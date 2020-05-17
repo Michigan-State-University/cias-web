@@ -7,14 +7,7 @@ module.exports = {
     '!app/global-styles.js',
     '!app/*/*/Loadable.{js,jsx}',
   ],
-  coverageThreshold: {
-    global: {
-      statements: 98,
-      branches: 91,
-      functions: 98,
-      lines: 98,
-    },
-  },
+  coverageThreshold: {},
   moduleDirectories: ['node_modules', 'app'],
   moduleNameMapper: {
     '.*\\.(css|less|styl|scss|sass)$': '<rootDir>/internals/mocks/cssModule.js',
