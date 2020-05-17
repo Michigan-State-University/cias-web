@@ -1,7 +1,7 @@
 # https://circleci.com/docs/2.0/language-javascript/
 version: 2
 jobs:
-  build:
+  build_and_lint:
     docker:
       - image: circleci/node:12.16.3
 
@@ -9,27 +9,24 @@ jobs:
       - checkout
 
       - restore_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          keys:
+            - dependency-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - dependency-cache-{{ .Branch }}
+            - dependency-cache
 
       - run:
           name: Install npm
           command: npm install
 
       - save_cache:
-          key: dependency-cache-{{ checksum "package-lock.json" }}
+          key: dependency-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
           paths:
             - node_modules
-
-  lint:
-    docker:
-      - image: circleci/node:12.16.3
-
-    steps:
-      - checkout
 
       - run:
           name: Lint js and css
           command: npm run lint
+
 
   test:
     docker:
@@ -37,6 +34,12 @@ jobs:
 
     steps:
       - checkout
+
+      - restore_cache:
+          keys:
+            - dependency-cache-{{ .Branch }}-{{ checksum "package-lock.json" }}
+            - dependency-cache-{{ .Branch }}
+            - dependency-cache
 
       - run:
           name: Run tests
@@ -46,13 +49,10 @@ workflows:
   version: 2
   default:
     jobs:
-      - build
-      - lint:
-          requires:
-            - build
+      - build_and_lint
       - test:
           requires:
-            - lint
+            - build_and_lint
           filters:
             branches:
               only:
