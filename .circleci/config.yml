@@ -1,17 +1,60 @@
-version: 2.1
-orbs:
-  node: circleci/node@1.1.6
+# https://circleci.com/docs/2.0/language-javascript/
+version: 2
 jobs:
-  build-and-test:
-    executor:
-      name: node/default
+  build:
+    docker:
+      - image: circleci/node:12.16.3
+
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: npm install
-            - run: npm test
+
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+
+      - run:
+          name: Install npm
+          command: npm install
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - node_modules
+
+  lint:
+    docker:
+      - image: circleci/node:12.16.3
+
+    steps:
+      - checkout
+
+      - run:
+          name: Lint js and css
+          command: npm run lint
+
+  test:
+    docker:
+      - image: circleci/node:12.16.3
+
+    steps:
+      - checkout
+
+      - run:
+          name: Run tests
+          command: npm test
+
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
+  version: 2
+  default:
+    jobs:
+      - build
+      - lint:
+          requires:
+            - build
+      - test:
+          requires:
+            - lint
+          filters:
+            branches:
+              only:
+                - master
+                - dev
