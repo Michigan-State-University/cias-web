@@ -1,8 +1,8 @@
 ## Install & Start
 
 ```shell
-yarn install
-yarn start
+npm install
+npm start
 ```
 
 ## Features
