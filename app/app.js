@@ -13,6 +13,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
@@ -36,7 +37,10 @@ import { translationMessages } from './i18n';
 
 // Create redux store with history
 const initialState = {};
-const { store, persistor } = configureStore(initialState, history);
+
+const store = configureStore(initialState, history);
+const persistor = persistStore(store);
+
 const MOUNT_NODE = document.getElementById('app');
 
 const render = messages => {
