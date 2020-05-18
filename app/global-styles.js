@@ -26,6 +26,11 @@ const GlobalStyle = createGlobalStyle`
     font-family: Georgia, Times, 'Times New Roman', serif;
     line-height: 1.5em;
   }
+
+  #app {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export default GlobalStyle;

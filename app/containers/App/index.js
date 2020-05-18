@@ -9,14 +9,18 @@
 
 import React, { Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { useInjectSaga } from 'utils/injectSaga';
 
 import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
+import saga from './saga';
 
-export default function App() {
+function App() {
+  useInjectSaga({ key: 'app', saga });
+
   return (
     <Fragment>
       <Switch>
@@ -28,3 +32,5 @@ export default function App() {
     </Fragment>
   );
 }
+
+export default App;

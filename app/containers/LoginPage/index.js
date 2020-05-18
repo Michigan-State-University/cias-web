@@ -15,14 +15,16 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import makeSelectLoginPage from './selectors';
+import { loginRequest } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { Input } from '../../components/Input';
 import { Card } from '../../components/Card';
-import { Centered } from '../../components/Centered';
+import { Button } from '../../components/Button';
+import { FullPageCentered } from './styles';
 
-export function LoginPage() {
+export function LoginPage({ onLogin }) {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
@@ -36,41 +38,42 @@ export function LoginPage() {
         <meta name="description" content="Description of LoginPage" />
       </Helmet>
       <FormattedMessage {...messages.header} />
-      <Centered>
+      <FullPageCentered>
         <Card>
           <p>Login</p>
           <Input
+            mb={20}
             placeholder="Email"
             value={email}
             onChange={event => setEmail(event.target.value)}
           />
           <div className="mt2">
             <Input
+              mb={20}
               type="password"
               placeholder="Password"
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
           </div>
+          <Button title="Log in" onClick={() => onLogin(email, password)} />
         </Card>
-      </Centered>
+      </FullPageCentered>
     </Fragment>
   );
 }
 
 LoginPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  onLogin: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   loginPage: makeSelectLoginPage(),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
+const mapDispatchToProps = dispatch => ({
+  onLogin: (username, password) => dispatch(loginRequest(username, password)),
+});
 
 const withConnect = connect(
   mapStateToProps,

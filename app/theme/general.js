@@ -5,6 +5,7 @@ const borders = {
 };
 
 const paddings = {
+  small: '12px',
   regular: '16px',
 };
 

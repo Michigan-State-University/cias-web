@@ -15,7 +15,7 @@ export const authReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case SET_TOKEN:
-        draft.token = action.payload;
+        draft.token = action.payload.token;
         break;
     }
   });

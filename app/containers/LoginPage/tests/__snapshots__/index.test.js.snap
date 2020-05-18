@@ -1,33 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginPage /> Should render and match the snapshot 1`] = `
-<div>
-  <span>
-    This is the LoginPage container!
-  </span>
-  <div>
-    <div
-      class="Card-v952e1-0 hICixF"
-    >
-      <p>
-        Login
-      </p>
-      <input
-        class="Input-sc-19txxuq-0 esVBKp"
-        placeholder="Email"
-        value=""
-      />
-      <div
-        class="mt2"
-      >
-        <input
-          class="Input-sc-19txxuq-0 esVBKp"
-          placeholder="Password"
-          type="password"
-          value=""
-        />
-      </div>
-    </div>
-  </div>
-</div>
+<span>
+  This is the LoginPage container!
+</span>
 `;
