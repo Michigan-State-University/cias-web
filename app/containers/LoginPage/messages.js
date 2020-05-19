@@ -17,4 +17,12 @@ export default defineMessages({
     id: `${scope}.loginButton`,
     defaultMessage: 'Log in',
   },
+  emailPlaceholder: {
+    id: `${scope}.emailPlaceholder`,
+    defaultMessage: 'Email',
+  },
+  passwordPlaceholder: {
+    id: `${scope}.passwordPlaceholder`,
+    defaultMessage: 'Password',
+  },
 });

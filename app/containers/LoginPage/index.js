@@ -36,7 +36,6 @@ export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
     <Fragment>
       <Helmet>
         <title>LoginPage</title>
-        <meta name="description" content="Description of LoginPage" />
       </Helmet>
       <Fill justify="center" align="center">
         <Card width="50%">
@@ -44,14 +43,14 @@ export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
             <p>{formatMessage(messages.header)}</p>
             <Input
               mb={20}
-              placeholder="Email"
+              placeholder={formatMessage(messages.emailPlaceholder)}
               value={email}
               onChange={event => setEmail(event.target.value)}
             />
             <Input
               mb={20}
               type="password"
-              placeholder="Password"
+              placeholder={formatMessage(messages.passwordPlaceholder)}
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
