@@ -8,5 +8,5 @@ function* tokenAssign({ payload: { token } }) {
 }
 
 export default function* rootSaga() {
-  yield all([takeEvery(action => /SUCCESS$/.test(action.type), tokenAssign)]);
+  yield all([takeEvery(action => /_SUCCESS$/.test(action.type), tokenAssign)]);
 }
