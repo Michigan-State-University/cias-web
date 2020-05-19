@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as S from './Button';
+import Wrapper from './Wrapper';
 
-const Button = props => <S.Button {...props}>{props.title}</S.Button>;
+const Button = props => <Wrapper {...props}>{props.title}</Wrapper>;
 
 Button.propTypes = {
   title: PropTypes.string.isRequired,

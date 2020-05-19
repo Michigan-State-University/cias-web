@@ -26,7 +26,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
         value=""
       />
       <button
-        class="Button-sc-5cxguj-0 esNeOK"
+        class="Wrapper-sc-5dsnpv-0 dGvIxC"
         color="primary"
         title="Log in"
         width="100%"

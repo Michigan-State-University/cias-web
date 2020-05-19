@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { colors, themeColors, borders, paddings } from 'theme';
 
-const Button = styled.button`
+const Wrapper = styled.button`
   width: ${props => props.width};
   height: 48px;
   padding: ${paddings.small};
@@ -13,15 +13,15 @@ const Button = styled.button`
   cursor: pointer;
 `;
 
-Button.propTypes = {
+Wrapper.propTypes = {
   color: PropTypes.oneOf(['primary']),
   outlined: PropTypes.bool,
   width: PropTypes.string,
 };
 
-Button.defaultProps = {
+Wrapper.defaultProps = {
   color: 'primary',
   width: '100%',
 };
 
-export { Button };
+export default Wrapper;
