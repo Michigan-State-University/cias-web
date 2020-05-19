@@ -13,6 +13,7 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { injectIntl } from 'react-intl';
 import makeSelectLoginPage from './selectors';
 import { loginRequest } from './actions';
 import reducer from './reducer';
@@ -24,7 +25,7 @@ import { Button } from '../../components/Button';
 import { Fill } from '../../components/Fill';
 import { Column } from '../../components/Column';
 
-export function LoginPage({ onLogin }) {
+export function LoginPage({ onLogin, intl: { formatMessage } }) {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
@@ -40,7 +41,7 @@ export function LoginPage({ onLogin }) {
       <Fill justify="center" align="center">
         <Card width="50%">
           <Column>
-            <p>Login</p>
+            <p>{formatMessage(messages.header)}</p>
             <Input
               mb={20}
               placeholder="Email"
@@ -54,7 +55,10 @@ export function LoginPage({ onLogin }) {
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
-            <Button title="Log in" onClick={() => onLogin(email, password)} />
+            <Button
+              title={formatMessage(messages.loginButton)}
+              onClick={() => onLogin(email, password)}
+            />
           </Column>
         </Card>
       </Fill>
@@ -64,6 +68,7 @@ export function LoginPage({ onLogin }) {
 
 LoginPage.propTypes = {
   onLogin: PropTypes.func,
+  intl: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -79,4 +84,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(LoginPage);
+export default injectIntl(compose(withConnect)(LoginPage));

@@ -4,11 +4,13 @@ exports[`<Input /> should match the snapshot 1`] = `
 .c0 {
   padding: 12px;
   border: 1px solid #E9F1FB;
+  border-radius: 10px;
 }
 
 .c0:focus {
   box-shadow: none;
-  outline: 1px solid #23B7A0;
+  outline: none;
+  border: 1px solid #23B7A0;
 }
 
 <input

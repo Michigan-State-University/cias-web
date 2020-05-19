@@ -8,7 +8,7 @@
  */
 
 import React, { Fragment } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 
 import HomePage from 'containers/HomePage/Loadable';
@@ -17,6 +17,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 import saga from './saga';
+import AppRoute from '../../components/AppRoute';
 
 function App() {
   useInjectSaga({ key: 'app', saga });
@@ -24,9 +25,9 @@ function App() {
   return (
     <Fragment>
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/login" component={LoginPage} />
-        <Route component={NotFoundPage} />
+        <AppRoute exact path="/" component={HomePage} />
+        <AppRoute exact path="/login" component={LoginPage} />
+        <AppRoute component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
     </Fragment>

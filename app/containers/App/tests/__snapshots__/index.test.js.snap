@@ -3,17 +3,17 @@
 exports[`<App /> should render and match the snapshot 1`] = `
 <React.Fragment>
   <Switch>
-    <Route
+    <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
       path="/"
     />
-    <Route
+    <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
       path="/login"
     />
-    <Route
+    <Memo(ConnectFunction)
       component={[Function]}
     />
   </Switch>

@@ -10,7 +10,7 @@ import { IntlProvider } from 'react-intl';
 import { browserHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
 
-import { LoginPage } from '../index';
+import LoginPage from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 import configureStore from '../../../configureStore';
 
