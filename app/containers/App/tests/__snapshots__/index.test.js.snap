@@ -7,6 +7,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       component={[Function]}
       exact={true}
       path="/"
+      protected={true}
     />
     <Memo(ConnectFunction)
       component={[Function]}

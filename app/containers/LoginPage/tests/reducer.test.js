@@ -7,7 +7,10 @@ describe('loginPageReducer', () => {
   let state;
   beforeEach(() => {
     state = {
-      // default state params here
+      formData: {
+        username: '',
+        password: '',
+      },
     };
   });
 
