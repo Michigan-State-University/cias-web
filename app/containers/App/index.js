@@ -14,11 +14,11 @@ import { useInjectSaga } from 'utils/injectSaga';
 import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import CreateInterventionPage from 'containers/CreateInterventionPage/Loadable';
 
 import GlobalStyle from '../../global-styles';
 import saga from './saga';
 import AppRoute from '../../components/AppRoute';
-import { CreateInterventionPage } from '../CreateInterventionPage';
 
 function App() {
   useInjectSaga({ key: 'app', saga });
@@ -32,6 +32,7 @@ function App() {
           exact
           path="/interventions/create"
           component={CreateInterventionPage}
+          protected
         />
         <AppRoute component={NotFoundPage} />
       </Switch>

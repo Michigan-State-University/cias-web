@@ -23,7 +23,7 @@ import { Input } from '../../components/Input';
 import { Card } from '../../components/Card';
 import { Button } from '../../components/Button';
 import { Fill } from '../../components/Fill';
-import { Column } from '../../components/Column';
+import Column from '../../components/Column';
 
 export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
   useInjectReducer({ key: 'loginPage', reducer });

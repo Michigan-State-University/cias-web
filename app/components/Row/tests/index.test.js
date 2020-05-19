@@ -4,7 +4,7 @@ import 'jest-styled-components';
 
 import Row from '../index';
 
-describe('<Column />', () => {
+describe('<Row />', () => {
   it('should match the snapshot', () => {
     const renderedComponent = renderer.create(<Row />).toJSON();
     expect(renderedComponent).toMatchSnapshot();

@@ -16,6 +16,12 @@ exports[`<App /> should render and match the snapshot 1`] = `
     />
     <Memo(ConnectFunction)
       component={[Function]}
+      exact={true}
+      path="/interventions/create"
+      protected={true}
+    />
+    <Memo(ConnectFunction)
+      component={[Function]}
     />
   </Switch>
   <GlobalStyleComponent />

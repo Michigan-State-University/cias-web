@@ -3,7 +3,7 @@ import { align } from '../BaseComponentStyles';
 
 const Row = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   ${align};
 `;
 

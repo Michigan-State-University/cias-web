@@ -1,10 +1,17 @@
 import PropTypes from 'prop-types';
 
+const propsToCssMapper = {
+  unset: 'unset',
+  center: 'center',
+  end: 'flex-end',
+  start: 'flex-start',
+};
+
 const align = props => ({
-  justifyContent: props.justify || '',
-  justifyItems: props.justify || '',
-  alignContent: props.align || '',
-  alignItems: props.align || '',
+  justifyContent: propsToCssMapper[props.justify] || '',
+  justifyItems: propsToCssMapper[props.justify] || '',
+  alignContent: propsToCssMapper[props.align] || '',
+  alignItems: propsToCssMapper[props.align] || '',
 });
 
 align.propTypes = {

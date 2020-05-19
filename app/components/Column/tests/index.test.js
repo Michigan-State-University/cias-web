@@ -2,7 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import 'jest-styled-components';
 
-import { Column } from '../index';
+import Column from '../index';
 
 describe('<Column />', () => {
   it('should match the snapshot', () => {

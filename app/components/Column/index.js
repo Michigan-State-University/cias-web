@@ -7,4 +7,4 @@ const Column = styled.div`
   ${align};
 `;
 
-export { Column };
+export default Column;
