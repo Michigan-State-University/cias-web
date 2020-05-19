@@ -8,7 +8,6 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
@@ -38,7 +37,6 @@ export function LoginPage({ onLogin }) {
         <title>LoginPage</title>
         <meta name="description" content="Description of LoginPage" />
       </Helmet>
-      <FormattedMessage {...messages.header} />
       <Fill justify="center" align="center">
         <Card width="50%">
           <Column>

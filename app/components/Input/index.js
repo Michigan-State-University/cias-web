@@ -5,9 +5,11 @@ import { margin } from '../BaseComponentStyles';
 const Input = styled.input`
   padding: ${paddings.small};
   border: ${borders.borderWidth} ${borders.borderStyle} ${colors.highlight};
+  border-radius: ${borders.borderRadius};
   &:focus {
     box-shadow: none;
-    outline: ${borders.borderWidth} ${borders.borderStyle} ${colors.primary};
+    outline: none;
+    border: ${borders.borderWidth} ${borders.borderStyle} ${colors.primary};
   }
   ${margin};
 `;
