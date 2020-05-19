@@ -1,12 +1,17 @@
-import { Route } from 'react-router-dom';
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectToken } from '../../global/reducers/auth';
+import { makeSelectIsLoggedIn } from '../../global/reducers/auth';
 
 class AppRoute extends Route {
   render() {
+    if (this.props.protected && !this.props.isLoggedIn) {
+      return <Redirect to="/login" />;
+    }
+
     return super.render();
   }
 }
@@ -20,7 +25,7 @@ AppRoute.defaultProps = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  token: makeSelectToken(),
+  isLoggedIn: makeSelectIsLoggedIn(),
 });
 
 const withConnect = connect(mapStateToProps);

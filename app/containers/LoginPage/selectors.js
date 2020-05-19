@@ -21,5 +21,11 @@ const makeSelectLoginPage = () =>
     substate => substate,
   );
 
+const makeSelectFormData = () =>
+  createSelector(
+    selectLoginPageDomain,
+    substate => substate.formData,
+  );
+
 export default makeSelectLoginPage;
-export { selectLoginPageDomain };
+export { selectLoginPageDomain, makeSelectFormData };

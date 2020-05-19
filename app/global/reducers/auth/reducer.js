@@ -4,10 +4,11 @@
  *
  */
 import produce from 'immer';
-import { SET_TOKEN } from './constants';
+import { SET_TOKEN, REMOVE_TOKEN } from './constants';
 
 export const initialState = {
-  token: '',
+  token: null,
+  isLoggedIn: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -16,6 +17,10 @@ export const authReducer = (state = initialState, action) =>
     switch (action.type) {
       case SET_TOKEN:
         draft.token = action.payload.token;
+        draft.isLoggedIn = true;
         break;
+      case REMOVE_TOKEN:
+        draft.token = null;
+        draft.isLoggedIn = false;
     }
   });

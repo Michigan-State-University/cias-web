@@ -14,7 +14,7 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { injectIntl } from 'react-intl';
-import makeSelectLoginPage from './selectors';
+import makeSelectLoginPage, { makeSelectFormData } from './selectors';
 import { loginRequest } from './actions';
 import reducer from './reducer';
 import saga from './saga';
@@ -25,12 +25,12 @@ import { Button } from '../../components/Button';
 import { Fill } from '../../components/Fill';
 import { Column } from '../../components/Column';
 
-export function LoginPage({ onLogin, intl: { formatMessage } }) {
+export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState(formData.username);
+  const [password, setPassword] = useState(formData.password);
 
   return (
     <Fragment>
@@ -69,10 +69,15 @@ export function LoginPage({ onLogin, intl: { formatMessage } }) {
 LoginPage.propTypes = {
   onLogin: PropTypes.func,
   intl: PropTypes.object,
+  formData: PropTypes.shape({
+    username: PropTypes.string,
+    password: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = createStructuredSelector({
   loginPage: makeSelectLoginPage(),
+  formData: makeSelectFormData(),
 });
 
 const mapDispatchToProps = dispatch => ({
