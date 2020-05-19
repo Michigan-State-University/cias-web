@@ -4,7 +4,7 @@ import { LOGIN_REQUEST } from './constants';
 import { loginError, loginSuccess } from './actions';
 
 function* login({ payload: { username, password } }) {
-  const requestURL = `http://localhost:3000/auth/sign_in`;
+  const requestURL = `${process.env.API_URL}/auth/sign_in`;
 
   try {
     const response = yield call(request, requestURL, {
