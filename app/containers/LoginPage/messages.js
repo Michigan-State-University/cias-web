@@ -9,6 +9,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.LoginPage';
 
 export default defineMessages({
+  pageTitle: {
+    id: `${scope}.pageTitle`,
+    defaultMessage: 'Login Page',
+  },
   header: {
     id: `${scope}.header`,
     defaultMessage: 'Login',
