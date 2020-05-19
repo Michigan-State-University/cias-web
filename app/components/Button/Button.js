@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { colors, borders, paddings } from 'theme';
+import { colors, themeColors, borders, paddings } from 'theme';
 
 const Button = styled.button`
   width: ${props => props.width};
   height: 48px;
   padding: ${paddings.small};
   background-color: ${props =>
-    props.outlined ? colors.white : colors[props.color]};
+    props.outlined ? colors.white : themeColors[props.color]};
   color: ${colors.white};
   border-radius: ${borders.borderRadius};
   cursor: pointer;
