@@ -2,11 +2,11 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import 'jest-styled-components';
 
-import { Button } from '../index';
+import { Align } from '../index';
 
-describe('<Button />', () => {
+describe('<Align />', () => {
   it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<Button title="test" />).toJSON();
+    const renderedComponent = renderer.create(<Align />).toJSON();
     expect(renderedComponent).toMatchSnapshot();
   });
 });

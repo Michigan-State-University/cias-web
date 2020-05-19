@@ -22,7 +22,8 @@ import messages from './messages';
 import { Input } from '../../components/Input';
 import { Card } from '../../components/Card';
 import { Button } from '../../components/Button';
-import { FullPageCentered } from './styles';
+import { Fill } from '../../components/Fill';
+import { Column } from '../../components/Column';
 
 export function LoginPage({ onLogin }) {
   useInjectReducer({ key: 'loginPage', reducer });
@@ -38,16 +39,16 @@ export function LoginPage({ onLogin }) {
         <meta name="description" content="Description of LoginPage" />
       </Helmet>
       <FormattedMessage {...messages.header} />
-      <FullPageCentered>
-        <Card>
-          <p>Login</p>
-          <Input
-            mb={20}
-            placeholder="Email"
-            value={email}
-            onChange={event => setEmail(event.target.value)}
-          />
-          <div className="mt2">
+      <Fill justify="center" align="center">
+        <Card width="50%">
+          <Column>
+            <p>Login</p>
+            <Input
+              mb={20}
+              placeholder="Email"
+              value={email}
+              onChange={event => setEmail(event.target.value)}
+            />
             <Input
               mb={20}
               type="password"
@@ -55,10 +56,10 @@ export function LoginPage({ onLogin }) {
               value={password}
               onChange={event => setPassword(event.target.value)}
             />
-          </div>
-          <Button title="Log in" onClick={() => onLogin(email, password)} />
+            <Button title="Log in" onClick={() => onLogin(email, password)} />
+          </Column>
         </Card>
-      </FullPageCentered>
+      </Fill>
     </Fragment>
   );
 }
