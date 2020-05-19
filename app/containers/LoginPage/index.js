@@ -35,7 +35,7 @@ export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
   return (
     <Fragment>
       <Helmet>
-        <title>{formatMessage(messages.LoginPage)}</title>
+        <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
       <Fill justify="center" align="center">
         <Card width="50%">
