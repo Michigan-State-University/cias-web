@@ -18,6 +18,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import GlobalStyle from '../../global-styles';
 import saga from './saga';
 import AppRoute from '../../components/AppRoute';
+import { CreateInterventionPage } from '../CreateInterventionPage';
 
 function App() {
   useInjectSaga({ key: 'app', saga });
@@ -27,6 +28,11 @@ function App() {
       <Switch>
         <AppRoute exact path="/" component={HomePage} protected />
         <AppRoute exact path="/login" component={LoginPage} />
+        <AppRoute
+          exact
+          path="/interventions/create"
+          component={CreateInterventionPage}
+        />
         <AppRoute component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
