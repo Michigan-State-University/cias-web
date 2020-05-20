@@ -1,7 +1,12 @@
+/* eslint-disable no-unused-vars */
 import Answer from './Answer';
 
 class Question {
-  constructor(text, answers = new Array(Answer)) {
+  /**
+   * @param  {string} text
+   * @param  {Answer[]} answers=[]
+   */
+  constructor(text, answers = []) {
     this.text = text;
     this.answers = answers;
   }
