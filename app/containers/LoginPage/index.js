@@ -38,28 +38,30 @@ export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
       <Fill justify="center" align="center">
-        <Card width="50%">
-          <Column>
-            <p>{formatMessage(messages.header)}</p>
-            <Input
-              mb={20}
-              placeholder={formatMessage(messages.emailPlaceholder)}
-              value={email}
-              onChange={event => setEmail(event.target.value)}
-            />
-            <Input
-              mb={20}
-              type="password"
-              placeholder={formatMessage(messages.passwordPlaceholder)}
-              value={password}
-              onChange={event => setPassword(event.target.value)}
-            />
-            <Button
-              title={formatMessage(messages.loginButton)}
-              onClick={() => onLogin(email, password)}
-            />
-          </Column>
-        </Card>
+        <Column align="center" sm={8} md={6}>
+          <Card width="100%">
+            <Column>
+              <p>{formatMessage(messages.header)}</p>
+              <Input
+                mb={20}
+                placeholder={formatMessage(messages.emailPlaceholder)}
+                value={email}
+                onChange={event => setEmail(event.target.value)}
+              />
+              <Input
+                mb={20}
+                type="password"
+                placeholder={formatMessage(messages.passwordPlaceholder)}
+                value={password}
+                onChange={event => setPassword(event.target.value)}
+              />
+              <Button
+                title={formatMessage(messages.loginButton)}
+                onClick={() => onLogin(email, password)}
+              />
+            </Column>
+          </Card>
+        </Column>
       </Fill>
     </Fragment>
   );

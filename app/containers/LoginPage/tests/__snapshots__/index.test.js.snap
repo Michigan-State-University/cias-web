@@ -5,34 +5,38 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
   class="Fill-sc-1f4o7x0-0 dHXeMo"
 >
   <div
-    class="Card-v952e1-0 bDVxmt"
-    width="50%"
+    class="Column-sc-1n6divy-0 gRtgjY"
   >
     <div
-      class="Column-sc-1n6divy-0 bqrFEU"
+      class="Card-v952e1-0 kutakG"
+      width="100%"
     >
-      <p>
-        Login
-      </p>
-      <input
-        class="Input-sc-19txxuq-0 cYADcQ"
-        placeholder="Email"
-        value=""
-      />
-      <input
-        class="Input-sc-19txxuq-0 cYADcQ"
-        placeholder="Password"
-        type="password"
-        value=""
-      />
-      <button
-        class="Wrapper-sc-5dsnpv-0 dGvIxC"
-        color="primary"
-        title="Log in"
-        width="100%"
+      <div
+        class="Column-sc-1n6divy-0 bqrFEU"
       >
-        Log in
-      </button>
+        <p>
+          Login
+        </p>
+        <input
+          class="Input-sc-19txxuq-0 cYADcQ"
+          placeholder="Email"
+          value=""
+        />
+        <input
+          class="Input-sc-19txxuq-0 cYADcQ"
+          placeholder="Password"
+          type="password"
+          value=""
+        />
+        <button
+          class="Wrapper-sc-5dsnpv-0 dGvIxC"
+          color="primary"
+          title="Log in"
+          width="100%"
+        >
+          Log in
+        </button>
+      </div>
     </div>
   </div>
 </div>
