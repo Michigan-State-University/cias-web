@@ -18,20 +18,17 @@ import configureStore from '../../../../../configureStore';
 
 describe('<CreateInterventionPage />', () => {
   let store;
-  let dispatch;
 
   beforeAll(() => {
     store = configureStore({}, browserHistory);
-    dispatch = jest.fn();
   });
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    dispatch = jest.fn();
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <CreateInterventionPage dispatch={dispatch} />
+          <CreateInterventionPage />
         </IntlProvider>
       </Provider>,
     );

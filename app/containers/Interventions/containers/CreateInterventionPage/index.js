@@ -31,8 +31,8 @@ function CreateInterventionPage({ intl: { formatMessage } }) {
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
       <Row>
-        <Column>col1</Column>
-        <Column>col2</Column>
+        <Column sm={4}>col1</Column>
+        <Column sm={8}>col2</Column>
       </Row>
     </Fragment>
   );
