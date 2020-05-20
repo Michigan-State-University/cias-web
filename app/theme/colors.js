@@ -1,8 +1,9 @@
 const colors = {
-  jungleGreen: '#23B7A0',
+  jungleGreen: '#107969',
   lavender: '#C866EA',
   bluewood: '#2F3850',
   linkWater: '#E9F1FB',
+  grey: '#9AA1B6',
   white: '#FFF',
 };
 

@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Comment /> should match the snapshot 1`] = `
+.c0 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #9AA1B6;
+}
+
+<p
+  className="c0"
+/>
+`;

@@ -9,9 +9,8 @@ function* login({ payload: { username, password } }) {
   try {
     const response = yield call(request, requestURL, {
       method: 'POST',
-      mode: 'cors',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
       },
       body: JSON.stringify({ email: username, password }),
     });
