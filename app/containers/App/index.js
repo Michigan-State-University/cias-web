@@ -14,14 +14,14 @@ import { useInjectSaga } from 'utils/injectSaga';
 import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import CreateInterventionPage from 'containers/CreateInterventionPage/Loadable';
+import CreateInterventionPage from 'containers/Interventions/containers/CreateInterventionPage/Loadable';
+import rootSaga from '../../global/sagas/rootSaga';
 
 import GlobalStyle from '../../global-styles';
-import saga from './saga';
 import AppRoute from '../../components/AppRoute';
 
 function App() {
-  useInjectSaga({ key: 'app', saga });
+  useInjectSaga({ key: 'app', saga: rootSaga });
 
   return (
     <Fragment>

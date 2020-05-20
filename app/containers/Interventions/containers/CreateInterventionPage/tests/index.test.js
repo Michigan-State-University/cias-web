@@ -13,8 +13,8 @@ import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
 
 import CreateInterventionPage from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
-import configureStore from '../../../configureStore';
+import { DEFAULT_LOCALE } from '../../../../../i18n';
+import configureStore from '../../../../../configureStore';
 
 describe('<CreateInterventionPage />', () => {
   let store;

@@ -14,12 +14,12 @@ import { Helmet } from 'react-helmet';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import Column from 'components/Column';
+import Row from 'components/Row';
 import makeSelectCreateInterventionPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import Row from '../../components/Row';
-import Column from '../../components/Column';
 
 function CreateInterventionPage({ intl: { formatMessage } }) {
   useInjectReducer({ key: 'createInterventionPage', reducer });
