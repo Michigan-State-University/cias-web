@@ -11,6 +11,6 @@ export const scope = 'app.containers.CreateInterventionPage';
 export default defineMessages({
   pageTitle: {
     id: `${scope}.pageTitle`,
-    defaultMessage: 'Screening',
+    defaultMessage: 'e-Intervention New',
   },
 });

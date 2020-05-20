@@ -16,12 +16,18 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import Column from 'components/Column';
 import Row from 'components/Row';
-import makeSelectCreateInterventionPage from './selectors';
+import Box from 'components/Box';
+import Img from 'components/Img';
+import cross from 'assets/svg/cross.svg';
+import H1 from 'components/H1';
+import Intervention from 'models/Intervention/Intervention';
+import { makeSelectIntervention } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import ScreenListItem from '../../components/ScreenListItem';
 
-function CreateInterventionPage({ intl: { formatMessage } }) {
+function CreateInterventionPage({ intl: { formatMessage }, intervention }) {
   useInjectReducer({ key: 'createInterventionPage', reducer });
   useInjectSaga({ key: 'createInterventionPage', saga });
 
@@ -31,8 +37,26 @@ function CreateInterventionPage({ intl: { formatMessage } }) {
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
       <Row>
-        <Column sm={4}>col1</Column>
-        <Column sm={8}>col2</Column>
+        <Column sm={5}>
+          <Box padded>
+            <Row mb={77}>
+              <Img src={cross} mr={37} />
+              <H1>{formatMessage(messages.pageTitle)}</H1>
+            </Row>
+
+            <Row>
+              <Box width="100%" padded>
+                {intervention.screens.map(screen => (
+                  <ScreenListItem
+                    type={screen.type}
+                    question={screen.question}
+                  />
+                ))}
+              </Box>
+            </Row>
+          </Box>
+        </Column>
+        <Column sm={7}>col2</Column>
       </Row>
     </Fragment>
   );
@@ -40,10 +64,11 @@ function CreateInterventionPage({ intl: { formatMessage } }) {
 
 CreateInterventionPage.propTypes = {
   intl: PropTypes.object,
+  intervention: PropTypes.shape(Intervention),
 };
 
 const mapStateToProps = createStructuredSelector({
-  createInterventionPage: makeSelectCreateInterventionPage(),
+  intervention: makeSelectIntervention(),
 });
 
 function mapDispatchToProps(dispatch) {
