@@ -5,23 +5,35 @@ const propsToCssMapper = {
   center: 'center',
   end: 'flex-end',
   start: 'flex-start',
+  around: 'space-around',
+  between: 'space-between',
+  evenly: 'space-evenly',
 };
 
-const align = props => ({
+const flex = props => ({
   justifyContent: propsToCssMapper[props.justify] || '',
   justifyItems: propsToCssMapper[props.justify] || '',
   alignContent: propsToCssMapper[props.align] || '',
   alignItems: propsToCssMapper[props.align] || '',
 });
 
-align.propTypes = {
-  justify: PropTypes.oneOf(['unset', 'center', 'end', 'start']),
-  align: PropTypes.oneOf(['unset', 'center', 'end', 'start']),
+flex.propTypes = {
+  justify: PropTypes.oneOf([
+    'center',
+    'end',
+    'start',
+    'around',
+    'between',
+    'evenly',
+  ]),
+  align: PropTypes.oneOf([
+    'center',
+    'end',
+    'start',
+    'around',
+    'between',
+    'evenly',
+  ]),
 };
 
-align.defaultProps = {
-  justify: 'unset',
-  align: 'unset',
-};
-
-export { align };
+export { flex };

@@ -1,4 +1,4 @@
-import { put, takeEvery, all } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import { setToken } from '../reducers/auth';
 

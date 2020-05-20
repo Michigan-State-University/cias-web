@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { align } from '../BaseComponentStyles';
+import { flex } from '../BaseComponentStyles';
 
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-  ${align};
+  ${flex};
 `;
 
 export default Row;
