@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<H1 /> should match the snapshot 1`] = `
+.c0 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+}
+
+<h1
+  className="c0"
+/>
+`;
