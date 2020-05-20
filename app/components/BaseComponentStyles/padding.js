@@ -5,6 +5,7 @@ const padding = props => ({
   paddingBottom: props.pb || '',
   paddingRight: props.pr || '',
   paddingLeft: props.pl || '',
+  padding: props.padding || '',
 });
 
 padding.propTypes = {
@@ -12,6 +13,7 @@ padding.propTypes = {
   pb: PropTypes.number,
   pr: PropTypes.number,
   pl: PropTypes.number,
+  padding: PropTypes.number,
 };
 
 export { padding };

@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { themeColors } from 'theme';
 import Regular from 'assets/fonts/DMSans-Regular.ttf';
 import RegularItalic from 'assets/fonts/DMSans-Italic.ttf';
 import Medium from 'assets/fonts/DMSans-Medium.ttf';
@@ -11,6 +12,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     width: 100%;
+    color: ${themeColors.text};
   }
 
   @font-face {
