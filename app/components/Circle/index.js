@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Wrapper from './Wrapper';
+import StyledCircle from './StyledCircle';
 
-const Circle = props => <Wrapper {...props}>{props.text}</Wrapper>;
+const Circle = props => <StyledCircle {...props}>{props.child}</StyledCircle>;
 
 Circle.propTypes = {
-  text: PropTypes.string.isRequired,
+  child: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+    PropTypes.number,
+  ]).isRequired,
 };
 
 export default Circle;

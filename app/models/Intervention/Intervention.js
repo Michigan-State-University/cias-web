@@ -1,14 +1,24 @@
 /* eslint-disable no-unused-vars */
-import Screen from './Screen';
+import { InterventionTypes } from './InterventionTypes';
+import Question from './Question';
 
 class Intervention {
   /**
    * @param  {string} name
-   * @param  {Screen[]} screens=[]
+   * @param  {string} type
+   * @param  {Question[]} questions=[]
+   * @param  {Object} settings={}
    */
-  constructor(name, screens = []) {
+  constructor(
+    name,
+    type = InterventionTypes[0],
+    questions = [],
+    settings = {},
+  ) {
     this.name = name;
-    this.screens = screens;
+    this.type = type;
+    this.questions = questions;
+    this.settings = settings;
   }
 }
 

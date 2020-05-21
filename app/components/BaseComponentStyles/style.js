@@ -1,14 +1,17 @@
 import PropTypes from 'prop-types';
+import { hexToRgb } from 'theme';
 
 const style = props => ({
-  backgroundColor: props.bg || '',
+  backgroundColor: props.bg
+    ? `rgba(${hexToRgb(props.bg)}, ${props.opacity})`
+    : '',
   color: props.color || '',
-  opacity: props.opacity || '',
   cursor: props.clickable ? 'pointer;' : '',
   '&:hover': {
     backgroundColor: props.hoverColor || '',
   },
   borderRadius: props.borderRadius || '',
+  boxShadow: props.shadow || '',
 });
 
 style.propTypes = {
@@ -18,6 +21,7 @@ style.propTypes = {
   clickable: PropTypes.bool,
   hoverColor: PropTypes.string,
   borderRadius: PropTypes.string,
+  shadow: PropTypes.string,
 };
 
 export { style };

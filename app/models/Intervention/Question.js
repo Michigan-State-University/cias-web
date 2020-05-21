@@ -1,14 +1,17 @@
 /* eslint-disable no-unused-vars */
-import Answer from './Answer';
+import QuestionType from './QuestionType';
 
+/* eslint-disable no-unused-vars */
 class Question {
   /**
-   * @param  {string} text
-   * @param  {Answer[]} answers=[]
+   * @param  {string} title
+   * @param  {QuestionType} type
+   * @param  {Object} body
    */
-  constructor(text, answers = []) {
-    this.text = text;
-    this.answers = answers;
+  constructor(title, type, body) {
+    this.title = title;
+    this.type = type;
+    this.body = body;
   }
 }
 

@@ -9,12 +9,8 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.BaseEditableIntervention';
 
 export default defineMessages({
-  pageTitle: {
-    id: `${scope}.pageTitle`,
-    defaultMessage: 'e-Intervention New',
-  },
-  addScreen: {
-    id: `${scope}.addScreen`,
-    defaultMessage: 'Add new question',
+  header: {
+    id: `${scope}.header`,
+    defaultMessage: 'Choose type of question',
   },
 });

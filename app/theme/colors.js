@@ -6,6 +6,7 @@ const colors = {
   grey: '#9AA1B6',
   zirkon: '#F8FBFF',
   white: '#FFF',
+  azure: '#0086F8',
 };
 
 const themeColors = {

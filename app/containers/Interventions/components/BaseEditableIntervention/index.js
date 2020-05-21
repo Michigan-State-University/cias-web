@@ -9,8 +9,13 @@ import Img from 'components/Img';
 import cross from 'assets/svg/cross.svg';
 import H1 from 'components/H1';
 import Intervention from 'models/Intervention/Intervention';
+import Text from 'components/Text';
+import HoverableBox from 'components/Box/HoverableBox';
+import { themeColors } from 'theme/colors';
+import { PlusCircle } from './styled';
 import messages from './messages';
-import ScreenListItem from '../ScreenListItem';
+import QuestionListItem from '../QuestionListItem';
+import QuestionTypeChooser from '../QuestionTypeChooser';
 
 const BaseEditableIntervention = ({
   intl: { formatMessage },
@@ -24,13 +29,26 @@ const BaseEditableIntervention = ({
           <H1>{formatMessage(messages.pageTitle)}</H1>
         </Row>
 
-        <Row>
-          <Box width="100%" padded>
-            {intervention.screens.map(screen => (
-              <ScreenListItem type={screen.type} question={screen.question} />
+        <Box width="100%" padded>
+          <Row>
+            {intervention.questions.map(question => (
+              <QuestionListItem type={question.type} title={question.title} />
             ))}
-          </Box>
-        </Row>
+          </Row>
+          <Row>
+            <HoverableBox px={21} py={14}>
+              <Row align="center">
+                <PlusCircle mr={12} clickable />
+                <Text fontWeight="bold" color={themeColors.secondary}>
+                  {formatMessage(messages.addScreen)}
+                </Text>
+              </Row>
+            </HoverableBox>
+          </Row>
+          <Row>
+            <QuestionTypeChooser />
+          </Row>
+        </Box>
       </Box>
     </Column>
     <Column sm={7}>col2</Column>

@@ -18,9 +18,9 @@ exports[`<Circle /> should match the snapshot 1`] = `
   align-items: center;
   width: 45px;
   height: 45px;
-  background-color: #107969;
+  background-color: rgba(16,121,105,1);
   color: #FFF;
-  opacity: 1;
+  color: #FFF;
 }
 
 <div

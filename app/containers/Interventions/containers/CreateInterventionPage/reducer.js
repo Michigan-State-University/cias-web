@@ -4,26 +4,21 @@
  *
  */
 import produce from 'immer';
+import Intervention from 'models/Intervention/Intervention';
+import Question from 'models/Intervention/Question';
+import { singleQuestion } from 'models/Intervention/QuestionTypes';
 import { DEFAULT_ACTION } from './constants';
-import Intervention from '../../../../models/Intervention/Intervention';
-import Screen from '../../../../models/Intervention/Screen';
-import { singleQuestion } from '../../../../models/Intervention/ScreenTypes';
-import Question from '../../../../models/Intervention/Question';
-import Answer from '../../../../models/Intervention/Answer';
 
 export const initialState = {
-  intervention: new Intervention('', [
-    new Screen(
-      '',
+  intervention: new Intervention('', '', [
+    new Question(
+      'I can address any health behavior. For example, I might ask a patient if they are a daily smoker.',
       singleQuestion,
-      new Question(
-        'I can address any health behavior. For example, I might ask a patient if they are a daily smoker.',
-        [
-          new Answer('Answer 1'),
-          new Answer('Answer 2'),
-          new Answer('Answer 3'),
-        ],
-      ),
+      {
+        0: 'Answer 1',
+        1: 'Answer 2',
+        2: 'Answer 3',
+      },
     ),
   ]),
 };

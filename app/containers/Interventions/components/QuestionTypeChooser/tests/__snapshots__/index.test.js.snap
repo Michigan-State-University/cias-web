@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    Choose type of question
+  </div>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    >
+      <div
+        className="c1"
+      >
+        Single answer question
+      </div>
+      <div
+        className="c1"
+      >
+        Multi answer question
+      </div>
+    </div>
+  </div>
+</div>
+`;
