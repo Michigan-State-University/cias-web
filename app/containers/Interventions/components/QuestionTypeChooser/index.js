@@ -16,6 +16,7 @@ import { DotCircle } from './styled';
 
 const QuestionTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
   <Box
+    onBlur={() => console.log('blur')}
     borderRadius={10}
     shadow={boxShadows[1]}
     position="absolute"

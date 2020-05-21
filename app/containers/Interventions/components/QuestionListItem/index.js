@@ -7,14 +7,24 @@ import Row from 'components/Row';
 import Img from 'components/Img';
 import H3 from 'components/H3';
 import Comment from 'components/Text/Comment';
-import { NumberCircle } from './styled';
-import HoverableBox from '../../../../components/Box/HoverableBox';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { NumberCircle, ToggleableBox } from './styled';
+import { selectQuestion } from '../../containers/CreateInterventionPage/actions';
 
-const QuestionListItem = ({ type, title, order }) => (
-  <HoverableBox px={21} py={14} mb={36} width="100%">
+const QuestionListItem = ({ type, title, index, onSelect, isSelected }) => (
+  <ToggleableBox
+    px={21}
+    py={14}
+    mb={36}
+    width="100%"
+    onClick={() => onSelect(index)}
+    isSelected={isSelected}
+  >
     <Row>
       <Column xs={2}>
-        <NumberCircle child={order} />
+        <NumberCircle isSelected={isSelected} child={index + 1} />
       </Column>
       <Column xs={8}>
         <Row>
@@ -28,13 +38,26 @@ const QuestionListItem = ({ type, title, order }) => (
         <Img src={gear} />
       </Column>
     </Row>
-  </HoverableBox>
+  </ToggleableBox>
 );
 
 QuestionListItem.propTypes = {
   type: PropTypes.shape(QuestionType).isRequired,
   title: PropTypes.string.isRequired,
-  order: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  isSelected: PropTypes.bool,
 };
 
-export default QuestionListItem;
+const mapStateToProps = createStructuredSelector({});
+
+const mapDispatchToProps = dispatch => ({
+  onSelect: index => dispatch(selectQuestion(index)),
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(withConnect)(QuestionListItem);

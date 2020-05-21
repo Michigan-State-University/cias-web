@@ -24,11 +24,13 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Text from 'components/Text';
 import cross from 'assets/svg/cross.svg';
 import Question from 'models/Intervention/Question';
-import { themeColors } from 'theme/colors';
+import { themeColors, colors } from 'theme/colors';
+import { borders } from 'theme/general';
 import {
   makeSelectIntervention,
   makeSelectQuestionTypeChooserVisiblity,
   makeSelectQuestions,
+  makeSelectSelectedQuestion,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -45,6 +47,7 @@ function CreateInterventionPage({
   toggleChooser,
   addQuestion,
   questions,
+  selectedQuestion,
 }) {
   useInjectReducer({ key: 'createInterventionPage', reducer });
   useInjectSaga({ key: 'createInterventionPage', saga });
@@ -56,7 +59,12 @@ function CreateInterventionPage({
       </Helmet>
       <Row>
         <Column sm={5}>
-          <Box padded>
+          <Box
+            borderRight={`${borders.borderWidth} ${borders.borderStyle} ${
+              colors.linkWater
+            }`}
+            padded
+          >
             <Row mb={77}>
               <Img src={cross} mr={37} />
               <H1>{intervention.name}</H1>
@@ -66,7 +74,8 @@ function CreateInterventionPage({
               {questions.map((question, index) => (
                 <Row>
                   <QuestionListItem
-                    order={index + 1}
+                    index={index}
+                    isSelected={selectedQuestion === index}
                     type={question.type}
                     title={question.title}
                   />
@@ -107,12 +116,14 @@ CreateInterventionPage.propTypes = {
   toggleChooser: PropTypes.func,
   addQuestion: PropTypes.func,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
+  selectedQuestion: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
   chooserVisibility: makeSelectQuestionTypeChooserVisiblity(),
   questions: makeSelectQuestions(),
+  selectedQuestion: makeSelectSelectedQuestion(),
 });
 
 const mapDispatchToProps = dispatch => ({

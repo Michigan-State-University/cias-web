@@ -7,7 +7,11 @@ import produce from 'immer';
 import Intervention from 'models/Intervention/Intervention';
 import Question from 'models/Intervention/Question';
 import { singleQuestion } from 'models/Intervention/QuestionTypes';
-import { TOGGLE_QUESTION_TYPE_CHOOSER, ADD_QUESTION } from './constants';
+import {
+  TOGGLE_QUESTION_TYPE_CHOOSER,
+  ADD_QUESTION,
+  SELECT_QUESTION,
+} from './constants';
 
 export const initialState = {
   intervention: new Intervention('e-Intervention New', ''),
@@ -23,6 +27,7 @@ export const initialState = {
     ),
   ],
   questionTypeChooserVisibility: false,
+  selectedQuestion: 0,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -34,6 +39,10 @@ const createInterventionPageReducer = (state = initialState, action) =>
         break;
       case ADD_QUESTION:
         draft.questions.push(new Question('New question', action.payload, {}));
+        break;
+      case SELECT_QUESTION:
+        draft.selectedQuestion = action.payload;
+        break;
     }
   });
 
