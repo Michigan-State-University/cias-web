@@ -16,8 +16,15 @@ const makeSelectIntervention = () =>
     substate => substate.intervention,
   );
 
+const makeSelectQuestionTypeChooserVisiblity = () =>
+  createSelector(
+    selectCreateInterventionPageDomain,
+    substate => substate.questionTypeChooserVisibility,
+  );
+
 export {
   makeSelectCreateInterventionPage,
   selectCreateInterventionPageDomain,
   makeSelectIntervention,
+  makeSelectQuestionTypeChooserVisiblity,
 };

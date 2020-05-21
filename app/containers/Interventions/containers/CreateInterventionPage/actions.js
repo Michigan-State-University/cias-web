@@ -4,10 +4,10 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import { TOGGLE_QUESTION_TYPE_CHOOSER } from './constants';
+import { actionBuilder } from '../../../../utils/actionBuilder';
 
-export function defaultAction() {
-  return {
-    type: DEFAULT_ACTION,
-  };
-}
+const toggleQuestionTypeChooser = () =>
+  actionBuilder(TOGGLE_QUESTION_TYPE_CHOOSER, {});
+
+export { toggleQuestionTypeChooser };

@@ -7,7 +7,7 @@ import produce from 'immer';
 import Intervention from 'models/Intervention/Intervention';
 import Question from 'models/Intervention/Question';
 import { singleQuestion } from 'models/Intervention/QuestionTypes';
-import { DEFAULT_ACTION } from './constants';
+import { TOGGLE_QUESTION_TYPE_CHOOSER } from './constants';
 
 export const initialState = {
   intervention: new Intervention('', '', [
@@ -21,13 +21,15 @@ export const initialState = {
       },
     ),
   ]),
+  questionTypeChooserVisibility: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const createInterventionPageReducer = (state = initialState, action) =>
-  produce(state, (/* draft */) => {
+  produce(state, draft => {
     switch (action.type) {
-      case DEFAULT_ACTION:
+      case TOGGLE_QUESTION_TYPE_CHOOSER:
+        draft.questionTypeChooserVisibility = !draft.questionTypeChooserVisibility;
         break;
     }
   });

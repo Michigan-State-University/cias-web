@@ -14,8 +14,13 @@ import HoverableBox from '../../../../components/Box/HoverableBox';
 import { boxShadows, borders } from '../../../../theme/general';
 import { colors } from '../../../../theme/colors';
 
-const QuestionTypeChooser = ({ intl: { formatMessage }, onClick }) => (
-  <Box borderRadius={10} shadow={boxShadows[1]}>
+const QuestionTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
+  <Box
+    borderRadius={10}
+    shadow={boxShadows[1]}
+    position="absolute"
+    {...(visible ? {} : { display: 'none' })}
+  >
     <Box
       borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
         colors.linkWater
@@ -31,11 +36,11 @@ const QuestionTypeChooser = ({ intl: { formatMessage }, onClick }) => (
         <Column>
           {QuestionTypes.map((questionType, i) => (
             <HoverableBox
-              onClick={onClick}
+              onClick={() => onClick(questionType)}
               padding={8}
               {...(i !== QuestionTypes.length - 1 ? { mb: 4 } : {})}
             >
-              <Row align="center" onClick={onClick}>
+              <Row align="center">
                 <DotCircle mr={18} bg={questionType.color} />
                 <Text>{questionType.name}</Text>
               </Row>
@@ -50,6 +55,7 @@ const QuestionTypeChooser = ({ intl: { formatMessage }, onClick }) => (
 QuestionTypeChooser.propTypes = {
   intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
+  visible: PropTypes.bool,
 };
 
 export default injectIntl(QuestionTypeChooser);

@@ -4,5 +4,5 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/CreateInterventionPage/DEFAULT_ACTION';
-export const ADD_SCREEN = 'app/CreateInterventionPage/ADD_SCREEN';
+export const TOGGLE_QUESTION_TYPE_CHOOSER =
+  'app/CreateInterventionPage/TOGGLE_QUESTION_TYPE_CHOOSER';
