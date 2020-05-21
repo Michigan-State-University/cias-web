@@ -6,27 +6,30 @@ import Question from 'models/Intervention/Question';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Img from 'components/Img';
-import Circle from 'components/Circle';
 import H3 from 'components/H3';
-import Comment from 'components/Comment';
+import Comment from 'components/Text/Comment';
+import { ScreenListCircle } from './styled';
+import HoverableBox from '../../../../components/Box/HoverableBox';
 
 const ScreenListItem = ({ type, question }) => (
-  <Row>
-    <Column xs={2}>
-      <Circle size="23px" child={1} opacity={0.3} />
-    </Column>
-    <Column xs={8}>
-      <Row>
-        <H3 mb={6}>{question.text}</H3>
-      </Row>
-      <Row>
-        <Comment fontWeight="bold">{type.name}</Comment>
-      </Row>
-    </Column>
-    <Column xs={2}>
-      <Img src={gear} />
-    </Column>
-  </Row>
+  <HoverableBox px={21} py={14} mb={36}>
+    <Row>
+      <Column xs={2}>
+        <ScreenListCircle text="1" />
+      </Column>
+      <Column xs={8}>
+        <Row>
+          <H3 mb={6}>{question.text}</H3>
+        </Row>
+        <Row>
+          <Comment fontWeight="bold">{type.name}</Comment>
+        </Row>
+      </Column>
+      <Column xs={2}>
+        <Img src={gear} />
+      </Column>
+    </Row>
+  </HoverableBox>
 );
 
 ScreenListItem.propTypes = {

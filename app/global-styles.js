@@ -6,6 +6,7 @@ import Medium from 'assets/fonts/DMSans-Medium.ttf';
 import MediumItalic from 'assets/fonts/DMSans-MediumItalic.ttf';
 import Bold from 'assets/fonts/DMSans-Bold.ttf';
 import BoldItalic from 'assets/fonts/DMSans-BoldItalic.ttf';
+import { colors } from './theme/colors';
 
 const GlobalStyle = createGlobalStyle`
   html,
@@ -59,7 +60,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-color: #fafafa;
+    background-color: ${colors.white};
     min-height: 100%;
     min-width: 100%;
   }

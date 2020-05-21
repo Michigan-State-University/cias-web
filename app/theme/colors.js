@@ -4,6 +4,7 @@ const colors = {
   bluewood: '#2F3850',
   linkWater: '#E9F1FB',
   grey: '#9AA1B6',
+  zirkon: '#F8FBFF',
   white: '#FFF',
 };
 

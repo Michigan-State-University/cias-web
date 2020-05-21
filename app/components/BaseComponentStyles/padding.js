@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
 const padding = props => ({
-  paddingTop: props.pt || '',
-  paddingBottom: props.pb || '',
-  paddingRight: props.pr || '',
-  paddingLeft: props.pl || '',
+  paddingTop: props.py || props.pt || '',
+  paddingBottom: props.py || props.pb || '',
+  paddingRight: props.px || props.pr || '',
+  paddingLeft: props.px || props.pl || '',
   padding: props.padding || '',
 });
 
@@ -14,6 +14,8 @@ padding.propTypes = {
   pr: PropTypes.number,
   pl: PropTypes.number,
   padding: PropTypes.number,
+  px: PropTypes.number,
+  py: PropTypes.number,
 };
 
 export { padding };

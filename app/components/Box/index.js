@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { paddings } from 'theme';
-import { layout, margin, padding } from '../BaseComponentStyles';
+import { layout, margin, padding, style } from '../BaseComponentStyles';
 
 const Box = styled.div`
   width: auto;
@@ -10,6 +10,7 @@ const Box = styled.div`
   ${layout};
   ${padding};
   ${margin};
+  ${style};
 `;
 
 Box.propTypes = {
