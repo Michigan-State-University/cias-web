@@ -33,17 +33,7 @@ const createInterventionPageReducer = (state = initialState, action) =>
         draft.questionTypeChooserVisibility = !draft.questionTypeChooserVisibility;
         break;
       case ADD_QUESTION:
-        draft.questions.push(
-          new Question(
-            'I cansd address any health behavior. For example, I might ask a patient if they are a daily smoker.',
-            action.payload,
-            {
-              0: 'Answer 1',
-              1: 'Answer 2',
-              2: 'Answer 3',
-            },
-          ),
-        );
+        draft.questions.push(new Question('New question', action.payload, {}));
     }
   });
 

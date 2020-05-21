@@ -63,19 +63,19 @@ function CreateInterventionPage({
             </Row>
 
             <Box width="100%" padded>
-              <Row>
-                {questions.map(question => (
+              {questions.map((question, index) => (
+                <Row>
                   <QuestionListItem
-                    key={2}
+                    order={index + 1}
                     type={question.type}
                     title={question.title}
                   />
-                ))}
-              </Row>
+                </Row>
+              ))}
               <Row>
                 <Box position="relative">
-                  <HoverableBox px={21} py={14}>
-                    <Box onClick={toggleChooser}>
+                  <HoverableBox px={21} py={14} onClick={toggleChooser}>
+                    <Box>
                       <Row align="center">
                         <PlusCircle mr={12} clickable />
                         <Text fontWeight="bold" color={themeColors.secondary}>

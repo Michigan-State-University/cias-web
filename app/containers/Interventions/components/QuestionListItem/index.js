@@ -10,11 +10,11 @@ import Comment from 'components/Text/Comment';
 import { NumberCircle } from './styled';
 import HoverableBox from '../../../../components/Box/HoverableBox';
 
-const QuestionListItem = ({ type, title }) => (
-  <HoverableBox px={21} py={14} mb={36}>
+const QuestionListItem = ({ type, title, order }) => (
+  <HoverableBox px={21} py={14} mb={36} width="100%">
     <Row>
       <Column xs={2}>
-        <NumberCircle child="1" />
+        <NumberCircle child={order} />
       </Column>
       <Column xs={8}>
         <Row>
@@ -33,7 +33,8 @@ const QuestionListItem = ({ type, title }) => (
 
 QuestionListItem.propTypes = {
   type: PropTypes.shape(QuestionType).isRequired,
-  title: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  order: PropTypes.number.isRequired,
 };
 
 export default QuestionListItem;
