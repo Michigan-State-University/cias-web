@@ -4,10 +4,12 @@
  *
  */
 
-import { TOGGLE_QUESTION_TYPE_CHOOSER } from './constants';
+import { TOGGLE_QUESTION_TYPE_CHOOSER, ADD_QUESTION } from './constants';
 import { actionBuilder } from '../../../../utils/actionBuilder';
 
 const toggleQuestionTypeChooser = () =>
   actionBuilder(TOGGLE_QUESTION_TYPE_CHOOSER, {});
 
-export { toggleQuestionTypeChooser };
+const addQuestionRequest = type => actionBuilder(ADD_QUESTION, type);
+
+export { toggleQuestionTypeChooser, addQuestionRequest };

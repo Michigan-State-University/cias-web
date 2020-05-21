@@ -7,10 +7,11 @@ import produce from 'immer';
 import Intervention from 'models/Intervention/Intervention';
 import Question from 'models/Intervention/Question';
 import { singleQuestion } from 'models/Intervention/QuestionTypes';
-import { TOGGLE_QUESTION_TYPE_CHOOSER } from './constants';
+import { TOGGLE_QUESTION_TYPE_CHOOSER, ADD_QUESTION } from './constants';
 
 export const initialState = {
-  intervention: new Intervention('', '', [
+  intervention: new Intervention('e-Intervention New', ''),
+  questions: [
     new Question(
       'I can address any health behavior. For example, I might ask a patient if they are a daily smoker.',
       singleQuestion,
@@ -20,7 +21,7 @@ export const initialState = {
         2: 'Answer 3',
       },
     ),
-  ]),
+  ],
   questionTypeChooserVisibility: false,
 };
 
@@ -31,6 +32,18 @@ const createInterventionPageReducer = (state = initialState, action) =>
       case TOGGLE_QUESTION_TYPE_CHOOSER:
         draft.questionTypeChooserVisibility = !draft.questionTypeChooserVisibility;
         break;
+      case ADD_QUESTION:
+        draft.questions.push(
+          new Question(
+            'I cansd address any health behavior. For example, I might ask a patient if they are a daily smoker.',
+            action.payload,
+            {
+              0: 'Answer 1',
+              1: 'Answer 2',
+              2: 'Answer 3',
+            },
+          ),
+        );
     }
   });
 

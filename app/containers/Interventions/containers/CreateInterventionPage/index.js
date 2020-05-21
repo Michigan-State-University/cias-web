@@ -23,15 +23,17 @@ import H1 from 'components/H1';
 import HoverableBox from 'components/Box/HoverableBox';
 import Text from 'components/Text';
 import cross from 'assets/svg/cross.svg';
+import Question from 'models/Intervention/Question';
 import { themeColors } from 'theme/colors';
 import {
   makeSelectIntervention,
   makeSelectQuestionTypeChooserVisiblity,
+  makeSelectQuestions,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { toggleQuestionTypeChooser } from './actions';
+import { toggleQuestionTypeChooser, addQuestionRequest } from './actions';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import { PlusCircle } from './styled';
@@ -41,6 +43,8 @@ function CreateInterventionPage({
   intervention,
   chooserVisibility,
   toggleChooser,
+  addQuestion,
+  questions,
 }) {
   useInjectReducer({ key: 'createInterventionPage', reducer });
   useInjectSaga({ key: 'createInterventionPage', saga });
@@ -55,13 +59,14 @@ function CreateInterventionPage({
           <Box padded>
             <Row mb={77}>
               <Img src={cross} mr={37} />
-              <H1>{formatMessage(messages.pageTitle)}</H1>
+              <H1>{intervention.name}</H1>
             </Row>
 
             <Box width="100%" padded>
               <Row>
-                {intervention.questions.map(question => (
+                {questions.map(question => (
                   <QuestionListItem
+                    key={2}
                     type={question.type}
                     title={question.title}
                   />
@@ -80,7 +85,7 @@ function CreateInterventionPage({
                     </Box>
                   </HoverableBox>
                   <QuestionTypeChooser
-                    onClick={() => console.log('text')}
+                    onClick={addQuestion}
                     visible={chooserVisibility}
                   />
                 </Box>
@@ -100,15 +105,19 @@ CreateInterventionPage.propTypes = {
   intervention: PropTypes.shape(Intervention),
   chooserVisibility: PropTypes.bool,
   toggleChooser: PropTypes.func,
+  addQuestion: PropTypes.func,
+  questions: PropTypes.arrayOf(PropTypes.shape(Question)),
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
   chooserVisibility: makeSelectQuestionTypeChooserVisiblity(),
+  questions: makeSelectQuestions(),
 });
 
 const mapDispatchToProps = dispatch => ({
   toggleChooser: () => dispatch(toggleQuestionTypeChooser()),
+  addQuestion: type => dispatch(addQuestionRequest(type)),
 });
 
 const withConnect = connect(
