@@ -7,12 +7,12 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import { QuestionTypes } from 'models/Intervention/QuestionTypes';
+import { fontSizes } from 'theme/fonts';
+import HoverableBox from 'components/Box/HoverableBox';
+import { boxShadows, borders } from 'theme/general';
+import { colors } from 'theme/colors';
 import messages from './messages';
-import { fontSizes } from '../../../../theme/fonts';
 import { DotCircle } from './styled';
-import HoverableBox from '../../../../components/Box/HoverableBox';
-import { boxShadows, borders } from '../../../../theme/general';
-import { colors } from '../../../../theme/colors';
 
 const QuestionTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
   <Box

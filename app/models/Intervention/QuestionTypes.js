@@ -1,5 +1,5 @@
-import QuestionType from './QuestionType';
 import { colors } from 'theme/colors';
+import QuestionType from './QuestionType';
 
 export const singleQuestion = new QuestionType(
   'Single',
