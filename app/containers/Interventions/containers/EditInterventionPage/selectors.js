@@ -37,7 +37,10 @@ const makeSelectSelectedQuestionIndex = () =>
 const makeSelectSelectedQuestion = () =>
   createSelector(
     selectEditInterventionPageDomain,
-    substate => substate.questions[substate.selectedQuestion],
+    substate =>
+      substate.questions.length > 0
+        ? substate.questions[substate.selectedQuestion]
+        : null,
   );
 
 export {

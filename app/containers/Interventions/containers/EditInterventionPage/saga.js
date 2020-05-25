@@ -1,6 +1,34 @@
-// import { take, call, put, select } from 'redux-saga/effects';
+import { put, takeLatest, select } from 'redux-saga/effects';
+import axios from 'axios';
+import { getHeaders } from 'utils/getHeaders';
+import { CREATE_INTERVENTION_REQUEST } from './constants';
+import { createInterventionSuccess, createInterventionError } from './actions';
+import { makeSelectHeaders } from '../../../../global/reducers/auth';
 
-// Individual exports for testing
-export default function* createInterventionPageSaga() {
-  // See example in containers/HomePage/saga.js
+function* createIntervention() {
+  const requestURL = `${process.env.API_URL}/v1/interventions`;
+
+  try {
+    const response = yield axios.post(
+      requestURL,
+      {
+        intervention: {
+          type: 'Intervention::Single',
+          name: 'e-Intervention New',
+          settings: {},
+        },
+      },
+      { headers: getHeaders(yield select(makeSelectHeaders())) },
+    );
+
+    const token = response.headers['access-token'];
+
+    yield put(createInterventionSuccess(token));
+  } catch (error) {
+    yield put(createInterventionError(error));
+  }
+}
+
+export default function* editInterventionPageSaga() {
+  yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention);
 }

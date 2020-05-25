@@ -15,6 +15,7 @@ import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage/Loadable';
+import CreateInterventionPage from 'containers/Interventions/containers/EditInterventionPage/temporary';
 import rootSaga from '../../global/sagas/rootSaga';
 
 import GlobalStyle from '../../global-styles';
@@ -30,8 +31,14 @@ function App() {
         <AppRoute exact path="/login" component={LoginPage} />
         <AppRoute
           exact
-          path="/interventions/create"
+          path="/interventions/edit"
           component={EditInterventionPage}
+          protected
+        />
+        <AppRoute
+          exact
+          path="/interventions/create"
+          component={CreateInterventionPage}
           protected
         />
         <AppRoute component={NotFoundPage} />

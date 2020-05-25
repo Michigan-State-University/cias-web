@@ -26,39 +26,41 @@ const QuestionDetails = ({
   intl: { formatMessage },
 }) => (
   <BackgroundBox padding={30} height="100%" display="flex">
-    <Column>
-      <Row>
-        <NumberCircle child={selectedQuestionIndex + 1} />
-      </Row>
-      <Row justify="center" height="100%" filled>
-        <Column sm={10} justify="center">
-          <Row width="100%">
-            <StyledHoverableBox width="100%" padded>
-              <H1>
-                <Row>
-                  <ApprovableInput
-                    height="auto"
-                    rows="5"
-                    placeholder={formatMessage(messages.placeholder)}
-                    value={selectedQuestion.title}
-                    type="text"
-                    onCheck={updateTitle}
-                  />
-                </Row>
-              </H1>
-            </StyledHoverableBox>
-          </Row>
-          <Row>
-            <QuestionData />
-          </Row>
-        </Column>
-      </Row>
-    </Column>
+    {selectedQuestion != null ? (
+      <Column>
+        <Row>
+          <NumberCircle child={selectedQuestionIndex + 1} />
+        </Row>
+        <Row justify="center" height="100%" filled>
+          <Column sm={10} justify="center">
+            <Row width="100%">
+              <StyledHoverableBox width="100%" padded>
+                <H1>
+                  <Row>
+                    <ApprovableInput
+                      height="auto"
+                      rows="4"
+                      placeholder={formatMessage(messages.placeholder)}
+                      value={selectedQuestion.title}
+                      type="text"
+                      onCheck={updateTitle}
+                    />
+                  </Row>
+                </H1>
+              </StyledHoverableBox>
+            </Row>
+            <Row>
+              <QuestionData />
+            </Row>
+          </Column>
+        </Row>
+      </Column>
+    ) : null}
   </BackgroundBox>
 );
 
 QuestionDetails.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.shape(Question),
   selectedQuestionIndex: PropTypes.number.isRequired,
   updateTitle: PropTypes.func,
   intl: PropTypes.object,

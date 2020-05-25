@@ -26,7 +26,10 @@ const ApprovableInput = props => {
           value={value}
           onChange={event => setValue(event.target.value)}
           onFocus={() => setfocused(true)}
-          onBlur={() => setfocused(false)}
+          onBlur={() => {
+            setfocused(false);
+            setValue(props.value);
+          }}
           transparent
         />
       </Column>
