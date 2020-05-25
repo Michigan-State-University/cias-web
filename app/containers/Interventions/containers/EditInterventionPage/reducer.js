@@ -1,8 +1,3 @@
-/*
- *
- * CreateInterventionPage reducer
- *
- */
 import produce from 'immer';
 import Intervention from 'models/Intervention/Intervention';
 import Question from 'models/Intervention/Question';
@@ -34,7 +29,7 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const createInterventionPageReducer = (state = initialState, action) =>
+const editInterventionPageReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case TOGGLE_QUESTION_TYPE_CHOOSER:
@@ -66,4 +61,4 @@ const createInterventionPageReducer = (state = initialState, action) =>
     }
   });
 
-export default createInterventionPageReducer;
+export default editInterventionPageReducer;

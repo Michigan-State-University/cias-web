@@ -1,6 +1,6 @@
 /**
  *
- * Tests for CreateInterventionPage
+ * Tests for EditInterventionPage
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -12,11 +12,11 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
 
-import CreateInterventionPage from '../index';
+import EditInterventionPage from '../index';
 import { DEFAULT_LOCALE } from '../../../../../i18n';
 import configureStore from '../../../../../configureStore';
 
-describe('<CreateInterventionPage />', () => {
+describe('<EditInterventionPage />', () => {
   let store;
 
   beforeAll(() => {
@@ -28,7 +28,7 @@ describe('<CreateInterventionPage />', () => {
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <CreateInterventionPage />
+          <EditInterventionPage />
         </IntlProvider>
       </Provider>,
     );
@@ -40,7 +40,7 @@ describe('<CreateInterventionPage />', () => {
       container: { firstChild },
     } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <CreateInterventionPage />
+        <EditInterventionPage />
       </IntlProvider>,
     );
     expect(firstChild).toMatchSnapshot();
