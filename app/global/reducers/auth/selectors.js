@@ -11,7 +11,13 @@ const makeSelectAuth = () =>
 const makeSelectToken = () =>
   createSelector(
     selectAuth,
-    authState => authState.token,
+    authState => authState.headers.token,
+  );
+
+const makeSelectHeaders = () =>
+  createSelector(
+    selectAuth,
+    authState => authState.headers,
   );
 
 const makeSelectIsLoggedIn = () =>
@@ -20,4 +26,9 @@ const makeSelectIsLoggedIn = () =>
     authState => authState.isLoggedIn,
   );
 
-export { makeSelectAuth, makeSelectToken, makeSelectIsLoggedIn };
+export {
+  makeSelectAuth,
+  makeSelectToken,
+  makeSelectIsLoggedIn,
+  makeSelectHeaders,
+};

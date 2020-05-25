@@ -1,5 +1,6 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import request from 'utils/request';
+import { put, takeLatest } from 'redux-saga/effects';
+import axios from 'axios';
+import { setAuthData } from 'global/reducers/auth';
 import { LOGIN_REQUEST } from './constants';
 import { loginError, loginSuccess } from './actions';
 
@@ -7,16 +8,15 @@ function* login({ payload: { username, password } }) {
   const requestURL = `${process.env.API_URL}/auth/sign_in`;
 
   try {
-    const response = yield call(request, requestURL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify({ email: username, password }),
+    const response = yield axios.post(requestURL, {
+      email: username,
+      password,
     });
 
-    const token = response.headers.get('access-token');
+    const token = response.headers['access-token'];
+    const { client, uid } = response.headers;
 
+    yield put(setAuthData({ token, client, uid }));
     yield put(loginSuccess(token));
   } catch (error) {
     yield put(loginError(error));

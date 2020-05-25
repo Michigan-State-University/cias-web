@@ -10,7 +10,7 @@ import { actionBuilder } from '../../utils/actionBuilder';
 const loginRequest = (username, password) =>
   actionBuilder(LOGIN_REQUEST, { username, password });
 
-const loginSuccess = token => actionBuilder(LOGIN_SUCCESS, { token });
+const loginSuccess = authData => actionBuilder(LOGIN_SUCCESS, authData);
 
 const loginError = error => actionBuilder(LOGIN_ERROR, { error });
 

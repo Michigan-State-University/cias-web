@@ -4,10 +4,9 @@
  *
  */
 import produce from 'immer';
-import { SET_TOKEN, REMOVE_TOKEN } from './constants';
+import { SET_AUTH_DATA, SET_TOKEN } from './constants';
 
 export const initialState = {
-  token: null,
   isLoggedIn: false,
 };
 
@@ -15,12 +14,12 @@ export const initialState = {
 export const authReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case SET_TOKEN:
-        draft.token = action.payload.token;
+      case SET_AUTH_DATA:
+        draft.headers = { ...action.payload };
         draft.isLoggedIn = true;
         break;
-      case REMOVE_TOKEN:
-        draft.token = null;
-        draft.isLoggedIn = false;
+      case SET_TOKEN:
+        draft.headers.token = action.payload;
+        break;
     }
   });
