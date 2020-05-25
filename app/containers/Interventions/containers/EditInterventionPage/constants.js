@@ -1,9 +1,3 @@
-/*
- *
- * EditInterventionPage constants
- *
- */
-
 export const TOGGLE_QUESTION_TYPE_CHOOSER =
   'app/EditInterventionPage/TOGGLE_QUESTION_TYPE_CHOOSER';
 
@@ -20,3 +14,10 @@ export const CREATE_INTERVENTION_SUCCESS =
   'app/EditInterventionPage/CREATE_INTERVENTION_SUCCESS';
 export const CREATE_INTERVENTION_ERROR =
   'app/EditInterventionPage/CREATE_INTERVENTION_ERROR';
+
+export const GET_INTERVENTION_REQUEST =
+  'app/EditInterventionPage/GET_INTERVENTION_REQUEST';
+export const GET_INTERVENTION_SUCCESS =
+  'app/EditInterventionPage/GET_INTERVENTION_SUCCESS';
+export const GET_INTERVENTION_ERROR =
+  'app/EditInterventionPage/GET_INTERVENTION_ERROR';

@@ -1,9 +1,4 @@
-/*
- *
- * CreateInterventionPage actions
- *
- */
-
+import { actionBuilder } from 'utils/actionBuilder';
 import {
   TOGGLE_QUESTION_TYPE_CHOOSER,
   ADD_QUESTION,
@@ -13,8 +8,10 @@ import {
   CREATE_INTERVENTION_REQUEST,
   CREATE_INTERVENTION_SUCCESS,
   CREATE_INTERVENTION_ERROR,
+  GET_INTERVENTION_REQUEST,
+  GET_INTERVENTION_SUCCESS,
+  GET_INTERVENTION_ERROR,
 } from './constants';
-import { actionBuilder } from '../../../../utils/actionBuilder';
 
 const toggleQuestionTypeChooser = () =>
   actionBuilder(TOGGLE_QUESTION_TYPE_CHOOSER, {});
@@ -32,6 +29,12 @@ const createInterventionSuccess = token =>
 const createInterventionError = () =>
   actionBuilder(CREATE_INTERVENTION_ERROR, {});
 
+const getInterventionRequest = id =>
+  actionBuilder(GET_INTERVENTION_REQUEST, { id });
+const getInterventionSuccess = token =>
+  actionBuilder(GET_INTERVENTION_SUCCESS, token);
+const getInterventionError = () => actionBuilder(GET_INTERVENTION_ERROR, {});
+
 export {
   toggleQuestionTypeChooser,
   addQuestionRequest,
@@ -41,4 +44,7 @@ export {
   createInterventionRequest,
   createInterventionSuccess,
   createInterventionError,
+  getInterventionRequest,
+  getInterventionSuccess,
+  getInterventionError,
 };

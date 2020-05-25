@@ -25,7 +25,13 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.questionTypeChooserVisibility = !draft.questionTypeChooserVisibility;
         break;
       case ADD_QUESTION:
-        draft.questions.push(new Question('New question', action.payload, {}));
+        draft.questions.push(
+          new Question(
+            'I can address any health behaviour. For example, I might ask a patient if they are a daily smoker.',
+            action.payload,
+            {},
+          ),
+        );
         break;
       case SELECT_QUESTION:
         draft.selectedQuestion = action.payload;

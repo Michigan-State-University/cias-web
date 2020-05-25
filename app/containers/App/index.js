@@ -16,10 +16,10 @@ import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage/Loadable';
 import CreateInterventionPage from 'containers/Interventions/containers/EditInterventionPage/temporary';
-import rootSaga from '../../global/sagas/rootSaga';
+import rootSaga from 'global/sagas/rootSaga';
 
-import GlobalStyle from '../../global-styles';
-import AppRoute from '../../components/AppRoute';
+import GlobalStyle from 'global-styles';
+import AppRoute from 'components/AppRoute';
 
 function App() {
   useInjectSaga({ key: 'app', saga: rootSaga });
@@ -31,13 +31,13 @@ function App() {
         <AppRoute exact path="/login" component={LoginPage} />
         <AppRoute
           exact
-          path="/interventions/edit"
+          path="/interventions/:id"
           component={EditInterventionPage}
           protected
         />
         <AppRoute
           exact
-          path="/interventions/create"
+          path="/intervention/create"
           component={CreateInterventionPage}
           protected
         />

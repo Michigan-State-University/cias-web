@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -28,7 +28,7 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { toggleQuestionTypeChooser } from './actions';
+import { toggleQuestionTypeChooser, getInterventionRequest } from './actions';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import { PlusCircle } from './styled';
@@ -40,9 +40,15 @@ function EditInterventionPage({
   toggleChooser,
   questions,
   selectedQuestion,
+  getIntervention,
+  match: { params },
 }) {
   useInjectReducer({ key: 'editInterventionPage', reducer });
   useInjectSaga({ key: 'editInterventionPage', saga });
+
+  useEffect(() => {
+    getIntervention(params.id);
+  }, []);
 
   return (
     <Fragment>
@@ -106,6 +112,8 @@ EditInterventionPage.propTypes = {
   toggleChooser: PropTypes.func,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.number.isRequired,
+  match: PropTypes.object,
+  getIntervention: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -116,6 +124,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   toggleChooser: () => dispatch(toggleQuestionTypeChooser()),
+  getIntervention: id => dispatch(getInterventionRequest(id)),
 });
 
 const withConnect = connect(

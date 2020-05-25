@@ -1,9 +1,9 @@
-import { put, takeLatest, select } from 'redux-saga/effects';
+import { put, takeLatest, select, all } from 'redux-saga/effects';
 import axios from 'axios';
 import { getHeaders } from 'utils/getHeaders';
+import { makeSelectHeaders } from 'global/reducers/auth';
 import { CREATE_INTERVENTION_REQUEST } from './constants';
 import { createInterventionSuccess, createInterventionError } from './actions';
-import { makeSelectHeaders } from '../../../../global/reducers/auth';
 
 function* createIntervention() {
   const requestURL = `${process.env.API_URL}/v1/interventions`;
@@ -30,5 +30,7 @@ function* createIntervention() {
 }
 
 export default function* editInterventionPageSaga() {
-  yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention);
+  yield all([
+    yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention),
+  ]);
 }
