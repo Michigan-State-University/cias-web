@@ -15,6 +15,7 @@ const flex = props => ({
   justifyItems: propsToCssMapper[props.justify] || '',
   alignContent: propsToCssMapper[props.align] || '',
   alignItems: propsToCssMapper[props.align] || '',
+  flexGrow: props.filled ? 1 : '',
 });
 
 flex.propTypes = {
@@ -34,6 +35,7 @@ flex.propTypes = {
     'between',
     'evenly',
   ]),
+  filled: PropTypes.bool,
 };
 
 export { flex };

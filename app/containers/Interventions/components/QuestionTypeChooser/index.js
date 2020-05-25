@@ -11,8 +11,16 @@ import { fontSizes } from 'theme/fonts';
 import HoverableBox from 'components/Box/HoverableBox';
 import { boxShadows, borders } from 'theme/general';
 import { colors } from 'theme/colors';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 import messages from './messages';
 import { DotCircle } from './styled';
+import { addQuestionRequest } from '../../containers/CreateInterventionPage/actions';
+import { makeSelectQuestionTypeChooserVisiblity } from '../../containers/CreateInterventionPage/selectors';
+
+const decideIfAddMargin = i =>
+  i !== QuestionTypes.length - 1 ? { mb: 4 } : {};
 
 const QuestionTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
   <Box
@@ -39,11 +47,11 @@ const QuestionTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
             <HoverableBox
               onClick={() => onClick(questionType)}
               padding={8}
-              {...(i !== QuestionTypes.length - 1 ? { mb: 4 } : {})}
+              {...decideIfAddMargin(i)}
             >
               <Row align="center">
                 <DotCircle mr={18} bg={questionType.color} />
-                <Text>{questionType.name}</Text>
+                <Text fontWeight="medium">{questionType.name}</Text>
               </Row>
             </HoverableBox>
           ))}
@@ -59,4 +67,17 @@ QuestionTypeChooser.propTypes = {
   visible: PropTypes.bool,
 };
 
-export default injectIntl(QuestionTypeChooser);
+const mapStateToProps = createStructuredSelector({
+  visible: makeSelectQuestionTypeChooserVisiblity(),
+});
+
+const mapDispatchToProps = dispatch => ({
+  onClick: type => dispatch(addQuestionRequest(type)),
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default injectIntl(compose(withConnect)(QuestionTypeChooser));

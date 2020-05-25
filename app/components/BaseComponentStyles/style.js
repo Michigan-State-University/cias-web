@@ -3,7 +3,7 @@ import { hexToRgb } from 'theme';
 
 const style = props => ({
   backgroundColor: props.bg
-    ? `rgba(${hexToRgb(props.bg)}, ${props.opacity})`
+    ? `rgba(${hexToRgb(props.bg)}, ${props.opacity ? props.opacity : 1})`
     : '',
   color: props.color || '',
   cursor: props.clickable ? 'pointer;' : '',

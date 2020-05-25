@@ -28,24 +28,22 @@ import { themeColors, colors } from 'theme/colors';
 import { borders } from 'theme/general';
 import {
   makeSelectIntervention,
-  makeSelectQuestionTypeChooserVisiblity,
   makeSelectQuestions,
-  makeSelectSelectedQuestion,
+  makeSelectSelectedQuestionIndex,
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { toggleQuestionTypeChooser, addQuestionRequest } from './actions';
+import { toggleQuestionTypeChooser } from './actions';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import { PlusCircle } from './styled';
+import QuestionDetails from '../../components/QuestionDetails';
 
 function CreateInterventionPage({
   intl: { formatMessage },
   intervention,
-  chooserVisibility,
   toggleChooser,
-  addQuestion,
   questions,
   selectedQuestion,
 }) {
@@ -57,9 +55,10 @@ function CreateInterventionPage({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
-      <Row>
+      <Row filled>
         <Column sm={5}>
           <Box
+            height="100%"
             borderRight={`${borders.borderWidth} ${borders.borderStyle} ${
               colors.linkWater
             }`}
@@ -76,8 +75,7 @@ function CreateInterventionPage({
                   <QuestionListItem
                     index={index}
                     isSelected={selectedQuestion === index}
-                    type={question.type}
-                    title={question.title}
+                    question={question}
                   />
                 </Row>
               ))}
@@ -86,24 +84,23 @@ function CreateInterventionPage({
                   <HoverableBox px={21} py={14} onClick={toggleChooser}>
                     <Box>
                       <Row align="center">
-                        <PlusCircle mr={12} clickable />
+                        <PlusCircle mr={12} />
                         <Text fontWeight="bold" color={themeColors.secondary}>
                           {formatMessage(messages.addScreen)}
                         </Text>
                       </Row>
                     </Box>
                   </HoverableBox>
-                  <QuestionTypeChooser
-                    onClick={addQuestion}
-                    visible={chooserVisibility}
-                  />
+                  <QuestionTypeChooser />
                 </Box>
               </Row>
               <Row />
             </Box>
           </Box>
         </Column>
-        <Column sm={7}>col2</Column>
+        <Column sm={7}>
+          <QuestionDetails />
+        </Column>
       </Row>
     </Fragment>
   );
@@ -112,23 +109,19 @@ function CreateInterventionPage({
 CreateInterventionPage.propTypes = {
   intl: PropTypes.object,
   intervention: PropTypes.shape(Intervention),
-  chooserVisibility: PropTypes.bool,
   toggleChooser: PropTypes.func,
-  addQuestion: PropTypes.func,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
-  chooserVisibility: makeSelectQuestionTypeChooserVisiblity(),
   questions: makeSelectQuestions(),
-  selectedQuestion: makeSelectSelectedQuestion(),
+  selectedQuestion: makeSelectSelectedQuestionIndex(),
 });
 
 const mapDispatchToProps = dispatch => ({
   toggleChooser: () => dispatch(toggleQuestionTypeChooser()),
-  addQuestion: type => dispatch(addQuestionRequest(type)),
 });
 
 const withConnect = connect(

@@ -28,10 +28,16 @@ const makeSelectQuestionTypeChooserVisiblity = () =>
     substate => substate.questionTypeChooserVisibility,
   );
 
-const makeSelectSelectedQuestion = () =>
+const makeSelectSelectedQuestionIndex = () =>
   createSelector(
     selectCreateInterventionPageDomain,
     substate => substate.selectedQuestion,
+  );
+
+const makeSelectSelectedQuestion = () =>
+  createSelector(
+    selectCreateInterventionPageDomain,
+    substate => substate.questions[substate.selectedQuestion],
   );
 
 export {
@@ -40,5 +46,6 @@ export {
   makeSelectIntervention,
   makeSelectQuestionTypeChooserVisiblity,
   makeSelectQuestions,
+  makeSelectSelectedQuestionIndex,
   makeSelectSelectedQuestion,
 };

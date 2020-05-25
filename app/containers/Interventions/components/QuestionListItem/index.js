@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import gear from 'assets/svg/gear.svg';
-import QuestionType from 'models/Intervention/QuestionType';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Img from 'components/Img';
@@ -10,10 +9,16 @@ import Comment from 'components/Text/Comment';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { NumberCircle, ToggleableBox } from './styled';
+import Question from 'models/Intervention/Question';
 import { selectQuestion } from '../../containers/CreateInterventionPage/actions';
+import { NumberCircle, ToggleableBox } from './styled';
 
-const QuestionListItem = ({ type, title, index, onSelect, isSelected }) => (
+const QuestionListItem = ({
+  question: { type, title },
+  index,
+  onSelect,
+  isSelected,
+}) => (
   <ToggleableBox
     px={21}
     py={14}
@@ -42,8 +47,7 @@ const QuestionListItem = ({ type, title, index, onSelect, isSelected }) => (
 );
 
 QuestionListItem.propTypes = {
-  type: PropTypes.shape(QuestionType).isRequired,
-  title: PropTypes.string.isRequired,
+  question: PropTypes.shape(Question).isRequired,
   index: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
   isSelected: PropTypes.bool,

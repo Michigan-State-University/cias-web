@@ -11,7 +11,9 @@ import {
   TOGGLE_QUESTION_TYPE_CHOOSER,
   ADD_QUESTION,
   SELECT_QUESTION,
+  UPDATE_QUESTION_DATA,
 } from './constants';
+import questionDataReducer from '../../components/QuestionTypes/reducer';
 
 export const initialState = {
   intervention: new Intervention('e-Intervention New', ''),
@@ -42,6 +44,16 @@ const createInterventionPageReducer = (state = initialState, action) =>
         break;
       case SELECT_QUESTION:
         draft.selectedQuestion = action.payload;
+        break;
+      case UPDATE_QUESTION_DATA:
+        draft.questions[state.selectedQuestion] = Object.assign(
+          {},
+          draft.questions[state.selectedQuestion],
+          questionDataReducer(
+            state.questions[state.selectedQuestion],
+            action.payload,
+          ),
+        );
         break;
     }
   });

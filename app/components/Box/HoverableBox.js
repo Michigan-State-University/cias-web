@@ -7,7 +7,7 @@ const HoverableBox = styled(Box)``;
 
 HoverableBox.defaultProps = {
   clickable: true,
-  hoverColor: colors.zirkon,
+  hoverColor: colors.linkWater,
   borderRadius: borders.borderRadius,
 };
 

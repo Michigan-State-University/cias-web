@@ -18,12 +18,12 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           Login
         </p>
         <input
-          class="Input-sc-19txxuq-0 bCinnS"
+          class="Input-sc-19txxuq-0 eXHRjG"
           placeholder="Email"
           value=""
         />
         <input
-          class="Input-sc-19txxuq-0 bCinnS"
+          class="Input-sc-19txxuq-0 eXHRjG"
           placeholder="Password"
           type="password"
           value=""
