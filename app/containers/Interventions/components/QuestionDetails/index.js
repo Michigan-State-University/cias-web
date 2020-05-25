@@ -13,11 +13,11 @@ import { NumberCircle, BackgroundBox, StyledHoverableBox } from './styled';
 import {
   makeSelectSelectedQuestion,
   makeSelectSelectedQuestionIndex,
-} from '../../containers/CreateInterventionPage/selectors';
+} from '../../containers/EditInterventionPage/selectors';
 
 import QuestionData from '../QuestionData';
 import messages from './messages';
-import { updateQuestionTitle } from '../../containers/CreateInterventionPage/actions';
+import { updateQuestionTitle } from '../../containers/EditInterventionPage/actions';
 
 const QuestionDetails = ({
   selectedQuestion,

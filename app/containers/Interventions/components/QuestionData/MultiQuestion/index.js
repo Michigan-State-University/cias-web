@@ -12,11 +12,11 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Text from 'components/Text';
 import { injectIntl } from 'react-intl';
 import checkbox from 'assets/svg/checkbox.svg';
-import { makeSelectSelectedQuestion } from '../../../containers/CreateInterventionPage/selectors';
-import { PlusCircle } from '../../../containers/CreateInterventionPage/styled';
+import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
+import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
 import { themeColors } from '../../../../../theme/colors';
 import messages from './messages';
-import { updateQuestionData } from '../../../containers/CreateInterventionPage/actions';
+import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 import ApprovableInput from '../../../../../components/Input/ApprovableInput';
 import { ADD, UPDATE } from './constants';
 

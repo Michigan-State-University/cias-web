@@ -16,8 +16,8 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import messages from './messages';
 import { DotCircle } from './styled';
-import { addQuestionRequest } from '../../containers/CreateInterventionPage/actions';
-import { makeSelectQuestionTypeChooserVisiblity } from '../../containers/CreateInterventionPage/selectors';
+import { addQuestionRequest } from '../../containers/EditInterventionPage/actions';
+import { makeSelectQuestionTypeChooserVisiblity } from '../../containers/EditInterventionPage/selectors';
 
 const decideIfAddMargin = i =>
   i !== QuestionTypes.length - 1 ? { mb: 4 } : {};

@@ -10,7 +10,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import Question from 'models/Intervention/Question';
-import { selectQuestion } from '../../containers/CreateInterventionPage/actions';
+import { selectQuestion } from '../../containers/EditInterventionPage/actions';
 import { NumberCircle, ToggleableBox } from './styled';
 
 const QuestionListItem = ({

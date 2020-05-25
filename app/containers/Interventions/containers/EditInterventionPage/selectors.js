@@ -1,48 +1,48 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const selectCreateInterventionPageDomain = state =>
-  state.createInterventionPage || initialState;
+const selectEditInterventionPageDomain = state =>
+  state.editInterventionPage || initialState;
 
-const makeSelectCreateInterventionPage = () =>
+const makeSelectEditInterventionPage = () =>
   createSelector(
-    selectCreateInterventionPageDomain,
+    selectEditInterventionPageDomain,
     substate => substate,
   );
 
 const makeSelectIntervention = () =>
   createSelector(
-    selectCreateInterventionPageDomain,
+    selectEditInterventionPageDomain,
     substate => substate.intervention,
   );
 
 const makeSelectQuestions = () =>
   createSelector(
-    selectCreateInterventionPageDomain,
+    selectEditInterventionPageDomain,
     substate => substate.questions,
   );
 
 const makeSelectQuestionTypeChooserVisiblity = () =>
   createSelector(
-    selectCreateInterventionPageDomain,
+    selectEditInterventionPageDomain,
     substate => substate.questionTypeChooserVisibility,
   );
 
 const makeSelectSelectedQuestionIndex = () =>
   createSelector(
-    selectCreateInterventionPageDomain,
+    selectEditInterventionPageDomain,
     substate => substate.selectedQuestion,
   );
 
 const makeSelectSelectedQuestion = () =>
   createSelector(
-    selectCreateInterventionPageDomain,
+    selectEditInterventionPageDomain,
     substate => substate.questions[substate.selectedQuestion],
   );
 
 export {
-  makeSelectCreateInterventionPage,
-  selectCreateInterventionPageDomain,
+  makeSelectEditInterventionPage,
+  selectEditInterventionPageDomain,
   makeSelectIntervention,
   makeSelectQuestionTypeChooserVisiblity,
   makeSelectQuestions,

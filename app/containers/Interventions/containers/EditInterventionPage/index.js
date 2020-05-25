@@ -40,15 +40,15 @@ import QuestionListItem from '../../components/QuestionListItem';
 import { PlusCircle } from './styled';
 import QuestionDetails from '../../components/QuestionDetails';
 
-function CreateInterventionPage({
+function EditInterventionPage({
   intl: { formatMessage },
   intervention,
   toggleChooser,
   questions,
   selectedQuestion,
 }) {
-  useInjectReducer({ key: 'createInterventionPage', reducer });
-  useInjectSaga({ key: 'createInterventionPage', saga });
+  useInjectReducer({ key: 'editInterventionPage', reducer });
+  useInjectSaga({ key: 'editInterventionPage', saga });
 
   return (
     <Fragment>
@@ -106,7 +106,7 @@ function CreateInterventionPage({
   );
 }
 
-CreateInterventionPage.propTypes = {
+EditInterventionPage.propTypes = {
   intl: PropTypes.object,
   intervention: PropTypes.shape(Intervention),
   toggleChooser: PropTypes.func,
@@ -129,4 +129,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default injectIntl(compose(withConnect)(CreateInterventionPage));
+export default injectIntl(compose(withConnect)(EditInterventionPage));
