@@ -8,19 +8,21 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import H1 from 'components/H1';
 import { injectIntl } from 'react-intl';
-import BigInput from 'components/Input/BigInput';
+import ApprovableInput from 'components/Input/ApprovableInput';
 import { NumberCircle, BackgroundBox, StyledHoverableBox } from './styled';
 import {
   makeSelectSelectedQuestion,
   makeSelectSelectedQuestionIndex,
 } from '../../containers/CreateInterventionPage/selectors';
 
-import QuestionData from '../QuestionTypes';
+import QuestionData from '../QuestionData';
 import messages from './messages';
+import { updateQuestionTitle } from '../../containers/CreateInterventionPage/actions';
 
 const QuestionDetails = ({
   selectedQuestion,
   selectedQuestionIndex,
+  updateTitle,
   intl: { formatMessage },
 }) => (
   <BackgroundBox padding={30} height="100%" display="flex">
@@ -29,17 +31,18 @@ const QuestionDetails = ({
         <NumberCircle child={selectedQuestionIndex + 1} />
       </Row>
       <Row justify="center" height="100%" filled>
-        <Column sm={10} align="center" justify="center">
-          <Row>
-            <StyledHoverableBox padded>
+        <Column sm={10} justify="center">
+          <Row width="100%">
+            <StyledHoverableBox width="100%" padded>
               <H1>
                 <Row>
-                  <BigInput
+                  <ApprovableInput
                     height="auto"
                     rows="5"
                     placeholder={formatMessage(messages.placeholder)}
                     value={selectedQuestion.title}
                     type="text"
+                    onCheck={updateTitle}
                   />
                 </Row>
               </H1>
@@ -57,6 +60,7 @@ const QuestionDetails = ({
 QuestionDetails.propTypes = {
   selectedQuestion: PropTypes.shape(Question).isRequired,
   selectedQuestionIndex: PropTypes.number.isRequired,
+  updateTitle: PropTypes.func,
   intl: PropTypes.object,
 };
 
@@ -65,7 +69,9 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestionIndex: makeSelectSelectedQuestionIndex(),
 });
 
-const mapDispatchToProps = () => ({});
+const mapDispatchToProps = dispatch => ({
+  updateTitle: title => dispatch(updateQuestionTitle(title)),
+});
 
 const withConnect = connect(
   mapStateToProps,

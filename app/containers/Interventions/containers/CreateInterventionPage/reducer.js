@@ -12,8 +12,9 @@ import {
   ADD_QUESTION,
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
+  UPDATE_QUESTION_TITLE,
 } from './constants';
-import questionDataReducer from '../../components/QuestionTypes/reducer';
+import questionDataReducer from '../../components/QuestionData/reducer';
 
 export const initialState = {
   intervention: new Intervention('e-Intervention New', ''),
@@ -44,6 +45,13 @@ const createInterventionPageReducer = (state = initialState, action) =>
         break;
       case SELECT_QUESTION:
         draft.selectedQuestion = action.payload;
+        break;
+      case UPDATE_QUESTION_TITLE:
+        draft.questions[state.selectedQuestion] = Object.assign(
+          {},
+          draft.questions[state.selectedQuestion],
+          { title: action.payload },
+        );
         break;
       case UPDATE_QUESTION_DATA:
         draft.questions[state.selectedQuestion] = Object.assign(

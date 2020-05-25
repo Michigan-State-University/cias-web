@@ -2,16 +2,19 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import check from 'assets/svg/checkbox-checked.svg';
 import cross from 'assets/svg/cross.svg';
-import { Input } from '.';
 import Column from '../Column';
 import Row from '../Row';
 import Img from '../Img';
 import Box from '../Box';
 import { TextArea } from './TextArea';
 
-const BigInput = props => {
+const ApprovableInput = props => {
   const [value, setValue] = useState(props.value);
   const [focused, setfocused] = useState(false);
+
+  React.useEffect(() => {
+    setValue(props.value);
+  }, [props.value]);
 
   return (
     <Fragment>
@@ -41,10 +44,10 @@ const BigInput = props => {
   );
 };
 
-BigInput.propTypes = {
+ApprovableInput.propTypes = {
   value: PropTypes.string,
   onCheck: PropTypes.func,
   rows: PropTypes.string,
 };
 
-export default BigInput;
+export default ApprovableInput;

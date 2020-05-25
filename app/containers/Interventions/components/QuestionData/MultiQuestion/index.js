@@ -17,7 +17,7 @@ import { PlusCircle } from '../../../containers/CreateInterventionPage/styled';
 import { themeColors } from '../../../../../theme/colors';
 import messages from './messages';
 import { updateQuestionData } from '../../../containers/CreateInterventionPage/actions';
-import BigInput from '../../../../../components/Input/BigInput';
+import ApprovableInput from '../../../../../components/Input/ApprovableInput';
 import { ADD, UPDATE } from './constants';
 
 const MultiQuestion = ({
@@ -32,7 +32,7 @@ const MultiQuestion = ({
         <HoverableBox px={21} py={14}>
           <Row>
             <Img src={checkbox} mr={16} />
-            <BigInput
+            <ApprovableInput
               placeholder={formatMessage(messages.placeholder)}
               value={value}
               onCheck={newVal => updateAnswer(index, newVal)}
