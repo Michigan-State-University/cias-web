@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { flex } from '../BaseComponentStyles';
+import { flex, layout } from '../BaseComponentStyles';
 
 const calculateWidth = span => {
   if (span) return (span / 12) * 100;
@@ -30,6 +30,7 @@ const Column = styled.div`
     ${({ lg }) => lg && getWidthString(lg)};
   }
   ${flex};
+  ${layout};
 `;
 
 Column.propTypes = {

@@ -7,6 +7,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import H1 from 'components/H1';
+import { injectIntl } from 'react-intl';
+import BigInput from 'components/Input/BigInput';
 import { NumberCircle, BackgroundBox, StyledHoverableBox } from './styled';
 import {
   makeSelectSelectedQuestion,
@@ -14,8 +16,13 @@ import {
 } from '../../containers/CreateInterventionPage/selectors';
 
 import QuestionData from '../QuestionTypes';
+import messages from './messages';
 
-const QuestionDetails = ({ selectedQuestion, selectedQuestionIndex }) => (
+const QuestionDetails = ({
+  selectedQuestion,
+  selectedQuestionIndex,
+  intl: { formatMessage },
+}) => (
   <BackgroundBox padding={30} height="100%" display="flex">
     <Column>
       <Row>
@@ -25,7 +32,17 @@ const QuestionDetails = ({ selectedQuestion, selectedQuestionIndex }) => (
         <Column sm={10} align="center" justify="center">
           <Row>
             <StyledHoverableBox padded>
-              <H1>{selectedQuestion.title}</H1>
+              <H1>
+                <Row>
+                  <BigInput
+                    height="auto"
+                    rows="5"
+                    placeholder={formatMessage(messages.placeholder)}
+                    value={selectedQuestion.title}
+                    type="text"
+                  />
+                </Row>
+              </H1>
             </StyledHoverableBox>
           </Row>
           <Row>
@@ -40,6 +57,7 @@ const QuestionDetails = ({ selectedQuestion, selectedQuestionIndex }) => (
 QuestionDetails.propTypes = {
   selectedQuestion: PropTypes.shape(Question).isRequired,
   selectedQuestionIndex: PropTypes.number.isRequired,
+  intl: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -54,4 +72,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(QuestionDetails);
+export default injectIntl(compose(withConnect)(QuestionDetails));

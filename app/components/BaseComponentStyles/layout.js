@@ -4,7 +4,7 @@ const layout = props => ({
   width: props.width || '',
   height: props.height || '',
   position: props.position || '',
-  display: props.display || '',
+  display: props.hidden ? 'none' : props.display || '',
 });
 
 layout.propTypes = {
@@ -12,6 +12,7 @@ layout.propTypes = {
   height: PropTypes.string,
   position: PropTypes.string,
   display: PropTypes.string,
+  hidden: PropTypes.bool,
 };
 
 export { layout };

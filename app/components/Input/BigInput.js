@@ -6,29 +6,37 @@ import { Input } from '.';
 import Column from '../Column';
 import Row from '../Row';
 import Img from '../Img';
+import Box from '../Box';
+import { TextArea } from './TextArea';
 
 const BigInput = props => {
   const [value, setValue] = useState(props.value);
+  const [focused, setfocused] = useState(false);
+
   return (
     <Fragment>
       <Column>
-        <Input
-          {...props}
+        <TextArea
           height="50px"
+          {...(props.rows ? { rows: props.rows, height: 'auto' } : {})}
           mr={9}
           value={value}
           onChange={event => setValue(event.target.value)}
+          onFocus={() => setfocused(true)}
+          onBlur={() => setfocused(false)}
           transparent
         />
       </Column>
-      <Column justify="between">
-        <Row>
-          <Img src={check} onClick={() => props.onCheck(value)} />
-        </Row>
-        <Row>
-          <Img src={cross} />
-        </Row>
-      </Column>
+      <Box hidden={!focused}>
+        <Column height="100%">
+          <Row mb={9}>
+            <Img src={check} onMouseDown={() => props.onCheck(value)} />
+          </Row>
+          <Row>
+            <Img src={cross} />
+          </Row>
+        </Column>
+      </Box>
     </Fragment>
   );
 };
@@ -36,6 +44,7 @@ const BigInput = props => {
 BigInput.propTypes = {
   value: PropTypes.string,
   onCheck: PropTypes.func,
+  rows: PropTypes.string,
 };
 
 export default BigInput;
