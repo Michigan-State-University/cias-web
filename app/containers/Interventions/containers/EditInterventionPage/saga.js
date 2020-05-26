@@ -110,7 +110,7 @@ function* createQuestion({ payload: { type, id } }) {
       requestURL,
       {
         question: new Question(
-          'I can address any health behavior. For example, I might ask a patient if they are a daily smoker.',
+          'I can address any health behaviour. For example, I might ask a patient if they are a daily smoker.',
           type,
           {},
         ),

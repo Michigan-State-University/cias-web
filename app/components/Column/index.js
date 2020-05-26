@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { breakpoints } from 'theme';
 import { flex, layout } from '../BaseComponentStyles';
 
 const calculateWidth = span => {
@@ -20,13 +21,13 @@ const Column = styled.div`
 
   ${({ xs }) => (xs ? getWidthString(xs) : 'width: 100%;')};
 
-  @media only screen and (min-width: 768px) {
+  @media only screen and (min-width: ${breakpoints.sm}) {
     ${props => props.sm && getWidthString(props.sm)};
   }
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: ${breakpoints.md}) {
     ${({ md }) => md && getWidthString(md)};
   }
-  @media only screen and (min-width: 1200px) {
+  @media only screen and (min-width: ${breakpoints.lg}) {
     ${({ lg }) => lg && getWidthString(lg)};
   }
   ${flex};
