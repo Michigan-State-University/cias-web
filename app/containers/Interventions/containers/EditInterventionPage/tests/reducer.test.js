@@ -1,9 +1,9 @@
-import createInterventionPageReducer from '../reducer';
+import createInterventionPageReducer, { initialState } from '../reducer';
 
 describe('createInterventionPageReducer', () => {
   let state;
   beforeEach(() => {
-    state = {};
+    state = initialState;
   });
 
   it('returns the initial state', () => {

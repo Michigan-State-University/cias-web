@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionListItem /> should match the snapshot 1`] = `
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 16.666666666666664%;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 66.66666666666666%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+}
+
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  margin-bottom: 6px;
+}
+
+.c6 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #9AA1B6;
+}
+
+.c3 {
+  border-radius: 50%;
+  background-color: #107969;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 23px;
+  height: 23px;
+  background-color: rgba(16,121,105,0.3);
+  color: #107969;
+  font-size: 13px;
+  color: #107969;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  margin-bottom: 36px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.c0:hover {
+  background-color: #E9F1FB;
+}
+
+<div
+  className="c0"
+  onClick={[Function]}
+  width="100%"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    >
+      <div
+        className="c3"
+        color="#107969"
+        fontSize="13px"
+        opacity={0.3}
+        size="23px"
+      >
+        NaN
+      </div>
+    </div>
+    <div
+      className="c4"
+    >
+      <div
+        className="c1"
+      >
+        <h3
+          className="c5"
+        >
+          Test
+        </h3>
+      </div>
+      <div
+        className="c1"
+      >
+        <p
+          className="c6"
+          fontWeight="bold"
+        >
+          Question::Single
+        </p>
+      </div>
+    </div>
+    <div
+      className="c2"
+    >
+      <img
+        className="c7"
+        src="IMAGE_MOCK"
+      />
+    </div>
+  </div>
+</div>
+`;

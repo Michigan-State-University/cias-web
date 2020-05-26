@@ -78,6 +78,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
+  font-weight: 500;
 }
 
 .c6 {
@@ -91,7 +92,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
 }
 
 .c6:hover {
-  background-color: #F8FBFF;
+  background-color: #E9F1FB;
 }
 
 .c10 {
@@ -104,7 +105,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
 }
 
 .c10:hover {
-  background-color: #F8FBFF;
+  background-color: #E9F1FB;
 }
 
 .c8 {
@@ -156,7 +157,6 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
 <div
   className="c0"
   display="none"
-  onBlur={[Function]}
 >
   <div
     className="c1"
@@ -193,6 +193,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
             />
             <p
               className="c9"
+              fontWeight="medium"
             >
               Single answer question
             </p>
@@ -213,6 +214,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
             />
             <p
               className="c9"
+              fontWeight="medium"
             >
               Multi answer question
             </p>
