@@ -9,7 +9,6 @@ import Comment from 'components/Text/Comment';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import Question from 'models/Intervention/Question';
 import { selectQuestion } from '../../containers/EditInterventionPage/actions';
 import { NumberCircle, ToggleableBox } from './styled';
 
@@ -36,7 +35,7 @@ const QuestionListItem = ({
           <H3 mb={6}>{title}</H3>
         </Row>
         <Row>
-          <Comment fontWeight="bold">{type.name}</Comment>
+          <Comment fontWeight="bold">{type}</Comment>
         </Row>
       </Column>
       <Column xs={2}>
@@ -47,7 +46,7 @@ const QuestionListItem = ({
 );
 
 QuestionListItem.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
   isSelected: PropTypes.bool,

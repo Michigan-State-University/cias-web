@@ -4,7 +4,7 @@ import { LOGIN_SUCCESS } from 'containers/LoginPage/constants';
 import { setToken } from '../reducers/auth';
 
 function* tokenAssign({ payload }) {
-  yield put(setToken(payload));
+  yield put(setToken(payload.token));
 }
 
 function* loginRedirect() {

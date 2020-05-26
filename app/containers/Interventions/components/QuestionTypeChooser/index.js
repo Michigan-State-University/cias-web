@@ -16,7 +16,6 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import messages from './messages';
 import { DotCircle } from './styled';
-import { addQuestionRequest } from '../../containers/EditInterventionPage/actions';
 import { makeSelectQuestionTypeChooserVisiblity } from '../../containers/EditInterventionPage/selectors';
 
 const decideIfAddMargin = i =>
@@ -44,7 +43,7 @@ const QuestionTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
         <Column>
           {QuestionTypes.map((questionType, i) => (
             <HoverableBox
-              onClick={() => onClick(questionType)}
+              onClick={() => onClick(questionType.id)}
               padding={8}
               {...decideIfAddMargin(i)}
             >
@@ -70,13 +69,6 @@ const mapStateToProps = createStructuredSelector({
   visible: makeSelectQuestionTypeChooserVisiblity(),
 });
 
-const mapDispatchToProps = dispatch => ({
-  onClick: type => dispatch(addQuestionRequest(type)),
-});
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps);
 
 export default injectIntl(compose(withConnect)(QuestionTypeChooser));

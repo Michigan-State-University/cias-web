@@ -28,7 +28,11 @@ import {
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { toggleQuestionTypeChooser, getInterventionRequest } from './actions';
+import {
+  toggleQuestionTypeChooser,
+  getInterventionRequest,
+  createQuestionRequest,
+} from './actions';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import { PlusCircle } from './styled';
@@ -41,6 +45,7 @@ function EditInterventionPage({
   questions,
   selectedQuestion,
   getIntervention,
+  createQuestion,
   match: { params },
 }) {
   useInjectReducer({ key: 'editInterventionPage', reducer });
@@ -91,7 +96,9 @@ function EditInterventionPage({
                       </Row>
                     </Box>
                   </HoverableBox>
-                  <QuestionTypeChooser />
+                  <QuestionTypeChooser
+                    onClick={type => createQuestion(type, params.id)}
+                  />
                 </Box>
               </Row>
               <Row />
@@ -114,6 +121,7 @@ EditInterventionPage.propTypes = {
   selectedQuestion: PropTypes.number.isRequired,
   match: PropTypes.object,
   getIntervention: PropTypes.func,
+  createQuestion: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -125,6 +133,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = dispatch => ({
   toggleChooser: () => dispatch(toggleQuestionTypeChooser()),
   getIntervention: id => dispatch(getInterventionRequest(id)),
+  createQuestion: (type, id) => dispatch(createQuestionRequest(type, id)),
 });
 
 const withConnect = connect(

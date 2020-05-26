@@ -1,17 +1,19 @@
 import produce from 'immer';
 import Intervention from 'models/Intervention/Intervention';
-import Question from 'models/Intervention/Question';
 import {
   TOGGLE_QUESTION_TYPE_CHOOSER,
-  ADD_QUESTION,
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_TITLE,
+  GET_INTERVENTION_SUCCESS,
+  GET_QUESTIONS_SUCCESS,
+  CREATE_QUESTION_SUCCESS,
+  UPDATE_QUESTION_SUCCESS,
 } from './constants';
 import questionDataReducer from '../../components/QuestionData/reducer';
 
 export const initialState = {
-  intervention: new Intervention('e-Intervention New', ''),
+  intervention: new Intervention('', ''),
   questions: [],
   questionTypeChooserVisibility: false,
   selectedQuestion: 0,
@@ -24,14 +26,8 @@ const editInterventionPageReducer = (state = initialState, action) =>
       case TOGGLE_QUESTION_TYPE_CHOOSER:
         draft.questionTypeChooserVisibility = !draft.questionTypeChooserVisibility;
         break;
-      case ADD_QUESTION:
-        draft.questions.push(
-          new Question(
-            'I can address any health behaviour. For example, I might ask a patient if they are a daily smoker.',
-            action.payload,
-            {},
-          ),
-        );
+      case CREATE_QUESTION_SUCCESS:
+        draft.questions.push(action.payload.question);
         break;
       case SELECT_QUESTION:
         draft.selectedQuestion = action.payload;
@@ -52,6 +48,15 @@ const editInterventionPageReducer = (state = initialState, action) =>
             action.payload,
           ),
         );
+        break;
+      case GET_INTERVENTION_SUCCESS:
+        draft.intervention = action.payload.intervention;
+        break;
+      case GET_QUESTIONS_SUCCESS:
+        draft.questions = action.payload.questions;
+        break;
+      case UPDATE_QUESTION_SUCCESS:
+        draft.questions[state.selectedQuestion] = action.payload.question;
         break;
     }
   });

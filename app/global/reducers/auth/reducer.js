@@ -19,7 +19,8 @@ export const authReducer = (state = initialState, action) =>
         draft.isLoggedIn = true;
         break;
       case SET_TOKEN:
-        draft.headers.token = action.payload;
+        if (action.payload != null && action.payload !== '')
+          draft.headers.token = action.payload;
         break;
     }
   });

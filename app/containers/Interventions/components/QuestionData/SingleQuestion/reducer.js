@@ -1,9 +1,3 @@
-/*
- *
- * CreateInterventionPage reducer
- *
- */
-
 import { ADD, UPDATE } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */

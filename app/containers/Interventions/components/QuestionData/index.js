@@ -1,18 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import QuestionType from 'models/Intervention/QuestionType';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import {
+  singleQuestion,
+  multiQuestion,
+} from 'models/Intervention/QuestionTypes';
 import { makeSelectSelectedQuestionType } from './selectors';
 import SingleQuestion from './SingleQuestion';
 import MultiQuestion from './MultiQuestion';
 
 const QuestionData = ({ selectedQuestionType }) => {
-  switch (selectedQuestionType.id) {
-    case 'Single':
+  switch (selectedQuestionType) {
+    case singleQuestion.id:
       return <SingleQuestion />;
-    case 'Multiple':
+    case multiQuestion.id:
       return <MultiQuestion />;
     default:
       return null;
@@ -20,7 +23,7 @@ const QuestionData = ({ selectedQuestionType }) => {
 };
 
 QuestionData.propTypes = {
-  selectedQuestionType: PropTypes.shape(QuestionType).isRequired,
+  selectedQuestionType: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
