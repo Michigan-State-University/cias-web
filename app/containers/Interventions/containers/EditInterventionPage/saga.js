@@ -3,6 +3,7 @@ import axios from 'axios';
 import { getHeaders } from 'utils/getHeaders';
 import { makeSelectHeaders } from 'global/reducers/auth';
 import Question from 'models/Intervention/Question';
+import { push } from 'connected-react-router';
 import {
   CREATE_INTERVENTION_REQUEST,
   GET_INTERVENTION_REQUEST,
@@ -48,6 +49,7 @@ function* createIntervention() {
     const token = response.headers['access-token'];
 
     yield put(createInterventionSuccess(token));
+    yield put(push(`/interventions/${response.data.id}/edit`));
   } catch (error) {
     yield put(createInterventionError(error));
   }
@@ -89,6 +91,9 @@ function* getQuestions({ payload: { id } }) {
     const questions = response.data.data.map(question => ({
       ...question.attributes,
       id: question.id,
+      body: question.attributes.body
+        ? Object.values(question.attributes.body)
+        : [],
     }));
 
     yield put(getQuestionsSuccess(token, questions));
@@ -117,7 +122,9 @@ function* createQuestion({ payload: { type, id } }) {
 
     const token = response.headers['access-token'];
 
-    yield put(createQuestionSuccess(token, { ...response.data, type }));
+    yield put(
+      createQuestionSuccess(token, { ...response.data, type, body: [] }),
+    );
   } catch (error) {
     yield put(createQuestionError(error));
   }

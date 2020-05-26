@@ -31,13 +31,13 @@ function App() {
         <AppRoute exact path="/login" component={LoginPage} />
         <AppRoute
           exact
-          path="/interventions/:id"
+          path="/interventions/:id/edit"
           component={EditInterventionPage}
           protected
         />
         <AppRoute
           exact
-          path="/intervention/create"
+          path="/interventions/create"
           component={CreateInterventionPage}
           protected
         />

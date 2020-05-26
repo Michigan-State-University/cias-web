@@ -60,13 +60,14 @@ function EditInterventionPage({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
-      <Row filled>
+      <Row height="100vh" filled>
         <Column sm={5}>
           <Box
             height="100%"
             borderRight={`${borders.borderWidth} ${borders.borderStyle} ${
               colors.linkWater
             }`}
+            overflow="scroll"
             padded
           >
             <Row mb={77}>
@@ -76,7 +77,7 @@ function EditInterventionPage({
 
             <Box width="100%" padded>
               {questions.map((question, index) => (
-                <Row>
+                <Row key={question.id}>
                   <QuestionListItem
                     index={index}
                     isSelected={selectedQuestion === index}

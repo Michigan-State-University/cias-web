@@ -26,12 +26,11 @@ const editInterventionPageReducer = (state = initialState, action) =>
       case TOGGLE_QUESTION_TYPE_CHOOSER:
         draft.questionTypeChooserVisibility = !draft.questionTypeChooserVisibility;
         break;
-      case CREATE_QUESTION_SUCCESS:
-        draft.questions.push(action.payload.question);
-        break;
+
       case SELECT_QUESTION:
         draft.selectedQuestion = action.payload;
         break;
+
       case UPDATE_QUESTION_TITLE:
         draft.questions[state.selectedQuestion] = Object.assign(
           {},
@@ -39,6 +38,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
           { title: action.payload },
         );
         break;
+
       case UPDATE_QUESTION_DATA:
         draft.questions[state.selectedQuestion] = Object.assign(
           {},
@@ -49,12 +49,19 @@ const editInterventionPageReducer = (state = initialState, action) =>
           ),
         );
         break;
+
+      case CREATE_QUESTION_SUCCESS:
+        draft.questions.push(action.payload.question);
+        break;
+
       case GET_INTERVENTION_SUCCESS:
         draft.intervention = action.payload.intervention;
         break;
+
       case GET_QUESTIONS_SUCCESS:
         draft.questions = action.payload.questions;
         break;
+
       case UPDATE_QUESTION_SUCCESS:
         draft.questions[state.selectedQuestion] = action.payload.question;
         break;

@@ -43,6 +43,7 @@ const QuestionTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
         <Column>
           {QuestionTypes.map((questionType, i) => (
             <HoverableBox
+              key={questionType.id}
               onClick={() => onClick(questionType.id)}
               padding={8}
               {...decideIfAddMargin(i)}

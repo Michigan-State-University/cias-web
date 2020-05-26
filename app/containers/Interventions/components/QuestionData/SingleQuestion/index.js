@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Column from 'components/Column';
 import Row from 'components/Row';
@@ -12,55 +12,83 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Text from 'components/Text';
 import { injectIntl } from 'react-intl';
 import radio from 'assets/svg/radio-button.svg';
+import bin from 'assets/svg/bin-red.svg';
+import { themeColors } from 'theme/colors';
+import ApprovableInput from 'components/Input/ApprovableInput';
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
-import { themeColors } from '../../../../../theme/colors';
 import messages from './messages';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
-import ApprovableInput from '../../../../../components/Input/ApprovableInput';
-import { ADD, UPDATE } from './constants';
+import { ADD, UPDATE, REMOVE } from './constants';
 
 const SingleQuestion = ({
   selectedQuestion,
   addAnswer,
   updateAnswer,
+  removeAnswer,
   intl: { formatMessage },
-}) => (
-  <Column>
-    {Object.entries(selectedQuestion.body).map(([, value], index) => (
+}) => {
+  const [hovered, setHovered] = useState(-1);
+
+  return (
+    <Column>
+      {selectedQuestion.body.map((value, index) => (
+        <Row>
+          <HoverableBox
+            px={21}
+            py={14}
+            width="100%"
+            onMouseEnter={() => setHovered(index)}
+            onMouseLeave={() => setHovered(-1)}
+            clickable={false}
+          >
+            <Row justify="between" align="center">
+              <Row>
+                <Img src={radio} mr={16} />
+                <ApprovableInput
+                  mr={8}
+                  placeholder={formatMessage(messages.placeholder)}
+                  value={value.payload}
+                  onCheck={newTitle =>
+                    updateAnswer(index, { ...value, payload: newTitle })
+                  }
+                />
+              </Row>
+              <Row>
+                <Box
+                  onClick={() => removeAnswer(index)}
+                  hidden={hovered !== index}
+                  clickable
+                >
+                  <Img src={bin} mr={16} />
+                </Box>
+              </Row>
+            </Row>
+          </HoverableBox>
+        </Row>
+      ))}
       <Row>
-        <HoverableBox px={21} py={14}>
-          <Row>
-            <Img src={radio} mr={16} />
-            <ApprovableInput
-              placeholder={formatMessage(messages.placeholder)}
-              value={value}
-              onCheck={newVal => updateAnswer(index, newVal)}
-            />
-          </Row>
+        <HoverableBox px={21} py={14} onClick={addAnswer}>
+          <Box>
+            <Row align="center">
+              <PlusCircle mr={12} />
+              <Text fontWeight="bold" color={themeColors.secondary}>
+                {formatMessage(messages.addAnswer)}
+              </Text>
+            </Row>
+          </Box>
         </HoverableBox>
       </Row>
-    ))}
-    <Row>
-      <HoverableBox px={21} py={14} onClick={addAnswer}>
-        <Box>
-          <Row align="center">
-            <PlusCircle mr={12} />
-            <Text fontWeight="bold" color={themeColors.secondary}>
-              {formatMessage(messages.addAnswer)}
-            </Text>
-          </Row>
-        </Box>
-      </HoverableBox>
-    </Row>
-  </Column>
-);
+    </Column>
+  );
+};
 
 SingleQuestion.propTypes = {
   selectedQuestion: PropTypes.shape(Question).isRequired,
   intl: PropTypes.object.isRequired,
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
+  removeAnswer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -71,6 +99,8 @@ const mapDispatchToProps = dispatch => ({
   addAnswer: () => dispatch(updateQuestionData({ type: ADD })),
   updateAnswer: (index, value) =>
     dispatch(updateQuestionData({ type: UPDATE, data: { index, value } })),
+  removeAnswer: index =>
+    dispatch(updateQuestionData({ type: REMOVE, data: { index } })),
 });
 
 const withConnect = connect(

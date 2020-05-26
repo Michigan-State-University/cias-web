@@ -4,18 +4,24 @@
  *
  */
 
-import { ADD, UPDATE } from './constants';
+import { ADD, UPDATE, REMOVE } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const multiQuestionReducer = (question, payload) => {
   switch (payload.type) {
     case ADD:
-      const answerCount = Object.entries(question.body).length;
-      question.body[answerCount] = `Answer ${answerCount + 1}`;
+      const answerCount = question.body.length;
+      question.body.push({
+        variable: '',
+        payload: `Answer ${answerCount + 1}`,
+      });
       return question;
     case UPDATE:
       const { index, value } = payload.data;
       question.body[index] = value;
+      return question;
+    case REMOVE:
+      question.body.splice(payload.data.index, 1);
       return question;
     default:
       return question;

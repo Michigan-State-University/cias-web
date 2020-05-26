@@ -5,6 +5,7 @@ const layout = props => ({
   height: props.height || '',
   position: props.position || '',
   display: props.hidden ? 'none' : props.display || '',
+  overflow: props.overflow || '',
 });
 
 layout.propTypes = {
@@ -13,6 +14,7 @@ layout.propTypes = {
   position: PropTypes.string,
   display: PropTypes.string,
   hidden: PropTypes.bool,
+  overflow: PropTypes.string,
 };
 
 export { layout };

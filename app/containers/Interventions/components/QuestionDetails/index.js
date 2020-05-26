@@ -25,7 +25,7 @@ const QuestionDetails = ({
   updateTitle,
   intl: { formatMessage },
 }) => (
-  <BackgroundBox padding={30} height="100%" display="flex">
+  <BackgroundBox padding={30} height="100%" display="flex" overflow="scroll">
     {selectedQuestion != null ? (
       <Column>
         <Row>

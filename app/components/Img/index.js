@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { layout, margin } from '../BaseComponentStyles';
+import { layout, margin, style } from '../BaseComponentStyles';
 
 const Img = styled.img`
   width: auto;
   height: auto;
   ${layout};
-  ${margin}
+  ${margin};
+  ${style};
 `;
 
 export default Img;
