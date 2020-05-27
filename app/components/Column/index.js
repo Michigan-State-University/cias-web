@@ -4,10 +4,14 @@ import { breakpoints } from 'theme';
 import { flex, layout } from '../BaseComponentStyles';
 
 const maxNumberOfColumns = 12;
-const hundredPercent = 100;
 
+/**
+ * Calculate width of a column in percents
+ * @param  {int} columnSpan column span value over maximum of 12 columns
+ * @param  {int} return width of column in percents
+ */
 const calculateWidth = columnSpan => {
-  if (columnSpan) return (columnSpan / maxNumberOfColumns) * hundredPercent;
+  if (columnSpan) return (columnSpan / maxNumberOfColumns) * 100;
 
   return undefined;
 };
