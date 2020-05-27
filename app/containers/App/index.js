@@ -21,6 +21,8 @@ import rootSaga from 'global/sagas/rootSaga';
 import GlobalStyle from 'global-styles';
 import AppRoute from 'components/AppRoute';
 
+import 'utils/axios';
+
 function App() {
   useInjectSaga({ key: 'app', saga: rootSaga });
 

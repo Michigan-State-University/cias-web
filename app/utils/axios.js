@@ -35,7 +35,9 @@ axios.interceptors.response.use(
   error => {
     if (error.response.status === 401) {
       LocalStorageService.clearHeaders();
-      useDispatch(logOut());
+
+      const dispatch = useDispatch();
+      dispatch(logOut());
     }
 
     return Promise.reject(error);

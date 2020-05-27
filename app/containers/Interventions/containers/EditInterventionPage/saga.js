@@ -125,21 +125,29 @@ function* updateQuestion() {
   const intervention = yield select(makeSelectIntervention());
   const question = yield select(makeSelectSelectedQuestion());
 
-  // eslint-disable-next-line no-unused-vars
   const requestURL = `v1/interventions/${intervention.id}/questions/${
     question.id
   }`;
 
   try {
-    // ! waiting for backend, temporary solution to return edited value
-    // const response = yield axios.post(
-    //   requestURL,
-    //   {
-    //     question,
-    //   }
-    // );
+    const response = yield axios.put(requestURL, {
+      question,
+    });
 
-    yield put(updateQuestionSuccess(question));
+    const responseQuestion = response.data.data;
+
+    yield put(
+      updateQuestionSuccess({
+        ...responseQuestion.attributes,
+        body: {
+          ...responseQuestion.attributes.body,
+          data: responseQuestion.attributes.body.data
+            ? responseQuestion.attributes.body.data
+            : [],
+        },
+        id: responseQuestion.id,
+      }),
+    );
   } catch (error) {
     yield put(updateQuestionError(error));
   }
