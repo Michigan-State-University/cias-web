@@ -13,8 +13,8 @@ import saga from './saga';
 import { createInterventionRequest } from './actions';
 
 function CreateInterventionPage({ createIntervention }) {
-  useInjectReducer({ key: 'CreateInterventionPage', reducer });
-  useInjectSaga({ key: 'CreateInterventionPage', saga });
+  useInjectReducer({ key: 'editInterventionPage', reducer });
+  useInjectSaga({ key: 'editInterventionPage', saga });
 
   useEffect(() => {
     createIntervention();
