@@ -3,14 +3,17 @@ import PropTypes from 'prop-types';
 import { breakpoints } from 'theme';
 import { flex, layout } from '../BaseComponentStyles';
 
-const calculateWidth = span => {
-  if (span) return (span / 12) * 100;
+const maxNumberOfColumns = 12;
+const hundredPercent = 100;
+
+const calculateWidth = columnSpan => {
+  if (columnSpan) return (columnSpan / maxNumberOfColumns) * hundredPercent;
 
   return undefined;
 };
 
-const getWidthString = span => {
-  if (span) return `width: ${calculateWidth(span)}%;`;
+const getWidthString = columnSpan => {
+  if (columnSpan) return `width: ${calculateWidth(columnSpan)}%;`;
 
   return '';
 };
