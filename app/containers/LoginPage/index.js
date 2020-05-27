@@ -10,20 +10,21 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { injectIntl } from 'react-intl';
+
+import { Input } from 'components/Input';
+import { Card } from 'components/Card';
+import { Button } from 'components/Button';
+import { Fill } from 'components/Fill';
+import Column from 'components/Column';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { injectIntl } from 'react-intl';
 import makeSelectLoginPage, { makeSelectFormData } from './selectors';
 import { loginRequest } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { Input } from '../../components/Input';
-import { Card } from '../../components/Card';
-import { Button } from '../../components/Button';
-import { Fill } from '../../components/Fill';
-import Column from '../../components/Column';
 
 export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
   useInjectReducer({ key: 'loginPage', reducer });
