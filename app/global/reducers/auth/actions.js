@@ -1,7 +1,7 @@
 import { actionBuilder } from 'utils/actionBuilder';
-import { SET_AUTH_DATA, SET_TOKEN } from './constants';
+import { SET_IS_LOGGED_IN, LOG_OUT } from './constants';
 
-export const setAuthData = authData =>
-  actionBuilder(SET_AUTH_DATA, { ...authData });
+export const setIsLoggedIn = isLoggedIn =>
+  actionBuilder(SET_IS_LOGGED_IN, { isLoggedIn });
 
-export const setToken = token => actionBuilder(SET_TOKEN, token);
+export const logOut = () => actionBuilder(LOG_OUT);

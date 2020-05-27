@@ -31,24 +31,18 @@ import {
 } from './selectors';
 
 function* createIntervention() {
-  const requestURL = `${process.env.API_URL}/v1/interventions`;
+  const requestURL = `v1/interventions`;
 
   try {
-    const response = yield axios.post(
-      requestURL,
-      {
-        intervention: {
-          type: 'Intervention::Single',
-          name: 'e-Intervention New',
-          settings: {},
-        },
+    const response = yield axios.post(requestURL, {
+      intervention: {
+        type: 'Intervention::Single',
+        name: 'e-Intervention New',
+        settings: {},
       },
-      { headers: getHeaders(yield select(makeSelectHeaders())) },
-    );
+    });
 
-    const token = response.headers['access-token'];
-
-    yield put(createInterventionSuccess(token));
+    yield put(createInterventionSuccess());
     yield put(push(`/interventions/${response.data.id}/edit`));
   } catch (error) {
     yield put(createInterventionError(error));
@@ -56,17 +50,13 @@ function* createIntervention() {
 }
 
 function* getIntervention({ payload: { id } }) {
-  const requestURL = `${process.env.API_URL}/v1/interventions/${id}`;
+  const requestURL = `v1/interventions/${id}`;
 
   try {
-    const response = yield axios.get(requestURL, {
-      headers: getHeaders(yield select(makeSelectHeaders())),
-    });
-
-    const token = response.headers['access-token'];
+    const response = yield axios.get(requestURL);
 
     yield put(
-      getInterventionSuccess(token, {
+      getInterventionSuccess({
         ...response.data.data.attributes,
         id: response.data.data.id,
       }),
@@ -79,14 +69,12 @@ function* getIntervention({ payload: { id } }) {
 }
 
 function* getQuestions({ payload: { id } }) {
-  const requestURL = `${process.env.API_URL}/v1/interventions/${id}/questions`;
+  const requestURL = `v1/interventions/${id}/questions`;
 
   try {
     const response = yield axios.get(requestURL, {
       headers: getHeaders(yield select(makeSelectHeaders())),
     });
-
-    const token = response.headers['access-token'];
 
     const questions = response.data.data.map(question => ({
       ...question.attributes,
@@ -96,35 +84,25 @@ function* getQuestions({ payload: { id } }) {
         : [],
     }));
 
-    yield put(getQuestionsSuccess(token, questions));
+    yield put(getQuestionsSuccess(questions));
   } catch (error) {
     yield put(getQuestionsError(error));
   }
 }
 
 function* createQuestion({ payload: { type, id } }) {
-  const requestURL = `${process.env.API_URL}/v1/interventions/${id}/questions`;
+  const requestURL = `v1/interventions/${id}/questions`;
 
   try {
-    const response = yield axios.post(
-      requestURL,
-      {
-        question: new Question(
-          'I can address any health behaviour. For example, I might ask a patient if they are a daily smoker.',
-          type,
-          {},
-        ),
-      },
-      {
-        headers: getHeaders(yield select(makeSelectHeaders())),
-      },
-    );
+    const response = yield axios.post(requestURL, {
+      question: new Question(
+        'I can address any health behaviour. For example, I might ask a patient if they are a daily smoker.',
+        type,
+        {},
+      ),
+    });
 
-    const token = response.headers['access-token'];
-
-    yield put(
-      createQuestionSuccess(token, { ...response.data, type, body: [] }),
-    );
+    yield put(createQuestionSuccess({ ...response.data, type, body: [] }));
   } catch (error) {
     yield put(createQuestionError(error));
   }
@@ -135,9 +113,9 @@ function* updateQuestion() {
   const question = yield select(makeSelectSelectedQuestion());
 
   // eslint-disable-next-line no-unused-vars
-  const requestURL = `${process.env.API_URL}/v1/interventions/${
-    intervention.id
-  }/questions/${question.id}`;
+  const requestURL = `v1/interventions/${intervention.id}/questions/${
+    question.id
+  }`;
 
   try {
     // ! waiting for backend, temporary solution to return edited value
@@ -145,16 +123,10 @@ function* updateQuestion() {
     //   requestURL,
     //   {
     //     question,
-    //   },
-    //   {
-    //     headers: getHeaders(yield select(makeSelectHeaders())),
-    //   },
+    //   }
     // );
 
-    // const token = response.headers['access-token'];
-    const token = null;
-
-    yield put(updateQuestionSuccess(token, question));
+    yield put(updateQuestionSuccess(question));
   } catch (error) {
     yield put(updateQuestionError(error));
   }

@@ -1,19 +1,13 @@
 import { put, takeEvery, all } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { LOGIN_SUCCESS } from 'containers/LoginPage/constants';
-import { setToken } from '../reducers/auth';
+import { LOG_OUT } from '../reducers/auth/constants';
+import { setIsLoggedIn } from '../reducers/auth/actions';
 
-function* tokenAssign({ payload }) {
-  yield put(setToken(payload.token));
+function* logOut() {
+  yield put(setIsLoggedIn(false));
+  yield put(push('/login'));
 }
 
-function* loginRedirect() {
-  yield put(push('/'));
-}
-
-export default function* authDataSaga() {
-  yield all([
-    yield takeEvery(action => /_SUCCESS$/.test(action.type), tokenAssign),
-    yield takeEvery(LOGIN_SUCCESS, loginRedirect),
-  ]);
+export default function* authSaga() {
+  yield all([yield takeEvery(LOG_OUT, logOut)]);
 }

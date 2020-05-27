@@ -35,6 +35,8 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
+import 'utils/axios';
+
 // Create redux store with history
 const initialState = {};
 

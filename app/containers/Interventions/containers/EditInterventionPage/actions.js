@@ -31,31 +31,31 @@ const updateQuestionData = data => actionBuilder(UPDATE_QUESTION_DATA, data);
 
 const createInterventionRequest = () =>
   actionBuilder(CREATE_INTERVENTION_REQUEST, {});
-const createInterventionSuccess = token =>
-  actionBuilder(CREATE_INTERVENTION_SUCCESS, { token });
+const createInterventionSuccess = () =>
+  actionBuilder(CREATE_INTERVENTION_SUCCESS, {});
 const createInterventionError = () =>
   actionBuilder(CREATE_INTERVENTION_ERROR, {});
 
 const getInterventionRequest = id =>
   actionBuilder(GET_INTERVENTION_REQUEST, { id });
-const getInterventionSuccess = (token, intervention) =>
-  actionBuilder(GET_INTERVENTION_SUCCESS, { token, intervention });
+const getInterventionSuccess = intervention =>
+  actionBuilder(GET_INTERVENTION_SUCCESS, { intervention });
 const getInterventionError = () => actionBuilder(GET_INTERVENTION_ERROR, {});
 
 const createQuestionRequest = (type, id) =>
   actionBuilder(CREATE_QUESTION_REQUEST, { type, id });
-const createQuestionSuccess = (token, question) =>
-  actionBuilder(CREATE_QUESTION_SUCCESS, { token, question });
+const createQuestionSuccess = question =>
+  actionBuilder(CREATE_QUESTION_SUCCESS, { question });
 const createQuestionError = () => actionBuilder(CREATE_QUESTION_ERROR, {});
 
 const updateQuestionRequest = () => actionBuilder(UPDATE_QUESTION_REQUEST, {});
-const updateQuestionSuccess = (token, question) =>
-  actionBuilder(UPDATE_QUESTION_SUCCESS, { token, question });
+const updateQuestionSuccess = question =>
+  actionBuilder(UPDATE_QUESTION_SUCCESS, { question });
 const updateQuestionError = () => actionBuilder(UPDATE_QUESTION_ERROR, {});
 
 const getQuestionsRequest = id => actionBuilder(GET_QUESTIONS_REQUEST, { id });
-const getQuestionsSuccess = (token, questions) =>
-  actionBuilder(GET_QUESTIONS_SUCCESS, { token, questions });
+const getQuestionsSuccess = questions =>
+  actionBuilder(GET_QUESTIONS_SUCCESS, { questions });
 const getQuestionsError = () => actionBuilder(GET_QUESTIONS_ERROR, {});
 
 export {

@@ -1,3 +1,2 @@
-export const SET_AUTH_DATA = 'app/auth/SET_AUTH_DATA';
-export const REMOVE_AUTH_DATA = 'app/auth/REMOVE_AUTH_DATA';
-export const SET_TOKEN = 'app/auth/SET_TOKEN';
+export const SET_IS_LOGGED_IN = 'app/auth/SET_IS_LOGGED_IN';
+export const LOG_OUT = 'app/auth/LOG_OUT';
