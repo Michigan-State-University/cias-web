@@ -16,26 +16,27 @@ import Img from 'components/Img';
 import H1 from 'components/H1';
 import HoverableBox from 'components/Box/HoverableBox';
 import Text from 'components/Text';
-import cross from 'assets/svg/cross.svg';
 import Question from 'models/Intervention/Question';
-import { themeColors, colors } from 'theme/colors';
-import { borders } from 'theme/general';
+import cross from 'assets/svg/cross.svg';
+
+import { borders, themeColors, colors } from 'theme';
+import reducer from './reducer';
+import saga from './saga';
+import messages from './messages';
+import { PlusCircle } from './styled';
 import {
   makeSelectIntervention,
   makeSelectQuestions,
   makeSelectSelectedQuestionIndex,
 } from './selectors';
-import reducer from './reducer';
-import saga from './saga';
-import messages from './messages';
 import {
   toggleQuestionTypeChooser,
   getInterventionRequest,
   createQuestionRequest,
 } from './actions';
+
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
-import { PlusCircle } from './styled';
 import QuestionDetails from '../../components/QuestionDetails';
 
 function EditInterventionPage({

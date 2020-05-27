@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
+import { createStructuredSelector } from 'reselect';
+
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Img from 'components/Img';
 import Question from 'models/Intervention/Question';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import Box from 'components/Box';
 import HoverableBox from 'components/Box/HoverableBox';
+import ApprovableInput from 'components/Input/ApprovableInput';
 import Text from 'components/Text';
-import { injectIntl } from 'react-intl';
 import bin from 'assets/svg/bin-red.svg';
 import checkbox from 'assets/svg/checkbox.svg';
+
+import { themeColors } from 'theme';
+import messages from './messages';
+import { ADD, UPDATE, REMOVE } from './constants';
+
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
-import { themeColors } from '../../../../../theme/colors';
-import messages from './messages';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
-import ApprovableInput from '../../../../../components/Input/ApprovableInput';
-import { ADD, UPDATE, REMOVE } from './constants';
 
 const MultiQuestion = ({
   selectedQuestion,

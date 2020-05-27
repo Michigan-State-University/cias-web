@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Text from 'components/Text';
-import { QuestionTypes } from 'models/Intervention/QuestionTypes';
-import { fontSizes } from 'theme/fonts';
 import HoverableBox from 'components/Box/HoverableBox';
-import { boxShadows, borders } from 'theme/general';
-import { colors } from 'theme/colors';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
+
+import { QuestionTypes } from 'models/Intervention/QuestionTypes';
+import { colors, boxShadows, borders, fontSizes } from 'theme';
 import messages from './messages';
 import { DotCircle } from './styled';
+
 import { makeSelectQuestionTypeChooserVisiblity } from '../../containers/EditInterventionPage/selectors';
 
 const decideIfAddMargin = i =>

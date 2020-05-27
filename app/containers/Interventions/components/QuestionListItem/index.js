@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import gear from 'assets/svg/gear.svg';
-import Column from 'components/Column';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
 import Row from 'components/Row';
 import Img from 'components/Img';
 import H3 from 'components/H3';
 import Comment from 'components/Text/Comment';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { selectQuestion } from '../../containers/EditInterventionPage/actions';
+import Column from 'components/Column';
+import gear from 'assets/svg/gear.svg';
+
 import { NumberCircle, ToggleableBox } from './styled';
+import { selectQuestion } from '../../containers/EditInterventionPage/actions';
 
 const QuestionListItem = ({
   question: { type, title },
