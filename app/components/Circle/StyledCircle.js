@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { colors, themeColors } from 'theme';
+import { themeColors } from 'theme';
 import { margin, padding, style, text } from '../BaseComponentStyles';
 
 const StyledCircle = styled.div`
@@ -26,7 +26,6 @@ StyledCircle.defaultProps = {
   size: '45px',
   bg: themeColors.primary,
   opacity: 1,
-  color: colors.white,
 };
 
 export default StyledCircle;

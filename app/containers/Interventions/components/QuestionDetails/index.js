@@ -18,6 +18,7 @@ import {
 import QuestionData from '../QuestionData';
 import messages from './messages';
 import { updateQuestionTitle } from '../../containers/EditInterventionPage/actions';
+import { colors } from '../../../../theme/colors';
 
 const QuestionDetails = ({
   selectedQuestion,
@@ -29,7 +30,10 @@ const QuestionDetails = ({
     {selectedQuestion != null ? (
       <Column>
         <Row>
-          <NumberCircle child={selectedQuestionIndex + 1} />
+          <NumberCircle
+            color={colors.white}
+            child={selectedQuestionIndex + 1}
+          />
         </Row>
         <Row justify="center" height="100%" filled>
           <Column sm={10} justify="center">

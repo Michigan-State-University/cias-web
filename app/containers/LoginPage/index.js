@@ -29,7 +29,7 @@ export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
-  const [email, setEmail] = useState(formData.username);
+  const [username, setUsername] = useState(formData.username);
   const [password, setPassword] = useState(formData.password);
 
   return (
@@ -45,8 +45,8 @@ export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
               <Input
                 mb={20}
                 placeholder={formatMessage(messages.emailPlaceholder)}
-                value={email}
-                onChange={event => setEmail(event.target.value)}
+                value={username}
+                onChange={event => setUsername(event.target.value)}
               />
               <Input
                 mb={20}
@@ -57,7 +57,7 @@ export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
               />
               <Button
                 title={formatMessage(messages.loginButton)}
-                onClick={() => onLogin(email, password)}
+                onClick={() => onLogin(username, password)}
               />
             </Column>
           </Card>

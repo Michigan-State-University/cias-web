@@ -9,7 +9,7 @@ function* login({ payload: { username, password } }) {
 
   try {
     const response = yield axios.post(requestURL, {
-      email: username,
+      username,
       password,
     });
 

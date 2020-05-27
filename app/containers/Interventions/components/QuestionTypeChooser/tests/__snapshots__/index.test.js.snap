@@ -127,8 +127,6 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   height: 10px;
   margin-right: 18px;
   background-color: rgba(0,134,248,1);
-  color: #FFF;
-  color: #FFF;
 }
 
 .c11 {
@@ -150,8 +148,6 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   height: 10px;
   margin-right: 18px;
   background-color: rgba(200,102,234,1);
-  color: #FFF;
-  color: #FFF;
 }
 
 <div
@@ -187,7 +183,6 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
           >
             <div
               className="c8"
-              color="#FFF"
               opacity={1}
               size="10px"
             />
@@ -208,7 +203,6 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
           >
             <div
               className="c11"
-              color="#FFF"
               opacity={1}
               size="10px"
             />
