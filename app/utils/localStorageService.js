@@ -1,9 +1,12 @@
 const LocalStorageService = (() => {
   const setToken = token => {
     if (token && token !== '') {
-      const headers = localStorage.getItem('headers');
+      const headers = getHeaders();
 
-      localStorage.setItem('headers', JSON.stringify({ ...headers, token }));
+      localStorage.setItem(
+        'headers',
+        JSON.stringify({ ...headers, 'access-token': token }),
+      );
     }
   };
 

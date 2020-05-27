@@ -35,7 +35,7 @@ const SingleQuestion = ({
 
   return (
     <Column>
-      {selectedQuestion.body.map((value, index) => (
+      {selectedQuestion.body.data.map((value, index) => (
         <Row>
           <HoverableBox
             px={21}

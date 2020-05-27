@@ -1,7 +1,5 @@
 import { put, takeLatest, select, all } from 'redux-saga/effects';
 import axios from 'axios';
-import { getHeaders } from 'utils/getHeaders';
-import { makeSelectHeaders } from 'global/reducers/auth';
 import Question from 'models/Intervention/Question';
 import { push } from 'connected-react-router';
 import {
@@ -43,7 +41,7 @@ function* createIntervention() {
     });
 
     yield put(createInterventionSuccess());
-    yield put(push(`/interventions/${response.data.id}/edit`));
+    yield put(push(`/interventions/${response.data.data.id}/edit`));
   } catch (error) {
     yield put(createInterventionError(error));
   }
@@ -72,16 +70,17 @@ function* getQuestions({ payload: { id } }) {
   const requestURL = `v1/interventions/${id}/questions`;
 
   try {
-    const response = yield axios.get(requestURL, {
-      headers: getHeaders(yield select(makeSelectHeaders())),
-    });
+    const response = yield axios.get(requestURL);
 
     const questions = response.data.data.map(question => ({
       ...question.attributes,
       id: question.id,
-      body: question.attributes.body
-        ? Object.values(question.attributes.body)
-        : [],
+      body: {
+        ...question.attributes.body,
+        data: question.attributes.body.data
+          ? question.attributes.body.data
+          : [],
+      },
     }));
 
     yield put(getQuestionsSuccess(questions));
@@ -102,7 +101,21 @@ function* createQuestion({ payload: { type, id } }) {
       ),
     });
 
-    yield put(createQuestionSuccess({ ...response.data, type, body: [] }));
+    const question = response.data.data;
+
+    yield put(
+      createQuestionSuccess({
+        ...question.attributes,
+        type,
+        body: {
+          ...question.attributes.body,
+          data: question.attributes.body.data
+            ? question.attributes.body.data
+            : [],
+        },
+        id: question.id,
+      }),
+    );
   } catch (error) {
     yield put(createQuestionError(error));
   }
