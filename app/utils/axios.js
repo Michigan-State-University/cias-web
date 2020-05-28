@@ -8,8 +8,7 @@ const { dispatch } = store;
 
 axios.interceptors.request.use(
   config => {
-    config.baseURL = process.env.API_URL;
-    console.log('https://cias-api.herokuapp.com/');
+    config.baseURL = 'https://cias-api.herokuapp.com/';
 
     const headers = LocalStorageService.getHeaders();
     config.headers = headers;
