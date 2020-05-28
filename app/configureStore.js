@@ -5,6 +5,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
+import utilsHistory from 'utils/history';
 import createReducer from './reducers';
 
 export default function configureStore(initialState = {}, history) {
@@ -57,3 +58,7 @@ export default function configureStore(initialState = {}, history) {
 
   return store;
 }
+
+const initialState = {};
+
+export const store = configureStore(initialState, utilsHistory);

@@ -1,8 +1,10 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { store } from 'configureStore';
 import LocalStorageService from './localStorageService';
 import { logOut } from '../global/reducers/auth/actions';
+
+const { dispatch } = store;
 
 axios.interceptors.request.use(
   config => {
@@ -36,7 +38,6 @@ axios.interceptors.response.use(
     if (error.response.status === 401) {
       LocalStorageService.clearHeaders();
 
-      const dispatch = useDispatch();
       dispatch(logOut());
     }
 

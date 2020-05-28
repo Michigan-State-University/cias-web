@@ -30,15 +30,13 @@ import '!file-loader?name=[name].[ext]!./assets/images/favicon.ico';
 import 'file-loader?name=.htaccess!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
-import configureStore from './configureStore';
+import { store } from './configureStore';
 
 // Import i18n messages
 import { translationMessages } from './i18n';
 
-// Create redux store with history
-const initialState = {};
+import 'utils/axios';
 
-const store = configureStore(initialState, history);
 const persistor = persistStore(store);
 
 const MOUNT_NODE = document.getElementById('app');
@@ -46,13 +44,13 @@ const MOUNT_NODE = document.getElementById('app');
 const render = messages => {
   ReactDOM.render(
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <LanguageProvider messages={messages}>
-          <ConnectedRouter history={history}>
+      <LanguageProvider messages={messages}>
+        <ConnectedRouter history={history}>
+          <PersistGate loading={null} persistor={persistor}>
             <App />
-          </ConnectedRouter>
-        </LanguageProvider>
-      </PersistGate>
+          </PersistGate>
+        </ConnectedRouter>
+      </LanguageProvider>
     </Provider>,
     MOUNT_NODE,
   );
