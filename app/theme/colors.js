@@ -7,6 +7,7 @@ const colors = {
   zirkon: '#F8FBFF',
   white: '#FFF',
   azure: '#0086F8',
+  tangerine: '#FFA16C',
 };
 
 const themeColors = {
