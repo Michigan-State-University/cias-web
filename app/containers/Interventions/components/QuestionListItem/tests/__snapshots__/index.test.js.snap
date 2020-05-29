@@ -86,6 +86,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
+  border-radius: 10px;
   width: 100%;
   padding-top: 14px;
   padding-bottom: 14px;

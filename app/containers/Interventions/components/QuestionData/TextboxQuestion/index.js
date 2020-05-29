@@ -5,12 +5,12 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import Column from 'components/Column';
 import Row from 'components/Row';
 import Question from 'models/Intervention/Question';
 import ApprovableInput from 'components/Input/ApprovableInput';
+import Box from 'components/Box';
 
-import { themeColors } from 'theme';
+import { colors } from 'theme/colors';
 import messages from './messages';
 import { UPDATE } from './constants';
 
@@ -24,16 +24,16 @@ const TextboxQuestion = ({
 }) => {
   const { variable, payload } = selectedQuestion.body.data[0];
   return (
-    <Column>
+    <Box bg={colors.linkWater} width="100%" px={21} py={14} mt={20}>
       <Row>
         <ApprovableInput
-          mr={8}
+          rows="5"
           placeholder={formatMessage(messages.placeholder)}
           value={payload}
-          onCheck={newTitle => updateAnswer({ payload: newTitle })}
+          onCheck={newTitle => updateAnswer({ variable, payload: newTitle })}
         />
       </Row>
-    </Column>
+    </Box>
   );
 };
 

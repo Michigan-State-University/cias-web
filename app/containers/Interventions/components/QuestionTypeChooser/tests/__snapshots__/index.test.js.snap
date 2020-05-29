@@ -43,6 +43,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
+  border-radius: 10px;
   position: absolute;
   display: none;
   border-radius: 10px;
@@ -53,6 +54,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
+  border-radius: 10px;
   padding: 16px;
   border-bottom: 1px solid #E9F1FB;
 }
@@ -61,6 +63,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
+  border-radius: 10px;
   padding: 8px;
 }
 
@@ -85,6 +88,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
+  border-radius: 10px;
   padding: 8px;
   margin-bottom: 4px;
   cursor: pointer;
@@ -95,16 +99,17 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
-.c10 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
+  border-radius: 10px;
   padding: 8px;
   cursor: pointer;
   border-radius: 10px;
 }
 
-.c10:hover {
+.c11:hover {
   background-color: #E9F1FB;
 }
 
@@ -129,7 +134,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   background-color: rgba(0,134,248,1);
 }
 
-.c11 {
+.c10 {
   border-radius: 50%;
   background-color: #C866EA;
   display: -webkit-box;
@@ -148,6 +153,27 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   height: 10px;
   margin-right: 18px;
   background-color: rgba(200,102,234,1);
+}
+
+.c12 {
+  border-radius: 50%;
+  background-color: #FFA16C;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  margin-right: 18px;
+  background-color: rgba(255,161,108,1);
 }
 
 <div
@@ -195,14 +221,14 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
           </div>
         </div>
         <div
-          className="c10"
+          className="c6"
           onClick={[Function]}
         >
           <div
             className="c7"
           >
             <div
-              className="c11"
+              className="c10"
               opacity={1}
               size="10px"
             />
@@ -211,6 +237,26 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               fontWeight="medium"
             >
               Multi answer question
+            </p>
+          </div>
+        </div>
+        <div
+          className="c11"
+          onClick={[Function]}
+        >
+          <div
+            className="c7"
+          >
+            <div
+              className="c12"
+              opacity={1}
+              size="10px"
+            />
+            <p
+              className="c9"
+              fontWeight="medium"
+            >
+              Textbox question
             </p>
           </div>
         </div>

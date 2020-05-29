@@ -5,6 +5,7 @@ exports[`<Box /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
+  border-radius: 10px;
 }
 
 <div

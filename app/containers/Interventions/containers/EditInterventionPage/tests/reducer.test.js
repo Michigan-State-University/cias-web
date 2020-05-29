@@ -1,15 +1,14 @@
-import createInterventionPageReducer, { initialState } from '../reducer';
+import editInterventionPageReducer, { initialState } from '../reducer';
 
-describe('createInterventionPageReducer', () => {
+describe('editInterventionPageReducer', () => {
   let state;
+
   beforeEach(() => {
     state = initialState;
   });
 
   it('returns the initial state', () => {
     const expectedResult = state;
-    expect(createInterventionPageReducer(undefined, {})).toEqual(
-      expectedResult,
-    );
+    expect(editInterventionPageReducer(undefined, {})).toEqual(expectedResult);
   });
 });
