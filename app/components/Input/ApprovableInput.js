@@ -30,6 +30,7 @@ const ApprovableInput = props => {
             setfocused(false);
             setValue(props.value);
           }}
+          placeholder={props.placeholder}
           transparent
         />
       </Column>
@@ -55,6 +56,7 @@ ApprovableInput.propTypes = {
   value: PropTypes.string,
   onCheck: PropTypes.func,
   rows: PropTypes.string,
+  placeholder: PropTypes.string,
 };
 
 export default ApprovableInput;
