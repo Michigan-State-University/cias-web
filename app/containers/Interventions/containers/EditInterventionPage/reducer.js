@@ -52,6 +52,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
 
       case CREATE_QUESTION_SUCCESS:
         draft.questions.push(action.payload.question);
+        draft.questionTypeChooserVisibility = false;
         break;
 
       case GET_INTERVENTION_SUCCESS:

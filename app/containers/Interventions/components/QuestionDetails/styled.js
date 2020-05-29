@@ -24,7 +24,7 @@ const BackgroundBox = props => (
 );
 
 const StyledHoverableBox = props => (
-  <HoverableBox {...props} hoverColor={colors.linkWater} />
+  <HoverableBox {...props} hoverColor={colors.linkWater} clickable={false} />
 );
 
 export { NumberCircle, BackgroundBox, StyledHoverableBox };
