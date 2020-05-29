@@ -12,11 +12,10 @@ import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistStore } from 'redux-persist';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import 'sanitize.css/sanitize.css';
+import { throttle } from 'lodash';
 
 // Import root app
 import App from 'containers/App';
@@ -36,8 +35,15 @@ import { store } from './configureStore';
 import { translationMessages } from './i18n';
 
 import 'utils/axios';
+import { saveState } from './utils/persist';
 
-const persistor = persistStore(store);
+store.subscribe(
+  throttle(() => {
+    saveState({
+      auth: store.getState().auth,
+    });
+  }, 1000),
+);
 
 const MOUNT_NODE = document.getElementById('app');
 
@@ -46,9 +52,7 @@ const render = messages => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <PersistGate loading={null} persistor={persistor}>
-            <App />
-          </PersistGate>
+          <App />
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

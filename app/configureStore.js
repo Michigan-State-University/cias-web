@@ -7,6 +7,7 @@ import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
 import utilsHistory from 'utils/history';
 import createReducer from './reducers';
+import { loadState } from './utils/persist';
 
 export default function configureStore(initialState = {}, history) {
   let composeEnhancers = compose;
@@ -58,7 +59,6 @@ export default function configureStore(initialState = {}, history) {
 
   return store;
 }
-
-const initialState = {};
+const initialState = loadState();
 
 export const store = configureStore(initialState, utilsHistory);
