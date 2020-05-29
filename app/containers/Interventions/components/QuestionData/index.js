@@ -6,10 +6,12 @@ import { createStructuredSelector } from 'reselect';
 import {
   singleQuestion,
   multiQuestion,
+  textboxQuestion,
 } from 'models/Intervention/QuestionTypes';
 import { makeSelectSelectedQuestionType } from './selectors';
 import SingleQuestion from './SingleQuestion';
 import MultiQuestion from './MultiQuestion';
+import TextboxQuestion from './TextboxQuestion';
 
 const QuestionData = ({ selectedQuestionType }) => {
   switch (selectedQuestionType) {
@@ -17,6 +19,8 @@ const QuestionData = ({ selectedQuestionType }) => {
       return <SingleQuestion />;
     case multiQuestion.id:
       return <MultiQuestion />;
+    case textboxQuestion.id:
+      return <TextboxQuestion />;
     default:
       return null;
   }

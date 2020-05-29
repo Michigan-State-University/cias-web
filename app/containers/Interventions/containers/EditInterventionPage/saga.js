@@ -28,6 +28,15 @@ import {
   makeSelectSelectedQuestion,
 } from './selectors';
 
+const mapQuestionToStateObject = question => ({
+  ...question.attributes,
+  id: question.id,
+  body: {
+    ...question.attributes.body,
+    data: question.attributes.body.data ? question.attributes.body.data : [],
+  },
+});
+
 function* createIntervention() {
   const requestURL = `v1/interventions`;
 
@@ -72,16 +81,9 @@ function* getQuestions({ payload: { id } }) {
   try {
     const response = yield axios.get(requestURL);
 
-    const questions = response.data.data.map(question => ({
-      ...question.attributes,
-      id: question.id,
-      body: {
-        ...question.attributes.body,
-        data: question.attributes.body.data
-          ? question.attributes.body.data
-          : [],
-      },
-    }));
+    const questions = response.data.data.map(question =>
+      mapQuestionToStateObject(question),
+    );
 
     yield put(getQuestionsSuccess(questions));
   } catch (error) {
@@ -101,21 +103,9 @@ function* createQuestion({ payload: { type, id } }) {
       ),
     });
 
-    const question = response.data.data;
+    const question = mapQuestionToStateObject(response.data.data);
 
-    yield put(
-      createQuestionSuccess({
-        ...question.attributes,
-        type,
-        body: {
-          ...question.attributes.body,
-          data: question.attributes.body.data
-            ? question.attributes.body.data
-            : [],
-        },
-        id: question.id,
-      }),
-    );
+    yield put(createQuestionSuccess(question));
   } catch (error) {
     yield put(createQuestionError(error));
   }
@@ -134,20 +124,9 @@ function* updateQuestion() {
       question,
     });
 
-    const responseQuestion = response.data.data;
+    const responseQuestion = mapQuestionToStateObject(response.data.data);
 
-    yield put(
-      updateQuestionSuccess({
-        ...responseQuestion.attributes,
-        body: {
-          ...responseQuestion.attributes.body,
-          data: responseQuestion.attributes.body.data
-            ? responseQuestion.attributes.body.data
-            : [],
-        },
-        id: responseQuestion.id,
-      }),
-    );
+    yield put(updateQuestionSuccess(responseQuestion));
   } catch (error) {
     yield put(updateQuestionError(error));
   }
