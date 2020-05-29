@@ -1,3 +1,3 @@
-export const ADD = 'app/EditInterventionPage/Single/ADD';
-export const UPDATE = 'app/EditInterventionPage/Single/UPDATE';
-export const REMOVE = 'app/EditInterventionPage/Single/REMOVE';
+export const ADD = 'app/EditInterventionPage/Textbox/ADD';
+export const UPDATE = 'app/EditInterventionPage/Textbox/UPDATE';
+export const REMOVE = 'app/EditInterventionPage/Textbox/REMOVE';
