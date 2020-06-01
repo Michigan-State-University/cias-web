@@ -1,6 +1,5 @@
 import { put, takeLatest, select, all } from 'redux-saga/effects';
 import axios from 'axios';
-import Question from 'models/Intervention/Question';
 import { push } from 'connected-react-router';
 import {
   CREATE_INTERVENTION_REQUEST,

@@ -11,6 +11,7 @@ import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 
 import { colors } from 'theme/colors';
+import { numericValidator } from 'utils/validators';
 import messages from './messages';
 import { UPDATE } from './constants';
 
@@ -27,9 +28,11 @@ const NumberQuestion = ({
     <Box bg={colors.linkWater} width="100%" px={21} py={14} mt={20}>
       <Row>
         <ApprovableInput
-          rows="5"
+          type="singleline"
+          keyboard="tel"
           placeholder={formatMessage(messages.placeholder)}
           value={payload}
+          validator={numericValidator}
           onCheck={newTitle => updateAnswer({ variable, payload: newTitle })}
         />
       </Row>

@@ -49,7 +49,6 @@ const QuestionDetails = ({
                       rows="4"
                       placeholder={formatMessage(messages.placeholder)}
                       value={selectedQuestion.title}
-                      type="text"
                       onCheck={updateTitle}
                     />
                   </Row>
