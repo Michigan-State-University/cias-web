@@ -50,6 +50,7 @@ const SingleQuestion = ({
                 <Img src={radio} mr={16} />
                 <ApprovableInput
                   mr={8}
+                  type="singleline"
                   placeholder={formatMessage(messages.placeholder)}
                   value={value.payload}
                   onCheck={newTitle =>
