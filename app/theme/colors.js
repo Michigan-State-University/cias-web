@@ -8,6 +8,7 @@ const colors = {
   white: '#FFF',
   azure: '#0086F8',
   tangerine: '#FFA16C',
+  golden: '#FFCF5B',
 };
 
 const themeColors = {
