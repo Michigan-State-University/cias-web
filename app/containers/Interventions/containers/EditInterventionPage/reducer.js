@@ -1,5 +1,11 @@
 import produce from 'immer';
 import Intervention from 'models/Intervention/Intervention';
+
+import {
+  textboxQuestion,
+  numberQuestion,
+} from 'models/Intervention/QuestionTypes';
+
 import {
   TOGGLE_QUESTION_TYPE_CHOOSER,
   SELECT_QUESTION,
@@ -10,8 +16,8 @@ import {
   CREATE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
 } from './constants';
+
 import questionDataReducer from '../../components/QuestionData/reducer';
-import { textboxQuestion } from '../../../../models/Intervention/QuestionTypes';
 
 export const initialState = {
   intervention: new Intervention('', ''),
@@ -23,6 +29,7 @@ export const initialState = {
 const mapQuestionDataForType = question => {
   switch (question.type) {
     case textboxQuestion.id:
+    case numberQuestion.id:
       return {
         ...question,
         body: {

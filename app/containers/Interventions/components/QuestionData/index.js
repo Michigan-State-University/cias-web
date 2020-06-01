@@ -3,15 +3,20 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+
 import {
   singleQuestion,
   multiQuestion,
   textboxQuestion,
+  numberQuestion,
 } from 'models/Intervention/QuestionTypes';
-import { makeSelectSelectedQuestionType } from './selectors';
+
 import SingleQuestion from './SingleQuestion';
 import MultiQuestion from './MultiQuestion';
 import TextboxQuestion from './TextboxQuestion';
+import NumberQuestion from './NumberQuestion';
+
+import { makeSelectSelectedQuestionType } from './selectors';
 
 const QuestionData = ({ selectedQuestionType }) => {
   switch (selectedQuestionType) {
@@ -21,6 +26,8 @@ const QuestionData = ({ selectedQuestionType }) => {
       return <MultiQuestion />;
     case textboxQuestion.id:
       return <TextboxQuestion />;
+    case numberQuestion.id:
+      return <NumberQuestion />;
     default:
       return null;
   }
