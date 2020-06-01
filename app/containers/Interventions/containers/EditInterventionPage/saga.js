@@ -91,21 +91,17 @@ function* getQuestions({ payload: { id } }) {
   }
 }
 
-function* createQuestion({ payload: { type, id } }) {
+function* createQuestion({ payload: { question, id } }) {
   const requestURL = `v1/interventions/${id}/questions`;
 
   try {
     const response = yield axios.post(requestURL, {
-      question: new Question(
-        'I can address any health behaviour. For example, I might ask a patient if they are a daily smoker.',
-        type,
-        {},
-      ),
+      question,
     });
 
-    const question = mapQuestionToStateObject(response.data.data);
+    const createdQuestion = mapQuestionToStateObject(response.data.data);
 
-    yield put(createQuestionSuccess(question));
+    yield put(createQuestionSuccess(createdQuestion));
   } catch (error) {
     yield put(createQuestionError(error));
   }

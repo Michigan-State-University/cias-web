@@ -39,6 +39,15 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import QuestionDetails from '../../components/QuestionDetails';
 
+const createEmptyQuestion = type =>
+  new Question(
+    'I can address any health behaviour. For example, I might ask a patient if they are a daily smoker.',
+    type,
+    {
+      data: [{ variable: '', payload: '' }],
+    },
+  );
+
 function EditInterventionPage({
   intl: { formatMessage },
   intervention,
@@ -99,7 +108,9 @@ function EditInterventionPage({
                     </Box>
                   </HoverableBox>
                   <QuestionTypeChooser
-                    onClick={type => createQuestion(type, params.id)}
+                    onClick={type =>
+                      createQuestion(createEmptyQuestion(type), params.id)
+                    }
                   />
                 </Box>
               </Row>
