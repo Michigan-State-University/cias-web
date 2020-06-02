@@ -1,4 +1,4 @@
-import { colors } from 'theme/colors';
+import { colors } from 'theme';
 import QuestionType from './QuestionType';
 
 export const singleQuestion = new QuestionType(
@@ -25,9 +25,16 @@ export const numberQuestion = new QuestionType(
   colors.golden,
 );
 
+export const gridQuestion = new QuestionType(
+  'Question::Grid',
+  'Grid question',
+  colors.pink,
+);
+
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
   textboxQuestion,
   numberQuestion,
+  gridQuestion,
 ];
