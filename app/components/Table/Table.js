@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { themeColors, borders, paddings } from 'theme';
-import { margin, layout } from '../BaseComponentStyles';
+import { fontSizes } from 'theme';
 
-const Table = styled.table``;
+const Table = styled.table`
+  font-size: ${fontSizes.small};
 
-Table.propTypes = {};
-
-Table.defaultProps = {};
+  tr,
+  th,
+  td {
+    font-weight: 400;
+  }
+`;
 
 export { Table };

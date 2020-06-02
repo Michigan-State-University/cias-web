@@ -18,11 +18,13 @@ const Input = styled.input.attrs(props => ({ type: props.keyboard }))`
     props.transparent
       ? { border: 'none', backgroundColor: 'transparent' }
       : {}};
+  ${props => (props.textAlign ? { textAlign: props.textAlign } : {})};
 `;
 
 Input.propTypes = {
   transparent: PropTypes.bool,
   keyboard: PropTypes.oneOf(['text', 'email', 'password', 'number', 'tel']),
+  textAlign: PropTypes.oneOf(['start', 'center', 'end']),
 };
 
 Input.defaultProps = {

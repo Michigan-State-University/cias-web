@@ -47,6 +47,7 @@ const ApprovableInput = props => {
           <Input
             height="60px"
             mr={9}
+            textAlign={props.textAlign}
             value={value}
             onChange={event => onInputChange(event.target.value)}
             onFocus={() => setfocused(true)}
@@ -83,6 +84,7 @@ ApprovableInput.propTypes = {
   type: PropTypes.oneOf(['multiline', 'singleline']),
   keyboard: PropTypes.string,
   validator: PropTypes.func,
+  textAlign: PropTypes.string,
 };
 
 ApprovableInput.defaultProps = {

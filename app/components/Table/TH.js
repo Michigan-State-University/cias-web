@@ -1,12 +1,7 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
-import { themeColors, borders, paddings } from 'theme';
-import { margin, layout } from '../BaseComponentStyles';
 
-const TH = styled.th``;
-
-TH.propTypes = {};
-
-TH.defaultProps = {};
+const TH = styled.th`
+  width: 120px;
+`;
 
 export { TH };

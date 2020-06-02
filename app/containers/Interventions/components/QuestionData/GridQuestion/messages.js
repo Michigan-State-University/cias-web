@@ -11,4 +11,12 @@ export default defineMessages({
     id: `${scope}.addRow`,
     defaultMessage: 'Add new row',
   },
+  rowPlaceholder: {
+    id: `${scope}.rowPlaceholder`,
+    defaultMessage: 'Row {index}...',
+  },
+  columnPlaceholder: {
+    id: `${scope}.columnPlaceholder`,
+    defaultMessage: 'Column {index}...',
+  },
 });

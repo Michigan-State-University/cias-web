@@ -10,10 +10,10 @@ import Question from 'models/Intervention/Question';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Img from 'components/Img';
-import { Table, THead, TBody, TR, TD, TH } from 'components/Table';
+import { Table, THead, TBody, StyledTR, TD, TH } from 'components/Table';
 import radio from 'assets/svg/radio-button.svg';
 
-import { colors } from 'theme/colors';
+import { colors } from 'theme';
 import messages from './messages';
 import { UPDATE } from './constants';
 
@@ -31,30 +31,46 @@ const GridQuestion = ({
   } = selectedQuestion.body.data[0];
   return (
     <Box width="100%" px={21} py={14} mt={20}>
-      <Table>
-        <THead>
-          <TR>
-            <TD />
-            {columns.map((column, columnIndex) => (
-              <TH scope="col">{column.payload}</TH>
-            ))}
-          </TR>
-        </THead>
-        <TBody>
-          {rows.map((row, rowIndex) => (
-            <TR>
-              <TH scope="row">{row.payload}</TH>
+      <Row align="center" justify="center">
+        <Table>
+          <THead>
+            <StyledTR>
+              <TD />
               {columns.map((column, columnIndex) => (
-                <TD>
-                  <Row align="center" justify="center">
-                    <Img src={radio} />
+                <TH scope="col">
+                  <Row>
+                    <ApprovableInput
+                      type="singleline"
+                      textAlign="center"
+                      placeholder={formatMessage(messages.columnPlaceholder, {
+                        index: columnIndex + 1,
+                      })}
+                      value={column.payload}
+                      // onCheck={newTitle =>
+                      //   updateAnswer(index, { ...value, payload: newTitle })
+                      // }
+                    />
                   </Row>
-                </TD>
+                </TH>
               ))}
-            </TR>
-          ))}
-        </TBody>
-      </Table>
+            </StyledTR>
+          </THead>
+          <TBody>
+            {rows.map((row, rowIndex) => (
+              <StyledTR>
+                <TH scope="row">{row.payload}</TH>
+                {columns.map((column, columnIndex) => (
+                  <TD>
+                    <Row align="center" justify="center">
+                      <Img src={radio} />
+                    </Row>
+                  </TD>
+                ))}
+              </StyledTR>
+            ))}
+          </TBody>
+        </Table>
+      </Row>
     </Box>
   );
 };

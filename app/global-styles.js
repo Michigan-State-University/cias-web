@@ -56,7 +56,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'DM Sans', Helvetica, Arial, sans-serif;
+    font-family: 'DM Sans', sans-serif;
   }
 
   #app {
