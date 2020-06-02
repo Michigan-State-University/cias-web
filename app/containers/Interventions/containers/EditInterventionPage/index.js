@@ -19,6 +19,8 @@ import Text from 'components/Text';
 import Question from 'models/Intervention/Question';
 import cross from 'assets/svg/cross.svg';
 
+import { gridQuestion } from 'models/Intervention/QuestionTypes';
+
 import { borders, themeColors, colors } from 'theme';
 import reducer from './reducer';
 import saga from './saga';
@@ -39,10 +41,37 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import QuestionDetails from '../../components/QuestionDetails';
 
-const instantiateEmptyQuestion = (message, type) =>
-  new Question(message, type, {
-    data: [{ variable: '', payload: '' }],
-  });
+const instantiateEmptyQuestion = (message, type) => {
+  switch (type) {
+    case gridQuestion.id:
+      return new Question(message, type, {
+        data: [
+          {
+            variable: '',
+            payload: {
+              rows: [
+                { variable: '', payload: 'Row 1' },
+                { variable: '', payload: 'Row 2' },
+                { variable: '', payload: 'Row 3' },
+                { variable: '', payload: 'Row 4' },
+                { variable: '', payload: 'Row 5' },
+              ],
+              columns: [
+                { variable: '', payload: 'Column 1' },
+                { variable: '', payload: 'Column 2' },
+                { variable: '', payload: 'Column 3' },
+              ],
+            },
+          },
+        ],
+      });
+
+    default:
+      return new Question(message, type, {
+        data: [{ variable: '', payload: '' }],
+      });
+  }
+};
 
 function EditInterventionPage({
   intl: { formatMessage },

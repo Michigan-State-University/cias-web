@@ -4,6 +4,7 @@ import Intervention from 'models/Intervention/Intervention';
 import {
   textboxQuestion,
   numberQuestion,
+  gridQuestion,
 } from 'models/Intervention/QuestionTypes';
 
 import {
@@ -37,6 +38,32 @@ const mapQuestionDataForType = question => {
           data: question.body.data.length
             ? question.body.data
             : [{ variable: '', payload: '' }],
+        },
+      };
+
+    case gridQuestion.id:
+      return {
+        ...question,
+        body: {
+          ...question.body,
+          data: question.body.data.length
+            ? question.body.data
+            : [
+                {
+                  variable: '',
+                  payload: {
+                    rows: [
+                      { variable: '', payload: '' },
+                      { variable: '', payload: '' },
+                    ],
+                    columns: [
+                      { variable: '', payload: '' },
+                      { variable: '', payload: '' },
+                      { variable: '', payload: '' },
+                    ],
+                  },
+                },
+              ],
         },
       };
 

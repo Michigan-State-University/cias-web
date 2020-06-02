@@ -1,6 +1,7 @@
 import { put, takeLatest, select, all } from 'redux-saga/effects';
 import axios from 'axios';
 import { push } from 'connected-react-router';
+
 import {
   CREATE_INTERVENTION_REQUEST,
   GET_INTERVENTION_REQUEST,
@@ -9,6 +10,7 @@ import {
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_TITLE,
 } from './constants';
+
 import {
   createInterventionSuccess,
   createInterventionError,
@@ -22,6 +24,7 @@ import {
   updateQuestionSuccess,
   updateQuestionError,
 } from './actions';
+
 import {
   makeSelectIntervention,
   makeSelectSelectedQuestion,

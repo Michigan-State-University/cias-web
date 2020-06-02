@@ -9,12 +9,14 @@ import {
   multiQuestion,
   textboxQuestion,
   numberQuestion,
+  gridQuestion,
 } from 'models/Intervention/QuestionTypes';
 
 import SingleQuestion from './SingleQuestion';
 import MultiQuestion from './MultiQuestion';
 import TextboxQuestion from './TextboxQuestion';
 import NumberQuestion from './NumberQuestion';
+import GridQuestion from './GridQuestion';
 
 import { makeSelectSelectedQuestionType } from './selectors';
 
@@ -28,6 +30,8 @@ const QuestionData = ({ selectedQuestionType }) => {
       return <TextboxQuestion />;
     case numberQuestion.id:
       return <NumberQuestion />;
+    case gridQuestion.id:
+      return <GridQuestion />;
     default:
       return null;
   }
