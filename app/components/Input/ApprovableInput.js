@@ -23,6 +23,11 @@ const ApprovableInput = props => {
     } else if (!props.validator) setValue(targetValue);
   };
 
+  const onBlur = () => {
+    setfocused(false);
+    setValue(props.value);
+  };
+
   return (
     <Fragment>
       <Column>
@@ -34,10 +39,7 @@ const ApprovableInput = props => {
             value={value}
             onChange={event => onInputChange(event.target.value)}
             onFocus={() => setfocused(true)}
-            onBlur={() => {
-              setfocused(false);
-              setValue(props.value);
-            }}
+            onBlur={onBlur}
             placeholder={props.placeholder}
             transparent
           />
@@ -48,10 +50,7 @@ const ApprovableInput = props => {
             value={value}
             onChange={event => onInputChange(event.target.value)}
             onFocus={() => setfocused(true)}
-            onBlur={() => {
-              setfocused(false);
-              setValue(props.value);
-            }}
+            onBlur={onBlur}
             placeholder={props.placeholder}
             keyboard={props.keyboard}
             transparent
