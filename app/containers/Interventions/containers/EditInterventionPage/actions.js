@@ -42,8 +42,8 @@ const getInterventionSuccess = intervention =>
   actionBuilder(GET_INTERVENTION_SUCCESS, { intervention });
 const getInterventionError = () => actionBuilder(GET_INTERVENTION_ERROR, {});
 
-const createQuestionRequest = (type, id) =>
-  actionBuilder(CREATE_QUESTION_REQUEST, { type, id });
+const createQuestionRequest = (question, id) =>
+  actionBuilder(CREATE_QUESTION_REQUEST, { question, id });
 const createQuestionSuccess = question =>
   actionBuilder(CREATE_QUESTION_SUCCESS, { question });
 const createQuestionError = () => actionBuilder(CREATE_QUESTION_ERROR, {});

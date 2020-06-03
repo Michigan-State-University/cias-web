@@ -19,4 +19,15 @@ export const textboxQuestion = new QuestionType(
   colors.tangerine,
 );
 
-export const QuestionTypes = [singleQuestion, multiQuestion, textboxQuestion];
+export const numberQuestion = new QuestionType(
+  'Question::Number',
+  'Number question',
+  colors.golden,
+);
+
+export const QuestionTypes = [
+  singleQuestion,
+  multiQuestion,
+  textboxQuestion,
+  numberQuestion,
+];

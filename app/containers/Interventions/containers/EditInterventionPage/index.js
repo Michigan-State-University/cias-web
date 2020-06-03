@@ -39,6 +39,11 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import QuestionDetails from '../../components/QuestionDetails';
 
+const instantiateEmptyQuestion = (message, type) =>
+  new Question(message, type, {
+    data: [{ variable: '', payload: '' }],
+  });
+
 function EditInterventionPage({
   intl: { formatMessage },
   intervention,
@@ -99,7 +104,15 @@ function EditInterventionPage({
                     </Box>
                   </HoverableBox>
                   <QuestionTypeChooser
-                    onClick={type => createQuestion(type, params.id)}
+                    onClick={type =>
+                      createQuestion(
+                        instantiateEmptyQuestion(
+                          formatMessage(messages.newQuestionMessage),
+                          type,
+                        ),
+                        params.id,
+                      )
+                    }
                   />
                 </Box>
               </Row>

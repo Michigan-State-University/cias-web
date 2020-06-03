@@ -7,6 +7,7 @@ import Row from '../Row';
 import Img from '../Img';
 import Box from '../Box';
 import { TextArea } from './TextArea';
+import { Input } from './index';
 
 const ApprovableInput = props => {
   const [value, setValue] = useState(props.value);
@@ -16,23 +17,45 @@ const ApprovableInput = props => {
     setValue(props.value);
   }, [props.value]);
 
+  const onInputChange = targetValue => {
+    if (props.validator && props.validator(targetValue)) {
+      setValue(targetValue);
+    } else if (!props.validator) setValue(targetValue);
+  };
+
+  const onBlur = () => {
+    setfocused(false);
+    setValue(props.value);
+  };
+
   return (
     <Fragment>
       <Column>
-        <TextArea
-          height="60px"
-          {...(props.rows ? { rows: props.rows, height: 'auto' } : {})}
-          mr={9}
-          value={value}
-          onChange={event => setValue(event.target.value)}
-          onFocus={() => setfocused(true)}
-          onBlur={() => {
-            setfocused(false);
-            setValue(props.value);
-          }}
-          placeholder={props.placeholder}
-          transparent
-        />
+        {props.type === 'multiline' ? (
+          <TextArea
+            height="60px"
+            {...(props.rows ? { rows: props.rows, height: 'auto' } : {})}
+            mr={9}
+            value={value}
+            onChange={event => onInputChange(event.target.value)}
+            onFocus={() => setfocused(true)}
+            onBlur={onBlur}
+            placeholder={props.placeholder}
+            transparent
+          />
+        ) : (
+          <Input
+            height="60px"
+            mr={9}
+            value={value}
+            onChange={event => onInputChange(event.target.value)}
+            onFocus={() => setfocused(true)}
+            onBlur={onBlur}
+            placeholder={props.placeholder}
+            keyboard={props.keyboard}
+            transparent
+          />
+        )}
       </Column>
       <Box hidden={!focused}>
         <Column height="100%">
@@ -57,6 +80,13 @@ ApprovableInput.propTypes = {
   onCheck: PropTypes.func,
   rows: PropTypes.string,
   placeholder: PropTypes.string,
+  type: PropTypes.oneOf(['multiline', 'singleline']),
+  keyboard: PropTypes.string,
+  validator: PropTypes.func,
+};
+
+ApprovableInput.defaultProps = {
+  type: 'multiline',
 };
 
 export default ApprovableInput;

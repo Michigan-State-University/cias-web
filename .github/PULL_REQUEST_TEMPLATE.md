@@ -1,5 +1,5 @@
 ## Related tasks
-- [CIAS-](https://htdevelopers.atlassian.net/jira/software/projects/CIAS)
+- [CIAS-](https://htdevelopers.atlassian.net/browse/CIAS-)
 
 ## What's new?
 - 
