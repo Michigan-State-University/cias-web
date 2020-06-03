@@ -1,0 +1,38 @@
+name: Continuous integration
+on: push
+
+jobs:
+  verify:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+   
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.16.3
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}--
+
+      - name: Install Dependencies
+        run: npm install
+        
+      - name: Lint js and css
+        run: npm run lint
+  
+      - name: Test
+        run: npm test
+
+    
