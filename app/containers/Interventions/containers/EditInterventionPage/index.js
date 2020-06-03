@@ -40,13 +40,9 @@ import QuestionListItem from '../../components/QuestionListItem';
 import QuestionDetails from '../../components/QuestionDetails';
 
 const instantiateEmptyQuestion = (message, type) =>
-  new Question(
-    'I can address any health behaviour. For example, I might ask a patient if they are a daily smoker.',
-    type,
-    {
-      data: [{ variable: '', payload: '' }],
-    },
-  );
+  new Question(message, type, {
+    data: [{ variable: '', payload: '' }],
+  });
 
 function EditInterventionPage({
   intl: { formatMessage },
