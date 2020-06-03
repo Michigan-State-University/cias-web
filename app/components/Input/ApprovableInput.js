@@ -17,6 +17,12 @@ const ApprovableInput = props => {
     setValue(props.value);
   }, [props.value]);
 
+  const onInputChange = targetValue => {
+    if (props.validator && props.validator(targetValue)) {
+      setValue(targetValue);
+    } else if (!props.validator) setValue(targetValue);
+  };
+
   return (
     <Fragment>
       <Column>
@@ -26,12 +32,7 @@ const ApprovableInput = props => {
             {...(props.rows ? { rows: props.rows, height: 'auto' } : {})}
             mr={9}
             value={value}
-            onChange={event => {
-              if (props.validator) {
-                if (props.validator(event.target.value))
-                  setValue(event.target.value);
-              } else setValue(event.target.value);
-            }}
+            onChange={event => onInputChange(event.target.value)}
             onFocus={() => setfocused(true)}
             onBlur={() => {
               setfocused(false);
@@ -45,12 +46,7 @@ const ApprovableInput = props => {
             height="60px"
             mr={9}
             value={value}
-            onChange={event => {
-              if (props.validator) {
-                if (props.validator(event.target.value))
-                  setValue(event.target.value);
-              } else setValue(event.target.value);
-            }}
+            onChange={event => onInputChange(event.target.value)}
             onFocus={() => setfocused(true)}
             onBlur={() => {
               setfocused(false);
