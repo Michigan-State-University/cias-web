@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { borders, hexToRgb } from 'theme';
 import { colors } from '../../theme/colors';
 import { TR } from './TR';
 import { TBody } from './TBody';
 
-const StyledTR = styled(TR)`
-  ${TBody} &:nth-child(even) {
+const StripedTR = styled(TR)`
+  ${TBody} &:nth-child(${props => props.stripesPlacement}) {
     td,
     th {
       background: rgba(${hexToRgb(colors.jungleGreen)}, 0.1);
@@ -23,4 +24,12 @@ const StyledTR = styled(TR)`
   }
 `;
 
-export { StyledTR };
+StripedTR.propTypes = {
+  stripesPlacement: PropTypes.string,
+};
+
+StripedTR.defaultProps = {
+  stripesPlacement: 'even',
+};
+
+export { StripedTR };

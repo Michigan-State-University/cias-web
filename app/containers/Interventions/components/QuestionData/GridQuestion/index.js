@@ -11,7 +11,7 @@ import Question from 'models/Intervention/Question';
 import Box from 'components/Box';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
-import { Table, THead, TBody, StyledTR, TD, TH } from 'components/Table';
+import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
 import { StyledInput } from 'components/Input/StyledInput';
 import radio from 'assets/svg/radio-button.svg';
 
@@ -54,7 +54,7 @@ const GridQuestion = ({
         <Box px={10} overflow="scroll">
           <Table>
             <THead>
-              <StyledTR>
+              <StripedTR>
                 <TD />
                 {columns.map((column, columnIndex) => (
                   <TH scope="col">
@@ -71,11 +71,11 @@ const GridQuestion = ({
                     />
                   </TH>
                 ))}
-              </StyledTR>
+              </StripedTR>
             </THead>
             <TBody>
               {rows.map((row, rowIndex) => (
-                <StyledTR>
+                <StripedTR>
                   <TH scope="row">
                     <StyledInput
                       width={110}
@@ -96,7 +96,7 @@ const GridQuestion = ({
                       </Row>
                     </TD>
                   ))}
-                </StyledTR>
+                </StripedTR>
               ))}
             </TBody>
           </Table>
