@@ -1,4 +1,5 @@
 import produce from 'immer';
+import _ from 'lodash';
 import Intervention from 'models/Intervention/Intervention';
 
 import {
@@ -16,6 +17,7 @@ import {
   GET_QUESTIONS_SUCCESS,
   CREATE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
+  UPDATE_QUESTION_ERROR,
 } from './constants';
 
 import questionDataReducer from '../../components/QuestionData/reducer';
@@ -25,6 +27,10 @@ export const initialState = {
   questions: [],
   questionTypeChooserVisibility: false,
   selectedQuestion: 0,
+  cache: {
+    intervention: new Intervention('', ''),
+    questions: [],
+  },
 };
 
 const mapQuestionDataForType = question => {
@@ -103,25 +109,39 @@ const editInterventionPageReducer = (state = initialState, action) =>
         );
         break;
 
-      case CREATE_QUESTION_SUCCESS:
-        draft.questions.push(mapQuestionDataForType(action.payload.question));
-        draft.questionTypeChooserVisibility = false;
-        break;
-
-      case GET_QUESTIONS_SUCCESS:
-        draft.questions = action.payload.questions.map(question =>
-          mapQuestionDataForType(question),
-        );
-        break;
-
       case UPDATE_QUESTION_SUCCESS:
-        draft.questions[state.selectedQuestion] = mapQuestionDataForType(
+        draft.cache.questions[state.selectedQuestion] = mapQuestionDataForType(
           action.payload.question,
         );
         break;
 
+      case UPDATE_QUESTION_ERROR:
+        draft.questions[state.selectedQuestion] = _.cloneDeep(
+          draft.cache.questions[state.selectedQuestion],
+        );
+        break;
+
+      case CREATE_QUESTION_SUCCESS:
+        draft.cache.questions.push(
+          mapQuestionDataForType(action.payload.question),
+        );
+
+        draft.questions = _.cloneDeep(draft.cache.questions);
+        draft.questionTypeChooserVisibility = false;
+        break;
+
+      case GET_QUESTIONS_SUCCESS:
+        draft.cache.questions = action.payload.questions.map(question =>
+          mapQuestionDataForType(question),
+        );
+
+        draft.questions = _.cloneDeep(draft.cache.questions);
+        break;
+
       case GET_INTERVENTION_SUCCESS:
-        draft.intervention = action.payload.intervention;
+        draft.cache.intervention = action.payload.intervention;
+
+        draft.intervention = _.cloneDeep(draft.cache.intervention);
         break;
     }
   });
