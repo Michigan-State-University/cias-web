@@ -1,19 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Input /> should match the snapshot 1`] = `
+exports[`<Table /> should match the snapshot 1`] = `
 .c0 {
-  padding: 12px;
-  border: 1px solid #E9F1FB;
-  border-radius: 10px;
+  font-size: 13px;
 }
 
-.c0:focus {
-  box-shadow: none;
-  outline: none;
-  border: 1px solid #107969;
+.c0 tr,
+.c0 th,
+.c0 td {
+  font-weight: 400;
 }
 
-<input
+<table
   className="c0"
 />
 `;
