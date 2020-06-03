@@ -11,4 +11,9 @@ export default defineMessages({
     id: `${scope}.addScreen`,
     defaultMessage: 'Add new question',
   },
+  newQuestionMessage: {
+    id: `${scope}.newQuestionMessage`,
+    defaultMessage:
+      'I can address any health behaviour. For example, I might ask a patient if they are a daily smoker.',
+  },
 });
