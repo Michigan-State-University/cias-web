@@ -50,17 +50,10 @@ const instantiateEmptyQuestion = (message, type) => {
             variable: '',
             payload: {
               rows: [
-                { variable: '', payload: 'Row 1' },
-                { variable: '', payload: 'Row 2' },
-                { variable: '', payload: 'Row 3' },
-                { variable: '', payload: 'Row 4' },
-                { variable: '', payload: 'Row 5' },
+                { variable: '', payload: '' },
+                { variable: '', payload: '' },
               ],
-              columns: [
-                { variable: '', payload: 'Column 1' },
-                { variable: '', payload: 'Column 2' },
-                { variable: '', payload: 'Column 3' },
-              ],
+              columns: [{ variable: '', payload: '' }],
             },
           },
         ],

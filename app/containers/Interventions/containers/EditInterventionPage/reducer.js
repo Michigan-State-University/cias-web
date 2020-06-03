@@ -58,15 +58,8 @@ const mapQuestionDataForType = question => {
                 {
                   variable: '',
                   payload: {
-                    rows: [
-                      { variable: '', payload: '' },
-                      { variable: '', payload: '' },
-                    ],
-                    columns: [
-                      { variable: '', payload: '' },
-                      { variable: '', payload: '' },
-                      { variable: '', payload: '' },
-                    ],
+                    rows: [],
+                    columns: [],
                   },
                 },
               ],
