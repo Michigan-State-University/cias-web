@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { borders, hexToRgb } from 'theme';
 import { colors } from '../../theme/colors';
-import { TBody, TR } from '.';
+import { TR } from './TR';
+import { TBody } from './TBody';
 
 const StyledTR = styled(TR)`
   ${TBody} &:nth-child(even) {

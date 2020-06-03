@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { fontSizes } from 'theme';
+import { layout } from '../BaseComponentStyles';
 
 const Table = styled.table`
   font-size: ${fontSizes.small};
@@ -9,6 +10,7 @@ const Table = styled.table`
   td {
     font-weight: 400;
   }
+  ${layout};
 `;
 
 export { Table };

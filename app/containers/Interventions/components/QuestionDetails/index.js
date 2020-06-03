@@ -38,7 +38,7 @@ const QuestionDetails = ({
             child={selectedQuestionIndex + 1}
           />
         </Row>
-        <Row justify="center" height="100%" filled>
+        <Row justify="center" filled>
           <Column sm={10} justify="center">
             <Row width="100%">
               <StyledHoverableBox width="100%" padded>
