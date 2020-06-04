@@ -99,7 +99,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
-.c13 {
+.c14 {
   width: auto;
   height: auto;
   display: block;
@@ -109,7 +109,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   border-radius: 10px;
 }
 
-.c13:hover {
+.c14:hover {
   background-color: #E9F1FB;
 }
 
@@ -197,7 +197,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   background-color: rgba(255,207,91,1);
 }
 
-.c14 {
+.c13 {
   border-radius: 50%;
   background-color: #FF7691;
   display: -webkit-box;
@@ -323,14 +323,14 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
           </div>
         </div>
         <div
-          className="c13"
+          className="c6"
           onClick={[Function]}
         >
           <div
             className="c7"
           >
             <div
-              className="c14"
+              className="c13"
               opacity={1}
               size="10px"
             />
@@ -339,6 +339,26 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               fontWeight="medium"
             >
               Grid question
+            </p>
+          </div>
+        </div>
+        <div
+          className="c14"
+          onClick={[Function]}
+        >
+          <div
+            className="c7"
+          >
+            <div
+              className="c13"
+              opacity={1}
+              size="10px"
+            />
+            <p
+              className="c9"
+              fontWeight="medium"
+            >
+              Visual Analogue Scale
             </p>
           </div>
         </div>

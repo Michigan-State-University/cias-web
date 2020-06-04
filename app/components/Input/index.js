@@ -17,7 +17,10 @@ const Input = styled.input.attrs(props => ({ type: props.keyboard }))`
   ${padding};
   ${props =>
     props.transparent
-      ? { border: 'none', backgroundColor: 'transparent' }
+      ? {
+          border: `${borders.borderWidth} solid transparent`,
+          backgroundColor: 'transparent',
+        }
       : {}};
   ${props => (props.textAlign ? { textAlign: props.textAlign } : {})};
 `;
