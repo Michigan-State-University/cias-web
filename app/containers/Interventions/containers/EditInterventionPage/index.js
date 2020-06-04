@@ -19,7 +19,10 @@ import Text from 'components/Text';
 import Question from 'models/Intervention/Question';
 import cross from 'assets/svg/cross.svg';
 
-import { gridQuestion } from 'models/Intervention/QuestionTypes';
+import {
+  gridQuestion,
+  visualAnalogueScaleQuestion,
+} from 'models/Intervention/QuestionTypes';
 
 import { borders, themeColors, colors } from 'theme';
 import reducer from './reducer';
@@ -57,6 +60,11 @@ const instantiateEmptyQuestion = (message, type) => {
             },
           },
         ],
+      });
+
+    case visualAnalogueScaleQuestion.id:
+      return new Question(message, type, {
+        data: [{ variable: '', payload: '' }, { variable: '', payload: '' }],
       });
 
     default:

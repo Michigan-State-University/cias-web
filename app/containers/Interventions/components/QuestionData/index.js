@@ -10,6 +10,7 @@ import {
   textboxQuestion,
   numberQuestion,
   gridQuestion,
+  visualAnalogueScaleQuestion,
 } from 'models/Intervention/QuestionTypes';
 
 import SingleQuestion from './SingleQuestion';
@@ -19,6 +20,7 @@ import NumberQuestion from './NumberQuestion';
 import GridQuestion from './GridQuestion';
 
 import { makeSelectSelectedQuestionType } from './selectors';
+import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
 
 const QuestionData = ({ selectedQuestionType }) => {
   switch (selectedQuestionType) {
@@ -32,6 +34,8 @@ const QuestionData = ({ selectedQuestionType }) => {
       return <NumberQuestion />;
     case gridQuestion.id:
       return <GridQuestion />;
+    case visualAnalogueScaleQuestion.id:
+      return <VisualAnalogueScaleQuestion />;
     default:
       return null;
   }
