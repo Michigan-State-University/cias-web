@@ -6,12 +6,12 @@ import { hexToRgb } from '../../theme/utils';
 
 const AppSlider = props => (
   <Slider
-    {...props}
     min={0}
     max={100}
     railStyle={{ backgroundColor: `rgba(${hexToRgb(colors.bluewood)}, 0.2)` }}
     trackStyle={{ backgroundColor: themeColors.secondary }}
     handleStyle={{ borderColor: themeColors.secondary, boxShadow: 'none' }}
+    {...props}
   />
 );
 
