@@ -31,10 +31,17 @@ export const gridQuestion = new QuestionType(
   colors.pink,
 );
 
+export const visualAnalogueScaleQuestion = new QuestionType(
+  'Question::AnalogueScale',
+  'Visual Analogue Scale',
+  colors.pink,
+);
+
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
   textboxQuestion,
   numberQuestion,
   gridQuestion,
+  visualAnalogueScaleQuestion,
 ];

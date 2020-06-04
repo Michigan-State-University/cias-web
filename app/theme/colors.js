@@ -10,6 +10,7 @@ const colors = {
   tangerine: '#FFA16C',
   golden: '#FFCF5B',
   pink: '#FF7691',
+  vividPink: '#FF5FC0',
 };
 
 const themeColors = {
