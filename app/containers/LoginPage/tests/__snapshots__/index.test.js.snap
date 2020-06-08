@@ -5,14 +5,14 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
   class="Fill-sc-1f4o7x0-0 dHXeMo"
 >
   <div
-    class="Column-sc-1n6divy-0 fhIlYL"
+    class="Column-sc-1n6divy-0 lxsJW"
   >
     <div
       class="Card-v952e1-0 kutakG"
       width="100%"
     >
       <div
-        class="Column-sc-1n6divy-0 kNNPxZ"
+        class="Column-sc-1n6divy-0 kCIvWB"
       >
         <p>
           Login
