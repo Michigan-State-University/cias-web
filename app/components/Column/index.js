@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { breakpoints } from 'theme';
+import { mediaQuery } from 'theme';
 import { flex, layout } from '../BaseComponentStyles';
 
 const maxNumberOfColumns = 12;
@@ -28,15 +28,18 @@ const Column = styled.div`
 
   ${({ xs }) => (xs ? getWidthString(xs) : 'width: 100%;')};
 
-  @media only screen and (min-width: ${breakpoints.sm}) {
-    ${props => props.sm && getWidthString(props.sm)};
-  }
-  @media only screen and (min-width: ${breakpoints.md}) {
+  ${mediaQuery.tablet`
+    ${({ sm }) => sm && getWidthString(sm)};
+  `}
+
+  ${mediaQuery.desktopXs`
     ${({ md }) => md && getWidthString(md)};
-  }
-  @media only screen and (min-width: ${breakpoints.lg}) {
+  `}
+
+  ${mediaQuery.desktop`
     ${({ lg }) => lg && getWidthString(lg)};
-  }
+  `}
+
   ${flex};
   ${layout};
 `;
