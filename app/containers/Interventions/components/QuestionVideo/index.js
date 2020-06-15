@@ -64,7 +64,7 @@ const QuestionVideo = ({
           visibility={hovered ? 'visible' : 'hidden'}
           ml={15}
         >
-          <Img src={bin} />
+          <Img src={bin} alt="bin-icon" />
         </Box>
       </Row>
     </HoverableBox>

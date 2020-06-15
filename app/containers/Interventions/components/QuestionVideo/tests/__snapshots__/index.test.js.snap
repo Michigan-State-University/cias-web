@@ -96,6 +96,7 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
       visibility="hidden"
     >
       <img
+        alt="bin-icon"
         className="c5"
         src="IMAGE_MOCK"
       />
