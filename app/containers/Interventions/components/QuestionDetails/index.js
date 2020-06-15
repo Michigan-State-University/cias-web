@@ -23,14 +23,26 @@ import {
 
 import { updateQuestionTitle } from '../../containers/EditInterventionPage/actions';
 
-const QuestionDetails = ({
+const QuestionDetails = props => (
+  <BackgroundBox
+    padding={30}
+    width="100%"
+    height="100%"
+    display="flex"
+    overflow="scroll"
+  >
+    {renderQuestionDetails(props)}
+  </BackgroundBox>
+);
+
+const renderQuestionDetails = ({
   selectedQuestion,
   selectedQuestionIndex,
   updateTitle,
   intl: { formatMessage },
-}) => (
-  <BackgroundBox padding={30} height="100%" display="flex" overflow="scroll">
-    {selectedQuestion != null ? (
+}) => {
+  if (selectedQuestion != null)
+    return (
       <Column>
         <Row>
           <NumberCircle
@@ -61,11 +73,12 @@ const QuestionDetails = ({
           </Column>
         </Row>
       </Column>
-    ) : null}
-  </BackgroundBox>
-);
+    );
 
-QuestionDetails.propTypes = {
+  return null;
+};
+
+renderQuestionDetails.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
   selectedQuestionIndex: PropTypes.number.isRequired,
   updateTitle: PropTypes.func,

@@ -11,6 +11,7 @@ const colors = {
   golden: '#FFCF5B',
   pink: '#FF7691',
   vividPink: '#FF5FC0',
+  blueHaze: '#CED3E4',
 };
 
 const themeColors = {

@@ -2,6 +2,7 @@ const fontFamily = 'DM Sans';
 
 const fontSizes = {
   h1: '25px',
+  h2: '18px',
   h3: '15px',
   small: '13px',
   regular: '15px',

@@ -19,15 +19,22 @@ import {
   GET_QUESTIONS_REQUEST,
   GET_QUESTIONS_SUCCESS,
   GET_QUESTIONS_ERROR,
+  TOGGLE_QUESTION_SETTINGS,
+  UPDATE_QUESTION_SETTINGS,
 } from './constants';
 
 const toggleQuestionTypeChooser = () =>
   actionBuilder(TOGGLE_QUESTION_TYPE_CHOOSER, {});
 
+const toggleQuestionSettings = index =>
+  actionBuilder(TOGGLE_QUESTION_SETTINGS, { index });
+
 const selectQuestion = index => actionBuilder(SELECT_QUESTION, index);
 const updateQuestionTitle = title =>
   actionBuilder(UPDATE_QUESTION_TITLE, title);
 const updateQuestionData = data => actionBuilder(UPDATE_QUESTION_DATA, data);
+const updateQuestionSettings = data =>
+  actionBuilder(UPDATE_QUESTION_SETTINGS, data);
 
 const createInterventionRequest = () =>
   actionBuilder(CREATE_INTERVENTION_REQUEST, {});
@@ -60,8 +67,10 @@ const getQuestionsError = () => actionBuilder(GET_QUESTIONS_ERROR, {});
 
 export {
   toggleQuestionTypeChooser,
+  toggleQuestionSettings,
   selectQuestion,
   updateQuestionData,
+  updateQuestionSettings,
   updateQuestionTitle,
   createInterventionRequest,
   createInterventionSuccess,

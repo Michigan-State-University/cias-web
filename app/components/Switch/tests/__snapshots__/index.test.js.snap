@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Switch /> should match the snapshot 1`] = `
+.c0 {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 21px;
+}
+
+.c2 {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.c3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  cursor: pointer;
+  background-color: #CED3E4;
+  border-radius: 21px;
+}
+
+.c1:checked + .c3 {
+  background-color: #C866EA;
+}
+
+.c1:focus + .c3 {
+  box-shadow: 0 0 1px #C866EA;
+}
+
+.c3:before {
+  position: absolute;
+  content: '';
+  left: 4px;
+  bottom: 4px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  height: 13px;
+  width: 13px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.c1:checked + .c3:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+<label
+  checked={false}
+  className="c0"
+>
+  <input
+    className="c1 c2"
+    defaultChecked={false}
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <span
+    className="c3"
+  />
+</label>
+`;

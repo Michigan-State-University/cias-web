@@ -43,6 +43,7 @@ import {
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import QuestionDetails from '../../components/QuestionDetails';
+import QuestionSettings from '../../components/QuestionSettings';
 
 const instantiateEmptyQuestion = (message, type) => {
   switch (type) {
@@ -151,7 +152,10 @@ function EditInterventionPage({
           </Box>
         </Column>
         <Column sm={7}>
-          <QuestionDetails />
+          <Row overflow="hidden" filled>
+            <QuestionDetails />
+            <QuestionSettings />
+          </Row>
         </Column>
       </Row>
     </Fragment>

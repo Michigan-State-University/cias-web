@@ -1,11 +1,17 @@
 export const TOGGLE_QUESTION_TYPE_CHOOSER =
   'app/EditInterventionPage/TOGGLE_QUESTION_TYPE_CHOOSER';
 
+export const TOGGLE_QUESTION_SETTINGS =
+  'app/EditInterventionPage/TOGGLE_QUESTION_SETTINGS';
+
 export const SELECT_QUESTION = 'app/EditInterventionPage/SELECT_QUESTION';
 export const UPDATE_QUESTION_TITLE =
   'app/EditInterventionPage/UPDATE_QUESTION_TITLE';
 export const UPDATE_QUESTION_DATA =
   'app/EditInterventionPage/UPDATE_QUESTION_DATA';
+
+export const UPDATE_QUESTION_SETTINGS =
+  'app/EditInterventionPage/UPDATE_QUESTION_SETTINGS';
 
 export const CREATE_INTERVENTION_REQUEST =
   'app/EditInterventionPage/CREATE_INTERVENTION_REQUEST';

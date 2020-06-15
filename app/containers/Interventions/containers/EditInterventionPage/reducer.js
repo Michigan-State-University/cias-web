@@ -18,14 +18,18 @@ import {
   CREATE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
   UPDATE_QUESTION_ERROR,
+  TOGGLE_QUESTION_SETTINGS,
+  UPDATE_QUESTION_SETTINGS,
 } from './constants';
 
 import questionDataReducer from '../../components/QuestionData/reducer';
+import questionSettingsReducer from '../../components/QuestionSettings/reducer';
 
 export const initialState = {
   intervention: new Intervention('', ''),
   questions: [],
   questionTypeChooserVisibility: false,
+  questionSettingsVisibility: false,
   selectedQuestion: 0,
   cache: {
     intervention: new Intervention('', ''),
@@ -79,27 +83,42 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.questionTypeChooserVisibility = !draft.questionTypeChooserVisibility;
         break;
 
+      case TOGGLE_QUESTION_SETTINGS:
+        if (action.payload.index === state.selectedQuestion) {
+          draft.questionSettingsVisibility = !draft.questionSettingsVisibility;
+        }
+
+        break;
+
       case SELECT_QUESTION:
         draft.selectedQuestion = action.payload;
         break;
 
       case UPDATE_QUESTION_TITLE:
-        draft.questions[state.selectedQuestion] = Object.assign(
-          {},
-          draft.questions[state.selectedQuestion],
-          { title: action.payload },
-        );
+        draft.questions[state.selectedQuestion] = {
+          ...draft.questions[state.selectedQuestion],
+          title: action.payload,
+        };
         break;
 
       case UPDATE_QUESTION_DATA:
-        draft.questions[state.selectedQuestion] = Object.assign(
-          {},
-          draft.questions[state.selectedQuestion],
-          questionDataReducer(
+        draft.questions[state.selectedQuestion] = {
+          ...draft.questions[state.selectedQuestion],
+          ...questionDataReducer(
             state.questions[state.selectedQuestion],
             action.payload,
           ),
-        );
+        };
+        break;
+
+      case UPDATE_QUESTION_SETTINGS:
+        draft.questions[state.selectedQuestion] = {
+          ...draft.questions[state.selectedQuestion],
+          ...questionSettingsReducer(
+            state.questions[state.selectedQuestion],
+            action.payload,
+          ),
+        };
         break;
 
       case UPDATE_QUESTION_SUCCESS:
