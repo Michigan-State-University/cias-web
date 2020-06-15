@@ -20,6 +20,7 @@ const layout = props => ({
   position: props.position || '',
   display: props.hidden ? 'none' : props.display || '',
   overflow: props.overflow || '',
+  visibility: props.visibility || '',
 });
 
 layout.propTypes = {
@@ -29,6 +30,13 @@ layout.propTypes = {
   display: PropTypes.string,
   hidden: PropTypes.bool,
   overflow: PropTypes.string,
+  visibility: PropTypes.oneOf([
+    'hidden',
+    'visible',
+    'collapse',
+    'initial',
+    'inherit',
+  ]),
 };
 
 export { layout, positioning };

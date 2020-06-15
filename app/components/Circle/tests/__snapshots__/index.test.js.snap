@@ -19,6 +19,7 @@ exports[`<Circle /> should match the snapshot 1`] = `
   width: 45px;
   height: 45px;
   background-color: rgba(16,121,105,1);
+  opacity: 1;
 }
 
 <div

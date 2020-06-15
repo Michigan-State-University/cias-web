@@ -13,6 +13,7 @@ import {
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_TITLE,
+  UPDATE_QUESTION_VIDEO,
   GET_INTERVENTION_SUCCESS,
   GET_QUESTIONS_SUCCESS,
   CREATE_QUESTION_SUCCESS,
@@ -98,6 +99,13 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.questions[state.selectedQuestion] = {
           ...draft.questions[state.selectedQuestion],
           title: action.payload,
+        };
+        break;
+
+      case UPDATE_QUESTION_VIDEO:
+        draft.questions[state.selectedQuestion] = {
+          ...draft.questions[state.selectedQuestion],
+          video: action.payload,
         };
         break;
 

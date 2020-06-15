@@ -9,6 +9,7 @@ import {
   GET_QUESTIONS_REQUEST,
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_TITLE,
+  UPDATE_QUESTION_VIDEO,
 } from './constants';
 
 import {
@@ -138,5 +139,6 @@ export default function* editInterventionPageSaga() {
     yield takeLatest(CREATE_QUESTION_REQUEST, createQuestion),
     yield takeLatest(UPDATE_QUESTION_DATA, updateQuestion),
     yield takeLatest(UPDATE_QUESTION_TITLE, updateQuestion),
+    yield takeLatest(UPDATE_QUESTION_VIDEO, updateQuestion),
   ]);
 }

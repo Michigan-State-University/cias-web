@@ -16,6 +16,7 @@ import { NumberCircle, BackgroundBox, StyledHoverableBox } from './styled';
 import messages from './messages';
 
 import QuestionData from '../QuestionData';
+import QuestionVideo from '../QuestionVideo';
 import {
   makeSelectSelectedQuestion,
   makeSelectSelectedQuestionIndex,
@@ -66,6 +67,9 @@ const renderQuestionDetails = ({
                   </Row>
                 </H1>
               </StyledHoverableBox>
+            </Row>
+            <Row my={25}>
+              <QuestionVideo />
             </Row>
             <Row>
               <QuestionData />

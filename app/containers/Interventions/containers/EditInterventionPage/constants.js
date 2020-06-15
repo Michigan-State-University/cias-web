@@ -7,6 +7,8 @@ export const TOGGLE_QUESTION_SETTINGS =
 export const SELECT_QUESTION = 'app/EditInterventionPage/SELECT_QUESTION';
 export const UPDATE_QUESTION_TITLE =
   'app/EditInterventionPage/UPDATE_QUESTION_TITLE';
+export const UPDATE_QUESTION_VIDEO =
+  'app/EditInterventionPage/UPDATE_QUESTION_VIDEO';
 export const UPDATE_QUESTION_DATA =
   'app/EditInterventionPage/UPDATE_QUESTION_DATA';
 

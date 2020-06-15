@@ -1,0 +1,262 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  visibility: hidden;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  border-radius: 10px;
+}
+
+.c0:hover {
+  background-color: #E9F1FB;
+}
+
+.c2 {
+  position: relative;
+  padding-top: 56.25%;
+  height: 100%;
+  width: 95%;
+}
+
+.c3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+<div
+  className="c0"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  width="100%"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    >
+      <div
+        className="c3"
+        style={
+          Object {
+            "height": "100%",
+            "width": "100%",
+          }
+        }
+      />
+    </div>
+    <div
+      className="c4"
+      onClick={[Function]}
+      visibility="hidden"
+    >
+      <img
+        className="c5"
+        src="IMAGE_MOCK"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 93px;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-bottom: 4px;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  padding-right: 16px;
+  padding-left: 16px;
+  background-color: rgba(233,241,251,1);
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  display: none;
+}
+
+.c3 {
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 10px;
+  margin-right: 9px;
+  height: 60px;
+  border: 1px solid transparent;
+  background-color: transparent;
+}
+
+.c3:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+<div
+  className="c0"
+  width="100%"
+>
+  <div
+    className="c1"
+    height={93}
+  >
+    <div
+      className="c2"
+    >
+      <input
+        className="c3"
+        height="60px"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="Use videos from YouTube or Vimeo. Paste link here."
+        type="text"
+        value=""
+      />
+    </div>
+    <div
+      className="c4"
+      hidden={true}
+    >
+      <div
+        className="c5"
+        height="100%"
+      >
+        <div
+          className="c6"
+        >
+          <img
+            className="c7"
+            onMouseDown={[Function]}
+            src="IMAGE_MOCK"
+          />
+        </div>
+        <div
+          className="c8"
+        >
+          <img
+            className="c7"
+            src="IMAGE_MOCK"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
