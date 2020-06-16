@@ -24,7 +24,8 @@ const VisualAnalogueScaleQuestion = ({
   updateLabel,
   intl: { formatMessage },
 }) => {
-  const [startValue, endValue] = selectedQuestion.body.data;
+  const startValue = selectedQuestion.body.data[0].payload.start_value;
+  const endValue = selectedQuestion.body.data[0].payload.end_value;
   return (
     <Box width="100%" px={21} py={14} mt={20}>
       <Column>
@@ -42,8 +43,8 @@ const VisualAnalogueScaleQuestion = ({
               py={9}
               textAlign="center"
               placeholder={formatMessage(messages.startValue)}
-              value={startValue.payload}
-              onBlur={value => updateLabel(value, 0)}
+              value={startValue}
+              onBlur={value => updateLabel(value, 'start_value')}
             />
           </Box>
 
@@ -54,8 +55,8 @@ const VisualAnalogueScaleQuestion = ({
               py={9}
               textAlign="center"
               placeholder={formatMessage(messages.endValue)}
-              value={endValue.payload}
-              onBlur={value => updateLabel(value, 1)}
+              value={endValue}
+              onBlur={value => updateLabel(value, 'end_value')}
             />
           </Box>
         </Row>
@@ -74,10 +75,10 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateLabel: (value, index) =>
-    dispatch(updateQuestionData({ type: UPDATE, data: { value, index } })),
-});
+const mapDispatchToProps = {
+  updateLabel: (value, label) =>
+    updateQuestionData({ type: UPDATE, data: { value, label } }),
+};
 
 const withConnect = connect(
   mapStateToProps,

@@ -51,13 +51,15 @@ const instantiateEmptyQuestion = (message, type) => {
       return new Question(message, type, {
         data: [
           {
-            variable: '',
             payload: {
               rows: [
-                { variable: '', payload: '' },
-                { variable: '', payload: '' },
+                { variable: { name: '' }, payload: '' },
+                { variable: { name: '' }, payload: '' },
               ],
-              columns: [{ variable: '', payload: '' }],
+              columns: [
+                { variable: { value: '1' }, payload: '' },
+                { variable: { value: '1' }, payload: '' },
+              ],
             },
           },
         ],
@@ -65,12 +67,17 @@ const instantiateEmptyQuestion = (message, type) => {
 
     case visualAnalogueScaleQuestion.id:
       return new Question(message, type, {
-        data: [{ variable: '', payload: '' }, { variable: '', payload: '' }],
+        data: [
+          {
+            variable: { name: '', value: '1' },
+            payload: { start_value: '', end_value: '' },
+          },
+        ],
       });
 
     default:
       return new Question(message, type, {
-        data: [{ variable: '', payload: '' }],
+        data: [{ variable: { name: '', value: '1' }, payload: '' }],
       });
   }
 };
@@ -98,7 +105,7 @@ function EditInterventionPage({
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
       <Row height="100vh" filled>
-        <Column sm={5}>
+        <Column sm={4}>
           <Box
             height="100%"
             borderRight={`${borders.borderWidth} ${borders.borderStyle} ${
@@ -151,7 +158,7 @@ function EditInterventionPage({
             </Box>
           </Box>
         </Column>
-        <Column sm={7}>
+        <Column sm={8}>
           <Row overflow="hidden" filled>
             <QuestionDetails />
             <QuestionSettings />

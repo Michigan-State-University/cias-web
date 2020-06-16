@@ -48,7 +48,7 @@ const mapQuestionDataForType = question => {
           ...question.body,
           data: question.body.data.length
             ? question.body.data
-            : [{ variable: '', payload: '' }],
+            : [{ variable: { name: '', value: '1' }, payload: '' }],
         },
       };
 
@@ -61,7 +61,7 @@ const mapQuestionDataForType = question => {
             ? question.body.data
             : [
                 {
-                  variable: '',
+                  variable: { name: '', value: '1' },
                   payload: {
                     rows: [],
                     columns: [],

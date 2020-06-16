@@ -20,7 +20,7 @@ const QuestionSettings = ({
   settingsVisiblity,
   intl: { formatMessage },
 }) => (
-  <StyledBox width="20%" isVisible={settingsVisiblity}>
+  <StyledBox width="30%" isVisible={settingsVisiblity}>
     <Box width="100%" height="100%" padded>
       <H2 mb={40}>{formatMessage(messages.header)}</H2>
       {renderSettings(selectedQuestionType)}

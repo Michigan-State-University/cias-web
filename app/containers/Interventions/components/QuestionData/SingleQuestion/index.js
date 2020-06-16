@@ -36,7 +36,7 @@ const SingleQuestion = ({
   return (
     <Column>
       {selectedQuestion.body.data.map((value, index) => (
-        <Row>
+        <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox
             px={21}
             py={14}

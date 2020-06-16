@@ -4,8 +4,8 @@ import { UPDATE } from './constants';
 const visualAnalogueScaleQuestionReducer = (question, payload) => {
   switch (payload.type) {
     case UPDATE:
-      const { value, index } = payload.data;
-      question.body.data[index].payload = value;
+      const { value, label } = payload.data;
+      question.body.data[0].payload[label] = value;
       return question;
     default:
       return question;
