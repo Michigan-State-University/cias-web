@@ -1,5 +1,5 @@
 import produce from 'immer';
-import _ from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
 import Intervention from 'models/Intervention/Intervention';
 
 import {
@@ -13,6 +13,9 @@ import {
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_TITLE,
+  ADD_QUESTION_IMAGE,
+  UPDATE_QUESTION_IMAGE,
+  DELETE_QUESTION_IMAGE,
   UPDATE_QUESTION_VIDEO,
   GET_INTERVENTION_SUCCESS,
   GET_QUESTIONS_SUCCESS,
@@ -101,11 +104,26 @@ const editInterventionPageReducer = (state = initialState, action) =>
           title: action.payload,
         };
         break;
+      case ADD_QUESTION_IMAGE:
+        draft.questions[state.selectedQuestion] = {
+          ...draft.questions[state.selectedQuestion],
+          image_url: action.payload.imageUrl,
+        };
+        break;
+      case UPDATE_QUESTION_IMAGE:
+        draft.questions[state.selectedQuestion].image_url = action.payload.url;
+        break;
+      case DELETE_QUESTION_IMAGE:
+        draft.questions[state.selectedQuestion] = {
+          ...draft.questions[state.selectedQuestion],
+          image_url: null,
+        };
+        break;
 
       case UPDATE_QUESTION_VIDEO:
         draft.questions[state.selectedQuestion] = {
           ...draft.questions[state.selectedQuestion],
-          video: action.payload,
+          video_url: action.payload,
         };
         break;
 
@@ -136,7 +154,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_QUESTION_ERROR:
-        draft.questions[state.selectedQuestion] = _.cloneDeep(
+        draft.questions[state.selectedQuestion] = cloneDeep(
           draft.cache.questions[state.selectedQuestion],
         );
         break;
@@ -146,7 +164,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
           mapQuestionDataForType(action.payload.question),
         );
 
-        draft.questions = _.cloneDeep(draft.cache.questions);
+        draft.questions = cloneDeep(draft.cache.questions);
         draft.questionTypeChooserVisibility = false;
         break;
 
@@ -155,13 +173,13 @@ const editInterventionPageReducer = (state = initialState, action) =>
           mapQuestionDataForType(question),
         );
 
-        draft.questions = _.cloneDeep(draft.cache.questions);
+        draft.questions = cloneDeep(draft.cache.questions);
         break;
 
       case GET_INTERVENTION_SUCCESS:
         draft.cache.intervention = action.payload.intervention;
 
-        draft.intervention = _.cloneDeep(draft.cache.intervention);
+        draft.intervention = cloneDeep(draft.cache.intervention);
         break;
     }
   });

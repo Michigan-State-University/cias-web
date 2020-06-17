@@ -4,6 +4,9 @@ import {
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_TITLE,
+  ADD_QUESTION_IMAGE,
+  UPDATE_QUESTION_IMAGE,
+  DELETE_QUESTION_IMAGE,
   UPDATE_QUESTION_VIDEO,
   CREATE_INTERVENTION_REQUEST,
   CREATE_INTERVENTION_SUCCESS,
@@ -33,6 +36,11 @@ const toggleQuestionSettings = index =>
 const selectQuestion = index => actionBuilder(SELECT_QUESTION, index);
 const updateQuestionTitle = title =>
   actionBuilder(UPDATE_QUESTION_TITLE, title);
+const addQuestionImage = payload => actionBuilder(ADD_QUESTION_IMAGE, payload);
+const updateQuestionImage = imageUrl =>
+  actionBuilder(UPDATE_QUESTION_IMAGE, imageUrl);
+const deleteQuestionImage = payload =>
+  actionBuilder(DELETE_QUESTION_IMAGE, payload);
 const updateQuestionVideo = videoUrl =>
   actionBuilder(UPDATE_QUESTION_VIDEO, videoUrl);
 const updateQuestionData = data => actionBuilder(UPDATE_QUESTION_DATA, data);
@@ -75,6 +83,9 @@ export {
   updateQuestionData,
   updateQuestionSettings,
   updateQuestionTitle,
+  addQuestionImage,
+  updateQuestionImage,
+  deleteQuestionImage,
   updateQuestionVideo,
   createInterventionRequest,
   createInterventionSuccess,

@@ -16,6 +16,7 @@ import { NumberCircle, BackgroundBox, StyledHoverableBox } from './styled';
 import messages from './messages';
 
 import QuestionData from '../QuestionData';
+import QuestionImage from '../QuestionImage';
 import QuestionVideo from '../QuestionVideo';
 import {
   makeSelectSelectedQuestion,
@@ -68,8 +69,11 @@ const renderQuestionDetails = ({
                 </H1>
               </StyledHoverableBox>
             </Row>
-            <Row my={25}>
+            <Row mt={22}>
               <QuestionVideo />
+            </Row>
+            <Row mt={22}>
+              <QuestionImage />
             </Row>
             <Row>
               <QuestionData />
@@ -94,9 +98,9 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestionIndex: makeSelectSelectedQuestionIndex(),
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateTitle: title => dispatch(updateQuestionTitle(title)),
-});
+const mapDispatchToProps = {
+  updateTitle: title => updateQuestionTitle(title),
+};
 
 const withConnect = connect(
   mapStateToProps,

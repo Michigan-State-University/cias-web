@@ -11,6 +11,7 @@ const text = props => ({
   fontWeight: propsToCssMapper[props.fontWeight] || '',
   fontStyle: props.pb || '',
   color: props.color || '',
+  opacity: props.opacity || '',
 });
 
 text.propTypes = {
@@ -18,6 +19,7 @@ text.propTypes = {
   fontWeight: PropTypes.oneOf(['regular', 'medium', 'bold']),
   fontStyle: PropTypes.string,
   color: PropTypes.string,
+  opacity: PropTypes.number,
 };
 
 export { text };

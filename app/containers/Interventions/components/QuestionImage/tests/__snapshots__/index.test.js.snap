@@ -1,0 +1,266 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuestionImage /> should match the snapshot with file 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  visibility: hidden;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  border-radius: 10px;
+}
+
+.c0:hover {
+  background-color: #E9F1FB;
+}
+
+.c2 {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+}
+
+<div
+  className="c0"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  width="100%"
+>
+  <div
+    className="c1"
+    width="100%"
+  >
+    <div
+      className="c2"
+    >
+      <img
+        alt="image"
+        className="c3"
+        height="100%"
+        src="mock.png"
+        width="100%"
+      />
+    </div>
+    <div
+      className="c4"
+      onClick={[Function]}
+      visibility="hidden"
+    >
+      <img
+        alt="bin-icon"
+        className="c5"
+        src="IMAGE_MOCK"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<QuestionImage /> should match the snapshot without file 1`] = `
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-top: 22px;
+  margin-bottom: 12px;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+}
+
+.c4 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #C866EA;
+  color: #C866EA;
+}
+
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+}
+
+.c0 {
+  border-radius: 10px;
+  border: 1px dashed #2F3850;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  background-color: rgba(233,241,251,1);
+  padding: 50px;
+  width: 100%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c7 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  opacity: 0.5;
+}
+
+<div
+  className="c0"
+  onBlur={null}
+  onClick={[Function]}
+  onDragEnter={[Function]}
+  onDragLeave={[Function]}
+  onDragOver={[Function]}
+  onDrop={[Function]}
+  onFocus={null}
+  onKeyDown={null}
+  width="100%"
+>
+  <div
+    className="c1"
+    display="flex"
+  >
+    <input
+      accept="image/jpeg, image/png, image/gif"
+      autoComplete="off"
+      multiple={false}
+      onChange={[Function]}
+      onClick={[Function]}
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+      tabIndex={-1}
+      type="file"
+    />
+    <img
+      alt="image"
+      className="c2"
+      src="IMAGE_MOCK"
+    />
+    <div
+      className="c3"
+    >
+      <h3
+        className="c4"
+        color="#C866EA"
+        cursor="pointer"
+        onClick={[Function]}
+        textDecoration="underline"
+      >
+        <span>
+          Upload
+        </span>
+      </h3>
+      <h3
+        className="c5"
+      >
+        <span>
+           or drop an image right here
+        </span>
+      </h3>
+    </div>
+    <div
+      className="c6"
+    >
+      <p
+        className="c7"
+        opacity={0.5}
+      >
+        <span>
+          It works for JPG, PNG, and GIF formats—max size 5MB
+        </span>
+      </p>
+    </div>
+  </div>
+</div>
+`;

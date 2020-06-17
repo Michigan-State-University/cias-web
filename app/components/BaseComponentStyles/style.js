@@ -12,7 +12,6 @@ const style = props => ({
   },
   borderRadius: props.borderRadius || '',
   boxShadow: props.shadow || '',
-  opacity: props.opacity || '',
 });
 
 style.propTypes = {

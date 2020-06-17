@@ -21,15 +21,15 @@ const isURLValid = url => url.includes('youtube') || url.includes('vimeo');
 
 const QuestionVideo = ({
   intl: { formatMessage },
-  selectedQuestion: { video },
+  selectedQuestion: { video_url: videoUrl },
   updateVideo,
 }) => {
   const [hovered, setHovered] = useState(false);
 
-  const setVideoUrl = videoUrl => updateVideo(videoUrl);
+  const setVideoUrl = url => updateVideo(url);
   const removeVideUrl = () => updateVideo(null);
 
-  if (!video || !isURLValid(video))
+  if (!videoUrl || !isURLValid(videoUrl))
     return (
       <Box bg={colors.linkWater} width="100%" px={16}>
         <Row align="center" height={93}>
@@ -37,7 +37,7 @@ const QuestionVideo = ({
             height="auto"
             rows="1"
             placeholder={formatMessage(messages.videoText)}
-            value={video || ''}
+            value={videoUrl || ''}
             onCheck={setVideoUrl}
             type="singleline"
           />
@@ -56,7 +56,7 @@ const QuestionVideo = ({
     >
       <Row justify="between" align="center">
         <PlayerWrapper>
-          <Player url={video} controls width="100%" height="100%" />
+          <Player url={videoUrl} controls width="100%" height="100%" />
         </PlayerWrapper>
         <Box
           onClick={removeVideUrl}
@@ -74,7 +74,7 @@ const QuestionVideo = ({
 QuestionVideo.propTypes = {
   intl: intlShape,
   selectedQuestion: PropTypes.shape({
-    video: PropTypes.string,
+    video_url: PropTypes.string,
   }),
   updateVideo: PropTypes.func,
 };
@@ -84,7 +84,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateVideo: videoUrl => updateQuestionVideo(videoUrl),
+  updateVideo: updateQuestionVideo,
 };
 
 const withConnect = connect(

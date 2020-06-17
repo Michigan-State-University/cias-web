@@ -21,7 +21,7 @@ describe('<QuestionListItem />', () => {
       .create(
         <Provider store={store}>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <QuestionListItem question={question} />
+            <QuestionListItem question={question} index={0} />
           </IntlProvider>
         </Provider>,
       )

@@ -9,6 +9,8 @@ import {
   GET_QUESTIONS_REQUEST,
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_TITLE,
+  ADD_QUESTION_IMAGE,
+  DELETE_QUESTION_IMAGE,
   UPDATE_QUESTION_VIDEO,
 } from './constants';
 
@@ -24,6 +26,7 @@ import {
   getQuestionsRequest,
   updateQuestionSuccess,
   updateQuestionError,
+  updateQuestionImage,
 } from './actions';
 
 import {
@@ -36,7 +39,7 @@ const mapQuestionToStateObject = question => ({
   id: question.id,
   body: {
     ...question.attributes.body,
-    data: question.attributes.body.data ? question.attributes.body.data : [],
+    data: question.attributes.body.data || [],
   },
 });
 
@@ -110,6 +113,43 @@ function* createQuestion({ payload: { question, id } }) {
   }
 }
 
+function* addImageQuestion({
+  payload: { image, imageUrl, selectedQuestionId },
+}) {
+  const requestURL = `v1/questions/${selectedQuestionId}/images`;
+
+  const formData = new FormData();
+  formData.append('image[file]', image);
+
+  try {
+    const response = yield axios.post(requestURL, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    const responseQuestion = mapQuestionToStateObject(response.data.data);
+    yield put(updateQuestionImage({ url: responseQuestion.image_url }));
+    yield put(updateQuestionSuccess(responseQuestion));
+    window.URL.revokeObjectURL(imageUrl);
+  } catch (error) {
+    yield put(updateQuestionError(error));
+  }
+}
+
+function* deleteQuestionImage({ payload: { selectedQuestionId } }) {
+  const requestURL = `v1/questions/${selectedQuestionId}/images`;
+
+  try {
+    const response = yield axios.delete(requestURL);
+
+    const responseQuestion = mapQuestionToStateObject(response.data.data);
+    yield put(updateQuestionSuccess(responseQuestion));
+  } catch (error) {
+    yield put(updateQuestionError(error));
+  }
+}
+
 function* updateQuestion() {
   const intervention = yield select(makeSelectIntervention());
   const question = yield select(makeSelectSelectedQuestion());
@@ -139,6 +179,8 @@ export default function* editInterventionPageSaga() {
     yield takeLatest(CREATE_QUESTION_REQUEST, createQuestion),
     yield takeLatest(UPDATE_QUESTION_DATA, updateQuestion),
     yield takeLatest(UPDATE_QUESTION_TITLE, updateQuestion),
+    yield takeLatest(ADD_QUESTION_IMAGE, addImageQuestion),
+    yield takeLatest(DELETE_QUESTION_IMAGE, deleteQuestionImage),
     yield takeLatest(UPDATE_QUESTION_VIDEO, updateQuestion),
   ]);
 }

@@ -26,5 +26,7 @@ exports[`<Circle /> should match the snapshot 1`] = `
   className="c0"
   opacity={1}
   size="45px"
-/>
+>
+  2
+</div>
 `;

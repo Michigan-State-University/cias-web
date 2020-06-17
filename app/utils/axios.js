@@ -11,7 +11,7 @@ axios.interceptors.request.use(
     config.baseURL = process.env.API_URL;
 
     const headers = LocalStorageService.getHeaders();
-    config.headers = headers;
+    config.headers = { ...headers, ...config.headers };
 
     return config;
   },

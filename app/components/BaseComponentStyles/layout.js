@@ -17,15 +17,19 @@ positioning.propTypes = {
 const layout = props => ({
   width: props.width || '',
   height: props.height || '',
+  maxWidth: props.maxWidth || '',
+  maxHeight: props.maxHeight || '',
   position: props.position || '',
   display: props.hidden ? 'none' : props.display || '',
-  overflow: props.overflow || '',
   visibility: props.visibility || '',
+  overflow: props.overflow || '',
 });
 
 layout.propTypes = {
   width: PropTypes.string,
   height: PropTypes.string,
+  maxWidth: PropTypes.string,
+  maxHeight: PropTypes.string,
   position: PropTypes.string,
   display: PropTypes.string,
   hidden: PropTypes.bool,

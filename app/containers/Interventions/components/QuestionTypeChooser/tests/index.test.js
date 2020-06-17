@@ -21,7 +21,7 @@ describe('<ScreenTypeChooser />', () => {
       .create(
         <Provider store={store}>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <ScreenTypeChooser />
+            <ScreenTypeChooser onClick={jest.fn()} />
           </IntlProvider>
         </Provider>,
       )

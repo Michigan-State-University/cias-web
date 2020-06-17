@@ -4,38 +4,39 @@ import 'jest-styled-components';
 
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
-import { QuestionVideoWithIntl as QuestionVideo } from '../index';
+import { QuestionImageWithIntl as QuestionImage } from '../index';
 
 const defualtProps = {
   selectedQuestion: {
-    video_url: null,
+    id: 'asda123a-123da1203123-213das',
+    image_url: '',
   },
-  updateVideo: jest.fn(),
+  updateFile: jest.fn(),
 };
 
-describe('<QuestionVideo />', () => {
-  it('should match the snapshot without video', () => {
+describe('<QuestionImage />', () => {
+  it('should match the snapshot without file', () => {
     const renderedComponent = renderer
       .create(
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionVideo {...defualtProps} />
+          <QuestionImage {...defualtProps} />
         </IntlProvider>,
       )
       .toJSON();
     expect(renderedComponent).toMatchSnapshot();
   });
-  it('should match the snapshot with video', () => {
+  it('should match the snapshot with file', () => {
     const newProps = {
       ...defualtProps,
       selectedQuestion: {
         ...defualtProps.selectedQuestion,
-        video_url: 'https://www.youtube.com/watch?v=ysz5S6PUM-U',
+        image_url: 'mock.png',
       },
     };
     const renderedComponent = renderer
       .create(
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionVideo {...newProps} />
+          <QuestionImage {...newProps} />
         </IntlProvider>,
       )
       .toJSON();
