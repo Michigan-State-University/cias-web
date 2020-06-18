@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -34,11 +34,7 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionIndex,
 } from './selectors';
-import {
-  toggleQuestionTypeChooser,
-  getInterventionRequest,
-  createQuestionRequest,
-} from './actions';
+import { getInterventionRequest, createQuestionRequest } from './actions';
 
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
@@ -85,13 +81,13 @@ const instantiateEmptyQuestion = (message, type) => {
 function EditInterventionPage({
   intl: { formatMessage },
   intervention,
-  toggleChooser,
   questions,
   selectedQuestion,
   getIntervention,
   createQuestion,
   match: { params },
 }) {
+  const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   useInjectReducer({ key: 'editInterventionPage', reducer });
   useInjectSaga({ key: 'editInterventionPage', saga });
 
@@ -99,6 +95,18 @@ function EditInterventionPage({
     getIntervention(params.id);
   }, []);
 
+  const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
+
+  const onCreateQuestion = type => {
+    createQuestion(
+      instantiateEmptyQuestion(
+        formatMessage(messages.newQuestionMessage),
+        type,
+      ),
+      params.id,
+    );
+    toggleTypeChooser();
+  };
   return (
     <Fragment>
       <Helmet>
@@ -131,7 +139,7 @@ function EditInterventionPage({
               ))}
               <Row>
                 <Box position="relative">
-                  <HoverableBox px={21} py={14} onClick={toggleChooser}>
+                  <HoverableBox px={21} py={14} onClick={toggleTypeChooser}>
                     <Box>
                       <Row align="center">
                         <PlusCircle mr={12} />
@@ -142,15 +150,8 @@ function EditInterventionPage({
                     </Box>
                   </HoverableBox>
                   <QuestionTypeChooser
-                    onClick={type =>
-                      createQuestion(
-                        instantiateEmptyQuestion(
-                          formatMessage(messages.newQuestionMessage),
-                          type,
-                        ),
-                        params.id,
-                      )
-                    }
+                    visible={typeChooserOpen}
+                    onClick={onCreateQuestion}
                   />
                 </Box>
               </Row>
@@ -172,7 +173,6 @@ function EditInterventionPage({
 EditInterventionPage.propTypes = {
   intl: PropTypes.object,
   intervention: PropTypes.shape(Intervention),
-  toggleChooser: PropTypes.func,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.number.isRequired,
   match: PropTypes.object,
@@ -186,11 +186,10 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestionIndex(),
 });
 
-const mapDispatchToProps = dispatch => ({
-  toggleChooser: () => dispatch(toggleQuestionTypeChooser()),
-  getIntervention: id => dispatch(getInterventionRequest(id)),
-  createQuestion: (type, id) => dispatch(createQuestionRequest(type, id)),
-});
+const mapDispatchToProps = {
+  getIntervention: id => getInterventionRequest(id),
+  createQuestion: (type, id) => createQuestionRequest(type, id),
+};
 
 const withConnect = connect(
   mapStateToProps,

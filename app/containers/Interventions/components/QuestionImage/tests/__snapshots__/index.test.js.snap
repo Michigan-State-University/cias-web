@@ -155,8 +155,6 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
 .c0 {
   border-radius: 10px;
   border: 1px dashed #2F3850;
-  margin-top: 25px;
-  margin-bottom: 25px;
   background-color: rgba(233,241,251,1);
   padding: 50px;
   width: 100%;

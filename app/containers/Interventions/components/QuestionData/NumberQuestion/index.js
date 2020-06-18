@@ -25,7 +25,7 @@ const NumberQuestion = ({
 }) => {
   const { variable, payload } = selectedQuestion.body.data[0];
   return (
-    <Box bg={colors.linkWater} width="100%" px={21} py={14} mt={20}>
+    <Box bg={colors.linkWater} width="100%" px={21} py={14}>
       <Row>
         <ApprovableInput
           type="singleline"

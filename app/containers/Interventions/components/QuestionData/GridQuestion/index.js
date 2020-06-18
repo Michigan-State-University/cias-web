@@ -50,7 +50,7 @@ const GridQuestion = ({
   const [hoveredColumn, setHoveredColumn] = useState(-1);
 
   return (
-    <Box width="100%" px={21} py={14} mt={20}>
+    <Box width="100%" px={21} py={14}>
       <Row justify="end">
         <HoverableBox px={21} py={14} onClick={addColumn}>
           <Box>

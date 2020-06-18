@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
@@ -15,8 +12,6 @@ import { QuestionTypes } from 'models/Intervention/QuestionTypes';
 import { colors, boxShadows, borders, fontSizes } from 'theme';
 import messages from './messages';
 import { DotCircle } from './styled';
-
-import { makeSelectQuestionTypeChooserVisiblity } from '../../containers/EditInterventionPage/selectors';
 
 const decideIfAddMargin = i =>
   i !== QuestionTypes.length - 1 ? { mb: 4 } : {};
@@ -66,10 +61,4 @@ QuestionTypeChooser.propTypes = {
   visible: PropTypes.bool,
 };
 
-const mapStateToProps = createStructuredSelector({
-  visible: makeSelectQuestionTypeChooserVisiblity(),
-});
-
-const withConnect = connect(mapStateToProps);
-
-export default injectIntl(compose(withConnect)(QuestionTypeChooser));
+export default injectIntl(QuestionTypeChooser);

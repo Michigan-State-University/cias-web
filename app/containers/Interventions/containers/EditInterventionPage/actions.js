@@ -1,6 +1,5 @@
 import { actionBuilder } from 'utils/actionBuilder';
 import {
-  TOGGLE_QUESTION_TYPE_CHOOSER,
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_TITLE,
@@ -26,9 +25,6 @@ import {
   TOGGLE_QUESTION_SETTINGS,
   UPDATE_QUESTION_SETTINGS,
 } from './constants';
-
-const toggleQuestionTypeChooser = () =>
-  actionBuilder(TOGGLE_QUESTION_TYPE_CHOOSER, {});
 
 const toggleQuestionSettings = index =>
   actionBuilder(TOGGLE_QUESTION_SETTINGS, { index });
@@ -77,7 +73,6 @@ const getQuestionsSuccess = questions =>
 const getQuestionsError = () => actionBuilder(GET_QUESTIONS_ERROR, {});
 
 export {
-  toggleQuestionTypeChooser,
   toggleQuestionSettings,
   selectQuestion,
   updateQuestionData,

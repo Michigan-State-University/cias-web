@@ -4,7 +4,13 @@ import { UPDATE_SETTINGS } from './constants';
 const defaultQuestionSettingsReducer = (question, payload) => {
   switch (payload.type) {
     case UPDATE_SETTINGS:
-      return question;
+      return {
+        ...question,
+        settings: {
+          ...question.settings,
+          [payload.data.property]: payload.data.value,
+        },
+      };
 
     default:
       return question;

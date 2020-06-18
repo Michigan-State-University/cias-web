@@ -48,6 +48,7 @@ const QuestionListItem = ({
             onClick={event => {
               event.stopPropagation();
               toggleSettings(index);
+              onSelect(index);
             }}
           >
             <Img src={gearIcon} />

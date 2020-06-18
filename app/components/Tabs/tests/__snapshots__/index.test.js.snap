@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tabs /> should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c3 {
+  margin: 25px 10px;
+}
+
+.c1 {
+  margin: 0 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  border-bottom-width: 2px;
+  border-bottom-color: #C866EA;
+  border-bottom-style: solid;
+}
+
+.c2 {
+  margin: 0 10px;
+  padding-bottom: 10px;
+  cursor: pointer;
+  border-bottom-width: 2px;
+  border-bottom-color: #C866EA;
+  border-bottom-style: none;
+}
+
+<div
+  className=""
+>
+  <div
+    className="c0"
+  >
+    <div
+      className="c1"
+      onClick={[Function]}
+    >
+      Tab1
+    </div>
+    <div
+      className="c2"
+      onClick={[Function]}
+    >
+      Tab2
+    </div>
+  </div>
+  <div
+    className="c3"
+  >
+    <span>
+      Tab1 Content
+    </span>
+  </div>
+</div>
+`;

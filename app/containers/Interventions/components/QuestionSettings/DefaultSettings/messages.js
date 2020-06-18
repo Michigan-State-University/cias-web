@@ -7,4 +7,12 @@ export default defineMessages({
     id: `${scope}.title`,
     defaultMessage: 'Title',
   },
+  video: {
+    id: `${scope}.video`,
+    defaultMessage: 'Video',
+  },
+  image: {
+    id: `${scope}.image`,
+    defaultMessage: 'Image',
+  },
 });

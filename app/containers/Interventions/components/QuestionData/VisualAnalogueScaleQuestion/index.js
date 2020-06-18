@@ -27,7 +27,7 @@ const VisualAnalogueScaleQuestion = ({
   const startValue = selectedQuestion.body.data[0].payload.start_value;
   const endValue = selectedQuestion.body.data[0].payload.end_value;
   return (
-    <Box width="100%" px={21} py={14} mt={20}>
+    <Box width="100%" px={21} py={14}>
       <Column>
         <Row>
           <Box width="100%">

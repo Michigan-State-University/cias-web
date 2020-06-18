@@ -43,7 +43,8 @@ const renderQuestionDetails = ({
   updateTitle,
   intl: { formatMessage },
 }) => {
-  if (selectedQuestion != null)
+  if (selectedQuestion != null) {
+    const { video, image } = selectedQuestion.settings;
     return (
       <Column>
         <Row>
@@ -69,19 +70,24 @@ const renderQuestionDetails = ({
                 </H1>
               </StyledHoverableBox>
             </Row>
-            <Row mt={22}>
-              <QuestionVideo />
-            </Row>
-            <Row mt={22}>
-              <QuestionImage />
-            </Row>
-            <Row>
+            {video && (
+              <Row mt={22}>
+                <QuestionVideo />
+              </Row>
+            )}
+            {image && (
+              <Row mt={22}>
+                <QuestionImage />
+              </Row>
+            )}
+            <Row mt={44}>
               <QuestionData />
             </Row>
           </Column>
         </Row>
       </Column>
     );
+  }
 
   return null;
 };

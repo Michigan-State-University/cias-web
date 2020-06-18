@@ -9,7 +9,6 @@ import {
 } from 'models/Intervention/QuestionTypes';
 
 import {
-  TOGGLE_QUESTION_TYPE_CHOOSER,
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_TITLE,
@@ -32,7 +31,6 @@ import questionSettingsReducer from '../../components/QuestionSettings/reducer';
 export const initialState = {
   intervention: new Intervention('', ''),
   questions: [],
-  questionTypeChooserVisibility: false,
   questionSettingsVisibility: false,
   selectedQuestion: 0,
   cache: {
@@ -83,15 +81,19 @@ const mapQuestionDataForType = question => {
 const editInterventionPageReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case TOGGLE_QUESTION_TYPE_CHOOSER:
-        draft.questionTypeChooserVisibility = !draft.questionTypeChooserVisibility;
-        break;
-
       case TOGGLE_QUESTION_SETTINGS:
-        if (action.payload.index === state.selectedQuestion) {
-          draft.questionSettingsVisibility = !draft.questionSettingsVisibility;
+        if (action.payload.index < 0) {
+          draft.questionSettingsVisibility = false;
+          break;
         }
-
+        if (
+          action.payload.index === state.selectedQuestion &&
+          state.questionSettingsVisibility
+        ) {
+          draft.questionSettingsVisibility = false;
+          break;
+        }
+        draft.questionSettingsVisibility = true;
         break;
 
       case SELECT_QUESTION:
@@ -165,7 +167,6 @@ const editInterventionPageReducer = (state = initialState, action) =>
         );
 
         draft.questions = cloneDeep(draft.cache.questions);
-        draft.questionTypeChooserVisibility = false;
         break;
 
       case GET_QUESTIONS_SUCCESS:

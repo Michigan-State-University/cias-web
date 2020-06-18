@@ -1,6 +1,3 @@
-export const TOGGLE_QUESTION_TYPE_CHOOSER =
-  'app/EditInterventionPage/TOGGLE_QUESTION_TYPE_CHOOSER';
-
 export const TOGGLE_QUESTION_SETTINGS =
   'app/EditInterventionPage/TOGGLE_QUESTION_SETTINGS';
 

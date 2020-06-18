@@ -66,7 +66,6 @@ export const QuestionImage = ({
         bg={themeColors.highlight}
         width="100%"
         padding={50}
-        my={25}
         withShadow={isDragActive}
         {...getRootProps()}
       >
