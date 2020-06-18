@@ -4,7 +4,9 @@ import { style } from '../BaseComponentStyles';
 
 export const AccordionContainer = styled.div``;
 
-export const StyledCollapseContainer = styled.div``;
+export const StyledCollapseContainer = styled.div`
+  margin-bottom: 7px;
+`;
 
 export const StyledCollapseLabel = styled.div`
   height: 40px;
