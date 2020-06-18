@@ -9,8 +9,10 @@ import { injectIntl, intlShape } from 'react-intl';
 import Row from 'components/Row';
 import Column from 'components/Column';
 import H3 from 'components/H3';
+import Accordion from 'components/Accordion';
 import Tabs from 'components/Tabs';
 import Switch from 'components/Switch';
+import Box from 'components/Box';
 
 import messages from './messages';
 import { updateSettings } from './actions';
@@ -41,6 +43,15 @@ const DefaultSettings = ({
         ))}
       </div>
       <div label={formatMessage(messages.narrator)}>Narrator</div>
+        <Accordion>
+          <Box label="label 1" color="#000">
+            x
+          </Box>
+          <Box label="label 2" color="#523345">
+            x2
+          </Box>
+        </Accordion>
+      </div>
     </Tabs>
   </Column>
 );
