@@ -19,8 +19,16 @@ export default defineMessages({
     id: `${scope}.settings`,
     defaultMessage: 'Settings',
   },
+  animation: {
+    id: `${scope}.animation`,
+    defaultMessage: 'Animation',
+  },
   narrator: {
     id: `${scope}.narrator`,
     defaultMessage: 'Narrator',
+  },
+  voice: {
+    id: `${scope}.voice`,
+    defaultMessage: 'Voice',
   },
 });

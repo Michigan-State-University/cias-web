@@ -6,10 +6,13 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
+import { stepTypeToColorMap } from 'models/Narrator/StepTypes';
+
 import Row from 'components/Row';
 import Column from 'components/Column';
 import H3 from 'components/H3';
 import Accordion from 'components/Accordion';
+import Collapse from 'components/Accordion/Collapse';
 import Tabs from 'components/Tabs';
 import Switch from 'components/Switch';
 import Box from 'components/Box';
@@ -20,7 +23,7 @@ import { updateSettings } from './actions';
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 
 const DefaultSettings = ({
-  selectedQuestion: { settings, id } = {},
+  selectedQuestion: { narrator, settings, id } = {},
   onToggle,
   intl: { formatMessage },
 }) => (
@@ -42,14 +45,35 @@ const DefaultSettings = ({
           </Row>
         ))}
       </div>
-      <div label={formatMessage(messages.narrator)}>Narrator</div>
+      <div label={formatMessage(messages.narrator)}>
+        <Box mb={30}>
+          {narrator &&
+            map(narrator.settings, (val, index) => (
+              <Row
+                key={`el-settings-${index}`}
+                justify="between"
+                align="center"
+                mb={15}
+              >
+                <H3>{formatMessage(messages[`${index}`])}</H3>
+                <Switch
+                  checked={val}
+                  onToggle={value => onToggle(`${index}`, value)}
+                />
+              </Row>
+            ))}
+        </Box>
         <Accordion>
-          <Box label="label 1" color="#000">
-            x
-          </Box>
-          <Box label="label 2" color="#523345">
-            x2
-          </Box>
+          {narrator &&
+            map(narrator.steps, (step, index) => (
+              <Collapse
+                key={`narrator-${index}`}
+                label={step.type}
+                color={stepTypeToColorMap[step.type]}
+              >
+                test
+              </Collapse>
+            ))}
         </Accordion>
       </div>
     </Tabs>
