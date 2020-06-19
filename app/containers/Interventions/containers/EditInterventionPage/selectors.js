@@ -1,5 +1,4 @@
 import { createSelector } from 'reselect';
-import get from 'lodash/get';
 import { initialState } from './reducer';
 
 const selectEditInterventionPageDomain = state =>
@@ -41,13 +40,6 @@ const makeSelectSelectedQuestion = () =>
     substate => substate.questions[substate.selectedQuestion],
   );
 
-const makeSelectOnePropertyFromSelectedQuestion = property =>
-  createSelector(
-    selectEditInterventionPageDomain,
-    substate =>
-      get(substate.questions[substate.selectedQuestion], property, null),
-  );
-
 export {
   makeSelectEditInterventionPage,
   selectEditInterventionPageDomain,
@@ -56,5 +48,4 @@ export {
   makeSelectSelectedQuestionIndex,
   makeSelectSelectedQuestion,
   makeSelectQuestionSettingsVisibility,
-  makeSelectOnePropertyFromSelectedQuestion,
 };

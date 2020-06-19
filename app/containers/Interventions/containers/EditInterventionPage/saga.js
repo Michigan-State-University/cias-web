@@ -12,6 +12,7 @@ import {
   ADD_QUESTION_IMAGE,
   DELETE_QUESTION_IMAGE,
   UPDATE_QUESTION_VIDEO,
+  UPDATE_QUESTION_SETTINGS,
 } from './constants';
 
 import {
@@ -182,5 +183,6 @@ export default function* editInterventionPageSaga() {
     yield takeLatest(ADD_QUESTION_IMAGE, addImageQuestion),
     yield takeLatest(DELETE_QUESTION_IMAGE, deleteQuestionImage),
     yield takeLatest(UPDATE_QUESTION_VIDEO, updateQuestion),
+    yield takeLatest(UPDATE_QUESTION_SETTINGS, updateQuestion),
   ]);
 }

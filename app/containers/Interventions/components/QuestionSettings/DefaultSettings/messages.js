@@ -15,4 +15,12 @@ export default defineMessages({
     id: `${scope}.image`,
     defaultMessage: 'Image',
   },
+  settings: {
+    id: `${scope}.settings`,
+    defaultMessage: 'Settings',
+  },
+  narrator: {
+    id: `${scope}.narrator`,
+    defaultMessage: 'Narrator',
+  },
 });

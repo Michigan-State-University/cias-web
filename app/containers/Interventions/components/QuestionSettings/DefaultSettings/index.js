@@ -4,7 +4,7 @@ import map from 'lodash/map';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl } from 'react-intl';
+import { injectIntl, intlShape } from 'react-intl';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -15,15 +15,19 @@ import Switch from 'components/Switch';
 import messages from './messages';
 import { updateSettings } from './actions';
 
-import { makeSelectOnePropertyFromSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
+import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 
-const DefaultSettings = ({ settings, onToggle, intl: { formatMessage } }) => (
+const DefaultSettings = ({
+  selectedQuestion: { settings, id } = {},
+  onToggle,
+  intl: { formatMessage },
+}) => (
   <Column>
     <Tabs>
-      <div label="Settings">
+      <div label={formatMessage(messages.settings)}>
         {map(settings, (val, index) => (
           <Row
-            key={`el-settings-${index}`}
+            key={`el-settings-${id}-${index}`}
             justify="between"
             align="center"
             mb={15}
@@ -36,19 +40,19 @@ const DefaultSettings = ({ settings, onToggle, intl: { formatMessage } }) => (
           </Row>
         ))}
       </div>
-      <div label="Narrator">Narrator</div>
+      <div label={formatMessage(messages.narrator)}>Narrator</div>
     </Tabs>
   </Column>
 );
 
 DefaultSettings.propTypes = {
-  intl: PropTypes.object.isRequired,
+  intl: intlShape,
   onToggle: PropTypes.func.isRequired,
-  settings: PropTypes.object,
+  selectedQuestion: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  settings: makeSelectOnePropertyFromSelectedQuestion('settings'),
+  selectedQuestion: makeSelectSelectedQuestion(),
 });
 
 const mapDispatchToProps = {
