@@ -20,6 +20,7 @@ const BlockTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
     borderRadius={10}
     shadow={boxShadows[1]}
     position="absolute"
+    width="100%"
     {...(visible ? {} : { display: 'none' })}
   >
     <Box

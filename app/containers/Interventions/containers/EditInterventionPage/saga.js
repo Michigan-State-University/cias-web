@@ -47,7 +47,7 @@ const mapQuestionToStateObject = question => ({
       voice: true,
       animation: true,
     },
-    steps: [
+    blocks: [
       { type: 'BodyAnimation', animation: 'MoveLeft' },
       { type: 'BodyAnimation', animation: 'MoveRight' },
       {

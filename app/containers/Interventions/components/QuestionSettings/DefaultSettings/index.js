@@ -18,7 +18,7 @@ import Switch from 'components/Switch';
 import Box from 'components/Box';
 
 import messages from './messages';
-import { updateSettings } from './actions';
+import { updateSettings, addBlock } from './actions';
 
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { DashedBox } from './styled';
@@ -28,21 +28,17 @@ const DefaultSettings = ({
   selectedQuestion: { narrator, settings, id } = {},
   onToggle,
   questionId,
+  onCreate,
   intl: { formatMessage },
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
 
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
 
-  // const onCreateBlock = type => {
-  //   createQuestion(
-  //     instantiateEmptyQuestion(
-  //       formatMessage(messages.newQuestionMessage),
-  //       type,
-  //     ),
-  //   );
-  //   toggleTypeChooser();
-  // };
+  const onCreateBlock = type => {
+    onCreate(type, questionId);
+    toggleTypeChooser();
+  };
 
   return (
     <Column>
@@ -83,7 +79,7 @@ const DefaultSettings = ({
           </Box>
           <Accordion>
             {narrator &&
-              map(narrator.steps, (step, index) => (
+              map(narrator.blocks, (step, index) => (
                 <Collapse
                   key={`${questionId}-narrator-${index}`}
                   label={step.type}
@@ -99,7 +95,7 @@ const DefaultSettings = ({
             </DashedBox>
             <BlockTypeChooser
               visible={typeChooserOpen}
-              // onClick={onCreateQuestion}
+              onClick={onCreateBlock}
             />
           </Box>
         </div>
@@ -113,6 +109,7 @@ DefaultSettings.propTypes = {
   onToggle: PropTypes.func.isRequired,
   selectedQuestion: PropTypes.object,
   questionId: PropTypes.string,
+  onCreate: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -121,6 +118,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   onToggle: updateSettings,
+  onCreate: addBlock,
 };
 
 const withConnect = connect(
