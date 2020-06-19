@@ -37,6 +37,12 @@ export const visualAnalogueScaleQuestion = new QuestionType(
   colors.pink,
 );
 
+export const informationQuestion = new QuestionType(
+  'Question::Information',
+  'Information',
+  colors.blueHaze,
+);
+
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
@@ -44,4 +50,5 @@ export const QuestionTypes = [
   numberQuestion,
   gridQuestion,
   visualAnalogueScaleQuestion,
+  informationQuestion,
 ];

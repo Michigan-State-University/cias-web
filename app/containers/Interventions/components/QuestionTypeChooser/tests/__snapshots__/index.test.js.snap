@@ -223,6 +223,28 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   opacity: 1;
 }
 
+.c15 {
+  border-radius: 50%;
+  background-color: #CED3E4;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  margin-right: 18px;
+  background-color: rgba(206,211,228,1);
+  opacity: 1;
+}
+
 <div
   className="c0"
   display="none"
@@ -348,7 +370,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
           </div>
         </div>
         <div
-          className="c14"
+          className="c6"
           onClick={[Function]}
         >
           <div
@@ -364,6 +386,26 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               fontWeight="medium"
             >
               Visual Analogue Scale
+            </p>
+          </div>
+        </div>
+        <div
+          className="c14"
+          onClick={[Function]}
+        >
+          <div
+            className="c7"
+          >
+            <div
+              className="c15"
+              opacity={1}
+              size="10px"
+            />
+            <p
+              className="c9"
+              fontWeight="medium"
+            >
+              Information
             </p>
           </div>
         </div>
