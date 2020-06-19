@@ -27,7 +27,6 @@ import BlockTypeChooser from '../BlockTypeChooser';
 const DefaultSettings = ({
   selectedQuestion: { narrator, settings, id } = {},
   onToggle,
-  questionId,
   onCreate,
   intl: { formatMessage },
 }) => {
@@ -36,7 +35,7 @@ const DefaultSettings = ({
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
 
   const onCreateBlock = type => {
-    onCreate(type, questionId);
+    onCreate(type, id);
     toggleTypeChooser();
   };
 
@@ -64,7 +63,7 @@ const DefaultSettings = ({
             {narrator &&
               map(narrator.settings, (val, index) => (
                 <Row
-                  key={`el-settings-${index}`}
+                  key={`${id}-settings-narrator-${index}`}
                   justify="between"
                   align="center"
                   mb={15}
@@ -72,7 +71,8 @@ const DefaultSettings = ({
                   <H3>{formatMessage(messages[`${index}`])}</H3>
                   <Switch
                     checked={val}
-                    onToggle={value => onToggle(`${index}`, value)}
+                    // * temporary solution
+                    onToggle={value => value}
                   />
                 </Row>
               ))}
@@ -81,7 +81,7 @@ const DefaultSettings = ({
             {narrator &&
               map(narrator.blocks, (step, index) => (
                 <Collapse
-                  key={`${questionId}-narrator-${index}`}
+                  key={`${id}-narrator-block-${index}`}
                   label={step.type}
                   color={blockTypeToColorMap[step.type]}
                 >
@@ -108,7 +108,6 @@ DefaultSettings.propTypes = {
   intl: intlShape,
   onToggle: PropTypes.func.isRequired,
   selectedQuestion: PropTypes.object,
-  questionId: PropTypes.string,
   onCreate: PropTypes.func,
 };
 
