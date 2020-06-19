@@ -31,4 +31,8 @@ export default defineMessages({
     id: `${scope}.voice`,
     defaultMessage: 'Voice',
   },
+  newStep: {
+    id: `${scope}.newStep`,
+    defaultMessage: '+ Add another block',
+  },
 });
