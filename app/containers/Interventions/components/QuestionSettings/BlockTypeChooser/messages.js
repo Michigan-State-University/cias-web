@@ -6,7 +6,7 @@
 
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.StepTypeChooser';
+export const scope = 'app.containers.BlockTypeChooser';
 
 export default defineMessages({
   header: {

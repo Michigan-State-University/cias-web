@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { stepTypeToColorMap } from 'models/Narrator/StepTypes';
+import { blockTypeToColorMap } from 'models/Narrator/BlockTypes';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -22,7 +22,7 @@ import { updateSettings } from './actions';
 
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { DashedBox } from './styled';
-import StepTypeChooser from '../StepTypeChooser';
+import BlockTypeChooser from '../BlockTypeChooser';
 
 const DefaultSettings = ({
   selectedQuestion: { narrator, settings, id } = {},
@@ -87,7 +87,7 @@ const DefaultSettings = ({
                 <Collapse
                   key={`${questionId}-narrator-${index}`}
                   label={step.type}
-                  color={stepTypeToColorMap[step.type]}
+                  color={blockTypeToColorMap[step.type]}
                 >
                   test
                 </Collapse>
@@ -97,7 +97,7 @@ const DefaultSettings = ({
             <DashedBox onClick={toggleTypeChooser}>
               {formatMessage(messages.newStep)}
             </DashedBox>
-            <StepTypeChooser
+            <BlockTypeChooser
               visible={typeChooserOpen}
               // onClick={onCreateQuestion}
             />

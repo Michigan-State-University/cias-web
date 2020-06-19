@@ -8,14 +8,14 @@ import Box from 'components/Box';
 import Text from 'components/Text';
 import HoverableBox from 'components/Box/HoverableBox';
 
-import { stepTypes, stepTypeToColorMap } from 'models/Narrator/StepTypes';
+import { blockTypes, blockTypeToColorMap } from 'models/Narrator/BlockTypes';
 import { colors, boxShadows, borders, fontSizes } from 'theme';
 import messages from './messages';
 import { DotCircle } from './styled';
 
-const decideIfAddMargin = i => (i !== stepTypes.length - 1 ? { mb: 4 } : {});
+const decideIfAddMargin = i => (i !== blockTypes.length - 1 ? { mb: 4 } : {});
 
-const StepTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
+const BlockTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
   <Box
     borderRadius={10}
     shadow={boxShadows[1]}
@@ -35,7 +35,7 @@ const StepTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
     <Row>
       <Box padding={8}>
         <Column>
-          {stepTypes.map((stepType, i) => (
+          {blockTypes.map((stepType, i) => (
             <HoverableBox
               key={`narrator-block-types-${i}`}
               onClick={() => onClick(stepType)}
@@ -43,7 +43,7 @@ const StepTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
               {...decideIfAddMargin(i)}
             >
               <Row align="center">
-                <DotCircle mr={18} bg={stepTypeToColorMap[stepType]} />
+                <DotCircle mr={18} bg={blockTypeToColorMap[stepType]} />
                 <Text fontWeight="medium">
                   {formatMessage(messages.stepTypes[stepType])}
                 </Text>
@@ -56,10 +56,10 @@ const StepTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
   </Box>
 );
 
-StepTypeChooser.propTypes = {
+BlockTypeChooser.propTypes = {
   intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
   visible: PropTypes.bool,
 };
 
-export default injectIntl(StepTypeChooser);
+export default injectIntl(BlockTypeChooser);
