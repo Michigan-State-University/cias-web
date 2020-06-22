@@ -17,6 +17,7 @@ import Tabs from 'components/Tabs';
 import Switch from 'components/Switch';
 import Chips from 'components/Chips';
 import Box from 'components/Box';
+import { colors } from 'theme';
 
 import messages from './messages';
 import {
@@ -93,7 +94,14 @@ const DefaultSettings = ({
                   color={blockTypeToColorMap[step.type]}
                 >
                   {mockChips.map(anim => (
-                    <Chips px={15} py={4} borderRadius={20} clickable>
+                    <Chips
+                      px={15}
+                      py={4}
+                      borderRadius={20}
+                      clickable
+                      bg={colors.azure}
+                      opacity={0.1}
+                    >
                       {anim}
                     </Chips>
                   ))}

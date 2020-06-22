@@ -4,10 +4,9 @@ import { fontSizes, lineHeights, colors } from 'theme';
 import { padding, style } from '../BaseComponentStyles';
 
 export const StyledChips = styled.div`
+  width: fit-content;
   ${padding};
   ${style};
-  background-color: ${colors.azureBackground};
-  width: fit-content;
 `;
 
 export const ChipsText = styled.p`

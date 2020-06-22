@@ -7,7 +7,6 @@ const colors = {
   zirkon: '#F8FBFF',
   white: '#FFF',
   azure: '#0086F8',
-  azureBackground: 'rgba(0, 134, 248, 0.1)',
   tangerine: '#FFA16C',
   golden: '#FFCF5B',
   pink: '#FF7691',

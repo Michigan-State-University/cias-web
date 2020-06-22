@@ -2,7 +2,6 @@
 
 exports[`<Chips /> should match the snapshot 1`] = `
 .c0 {
-  background-color: rgba(0,134,248,0.1);
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
