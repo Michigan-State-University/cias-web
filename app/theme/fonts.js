@@ -5,6 +5,7 @@ const fontSizes = {
   h2: '18px',
   h3: '15px',
   small: '13px',
+  medium: '14px',
   regular: '15px',
 };
 

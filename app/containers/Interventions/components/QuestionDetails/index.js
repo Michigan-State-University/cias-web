@@ -18,6 +18,7 @@ import messages from './messages';
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
 import QuestionVideo from '../QuestionVideo';
+import QuestionNarrator from '../QuestionNarrator';
 import {
   makeSelectSelectedQuestion,
   makeSelectSelectedQuestionIndex,
@@ -45,8 +46,11 @@ const renderQuestionDetails = ({
 }) => {
   if (selectedQuestion != null) {
     const { video, image } = selectedQuestion.settings;
+
+    const { settings: { animation } = {} } = selectedQuestion.narrator || {};
     return (
-      <Column>
+      <Column position="relative">
+        {animation && <QuestionNarrator />}
         <Row>
           <NumberCircle
             color={colors.white}

@@ -18,7 +18,8 @@ export const StyledCollapseLabel = styled.div`
 `;
 
 export const StyledCollapseContent = styled.div`
-  transition: height 0.4s ease, opacity 0.8s ease;
+  transition: height 0.4s ease, opacity 0.5s ease;
+  margin-top: 15px;
   ${({ isOpened }) =>
     isOpened ? { height: 300, opacity: 1 } : { height: 0, opacity: 0 }};
 `;

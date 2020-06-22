@@ -15,18 +15,26 @@ import Accordion from 'components/Accordion';
 import Collapse from 'components/Accordion/Collapse';
 import Tabs from 'components/Tabs';
 import Switch from 'components/Switch';
+import Chips from 'components/Chips';
 import Box from 'components/Box';
 
 import messages from './messages';
-import { updateSettings, addBlock } from './actions';
+import {
+  updateSettings as updateQuestionSettings,
+  addBlock,
+  updateNarratorSettings,
+} from './actions';
 
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { DashedBox } from './styled';
 import BlockTypeChooser from '../BlockTypeChooser';
 
+const mockChips = ['Move right'];
+
 const DefaultSettings = ({
   selectedQuestion: { narrator, settings, id } = {},
-  onToggle,
+  onQuestionToggle,
+  onNarratorToggle,
   onCreate,
   intl: { formatMessage },
 }) => {
@@ -53,7 +61,7 @@ const DefaultSettings = ({
               <H3>{formatMessage(messages[`${index}`])}</H3>
               <Switch
                 checked={val}
-                onToggle={value => onToggle(`${index}`, value)}
+                onToggle={value => onQuestionToggle(`${index}`, value)}
               />
             </Row>
           ))}
@@ -71,8 +79,7 @@ const DefaultSettings = ({
                   <H3>{formatMessage(messages[`${index}`])}</H3>
                   <Switch
                     checked={val}
-                    // * temporary solution
-                    onToggle={value => value}
+                    onToggle={value => onNarratorToggle(`${index}`, value)}
                   />
                 </Row>
               ))}
@@ -82,10 +89,14 @@ const DefaultSettings = ({
               map(narrator.blocks, (step, index) => (
                 <Collapse
                   key={`${id}-narrator-block-${index}`}
-                  label={step.type}
+                  label={`${index + 1}. ${step.type}`}
                   color={blockTypeToColorMap[step.type]}
                 >
-                  test
+                  {mockChips.map(anim => (
+                    <Chips px={15} py={4} borderRadius={20} clickable>
+                      {anim}
+                    </Chips>
+                  ))}
                 </Collapse>
               ))}
           </Accordion>
@@ -106,7 +117,8 @@ const DefaultSettings = ({
 
 DefaultSettings.propTypes = {
   intl: intlShape,
-  onToggle: PropTypes.func.isRequired,
+  onQuestionToggle: PropTypes.func.isRequired,
+  onNarratorToggle: PropTypes.func.isRequired,
   selectedQuestion: PropTypes.object,
   onCreate: PropTypes.func,
 };
@@ -116,8 +128,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  onToggle: updateSettings,
+  onQuestionToggle: updateQuestionSettings,
   onCreate: addBlock,
+  onNarratorToggle: updateNarratorSettings,
 };
 
 const withConnect = connect(

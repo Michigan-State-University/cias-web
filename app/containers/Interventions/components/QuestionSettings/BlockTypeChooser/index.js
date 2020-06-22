@@ -34,7 +34,7 @@ const BlockTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
       </Text>
     </Box>
     <Row>
-      <Box padding={8}>
+      <Box padding={8} filled>
         <Column>
           {blockTypes.map((stepType, i) => (
             <HoverableBox

@@ -42,20 +42,6 @@ const mapQuestionToStateObject = question => ({
     ...question.attributes.body,
     data: question.attributes.body.data || [],
   },
-  narrator: {
-    settings: {
-      voice: true,
-      animation: true,
-    },
-    blocks: [
-      { type: 'BodyAnimation', animation: 'MoveLeft' },
-      { type: 'BodyAnimation', animation: 'MoveRight' },
-      {
-        type: 'Speech',
-        text: 'This is a first sentence. This is a second sentence.',
-      },
-    ],
-  },
 });
 
 function* createIntervention() {
