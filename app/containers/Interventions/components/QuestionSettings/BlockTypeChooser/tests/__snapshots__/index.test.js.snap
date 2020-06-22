@@ -66,6 +66,10 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   display: block;
   border-radius: 10px;
   padding: 8px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
 }
 
 .c2 {
