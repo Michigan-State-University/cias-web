@@ -18,8 +18,11 @@ export const StyledCollapseLabel = styled.div`
 `;
 
 export const StyledCollapseContent = styled.div`
-  transition: height 0.4s ease, opacity 0.5s ease;
-  margin-top: 15px;
+  transition: all 390ms ease;
+  display: flex;
+  flex-wrap: wrap;
   ${({ isOpened }) =>
-    isOpened ? { height: 300, opacity: 1 } : { height: 0, opacity: 0 }};
+    isOpened
+      ? { height: 300, opacity: 1, marginTop: 15 }
+      : { height: 0, opacity: 0, marginTop: 0 }};
 `;

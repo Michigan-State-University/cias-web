@@ -51,3 +51,6 @@ export const GET_QUESTIONS_SUCCESS =
   'app/EditInterventionPage/GET_QUESTIONS_SUCCESS';
 export const GET_QUESTIONS_ERROR =
   'app/EditInterventionPage/GET_QUESTIONS_ERROR';
+
+export const UPDATE_PREVIEW_ANIMATION =
+  'app/EditInterventionPage/UPDATE_PREVIEW_ANIMATION';

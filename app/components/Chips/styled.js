@@ -5,6 +5,8 @@ import { padding, style } from '../BaseComponentStyles';
 
 export const StyledChips = styled.div`
   width: fit-content;
+  max-height: 30px;
+  margin-right: 10px;
   ${padding};
   ${style};
 `;
@@ -12,6 +14,6 @@ export const StyledChips = styled.div`
 export const ChipsText = styled.p`
   font-size: ${fontSizes.medium};
   line-height: ${lineHeights.regular};
-  color: ${colors.azure};
+  color: ${({ isActive }) => (isActive ? colors.white : colors.azure)};
   margin: 0;
 `;

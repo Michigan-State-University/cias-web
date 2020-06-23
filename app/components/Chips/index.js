@@ -5,12 +5,13 @@ import { StyledChips, ChipsText } from './styled';
 
 const Chips = props => (
   <StyledChips {...props}>
-    <ChipsText>{props.children}</ChipsText>
+    <ChipsText isActive={props.isActive}>{props.children}</ChipsText>
   </StyledChips>
 );
 
 Chips.propTypes = {
   children: PropTypes.node,
+  isActive: PropTypes.bool,
 };
 
 export default Chips;

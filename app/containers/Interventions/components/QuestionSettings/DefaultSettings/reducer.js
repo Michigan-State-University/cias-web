@@ -2,6 +2,7 @@ import {
   UPDATE_QUESTION_SETTINGS,
   ADD_BLOCK,
   UPDATE_NARRATOR_SETTINGS,
+  UPDATE_NARRATOR_ANIMATION,
 } from './constants';
 
 const instantiateBlockForType = type => {
@@ -48,6 +49,17 @@ const defaultQuestionSettingsReducer = (question, payload) => {
             ...question.narrator.blocks,
             instantiateBlockForType(payload.data.type),
           ],
+        },
+      };
+
+    case UPDATE_NARRATOR_ANIMATION:
+      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      cloneBlocks[payload.data.index].animation = payload.data.value;
+      return {
+        ...question,
+        narrator: {
+          ...question.narrator,
+          blocks: cloneBlocks,
         },
       };
 

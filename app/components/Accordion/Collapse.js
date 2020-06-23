@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import arrowUp from 'assets/svg/arrow-up.svg';
@@ -32,9 +32,32 @@ CollapseLabel.propTypes = {
   color: PropTypes.string,
 };
 
-const CollapseContent = ({ child, isOpened }) => (
-  <StyledCollapseContent isOpened={isOpened}>{child}</StyledCollapseContent>
-);
+const CollapseContent = ({ child, isOpened }) => {
+  const [hidden, setHidden] = useState(isOpened);
+  const [transition, setTransition] = useState(false);
+
+  useLayoutEffect(() => {
+    if (!isOpened) {
+      setTransition(false);
+      setTimeout(() => {
+        setHidden(false);
+      }, 400);
+    } else {
+      setHidden(true);
+      setTimeout(() => {
+        setTransition(true);
+      }, 10);
+    }
+  }, [isOpened]);
+
+  return (
+    hidden && (
+      <StyledCollapseContent isOpened={transition && isOpened}>
+        {child}
+      </StyledCollapseContent>
+    )
+  );
+};
 
 CollapseContent.propTypes = {
   child: PropTypes.node,

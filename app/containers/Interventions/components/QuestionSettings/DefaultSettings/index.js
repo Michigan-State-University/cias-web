@@ -6,37 +6,44 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { blockTypeToColorMap } from 'models/Narrator/BlockTypes';
-
-import Row from 'components/Row';
+import Accordion from 'components/Accordion';
+import Box from 'components/Box';
+import Chips from 'components/Chips';
 import Column from 'components/Column';
 import H3 from 'components/H3';
-import Accordion from 'components/Accordion';
-import Collapse from 'components/Accordion/Collapse';
-import Tabs from 'components/Tabs';
+import Row from 'components/Row';
 import Switch from 'components/Switch';
-import Chips from 'components/Chips';
-import Box from 'components/Box';
+import Tabs from 'components/Tabs';
+import { blockTypes } from 'models/Narrator/BlockTypes';
 import { colors } from 'theme';
+import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
 import messages from './messages';
 import {
   updateSettings as updateQuestionSettings,
   addBlock,
   updateNarratorSettings,
+  updateNarratorAnimation,
 } from './actions';
 
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
-import { DashedBox } from './styled';
 import BlockTypeChooser from '../BlockTypeChooser';
+import { DashedBox } from './styled';
+import { bodyAnimations, facialAnimations } from './animations';
+import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 
-const mockChips = ['Move right'];
+const getPossibleAnimations = (type, formatMessage) => {
+  if (type === blockTypes[0]) return facialAnimations(formatMessage);
+  if (type === blockTypes[1]) return bodyAnimations(formatMessage);
+  return [];
+};
 
 const DefaultSettings = ({
   selectedQuestion: { narrator, settings, id } = {},
   onQuestionToggle,
   onNarratorToggle,
   onCreate,
+  updateAnimation,
+  updateNarratorPreviewAnimation,
   intl: { formatMessage },
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
@@ -46,6 +53,16 @@ const DefaultSettings = ({
   const onCreateBlock = type => {
     onCreate(type, id);
     toggleTypeChooser();
+  };
+
+  const onChipsClick = (index, value) => () => {
+    if (narrator.blocks[index].animation === value) {
+      updateNarratorPreviewAnimation('');
+      updateAnimation(index, null, id);
+    } else {
+      updateNarratorPreviewAnimation(value);
+      updateAnimation(index, value, id);
+    }
   };
 
   return (
@@ -87,25 +104,32 @@ const DefaultSettings = ({
           </Box>
           <Accordion>
             {narrator &&
-              map(narrator.blocks, (step, index) => (
-                <Collapse
-                  key={`${id}-narrator-block-${index}`}
-                  label={`${index + 1}. ${step.type}`}
-                  color={blockTypeToColorMap[step.type]}
+              map(narrator.blocks, (step, blockIndex) => (
+                <div
+                  key={`${id}-narrator-block-${blockIndex}`}
+                  type={step.type}
                 >
-                  {mockChips.map(anim => (
-                    <Chips
-                      px={15}
-                      py={4}
-                      borderRadius={20}
-                      clickable
-                      bg={colors.azure}
-                      opacity={0.1}
-                    >
-                      {anim}
-                    </Chips>
-                  ))}
-                </Collapse>
+                  {getPossibleAnimations(step.type, formatMessage).map(
+                    (anim, animIndex) => {
+                      const isActive = step.animation === anim;
+                      return (
+                        <Chips
+                          px={15}
+                          py={4}
+                          borderRadius={20}
+                          clickable
+                          bg={colors.azure}
+                          opacity={isActive ? null : 0.1}
+                          onClick={onChipsClick(blockIndex, anim)}
+                          isActive={isActive}
+                          key={`el-chips-${animIndex}`}
+                        >
+                          {anim}
+                        </Chips>
+                      );
+                    },
+                  )}
+                </div>
               ))}
           </Accordion>
           <Box position="relative">
@@ -129,6 +153,8 @@ DefaultSettings.propTypes = {
   onNarratorToggle: PropTypes.func.isRequired,
   selectedQuestion: PropTypes.object,
   onCreate: PropTypes.func,
+  updateAnimation: PropTypes.func,
+  updateNarratorPreviewAnimation: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -139,6 +165,8 @@ const mapDispatchToProps = {
   onQuestionToggle: updateQuestionSettings,
   onCreate: addBlock,
   onNarratorToggle: updateNarratorSettings,
+  updateAnimation: updateNarratorAnimation,
+  updateNarratorPreviewAnimation: updatePreviewAnimation,
 };
 
 const withConnect = connect(

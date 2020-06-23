@@ -1,39 +1,112 @@
-import React, { useRef } from 'react';
-// import PropTypes from 'prop-types';
+import React, { useRef, useState, useEffect } from 'react';
+import get from 'lodash/get';
+import PropTypes from 'prop-types';
 import Lottie from 'react-lottie';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import animationData from './Animations/YzwpWaK.json';
+import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
 import { NarratorContainer } from './styled';
+import { makeSelectPreviewAnimation } from './selectors';
+import { getPause } from './helpers';
 
 const lottieStyles = {
   margin: 'none',
   marginLeft: '50px',
 };
 
-const QuestionNarrator = () => {
+const QuestionNarrator = ({ animation }) => {
+  const [loadedAnimations, setLoadedAnimations] = useState([]);
+  const animationRef = useRef(null);
+
+  const fetchJSON = async () => {
+    const animName = animation.toLowerCase();
+
+    if (!loadedAnimations.find(anim => anim.name === animName)) {
+      const data = await import(`./Animations/${animName}.json`);
+      setLoadedAnimations([
+        ...loadedAnimations,
+        {
+          name: animName,
+          path: `./Animations/${animName}.json`,
+          animationData: data,
+          pause: getPause(animName),
+        },
+      ]);
+    }
+  };
+
+  useEffect(() => {
+    if (animation) {
+      fetchJSON();
+    }
+  }, [animation]);
+
+  useDidUpdateEffect(() => {
+    const { anim } = animationRef.current;
+    if (animation) anim.play();
+    else anim.stop();
+  }, [animation]);
+
+  const currentAnimation = loadedAnimations.find(
+    anim => anim.name === animation.toLowerCase(),
+  );
+
   const defaultOptions = {
+    renderer: 'svg',
+    autoloadSegments: false,
     loop: false,
     autoplay: false,
-    animationData,
+    ...(currentAnimation
+      ? {
+          name: currentAnimation.name,
+          path: currentAnimation.path,
+          animationData: currentAnimation.animationData,
+        }
+      : {}),
   };
-  const animation = useRef(null);
+
+  const completeCallback = () => {
+    setTimeout(() => {
+      if (animationRef.current) {
+        const { anim } = animationRef.current;
+        anim.setDirection(-1);
+        anim.play();
+        anim.removeEventListener('complete', completeCallback);
+      }
+    }, get(currentAnimation, 'pause', 0));
+  };
 
   return (
     <NarratorContainer>
       <Lottie
-        ref={animation}
+        ref={animationRef}
         options={defaultOptions}
         height={100}
         width={100}
         style={lottieStyles}
         isClickToPauseDisabled
-        isStopped
+        eventListeners={[
+          {
+            eventName: 'complete',
+            callback: completeCallback,
+          },
+        ]}
       />
     </NarratorContainer>
   );
 };
 
-// QuestionNarrator.propTypes = {};
+QuestionNarrator.propTypes = {
+  animation: PropTypes.string,
+};
 
-export default QuestionNarrator;
+const mapStateToProps = createStructuredSelector({
+  animation: makeSelectPreviewAnimation(),
+});
+
+const withConnect = connect(mapStateToProps);
+
+export default compose(withConnect)(QuestionNarrator);

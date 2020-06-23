@@ -23,6 +23,7 @@ import {
   UPDATE_QUESTION_ERROR,
   TOGGLE_QUESTION_SETTINGS,
   UPDATE_QUESTION_SETTINGS,
+  UPDATE_PREVIEW_ANIMATION,
 } from './constants';
 
 import questionDataReducer from '../../components/QuestionData/reducer';
@@ -33,6 +34,7 @@ export const initialState = {
   questions: [],
   questionSettingsVisibility: false,
   selectedQuestion: 0,
+  previewAnimation: '',
   cache: {
     intervention: new Intervention('', ''),
     questions: [],
@@ -96,6 +98,9 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.questionSettingsVisibility = true;
         break;
 
+      case UPDATE_PREVIEW_ANIMATION:
+        draft.previewAnimation = action.payload.animation;
+        break;
       case SELECT_QUESTION:
         draft.selectedQuestion = action.payload;
         break;

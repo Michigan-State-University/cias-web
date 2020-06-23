@@ -35,4 +35,16 @@ export default defineMessages({
     id: `${scope}.newStep`,
     defaultMessage: '+ Add another block',
   },
+  shrug: {
+    id: `${scope}.shrug`,
+    defaultMessage: 'Shrug',
+  },
+  wave: {
+    id: `${scope}.wave`,
+    defaultMessage: 'Wave',
+  },
+  bow: {
+    id: `${scope}.bow`,
+    defaultMessage: 'Bow',
+  },
 });

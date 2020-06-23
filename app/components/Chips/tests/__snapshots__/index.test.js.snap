@@ -5,6 +5,8 @@ exports[`<Chips /> should match the snapshot 1`] = `
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  max-height: 30px;
+  margin-right: 10px;
 }
 
 .c1 {

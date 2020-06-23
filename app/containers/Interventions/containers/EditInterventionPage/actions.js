@@ -24,6 +24,7 @@ import {
   GET_QUESTIONS_ERROR,
   TOGGLE_QUESTION_SETTINGS,
   UPDATE_QUESTION_SETTINGS,
+  UPDATE_PREVIEW_ANIMATION,
 } from './constants';
 
 const toggleQuestionSettings = index =>
@@ -72,6 +73,9 @@ const getQuestionsSuccess = questions =>
   actionBuilder(GET_QUESTIONS_SUCCESS, { questions });
 const getQuestionsError = () => actionBuilder(GET_QUESTIONS_ERROR, {});
 
+const updatePreviewAnimation = animation =>
+  actionBuilder(UPDATE_PREVIEW_ANIMATION, { animation });
+
 export {
   toggleQuestionSettings,
   selectQuestion,
@@ -97,4 +101,5 @@ export {
   getQuestionsRequest,
   getQuestionsSuccess,
   getQuestionsError,
+  updatePreviewAnimation,
 };
