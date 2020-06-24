@@ -11,6 +11,7 @@ import {
   StyledCollapseLabel,
   StyledCollapseContainer,
   StyledCollapseContent,
+  Content,
 } from './styled';
 
 const CollapseLabel = ({ isOpened, onToggle, label, color }) => {
@@ -53,7 +54,7 @@ const CollapseContent = ({ child, isOpened }) => {
   return (
     hidden && (
       <StyledCollapseContent isOpened={transition && isOpened}>
-        {child}
+        <Content>{child}</Content>
       </StyledCollapseContent>
     )
   );

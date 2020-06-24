@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
+import snakeCase from 'lodash/snakeCase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -60,7 +61,7 @@ const DefaultSettings = ({
       updateNarratorPreviewAnimation('');
       updateAnimation(index, null, id);
     } else {
-      updateNarratorPreviewAnimation(value);
+      updateNarratorPreviewAnimation(snakeCase(value.toLowerCase()));
       updateAnimation(index, value, id);
     }
   };

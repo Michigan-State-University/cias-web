@@ -47,4 +47,20 @@ export default defineMessages({
     id: `${scope}.bow`,
     defaultMessage: 'Bow',
   },
+  pointRight: {
+    id: `${scope}.pointRight`,
+    defaultMessage: 'Point right',
+  },
+  pointLeft: {
+    id: `${scope}.pointLeft`,
+    defaultMessage: 'Point left',
+  },
+  pointUp: {
+    id: `${scope}.pointUp`,
+    defaultMessage: 'Point up',
+  },
+  pointDown: {
+    id: `${scope}.pointDown`,
+    defaultMessage: 'Point down',
+  },
 });

@@ -22,17 +22,15 @@ const QuestionNarrator = ({ animation }) => {
   const animationRef = useRef(null);
 
   const fetchJSON = async () => {
-    const animName = animation.toLowerCase();
-
-    if (!loadedAnimations.find(anim => anim.name === animName)) {
-      const data = await import(`./Animations/${animName}.json`);
+    if (!loadedAnimations.find(anim => anim.name === animation)) {
+      const data = await import(`./Animations/${animation}.json`);
       setLoadedAnimations([
         ...loadedAnimations,
         {
-          name: animName,
-          path: `./Animations/${animName}.json`,
+          name: animation,
+          path: `./Animations/${animation}.json`,
           animationData: data,
-          pause: getPause(animName),
+          pause: getPause(animation),
         },
       ]);
     }
@@ -51,7 +49,7 @@ const QuestionNarrator = ({ animation }) => {
   }, [animation]);
 
   const currentAnimation = loadedAnimations.find(
-    anim => anim.name === animation.toLowerCase(),
+    anim => anim.name === animation,
   );
 
   const defaultOptions = {

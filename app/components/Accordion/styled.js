@@ -20,9 +20,15 @@ export const StyledCollapseLabel = styled.div`
 export const StyledCollapseContent = styled.div`
   transition: all 390ms ease;
   display: flex;
-  flex-wrap: wrap;
   ${({ isOpened }) =>
     isOpened
       ? { height: 300, opacity: 1, marginTop: 15 }
       : { height: 0, opacity: 0, marginTop: 0 }};
+`;
+
+export const Content = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  height: fit-content;
+  margin-top: -12px;
 `;

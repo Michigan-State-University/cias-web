@@ -7,6 +7,7 @@ export const StyledChips = styled.div`
   width: fit-content;
   max-height: 30px;
   margin-right: 10px;
+  margin-top: 12px;
   ${padding};
   ${style};
 `;
