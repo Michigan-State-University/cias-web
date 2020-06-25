@@ -14,7 +14,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage/Loadable';
+import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage';
 import CreateInterventionPage from 'containers/Interventions/containers/EditInterventionPage/temporary';
 import rootSaga from 'global/sagas/rootSaga';
 
