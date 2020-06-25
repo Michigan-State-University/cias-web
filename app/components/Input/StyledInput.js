@@ -15,6 +15,8 @@ const StyledInput = props => {
     } else if (!props.validator) setValue(targetValue);
   };
 
+  const calculateWidthFromText = text => text * 8 + 25;
+
   return (
     <Input
       {...props}
@@ -25,6 +27,13 @@ const StyledInput = props => {
       placeholder={props.placeholder}
       keyboard={props.keyboard}
       transparent
+      {...(props.autoSize
+        ? {
+            width: `${calculateWidthFromText(
+              value ? value.length : props.placeholder.length,
+            )}px`,
+          }
+        : {})}
     />
   );
 };
@@ -36,10 +45,12 @@ StyledInput.propTypes = {
   validator: PropTypes.func,
   textAlign: PropTypes.string,
   onBlur: PropTypes.func,
+  autoSize: PropTypes.bool,
 };
 
 StyledInput.defaultProps = {
   keyboard: 'text',
+  autoSize: false,
 };
 
 export { StyledInput };
