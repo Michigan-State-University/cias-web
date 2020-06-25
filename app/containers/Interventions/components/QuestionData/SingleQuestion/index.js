@@ -13,10 +13,12 @@ import Box from 'components/Box';
 import HoverableBox from 'components/Box/HoverableBox';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Text from 'components/Text';
+import { BadgeInput } from 'components/Input/BadgeInput';
 import radio from 'assets/svg/radio-button.svg';
 import bin from 'assets/svg/bin-red.svg';
 
-import { themeColors } from 'theme';
+import { numericValidator } from 'utils/validators';
+import { themeColors, colors } from 'theme';
 import messages from './messages';
 import { ADD, UPDATE, REMOVE } from './constants';
 
@@ -47,18 +49,62 @@ const SingleQuestion = ({
           >
             <Row justify="between" align="center">
               <Row>
-                <Img src={radio} mr={16} />
-                <ApprovableInput
-                  mr={8}
-                  type="singleline"
-                  placeholder={formatMessage(messages.placeholder)}
-                  value={value.payload}
-                  onCheck={newTitle =>
-                    updateAnswer(index, { ...value, payload: newTitle })
-                  }
-                />
+                <Column justify="center">
+                  <Img src={radio} mr={16} />
+                </Column>
+                <Column>
+                  <Row mb={10}>
+                    <ApprovableInput
+                      mr={8}
+                      type="singleline"
+                      placeholder={formatMessage(messages.placeholder)}
+                      value={value.payload}
+                      onCheck={newTitle =>
+                        updateAnswer(index, { ...value, payload: newTitle })
+                      }
+                    />
+                  </Row>
+                  <Row>
+                    <BadgeInput
+                      px={0}
+                      py={12}
+                      mx={10}
+                      textAlign="center"
+                      placeholder={formatMessage(
+                        messages.variableNamePlaceholder,
+                      )}
+                      value={value.variable.name}
+                      color={colors.jungleGreen}
+                      onBlur={val =>
+                        updateAnswer(index, {
+                          ...value,
+                          variable: { ...value.variable, name: val },
+                        })
+                      }
+                    />
+                    <BadgeInput
+                      px={0}
+                      py={12}
+                      textAlign="center"
+                      validator={numericValidator}
+                      keyboard="tel"
+                      placeholder={formatMessage(
+                        messages.variableScorePlaceholder,
+                      )}
+                      value={value.variable.value}
+                      color={colors.azure}
+                      onBlur={val =>
+                        updateAnswer(index, {
+                          ...value,
+                          variable: { ...value.variable, value: val },
+                        })
+                      }
+                    />
+                  </Row>
+                </Column>
               </Row>
-              <Row>
+
+              <Column align="end">
                 <Box
                   onClick={() => removeAnswer(index)}
                   hidden={hovered !== index}
@@ -66,7 +112,7 @@ const SingleQuestion = ({
                 >
                   <Img src={bin} mr={16} />
                 </Box>
-              </Row>
+              </Column>
             </Row>
           </HoverableBox>
         </Row>
