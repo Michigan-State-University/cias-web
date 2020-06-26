@@ -13,6 +13,7 @@ const colors = {
   vividPink: '#FF5FC0',
   blueHaze: '#CED3E4',
   greyishBlue: '#B0BAC9',
+  black: '#000000',
 };
 
 const themeColors = {

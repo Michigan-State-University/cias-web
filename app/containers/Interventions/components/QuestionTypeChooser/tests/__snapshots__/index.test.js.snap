@@ -44,8 +44,10 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 10px;
+  width: 100%;
   position: absolute;
   display: none;
+  margin-top: 15px;
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
 }
@@ -64,6 +66,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 10px;
+  width: 100%;
   padding: 8px;
 }
 
@@ -99,7 +102,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
-.c14 {
+.c15 {
   width: auto;
   height: auto;
   display: block;
@@ -109,7 +112,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   border-radius: 10px;
 }
 
-.c14:hover {
+.c15:hover {
   background-color: #E9F1FB;
 }
 
@@ -223,7 +226,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   opacity: 1;
 }
 
-.c15 {
+.c14 {
   border-radius: 50%;
   background-color: #CED3E4;
   display: -webkit-box;
@@ -245,9 +248,32 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   opacity: 1;
 }
 
+.c16 {
+  border-radius: 50%;
+  background-color: #107969;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  margin-right: 18px;
+  background-color: rgba(16,121,105,1);
+  opacity: 1;
+}
+
 <div
   className="c0"
   display="none"
+  width="100%"
 >
   <div
     className="c1"
@@ -265,6 +291,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   >
     <div
       className="c4"
+      width="100%"
     >
       <div
         className="c5"
@@ -390,14 +417,14 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
           </div>
         </div>
         <div
-          className="c14"
+          className="c6"
           onClick={[Function]}
         >
           <div
             className="c7"
           >
             <div
-              className="c15"
+              className="c14"
               opacity={1}
               size="10px"
             />
@@ -406,6 +433,26 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               fontWeight="medium"
             >
               Information
+            </p>
+          </div>
+        </div>
+        <div
+          className="c15"
+          onClick={[Function]}
+        >
+          <div
+            className="c7"
+          >
+            <div
+              className="c16"
+              opacity={1}
+              size="10px"
+            />
+            <p
+              className="c9"
+              fontWeight="medium"
+            >
+              Url
             </p>
           </div>
         </div>

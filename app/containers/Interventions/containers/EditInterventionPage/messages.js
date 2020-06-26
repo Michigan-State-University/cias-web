@@ -9,7 +9,7 @@ export default defineMessages({
   },
   addScreen: {
     id: `${scope}.addScreen`,
-    defaultMessage: 'Add new question',
+    defaultMessage: '+ Add new question',
   },
   newQuestionMessage: {
     id: `${scope}.newQuestionMessage`,

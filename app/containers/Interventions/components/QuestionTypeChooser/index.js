@@ -21,6 +21,8 @@ const QuestionTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
     borderRadius={10}
     shadow={boxShadows[1]}
     position="absolute"
+    width="100%"
+    mt={15}
     {...(visible ? {} : { display: 'none' })}
   >
     <Box
@@ -34,7 +36,7 @@ const QuestionTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
       </Text>
     </Box>
     <Row>
-      <Box padding={8}>
+      <Box padding={8} width="100%">
         <Column>
           {QuestionTypes.map((questionType, i) => (
             <HoverableBox

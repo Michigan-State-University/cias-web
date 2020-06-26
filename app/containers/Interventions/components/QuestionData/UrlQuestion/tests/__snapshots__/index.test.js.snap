@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UrlQuestion /> should match the snapshot 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-bottom: 4px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  background-color: rgba(233,241,251,1);
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  display: none;
+}
+
+.c3 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 10px;
+  margin-right: 9px;
+  height: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c3:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+<div
+  className="c0"
+  width="100%"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    >
+      <textarea
+        className="c3"
+        height="auto"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="Paste here a web page link to show it to a respondend."
+        rows="3"
+        value="www.google.com"
+      />
+    </div>
+    <div
+      className="c4"
+      hidden={true}
+    >
+      <div
+        className="c5"
+        height="100%"
+      >
+        <div
+          className="c6"
+        >
+          <img
+            className="c7"
+            onMouseDown={[Function]}
+            src="IMAGE_MOCK"
+          />
+        </div>
+        <div
+          className="c1"
+        >
+          <img
+            className="c7"
+            src="IMAGE_MOCK"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

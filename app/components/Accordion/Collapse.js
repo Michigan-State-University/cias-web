@@ -34,17 +34,17 @@ CollapseLabel.propTypes = {
 };
 
 const CollapseContent = ({ child, isOpened }) => {
-  const [hidden, setHidden] = useState(isOpened);
+  const [show, setShow] = useState(isOpened);
   const [transition, setTransition] = useState(false);
 
   useLayoutEffect(() => {
     if (!isOpened) {
       setTransition(false);
       setTimeout(() => {
-        setHidden(false);
+        setShow(false);
       }, 400);
     } else {
-      setHidden(true);
+      setShow(true);
       setTimeout(() => {
         setTransition(true);
       }, 10);
@@ -52,7 +52,7 @@ const CollapseContent = ({ child, isOpened }) => {
   }, [isOpened]);
 
   return (
-    hidden && (
+    show && (
       <StyledCollapseContent isOpened={transition && isOpened}>
         <Content>{child}</Content>
       </StyledCollapseContent>

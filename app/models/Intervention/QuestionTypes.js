@@ -43,6 +43,12 @@ export const informationQuestion = new QuestionType(
   colors.blueHaze,
 );
 
+export const urlQuestion = new QuestionType(
+  'Question::Url',
+  'Url',
+  colors.jungleGreen,
+);
+
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
@@ -51,4 +57,5 @@ export const QuestionTypes = [
   gridQuestion,
   visualAnalogueScaleQuestion,
   informationQuestion,
+  urlQuestion,
 ];

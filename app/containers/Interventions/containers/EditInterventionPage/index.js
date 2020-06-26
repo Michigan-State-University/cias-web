@@ -28,7 +28,6 @@ import { borders, themeColors, colors } from 'theme';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { PlusCircle } from './styled';
 import {
   makeSelectIntervention,
   makeSelectQuestions,
@@ -138,16 +137,26 @@ function EditInterventionPage({
                 </Row>
               ))}
               <Row>
-                <Box position="relative">
-                  <HoverableBox px={21} py={14} onClick={toggleTypeChooser}>
-                    <Box>
-                      <Row align="center">
-                        <PlusCircle mr={12} />
-                        <Text fontWeight="bold" color={themeColors.secondary}>
-                          {formatMessage(messages.addScreen)}
-                        </Text>
-                      </Row>
-                    </Box>
+                <Box position="relative" width="100%">
+                  <HoverableBox
+                    px={21}
+                    py={14}
+                    onClick={toggleTypeChooser}
+                    display="flex"
+                    justify="center"
+                    align="center"
+                    border={`${borders.borderWidth} dashed ${
+                      colors.greyishBlue
+                    }`}
+                    borderRadius={5}
+                    height={80}
+                    width="100%"
+                  >
+                    <Row align="center">
+                      <Text fontWeight="bold" color={themeColors.secondary}>
+                        {formatMessage(messages.addScreen)}
+                      </Text>
+                    </Row>
                   </HoverableBox>
                   <QuestionTypeChooser
                     visible={typeChooserOpen}

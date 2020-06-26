@@ -10,6 +10,7 @@ import Row from 'components/Row';
 import H1 from 'components/H1';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Question from 'models/Intervention/Question';
+import NoContent from 'components/NoContent';
 
 import { colors } from 'theme';
 import { NumberCircle, BackgroundBox, StyledHoverableBox } from './styled';
@@ -93,7 +94,7 @@ const renderQuestionDetails = ({
     );
   }
 
-  return null;
+  return <NoContent />;
 };
 
 renderQuestionDetails.propTypes = {

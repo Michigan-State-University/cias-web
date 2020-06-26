@@ -15,10 +15,11 @@ const TextArea = styled.textarea`
   }
   ${margin};
   ${layout};
-  ${props =>
-    props.transparent
-      ? { border: 'none', backgroundColor: 'transparent' }
-      : {}};
+  ${({ transparent }) =>
+    transparent && {
+      backgroundColor: 'transparent',
+      border: `${borders.borderWidth} ${borders.borderStyle} transparent`,
+    }};
 `;
 
 TextArea.propTypes = {
