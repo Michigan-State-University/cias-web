@@ -19,4 +19,8 @@ export default defineMessages({
     id: `${scope}.variableScorePlaceholder`,
     defaultMessage: 'Score value...',
   },
+  value: {
+    id: `${scope}.value`,
+    defaultMessage: 'Value:',
+  },
 });

@@ -9,7 +9,7 @@ const propsToCssMapper = {
 const text = props => ({
   fontSize: props.fontSize || '',
   fontWeight: propsToCssMapper[props.fontWeight] || '',
-  fontStyle: props.pb || '',
+  fontStyle: props.fontStyle || '',
   color: props.color || '',
   opacity: props.opacity || '',
 });

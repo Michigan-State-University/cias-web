@@ -11,7 +11,7 @@ const singleQuestionReducer = (question, payload) => {
       const answerCount = question.body.data.length;
 
       question.body.data.push({
-        variable: { name: '', value: '1' },
+        variable: { value: '' },
         payload: `Answer ${answerCount + 1}`,
       });
       return question;

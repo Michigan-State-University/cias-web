@@ -64,24 +64,10 @@ const SingleQuestion = ({
                       }
                     />
                   </Row>
-                  <Row>
-                    <BadgeInput
-                      px={0}
-                      py={12}
-                      mx={10}
-                      textAlign="center"
-                      placeholder={formatMessage(
-                        messages.variableNamePlaceholder,
-                      )}
-                      value={value.variable.name}
-                      color={colors.jungleGreen}
-                      onBlur={val =>
-                        updateAnswer(index, {
-                          ...value,
-                          variable: { ...value.variable, name: val },
-                        })
-                      }
-                    />
+                  <Row align="center">
+                    <Text mr={8} fontWeight="bold" color={colors.azure}>
+                      {formatMessage(messages.value)}
+                    </Text>
                     <BadgeInput
                       px={0}
                       py={12}
