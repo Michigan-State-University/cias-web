@@ -26,9 +26,16 @@ const makeSelectIsLoggedIn = () =>
     authState => authState.isLoggedIn,
   );
 
+const makeSelectUser = () =>
+  createSelector(
+    selectAuth,
+    authState => authState.user,
+  );
+
 export {
   makeSelectAuth,
   makeSelectToken,
   makeSelectIsLoggedIn,
   makeSelectHeaders,
+  makeSelectUser,
 };

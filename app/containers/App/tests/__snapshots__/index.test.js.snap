@@ -7,7 +7,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       component={[Function]}
       exact={true}
       path="/"
-      protected={true}
+      protectedRoute={true}
     />
     <Memo(ConnectFunction)
       component={[Function]}
@@ -18,7 +18,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       component={[Function]}
       exact={true}
       path="/interventions/:id/edit"
-      protected={true}
+      protectedRoute={true}
     />
     <Memo(ConnectFunction)
       component={
@@ -32,7 +32,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       }
       exact={true}
       path="/interventions/create"
-      protected={true}
+      protectedRoute={true}
     />
     <Memo(ConnectFunction)
       component={[Function]}

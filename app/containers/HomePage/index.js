@@ -6,13 +6,25 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
+import { injectIntl } from 'react-intl';
+import { Link } from 'react-router-dom';
+import { Button } from 'components/Button';
 import messages from './messages';
+import { HomePageContainer } from './styled';
 
-export default function HomePage() {
+export function HomePage({ intl }) {
   return (
-    <h1>
-      <FormattedMessage {...messages.header} />
-    </h1>
+    <HomePageContainer>
+      <Link to="/interventions/create">
+        <Button title={intl.formatMessage(messages.createIntervation)} />
+      </Link>
+    </HomePageContainer>
   );
 }
+
+HomePage.propTypes = {
+  intl: PropTypes.object,
+};
+
+export default injectIntl(HomePage);
