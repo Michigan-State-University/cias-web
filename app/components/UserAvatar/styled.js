@@ -11,6 +11,7 @@ export const AvatarStyled = styled.div`
   align-items: center;
   margin: 0 10px;
   position: relative;
+  cursor: pointer;
 `;
 
 export const DropDownContent = styled.div`
@@ -24,6 +25,7 @@ export const DropDownContent = styled.div`
   border-radius: 10px;
   div {
     padding: 5px 0;
+    cursor: pointer;
     border-bottom: 1px solid black;
     &:last-child {
       border-bottom: none;
