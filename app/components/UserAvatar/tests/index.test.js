@@ -15,12 +15,8 @@ import UserAvatar from '../index';
 describe('<UserAvatar />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<UserAvatar />);
+    render(<UserAvatar firstName="test" lastName="test" />);
     expect(spy).not.toHaveBeenCalled();
-  });
-
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
   });
 
   /**

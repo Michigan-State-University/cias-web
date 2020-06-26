@@ -19,14 +19,10 @@ describe('<Navbar />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <Navbar />
+        <Navbar user={{ firstName: 'test', lastName: 'test' }} />
       </IntlProvider>,
     );
     expect(spy).not.toHaveBeenCalled();
-  });
-
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
   });
 
   /**
@@ -39,7 +35,7 @@ describe('<Navbar />', () => {
       container: { firstChild },
     } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <Navbar />
+        <Navbar user={{ firstName: 'test', lastName: 'test' }} />
       </IntlProvider>,
     );
     expect(firstChild).toMatchSnapshot();
