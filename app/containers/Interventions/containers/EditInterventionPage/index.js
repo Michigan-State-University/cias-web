@@ -20,6 +20,7 @@ import Question from 'models/Intervention/Question';
 import cross from 'assets/svg/cross.svg';
 
 import { borders, themeColors, colors, elements } from 'theme';
+
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -35,6 +36,7 @@ import QuestionListItem from '../../components/QuestionListItem';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import instantiateEmptyQuestion from './utils';
+
 function EditInterventionPage({
   intl: { formatMessage },
   intervention,

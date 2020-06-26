@@ -1,11 +1,24 @@
 import {
   gridQuestion,
   visualAnalogueScaleQuestion,
+  multiQuestion,
+  singleQuestion,
 } from 'models/Intervention/QuestionTypes';
 import Question from 'models/Intervention/Question';
 
 const instantiateEmptyQuestion = (message, type) => {
   switch (type) {
+    case singleQuestion.id:
+      return new Question(message, type, {
+        variable: { name: '' },
+        data: [{ payload: '', value: '' }],
+      });
+
+    case multiQuestion.id:
+      return new Question(message, type, {
+        data: [{ payload: '', variable: { name: '', value: '' } }],
+      });
+
     case gridQuestion.id:
       return new Question(message, type, {
         data: [
@@ -26,9 +39,9 @@ const instantiateEmptyQuestion = (message, type) => {
 
     case visualAnalogueScaleQuestion.id:
       return new Question(message, type, {
+        variable: { name: '' },
         data: [
           {
-            variable: { name: '', value: '1' },
             payload: { start_value: '', end_value: '' },
           },
         ],
@@ -36,7 +49,8 @@ const instantiateEmptyQuestion = (message, type) => {
 
     default:
       return new Question(message, type, {
-        data: [{ variable: { name: '', value: '1' }, payload: '' }],
+        variable: { name: '' },
+        data: [{ payload: '' }],
       });
   }
 };

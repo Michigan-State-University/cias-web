@@ -35,9 +35,23 @@ const SingleQuestion = ({
 }) => {
   const [hovered, setHovered] = useState(-1);
 
+  const { data, variable } = selectedQuestion.body;
+
   return (
-    <Column>
-      {selectedQuestion.body.data.map((value, index) => (
+    <Column mt={10}>
+      <BadgeInput
+        px={0}
+        py={12}
+        mb={10}
+        textAlign="center"
+        validator={numericValidator}
+        keyboard="tel"
+        placeholder={formatMessage(messages.variableNamePlaceholder)}
+        value={variable}
+        color={colors.jungleGreen}
+        onBlur={val => val}
+      />
+      {data.map((value, index) => (
         <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox
             px={21}
