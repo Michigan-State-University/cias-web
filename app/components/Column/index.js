@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { mediaQuery } from 'theme';
-import { flex, layout } from '../BaseComponentStyles';
+import { flex, layout, margin } from '../BaseComponentStyles';
 
 const maxNumberOfColumns = 12;
 
@@ -42,6 +42,7 @@ const Column = styled.div`
 
   ${flex};
   ${layout};
+  ${margin};
 `;
 
 Column.propTypes = {

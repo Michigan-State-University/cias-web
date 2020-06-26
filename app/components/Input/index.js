@@ -15,13 +15,11 @@ const Input = styled.input.attrs(props => ({ type: props.keyboard }))`
   ${margin};
   ${layout};
   ${padding};
-  ${props =>
-    props.transparent
-      ? {
-          border: `${borders.borderWidth} solid transparent`,
-          backgroundColor: 'transparent',
-        }
-      : {}};
+  ${({ transparent }) =>
+    transparent && {
+      backgroundColor: 'transparent',
+      border: `${borders.borderWidth} ${borders.borderStyle} transparent`,
+    }};
   ${props => (props.textAlign ? { textAlign: props.textAlign } : {})};
 `;
 

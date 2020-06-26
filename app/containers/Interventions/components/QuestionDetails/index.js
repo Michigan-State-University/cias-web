@@ -85,7 +85,7 @@ const renderQuestionDetails = ({
                 <QuestionImage />
               </Row>
             )}
-            <Row mt={44}>
+            <Row>
               <QuestionData />
             </Row>
           </Column>

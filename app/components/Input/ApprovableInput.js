@@ -59,8 +59,11 @@ const ApprovableInput = props => {
         )}
       </Column>
       <Box hidden={!focused}>
-        <Column height="100%">
-          <Row mb={4}>
+        <Column
+          height="100%"
+          {...props.type !== 'multiline' && { justify: 'between' }}
+        >
+          <Row {...props.type === 'multiline' && { mb: 4 }}>
             <Img
               src={check}
               onMouseDown={() => props.onCheck(value)}
