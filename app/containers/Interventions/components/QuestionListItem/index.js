@@ -6,6 +6,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { injectIntl } from 'react-intl';
 import { FormattedMessage } from 'react-intl';
 
 import Row from 'components/Row';
@@ -16,6 +17,8 @@ import Comment from 'components/Text/Comment';
 import Column from 'components/Column';
 import gear from 'assets/svg/gear.svg';
 import gearSelected from 'assets/svg/gear-selected.svg';
+
+import globalMessages from 'global/i18n/globalMessages';
 
 import Box from 'components/Box';
 import { colors } from 'theme';
@@ -43,6 +46,7 @@ const QuestionListItem = ({
   settingsVisibility,
   toggleSettings,
   removeQuestion,
+  intl: { formatMessage },
   copyQuestion,
   interventionId,
 }) => {
@@ -106,7 +110,9 @@ const QuestionListItem = ({
             <H3 mb={6}>{title}</H3>
           </Row>
           <Row>
-            <Comment fontWeight="bold">{type}</Comment>
+            <Comment fontWeight="bold">
+              {formatMessage(globalMessages.questionTypes[type])}
+            </Comment>
           </Row>
         </Column>
         <Column xs={1}>
@@ -126,6 +132,7 @@ QuestionListItem.propTypes = {
   settingsVisibility: PropTypes.bool,
   toggleSettings: PropTypes.func,
   copyQuestion: PropTypes.func,
+  intl: PropTypes.object,
   removeQuestion: PropTypes.func,
   interventionId: PropTypes.string,
 };
@@ -146,4 +153,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(QuestionListItem);
+export default injectIntl(compose(withConnect)(QuestionListItem));

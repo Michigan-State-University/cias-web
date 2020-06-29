@@ -10,6 +10,7 @@ import HoverableBox from 'components/Box/HoverableBox';
 
 import { QuestionTypes } from 'models/Intervention/QuestionTypes';
 import { colors, boxShadows, borders, fontSizes } from 'theme';
+import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
 import { DotCircle } from './styled';
 
@@ -47,7 +48,9 @@ const QuestionTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
             >
               <Row align="center">
                 <DotCircle mr={18} bg={questionType.color} />
-                <Text fontWeight="medium">{questionType.name}</Text>
+                <Text fontWeight="medium">
+                  {formatMessage(globalMessages.questionTypes[questionType.id])}
+                </Text>
               </Row>
             </HoverableBox>
           ))}
