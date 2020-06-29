@@ -13,6 +13,7 @@ export const UPDATE_QUESTION_VIDEO =
   'app/EditInterventionPage/UPDATE_QUESTION_VIDEO';
 export const UPDATE_QUESTION_DATA =
   'app/EditInterventionPage/UPDATE_QUESTION_DATA';
+export const DELETE_QUESTION = 'app/EditInterventionPage/DELETE_QUESTION';
 
 export const UPDATE_QUESTION_SETTINGS =
   'app/EditInterventionPage/UPDATE_QUESTION_SETTINGS';

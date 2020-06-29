@@ -14,6 +14,7 @@ const colors = {
   blueHaze: '#CED3E4',
   greyishBlue: '#B0BAC9',
   black: '#000000',
+  flamingo: '#EF462F',
 };
 
 const themeColors = {

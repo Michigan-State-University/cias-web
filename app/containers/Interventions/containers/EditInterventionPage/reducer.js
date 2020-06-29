@@ -24,6 +24,7 @@ import {
   TOGGLE_QUESTION_SETTINGS,
   UPDATE_QUESTION_SETTINGS,
   UPDATE_PREVIEW_ANIMATION,
+  DELETE_QUESTION,
 } from './constants';
 
 import questionDataReducer from '../../components/QuestionData/reducer';
@@ -152,6 +153,19 @@ const editInterventionPageReducer = (state = initialState, action) =>
             action.payload,
           ),
         };
+        break;
+
+      case DELETE_QUESTION:
+        draft.questions = draft.questions.filter(
+          question => question.id !== action.payload.questionId,
+        );
+        // if (draft.selectedQuestion === 0 && draft.questions.length > 0)
+        //   draft.selectedQuestion = 1;
+        // else if (
+        //   draft.selectedQuestion === draft.questions.length - 1 &&
+        //   draft.questions.length > 0
+        // )
+        //   draft.selectedQuestion -= 1;
         break;
 
       case UPDATE_QUESTION_SUCCESS:

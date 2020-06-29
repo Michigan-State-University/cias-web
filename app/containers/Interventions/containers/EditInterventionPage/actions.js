@@ -25,6 +25,7 @@ import {
   TOGGLE_QUESTION_SETTINGS,
   UPDATE_QUESTION_SETTINGS,
   UPDATE_PREVIEW_ANIMATION,
+  DELETE_QUESTION,
 } from './constants';
 
 const toggleQuestionSettings = index =>
@@ -43,6 +44,8 @@ const updateQuestionVideo = videoUrl =>
 const updateQuestionData = data => actionBuilder(UPDATE_QUESTION_DATA, data);
 const updateQuestionSettings = data =>
   actionBuilder(UPDATE_QUESTION_SETTINGS, data);
+const deleteQuestion = questionId =>
+  actionBuilder(DELETE_QUESTION, { questionId });
 
 const createInterventionRequest = () =>
   actionBuilder(CREATE_INTERVENTION_REQUEST, {});
@@ -102,4 +105,5 @@ export {
   getQuestionsSuccess,
   getQuestionsError,
   updatePreviewAnimation,
+  deleteQuestion,
 };

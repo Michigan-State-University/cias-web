@@ -18,7 +18,7 @@ const NoContent = ({ image, text, alt }) => (
     display="flex"
     justify="center"
     align="center"
-    borderRadius={0}
+    borderRadius="0"
   >
     <Column align="center">
       <Img src={image} alt={alt} />

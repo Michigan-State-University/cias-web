@@ -19,11 +19,6 @@ import Text from 'components/Text';
 import Question from 'models/Intervention/Question';
 import cross from 'assets/svg/cross.svg';
 
-import {
-  gridQuestion,
-  visualAnalogueScaleQuestion,
-} from 'models/Intervention/QuestionTypes';
-
 import { borders, themeColors, colors } from 'theme';
 import reducer from './reducer';
 import saga from './saga';
@@ -39,44 +34,7 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
-
-const instantiateEmptyQuestion = (message, type) => {
-  switch (type) {
-    case gridQuestion.id:
-      return new Question(message, type, {
-        data: [
-          {
-            payload: {
-              rows: [
-                { variable: { name: '' }, payload: '' },
-                { variable: { name: '' }, payload: '' },
-              ],
-              columns: [
-                { variable: { value: '1' }, payload: '' },
-                { variable: { value: '1' }, payload: '' },
-              ],
-            },
-          },
-        ],
-      });
-
-    case visualAnalogueScaleQuestion.id:
-      return new Question(message, type, {
-        data: [
-          {
-            variable: { name: '', value: '1' },
-            payload: { start_value: '', end_value: '' },
-          },
-        ],
-      });
-
-    default:
-      return new Question(message, type, {
-        data: [{ variable: { name: '', value: '1' }, payload: '' }],
-      });
-  }
-};
-
+import instantiateEmptyQuestion from './utils';
 function EditInterventionPage({
   intl: { formatMessage },
   intervention,

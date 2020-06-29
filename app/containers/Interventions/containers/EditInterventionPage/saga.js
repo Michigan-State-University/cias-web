@@ -13,6 +13,7 @@ import {
   DELETE_QUESTION_IMAGE,
   UPDATE_QUESTION_VIDEO,
   UPDATE_QUESTION_SETTINGS,
+  DELETE_QUESTION,
 } from './constants';
 
 import {
@@ -172,6 +173,23 @@ function* updateQuestion() {
   }
 }
 
+function* deleteQuestion({ payload: { questionId } }) {
+  const intervention = yield select(makeSelectIntervention());
+
+  const requestURL = `v1/interventions/${
+    intervention.id
+  }/questions/${questionId}`;
+
+  try {
+    const response = yield axios.delete(requestURL);
+
+    if (response.status === 200) console.log('e');
+    else yield put(updateQuestionError(error));
+  } catch (error) {
+    yield put(updateQuestionError(error));
+  }
+}
+
 export default function* editInterventionPageSaga() {
   yield all([
     yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention),
@@ -184,5 +202,6 @@ export default function* editInterventionPageSaga() {
     yield takeLatest(DELETE_QUESTION_IMAGE, deleteQuestionImage),
     yield takeLatest(UPDATE_QUESTION_VIDEO, updateQuestion),
     yield takeLatest(UPDATE_QUESTION_SETTINGS, updateQuestion),
+    yield takeLatest(DELETE_QUESTION, deleteQuestion),
   ]);
 }
