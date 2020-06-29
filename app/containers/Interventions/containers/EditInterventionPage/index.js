@@ -19,7 +19,7 @@ import Text from 'components/Text';
 import Question from 'models/Intervention/Question';
 import cross from 'assets/svg/cross.svg';
 
-import { borders, themeColors, colors } from 'theme';
+import { borders, themeColors, colors, elements } from 'theme';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -69,7 +69,7 @@ function EditInterventionPage({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
-      <Row height="100vh" filled>
+      <Row height={`calc(100vh - ${elements.navbarHeight}px)`} filled>
         <Column sm={4}>
           <Box
             height="100%"
@@ -91,8 +91,8 @@ function EditInterventionPage({
                     index={index}
                     selectedQuestionIndex={selectedQuestion}
                     questionsLength={questions.length}
-                    // isSelected={selectedQuestion === index}
                     question={question}
+                    interventionId={params.id}
                   />
                 </Row>
               ))}

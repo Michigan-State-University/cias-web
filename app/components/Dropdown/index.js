@@ -11,25 +11,22 @@ import { borders, colors } from 'theme';
 import { ContentContainer, ImageContainer, StyledRow } from './styled';
 
 const Dropdown = props => {
-  const { options, ...restProps } = props;
+  const { options, id, ...restProps } = props;
   const [open, setOpen] = useState(false);
 
   const dropdown = useRef(null);
 
   const handleClick = event => {
-    const { target, stopPropagation } = event;
-    // stopPropagation()
-    if (dropdown.current && !dropdown.current.contains(target)) setOpen(false);
-    else {
-      console.log('eee');
-      setOpen(!open);
+    const { target } = event;
+    if (dropdown.current && !dropdown.current.contains(target)) {
+      setOpen(false);
     }
   };
 
   useEffect(() => {
-    window.addEventListener('click', handleClick, false);
+    window.addEventListener('click', handleClick);
     return () => {
-      window.removeEventListener('click', handleClick, false);
+      window.removeEventListener('click', handleClick);
     };
   }, []);
 
@@ -44,7 +41,13 @@ const Dropdown = props => {
       width="100%"
       {...restProps}
     >
-      <ImageContainer ref={dropdown}>
+      <ImageContainer
+        ref={dropdown}
+        key={`el-img-${id}`}
+        onClick={() => {
+          setOpen(!open);
+        }}
+      >
         <Img src={dots} alt="dots" />
       </ImageContainer>
       {open && (
@@ -71,6 +74,7 @@ const Dropdown = props => {
 
 Dropdown.propTypes = {
   options: PropTypes.array,
+  id: PropTypes.string,
 };
 
 export default Dropdown;

@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import set from 'lodash/set';
+import uniqueId from 'lodash/uniqueId';
 import cloneDeep from 'lodash/cloneDeep';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import { withRouter } from 'react-router-dom';
 
 import Row from 'components/Row';
 import Img from 'components/Img';
@@ -25,12 +26,13 @@ import {
   selectQuestion,
   toggleQuestionSettings,
   deleteQuestion,
-  createQuestionRequest,
+  copyQuestionRequest,
 } from '../../containers/EditInterventionPage/actions';
 
 import { makeSelectQuestionSettingsVisibility } from '../../containers/EditInterventionPage/selectors';
 
 import messages from './messages';
+import getIndex from './utils';
 
 const QuestionListItem = ({
   question,
@@ -41,57 +43,48 @@ const QuestionListItem = ({
   settingsVisibility,
   toggleSettings,
   removeQuestion,
-  createQuestion,
-  match: { params },
+  copyQuestion,
+  interventionId,
 }) => {
   const isSelected = selectedQuestionIndex === index;
   const gearIcon = settingsVisibility && isSelected ? gearSelected : gear;
   const { type, title, id } = question;
 
-  const getIndex = () => {
-    console.log({ selectedQuestionIndex, questionsLength });
-    if (selectedQuestionIndex === 0 && questionsLength > 1) {
-      return selectedQuestionIndex + 1;
-    } else if (
-      selectedQuestionIndex === questionsLength - 1 &&
-      questionsLength > 1
-    ) {
-      console.log('asdasdads');
-      return selectedQuestionIndex - 1;
-    } else if (questionsLength === 1) {
-      return 0;
-    } else {
-      return selectedQuestionIndex + 1;
-    }
-  };
-
-  const deletion = event => {
+  const handleDelete = event => {
     event.stopPropagation();
-    const newIndex = getIndex();
+    const newIndex = getIndex(selectedQuestionIndex, questionsLength);
     onSelect(newIndex);
-    removeQuestion(id);
+    removeQuestion({ questionId: id, interventionId });
   };
 
-  const copy = event => {
-    event.stopPropagation();
+  const handleCopy = () => {
     const copied = cloneDeep(question);
-    createQuestion(copied, params.id);
+    set(copied, 'id', uniqueId());
+    copyQuestion({ copied, questionId: id, interventionId });
   };
 
   const options = [
     {
       id: 'delete',
       label: <FormattedMessage {...messages.delete} />,
-      action: deletion,
+      action: handleDelete,
       color: colors.flamingo,
     },
     {
       id: 'copy',
       label: <FormattedMessage {...messages.copy} />,
-      action: copy,
+      action: handleCopy,
       color: colors.black,
     },
   ];
+
+  const onGearClick = () => {
+    toggleSettings(index);
+  };
+
+  const onChangeItem = () => {
+    onSelect(index);
+  };
 
   return (
     <ToggleableBox
@@ -99,22 +92,12 @@ const QuestionListItem = ({
       py={14}
       mb={36}
       width="100%"
-      onClick={() => {
-        console.log('11111');
-        onSelect(index);
-      }}
+      onClick={onChangeItem}
       isSelected={isSelected}
     >
       <Row>
         <Column xs={1}>
-          <Box
-            onClick={event => {
-              console.log('2222');
-              event.stopPropagation();
-              toggleSettings(index);
-              onSelect(index);
-            }}
-          >
+          <Box onClick={onGearClick}>
             <Img src={gearIcon} />
           </Box>
         </Column>
@@ -127,7 +110,7 @@ const QuestionListItem = ({
           </Row>
         </Column>
         <Column xs={1}>
-          <Dropdown options={options} />
+          <Dropdown options={options} id={id} />
         </Column>
       </Row>
     </ToggleableBox>
@@ -138,9 +121,13 @@ QuestionListItem.propTypes = {
   question: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
-  isSelected: PropTypes.bool,
+  selectedQuestionIndex: PropTypes.number,
+  questionsLength: PropTypes.number,
   settingsVisibility: PropTypes.bool,
   toggleSettings: PropTypes.func,
+  copyQuestion: PropTypes.func,
+  removeQuestion: PropTypes.func,
+  interventionId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -151,7 +138,7 @@ const mapDispatchToProps = {
   onSelect: selectQuestion,
   toggleSettings: toggleQuestionSettings,
   removeQuestion: deleteQuestion,
-  createQuestion: createQuestionRequest,
+  copyQuestion: copyQuestionRequest,
 };
 
 const withConnect = connect(
@@ -159,7 +146,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(
-  withConnect,
-  withRouter,
-)(QuestionListItem);
+export default compose(withConnect)(QuestionListItem);

@@ -25,6 +25,9 @@ import {
   UPDATE_QUESTION_SETTINGS,
   UPDATE_PREVIEW_ANIMATION,
   DELETE_QUESTION,
+  DELETE_QUESTION_SUCCESS,
+  COPY_QUESTION,
+  DELETE_QUESTION_ERROR,
 } from './constants';
 
 import questionDataReducer from '../../components/QuestionData/reducer';
@@ -155,10 +158,24 @@ const editInterventionPageReducer = (state = initialState, action) =>
         };
         break;
 
+      case DELETE_QUESTION_SUCCESS:
+        draft.cache.questions = draft.cache.questions.filter(
+          question => question.id !== action.payload.questionId,
+        );
+        break;
+
+      case DELETE_QUESTION_ERROR:
+        draft.questions = cloneDeep(draft.cache.questions);
+        break;
+
       case DELETE_QUESTION:
         draft.questions = draft.questions.filter(
           question => question.id !== action.payload.questionId,
         );
+        break;
+
+      case COPY_QUESTION:
+        draft.questions.push(action.payload.copied);
         break;
 
       case UPDATE_QUESTION_SUCCESS:

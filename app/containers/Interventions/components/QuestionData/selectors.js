@@ -4,10 +4,7 @@ import { selectEditInterventionPageDomain } from '../../containers/EditIntervent
 const makeSelectSelectedQuestionType = () =>
   createSelector(
     selectEditInterventionPageDomain,
-    substate =>
-      substate.questions.length > 0
-        ? substate.questions[substate.selectedQuestion].type
-        : null,
+    substate => substate.questions[substate.selectedQuestion].type,
   );
 
 export { makeSelectSelectedQuestionType };

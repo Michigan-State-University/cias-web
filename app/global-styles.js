@@ -9,8 +9,7 @@ import BoldItalic from 'assets/fonts/DMSans-BoldItalic.ttf';
 import { colors } from './theme/colors';
 
 const GlobalStyle = createGlobalStyle`
-  html,
-  body {
+  html {
     height: 100%;
     width: 100%;
     color: ${themeColors.text};
@@ -57,22 +56,25 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'DM Sans', sans-serif;
+    color: ${themeColors.text};
+    min-height: 100%;
+    max-width: 100%;
+    display: flex;
+    flex: 1;
+    align-items: stretch;
   }
 
   #app {
     background-color: ${colors.white};
     min-height: 100%;
     min-width: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   p,
   label {
     line-height: 1.5em;
-  }
-
-  #app {
-    display: flex;
-    flex-direction: column;
   }
 `;
 

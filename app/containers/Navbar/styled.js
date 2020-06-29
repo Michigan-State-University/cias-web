@@ -9,6 +9,7 @@ export const NavbarStyled = styled.div`
   box-shadow: 0px 4px 10px rgba(227, 238, 251, 0.8);
   display: flex;
   align-items: flex-end;
+  z-index: 10;
 `;
 
 export const RightPanel = styled.div`

@@ -14,6 +14,7 @@ import {
   UPDATE_QUESTION_VIDEO,
   UPDATE_QUESTION_SETTINGS,
   DELETE_QUESTION,
+  COPY_QUESTION,
 } from './constants';
 
 import {
@@ -29,6 +30,8 @@ import {
   updateQuestionSuccess,
   updateQuestionError,
   updateQuestionImage,
+  deleteQuestionsSucccess,
+  deleteQuestionError,
 } from './actions';
 
 import {
@@ -173,20 +176,29 @@ function* updateQuestion() {
   }
 }
 
-function* deleteQuestion({ payload: { questionId } }) {
-  const intervention = yield select(makeSelectIntervention());
-
-  const requestURL = `v1/interventions/${
-    intervention.id
-  }/questions/${questionId}`;
+function* deleteQuestion({ payload: { questionId, interventionId } }) {
+  const requestURL = `v1/interventions/${interventionId}/questions/${questionId}`;
 
   try {
-    const response = yield axios.delete(requestURL);
+    yield axios.delete(requestURL);
 
-    if (response.status === 200) console.log('e');
-    else yield put(updateQuestionError(error));
+    yield put(deleteQuestionsSucccess(questionId));
   } catch (error) {
-    yield put(updateQuestionError(error));
+    yield put(deleteQuestionError(error));
+  }
+}
+
+function* copyQuestion({ payload: { questionId, interventionId } }) {
+  const requestURL = `v1/interventions/${interventionId}/questions/${questionId}/clone`;
+
+  try {
+    const response = yield axios.get(requestURL);
+
+    const copiedQuestion = mapQuestionToStateObject(response.data.data);
+
+    yield put(createQuestionSuccess(copiedQuestion));
+  } catch (error) {
+    yield put(createQuestionError(error));
   }
 }
 
@@ -203,5 +215,6 @@ export default function* editInterventionPageSaga() {
     yield takeLatest(UPDATE_QUESTION_VIDEO, updateQuestion),
     yield takeLatest(UPDATE_QUESTION_SETTINGS, updateQuestion),
     yield takeLatest(DELETE_QUESTION, deleteQuestion),
+    yield takeLatest(COPY_QUESTION, copyQuestion),
   ]);
 }

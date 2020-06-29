@@ -14,7 +14,6 @@ import { getPause } from './helpers';
 
 const lottieStyles = {
   margin: 'none',
-  marginLeft: '50px',
 };
 
 const QuestionNarrator = ({ animation }) => {

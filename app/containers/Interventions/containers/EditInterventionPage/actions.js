@@ -26,6 +26,9 @@ import {
   UPDATE_QUESTION_SETTINGS,
   UPDATE_PREVIEW_ANIMATION,
   DELETE_QUESTION,
+  DELETE_QUESTION_SUCCESS,
+  COPY_QUESTION,
+  DELETE_QUESTION_ERROR,
 } from './constants';
 
 const toggleQuestionSettings = index =>
@@ -44,8 +47,13 @@ const updateQuestionVideo = videoUrl =>
 const updateQuestionData = data => actionBuilder(UPDATE_QUESTION_DATA, data);
 const updateQuestionSettings = data =>
   actionBuilder(UPDATE_QUESTION_SETTINGS, data);
-const deleteQuestion = questionId =>
-  actionBuilder(DELETE_QUESTION, { questionId });
+const deleteQuestion = payload => actionBuilder(DELETE_QUESTION, payload);
+const copyQuestionRequest = payload => actionBuilder(COPY_QUESTION, payload);
+
+const deleteQuestionsSucccess = questionId =>
+  actionBuilder(DELETE_QUESTION_SUCCESS, { questionId });
+const deleteQuestionError = error =>
+  actionBuilder(DELETE_QUESTION_ERROR, { error });
 
 const createInterventionRequest = () =>
   actionBuilder(CREATE_INTERVENTION_REQUEST, {});
@@ -106,4 +114,7 @@ export {
   getQuestionsError,
   updatePreviewAnimation,
   deleteQuestion,
+  deleteQuestionsSucccess,
+  copyQuestionRequest,
+  deleteQuestionError,
 };

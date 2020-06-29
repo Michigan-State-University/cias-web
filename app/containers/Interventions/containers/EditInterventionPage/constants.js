@@ -14,9 +14,15 @@ export const UPDATE_QUESTION_VIDEO =
 export const UPDATE_QUESTION_DATA =
   'app/EditInterventionPage/UPDATE_QUESTION_DATA';
 export const DELETE_QUESTION = 'app/EditInterventionPage/DELETE_QUESTION';
+export const COPY_QUESTION = 'app/EditInterventionPage/COPY_QUESTION';
 
 export const UPDATE_QUESTION_SETTINGS =
   'app/EditInterventionPage/UPDATE_QUESTION_SETTINGS';
+
+export const DELETE_QUESTION_SUCCESS =
+  'app/EditInterventionPage/DELETE_QUESTION_SUCCESS';
+export const DELETE_QUESTION_ERROR =
+  'app/EditInterventionPage/DELETE_QUESTION_ERROR';
 
 export const CREATE_INTERVENTION_REQUEST =
   'app/EditInterventionPage/CREATE_INTERVENTION_REQUEST';

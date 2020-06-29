@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Dropdown /> should match the snapshot 1`] = `
+.c2 {
+  width: auto;
+  height: auto;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 0;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 8px;
+  margin-left: 8px;
+}
+
+<div
+  className="c0"
+  display="flex"
+  height="100%"
+  width="100%"
+>
+  <div
+    className="c1"
+    onClick={[Function]}
+  >
+    <img
+      alt="dots"
+      className="c2"
+      src="IMAGE_MOCK"
+    />
+  </div>
+</div>
+`;
