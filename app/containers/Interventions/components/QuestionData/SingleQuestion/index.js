@@ -23,6 +23,8 @@ import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
 
+import SingleQuestionVariable from './variable';
+
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
@@ -40,20 +42,9 @@ const SingleQuestion = ({
 
   return (
     <Column mt={10}>
-      <BadgeInput
-        px={0}
-        py={12}
-        mb={10}
-        textAlign="center"
-        validator={numericValidator}
-        keyboard="tel"
-        placeholder={formatMessage(
-          globalMessages.variables.variableNamePlaceholder,
-        )}
-        value={variable}
-        color={colors.jungleGreen}
-        onBlur={val => val}
-      />
+      <Box mb={10}>
+        <SingleQuestionVariable variableName={variable.name} />
+      </Box>
       {data.map((value, index) => (
         <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox
@@ -94,12 +85,12 @@ const SingleQuestion = ({
                       placeholder={formatMessage(
                         globalMessages.variables.variableScorePlaceholder,
                       )}
-                      value={value.variable.value}
+                      value={value.value}
                       color={colors.azure}
                       onBlur={val =>
                         updateAnswer(index, {
                           ...value,
-                          variable: { ...value.variable, value: val },
+                          value: val,
                         })
                       }
                     />

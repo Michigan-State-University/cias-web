@@ -6,8 +6,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl } from 'react-intl';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 
 import Row from 'components/Row';
 import Img from 'components/Img';
