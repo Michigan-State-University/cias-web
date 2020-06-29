@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { render } from 'react-testing-library';
-// import 'jest-dom/extend-expect'; // add some helpful assertions
+import 'jest-styled-components';
 
 import UserAvatar from '../index';
 
@@ -24,10 +24,11 @@ describe('<UserAvatar />', () => {
    *
    * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
    */
-  it.skip('Should render and match the snapshot', () => {
+  it('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
-    } = render(<UserAvatar />);
+    } = render(<UserAvatar firstName="test" lastName="test" />);
+
     expect(firstChild).toMatchSnapshot();
   });
 });

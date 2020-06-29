@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserAvatar /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #107969;
+  color: white;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 0 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+<div
+  class="c0"
+>
+  <div>
+    TT
+  </div>
+</div>
+`;
