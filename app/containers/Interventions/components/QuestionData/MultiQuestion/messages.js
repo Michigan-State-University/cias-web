@@ -11,12 +11,4 @@ export default defineMessages({
     id: `${scope}.addAnswer`,
     defaultMessage: 'Add new answer',
   },
-  variableNamePlaceholder: {
-    id: `${scope}.variableNamePlaceholder`,
-    defaultMessage: 'Variable name...',
-  },
-  variableScorePlaceholder: {
-    id: `${scope}.variableScorePlaceholder`,
-    defaultMessage: 'Score value...',
-  },
 });

@@ -1,4 +1,4 @@
-import { ADD, UPDATE, REMOVE } from './constants';
+import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const singleQuestionReducer = (question, payload) => {
@@ -15,7 +15,7 @@ const singleQuestionReducer = (question, payload) => {
         payload: `Answer ${answerCount + 1}`,
       });
       return question;
-    case UPDATE:
+    case UPDATE_ANSWER:
       const { index, value } = payload.data;
       question.body.data[index] = value;
       return question;

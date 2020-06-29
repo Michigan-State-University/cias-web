@@ -19,6 +19,7 @@ import checkbox from 'assets/svg/checkbox.svg';
 
 import { numericValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
+import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
 import { ADD, UPDATE, REMOVE } from './constants';
 
@@ -71,7 +72,7 @@ const MultiQuestion = ({
                       mx={10}
                       textAlign="center"
                       placeholder={formatMessage(
-                        messages.variableNamePlaceholder,
+                        globalMessages.variables.variableNamePlaceholder,
                       )}
                       value={value.variable.name}
                       color={colors.jungleGreen}
@@ -89,7 +90,7 @@ const MultiQuestion = ({
                       validator={numericValidator}
                       keyboard="tel"
                       placeholder={formatMessage(
-                        messages.variableScorePlaceholder,
+                        globalMessages.variables.variableScorePlaceholder,
                       )}
                       value={value.variable.value}
                       color={colors.azure}

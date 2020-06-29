@@ -19,8 +19,9 @@ import bin from 'assets/svg/bin-red.svg';
 
 import { numericValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
+import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
-import { ADD, UPDATE, REMOVE } from './constants';
+import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
 
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
@@ -46,7 +47,9 @@ const SingleQuestion = ({
         textAlign="center"
         validator={numericValidator}
         keyboard="tel"
-        placeholder={formatMessage(messages.variableNamePlaceholder)}
+        placeholder={formatMessage(
+          globalMessages.variables.variableNamePlaceholder,
+        )}
         value={variable}
         color={colors.jungleGreen}
         onBlur={val => val}
@@ -80,7 +83,7 @@ const SingleQuestion = ({
                   </Row>
                   <Row align="center">
                     <Text mr={8} fontWeight="bold" color={colors.azure}>
-                      {formatMessage(messages.value)}
+                      {formatMessage(globalMessages.variables.value)}
                     </Text>
                     <BadgeInput
                       px={0}
@@ -89,7 +92,7 @@ const SingleQuestion = ({
                       validator={numericValidator}
                       keyboard="tel"
                       placeholder={formatMessage(
-                        messages.variableScorePlaceholder,
+                        globalMessages.variables.variableScorePlaceholder,
                       )}
                       value={value.variable.value}
                       color={colors.azure}
@@ -145,13 +148,13 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
 });
 
-const mapDispatchToProps = dispatch => ({
-  addAnswer: () => dispatch(updateQuestionData({ type: ADD })),
+const mapDispatchToProps = {
+  addAnswer: () => updateQuestionData({ type: ADD }),
   updateAnswer: (index, value) =>
-    dispatch(updateQuestionData({ type: UPDATE, data: { index, value } })),
-  removeAnswer: index =>
-    dispatch(updateQuestionData({ type: REMOVE, data: { index } })),
-});
+    updateQuestionData({ type: UPDATE_ANSWER, data: { index, value } }),
+
+  removeAnswer: index => updateQuestionData({ type: REMOVE, data: { index } }),
+};
 
 const withConnect = connect(
   mapStateToProps,
