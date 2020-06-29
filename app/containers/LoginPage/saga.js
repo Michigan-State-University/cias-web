@@ -25,7 +25,8 @@ function* login({ payload: { username, password } }) {
     yield put(loginSuccess());
     yield put(push('/'));
   } catch (error) {
-    yield put(loginError(error));
+    const errorMessage = error.response.data.errors[0];
+    yield put(loginError(errorMessage));
   }
 }
 

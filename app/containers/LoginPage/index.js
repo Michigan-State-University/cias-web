@@ -20,19 +20,24 @@ import Column from 'components/Column';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import makeSelectLoginPage, { makeSelectFormData } from './selectors';
+import ErrorAlert from 'components/ErrorAlert';
+import makeSelectLoginPage from './selectors';
 import { loginRequest } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 
-export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
+export function LoginPage(props) {
+  const {
+    onLogin,
+    loginPage: { error, loading, formData },
+    intl: { formatMessage },
+  } = props;
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
   const [username, setUsername] = useState(formData.username);
   const [password, setPassword] = useState(formData.password);
-
   return (
     <Fragment>
       <Helmet>
@@ -57,9 +62,11 @@ export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
                 onChange={event => setPassword(event.target.value)}
               />
               <Button
+                loading={loading}
                 title={formatMessage(messages.loginButton)}
                 onClick={() => onLogin(username, password)}
               />
+              {error && <ErrorAlert errorText={error} />}
             </Column>
           </Card>
         </Column>
@@ -71,15 +78,18 @@ export function LoginPage({ onLogin, formData, intl: { formatMessage } }) {
 LoginPage.propTypes = {
   onLogin: PropTypes.func,
   intl: PropTypes.object,
-  formData: PropTypes.shape({
-    username: PropTypes.string,
-    password: PropTypes.string,
+  loginPage: PropTypes.shape({
+    errors: PropTypes.string,
+    loading: PropTypes.bool,
+    formData: PropTypes.shape({
+      username: PropTypes.string,
+      password: PropTypes.string,
+    }),
   }),
 };
 
 const mapStateToProps = createStructuredSelector({
   loginPage: makeSelectLoginPage(),
-  formData: makeSelectFormData(),
 });
 
 const mapDispatchToProps = dispatch => ({

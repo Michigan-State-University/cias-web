@@ -14,6 +14,7 @@ exports[`<Button /> should match the snapshot 1`] = `
 <button
   className="c0"
   color="primary"
+  disabled={false}
   title="test"
   width="100%"
 >
