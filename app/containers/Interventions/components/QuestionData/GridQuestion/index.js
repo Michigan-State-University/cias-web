@@ -12,12 +12,15 @@ import Question from 'models/Intervention/Question';
 import Box from 'components/Box';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
+import { BadgeInput } from 'components/Input/BadgeInput';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
 import { StyledInput } from 'components/Input/StyledInput';
 import radio from 'assets/svg/radio-button.svg';
 import bin from 'assets/svg/bin-red.svg';
 
-import { themeColors } from 'theme';
+import globalMessages from 'global/i18n/globalMessages';
+import { themeColors, colors } from 'theme';
+import { numericValidator } from 'utils/validators';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
 import messages from './messages';
 import {
@@ -90,6 +93,25 @@ const GridQuestion = ({
                       >
                         <Img src={bin} hidden={hoveredColumn !== columnIndex} />
                       </Box>
+                      <BadgeInput
+                        px={0}
+                        py={12}
+                        mb={8}
+                        textAlign="center"
+                        validator={numericValidator}
+                        keyboard="tel"
+                        placeholder={formatMessage(
+                          globalMessages.variables.variableScorePlaceholder,
+                        )}
+                        value={column.variable.value}
+                        color={colors.azure}
+                        onBlur={val =>
+                          updateColumn(
+                            { variable: { value: val } },
+                            columnIndex,
+                          )
+                        }
+                      />
                       <StyledInput
                         width={110}
                         px={0}
@@ -99,7 +121,9 @@ const GridQuestion = ({
                           index: columnIndex + 1,
                         })}
                         value={column.payload}
-                        onBlur={value => updateColumn(value, columnIndex)}
+                        onBlur={value =>
+                          updateColumn({ payload: value }, columnIndex)
+                        }
                       />
                     </Column>
                   </TH>
@@ -118,25 +142,42 @@ const GridQuestion = ({
                   >
                     <Row align="center">
                       <Box
-                        px={8}
-                        mr={16}
-                        width={35}
+                        width={60}
                         onClick={() => deleteRow(rowIndex)}
                         clickable
                       >
                         <Img src={bin} hidden={hoveredRow !== rowIndex} />
                       </Box>
-                      <StyledInput
-                        width={110}
-                        px={0}
-                        py={12}
-                        textAlign="center"
-                        placeholder={formatMessage(messages.rowPlaceholder, {
-                          index: rowIndex + 1,
-                        })}
-                        value={row.payload}
-                        onBlur={value => updateRow(value, rowIndex)}
-                      />
+                      <Row align="center" justify="between" width="100%">
+                        <BadgeInput
+                          px={0}
+                          py={12}
+                          mr={8}
+                          textAlign="center"
+                          keyboard="tel"
+                          placeholder={formatMessage(
+                            globalMessages.variables.variableNamePlaceholder,
+                          )}
+                          value={row.variable.name}
+                          color={colors.jungleGreen}
+                          onBlur={val =>
+                            updateRow({ variable: { name: val } }, rowIndex)
+                          }
+                        />
+                        <StyledInput
+                          width={110}
+                          px={0}
+                          py={12}
+                          textAlign="center"
+                          placeholder={formatMessage(messages.rowPlaceholder, {
+                            index: rowIndex + 1,
+                          })}
+                          value={row.payload}
+                          onBlur={value =>
+                            updateRow({ payload: value }, rowIndex)
+                          }
+                        />
+                      </Row>
                     </Row>
                   </TH>
                   {columns.map((_, columnIndex) => (
@@ -191,11 +232,11 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   addRow: () => updateQuestionData({ type: ADD_ROW, data: {} }),
   addColumn: () => updateQuestionData({ type: ADD_COLUMN, data: {} }),
-  updateRow: (payload, index) =>
-    updateQuestionData({ type: UPDATE_ROW, data: { payload, index } }),
+  updateRow: (value, index) =>
+    updateQuestionData({ type: UPDATE_ROW, data: { value, index } }),
 
-  updateColumn: (payload, index) =>
-    updateQuestionData({ type: UPDATE_COLUMN, data: { payload, index } }),
+  updateColumn: (value, index) =>
+    updateQuestionData({ type: UPDATE_COLUMN, data: { value, index } }),
 
   deleteRow: index => updateQuestionData({ type: DELETE_ROW, data: { index } }),
   deleteColumn: index =>

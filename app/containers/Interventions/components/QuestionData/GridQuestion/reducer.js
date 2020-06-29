@@ -19,7 +19,7 @@ const gridQuestionReducer = (question, payload) => {
 
     case ADD_COLUMN:
       question.body.data[0].payload.columns.push({
-        variable: { value: '1' },
+        variable: { value: '' },
         payload: '',
       });
       return question;
@@ -27,14 +27,14 @@ const gridQuestionReducer = (question, payload) => {
     case UPDATE_COLUMN:
       question.body.data[0].payload.columns[payload.data.index] = {
         ...question.body.data[0].payload.columns[payload.data.index],
-        payload: payload.data.payload,
+        ...payload.data.value,
       };
       return question;
 
     case UPDATE_ROW:
       question.body.data[0].payload.rows[payload.data.index] = {
         ...question.body.data[0].payload.rows[payload.data.index],
-        payload: payload.data.payload,
+        ...payload.data.value,
       };
       return question;
 
