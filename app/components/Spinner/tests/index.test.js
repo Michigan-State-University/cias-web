@@ -1,6 +1,6 @@
 /**
  *
- * Tests for ErrorAlert
+ * Tests for Spinner
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -10,19 +10,19 @@ import React from 'react';
 import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
-import ErrorAlert from '../index';
+import Spinner from '../index';
 
-describe('<ErrorAlert />', () => {
+describe('<Spinner />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<ErrorAlert errorText="error" />);
+    render(<Spinner />);
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
-    } = render(<ErrorAlert errorText="error" />);
+    } = render(<Spinner />);
     expect(firstChild).toMatchSnapshot();
   });
 });

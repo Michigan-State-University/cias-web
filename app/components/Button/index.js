@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyledButton, Spinner } from './StyledButton';
+import Spinner from 'components/Spinner';
+import { StyledButton } from './StyledButton';
 
 const Button = ({ loading, ...props }) => (
   <StyledButton disabled={loading} {...props}>
