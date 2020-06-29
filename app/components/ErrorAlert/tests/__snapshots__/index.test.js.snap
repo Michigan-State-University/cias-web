@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ErrorAlert /> Should render and match the snapshot 1`] = `
+<div
+  class="styled__StyledAlert-mky144-0 iMEfMz"
+>
+  error
+</div>
+`;

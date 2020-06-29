@@ -8,6 +8,8 @@ describe('loginPageReducer', () => {
         username: '',
         password: '',
       },
+      loading: false,
+      error: '',
     };
   });
 
