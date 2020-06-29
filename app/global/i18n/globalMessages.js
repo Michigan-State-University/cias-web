@@ -16,6 +16,10 @@ export default defineMessages({
       id: `${scope}.value`,
       defaultMessage: 'Value:',
     },
+    emptyBadge: {
+      id: `${scope}.emptyBadge`,
+      defaultMessage: 'No assigned value',
+    },
   },
   questionTypes: {
     'Question::Single': {

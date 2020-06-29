@@ -14,12 +14,13 @@ import H3 from 'components/H3';
 import Dropdown from 'components/Dropdown';
 import Comment from 'components/Text/Comment';
 import Column from 'components/Column';
+import Badge from 'components/Badge';
+import Box from 'components/Box';
 import gear from 'assets/svg/gear.svg';
 import gearSelected from 'assets/svg/gear-selected.svg';
 
 import globalMessages from 'global/i18n/globalMessages';
-
-import Box from 'components/Box';
+import { hasObjectProperty } from 'utils/hasObjectProperty';
 import { colors } from 'theme';
 
 import { ToggleableBox } from './styled';
@@ -51,7 +52,7 @@ const QuestionListItem = ({
 }) => {
   const isSelected = selectedQuestionIndex === index;
   const gearIcon = settingsVisibility && isSelected ? gearSelected : gear;
-  const { type, title, id } = question;
+  const { type, title, id, body } = question;
 
   const handleDelete = event => {
     event.stopPropagation();
@@ -113,6 +114,14 @@ const QuestionListItem = ({
               {formatMessage(globalMessages.questionTypes[type])}
             </Comment>
           </Row>
+          {hasObjectProperty(body, 'variable') && (
+            <Row mt={5}>
+              <Badge>
+                {(body.variable.name && body.variable.name.trim()) ||
+                  formatMessage(globalMessages.variables.emptyBadge)}
+              </Badge>
+            </Row>
+          )}
         </Column>
         <Column xs={1}>
           <Dropdown options={options} id={id} />
