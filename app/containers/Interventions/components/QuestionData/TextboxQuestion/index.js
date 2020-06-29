@@ -9,10 +9,13 @@ import Row from 'components/Row';
 import Question from 'models/Intervention/Question';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
+import Column from 'components/Column';
 
 import { colors } from 'theme/colors';
 import messages from './messages';
 import { UPDATE_DATA } from './constants';
+
+import TextboxVariable from './variable';
 
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
@@ -24,16 +27,21 @@ const TextboxQuestion = ({
 }) => {
   const { variable, payload } = selectedQuestion.body.data[0];
   return (
-    <Box bg={colors.linkWater} width="100%" px={21} py={14}>
-      <Row>
-        <ApprovableInput
-          rows="5"
-          placeholder={formatMessage(messages.placeholder)}
-          value={payload}
-          onCheck={newTitle => updateAnswer({ variable, payload: newTitle })}
-        />
-      </Row>
-    </Box>
+    <Column mt={10}>
+      <Box mb={10}>
+        <TextboxVariable variableName={variable.name} />
+      </Box>
+      <Box bg={colors.linkWater} width="100%" px={21} py={14}>
+        <Row>
+          <ApprovableInput
+            rows="5"
+            placeholder={formatMessage(messages.placeholder)}
+            value={payload}
+            onCheck={newTitle => updateAnswer({ variable, payload: newTitle })}
+          />
+        </Row>
+      </Box>
+    </Column>
   );
 };
 
