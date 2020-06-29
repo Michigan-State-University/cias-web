@@ -412,7 +412,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               className="c9"
               fontWeight="medium"
             >
-              Visual Analogue Scale
+              Visual Analogue Scale Question
             </p>
           </div>
         </div>
@@ -432,7 +432,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               className="c9"
               fontWeight="medium"
             >
-              Information
+              Information Question
             </p>
           </div>
         </div>
@@ -452,7 +452,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               className="c9"
               fontWeight="medium"
             >
-              Url
+              Url Question
             </p>
           </div>
         </div>
