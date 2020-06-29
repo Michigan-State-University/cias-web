@@ -36,27 +36,59 @@ const QuestionListItem = ({
   question,
   index,
   onSelect,
-  isSelected,
+  selectedQuestionIndex,
+  questionsLength,
   settingsVisibility,
   toggleSettings,
   removeQuestion,
   createQuestion,
   match: { params },
 }) => {
+  const isSelected = selectedQuestionIndex === index;
   const gearIcon = settingsVisibility && isSelected ? gearSelected : gear;
   const { type, title, id } = question;
+
+  const getIndex = () => {
+    console.log({ selectedQuestionIndex, questionsLength });
+    if (selectedQuestionIndex === 0 && questionsLength > 1) {
+      return selectedQuestionIndex + 1;
+    } else if (
+      selectedQuestionIndex === questionsLength - 1 &&
+      questionsLength > 1
+    ) {
+      console.log('asdasdads');
+      return selectedQuestionIndex - 1;
+    } else if (questionsLength === 1) {
+      return 0;
+    } else {
+      return selectedQuestionIndex + 1;
+    }
+  };
+
+  const deletion = event => {
+    event.stopPropagation();
+    const newIndex = getIndex();
+    onSelect(newIndex);
+    removeQuestion(id);
+  };
+
+  const copy = event => {
+    event.stopPropagation();
+    const copied = cloneDeep(question);
+    createQuestion(copied, params.id);
+  };
 
   const options = [
     {
       id: 'delete',
       label: <FormattedMessage {...messages.delete} />,
-      action: () => removeQuestion(id),
+      action: deletion,
       color: colors.flamingo,
     },
     {
       id: 'copy',
       label: <FormattedMessage {...messages.copy} />,
-      action: () => createQuestion(cloneDeep(question), params.id),
+      action: copy,
       color: colors.black,
     },
   ];
@@ -67,13 +99,17 @@ const QuestionListItem = ({
       py={14}
       mb={36}
       width="100%"
-      onClick={() => onSelect(index)}
+      onClick={() => {
+        console.log('11111');
+        onSelect(index);
+      }}
       isSelected={isSelected}
     >
       <Row>
         <Column xs={1}>
           <Box
             onClick={event => {
+              console.log('2222');
               event.stopPropagation();
               toggleSettings(index);
               onSelect(index);
@@ -91,10 +127,7 @@ const QuestionListItem = ({
           </Row>
         </Column>
         <Column xs={1}>
-          <Dropdown
-            options={options}
-            additionalAction={() => onSelect(index)}
-          />
+          <Dropdown options={options} />
         </Column>
       </Row>
     </ToggleableBox>

@@ -89,7 +89,9 @@ function EditInterventionPage({
                 <Row key={question.id}>
                   <QuestionListItem
                     index={index}
-                    isSelected={selectedQuestion === index}
+                    selectedQuestionIndex={selectedQuestion}
+                    questionsLength={questions.length}
+                    // isSelected={selectedQuestion === index}
                     question={question}
                   />
                 </Row>

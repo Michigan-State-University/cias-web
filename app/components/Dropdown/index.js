@@ -11,15 +11,19 @@ import { borders, colors } from 'theme';
 import { ContentContainer, ImageContainer, StyledRow } from './styled';
 
 const Dropdown = props => {
-  const { options, additionalAction, ...restProps } = props;
+  const { options, ...restProps } = props;
   const [open, setOpen] = useState(false);
 
   const dropdown = useRef(null);
 
   const handleClick = event => {
-    const { target } = event;
-    if (!dropdown.current.contains(target)) setOpen(false);
-    else setOpen(true);
+    const { target, stopPropagation } = event;
+    // stopPropagation()
+    if (dropdown.current && !dropdown.current.contains(target)) setOpen(false);
+    else {
+      console.log('eee');
+      setOpen(!open);
+    }
   };
 
   useEffect(() => {
@@ -53,10 +57,7 @@ const Dropdown = props => {
                 borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
                   colors.greyishBlue
                 }`}
-                onClick={() => {
-                  option.action();
-                  additionalAction();
-                }}
+                onClick={option.action}
               >
                 <Comment color={option.color}>{option.label}</Comment>
               </StyledRow>
@@ -70,7 +71,6 @@ const Dropdown = props => {
 
 Dropdown.propTypes = {
   options: PropTypes.array,
-  additionalAction: PropTypes.func,
 };
 
 export default Dropdown;

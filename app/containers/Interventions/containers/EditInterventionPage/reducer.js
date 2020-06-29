@@ -159,13 +159,6 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.questions = draft.questions.filter(
           question => question.id !== action.payload.questionId,
         );
-        // if (draft.selectedQuestion === 0 && draft.questions.length > 0)
-        //   draft.selectedQuestion = 1;
-        // else if (
-        //   draft.selectedQuestion === draft.questions.length - 1 &&
-        //   draft.questions.length > 0
-        // )
-        //   draft.selectedQuestion -= 1;
         break;
 
       case UPDATE_QUESTION_SUCCESS:
