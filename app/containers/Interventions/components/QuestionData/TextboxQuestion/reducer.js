@@ -1,4 +1,4 @@
-import { UPDATE } from './constants';
+import { UPDATE, UPDATE_VARIABLE } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const textboxQuestionReducer = (question, payload) => {
@@ -6,6 +6,9 @@ const textboxQuestionReducer = (question, payload) => {
     case UPDATE:
       const { value } = payload.data;
       question.body.data[0] = value;
+      return question;
+    case UPDATE_VARIABLE:
+      question.body.variable.name = payload.data.name;
       return question;
     default:
       return question;
