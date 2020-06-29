@@ -13,7 +13,7 @@ import Box from 'components/Box';
 import { colors } from 'theme/colors';
 import { numericValidator } from 'utils/validators';
 import messages from './messages';
-import { UPDATE } from './constants';
+import { UPDATE_DATA } from './constants';
 
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
@@ -52,7 +52,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   updateAnswer: value =>
-    dispatch(updateQuestionData({ type: UPDATE, data: { value } })),
+    dispatch(updateQuestionData({ type: UPDATE_DATA, data: { value } })),
 });
 
 const withConnect = connect(

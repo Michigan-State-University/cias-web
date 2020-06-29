@@ -14,7 +14,7 @@ import Box from 'components/Box';
 import { colors } from 'theme/colors';
 import AppSlider from 'components/AppSlider';
 import messages from './messages';
-import { UPDATE } from './constants';
+import { UPDATE_DATA } from './constants';
 
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
@@ -77,7 +77,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   updateLabel: (value, label) =>
-    updateQuestionData({ type: UPDATE, data: { value, label } }),
+    updateQuestionData({ type: UPDATE_DATA, data: { value, label } }),
 };
 
 const withConnect = connect(
