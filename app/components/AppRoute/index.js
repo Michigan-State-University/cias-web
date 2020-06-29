@@ -4,24 +4,34 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import Navbar from 'containers/Navbar';
 import { makeSelectIsLoggedIn } from '../../global/reducers/auth';
 
 class AppRoute extends Route {
   render() {
-    if (this.props.protected && !this.props.isLoggedIn) {
+    const { protectedRoute, isLoggedIn } = this.props;
+    if (protectedRoute && !isLoggedIn) {
       return <Redirect to="/login" />;
     }
-
+    if (isLoggedIn) {
+      return (
+        <>
+          <Navbar />
+          <div style={{ marginTop: 70 }}>{super.render()}</div>
+        </>
+      );
+    }
     return super.render();
   }
 }
 
 AppRoute.propTypes = {
-  protected: PropTypes.bool,
+  protectedRoute: PropTypes.bool,
+  logOut: PropTypes.func,
 };
 
 AppRoute.defaultProps = {
-  protected: false,
+  protectedRoute: false,
 };
 
 const mapStateToProps = createStructuredSelector({

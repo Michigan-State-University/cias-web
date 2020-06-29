@@ -4,18 +4,24 @@
  *
  */
 import produce from 'immer';
-import { SET_IS_LOGGED_IN } from './constants';
+import { LOG_IN_USER, LOG_OUT } from './constants';
 
 export const initialState = {
   isLoggedIn: false,
+  user: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
-export const authReducer = (state = initialState, action) =>
+export const authReducer = (state = initialState, { type, payload }) =>
   produce(state, draft => {
-    switch (action.type) {
-      case SET_IS_LOGGED_IN:
-        draft.isLoggedIn = action.payload.isLoggedIn;
+    switch (type) {
+      case LOG_IN_USER:
+        draft.isLoggedIn = true;
+        draft.user = payload.user;
+        break;
+      case LOG_OUT:
+        draft.isLoggedIn = false;
+        draft.user = null;
         break;
     }
   });

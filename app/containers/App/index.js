@@ -27,19 +27,19 @@ function App() {
   return (
     <Fragment>
       <Switch>
-        <AppRoute exact path="/" component={HomePage} protected />
+        <AppRoute exact path="/" component={HomePage} protectedRoute />
         <AppRoute exact path="/login" component={LoginPage} />
         <AppRoute
           exact
           path="/interventions/:id/edit"
           component={EditInterventionPage}
-          protected
+          protectedRoute
         />
         <AppRoute
           exact
           path="/interventions/create"
           component={CreateInterventionPage}
-          protected
+          protectedRoute
         />
         <AppRoute component={NotFoundPage} />
       </Switch>
