@@ -18,7 +18,7 @@ import radio from 'assets/svg/radio-button.svg';
 import bin from 'assets/svg/bin-red.svg';
 
 import { numericValidator } from 'utils/validators';
-import { themeColors, colors } from 'theme';
+import { themeColors, colors, paddings } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
@@ -45,6 +45,7 @@ const SingleQuestion = ({
         px={0}
         py={12}
         mb={10}
+        ml={24}
         textAlign="center"
         keyboard="tel"
         placeholder={formatMessage(
@@ -82,7 +83,12 @@ const SingleQuestion = ({
                     />
                   </Row>
                   <Row align="center">
-                    <Text mr={8} fontWeight="bold" color={colors.azure}>
+                    <Text
+                      ml={paddings.small}
+                      mr={8}
+                      fontWeight="bold"
+                      color={colors.azure}
+                    >
                       {formatMessage(globalMessages.variables.value)}
                     </Text>
                     <BadgeInput
