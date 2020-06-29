@@ -4,10 +4,11 @@ import { Input } from './index';
 
 const StyledInput = props => {
   const [value, setValue] = useState(props.value);
+  const [hasFocus, setHasFocus] = useState(false);
 
   useEffect(() => {
     setValue(props.value);
-  }, [props.value]);
+  }, [props.value !== value && hasFocus === false]);
 
   const onInputChange = targetValue => {
     if (props.validator && props.validator(targetValue)) {
@@ -23,7 +24,12 @@ const StyledInput = props => {
       textAlign={props.textAlign}
       value={value}
       onChange={event => onInputChange(event.target.value)}
-      onBlur={() => props.onBlur(value)}
+      onBlur={() => {
+        setHasFocus(false);
+        props.onBlur(value);
+      }}
+      onMouse
+      onFocus={() => setHasFocus(true)}
       placeholder={props.placeholder}
       keyboard={props.keyboard}
       transparent

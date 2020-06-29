@@ -72,7 +72,8 @@ const createQuestionRequest = (question, id) =>
   actionBuilder(CREATE_QUESTION_REQUEST, { question, id });
 const createQuestionSuccess = question =>
   actionBuilder(CREATE_QUESTION_SUCCESS, { question });
-const createQuestionError = () => actionBuilder(CREATE_QUESTION_ERROR, {});
+const createQuestionError = error =>
+  actionBuilder(CREATE_QUESTION_ERROR, { error });
 
 const updateQuestionRequest = () => actionBuilder(UPDATE_QUESTION_REQUEST, {});
 const updateQuestionSuccess = question =>
@@ -82,7 +83,8 @@ const updateQuestionError = () => actionBuilder(UPDATE_QUESTION_ERROR, {});
 const getQuestionsRequest = id => actionBuilder(GET_QUESTIONS_REQUEST, { id });
 const getQuestionsSuccess = questions =>
   actionBuilder(GET_QUESTIONS_SUCCESS, { questions });
-const getQuestionsError = () => actionBuilder(GET_QUESTIONS_ERROR, {});
+const getQuestionsError = error =>
+  actionBuilder(GET_QUESTIONS_ERROR, { error });
 
 const updatePreviewAnimation = animation =>
   actionBuilder(UPDATE_PREVIEW_ANIMATION, { animation });

@@ -2,6 +2,9 @@ import { put, takeLatest, select, all } from 'redux-saga/effects';
 import axios from 'axios';
 import { push } from 'connected-react-router';
 
+import { getAllVariables } from 'models/Intervention/utils';
+import { hasDuplicates } from 'utils/hasDuplicates';
+
 import {
   CREATE_INTERVENTION_REQUEST,
   GET_INTERVENTION_REQUEST,
@@ -37,6 +40,7 @@ import {
 import {
   makeSelectIntervention,
   makeSelectSelectedQuestion,
+  makeSelectQuestions,
 } from './selectors';
 
 const mapQuestionToStateObject = question => ({
@@ -159,6 +163,14 @@ function* updateQuestion() {
   const intervention = yield select(makeSelectIntervention());
   const question = yield select(makeSelectSelectedQuestion());
 
+  const questions = yield select(makeSelectQuestions());
+
+  const variables = getAllVariables(questions).filter(
+    variable => variable && variable.trim(),
+  );
+
+  if (hasDuplicates(variables)) return yield put(updateQuestionError());
+
   const requestURL = `v1/interventions/${intervention.id}/questions/${
     question.id
   }`;
@@ -170,9 +182,9 @@ function* updateQuestion() {
 
     const responseQuestion = mapQuestionToStateObject(response.data.data);
 
-    yield put(updateQuestionSuccess(responseQuestion));
+    return yield put(updateQuestionSuccess(responseQuestion));
   } catch (error) {
-    yield put(updateQuestionError(error));
+    return yield put(updateQuestionError(error));
   }
 }
 
