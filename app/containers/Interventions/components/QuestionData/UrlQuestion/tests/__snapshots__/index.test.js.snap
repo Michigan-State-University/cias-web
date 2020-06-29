@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UrlQuestion /> should match the snapshot 1`] = `
-.c1 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -11,7 +11,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   flex-direction: row;
 }
 
-.c6 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -22,7 +22,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   margin-bottom: 4px;
 }
 
-.c2 {
+.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -33,7 +33,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c5 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -45,13 +45,13 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   height: 100%;
 }
 
-.c7 {
+.c9 {
   width: auto;
   height: auto;
   cursor: pointer;
 }
 
-.c0 {
+.c3 {
   width: auto;
   height: auto;
   display: block;
@@ -64,7 +64,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c4 {
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -72,7 +72,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   display: none;
 }
 
-.c3 {
+.c5 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -83,57 +83,106 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c3:focus {
+.c5:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
+.c2 {
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  width: 153px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  text-align: center;
+}
+
+.c2:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c1 {
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: rgba(16,121,105,0.1);
+  color: #107969;
+}
+
+.c1:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid transparent;
+}
+
 <div
   className="c0"
-  width="100%"
 >
+  <input
+    className="c1 c2"
+    color="#107969"
+    onBlur={[Function]}
+    onChange={[Function]}
+    opacity={0.1}
+    placeholder="Variable name..."
+    type="tel"
+    value=""
+    width="153px"
+  />
   <div
-    className="c1"
+    className="c3"
+    width="100%"
   >
     <div
-      className="c2"
-    >
-      <textarea
-        className="c3"
-        height="auto"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onFocus={[Function]}
-        placeholder="Paste here a web page link to show it to a respondend."
-        rows="3"
-        value="www.google.com"
-      />
-    </div>
-    <div
       className="c4"
-      hidden={true}
     >
       <div
-        className="c5"
-        height="100%"
+        className="c0"
+      >
+        <textarea
+          className="c5"
+          height="auto"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="Paste here a web page link to show it to a respondend."
+          rows="3"
+          value="www.google.com"
+        />
+      </div>
+      <div
+        className="c6"
+        hidden={true}
       >
         <div
-          className="c6"
+          className="c7"
+          height="100%"
         >
-          <img
-            className="c7"
-            onMouseDown={[Function]}
-            src="IMAGE_MOCK"
-          />
-        </div>
-        <div
-          className="c1"
-        >
-          <img
-            className="c7"
-            src="IMAGE_MOCK"
-          />
+          <div
+            className="c8"
+          >
+            <img
+              className="c9"
+              onMouseDown={[Function]}
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <div
+            className="c4"
+          >
+            <img
+              className="c9"
+              src="IMAGE_MOCK"
+            />
+          </div>
         </div>
       </div>
     </div>
