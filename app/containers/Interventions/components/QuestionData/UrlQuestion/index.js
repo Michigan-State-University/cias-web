@@ -6,19 +6,24 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
 import Row from 'components/Row';
+import Column from 'components/Column';
 import Question from 'models/Intervention/Question';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
+import { BadgeInput } from 'components/Input/BadgeInput';
+
 import { colors } from 'theme/colors';
 import { makeSelectSelectedQuestion } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import { updateQuestionData } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
+import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
-import { UPDATE_URL } from './constants';
+import { UPDATE_URL, UPDATE_VARIABLE } from './constants';
 
 const UrlQuestion = ({
   selectedQuestion,
   updateUrl,
+  updateVariable,
   intl: { formatMessage },
 }) => {
   const { variable, payload } = selectedQuestion.body.data[0];
@@ -26,17 +31,32 @@ const UrlQuestion = ({
   const updateLink = url => updateUrl({ variable, payload: url });
 
   return (
-    <Box bg={colors.linkWater} width="100%" px={21} py={14}>
-      <Row>
-        <ApprovableInput
-          rows="3"
-          placeholder={formatMessage(messages.placeholder)}
-          value={payload}
-          onCheck={updateLink}
-          type="multiline"
-        />
-      </Row>
-    </Box>
+    <Column>
+      <BadgeInput
+        px={0}
+        py={12}
+        mb={10}
+        textAlign="center"
+        keyboard="tel"
+        placeholder={formatMessage(
+          globalMessages.variables.variableNamePlaceholder,
+        )}
+        value={variable.name}
+        color={colors.jungleGreen}
+        onBlur={val => updateVariable(val)}
+      />
+      <Box bg={colors.linkWater} width="100%" px={21} py={14}>
+        <Row>
+          <ApprovableInput
+            rows="3"
+            placeholder={formatMessage(messages.placeholder)}
+            value={payload}
+            onCheck={updateLink}
+            type="multiline"
+          />
+        </Row>
+      </Box>
+    </Column>
   );
 };
 
@@ -44,6 +64,7 @@ UrlQuestion.propTypes = {
   selectedQuestion: PropTypes.shape(Question).isRequired,
   intl: PropTypes.object.isRequired,
   updateUrl: PropTypes.func.isRequired,
+  updateVariable: PropTypes.func.isRequired,
 };
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
@@ -51,6 +72,8 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   updateUrl: value => updateQuestionData({ type: UPDATE_URL, data: { value } }),
+  updateVariable: name =>
+    updateQuestionData({ type: UPDATE_VARIABLE, data: { name } }),
 };
 
 export const QuestionUrlWithIntl = injectIntl(UrlQuestion);
