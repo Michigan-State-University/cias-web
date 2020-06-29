@@ -114,7 +114,7 @@ const QuestionListItem = ({
               {formatMessage(globalMessages.questionTypes[type])}
             </Comment>
           </Row>
-          {hasObjectProperty(body, 'variable') && (
+          {body && hasObjectProperty(body, 'variable') && (
             <Row mt={5}>
               <Badge>
                 {(body.variable.name && body.variable.name.trim()) ||
