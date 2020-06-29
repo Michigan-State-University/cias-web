@@ -10,12 +10,12 @@ import Question from 'models/Intervention/Question';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
+import { BadgeInput } from 'components/Input/BadgeInput';
 
+import globalMessages from 'global/i18n/globalMessages';
 import { colors } from 'theme/colors';
 import messages from './messages';
-import { UPDATE_DATA } from './constants';
-
-import TextboxVariable from './variable';
+import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
 
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
@@ -23,14 +23,25 @@ import { updateQuestionData } from '../../../containers/EditInterventionPage/act
 const TextboxQuestion = ({
   selectedQuestion,
   updateAnswer,
+  updateVariable,
   intl: { formatMessage },
 }) => {
   const { variable, payload } = selectedQuestion.body.data[0];
   return (
     <Column mt={10}>
-      <Box mb={10}>
-        <TextboxVariable variableName={variable.name} />
-      </Box>
+      <BadgeInput
+        px={0}
+        py={12}
+        mb={10}
+        textAlign="center"
+        keyboard="tel"
+        placeholder={formatMessage(
+          globalMessages.variables.variableNamePlaceholder,
+        )}
+        value={variable.name}
+        color={colors.jungleGreen}
+        onBlur={val => updateVariable(val)}
+      />
       <Box bg={colors.linkWater} width="100%" px={21} py={14}>
         <Row>
           <ApprovableInput
@@ -49,6 +60,7 @@ TextboxQuestion.propTypes = {
   selectedQuestion: PropTypes.shape(Question).isRequired,
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
+  updateVariable: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -58,6 +70,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = dispatch => ({
   updateAnswer: value =>
     dispatch(updateQuestionData({ type: UPDATE_DATA, data: { value } })),
+  updateVariable: name =>
+    updateQuestionData({ type: UPDATE_VARIABLE, data: { name } }),
 });
 
 const withConnect = connect(

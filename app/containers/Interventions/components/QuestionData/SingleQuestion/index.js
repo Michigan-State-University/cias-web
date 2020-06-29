@@ -21,9 +21,7 @@ import { numericValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
-import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
-
-import SingleQuestionVariable from './variable';
+import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
 
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
@@ -34,6 +32,7 @@ const SingleQuestion = ({
   addAnswer,
   updateAnswer,
   removeAnswer,
+  updateVariable,
   intl: { formatMessage },
 }) => {
   const [hovered, setHovered] = useState(-1);
@@ -42,9 +41,19 @@ const SingleQuestion = ({
 
   return (
     <Column mt={10}>
-      <Box mb={10}>
-        <SingleQuestionVariable variableName={variable.name} />
-      </Box>
+      <BadgeInput
+        px={0}
+        py={12}
+        mb={10}
+        textAlign="center"
+        keyboard="tel"
+        placeholder={formatMessage(
+          globalMessages.variables.variableNamePlaceholder,
+        )}
+        value={variable.name}
+        color={colors.jungleGreen}
+        onBlur={val => updateVariable(val)}
+      />
       {data.map((value, index) => (
         <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox
@@ -133,6 +142,7 @@ SingleQuestion.propTypes = {
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
   removeAnswer: PropTypes.func.isRequired,
+  updateVariable: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -143,7 +153,8 @@ const mapDispatchToProps = {
   addAnswer: () => updateQuestionData({ type: ADD }),
   updateAnswer: (index, value) =>
     updateQuestionData({ type: UPDATE_ANSWER, data: { index, value } }),
-
+  updateVariable: name =>
+    updateQuestionData({ type: UPDATE_VARIABLE, data: { name } }),
   removeAnswer: index => updateQuestionData({ type: REMOVE, data: { index } }),
 };
 
