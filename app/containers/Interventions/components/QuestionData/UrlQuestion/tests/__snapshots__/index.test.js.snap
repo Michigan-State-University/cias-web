@@ -11,7 +11,18 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   flex-direction: row;
 }
 
-.c8 {
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+}
+
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -33,7 +44,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -45,7 +56,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   height: 100%;
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   cursor: pointer;
@@ -64,7 +75,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c6 {
+.c7 {
   width: auto;
   height: auto;
   display: block;
@@ -72,7 +83,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   display: none;
 }
 
-.c5 {
+.c6 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -83,7 +94,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c5:focus {
+.c6:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
@@ -147,43 +158,48 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
       className="c4"
     >
       <div
-        className="c0"
-      >
-        <textarea
-          className="c5"
-          height="auto"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          placeholder="Paste here a web page link to show it to a respondend."
-          rows="3"
-          value="www.google.com"
-        />
-      </div>
-      <div
-        className="c6"
-        hidden={true}
+        className="c5"
+        width="100%"
       >
         <div
+          className="c0"
+        >
+          <textarea
+            className="c6"
+            height="auto"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="Paste here a web page link to show it to a respondend."
+            rows="3"
+            value="www.google.com"
+          />
+        </div>
+        <div
           className="c7"
-          height="100%"
+          hidden={true}
         >
           <div
             className="c8"
+            height="100%"
           >
-            <img
+            <div
               className="c9"
-              onMouseDown={[Function]}
-              src="IMAGE_MOCK"
-            />
-          </div>
-          <div
-            className="c4"
-          >
-            <img
-              className="c9"
-              src="IMAGE_MOCK"
-            />
+            >
+              <img
+                className="c10"
+                onMouseDown={[Function]}
+                src="IMAGE_MOCK"
+              />
+            </div>
+            <div
+              className="c4"
+            >
+              <img
+                className="c10"
+                src="IMAGE_MOCK"
+              />
+            </div>
           </div>
         </div>
       </div>

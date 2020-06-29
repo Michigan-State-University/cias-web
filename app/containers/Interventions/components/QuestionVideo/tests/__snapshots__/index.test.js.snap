@@ -106,7 +106,7 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
 `;
 
 exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
-.c2 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -117,7 +117,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   width: 100%;
 }
 
-.c5 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -152,7 +152,18 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   height: 93px;
 }
 
-.c6 {
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  width: 100%;
+}
+
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -162,7 +173,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   flex-direction: row;
 }
 
-.c7 {
+.c8 {
   width: auto;
   height: auto;
   cursor: pointer;
@@ -179,7 +190,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c4 {
+.c5 {
   width: auto;
   height: auto;
   display: block;
@@ -187,7 +198,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   display: none;
 }
 
-.c3 {
+.c4 {
   padding: 12px;
   border: 1px solid #E9F1FB;
   border-radius: 10px;
@@ -197,7 +208,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   border: 1px solid transparent;
 }
 
-.c3:focus {
+.c4:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
@@ -213,42 +224,47 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   >
     <div
       className="c2"
-    >
-      <input
-        className="c3"
-        height="60px"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onFocus={[Function]}
-        placeholder="Use videos from YouTube or Vimeo. Paste link here."
-        type="text"
-        value=""
-      />
-    </div>
-    <div
-      className="c4"
-      hidden={true}
+      width="100%"
     >
       <div
+        className="c3"
+      >
+        <input
+          className="c4"
+          height="60px"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="Use videos from YouTube or Vimeo. Paste link here."
+          type="text"
+          value=""
+        />
+      </div>
+      <div
         className="c5"
-        height="100%"
+        hidden={true}
       >
         <div
           className="c6"
+          height="100%"
         >
-          <img
+          <div
             className="c7"
-            onMouseDown={[Function]}
-            src="IMAGE_MOCK"
-          />
-        </div>
-        <div
-          className="c6"
-        >
-          <img
+          >
+            <img
+              className="c8"
+              onMouseDown={[Function]}
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <div
             className="c7"
-            src="IMAGE_MOCK"
-          />
+          >
+            <img
+              className="c8"
+              src="IMAGE_MOCK"
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -54,9 +54,8 @@ const MultiQuestion = ({
                   <Img src={checkbox} mr={16} />
                 </Column>
                 <Column>
-                  <Row mb={10}>
+                  <Box mr={8} mb={10}>
                     <ApprovableInput
-                      mr={8}
                       type="singleline"
                       placeholder={formatMessage(messages.placeholder)}
                       value={value.payload}
@@ -64,7 +63,7 @@ const MultiQuestion = ({
                         updateAnswer(index, { ...value, payload: newTitle })
                       }
                     />
-                  </Row>
+                  </Box>
                   <Row>
                     <BadgeInput
                       px={0}

@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import check from 'assets/svg/checkbox-checked-green.svg';
 import cross from 'assets/svg/cross-closing.svg';
@@ -29,7 +29,7 @@ const ApprovableInput = props => {
   };
 
   return (
-    <Fragment>
+    <Row width="100%">
       <Column>
         {props.type === 'multiline' ? (
           <TextArea
@@ -75,7 +75,7 @@ const ApprovableInput = props => {
           </Row>
         </Column>
       </Box>
-    </Fragment>
+    </Row>
   );
 };
 
