@@ -63,4 +63,12 @@ export default defineMessages({
     id: `${scope}.pointDown`,
     defaultMessage: 'Point down',
   },
+  branching: {
+    id: `${scope}.branching`,
+    defaultMessage: 'Branching',
+  },
+  formula: {
+    id: `${scope}.formula`,
+    defaultMessage: 'Formula',
+  },
 });

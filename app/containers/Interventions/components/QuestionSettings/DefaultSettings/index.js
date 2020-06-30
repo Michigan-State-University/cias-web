@@ -143,6 +143,9 @@ const DefaultSettings = ({
             />
           </Box>
         </div>
+        <div label={formatMessage(messages.branching)}>
+          {formatMessage(messages.formula)}
+        </div>
       </Tabs>
     </Column>
   );
