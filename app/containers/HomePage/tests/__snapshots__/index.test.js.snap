@@ -8,7 +8,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     href="/interventions/create"
   >
     <button
-      class="StyledButton-t20ntd-0 gNPbpR"
+      class="StyledButton-t20ntd-0 ipXBhQ"
       color="primary"
       title="Create intervation"
       width="100%"
