@@ -139,7 +139,7 @@ const DefaultSettings = ({
               ))}
           </Accordion>
           <Box position="relative">
-            <DashedBox onClick={toggleTypeChooser}>
+            <DashedBox mt={14} onClick={toggleTypeChooser}>
               {formatMessage(messages.newStep)}
             </DashedBox>
             <BlockTypeChooser
@@ -162,7 +162,7 @@ const DefaultSettings = ({
                 />
               </Box>
             )}
-            <DashedBox onClick={() => onAddCase(id)}>
+            <DashedBox mt={20} onClick={() => onAddCase(id)}>
               {formatMessage(messages.newCase)}
             </DashedBox>
           </Column>
