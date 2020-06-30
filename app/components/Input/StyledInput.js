@@ -28,7 +28,6 @@ const StyledInput = props => {
         setHasFocus(false);
         props.onBlur(value);
       }}
-      onMouse
       onFocus={() => setHasFocus(true)}
       placeholder={props.placeholder}
       keyboard={props.keyboard}
