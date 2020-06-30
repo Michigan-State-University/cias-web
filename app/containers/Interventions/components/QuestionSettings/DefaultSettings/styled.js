@@ -12,4 +12,5 @@ export const DashedBox = styled(Box)`
   align-items: center;
   cursor: pointer;
   font-weight: bold;
+  border-radius: 4px;
 `;

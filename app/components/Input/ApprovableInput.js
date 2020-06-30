@@ -33,6 +33,7 @@ const ApprovableInput = props => {
       <Column>
         {props.type === 'multiline' ? (
           <TextArea
+            width="98%"
             height="60px"
             {...(props.rows ? { rows: props.rows, height: 'auto' } : {})}
             mr={9}

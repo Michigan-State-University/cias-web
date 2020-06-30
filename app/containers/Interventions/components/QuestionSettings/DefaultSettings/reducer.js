@@ -3,6 +3,7 @@ import {
   ADD_BLOCK,
   UPDATE_NARRATOR_SETTINGS,
   UPDATE_NARRATOR_ANIMATION,
+  UPDATE_FORMULA,
 } from './constants';
 
 const instantiateBlockForType = type => {
@@ -61,6 +62,12 @@ const defaultQuestionSettingsReducer = (question, payload) => {
           ...question.narrator,
           blocks: cloneBlocks,
         },
+      };
+
+    case UPDATE_FORMULA:
+      return {
+        ...question,
+        formula: { ...question.formula, payload: payload.data.value },
       };
 
     default:

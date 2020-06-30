@@ -4,6 +4,8 @@ import {
   ADD_BLOCK,
   UPDATE_NARRATOR_SETTINGS,
   UPDATE_NARRATOR_ANIMATION,
+  UPDATE_FORMULA,
+  ADD_FORMULA_CASE,
 } from './constants';
 
 export const updateSettings = (property, value) =>
@@ -28,4 +30,16 @@ export const updateNarratorAnimation = (index, value, questionId) =>
   updateQuestionSettings({
     type: UPDATE_NARRATOR_ANIMATION,
     data: { index, value, questionId },
+  });
+
+export const updateFormula = (value, questionId) =>
+  updateQuestionSettings({
+    type: UPDATE_FORMULA,
+    data: { value, questionId },
+  });
+
+export const addFormulaCase = questionId =>
+  updateQuestionSettings({
+    type: ADD_FORMULA_CASE,
+    data: { questionId },
   });

@@ -15,6 +15,7 @@ import H3 from 'components/H3';
 import Row from 'components/Row';
 import Switch from 'components/Switch';
 import Tabs from 'components/Tabs';
+import ApprovableInput from 'components/Input/ApprovableInput';
 import { blockTypes } from 'models/Narrator/BlockTypes';
 import { colors } from 'theme';
 import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
@@ -25,6 +26,7 @@ import {
   addBlock,
   updateNarratorSettings,
   updateNarratorAnimation,
+  updateFormula,
 } from './actions';
 
 import BlockTypeChooser from '../BlockTypeChooser';
@@ -39,12 +41,13 @@ const getPossibleAnimations = (type, formatMessage) => {
 };
 
 const DefaultSettings = ({
-  selectedQuestion: { narrator, settings, id } = {},
+  selectedQuestion: { narrator, settings, id, formula } = {},
   onQuestionToggle,
   onNarratorToggle,
   onCreate,
   updateAnimation,
   updateNarratorPreviewAnimation,
+  onFormulaUpdate,
   intl: { formatMessage },
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
@@ -144,7 +147,29 @@ const DefaultSettings = ({
           </Box>
         </div>
         <div label={formatMessage(messages.branching)}>
-          {formatMessage(messages.formula)}
+          <Column>
+            {formatMessage(messages.formula)}
+            {formula && (
+              <Box bg={colors.linkWater} width="100%" mt={10} px={8} py={8}>
+                <ApprovableInput
+                  rows="5"
+                  width="auto"
+                  placeholder={formatMessage(messages.formulaPlaceholder)}
+                  value={formula.payload}
+                  onCheck={val => onFormulaUpdate(val, id)}
+                />
+              </Box>
+            )}
+            <Box position="relative">
+              <DashedBox onClick={toggleTypeChooser}>
+                {formatMessage(messages.newCase)}
+              </DashedBox>
+              <BlockTypeChooser
+                visible={typeChooserOpen}
+                onClick={onCreateBlock}
+              />
+            </Box>
+          </Column>
         </div>
       </Tabs>
     </Column>
@@ -159,6 +184,7 @@ DefaultSettings.propTypes = {
   onCreate: PropTypes.func,
   updateAnimation: PropTypes.func,
   updateNarratorPreviewAnimation: PropTypes.func,
+  onFormulaUpdate: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -171,6 +197,7 @@ const mapDispatchToProps = {
   onNarratorToggle: updateNarratorSettings,
   updateAnimation: updateNarratorAnimation,
   updateNarratorPreviewAnimation: updatePreviewAnimation,
+  onFormulaUpdate: updateFormula,
 };
 
 const withConnect = connect(

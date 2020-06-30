@@ -8,3 +8,9 @@ export const ADD_BLOCK = 'app/EditInterventionPage/DefaultSettings/ADD_BLOCK';
 
 export const UPDATE_NARRATOR_ANIMATION =
   'app/EditInterventionPage/DefaultSettings/UPDATE_NARRATOR_ANIMATION';
+
+export const UPDATE_FORMULA =
+  'app/EditInterventionPage/DefaultSettings/UPDATE_FORMULA';
+
+export const ADD_FORMULA_CASE =
+  'app/EditInterventionPage/DefaultSettings/ADD_FORMULA_CASE';
