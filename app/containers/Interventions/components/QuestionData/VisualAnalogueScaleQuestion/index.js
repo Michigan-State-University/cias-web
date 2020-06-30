@@ -33,7 +33,7 @@ const VisualAnalogueScaleQuestion = ({
   const { variable } = selectedQuestion.body;
 
   return (
-    <Column>
+    <Column mt={10}>
       <BadgeInput
         px={0}
         py={12}
