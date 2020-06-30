@@ -4,6 +4,7 @@ import {
   UPDATE_NARRATOR_SETTINGS,
   UPDATE_NARRATOR_ANIMATION,
   UPDATE_FORMULA,
+  ADD_FORMULA_CASE,
 } from './constants';
 
 const instantiateBlockForType = type => {
@@ -68,6 +69,15 @@ const defaultQuestionSettingsReducer = (question, payload) => {
       return {
         ...question,
         formula: { ...question.formula, payload: payload.data.value },
+      };
+
+    case ADD_FORMULA_CASE:
+      return {
+        ...question,
+        formula: {
+          ...question.formula,
+          patterns: [...question.formula.patterns, { match: '', target: '1' }],
+        },
       };
 
     default:

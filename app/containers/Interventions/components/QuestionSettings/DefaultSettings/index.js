@@ -27,6 +27,7 @@ import {
   updateNarratorSettings,
   updateNarratorAnimation,
   updateFormula,
+  addFormulaCase,
 } from './actions';
 
 import BlockTypeChooser from '../BlockTypeChooser';
@@ -48,6 +49,7 @@ const DefaultSettings = ({
   updateAnimation,
   updateNarratorPreviewAnimation,
   onFormulaUpdate,
+  onAddCase,
   intl: { formatMessage },
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
@@ -160,15 +162,9 @@ const DefaultSettings = ({
                 />
               </Box>
             )}
-            <Box position="relative">
-              <DashedBox onClick={toggleTypeChooser}>
-                {formatMessage(messages.newCase)}
-              </DashedBox>
-              <BlockTypeChooser
-                visible={typeChooserOpen}
-                onClick={onCreateBlock}
-              />
-            </Box>
+            <DashedBox onClick={() => onAddCase(id)}>
+              {formatMessage(messages.newCase)}
+            </DashedBox>
           </Column>
         </div>
       </Tabs>
@@ -185,6 +181,7 @@ DefaultSettings.propTypes = {
   updateAnimation: PropTypes.func,
   updateNarratorPreviewAnimation: PropTypes.func,
   onFormulaUpdate: PropTypes.func,
+  onAddCase: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -198,6 +195,7 @@ const mapDispatchToProps = {
   updateAnimation: updateNarratorAnimation,
   updateNarratorPreviewAnimation: updatePreviewAnimation,
   onFormulaUpdate: updateFormula,
+  onAddCase: addFormulaCase,
 };
 
 const withConnect = connect(
