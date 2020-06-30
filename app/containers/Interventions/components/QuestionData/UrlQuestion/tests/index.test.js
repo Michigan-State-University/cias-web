@@ -10,7 +10,8 @@ const defaultProps = {
   updateUrl: jest.fn(),
   selectedQuestion: {
     body: {
-      data: [{ variable: { name: '', value: '1' }, payload: 'www.google.com' }],
+      variable: { name: '' },
+      data: [{ payload: 'www.google.com' }],
     },
   },
 };
