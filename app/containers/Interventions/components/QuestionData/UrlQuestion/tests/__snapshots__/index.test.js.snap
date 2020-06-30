@@ -89,6 +89,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   border: 1px solid #E9F1FB;
   border-radius: 10px;
   margin-right: 9px;
+  width: 98%;
   height: auto;
   background-color: transparent;
   border: 1px solid transparent;
@@ -175,6 +176,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
             placeholder="Paste here a web page link to show it to a respondend."
             rows="3"
             value="www.google.com"
+            width="98%"
           />
         </div>
         <div
