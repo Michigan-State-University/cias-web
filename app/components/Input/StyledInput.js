@@ -21,7 +21,7 @@ const StyledInput = props => {
 
   // calculate approximate input width in pixels
   const calculateWidthFromText = text =>
-    text * AVERAGE_LETTER_WIDTH + TEXT_PADDING;
+    Math.min(text * AVERAGE_LETTER_WIDTH + TEXT_PADDING, props.maxWidth);
 
   return (
     <Input
@@ -55,11 +55,13 @@ StyledInput.propTypes = {
   textAlign: PropTypes.string,
   onBlur: PropTypes.func,
   autoSize: PropTypes.bool,
+  maxWidth: PropTypes.number,
 };
 
 StyledInput.defaultProps = {
   keyboard: 'text',
   autoSize: false,
+  maxWidth: 200,
 };
 
 export { StyledInput };
