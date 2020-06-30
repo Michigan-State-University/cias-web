@@ -28,9 +28,9 @@ const VisualAnalogueScaleQuestion = ({
   intl: { formatMessage },
 }) => {
   const {
-    variable,
     payload: { start_value: startValue, end_value: endValue },
   } = selectedQuestion.body.data[0];
+  const { variable } = selectedQuestion.body;
 
   return (
     <Column>

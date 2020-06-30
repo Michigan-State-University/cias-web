@@ -27,7 +27,9 @@ const NumberQuestion = ({
   updateVariable,
   intl: { formatMessage },
 }) => {
-  const { variable, payload } = selectedQuestion.body.data[0];
+  const { payload } = selectedQuestion.body.data[0];
+  const { variable } = selectedQuestion.body;
+
   return (
     <Column mt={10}>
       <BadgeInput
@@ -70,12 +72,12 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = {
   updateAnswer: value =>
-    dispatch(updateQuestionData({ type: UPDATE_DATA, data: { value } })),
+    updateQuestionData({ type: UPDATE_DATA, data: { value } }),
   updateVariable: name =>
     updateQuestionData({ type: UPDATE_VARIABLE, data: { name } }),
-});
+};
 
 const withConnect = connect(
   mapStateToProps,

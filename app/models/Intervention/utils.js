@@ -1,6 +1,10 @@
 // eslint-disable-next-line no-unused-vars
 import Question from './Question';
-import { multiQuestion, gridQuestion } from './QuestionTypes';
+import {
+  multiQuestion,
+  gridQuestion,
+  informationQuestion,
+} from './QuestionTypes';
 
 /**
  * @param  {Array<Question>} questions
@@ -18,6 +22,9 @@ export const getAllVariables = (questions, options = { structure: 'flat' }) => {
         break;
       case gridQuestion.id:
         questionVariables = getGridVariables(question);
+        break;
+      case informationQuestion.id:
+        questionVariables = [];
         break;
       default:
         questionVariables = [getDefaultVariable(question)];

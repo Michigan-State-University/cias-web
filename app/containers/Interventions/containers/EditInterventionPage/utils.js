@@ -3,6 +3,7 @@ import {
   visualAnalogueScaleQuestion,
   multiQuestion,
   singleQuestion,
+  informationQuestion,
 } from 'models/Intervention/QuestionTypes';
 import Question from 'models/Intervention/Question';
 
@@ -45,6 +46,11 @@ const instantiateEmptyQuestion = (message, type) => {
             payload: { start_value: '', end_value: '' },
           },
         ],
+      });
+
+    case informationQuestion.id:
+      return new Question(message, type, {
+        data: [],
       });
 
     default:

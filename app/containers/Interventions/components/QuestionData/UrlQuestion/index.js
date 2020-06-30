@@ -26,7 +26,8 @@ const UrlQuestion = ({
   updateVariable,
   intl: { formatMessage },
 }) => {
-  const { variable, payload } = selectedQuestion.body.data[0];
+  const { payload } = selectedQuestion.body.data[0];
+  const { variable } = selectedQuestion.body;
 
   const updateLink = url => updateUrl({ variable, payload: url });
 
