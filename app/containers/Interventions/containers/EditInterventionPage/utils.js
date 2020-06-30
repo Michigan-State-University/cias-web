@@ -30,8 +30,8 @@ const instantiateEmptyQuestion = (message, type) => {
                 { variable: { name: '' }, payload: '' },
               ],
               columns: [
-                { variable: { value: '1' }, payload: '' },
-                { variable: { value: '1' }, payload: '' },
+                { variable: { value: '' }, payload: '' },
+                { variable: { value: '' }, payload: '' },
               ],
             },
           },
