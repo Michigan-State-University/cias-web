@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import map from 'lodash/map';
-import snakeCase from 'lodash/snakeCase';
+import { map, snakeCase } from 'lodash';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -16,10 +15,15 @@ import Row from 'components/Row';
 import Switch from 'components/Switch';
 import Tabs from 'components/Tabs';
 import ApprovableInput from 'components/Input/ApprovableInput';
+import Img from 'components/Img';
+
+import binNoBg from 'assets/svg/bin-no-bg.svg';
+
 import { blockTypes } from 'models/Narrator/BlockTypes';
 import { colors } from 'theme';
 import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
+import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
 import {
   updateSettings as updateQuestionSettings,
@@ -28,10 +32,12 @@ import {
   updateNarratorAnimation,
   updateFormula,
   addFormulaCase,
+  removeFormulaCase,
+  updateFormulaCase,
 } from './actions';
 
 import BlockTypeChooser from '../BlockTypeChooser';
-import { DashedBox } from './styled';
+import { DashedBox, CaseInput } from './styled';
 import { bodyAnimations, facialAnimations } from './animations';
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 
@@ -50,6 +56,8 @@ const DefaultSettings = ({
   updateNarratorPreviewAnimation,
   onFormulaUpdate,
   onAddCase,
+  onRemoveCase,
+  onUpdateCase,
   intl: { formatMessage },
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
@@ -150,17 +158,53 @@ const DefaultSettings = ({
         </div>
         <div label={formatMessage(messages.branching)}>
           <Column>
-            {formatMessage(messages.formula)}
+            {formatMessage(globalMessages.general.formula)}
             {formula && (
-              <Box bg={colors.linkWater} width="100%" mt={10} px={8} py={8}>
-                <ApprovableInput
-                  rows="5"
-                  width="auto"
-                  placeholder={formatMessage(messages.formulaPlaceholder)}
-                  value={formula.payload}
-                  onCheck={val => onFormulaUpdate(val, id)}
-                />
-              </Box>
+              <Fragment>
+                <Box
+                  bg={colors.linkWater}
+                  width="100%"
+                  mt={10}
+                  mb={20}
+                  px={8}
+                  py={8}
+                >
+                  <ApprovableInput
+                    rows="5"
+                    width="auto"
+                    placeholder={formatMessage(messages.formulaPlaceholder)}
+                    value={formula.payload}
+                    onCheck={val => onFormulaUpdate(val, id)}
+                  />
+                </Box>
+                {formula.patterns.map((pattern, index) => (
+                  <Row
+                    key={`${id}-settings-branching-case-${index}`}
+                    align="center"
+                    mb={8}
+                  >
+                    {formatMessage(globalMessages.general.if)}
+                    <Box bg={colors.linkWater} mx={10}>
+                      <CaseInput
+                        px={0}
+                        py={12}
+                        textAlign="center"
+                        placeholder="..."
+                        value={pattern.match}
+                        onBlur={value =>
+                          onUpdateCase(index, { ...pattern, match: value }, id)
+                        }
+                      />
+                    </Box>
+                    {formatMessage(globalMessages.general.goTo)}
+                    <Img
+                      src={binNoBg}
+                      onClick={() => onRemoveCase(index, id)}
+                      clickable
+                    />
+                  </Row>
+                ))}
+              </Fragment>
             )}
             <DashedBox mt={20} onClick={() => onAddCase(id)}>
               {formatMessage(messages.newCase)}
@@ -182,6 +226,8 @@ DefaultSettings.propTypes = {
   updateNarratorPreviewAnimation: PropTypes.func,
   onFormulaUpdate: PropTypes.func,
   onAddCase: PropTypes.func,
+  onRemoveCase: PropTypes.func,
+  onUpdateCase: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -196,6 +242,8 @@ const mapDispatchToProps = {
   updateNarratorPreviewAnimation: updatePreviewAnimation,
   onFormulaUpdate: updateFormula,
   onAddCase: addFormulaCase,
+  onRemoveCase: removeFormulaCase,
+  onUpdateCase: updateFormulaCase,
 };
 
 const withConnect = connect(

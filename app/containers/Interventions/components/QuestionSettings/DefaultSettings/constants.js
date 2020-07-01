@@ -14,3 +14,9 @@ export const UPDATE_FORMULA =
 
 export const ADD_FORMULA_CASE =
   'app/EditInterventionPage/DefaultSettings/ADD_FORMULA_CASE';
+
+export const REMOVE_FORMULA_CASE =
+  'app/EditInterventionPage/DefaultSettings/REMOVE_FORMULA_CASE';
+
+export const UPDATE_FORMULA_CASE =
+  'app/EditInterventionPage/DefaultSettings/UPDATE_FORMULA_CASE';

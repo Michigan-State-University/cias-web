@@ -6,6 +6,8 @@ import {
   UPDATE_NARRATOR_ANIMATION,
   UPDATE_FORMULA,
   ADD_FORMULA_CASE,
+  UPDATE_FORMULA_CASE,
+  REMOVE_FORMULA_CASE,
 } from './constants';
 
 export const updateSettings = (property, value) =>
@@ -42,4 +44,16 @@ export const addFormulaCase = questionId =>
   updateQuestionSettings({
     type: ADD_FORMULA_CASE,
     data: { questionId },
+  });
+
+export const removeFormulaCase = (index, questionId) =>
+  updateQuestionSettings({
+    type: REMOVE_FORMULA_CASE,
+    data: { index, questionId },
+  });
+
+export const updateFormulaCase = (index, value, questionId) =>
+  updateQuestionSettings({
+    type: UPDATE_FORMULA_CASE,
+    data: { index, value, questionId },
   });

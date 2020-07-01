@@ -1,5 +1,8 @@
 import styled from 'styled-components';
+
 import Box from 'components/Box';
+import { StyledInput } from 'components/Input/StyledInput';
+
 import { colors } from 'theme';
 
 export const DashedBox = styled(Box)`
@@ -12,4 +15,8 @@ export const DashedBox = styled(Box)`
   cursor: pointer;
   font-weight: bold;
   border-radius: 4px;
+`;
+
+export const CaseInput = styled(StyledInput)`
+  width: 50px;
 `;
