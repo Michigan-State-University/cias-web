@@ -18,6 +18,7 @@ import {
   UPDATE_QUESTION_SETTINGS,
   DELETE_QUESTION,
   COPY_QUESTION,
+  EDIT_INTERVENTION_REQUEST,
 } from './constants';
 
 import {
@@ -35,6 +36,8 @@ import {
   updateQuestionImage,
   deleteQuestionsSucccess,
   deleteQuestionError,
+  editInterventionSuccess,
+  editInterventionError,
 } from './actions';
 
 import {
@@ -87,6 +90,26 @@ function* getIntervention({ payload: { id } }) {
     yield put(getQuestionsRequest(id));
   } catch (error) {
     yield put(getInterventionError(error));
+  }
+}
+
+function* editIntervention() {
+  const intervention = yield select(makeSelectIntervention());
+  const requestURL = `v1/interventions/${intervention.id}`;
+
+  try {
+    const {
+      data: { data },
+    } = yield axios.put(requestURL, { intervention });
+
+    yield put(
+      editInterventionSuccess({
+        ...data.attributes,
+        id: data.id,
+      }),
+    );
+  } catch (error) {
+    yield put(editInterventionError(error));
   }
 }
 
@@ -228,5 +251,6 @@ export default function* editInterventionPageSaga() {
     yield takeLatest(UPDATE_QUESTION_SETTINGS, updateQuestion),
     yield takeLatest(DELETE_QUESTION, deleteQuestion),
     yield takeLatest(COPY_QUESTION, copyQuestion),
+    yield takeLatest(EDIT_INTERVENTION_REQUEST, editIntervention),
   ]);
 }

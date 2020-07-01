@@ -109,6 +109,8 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   max-width: 200px;
   padding-top: 12px;
   padding-bottom: 12px;
+  color: #107969;
+  opacity: 0.1;
   background-color: transparent;
   border: 1px solid transparent;
   text-align: center;

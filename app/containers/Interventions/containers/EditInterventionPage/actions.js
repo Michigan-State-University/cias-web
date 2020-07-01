@@ -29,6 +29,9 @@ import {
   DELETE_QUESTION_SUCCESS,
   COPY_QUESTION,
   DELETE_QUESTION_ERROR,
+  EDIT_INTERVENTION_REQUEST,
+  EDIT_INTERVENTION_SUCCESS,
+  EDIT_INTERVENTION_ERROR,
 } from './constants';
 
 const toggleQuestionSettings = index =>
@@ -67,6 +70,13 @@ const getInterventionRequest = id =>
 const getInterventionSuccess = intervention =>
   actionBuilder(GET_INTERVENTION_SUCCESS, { intervention });
 const getInterventionError = () => actionBuilder(GET_INTERVENTION_ERROR, {});
+
+const editInterventionRequest = payload =>
+  actionBuilder(EDIT_INTERVENTION_REQUEST, payload);
+const editInterventionSuccess = intervention =>
+  actionBuilder(EDIT_INTERVENTION_SUCCESS, { intervention });
+const editInterventionError = error =>
+  actionBuilder(EDIT_INTERVENTION_ERROR, { error });
 
 const createQuestionRequest = (question, id) =>
   actionBuilder(CREATE_QUESTION_REQUEST, { question, id });
@@ -119,4 +129,7 @@ export {
   deleteQuestionsSucccess,
   copyQuestionRequest,
   deleteQuestionError,
+  editInterventionRequest,
+  editInterventionSuccess,
+  editInterventionError,
 };

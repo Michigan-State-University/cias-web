@@ -11,7 +11,7 @@ import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import 'jest-styled-components';
 
-import { Navbar } from '../index';
+import { NavbarWithIntl as Navbar } from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<Navbar />', () => {
@@ -22,17 +22,13 @@ describe('<Navbar />', () => {
         <Navbar
           logOut={() => {}}
           user={{ firstName: 'test', lastName: 'test' }}
+          intervention={{ name: 'e-Intervention Name' }}
         />
       </IntlProvider>,
     );
     expect(spy).not.toHaveBeenCalled();
   });
 
-  /**
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
   it('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
@@ -41,6 +37,7 @@ describe('<Navbar />', () => {
         <Navbar
           logOut={() => {}}
           user={{ firstName: 'test', lastName: 'test' }}
+          intervention={{ name: 'e-Intervention Name' }}
         />
       </IntlProvider>,
     );

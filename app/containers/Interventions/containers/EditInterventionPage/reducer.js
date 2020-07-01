@@ -28,6 +28,8 @@ import {
   DELETE_QUESTION_SUCCESS,
   COPY_QUESTION,
   DELETE_QUESTION_ERROR,
+  EDIT_INTERVENTION_REQUEST,
+  EDIT_INTERVENTION_SUCCESS,
 } from './constants';
 
 import questionDataReducer from '../../components/QuestionData/reducer';
@@ -210,6 +212,17 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.cache.intervention = action.payload.intervention;
 
         draft.intervention = cloneDeep(draft.cache.intervention);
+        break;
+
+      case EDIT_INTERVENTION_REQUEST:
+        draft.intervention = {
+          ...draft.intervention,
+          [action.payload.field]: action.payload.value,
+        };
+        break;
+      case EDIT_INTERVENTION_SUCCESS:
+        draft.intervention = action.payload.intervention;
+        draft.cache.intervention = action.payload.intervention;
         break;
     }
   });

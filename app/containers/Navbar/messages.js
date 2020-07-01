@@ -16,4 +16,8 @@ export default defineMessages({
     id: `${scope}.logOut`,
     defaultMessage: 'Log out',
   },
+  placeholder: {
+    id: `${scope}.placeholder`,
+    defaultMessage: 'e-Intervention Name',
+  },
 });

@@ -67,6 +67,7 @@ UrlQuestion.propTypes = {
   updateUrl: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
 };
+
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
 });

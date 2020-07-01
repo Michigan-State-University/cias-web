@@ -8,16 +8,12 @@ import { Helmet } from 'react-helmet';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import Intervention from 'models/Intervention/Intervention';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Row from 'components/Row';
-import Img from 'components/Img';
-import H1 from 'components/H1';
 import HoverableBox from 'components/Box/HoverableBox';
 import Text from 'components/Text';
 import Question from 'models/Intervention/Question';
-import cross from 'assets/svg/cross.svg';
 
 import { borders, themeColors, colors, elements } from 'theme';
 
@@ -25,7 +21,6 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import {
-  makeSelectIntervention,
   makeSelectQuestions,
   makeSelectSelectedQuestionIndex,
 } from './selectors';
@@ -39,7 +34,6 @@ import instantiateEmptyQuestion from './utils';
 
 function EditInterventionPage({
   intl: { formatMessage },
-  intervention,
   questions,
   selectedQuestion,
   getIntervention,
@@ -81,11 +75,6 @@ function EditInterventionPage({
             overflow="scroll"
             padded
           >
-            <Row mb={77}>
-              <Img src={cross} mr={37} />
-              <H1>{intervention.name}</H1>
-            </Row>
-
             <Box width="100%" padded>
               {questions.map((question, index) => (
                 <Row key={question.id}>
@@ -143,7 +132,6 @@ function EditInterventionPage({
 
 EditInterventionPage.propTypes = {
   intl: PropTypes.object,
-  intervention: PropTypes.shape(Intervention),
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.number.isRequired,
   match: PropTypes.object,
@@ -152,7 +140,6 @@ EditInterventionPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectIntervention(),
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionIndex(),
 });

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Input } from './index';
 
-const TEXT_PADDING = 25;
-const AVERAGE_LETTER_WIDTH = 8;
+const DEFAULT_TEXT_PADDING = 25;
+const DEFAULT_AVERAGE_LETTER_WIDTH = 8;
 
 const StyledInput = props => {
   const [value, setValue] = useState(props.value);
@@ -21,7 +21,10 @@ const StyledInput = props => {
 
   // calculate approximate input width in pixels
   const calculateWidthFromText = text =>
-    Math.min(text * AVERAGE_LETTER_WIDTH + TEXT_PADDING, props.maxWidth);
+    Math.min(
+      text * props.averageLetterWidth + props.textPadding,
+      props.maxWidth,
+    );
 
   return (
     <Input
@@ -56,12 +59,16 @@ StyledInput.propTypes = {
   onBlur: PropTypes.func,
   autoSize: PropTypes.bool,
   maxWidth: PropTypes.number,
+  averageLetterWidth: PropTypes.number,
+  textPadding: PropTypes.number,
 };
 
 StyledInput.defaultProps = {
   keyboard: 'text',
   autoSize: false,
   maxWidth: 200,
+  averageLetterWidth: DEFAULT_AVERAGE_LETTER_WIDTH,
+  textPadding: DEFAULT_TEXT_PADDING,
 };
 
 export { StyledInput };

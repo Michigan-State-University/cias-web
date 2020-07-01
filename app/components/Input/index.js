@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { themeColors, borders, paddings } from 'theme';
-import { margin, layout, padding } from '../BaseComponentStyles';
+import { margin, layout, padding, text } from '../BaseComponentStyles';
 
 const Input = styled.input.attrs(props => ({ type: props.keyboard }))`
   padding: ${paddings.small};
@@ -15,6 +15,7 @@ const Input = styled.input.attrs(props => ({ type: props.keyboard }))`
   ${margin};
   ${layout};
   ${padding};
+  ${text};
   ${({ transparent }) =>
     transparent && {
       backgroundColor: 'transparent',

@@ -38,6 +38,13 @@ export const GET_INTERVENTION_SUCCESS =
 export const GET_INTERVENTION_ERROR =
   'app/EditInterventionPage/GET_INTERVENTION_ERROR';
 
+export const EDIT_INTERVENTION_REQUEST =
+  'app/EditInterventionPage/EDIT_INTERVENTION_REQUEST';
+export const EDIT_INTERVENTION_SUCCESS =
+  'app/EditInterventionPage/EDIT_INTERVENTION_SUCCESS';
+export const EDIT_INTERVENTION_ERROR =
+  'app/EditInterventionPage/EDIT_INTERVENTION_ERROR';
+
 export const CREATE_QUESTION_REQUEST =
   'app/EditInterventionPage/CREATE_QUESTION_REQUEST';
 export const CREATE_QUESTION_SUCCESS =

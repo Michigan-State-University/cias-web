@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+import { colors, elements } from 'theme';
 export const NavbarStyled = styled.div`
   position: fixed;
   width: 100%;
@@ -8,8 +9,9 @@ export const NavbarStyled = styled.div`
   padding: 20px;
   box-shadow: 0px 4px 10px rgba(227, 238, 251, 0.8);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   z-index: 10;
+  height: ${elements.navbarHeight}px;
 `;
 
 export const RightPanel = styled.div`
@@ -17,6 +19,18 @@ export const RightPanel = styled.div`
   margin-right: 0;
   display: flex;
   align-items: center;
+`;
+
+export const CrossContainer = styled.div`
+  height: 28px;
+  width: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background: ${colors.linkWater};
+  margin-right: 35px;
+  cursor: pointer;
 `;
 
 export const DropDownContent = styled.div`
