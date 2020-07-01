@@ -13,6 +13,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 
 import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
+import RegisterPage from 'containers/RegisterPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage';
 import CreateInterventionPage from 'containers/Interventions/containers/EditInterventionPage/temporary';
@@ -29,6 +30,7 @@ function App() {
       <Switch>
         <AppRoute exact path="/" component={HomePage} protectedRoute />
         <AppRoute exact path="/login" component={LoginPage} />
+        <AppRoute exact path="/register" component={RegisterPage} />
         <AppRoute
           exact
           path="/interventions/:id/edit"

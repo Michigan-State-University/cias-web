@@ -14,7 +14,10 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
+import { ToastContainer } from 'react-toastify';
+
 import 'sanitize.css/sanitize.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { throttle } from 'lodash';
 
 // Import root app
@@ -52,6 +55,7 @@ const render = messages => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
+          <ToastContainer />
           <App />
         </ConnectedRouter>
       </LanguageProvider>

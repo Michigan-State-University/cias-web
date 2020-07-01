@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
+<div
+  class="Fill-sc-1f4o7x0-0 dHXeMo"
+>
+  <div
+    class="Column-sc-1n6divy-0 lxsJW"
+  >
+    <div
+      class="Card-v952e1-0 kutakG"
+      width="100%"
+    >
+      <div
+        class="Column-sc-1n6divy-0 kCIvWB"
+      >
+        <span>
+          Register
+        </span>
+        <input
+          class="Input-sc-19txxuq-0 fTNTqj"
+          name="username"
+          placeholder="Username"
+          type="text"
+          value=""
+        />
+        <input
+          class="Input-sc-19txxuq-0 AcTzB"
+          name="firstName"
+          placeholder="First name"
+          type="text"
+          value=""
+        />
+        <input
+          class="Input-sc-19txxuq-0 AcTzB"
+          name="lastName"
+          placeholder="Last name"
+          type="text"
+          value=""
+        />
+        <input
+          class="Input-sc-19txxuq-0 AcTzB"
+          name="email"
+          placeholder="Email"
+          type="email"
+          value=""
+        />
+        <input
+          class="Input-sc-19txxuq-0 AcTzB"
+          name="password"
+          placeholder="Password"
+          type="password"
+          value=""
+        />
+        <input
+          class="Input-sc-19txxuq-0 AcTzB"
+          name="passwordConfirmation"
+          placeholder="Password confirmation"
+          type="password"
+          value=""
+        />
+        <button
+          class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 ipXBhQ"
+          color="primary"
+          title="Register"
+          width="100%"
+        >
+          Register
+        </button>
+        <a
+          href="/login"
+        >
+          <button
+            class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 ipXBhQ"
+            color="primary"
+            title="I already have an account"
+            width="100%"
+          >
+            I already have an account
+          </button>
+        </a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+`;

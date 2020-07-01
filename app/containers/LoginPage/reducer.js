@@ -4,11 +4,18 @@
  *
  */
 import produce from 'immer';
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from './constants';
+import { REGISTER_SUCCESS } from 'containers/RegisterPage/constants';
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
+  REGISTER_POPUP_SHOWN,
+} from './constants';
 
 export const initialState = {
   loading: false,
   error: '',
+  newAccountPopup: false,
   formData: {
     username: '',
     password: '',
@@ -35,6 +42,11 @@ const loginPageReducer = (state = initialState, action) =>
         draft.loading = false;
         draft.error = action.payload.error;
         break;
+      case REGISTER_SUCCESS:
+        draft.newAccountPopup = true;
+        break;
+      case REGISTER_POPUP_SHOWN:
+        draft.newAccountPopup = false;
     }
   });
 

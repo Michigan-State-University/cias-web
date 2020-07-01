@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -14,23 +14,26 @@ import { injectIntl } from 'react-intl';
 
 import { Input } from 'components/Input';
 import { Card } from 'components/Card';
-import { Button } from 'components/Button';
 import { Fill } from 'components/Fill';
 import Column from 'components/Column';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import ErrorAlert from 'components/ErrorAlert';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import makeSelectLoginPage from './selectors';
-import { loginRequest } from './actions';
+import { loginRequest, popupShown } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
+import { StyledButton } from './styled';
 
 export function LoginPage(props) {
   const {
     onLogin,
-    loginPage: { error, loading, formData },
+    popupShown: popupWasShown,
+    loginPage: { error, loading, formData, newAccountPopup },
     intl: { formatMessage },
   } = props;
   useInjectReducer({ key: 'loginPage', reducer });
@@ -38,6 +41,14 @@ export function LoginPage(props) {
 
   const [username, setUsername] = useState(formData.username);
   const [password, setPassword] = useState(formData.password);
+
+  useEffect(() => {
+    if (newAccountPopup) {
+      toast.success(formatMessage(messages.createdAccount));
+      popupWasShown();
+    }
+  }, [newAccountPopup]);
+
   return (
     <Fragment>
       <Helmet>
@@ -61,11 +72,14 @@ export function LoginPage(props) {
                 value={password}
                 onChange={event => setPassword(event.target.value)}
               />
-              <Button
+              <StyledButton
                 loading={loading}
                 title={formatMessage(messages.loginButton)}
                 onClick={() => onLogin(username, password)}
               />
+              <Link to="/register">
+                <StyledButton title={formatMessage(messages.register)} />
+              </Link>
               {error && <ErrorAlert errorText={error} />}
             </Column>
           </Card>
@@ -77,6 +91,7 @@ export function LoginPage(props) {
 
 LoginPage.propTypes = {
   onLogin: PropTypes.func,
+  popupShown: PropTypes.func,
   intl: PropTypes.object,
   loginPage: PropTypes.shape({
     errors: PropTypes.string,
@@ -92,9 +107,10 @@ const mapStateToProps = createStructuredSelector({
   loginPage: makeSelectLoginPage(),
 });
 
-const mapDispatchToProps = dispatch => ({
-  onLogin: (username, password) => dispatch(loginRequest(username, password)),
-});
+const mapDispatchToProps = {
+  onLogin: loginRequest,
+  popupShown,
+};
 
 const withConnect = connect(
   mapStateToProps,

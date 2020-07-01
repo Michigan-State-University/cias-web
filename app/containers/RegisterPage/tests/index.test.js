@@ -1,20 +1,23 @@
 /**
  *
- * Tests for LoginPage
+ * Tests for RegisterPage
+ *
+ * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
  */
 
 import React from 'react';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
-import { browserHistory, MemoryRouter } from 'react-router-dom';
+// import 'jest-dom/extend-expect'; // add some helpful assertions
+
+import { MemoryRouter, browserHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
-import LoginPage from '../index';
+import configureStore from 'configureStore';
+import RegisterPage from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
-import configureStore from '../../../configureStore';
 
-describe('<LoginPage />', () => {
+describe('<RegisterPage />', () => {
   let store;
 
   beforeAll(() => {
@@ -23,12 +26,11 @@ describe('<LoginPage />', () => {
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
-            <LoginPage />
+            <RegisterPage />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,
@@ -43,7 +45,7 @@ describe('<LoginPage />', () => {
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
-            <LoginPage />
+            <RegisterPage />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,

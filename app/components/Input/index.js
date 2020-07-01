@@ -5,7 +5,8 @@ import { margin, layout, padding, text } from '../BaseComponentStyles';
 
 const Input = styled.input.attrs(props => ({ type: props.keyboard }))`
   padding: ${paddings.small};
-  border: ${borders.borderWidth} ${borders.borderStyle} ${themeColors.highlight};
+  border: ${borders.borderWidth} ${borders.borderStyle}
+    ${props => (props.hasError ? 'red' : themeColors.highlight)};
   border-radius: ${borders.borderRadius};
   &:focus {
     box-shadow: none;

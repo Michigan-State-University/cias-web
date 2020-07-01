@@ -10,6 +10,7 @@ describe('loginPageReducer', () => {
       },
       loading: false,
       error: '',
+      newAccountPopup: false,
     };
   });
 

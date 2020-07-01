@@ -29,4 +29,12 @@ export default defineMessages({
     id: `${scope}.passwordPlaceholder`,
     defaultMessage: 'Password',
   },
+  register: {
+    id: `${scope}.register`,
+    defaultMessage: 'Register',
+  },
+  createdAccount: {
+    id: `${scope}.createdAccount`,
+    defaultMessage: 'Your account has been created',
+  },
 });
