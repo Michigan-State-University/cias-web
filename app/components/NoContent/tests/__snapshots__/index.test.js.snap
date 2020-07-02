@@ -56,7 +56,7 @@ exports[`<NoContent /> should match the snapshot 1`] = `
   font-size: 18px;
   line-height: 130%;
   margin-top: 15px;
-  color: #B0BAC9;
+  color: rgba(176,186,201,1);
 }
 
 <div

@@ -13,8 +13,8 @@ const NumberCircle = props => (
     bg={themeColors.primary}
     fontSize={fontSizes.small}
     {...(props.isSelected
-      ? { opacity: 1, color: colors.white }
-      : { opacity: 0.3, color: colors.jungleGreen })}
+      ? { textOpacity: 1, color: colors.white }
+      : { textOpacity: 0.3, color: colors.jungleGreen })}
   />
 );
 

@@ -5,7 +5,7 @@ const colors = {
   linkWater: '#E9F1FB',
   grey: '#9AA1B6',
   zirkon: '#F8FBFF',
-  white: '#FFF',
+  white: '#FFFFFF',
   azure: '#0086F8',
   tangerine: '#FFA16C',
   golden: '#FFCF5B',

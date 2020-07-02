@@ -141,8 +141,8 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   -webkit-text-decoration: underline;
   text-decoration: underline;
   cursor: pointer;
-  color: #C866EA;
-  color: #C866EA;
+  color: rgba(200,102,234,1);
+  color: rgba(200,102,234,1);
 }
 
 .c5 {
@@ -187,7 +187,6 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  opacity: 0.5;
 }
 
 <div
@@ -252,7 +251,6 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
     >
       <p
         className="c7"
-        opacity={0.5}
       >
         <span>
           It works for JPG, PNG, and GIF formats—max size 5MB

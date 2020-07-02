@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import { hexToRgb } from 'theme';
 
 const style = props => ({
-  backgroundColor: props.bg
-    ? `rgba(${hexToRgb(props.bg)}, ${props.opacity ? props.opacity : 1})`
-    : '',
-  color: props.color || '',
+  backgroundColor:
+    props.bg && `rgba(${hexToRgb(props.bg)}, ${props.opacity || 1})`,
+  color:
+    props.color && `rgba(${hexToRgb(props.color)}, ${props.textOpacity || 1})`,
   cursor: props.clickable ? 'pointer;' : '',
   '&:hover': {
     backgroundColor: props.hoverColor || '',

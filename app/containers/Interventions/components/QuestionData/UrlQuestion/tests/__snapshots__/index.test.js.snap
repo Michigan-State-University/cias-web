@@ -110,8 +110,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   max-width: 200px;
   padding-top: 12px;
   padding-bottom: 12px;
-  color: #107969;
-  opacity: 0.1;
+  color: rgba(16,121,105,1);
   background-color: transparent;
   border: 1px solid transparent;
   text-align: center;
@@ -129,7 +128,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   font-weight: 600;
   border-radius: 4px;
   background-color: rgba(16,121,105,0.1);
-  color: #107969;
+  color: rgba(16,121,105,1);
 }
 
 .c1:focus {

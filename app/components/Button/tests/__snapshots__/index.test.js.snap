@@ -6,7 +6,7 @@ exports[`<Button /> should match the snapshot 1`] = `
   height: 48px;
   padding: 12px;
   background-color: #107969;
-  color: #FFF;
+  color: #FFFFFF;
   border-radius: 10px;
   cursor: pointer;
 }

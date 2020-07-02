@@ -9,7 +9,7 @@ exports[`<Card /> should match the snapshot 1`] = `
   height: -moz-min-content;
   height: min-content;
   padding: 16px;
-  background-color: #FFF;
+  background-color: #FFFFFF;
   border-radius: 10px;
 }
 

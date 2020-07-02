@@ -90,7 +90,7 @@ export const QuestionImage = ({
             </H3>
           </Row>
           <Row>
-            <Text opacity={0.5}>
+            <Text textOpacity={0.5}>
               <FormattedMessage {...messages.subheader} />
             </Text>
           </Row>
