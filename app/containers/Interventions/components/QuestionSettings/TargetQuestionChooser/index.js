@@ -25,6 +25,7 @@ import {
 
 import { colors, borders, fontSizes } from 'theme';
 import Question from 'models/Intervention/Question';
+import { findQuestionIndex } from 'containers/Interventions/containers/EditInterventionPage/utils';
 import messages from './messages';
 
 const TargetQuestionChooser = ({
@@ -42,11 +43,20 @@ const TargetQuestionChooser = ({
       }`}
       padded
     >
-      <Row>
+      <Row
+        onClick={() => {
+          const currentIndex = findQuestionIndex(questions, id);
+
+          if (currentIndex !== questions.length - 1)
+            onClick(questions[currentIndex + 1].id);
+        }}
+      >
         <Img src={navigationNext} mr={5} />
-        <Text fontWeight="bold" fontSize={fontSizes.regular}>
-          {formatMessage(messages.header)}
-        </Text>
+        <Box clickable>
+          <Text fontWeight="bold" fontSize={fontSizes.regular}>
+            {formatMessage(messages.header)}
+          </Text>
+        </Box>
       </Row>
     </Box>
     <Row>

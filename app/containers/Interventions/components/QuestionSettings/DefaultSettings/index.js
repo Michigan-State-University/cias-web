@@ -27,6 +27,7 @@ import { updatePreviewAnimation } from 'containers/Interventions/containers/Edit
 
 import globalMessages from 'global/i18n/globalMessages';
 import Question from 'models/Intervention/Question';
+import { findQuestionIndex } from 'containers/Interventions/containers/EditInterventionPage/utils';
 import messages from './messages';
 import {
   updateSettings as updateQuestionSettings,
@@ -69,6 +70,7 @@ const DefaultSettings = ({
   intl: { formatMessage },
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
+  const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
 
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
 
@@ -88,8 +90,8 @@ const DefaultSettings = ({
   };
 
   const displayPatternTargetText = questionId => {
-    const selectedIndex = questions.findIndex(value => value.id === id);
-    const targetIndex = questions.findIndex(value => value.id === questionId);
+    const selectedIndex = findQuestionIndex(questions, id);
+    const targetIndex = findQuestionIndex(questions, questionId);
 
     if (selectedIndex === targetIndex - 1)
       return formatMessage(globalMessages.general.nextScreen);
@@ -224,6 +226,10 @@ const DefaultSettings = ({
                     <ArrowDropdown
                       width="100%"
                       positionFrom="right"
+                      setOpen={value =>
+                        setTargetChooserOpen(value ? index : -1)
+                      }
+                      isOpened={index === targetChooserOpen}
                       dropdownContent={
                         <Box maxWidth={70}>
                           <Text
@@ -238,9 +244,14 @@ const DefaultSettings = ({
                     >
                       <TargetQuestionChooser
                         pattern={pattern}
-                        onClick={value =>
-                          onUpdateCase(index, { ...pattern, target: value }, id)
-                        }
+                        onClick={value => {
+                          setTargetChooserOpen(false);
+                          onUpdateCase(
+                            index,
+                            { ...pattern, target: value },
+                            id,
+                          );
+                        }}
                       />
                     </ArrowDropdown>
                     <Img

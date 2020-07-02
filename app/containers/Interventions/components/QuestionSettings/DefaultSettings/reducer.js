@@ -87,7 +87,8 @@ const defaultQuestionSettingsReducer = (question, payload) => {
       return question;
 
     case UPDATE_FORMULA_CASE:
-      question.formula.patterns[payload.data.index] = payload.data.value;
+      if (question.id !== payload.data.value.target)
+        question.formula.patterns[payload.data.index] = payload.data.value;
       return question;
 
     default:

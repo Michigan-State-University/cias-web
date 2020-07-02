@@ -23,6 +23,7 @@ const layout = props => ({
   display: props.hidden ? 'none' : props.display || '',
   visibility: props.visibility || '',
   overflow: props.overflow || '',
+  zIndex: props.zIndex || '',
 });
 
 layout.propTypes = {
@@ -41,6 +42,7 @@ layout.propTypes = {
     'initial',
     'inherit',
   ]),
+  zIndex: PropTypes.number,
 };
 
 export { layout, positioning };

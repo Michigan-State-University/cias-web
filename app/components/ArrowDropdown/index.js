@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { boxShadows, colors } from 'theme';
@@ -8,15 +8,20 @@ import Box from 'components/Box';
 import Dropdown from './Dropdown';
 import { ArrowDropdownWrapper } from './styled';
 
-const ArrowDropdown = ({ children, width, dropdownContent, positionFrom }) => {
-  const [isOpened, setIsOpened] = useState(false);
-
+const ArrowDropdown = ({
+  children,
+  width,
+  dropdownContent,
+  positionFrom,
+  isOpened,
+  setOpen,
+}) => {
   const dropdown = useRef(null);
 
   const handleClick = event => {
     const { target } = event;
-    if (dropdown.current && !dropdown.current.contains(target)) {
-      setIsOpened(false);
+    if (isOpened && dropdown.current && !dropdown.current.contains(target)) {
+      setOpen(false);
     }
   };
 
@@ -25,11 +30,11 @@ const ArrowDropdown = ({ children, width, dropdownContent, positionFrom }) => {
     return () => {
       window.removeEventListener('click', handleClick);
     };
-  }, []);
+  }, [isOpened]);
 
   return (
     <ArrowDropdownWrapper ref={dropdown} width={width}>
-      <Dropdown onClick={() => setIsOpened(!isOpened)} isOpened={isOpened}>
+      <Dropdown onClick={() => setOpen(!isOpened)} isOpened={isOpened}>
         {dropdownContent}
       </Dropdown>
       <Box
@@ -39,7 +44,7 @@ const ArrowDropdown = ({ children, width, dropdownContent, positionFrom }) => {
         position="absolute"
         width="max-content"
         mt={15}
-        {...(isOpened ? {} : { display: 'none' })}
+        {...(isOpened ? { zIndex: 1 } : { display: 'none' })}
         {...positionFrom === 'right' && { right: '0' }}
       >
         {children}
@@ -53,6 +58,8 @@ ArrowDropdown.propTypes = {
   width: PropTypes.string,
   dropdownContent: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   positionFrom: PropTypes.oneOf(['left', 'right']),
+  isOpened: PropTypes.bool,
+  setOpen: PropTypes.func,
 };
 
 ArrowDropdown.defaultProps = {

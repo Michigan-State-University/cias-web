@@ -34,7 +34,7 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
-import instantiateEmptyQuestion from './utils';
+import { instantiateEmptyQuestion } from './utils';
 
 function EditInterventionPage({
   intl: { formatMessage },

@@ -7,7 +7,7 @@ import {
 } from 'models/Intervention/QuestionTypes';
 import Question from 'models/Intervention/Question';
 
-const instantiateEmptyQuestion = (message, type) => {
+export const instantiateEmptyQuestion = (message, type) => {
   switch (type) {
     case singleQuestion.id:
       return new Question(message, type, {
@@ -61,4 +61,5 @@ const instantiateEmptyQuestion = (message, type) => {
   }
 };
 
-export default instantiateEmptyQuestion;
+export const findQuestionIndex = (questions, questionId) =>
+  questions.findIndex(value => value.id === questionId);
