@@ -17,6 +17,7 @@ import Tabs from 'components/Tabs';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Img from 'components/Img';
 import ArrowDropdown from 'components/ArrowDropdown';
+import Text from 'components/Text';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
@@ -25,6 +26,7 @@ import { colors } from 'theme';
 import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
 import globalMessages from 'global/i18n/globalMessages';
+import Question from 'models/Intervention/Question';
 import messages from './messages';
 import {
   updateSettings as updateQuestionSettings,
@@ -40,7 +42,11 @@ import {
 import BlockTypeChooser from '../BlockTypeChooser';
 import { DashedBox, CaseInput } from './styled';
 import { bodyAnimations, facialAnimations } from './animations';
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestions,
+} from '../../../containers/EditInterventionPage/selectors';
+import TargetQuestionChooser from '../TargetQuestionChooser';
 
 const getPossibleAnimations = (type, formatMessage) => {
   if (type === blockTypes[0]) return facialAnimations(formatMessage);
@@ -59,6 +65,7 @@ const DefaultSettings = ({
   onAddCase,
   onRemoveCase,
   onUpdateCase,
+  questions,
   intl: { formatMessage },
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
@@ -78,6 +85,18 @@ const DefaultSettings = ({
       updateNarratorPreviewAnimation(snakeCase(value.toLowerCase()));
       updateAnimation(index, value, id);
     }
+  };
+
+  const displayPatternTargetText = questionId => {
+    const selectedIndex = questions.findIndex(value => value.id === id);
+    const targetIndex = questions.findIndex(value => value.id === questionId);
+
+    if (selectedIndex === targetIndex - 1)
+      return formatMessage(globalMessages.general.nextScreen);
+
+    if (targetIndex !== -1) return questions[targetIndex].title;
+
+    return formatMessage(messages.selectQuestion);
   };
 
   return (
@@ -184,7 +203,9 @@ const DefaultSettings = ({
                     align="center"
                     mb={8}
                   >
-                    {formatMessage(globalMessages.general.if)}
+                    <Text whiteSpace="pre">
+                      {formatMessage(globalMessages.general.if)}
+                    </Text>
                     <Box bg={colors.linkWater} mx={10}>
                       <CaseInput
                         px={0}
@@ -197,9 +218,33 @@ const DefaultSettings = ({
                         }
                       />
                     </Box>
-                    <Box>{formatMessage(globalMessages.general.goTo)}</Box>
-                    <ArrowDropdown width="100%">x</ArrowDropdown>
+                    <Text whiteSpace="pre" mr={10}>
+                      {formatMessage(globalMessages.general.goTo)}
+                    </Text>
+                    <ArrowDropdown
+                      width="100%"
+                      positionFrom="right"
+                      dropdownContent={
+                        <Box maxWidth={70}>
+                          <Text
+                            textOverflow="ellipsis"
+                            whiteSpace="pre"
+                            overflow="hidden"
+                          >
+                            {displayPatternTargetText(pattern.target)}
+                          </Text>
+                        </Box>
+                      }
+                    >
+                      <TargetQuestionChooser
+                        pattern={pattern}
+                        onClick={value =>
+                          onUpdateCase(index, { ...pattern, target: value }, id)
+                        }
+                      />
+                    </ArrowDropdown>
                     <Img
+                      ml={10}
                       src={binNoBg}
                       onClick={() => onRemoveCase(index, id)}
                       clickable
@@ -230,10 +275,12 @@ DefaultSettings.propTypes = {
   onAddCase: PropTypes.func,
   onRemoveCase: PropTypes.func,
   onUpdateCase: PropTypes.func,
+  questions: PropTypes.arrayOf(PropTypes.shape(Question)),
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
+  questions: makeSelectQuestions(),
 });
 
 const mapDispatchToProps = {

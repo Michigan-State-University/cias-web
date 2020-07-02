@@ -15,7 +15,7 @@ const Dropdown = ({ children, isOpened, onClick }) => {
 
   return (
     <DropdownContainer onClick={onClick}>
-      <Row align="center" justify="between">
+      <Row align="center" justify="between" height="100%">
         <Box>{children}</Box>
         <Img src={arrow} />
       </Row>

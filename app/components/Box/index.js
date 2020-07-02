@@ -8,6 +8,7 @@ import {
   style,
   border,
   flex,
+  positioning,
 } from '../BaseComponentStyles';
 
 const Box = styled.div`
@@ -22,6 +23,7 @@ const Box = styled.div`
   ${style};
   ${border};
   ${flex};
+  ${positioning};
 `;
 
 Box.propTypes = {

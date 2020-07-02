@@ -13,6 +13,8 @@ const text = props => ({
   fontStyle: props.fontStyle || '',
   color:
     props.color && `rgba(${hexToRgb(props.color)}, ${props.textOpacity || 1})`,
+  whiteSpace: props.whiteSpace || '',
+  textOverflow: props.textOverflow || '',
 });
 
 text.propTypes = {
@@ -21,6 +23,8 @@ text.propTypes = {
   fontStyle: PropTypes.string,
   color: PropTypes.string,
   textOpacity: PropTypes.number,
+  whiteSpace: PropTypes.string,
+  textOverflow: PropTypes.string,
 };
 
 export { text };

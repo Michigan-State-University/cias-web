@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  padding: 16px;
+  border-bottom: 1px solid #E9F1FB;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  padding: 8px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c4 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.c8 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  margin-right: 5px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    >
+      <img
+        className="c3"
+        src="IMAGE_MOCK"
+      />
+      <p
+        className="c4"
+        fontSize="15px"
+        fontWeight="bold"
+      >
+        Next Screen
+      </p>
+    </div>
+  </div>
+  <div
+    className="c2"
+  >
+    <div
+      className="c5"
+    >
+      <div
+        className="c6"
+      >
+        <div
+          className="c7"
+        >
+          <img
+            className="c3"
+            src="IMAGE_MOCK"
+          />
+          <h3
+            className="c8"
+          >
+            
+          </h3>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { fontSizes, fontFamily, lineHeights } from 'theme';
-import { margin, text } from '../BaseComponentStyles';
+import { margin, text, layout } from '../BaseComponentStyles';
 
 const Text = styled.p`
   margin: 0;
@@ -9,6 +9,7 @@ const Text = styled.p`
   line-height: ${lineHeights.small};
   ${margin};
   ${text};
+  ${layout};
 `;
 
 export default Text;

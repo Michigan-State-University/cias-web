@@ -79,4 +79,8 @@ export default defineMessages({
     id: `${scope}.newCase`,
     defaultMessage: '+ Add another case',
   },
+  selectQuestion: {
+    id: `${scope}.selectQuestion`,
+    defaultMessage: 'Select Question',
+  },
 });
