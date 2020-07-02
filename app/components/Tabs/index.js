@@ -6,7 +6,7 @@ import Row from 'components/Row';
 import Tab from './Tab';
 import { TabsContainer, ContentContainer } from './styled';
 
-const Tabs = ({ children }) => {
+const Tabs = ({ children, ...restProps }) => {
   const { label: initialLabel } = children[0].props;
   const [activeTab, setActiveTab] = useState(initialLabel);
 
@@ -15,7 +15,7 @@ const Tabs = ({ children }) => {
   };
 
   return (
-    <TabsContainer>
+    <TabsContainer {...restProps}>
       <Row>
         {children.map(child => {
           const { label } = child.props;

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-import { colors, elements } from 'theme';
+import { elements } from 'theme';
+
 export const NavbarStyled = styled.div`
   position: fixed;
   width: 100%;
@@ -19,18 +20,6 @@ export const RightPanel = styled.div`
   margin-right: 0;
   display: flex;
   align-items: center;
-`;
-
-export const CrossContainer = styled.div`
-  height: 28px;
-  width: 28px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 4px;
-  background: ${colors.linkWater};
-  margin-right: 35px;
-  cursor: pointer;
 `;
 
 export const DropDownContent = styled.div`

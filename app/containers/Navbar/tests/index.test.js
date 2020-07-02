@@ -11,7 +11,7 @@ import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import 'jest-styled-components';
 
-import { NavbarWithIntl as Navbar } from '../index';
+import Navbar from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<Navbar />', () => {
@@ -22,7 +22,6 @@ describe('<Navbar />', () => {
         <Navbar
           logOut={() => {}}
           user={{ firstName: 'test', lastName: 'test' }}
-          intervention={{ name: 'e-Intervention Name' }}
         />
       </IntlProvider>,
     );
@@ -37,7 +36,6 @@ describe('<Navbar />', () => {
         <Navbar
           logOut={() => {}}
           user={{ firstName: 'test', lastName: 'test' }}
-          intervention={{ name: 'e-Intervention Name' }}
         />
       </IntlProvider>,
     );

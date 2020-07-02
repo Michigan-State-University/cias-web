@@ -16,6 +16,7 @@ import LoginPage from 'containers/LoginPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage';
+import SettingsInterventionPage from 'containers/Interventions/containers/SettingsInterventionPage';
 import CreateInterventionPage from 'containers/Interventions/containers/EditInterventionPage/temporary';
 import rootSaga from 'global/sagas/rootSaga';
 
@@ -41,6 +42,12 @@ function App() {
           exact
           path="/interventions/create"
           component={CreateInterventionPage}
+          protectedRoute
+        />
+        <AppRoute
+          exact
+          path="/interventions/:id/settings"
+          component={SettingsInterventionPage}
           protectedRoute
         />
         <AppRoute component={NotFoundPage} />

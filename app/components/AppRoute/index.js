@@ -16,7 +16,7 @@ class AppRoute extends Route {
     if (isLoggedIn) {
       return (
         <>
-          <Navbar includeInterventionName={path.includes('/interventions')} />
+          <Navbar path={path} />
           <div style={{ marginTop: 70 }}>{super.render()}</div>
         </>
       );
