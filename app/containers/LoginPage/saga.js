@@ -5,14 +5,14 @@ import { LOGIN_REQUEST } from './constants';
 import { loginError, loginSuccess } from './actions';
 import { logIn } from '../../global/reducers/auth/actions';
 
-function* login({ payload: { username, password } }) {
+function* login({ payload: { email, password } }) {
   const requestURL = `auth/sign_in`;
 
   try {
     const {
       data: { data },
     } = yield axios.post(requestURL, {
-      username,
+      email,
       password,
     });
 

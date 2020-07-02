@@ -12,8 +12,8 @@ import {
 } from './constants';
 import { actionBuilder } from '../../utils/actionBuilder';
 
-const loginRequest = (username, password) =>
-  actionBuilder(LOGIN_REQUEST, { username, password });
+const loginRequest = (email, password) =>
+  actionBuilder(LOGIN_REQUEST, { email, password });
 
 const loginSuccess = () => actionBuilder(LOGIN_SUCCESS);
 

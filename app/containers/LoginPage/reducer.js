@@ -17,7 +17,7 @@ export const initialState = {
   error: '',
   newAccountPopup: false,
   formData: {
-    username: '',
+    email: '',
     password: '',
   },
 };
@@ -28,7 +28,7 @@ const loginPageReducer = (state = initialState, action) =>
     switch (action.type) {
       case LOGIN_REQUEST:
         draft.formData = {
-          username: action.payload.username,
+          email: action.payload.email,
           password: action.payload.password,
         };
         draft.error = '';

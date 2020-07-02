@@ -39,7 +39,7 @@ export function LoginPage(props) {
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
-  const [username, setUsername] = useState(formData.username);
+  const [email, setEmail] = useState(formData.email);
   const [password, setPassword] = useState(formData.password);
 
   useEffect(() => {
@@ -62,8 +62,8 @@ export function LoginPage(props) {
               <Input
                 mb={20}
                 placeholder={formatMessage(messages.emailPlaceholder)}
-                value={username}
-                onChange={event => setUsername(event.target.value)}
+                value={email}
+                onChange={event => setEmail(event.target.value)}
               />
               <Input
                 mb={20}
@@ -75,7 +75,7 @@ export function LoginPage(props) {
               <StyledButton
                 loading={loading}
                 title={formatMessage(messages.loginButton)}
-                onClick={() => onLogin(username, password)}
+                onClick={() => onLogin(email, password)}
               />
               <Link to="/register">
                 <StyledButton title={formatMessage(messages.register)} />
@@ -97,7 +97,7 @@ LoginPage.propTypes = {
     errors: PropTypes.string,
     loading: PropTypes.bool,
     formData: PropTypes.shape({
-      username: PropTypes.string,
+      email: PropTypes.string,
       password: PropTypes.string,
     }),
   }),

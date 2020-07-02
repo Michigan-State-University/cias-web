@@ -5,7 +5,7 @@ describe('loginPageReducer', () => {
   beforeEach(() => {
     state = {
       formData: {
-        username: '',
+        email: '',
         password: '',
       },
       loading: false,

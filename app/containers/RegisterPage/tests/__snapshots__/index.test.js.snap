@@ -5,55 +5,55 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
   class="Fill-sc-1f4o7x0-0 dHXeMo"
 >
   <div
-    class="Column-sc-1n6divy-0 lxsJW"
+    class="Column-sc-1n6divy-0 edhQgu"
   >
     <div
       class="Card-v952e1-0 kutakG"
       width="100%"
     >
       <div
-        class="Column-sc-1n6divy-0 kCIvWB"
+        class="Column-sc-1n6divy-0 dQNPKb"
       >
         <span>
           Register
         </span>
         <input
-          class="Input-sc-19txxuq-0 fTNTqj"
+          class="Input-sc-19txxuq-0 eYRTXl"
           name="username"
           placeholder="Username"
           type="text"
           value=""
         />
         <input
-          class="Input-sc-19txxuq-0 AcTzB"
+          class="Input-sc-19txxuq-0 TEjKm"
           name="firstName"
           placeholder="First name"
           type="text"
           value=""
         />
         <input
-          class="Input-sc-19txxuq-0 AcTzB"
+          class="Input-sc-19txxuq-0 TEjKm"
           name="lastName"
           placeholder="Last name"
           type="text"
           value=""
         />
         <input
-          class="Input-sc-19txxuq-0 AcTzB"
+          class="Input-sc-19txxuq-0 TEjKm"
           name="email"
           placeholder="Email"
           type="email"
           value=""
         />
         <input
-          class="Input-sc-19txxuq-0 AcTzB"
+          class="Input-sc-19txxuq-0 TEjKm"
           name="password"
           placeholder="Password"
           type="password"
           value=""
         />
         <input
-          class="Input-sc-19txxuq-0 AcTzB"
+          class="Input-sc-19txxuq-0 TEjKm"
           name="passwordConfirmation"
           placeholder="Password confirmation"
           type="password"
