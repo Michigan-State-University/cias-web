@@ -21,7 +21,7 @@ const ArrowDropdown = ({
   const handleClick = event => {
     const { target } = event;
     if (isOpened && dropdown.current && !dropdown.current.contains(target)) {
-      setOpen(false);
+      if (setOpen) setOpen(false);
     }
   };
 
@@ -34,7 +34,10 @@ const ArrowDropdown = ({
 
   return (
     <ArrowDropdownWrapper ref={dropdown} width={width}>
-      <Dropdown onClick={() => setOpen(!isOpened)} isOpened={isOpened}>
+      <Dropdown
+        onClick={() => setOpen && setOpen(!isOpened)}
+        isOpened={isOpened}
+      >
         {dropdownContent}
       </Dropdown>
       <Box
