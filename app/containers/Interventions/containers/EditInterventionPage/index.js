@@ -15,7 +15,7 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Text from 'components/Text';
 import Question from 'models/Intervention/Question';
 
-import { borders, themeColors, colors, elements } from 'theme';
+import { borders, themeColors, colors } from 'theme';
 
 import reducer from './reducer';
 import saga from './saga';
@@ -65,7 +65,7 @@ function EditInterventionPage({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
-      <Row height={`calc(100vh - ${elements.navbarHeight}px)`} filled>
+      <Row height="100%" filled>
         <Column sm={4}>
           <Box
             height="100%"

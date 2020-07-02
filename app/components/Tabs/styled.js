@@ -15,8 +15,22 @@ export const ContentContainer = styled.div`
 export const LabelContainer = styled.div`
   margin: 0 10px;
   padding-bottom: 10px;
-  cursor: pointer;
   border-bottom-width: 2px;
   border-bottom-color: ${themeColors.secondary};
   border-bottom-style: ${({ isActive }) => (isActive ? 'solid' : 'none')};
+  div {
+    cursor: pointer;
+  }
+`;
+
+export const LinkContainer = styled(LabelContainer)`
+  cursor: default;
+  a {
+    color: ${themeColors.text};
+    text-decoration: none;
+  }
+  a:visited,
+  a:hover {
+    color: ${themeColors.text};
+  }
 `;

@@ -1,5 +1,6 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
+import set from 'lodash/set';
 import Intervention from 'models/Intervention/Intervention';
 
 import {
@@ -215,10 +216,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case EDIT_INTERVENTION_REQUEST:
-        draft.intervention = {
-          ...draft.intervention,
-          [action.payload.field]: action.payload.value,
-        };
+        set(draft.intervention, action.payload.path, action.payload.value);
         break;
       case EDIT_INTERVENTION_SUCCESS:
         draft.intervention = action.payload.intervention;

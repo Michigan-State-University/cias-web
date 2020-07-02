@@ -24,7 +24,8 @@ import messages from './messages';
 import InterventionsNavbar from './components/InterventionsNavbar';
 
 const renderNavbar = path => {
-  if (path.includes('/interventions')) return <InterventionsNavbar />;
+  if (path.includes('/interventions'))
+    return <InterventionsNavbar path={path} />;
 };
 function Navbar({ user: { firstName, lastName }, logOut: logOutCall, path }) {
   const [menuVisible, setMenuVisible] = useState(false);

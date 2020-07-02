@@ -6,24 +6,38 @@ import Row from 'components/Row';
 import Tab from './Tab';
 import { TabsContainer, ContentContainer } from './styled';
 
-const Tabs = ({ children, ...restProps }) => {
-  const { label: initialLabel } = children[0].props;
-  const [activeTab, setActiveTab] = useState(initialLabel);
+const Tabs = ({
+  children,
+  controlled,
+  controlledTabActive,
+  controlledSetTabActive,
+  ...restProps
+}) => {
+  const { label: initialLabel, renderAsLink } = children[0].props;
+
+  const [activeTab, setActiveTab] = useState(
+    initialLabel || renderAsLink.props.children,
+  );
 
   const onClickTabItem = tab => {
-    setActiveTab(tab);
+    if (controlled) controlledSetTabActive(tab);
+    else setActiveTab(tab);
   };
+
+  const tab = controlled ? controlledTabActive : activeTab;
 
   return (
     <TabsContainer {...restProps}>
       <Row>
         {children.map(child => {
-          const { label } = child.props;
+          const { label, renderAsLink } = child.props;
           return (
             <Tab
-              activeTab={activeTab}
-              key={label}
+              activeTab={tab}
+              key={label || renderAsLink.props.children}
+              text={label || renderAsLink.props.children}
               label={label}
+              renderAsLink={renderAsLink}
               onClick={onClickTabItem}
             />
           );
@@ -32,7 +46,7 @@ const Tabs = ({ children, ...restProps }) => {
       <ContentContainer>
         {children.map(child => {
           const { label, children: content } = child.props;
-          if (label !== activeTab) return null;
+          if (label !== tab) return null;
           return content;
         })}
       </ContentContainer>

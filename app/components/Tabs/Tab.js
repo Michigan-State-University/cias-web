@@ -1,18 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { LabelContainer } from './styled';
+import { LabelContainer, LinkContainer } from './styled';
 
-const Tab = ({ label, onClick, activeTab }) => {
+const Tab = ({
+  label,
+  text,
+  renderAsLink: LinkComponent,
+  onClick,
+  activeTab,
+}) => {
   const handleClick = () => {
-    onClick(label);
+    onClick(text);
   };
 
-  return (
-    <LabelContainer isActive={activeTab === label} onClick={handleClick}>
-      {label}
-    </LabelContainer>
-  );
+  if (label)
+    return (
+      <LabelContainer isActive={activeTab === text}>
+        <div onClick={handleClick}>{label}</div>
+      </LabelContainer>
+    );
+
+  if (LinkComponent)
+    return (
+      <LinkContainer isActive={activeTab === text}>
+        <div onClick={handleClick}>{LinkComponent}</div>
+      </LinkContainer>
+    );
+
+  return null;
 };
 
 Tab.propTypes = {

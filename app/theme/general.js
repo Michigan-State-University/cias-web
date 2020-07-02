@@ -11,6 +11,7 @@ const paddings = {
 
 const boxShadows = {
   1: '0px 0px 50px rgba(0, 0, 0, 0.08)',
+  2: '0px 4px 20px #e3eefb;',
 };
 
 const elements = {

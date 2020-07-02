@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+
 import Navbar from 'containers/Navbar';
+import { elements } from 'theme';
 import { makeSelectIsLoggedIn } from '../../global/reducers/auth';
 
 class AppRoute extends Route {
@@ -17,7 +19,14 @@ class AppRoute extends Route {
       return (
         <>
           <Navbar path={path} />
-          <div style={{ marginTop: 70 }}>{super.render()}</div>
+          <div
+            style={{
+              marginTop: 70,
+              height: `calc(100vh - ${elements.navbarHeight}px)`,
+            }}
+          >
+            {super.render()}
+          </div>
         </>
       );
     }

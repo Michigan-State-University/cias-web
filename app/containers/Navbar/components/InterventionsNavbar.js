@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -15,13 +15,24 @@ import { editInterventionRequest } from 'containers/Interventions/containers/Edi
 import { CrossContainer } from './styled';
 import messages from './messages';
 
+const getActiveTab = (path, formatMessage) => {
+  if (path.includes('/edit')) return formatMessage(messages.content);
+  if (path.includes('/settings')) return formatMessage(messages.settings);
+  return formatMessage(messages.sharing);
+};
+
 const InterventionNavbar = ({
   intervention: { name, id },
   updateInterventionName,
   intl: { formatMessage },
+  path,
 }) => {
+  const [tabActive, setTabActive] = useState(getActiveTab(path, formatMessage));
+  useEffect(() => {
+    setTabActive(getActiveTab(path, formatMessage));
+  }, [path]);
   return (
-    <Row align="center" justify="between" width="100%" border="1px solid red">
+    <Row align="center" justify="between" width="100%">
       <Row align="center">
         <CrossContainer onClick={() => {}}>
           <Img src={cross} alt="cross" />
@@ -36,23 +47,34 @@ const InterventionNavbar = ({
           maxWidth={800}
           averageLetterWidth={13}
           placeholder={formatMessage(messages.placeholder)}
-          onBlur={val => updateInterventionName({ field: 'name', value: val })}
+          onBlur={val => updateInterventionName({ path: 'name', value: val })}
         />
       </Row>
 
-      <Tabs display="flex" align="center">
+      <Tabs
+        display="flex"
+        align="center"
+        controlledTabActive={tabActive}
+        controlledSetTabActive={setTabActive}
+        controlled
+      >
         <div
-          label={
+          renderAsLink={
             <Link to={`/interventions/${id}/edit`}>
               {formatMessage(messages.content)}
             </Link>
           }
         />
         <div
-          to={`/interventions/${id}/settings`}
-          label={formatMessage(messages.settings)}
+          renderAsLink={
+            <Link to={`/interventions/${id}/settings`}>
+              {formatMessage(messages.settings)}
+            </Link>
+          }
         />
-        <div to="/" label={formatMessage(messages.sharing)} />
+        <div
+          renderAsLink={<Link to={`/`}>{formatMessage(messages.sharing)}</Link>}
+        />
       </Tabs>
       <div />
     </Row>
