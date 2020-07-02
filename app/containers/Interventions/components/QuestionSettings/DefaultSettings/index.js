@@ -16,6 +16,7 @@ import Switch from 'components/Switch';
 import Tabs from 'components/Tabs';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Img from 'components/Img';
+import ArrowDropdown from 'components/ArrowDropdown';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
@@ -196,7 +197,8 @@ const DefaultSettings = ({
                         }
                       />
                     </Box>
-                    {formatMessage(globalMessages.general.goTo)}
+                    <Box>{formatMessage(globalMessages.general.goTo)}</Box>
+                    <ArrowDropdown width="100%">x</ArrowDropdown>
                     <Img
                       src={binNoBg}
                       onClick={() => onRemoveCase(index, id)}
