@@ -20,9 +20,11 @@ const ArrowDropdown = ({
   const dropdown = useRef(null);
 
   useEffect(() => {
-    const cleanUp = outsideClickHandler(dropdown, () => setOpen(false));
+    if (isOpened) {
+      const cleanUp = outsideClickHandler(dropdown, () => setOpen(false));
 
-    return cleanUp;
+      return cleanUp;
+    }
   }, [isOpened]);
 
   return (
