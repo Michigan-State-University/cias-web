@@ -21,11 +21,11 @@ import {
   makeSelectIntervention,
   makeSelectQuestions,
   makeSelectSelectedQuestion,
+  makeSelectSelectedQuestionIndex,
 } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 
 import { colors, borders, fontSizes } from 'theme';
 import Question from 'models/Intervention/Question';
-import { findQuestionIndex } from 'models/Intervention/utils';
 import messages from './messages';
 
 const TargetQuestionChooser = ({
@@ -35,64 +35,79 @@ const TargetQuestionChooser = ({
   questions,
   selectedQuestion: { id } = {},
   pattern,
-}) => (
-  <Box>
-    <Box
-      borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
-        colors.linkWater
-      }`}
-      padded
-    >
-      <Row
-        onClick={() => {
-          const currentIndex = findQuestionIndex(questions, id);
+  currentIndex,
+}) => {
+  const canSelectQuestion = questionId => id !== questionId;
+  const isLast = currentIndex === questions.length - 1;
 
-          if (currentIndex !== questions.length - 1)
-            onClick(questions[currentIndex + 1].id);
-        }}
+  return (
+    <Box>
+      <Box
+        borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
+          colors.linkWater
+        }`}
+        padded
       >
-        <Img src={navigationNext} mr={5} />
-        <Box clickable>
-          <Text fontWeight="bold" fontSize={fontSizes.regular}>
-            {formatMessage(messages.header)}
-          </Text>
+        <Row
+          onClick={() => {
+            if (!isLast) {
+              const targetId = questions[currentIndex + 1].id;
+              onClick(targetId);
+            }
+          }}
+        >
+          <Img src={navigationNext} mr={5} />
+          <Box clickable={!isLast}>
+            <Text
+              color={isLast ? colors.grey : ''}
+              fontWeight="bold"
+              fontSize={fontSizes.regular}
+            >
+              {formatMessage(messages.header)}
+            </Text>
+          </Box>
+        </Row>
+      </Box>
+      <Row>
+        <Box padding={8} filled>
+          <Column>
+            <Row mb={20}>
+              <Img src={presentationProjector} mr={5} />
+              <H3>{name}</H3>
+            </Row>
+            {questions.map((question, index) => (
+              <Row
+                key={`${id}-select-target-${index}`}
+                mb={index !== questions.length - 1 && 15}
+                onClick={() =>
+                  canSelectQuestion(question.id) && onClick(question.id)
+                }
+              >
+                <Img
+                  src={
+                    pattern.target === question.id ? webpageSelected : webpage
+                  }
+                  mr={10}
+                />
+                <Box maxWidth={250} clickable={canSelectQuestion(question.id)}>
+                  <Text
+                    textOverflow="ellipsis"
+                    whiteSpace="pre"
+                    overflow="hidden"
+                    color={!canSelectQuestion(question.id) ? colors.grey : ''}
+                    fontWeight={pattern.target === question.id ? 'bold' : ''}
+                  >
+                    {question.title}
+                  </Text>
+                </Box>
+              </Row>
+            ))}
+          </Column>
         </Box>
       </Row>
     </Box>
-    <Row>
-      <Box padding={8} filled>
-        <Column>
-          <Row mb={20}>
-            <Img src={presentationProjector} mr={5} />
-            <H3>{name}</H3>
-          </Row>
-          {questions.map((question, index) => (
-            <Row
-              key={`${id}-select-target-${index}`}
-              mb={index !== questions.length - 1 && 15}
-              onClick={() => onClick(question.id)}
-            >
-              <Img
-                src={pattern.target === question.id ? webpageSelected : webpage}
-                mr={10}
-              />
-              <Box maxWidth={250} clickable>
-                <Text
-                  textOverflow="ellipsis"
-                  whiteSpace="pre"
-                  overflow="hidden"
-                  fontWeight={pattern.target === question.id ? 'bold' : ''}
-                >
-                  {question.title}
-                </Text>
-              </Box>
-            </Row>
-          ))}
-        </Column>
-      </Box>
-    </Row>
-  </Box>
-);
+  );
+};
 
 TargetQuestionChooser.propTypes = {
   intl: PropTypes.object,
@@ -104,12 +119,14 @@ TargetQuestionChooser.propTypes = {
     match: PropTypes.string,
     target: PropTypes.string,
   }),
+  currentIndex: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
+  currentIndex: makeSelectSelectedQuestionIndex(),
 });
 
 const withConnect = connect(mapStateToProps);
