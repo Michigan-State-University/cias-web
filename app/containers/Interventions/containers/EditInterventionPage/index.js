@@ -24,7 +24,11 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionIndex,
 } from './selectors';
-import { getInterventionRequest, createQuestionRequest } from './actions';
+import {
+  getInterventionRequest,
+  createQuestionRequest,
+  getQuestionsRequest,
+} from './actions';
 
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
@@ -39,6 +43,7 @@ function EditInterventionPage({
   getIntervention,
   createQuestion,
   match: { params },
+  getQuestions,
 }) {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   useInjectReducer({ key: 'editInterventionPage', reducer });
@@ -46,6 +51,7 @@ function EditInterventionPage({
 
   useEffect(() => {
     getIntervention(params.id);
+    getQuestions(params.id);
   }, []);
 
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
@@ -137,6 +143,7 @@ EditInterventionPage.propTypes = {
   match: PropTypes.object,
   getIntervention: PropTypes.func,
   createQuestion: PropTypes.func,
+  getQuestions: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -146,6 +153,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   getIntervention: id => getInterventionRequest(id),
+  getQuestions: getQuestionsRequest,
   createQuestion: (type, id) => createQuestionRequest(type, id),
 };
 

@@ -1,44 +1,39 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
+import { Helmet } from 'react-helmet';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
-import { injectIntl } from 'react-intl';
-import { Helmet } from 'react-helmet';
-
-import reducer from '../EditInterventionPage/reducer';
-import saga from '../EditInterventionPage/saga';
-
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
-import { colors } from 'theme';
+import { injectIntl, intlShape } from 'react-intl';
 
 import Box from 'components/Box';
 import H3 from 'components/H3';
-
+import { colors } from 'theme';
+import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
 import { makeSelectIntervention } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import {
   editInterventionRequest,
   getInterventionRequest,
+  getQuestionsRequest,
 } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
-import { StyledColumn, Input, NameContainer } from './styled';
-import messages from './messages';
-
 import Option from './components/Option';
+import messages from './messages';
+import reducer from '../EditInterventionPage/reducer';
+import saga from '../EditInterventionPage/saga';
+import { StyledColumn, Input, NameContainer } from './styled';
 
-const mockSettings = {
-  voice: true,
-  animatedCharacter: true,
-};
+const lastKey = obj => Object.keys(obj)[Object.keys(obj).length - 1];
 
 const SettingsInterventionPage = ({
-  intervention: { name, settings },
+  intervention: { id, name, settings: { narrator: narratorSettings } = {} },
   match: { params },
   getIntervention,
   intl: { formatMessage },
   editIntervention,
+  getQuestions,
 }) => {
   useInjectReducer({ key: 'editInterventionPage', reducer });
   useInjectSaga({ key: 'editInterventionPage', saga });
@@ -77,11 +72,11 @@ const SettingsInterventionPage = ({
           <H3 mt={30} mb={20}>
             {formatMessage(messages.narratorSettings)}
           </H3>
-          {map(mockSettings, (option, index) => (
+          {map(narratorSettings, (option, index) => (
             <Option
+              refetchQuestions={() => getQuestions(id)}
               key={`el-option-${index}`}
-              // fontWeight={index === 'narratorActive' ? 'bold' : 'regular'}
-              withBorder={index !== 'animatedCharacter'}
+              withBorder={index !== lastKey(narratorSettings)}
               label={formatMessage(messages[index])}
               value={option}
               action={editIntervention}
@@ -94,9 +89,23 @@ const SettingsInterventionPage = ({
   );
 };
 
-SettingsInterventionPage.propTypes = {};
-
-SettingsInterventionPage.defualtProps = {};
+SettingsInterventionPage.propTypes = {
+  intervention: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    settings: PropTypes.shape({
+      narrator: PropTypes.shape({
+        voice: PropTypes.bool,
+        narrator: PropTypes.bool,
+      }),
+    }),
+  }),
+  match: PropTypes.object,
+  getIntervention: PropTypes.func,
+  intl: intlShape,
+  editIntervention: PropTypes.func,
+  getQuestions: PropTypes.func,
+};
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
@@ -105,6 +114,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   editIntervention: editInterventionRequest,
   getIntervention: getInterventionRequest,
+  getQuestions: getQuestionsRequest,
 };
 
 const withConnect = connect(

@@ -27,8 +27,8 @@ export default defineMessages({
     id: `${scope}.voice`,
     defaultMessage: 'Voice',
   },
-  animatedCharacter: {
-    id: `${scope}.animatedCharacter`,
+  animation: {
+    id: `${scope}.animation`,
     defaultMessage: 'Animated Character',
   },
 });

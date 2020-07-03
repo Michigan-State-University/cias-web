@@ -6,7 +6,7 @@
 
 import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -24,10 +24,15 @@ import messages from './messages';
 import InterventionsNavbar from './components/InterventionsNavbar';
 
 const renderNavbar = path => {
-  if (path.includes('/interventions'))
+  if (path && path.includes('/interventions'))
     return <InterventionsNavbar path={path} />;
+  return null;
 };
-function Navbar({ user: { firstName, lastName }, logOut: logOutCall, path }) {
+export function Navbar({
+  user: { firstName, lastName },
+  logOut: logOutCall,
+  path,
+}) {
   const [menuVisible, setMenuVisible] = useState(false);
 
   return (
@@ -59,7 +64,7 @@ Navbar.propTypes = {
     lastName: PropTypes.string.isRequired,
   }),
   logOut: PropTypes.func,
-  path: PropTypes.string,
+  path: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

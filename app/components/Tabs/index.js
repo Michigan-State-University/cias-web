@@ -6,6 +6,7 @@ import Row from 'components/Row';
 import Tab from './Tab';
 import { TabsContainer, ContentContainer } from './styled';
 
+// rendering labels as links should be used with a `controlled` prop
 const Tabs = ({
   children,
   controlled,
@@ -13,10 +14,13 @@ const Tabs = ({
   controlledSetTabActive,
   ...restProps
 }) => {
-  const { label: initialLabel, renderAsLink } = children[0].props;
+  const {
+    label: initialLabel,
+    renderAsLink: initialRenderAsLink,
+  } = children[0].props;
 
   const [activeTab, setActiveTab] = useState(
-    initialLabel || renderAsLink.props.children,
+    initialLabel || initialRenderAsLink.props.children,
   );
 
   const onClickTabItem = tab => {
@@ -56,6 +60,9 @@ const Tabs = ({
 
 Tabs.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
+  controlled: PropTypes.bool,
+  controlledTabActive: PropTypes.string,
+  controlledSetTabActive: PropTypes.func,
 };
 
 export default Tabs;

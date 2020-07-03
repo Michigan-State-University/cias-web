@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Row from 'components/Row';
@@ -7,14 +7,16 @@ import Switch from 'components/Switch';
 import { colors, borders } from 'theme';
 
 const Option = ({
-  /* fontWeight,*/ withBorder,
+  withBorder,
   label,
   value,
   action,
   index,
+  refetchQuestions,
 }) => {
   const handleToggle = val => {
-    action({ path: `settings.${index}`, value: val });
+    action({ path: `settings.narrator.${index}`, value: val });
+    refetchQuestions();
   };
   return (
     <Row
@@ -28,13 +30,20 @@ const Option = ({
           : null
       }
     >
-      <Text /* fontWeight={fontWeight} */>{label}</Text>
+      <Text>{label}</Text>
       <Switch checked={value} onToggle={handleToggle} />
     </Row>
   );
 };
 
-Option.propTypes = {};
+Option.propTypes = {
+  withBorder: PropTypes.bool,
+  label: PropTypes.string,
+  value: PropTypes.bool,
+  action: PropTypes.func,
+  index: PropTypes.string,
+  refetchQuestions: PropTypes.func,
+};
 
 Option.defualtProps = {};
 

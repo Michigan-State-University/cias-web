@@ -1,5 +1,6 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { injectIntl, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -73,12 +74,22 @@ const InterventionNavbar = ({
           }
         />
         <div
-          renderAsLink={<Link to={`/`}>{formatMessage(messages.sharing)}</Link>}
+          renderAsLink={<Link to="/">{formatMessage(messages.sharing)}</Link>}
         />
       </Tabs>
       <div />
     </Row>
   );
+};
+
+InterventionNavbar.propTypes = {
+  intervention: PropTypes.shape({
+    name: PropTypes.string,
+    id: PropTypes.string,
+  }),
+  updateInterventionName: PropTypes.func,
+  intl: intlShape,
+  path: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

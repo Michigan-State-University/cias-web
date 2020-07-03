@@ -30,7 +30,6 @@ import {
   getQuestionsError,
   createQuestionSuccess,
   createQuestionError,
-  getQuestionsRequest,
   updateQuestionSuccess,
   updateQuestionError,
   updateQuestionImage,
@@ -63,7 +62,6 @@ function* createIntervention() {
       intervention: {
         type: 'Intervention::Single',
         name: 'e-Intervention New',
-        settings: {},
       },
     });
 
@@ -86,8 +84,6 @@ function* getIntervention({ payload: { id } }) {
         id: response.data.data.id,
       }),
     );
-
-    yield put(getQuestionsRequest(id));
   } catch (error) {
     yield put(getInterventionError(error));
   }

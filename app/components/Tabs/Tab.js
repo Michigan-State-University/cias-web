@@ -35,6 +35,8 @@ Tab.propTypes = {
   label: PropTypes.string,
   onClick: PropTypes.func,
   activeTab: PropTypes.string,
+  text: PropTypes.string,
+  renderAsLink: PropTypes.node,
 };
 
 export default Tab;
