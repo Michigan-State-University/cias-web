@@ -84,6 +84,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 >
   <div
     className="c1"
+    data-testid="no-content"
     display="flex"
     height="100%"
     width="100%"

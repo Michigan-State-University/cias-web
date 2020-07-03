@@ -50,7 +50,8 @@ const VariableChooser = ({
     if (variables && variables.length)
       return variables.map((variable, index) => (
         <Row
-          key={`${id}-select-target-${index}`}
+          data-testid={`${id}-select-variable`}
+          key={`${id}-select-variable-${index}`}
           mb={index !== variables.length - 1 && 15}
           onClick={() => onClick(variable.variable)}
           justify="between"

@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
-.c7 {
+Object {
+  "asFragment": [Function],
+  "baseElement": .c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -91,58 +93,176 @@ exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
   margin-right: 5px;
 }
 
-<div
-  className="c0"
->
-  <div
-    className="c1"
-  >
-    <div
-      className="c2"
-      onClick={[Function]}
-    >
-      <img
-        className="c3"
-        src="IMAGE_MOCK"
-      />
+<body>
+    <div>
       <div
-        className="c4"
-      >
-        <p
-          className="c5"
-          color=""
-          fontSize="15px"
-          fontWeight="bold"
-        >
-          Next Screen
-        </p>
-      </div>
-    </div>
-  </div>
-  <div
-    className="c2"
-  >
-    <div
-      className="c6"
-    >
-      <div
-        className="c7"
+        class="c0"
       >
         <div
-          className="c8"
+          class="c1"
         >
-          <img
-            className="c3"
-            src="IMAGE_MOCK"
-          />
-          <h3
-            className="c9"
+          <div
+            class="c2"
           >
-            
-          </h3>
+            <img
+              class="c3"
+              src="IMAGE_MOCK"
+            />
+            <div
+              class="c4"
+            >
+              <p
+                class="c5"
+                color=""
+                font-size="15px"
+                font-weight="bold"
+              >
+                Next Screen
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="c2"
+        >
+          <div
+            class="c6"
+          >
+            <div
+              class="c7"
+            >
+              <div
+                class="c8"
+              >
+                <img
+                  class="c3"
+                  src="IMAGE_MOCK"
+                />
+                <h3
+                  class="c9"
+                >
+                  e-Intervention Name
+                </h3>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </body>,
+  "container": <div>
+    <div
+      class="Box-sc-14m3exe-0 bEDaLW"
+    >
+      <div
+        class="Box-sc-14m3exe-0 hTRAkP"
+      >
+        <div
+          class="Row-x1o3ru-0 cXSRYv"
+        >
+          <img
+            class="Img-sc-1kfzr96-0 ejmWBC"
+            src="IMAGE_MOCK"
+          />
+          <div
+            class="Box-sc-14m3exe-0 jluDyk"
+          >
+            <p
+              class="Text-sc-2lza2m-0 hSSPPH"
+              color=""
+              font-size="15px"
+              font-weight="bold"
+            >
+              Next Screen
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Row-x1o3ru-0 cXSRYv"
+      >
+        <div
+          class="Box-sc-14m3exe-0 gtQYuD"
+        >
+          <div
+            class="Column-sc-1n6divy-0 dQNPKb"
+          >
+            <div
+              class="Row-x1o3ru-0 fsbhR"
+            >
+              <img
+                class="Img-sc-1kfzr96-0 ejmWBC"
+                src="IMAGE_MOCK"
+              />
+              <h3
+                class="H3-sc-1nwhpi5-0 hHNTFr"
+              >
+                e-Intervention Name
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllBySelectText": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getAllByValue": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getBySelectText": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "getByValue": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllBySelectText": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryAllByValue": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryBySelectText": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "queryByValue": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;

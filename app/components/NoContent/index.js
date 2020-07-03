@@ -19,6 +19,7 @@ const NoContent = ({ image, text, alt }) => (
     justify="center"
     align="center"
     borderRadius="0"
+    data-testid="no-content"
   >
     <Column align="center">
       <Img src={image} alt={alt} />

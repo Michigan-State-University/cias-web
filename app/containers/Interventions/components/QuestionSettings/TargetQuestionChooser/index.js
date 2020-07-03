@@ -77,6 +77,7 @@ const TargetQuestionChooser = ({
             </Row>
             {questions.map((question, index) => (
               <Row
+                data-testid={`${id}-select-target`}
                 key={`${id}-select-target-${index}`}
                 mb={index !== questions.length - 1 && 15}
                 onClick={() =>
