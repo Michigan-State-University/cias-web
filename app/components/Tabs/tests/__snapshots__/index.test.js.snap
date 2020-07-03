@@ -18,42 +18,50 @@ exports[`<Tabs /> should render and match the snapshot 1`] = `
 .c1 {
   margin: 0 10px;
   padding-bottom: 10px;
-  cursor: pointer;
   border-bottom-width: 2px;
   border-bottom-color: #C866EA;
   border-bottom-style: solid;
 }
 
+.c1 div {
+  cursor: pointer;
+}
+
 .c2 {
   margin: 0 10px;
   padding-bottom: 10px;
-  cursor: pointer;
   border-bottom-width: 2px;
   border-bottom-color: #C866EA;
   border-bottom-style: none;
 }
 
+.c2 div {
+  cursor: pointer;
+}
+
 <div
-  className=""
+  class=""
 >
   <div
-    className="c0"
+    class="c0"
   >
     <div
-      className="c1"
-      onClick={[Function]}
+      class="c1"
     >
-      Tab1
+      <div>
+        Tab1
+      </div>
     </div>
     <div
-      className="c2"
-      onClick={[Function]}
+      class="c2"
     >
-      Tab2
+      <div>
+        Tab2
+      </div>
     </div>
   </div>
   <div
-    className="c3"
+    class="c3"
   >
     <span>
       Tab1 Content
