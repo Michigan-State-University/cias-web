@@ -40,6 +40,13 @@ const TargetQuestionChooser = ({
   const canSelectQuestion = questionId => id !== questionId;
   const isLast = currentIndex === questions.length - 1;
 
+  const chooseQuestion = () => {
+    if (!isLast) {
+      const targetId = questions[currentIndex + 1].id;
+      onClick(targetId);
+    }
+  };
+
   return (
     <Box>
       <Box
@@ -48,14 +55,7 @@ const TargetQuestionChooser = ({
         }`}
         padded
       >
-        <Row
-          onClick={() => {
-            if (!isLast) {
-              const targetId = questions[currentIndex + 1].id;
-              onClick(targetId);
-            }
-          }}
-        >
+        <Row onClick={chooseQuestion}>
           <Img src={navigationNext} mr={5} />
           <Box clickable={!isLast}>
             <Text
