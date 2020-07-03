@@ -152,9 +152,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  getIntervention: id => getInterventionRequest(id),
+  getIntervention: getInterventionRequest,
   getQuestions: getQuestionsRequest,
-  createQuestion: (type, id) => createQuestionRequest(type, id),
+  createQuestion: createQuestionRequest,
 };
 
 const withConnect = connect(

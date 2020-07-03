@@ -2,9 +2,8 @@ import React from 'react';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { MemoryRouter, browserHistory } from 'react-router-dom';
-
-import configureStore from 'configureStore';
+import { MemoryRouter } from 'react-router-dom';
+import { createStore } from 'redux';
 
 import { DEFAULT_LOCALE } from 'i18n';
 import SettingsInterventionPage from '../index';
@@ -18,8 +17,27 @@ describe('<SettingsInterventionPage />', () => {
     editIntervention: jest.fn(),
     getQuestions: jest.fn(),
   };
+
+  const reducer = state => state;
+  const initialState = {
+    editInterventionPage: {
+      intervention: {
+        id: '12ad120dj012-3a',
+        name: 'e-Intervention Name',
+        settings: {
+          narrator: {
+            voice: true,
+            animation: true,
+          },
+        },
+      },
+    },
+  };
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = createStore(reducer, initialState);
+    store.runSaga = () => {};
+    store.injectedReducers = {};
+    store.injectedSagas = {};
   });
 
   it('Expect to not log errors in console', () => {

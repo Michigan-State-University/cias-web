@@ -91,7 +91,6 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   border-bottom-width: 2px;
   border-bottom-color: #C866EA;
   border-bottom-style: solid;
-  cursor: default;
 }
 
 .c1 div {
@@ -115,7 +114,6 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   border-bottom-width: 2px;
   border-bottom-color: #C866EA;
   border-bottom-style: none;
-  cursor: default;
 }
 
 .c2 div {

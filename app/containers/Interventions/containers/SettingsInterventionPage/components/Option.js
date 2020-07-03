@@ -36,6 +36,4 @@ Option.propTypes = {
   fontWeight: PropTypes.string,
 };
 
-Option.defualtProps = {};
-
 export default Option;

@@ -139,7 +139,6 @@ exports[`<Navbar /> Should render and match the snapshot with intervention path 
   border-bottom-width: 2px;
   border-bottom-color: #C866EA;
   border-bottom-style: none;
-  cursor: default;
 }
 
 .c8 div {
@@ -163,7 +162,6 @@ exports[`<Navbar /> Should render and match the snapshot with intervention path 
   border-bottom-width: 2px;
   border-bottom-color: #C866EA;
   border-bottom-style: solid;
-  cursor: default;
 }
 
 .c9 div {

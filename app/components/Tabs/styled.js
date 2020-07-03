@@ -24,7 +24,6 @@ export const LabelContainer = styled.div`
 `;
 
 export const LinkContainer = styled(LabelContainer)`
-  cursor: default;
   a {
     color: ${themeColors.text};
     text-decoration: none;
