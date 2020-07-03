@@ -24,6 +24,7 @@ import {
 import { colors, boxShadows } from 'theme';
 import Question from 'models/Intervention/Question';
 import { getAllVariables } from 'models/Intervention/utils';
+import NoContent from 'components/NoContent';
 
 const VariableChooser = ({
   onClick,
@@ -35,6 +36,39 @@ const VariableChooser = ({
     structure: 'flat',
     include: ['id', 'title'],
   });
+
+  const displayContent = () => {
+    if (variables && variables.length)
+      return variables.map((variable, index) => (
+        <Row
+          key={`${id}-select-target-${index}`}
+          mb={index !== variables.length - 1 && 15}
+          onClick={() => onClick(variable.variable)}
+          justify="between"
+          align="center"
+          clickable
+        >
+          <Row align="center">
+            <Img src={webpage} mr={15} />
+            <Text
+              textOverflow="ellipsis"
+              whiteSpace="pre"
+              overflow="hidden"
+              mr={20}
+            >
+              {variable.title}
+            </Text>
+          </Row>
+          <Badge>{variable.variable && variable.variable.trim()}</Badge>
+        </Row>
+      ));
+
+    return (
+      <Box padding={30}>
+        <NoContent />
+      </Box>
+    );
+  };
 
   return (
     <Box
@@ -48,31 +82,7 @@ const VariableChooser = ({
     >
       <Row>
         <Box padding={8} filled>
-          <Column>
-            {variables.map((variable, index) => (
-              <Row
-                key={`${id}-select-target-${index}`}
-                mb={index !== variables.length - 1 && 15}
-                onClick={() => onClick(variable.variable)}
-                justify="between"
-                align="center"
-                clickable
-              >
-                <Row align="center">
-                  <Img src={webpage} mr={15} />
-                  <Text
-                    textOverflow="ellipsis"
-                    whiteSpace="pre"
-                    overflow="hidden"
-                    mr={20}
-                  >
-                    {variable.title}
-                  </Text>
-                </Row>
-                <Badge>{variable.variable && variable.variable.trim()}</Badge>
-              </Row>
-            ))}
-          </Column>
+          <Column>{displayContent()}</Column>
         </Box>
       </Row>
     </Box>
