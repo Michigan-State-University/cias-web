@@ -11,6 +11,9 @@ exports[`<Badge /> should match the snapshot 1`] = `
   font-size: 13px;
   font-weight: 600;
   border-radius: 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   background-color: rgba(16,121,105,0.1);
   color: rgba(16,121,105,1);
 }

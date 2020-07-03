@@ -54,12 +54,15 @@ const VariableChooser = ({
               textOverflow="ellipsis"
               whiteSpace="pre"
               overflow="hidden"
+              maxWidth={200}
               mr={20}
             >
               {variable.title}
             </Text>
           </Row>
-          <Badge>{variable.variable && variable.variable.trim()}</Badge>
+          <Badge maxWidth={300}>
+            {variable.variable && variable.variable.trim()}
+          </Badge>
         </Row>
       ));
 

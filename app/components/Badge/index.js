@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { colors, fontSizes } from 'theme';
-import { margin, style } from '../BaseComponentStyles';
+import { margin, style, layout } from '../BaseComponentStyles';
 
 const Badge = styled.div.attrs(({ color }) => ({
   bg: color,
@@ -13,7 +13,11 @@ const Badge = styled.div.attrs(({ color }) => ({
   font-size: ${fontSizes.small};
   font-weight: 600;
   border-radius: 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   ${style};
+  ${layout};
   ${margin};
 `;
 
