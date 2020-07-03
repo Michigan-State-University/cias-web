@@ -1,5 +1,8 @@
+import { pick } from 'lodash';
+
 // eslint-disable-next-line no-unused-vars
 import Question from './Question';
+
 import {
   multiQuestion,
   gridQuestion,
@@ -8,9 +11,18 @@ import {
 
 /**
  * @param  {Array<Question>} questions
- * @param  {{structure: 'flat' | 'id'}} options
+ * @param  {string} questionId
  */
-export const getAllVariables = (questions, options = { structure: 'flat' }) => {
+export const findQuestionIndex = (questions, questionId) =>
+  questions.findIndex(value => value.id === questionId);
+
+/**
+ * @param  {Array<Question>} questions
+ * @param  {{structure: 'flat' | 'group', include: Array<string>, noEmpty: boolean}} options
+ */
+export const getAllVariables = (questions, options) => {
+  const defaultParams = { structure: 'flat', include: [], noEmpty: true };
+  const { structure, include, noEmpty } = { ...defaultParams, ...options };
   const variables = [];
 
   questions.forEach(question => {
@@ -31,13 +43,27 @@ export const getAllVariables = (questions, options = { structure: 'flat' }) => {
         break;
     }
 
-    switch (options.structure) {
-      case 'id':
-        variables.push({ id: question.id, variables: questionVariables });
+    if (noEmpty)
+      questionVariables = questionVariables.filter(val => val && val.trim());
+
+    switch (structure) {
+      case 'group':
+        variables.push({
+          variables: questionVariables,
+          ...pick(question, include),
+        });
         break;
       case 'flat':
       default:
-        variables.push(...questionVariables);
+        if (include && include.length) {
+          variables.push(
+            ...questionVariables.map(variable => ({
+              ...pick(question, include),
+              variable,
+            })),
+          );
+        } else variables.push(...questionVariables);
+
         break;
     }
   });

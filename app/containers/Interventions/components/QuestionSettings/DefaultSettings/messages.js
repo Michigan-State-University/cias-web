@@ -83,4 +83,8 @@ export default defineMessages({
     id: `${scope}.selectQuestion`,
     defaultMessage: 'Select Question',
   },
+  addVariable: {
+    id: `${scope}.addVariable`,
+    defaultMessage: '+ From list',
+  },
 });

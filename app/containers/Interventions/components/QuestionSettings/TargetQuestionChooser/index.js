@@ -25,7 +25,7 @@ import {
 
 import { colors, borders, fontSizes } from 'theme';
 import Question from 'models/Intervention/Question';
-import { findQuestionIndex } from 'containers/Interventions/containers/EditInterventionPage/utils';
+import { findQuestionIndex } from 'models/Intervention/utils';
 import messages from './messages';
 
 const TargetQuestionChooser = ({

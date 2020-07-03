@@ -60,6 +60,3 @@ export const instantiateEmptyQuestion = (message, type) => {
       });
   }
 };
-
-export const findQuestionIndex = (questions, questionId) =>
-  questions.findIndex(value => value.id === questionId);

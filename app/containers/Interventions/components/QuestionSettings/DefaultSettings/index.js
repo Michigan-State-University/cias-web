@@ -22,12 +22,12 @@ import Text from 'components/Text';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
 import { blockTypes } from 'models/Narrator/BlockTypes';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
 import globalMessages from 'global/i18n/globalMessages';
 import Question from 'models/Intervention/Question';
-import { findQuestionIndex } from 'containers/Interventions/containers/EditInterventionPage/utils';
+import { findQuestionIndex } from 'models/Intervention/utils';
 import messages from './messages';
 import {
   updateSettings as updateQuestionSettings,
@@ -48,6 +48,7 @@ import {
   makeSelectQuestions,
 } from '../../../containers/EditInterventionPage/selectors';
 import TargetQuestionChooser from '../TargetQuestionChooser';
+import VariableChooser from '../VariableChooser';
 
 const getPossibleAnimations = (type, formatMessage) => {
   if (type === blockTypes[0]) return facialAnimations(formatMessage);
@@ -71,6 +72,7 @@ const DefaultSettings = ({
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
+  const [variableChooserOpen, setVariableChooserOpen] = useState(false);
 
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
 
@@ -180,7 +182,21 @@ const DefaultSettings = ({
         </div>
         <div label={formatMessage(messages.branching)}>
           <Column>
-            {formatMessage(globalMessages.general.formula)}
+            <Row align="center" justify="between">
+              {formatMessage(globalMessages.general.formula)}
+              <Box
+                onClick={() => setVariableChooserOpen(!variableChooserOpen)}
+                clickable
+              >
+                <Text
+                  fontWeight="bold"
+                  color={themeColors.secondary}
+                  hoverDecoration="underline"
+                >
+                  {formatMessage(messages.addVariable)}
+                </Text>
+              </Box>
+            </Row>
             {formula && (
               <Fragment>
                 <Box
@@ -197,6 +213,15 @@ const DefaultSettings = ({
                     placeholder={formatMessage(messages.formulaPlaceholder)}
                     value={formula.payload}
                     onCheck={val => onFormulaUpdate(val, id)}
+                  />
+                </Box>
+                <Box position="relative">
+                  <VariableChooser
+                    visible={variableChooserOpen}
+                    onClick={value => {
+                      setVariableChooserOpen(false);
+                      onFormulaUpdate(`${formula.payload}${value}`, id);
+                    }}
                   />
                 </Box>
                 {formula.patterns.map((pattern, index) => (

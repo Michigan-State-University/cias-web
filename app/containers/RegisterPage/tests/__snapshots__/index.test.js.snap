@@ -18,42 +18,42 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           Register
         </span>
         <input
-          class="Input-sc-19txxuq-0 eYRTXl"
+          class="Input-sc-19txxuq-0 ckPklY"
           name="username"
           placeholder="Username"
           type="text"
           value=""
         />
         <input
-          class="Input-sc-19txxuq-0 TEjKm"
+          class="Input-sc-19txxuq-0 bdmbaI"
           name="firstName"
           placeholder="First name"
           type="text"
           value=""
         />
         <input
-          class="Input-sc-19txxuq-0 TEjKm"
+          class="Input-sc-19txxuq-0 bdmbaI"
           name="lastName"
           placeholder="Last name"
           type="text"
           value=""
         />
         <input
-          class="Input-sc-19txxuq-0 TEjKm"
+          class="Input-sc-19txxuq-0 bdmbaI"
           name="email"
           placeholder="Email"
           type="email"
           value=""
         />
         <input
-          class="Input-sc-19txxuq-0 TEjKm"
+          class="Input-sc-19txxuq-0 bdmbaI"
           name="password"
           placeholder="Password"
           type="password"
           value=""
         />
         <input
-          class="Input-sc-19txxuq-0 TEjKm"
+          class="Input-sc-19txxuq-0 bdmbaI"
           name="passwordConfirmation"
           placeholder="Password confirmation"
           type="password"

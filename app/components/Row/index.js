@@ -1,5 +1,12 @@
 import styled from 'styled-components';
-import { flex, margin, layout, padding, border } from '../BaseComponentStyles';
+import {
+  flex,
+  margin,
+  layout,
+  padding,
+  border,
+  style,
+} from '../BaseComponentStyles';
 
 const Row = styled.div`
   display: flex;
@@ -9,6 +16,7 @@ const Row = styled.div`
   ${padding};
   ${layout};
   ${border};
+  ${style};
 `;
 
 export default Row;

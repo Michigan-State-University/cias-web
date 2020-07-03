@@ -15,6 +15,10 @@ const text = props => ({
     props.color && `rgba(${hexToRgb(props.color)}, ${props.textOpacity || 1})`,
   whiteSpace: props.whiteSpace || '',
   textOverflow: props.textOverflow || '',
+  cursor: props.clickable ? 'pointer;' : '',
+  '&:hover': {
+    textDecoration: props.hoverDecoration || '',
+  },
 });
 
 text.propTypes = {
@@ -25,6 +29,8 @@ text.propTypes = {
   textOpacity: PropTypes.number,
   whiteSpace: PropTypes.string,
   textOverflow: PropTypes.string,
+  clickable: PropTypes.bool,
+  hoverDecoration: PropTypes.oneOf(['underline', 'overline', 'line-through']),
 };
 
 export { text };
