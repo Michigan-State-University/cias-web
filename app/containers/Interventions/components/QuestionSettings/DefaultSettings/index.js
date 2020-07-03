@@ -218,6 +218,7 @@ const DefaultSettings = ({
                 <Box position="relative">
                   <VariableChooser
                     visible={variableChooserOpen}
+                    setOpen={setVariableChooserOpen}
                     onClick={value => {
                       setVariableChooserOpen(false);
                       onFormulaUpdate(`${formula.payload}${value}`, id);

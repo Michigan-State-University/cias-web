@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
+import { outsideClickHandler } from 'utils/outsideClickHandler';
+
 import Img from 'components/Img';
 import Box from 'components/Box';
 import Column from 'components/Column';
@@ -16,18 +18,10 @@ const Dropdown = props => {
 
   const dropdown = useRef(null);
 
-  const handleClick = event => {
-    const { target } = event;
-    if (dropdown.current && !dropdown.current.contains(target)) {
-      setOpen(false);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('click', handleClick);
-    return () => {
-      window.removeEventListener('click', handleClick);
-    };
+    const cleanUp = outsideClickHandler(dropdown, () => setOpen(false));
+
+    return cleanUp;
   }, []);
 
   return (

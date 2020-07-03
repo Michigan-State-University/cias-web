@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { boxShadows, colors } from 'theme';
+import { outsideClickHandler } from 'utils/outsideClickHandler';
 
 import Box from 'components/Box';
 
@@ -18,18 +19,10 @@ const ArrowDropdown = ({
 }) => {
   const dropdown = useRef(null);
 
-  const handleClick = event => {
-    const { target } = event;
-    if (isOpened && dropdown.current && !dropdown.current.contains(target)) {
-      if (setOpen) setOpen(false);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('click', handleClick);
-    return () => {
-      window.removeEventListener('click', handleClick);
-    };
+    const cleanUp = outsideClickHandler(dropdown, () => setOpen(false));
+
+    return cleanUp;
   }, [isOpened]);
 
   return (

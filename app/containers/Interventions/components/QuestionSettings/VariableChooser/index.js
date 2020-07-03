@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { compose } from 'redux';
@@ -25,17 +25,27 @@ import { colors, boxShadows } from 'theme';
 import Question from 'models/Intervention/Question';
 import { getAllVariables } from 'models/Intervention/utils';
 import NoContent from 'components/NoContent';
+import { outsideClickHandler } from 'utils/outsideClickHandler';
 
 const VariableChooser = ({
   onClick,
   questions,
   selectedQuestion: { id } = {},
   visible,
+  setOpen,
 }) => {
   const variables = getAllVariables(questions, {
     structure: 'flat',
     include: ['id', 'title'],
   });
+
+  const variableChooser = useRef(null);
+
+  useEffect(() => {
+    const cleanUp = outsideClickHandler(variableChooser, () => setOpen(false));
+
+    return cleanUp;
+  }, [visible]);
 
   const displayContent = () => {
     if (variables && variables.length)
@@ -75,6 +85,7 @@ const VariableChooser = ({
 
   return (
     <Box
+      ref={variableChooser}
       bg={colors.white}
       borderRadius={10}
       shadow={boxShadows[1]}
@@ -97,6 +108,7 @@ VariableChooser.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.shape(Question),
   visible: PropTypes.bool,
+  setOpen: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
