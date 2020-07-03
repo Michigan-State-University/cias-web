@@ -41,10 +41,11 @@ const StyledInput = props => {
       keyboard={props.keyboard}
       transparent
       width={
-        props.autoSize &&
-        `${calculateWidthFromText(
-          value ? value.length : props.placeholder.length,
-        )}px`
+        props.autoSize
+          ? `${calculateWidthFromText(
+              value ? value.length : props.placeholder.length,
+            )}px`
+          : null
       }
     />
   );

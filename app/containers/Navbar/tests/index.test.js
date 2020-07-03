@@ -9,35 +9,71 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
+import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
+import { createStore } from 'redux';
+
 import 'jest-styled-components';
 
 import Navbar from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<Navbar />', () => {
+  let store;
+  const reducer = state => state;
+  const initialState = {
+    auth: { user: { firstName: 'test', lastName: 'test' } },
+    editInterventionPage: {
+      intervention: {
+        id: '12dasc0123=21-2',
+        name: 'e-Intervention New',
+      },
+    },
+  };
+
+  beforeAll(() => {
+    store = createStore(reducer, initialState);
+  });
+
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <Navbar
-          logOut={() => {}}
-          user={{ firstName: 'test', lastName: 'test' }}
-        />
-      </IntlProvider>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <IntlProvider locale={DEFAULT_LOCALE}>
+            <Navbar logOut={() => {}} path="/interventions" />
+          </IntlProvider>
+        </MemoryRouter>
+      </Provider>,
     );
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Should render and match the snapshot', () => {
+  it('Should render and match the snapshot with intervention path', () => {
     const {
       container: { firstChild },
     } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <Navbar
-          logOut={() => {}}
-          user={{ firstName: 'test', lastName: 'test' }}
-        />
-      </IntlProvider>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <IntlProvider locale={DEFAULT_LOCALE}>
+            <Navbar logOut={() => {}} path="/interventions" />
+          </IntlProvider>
+        </MemoryRouter>
+      </Provider>,
+    );
+    expect(firstChild).toMatchSnapshot();
+  });
+  it('Should render and match the snapshot withou matching path', () => {
+    const {
+      container: { firstChild },
+    } = render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <IntlProvider locale={DEFAULT_LOCALE}>
+            <Navbar logOut={() => {}} path="" />
+          </IntlProvider>
+        </MemoryRouter>
+      </Provider>,
     );
     expect(firstChild).toMatchSnapshot();
   });

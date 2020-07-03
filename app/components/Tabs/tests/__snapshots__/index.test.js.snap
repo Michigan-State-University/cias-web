@@ -61,3 +61,101 @@ exports[`<Tabs /> should render and match the snapshot 1`] = `
   </div>
 </div>
 `;
+
+exports[`<Tabs /> should render as links and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c3 {
+  margin: 25px 10px;
+}
+
+.c1 {
+  margin: 0 10px;
+  padding-bottom: 10px;
+  border-bottom-width: 2px;
+  border-bottom-color: #C866EA;
+  border-bottom-style: solid;
+  cursor: default;
+}
+
+.c1 div {
+  cursor: pointer;
+}
+
+.c1 a {
+  color: #2F3850;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1 a:visited,
+.c1 a:hover {
+  color: #2F3850;
+}
+
+.c2 {
+  margin: 0 10px;
+  padding-bottom: 10px;
+  border-bottom-width: 2px;
+  border-bottom-color: #C866EA;
+  border-bottom-style: none;
+  cursor: default;
+}
+
+.c2 div {
+  cursor: pointer;
+}
+
+.c2 a {
+  color: #2F3850;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c2 a:visited,
+.c2 a:hover {
+  color: #2F3850;
+}
+
+<div
+  class=""
+>
+  <div
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <div>
+        <a
+          href="/url1"
+        >
+          Url1
+        </a>
+      </div>
+    </div>
+    <div
+      class="c2"
+    >
+      <div>
+        <a
+          href="/url2"
+        >
+          Url2
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    class="c3"
+  />
+</div>
+`;

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] = `
+<div
+  class="Box-sc-14m3exe-0 gUsJeQ"
+  display="flex"
+  height="100%"
+  width="100%"
+>
+  <div
+    class="Column-sc-1n6divy-0 styled__StyledColumn-sc-17rp6q7-1 hQtNOH"
+    height="100%"
+  >
+    <div
+      class="styled__NameContainer-sc-17rp6q7-2 bwKhoo"
+    >
+      <h3
+        class="H3-sc-1nwhpi5-0 gXiEgw"
+        font-weight="regular"
+      >
+        Name
+      </h3>
+      <input
+        class="styled__Input-sc-17rp6q7-0 cAlJGU Input-sc-19txxuq-0 fKbEOl"
+        placeholder="e-Intervention Name"
+        type="text"
+        value=""
+      />
+    </div>
+    <h3
+      class="H3-sc-1nwhpi5-0 blamhX"
+    >
+      Narrator Settings
+    </h3>
+  </div>
+</div>
+`;

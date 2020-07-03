@@ -33,8 +33,7 @@ Option.propTypes = {
   label: PropTypes.string,
   value: PropTypes.bool,
   action: PropTypes.func,
-  index: PropTypes.string,
-  refetchQuestions: PropTypes.func,
+  fontWeight: PropTypes.string,
 };
 
 Option.defualtProps = {};
