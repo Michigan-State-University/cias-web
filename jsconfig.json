@@ -2,5 +2,6 @@
   "compilerOptions": {
     "baseUrl": "./app"
   },
-  "exclude": ["node_modules", "**/node_modules/*"]
+  "exclude": ["node_modules", "**/node_modules/*"],
+  "typeAcquisition": { "include": ["jest"] }
 }
