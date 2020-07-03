@@ -148,7 +148,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
     onFocus={[Function]}
     opacity={0.1}
     placeholder="Variable name..."
-    type="tel"
+    type="singleline"
     value=""
     width="153px"
   />

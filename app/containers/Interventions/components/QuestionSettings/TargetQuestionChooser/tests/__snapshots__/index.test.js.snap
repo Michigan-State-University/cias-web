@@ -110,6 +110,7 @@ exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
       >
         <p
           className="c5"
+          color=""
           fontSize="15px"
           fontWeight="bold"
         >
