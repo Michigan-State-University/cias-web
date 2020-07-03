@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
+import some from 'lodash/some';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -42,6 +43,26 @@ const SettingsInterventionPage = ({
     getIntervention(params.id);
   }, []);
 
+  const refetchQuestions = () => getQuestions(id);
+
+  const isNarratorActive = some(narratorSettings, setting => setting);
+
+  const onToggle = index => val => {
+    editIntervention({ path: `settings.narrator.${index}`, value: val });
+    refetchQuestions();
+  };
+
+  const onGlobalToggle = val => {
+    editIntervention({
+      path: `settings.narrator`,
+      value: {
+        voice: val,
+        animation: val,
+      },
+    });
+    refetchQuestions();
+  };
+
   return (
     <Fragment>
       <Helmet>
@@ -72,17 +93,25 @@ const SettingsInterventionPage = ({
           <H3 mt={30} mb={20}>
             {formatMessage(messages.narratorSettings)}
           </H3>
-          {map(narratorSettings, (option, index) => (
+          {narratorSettings && (
             <Option
-              refetchQuestions={() => getQuestions(id)}
-              key={`el-option-${index}`}
-              withBorder={index !== lastKey(narratorSettings)}
-              label={formatMessage(messages[index])}
-              value={option}
-              action={editIntervention}
-              index={index}
+              label={formatMessage(messages.narratorActive)}
+              withBorder={isNarratorActive}
+              value={isNarratorActive}
+              action={onGlobalToggle}
+              fontWeight="bold"
             />
-          ))}
+          )}
+          {isNarratorActive &&
+            map(narratorSettings, (option, index) => (
+              <Option
+                key={`el-option-${index}`}
+                withBorder={index !== lastKey(narratorSettings)}
+                label={formatMessage(messages[index])}
+                value={option}
+                action={onToggle(index)}
+              />
+            ))}
         </StyledColumn>
       </Box>
     </Fragment>

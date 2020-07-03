@@ -4,8 +4,9 @@ import { SwitchWrapper, SwitchInput, Slider } from './styled';
 
 const Switch = props => (
   <SwitchWrapper {...props}>
+    {console.log('eeeeee', props.e ? props.checked : '')}
     <SwitchInput
-      defaultChecked={props.checked}
+      checked={props.checked}
       onChange={event => props.onToggle(event.target.checked)}
     />
     <Slider />

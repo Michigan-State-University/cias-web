@@ -6,17 +6,9 @@ import Text from 'components/Text';
 import Switch from 'components/Switch';
 import { colors, borders } from 'theme';
 
-const Option = ({
-  withBorder,
-  label,
-  value,
-  action,
-  index,
-  refetchQuestions,
-}) => {
+const Option = ({ withBorder, fontWeight, label, value, action }) => {
   const handleToggle = val => {
-    action({ path: `settings.narrator.${index}`, value: val });
-    refetchQuestions();
+    action(val);
   };
   return (
     <Row
@@ -30,7 +22,7 @@ const Option = ({
           : null
       }
     >
-      <Text>{label}</Text>
+      <Text fontWeight={fontWeight}>{label}</Text>
       <Switch checked={value} onToggle={handleToggle} />
     </Row>
   );

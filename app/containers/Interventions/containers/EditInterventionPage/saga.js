@@ -76,12 +76,14 @@ function* getIntervention({ payload: { id } }) {
   const requestURL = `v1/interventions/${id}`;
 
   try {
-    const response = yield axios.get(requestURL);
+    const {
+      data: { data },
+    } = yield axios.get(requestURL);
 
     yield put(
       getInterventionSuccess({
-        ...response.data.data.attributes,
-        id: response.data.data.id,
+        ...data.attributes,
+        id: data.id,
       }),
     );
   } catch (error) {
