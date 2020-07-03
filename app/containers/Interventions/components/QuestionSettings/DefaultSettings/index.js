@@ -14,10 +14,10 @@ import H3 from 'components/H3';
 import Row from 'components/Row';
 import Switch from 'components/Switch';
 import Tabs from 'components/Tabs';
-import ApprovableInput from 'components/Input/ApprovableInput';
 import Img from 'components/Img';
 import ArrowDropdown from 'components/ArrowDropdown';
 import Text from 'components/Text';
+import { StyledInput } from 'components/Input/StyledInput';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
@@ -207,12 +207,13 @@ const DefaultSettings = ({
                   px={8}
                   py={8}
                 >
-                  <ApprovableInput
+                  <StyledInput
+                    type="multiline"
                     rows="5"
                     width="auto"
                     placeholder={formatMessage(messages.formulaPlaceholder)}
                     value={formula.payload}
-                    onCheck={val => onFormulaUpdate(val, id)}
+                    onBlur={val => onFormulaUpdate(val, id)}
                   />
                 </Box>
                 <Box position="relative">

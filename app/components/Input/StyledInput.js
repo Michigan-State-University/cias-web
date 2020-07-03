@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Input } from './index';
+import { TextArea } from './TextArea';
 
 const DEFAULT_TEXT_PADDING = 25;
 const DEFAULT_AVERAGE_LETTER_WIDTH = 8;
@@ -26,27 +27,46 @@ const StyledInput = props => {
       props.maxWidth,
     );
 
+  if (props.type === 'singleline')
+    return (
+      <Input
+        {...props}
+        textAlign={props.textAlign}
+        value={value}
+        onChange={event => onInputChange(event.target.value)}
+        onBlur={() => {
+          setHasFocus(false);
+          props.onBlur(value);
+        }}
+        onFocus={() => setHasFocus(true)}
+        placeholder={props.placeholder}
+        keyboard={props.keyboard}
+        transparent
+        width={
+          props.autoSize
+            ? `${calculateWidthFromText(
+                value ? value.length : props.placeholder.length,
+              )}px`
+          : null
+        }
+      />
+    );
+
   return (
-    <Input
-      {...props}
-      textAlign={props.textAlign}
+    <TextArea
+      width="100%"
+      height="60px"
+      {...(props.rows ? { rows: props.rows, height: 'auto' } : {})}
+      mr={9}
       value={value}
       onChange={event => onInputChange(event.target.value)}
+      onFocus={() => setHasFocus(true)}
       onBlur={() => {
         setHasFocus(false);
         props.onBlur(value);
       }}
-      onFocus={() => setHasFocus(true)}
       placeholder={props.placeholder}
-      keyboard={props.keyboard}
       transparent
-      width={
-        props.autoSize
-          ? `${calculateWidthFromText(
-              value ? value.length : props.placeholder.length,
-            )}px`
-          : null
-      }
     />
   );
 };
@@ -62,6 +82,8 @@ StyledInput.propTypes = {
   maxWidth: PropTypes.number,
   averageLetterWidth: PropTypes.number,
   textPadding: PropTypes.number,
+  type: PropTypes.oneOf(['multiline', 'singleline']),
+  rows: PropTypes.string,
 };
 
 StyledInput.defaultProps = {
@@ -70,6 +92,7 @@ StyledInput.defaultProps = {
   maxWidth: 200,
   averageLetterWidth: DEFAULT_AVERAGE_LETTER_WIDTH,
   textPadding: DEFAULT_TEXT_PADDING,
+  type: 'singleline',
 };
 
 export { StyledInput };
