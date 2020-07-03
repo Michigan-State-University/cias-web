@@ -29,6 +29,4 @@ Dropdown.propTypes = {
   onClick: PropTypes.func,
 };
 
-Dropdown.defaultProps = {};
-
 export default Dropdown;
