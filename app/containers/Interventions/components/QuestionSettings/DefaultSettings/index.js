@@ -25,7 +25,6 @@ import { blockTypes } from 'models/Narrator/BlockTypes';
 import { colors, themeColors } from 'theme';
 import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
-import globalMessages from 'global/i18n/globalMessages';
 import Question from 'models/Intervention/Question';
 import { findQuestionIndex } from 'models/Intervention/utils';
 import messages from './messages';
@@ -96,7 +95,7 @@ const DefaultSettings = ({
     const targetIndex = findQuestionIndex(questions, questionId);
 
     if (selectedIndex === targetIndex - 1)
-      return formatMessage(globalMessages.general.nextScreen);
+      return formatMessage(messages.nextScreen);
 
     if (targetIndex !== -1) return questions[targetIndex].title;
 
@@ -183,7 +182,7 @@ const DefaultSettings = ({
         <div label={formatMessage(messages.branching)}>
           <Column>
             <Row align="center" justify="between">
-              {formatMessage(globalMessages.general.formula)}
+              {formatMessage(messages.formula)}
               <Box
                 onClick={() => setVariableChooserOpen(!variableChooserOpen)}
                 clickable
@@ -232,9 +231,7 @@ const DefaultSettings = ({
                     align="center"
                     mb={8}
                   >
-                    <Text whiteSpace="pre">
-                      {formatMessage(globalMessages.general.if)}
-                    </Text>
+                    <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
                     <Box bg={colors.linkWater} mx={10}>
                       <CaseInput
                         px={0}
@@ -248,7 +245,7 @@ const DefaultSettings = ({
                       />
                     </Box>
                     <Text whiteSpace="pre" mr={10}>
-                      {formatMessage(globalMessages.general.goTo)}
+                      {formatMessage(messages.goTo)}
                     </Text>
                     <ArrowDropdown
                       width="100%"

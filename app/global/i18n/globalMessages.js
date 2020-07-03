@@ -55,22 +55,4 @@ export default defineMessages({
       defaultMessage: 'Url Question',
     },
   },
-  general: {
-    if: {
-      id: `${scope}.if`,
-      defaultMessage: 'If',
-    },
-    goTo: {
-      id: `${scope}.goTo`,
-      defaultMessage: 'go to',
-    },
-    formula: {
-      id: `${scope}.formula`,
-      defaultMessage: 'Formula',
-    },
-    nextScreen: {
-      id: `${scope}.nextScreen`,
-      defaultMessage: 'Next Screen',
-    },
-  },
 });

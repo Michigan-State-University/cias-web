@@ -87,4 +87,16 @@ export default defineMessages({
     id: `${scope}.addVariable`,
     defaultMessage: '+ From list',
   },
+  if: {
+    id: `${scope}.if`,
+    defaultMessage: 'If',
+  },
+  goTo: {
+    id: `${scope}.goTo`,
+    defaultMessage: 'go to',
+  },
+  nextScreen: {
+    id: `${scope}.nextScreen`,
+    defaultMessage: 'Next Screen',
+  },
 });
