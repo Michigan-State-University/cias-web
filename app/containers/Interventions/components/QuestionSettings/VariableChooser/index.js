@@ -16,7 +16,6 @@ import Badge from 'components/Badge';
 import webpage from 'assets/svg/webpage-mouseover.svg';
 
 import {
-  makeSelectIntervention,
   makeSelectQuestions,
   makeSelectSelectedQuestion,
 } from 'containers/Interventions/containers/EditInterventionPage/selectors';
@@ -112,7 +111,6 @@ VariableChooser.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectIntervention(),
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
 });
