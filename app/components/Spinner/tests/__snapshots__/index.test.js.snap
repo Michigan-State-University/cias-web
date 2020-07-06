@@ -13,13 +13,14 @@ exports[`<Spinner /> Should render and match the snapshot 1`] = `
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 6px solid #fff;
-  border-color: #fff transparent #fff transparent;
+  border: 6px solid #FFFFFF;
+  border-color: #FFFFFF transparent #FFFFFF transparent;
   -webkit-animation: ixzqdH 1.2s linear infinite;
   animation: ixzqdH 1.2s linear infinite;
 }
 
 <div
   class="c0"
+  color="#FFFFFF"
 />
 `;

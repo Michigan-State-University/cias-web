@@ -52,8 +52,8 @@ export const initialState = {
     intervention: new Intervention('', ''),
     questions: [],
   },
-  loading: {
-    interventionList: false,
+  loaders: {
+    interventionListLoading: false,
   },
 };
 
@@ -244,16 +244,17 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case GET_INTERVENTION_LIST_REQUEST:
-        draft.loading.interventionList = true;
+        draft.loaders.interventionListLoading = true;
         break;
 
       case GET_INTERVENTION_LIST_SUCCESS:
-        draft.loading.interventionList = false;
+        draft.loaders.interventionListLoading = false;
         draft.interventionList = action.payload.interventions;
         break;
 
       case GET_INTERVENTION_LIST_ERROR:
-        draft.loading.interventionList = false;
+        draft.interventionList = [draft.intervention];
+        draft.loaders.interventionListLoading = false;
         break;
     }
   });

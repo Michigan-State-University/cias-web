@@ -18,6 +18,9 @@ describe('<TargetQuestionChooser />', () => {
       },
       interventionList: [],
       questions: [],
+      loaders: {
+        interventionListLoading: false,
+      },
     },
   };
 
@@ -74,6 +77,9 @@ describe('<TargetQuestionChooser />', () => {
           mockSingleQuestion(3, true),
         ],
         selectedQuestion: 1,
+        loaders: {
+          interventionListLoading: false,
+        },
       },
     });
 

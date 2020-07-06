@@ -12,6 +12,7 @@ import Text from 'components/Text';
 import H3 from 'components/H3';
 import Img from 'components/Img';
 import Badge from 'components/Badge';
+import Spinner from 'components/Spinner';
 
 import navigationNext from 'assets/svg/navigation-next.svg';
 import presentationProjector from 'assets/svg/presentation-projector.svg';
@@ -33,7 +34,10 @@ import Intervention from 'models/Intervention/Intervention';
 import { getInterventionListRequest } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
 import messages from './messages';
-import { makeSelectInterventionList } from './selectors';
+import {
+  makeSelectInterventionList,
+  makeSelectInterventionListLoader,
+} from './selectors';
 
 const TargetQuestionChooser = ({
   intl: { formatMessage },
@@ -46,6 +50,7 @@ const TargetQuestionChooser = ({
   isVisible,
   getInterventionList,
   interventionList,
+  interventionListLoading,
 }) => {
   const [isInterventionView, _setIsInterventionView] = useState(false);
   const setIsInterventionView = (value, event) => {
@@ -124,51 +129,62 @@ const TargetQuestionChooser = ({
     </Column>
   );
 
-  const renderInterventionChooser = (
-    <Column>
-      <Row mb={20}>
-        <H3>{formatMessage(messages.interventionListHeader)}</H3>
-      </Row>
-      <Box maxHeight="300px" overflow="scroll">
-        <Column>
-          {interventionList.map((intervention, index) => (
-            <Row
-              data-testid={`${id}-select-target-intervention`}
-              key={`${id}-select-target-intervention-${index}`}
-              mb={index !== interventionList.length - 1 ? 15 : 5}
-              onClick={event => chooseIntervention(intervention.id, event)}
-              align="center"
-              clickable
-            >
-              <Img
-                src={
-                  pattern.target === intervention.id
-                    ? presentationProjectorSelected
-                    : presentationProjector
-                }
-                mr={10}
-              />
-              <Box maxWidth={250} mr={10}>
-                <Text
-                  textOverflow="ellipsis"
-                  whiteSpace="pre"
-                  overflow="hidden"
-                  fontWeight={pattern.target === intervention.id ? 'bold' : ''}
-                >
-                  {intervention.name}
-                </Text>
-              </Box>
-              {interventionId === intervention.id && (
-                <Badge bg={themeColors.secondary} color={colors.white}>
-                  {formatMessage(messages.selectedInterventionBadge)}
-                </Badge>
-              )}
-            </Row>
-          ))}
-        </Column>
-      </Box>
-    </Column>
-  );
+  const renderInterventionChooser = () => {
+    if (interventionListLoading)
+      return (
+        <Row height="80px" justify="center" align="center">
+          <Spinner color={themeColors.secondary} />
+        </Row>
+      );
+
+    return (
+      <Column>
+        <Row mb={20}>
+          <H3>{formatMessage(messages.interventionListHeader)}</H3>
+        </Row>
+        <Box maxHeight="300px" overflow="scroll">
+          <Column>
+            {interventionList.map((intervention, index) => (
+              <Row
+                data-testid={`${id}-select-target-intervention`}
+                key={`${id}-select-target-intervention-${index}`}
+                mb={index !== interventionList.length - 1 ? 15 : 5}
+                onClick={event => chooseIntervention(intervention.id, event)}
+                align="center"
+                clickable
+              >
+                <Img
+                  src={
+                    pattern.target === intervention.id
+                      ? presentationProjectorSelected
+                      : presentationProjector
+                  }
+                  mr={10}
+                />
+                <Box maxWidth={250} mr={10}>
+                  <Text
+                    textOverflow="ellipsis"
+                    whiteSpace="pre"
+                    overflow="hidden"
+                    fontWeight={
+                      pattern.target === intervention.id ? 'bold' : ''
+                    }
+                  >
+                    {intervention.name}
+                  </Text>
+                </Box>
+                {interventionId === intervention.id && (
+                  <Badge bg={themeColors.secondary} color={colors.white}>
+                    {formatMessage(messages.selectedInterventionBadge)}
+                  </Badge>
+                )}
+              </Row>
+            ))}
+          </Column>
+        </Box>
+      </Column>
+    );
+  };
 
   return (
     <Box>
@@ -194,7 +210,7 @@ const TargetQuestionChooser = ({
       <Row>
         <Box padding={8} filled>
           {isInterventionView
-            ? renderInterventionChooser
+            ? renderInterventionChooser()
             : renderQuestionChooser}
         </Box>
       </Row>
@@ -216,6 +232,7 @@ TargetQuestionChooser.propTypes = {
   isVisible: PropTypes.bool,
   getInterventionList: PropTypes.func,
   interventionList: PropTypes.arrayOf(PropTypes.shape(Intervention)),
+  interventionListLoading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -224,6 +241,7 @@ const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
   currentIndex: makeSelectSelectedQuestionIndex(),
+  interventionListLoading: makeSelectInterventionListLoader(),
 });
 
 const mapDispatchToProps = {
