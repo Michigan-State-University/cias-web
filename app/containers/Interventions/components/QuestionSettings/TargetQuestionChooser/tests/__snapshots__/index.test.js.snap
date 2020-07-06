@@ -3,7 +3,7 @@
 exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c7 {
+  "baseElement": .c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -24,7 +24,7 @@ Object {
   flex-direction: row;
 }
 
-.c8 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -51,15 +51,7 @@ Object {
   border-bottom: 1px solid #E9F1FB;
 }
 
-.c4 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.c6 {
+.c5 {
   width: auto;
   height: auto;
   display: block;
@@ -71,7 +63,7 @@ Object {
   flex-grow: 1;
 }
 
-.c12 {
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -80,16 +72,36 @@ Object {
   overflow: scroll;
 }
 
-.c5 {
+.c12 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  max-width: 250px;
+}
+
+.c4 {
   margin: 0;
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   font-size: 15px;
   font-weight: 700;
+  color: rgba(154,161,182,1);
 }
 
-.c11 {
+.c13 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(154,161,182,1);
+  white-space: pre;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.c10 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -102,14 +114,14 @@ Object {
   margin-right: 5px;
 }
 
-.c9 {
+.c8 {
   width: auto;
   height: auto;
   margin-right: 10px;
   cursor: pointer;
 }
 
-.c10 {
+.c9 {
   width: auto;
   height: auto;
   margin-right: 10px;
@@ -131,11 +143,11 @@ Object {
               src="IMAGE_MOCK"
             />
             <div
-              class="c4"
+              class="c0"
             >
               <p
-                class="c5"
-                color=""
+                class="c4"
+                color="#9AA1B6"
                 font-size="15px"
                 font-weight="bold"
               >
@@ -148,35 +160,59 @@ Object {
           class="c2"
         >
           <div
-            class="c6"
+            class="c5"
           >
             <div
-              class="c7"
+              class="c6"
+              data-testid="test-id-1-select-target-question"
             >
               <div
-                class="c8"
+                class="c7"
               >
+                <img
+                  class="c8"
+                  data-testid="test-id-1-select-target-question-interview-view-setter"
+                  src="IMAGE_MOCK"
+                />
                 <img
                   class="c9"
                   src="IMAGE_MOCK"
                 />
-                <img
-                  class="c10"
-                  src="IMAGE_MOCK"
-                />
                 <h3
-                  class="c11"
+                  class="c10"
                 >
                   e-Intervention Name
                 </h3>
               </div>
               <div
-                class="c12"
+                class="c11"
                 overflow="scroll"
               >
                 <div
-                  class="c7"
-                />
+                  class="c6"
+                >
+                  <div
+                    class="c2"
+                    data-testid="test-id-1-select-target-question-el"
+                  >
+                    <img
+                      class="c9"
+                      src="IMAGE_MOCK"
+                    />
+                    <div
+                      class="c12"
+                    >
+                      <p
+                        class="c13"
+                        color="#9AA1B6"
+                        font-weight=""
+                        overflow="hidden"
+                      >
+                        Test title 1
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -199,11 +235,11 @@ Object {
             src="IMAGE_MOCK"
           />
           <div
-            class="Box-sc-14m3exe-0 jluDyk"
+            class="Box-sc-14m3exe-0 bEDaLW"
           >
             <p
-              class="Text-sc-2lza2m-0 hSSPPH"
-              color=""
+              class="Text-sc-2lza2m-0 euoZyA"
+              color="#9AA1B6"
               font-size="15px"
               font-weight="bold"
             >
@@ -220,12 +256,14 @@ Object {
         >
           <div
             class="Column-sc-1n6divy-0 dQNPKb"
+            data-testid="test-id-1-select-target-question"
           >
             <div
               class="Row-x1o3ru-0 fsbhR"
             >
               <img
                 class="Img-sc-1kfzr96-0 ihJDCz"
+                data-testid="test-id-1-select-target-question-interview-view-setter"
                 src="IMAGE_MOCK"
               />
               <img
@@ -244,7 +282,29 @@ Object {
             >
               <div
                 class="Column-sc-1n6divy-0 dQNPKb"
-              />
+              >
+                <div
+                  class="Row-x1o3ru-0 cXSRYv"
+                  data-testid="test-id-1-select-target-question-el"
+                >
+                  <img
+                    class="Img-sc-1kfzr96-0 jjPZlC"
+                    src="IMAGE_MOCK"
+                  />
+                  <div
+                    class="Box-sc-14m3exe-0 duTKAM"
+                  >
+                    <p
+                      class="Text-sc-2lza2m-0 hnHZXZ"
+                      color="#9AA1B6"
+                      font-weight=""
+                      overflow="hidden"
+                    >
+                      Test title 1
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

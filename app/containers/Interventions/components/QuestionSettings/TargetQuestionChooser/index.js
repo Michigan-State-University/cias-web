@@ -84,9 +84,10 @@ const TargetQuestionChooser = ({
   };
 
   const renderQuestionChooser = (
-    <Column>
+    <Column data-testid={`${id}-select-target-question`}>
       <Row mb={20}>
         <Img
+          data-testid={`${id}-select-target-question-interview-view-setter`}
           src={arrowLeft}
           mr={10}
           onClick={event => setIsInterventionView(true, event)}
@@ -99,7 +100,7 @@ const TargetQuestionChooser = ({
         <Column>
           {questions.map((question, index) => (
             <Row
-              data-testid={`${id}-select-target-question`}
+              data-testid={`${id}-select-target-question-el`}
               key={`${id}-select-target-question-${index}`}
               mb={index !== questions.length - 1 && 15}
               onClick={() =>
@@ -132,13 +133,18 @@ const TargetQuestionChooser = ({
   const renderInterventionChooser = () => {
     if (interventionListLoading)
       return (
-        <Row height="80px" justify="center" align="center">
+        <Row
+          data-testid={`${id}-select-target-intervention-spinner`}
+          height="80px"
+          justify="center"
+          align="center"
+        >
           <Spinner color={themeColors.secondary} />
         </Row>
       );
 
     return (
-      <Column>
+      <Column data-testid={`${id}-select-target-intervention`}>
         <Row mb={20}>
           <H3>{formatMessage(messages.interventionListHeader)}</H3>
         </Row>
@@ -146,7 +152,7 @@ const TargetQuestionChooser = ({
           <Column>
             {interventionList.map((intervention, index) => (
               <Row
-                data-testid={`${id}-select-target-intervention`}
+                data-testid={`${id}-select-target-intervention-el`}
                 key={`${id}-select-target-intervention-${index}`}
                 mb={index !== interventionList.length - 1 ? 15 : 5}
                 onClick={event => chooseIntervention(intervention.id, event)}
