@@ -254,7 +254,9 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case GET_INTERVENTION_LIST_ERROR:
-        draft.interventionList = [draft.intervention];
+        draft.interventionList = draft.interventionList.length
+          ? draft.interventionList
+          : [draft.intervention];
         draft.loaders.interventionListLoading = false;
         break;
     }
