@@ -24,7 +24,11 @@ import messages from './messages';
 import InterventionsNavbar from './components/InterventionsNavbar';
 
 const renderNavbar = path => {
-  if (path && path.includes('/interventions') && path.includes('/edit'))
+  if (
+    path &&
+    path.includes('/interventions') &&
+    (path.includes('/edit') || path.includes('/settings'))
+  )
     return <InterventionsNavbar path={path} />;
   return null;
 };

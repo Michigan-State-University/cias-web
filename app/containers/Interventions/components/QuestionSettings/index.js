@@ -11,15 +11,13 @@ import Row from 'components/Row';
 import Img from 'components/Img';
 import close from 'assets/svg/cross.svg';
 
-import DefaultSettings from './DefaultSettings';
+import Settings from './Settings';
 import messages from './messages';
-import { makeSelectSelectedQuestionType } from './selectors';
 import { makeSelectQuestionSettingsVisibility } from '../../containers/EditInterventionPage/selectors';
 import { toggleQuestionSettings } from '../../containers/EditInterventionPage/actions';
 import { SettingsBar, Container } from './styled';
 
 const QuestionSettings = ({
-  selectedQuestionType,
   settingsVisiblity,
   toggleSettings,
   intl: { formatMessage },
@@ -33,30 +31,20 @@ const QuestionSettings = ({
             <H2>{formatMessage(messages.header)}</H2>
             <Img src={close} alt="close" clickable onClick={onClose} />
           </Row>
-          {renderSettings(selectedQuestionType)}
+          <Settings />
         </Box>
       </SettingsBar>
     </Container>
   );
 };
 
-// * There will be different settings for some of the questions/slides
-const renderSettings = selectedQuestionType => {
-  switch (selectedQuestionType) {
-    default:
-      return <DefaultSettings />;
-  }
-};
-
 QuestionSettings.propTypes = {
-  selectedQuestionType: PropTypes.string,
   intl: PropTypes.object.isRequired,
   settingsVisiblity: PropTypes.bool,
   toggleSettings: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  selectedQuestionType: makeSelectSelectedQuestionType(),
   settingsVisiblity: makeSelectQuestionSettingsVisibility(),
 });
 

@@ -32,6 +32,7 @@ import {
   EDIT_INTERVENTION_REQUEST,
   EDIT_INTERVENTION_SUCCESS,
   EDIT_INTERVENTION_ERROR,
+  CHANGE_QUESTION_TYPE,
 } from './constants';
 
 const toggleQuestionSettings = index =>
@@ -52,6 +53,8 @@ const updateQuestionSettings = data =>
   actionBuilder(UPDATE_QUESTION_SETTINGS, data);
 const deleteQuestion = payload => actionBuilder(DELETE_QUESTION, payload);
 const copyQuestionRequest = payload => actionBuilder(COPY_QUESTION, payload);
+const changeQuestionType = newType =>
+  actionBuilder(CHANGE_QUESTION_TYPE, { newType });
 
 const deleteQuestionsSucccess = questionId =>
   actionBuilder(DELETE_QUESTION_SUCCESS, { questionId });
@@ -132,4 +135,5 @@ export {
   editInterventionRequest,
   editInterventionSuccess,
   editInterventionError,
+  changeQuestionType,
 };

@@ -3,6 +3,14 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.DefaultSettings';
 
 export default defineMessages({
+  type: {
+    id: `${scope}.type`,
+    defaultMessage: 'Type',
+  },
+  typePlaceholder: {
+    id: `${scope}.typePlaceholder`,
+    defaultMessage: 'Question type',
+  },
   title: {
     id: `${scope}.title`,
     defaultMessage: 'Title',
@@ -15,17 +23,17 @@ export default defineMessages({
     id: `${scope}.image`,
     defaultMessage: 'Image',
   },
-  settings: {
-    id: `${scope}.settings`,
-    defaultMessage: 'Settings',
+  subtitle: {
+    id: `${scope}.subtitle`,
+    defaultMessage: 'Subtitle',
+  },
+  proceed_button: {
+    id: `${scope}.proceed_button`,
+    defaultMessage: 'Proceed button',
   },
   animation: {
     id: `${scope}.animation`,
     defaultMessage: 'Animation',
-  },
-  narrator: {
-    id: `${scope}.narrator`,
-    defaultMessage: 'Narrator',
   },
   voice: {
     id: `${scope}.voice`,
@@ -62,10 +70,6 @@ export default defineMessages({
   pointDown: {
     id: `${scope}.pointDown`,
     defaultMessage: 'Point down',
-  },
-  branching: {
-    id: `${scope}.branching`,
-    defaultMessage: 'Branching',
   },
   formula: {
     id: `${scope}.formula`,

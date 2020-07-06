@@ -19,6 +19,7 @@ import {
   DELETE_QUESTION,
   COPY_QUESTION,
   EDIT_INTERVENTION_REQUEST,
+  CHANGE_QUESTION_TYPE,
 } from './constants';
 
 import {
@@ -250,5 +251,6 @@ export default function* editInterventionPageSaga() {
     yield takeLatest(DELETE_QUESTION, deleteQuestion),
     yield takeLatest(COPY_QUESTION, copyQuestion),
     yield takeLatest(EDIT_INTERVENTION_REQUEST, editIntervention),
+    yield takeLatest(CHANGE_QUESTION_TYPE, updateQuestion),
   ]);
 }

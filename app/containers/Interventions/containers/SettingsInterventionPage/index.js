@@ -10,6 +10,7 @@ import { injectIntl, intlShape } from 'react-intl';
 
 import Box from 'components/Box';
 import H3 from 'components/H3';
+import lastKey from 'utils/getLastKey';
 import { colors } from 'theme';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -25,8 +26,6 @@ import messages from './messages';
 import reducer from '../EditInterventionPage/reducer';
 import saga from '../EditInterventionPage/saga';
 import { StyledColumn, Input, NameContainer } from './styled';
-
-const lastKey = obj => Object.keys(obj)[Object.keys(obj).length - 1];
 
 const SettingsInterventionPage = ({
   intervention: { id, name, settings: { narrator: narratorSettings } = {} },

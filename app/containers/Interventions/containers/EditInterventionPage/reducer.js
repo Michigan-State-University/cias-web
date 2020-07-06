@@ -31,10 +31,12 @@ import {
   DELETE_QUESTION_ERROR,
   EDIT_INTERVENTION_REQUEST,
   EDIT_INTERVENTION_SUCCESS,
+  CHANGE_QUESTION_TYPE,
 } from './constants';
 
 import questionDataReducer from '../../components/QuestionData/reducer';
-import questionSettingsReducer from '../../components/QuestionSettings/reducer';
+import questionSettingsReducer from '../../components/QuestionSettings/Settings/reducer';
+import { instantiateEmptyQuestion } from './utils';
 
 export const initialState = {
   intervention: new Intervention('', ''),
@@ -211,16 +213,27 @@ const editInterventionPageReducer = (state = initialState, action) =>
 
       case GET_INTERVENTION_SUCCESS:
         draft.cache.intervention = action.payload.intervention;
-
         draft.intervention = cloneDeep(draft.cache.intervention);
         break;
 
       case EDIT_INTERVENTION_REQUEST:
         set(draft.intervention, action.payload.path, action.payload.value);
         break;
+
       case EDIT_INTERVENTION_SUCCESS:
         draft.intervention = action.payload.intervention;
         draft.cache.intervention = action.payload.intervention;
+        break;
+
+      case CHANGE_QUESTION_TYPE:
+        draft.questions[state.selectedQuestion] = {
+          ...draft.questions[state.selectedQuestion],
+          ...instantiateEmptyQuestion(
+            draft.questions[state.selectedQuestion].title,
+            action.payload.newType,
+          ),
+          formula: { payload: '', patterns: [] },
+        };
         break;
     }
   });

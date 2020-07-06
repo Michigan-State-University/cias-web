@@ -15,6 +15,8 @@ export const UPDATE_QUESTION_DATA =
   'app/EditInterventionPage/UPDATE_QUESTION_DATA';
 export const DELETE_QUESTION = 'app/EditInterventionPage/DELETE_QUESTION';
 export const COPY_QUESTION = 'app/EditInterventionPage/COPY_QUESTION';
+export const CHANGE_QUESTION_TYPE =
+  'app/EditInterventionPage/CHANGE_QUESTION_TYPE';
 
 export const UPDATE_QUESTION_SETTINGS =
   'app/EditInterventionPage/UPDATE_QUESTION_SETTINGS';

@@ -21,7 +21,7 @@ const instantiateBlockForType = type => {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const defaultQuestionSettingsReducer = (question, payload) => {
+const questionSettingsReducer = (question, payload) => {
   switch (payload.type) {
     case UPDATE_QUESTION_SETTINGS:
       return {
@@ -96,4 +96,4 @@ const defaultQuestionSettingsReducer = (question, payload) => {
   }
 };
 
-export default defaultQuestionSettingsReducer;
+export default questionSettingsReducer;

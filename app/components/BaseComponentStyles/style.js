@@ -12,6 +12,8 @@ const style = props => ({
   },
   borderRadius: props.borderRadius || '',
   boxShadow: props.shadow || '',
+  transform: props.transform || '',
+  transition: props.transition || '',
 });
 
 style.propTypes = {
@@ -22,6 +24,8 @@ style.propTypes = {
   hoverColor: PropTypes.string,
   borderRadius: PropTypes.string,
   shadow: PropTypes.string,
+  transform: PropTypes.string,
+  transition: PropTypes.string,
 };
 
 export { style };

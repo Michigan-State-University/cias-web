@@ -46,7 +46,7 @@ const renderQuestionDetails = ({
   intl: { formatMessage },
 }) => {
   if (selectedQuestion != null) {
-    const { video, image } = selectedQuestion.settings;
+    const { video, image, title } = selectedQuestion.settings;
 
     const { settings: { animation } = {} } = selectedQuestion.narrator || {};
     return (
@@ -60,21 +60,23 @@ const renderQuestionDetails = ({
         </Row>
         <Row justify="center" filled>
           <Column sm={10} justify="center">
-            <Row width="100%">
-              <StyledHoverableBox width="100%" padded>
-                <H1>
-                  <Row>
-                    <ApprovableInput
-                      height="auto"
-                      rows="4"
-                      placeholder={formatMessage(messages.placeholder)}
-                      value={selectedQuestion.title}
-                      onCheck={updateTitle}
-                    />
-                  </Row>
-                </H1>
-              </StyledHoverableBox>
-            </Row>
+            {title && (
+              <Row width="100%">
+                <StyledHoverableBox width="100%" padded>
+                  <H1>
+                    <Row>
+                      <ApprovableInput
+                        height="auto"
+                        rows="4"
+                        placeholder={formatMessage(messages.placeholder)}
+                        value={selectedQuestion.title}
+                        onCheck={updateTitle}
+                      />
+                    </Row>
+                  </H1>
+                </StyledHoverableBox>
+              </Row>
+            )}
             {video && (
               <Row mt={22}>
                 <QuestionVideo />
