@@ -19,8 +19,9 @@ export const StyledSpinner = styled.div`
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 6px solid #fff;
-    border-color: #fff transparent #fff transparent;
+    border: 6px solid ${({ color }) => color};
+    border-color: ${({ color }) => color} transparent ${({ color }) => color}
+      transparent;
     animation: ${animation} 1.2s linear infinite;
   }
 `;
