@@ -155,7 +155,7 @@ const TargetQuestionChooser = ({
                 </Text>
               </Box>
               {interventionId === intervention.id && (
-                <Badge color={themeColors.secondary}>
+                <Badge bg={themeColors.secondary} color={colors.white}>
                   {formatMessage(messages.selectedInterventionBadge)}
                 </Badge>
               )}

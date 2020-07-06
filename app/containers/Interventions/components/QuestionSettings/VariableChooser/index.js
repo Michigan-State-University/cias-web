@@ -70,7 +70,7 @@ const VariableChooser = ({
               {variable.title}
             </Text>
           </Row>
-          <Badge maxWidth={300}>
+          <Badge maxWidth={300} color={colors.jungleGreen} bgWithOpacity>
             {variable.variable && variable.variable.trim()}
           </Badge>
         </Row>

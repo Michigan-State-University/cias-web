@@ -1,11 +1,15 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { colors, fontSizes } from 'theme';
 import { margin, style, layout } from '../BaseComponentStyles';
 
-const Badge = styled.div.attrs(({ color }) => ({
-  bg: color,
-  opacity: 0.1,
-}))`
+const Badge = styled.div.attrs(
+  ({ bgWithOpacity, color }) =>
+    bgWithOpacity && {
+      bg: color,
+      opacity: 0.1,
+    },
+)`
   min-height: 24px;
   min-width: 25px;
   width: max-content;
@@ -21,8 +25,13 @@ const Badge = styled.div.attrs(({ color }) => ({
   ${margin};
 `;
 
+Badge.propTypes = {
+  bgWithOpacity: PropTypes.bool,
+};
+
 Badge.defaultProps = {
-  color: colors.jungleGreen,
+  color: colors.white,
+  bg: colors.jungleGreen,
 };
 
 export default Badge;

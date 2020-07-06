@@ -116,7 +116,7 @@ const QuestionListItem = ({
           </Row>
           {body && hasObjectProperty(body, 'variable') && (
             <Row mt={5}>
-              <Badge>
+              <Badge color={colors.jungleGreen} bgWithOpacity>
                 {(body.variable.name && body.variable.name.trim()) ||
                   formatMessage(globalMessages.variables.emptyBadge)}
               </Badge>

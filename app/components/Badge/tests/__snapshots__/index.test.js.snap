@@ -14,13 +14,12 @@ exports[`<Badge /> should match the snapshot 1`] = `
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  background-color: rgba(16,121,105,0.1);
-  color: rgba(16,121,105,1);
+  background-color: rgba(16,121,105,1);
+  color: rgba(255,255,255,1);
 }
 
 <div
   className="c0"
-  color="#107969"
-  opacity={0.1}
+  color="#FFFFFF"
 />
 `;
