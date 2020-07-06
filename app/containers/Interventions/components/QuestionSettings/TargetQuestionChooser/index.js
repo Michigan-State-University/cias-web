@@ -47,17 +47,14 @@ const TargetQuestionChooser = ({
   getInterventionList,
   interventionList,
 }) => {
-  const [isInterventionView, setIsInterventionView] = useState(false);
+  const [isInterventionView, _setIsInterventionView] = useState(false);
+  const setIsInterventionView = (value, event) => {
+    if (event) event.stopPropagation();
+    _setIsInterventionView(value);
+  };
 
   const canSelectQuestion = questionId => id !== questionId;
   const isLast = currentIndex === questions.length - 1;
-
-  const chooseNextQuestion = () => {
-    if (!isLast) {
-      const targetId = questions[currentIndex + 1].id;
-      onClick(targetId);
-    }
-  };
 
   useEffect(() => {
     if (isVisible) setIsInterventionView(false);
@@ -67,16 +64,27 @@ const TargetQuestionChooser = ({
     if (isInterventionView) getInterventionList();
   }, [isInterventionView]);
 
+  const chooseNextQuestion = () => {
+    if (!isLast) {
+      const targetId = questions[currentIndex + 1].id;
+      onClick(targetId);
+    }
+  };
+
+  const chooseIntervention = (targetInterventionId, event) => {
+    if (targetInterventionId === interventionId)
+      setIsInterventionView(false, event);
+
+    // TODO: select intervention as target; need to wait for backend
+  };
+
   const renderQuestionChooser = (
     <Column>
       <Row mb={20}>
         <Img
           src={arrowLeft}
           mr={10}
-          onClick={event => {
-            event.stopPropagation();
-            setIsInterventionView(true);
-          }}
+          onClick={event => setIsInterventionView(true, event)}
           clickable
         />
         <Img src={presentationProjector} mr={10} />
@@ -128,11 +136,7 @@ const TargetQuestionChooser = ({
               data-testid={`${id}-select-target-intervention`}
               key={`${id}-select-target-intervention-${index}`}
               mb={index !== interventionList.length - 1 ? 15 : 5}
-              onClick={() =>
-                console.log(
-                  `TODO: SELECTED INTERVENTION ID: ${intervention.id}`,
-                )
-              }
+              onClick={event => chooseIntervention(intervention.id, event)}
               align="center"
               clickable
             >
