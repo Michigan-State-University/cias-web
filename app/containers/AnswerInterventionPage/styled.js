@@ -14,6 +14,9 @@ export const AnswerContent = styled.div`
 
 export const QuestionActions = styled.div`
   margin: 20px 0;
+  button {
+    border: none;
+  }
 `;
 
 export const QuestionTitle = styled.div`

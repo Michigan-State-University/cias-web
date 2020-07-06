@@ -9,6 +9,8 @@ import HoverableBox from 'components/Box/HoverableBox';
 import radio from 'assets/svg/radio-button.svg';
 import radioChecked from 'assets/svg/radio-button-checked.svg';
 
+const margin = 21;
+
 const SingleQuestion = ({ question, answer, selectAnswer }) => {
   const {
     attributes: {
@@ -25,9 +27,10 @@ const SingleQuestion = ({ question, answer, selectAnswer }) => {
         return (
           <Row key={`question-${question.id}-el-${index}`}>
             <HoverableBox
-              px={21}
+              px={margin}
               py={14}
-              width="100%"
+              mx={-margin}
+              width={`calc(100% + ${margin}px)`}
               clickable
               onClick={() =>
                 selectAnswer({
