@@ -47,7 +47,7 @@ const StyledInput = props => {
             ? `${calculateWidthFromText(
                 value ? value.length : props.placeholder.length,
               )}px`
-          : null
+            : null
         }
       />
     );

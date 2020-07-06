@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AnswerInterventionPage /> Should render and match the snapshot 1`] = `
+<div
+  class="styled__AnswerInterventionContainer-sc-5f6i11-0 hioHJb"
+>
+  <div
+    class="styled__AnswerContent-sc-5f6i11-1 qmmML"
+  >
+    <div
+      class="styled__BackButton-sc-5f6i11-4 hcpzYo"
+    >
+      <span>
+        &lt; Previous question
+      </span>
+    </div>
+    <div>
+       thanks for completing intervention
+    </div>
+  </div>
+</div>
+`;

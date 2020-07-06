@@ -26,6 +26,12 @@ exports[`<App /> should render and match the snapshot 1`] = `
       protectedRoute={true}
     />
     <Memo(ConnectFunction)
+      component={[Function]}
+      exact={true}
+      path="/interventions/:id/fill"
+      protectedRoute={true}
+    />
+    <Memo(ConnectFunction)
       component={
         Object {
           "$$typeof": Symbol(react.memo),
