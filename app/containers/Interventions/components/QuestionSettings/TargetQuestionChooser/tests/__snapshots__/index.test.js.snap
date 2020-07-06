@@ -80,7 +80,7 @@ Object {
   font-weight: 700;
 }
 
-.c9 {
+.c11 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -91,6 +91,19 @@ Object {
   width: auto;
   height: auto;
   margin-right: 5px;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
 }
 
 <body>
@@ -135,11 +148,15 @@ Object {
                 class="c8"
               >
                 <img
-                  class="c3"
+                  class="c9"
+                  src="IMAGE_MOCK"
+                />
+                <img
+                  class="c10"
                   src="IMAGE_MOCK"
                 />
                 <h3
-                  class="c9"
+                  class="c11"
                 >
                   e-Intervention Name
                 </h3>
@@ -191,7 +208,11 @@ Object {
               class="Row-x1o3ru-0 fsbhR"
             >
               <img
-                class="Img-sc-1kfzr96-0 ejmWBC"
+                class="Img-sc-1kfzr96-0 ihJDCz"
+                src="IMAGE_MOCK"
+              />
+              <img
+                class="Img-sc-1kfzr96-0 jjPZlC"
                 src="IMAGE_MOCK"
               />
               <h3

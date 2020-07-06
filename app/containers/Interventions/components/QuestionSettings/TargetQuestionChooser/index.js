@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { compose } from 'redux';
@@ -16,6 +16,7 @@ import navigationNext from 'assets/svg/navigation-next.svg';
 import presentationProjector from 'assets/svg/presentation-projector.svg';
 import webpage from 'assets/svg/webpage-mouseover.svg';
 import webpageSelected from 'assets/svg/webpage-mouseover-selected.svg';
+import arrowLeft from 'assets/svg/arrow-left.svg';
 
 import {
   makeSelectIntervention,
@@ -36,16 +37,67 @@ const TargetQuestionChooser = ({
   selectedQuestion: { id } = {},
   pattern,
   currentIndex,
+  isVisible,
 }) => {
+  const [isInterventionView, setIsInterventionView] = useState(false);
+
   const canSelectQuestion = questionId => id !== questionId;
   const isLast = currentIndex === questions.length - 1;
 
-  const chooseQuestion = () => {
+  const chooseNextQuestion = () => {
     if (!isLast) {
       const targetId = questions[currentIndex + 1].id;
       onClick(targetId);
     }
   };
+
+  useEffect(() => {
+    setIsInterventionView(false);
+  }, [isVisible]);
+
+  const renderQuestionChooser = (
+    <Column>
+      <Row mb={20}>
+        <Img
+          src={arrowLeft}
+          mr={10}
+          onClick={event => {
+            event.stopPropagation();
+            setIsInterventionView(true);
+          }}
+          clickable
+        />
+        <Img src={presentationProjector} mr={10} />
+        <H3>{name}</H3>
+      </Row>
+      {questions.map((question, index) => (
+        <Row
+          data-testid={`${id}-select-target`}
+          key={`${id}-select-target-${index}`}
+          mb={index !== questions.length - 1 && 15}
+          onClick={() => canSelectQuestion(question.id) && onClick(question.id)}
+        >
+          <Img
+            src={pattern.target === question.id ? webpageSelected : webpage}
+            mr={10}
+          />
+          <Box maxWidth={250} clickable={canSelectQuestion(question.id)}>
+            <Text
+              textOverflow="ellipsis"
+              whiteSpace="pre"
+              overflow="hidden"
+              color={!canSelectQuestion(question.id) ? colors.grey : ''}
+              fontWeight={pattern.target === question.id ? 'bold' : ''}
+            >
+              {question.title}
+            </Text>
+          </Box>
+        </Row>
+      ))}
+    </Column>
+  );
+
+  const renderInterventionChooser = <Column>intervention list</Column>;
 
   return (
     <Box>
@@ -55,7 +107,7 @@ const TargetQuestionChooser = ({
         }`}
         padded
       >
-        <Row onClick={chooseQuestion}>
+        <Row onClick={chooseNextQuestion}>
           <Img src={navigationNext} mr={5} />
           <Box clickable={!isLast}>
             <Text
@@ -70,40 +122,9 @@ const TargetQuestionChooser = ({
       </Box>
       <Row>
         <Box padding={8} filled>
-          <Column>
-            <Row mb={20}>
-              <Img src={presentationProjector} mr={5} />
-              <H3>{name}</H3>
-            </Row>
-            {questions.map((question, index) => (
-              <Row
-                data-testid={`${id}-select-target`}
-                key={`${id}-select-target-${index}`}
-                mb={index !== questions.length - 1 && 15}
-                onClick={() =>
-                  canSelectQuestion(question.id) && onClick(question.id)
-                }
-              >
-                <Img
-                  src={
-                    pattern.target === question.id ? webpageSelected : webpage
-                  }
-                  mr={10}
-                />
-                <Box maxWidth={250} clickable={canSelectQuestion(question.id)}>
-                  <Text
-                    textOverflow="ellipsis"
-                    whiteSpace="pre"
-                    overflow="hidden"
-                    color={!canSelectQuestion(question.id) ? colors.grey : ''}
-                    fontWeight={pattern.target === question.id ? 'bold' : ''}
-                  >
-                    {question.title}
-                  </Text>
-                </Box>
-              </Row>
-            ))}
-          </Column>
+          {isInterventionView
+            ? renderInterventionChooser
+            : renderQuestionChooser}
         </Box>
       </Row>
     </Box>
@@ -121,6 +142,7 @@ TargetQuestionChooser.propTypes = {
     target: PropTypes.string,
   }),
   currentIndex: PropTypes.number,
+  isVisible: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
