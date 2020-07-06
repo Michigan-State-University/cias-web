@@ -20,6 +20,7 @@ import {
   COPY_QUESTION,
   EDIT_INTERVENTION_REQUEST,
   CHANGE_QUESTION_TYPE,
+  GET_INTERVENTION_LIST_REQUEST,
 } from './constants';
 
 import {
@@ -38,6 +39,8 @@ import {
   deleteQuestionError,
   editInterventionSuccess,
   editInterventionError,
+  getInterventionListSuccess,
+  getInterventionListError,
 } from './actions';
 
 import {
@@ -53,6 +56,11 @@ const mapQuestionToStateObject = question => ({
     ...question.attributes.body,
     data: question.attributes.body.data || [],
   },
+});
+
+const mapInterventionToStateObject = intervention => ({
+  ...intervention.attributes,
+  id: intervention.id,
 });
 
 function* createIntervention() {
@@ -81,14 +89,27 @@ function* getIntervention({ payload: { id } }) {
       data: { data },
     } = yield axios.get(requestURL);
 
-    yield put(
-      getInterventionSuccess({
-        ...data.attributes,
-        id: data.id,
-      }),
-    );
+    yield put(getInterventionSuccess(mapInterventionToStateObject(data)));
   } catch (error) {
     yield put(getInterventionError(error));
+  }
+}
+
+function* getInterventionList() {
+  const requestURL = 'v1/interventions/';
+
+  try {
+    const {
+      data: { data },
+    } = yield axios.get(requestURL);
+
+    yield put(
+      getInterventionListSuccess(
+        data.map(intervention => mapInterventionToStateObject(intervention)),
+      ),
+    );
+  } catch (error) {
+    yield put(getInterventionListError(error));
   }
 }
 
@@ -240,6 +261,7 @@ export default function* editInterventionPageSaga() {
   yield all([
     yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention),
     yield takeLatest(GET_INTERVENTION_REQUEST, getIntervention),
+    yield takeLatest(GET_INTERVENTION_LIST_REQUEST, getInterventionList),
     yield takeLatest(GET_QUESTIONS_REQUEST, getQuestions),
     yield takeLatest(CREATE_QUESTION_REQUEST, createQuestion),
     yield takeLatest(UPDATE_QUESTION_DATA, updateQuestion),

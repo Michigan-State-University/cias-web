@@ -16,6 +16,7 @@ describe('<TargetQuestionChooser />', () => {
       intervention: {
         name: 'e-Intervention Name',
       },
+      interventionList: [],
       questions: [],
     },
   };
@@ -66,6 +67,7 @@ describe('<TargetQuestionChooser />', () => {
         intervention: {
           name: 'e-Intervention Name',
         },
+        interventionList: [],
         questions: [
           mockSingleQuestion(1, true),
           question,
@@ -84,7 +86,7 @@ describe('<TargetQuestionChooser />', () => {
     );
 
     const variableComponentList = getAllByTestId(
-      `${question.id}-select-target`,
+      `${question.id}-select-target-question`,
     );
 
     expect(variableComponentList).toHaveLength(3);

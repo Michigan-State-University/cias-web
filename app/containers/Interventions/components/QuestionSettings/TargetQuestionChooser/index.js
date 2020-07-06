@@ -14,6 +14,7 @@ import Img from 'components/Img';
 
 import navigationNext from 'assets/svg/navigation-next.svg';
 import presentationProjector from 'assets/svg/presentation-projector.svg';
+import presentationProjectorSelected from 'assets/svg/presentation-projector-selected.svg';
 import webpage from 'assets/svg/webpage-mouseover.svg';
 import webpageSelected from 'assets/svg/webpage-mouseover-selected.svg';
 import arrowLeft from 'assets/svg/arrow-left.svg';
@@ -27,7 +28,11 @@ import {
 
 import { colors, borders, fontSizes } from 'theme';
 import Question from 'models/Intervention/Question';
+import Intervention from 'models/Intervention/Intervention';
+import { getInterventionListRequest } from 'containers/Interventions/containers/EditInterventionPage/actions';
+
 import messages from './messages';
+import { makeSelectInterventionList } from './selectors';
 
 const TargetQuestionChooser = ({
   intl: { formatMessage },
@@ -38,6 +43,8 @@ const TargetQuestionChooser = ({
   pattern,
   currentIndex,
   isVisible,
+  getInterventionList,
+  interventionList,
 }) => {
   const [isInterventionView, setIsInterventionView] = useState(false);
 
@@ -52,8 +59,12 @@ const TargetQuestionChooser = ({
   };
 
   useEffect(() => {
-    setIsInterventionView(false);
+    if (isVisible) setIsInterventionView(false);
   }, [isVisible]);
+
+  useEffect(() => {
+    if (isInterventionView) getInterventionList();
+  }, [isInterventionView]);
 
   const renderQuestionChooser = (
     <Column>
@@ -72,8 +83,8 @@ const TargetQuestionChooser = ({
       </Row>
       {questions.map((question, index) => (
         <Row
-          data-testid={`${id}-select-target`}
-          key={`${id}-select-target-${index}`}
+          data-testid={`${id}-select-target-question`}
+          key={`${id}-select-target-question-${index}`}
           mb={index !== questions.length - 1 && 15}
           onClick={() => canSelectQuestion(question.id) && onClick(question.id)}
         >
@@ -97,7 +108,42 @@ const TargetQuestionChooser = ({
     </Column>
   );
 
-  const renderInterventionChooser = <Column>intervention list</Column>;
+  const renderInterventionChooser = (
+    <Column>
+      <Row mb={20}>
+        <H3>{formatMessage(messages.interventionListHeader)}</H3>
+      </Row>
+      {interventionList.map((intervention, index) => (
+        <Row
+          data-testid={`${id}-select-target-intervention`}
+          key={`${id}-select-target-intervention-${index}`}
+          mb={index !== interventionList.length - 1 && 15}
+          onClick={() =>
+            console.log(`TODO: SELECTED INTERVENTION ID: ${intervention.id}`)
+          }
+        >
+          <Img
+            src={
+              pattern.target === intervention.id
+                ? presentationProjectorSelected
+                : presentationProjector
+            }
+            mr={10}
+          />
+          <Box maxWidth={250} clickable>
+            <Text
+              textOverflow="ellipsis"
+              whiteSpace="pre"
+              overflow="hidden"
+              fontWeight={pattern.target === intervention.id ? 'bold' : ''}
+            >
+              {intervention.name}
+            </Text>
+          </Box>
+        </Row>
+      ))}
+    </Column>
+  );
 
   return (
     <Box>
@@ -143,15 +189,25 @@ TargetQuestionChooser.propTypes = {
   }),
   currentIndex: PropTypes.number,
   isVisible: PropTypes.bool,
+  getInterventionList: PropTypes.func,
+  interventionList: PropTypes.arrayOf(PropTypes.shape(Intervention)),
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
+  interventionList: makeSelectInterventionList(),
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
   currentIndex: makeSelectSelectedQuestionIndex(),
 });
 
-const withConnect = connect(mapStateToProps);
+const mapDispatchToProps = {
+  getInterventionList: getInterventionListRequest,
+};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 
 export default injectIntl(compose(withConnect)(TargetQuestionChooser));

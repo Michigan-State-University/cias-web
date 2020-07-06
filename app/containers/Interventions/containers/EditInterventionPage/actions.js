@@ -33,6 +33,9 @@ import {
   EDIT_INTERVENTION_SUCCESS,
   EDIT_INTERVENTION_ERROR,
   CHANGE_QUESTION_TYPE,
+  GET_INTERVENTION_LIST_REQUEST,
+  GET_INTERVENTION_LIST_SUCCESS,
+  GET_INTERVENTION_LIST_ERROR,
 } from './constants';
 
 const toggleQuestionSettings = index =>
@@ -73,6 +76,13 @@ const getInterventionRequest = id =>
 const getInterventionSuccess = intervention =>
   actionBuilder(GET_INTERVENTION_SUCCESS, { intervention });
 const getInterventionError = () => actionBuilder(GET_INTERVENTION_ERROR, {});
+
+const getInterventionListRequest = () =>
+  actionBuilder(GET_INTERVENTION_LIST_REQUEST, {});
+const getInterventionListSuccess = interventions =>
+  actionBuilder(GET_INTERVENTION_LIST_SUCCESS, { interventions });
+const getInterventionListError = error =>
+  actionBuilder(GET_INTERVENTION_LIST_ERROR, { error });
 
 const editInterventionRequest = payload =>
   actionBuilder(EDIT_INTERVENTION_REQUEST, payload);
@@ -118,6 +128,9 @@ export {
   getInterventionRequest,
   getInterventionSuccess,
   getInterventionError,
+  getInterventionListRequest,
+  getInterventionListSuccess,
+  getInterventionListError,
   createQuestionRequest,
   createQuestionSuccess,
   createQuestionError,

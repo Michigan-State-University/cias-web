@@ -32,6 +32,9 @@ import {
   EDIT_INTERVENTION_REQUEST,
   EDIT_INTERVENTION_SUCCESS,
   CHANGE_QUESTION_TYPE,
+  GET_INTERVENTION_LIST_REQUEST,
+  GET_INTERVENTION_LIST_SUCCESS,
+  GET_INTERVENTION_LIST_ERROR,
 } from './constants';
 
 import questionDataReducer from '../../components/QuestionData/reducer';
@@ -40,6 +43,7 @@ import { instantiateEmptyQuestion } from './utils';
 
 export const initialState = {
   intervention: new Intervention('', ''),
+  interventionList: [],
   questions: [],
   questionSettingsVisibility: false,
   selectedQuestion: 0,
@@ -47,6 +51,9 @@ export const initialState = {
   cache: {
     intervention: new Intervention('', ''),
     questions: [],
+  },
+  loading: {
+    interventionList: false,
   },
 };
 
@@ -234,6 +241,19 @@ const editInterventionPageReducer = (state = initialState, action) =>
           ),
           formula: { payload: '', patterns: [] },
         };
+        break;
+
+      case GET_INTERVENTION_LIST_REQUEST:
+        draft.loading.interventionList = true;
+        break;
+
+      case GET_INTERVENTION_LIST_SUCCESS:
+        draft.loading.interventionList = false;
+        draft.interventionList = action.payload.interventions;
+        break;
+
+      case GET_INTERVENTION_LIST_ERROR:
+        draft.loading.interventionList = false;
         break;
     }
   });
