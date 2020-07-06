@@ -1,7 +1,7 @@
 /*
- * QuestionTypeChooser Messages
+ * TargetQuestionChooser Messages
  *
- * This contains all the text for the QuestionTypeChooser container.
+ * This contains all the text for the TargetQuestionChooser container.
  */
 
 import { defineMessages } from 'react-intl';
@@ -16,5 +16,9 @@ export default defineMessages({
   interventionListHeader: {
     id: `${scope}.interventionListHeader`,
     defaultMessage: 'Your interventions',
+  },
+  selectedInterventionBadge: {
+    id: `${scope}.selectedInterventionBadge`,
+    defaultMessage: 'Current',
   },
 });

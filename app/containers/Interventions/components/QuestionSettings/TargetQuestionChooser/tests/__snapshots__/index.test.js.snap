@@ -71,6 +71,15 @@ Object {
   flex-grow: 1;
 }
 
+.c12 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  max-height: 300px;
+  overflow: scroll;
+}
+
 .c5 {
   margin: 0;
   font-family: DM Sans;
@@ -161,6 +170,14 @@ Object {
                   e-Intervention Name
                 </h3>
               </div>
+              <div
+                class="c12"
+                overflow="scroll"
+              >
+                <div
+                  class="c7"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -220,6 +237,14 @@ Object {
               >
                 e-Intervention Name
               </h3>
+            </div>
+            <div
+              class="Box-sc-14m3exe-0 iKBemb"
+              overflow="scroll"
+            >
+              <div
+                class="Column-sc-1n6divy-0 dQNPKb"
+              />
             </div>
           </div>
         </div>

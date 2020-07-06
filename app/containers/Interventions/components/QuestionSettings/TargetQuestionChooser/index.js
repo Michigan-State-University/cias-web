@@ -11,6 +11,7 @@ import Box from 'components/Box';
 import Text from 'components/Text';
 import H3 from 'components/H3';
 import Img from 'components/Img';
+import Badge from 'components/Badge';
 
 import navigationNext from 'assets/svg/navigation-next.svg';
 import presentationProjector from 'assets/svg/presentation-projector.svg';
@@ -26,7 +27,7 @@ import {
   makeSelectSelectedQuestionIndex,
 } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 
-import { colors, borders, fontSizes } from 'theme';
+import { colors, borders, fontSizes, themeColors } from 'theme';
 import Question from 'models/Intervention/Question';
 import Intervention from 'models/Intervention/Intervention';
 import { getInterventionListRequest } from 'containers/Interventions/containers/EditInterventionPage/actions';
@@ -37,7 +38,7 @@ import { makeSelectInterventionList } from './selectors';
 const TargetQuestionChooser = ({
   intl: { formatMessage },
   onClick,
-  intervention: { name },
+  intervention: { name, id: interventionId },
   questions,
   selectedQuestion: { id } = {},
   pattern,
@@ -81,30 +82,37 @@ const TargetQuestionChooser = ({
         <Img src={presentationProjector} mr={10} />
         <H3>{name}</H3>
       </Row>
-      {questions.map((question, index) => (
-        <Row
-          data-testid={`${id}-select-target-question`}
-          key={`${id}-select-target-question-${index}`}
-          mb={index !== questions.length - 1 && 15}
-          onClick={() => canSelectQuestion(question.id) && onClick(question.id)}
-        >
-          <Img
-            src={pattern.target === question.id ? webpageSelected : webpage}
-            mr={10}
-          />
-          <Box maxWidth={250} clickable={canSelectQuestion(question.id)}>
-            <Text
-              textOverflow="ellipsis"
-              whiteSpace="pre"
-              overflow="hidden"
-              color={!canSelectQuestion(question.id) ? colors.grey : ''}
-              fontWeight={pattern.target === question.id ? 'bold' : ''}
+      <Box maxHeight="300px" overflow="scroll">
+        <Column>
+          {questions.map((question, index) => (
+            <Row
+              data-testid={`${id}-select-target-question`}
+              key={`${id}-select-target-question-${index}`}
+              mb={index !== questions.length - 1 && 15}
+              onClick={() =>
+                canSelectQuestion(question.id) && onClick(question.id)
+              }
+              clickable={canSelectQuestion(question.id)}
             >
-              {question.title}
-            </Text>
-          </Box>
-        </Row>
-      ))}
+              <Img
+                src={pattern.target === question.id ? webpageSelected : webpage}
+                mr={10}
+              />
+              <Box maxWidth={250}>
+                <Text
+                  textOverflow="ellipsis"
+                  whiteSpace="pre"
+                  overflow="hidden"
+                  color={!canSelectQuestion(question.id) ? colors.grey : ''}
+                  fontWeight={pattern.target === question.id ? 'bold' : ''}
+                >
+                  {question.title}
+                </Text>
+              </Box>
+            </Row>
+          ))}
+        </Column>
+      </Box>
     </Column>
   );
 
@@ -113,35 +121,48 @@ const TargetQuestionChooser = ({
       <Row mb={20}>
         <H3>{formatMessage(messages.interventionListHeader)}</H3>
       </Row>
-      {interventionList.map((intervention, index) => (
-        <Row
-          data-testid={`${id}-select-target-intervention`}
-          key={`${id}-select-target-intervention-${index}`}
-          mb={index !== interventionList.length - 1 && 15}
-          onClick={() =>
-            console.log(`TODO: SELECTED INTERVENTION ID: ${intervention.id}`)
-          }
-        >
-          <Img
-            src={
-              pattern.target === intervention.id
-                ? presentationProjectorSelected
-                : presentationProjector
-            }
-            mr={10}
-          />
-          <Box maxWidth={250} clickable>
-            <Text
-              textOverflow="ellipsis"
-              whiteSpace="pre"
-              overflow="hidden"
-              fontWeight={pattern.target === intervention.id ? 'bold' : ''}
+      <Box maxHeight="300px" overflow="scroll">
+        <Column>
+          {interventionList.map((intervention, index) => (
+            <Row
+              data-testid={`${id}-select-target-intervention`}
+              key={`${id}-select-target-intervention-${index}`}
+              mb={index !== interventionList.length - 1 ? 15 : 5}
+              onClick={() =>
+                console.log(
+                  `TODO: SELECTED INTERVENTION ID: ${intervention.id}`,
+                )
+              }
+              align="center"
+              clickable
             >
-              {intervention.name}
-            </Text>
-          </Box>
-        </Row>
-      ))}
+              <Img
+                src={
+                  pattern.target === intervention.id
+                    ? presentationProjectorSelected
+                    : presentationProjector
+                }
+                mr={10}
+              />
+              <Box maxWidth={250} mr={10}>
+                <Text
+                  textOverflow="ellipsis"
+                  whiteSpace="pre"
+                  overflow="hidden"
+                  fontWeight={pattern.target === intervention.id ? 'bold' : ''}
+                >
+                  {intervention.name}
+                </Text>
+              </Box>
+              {interventionId === intervention.id && (
+                <Badge color={themeColors.secondary}>
+                  {formatMessage(messages.selectedInterventionBadge)}
+                </Badge>
+              )}
+            </Row>
+          ))}
+        </Column>
+      </Box>
     </Column>
   );
 
