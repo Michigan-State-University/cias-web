@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 
 import playButton from 'assets/svg/play-button-1.svg';
 
+import AudioWrapper from 'utils/audioWrapper';
 import { colors } from 'theme';
 
 import messages from '../messages';
@@ -18,30 +19,36 @@ import { updateSpeechSettings } from '../../actions';
 const BUTTON_MARGIN = '10px';
 
 const SpeechBlock = ({ formatMessage, block, updateText, blockIndex, id }) => {
-  const [imgWidth, setImgWidth] = useState(0);
-  const img = useRef(null);
+  const audio = new AudioWrapper(block.audio_url);
 
-  useEffect(() => {
-    setImgWidth(img.current.width);
-  }, [img]);
+  const playAudio = () => audio.play();
+  const stopAudio = () => audio.stop();
+
+  const handleButtonClick = () => {
+    if (block.audio_url)
+      if (audio.stopped) playAudio();
+      else stopAudio();
+  };
 
   return (
     <Column>
       <Box mt={15}>{formatMessage(messages.speech)}</Box>
-      <Box mt={15} bg={colors.linkWater} width="100%">
-        <StyledInput
-          type="multiline"
-          rows="10"
-          placeholder={formatMessage(messages.speechPlaceholder)}
-          value={block.text}
-          onBlur={val => updateText(blockIndex, val, id)}
-        />
+      <Box position="relative">
+        <Box mt={15} bg={colors.linkWater} width="100%">
+          <StyledInput
+            type="multiline"
+            rows="10"
+            placeholder={formatMessage(messages.speechPlaceholder)}
+            value={block.text}
+            onBlur={val => updateText(blockIndex, val, id)}
+          />
+        </Box>
         <Img
-          ref={img}
-          position="relative"
-          left={`calc(100% - ${imgWidth}px - ${BUTTON_MARGIN})`}
+          position="absolute"
           bottom={BUTTON_MARGIN}
+          right={BUTTON_MARGIN}
           src={playButton}
+          onClick={handleButtonClick}
           clickable
         />
       </Box>
