@@ -17,6 +17,7 @@ import BlockTypeChooser from '../../../BlockTypeChooser';
 import { DashedBox } from '../styled';
 import { addBlock, updateNarratorSettings } from '../../actions';
 import BodyAnimationBlock from '../Blocks/BodyAnimationBlock';
+import SpeechBlock from '../Blocks/SpeechBlock';
 
 const NarratorTab = ({
   formatMessage,
@@ -45,6 +46,14 @@ const NarratorTab = ({
           />
         );
       case speechType:
+        return (
+          <SpeechBlock
+            formatMessage={formatMessage}
+            block={block}
+            blockIndex={index}
+            id={id}
+          />
+        );
       default:
         return null;
     }

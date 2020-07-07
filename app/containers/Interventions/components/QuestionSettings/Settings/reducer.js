@@ -7,6 +7,7 @@ import {
   ADD_FORMULA_CASE,
   UPDATE_FORMULA_CASE,
   REMOVE_FORMULA_CASE,
+  UPDATE_SPEECH_TEXT,
 } from './constants';
 
 const instantiateBlockForType = type => {
@@ -14,7 +15,7 @@ const instantiateBlockForType = type => {
     case 'BodyAnimation':
       return { type: 'BodyAnimation', animation: null };
     case 'Speech':
-      return { type: 'Speech', text: null };
+      return { type: 'Speech', text: '', audio_url: null };
     default:
       return undefined;
   }
@@ -56,7 +57,7 @@ const questionSettingsReducer = (question, payload) => {
         },
       };
 
-    case UPDATE_NARRATOR_ANIMATION:
+    case UPDATE_NARRATOR_ANIMATION: {
       const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
       cloneBlocks[payload.data.index].animation = payload.data.value;
       return {
@@ -66,6 +67,20 @@ const questionSettingsReducer = (question, payload) => {
           blocks: cloneBlocks,
         },
       };
+    }
+
+    case UPDATE_SPEECH_TEXT: {
+      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      cloneBlocks[payload.data.index].text = payload.data.value;
+
+      return {
+        ...question,
+        narrator: {
+          ...question.narrator,
+          blocks: cloneBlocks,
+        },
+      };
+    }
 
     case UPDATE_FORMULA:
       return {

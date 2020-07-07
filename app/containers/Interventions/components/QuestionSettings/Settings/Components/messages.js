@@ -107,4 +107,8 @@ export default defineMessages({
     id: `${scope}.speech`,
     defaultMessage: 'Speech',
   },
+  speechPlaceholder: {
+    id: `${scope}.speechPlaceholder`,
+    defaultMessage: 'Enter speech here...',
+  },
 });

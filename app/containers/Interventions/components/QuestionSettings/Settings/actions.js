@@ -8,6 +8,7 @@ import {
   ADD_FORMULA_CASE,
   UPDATE_FORMULA_CASE,
   REMOVE_FORMULA_CASE,
+  UPDATE_SPEECH_TEXT,
 } from './constants';
 
 export const updateSettings = (property, value) =>
@@ -31,6 +32,12 @@ export const addBlock = (type, questionId) =>
 export const updateNarratorAnimation = (index, value, questionId) =>
   updateQuestionSettings({
     type: UPDATE_NARRATOR_ANIMATION,
+    data: { index, value, questionId },
+  });
+
+export const updateSpeechSettings = (index, value, questionId) =>
+  updateQuestionSettings({
+    type: UPDATE_SPEECH_TEXT,
     data: { index, value, questionId },
   });
 

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { borders } from 'theme';
 import { style } from '../BaseComponentStyles';
 
 export const AccordionContainer = styled.div``;
@@ -10,7 +9,7 @@ export const StyledCollapseContainer = styled.div`
 
 export const StyledCollapseLabel = styled.div`
   height: 40px;
-  border-radius: ${borders.borderRadius};
+  border-radius: 5px;
   padding: 12px;
   color: white;
   cursor: pointer;
@@ -31,4 +30,5 @@ export const Content = styled.div`
   flex-wrap: wrap;
   height: fit-content;
   margin-top: -12px;
+  width: 100%;
 `;
