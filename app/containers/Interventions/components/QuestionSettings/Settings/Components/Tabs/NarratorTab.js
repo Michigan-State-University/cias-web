@@ -2,41 +2,27 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { map, snakeCase } from 'lodash';
+import { map } from 'lodash';
 
 import Accordion from 'components/Accordion';
 import Box from 'components/Box';
-import Chips from 'components/Chips';
+
 import H3 from 'components/H3';
 import Row from 'components/Row';
 import Switch from 'components/Switch';
-import { blockTypes } from 'models/Narrator/BlockTypes';
-import { colors } from 'theme';
-import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
+import { bodyAnimationType, speechType } from 'models/Narrator/BlockTypes';
 
 import messages from '../messages';
 import BlockTypeChooser from '../../../BlockTypeChooser';
 import { DashedBox } from '../styled';
-import { bodyAnimations, facialAnimations } from '../animations';
-import {
-  addBlock,
-  updateNarratorSettings,
-  updateNarratorAnimation,
-} from '../../actions';
-
-const getPossibleAnimations = (type, formatMessage) => {
-  if (type === blockTypes[0]) return facialAnimations(formatMessage);
-  if (type === blockTypes[1]) return bodyAnimations(formatMessage);
-  return [];
-};
+import { addBlock, updateNarratorSettings } from '../../actions';
+import BodyAnimationBlock from '../Blocks/BodyAnimationBlock';
 
 const NarratorTab = ({
   formatMessage,
   narrator,
   onNarratorToggle,
   onCreate,
-  updateAnimation,
-  updateNarratorPreviewAnimation,
   id,
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
@@ -47,15 +33,23 @@ const NarratorTab = ({
     toggleTypeChooser();
   };
 
-  const onChipsClick = (index, value) => () => {
-    if (narrator.blocks[index].animation === value) {
-      updateNarratorPreviewAnimation('');
-      updateAnimation(index, null, id);
-    } else {
-      updateNarratorPreviewAnimation(snakeCase(value.toLowerCase()));
-      updateAnimation(index, value, id);
+  const renderBlock = (block, index) => {
+    switch (block.type) {
+      case bodyAnimationType:
+        return (
+          <BodyAnimationBlock
+            formatMessage={formatMessage}
+            block={block}
+            blockIndex={index}
+            id={id}
+          />
+        );
+      case speechType:
+      default:
+        return null;
     }
   };
+
   return (
     <Fragment>
       <Box mb={30}>
@@ -79,26 +73,7 @@ const NarratorTab = ({
         {narrator &&
           map(narrator.blocks, (block, blockIndex) => (
             <div key={`${id}-narrator-block-${blockIndex}`} type={block.type}>
-              {getPossibleAnimations(block.type, formatMessage).map(
-                (anim, animIndex) => {
-                  const isActive = block.animation === anim;
-                  return (
-                    <Chips
-                      px={15}
-                      py={4}
-                      borderRadius={20}
-                      clickable
-                      bg={colors.azure}
-                      opacity={isActive ? null : 0.1}
-                      onClick={onChipsClick(blockIndex, anim)}
-                      isActive={isActive}
-                      key={`el-chips-${animIndex}`}
-                    >
-                      {anim}
-                    </Chips>
-                  );
-                },
-              )}
+              {renderBlock(block, blockIndex)}
             </div>
           ))}
       </Accordion>
@@ -118,15 +93,11 @@ NarratorTab.propTypes = {
   id: PropTypes.string,
   onNarratorToggle: PropTypes.func.isRequired,
   onCreate: PropTypes.func,
-  updateAnimation: PropTypes.func,
-  updateNarratorPreviewAnimation: PropTypes.func,
 };
 
 const mapDispatchToProps = {
   onCreate: addBlock,
   onNarratorToggle: updateNarratorSettings,
-  updateAnimation: updateNarratorAnimation,
-  updateNarratorPreviewAnimation: updatePreviewAnimation,
 };
 
 const withConnect = connect(

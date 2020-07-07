@@ -103,4 +103,8 @@ export default defineMessages({
     id: `${scope}.nextScreen`,
     defaultMessage: 'Next Screen',
   },
+  speech: {
+    id: `${scope}.speech`,
+    defaultMessage: 'Speech',
+  },
 });

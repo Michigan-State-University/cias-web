@@ -1,8 +1,11 @@
 import { colors } from 'theme';
 
-export const blockTypes = ['Speech', 'BodyAnimation'];
+export const bodyAnimationType = 'BodyAnimation';
+export const speechType = 'Speech';
+
+export const blockTypes = [speechType, bodyAnimationType];
 
 export const blockTypeToColorMap = {
-  BodyAnimation: colors.pink,
-  Speech: colors.azure,
+  [bodyAnimationType]: colors.pink,
+  [speechType]: colors.azure,
 };
