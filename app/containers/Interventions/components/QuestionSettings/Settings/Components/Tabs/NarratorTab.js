@@ -16,6 +16,8 @@ import {
   blockTypeToColorMap,
 } from 'models/Narrator/BlockTypes';
 
+import { colors } from 'theme';
+
 import globalMessages from 'global/i18n/globalMessages';
 import messages from '../messages';
 import BlockTypeChooser from '../../../BlockTypeChooser';
@@ -33,6 +35,8 @@ const NarratorTab = ({
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
+
+  const { voice, animation } = narrator.settings;
 
   const onCreateBlock = type => {
     onCreate(type, id);
@@ -64,6 +68,17 @@ const NarratorTab = ({
     }
   };
 
+  const getBlockColor = type => {
+    switch (type) {
+      case bodyAnimationType:
+        return animation ? blockTypeToColorMap[type] : colors.grey;
+      case speechType:
+        return voice ? blockTypeToColorMap[type] : colors.grey;
+      default:
+        return null;
+    }
+  };
+
   return (
     <Fragment>
       <Box mb={30}>
@@ -88,7 +103,7 @@ const NarratorTab = ({
           map(narrator.blocks, (block, blockIndex) => (
             <div
               key={`${id}-narrator-block-${blockIndex}`}
-              color={blockTypeToColorMap[block.type]}
+              color={getBlockColor(block.type)}
               label={`${blockIndex + 1}. ${formatMessage(
                 globalMessages.blockTypes[block.type],
               )}`}
