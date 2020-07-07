@@ -14,15 +14,15 @@ import { blockTypes } from 'models/Narrator/BlockTypes';
 import { colors } from 'theme';
 import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
-import messages from './messages';
-import BlockTypeChooser from '../../BlockTypeChooser';
-import { DashedBox } from './styled';
-import { bodyAnimations, facialAnimations } from './animations';
+import messages from '../messages';
+import BlockTypeChooser from '../../../BlockTypeChooser';
+import { DashedBox } from '../styled';
+import { bodyAnimations, facialAnimations } from '../animations';
 import {
   addBlock,
   updateNarratorSettings,
   updateNarratorAnimation,
-} from '../actions';
+} from '../../actions';
 
 const getPossibleAnimations = (type, formatMessage) => {
   if (type === blockTypes[0]) return facialAnimations(formatMessage);
@@ -77,11 +77,11 @@ const NarratorTab = ({
       </Box>
       <Accordion>
         {narrator &&
-          map(narrator.blocks, (step, blockIndex) => (
-            <div key={`${id}-narrator-block-${blockIndex}`} type={step.type}>
-              {getPossibleAnimations(step.type, formatMessage).map(
+          map(narrator.blocks, (block, blockIndex) => (
+            <div key={`${id}-narrator-block-${blockIndex}`} type={block.type}>
+              {getPossibleAnimations(block.type, formatMessage).map(
                 (anim, animIndex) => {
-                  const isActive = step.animation === anim;
+                  const isActive = block.animation === anim;
                   return (
                     <Chips
                       px={15}

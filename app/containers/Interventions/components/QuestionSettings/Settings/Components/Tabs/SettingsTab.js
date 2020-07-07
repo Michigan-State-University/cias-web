@@ -16,8 +16,8 @@ import { QuestionTypes } from 'models/Intervention/QuestionTypes';
 import { colors, borders } from 'theme';
 import { changeQuestionType } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
-import messages from './messages';
-import { updateSettings as updateQuestionSettings } from '../actions';
+import messages from '../messages';
+import { updateSettings as updateQuestionSettings } from '../../actions';
 
 const orderSettings = settings =>
   settings && {

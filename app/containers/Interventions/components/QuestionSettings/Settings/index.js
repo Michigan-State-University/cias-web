@@ -14,9 +14,9 @@ import {
   makeSelectQuestions,
 } from '../../../containers/EditInterventionPage/selectors';
 
-import SettingsTab from './Components/SettingsTab';
-import NarratorTab from './Components/NarratorTab';
-import BranchingTab from './Components/BranchingTab';
+import SettingsTab from './Components/Tabs/SettingsTab';
+import NarratorTab from './Components/Tabs/NarratorTab';
+import BranchingTab from './Components/Tabs/BranchingTab';
 
 const Settings = ({
   selectedQuestion: { narrator, settings, id, formula, type } = {},

@@ -17,16 +17,16 @@ import { colors, themeColors } from 'theme';
 import { findQuestionIndex } from 'models/Intervention/utils';
 import { makeSelectQuestions } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 
-import messages from './messages';
-import TargetQuestionChooser from '../../TargetQuestionChooser';
-import VariableChooser from '../../VariableChooser';
-import { DashedBox, CaseInput } from './styled';
+import messages from '../messages';
+import TargetQuestionChooser from '../../../TargetQuestionChooser';
+import VariableChooser from '../../../VariableChooser';
+import { DashedBox, CaseInput } from '../styled';
 import {
   updateFormula,
   addFormulaCase,
   removeFormulaCase,
   updateFormulaCase,
-} from '../actions';
+} from '../../actions';
 
 const BranchingTab = ({
   formatMessage,
