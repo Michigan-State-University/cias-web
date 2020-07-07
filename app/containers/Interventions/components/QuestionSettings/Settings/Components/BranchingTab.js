@@ -140,6 +140,7 @@ const BranchingTab = ({
                   }
                 >
                   <TargetQuestionChooser
+                    isVisible={index === targetChooserOpen}
                     pattern={pattern}
                     onClick={value => {
                       setTargetChooserOpen(false);
