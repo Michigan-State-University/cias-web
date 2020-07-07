@@ -10,6 +10,7 @@ import HoverableBox from 'components/Box/HoverableBox';
 
 import { blockTypes, blockTypeToColorMap } from 'models/Narrator/BlockTypes';
 import { colors, boxShadows, borders, fontSizes } from 'theme';
+import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
 import { DotCircle } from './styled';
 
@@ -46,7 +47,7 @@ const BlockTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
               <Row align="center">
                 <DotCircle mr={18} bg={blockTypeToColorMap[stepType]} />
                 <Text fontWeight="medium">
-                  {formatMessage(messages.stepTypes[stepType])}
+                  {formatMessage(globalMessages.blockTypes[stepType])}
                 </Text>
               </Row>
             </HoverableBox>

@@ -103,10 +103,6 @@ export default defineMessages({
     id: `${scope}.nextScreen`,
     defaultMessage: 'Next Screen',
   },
-  speech: {
-    id: `${scope}.speech`,
-    defaultMessage: 'Speech',
-  },
   speechPlaceholder: {
     id: `${scope}.speechPlaceholder`,
     defaultMessage: 'Enter speech here...',

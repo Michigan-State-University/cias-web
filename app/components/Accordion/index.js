@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { blockTypeToColorMap } from 'models/Narrator/BlockTypes';
-
 import { AccordionContainer } from './styled';
 import Collapse from './Collapse';
 
@@ -10,7 +8,7 @@ const Accordion = ({ children }) => {
   const [opened, setOpened] = useState(-1);
 
   const renderCollapse = (child, index) => {
-    const { children: content, type } = child.props;
+    const { children: content, label, color } = child.props;
 
     return (
       <Collapse
@@ -20,8 +18,8 @@ const Accordion = ({ children }) => {
           else setOpened(index);
         }}
         isOpened={opened === index}
-        label={`${index + 1}. ${type}`}
-        color={blockTypeToColorMap[type]}
+        label={label}
+        color={color}
       >
         {content}
       </Collapse>

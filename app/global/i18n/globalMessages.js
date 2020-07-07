@@ -21,6 +21,16 @@ export default defineMessages({
       defaultMessage: 'No assigned value',
     },
   },
+  blockTypes: {
+    BodyAnimation: {
+      id: `${scope}.BodyAnimation`,
+      defaultMessage: 'Body Animation',
+    },
+    Speech: {
+      id: `${scope}.Speech`,
+      defaultMessage: 'Speech',
+    },
+  },
   questionTypes: {
     'Question::Single': {
       id: `${scope}.Question::Single`,

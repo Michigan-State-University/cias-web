@@ -10,8 +10,13 @@ import Box from 'components/Box';
 import H3 from 'components/H3';
 import Row from 'components/Row';
 import Switch from 'components/Switch';
-import { bodyAnimationType, speechType } from 'models/Narrator/BlockTypes';
+import {
+  bodyAnimationType,
+  speechType,
+  blockTypeToColorMap,
+} from 'models/Narrator/BlockTypes';
 
+import globalMessages from 'global/i18n/globalMessages';
 import messages from '../messages';
 import BlockTypeChooser from '../../../BlockTypeChooser';
 import { DashedBox } from '../styled';
@@ -81,7 +86,13 @@ const NarratorTab = ({
       <Accordion>
         {narrator &&
           map(narrator.blocks, (block, blockIndex) => (
-            <div key={`${id}-narrator-block-${blockIndex}`} type={block.type}>
+            <div
+              key={`${id}-narrator-block-${blockIndex}`}
+              color={blockTypeToColorMap[block.type]}
+              label={`${blockIndex + 1}. ${formatMessage(
+                globalMessages.blockTypes[block.type],
+              )}`}
+            >
               {renderBlock(block, blockIndex)}
             </div>
           ))}

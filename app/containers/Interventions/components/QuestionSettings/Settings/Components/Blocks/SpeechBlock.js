@@ -13,6 +13,7 @@ import playButton from 'assets/svg/play-button-1.svg';
 import AudioWrapper from 'utils/audioWrapper';
 import { colors } from 'theme';
 
+import globalMessages from 'global/i18n/globalMessages';
 import messages from '../messages';
 import { updateSpeechSettings } from '../../actions';
 
@@ -32,7 +33,7 @@ const SpeechBlock = ({ formatMessage, block, updateText, blockIndex, id }) => {
 
   return (
     <Column>
-      <Box mt={15}>{formatMessage(messages.speech)}</Box>
+      <Box mt={15}>{formatMessage(globalMessages.blockTypes[block.type])}</Box>
       <Box position="relative">
         <Box mt={15} bg={colors.linkWater} width="100%">
           <StyledInput

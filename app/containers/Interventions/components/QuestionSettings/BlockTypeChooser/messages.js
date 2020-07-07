@@ -13,14 +13,4 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Choose type of block',
   },
-  stepTypes: {
-    BodyAnimation: {
-      id: `${scope}.stepTypes.BodyAnimation`,
-      defaultMessage: 'Body Animation',
-    },
-    Speech: {
-      id: `${scope}.stepTypes.Speech`,
-      defaultMessage: 'Speech',
-    },
-  },
 });
