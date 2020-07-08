@@ -31,6 +31,7 @@ describe('<SettingsInterventionPage />', () => {
           },
         },
       },
+      loaders: {},
     },
   };
   beforeAll(() => {

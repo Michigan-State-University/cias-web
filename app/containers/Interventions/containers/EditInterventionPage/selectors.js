@@ -1,4 +1,6 @@
 import { createSelector } from 'reselect';
+import { get } from 'lodash';
+
 import { initialState } from './reducer';
 
 const selectEditInterventionPageDomain = state =>
@@ -40,6 +42,18 @@ const makeSelectSelectedQuestion = () =>
     substate => substate.questions[substate.selectedQuestion],
   );
 
+const makeSelectLoaders = () =>
+  createSelector(
+    selectEditInterventionPageDomain,
+    substate => substate.loaders,
+  );
+
+const makeSelectLoader = loader =>
+  createSelector(
+    selectEditInterventionPageDomain,
+    substate => get(substate.loaders, loader, false),
+  );
+
 export {
   makeSelectEditInterventionPage,
   selectEditInterventionPageDomain,
@@ -48,4 +62,6 @@ export {
   makeSelectSelectedQuestionIndex,
   makeSelectSelectedQuestion,
   makeSelectQuestionSettingsVisibility,
+  makeSelectLoader,
+  makeSelectLoaders,
 };

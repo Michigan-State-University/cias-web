@@ -36,6 +36,10 @@ import {
   GET_INTERVENTION_LIST_REQUEST,
   GET_INTERVENTION_LIST_SUCCESS,
   GET_INTERVENTION_LIST_ERROR,
+  GET_INTERVENTION_REQUEST,
+  GET_INTERVENTION_ERROR,
+  GET_QUESTIONS_REQUEST,
+  GET_QUESTIONS_ERROR,
 } from './constants';
 
 import questionDataReducer from '../../components/QuestionData/reducer';
@@ -55,6 +59,8 @@ export const initialState = {
   },
   loaders: {
     interventionListLoading: false,
+    interventionLoading: true,
+    questionListLoading: false,
   },
 };
 
@@ -211,7 +217,12 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.questions = cloneDeep(draft.cache.questions);
         break;
 
+      case GET_QUESTIONS_REQUEST:
+        draft.loaders.questionListLoading = true;
+        break;
+
       case GET_QUESTIONS_SUCCESS:
+        draft.loaders.questionListLoading = false;
         draft.cache.questions = action.payload.questions.map(question =>
           mapQuestionDataForType(question),
         );
@@ -219,9 +230,22 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.questions = cloneDeep(draft.cache.questions);
         break;
 
+      case GET_QUESTIONS_ERROR:
+        draft.loaders.questionListLoading = false;
+        break;
+
+      case GET_INTERVENTION_REQUEST:
+        draft.loaders.interventionLoading = true;
+        break;
+
       case GET_INTERVENTION_SUCCESS:
+        draft.loaders.interventionLoading = false;
         draft.cache.intervention = action.payload.intervention;
         draft.intervention = cloneDeep(draft.cache.intervention);
+        break;
+
+      case GET_INTERVENTION_ERROR:
+        draft.loaders.interventionLoading = false;
         break;
 
       case EDIT_INTERVENTION_REQUEST:

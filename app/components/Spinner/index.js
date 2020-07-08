@@ -12,12 +12,14 @@ import { StyledSpinner } from './styled';
 
 const Spinner = props => <StyledSpinner {...props} />;
 
-StyledSpinner.propTypes = {
+Spinner.propTypes = {
   color: PropTypes.string,
+  size: PropTypes.number,
 };
 
-StyledSpinner.defaultProps = {
+Spinner.defaultProps = {
   color: colors.white,
+  size: 30,
 };
 
 export default Spinner;

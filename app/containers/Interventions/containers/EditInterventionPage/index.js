@@ -15,6 +15,7 @@ import Row from 'components/Row';
 import HoverableBox from 'components/Box/HoverableBox';
 import Text from 'components/Text';
 import Question from 'models/Intervention/Question';
+import Loader from 'components/Loader';
 
 import { borders, themeColors, colors } from 'theme';
 
@@ -24,6 +25,7 @@ import messages from './messages';
 import {
   makeSelectQuestions,
   makeSelectSelectedQuestionIndex,
+  makeSelectLoaders,
 } from './selectors';
 import {
   getInterventionRequest,
@@ -47,6 +49,7 @@ function EditInterventionPage({
   match: { params },
   getQuestions,
   reorderQuestions,
+  loaders: { interventionLoading },
 }) {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   useInjectReducer({ key: 'editInterventionPage', reducer });
@@ -85,6 +88,7 @@ function EditInterventionPage({
   };
   return (
     <Fragment>
+      <Loader hidden={!interventionLoading} />
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
@@ -164,11 +168,13 @@ EditInterventionPage.propTypes = {
   createQuestion: PropTypes.func,
   getQuestions: PropTypes.func,
   reorderQuestions: PropTypes.func,
+  loaders: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionIndex(),
+  loaders: makeSelectLoaders(),
 });
 
 const mapDispatchToProps = {
