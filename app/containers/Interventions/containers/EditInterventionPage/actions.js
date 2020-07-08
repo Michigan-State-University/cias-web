@@ -33,6 +33,7 @@ import {
   EDIT_INTERVENTION_SUCCESS,
   EDIT_INTERVENTION_ERROR,
   CHANGE_QUESTION_TYPE,
+  REORDER_QUESTION_LIST,
   GET_INTERVENTION_LIST_REQUEST,
   GET_INTERVENTION_LIST_SUCCESS,
   GET_INTERVENTION_LIST_ERROR,
@@ -112,6 +113,9 @@ const getQuestionsError = error =>
 const updatePreviewAnimation = animation =>
   actionBuilder(UPDATE_PREVIEW_ANIMATION, { animation });
 
+const reorderQuestionList = reorderedList =>
+  actionBuilder(REORDER_QUESTION_LIST, { reorderedList });
+
 export {
   toggleQuestionSettings,
   selectQuestion,
@@ -149,4 +153,5 @@ export {
   editInterventionSuccess,
   editInterventionError,
   changeQuestionType,
+  reorderQuestionList,
 };

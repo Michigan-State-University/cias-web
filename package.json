@@ -93,6 +93,7 @@
     "react-lottie": "1.2.3",
     "react-player": "2.3.1",
     "react-redux": "7.0.2",
+    "react-reorder": "3.0.0-alpha.7",
     "react-router-dom": "5.0.0",
     "react-select": "3.1.0",
     "react-toastify": "^6.0.6",

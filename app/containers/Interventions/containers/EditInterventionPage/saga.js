@@ -1,5 +1,6 @@
 import { put, takeLatest, select, all } from 'redux-saga/effects';
 import axios from 'axios';
+import sortBy from 'lodash/sortBy';
 import { push } from 'connected-react-router';
 
 import { getAllVariables } from 'models/Intervention/utils';
@@ -143,7 +144,7 @@ function* getQuestions({ payload: { id } }) {
       mapQuestionToStateObject(question),
     );
 
-    yield put(getQuestionsSuccess(questions));
+    yield put(getQuestionsSuccess(sortBy(questions, 'order')));
   } catch (error) {
     yield put(getQuestionsError(error));
   }

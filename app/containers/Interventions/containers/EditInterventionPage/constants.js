@@ -77,3 +77,6 @@ export const GET_QUESTIONS_ERROR =
 
 export const UPDATE_PREVIEW_ANIMATION =
   'app/EditInterventionPage/UPDATE_PREVIEW_ANIMATION';
+
+export const REORDER_QUESTION_LIST =
+  'app/EditInterventionPage/REORDER_QUESTION_LIST';

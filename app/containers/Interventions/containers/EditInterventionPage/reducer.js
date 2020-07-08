@@ -32,6 +32,7 @@ import {
   EDIT_INTERVENTION_REQUEST,
   EDIT_INTERVENTION_SUCCESS,
   CHANGE_QUESTION_TYPE,
+  REORDER_QUESTION_LIST,
   GET_INTERVENTION_LIST_REQUEST,
   GET_INTERVENTION_LIST_SUCCESS,
   GET_INTERVENTION_LIST_ERROR,
@@ -242,7 +243,9 @@ const editInterventionPageReducer = (state = initialState, action) =>
           formula: { payload: '', patterns: [] },
         };
         break;
-
+      case REORDER_QUESTION_LIST:
+        draft.questions = action.payload.reorderedList;
+        break;
       case GET_INTERVENTION_LIST_REQUEST:
         if (!draft.interventionList || draft.interventionList.length === 0)
           draft.loaders.interventionListLoading = true;

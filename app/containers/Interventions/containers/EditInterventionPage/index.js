@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { injectIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
+import Reorder, { reorder } from 'react-reorder';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -28,6 +29,7 @@ import {
   getInterventionRequest,
   createQuestionRequest,
   getQuestionsRequest,
+  reorderQuestionList,
 } from './actions';
 
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
@@ -44,6 +46,7 @@ function EditInterventionPage({
   createQuestion,
   match: { params },
   getQuestions,
+  reorderQuestions,
 }) {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   useInjectReducer({ key: 'editInterventionPage', reducer });
@@ -66,6 +69,20 @@ function EditInterventionPage({
     );
     toggleTypeChooser();
   };
+
+  const handleReorder = (event, previousIndex, nextIndex) => {
+    const newList = reorder(questions, previousIndex, nextIndex);
+    let order = 0;
+    const orderdedNewList = newList.map(question => {
+      order += 1;
+      return {
+        ...question,
+        order,
+      };
+    });
+
+    reorderQuestions(orderdedNewList);
+  };
   return (
     <Fragment>
       <Helmet>
@@ -82,17 +99,19 @@ function EditInterventionPage({
             padded
           >
             <Box width="100%" padded>
-              {questions.map((question, index) => (
-                <Row key={question.id}>
-                  <QuestionListItem
-                    index={index}
-                    selectedQuestionIndex={selectedQuestion}
-                    questionsLength={questions.length}
-                    question={question}
-                    interventionId={params.id}
-                  />
-                </Row>
-              ))}
+              <Reorder reorderId="question-list" onReorder={handleReorder}>
+                {questions.map((question, index) => (
+                  <Row key={question.id}>
+                    <QuestionListItem
+                      index={index}
+                      selectedQuestionIndex={selectedQuestion}
+                      questionsLength={questions.length}
+                      question={question}
+                      interventionId={params.id}
+                    />
+                  </Row>
+                ))}
+              </Reorder>
               <Row>
                 <Box position="relative" width="100%">
                   <HoverableBox
@@ -144,6 +163,7 @@ EditInterventionPage.propTypes = {
   getIntervention: PropTypes.func,
   createQuestion: PropTypes.func,
   getQuestions: PropTypes.func,
+  reorderQuestions: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -155,6 +175,7 @@ const mapDispatchToProps = {
   getIntervention: getInterventionRequest,
   getQuestions: getQuestionsRequest,
   createQuestion: createQuestionRequest,
+  reorderQuestions: reorderQuestionList,
 };
 
 const withConnect = connect(
