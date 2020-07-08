@@ -15,6 +15,7 @@ export const StyledSpinner = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: auto;
   width: ${({ size }) => `${size}px`};
   height: ${({ size }) => `${size}px`};
   &:after {

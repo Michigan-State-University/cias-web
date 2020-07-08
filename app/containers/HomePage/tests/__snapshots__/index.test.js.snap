@@ -5,7 +5,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
   class="styled__HomePageContainer-r8av8f-0 hPMtJa"
 >
   <button
-    class="StyledButton-t20ntd-0 fmwIxP"
+    class="StyledButton-t20ntd-0 goZETI"
     color="primary"
     title="Create intervention"
     width="100%"

@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { colors, themeColors, borders, paddings } from 'theme';
+import { colors, themeColors, borders } from 'theme';
 
 export const StyledButton = styled.button`
   width: ${props => props.width};
   height: 48px;
-  padding: ${paddings.small};
   background-color: ${props =>
     props.outlined ? colors.white : themeColors[props.color]};
   color: ${colors.white};

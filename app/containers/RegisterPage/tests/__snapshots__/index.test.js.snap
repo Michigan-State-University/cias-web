@@ -60,7 +60,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           value=""
         />
         <button
-          class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 fmwIxP"
+          class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 goZETI"
           color="primary"
           title="Register"
           width="100%"
@@ -71,7 +71,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           href="/login"
         >
           <button
-            class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 fmwIxP"
+            class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 goZETI"
             color="primary"
             title="I already have an account"
             width="100%"
