@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Column from 'components/Column';
@@ -11,7 +11,8 @@ import radioChecked from 'assets/svg/radio-button-checked.svg';
 
 const margin = 21;
 
-const SingleQuestion = ({ question, answer, selectAnswer }) => {
+const SingleQuestion = ({ question, selectAnswer }) => {
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const {
     body: {
       data,
@@ -30,16 +31,22 @@ const SingleQuestion = ({ question, answer, selectAnswer }) => {
               mx={-margin}
               width={`calc(100% + ${margin}px)`}
               clickable
-              onClick={() =>
-                selectAnswer({
-                  answer: payload,
-                  value,
-                  variable: name,
-                })
-              }
+              onClick={() => {
+                selectAnswer([
+                  {
+                    variable: name,
+                    payload,
+                    value,
+                  },
+                ]);
+                setSelectedAnswerIndex(index);
+              }}
             >
               <Row align="center">
-                <Img src={answer === value ? radioChecked : radio} mr={16} />
+                <Img
+                  src={selectedAnswerIndex === index ? radioChecked : radio}
+                  mr={16}
+                />
                 {payload}
               </Row>
             </HoverableBox>
@@ -52,7 +59,6 @@ const SingleQuestion = ({ question, answer, selectAnswer }) => {
 
 SingleQuestion.propTypes = {
   question: PropTypes.shape(Question).isRequired,
-  answer: PropTypes.any,
   selectAnswer: PropTypes.func,
 };
 

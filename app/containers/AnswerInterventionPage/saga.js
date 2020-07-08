@@ -29,11 +29,11 @@ function* fetchQuestionsAsync({ payload: { interventionId } }) {
 
 function* submitAnswersAsync({ payload: { answerId } }) {
   const answers = yield select(makeSelectAnswers());
-  const { variable, type: questionType, answer } = answers[answerId];
+  const { type: questionType, answerBody } = answers[answerId];
   if (questionType) {
     const type = questionType.replace('Question', 'Answer');
     yield axios.post(`/v1/questions/${answerId}/answers`, {
-      answer: { type, body: [{ payload: answer, var: variable }] },
+      answer: { type, body: answerBody },
     });
     yield put(submitAnswerSuccess(answerId));
   } else {

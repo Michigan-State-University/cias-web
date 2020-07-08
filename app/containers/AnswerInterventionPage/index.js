@@ -56,7 +56,6 @@ export function AnswerInterventionPage({
 }) {
   useInjectReducer({ key: 'answerInterventionPage', reducer });
   useInjectSaga({ key: 'answerInterventionPage', saga });
-
   const currentQuestion = interventionQuestions
     ? interventionQuestions[questionIndex]
     : null;
@@ -71,23 +70,21 @@ export function AnswerInterventionPage({
 
   const renderQuestion = () => {
     const { title, type } = currentQuestion;
-    const selectAnswerProp = ({ answer, value, variable }) => {
+    const selectAnswerProp = answerBody => {
       saveSelectedAnswer({
         id: currentQuestionId,
-        value,
         type,
-        answer,
-        variable,
+        answerBody,
       });
     };
 
-    const answer = answers[currentQuestionId]
-      ? answers[currentQuestionId].value
-      : null;
+    const answerBody = answers[currentQuestionId]
+      ? answers[currentQuestionId].answerBody
+      : [];
 
     const sharedProps = {
       selectAnswer: selectAnswerProp,
-      answer,
+      answerBody,
     };
     return (
       <>
