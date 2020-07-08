@@ -22,14 +22,20 @@ import messages from './messages';
 import { createInterventionRequest } from './actions';
 import reducer from './reducer';
 import saga from './saga';
+import { makeSelectInterventionCreatingLoader } from './selectors';
 
-export function HomePage({ intl: { formatMessage }, createIntervention }) {
+export function HomePage({
+  intl: { formatMessage },
+  createIntervention,
+  interventionCreating,
+}) {
   useInjectReducer({ key: 'dashboardPage', reducer });
   useInjectSaga({ key: 'dashboardPage', saga });
 
   return (
     <HomePageContainer>
       <Button
+        loading={interventionCreating}
         onClick={createIntervention}
         title={formatMessage(messages.createIntervention)}
       />
@@ -39,15 +45,15 @@ export function HomePage({ intl: { formatMessage }, createIntervention }) {
 
 HomePage.propTypes = {
   intl: PropTypes.object,
-};
-
-HomePage.propTypes = {
   createIntervention: PropTypes.func,
+  interventionCreating: PropTypes.bool,
 };
 
 const withIntl = injectIntl(HomePage);
 
-const mapStateToProps = createStructuredSelector({});
+const mapStateToProps = createStructuredSelector({
+  interventionCreating: makeSelectInterventionCreatingLoader(),
+});
 
 const mapDispatchToProps = {
   createIntervention: createInterventionRequest,

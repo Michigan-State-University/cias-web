@@ -17,15 +17,15 @@ const dashboardPageReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case CREATE_INTERVENTION_REQUEST:
-        draft.interventionCreating = true;
+        draft.loaders.interventionCreating = true;
         break;
 
       case CREATE_INTERVENTION_SUCCESS:
-        draft.interventionCreating = false;
+        draft.loaders.interventionCreating = false;
         break;
 
       case CREATE_INTERVENTION_ERROR:
-        draft.interventionCreating = false;
+        draft.loaders.interventionCreating = false;
         break;
     }
   });
