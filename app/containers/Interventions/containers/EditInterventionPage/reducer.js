@@ -60,7 +60,7 @@ export const initialState = {
   loaders: {
     interventionListLoading: false,
     interventionLoading: true,
-    questionListLoading: false,
+    questionListLoading: true,
   },
 };
 

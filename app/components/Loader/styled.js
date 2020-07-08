@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 import { colors } from 'theme';
 import { style, layout } from 'components/BaseComponentStyles';
-import Box from 'components/Box';
 
 export const FillScreenLoader = styled.div.attrs({
   bg: colors.white,
@@ -21,10 +20,12 @@ export const FillScreenLoader = styled.div.attrs({
   ${layout};
 `;
 
-export const InlineLoader = styled(Box)`
+export const InlineLoader = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  ${style};
+  ${layout};
 `;

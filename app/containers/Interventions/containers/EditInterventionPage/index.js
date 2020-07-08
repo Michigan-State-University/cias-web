@@ -49,7 +49,7 @@ function EditInterventionPage({
   match: { params },
   getQuestions,
   reorderQuestions,
-  loaders: { interventionLoading },
+  loaders: { interventionLoading, questionListLoading },
 }) {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   useInjectReducer({ key: 'editInterventionPage', reducer });
@@ -86,6 +86,28 @@ function EditInterventionPage({
 
     reorderQuestions(orderdedNewList);
   };
+
+  const renderList = () => {
+    if (questionListLoading)
+      return <Loader hidden={!questionListLoading} type="inline" />;
+
+    return (
+      <Reorder reorderId="question-list" onReorder={handleReorder}>
+        {questions.map((question, index) => (
+          <Row key={question.id}>
+            <QuestionListItem
+              index={index}
+              selectedQuestionIndex={selectedQuestion}
+              questionsLength={questions.length}
+              question={question}
+              interventionId={params.id}
+            />
+          </Row>
+        ))}
+      </Reorder>
+    );
+  };
+
   return (
     <Fragment>
       <Loader hidden={!interventionLoading} />
@@ -103,19 +125,7 @@ function EditInterventionPage({
             padded
           >
             <Box width="100%" padded>
-              <Reorder reorderId="question-list" onReorder={handleReorder}>
-                {questions.map((question, index) => (
-                  <Row key={question.id}>
-                    <QuestionListItem
-                      index={index}
-                      selectedQuestionIndex={selectedQuestion}
-                      questionsLength={questions.length}
-                      question={question}
-                      interventionId={params.id}
-                    />
-                  </Row>
-                ))}
-              </Reorder>
+              {renderList()}
               <Row>
                 <Box position="relative" width="100%">
                   <HoverableBox
