@@ -1,4 +1,4 @@
-export const getPause = type => {
+const getPause = type => {
   switch (type) {
     case 'stand_still':
       return 0;
@@ -57,4 +57,4 @@ export const getPause = type => {
   }
 };
 
-export default { getPause };
+export default getPause;

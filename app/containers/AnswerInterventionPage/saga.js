@@ -1,5 +1,8 @@
 import { takeLatest, put, select } from 'redux-saga/effects';
 import axios from 'axios';
+
+import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
+
 import { FETCH_QUESTIONS, SUBMIT_ANSWER_REQUEST } from './constants';
 import {
   fetchQuestionsFailure,
@@ -14,7 +17,11 @@ function* fetchQuestionsAsync({ payload: { interventionId } }) {
     const {
       data: { data },
     } = yield axios.get(`/v1/interventions/${interventionId}/questions`);
-    yield put(fetchQuestionsSuccess(data));
+    yield put(
+      fetchQuestionsSuccess(
+        data.map(question => mapQuestionToStateObject(question)),
+      ),
+    );
   } catch (error) {
     yield put(fetchQuestionsFailure(error));
   }

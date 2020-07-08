@@ -48,7 +48,7 @@ export const initialState = {
   questions: [],
   questionSettingsVisibility: false,
   selectedQuestion: 0,
-  previewAnimation: '',
+  previewAnimation: 'stand-still',
   cache: {
     intervention: new Intervention('', ''),
     questions: [],

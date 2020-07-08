@@ -17,11 +17,13 @@ import { useInjectReducer } from 'utils/injectReducer';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 import { Button } from 'components/Button';
+import { blockTypes } from 'models/Narrator/BlockTypes';
 import makeSelectAnswerInterventionPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import renderQuestionByType from './components';
+import CharacterAnim from './components/CharacterAnim';
 import {
   AnswerInterventionContainer,
   AnswerContent,
@@ -68,9 +70,7 @@ export function AnswerInterventionPage({
   const saveAnswer = () => submitAnswerRequest(currentQuestionId);
 
   const renderQuestion = () => {
-    const {
-      attributes: { title, type },
-    } = currentQuestion;
+    const { title, type } = currentQuestion;
     const selectAnswerProp = ({ answer, value, variable }) => {
       saveSelectedAnswer({
         id: currentQuestionId,
@@ -99,6 +99,14 @@ export function AnswerInterventionPage({
 
   return (
     <AnswerInterventionContainer>
+      {currentQuestion && currentQuestion.narrator.settings.animation && (
+        <CharacterAnim
+          blocks={currentQuestion.narrator.blocks.filter(
+            block => block.type === blockTypes[1],
+          )}
+          quesitonId={currentQuestionId}
+        />
+      )}
       <Helmet>
         <title>Answer Intervention</title>
         <meta name="description" content="Answer Intervention" />

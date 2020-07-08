@@ -5,6 +5,10 @@ import { push } from 'connected-react-router';
 
 import { getAllVariables } from 'models/Intervention/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
+import {
+  mapQuestionToStateObject,
+  mapInterventionToStateObject,
+} from 'utils/mapResponseObjects';
 
 import {
   CREATE_INTERVENTION_REQUEST,
@@ -49,20 +53,6 @@ import {
   makeSelectSelectedQuestion,
   makeSelectQuestions,
 } from './selectors';
-
-const mapQuestionToStateObject = question => ({
-  ...question.attributes,
-  id: question.id,
-  body: {
-    ...question.attributes.body,
-    data: question.attributes.body.data || [],
-  },
-});
-
-const mapInterventionToStateObject = intervention => ({
-  ...intervention.attributes,
-  id: intervention.id,
-});
 
 function* createIntervention() {
   const requestURL = `v1/interventions`;

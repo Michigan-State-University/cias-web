@@ -13,11 +13,9 @@ const margin = 21;
 
 const SingleQuestion = ({ question, answer, selectAnswer }) => {
   const {
-    attributes: {
-      body: {
-        data,
-        variable: { name },
-      },
+    body: {
+      data,
+      variable: { name },
     },
   } = question;
   return (

@@ -7,10 +7,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
+import getPause from 'utils/getPause';
 
 import { NarratorContainer } from './styled';
 import { makeSelectPreviewAnimation } from './selectors';
-import { getPause } from './helpers';
 
 const lottieStyles = {
   margin: 'none',
@@ -22,19 +22,17 @@ const QuestionNarrator = ({ animation }) => {
 
   const fetchJSON = async () => {
     if (!loadedAnimations.find(anim => anim.name === animation)) {
-      const data = await import(`./Animations/${animation}.json`);
+      const data = await import(`assets/animations/${animation}.json`);
       setLoadedAnimations([
         ...loadedAnimations,
         {
           name: animation,
-          path: `./Animations/${animation}.json`,
           animationData: data,
           pause: getPause(animation),
         },
       ]);
     }
   };
-
   useEffect(() => {
     if (animation) {
       fetchJSON();
@@ -59,7 +57,6 @@ const QuestionNarrator = ({ animation }) => {
     ...(currentAnimation
       ? {
           name: currentAnimation.name,
-          path: currentAnimation.path,
           animationData: currentAnimation.animationData,
         }
       : {}),

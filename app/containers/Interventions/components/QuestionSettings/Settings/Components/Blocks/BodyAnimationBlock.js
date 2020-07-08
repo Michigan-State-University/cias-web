@@ -31,8 +31,9 @@ const BodyAnimationBlock = ({
       updateNarratorPreviewAnimation('');
       updateAnimation(index, null, id);
     } else {
-      updateNarratorPreviewAnimation(snakeCase(value.toLowerCase()));
-      updateAnimation(index, value, id);
+      const animName = snakeCase(value.toLowerCase());
+      updateNarratorPreviewAnimation(animName);
+      updateAnimation(index, animName, id);
     }
   };
 
@@ -40,7 +41,7 @@ const BodyAnimationBlock = ({
     <>
       {getPossibleAnimations(block.type, formatMessage).map(
         (anim, animIndex) => {
-          const isActive = block.animation === anim;
+          const isActive = block.animation === snakeCase(anim.toLowerCase());
 
           return (
             <Chips
