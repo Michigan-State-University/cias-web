@@ -12,7 +12,9 @@ const animation = keyframes`
 }`;
 
 export const StyledSpinner = styled.div`
-  display: inline-block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: ${({ size }) => `${size}px`};
   height: ${({ size }) => `${size}px`};
   &:after {

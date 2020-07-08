@@ -12,7 +12,7 @@ import Text from 'components/Text';
 import H3 from 'components/H3';
 import Img from 'components/Img';
 import Badge from 'components/Badge';
-import Spinner from 'components/Spinner';
+import Loader from 'components/Loader';
 
 import navigationNext from 'assets/svg/navigation-next.svg';
 import presentationProjector from 'assets/svg/presentation-projector.svg';
@@ -133,14 +133,13 @@ const TargetQuestionChooser = ({
   const renderInterventionChooser = () => {
     if (interventionListLoading)
       return (
-        <Row
-          data-testid={`${id}-select-target-intervention-spinner`}
+        <Box
+          width="100%"
           height="80px"
-          justify="center"
-          align="center"
+          data-testid={`${id}-select-target-intervention-spinner`}
         >
-          <Spinner color={themeColors.secondary} />
-        </Row>
+          <Loader type="inline" hidden={false} />
+        </Box>
       );
 
     return (
