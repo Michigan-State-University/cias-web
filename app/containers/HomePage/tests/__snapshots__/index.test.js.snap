@@ -4,17 +4,13 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
 <div
   class="styled__HomePageContainer-r8av8f-0 hPMtJa"
 >
-  <a
-    href="/interventions/create"
+  <button
+    class="StyledButton-t20ntd-0 fmwIxP"
+    color="primary"
+    title="Create intervention"
+    width="100%"
   >
-    <button
-      class="StyledButton-t20ntd-0 fmwIxP"
-      color="primary"
-      title="Create intervation"
-      width="100%"
-    >
-      Create intervation
-    </button>
-  </a>
+    Create intervention
+  </button>
 </div>
 `;

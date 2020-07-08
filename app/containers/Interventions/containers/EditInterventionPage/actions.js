@@ -7,9 +7,6 @@ import {
   UPDATE_QUESTION_IMAGE,
   DELETE_QUESTION_IMAGE,
   UPDATE_QUESTION_VIDEO,
-  CREATE_INTERVENTION_REQUEST,
-  CREATE_INTERVENTION_SUCCESS,
-  CREATE_INTERVENTION_ERROR,
   GET_INTERVENTION_REQUEST,
   GET_INTERVENTION_SUCCESS,
   GET_INTERVENTION_ERROR,
@@ -65,13 +62,6 @@ const deleteQuestionsSucccess = questionId =>
 const deleteQuestionError = error =>
   actionBuilder(DELETE_QUESTION_ERROR, { error });
 
-const createInterventionRequest = () =>
-  actionBuilder(CREATE_INTERVENTION_REQUEST, {});
-const createInterventionSuccess = () =>
-  actionBuilder(CREATE_INTERVENTION_SUCCESS, {});
-const createInterventionError = () =>
-  actionBuilder(CREATE_INTERVENTION_ERROR, {});
-
 const getInterventionRequest = id =>
   actionBuilder(GET_INTERVENTION_REQUEST, { id });
 const getInterventionSuccess = intervention =>
@@ -126,9 +116,6 @@ export {
   updateQuestionImage,
   deleteQuestionImage,
   updateQuestionVideo,
-  createInterventionRequest,
-  createInterventionSuccess,
-  createInterventionError,
   getInterventionRequest,
   getInterventionSuccess,
   getInterventionError,

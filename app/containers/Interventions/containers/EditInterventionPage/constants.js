@@ -26,13 +26,6 @@ export const DELETE_QUESTION_SUCCESS =
 export const DELETE_QUESTION_ERROR =
   'app/EditInterventionPage/DELETE_QUESTION_ERROR';
 
-export const CREATE_INTERVENTION_REQUEST =
-  'app/EditInterventionPage/CREATE_INTERVENTION_REQUEST';
-export const CREATE_INTERVENTION_SUCCESS =
-  'app/EditInterventionPage/CREATE_INTERVENTION_SUCCESS';
-export const CREATE_INTERVENTION_ERROR =
-  'app/EditInterventionPage/CREATE_INTERVENTION_ERROR';
-
 export const GET_INTERVENTION_REQUEST =
   'app/EditInterventionPage/GET_INTERVENTION_REQUEST';
 export const GET_INTERVENTION_SUCCESS =

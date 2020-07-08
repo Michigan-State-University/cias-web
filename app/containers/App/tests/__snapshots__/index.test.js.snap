@@ -32,20 +32,6 @@ exports[`<App /> should render and match the snapshot 1`] = `
       protectedRoute={true}
     />
     <Memo(ConnectFunction)
-      component={
-        Object {
-          "$$typeof": Symbol(react.memo),
-          "WrappedComponent": [Function],
-          "compare": null,
-          "displayName": "Connect(CreateInterventionPage)",
-          "type": [Function],
-        }
-      }
-      exact={true}
-      path="/interventions/create"
-      protectedRoute={true}
-    />
-    <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
       path="/interventions/:id/settings"

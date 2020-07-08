@@ -1,7 +1,6 @@
 import { put, takeLatest, select, all } from 'redux-saga/effects';
 import axios from 'axios';
 import sortBy from 'lodash/sortBy';
-import { push } from 'connected-react-router';
 
 import { getAllVariables } from 'models/Intervention/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
@@ -11,7 +10,6 @@ import {
 } from 'utils/mapResponseObjects';
 
 import {
-  CREATE_INTERVENTION_REQUEST,
   GET_INTERVENTION_REQUEST,
   CREATE_QUESTION_REQUEST,
   GET_QUESTIONS_REQUEST,
@@ -29,8 +27,6 @@ import {
 } from './constants';
 
 import {
-  createInterventionSuccess,
-  createInterventionError,
   getInterventionSuccess,
   getInterventionError,
   getQuestionsSuccess,
@@ -53,24 +49,6 @@ import {
   makeSelectSelectedQuestion,
   makeSelectQuestions,
 } from './selectors';
-
-function* createIntervention() {
-  const requestURL = `v1/interventions`;
-
-  try {
-    const response = yield axios.post(requestURL, {
-      intervention: {
-        type: 'Intervention::Single',
-        name: 'e-Intervention New',
-      },
-    });
-
-    yield put(createInterventionSuccess());
-    yield put(push(`/interventions/${response.data.data.id}/edit`));
-  } catch (error) {
-    yield put(createInterventionError(error));
-  }
-}
 
 function* getIntervention({ payload: { id } }) {
   const requestURL = `v1/interventions/${id}`;
@@ -250,7 +228,6 @@ function* copyQuestion({ payload: { questionId, interventionId } }) {
 
 export default function* editInterventionPageSaga() {
   yield all([
-    yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention),
     yield takeLatest(GET_INTERVENTION_REQUEST, getIntervention),
     yield takeLatest(GET_INTERVENTION_LIST_REQUEST, getInterventionList),
     yield takeLatest(GET_QUESTIONS_REQUEST, getQuestions),

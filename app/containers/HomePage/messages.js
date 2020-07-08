@@ -8,8 +8,8 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.HomePage';
 
 export default defineMessages({
-  createIntervation: {
-    id: `${scope}.createIntervation`,
-    defaultMessage: 'Create intervation',
+  createIntervention: {
+    id: `${scope}.createIntervention`,
+    defaultMessage: 'Create intervention',
   },
 });
