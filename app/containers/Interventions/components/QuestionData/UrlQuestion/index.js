@@ -29,10 +29,8 @@ const UrlQuestion = ({
   const { payload } = selectedQuestion.body.data[0];
   const { variable } = selectedQuestion.body;
 
-  const updateLink = url => updateUrl({ variable, payload: url });
-
   return (
-    <Column>
+    <Column mt={10}>
       <BadgeInput
         px={0}
         py={12}
@@ -52,7 +50,7 @@ const UrlQuestion = ({
             rows="3"
             placeholder={formatMessage(messages.placeholder)}
             value={payload}
-            onCheck={updateLink}
+            onCheck={updateUrl}
             type="multiline"
           />
         </Row>
@@ -73,7 +71,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateUrl: value => updateQuestionData({ type: UPDATE_URL, data: { value } }),
+  updateUrl: url => updateQuestionData({ type: UPDATE_URL, data: { url } }),
   updateVariable: name =>
     updateQuestionData({ type: UPDATE_VARIABLE, data: { name } }),
 };

@@ -22,7 +22,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -42,9 +42,21 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
+  margin-top: 10px;
 }
 
-.c8 {
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -56,7 +68,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   height: 100%;
 }
 
-.c10 {
+.c11 {
   width: auto;
   height: auto;
   cursor: pointer;
@@ -75,7 +87,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c7 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -104,7 +116,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   border: 1px solid #107969;
 }
 
-.c6 {
+.c7 {
   padding: 12px;
   border: 1px solid #E9F1FB;
   border-radius: 10px;
@@ -114,7 +126,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c6:focus {
+.c7:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
@@ -162,10 +174,10 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
         width="100%"
       >
         <div
-          className="c0"
+          className="c6"
         >
           <input
-            className="c6"
+            className="c7"
             height="60px"
             onBlur={[Function]}
             onChange={[Function]}
@@ -176,18 +188,18 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
           />
         </div>
         <div
-          className="c7"
+          className="c8"
           hidden={true}
         >
           <div
-            className="c8"
+            className="c9"
             height="100%"
           >
             <div
-              className="c9"
+              className="c10"
             >
               <img
-                className="c10"
+                className="c11"
                 onMouseDown={[Function]}
                 src="IMAGE_MOCK"
               />
@@ -196,7 +208,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
               className="c4"
             >
               <img
-                className="c10"
+                className="c11"
                 src="IMAGE_MOCK"
               />
             </div>
