@@ -4,9 +4,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
-import { toast } from 'react-toastify';
 
-import { makeSelectAlert, clearAlert } from 'global/reducers/alerts';
+import { error } from 'react-toastify-redux';
+import { makeSelectAlert } from 'global/reducers/alerts';
 import { ERROR_DUPLICATE_VARIABLE } from 'containers/Interventions/containers/EditInterventionPage/constants';
 
 import Column from 'components/Column';
@@ -26,12 +26,13 @@ const Settings = ({
   selectedQuestion: { narrator, settings, id, formula, type } = {},
   intl: { formatMessage },
   alertVisible,
-  afterAlertShow,
+  showError,
 }) => {
   useEffect(() => {
     if (alertVisible) {
-      toast.error(formatMessage(messages.errors.duplicateVariable));
-      afterAlertShow();
+      showError(formatMessage(messages.errors.duplicateVariable), {
+        id: ERROR_DUPLICATE_VARIABLE,
+      });
     }
   }, [alertVisible]);
 
@@ -75,7 +76,7 @@ Settings.propTypes = {
     type: PropTypes.string,
   }),
   alertVisible: PropTypes.bool,
-  afterAlertShow: PropTypes.func,
+  showError: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -85,7 +86,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  afterAlertShow: () => clearAlert(ERROR_DUPLICATE_VARIABLE),
+  showError: error,
 };
 
 const withConnect = connect(

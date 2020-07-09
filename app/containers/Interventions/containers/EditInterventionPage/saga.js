@@ -1,14 +1,15 @@
 import { put, takeLatest, select, all } from 'redux-saga/effects';
 import axios from 'axios';
 import sortBy from 'lodash/sortBy';
+import { dismiss } from 'react-toastify-redux';
 
+import { showAlert } from 'global/reducers/alerts';
 import { getAllVariables } from 'models/Intervention/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
 import {
   mapQuestionToStateObject,
   mapInterventionToStateObject,
 } from 'utils/mapResponseObjects';
-import { showAlert } from 'global/reducers/alerts';
 
 import {
   GET_INTERVENTION_REQUEST,
@@ -187,6 +188,7 @@ function* updateQuestion() {
     yield put(showAlert(ERROR_DUPLICATE_VARIABLE));
     return yield put(updateQuestionError());
   }
+  yield put(dismiss(ERROR_DUPLICATE_VARIABLE));
 
   const requestURL = `v1/interventions/${intervention.id}/questions/${
     question.id
