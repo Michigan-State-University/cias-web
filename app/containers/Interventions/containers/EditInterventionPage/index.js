@@ -144,7 +144,7 @@ function EditInterventionPage({
             </Box>
           </Box>
         </Column>
-        <Column sm={8}>
+        <Column sm={8} id="quill_boundaries">
           <Row overflow="hidden" filled>
             <QuestionDetails />
             <QuestionSettings />

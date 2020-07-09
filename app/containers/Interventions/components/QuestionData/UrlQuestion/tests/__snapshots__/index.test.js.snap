@@ -83,24 +83,6 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   display: none;
 }
 
-.c6 {
-  resize: none;
-  padding: 12px;
-  border: 1px solid #E9F1FB;
-  border-radius: 10px;
-  margin-right: 9px;
-  width: 98%;
-  height: auto;
-  background-color: transparent;
-  border: 1px solid transparent;
-}
-
-.c6:focus {
-  box-shadow: none;
-  outline: none;
-  border: 1px solid #107969;
-}
-
 .c2 {
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -117,6 +99,22 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
 }
 
 .c2:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c6 {
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 10px;
+  margin-right: 9px;
+  height: 60px;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c6:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
@@ -166,16 +164,15 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
         <div
           className="c0"
         >
-          <textarea
+          <input
             className="c6"
-            height="auto"
+            height="60px"
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}
             placeholder="Paste here a web page link to show it to a respondend."
-            rows="3"
+            type="text"
             value="www.google.com"
-            width="98%"
           />
         </div>
         <div

@@ -88,7 +88,7 @@ export function AnswerInterventionPage({
     };
     return (
       <>
-        <QuestionTitle>{title}</QuestionTitle>
+        <QuestionTitle dangerouslySetInnerHTML={{ __html: title }} />
         {renderQuestionByType(currentQuestion, sharedProps)}
       </>
     );

@@ -107,7 +107,7 @@ const QuestionListItem = ({
         </Column>
         <Column xs={10}>
           <Row>
-            <H3 mb={6}>{title}</H3>
+            <H3 mb={6}>{title.replace(/<[^>]*>?/gm, '')}</H3>
           </Row>
           <Row>
             <Comment fontWeight="bold">
