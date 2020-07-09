@@ -17,13 +17,13 @@ const Loader = ({ color, hidden, size, type }) => {
   const typeSize = size || type === 'absolute' ? 100 : 50;
 
   const fullScreenLoader = (
-    <FillScreenLoader hidden={hidden}>
+    <FillScreenLoader data-testid="fullscreen-loader" hidden={hidden}>
       <Spinner color={color} size={typeSize} />
     </FillScreenLoader>
   );
 
   const containerLoader = (
-    <InlineLoader hidden={hidden}>
+    <InlineLoader data-testid="inline-loader" hidden={hidden}>
       <Spinner color={color} size={typeSize} />
     </InlineLoader>
   );
