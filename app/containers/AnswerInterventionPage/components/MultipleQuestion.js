@@ -51,9 +51,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
               mx={margin}
               width={`calc(100% + ${margin}px)`}
               clickable
-              onClick={() => {
-                check(payload, value, name, index);
-              }}
+              onClick={() => check(payload, value, name, index)}
             >
               <Row align="center">
                 <Img

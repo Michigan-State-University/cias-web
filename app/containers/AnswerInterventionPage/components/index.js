@@ -1,13 +1,14 @@
 import React from 'react';
 
 import ErrorAlert from 'components/ErrorAlert';
-
-import SingleQuestion from './SingleQuestion';
-import MultipleQuestion from './MultipleQuestion';
 import {
+  gridQuestion,
   multiQuestion,
   singleQuestion,
-} from '../../../models/Intervention/QuestionTypes';
+} from 'models/Intervention/QuestionTypes';
+import SingleQuestion from './SingleQuestion';
+import MultipleQuestion from './MultipleQuestion';
+import GridQuestion from './GridQuestion';
 
 export const renderQuestionByType = (question, sharedProps) => {
   const { type } = question;
@@ -16,6 +17,8 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <SingleQuestion question={question} {...sharedProps} />;
     case multiQuestion.id:
       return <MultipleQuestion question={question} {...sharedProps} />;
+    case gridQuestion.id:
+      return <GridQuestion question={question} {...sharedProps} />;
     default:
       return <ErrorAlert errorText={`CANNOT RENDER ${type}`} />;
   }

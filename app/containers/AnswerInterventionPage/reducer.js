@@ -63,6 +63,11 @@ const answerInterventionPageReducer = (
       case SUBMIT_ANSWER_ERROR:
         draft.answersError = payload.error;
         draft.answers[payload.answerId].loading = false;
+        draft.answers[payload.answerId].answerBody = state.answers[
+          payload.answerId
+        ].answerBody
+          ? state.answers[payload.answerId].answerBody
+          : [];
         break;
       case SET_QUESTION_INDEX:
         draft.questionIndex = payload.index;
