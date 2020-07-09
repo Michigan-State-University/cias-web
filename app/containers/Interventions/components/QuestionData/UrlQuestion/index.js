@@ -16,6 +16,7 @@ import { colors } from 'theme/colors';
 import { makeSelectSelectedQuestion } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import { updateQuestionData } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
+import { variableNameValidator } from 'utils/validators';
 import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
 import { UPDATE_URL, UPDATE_VARIABLE } from './constants';
@@ -37,6 +38,7 @@ const UrlQuestion = ({
         mb={10}
         textAlign="center"
         keyboard="tel"
+        validator={variableNameValidator}
         placeholder={formatMessage(
           globalMessages.variables.variableNamePlaceholder,
         )}

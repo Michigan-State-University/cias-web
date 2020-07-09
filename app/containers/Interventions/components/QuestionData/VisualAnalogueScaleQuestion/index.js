@@ -12,6 +12,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 import Box from 'components/Box';
 import { BadgeInput } from 'components/Input/BadgeInput';
 
+import { variableNameValidator } from 'utils/validators';
 import { colors } from 'theme/colors';
 import AppSlider from 'components/AppSlider';
 import globalMessages from 'global/i18n/globalMessages';
@@ -40,6 +41,7 @@ const VisualAnalogueScaleQuestion = ({
         mb={10}
         textAlign="center"
         keyboard="tel"
+        validator={variableNameValidator}
         placeholder={formatMessage(
           globalMessages.variables.variableNamePlaceholder,
         )}

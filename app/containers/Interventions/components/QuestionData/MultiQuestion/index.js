@@ -17,7 +17,7 @@ import Text from 'components/Text';
 import bin from 'assets/svg/bin-red.svg';
 import checkbox from 'assets/svg/checkbox.svg';
 
-import { numericValidator } from 'utils/validators';
+import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
@@ -70,6 +70,7 @@ const MultiQuestion = ({
                       py={12}
                       mx={10}
                       textAlign="center"
+                      validator={variableNameValidator}
                       placeholder={formatMessage(
                         globalMessages.variables.variableNamePlaceholder,
                       )}

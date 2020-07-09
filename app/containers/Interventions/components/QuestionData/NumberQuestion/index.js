@@ -13,7 +13,7 @@ import Box from 'components/Box';
 import { BadgeInput } from 'components/Input/BadgeInput';
 
 import { colors } from 'theme/colors';
-import { numericValidator } from 'utils/validators';
+import { numericValidator, variableNameValidator } from 'utils/validators';
 import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
@@ -38,6 +38,7 @@ const NumberQuestion = ({
         mb={10}
         textAlign="center"
         keyboard="tel"
+        validator={variableNameValidator}
         placeholder={formatMessage(
           globalMessages.variables.variableNamePlaceholder,
         )}

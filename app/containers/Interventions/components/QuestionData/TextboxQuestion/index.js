@@ -12,6 +12,7 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import { BadgeInput } from 'components/Input/BadgeInput';
 
+import { variableNameValidator } from 'utils/validators';
 import globalMessages from 'global/i18n/globalMessages';
 import { colors } from 'theme/colors';
 import messages from './messages';
@@ -37,6 +38,7 @@ const TextboxQuestion = ({
         mb={10}
         textAlign="center"
         keyboard="tel"
+        validator={variableNameValidator}
         placeholder={formatMessage(
           globalMessages.variables.variableNamePlaceholder,
         )}

@@ -17,7 +17,7 @@ import { BadgeInput } from 'components/Input/BadgeInput';
 import radio from 'assets/svg/radio-button.svg';
 import bin from 'assets/svg/bin-red.svg';
 
-import { numericValidator } from 'utils/validators';
+import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors, paddings } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
@@ -48,6 +48,7 @@ const SingleQuestion = ({
         ml={24}
         textAlign="center"
         keyboard="tel"
+        validator={variableNameValidator}
         placeholder={formatMessage(
           globalMessages.variables.variableNamePlaceholder,
         )}

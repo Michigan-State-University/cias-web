@@ -20,7 +20,7 @@ import bin from 'assets/svg/bin-red.svg';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { themeColors, colors } from 'theme';
-import { numericValidator } from 'utils/validators';
+import { numericValidator, variableNameValidator } from 'utils/validators';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
 import messages from './messages';
 import {
@@ -154,7 +154,7 @@ const GridQuestion = ({
                           py={12}
                           mr={8}
                           textAlign="center"
-                          keyboard="tel"
+                          validator={variableNameValidator}
                           placeholder={formatMessage(
                             globalMessages.variables.variableNamePlaceholder,
                           )}
