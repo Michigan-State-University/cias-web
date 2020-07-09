@@ -42,7 +42,7 @@ const UrlQuestion = ({
         )}
         value={variable.name}
         color={colors.jungleGreen}
-        onBlur={val => updateVariable(val)}
+        onBlur={updateVariable}
       />
       <Box bg={colors.linkWater} width="100%" px={21} py={14}>
         <Row>
