@@ -73,3 +73,6 @@ export const UPDATE_PREVIEW_ANIMATION =
 
 export const REORDER_QUESTION_LIST =
   'app/EditInterventionPage/REORDER_QUESTION_LIST';
+
+export const ERROR_DUPLICATE_VARIABLE =
+  'app/EditInterventionPage/ERROR_DUPLICATE_VARIABLE';

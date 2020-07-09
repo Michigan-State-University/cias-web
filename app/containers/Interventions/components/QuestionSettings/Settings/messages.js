@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.DefaultSettings';
+export const scope = 'app.containers.Settings';
 
 export default defineMessages({
   settings: {
@@ -14,5 +14,11 @@ export default defineMessages({
   branching: {
     id: `${scope}.branching`,
     defaultMessage: 'Branching',
+  },
+  errors: {
+    duplicateVariable: {
+      id: `${scope}.duplicateVariable`,
+      defaultMessage: 'This variable name is already in use!',
+    },
   },
 });

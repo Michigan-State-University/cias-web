@@ -8,6 +8,7 @@ import {
   mapQuestionToStateObject,
   mapInterventionToStateObject,
 } from 'utils/mapResponseObjects';
+import { showAlert } from 'global/reducers/alerts';
 
 import {
   GET_INTERVENTION_REQUEST,
@@ -24,6 +25,7 @@ import {
   EDIT_INTERVENTION_REQUEST,
   CHANGE_QUESTION_TYPE,
   GET_INTERVENTION_LIST_REQUEST,
+  ERROR_DUPLICATE_VARIABLE,
 } from './constants';
 
 import {
@@ -181,7 +183,10 @@ function* updateQuestion() {
     variable => variable && variable.trim(),
   );
 
-  if (hasDuplicates(variables)) return yield put(updateQuestionError());
+  if (hasDuplicates(variables)) {
+    yield put(showAlert(ERROR_DUPLICATE_VARIABLE));
+    return yield put(updateQuestionError());
+  }
 
   const requestURL = `v1/interventions/${intervention.id}/questions/${
     question.id

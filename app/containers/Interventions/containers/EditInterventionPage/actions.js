@@ -92,7 +92,8 @@ const createQuestionError = error =>
 const updateQuestionRequest = () => actionBuilder(UPDATE_QUESTION_REQUEST, {});
 const updateQuestionSuccess = question =>
   actionBuilder(UPDATE_QUESTION_SUCCESS, { question });
-const updateQuestionError = () => actionBuilder(UPDATE_QUESTION_ERROR, {});
+const updateQuestionError = error =>
+  actionBuilder(UPDATE_QUESTION_ERROR, { error });
 
 const getQuestionsRequest = id => actionBuilder(GET_QUESTIONS_REQUEST, { id });
 const getQuestionsSuccess = questions =>
