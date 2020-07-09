@@ -5,6 +5,7 @@ import { colors, themeColors } from 'theme';
 import Circle from 'components/Circle';
 import { fontSizes } from 'theme/fonts';
 import HoverableBox from 'components/Box/HoverableBox';
+import H3 from 'components/H3';
 
 const NumberCircle = props => (
   <Circle
@@ -30,4 +31,14 @@ ToggleableBox.propTypes = {
   isSelected: PropTypes.bool,
 };
 
-export { NumberCircle, ToggleableBox };
+const ClampedTitle = styled(H3)`
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  -o-box-orient: vertical;
+  display: -webkit-box;
+`;
+
+export { NumberCircle, ToggleableBox, ClampedTitle };

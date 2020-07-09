@@ -10,7 +10,6 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 
 import Row from 'components/Row';
 import Img from 'components/Img';
-import H3 from 'components/H3';
 import Dropdown from 'components/Dropdown';
 import Comment from 'components/Text/Comment';
 import Column from 'components/Column';
@@ -23,7 +22,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import { colors } from 'theme';
 
-import { ToggleableBox } from './styled';
+import { ToggleableBox, ClampedTitle } from './styled';
 
 import {
   selectQuestion,
@@ -107,7 +106,9 @@ const QuestionListItem = ({
         </Column>
         <Column xs={10}>
           <Row>
-            <H3 mb={6}>{title.replace(/<[^>]*>?/gm, '')}</H3>
+            <ClampedTitle mb={6}>
+              {title.replace(/<[^>]*>?/gm, '')}
+            </ClampedTitle>
           </Row>
           <Row>
             <Comment fontWeight="bold">

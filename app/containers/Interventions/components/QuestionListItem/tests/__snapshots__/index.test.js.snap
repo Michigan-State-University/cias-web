@@ -16,14 +16,6 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   height: auto;
 }
 
-.c6 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 15px;
-  line-height: 150%;
-  margin-bottom: 6px;
-}
-
 .c3 {
   width: auto;
   height: auto;
@@ -119,6 +111,21 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
 
 .c0:hover {
   background-color: #E9F1FB;
+}
+
+.c6 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  margin-bottom: 6px;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  -o-box-orient: vertical;
+  display: -webkit-box;
 }
 
 <div
