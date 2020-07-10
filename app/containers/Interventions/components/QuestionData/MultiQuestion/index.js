@@ -127,7 +127,7 @@ const MultiQuestion = ({
                   onBlur={val =>
                     updateAnswer(index, {
                       ...value,
-                      value: val,
+                      variable: { ...value.variable, value: val },
                     })
                   }
                 />
