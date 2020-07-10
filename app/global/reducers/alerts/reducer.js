@@ -4,7 +4,7 @@
  *
  */
 import produce from 'immer';
-import { set } from 'lodash';
+import { set, has } from 'lodash';
 
 import { SHOW_ALERT, CLEAR_ALERT, TOAST_DISMISS } from './constants';
 
@@ -23,7 +23,7 @@ export const alertsReducer = (state = initialState, { type, payload }) =>
         break;
 
       case TOAST_DISMISS:
-        set(draft, payload.id, false);
+        if (has(draft, payload.id)) set(draft, payload.id, false);
         break;
     }
   });
