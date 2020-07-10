@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -41,11 +41,14 @@ const SingleQuestion = ({
   const radioButtonRef = useRef(null);
 
   const [hovered, setHovered] = useState(-1);
+  const [leftMargin, setLeftMargin] = useState(0);
 
-  const getLeftMargin = () => {
+  useEffect(() => {
     if (radioButtonRef.current)
-      return radioButtonRef.current.width + RADIO_MARGIN + INPUT_PADDING;
-  };
+      setLeftMargin(
+        radioButtonRef.current.width + RADIO_MARGIN + INPUT_PADDING,
+      );
+  }, [radioButtonRef.current]);
 
   const { data, variable } = selectedQuestion.body;
 
@@ -106,7 +109,7 @@ const SingleQuestion = ({
               </Row>
               <Row align="center">
                 <Text
-                  ml={`${getLeftMargin()}px`}
+                  ml={`${leftMargin}px`}
                   mr={8}
                   fontWeight="bold"
                   color={colors.azure}

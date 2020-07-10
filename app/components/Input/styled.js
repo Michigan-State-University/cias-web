@@ -9,11 +9,12 @@ export const QuillStyled = styled(ReactQuill)`
     singleline ? 'auto' : !autoSize && '150px'};
   margin-right: 9px;
   ${({ focused }) =>
-    focused &&
-    `
-    border: 1px solid ${colors.jungleGreen};
-     border-radius: 10px;
-    `}
+    focused
+      ? {
+          border: `1px solid ${colors.jungleGreen}`,
+          borderRadius: `10px`,
+        }
+      : { border: '1px solid transparent' }}
   .ql-editor {
     font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '25px')};
     font-weight: 400;
