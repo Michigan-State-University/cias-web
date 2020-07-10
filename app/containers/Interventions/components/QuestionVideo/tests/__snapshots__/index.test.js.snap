@@ -23,11 +23,6 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   align-items: center;
 }
 
-.c5 {
-  width: auto;
-  height: auto;
-}
-
 .c4 {
   width: auto;
   height: auto;
@@ -53,6 +48,11 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
 
 .c0:hover {
   background-color: #E9F1FB;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
 }
 
 .c2 {
@@ -117,23 +117,6 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   width: 100%;
 }
 
-.c6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  height: 100%;
-}
-
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -163,41 +146,6 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   width: 100%;
 }
 
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-}
-
-.c8 {
-  width: auto;
-  height: auto;
-  cursor: pointer;
-}
-
-.c0 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 10px;
-  width: 100%;
-  padding-right: 16px;
-  padding-left: 16px;
-  background-color: rgba(233,241,251,1);
-}
-
-.c5 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 10px;
-  display: none;
-}
-
 .c4 {
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -212,6 +160,17 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 10px;
+  width: 100%;
+  padding-right: 16px;
+  padding-left: 16px;
+  background-color: rgba(233,241,251,1);
 }
 
 <div
@@ -239,33 +198,6 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
           type="text"
           value=""
         />
-      </div>
-      <div
-        className="c5"
-        hidden={true}
-      >
-        <div
-          className="c6"
-          height="100%"
-        >
-          <div
-            className="c7"
-          >
-            <img
-              className="c8"
-              onMouseDown={[Function]}
-              src="IMAGE_MOCK"
-            />
-          </div>
-          <div
-            className="c7"
-          >
-            <img
-              className="c8"
-              src="IMAGE_MOCK"
-            />
-          </div>
-        </div>
       </div>
     </div>
   </div>

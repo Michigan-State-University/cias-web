@@ -1,12 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import check from 'assets/svg/checkbox-checked-green.svg';
-import cross from 'assets/svg/cross-closing.svg';
 import 'react-quill/dist/quill.bubble.css';
+
 import Column from '../Column';
 import Row from '../Row';
-import Img from '../Img';
-import Box from '../Box';
 import { Input } from './index';
 import { QuillStyled } from './styled';
 import { TextArea } from './TextArea';
@@ -32,6 +29,8 @@ const ApprovableInput = props => {
     type,
     onCheck,
     rows,
+    richText,
+    autoSize,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [focused, setfocused] = useState(false);
@@ -47,25 +46,13 @@ const ApprovableInput = props => {
     } else if (!validator) setValue(targetValue);
   };
 
-  const checkIfQuillToolbarVisible = () => {
-    const { current } = quillRef;
-    if (!current || !current.editingArea) return false;
-    const tooltipElements = current.editingArea.getElementsByClassName(
-      'ql-tooltip',
-    );
-    if (!tooltipElements || tooltipElements.length === 0) return false;
-    return tooltipElements[0].classList.contains('ql-hidden');
-  };
-
   const onBlur = () => {
-    if (checkIfQuillToolbarVisible() || type !== 'richText') {
-      setfocused(false);
-      setValue(propsValue);
-    }
+    setfocused(false);
+    onCheck(value);
   };
 
   const renderInput = () => {
-    if (type === 'richText')
+    if (richText)
       return (
         <QuillStyled
           ref={quillRef}
@@ -78,12 +65,13 @@ const ApprovableInput = props => {
           modules={quillModules}
           bounds="#quill_boundaries"
           focused={focused}
+          autoSize={autoSize}
         />
       );
     if (type === 'multiLine')
       return (
         <TextArea
-          width="98%"
+          width="100%"
           height="60px"
           {...(rows ? { rows, height: 'auto' } : {})}
           mr={9}
@@ -114,16 +102,6 @@ const ApprovableInput = props => {
   return (
     <Row width="100%">
       <Column>{renderInput()}</Column>
-      <Box hidden={!focused}>
-        <Column height="100%" justify={type === 'singleline' && 'between'}>
-          <Row mb={type === 'multiline' && 4}>
-            <Img src={check} onMouseDown={() => onCheck(value)} clickable />
-          </Row>
-          <Row>
-            <Img src={cross} clickable />
-          </Row>
-        </Column>
-      </Box>
     </Row>
   );
 };
@@ -133,14 +111,18 @@ ApprovableInput.propTypes = {
   onCheck: PropTypes.func,
   rows: PropTypes.string,
   placeholder: PropTypes.string,
-  type: PropTypes.oneOf(['multiline', 'singleline', 'richText']),
+  type: PropTypes.oneOf(['multiline', 'singleline']),
   keyboard: PropTypes.string,
   validator: PropTypes.func,
   textAlign: PropTypes.string,
+  richText: PropTypes.bool,
+  autoSize: PropTypes.bool,
 };
 
 ApprovableInput.defaultProps = {
-  type: 'richText',
+  type: 'multiline',
+  richText: false,
+  autoSize: false,
 };
 
 export default ApprovableInput;

@@ -65,6 +65,8 @@ const renderQuestionDetails = ({
                         placeholder={formatMessage(messages.placeholder)}
                         value={selectedQuestion.title}
                         onCheck={updateTitle}
+                        autoSize
+                        richText
                       />
                     </Row>
                   </H1>

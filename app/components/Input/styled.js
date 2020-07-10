@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
 import { colors } from 'theme';
+
 export const QuillStyled = styled(ReactQuill)`
-  width: 98%;
-  height: 150px;
+  width: 100%;
+  ${({ autoSize }) =>
+    autoSize ? { minHeight: 'max-content' } : { height: '150px' }};
   margin-right: 9px;
   ${({ focused }) =>
     focused &&
