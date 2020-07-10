@@ -20,7 +20,7 @@ NumberCircle.propTypes = {
 };
 
 const BackgroundBox = props => (
-  <Box {...props} padding={30} height="100%" bg={colors.zirkon} />
+  <Box {...props} padding={30} height="auto" bg={colors.zirkon} />
 );
 
 const StyledHoverableBox = props => (

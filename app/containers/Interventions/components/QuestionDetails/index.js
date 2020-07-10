@@ -28,13 +28,7 @@ import {
 import { updateQuestionTitle } from '../../containers/EditInterventionPage/actions';
 
 const QuestionDetails = props => (
-  <BackgroundBox
-    padding={30}
-    width="100%"
-    height="100%"
-    display="flex"
-    overflow="scroll"
-  >
+  <BackgroundBox width="100%" display="flex" overflow="scroll">
     {renderQuestionDetails(props)}
   </BackgroundBox>
 );
