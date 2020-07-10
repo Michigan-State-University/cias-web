@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -27,6 +27,9 @@ import { makeSelectSelectedQuestion } from '../../../containers/EditIntervention
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
+const CHECKBOX_MARGIN = 16;
+const INPUT_PADDING = 15;
+
 const MultiQuestion = ({
   selectedQuestion,
   addAnswer,
@@ -34,7 +37,17 @@ const MultiQuestion = ({
   removeAnswer,
   intl: { formatMessage },
 }) => {
+  const checkboxButtonRef = useRef(null);
+
   const [hovered, setHovered] = useState(-1);
+  const [leftMargin, setLeftMargin] = useState(0);
+
+  useEffect(() => {
+    if (checkboxButtonRef.current)
+      setLeftMargin(
+        checkboxButtonRef.current.width + CHECKBOX_MARGIN + INPUT_PADDING,
+      );
+  }, [checkboxButtonRef.current]);
 
   return (
     <Column>
@@ -48,72 +61,78 @@ const MultiQuestion = ({
             onMouseLeave={() => setHovered(-1)}
             clickable={false}
           >
-            <Row justify="between" align="center">
-              <Row>
-                <Column justify="center">
-                  <Img src={checkbox} mr={16} />
-                </Column>
-                <Column>
-                  <Box mr={8} mb={10}>
+            <Column>
+              <Row align="center" justify="between" mb={10}>
+                <Row width="90%">
+                  <Img
+                    ref={checkboxButtonRef}
+                    src={checkbox}
+                    mr={CHECKBOX_MARGIN}
+                  />
+                  <Box width="100%">
                     <ApprovableInput
+                      mr={8}
+                      fontSize={18}
                       type="singleline"
                       placeholder={formatMessage(messages.placeholder)}
                       value={value.payload}
                       onCheck={newTitle =>
                         updateAnswer(index, { ...value, payload: newTitle })
                       }
+                      richText
                     />
                   </Box>
-                  <Row>
-                    <BadgeInput
-                      px={0}
-                      py={12}
-                      mx={10}
-                      textAlign="center"
-                      validator={variableNameValidator}
-                      placeholder={formatMessage(
-                        globalMessages.variables.variableNamePlaceholder,
-                      )}
-                      value={value.variable.name}
-                      color={colors.jungleGreen}
-                      onBlur={val =>
-                        updateAnswer(index, {
-                          ...value,
-                          variable: { ...value.variable, name: val },
-                        })
-                      }
-                    />
-                    <BadgeInput
-                      px={0}
-                      py={12}
-                      textAlign="center"
-                      validator={numericValidator}
-                      keyboard="tel"
-                      placeholder={formatMessage(
-                        globalMessages.variables.variableScorePlaceholder,
-                      )}
-                      value={value.variable.value}
-                      color={colors.azure}
-                      onBlur={val =>
-                        updateAnswer(index, {
-                          ...value,
-                          variable: { ...value.variable, value: val },
-                        })
-                      }
-                    />
-                  </Row>
-                </Column>
+                </Row>
+                <Row>
+                  <Box
+                    onClick={() => removeAnswer(index)}
+                    hidden={hovered !== index}
+                    clickable
+                  >
+                    <Img src={bin} mr={16} />
+                  </Box>
+                </Row>
               </Row>
-              <Column align="end">
-                <Box
-                  onClick={() => removeAnswer(index)}
-                  hidden={hovered !== index}
-                  clickable
-                >
-                  <Img src={bin} mr={16} />
-                </Box>
-              </Column>
-            </Row>
+              <Row align="center">
+                <BadgeInput
+                  px={0}
+                  py={12}
+                  ml={`${leftMargin}px`}
+                  mr={10}
+                  textAlign="center"
+                  validator={variableNameValidator}
+                  placeholder={formatMessage(
+                    globalMessages.variables.variableNamePlaceholder,
+                  )}
+                  value={value.variable.name}
+                  color={colors.jungleGreen}
+                  onBlur={val =>
+                    updateAnswer(index, {
+                      ...value,
+                      variable: { ...value.variable, name: val },
+                    })
+                  }
+                />
+                <BadgeInput
+                  px={0}
+                  py={12}
+                  textAlign="center"
+                  validator={numericValidator}
+                  keyboard="tel"
+                  placeholder={formatMessage(
+                    globalMessages.variables.variableScorePlaceholder,
+                  )}
+                  value={value.value}
+                  color={colors.azure}
+                  onBlur={val =>
+                    updateAnswer(index, {
+                      ...value,
+                      value: val,
+                    })
+                  }
+                />
+              </Row>
+            </Column>
           </HoverableBox>
         </Row>
       ))}
