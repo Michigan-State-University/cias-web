@@ -1,12 +1,10 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable func-names */
+/* eslint-disable prefer-rest-params, no-param-reassign, func-names */
 import { Quill } from 'react-quill';
 
 const Clipboard = Quill.import('modules/clipboard');
 const Delta = Quill.import('delta');
 
 function CustomClipboard() {
-  // eslint-disable-next-line prefer-rest-params
   return Reflect.construct(Clipboard, arguments, CustomClipboard);
 }
 
