@@ -20,13 +20,12 @@ import presentationProjectorSelected from 'assets/svg/presentation-projector-sel
 import webpage from 'assets/svg/webpage-mouseover.svg';
 import webpageSelected from 'assets/svg/webpage-mouseover-selected.svg';
 import arrowLeft from 'assets/svg/arrow-left.svg';
-
 import {
-  makeSelectIntervention,
   makeSelectQuestions,
   makeSelectSelectedQuestion,
   makeSelectSelectedQuestionIndex,
 } from 'containers/Interventions/containers/EditInterventionPage/selectors';
+import { makeSelectIntervention } from 'global/reducers/intervention';
 
 import { colors, borders, fontSizes, themeColors } from 'theme';
 import Question from 'models/Intervention/Question';

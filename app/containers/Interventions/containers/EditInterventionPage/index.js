@@ -16,6 +16,12 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Text from 'components/Text';
 import Question from 'models/Intervention/Question';
 import Loader from 'components/Loader';
+import {
+  getInterventionRequest,
+  interventionReducer,
+  getInterventionSaga,
+  makeSelectInterventionLoaders,
+} from 'global/reducers/intervention';
 
 import { borders, themeColors, colors } from 'theme';
 
@@ -28,7 +34,6 @@ import {
   makeSelectLoaders,
 } from './selectors';
 import {
-  getInterventionRequest,
   createQuestionRequest,
   getQuestionsRequest,
   reorderQuestionList,
@@ -49,11 +54,16 @@ function EditInterventionPage({
   match: { params },
   getQuestions,
   reorderQuestions,
-  loaders: { interventionLoading, questionListLoading },
+  loaders: { questionListLoading },
+  interventionLoaders: { getIntervention: getInterventionLoader },
 }) {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   useInjectReducer({ key: 'editInterventionPage', reducer });
   useInjectSaga({ key: 'editInterventionPage', saga });
+
+  // refactored redux-saga
+  useInjectReducer({ key: 'intervention', reducer: interventionReducer });
+  useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
 
   useEffect(() => {
     getIntervention(params.id);
@@ -110,7 +120,7 @@ function EditInterventionPage({
 
   return (
     <Fragment>
-      <Loader hidden={!interventionLoading} />
+      <Loader hidden={!getInterventionLoader} />
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
@@ -179,12 +189,14 @@ EditInterventionPage.propTypes = {
   getQuestions: PropTypes.func,
   reorderQuestions: PropTypes.func,
   loaders: PropTypes.object,
+  interventionLoaders: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionIndex(),
   loaders: makeSelectLoaders(),
+  interventionLoaders: makeSelectInterventionLoaders(),
 });
 
 const mapDispatchToProps = {

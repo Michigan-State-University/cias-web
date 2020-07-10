@@ -7,9 +7,6 @@ import {
   UPDATE_QUESTION_IMAGE,
   DELETE_QUESTION_IMAGE,
   UPDATE_QUESTION_VIDEO,
-  GET_INTERVENTION_REQUEST,
-  GET_INTERVENTION_SUCCESS,
-  GET_INTERVENTION_ERROR,
   CREATE_QUESTION_REQUEST,
   CREATE_QUESTION_ERROR,
   CREATE_QUESTION_SUCCESS,
@@ -26,9 +23,6 @@ import {
   DELETE_QUESTION_SUCCESS,
   COPY_QUESTION,
   DELETE_QUESTION_ERROR,
-  EDIT_INTERVENTION_REQUEST,
-  EDIT_INTERVENTION_SUCCESS,
-  EDIT_INTERVENTION_ERROR,
   CHANGE_QUESTION_TYPE,
   REORDER_QUESTION_LIST,
   GET_INTERVENTION_LIST_REQUEST,
@@ -62,25 +56,12 @@ const deleteQuestionsSucccess = questionId =>
 const deleteQuestionError = error =>
   actionBuilder(DELETE_QUESTION_ERROR, { error });
 
-const getInterventionRequest = id =>
-  actionBuilder(GET_INTERVENTION_REQUEST, { id });
-const getInterventionSuccess = intervention =>
-  actionBuilder(GET_INTERVENTION_SUCCESS, { intervention });
-const getInterventionError = () => actionBuilder(GET_INTERVENTION_ERROR, {});
-
 const getInterventionListRequest = () =>
   actionBuilder(GET_INTERVENTION_LIST_REQUEST, {});
 const getInterventionListSuccess = interventions =>
   actionBuilder(GET_INTERVENTION_LIST_SUCCESS, { interventions });
 const getInterventionListError = error =>
   actionBuilder(GET_INTERVENTION_LIST_ERROR, { error });
-
-const editInterventionRequest = payload =>
-  actionBuilder(EDIT_INTERVENTION_REQUEST, payload);
-const editInterventionSuccess = intervention =>
-  actionBuilder(EDIT_INTERVENTION_SUCCESS, { intervention });
-const editInterventionError = error =>
-  actionBuilder(EDIT_INTERVENTION_ERROR, { error });
 
 const createQuestionRequest = (question, id) =>
   actionBuilder(CREATE_QUESTION_REQUEST, { question, id });
@@ -117,9 +98,6 @@ export {
   updateQuestionImage,
   deleteQuestionImage,
   updateQuestionVideo,
-  getInterventionRequest,
-  getInterventionSuccess,
-  getInterventionError,
   getInterventionListRequest,
   getInterventionListSuccess,
   getInterventionListError,
@@ -137,9 +115,6 @@ export {
   deleteQuestionsSucccess,
   copyQuestionRequest,
   deleteQuestionError,
-  editInterventionRequest,
-  editInterventionSuccess,
-  editInterventionError,
   changeQuestionType,
   reorderQuestionList,
 };

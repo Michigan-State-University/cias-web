@@ -20,7 +20,7 @@ describe('<SettingsInterventionPage />', () => {
 
   const reducer = state => state;
   const initialState = {
-    editInterventionPage: {
+    intervention: {
       intervention: {
         id: '12ad120dj012-3a',
         name: 'e-Intervention Name',
@@ -31,7 +31,11 @@ describe('<SettingsInterventionPage />', () => {
           },
         },
       },
-      loaders: {},
+      loaders: {
+        getIntervention: false,
+        createIntervention: false,
+        editIntervention: false,
+      },
     },
   };
   beforeAll(() => {

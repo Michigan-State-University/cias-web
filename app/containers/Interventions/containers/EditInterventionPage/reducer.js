@@ -1,7 +1,5 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
-import set from 'lodash/set';
-import Intervention from 'models/Intervention/Intervention';
 
 import {
   textboxQuestion,
@@ -17,7 +15,6 @@ import {
   UPDATE_QUESTION_IMAGE,
   DELETE_QUESTION_IMAGE,
   UPDATE_QUESTION_VIDEO,
-  GET_INTERVENTION_SUCCESS,
   GET_QUESTIONS_SUCCESS,
   CREATE_QUESTION_SUCCESS,
   UPDATE_QUESTION_SUCCESS,
@@ -29,15 +26,11 @@ import {
   DELETE_QUESTION_SUCCESS,
   COPY_QUESTION,
   DELETE_QUESTION_ERROR,
-  EDIT_INTERVENTION_REQUEST,
-  EDIT_INTERVENTION_SUCCESS,
   CHANGE_QUESTION_TYPE,
   REORDER_QUESTION_LIST,
   GET_INTERVENTION_LIST_REQUEST,
   GET_INTERVENTION_LIST_SUCCESS,
   GET_INTERVENTION_LIST_ERROR,
-  GET_INTERVENTION_REQUEST,
-  GET_INTERVENTION_ERROR,
   GET_QUESTIONS_REQUEST,
   GET_QUESTIONS_ERROR,
 } from './constants';
@@ -47,19 +40,16 @@ import questionSettingsReducer from '../../components/QuestionSettings/Settings/
 import { instantiateEmptyQuestion } from './utils';
 
 export const initialState = {
-  intervention: new Intervention('', ''),
   interventionList: [],
   questions: [],
   questionSettingsVisibility: false,
   selectedQuestion: 0,
   previewAnimation: 'stand-still',
   cache: {
-    intervention: new Intervention('', ''),
     questions: [],
   },
   loaders: {
     interventionListLoading: false,
-    interventionLoading: true,
     questionListLoading: true,
   },
 };
@@ -232,29 +222,6 @@ const editInterventionPageReducer = (state = initialState, action) =>
 
       case GET_QUESTIONS_ERROR:
         draft.loaders.questionListLoading = false;
-        break;
-
-      case GET_INTERVENTION_REQUEST:
-        draft.loaders.interventionLoading = true;
-        break;
-
-      case GET_INTERVENTION_SUCCESS:
-        draft.loaders.interventionLoading = false;
-        draft.cache.intervention = action.payload.intervention;
-        draft.intervention = cloneDeep(draft.cache.intervention);
-        break;
-
-      case GET_INTERVENTION_ERROR:
-        draft.loaders.interventionLoading = false;
-        break;
-
-      case EDIT_INTERVENTION_REQUEST:
-        set(draft.intervention, action.payload.path, action.payload.value);
-        break;
-
-      case EDIT_INTERVENTION_SUCCESS:
-        draft.intervention = action.payload.intervention;
-        draft.cache.intervention = action.payload.intervention;
         break;
 
       case CHANGE_QUESTION_TYPE:

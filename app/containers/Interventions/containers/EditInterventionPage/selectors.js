@@ -12,12 +12,6 @@ const makeSelectEditInterventionPage = () =>
     substate => substate,
   );
 
-const makeSelectIntervention = () =>
-  createSelector(
-    selectEditInterventionPageDomain,
-    substate => substate.intervention,
-  );
-
 const makeSelectQuestions = () =>
   createSelector(
     selectEditInterventionPageDomain,
@@ -57,7 +51,6 @@ const makeSelectLoader = loader =>
 export {
   makeSelectEditInterventionPage,
   selectEditInterventionPageDomain,
-  makeSelectIntervention,
   makeSelectQuestions,
   makeSelectSelectedQuestionIndex,
   makeSelectSelectedQuestion,

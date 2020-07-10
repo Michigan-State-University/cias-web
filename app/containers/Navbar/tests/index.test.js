@@ -23,7 +23,7 @@ describe('<Navbar />', () => {
   const reducer = state => state;
   const initialState = {
     auth: { user: { firstName: 'test', lastName: 'test' } },
-    editInterventionPage: {
+    intervention: {
       intervention: {
         id: '12dasc0123=21-2',
         name: 'e-Intervention New',

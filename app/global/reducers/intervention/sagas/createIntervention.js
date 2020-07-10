@@ -1,10 +1,10 @@
-import { put, takeLatest, all } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 import { push } from 'connected-react-router';
 
-import { CREATE_INTERVENTION_REQUEST } from './constants';
+import { CREATE_INTERVENTION_REQUEST } from '../constants';
 
-import { createInterventionSuccess, createInterventionError } from './actions';
+import { createInterventionSuccess, createInterventionError } from '../actions';
 
 function* createIntervention() {
   const requestURL = `v1/interventions`;
@@ -24,8 +24,6 @@ function* createIntervention() {
   }
 }
 
-export default function* dashboardPageSaga() {
-  yield all([
-    yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention),
-  ]);
+export default function* createInterventionSaga() {
+  yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention);
 }

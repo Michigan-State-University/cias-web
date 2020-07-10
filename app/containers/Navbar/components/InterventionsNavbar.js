@@ -4,14 +4,19 @@ import { injectIntl, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useInjectSaga } from 'utils/injectSaga';
 
 import Row from 'components/Row';
 import Img from 'components/Img';
 import Tabs from 'components/Tabs';
 import { StyledInput } from 'components/Input/StyledInput';
 import cross from 'assets/svg/cross.svg';
-import { makeSelectIntervention } from 'containers/Interventions/containers/EditInterventionPage/selectors';
-import { editInterventionRequest } from 'containers/Interventions/containers/EditInterventionPage/actions';
+
+import {
+  editInterventionRequest,
+  makeSelectIntervention,
+  editInterventionSaga,
+} from 'global/reducers/intervention';
 
 import { CrossContainer } from './styled';
 import messages from './messages';
@@ -28,6 +33,8 @@ const InterventionNavbar = ({
   intl: { formatMessage },
   path,
 }) => {
+  useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
+
   const [tabActive, setTabActive] = useState(getActiveTab(path, formatMessage));
   useEffect(() => {
     setTabActive(getActiveTab(path, formatMessage));

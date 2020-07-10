@@ -14,17 +14,19 @@ import lastKey from 'utils/getLastKey';
 import { colors } from 'theme';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-import { makeSelectIntervention } from 'containers/Interventions/containers/EditInterventionPage/selectors';
+import { getQuestionsRequest } from 'containers/Interventions/containers/EditInterventionPage/actions';
+
 import {
   editInterventionRequest,
   getInterventionRequest,
-  getQuestionsRequest,
-} from 'containers/Interventions/containers/EditInterventionPage/actions';
+  interventionReducer,
+  editInterventionSaga,
+  makeSelectIntervention,
+  getInterventionSaga,
+} from 'global/reducers/intervention';
 
 import Option from './components/Option';
 import messages from './messages';
-import reducer from '../EditInterventionPage/reducer';
-import saga from '../EditInterventionPage/saga';
 import { StyledColumn, Input, NameContainer } from './styled';
 
 const SettingsInterventionPage = ({
@@ -35,8 +37,9 @@ const SettingsInterventionPage = ({
   editIntervention,
   getQuestions,
 }) => {
-  useInjectReducer({ key: 'editInterventionPage', reducer });
-  useInjectSaga({ key: 'editInterventionPage', saga });
+  useInjectReducer({ key: 'intervention', reducer: interventionReducer });
+  useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
+  useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
 
   useEffect(() => {
     getIntervention(params.id);

@@ -28,30 +28,28 @@ import {
 } from 'global/reducers/interventionList';
 
 import {
+  createInterventionSaga,
+  createInterventionRequest,
+  makeSelectInterventionLoaders,
+} from 'global/reducers/intervention';
+
+import {
   HomePageContainer,
   NewInterventionFloatButton,
   AddIcon,
 } from './styled';
 import messages from './messages';
-import { createInterventionRequest } from './actions';
-import reducer from './reducer';
-import saga from './saga';
-import { makeSelectDashboardPage } from './selectors';
-
 export function HomePage({
   createIntervention,
   fetchInterventions,
-  homePageState: {
-    loaders: { interventionCreating },
-  },
+  loaders: { createIntervention: createInterventionLoader },
   interventionList: {
     interventions,
     fetchInterventionLoading,
     fetchInterventionError,
   },
 }) {
-  useInjectReducer({ key: 'dashboardPage', reducer });
-  useInjectSaga({ key: 'dashboardPage', saga });
+  useInjectSaga({ key: 'createIntervention', saga: createInterventionSaga });
   useInjectReducer({
     key: 'interventionList',
     reducer: interventionListReducer,
@@ -79,7 +77,7 @@ export function HomePage({
           {wrapWithCol(
             <SingleInterventionPanel
               clickHandler={createIntervention}
-              interventionCreating={interventionCreating}
+              interventionCreating={createInterventionLoader}
             />,
             'new',
           )}
@@ -95,13 +93,13 @@ export function HomePage({
         <ErrorAlert errorText={fetchInterventionError} />
       )}
       <NewInterventionFloatButton onClick={createIntervention}>
-        {!interventionCreating && (
+        {!createInterventionLoader && (
           <>
             <AddIcon>+</AddIcon>
             <FormattedMessage {...messages.createIntervention} />
           </>
         )}
-        {interventionCreating && <Spinner />}
+        {createInterventionLoader && <Spinner />}
       </NewInterventionFloatButton>
     </HomePageContainer>
   );
@@ -113,11 +111,12 @@ HomePage.propTypes = {
   fetchInterventions: PropTypes.func,
   homePageState: PropTypes.object,
   interventionList: PropTypes.object,
+  loaders: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
-  homePageState: makeSelectDashboardPage(),
   interventionList: makeSelectInterventionList(),
+  loaders: makeSelectInterventionLoaders(),
 });
 
 const mapDispatchToProps = {

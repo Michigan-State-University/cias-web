@@ -10,9 +10,9 @@ import {
   mapQuestionToStateObject,
   mapInterventionToStateObject,
 } from 'utils/mapResponseObjects';
+import { makeSelectIntervention } from 'global/reducers/intervention';
 
 import {
-  GET_INTERVENTION_REQUEST,
   CREATE_QUESTION_REQUEST,
   GET_QUESTIONS_REQUEST,
   UPDATE_QUESTION_DATA,
@@ -23,15 +23,12 @@ import {
   UPDATE_QUESTION_SETTINGS,
   DELETE_QUESTION,
   COPY_QUESTION,
-  EDIT_INTERVENTION_REQUEST,
   CHANGE_QUESTION_TYPE,
   GET_INTERVENTION_LIST_REQUEST,
   ERROR_DUPLICATE_VARIABLE,
 } from './constants';
 
 import {
-  getInterventionSuccess,
-  getInterventionError,
   getQuestionsSuccess,
   getQuestionsError,
   createQuestionSuccess,
@@ -41,31 +38,11 @@ import {
   updateQuestionImage,
   deleteQuestionsSucccess,
   deleteQuestionError,
-  editInterventionSuccess,
-  editInterventionError,
   getInterventionListSuccess,
   getInterventionListError,
 } from './actions';
 
-import {
-  makeSelectIntervention,
-  makeSelectSelectedQuestion,
-  makeSelectQuestions,
-} from './selectors';
-
-function* getIntervention({ payload: { id } }) {
-  const requestURL = `v1/interventions/${id}`;
-
-  try {
-    const {
-      data: { data },
-    } = yield axios.get(requestURL);
-
-    yield put(getInterventionSuccess(mapInterventionToStateObject(data)));
-  } catch (error) {
-    yield put(getInterventionError(error));
-  }
-}
+import { makeSelectSelectedQuestion, makeSelectQuestions } from './selectors';
 
 function* getInterventionList() {
   const requestURL = 'v1/interventions/';
@@ -82,26 +59,6 @@ function* getInterventionList() {
     );
   } catch (error) {
     yield put(getInterventionListError(error));
-  }
-}
-
-function* editIntervention() {
-  const intervention = yield select(makeSelectIntervention());
-  const requestURL = `v1/interventions/${intervention.id}`;
-
-  try {
-    const {
-      data: { data },
-    } = yield axios.put(requestURL, { intervention });
-
-    yield put(
-      editInterventionSuccess({
-        ...data.attributes,
-        id: data.id,
-      }),
-    );
-  } catch (error) {
-    yield put(editInterventionError(error));
   }
 }
 
@@ -235,7 +192,6 @@ function* copyQuestion({ payload: { questionId, interventionId } }) {
 
 export default function* editInterventionPageSaga() {
   yield all([
-    yield takeLatest(GET_INTERVENTION_REQUEST, getIntervention),
     yield takeLatest(GET_INTERVENTION_LIST_REQUEST, getInterventionList),
     yield takeLatest(GET_QUESTIONS_REQUEST, getQuestions),
     yield takeLatest(CREATE_QUESTION_REQUEST, createQuestion),
@@ -247,7 +203,6 @@ export default function* editInterventionPageSaga() {
     yield takeLatest(UPDATE_QUESTION_SETTINGS, updateQuestion),
     yield takeLatest(DELETE_QUESTION, deleteQuestion),
     yield takeLatest(COPY_QUESTION, copyQuestion),
-    yield takeLatest(EDIT_INTERVENTION_REQUEST, editIntervention),
     yield takeLatest(CHANGE_QUESTION_TYPE, updateQuestion),
   ]);
 }

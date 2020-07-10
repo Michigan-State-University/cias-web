@@ -26,10 +26,13 @@ describe('<TargetQuestionChooser />', () => {
   let store;
   const reducer = state => state;
   const initialState = {
-    editInterventionPage: {
+    intervention: {
       intervention: {
         name: 'e-Intervention Name',
+        id: 'asd12ca-daiud12',
       },
+    },
+    editInterventionPage: {
       interventionList: [],
       questions: [mockSingleQuestion(1, true)],
       selectedQuestion: 0,
@@ -81,10 +84,13 @@ describe('<TargetQuestionChooser />', () => {
     const question = mockSingleQuestion(2, true);
 
     store = createStore(reducer, {
-      editInterventionPage: {
+      intervention: {
         intervention: {
           name: 'e-Intervention Name',
+          id: 'asd12ca-daiud12',
         },
+      },
+      editInterventionPage: {
         interventionList: [],
         questions: [
           mockSingleQuestion(1, true),
@@ -117,10 +123,13 @@ describe('<TargetQuestionChooser />', () => {
     const question = mockSingleQuestion(2, true);
 
     store = createStore(reducer, {
-      editInterventionPage: {
+      intervention: {
         intervention: {
           name: 'e-Intervention Name',
+          id: 'asd12ca-daiud12',
         },
+      },
+      editInterventionPage: {
         interventionList: [
           mockIntervention(1),
           mockIntervention(2),
@@ -179,10 +188,13 @@ describe('<TargetQuestionChooser />', () => {
     const question = mockSingleQuestion(2, true);
 
     store = createStore(reducer, {
-      editInterventionPage: {
+      intervention: {
         intervention: {
           name: 'e-Intervention Name',
+          id: 'asd12ca-daiud12',
         },
+      },
+      editInterventionPage: {
         interventionList: [],
         questions: [
           mockSingleQuestion(1, true),

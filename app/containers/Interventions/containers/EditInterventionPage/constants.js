@@ -26,26 +26,12 @@ export const DELETE_QUESTION_SUCCESS =
 export const DELETE_QUESTION_ERROR =
   'app/EditInterventionPage/DELETE_QUESTION_ERROR';
 
-export const GET_INTERVENTION_REQUEST =
-  'app/EditInterventionPage/GET_INTERVENTION_REQUEST';
-export const GET_INTERVENTION_SUCCESS =
-  'app/EditInterventionPage/GET_INTERVENTION_SUCCESS';
-export const GET_INTERVENTION_ERROR =
-  'app/EditInterventionPage/GET_INTERVENTION_ERROR';
-
 export const GET_INTERVENTION_LIST_REQUEST =
   'app/EditInterventionPage/GET_INTERVENTION_LIST_REQUEST';
 export const GET_INTERVENTION_LIST_SUCCESS =
   'app/EditInterventionPage/GET_INTERVENTION_LIST_SUCCESS';
 export const GET_INTERVENTION_LIST_ERROR =
   'app/EditInterventionPage/GET_INTERVENTION_LIST_ERROR';
-
-export const EDIT_INTERVENTION_REQUEST =
-  'app/EditInterventionPage/EDIT_INTERVENTION_REQUEST';
-export const EDIT_INTERVENTION_SUCCESS =
-  'app/EditInterventionPage/EDIT_INTERVENTION_SUCCESS';
-export const EDIT_INTERVENTION_ERROR =
-  'app/EditInterventionPage/EDIT_INTERVENTION_ERROR';
 
 export const CREATE_QUESTION_REQUEST =
   'app/EditInterventionPage/CREATE_QUESTION_REQUEST';
