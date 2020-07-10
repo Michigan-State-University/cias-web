@@ -122,7 +122,7 @@ const MultiQuestion = ({
                   placeholder={formatMessage(
                     globalMessages.variables.variableScorePlaceholder,
                   )}
-                  value={value.value}
+                  value={value.variable.value}
                   color={colors.azure}
                   onBlur={val =>
                     updateAnswer(index, {
