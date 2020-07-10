@@ -59,9 +59,8 @@ const ApprovableInput = props => {
   }, [propsValue]);
 
   const onInputChange = targetValue => {
-    if (validator && validator(targetValue)) {
-      setValue(targetValue);
-    } else if (!validator) setValue(targetValue);
+    if (validator && validator(targetValue)) setValue(targetValue);
+    else if (!validator) setValue(targetValue);
   };
 
   const onBlur = () => {
@@ -88,6 +87,7 @@ const ApprovableInput = props => {
           fontSize={fontSize}
         />
       );
+
     if (type === 'multiline')
       return (
         <TextArea
@@ -103,6 +103,7 @@ const ApprovableInput = props => {
           transparent
         />
       );
+
     return (
       <Input
         height="60px"
