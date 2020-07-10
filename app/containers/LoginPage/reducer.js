@@ -5,12 +5,7 @@
  */
 import produce from 'immer';
 import { REGISTER_SUCCESS } from 'containers/RegisterPage/constants';
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_ERROR,
-  REGISTER_POPUP_SHOWN,
-} from './constants';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_ERROR } from './constants';
 
 export const initialState = {
   loading: false,
@@ -45,8 +40,6 @@ const loginPageReducer = (state = initialState, action) =>
       case REGISTER_SUCCESS:
         draft.newAccountPopup = true;
         break;
-      case REGISTER_POPUP_SHOWN:
-        draft.newAccountPopup = false;
     }
   });
 

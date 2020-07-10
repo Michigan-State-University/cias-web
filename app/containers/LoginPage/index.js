@@ -21,9 +21,14 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import ErrorAlert from 'components/ErrorAlert';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import { success } from 'react-toastify-redux';
+
+import { makeSelectAlert } from 'global/reducers/alerts';
+
+import { REGISTER_SUCCESS } from 'containers/RegisterPage/constants';
+
 import makeSelectLoginPage from './selectors';
-import { loginRequest, popupShown } from './actions';
+import { loginRequest } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -32,9 +37,10 @@ import { StyledButton } from './styled';
 export function LoginPage(props) {
   const {
     onLogin,
-    popupShown: popupWasShown,
-    loginPage: { error, loading, formData, newAccountPopup },
+    loginPage: { error, loading, formData },
     intl: { formatMessage },
+    isRegisterSuccess,
+    showSuccess,
   } = props;
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
@@ -43,11 +49,12 @@ export function LoginPage(props) {
   const [password, setPassword] = useState(formData.password);
 
   useEffect(() => {
-    if (newAccountPopup) {
-      toast.success(formatMessage(messages.createdAccount));
-      popupWasShown();
+    if (isRegisterSuccess) {
+      showSuccess(formatMessage(messages.createdAccount), {
+        id: REGISTER_SUCCESS,
+      });
     }
-  }, [newAccountPopup]);
+  }, [isRegisterSuccess]);
 
   return (
     <Fragment>
@@ -91,7 +98,6 @@ export function LoginPage(props) {
 
 LoginPage.propTypes = {
   onLogin: PropTypes.func,
-  popupShown: PropTypes.func,
   intl: PropTypes.object,
   loginPage: PropTypes.shape({
     errors: PropTypes.string,
@@ -101,15 +107,18 @@ LoginPage.propTypes = {
       password: PropTypes.string,
     }),
   }),
+  isRegisterSuccess: PropTypes.bool,
+  showSuccess: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   loginPage: makeSelectLoginPage(),
+  isRegisterSuccess: makeSelectAlert(REGISTER_SUCCESS),
 });
 
 const mapDispatchToProps = {
   onLogin: loginRequest,
-  popupShown,
+  showSuccess: success,
 };
 
 const withConnect = connect(
