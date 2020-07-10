@@ -8,6 +8,8 @@ import { Input } from './index';
 import { QuillStyled } from './styled';
 import { TextArea } from './TextArea';
 
+import './QuillSinglelineHandler';
+
 const quillModules = {
   toolbar: [
     ['bold', 'italic', 'underline', 'strike'],
@@ -17,6 +19,21 @@ const quillModules = {
     [{ header: 1 }, { header: 2 }],
     [{ color: [] }, { background: [] }],
   ],
+};
+
+const quillModulesSingleline = {
+  ...quillModules,
+  keyboard: {
+    bindings: {
+      enter: {
+        key: 13,
+        handler: () => false,
+      },
+    },
+  },
+  clipboard: {
+    newLines: false,
+  },
 };
 
 const ApprovableInput = props => {
@@ -31,6 +48,7 @@ const ApprovableInput = props => {
     rows,
     richText,
     autoSize,
+    fontSize,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [focused, setfocused] = useState(false);
@@ -62,13 +80,15 @@ const ApprovableInput = props => {
           onFocus={() => setfocused(true)}
           onChange={v => onInputChange(v)}
           onBlur={onBlur}
-          modules={quillModules}
+          modules={type === 'multiline' ? quillModules : quillModulesSingleline}
           bounds="#quill_boundaries"
           focused={focused}
           autoSize={autoSize}
+          singleline={type === 'singleline'}
+          fontSize={fontSize}
         />
       );
-    if (type === 'multiLine')
+    if (type === 'multiline')
       return (
         <TextArea
           width="100%"
@@ -117,6 +137,7 @@ ApprovableInput.propTypes = {
   textAlign: PropTypes.string,
   richText: PropTypes.bool,
   autoSize: PropTypes.bool,
+  fontSize: PropTypes.number,
 };
 
 ApprovableInput.defaultProps = {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -18,7 +18,7 @@ import radio from 'assets/svg/radio-button.svg';
 import bin from 'assets/svg/bin-red.svg';
 
 import { numericValidator, variableNameValidator } from 'utils/validators';
-import { themeColors, colors, paddings } from 'theme';
+import { themeColors, colors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
@@ -26,6 +26,9 @@ import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
+
+const RADIO_MARGIN = 16;
+const INPUT_PADDING = 15;
 
 const SingleQuestion = ({
   selectedQuestion,
@@ -35,7 +38,14 @@ const SingleQuestion = ({
   updateVariable,
   intl: { formatMessage },
 }) => {
+  const radioButtonRef = useRef(null);
+
   const [hovered, setHovered] = useState(-1);
+
+  const getLeftMargin = () => {
+    if (radioButtonRef.current)
+      return radioButtonRef.current.width + RADIO_MARGIN + INPUT_PADDING;
+  };
 
   const { data, variable } = selectedQuestion.body;
 
@@ -66,64 +76,63 @@ const SingleQuestion = ({
             onMouseLeave={() => setHovered(-1)}
             clickable={false}
           >
-            <Row justify="between" align="center">
-              <Row>
-                <Column justify="center">
-                  <Img src={radio} mr={16} />
-                </Column>
-                <Column>
-                  <Row mb={10}>
+            <Column>
+              <Row align="center" justify="between" mb={10}>
+                <Row width="90%">
+                  <Img ref={radioButtonRef} src={radio} mr={RADIO_MARGIN} />
+                  <Box width="100%">
                     <ApprovableInput
                       mr={8}
+                      fontSize={18}
                       type="singleline"
                       placeholder={formatMessage(messages.placeholder)}
                       value={value.payload}
                       onCheck={newTitle =>
                         updateAnswer(index, { ...value, payload: newTitle })
                       }
+                      richText
                     />
-                  </Row>
-                  <Row align="center">
-                    <Text
-                      ml={paddings.small}
-                      mr={8}
-                      fontWeight="bold"
-                      color={colors.azure}
-                    >
-                      {formatMessage(globalMessages.variables.value)}
-                    </Text>
-                    <BadgeInput
-                      px={0}
-                      py={12}
-                      textAlign="center"
-                      validator={numericValidator}
-                      keyboard="tel"
-                      placeholder={formatMessage(
-                        globalMessages.variables.variableScorePlaceholder,
-                      )}
-                      value={value.value}
-                      color={colors.azure}
-                      onBlur={val =>
-                        updateAnswer(index, {
-                          ...value,
-                          value: val,
-                        })
-                      }
-                    />
-                  </Row>
-                </Column>
+                  </Box>
+                </Row>
+                <Row>
+                  <Box
+                    onClick={() => removeAnswer(index)}
+                    hidden={hovered !== index}
+                    clickable
+                  >
+                    <Img src={bin} mr={16} />
+                  </Box>
+                </Row>
               </Row>
-
-              <Column align="end">
-                <Box
-                  onClick={() => removeAnswer(index)}
-                  hidden={hovered !== index}
-                  clickable
+              <Row align="center">
+                <Text
+                  ml={`${getLeftMargin()}px`}
+                  mr={8}
+                  fontWeight="bold"
+                  color={colors.azure}
                 >
-                  <Img src={bin} mr={16} />
-                </Box>
-              </Column>
-            </Row>
+                  {formatMessage(globalMessages.variables.value)}
+                </Text>
+                <BadgeInput
+                  px={0}
+                  py={12}
+                  textAlign="center"
+                  validator={numericValidator}
+                  keyboard="tel"
+                  placeholder={formatMessage(
+                    globalMessages.variables.variableScorePlaceholder,
+                  )}
+                  value={value.value}
+                  color={colors.azure}
+                  onBlur={val =>
+                    updateAnswer(index, {
+                      ...value,
+                      value: val,
+                    })
+                  }
+                />
+              </Row>
+            </Column>
           </HoverableBox>
         </Row>
       ))}

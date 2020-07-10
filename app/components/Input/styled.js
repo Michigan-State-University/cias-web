@@ -4,8 +4,9 @@ import { colors } from 'theme';
 
 export const QuillStyled = styled(ReactQuill)`
   width: 100%;
-  ${({ autoSize }) =>
-    autoSize ? { minHeight: 'max-content' } : { height: '150px' }};
+  min-height: ${({ autoSize }) => autoSize && 'max-content'};
+  height: ${({ autoSize, singleline }) =>
+    singleline ? 'auto' : !autoSize && '150px'};
   margin-right: 9px;
   ${({ focused }) =>
     focused &&
@@ -14,10 +15,13 @@ export const QuillStyled = styled(ReactQuill)`
      border-radius: 10px;
     `}
   .ql-editor {
-    font-size: 25px;
+    font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '25px')};
     font-weight: 400;
   }
   .ql-picker-label svg {
     margin-bottom: 15px !important;
+  }
+  .ql-bubble {
+    z-index: 1000;
   }
 `;

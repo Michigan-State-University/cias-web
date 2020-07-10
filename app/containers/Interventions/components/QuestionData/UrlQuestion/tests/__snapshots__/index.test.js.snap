@@ -67,11 +67,13 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
 }
 
 .c7 {
+  resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
   border-radius: 10px;
   margin-right: 9px;
-  height: 60px;
+  width: 100%;
+  height: auto;
   background-color: transparent;
   border: 1px solid transparent;
 }
@@ -139,15 +141,16 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
         <div
           className="c6"
         >
-          <input
+          <textarea
             className="c7"
-            height="60px"
+            height="auto"
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}
             placeholder="Paste here a web page link to show it to a respondend."
-            type="text"
+            rows="3"
             value="www.google.com"
+            width="100%"
           />
         </div>
       </div>
