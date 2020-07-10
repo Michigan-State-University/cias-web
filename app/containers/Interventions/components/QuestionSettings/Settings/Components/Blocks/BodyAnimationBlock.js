@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { snakeCase } from 'lodash';
+import kebabCase from 'lodash/kebabCase';
 
 import Chips from 'components/Chips';
 import { blockTypes } from 'models/Narrator/BlockTypes';
@@ -27,11 +27,11 @@ const BodyAnimationBlock = ({
   id,
 }) => {
   const onChipsClick = (index, value) => () => {
-    if (block.animation === value) {
-      updateNarratorPreviewAnimation('');
+    const animName = kebabCase(value.toLowerCase());
+    if (block.animation === animName) {
+      updateNarratorPreviewAnimation('stand-still');
       updateAnimation(index, null, id);
     } else {
-      const animName = snakeCase(value.toLowerCase());
       updateNarratorPreviewAnimation(animName);
       updateAnimation(index, animName, id);
     }
@@ -41,7 +41,7 @@ const BodyAnimationBlock = ({
     <>
       {getPossibleAnimations(block.type, formatMessage).map(
         (anim, animIndex) => {
-          const isActive = block.animation === snakeCase(anim.toLowerCase());
+          const isActive = block.animation === kebabCase(anim.toLowerCase());
 
           return (
             <Chips

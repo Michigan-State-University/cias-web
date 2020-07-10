@@ -16,6 +16,8 @@ const lottieStyles = {
   margin: 'none',
 };
 
+const autoRest = ['greet', 'confused', 'reading'];
+
 const QuestionNarrator = ({ animation }) => {
   const [loadedAnimations, setLoadedAnimations] = useState([]);
   const animationRef = useRef(null);
@@ -29,10 +31,12 @@ const QuestionNarrator = ({ animation }) => {
           name: animation,
           animationData: data,
           pause: getPause(animation),
+          isAutoRest: autoRest.includes(animation),
         },
       ]);
     }
   };
+
   useEffect(() => {
     if (animation) {
       fetchJSON();
@@ -66,8 +70,10 @@ const QuestionNarrator = ({ animation }) => {
     setTimeout(() => {
       if (animationRef.current) {
         const { anim } = animationRef.current;
-        anim.setDirection(-1);
-        anim.play();
+        if (!get(currentAnimation, 'isAutoRest', false)) {
+          anim.setDirection(-1);
+          anim.play();
+        }
         anim.removeEventListener('complete', completeCallback);
       }
     }, get(currentAnimation, 'pause', 0));

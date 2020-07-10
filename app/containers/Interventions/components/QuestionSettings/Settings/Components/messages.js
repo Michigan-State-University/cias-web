@@ -43,17 +43,17 @@ export default defineMessages({
     id: `${scope}.newStep`,
     defaultMessage: '+ Add another block',
   },
-  shrug: {
-    id: `${scope}.shrug`,
-    defaultMessage: 'Shrug',
+  uncertain: {
+    id: `${scope}.uncertain`,
+    defaultMessage: 'Uncertain',
   },
   wave: {
     id: `${scope}.wave`,
     defaultMessage: 'Wave',
   },
-  bow: {
-    id: `${scope}.bow`,
-    defaultMessage: 'Bow',
+  greet: {
+    id: `${scope}.greet`,
+    defaultMessage: 'Greet',
   },
   pointRight: {
     id: `${scope}.pointRight`,
@@ -70,6 +70,22 @@ export default defineMessages({
   pointDown: {
     id: `${scope}.pointDown`,
     defaultMessage: 'Point down',
+  },
+  explain: {
+    id: `${scope}.explain`,
+    defaultMessage: 'Explain',
+  },
+  read: {
+    id: `${scope}.read`,
+    defaultMessage: 'Read',
+  },
+  reading: {
+    id: `${scope}.reading`,
+    defaultMessage: 'Reading',
+  },
+  confused: {
+    id: `${scope}.confused`,
+    defaultMessage: 'Confused',
   },
   formula: {
     id: `${scope}.formula`,
