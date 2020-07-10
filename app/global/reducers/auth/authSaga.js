@@ -1,11 +1,11 @@
 import { put, takeEvery, all } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { LOG_OUT } from '../reducers/auth/constants';
+import { LOG_OUT } from './constants';
 
 function* logOut() {
   yield put(push('/login'));
 }
 
-export default function* authSaga() {
+export function* authSaga() {
   yield all([yield takeEvery(LOG_OUT, logOut)]);
 }

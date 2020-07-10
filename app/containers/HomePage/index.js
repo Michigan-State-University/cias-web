@@ -5,40 +5,104 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { Container, Row, Col } from 'react-grid-system';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 
-import { Button } from 'components/Button';
+import Loader from 'components/Loader';
+import ErrorAlert from 'components/ErrorAlert';
+import SingleInterventionPanel from 'components/SingleInterventionPanel';
+import Spinner from 'components/Spinner';
+import {
+  interventionListReducer,
+  interventionListSaga,
+  makeSelectInterventionList,
+  fetchInterventionsRequest,
+} from 'global/reducers/interventionList';
 
-import { HomePageContainer } from './styled';
+import {
+  HomePageContainer,
+  NewInterventionFloatButton,
+  AddIcon,
+} from './styled';
 import messages from './messages';
 import { createInterventionRequest } from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import { makeSelectInterventionCreatingLoader } from './selectors';
+import { makeSelectDashboardPage } from './selectors';
 
 export function HomePage({
-  intl: { formatMessage },
   createIntervention,
-  interventionCreating,
+  fetchInterventions,
+  homePageState: {
+    loaders: { interventionCreating },
+  },
+  interventionList: {
+    interventions,
+    fetchInterventionLoading,
+    fetchInterventionError,
+  },
 }) {
   useInjectReducer({ key: 'dashboardPage', reducer });
   useInjectSaga({ key: 'dashboardPage', saga });
+  useInjectReducer({
+    key: 'interventionList',
+    reducer: interventionListReducer,
+  });
+  useInjectSaga({ key: 'interventionList', saga: interventionListSaga });
 
+  useEffect(() => {
+    fetchInterventions();
+  }, []);
+
+  const wrapWithCol = (child, key) => (
+    <Col key={`Single-intvention-${key}`} xs={12} sm={6} lg={4} xl={3}>
+      {child}
+    </Col>
+  );
+
+  if (fetchInterventionLoading) return <Loader />;
   return (
     <HomePageContainer>
-      <Button
-        loading={interventionCreating}
-        onClick={createIntervention}
-        title={formatMessage(messages.createIntervention)}
-      />
+      <h2>
+        <FormattedMessage {...messages.myIntervention} />
+      </h2>
+      <Container>
+        <Row>
+          {wrapWithCol(
+            <SingleInterventionPanel
+              clickHandler={createIntervention}
+              interventionCreating={interventionCreating}
+            />,
+            'new',
+          )}
+          {interventions.map(intervention =>
+            wrapWithCol(
+              <SingleInterventionPanel intervention={intervention} />,
+              intervention.id,
+            ),
+          )}
+        </Row>
+      </Container>
+      {fetchInterventionError && (
+        <ErrorAlert errorText={fetchInterventionError} />
+      )}
+      <NewInterventionFloatButton onClick={createIntervention}>
+        {!interventionCreating && (
+          <>
+            <AddIcon>+</AddIcon>
+            <FormattedMessage {...messages.createIntervention} />
+          </>
+        )}
+        {interventionCreating && <Spinner />}
+      </NewInterventionFloatButton>
     </HomePageContainer>
   );
 }
@@ -46,17 +110,19 @@ export function HomePage({
 HomePage.propTypes = {
   intl: PropTypes.object,
   createIntervention: PropTypes.func,
-  interventionCreating: PropTypes.bool,
+  fetchInterventions: PropTypes.func,
+  homePageState: PropTypes.object,
+  interventionList: PropTypes.object,
 };
 
-const withIntl = injectIntl(HomePage);
-
 const mapStateToProps = createStructuredSelector({
-  interventionCreating: makeSelectInterventionCreatingLoader(),
+  homePageState: makeSelectDashboardPage(),
+  interventionList: makeSelectInterventionList(),
 });
 
 const mapDispatchToProps = {
   createIntervention: createInterventionRequest,
+  fetchInterventions: fetchInterventionsRequest,
 };
 
 const withConnect = connect(
@@ -64,4 +130,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(withIntl);
+export default compose(withConnect)(HomePage);

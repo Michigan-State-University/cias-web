@@ -2,15 +2,13 @@
 
 exports[`<HomePage /> should render and match the snapshot 1`] = `
 <div
-  class="styled__HomePageContainer-r8av8f-0 hPMtJa"
+  class="styled__FillScreenLoader-tle2yi-0 efFfcM"
+  opacity="0.5"
 >
-  <button
-    class="StyledButton-t20ntd-0 goZETI"
-    color="primary"
-    title="Create intervention"
-    width="100%"
-  >
-    Create intervention
-  </button>
+  <div
+    class="styled__StyledSpinner-d123q3-0 dOefMO"
+    color="#C866EA"
+    size="100"
+  />
 </div>
 `;

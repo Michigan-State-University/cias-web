@@ -19,7 +19,6 @@ const dashboardPageReducer = (state = initialState, action) =>
       case CREATE_INTERVENTION_REQUEST:
         draft.loaders.interventionCreating = true;
         break;
-
       case CREATE_INTERVENTION_SUCCESS:
       case CREATE_INTERVENTION_ERROR:
         draft.loaders.interventionCreating = false;

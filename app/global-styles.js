@@ -65,11 +65,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #app {
-    background-color: ${colors.white};
+    background-color: ${colors.zirkon};
     min-height: 100%;
     min-width: 100%;
     display: flex;
     flex-direction: column;
+    overflow: scroll;
   }
 
   p,

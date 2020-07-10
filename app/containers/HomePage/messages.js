@@ -12,4 +12,8 @@ export default defineMessages({
     id: `${scope}.createIntervention`,
     defaultMessage: 'Create intervention',
   },
+  myIntervention: {
+    id: `${scope}.myIntervention`,
+    defaultMessage: 'My e-Interventions',
+  },
 });

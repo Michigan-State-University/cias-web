@@ -8,3 +8,4 @@ export {
   makeSelectHeaders,
   makeSelectUser,
 } from './selectors';
+export { authSaga } from './authSaga';
