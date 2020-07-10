@@ -25,4 +25,7 @@ export const QuillStyled = styled(ReactQuill)`
   .ql-bubble {
     z-index: 1000;
   }
+  .ql-toolbar {
+    width: max-content;
+  }
 `;
