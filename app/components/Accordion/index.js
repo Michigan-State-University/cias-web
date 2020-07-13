@@ -7,16 +7,18 @@ import Collapse from './Collapse';
 const Accordion = ({ children }) => {
   const [opened, setOpened] = useState(-1);
 
+  const handleToggle = index => () => {
+    if (opened === index) setOpened(-1);
+    else setOpened(index);
+  };
+
   const renderCollapse = (child, index) => {
     const { children: content, label, color } = child.props;
 
     return (
       <Collapse
         key={`accordion-${index}`}
-        onToggle={() => {
-          if (opened === index) setOpened(-1);
-          else setOpened(index);
-        }}
+        onToggle={handleToggle(index)}
         isOpened={opened === index}
         label={label}
         color={color}

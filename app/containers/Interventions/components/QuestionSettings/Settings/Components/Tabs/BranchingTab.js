@@ -90,7 +90,7 @@ const BranchingTab = ({
                 onBlur={val => onFormulaUpdate(val, id)}
               />
             </Box>
-            <Box position="relative">
+            <Box position="absolute" right={25} top={310}>
               <VariableChooser
                 visible={variableChooserOpen}
                 setOpen={setVariableChooserOpen}

@@ -25,7 +25,7 @@ const QuestionSettings = ({
   const onClose = () => toggleSettings(-1);
   return (
     <Container isVisible={settingsVisiblity}>
-      <SettingsBar width="300px" height="100%">
+      <SettingsBar width="400px" height="100%">
         <Box width="100%" height="100%" padded>
           <Row align="center" justify="between" mb={40}>
             <H2>{formatMessage(messages.header)}</H2>

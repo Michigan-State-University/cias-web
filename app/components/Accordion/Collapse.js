@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { Collapse as ReactCollapse } from 'react-collapse';
 
 import arrowUp from 'assets/svg/arrow-up.svg';
 import arrowDown from 'assets/svg/arrow-down.svg';
@@ -52,11 +53,11 @@ const CollapseContent = ({ child, isOpened }) => {
   }, [isOpened]);
 
   return (
-    show && (
-      <StyledCollapseContent isOpened={transition && isOpened}>
-        <Content>{child}</Content>
-      </StyledCollapseContent>
-    )
+    <StyledCollapseContent>
+      <ReactCollapse isOpened={transition && isOpened}>
+        {show && <Content>{child}</Content>}
+      </ReactCollapse>
+    </StyledCollapseContent>
   );
 };
 

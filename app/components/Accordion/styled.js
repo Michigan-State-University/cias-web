@@ -16,19 +16,16 @@ export const StyledCollapseLabel = styled.div`
   ${style};
 `;
 
-export const StyledCollapseContent = styled.div`
-  transition: all 390ms ease;
-  display: flex;
-  ${({ isOpened }) =>
-    isOpened
-      ? { height: 570, opacity: 1, marginTop: 15 }
-      : { height: 0, opacity: 0, marginTop: 0 }};
-`;
-
 export const Content = styled.div`
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
-  margin-top: -12px;
   width: 100%;
+  margin-bottom: 10px;
+`;
+
+export const StyledCollapseContent = styled.div`
+  .ReactCollapse--collapse {
+    transition: height 490ms ease;
+  }
 `;

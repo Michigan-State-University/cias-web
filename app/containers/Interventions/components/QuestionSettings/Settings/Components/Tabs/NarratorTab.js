@@ -6,17 +6,16 @@ import { map } from 'lodash';
 
 import Accordion from 'components/Accordion';
 import Box from 'components/Box';
-
 import H3 from 'components/H3';
 import Row from 'components/Row';
 import Switch from 'components/Switch';
+import lastKey from 'utils/getLastKey';
 import {
   bodyAnimationType,
   speechType,
   blockTypeToColorMap,
 } from 'models/Narrator/BlockTypes';
-
-import { colors } from 'theme';
+import { colors, borders } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
 import messages from '../messages';
@@ -79,6 +78,8 @@ const NarratorTab = ({
     }
   };
 
+  const last = lastKey(narrator.settings);
+
   return (
     <Fragment>
       <Box mb={30}>
@@ -88,7 +89,15 @@ const NarratorTab = ({
               key={`${id}-settings-narrator-${index}`}
               justify="between"
               align="center"
+              pb={15}
               mb={15}
+              borderBottom={
+                index !== last
+                  ? `${borders.borderWidth} ${borders.borderStyle} ${
+                      colors.linkWater
+                    }`
+                  : null
+              }
             >
               <H3>{formatMessage(messages[`${index}`])}</H3>
               <Switch
