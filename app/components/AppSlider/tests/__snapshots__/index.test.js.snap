@@ -38,6 +38,8 @@ exports[`<AppSlider /> should match the snapshot 1`] = `
     aria-valuemin={0}
     aria-valuenow={0}
     className="rc-slider-handle"
+    dragging="false"
+    index={0}
     onBlur={[Function]}
     onKeyDown={[Function]}
     onMouseDown={[Function]}
@@ -45,6 +47,7 @@ exports[`<AppSlider /> should match the snapshot 1`] = `
     style={
       Object {
         "borderColor": "#C866EA",
+        "borderWidth": "3px",
         "boxShadow": "none",
         "left": "0%",
         "right": "auto",

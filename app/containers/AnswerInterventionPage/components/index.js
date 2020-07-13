@@ -5,11 +5,13 @@ import {
   gridQuestion,
   multiQuestion,
   singleQuestion,
+  visualAnalogueScaleQuestion,
   textboxQuestion,
 } from 'models/Intervention/QuestionTypes';
 import SingleQuestion from './SingleQuestion';
 import MultipleQuestion from './MultipleQuestion';
 import GridQuestion from './GridQuestion';
+import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
 import TextBoxQuestion from './TextBoxQuestion';
 
 export const renderQuestionByType = (question, sharedProps) => {
@@ -21,6 +23,10 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <MultipleQuestion question={question} {...sharedProps} />;
     case gridQuestion.id:
       return <GridQuestion question={question} {...sharedProps} />;
+    case visualAnalogueScaleQuestion.id:
+      return (
+        <VisualAnalogueScaleQuestion question={question} {...sharedProps} />
+      );
     case textboxQuestion.id:
       return <TextBoxQuestion question={question} {...sharedProps} />;
     default:
