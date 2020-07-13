@@ -85,6 +85,7 @@ export function AnswerInterventionPage({
     const sharedProps = {
       selectAnswer: selectAnswerProp,
       answerBody,
+      formatMessage,
     };
     return (
       <>
