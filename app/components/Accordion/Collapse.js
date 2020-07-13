@@ -42,7 +42,7 @@ const CollapseContent = ({ child, isOpened }) => {
       setTransition(false);
       setTimeout(() => {
         setShow(false);
-      }, 400);
+      }, 500);
     } else {
       setShow(true);
       setTimeout(() => {

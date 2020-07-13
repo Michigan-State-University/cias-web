@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
-import getPause from 'utils/getPause';
+import getPause from 'utils/animations/getPause';
+import { autoRestAnimations } from 'utils/animations/animationsNames';
 
 import { NarratorContainer } from './styled';
 import { makeSelectPreviewAnimation } from './selectors';
@@ -15,8 +16,6 @@ import { makeSelectPreviewAnimation } from './selectors';
 const lottieStyles = {
   margin: 'none',
 };
-
-const autoRest = ['greet', 'confused', 'reading'];
 
 const QuestionNarrator = ({ animation }) => {
   const [loadedAnimations, setLoadedAnimations] = useState([]);
@@ -31,7 +30,7 @@ const QuestionNarrator = ({ animation }) => {
           name: animation,
           animationData: data,
           pause: getPause(animation),
-          isAutoRest: autoRest.includes(animation),
+          isAutoRest: autoRestAnimations.includes(animation),
         },
       ]);
     }

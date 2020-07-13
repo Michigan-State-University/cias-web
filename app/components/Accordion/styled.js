@@ -21,7 +21,7 @@ export const StyledCollapseContent = styled.div`
   display: flex;
   ${({ isOpened }) =>
     isOpened
-      ? { height: 300, opacity: 1, marginTop: 15 }
+      ? { height: 570, opacity: 1, marginTop: 15 }
       : { height: 0, opacity: 0, marginTop: 0 }};
 `;
 

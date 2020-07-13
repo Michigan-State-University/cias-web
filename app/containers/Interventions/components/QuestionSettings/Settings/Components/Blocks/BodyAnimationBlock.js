@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import kebabCase from 'lodash/kebabCase';
+import camelCase from 'lodash/camelCase';
 
 import Chips from 'components/Chips';
 import { blockTypes } from 'models/Narrator/BlockTypes';
 import { colors } from 'theme';
 import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
-import { bodyAnimations, facialAnimations } from '../animations';
+import { bodyAnimations, facialAnimations } from './animations';
 import { updateNarratorAnimation } from '../../actions';
 
 const getPossibleAnimations = (type, formatMessage) => {
@@ -27,9 +27,9 @@ const BodyAnimationBlock = ({
   id,
 }) => {
   const onChipsClick = (index, value) => () => {
-    const animName = kebabCase(value.toLowerCase());
+    const animName = camelCase(value.toLowerCase());
     if (block.animation === animName) {
-      updateNarratorPreviewAnimation('stand-still');
+      updateNarratorPreviewAnimation('standStill');
       updateAnimation(index, null, id);
     } else {
       updateNarratorPreviewAnimation(animName);
@@ -41,7 +41,7 @@ const BodyAnimationBlock = ({
     <>
       {getPossibleAnimations(block.type, formatMessage).map(
         (anim, animIndex) => {
-          const isActive = block.animation === kebabCase(anim.toLowerCase());
+          const isActive = block.animation === camelCase(anim.toLowerCase());
 
           return (
             <Chips

@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import Box from 'components/Box';
 
-export const SettingsBar = styled(Box)``;
+export const SettingsBar = styled(Box)`
+  overflow-x: auto;
+`;
 
 export const Container = styled(Box)`
   transition: width 0.4s ease;

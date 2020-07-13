@@ -5,7 +5,8 @@ import uniqBy from 'lodash/uniqBy';
 import Lottie from 'react-lottie';
 
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
-import getPause from 'utils/getPause';
+import getPause from 'utils/animations/getPause';
+import { autoRestAnimations } from 'utils/animations/animationsNames';
 
 import { NarratorContainer } from './styled';
 
@@ -46,6 +47,7 @@ const CharacterAnim = ({ blocks, quesitonId }) => {
           name: animation,
           animationData: data,
           pause: getPause(animation),
+          isAutoRest: autoRestAnimations.includes(animation),
         });
       }),
     );
@@ -91,10 +93,15 @@ const CharacterAnim = ({ blocks, quesitonId }) => {
     setTimeout(() => {
       if (animationRef.current) {
         const { anim } = animationRef.current;
-        anim.setDirection(-1);
-        anim.play();
-        anim.removeEventListener('complete', reverseAnimation);
-        anim.addEventListener('complete', changeAnimation);
+        if (!get(state.currentAnimation, 'isAutoRest', false)) {
+          anim.setDirection(-1);
+          anim.play();
+          anim.removeEventListener('complete', reverseAnimation);
+          anim.addEventListener('complete', changeAnimation);
+        } else {
+          anim.removeEventListener('complete', reverseAnimation);
+          changeAnimation();
+        }
       }
     }, get(state.currentAnimation, 'pause', 0));
   };
