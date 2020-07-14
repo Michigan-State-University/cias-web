@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { colors, themeColors, borders } from 'theme';
+import { margin } from 'components/BaseComponentStyles';
 
 export const StyledButton = styled.button`
   width: ${props => props.width};
@@ -17,6 +18,15 @@ export const StyledButton = styled.button`
     background-color : grey;
   `
       : ` `}
+  ${props =>
+    props.inverted
+      ? `
+    background-color: ${colors.white};
+    color: ${themeColors[props.color]};
+    border: 1px solid ${themeColors[props.color]};
+  `
+      : ''}
+  ${margin}
 `;
 
 StyledButton.propTypes = {

@@ -79,4 +79,16 @@ export default defineMessages({
     id: `${scope}.speechPlaceholder`,
     defaultMessage: 'Enter speech here...',
   },
+  replaceCharacter: {
+    id: `${scope}.replaceCharacter`,
+    defaultMessage: 'Replace character',
+  },
+  save: {
+    id: `${scope}.save`,
+    defaultMessage: 'Save',
+  },
+  cancel: {
+    id: `${scope}.cancel`,
+    defaultMessage: 'Cancel',
+  },
 });

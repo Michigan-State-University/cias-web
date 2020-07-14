@@ -5,24 +5,67 @@ import {
   UPDATE_NARRATOR_ANIMATION,
   UPDATE_FORMULA,
   ADD_FORMULA_CASE,
-  UPDATE_FORMULA_CASE,
   REMOVE_FORMULA_CASE,
   UPDATE_SPEECH_TEXT,
+  UPDATE_NARRATOR_MOVEMENT,
 } from './constants';
 
-const instantiateBlockForType = type => {
+const instantiateBlockForType = (type, posFrom) => {
   switch (type) {
     case 'BodyAnimation':
-      return { type: 'BodyAnimation', animation: null };
+      return {
+        type: 'BodyAnimation',
+        animation: null,
+        position: {
+          posFrom,
+          posTo: posFrom,
+        },
+      };
     case 'Speech':
-      return { type: 'Speech', text: '', audio_url: null };
+      return {
+        type: 'Speech',
+        text: '',
+        audio_url: null,
+        position: {
+          posFrom,
+          posTo: posFrom,
+        },
+      };
     default:
       return undefined;
   }
 };
 
+const getStartAnimationPoint = (
+  allQuestions,
+  questionIndex,
+  currentQuestion,
+) => {
+  const { blocks } = currentQuestion.narrator;
+  // if first question and there is no blocks
+  if (questionIndex === 0 && blocks.length === 0) {
+    return { x: 0, y: 0 };
+  }
+  // if question already has blocks return position of the last block
+  if (blocks.length !== 0) {
+    return blocks[blocks.length - 1].position.posTo;
+  }
+  // if it's new question
+  for (let i = allQuestions.length - 1; i >= 0; i -= 1) {
+    const {
+      narrator: { blocks: previousQuestionBlocks },
+    } = allQuestions[i];
+    const lastBlock = previousQuestionBlocks[previousQuestionBlocks.length - 1];
+    if (lastBlock) {
+      return lastBlock.position.posTo;
+    }
+  }
+  return { x: 0, y: 0 };
+};
+
 /* eslint-disable default-case, no-param-reassign */
-const questionSettingsReducer = (question, payload) => {
+const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
+  const question = allQuestions[questionIndex];
   switch (payload.type) {
     case UPDATE_QUESTION_SETTINGS:
       return {
@@ -46,13 +89,14 @@ const questionSettingsReducer = (question, payload) => {
       };
 
     case ADD_BLOCK:
+      const pos = getStartAnimationPoint(allQuestions, questionIndex, question);
       return {
         ...question,
         narrator: {
           ...question.narrator,
           blocks: [
             ...question.narrator.blocks,
-            instantiateBlockForType(payload.data.type),
+            instantiateBlockForType(payload.data.type, pos),
           ],
         },
       };
@@ -101,10 +145,26 @@ const questionSettingsReducer = (question, payload) => {
       question.formula.patterns.splice(payload.data.index, 1);
       return question;
 
-    case UPDATE_FORMULA_CASE:
-      if (question.id !== payload.data.value.target)
-        question.formula.patterns[payload.data.index] = payload.data.value;
-      return question;
+    case UPDATE_NARRATOR_MOVEMENT: {
+      const positionToSet = payload.data.position;
+      // update position that animates to in current animation block
+      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      cloneBlocks[payload.data.index].position.posTo = positionToSet;
+
+      // update animation position in next block so it starts in same position that last animation finishes
+      const nextBlock = cloneBlocks[payload.data.index + 1];
+      if (nextBlock) {
+        nextBlock.position.posFrom = positionToSet;
+      }
+
+      return {
+        ...question,
+        narrator: {
+          ...question.narrator,
+          blocks: cloneBlocks,
+        },
+      };
+    }
 
     default:
       return question;

@@ -44,7 +44,7 @@ const renderQuestionDetails = ({
 
     const { settings: { animation } = {} } = selectedQuestion.narrator || {};
     return (
-      <Column position="relative">
+      <Column position="relative" zIndex={0}>
         {animation && <QuestionNarrator />}
         <Row>
           <NumberCircle

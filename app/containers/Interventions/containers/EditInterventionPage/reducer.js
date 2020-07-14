@@ -33,6 +33,8 @@ import {
   GET_INTERVENTION_LIST_ERROR,
   GET_QUESTIONS_REQUEST,
   GET_QUESTIONS_ERROR,
+  MAKE_PEEDY_DRAGGABLE,
+  SET_ANIMATION_STOP_POSITION,
 } from './constants';
 
 import questionDataReducer from '../../components/QuestionData/reducer';
@@ -44,6 +46,11 @@ export const initialState = {
   questions: [],
   questionSettingsVisibility: false,
   selectedQuestion: 0,
+  animationPosition: {
+    x: 0,
+    y: 0,
+  },
+  draggable: false,
   previewAnimation: 'standStill',
   cache: {
     questions: [],
@@ -69,26 +76,42 @@ const mapQuestionDataForType = question => {
       };
 
     case gridQuestion.id:
+      const exampleData = {
+        variable: { name: '', value: '  1' },
+        payload: {
+          rows: [],
+          columns: [],
+        },
+      };
       return {
         ...question,
         body: {
           ...question.body,
-          data: question.body.data.length
-            ? question.body.data
-            : [
-                {
-                  variable: { name: '', value: '1' },
-                  payload: {
-                    rows: [],
-                    columns: [],
-                  },
-                },
-              ],
+          data: question.body.data.length ? question.body.data : [exampleData],
         },
       };
 
     default:
       return question;
+  }
+};
+
+const getAnimationPosition = (draft, state, payload) => {
+  if (draft.selectedQuestion !== payload) {
+    // set position to first block of new question
+    if (state.questions[payload].narrator.blocks[0])
+      return state.questions[payload].narrator.blocks[0].position.posTo;
+    for (let i = payload - 1; i >= 0; i -= 1) {
+      const {
+        narrator: { blocks: previousQuestionBlocks },
+      } = state.questions[i];
+      const lastBlock =
+        previousQuestionBlocks[previousQuestionBlocks.length - 1];
+      if (lastBlock) {
+        return lastBlock.position.posTo;
+      }
+    }
+    return { x: 0, y: 0 };
   }
 };
 
@@ -115,6 +138,12 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.previewAnimation = action.payload.animation;
         break;
       case SELECT_QUESTION:
+        draft.draggable = false;
+        draft.animationPosition = getAnimationPosition(
+          draft,
+          state,
+          action.payload,
+        );
         draft.selectedQuestion = action.payload;
         break;
 
@@ -161,8 +190,9 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.questions[state.selectedQuestion] = {
           ...draft.questions[state.selectedQuestion],
           ...questionSettingsReducer(
-            state.questions[state.selectedQuestion],
+            state.questions,
             action.payload,
+            state.selectedQuestion,
           ),
         };
         break;
@@ -216,6 +246,8 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.cache.questions = action.payload.questions.map(question =>
           mapQuestionDataForType(question),
         );
+        draft.animationPosition =
+          action.payload.questions[0].narrator.blocks[0].position.posTo;
 
         draft.questions = cloneDeep(draft.cache.questions);
         break;
@@ -253,6 +285,11 @@ const editInterventionPageReducer = (state = initialState, action) =>
           : [draft.intervention];
         draft.loaders.interventionListLoading = false;
         break;
+      case MAKE_PEEDY_DRAGGABLE:
+        draft.draggable = action.payload.draggable;
+        break;
+      case SET_ANIMATION_STOP_POSITION:
+        draft.animationPosition = action.payload;
     }
   });
 

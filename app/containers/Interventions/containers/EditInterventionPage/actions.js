@@ -28,6 +28,8 @@ import {
   GET_INTERVENTION_LIST_REQUEST,
   GET_INTERVENTION_LIST_SUCCESS,
   GET_INTERVENTION_LIST_ERROR,
+  MAKE_PEEDY_DRAGGABLE,
+  SET_ANIMATION_STOP_POSITION,
 } from './constants';
 
 const toggleQuestionSettings = index =>
@@ -88,6 +90,12 @@ const updatePreviewAnimation = animation =>
 const reorderQuestionList = reorderedList =>
   actionBuilder(REORDER_QUESTION_LIST, { reorderedList });
 
+const setPeedyDraggable = draggable =>
+  actionBuilder(MAKE_PEEDY_DRAGGABLE, { draggable });
+
+const setAnimationStopPosition = (posX, posY) =>
+  actionBuilder(SET_ANIMATION_STOP_POSITION, { x: posX, y: posY });
+
 export {
   toggleQuestionSettings,
   selectQuestion,
@@ -117,4 +125,6 @@ export {
   deleteQuestionError,
   changeQuestionType,
   reorderQuestionList,
+  setPeedyDraggable,
+  setAnimationStopPosition,
 };

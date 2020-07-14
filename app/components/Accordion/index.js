@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 
 import { AccordionContainer } from './styled';
 import Collapse from './Collapse';
 
-const Accordion = ({ children }) => {
+const Accordion = ({ children, onHide, onOpen, accordionParentKey }) => {
   const [opened, setOpened] = useState(-1);
 
+  useEffect(() => {
+    if (opened !== -1) onOpen(opened);
+  }, [opened]);
+
+  useEffect(() => {
+    setOpened(-1);
+  }, [accordionParentKey]);
+
   const handleToggle = index => () => {
-    if (opened === index) setOpened(-1);
-    else setOpened(index);
+    let newIndex = index;
+    if (opened === index) newIndex = -1;
+    else onHide(opened);
+    setOpened(newIndex);
   };
 
   const renderCollapse = (child, index) => {
@@ -41,8 +51,11 @@ Accordion.propTypes = {
     PropTypes.node,
     PropTypes.arrayOf(PropTypes.node),
   ]),
+  onHide: PropTypes.func,
+  accordionParentKey: PropTypes.number,
+  onOpen: PropTypes.func,
 };
 
 Accordion.defaultProps = {};
 
-export default Accordion;
+export default memo(Accordion);

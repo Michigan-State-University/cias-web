@@ -30,7 +30,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           value=""
         />
         <button
-          class="styled__StyledButton-sc-13sgwpa-0 dLtwcD StyledButton-t20ntd-0 goZETI"
+          class="styled__StyledButton-sc-13sgwpa-0 dLtwcD StyledButton-t20ntd-0 lagNgJ"
           color="primary"
           title="Log in"
           width="100%"
@@ -41,7 +41,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           href="/register"
         >
           <button
-            class="styled__StyledButton-sc-13sgwpa-0 dLtwcD StyledButton-t20ntd-0 goZETI"
+            class="styled__StyledButton-sc-13sgwpa-0 dLtwcD StyledButton-t20ntd-0 lagNgJ"
             color="primary"
             title="Register"
             width="100%"

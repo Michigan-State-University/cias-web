@@ -23,3 +23,6 @@ export const REMOVE_FORMULA_CASE =
 
 export const UPDATE_FORMULA_CASE =
   'app/EditInterventionPage/Settings/UPDATE_FORMULA_CASE';
+
+export const UPDATE_NARRATOR_MOVEMENT =
+  'app/EditInterventionPage/Settings/UPDATE_NARRATOR_MOVEMENT';

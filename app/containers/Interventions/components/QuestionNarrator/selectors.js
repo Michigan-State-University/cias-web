@@ -6,5 +6,19 @@ const makeSelectPreviewAnimation = () =>
     selectEditInterventionPageDomain,
     substate => substate.previewAnimation,
   );
+const makeSelectDraggable = () =>
+  createSelector(
+    selectEditInterventionPageDomain,
+    substate => substate.draggable,
+  );
+const makeSelectAnimationPosition = () =>
+  createSelector(
+    selectEditInterventionPageDomain,
+    substate => substate.animationPosition,
+  );
 
-export { makeSelectPreviewAnimation };
+export {
+  makeSelectPreviewAnimation,
+  makeSelectDraggable,
+  makeSelectAnimationPosition,
+};

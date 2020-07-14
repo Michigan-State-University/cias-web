@@ -88,6 +88,7 @@
     "react": "16.8.6",
     "react-collapse": "5.0.1",
     "react-dom": "16.8.6",
+    "react-draggable": "4.4.3",
     "react-dropzone": "11.0.1",
     "react-grid-system": "7.0.3",
     "react-helmet": "6.0.0-beta",

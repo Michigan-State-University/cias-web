@@ -2,7 +2,8 @@ import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { map } from 'lodash';
+import map from 'lodash/map';
+import isEqual from 'lodash/isEqual';
 
 import Accordion from 'components/Accordion';
 import Box from 'components/Box';
@@ -18,10 +19,25 @@ import {
 import { colors, borders } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
+import {
+  setPeedyDraggable,
+  setAnimationStopPosition,
+} from 'containers/Interventions/containers/EditInterventionPage/actions';
+import {
+  makeSelectDraggable,
+  makeSelectAnimationPosition,
+} from 'containers/Interventions/components/QuestionNarrator/selectors';
+import { Button } from 'components/Button';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectSelectedQuestionIndex } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import messages from '../messages';
 import BlockTypeChooser from '../../../BlockTypeChooser';
 import { DashedBox } from '../styled';
-import { addBlock, updateNarratorSettings } from '../../actions';
+import {
+  addBlock,
+  updateNarratorSettings,
+  saveNarratorMovement,
+} from '../../actions';
 import BodyAnimationBlock from '../Blocks/BodyAnimationBlock';
 import SpeechBlock from '../Blocks/SpeechBlock';
 
@@ -31,10 +47,15 @@ const NarratorTab = ({
   onNarratorToggle,
   onCreate,
   id,
+  draggable,
+  setDraggable,
+  setOffset,
+  savePosition,
+  animationPosition,
+  currentQuestionIndex,
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
-
   const { voice, animation } = narrator.settings;
 
   const onCreateBlock = type => {
@@ -78,7 +99,30 @@ const NarratorTab = ({
     }
   };
 
+  const cancelAction = index => {
+    if (draggable) {
+      const {
+        position: { posFrom },
+      } = narrator.blocks[index];
+      setDraggable(false);
+      savePosition(index, id, posFrom);
+      setOffset(posFrom.x, posFrom.y);
+    }
+  };
+
+  const moveAnimation = index => {
+    const { position } = narrator.blocks[index];
+    if (!isEqual(position.posTo, animationPosition)) {
+      setOffset(position.posTo.x, position.posTo.y);
+    }
+  };
+
   const last = lastKey(narrator.settings);
+
+  const getBorderBottom = index => {
+    if (index === last) return null;
+    return `${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`;
+  };
 
   return (
     <Fragment>
@@ -91,13 +135,7 @@ const NarratorTab = ({
               align="center"
               pb={15}
               mb={15}
-              borderBottom={
-                index !== last
-                  ? `${borders.borderWidth} ${borders.borderStyle} ${
-                      colors.linkWater
-                    }`
-                  : null
-              }
+              borderBottom={getBorderBottom(index)}
             >
               <H3>{formatMessage(messages[`${index}`])}</H3>
               <Switch
@@ -107,7 +145,11 @@ const NarratorTab = ({
             </Row>
           ))}
       </Box>
-      <Accordion>
+      <Accordion
+        accordionParentKey={currentQuestionIndex}
+        onHide={cancelAction}
+        onOpen={moveAnimation}
+      >
         {narrator &&
           map(narrator.blocks, (block, blockIndex) => (
             <div
@@ -117,6 +159,35 @@ const NarratorTab = ({
                 globalMessages.blockTypes[block.type],
               )}`}
             >
+              {!draggable && (
+                <Button
+                  onClick={() => setDraggable(true)}
+                  mt={15}
+                  inverted
+                  title={formatMessage(messages.replaceCharacter)}
+                />
+              )}
+              {draggable && (
+                <Row width="100%" mt={15}>
+                  <Button
+                    onClick={() => {
+                      savePosition(blockIndex, id, animationPosition);
+                      setDraggable(false);
+                    }}
+                    title={formatMessage(messages.save)}
+                    mr={5}
+                    width="50%"
+                  />
+                  <Button
+                    onClick={() => cancelAction(blockIndex)}
+                    ml={5}
+                    inverted
+                    width="50%"
+                    title={formatMessage(messages.cancel)}
+                  />
+                </Row>
+              )}
+
               {renderBlock(block, blockIndex)}
             </div>
           ))}
@@ -133,19 +204,34 @@ const NarratorTab = ({
 
 NarratorTab.propTypes = {
   formatMessage: PropTypes.func.isRequired,
-  narrator: PropTypes.object,
   id: PropTypes.string,
+  narrator: PropTypes.object,
+  animationPosition: PropTypes.object,
   onNarratorToggle: PropTypes.func.isRequired,
   onCreate: PropTypes.func,
+  setDraggable: PropTypes.func,
+  setOffset: PropTypes.func,
+  savePosition: PropTypes.func,
+  draggable: PropTypes.bool,
+  currentQuestionIndex: PropTypes.number,
 };
 
 const mapDispatchToProps = {
   onCreate: addBlock,
   onNarratorToggle: updateNarratorSettings,
+  setDraggable: setPeedyDraggable,
+  setOffset: setAnimationStopPosition,
+  savePosition: saveNarratorMovement,
 };
 
+const mapStateToProps = createStructuredSelector({
+  draggable: makeSelectDraggable(),
+  animationPosition: makeSelectAnimationPosition(),
+  currentQuestionIndex: makeSelectSelectedQuestionIndex(),
+});
+
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 

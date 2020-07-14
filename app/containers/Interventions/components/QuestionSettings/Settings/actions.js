@@ -9,6 +9,7 @@ import {
   UPDATE_FORMULA_CASE,
   REMOVE_FORMULA_CASE,
   UPDATE_SPEECH_TEXT,
+  UPDATE_NARRATOR_MOVEMENT,
 } from './constants';
 
 export const updateSettings = (property, value) =>
@@ -63,4 +64,10 @@ export const updateFormulaCase = (index, value, questionId) =>
   updateQuestionSettings({
     type: UPDATE_FORMULA_CASE,
     data: { index, value, questionId },
+  });
+
+export const saveNarratorMovement = (index, questionId, position) =>
+  updateQuestionSettings({
+    type: UPDATE_NARRATOR_MOVEMENT,
+    data: { index, questionId, position },
   });

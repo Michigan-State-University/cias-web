@@ -5,4 +5,8 @@ export const NarratorContainer = styled.div`
   width: 100px;
   width: 100px;
   margin-left: 50px;
+  z-index: 1500;
+  > div {
+    cursor: ${props => (props.canBeDragged ? 'grab' : 'default')};
+  }
 `;

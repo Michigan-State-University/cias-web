@@ -13,6 +13,7 @@ const Button = ({ loading, ...props }) => (
 Button.propTypes = {
   title: PropTypes.string.isRequired,
   loading: PropTypes.bool,
+  inverted: PropTypes.bool,
 };
 
 export { Button };

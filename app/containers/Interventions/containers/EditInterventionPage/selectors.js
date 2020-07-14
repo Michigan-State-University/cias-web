@@ -42,6 +42,12 @@ const makeSelectLoaders = () =>
     substate => substate.loaders,
   );
 
+const makeSelectAnimationPosition = () =>
+  createSelector(
+    selectEditInterventionPageDomain,
+    substate => substate.animationPosition,
+  );
+
 const makeSelectLoader = loader =>
   createSelector(
     selectEditInterventionPageDomain,
@@ -57,4 +63,5 @@ export {
   makeSelectQuestionSettingsVisibility,
   makeSelectLoader,
   makeSelectLoaders,
+  makeSelectAnimationPosition,
 };

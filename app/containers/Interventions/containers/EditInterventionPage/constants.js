@@ -62,3 +62,7 @@ export const REORDER_QUESTION_LIST =
 
 export const ERROR_DUPLICATE_VARIABLE =
   'app/EditInterventionPage/ERROR_DUPLICATE_VARIABLE';
+export const MAKE_PEEDY_DRAGGABLE =
+  'app/EditInterventionPage/MAKE_PEEDY_DRAGGABLE';
+export const SET_ANIMATION_STOP_POSITION =
+  'app/EditInterventionPage/SET_ANIMATION_STOP_POSITION';

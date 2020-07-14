@@ -150,7 +150,6 @@ function* updateQuestion() {
   const requestURL = `v1/interventions/${intervention.id}/questions/${
     question.id
   }`;
-
   try {
     const response = yield axios.put(requestURL, {
       question,
