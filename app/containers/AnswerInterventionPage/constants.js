@@ -18,3 +18,6 @@ export const SUBMIT_ANSWER_ERROR =
 export const SELECT_ANSWER = 'app/AnswerInterventionPage/SELECT_ANSWER';
 export const SET_QUESTION_INDEX =
   'app/AnswerInterventionPage/SET_QUESTION_INDEX';
+
+export const START_INTERVENTION =
+  'app/AnswerInterventionPage/START_INTERVENTION';

@@ -13,6 +13,7 @@ import {
   SUBMIT_ANSWER_SUCCESS,
   SELECT_ANSWER,
   SET_QUESTION_INDEX,
+  START_INTERVENTION,
 } from './constants';
 
 export const initialState = {
@@ -23,6 +24,7 @@ export const initialState = {
   answersLoading: false,
   answersError: '',
   answers: {},
+  interventionStarted: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -35,19 +37,24 @@ const answerInterventionPageReducer = (
       case FETCH_QUESTIONS:
         draft.questionError = '';
         draft.questionLoading = true;
+        draft.interventionStarted = false;
         break;
+
       case FETCH_QUESTIONS_SUCCESS:
         draft.questionError = '';
         draft.questionLoading = false;
         draft.interventionQuestions = payload.questions;
         break;
+
       case FETCH_QUESTION_FAILURE:
         draft.questionError = payload.error;
         draft.questionLoading = false;
         break;
+
       case SELECT_ANSWER:
         draft.answers[payload.id] = payload;
         break;
+
       case SUBMIT_ANSWER_REQUEST:
         draft.answersError = '';
         draft.answers[payload.answerId] = {
@@ -55,11 +62,13 @@ const answerInterventionPageReducer = (
           loading: true,
         };
         break;
+
       case SUBMIT_ANSWER_SUCCESS:
         draft.answersError = '';
         draft.answers[payload.answerId].loading = false;
         draft.questionIndex = state.questionIndex + 1;
         break;
+
       case SUBMIT_ANSWER_ERROR:
         draft.answersError = payload.error;
         draft.answers[payload.answerId].loading = false;
@@ -69,8 +78,14 @@ const answerInterventionPageReducer = (
           ? state.answers[payload.answerId].answerBody
           : [];
         break;
+
       case SET_QUESTION_INDEX:
         draft.questionIndex = payload.index;
+        break;
+
+      case START_INTERVENTION:
+        draft.interventionStarted = true;
+        break;
     }
   });
 

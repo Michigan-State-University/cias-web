@@ -21,6 +21,10 @@ export default defineMessages({
     id: `${scope}.submitAnswer`,
     defaultMessage: 'Finish intervention',
   },
+  startIntervention: {
+    id: `${scope}.startIntervention`,
+    defaultMessage: 'Start intervention',
+  },
   answerPlaceholder: {
     id: `${scope}.placeholder`,
     defaultMessage: 'Answer the question...',

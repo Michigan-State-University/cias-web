@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Img from 'components/Img';
-import Question from 'models/Intervention/Question';
+import Box from 'components/Box';
 import HoverableBox from 'components/Box/HoverableBox';
+
 import radio from 'assets/svg/radio-button.svg';
 import radioChecked from 'assets/svg/radio-button-checked.svg';
+
+import Question from 'models/Intervention/Question';
 
 const margin = 21;
 
@@ -47,7 +50,7 @@ const SingleQuestion = ({ question, selectAnswer }) => {
                   src={selectedAnswerIndex === index ? radioChecked : radio}
                   mr={16}
                 />
-                {payload}
+                <Box dangerouslySetInnerHTML={{ __html: payload }} />
               </Row>
             </HoverableBox>
           </Row>

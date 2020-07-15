@@ -1,17 +1,9 @@
-import answerInterventionPageReducer from '../reducer';
+import answerInterventionPageReducer, { initialState } from '../reducer';
 /* eslint-disable default-case, no-param-reassign */
 describe('answerInterventionPageReducer', () => {
   let state;
   beforeEach(() => {
-    state = {
-      questionLoading: false,
-      questionError: '',
-      interventionQuestions: [],
-      questionIndex: 0,
-      answersLoading: false,
-      answersError: '',
-      answers: {},
-    };
+    state = initialState;
   });
 
   it('returns the initial state', () => {

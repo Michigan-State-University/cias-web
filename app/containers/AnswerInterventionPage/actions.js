@@ -12,6 +12,7 @@ import {
   SUBMIT_ANSWER_REQUEST,
   SUBMIT_ANSWER_SUCCESS,
   SELECT_ANSWER,
+  START_INTERVENTION,
 } from './constants';
 import { actionBuilder } from '../../utils/actionBuilder';
 
@@ -37,3 +38,5 @@ export const submitAnswerFailure = (answerId, error) =>
 
 export const setQuestionIndex = index =>
   actionBuilder(SUBMIT_ANSWER_ERROR, { index });
+
+export const startIntervention = () => actionBuilder(START_INTERVENTION, {});

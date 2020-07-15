@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -6,9 +6,11 @@ import { connect } from 'react-redux';
 import Column from 'components/Column';
 import Box from 'components/Box';
 import Img from 'components/Img';
+import Loader from 'components/Loader';
 import { StyledInput } from 'components/Input/StyledInput';
 
 import playButton from 'assets/svg/play-button-1.svg';
+import stopButton from 'assets/svg/stop-button-1.svg';
 
 import AudioWrapper from 'utils/audioWrapper';
 import { colors } from 'theme';
@@ -20,15 +22,42 @@ import { updateSpeechSettings } from '../../actions';
 const BUTTON_MARGIN = '10px';
 
 const SpeechBlock = ({ formatMessage, block, updateText, blockIndex, id }) => {
-  const audio = new AudioWrapper(block.audio_url);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
 
-  const playAudio = () => audio.play();
-  const stopAudio = () => audio.stop();
+  const audio = useRef(new AudioWrapper());
+
+  const handleLoad = () => setIsLoading(true);
+  const handleReady = () => setIsLoading(false);
+
+  useEffect(() => {
+    audio.current.onLoading(handleLoad);
+    audio.current.onLoaded(handleReady);
+    audio.current.onEnded(() => setIsPlaying(false));
+
+    audio.current.setSrc(block.audio_url);
+
+    return audio.current.clean;
+  }, [blockIndex]);
+
+  const playAudio = () => audio.current.play();
+  const stopAudio = () => audio.current.stop();
 
   const handleButtonClick = () => {
-    if (block.audio_url)
-      if (audio.stopped) playAudio();
-      else stopAudio();
+    if (!isLoading) {
+      if (isPlaying) stopAudio();
+      else playAudio();
+
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  const button = isPlaying ? stopButton : playButton;
+
+  const renderButton = () => {
+    if (isLoading) return <Loader size={24} type="inline" />;
+
+    return <Img src={button} onClick={handleButtonClick} clickable />;
   };
 
   return (
@@ -44,14 +73,9 @@ const SpeechBlock = ({ formatMessage, block, updateText, blockIndex, id }) => {
             onBlur={val => updateText(blockIndex, val, id)}
           />
         </Box>
-        <Img
-          position="absolute"
-          bottom={BUTTON_MARGIN}
-          right={BUTTON_MARGIN}
-          src={playButton}
-          onClick={handleButtonClick}
-          clickable
-        />
+        <Box position="absolute" bottom={BUTTON_MARGIN} right={BUTTON_MARGIN}>
+          {renderButton()}
+        </Box>
       </Box>
     </Column>
   );

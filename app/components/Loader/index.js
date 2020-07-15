@@ -14,7 +14,7 @@ import Spinner from 'components/Spinner';
 import { FillScreenLoader, InlineLoader } from './styled';
 
 const Loader = ({ color, hidden, size, type }) => {
-  const typeSize = size || type === 'absolute' ? 100 : 50;
+  const typeSize = size || (type === 'absolute' ? 100 : 50);
 
   const fullScreenLoader = (
     <FillScreenLoader data-testid="fullscreen-loader" hidden={hidden}>

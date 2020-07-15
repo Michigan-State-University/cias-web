@@ -45,7 +45,9 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 10px;
-  width: 100%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   height: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -87,7 +89,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
     data-testid="no-content"
     display="flex"
     height="100%"
-    width="100%"
+    width="max-content"
   >
     <div
       className="c2"

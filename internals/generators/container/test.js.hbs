@@ -45,18 +45,14 @@ describe('<{{ properCase name }} />', () => {
    */
   it.skip('Should render and match the snapshot', () => {
 {{#if wantMessages}}
-    const {
-      container: { firstChild },
-    } = render(
+    const { container } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <{{ properCase name }} />
       </IntlProvider>,
     );
 {{else}}
-    const {
-      container: { firstChild },
-    } = render(<{{ properCase name }} />);
+    const { container } = render(<{{ properCase name }} />);
 {{/if}}
-    expect(firstChild).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });

@@ -17,7 +17,6 @@ import { useInjectReducer } from 'utils/injectReducer';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 import { Button } from 'components/Button';
-import { blockTypes } from 'models/Narrator/BlockTypes';
 import makeSelectAnswerInterventionPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -36,6 +35,7 @@ import {
   submitAnswer,
   selectAnswer,
   setQuestionIndex,
+  startIntervention,
 } from './actions';
 
 export function AnswerInterventionPage({
@@ -45,6 +45,7 @@ export function AnswerInterventionPage({
   saveSelectedAnswer,
   submitAnswerRequest,
   setQuestionIndexAction,
+  onStartIntervention,
   answerInterventionPage: {
     interventionQuestions,
     questionError,
@@ -52,10 +53,12 @@ export function AnswerInterventionPage({
     answersError,
     answers,
     questionIndex,
+    interventionStarted,
   },
 }) {
   useInjectReducer({ key: 'answerInterventionPage', reducer });
   useInjectSaga({ key: 'answerInterventionPage', saga });
+
   const currentQuestion = interventionQuestions
     ? interventionQuestions[questionIndex]
     : null;
@@ -95,47 +98,66 @@ export function AnswerInterventionPage({
     );
   };
 
+  const renderPage = () => {
+    if (interventionStarted)
+      return (
+        <>
+          {currentQuestion && (
+            <CharacterAnim
+              blocks={currentQuestion.narrator.blocks}
+              quesitonId={currentQuestionId}
+              settings={currentQuestion.narrator.settings}
+            />
+          )}
+          <AnswerContent>
+            {questionIndex !== 0 && (
+              <BackButton
+                onClick={() => setQuestionIndexAction(questionIndex - 1)}
+              >
+                <FormattedMessage {...messages.previousQuestion} />
+              </BackButton>
+            )}
+            {questionError && <ErrorAlert errorText={questionError} />}
+            {questionLoading && <Spinner />}
+            {currentQuestion && (
+              <>
+                {renderQuestion()}
+                <QuestionActions>
+                  <Button
+                    loading={currentQuestion.loading}
+                    onClick={saveAnswer}
+                    title={formatMessage(
+                      questionIndex !== interventionQuestions.length - 1
+                        ? messages.nextQuestion
+                        : messages.submitAnswer,
+                    )}
+                  />
+                </QuestionActions>
+              </>
+            )}
+            {!currentQuestion && <div> thanks for completing intervention</div>}
+            {answersError && <ErrorAlert errorText={answersError} />}
+          </AnswerContent>
+        </>
+      );
+
+    return (
+      <AnswerContent>
+        <Button
+          onClick={onStartIntervention}
+          title={formatMessage(messages.startIntervention)}
+        />
+      </AnswerContent>
+    );
+  };
+
   return (
     <AnswerInterventionContainer>
-      {currentQuestion && currentQuestion.narrator.settings.animation && (
-        <CharacterAnim
-          blocks={currentQuestion.narrator.blocks.filter(
-            block => block.type === blockTypes[1],
-          )}
-          quesitonId={currentQuestionId}
-        />
-      )}
       <Helmet>
         <title>Answer Intervention</title>
         <meta name="description" content="Answer Intervention" />
       </Helmet>
-      <AnswerContent>
-        {questionIndex !== 0 && (
-          <BackButton onClick={() => setQuestionIndexAction(questionIndex - 1)}>
-            <FormattedMessage {...messages.previousQuestion} />
-          </BackButton>
-        )}
-        {questionError && <ErrorAlert errorText={questionError} />}
-        {questionLoading && <Spinner />}
-        {currentQuestion && (
-          <>
-            {renderQuestion()}
-            <QuestionActions>
-              <Button
-                loading={currentQuestion.loading}
-                onClick={saveAnswer}
-                title={formatMessage(
-                  questionIndex !== interventionQuestions.length - 1
-                    ? messages.nextQuestion
-                    : messages.submitAnswer,
-                )}
-              />
-            </QuestionActions>
-          </>
-        )}
-        {!currentQuestion && <div> thanks for completing intervention</div>}
-        {answersError && <ErrorAlert errorText={answersError} />}
-      </AnswerContent>
+      {renderPage()}
     </AnswerInterventionContainer>
   );
 }
@@ -148,6 +170,7 @@ AnswerInterventionPage.propTypes = {
   fetchQuestionsAction: PropTypes.func,
   submitAnswerRequest: PropTypes.func,
   setQuestionIndexAction: PropTypes.func,
+  onStartIntervention: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -159,6 +182,7 @@ const mapDispatchToProps = {
   submitAnswerRequest: submitAnswer,
   saveSelectedAnswer: selectAnswer,
   setQuestionIndexAction: setQuestionIndex,
+  onStartIntervention: startIntervention,
 };
 
 const withConnect = connect(

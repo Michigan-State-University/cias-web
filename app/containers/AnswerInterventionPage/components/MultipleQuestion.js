@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Img from 'components/Img';
-import Question from 'models/Intervention/Question';
+import Box from 'components/Box';
 import HoverableBox from 'components/Box/HoverableBox';
+
 import checkbox from 'assets/svg/checkbox.svg';
 import checkboxChecked from 'assets/svg/checkbox-checked.svg';
+
+import Question from 'models/Intervention/Question';
 
 const margin = 21;
 
@@ -62,7 +65,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
                   }
                   mr={16}
                 />
-                {payload}
+                <Box dangerouslySetInnerHTML={{ __html: payload }} />
               </Row>
             </HoverableBox>
           </Row>
