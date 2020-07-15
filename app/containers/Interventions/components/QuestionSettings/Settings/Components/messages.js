@@ -31,6 +31,10 @@ export default defineMessages({
     id: `${scope}.proceed_button`,
     defaultMessage: 'Proceed button',
   },
+  required: {
+    id: `${scope}.required`,
+    defaultMessage: 'Required',
+  },
   animation: {
     id: `${scope}.animation`,
     defaultMessage: 'Animation',

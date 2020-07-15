@@ -28,6 +28,9 @@ const orderSettings = settings =>
     ...(!isNullOrUndefined(settings.proceed_button) && {
       proceed_button: settings.proceed_button,
     }),
+    ...(!isNullOrUndefined(settings.required) && {
+      required: settings.required,
+    }),
   };
 
 const SettingsTab = ({

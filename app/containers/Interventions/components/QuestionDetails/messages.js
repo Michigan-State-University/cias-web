@@ -7,4 +7,8 @@ export default defineMessages({
     id: `${scope}.placeholder`,
     defaultMessage: 'Type answer here...',
   },
+  nextQuestion: {
+    id: `${scope}.nextQuestion`,
+    defaultMessage: 'Next question',
+  },
 });
