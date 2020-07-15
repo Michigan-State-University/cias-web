@@ -246,8 +246,10 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.cache.questions = action.payload.questions.map(question =>
           mapQuestionDataForType(question),
         );
-        draft.animationPosition =
-          action.payload.questions[0].narrator.blocks[0].position.posTo;
+        if (action.payload.questions[0].narrator.blocks[0]) {
+          draft.animationPosition =
+            action.payload.questions[0].narrator.blocks[0].position.posTo;
+        }
 
         draft.questions = cloneDeep(draft.cache.questions);
         break;
