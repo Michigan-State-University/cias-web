@@ -3,18 +3,21 @@
 exports[`<Button /> should match the snapshot 1`] = `
 .c0 {
   width: 100%;
-  height: 48px;
+  height: 44px;
   background-color: #107969;
   color: #FFFFFF;
-  border-radius: 10px;
+  border-radius: 100px;
   cursor: pointer;
+  border: none;
+  outline: none;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
 <button
   className="c0"
   color="primary"
   disabled={false}
-  title="test"
   width="100%"
 >
   test

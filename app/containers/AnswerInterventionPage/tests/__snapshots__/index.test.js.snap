@@ -8,9 +8,8 @@ exports[`<AnswerInterventionPage /> Should render and match the snapshot 1`] = `
     class="styled__AnswerContent-sc-5f6i11-1 qmmML"
   >
     <button
-      class="StyledButton-t20ntd-0 lagNgJ"
+      class="StyledButton-t20ntd-0 fgSUzr"
       color="primary"
-      title="Start intervention"
       width="100%"
     >
       Start intervention
