@@ -15,7 +15,7 @@ import { colors } from 'theme';
 import messages from './messages';
 import { PlayerWrapper, Player } from './styled';
 import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
-import { updateQuestionVideo } from '../../containers/EditInterventionPage/actions';
+import { editQuestionRequest } from '../../containers/EditInterventionPage/actions';
 
 const isURLValid = url => url.includes('youtube') || url.includes('vimeo');
 
@@ -26,8 +26,8 @@ const QuestionVideo = ({
 }) => {
   const [hovered, setHovered] = useState(false);
 
-  const setVideoUrl = url => updateVideo(url);
-  const removeVideUrl = () => updateVideo(null);
+  const setVideoUrl = url => updateVideo({ path: 'video_url', value: url });
+  const removeVideUrl = () => updateVideo({ path: 'video_url', value: null });
 
   if (!videoUrl || !isURLValid(videoUrl))
     return (
@@ -84,7 +84,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateVideo: updateQuestionVideo,
+  updateVideo: editQuestionRequest,
 };
 
 const withConnect = connect(

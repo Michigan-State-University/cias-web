@@ -2,11 +2,15 @@ import React from 'react';
 import { render, fireEvent } from 'react-testing-library';
 import 'jest-styled-components';
 import { Provider } from 'react-redux';
-
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 import { createStore } from 'redux';
+
+import { interventionReducer } from 'global/reducers/intervention';
+import { interventionListReducer } from 'global/reducers/interventionList';
+
 import TargetQuestionChooser from '../index';
+import editInterventionPageReducer from '../../../../containers/EditInterventionPage/reducer';
 
 const mockSingleQuestion = (suffix = 1, hasVariable = true) => ({
   id: `test-id-${suffix}`,
@@ -32,27 +36,30 @@ describe('<TargetQuestionChooser />', () => {
         id: 'asd12ca-daiud12',
       },
     },
+    interventionList: {
+      interventions: [],
+      fetchInterventionLoading: false,
+    },
     editInterventionPage: {
-      interventionList: [],
       questions: [mockSingleQuestion(1, true)],
       selectedQuestion: 0,
-      loaders: {
-        interventionListLoading: false,
-      },
     },
-  };
-
-  const props = {
-    onClick: jest.fn(),
-    pattern: { match: '', target: '' },
   };
 
   beforeAll(() => {
     store = createStore(reducer, initialState);
     store.runSaga = () => {};
-    store.injectedReducers = {};
+    store.injectedReducers = {
+      intervention: interventionReducer,
+      editInterventionPage: editInterventionPageReducer,
+    };
     store.injectedSagas = {};
   });
+
+  const props = {
+    onClick: jest.fn(),
+    pattern: { match: '', target: '' },
+  };
 
   it('should match the snapshot', () => {
     const renderedComponent = render(
@@ -90,19 +97,26 @@ describe('<TargetQuestionChooser />', () => {
           id: 'asd12ca-daiud12',
         },
       },
+      interventionList: {
+        interventions: [],
+        fetchInterventionLoading: false,
+      },
       editInterventionPage: {
-        interventionList: [],
         questions: [
           mockSingleQuestion(1, true),
           question,
           mockSingleQuestion(3, true),
         ],
         selectedQuestion: 1,
-        loaders: {
-          interventionListLoading: false,
-        },
       },
     });
+
+    store.runSaga = () => {};
+    store.injectedReducers = {
+      intervention: interventionReducer,
+      editInterventionPage: editInterventionPageReducer,
+    };
+    store.injectedSagas = {};
 
     const { getAllByTestId } = render(
       <Provider store={store}>
@@ -129,23 +143,30 @@ describe('<TargetQuestionChooser />', () => {
           id: 'asd12ca-daiud12',
         },
       },
-      editInterventionPage: {
-        interventionList: [
+      interventionList: {
+        interventions: [
           mockIntervention(1),
           mockIntervention(2),
           mockIntervention(3),
         ],
+        fetchInterventionLoading: false,
+      },
+      editInterventionPage: {
         questions: [
           mockSingleQuestion(1, true),
           question,
           mockSingleQuestion(3, true),
         ],
         selectedQuestion: 1,
-        loaders: {
-          interventionListLoading: false,
-        },
       },
     });
+    store.runSaga = () => {};
+    store.injectedReducers = {
+      intervention: interventionReducer,
+      editInterventionPage: editInterventionPageReducer,
+      interventionList: interventionListReducer,
+    };
+    store.injectedSagas = {};
 
     const {
       getAllByTestId,
@@ -194,19 +215,26 @@ describe('<TargetQuestionChooser />', () => {
           id: 'asd12ca-daiud12',
         },
       },
+      interventionList: {
+        interventions: [],
+        fetchInterventionLoading: false,
+      },
       editInterventionPage: {
-        interventionList: [],
         questions: [
           mockSingleQuestion(1, true),
           question,
           mockSingleQuestion(3, true),
         ],
         selectedQuestion: 1,
-        loaders: {
-          interventionListLoading: true,
-        },
       },
     });
+
+    store.runSaga = () => {};
+    store.injectedReducers = {
+      intervention: interventionReducer,
+      editInterventionPage: editInterventionPageReducer,
+    };
+    store.injectedSagas = {};
 
     const { getByTestId } = render(
       <Provider store={store}>

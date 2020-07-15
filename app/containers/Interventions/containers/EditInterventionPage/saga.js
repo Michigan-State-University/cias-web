@@ -6,26 +6,22 @@ import { dismiss } from 'react-toastify-redux';
 import { showAlert } from 'global/reducers/alerts';
 import { getAllVariables } from 'models/Intervention/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
-import {
-  mapQuestionToStateObject,
-  mapInterventionToStateObject,
-} from 'utils/mapResponseObjects';
+import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { makeSelectIntervention } from 'global/reducers/intervention';
 
 import {
   CREATE_QUESTION_REQUEST,
   GET_QUESTIONS_REQUEST,
   UPDATE_QUESTION_DATA,
-  UPDATE_QUESTION_TITLE,
   ADD_QUESTION_IMAGE,
   DELETE_QUESTION_IMAGE,
-  UPDATE_QUESTION_VIDEO,
   UPDATE_QUESTION_SETTINGS,
-  DELETE_QUESTION,
-  COPY_QUESTION,
+  DELETE_QUESTION_REQUEST,
+  COPY_QUESTION_REQUEST,
   CHANGE_QUESTION_TYPE,
-  GET_INTERVENTION_LIST_REQUEST,
   ERROR_DUPLICATE_VARIABLE,
+  REORDER_QUESTION_LIST,
+  EDIT_QUESTION_REQUEST,
 } from './constants';
 
 import {
@@ -33,34 +29,14 @@ import {
   getQuestionsError,
   createQuestionSuccess,
   createQuestionError,
-  updateQuestionSuccess,
-  updateQuestionError,
+  editQuestionSuccess,
+  editQuestionError,
   updateQuestionImage,
-  deleteQuestionsSucccess,
-  deleteQuestionError,
-  getInterventionListSuccess,
-  getInterventionListError,
+  updateCache,
+  restoreCache,
 } from './actions';
 
 import { makeSelectSelectedQuestion, makeSelectQuestions } from './selectors';
-
-function* getInterventionList() {
-  const requestURL = 'v1/interventions/';
-
-  try {
-    const {
-      data: { data },
-    } = yield axios.get(requestURL);
-
-    yield put(
-      getInterventionListSuccess(
-        data.map(intervention => mapInterventionToStateObject(intervention)),
-      ),
-    );
-  } catch (error) {
-    yield put(getInterventionListError(error));
-  }
-}
 
 function* getQuestions({ payload: { id } }) {
   const requestURL = `v1/interventions/${id}/questions`;
@@ -72,7 +48,7 @@ function* getQuestions({ payload: { id } }) {
       mapQuestionToStateObject(question),
     );
 
-    yield put(getQuestionsSuccess(sortBy(questions, 'order')));
+    yield put(getQuestionsSuccess(sortBy(questions, 'position')));
   } catch (error) {
     yield put(getQuestionsError(error));
   }
@@ -111,10 +87,10 @@ function* addImageQuestion({
 
     const responseQuestion = mapQuestionToStateObject(response.data.data);
     yield put(updateQuestionImage({ url: responseQuestion.image_url }));
-    yield put(updateQuestionSuccess(responseQuestion));
+    yield put(editQuestionSuccess(responseQuestion));
     window.URL.revokeObjectURL(imageUrl);
   } catch (error) {
-    yield put(updateQuestionError(error));
+    yield put(editQuestionError(error));
   }
 }
 
@@ -125,9 +101,9 @@ function* deleteQuestionImage({ payload: { selectedQuestionId } }) {
     const response = yield axios.delete(requestURL);
 
     const responseQuestion = mapQuestionToStateObject(response.data.data);
-    yield put(updateQuestionSuccess(responseQuestion));
+    yield put(editQuestionSuccess(responseQuestion));
   } catch (error) {
-    yield put(updateQuestionError(error));
+    yield put(editQuestionError(error));
   }
 }
 
@@ -143,7 +119,7 @@ function* updateQuestion() {
 
   if (hasDuplicates(variables)) {
     yield put(showAlert(ERROR_DUPLICATE_VARIABLE));
-    return yield put(updateQuestionError());
+    return yield put(editQuestionError());
   }
   yield put(dismiss(ERROR_DUPLICATE_VARIABLE));
 
@@ -157,9 +133,9 @@ function* updateQuestion() {
 
     const responseQuestion = mapQuestionToStateObject(response.data.data);
 
-    return yield put(updateQuestionSuccess(responseQuestion));
+    return yield put(editQuestionSuccess(responseQuestion));
   } catch (error) {
-    return yield put(updateQuestionError(error));
+    return yield put(editQuestionError(error));
   }
 }
 
@@ -169,9 +145,9 @@ function* deleteQuestion({ payload: { questionId, interventionId } }) {
   try {
     yield axios.delete(requestURL);
 
-    yield put(deleteQuestionsSucccess(questionId));
+    yield put(updateCache());
   } catch (error) {
-    yield put(deleteQuestionError(error));
+    yield put(restoreCache(error));
   }
 }
 
@@ -189,19 +165,36 @@ function* copyQuestion({ payload: { questionId, interventionId } }) {
   }
 }
 
+function* reorderQuestions({ payload: { reorderedList, interventionId } }) {
+  const requestURL = `v1/interventions/${interventionId}/questions/position`;
+
+  try {
+    const list = reorderedList.map(el => ({
+      id: el.id,
+      position: el.position,
+    }));
+    yield axios.patch(requestURL, {
+      question: { position: list },
+    });
+
+    yield put(updateCache());
+  } catch (error) {
+    yield put(restoreCache(error));
+  }
+}
+
 export default function* editInterventionPageSaga() {
   yield all([
-    yield takeLatest(GET_INTERVENTION_LIST_REQUEST, getInterventionList),
     yield takeLatest(GET_QUESTIONS_REQUEST, getQuestions),
     yield takeLatest(CREATE_QUESTION_REQUEST, createQuestion),
-    yield takeLatest(UPDATE_QUESTION_DATA, updateQuestion),
-    yield takeLatest(UPDATE_QUESTION_TITLE, updateQuestion),
     yield takeLatest(ADD_QUESTION_IMAGE, addImageQuestion),
     yield takeLatest(DELETE_QUESTION_IMAGE, deleteQuestionImage),
-    yield takeLatest(UPDATE_QUESTION_VIDEO, updateQuestion),
-    yield takeLatest(UPDATE_QUESTION_SETTINGS, updateQuestion),
-    yield takeLatest(DELETE_QUESTION, deleteQuestion),
-    yield takeLatest(COPY_QUESTION, copyQuestion),
+    yield takeLatest(DELETE_QUESTION_REQUEST, deleteQuestion),
+    yield takeLatest(COPY_QUESTION_REQUEST, copyQuestion),
+    yield takeLatest(REORDER_QUESTION_LIST, reorderQuestions),
     yield takeLatest(CHANGE_QUESTION_TYPE, updateQuestion),
+    yield takeLatest(UPDATE_QUESTION_DATA, updateQuestion),
+    yield takeLatest(UPDATE_QUESTION_SETTINGS, updateQuestion),
+    yield takeLatest(EDIT_QUESTION_REQUEST, updateQuestion),
   ]);
 }

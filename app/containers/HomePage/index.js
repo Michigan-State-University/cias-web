@@ -22,7 +22,7 @@ import SingleInterventionPanel from 'components/SingleInterventionPanel';
 import Spinner from 'components/Spinner';
 import {
   interventionListReducer,
-  interventionListSaga,
+  fetchInterventionsSaga,
   makeSelectInterventionList,
   fetchInterventionsRequest,
 } from 'global/reducers/interventionList';
@@ -54,7 +54,7 @@ export function HomePage({
     key: 'interventionList',
     reducer: interventionListReducer,
   });
-  useInjectSaga({ key: 'interventionList', saga: interventionListSaga });
+  useInjectSaga({ key: 'getInterventions', saga: fetchInterventionsSaga });
 
   useEffect(() => {
     fetchInterventions();

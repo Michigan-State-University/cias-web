@@ -27,7 +27,7 @@ import { ToggleableBox, ClampedTitle } from './styled';
 import {
   selectQuestion,
   toggleQuestionSettings,
-  deleteQuestion,
+  deleteQuestionRequest,
   copyQuestionRequest,
 } from '../../containers/EditInterventionPage/actions';
 
@@ -153,7 +153,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   onSelect: selectQuestion,
   toggleSettings: toggleQuestionSettings,
-  removeQuestion: deleteQuestion,
+  removeQuestion: deleteQuestionRequest,
   copyQuestion: copyQuestionRequest,
 };
 

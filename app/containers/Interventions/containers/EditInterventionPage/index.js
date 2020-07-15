@@ -85,16 +85,19 @@ function EditInterventionPage({
 
   const handleReorder = (event, previousIndex, nextIndex) => {
     const newList = reorder(questions, previousIndex, nextIndex);
-    let order = 0;
+    let position = 0;
     const orderdedNewList = newList.map(question => {
-      order += 1;
+      position += 1;
       return {
         ...question,
-        order,
+        position,
       };
     });
 
-    reorderQuestions(orderdedNewList);
+    reorderQuestions({
+      reorderedList: orderdedNewList,
+      interventionId: params.id,
+    });
   };
 
   const renderList = () => {

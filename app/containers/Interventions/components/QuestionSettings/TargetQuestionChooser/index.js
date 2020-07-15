@@ -26,17 +26,21 @@ import {
   makeSelectSelectedQuestionIndex,
 } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import { makeSelectIntervention } from 'global/reducers/intervention';
+import {
+  fetchInterventionsRequest,
+  makeSelectInterventionsLoader,
+  makeSelectInterventions,
+  interventionListReducer,
+  fetchInterventionsSaga,
+} from 'global/reducers/interventionList';
+import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
 
 import { colors, borders, fontSizes, themeColors } from 'theme';
 import Question from 'models/Intervention/Question';
 import Intervention from 'models/Intervention/Intervention';
-import { getInterventionListRequest } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
 import messages from './messages';
-import {
-  makeSelectInterventionList,
-  makeSelectInterventionListLoader,
-} from './selectors';
 
 const TargetQuestionChooser = ({
   intl: { formatMessage },
@@ -51,6 +55,11 @@ const TargetQuestionChooser = ({
   interventionList,
   interventionListLoading,
 }) => {
+  useInjectReducer({
+    key: 'interventionList',
+    reducer: interventionListReducer,
+  });
+  useInjectSaga({ key: 'getInterventions', saga: fetchInterventionsSaga });
   const [isInterventionView, _setIsInterventionView] = useState(false);
   const setIsInterventionView = (value, event) => {
     if (event) event.stopPropagation();
@@ -241,15 +250,15 @@ TargetQuestionChooser.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
-  interventionList: makeSelectInterventionList(),
+  interventionList: makeSelectInterventions(),
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
   currentIndex: makeSelectSelectedQuestionIndex(),
-  interventionListLoading: makeSelectInterventionListLoader(),
+  interventionListLoading: makeSelectInterventionsLoader(),
 });
 
 const mapDispatchToProps = {
-  getInterventionList: getInterventionListRequest,
+  getInterventionList: fetchInterventionsRequest,
 };
 
 const withConnect = connect(

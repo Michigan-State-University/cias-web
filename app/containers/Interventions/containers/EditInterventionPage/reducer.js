@@ -1,48 +1,41 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
-
-import {
-  textboxQuestion,
-  numberQuestion,
-  gridQuestion,
-} from 'models/Intervention/QuestionTypes';
+import set from 'lodash/set';
 
 import {
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
-  UPDATE_QUESTION_TITLE,
   ADD_QUESTION_IMAGE,
   UPDATE_QUESTION_IMAGE,
   DELETE_QUESTION_IMAGE,
-  UPDATE_QUESTION_VIDEO,
   GET_QUESTIONS_SUCCESS,
   CREATE_QUESTION_SUCCESS,
-  UPDATE_QUESTION_SUCCESS,
-  UPDATE_QUESTION_ERROR,
   TOGGLE_QUESTION_SETTINGS,
   UPDATE_QUESTION_SETTINGS,
   UPDATE_PREVIEW_ANIMATION,
-  DELETE_QUESTION,
-  DELETE_QUESTION_SUCCESS,
-  COPY_QUESTION,
-  DELETE_QUESTION_ERROR,
+  DELETE_QUESTION_REQUEST,
+  COPY_QUESTION_REQUEST,
   CHANGE_QUESTION_TYPE,
   REORDER_QUESTION_LIST,
-  GET_INTERVENTION_LIST_REQUEST,
-  GET_INTERVENTION_LIST_SUCCESS,
-  GET_INTERVENTION_LIST_ERROR,
   GET_QUESTIONS_REQUEST,
   GET_QUESTIONS_ERROR,
+  UPDATE_CACHE,
+  RESTORE_CACHE,
+  EDIT_QUESTION_REQUEST,
+  EDIT_QUESTION_SUCCESS,
+  EDIT_QUESTION_ERROR,
   MAKE_PEEDY_DRAGGABLE,
   SET_ANIMATION_STOP_POSITION,
 } from './constants';
-
 import questionDataReducer from '../../components/QuestionData/reducer';
 import questionSettingsReducer from '../../components/QuestionSettings/Settings/reducer';
-import { instantiateEmptyQuestion } from './utils';
+import {
+  instantiateEmptyQuestion,
+  mapQuestionDataForType,
+  getAnimationPosition,
+} from './utils';
 
 export const initialState = {
-  interventionList: [],
   questions: [],
   questionSettingsVisibility: false,
   selectedQuestion: 0,
@@ -59,60 +52,6 @@ export const initialState = {
     interventionListLoading: false,
     questionListLoading: true,
   },
-};
-
-const mapQuestionDataForType = question => {
-  switch (question.type) {
-    case textboxQuestion.id:
-    case numberQuestion.id:
-      return {
-        ...question,
-        body: {
-          ...question.body,
-          data: question.body.data.length
-            ? question.body.data
-            : [{ variable: { name: '', value: '1' }, payload: '' }],
-        },
-      };
-
-    case gridQuestion.id:
-      const exampleData = {
-        variable: { name: '', value: '  1' },
-        payload: {
-          rows: [],
-          columns: [],
-        },
-      };
-      return {
-        ...question,
-        body: {
-          ...question.body,
-          data: question.body.data.length ? question.body.data : [exampleData],
-        },
-      };
-
-    default:
-      return question;
-  }
-};
-
-const getAnimationPosition = (draft, state, payload) => {
-  if (draft.selectedQuestion !== payload) {
-    // set position to first block of new question
-    if (state.questions[payload].narrator.blocks[0])
-      return state.questions[payload].narrator.blocks[0].position.posTo;
-    for (let i = payload - 1; i >= 0; i -= 1) {
-      const {
-        narrator: { blocks: previousQuestionBlocks },
-      } = state.questions[i];
-      const lastBlock =
-        previousQuestionBlocks[previousQuestionBlocks.length - 1];
-      if (lastBlock) {
-        return lastBlock.position.posTo;
-      }
-    }
-    return { x: 0, y: 0 };
-  }
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -147,12 +86,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.selectedQuestion = action.payload;
         break;
 
-      case UPDATE_QUESTION_TITLE:
-        draft.questions[state.selectedQuestion] = {
-          ...draft.questions[state.selectedQuestion],
-          title: action.payload,
-        };
-        break;
+      // backend connected states
       case ADD_QUESTION_IMAGE:
         draft.questions[state.selectedQuestion] = {
           ...draft.questions[state.selectedQuestion],
@@ -169,64 +103,14 @@ const editInterventionPageReducer = (state = initialState, action) =>
         };
         break;
 
-      case UPDATE_QUESTION_VIDEO:
-        draft.questions[state.selectedQuestion] = {
-          ...draft.questions[state.selectedQuestion],
-          video_url: action.payload,
-        };
-        break;
-
-      case UPDATE_QUESTION_DATA:
-        draft.questions[state.selectedQuestion] = {
-          ...draft.questions[state.selectedQuestion],
-          ...questionDataReducer(
-            state.questions[state.selectedQuestion],
-            action.payload,
-          ),
-        };
-        break;
-
-      case UPDATE_QUESTION_SETTINGS:
-        draft.questions[state.selectedQuestion] = {
-          ...draft.questions[state.selectedQuestion],
-          ...questionSettingsReducer(
-            state.questions,
-            action.payload,
-            state.selectedQuestion,
-          ),
-        };
-        break;
-
-      case DELETE_QUESTION_SUCCESS:
-        draft.cache.questions = draft.cache.questions.filter(
-          question => question.id !== action.payload.questionId,
-        );
-        break;
-
-      case DELETE_QUESTION_ERROR:
-        draft.questions = cloneDeep(draft.cache.questions);
-        break;
-
-      case DELETE_QUESTION:
+      case DELETE_QUESTION_REQUEST:
         draft.questions = draft.questions.filter(
           question => question.id !== action.payload.questionId,
         );
         break;
 
-      case COPY_QUESTION:
+      case COPY_QUESTION_REQUEST:
         draft.questions.push(action.payload.copied);
-        break;
-
-      case UPDATE_QUESTION_SUCCESS:
-        draft.cache.questions[state.selectedQuestion] = mapQuestionDataForType(
-          action.payload.question,
-        );
-        break;
-
-      case UPDATE_QUESTION_ERROR:
-        draft.questions[state.selectedQuestion] = cloneDeep(
-          draft.cache.questions[state.selectedQuestion],
-        );
         break;
 
       case CREATE_QUESTION_SUCCESS:
@@ -271,21 +155,53 @@ const editInterventionPageReducer = (state = initialState, action) =>
       case REORDER_QUESTION_LIST:
         draft.questions = action.payload.reorderedList;
         break;
-      case GET_INTERVENTION_LIST_REQUEST:
-        if (!draft.interventionList || draft.interventionList.length === 0)
-          draft.loaders.interventionListLoading = true;
+
+      case EDIT_QUESTION_REQUEST:
+        set(
+          draft.questions[state.selectedQuestion],
+          action.payload.path,
+          action.payload.value,
+        );
         break;
 
-      case GET_INTERVENTION_LIST_SUCCESS:
-        draft.loaders.interventionListLoading = false;
-        draft.interventionList = action.payload.interventions;
+      case UPDATE_QUESTION_DATA:
+        draft.questions[state.selectedQuestion] = {
+          ...draft.questions[state.selectedQuestion],
+          ...questionDataReducer(
+            state.questions[state.selectedQuestion],
+            action.payload,
+          ),
+        };
         break;
 
-      case GET_INTERVENTION_LIST_ERROR:
-        draft.interventionList = draft.interventionList.length
-          ? draft.interventionList
-          : [draft.intervention];
-        draft.loaders.interventionListLoading = false;
+      case UPDATE_QUESTION_SETTINGS:
+        draft.questions[state.selectedQuestion] = {
+          ...draft.questions[state.selectedQuestion],
+          ...questionSettingsReducer(
+            state.questions,
+            action.payload,
+            state.selectedQuestion,
+          ),
+        };
+        break;
+
+      case EDIT_QUESTION_SUCCESS:
+        draft.cache.questions[state.selectedQuestion] = mapQuestionDataForType(
+          action.payload.question,
+        );
+        break;
+
+      case EDIT_QUESTION_ERROR:
+        draft.questions[state.selectedQuestion] = cloneDeep(
+          draft.cache.questions[state.selectedQuestion],
+        );
+        break;
+
+      case UPDATE_CACHE:
+        draft.cache.questions = draft.questions;
+        break;
+      case RESTORE_CACHE:
+        draft.questions = draft.cache.questions;
         break;
       case MAKE_PEEDY_DRAGGABLE:
         draft.draggable = action.payload.draggable;

@@ -25,7 +25,7 @@ import {
   makeSelectSelectedQuestionIndex,
 } from '../../containers/EditInterventionPage/selectors';
 
-import { updateQuestionTitle } from '../../containers/EditInterventionPage/actions';
+import { editQuestionRequest } from '../../containers/EditInterventionPage/actions';
 
 const QuestionDetails = props => (
   <BackgroundBox width="100%" display="flex" overflow="scroll">
@@ -64,7 +64,9 @@ const renderQuestionDetails = ({
                         rows="4"
                         placeholder={formatMessage(messages.placeholder)}
                         value={selectedQuestion.title}
-                        onCheck={updateTitle}
+                        onCheck={val =>
+                          updateTitle({ path: 'title', value: val })
+                        }
                         autoSize
                         richText
                       />
@@ -108,7 +110,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateTitle: title => updateQuestionTitle(title),
+  updateTitle: editQuestionRequest,
 };
 
 const withConnect = connect(

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest, all } from 'redux-saga/effects';
+import { put, takeLatest } from 'redux-saga/effects';
 
 import { mapInterventionToStateObject } from 'utils/mapResponseObjects';
 import { FETCH_INTERVENTIONS_REQUEST } from './constants';
@@ -20,8 +20,6 @@ function* fetchInterventions() {
   }
 }
 
-export function* interventionListSaga() {
-  yield all([
-    yield takeLatest(FETCH_INTERVENTIONS_REQUEST, fetchInterventions),
-  ]);
+export function* fetchInterventionsSaga() {
+  yield takeLatest(FETCH_INTERVENTIONS_REQUEST, fetchInterventions);
 }

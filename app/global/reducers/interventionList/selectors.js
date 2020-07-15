@@ -8,3 +8,15 @@ export const makeSelectInterventionList = () =>
     interventionList,
     interventionListState => interventionListState,
   );
+
+export const makeSelectInterventions = () =>
+  createSelector(
+    interventionList,
+    interventionListState => interventionListState.interventions,
+  );
+
+export const makeSelectInterventionsLoader = () =>
+  createSelector(
+    interventionList,
+    interventionListState => interventionListState.fetchInterventionLoading,
+  );

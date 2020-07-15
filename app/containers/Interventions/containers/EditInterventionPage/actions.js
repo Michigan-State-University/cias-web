@@ -2,69 +2,63 @@ import { actionBuilder } from 'utils/actionBuilder';
 import {
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
-  UPDATE_QUESTION_TITLE,
   ADD_QUESTION_IMAGE,
   UPDATE_QUESTION_IMAGE,
   DELETE_QUESTION_IMAGE,
-  UPDATE_QUESTION_VIDEO,
   CREATE_QUESTION_REQUEST,
   CREATE_QUESTION_ERROR,
   CREATE_QUESTION_SUCCESS,
-  UPDATE_QUESTION_REQUEST,
-  UPDATE_QUESTION_ERROR,
-  UPDATE_QUESTION_SUCCESS,
   GET_QUESTIONS_REQUEST,
   GET_QUESTIONS_SUCCESS,
   GET_QUESTIONS_ERROR,
   TOGGLE_QUESTION_SETTINGS,
   UPDATE_QUESTION_SETTINGS,
   UPDATE_PREVIEW_ANIMATION,
-  DELETE_QUESTION,
-  DELETE_QUESTION_SUCCESS,
-  COPY_QUESTION,
-  DELETE_QUESTION_ERROR,
+  DELETE_QUESTION_REQUEST,
+  COPY_QUESTION_REQUEST,
   CHANGE_QUESTION_TYPE,
   REORDER_QUESTION_LIST,
-  GET_INTERVENTION_LIST_REQUEST,
-  GET_INTERVENTION_LIST_SUCCESS,
-  GET_INTERVENTION_LIST_ERROR,
+  UPDATE_CACHE,
+  RESTORE_CACHE,
+  EDIT_QUESTION_REQUEST,
+  EDIT_QUESTION_SUCCESS,
+  EDIT_QUESTION_ERROR,
   MAKE_PEEDY_DRAGGABLE,
   SET_ANIMATION_STOP_POSITION,
 } from './constants';
 
+// application state actions
 const toggleQuestionSettings = index =>
   actionBuilder(TOGGLE_QUESTION_SETTINGS, { index });
-
 const selectQuestion = index => actionBuilder(SELECT_QUESTION, index);
-const updateQuestionTitle = title =>
-  actionBuilder(UPDATE_QUESTION_TITLE, title);
+const updatePreviewAnimation = animation =>
+  actionBuilder(UPDATE_PREVIEW_ANIMATION, { animation });
+
+// image actions
 const addQuestionImage = payload => actionBuilder(ADD_QUESTION_IMAGE, payload);
 const updateQuestionImage = imageUrl =>
   actionBuilder(UPDATE_QUESTION_IMAGE, imageUrl);
 const deleteQuestionImage = payload =>
   actionBuilder(DELETE_QUESTION_IMAGE, payload);
-const updateQuestionVideo = videoUrl =>
-  actionBuilder(UPDATE_QUESTION_VIDEO, videoUrl);
+
+// data action
 const updateQuestionData = data => actionBuilder(UPDATE_QUESTION_DATA, data);
+
+// settings action
 const updateQuestionSettings = data =>
   actionBuilder(UPDATE_QUESTION_SETTINGS, data);
-const deleteQuestion = payload => actionBuilder(DELETE_QUESTION, payload);
-const copyQuestionRequest = payload => actionBuilder(COPY_QUESTION, payload);
+
+// managing question actions
+const copyQuestionRequest = payload =>
+  actionBuilder(COPY_QUESTION_REQUEST, payload);
 const changeQuestionType = newType =>
   actionBuilder(CHANGE_QUESTION_TYPE, { newType });
+const deleteQuestionRequest = payload =>
+  actionBuilder(DELETE_QUESTION_REQUEST, payload);
+const reorderQuestionList = payload =>
+  actionBuilder(REORDER_QUESTION_LIST, payload);
 
-const deleteQuestionsSucccess = questionId =>
-  actionBuilder(DELETE_QUESTION_SUCCESS, { questionId });
-const deleteQuestionError = error =>
-  actionBuilder(DELETE_QUESTION_ERROR, { error });
-
-const getInterventionListRequest = () =>
-  actionBuilder(GET_INTERVENTION_LIST_REQUEST, {});
-const getInterventionListSuccess = interventions =>
-  actionBuilder(GET_INTERVENTION_LIST_SUCCESS, { interventions });
-const getInterventionListError = error =>
-  actionBuilder(GET_INTERVENTION_LIST_ERROR, { error });
-
+// create question actions
 const createQuestionRequest = (question, id) =>
   actionBuilder(CREATE_QUESTION_REQUEST, { question, id });
 const createQuestionSuccess = question =>
@@ -72,23 +66,24 @@ const createQuestionSuccess = question =>
 const createQuestionError = error =>
   actionBuilder(CREATE_QUESTION_ERROR, { error });
 
-const updateQuestionRequest = () => actionBuilder(UPDATE_QUESTION_REQUEST, {});
-const updateQuestionSuccess = question =>
-  actionBuilder(UPDATE_QUESTION_SUCCESS, { question });
-const updateQuestionError = error =>
-  actionBuilder(UPDATE_QUESTION_ERROR, { error });
-
+// get question actions
 const getQuestionsRequest = id => actionBuilder(GET_QUESTIONS_REQUEST, { id });
 const getQuestionsSuccess = questions =>
   actionBuilder(GET_QUESTIONS_SUCCESS, { questions });
 const getQuestionsError = error =>
   actionBuilder(GET_QUESTIONS_ERROR, { error });
 
-const updatePreviewAnimation = animation =>
-  actionBuilder(UPDATE_PREVIEW_ANIMATION, { animation });
+// edit question actions
+const editQuestionRequest = payload =>
+  actionBuilder(EDIT_QUESTION_REQUEST, payload);
+const editQuestionSuccess = question =>
+  actionBuilder(EDIT_QUESTION_SUCCESS, { question });
+const editQuestionError = error =>
+  actionBuilder(EDIT_QUESTION_ERROR, { error });
 
-const reorderQuestionList = reorderedList =>
-  actionBuilder(REORDER_QUESTION_LIST, { reorderedList });
+// common actions
+const updateCache = () => actionBuilder(UPDATE_CACHE, {});
+const restoreCache = error => actionBuilder(RESTORE_CACHE, { error });
 
 const setPeedyDraggable = draggable =>
   actionBuilder(MAKE_PEEDY_DRAGGABLE, { draggable });
@@ -101,30 +96,25 @@ export {
   selectQuestion,
   updateQuestionData,
   updateQuestionSettings,
-  updateQuestionTitle,
   addQuestionImage,
   updateQuestionImage,
   deleteQuestionImage,
-  updateQuestionVideo,
-  getInterventionListRequest,
-  getInterventionListSuccess,
-  getInterventionListError,
   createQuestionRequest,
   createQuestionSuccess,
   createQuestionError,
-  updateQuestionRequest,
-  updateQuestionSuccess,
-  updateQuestionError,
   getQuestionsRequest,
   getQuestionsSuccess,
   getQuestionsError,
   updatePreviewAnimation,
-  deleteQuestion,
-  deleteQuestionsSucccess,
+  deleteQuestionRequest,
   copyQuestionRequest,
-  deleteQuestionError,
   changeQuestionType,
   reorderQuestionList,
+  updateCache,
+  restoreCache,
+  editQuestionRequest,
+  editQuestionSuccess,
+  editQuestionError,
   setPeedyDraggable,
   setAnimationStopPosition,
 };
