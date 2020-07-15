@@ -22,6 +22,11 @@ class AudioWrapper extends Audio {
   onErrorHandler = null;
 
   /**
+   * Function executed when started playing audio
+   */
+  onPlayHandler = null;
+
+  /**
    * Stops the current playback.
    */
   stop = () => {
@@ -68,6 +73,14 @@ class AudioWrapper extends Audio {
   };
 
   /**
+   * Set a function to execute when start playing audio
+   */
+  onPlay = onPlay => {
+    this.onPlayHandler = onPlay;
+    this.addEventListener('play', onPlay);
+  };
+
+  /**
    * Removes event listeners.
    */
   clean = () => {
@@ -79,6 +92,8 @@ class AudioWrapper extends Audio {
       this.removeEventListener('ended', this.onEndedHandler);
     if (this.onErrorHandler)
       this.removeEventListener('error', this.onErrorHandler);
+    if (this.onPlayHandler)
+      this.removeEventListener('play', this.onPlayHandler);
   };
 
   /**
