@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Img from 'components/Img';
-import Box from 'components/Box';
 import HoverableBox from 'components/Box/HoverableBox';
 
 import checkbox from 'assets/svg/checkbox.svg';
 import checkboxChecked from 'assets/svg/checkbox-checked.svg';
+import { QuestionOption } from 'containers/AnswerInterventionPage/styled';
 
 import Question from 'models/Intervention/Question';
 
@@ -19,7 +19,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
 
   const check = (payload, value, name, index) => {
     const selectedAnswer = {
-      variable: name,
+      var: name,
       payload,
       value,
     };
@@ -65,7 +65,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
                   }
                   mr={16}
                 />
-                <Box dangerouslySetInnerHTML={{ __html: payload }} />
+                <QuestionOption dangerouslySetInnerHTML={{ __html: payload }} />
               </Row>
             </HoverableBox>
           </Row>

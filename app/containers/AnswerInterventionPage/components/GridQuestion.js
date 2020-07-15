@@ -25,7 +25,7 @@ const GridQuestion = ({ question, selectAnswer }) => {
 
   const check = (payload, value, name, rowIndex, columnIndex) => {
     const selectedAnswer = {
-      variable: name,
+      var: name,
       payload,
       value,
     };

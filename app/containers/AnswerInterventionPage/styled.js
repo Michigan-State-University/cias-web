@@ -24,6 +24,11 @@ export const QuestionTitle = styled.div`
   font-size: 1.3rem;
 `;
 
+export const QuestionOption = styled.div`
+  font-weight: normal;
+  font-size: 1rem;
+`;
+
 export const BackButton = styled.div`
   font-weight: bold;
   margin-bottom: 10px;

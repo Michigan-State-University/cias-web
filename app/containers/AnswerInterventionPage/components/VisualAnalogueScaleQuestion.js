@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Column from 'components/Column';
@@ -24,6 +24,16 @@ const VisualAnalogueScaleQuestion = ({
       variable: { name },
     },
   } = question;
+
+  useEffect(() => {
+    selectAnswer([
+      {
+        var: name,
+        payload: value,
+      },
+    ]);
+  }, []);
+
   return (
     <Column mt={10} mb={10}>
       <Box width="100%">
@@ -37,7 +47,7 @@ const VisualAnalogueScaleQuestion = ({
               onAfterChange={() => {
                 selectAnswer([
                   {
-                    variable: name,
+                    var: name,
                     payload: answerValue,
                   },
                 ]);

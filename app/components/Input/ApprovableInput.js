@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import 'react-quill/dist/quill.bubble.css';
 
+import isNumber from 'lodash/isNumber';
 import Column from '../Column';
 import Row from '../Row';
 import { Input } from './index';
@@ -49,6 +50,7 @@ const ApprovableInput = props => {
     richText,
     autoSize,
     fontSize,
+    mr,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [focused, setfocused] = useState(false);
@@ -94,7 +96,7 @@ const ApprovableInput = props => {
           width="100%"
           height="60px"
           {...(rows ? { rows, height: 'auto' } : {})}
-          mr={9}
+          mr={isNumber(mr) ? mr : 9}
           value={value}
           onChange={event => onInputChange(event.target.value)}
           onFocus={() => setfocused(true)}
@@ -107,7 +109,7 @@ const ApprovableInput = props => {
     return (
       <Input
         height="60px"
-        mr={9}
+        mr={isNumber(mr) ? mr : 9}
         textAlign={textAlign}
         value={value}
         onChange={event => onInputChange(event.target.value)}
@@ -139,6 +141,7 @@ ApprovableInput.propTypes = {
   richText: PropTypes.bool,
   autoSize: PropTypes.bool,
   fontSize: PropTypes.number,
+  mr: PropTypes.number,
 };
 
 ApprovableInput.defaultProps = {

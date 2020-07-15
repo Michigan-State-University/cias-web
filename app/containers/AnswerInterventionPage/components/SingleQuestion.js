@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Img from 'components/Img';
-import Box from 'components/Box';
 import HoverableBox from 'components/Box/HoverableBox';
 
 import radio from 'assets/svg/radio-button.svg';
 import radioChecked from 'assets/svg/radio-button-checked.svg';
+import { QuestionOption } from 'containers/AnswerInterventionPage/styled';
 
 import Question from 'models/Intervention/Question';
 
@@ -37,7 +37,7 @@ const SingleQuestion = ({ question, selectAnswer }) => {
               onClick={() => {
                 selectAnswer([
                   {
-                    variable: name,
+                    var: name,
                     payload,
                     value,
                   },
@@ -50,7 +50,7 @@ const SingleQuestion = ({ question, selectAnswer }) => {
                   src={selectedAnswerIndex === index ? radioChecked : radio}
                   mr={16}
                 />
-                <Box dangerouslySetInnerHTML={{ __html: payload }} />
+                <QuestionOption dangerouslySetInnerHTML={{ __html: payload }} />
               </Row>
             </HoverableBox>
           </Row>

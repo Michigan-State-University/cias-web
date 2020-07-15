@@ -10,19 +10,21 @@ import messages from './messages';
 
 const TextBoxQuestion = ({ question, selectAnswer, formatMessage }) => {
   const {
-    body: { variable },
+    body: {
+      variable: { name },
+    },
   } = question;
   return (
     <Box my={10} bg={themeColors.highlight}>
       <Row>
         <TextArea
           transparent
-          placeholder={formatMessage(messages.answerPlaceholder)}
+          placeholder={formatMessage(messages.textPlaceholder)}
           rows="5"
           width="100%"
           onChange={e => {
             selectAnswer({
-              variable,
+              var: name,
               payload: e.target.value,
             });
           }}
