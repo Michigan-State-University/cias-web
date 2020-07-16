@@ -91,17 +91,17 @@ const CharacterAnim = ({ blocks, quesitonId, settings }) => {
                 anim.name === (blocks[0] ? blocks[0].animation : undefined),
             ),
           };
+
+        case bodyAnimationType:
+          return loadedAnimations.current[0];
+
         default:
           break;
       }
     }
-
-    return loadedAnimations.current[0];
   };
 
   useEffect(() => {
-    stopSpeech();
-
     const fetch = async () => {
       const { bodyAnimations, speechAnimations } = await loadAnimations();
       loadedAnimations.current = bodyAnimations;
@@ -115,6 +115,8 @@ const CharacterAnim = ({ blocks, quesitonId, settings }) => {
       });
     };
     fetch();
+
+    return stopSpeech;
   }, [quesitonId]);
 
   const changeBlock = () => {
