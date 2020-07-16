@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
 import Lottie from 'react-lottie';
+import Draggable from 'react-draggable';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -9,9 +10,11 @@ import { createStructuredSelector } from 'reselect';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 import getPause from 'utils/animations/getPause';
 import { autoRestAnimations } from 'utils/animations/animationsNames';
+import {
+  setAnimationStopPosition,
+  updatePreviewAnimation,
+} from 'containers/Interventions/containers/EditInterventionPage/actions';
 
-import Draggable from 'react-draggable';
-import { setAnimationStopPosition } from 'containers/Interventions/containers/EditInterventionPage/actions';
 import { NarratorContainer } from './styled';
 import {
   makeSelectPreviewAnimation,
@@ -24,10 +27,12 @@ const lottieStyles = {
 };
 
 const QuestionNarrator = ({
+  questionId,
   animation,
   draggable,
   setOffset,
   animationPositionStored,
+  updateNarratorPreviewAnimation,
 }) => {
   const [loadedAnimations, setLoadedAnimations] = useState([]);
   const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
@@ -52,6 +57,12 @@ const QuestionNarrator = ({
       fetchJSON();
     }
   }, [animation]);
+
+  useDidUpdateEffect(() => {
+    const { anim } = animationRef.current;
+    anim.stop();
+    updateNarratorPreviewAnimation('standStill');
+  }, [questionId]);
 
   useEffect(() => {
     setDragPosition(animationPositionStored);
@@ -127,6 +138,8 @@ QuestionNarrator.propTypes = {
   draggable: PropTypes.bool,
   setOffset: PropTypes.func,
   animationPositionStored: PropTypes.object,
+  questionId: PropTypes.string,
+  updateNarratorPreviewAnimation: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -137,6 +150,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   setOffset: setAnimationStopPosition,
+  updateNarratorPreviewAnimation: updatePreviewAnimation,
 };
 
 const withConnect = connect(

@@ -18,6 +18,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 
 import Loader from 'components/Loader';
 import ErrorAlert from 'components/ErrorAlert';
+import H1 from 'components/H1';
 import SingleInterventionPanel from 'components/SingleInterventionPanel';
 import Spinner from 'components/Spinner';
 import {
@@ -69,10 +70,10 @@ export function HomePage({
   if (fetchInterventionLoading || !interventions) return <Loader />;
   return (
     <HomePageContainer>
-      <h2>
-        <FormattedMessage {...messages.myIntervention} />
-      </h2>
       <Container>
+        <H1 my={35}>
+          <FormattedMessage {...messages.myIntervention} />
+        </H1>
         <Row>
           {wrapWithCol(
             <SingleInterventionPanel

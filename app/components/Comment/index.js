@@ -3,7 +3,6 @@ import { fontSizes, fontFamily, lineHeights, colors } from 'theme';
 import { margin, text } from '../BaseComponentStyles';
 
 const Comment = styled.p`
-  margin: 0;
   font-family: ${fontFamily};
   font-size: ${fontSizes.small};
   line-height: ${lineHeights.small};

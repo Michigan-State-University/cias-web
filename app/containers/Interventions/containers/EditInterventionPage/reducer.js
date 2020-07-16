@@ -1,5 +1,6 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
+import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
 
 import {
@@ -130,7 +131,10 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.cache.questions = action.payload.questions.map(question =>
           mapQuestionDataForType(question),
         );
-        if (action.payload.questions[0].narrator.blocks[0]) {
+        if (
+          !isEmpty(action.payload.questions) &&
+          action.payload.questions[0].narrator.blocks[0]
+        ) {
           draft.animationPosition =
             action.payload.questions[0].narrator.blocks[0].position.posTo;
         }

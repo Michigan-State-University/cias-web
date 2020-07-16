@@ -35,7 +35,8 @@ const SpeechBlock = ({ formatMessage, block, updateText, blockIndex, id }) => {
     audio.current.onLoaded(handleReady);
     audio.current.onEnded(() => setIsPlaying(false));
 
-    audio.current.setSrc(block.audio_url);
+    const { audio_url: audioUrl } = block;
+    if (audioUrl) audio.current.setSrc(audioUrl);
 
     return audio.current.clean;
   }, [blockIndex]);

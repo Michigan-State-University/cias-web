@@ -16,5 +16,4 @@ export const ChipsText = styled.p`
   font-size: ${fontSizes.medium};
   line-height: ${lineHeights.regular};
   color: ${({ isActive }) => (isActive ? colors.white : colors.azure)};
-  margin: 0;
 `;

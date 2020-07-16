@@ -13,7 +13,8 @@ import messages from './messages';
 
 const NoContent = ({ image, text, alt }) => (
   <Box
-    width="max-content"
+    width="100%"
+    minWidth="max-content"
     height="100%"
     display="flex"
     justify="center"

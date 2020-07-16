@@ -14,7 +14,6 @@ exports[`<Chips /> should match the snapshot 1`] = `
   font-size: 14px;
   line-height: 150%;
   color: #0086F8;
-  margin: 0;
 }
 
 <div

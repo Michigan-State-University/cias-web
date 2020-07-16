@@ -183,7 +183,6 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
 }
 
 .c7 {
-  margin: 0;
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;

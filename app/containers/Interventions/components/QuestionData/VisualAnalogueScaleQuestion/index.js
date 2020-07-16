@@ -61,9 +61,8 @@ const VisualAnalogueScaleQuestion = ({
             <Box hoverColor={colors.linkWater} padding={5}>
               <StyledInput
                 width={120}
-                px={0}
                 py={9}
-                textAlign="center"
+                textAlign="left"
                 placeholder={formatMessage(messages.startValue)}
                 value={startValue}
                 onBlur={value => updateLabel(value, 'start_value')}
@@ -73,9 +72,8 @@ const VisualAnalogueScaleQuestion = ({
             <Box hoverColor={colors.linkWater} padding={5}>
               <StyledInput
                 width={120}
-                px={0}
                 py={9}
-                textAlign="center"
+                textAlign="right"
                 placeholder={formatMessage(messages.endValue)}
                 value={endValue}
                 onBlur={value => updateLabel(value, 'end_value')}

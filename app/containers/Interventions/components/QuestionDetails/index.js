@@ -43,18 +43,20 @@ const QuestionDetails = props => (
 const renderQuestionDetails = ({ selectedQuestion }) => {
   if (selectedQuestion != null) {
     const {
-      video,
-      image,
-      title,
-      subtitle,
-      proceed_button: proceedButton,
-    } = selectedQuestion.settings;
-
-    const { settings: { animation } = {} } = selectedQuestion.narrator || {};
+      id,
+      settings: {
+        video,
+        image,
+        title,
+        subtitle,
+        proceed_button: proceedButton,
+      } = {},
+      narrator: { settings: { animation } = {} } = {},
+    } = selectedQuestion || {};
 
     return (
       <Column position="relative" zIndex={0}>
-        {animation && <QuestionNarrator />}
+        {animation && <QuestionNarrator questionId={id} />}
         <Row justify="center" filled>
           <Column sm={10} justify="center">
             {title && (

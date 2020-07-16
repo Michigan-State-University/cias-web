@@ -92,7 +92,6 @@ Object {
 }
 
 .c7 {
-  margin: 0;
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -201,7 +200,7 @@ Object {
                   src="IMAGE_MOCK"
                 />
                 <p
-                  class="Text-sc-2lza2m-0 kQAkiC"
+                  class="Text-sc-2lza2m-0 frwakD"
                   overflow="hidden"
                 >
                   Test title 1
@@ -363,10 +362,11 @@ Object {
   height: auto;
   display: block;
   border-radius: 10px;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 100%;
   height: 100%;
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -424,7 +424,7 @@ Object {
                   data-testid="no-content"
                   display="flex"
                   height="100%"
-                  width="max-content"
+                  width="100%"
                 >
                   <div
                     class="c6"
@@ -470,11 +470,11 @@ Object {
               class="Box-sc-14m3exe-0 iRYdJy"
             >
               <div
-                class="Box-sc-14m3exe-0 gzIjIu"
+                class="Box-sc-14m3exe-0 vMTUg"
                 data-testid="no-content"
                 display="flex"
                 height="100%"
-                width="max-content"
+                width="100%"
               >
                 <div
                   class="Column-sc-1n6divy-0 itgCtL"

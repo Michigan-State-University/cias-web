@@ -76,6 +76,7 @@ const GlobalStyle = createGlobalStyle`
   p,
   label {
     line-height: 1.5em;
+    margin: 0;
   }
 `;
 
