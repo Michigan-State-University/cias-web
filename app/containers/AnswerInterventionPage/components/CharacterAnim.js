@@ -203,9 +203,7 @@ const CharacterAnim = ({ blocks, quesitonId, settings }) => {
     audio.current.onEnded(onSpeechEnded);
     audio.current.onError(onSpeechEnded);
 
-    audio.current.setSrc(
-      'https://developers.google.com/assistant/downloads/ssml/wavenet-break.mp3',
-    );
+    audio.current.setSrc(state.currentData.audio_url);
   };
 
   const onSpeechPlay = () => {
