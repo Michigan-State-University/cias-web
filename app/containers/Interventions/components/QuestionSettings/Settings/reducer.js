@@ -26,6 +26,7 @@ const instantiateBlockForType = (type, posFrom) => {
         type: 'Speech',
         text: '',
         audio_url: null,
+        animation: 'restSpeech',
         position: {
           posFrom,
           posTo: posFrom,
