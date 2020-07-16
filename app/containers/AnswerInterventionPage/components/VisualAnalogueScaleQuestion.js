@@ -23,6 +23,7 @@ const VisualAnalogueScaleQuestion = ({
       ],
       variable: { name },
     },
+    id,
   } = question;
 
   useEffect(() => {
@@ -32,7 +33,8 @@ const VisualAnalogueScaleQuestion = ({
         payload: value,
       },
     ]);
-  }, []);
+    setAnswerValue(value);
+  }, [id]);
 
   return (
     <Column mt={10} mb={10}>

@@ -19,9 +19,15 @@ const GridQuestion = ({ question, selectAnswer }) => {
     }
   }, [selectedAnswers]);
 
+  const { id, body } = question;
   const {
     payload: { rows, columns },
-  } = question.body.data[0];
+  } = body.data[0];
+
+  useEffect(() => {
+    setSelectedAnswersIndex({});
+    setSelectedAnswers({});
+  }, [id]);
 
   const check = (payload, value, name, rowIndex, columnIndex) => {
     const selectedAnswer = {

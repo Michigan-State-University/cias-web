@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Column from 'components/Column';
@@ -16,6 +16,15 @@ const margin = 21;
 
 const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
   const [selectedAnswersIndex, setSelectedAnswersIndex] = useState([]);
+
+  const {
+    body: { data },
+    id,
+  } = question;
+
+  useEffect(() => {
+    setSelectedAnswersIndex([]);
+  }, [id]);
 
   const check = (payload, value, name, index) => {
     const selectedAnswer = {
@@ -35,10 +44,6 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
       selectAnswer([...answerBody, selectedAnswer]);
     }
   };
-
-  const {
-    body: { data },
-  } = question;
   return (
     <Column mt={10} mb={10}>
       {data.map((questionAnswer, index) => {

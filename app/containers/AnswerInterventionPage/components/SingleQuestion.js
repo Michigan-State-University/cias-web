@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Column from 'components/Column';
@@ -21,7 +21,13 @@ const SingleQuestion = ({ question, selectAnswer }) => {
       data,
       variable: { name },
     },
+    id,
   } = question;
+
+  useEffect(() => {
+    setSelectedAnswerIndex(null);
+  }, [id]);
+
   return (
     <Column mt={10} mb={10}>
       {data.map((questionAnswer, index) => {
