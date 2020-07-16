@@ -82,4 +82,8 @@ export default defineMessages({
     defaultMessage:
       'Password must contain capital letter, small letter, special character and digit',
   },
+  createdAccount: {
+    id: `${scope}.createdAccount`,
+    defaultMessage: 'Your account has been created',
+  },
 });

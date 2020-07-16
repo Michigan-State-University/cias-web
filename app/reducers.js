@@ -5,7 +5,6 @@ import { toastsReducer } from 'react-toastify-redux';
 import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
-import { alertsReducer } from 'global/reducers/alerts';
 import { authReducer } from './global/reducers/auth';
 
 /**
@@ -13,7 +12,6 @@ import { authReducer } from './global/reducers/auth';
  */
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
-    alerts: alertsReducer,
     toasts: toastsReducer,
     auth: authReducer,
     language: languageProviderReducer,

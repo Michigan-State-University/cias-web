@@ -1,14 +1,15 @@
 import { put, takeLatest, select, all } from 'redux-saga/effects';
 import axios from 'axios';
 import sortBy from 'lodash/sortBy';
-import { dismiss } from 'react-toastify-redux';
+import { dismiss, error as showError } from 'react-toastify-redux';
 
-import { showAlert } from 'global/reducers/alerts';
 import { getAllVariables } from 'models/Intervention/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { makeSelectIntervention } from 'global/reducers/intervention';
+import { formatMessage } from 'utils/intlOutsideReact';
 
+import messages from './messages';
 import {
   CREATE_QUESTION_REQUEST,
   GET_QUESTIONS_REQUEST,
@@ -118,7 +119,11 @@ function* updateQuestion() {
   );
 
   if (hasDuplicates(variables)) {
-    yield put(showAlert(ERROR_DUPLICATE_VARIABLE));
+    yield put(
+      showError(formatMessage(messages.errors.duplicateVariable), {
+        id: ERROR_DUPLICATE_VARIABLE,
+      }),
+    );
     return yield put(editQuestionError());
   }
   yield put(dismiss(ERROR_DUPLICATE_VARIABLE));

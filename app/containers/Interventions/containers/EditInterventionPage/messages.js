@@ -16,4 +16,10 @@ export default defineMessages({
     defaultMessage:
       'I can address any health behaviour. For example, I might ask a patient if they are a daily smoker.',
   },
+  errors: {
+    duplicateVariable: {
+      id: `${scope}.duplicateVariable`,
+      defaultMessage: 'This variable name is already in use!',
+    },
+  },
 });

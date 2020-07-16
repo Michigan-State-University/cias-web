@@ -33,8 +33,4 @@ export default defineMessages({
     id: `${scope}.register`,
     defaultMessage: 'Register',
   },
-  createdAccount: {
-    id: `${scope}.createdAccount`,
-    defaultMessage: 'Your account has been created',
-  },
 });

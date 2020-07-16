@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState, Fragment, useEffect } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -21,11 +21,6 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import ErrorAlert from 'components/ErrorAlert';
 import { Link } from 'react-router-dom';
-import { success } from 'react-toastify-redux';
-
-import { makeSelectAlert } from 'global/reducers/alerts';
-
-import { REGISTER_SUCCESS } from 'containers/RegisterPage/constants';
 
 import makeSelectLoginPage from './selectors';
 import { loginRequest } from './actions';
@@ -39,22 +34,12 @@ export function LoginPage(props) {
     onLogin,
     loginPage: { error, loading, formData },
     intl: { formatMessage },
-    isRegisterSuccess,
-    showSuccess,
   } = props;
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
   const [email, setEmail] = useState(formData.email);
   const [password, setPassword] = useState(formData.password);
-
-  useEffect(() => {
-    if (isRegisterSuccess) {
-      showSuccess(formatMessage(messages.createdAccount), {
-        id: REGISTER_SUCCESS,
-      });
-    }
-  }, [isRegisterSuccess]);
 
   return (
     <Fragment>
@@ -107,18 +92,14 @@ LoginPage.propTypes = {
       password: PropTypes.string,
     }),
   }),
-  isRegisterSuccess: PropTypes.bool,
-  showSuccess: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   loginPage: makeSelectLoginPage(),
-  isRegisterSuccess: makeSelectAlert(REGISTER_SUCCESS),
 });
 
 const mapDispatchToProps = {
   onLogin: loginRequest,
-  showSuccess: success,
 };
 
 const withConnect = connect(
