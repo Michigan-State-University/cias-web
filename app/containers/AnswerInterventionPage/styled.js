@@ -24,6 +24,10 @@ export const QuestionTitle = styled.div`
   font-size: 1.3rem;
 `;
 
+export const QuestionSubtitle = styled.div`
+  font-size: 1rem;
+`;
+
 export const QuestionOption = styled.div`
   font-weight: normal;
   font-size: 1rem;

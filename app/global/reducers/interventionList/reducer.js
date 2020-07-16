@@ -7,7 +7,7 @@ import {
 } from './constants';
 
 export const initialState = {
-  interventions: [],
+  interventions: null,
   fetchInterventionLoading: false,
   fetchInterventionError: null,
 };

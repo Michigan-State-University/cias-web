@@ -66,7 +66,7 @@ export function HomePage({
     </Col>
   );
 
-  if (fetchInterventionLoading) return <Loader />;
+  if (fetchInterventionLoading || !interventions) return <Loader />;
   return (
     <HomePageContainer>
       <h2>

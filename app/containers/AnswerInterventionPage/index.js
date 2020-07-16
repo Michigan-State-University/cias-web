@@ -29,6 +29,7 @@ import {
   QuestionActions,
   QuestionTitle,
   BackButton,
+  QuestionSubtitle,
 } from './styled';
 import {
   fetchQuestions,
@@ -72,7 +73,12 @@ export function AnswerInterventionPage({
   const saveAnswer = () => submitAnswerRequest(currentQuestionId);
 
   const renderQuestion = () => {
-    const { title, type } = currentQuestion;
+    const {
+      title,
+      subtitle,
+      type,
+      settings: { title: settingsTitle, subtitle: settingsSubtitle },
+    } = currentQuestion;
     const selectAnswerProp = answerBody => {
       saveSelectedAnswer({
         id: currentQuestionId,
@@ -92,7 +98,12 @@ export function AnswerInterventionPage({
     };
     return (
       <>
-        <QuestionTitle dangerouslySetInnerHTML={{ __html: title }} />
+        {settingsSubtitle && (
+          <QuestionTitle dangerouslySetInnerHTML={{ __html: title }} />
+        )}
+        {settingsTitle && (
+          <QuestionSubtitle dangerouslySetInnerHTML={{ __html: subtitle }} />
+        )}
         {renderQuestionByType(currentQuestion, sharedProps)}
       </>
     );

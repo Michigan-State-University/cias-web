@@ -19,18 +19,12 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   align-items: center;
 }
 
-.c3 {
-  width: auto;
-  height: auto;
-}
-
 .c0 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 10px;
   width: 100%;
-  height: auto;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -68,6 +62,11 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   align-items: center;
 }
 
+.c3 {
+  width: auto;
+  height: auto;
+}
+
 .c4 {
   margin: 0;
   font-family: DM Sans;
@@ -80,7 +79,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 <div
   className="c0"
   display="flex"
-  height="auto"
   overflow="scroll"
   width="100%"
 >

@@ -17,6 +17,7 @@ module.exports = {
   setupFilesAfterEnv: [
     '<rootDir>/internals/testing/test-bundler.js',
     'react-testing-library/cleanup-after-each',
+    '<rootDir>/jest.setup.js',
   ],
   setupFiles: ['raf/polyfill', 'jest-canvas-mock'],
   testRegex: 'tests/.*\\.test\\.js$',

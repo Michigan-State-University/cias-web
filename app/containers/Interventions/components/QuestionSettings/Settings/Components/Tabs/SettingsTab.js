@@ -19,6 +19,8 @@ import { changeQuestionType } from 'containers/Interventions/containers/EditInte
 import messages from '../messages';
 import { updateSettings as updateQuestionSettings } from '../../actions';
 
+const HIDE_CHANGING_QUESTION_TYPE = false;
+
 const orderSettings = settings =>
   settings && {
     video: settings.video,
@@ -60,19 +62,23 @@ const SettingsTab = ({
   };
   return (
     <Fragment>
-      <Text fontSize={14} mb={6}>
-        <FormattedMessage {...messages.type} />
-      </Text>
-      <Select
-        mb={40}
-        selectProps={{
-          placeholder: formatMessage(messages.typePlaceholder),
-          options: selectOptions,
-          value: selectedOption,
-          isSearchable: false,
-          onChange: handleChange,
-        }}
-      />
+      {HIDE_CHANGING_QUESTION_TYPE && (
+        <Text fontSize={14} mb={6}>
+          <FormattedMessage {...messages.type} />
+        </Text>
+      )}
+      {HIDE_CHANGING_QUESTION_TYPE && (
+        <Select
+          mb={40}
+          selectProps={{
+            placeholder: formatMessage(messages.typePlaceholder),
+            options: selectOptions,
+            value: selectedOption,
+            isSearchable: false,
+            onChange: handleChange,
+          }}
+        />
+      )}
       {map(orderedSettings, (val, index) => (
         <Row
           key={`el-settings-${id}-${index}`}

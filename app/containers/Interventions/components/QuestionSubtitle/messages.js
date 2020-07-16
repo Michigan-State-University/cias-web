@@ -1,13 +1,12 @@
-/*
- * QuestionDetails Messages
- *
- * This contains all the text for the QuestionDetails component.
- */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.QuestionDetails';
+export const scope = 'app.containers.QuestionTitle';
 
 export default defineMessages({
+  placeholder: {
+    id: `${scope}.placeholder`,
+    defaultMessage: 'Type subtitle here...',
+  },
   nextQuestion: {
     id: `${scope}.nextQuestion`,
     defaultMessage: 'Next question',
