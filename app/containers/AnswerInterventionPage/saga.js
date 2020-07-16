@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 
+import { informationQuestion } from 'models/Intervention/QuestionTypes';
 import { FETCH_QUESTIONS, SUBMIT_ANSWER_REQUEST } from './constants';
 import {
   fetchQuestionsFailure,
@@ -31,10 +32,12 @@ function* submitAnswersAsync({ payload: { answerId } }) {
   const answers = yield select(makeSelectAnswers());
   const { type: questionType, answerBody } = answers[answerId];
   if (questionType) {
-    const type = questionType.replace('Question', 'Answer');
-    yield axios.post(`/v1/questions/${answerId}/answers`, {
-      answer: { type, body: answerBody },
-    });
+    if (questionType !== informationQuestion.id) {
+      const type = questionType.replace('Question', 'Answer');
+      yield axios.post(`/v1/questions/${answerId}/answers`, {
+        answer: { type, body: answerBody },
+      });
+    }
     yield put(submitAnswerSuccess(answerId));
   } else {
     yield put(submitAnswerFailure(answerId, 'Choose answer'));

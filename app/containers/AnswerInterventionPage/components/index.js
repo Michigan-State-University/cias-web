@@ -8,7 +8,11 @@ import {
   singleQuestion,
   visualAnalogueScaleQuestion,
   textboxQuestion,
+  informationQuestion,
+  urlQuestion,
 } from 'models/Intervention/QuestionTypes';
+import UrlQuestion from './UrlQuestion';
+import InformationSlide from './InformationSlide';
 import SingleQuestion from './SingleQuestion';
 import MultipleQuestion from './MultipleQuestion';
 import GridQuestion from './GridQuestion';
@@ -33,6 +37,10 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <TextBoxQuestion question={question} {...sharedProps} />;
     case numberQuestion.id:
       return <NumberQuestion question={question} {...sharedProps} />;
+    case informationQuestion.id:
+      return <InformationSlide {...sharedProps} />;
+    case urlQuestion.id:
+      return <UrlQuestion question={question} {...sharedProps} />;
     default:
       return <ErrorAlert errorText={`CANNOT RENDER ${type}`} />;
   }

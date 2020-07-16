@@ -17,12 +17,12 @@ import { useInjectReducer } from 'utils/injectReducer';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 import { Button } from 'components/Button';
+import renderQuestionByType from './components';
+import CharacterAnim from './components/CharacterAnim';
 import makeSelectAnswerInterventionPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import renderQuestionByType from './components';
-import CharacterAnim from './components/CharacterAnim';
 import {
   AnswerInterventionContainer,
   AnswerContent,

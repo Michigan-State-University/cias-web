@@ -18,6 +18,8 @@ import { updateQuestionData } from 'containers/Interventions/containers/EditInte
 
 import { variableNameValidator } from 'utils/validators';
 import globalMessages from 'global/i18n/globalMessages';
+import { urlValidator } from 'utils/validators/urlValidator';
+import UrlPreview from 'components/UrlPreview';
 import messages from './messages';
 import { UPDATE_URL, UPDATE_VARIABLE } from './constants';
 
@@ -50,6 +52,7 @@ const UrlQuestion = ({
         <Row>
           <ApprovableInput
             rows="3"
+            validator={urlValidator}
             placeholder={formatMessage(messages.placeholder)}
             value={payload}
             onCheck={updateUrl}
@@ -57,6 +60,7 @@ const UrlQuestion = ({
           />
         </Row>
       </Box>
+      <Box my={5}>{payload && <UrlPreview link={payload} />}</Box>
     </Column>
   );
 };
