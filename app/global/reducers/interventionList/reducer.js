@@ -19,7 +19,6 @@ export const interventionListReducer = (state = initialState, action) =>
       case FETCH_INTERVENTIONS_REQUEST:
         draft.fetchInterventionLoading = true;
         draft.fetchInterventionError = null;
-        draft.interventions = [];
         break;
       case FETCH_INTERVENTIONS_SUCCESS:
         draft.fetchInterventionLoading = false;

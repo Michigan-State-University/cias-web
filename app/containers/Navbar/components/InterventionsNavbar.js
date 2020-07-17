@@ -18,7 +18,7 @@ import {
   editInterventionSaga,
 } from 'global/reducers/intervention';
 
-import { CrossContainer } from './styled';
+import { CrossLink } from './styled';
 import messages from './messages';
 
 const getActiveTab = (path, formatMessage) => {
@@ -42,9 +42,9 @@ const InterventionNavbar = ({
   return (
     <Row align="center" justify="between" width="100%">
       <Row align="center">
-        <CrossContainer onClick={() => {}}>
+        <CrossLink to="/">
           <Img src={cross} alt="cross" />
-        </CrossContainer>
+        </CrossLink>
         <StyledInput
           px={12}
           py={6}

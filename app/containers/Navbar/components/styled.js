@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { colors } from 'theme';
 
-export const CrossContainer = styled.div`
+export const CrossLink = styled(Link)`
   height: 28px;
   width: 28px;
   display: flex;

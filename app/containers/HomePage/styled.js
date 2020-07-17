@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { themeColors, colors } from 'theme';
 
-export const HomePageContainer = styled.div``;
-
 export const NewInterventionFloatButton = styled.div`
   position: fixed;
   right: 115px;

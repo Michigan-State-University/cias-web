@@ -5,7 +5,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -34,11 +34,7 @@ import {
   makeSelectInterventionLoaders,
 } from 'global/reducers/intervention';
 
-import {
-  HomePageContainer,
-  NewInterventionFloatButton,
-  AddIcon,
-} from './styled';
+import { NewInterventionFloatButton, AddIcon } from './styled';
 import messages from './messages';
 export function HomePage({
   createIntervention,
@@ -67,9 +63,11 @@ export function HomePage({
     </Col>
   );
 
-  if (fetchInterventionLoading || !interventions) return <Loader />;
+  if ((fetchInterventionLoading && !interventions) || !interventions)
+    return <Loader />;
+
   return (
-    <HomePageContainer>
+    <Fragment>
       <Container>
         <H1 my={35}>
           <FormattedMessage {...messages.myIntervention} />
@@ -102,7 +100,7 @@ export function HomePage({
         )}
         {createInterventionLoader && <Spinner />}
       </NewInterventionFloatButton>
-    </HomePageContainer>
+    </Fragment>
   );
 }
 
