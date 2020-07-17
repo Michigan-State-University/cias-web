@@ -71,7 +71,7 @@ const BranchingTab = ({
 
       if (targetIndex !== -1)
         return htmlToPlainText(questions[targetIndex].title);
-    } else return interventionList[targetIndex].name;
+    } else if (targetIndex !== -1) return interventionList[targetIndex].name;
 
     return formatMessage(messages.selectQuestion);
   };
