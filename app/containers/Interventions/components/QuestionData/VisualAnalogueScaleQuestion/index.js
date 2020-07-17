@@ -53,7 +53,7 @@ const VisualAnalogueScaleQuestion = ({
         <Column>
           <Row>
             <Box width="100%">
-              <AppSlider />
+              <AppSlider disabled />
             </Box>
           </Row>
 

@@ -55,6 +55,7 @@ const NumberQuestion = ({
             value={payload}
             validator={numericValidator}
             onCheck={newTitle => updateAnswer({ variable, payload: newTitle })}
+            disabled
           />
         </Row>
       </Box>

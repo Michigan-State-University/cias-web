@@ -53,6 +53,7 @@ const TextboxQuestion = ({
             placeholder={formatMessage(messages.placeholder)}
             value={payload}
             onCheck={newTitle => updateAnswer({ payload: newTitle })}
+            disabled
           />
         </Row>
       </Box>

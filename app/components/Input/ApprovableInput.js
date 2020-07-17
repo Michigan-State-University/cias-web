@@ -51,6 +51,7 @@ const ApprovableInput = props => {
     autoSize,
     fontSize,
     mr,
+    disabled,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [focused, setfocused] = useState(false);
@@ -103,6 +104,7 @@ const ApprovableInput = props => {
           onBlur={onBlur}
           placeholder={props.placeholder}
           transparent
+          disabled={disabled}
         />
       );
 
@@ -118,6 +120,7 @@ const ApprovableInput = props => {
         placeholder={placeholder}
         keyboard={keyboard}
         transparent
+        disabled={disabled}
       />
     );
   };
@@ -142,6 +145,7 @@ ApprovableInput.propTypes = {
   autoSize: PropTypes.bool,
   fontSize: PropTypes.number,
   mr: PropTypes.number,
+  disabled: PropTypes.bool,
 };
 
 ApprovableInput.defaultProps = {
