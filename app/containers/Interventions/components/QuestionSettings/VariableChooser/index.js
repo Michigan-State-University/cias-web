@@ -25,6 +25,7 @@ import Question from 'models/Intervention/Question';
 import { getAllVariables } from 'models/Intervention/utils';
 import NoContent from 'components/NoContent';
 import { outsideClickHandler } from 'utils/outsideClickHandler';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 const VariableChooser = ({
   onClick,
@@ -67,7 +68,7 @@ const VariableChooser = ({
               maxWidth={200}
               mr={20}
             >
-              {variable.title}
+              {htmlToPlainText(variable.title)}
             </Text>
           </Row>
           <Badge maxWidth={300} color={colors.jungleGreen} bgWithOpacity>
