@@ -33,6 +33,7 @@ import {
   interventionListReducer,
   fetchInterventionsSaga,
 } from 'global/reducers/interventionList';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 
@@ -48,7 +49,7 @@ const TargetQuestionChooser = ({
   intervention: { name, id: interventionId },
   questions,
   selectedQuestion: { id } = {},
-  pattern,
+  pattern: { target },
   currentIndex,
   isVisible,
   getInterventionList,
@@ -70,7 +71,9 @@ const TargetQuestionChooser = ({
   const isLast = currentIndex === questions.length - 1;
 
   useEffect(() => {
-    if (isVisible) setIsInterventionView(false);
+    if (isVisible) {
+      setIsInterventionView(false);
+    }
   }, [isVisible]);
 
   useEffect(() => {
@@ -117,7 +120,7 @@ const TargetQuestionChooser = ({
               clickable={canSelectQuestion(question.id)}
             >
               <Img
-                src={pattern.target === question.id ? webpageSelected : webpage}
+                src={target.id === question.id ? webpageSelected : webpage}
                 mr={10}
               />
               <Box maxWidth={250}>
@@ -126,9 +129,9 @@ const TargetQuestionChooser = ({
                   whiteSpace="pre"
                   overflow="hidden"
                   color={!canSelectQuestion(question.id) ? colors.grey : ''}
-                  fontWeight={pattern.target === question.id ? 'bold' : ''}
+                  fontWeight={target.id === question.id ? 'bold' : ''}
                 >
-                  {question.title}
+                  {htmlToPlainText(question.title)}
                 </Text>
               </Box>
             </Row>
@@ -157,42 +160,41 @@ const TargetQuestionChooser = ({
         </Row>
         <Box maxHeight="300px" overflow="scroll">
           <Column>
-            {interventionList.map((intervention, index) => (
-              <Row
-                data-testid={`${id}-select-target-intervention-el`}
-                key={`${id}-select-target-intervention-${index}`}
-                mb={index !== interventionList.length - 1 ? 15 : 5}
-                onClick={event => chooseIntervention(intervention.id, event)}
-                align="center"
-                clickable
-              >
-                <Img
-                  src={
-                    pattern.target === intervention.id
-                      ? presentationProjectorSelected
-                      : presentationProjector
-                  }
-                  mr={10}
-                />
-                <Box maxWidth={250} mr={10}>
-                  <Text
-                    textOverflow="ellipsis"
-                    whiteSpace="pre"
-                    overflow="hidden"
-                    fontWeight={
-                      pattern.target === intervention.id ? 'bold' : ''
+            {interventionList &&
+              interventionList.map((intervention, index) => (
+                <Row
+                  data-testid={`${id}-select-target-intervention-el`}
+                  key={`${id}-select-target-intervention-${index}`}
+                  mb={index !== interventionList.length - 1 ? 15 : 5}
+                  onClick={event => chooseIntervention(intervention.id, event)}
+                  align="center"
+                  clickable
+                >
+                  <Img
+                    src={
+                      target.id === intervention.id
+                        ? presentationProjectorSelected
+                        : presentationProjector
                     }
-                  >
-                    {intervention.name}
-                  </Text>
-                </Box>
-                {interventionId === intervention.id && (
-                  <Badge bg={themeColors.secondary} color={colors.white}>
-                    {formatMessage(messages.selectedInterventionBadge)}
-                  </Badge>
-                )}
-              </Row>
-            ))}
+                    mr={10}
+                  />
+                  <Box maxWidth={250} mr={10}>
+                    <Text
+                      textOverflow="ellipsis"
+                      whiteSpace="pre"
+                      overflow="hidden"
+                      fontWeight={target.id === intervention.id ? 'bold' : ''}
+                    >
+                      {intervention.name}
+                    </Text>
+                  </Box>
+                  {interventionId === intervention.id && (
+                    <Badge bg={themeColors.secondary} color={colors.white}>
+                      {formatMessage(messages.selectedInterventionBadge)}
+                    </Badge>
+                  )}
+                </Row>
+              ))}
           </Column>
         </Box>
       </Column>
@@ -239,7 +241,7 @@ TargetQuestionChooser.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
   pattern: PropTypes.shape({
     match: PropTypes.string,
-    target: PropTypes.string,
+    target: PropTypes.shape({ id: PropTypes.string, type: PropTypes.string }),
   }),
   currentIndex: PropTypes.number,
   isVisible: PropTypes.bool,

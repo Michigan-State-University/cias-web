@@ -19,6 +19,7 @@ import gear from 'assets/svg/gear.svg';
 import gearSelected from 'assets/svg/gear-selected.svg';
 
 import globalMessages from 'global/i18n/globalMessages';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import { colors } from 'theme';
 
@@ -106,9 +107,7 @@ const QuestionListItem = ({
         </Column>
         <Column xs={10}>
           <Row>
-            <ClampedTitle mb={6}>
-              {title.replace(/<[^>]*>?/gm, '')}
-            </ClampedTitle>
+            <ClampedTitle mb={6}>{htmlToPlainText(title)}</ClampedTitle>
           </Row>
           <Row>
             <Comment fontWeight="bold">
