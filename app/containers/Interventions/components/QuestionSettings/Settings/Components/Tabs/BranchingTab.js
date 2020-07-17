@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -23,7 +23,10 @@ import {
   findInterventionIndex,
 } from 'models/Intervention/utils';
 import { makeSelectQuestions } from 'containers/Interventions/containers/EditInterventionPage/selectors';
-import { makeSelectInterventions } from 'global/reducers/interventionList';
+import {
+  makeSelectInterventions,
+  fetchInterventionsRequest,
+} from 'global/reducers/interventionList';
 
 import messages from '../messages';
 import TargetQuestionChooser from '../../../TargetQuestionChooser';
@@ -46,16 +49,21 @@ const BranchingTab = ({
   onUpdateCase,
   questions,
   interventionList,
+  fetchInterventions,
 }) => {
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
   const [variableChooserOpen, setVariableChooserOpen] = useState(false);
+
+  useEffect(() => {
+    fetchInterventions();
+  }, []);
 
   const displayPatternTargetText = target => {
     const selectedIndex = findQuestionIndex(questions, id);
     const targetIndex =
       target.type === 'Question'
         ? findQuestionIndex(questions, target.id)
-        : findInterventionIndex(interventionList, target.id);
+        : findInterventionIndex(interventionList || [], target.id);
 
     if (selectedIndex === targetIndex - 1)
       return formatMessage(messages.nextScreen);
@@ -191,6 +199,7 @@ BranchingTab.propTypes = {
   onUpdateCase: PropTypes.func,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   interventionList: PropTypes.arrayOf(PropTypes.shape(Intervention)),
+  fetchInterventions: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -203,6 +212,7 @@ const mapDispatchToProps = {
   onAddCase: addFormulaCase,
   onRemoveCase: removeFormulaCase,
   onUpdateCase: updateFormulaCase,
+  fetchInterventions: fetchInterventionsRequest,
 };
 
 const withConnect = connect(

@@ -17,7 +17,7 @@ export const interventionListReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case FETCH_INTERVENTIONS_REQUEST:
-        draft.fetchInterventionLoading = true;
+        if (!draft.interventions) draft.fetchInterventionLoading = true;
         draft.fetchInterventionError = null;
         break;
       case FETCH_INTERVENTIONS_SUCCESS:
