@@ -72,7 +72,7 @@ const TargetQuestionChooser = ({
 
   useEffect(() => {
     if (isVisible) {
-      setIsInterventionView(false);
+      setIsInterventionView(target.type === 'Intervention');
     }
   }, [isVisible]);
 
@@ -83,7 +83,7 @@ const TargetQuestionChooser = ({
   const chooseNextQuestion = () => {
     if (!isLast) {
       const targetId = questions[currentIndex + 1].id;
-      onClick(targetId);
+      onClick({ type: 'Question', id: targetId });
     }
   };
 

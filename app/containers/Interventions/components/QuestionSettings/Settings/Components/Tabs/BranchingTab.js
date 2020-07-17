@@ -65,13 +65,13 @@ const BranchingTab = ({
         ? findQuestionIndex(questions, target.id)
         : findInterventionIndex(interventionList || [], target.id);
 
-    if (selectedIndex === targetIndex - 1)
-      return formatMessage(messages.nextScreen);
+    if (target.type === 'Question') {
+      if (selectedIndex === targetIndex - 1)
+        return formatMessage(messages.nextScreen);
 
-    if (targetIndex !== -1)
-      return target.type === 'Question'
-        ? htmlToPlainText(questions[targetIndex].title)
-        : interventionList[targetIndex].name;
+      if (targetIndex !== -1)
+        return htmlToPlainText(questions[targetIndex].title);
+    } else return interventionList[targetIndex].name;
 
     return formatMessage(messages.selectQuestion);
   };

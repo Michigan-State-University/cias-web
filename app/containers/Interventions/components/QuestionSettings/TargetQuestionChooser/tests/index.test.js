@@ -216,7 +216,7 @@ describe('<TargetQuestionChooser />', () => {
         },
       },
       interventionList: {
-        interventions: [],
+        interventions: null,
         fetchInterventionLoading: false,
       },
       editInterventionPage: {
