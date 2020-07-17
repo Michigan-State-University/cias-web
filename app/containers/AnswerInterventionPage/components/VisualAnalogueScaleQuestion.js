@@ -12,7 +12,7 @@ const VisualAnalogueScaleQuestion = ({
   answerBody,
   selectAnswer,
 }) => {
-  const { payload: value } = answerBody[0] ? answerBody[0] : { payload: 0 };
+  const { payload: value } = answerBody.length ? answerBody[0] : { payload: 0 };
   const [answerValue, setAnswerValue] = useState(value);
   const {
     body: {

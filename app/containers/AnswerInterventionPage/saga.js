@@ -1,5 +1,6 @@
 import { takeLatest, put, select } from 'redux-saga/effects';
 import axios from 'axios';
+import omit from 'lodash/omit';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 
@@ -10,6 +11,7 @@ import {
   fetchQuestionsSuccess,
   submitAnswerSuccess,
   submitAnswerFailure,
+  setQuestionIndex,
 } from './actions';
 import { makeSelectAnswers } from './selectors';
 
@@ -28,17 +30,21 @@ function* fetchQuestionsAsync({ payload: { interventionId } }) {
   }
 }
 
-function* submitAnswersAsync({ payload: { answerId } }) {
+function* submitAnswersAsync({ payload: { answerId, nextQuestionIndex } }) {
   const answers = yield select(makeSelectAnswers());
   const { type: questionType, answerBody } = answers[answerId];
+
+  const body = omit(answerBody, 'index'); // index is needed to remember the selected answers, but useless in request
+
   if (questionType) {
     if (questionType !== informationQuestion.id) {
       const type = questionType.replace('Question', 'Answer');
       yield axios.post(`/v1/questions/${answerId}/answers`, {
-        answer: { type, body: answerBody },
+        answer: { type, body },
       });
     }
     yield put(submitAnswerSuccess(answerId));
+    yield put(setQuestionIndex(nextQuestionIndex));
   } else {
     yield put(submitAnswerFailure(answerId, 'Choose answer'));
   }

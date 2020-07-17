@@ -5,11 +5,9 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Img from 'components/Img';
 import HoverableBox from 'components/Box/HoverableBox';
-
 import checkbox from 'assets/svg/checkbox.svg';
 import checkboxChecked from 'assets/svg/checkbox-checked.svg';
 import { QuestionOption } from 'containers/AnswerInterventionPage/styled';
-
 import Question from 'models/Intervention/Question';
 
 const margin = 21;
@@ -23,7 +21,9 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
   } = question;
 
   useEffect(() => {
-    setSelectedAnswersIndex([]);
+    setSelectedAnswersIndex(
+      answerBody.length ? answerBody.map(answer => answer.index) : [],
+    );
   }, [id]);
 
   const check = (payload, value, name, index) => {
@@ -31,6 +31,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
       var: name,
       payload,
       value,
+      index,
     };
     if (selectedAnswersIndex.includes(index)) {
       setSelectedAnswersIndex(

@@ -8,7 +8,12 @@ import { TextArea } from 'components/Input/TextArea';
 import { themeColors } from 'theme';
 import messages from './messages';
 
-const TextBoxQuestion = ({ question, selectAnswer, formatMessage }) => {
+const TextBoxQuestion = ({
+  question,
+  answerBody,
+  selectAnswer,
+  formatMessage,
+}) => {
   const {
     body: {
       variable: { name },
@@ -18,6 +23,7 @@ const TextBoxQuestion = ({ question, selectAnswer, formatMessage }) => {
     <Box my={10} bg={themeColors.highlight}>
       <Row>
         <TextArea
+          value={answerBody.payload ? answerBody.payload.toString() : ''}
           transparent
           placeholder={formatMessage(messages.textPlaceholder)}
           rows="5"
@@ -38,6 +44,7 @@ TextBoxQuestion.propTypes = {
   question: PropTypes.shape(Question).isRequired,
   selectAnswer: PropTypes.func,
   formatMessage: PropTypes.func,
+  answerBody: PropTypes.any,
 };
 
 export default TextBoxQuestion;

@@ -70,7 +70,10 @@ export function AnswerInterventionPage({
     fetchQuestionsAction(params.id);
   }, []);
 
-  const saveAnswer = () => submitAnswerRequest(currentQuestionId);
+  const saveAnswer = nextQuestionIndex =>
+    submitAnswerRequest(currentQuestionId, nextQuestionIndex);
+
+  const setQuestion = question => setQuestionIndexAction(question);
 
   const renderQuestion = () => {
     const {
@@ -121,13 +124,20 @@ export function AnswerInterventionPage({
             />
           )}
           <AnswerContent>
-            {questionIndex !== 0 && (
-              <BackButton
-                onClick={() => setQuestionIndexAction(questionIndex - 1)}
-              >
-                <FormattedMessage {...messages.previousQuestion} />
-              </BackButton>
-            )}
+            {questionIndex !== 0 &&
+              (currentQuestion && (
+                <BackButton
+                  onClick={() => {
+                    if (answers[currentQuestionId]) {
+                      saveAnswer(questionIndex - 1);
+                    } else {
+                      setQuestion(questionIndex - 1);
+                    }
+                  }}
+                >
+                  <FormattedMessage {...messages.previousQuestion} />
+                </BackButton>
+              ))}
             {questionError && <ErrorAlert errorText={questionError} />}
             {questionLoading && <Spinner />}
             {currentQuestion && (
@@ -136,7 +146,9 @@ export function AnswerInterventionPage({
                 <QuestionActions>
                   <Button
                     loading={currentQuestion.loading}
-                    onClick={saveAnswer}
+                    onClick={() => {
+                      saveAnswer(questionIndex + 1);
+                    }}
                     title={formatMessage(
                       questionIndex !== interventionQuestions.length - 1
                         ? messages.nextQuestion
@@ -180,8 +192,8 @@ AnswerInterventionPage.propTypes = {
   saveSelectedAnswer: PropTypes.func,
   fetchQuestionsAction: PropTypes.func,
   submitAnswerRequest: PropTypes.func,
-  setQuestionIndexAction: PropTypes.func,
   onStartIntervention: PropTypes.func,
+  setQuestionIndexAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

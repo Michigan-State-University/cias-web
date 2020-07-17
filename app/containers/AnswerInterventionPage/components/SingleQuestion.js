@@ -5,16 +5,14 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Img from 'components/Img';
 import HoverableBox from 'components/Box/HoverableBox';
-
 import radio from 'assets/svg/radio-button.svg';
 import radioChecked from 'assets/svg/radio-button-checked.svg';
 import { QuestionOption } from 'containers/AnswerInterventionPage/styled';
-
 import Question from 'models/Intervention/Question';
 
 const margin = 21;
 
-const SingleQuestion = ({ question, selectAnswer }) => {
+const SingleQuestion = ({ question, answerBody, selectAnswer }) => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const {
     body: {
@@ -25,7 +23,7 @@ const SingleQuestion = ({ question, selectAnswer }) => {
   } = question;
 
   useEffect(() => {
-    setSelectedAnswerIndex(null);
+    setSelectedAnswerIndex(answerBody.length ? answerBody[0].index : null);
   }, [id]);
 
   return (
@@ -46,6 +44,7 @@ const SingleQuestion = ({ question, selectAnswer }) => {
                     var: name,
                     payload,
                     value,
+                    index,
                   },
                 ]);
                 setSelectedAnswerIndex(index);
@@ -68,6 +67,7 @@ const SingleQuestion = ({ question, selectAnswer }) => {
 
 SingleQuestion.propTypes = {
   question: PropTypes.shape(Question).isRequired,
+  answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
 };
 

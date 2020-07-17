@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+
 import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import Box from 'components/Box';
@@ -9,7 +10,7 @@ import Img from 'components/Img';
 import radioChecked from 'assets/svg/radio-button-checked.svg';
 import radio from 'assets/svg/radio-button.svg';
 
-const GridQuestion = ({ question, selectAnswer }) => {
+const GridQuestion = ({ question, answerBody, selectAnswer }) => {
   const [selectedAnswersIndex, setSelectedAnswersIndex] = useState({});
   const [selectedAnswers, setSelectedAnswers] = useState({});
 
@@ -25,8 +26,19 @@ const GridQuestion = ({ question, selectAnswer }) => {
   } = body.data[0];
 
   useEffect(() => {
-    setSelectedAnswersIndex({});
-    setSelectedAnswers({});
+    if (answerBody.length) {
+      let answerIndex = {};
+      let answers = {};
+      answerBody.forEach((answer, index) => {
+        answerIndex = { ...answerIndex, ...answer.index };
+        answers = { ...answers, [index]: { ...answer } };
+      });
+      setSelectedAnswersIndex(answerIndex);
+      setSelectedAnswers(answers);
+    } else {
+      setSelectedAnswersIndex({});
+      setSelectedAnswers({});
+    }
   }, [id]);
 
   const check = (payload, value, name, rowIndex, columnIndex) => {
@@ -34,14 +46,19 @@ const GridQuestion = ({ question, selectAnswer }) => {
       var: name,
       payload,
       value,
+      index: {
+        [rowIndex]: columnIndex,
+      },
     };
     setSelectedAnswersIndex({
       ...selectedAnswersIndex,
       [rowIndex]: columnIndex,
     });
-    setSelectedAnswers({ ...selectedAnswers, [rowIndex]: selectedAnswer });
+    setSelectedAnswers({
+      ...selectedAnswers,
+      [rowIndex]: selectedAnswer,
+    });
   };
-
   return (
     <Row align="center" justify="center">
       <Box px={10} overflow="scroll">
@@ -110,6 +127,7 @@ const GridQuestion = ({ question, selectAnswer }) => {
 GridQuestion.propTypes = {
   question: PropTypes.shape(Question).isRequired,
   selectAnswer: PropTypes.func,
+  answerBody: PropTypes.any,
 };
 
 export default GridQuestion;
