@@ -8,6 +8,7 @@ import {
   REMOVE_FORMULA_CASE,
   UPDATE_SPEECH_TEXT,
   UPDATE_NARRATOR_MOVEMENT,
+  UPDATE_FORMULA_CASE,
 } from './constants';
 
 const instantiateBlockForType = (type, posFrom) => {
@@ -144,6 +145,10 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
           ],
         },
       };
+
+    case UPDATE_FORMULA_CASE:
+      question.formula.patterns[payload.data.index] = payload.data.value;
+      return question;
 
     case REMOVE_FORMULA_CASE:
       question.formula.patterns.splice(payload.data.index, 1);

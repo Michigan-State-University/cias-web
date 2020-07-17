@@ -4,6 +4,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { htmlToPlainText } from 'utils/htmlToPlainText';
+
 import ArrowDropdown from 'components/ArrowDropdown';
 import Box from 'components/Box';
 import Column from 'components/Column';
@@ -48,7 +50,8 @@ const BranchingTab = ({
     if (selectedIndex === targetIndex - 1)
       return formatMessage(messages.nextScreen);
 
-    if (targetIndex !== -1) return questions[targetIndex].title;
+    if (targetIndex !== -1)
+      return htmlToPlainText(questions[targetIndex].title);
 
     return formatMessage(messages.selectQuestion);
   };
@@ -128,13 +131,13 @@ const BranchingTab = ({
                   setOpen={value => setTargetChooserOpen(value ? index : -1)}
                   isOpened={index === targetChooserOpen}
                   dropdownContent={
-                    <Box maxWidth={70}>
+                    <Box maxWidth={140}>
                       <Text
                         textOverflow="ellipsis"
                         whiteSpace="pre"
                         overflow="hidden"
                       >
-                        {displayPatternTargetText(pattern.target)}
+                        {displayPatternTargetText(pattern.target.id)}
                       </Text>
                     </Box>
                   }

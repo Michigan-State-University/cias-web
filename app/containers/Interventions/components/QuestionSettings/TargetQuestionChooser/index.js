@@ -115,7 +115,8 @@ const TargetQuestionChooser = ({
               key={`${id}-select-target-question-${index}`}
               mb={index !== questions.length - 1 && 15}
               onClick={() =>
-                canSelectQuestion(question.id) && onClick(question.id)
+                canSelectQuestion(question.id) &&
+                onClick({ type: 'Question', id: question.id })
               }
               clickable={canSelectQuestion(question.id)}
             >
