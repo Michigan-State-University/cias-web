@@ -10,14 +10,20 @@ import ArrowDropdown from 'components/ArrowDropdown';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Img from 'components/Img';
-import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { StyledInput } from 'components/Input/StyledInput';
+
 import { colors, themeColors } from 'theme';
-import { findQuestionIndex } from 'models/Intervention/utils';
+import Question from 'models/Intervention/Question';
+import Intervention from 'models/Intervention/Intervention';
+import {
+  findQuestionIndex,
+  findInterventionIndex,
+} from 'models/Intervention/utils';
 import { makeSelectQuestions } from 'containers/Interventions/containers/EditInterventionPage/selectors';
+import { makeSelectInterventions } from 'global/reducers/interventionList';
 
 import messages from '../messages';
 import TargetQuestionChooser from '../../../TargetQuestionChooser';
@@ -39,19 +45,25 @@ const BranchingTab = ({
   onRemoveCase,
   onUpdateCase,
   questions,
+  interventionList,
 }) => {
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
   const [variableChooserOpen, setVariableChooserOpen] = useState(false);
 
-  const displayPatternTargetText = questionId => {
+  const displayPatternTargetText = target => {
     const selectedIndex = findQuestionIndex(questions, id);
-    const targetIndex = findQuestionIndex(questions, questionId);
+    const targetIndex =
+      target.type === 'Question'
+        ? findQuestionIndex(questions, target.id)
+        : findInterventionIndex(interventionList, target.id);
 
     if (selectedIndex === targetIndex - 1)
       return formatMessage(messages.nextScreen);
 
     if (targetIndex !== -1)
-      return htmlToPlainText(questions[targetIndex].title);
+      return target.type === 'Question'
+        ? htmlToPlainText(questions[targetIndex].title)
+        : interventionList[targetIndex].name;
 
     return formatMessage(messages.selectQuestion);
   };
@@ -137,7 +149,7 @@ const BranchingTab = ({
                         whiteSpace="pre"
                         overflow="hidden"
                       >
-                        {displayPatternTargetText(pattern.target.id)}
+                        {displayPatternTargetText(pattern.target)}
                       </Text>
                     </Box>
                   }
@@ -178,10 +190,12 @@ BranchingTab.propTypes = {
   onRemoveCase: PropTypes.func,
   onUpdateCase: PropTypes.func,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
+  interventionList: PropTypes.arrayOf(PropTypes.shape(Intervention)),
 };
 
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
+  interventionList: makeSelectInterventions(),
 });
 
 const mapDispatchToProps = {

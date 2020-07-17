@@ -1,7 +1,8 @@
+/* eslint-disable no-unused-vars */
 import { pick } from 'lodash';
 
-// eslint-disable-next-line no-unused-vars
 import Question from './Question';
+import Intervention from './Intervention';
 
 import {
   multiQuestion,
@@ -15,6 +16,13 @@ import {
  */
 export const findQuestionIndex = (questions, questionId) =>
   questions.findIndex(value => value.id === questionId);
+
+/**
+ * @param  {Array<Intervention>} interventions
+ * @param  {string} interventionId
+ */
+export const findInterventionIndex = (interventions, interventionId) =>
+  interventions.findIndex(value => value.id === interventionId);
 
 /**
  * @param  {Array<Question>} questions

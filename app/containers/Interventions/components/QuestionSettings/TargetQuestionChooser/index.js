@@ -90,8 +90,7 @@ const TargetQuestionChooser = ({
   const chooseIntervention = (targetInterventionId, event) => {
     if (targetInterventionId === interventionId)
       setIsInterventionView(false, event);
-
-    // TODO: select intervention as target; need to wait for backend
+    else onClick({ type: 'Intervention', id: targetInterventionId });
   };
 
   const renderQuestionChooser = (
