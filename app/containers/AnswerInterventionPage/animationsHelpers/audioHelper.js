@@ -106,9 +106,7 @@ const useAudioHelper = (
       audio.current.onEnded(onSpeechEnded);
       audio.current.onError(onSpeechEnded);
 
-      audio.current.setSrc(
-        'https://developers.google.com/assistant/downloads/ssml/wavenet-speak.mp3',
-      );
+      audio.current.setSrc(currentData.audio_url);
     } else if (currentData.currentAnimation === 'end') {
       const { anim } = animationCurrent;
 

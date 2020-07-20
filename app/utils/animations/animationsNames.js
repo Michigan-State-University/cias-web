@@ -99,11 +99,10 @@ const speechAnimations = {
   },
   announce: {
     animations: {
-      start: 'announce',
+      start: 'announceStart',
       speech: 'announceSpeech',
-      end: 'announce',
+      end: 'announceEnd',
     },
-    isEndReversed: true,
   },
   search: {
     animations: {
