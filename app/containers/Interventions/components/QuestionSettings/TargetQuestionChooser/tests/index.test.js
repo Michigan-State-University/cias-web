@@ -58,7 +58,7 @@ describe('<TargetQuestionChooser />', () => {
 
   const props = {
     onClick: jest.fn(),
-    pattern: { match: '', target: '' },
+    pattern: { match: '', target: { id: '', match: '' } },
   };
 
   it('should match the snapshot', () => {
@@ -217,7 +217,7 @@ describe('<TargetQuestionChooser />', () => {
       },
       interventionList: {
         interventions: null,
-        fetchInterventionLoading: false,
+        fetchInterventionLoading: true,
       },
       editInterventionPage: {
         questions: [
