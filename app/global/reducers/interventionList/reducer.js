@@ -8,7 +8,7 @@ import {
 
 export const initialState = {
   interventions: null,
-  fetchInterventionLoading: false,
+  fetchInterventionLoading: true,
   fetchInterventionError: null,
 };
 

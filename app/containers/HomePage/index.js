@@ -63,8 +63,7 @@ export function HomePage({
     </Col>
   );
 
-  if ((fetchInterventionLoading && !interventions) || !interventions)
-    return <Loader />;
+  if (fetchInterventionLoading) return <Loader />;
 
   return (
     <Fragment>
