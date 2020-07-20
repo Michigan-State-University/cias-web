@@ -32,8 +32,13 @@ const reverseAnimations = [
   'write',
 ];
 
+const speechAnimations = {
+  rest: { speech: 'restSpeech' },
+  explain: { speech: 'explainSpeech' },
+};
+
 const moveAnimations = ['moveLeft', 'moveRight'];
 
 const bodyAnimations = [...autoRestAnimations, ...reverseAnimations];
 
-export { autoRestAnimations, bodyAnimations, moveAnimations };
+export { autoRestAnimations, bodyAnimations, moveAnimations, speechAnimations };

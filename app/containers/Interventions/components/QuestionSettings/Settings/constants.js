@@ -9,8 +9,8 @@ export const ADD_BLOCK = 'app/EditInterventionPage/Settings/ADD_BLOCK';
 export const UPDATE_NARRATOR_ANIMATION =
   'app/EditInterventionPage/Settings/UPDATE_NARRATOR_ANIMATION';
 
-export const UPDATE_SPEECH_TEXT =
-  'app/EditInterventionPage/Settings/UPDATE_SPEECH_TEXT';
+export const UPDATE_SPEECH_SETTINGS =
+  'app/EditInterventionPage/Settings/UPDATE_SPEECH_SETTINGS';
 
 export const UPDATE_FORMULA =
   'app/EditInterventionPage/Settings/UPDATE_FORMULA';

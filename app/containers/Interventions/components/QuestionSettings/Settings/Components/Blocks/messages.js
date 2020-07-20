@@ -35,6 +35,10 @@ export default defineMessages({
     id: `${scope}.explain`,
     defaultMessage: 'Explain',
   },
+  rest: {
+    id: `${scope}.rest`,
+    defaultMessage: 'Rest',
+  },
   read: {
     id: `${scope}.read`,
     defaultMessage: 'Read',

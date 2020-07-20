@@ -6,7 +6,7 @@ import {
   UPDATE_FORMULA,
   ADD_FORMULA_CASE,
   REMOVE_FORMULA_CASE,
-  UPDATE_SPEECH_TEXT,
+  UPDATE_SPEECH_SETTINGS,
   UPDATE_NARRATOR_MOVEMENT,
   UPDATE_FORMULA_CASE,
 } from './constants';
@@ -27,7 +27,7 @@ const instantiateBlockForType = (type, posFrom) => {
         type: 'Speech',
         text: '',
         audio_url: null,
-        animation: 'restSpeech',
+        animation: 'rest',
         position: {
           posFrom,
           posTo: posFrom,
@@ -115,9 +115,12 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       };
     }
 
-    case UPDATE_SPEECH_TEXT: {
+    case UPDATE_SPEECH_SETTINGS: {
       const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
-      cloneBlocks[payload.data.index].text = payload.data.value;
+      cloneBlocks[payload.data.index] = {
+        ...cloneBlocks[payload.data.index],
+        ...payload.data.value,
+      };
 
       return {
         ...question,

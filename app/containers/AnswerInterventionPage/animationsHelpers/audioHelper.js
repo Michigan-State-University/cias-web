@@ -3,6 +3,7 @@ import filter from 'lodash/filter';
 import { speechType } from 'models/Narrator/BlockTypes';
 import AudioWrapper from 'utils/audioWrapper';
 import { useRef } from 'react';
+import { speechAnimations } from 'utils/animations/animationsNames';
 
 const useAudioHelper = (
   blocks,
@@ -27,12 +28,14 @@ const useAudioHelper = (
       filteredAnimations.filter(block => block.animation),
       'animation',
     );
-    const speechAnimations = [];
+    const animations = [];
     if (blocks.length) {
       await Promise.all(
         uniqAnimations.map(async ({ animation, type }) => {
-          const data = await import(`assets/animations/${animation}.json`);
-          speechAnimations.push({
+          const animationName = speechAnimations[animation].speech;
+          const data = await import(`assets/animations/${animationName}.json`);
+
+          animations.push({
             type,
             name: animation,
             animationData: data,
@@ -40,7 +43,7 @@ const useAudioHelper = (
         }),
       );
     }
-    return speechAnimations;
+    return animations;
   };
 
   const changeSpeech = (nextBlock, nextIndex) => {
@@ -70,7 +73,9 @@ const useAudioHelper = (
     audio.current.onEnded(onSpeechEnded);
     audio.current.onError(onSpeechEnded);
 
-    audio.current.setSrc(currentData.audio_url);
+    audio.current.setSrc(
+      'https://developers.google.com/assistant/downloads/ssml/wavenet-speak.mp3',
+    );
   };
 
   const onSpeechPlay = () => {
