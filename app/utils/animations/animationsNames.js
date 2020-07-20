@@ -33,8 +33,14 @@ const reverseAnimations = [
 ];
 
 const speechAnimations = {
-  rest: { speech: 'restSpeech' },
-  explain: { speech: 'explainSpeech' },
+  rest: { animations: { speech: 'restSpeech' } },
+  explain: {
+    animations: {
+      start: 'explain',
+      speech: 'explainSpeech',
+      end: 'explainSpeechReverse',
+    },
+  },
 };
 
 const moveAnimations = ['moveLeft', 'moveRight'];

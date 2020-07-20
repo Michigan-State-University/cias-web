@@ -1,9 +1,12 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 import uniqBy from 'lodash/uniqBy';
 import filter from 'lodash/filter';
 import { speechType } from 'models/Narrator/BlockTypes';
 import AudioWrapper from 'utils/audioWrapper';
 import { useRef } from 'react';
 import { speechAnimations } from 'utils/animations/animationsNames';
+import values from 'lodash/values';
 
 const useAudioHelper = (
   blocks,
@@ -28,21 +31,28 @@ const useAudioHelper = (
       filteredAnimations.filter(block => block.animation),
       'animation',
     );
+
     const animations = [];
     if (blocks.length) {
       await Promise.all(
         uniqAnimations.map(async ({ animation, type }) => {
-          const animationName = speechAnimations[animation].speech;
-          const data = await import(`assets/animations/${animationName}.json`);
+          const animationNames = values(speechAnimations[animation].animations);
 
-          animations.push({
-            type,
-            name: animation,
-            animationData: data,
-          });
+          for (const animationName of animationNames) {
+            const data = await import(
+              `assets/animations/${animationName}.json`
+            );
+
+            animations.push({
+              type,
+              name: animationName,
+              animationData: data,
+            });
+          }
         }),
       );
     }
+
     return animations;
   };
 
