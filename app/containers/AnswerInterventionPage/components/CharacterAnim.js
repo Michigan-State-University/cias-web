@@ -161,18 +161,24 @@ const CharacterAnim = ({
   }, [state.currentData, state.currentBlockIndex]);
 
   const decideIfLoopAnimation = () =>
-    get(state, 'currentData.type', 'none') === speechType;
+    get(state, 'currentData.type', 'none') === speechType &&
+    get(state, 'currentData.isLoop', false);
 
   const getAnimationOptions = () => {
     if (
       settings.animation &&
       state.currentData &&
       state.currentData.animationData
-    )
+    ) {
+      const isSpeechType = state.currentData.type === 'Speech';
+
       return {
         name: state.currentData.name,
-        animationData: state.currentData.animationData,
+        animationData: isSpeechType
+          ? state.currentData.animationData[state.currentData.currentAnimation]
+          : state.currentData.animationData,
       };
+    }
     return {};
   };
 

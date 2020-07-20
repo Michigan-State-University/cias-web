@@ -6,7 +6,7 @@ import { speechType } from 'models/Narrator/BlockTypes';
 import AudioWrapper from 'utils/audioWrapper';
 import { useRef } from 'react';
 import { speechAnimations } from 'utils/animations/animationsNames';
-import values from 'lodash/values';
+import toPairs from 'lodash/toPairs';
 
 const useAudioHelper = (
   blocks,
@@ -36,19 +36,22 @@ const useAudioHelper = (
     if (blocks.length) {
       await Promise.all(
         uniqAnimations.map(async ({ animation, type }) => {
-          const animationNames = values(speechAnimations[animation].animations);
+          const animationNames = toPairs(
+            speechAnimations[animation].animations,
+          );
+          const animationsData = {};
 
-          for (const animationName of animationNames) {
-            const data = await import(
-              `assets/animations/${animationName}.json`
-            );
+          for (const [key, value] of animationNames) {
+            const data = await import(`assets/animations/${value}.json`);
 
-            animations.push({
-              type,
-              name: animationName,
-              animationData: data,
-            });
+            animationsData[key] = data;
           }
+
+          animations.push({
+            type,
+            name: animation,
+            animationData: animationsData,
+          });
         }),
       );
     }
@@ -57,23 +60,33 @@ const useAudioHelper = (
   };
 
   const changeSpeech = (nextBlock, nextIndex) => {
+    const speechData = loadedSpeechAnimations.current.find(
+      anim => anim.name === (nextBlock ? nextBlock.animation : undefined),
+    );
+
     dispatchUpdate({
       currentData: {
         ...nextBlock,
-        ...loadedSpeechAnimations.current.find(
-          anim => anim.name === (nextBlock ? nextBlock.animation : undefined),
-        ),
+        ...speechData,
+        currentAnimation: speechData.animationData.start ? 'start' : 'speech',
+        isLoop: !speechData.animationData.start,
       },
       currentBlockIndex: nextIndex,
     });
   };
 
-  const getInitialSpeechAnimation = () => ({
-    ...blocks[0],
-    ...loadedSpeechAnimations.current.find(
+  const getInitialSpeechAnimation = () => {
+    const speechData = loadedSpeechAnimations.current.find(
       anim => anim.name === (blocks[0] ? blocks[0].animation : undefined),
-    ),
-  });
+    );
+
+    return {
+      ...blocks[0],
+      ...speechData,
+      currentAnimation: speechData.animationData.start ? 'start' : 'speech',
+      isLoop: !speechData.animationData.start,
+    };
+  };
 
   const cleanAudio = () => audio.current.clean();
 
