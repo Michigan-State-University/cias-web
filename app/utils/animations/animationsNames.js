@@ -38,8 +38,9 @@ const speechAnimations = {
     animations: {
       start: 'explain',
       speech: 'explainSpeech',
-      end: 'explainSpeechReverse',
+      end: 'explain',
     },
+    isEndReversed: true,
   },
 };
 

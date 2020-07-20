@@ -8,10 +8,13 @@ import { useRef } from 'react';
 import { speechAnimations } from 'utils/animations/animationsNames';
 import toPairs from 'lodash/toPairs';
 
+const animationTimeout = 200;
+
 const useAudioHelper = (
   blocks,
   dispatchUpdate,
   currentData,
+  currentIndex,
   animationCurrent,
   changeBlock,
 ) => {
@@ -51,6 +54,7 @@ const useAudioHelper = (
             type,
             name: animation,
             animationData: animationsData,
+            isEndReversed: speechAnimations[animation].isEndReversed,
           });
         }),
       );
@@ -91,18 +95,65 @@ const useAudioHelper = (
   const cleanAudio = () => audio.current.clean();
 
   const handleSpeechBlock = () => {
-    audio.current.onPlay(onSpeechPlay);
-    audio.current.onLoaded(onSpeechReady);
-    audio.current.onEnded(onSpeechEnded);
-    audio.current.onError(onSpeechEnded);
+    if (currentData.currentAnimation === 'start') {
+      const { anim } = animationCurrent;
 
-    audio.current.setSrc(
-      'https://developers.google.com/assistant/downloads/ssml/wavenet-speak.mp3',
-    );
+      anim.addEventListener('complete', updateAnimation);
+      playAnimation();
+    } else if (currentData.currentAnimation === 'speech') {
+      audio.current.onPlay(playAnimation);
+      audio.current.onLoaded(onSpeechReady);
+      audio.current.onEnded(onSpeechEnded);
+      audio.current.onError(onSpeechEnded);
+
+      audio.current.setSrc(
+        'https://developers.google.com/assistant/downloads/ssml/wavenet-speak.mp3',
+      );
+    } else if (currentData.currentAnimation === 'end') {
+      const { anim } = animationCurrent;
+
+      anim.addEventListener('complete', nextBlock);
+      playAnimation();
+    }
   };
 
-  const onSpeechPlay = () => {
+  const nextBlock = () => {
     const { anim } = animationCurrent;
+    anim.removeEventListener('complete', nextBlock);
+
+    setTimeout(() => changeBlock(), animationTimeout);
+  };
+
+  const updateAnimation = () => {
+    const { anim } = animationCurrent;
+    anim.removeEventListener('complete', updateAnimation);
+
+    const { currentAnimation } = currentData;
+    let nextAnimation = '';
+
+    if (currentAnimation === 'start') {
+      nextAnimation = 'speech';
+    } else if (currentAnimation === 'speech') {
+      nextAnimation = 'end';
+    }
+
+    dispatchUpdate({
+      currentData: {
+        ...currentData,
+        currentAnimation: nextAnimation,
+        isLoop: nextAnimation === 'speech',
+      },
+      currentBlockIndex: currentIndex,
+    });
+  };
+
+  const playAnimation = () => {
+    const { anim } = animationCurrent;
+
+    if (currentData.currentAnimation === 'end' && currentData.isEndReversed) {
+      anim.goToAndStop(anim.totalFrames - 1, true);
+      anim.setDirection(-1);
+    }
 
     anim.play();
   };
@@ -113,7 +164,11 @@ const useAudioHelper = (
     const { anim } = animationCurrent;
 
     anim.stop();
-    changeBlock();
+
+    setTimeout(() => {
+      if (currentData.animationData.end) updateAnimation();
+      else changeBlock();
+    }, animationTimeout);
   };
 
   const stopSpeech = () => {

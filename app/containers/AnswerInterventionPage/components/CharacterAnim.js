@@ -102,6 +102,7 @@ const CharacterAnim = ({
     blocks,
     dispatchUpdate,
     state.currentData,
+    state.currentBlockIndex,
     animationRef.current,
     changeBlock,
   );
