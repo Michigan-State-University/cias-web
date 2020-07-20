@@ -60,12 +60,13 @@ const BranchingTab = ({
 
   const displayPatternTargetText = target => {
     const selectedIndex = findQuestionIndex(questions, id);
-    const targetIndex =
-      target.type === 'Question'
-        ? findQuestionIndex(questions, target.id)
-        : findInterventionIndex(interventionList || [], target.id);
+    const isQuestionType = target.type === 'Question';
 
-    if (target.type === 'Question') {
+    const targetIndex = isQuestionType
+      ? findQuestionIndex(questions, target.id)
+      : findInterventionIndex(interventionList || [], target.id);
+
+    if (isQuestionType) {
       if (selectedIndex === targetIndex - 1)
         return formatMessage(messages.nextScreen);
 

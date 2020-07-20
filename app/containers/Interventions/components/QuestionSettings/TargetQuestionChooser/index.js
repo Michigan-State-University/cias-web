@@ -27,7 +27,6 @@ import {
 } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import { makeSelectIntervention } from 'global/reducers/intervention';
 import {
-  fetchInterventionsRequest,
   makeSelectInterventionsLoader,
   makeSelectInterventions,
   interventionListReducer,
@@ -52,7 +51,6 @@ const TargetQuestionChooser = ({
   pattern: { target },
   currentIndex,
   isVisible,
-  getInterventionList,
   interventionList,
   interventionListLoading,
 }) => {
@@ -75,10 +73,6 @@ const TargetQuestionChooser = ({
       setIsInterventionView(target.type === 'Intervention');
     }
   }, [isVisible]);
-
-  useEffect(() => {
-    if (isInterventionView) getInterventionList();
-  }, [isInterventionView]);
 
   const chooseNextQuestion = () => {
     if (!isLast) {
@@ -245,7 +239,6 @@ TargetQuestionChooser.propTypes = {
   }),
   currentIndex: PropTypes.number,
   isVisible: PropTypes.bool,
-  getInterventionList: PropTypes.func,
   interventionList: PropTypes.arrayOf(PropTypes.shape(Intervention)),
   interventionListLoading: PropTypes.bool,
 };
@@ -259,13 +252,6 @@ const mapStateToProps = createStructuredSelector({
   interventionListLoading: makeSelectInterventionsLoader(),
 });
 
-const mapDispatchToProps = {
-  getInterventionList: fetchInterventionsRequest,
-};
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps);
 
 export default injectIntl(compose(withConnect)(TargetQuestionChooser));
