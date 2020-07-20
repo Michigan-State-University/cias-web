@@ -16,6 +16,7 @@ const boxShadows = {
 
 const elements = {
   navbarHeight: 70,
+  draggableContainerSize: 700,
 };
 
 export { borders, paddings, boxShadows, elements };

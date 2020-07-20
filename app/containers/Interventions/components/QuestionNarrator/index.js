@@ -78,7 +78,7 @@ const QuestionNarrator = ({
     anim => anim.name === animation,
   );
 
-  const getCurrentAnimation = () => ({
+  const getAnimationData = () => ({
     name: currentAnimation.name,
     animationData: currentAnimation.animationData,
   });
@@ -88,7 +88,7 @@ const QuestionNarrator = ({
     autoloadSegments: false,
     loop: false,
     autoplay: false,
-    ...(currentAnimation ? getCurrentAnimation() : {}),
+    ...(currentAnimation ? getAnimationData() : {}),
   };
 
   const completeCallback = () => {
@@ -111,6 +111,7 @@ const QuestionNarrator = ({
         onDrag={(_, { x, y }) => setDragPosition({ x, y })}
         position={dragPosition}
         disabled={!draggable}
+        bounds="#narrator-boundaries"
       >
         <div>
           <Lottie

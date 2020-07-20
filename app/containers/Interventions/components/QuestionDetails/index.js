@@ -13,6 +13,8 @@ import NoContent from 'components/NoContent';
 import { Button } from 'components/Button';
 
 import { colors } from 'theme';
+import { AnswerOuterContainer, AnswerOuterContent } from './styled';
+import messages from './messages';
 
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
@@ -20,13 +22,7 @@ import QuestionVideo from '../QuestionVideo';
 import QuestionNarrator from '../QuestionNarrator';
 import QuestionSubtitle from '../QuestionSubtitle';
 import QuestionTitle from '../QuestionTitle';
-import {
-  makeSelectSelectedQuestion,
-  makeSelectSelectedQuestionIndex,
-} from '../../containers/EditInterventionPage/selectors';
-
-import { editQuestionRequest } from '../../containers/EditInterventionPage/actions';
-import messages from './messages';
+import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
 
 const QuestionDetails = props => (
   <Box
@@ -43,7 +39,6 @@ const QuestionDetails = props => (
 const renderQuestionDetails = ({ selectedQuestion }) => {
   if (selectedQuestion != null) {
     const {
-      id,
       settings: {
         video,
         image,
@@ -55,41 +50,43 @@ const renderQuestionDetails = ({ selectedQuestion }) => {
     } = selectedQuestion || {};
 
     return (
-      <Column position="relative" zIndex={0}>
-        {animation && <QuestionNarrator questionId={id} />}
-        <Row justify="center" filled>
-          <Column sm={10} justify="center">
-            {title && (
-              <Row width="100%">
-                <QuestionTitle />
-              </Row>
-            )}
-            {subtitle && (
+      <AnswerOuterContainer>
+        <AnswerOuterContent id="narrator-boundaries">
+          {animation && <QuestionNarrator />}
+          <Row justify="center" filled>
+            <Column sm={10} justify="center">
+              {title && (
+                <Row width="100%">
+                  <QuestionTitle />
+                </Row>
+              )}
+              {subtitle && (
+                <Row mt={22}>
+                  <QuestionSubtitle />
+                </Row>
+              )}
+              {video && (
+                <Row mt={22}>
+                  <QuestionVideo />
+                </Row>
+              )}
+              {image && (
+                <Row mt={22}>
+                  <QuestionImage />
+                </Row>
+              )}
               <Row mt={22}>
-                <QuestionSubtitle />
+                <QuestionData />
               </Row>
-            )}
-            {video && (
-              <Row mt={22}>
-                <QuestionVideo />
-              </Row>
-            )}
-            {image && (
-              <Row mt={22}>
-                <QuestionImage />
-              </Row>
-            )}
-            <Row mt={22}>
-              <QuestionData />
-            </Row>
-            {proceedButton && (
-              <Button width="180px" mt={40} hoverable>
-                <FormattedMessage {...messages.nextQuestion} />
-              </Button>
-            )}
-          </Column>
-        </Row>
-      </Column>
+              {proceedButton && (
+                <Button width="180px" mt={40} hoverable>
+                  <FormattedMessage {...messages.nextQuestion} />
+                </Button>
+              )}
+            </Column>
+          </Row>
+        </AnswerOuterContent>
+      </AnswerOuterContainer>
     );
   }
 
@@ -102,16 +99,8 @@ renderQuestionDetails.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  selectedQuestionIndex: makeSelectSelectedQuestionIndex(),
 });
 
-const mapDispatchToProps = {
-  updateTitle: editQuestionRequest,
-};
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps);
 
 export default compose(withConnect)(QuestionDetails);

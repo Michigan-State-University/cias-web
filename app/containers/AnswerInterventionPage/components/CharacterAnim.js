@@ -1,16 +1,17 @@
-import React, { useEffect, useRef, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
+import isNumber from 'lodash/isNumber';
 import get from 'lodash/get';
-import uniqBy from 'lodash/uniqBy';
 import Lottie from 'react-lottie';
 
 import { bodyAnimationType, speechType } from 'models/Narrator/BlockTypes';
-import AudioWrapper from 'utils/audioWrapper';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
-import getPause from 'utils/animations/getPause';
-import { autoRestAnimations } from 'utils/animations/animationsNames';
 
+import Draggable from 'react-draggable';
 import { NarratorContainer } from './styled';
+import useMoveHelper from '../animationsHelpers/useMoveHelperHook';
+import useAudioHelper from '../animationsHelpers/audioHelper';
+import useAnimationHelper from '../animationsHelpers/animationHelper';
 
 const UPDATE = 'UPDATE';
 
@@ -33,104 +34,28 @@ const lottieStyles = {
   margin: 'none',
 };
 
-const CharacterAnim = ({ blocks, quesitonId, settings }) => {
+const CharacterAnim = ({
+  blocks,
+  questionId,
+  settings,
+  animationContainer,
+}) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const audio = useRef(new AudioWrapper());
+  const dispatchUpdate = newState =>
+    dispatch({
+      type: UPDATE,
+      newState,
+    });
 
-  const animationRef = useRef(null);
-  const loadedAnimations = useRef([]);
-  const loadedSpeechAnimations = useRef([]);
+  const changeBlock = async prevIndex => {
+    clearAnimationBlock();
 
-  const loadAnimations = async () => {
-    const bodyAnimations = [];
-    const speechAnimations = [];
-
-    const uniqAnimations = uniqBy(
-      blocks.filter(block => block.animation),
-      'animation',
-    );
-
-    await Promise.all(
-      uniqAnimations.map(async ({ animation, type }) => {
-        const data = await import(`assets/animations/${animation}.json`);
-
-        switch (type) {
-          case bodyAnimationType:
-            bodyAnimations.push({
-              type,
-              name: animation,
-              animationData: data,
-              pause: getPause(animation),
-              isAutoRest: autoRestAnimations.includes(animation),
-            });
-            break;
-          case speechType:
-            speechAnimations.push({
-              type,
-              name: animation,
-              animationData: data,
-            });
-            break;
-          default:
-            break;
-        }
-      }),
-    );
-
-    return { bodyAnimations, speechAnimations };
-  };
-
-  const getInitialData = () => {
-    if (blocks.length) {
-      switch (blocks[0].type) {
-        case speechType:
-          return {
-            ...blocks[0],
-            ...loadedSpeechAnimations.current.find(
-              anim =>
-                anim.name === (blocks[0] ? blocks[0].animation : undefined),
-            ),
-          };
-
-        case bodyAnimationType:
-          return loadedAnimations.current[0];
-
-        default:
-          break;
-      }
-    }
-  };
-
-  useEffect(() => {
-    const fetch = async () => {
-      const { bodyAnimations, speechAnimations } = await loadAnimations();
-      loadedAnimations.current = bodyAnimations;
-      loadedSpeechAnimations.current = speechAnimations;
-      dispatch({
-        type: UPDATE,
-        newState: {
-          currentData: getInitialData(),
-          currentBlockIndex: 0,
-        },
-      });
-    };
-    fetch();
-
-    return stopSpeech;
-  }, [quesitonId]);
-
-  const changeBlock = () => {
-    if (animationRef.current) {
-      const { anim } = animationRef.current;
-      anim.removeEventListener('complete', changeBlock);
-    }
-
-    audio.current.clean();
-
-    const nextIndex = state.currentBlockIndex + 1;
+    cleanAudio();
+    const nextIndex =
+      (isNumber(prevIndex) ? prevIndex : state.currentBlockIndex) + 1;
     const nextBlock = blocks[nextIndex];
-
     if (nextBlock) {
+      await moveAnimation(nextBlock);
       switch (nextBlock.type) {
         case bodyAnimationType:
           changeAnimation(nextBlock, nextIndex);
@@ -141,90 +66,81 @@ const CharacterAnim = ({ blocks, quesitonId, settings }) => {
         default:
           break;
       }
+    } else {
+      const nextAnim = getIdleAnimation();
+      dispatchUpdate({
+        currentData: nextAnim,
+        currentBlockIndex: nextIndex,
+      });
     }
   };
 
-  const changeAnimation = (nextBlock, nextIndex) => {
-    const nextAnim = loadedAnimations.current.find(
-      anim => anim.name === (nextBlock ? nextBlock.animation : undefined),
-    );
-    dispatch({
-      type: UPDATE,
-      newState: {
-        currentData: nextAnim,
-        currentBlockIndex: nextIndex,
-      },
-    });
-  };
+  const {
+    getInitialBodyAnimation,
+    changeAnimation,
+    handleBodyAnimationBlock,
+    getIdleAnimation,
+    clearAnimationBlock,
+    animationRef,
+    fetchBodyAnimations,
+  } = useAnimationHelper(
+    blocks,
+    dispatchUpdate,
+    changeBlock,
+    state.currentData,
+  );
 
-  const changeSpeech = (nextBlock, nextIndex) => {
-    dispatch({
-      type: UPDATE,
-      newState: {
-        currentData: {
-          ...nextBlock,
-          ...loadedSpeechAnimations.current.find(
-            anim => anim.name === (nextBlock ? nextBlock.animation : undefined),
-          ),
-        },
-        currentBlockIndex: nextIndex,
-      },
-    });
-  };
+  const {
+    changeSpeech,
+    getInitialSpeechAnimation,
+    cleanAudio,
+    handleSpeechBlock,
+    decideIfPlaySpeechAnimation,
+    fetchAudioAnimations,
+    stopSpeech,
+  } = useAudioHelper(
+    blocks,
+    dispatchUpdate,
+    state.currentData,
+    animationRef.current,
+    changeBlock,
+  );
 
-  const reverseAnimation = () => {
-    setTimeout(() => {
-      if (animationRef.current) {
-        const { anim } = animationRef.current;
-        if (!get(state.currentData, 'isAutoRest', false)) {
-          anim.setDirection(-1);
-          anim.play();
-          anim.removeEventListener('complete', reverseAnimation);
-          anim.addEventListener('complete', changeBlock);
-        } else {
-          anim.removeEventListener('complete', reverseAnimation);
-          changeBlock();
-        }
+  const { animationPos, moveAnimation, fetchMoveAnimations } = useMoveHelper(
+    animationContainer,
+    blocks,
+    dispatchUpdate,
+  );
+
+  const getInitialData = () => {
+    if (blocks.length) {
+      switch (blocks[0].type) {
+        case speechType:
+          return getInitialSpeechAnimation();
+
+        case bodyAnimationType:
+          return getInitialBodyAnimation();
+
+        default:
+          break;
       }
-    }, get(state.currentData, 'pause', 0));
+    }
   };
 
-  const handleBodyAnimationBlock = () => {
-    const { anim } = animationRef.current;
-    if (state.currentData) {
-      anim.addEventListener('complete', reverseAnimation);
-      anim.play();
-    } else anim.stop();
-  };
-
-  const handleSpeechBlock = () => {
-    audio.current.onPlay(onSpeechPlay);
-    audio.current.onLoaded(onSpeechReady);
-    audio.current.onEnded(onSpeechEnded);
-    audio.current.onError(onSpeechEnded);
-
-    audio.current.setSrc(state.currentData.audio_url);
-  };
-
-  const onSpeechPlay = () => {
-    const { anim } = animationRef.current;
-
-    anim.play();
-  };
-
-  const onSpeechReady = () => audio.current.play();
-
-  const onSpeechEnded = () => {
-    const { anim } = animationRef.current;
-
-    anim.stop();
-    changeBlock();
-  };
-
-  const stopSpeech = () => {
-    audio.current.clean();
-    audio.current.stop();
-  };
+  useEffect(() => {
+    const fetch = async () => {
+      await moveAnimation(blocks[0]);
+      await fetchBodyAnimations();
+      await fetchAudioAnimations();
+      await fetchMoveAnimations();
+      dispatchUpdate({
+        currentData: getInitialData(),
+        currentBlockIndex: 0,
+      });
+    };
+    fetch();
+    return stopSpeech;
+  }, [questionId]);
 
   useDidUpdateEffect(() => {
     if (state.currentData)
@@ -232,13 +148,11 @@ const CharacterAnim = ({ blocks, quesitonId, settings }) => {
         case bodyAnimationType:
           if (!settings.animation) changeBlock();
           else handleBodyAnimationBlock();
-
           break;
 
         case speechType:
           if (!settings.voice) changeBlock();
           else handleSpeechBlock();
-
           break;
 
         default:
@@ -246,27 +160,20 @@ const CharacterAnim = ({ blocks, quesitonId, settings }) => {
       }
   }, [state.currentData, state.currentBlockIndex]);
 
-  const decideIfLoopAnimation = () => {
-    if (!state.currentData) return false;
+  const decideIfLoopAnimation = () =>
+    get(state, 'currentData.type', 'none') === speechType;
 
-    switch (state.currentData.type) {
-      case speechType:
-        return true;
-      case bodyAnimationType:
-      default:
-        return false;
-    }
-  };
-
-  const decideIfPlaySpeechAnimation = () => {
+  const getAnimationOptions = () => {
     if (
+      settings.animation &&
       state.currentData &&
-      state.currentData.type === speechType &&
-      (audio.current.paused || audio.current.stopped)
+      state.currentData.animationData
     )
-      return false;
-
-    return true;
+      return {
+        name: state.currentData.name,
+        animationData: state.currentData.animationData,
+      };
+    return {};
   };
 
   const defaultOptions = {
@@ -274,31 +181,26 @@ const CharacterAnim = ({ blocks, quesitonId, settings }) => {
     autoloadSegments: false,
     loop: decideIfLoopAnimation(),
     autoplay: false,
-    ...(settings.animation &&
-    state.currentData &&
-    state.currentData.animationData
-      ? {
-          name: state.currentData.name,
-          animationData: state.currentData.animationData,
-        }
-      : {}),
+    ...getAnimationOptions(),
   };
 
   return (
     <NarratorContainer>
-      <Lottie
-        ref={animationRef}
-        options={defaultOptions}
-        height={100}
-        width={100}
-        style={lottieStyles}
-        isClickToPauseDisabled
-        isStopped={
-          !state.currentData ||
-          !state.currentData.animationData ||
-          !decideIfPlaySpeechAnimation()
-        }
-      />
+      <Draggable disabled position={animationPos}>
+        <Lottie
+          ref={animationRef}
+          options={defaultOptions}
+          height={100}
+          width={100}
+          style={lottieStyles}
+          isClickToPauseDisabled
+          isStopped={
+            !state.currentData ||
+            !state.currentData.animationData ||
+            !decideIfPlaySpeechAnimation()
+          }
+        />
+      </Draggable>
     </NarratorContainer>
   );
 };
@@ -314,8 +216,9 @@ CharacterAnim.propTypes = {
       }),
     ]),
   ),
-  quesitonId: PropTypes.string,
+  questionId: PropTypes.string,
   settings: PropTypes.object,
+  animationContainer: PropTypes.shape({ current: PropTypes.any }),
 };
 
 export default CharacterAnim;

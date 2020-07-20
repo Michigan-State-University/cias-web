@@ -2,18 +2,22 @@
 
 exports[`<AnswerInterventionPage /> Should render and match the snapshot 1`] = `
 <div
-  class="styled__AnswerInterventionContainer-sc-5f6i11-0 hioHJb"
+  class="styled__AnswerInterventionContainer-sc-5f6i11-0 jEuona"
 >
   <div
-    class="styled__AnswerContent-sc-5f6i11-1 qmmML"
+    class="styled__AnswerInterventionContent-sc-5f6i11-1 kwrUGy"
   >
-    <button
-      class="StyledButton-t20ntd-0 fgSUzr"
-      color="primary"
-      width="100%"
+    <div
+      class="styled__AnswerContent-sc-5f6i11-2 kqLVLV"
     >
-      Start intervention
-    </button>
+      <button
+        class="StyledButton-t20ntd-0 fgSUzr"
+        color="primary"
+        width="100%"
+      >
+        Start intervention
+      </button>
+    </div>
   </div>
 </div>
 `;

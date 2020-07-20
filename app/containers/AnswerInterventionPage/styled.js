@@ -1,8 +1,21 @@
 import styled from 'styled-components';
+import { elements } from 'theme';
 
 export const AnswerInterventionContainer = styled.div`
   width: 100%;
   height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+`;
+
+export const AnswerInterventionContent = styled.div`
+  max-width: ${elements.draggableContainerSize}px;
+  width: 100%;
+  max-height: ${elements.draggableContainerSize}px;
+  position: relative;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;

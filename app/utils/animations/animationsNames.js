@@ -32,6 +32,8 @@ const reverseAnimations = [
   'write',
 ];
 
+const moveAnimations = ['moveLeft', 'moveRight'];
+
 const bodyAnimations = [...autoRestAnimations, ...reverseAnimations];
 
-export { autoRestAnimations, bodyAnimations };
+export { autoRestAnimations, bodyAnimations, moveAnimations };

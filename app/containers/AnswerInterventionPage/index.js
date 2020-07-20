@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -29,6 +29,7 @@ import {
   QuestionActions,
   QuestionTitle,
   BackButton,
+  AnswerInterventionContent,
   QuestionSubtitle,
 } from './styled';
 import {
@@ -65,6 +66,7 @@ export function AnswerInterventionPage({
     : null;
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
+  const animationParentRef = useRef();
 
   useEffect(() => {
     fetchQuestionsAction(params.id);
@@ -118,8 +120,9 @@ export function AnswerInterventionPage({
         <>
           {currentQuestion && (
             <CharacterAnim
+              animationContainer={animationParentRef}
               blocks={currentQuestion.narrator.blocks}
-              quesitonId={currentQuestionId}
+              questionId={currentQuestionId}
               settings={currentQuestion.narrator.settings}
             />
           )}
@@ -176,11 +179,13 @@ export function AnswerInterventionPage({
 
   return (
     <AnswerInterventionContainer>
-      <Helmet>
-        <title>Answer Intervention</title>
-        <meta name="description" content="Answer Intervention" />
-      </Helmet>
-      {renderPage()}
+      <AnswerInterventionContent ref={animationParentRef}>
+        <Helmet>
+          <title>Answer Intervention</title>
+          <meta name="description" content="Answer Intervention" />
+        </Helmet>
+        {renderPage()}
+      </AnswerInterventionContent>
     </AnswerInterventionContainer>
   );
 }
