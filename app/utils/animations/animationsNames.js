@@ -42,6 +42,93 @@ const speechAnimations = {
     },
     isEndReversed: true,
   },
+  pointUp: {
+    animations: {
+      start: 'pointUp',
+      speech: 'pointUpSpeech',
+      end: 'pointUp',
+    },
+    isEndReversed: true,
+  },
+  pointDown: {
+    animations: {
+      start: 'pointDown',
+      speech: 'pointDownSpeech',
+      end: 'pointDown',
+    },
+    isEndReversed: true,
+  },
+  pointLeft: {
+    animations: {
+      start: 'pointLeft',
+      speech: 'pointLeftSpeech',
+      end: 'pointLeft',
+    },
+    isEndReversed: true,
+  },
+  pointRight: {
+    animations: {
+      start: 'pointRight',
+      speech: 'pointRightSpeech',
+      end: 'pointRight',
+    },
+    isEndReversed: true,
+  },
+  read: {
+    animations: {
+      start: 'readStart',
+      speech: 'readSpeech',
+      end: 'readEnd',
+    },
+  },
+  write: {
+    animations: {
+      start: 'write',
+      speech: 'writeSpeech',
+      end: 'write',
+    },
+    isEndReversed: true,
+  },
+  listen: {
+    animations: {
+      start: 'listen',
+      speech: 'listenSpeech',
+      end: 'listen',
+    },
+    isEndReversed: true,
+  },
+  announce: {
+    animations: {
+      start: 'announce',
+      speech: 'announceSpeech',
+      end: 'announce',
+    },
+    isEndReversed: true,
+  },
+  search: {
+    animations: {
+      start: 'searchReversable',
+      speech: 'searchSpeech',
+      end: 'searchReversable',
+    },
+    isEndReversed: true,
+  },
+  suggest: {
+    animations: {
+      start: 'suggest',
+      speech: 'suggestSpeech',
+      end: 'suggest',
+    },
+    isEndReversed: true,
+  },
+  think: {
+    animations: {
+      start: 'think',
+      speech: 'thinkSpeech',
+      end: 'think',
+    },
+    isEndReversed: true,
+  },
 };
 
 const moveAnimations = ['moveLeft', 'moveRight'];
