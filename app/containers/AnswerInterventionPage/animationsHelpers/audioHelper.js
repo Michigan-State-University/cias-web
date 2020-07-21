@@ -45,9 +45,13 @@ const useAudioHelper = (
           const animationsData = {};
 
           for (const [key, value] of animationNames) {
-            const data = await import(`assets/animations/${value}.json`);
+            if (key === 'end' && speechAnimations[animation].isEndReversed)
+              animationsData.end = animationsData.start;
+            else {
+              const data = await import(`assets/animations/${value}.json`);
 
-            animationsData[key] = data;
+              animationsData[key] = data;
+            }
           }
 
           animations.push({
