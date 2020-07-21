@@ -36,15 +36,14 @@ const SpeechBlock = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const animations = keys(speechAnimations);
-  const selectOptions = useMemo(
-    () =>
-      animations.map(animation => ({
-        value: animation,
-        label: formatMessage(animationMessages[animation]),
-      })),
-    animations,
-  );
+  const selectOptions = useMemo(() => {
+    const animations = keys(speechAnimations);
+
+    return animations.map(animation => ({
+      value: animation,
+      label: formatMessage(animationMessages[animation]),
+    }));
+  }, [speechAnimations]);
 
   const audio = useRef(new AudioWrapper());
 
