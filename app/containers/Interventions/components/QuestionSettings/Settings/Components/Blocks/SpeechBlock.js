@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -37,10 +37,14 @@ const SpeechBlock = ({
   const [isPlaying, setIsPlaying] = useState(false);
 
   const animations = keys(speechAnimations);
-  const selectOptions = animations.map(animation => ({
-    value: animation,
-    label: formatMessage(animationMessages[animation]),
-  }));
+  const selectOptions = useMemo(
+    () =>
+      animations.map(animation => ({
+        value: animation,
+        label: formatMessage(animationMessages[animation]),
+      })),
+    animations,
+  );
 
   const audio = useRef(new AudioWrapper());
 
