@@ -23,7 +23,7 @@ const Accordion = ({ children, onHide, onOpen, accordionParentKey }) => {
   };
 
   const renderCollapse = (child, index) => {
-    const { children: content, label, color } = child.props;
+    const { children: content, label, color, onDelete } = child.props;
 
     return (
       <Collapse
@@ -32,6 +32,7 @@ const Accordion = ({ children, onHide, onOpen, accordionParentKey }) => {
         isOpened={opened === index}
         label={label}
         color={color}
+        onDelete={onDelete}
       >
         {content}
       </Collapse>

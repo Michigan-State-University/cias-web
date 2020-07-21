@@ -4,6 +4,7 @@ import { Collapse as ReactCollapse } from 'react-collapse';
 
 import arrowUp from 'assets/svg/arrow-up.svg';
 import arrowDown from 'assets/svg/arrow-down.svg';
+import bin from 'assets/svg/bin-red.svg';
 
 import Row from 'components/Row';
 import Img from 'components/Img';
@@ -13,17 +14,25 @@ import {
   StyledCollapseContainer,
   StyledCollapseContent,
   Content,
+  HoverableContainer,
 } from './styled';
 
-const CollapseLabel = ({ isOpened, onToggle, label, color }) => {
+const CollapseLabel = ({ isOpened, onToggle, label, color, onDelete }) => {
   const img = isOpened ? arrowUp : arrowDown;
 
   return (
-    <StyledCollapseLabel bg={color} onClick={onToggle}>
-      <Row justify="between">
-        {label} <Img src={img} />
-      </Row>
-    </StyledCollapseLabel>
+    <HoverableContainer
+      justify="between"
+      align="center"
+      isDeletable={!!onDelete}
+    >
+      <StyledCollapseLabel bg={color} onClick={onToggle}>
+        <Row justify="between">
+          {label} <Img src={img} />
+        </Row>
+      </StyledCollapseLabel>
+      <Img src={bin} alt="bin" clickable onClick={onDelete} />
+    </HoverableContainer>
   );
 };
 
@@ -32,6 +41,7 @@ CollapseLabel.propTypes = {
   onToggle: PropTypes.func,
   isOpened: PropTypes.bool,
   color: PropTypes.string,
+  onDelete: PropTypes.func,
 };
 
 const CollapseContent = ({ child, isOpened }) => {
@@ -66,13 +76,14 @@ CollapseContent.propTypes = {
   isOpened: PropTypes.bool,
 };
 
-const Collapse = ({ children, isOpened, onToggle, label, color }) => (
+const Collapse = ({ children, isOpened, onToggle, label, color, onDelete }) => (
   <StyledCollapseContainer>
     <CollapseLabel
       label={label}
       onToggle={onToggle}
       isOpened={isOpened}
       color={color}
+      onDelete={onDelete}
     />
     <CollapseContent child={children} isOpened={isOpened} />
   </StyledCollapseContainer>
@@ -84,6 +95,7 @@ Collapse.propTypes = {
   onToggle: PropTypes.func,
   isOpened: PropTypes.bool,
   color: PropTypes.string,
+  onDelete: PropTypes.func,
 };
 
 Collapse.defaultProps = {

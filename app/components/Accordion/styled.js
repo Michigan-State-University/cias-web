@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+
+import Row from 'components/Row';
+
 import { style } from '../BaseComponentStyles';
 
 export const AccordionContainer = styled.div``;
@@ -13,6 +16,8 @@ export const StyledCollapseLabel = styled.div`
   padding: 12px;
   color: white;
   cursor: pointer;
+  width: 100%;
+  margin-right: 5px;
   ${style};
 `;
 
@@ -27,5 +32,16 @@ export const Content = styled.div`
 export const StyledCollapseContent = styled.div`
   .ReactCollapse--collapse {
     transition: height 490ms ease;
+  }
+`;
+
+export const HoverableContainer = styled(Row)`
+  img[alt='bin'] {
+    display: none;
+  }
+  &:hover {
+    img[alt='bin'] {
+      ${({ isDeletable }) => isDeletable && 'display: block;'}
+    }
   }
 `;

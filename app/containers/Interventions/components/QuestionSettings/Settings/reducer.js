@@ -1,3 +1,5 @@
+import cloneDeep from 'lodash/cloneDeep';
+
 import {
   UPDATE_QUESTION_SETTINGS,
   ADD_BLOCK,
@@ -9,6 +11,7 @@ import {
   UPDATE_SPEECH_SETTINGS,
   UPDATE_NARRATOR_MOVEMENT,
   UPDATE_FORMULA_CASE,
+  REMOVE_BLOCK,
 } from './constants';
 
 const instantiateBlockForType = (type, posFrom) => {
@@ -102,6 +105,19 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
           ],
         },
       };
+
+    case REMOVE_BLOCK: {
+      const clonedQuesiton = cloneDeep(question);
+      const previousBlock =
+        clonedQuesiton.narrator.blocks[payload.data.index - 1];
+      const nextBlock = clonedQuesiton.narrator.blocks[payload.data.index + 1];
+
+      if (nextBlock && previousBlock) {
+        nextBlock.posFrom = previousBlock.posTo;
+      }
+      clonedQuesiton.narrator.blocks.splice(payload.data.index, 1);
+      return clonedQuesiton;
+    }
 
     case UPDATE_NARRATOR_ANIMATION: {
       const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));

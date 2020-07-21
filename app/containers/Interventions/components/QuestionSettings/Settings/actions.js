@@ -2,6 +2,7 @@ import { updateQuestionSettings } from 'containers/Interventions/containers/Edit
 import {
   UPDATE_QUESTION_SETTINGS,
   ADD_BLOCK,
+  REMOVE_BLOCK,
   UPDATE_NARRATOR_SETTINGS,
   UPDATE_NARRATOR_ANIMATION,
   UPDATE_FORMULA,
@@ -28,6 +29,12 @@ export const addBlock = (type, questionId) =>
   updateQuestionSettings({
     type: ADD_BLOCK,
     data: { type, questionId },
+  });
+
+export const removeBlock = index =>
+  updateQuestionSettings({
+    type: REMOVE_BLOCK,
+    data: { index },
   });
 
 export const updateNarratorAnimation = (index, value, questionId) =>

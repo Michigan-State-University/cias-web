@@ -6,6 +6,8 @@ export const UPDATE_NARRATOR_SETTINGS =
 
 export const ADD_BLOCK = 'app/EditInterventionPage/Settings/ADD_BLOCK';
 
+export const REMOVE_BLOCK = 'app/EditInterventionPage/Settings/REMOVE_BLOCK';
+
 export const UPDATE_NARRATOR_ANIMATION =
   'app/EditInterventionPage/Settings/UPDATE_NARRATOR_ANIMATION';
 

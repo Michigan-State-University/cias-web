@@ -1,45 +1,46 @@
 import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
+import map from 'lodash/map';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import map from 'lodash/map';
-import isEqual from 'lodash/isEqual';
 
 import Accordion from 'components/Accordion';
 import Box from 'components/Box';
 import H3 from 'components/H3';
 import Row from 'components/Row';
 import Switch from 'components/Switch';
+import globalMessages from 'global/i18n/globalMessages';
 import lastKey from 'utils/getLastKey';
+import { Button } from 'components/Button';
+import { colors, borders } from 'theme';
+import { createStructuredSelector } from 'reselect';
+import { makeSelectSelectedQuestionIndex } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import {
   bodyAnimationType,
   speechType,
   blockTypeToColorMap,
 } from 'models/Narrator/BlockTypes';
-import { colors, borders } from 'theme';
-
-import globalMessages from 'global/i18n/globalMessages';
-import {
-  setPeedyDraggable,
-  setAnimationStopPosition,
-} from 'containers/Interventions/containers/EditInterventionPage/actions';
 import {
   makeSelectDraggable,
   makeSelectAnimationPosition,
 } from 'containers/Interventions/components/QuestionNarrator/selectors';
-import { Button } from 'components/Button';
-import { createStructuredSelector } from 'reselect';
-import { makeSelectSelectedQuestionIndex } from 'containers/Interventions/containers/EditInterventionPage/selectors';
-import messages from '../messages';
+import {
+  setPeedyDraggable,
+  setAnimationStopPosition,
+} from 'containers/Interventions/containers/EditInterventionPage/actions';
+
 import BlockTypeChooser from '../../../BlockTypeChooser';
+import BodyAnimationBlock from '../Blocks/BodyAnimationBlock';
+import SpeechBlock from '../Blocks/SpeechBlock';
+import messages from '../messages';
 import { DashedBox } from '../styled';
 import {
   addBlock,
   updateNarratorSettings,
   saveNarratorMovement,
+  removeBlock,
 } from '../../actions';
-import BodyAnimationBlock from '../Blocks/BodyAnimationBlock';
-import SpeechBlock from '../Blocks/SpeechBlock';
 
 const NarratorTab = ({
   formatMessage,
@@ -53,6 +54,7 @@ const NarratorTab = ({
   savePosition,
   animationPosition,
   currentQuestionIndex,
+  deleteBlock,
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
@@ -124,6 +126,8 @@ const NarratorTab = ({
     return `${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`;
   };
 
+  const handleDelete = index => () => deleteBlock(index);
+
   return (
     <Fragment>
       <Box mb={30}>
@@ -158,6 +162,7 @@ const NarratorTab = ({
               label={`${blockIndex + 1}. ${formatMessage(
                 globalMessages.blockTypes[block.type],
               )}`}
+              onDelete={handleDelete(blockIndex)}
             >
               {!draggable && (
                 <Button
@@ -214,10 +219,12 @@ NarratorTab.propTypes = {
   savePosition: PropTypes.func,
   draggable: PropTypes.bool,
   currentQuestionIndex: PropTypes.number,
+  deleteBlock: PropTypes.func,
 };
 
 const mapDispatchToProps = {
   onCreate: addBlock,
+  deleteBlock: removeBlock,
   onNarratorToggle: updateNarratorSettings,
   setDraggable: setPeedyDraggable,
   setOffset: setAnimationStopPosition,
