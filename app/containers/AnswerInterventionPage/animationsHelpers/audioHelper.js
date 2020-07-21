@@ -159,8 +159,9 @@ const useAudioHelper = (
   const onSpeechReady = () => audio.current.play();
 
   const onSpeechEnded = () => {
-    const { anim } = animationCurrent;
+    cleanAudio();
 
+    const { anim } = animationCurrent;
     anim.stop();
 
     setTimeout(() => {
