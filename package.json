@@ -44,7 +44,7 @@
     "test:local": "cross-env NODE_ENV=test jest",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
   },
   "browserslist": [
     "last 2 versions",
