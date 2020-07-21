@@ -107,16 +107,16 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       };
 
     case REMOVE_BLOCK: {
-      const clonedQuesiton = cloneDeep(question);
+      const clonedQuestion = cloneDeep(question);
       const previousBlock =
-        clonedQuesiton.narrator.blocks[payload.data.index - 1];
-      const nextBlock = clonedQuesiton.narrator.blocks[payload.data.index + 1];
+        clonedQuestion.narrator.blocks[payload.data.index - 1];
+      const nextBlock = clonedQuestion.narrator.blocks[payload.data.index + 1];
 
       if (nextBlock && previousBlock) {
         nextBlock.posFrom = previousBlock.posTo;
       }
-      clonedQuesiton.narrator.blocks.splice(payload.data.index, 1);
-      return clonedQuesiton;
+      clonedQuestion.narrator.blocks.splice(payload.data.index, 1);
+      return clonedQuestion;
     }
 
     case UPDATE_NARRATOR_ANIMATION: {
