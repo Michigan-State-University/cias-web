@@ -17,6 +17,8 @@ import { useInjectReducer } from 'utils/injectReducer';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 import { Button } from 'components/Button';
+import Img from 'components/Img';
+
 import renderQuestionByType from './components';
 import CharacterAnim from './components/CharacterAnim';
 import makeSelectAnswerInterventionPage from './selectors';
@@ -31,6 +33,9 @@ import {
   BackButton,
   AnswerInterventionContent,
   QuestionSubtitle,
+  Player,
+  PlayerWrapper,
+  ImageWrapper,
 } from './styled';
 import {
   fetchQuestions,
@@ -81,8 +86,15 @@ export function AnswerInterventionPage({
     const {
       title,
       subtitle,
+      video_url: videoUrl,
+      image_url: imageUrl,
       type,
-      settings: { title: settingsTitle, subtitle: settingsSubtitle },
+      settings: {
+        title: settingsTitle,
+        subtitle: settingsSubtitle,
+        video: settingsVideo,
+        image: settingsImage,
+      },
     } = currentQuestion;
     const selectAnswerProp = answerBody => {
       saveSelectedAnswer({
@@ -108,6 +120,16 @@ export function AnswerInterventionPage({
         )}
         {settingsTitle && (
           <QuestionSubtitle dangerouslySetInnerHTML={{ __html: subtitle }} />
+        )}
+        {settingsVideo && videoUrl && (
+          <PlayerWrapper>
+            <Player url={videoUrl} controls width="100%" height="100%" />
+          </PlayerWrapper>
+        )}
+        {settingsImage && imageUrl && (
+          <ImageWrapper>
+            <Img src={imageUrl} alt="image" height="100%" width="100%" />
+          </ImageWrapper>
         )}
         {renderQuestionByType(currentQuestion, sharedProps)}
       </>

@@ -2,13 +2,13 @@
 
 exports[`<AnswerInterventionPage /> Should render and match the snapshot 1`] = `
 <div
-  class="styled__AnswerInterventionContainer-sc-5f6i11-0 jEuona"
+  class="styled__AnswerInterventionContainer-sc-5f6i11-3 kHKGAe"
 >
   <div
-    class="styled__AnswerInterventionContent-sc-5f6i11-1 kwrUGy"
+    class="styled__AnswerInterventionContent-sc-5f6i11-4 joViwt"
   >
     <div
-      class="styled__AnswerContent-sc-5f6i11-2 kqLVLV"
+      class="styled__AnswerContent-sc-5f6i11-5 cBIzMa"
     >
       <button
         class="StyledButton-t20ntd-0 fgSUzr"
