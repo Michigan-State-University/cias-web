@@ -51,9 +51,6 @@ const InterventionNavbar = ({
           width="auto"
           value={name}
           fontSize={23}
-          autoSize
-          maxWidth={800}
-          averageLetterWidth={13}
           placeholder={formatMessage(messages.placeholder)}
           onBlur={val => updateInterventionName({ path: 'name', value: val })}
         />
