@@ -16,6 +16,8 @@ import {
   UPDATE_PREVIEW_ANIMATION,
   DELETE_QUESTION_REQUEST,
   COPY_QUESTION_REQUEST,
+  COPY_QUESTION_SUCCESS,
+  COPY_QUESTION_ERROR,
   CHANGE_QUESTION_TYPE,
   REORDER_QUESTION_LIST,
   UPDATE_CACHE,
@@ -51,6 +53,10 @@ const updateQuestionSettings = data =>
 // managing question actions
 const copyQuestionRequest = payload =>
   actionBuilder(COPY_QUESTION_REQUEST, payload);
+const copyQuestionSuccess = question =>
+  actionBuilder(COPY_QUESTION_SUCCESS, { question });
+const copyQuestionError = error =>
+  actionBuilder(COPY_QUESTION_ERROR, { error });
 const changeQuestionType = newType =>
   actionBuilder(CHANGE_QUESTION_TYPE, { newType });
 const deleteQuestionRequest = payload =>
@@ -108,6 +114,8 @@ export {
   updatePreviewAnimation,
   deleteQuestionRequest,
   copyQuestionRequest,
+  copyQuestionSuccess,
+  copyQuestionError,
   changeQuestionType,
   reorderQuestionList,
   updateCache,

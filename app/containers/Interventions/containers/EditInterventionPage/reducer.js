@@ -15,7 +15,8 @@ import {
   UPDATE_QUESTION_SETTINGS,
   UPDATE_PREVIEW_ANIMATION,
   DELETE_QUESTION_REQUEST,
-  COPY_QUESTION_REQUEST,
+  COPY_QUESTION_SUCCESS,
+  COPY_QUESTION_ERROR,
   CHANGE_QUESTION_TYPE,
   REORDER_QUESTION_LIST,
   GET_QUESTIONS_REQUEST,
@@ -110,8 +111,16 @@ const editInterventionPageReducer = (state = initialState, action) =>
         );
         break;
 
-      case COPY_QUESTION_REQUEST:
-        draft.questions.push(action.payload.copied);
+      case COPY_QUESTION_SUCCESS:
+        draft.cache.questions.push(
+          mapQuestionDataForType(action.payload.question),
+        );
+
+        draft.questions = cloneDeep(draft.cache.questions);
+        draft.selectedQuestion = draft.questions.length - 1;
+        break;
+
+      case COPY_QUESTION_ERROR:
         break;
 
       case CREATE_QUESTION_SUCCESS:
@@ -120,6 +129,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
         );
 
         draft.questions = cloneDeep(draft.cache.questions);
+        draft.selectedQuestion = draft.questions.length - 1;
         break;
 
       case GET_QUESTIONS_REQUEST:

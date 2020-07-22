@@ -6,6 +6,10 @@ export const UPDATE_PREVIEW_ANIMATION =
 
 export const ERROR_DUPLICATE_VARIABLE =
   'app/EditInterventionPage/ERROR_DUPLICATE_VARIABLE';
+export const ERROR_UNDEFINED_VARIABLE =
+  'app/EditInterventionPage/ERROR_UNDEFINED_VARIABLE';
+export const ERROR_COPY_QUESTION =
+  'app/EditInterventionPage/ERROR_COPY_QUESTION';
 
 export const ADD_QUESTION_IMAGE = 'app/EditInterventionPage/ADD_QUESTION_IMAGE';
 export const UPDATE_QUESTION_IMAGE =
@@ -21,6 +25,11 @@ export const UPDATE_QUESTION_SETTINGS =
 
 export const COPY_QUESTION_REQUEST =
   'app/EditInterventionPage/COPY_QUESTION_REQUEST';
+export const COPY_QUESTION_SUCCESS =
+  'app/EditInterventionPage/COPY_QUESTION_SUCCESS';
+export const COPY_QUESTION_ERROR =
+  'app/EditInterventionPage/COPY_QUESTION_ERROR';
+
 export const DELETE_QUESTION_REQUEST =
   'app/EditInterventionPage/DELETE_QUESTION_REQUEST';
 export const CHANGE_QUESTION_TYPE =

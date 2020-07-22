@@ -24,7 +24,7 @@ NumberCircle.propTypes = {
 };
 
 const ToggleableBox = styled(HoverableBox)`
-  ${props => (props.isSelected ? { backgroundColor: colors.zirkon } : {})};
+  ${props => (props.isSelected ? { backgroundColor: colors.linkWater } : {})};
 `;
 
 ToggleableBox.propTypes = {

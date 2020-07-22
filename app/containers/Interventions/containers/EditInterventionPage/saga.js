@@ -23,6 +23,8 @@ import {
   ERROR_DUPLICATE_VARIABLE,
   REORDER_QUESTION_LIST,
   EDIT_QUESTION_REQUEST,
+  ERROR_UNDEFINED_VARIABLE,
+  ERROR_COPY_QUESTION,
 } from './constants';
 
 import {
@@ -35,6 +37,8 @@ import {
   updateQuestionImage,
   updateCache,
   restoreCache,
+  copyQuestionSuccess,
+  copyQuestionError,
 } from './actions';
 
 import { makeSelectSelectedQuestion, makeSelectQuestions } from './selectors';
@@ -118,7 +122,20 @@ function* updateQuestion() {
     variable => variable && variable.trim(),
   );
 
-  if (hasDuplicates(variables)) {
+  const {
+    body: {
+      variable: { name: variable },
+    },
+  } = question;
+  if (!variable) {
+    yield put(
+      showError(formatMessage(messages.errors.undefinedVariable), {
+        id: ERROR_UNDEFINED_VARIABLE,
+      }),
+    );
+    return yield put(editQuestionError());
+  }
+  if (hasDuplicates(variables, variable)) {
     yield put(
       showError(formatMessage(messages.errors.duplicateVariable), {
         id: ERROR_DUPLICATE_VARIABLE,
@@ -164,9 +181,14 @@ function* copyQuestion({ payload: { questionId, interventionId } }) {
 
     const copiedQuestion = mapQuestionToStateObject(response.data.data);
 
-    yield put(createQuestionSuccess(copiedQuestion));
+    yield put(copyQuestionSuccess(copiedQuestion));
   } catch (error) {
-    yield put(createQuestionError(error));
+    yield put(
+      showError(formatMessage(messages.errors.copyError), {
+        id: ERROR_COPY_QUESTION,
+      }),
+    );
+    yield put(copyQuestionError(error));
   }
 }
 

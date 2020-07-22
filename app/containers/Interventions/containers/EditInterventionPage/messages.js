@@ -21,5 +21,13 @@ export default defineMessages({
       id: `${scope}.duplicateVariable`,
       defaultMessage: 'This variable name is already in use!',
     },
+    undefinedVariable: {
+      id: `${scope}.undefinedVariable`,
+      defaultMessage: 'Set the variable!',
+    },
+    copyError: {
+      id: `${scope}.copyError`,
+      defaultMessage: 'Cannot copy the question!',
+    },
   },
 });
