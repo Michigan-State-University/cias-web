@@ -66,11 +66,9 @@ const useAnimationHelper = (
   const getInitialBodyOrHeadAnimation = () => loadedAnimations.current[0];
 
   const changeAnimation = (nextBlock, nextIndex) => {
-    console.log('eee');
     const nextAnim = loadedAnimations.current.find(
       anim => anim.name === (nextBlock ? nextBlock.animation : undefined),
     );
-    console.log({ nextAnim });
     dispatchUpdate({
       currentData: nextAnim,
       currentBlockIndex: nextIndex,
