@@ -34,7 +34,6 @@ const passwordLength = 8;
 
 const validationSchema = formatMessage =>
   Yup.object().shape({
-    username: Yup.string().required(formatMessage(messages.usernameRequired)),
     email: Yup.string()
       .required(formatMessage(messages.emailRequired))
       .email(formatMessage(messages.validEmail)),
@@ -64,7 +63,6 @@ const validationSchema = formatMessage =>
 const initialValues = {
   email: '',
   password: '',
-  username: '',
   passwordConfirmation: '',
   firstName: '',
   lastName: '',
@@ -117,16 +115,10 @@ export function RegisterPage({
                 return (
                   <>
                     <FormikInput
-                      formikKey="username"
-                      placeholder={formatMessage(messages.username)}
-                      hasMarginBottom
-                      hasMarginTop
-                      {...sharedInputPops}
-                    />
-                    <FormikInput
                       formikKey="firstName"
                       placeholder={formatMessage(messages.firstName)}
                       hasMarginBottom
+                      hasMarginTop
                       {...sharedInputPops}
                     />
                     <FormikInput

@@ -17,10 +17,6 @@ export default defineMessages({
     id: `${scope}.login`,
     defaultMessage: 'I already have an account',
   },
-  username: {
-    id: `${scope}.username`,
-    defaultMessage: 'Username',
-  },
   firstName: {
     id: `${scope}.firstName`,
     defaultMessage: 'First name',
@@ -44,10 +40,6 @@ export default defineMessages({
   confirmPassword: {
     id: `${scope}.confirmPassword`,
     defaultMessage: 'Password confirmation',
-  },
-  usernameRequired: {
-    id: `${scope}.usernameRequired`,
-    defaultMessage: 'Username is required',
   },
   validEmail: {
     id: `${scope}.validEmail`,

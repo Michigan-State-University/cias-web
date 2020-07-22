@@ -19,13 +19,6 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
         </span>
         <input
           class="Input-sc-19txxuq-0 ckPklY"
-          name="username"
-          placeholder="Username"
-          type="text"
-          value=""
-        />
-        <input
-          class="Input-sc-19txxuq-0 bdmbaI"
           name="firstName"
           placeholder="First name"
           type="text"
