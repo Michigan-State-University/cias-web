@@ -8,11 +8,9 @@ const singleQuestionReducer = (question, payload) => {
         question.body.data = [];
       }
 
-      const answerCount = question.body.data.length;
-
       question.body.data.push({
-        variable: { value: '' },
-        payload: `Answer ${answerCount + 1}`,
+        value: '',
+        payload: '',
       });
       return question;
     case UPDATE_ANSWER:

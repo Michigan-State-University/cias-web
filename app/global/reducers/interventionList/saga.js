@@ -2,8 +2,8 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
 import { mapInterventionToStateObject } from 'utils/mapResponseObjects';
-import { FETCH_INTERVENTIONS_REQUEST } from './constants';
 
+import { FETCH_INTERVENTIONS_REQUEST } from './constants';
 import { fetchInterventionsSuccess, fetchInterventionsError } from './actions';
 
 function* fetchInterventions() {

@@ -1,6 +1,7 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import axios from 'axios';
+import get from 'lodash/get';
 import { push } from 'connected-react-router';
 import { success as showSuccess } from 'react-toastify-redux';
 
@@ -26,7 +27,11 @@ function* register({ payload }) {
       }),
     );
   } catch (error) {
-    const errorMessage = error.response.data.errors.full_messages.join('\n');
+    const errorMessage = get(
+      error,
+      'response.data.errors.full_messages[0]',
+      error.toString().split('\n')[0],
+    );
     yield put(registerFailure(errorMessage));
   }
 }

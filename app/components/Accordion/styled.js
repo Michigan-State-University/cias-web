@@ -17,7 +17,6 @@ export const StyledCollapseLabel = styled.div`
   color: white;
   cursor: pointer;
   width: 100%;
-  margin-right: 5px;
   ${style};
 `;
 
@@ -36,12 +35,18 @@ export const StyledCollapseContent = styled.div`
 `;
 
 export const HoverableContainer = styled(Row)`
+  & > div:first-child {
+    margin-right: 0;
+  }
   img[alt='bin'] {
     display: none;
   }
   &:hover {
     img[alt='bin'] {
       ${({ isDeletable }) => isDeletable && 'display: block;'}
+    }
+    & > div:first-child {
+      ${({ isDeletable }) => isDeletable && 'margin-right: 5px;'}
     }
   }
 `;

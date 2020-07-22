@@ -64,6 +64,12 @@ export function HomePage({
   );
 
   if (fetchInterventionLoading) return <Loader />;
+  if (fetchInterventionError)
+    return (
+      <Container>
+        <ErrorAlert errorText={fetchInterventionError} />
+      </Container>
+    );
 
   return (
     <Fragment>
@@ -87,9 +93,6 @@ export function HomePage({
           )}
         </Row>
       </Container>
-      {fetchInterventionError && (
-        <ErrorAlert errorText={fetchInterventionError} />
-      )}
       <NewInterventionFloatButton onClick={createIntervention}>
         {!createInterventionLoader && (
           <>

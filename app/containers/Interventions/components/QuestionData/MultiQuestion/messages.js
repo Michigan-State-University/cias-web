@@ -5,7 +5,7 @@ export const scope = 'app.containers.Multi';
 export default defineMessages({
   placeholder: {
     id: `${scope}.placeholder`,
-    defaultMessage: 'Type answer here...',
+    defaultMessage: 'Answer {index}',
   },
   addAnswer: {
     id: `${scope}.addAnswer`,

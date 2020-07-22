@@ -11,9 +11,12 @@ import { StyledAlert } from './styled';
 function ErrorAlert({ errorText }) {
   return (
     <StyledAlert>
-      {errorText.split('\n').map((item, i) => (
-        <p key={i}>{item}</p>
-      ))}
+      {errorText
+        .toString()
+        .split('\n')
+        .map((item, i) => (
+          <p key={i}>{item}</p>
+        ))}
     </StyledAlert>
   );
 }

@@ -88,7 +88,9 @@ const SingleQuestion = ({
                       mr={8}
                       fontSize={18}
                       type="singleline"
-                      placeholder={formatMessage(messages.placeholder)}
+                      placeholder={formatMessage(messages.placeholder, {
+                        index: index + 1,
+                      })}
                       value={value.payload}
                       onCheck={newTitle =>
                         updateAnswer(index, { ...value, payload: newTitle })

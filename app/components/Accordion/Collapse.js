@@ -26,7 +26,11 @@ const CollapseLabel = ({ isOpened, onToggle, label, color, onDelete }) => {
       align="center"
       isDeletable={!!onDelete}
     >
-      <StyledCollapseLabel bg={color} onClick={onToggle}>
+      <StyledCollapseLabel
+        bg={color}
+        onClick={onToggle}
+        isDeletable={!!onDelete}
+      >
         <Row justify="between">
           {label} <Img src={img} />
         </Row>
