@@ -30,6 +30,10 @@ export default defineMessages({
       id: `${scope}.Speech`,
       defaultMessage: 'Speech',
     },
+    HeadAnimation: {
+      id: `${scope}.HeadAnimation`,
+      defaultMessage: 'Head Animation',
+    },
   },
   questionTypes: {
     'Question::Single': {

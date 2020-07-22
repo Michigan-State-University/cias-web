@@ -1,7 +1,10 @@
 import { useRef } from 'react';
 
 import getPause from 'utils/animations/getPause';
-import { bodyAnimationType } from 'models/Narrator/BlockTypes';
+import {
+  bodyAnimationType,
+  headAnimationType,
+} from 'models/Narrator/BlockTypes';
 
 import uniqBy from 'lodash/uniqBy';
 import filter from 'lodash/filter';
@@ -22,7 +25,7 @@ const useAnimationHelper = (
 
     const filteredAnimations = filter(
       blocks,
-      ({ type }) => type === bodyAnimationType,
+      ({ type }) => type === bodyAnimationType || type === headAnimationType,
     );
     const uniqAnimations = uniqBy(
       filteredAnimations.filter(block => block.animation),
@@ -55,17 +58,19 @@ const useAnimationHelper = (
     return bodyAnimations;
   };
 
-  const fetchBodyAnimations = async () => {
+  const fetchBodyAndHeadAnimations = async () => {
     const bodyAnimations = await loadAnimations();
     loadedAnimations.current = bodyAnimations;
   };
 
-  const getInitialBodyAnimation = () => loadedAnimations.current[0];
+  const getInitialBodyOrHeadAnimation = () => loadedAnimations.current[0];
 
   const changeAnimation = (nextBlock, nextIndex) => {
+    console.log('eee');
     const nextAnim = loadedAnimations.current.find(
       anim => anim.name === (nextBlock ? nextBlock.animation : undefined),
     );
+    console.log({ nextAnim });
     dispatchUpdate({
       currentData: nextAnim,
       currentBlockIndex: nextIndex,
@@ -92,7 +97,7 @@ const useAnimationHelper = (
     }, get(currentData, 'pause', 0));
   };
 
-  const handleBodyAnimationBlock = () => {
+  const handleBodyOrHeadAnimationBlock = () => {
     const { anim } = animationRef.current;
     if (currentData) {
       anim.addEventListener('complete', reverseAnimation);
@@ -111,13 +116,13 @@ const useAnimationHelper = (
   };
 
   return {
-    getInitialBodyAnimation,
+    getInitialBodyOrHeadAnimation,
     changeAnimation,
-    handleBodyAnimationBlock,
+    handleBodyOrHeadAnimationBlock,
     getIdleAnimation,
     clearAnimationBlock,
     animationRef,
-    fetchBodyAnimations,
+    fetchBodyAndHeadAnimations,
   };
 };
 

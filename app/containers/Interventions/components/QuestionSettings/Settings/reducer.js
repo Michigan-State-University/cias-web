@@ -1,6 +1,12 @@
 import cloneDeep from 'lodash/cloneDeep';
 
 import {
+  bodyAnimationType,
+  speechType,
+  headAnimationType,
+} from 'models/Narrator/BlockTypes';
+
+import {
   UPDATE_QUESTION_SETTINGS,
   ADD_BLOCK,
   UPDATE_NARRATOR_SETTINGS,
@@ -16,21 +22,30 @@ import {
 
 const instantiateBlockForType = (type, posFrom) => {
   switch (type) {
-    case 'BodyAnimation':
+    case bodyAnimationType:
       return {
-        type: 'BodyAnimation',
+        type: bodyAnimationType,
         animation: null,
         position: {
           posFrom,
           posTo: posFrom,
         },
       };
-    case 'Speech':
+    case speechType:
       return {
-        type: 'Speech',
+        type: speechType,
         text: '',
         audio_url: null,
         animation: 'rest',
+        position: {
+          posFrom,
+          posTo: posFrom,
+        },
+      };
+    case headAnimationType:
+      return {
+        type: headAnimationType,
+        animation: null,
         position: {
           posFrom,
           posTo: posFrom,

@@ -4,7 +4,11 @@ import isNumber from 'lodash/isNumber';
 import get from 'lodash/get';
 import Lottie from 'react-lottie';
 
-import { bodyAnimationType, speechType } from 'models/Narrator/BlockTypes';
+import {
+  bodyAnimationType,
+  speechType,
+  headAnimationType,
+} from 'models/Narrator/BlockTypes';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
 import Draggable from 'react-draggable';
@@ -58,6 +62,7 @@ const CharacterAnim = ({
       await moveAnimation(nextBlock);
       switch (nextBlock.type) {
         case bodyAnimationType:
+        case headAnimationType:
           changeAnimation(nextBlock, nextIndex);
           break;
         case speechType:
@@ -76,13 +81,13 @@ const CharacterAnim = ({
   };
 
   const {
-    getInitialBodyAnimation,
+    getInitialBodyOrHeadAnimation,
     changeAnimation,
-    handleBodyAnimationBlock,
+    handleBodyOrHeadAnimationBlock,
     getIdleAnimation,
     clearAnimationBlock,
     animationRef,
-    fetchBodyAnimations,
+    fetchBodyAndHeadAnimations,
   } = useAnimationHelper(
     blocks,
     dispatchUpdate,
@@ -119,8 +124,9 @@ const CharacterAnim = ({
         case speechType:
           return getInitialSpeechAnimation();
 
+        case headAnimationType:
         case bodyAnimationType:
-          return getInitialBodyAnimation();
+          return getInitialBodyOrHeadAnimation();
 
         default:
           break;
@@ -131,7 +137,7 @@ const CharacterAnim = ({
   useEffect(() => {
     const fetch = async () => {
       await moveAnimation(blocks[0]);
-      await fetchBodyAnimations();
+      await fetchBodyAndHeadAnimations();
       await fetchAudioAnimations();
       await fetchMoveAnimations();
       dispatchUpdate({
@@ -146,9 +152,10 @@ const CharacterAnim = ({
   useDidUpdateEffect(() => {
     if (state.currentData)
       switch (state.currentData.type) {
+        case headAnimationType:
         case bodyAnimationType:
           if (!settings.animation) changeBlock();
-          else handleBodyAnimationBlock();
+          else handleBodyOrHeadAnimationBlock();
           break;
 
         case speechType:

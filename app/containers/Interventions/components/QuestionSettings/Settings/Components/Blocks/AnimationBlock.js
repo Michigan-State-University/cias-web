@@ -5,20 +5,23 @@ import { connect } from 'react-redux';
 import camelCase from 'lodash/camelCase';
 
 import Chips from 'components/Chips';
-import { blockTypes } from 'models/Narrator/BlockTypes';
+import {
+  bodyAnimationType,
+  headAnimationType,
+} from 'models/Narrator/BlockTypes';
 import { colors } from 'theme';
 import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
-import { bodyAnimations, facialAnimations } from './animations';
+import { bodyAnimations, headAnimations } from './animations';
 import { updateNarratorAnimation } from '../../actions';
 
 const getPossibleAnimations = (type, formatMessage) => {
-  if (type === blockTypes[0]) return facialAnimations(formatMessage);
-  if (type === blockTypes[1]) return bodyAnimations(formatMessage);
+  if (type === headAnimationType) return headAnimations(formatMessage);
+  if (type === bodyAnimationType) return bodyAnimations(formatMessage);
   return [];
 };
 
-const BodyAnimationBlock = ({
+const AnimationBlock = ({
   formatMessage,
   block,
   updateAnimation,
@@ -64,7 +67,7 @@ const BodyAnimationBlock = ({
   );
 };
 
-BodyAnimationBlock.propTypes = {
+AnimationBlock.propTypes = {
   formatMessage: PropTypes.func.isRequired,
   block: PropTypes.shape({
     type: PropTypes.string,
@@ -86,4 +89,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(BodyAnimationBlock);
+export default compose(withConnect)(AnimationBlock);

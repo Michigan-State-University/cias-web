@@ -1,4 +1,4 @@
-const autoRestAnimations = [
+const autoRestBodyAnimations = [
   'standStill',
   'greet',
   'confused',
@@ -17,7 +17,7 @@ const autoRestAnimations = [
   'announce',
 ];
 
-const reverseAnimations = [
+const reverseBodyAnimations = [
   'uncertain',
   'wave',
   'pointLeft',
@@ -30,6 +30,29 @@ const reverseAnimations = [
   'suggest',
   'think',
   'write',
+];
+
+const autoRestHeadAnimations = [
+  'blink',
+  'acknowledge',
+  'decline',
+  'pleased',
+  'hearBothEars',
+  'yawn',
+  'eatCracker',
+];
+const reverseHeadAnimations = [
+  'browsUp',
+  'sad',
+  'hearLeftEar',
+  'hearRightEar',
+  'wearSunglasses',
+  'lookDown',
+  'lookDownAndBlink',
+  'glanceUp',
+  'glanceDown',
+  'glanceLeft',
+  'glanceRight',
 ];
 
 const speechAnimations = {
@@ -132,6 +155,19 @@ const speechAnimations = {
 
 const moveAnimations = ['moveLeft', 'moveRight'];
 
-const bodyAnimations = [...autoRestAnimations, ...reverseAnimations];
+const bodyAnimations = [...autoRestBodyAnimations, ...reverseBodyAnimations];
 
-export { autoRestAnimations, bodyAnimations, moveAnimations, speechAnimations };
+const headAnimations = [...autoRestHeadAnimations, ...reverseHeadAnimations];
+
+const autoRestAnimations = [
+  ...autoRestBodyAnimations,
+  ...autoRestHeadAnimations,
+];
+
+export {
+  autoRestAnimations,
+  bodyAnimations,
+  moveAnimations,
+  headAnimations,
+  speechAnimations,
+};

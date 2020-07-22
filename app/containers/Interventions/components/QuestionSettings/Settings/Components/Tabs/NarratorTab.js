@@ -19,6 +19,7 @@ import { makeSelectSelectedQuestionIndex } from 'containers/Interventions/contai
 import {
   bodyAnimationType,
   speechType,
+  headAnimationType,
   blockTypeToColorMap,
 } from 'models/Narrator/BlockTypes';
 import {
@@ -31,7 +32,7 @@ import {
 } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
 import BlockTypeChooser from '../../../BlockTypeChooser';
-import BodyAnimationBlock from '../Blocks/BodyAnimationBlock';
+import AnimationBlock from '../Blocks/AnimationBlock';
 import SpeechBlock from '../Blocks/SpeechBlock';
 import messages from '../messages';
 import { DashedBox } from '../styled';
@@ -68,8 +69,9 @@ const NarratorTab = ({
   const renderBlock = (block, index) => {
     switch (block.type) {
       case bodyAnimationType:
+      case headAnimationType:
         return (
-          <BodyAnimationBlock
+          <AnimationBlock
             formatMessage={formatMessage}
             block={block}
             blockIndex={index}
@@ -96,6 +98,8 @@ const NarratorTab = ({
         return animation ? blockTypeToColorMap[type] : colors.grey;
       case speechType:
         return voice ? blockTypeToColorMap[type] : colors.grey;
+      case headAnimationType:
+        return animation ? blockTypeToColorMap[type] : colors.grey;
       default:
         return null;
     }

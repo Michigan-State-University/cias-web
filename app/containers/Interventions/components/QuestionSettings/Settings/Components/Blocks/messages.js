@@ -123,4 +123,76 @@ export default defineMessages({
     id: `${scope}.announce`,
     defaultMessage: 'Announce',
   },
+  blink: {
+    id: `${scope}.blink`,
+    defaultMessage: 'Blink',
+  },
+  acknowledge: {
+    id: `${scope}.acknowledge`,
+    defaultMessage: 'Acknowledge',
+  },
+  browsUp: {
+    id: `${scope}.browsUp`,
+    defaultMessage: 'Brows up',
+  },
+  decline: {
+    id: `${scope}.decline`,
+    defaultMessage: 'Decline',
+  },
+  pleased: {
+    id: `${scope}.pleased`,
+    defaultMessage: 'Pleased',
+  },
+  sad: {
+    id: `${scope}.sad`,
+    defaultMessage: 'Sad',
+  },
+  hearLeftEar: {
+    id: `${scope}.hearLeftEar`,
+    defaultMessage: 'Hear left ear',
+  },
+  hearRightEar: {
+    id: `${scope}.hearRightEar`,
+    defaultMessage: 'Hear right ear',
+  },
+  hearBothEars: {
+    id: `${scope}.hearBothEars`,
+    defaultMessage: 'Hear both ears',
+  },
+  yawn: {
+    id: `${scope}.yawn`,
+    defaultMessage: 'Yawn',
+  },
+  eatCracker: {
+    id: `${scope}.eatCracker`,
+    defaultMessage: 'Eat cracker',
+  },
+  wearSunglasses: {
+    id: `${scope}.wearSunglasses`,
+    defaultMessage: 'Wear sunglasses',
+  },
+  lookDown: {
+    id: `${scope}.lookDown`,
+    defaultMessage: 'Look down',
+  },
+  lookDownAndBlink: {
+    id: `${scope}.lookDownAndBlink`,
+    defaultMessage: 'Look down and blink',
+  },
+  glanceUp: {
+    id: `${scope}.glanceUp`,
+    defaultMessage: 'Glance up',
+  },
+  glanceDown: {
+    id: `${scope}.glanceDown`,
+    defaultMessage: 'Glance down',
+  },
+  glanceLeft: {
+    id: `${scope}.glanceLeft`,
+    defaultMessage: 'Glance left',
+  },
+  glanceRight: {
+    id: `${scope}.glanceRight`,
+    defaultMessage: 'Glance right',
+  },
 });
