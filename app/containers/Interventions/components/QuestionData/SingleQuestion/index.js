@@ -5,26 +5,26 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
+import ApprovableInput from 'components/Input/ApprovableInput';
+import Box from 'components/Box';
 import Column from 'components/Column';
-import Row from 'components/Row';
+import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import Question from 'models/Intervention/Question';
-import Box from 'components/Box';
-import HoverableBox from 'components/Box/HoverableBox';
-import ApprovableInput from 'components/Input/ApprovableInput';
+import Row from 'components/Row';
 import Text from 'components/Text';
-import { BadgeInput } from 'components/Input/BadgeInput';
-import radio from 'assets/svg/radio-button.svg';
 import bin from 'assets/svg/bin-red.svg';
-
+import globalMessages from 'global/i18n/globalMessages';
+import radio from 'assets/svg/radio-button.svg';
+import { BadgeInput } from 'components/Input/BadgeInput';
+import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
-import globalMessages from 'global/i18n/globalMessages';
+
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
-
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
+import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const RADIO_MARGIN = 16;
@@ -36,6 +36,7 @@ const SingleQuestion = ({
   updateAnswer,
   removeAnswer,
   updateVariable,
+  draggable,
   intl: { formatMessage },
 }) => {
   const radioButtonRef = useRef(null);
@@ -54,21 +55,21 @@ const SingleQuestion = ({
 
   return (
     <Column mt={10}>
-      <BadgeInput
-        px={0}
-        py={12}
-        mb={10}
-        ml={24}
-        textAlign="center"
-        keyboard="tel"
-        validator={variableNameValidator}
-        placeholder={formatMessage(
-          globalMessages.variables.variableNamePlaceholder,
-        )}
-        value={variable.name}
-        color={colors.jungleGreen}
-        onBlur={val => updateVariable(val)}
-      />
+      <Row display="flex" hidden={draggable} mb={10} ml={24}>
+        <BadgeInput
+          px={0}
+          py={12}
+          textAlign="center"
+          keyboard="tel"
+          validator={variableNameValidator}
+          placeholder={formatMessage(
+            globalMessages.variables.variableNamePlaceholder,
+          )}
+          value={variable.name}
+          color={colors.jungleGreen}
+          onBlur={val => updateVariable(val)}
+        />
+      </Row>
       {data.map((value, index) => (
         <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox
@@ -109,7 +110,7 @@ const SingleQuestion = ({
                   </Box>
                 </Row>
               </Row>
-              <Row align="center">
+              <Row align="center" display="flex" hidden={draggable}>
                 <Text
                   ml={`${leftMargin}px`}
                   mr={8}
@@ -118,6 +119,7 @@ const SingleQuestion = ({
                 >
                   {formatMessage(globalMessages.variables.value)}
                 </Text>
+
                 <BadgeInput
                   px={0}
                   py={12}
@@ -141,7 +143,7 @@ const SingleQuestion = ({
           </HoverableBox>
         </Row>
       ))}
-      <Row>
+      <Row display="flex" hidden={draggable}>
         <HoverableBox px={21} py={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
@@ -164,10 +166,12 @@ SingleQuestion.propTypes = {
   updateAnswer: PropTypes.func.isRequired,
   removeAnswer: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
+  draggable: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
+  draggable: makeSelectDraggable(),
 });
 
 const mapDispatchToProps = {

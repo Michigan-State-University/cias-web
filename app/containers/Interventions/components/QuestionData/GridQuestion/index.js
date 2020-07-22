@@ -5,24 +5,27 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import Row from 'components/Row';
-import Column from 'components/Column';
-import Text from 'components/Text';
-import Question from 'models/Intervention/Question';
 import Box from 'components/Box';
+import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
-import { BadgeInput } from 'components/Input/BadgeInput';
-import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
-import { StyledInput } from 'components/Input/StyledInput';
-import radio from 'assets/svg/radio-button.svg';
+import Question from 'models/Intervention/Question';
+import Row from 'components/Row';
+import Text from 'components/Text';
 import bin from 'assets/svg/bin-red.svg';
-
 import globalMessages from 'global/i18n/globalMessages';
-import { themeColors, colors } from 'theme';
+import radio from 'assets/svg/radio-button.svg';
+import { BadgeInput } from 'components/Input/BadgeInput';
+import { StyledInput } from 'components/Input/StyledInput';
+import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
+import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { numericValidator, variableNameValidator } from 'utils/validators';
-import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
+import { themeColors, colors } from 'theme';
+
 import messages from './messages';
+import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
+import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
+import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 import {
   ADD_ROW,
   ADD_COLUMN,
@@ -32,9 +35,6 @@ import {
   DELETE_COLUMN,
 } from './constants';
 
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
-import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
-
 const GridQuestion = ({
   selectedQuestion,
   addRow,
@@ -43,6 +43,7 @@ const GridQuestion = ({
   updateColumn,
   deleteRow,
   deleteColumn,
+  draggable,
   intl: { formatMessage },
 }) => {
   const {
@@ -54,7 +55,7 @@ const GridQuestion = ({
 
   return (
     <Box width="100%" px={21} py={14}>
-      <Row justify="end">
+      <Row justify="end" display="flex" hidden={draggable}>
         <HoverableBox px={21} py={14} onClick={addColumn}>
           <Box>
             <Row align="center">
@@ -93,25 +94,26 @@ const GridQuestion = ({
                       >
                         <Img src={bin} hidden={hoveredColumn !== columnIndex} />
                       </Box>
-                      <BadgeInput
-                        px={0}
-                        py={12}
-                        mb={8}
-                        textAlign="center"
-                        validator={numericValidator}
-                        keyboard="tel"
-                        placeholder={formatMessage(
-                          globalMessages.variables.variableScorePlaceholder,
-                        )}
-                        value={column.variable.value}
-                        color={colors.azure}
-                        onBlur={val =>
-                          updateColumn(
-                            { variable: { value: val } },
-                            columnIndex,
-                          )
-                        }
-                      />
+                      <Row display="flex" hidden={draggable} mb={8}>
+                        <BadgeInput
+                          px={0}
+                          py={12}
+                          textAlign="center"
+                          validator={numericValidator}
+                          keyboard="tel"
+                          placeholder={formatMessage(
+                            globalMessages.variables.variableScorePlaceholder,
+                          )}
+                          value={column.variable.value}
+                          color={colors.azure}
+                          onBlur={val =>
+                            updateColumn(
+                              { variable: { value: val } },
+                              columnIndex,
+                            )
+                          }
+                        />
+                      </Row>
                       <StyledInput
                         width={110}
                         px={0}
@@ -149,21 +151,22 @@ const GridQuestion = ({
                         <Img src={bin} hidden={hoveredRow !== rowIndex} />
                       </Box>
                       <Row align="center" justify="between" width="100%">
-                        <BadgeInput
-                          px={0}
-                          py={12}
-                          mr={8}
-                          textAlign="center"
-                          validator={variableNameValidator}
-                          placeholder={formatMessage(
-                            globalMessages.variables.variableNamePlaceholder,
-                          )}
-                          value={row.variable.name}
-                          color={colors.jungleGreen}
-                          onBlur={val =>
-                            updateRow({ variable: { name: val } }, rowIndex)
-                          }
-                        />
+                        <Row display="flex" hidden={draggable} mr={8}>
+                          <BadgeInput
+                            px={0}
+                            py={12}
+                            textAlign="center"
+                            validator={variableNameValidator}
+                            placeholder={formatMessage(
+                              globalMessages.variables.variableNamePlaceholder,
+                            )}
+                            value={row.variable.name}
+                            color={colors.jungleGreen}
+                            onBlur={val =>
+                              updateRow({ variable: { name: val } }, rowIndex)
+                            }
+                          />
+                        </Row>
                         <StyledInput
                           width={110}
                           px={0}
@@ -201,7 +204,7 @@ const GridQuestion = ({
       <Row justify="start">
         <HoverableBox px={21} py={14} mt={20} onClick={addRow}>
           <Box>
-            <Row align="center">
+            <Row align="center" display="flex" hidden={draggable}>
               <PlusCircle mr={12} />
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(messages.addRow)}
@@ -223,10 +226,12 @@ GridQuestion.propTypes = {
   updateColumn: PropTypes.func.isRequired,
   deleteRow: PropTypes.func.isRequired,
   deleteColumn: PropTypes.func.isRequired,
+  draggable: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
+  draggable: makeSelectDraggable(),
 });
 
 const mapDispatchToProps = {

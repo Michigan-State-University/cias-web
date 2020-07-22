@@ -2,29 +2,29 @@ import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
+import { injectIntl } from 'react-intl';
 
+import ApprovableInput from 'components/Input/ApprovableInput';
+import Box from 'components/Box';
 import Column from 'components/Column';
-import Row from 'components/Row';
+import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import Question from 'models/Intervention/Question';
-import Box from 'components/Box';
-import HoverableBox from 'components/Box/HoverableBox';
-import ApprovableInput from 'components/Input/ApprovableInput';
-import { BadgeInput } from 'components/Input/BadgeInput';
+import Row from 'components/Row';
 import Text from 'components/Text';
 import bin from 'assets/svg/bin-red.svg';
 import checkbox from 'assets/svg/checkbox.svg';
-
+import globalMessages from 'global/i18n/globalMessages';
+import { BadgeInput } from 'components/Input/BadgeInput';
+import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
-import globalMessages from 'global/i18n/globalMessages';
+
 import messages from './messages';
 import { ADD, UPDATE, REMOVE } from './constants';
-
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
+import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const CHECKBOX_MARGIN = 16;
@@ -35,6 +35,7 @@ const MultiQuestion = ({
   addAnswer,
   updateAnswer,
   removeAnswer,
+  draggable,
   intl: { formatMessage },
 }) => {
   const checkboxButtonRef = useRef(null);
@@ -95,7 +96,7 @@ const MultiQuestion = ({
                   </Box>
                 </Row>
               </Row>
-              <Row align="center">
+              <Row align="center" display="flex" hidden={draggable}>
                 <BadgeInput
                   px={0}
                   py={12}
@@ -138,7 +139,7 @@ const MultiQuestion = ({
           </HoverableBox>
         </Row>
       ))}
-      <Row>
+      <Row display="flex" hidden={draggable}>
         <HoverableBox px={21} py={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
@@ -160,10 +161,12 @@ MultiQuestion.propTypes = {
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
   removeAnswer: PropTypes.func.isRequired,
+  draggable: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
+  draggable: makeSelectDraggable(),
 });
 
 const mapDispatchToProps = dispatch => ({
