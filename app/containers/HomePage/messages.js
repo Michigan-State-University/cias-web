@@ -16,4 +16,8 @@ export default defineMessages({
     id: `${scope}.myIntervention`,
     defaultMessage: 'My e-Interventions',
   },
+  noInterventions: {
+    id: `${scope}.noInterventions`,
+    defaultMessage: `You don't have any interventions`,
+  },
 });

@@ -71,6 +71,20 @@ export function HomePage({
       </Container>
     );
 
+  if (!interventions.length)
+    return (
+      <Container>
+        <H1 my={35}>
+          <FormattedMessage {...messages.noInterventions} />
+        </H1>
+
+        <SingleInterventionPanel
+          clickHandler={createIntervention}
+          interventionCreating={createInterventionLoader}
+        />
+      </Container>
+    );
+
   return (
     <Fragment>
       <Container>
@@ -94,7 +108,7 @@ export function HomePage({
         </Row>
       </Container>
       <NewInterventionFloatButton onClick={createIntervention}>
-        {!createInterventionLoader && (
+        {!createInterventionLoader && interventions.length && (
           <>
             <AddIcon>+</AddIcon>
             <FormattedMessage {...messages.createIntervention} />
