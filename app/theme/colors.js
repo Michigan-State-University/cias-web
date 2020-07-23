@@ -15,6 +15,7 @@ const colors = {
   greyishBlue: '#B0BAC9',
   black: '#000000',
   flamingo: '#EF462F',
+  botticelli: '#D5DEEA',
 };
 
 const themeColors = {

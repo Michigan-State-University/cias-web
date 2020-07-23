@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import { colors, themeColors } from 'theme';
-import { margin } from 'components/BaseComponentStyles';
+import { margin, border } from 'components/BaseComponentStyles';
 
 const invertedStyles = color => css`
   background-color: ${colors.white};
@@ -11,7 +11,7 @@ const invertedStyles = color => css`
 
 export const StyledButton = styled.button`
   width: ${props => props.width};
-  height: 44px;
+  height: 40px;
   background-color: ${props =>
     props.outlined ? colors.white : themeColors[props.color]};
   color: ${colors.white};
@@ -26,6 +26,7 @@ export const StyledButton = styled.button`
     ${props => props.hoverable && invertedStyles(props.color)};
   }
   ${margin};
+  ${border};
 `;
 
 StyledButton.propTypes = {

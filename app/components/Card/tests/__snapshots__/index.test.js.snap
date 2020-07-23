@@ -10,7 +10,7 @@ exports[`<Card /> should match the snapshot 1`] = `
   height: min-content;
   padding: 16px;
   background-color: #FFFFFF;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 <div

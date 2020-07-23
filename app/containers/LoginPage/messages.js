@@ -15,7 +15,7 @@ export default defineMessages({
   },
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Login',
+    defaultMessage: 'Login in to CIAS',
   },
   loginButton: {
     id: `${scope}.loginButton`,
@@ -23,14 +23,38 @@ export default defineMessages({
   },
   emailPlaceholder: {
     id: `${scope}.emailPlaceholder`,
-    defaultMessage: 'Email',
+    defaultMessage: 'Enter e-mail address',
   },
   passwordPlaceholder: {
     id: `${scope}.passwordPlaceholder`,
-    defaultMessage: 'Password',
+    defaultMessage: 'Enter password',
   },
   register: {
     id: `${scope}.register`,
-    defaultMessage: 'Register',
+    defaultMessage: 'Create participant account',
+  },
+  or: {
+    id: `${scope}.or`,
+    defaultMessage: 'or',
+  },
+  emailLabel: {
+    id: `${scope}.emailLabel`,
+    defaultMessage: 'E-mail address',
+  },
+  passwordLabel: {
+    id: `${scope}.passwordLabel`,
+    defaultMessage: 'Password',
+  },
+  validEmail: {
+    id: `${scope}.validEmail`,
+    defaultMessage: 'Provide valid email',
+  },
+  emailRequired: {
+    id: `${scope}.emailRequired`,
+    defaultMessage: 'Email is required',
+  },
+  passwordRequired: {
+    id: `${scope}.passwordRequired`,
+    defaultMessage: 'Password is required',
   },
 });

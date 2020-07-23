@@ -97,56 +97,38 @@ export function RegisterPage({
               onSubmit={onSubmit}
             >
               {formikProps => {
-                const {
-                  values,
-                  errors,
-                  touched,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                } = formikProps;
-                const sharedInputPops = {
-                  values,
-                  errors,
-                  touched,
-                  handleChange,
-                  handleBlur,
-                };
+                const { handleSubmit } = formikProps;
                 return (
                   <>
                     <FormikInput
                       formikKey="firstName"
                       placeholder={formatMessage(messages.firstName)}
-                      hasMarginBottom
-                      hasMarginTop
-                      {...sharedInputPops}
+                      type="text"
+                      mb={20}
                     />
                     <FormikInput
                       formikKey="lastName"
                       placeholder={formatMessage(messages.lastName)}
-                      hasMarginBottom
-                      {...sharedInputPops}
+                      type="text"
+                      mb={20}
                     />
                     <FormikInput
                       formikKey="email"
                       placeholder={formatMessage(messages.email)}
-                      hasMarginBottom
                       type="email"
-                      {...sharedInputPops}
+                      mb={20}
                     />
                     <FormikInput
                       formikKey="password"
                       placeholder={formatMessage(messages.password)}
-                      hasMarginBottom
                       type="password"
-                      {...sharedInputPops}
+                      mb={20}
                     />
                     <FormikInput
                       formikKey="passwordConfirmation"
                       placeholder={formatMessage(messages.confirmPassword)}
-                      hasMarginBottom
                       type="password"
-                      {...sharedInputPops}
+                      mb={20}
                     />
                     <StyledButton
                       loading={loading}

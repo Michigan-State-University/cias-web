@@ -63,7 +63,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
 .c3 {
   padding: 12px;
   border: 1px solid #E9F1FB;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 153px;
   max-width: 200px;
   padding-top: 12px;
@@ -84,7 +84,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-right: 9px;
   width: 100%;
   height: auto;
@@ -102,7 +102,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100%;
   padding-top: 14px;
   padding-bottom: 14px;
@@ -115,7 +115,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
 }

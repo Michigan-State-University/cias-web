@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { mediaQuery } from 'theme';
 import { flex, layout, margin } from '../BaseComponentStyles';
 
 const maxNumberOfColumns = 12;
@@ -27,18 +26,15 @@ const Column = styled.div`
   flex-direction: column;
 
   ${({ xs }) => (xs ? getWidthString(xs) : 'width: 100%;')};
-
-  ${mediaQuery.tablet`
+  @media only screen and (min-width: 768px) {
     ${({ sm }) => sm && getWidthString(sm)};
-  `}
-
-  ${mediaQuery.desktopXs`
+  }
+  @media only screen and (min-width: 960px) {
     ${({ md }) => md && getWidthString(md)};
-  `}
-
-  ${mediaQuery.desktop`
-    ${({ lg }) => lg && getWidthString(lg)};
-  `}
+  }
+  @media only screen and (min-width: 1170px) {
+    ${({ lg }) => lg && getWidthString(lg)}5
+  }
 
   ${flex};
   ${layout};

@@ -3,11 +3,11 @@
 exports[`<QuestionTitle /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 eQfGsL"
+    class="Box-sc-14m3exe-0 jEoxdd"
     width="100%"
   >
     <h1
-      class="H1-tncdg6-0 lmLxFg"
+      class="H1-tncdg6-0 gsPdiF"
     >
       <div
         class="Row-x1o3ru-0 cXSRYv"
@@ -17,7 +17,7 @@ exports[`<QuestionTitle /> Should render and match the snapshot 1`] = `
           width="100%"
         >
           <div
-            class="Column-sc-1n6divy-0 dQNPKb"
+            class="Column-sc-1n6divy-0 etLFdC"
           >
             <div
               class="quill styled__QuillStyled-sc-65e6t4-0 fMrBwY"

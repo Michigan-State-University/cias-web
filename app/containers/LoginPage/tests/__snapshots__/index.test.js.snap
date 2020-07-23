@@ -2,51 +2,114 @@
 
 exports[`<LoginPage /> Should render and match the snapshot 1`] = `
 <div
-  class="Fill-sc-1f4o7x0-0 dHXeMo"
+  class="styled__Background-sc-1r4kg53-0 jqrSlU"
 >
   <div
-    class="Column-sc-1n6divy-0 edhQgu"
+    class="styled__TopBackground-sc-1r4kg53-1 nQFgX"
+  />
+  <div
+    class="styled__Header-sc-1r4kg53-2 fIXxOZ"
+  >
+    <img
+      class="styled__Logo-sc-1r4kg53-3 gleJUL"
+      src="IMAGE_MOCK"
+    />
+  </div>
+  <div
+    class="styled__Content-sc-1r4kg53-4 hBhonq"
   >
     <div
-      class="Card-v952e1-0 hVsVcd"
-      width="100%"
+      class="Fill-sc-1f4o7x0-0 dHXeMo"
     >
       <div
-        class="Column-sc-1n6divy-0 dQNPKb"
+        class="Column-sc-1n6divy-0 gfiYfS"
       >
-        <p>
-          Login
-        </p>
-        <input
-          class="Input-sc-19txxuq-0 bdmbaI"
-          placeholder="Email"
-          type="text"
-          value=""
-        />
-        <input
-          class="Input-sc-19txxuq-0 bdmbaI"
-          placeholder="Password"
-          type="password"
-          value=""
-        />
+        <h1
+          class="H1-tncdg6-0 fdwqP"
+          font-size="23"
+        >
+          Login in to CIAS
+        </h1>
+        <div
+          class="Column-sc-1n6divy-0 HjGWm"
+        >
+          <p
+            class="Text-sc-2lza2m-0 bkfXbb"
+          >
+            E-mail address
+          </p>
+          <input
+            class="Input-sc-19txxuq-0 fPIrzk"
+            height="46"
+            name="email"
+            placeholder="Enter e-mail address"
+            type="text"
+            value=""
+            width="100%"
+          />
+        </div>
+        <div
+          class="Column-sc-1n6divy-0 HjGWm"
+        >
+          <p
+            class="Text-sc-2lza2m-0 bkfXbb"
+          >
+            Password
+          </p>
+          <input
+            class="Input-sc-19txxuq-0 fPIrzk"
+            height="46"
+            name="password"
+            placeholder="Enter password"
+            type="password"
+            value=""
+            width="100%"
+          />
+        </div>
         <button
-          class="styled__StyledButton-sc-13sgwpa-0 dLtwcD StyledButton-t20ntd-0 fgSUzr"
+          class="StyledButton-t20ntd-0 iXwuNZ"
           color="primary"
+          height="46"
+          type="submit"
           width="100%"
         >
           Log in
         </button>
-        <a
-          href="/register"
+        <div
+          class="Row-x1o3ru-0 kySctD"
+          width="100%"
         >
-          <button
-            class="styled__StyledButton-sc-13sgwpa-0 dLtwcD StyledButton-t20ntd-0 fgSUzr"
-            color="primary"
-            width="100%"
+          <div
+            class="styled__Divider-sc-13sgwpa-0 dyebSF"
+          />
+          <p
+            class="Text-sc-2lza2m-0 styled__Or-sc-13sgwpa-1 beKyAs"
+            font-weight="bold"
           >
-            Register
-          </button>
-        </a>
+            <span>
+              or
+            </span>
+          </p>
+          <div
+            class="styled__Divider-sc-13sgwpa-0 djSuch"
+          />
+        </div>
+        <div
+          class="Row-x1o3ru-0 jhyXVk"
+          width="100%"
+        >
+          <a
+            href="/register"
+          >
+            <button
+              class="TextButton-sc-12pwroy-0 dXRUab"
+            >
+              <span>
+                Create participant account
+              </span>
+            </button>
+          </a>
+        </div>
         
       </div>
     </div>

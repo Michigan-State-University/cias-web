@@ -6,8 +6,9 @@
  *
  */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import { render } from 'react-testing-library';
+import { Formik } from 'formik';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
 import FormikInput from '../index';
@@ -16,29 +17,36 @@ describe('<FormikInput />', () => {
   let props;
   beforeAll(() => {
     props = {
-      values: {
-        test: 'test',
-      },
-      errors: {},
-      touched: {
-        test: true,
-      },
       formikKey: 'test',
-      handleChange: jest.fn(),
-      handleBlur: jest.fn(),
       placeholder: 'test',
+      type: 'text',
+      label: 'Label',
     };
   });
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<FormikInput {...props} />);
+    render(
+      <Formik initialValues={{ test: '' }} onSubmit={jest.fn()}>
+        {() => (
+          <Fragment>
+            <FormikInput {...props} />
+          </Fragment>
+        )}
+      </Formik>,
+    );
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it.skip('Should render and match the snapshot', () => {
-    const {
-      container: { firstChild },
-    } = render(<FormikInput {...props} />);
-    expect(firstChild).toMatchSnapshot();
+  it('Should render and match the snapshot', () => {
+    const { container } = render(
+      <Formik initialValues={{ test: '' }} onSubmit={jest.fn()}>
+        {() => (
+          <Fragment>
+            <FormikInput {...props} />
+          </Fragment>
+        )}
+      </Formik>,
+    );
+    expect(container).toMatchSnapshot();
   });
 });

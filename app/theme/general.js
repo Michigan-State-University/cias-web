@@ -1,5 +1,5 @@
 const borders = {
-  borderRadius: '10px',
+  borderRadius: '5px',
   borderStyle: 'solid',
   borderWidth: '1px',
 };

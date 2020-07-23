@@ -43,19 +43,20 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100%;
   position: absolute;
   display: none;
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  border-radius: 10px;
 }
 
 .c1 {
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 16px;
   border-bottom: 1px solid #E9F1FB;
 }
@@ -64,7 +65,7 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 8px;
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
@@ -91,11 +92,12 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 8px;
   margin-bottom: 4px;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 5px;
+  border-radius: 5px;
 }
 
 .c6:hover {
@@ -106,10 +108,11 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 8px;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 5px;
+  border-radius: 5px;
 }
 
 .c11:hover {

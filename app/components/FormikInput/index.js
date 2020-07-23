@@ -6,54 +6,56 @@
 
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { useField } from 'formik';
+
 import { Input } from 'components/Input';
+import Text from 'components/Text';
+import Column from 'components/Column';
+
 import { ErrorText } from './styled';
 
 const inputMarginVertical = 20;
 
 function FormikInput({
-  values,
-  errors,
-  touched,
   formikKey,
-  handleChange,
-  hasMarginBottom,
-  hasMarginTop,
   placeholder,
-  handleBlur,
-  ...rest
+  type,
+  label,
+  inputProps,
+  ...columnStyleProps
 }) {
-  const error = errors[formikKey];
-  const hasError = touched[formikKey] && error;
-  const value = values[formikKey];
+  const [field, meta] = useField(formikKey);
+  const { value, onBlur, onChange } = field;
+  const { error, touched } = meta;
+  const hasError = touched && error;
+
   return (
-    <>
+    <Column {...columnStyleProps}>
+      <Text mb={5}>{label}</Text>
       <Input
-        mb={hasMarginBottom && !hasError ? inputMarginVertical : 5}
-        mt={hasMarginTop && inputMarginVertical}
+        mb={hasError ? 5 : null}
         placeholder={placeholder}
         value={value}
         name={formikKey}
-        onChange={handleChange}
-        onBlur={handleBlur}
+        onChange={onChange}
+        onBlur={onBlur}
         hasError={hasError}
-        {...rest}
+        type={type}
+        {...inputProps}
       />
-      {hasError && <ErrorText margin={inputMarginVertical}>{error}</ErrorText>}
-    </>
+      {hasError && (
+        <ErrorText margin={inputMarginVertical}>{error.toString()}</ErrorText>
+      )}
+    </Column>
   );
 }
 
 FormikInput.propTypes = {
-  values: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired,
-  touched: PropTypes.object.isRequired,
   formikKey: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleBlur: PropTypes.func.isRequired,
-  hasMarginBottom: PropTypes.bool,
-  hasMarginTop: PropTypes.bool,
   placeholder: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  label: PropTypes.string,
+  inputProps: PropTypes.object,
 };
 
 export default memo(FormikInput);

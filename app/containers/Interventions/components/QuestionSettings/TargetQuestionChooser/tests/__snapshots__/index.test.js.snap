@@ -39,14 +39,14 @@ Object {
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .c1 {
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 16px;
   border-bottom: 1px solid #E9F1FB;
 }
@@ -55,7 +55,7 @@ Object {
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 8px;
   -webkit-box-flex: 1;
   -webkit-flex-grow: 1;
@@ -67,7 +67,7 @@ Object {
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   max-height: 300px;
   overflow: scroll;
 }
@@ -76,7 +76,7 @@ Object {
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   max-width: 250px;
 }
 
@@ -220,10 +220,10 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Box-sc-14m3exe-0 bEDaLW"
+      class="Box-sc-14m3exe-0 gfpMuw"
     >
       <div
-        class="Box-sc-14m3exe-0 hTRAkP"
+        class="Box-sc-14m3exe-0 kVsMlK"
       >
         <div
           class="Row-x1o3ru-0 cXSRYv"
@@ -233,7 +233,7 @@ Object {
             src="IMAGE_MOCK"
           />
           <div
-            class="Box-sc-14m3exe-0 bEDaLW"
+            class="Box-sc-14m3exe-0 gfpMuw"
           >
             <p
               class="Text-sc-2lza2m-0 trHvP"
@@ -250,10 +250,10 @@ Object {
         class="Row-x1o3ru-0 cXSRYv"
       >
         <div
-          class="Box-sc-14m3exe-0 gtQYuD"
+          class="Box-sc-14m3exe-0 dvwSEs"
         >
           <div
-            class="Column-sc-1n6divy-0 dQNPKb"
+            class="Column-sc-1n6divy-0 etLFdC"
             data-testid="test-id-1-select-target-question"
           >
             <div
@@ -275,11 +275,11 @@ Object {
               </h3>
             </div>
             <div
-              class="Box-sc-14m3exe-0 iKBemb"
+              class="Box-sc-14m3exe-0 kghdhh"
               overflow="scroll"
             >
               <div
-                class="Column-sc-1n6divy-0 dQNPKb"
+                class="Column-sc-1n6divy-0 etLFdC"
               >
                 <div
                   class="Row-x1o3ru-0 cXSRYv"
@@ -290,7 +290,7 @@ Object {
                     src="IMAGE_MOCK"
                   />
                   <div
-                    class="Box-sc-14m3exe-0 duTKAM"
+                    class="Box-sc-14m3exe-0 dhhgIW"
                   >
                     <p
                       class="Text-sc-2lza2m-0 eGMvQh"

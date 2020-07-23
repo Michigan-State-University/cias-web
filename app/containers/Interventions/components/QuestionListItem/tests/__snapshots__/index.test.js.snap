@@ -20,14 +20,14 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .c8 {
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100%;
   height: 100%;
   position: relative;
@@ -35,6 +35,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  border-radius: 0;
   border-radius: 0;
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
@@ -97,7 +98,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100%;
   padding-top: 14px;
   padding-bottom: 14px;
@@ -105,7 +106,8 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   padding-left: 21px;
   margin-bottom: 36px;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 5px;
+  border-radius: 5px;
 }
 
 .c0:hover {

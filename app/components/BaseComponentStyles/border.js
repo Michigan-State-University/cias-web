@@ -6,6 +6,7 @@ const border = props => ({
   borderRight: props.borderRight || '',
   borderLeft: props.borderLeft || '',
   border: props.border || '',
+  borderRadius: props.borderRadius || '',
 });
 
 border.propTypes = {
@@ -14,6 +15,7 @@ border.propTypes = {
   borderRight: PropTypes.string,
   borderLeft: PropTypes.string,
   border: PropTypes.string,
+  borderRadius: PropTypes.string,
 };
 
 export { border };

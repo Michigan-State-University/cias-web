@@ -2,13 +2,13 @@
 
 exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-14m3exe-0 dJXeIa"
+  class="Box-sc-14m3exe-0 eowDf"
   display="flex"
   height="100%"
   width="100%"
 >
   <div
-    class="Column-sc-1n6divy-0 styled__StyledColumn-sc-17rp6q7-1 hWDIsX"
+    class="Column-sc-1n6divy-0 styled__StyledColumn-sc-17rp6q7-1 iilQeL"
     height="100%"
   >
     <div
@@ -21,7 +21,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
         Name
       </h3>
       <input
-        class="styled__Input-sc-17rp6q7-0 cAlJGU Input-sc-19txxuq-0 gvBIga"
+        class="styled__Input-sc-17rp6q7-0 cAlJGU Input-sc-19txxuq-0 ckBrTu"
         placeholder="e-Intervention Name"
         type="singleline"
         value="e-Intervention Name"

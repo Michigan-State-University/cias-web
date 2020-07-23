@@ -11,7 +11,7 @@ exports[`<AnswerInterventionPage /> Should render and match the snapshot 1`] = `
       class="styled__AnswerContent-sc-5f6i11-5 cBIzMa"
     >
       <button
-        class="StyledButton-t20ntd-0 fgSUzr"
+        class="StyledButton-t20ntd-0 jQWJUS"
         color="primary"
         width="100%"
       >

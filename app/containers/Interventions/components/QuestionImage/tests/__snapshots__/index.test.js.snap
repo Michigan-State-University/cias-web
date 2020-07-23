@@ -40,7 +40,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   visibility: hidden;
   margin-left: 15px;
   cursor: pointer;
@@ -50,13 +50,14 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   width: auto;
   height: auto;
   display: block;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 100%;
   padding-top: 14px;
   padding-bottom: 14px;
   padding-right: 21px;
   padding-left: 21px;
-  border-radius: 10px;
+  border-radius: 5px;
+  border-radius: 5px;
 }
 
 .c0:hover {
@@ -153,7 +154,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
 }
 
 .c0 {
-  border-radius: 10px;
+  border-radius: 5px;
   border: 1px dashed #2F3850;
   background-color: rgba(233,241,251,1);
   padding: 50px;
