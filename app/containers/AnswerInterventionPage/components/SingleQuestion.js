@@ -7,7 +7,6 @@ import Img from 'components/Img';
 import HoverableBox from 'components/Box/HoverableBox';
 import radio from 'assets/svg/radio-button.svg';
 import radioChecked from 'assets/svg/radio-button-checked.svg';
-import { QuestionOption } from 'containers/AnswerInterventionPage/styled';
 import Question from 'models/Intervention/Question';
 
 const margin = 21;
@@ -55,7 +54,7 @@ const SingleQuestion = ({ question, answerBody, selectAnswer }) => {
                   src={selectedAnswerIndex === index ? radioChecked : radio}
                   mr={16}
                 />
-                <QuestionOption dangerouslySetInnerHTML={{ __html: payload }} />
+                <div dangerouslySetInnerHTML={{ __html: payload }} />
               </Row>
             </HoverableBox>
           </Row>

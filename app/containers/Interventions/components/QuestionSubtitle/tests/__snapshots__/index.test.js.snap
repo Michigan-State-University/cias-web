@@ -50,8 +50,8 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
 }
 
 .c5 .ql-editor {
-  font-size: 18px;
   font-weight: 400;
+  padding: 10px;
 }
 
 .c5 .ql-picker-label svg {
@@ -66,6 +66,11 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
+}
+
+.c5 .ql-container {
+  font-size: initial;
+  font-family: DM Sans;
 }
 
 .c0 {

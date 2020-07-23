@@ -15,9 +15,22 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import ErrorAlert from 'components/ErrorAlert';
-import Spinner from 'components/Spinner';
 import { Button } from 'components/Button';
+import Row from 'components/Row';
+import Box from 'components/Box';
+import Column from 'components/Column';
+import Loader from 'components/Loader';
 import Img from 'components/Img';
+
+import {
+  QuestionActions,
+  BackButton,
+  AnswerInterventionContent,
+  Player,
+  PlayerWrapper,
+  ImageWrapper,
+  AnswerOuterContainer,
+} from './styled';
 
 import renderQuestionByType from './components';
 import CharacterAnim from './components/CharacterAnim';
@@ -25,18 +38,7 @@ import makeSelectAnswerInterventionPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import {
-  AnswerInterventionContainer,
-  AnswerContent,
-  QuestionActions,
-  QuestionTitle,
-  BackButton,
-  AnswerInterventionContent,
-  QuestionSubtitle,
-  Player,
-  PlayerWrapper,
-  ImageWrapper,
-} from './styled';
+
 import {
   fetchQuestions,
   submitAnswer,
@@ -114,43 +116,11 @@ export function AnswerInterventionPage({
       formatMessage,
     };
     return (
-      <>
-        {settingsSubtitle && (
-          <QuestionTitle dangerouslySetInnerHTML={{ __html: title }} />
-        )}
-        {settingsTitle && (
-          <QuestionSubtitle dangerouslySetInnerHTML={{ __html: subtitle }} />
-        )}
-        {settingsVideo && videoUrl && (
-          <PlayerWrapper>
-            <Player url={videoUrl} controls width="100%" height="100%" />
-          </PlayerWrapper>
-        )}
-        {settingsImage && imageUrl && (
-          <ImageWrapper>
-            <Img src={imageUrl} alt="image" height="100%" width="100%" />
-          </ImageWrapper>
-        )}
-        {renderQuestionByType(currentQuestion, sharedProps)}
-      </>
-    );
-  };
-
-  const renderPage = () => {
-    if (interventionStarted)
-      return (
-        <>
-          {currentQuestion && (
-            <CharacterAnim
-              animationContainer={animationParentRef}
-              blocks={currentQuestion.narrator.blocks}
-              questionId={currentQuestionId}
-              settings={currentQuestion.narrator.settings}
-            />
-          )}
-          <AnswerContent>
-            {questionIndex !== 0 &&
-              (currentQuestion && (
+      <Row justify="center" filled>
+        <Column mx={50} justify="center">
+          {questionIndex !== 0 &&
+            (currentQuestion && (
+              <Row width="100%" mt={10}>
                 <BackButton
                   onClick={() => {
                     if (answers[currentQuestionId]) {
@@ -162,53 +132,110 @@ export function AnswerInterventionPage({
                 >
                   <FormattedMessage {...messages.previousQuestion} />
                 </BackButton>
-              ))}
-            {questionError && <ErrorAlert errorText={questionError} />}
-            {questionLoading && <Spinner />}
-            {currentQuestion && (
-              <>
-                {renderQuestion()}
-                <QuestionActions>
-                  <Button
-                    loading={currentQuestion.loading}
-                    onClick={() => {
-                      saveAnswer(questionIndex + 1);
-                    }}
-                    title={formatMessage(
-                      questionIndex !== interventionQuestions.length - 1
-                        ? messages.nextQuestion
-                        : messages.submitAnswer,
-                    )}
-                  />
-                </QuestionActions>
-              </>
-            )}
-            {!currentQuestion && <div> thanks for completing intervention</div>}
-            {answersError && <ErrorAlert errorText={answersError} />}
-          </AnswerContent>
-        </>
-      );
-
-    return (
-      <AnswerContent>
-        <Button
-          onClick={onStartIntervention}
-          title={formatMessage(messages.startIntervention)}
-        />
-      </AnswerContent>
+              </Row>
+            ))}
+          <Box mt={10}>
+            <Row>
+              {settingsTitle && (
+                <Box
+                  padding={26}
+                  width="100%"
+                  dangerouslySetInnerHTML={{ __html: title }}
+                />
+              )}
+            </Row>
+            <Row>
+              {settingsSubtitle && (
+                <Box
+                  padding={26}
+                  dangerouslySetInnerHTML={{ __html: subtitle }}
+                />
+              )}
+            </Row>
+            <Row mt={10}>
+              {settingsVideo && videoUrl && (
+                <PlayerWrapper>
+                  <Player url={videoUrl} controls width="100%" height="100%" />
+                </PlayerWrapper>
+              )}
+            </Row>
+            <Row>
+              {settingsImage && imageUrl && (
+                <ImageWrapper>
+                  <Img src={imageUrl} alt="image" height="100%" width="100%" />
+                </ImageWrapper>
+              )}
+            </Row>
+          </Box>
+          <Row pl={26}>
+            {renderQuestionByType(currentQuestion, sharedProps)}
+          </Row>
+          <Row width="100%">
+            <QuestionActions>
+              <Button
+                my={20}
+                width="180px"
+                loading={currentQuestion.loading}
+                onClick={() => {
+                  saveAnswer(questionIndex + 1);
+                }}
+                title={formatMessage(
+                  questionIndex !== interventionQuestions.length - 1
+                    ? messages.nextQuestion
+                    : messages.submitAnswer,
+                )}
+              />
+            </QuestionActions>
+          </Row>
+        </Column>
+      </Row>
     );
   };
 
+  const renderPage = () => (
+    <>
+      {currentQuestion && interventionStarted && (
+        <AnswerInterventionContent>
+          {renderQuestion()}
+          <CharacterAnim
+            animationContainer={animationParentRef}
+            blocks={currentQuestion.narrator.blocks}
+            questionId={currentQuestionId}
+            settings={currentQuestion.narrator.settings}
+          />
+        </AnswerInterventionContent>
+      )}
+    </>
+  );
+
   return (
-    <AnswerInterventionContainer>
+    <AnswerOuterContainer flexDirection="column">
+      <Helmet>
+        <title>Answer Intervention</title>
+        <meta name="description" content="Answer Intervention" />
+      </Helmet>
+      {interventionStarted && (
+        <Box>
+          {questionError && <ErrorAlert errorText={questionError} />}
+          {answersError && <ErrorAlert errorText={answersError} />}
+          {questionLoading && <Loader />}
+          {!currentQuestion && (
+            <FormattedMessage {...messages.completeIntervention} />
+          )}
+        </Box>
+      )}
+      {!interventionStarted && (
+        <Button
+          mt={16}
+          onClick={onStartIntervention}
+          title={formatMessage(messages.startIntervention)}
+          width="40%"
+        />
+      )}
       <AnswerInterventionContent ref={animationParentRef}>
-        <Helmet>
-          <title>Answer Intervention</title>
-          <meta name="description" content="Answer Intervention" />
-        </Helmet>
         {renderPage()}
       </AnswerInterventionContent>
-    </AnswerInterventionContainer>
+    </AnswerOuterContainer>
   );
 }
 

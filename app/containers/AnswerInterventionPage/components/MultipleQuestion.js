@@ -7,7 +7,6 @@ import Img from 'components/Img';
 import HoverableBox from 'components/Box/HoverableBox';
 import checkbox from 'assets/svg/checkbox.svg';
 import checkboxChecked from 'assets/svg/checkbox-checked.svg';
-import { QuestionOption } from 'containers/AnswerInterventionPage/styled';
 import Question from 'models/Intervention/Question';
 
 const margin = 21;
@@ -71,7 +70,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
                   }
                   mr={16}
                 />
-                <QuestionOption dangerouslySetInnerHTML={{ __html: payload }} />
+                <div dangerouslySetInnerHTML={{ __html: payload }} />
               </Row>
             </HoverableBox>
           </Row>

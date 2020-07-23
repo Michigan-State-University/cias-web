@@ -39,12 +39,13 @@ const QuestionDetails = props => (
 const renderQuestionDetails = ({ selectedQuestion }) => {
   if (selectedQuestion != null) {
     const {
+      position,
       settings: {
         video,
         image,
         title,
         subtitle,
-        proceed_button: proceedButton,
+        // proceed_button: proceedButton,
       } = {},
       narrator: { settings: { animation } = {} } = {},
     } = selectedQuestion || {};
@@ -54,35 +55,39 @@ const renderQuestionDetails = ({ selectedQuestion }) => {
         <AnswerOuterContent id="narrator-boundaries">
           {animation && <QuestionNarrator />}
           <Row justify="center" filled>
-            <Column sm={10} justify="center">
+            <Column mx={50} justify="center">
+              {position !== 1 && <Row width="100%" mt={26} />}
               {title && (
                 <Row width="100%">
                   <QuestionTitle />
                 </Row>
               )}
               {subtitle && (
-                <Row mt={22}>
+                <Row mt={10}>
                   <QuestionSubtitle />
                 </Row>
               )}
               {video && (
-                <Row mt={22}>
+                <Row mt={10}>
                   <QuestionVideo />
                 </Row>
               )}
               {image && (
-                <Row mt={22}>
+                <Row mt={10}>
                   <QuestionImage />
                 </Row>
               )}
-              <Row mt={22}>
+              <Row>
                 <QuestionData />
               </Row>
-              {proceedButton && (
-                <Button width="180px" mt={40} hoverable>
-                  <FormattedMessage {...messages.nextQuestion} />
-                </Button>
-              )}
+              <Button my={20} width="180px">
+                <FormattedMessage {...messages.nextQuestion} />
+              </Button>
+              {/* {proceedButton && ( */}
+              {/*  <Button my={20} width="180px"> */}
+              {/*    <FormattedMessage {...messages.nextQuestion} /> */}
+              {/*  </Button> */}
+              {/* )} */}
             </Column>
           </Row>
         </AnswerOuterContent>

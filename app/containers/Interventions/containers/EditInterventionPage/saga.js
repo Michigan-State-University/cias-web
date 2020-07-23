@@ -9,6 +9,11 @@ import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { makeSelectIntervention } from 'global/reducers/intervention';
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import {
+  gridQuestion,
+  informationQuestion,
+  multiQuestion,
+} from 'models/Intervention/QuestionTypes';
 import messages from './messages';
 import {
   CREATE_QUESTION_REQUEST,
@@ -23,7 +28,6 @@ import {
   ERROR_DUPLICATE_VARIABLE,
   REORDER_QUESTION_LIST,
   EDIT_QUESTION_REQUEST,
-  ERROR_UNDEFINED_VARIABLE,
   ERROR_COPY_QUESTION,
 } from './constants';
 
@@ -115,27 +119,28 @@ function* deleteQuestionImage({ payload: { selectedQuestionId } }) {
 function* updateQuestion() {
   const intervention = yield select(makeSelectIntervention());
   const question = yield select(makeSelectSelectedQuestion());
-
   const questions = yield select(makeSelectQuestions());
-
   const variables = getAllVariables(questions).filter(
-    variable => variable && variable.trim(),
+    currentVariable => currentVariable && currentVariable.trim(),
   );
 
-  const {
-    body: {
-      variable: { name: variable },
-    },
-  } = question;
-  if (!variable) {
-    yield put(
-      showError(formatMessage(messages.errors.undefinedVariable), {
-        id: ERROR_UNDEFINED_VARIABLE,
-      }),
-    );
-    return yield put(editQuestionError());
+  let duplicates = false;
+
+  if (question.type === multiQuestion.id) {
+    question.body.data.forEach(element => {
+      if (hasDuplicates(variables, element.variable.name)) duplicates = true;
+    });
+  } else if (question.type === gridQuestion.id) {
+    question.body.data[0].payload.rows.forEach(element => {
+      if (hasDuplicates(variables, element.variable.name)) duplicates = true;
+    });
+  } else if (question.type === informationQuestion.id) {
+    duplicates = false;
+  } else {
+    duplicates = hasDuplicates(variables, question.body.variable.name);
   }
-  if (hasDuplicates(variables, variable)) {
+
+  if (duplicates) {
     yield put(
       showError(formatMessage(messages.errors.duplicateVariable), {
         id: ERROR_DUPLICATE_VARIABLE,

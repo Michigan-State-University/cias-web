@@ -12,4 +12,8 @@ export default defineMessages({
     id: `${scope}.nextQuestion`,
     defaultMessage: 'Next question',
   },
+  previousQuestion: {
+    id: `${scope}.previousQuestion`,
+    defaultMessage: '< Previous question',
+  },
 });

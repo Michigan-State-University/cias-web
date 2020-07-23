@@ -6,8 +6,6 @@ export const UPDATE_PREVIEW_ANIMATION =
 
 export const ERROR_DUPLICATE_VARIABLE =
   'app/EditInterventionPage/ERROR_DUPLICATE_VARIABLE';
-export const ERROR_UNDEFINED_VARIABLE =
-  'app/EditInterventionPage/ERROR_UNDEFINED_VARIABLE';
 export const ERROR_COPY_QUESTION =
   'app/EditInterventionPage/ERROR_COPY_QUESTION';
 

@@ -38,7 +38,7 @@ const UrlPreview = ({ link, handleClick }) => {
   };
 
   return (
-    <Box my={5}>
+    <Box my={5} width="100%">
       {linkData && (
         <Box bg={colors.white}>
           <Row>

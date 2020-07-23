@@ -29,4 +29,8 @@ export default defineMessages({
     id: `${scope}.placeholder`,
     defaultMessage: 'Answer the question...',
   },
+  completeIntervention: {
+    id: `${scope}.completeIntervention`,
+    defaultMessage: 'Thanks for completing intervention',
+  },
 });

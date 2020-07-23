@@ -60,7 +60,7 @@ const GridQuestion = ({ question, answerBody, selectAnswer }) => {
     });
   };
   return (
-    <Row align="center" justify="center">
+    <Row align="center" justify="center" width="100%">
       <Box px={10} overflow="scroll">
         <Table>
           <THead>

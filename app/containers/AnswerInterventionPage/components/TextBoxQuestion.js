@@ -20,7 +20,7 @@ const TextBoxQuestion = ({
     },
   } = question;
   return (
-    <Box my={10} bg={themeColors.highlight}>
+    <Box my={10} bg={themeColors.highlight} width="100%">
       <Row>
         <TextArea
           value={answerBody.payload ? answerBody.payload.toString() : ''}

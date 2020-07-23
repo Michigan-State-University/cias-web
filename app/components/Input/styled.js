@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
-import { colors } from 'theme';
+import { colors, fontFamily } from 'theme';
 
 export const QuillStyled = styled(ReactQuill)`
   width: 100%;
@@ -16,8 +16,8 @@ export const QuillStyled = styled(ReactQuill)`
         }
       : { border: '1px solid transparent' }}
   .ql-editor {
-    font-size: ${({ fontSize }) => (fontSize ? `${fontSize}px` : '25px')};
     font-weight: 400;
+    padding: 10px;
   }
   .ql-picker-label svg {
     margin-bottom: 15px !important;
@@ -27,5 +27,9 @@ export const QuillStyled = styled(ReactQuill)`
   }
   .ql-toolbar {
     width: max-content;
+  }
+  .ql-container {
+    font-size: initial;
+    font-family: ${fontFamily};
   }
 `;
