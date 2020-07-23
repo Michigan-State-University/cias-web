@@ -4,14 +4,21 @@
  *
  */
 
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import UserAvatar from 'components/UserAvatar';
+import Row from 'components/Row';
+import Img from 'components/Img';
+import Box from 'components/Box';
 
+import gear from 'assets/svg/gear-wo-background.svg';
+import logoutArrow from 'assets/svg/arrow-right-circle.svg';
+
+import { outsideClickHandler } from 'utils/outsideClickHandler';
 import { logOut, makeSelectUser } from 'global/reducers/auth';
 
 import {
@@ -38,25 +45,53 @@ export function Navbar({
   path,
 }) {
   const [menuVisible, setMenuVisible] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    if (menuVisible) {
+      const cleanUp = outsideClickHandler(dropdownRef, () =>
+        setMenuVisible(false),
+      );
+
+      return cleanUp;
+    }
+  }, [menuVisible]);
 
   return (
     <NavbarStyled>
       {renderNavbar(path)}
-      <RightPanel>
-        <DropDownContainer onClick={() => setMenuVisible(!menuVisible)}>
+      <RightPanel onClick={() => !menuVisible && setMenuVisible(true)}>
+        <DropDownContainer>
           <UserAvatar lastName={lastName} firstName={firstName} />
           {menuVisible && (
-            <DropDownContent>
-              <div onClick={() => {}}>
-                <FormattedMessage {...messages.editAccount} />
+            <DropDownContent ref={dropdownRef}>
+              <div
+                onClick={event => {
+                  event.stopPropagation();
+                  setMenuVisible(false);
+                }}
+              >
+                <Row>
+                  <Img mr={13} src={gear} />
+                  <FormattedMessage {...messages.editAccount} />
+                </Row>
               </div>
-              <div onClick={logOutCall}>
-                <FormattedMessage {...messages.logOut} />
+              <div
+                onClick={event => {
+                  event.stopPropagation();
+                  setMenuVisible(false);
+                  logOutCall();
+                }}
+              >
+                <Row>
+                  <Img mr={13} src={logoutArrow} />
+                  <FormattedMessage {...messages.logOut} />
+                </Row>
               </div>
             </DropDownContent>
           )}
         </DropDownContainer>
-        {`${firstName} ${lastName}`}
+        <Box clickable>{`${firstName} ${lastName}`}</Box>
       </RightPanel>
     </NavbarStyled>
   );

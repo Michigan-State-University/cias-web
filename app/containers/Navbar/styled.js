@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { elements } from 'theme';
+import { elements, colors, hexToRgb } from 'theme';
 
 export const NavbarStyled = styled.div`
   position: fixed;
@@ -26,17 +26,23 @@ export const DropDownContent = styled.div`
   position: absolute;
   min-width: 150px;
   top: calc(100% + 5px);
-  border: 1px solid black;
-  background-color: #ececec;
+  background-color: ${colors.white};
   text-align: center;
   color: black;
   border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(${hexToRgb(colors.black)}, 0.08);
+  padding: 16px;
+
   div {
-    padding: 5px 0;
     cursor: pointer;
-    border-bottom: 1px solid black;
-    &:last-child {
-      border-bottom: none;
+    white-space: nowrap;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    &:hover {
+      text-shadow: 0 0 1px ${colors.black}; // workaround to prevent shifting on bold
     }
   }
 `;
