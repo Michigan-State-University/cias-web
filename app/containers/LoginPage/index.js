@@ -41,6 +41,13 @@ export function LoginPage(props) {
   const [email, setEmail] = useState(formData.email);
   const [password, setPassword] = useState(formData.password);
 
+  const loginOnEnter = event => {
+    if (!email || !password) return;
+    if (event.keyCode === 13) {
+      onLogin(email, password);
+    }
+  };
+
   return (
     <Fragment>
       <Helmet>
@@ -55,6 +62,7 @@ export function LoginPage(props) {
                 mb={20}
                 placeholder={formatMessage(messages.emailPlaceholder)}
                 value={email}
+                onKeyDown={loginOnEnter}
                 onChange={event => setEmail(event.target.value)}
               />
               <Input
@@ -63,6 +71,7 @@ export function LoginPage(props) {
                 placeholder={formatMessage(messages.passwordPlaceholder)}
                 value={password}
                 onChange={event => setPassword(event.target.value)}
+                onKeyDown={loginOnEnter}
               />
               <StyledButton
                 loading={loading}
