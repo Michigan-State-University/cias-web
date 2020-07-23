@@ -53,14 +53,13 @@ export const Header = styled.div`
 `;
 
 export const Logo = styled.img`
-  margin-bottom: 30px;
   height: 100%;
   width: 100%;
-  max-height: 213px;
-  max-width: 500px;
+  max-height: 320px;
+  max-width: 370px;
   ${mediaQuery.tablet`
-    height: 97px;
-    width: 101px;
+    height: 130px;
+    width: 150px;
   `}
 `;
 

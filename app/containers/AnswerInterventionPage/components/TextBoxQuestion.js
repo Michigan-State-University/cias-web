@@ -23,7 +23,11 @@ const TextBoxQuestion = ({
     <Box my={10} bg={themeColors.highlight} width="100%">
       <Row>
         <TextArea
-          value={answerBody.payload ? answerBody.payload.toString() : ''}
+          value={
+            answerBody && answerBody.payload
+              ? answerBody.payload.toString()
+              : ''
+          }
           transparent
           placeholder={formatMessage(messages.textPlaceholder)}
           rows="5"

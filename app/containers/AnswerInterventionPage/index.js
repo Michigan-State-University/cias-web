@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import get from 'lodash/get';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -74,13 +75,17 @@ export function AnswerInterventionPage({
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
   const animationParentRef = useRef();
-
   useEffect(() => {
     fetchQuestionsAction(params.id);
   }, []);
 
   const saveAnswer = nextQuestionIndex =>
-    submitAnswerRequest(currentQuestionId, nextQuestionIndex);
+    submitAnswerRequest(
+      currentQuestionId,
+      nextQuestionIndex,
+      get(currentQuestion, 'settings.required', false),
+      get(currentQuestion, 'type', ''),
+    );
 
   const setQuestion = question => setQuestionIndexAction(question);
 
@@ -90,7 +95,6 @@ export function AnswerInterventionPage({
       subtitle,
       video_url: videoUrl,
       image_url: imageUrl,
-      type,
       settings: {
         title: settingsTitle,
         subtitle: settingsSubtitle,
@@ -101,7 +105,6 @@ export function AnswerInterventionPage({
     const selectAnswerProp = answerBody => {
       saveSelectedAnswer({
         id: currentQuestionId,
-        type,
         answerBody,
       });
     };

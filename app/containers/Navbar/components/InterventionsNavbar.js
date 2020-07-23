@@ -48,11 +48,12 @@ const InterventionNavbar = ({
         <StyledInput
           px={12}
           py={6}
-          width="auto"
+          width="400px"
           value={name}
           fontSize={23}
           placeholder={formatMessage(messages.placeholder)}
           onBlur={val => updateInterventionName({ path: 'name', value: val })}
+          maxWidth="none"
         />
       </Row>
 

@@ -27,7 +27,11 @@ const NumberQuestion = ({
           mr={0}
           type="singleline"
           keyboard="tel"
-          value={answerBody.payload ? answerBody.payload.toString() : ''}
+          value={
+            answerBody && answerBody.payload
+              ? answerBody.payload.toString()
+              : ''
+          }
           placeholder={formatMessage(messages.numberPlaceholder)}
           validator={numericValidator}
           onCheck={e => {

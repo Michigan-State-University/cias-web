@@ -21,11 +21,12 @@ const StyledInput = props => {
   };
 
   // calculate approximate input width in pixels
-  const calculateWidthFromText = text =>
-    Math.min(
-      text * props.averageLetterWidth + props.textPadding,
-      props.maxWidth,
-    );
+  const calculateWidthFromText = text => {
+    const calculatedWidth = text * props.averageLetterWidth + props.textPadding;
+    if (typeof props.maxWidth === 'number')
+      return Math.min(calculatedWidth, props.maxWidth);
+    return calculatedWidth;
+  };
 
   if (props.type === 'singleline')
     return (
@@ -47,7 +48,7 @@ const StyledInput = props => {
             ? `${calculateWidthFromText(
                 value ? value.length : props.placeholder.length,
               )}px`
-            : null
+            : props.width
         }
       />
     );
@@ -84,6 +85,7 @@ StyledInput.propTypes = {
   textPadding: PropTypes.number,
   type: PropTypes.oneOf(['multiline', 'singleline']),
   rows: PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 StyledInput.defaultProps = {

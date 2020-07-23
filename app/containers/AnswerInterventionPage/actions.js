@@ -28,8 +28,13 @@ export const fetchQuestionsFailure = error =>
 
 export const selectAnswer = payload => actionBuilder(SELECT_ANSWER, payload);
 
-export const submitAnswer = (answerId, nextQuestionIndex) =>
-  actionBuilder(SUBMIT_ANSWER_REQUEST, { answerId, nextQuestionIndex });
+export const submitAnswer = (answerId, nextQuestionIndex, required, type) =>
+  actionBuilder(SUBMIT_ANSWER_REQUEST, {
+    answerId,
+    nextQuestionIndex,
+    required,
+    type,
+  });
 
 export const submitAnswerSuccess = answerId =>
   actionBuilder(SUBMIT_ANSWER_SUCCESS, { answerId });
