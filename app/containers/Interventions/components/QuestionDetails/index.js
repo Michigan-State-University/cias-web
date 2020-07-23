@@ -52,7 +52,7 @@ const renderQuestionDetails = ({ selectedQuestion }) => {
 
     return (
       <AnswerOuterContainer>
-        <AnswerOuterContent id="narrator-boundaries">
+        <AnswerOuterContent>
           {animation && <QuestionNarrator />}
           <Row justify="center" filled>
             <Column mx={50} justify="center">

@@ -111,7 +111,7 @@ const QuestionNarrator = ({
         onDrag={(_, { x, y }) => setDragPosition({ x, y })}
         position={dragPosition}
         disabled={!draggable}
-        bounds="#narrator-boundaries"
+        bounds="parent"
       >
         <div>
           <Lottie
