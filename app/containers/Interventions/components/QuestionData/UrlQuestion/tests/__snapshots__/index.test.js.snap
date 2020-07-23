@@ -62,22 +62,24 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
 
 .c3 {
   padding: 12px;
-  border: 1px solid #E9F1FB;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
   border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  text-align: center;
   width: 153px;
   max-width: 200px;
   padding-top: 12px;
   padding-bottom: 12px;
   color: rgba(16,121,105,1);
-  background-color: transparent;
-  border: 1px solid transparent;
-  text-align: center;
 }
 
 .c3:focus {
   box-shadow: none;
   outline: none;
-  border: 1px solid #107969;
+  border-color: #107969;
 }
 
 .c8 {

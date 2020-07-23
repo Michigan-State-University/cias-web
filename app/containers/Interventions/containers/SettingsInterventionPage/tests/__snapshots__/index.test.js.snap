@@ -21,7 +21,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
         Name
       </h3>
       <input
-        class="styled__Input-sc-17rp6q7-0 cAlJGU Input-sc-19txxuq-0 ckBrTu"
+        class="styled__Input-sc-17rp6q7-0 cAlJGU Input-sc-19txxuq-0 dMXGQl"
         placeholder="e-Intervention Name"
         type="singleline"
         value="e-Intervention Name"

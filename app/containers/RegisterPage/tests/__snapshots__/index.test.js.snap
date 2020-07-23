@@ -24,7 +24,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
             class="Text-sc-2lza2m-0 bkfXbb"
           />
           <input
-            class="Input-sc-19txxuq-0 lhdglp"
+            class="Input-sc-19txxuq-0 bSnPKz"
             name="firstName"
             placeholder="First name"
             type="text"
@@ -38,7 +38,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
             class="Text-sc-2lza2m-0 bkfXbb"
           />
           <input
-            class="Input-sc-19txxuq-0 lhdglp"
+            class="Input-sc-19txxuq-0 bSnPKz"
             name="lastName"
             placeholder="Last name"
             type="text"
@@ -52,7 +52,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
             class="Text-sc-2lza2m-0 bkfXbb"
           />
           <input
-            class="Input-sc-19txxuq-0 lhdglp"
+            class="Input-sc-19txxuq-0 bSnPKz"
             name="email"
             placeholder="Email"
             type="email"
@@ -66,7 +66,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
             class="Text-sc-2lza2m-0 bkfXbb"
           />
           <input
-            class="Input-sc-19txxuq-0 lhdglp"
+            class="Input-sc-19txxuq-0 bSnPKz"
             name="password"
             placeholder="Password"
             type="password"
@@ -80,7 +80,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
             class="Text-sc-2lza2m-0 bkfXbb"
           />
           <input
-            class="Input-sc-19txxuq-0 lhdglp"
+            class="Input-sc-19txxuq-0 bSnPKz"
             name="passwordConfirmation"
             placeholder="Password confirmation"
             type="password"
