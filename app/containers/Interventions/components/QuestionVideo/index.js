@@ -17,7 +17,8 @@ import { PlayerWrapper, Player } from './styled';
 import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
 import { editQuestionRequest } from '../../containers/EditInterventionPage/actions';
 
-const isURLValid = url => url.includes('youtube') || url.includes('vimeo');
+const isURLValid = url =>
+  url.includes('youtube') || url.includes('vimeo') || url.includes('youtu.be');
 
 const QuestionVideo = ({
   intl: { formatMessage },
