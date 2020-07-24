@@ -69,6 +69,7 @@ module.exports = require('./webpack.base.babel')({
   plugins: [
     // Minify and optimize the index.html
     new HtmlWebpackPlugin({
+      favicon: 'app/assets/images/logo.png',
       template: 'app/index.html',
       minify: {
         removeComments: true,
@@ -126,11 +127,11 @@ module.exports = require('./webpack.base.babel')({
       ios: true,
       icons: [
         {
-          src: path.resolve('app/assets/images/icon-512x512.png'),
+          src: path.resolve('app/assets/images/logo.png'),
           sizes: [72, 96, 128, 144, 192, 384, 512],
         },
         {
-          src: path.resolve('app/assets/images/icon-512x512.png'),
+          src: path.resolve('app/assets/images/logo.png'),
           sizes: [120, 152, 167, 180],
           ios: true,
         },
