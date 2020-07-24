@@ -69,4 +69,18 @@ export default defineMessages({
       defaultMessage: 'Url screen',
     },
   },
+  statuses: {
+    draft: {
+      id: `${scope}.draft`,
+      defaultMessage: 'Draft',
+    },
+    published: {
+      id: `${scope}.published`,
+      defaultMessage: 'Published',
+    },
+    closed: {
+      id: `${scope}.closed`,
+      defaultMessage: 'Closed',
+    },
+  },
 });

@@ -16,6 +16,9 @@ const colors = {
   black: '#000000',
   flamingo: '#EF462F',
   botticelli: '#D5DEEA',
+  heather: '#BDC7D6',
+  pistachio: '#8CBD00',
+  burntSienna: '#F0684A',
 };
 
 const themeColors = {

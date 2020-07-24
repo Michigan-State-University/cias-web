@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { colors, themeColors } from 'theme';
+import { statusTypeToColorMap } from 'models/Status/StatusTypes';
 
 const sharedContainerStyles = `
   padding: 15px;
@@ -37,13 +38,14 @@ export const Heading = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-transform: capitalize;
 `;
 
 export const StatusIndicator = styled.span`
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #bdc7d6;
+  background: ${props => statusTypeToColorMap[props.status]};
   display: inline-block;
   margin-left: 5px;
 `;

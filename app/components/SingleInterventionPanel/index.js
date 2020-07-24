@@ -13,6 +13,7 @@ import csvIcon from 'assets/svg/csv-icon.svg';
 import fileShare from 'assets/svg/file-share.svg';
 import Spinner from 'components/Spinner';
 import Img from 'components/Img';
+import globalMessages from 'global/i18n/globalMessages';
 import messages from './messages';
 
 import {
@@ -46,14 +47,14 @@ function SingleInterventionPanel({
       </NewInterventionContainer>
     );
   }
-  const { id, name } = intervention;
+  const { id, name, status } = intervention;
   return (
     <StyledLink to={`/interventions/${id}/edit`}>
       <InterventionContainer>
         <Heading>
           <div>
-            <FormattedMessage {...messages.draft} />
-            <StatusIndicator />
+            <FormattedMessage {...globalMessages.statuses[status]} />
+            <StatusIndicator status={status} />
           </div>
           <div>
             <Img ml={15} src={csvIcon} alt="export csv" />

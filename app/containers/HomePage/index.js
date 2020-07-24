@@ -75,7 +75,6 @@ export function HomePage({
   useEffect(() => {
     if (!interventions) return;
     if (debouncedFilterValue === '') setFilteredInterventions(interventions);
-    console.log(debouncedFilterValue);
     const searchedInterventions = interventions.filter(
       ({ name }) =>
         name.toLowerCase().indexOf(debouncedFilterValue.toLowerCase()) !== -1,
