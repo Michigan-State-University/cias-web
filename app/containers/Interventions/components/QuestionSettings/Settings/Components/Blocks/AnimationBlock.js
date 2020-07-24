@@ -53,7 +53,7 @@ const AnimationBlock = ({
               borderRadius={20}
               clickable
               bg={colors.azure}
-              opacity={isActive ? null : 0.1}
+              bgOpacity={isActive ? null : 0.1}
               onClick={onChipsClick(blockIndex, anim)}
               isActive={isActive}
               key={`el-chips-${animIndex}`}

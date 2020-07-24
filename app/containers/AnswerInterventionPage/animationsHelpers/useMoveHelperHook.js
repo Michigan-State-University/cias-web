@@ -11,8 +11,12 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
 
   const getScaledPosition = (scale, position) => {
     const {
-      current: { clientWidth, clientHeight },
-    } = animationContainer;
+      current: { clientWidth, clientHeight } = {
+        clientWidth: elements.draggableContainerSize,
+        clientHeight: elements.draggableContainerSize,
+      },
+    } = animationContainer || {};
+
     return {
       x: Math.min(position.x * scale.x, clientWidth - 100),
       y: Math.min(position.y * scale.y, clientHeight - 100),
@@ -21,8 +25,11 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
 
   const getScaleFactor = () => {
     const {
-      current: { clientWidth, clientHeight },
-    } = animationContainer;
+      current: { clientWidth, clientHeight } = {
+        clientWidth: elements.draggableContainerSize,
+        clientHeight: elements.draggableContainerSize,
+      },
+    } = animationContainer || {};
     const scaleX = Math.min(1, clientWidth / elements.draggableContainerSize);
     const scaleY = Math.min(1, clientHeight / elements.draggableContainerSize);
     return { x: scaleX, y: scaleY };

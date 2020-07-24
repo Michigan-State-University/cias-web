@@ -3,10 +3,10 @@ import { hexToRgb } from 'theme';
 
 const style = props => ({
   backgroundColor:
-    props.bg && `rgba(${hexToRgb(props.bg)}, ${props.opacity || 1})`,
+    props.bg && `rgba(${hexToRgb(props.bg)}, ${props.bgOpacity || 1})`,
   color:
     props.color && `rgba(${hexToRgb(props.color)}, ${props.textOpacity || 1})`,
-  cursor: props.clickable ? 'pointer;' : '',
+  cursor: props.cursor || (props.clickable ? 'pointer;' : ''),
   '&:hover': {
     backgroundColor: props.hoverColor || '',
   },
@@ -14,12 +14,14 @@ const style = props => ({
   boxShadow: props.shadow || '',
   transform: props.transform || '',
   transition: props.transition || '',
+  opacity: props.opacity || '',
 });
 
 style.propTypes = {
   bg: PropTypes.string,
   color: PropTypes.string,
   opacity: PropTypes.number,
+  bgOpacity: PropTypes.number,
   clickable: PropTypes.bool,
   hoverColor: PropTypes.string,
   borderRadius: PropTypes.string,

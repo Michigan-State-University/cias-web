@@ -143,6 +143,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   text-decoration: underline;
   cursor: pointer;
   color: rgba(200,102,234,1);
+  cursor: pointer;
   color: rgba(200,102,234,1);
 }
 

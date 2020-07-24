@@ -52,7 +52,8 @@ Object {
   height: 100vh;
   left: 0;
   top: 0;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255,255,255,1);
+  opacity: 0.5;
 }
 
 <body>
@@ -72,7 +73,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="styled__FillScreenLoader-tle2yi-0 efFfcM"
+      class="styled__FillScreenLoader-tle2yi-0 jcBUSp"
       data-testid="fullscreen-loader"
       opacity="0.5"
     >

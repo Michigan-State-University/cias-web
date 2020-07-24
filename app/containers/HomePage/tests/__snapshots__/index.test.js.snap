@@ -2,7 +2,7 @@
 
 exports[`<HomePage /> should render and match the snapshot 1`] = `
 <div
-  class="styled__FillScreenLoader-tle2yi-0 efFfcM"
+  class="styled__FillScreenLoader-tle2yi-0 jcBUSp"
   data-testid="fullscreen-loader"
   opacity="0.5"
 >

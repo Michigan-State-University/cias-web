@@ -163,7 +163,6 @@ Object {
                 <div
                   class="c8"
                   color="#107969"
-                  opacity="0.1"
                 >
                   var_single_1
                 </div>
@@ -197,7 +196,7 @@ Object {
                 class="Row-x1o3ru-0 faOZMV"
               >
                 <img
-                  class="Img-sc-1kfzr96-0 yjFqA"
+                  class="Img-sc-1kfzr96-0 dsoWic"
                   src="IMAGE_MOCK"
                 />
                 <p
@@ -210,7 +209,6 @@ Object {
               <div
                 class="Badge-sc-1bivynt-0 eZpQcn"
                 color="#107969"
-                opacity="0.1"
               >
                 var_single_1
               </div>
@@ -484,7 +482,7 @@ Object {
                 >
                   <img
                     alt="No content"
-                    class="Img-sc-1kfzr96-0 bnOzpx"
+                    class="Img-sc-1kfzr96-0 dlGAit"
                     src="IMAGE_MOCK"
                   />
                   <h2

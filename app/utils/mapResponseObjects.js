@@ -11,3 +11,8 @@ export const mapInterventionToStateObject = intervention => ({
   ...intervention.attributes,
   id: intervention.id,
 });
+
+export const mapUserToStateObject = user => ({
+  ...user.attributes,
+  id: user.id,
+});

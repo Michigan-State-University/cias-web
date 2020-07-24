@@ -7,7 +7,7 @@ const Badge = styled.div.attrs(
   ({ bgWithOpacity, color }) =>
     bgWithOpacity && {
       bg: color,
-      opacity: 0.1,
+      bgOpacity: 0.1,
     },
 )`
   min-height: 24px;

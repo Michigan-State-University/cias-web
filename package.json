@@ -89,6 +89,7 @@
     "rc-slider": "^9.3.0",
     "react": "16.8.6",
     "react-collapse": "5.0.1",
+    "react-copy-to-clipboard": "5.0.2",
     "react-dom": "16.8.6",
     "react-draggable": "4.4.3",
     "react-dropzone": "11.0.1",

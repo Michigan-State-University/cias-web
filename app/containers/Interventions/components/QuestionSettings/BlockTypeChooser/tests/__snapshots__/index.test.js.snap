@@ -138,6 +138,7 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   height: 10px;
   margin-right: 18px;
   background-color: rgba(0,134,248,1);
+  opacity: 1;
 }
 
 .c10 {
@@ -159,6 +160,7 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   height: 10px;
   margin-right: 18px;
   background-color: rgba(255,118,145,1);
+  opacity: 1;
 }
 
 .c12 {
@@ -180,6 +182,7 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   height: 10px;
   margin-right: 18px;
   background-color: rgba(255,207,91,1);
+  opacity: 1;
 }
 
 <div

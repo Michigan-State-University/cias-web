@@ -7,28 +7,12 @@ export default defineMessages({
     id: `${scope}.pageTitle`,
     defaultMessage: 'Settings',
   },
-  placeholder: {
-    id: `${scope}.placeholder`,
-    defaultMessage: 'e-Intervention Name',
+  sessionSettings: {
+    id: `${scope}.sessionSettings`,
+    defaultMessage: 'Session Settings',
   },
-  nameLabel: {
-    id: `${scope}.nameLabel`,
-    defaultMessage: 'Name',
-  },
-  narratorSettings: {
-    id: `${scope}.narratorSettings`,
-    defaultMessage: 'Narrator Settings',
-  },
-  narratorActive: {
-    id: `${scope}.narratorActive`,
-    defaultMessage: 'Narrator Active',
-  },
-  voice: {
-    id: `${scope}.voice`,
-    defaultMessage: 'Voice',
-  },
-  animation: {
-    id: `${scope}.animation`,
-    defaultMessage: 'Animated Character',
+  respondentSettings: {
+    id: `${scope}.respondentSettings`,
+    defaultMessage: 'Respondent Settings',
   },
 });

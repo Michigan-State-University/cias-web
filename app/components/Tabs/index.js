@@ -29,7 +29,6 @@ const Tabs = ({
   };
 
   const tab = controlled ? controlledTabActive : activeTab;
-
   return (
     <TabsContainer {...restProps}>
       <Row>

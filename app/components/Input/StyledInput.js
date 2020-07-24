@@ -27,7 +27,6 @@ const StyledInput = props => {
       return Math.min(calculatedWidth, props.maxWidth);
     return calculatedWidth;
   };
-
   if (props.type === 'singleline')
     return (
       <Input
@@ -42,7 +41,7 @@ const StyledInput = props => {
         onFocus={() => setHasFocus(true)}
         placeholder={props.placeholder}
         keyboard={props.keyboard}
-        transparent
+        transparent={props.transparent}
         width={
           props.autoSize
             ? `${calculateWidthFromText(
@@ -67,7 +66,7 @@ const StyledInput = props => {
         props.onBlur(value);
       }}
       placeholder={props.placeholder}
-      transparent
+      transparent={props.transparent}
     />
   );
 };
@@ -80,12 +79,13 @@ StyledInput.propTypes = {
   textAlign: PropTypes.string,
   onBlur: PropTypes.func,
   autoSize: PropTypes.bool,
-  maxWidth: PropTypes.number,
+  maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   averageLetterWidth: PropTypes.number,
   textPadding: PropTypes.number,
   type: PropTypes.oneOf(['multiline', 'singleline']),
   rows: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  transparent: PropTypes.bool,
 };
 
 StyledInput.defaultProps = {
@@ -95,6 +95,7 @@ StyledInput.defaultProps = {
   averageLetterWidth: DEFAULT_AVERAGE_LETTER_WIDTH,
   textPadding: DEFAULT_TEXT_PADDING,
   type: 'singleline',
+  transparent: true,
 };
 
 export { StyledInput };
