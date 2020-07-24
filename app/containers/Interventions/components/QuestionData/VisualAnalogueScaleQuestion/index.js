@@ -60,7 +60,7 @@ const VisualAnalogueScaleQuestion = ({
           </Row>
 
           <Row justify="between" filled>
-            <Box hoverColor={colors.linkWater} padding={5}>
+            <Box hoverColor={colors.linkWater} padding={5} ml={-24}>
               <StyledInput
                 width={120}
                 py={9}
@@ -71,7 +71,7 @@ const VisualAnalogueScaleQuestion = ({
               />
             </Box>
 
-            <Box hoverColor={colors.linkWater} padding={5}>
+            <Box hoverColor={colors.linkWater} padding={5} mr={-18}>
               <StyledInput
                 width={120}
                 py={9}
