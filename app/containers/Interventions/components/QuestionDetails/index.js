@@ -56,7 +56,7 @@ const renderQuestionDetails = ({ selectedQuestion }) => {
           {animation && <QuestionNarrator />}
           <Row justify="center" filled>
             <Column mx={50} justify="center">
-              {position !== 1 && <Row width="100%" mt={26} />}
+              {position !== 1 && <Row width="100%" mt={40} />}
               {title && (
                 <Row width="100%">
                   <QuestionTitle />

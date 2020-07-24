@@ -20,7 +20,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
 import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { numericValidator, variableNameValidator } from 'utils/validators';
-import { themeColors, colors } from 'theme';
+import { themeColors, colors, elements } from 'theme';
 
 import messages from './messages';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
@@ -68,8 +68,8 @@ const GridQuestion = ({
         </HoverableBox>
       </Row>
 
-      <Row align="center" justify="center">
-        <Box px={10} overflow="scroll">
+      <Row justify="end" display="flex">
+        <Box maxWidth={elements.draggableContainerSize} overflow="scroll">
           <Table>
             <THead>
               <StripedTR>
@@ -83,7 +83,7 @@ const GridQuestion = ({
                     onMouseEnter={() => setHoveredColumn(columnIndex)}
                     onMouseLeave={() => setHoveredColumn(-1)}
                   >
-                    <Column align="center">
+                    <Column align="center" width="100%" mx={-50}>
                       <Box
                         px={8}
                         mb={8}
@@ -189,7 +189,7 @@ const GridQuestion = ({
                         selectedQuestion.id
                       }-row-cell-${rowIndex}-${columnIndex}`}
                     >
-                      <Row align="center" justify="center">
+                      <Row width={150}>
                         <Img src={radio} />
                       </Row>
                     </TD>

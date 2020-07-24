@@ -137,7 +137,7 @@ export function AnswerInterventionPage({
                 </BackButton>
               </Row>
             ))}
-          <Box mt={10}>
+          <Box>
             <Row>
               {settingsTitle && (
                 <Box
