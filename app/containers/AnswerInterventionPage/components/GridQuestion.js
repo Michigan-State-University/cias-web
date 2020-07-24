@@ -10,17 +10,23 @@ import Img from 'components/Img';
 import radioChecked from 'assets/svg/radio-button-checked.svg';
 import radio from 'assets/svg/radio-button.svg';
 
-const GridQuestion = ({ question, answerBody, selectAnswer }) => {
+const GridQuestion = ({
+  question,
+  answerBody,
+  selectAnswer,
+  questionIndex,
+  saveAnswer,
+}) => {
   const [selectedAnswersIndex, setSelectedAnswersIndex] = useState({});
   const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [updated, setUpdated] = useState(false);
 
-  useEffect(() => {
-    if (Object.keys(selectedAnswersIndex).length === rows.length) {
-      selectAnswer(Object.values(selectedAnswers));
-    }
-  }, [selectedAnswers]);
+  const {
+    id,
+    body,
+    settings: { proceed_button: proceedButton },
+  } = question;
 
-  const { id, body } = question;
   const {
     payload: { rows, columns },
   } = body.data[0];
@@ -41,6 +47,15 @@ const GridQuestion = ({ question, answerBody, selectAnswer }) => {
     }
   }, [id]);
 
+  useEffect(() => {
+    if (updated && Object.keys(selectedAnswersIndex).length === rows.length) {
+      selectAnswer(Object.values(selectedAnswers));
+      if (!proceedButton) {
+        saveAnswer(questionIndex + 1);
+      }
+    }
+  }, [selectedAnswersIndex, updated]);
+
   const check = (payload, value, name, rowIndex, columnIndex) => {
     const selectedAnswer = {
       var: name,
@@ -50,14 +65,18 @@ const GridQuestion = ({ question, answerBody, selectAnswer }) => {
         [rowIndex]: columnIndex,
       },
     };
+
     setSelectedAnswersIndex({
       ...selectedAnswersIndex,
       [rowIndex]: columnIndex,
     });
+
     setSelectedAnswers({
       ...selectedAnswers,
       [rowIndex]: selectedAnswer,
     });
+
+    setUpdated(true);
   };
   return (
     <Row align="center" justify="center" width="100%">
@@ -128,6 +147,8 @@ GridQuestion.propTypes = {
   question: PropTypes.shape(Question).isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
+  questionIndex: PropTypes.number,
+  saveAnswer: PropTypes.func,
 };
 
 export default GridQuestion;

@@ -46,7 +46,7 @@ const renderQuestionDetails = ({ selectedQuestion }) => {
         image,
         title,
         subtitle,
-        // proceed_button: proceedButton,
+        proceed_button: proceedButton,
       } = {},
       narrator: { settings: { animation } = {} } = {},
     } = selectedQuestion || {};
@@ -81,14 +81,11 @@ const renderQuestionDetails = ({ selectedQuestion }) => {
               <Row>
                 <QuestionData />
               </Row>
-              <Button my={20} width="180px">
-                <FormattedMessage {...messages.nextQuestion} />
-              </Button>
-              {/* {proceedButton && ( */}
-              {/*  <Button my={20} width="180px"> */}
-              {/*    <FormattedMessage {...messages.nextQuestion} /> */}
-              {/*  </Button> */}
-              {/* )} */}
+              {proceedButton && (
+                <Button my={20} width="180px">
+                  <FormattedMessage {...messages.nextQuestion} />
+                </Button>
+              )}
             </Column>
           </Row>
         </AnswerOuterContent>

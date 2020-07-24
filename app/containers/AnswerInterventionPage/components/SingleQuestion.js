@@ -11,19 +11,42 @@ import Question from 'models/Intervention/Question';
 
 const margin = 21;
 
-const SingleQuestion = ({ question, answerBody, selectAnswer }) => {
+const SingleQuestion = ({
+  question,
+  answerBody,
+  selectAnswer,
+  saveAnswer,
+  questionIndex,
+}) => {
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const {
     body: {
       data,
       variable: { name },
     },
+    settings: { proceed_button: proceedButton },
     id,
   } = question;
 
   useEffect(() => {
     setSelectedAnswerIndex(answerBody.length ? answerBody[0].index : null);
   }, [id]);
+
+  const handleClick = (payload, value, index) => {
+    selectAnswer([
+      {
+        var: name,
+        payload,
+        value,
+        index,
+      },
+    ]);
+    setSelectedAnswerIndex(index);
+
+    if (!proceedButton) {
+      saveAnswer(questionIndex + 1);
+    }
+  };
 
   return (
     <Column mt={10} mb={10}>
@@ -37,17 +60,7 @@ const SingleQuestion = ({ question, answerBody, selectAnswer }) => {
               mx={-margin}
               width={`calc(100% + ${margin}px)`}
               clickable
-              onClick={() => {
-                selectAnswer([
-                  {
-                    var: name,
-                    payload,
-                    value,
-                    index,
-                  },
-                ]);
-                setSelectedAnswerIndex(index);
-              }}
+              onClick={() => handleClick(payload, value, index)}
             >
               <Row align="center">
                 <Img
@@ -68,6 +81,8 @@ SingleQuestion.propTypes = {
   question: PropTypes.shape(Question).isRequired,
   answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
+  questionIndex: PropTypes.number,
+  saveAnswer: PropTypes.func,
 };
 
 export default SingleQuestion;

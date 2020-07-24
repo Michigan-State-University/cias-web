@@ -14,6 +14,7 @@ import { compose } from 'redux';
 import get from 'lodash/get';
 
 import { useInjectSaga } from 'utils/injectSaga';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { useInjectReducer } from 'utils/injectReducer';
 import ErrorAlert from 'components/ErrorAlert';
 import { Button } from 'components/Button';
@@ -100,6 +101,7 @@ export function AnswerInterventionPage({
         subtitle: settingsSubtitle,
         video: settingsVideo,
         image: settingsImage,
+        proceed_button: proceedButton,
       },
     } = currentQuestion;
     const selectAnswerProp = answerBody => {
@@ -117,6 +119,8 @@ export function AnswerInterventionPage({
       selectAnswer: selectAnswerProp,
       answerBody,
       formatMessage,
+      questionIndex,
+      saveAnswer,
     };
     return (
       <Row justify="center" filled>
@@ -173,23 +177,25 @@ export function AnswerInterventionPage({
           <Row pl={26}>
             {renderQuestionByType(currentQuestion, sharedProps)}
           </Row>
-          <Row width="100%">
-            <QuestionActions>
-              <Button
-                my={20}
-                width="180px"
-                loading={currentQuestion.loading}
-                onClick={() => {
-                  saveAnswer(questionIndex + 1);
-                }}
-                title={formatMessage(
-                  questionIndex !== interventionQuestions.length - 1
-                    ? messages.nextQuestion
-                    : messages.submitAnswer,
-                )}
-              />
-            </QuestionActions>
-          </Row>
+          {(isNullOrUndefined(proceedButton) || proceedButton) && (
+            <Row width="100%">
+              <QuestionActions>
+                <Button
+                  my={20}
+                  width="180px"
+                  loading={currentQuestion.loading}
+                  onClick={() => {
+                    saveAnswer(questionIndex + 1);
+                  }}
+                  title={formatMessage(
+                    questionIndex !== interventionQuestions.length - 1
+                      ? messages.nextQuestion
+                      : messages.submitAnswer,
+                  )}
+                />
+              </QuestionActions>
+            </Row>
+          )}
         </Column>
       </Row>
     );
