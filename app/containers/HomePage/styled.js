@@ -28,3 +28,9 @@ export const AddIcon = styled.div`
   align-items: center;
   margin-right: 5px;
 `;
+
+export const InitialRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
