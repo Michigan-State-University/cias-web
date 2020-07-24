@@ -5,6 +5,6 @@ export const scope = 'app.containers.QuestionSettings';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Question Settings',
+    defaultMessage: 'Screen Settings',
   },
 });

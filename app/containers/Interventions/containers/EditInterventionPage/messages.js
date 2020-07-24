@@ -9,7 +9,7 @@ export default defineMessages({
   },
   addScreen: {
     id: `${scope}.addScreen`,
-    defaultMessage: '+ Add new question',
+    defaultMessage: '+ Add new screen',
   },
   newQuestionMessage: {
     id: `${scope}.newQuestionMessage`,
@@ -23,7 +23,7 @@ export default defineMessages({
     },
     copyError: {
       id: `${scope}.copyError`,
-      defaultMessage: 'Cannot copy the question!',
+      defaultMessage: 'Cannot copy the screren!',
     },
   },
 });

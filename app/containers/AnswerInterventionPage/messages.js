@@ -11,7 +11,7 @@ export const scope = 'app.containers.AnswerInterventionPage';
 export default defineMessages({
   previousQuestion: {
     id: `${scope}.previousQuestion`,
-    defaultMessage: '< Previous question',
+    defaultMessage: '< Previous screen',
   },
   nextQuestion: {
     id: `${scope}.nextQuestion`,
@@ -27,7 +27,7 @@ export default defineMessages({
   },
   answerPlaceholder: {
     id: `${scope}.placeholder`,
-    defaultMessage: 'Answer the question...',
+    defaultMessage: 'Answer the screen...',
   },
   completeIntervention: {
     id: `${scope}.completeIntervention`,

@@ -38,35 +38,35 @@ export default defineMessages({
   questionTypes: {
     'Question::Single': {
       id: `${scope}.Question::Single`,
-      defaultMessage: 'Single answer question',
+      defaultMessage: 'Single answer screen',
     },
     'Question::Multiple': {
       id: `${scope}.Question::Multiple`,
-      defaultMessage: 'Multi answer question',
+      defaultMessage: 'Multi answer screen',
     },
     'Question::TextBox': {
       id: `${scope}.Question::TextBox`,
-      defaultMessage: 'Textbox question',
+      defaultMessage: 'Textbox screen',
     },
     'Question::Number': {
       id: `${scope}.Question::Number`,
-      defaultMessage: 'Number question',
+      defaultMessage: 'Number screen',
     },
     'Question::Grid': {
       id: `${scope}.Question::Grid`,
-      defaultMessage: 'Grid question',
+      defaultMessage: 'Grid screen',
     },
     'Question::AnalogueScale': {
       id: `${scope}.Question::AnalogueScale`,
-      defaultMessage: 'Visual Analogue Scale Question',
+      defaultMessage: 'Visual Analogue Scale screen',
     },
     'Question::Information': {
       id: `${scope}.Question::Information`,
-      defaultMessage: 'Information Question',
+      defaultMessage: 'Information screen',
     },
     'Question::Url': {
       id: `${scope}.Question::Url`,
-      defaultMessage: 'Url Question',
+      defaultMessage: 'Url screen',
     },
   },
 });

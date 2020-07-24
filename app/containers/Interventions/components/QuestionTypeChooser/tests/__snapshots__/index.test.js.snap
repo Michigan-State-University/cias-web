@@ -277,7 +277,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
       fontSize="15px"
       fontWeight="bold"
     >
-      Choose type of question
+      Choose type of screen
     </p>
   </div>
   <div
@@ -306,7 +306,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               className="c9"
               fontWeight="medium"
             >
-              Single answer question
+              Single answer screen
             </p>
           </div>
         </div>
@@ -326,7 +326,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               className="c9"
               fontWeight="medium"
             >
-              Multi answer question
+              Multi answer screen
             </p>
           </div>
         </div>
@@ -346,7 +346,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               className="c9"
               fontWeight="medium"
             >
-              Textbox question
+              Textbox screen
             </p>
           </div>
         </div>
@@ -366,7 +366,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               className="c9"
               fontWeight="medium"
             >
-              Number question
+              Number screen
             </p>
           </div>
         </div>
@@ -386,7 +386,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               className="c9"
               fontWeight="medium"
             >
-              Grid question
+              Grid screen
             </p>
           </div>
         </div>
@@ -406,7 +406,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               className="c9"
               fontWeight="medium"
             >
-              Visual Analogue Scale Question
+              Visual Analogue Scale screen
             </p>
           </div>
         </div>
@@ -426,7 +426,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               className="c9"
               fontWeight="medium"
             >
-              Information Question
+              Information screen
             </p>
           </div>
         </div>
@@ -446,7 +446,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
               className="c9"
               fontWeight="medium"
             >
-              Url Question
+              Url screen
             </p>
           </div>
         </div>

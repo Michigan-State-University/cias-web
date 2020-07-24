@@ -9,6 +9,6 @@ export default defineMessages({
   },
   nextQuestion: {
     id: `${scope}.nextQuestion`,
-    defaultMessage: 'Next question',
+    defaultMessage: 'Next screen',
   },
 });

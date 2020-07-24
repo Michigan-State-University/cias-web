@@ -5,7 +5,7 @@ export const scope = 'app.containers.Answer';
 export default defineMessages({
   textPlaceholder: {
     id: `${scope}.textPlaceholder`,
-    defaultMessage: 'Answer the question...',
+    defaultMessage: 'Answer the screen...',
   },
   numberPlaceholder: {
     id: `${scope}.numberPlaceholder`,

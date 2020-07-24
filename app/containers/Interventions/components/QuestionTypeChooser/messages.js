@@ -11,6 +11,6 @@ export const scope = 'app.containers.QuestionTypeChooser';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Choose type of question',
+    defaultMessage: 'Choose type of screen',
   },
 });

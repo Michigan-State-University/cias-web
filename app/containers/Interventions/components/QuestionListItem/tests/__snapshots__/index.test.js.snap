@@ -169,7 +169,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
           className="c7"
           fontWeight="bold"
         >
-          Single answer question
+          Single answer screen
         </p>
       </div>
     </div>

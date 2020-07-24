@@ -61,7 +61,7 @@ export default defineMessages({
   },
   selectQuestion: {
     id: `${scope}.selectQuestion`,
-    defaultMessage: 'Select Question',
+    defaultMessage: 'Select Screen',
   },
   addVariable: {
     id: `${scope}.addVariable`,
