@@ -18,7 +18,7 @@ const Accordion = ({ children, onHide, onOpen, accordionParentKey }) => {
   const handleToggle = index => () => {
     let newIndex = index;
     if (opened === index) newIndex = -1;
-    else onHide(opened);
+    if (opened !== -1) onHide(opened);
     setOpened(newIndex);
   };
 

@@ -62,7 +62,7 @@ const CollapseContent = ({ child, isOpened }) => {
       setShow(true);
       setTimeout(() => {
         setTransition(true);
-      }, 10);
+      }, 20);
     }
   }, [isOpened]);
 

@@ -39,6 +39,7 @@ const QuestionDetails = props => (
 const renderQuestionDetails = ({ selectedQuestion }) => {
   if (selectedQuestion != null) {
     const {
+      id,
       position,
       settings: {
         video,
@@ -53,7 +54,7 @@ const renderQuestionDetails = ({ selectedQuestion }) => {
     return (
       <AnswerOuterContainer>
         <AnswerOuterContent>
-          {animation && <QuestionNarrator />}
+          {animation && <QuestionNarrator questionId={id} />}
           <Row justify="center" filled>
             <Column mx={50} justify="center">
               {position !== 1 && <Row width="100%" mt={40} />}

@@ -29,6 +29,7 @@ import {
 import {
   setPeedyDraggable,
   setAnimationStopPosition,
+  updatePreviewAnimation,
 } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
 import BlockTypeChooser from '../../../BlockTypeChooser';
@@ -56,6 +57,7 @@ const NarratorTab = ({
   animationPosition,
   currentQuestionIndex,
   deleteBlock,
+  updateNarratorPreviewAnimation,
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
@@ -107,20 +109,32 @@ const NarratorTab = ({
 
   const cancelAction = index => {
     if (draggable) {
-      const {
-        position: { posFrom },
-      } = narrator.blocks[index];
+      const { position: { posFrom } = {} } = narrator.blocks[index] || {};
       setDraggable(false);
       savePosition(index, id, posFrom);
       setOffset(posFrom.x, posFrom.y);
     }
   };
 
-  const moveAnimation = index => {
-    const { position } = narrator.blocks[index];
-    if (!isEqual(position.posTo, animationPosition)) {
-      setOffset(position.posTo.x, position.posTo.y);
+  const hideAccordion = index => {
+    if (draggable) {
+      const { position: { posTo } = {} } = narrator.blocks[index] || {};
+      setDraggable(false);
+      setOffset(posTo.x, posTo.y);
     }
+    updateNarratorPreviewAnimation('standStill');
+  };
+
+  const moveAnimation = index => {
+    const { position: { posTo } = {} } = narrator.blocks[index] || {};
+    if (!isEqual(posTo, animationPosition)) {
+      setOffset(posTo.x, posTo.y);
+    }
+  };
+
+  const handleSave = index => () => {
+    savePosition(index, id, animationPosition);
+    setDraggable(false);
   };
 
   const last = lastKey(narrator.settings);
@@ -155,7 +169,7 @@ const NarratorTab = ({
       </Box>
       <Accordion
         accordionParentKey={currentQuestionIndex}
-        onHide={cancelAction}
+        onHide={hideAccordion}
         onOpen={moveAnimation}
       >
         {narrator &&
@@ -179,10 +193,7 @@ const NarratorTab = ({
               {draggable && (
                 <Row width="100%" mt={15}>
                   <Button
-                    onClick={() => {
-                      savePosition(blockIndex, id, animationPosition);
-                      setDraggable(false);
-                    }}
+                    onClick={handleSave(blockIndex)}
                     title={formatMessage(messages.save)}
                     mr={5}
                     width="50%"
@@ -224,6 +235,7 @@ NarratorTab.propTypes = {
   draggable: PropTypes.bool,
   currentQuestionIndex: PropTypes.number,
   deleteBlock: PropTypes.func,
+  updateNarratorPreviewAnimation: PropTypes.func,
 };
 
 const mapDispatchToProps = {
@@ -233,6 +245,7 @@ const mapDispatchToProps = {
   setDraggable: setPeedyDraggable,
   setOffset: setAnimationStopPosition,
   savePosition: saveNarratorMovement,
+  updateNarratorPreviewAnimation: updatePreviewAnimation,
 };
 
 const mapStateToProps = createStructuredSelector({

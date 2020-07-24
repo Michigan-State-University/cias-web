@@ -64,6 +64,10 @@ const QuestionNarrator = ({
     updateNarratorPreviewAnimation('standStill');
   }, [questionId]);
 
+  useDidUpdateEffect(() => {
+    if (draggable) updateNarratorPreviewAnimation('standStill');
+  }, [draggable]);
+
   useEffect(() => {
     setDragPosition(animationPositionStored);
   }, [animationPositionStored]);
@@ -121,6 +125,7 @@ const QuestionNarrator = ({
             width={100}
             style={lottieStyles}
             isClickToPauseDisabled
+            isStopped={!!draggable || animation === 'standStill'}
             eventListeners={[
               {
                 eventName: 'complete',
