@@ -34,7 +34,7 @@ const instantiateBlockForType = (type, posFrom) => {
     case speechType:
       return {
         type: speechType,
-        text: '',
+        text: [],
         audio_url: null,
         animation: 'rest',
         position: {

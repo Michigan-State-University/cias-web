@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import keys from 'lodash/keys';
+import join from 'lodash/join';
 
 import Column from 'components/Column';
 import Box from 'components/Box';
@@ -15,6 +16,7 @@ import playButton from 'assets/svg/play-button-1.svg';
 import stopButton from 'assets/svg/stop-button-1.svg';
 
 import AudioWrapper from 'utils/audioWrapper';
+import { splitAndKeep } from 'utils/splitAndKeep';
 import { colors } from 'theme';
 
 import globalMessages from 'global/i18n/globalMessages';
@@ -35,6 +37,11 @@ const SpeechBlock = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [text, setText] = useState(join(block.text, ''));
+
+  useEffect(() => {
+    setText(join(block.text, ''));
+  }, [block.text]);
 
   const selectOptions = useMemo(() => {
     const animations = keys(speechAnimations);
@@ -47,7 +54,14 @@ const SpeechBlock = ({
 
   const audio = useRef(new AudioWrapper());
 
-  const handleLoad = () => setIsLoading(true);
+  const handleTextUpdate = value =>
+    updateText(blockIndex, splitAndKeep(value, [',', '.', '?', '!']), id);
+
+  const handleLoad = () => {
+    stopAudio();
+    setIsLoading(true);
+  };
+
   const handleReady = () => setIsLoading(false);
 
   useEffect(() => {
@@ -103,8 +117,8 @@ const SpeechBlock = ({
             type="multiline"
             rows="10"
             placeholder={formatMessage(messages.speechPlaceholder)}
-            value={block.text}
-            onBlur={value => updateText(blockIndex, value, id)}
+            value={text}
+            onBlur={value => handleTextUpdate(value)}
           />
         </Box>
         <Box position="absolute" bottom={BUTTON_MARGIN} right={BUTTON_MARGIN}>
