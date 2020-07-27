@@ -133,7 +133,7 @@ SpeechBlock.propTypes = {
   formatMessage: PropTypes.func.isRequired,
   block: PropTypes.shape({
     type: PropTypes.string,
-    text: PropTypes.string,
+    text: PropTypes.arrayOf(PropTypes.string),
     audio_url: PropTypes.string,
   }),
   id: PropTypes.string,
