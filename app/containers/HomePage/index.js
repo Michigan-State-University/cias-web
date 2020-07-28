@@ -19,7 +19,9 @@ import useDebounce from 'utils/useDebounce';
 import useIsInViewport from 'utils/useIsInViewport';
 
 import search from 'assets/svg/search.svg';
+import StatusFilter from 'containers/HomePage/StatusFilter';
 import Loader from 'components/Loader';
+import { Input } from 'components/Input';
 import ErrorAlert from 'components/ErrorAlert';
 import H1 from 'components/H1';
 import SingleInterventionPanel from 'components/SingleInterventionPanel';
@@ -37,9 +39,14 @@ import {
   makeSelectInterventionLoaders,
 } from 'global/reducers/intervention';
 
-import { Input } from 'components/Input';
-import { NewInterventionFloatButton, AddIcon, InitialRow } from './styled';
+import {
+  NewInterventionFloatButton,
+  AddIcon,
+  InitialRow,
+  ArchivedButton,
+} from './styled';
 import messages from './messages';
+
 export function HomePage({
   intl: { formatMessage },
   createIntervention,
@@ -59,6 +66,7 @@ export function HomePage({
   useInjectSaga({ key: 'getInterventions', saga: fetchInterventionsSaga });
 
   const [filterValue, setFilterValue] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
   const debouncedFilterValue = useDebounce(filterValue, 500);
   const [filteredInterventions, setFilteredInterventions] = useState(null);
 
@@ -77,13 +85,35 @@ export function HomePage({
 
   useEffect(() => {
     if (!interventions) return;
-    if (debouncedFilterValue === '') setFilteredInterventions(interventions);
-    const searchedInterventions = interventions.filter(
-      ({ name }) =>
-        name.toLowerCase().indexOf(debouncedFilterValue.toLowerCase()) !== -1,
-    );
+    if (debouncedFilterValue === '' && filterStatus === '')
+      setFilteredInterventions(interventions);
+    let searchedInterventions = interventions;
+    if (debouncedFilterValue !== '') {
+      searchedInterventions = searchedInterventions.filter(
+        ({ name }) =>
+          name.toLowerCase().indexOf(debouncedFilterValue.toLowerCase()) !== -1,
+      );
+    }
+    if (filterStatus !== '') {
+      searchedInterventions = searchedInterventions.filter(
+        ({ status }) =>
+          status.toLowerCase().indexOf(filterStatus.toLowerCase()) !== -1,
+      );
+    }
     setFilteredInterventions(searchedInterventions);
-  }, [debouncedFilterValue]);
+  }, [debouncedFilterValue, filterStatus]);
+
+  const handleFilterStatus = e => {
+    e.preventDefault();
+    const {
+      currentTarget: { value },
+    } = e;
+    if (value === filterStatus) {
+      setFilterStatus('');
+    } else {
+      setFilterStatus(value);
+    }
+  };
 
   const wrapWithCol = (child, key) => (
     <Col key={`Single-intvention-${key}`} xs={12} sm={6} lg={4} xl={3}>
@@ -118,7 +148,7 @@ export function HomePage({
     <Fragment>
       <Container>
         <InitialRow>
-          <H1 my={35}>
+          <H1>
             <FormattedMessage {...messages.myIntervention} />
           </H1>
           <div>
@@ -130,6 +160,16 @@ export function HomePage({
               placeholder={formatMessage(messages.filter)}
             />
           </div>
+        </InitialRow>
+        <InitialRow>
+          <StatusFilter
+            onClick={handleFilterStatus}
+            formatMessage={formatMessage}
+            active={filterStatus}
+          />
+          <ArchivedButton>
+            {formatMessage(messages.showArchived)}
+          </ArchivedButton>
         </InitialRow>
         {filterValue && filteredInterventions.length === 0 && (
           <h3>

@@ -28,4 +28,8 @@ export default defineMessages({
     id: `${scope}.noFilterResults`,
     defaultMessage: `There are no interventions with this criteria`,
   },
+  showArchived: {
+    id: `${scope}.showArchived`,
+    defaultMessage: `Show Archived`,
+  },
 });
