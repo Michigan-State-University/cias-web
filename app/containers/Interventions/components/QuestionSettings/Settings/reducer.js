@@ -35,7 +35,8 @@ const instantiateBlockForType = (type, posFrom) => {
       return {
         type: speechType,
         text: [],
-        audio_url: null,
+        audio_url: [],
+        sha256: [],
         animation: 'rest',
         position: {
           posFrom,
