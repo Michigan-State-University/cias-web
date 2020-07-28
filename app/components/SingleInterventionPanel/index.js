@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, forwardRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { FormattedMessage } from 'react-intl';
@@ -27,53 +27,51 @@ import {
   AddIcon,
 } from './styled';
 
-function SingleInterventionPanel({
-  intervention,
-  clickHandler,
-  interventionCreating,
-}) {
-  if (!intervention) {
+const SingleInterventionPanel = forwardRef(
+  ({ intervention, clickHandler, interventionCreating }, ref) => {
+    if (!intervention) {
+      return (
+        <NewInterventionContainer onClick={clickHandler} ref={ref}>
+          {!interventionCreating && (
+            <>
+              <AddIcon>
+                <div>+</div>
+              </AddIcon>
+              <FormattedMessage {...messages.newIntervention} />
+            </>
+          )}
+          {interventionCreating && <Spinner />}
+        </NewInterventionContainer>
+      );
+    }
+    const { id, name, status } = intervention;
     return (
-      <NewInterventionContainer onClick={clickHandler}>
-        {!interventionCreating && (
-          <>
-            <AddIcon>
-              <div>+</div>
-            </AddIcon>
-            <FormattedMessage {...messages.newIntervention} />
-          </>
-        )}
-        {interventionCreating && <Spinner />}
-      </NewInterventionContainer>
+      <StyledLink to={`/interventions/${id}/edit`}>
+        <InterventionContainer>
+          <Heading>
+            <div>
+              <FormattedMessage {...globalMessages.statuses[status]} />
+              <StatusIndicator status={status} />
+            </div>
+            <div>
+              <Img ml={15} src={csvIcon} alt="export csv" />
+              <Img ml={15} src={fileShare} alt="share" />
+              <Img ml={15} src={binNoBg} alt="remove" />
+            </div>
+          </Heading>
+          <Title>
+            <div>{name}</div>
+          </Title>
+          <InterventionInfo>
+            <div>
+              <FormattedMessage {...messages.notPublished} />
+            </div>
+          </InterventionInfo>
+        </InterventionContainer>
+      </StyledLink>
     );
-  }
-  const { id, name, status } = intervention;
-  return (
-    <StyledLink to={`/interventions/${id}/edit`}>
-      <InterventionContainer>
-        <Heading>
-          <div>
-            <FormattedMessage {...globalMessages.statuses[status]} />
-            <StatusIndicator status={status} />
-          </div>
-          <div>
-            <Img ml={15} src={csvIcon} alt="export csv" />
-            <Img ml={15} src={fileShare} alt="share" />
-            <Img ml={15} src={binNoBg} alt="remove" />
-          </div>
-        </Heading>
-        <Title>
-          <div>{name}</div>
-        </Title>
-        <InterventionInfo>
-          <div>
-            <FormattedMessage {...messages.notPublished} />
-          </div>
-        </InterventionInfo>
-      </InterventionContainer>
-    </StyledLink>
-  );
-}
+  },
+);
 
 SingleInterventionPanel.propTypes = {
   intervention: PropTypes.object,

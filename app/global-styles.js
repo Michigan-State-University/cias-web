@@ -62,6 +62,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex: 1;
     align-items: stretch;
+    overflow: scroll;
   }
 
   #app {
@@ -70,7 +71,6 @@ const GlobalStyle = createGlobalStyle`
     min-width: 100%;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
   }
 
   p,

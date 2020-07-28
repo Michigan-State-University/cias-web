@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
+import get from 'lodash/get';
 import { store } from 'configureStore';
 import LocalStorageService from './localStorageService';
 import { logOut } from '../global/reducers/auth/actions';
@@ -35,7 +36,7 @@ axios.interceptors.response.use(
     return response;
   },
   error => {
-    if (error.response.status === 401) {
+    if (get(error, 'response.status') === 401) {
       LocalStorageService.clearHeaders();
 
       dispatch(logOut());

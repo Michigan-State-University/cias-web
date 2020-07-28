@@ -16,6 +16,7 @@ import { Container, Row, Col } from 'react-grid-system';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import useDebounce from 'utils/useDebounce';
+import useIsInViewport from 'utils/useIsInViewport';
 
 import search from 'assets/svg/search.svg';
 import Loader from 'components/Loader';
@@ -60,6 +61,8 @@ export function HomePage({
   const [filterValue, setFilterValue] = useState('');
   const debouncedFilterValue = useDebounce(filterValue, 500);
   const [filteredInterventions, setFilteredInterventions] = useState(null);
+
+  const [ref, isInViewport] = useIsInViewport();
 
   useEffect(() => {
     fetchInterventions();
@@ -136,6 +139,7 @@ export function HomePage({
         <Row>
           {wrapWithCol(
             <SingleInterventionPanel
+              ref={ref}
               clickHandler={createIntervention}
               interventionCreating={createInterventionLoader}
             />,
@@ -149,7 +153,7 @@ export function HomePage({
           )}
         </Row>
       </Container>
-      {filteredInterventions.length !== 0 && (
+      {filteredInterventions.length !== 0 && !isInViewport && (
         <NewInterventionFloatButton onClick={createIntervention}>
           {!createInterventionLoader && (
             <>
