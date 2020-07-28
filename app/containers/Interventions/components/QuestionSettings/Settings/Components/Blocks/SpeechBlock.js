@@ -38,6 +38,7 @@ const SpeechBlock = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(block.text, ''));
+  const [hasFocus, setHasFocus] = useState(false);
 
   useEffect(() => {
     setText(join(block.text, ''));
@@ -87,6 +88,11 @@ const SpeechBlock = ({
     }
   };
 
+  const handleBlur = value => {
+    handleTextUpdate(value);
+    setHasFocus(false);
+  };
+
   const button = isPlaying ? stopButton : playButton;
 
   const selectedOption = selectOptions.find(
@@ -118,10 +124,16 @@ const SpeechBlock = ({
             rows="10"
             placeholder={formatMessage(messages.speechPlaceholder)}
             value={text}
-            onBlur={value => handleTextUpdate(value)}
+            onBlur={handleBlur}
+            onFocus={() => setHasFocus(true)}
           />
         </Box>
-        <Box position="absolute" bottom={BUTTON_MARGIN} right={BUTTON_MARGIN}>
+        <Box
+          position="absolute"
+          bottom={BUTTON_MARGIN}
+          right={BUTTON_MARGIN}
+          hidden={hasFocus}
+        >
           {renderButton()}
         </Box>
       </Box>
