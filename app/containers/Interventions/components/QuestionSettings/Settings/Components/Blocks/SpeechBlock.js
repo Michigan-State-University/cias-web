@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, useMemo } from 'react';
+import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -19,6 +20,8 @@ import AudioWrapper from 'utils/audioWrapper';
 import { splitAndKeep } from 'utils/splitAndKeep';
 import { colors } from 'theme';
 
+import { makeSelectLoader } from 'containers/Interventions/containers/EditInterventionPage/selectors';
+
 import globalMessages from 'global/i18n/globalMessages';
 import { speechAnimations } from 'utils/animations/animationsNames';
 import messages from '../messages';
@@ -34,11 +37,13 @@ const SpeechBlock = ({
   updateAnimation,
   blockIndex,
   id,
+  updateLoader,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(block.text, ''));
   const [hasFocus, setHasFocus] = useState(false);
+  const [isSpeechUpdating, setIsSpeechUpdating] = useState(false);
 
   useEffect(() => {
     setText(join(block.text, ''));
@@ -76,6 +81,10 @@ const SpeechBlock = ({
     return audio.current.clean;
   }, [blockIndex]);
 
+  useEffect(() => {
+    if (!updateLoader) setIsSpeechUpdating(false);
+  }, [updateLoader]);
+
   const playAudio = () => audio.current.play();
   const stopAudio = () => audio.current.stop();
 
@@ -89,6 +98,7 @@ const SpeechBlock = ({
   };
 
   const handleBlur = value => {
+    setIsSpeechUpdating(true);
     handleTextUpdate(value);
     setHasFocus(false);
   };
@@ -100,7 +110,7 @@ const SpeechBlock = ({
   );
 
   const renderButton = () => {
-    if (isLoading) return <Loader size={24} type="inline" />;
+    if (isSpeechUpdating) return <Loader size={24} type="inline" />;
 
     return <Img src={button} onClick={handleButtonClick} clickable />;
   };
@@ -152,7 +162,12 @@ SpeechBlock.propTypes = {
   blockIndex: PropTypes.number,
   updateText: PropTypes.func,
   updateAnimation: PropTypes.func,
+  updateLoader: PropTypes.bool,
 };
+
+const mapStateToProps = createStructuredSelector({
+  updateLoader: makeSelectLoader('updateQuestion'),
+});
 
 const mapDispatchToProps = {
   updateText: (index, text, id) => updateSpeechSettings(index, { text }, id),
@@ -161,7 +176,7 @@ const mapDispatchToProps = {
 };
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 

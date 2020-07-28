@@ -53,6 +53,7 @@ export const initialState = {
   loaders: {
     interventionListLoading: false,
     questionListLoading: true,
+    updateQuestion: false,
   },
 };
 
@@ -189,6 +190,8 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_QUESTION_SETTINGS:
+        draft.loaders.updateQuestion = true;
+
         draft.questions[state.selectedQuestion] = {
           ...draft.questions[state.selectedQuestion],
           ...questionSettingsReducer(
@@ -200,12 +203,16 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case EDIT_QUESTION_SUCCESS:
+        draft.loaders.updateQuestion = false;
+
         draft.cache.questions[state.selectedQuestion] = mapQuestionDataForType(
           action.payload.question,
         );
         break;
 
       case EDIT_QUESTION_ERROR:
+        draft.loaders.updateQuestion = false;
+
         draft.questions[state.selectedQuestion] = cloneDeep(
           draft.cache.questions[state.selectedQuestion],
         );
