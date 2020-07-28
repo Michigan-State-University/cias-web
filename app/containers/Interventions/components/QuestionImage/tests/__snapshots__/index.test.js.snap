@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionImage /> should match the snapshot with file 1`] = `
-.c1 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -24,19 +24,27 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   width: 100%;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
 }
 
-.c3 {
+.c4 {
   width: auto;
   height: auto;
   width: 100%;
   height: 100%;
 }
 
-.c4 {
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.c5 {
   width: auto;
   height: auto;
   display: block;
@@ -46,7 +54,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   cursor: pointer;
 }
 
-.c0 {
+.c1 {
   width: auto;
   height: auto;
   display: block;
@@ -60,11 +68,11 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   border-radius: 5px;
 }
 
-.c0:hover {
+.c1:hover {
   background-color: #E9F1FB;
 }
 
-.c2 {
+.c3 {
   width: 100%;
   height: 100%;
   max-width: 100%;
@@ -72,35 +80,39 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
 
 <div
   className="c0"
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  width="100%"
 >
   <div
     className="c1"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     width="100%"
   >
     <div
       className="c2"
+      width="100%"
     >
-      <img
-        alt="image"
+      <div
         className="c3"
-        height="100%"
-        src="mock.png"
-        width="100%"
-      />
-    </div>
-    <div
-      className="c4"
-      onClick={[Function]}
-      visibility="hidden"
-    >
-      <img
-        alt="bin-icon"
+      >
+        <img
+          alt="image"
+          className="c4"
+          height="100%"
+          src="mock.png"
+          width="100%"
+        />
+      </div>
+      <div
         className="c5"
-        src="IMAGE_MOCK"
-      />
+        onClick={[Function]}
+        visibility="hidden"
+      >
+        <img
+          alt="bin-icon"
+          className="c6"
+          src="IMAGE_MOCK"
+        />
+      </div>
     </div>
   </div>
 </div>

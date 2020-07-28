@@ -125,9 +125,9 @@ export function AnswerInterventionPage({
     return (
       <Row justify="center" filled>
         <Column mx={50} justify="center">
-          {questionIndex !== 0 &&
-            (currentQuestion && (
-              <Row width="100%" mt={10}>
+          <Row width="100%" mt={5} height={30}>
+            {questionIndex !== 0 &&
+              (currentQuestion && (
                 <BackButton
                   onClick={() => {
                     if (answers[currentQuestionId]) {
@@ -139,42 +139,42 @@ export function AnswerInterventionPage({
                 >
                   <FormattedMessage {...messages.previousQuestion} />
                 </BackButton>
-              </Row>
-            ))}
+              ))}
+          </Row>
           <Box>
-            <Row>
-              {settingsTitle && (
+            {settingsTitle && !isNullOrUndefined(title) && (
+              <Row>
                 <Box
                   padding={26}
                   width="100%"
                   dangerouslySetInnerHTML={{ __html: title }}
                 />
-              )}
-            </Row>
-            <Row>
-              {settingsSubtitle && (
+              </Row>
+            )}
+            {settingsSubtitle && !isNullOrUndefined(subtitle) && (
+              <Row mt={10}>
                 <Box
                   padding={26}
                   dangerouslySetInnerHTML={{ __html: subtitle }}
                 />
-              )}
-            </Row>
-            <Row mt={10}>
-              {settingsVideo && videoUrl && (
+              </Row>
+            )}
+            {settingsVideo && !isNullOrUndefined(videoUrl) && (
+              <Row mt={10}>
                 <PlayerWrapper>
                   <Player url={videoUrl} controls width="100%" height="100%" />
                 </PlayerWrapper>
-              )}
-            </Row>
-            <Row>
-              {settingsImage && imageUrl && (
+              </Row>
+            )}
+            {settingsImage && !isNullOrUndefined(imageUrl) && (
+              <Row mt={10}>
                 <ImageWrapper>
                   <Img src={imageUrl} alt="image" height="100%" width="100%" />
                 </ImageWrapper>
-              )}
-            </Row>
+              </Row>
+            )}
           </Box>
-          <Row pl={26}>
+          <Row mt={10}>
             {renderQuestionByType(currentQuestion, sharedProps)}
           </Row>
           {(isNullOrUndefined(proceedButton) || proceedButton) && (

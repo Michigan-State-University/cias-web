@@ -50,7 +50,13 @@ const UrlQuestion = ({
           onBlur={updateVariable}
         />
       </Row>
-      <Box bg={colors.linkWater} width="100%" px={21} py={14}>
+      <Box
+        bg={colors.linkWater}
+        width="100%"
+        px={21}
+        py={14}
+        hidden={draggable}
+      >
         <Row>
           <ApprovableInput
             rows="3"
@@ -62,7 +68,7 @@ const UrlQuestion = ({
           />
         </Row>
       </Box>
-      <Box my={5}>{payload && <UrlPreview link={payload} />}</Box>
+      <Box>{payload && <UrlPreview link={payload} />}</Box>
     </Column>
   );
 };

@@ -118,8 +118,6 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 
 .c10 {

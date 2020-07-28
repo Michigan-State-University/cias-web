@@ -45,23 +45,22 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
     }
   };
   return (
-    <Column mt={10} mb={10}>
+    <Column>
       {data.map((questionAnswer, index) => {
         const {
           payload,
           variable: { name, value },
         } = questionAnswer;
         return (
-          <Row key={`question-${question.id}-el-${index}`}>
+          <Row key={`question-${question.id}-el-${index}`} mb={10}>
             <HoverableBox
               px={margin}
               py={14}
-              mx={margin}
               width={`calc(100% + ${margin}px)`}
               clickable
               onClick={() => check(payload, value, name, index)}
             >
-              <Row align="center">
+              <Row align="center" padding={10}>
                 <Img
                   src={
                     selectedAnswersIndex.includes(index)

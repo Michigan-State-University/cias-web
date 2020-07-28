@@ -41,7 +41,6 @@ export const AnswerOuterContainer = styled.div`
 `;
 
 export const PlayerWrapper = styled.div`
-  margin-top: 22px;
   position: relative;
   padding-top: ${aspectRatio * 100}%;
   height: 100%;

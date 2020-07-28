@@ -54,7 +54,7 @@ const GridQuestion = ({
   const [hoveredColumn, setHoveredColumn] = useState(-1);
 
   return (
-    <Box width="100%" px={21} py={14}>
+    <Box width="100%" px={21} py={14} mt={10}>
       <Row justify="end" display="flex" hidden={draggable}>
         <HoverableBox px={21} py={14} onClick={addColumn}>
           <Box>
@@ -87,7 +87,6 @@ const GridQuestion = ({
                       <Box
                         px={8}
                         mb={8}
-                        height={35}
                         onClick={() => deleteColumn(columnIndex)}
                         hidden={false}
                         clickable
@@ -119,9 +118,13 @@ const GridQuestion = ({
                         px={0}
                         py={12}
                         textAlign="center"
-                        placeholder={formatMessage(messages.columnPlaceholder, {
-                          index: columnIndex + 1,
-                        })}
+                        placeholder={
+                          !draggable
+                            ? formatMessage(messages.columnPlaceholder, {
+                                index: columnIndex + 1,
+                              })
+                            : ''
+                        }
                         value={column.payload}
                         onBlur={value =>
                           updateColumn({ payload: value }, columnIndex)
@@ -172,9 +175,13 @@ const GridQuestion = ({
                           px={0}
                           py={12}
                           textAlign="center"
-                          placeholder={formatMessage(messages.rowPlaceholder, {
-                            index: rowIndex + 1,
-                          })}
+                          placeholder={
+                            !draggable
+                              ? formatMessage(messages.rowPlaceholder, {
+                                  index: rowIndex + 1,
+                                })
+                              : ''
+                          }
                           value={row.payload}
                           onBlur={value =>
                             updateRow({ payload: value }, rowIndex)
@@ -201,10 +208,10 @@ const GridQuestion = ({
         </Box>
       </Row>
 
-      <Row justify="start">
+      <Row justify="start" hidden={draggable}>
         <HoverableBox px={21} py={14} mt={20} onClick={addRow}>
           <Box>
-            <Row align="center" display="flex" hidden={draggable}>
+            <Row align="center" display="flex">
               <PlusCircle mr={12} />
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(messages.addRow)}

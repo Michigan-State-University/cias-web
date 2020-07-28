@@ -89,9 +89,13 @@ const SingleQuestion = ({
                       mr={8}
                       fontSize={18}
                       type="singleline"
-                      placeholder={formatMessage(messages.placeholder, {
-                        index: index + 1,
-                      })}
+                      placeholder={
+                        !draggable
+                          ? formatMessage(messages.placeholder, {
+                              index: index + 1,
+                            })
+                          : ''
+                      }
                       value={value.payload}
                       onCheck={newTitle =>
                         updateAnswer(index, { ...value, payload: newTitle })
@@ -126,9 +130,13 @@ const SingleQuestion = ({
                   textAlign="center"
                   validator={numericValidator}
                   keyboard="tel"
-                  placeholder={formatMessage(
-                    globalMessages.variables.variableScorePlaceholder,
-                  )}
+                  placeholder={
+                    !draggable
+                      ? formatMessage(globalMessages.variables.emptyBadge, {
+                          index: index + 1,
+                        })
+                      : ''
+                  }
                   value={value.value}
                   color={colors.azure}
                   onBlur={val =>

@@ -20,7 +20,7 @@ const TextBoxQuestion = ({
     },
   } = question;
   return (
-    <Box my={10} bg={themeColors.highlight} width="100%">
+    <Box bg={themeColors.highlight} width="100%" px={21} py={14}>
       <Row>
         <TextArea
           value={

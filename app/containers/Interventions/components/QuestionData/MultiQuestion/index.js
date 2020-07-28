@@ -51,7 +51,7 @@ const MultiQuestion = ({
   }, [checkboxButtonRef.current]);
 
   return (
-    <Column>
+    <Column mt={10}>
       {selectedQuestion.body.data.map((value, index) => (
         <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox

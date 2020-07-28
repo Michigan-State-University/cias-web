@@ -40,7 +40,7 @@ const VisualAnalogueScaleQuestion = ({
     <Column mt={10} mb={10}>
       <Box width="100%">
         <Row>
-          <Box width="100%" mt={25}>
+          <Box width="100%" px={21} py={14}>
             <AppSlider
               showValue
               step={1}

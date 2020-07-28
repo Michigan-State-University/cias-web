@@ -65,7 +65,9 @@ const VisualAnalogueScaleQuestion = ({
                 width={120}
                 py={9}
                 textAlign="left"
-                placeholder={formatMessage(messages.startValue)}
+                placeholder={
+                  !draggable ? formatMessage(messages.startValue) : ''
+                }
                 value={startValue}
                 onBlur={value => updateLabel(value, 'start_value')}
               />
@@ -76,7 +78,7 @@ const VisualAnalogueScaleQuestion = ({
                 width={120}
                 py={9}
                 textAlign="right"
-                placeholder={formatMessage(messages.endValue)}
+                placeholder={!draggable ? formatMessage(messages.endValue) : ''}
                 value={endValue}
                 onBlur={value => updateLabel(value, 'end_value')}
               />

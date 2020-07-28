@@ -80,7 +80,7 @@ const GridQuestion = ({
   };
   return (
     <Row align="center" justify="center" width="100%">
-      <Box px={10} overflow="scroll">
+      <Box overflow="scroll" px={21} py={14}>
         <Table>
           <THead>
             <StripedTR>
@@ -108,6 +108,7 @@ const GridQuestion = ({
                     }-row-cell-${rowIndex}-${columnIndex}`}
                   >
                     <Row
+                      width={150}
                       align="center"
                       justify="center"
                       onClick={() => {

@@ -19,6 +19,7 @@ import imagePlaceholder from 'assets/svg/image-placeholder.svg';
 import { themeColors, borders } from 'theme';
 import bin from 'assets/svg/bin-red.svg';
 
+import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import {
   addQuestionImage,
   deleteQuestionImage,
@@ -32,6 +33,7 @@ export const QuestionImage = ({
   deleteImage,
   selectedQuestion: { id, image_url: imageUrl },
   intl: { formatMessage },
+  draggable,
 }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -99,28 +101,37 @@ export const QuestionImage = ({
     );
 
   return (
-    <HoverableBox
-      width="100%"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      clickable={false}
-      px={21}
-      py={14}
-    >
-      <Row justify="between" align="center" width="100%">
+    <Box mt={10}>
+      {draggable && (
         <ImageWrapper>
           <Img src={imageUrl} alt="image" height="100%" width="100%" />
         </ImageWrapper>
-        <Box
-          onClick={handleRemove}
-          clickable
-          visibility={hovered ? 'visible' : 'hidden'}
-          ml={15}
+      )}
+      {!draggable && (
+        <HoverableBox
+          width="100%"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          clickable={false}
+          px={21}
+          py={14}
         >
-          <Img src={bin} alt="bin-icon" />
-        </Box>
-      </Row>
-    </HoverableBox>
+          <Row justify="between" align="center" width="100%">
+            <ImageWrapper>
+              <Img src={imageUrl} alt="image" height="100%" width="100%" />
+            </ImageWrapper>
+            <Box
+              onClick={handleRemove}
+              clickable
+              visibility={hovered ? 'visible' : 'hidden'}
+              ml={15}
+            >
+              <Img src={bin} alt="bin-icon" />
+            </Box>
+          </Row>
+        </HoverableBox>
+      )}
+    </Box>
   );
 };
 
@@ -133,10 +144,12 @@ QuestionImage.propTypes = {
   }),
   formatMessage: PropTypes.func,
   intl: intlShape,
+  draggable: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
+  draggable: makeSelectDraggable(),
 });
 
 const mapDispatchToProps = {

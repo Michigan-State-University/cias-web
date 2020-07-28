@@ -12,6 +12,7 @@ import Row from 'components/Row';
 import bin from 'assets/svg/bin-red.svg';
 import { colors } from 'theme';
 
+import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import messages from './messages';
 import { PlayerWrapper, Player } from './styled';
 import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
@@ -24,6 +25,7 @@ const QuestionVideo = ({
   intl: { formatMessage },
   selectedQuestion: { video_url: videoUrl },
   updateVideo,
+  draggable,
 }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -47,28 +49,37 @@ const QuestionVideo = ({
     );
 
   return (
-    <HoverableBox
-      width="100%"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      clickable={false}
-      px={21}
-      py={14}
-    >
-      <Row justify="between" align="center">
+    <Box width="100%">
+      {draggable && (
         <PlayerWrapper>
           <Player url={videoUrl} controls width="100%" height="100%" />
         </PlayerWrapper>
-        <Box
-          onClick={removeVideUrl}
-          clickable
-          visibility={hovered ? 'visible' : 'hidden'}
-          ml={15}
+      )}
+      {!draggable && (
+        <HoverableBox
+          width="100%"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          clickable={false}
+          px={21}
+          py={14}
         >
-          <Img src={bin} alt="bin-icon" />
-        </Box>
-      </Row>
-    </HoverableBox>
+          <Row justify="between" align="center">
+            <PlayerWrapper>
+              <Player url={videoUrl} controls width="100%" height="100%" />
+            </PlayerWrapper>
+            <Box
+              onClick={removeVideUrl}
+              clickable
+              visibility={hovered ? 'visible' : 'hidden'}
+              ml={15}
+            >
+              <Img src={bin} alt="bin-icon" />
+            </Box>
+          </Row>
+        </HoverableBox>
+      )}
+    </Box>
   );
 };
 
@@ -78,10 +89,12 @@ QuestionVideo.propTypes = {
     video_url: PropTypes.string,
   }),
   updateVideo: PropTypes.func,
+  draggable: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
+  draggable: makeSelectDraggable(),
 });
 
 const mapDispatchToProps = {
