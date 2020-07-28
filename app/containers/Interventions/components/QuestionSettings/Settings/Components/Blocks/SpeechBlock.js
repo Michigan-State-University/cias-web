@@ -69,8 +69,8 @@ const SpeechBlock = ({
     audio.current.onLoaded(handleReady);
     audio.current.onEnded(() => setIsPlaying(false));
 
-    const { audio_url: audioUrl } = block;
-    if (audioUrl) audio.current.setSrc(audioUrl);
+    const { audio_urls: audioUrls } = block;
+    if (audioUrls) audio.current.setSrc(audioUrls);
 
     return audio.current.clean;
   }, [blockIndex]);
@@ -134,7 +134,7 @@ SpeechBlock.propTypes = {
   block: PropTypes.shape({
     type: PropTypes.string,
     text: PropTypes.arrayOf(PropTypes.string),
-    audio_url: PropTypes.string,
+    audio_urls: PropTypes.arrayOf(PropTypes.string),
   }),
   id: PropTypes.string,
   blockIndex: PropTypes.number,
