@@ -9,17 +9,22 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { Link } from 'react-router-dom';
 
 import UserAvatar from 'components/UserAvatar';
 import Row from 'components/Row';
 import Img from 'components/Img';
 import Box from 'components/Box';
+import Text from 'components/Text';
+import CloseIcon from 'components/CloseIcon';
 
 import gear from 'assets/svg/gear-wo-background.svg';
 import logoutArrow from 'assets/svg/arrow-right-circle.svg';
+import users from 'assets/svg/users.svg';
 
 import { outsideClickHandler } from 'utils/outsideClickHandler';
 import { logOut, makeSelectUser } from 'global/reducers/auth';
+import InterventionsNavbar from './components/InterventionsNavbar';
 
 import {
   NavbarStyled,
@@ -28,7 +33,6 @@ import {
   DropDownContent,
 } from './styled';
 import messages from './messages';
-import InterventionsNavbar from './components/InterventionsNavbar';
 
 const renderNavbar = path => {
   if (
@@ -43,6 +47,8 @@ export function Navbar({
   user: { firstName, lastName },
   logOut: logOutCall,
   path,
+  returnToHomePage,
+  navbarName,
 }) {
   const [menuVisible, setMenuVisible] = useState(false);
   const dropdownRef = useRef(null);
@@ -59,12 +65,26 @@ export function Navbar({
 
   return (
     <NavbarStyled>
+      {returnToHomePage && <CloseIcon to="/" />}
+      {navbarName && (
+        <Text color="black" fontSize={23}>
+          {navbarName}
+        </Text>
+      )}
       {renderNavbar(path)}
       <RightPanel onClick={() => !menuVisible && setMenuVisible(true)}>
         <DropDownContainer>
           <UserAvatar lastName={lastName} firstName={firstName} />
           {menuVisible && (
             <DropDownContent ref={dropdownRef}>
+              <div>
+                <Link to="/users">
+                  <Row>
+                    <Img mr={13} src={users} />
+                    <FormattedMessage {...messages.users} />
+                  </Row>
+                </Link>
+              </div>
               <div
                 onClick={event => {
                   event.stopPropagation();
@@ -104,6 +124,12 @@ Navbar.propTypes = {
   }),
   logOut: PropTypes.func,
   path: PropTypes.string.isRequired,
+  returnToHomePage: PropTypes.bool,
+  navbarName: PropTypes.string,
+};
+
+Navbar.defaultProps = {
+  returnToHomePage: false,
 };
 
 const mapStateToProps = createStructuredSelector({

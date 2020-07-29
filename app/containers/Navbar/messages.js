@@ -20,4 +20,8 @@ export default defineMessages({
     id: `${scope}.placeholder`,
     defaultMessage: 'e-Intervention Name',
   },
+  users: {
+    id: `${scope}.users`,
+    defaultMessage: 'Users',
+  },
 });

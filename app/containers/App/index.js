@@ -18,6 +18,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage';
 import SettingsInterventionPage from 'containers/Interventions/containers/SettingsInterventionPage';
 import AnswerInterventionPage from 'containers/AnswerInterventionPage/Loadable';
+import UserListPage from 'containers/UserList/Loadable';
 import rootSaga from 'global/sagas/rootSaga';
 
 import GlobalStyle from 'global-styles';
@@ -36,6 +37,7 @@ function App() {
           exact
           path="/interventions/:id/edit"
           component={EditInterventionPage}
+          returnToHomePage
           protectedRoute
         />
         <AppRoute
@@ -48,6 +50,15 @@ function App() {
           exact
           path="/interventions/:id/settings"
           component={SettingsInterventionPage}
+          returnToHomePage
+          protectedRoute
+        />
+        <AppRoute
+          exact
+          path="/users"
+          returnToHomePage
+          navbarName="User list"
+          component={UserListPage}
           protectedRoute
         />
         <AppRoute component={NotFoundPage} />

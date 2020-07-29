@@ -44,6 +44,10 @@ export const DropDownContent = styled.div`
     &:hover {
       text-shadow: 0 0 1px ${colors.black}; // workaround to prevent shifting on bold
     }
+    a {
+      color: black !important;
+      text-decoration: none !important;
+    }
   }
 `;
 

@@ -7,10 +7,8 @@ import { Link } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 
 import Row from 'components/Row';
-import Img from 'components/Img';
 import Tabs from 'components/Tabs';
 import { StyledInput } from 'components/Input/StyledInput';
-import cross from 'assets/svg/cross.svg';
 
 import {
   editInterventionRequest,
@@ -18,7 +16,6 @@ import {
   editInterventionSaga,
 } from 'global/reducers/intervention';
 
-import { CrossLink } from './styled';
 import messages from './messages';
 
 const getActiveTab = (path, formatMessage) => {
@@ -42,9 +39,6 @@ const InterventionNavbar = ({
   return (
     <Row align="center" justify="between" width="100%">
       <Row align="center">
-        <CrossLink to="/">
-          <Img src={cross} alt="cross" />
-        </CrossLink>
         <StyledInput
           px={12}
           py={6}

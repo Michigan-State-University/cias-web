@@ -24,6 +24,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       exact={true}
       path="/interventions/:id/edit"
       protectedRoute={true}
+      returnToHomePage={true}
     />
     <Memo(ConnectFunction)
       component={[Function]}
@@ -36,6 +37,15 @@ exports[`<App /> should render and match the snapshot 1`] = `
       exact={true}
       path="/interventions/:id/settings"
       protectedRoute={true}
+      returnToHomePage={true}
+    />
+    <Memo(ConnectFunction)
+      component={[Function]}
+      exact={true}
+      navbarName="User list"
+      path="/users"
+      protectedRoute={true}
+      returnToHomePage={true}
     />
     <Memo(ConnectFunction)
       component={[Function]}
