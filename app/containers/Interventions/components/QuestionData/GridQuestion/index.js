@@ -53,6 +53,9 @@ const GridQuestion = ({
   const [hoveredRow, setHoveredRow] = useState(-1);
   const [hoveredColumn, setHoveredColumn] = useState(-1);
 
+  const getPlaceholder = (name, value) =>
+    draggable ? '' : formatMessage(messages[name], { index: value });
+
   return (
     <Box width="100%" px={21} py={14} mt={10}>
       <Row justify="end" display="flex" hidden={draggable}>
@@ -83,13 +86,14 @@ const GridQuestion = ({
                     onMouseEnter={() => setHoveredColumn(columnIndex)}
                     onMouseLeave={() => setHoveredColumn(-1)}
                   >
-                    <Column align="center" width="100%" mx={-50}>
+                    <Column align="center">
                       <Box
                         px={8}
                         mb={8}
                         onClick={() => deleteColumn(columnIndex)}
-                        hidden={false}
+                        hidden={draggable}
                         clickable
+                        height={35}
                       >
                         <Img src={bin} hidden={hoveredColumn !== columnIndex} />
                       </Box>
@@ -118,13 +122,10 @@ const GridQuestion = ({
                         px={0}
                         py={12}
                         textAlign="center"
-                        placeholder={
-                          !draggable
-                            ? formatMessage(messages.columnPlaceholder, {
-                                index: columnIndex + 1,
-                              })
-                            : ''
-                        }
+                        placeholder={getPlaceholder(
+                          'columnPlaceholder',
+                          columnIndex + 1,
+                        )}
                         value={column.payload}
                         onBlur={value =>
                           updateColumn({ payload: value }, columnIndex)
@@ -150,6 +151,7 @@ const GridQuestion = ({
                         width={60}
                         onClick={() => deleteRow(rowIndex)}
                         clickable
+                        hidden={draggable}
                       >
                         <Img src={bin} hidden={hoveredRow !== rowIndex} />
                       </Box>
@@ -175,13 +177,10 @@ const GridQuestion = ({
                           px={0}
                           py={12}
                           textAlign="center"
-                          placeholder={
-                            !draggable
-                              ? formatMessage(messages.rowPlaceholder, {
-                                  index: rowIndex + 1,
-                                })
-                              : ''
-                          }
+                          placeholder={getPlaceholder(
+                            'rowPlaceholder',
+                            rowIndex + 1,
+                          )}
                           value={row.payload}
                           onBlur={value =>
                             updateRow({ payload: value }, rowIndex)
@@ -196,7 +195,7 @@ const GridQuestion = ({
                         selectedQuestion.id
                       }-row-cell-${rowIndex}-${columnIndex}`}
                     >
-                      <Row width={150}>
+                      <Row justify="center">
                         <Img src={radio} />
                       </Row>
                     </TD>

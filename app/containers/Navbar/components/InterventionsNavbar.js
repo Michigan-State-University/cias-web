@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
+import { compose } from 'redux';
 
+import CloseIcon from 'components/CloseIcon';
+import Img from 'components/Img';
 import Row from 'components/Row';
 import Tabs from 'components/Tabs';
+import eye from 'assets/svg/eye.svg';
+import { Button } from 'components/Button';
 import { StyledInput } from 'components/Input/StyledInput';
+import { makeSelectQuestionsLength } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 
 import {
   editInterventionRequest,
@@ -17,6 +23,7 @@ import {
 } from 'global/reducers/intervention';
 
 import messages from './messages';
+import { StyledLink } from './styled';
 
 const getActiveTab = (path, formatMessage) => {
   if (path.includes('/edit')) return formatMessage(messages.content);
@@ -28,17 +35,24 @@ const InterventionNavbar = ({
   intervention: { name, id },
   updateInterventionName,
   intl: { formatMessage },
-  path,
+  location: { pathname },
+  questionsLength,
 }) => {
   useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
 
-  const [tabActive, setTabActive] = useState(getActiveTab(path, formatMessage));
+  const [tabActive, setTabActive] = useState(
+    getActiveTab(pathname, formatMessage),
+  );
   useEffect(() => {
-    setTabActive(getActiveTab(path, formatMessage));
-  }, [path]);
+    setTabActive(getActiveTab(pathname, formatMessage));
+  }, [pathname]);
+
+  const previewDisabled = !questionsLength;
+
   return (
-    <Row align="center" justify="between" width="100%">
+    <Row align="center" justify="between" width="100%" mr={35}>
       <Row align="center">
+        <CloseIcon to="/" />
         <StyledInput
           px={12}
           py={6}
@@ -60,23 +74,42 @@ const InterventionNavbar = ({
       >
         <div
           renderAsLink={
-            <Link to={`/interventions/${id}/edit`}>
+            <StyledLink to={`/interventions/${id}/edit`}>
               {formatMessage(messages.content)}
-            </Link>
+            </StyledLink>
           }
         />
         <div
           renderAsLink={
-            <Link to={`/interventions/${id}/settings`}>
+            <StyledLink to={`/interventions/${id}/settings`}>
               {formatMessage(messages.settings)}
-            </Link>
+            </StyledLink>
           }
         />
         <div
-          renderAsLink={<Link to="/">{formatMessage(messages.sharing)}</Link>}
+          renderAsLink={
+            <StyledLink to="/">{formatMessage(messages.sharing)}</StyledLink>
+          }
         />
       </Tabs>
-      <div />
+      <StyledLink
+        to={`/interventions/${id}/preview`}
+        target="_blank"
+        disabled={previewDisabled}
+      >
+        <Button
+          disabled={previewDisabled}
+          inverted
+          width="auto"
+          height={35}
+          color="secondary"
+          borderRadius={5}
+          px={11}
+        >
+          <Img src={eye} alt="eye" mr={6} />
+          <FormattedMessage {...messages.preview} />
+        </Button>
+      </StyledLink>
     </Row>
   );
 };
@@ -89,10 +122,13 @@ InterventionNavbar.propTypes = {
   updateInterventionName: PropTypes.func,
   intl: intlShape,
   path: PropTypes.string,
+  location: PropTypes.object,
+  questionsLength: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
+  questionsLength: makeSelectQuestionsLength(),
 });
 
 const mapDispatchToProps = {
@@ -101,7 +137,10 @@ const mapDispatchToProps = {
 
 export const InterventionNavbarWithIntl = injectIntl(InterventionNavbar);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
+export default compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
 )(InterventionNavbarWithIntl);

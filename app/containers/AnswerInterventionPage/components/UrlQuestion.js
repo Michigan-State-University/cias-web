@@ -24,9 +24,9 @@ const UrlQuestion = ({ question, selectAnswer }) => {
   useEffect(() => {
     changeLinkState(false);
   }, []);
-  return (
-    <UrlPreview handleClick={() => changeLinkState(true)} link={payload} />
-  );
+
+  const onClick = () => changeLinkState(true);
+  return <UrlPreview handleClick={onClick} link={payload} />;
 };
 
 UrlQuestion.propTypes = {

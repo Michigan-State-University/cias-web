@@ -1,12 +1,9 @@
 import React from 'react';
-import Row from 'components/Row';
-import Box from 'components/Box';
-import { themeColors } from 'theme';
 import PropTypes from 'prop-types';
+
 import Question from 'models/Intervention/Question';
-import ApprovableInput from 'components/Input/ApprovableInput';
-import { numericValidator } from 'utils/validators';
-import messages from './messages';
+
+import NumberQuestionLayout from '../layouts/NumberQuestionLayout';
 
 const NumberQuestion = ({
   question,
@@ -19,30 +16,19 @@ const NumberQuestion = ({
       variable: { name },
     },
   } = question;
+
+  const onChange = event => {
+    selectAnswer({
+      var: name,
+      payload: parseInt(event, 10),
+    });
+  };
   return (
-    <Box bg={themeColors.highlight} width="100%" px={21} py={14}>
-      <Row>
-        <ApprovableInput
-          width="100%"
-          mr={0}
-          type="singleline"
-          keyboard="tel"
-          value={
-            answerBody && answerBody.payload
-              ? answerBody.payload.toString()
-              : ''
-          }
-          placeholder={formatMessage(messages.numberPlaceholder)}
-          validator={numericValidator}
-          onCheck={e => {
-            selectAnswer({
-              var: name,
-              payload: parseInt(e, 10),
-            });
-          }}
-        />
-      </Row>
-    </Box>
+    <NumberQuestionLayout
+      formatMessage={formatMessage}
+      onChange={onChange}
+      answerBody={answerBody}
+    />
   );
 };
 

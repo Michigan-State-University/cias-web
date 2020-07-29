@@ -13,7 +13,7 @@ padding.propTypes = {
   pb: PropTypes.number,
   pr: PropTypes.number,
   pl: PropTypes.number,
-  padding: PropTypes.number,
+  padding: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   px: PropTypes.number,
   py: PropTypes.number,
 };

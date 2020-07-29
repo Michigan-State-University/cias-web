@@ -88,9 +88,8 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <button
-          class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 jQWJUS"
+          class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 bdIUUI"
           color="primary"
-          width="100%"
         >
           Register
         </button>
@@ -98,9 +97,8 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           href="/login"
         >
           <button
-            class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 jQWJUS"
+            class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 bdIUUI"
             color="primary"
-            width="100%"
           >
             I already have an account
           </button>

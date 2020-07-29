@@ -22,30 +22,61 @@ exports[`<App /> should render and match the snapshot 1`] = `
     <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
+      navbarProps={
+        Object {
+          "navbarId": "interventions",
+        }
+      }
       path="/interventions/:id/edit"
       protectedRoute={true}
-      returnToHomePage={true}
     />
     <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
       path="/interventions/:id/fill"
-      protectedRoute={true}
     />
     <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
+      navbarProps={
+        Object {
+          "navbarId": "interventions",
+        }
+      }
       path="/interventions/:id/settings"
       protectedRoute={true}
-      returnToHomePage={true}
     />
     <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
-      navbarName="User list"
+      navbarProps={
+        Object {
+          "navbarId": "default",
+          "navbarName": <FormattedMessage
+            defaultMessage="User list"
+            id="app.navbarNames.userList"
+            values={Object {}}
+          />,
+        }
+      }
       path="/users"
       protectedRoute={true}
-      returnToHomePage={true}
+    />
+    <Memo(ConnectFunction)
+      component={[Function]}
+      exact={true}
+      navbarProps={
+        Object {
+          "navbarId": "preview",
+          "navbarName": <FormattedMessage
+            defaultMessage="Preview"
+            id="app.navbarNames.preview"
+            values={Object {}}
+          />,
+        }
+      }
+      path="/interventions/:id/preview"
+      protectedRoute={true}
     />
     <Memo(ConnectFunction)
       component={[Function]}

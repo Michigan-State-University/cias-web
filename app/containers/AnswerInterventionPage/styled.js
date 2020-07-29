@@ -1,15 +1,5 @@
 import styled from 'styled-components';
-import ReactPlayer from 'react-player/lazy';
 import { elements } from 'theme';
-
-const aspectRatio = 9 / 16;
-
-export const QuestionActions = styled.div`
-  margin: 20px 0;
-  button {
-    border: none;
-  }
-`;
 
 export const BackButton = styled.div`
   font-weight: bold;
@@ -38,24 +28,4 @@ export const AnswerOuterContainer = styled.div`
   height: fit-content;
   position: relative;
   margin-top: 50px;
-`;
-
-export const PlayerWrapper = styled.div`
-  position: relative;
-  padding-top: ${aspectRatio * 100}%;
-  height: 100%;
-  width: 100%;
-`;
-
-export const Player = styled(ReactPlayer)`
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-export const ImageWrapper = styled.div`
-  margin-top: 22px;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
 `;

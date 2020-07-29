@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -22,20 +22,16 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
-import Img from 'components/Img';
 
 import {
-  QuestionActions,
   BackButton,
   AnswerInterventionContent,
-  Player,
-  PlayerWrapper,
-  ImageWrapper,
   AnswerOuterContainer,
 } from './styled';
 
 import renderQuestionByType from './components';
 import CharacterAnim from './components/CharacterAnim';
+import CommonLayout from './layouts/CommonLayout';
 import makeSelectAnswerInterventionPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -92,17 +88,7 @@ export function AnswerInterventionPage({
 
   const renderQuestion = () => {
     const {
-      title,
-      subtitle,
-      video_url: videoUrl,
-      image_url: imageUrl,
-      settings: {
-        title: settingsTitle,
-        subtitle: settingsSubtitle,
-        video: settingsVideo,
-        image: settingsImage,
-        proceed_button: proceedButton,
-      },
+      settings: { proceed_button: proceedButton },
     } = currentQuestion;
     const selectAnswerProp = answerBody => {
       saveSelectedAnswer({
@@ -122,78 +108,44 @@ export function AnswerInterventionPage({
       questionIndex,
       saveAnswer,
     };
+
+    const handleBackClick = () => {
+      if (answers[currentQuestionId]) {
+        saveAnswer(questionIndex - 1);
+      } else {
+        setQuestion(questionIndex - 1);
+      }
+    };
+
     return (
       <Row justify="center" filled>
         <Column mx={50} justify="center">
           <Row width="100%" mt={5} height={30}>
-            {questionIndex !== 0 &&
-              (currentQuestion && (
-                <BackButton
-                  onClick={() => {
-                    if (answers[currentQuestionId]) {
-                      saveAnswer(questionIndex - 1);
-                    } else {
-                      setQuestion(questionIndex - 1);
-                    }
-                  }}
-                >
-                  <FormattedMessage {...messages.previousQuestion} />
-                </BackButton>
-              ))}
+            {questionIndex !== 0 && currentQuestion && (
+              <BackButton onClick={handleBackClick}>
+                <FormattedMessage {...messages.previousQuestion} />
+              </BackButton>
+            )}
           </Row>
-          <Box>
-            {settingsTitle && !isNullOrUndefined(title) && (
-              <Row>
-                <Box
-                  padding={26}
-                  width="100%"
-                  dangerouslySetInnerHTML={{ __html: title }}
-                />
-              </Row>
-            )}
-            {settingsSubtitle && !isNullOrUndefined(subtitle) && (
-              <Row mt={10}>
-                <Box
-                  padding={26}
-                  dangerouslySetInnerHTML={{ __html: subtitle }}
-                />
-              </Row>
-            )}
-            {settingsVideo && !isNullOrUndefined(videoUrl) && (
-              <Row mt={10}>
-                <PlayerWrapper>
-                  <Player url={videoUrl} controls width="100%" height="100%" />
-                </PlayerWrapper>
-              </Row>
-            )}
-            {settingsImage && !isNullOrUndefined(imageUrl) && (
-              <Row mt={10}>
-                <ImageWrapper>
-                  <Img src={imageUrl} alt="image" height="100%" width="100%" />
-                </ImageWrapper>
-              </Row>
-            )}
-          </Box>
+          <CommonLayout currentQuestion={currentQuestion} />
           <Row mt={10}>
             {renderQuestionByType(currentQuestion, sharedProps)}
           </Row>
           {(isNullOrUndefined(proceedButton) || proceedButton) && (
             <Row width="100%">
-              <QuestionActions>
-                <Button
-                  my={20}
-                  width="180px"
-                  loading={currentQuestion.loading}
-                  onClick={() => {
-                    saveAnswer(questionIndex + 1);
-                  }}
-                  title={formatMessage(
-                    questionIndex !== interventionQuestions.length - 1
-                      ? messages.nextQuestion
-                      : messages.submitAnswer,
-                  )}
-                />
-              </QuestionActions>
+              <Button
+                margin={20}
+                width="180px"
+                loading={currentQuestion.loading}
+                onClick={() => {
+                  saveAnswer(questionIndex + 1);
+                }}
+                title={formatMessage(
+                  questionIndex !== interventionQuestions.length - 1
+                    ? messages.nextQuestion
+                    : messages.submitAnswer,
+                )}
+              />
             </Row>
           )}
         </Column>
@@ -204,7 +156,7 @@ export function AnswerInterventionPage({
   const renderPage = () => (
     <>
       {currentQuestion && interventionStarted && (
-        <AnswerInterventionContent>
+        <Fragment>
           {renderQuestion()}
           <CharacterAnim
             animationContainer={animationParentRef}
@@ -212,7 +164,7 @@ export function AnswerInterventionPage({
             questionId={currentQuestionId}
             settings={currentQuestion.narrator.settings}
           />
-        </AnswerInterventionContent>
+        </Fragment>
       )}
     </>
   );

@@ -67,11 +67,10 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <button
-          class="StyledButton-t20ntd-0 iXwuNZ"
+          class="StyledButton-t20ntd-0 cmfTJQ"
           color="primary"
           height="46"
           type="submit"
-          width="100%"
         >
           Log in
         </button>

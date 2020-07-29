@@ -9,20 +9,20 @@
 
 import React, { Fragment } from 'react';
 import { Switch } from 'react-router-dom';
-import { useInjectSaga } from 'utils/injectSaga';
 
+import AnswerInterventionPage from 'containers/AnswerInterventionPage/Loadable';
+import AppRoute from 'components/AppRoute';
+import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage';
+import GlobalStyle from 'global-styles';
 import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
-import RegisterPage from 'containers/RegisterPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage';
+import RegisterPage from 'containers/RegisterPage/Loadable';
 import SettingsInterventionPage from 'containers/Interventions/containers/SettingsInterventionPage';
-import AnswerInterventionPage from 'containers/AnswerInterventionPage/Loadable';
 import UserListPage from 'containers/UserList/Loadable';
+import navbarNames from 'utils/navbarNames';
 import rootSaga from 'global/sagas/rootSaga';
-
-import GlobalStyle from 'global-styles';
-import AppRoute from 'components/AppRoute';
+import { useInjectSaga } from 'utils/injectSaga';
 
 function App() {
   useInjectSaga({ key: 'app', saga: rootSaga });
@@ -37,29 +37,44 @@ function App() {
           exact
           path="/interventions/:id/edit"
           component={EditInterventionPage}
-          returnToHomePage
           protectedRoute
+          navbarProps={{
+            navbarId: 'interventions',
+          }}
         />
         <AppRoute
           exact
           path="/interventions/:id/fill"
           component={AnswerInterventionPage}
-          protectedRoute
         />
         <AppRoute
           exact
           path="/interventions/:id/settings"
           component={SettingsInterventionPage}
-          returnToHomePage
           protectedRoute
+          navbarProps={{
+            navbarId: 'interventions',
+          }}
         />
         <AppRoute
           exact
           path="/users"
-          returnToHomePage
-          navbarName="User list"
           component={UserListPage}
           protectedRoute
+          navbarProps={{
+            navbarId: 'default',
+            navbarName: navbarNames.userList,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:id/preview"
+          component={AnswerInterventionPage}
+          protectedRoute
+          navbarProps={{
+            navbarId: 'preview',
+            navbarName: navbarNames.preview,
+          }}
         />
         <AppRoute component={NotFoundPage} />
       </Switch>

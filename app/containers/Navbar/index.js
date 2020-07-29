@@ -15,8 +15,6 @@ import UserAvatar from 'components/UserAvatar';
 import Row from 'components/Row';
 import Img from 'components/Img';
 import Box from 'components/Box';
-import Text from 'components/Text';
-import CloseIcon from 'components/CloseIcon';
 
 import gear from 'assets/svg/gear-wo-background.svg';
 import logoutArrow from 'assets/svg/arrow-right-circle.svg';
@@ -24,7 +22,6 @@ import users from 'assets/svg/users.svg';
 
 import { outsideClickHandler } from 'utils/outsideClickHandler';
 import { logOut, makeSelectUser } from 'global/reducers/auth';
-import InterventionsNavbar from './components/InterventionsNavbar';
 
 import {
   NavbarStyled,
@@ -33,22 +30,22 @@ import {
   DropDownContent,
 } from './styled';
 import messages from './messages';
+import InterventionsNavbar from './components/InterventionsNavbar';
+import PreviewNavbar from './components/PreviewNavbar';
+import DefaultNavbar from './components/DefaultNavbar';
 
-const renderNavbar = path => {
-  if (
-    path &&
-    path.includes('/interventions') &&
-    (path.includes('/edit') || path.includes('/settings'))
-  )
-    return <InterventionsNavbar path={path} />;
+const renderNavbar = navbarProps => {
+  const { navbarId, ...restProps } = navbarProps || {};
+  if (navbarId === 'interventions') return <InterventionsNavbar />;
+  if (navbarId === 'preview') return <PreviewNavbar {...restProps} />;
+  if (navbarId === 'default') return <DefaultNavbar {...restProps} />;
   return null;
 };
+
 export function Navbar({
   user: { firstName, lastName },
   logOut: logOutCall,
-  path,
-  returnToHomePage,
-  navbarName,
+  navbarProps,
 }) {
   const [menuVisible, setMenuVisible] = useState(false);
   const dropdownRef = useRef(null);
@@ -62,16 +59,9 @@ export function Navbar({
       return cleanUp;
     }
   }, [menuVisible]);
-
   return (
     <NavbarStyled>
-      {returnToHomePage && <CloseIcon to="/" />}
-      {navbarName && (
-        <Text color="black" fontSize={23}>
-          {navbarName}
-        </Text>
-      )}
-      {renderNavbar(path)}
+      {renderNavbar(navbarProps)}
       <RightPanel onClick={() => !menuVisible && setMenuVisible(true)}>
         <DropDownContainer>
           <UserAvatar lastName={lastName} firstName={firstName} />
@@ -123,13 +113,10 @@ Navbar.propTypes = {
     lastName: PropTypes.string.isRequired,
   }),
   logOut: PropTypes.func,
-  path: PropTypes.string.isRequired,
-  returnToHomePage: PropTypes.bool,
-  navbarName: PropTypes.string,
-};
-
-Navbar.defaultProps = {
-  returnToHomePage: false,
+  navbarProps: PropTypes.shape({
+    navbarId: PropTypes.string.isRequired,
+    navbarName: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = createStructuredSelector({

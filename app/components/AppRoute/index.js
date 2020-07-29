@@ -11,14 +11,14 @@ import { makeSelectIsLoggedIn } from '../../global/reducers/auth';
 
 class AppRoute extends Route {
   render() {
-    const { protectedRoute, isLoggedIn } = this.props;
+    const { protectedRoute, isLoggedIn, navbarProps } = this.props;
     if (protectedRoute && !isLoggedIn) {
       return <Redirect to="/login" />;
     }
     if (isLoggedIn) {
       return (
         <>
-          <Navbar {...this.props} />
+          <Navbar navbarProps={navbarProps} />
           <div
             style={{
               marginTop: 70,

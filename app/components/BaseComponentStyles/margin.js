@@ -5,6 +5,7 @@ const margin = props => ({
   marginBottom: props.my || props.mb || '',
   marginRight: props.mx || props.mr || '',
   marginLeft: props.mx || props.ml || '',
+  margin: props.margin || '',
 });
 
 margin.propTypes = {
@@ -14,6 +15,7 @@ margin.propTypes = {
   ml: PropTypes.number,
   mx: PropTypes.number,
   my: PropTypes.number,
+  margin: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 export { margin };

@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Column from 'components/Column';
-import Row from 'components/Row';
-import Img from 'components/Img';
-import HoverableBox from 'components/Box/HoverableBox';
-import checkbox from 'assets/svg/checkbox.svg';
-import checkboxChecked from 'assets/svg/checkbox-checked.svg';
 import Question from 'models/Intervention/Question';
-
-const margin = 21;
+import MultipleQuestionLayout from '../layouts/MultipleQuestionLayout';
 
 const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
   const [selectedAnswersIndex, setSelectedAnswersIndex] = useState([]);
@@ -45,37 +38,12 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
     }
   };
   return (
-    <Column>
-      {data.map((questionAnswer, index) => {
-        const {
-          payload,
-          variable: { name, value },
-        } = questionAnswer;
-        return (
-          <Row key={`question-${question.id}-el-${index}`} mb={10}>
-            <HoverableBox
-              px={margin}
-              py={14}
-              width={`calc(100% + ${margin}px)`}
-              clickable
-              onClick={() => check(payload, value, name, index)}
-            >
-              <Row align="center" padding={10}>
-                <Img
-                  src={
-                    selectedAnswersIndex.includes(index)
-                      ? checkboxChecked
-                      : checkbox
-                  }
-                  mr={16}
-                />
-                <div dangerouslySetInnerHTML={{ __html: payload }} />
-              </Row>
-            </HoverableBox>
-          </Row>
-        );
-      })}
-    </Column>
+    <MultipleQuestionLayout
+      data={data}
+      questionId={id}
+      check={check}
+      selectedAnswersIndex={selectedAnswersIndex}
+    />
   );
 };
 

@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.Answer';
+export const scope = 'app.containers.Answer.layouts';
 
 export default defineMessages({
   textPlaceholder: {

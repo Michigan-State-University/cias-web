@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Column from 'components/Column';
-import Row from 'components/Row';
 import Question from 'models/Intervention/Question';
-import Box from 'components/Box';
-import AppSlider from 'components/AppSlider';
+import VisualAnalogueScaleQuestionLayout from '../layouts/VisualAnalogueScaleQuestionLayout';
 
 const VisualAnalogueScaleQuestion = ({
   question,
@@ -36,33 +33,25 @@ const VisualAnalogueScaleQuestion = ({
     setAnswerValue(value);
   }, [id]);
 
+  const onChange = num => setAnswerValue(num);
+
+  const onAfterChange = () => {
+    selectAnswer([
+      {
+        var: name,
+        payload: answerValue,
+      },
+    ]);
+  };
+
   return (
-    <Column mt={10} mb={10}>
-      <Box width="100%">
-        <Row>
-          <Box width="100%" px={21} py={14}>
-            <AppSlider
-              showValue
-              step={1}
-              onChange={num => setAnswerValue(num)}
-              value={answerValue}
-              onAfterChange={() => {
-                selectAnswer([
-                  {
-                    var: name,
-                    payload: answerValue,
-                  },
-                ]);
-              }}
-            />
-          </Box>
-        </Row>
-        <Row justify="between" filled padding="5px">
-          <Box>{startValue}</Box>
-          <Box>{endValue}</Box>
-        </Row>
-      </Box>
-    </Column>
+    <VisualAnalogueScaleQuestionLayout
+      onChange={onChange}
+      onAfterChange={onAfterChange}
+      startValue={startValue}
+      endValue={endValue}
+      answerValue={answerValue}
+    />
   );
 };
 
