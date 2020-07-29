@@ -61,6 +61,9 @@ const NarratorTab = ({
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
+  if (!narrator) {
+    return <></>;
+  }
   const { voice, animation } = narrator.settings;
 
   const onCreateBlock = type => {
