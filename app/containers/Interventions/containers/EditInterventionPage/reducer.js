@@ -4,6 +4,12 @@ import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
 
 import {
+  bodyAnimationType,
+  speechType,
+  headAnimationType,
+} from 'models/Narrator/BlockTypes';
+
+import {
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
   ADD_QUESTION_IMAGE,
@@ -28,6 +34,7 @@ import {
   EDIT_QUESTION_ERROR,
   MAKE_PEEDY_DRAGGABLE,
   SET_ANIMATION_STOP_POSITION,
+  UPDATE_PREVIEW_DATA,
 } from './constants';
 import questionDataReducer from '../../components/QuestionData/reducer';
 import questionSettingsReducer from '../../components/QuestionSettings/Settings/reducer';
@@ -46,14 +53,30 @@ export const initialState = {
     y: 0,
   },
   draggable: false,
-  previewAnimation: 'standStill',
+  previewData: {
+    animation: 'standStill',
+    type: 'BodyAnimation',
+  },
   cache: {
     questions: [],
   },
   loaders: {
     interventionListLoading: false,
     questionListLoading: true,
+    updateQuestion: false,
   },
+};
+
+const getPreviewData = data => {
+  switch (data.type) {
+    case speechType:
+      return data;
+
+    case headAnimationType:
+    case bodyAnimationType:
+    default:
+      return { type: 'BodyAnimation', animation: data.animation };
+  }
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -76,7 +99,8 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_PREVIEW_ANIMATION:
-        draft.previewAnimation = action.payload.animation;
+      case UPDATE_PREVIEW_DATA:
+        draft.previewData = getPreviewData(action.payload);
         break;
       case SELECT_QUESTION:
         draft.draggable = false;
@@ -189,6 +213,8 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_QUESTION_SETTINGS:
+        draft.loaders.updateQuestion = true;
+
         draft.questions[state.selectedQuestion] = {
           ...draft.questions[state.selectedQuestion],
           ...questionSettingsReducer(
@@ -200,12 +226,16 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case EDIT_QUESTION_SUCCESS:
+        draft.loaders.updateQuestion = false;
+
         draft.cache.questions[state.selectedQuestion] = mapQuestionDataForType(
           action.payload.question,
         );
         break;
 
       case EDIT_QUESTION_ERROR:
+        draft.loaders.updateQuestion = false;
+
         draft.questions[state.selectedQuestion] = cloneDeep(
           draft.cache.questions[state.selectedQuestion],
         );

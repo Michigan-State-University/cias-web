@@ -78,6 +78,7 @@ const useAudioHelper = (
         ...speechData,
         currentAnimation: speechData.animationData.start ? 'start' : 'speech',
         isLoop: !speechData.animationData.start,
+        currentAudioIndex: 0,
       },
       currentBlockIndex: nextIndex,
     });
@@ -93,6 +94,7 @@ const useAudioHelper = (
       ...speechData,
       currentAnimation: speechData.animationData.start ? 'start' : 'speech',
       isLoop: !speechData.animationData.start,
+      currentAudioIndex: 0,
     };
   };
 
@@ -110,7 +112,11 @@ const useAudioHelper = (
       audio.current.onEnded(onSpeechEnded);
       audio.current.onError(onSpeechEnded);
 
-      audio.current.setSrc(currentData.audio_url);
+      audio.current.setSrc(
+        `${process.env.API_URL}${
+          currentData.audio_urls[currentData.currentAudioIndex]
+        }`,
+      );
     } else if (currentData.currentAnimation === 'end') {
       const { anim } = animationCurrent;
 
@@ -165,6 +171,32 @@ const useAudioHelper = (
   const onSpeechEnded = () => {
     cleanAudio();
 
+    if (hasMoreAudio()) moveToNextAudio();
+    else finishSpeech();
+  };
+
+  const hasMoreAudio = () => {
+    const audioLength = currentData.audio_urls.length;
+
+    if (audioLength > currentData.currentAudioIndex + 1) return true;
+    return false;
+  };
+
+  const moveToNextAudio = () => {
+    const { anim } = animationCurrent;
+    anim.stop();
+    audio.current.pause();
+
+    dispatchUpdate({
+      currentData: {
+        ...currentData,
+        currentAudioIndex: currentData.currentAudioIndex + 1,
+      },
+      currentBlockIndex: currentIndex,
+    });
+  };
+
+  const finishSpeech = () => {
     const { anim } = animationCurrent;
     anim.stop();
 

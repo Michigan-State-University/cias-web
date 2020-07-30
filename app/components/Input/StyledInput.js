@@ -20,6 +20,12 @@ const StyledInput = props => {
     } else if (!props.validator) setValue(targetValue);
   };
 
+  const handleFocus = () => {
+    if (props.onFocus) props.onFocus();
+
+    setHasFocus(true);
+  };
+
   // calculate approximate input width in pixels
   const calculateWidthFromText = text => {
     const calculatedWidth = text * props.averageLetterWidth + props.textPadding;
@@ -38,7 +44,7 @@ const StyledInput = props => {
           setHasFocus(false);
           props.onBlur(value);
         }}
-        onFocus={() => setHasFocus(true)}
+        onFocus={handleFocus}
         placeholder={props.placeholder}
         keyboard={props.keyboard}
         transparent={props.transparent}
@@ -60,7 +66,7 @@ const StyledInput = props => {
       mr={9}
       value={value}
       onChange={event => onInputChange(event.target.value)}
-      onFocus={() => setHasFocus(true)}
+      onFocus={handleFocus}
       onBlur={() => {
         setHasFocus(false);
         props.onBlur(value);
@@ -78,6 +84,7 @@ StyledInput.propTypes = {
   validator: PropTypes.func,
   textAlign: PropTypes.string,
   onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
   autoSize: PropTypes.bool,
   maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   averageLetterWidth: PropTypes.number,

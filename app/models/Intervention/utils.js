@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { pick } from 'lodash';
+import pick from 'lodash/pick';
 
 import Question from './Question';
 import Intervention from './Intervention';
