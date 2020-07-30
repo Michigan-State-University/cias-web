@@ -63,10 +63,17 @@ const QuestionNarrator = ({
       newState,
     });
 
-  const changeBlock = () => {
-    cleanAudio();
+  const onBlockFinish = () => {
     clearAnimationBlock();
-    updateNarratorPreviewAnimation('standStill');
+    cleanAudio();
+
+    dispatchUpdate({
+      currentData: getIdleAnimation(),
+      currentBlockIndex: 0,
+    });
+
+    if (previewData.animation !== 'standStill')
+      updateNarratorPreviewAnimation('standStill');
   };
 
   const {
@@ -75,10 +82,11 @@ const QuestionNarrator = ({
     clearAnimationBlock,
     animationRef,
     fetchBodyAndHeadAnimations,
+    getIdleAnimation,
   } = useAnimationHelper(
     [previewData],
     dispatchUpdate,
-    changeBlock,
+    onBlockFinish,
     state.currentData,
   );
 
@@ -95,7 +103,7 @@ const QuestionNarrator = ({
     state.currentData,
     state.currentBlockIndex,
     animationRef.current,
-    changeBlock,
+    onBlockFinish,
   );
 
   const getInitialData = () => {
