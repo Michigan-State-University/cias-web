@@ -121,7 +121,6 @@ const useAnimationHelper = (
     clearAnimationBlock,
     animationRef,
     fetchBodyAndHeadAnimations,
-    loadedBodyHeadAnimations: loadedAnimations,
   };
 };
 

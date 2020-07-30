@@ -77,7 +77,6 @@ const QuestionNarrator = ({
     clearAnimationBlock,
     animationRef,
     fetchBodyAndHeadAnimations,
-    loadedBodyHeadAnimations,
   } = useAnimationHelper(
     [previewData],
     dispatchUpdate,
@@ -134,24 +133,16 @@ const QuestionNarrator = ({
     }
   };
 
-  const [loadedAnimations, setLoadedAnimations] = useState([]);
   const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
+
   const fetchJSON = async () => {
     await fetchBodyAndHeadAnimations();
     await fetchAudioAnimations();
 
-    if (!loadedAnimations.find(anim => anim.name === animation)) {
-      const data = await import(`assets/animations/${animation}.json`);
-      setLoadedAnimations([
-        ...loadedAnimations,
-        {
-          name: animation,
-          animationData: data,
-          pause: getPause(animation),
-          isAutoRest: autoRestAnimations.includes(animation),
-        },
-      ]);
-    }
+    dispatchUpdate({
+      currentData: getInitialData(),
+      currentBlockIndex: 0,
+    });
   };
 
   useEffect(() => {
@@ -177,34 +168,29 @@ const QuestionNarrator = ({
   }, [animationPositionStored]);
 
   useDidUpdateEffect(() => {
-    // const { anim } = animationRef.current;
-    // if (animation) anim.play();
-    // else anim.stop();
-    dispatchUpdate({
-      currentData: getInitialData(),
-      currentBlockIndex: 0,
-    });
-  }, [animation]);
-
-  useDidUpdateEffect(() => {
     handlePreview();
   }, [state.currentData]);
 
-  const currentAnimation = loadedAnimations.find(
-    anim => anim.name === animation,
-  );
+  const getAnimationOptions = () => {
+    if (state.currentData && state.currentData.animationData) {
+      const isSpeechType = state.currentData.type === 'Speech';
 
-  const getAnimationData = () => ({
-    name: currentAnimation.name,
-    animationData: currentAnimation.animationData,
-  });
+      return {
+        name: state.currentData.name,
+        animationData: isSpeechType
+          ? state.currentData.animationData[state.currentData.currentAnimation]
+          : state.currentData.animationData,
+      };
+    }
+    return {};
+  };
 
   const defaultOptions = {
     renderer: 'svg',
     autoloadSegments: false,
     loop: false,
     autoplay: false,
-    ...(currentAnimation ? getAnimationData() : {}),
+    ...getAnimationOptions(),
   };
 
   return (
