@@ -53,7 +53,6 @@ const initialState = {
 
 const QuestionNarrator = ({
   questionId,
-  animation,
   draggable,
   setOffset,
   animationPositionStored,
@@ -146,12 +145,12 @@ const QuestionNarrator = ({
   };
 
   useEffect(() => {
-    if (animation) {
+    if (previewData.animation) {
       fetchJSON();
 
       return stopSpeech;
     }
-  }, [animation]);
+  }, [previewData.animation]);
 
   useDidUpdateEffect(() => {
     const { anim } = animationRef.current;
@@ -210,7 +209,7 @@ const QuestionNarrator = ({
             width={100}
             style={lottieStyles}
             isClickToPauseDisabled
-            isStopped={!!draggable || animation === 'standStill'}
+            isStopped={!!draggable || previewData.animation === 'standStill'}
           />
         </div>
       </Draggable>
@@ -219,7 +218,6 @@ const QuestionNarrator = ({
 };
 
 QuestionNarrator.propTypes = {
-  animation: PropTypes.string,
   draggable: PropTypes.bool,
   setOffset: PropTypes.func,
   animationPositionStored: PropTypes.object,
@@ -229,7 +227,6 @@ QuestionNarrator.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  animation: makeSelectPreviewAnimation(),
   draggable: makeSelectDraggable(),
   animationPositionStored: makeSelectAnimationPosition(),
   previewData: makeSelectPreviewData(),

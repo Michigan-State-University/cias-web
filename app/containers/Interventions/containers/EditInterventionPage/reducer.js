@@ -4,6 +4,12 @@ import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
 
 import {
+  bodyAnimationType,
+  speechType,
+  headAnimationType,
+} from 'models/Narrator/BlockTypes';
+
+import {
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
   ADD_QUESTION_IMAGE,
@@ -50,7 +56,6 @@ export const initialState = {
     animation: 'standStill',
     type: 'BodyAnimation',
   },
-  previewAnimation: 'standStill',
   cache: {
     questions: [],
   },
@@ -59,6 +64,18 @@ export const initialState = {
     questionListLoading: true,
     updateQuestion: false,
   },
+};
+
+const getPreviewData = data => {
+  switch (data.type) {
+    case speechType:
+      return data;
+
+    case headAnimationType:
+    case bodyAnimationType:
+    default:
+      return { type: 'BodyAnimation', animation: data.animation };
+  }
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -81,11 +98,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_PREVIEW_ANIMATION:
-        draft.previewData = {
-          ...draft.previewData,
-          animation: action.payload.animation,
-        };
-        draft.previewAnimation = action.payload.animation;
+        draft.previewData = getPreviewData(action.payload);
         break;
       case SELECT_QUESTION:
         draft.draggable = false;
