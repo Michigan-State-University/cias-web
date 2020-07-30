@@ -7,6 +7,11 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import {
+  speechType,
+  bodyAnimationType,
+  headAnimationType,
+} from 'models/Narrator/BlockTypes';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 import getPause from 'utils/animations/getPause';
 import { autoRestAnimations } from 'utils/animations/animationsNames';
@@ -62,6 +67,8 @@ const QuestionNarrator = ({
       newState,
     });
 
+  const changeBlock = () => {};
+
   const {
     getInitialBodyOrHeadAnimation,
     changeAnimation,
@@ -70,6 +77,7 @@ const QuestionNarrator = ({
     clearAnimationBlock,
     animationRef,
     fetchBodyAndHeadAnimations,
+    loadedBodyHeadAnimations,
   } = useAnimationHelper(
     [previewData],
     dispatchUpdate,
@@ -94,11 +102,44 @@ const QuestionNarrator = ({
     changeBlock,
   );
 
-  const changeBlock = () => {};
+  const getInitialData = () => {
+    if (previewData) {
+      switch (previewData.type) {
+        case speechType:
+          return getInitialSpeechAnimation();
+
+        case headAnimationType:
+        case bodyAnimationType:
+          return getInitialBodyOrHeadAnimation();
+
+        default:
+          break;
+      }
+    }
+  };
+
+  const handlePreview = () => {
+    switch (previewData.type) {
+      case headAnimationType:
+      case bodyAnimationType:
+        handleBodyOrHeadAnimationBlock();
+        break;
+
+      case speechType:
+        handleSpeechBlock();
+        break;
+
+      default:
+        break;
+    }
+  };
 
   const [loadedAnimations, setLoadedAnimations] = useState([]);
   const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
   const fetchJSON = async () => {
+    await fetchBodyAndHeadAnimations();
+    await fetchAudioAnimations();
+
     if (!loadedAnimations.find(anim => anim.name === animation)) {
       const data = await import(`assets/animations/${animation}.json`);
       setLoadedAnimations([
@@ -116,6 +157,8 @@ const QuestionNarrator = ({
   useEffect(() => {
     if (animation) {
       fetchJSON();
+
+      return stopSpeech;
     }
   }, [animation]);
 
@@ -134,10 +177,18 @@ const QuestionNarrator = ({
   }, [animationPositionStored]);
 
   useDidUpdateEffect(() => {
-    const { anim } = animationRef.current;
-    if (animation) anim.play();
-    else anim.stop();
+    // const { anim } = animationRef.current;
+    // if (animation) anim.play();
+    // else anim.stop();
+    dispatchUpdate({
+      currentData: getInitialData(),
+      currentBlockIndex: 0,
+    });
   }, [animation]);
+
+  useDidUpdateEffect(() => {
+    handlePreview();
+  }, [state.currentData]);
 
   const currentAnimation = loadedAnimations.find(
     anim => anim.name === animation,
@@ -154,19 +205,6 @@ const QuestionNarrator = ({
     loop: false,
     autoplay: false,
     ...(currentAnimation ? getAnimationData() : {}),
-  };
-
-  const completeCallback = () => {
-    setTimeout(() => {
-      if (animationRef.current) {
-        const { anim } = animationRef.current;
-        if (!get(currentAnimation, 'isAutoRest', false)) {
-          anim.setDirection(-1);
-          anim.play();
-        }
-        anim.removeEventListener('complete', completeCallback);
-      }
-    }, get(currentAnimation, 'pause', 0));
   };
 
   return (
@@ -187,12 +225,6 @@ const QuestionNarrator = ({
             style={lottieStyles}
             isClickToPauseDisabled
             isStopped={!!draggable || animation === 'standStill'}
-            eventListeners={[
-              {
-                eventName: 'complete',
-                callback: completeCallback,
-              },
-            ]}
           />
         </div>
       </Draggable>
