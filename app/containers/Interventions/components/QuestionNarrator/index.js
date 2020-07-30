@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
 import Lottie from 'react-lottie';
@@ -13,8 +13,6 @@ import {
   headAnimationType,
 } from 'models/Narrator/BlockTypes';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
-import getPause from 'utils/animations/getPause';
-import { autoRestAnimations } from 'utils/animations/animationsNames';
 import {
   setAnimationStopPosition,
   updatePreviewAnimation,
@@ -24,7 +22,6 @@ import useAudioHelper from 'containers/AnswerInterventionPage/animationsHelpers/
 
 import { NarratorContainer } from './styled';
 import {
-  makeSelectPreviewAnimation,
   makeSelectDraggable,
   makeSelectAnimationPosition,
   makeSelectPreviewData,
@@ -66,13 +63,15 @@ const QuestionNarrator = ({
       newState,
     });
 
-  const changeBlock = () => {};
+  const changeBlock = () => {
+    cleanAudio();
+    clearAnimationBlock();
+    updateNarratorPreviewAnimation('standStill');
+  };
 
   const {
     getInitialBodyOrHeadAnimation,
-    changeAnimation,
     handleBodyOrHeadAnimationBlock,
-    getIdleAnimation,
     clearAnimationBlock,
     animationRef,
     fetchBodyAndHeadAnimations,
@@ -84,7 +83,6 @@ const QuestionNarrator = ({
   );
 
   const {
-    changeSpeech,
     getInitialSpeechAnimation,
     cleanAudio,
     handleSpeechBlock,
@@ -170,6 +168,10 @@ const QuestionNarrator = ({
     handlePreview();
   }, [state.currentData]);
 
+  const decideIfLoopAnimation = () =>
+    get(state, 'currentData.type', 'none') === speechType &&
+    get(state, 'currentData.isLoop', false);
+
   const getAnimationOptions = () => {
     if (state.currentData && state.currentData.animationData) {
       const isSpeechType = state.currentData.type === 'Speech';
@@ -187,7 +189,7 @@ const QuestionNarrator = ({
   const defaultOptions = {
     renderer: 'svg',
     autoloadSegments: false,
-    loop: false,
+    loop: decideIfLoopAnimation(),
     autoplay: false,
     ...getAnimationOptions(),
   };
@@ -209,7 +211,11 @@ const QuestionNarrator = ({
             width={100}
             style={lottieStyles}
             isClickToPauseDisabled
-            isStopped={!!draggable || previewData.animation === 'standStill'}
+            isStopped={
+              !!draggable ||
+              previewData.animation === 'standStill' ||
+              !decideIfPlaySpeechAnimation()
+            }
           />
         </div>
       </Draggable>

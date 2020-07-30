@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
@@ -16,11 +16,16 @@ import Select from 'components/Select';
 import playButton from 'assets/svg/play-button-1.svg';
 import stopButton from 'assets/svg/stop-button-1.svg';
 
-import AudioWrapper from 'utils/audioWrapper';
 import { splitAndKeep } from 'utils/splitAndKeep';
 import { colors } from 'theme';
 
 import { makeSelectLoader } from 'containers/Interventions/containers/EditInterventionPage/selectors';
+import {
+  updatePreviewData,
+  updatePreviewAnimation,
+} from 'containers/Interventions/containers/EditInterventionPage/actions';
+import { makeSelectPreviewData } from 'containers/Interventions/components/QuestionNarrator/selectors';
+import { speechType } from 'models/Narrator/BlockTypes';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { speechAnimations } from 'utils/animations/animationsNames';
@@ -38,8 +43,10 @@ const SpeechBlock = ({
   blockIndex,
   id,
   updateLoader,
+  updateNarratorPreviewData,
+  updateNarratorPreviewAnimation,
+  previewData,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(block.text, ''));
   const [hasFocus, setHasFocus] = useState(false);
@@ -48,6 +55,10 @@ const SpeechBlock = ({
   useEffect(() => {
     setText(join(block.text, ''));
   }, [block.text]);
+
+  useEffect(() => {
+    if (previewData.type !== speechType) setIsPlaying(false);
+  }, [previewData]);
 
   const selectOptions = useMemo(() => {
     const animations = keys(speechAnimations);
@@ -58,43 +69,18 @@ const SpeechBlock = ({
     }));
   }, [speechAnimations]);
 
-  const audio = useRef(new AudioWrapper());
-
   const handleTextUpdate = value =>
     updateText(blockIndex, splitAndKeep(value, [',', '.', '?', '!']), id);
-
-  const handleLoad = () => {
-    stopAudio();
-    setIsLoading(true);
-  };
-
-  const handleReady = () => setIsLoading(false);
-
-  useEffect(() => {
-    audio.current.onLoading(handleLoad);
-    audio.current.onLoaded(handleReady);
-    audio.current.onEnded(() => setIsPlaying(false));
-
-    const { audio_urls: audioUrls } = block;
-    if (audioUrls) audio.current.setSrc(audioUrls);
-
-    return audio.current.clean;
-  }, [blockIndex]);
 
   useEffect(() => {
     if (!updateLoader) setIsSpeechUpdating(false);
   }, [updateLoader]);
 
-  const playAudio = () => audio.current.play();
-  const stopAudio = () => audio.current.stop();
-
   const handleButtonClick = () => {
-    if (!isLoading) {
-      if (isPlaying) stopAudio();
-      else playAudio();
+    if (isPlaying) updateNarratorPreviewAnimation('standStill');
+    else updateNarratorPreviewData(block);
 
-      setIsPlaying(!isPlaying);
-    }
+    setIsPlaying(!isPlaying);
   };
 
   const handleBlur = value => {
@@ -163,16 +149,22 @@ SpeechBlock.propTypes = {
   updateText: PropTypes.func,
   updateAnimation: PropTypes.func,
   updateLoader: PropTypes.bool,
+  updateNarratorPreviewData: PropTypes.func,
+  updateNarratorPreviewAnimation: PropTypes.func,
+  previewData: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   updateLoader: makeSelectLoader('updateQuestion'),
+  previewData: makeSelectPreviewData(),
 });
 
 const mapDispatchToProps = {
   updateText: (index, text, id) => updateSpeechSettings(index, { text }, id),
   updateAnimation: (index, animation, id) =>
     updateSpeechSettings(index, { animation }, id),
+  updateNarratorPreviewData: updatePreviewData,
+  updateNarratorPreviewAnimation: updatePreviewAnimation,
 };
 
 const withConnect = connect(

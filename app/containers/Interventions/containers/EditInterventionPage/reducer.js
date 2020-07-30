@@ -34,6 +34,7 @@ import {
   EDIT_QUESTION_ERROR,
   MAKE_PEEDY_DRAGGABLE,
   SET_ANIMATION_STOP_POSITION,
+  UPDATE_PREVIEW_DATA,
 } from './constants';
 import questionDataReducer from '../../components/QuestionData/reducer';
 import questionSettingsReducer from '../../components/QuestionSettings/Settings/reducer';
@@ -98,6 +99,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_PREVIEW_ANIMATION:
+      case UPDATE_PREVIEW_DATA:
         draft.previewData = getPreviewData(action.payload);
         break;
       case SELECT_QUESTION:

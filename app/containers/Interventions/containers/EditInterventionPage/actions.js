@@ -27,6 +27,7 @@ import {
   EDIT_QUESTION_ERROR,
   MAKE_PEEDY_DRAGGABLE,
   SET_ANIMATION_STOP_POSITION,
+  UPDATE_PREVIEW_DATA,
 } from './constants';
 
 // application state actions
@@ -35,6 +36,8 @@ const toggleQuestionSettings = index =>
 const selectQuestion = index => actionBuilder(SELECT_QUESTION, index);
 const updatePreviewAnimation = animation =>
   actionBuilder(UPDATE_PREVIEW_ANIMATION, { animation });
+const updatePreviewData = data =>
+  actionBuilder(UPDATE_PREVIEW_DATA, { ...data });
 
 // image actions
 const addQuestionImage = payload => actionBuilder(ADD_QUESTION_IMAGE, payload);
@@ -125,4 +128,5 @@ export {
   editQuestionError,
   setPeedyDraggable,
   setAnimationStopPosition,
+  updatePreviewData,
 };
