@@ -46,6 +46,10 @@ export const initialState = {
     y: 0,
   },
   draggable: false,
+  previewData: {
+    animation: 'standStill',
+    type: 'BodyAnimation',
+  },
   previewAnimation: 'standStill',
   cache: {
     questions: [],
@@ -77,6 +81,10 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_PREVIEW_ANIMATION:
+        draft.previewData = {
+          ...draft.previewData,
+          animation: action.payload.animation,
+        };
         draft.previewAnimation = action.payload.animation;
         break;
       case SELECT_QUESTION:
