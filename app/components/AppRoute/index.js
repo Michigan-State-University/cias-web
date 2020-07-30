@@ -23,6 +23,7 @@ class AppRoute extends Route {
             style={{
               marginTop: 70,
               height: `calc(100vh - ${elements.navbarHeight}px)`,
+              paddingTop: 10,
             }}
           >
             {super.render()}

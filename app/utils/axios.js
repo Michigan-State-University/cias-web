@@ -37,8 +37,6 @@ axios.interceptors.response.use(
   },
   error => {
     if (get(error, 'response.status') === 401) {
-      LocalStorageService.clearHeaders();
-
       dispatch(logOut());
     }
 

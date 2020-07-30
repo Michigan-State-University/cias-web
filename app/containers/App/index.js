@@ -20,6 +20,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
 import SettingsInterventionPage from 'containers/Interventions/containers/SettingsInterventionPage';
 import UserListPage from 'containers/UserList/Loadable';
+import Logout from 'containers/Logout/Loadable';
 import navbarNames from 'utils/navbarNames';
 import rootSaga from 'global/sagas/rootSaga';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -33,6 +34,7 @@ function App() {
         <AppRoute exact path="/" component={HomePage} protectedRoute />
         <AppRoute exact path="/login" component={LoginPage} />
         <AppRoute exact path="/register" component={RegisterPage} />
+        <AppRoute exact path="/logout" component={Logout} />
         <AppRoute
           exact
           path="/interventions/:id/edit"
