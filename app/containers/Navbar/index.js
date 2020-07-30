@@ -40,7 +40,7 @@ const renderNavbar = navbarProps => {
   return null;
 };
 
-export function Navbar({ user: { firstName, lastName }, navbarProps }) {
+export function Navbar({ user: { firstName, lastName, roles }, navbarProps }) {
   const [menuVisible, setMenuVisible] = useState(false);
   const dropdownRef = useRef(null);
   useEffect(() => {
@@ -60,7 +60,7 @@ export function Navbar({ user: { firstName, lastName }, navbarProps }) {
           <UserAvatar lastName={lastName} firstName={firstName} />
           {menuVisible && (
             <DropDownContent ref={dropdownRef}>
-              {content.map(({ url, messagesKey, icon }, index) => (
+              {content[roles[0]].map(({ url, messagesKey, icon }, index) => (
                 <div key={index} onClick={() => setMenuVisible(false)}>
                   <Link to={url}>
                     <Row>

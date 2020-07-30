@@ -2,12 +2,7 @@ import gear from 'assets/svg/gear-wo-background.svg';
 import logoutArrow from 'assets/svg/arrow-right-circle.svg';
 import users from 'assets/svg/users.svg';
 
-export default [
-  {
-    url: '/users',
-    icon: users,
-    messagesKey: 'users',
-  },
+const sharedNavbarElements = [
   {
     url: '/#',
     icon: gear,
@@ -19,3 +14,16 @@ export default [
     messagesKey: 'logOut',
   },
 ];
+
+export default {
+  admin: [
+    {
+      url: '/users',
+      icon: users,
+      messagesKey: 'users',
+    },
+    ...sharedNavbarElements,
+  ],
+  researcher: [...sharedNavbarElements],
+  participant: [...sharedNavbarElements],
+};

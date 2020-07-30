@@ -28,7 +28,10 @@ import {
 } from './styled';
 
 const SingleInterventionPanel = forwardRef(
-  ({ intervention, clickHandler, interventionCreating }, ref) => {
+  (
+    { intervention, clickHandler, interventionCreating, participantView },
+    ref,
+  ) => {
     if (!intervention) {
       return (
         <NewInterventionContainer onClick={clickHandler} ref={ref}>
@@ -53,19 +56,23 @@ const SingleInterventionPanel = forwardRef(
               <FormattedMessage {...globalMessages.statuses[status]} />
               <StatusIndicator status={status} />
             </div>
-            <div>
-              <Img ml={15} src={csvIcon} alt="export csv" />
-              <Img ml={15} src={fileShare} alt="share" />
-              <Img ml={15} src={binNoBg} alt="remove" />
-            </div>
+            {!participantView && (
+              <div>
+                <Img ml={15} src={csvIcon} alt="export csv" />
+                <Img ml={15} src={fileShare} alt="share" />
+                <Img ml={15} src={binNoBg} alt="remove" />
+              </div>
+            )}
           </Heading>
           <Title>
             <div>{name}</div>
           </Title>
           <InterventionInfo>
-            <div>
-              <FormattedMessage {...messages.notPublished} />
-            </div>
+            {!participantView && (
+              <div>
+                <FormattedMessage {...messages.notPublished} />
+              </div>
+            )}
           </InterventionInfo>
         </InterventionContainer>
       </StyledLink>
@@ -77,6 +84,7 @@ SingleInterventionPanel.propTypes = {
   intervention: PropTypes.object,
   clickHandler: PropTypes.func,
   interventionCreating: PropTypes.bool,
+  participantView: PropTypes.bool,
 };
 
 export default memo(SingleInterventionPanel);

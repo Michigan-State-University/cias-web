@@ -4,10 +4,17 @@ exports[`<App /> should render and match the snapshot 1`] = `
 <React.Fragment>
   <Switch>
     <Memo(ConnectFunction)
-      component={[Function]}
+      allowedRoles={
+        Array [
+          "admin",
+          "participant",
+          "researcher",
+        ]
+      }
       exact={true}
       path="/"
       protectedRoute={true}
+      render={[Function]}
     />
     <Memo(ConnectFunction)
       component={[Function]}
@@ -25,6 +32,12 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/logout"
     />
     <Memo(ConnectFunction)
+      allowedRoles={
+        Array [
+          "admin",
+          "researcher",
+        ]
+      }
       component={[Function]}
       exact={true}
       navbarProps={
@@ -36,11 +49,26 @@ exports[`<App /> should render and match the snapshot 1`] = `
       protectedRoute={true}
     />
     <Memo(ConnectFunction)
+      allowedRoles={
+        Array [
+          "admin",
+          "participant",
+          "researcher",
+        ]
+      }
       component={[Function]}
       exact={true}
       path="/interventions/:id/fill"
+      protectedRoute={true}
+      user={true}
     />
     <Memo(ConnectFunction)
+      allowedRoles={
+        Array [
+          "admin",
+          "researcher",
+        ]
+      }
       component={[Function]}
       exact={true}
       navbarProps={
@@ -52,6 +80,11 @@ exports[`<App /> should render and match the snapshot 1`] = `
       protectedRoute={true}
     />
     <Memo(ConnectFunction)
+      allowedRoles={
+        Array [
+          "admin",
+        ]
+      }
       component={[Function]}
       exact={true}
       navbarProps={
@@ -68,6 +101,12 @@ exports[`<App /> should render and match the snapshot 1`] = `
       protectedRoute={true}
     />
     <Memo(ConnectFunction)
+      allowedRoles={
+        Array [
+          "admin",
+          "researcher",
+        ]
+      }
       component={[Function]}
       exact={true}
       navbarProps={

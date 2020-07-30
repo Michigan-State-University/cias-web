@@ -11,7 +11,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container, Row } from 'react-grid-system';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -39,6 +39,9 @@ import {
   makeSelectInterventionLoaders,
 } from 'global/reducers/intervention';
 
+import MapInterventions, {
+  wrapWithCol,
+} from 'components/MapInterventions/MapInterventions';
 import {
   NewInterventionFloatButton,
   AddIcon,
@@ -115,12 +118,6 @@ export function HomePage({
     }
   };
 
-  const wrapWithCol = (child, key) => (
-    <Col key={`Single-intvention-${key}`} xs={12} sm={6} lg={4} xl={3}>
-      {child}
-    </Col>
-  );
-
   if (fetchInterventionLoading || filteredInterventions === null)
     return <Loader />;
   if (fetchInterventionError)
@@ -185,12 +182,7 @@ export function HomePage({
             />,
             'new',
           )}
-          {filteredInterventions.map(intervention =>
-            wrapWithCol(
-              <SingleInterventionPanel intervention={intervention} />,
-              intervention.id,
-            ),
-          )}
+          <MapInterventions interventions={filteredInterventions} />
         </Row>
       </Container>
       {filteredInterventions.length !== 0 && !isInViewport && (

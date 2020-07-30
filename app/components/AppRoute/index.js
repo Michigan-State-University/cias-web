@@ -7,15 +7,25 @@ import { createStructuredSelector } from 'reselect';
 
 import Navbar from 'containers/Navbar';
 import { elements } from 'theme';
-import { makeSelectIsLoggedIn } from '../../global/reducers/auth';
+import { makeSelectIsLoggedIn, makeSelectUser } from 'global/reducers/auth';
 
 class AppRoute extends Route {
   render() {
-    const { protectedRoute, isLoggedIn, navbarProps } = this.props;
-    if (protectedRoute && !isLoggedIn) {
+    const {
+      protectedRoute,
+      isLoggedIn,
+      allowedRoles,
+      user,
+      navbarProps,
+    } = this.props;
+
+    if (!protectedRoute) {
+      return super.render();
+    }
+    if (!isLoggedIn || !user.roles) {
       return <Redirect to="/login" />;
     }
-    if (isLoggedIn) {
+    if (isLoggedIn && allowedRoles.includes(user.roles[0])) {
       return (
         <>
           <Navbar navbarProps={navbarProps} />
@@ -42,10 +52,12 @@ AppRoute.propTypes = {
 
 AppRoute.defaultProps = {
   protectedRoute: false,
+  allowedRoles: [],
 };
 
 const mapStateToProps = createStructuredSelector({
   isLoggedIn: makeSelectIsLoggedIn(),
+  user: makeSelectUser(),
 });
 
 const withConnect = connect(mapStateToProps);

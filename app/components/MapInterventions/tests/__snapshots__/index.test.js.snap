@@ -1,0 +1,160 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MapInterventions /> Should render and match the snapshot 1`] = `
+.c4 {
+  width: auto;
+  height: auto;
+  margin-left: 15px;
+}
+
+.c1 {
+  padding: 15px;
+  height: 150px;
+  box-shadow: 0px 4px 20px #e3eefb;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background: #FFFFFF;
+  color: #000000;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c2 {
+  font-size: 13px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-transform: capitalize;
+}
+
+.c3 {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #8CBD00;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.c5 {
+  position: relative;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.c5 div {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 20px;
+}
+
+.c5:hover div {
+  z-index: 1;
+  background-color: white;
+  overflow: visible;
+  white-space: initial;
+  height: auto;
+  box-shadow: 0px 4px 20px #e3eefb;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c6 div {
+  padding: 5px 10px;
+  background: #e9f1fb;
+  font-size: 12px;
+  line-height: 16px;
+  border-radius: 5px;
+}
+
+<div
+  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
+>
+  <a
+    class="c0"
+    href="/interventions/1/edit"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+      >
+        <div>
+          <span>
+            Published
+          </span>
+          <span
+            class="c3"
+          />
+        </div>
+        <div>
+          <img
+            alt="export csv"
+            class="c4"
+            src="IMAGE_MOCK"
+          />
+          <img
+            alt="share"
+            class="c4"
+            src="IMAGE_MOCK"
+          />
+          <img
+            alt="remove"
+            class="c4"
+            src="IMAGE_MOCK"
+          />
+        </div>
+      </div>
+      <div
+        class="c5"
+      >
+        <div>
+          Intervention 1
+        </div>
+      </div>
+      <div
+        class="c6"
+      >
+        <div>
+          <span>
+            Not published yet
+          </span>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+`;
