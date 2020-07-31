@@ -41,6 +41,7 @@ const ApprovableInput = props => {
   const {
     value: propsValue,
     validator,
+    onValidation,
     placeholder,
     textAlign,
     keyboard,
@@ -62,8 +63,14 @@ const ApprovableInput = props => {
   }, [propsValue]);
 
   const onInputChange = targetValue => {
-    if (validator && validator(targetValue)) setValue(targetValue);
-    else if (!validator) setValue(targetValue);
+    if (!validator) setValue(targetValue);
+    else {
+      const validationResult = validator(targetValue);
+
+      if (validationResult) setValue(targetValue);
+
+      if (onValidation) onValidation(validationResult);
+    }
   };
 
   const onBlur = () => {
@@ -140,6 +147,7 @@ ApprovableInput.propTypes = {
   type: PropTypes.oneOf(['multiline', 'singleline']),
   keyboard: PropTypes.string,
   validator: PropTypes.func,
+  onValidation: PropTypes.func,
   textAlign: PropTypes.string,
   richText: PropTypes.bool,
   autoSize: PropTypes.bool,

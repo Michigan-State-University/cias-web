@@ -9,6 +9,10 @@ export default defineMessages({
   },
   numberPlaceholder: {
     id: `${scope}.numberPlaceholder`,
-    defaultMessage: 'Enter a number...',
+    defaultMessage: 'ex: 1, 2, 100',
+  },
+  numberValidationError: {
+    id: `${scope}.numberValidationError`,
+    defaultMessage: 'Only numerical values are allowed. E.g. 1, 2, 100.',
   },
 });

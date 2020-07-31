@@ -33,7 +33,7 @@ const Column = styled.div`
     ${({ md }) => md && getWidthString(md)};
   }
   @media only screen and (min-width: 1170px) {
-    ${({ lg }) => lg && getWidthString(lg)}5
+    ${({ lg }) => lg && getWidthString(lg)};
   }
 
   ${flex};

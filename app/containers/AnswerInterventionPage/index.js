@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { error } from 'react-toastify-redux';
 import get from 'lodash/get';
 
 import { useInjectSaga } from 'utils/injectSaga';
@@ -53,6 +54,7 @@ export function AnswerInterventionPage({
   submitAnswerRequest,
   setQuestionIndexAction,
   onStartIntervention,
+  showError,
   answerInterventionPage: {
     interventionQuestions,
     questionError,
@@ -107,6 +109,7 @@ export function AnswerInterventionPage({
       formatMessage,
       questionIndex,
       saveAnswer,
+      showError,
     };
 
     const handleBackClick = () => {
@@ -209,6 +212,7 @@ AnswerInterventionPage.propTypes = {
   submitAnswerRequest: PropTypes.func,
   onStartIntervention: PropTypes.func,
   setQuestionIndexAction: PropTypes.func,
+  showError: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -221,6 +225,7 @@ const mapDispatchToProps = {
   saveSelectedAnswer: selectAnswer,
   setQuestionIndexAction: setQuestionIndex,
   onStartIntervention: startIntervention,
+  showError: error,
 };
 
 const withConnect = connect(

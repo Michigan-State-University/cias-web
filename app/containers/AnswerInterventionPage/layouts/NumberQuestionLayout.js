@@ -9,11 +9,17 @@ import { themeColors } from 'theme';
 
 import messages from './messages';
 
-const NumberQuestionLayout = ({ onChange, formatMessage, answerBody }) => {
+const NumberQuestionLayout = ({
+  onChange,
+  formatMessage,
+  answerBody,
+  onValidation,
+}) => {
   const value =
     answerBody && answerBody.payload ? answerBody.payload.toString() : '';
+
   return (
-    <Box bg={themeColors.highlight} width="100%" px={21} py={14}>
+    <Box bg={themeColors.highlight} width="100%" maxWidth={150} px={21} py={14}>
       <Row>
         <ApprovableInput
           width="100%"
@@ -23,6 +29,7 @@ const NumberQuestionLayout = ({ onChange, formatMessage, answerBody }) => {
           value={value}
           placeholder={formatMessage(messages.numberPlaceholder)}
           validator={numericValidator}
+          onValidation={onValidation}
           onCheck={onChange}
         />
       </Row>
@@ -33,7 +40,8 @@ const NumberQuestionLayout = ({ onChange, formatMessage, answerBody }) => {
 NumberQuestionLayout.propTypes = {
   onChange: PropTypes.func,
   formatMessage: PropTypes.func,
-  answerBody: PropTypes.string,
+  answerBody: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  onValidation: PropTypes.func,
 };
 
 export default NumberQuestionLayout;

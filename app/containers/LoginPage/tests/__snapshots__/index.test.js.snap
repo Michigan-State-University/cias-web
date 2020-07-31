@@ -22,7 +22,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
       class="Fill-sc-1f4o7x0-0 dHXeMo"
     >
       <div
-        class="Column-sc-1n6divy-0 gfiYfS"
+        class="Column-sc-1n6divy-0 dSGRwX"
       >
         <h1
           class="H1-tncdg6-0 fdwqP"
@@ -31,7 +31,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           Login in to CIAS
         </h1>
         <div
-          class="Column-sc-1n6divy-0 HjGWm"
+          class="Column-sc-1n6divy-0 bWskNd"
         >
           <p
             class="Text-sc-2lza2m-0 bkfXbb"
@@ -49,7 +49,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 HjGWm"
+          class="Column-sc-1n6divy-0 bWskNd"
         >
           <p
             class="Text-sc-2lza2m-0 bkfXbb"
