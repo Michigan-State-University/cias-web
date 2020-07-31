@@ -1,3 +1,5 @@
+import { fontSizes } from 'theme/fonts';
+
 const borders = {
   borderRadius: '5px',
   borderStyle: 'solid',
@@ -19,4 +21,9 @@ const elements = {
   draggableContainerSize: 700,
 };
 
-export { borders, paddings, boxShadows, elements };
+const visualAnalogScaleLabel = {
+  fontSize: fontSizes.regular,
+  width: '100%',
+};
+
+export { borders, paddings, boxShadows, elements, visualAnalogScaleLabel };

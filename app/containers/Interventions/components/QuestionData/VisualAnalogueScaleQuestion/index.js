@@ -17,6 +17,8 @@ import { colors } from 'theme/colors';
 import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { variableNameValidator } from 'utils/validators';
 
+import VisualAnalogueScaleQuestionLayout from 'containers/AnswerInterventionPage/layouts/VisualAnalogueScaleQuestionLayout';
+import { visualAnalogScaleLabel } from 'theme';
 import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
@@ -33,6 +35,35 @@ const VisualAnalogueScaleQuestion = ({
     payload: { start_value: startValue, end_value: endValue },
   } = selectedQuestion.body.data[0];
   const { variable } = selectedQuestion.body;
+
+  const labels = {
+    0: {
+      label: (
+        <StyledInput
+          width={120}
+          py={9}
+          textAlign="center"
+          placeholder={formatMessage(messages.startValue)}
+          value={startValue}
+          onBlur={value => updateLabel(value, 'start_value')}
+        />
+      ),
+      style: visualAnalogScaleLabel,
+    },
+    100: {
+      label: (
+        <StyledInput
+          width={120}
+          py={9}
+          textAlign="center"
+          placeholder={formatMessage(messages.endValue)}
+          value={endValue}
+          onBlur={value => updateLabel(value, 'end_value')}
+        />
+      ),
+      style: visualAnalogScaleLabel,
+    },
+  };
 
   return (
     <Column mt={10}>
@@ -55,33 +86,13 @@ const VisualAnalogueScaleQuestion = ({
         <Column>
           <Row>
             <Box width="100%">
-              <AppSlider disabled />
-            </Box>
-          </Row>
-
-          <Row justify="between" filled>
-            <Box hoverColor={colors.linkWater} padding={5} ml={-24}>
-              <StyledInput
-                width={120}
-                py={9}
-                textAlign="left"
-                placeholder={
-                  !draggable ? formatMessage(messages.startValue) : ''
-                }
-                value={startValue}
-                onBlur={value => updateLabel(value, 'start_value')}
-              />
-            </Box>
-
-            <Box hoverColor={colors.linkWater} padding={5} mr={-18}>
-              <StyledInput
-                width={120}
-                py={9}
-                textAlign="right"
-                placeholder={!draggable ? formatMessage(messages.endValue) : ''}
-                value={endValue}
-                onBlur={value => updateLabel(value, 'end_value')}
-              />
+              {!draggable && <AppSlider marks={labels} disabled />}
+              {draggable && (
+                <VisualAnalogueScaleQuestionLayout
+                  startValue={startValue}
+                  endValue={endValue}
+                />
+              )}
             </Box>
           </Row>
         </Column>
