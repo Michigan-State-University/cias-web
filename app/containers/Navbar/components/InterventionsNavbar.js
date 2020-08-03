@@ -12,6 +12,7 @@ import Img from 'components/Img';
 import Row from 'components/Row';
 import Tabs from 'components/Tabs';
 import eye from 'assets/svg/eye.svg';
+import check from 'assets/svg/check.svg';
 import { Button } from 'components/Button';
 import { StyledInput } from 'components/Input/StyledInput';
 import { makeSelectQuestionsLength } from 'containers/Interventions/containers/EditInterventionPage/selectors';
@@ -20,10 +21,18 @@ import {
   editInterventionRequest,
   makeSelectIntervention,
   editInterventionSaga,
+  makeSelectInterventionEditLoader,
 } from 'global/reducers/intervention';
 
+import { themeColors } from 'theme';
+import Spinner from 'components/Spinner';
 import messages from './messages';
-import { StyledLink } from './styled';
+import {
+  StyledLink,
+  SaveInfoContainer,
+  SavingContainer,
+  CheckBackground,
+} from './styled';
 
 const getActiveTab = (path, formatMessage) => {
   if (path.includes('/edit')) return formatMessage(messages.content);
@@ -37,9 +46,9 @@ const InterventionNavbar = ({
   intl: { formatMessage },
   location: { pathname },
   questionsLength,
+  interventionEditing,
 }) => {
   useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
-
   const [tabActive, setTabActive] = useState(
     getActiveTab(pathname, formatMessage),
   );
@@ -53,6 +62,24 @@ const InterventionNavbar = ({
     <Row align="center" justify="between" width="100%" mr={35}>
       <Row align="center">
         <CloseIcon to="/" />
+        <SaveInfoContainer>
+          {interventionEditing && (
+            <SavingContainer>
+              <Spinner color={themeColors.secondary} />
+              <FormattedMessage {...messages.saving} />
+            </SavingContainer>
+          )}
+          {!interventionEditing && (
+            <SaveInfoContainer
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
+              <CheckBackground>
+                <Img src={check} />
+              </CheckBackground>
+              <FormattedMessage {...messages.saved} />
+            </SaveInfoContainer>
+          )}
+        </SaveInfoContainer>
         <StyledInput
           px={12}
           py={6}
@@ -64,7 +91,6 @@ const InterventionNavbar = ({
           maxWidth="none"
         />
       </Row>
-
       <Tabs
         display="flex"
         align="center"
@@ -124,11 +150,13 @@ InterventionNavbar.propTypes = {
   path: PropTypes.string,
   location: PropTypes.object,
   questionsLength: PropTypes.number,
+  interventionEditing: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
   questionsLength: makeSelectQuestionsLength(),
+  interventionEditing: makeSelectInterventionEditLoader(),
 });
 
 const mapDispatchToProps = {

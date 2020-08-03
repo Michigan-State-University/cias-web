@@ -16,4 +16,14 @@ const makeSelectInterventionLoaders = () =>
     substate => substate.loaders,
   );
 
-export { makeSelectIntervention, makeSelectInterventionLoaders };
+const makeSelectInterventionEditLoader = () =>
+  createSelector(
+    selectIntervention,
+    substate => substate.interventionSaving,
+  );
+
+export {
+  makeSelectIntervention,
+  makeSelectInterventionLoaders,
+  makeSelectInterventionEditLoader,
+};

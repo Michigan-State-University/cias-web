@@ -3,6 +3,22 @@ import set from 'lodash/set';
 import Intervention from 'models/Intervention/Intervention';
 
 import {
+  EDIT_QUESTION_SUCCESS,
+  EDIT_QUESTION_REQUEST,
+  EDIT_QUESTION_ERROR,
+  COPY_QUESTION_REQUEST,
+  COPY_QUESTION_ERROR,
+  COPY_QUESTION_SUCCESS,
+  UPDATE_QUESTION_DATA,
+  DELETE_QUESTION_REQUEST,
+  UPDATE_CACHE,
+  UPDATE_QUESTION_SETTINGS,
+  UPDATE_QUESTION_IMAGE,
+  CREATE_QUESTION_REQUEST,
+  CREATE_QUESTION_SUCCESS,
+  CREATE_QUESTION_ERROR,
+} from 'containers/Interventions/containers/EditInterventionPage/constants';
+import {
   CREATE_INTERVENTION_REQUEST,
   CREATE_INTERVENTION_SUCCESS,
   CREATE_INTERVENTION_ERROR,
@@ -16,6 +32,7 @@ import {
 
 export const initialState = {
   intervention: new Intervention('', ''),
+  interventionSaving: false,
   loaders: {
     createIntervention: false,
     getIntervention: false,
@@ -26,9 +43,33 @@ export const initialState = {
   },
 };
 
+const saving = [
+  EDIT_INTERVENTION_REQUEST,
+  EDIT_QUESTION_REQUEST,
+  COPY_QUESTION_REQUEST,
+  UPDATE_QUESTION_DATA,
+  DELETE_QUESTION_REQUEST,
+  UPDATE_QUESTION_SETTINGS,
+  UPDATE_QUESTION_IMAGE,
+  CREATE_QUESTION_REQUEST,
+];
+const saved = [
+  EDIT_INTERVENTION_SUCCESS,
+  EDIT_INTERVENTION_ERROR,
+  EDIT_QUESTION_SUCCESS,
+  EDIT_QUESTION_ERROR,
+  COPY_QUESTION_ERROR,
+  COPY_QUESTION_SUCCESS,
+  UPDATE_CACHE,
+  CREATE_QUESTION_SUCCESS,
+  CREATE_QUESTION_ERROR,
+];
+
 /* eslint-disable default-case, no-param-reassign */
 const interventionReducer = (state = initialState, action) =>
   produce(state, draft => {
+    if (saving.includes(action.type)) draft.interventionSaving = true;
+    if (saved.includes(action.type)) draft.interventionSaving = false;
     switch (action.type) {
       case CREATE_INTERVENTION_REQUEST:
         draft.loaders.createIntervention = true;

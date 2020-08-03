@@ -36,4 +36,12 @@ export default defineMessages({
     id: `${scope}.previous`,
     defaultMessage: 'Previous Question',
   },
+  saving: {
+    id: `${scope}.saving`,
+    defaultMessage: 'Saving',
+  },
+  saved: {
+    id: `${scope}.saved`,
+    defaultMessage: 'Saved',
+  },
 });
