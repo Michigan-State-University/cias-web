@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -8,14 +8,16 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { compose } from 'redux';
 
 import CloseIcon from 'components/CloseIcon';
-import Img from 'components/Img';
 import Row from 'components/Row';
 import Tabs from 'components/Tabs';
-import eye from 'assets/svg/eye.svg';
-import check from 'assets/svg/check.svg';
-import { Button } from 'components/Button';
 import { StyledInput } from 'components/Input/StyledInput';
-import { makeSelectQuestionsLength } from 'containers/Interventions/containers/EditInterventionPage/selectors';
+import Spinner from 'components/Spinner';
+import PreviewButton from 'components/PreviewButton';
+import Img from 'components/Img';
+import {
+  makeSelectQuestionsLength,
+  makeSelectSelectedQuestionIndex,
+} from 'containers/Interventions/containers/EditInterventionPage/selectors';
 
 import {
   editInterventionRequest,
@@ -25,7 +27,7 @@ import {
 } from 'global/reducers/intervention';
 
 import { themeColors } from 'theme';
-import Spinner from 'components/Spinner';
+import check from 'assets/svg/check.svg';
 import messages from './messages';
 import {
   StyledLink,
@@ -46,6 +48,7 @@ const InterventionNavbar = ({
   intl: { formatMessage },
   location: { pathname },
   questionsLength,
+  selectedQuestion,
   interventionEditing,
 }) => {
   useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
@@ -118,24 +121,12 @@ const InterventionNavbar = ({
           }
         />
       </Tabs>
-      <StyledLink
-        to={`/interventions/${id}/preview`}
+      <PreviewButton
+        to={`/interventions/${id}/preview/${selectedQuestion}`}
+        previewDisabled={previewDisabled}
+        text={formatMessage(messages.previewCurrent)}
         target="_blank"
-        disabled={previewDisabled}
-      >
-        <Button
-          disabled={previewDisabled}
-          inverted
-          width="auto"
-          height={35}
-          color="secondary"
-          borderRadius={5}
-          px={11}
-        >
-          <Img src={eye} alt="eye" mr={6} />
-          <FormattedMessage {...messages.preview} />
-        </Button>
-      </StyledLink>
+      />
     </Row>
   );
 };
@@ -147,15 +138,16 @@ InterventionNavbar.propTypes = {
   }),
   updateInterventionName: PropTypes.func,
   intl: intlShape,
-  path: PropTypes.string,
   location: PropTypes.object,
   questionsLength: PropTypes.number,
+  selectedQuestion: PropTypes.number,
   interventionEditing: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
   questionsLength: makeSelectQuestionsLength(),
+  selectedQuestion: makeSelectSelectedQuestionIndex(),
   interventionEditing: makeSelectInterventionEditLoader(),
 });
 

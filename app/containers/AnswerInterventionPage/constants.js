@@ -22,5 +22,8 @@ export const SET_QUESTION_INDEX =
 export const START_INTERVENTION =
   'app/AnswerInterventionPage/START_INTERVENTION';
 
+export const RESET_INTERVENTION =
+  'app/AnswerInterventionPage/RESET_INTERVENTION';
+
 export const NUMBER_VALIDATION_ERROR =
   'app/AnswerInterventionPage/NUMBER_VALIDATION_ERROR';

@@ -123,6 +123,27 @@ exports[`<App /> should render and match the snapshot 1`] = `
       protectedRoute={true}
     />
     <Memo(ConnectFunction)
+      allowedRoles={
+        Array [
+          "admin",
+          "researcher",
+        ]
+      }
+      component={[Function]}
+      navbarProps={
+        Object {
+          "navbarId": "preview",
+          "navbarName": <FormattedMessage
+            defaultMessage="Preview"
+            id="app.navbarNames.preview"
+            values={Object {}}
+          />,
+        }
+      }
+      path="/interventions/:id/preview/:index"
+      protectedRoute={true}
+    />
+    <Memo(ConnectFunction)
       component={[Function]}
     />
   </Switch>

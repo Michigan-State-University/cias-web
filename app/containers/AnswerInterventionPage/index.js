@@ -74,8 +74,15 @@ export function AnswerInterventionPage({
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
   const animationParentRef = useRef();
+
+  const { id, index } = params;
+
   useEffect(() => {
-    fetchQuestionsAction(params.id);
+    fetchQuestionsAction(id);
+    if (index) {
+      setQuestionIndexAction(parseInt(index, 10));
+      onStartIntervention();
+    }
   }, []);
 
   const saveAnswer = nextQuestionIndex =>
@@ -115,7 +122,6 @@ export function AnswerInterventionPage({
       saveAnswer,
       showError,
     };
-
     const handleBackClick = () => {
       if (answers[currentQuestionId]) {
         saveAnswer(questionIndex - 1);
@@ -188,12 +194,12 @@ export function AnswerInterventionPage({
           {questionError && <ErrorAlert errorText={questionError} />}
           {answersError && <ErrorAlert errorText={answersError} />}
           {questionLoading && <Loader />}
-          {!currentQuestion && (
+          {!questionLoading && !currentQuestion && (
             <FormattedMessage {...messages.completeIntervention} />
           )}
         </Box>
       )}
-      {!interventionStarted && (
+      {!index && !interventionStarted && (
         <Button
           mt={16}
           onClick={onStartIntervention}

@@ -107,7 +107,19 @@ export function App({ user }) {
         />
         <AppRoute
           exact
+          key="previewFromStart"
           path="/interventions/:id/preview"
+          component={AnswerInterventionPage}
+          protectedRoute
+          allowedRoles={[ROLES.admin, ROLES.researcher]}
+          navbarProps={{
+            navbarId: 'preview',
+            navbarName: navbarNames.preview,
+          }}
+        />
+        <AppRoute
+          key="previewFromCurrent"
+          path="/interventions/:id/preview/:index"
           component={AnswerInterventionPage}
           protectedRoute
           allowedRoles={[ROLES.admin, ROLES.researcher]}

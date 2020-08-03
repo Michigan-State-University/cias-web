@@ -24,8 +24,12 @@ export default defineMessages({
     id: `${scope}.sharing`,
     defaultMessage: 'Manage Sharing',
   },
-  preview: {
+  previewStart: {
     id: `${scope}.preview`,
+    defaultMessage: 'Preview From Start',
+  },
+  previewCurrent: {
+    id: `${scope}.previewCurrent`,
     defaultMessage: 'Open Preview',
   },
   next: {

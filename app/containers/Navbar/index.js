@@ -86,7 +86,7 @@ Navbar.propTypes = {
   }),
   navbarProps: PropTypes.shape({
     navbarId: PropTypes.string.isRequired,
-    navbarName: PropTypes.string,
+    navbarName: PropTypes.object,
   }),
 };
 
