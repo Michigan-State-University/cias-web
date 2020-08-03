@@ -90,7 +90,7 @@ export function AnswerInterventionPage({
 
   const renderQuestion = () => {
     const {
-      settings: { proceed_button: proceedButton },
+      settings: { proceed_button: proceedButton, required },
     } = currentQuestion;
     const selectAnswerProp = answerBody => {
       saveSelectedAnswer({
@@ -102,6 +102,10 @@ export function AnswerInterventionPage({
     const answerBody = answers[currentQuestionId]
       ? answers[currentQuestionId].answerBody
       : [];
+
+    const isAnswered = () => !(Array.isArray(answerBody) && !answerBody.length);
+
+    const isButtonDisabled = () => required && !isAnswered();
 
     const sharedProps = {
       selectAnswer: selectAnswerProp,
@@ -137,6 +141,7 @@ export function AnswerInterventionPage({
           {(isNullOrUndefined(proceedButton) || proceedButton) && (
             <Row width="100%">
               <Button
+                disabled={isButtonDisabled()}
                 margin={20}
                 width="180px"
                 loading={currentQuestion.loading}

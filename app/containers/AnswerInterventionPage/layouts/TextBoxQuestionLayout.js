@@ -30,7 +30,7 @@ const TextBoxQuestionLayout = ({ formatMessage, onChange, answerBody }) => {
 TextBoxQuestionLayout.propTypes = {
   formatMessage: PropTypes.func,
   onChange: PropTypes.func,
-  answerBody: PropTypes.string,
+  answerBody: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };
 
 export default TextBoxQuestionLayout;

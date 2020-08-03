@@ -76,7 +76,7 @@ GridQuestionLayout.propTypes = {
   rows: PropTypes.array,
   columns: PropTypes.array,
   check: PropTypes.func,
-  selectedAnswersIndex: PropTypes.array,
+  selectedAnswersIndex: PropTypes.object,
   questionId: PropTypes.string,
 };
 
