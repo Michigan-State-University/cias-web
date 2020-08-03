@@ -33,6 +33,9 @@ const orderSettings = settings =>
     ...(!isNullOrUndefined(settings.required) && {
       required: settings.required,
     }),
+    ...(!isNullOrUndefined(settings.show_number) && {
+      show_number: settings.show_number,
+    }),
   };
 
 const SettingsTab = ({

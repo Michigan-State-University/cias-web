@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Question from 'models/Intervention/Question';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
 import VisualAnalogueScaleQuestionLayout from '../layouts/VisualAnalogueScaleQuestionLayout';
 
 const VisualAnalogueScaleQuestion = ({
@@ -21,6 +22,7 @@ const VisualAnalogueScaleQuestion = ({
       variable: { name },
     },
     id,
+    settings: { show_number: showNumber },
   } = question;
 
   useEffect(() => {
@@ -51,6 +53,7 @@ const VisualAnalogueScaleQuestion = ({
       startValue={startValue}
       endValue={endValue}
       answerValue={answerValue}
+      showNumber={!isNullOrUndefined(showNumber) && showNumber}
     />
   );
 };

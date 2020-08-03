@@ -95,4 +95,8 @@ export default defineMessages({
     id: `${scope}.cancel`,
     defaultMessage: 'Cancel',
   },
+  show_number: {
+    id: `${scope}.show_number`,
+    defaultMessage: 'Show number',
+  },
 });

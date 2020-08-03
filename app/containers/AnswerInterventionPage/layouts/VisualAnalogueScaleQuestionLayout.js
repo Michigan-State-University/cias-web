@@ -14,6 +14,7 @@ const VisualAnalogueScaleQuestionLayout = ({
   startValue,
   endValue,
   answerValue,
+  showNumber,
 }) => {
   const labels = {
     0: {
@@ -32,12 +33,12 @@ const VisualAnalogueScaleQuestionLayout = ({
         <Row>
           <Box width="100%" px={21} py={14}>
             <AppSlider
-              showValue
               step={1}
               onChange={onChange}
               value={answerValue}
               onAfterChange={onAfterChange}
               marks={labels}
+              showValue={showNumber}
             />
           </Box>
         </Row>
@@ -52,6 +53,11 @@ VisualAnalogueScaleQuestionLayout.propTypes = {
   startValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   endValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   answerValue: PropTypes.number,
+  showNumber: PropTypes.bool,
+};
+
+VisualAnalogueScaleQuestionLayout.defaultProps = {
+  showNumber: true,
 };
 
 export default VisualAnalogueScaleQuestionLayout;

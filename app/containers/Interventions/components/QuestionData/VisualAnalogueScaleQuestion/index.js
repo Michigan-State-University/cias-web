@@ -5,22 +5,27 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
+import globalMessages from 'global/i18n/globalMessages';
+import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
+import VisualAnalogueScaleQuestionLayout from 'containers/AnswerInterventionPage/layouts/VisualAnalogueScaleQuestionLayout';
+
 import AppSlider from 'components/AppSlider';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Question from 'models/Intervention/Question';
-import Row from 'components/Row';
-import globalMessages from 'global/i18n/globalMessages';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
-import { colors } from 'theme/colors';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
-import { variableNameValidator } from 'utils/validators';
+import Row from 'components/Row';
 
-import VisualAnalogueScaleQuestionLayout from 'containers/AnswerInterventionPage/layouts/VisualAnalogueScaleQuestionLayout';
+import Question from 'models/Intervention/Question';
+
+import { colors } from 'theme/colors';
+import { variableNameValidator } from 'utils/validators';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+
 import { visualAnalogScaleLabel } from 'theme';
 import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
+
 import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
@@ -32,9 +37,12 @@ const VisualAnalogueScaleQuestion = ({
   intl: { formatMessage },
 }) => {
   const {
+    body: { variable, data },
+    settings: { show_number: showNumber },
+  } = selectedQuestion;
+  const {
     payload: { start_value: startValue, end_value: endValue },
-  } = selectedQuestion.body.data[0];
-  const { variable } = selectedQuestion.body;
+  } = data[0];
 
   const labels = {
     0: {
@@ -82,15 +90,22 @@ const VisualAnalogueScaleQuestion = ({
           onBlur={val => updateVariable(val)}
         />
       </Row>
-      <Box width="100%" px={21} py={14}>
+      <Box width="100%" px={21} py={30}>
         <Column>
           <Row>
             <Box width="100%">
-              {!draggable && <AppSlider marks={labels} disabled />}
+              {!draggable && (
+                <AppSlider
+                  marks={labels}
+                  disabled
+                  showValue={!isNullOrUndefined(showNumber) && showNumber}
+                />
+              )}
               {draggable && (
                 <VisualAnalogueScaleQuestionLayout
                   startValue={startValue}
                   endValue={endValue}
+                  showNumber={!isNullOrUndefined(showNumber) && showNumber}
                 />
               )}
             </Box>

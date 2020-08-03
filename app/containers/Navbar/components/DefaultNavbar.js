@@ -14,7 +14,7 @@ const DefaultNavbar = ({ navbarName }) => (
 );
 
 DefaultNavbar.propTypes = {
-  navbarName: PropTypes.string,
+  navbarName: PropTypes.object,
 };
 
 export default DefaultNavbar;
