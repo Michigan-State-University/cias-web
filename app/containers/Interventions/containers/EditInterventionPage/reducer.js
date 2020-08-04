@@ -42,6 +42,7 @@ import {
   instantiateEmptyQuestion,
   mapQuestionDataForType,
   getAnimationPosition,
+  getFromQuestionTTS,
 } from './utils';
 
 export const initialState = {
@@ -78,6 +79,14 @@ const getPreviewData = data => {
       return { type: 'BodyAnimation', animation: data.animation };
   }
 };
+
+const assignFromQuestionTTS = (draft, state) =>
+  set(draft.questions[state.selectedQuestion], 'narrator.from_question', [
+    {
+      ...draft.questions[state.selectedQuestion].narrator.from_question[0],
+      text: getFromQuestionTTS(draft.questions[state.selectedQuestion]),
+    },
+  ]);
 
 /* eslint-disable default-case, no-param-reassign */
 const editInterventionPageReducer = (state = initialState, action) =>
@@ -200,6 +209,8 @@ const editInterventionPageReducer = (state = initialState, action) =>
           action.payload.path,
           action.payload.value,
         );
+
+        assignFromQuestionTTS(draft, state);
         break;
 
       case UPDATE_QUESTION_DATA:
@@ -210,6 +221,8 @@ const editInterventionPageReducer = (state = initialState, action) =>
             action.payload,
           ),
         };
+
+        assignFromQuestionTTS(draft, state);
         break;
 
       case UPDATE_QUESTION_SETTINGS:
@@ -230,6 +243,10 @@ const editInterventionPageReducer = (state = initialState, action) =>
 
         draft.cache.questions[state.selectedQuestion] = mapQuestionDataForType(
           action.payload.question,
+        );
+        draft.questions[state.selectedQuestion] = cloneDeep(
+          // needed for TTS url update
+          draft.cache.questions[state.selectedQuestion],
         );
         break;
 

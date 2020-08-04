@@ -13,7 +13,9 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { error } from 'react-toastify-redux';
 import get from 'lodash/get';
+import filter from 'lodash/filter';
 
+import { speechType } from 'models/Narrator/BlockTypes';
 import { useInjectSaga } from 'utils/injectSaga';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -23,6 +25,8 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
+
+import { instantiateBlockForType } from 'models/Intervention/utils';
 
 import {
   BackButton,
@@ -68,8 +72,35 @@ export function AnswerInterventionPage({
   useInjectReducer({ key: 'answerInterventionPage', reducer });
   useInjectSaga({ key: 'answerInterventionPage', saga });
 
+  const hasSpeechBlocks = question =>
+    filter(question.narrator.blocks, ({ type }) => type === speechType)
+      .length !== 0;
+
+  const assignCurrentQuestion = () => {
+    const question = interventionQuestions[questionIndex];
+
+    if (!question) return null;
+
+    if (hasSpeechBlocks(question)) return question;
+
+    const { narrator } = question;
+    return {
+      ...question,
+      narrator: {
+        ...narrator,
+        blocks: [
+          {
+            ...instantiateBlockForType(speechType, { x: 0, y: 0 }),
+            ...narrator.from_question[0],
+          },
+          ...narrator.blocks,
+        ],
+      },
+    };
+  };
+
   const currentQuestion = interventionQuestions
-    ? interventionQuestions[questionIndex]
+    ? assignCurrentQuestion()
     : null;
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;

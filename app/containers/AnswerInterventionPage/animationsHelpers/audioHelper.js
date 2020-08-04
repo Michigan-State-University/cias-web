@@ -26,12 +26,10 @@ const useAudioHelper = (
   };
 
   const loadSpeechAnimations = async () => {
-    const filteredAnimations = filter(
-      blocks,
-      ({ type }) => type === speechType,
-    );
+    const speechBlocks = filter(blocks, ({ type }) => type === speechType);
+
     const uniqAnimations = uniqBy(
-      filteredAnimations.filter(block => block.animation),
+      speechBlocks.filter(block => block.animation),
       'animation',
     );
 

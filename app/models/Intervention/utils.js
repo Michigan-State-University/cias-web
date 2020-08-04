@@ -1,6 +1,12 @@
 /* eslint-disable no-unused-vars */
 import pick from 'lodash/pick';
 
+import {
+  bodyAnimationType,
+  speechType,
+  headAnimationType,
+} from 'models/Narrator/BlockTypes';
+
 import Question from './Question';
 import Intervention from './Intervention';
 
@@ -86,3 +92,40 @@ const getMultiVariables = question =>
 
 const getGridVariables = question =>
   question.body.data[0].payload.rows.map(row => row.variable.name);
+
+export const instantiateBlockForType = (type, posFrom) => {
+  switch (type) {
+    case bodyAnimationType:
+      return {
+        type: bodyAnimationType,
+        animation: null,
+        position: {
+          posFrom,
+          posTo: posFrom,
+        },
+      };
+    case speechType:
+      return {
+        type: speechType,
+        text: [],
+        audio_urls: [],
+        sha256: [],
+        animation: 'rest',
+        position: {
+          posFrom,
+          posTo: posFrom,
+        },
+      };
+    case headAnimationType:
+      return {
+        type: headAnimationType,
+        animation: null,
+        position: {
+          posFrom,
+          posTo: posFrom,
+        },
+      };
+    default:
+      return undefined;
+  }
+};

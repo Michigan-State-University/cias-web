@@ -1,10 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 
-import {
-  bodyAnimationType,
-  speechType,
-  headAnimationType,
-} from 'models/Narrator/BlockTypes';
+import { instantiateBlockForType } from 'models/Intervention/utils';
 
 import {
   UPDATE_QUESTION_SETTINGS,
@@ -19,43 +15,6 @@ import {
   UPDATE_FORMULA_CASE,
   REMOVE_BLOCK,
 } from './constants';
-
-const instantiateBlockForType = (type, posFrom) => {
-  switch (type) {
-    case bodyAnimationType:
-      return {
-        type: bodyAnimationType,
-        animation: null,
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
-      };
-    case speechType:
-      return {
-        type: speechType,
-        text: [],
-        audio_urls: [],
-        sha256: [],
-        animation: 'rest',
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
-      };
-    case headAnimationType:
-      return {
-        type: headAnimationType,
-        animation: null,
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
-      };
-    default:
-      return undefined;
-  }
-};
 
 const getStartAnimationPoint = (
   allQuestions,
