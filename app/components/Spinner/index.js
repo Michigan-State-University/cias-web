@@ -15,11 +15,13 @@ const Spinner = props => <StyledSpinner {...props} />;
 Spinner.propTypes = {
   color: PropTypes.string,
   size: PropTypes.number,
+  width: PropTypes.number,
 };
 
 Spinner.defaultProps = {
   color: colors.white,
   size: 30,
+  width: 6,
 };
 
 export default Spinner;

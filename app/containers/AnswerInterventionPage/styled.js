@@ -1,5 +1,15 @@
-import styled from 'styled-components';
-import { elements } from 'theme';
+import styled, { css } from 'styled-components';
+
+import { Button } from 'components/Button';
+import { sizes, DESKTOP_MODE } from 'utils/previewMode';
+import { elements, colors, mediaQuery } from 'theme';
+
+export const StyledButton = styled(Button)`
+  width: ${({ isDesktop }) => (isDesktop ? '40%' : '80%')};
+  ${mediaQuery.mobile`
+    width: 80%;
+  `}
+`;
 
 export const BackButton = styled.div`
   font-weight: bold;
@@ -9,23 +19,33 @@ export const BackButton = styled.div`
 `;
 
 export const AnswerInterventionContent = styled.div`
-  max-width: ${elements.draggableContainerSize}px;
-  max-height: ${elements.draggableContainerSize}px;
-  width: 100%;
-  position: relative;
-  height: 100%;
+  align-items: flex-start;
+  border: 1px dashed ${colors.botticelli};
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  max-width: ${elements.draggableContainerSize}px;
+  min-height: ${elements.draggableContainerSize}px;
+  position: relative;
+  width: 100%;
+  height: fit-content;
+`;
+
+const getStyles = previewMode => css`
+  height: ${sizes[previewMode].height};
+  width: ${sizes[previewMode].width};
+  ${previewMode !== DESKTOP_MODE &&
+    `overflow: auto; 
+     border: 1px solid ${colors.casper}`}
 `;
 
 export const AnswerOuterContainer = styled.div`
-  display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  flex-direction: ${props => props.flexDirection || 'row'};
+  display: flex;
+  flex-direction: column;
   height: fit-content;
-  position: relative;
-  margin-top: 50px;
+  justify-content: ${props =>
+    props.interventionStarted ? 'flex-start' : 'center'};
+  padding: 0 10px;
+  width: 100%;
+  ${props => props.previewMode && getStyles(props.previewMode)}
 `;

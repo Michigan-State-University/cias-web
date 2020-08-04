@@ -7,4 +7,5 @@ export const StyledAlert = styled.div`
   border: 1px solid red;
   border-radius: 10px;
   margin: 10px 0;
+  max-width: 700px;
 `;

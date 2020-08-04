@@ -35,5 +35,6 @@ exports[`<Spinner /> Should render and match the snapshot 1`] = `
   class="c0"
   color="#FFFFFF"
   size="30"
+  width="6"
 />
 `;

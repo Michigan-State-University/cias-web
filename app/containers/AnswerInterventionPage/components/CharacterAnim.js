@@ -43,6 +43,7 @@ const CharacterAnim = ({
   questionId,
   settings,
   animationContainer,
+  previewMode,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const dispatchUpdate = newState =>
@@ -147,7 +148,7 @@ const CharacterAnim = ({
     };
     fetch();
     return stopSpeech;
-  }, [questionId]);
+  }, [questionId, previewMode]);
 
   useDidUpdateEffect(() => {
     if (state.currentData)
@@ -232,7 +233,11 @@ CharacterAnim.propTypes = {
   ),
   questionId: PropTypes.string,
   settings: PropTypes.object,
-  animationContainer: PropTypes.shape({ current: PropTypes.any }),
+  animationContainer: PropTypes.shape({
+    clientWidth: PropTypes.number,
+    clientHeight: PropTypes.number,
+  }),
+  previewMode: PropTypes.string,
 };
 
 export default CharacterAnim;

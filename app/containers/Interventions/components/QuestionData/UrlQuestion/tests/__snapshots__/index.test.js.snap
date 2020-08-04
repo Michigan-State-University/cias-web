@@ -258,6 +258,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
             className="c12"
             color="#C866EA"
             size={50}
+            width={6}
           />
         </div>
       </div>

@@ -27,3 +27,6 @@ export const RESET_INTERVENTION =
 
 export const NUMBER_VALIDATION_ERROR =
   'app/AnswerInterventionPage/NUMBER_VALIDATION_ERROR';
+
+export const CHANGE_PREVIEW_MODE =
+  'app/AnswerInterventionPage/CHANGE_PREVIEW_MODE';

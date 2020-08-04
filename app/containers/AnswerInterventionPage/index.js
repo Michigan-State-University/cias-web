@@ -25,6 +25,7 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
+import { DESKTOP_MODE } from 'utils/previewMode';
 
 import { instantiateBlockForType } from 'models/Intervention/utils';
 
@@ -32,12 +33,14 @@ import {
   BackButton,
   AnswerInterventionContent,
   AnswerOuterContainer,
+  StyledButton,
 } from './styled';
 
 import renderQuestionByType from './components';
 import CharacterAnim from './components/CharacterAnim';
 import CommonLayout from './layouts/CommonLayout';
 import makeSelectAnswerInterventionPage from './selectors';
+
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -67,6 +70,7 @@ export function AnswerInterventionPage({
     answers,
     questionIndex,
     interventionStarted,
+    previewMode,
   },
 }) {
   useInjectReducer({ key: 'answerInterventionPage', reducer });
@@ -162,15 +166,15 @@ export function AnswerInterventionPage({
     };
 
     return (
-      <Row justify="center" filled>
-        <Column mx={50} justify="center">
-          <Row width="100%" mt={5} height={30}>
-            {questionIndex !== 0 && currentQuestion && (
+      <Row justify="center">
+        <Column mx={40} justify="center">
+          {questionIndex !== 0 && currentQuestion && (
+            <Row width="100%" mt={5} height={30}>
               <BackButton onClick={handleBackClick}>
                 <FormattedMessage {...messages.previousQuestion} />
               </BackButton>
-            )}
-          </Row>
+            </Row>
+          )}
           <CommonLayout currentQuestion={currentQuestion} />
           <Row mt={10}>
             {renderQuestionByType(currentQuestion, sharedProps)}
@@ -204,44 +208,59 @@ export function AnswerInterventionPage({
         <Fragment>
           {renderQuestion()}
           <CharacterAnim
-            animationContainer={animationParentRef}
+            animationContainer={animationParentRef.current}
             blocks={currentQuestion.narrator.blocks}
             questionId={currentQuestionId}
             settings={currentQuestion.narrator.settings}
+            previewMode={previewMode}
           />
         </Fragment>
       )}
     </>
   );
 
+  const isDesktop = previewMode === DESKTOP_MODE;
+
   return (
-    <AnswerOuterContainer flexDirection="column">
+    <Box
+      display="flex"
+      align="center"
+      justify="center"
+      height="100%"
+      width="100%"
+    >
       <Helmet>
         <title>Answer Intervention</title>
         <meta name="description" content="Answer Intervention" />
       </Helmet>
-      {interventionStarted && (
-        <Box>
-          {questionError && <ErrorAlert errorText={questionError} />}
-          {answersError && <ErrorAlert errorText={answersError} />}
-          {questionLoading && <Loader />}
-          {!questionLoading && !currentQuestion && (
-            <FormattedMessage {...messages.completeIntervention} />
-          )}
-        </Box>
-      )}
-      {!index && !interventionStarted && (
-        <Button
-          mt={16}
-          onClick={onStartIntervention}
-          title={formatMessage(messages.startIntervention)}
-          width="40%"
-        />
-      )}
-      <AnswerInterventionContent ref={animationParentRef}>
-        {renderPage()}
-      </AnswerInterventionContent>
-    </AnswerOuterContainer>
+      <AnswerOuterContainer
+        previewMode={previewMode}
+        interventionStarted={interventionStarted}
+      >
+        {!index && !interventionStarted && (
+          <StyledButton
+            onClick={onStartIntervention}
+            title={formatMessage(messages.startIntervention)}
+            isDesktop={isDesktop}
+          />
+        )}
+        {interventionStarted && (
+          <Fragment>
+            <div>
+              <AnswerInterventionContent ref={animationParentRef}>
+                {renderPage()}
+              </AnswerInterventionContent>
+            </div>
+            {questionError && <ErrorAlert errorText={questionError} />}
+            {answersError && <ErrorAlert errorText={answersError} />}
+            {questionLoading && <Loader />}
+            {!currentQuestion && (
+              <FormattedMessage {...messages.completeIntervention} />
+            )}
+          </Fragment>
+        )}
+      </AnswerOuterContainer>
+    </Box>
   );
 }
 

@@ -4,18 +4,18 @@ import { moveAnimations as moveAnimationsNames } from 'utils/animations/animatio
 import isEqual from 'lodash/isEqual';
 import { animationDuration } from '../components/styled';
 
+const defaultCurrent = {
+  clientWidth: elements.draggableContainerSize,
+  clientHeight: elements.draggableContainerSize,
+};
+
 const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
   const [scaleFactor, setScaleFactor] = useState({ x: 1, y: 1 });
 
   const loadedMoveAnimations = useRef([]);
 
   const getScaledPosition = (scale, position) => {
-    const {
-      current: { clientWidth, clientHeight } = {
-        clientWidth: elements.draggableContainerSize,
-        clientHeight: elements.draggableContainerSize,
-      },
-    } = animationContainer || {};
+    const { clientWidth, clientHeight } = animationContainer || defaultCurrent;
 
     return {
       x: Math.min(position.x * scale.x, clientWidth - 100),
@@ -24,12 +24,7 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
   };
 
   const getScaleFactor = () => {
-    const {
-      current: { clientWidth, clientHeight } = {
-        clientWidth: elements.draggableContainerSize,
-        clientHeight: elements.draggableContainerSize,
-      },
-    } = animationContainer || {};
+    const { clientWidth, clientHeight } = animationContainer || defaultCurrent;
     const scaleX = Math.min(1, clientWidth / elements.draggableContainerSize);
     const scaleY = Math.min(1, clientHeight / elements.draggableContainerSize);
     return { x: scaleX, y: scaleY };

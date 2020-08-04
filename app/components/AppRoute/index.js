@@ -32,9 +32,7 @@ class AppRoute extends Route {
           <div
             style={{
               marginTop: 70,
-              height: `calc(100vh - ${elements.navbarHeight}px)`,
-              paddingTop: 10,
-              overflow: 'scroll',
+              height: `calc(100% - ${elements.navbarHeight}px)`,
             }}
           >
             {super.render()}

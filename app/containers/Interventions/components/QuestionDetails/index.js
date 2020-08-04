@@ -17,7 +17,7 @@ import { makeSelectDraggable } from 'containers/Interventions/components/Questio
 import QuestionPreview from 'containers/Interventions/components/QuestionDetails/QuestionPreview';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
-import { AnswerOuterContainer, AnswerOuterContent } from './styled';
+import { AnswerOuterContainer, AnswerInterventionContent } from './styled';
 import messages from './messages';
 
 import QuestionData from '../QuestionData';
@@ -59,76 +59,78 @@ const renderQuestionDetails = ({ selectedQuestion, draggable }) => {
 
     return (
       <AnswerOuterContainer>
-        <AnswerOuterContent>
-          {animation && <QuestionNarrator questionId={id} />}
-          <Row justify="center" filled>
-            <Column mx={50} justify="center">
-              <Row width="100%" mt={5} height={30} />
-              {!draggable && (
-                <>
-                  {title && (
-                    <Row width="100%">
-                      <QuestionTitle />
-                    </Row>
-                  )}
-                  {subtitle && (
-                    <Row mt={10}>
-                      <QuestionSubtitle />
-                    </Row>
-                  )}
-                  {video && (
-                    <Row mt={10}>
-                      <QuestionVideo />
-                    </Row>
-                  )}
-                  {image && (
-                    <Row mt={10}>
-                      <QuestionImage />
-                    </Row>
-                  )}
-                </>
-              )}
-              {draggable && (
-                <>
-                  {title && questionTitle && (
-                    <QuestionPreview
-                      padding={26}
-                      dangerouslySetInnerHTML={{ __html: questionTitle }}
-                    />
-                  )}
-                  {subtitle && questionSubtitle && (
-                    <QuestionPreview
-                      mt={10}
-                      padding={26}
-                      dangerouslySetInnerHTML={{ __html: questionSubtitle }}
-                    />
-                  )}
-                  {video && !isNullOrUndefined(videoUrl) && (
-                    <Row mt={10}>
-                      <QuestionVideo />
-                    </Row>
-                  )}
-                  {image && !isNullOrUndefined(imageUrl) && (
-                    <Row mt={10}>
-                      <QuestionImage />
-                    </Row>
-                  )}
-                </>
-              )}
+        <div>
+          <AnswerInterventionContent>
+            {animation && <QuestionNarrator questionId={id} />}
+            <Row justify="center" filled>
+              <Column mx={50} justify="center">
+                <Row width="100%" mt={5} height={30} />
+                {!draggable && (
+                  <>
+                    {title && (
+                      <Row width="100%">
+                        <QuestionTitle />
+                      </Row>
+                    )}
+                    {subtitle && (
+                      <Row mt={10}>
+                        <QuestionSubtitle />
+                      </Row>
+                    )}
+                    {video && (
+                      <Row mt={10}>
+                        <QuestionVideo />
+                      </Row>
+                    )}
+                    {image && (
+                      <Row mt={10}>
+                        <QuestionImage />
+                      </Row>
+                    )}
+                  </>
+                )}
+                {draggable && (
+                  <>
+                    {title && questionTitle && (
+                      <QuestionPreview
+                        padding={26}
+                        dangerouslySetInnerHTML={{ __html: questionTitle }}
+                      />
+                    )}
+                    {subtitle && questionSubtitle && (
+                      <QuestionPreview
+                        mt={10}
+                        padding={26}
+                        dangerouslySetInnerHTML={{ __html: questionSubtitle }}
+                      />
+                    )}
+                    {video && !isNullOrUndefined(videoUrl) && (
+                      <Row mt={10}>
+                        <QuestionVideo />
+                      </Row>
+                    )}
+                    {image && !isNullOrUndefined(imageUrl) && (
+                      <Row mt={10}>
+                        <QuestionImage />
+                      </Row>
+                    )}
+                  </>
+                )}
 
-              <Row>
-                <QuestionData />
-              </Row>
-              {(isNullOrUndefined(proceedButton) || proceedButton) && (
-                <Box my={20}>
-                  <Button my={20} width="180px">
-                    <FormattedMessage {...messages.nextQuestion} />
-                  </Button>
-                </Box>
-              )}
-            </Column>
-          </Row>
-        </AnswerOuterContent>
+                <Row>
+                  <QuestionData />
+                </Row>
+                {(isNullOrUndefined(proceedButton) || proceedButton) && (
+                  <Box my={20}>
+                    <Button my={20} width="180px">
+                      <FormattedMessage {...messages.nextQuestion} />
+                    </Button>
+                  </Box>
+                )}
+              </Column>
+            </Row>
+          </AnswerInterventionContent>
+        </div>
       </AnswerOuterContainer>
     );
   }

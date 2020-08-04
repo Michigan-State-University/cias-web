@@ -28,5 +28,15 @@ const makeSelectAnswers = () =>
     substate => substate.answers,
   );
 
+const makeSelectPreviewMode = () =>
+  createSelector(
+    selectAnswerInterventionPageDomain,
+    substate => substate.previewMode,
+  );
+
 export default makeSelectAnswerInterventionPage;
-export { selectAnswerInterventionPageDomain, makeSelectAnswers };
+export {
+  selectAnswerInterventionPageDomain,
+  makeSelectAnswers,
+  makeSelectPreviewMode,
+};

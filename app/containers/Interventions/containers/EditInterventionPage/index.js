@@ -100,9 +100,9 @@ function EditInterventionPage({
     });
   };
 
+  const loading = questionListLoading || getInterventionLoader;
   const renderList = () => {
-    if (questionListLoading)
-      return <Loader hidden={!questionListLoading} type="inline" />;
+    if (loading) return <Loader type="inline" width={4} />;
 
     return (
       <Reorder reorderId="question-list" onReorder={handleReorder}>
@@ -123,7 +123,6 @@ function EditInterventionPage({
 
   return (
     <Fragment>
-      <Loader hidden={!getInterventionLoader} />
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
@@ -172,10 +171,13 @@ function EditInterventionPage({
           </Box>
         </Column>
         <Column sm={8} id="quill_boundaries">
-          <Row overflow="hidden" filled>
-            <QuestionDetails />
-            <QuestionSettings />
-          </Row>
+          <Loader hidden={!loading} type="inline" size={100} />
+          {!loading && (
+            <Row overflow="hidden" filled>
+              <QuestionDetails />
+              <QuestionSettings />
+            </Row>
+          )}
         </Column>
       </Row>
     </Fragment>

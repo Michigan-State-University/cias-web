@@ -10,6 +10,7 @@ exports[`<HomePage /> should render and match the snapshot 1`] = `
     class="styled__StyledSpinner-d123q3-0 dOefMO"
     color="#C866EA"
     size="100"
+    width="6"
   />
 </div>
 `;

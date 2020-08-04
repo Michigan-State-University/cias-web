@@ -22,30 +22,30 @@ const CommonLayout = ({ currentQuestion }) => {
   } = currentQuestion;
   return (
     <Box>
-      <Row>
-        {settingsTitle && title && (
+      {settingsTitle && title && (
+        <Row>
           <Box padding={26} dangerouslySetInnerHTML={{ __html: title }} />
-        )}
-      </Row>
-      <Row mt={10}>
-        {settingsSubtitle && subtitle && (
+        </Row>
+      )}
+      {settingsSubtitle && subtitle && (
+        <Row mt={10}>
           <Box padding={26} dangerouslySetInnerHTML={{ __html: subtitle }} />
-        )}
-      </Row>
-      <Row mt={10}>
-        {settingsVideo && videoUrl && (
+        </Row>
+      )}
+      {settingsVideo && videoUrl && (
+        <Row mt={10}>
           <PlayerWrapper>
             <Player url={videoUrl} controls width="100%" height="100%" />
           </PlayerWrapper>
-        )}
-      </Row>
-      <Row mt={10} justify="center" align="center" width="100%">
-        {settingsImage && imageUrl && (
+        </Row>
+      )}
+      {settingsImage && imageUrl && (
+        <Row mt={10} justify="center" align="center" width="100%">
           <ImageWrapper>
             <Img src={imageUrl} alt="image" maxHeight="50vh" maxWidth="100%" />
           </ImageWrapper>
-        )}
-      </Row>
+        </Row>
+      )}
     </Box>
   );
 };

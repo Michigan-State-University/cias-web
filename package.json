@@ -95,6 +95,7 @@
     "react-dropzone": "11.0.1",
     "react-grid-system": "7.0.3",
     "react-helmet": "6.0.0-beta",
+    "react-inlinesvg": "2.0.1",
     "react-intl": "2.8.0",
     "react-lottie": "1.2.3",
     "react-player": "2.3.1",
