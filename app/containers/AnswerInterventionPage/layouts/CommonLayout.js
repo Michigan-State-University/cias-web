@@ -39,10 +39,10 @@ const CommonLayout = ({ currentQuestion }) => {
           </PlayerWrapper>
         )}
       </Row>
-      <Row mt={10}>
+      <Row mt={10} justify="center" align="center" width="100%">
         {settingsImage && imageUrl && (
           <ImageWrapper>
-            <Img src={imageUrl} alt="image" height="100%" width="100%" />
+            <Img src={imageUrl} alt="image" maxHeight="50vh" maxWidth="100%" />
           </ImageWrapper>
         )}
       </Row>

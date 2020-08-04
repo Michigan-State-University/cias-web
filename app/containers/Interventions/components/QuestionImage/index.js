@@ -101,7 +101,7 @@ export const QuestionImage = ({
     );
 
   return (
-    <Box mt={10}>
+    <Box mt={10} width="100%">
       {draggable && (
         <ImageWrapper>
           <Img src={imageUrl} alt="image" height="100%" width="100%" />
@@ -116,9 +116,14 @@ export const QuestionImage = ({
           px={21}
           py={14}
         >
-          <Row justify="between" align="center" width="100%">
+          <Row justify="center" align="center" width="100%">
             <ImageWrapper>
-              <Img src={imageUrl} alt="image" height="100%" width="100%" />
+              <Img
+                src={imageUrl}
+                alt="image"
+                maxHeight="50vh"
+                maxWidth="100%"
+              />
             </ImageWrapper>
             <Box
               onClick={handleRemove}

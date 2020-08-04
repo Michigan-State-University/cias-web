@@ -18,7 +18,6 @@ export const Player = styled(ReactPlayer)`
 `;
 
 export const ImageWrapper = styled.div`
-  width: 100%;
   height: 100%;
   max-width: 100%;
 `;
