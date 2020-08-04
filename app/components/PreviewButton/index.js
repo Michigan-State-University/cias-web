@@ -38,7 +38,7 @@ const PreviewButton = ({ to, target, previewDisabled, text, handleClick }) => (
 );
 
 PreviewButton.propTypes = {
-  target: PropTypes.func,
+  target: PropTypes.string,
   to: PropTypes.string,
   previewDisabled: PropTypes.bool,
   text: PropTypes.string,
