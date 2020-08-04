@@ -51,10 +51,6 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
   margin-bottom: 15px !important;
 }
 
-.c4 .ql-bubble {
-  z-index: 1000;
-}
-
 .c4 .ql-toolbar {
   width: -webkit-max-content;
   width: -moz-max-content;

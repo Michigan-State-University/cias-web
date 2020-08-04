@@ -13,6 +13,9 @@ export const QuillStyled = styled(ReactQuill)`
           border: `1px solid ${colors.jungleGreen}`,
           borderRadius: `10px`,
           marginRight: `9px`,
+          '.ql-bubble': {
+            zIndex: 1000,
+          },
         }
       : { border: '0px solid transparent', marginRight: `0px` }}
   .ql-editor {
@@ -21,9 +24,6 @@ export const QuillStyled = styled(ReactQuill)`
   }
   .ql-picker-label svg {
     margin-bottom: 15px !important;
-  }
-  .ql-bubble {
-    z-index: 1000;
   }
   .ql-toolbar {
     width: max-content;
