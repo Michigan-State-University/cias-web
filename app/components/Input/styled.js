@@ -12,15 +12,17 @@ export const QuillStyled = styled(ReactQuill)`
       ? {
           border: `1px solid ${colors.jungleGreen}`,
           borderRadius: `10px`,
-          marginRight: `9px`,
           '.ql-bubble': {
             zIndex: 1000,
           },
         }
-      : { border: '0px solid transparent', marginRight: `0px` }}
+      : { border: '1px solid transparent' }}
   .ql-editor {
     font-weight: 400;
     padding: 10px;
+  }
+  .ql-editor.ql-blank::before {
+    left: 11px;
   }
   .ql-picker-label svg {
     margin-bottom: 15px !important;

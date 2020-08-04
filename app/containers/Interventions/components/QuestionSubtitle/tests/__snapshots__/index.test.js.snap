@@ -38,13 +38,16 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
   min-height: -webkit-max-content;
   min-height: -moz-max-content;
   min-height: max-content;
-  border: 0px solid transparent;
-  margin-right: 0px;
+  border: 1px solid transparent;
 }
 
 .c4 .ql-editor {
   font-weight: 400;
   padding: 10px;
+}
+
+.c4 .ql-editor.ql-blank::before {
+  left: 11px;
 }
 
 .c4 .ql-picker-label svg {
