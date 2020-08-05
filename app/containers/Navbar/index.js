@@ -18,6 +18,7 @@ import Img from 'components/Img';
 
 import { outsideClickHandler } from 'utils/outsideClickHandler';
 import { makeSelectUser } from 'global/reducers/auth';
+import LogoNavbar from 'containers/Navbar/components/LogoNavbar';
 import InterventionsNavbar from './components/InterventionsNavbar';
 
 import {
@@ -37,6 +38,7 @@ const renderNavbar = navbarProps => {
   if (navbarId === 'interventions') return <InterventionsNavbar />;
   if (navbarId === 'preview') return <PreviewNavbar {...restProps} />;
   if (navbarId === 'default') return <DefaultNavbar {...restProps} />;
+  if (navbarId === 'logo') return <LogoNavbar {...restProps} />;
   return null;
 };
 

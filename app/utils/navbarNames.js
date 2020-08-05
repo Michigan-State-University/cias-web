@@ -12,11 +12,16 @@ const navbarMessages = defineMessages({
     id: `${scope}.userList`,
     defaultMessage: 'User list',
   },
+  logo: {
+    id: `${scope}.logo`,
+    defaultMessage: 'CIAS',
+  },
 });
 
 const navbarNames = {
   preview: <FormattedMessage {...navbarMessages.preview} />,
   userList: <FormattedMessage {...navbarMessages.userList} />,
+  logo: <FormattedMessage {...navbarMessages.logo} />,
 };
 
 export default navbarNames;

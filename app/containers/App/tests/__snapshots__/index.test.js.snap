@@ -12,6 +12,16 @@ exports[`<App /> should render and match the snapshot 1`] = `
         ]
       }
       exact={true}
+      navbarProps={
+        Object {
+          "navbarId": "logo",
+          "navbarName": <FormattedMessage
+            defaultMessage="CIAS"
+            id="app.navbarNames.logo"
+            values={Object {}}
+          />,
+        }
+      }
       path="/"
       protectedRoute={true}
       render={[Function]}

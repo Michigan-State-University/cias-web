@@ -62,6 +62,10 @@ export function App({ user }) {
           render={() => renderDashboardByRole()}
           protectedRoute
           allowedRoles={ROLES.allRoles}
+          navbarProps={{
+            navbarId: 'logo',
+            navbarName: navbarNames.logo,
+          }}
         />
         <AppRoute exact path="/login" component={LoginPage} />
         <AppRoute exact path="/register" component={RegisterPage} />
