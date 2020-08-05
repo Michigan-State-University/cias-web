@@ -110,11 +110,17 @@ const useAudioHelper = (
       audio.current.onEnded(onSpeechEnded);
       audio.current.onError(onSpeechEnded);
 
-      audio.current.setSrc(
-        `${process.env.API_URL}${
-          currentData.audio_urls[currentData.currentAudioIndex]
-        }`,
-      );
+      if (
+        !currentData.audio_urls.length ||
+        !currentData.audio_urls[currentData.currentAudioIndex]
+      )
+        onSpeechEnded();
+      else
+        audio.current.setSrc(
+          `${process.env.API_URL}${
+            currentData.audio_urls[currentData.currentAudioIndex]
+          }`,
+        );
     } else if (currentData.currentAnimation === 'end') {
       const { anim } = animationCurrent;
 
