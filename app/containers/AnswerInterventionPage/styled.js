@@ -28,13 +28,14 @@ export const AnswerInterventionContent = styled.div`
   position: relative;
   width: 100%;
   height: fit-content;
+  margin-top: 15px;
 `;
 
 const getStyles = previewMode => css`
   height: ${sizes[previewMode].height};
   width: ${sizes[previewMode].width};
   ${previewMode !== DESKTOP_MODE &&
-    `overflow: auto; 
+    `overflow: auto;
      border: 1px solid ${colors.casper}`}
 `;
 

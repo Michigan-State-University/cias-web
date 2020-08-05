@@ -204,18 +204,16 @@ export function AnswerInterventionPage({
 
   const renderPage = () => (
     <>
-      {currentQuestion && interventionStarted && (
-        <Fragment>
-          {renderQuestion()}
-          <CharacterAnim
-            animationContainer={animationParentRef.current}
-            blocks={currentQuestion.narrator.blocks}
-            questionId={currentQuestionId}
-            settings={currentQuestion.narrator.settings}
-            previewMode={previewMode}
-          />
-        </Fragment>
-      )}
+      <Fragment>
+        {renderQuestion()}
+        <CharacterAnim
+          animationContainer={animationParentRef.current}
+          blocks={currentQuestion.narrator.blocks}
+          questionId={currentQuestionId}
+          settings={currentQuestion.narrator.settings}
+          previewMode={previewMode}
+        />
+      </Fragment>
     </>
   );
 
@@ -247,15 +245,19 @@ export function AnswerInterventionPage({
         {interventionStarted && (
           <Fragment>
             <div>
-              <AnswerInterventionContent ref={animationParentRef}>
-                {renderPage()}
-              </AnswerInterventionContent>
+              {!questionLoading && currentQuestion && (
+                <AnswerInterventionContent ref={animationParentRef}>
+                  {renderPage()}
+                </AnswerInterventionContent>
+              )}
             </div>
             {questionError && <ErrorAlert errorText={questionError} />}
             {answersError && <ErrorAlert errorText={answersError} />}
             {questionLoading && <Loader />}
-            {!currentQuestion && (
-              <FormattedMessage {...messages.completeIntervention} />
+            {!questionLoading && !currentQuestion && (
+              <Box mt={50}>
+                <FormattedMessage {...messages.completeIntervention} />
+              </Box>
             )}
           </Fragment>
         )}
