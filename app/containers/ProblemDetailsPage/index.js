@@ -4,19 +4,18 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Container } from 'react-grid-system';
-import { Link } from 'react-router-dom';
 
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-import { StyledInput } from 'components/Input/StyledInput';
 
+import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
@@ -31,11 +30,12 @@ import {
   editProblemSaga,
   editProblemRequest,
 } from 'global/reducers/problem';
-
 import {
   createInterventionSaga,
   createInterventionRequest,
 } from 'global/reducers/intervention';
+import InterventionListItem from './components/InterventionListItem';
+import InterventionCreateButton from './components/InterventionCreateButton';
 
 import messages from './messages';
 
@@ -49,7 +49,6 @@ export function ProblemDetailsPage({
   },
   problemState: { problem, fetchProblemLoading, fetchProblemError },
 }) {
-  const { interventions, name } = problem || {};
   useInjectSaga({ key: 'createIntervention', saga: createInterventionSaga });
   useInjectReducer({
     key: 'problem',
@@ -58,17 +57,33 @@ export function ProblemDetailsPage({
   useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
   useInjectSaga({ key: 'editProblem', saga: editProblemSaga });
 
-  useEffect(() => {
+  const { interventions, name } = problem || {};
+
+  useLayoutEffect(() => {
     fetchProblem(problemId);
   }, []);
 
-  if (fetchProblemLoading || problem === null) return <Loader />;
+  const renderList = () => (
+    <>
+      {interventions &&
+        interventions.map((intervention, index) => (
+          <InterventionListItem
+            key={intervention.id}
+            intervention={intervention}
+            index={index}
+          />
+        ))}
+    </>
+  );
+
   if (fetchProblemError)
     return (
       <Container>
         <ErrorAlert errorText={fetchProblemError} />
       </Container>
     );
+
+  if (fetchProblemLoading) return <Loader />;
 
   return (
     <Box height="100%" width="100%" padding="60px 160px">
@@ -90,18 +105,14 @@ export function ProblemDetailsPage({
           maxWidth="none"
         />
       </Row>
-      <button onClick={() => createIntervention(problemId)} type="button">
-        Create intervention
-      </button>
-      {interventions.map(el => (
-        <Column mt={20}>
-          <Link to={`/interventions/${problemId}/sessions/${el.id}/edit`}>
-            <Box border="1px solid black" padding={20}>
-              {el.name}
-            </Box>
-          </Link>
-        </Column>
-      ))}
+      <Column sm={6}>
+        {renderList()}
+        <Row my={18} align="center">
+          <InterventionCreateButton
+            handleClick={() => createIntervention(problemId)}
+          />
+        </Row>
+      </Column>
     </Box>
   );
 }

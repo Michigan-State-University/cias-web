@@ -1,0 +1,197 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 8.333333333333332%;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 83.33333333333334%;
+  margin-right: 18px;
+  margin-left: 18px;
+}
+
+.c6 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 0;
+  border-radius: 0;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 8px;
+  margin-left: 8px;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+  background-color: #FFFFFF;
+  margin-top: 18px;
+  box-shadow: 0px 4px 20px #e3eefb;
+}
+
+.c0:hover {
+  background-color: #E9F1FB;
+}
+
+.c3 {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #107969;
+  color: white;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: 0 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.c5 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: black;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  >
+    <div
+      className="c2"
+    >
+      <div
+        className="c3"
+      >
+        1
+      </div>
+    </div>
+    <div
+      className="c4"
+    >
+      <a
+        className="c5"
+        href="/interventions/1/sessions/1/edit"
+        onClick={[Function]}
+      >
+        <h2
+          className="c6"
+        >
+          Intervention
+        </h2>
+      </a>
+    </div>
+    <div
+      className="c2"
+    >
+      <div
+        className="c7"
+        display="flex"
+        height="100%"
+        width="100%"
+      >
+        <div
+          className="c8"
+          onClick={[Function]}
+        >
+          <img
+            alt="dots"
+            className="c9"
+            src="IMAGE_MOCK"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
