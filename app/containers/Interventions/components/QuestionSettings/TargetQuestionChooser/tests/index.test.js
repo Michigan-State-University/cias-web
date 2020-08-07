@@ -7,7 +7,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { createStore } from 'redux';
 
 import { interventionReducer } from 'global/reducers/intervention';
-import { interventionListReducer } from 'global/reducers/interventionList';
+import { problemReducer } from 'global/reducers/problem';
 
 import TargetQuestionChooser from '../index';
 import editInterventionPageReducer from '../../../../containers/EditInterventionPage/reducer';
@@ -36,9 +36,11 @@ describe('<TargetQuestionChooser />', () => {
         id: 'asd12ca-daiud12',
       },
     },
-    interventionList: {
-      interventions: [],
-      fetchInterventionLoading: false,
+    problem: {
+      problem: { interventions: [] },
+      loaders: {
+        fetchProblemLoading: false,
+      },
     },
     editInterventionPage: {
       questions: [mockSingleQuestion(1, true)],
@@ -97,9 +99,11 @@ describe('<TargetQuestionChooser />', () => {
           id: 'asd12ca-daiud12',
         },
       },
-      interventionList: {
-        interventions: [],
-        fetchInterventionLoading: false,
+      problem: {
+        problem: { interventions: [] },
+        loaders: {
+          fetchProblemLoading: false,
+        },
       },
       editInterventionPage: {
         questions: [
@@ -143,13 +147,18 @@ describe('<TargetQuestionChooser />', () => {
           id: 'asd12ca-daiud12',
         },
       },
-      interventionList: {
-        interventions: [
-          mockIntervention(1),
-          mockIntervention(2),
-          mockIntervention(3),
-        ],
-        fetchInterventionLoading: false,
+
+      problem: {
+        problem: {
+          interventions: [
+            mockIntervention(1),
+            mockIntervention(2),
+            mockIntervention(3),
+          ],
+        },
+        loaders: {
+          fetchProblemLoading: false,
+        },
       },
       editInterventionPage: {
         questions: [
@@ -164,7 +173,7 @@ describe('<TargetQuestionChooser />', () => {
     store.injectedReducers = {
       intervention: interventionReducer,
       editInterventionPage: editInterventionPageReducer,
-      interventionList: interventionListReducer,
+      problem: problemReducer,
     };
     store.injectedSagas = {};
 
@@ -205,7 +214,7 @@ describe('<TargetQuestionChooser />', () => {
     expect(interventionComponentList).toHaveLength(3);
   });
 
-  it('should render spinner on intervention view when loading a list', () => {
+  it.only('should render spinner on intervention view when loading a list', () => {
     const question = mockSingleQuestion(2, true);
 
     store = createStore(reducer, {
@@ -215,9 +224,11 @@ describe('<TargetQuestionChooser />', () => {
           id: 'asd12ca-daiud12',
         },
       },
-      interventionList: {
-        interventions: null,
-        fetchInterventionLoading: true,
+      problem: {
+        problem: { interventions: [] },
+        loaders: {
+          fetchProblemLoading: true,
+        },
       },
       editInterventionPage: {
         questions: [

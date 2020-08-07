@@ -14,12 +14,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       exact={true}
       navbarProps={
         Object {
-          "navbarId": "logo",
-          "navbarName": <FormattedMessage
-            defaultMessage="CIAS"
-            id="app.navbarNames.logo"
-            values={Object {}}
-          />,
+          "navbarId": "default",
         }
       }
       path="/"
@@ -55,7 +50,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
           "navbarId": "interventions",
         }
       }
-      path="/interventions/:id/edit"
+      path="/interventions/:problemId/sessions/:interventionId/edit"
       protectedRoute={true}
     />
     <Memo(ConnectFunction)
@@ -68,7 +63,12 @@ exports[`<App /> should render and match the snapshot 1`] = `
       }
       component={[Function]}
       exact={true}
-      path="/interventions/:id/fill"
+      navbarProps={
+        Object {
+          "navbarId": "default",
+        }
+      }
+      path="/interventions/:problemId/sessions/:interventionId/fill"
       protectedRoute={true}
       user={true}
     />
@@ -86,7 +86,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
           "navbarId": "interventions",
         }
       }
-      path="/interventions/:id/settings"
+      path="/interventions/:problemId/sessions/:interventionId/settings"
       protectedRoute={true}
     />
     <Memo(ConnectFunction)
@@ -129,7 +129,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
           />,
         }
       }
-      path="/interventions/:id/preview"
+      path="/interventions/:problemId/sessions/:interventionId/preview"
       protectedRoute={true}
     />
     <Memo(ConnectFunction)
@@ -150,7 +150,24 @@ exports[`<App /> should render and match the snapshot 1`] = `
           />,
         }
       }
-      path="/interventions/:id/preview/:index"
+      path="/interventions/:problemId/sessions/:interventionId/preview/:index"
+      protectedRoute={true}
+    />
+    <Memo(ConnectFunction)
+      allowedRoles={
+        Array [
+          "admin",
+          "researcher",
+        ]
+      }
+      component={[Function]}
+      exact={true}
+      navbarProps={
+        Object {
+          "navbarId": "default",
+        }
+      }
+      path="/interventions/:problemId"
       protectedRoute={true}
     />
     <Memo(ConnectFunction)

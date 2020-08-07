@@ -1,0 +1,11 @@
+export const FETCH_PROBLEM_REQUEST = 'app/Dashboard/FETCH_PROBLEM_REQUEST';
+export const FETCH_PROBLEM_SUCCESS = 'app/Dashboard/FETCH_PROBLEM_SUCCESS';
+export const FETCH_PROBLEM_ERROR = 'app/Dashboard/FETCH_PROBLEM_ERROR';
+
+export const CREATE_PROBLEM_REQUEST = 'app/Dashboard/CREATE_PROBLEM_REQUEST';
+export const CREATE_PROBLEM_SUCCESS = 'app/Dashboard/CREATE_PROBLEM_SUCCESS';
+export const CREATE_PROBLEM_ERROR = 'app/Dashboard/CREATE_PROBLEM_ERROR';
+
+export const EDIT_PROBLEM_REQUEST = 'app/Dashboard/EDIT_PROBLEM_REQUEST';
+export const EDIT_PROBLEM_SUCCESS = 'app/Dashboard/EDIT_PROBLEM_SUCCESS';
+export const EDIT_PROBLEM_ERROR = 'app/Dashboard/EDIT_PROBLEM_ERROR';

@@ -66,8 +66,8 @@ function EditInterventionPage({
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
 
   useEffect(() => {
-    getIntervention(params.id);
-    getQuestions(params.id);
+    getIntervention(params.interventionId);
+    getQuestions(params.interventionId);
   }, []);
 
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
@@ -78,7 +78,7 @@ function EditInterventionPage({
         formatMessage(messages.newQuestionMessage),
         type,
       ),
-      params.id,
+      params.interventionId,
     );
     toggleTypeChooser();
   };
@@ -96,7 +96,7 @@ function EditInterventionPage({
 
     reorderQuestions({
       reorderedList: orderdedNewList,
-      interventionId: params.id,
+      interventionId: params.interventionId,
     });
   };
 
@@ -113,7 +113,7 @@ function EditInterventionPage({
               selectedQuestionIndex={selectedQuestion}
               questionsLength={questions.length}
               question={question}
-              interventionId={params.id}
+              interventionId={params.interventionId}
             />
           </Row>
         ))}

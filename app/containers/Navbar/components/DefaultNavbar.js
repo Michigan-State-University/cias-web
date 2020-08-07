@@ -2,11 +2,13 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import Text from 'components/Text';
-import CloseIcon from 'components/CloseIcon';
+import Img from 'components/Img';
+import logo from 'assets/svg/logo.svg';
+import navbarNames from 'utils/navbarNames';
 
 const DefaultNavbar = ({ navbarName }) => (
   <Fragment>
-    <CloseIcon to="/" />
+    <Img alt="logo" src={logo} height={51} width={56} mr={15} />
     <Text color="black" fontSize={23}>
       {navbarName}
     </Text>
@@ -14,7 +16,11 @@ const DefaultNavbar = ({ navbarName }) => (
 );
 
 DefaultNavbar.propTypes = {
-  navbarName: PropTypes.object,
+  navbarName: PropTypes.node,
+};
+
+DefaultNavbar.defaultProps = {
+  navbarName: navbarNames.logo,
 };
 
 export default DefaultNavbar;

@@ -6,19 +6,22 @@ import { CREATE_INTERVENTION_REQUEST } from '../constants';
 
 import { createInterventionSuccess, createInterventionError } from '../actions';
 
-function* createIntervention() {
+function* createIntervention({ payload: { id } }) {
   const requestURL = `v1/interventions`;
 
   try {
-    const response = yield axios.post(requestURL, {
+    const {
+      data: { data },
+    } = yield axios.post(requestURL, {
       intervention: {
         type: 'Intervention::Single',
         name: 'e-Intervention New',
+        problem_id: id,
       },
     });
 
     yield put(createInterventionSuccess());
-    yield put(push(`/interventions/${response.data.data.id}/edit`));
+    yield put(push(`/interventions/${id}/sessions/${data.id}/edit`));
   } catch (error) {
     yield put(createInterventionError(error));
   }

@@ -3,39 +3,7 @@
 exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-}
-
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  margin-bottom: 20px;
-}
-
-.c0 {
+  "baseElement": .c0 {
   width: auto;
   height: auto;
   display: block;
@@ -80,23 +48,15 @@ Object {
   max-width: 250px;
 }
 
-.c4 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 15px;
-  font-weight: 700;
-  color: rgba(154,161,182,1);
-}
-
-.c13 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: rgba(154,161,182,1);
-  white-space: pre;
-  text-overflow: ellipsis;
-  overflow: hidden;
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
 }
 
 .c10 {
@@ -123,6 +83,46 @@ Object {
   width: auto;
   height: auto;
   margin-right: 10px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  margin-bottom: 20px;
+}
+
+.c4 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(154,161,182,1);
+}
+
+.c13 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(154,161,182,1);
+  white-space: pre;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 <body>

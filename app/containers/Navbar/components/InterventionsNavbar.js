@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { compose } from 'redux';
 
@@ -43,14 +42,17 @@ const getActiveTab = (path, formatMessage) => {
 };
 
 const InterventionNavbar = ({
-  intervention: { name, id },
+  intervention: { name },
   updateInterventionName,
   intl: { formatMessage },
   location: { pathname },
   questionsLength,
   selectedQuestion,
   interventionEditing,
+  match: { params },
 }) => {
+  const { problemId, interventionId } = params;
+
   useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
   const [tabActive, setTabActive] = useState(
     getActiveTab(pathname, formatMessage),
@@ -64,7 +66,7 @@ const InterventionNavbar = ({
   return (
     <Row align="center" justify="between" width="100%" mr={35}>
       <Row align="center">
-        <CloseIcon to="/" />
+        <CloseIcon to={`/interventions/${problemId}`} />
         <SaveInfoContainer>
           {interventionEditing && (
             <SavingContainer>
@@ -103,14 +105,18 @@ const InterventionNavbar = ({
       >
         <div
           renderAsLink={
-            <StyledLink to={`/interventions/${id}/edit`}>
+            <StyledLink
+              to={`/interventions/${problemId}/sessions/${interventionId}/edit`}
+            >
               {formatMessage(messages.content)}
             </StyledLink>
           }
         />
         <div
           renderAsLink={
-            <StyledLink to={`/interventions/${id}/settings`}>
+            <StyledLink
+              to={`/interventions/${problemId}/sessions/${interventionId}/settings`}
+            >
               {formatMessage(messages.settings)}
             </StyledLink>
           }
@@ -122,7 +128,7 @@ const InterventionNavbar = ({
         />
       </Tabs>
       <PreviewButton
-        to={`/interventions/${id}/preview/${selectedQuestion}`}
+        to={`/interventions/${problemId}/sessions/${interventionId}/preview/${selectedQuestion}`}
         previewDisabled={previewDisabled}
         text={formatMessage(messages.previewCurrent)}
         target="_blank"
@@ -142,6 +148,7 @@ InterventionNavbar.propTypes = {
   questionsLength: PropTypes.number,
   selectedQuestion: PropTypes.number,
   interventionEditing: PropTypes.bool,
+  match: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -158,7 +165,6 @@ const mapDispatchToProps = {
 export const InterventionNavbarWithIntl = injectIntl(InterventionNavbar);
 
 export default compose(
-  withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps,

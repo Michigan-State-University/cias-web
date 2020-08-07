@@ -17,6 +17,8 @@ class AppRoute extends Route {
       allowedRoles,
       user,
       navbarProps,
+      computedMatch,
+      location,
     } = this.props;
 
     if (!protectedRoute) {
@@ -28,7 +30,11 @@ class AppRoute extends Route {
     if (isLoggedIn && allowedRoles.includes(user.roles[0])) {
       return (
         <>
-          <Navbar navbarProps={navbarProps} />
+          <Navbar
+            navbarProps={navbarProps}
+            match={computedMatch}
+            location={location}
+          />
           <div
             style={{
               marginTop: 70,

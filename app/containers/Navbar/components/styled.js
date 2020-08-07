@@ -29,8 +29,3 @@ export const CheckBackground = styled.div`
   flex-direction: column;
   margin: 0 5px;
 `;
-
-export const Logo = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-`;

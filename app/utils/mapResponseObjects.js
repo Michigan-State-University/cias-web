@@ -7,12 +7,7 @@ export const mapQuestionToStateObject = question => ({
   },
 });
 
-export const mapInterventionToStateObject = intervention => ({
-  ...intervention.attributes,
-  id: intervention.id,
-});
-
-export const mapUserToStateObject = user => ({
-  ...user.attributes,
-  id: user.id,
+export const defaultMapper = object => ({
+  ...object.attributes,
+  id: object.id,
 });

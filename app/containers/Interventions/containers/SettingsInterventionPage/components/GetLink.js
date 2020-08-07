@@ -17,7 +17,7 @@ import { HiddenInput } from './styled';
 
 const POPUP_TIMEOUT = 1000;
 
-const GetLink = ({ formatMessage, slug, disabled }) => {
+const GetLink = ({ formatMessage, slug, disabled, problemId }) => {
   const [copied, setCopied] = useState(false);
 
   const onCopy = () => {
@@ -32,7 +32,9 @@ const GetLink = ({ formatMessage, slug, disabled }) => {
     themeColors.highlight
   }`;
 
-  const link = `${process.env.WEB_URL}/interventions/${slug}/fill`;
+  const link = `${
+    process.env.WEB_URL
+  }/interventions/${problemId}/sessions/${slug}/fill`;
   return (
     <Column>
       <Row>
@@ -84,6 +86,7 @@ GetLink.propTypes = {
   formatMessage: PropTypes.func,
   slug: PropTypes.string,
   disabled: PropTypes.bool,
+  problemId: PropTypes.string,
 };
 
 export default GetLink;

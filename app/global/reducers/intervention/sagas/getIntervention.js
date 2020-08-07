@@ -1,7 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { mapInterventionToStateObject } from 'utils/mapResponseObjects';
+import { defaultMapper } from 'utils/mapResponseObjects';
 
 import { GET_INTERVENTION_REQUEST } from '../constants';
 import { getInterventionSuccess, getInterventionError } from '../actions';
@@ -14,7 +14,7 @@ function* getIntervention({ payload: { id } }) {
       data: { data },
     } = yield axios.get(requestURL);
 
-    yield put(getInterventionSuccess(mapInterventionToStateObject(data)));
+    yield put(getInterventionSuccess(defaultMapper(data)));
   } catch (error) {
     yield put(getInterventionError(error));
   }

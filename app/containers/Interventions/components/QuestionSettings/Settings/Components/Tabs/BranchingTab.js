@@ -3,34 +3,37 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
-import { htmlToPlainText } from 'utils/htmlToPlainText';
+import { withRouter } from 'react-router-dom';
 
 import ArrowDropdown from 'components/ArrowDropdown';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Img from 'components/Img';
+import Intervention from 'models/Intervention/Intervention';
+import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { StyledInput } from 'components/Input/StyledInput';
-
 import { colors, themeColors } from 'theme';
-import Question from 'models/Intervention/Question';
-import Intervention from 'models/Intervention/Intervention';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
+import { makeSelectQuestions } from 'containers/Interventions/containers/EditInterventionPage/selectors';
+import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
 import {
   findQuestionIndex,
   findInterventionIndex,
 } from 'models/Intervention/utils';
-import { makeSelectQuestions } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import {
-  makeSelectInterventions,
-  fetchInterventionsRequest,
-} from 'global/reducers/interventionList';
+  problemReducer,
+  fetchProblemSaga,
+  makeSelectProblem,
+  fetchProblemRequest,
+} from 'global/reducers/problem';
 
-import messages from '../messages';
 import TargetQuestionChooser from '../../../TargetQuestionChooser';
 import VariableChooser from '../../../VariableChooser';
+import messages from '../messages';
 import { DashedBox, CaseInput } from '../styled';
 import {
   updateFormula,
@@ -48,14 +51,22 @@ const BranchingTab = ({
   onRemoveCase,
   onUpdateCase,
   questions,
-  interventionList,
-  fetchInterventions,
+  problem,
+  fetchProblem,
+  match: { params },
 }) => {
+  const { problemId } = params;
+  const { interventions: interventionList } = problem || {};
+  useInjectReducer({
+    key: 'problem',
+    reducer: problemReducer,
+  });
+  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
   const [variableChooserOpen, setVariableChooserOpen] = useState(false);
 
   useEffect(() => {
-    fetchInterventions();
+    fetchProblem(problemId);
   }, []);
 
   const displayPatternTargetText = target => {
@@ -199,13 +210,16 @@ BranchingTab.propTypes = {
   onRemoveCase: PropTypes.func,
   onUpdateCase: PropTypes.func,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
-  interventionList: PropTypes.arrayOf(PropTypes.shape(Intervention)),
-  fetchInterventions: PropTypes.func,
+  problem: PropTypes.shape({
+    interventions: PropTypes.arrayOf(PropTypes.shape(Intervention)),
+  }),
+  fetchProblem: PropTypes.func,
+  match: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
-  interventionList: makeSelectInterventions(),
+  problem: makeSelectProblem(),
 });
 
 const mapDispatchToProps = {
@@ -213,7 +227,7 @@ const mapDispatchToProps = {
   onAddCase: addFormulaCase,
   onRemoveCase: removeFormulaCase,
   onUpdateCase: updateFormulaCase,
-  fetchInterventions: fetchInterventionsRequest,
+  fetchProblem: fetchProblemRequest,
 };
 
 const withConnect = connect(
@@ -221,4 +235,7 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(BranchingTab);
+export default compose(
+  withConnect,
+  withRouter,
+)(BranchingTab);

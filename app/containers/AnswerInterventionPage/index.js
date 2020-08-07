@@ -110,10 +110,10 @@ export function AnswerInterventionPage({
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
   const animationParentRef = useRef();
 
-  const { id, index } = params;
+  const { interventionId, index } = params;
 
   useEffect(() => {
-    fetchQuestionsAction(id);
+    fetchQuestionsAction(interventionId);
     if (index) {
       setQuestionIndexAction(parseInt(index, 10));
       onStartIntervention();

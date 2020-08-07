@@ -18,7 +18,6 @@ import Img from 'components/Img';
 
 import { outsideClickHandler } from 'utils/outsideClickHandler';
 import { makeSelectUser } from 'global/reducers/auth';
-import LogoNavbar from 'containers/Navbar/components/LogoNavbar';
 import InterventionsNavbar from './components/InterventionsNavbar';
 
 import {
@@ -35,14 +34,19 @@ import DefaultNavbar from './components/DefaultNavbar';
 
 const renderNavbar = navbarProps => {
   const { navbarId, ...restProps } = navbarProps || {};
-  if (navbarId === 'interventions') return <InterventionsNavbar />;
+  if (navbarId === 'interventions')
+    return <InterventionsNavbar {...restProps} />;
   if (navbarId === 'preview') return <PreviewNavbar {...restProps} />;
   if (navbarId === 'default') return <DefaultNavbar {...restProps} />;
-  if (navbarId === 'logo') return <LogoNavbar {...restProps} />;
   return null;
 };
 
-export function Navbar({ user: { firstName, lastName, roles }, navbarProps }) {
+export function Navbar({
+  user: { firstName, lastName, roles },
+  navbarProps,
+  match,
+  location,
+}) {
   const [menuVisible, setMenuVisible] = useState(false);
   const dropdownRef = useRef(null);
   useEffect(() => {
@@ -56,7 +60,7 @@ export function Navbar({ user: { firstName, lastName, roles }, navbarProps }) {
   }, [menuVisible]);
   return (
     <NavbarStyled>
-      {renderNavbar(navbarProps)}
+      {renderNavbar({ ...navbarProps, match, location })}
       <RightPanel onClick={() => !menuVisible && setMenuVisible(true)}>
         <DropDownContainer>
           <UserAvatar lastName={lastName} firstName={firstName} />
@@ -90,6 +94,8 @@ Navbar.propTypes = {
     navbarId: PropTypes.string.isRequired,
     navbarName: PropTypes.node,
   }),
+  match: PropTypes.object,
+  location: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

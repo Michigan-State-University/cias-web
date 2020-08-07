@@ -1,44 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { injectIntl } from 'react-intl';
 
-import Column from 'components/Column';
-import Row from 'components/Row';
+import Badge from 'components/Badge';
 import Box from 'components/Box';
-import Text from 'components/Text';
+import Column from 'components/Column';
 import H3 from 'components/H3';
 import Img from 'components/Img';
-import Badge from 'components/Badge';
 import Loader from 'components/Loader';
-
+import Question from 'models/Intervention/Question';
+import Row from 'components/Row';
+import Text from 'components/Text';
+import arrowLeft from 'assets/svg/arrow-left.svg';
 import navigationNext from 'assets/svg/navigation-next.svg';
 import presentationProjector from 'assets/svg/presentation-projector.svg';
 import presentationProjectorSelected from 'assets/svg/presentation-projector-selected.svg';
 import webpage from 'assets/svg/webpage-mouseover.svg';
 import webpageSelected from 'assets/svg/webpage-mouseover-selected.svg';
-import arrowLeft from 'assets/svg/arrow-left.svg';
+import { colors, borders, fontSizes, themeColors } from 'theme';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
+import { makeSelectIntervention } from 'global/reducers/intervention';
+import {
+  makeSelectProblemLoader,
+  makeSelectProblem,
+} from 'global/reducers/problem';
 import {
   makeSelectQuestions,
   makeSelectSelectedQuestion,
   makeSelectSelectedQuestionIndex,
 } from 'containers/Interventions/containers/EditInterventionPage/selectors';
-import { makeSelectIntervention } from 'global/reducers/intervention';
-import {
-  makeSelectInterventionsLoader,
-  makeSelectInterventions,
-  interventionListReducer,
-  fetchInterventionsSaga,
-} from 'global/reducers/interventionList';
-import { htmlToPlainText } from 'utils/htmlToPlainText';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
-
-import { colors, borders, fontSizes, themeColors } from 'theme';
-import Question from 'models/Intervention/Question';
-import Intervention from 'models/Intervention/Intervention';
 
 import messages from './messages';
 
@@ -51,14 +44,10 @@ const TargetQuestionChooser = ({
   pattern: { target },
   currentIndex,
   isVisible,
-  interventionList,
-  interventionListLoading,
+  problem,
+  problemLoading,
 }) => {
-  useInjectReducer({
-    key: 'interventionList',
-    reducer: interventionListReducer,
-  });
-  useInjectSaga({ key: 'getInterventions', saga: fetchInterventionsSaga });
+  const { interventions: interventionList } = problem || {};
   const [isInterventionView, _setIsInterventionView] = useState(false);
   const setIsInterventionView = (value, event) => {
     if (event) event.stopPropagation();
@@ -136,7 +125,7 @@ const TargetQuestionChooser = ({
   );
 
   const renderInterventionChooser = () => {
-    if (interventionListLoading)
+    if (problemLoading)
       return (
         <Box
           width="100%"
@@ -239,17 +228,17 @@ TargetQuestionChooser.propTypes = {
   }),
   currentIndex: PropTypes.number,
   isVisible: PropTypes.bool,
-  interventionList: PropTypes.arrayOf(PropTypes.shape(Intervention)),
-  interventionListLoading: PropTypes.bool,
+  problem: PropTypes.object,
+  problemLoading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
-  interventionList: makeSelectInterventions(),
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
   currentIndex: makeSelectSelectedQuestionIndex(),
-  interventionListLoading: makeSelectInterventionsLoader(),
+  problemLoading: makeSelectProblemLoader('fetchProblemLoading'),
+  problem: makeSelectProblem(),
 });
 
 const withConnect = connect(mapStateToProps);

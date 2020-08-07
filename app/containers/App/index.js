@@ -15,7 +15,7 @@ import AnswerInterventionPage from 'containers/AnswerInterventionPage/Loadable';
 import AppRoute from 'components/AppRoute';
 import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage';
 import GlobalStyle from 'global-styles';
-import HomePage from 'containers/HomePage/Loadable';
+import ProblemDetailsPage from 'containers/ProblemDetailsPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
@@ -25,6 +25,7 @@ import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 
 import { ROLES } from 'global/reducers/auth/constants';
 
+import ProblemPage from 'containers/ProblemPage/Loadable';
 import UserListPage from 'containers/UserList/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import navbarNames from 'utils/navbarNames';
@@ -42,9 +43,9 @@ export function App({ user }) {
     if (user) {
       switch (user.roles[0]) {
         case ROLES.admin:
-          return <HomePage />;
+          return <ProblemPage />;
         case ROLES.researcher:
-          return <HomePage />;
+          return <ProblemPage />;
         case ROLES.participant:
           return <ParticipantDashboard />;
         default:
@@ -63,8 +64,7 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={ROLES.allRoles}
           navbarProps={{
-            navbarId: 'logo',
-            navbarName: navbarNames.logo,
+            navbarId: 'default',
           }}
         />
         <AppRoute exact path="/login" component={LoginPage} />
@@ -72,7 +72,7 @@ export function App({ user }) {
         <AppRoute exact path="/logout" component={Logout} />
         <AppRoute
           exact
-          path="/interventions/:id/edit"
+          path="/interventions/:problemId/sessions/:interventionId/edit"
           component={EditInterventionPage}
           protectedRoute
           allowedRoles={[ROLES.admin, ROLES.researcher]}
@@ -82,15 +82,18 @@ export function App({ user }) {
         />
         <AppRoute
           exact
-          path="/interventions/:id/fill"
+          path="/interventions/:problemId/sessions/:interventionId/fill"
           component={AnswerInterventionPage}
           protectedRoute
           allowedRoles={ROLES.allRoles}
           user
+          navbarProps={{
+            navbarId: 'default',
+          }}
         />
         <AppRoute
           exact
-          path="/interventions/:id/settings"
+          path="/interventions/:problemId/sessions/:interventionId/settings"
           component={SettingsInterventionPage}
           protectedRoute
           allowedRoles={[ROLES.admin, ROLES.researcher]}
@@ -112,7 +115,7 @@ export function App({ user }) {
         <AppRoute
           exact
           key="previewFromStart"
-          path="/interventions/:id/preview"
+          path="/interventions/:problemId/sessions/:interventionId/preview"
           component={AnswerInterventionPage}
           protectedRoute
           allowedRoles={[ROLES.admin, ROLES.researcher]}
@@ -123,13 +126,23 @@ export function App({ user }) {
         />
         <AppRoute
           key="previewFromCurrent"
-          path="/interventions/:id/preview/:index"
+          path="/interventions/:problemId/sessions/:interventionId/preview/:index"
           component={AnswerInterventionPage}
           protectedRoute
           allowedRoles={[ROLES.admin, ROLES.researcher]}
           navbarProps={{
             navbarId: 'preview',
             navbarName: navbarNames.preview,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:problemId"
+          component={ProblemDetailsPage}
+          protectedRoute
+          allowedRoles={[ROLES.admin, ROLES.researcher]}
+          navbarProps={{
+            navbarId: 'default',
           }}
         />
         <AppRoute component={NotFoundPage} />

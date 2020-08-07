@@ -5,35 +5,33 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
+import Box from 'components/Box';
+import CloseIcon from 'components/CloseIcon';
 import Icon from 'components/Icon';
+import PreviewButton from 'components/PreviewButton';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import desktop from 'assets/svg/desktop.svg';
 import mobile from 'assets/svg/mobile.svg';
+import { I_PHONE_8_PLUS_MODE, DESKTOP_MODE } from 'utils/previewMode';
 import { colors, themeColors } from 'theme';
-import makeSelectAnswerInterventionPage, {
-  makeSelectPreviewMode,
-} from 'containers/AnswerInterventionPage/selectors';
+import { makeSelectPreviewMode } from 'containers/AnswerInterventionPage/selectors';
 import {
   changePreviewMode as changePreviewModeAction,
   resetIntervention,
 } from 'containers/AnswerInterventionPage/actions';
-import { I_PHONE_8_PLUS_MODE, DESKTOP_MODE } from 'utils/previewMode';
 
-import CloseIcon from 'components/CloseIcon';
-import messages from 'containers/Navbar/components/messages';
-
-import Box from 'components/Box';
-import PreviewButton from 'components/PreviewButton';
+import messages from './messages';
 
 const PreviewNavbar = ({
   intl: { formatMessage },
-  intervention: { interventionId },
   navbarName,
   onResetIntervention,
   previewMode,
   changePreviewMode,
+  match: { params },
 }) => {
+  const { problemId, interventionId } = params;
   const handleClose = () => {
     window.opener = null;
     window.open('', '_self');
@@ -70,7 +68,7 @@ const PreviewNavbar = ({
         </Text>
         <Box mx={20}>
           <PreviewButton
-            to={`/interventions/${interventionId}/preview`}
+            to={`/interventions/${problemId}/sessions/${interventionId}/preview`}
             handleClick={onResetIntervention}
             text={formatMessage(messages.previewStart)}
           />
@@ -103,11 +101,11 @@ PreviewNavbar.propTypes = {
   }),
   onResetIntervention: PropTypes.func,
   intl: intlShape,
+  match: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   previewMode: makeSelectPreviewMode(),
-  intervention: makeSelectAnswerInterventionPage(),
 });
 
 const mapDispatchToProps = {

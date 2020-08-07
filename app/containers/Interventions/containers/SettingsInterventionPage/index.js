@@ -29,6 +29,7 @@ const SettingsInterventionPage = ({
     id,
     name,
     slug,
+    problem_id: problemId,
     settings: { narrator: narratorSettings } = {},
   },
   match: { params },
@@ -39,7 +40,7 @@ const SettingsInterventionPage = ({
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
 
   useEffect(() => {
-    getIntervention(params.id);
+    getIntervention(params.interventionId);
   }, []);
 
   return (
@@ -68,7 +69,11 @@ const SettingsInterventionPage = ({
               />
             </div>
             <div label={formatMessage(messages.respondentSettings)}>
-              <RespondentSettings formatMessage={formatMessage} slug={slug} />
+              <RespondentSettings
+                formatMessage={formatMessage}
+                slug={slug}
+                problemId={problemId}
+              />
             </div>
           </Tabs>
         </StyledColumn>

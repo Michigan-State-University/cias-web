@@ -83,4 +83,12 @@ export default defineMessages({
       defaultMessage: 'Closed',
     },
   },
+  createProblemError: {
+    id: `${scope}.createProblemError`,
+    defaultMessage: `Couldn't create an intervention`,
+  },
+  editProblemError: {
+    id: `${scope}.editProblemError`,
+    defaultMessage: `Couldn't edit an intervention`,
+  },
 });

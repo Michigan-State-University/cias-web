@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProblemDetailsPage /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="styled__FillScreenLoader-tle2yi-0 jcBUSp"
+    data-testid="fullscreen-loader"
+    opacity="0.5"
+  >
+    <div
+      class="styled__StyledSpinner-d123q3-0 dOefMO"
+      color="#C866EA"
+      size="100"
+      width="6"
+    />
+  </div>
+</div>
+`;
