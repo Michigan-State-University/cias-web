@@ -8,6 +8,8 @@ import {
   speechType,
   headAnimationType,
 } from 'models/Narrator/BlockTypes';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 
 import {
   SELECT_QUESTION,
@@ -47,7 +49,10 @@ import {
 
 export const initialState = {
   questions: [],
-  questionSettingsVisibility: false,
+  questionSettings: {
+    visibility: false,
+    tab: settingsTabLabels.settings,
+  },
   selectedQuestion: 0,
   animationPosition: {
     x: 0,
@@ -93,18 +98,22 @@ const editInterventionPageReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case TOGGLE_QUESTION_SETTINGS:
-        if (action.payload.index < 0) {
-          draft.questionSettingsVisibility = false;
-          break;
+        if (!isNullOrUndefined(action.payload.index)) {
+          if (action.payload.index < 0) {
+            draft.questionSettings.visibility = false;
+            break;
+          }
+          if (
+            action.payload.index === state.selectedQuestion &&
+            state.questionSettings.visibility
+          ) {
+            draft.questionSettings.visibility = false;
+            break;
+          }
+          draft.questionSettings.visibility = true;
         }
-        if (
-          action.payload.index === state.selectedQuestion &&
-          state.questionSettingsVisibility
-        ) {
-          draft.questionSettingsVisibility = false;
-          break;
-        }
-        draft.questionSettingsVisibility = true;
+        if (!isNullOrUndefined(action.payload.tab))
+          draft.questionSettings.tab = action.payload.tab;
         break;
 
       case UPDATE_PREVIEW_ANIMATION:

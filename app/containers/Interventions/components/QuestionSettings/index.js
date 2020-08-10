@@ -26,7 +26,7 @@ const QuestionSettings = ({
   intl: { formatMessage },
   questionsLength,
 }) => {
-  const onClose = () => toggleSettings(-1);
+  const onClose = () => toggleSettings({ index: -1 });
   return (
     <Container isVisible={settingsVisiblity && questionsLength}>
       <SettingsBar width="400px" height="100%">

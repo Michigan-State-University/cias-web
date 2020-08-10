@@ -31,8 +31,8 @@ import {
 } from './constants';
 
 // application state actions
-const toggleQuestionSettings = index =>
-  actionBuilder(TOGGLE_QUESTION_SETTINGS, { index });
+const toggleQuestionSettings = ({ index, tab }) =>
+  actionBuilder(TOGGLE_QUESTION_SETTINGS, { index, tab });
 const selectQuestion = index => actionBuilder(SELECT_QUESTION, index);
 const updatePreviewAnimation = animation =>
   actionBuilder(UPDATE_PREVIEW_ANIMATION, { animation });

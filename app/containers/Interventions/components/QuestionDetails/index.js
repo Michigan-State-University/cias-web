@@ -10,13 +10,16 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import Question from 'models/Intervention/Question';
 import NoContent from 'components/NoContent';
+import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { Button } from 'components/Button';
 
 import { colors } from 'theme';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import QuestionPreview from 'containers/Interventions/components/QuestionDetails/QuestionPreview';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestionSettingsTab,
+} from '../../containers/EditInterventionPage/selectors';
 import { AnswerOuterContainer, AnswerInterventionContent } from './styled';
 import messages from './messages';
 
@@ -39,7 +42,8 @@ const QuestionDetails = props => (
   </Box>
 );
 
-const renderQuestionDetails = ({ selectedQuestion, draggable }) => {
+const renderQuestionDetails = ({ selectedQuestion, tab }) => {
+  const isNarratorTab = tab === settingsTabLabels.narrator;
   if (selectedQuestion != null) {
     const {
       id,
@@ -65,7 +69,7 @@ const renderQuestionDetails = ({ selectedQuestion, draggable }) => {
             <Row justify="center" filled>
               <Column mx={50} justify="center">
                 <Row width="100%" mt={5} height={30} />
-                {!draggable && (
+                {!isNarratorTab && (
                   <>
                     {title && (
                       <Row width="100%">
@@ -89,7 +93,7 @@ const renderQuestionDetails = ({ selectedQuestion, draggable }) => {
                     )}
                   </>
                 )}
-                {draggable && (
+                {isNarratorTab && (
                   <>
                     {title && questionTitle && (
                       <QuestionPreview
@@ -140,12 +144,12 @@ const renderQuestionDetails = ({ selectedQuestion, draggable }) => {
 
 renderQuestionDetails.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
-  draggable: PropTypes.bool,
+  tab: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
+  tab: makeSelectQuestionSettingsTab(),
 });
 
 const withConnect = connect(mapStateToProps);

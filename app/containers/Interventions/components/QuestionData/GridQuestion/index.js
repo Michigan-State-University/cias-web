@@ -15,16 +15,19 @@ import Text from 'components/Text';
 import bin from 'assets/svg/bin-red.svg';
 import globalMessages from 'global/i18n/globalMessages';
 import radio from 'assets/svg/radio-button.svg';
+import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors, elements } from 'theme';
 
 import messages from './messages';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestionSettingsTab,
+} from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 import {
   ADD_ROW,
@@ -43,9 +46,10 @@ const GridQuestion = ({
   updateColumn,
   deleteRow,
   deleteColumn,
-  draggable,
+  tab,
   intl: { formatMessage },
 }) => {
+  const isNarratorTab = tab === settingsTabLabels.narrator;
   const {
     payload: { rows, columns },
   } = selectedQuestion.body.data[0];
@@ -54,11 +58,11 @@ const GridQuestion = ({
   const [hoveredColumn, setHoveredColumn] = useState(-1);
 
   const getPlaceholder = (name, value) =>
-    draggable ? '' : formatMessage(messages[name], { index: value });
+    isNarratorTab ? '' : formatMessage(messages[name], { index: value });
 
   return (
     <Box width="100%" px={21} py={14} mt={10}>
-      <Row justify="end" display="flex" hidden={draggable}>
+      <Row justify="end" display="flex" hidden={isNarratorTab}>
         <HoverableBox px={21} py={14} onClick={addColumn}>
           <Box>
             <Row align="center">
@@ -91,13 +95,13 @@ const GridQuestion = ({
                         px={8}
                         mb={8}
                         onClick={() => deleteColumn(columnIndex)}
-                        hidden={draggable}
+                        hidden={isNarratorTab}
                         clickable
                         height={35}
                       >
                         <Img src={bin} hidden={hoveredColumn !== columnIndex} />
                       </Box>
-                      <Row display="flex" hidden={draggable} mb={8}>
+                      <Row display="flex" hidden={isNarratorTab} mb={8}>
                         <BadgeInput
                           px={0}
                           py={12}
@@ -151,12 +155,12 @@ const GridQuestion = ({
                         width={60}
                         onClick={() => deleteRow(rowIndex)}
                         clickable
-                        hidden={draggable}
+                        hidden={isNarratorTab}
                       >
                         <Img src={bin} hidden={hoveredRow !== rowIndex} />
                       </Box>
                       <Row align="center" justify="between" width="100%">
-                        <Row display="flex" hidden={draggable} mr={8}>
+                        <Row display="flex" hidden={isNarratorTab} mr={8}>
                           <BadgeInput
                             px={0}
                             py={12}
@@ -207,7 +211,7 @@ const GridQuestion = ({
         </Box>
       </Row>
 
-      <Row justify="start" hidden={draggable}>
+      <Row justify="start" hidden={isNarratorTab}>
         <HoverableBox px={21} py={14} mt={20} onClick={addRow}>
           <Box>
             <Row align="center" display="flex">
@@ -232,12 +236,12 @@ GridQuestion.propTypes = {
   updateColumn: PropTypes.func.isRequired,
   deleteRow: PropTypes.func.isRequired,
   deleteColumn: PropTypes.func.isRequired,
-  draggable: PropTypes.bool,
+  tab: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
+  tab: makeSelectQuestionSettingsTab(),
 });
 
 const mapDispatchToProps = {

@@ -16,15 +16,18 @@ import Text from 'components/Text';
 import bin from 'assets/svg/bin-red.svg';
 import checkbox from 'assets/svg/checkbox.svg';
 import globalMessages from 'global/i18n/globalMessages';
+import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { BadgeInput } from 'components/Input/BadgeInput';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
 import messages from './messages';
 import { ADD, UPDATE, REMOVE } from './constants';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestionSettingsTab,
+} from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const CHECKBOX_MARGIN = 16;
@@ -35,9 +38,10 @@ const MultiQuestion = ({
   addAnswer,
   updateAnswer,
   removeAnswer,
-  draggable,
+  tab,
   intl: { formatMessage },
 }) => {
+  const isNarratorTab = tab === settingsTabLabels.narrator;
   const checkboxButtonRef = useRef(null);
 
   const [hovered, setHovered] = useState(-1);
@@ -96,7 +100,7 @@ const MultiQuestion = ({
                   </Box>
                 </Row>
               </Row>
-              <Row align="center" display="flex" hidden={draggable}>
+              <Row align="center" display="flex" hidden={isNarratorTab}>
                 <BadgeInput
                   px={0}
                   py={12}
@@ -139,7 +143,7 @@ const MultiQuestion = ({
           </HoverableBox>
         </Row>
       ))}
-      <Row display="flex" hidden={draggable}>
+      <Row display="flex" hidden={isNarratorTab}>
         <HoverableBox px={21} py={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
@@ -161,12 +165,12 @@ MultiQuestion.propTypes = {
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
   removeAnswer: PropTypes.func.isRequired,
-  draggable: PropTypes.bool,
+  tab: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
+  tab: makeSelectQuestionSettingsTab(),
 });
 
 const mapDispatchToProps = dispatch => ({

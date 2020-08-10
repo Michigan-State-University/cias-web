@@ -21,7 +21,13 @@ const makeSelectQuestions = () =>
 const makeSelectQuestionSettingsVisibility = () =>
   createSelector(
     selectEditInterventionPageDomain,
-    substate => substate.questionSettingsVisibility,
+    substate => substate.questionSettings.visibility,
+  );
+
+const makeSelectQuestionSettingsTab = () =>
+  createSelector(
+    selectEditInterventionPageDomain,
+    substate => substate.questionSettings.tab,
   );
 
 const makeSelectSelectedQuestionIndex = () =>
@@ -67,6 +73,7 @@ export {
   makeSelectSelectedQuestionIndex,
   makeSelectSelectedQuestion,
   makeSelectQuestionSettingsVisibility,
+  makeSelectQuestionSettingsTab,
   makeSelectLoader,
   makeSelectLoaders,
   makeSelectAnimationPosition,

@@ -83,7 +83,7 @@ const QuestionListItem = ({
   ];
 
   const onGearClick = () => {
-    toggleSettings(index);
+    toggleSettings({ index });
   };
 
   const onChangeItem = () => {

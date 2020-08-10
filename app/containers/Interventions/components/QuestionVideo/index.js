@@ -10,12 +10,15 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import bin from 'assets/svg/bin-red.svg';
+import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { colors } from 'theme';
 
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import messages from './messages';
 import { PlayerWrapper, Player } from './styled';
-import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestionSettingsTab,
+} from '../../containers/EditInterventionPage/selectors';
 import { editQuestionRequest } from '../../containers/EditInterventionPage/actions';
 
 const isURLValid = url =>
@@ -25,8 +28,9 @@ const QuestionVideo = ({
   intl: { formatMessage },
   selectedQuestion: { video_url: videoUrl },
   updateVideo,
-  draggable,
+  tab,
 }) => {
+  const isNarratorTab = tab === settingsTabLabels.narrator;
   const [hovered, setHovered] = useState(false);
 
   const setVideoUrl = url => updateVideo({ path: 'video_url', value: url });
@@ -50,12 +54,12 @@ const QuestionVideo = ({
 
   return (
     <Box width="100%">
-      {draggable && (
+      {isNarratorTab && (
         <PlayerWrapper>
           <Player url={videoUrl} controls width="100%" height="100%" />
         </PlayerWrapper>
       )}
-      {!draggable && (
+      {!isNarratorTab && (
         <HoverableBox
           width="100%"
           onMouseEnter={() => setHovered(true)}
@@ -89,12 +93,12 @@ QuestionVideo.propTypes = {
     video_url: PropTypes.string,
   }),
   updateVideo: PropTypes.func,
-  draggable: PropTypes.bool,
+  tab: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
+  tab: makeSelectQuestionSettingsTab(),
 });
 
 const mapDispatchToProps = {

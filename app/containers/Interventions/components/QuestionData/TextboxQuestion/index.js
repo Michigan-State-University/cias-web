@@ -11,29 +11,33 @@ import Column from 'components/Column';
 import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import globalMessages from 'global/i18n/globalMessages';
+import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { colors } from 'theme/colors';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { variableNameValidator } from 'utils/validators';
 
 import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestionSettingsTab,
+} from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const TextboxQuestion = ({
   selectedQuestion,
   updateAnswer,
   updateVariable,
-  draggable,
+  tab,
   intl: { formatMessage },
 }) => {
+  const isNarratorTab = tab === settingsTabLabels.narrator;
   const { payload } = selectedQuestion.body.data[0];
   const { variable } = selectedQuestion.body;
 
   return (
     <Column mt={10}>
-      <Row display="flex" hidden={draggable} mb={10}>
+      <Row display="flex" hidden={isNarratorTab} mb={10}>
         <BadgeInput
           px={0}
           py={12}
@@ -68,12 +72,12 @@ TextboxQuestion.propTypes = {
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
-  draggable: PropTypes.bool,
+  tab: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
+  tab: makeSelectQuestionSettingsTab(),
 });
 
 const mapDispatchToProps = {

@@ -16,15 +16,18 @@ import Text from 'components/Text';
 import bin from 'assets/svg/bin-red.svg';
 import globalMessages from 'global/i18n/globalMessages';
 import radio from 'assets/svg/radio-button.svg';
+import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { BadgeInput } from 'components/Input/BadgeInput';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestionSettingsTab,
+} from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const RADIO_MARGIN = 16;
@@ -36,9 +39,10 @@ const SingleQuestion = ({
   updateAnswer,
   removeAnswer,
   updateVariable,
-  draggable,
+  tab,
   intl: { formatMessage },
 }) => {
+  const isNarratorTab = tab === settingsTabLabels.narrator;
   const radioButtonRef = useRef(null);
 
   const [hovered, setHovered] = useState(-1);
@@ -55,7 +59,7 @@ const SingleQuestion = ({
 
   return (
     <Column mt={10}>
-      <Row display="flex" hidden={draggable} mb={10} ml={24}>
+      <Row display="flex" hidden={isNarratorTab} mb={10} ml={24}>
         <BadgeInput
           px={0}
           py={12}
@@ -90,7 +94,7 @@ const SingleQuestion = ({
                       fontSize={18}
                       type="singleline"
                       placeholder={
-                        !draggable
+                        !isNarratorTab
                           ? formatMessage(messages.placeholder, {
                               index: index + 1,
                             })
@@ -114,7 +118,7 @@ const SingleQuestion = ({
                   </Box>
                 </Row>
               </Row>
-              <Row align="center" display="flex" hidden={draggable}>
+              <Row align="center" display="flex" hidden={isNarratorTab}>
                 <Text
                   ml={`${leftMargin}px`}
                   mr={8}
@@ -131,7 +135,7 @@ const SingleQuestion = ({
                   validator={numericValidator}
                   keyboard="tel"
                   placeholder={
-                    !draggable
+                    !isNarratorTab
                       ? formatMessage(globalMessages.variables.emptyBadge, {
                           index: index + 1,
                         })
@@ -151,7 +155,7 @@ const SingleQuestion = ({
           </HoverableBox>
         </Row>
       ))}
-      <Row display="flex" hidden={draggable}>
+      <Row display="flex" hidden={isNarratorTab}>
         <HoverableBox px={21} py={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
@@ -174,12 +178,12 @@ SingleQuestion.propTypes = {
   updateAnswer: PropTypes.func.isRequired,
   removeAnswer: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
-  draggable: PropTypes.bool,
+  tab: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
+  tab: makeSelectQuestionSettingsTab(),
 });
 
 const mapDispatchToProps = {

@@ -6,7 +6,6 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
 import globalMessages from 'global/i18n/globalMessages';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import VisualAnalogueScaleQuestionLayout from 'containers/AnswerInterventionPage/layouts/VisualAnalogueScaleQuestionLayout';
 
 import AppSlider from 'components/AppSlider';
@@ -15,7 +14,7 @@ import Column from 'components/Column';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
 import Row from 'components/Row';
-
+import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import Question from 'models/Intervention/Question';
 
 import { colors } from 'theme/colors';
@@ -26,16 +25,20 @@ import { visualAnalogScaleLabel } from 'theme';
 import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
 
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestionSettingsTab,
+} from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const VisualAnalogueScaleQuestion = ({
   selectedQuestion,
   updateLabel,
   updateVariable,
-  draggable,
+  tab,
   intl: { formatMessage },
 }) => {
+  const isNarratorTab = tab === settingsTabLabels.narrator;
   const {
     body: { variable, data },
     settings: { show_number: showNumber },
@@ -75,7 +78,7 @@ const VisualAnalogueScaleQuestion = ({
 
   return (
     <Column mt={10}>
-      <Row display="flex" hidden={draggable} mb={10}>
+      <Row display="flex" hidden={isNarratorTab} mb={10}>
         <BadgeInput
           px={0}
           py={12}
@@ -94,14 +97,14 @@ const VisualAnalogueScaleQuestion = ({
         <Column>
           <Row>
             <Box width="100%">
-              {!draggable && (
+              {!isNarratorTab && (
                 <AppSlider
                   marks={labels}
                   disabled
                   showValue={!isNullOrUndefined(showNumber) && showNumber}
                 />
               )}
-              {draggable && (
+              {isNarratorTab && (
                 <VisualAnalogueScaleQuestionLayout
                   startValue={startValue}
                   endValue={endValue}
@@ -121,12 +124,12 @@ VisualAnalogueScaleQuestion.propTypes = {
   intl: PropTypes.object.isRequired,
   updateLabel: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
-  draggable: PropTypes.bool,
+  tab: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
+  tab: makeSelectQuestionSettingsTab(),
 });
 
 const mapDispatchToProps = {

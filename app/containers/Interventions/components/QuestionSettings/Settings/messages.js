@@ -3,15 +3,15 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.Settings';
 
 export default defineMessages({
-  settings: {
+  Settings: {
     id: `${scope}.settings`,
     defaultMessage: 'Settings',
   },
-  narrator: {
+  Narrator: {
     id: `${scope}.narrator`,
     defaultMessage: 'Narrator',
   },
-  branching: {
+  Branching: {
     id: `${scope}.branching`,
     defaultMessage: 'Branching',
   },

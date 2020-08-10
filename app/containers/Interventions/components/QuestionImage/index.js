@@ -18,13 +18,15 @@ import HoverableBox from 'components/Box/HoverableBox';
 import imagePlaceholder from 'assets/svg/image-placeholder.svg';
 import { themeColors, borders } from 'theme';
 import bin from 'assets/svg/bin-red.svg';
-
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
+import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import {
   addQuestionImage,
   deleteQuestionImage,
 } from '../../containers/EditInterventionPage/actions';
-import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestionSettingsTab,
+} from '../../containers/EditInterventionPage/selectors';
 import { ImageWrapper } from './styled';
 import messages from './messages';
 
@@ -33,8 +35,9 @@ export const QuestionImage = ({
   deleteImage,
   selectedQuestion: { id, image_url: imageUrl },
   intl: { formatMessage },
-  draggable,
+  tab,
 }) => {
+  const isNarratorTab = tab === settingsTabLabels.narrator;
   const [hovered, setHovered] = useState(false);
 
   const handleDrop = useCallback(newFiles => {
@@ -102,12 +105,12 @@ export const QuestionImage = ({
 
   return (
     <Box mt={10} width="100%">
-      {draggable && (
+      {isNarratorTab && (
         <ImageWrapper>
           <Img src={imageUrl} alt="image" height="100%" width="100%" />
         </ImageWrapper>
       )}
-      {!draggable && (
+      {!isNarratorTab && (
         <HoverableBox
           width="100%"
           onMouseEnter={() => setHovered(true)}
@@ -149,12 +152,12 @@ QuestionImage.propTypes = {
   }),
   formatMessage: PropTypes.func,
   intl: intlShape,
-  draggable: PropTypes.bool,
+  tab: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
+  tab: makeSelectQuestionSettingsTab(),
 });
 
 const mapDispatchToProps = {

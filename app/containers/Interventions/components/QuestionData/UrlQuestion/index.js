@@ -12,10 +12,13 @@ import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import UrlPreview from 'components/UrlPreview';
 import globalMessages from 'global/i18n/globalMessages';
+import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { colors } from 'theme/colors';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
-import { makeSelectSelectedQuestion } from 'containers/Interventions/containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestionSettingsTab,
+} from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import { updateQuestionData } from 'containers/Interventions/containers/EditInterventionPage/actions';
 import { urlValidator } from 'utils/validators/urlValidator';
 import { variableNameValidator } from 'utils/validators';
@@ -27,15 +30,16 @@ const UrlQuestion = ({
   selectedQuestion,
   updateUrl,
   updateVariable,
-  draggable,
+  tab,
   intl: { formatMessage },
 }) => {
+  const isNarratorTab = tab === settingsTabLabels.narrator;
   const { payload } = selectedQuestion.body.data[0];
   const { variable } = selectedQuestion.body;
 
   return (
     <Column mt={10}>
-      <Row display="flex" hidden={draggable} mb={10}>
+      <Row display="flex" hidden={isNarratorTab} mb={10}>
         <BadgeInput
           px={0}
           py={12}
@@ -55,7 +59,7 @@ const UrlQuestion = ({
         width="100%"
         px={21}
         py={14}
-        hidden={draggable}
+        hidden={isNarratorTab}
       >
         <Row>
           <ApprovableInput
@@ -78,12 +82,12 @@ UrlQuestion.propTypes = {
   intl: PropTypes.object.isRequired,
   updateUrl: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
-  draggable: PropTypes.bool,
+  tab: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
+  tab: makeSelectQuestionSettingsTab(),
 });
 
 const mapDispatchToProps = {
