@@ -19,7 +19,7 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
 
     return {
       x: Math.min(position.x * scale.x, clientWidth - 100),
-      y: Math.min(position.y * scale.y, clientHeight - 100),
+      y: Math.min(position.y, clientHeight),
     };
   };
 

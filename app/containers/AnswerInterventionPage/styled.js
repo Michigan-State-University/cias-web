@@ -22,7 +22,6 @@ export const AnswerInterventionContent = styled.div`
   align-items: flex-start;
   border: 1px dashed ${colors.botticelli};
   display: flex;
-  justify-content: center;
   max-width: ${elements.draggableContainerSize}px;
   min-height: ${elements.draggableContainerSize}px;
   position: relative;
@@ -46,7 +45,7 @@ export const AnswerOuterContainer = styled.div`
   height: fit-content;
   justify-content: ${props =>
     props.interventionStarted ? 'flex-start' : 'center'};
-  padding: 0 10px;
   width: 100%;
+  max-width: ${elements.draggableContainerSize}px;
   ${props => props.previewMode && getStyles(props.previewMode)}
 `;

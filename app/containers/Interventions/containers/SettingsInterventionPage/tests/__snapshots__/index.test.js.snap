@@ -15,7 +15,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
       class="styled__TabsContainer-z6npy3-0 fmuXqq"
     >
       <div
-        class="Row-x1o3ru-0 cXSRYv"
+        class="Row-x1o3ru-0 hLHnCX"
       >
         <div
           class="styled__LabelContainer-z6npy3-2 kyWDKV"
@@ -58,7 +58,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
           Narrator Settings
         </h3>
         <div
-          class="Row-x1o3ru-0 Hjqyz"
+          class="Row-x1o3ru-0 jfdDwu"
         >
           <p
             class="Text-sc-2lza2m-0 kqjpYH"
@@ -80,7 +80,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
           </label>
         </div>
         <div
-          class="Row-x1o3ru-0 Hjqyz"
+          class="Row-x1o3ru-0 jfdDwu"
         >
           <p
             class="Text-sc-2lza2m-0 huzOcZ"
@@ -101,7 +101,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
           </label>
         </div>
         <div
-          class="Row-x1o3ru-0 dGvAgt"
+          class="Row-x1o3ru-0 dgpnJC"
         >
           <p
             class="Text-sc-2lza2m-0 huzOcZ"

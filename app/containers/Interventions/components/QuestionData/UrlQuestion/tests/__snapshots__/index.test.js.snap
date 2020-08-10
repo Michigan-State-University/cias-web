@@ -32,6 +32,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   margin-bottom: 10px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -47,6 +48,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
 }
 
 .c6 {
@@ -57,6 +59,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   width: 100%;
 }
 

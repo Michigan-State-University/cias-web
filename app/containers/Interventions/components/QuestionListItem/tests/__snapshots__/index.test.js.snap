@@ -9,6 +9,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
 }
 
 .c4 {

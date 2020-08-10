@@ -59,7 +59,7 @@ const renderQuestionDetails = ({ selectedQuestion, draggable }) => {
 
     return (
       <AnswerOuterContainer>
-        <div>
+        <Box width="100%">
           <AnswerInterventionContent>
             {animation && <QuestionNarrator questionId={id} />}
             <Row justify="center" filled>
@@ -130,7 +130,7 @@ const renderQuestionDetails = ({ selectedQuestion, draggable }) => {
               </Column>
             </Row>
           </AnswerInterventionContent>
-        </div>
+        </Box>
       </AnswerOuterContainer>
     );
   }

@@ -9,6 +9,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   -webkit-box-pack: center;
   -webkit-justify-content: center;
   -ms-flex-pack: center;
@@ -126,6 +127,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   margin-top: 22px;
   margin-bottom: 12px;
 }
@@ -138,6 +140,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
 }
 
 .c2 {

@@ -23,6 +23,7 @@ Object {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
 }
 
 .c4 {
@@ -33,6 +34,7 @@ Object {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -56,6 +58,7 @@ Object {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -180,7 +183,7 @@ Object {
       width="auto"
     >
       <div
-        class="Row-x1o3ru-0 cXSRYv"
+        class="Row-x1o3ru-0 hLHnCX"
       >
         <div
           class="Box-sc-14m3exe-0 dvwSEs"
@@ -189,11 +192,11 @@ Object {
             class="Column-sc-1n6divy-0 gSmTjF"
           >
             <div
-              class="Row-x1o3ru-0 kBPBQn"
+              class="Row-x1o3ru-0 dwmUvf"
               data-testid="undefined-select-variable"
             >
               <div
-                class="Row-x1o3ru-0 faOZMV"
+                class="Row-x1o3ru-0 gxDdJd"
               >
                 <img
                   class="Img-sc-1kfzr96-0 dsoWic"
@@ -320,6 +323,7 @@ Object {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
 }
 
 .c0 {
@@ -459,7 +463,7 @@ Object {
       width="auto"
     >
       <div
-        class="Row-x1o3ru-0 cXSRYv"
+        class="Row-x1o3ru-0 hLHnCX"
       >
         <div
           class="Box-sc-14m3exe-0 dvwSEs"

@@ -166,15 +166,15 @@ export function AnswerInterventionPage({
     };
 
     return (
-      <Row justify="center">
-        <Column mx={40} justify="center">
-          {questionIndex !== 0 && currentQuestion && (
-            <Row width="100%" mt={5} height={30}>
+      <Row justify="center" width="100%">
+        <Column mx={50} justify="center">
+          <Row width="100%" mt={5} height={30}>
+            {questionIndex !== 0 && currentQuestion && (
               <BackButton onClick={handleBackClick}>
                 <FormattedMessage {...messages.previousQuestion} />
               </BackButton>
-            </Row>
-          )}
+            )}
+          </Row>
           <CommonLayout currentQuestion={currentQuestion} />
           <Row mt={10}>
             {renderQuestionByType(currentQuestion, sharedProps)}
@@ -244,13 +244,13 @@ export function AnswerInterventionPage({
         )}
         {interventionStarted && (
           <Fragment>
-            <div>
+            <Box width="100%">
               {!questionLoading && currentQuestion && (
                 <AnswerInterventionContent ref={animationParentRef}>
                   {renderPage()}
                 </AnswerInterventionContent>
               )}
-            </div>
+            </Box>
             {questionError && <ErrorAlert errorText={questionError} />}
             {answersError && <ErrorAlert errorText={answersError} />}
             {questionLoading && <Loader />}

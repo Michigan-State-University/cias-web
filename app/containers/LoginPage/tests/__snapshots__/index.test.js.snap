@@ -75,7 +75,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           Log in
         </button>
         <div
-          class="Row-x1o3ru-0 kySctD"
+          class="Row-x1o3ru-0 jRjhie"
           width="100%"
         >
           <div
@@ -94,7 +94,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          class="Row-x1o3ru-0 jhyXVk"
+          class="Row-x1o3ru-0 cemZln"
           width="100%"
         >
           <a

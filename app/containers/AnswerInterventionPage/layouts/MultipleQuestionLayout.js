@@ -31,7 +31,7 @@ const MultipleQuestionLayout = ({
             clickable
             onClick={() => check(payload, value, name, index)}
           >
-            <Row align="center" padding={10}>
+            <Row align="center" py={10} height="44">
               <Checkbox checked={isChecked} mr={16} />
               <div dangerouslySetInnerHTML={{ __html: payload }} />
             </Row>

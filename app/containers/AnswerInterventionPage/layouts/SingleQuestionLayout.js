@@ -22,7 +22,7 @@ const SingleQuestionLayout = ({
         const isChecked = selectedAnswerIndex === index;
 
         return (
-          <Row key={`question-${questionId}-el-${index}`} mb={10}>
+          <Row key={`question-${questionId}-el-${index}`} mb={12}>
             <HoverableBox
               px={margin}
               py={14}
@@ -30,7 +30,7 @@ const SingleQuestionLayout = ({
               clickable
               onClick={() => handleClick(payload, value, index)}
             >
-              <Row align="center" padding={10}>
+              <Row align="center" height="44">
                 <Radio checked={isChecked} mr={16} />
                 <div dangerouslySetInnerHTML={{ __html: payload }} />
               </Row>

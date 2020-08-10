@@ -9,6 +9,7 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -139,6 +140,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: 93px;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -157,6 +159,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   width: 100%;
 }
 
