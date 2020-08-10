@@ -12,9 +12,6 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Container } from 'react-grid-system';
 
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
-
 import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
 import Column from 'components/Column';
@@ -23,17 +20,15 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import BackButton from 'components/BackButton';
 import {
-  problemReducer,
   fetchProblemRequest,
   makeSelectProblemState,
-  fetchProblemSaga,
-  editProblemSaga,
   editProblemRequest,
+  problemReducer,
 } from 'global/reducers/problem';
-import {
-  createInterventionSaga,
-  createInterventionRequest,
-} from 'global/reducers/intervention';
+import { createInterventionRequest } from 'global/reducers/intervention';
+import injectSaga from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import problemDetailsPageSagas from 'containers/ProblemDetailsPage/saga';
 import InterventionListItem from './components/InterventionListItem';
 import InterventionCreateButton from './components/InterventionCreateButton';
 
@@ -49,13 +44,10 @@ export function ProblemDetailsPage({
   },
   problemState: { problem, fetchProblemLoading, fetchProblemError },
 }) {
-  useInjectSaga({ key: 'createIntervention', saga: createInterventionSaga });
   useInjectReducer({
     key: 'problem',
     reducer: problemReducer,
   });
-  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
-  useInjectSaga({ key: 'editProblem', saga: editProblemSaga });
 
   const { interventions, name } = problem || {};
 
@@ -145,7 +137,13 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
+const withSaga = injectSaga({
+  key: 'problemDetailsPageSagas',
+  saga: problemDetailsPageSagas,
+});
+
 export default compose(
   withConnect,
+  withSaga,
   injectIntl,
 )(ProblemDetailsPage);
