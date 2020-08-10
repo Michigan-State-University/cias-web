@@ -11,8 +11,9 @@ import { Container, PopupElement } from './styled';
 export const Popup = ({
   children,
   popupContent,
-  right,
   top,
+  right,
+  center,
   controlled,
   visible,
 }) => {
@@ -27,7 +28,7 @@ export const Popup = ({
     >
       {children}
       {((!controlled && popupVisible) || visible) && (
-        <PopupElement right={right} top={top}>
+        <PopupElement right={right} top={top} center={center}>
           {popupContent}
         </PopupElement>
       )}
@@ -42,6 +43,7 @@ Popup.propTypes = {
     .isRequired,
   right: PropTypes.bool,
   top: PropTypes.bool,
+  center: PropTypes.bool,
   controlled: PropTypes.bool,
   visible: PropTypes.bool,
 };
@@ -49,6 +51,7 @@ Popup.propTypes = {
 Popup.defaultProps = {
   right: false,
   top: false,
+  center: false,
   controlled: false,
 };
 

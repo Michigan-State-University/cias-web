@@ -38,7 +38,7 @@ const ArrowDropdown = ({
       <Box
         bg={colors.white}
         borderRadius={10}
-        shadow={boxShadows[1]}
+        shadow={boxShadows.black}
         position="absolute"
         width="max-content"
         mt={15}

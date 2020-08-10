@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Selector /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 8px;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  margin-left: 8px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c2 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(200,102,234,1);
+  cursor: pointer;
+  color: rgba(200,102,234,1);
+  cursor: pointer;
+}
+
+.c5 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <div
+      class="c1"
+    >
+      <p
+        class="c2"
+        color="#C866EA"
+        font-weight="bold"
+      >
+        Label
+      </p>
+      <div
+        class="c3"
+        display="flex"
+      >
+        <img
+          alt="?"
+          class="c4"
+          currentitem="false"
+          data-for="el-tooltip-id-asd02as"
+          data-tip="true"
+          src="IMAGE_MOCK"
+        />
+        <div
+          class="__react_component_tooltip t00000000-0000-0000-0000-000000000000 place-top type-dark"
+          data-id="tooltip"
+          id="el-tooltip-id-asd02as"
+        >
+          <style>
+            
+  	.t00000000-0000-0000-0000-000000000000 {
+	    color: #fff;
+	    background: #222;
+	    border: 1px solid transparent;
+  	}
+
+  	.t00000000-0000-0000-0000-000000000000.place-top {
+        margin-top: -10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-top::before {
+        border-top: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-top::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        bottom: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-top-color: #222;
+        border-top-style: solid;
+        border-top-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-bottom {
+        margin-top: 10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-bottom::before {
+        border-bottom: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-bottom::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        top: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-bottom-color: #222;
+        border-bottom-style: solid;
+        border-bottom-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-left {
+        margin-left: -10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-left::before {
+        border-left: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-left::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        right: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-left-color: #222;
+        border-left-style: solid;
+        border-left-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-right {
+        margin-left: 10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-right::before {
+        border-right: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-right::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        left: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-right-color: #222;
+        border-right-style: solid;
+        border-right-width: 6px;
+    }
+  
+          </style>
+          <p
+            class="c5"
+          >
+            tooltipContent
+          </p>
+        </div>
+      </div>
+      <img
+        alt="arrow"
+        class="c6"
+        src="IMAGE_MOCK"
+        transform=""
+      />
+    </div>
+  </div>
+</div>
+`;

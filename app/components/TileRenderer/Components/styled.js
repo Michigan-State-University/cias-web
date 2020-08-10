@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { themeColors, colors } from 'theme';
+import { themeColors, colors, boxShadows } from 'theme';
 
 export const NewItemFloatButton = styled.div`
   position: fixed;
@@ -18,7 +18,7 @@ export const NewItemFloatButton = styled.div`
 export const NewElementContainer = styled.div`
   padding: 15px;
   height: 150px;
-  box-shadow: 0px 4px 20px #e3eefb;
+  box-shadow: ${boxShadows.selago};
   border-radius: 5px;
   margin-bottom: 20px;
   display: flex;

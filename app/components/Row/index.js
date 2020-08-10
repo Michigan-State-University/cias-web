@@ -6,6 +6,7 @@ import {
   padding,
   border,
   style,
+  positioning,
 } from '../BaseComponentStyles';
 
 const Row = styled.div`
@@ -18,6 +19,7 @@ const Row = styled.div`
   ${layout};
   ${border};
   ${style};
+  ${positioning};
 `;
 
 export default Row;

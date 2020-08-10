@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import HoverableBox from 'components/Box/HoverableBox';
-import { colors } from 'theme';
+import { colors, boxShadows } from 'theme';
 
 export const ToggleableBox = styled(HoverableBox)`
   background-color: ${({ isSelected }) =>
     isSelected ? colors.linkWater : colors.white};
   margin-top: 18px;
-  box-shadow: 0px 4px 20px #e3eefb;
+  box-shadow: ${boxShadows.selago};
 `;
 
 export const InterventionIndex = styled.div`

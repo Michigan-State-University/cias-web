@@ -64,15 +64,11 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 100%;
-  height: 100%;
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-radius: 0;
-  border-radius: 0;
   -webkit-box-pack: end;
   -webkit-justify-content: flex-end;
   -ms-flex-pack: end;
@@ -93,7 +89,6 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   display: -ms-flexbox;
   display: flex;
   padding: 8px;
-  margin-left: 8px;
 }
 
 .c0 {
@@ -106,7 +101,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   background-color: #FFFFFF;
   margin-top: 18px;
-  box-shadow: 0px 4px 20px #e3eefb;
+  box-shadow: 0px 4px 20px #E3EEFB;
 }
 
 .c0:hover {
@@ -178,8 +173,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
       <div
         className="c7"
         display="flex"
-        height="100%"
-        width="100%"
+        id="1"
       >
         <div
           className="c8"

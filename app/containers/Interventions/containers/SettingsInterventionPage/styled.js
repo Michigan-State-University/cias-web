@@ -8,5 +8,5 @@ export const StyledColumn = styled(Column)`
   padding: 25px 20px;
   background-color: ${colors.white};
   border-radius: 5px;
-  box-shadow: ${boxShadows[2]};
+  box-shadow: ${boxShadows.selago};
 `;

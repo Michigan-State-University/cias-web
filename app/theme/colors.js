@@ -21,6 +21,7 @@ const colors = {
   burntSienna: '#F0684A',
   casper: '#ABBBD1',
   surfieGreen: '#107969',
+  selago: '#E3EEFB',
 };
 
 const themeColors = {

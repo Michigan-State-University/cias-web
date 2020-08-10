@@ -12,7 +12,7 @@ import {
 
 const Dropzone = styled.div`
   border-radius: ${borders.borderRadius};
-  ${({ withShadow }) => withShadow && `box-shadow: ${boxShadows[1]}`};
+  ${({ withShadow }) => withShadow && `box-shadow: ${boxShadows.black}`};
   ${border};
   ${margin};
   ${style};

@@ -1,0 +1,680 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ShareBox /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-14m3exe-0 sbJoj"
+    height="100%"
+    width="100%"
+  >
+    <div
+      class="Box-sc-14m3exe-0 csEDWM"
+    >
+      <h2
+        class="H2-egphza-0 eiEAKJ"
+      >
+        <span>
+          Share Intervention with Participants
+        </span>
+      </h2>
+      <div
+        class="Row-x1o3ru-0 fbdBbJ"
+      >
+        <div
+          class="Box-sc-14m3exe-0 iaOvfz"
+        >
+          <div
+            class="Row-x1o3ru-0 diEAcg"
+          >
+            <p
+              class="Text-sc-2lza2m-0 iKKmjm"
+              color="#C866EA"
+              font-weight="bold"
+            >
+              Anyone with the link can access sessions
+            </p>
+            <div
+              class="Box-sc-14m3exe-0 jFRsDB"
+              display="flex"
+            >
+              <img
+                alt="?"
+                class="Img-sc-1kfzr96-0 dlGAit"
+                currentitem="false"
+                data-for="el-tooltip-id-anyone_with_the_link"
+                data-tip="true"
+                src="IMAGE_MOCK"
+              />
+              <div
+                class="__react_component_tooltip t00000000-0000-0000-0000-000000000000 place-top type-dark"
+                data-id="tooltip"
+                id="el-tooltip-id-anyone_with_the_link"
+              >
+                <style>
+                  
+  	.t00000000-0000-0000-0000-000000000000 {
+	    color: #fff;
+	    background: #222;
+	    border: 1px solid transparent;
+  	}
+
+  	.t00000000-0000-0000-0000-000000000000.place-top {
+        margin-top: -10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-top::before {
+        border-top: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-top::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        bottom: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-top-color: #222;
+        border-top-style: solid;
+        border-top-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-bottom {
+        margin-top: 10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-bottom::before {
+        border-bottom: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-bottom::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        top: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-bottom-color: #222;
+        border-bottom-style: solid;
+        border-bottom-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-left {
+        margin-left: -10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-left::before {
+        border-left: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-left::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        right: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-left-color: #222;
+        border-left-style: solid;
+        border-left-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-right {
+        margin-left: 10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-right::before {
+        border-right: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-right::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        left: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-right-color: #222;
+        border-right-style: solid;
+        border-right-width: 6px;
+    }
+  
+                </style>
+                <p
+                  class="Text-sc-2lza2m-0 zCDei"
+                >
+                  <span>
+                    It means that any person who click the link will be able to complete the session. However please note, that people who starts session with the link and are not listed below won’t be able to use the branching and multisessions sequences.
+                  </span>
+                </p>
+              </div>
+            </div>
+            <img
+              alt="arrow"
+              class="Img-sc-1kfzr96-0 juORtB"
+              src="IMAGE_MOCK"
+              transform=""
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="Row-x1o3ru-0 bhnrrF"
+      >
+        <div
+          class="Column-sc-1n6divy-0 bzgxko"
+        >
+          <div
+            class="Row-x1o3ru-0 iAbLUf"
+          >
+            <p
+              class="Text-sc-2lza2m-0 hLUsTn"
+              font-weight="bold"
+            >
+              <span>
+                Select Starting Session
+              </span>
+            </p>
+            <div
+              class="Box-sc-14m3exe-0 jFRsDB"
+              display="flex"
+            >
+              <img
+                alt="?"
+                class="Img-sc-1kfzr96-0 dlGAit"
+                currentitem="false"
+                data-for="el-intervention-select-tooltip"
+                data-tip="true"
+                src="IMAGE_MOCK"
+              />
+              <div
+                class="__react_component_tooltip t00000000-0000-0000-0000-000000000000 place-top type-dark"
+                data-id="tooltip"
+                id="el-intervention-select-tooltip"
+              >
+                <style>
+                  
+  	.t00000000-0000-0000-0000-000000000000 {
+	    color: #fff;
+	    background: #222;
+	    border: 1px solid transparent;
+  	}
+
+  	.t00000000-0000-0000-0000-000000000000.place-top {
+        margin-top: -10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-top::before {
+        border-top: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-top::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        bottom: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-top-color: #222;
+        border-top-style: solid;
+        border-top-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-bottom {
+        margin-top: 10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-bottom::before {
+        border-bottom: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-bottom::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        top: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-bottom-color: #222;
+        border-bottom-style: solid;
+        border-bottom-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-left {
+        margin-left: -10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-left::before {
+        border-left: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-left::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        right: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-left-color: #222;
+        border-left-style: solid;
+        border-left-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-right {
+        margin-left: 10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-right::before {
+        border-right: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-right::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        left: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-right-color: #222;
+        border-right-style: solid;
+        border-right-width: 6px;
+    }
+  
+                </style>
+                <p
+                  class="Text-sc-2lza2m-0 zCDei"
+                >
+                  <span>
+                    Participants will be able to take part in the intervention from this particular session
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="Box-sc-14m3exe-0 gfpMuw"
+          >
+            <div
+              class=" css-2b097c-container"
+            >
+              <div
+                class=" css-1adp70q-control"
+              >
+                <div
+                  class=" css-g1d714-ValueContainer"
+                >
+                  <div
+                    class=" css-1uccc91-singleValue"
+                  >
+                    I1
+                  </div>
+                  <div
+                    class="css-b8ldur-Input"
+                  >
+                    <div
+                      class=""
+                      style="display: inline-block;"
+                    >
+                      <input
+                        aria-autocomplete="list"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
+                        id="react-select-3-input"
+                        spellcheck="false"
+                        style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
+                        tabindex="0"
+                        type="text"
+                        value=""
+                      />
+                      <div
+                        style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class=" css-1hb7zxy-IndicatorsContainer"
+                >
+                  <div
+                    aria-hidden="true"
+                    class=" css-tlfecz-indicatorContainer"
+                  >
+                    <img
+                      class="Img-sc-1kfzr96-0 dxGzl"
+                      src="IMAGE_MOCK"
+                      transform=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Row-x1o3ru-0 bhnrrF"
+      >
+        <div
+          class="Column-sc-1n6divy-0 bzgxko"
+        >
+          <div
+            class="Row-x1o3ru-0 lgUwZa"
+          >
+            <div
+              class="Row-x1o3ru-0 diEAcg"
+            >
+              <p
+                class="Text-sc-2lza2m-0 hLUsTn"
+                font-weight="bold"
+              >
+                <span>
+                  Invite Participants
+                </span>
+              </p>
+              <div
+                class="Box-sc-14m3exe-0 jFRsDB"
+                display="flex"
+              >
+                <img
+                  alt="?"
+                  class="Img-sc-1kfzr96-0 dlGAit"
+                  currentitem="false"
+                  data-for="el-participant-inviter-tooltip"
+                  data-tip="true"
+                  src="IMAGE_MOCK"
+                />
+                <div
+                  class="__react_component_tooltip t00000000-0000-0000-0000-000000000000 place-top type-dark"
+                  data-id="tooltip"
+                  id="el-participant-inviter-tooltip"
+                >
+                  <style>
+                    
+  	.t00000000-0000-0000-0000-000000000000 {
+	    color: #fff;
+	    background: #222;
+	    border: 1px solid transparent;
+  	}
+
+  	.t00000000-0000-0000-0000-000000000000.place-top {
+        margin-top: -10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-top::before {
+        border-top: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-top::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        bottom: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-top-color: #222;
+        border-top-style: solid;
+        border-top-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-bottom {
+        margin-top: 10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-bottom::before {
+        border-bottom: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-bottom::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        top: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-bottom-color: #222;
+        border-bottom-style: solid;
+        border-bottom-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-left {
+        margin-left: -10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-left::before {
+        border-left: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-left::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        right: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-left-color: #222;
+        border-left-style: solid;
+        border-left-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-right {
+        margin-left: 10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-right::before {
+        border-right: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-right::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        left: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-right-color: #222;
+        border-right-style: solid;
+        border-right-width: 6px;
+    }
+  
+                  </style>
+                  <p
+                    class="Text-sc-2lza2m-0 zCDei"
+                  >
+                    <span>
+                      These people will be invited to take part in the intervention and answer the selected session
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="Box-sc-14m3exe-0 gfpMuw"
+            >
+              <input
+                accept=".csv"
+                autocomplete="off"
+                style="display: none;"
+                tabindex="-1"
+                type="file"
+              />
+              <div
+                class="Row-x1o3ru-0 eekyNt"
+              >
+                <img
+                  alt="upload"
+                  class="Img-sc-1kfzr96-0 kHuQYD"
+                  src="IMAGE_MOCK"
+                />
+                <p
+                  class="Text-sc-2lza2m-0 evAabw"
+                  color="#C866EA"
+                  font-weight="bold"
+                >
+                  <span>
+                    Upload e-mails with CVS file
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="Row-x1o3ru-0 bKPAyc"
+          >
+            <input
+              class="Input-sc-19txxuq-0 eTitEt"
+              height="46"
+              placeholder="Participants emails"
+              type="singleline"
+              value=""
+              width="100%"
+            />
+            <button
+              class="StyledButton-t20ntd-0 kWxdQZ"
+              color="primary"
+              disabled=""
+              width="140"
+            >
+              <span>
+                Send invite
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Row-x1o3ru-0 dbynTp"
+      >
+        <div
+          class="Column-sc-1n6divy-0 bzgxko"
+        >
+          <div
+            class="Row-x1o3ru-0 csxlrH"
+          >
+            <div
+              class="Row-x1o3ru-0 exvbpM"
+            >
+              <img
+                alt="avatar"
+                class="Img-sc-1kfzr96-0 dsoWic"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="Text-sc-2lza2m-0 liriFs"
+                font-size="15px"
+              >
+                mock@mock.pl
+              </p>
+            </div>
+            <div
+              class="Box-sc-14m3exe-0 imXifq"
+              display="flex"
+            >
+              <div
+                class="styled__ImageContainer-sc-1amzre3-0 fIZBYf"
+              >
+                <img
+                  alt="dots"
+                  class="Img-sc-1kfzr96-0 dlGAit"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="Row-x1o3ru-0 csxlrH"
+          >
+            <div
+              class="Row-x1o3ru-0 exvbpM"
+            >
+              <img
+                alt="avatar"
+                class="Img-sc-1kfzr96-0 dsoWic"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="Text-sc-2lza2m-0 liriFs"
+                font-size="15px"
+              >
+                mock@mock.pl
+              </p>
+            </div>
+            <div
+              class="Box-sc-14m3exe-0 imXifq"
+              display="flex"
+            >
+              <div
+                class="styled__ImageContainer-sc-1amzre3-0 fIZBYf"
+              >
+                <img
+                  alt="dots"
+                  class="Img-sc-1kfzr96-0 dlGAit"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="Row-x1o3ru-0 csxlrH"
+          >
+            <div
+              class="Row-x1o3ru-0 exvbpM"
+            >
+              <img
+                alt="avatar"
+                class="Img-sc-1kfzr96-0 dsoWic"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="Text-sc-2lza2m-0 liriFs"
+                font-size="15px"
+              >
+                mock@mock.pl
+              </p>
+            </div>
+            <div
+              class="Box-sc-14m3exe-0 imXifq"
+              display="flex"
+            >
+              <div
+                class="styled__ImageContainer-sc-1amzre3-0 fIZBYf"
+              >
+                <img
+                  alt="dots"
+                  class="Img-sc-1kfzr96-0 dlGAit"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="Row-x1o3ru-0 csxlrH"
+          >
+            <div
+              class="Row-x1o3ru-0 exvbpM"
+            >
+              <img
+                alt="avatar"
+                class="Img-sc-1kfzr96-0 dsoWic"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="Text-sc-2lza2m-0 liriFs"
+                font-size="15px"
+              >
+                mock@mock.pl
+              </p>
+            </div>
+            <div
+              class="Box-sc-14m3exe-0 imXifq"
+              display="flex"
+            >
+              <div
+                class="styled__ImageContainer-sc-1amzre3-0 fIZBYf"
+              >
+                <img
+                  alt="dots"
+                  class="Img-sc-1kfzr96-0 dlGAit"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="Row-x1o3ru-0 iEEcOL"
+    >
+      <div
+        class="Box-sc-14m3exe-0 hRMAiJ"
+      >
+        <div
+          class="styled__Container-e4ycn-0 fbBlX"
+        >
+          <div
+            class="Row-x1o3ru-0 diEAcg"
+          >
+            <img
+              alt="share"
+              src="IMAGE_MOCK"
+            />
+            <p
+              class="Text-sc-2lza2m-0 evAabw"
+              color="#C866EA"
+              font-weight="bold"
+            >
+              <span>
+                Copy link to this session and share it with participants
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

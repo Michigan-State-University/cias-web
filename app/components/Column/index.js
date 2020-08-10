@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { flex, layout, margin } from '../BaseComponentStyles';
+import { flex, layout, margin, style, padding } from '../BaseComponentStyles';
 
 const maxNumberOfColumns = 12;
 
@@ -39,6 +39,8 @@ const Column = styled.div`
   ${flex};
   ${layout};
   ${margin};
+  ${style};
+  ${padding};
 `;
 
 Column.propTypes = {

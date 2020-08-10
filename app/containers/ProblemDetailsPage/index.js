@@ -10,7 +10,6 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { Container } from 'react-grid-system';
 
 import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
@@ -19,6 +18,7 @@ import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import BackButton from 'components/BackButton';
+import ShareBox from 'containers/ShareBox';
 import {
   fetchProblemRequest,
   makeSelectProblemState,
@@ -70,9 +70,9 @@ export function ProblemDetailsPage({
 
   if (fetchProblemError)
     return (
-      <Container>
+      <Box>
         <ErrorAlert errorText={fetchProblemError} />
-      </Container>
+      </Box>
     );
 
   if (fetchProblemLoading) return <Loader />;
@@ -97,14 +97,19 @@ export function ProblemDetailsPage({
           maxWidth="none"
         />
       </Row>
-      <Column sm={6}>
-        {renderList()}
-        <Row my={18} align="center">
-          <InterventionCreateButton
-            handleClick={() => createIntervention(problemId)}
-          />
-        </Row>
-      </Column>
+      <Row>
+        <Column sm={6}>
+          {renderList()}
+          <Row my={18} align="center">
+            <InterventionCreateButton
+              handleClick={() => createIntervention(problemId)}
+            />
+          </Row>
+        </Column>
+        <Column sm={6}>
+          <ShareBox />
+        </Column>
+      </Row>
     </Box>
   );
 }

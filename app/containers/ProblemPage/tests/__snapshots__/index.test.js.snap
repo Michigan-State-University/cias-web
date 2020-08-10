@@ -20,11 +20,11 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
       class="styled__InitialRow-sc-14fow03-0 eNEjTh"
     >
       <div
-        class="Row-x1o3ru-0 bStBXz"
+        class="Row-x1o3ru-0 hFDYll"
         width="250"
       >
         <button
-          class="styled__StatusLabel-sc-132k507-0 jZjlrC"
+          class="styled__StatusLabel-sc-132k507-0 glAVLl"
           color="#BDC7D6"
           value="draft"
         >
@@ -33,7 +33,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           </p>
         </button>
         <button
-          class="styled__StatusLabel-sc-132k507-0 ezhmBV"
+          class="styled__StatusLabel-sc-132k507-0 gamNkz"
           color="#8CBD00"
           value="published"
         >
@@ -42,7 +42,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           </p>
         </button>
         <button
-          class="styled__StatusLabel-sc-132k507-0 jeyZdx"
+          class="styled__StatusLabel-sc-132k507-0 bIGkyp"
           color="#F0684A"
           value="closed"
         >
@@ -72,7 +72,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
       >
         <div
-          class="styled__NewElementContainer-sc-1wlulo8-1 fZMXna"
+          class="styled__NewElementContainer-sc-1wlulo8-1 dweXER"
         >
           <div
             class="Box-sc-14m3exe-0 hkJBrh"
@@ -96,7 +96,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           href="/interventions/undefined/"
         >
           <div
-            class="styled__TileContainer-vwtndu-0 foQaSE"
+            class="styled__TileContainer-vwtndu-0 VjUkX"
           >
             <div
               class="styled__Heading-vwtndu-2 dAoPsR"
@@ -128,7 +128,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
               </div>
             </div>
             <div
-              class="styled__Title-vwtndu-4 gSlbGu"
+              class="styled__Title-vwtndu-4 cnHTKf"
             >
               <div>
                 Name
@@ -173,7 +173,7 @@ exports[`<ProblemPage /> Should render and match the snapshot without interventi
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
       >
         <div
-          class="styled__NewElementContainer-sc-1wlulo8-1 fZMXna"
+          class="styled__NewElementContainer-sc-1wlulo8-1 dweXER"
         >
           <div
             class="Box-sc-14m3exe-0 hkJBrh"

@@ -19,3 +19,5 @@ Button.propTypes = {
 };
 
 export { Button };
+
+export default Button;

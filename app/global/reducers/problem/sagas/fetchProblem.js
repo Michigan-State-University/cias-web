@@ -8,7 +8,6 @@ import { fetchProblemSuccess, fetchProblemError } from '../actions';
 
 function* fetchProblem({ payload: { id } }) {
   const requestURL = `v1/problems/${id}`;
-
   try {
     const {
       data: { data },

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { themeColors, colors } from 'theme';
+import { themeColors, colors, boxShadows } from 'theme';
 
 export const StatusLabel = styled.button`
   border: none;
@@ -12,7 +12,7 @@ export const StatusLabel = styled.button`
   background: ${props =>
     props.active ? themeColors.primary : props.color || themeColors.highlight};
   color: ${props => props.active && colors.white};
-  box-shadow: 0px 4px 20px #e3eefb;
+  box-shadow: ${boxShadows.selago};
   transition: 0.3s;
   &:hover {
     cursor: pointer;

@@ -19,7 +19,7 @@ const decideIfAddMargin = i => (i !== blockTypes.length - 1 ? { mb: 4 } : {});
 const BlockTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
   <Box
     borderRadius={10}
-    shadow={boxShadows[1]}
+    shadow={boxShadows.black}
     position="absolute"
     width="100%"
     {...(visible ? {} : { display: 'none' })}

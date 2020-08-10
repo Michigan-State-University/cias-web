@@ -124,7 +124,7 @@ const QuestionListItem = ({
           )}
         </Column>
         <Column xs={1}>
-          <Dropdown options={options} id={id} />
+          <Dropdown options={options} />
         </Column>
       </Row>
     </ToggleableBox>

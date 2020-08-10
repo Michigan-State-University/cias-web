@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UploadFileButton /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.c3 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(200,102,234,1);
+  color: rgba(200,102,234,1);
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <input
+      accept=".csv"
+      autocomplete="off"
+      style="display: none;"
+      tabindex="-1"
+      type="file"
+    />
+    <div
+      class="c1"
+    >
+      <img
+        alt="upload"
+        class="c2"
+        src="icon.svg"
+      />
+      <p
+        class="c3"
+        color="#C866EA"
+        font-weight="bold"
+      >
+        Upload
+      </p>
+    </div>
+  </div>
+</div>
+`;

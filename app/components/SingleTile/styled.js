@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { colors, themeColors } from 'theme';
+import { colors, themeColors, boxShadows } from 'theme';
 import { statusTypeToColorMap } from 'models/Status/StatusTypes';
 
 const sharedContainerStyles = `
   padding: 15px;
   height: 150px;
-  box-shadow: 0px 4px 20px #e3eefb;
+  box-shadow: ${boxShadows.selago};
   border-radius: 5px;
   margin-bottom: 20px;
   display: flex;
@@ -61,7 +61,7 @@ export const Title = styled.div`
       overflow: visible;
       white-space: initial;
       height: auto;
-      box-shadow: 0px 4px 20px #e3eefb;
+      box-shadow: ${boxShadows.selago};
     }
   }
 `;

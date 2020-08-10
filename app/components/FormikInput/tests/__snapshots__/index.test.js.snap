@@ -3,10 +3,10 @@
 exports[`<FormikInput /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Column-sc-1n6divy-0 gSmTjF"
+    class="Column-sc-1n6divy-0 bzgxko"
   >
     <p
-      class="Text-sc-2lza2m-0 bkfXbb"
+      class="Text-sc-2lza2m-0 jdGrCy"
     >
       Label
     </p>
