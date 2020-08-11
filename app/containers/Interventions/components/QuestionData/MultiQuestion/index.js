@@ -23,10 +23,7 @@ import { themeColors, colors } from 'theme';
 import messages from './messages';
 import { ADD, UPDATE, REMOVE } from './constants';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
-import {
-  makeSelectSelectedQuestion,
-  makeSelectIsNarratorTab,
-} from '../../../containers/EditInterventionPage/selectors';
+import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const CHECKBOX_MARGIN = 16;
@@ -168,7 +165,6 @@ MultiQuestion.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = dispatch => ({

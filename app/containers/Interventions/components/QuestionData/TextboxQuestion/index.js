@@ -17,10 +17,7 @@ import { variableNameValidator } from 'utils/validators';
 
 import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
-import {
-  makeSelectSelectedQuestion,
-  makeSelectIsNarratorTab,
-} from '../../../containers/EditInterventionPage/selectors';
+import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const TextboxQuestion = ({
@@ -75,7 +72,6 @@ TextboxQuestion.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {

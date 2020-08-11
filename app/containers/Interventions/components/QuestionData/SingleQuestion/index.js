@@ -23,10 +23,7 @@ import { themeColors, colors } from 'theme';
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
-import {
-  makeSelectSelectedQuestion,
-  makeSelectIsNarratorTab,
-} from '../../../containers/EditInterventionPage/selectors';
+import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const RADIO_MARGIN = 16;
@@ -181,7 +178,6 @@ SingleQuestion.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {

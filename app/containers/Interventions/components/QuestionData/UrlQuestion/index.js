@@ -14,10 +14,7 @@ import UrlPreview from 'components/UrlPreview';
 import globalMessages from 'global/i18n/globalMessages';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { colors } from 'theme/colors';
-import {
-  makeSelectSelectedQuestion,
-  makeSelectIsNarratorTab,
-} from 'containers/Interventions/containers/EditInterventionPage/selectors';
+import { makeSelectSelectedQuestion } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import { updateQuestionData } from 'containers/Interventions/containers/EditInterventionPage/actions';
 import { urlValidator } from 'utils/validators/urlValidator';
 import { variableNameValidator } from 'utils/validators';
@@ -85,7 +82,6 @@ UrlQuestion.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {

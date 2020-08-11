@@ -23,10 +23,7 @@ import { themeColors, colors, elements } from 'theme';
 
 import messages from './messages';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
-import {
-  makeSelectSelectedQuestion,
-  makeSelectIsNarratorTab,
-} from '../../../containers/EditInterventionPage/selectors';
+import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 import {
   ADD_ROW,
@@ -239,7 +236,6 @@ GridQuestion.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {
