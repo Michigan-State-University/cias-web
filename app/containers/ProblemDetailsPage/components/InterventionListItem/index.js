@@ -6,18 +6,53 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { injectIntl } from 'react-intl';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
 import H2 from 'components/H2';
 import Dropdown from 'components/Dropdown';
 
+import fileShare from 'assets/svg/file-share.svg';
+import copy from 'assets/svg/copy.svg';
+import archive from 'assets/svg/archive.svg';
+
+import { colors } from 'theme';
+import messages from './messages';
 import { InterventionIndex, StyledLink, ToggleableBox } from './styled';
 
-function InterventionListItem({ intervention, index, isSelected }) {
+function InterventionListItem({
+  intl: { formatMessage },
+  intervention,
+  index,
+  isSelected,
+}) {
   const { id, name, problem_id: problemId } = intervention || {};
 
-  const options = [];
+  const options = [
+    {
+      id: 'copy',
+      label: formatMessage(messages.copy),
+      icon: fileShare,
+      action: () => {},
+      color: colors.bluewood,
+    },
+    {
+      id: 'duplicate',
+      label: formatMessage(messages.duplicate),
+      icon: copy,
+      action: () => {},
+      color: colors.bluewood,
+    },
+    {
+      id: 'archive',
+      label: formatMessage(messages.archive),
+      icon: archive,
+      action: () => {},
+      color: colors.bluewood,
+    },
+  ];
+
   return (
     <ToggleableBox isSelected={isSelected}>
       <Row py={18} px={20} align="center">
@@ -41,6 +76,7 @@ InterventionListItem.propTypes = {
   intervention: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   isSelected: PropTypes.bool,
+  intl: PropTypes.object,
 };
 
-export default InterventionListItem;
+export default injectIntl(InterventionListItem);

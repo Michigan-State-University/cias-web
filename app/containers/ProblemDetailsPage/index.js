@@ -106,7 +106,7 @@ export function ProblemDetailsPage({
             />
           </Row>
         </Column>
-        <Column sm={6}>
+        <Column height="0%" sm={6}>
           <ShareBox />
         </Column>
       </Row>
