@@ -51,6 +51,7 @@ const QuestionData = ({ selectedQuestionType, isNarratorTab }) => {
 
 QuestionData.propTypes = {
   selectedQuestionType: PropTypes.string.isRequired,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
