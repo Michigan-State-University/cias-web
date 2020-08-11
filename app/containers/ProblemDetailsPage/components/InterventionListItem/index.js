@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
@@ -12,6 +12,7 @@ import Row from 'components/Row';
 import Column from 'components/Column';
 import H2 from 'components/H2';
 import Dropdown from 'components/Dropdown';
+import Divider from 'components/Divider';
 
 import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
@@ -20,13 +21,16 @@ import archive from 'assets/svg/archive.svg';
 import { colors } from 'theme';
 import messages from './messages';
 import { InterventionIndex, StyledLink, ToggleableBox } from './styled';
+import InterventionListBranching from '../InterventionListBranching';
 
 function InterventionListItem({
   intl: { formatMessage },
   intervention,
   index,
   isSelected,
+  nextInterventionName,
 }) {
+  const [branching, setBranching] = useState(false);
   const { id, name, problem_id: problemId } = intervention || {};
 
   const options = [
@@ -55,19 +59,27 @@ function InterventionListItem({
 
   return (
     <ToggleableBox isSelected={isSelected}>
-      <Row py={18} px={20} align="center">
+      <Row py={21} px={16} align="center" justify="between">
         <Column xs={1}>
           <InterventionIndex>{index + 1}</InterventionIndex>
         </Column>
-        <Column xs={10} mx={18}>
+        <Column xs={10}>
           <StyledLink to={`/interventions/${problemId}/sessions/${id}/edit`}>
             <H2>{name}</H2>
           </StyledLink>
         </Column>
-        <Column xs={1}>
-          <Dropdown options={options} id={id} />
+        <Column xs={1} align="center">
+          <Dropdown options={options} clickable id={id} />
         </Column>
       </Row>
+      <Row px={62}>
+        <Divider />
+      </Row>
+      <InterventionListBranching
+        nextInterventionName={nextInterventionName}
+        branching={branching}
+        handleBranching={setBranching}
+      />
     </ToggleableBox>
   );
 }
@@ -76,6 +88,7 @@ InterventionListItem.propTypes = {
   intervention: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   isSelected: PropTypes.bool,
+  nextInterventionName: PropTypes.string,
   intl: PropTypes.object,
 };
 

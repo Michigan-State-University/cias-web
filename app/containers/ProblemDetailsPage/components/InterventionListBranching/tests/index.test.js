@@ -1,13 +1,13 @@
 /**
  *
- * Tests for InterventionListItem
+ * Tests for InterventionListBranching
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
  */
 
 import React from 'react';
-import { browserHistory, MemoryRouter } from 'react-router-dom';
+import { browserHistory } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 import { render } from 'react-testing-library';
 import 'jest-styled-components';
@@ -16,9 +16,13 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { Provider } from 'react-redux';
 import configureStore from 'configureStore';
 
-import InterventionListItem from '../index';
+import InterventionListBranching from '../index';
 
-describe('<InterventionListItem />', () => {
+const defaultProps = {
+  nextInterventionName: 'test-2',
+};
+
+describe('<InterventionListBranching />', () => {
   let store;
 
   beforeAll(() => {
@@ -30,13 +34,7 @@ describe('<InterventionListItem />', () => {
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <Provider store={store}>
-          <MemoryRouter>
-            <InterventionListItem
-              intervention={{ id: '1', name: 'Intervention', problem_id: '1' }}
-              index={0}
-              nextInterventionName="test-2"
-            />
-          </MemoryRouter>
+          <InterventionListBranching {...defaultProps} />
         </Provider>
       </IntlProvider>,
     );
@@ -48,17 +46,7 @@ describe('<InterventionListItem />', () => {
       .create(
         <IntlProvider locale={DEFAULT_LOCALE}>
           <Provider store={store}>
-            <MemoryRouter>
-              <InterventionListItem
-                intervention={{
-                  id: '1',
-                  name: 'Intervention',
-                  problem_id: '1',
-                }}
-                index={0}
-                nextInterventionName="test-2"
-              />
-            </MemoryRouter>
+            <InterventionListBranching {...defaultProps} />
           </Provider>
         </IntlProvider>,
       )

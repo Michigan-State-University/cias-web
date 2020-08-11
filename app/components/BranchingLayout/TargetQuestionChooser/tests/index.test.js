@@ -9,8 +9,8 @@ import { createStore } from 'redux';
 import { interventionReducer } from 'global/reducers/intervention';
 import { problemReducer } from 'global/reducers/problem';
 
+import editInterventionPageReducer from 'containers/Interventions/containers/EditInterventionPage/reducer';
 import TargetQuestionChooser from '../index';
-import editInterventionPageReducer from '../../../../containers/EditInterventionPage/reducer';
 
 const mockSingleQuestion = (suffix = 1, hasVariable = true) => ({
   id: `test-id-${suffix}`,

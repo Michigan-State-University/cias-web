@@ -63,6 +63,9 @@ export function ProblemDetailsPage({
             key={intervention.id}
             intervention={intervention}
             index={index}
+            nextInterventionName={
+              interventions[index + 1] ? interventions[index + 1].name : null
+            }
           />
         ))}
     </>

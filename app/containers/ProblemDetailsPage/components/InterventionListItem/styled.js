@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import HoverableBox from 'components/Box/HoverableBox';
 import { colors, boxShadows } from 'theme';
+import Box from 'components/Box';
 
-export const ToggleableBox = styled(HoverableBox)`
+export const ToggleableBox = styled(Box)`
   background-color: ${({ isSelected }) =>
     isSelected ? colors.linkWater : colors.white};
   margin-top: 18px;
@@ -19,7 +19,6 @@ export const InterventionIndex = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 10px;
   position: relative;
   cursor: pointer;
 `;
