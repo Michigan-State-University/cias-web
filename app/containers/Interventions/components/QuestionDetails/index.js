@@ -10,7 +10,6 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import Question from 'models/Intervention/Question';
 import NoContent from 'components/NoContent';
-import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { Button } from 'components/Button';
 
 import { colors } from 'theme';
@@ -18,7 +17,7 @@ import QuestionPreview from 'containers/Interventions/components/QuestionDetails
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import {
   makeSelectSelectedQuestion,
-  makeSelectQuestionSettingsTab,
+  makeSelectIsNarratorTab,
 } from '../../containers/EditInterventionPage/selectors';
 import { AnswerOuterContainer, AnswerInterventionContent } from './styled';
 import messages from './messages';
@@ -42,8 +41,7 @@ const QuestionDetails = props => (
   </Box>
 );
 
-const renderQuestionDetails = ({ selectedQuestion, tab }) => {
-  const isNarratorTab = tab === settingsTabLabels.narrator;
+const renderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
   if (selectedQuestion != null) {
     const {
       id,
@@ -144,12 +142,12 @@ const renderQuestionDetails = ({ selectedQuestion, tab }) => {
 
 renderQuestionDetails.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
-  tab: PropTypes.string,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  tab: makeSelectQuestionSettingsTab(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const withConnect = connect(mapStateToProps);

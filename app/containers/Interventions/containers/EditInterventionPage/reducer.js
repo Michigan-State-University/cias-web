@@ -9,7 +9,7 @@ import {
   headAnimationType,
 } from 'models/Narrator/BlockTypes';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
+import settingsTabLabels from 'utils/settingsTabsLabels';
 
 import {
   SELECT_QUESTION,

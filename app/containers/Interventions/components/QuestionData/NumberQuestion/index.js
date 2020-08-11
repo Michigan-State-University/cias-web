@@ -11,7 +11,6 @@ import Column from 'components/Column';
 import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import globalMessages from 'global/i18n/globalMessages';
-import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { colors } from 'theme/colors';
 import { numericValidator, variableNameValidator } from 'utils/validators';
@@ -20,7 +19,7 @@ import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
 import {
   makeSelectSelectedQuestion,
-  makeSelectQuestionSettingsTab,
+  makeSelectIsNarratorTab,
 } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
@@ -28,10 +27,9 @@ const NumberQuestion = ({
   selectedQuestion,
   updateAnswer,
   updateVariable,
-  tab,
+  isNarratorTab,
   intl: { formatMessage },
 }) => {
-  const isNarratorTab = tab === settingsTabLabels.narrator;
   const { payload } = selectedQuestion.body.data[0];
   const { variable } = selectedQuestion.body;
 
@@ -74,12 +72,12 @@ NumberQuestion.propTypes = {
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
-  tab: PropTypes.string,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  tab: makeSelectQuestionSettingsTab(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {

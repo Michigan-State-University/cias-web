@@ -14,7 +14,6 @@ import Column from 'components/Column';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
 import Row from 'components/Row';
-import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import Question from 'models/Intervention/Question';
 
 import { colors } from 'theme/colors';
@@ -27,7 +26,7 @@ import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
 
 import {
   makeSelectSelectedQuestion,
-  makeSelectQuestionSettingsTab,
+  makeSelectIsNarratorTab,
 } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
@@ -35,10 +34,9 @@ const VisualAnalogueScaleQuestion = ({
   selectedQuestion,
   updateLabel,
   updateVariable,
-  tab,
+  isNarratorTab,
   intl: { formatMessage },
 }) => {
-  const isNarratorTab = tab === settingsTabLabels.narrator;
   const {
     body: { variable, data },
     settings: { show_number: showNumber },
@@ -124,12 +122,12 @@ VisualAnalogueScaleQuestion.propTypes = {
   intl: PropTypes.object.isRequired,
   updateLabel: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
-  tab: PropTypes.string,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  tab: makeSelectQuestionSettingsTab(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {

@@ -7,19 +7,18 @@ import { injectIntl, intlShape } from 'react-intl';
 
 import Column from 'components/Column';
 import Tabs from 'components/Tabs';
-import messages from './messages';
+import settingsTabLabels from 'utils/settingsTabsLabels';
 
+import SettingsTab from './Components/Tabs/SettingsTab';
+import NarratorTab from './Components/Tabs/NarratorTab';
+import BranchingTab from './Components/Tabs/BranchingTab';
+import messages from './messages';
 import {
   makeSelectSelectedQuestion,
   makeSelectQuestions,
   makeSelectQuestionSettingsTab,
 } from '../../../containers/EditInterventionPage/selectors';
 import { toggleQuestionSettings } from '../../../containers/EditInterventionPage/actions';
-
-import SettingsTab from './Components/Tabs/SettingsTab';
-import NarratorTab from './Components/Tabs/NarratorTab';
-import BranchingTab from './Components/Tabs/BranchingTab';
-import settingsTabLabels from './settingsTabLabels';
 
 const Settings = ({
   selectedQuestion: { narrator, settings, id, formula, type } = {},

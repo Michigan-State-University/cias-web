@@ -18,14 +18,13 @@ import HoverableBox from 'components/Box/HoverableBox';
 import imagePlaceholder from 'assets/svg/image-placeholder.svg';
 import { themeColors, borders } from 'theme';
 import bin from 'assets/svg/bin-red.svg';
-import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import {
   addQuestionImage,
   deleteQuestionImage,
 } from '../../containers/EditInterventionPage/actions';
 import {
   makeSelectSelectedQuestion,
-  makeSelectQuestionSettingsTab,
+  makeSelectIsNarratorTab,
 } from '../../containers/EditInterventionPage/selectors';
 import { ImageWrapper } from './styled';
 import messages from './messages';
@@ -35,9 +34,8 @@ export const QuestionImage = ({
   deleteImage,
   selectedQuestion: { id, image_url: imageUrl },
   intl: { formatMessage },
-  tab,
+  isNarratorTab,
 }) => {
-  const isNarratorTab = tab === settingsTabLabels.narrator;
   const [hovered, setHovered] = useState(false);
 
   const handleDrop = useCallback(newFiles => {
@@ -152,12 +150,12 @@ QuestionImage.propTypes = {
   }),
   formatMessage: PropTypes.func,
   intl: intlShape,
-  tab: PropTypes.string,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  tab: makeSelectQuestionSettingsTab(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {

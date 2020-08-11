@@ -12,12 +12,11 @@ import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import UrlPreview from 'components/UrlPreview';
 import globalMessages from 'global/i18n/globalMessages';
-import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { colors } from 'theme/colors';
 import {
   makeSelectSelectedQuestion,
-  makeSelectQuestionSettingsTab,
+  makeSelectIsNarratorTab,
 } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import { updateQuestionData } from 'containers/Interventions/containers/EditInterventionPage/actions';
 import { urlValidator } from 'utils/validators/urlValidator';
@@ -30,10 +29,9 @@ const UrlQuestion = ({
   selectedQuestion,
   updateUrl,
   updateVariable,
-  tab,
+  isNarratorTab,
   intl: { formatMessage },
 }) => {
-  const isNarratorTab = tab === settingsTabLabels.narrator;
   const { payload } = selectedQuestion.body.data[0];
   const { variable } = selectedQuestion.body;
 
@@ -82,12 +80,12 @@ UrlQuestion.propTypes = {
   intl: PropTypes.object.isRequired,
   updateUrl: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
-  tab: PropTypes.string,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  tab: makeSelectQuestionSettingsTab(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {

@@ -16,7 +16,6 @@ import Text from 'components/Text';
 import bin from 'assets/svg/bin-red.svg';
 import checkbox from 'assets/svg/checkbox.svg';
 import globalMessages from 'global/i18n/globalMessages';
-import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
@@ -26,7 +25,7 @@ import { ADD, UPDATE, REMOVE } from './constants';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
 import {
   makeSelectSelectedQuestion,
-  makeSelectQuestionSettingsTab,
+  makeSelectIsNarratorTab,
 } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
@@ -38,10 +37,9 @@ const MultiQuestion = ({
   addAnswer,
   updateAnswer,
   removeAnswer,
-  tab,
+  isNarratorTab,
   intl: { formatMessage },
 }) => {
-  const isNarratorTab = tab === settingsTabLabels.narrator;
   const checkboxButtonRef = useRef(null);
 
   const [hovered, setHovered] = useState(-1);
@@ -165,12 +163,12 @@ MultiQuestion.propTypes = {
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
   removeAnswer: PropTypes.func.isRequired,
-  tab: PropTypes.string,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  tab: makeSelectQuestionSettingsTab(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = dispatch => ({

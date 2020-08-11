@@ -15,7 +15,6 @@ import Text from 'components/Text';
 import bin from 'assets/svg/bin-red.svg';
 import globalMessages from 'global/i18n/globalMessages';
 import radio from 'assets/svg/radio-button.svg';
-import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
@@ -26,7 +25,7 @@ import messages from './messages';
 import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
 import {
   makeSelectSelectedQuestion,
-  makeSelectQuestionSettingsTab,
+  makeSelectIsNarratorTab,
 } from '../../../containers/EditInterventionPage/selectors';
 import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 import {
@@ -46,10 +45,9 @@ const GridQuestion = ({
   updateColumn,
   deleteRow,
   deleteColumn,
-  tab,
+  isNarratorTab,
   intl: { formatMessage },
 }) => {
-  const isNarratorTab = tab === settingsTabLabels.narrator;
   const {
     payload: { rows, columns },
   } = selectedQuestion.body.data[0];
@@ -236,12 +234,12 @@ GridQuestion.propTypes = {
   updateColumn: PropTypes.func.isRequired,
   deleteRow: PropTypes.func.isRequired,
   deleteColumn: PropTypes.func.isRequired,
-  tab: PropTypes.string,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  tab: makeSelectQuestionSettingsTab(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {

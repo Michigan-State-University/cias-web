@@ -10,14 +10,13 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import bin from 'assets/svg/bin-red.svg';
-import settingsTabLabels from 'containers/Interventions/components/QuestionSettings/Settings/settingsTabLabels';
 import { colors } from 'theme';
 
 import messages from './messages';
 import { PlayerWrapper, Player } from './styled';
 import {
   makeSelectSelectedQuestion,
-  makeSelectQuestionSettingsTab,
+  makeSelectIsNarratorTab,
 } from '../../containers/EditInterventionPage/selectors';
 import { editQuestionRequest } from '../../containers/EditInterventionPage/actions';
 
@@ -28,9 +27,8 @@ const QuestionVideo = ({
   intl: { formatMessage },
   selectedQuestion: { video_url: videoUrl },
   updateVideo,
-  tab,
+  isNarratorTab,
 }) => {
-  const isNarratorTab = tab === settingsTabLabels.narrator;
   const [hovered, setHovered] = useState(false);
 
   const setVideoUrl = url => updateVideo({ path: 'video_url', value: url });
@@ -93,12 +91,12 @@ QuestionVideo.propTypes = {
     video_url: PropTypes.string,
   }),
   updateVideo: PropTypes.func,
-  tab: PropTypes.string,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  tab: makeSelectQuestionSettingsTab(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {

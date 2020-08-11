@@ -201,7 +201,6 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   <div
     className="c1"
     display="flex"
-    hidden={false}
   >
     <input
       className="c2 c3"
@@ -217,7 +216,6 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   </div>
   <div
     className="c4"
-    hidden={false}
     width="100%"
   >
     <div
