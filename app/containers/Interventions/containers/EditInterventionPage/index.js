@@ -22,6 +22,7 @@ import {
   getInterventionSaga,
   makeSelectInterventionLoaders,
 } from 'global/reducers/intervention';
+import useLockBodyScroll from 'utils/useLockBodyScroll';
 
 import { borders, themeColors, colors } from 'theme';
 
@@ -57,6 +58,7 @@ function EditInterventionPage({
   loaders: { questionListLoading },
   interventionLoaders: { getIntervention: getInterventionLoader },
 }) {
+  useLockBodyScroll();
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   useInjectReducer({ key: 'editInterventionPage', reducer });
   useInjectSaga({ key: 'editInterventionPage', saga });
@@ -133,7 +135,7 @@ function EditInterventionPage({
             borderRight={`${borders.borderWidth} ${borders.borderStyle} ${
               colors.linkWater
             }`}
-            overflow="scroll"
+            overflow="auto"
             padded
           >
             <Box width="100%" padded>

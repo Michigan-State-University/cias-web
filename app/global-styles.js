@@ -62,7 +62,7 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     flex: 1;
     align-items: stretch;
-    overflow: scroll;
+    overflow: auto;
   }
 
   #app {

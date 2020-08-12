@@ -6,8 +6,8 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import Navbar from 'containers/Navbar';
-import { elements } from 'theme';
 import { makeSelectIsLoggedIn, makeSelectUser } from 'global/reducers/auth';
+import { MainAppContainer } from './styled';
 
 class AppRoute extends Route {
   render() {
@@ -35,14 +35,9 @@ class AppRoute extends Route {
             match={computedMatch}
             location={location}
           />
-          <div
-            style={{
-              marginTop: 70,
-              height: `calc(100% - ${elements.navbarHeight}px)`,
-            }}
-          >
+          <MainAppContainer id="main-app-container">
             {super.render()}
-          </div>
+          </MainAppContainer>
         </>
       );
     }
