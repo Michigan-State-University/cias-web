@@ -16,10 +16,9 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
 
   const getScaledPosition = (scale, position) => {
     const { clientWidth, clientHeight } = animationContainer || defaultCurrent;
-
     return {
       x: Math.min(position.x * scale.x, clientWidth - 100),
-      y: Math.min(position.y, clientHeight),
+      y: Math.min(position.y, clientHeight - 100),
     };
   };
 
@@ -32,18 +31,15 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
 
   const getInitialAnimationPosition = firstBlock => {
     if (!firstBlock) return { x: 0, y: 0 };
-    return getScaledPosition(
-      getScaleFactor(animationContainer),
-      firstBlock.position.posTo,
-    );
+    return getScaledPosition(getScaleFactor(), firstBlock.position.posTo);
   };
 
   const [animationPos, setAnimationPos] = useState(
-    getInitialAnimationPosition(blocks[0], animationContainer),
+    getInitialAnimationPosition(blocks[0]),
   );
 
   useEffect(() => {
-    const newScaleFactor = getScaleFactor(animationContainer);
+    const newScaleFactor = getScaleFactor();
     setScaleFactor(newScaleFactor);
   }, []);
 

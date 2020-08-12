@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useRef, Fragment } from 'react';
+import React, { memo, useEffect, useRef, Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -52,6 +52,39 @@ import {
   setQuestionIndex,
   startIntervention,
 } from './actions';
+
+const AnimationRefHelper = ({
+  children,
+  currentQuestion,
+  currentQuestionId,
+  previewMode,
+}) => {
+  const animationParentRef = useRef();
+  const [refState, setRefState] = useState(null);
+  useEffect(() => {
+    setRefState(animationParentRef.current);
+  }, [animationParentRef]);
+  return (
+    <AnswerInterventionContent ref={animationParentRef}>
+      {children}
+      {refState !== null && (
+        <CharacterAnim
+          animationContainer={animationParentRef.current}
+          blocks={currentQuestion.narrator.blocks}
+          questionId={currentQuestionId}
+          settings={currentQuestion.narrator.settings}
+          previewMode={previewMode}
+        />
+      )}
+    </AnswerInterventionContent>
+  );
+};
+AnimationRefHelper.propTypes = {
+  children: PropTypes.any,
+  currentQuestion: PropTypes.any,
+  currentQuestionId: PropTypes.any,
+  previewMode: PropTypes.any,
+};
 
 export function AnswerInterventionPage({
   match: { params },
@@ -108,7 +141,6 @@ export function AnswerInterventionPage({
     : null;
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
-  const animationParentRef = useRef();
 
   const { interventionId, index } = params;
 
@@ -180,7 +212,7 @@ export function AnswerInterventionPage({
             {renderQuestionByType(currentQuestion, sharedProps)}
           </Row>
           {(isNullOrUndefined(proceedButton) || proceedButton) && (
-            <Row width="100%">
+            <Row width="100%" my={20}>
               <Button
                 disabled={isButtonDisabled()}
                 margin={20}
@@ -202,23 +234,9 @@ export function AnswerInterventionPage({
     );
   };
 
-  const renderPage = () => (
-    <>
-      <Fragment>
-        {renderQuestion()}
-        <CharacterAnim
-          animationContainer={animationParentRef.current}
-          blocks={currentQuestion.narrator.blocks}
-          questionId={currentQuestionId}
-          settings={currentQuestion.narrator.settings}
-          previewMode={previewMode}
-        />
-      </Fragment>
-    </>
-  );
+  const renderPage = () => <Fragment>{renderQuestion()}</Fragment>;
 
   const isDesktop = previewMode === DESKTOP_MODE;
-
   return (
     <Box
       display="flex"
@@ -245,10 +263,14 @@ export function AnswerInterventionPage({
         {interventionStarted && (
           <Fragment>
             <Box width="100%">
-              {!questionLoading && currentQuestion && (
-                <AnswerInterventionContent ref={animationParentRef}>
+              {!questionLoading && currentQuestion && interventionStarted && (
+                <AnimationRefHelper
+                  currentQuestion={currentQuestion}
+                  currentQuestionId={currentQuestionId}
+                  previewMode={previewMode}
+                >
                   {renderPage()}
-                </AnswerInterventionContent>
+                </AnimationRefHelper>
               )}
             </Box>
             {questionError && <ErrorAlert errorText={questionError} />}

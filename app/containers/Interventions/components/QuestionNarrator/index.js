@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useLayoutEffect } from 'react';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
 import Lottie from 'react-lottie';
@@ -55,7 +55,9 @@ const QuestionNarrator = ({
   animationPositionStored,
   updateNarratorPreviewAnimation,
   previewData,
+  animationBoundaries,
 }) => {
+  const [height, setHeight] = useState(0);
   const [state, dispatch] = useReducer(reducer, initialState);
   const dispatchUpdate = newState =>
     dispatch({
@@ -158,6 +160,14 @@ const QuestionNarrator = ({
     }
   }, [previewData.animation]);
 
+  useLayoutEffect(() => {
+    const cur = animationBoundaries.current;
+    if (cur) {
+      const { clientHeight } = cur;
+      setHeight(clientHeight);
+    }
+  });
+
   useDidUpdateEffect(() => {
     const { anim } = animationRef.current;
     anim.stop();
@@ -202,12 +212,21 @@ const QuestionNarrator = ({
     ...getAnimationOptions(),
   };
 
+  const getPosition = () => {
+    if (dragPosition) {
+      return {
+        x: dragPosition.x,
+        y: Math.min(height - 100, dragPosition.y),
+      };
+    }
+  };
+
   return (
     <NarratorContainer canBeDragged={draggable}>
       <Draggable
         onStop={(_, { x, y }) => setOffset(x, y)}
         onDrag={(_, { x, y }) => setDragPosition({ x, y })}
-        position={dragPosition}
+        position={getPosition()}
         disabled={!draggable}
         bounds="parent"
       >
@@ -238,6 +257,7 @@ QuestionNarrator.propTypes = {
   questionId: PropTypes.string,
   updateNarratorPreviewAnimation: PropTypes.func,
   previewData: PropTypes.object,
+  animationBoundaries: PropTypes.any,
 };
 
 const mapStateToProps = createStructuredSelector({

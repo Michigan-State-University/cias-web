@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
@@ -37,11 +37,13 @@ const QuestionDetails = props => (
     padding={30}
     bg={colors.zirkon}
   >
-    {renderQuestionDetails(props)}
+    <RenderQuestionDetails {...props} />
   </Box>
 );
 
-const renderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
+const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
+  const animationBoundaries = useRef(null);
+
   if (selectedQuestion != null) {
     const {
       id,
@@ -62,8 +64,13 @@ const renderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
     return (
       <AnswerOuterContainer>
         <Box width="100%">
-          <AnswerInterventionContent>
-            {animation && <QuestionNarrator questionId={id} />}
+          <AnswerInterventionContent ref={animationBoundaries}>
+            {animation && (
+              <QuestionNarrator
+                questionId={id}
+                animationBoundaries={animationBoundaries}
+              />
+            )}
             <Row justify="center" filled>
               <Column mx={50} justify="center">
                 <Row width="100%" mt={5} height={30} />
@@ -140,7 +147,7 @@ const renderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
   return <NoContent />;
 };
 
-renderQuestionDetails.propTypes = {
+RenderQuestionDetails.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
   isNarratorTab: PropTypes.bool,
 };
