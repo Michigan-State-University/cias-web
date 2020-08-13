@@ -56,6 +56,7 @@ const QuestionNarrator = ({
   updateNarratorPreviewAnimation,
   previewData,
   animationBoundaries,
+  settings,
 }) => {
   const [height, setHeight] = useState(0);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -95,7 +96,7 @@ const QuestionNarrator = ({
   const {
     getInitialSpeechAnimation,
     cleanAudio,
-    handleSpeechBlock,
+    handleAudioBlock,
     decideIfPlaySpeechAnimation,
     fetchAudioAnimations,
     stopSpeech,
@@ -106,6 +107,8 @@ const QuestionNarrator = ({
     state.currentBlockIndex,
     animationRef.current,
     onBlockFinish,
+    {},
+    settings,
   );
 
   const getInitialData = () => {
@@ -128,11 +131,11 @@ const QuestionNarrator = ({
     switch (previewData.type) {
       case headAnimationType:
       case bodyAnimationType:
-        handleBodyOrHeadAnimationBlock();
+        if (settings.animation) handleBodyOrHeadAnimationBlock();
         break;
 
       case speechType:
-        handleSpeechBlock();
+        handleAudioBlock();
         break;
 
       default:
@@ -169,8 +172,10 @@ const QuestionNarrator = ({
   });
 
   useDidUpdateEffect(() => {
-    const { anim } = animationRef.current;
-    anim.stop();
+    if (settings.animation) {
+      const { anim } = animationRef.current;
+      anim.stop();
+    }
     updateNarratorPreviewAnimation('standStill');
   }, [questionId]);
 
@@ -191,7 +196,11 @@ const QuestionNarrator = ({
     get(state, 'currentData.isLoop', false);
 
   const getAnimationOptions = () => {
-    if (state.currentData && state.currentData.animationData) {
+    if (
+      settings.animation &&
+      state.currentData &&
+      state.currentData.animationData
+    ) {
       const isSpeechType = state.currentData.type === 'Speech';
 
       return {
@@ -231,19 +240,21 @@ const QuestionNarrator = ({
         bounds="parent"
       >
         <div>
-          <Lottie
-            ref={animationRef}
-            options={defaultOptions}
-            height={100}
-            width={100}
-            style={lottieStyles}
-            isClickToPauseDisabled
-            isStopped={
-              !!draggable ||
-              previewData.animation === 'standStill' ||
-              !decideIfPlaySpeechAnimation()
-            }
-          />
+          {settings.animation && (
+            <Lottie
+              ref={animationRef}
+              options={defaultOptions}
+              height={100}
+              width={100}
+              style={lottieStyles}
+              isClickToPauseDisabled
+              isStopped={
+                !!draggable ||
+                previewData.animation === 'standStill' ||
+                !decideIfPlaySpeechAnimation()
+              }
+            />
+          )}
         </div>
       </Draggable>
     </NarratorContainer>
@@ -258,6 +269,7 @@ QuestionNarrator.propTypes = {
   updateNarratorPreviewAnimation: PropTypes.func,
   previewData: PropTypes.object,
   animationBoundaries: PropTypes.any,
+  settings: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

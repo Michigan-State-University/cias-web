@@ -21,6 +21,7 @@ import {
   speechType,
   headAnimationType,
   blockTypeToColorMap,
+  reflectionType,
 } from 'models/Narrator/BlockTypes';
 import {
   makeSelectDraggable,
@@ -35,6 +36,7 @@ import {
 import BlockTypeChooser from '../../../BlockTypeChooser';
 import AnimationBlock from '../Blocks/AnimationBlock';
 import SpeechBlock from '../Blocks/SpeechBlock';
+import ReflectionBlock from '../Blocks/Reflections/ReflectionBlock';
 import messages from '../messages';
 import { DashedBox } from '../styled';
 import {
@@ -92,6 +94,15 @@ const NarratorTab = ({
             id={id}
           />
         );
+      case reflectionType:
+        return (
+          <ReflectionBlock
+            formatMessage={formatMessage}
+            block={block}
+            blockIndex={index}
+            id={id}
+          />
+        );
       default:
         return null;
     }
@@ -102,6 +113,7 @@ const NarratorTab = ({
       case bodyAnimationType:
         return animation ? blockTypeToColorMap[type] : colors.grey;
       case speechType:
+      case reflectionType:
         return voice ? blockTypeToColorMap[type] : colors.grey;
       case headAnimationType:
         return animation ? blockTypeToColorMap[type] : colors.grey;

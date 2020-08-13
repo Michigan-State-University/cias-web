@@ -7,6 +7,7 @@ import {
   bodyAnimationType,
   speechType,
   headAnimationType,
+  reflectionType,
 } from 'models/Narrator/BlockTypes';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import settingsTabLabels from 'utils/settingsTabsLabels';
@@ -76,6 +77,7 @@ export const initialState = {
 const getPreviewData = data => {
   switch (data.type) {
     case speechType:
+    case reflectionType:
       return data;
 
     case headAnimationType:
@@ -247,25 +249,46 @@ const editInterventionPageReducer = (state = initialState, action) =>
         };
         break;
 
-      case EDIT_QUESTION_SUCCESS:
+      case EDIT_QUESTION_SUCCESS: {
         draft.loaders.updateQuestion = false;
 
-        draft.cache.questions[state.selectedQuestion] = mapQuestionDataForType(
-          action.payload.question,
+        const cacheIndex = draft.cache.questions.findIndex(
+          question => question.id === action.payload.question.id,
         );
-        draft.questions[state.selectedQuestion] = cloneDeep(
-          // needed for TTS url update
-          draft.cache.questions[state.selectedQuestion],
-        );
-        break;
 
-      case EDIT_QUESTION_ERROR:
+        if (cacheIndex > -1) {
+          draft.cache.questions[cacheIndex] = mapQuestionDataForType(
+            action.payload.question,
+          );
+
+          const index = draft.questions.findIndex(
+            question => question.id === action.payload.question.id,
+          );
+          draft.questions[index] = cloneDeep(
+            // needed for TTS url update
+            draft.cache.questions[cacheIndex],
+          );
+        }
+
+        break;
+      }
+
+      case EDIT_QUESTION_ERROR: {
         draft.loaders.updateQuestion = false;
 
-        draft.questions[state.selectedQuestion] = cloneDeep(
-          draft.cache.questions[state.selectedQuestion],
+        const cacheIndex = draft.cache.questions.findIndex(
+          question => question.id === action.payload.questionId,
         );
+
+        if (cacheIndex > -1) {
+          const index = draft.questions.findIndex(
+            question => question.id === action.payload.questionId,
+          );
+
+          draft.questions[index] = cloneDeep(draft.cache.questions[cacheIndex]);
+        }
         break;
+      }
 
       case UPDATE_CACHE:
         draft.cache.questions = draft.questions;

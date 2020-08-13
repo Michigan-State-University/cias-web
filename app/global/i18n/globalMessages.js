@@ -30,6 +30,10 @@ export default defineMessages({
       id: `${scope}.Speech`,
       defaultMessage: 'Speech',
     },
+    Reflection: {
+      id: `${scope}.Reflection`,
+      defaultMessage: 'Speech',
+    },
     HeadAnimation: {
       id: `${scope}.HeadAnimation`,
       defaultMessage: 'Head Animation',

@@ -12,6 +12,8 @@ import Img from 'components/Img';
 import Loader from 'components/Loader';
 import { StyledInput } from 'components/Input/StyledInput';
 import Select from 'components/Select';
+import Row from 'components/Row';
+import Switch from 'components/Switch';
 
 import playButton from 'assets/svg/play-button-1.svg';
 import stopButton from 'assets/svg/stop-button-1.svg';
@@ -31,7 +33,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import { speechAnimations } from 'utils/animations/animationsNames';
 import messages from '../messages';
 import animationMessages from './messages';
-import { updateSpeechSettings } from '../../actions';
+import { updateSpeechSettings, switchSpeechReflection } from '../../actions';
 
 const BUTTON_MARGIN = '10px';
 
@@ -46,6 +48,7 @@ const SpeechBlock = ({
   updateNarratorPreviewData,
   updateNarratorPreviewAnimation,
   previewData,
+  switchToReflection,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(block.text, ''));
@@ -113,6 +116,10 @@ const SpeechBlock = ({
           }}
         />
       </Box>
+      <Row mt={15} align="center" justify="between">
+        {formatMessage(messages.reflectionToggle)}
+        <Switch mr={15} onToggle={() => switchToReflection(blockIndex, id)} />
+      </Row>
       <Box position="relative">
         <Box mt={15} bg={colors.linkWater} width="100%">
           <StyledInput
@@ -152,6 +159,7 @@ SpeechBlock.propTypes = {
   updateNarratorPreviewData: PropTypes.func,
   updateNarratorPreviewAnimation: PropTypes.func,
   previewData: PropTypes.object,
+  switchToReflection: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -165,6 +173,7 @@ const mapDispatchToProps = {
     updateSpeechSettings(index, { animation }, id),
   updateNarratorPreviewData: updatePreviewData,
   updateNarratorPreviewAnimation: updatePreviewAnimation,
+  switchToReflection: (index, id) => switchSpeechReflection(index, id),
 };
 
 const withConnect = connect(

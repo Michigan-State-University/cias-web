@@ -87,8 +87,7 @@ const editQuestionRequest = payload =>
   actionBuilder(EDIT_QUESTION_REQUEST, payload);
 const editQuestionSuccess = question =>
   actionBuilder(EDIT_QUESTION_SUCCESS, { question });
-const editQuestionError = error =>
-  actionBuilder(EDIT_QUESTION_ERROR, { error });
+const editQuestionError = error => actionBuilder(EDIT_QUESTION_ERROR, error);
 
 // common actions
 const updateCache = () => actionBuilder(UPDATE_CACHE, {});

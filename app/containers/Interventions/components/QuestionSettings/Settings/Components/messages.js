@@ -75,4 +75,16 @@ export default defineMessages({
     id: `${scope}.show_number`,
     defaultMessage: 'Show number',
   },
+  reflectionToggle: {
+    id: `${scope}.reflectionToggle`,
+    defaultMessage: 'Use Reflection',
+  },
+  chooseQuestion: {
+    id: `${scope}.chooseQuestion`,
+    defaultMessage: 'Choose Question',
+  },
+  addReflection: {
+    id: `${scope}.addReflection`,
+    defaultMessage: 'Add Reflection',
+  },
 });

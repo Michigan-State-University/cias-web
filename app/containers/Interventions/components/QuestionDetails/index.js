@@ -58,19 +58,19 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
         subtitle,
         proceed_button: proceedButton,
       } = {},
-      narrator: { settings: { animation } = {} } = {},
+      narrator: { settings } = {},
     } = selectedQuestion || {};
 
     return (
       <AnswerOuterContainer>
         <Box width="100%">
           <AnswerInterventionContent ref={animationBoundaries}>
-            {animation && (
-              <QuestionNarrator
-                questionId={id}
-                animationBoundaries={animationBoundaries}
-              />
-            )}
+            <QuestionNarrator
+              questionId={id}
+              animationBoundaries={animationBoundaries}
+              settings={settings}
+            />
+
             <Row justify="center" filled>
               <Column mx={50} justify="center">
                 <Row width="100%" mt={5} height={30} />

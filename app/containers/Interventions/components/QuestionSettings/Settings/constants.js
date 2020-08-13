@@ -14,6 +14,12 @@ export const UPDATE_NARRATOR_ANIMATION =
 export const UPDATE_SPEECH_SETTINGS =
   'app/EditInterventionPage/Settings/UPDATE_SPEECH_SETTINGS';
 
+export const UPDATE_REFLECTION =
+  'app/EditInterventionPage/Settings/UPDATE_REFLECTION';
+
+export const SWITCH_SPEECH_REFLECTION =
+  'app/EditInterventionPage/Settings/SWITCH_SPEECH_REFLECTION';
+
 export const UPDATE_FORMULA =
   'app/EditInterventionPage/Settings/UPDATE_FORMULA';
 

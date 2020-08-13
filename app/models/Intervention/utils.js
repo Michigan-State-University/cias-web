@@ -5,6 +5,7 @@ import {
   bodyAnimationType,
   speechType,
   headAnimationType,
+  reflectionType,
 } from 'models/Narrator/BlockTypes';
 
 import Question from './Question';
@@ -15,6 +16,13 @@ import {
   gridQuestion,
   informationQuestion,
 } from './QuestionTypes';
+
+/**
+ * @param  {Array<Question>} questions
+ * @param  {string} questionId
+ */
+export const findQuestionById = (questions, questionId) =>
+  questions.find(value => value.id === questionId);
 
 /**
  * @param  {Array<Question>} questions
@@ -110,6 +118,17 @@ export const instantiateBlockForType = (type, posFrom) => {
         text: [],
         audio_urls: [],
         sha256: [],
+        animation: 'rest',
+        position: {
+          posFrom,
+          posTo: posFrom,
+        },
+      };
+    case reflectionType:
+      return {
+        question_id: '',
+        type: reflectionType,
+        reflections: [],
         animation: 'rest',
         position: {
           posFrom,

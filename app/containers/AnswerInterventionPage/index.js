@@ -15,7 +15,7 @@ import { error } from 'react-toastify-redux';
 import get from 'lodash/get';
 import filter from 'lodash/filter';
 
-import { speechType } from 'models/Narrator/BlockTypes';
+import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 import { useInjectSaga } from 'utils/injectSaga';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -58,6 +58,7 @@ const AnimationRefHelper = ({
   currentQuestion,
   currentQuestionId,
   previewMode,
+  answers,
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
@@ -74,6 +75,7 @@ const AnimationRefHelper = ({
           questionId={currentQuestionId}
           settings={currentQuestion.narrator.settings}
           previewMode={previewMode}
+          answers={answers}
         />
       )}
     </AnswerInterventionContent>
@@ -84,6 +86,7 @@ AnimationRefHelper.propTypes = {
   currentQuestion: PropTypes.any,
   currentQuestionId: PropTypes.any,
   previewMode: PropTypes.any,
+  answers: PropTypes.object,
 };
 
 export function AnswerInterventionPage({
@@ -110,8 +113,10 @@ export function AnswerInterventionPage({
   useInjectSaga({ key: 'answerInterventionPage', saga });
 
   const hasSpeechBlocks = question =>
-    filter(question.narrator.blocks, ({ type }) => type === speechType)
-      .length !== 0;
+    filter(
+      question.narrator.blocks,
+      ({ type }) => type === speechType || type === reflectionType,
+    ).length !== 0;
 
   const assignCurrentQuestion = () => {
     const question = interventionQuestions[questionIndex];
@@ -268,6 +273,7 @@ export function AnswerInterventionPage({
                   currentQuestion={currentQuestion}
                   currentQuestionId={currentQuestionId}
                   previewMode={previewMode}
+                  answers={answers}
                 >
                   {renderPage()}
                 </AnimationRefHelper>
