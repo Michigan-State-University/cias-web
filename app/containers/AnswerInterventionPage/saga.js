@@ -36,10 +36,10 @@ function* submitAnswersAsync({
 }) {
   const answers = yield select(makeSelectAnswers());
   const { answerBody } = answers[answerId];
-  let body = map(answerBody, singleBody => omit(singleBody, 'index')); // index is needed to remember the selected answers, but useless in request
-  if (body.length || !required) {
-    if (!body.length) {
-      body = [
+  let data = map(answerBody, singleBody => omit(singleBody, 'index')); // index is needed to remember the selected answers, but useless in request
+  if (data.length || !required) {
+    if (!data.length) {
+      data = [
         {
           payload: '',
           value: '',
@@ -50,7 +50,7 @@ function* submitAnswersAsync({
     if (questionType !== informationQuestion.id) {
       const type = questionType.replace('Question', 'Answer');
       yield axios.post(`/v1/questions/${answerId}/answers`, {
-        answer: { type, body },
+        answer: { type, body: { data } },
       });
     }
     yield put(submitAnswerSuccess(answerId));
