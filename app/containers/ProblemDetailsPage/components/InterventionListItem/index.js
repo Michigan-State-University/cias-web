@@ -19,6 +19,7 @@ import copy from 'assets/svg/copy.svg';
 import archive from 'assets/svg/archive.svg';
 
 import { colors } from 'theme';
+import appStages from 'global/appStages';
 import messages from './messages';
 import { InterventionIndex, StyledLink, ToggleableBox } from './styled';
 import InterventionListBranching from '../InterventionListBranching';
@@ -68,18 +69,24 @@ function InterventionListItem({
             <H2>{name}</H2>
           </StyledLink>
         </Column>
-        <Column xs={1} align="center">
-          <Dropdown options={options} clickable id={id} />
-        </Column>
+        {process.env.APP_STAGE === appStages.dev.id && (
+          <Column xs={1} align="center">
+            <Dropdown options={options} clickable id={id} />
+          </Column>
+        )}
       </Row>
-      <Row px={62}>
-        <Divider />
-      </Row>
-      <InterventionListBranching
-        nextInterventionName={nextInterventionName}
-        branching={branching}
-        handleBranching={setBranching}
-      />
+      {process.env.APP_STAGE === appStages.dev.id && (
+        <>
+          <Row px={62}>
+            <Divider />
+          </Row>
+          <InterventionListBranching
+            nextInterventionName={nextInterventionName}
+            branching={branching}
+            handleBranching={setBranching}
+          />
+        </>
+      )}
     </ToggleableBox>
   );
 }

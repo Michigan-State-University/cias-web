@@ -29,6 +29,7 @@ import { createInterventionRequest } from 'global/reducers/intervention';
 import injectSaga from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import problemDetailsPageSagas from 'containers/ProblemDetailsPage/saga';
+import appStages from 'global/appStages';
 import InterventionListItem from './components/InterventionListItem';
 import InterventionCreateButton from './components/InterventionCreateButton';
 
@@ -109,9 +110,11 @@ export function ProblemDetailsPage({
             />
           </Row>
         </Column>
-        <Column height="0%" sm={6}>
-          <ShareBox />
-        </Column>
+        {process.env.APP_STAGE === appStages.dev.id && (
+          <Column height="0%" sm={6}>
+            <ShareBox />
+          </Column>
+        )}
       </Row>
     </Box>
   );
