@@ -35,7 +35,7 @@ const useFilter = (array, key, configuration) => {
       return;
     }
 
-    const filteredList = list.filter(
+    const filteredList = array.filter(
       element =>
         get(element, key, '')
           .toLowerCase()
