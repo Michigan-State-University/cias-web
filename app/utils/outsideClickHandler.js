@@ -15,3 +15,5 @@ export const outsideClickHandler = (ref, onOutsideClick) => {
 
   return () => window.removeEventListener('click', handleClick);
 };
+
+export default outsideClickHandler;

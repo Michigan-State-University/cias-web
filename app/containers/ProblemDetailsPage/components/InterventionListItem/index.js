@@ -25,10 +25,11 @@ import { InterventionIndex, StyledLink, ToggleableBox } from './styled';
 import InterventionListBranching from '../InterventionListBranching';
 
 function InterventionListItem({
-  intl: { formatMessage },
   intervention,
   index,
   isSelected,
+  handleClick,
+  intl: { formatMessage },
   nextInterventionName,
 }) {
   const [branching, setBranching] = useState(false);
@@ -59,7 +60,7 @@ function InterventionListItem({
   ];
 
   return (
-    <ToggleableBox isSelected={isSelected}>
+    <ToggleableBox isSelected={isSelected} onClick={handleClick} clickable>
       <Row py={21} px={16} align="center" justify="between">
         <Column xs={1}>
           <InterventionIndex>{index + 1}</InterventionIndex>
@@ -95,6 +96,7 @@ InterventionListItem.propTypes = {
   intervention: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   isSelected: PropTypes.bool,
+  handleClick: PropTypes.func,
   nextInterventionName: PropTypes.string,
   intl: PropTypes.object,
 };

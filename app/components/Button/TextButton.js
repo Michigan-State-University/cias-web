@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { margin } from 'components/BaseComponentStyles';
+import { margin, layout, text } from 'components/BaseComponentStyles';
 import { themeColors } from 'theme';
 
 const TextButton = styled.button`
@@ -14,6 +14,8 @@ const TextButton = styled.button`
   color: ${themeColors.secondary};
   cursor: pointer;
   ${margin};
+  ${layout};
+  ${text};
 `;
 
 export default TextButton;

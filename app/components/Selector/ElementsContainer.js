@@ -20,7 +20,11 @@ const ElementsContainer = ({ options, selectedOption }) => (
         <Text
           key={`el-text-option-${id}`}
           color={isSelected ? themeColors.secondary : null}
-          mb={decideIfPassValue(index, options, 10)}
+          mb={decideIfPassValue({
+            index,
+            arrayLength: options.length,
+            value: 10,
+          })}
           fontWeight="bold"
           whiteSpace="nowrap"
           clickable

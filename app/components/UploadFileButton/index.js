@@ -20,12 +20,13 @@ const UploadFileButton = ({
   children,
   onUpload = () => {},
   textProps,
+  accept,
   ...restProps
 }) => {
   const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
     multiple: false,
     noKeyboard: true,
-    accept: '.csv',
+    accept,
     noClick: true,
   });
 
@@ -49,6 +50,7 @@ UploadFileButton.propTypes = {
   icon: PropTypes.node,
   onUpload: PropTypes.func,
   textProps: PropTypes.object,
+  accept: PropTypes.string,
 };
 
 UploadFileButton.defaultProps = {

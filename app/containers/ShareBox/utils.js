@@ -12,3 +12,5 @@ export const shareOptions = [
     label: 'Only invited registered participants can access sessions',
   },
 ];
+
+export const validEmailRegExp = /^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/;

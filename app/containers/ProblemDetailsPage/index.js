@@ -26,6 +26,11 @@ import {
   problemReducer,
 } from 'global/reducers/problem';
 import { createInterventionRequest } from 'global/reducers/intervention';
+import {
+  localStateReducer,
+  makeSelectCurrentInterventionIndex,
+  changeCurrentIntervention,
+} from 'global/reducers/localState';
 import injectSaga from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import problemDetailsPageSagas from 'containers/ProblemDetailsPage/saga';
@@ -44,10 +49,16 @@ export function ProblemDetailsPage({
     params: { problemId },
   },
   problemState: { problem, fetchProblemLoading, fetchProblemError },
+  interventionIndex,
+  changeInterventionIndex,
 }) {
   useInjectReducer({
     key: 'problem',
     reducer: problemReducer,
+  });
+  useInjectReducer({
+    key: 'localState',
+    reducer: localStateReducer,
   });
 
   const { interventions, name } = problem || {};
@@ -59,16 +70,23 @@ export function ProblemDetailsPage({
   const renderList = () => (
     <>
       {interventions &&
-        interventions.map((intervention, index) => (
-          <InterventionListItem
-            key={intervention.id}
-            intervention={intervention}
-            index={index}
-            nextInterventionName={
-              interventions[index + 1] ? interventions[index + 1].name : null
-            }
-          />
-        ))}
+        interventions.map((intervention, index) => {
+          const handleClick = () => {
+            changeInterventionIndex(index);
+          };
+          return (
+            <InterventionListItem
+              key={intervention.id}
+              intervention={intervention}
+              index={index}
+              isSelected={index === interventionIndex}
+              handleClick={handleClick}
+              nextInterventionName={
+                interventions[index + 1] ? interventions[index + 1].name : null
+              }
+            />
+          );
+        })}
     </>
   );
 
@@ -111,7 +129,7 @@ export function ProblemDetailsPage({
           </Row>
         </Column>
         {process.env.APP_STAGE === appStages.dev.id && (
-          <Column height="0%" sm={6}>
+          <Column height="0%" sm={6} ml={38} mt={-25}>
             <ShareBox />
           </Column>
         )}
@@ -131,16 +149,20 @@ ProblemDetailsPage.propTypes = {
   }),
   match: PropTypes.object,
   editName: PropTypes.func,
+  interventionIndex: PropTypes.number,
+  changeInterventionIndex: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   problemState: makeSelectProblemState(),
+  interventionIndex: makeSelectCurrentInterventionIndex(),
 });
 
 const mapDispatchToProps = {
   createIntervention: createInterventionRequest,
   fetchProblem: fetchProblemRequest,
   editName: editProblemRequest,
+  changeInterventionIndex: changeCurrentIntervention,
 };
 
 const withConnect = connect(

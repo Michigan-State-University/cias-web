@@ -6,6 +6,7 @@ export {
 } from './actions';
 export { problemReducer } from './reducer';
 export {
+  selectProblem,
   makeSelectProblem,
   makeSelectProblemLoader,
   makeSelectProblemState,

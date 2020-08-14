@@ -1,18 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 import Column from 'components/Column';
-import Dropdown from 'components/Dropdown';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import Text from 'components/Text';
-import bin from 'assets/svg/bin-no-bg.svg';
-import paperAirplane from 'assets/svg/paper-airplane.svg';
+import H3 from 'components/H3';
 import userAvatar from 'assets/svg/user.svg';
 import { colors, fontSizes } from 'theme';
 
 import messages from '../messages';
+import { StyledTextButton, HoverableRow } from '../styled';
 
 const mockUsers = [
   {
@@ -37,52 +36,43 @@ const mockUsers = [
   },
 ];
 
-const UserList = ({ users = mockUsers, intl: { formatMessage } }) => {
-  const options = [
-    {
-      id: 'remove',
-      label: formatMessage(messages.remove),
-      icon: bin,
-      action: () => {},
-      color: colors.bluewood,
-    },
-    {
-      id: 'resend',
-      label: formatMessage(messages.resend),
-      icon: paperAirplane,
-      action: () => {},
-      color: colors.bluewood,
-    },
-  ];
-
-  return (
-    <Column>
-      {users.map(user => (
-        <Row
-          key={`el-user-${user.id}`}
-          align="center"
-          justify="between"
-          mx={-20}
-          px={20}
-          py={10}
-          borderRadius={5}
-          hoverColor={colors.linkWater}
-        >
-          <Row>
-            <Img src={user.avatar} alt="avatar" mr={15} />
-            <Text fontSize={fontSizes.regular} lineHeight="270%">
-              {user.email}
-            </Text>
-          </Row>
-          <Dropdown options={options} clickable ml={0} />
+const UserList = ({ users = mockUsers }) => (
+  <Column>
+    <H3
+      mb={15}
+      fontSize={13}
+      fontWeight="bold"
+      color={colors.bluewood}
+      textOpacity={0.6}
+    >
+      <FormattedMessage {...messages.userListLabel} />
+    </H3>
+    {users.map(user => (
+      <HoverableRow
+        key={`el-user-${user.id}`}
+        align="center"
+        justify="between"
+        mx={-20}
+        px={20}
+        py={10}
+        borderRadius={5}
+        hoverColor={colors.linkWater}
+      >
+        <Row>
+          <Img src={user.avatar} alt="avatar" mr={15} />
+          <Text fontSize={fontSizes.regular} lineHeight="270%">
+            {user.email}
+          </Text>
         </Row>
-      ))}
-    </Column>
-  );
-};
+        <StyledTextButton fontWeight="bold">
+          <FormattedMessage {...messages.resend} />
+        </StyledTextButton>
+      </HoverableRow>
+    ))}
+  </Column>
+);
 
 UserList.propTypes = {
   users: PropTypes.array,
-  intl: intlShape,
 };
-export default injectIntl(UserList);
+export default UserList;

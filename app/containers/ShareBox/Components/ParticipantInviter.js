@@ -1,60 +1,59 @@
 import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { compose } from 'redux';
+import head from 'lodash/head';
+import map from 'lodash/map';
+import uniq from 'lodash/uniq';
+import filter from 'lodash/filter';
+import { FormattedMessage } from 'react-intl';
 
 import Button from 'components/Button';
 import Column from 'components/Column';
 import Row from 'components/Row';
-import Text from 'components/Text';
-import Tooltip from 'components/Tooltip';
-import UploadFileButton from 'components/UploadFileButton';
-import csvFile from 'assets/svg/csv-file.svg';
-import { StyledInput } from 'components/Input/StyledInput';
+import CsvFileReader from 'components/CsvFileReader';
+import csvFileIcon from 'assets/svg/csv-file.svg';
 
 import messages from '../messages';
+import ChipsInput from './ChipsInput';
+import { validEmailRegExp } from '../utils';
 
-const ParticipantInviter = ({ intl: { formatMessage } }) => {
-  // mock input value
-  // eslint-disable-next-line no-unused-vars
+const ParticipantInviter = () => {
   const [value, setValue] = useState('');
+
+  const handleUploadCsv = data => {
+    const parsedData = uniq(
+      filter(
+        map(data, columns => {
+          const email = head(columns.data);
+          if (email && validEmailRegExp.test(email)) return email;
+          return null;
+        }),
+        val => val !== null,
+      ),
+    );
+
+    const string = parsedData.join(',');
+    setValue(string);
+  };
+
   return (
     <Column>
-      <Row mb={15} justify="between" align="center">
-        <Row align="center">
-          <Text fontWeight="bold">
-            <FormattedMessage {...messages.inviteLabel} />
-          </Text>
-          <Tooltip ml={8} id="el-participant-inviter-tooltip">
-            <FormattedMessage {...messages.tooltipInviterContent} />
-          </Tooltip>
-        </Row>
-        <UploadFileButton icon={csvFile}>
-          <FormattedMessage {...messages.uploadText} />
-        </UploadFileButton>
-      </Row>
       <Row align="center" justify="between">
-        <StyledInput
-          transparent={false}
-          placeholder={formatMessage(messages.emailPlaceholder)}
-          type="singleline"
-          width="100%"
-          maxWidth="none"
-          value={value}
-          onBlur={() => {}}
-          height={46}
-          mt={0}
-        />
+        <ChipsInput value={value} setValue={setValue} />
         <Button disabled={!value} heigh={25} width={140} ml={12} hoverable>
           <FormattedMessage {...messages.sendText} />
         </Button>
       </Row>
+      <Column mt={12}>
+        <Row>
+          <CsvFileReader icon={csvFileIcon} onUpload={handleUploadCsv}>
+            <FormattedMessage {...messages.uploadText} />
+          </CsvFileReader>
+        </Row>
+      </Column>
     </Column>
   );
 };
 
-ParticipantInviter.propTypes = {
-  intl: intlShape,
-};
+ParticipantInviter.propTypes = {};
 
-export default compose(injectIntl)(ParticipantInviter);
+export default ParticipantInviter;

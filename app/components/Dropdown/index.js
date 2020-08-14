@@ -12,7 +12,7 @@ import { colors, boxShadows } from 'theme';
 
 import { StyledComment, ImageContainer, StyledRow } from './styled';
 
-const Dropdown = ({ options, ...restProps }) => {
+const Dropdown = ({ options, top, ...restProps }) => {
   const [open, setOpen] = useState(false);
 
   const dropdown = useRef(null);
@@ -22,6 +22,14 @@ const Dropdown = ({ options, ...restProps }) => {
 
     return cleanUp;
   }, []);
+
+  const getPosition = () => {
+    if (top)
+      return {
+        bottom: '35px',
+      };
+    return { top: '35px' };
+  };
 
   return (
     <Box
@@ -40,7 +48,7 @@ const Dropdown = ({ options, ...restProps }) => {
         <Img src={dots} alt="dots" />
       </ImageContainer>
       {open && (
-        <Row position="absolute" top="35px" right="0" zIndex={999}>
+        <Row position="absolute" right="0" zIndex={999} {...getPosition()}>
           <Column bg={colors.white} shadow={boxShadows.black} borderRadius={10}>
             {options.map(option => (
               <StyledRow
@@ -68,7 +76,7 @@ const Dropdown = ({ options, ...restProps }) => {
 
 Dropdown.propTypes = {
   options: PropTypes.array,
-  id: PropTypes.string,
+  top: PropTypes.bool,
 };
 
 export default Dropdown;

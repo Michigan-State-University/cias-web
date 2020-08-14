@@ -1,6 +1,6 @@
 /**
  *
- * Tests for ShareBox
+ * Tests for CsvFileReader
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -11,22 +11,20 @@ import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import 'jest-styled-components';
 
-import ShareBox from '../index';
+import CsvFileReader from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 
-describe('<ShareBox />', () => {
+const defaultProps = {
+  icon: 'image.svg',
+  onUpload: jest.fn(),
+  showError: jest.fn(),
+};
+
+describe('<CsvFileReader />', () => {
   const reducer = state => state;
-  const initialState = {
-    problem: {
-      problem: {
-        interventions: [{ name: 'Name', slug: 'Slug-id-e-intervention' }],
-      },
-    },
-    localState: {
-      currentInterventionIndex: 0,
-    },
-  };
+  const initialState = {};
   let store;
   beforeAll(() => {
     store = createStore(reducer, initialState);
@@ -39,7 +37,7 @@ describe('<ShareBox />', () => {
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <ShareBox />
+          <CsvFileReader {...defaultProps}>Upload CSV</CsvFileReader>
         </IntlProvider>
       </Provider>,
     );
@@ -50,7 +48,7 @@ describe('<ShareBox />', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <ShareBox />
+          <CsvFileReader {...defaultProps}>Upload CSV</CsvFileReader>
         </IntlProvider>
       </Provider>,
     );

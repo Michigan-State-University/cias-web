@@ -3,7 +3,9 @@ import ReactTooltip from 'react-tooltip';
 
 import { boxShadows } from 'theme';
 
-export const StyledTooltip = styled(ReactTooltip)`
+export const StyledTooltip = styled(ReactTooltip).attrs({
+  suppressClassNameWarning: true,
+})`
   box-shadow: ${boxShadows.selago};
   border-radius: 5px;
   max-width: 380px;
