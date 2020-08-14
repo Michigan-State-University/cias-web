@@ -25,11 +25,10 @@ const SingleQuestion = ({
     setSelectedAnswerIndex(answerBody.length ? answerBody[0].index : null);
   }, [id]);
 
-  const handleClick = (payload, value, index) => {
+  const handleClick = (value, index) => {
     selectAnswer([
       {
         var: name,
-        payload,
         value,
         index,
       },

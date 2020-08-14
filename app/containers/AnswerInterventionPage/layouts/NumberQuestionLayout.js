@@ -16,7 +16,7 @@ const NumberQuestionLayout = ({
   onValidation,
 }) => {
   const value =
-    answerBody && answerBody.payload ? answerBody.payload.toString() : '';
+    answerBody && answerBody.value ? answerBody.value.toString() : '';
 
   return (
     <Box bg={themeColors.highlight} width="100%" maxWidth={150} px={21} py={14}>

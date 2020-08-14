@@ -15,8 +15,8 @@ const GridQuestionLayout = ({
   questionId,
 }) => {
   const handleClick = (column, name, rowIndex, columnIndex) => () => {
-    const { payload, variable: { value } = {} } = column || {};
-    check(payload, value, name, rowIndex, columnIndex);
+    const { variable: { value } = {} } = column || {};
+    check(value, name, rowIndex, columnIndex);
   };
   return (
     <Row align="center" justify="center" width="100%">
