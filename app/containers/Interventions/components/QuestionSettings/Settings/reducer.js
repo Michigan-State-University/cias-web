@@ -3,6 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import { instantiateBlockForType } from 'models/Intervention/utils';
 import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 
+import { elements } from 'theme';
 import {
   UPDATE_QUESTION_SETTINGS,
   ADD_BLOCK,
@@ -27,7 +28,7 @@ const getStartAnimationPoint = (
   const { blocks } = currentQuestion.narrator;
   // if first question and there is no blocks
   if (questionIndex === 0 && blocks.length === 0) {
-    return { x: 0, y: 0 };
+    return { x: 0, y: elements.peedyInitialYPosition };
   }
   // if question already has blocks return position of the last block
   if (blocks.length !== 0) {
@@ -43,7 +44,7 @@ const getStartAnimationPoint = (
       return lastBlock.position.posTo;
     }
   }
-  return { x: 0, y: 0 };
+  return { x: 0, y: elements.peedyInitialYPosition };
 };
 
 /* eslint-disable default-case, no-param-reassign */

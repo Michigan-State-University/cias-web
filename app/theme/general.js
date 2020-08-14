@@ -20,6 +20,7 @@ const boxShadows = {
 const elements = {
   navbarHeight: 70,
   draggableContainerSize: 700,
+  peedyInitialYPosition: 598,
 };
 
 const visualAnalogScaleLabel = {

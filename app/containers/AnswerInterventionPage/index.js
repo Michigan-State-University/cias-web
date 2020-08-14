@@ -29,6 +29,7 @@ import { DESKTOP_MODE } from 'utils/previewMode';
 
 import { instantiateBlockForType } from 'models/Intervention/utils';
 
+import { elements } from 'theme';
 import {
   BackButton,
   AnswerInterventionContent,
@@ -132,7 +133,10 @@ export function AnswerInterventionPage({
         ...narrator,
         blocks: [
           {
-            ...instantiateBlockForType(speechType, { x: 0, y: 0 }),
+            ...instantiateBlockForType(speechType, {
+              x: 0,
+              y: elements.peedyInitialYPosition,
+            }),
             ...narrator.from_question[0],
           },
           ...narrator.blocks,

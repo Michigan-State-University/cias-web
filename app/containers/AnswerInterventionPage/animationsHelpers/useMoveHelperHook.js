@@ -30,7 +30,7 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
   };
 
   const getInitialAnimationPosition = firstBlock => {
-    if (!firstBlock) return { x: 0, y: 0 };
+    if (!firstBlock) return { x: 0, y: elements.peedyInitialYPosition };
     return getScaledPosition(getScaleFactor(), firstBlock.position.posTo);
   };
 

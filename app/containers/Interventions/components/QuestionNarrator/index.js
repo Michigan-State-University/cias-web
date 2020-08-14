@@ -20,6 +20,7 @@ import {
 import useAnimationHelper from 'containers/AnswerInterventionPage/animationsHelpers/animationHelper';
 import useAudioHelper from 'containers/AnswerInterventionPage/animationsHelpers/audioHelper';
 
+import { elements } from 'theme';
 import { NarratorContainer } from './styled';
 import {
   makeSelectDraggable,
@@ -143,7 +144,10 @@ const QuestionNarrator = ({
     }
   };
 
-  const [dragPosition, setDragPosition] = useState({ x: 0, y: 0 });
+  const [dragPosition, setDragPosition] = useState({
+    x: 0,
+    y: elements.peedyInitialYPosition,
+  });
 
   const fetchJSON = async () => {
     await fetchBodyAndHeadAnimations();
@@ -225,7 +229,10 @@ const QuestionNarrator = ({
     if (dragPosition) {
       return {
         x: dragPosition.x,
-        y: Math.min(height - 100, dragPosition.y),
+        y: Math.min(
+          height !== 0 ? height - 100 : Number.POSITIVE_INFINITY,
+          dragPosition.y,
+        ),
       };
     }
   };

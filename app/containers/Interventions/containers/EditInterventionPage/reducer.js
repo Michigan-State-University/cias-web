@@ -12,6 +12,7 @@ import {
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import settingsTabLabels from 'utils/settingsTabsLabels';
 
+import { elements } from 'theme';
 import {
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
@@ -57,7 +58,7 @@ export const initialState = {
   selectedQuestion: 0,
   animationPosition: {
     x: 0,
-    y: 0,
+    y: elements.peedyInitialYPosition,
   },
   draggable: false,
   previewData: {
