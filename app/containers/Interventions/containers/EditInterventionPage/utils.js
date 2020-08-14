@@ -110,7 +110,10 @@ export const mapQuestionDataForType = question => {
 export const getAnimationPosition = (draft, state, payload) => {
   if (draft.selectedQuestion !== payload) {
     // set position to first block of new question
-    if (state.questions[payload].narrator.blocks[0])
+    if (
+      state.questions[payload].narrator.blocks[0] &&
+      state.questions[payload].narrator.blocks[0].position
+    )
       return state.questions[payload].narrator.blocks[0].position.posTo;
     for (let i = payload - 1; i >= 0; i -= 1) {
       const {
@@ -118,7 +121,7 @@ export const getAnimationPosition = (draft, state, payload) => {
       } = state.questions[i];
       const lastBlock =
         previousQuestionBlocks[previousQuestionBlocks.length - 1];
-      if (lastBlock) {
+      if (lastBlock && lastBlock.position) {
         return lastBlock.position.posTo;
       }
     }

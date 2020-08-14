@@ -72,6 +72,10 @@ export default defineMessages({
       id: `${scope}.Question::Url`,
       defaultMessage: 'Url screen',
     },
+    'Question::FollowUpContact': {
+      id: `${scope}.Question::FollowUpContact`,
+      defaultMessage: 'FollowUpContact screen',
+    },
   },
   statuses: {
     draft: {

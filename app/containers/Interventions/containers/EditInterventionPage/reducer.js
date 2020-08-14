@@ -188,7 +188,8 @@ const editInterventionPageReducer = (state = initialState, action) =>
         );
         if (
           !isEmpty(action.payload.questions) &&
-          action.payload.questions[0].narrator.blocks[0]
+          action.payload.questions[0].narrator.blocks[0] &&
+          action.payload.questions[0].narrator.blocks[0].position
         ) {
           draft.animationPosition =
             action.payload.questions[0].narrator.blocks[0].position.posTo;
