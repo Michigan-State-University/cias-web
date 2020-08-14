@@ -14,7 +14,10 @@ import { colors } from 'theme';
 
 import messages from './messages';
 import { PlayerWrapper, Player } from './styled';
-import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectIsNarratorTab,
+} from '../../containers/EditInterventionPage/selectors';
 import { editQuestionRequest } from '../../containers/EditInterventionPage/actions';
 
 const isURLValid = url =>
@@ -24,6 +27,7 @@ const QuestionVideo = ({
   intl: { formatMessage },
   selectedQuestion: { video_url: videoUrl },
   updateVideo,
+  isNarratorTab,
 }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -47,28 +51,37 @@ const QuestionVideo = ({
     );
 
   return (
-    <HoverableBox
-      width="100%"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      clickable={false}
-      px={21}
-      py={14}
-    >
-      <Row justify="between" align="center">
+    <Box width="100%">
+      {isNarratorTab && (
         <PlayerWrapper>
           <Player url={videoUrl} controls width="100%" height="100%" />
         </PlayerWrapper>
-        <Box
-          onClick={removeVideUrl}
-          clickable
-          visibility={hovered ? 'visible' : 'hidden'}
-          ml={15}
+      )}
+      {!isNarratorTab && (
+        <HoverableBox
+          width="100%"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          clickable={false}
+          px={21}
+          py={14}
         >
-          <Img src={bin} alt="bin-icon" />
-        </Box>
-      </Row>
-    </HoverableBox>
+          <Row justify="between" align="center">
+            <PlayerWrapper>
+              <Player url={videoUrl} controls width="100%" height="100%" />
+            </PlayerWrapper>
+            <Box
+              onClick={removeVideUrl}
+              clickable
+              visibility={hovered ? 'visible' : 'hidden'}
+              ml={15}
+            >
+              <Img src={bin} alt="bin-icon" />
+            </Box>
+          </Row>
+        </HoverableBox>
+      )}
+    </Box>
   );
 };
 
@@ -78,10 +91,12 @@ QuestionVideo.propTypes = {
     video_url: PropTypes.string,
   }),
   updateVideo: PropTypes.func,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {

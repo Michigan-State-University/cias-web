@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import Row from 'components/Row';
-import H1 from 'components/H1';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Question from 'models/Intervention/Question';
@@ -26,18 +25,16 @@ const QuestionSubtitle = ({
   const handleUpdate = val => updateSubtitle({ path: 'subtitle', value: val });
   return (
     <Box width="100%" padded hoverColor={colors.linkWater} clickable={false}>
-      <H1>
-        <Row>
-          <ApprovableInput
-            placeholder={formatMessage(messages.placeholder)}
-            value={subtitle}
-            onCheck={handleUpdate}
-            autoSize
-            richText
-            fontSize={18}
-          />
-        </Row>
-      </H1>
+      <Row>
+        <ApprovableInput
+          placeholder={formatMessage(messages.placeholder)}
+          value={subtitle}
+          onCheck={handleUpdate}
+          autoSize
+          richText
+          fontSize={18}
+        />
+      </Row>
     </Box>
   );
 };

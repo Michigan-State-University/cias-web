@@ -9,6 +9,7 @@ exports[`<Tabs /> should render and match the snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
 }
 
 .c3 {
@@ -79,6 +80,7 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
 }
 
 .c3 {

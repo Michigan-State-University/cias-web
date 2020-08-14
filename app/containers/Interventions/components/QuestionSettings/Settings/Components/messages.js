@@ -47,33 +47,9 @@ export default defineMessages({
     id: `${scope}.newStep`,
     defaultMessage: '+ Add another block',
   },
-  formula: {
-    id: `${scope}.formula`,
-    defaultMessage: 'Formula',
-  },
-  formulaPlaceholder: {
-    id: `${scope}.formulaPlaceholder`,
-    defaultMessage: 'Enter formula here...',
-  },
-  newCase: {
-    id: `${scope}.newCase`,
-    defaultMessage: '+ Add another case',
-  },
   selectQuestion: {
     id: `${scope}.selectQuestion`,
     defaultMessage: 'Select Screen',
-  },
-  addVariable: {
-    id: `${scope}.addVariable`,
-    defaultMessage: '+ From list',
-  },
-  if: {
-    id: `${scope}.if`,
-    defaultMessage: 'If',
-  },
-  goTo: {
-    id: `${scope}.goTo`,
-    defaultMessage: 'go to',
   },
   nextScreen: {
     id: `${scope}.nextScreen`,
@@ -94,5 +70,21 @@ export default defineMessages({
   cancel: {
     id: `${scope}.cancel`,
     defaultMessage: 'Cancel',
+  },
+  show_number: {
+    id: `${scope}.show_number`,
+    defaultMessage: 'Show number',
+  },
+  reflectionToggle: {
+    id: `${scope}.reflectionToggle`,
+    defaultMessage: 'Use Reflection',
+  },
+  chooseQuestion: {
+    id: `${scope}.chooseQuestion`,
+    defaultMessage: 'Choose Question',
+  },
+  addReflection: {
+    id: `${scope}.addReflection`,
+    defaultMessage: 'Add Reflection',
   },
 });

@@ -1,25 +1,26 @@
 import styled from 'styled-components';
 
-import { elements } from 'theme';
+import { elements, colors } from 'theme';
 
-const AnswerOuterContent = styled.div`
+const AnswerInterventionContent = styled.div`
+  align-items: flex-start;
+  border: 1px dashed ${colors.botticelli};
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  width: 100%;
   max-width: ${elements.draggableContainerSize}px;
-  height: 100%;
+  min-height: ${elements.draggableContainerSize}px;
   position: relative;
+  width: 100%;
   z-index: 0;
 `;
 
 const AnswerOuterContainer = styled.div`
-  display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  flex-direction: ${props => props.flexDirection || 'row'};
+  display: flex;
   height: fit-content;
+  justify-content: flex-start;
+  padding: 0 10px;
+  width: 100%;
 `;
 
-export { AnswerOuterContainer, AnswerOuterContent };
+export { AnswerOuterContainer, AnswerInterventionContent };

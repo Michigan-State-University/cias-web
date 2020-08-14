@@ -7,44 +7,59 @@ import { injectIntl, intlShape } from 'react-intl';
 
 import Column from 'components/Column';
 import Tabs from 'components/Tabs';
-import messages from './messages';
-
-import {
-  makeSelectSelectedQuestion,
-  makeSelectQuestions,
-} from '../../../containers/EditInterventionPage/selectors';
+import settingsTabLabels from 'utils/settingsTabsLabels';
 
 import SettingsTab from './Components/Tabs/SettingsTab';
 import NarratorTab from './Components/Tabs/NarratorTab';
 import BranchingTab from './Components/Tabs/BranchingTab';
+import messages from './messages';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestions,
+  makeSelectQuestionSettingsTab,
+} from '../../../containers/EditInterventionPage/selectors';
+import { toggleQuestionSettings } from '../../../containers/EditInterventionPage/actions';
 
 const Settings = ({
   selectedQuestion: { narrator, settings, id, formula, type } = {},
   intl: { formatMessage },
-}) => (
-  <Column>
-    <Tabs>
-      <div label={formatMessage(messages.settings)}>
-        <SettingsTab
-          formatMessage={formatMessage}
-          settings={settings}
-          type={type}
-          id={id}
-        />
-      </div>
-      <div label={formatMessage(messages.narrator)}>
-        <NarratorTab
-          formatMessage={formatMessage}
-          narrator={narrator}
-          id={id}
-        />
-      </div>
-      <div label={formatMessage(messages.branching)}>
-        <BranchingTab formatMessage={formatMessage} formula={formula} id={id} />
-      </div>
-    </Tabs>
-  </Column>
-);
+  tab,
+  changeTab,
+}) => {
+  const handleChange = newTab => changeTab({ tab: newTab });
+  return (
+    <Column>
+      <Tabs
+        controlled
+        controlledTabActive={tab}
+        controlledSetTabActive={handleChange}
+      >
+        <div label={formatMessage(messages[settingsTabLabels.settings])}>
+          <SettingsTab
+            formatMessage={formatMessage}
+            settings={settings}
+            type={type}
+            id={id}
+          />
+        </div>
+        <div label={formatMessage(messages[settingsTabLabels.narrator])}>
+          <NarratorTab
+            formatMessage={formatMessage}
+            narrator={narrator}
+            id={id}
+          />
+        </div>
+        <div label={formatMessage(messages[settingsTabLabels.branching])}>
+          <BranchingTab
+            formatMessage={formatMessage}
+            formula={formula}
+            id={id}
+          />
+        </div>
+      </Tabs>
+    </Column>
+  );
+};
 
 Settings.propTypes = {
   intl: intlShape,
@@ -55,13 +70,23 @@ Settings.propTypes = {
     formula: PropTypes.object,
     type: PropTypes.string,
   }),
+  tab: PropTypes.string,
+  changeTab: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
   questions: makeSelectQuestions(),
+  tab: makeSelectQuestionSettingsTab(),
 });
 
-const withConnect = connect(mapStateToProps);
+const mapDispatchToProps = {
+  changeTab: toggleQuestionSettings,
+};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
 
 export default injectIntl(compose(withConnect)(Settings));

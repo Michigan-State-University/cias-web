@@ -1,14 +1,14 @@
-import styled from 'styled-components';
-import ReactPlayer from 'react-player/lazy';
-import { elements } from 'theme';
+import styled, { css } from 'styled-components';
 
-const aspectRatio = 9 / 16;
+import { Button } from 'components/Button';
+import { sizes, DESKTOP_MODE } from 'utils/previewMode';
+import { elements, colors, mediaQuery } from 'theme';
 
-export const QuestionActions = styled.div`
-  margin: 20px 0;
-  button {
-    border: none;
-  }
+export const StyledButton = styled(Button)`
+  width: ${({ isDesktop }) => (isDesktop ? '40%' : '80%')};
+  ${mediaQuery.mobile`
+    width: 80%;
+  `}
 `;
 
 export const BackButton = styled.div`
@@ -19,44 +19,33 @@ export const BackButton = styled.div`
 `;
 
 export const AnswerInterventionContent = styled.div`
-  max-width: ${elements.draggableContainerSize}px;
-  max-height: ${elements.draggableContainerSize}px;
-  width: 100%;
-  position: relative;
-  height: 100%;
-  display: flex;
-  justify-content: center;
   align-items: flex-start;
+  border: 1px dashed ${colors.botticelli};
+  display: flex;
+  max-width: ${elements.draggableContainerSize}px;
+  min-height: ${elements.draggableContainerSize}px;
+  position: relative;
+  width: 100%;
+  height: fit-content;
+  margin-top: 15px;
+`;
+
+const getStyles = previewMode => css`
+  height: ${sizes[previewMode].height};
+  width: ${sizes[previewMode].width};
+  ${previewMode !== DESKTOP_MODE &&
+    `overflow: auto;
+     border: 1px solid ${colors.casper}`}
 `;
 
 export const AnswerOuterContainer = styled.div`
-  display: flex;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-  flex-direction: ${props => props.flexDirection || 'row'};
+  display: flex;
+  flex-direction: column;
   height: fit-content;
-  position: relative;
-  margin-top: 50px;
-`;
-
-export const PlayerWrapper = styled.div`
-  margin-top: 22px;
-  position: relative;
-  padding-top: ${aspectRatio * 100}%;
-  height: 100%;
+  justify-content: ${props =>
+    props.interventionStarted ? 'flex-start' : 'center'};
   width: 100%;
-`;
-
-export const Player = styled(ReactPlayer)`
-  position: absolute;
-  top: 0;
-  left: 0;
-`;
-
-export const ImageWrapper = styled.div`
-  margin-top: 22px;
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
+  max-width: ${elements.draggableContainerSize}px;
+  ${props => props.previewMode && getStyles(props.previewMode)}
 `;

@@ -4,15 +4,18 @@
  *
  */
 
-import React, { memo, useEffect, useRef } from 'react';
+import React, { memo, useEffect, useRef, Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { error } from 'react-toastify-redux';
 import get from 'lodash/get';
+import filter from 'lodash/filter';
 
+import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 import { useInjectSaga } from 'utils/injectSaga';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -22,21 +25,22 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
-import Img from 'components/Img';
+import { DESKTOP_MODE } from 'utils/previewMode';
+
+import { instantiateBlockForType } from 'models/Intervention/utils';
 
 import {
-  QuestionActions,
   BackButton,
   AnswerInterventionContent,
-  Player,
-  PlayerWrapper,
-  ImageWrapper,
   AnswerOuterContainer,
+  StyledButton,
 } from './styled';
 
 import renderQuestionByType from './components';
 import CharacterAnim from './components/CharacterAnim';
+import CommonLayout from './layouts/CommonLayout';
 import makeSelectAnswerInterventionPage from './selectors';
+
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
@@ -49,6 +53,42 @@ import {
   startIntervention,
 } from './actions';
 
+const AnimationRefHelper = ({
+  children,
+  currentQuestion,
+  currentQuestionId,
+  previewMode,
+  answers,
+}) => {
+  const animationParentRef = useRef();
+  const [refState, setRefState] = useState(null);
+  useEffect(() => {
+    setRefState(animationParentRef.current);
+  }, [animationParentRef]);
+  return (
+    <AnswerInterventionContent ref={animationParentRef}>
+      {children}
+      {refState !== null && (
+        <CharacterAnim
+          animationContainer={animationParentRef.current}
+          blocks={currentQuestion.narrator.blocks}
+          questionId={currentQuestionId}
+          settings={currentQuestion.narrator.settings}
+          previewMode={previewMode}
+          answers={answers}
+        />
+      )}
+    </AnswerInterventionContent>
+  );
+};
+AnimationRefHelper.propTypes = {
+  children: PropTypes.any,
+  currentQuestion: PropTypes.any,
+  currentQuestionId: PropTypes.any,
+  previewMode: PropTypes.any,
+  answers: PropTypes.object,
+};
+
 export function AnswerInterventionPage({
   match: { params },
   intl: { formatMessage },
@@ -57,6 +97,7 @@ export function AnswerInterventionPage({
   submitAnswerRequest,
   setQuestionIndexAction,
   onStartIntervention,
+  showError,
   answerInterventionPage: {
     interventionQuestions,
     questionError,
@@ -65,19 +106,55 @@ export function AnswerInterventionPage({
     answers,
     questionIndex,
     interventionStarted,
+    previewMode,
   },
 }) {
   useInjectReducer({ key: 'answerInterventionPage', reducer });
   useInjectSaga({ key: 'answerInterventionPage', saga });
 
+  const hasSpeechBlocks = question =>
+    filter(
+      question.narrator.blocks,
+      ({ type }) => type === speechType || type === reflectionType,
+    ).length !== 0;
+
+  const assignCurrentQuestion = () => {
+    const question = interventionQuestions[questionIndex];
+
+    if (!question) return null;
+
+    if (hasSpeechBlocks(question)) return question;
+
+    const { narrator } = question;
+    return {
+      ...question,
+      narrator: {
+        ...narrator,
+        blocks: [
+          {
+            ...instantiateBlockForType(speechType, { x: 0, y: 0 }),
+            ...narrator.from_question[0],
+          },
+          ...narrator.blocks,
+        ],
+      },
+    };
+  };
+
   const currentQuestion = interventionQuestions
-    ? interventionQuestions[questionIndex]
+    ? assignCurrentQuestion()
     : null;
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
-  const animationParentRef = useRef();
+
+  const { interventionId, index } = params;
+
   useEffect(() => {
-    fetchQuestionsAction(params.id);
+    fetchQuestionsAction(interventionId);
+    if (index) {
+      setQuestionIndexAction(parseInt(index, 10));
+      onStartIntervention();
+    }
   }, []);
 
   const saveAnswer = nextQuestionIndex =>
@@ -92,17 +169,7 @@ export function AnswerInterventionPage({
 
   const renderQuestion = () => {
     const {
-      title,
-      subtitle,
-      video_url: videoUrl,
-      image_url: imageUrl,
-      settings: {
-        title: settingsTitle,
-        subtitle: settingsSubtitle,
-        video: settingsVideo,
-        image: settingsImage,
-        proceed_button: proceedButton,
-      },
+      settings: { proceed_button: proceedButton, required },
     } = currentQuestion;
     const selectAnswerProp = answerBody => {
       saveSelectedAnswer({
@@ -115,85 +182,56 @@ export function AnswerInterventionPage({
       ? answers[currentQuestionId].answerBody
       : [];
 
+    const isAnswered = () => !(Array.isArray(answerBody) && !answerBody.length);
+
+    const isButtonDisabled = () => required && !isAnswered();
+
     const sharedProps = {
       selectAnswer: selectAnswerProp,
       answerBody,
       formatMessage,
       questionIndex,
       saveAnswer,
+      showError,
     };
+    const handleBackClick = () => {
+      if (answers[currentQuestionId]) {
+        saveAnswer(questionIndex - 1);
+      } else {
+        setQuestion(questionIndex - 1);
+      }
+    };
+
     return (
-      <Row justify="center" filled>
+      <Row justify="center" width="100%">
         <Column mx={50} justify="center">
-          {questionIndex !== 0 &&
-            (currentQuestion && (
-              <Row width="100%" mt={10}>
-                <BackButton
-                  onClick={() => {
-                    if (answers[currentQuestionId]) {
-                      saveAnswer(questionIndex - 1);
-                    } else {
-                      setQuestion(questionIndex - 1);
-                    }
-                  }}
-                >
-                  <FormattedMessage {...messages.previousQuestion} />
-                </BackButton>
-              </Row>
-            ))}
-          <Box>
-            <Row>
-              {settingsTitle && (
-                <Box
-                  padding={26}
-                  width="100%"
-                  dangerouslySetInnerHTML={{ __html: title }}
-                />
-              )}
-            </Row>
-            <Row>
-              {settingsSubtitle && (
-                <Box
-                  padding={26}
-                  dangerouslySetInnerHTML={{ __html: subtitle }}
-                />
-              )}
-            </Row>
-            <Row mt={10}>
-              {settingsVideo && videoUrl && (
-                <PlayerWrapper>
-                  <Player url={videoUrl} controls width="100%" height="100%" />
-                </PlayerWrapper>
-              )}
-            </Row>
-            <Row>
-              {settingsImage && imageUrl && (
-                <ImageWrapper>
-                  <Img src={imageUrl} alt="image" height="100%" width="100%" />
-                </ImageWrapper>
-              )}
-            </Row>
-          </Box>
-          <Row pl={26}>
+          <Row width="100%" mt={5} height={30}>
+            {questionIndex !== 0 && currentQuestion && (
+              <BackButton onClick={handleBackClick}>
+                <FormattedMessage {...messages.previousQuestion} />
+              </BackButton>
+            )}
+          </Row>
+          <CommonLayout currentQuestion={currentQuestion} />
+          <Row mt={10}>
             {renderQuestionByType(currentQuestion, sharedProps)}
           </Row>
           {(isNullOrUndefined(proceedButton) || proceedButton) && (
-            <Row width="100%">
-              <QuestionActions>
-                <Button
-                  my={20}
-                  width="180px"
-                  loading={currentQuestion.loading}
-                  onClick={() => {
-                    saveAnswer(questionIndex + 1);
-                  }}
-                  title={formatMessage(
-                    questionIndex !== interventionQuestions.length - 1
-                      ? messages.nextQuestion
-                      : messages.submitAnswer,
-                  )}
-                />
-              </QuestionActions>
+            <Row width="100%" my={20}>
+              <Button
+                disabled={isButtonDisabled()}
+                margin={20}
+                width="180px"
+                loading={currentQuestion.loading}
+                onClick={() => {
+                  saveAnswer(questionIndex + 1);
+                }}
+                title={formatMessage(
+                  questionIndex !== interventionQuestions.length - 1
+                    ? messages.nextQuestion
+                    : messages.submitAnswer,
+                )}
+              />
             </Row>
           )}
         </Column>
@@ -201,50 +239,58 @@ export function AnswerInterventionPage({
     );
   };
 
-  const renderPage = () => (
-    <>
-      {currentQuestion && interventionStarted && (
-        <AnswerInterventionContent>
-          {renderQuestion()}
-          <CharacterAnim
-            animationContainer={animationParentRef}
-            blocks={currentQuestion.narrator.blocks}
-            questionId={currentQuestionId}
-            settings={currentQuestion.narrator.settings}
-          />
-        </AnswerInterventionContent>
-      )}
-    </>
-  );
+  const renderPage = () => <Fragment>{renderQuestion()}</Fragment>;
 
+  const isDesktop = previewMode === DESKTOP_MODE;
   return (
-    <AnswerOuterContainer flexDirection="column">
+    <Box
+      display="flex"
+      align="center"
+      justify="center"
+      height="100%"
+      width="100%"
+    >
       <Helmet>
         <title>Answer Intervention</title>
         <meta name="description" content="Answer Intervention" />
       </Helmet>
-      {interventionStarted && (
-        <Box>
-          {questionError && <ErrorAlert errorText={questionError} />}
-          {answersError && <ErrorAlert errorText={answersError} />}
-          {questionLoading && <Loader />}
-          {!currentQuestion && (
-            <FormattedMessage {...messages.completeIntervention} />
-          )}
-        </Box>
-      )}
-      {!interventionStarted && (
-        <Button
-          mt={16}
-          onClick={onStartIntervention}
-          title={formatMessage(messages.startIntervention)}
-          width="40%"
-        />
-      )}
-      <AnswerInterventionContent ref={animationParentRef}>
-        {renderPage()}
-      </AnswerInterventionContent>
-    </AnswerOuterContainer>
+      <AnswerOuterContainer
+        previewMode={previewMode}
+        interventionStarted={interventionStarted}
+      >
+        {!index && !interventionStarted && (
+          <StyledButton
+            onClick={onStartIntervention}
+            title={formatMessage(messages.startIntervention)}
+            isDesktop={isDesktop}
+          />
+        )}
+        {interventionStarted && (
+          <Fragment>
+            <Box width="100%">
+              {!questionLoading && currentQuestion && interventionStarted && (
+                <AnimationRefHelper
+                  currentQuestion={currentQuestion}
+                  currentQuestionId={currentQuestionId}
+                  previewMode={previewMode}
+                  answers={answers}
+                >
+                  {renderPage()}
+                </AnimationRefHelper>
+              )}
+            </Box>
+            {questionError && <ErrorAlert errorText={questionError} />}
+            {answersError && <ErrorAlert errorText={answersError} />}
+            {questionLoading && <Loader />}
+            {!questionLoading && !currentQuestion && (
+              <Box mt={50}>
+                <FormattedMessage {...messages.completeIntervention} />
+              </Box>
+            )}
+          </Fragment>
+        )}
+      </AnswerOuterContainer>
+    </Box>
   );
 }
 
@@ -257,6 +303,7 @@ AnswerInterventionPage.propTypes = {
   submitAnswerRequest: PropTypes.func,
   onStartIntervention: PropTypes.func,
   setQuestionIndexAction: PropTypes.func,
+  showError: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -269,6 +316,7 @@ const mapDispatchToProps = {
   saveSelectedAnswer: selectAnswer,
   setQuestionIndexAction: setQuestionIndex,
   onStartIntervention: startIntervention,
+  showError: error,
 };
 
 const withConnect = connect(

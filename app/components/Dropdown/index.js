@@ -6,14 +6,13 @@ import { outsideClickHandler } from 'utils/outsideClickHandler';
 import Img from 'components/Img';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Comment from 'components/Comment';
+import Row from 'components/Row';
 import dots from 'assets/svg/dots.svg';
-import { borders, colors } from 'theme';
+import { colors, boxShadows } from 'theme';
 
-import { ContentContainer, ImageContainer, StyledRow } from './styled';
+import { StyledComment, ImageContainer, StyledRow } from './styled';
 
-const Dropdown = props => {
-  const { options, id, ...restProps } = props;
+const Dropdown = ({ options, ...restProps }) => {
   const [open, setOpen] = useState(false);
 
   const dropdown = useRef(null);
@@ -27,17 +26,13 @@ const Dropdown = props => {
   return (
     <Box
       display="flex"
-      borderRadius="0"
       justify="end"
       align="start"
       position="relative"
-      height="100%"
-      width="100%"
       {...restProps}
     >
       <ImageContainer
         ref={dropdown}
-        key={`el-img-${id}`}
         onClick={() => {
           setOpen(!open);
         }}
@@ -45,22 +40,27 @@ const Dropdown = props => {
         <Img src={dots} alt="dots" />
       </ImageContainer>
       {open && (
-        <ContentContainer>
-          <Column>
+        <Row position="absolute" top="35px" right="0" zIndex={999}>
+          <Column bg={colors.white} shadow={boxShadows.black} borderRadius={10}>
             {options.map(option => (
               <StyledRow
                 key={`el-dropdown-${option.id}`}
                 padding={8}
-                borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
-                  colors.greyishBlue
-                }`}
                 onClick={option.action}
+                align="center"
               >
-                <Comment color={option.color}>{option.label}</Comment>
+                {option.icon && <Img src={option.icon} alt="icon" mr={12} />}
+                <StyledComment
+                  color={option.color || colors.bluewood}
+                  whiteSpace="nowrap"
+                  title={option.label}
+                >
+                  {option.label}
+                </StyledComment>
               </StyledRow>
             ))}
           </Column>
-        </ContentContainer>
+        </Row>
       )}
     </Box>
   );

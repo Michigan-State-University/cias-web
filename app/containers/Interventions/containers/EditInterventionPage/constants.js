@@ -3,6 +3,8 @@ export const TOGGLE_QUESTION_SETTINGS =
 export const SELECT_QUESTION = 'app/EditInterventionPage/SELECT_QUESTION';
 export const UPDATE_PREVIEW_ANIMATION =
   'app/EditInterventionPage/UPDATE_PREVIEW_ANIMATION';
+export const UPDATE_PREVIEW_DATA =
+  'app/EditInterventionPage/UPDATE_PREVIEW_DATA';
 
 export const ERROR_DUPLICATE_VARIABLE =
   'app/EditInterventionPage/ERROR_DUPLICATE_VARIABLE';

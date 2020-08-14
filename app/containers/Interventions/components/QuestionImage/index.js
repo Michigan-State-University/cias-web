@@ -18,12 +18,14 @@ import HoverableBox from 'components/Box/HoverableBox';
 import imagePlaceholder from 'assets/svg/image-placeholder.svg';
 import { themeColors, borders } from 'theme';
 import bin from 'assets/svg/bin-red.svg';
-
 import {
   addQuestionImage,
   deleteQuestionImage,
 } from '../../containers/EditInterventionPage/actions';
-import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectIsNarratorTab,
+} from '../../containers/EditInterventionPage/selectors';
 import { ImageWrapper } from './styled';
 import messages from './messages';
 
@@ -32,6 +34,7 @@ export const QuestionImage = ({
   deleteImage,
   selectedQuestion: { id, image_url: imageUrl },
   intl: { formatMessage },
+  isNarratorTab,
 }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -99,28 +102,42 @@ export const QuestionImage = ({
     );
 
   return (
-    <HoverableBox
-      width="100%"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      clickable={false}
-      px={21}
-      py={14}
-    >
-      <Row justify="between" align="center" width="100%">
+    <Box mt={10} width="100%">
+      {isNarratorTab && (
         <ImageWrapper>
           <Img src={imageUrl} alt="image" height="100%" width="100%" />
         </ImageWrapper>
-        <Box
-          onClick={handleRemove}
-          clickable
-          visibility={hovered ? 'visible' : 'hidden'}
-          ml={15}
+      )}
+      {!isNarratorTab && (
+        <HoverableBox
+          width="100%"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          clickable={false}
+          px={21}
+          py={14}
         >
-          <Img src={bin} alt="bin-icon" />
-        </Box>
-      </Row>
-    </HoverableBox>
+          <Row justify="center" align="center" width="100%">
+            <ImageWrapper>
+              <Img
+                src={imageUrl}
+                alt="image"
+                maxHeight="50vh"
+                maxWidth="100%"
+              />
+            </ImageWrapper>
+            <Box
+              onClick={handleRemove}
+              clickable
+              visibility={hovered ? 'visible' : 'hidden'}
+              ml={15}
+            >
+              <Img src={bin} alt="bin-icon" />
+            </Box>
+          </Row>
+        </HoverableBox>
+      )}
+    </Box>
   );
 };
 
@@ -133,10 +150,12 @@ QuestionImage.propTypes = {
   }),
   formatMessage: PropTypes.func,
   intl: intlShape,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = {

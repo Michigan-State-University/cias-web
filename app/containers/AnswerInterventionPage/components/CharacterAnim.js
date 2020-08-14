@@ -8,6 +8,7 @@ import {
   bodyAnimationType,
   speechType,
   headAnimationType,
+  reflectionType,
 } from 'models/Narrator/BlockTypes';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
@@ -43,6 +44,8 @@ const CharacterAnim = ({
   questionId,
   settings,
   animationContainer,
+  previewMode,
+  answers,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const dispatchUpdate = newState =>
@@ -66,6 +69,7 @@ const CharacterAnim = ({
           changeAnimation(nextBlock, nextIndex);
           break;
         case speechType:
+        case reflectionType:
           changeSpeech(nextBlock, nextIndex);
           break;
         default:
@@ -99,7 +103,7 @@ const CharacterAnim = ({
     changeSpeech,
     getInitialSpeechAnimation,
     cleanAudio,
-    handleSpeechBlock,
+    handleAudioBlock,
     decideIfPlaySpeechAnimation,
     fetchAudioAnimations,
     stopSpeech,
@@ -110,6 +114,8 @@ const CharacterAnim = ({
     state.currentBlockIndex,
     animationRef.current,
     changeBlock,
+    answers,
+    settings,
   );
 
   const { animationPos, moveAnimation, fetchMoveAnimations } = useMoveHelper(
@@ -122,6 +128,7 @@ const CharacterAnim = ({
     if (blocks.length) {
       switch (blocks[0].type) {
         case speechType:
+        case reflectionType:
           return getInitialSpeechAnimation();
 
         case headAnimationType:
@@ -147,7 +154,7 @@ const CharacterAnim = ({
     };
     fetch();
     return stopSpeech;
-  }, [questionId]);
+  }, [questionId, previewMode]);
 
   useDidUpdateEffect(() => {
     if (state.currentData)
@@ -159,8 +166,9 @@ const CharacterAnim = ({
           break;
 
         case speechType:
+        case reflectionType:
           if (!settings.voice) changeBlock();
-          else handleSpeechBlock();
+          else handleAudioBlock();
           break;
 
         default:
@@ -169,7 +177,8 @@ const CharacterAnim = ({
   }, [state.currentData, state.currentBlockIndex]);
 
   const decideIfLoopAnimation = () =>
-    get(state, 'currentData.type', 'none') === speechType &&
+    (get(state, 'currentData.type', 'none') === speechType ||
+      get(state, 'currentData.type', 'none') === reflectionType) &&
     get(state, 'currentData.isLoop', false);
 
   const getAnimationOptions = () => {
@@ -178,7 +187,9 @@ const CharacterAnim = ({
       state.currentData &&
       state.currentData.animationData
     ) {
-      const isSpeechType = state.currentData.type === 'Speech';
+      const isSpeechType =
+        state.currentData.type === speechType ||
+        state.currentData.type === reflectionType;
 
       return {
         name: state.currentData.name,
@@ -198,23 +209,26 @@ const CharacterAnim = ({
     ...getAnimationOptions(),
   };
 
+  const isStopped =
+    !state.currentData ||
+    !state.currentData.animationData ||
+    !decideIfPlaySpeechAnimation();
+
   return (
     <NarratorContainer>
-      <Draggable disabled position={animationPos}>
-        <Lottie
-          ref={animationRef}
-          options={defaultOptions}
-          height={100}
-          width={100}
-          style={lottieStyles}
-          isClickToPauseDisabled
-          isStopped={
-            !state.currentData ||
-            !state.currentData.animationData ||
-            !decideIfPlaySpeechAnimation()
-          }
-        />
-      </Draggable>
+      {settings.animation && (
+        <Draggable disabled position={animationPos}>
+          <Lottie
+            ref={animationRef}
+            options={defaultOptions}
+            height={100}
+            width={100}
+            style={lottieStyles}
+            isClickToPauseDisabled
+            isStopped={isStopped}
+          />
+        </Draggable>
+      )}
     </NarratorContainer>
   );
 };
@@ -232,7 +246,12 @@ CharacterAnim.propTypes = {
   ),
   questionId: PropTypes.string,
   settings: PropTypes.object,
-  animationContainer: PropTypes.shape({ current: PropTypes.any }),
+  animationContainer: PropTypes.shape({
+    clientWidth: PropTypes.number,
+    clientHeight: PropTypes.number,
+  }),
+  previewMode: PropTypes.string,
+  answers: PropTypes.object,
 };
 
 export default CharacterAnim;

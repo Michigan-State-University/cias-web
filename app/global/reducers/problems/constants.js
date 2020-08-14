@@ -1,0 +1,3 @@
+export const FETCH_PROBLEMS_REQUEST = 'app/Dashboard/FETCH_PROBLEMS_REQUEST';
+export const FETCH_PROBLEMS_SUCCESS = 'app/Dashboard/FETCH_PROBLEMS_SUCCESS';
+export const FETCH_PROBLEMS_ERROR = 'app/Dashboard/FETCH_PROBLEMS_ERROR';

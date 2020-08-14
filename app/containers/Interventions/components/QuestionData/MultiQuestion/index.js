@@ -17,7 +17,6 @@ import bin from 'assets/svg/bin-red.svg';
 import checkbox from 'assets/svg/checkbox.svg';
 import globalMessages from 'global/i18n/globalMessages';
 import { BadgeInput } from 'components/Input/BadgeInput';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
@@ -35,7 +34,7 @@ const MultiQuestion = ({
   addAnswer,
   updateAnswer,
   removeAnswer,
-  draggable,
+  isNarratorTab,
   intl: { formatMessage },
 }) => {
   const checkboxButtonRef = useRef(null);
@@ -51,7 +50,7 @@ const MultiQuestion = ({
   }, [checkboxButtonRef.current]);
 
   return (
-    <Column>
+    <Column mt={10}>
       {selectedQuestion.body.data.map((value, index) => (
         <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox
@@ -96,7 +95,7 @@ const MultiQuestion = ({
                   </Box>
                 </Row>
               </Row>
-              <Row align="center" display="flex" hidden={draggable}>
+              <Row align="center" display="flex" hidden={isNarratorTab}>
                 <BadgeInput
                   px={0}
                   py={12}
@@ -139,7 +138,7 @@ const MultiQuestion = ({
           </HoverableBox>
         </Row>
       ))}
-      <Row display="flex" hidden={draggable}>
+      <Row display="flex" hidden={isNarratorTab}>
         <HoverableBox px={21} py={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
@@ -161,12 +160,11 @@ MultiQuestion.propTypes = {
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
   removeAnswer: PropTypes.func.isRequired,
-  draggable: PropTypes.bool,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
 });
 
 const mapDispatchToProps = dispatch => ({

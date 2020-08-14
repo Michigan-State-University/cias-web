@@ -24,7 +24,7 @@ export const StyledSpinner = styled.div`
     width: ${({ size }) => `${size * INNER_CIRCLE_SCALE}px`};
     height: ${({ size }) => `${size * INNER_CIRCLE_SCALE}px`};
     border-radius: 50%;
-    border: 6px solid ${({ color }) => color};
+    border: ${({ width }) => `${width}px`} solid ${({ color }) => color};
     border-color: ${({ color }) => `${color} transparent ${color} transparent`};
     animation: ${animation} 1.2s linear infinite;
   }

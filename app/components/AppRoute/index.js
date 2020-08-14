@@ -6,27 +6,38 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import Navbar from 'containers/Navbar';
-import { elements } from 'theme';
-import { makeSelectIsLoggedIn } from '../../global/reducers/auth';
+import { makeSelectIsLoggedIn, makeSelectUser } from 'global/reducers/auth';
+import { MainAppContainer } from './styled';
 
 class AppRoute extends Route {
   render() {
-    const { protectedRoute, isLoggedIn, path } = this.props;
-    if (protectedRoute && !isLoggedIn) {
+    const {
+      protectedRoute,
+      isLoggedIn,
+      allowedRoles,
+      user,
+      navbarProps,
+      computedMatch,
+      location,
+    } = this.props;
+
+    if (!protectedRoute) {
+      return super.render();
+    }
+    if (!isLoggedIn || !user.roles) {
       return <Redirect to="/login" />;
     }
-    if (isLoggedIn) {
+    if (isLoggedIn && allowedRoles.includes(user.roles[0])) {
       return (
         <>
-          <Navbar path={path} />
-          <div
-            style={{
-              marginTop: 70,
-              height: `calc(100vh - ${elements.navbarHeight}px)`,
-            }}
-          >
+          <Navbar
+            navbarProps={navbarProps}
+            match={computedMatch}
+            location={location}
+          />
+          <MainAppContainer id="main-app-container">
             {super.render()}
-          </div>
+          </MainAppContainer>
         </>
       );
     }
@@ -41,10 +52,12 @@ AppRoute.propTypes = {
 
 AppRoute.defaultProps = {
   protectedRoute: false,
+  allowedRoles: [],
 };
 
 const mapStateToProps = createStructuredSelector({
   isLoggedIn: makeSelectIsLoggedIn(),
+  user: makeSelectUser(),
 });
 
 const withConnect = connect(mapStateToProps);

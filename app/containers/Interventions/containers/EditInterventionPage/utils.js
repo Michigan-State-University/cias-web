@@ -1,3 +1,5 @@
+import concat from 'lodash/concat';
+
 import {
   gridQuestion,
   visualAnalogueScaleQuestion,
@@ -8,6 +10,9 @@ import {
   numberQuestion,
 } from 'models/Intervention/QuestionTypes';
 import Question from 'models/Intervention/Question';
+
+import { splitAndKeep } from 'utils/splitAndKeep';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 export const instantiateEmptyQuestion = (message, type) => {
   switch (type) {
@@ -118,4 +123,35 @@ export const getAnimationPosition = (draft, state, payload) => {
     }
     return { x: 0, y: 0 };
   }
+};
+
+const getDataTTS = (type, questionData, delimiters) => {
+  switch (type) {
+    case singleQuestion.id:
+    case multiQuestion.id:
+      const textArray = [];
+
+      questionData.forEach(({ payload }) => {
+        textArray.push(...splitAndKeep(htmlToPlainText(payload), delimiters));
+      });
+
+      return textArray;
+
+    default:
+      return [];
+  }
+};
+
+export const getFromQuestionTTS = question => {
+  const delimiters = [',', '.', '?', '!'];
+
+  const titleTTS = question.title
+    ? splitAndKeep(htmlToPlainText(question.title), delimiters)
+    : [];
+  const subtileTTS = question.subtitle
+    ? splitAndKeep(htmlToPlainText(question.subtitle), delimiters)
+    : [];
+  const dataTTS = getDataTTS(question.type, question.body.data, delimiters);
+
+  return concat(titleTTS, subtileTTS, dataTTS);
 };

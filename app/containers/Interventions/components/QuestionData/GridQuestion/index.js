@@ -18,7 +18,6 @@ import radio from 'assets/svg/radio-button.svg';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors, elements } from 'theme';
 
@@ -43,7 +42,7 @@ const GridQuestion = ({
   updateColumn,
   deleteRow,
   deleteColumn,
-  draggable,
+  isNarratorTab,
   intl: { formatMessage },
 }) => {
   const {
@@ -53,9 +52,12 @@ const GridQuestion = ({
   const [hoveredRow, setHoveredRow] = useState(-1);
   const [hoveredColumn, setHoveredColumn] = useState(-1);
 
+  const getPlaceholder = (name, value) =>
+    isNarratorTab ? '' : formatMessage(messages[name], { index: value });
+
   return (
-    <Box width="100%" px={21} py={14}>
-      <Row justify="end" display="flex" hidden={draggable}>
+    <Box width="100%" px={21} py={14} mt={10}>
+      <Row justify="end" display="flex" hidden={isNarratorTab}>
         <HoverableBox px={21} py={14} onClick={addColumn}>
           <Box>
             <Row align="center">
@@ -83,18 +85,18 @@ const GridQuestion = ({
                     onMouseEnter={() => setHoveredColumn(columnIndex)}
                     onMouseLeave={() => setHoveredColumn(-1)}
                   >
-                    <Column align="center" width="100%" mx={-50}>
+                    <Column align="center">
                       <Box
                         px={8}
                         mb={8}
-                        height={35}
                         onClick={() => deleteColumn(columnIndex)}
-                        hidden={false}
+                        hidden={isNarratorTab}
                         clickable
+                        height={35}
                       >
                         <Img src={bin} hidden={hoveredColumn !== columnIndex} />
                       </Box>
-                      <Row display="flex" hidden={draggable} mb={8}>
+                      <Row display="flex" hidden={isNarratorTab} mb={8}>
                         <BadgeInput
                           px={0}
                           py={12}
@@ -119,9 +121,10 @@ const GridQuestion = ({
                         px={0}
                         py={12}
                         textAlign="center"
-                        placeholder={formatMessage(messages.columnPlaceholder, {
-                          index: columnIndex + 1,
-                        })}
+                        placeholder={getPlaceholder(
+                          'columnPlaceholder',
+                          columnIndex + 1,
+                        )}
                         value={column.payload}
                         onBlur={value =>
                           updateColumn({ payload: value }, columnIndex)
@@ -147,11 +150,12 @@ const GridQuestion = ({
                         width={60}
                         onClick={() => deleteRow(rowIndex)}
                         clickable
+                        hidden={isNarratorTab}
                       >
                         <Img src={bin} hidden={hoveredRow !== rowIndex} />
                       </Box>
                       <Row align="center" justify="between" width="100%">
-                        <Row display="flex" hidden={draggable} mr={8}>
+                        <Row display="flex" hidden={isNarratorTab} mr={8}>
                           <BadgeInput
                             px={0}
                             py={12}
@@ -172,9 +176,10 @@ const GridQuestion = ({
                           px={0}
                           py={12}
                           textAlign="center"
-                          placeholder={formatMessage(messages.rowPlaceholder, {
-                            index: rowIndex + 1,
-                          })}
+                          placeholder={getPlaceholder(
+                            'rowPlaceholder',
+                            rowIndex + 1,
+                          )}
                           value={row.payload}
                           onBlur={value =>
                             updateRow({ payload: value }, rowIndex)
@@ -189,7 +194,7 @@ const GridQuestion = ({
                         selectedQuestion.id
                       }-row-cell-${rowIndex}-${columnIndex}`}
                     >
-                      <Row width={150}>
+                      <Row justify="center">
                         <Img src={radio} />
                       </Row>
                     </TD>
@@ -201,10 +206,10 @@ const GridQuestion = ({
         </Box>
       </Row>
 
-      <Row justify="start">
+      <Row justify="start" hidden={isNarratorTab}>
         <HoverableBox px={21} py={14} mt={20} onClick={addRow}>
           <Box>
-            <Row align="center" display="flex" hidden={draggable}>
+            <Row align="center" display="flex">
               <PlusCircle mr={12} />
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(messages.addRow)}
@@ -226,12 +231,11 @@ GridQuestion.propTypes = {
   updateColumn: PropTypes.func.isRequired,
   deleteRow: PropTypes.func.isRequired,
   deleteColumn: PropTypes.func.isRequired,
-  draggable: PropTypes.bool,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
 });
 
 const mapDispatchToProps = {

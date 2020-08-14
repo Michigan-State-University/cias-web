@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { fontSizes, fontFamily, lineHeights } from 'theme';
-import { margin, text, layout } from '../BaseComponentStyles';
+import { margin, text, layout, style } from '../BaseComponentStyles';
 
 const Text = styled.p`
   font-family: ${fontFamily};
@@ -9,6 +9,7 @@ const Text = styled.p`
   ${margin};
   ${text};
   ${layout};
+  ${style};
 `;
 
 export default Text;

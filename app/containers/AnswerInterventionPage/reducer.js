@@ -4,6 +4,9 @@
  *
  */
 import produce from 'immer';
+
+import { DESKTOP_MODE } from 'utils/previewMode';
+
 import {
   FETCH_QUESTIONS,
   FETCH_QUESTIONS_SUCCESS,
@@ -14,6 +17,8 @@ import {
   SELECT_ANSWER,
   SET_QUESTION_INDEX,
   START_INTERVENTION,
+  CHANGE_PREVIEW_MODE,
+  RESET_INTERVENTION,
 } from './constants';
 
 export const initialState = {
@@ -25,6 +30,8 @@ export const initialState = {
   answersError: '',
   answers: {},
   interventionStarted: false,
+  previewMode: DESKTOP_MODE,
+  interventionId: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -38,6 +45,7 @@ const answerInterventionPageReducer = (
         draft.questionError = '';
         draft.questionLoading = true;
         draft.interventionStarted = false;
+        draft.interventionId = payload.interventionId;
         break;
 
       case FETCH_QUESTIONS_SUCCESS:
@@ -85,6 +93,15 @@ const answerInterventionPageReducer = (
 
       case START_INTERVENTION:
         draft.interventionStarted = true;
+        break;
+
+      case CHANGE_PREVIEW_MODE:
+        draft.previewMode = payload.previewMode;
+        break;
+      case RESET_INTERVENTION:
+        draft.answers = initialState.answers;
+        draft.questionIndex = 0;
+        draft.interventionStarted = false;
         break;
     }
   });

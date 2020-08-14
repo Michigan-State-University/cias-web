@@ -1,10 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep';
 
-import {
-  bodyAnimationType,
-  speechType,
-  headAnimationType,
-} from 'models/Narrator/BlockTypes';
+import { instantiateBlockForType } from 'models/Intervention/utils';
+import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 
 import {
   UPDATE_QUESTION_SETTINGS,
@@ -18,43 +15,9 @@ import {
   UPDATE_NARRATOR_MOVEMENT,
   UPDATE_FORMULA_CASE,
   REMOVE_BLOCK,
+  SWITCH_SPEECH_REFLECTION,
+  UPDATE_REFLECTION,
 } from './constants';
-
-const instantiateBlockForType = (type, posFrom) => {
-  switch (type) {
-    case bodyAnimationType:
-      return {
-        type: bodyAnimationType,
-        animation: null,
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
-      };
-    case speechType:
-      return {
-        type: speechType,
-        text: '',
-        audio_url: null,
-        animation: 'rest',
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
-      };
-    case headAnimationType:
-      return {
-        type: headAnimationType,
-        animation: null,
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
-      };
-    default:
-      return undefined;
-  }
-};
 
 const getStartAnimationPoint = (
   allQuestions,
@@ -151,6 +114,50 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       cloneBlocks[payload.data.index] = {
         ...cloneBlocks[payload.data.index],
         ...payload.data.value,
+      };
+
+      return {
+        ...question,
+        narrator: {
+          ...question.narrator,
+          blocks: cloneBlocks,
+        },
+      };
+    }
+
+    case UPDATE_REFLECTION: {
+      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      const reflection =
+        cloneBlocks[payload.data.blockIndex].reflections[
+          payload.data.reflectionIndex
+        ];
+
+      cloneBlocks[payload.data.blockIndex].reflections[
+        payload.data.reflectionIndex
+      ] = {
+        ...reflection,
+        ...payload.data.value,
+      };
+
+      return {
+        ...question,
+        narrator: {
+          ...question.narrator,
+          blocks: cloneBlocks,
+        },
+      };
+    }
+
+    case SWITCH_SPEECH_REFLECTION: {
+      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      const newBlockType =
+        cloneBlocks[payload.data.index].type === speechType
+          ? reflectionType
+          : speechType;
+      cloneBlocks[payload.data.index] = {
+        ...instantiateBlockForType(newBlockType),
+        position: cloneBlocks[payload.data.index].position,
+        animation: cloneBlocks[payload.data.index].animation,
       };
 
       return {

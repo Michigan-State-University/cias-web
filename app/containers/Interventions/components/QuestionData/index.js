@@ -22,24 +22,28 @@ import GridQuestion from './GridQuestion';
 import UrlQuestion from './UrlQuestion';
 
 import { makeSelectSelectedQuestionType } from './selectors';
+import { makeSelectIsNarratorTab } from '../../containers/EditInterventionPage/selectors';
 import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
 
-const QuestionData = ({ selectedQuestionType }) => {
+const QuestionData = ({ selectedQuestionType, isNarratorTab }) => {
+  const commonProps = {
+    isNarratorTab,
+  };
   switch (selectedQuestionType) {
     case singleQuestion.id:
-      return <SingleQuestion />;
+      return <SingleQuestion {...commonProps} />;
     case multiQuestion.id:
-      return <MultiQuestion />;
+      return <MultiQuestion {...commonProps} />;
     case textboxQuestion.id:
-      return <TextboxQuestion />;
+      return <TextboxQuestion {...commonProps} />;
     case numberQuestion.id:
-      return <NumberQuestion />;
+      return <NumberQuestion {...commonProps} />;
     case gridQuestion.id:
-      return <GridQuestion />;
+      return <GridQuestion {...commonProps} />;
     case visualAnalogueScaleQuestion.id:
-      return <VisualAnalogueScaleQuestion />;
+      return <VisualAnalogueScaleQuestion {...commonProps} />;
     case urlQuestion.id:
-      return <UrlQuestion />;
+      return <UrlQuestion {...commonProps} />;
     default:
       return null;
   }
@@ -47,10 +51,12 @@ const QuestionData = ({ selectedQuestionType }) => {
 
 QuestionData.propTypes = {
   selectedQuestionType: PropTypes.string.isRequired,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestionType: makeSelectSelectedQuestionType(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const mapDispatchToProps = () => ({});

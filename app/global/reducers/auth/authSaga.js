@@ -1,8 +1,11 @@
-import { put, takeEvery, all } from 'redux-saga/effects';
+import { put, takeEvery, all, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
+import LocalStorageService from 'utils/localStorageService';
 import { LOG_OUT } from './constants';
 
 function* logOut() {
+  yield call(LocalStorageService.clearHeaders);
+
   yield put(push('/login'));
 }
 

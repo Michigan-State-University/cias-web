@@ -16,6 +16,7 @@ const ArrowDropdown = ({
   positionFrom,
   isOpened,
   setOpen,
+  childWidthScope,
 }) => {
   const dropdown = useRef(null);
 
@@ -38,9 +39,9 @@ const ArrowDropdown = ({
       <Box
         bg={colors.white}
         borderRadius={10}
-        shadow={boxShadows[1]}
+        shadow={boxShadows.black}
         position="absolute"
-        width="max-content"
+        width={childWidthScope === 'child' ? 'max-content' : '100%'}
         mt={15}
         {...(isOpened ? { zIndex: 1 } : { display: 'none' })}
         {...positionFrom === 'right' && { right: '0' }}
@@ -53,6 +54,7 @@ const ArrowDropdown = ({
 
 ArrowDropdown.propTypes = {
   children: PropTypes.node,
+  childWidthScope: PropTypes.oneOf(['parent', 'child']),
   width: PropTypes.string,
   dropdownContent: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   positionFrom: PropTypes.oneOf(['left', 'right']),
@@ -62,6 +64,7 @@ ArrowDropdown.propTypes = {
 
 ArrowDropdown.defaultProps = {
   positionFrom: 'left',
+  childWidthScope: 'child',
 };
 
 export default ArrowDropdown;

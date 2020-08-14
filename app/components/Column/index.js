@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { flex, layout, margin } from '../BaseComponentStyles';
+import { flex, layout, margin, style, padding } from '../BaseComponentStyles';
 
 const maxNumberOfColumns = 12;
 
@@ -33,12 +33,14 @@ const Column = styled.div`
     ${({ md }) => md && getWidthString(md)};
   }
   @media only screen and (min-width: 1170px) {
-    ${({ lg }) => lg && getWidthString(lg)}5
+    ${({ lg }) => lg && getWidthString(lg)};
   }
 
   ${flex};
   ${layout};
   ${margin};
+  ${style};
+  ${padding};
 `;
 
 Column.propTypes = {

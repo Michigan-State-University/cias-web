@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 import { get } from 'lodash';
 
+import settingsTabsLabels from 'utils/settingsTabsLabels';
+
 import { initialState } from './reducer';
 
 const selectEditInterventionPageDomain = state =>
@@ -21,7 +23,19 @@ const makeSelectQuestions = () =>
 const makeSelectQuestionSettingsVisibility = () =>
   createSelector(
     selectEditInterventionPageDomain,
-    substate => substate.questionSettingsVisibility,
+    substate => substate.questionSettings.visibility,
+  );
+
+const makeSelectQuestionSettingsTab = () =>
+  createSelector(
+    selectEditInterventionPageDomain,
+    substate => substate.questionSettings.tab,
+  );
+
+const makeSelectIsNarratorTab = () =>
+  createSelector(
+    selectEditInterventionPageDomain,
+    substate => substate.questionSettings.tab === settingsTabsLabels.narrator,
   );
 
 const makeSelectSelectedQuestionIndex = () =>
@@ -54,6 +68,12 @@ const makeSelectLoader = loader =>
     substate => get(substate.loaders, loader, false),
   );
 
+const makeSelectQuestionsLength = () =>
+  createSelector(
+    selectEditInterventionPageDomain,
+    substate => substate.questions.length,
+  );
+
 export {
   makeSelectEditInterventionPage,
   selectEditInterventionPageDomain,
@@ -61,7 +81,10 @@ export {
   makeSelectSelectedQuestionIndex,
   makeSelectSelectedQuestion,
   makeSelectQuestionSettingsVisibility,
+  makeSelectQuestionSettingsTab,
+  makeSelectIsNarratorTab,
   makeSelectLoader,
   makeSelectLoaders,
   makeSelectAnimationPosition,
+  makeSelectQuestionsLength,
 };

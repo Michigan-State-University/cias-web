@@ -13,7 +13,7 @@ import checkboxChecked from 'assets/svg/checkbox-checked.svg';
 
 const Checkbox = ({ checked, ...restProps }) => {
   const icon = checked ? checkboxChecked : checkbox;
-  return <Img {...restProps} src={icon} />;
+  return <Img {...restProps} src={icon} clickable />;
 };
 
 Checkbox.propTypes = {

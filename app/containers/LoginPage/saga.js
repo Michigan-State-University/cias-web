@@ -22,6 +22,7 @@ function* login({ payload: { email, password } }) {
       logIn({
         firstName: data.first_name,
         lastName: data.last_name,
+        roles: data.roles,
       }),
     );
     yield put(loginSuccess());

@@ -19,6 +19,7 @@ exports[`<UrlPreview /> Should render and match the snapshot 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
 }
 
 .c3 {
@@ -83,6 +84,7 @@ exports[`<UrlPreview /> Should render and match the snapshot 1`] = `
         className="c3"
         color="#C866EA"
         size={50}
+        width={6}
       />
     </div>
   </div>

@@ -7,7 +7,6 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape } from 'react-intl';
 
 import Box from 'components/Box';
-import Tabs from 'components/Tabs';
 import { colors } from 'theme';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -20,17 +19,11 @@ import {
 } from 'global/reducers/intervention';
 
 import InterventionSettings from './components/InterventionSettings';
-import RespondentSettings from './components/RespondentSettings';
 import messages from './messages';
 import { StyledColumn } from './styled';
 
 const SettingsInterventionPage = ({
-  intervention: {
-    id,
-    name,
-    slug,
-    settings: { narrator: narratorSettings } = {},
-  },
+  intervention: { id, name, settings: { narrator: narratorSettings } = {} },
   match: { params },
   getIntervention,
   intl: { formatMessage },
@@ -39,7 +32,7 @@ const SettingsInterventionPage = ({
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
 
   useEffect(() => {
-    getIntervention(params.id);
+    getIntervention(params.interventionId);
   }, []);
 
   return (
@@ -57,20 +50,13 @@ const SettingsInterventionPage = ({
         pb={100}
         bg={colors.zirkon}
       >
-        <StyledColumn height="100%">
-          <Tabs>
-            <div label={formatMessage(messages.sessionSettings)}>
-              <InterventionSettings
-                id={id}
-                name={name}
-                narratorSettings={narratorSettings}
-                formatMessage={formatMessage}
-              />
-            </div>
-            <div label={formatMessage(messages.respondentSettings)}>
-              <RespondentSettings formatMessage={formatMessage} slug={slug} />
-            </div>
-          </Tabs>
+        <StyledColumn height="100%" border="1px solid red">
+          <InterventionSettings
+            id={id}
+            name={name}
+            narratorSettings={narratorSettings}
+            formatMessage={formatMessage}
+          />
         </StyledColumn>
       </Box>
     </Fragment>

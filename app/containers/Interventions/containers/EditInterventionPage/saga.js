@@ -99,7 +99,7 @@ function* addImageQuestion({
     yield put(editQuestionSuccess(responseQuestion));
     window.URL.revokeObjectURL(imageUrl);
   } catch (error) {
-    yield put(editQuestionError(error));
+    yield put(editQuestionError({ error, questionId: selectedQuestionId }));
   }
 }
 
@@ -112,7 +112,7 @@ function* deleteQuestionImage({ payload: { selectedQuestionId } }) {
     const responseQuestion = mapQuestionToStateObject(response.data.data);
     yield put(editQuestionSuccess(responseQuestion));
   } catch (error) {
-    yield put(editQuestionError(error));
+    yield put(editQuestionError({ error, questionId: selectedQuestionId }));
   }
 }
 
@@ -146,7 +146,7 @@ function* updateQuestion() {
         id: ERROR_DUPLICATE_VARIABLE,
       }),
     );
-    return yield put(editQuestionError());
+    return yield put(editQuestionError({ questionId: question.id }));
   }
   yield put(dismiss(ERROR_DUPLICATE_VARIABLE));
 
@@ -162,7 +162,7 @@ function* updateQuestion() {
 
     return yield put(editQuestionSuccess(responseQuestion));
   } catch (error) {
-    return yield put(editQuestionError(error));
+    return yield put(editQuestionError({ error, questionId: question.id }));
   }
 }
 

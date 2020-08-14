@@ -1,3 +1,6 @@
+import { fontSizes } from 'theme/fonts';
+import { colors } from 'theme/colors';
+
 const borders = {
   borderRadius: '5px',
   borderStyle: 'solid',
@@ -10,8 +13,8 @@ const paddings = {
 };
 
 const boxShadows = {
-  1: '0px 0px 50px rgba(0, 0, 0, 0.08)',
-  2: '0px 4px 20px #e3eefb;',
+  black: '0px 0px 50px rgba(0, 0, 0, 0.08)',
+  selago: `0px 4px 20px ${colors.selago};`,
 };
 
 const elements = {
@@ -19,4 +22,9 @@ const elements = {
   draggableContainerSize: 700,
 };
 
-export { borders, paddings, boxShadows, elements };
+const visualAnalogScaleLabel = {
+  fontSize: fontSizes.regular,
+  width: '100%',
+};
+
+export { borders, paddings, boxShadows, elements, visualAnalogScaleLabel };

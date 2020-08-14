@@ -24,4 +24,28 @@ export default defineMessages({
     id: `${scope}.sharing`,
     defaultMessage: 'Manage Sharing',
   },
+  previewStart: {
+    id: `${scope}.preview`,
+    defaultMessage: 'Preview From Start',
+  },
+  previewCurrent: {
+    id: `${scope}.previewCurrent`,
+    defaultMessage: 'Open Preview',
+  },
+  next: {
+    id: `${scope}.next`,
+    defaultMessage: 'Next Question',
+  },
+  previous: {
+    id: `${scope}.previous`,
+    defaultMessage: 'Previous Question',
+  },
+  saving: {
+    id: `${scope}.saving`,
+    defaultMessage: 'Saving',
+  },
+  saved: {
+    id: `${scope}.saved`,
+    defaultMessage: 'Saved',
+  },
 });

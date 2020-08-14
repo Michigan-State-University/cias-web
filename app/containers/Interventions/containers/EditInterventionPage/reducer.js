@@ -4,6 +4,15 @@ import isEmpty from 'lodash/isEmpty';
 import set from 'lodash/set';
 
 import {
+  bodyAnimationType,
+  speechType,
+  headAnimationType,
+  reflectionType,
+} from 'models/Narrator/BlockTypes';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+import settingsTabLabels from 'utils/settingsTabsLabels';
+
+import {
   SELECT_QUESTION,
   UPDATE_QUESTION_DATA,
   ADD_QUESTION_IMAGE,
@@ -28,6 +37,7 @@ import {
   EDIT_QUESTION_ERROR,
   MAKE_PEEDY_DRAGGABLE,
   SET_ANIMATION_STOP_POSITION,
+  UPDATE_PREVIEW_DATA,
 } from './constants';
 import questionDataReducer from '../../components/QuestionData/reducer';
 import questionSettingsReducer from '../../components/QuestionSettings/Settings/reducer';
@@ -35,48 +45,82 @@ import {
   instantiateEmptyQuestion,
   mapQuestionDataForType,
   getAnimationPosition,
+  getFromQuestionTTS,
 } from './utils';
 
 export const initialState = {
   questions: [],
-  questionSettingsVisibility: false,
+  questionSettings: {
+    visibility: false,
+    tab: settingsTabLabels.settings,
+  },
   selectedQuestion: 0,
   animationPosition: {
     x: 0,
     y: 0,
   },
   draggable: false,
-  previewAnimation: 'standStill',
+  previewData: {
+    animation: 'standStill',
+    type: 'BodyAnimation',
+  },
   cache: {
     questions: [],
   },
   loaders: {
     interventionListLoading: false,
     questionListLoading: true,
+    updateQuestion: false,
   },
 };
+
+const getPreviewData = data => {
+  switch (data.type) {
+    case speechType:
+    case reflectionType:
+      return data;
+
+    case headAnimationType:
+    case bodyAnimationType:
+    default:
+      return { type: 'BodyAnimation', animation: data.animation };
+  }
+};
+
+const assignFromQuestionTTS = (draft, state) =>
+  set(draft.questions[state.selectedQuestion], 'narrator.from_question', [
+    {
+      ...draft.questions[state.selectedQuestion].narrator.from_question[0],
+      text: getFromQuestionTTS(draft.questions[state.selectedQuestion]),
+    },
+  ]);
 
 /* eslint-disable default-case, no-param-reassign */
 const editInterventionPageReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case TOGGLE_QUESTION_SETTINGS:
-        if (action.payload.index < 0) {
-          draft.questionSettingsVisibility = false;
-          break;
+        if (!isNullOrUndefined(action.payload.index)) {
+          if (action.payload.index < 0) {
+            draft.questionSettings.visibility = false;
+            break;
+          }
+          if (
+            action.payload.index === state.selectedQuestion &&
+            state.questionSettings.visibility
+          ) {
+            draft.questionSettings.visibility = false;
+            break;
+          }
+          draft.questionSettings.visibility = true;
         }
-        if (
-          action.payload.index === state.selectedQuestion &&
-          state.questionSettingsVisibility
-        ) {
-          draft.questionSettingsVisibility = false;
-          break;
-        }
-        draft.questionSettingsVisibility = true;
+        if (!isNullOrUndefined(action.payload.tab))
+          draft.questionSettings.tab = action.payload.tab;
         break;
 
       case UPDATE_PREVIEW_ANIMATION:
-        draft.previewAnimation = action.payload.animation;
+      case UPDATE_PREVIEW_DATA:
+        draft.previewData = getPreviewData(action.payload);
         break;
       case SELECT_QUESTION:
         draft.draggable = false;
@@ -176,6 +220,8 @@ const editInterventionPageReducer = (state = initialState, action) =>
           action.payload.path,
           action.payload.value,
         );
+
+        assignFromQuestionTTS(draft, state);
         break;
 
       case UPDATE_QUESTION_DATA:
@@ -186,9 +232,13 @@ const editInterventionPageReducer = (state = initialState, action) =>
             action.payload,
           ),
         };
+
+        assignFromQuestionTTS(draft, state);
         break;
 
       case UPDATE_QUESTION_SETTINGS:
+        draft.loaders.updateQuestion = true;
+
         draft.questions[state.selectedQuestion] = {
           ...draft.questions[state.selectedQuestion],
           ...questionSettingsReducer(
@@ -199,17 +249,46 @@ const editInterventionPageReducer = (state = initialState, action) =>
         };
         break;
 
-      case EDIT_QUESTION_SUCCESS:
-        draft.cache.questions[state.selectedQuestion] = mapQuestionDataForType(
-          action.payload.question,
-        );
-        break;
+      case EDIT_QUESTION_SUCCESS: {
+        draft.loaders.updateQuestion = false;
 
-      case EDIT_QUESTION_ERROR:
-        draft.questions[state.selectedQuestion] = cloneDeep(
-          draft.cache.questions[state.selectedQuestion],
+        const cacheIndex = draft.cache.questions.findIndex(
+          question => question.id === action.payload.question.id,
         );
+
+        if (cacheIndex > -1) {
+          draft.cache.questions[cacheIndex] = mapQuestionDataForType(
+            action.payload.question,
+          );
+
+          const index = draft.questions.findIndex(
+            question => question.id === action.payload.question.id,
+          );
+          draft.questions[index] = cloneDeep(
+            // needed for TTS url update
+            draft.cache.questions[cacheIndex],
+          );
+        }
+
         break;
+      }
+
+      case EDIT_QUESTION_ERROR: {
+        draft.loaders.updateQuestion = false;
+
+        const cacheIndex = draft.cache.questions.findIndex(
+          question => question.id === action.payload.questionId,
+        );
+
+        if (cacheIndex > -1) {
+          const index = draft.questions.findIndex(
+            question => question.id === action.payload.questionId,
+          );
+
+          draft.questions[index] = cloneDeep(draft.cache.questions[cacheIndex]);
+        }
+        break;
+      }
 
       case UPDATE_CACHE:
         draft.cache.questions = draft.questions;

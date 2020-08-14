@@ -14,6 +14,8 @@ import {
   SELECT_ANSWER,
   START_INTERVENTION,
   SET_QUESTION_INDEX,
+  CHANGE_PREVIEW_MODE,
+  RESET_INTERVENTION,
 } from './constants';
 import { actionBuilder } from '../../utils/actionBuilder';
 
@@ -46,3 +48,7 @@ export const setQuestionIndex = index =>
   actionBuilder(SET_QUESTION_INDEX, { index });
 
 export const startIntervention = () => actionBuilder(START_INTERVENTION, {});
+
+export const changePreviewMode = previewMode =>
+  actionBuilder(CHANGE_PREVIEW_MODE, { previewMode });
+export const resetIntervention = () => actionBuilder(RESET_INTERVENTION, {});

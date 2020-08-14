@@ -17,8 +17,15 @@ const makeSelectAnimationPosition = () =>
     substate => substate.animationPosition,
   );
 
+const makeSelectPreviewData = () =>
+  createSelector(
+    selectEditInterventionPageDomain,
+    substate => substate.previewData,
+  );
+
 export {
   makeSelectPreviewAnimation,
   makeSelectDraggable,
   makeSelectAnimationPosition,
+  makeSelectPreviewData,
 };

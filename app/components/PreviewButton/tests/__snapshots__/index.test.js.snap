@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
+.c2 {
+  width: auto;
+  height: auto;
+  margin-right: 6px;
+}
+
+.c0 {
+  pointer-events: auto;
+}
+
+.c1 {
+  width: 100%;
+  height: 40px;
+  background-color: #C866EA;
+  color: #FFFFFF;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #FFFFFF;
+  color: #C866EA;
+  border: 1px solid #C866EA;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-right: 5px;
+  margin-left: 5px;
+  border-radius: 5px;
+  width: auto;
+  height: 35px;
+  padding-right: 11px;
+  padding-left: 11px;
+}
+
+<div>
+  <a
+    class="c0"
+    href=""
+  >
+    <button
+      class="c1"
+      color="secondary"
+      height="35"
+      width="auto"
+    >
+      <img
+        alt="eye"
+        class="c2"
+        src="IMAGE_MOCK"
+      />
+    </button>
+  </a>
+</div>
+`;

@@ -14,7 +14,6 @@ import UrlPreview from 'components/UrlPreview';
 import globalMessages from 'global/i18n/globalMessages';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { colors } from 'theme/colors';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { makeSelectSelectedQuestion } from 'containers/Interventions/containers/EditInterventionPage/selectors';
 import { updateQuestionData } from 'containers/Interventions/containers/EditInterventionPage/actions';
 import { urlValidator } from 'utils/validators/urlValidator';
@@ -27,7 +26,7 @@ const UrlQuestion = ({
   selectedQuestion,
   updateUrl,
   updateVariable,
-  draggable,
+  isNarratorTab,
   intl: { formatMessage },
 }) => {
   const { payload } = selectedQuestion.body.data[0];
@@ -35,7 +34,7 @@ const UrlQuestion = ({
 
   return (
     <Column mt={10}>
-      <Row display="flex" hidden={draggable} mb={10}>
+      <Row display="flex" hidden={isNarratorTab} mb={10}>
         <BadgeInput
           px={0}
           py={12}
@@ -50,7 +49,13 @@ const UrlQuestion = ({
           onBlur={updateVariable}
         />
       </Row>
-      <Box bg={colors.linkWater} width="100%" px={21} py={14}>
+      <Box
+        bg={colors.linkWater}
+        width="100%"
+        px={21}
+        py={14}
+        hidden={isNarratorTab}
+      >
         <Row>
           <ApprovableInput
             rows="3"
@@ -62,7 +67,7 @@ const UrlQuestion = ({
           />
         </Row>
       </Box>
-      <Box my={5}>{payload && <UrlPreview link={payload} />}</Box>
+      <Box>{payload && <UrlPreview link={payload} />}</Box>
     </Column>
   );
 };
@@ -72,12 +77,11 @@ UrlQuestion.propTypes = {
   intl: PropTypes.object.isRequired,
   updateUrl: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
-  draggable: PropTypes.bool,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
 });
 
 const mapDispatchToProps = {

@@ -76,6 +76,7 @@ module.exports = {
     'redux-saga/yield-effects': 2,
     'require-yield': 0,
     'consistent-return': 0,
+    'react/no-danger': 0,
   },
   settings: {
     'import/resolver': {

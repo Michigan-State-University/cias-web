@@ -13,6 +13,7 @@ export { interventionReducer } from './reducer';
 export {
   makeSelectIntervention,
   makeSelectInterventionLoaders,
+  makeSelectInterventionEditLoader,
 } from './selectors';
 export {
   createInterventionSaga,

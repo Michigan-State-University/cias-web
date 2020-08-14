@@ -27,14 +27,17 @@ import {
   EDIT_QUESTION_ERROR,
   MAKE_PEEDY_DRAGGABLE,
   SET_ANIMATION_STOP_POSITION,
+  UPDATE_PREVIEW_DATA,
 } from './constants';
 
 // application state actions
-const toggleQuestionSettings = index =>
-  actionBuilder(TOGGLE_QUESTION_SETTINGS, { index });
+const toggleQuestionSettings = ({ index, tab }) =>
+  actionBuilder(TOGGLE_QUESTION_SETTINGS, { index, tab });
 const selectQuestion = index => actionBuilder(SELECT_QUESTION, index);
 const updatePreviewAnimation = animation =>
   actionBuilder(UPDATE_PREVIEW_ANIMATION, { animation });
+const updatePreviewData = data =>
+  actionBuilder(UPDATE_PREVIEW_DATA, { ...data });
 
 // image actions
 const addQuestionImage = payload => actionBuilder(ADD_QUESTION_IMAGE, payload);
@@ -84,8 +87,7 @@ const editQuestionRequest = payload =>
   actionBuilder(EDIT_QUESTION_REQUEST, payload);
 const editQuestionSuccess = question =>
   actionBuilder(EDIT_QUESTION_SUCCESS, { question });
-const editQuestionError = error =>
-  actionBuilder(EDIT_QUESTION_ERROR, { error });
+const editQuestionError = error => actionBuilder(EDIT_QUESTION_ERROR, error);
 
 // common actions
 const updateCache = () => actionBuilder(UPDATE_CACHE, {});
@@ -125,4 +127,5 @@ export {
   editQuestionError,
   setPeedyDraggable,
   setAnimationStopPosition,
+  updatePreviewData,
 };

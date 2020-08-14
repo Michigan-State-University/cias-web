@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionImage /> should match the snapshot with file 1`] = `
-.c1 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9,11 +9,12 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -24,19 +25,28 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   width: 100%;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
-}
-
-.c3 {
-  width: auto;
-  height: auto;
-  width: 100%;
-  height: 100%;
 }
 
 .c4 {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 50vh;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.c5 {
   width: auto;
   height: auto;
   display: block;
@@ -46,7 +56,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   cursor: pointer;
 }
 
-.c0 {
+.c1 {
   width: auto;
   height: auto;
   display: block;
@@ -60,47 +70,49 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   border-radius: 5px;
 }
 
-.c0:hover {
+.c1:hover {
   background-color: #E9F1FB;
 }
 
-.c2 {
-  width: 100%;
+.c3 {
   height: 100%;
   max-width: 100%;
 }
 
 <div
   className="c0"
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   width="100%"
 >
   <div
     className="c1"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
     width="100%"
   >
     <div
       className="c2"
+      width="100%"
     >
-      <img
-        alt="image"
+      <div
         className="c3"
-        height="100%"
-        src="mock.png"
-        width="100%"
-      />
-    </div>
-    <div
-      className="c4"
-      onClick={[Function]}
-      visibility="hidden"
-    >
-      <img
-        alt="bin-icon"
+      >
+        <img
+          alt="image"
+          className="c4"
+          src="mock.png"
+        />
+      </div>
+      <div
         className="c5"
-        src="IMAGE_MOCK"
-      />
+        onClick={[Function]}
+        visibility="hidden"
+      >
+        <img
+          alt="bin-icon"
+          className="c6"
+          src="IMAGE_MOCK"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -115,6 +127,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   margin-top: 22px;
   margin-bottom: 12px;
 }
@@ -127,6 +140,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
 }
 
 .c2 {

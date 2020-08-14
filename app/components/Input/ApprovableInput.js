@@ -41,6 +41,7 @@ const ApprovableInput = props => {
   const {
     value: propsValue,
     validator,
+    onValidation,
     placeholder,
     textAlign,
     keyboard,
@@ -57,13 +58,42 @@ const ApprovableInput = props => {
   const [focused, setfocused] = useState(false);
   const quillRef = useRef();
 
+  const blockQuillBlur = () => {
+    const preventDefault = event => event.preventDefault();
+    const toolbar = quillRef.current.editor.container.querySelector(
+      '.ql-toolbar',
+    );
+
+    const block = () => toolbar.addEventListener('mousedown', preventDefault);
+    const clean = () =>
+      toolbar.removeEventListener('mousedown', preventDefault);
+
+    block();
+
+    return clean;
+  };
+
+  useEffect(() => {
+    if (richText && focused) {
+      const clean = blockQuillBlur();
+
+      return clean;
+    }
+  }, [focused, quillRef.current]);
+
   useEffect(() => {
     setValue(propsValue);
   }, [propsValue]);
 
   const onInputChange = targetValue => {
-    if (validator && validator(targetValue)) setValue(targetValue);
-    else if (!validator) setValue(targetValue);
+    if (!validator) setValue(targetValue);
+    else {
+      const validationResult = validator(targetValue);
+
+      if (validationResult) setValue(targetValue);
+
+      if (onValidation) onValidation(validationResult);
+    }
   };
 
   const onBlur = () => {
@@ -140,6 +170,7 @@ ApprovableInput.propTypes = {
   type: PropTypes.oneOf(['multiline', 'singleline']),
   keyboard: PropTypes.string,
   validator: PropTypes.func,
+  onValidation: PropTypes.func,
   textAlign: PropTypes.string,
   richText: PropTypes.bool,
   autoSize: PropTypes.bool,

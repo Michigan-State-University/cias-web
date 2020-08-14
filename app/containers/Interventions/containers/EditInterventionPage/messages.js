@@ -23,7 +23,7 @@ export default defineMessages({
     },
     copyError: {
       id: `${scope}.copyError`,
-      defaultMessage: 'Cannot copy the screren!',
+      defaultMessage: 'Cannot copy the screen!',
     },
   },
 });

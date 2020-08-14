@@ -16,6 +16,7 @@ const flex = props => ({
   alignContent: propsToCssMapper[props.align] || '',
   alignItems: propsToCssMapper[props.align] || '',
   flexGrow: props.filled ? 1 : '',
+  flexDirection: props.direction || '',
 });
 
 flex.propTypes = {
@@ -36,6 +37,7 @@ flex.propTypes = {
     'evenly',
   ]),
   filled: PropTypes.bool,
+  flexDirection: PropTypes.oneOf(['row', 'column']),
 };
 
 export { flex };

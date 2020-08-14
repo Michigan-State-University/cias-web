@@ -13,18 +13,18 @@ import Spinner from 'components/Spinner';
 
 import { FillScreenLoader, InlineLoader } from './styled';
 
-const Loader = ({ color, hidden, size, type }) => {
+const Loader = ({ color, hidden, size, type, width }) => {
   const typeSize = size || (type === 'absolute' ? 100 : 50);
 
   const fullScreenLoader = (
     <FillScreenLoader data-testid="fullscreen-loader" hidden={hidden}>
-      <Spinner color={color} size={typeSize} />
+      <Spinner color={color} size={typeSize} width={width} />
     </FillScreenLoader>
   );
 
   const containerLoader = (
     <InlineLoader data-testid="inline-loader" hidden={hidden}>
-      <Spinner color={color} size={typeSize} />
+      <Spinner color={color} size={typeSize} width={width} />
     </InlineLoader>
   );
 

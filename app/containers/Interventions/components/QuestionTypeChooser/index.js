@@ -20,7 +20,7 @@ const decideIfAddMargin = i =>
 const QuestionTypeChooser = ({ intl: { formatMessage }, onClick, visible }) => (
   <Box
     borderRadius={10}
-    shadow={boxShadows[1]}
+    shadow={boxShadows.black}
     position="absolute"
     width="100%"
     mt={15}

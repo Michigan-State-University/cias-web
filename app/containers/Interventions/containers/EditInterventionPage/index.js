@@ -22,6 +22,7 @@ import {
   getInterventionSaga,
   makeSelectInterventionLoaders,
 } from 'global/reducers/intervention';
+import useLockBodyScroll from 'utils/useLockBodyScroll';
 
 import { borders, themeColors, colors } from 'theme';
 
@@ -57,6 +58,7 @@ function EditInterventionPage({
   loaders: { questionListLoading },
   interventionLoaders: { getIntervention: getInterventionLoader },
 }) {
+  useLockBodyScroll();
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   useInjectReducer({ key: 'editInterventionPage', reducer });
   useInjectSaga({ key: 'editInterventionPage', saga });
@@ -66,8 +68,8 @@ function EditInterventionPage({
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
 
   useEffect(() => {
-    getIntervention(params.id);
-    getQuestions(params.id);
+    getIntervention(params.interventionId);
+    getQuestions(params.interventionId);
   }, []);
 
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
@@ -78,7 +80,7 @@ function EditInterventionPage({
         formatMessage(messages.newQuestionMessage),
         type,
       ),
-      params.id,
+      params.interventionId,
     );
     toggleTypeChooser();
   };
@@ -96,13 +98,13 @@ function EditInterventionPage({
 
     reorderQuestions({
       reorderedList: orderdedNewList,
-      interventionId: params.id,
+      interventionId: params.interventionId,
     });
   };
 
+  const loading = questionListLoading || getInterventionLoader;
   const renderList = () => {
-    if (questionListLoading)
-      return <Loader hidden={!questionListLoading} type="inline" />;
+    if (loading) return <Loader type="inline" width={4} />;
 
     return (
       <Reorder reorderId="question-list" onReorder={handleReorder}>
@@ -113,7 +115,7 @@ function EditInterventionPage({
               selectedQuestionIndex={selectedQuestion}
               questionsLength={questions.length}
               question={question}
-              interventionId={params.id}
+              interventionId={params.interventionId}
             />
           </Row>
         ))}
@@ -123,7 +125,6 @@ function EditInterventionPage({
 
   return (
     <Fragment>
-      <Loader hidden={!getInterventionLoader} />
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
@@ -134,7 +135,7 @@ function EditInterventionPage({
             borderRight={`${borders.borderWidth} ${borders.borderStyle} ${
               colors.linkWater
             }`}
-            overflow="scroll"
+            overflow="auto"
             padded
           >
             <Box width="100%" padded>
@@ -172,10 +173,13 @@ function EditInterventionPage({
           </Box>
         </Column>
         <Column sm={8} id="quill_boundaries">
-          <Row overflow="hidden" filled>
-            <QuestionDetails />
-            <QuestionSettings />
-          </Row>
+          <Loader hidden={!loading} type="inline" size={100} />
+          {!loading && (
+            <Row overflow="hidden" filled>
+              <QuestionDetails />
+              <QuestionSettings />
+            </Row>
+          )}
         </Column>
       </Row>
     </Fragment>

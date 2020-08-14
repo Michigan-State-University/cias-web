@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
-.c1 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -9,6 +9,7 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -23,7 +24,15 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   align-items: center;
 }
 
-.c4 {
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.c5 {
   width: auto;
   height: auto;
   display: block;
@@ -33,7 +42,7 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   cursor: pointer;
 }
 
-.c0 {
+.c1 {
   width: auto;
   height: auto;
   display: block;
@@ -47,23 +56,23 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   border-radius: 5px;
 }
 
-.c0:hover {
+.c1:hover {
   background-color: #E9F1FB;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
 }
 
-.c2 {
+.c3 {
   position: relative;
   padding-top: 56.25%;
   height: 100%;
-  width: 95%;
+  width: 100%;
 }
 
-.c3 {
+.c4 {
   position: absolute;
   top: 0;
   left: 0;
@@ -71,36 +80,41 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
 
 <div
   className="c0"
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
   width="100%"
 >
   <div
     className="c1"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    width="100%"
   >
     <div
       className="c2"
     >
       <div
         className="c3"
-        style={
-          Object {
-            "height": "100%",
-            "width": "100%",
+      >
+        <div
+          className="c4"
+          style={
+            Object {
+              "height": "100%",
+              "width": "100%",
+            }
           }
-        }
-      />
-    </div>
-    <div
-      className="c4"
-      onClick={[Function]}
-      visibility="hidden"
-    >
-      <img
-        alt="bin-icon"
+        />
+      </div>
+      <div
         className="c5"
-        src="IMAGE_MOCK"
-      />
+        onClick={[Function]}
+        visibility="hidden"
+      >
+        <img
+          alt="bin-icon"
+          className="c6"
+          src="IMAGE_MOCK"
+        />
+      </div>
     </div>
   </div>
 </div>
@@ -126,6 +140,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: 93px;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -144,6 +159,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   width: 100%;
 }
 

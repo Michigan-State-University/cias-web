@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import uniqBy from 'lodash/uniqBy';
 import filter from 'lodash/filter';
-import { speechType } from 'models/Narrator/BlockTypes';
+import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 import AudioWrapper from 'utils/audioWrapper';
 import { useRef } from 'react';
 import { speechAnimations } from 'utils/animations/animationsNames';
@@ -17,6 +17,8 @@ const useAudioHelper = (
   currentIndex,
   animationCurrent,
   changeBlock,
+  answers,
+  settings,
 ) => {
   const audio = useRef(new AudioWrapper());
   const loadedSpeechAnimations = useRef([]);
@@ -26,19 +28,20 @@ const useAudioHelper = (
   };
 
   const loadSpeechAnimations = async () => {
-    const filteredAnimations = filter(
+    const speechBlocks = filter(
       blocks,
-      ({ type }) => type === speechType,
+      ({ type }) => type === speechType || type === reflectionType,
     );
+
     const uniqAnimations = uniqBy(
-      filteredAnimations.filter(block => block.animation),
+      speechBlocks.filter(block => block.animation),
       'animation',
     );
 
     const animations = [];
-    if (blocks.length) {
+    if (settings.animation && blocks.length) {
       await Promise.all(
-        uniqAnimations.map(async ({ animation, type }) => {
+        uniqAnimations.map(async ({ animation }) => {
           const animationNames = toPairs(
             speechAnimations[animation].animations,
           );
@@ -55,7 +58,6 @@ const useAudioHelper = (
           }
 
           animations.push({
-            type,
             name: animation,
             animationData: animationsData,
             isEndReversed: speechAnimations[animation].isEndReversed,
@@ -71,46 +73,117 @@ const useAudioHelper = (
     const speechData = loadedSpeechAnimations.current.find(
       anim => anim.name === (nextBlock ? nextBlock.animation : undefined),
     );
+    const initialAnimation =
+      speechData && speechData.animationData.start ? 'start' : 'speech';
 
-    dispatchUpdate({
-      currentData: {
-        ...nextBlock,
-        ...speechData,
-        currentAnimation: speechData.animationData.start ? 'start' : 'speech',
-        isLoop: !speechData.animationData.start,
-      },
-      currentBlockIndex: nextIndex,
-    });
+    switch (nextBlock.type) {
+      case speechType:
+        dispatchUpdate({
+          currentData: {
+            ...speechData,
+            ...nextBlock,
+            currentAnimation: initialAnimation,
+            isLoop: initialAnimation !== 'start',
+            currentAudioIndex: 0,
+          },
+          currentBlockIndex: nextIndex,
+        });
+        break;
+      case reflectionType:
+        dispatchUpdate({
+          currentData: {
+            ...speechData,
+            ...nextBlock,
+            ...getReflectionData(nextBlock),
+            initialAnimation,
+            currentAnimation: initialAnimation,
+            isLoop: initialAnimation !== 'start',
+            currentAudioIndex: 0,
+            currentReflectionIndex: 0,
+          },
+          currentBlockIndex: nextIndex,
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  const getReflectionData = block => {
+    const answer = answers[block.question_id];
+    const reflections = [];
+
+    if (answer && answer.answerBody) {
+      answer.answerBody.forEach(answerBody => {
+        const matchReflection = block.reflections.find(
+          reflection =>
+            reflection.variable === answerBody.var &&
+            reflection.value === answerBody.value,
+        );
+
+        if (matchReflection) reflections.push(matchReflection);
+      });
+    }
+
+    return { audio_urls: [], reflections };
   };
 
   const getInitialSpeechAnimation = () => {
     const speechData = loadedSpeechAnimations.current.find(
       anim => anim.name === (blocks[0] ? blocks[0].animation : undefined),
     );
+    const initialAnimation =
+      speechData && speechData.animationData.start ? 'start' : 'speech';
 
-    return {
-      ...blocks[0],
-      ...speechData,
-      currentAnimation: speechData.animationData.start ? 'start' : 'speech',
-      isLoop: !speechData.animationData.start,
-    };
+    switch (blocks[0].type) {
+      case speechType:
+        return {
+          ...blocks[0],
+          ...speechData,
+          currentAnimation: initialAnimation,
+          isLoop: initialAnimation !== 'start',
+          currentAudioIndex: 0,
+        };
+      case reflectionType:
+        return {
+          ...blocks[0],
+          ...speechData,
+          ...getReflectionData(blocks[0]),
+          initialAnimation,
+          currentAnimation: initialAnimation,
+          isLoop: initialAnimation !== 'start',
+          currentAudioIndex: 0,
+          currentReflectionIndex: 0,
+        };
+      default:
+        return undefined;
+    }
   };
 
   const cleanAudio = () => audio.current.clean();
 
-  const handleSpeechBlock = () => {
+  const handleAudioBlock = () => {
     if (currentData.currentAnimation === 'start') {
       const { anim } = animationCurrent;
 
       anim.addEventListener('complete', updateAnimation);
       playAnimation();
     } else if (currentData.currentAnimation === 'speech') {
-      audio.current.onPlay(playAnimation);
-      audio.current.onLoaded(onSpeechReady);
-      audio.current.onEnded(onSpeechEnded);
-      audio.current.onError(onSpeechEnded);
-
-      audio.current.setSrc(currentData.audio_url);
+      switch (currentData.type) {
+        case speechType:
+          handleSpeech(currentData.audio_urls);
+          break;
+        case reflectionType:
+          handleSpeech(
+            currentData.reflections.length
+              ? currentData.reflections[currentData.currentReflectionIndex]
+                  .audio_urls
+              : [],
+          );
+          break;
+        default:
+          break;
+      }
     } else if (currentData.currentAnimation === 'end') {
       const { anim } = animationCurrent;
 
@@ -119,11 +192,25 @@ const useAudioHelper = (
     }
   };
 
+  const handleSpeech = audioUrls => {
+    audio.current.onPlay(playAnimation);
+    audio.current.onLoaded(onSpeechReady);
+    audio.current.onEnded(() => onSpeechEnded(audioUrls));
+    audio.current.onError(() => onSpeechEnded(audioUrls));
+
+    if (!audioUrls.length || !audioUrls[currentData.currentAudioIndex])
+      onSpeechEnded(audioUrls);
+    else
+      audio.current.setSrc(
+        `${process.env.API_URL}${audioUrls[currentData.currentAudioIndex]}`,
+      );
+  };
+
   const nextBlock = () => {
     const { anim } = animationCurrent;
     anim.removeEventListener('complete', nextBlock);
 
-    setTimeout(() => changeBlock(), animationTimeout);
+    setTimeout(speechEndUpdate, animationTimeout);
   };
 
   const updateAnimation = () => {
@@ -150,28 +237,85 @@ const useAudioHelper = (
   };
 
   const playAnimation = () => {
-    const { anim } = animationCurrent;
+    if (settings.animation) {
+      const { anim } = animationCurrent;
 
-    if (currentData.currentAnimation === 'end' && currentData.isEndReversed) {
-      anim.goToAndStop(anim.totalFrames - 1, true);
-      anim.setDirection(-1);
+      if (currentData.currentAnimation === 'end' && currentData.isEndReversed) {
+        anim.goToAndStop(anim.totalFrames - 1, true);
+        anim.setDirection(-1);
+      }
+
+      anim.play();
     }
-
-    anim.play();
   };
 
   const onSpeechReady = () => audio.current.play();
 
-  const onSpeechEnded = () => {
+  const onSpeechEnded = audioUrls => {
     cleanAudio();
 
-    const { anim } = animationCurrent;
-    anim.stop();
+    if (hasMoreAudio(audioUrls)) moveToNextAudio();
+    else finishSpeech();
+  };
+
+  const hasMoreAudio = audioUrls => {
+    const audioLength = audioUrls.length;
+
+    if (audioLength > currentData.currentAudioIndex + 1) return true;
+    return false;
+  };
+
+  const hasMoreReflections = () => {
+    const reflectionsLength = currentData.reflections.length;
+
+    if (reflectionsLength > currentData.currentReflectionIndex + 1) return true;
+    return false;
+  };
+
+  const moveToNextAudio = () => {
+    stopAnimation();
+    audio.current.pause();
+
+    dispatchUpdate({
+      currentData: {
+        ...currentData,
+        currentAudioIndex: currentData.currentAudioIndex + 1,
+      },
+      currentBlockIndex: currentIndex,
+    });
+  };
+
+  const finishSpeech = () => {
+    stopAnimation();
 
     setTimeout(() => {
-      if (currentData.animationData.end) updateAnimation();
-      else changeBlock();
+      if (settings.animation && currentData.animationData.end)
+        updateAnimation();
+      else speechEndUpdate();
     }, animationTimeout);
+  };
+
+  const speechEndUpdate = () => {
+    switch (currentData.type) {
+      case speechType:
+        changeBlock();
+        break;
+      case reflectionType:
+        if (hasMoreReflections())
+          dispatchUpdate({
+            currentData: {
+              ...currentData,
+              currentAnimation: currentData.initialAnimation,
+              currentAudioIndex: 0,
+              currentReflectionIndex: currentData.currentReflectionIndex + 1,
+            },
+            currentBlockIndex: currentIndex,
+          });
+        else changeBlock();
+        break;
+      default:
+        break;
+    }
   };
 
   const stopSpeech = () => {
@@ -179,11 +323,21 @@ const useAudioHelper = (
     audio.current.stop();
   };
 
+  const stopAnimation = () => {
+    if (settings.animation) {
+      const { anim } = animationCurrent;
+      anim.stop();
+    }
+  };
+
   const decideIfPlaySpeechAnimation = () => {
     if (
       currentData &&
-      currentData.type === speechType &&
-      (audio.current.paused || audio.current.stopped)
+      (currentData.type === speechType ||
+        currentData.type === reflectionType) &&
+      (audio.current.paused || audio.current.stopped) &&
+      (currentData.currentAnimation !== 'start' &&
+        currentData.currentAnimation !== 'end')
     )
       return false;
 
@@ -194,7 +348,7 @@ const useAudioHelper = (
     changeSpeech,
     getInitialSpeechAnimation,
     cleanAudio,
-    handleSpeechBlock,
+    handleAudioBlock,
     decideIfPlaySpeechAnimation,
     stopSpeech,
     fetchAudioAnimations,

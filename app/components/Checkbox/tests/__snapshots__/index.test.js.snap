@@ -4,6 +4,7 @@ exports[`<Checkbox /> Should render checked and match the snapshot 1`] = `
 .c0 {
   width: auto;
   height: auto;
+  cursor: pointer;
 }
 
 <div>
@@ -18,6 +19,7 @@ exports[`<Checkbox /> Should render unchecked and match the snapshot 1`] = `
 .c0 {
   width: auto;
   height: auto;
+  cursor: pointer;
 }
 
 <div>

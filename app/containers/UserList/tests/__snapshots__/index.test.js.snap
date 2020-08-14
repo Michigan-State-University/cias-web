@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UserList /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-14m3exe-0 esRSnJ"
+    display="flex"
+    height="100%"
+    overflow="scroll"
+  >
+    <div
+      class="Box-sc-14m3exe-0 dkaNbU"
+      width="900px"
+    >
+      <table
+        class="Table-jgz9dg-0 hpgAdc"
+      >
+        <thead
+          class="THead-sc-1pp8kl6-0 eAjaUx"
+        >
+          <tr
+            class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 eXDpQb"
+          >
+            <th
+              class="TH-sc-1qq1mcj-0 eCwubA"
+              scope="col"
+            >
+              <div
+                class="Column-sc-1n6divy-0 fPyrj"
+                width="300"
+              >
+                Email
+              </div>
+            </th>
+            <th
+              class="TH-sc-1qq1mcj-0 eCwubA"
+              scope="col"
+            >
+              <div
+                class="Column-sc-1n6divy-0 fPyrj"
+                width="300"
+              >
+                Name
+              </div>
+            </th>
+            <th
+              class="TH-sc-1qq1mcj-0 eCwubA"
+              scope="col"
+            >
+              <div
+                class="Column-sc-1n6divy-0 fPyrj"
+                width="300"
+              >
+                Roles
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          class="TBody-sc-1332v38-0 ekZOxU"
+        >
+          <tr
+            class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 eXDpQb"
+          >
+            <td
+              class="TD-sc-4t6406-0 bALMwj"
+            >
+              test@test.pl
+            </td>
+            <td
+              class="TD-sc-4t6406-0 bALMwj"
+            >
+              test
+            </td>
+            <td
+              class="TD-sc-4t6406-0 bALMwj"
+            >
+              participant
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;

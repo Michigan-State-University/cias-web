@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Radio /> Should render checked and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+<div>
+  <img
+    class="c0"
+    src="IMAGE_MOCK"
+  />
+</div>
+`;
+
+exports[`<Radio /> Should render unchecked and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+<div>
+  <img
+    class="c0"
+    src="IMAGE_MOCK"
+  />
+</div>
+`;

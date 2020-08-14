@@ -13,7 +13,6 @@ import Row from 'components/Row';
 import globalMessages from 'global/i18n/globalMessages';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { colors } from 'theme/colors';
-import { makeSelectDraggable } from 'containers/Interventions/components/QuestionNarrator/selectors';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 
 import messages from './messages';
@@ -25,7 +24,7 @@ const NumberQuestion = ({
   selectedQuestion,
   updateAnswer,
   updateVariable,
-  draggable,
+  isNarratorTab,
   intl: { formatMessage },
 }) => {
   const { payload } = selectedQuestion.body.data[0];
@@ -33,7 +32,7 @@ const NumberQuestion = ({
 
   return (
     <Column mt={10}>
-      <Row display="flex" hidden={draggable} mb={10}>
+      <Row display="flex" hidden={isNarratorTab} mb={10}>
         <BadgeInput
           px={0}
           py={12}
@@ -70,12 +69,11 @@ NumberQuestion.propTypes = {
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
-  draggable: PropTypes.bool,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
-  draggable: makeSelectDraggable(),
 });
 
 const mapDispatchToProps = {

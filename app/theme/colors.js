@@ -19,6 +19,9 @@ const colors = {
   heather: '#BDC7D6',
   pistachio: '#8CBD00',
   burntSienna: '#F0684A',
+  casper: '#ABBBD1',
+  surfieGreen: '#107969',
+  selago: '#E3EEFB',
 };
 
 const themeColors = {

@@ -25,8 +25,8 @@ ValueSlider.propTypes = {
 
 const AppSlider = props => (
   <Slider
-    min={0}
-    max={100}
+    min={props.min}
+    max={props.max}
     railStyle={{ backgroundColor: `rgba(${hexToRgb(colors.bluewood)}, 0.2)` }}
     trackStyle={{ backgroundColor: themeColors.secondary }}
     handleStyle={{
@@ -47,6 +47,13 @@ const AppSlider = props => (
 
 AppSlider.propTypes = {
   showValue: PropTypes.bool,
+  min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
+AppSlider.defaultProps = {
+  min: 0,
+  max: 100,
 };
 
 export default AppSlider;

@@ -11,6 +11,8 @@ import {
   REMOVE_FORMULA_CASE,
   UPDATE_SPEECH_SETTINGS,
   UPDATE_NARRATOR_MOVEMENT,
+  SWITCH_SPEECH_REFLECTION,
+  UPDATE_REFLECTION,
 } from './constants';
 
 export const updateSettings = (property, value) =>
@@ -47,6 +49,23 @@ export const updateSpeechSettings = (index, value, questionId) =>
   updateQuestionSettings({
     type: UPDATE_SPEECH_SETTINGS,
     data: { index, value, questionId },
+  });
+
+export const updateReflection = (
+  blockIndex,
+  reflectionIndex,
+  value,
+  questionId,
+) =>
+  updateQuestionSettings({
+    type: UPDATE_REFLECTION,
+    data: { blockIndex, reflectionIndex, value, questionId },
+  });
+
+export const switchSpeechReflection = (index, questionId) =>
+  updateQuestionSettings({
+    type: SWITCH_SPEECH_REFLECTION,
+    data: { index, questionId },
   });
 
 export const updateFormula = (value, questionId) =>

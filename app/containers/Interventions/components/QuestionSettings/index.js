@@ -13,7 +13,10 @@ import close from 'assets/svg/cross.svg';
 
 import Settings from './Settings';
 import messages from './messages';
-import { makeSelectQuestionSettingsVisibility } from '../../containers/EditInterventionPage/selectors';
+import {
+  makeSelectQuestionSettingsVisibility,
+  makeSelectQuestionsLength,
+} from '../../containers/EditInterventionPage/selectors';
 import { toggleQuestionSettings } from '../../containers/EditInterventionPage/actions';
 import { SettingsBar, Container } from './styled';
 
@@ -21,10 +24,11 @@ const QuestionSettings = ({
   settingsVisiblity,
   toggleSettings,
   intl: { formatMessage },
+  questionsLength,
 }) => {
-  const onClose = () => toggleSettings(-1);
+  const onClose = () => toggleSettings({ index: -1 });
   return (
-    <Container isVisible={settingsVisiblity}>
+    <Container isVisible={settingsVisiblity && questionsLength}>
       <SettingsBar width="400px" height="100%">
         <Box width="100%" height="100%" padded>
           <Row align="center" justify="between" mb={40}>
@@ -42,10 +46,12 @@ QuestionSettings.propTypes = {
   intl: PropTypes.object.isRequired,
   settingsVisiblity: PropTypes.bool,
   toggleSettings: PropTypes.func,
+  questionsLength: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
   settingsVisiblity: makeSelectQuestionSettingsVisibility(),
+  questionsLength: makeSelectQuestionsLength(),
 });
 
 const mapDispatchToProps = {

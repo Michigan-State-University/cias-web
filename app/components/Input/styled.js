@@ -7,23 +7,25 @@ export const QuillStyled = styled(ReactQuill)`
   min-height: ${({ autoSize }) => autoSize && 'max-content'};
   height: ${({ autoSize, singleline }) =>
     singleline ? 'auto' : !autoSize && '150px'};
-  margin-right: 9px;
   ${({ focused }) =>
     focused
       ? {
           border: `1px solid ${colors.jungleGreen}`,
           borderRadius: `10px`,
+          '.ql-bubble': {
+            zIndex: 1000,
+          },
         }
       : { border: '1px solid transparent' }}
   .ql-editor {
     font-weight: 400;
     padding: 10px;
   }
+  .ql-editor.ql-blank::before {
+    left: 11px;
+  }
   .ql-picker-label svg {
     margin-bottom: 15px !important;
-  }
-  .ql-bubble {
-    z-index: 1000;
   }
   .ql-toolbar {
     width: max-content;

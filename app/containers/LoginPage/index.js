@@ -22,6 +22,7 @@ import H1 from 'components/H1';
 import Row from 'components/Row';
 import { Button } from 'components/Button';
 import TextButton from 'components/Button/TextButton';
+import Divider from 'components/Divider';
 import withPublicLayout from 'containers/PublicLayout';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -33,7 +34,7 @@ import { loginRequest } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import { Divider, Or } from './styled';
+import { Or } from './styled';
 
 const validationSchema = formatMessage =>
   Yup.object().shape({
@@ -119,11 +120,11 @@ export function LoginPage(props) {
                     type="submit"
                   />
                   <Row width="100%">
-                    <Divider mr={15} />
+                    <Divider mr={15} mt={40} />
                     <Or fontWeight="bold" mb={-5}>
                       <FormattedMessage {...messages.or} />
                     </Or>
-                    <Divider ml={15} />
+                    <Divider ml={15} mt={40} />
                   </Row>
                   <Row width="100%" justify="center" mt={30}>
                     <Link to="/register">

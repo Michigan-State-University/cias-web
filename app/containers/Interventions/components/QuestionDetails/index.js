@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
@@ -13,7 +13,13 @@ import NoContent from 'components/NoContent';
 import { Button } from 'components/Button';
 
 import { colors } from 'theme';
-import { AnswerOuterContainer, AnswerOuterContent } from './styled';
+import QuestionPreview from 'containers/Interventions/components/QuestionDetails/QuestionPreview';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectIsNarratorTab,
+} from '../../containers/EditInterventionPage/selectors';
+import { AnswerOuterContainer, AnswerInterventionContent } from './styled';
 import messages from './messages';
 
 import QuestionData from '../QuestionData';
@@ -22,7 +28,6 @@ import QuestionVideo from '../QuestionVideo';
 import QuestionNarrator from '../QuestionNarrator';
 import QuestionSubtitle from '../QuestionSubtitle';
 import QuestionTitle from '../QuestionTitle';
-import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
 
 const QuestionDetails = props => (
   <Box
@@ -32,15 +37,20 @@ const QuestionDetails = props => (
     padding={30}
     bg={colors.zirkon}
   >
-    {renderQuestionDetails(props)}
+    <RenderQuestionDetails {...props} />
   </Box>
 );
 
-const renderQuestionDetails = ({ selectedQuestion }) => {
+const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
+  const animationBoundaries = useRef(null);
+
   if (selectedQuestion != null) {
     const {
       id,
-      position,
+      title: questionTitle,
+      subtitle: questionSubtitle,
+      image_url: imageUrl,
+      video_url: videoUrl,
       settings: {
         video,
         image,
@@ -48,47 +58,88 @@ const renderQuestionDetails = ({ selectedQuestion }) => {
         subtitle,
         proceed_button: proceedButton,
       } = {},
-      narrator: { settings: { animation } = {} } = {},
+      narrator: { settings } = {},
     } = selectedQuestion || {};
 
     return (
       <AnswerOuterContainer>
-        <AnswerOuterContent>
-          {animation && <QuestionNarrator questionId={id} />}
-          <Row justify="center" filled>
-            <Column mx={50} justify="center">
-              {position !== 1 && <Row width="100%" mt={40} />}
-              {title && (
-                <Row width="100%">
-                  <QuestionTitle />
+        <Box width="100%">
+          <AnswerInterventionContent ref={animationBoundaries}>
+            <QuestionNarrator
+              questionId={id}
+              animationBoundaries={animationBoundaries}
+              settings={settings}
+            />
+
+            <Row justify="center" filled>
+              <Column mx={50} justify="center">
+                <Row width="100%" mt={5} height={30} />
+                {!isNarratorTab && (
+                  <>
+                    {title && (
+                      <Row width="100%">
+                        <QuestionTitle />
+                      </Row>
+                    )}
+                    {subtitle && (
+                      <Row mt={10}>
+                        <QuestionSubtitle />
+                      </Row>
+                    )}
+                    {video && (
+                      <Row mt={10}>
+                        <QuestionVideo />
+                      </Row>
+                    )}
+                    {image && (
+                      <Row mt={10}>
+                        <QuestionImage />
+                      </Row>
+                    )}
+                  </>
+                )}
+                {isNarratorTab && (
+                  <>
+                    {title && questionTitle && (
+                      <QuestionPreview
+                        padding={26}
+                        dangerouslySetInnerHTML={{ __html: questionTitle }}
+                      />
+                    )}
+                    {subtitle && questionSubtitle && (
+                      <QuestionPreview
+                        mt={10}
+                        padding={26}
+                        dangerouslySetInnerHTML={{ __html: questionSubtitle }}
+                      />
+                    )}
+                    {video && !isNullOrUndefined(videoUrl) && (
+                      <Row mt={10}>
+                        <QuestionVideo />
+                      </Row>
+                    )}
+                    {image && !isNullOrUndefined(imageUrl) && (
+                      <Row mt={10}>
+                        <QuestionImage />
+                      </Row>
+                    )}
+                  </>
+                )}
+
+                <Row>
+                  <QuestionData />
                 </Row>
-              )}
-              {subtitle && (
-                <Row mt={10}>
-                  <QuestionSubtitle />
-                </Row>
-              )}
-              {video && (
-                <Row mt={10}>
-                  <QuestionVideo />
-                </Row>
-              )}
-              {image && (
-                <Row mt={10}>
-                  <QuestionImage />
-                </Row>
-              )}
-              <Row>
-                <QuestionData />
-              </Row>
-              {proceedButton && (
-                <Button my={20} width="180px">
-                  <FormattedMessage {...messages.nextQuestion} />
-                </Button>
-              )}
-            </Column>
-          </Row>
-        </AnswerOuterContent>
+                {(isNullOrUndefined(proceedButton) || proceedButton) && (
+                  <Box my={20}>
+                    <Button my={20} width="180px">
+                      <FormattedMessage {...messages.nextQuestion} />
+                    </Button>
+                  </Box>
+                )}
+              </Column>
+            </Row>
+          </AnswerInterventionContent>
+        </Box>
       </AnswerOuterContainer>
     );
   }
@@ -96,12 +147,14 @@ const renderQuestionDetails = ({ selectedQuestion }) => {
   return <NoContent />;
 };
 
-renderQuestionDetails.propTypes = {
+RenderQuestionDetails.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
+  isNarratorTab: makeSelectIsNarratorTab(),
 });
 
 const withConnect = connect(mapStateToProps);
