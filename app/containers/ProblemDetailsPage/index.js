@@ -37,12 +37,11 @@ import {
 import injectSaga from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { colors } from 'theme';
-
-import problemDetailsPageSagas from 'containers/ProblemDetailsPage/saga';
 import appStages from 'global/appStages';
-import InterventionListItem from './components/InterventionListItem';
-import InterventionCreateButton from './components/InterventionCreateButton';
 
+import problemDetailsPageSagas from './saga';
+import InterventionCreateButton from './components/InterventionCreateButton';
+import InterventionListItem from './components/InterventionListItem';
 import messages from './messages';
 
 const mockSetting =

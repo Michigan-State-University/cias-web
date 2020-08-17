@@ -20,9 +20,11 @@ import archive from 'assets/svg/archive.svg';
 
 import { colors } from 'theme';
 import appStages from 'global/appStages';
+
+import InterventionSchedule from '../InterventionSchedule';
 import messages from './messages';
 import { InterventionIndex, StyledLink, ToggleableBox } from './styled';
-import InterventionListBranching from '../InterventionListBranching';
+import InterventionBranching from '../InterventionBranching';
 
 function InterventionListItem({
   intervention,
@@ -78,10 +80,15 @@ function InterventionListItem({
       </Row>
       {process.env.APP_STAGE === appStages.dev.id && (
         <>
+          {index !== 0 && (
+            <Row px={62}>
+              <InterventionSchedule />
+            </Row>
+          )}
           <Row px={62}>
             <Divider />
           </Row>
-          <InterventionListBranching
+          <InterventionBranching
             nextInterventionName={nextInterventionName}
             branching={branching}
             handleBranching={setBranching}

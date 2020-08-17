@@ -1,6 +1,6 @@
 /**
  *
- * Tests for InterventionListBranching
+ * Tests for InterventionBranching
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -16,13 +16,13 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { Provider } from 'react-redux';
 import configureStore from 'configureStore';
 
-import InterventionListBranching from '../index';
+import InterventionBranching from '../index';
 
 const defaultProps = {
   nextInterventionName: 'test-2',
 };
 
-describe('<InterventionListBranching />', () => {
+describe('<InterventionBranching />', () => {
   let store;
 
   beforeAll(() => {
@@ -34,7 +34,7 @@ describe('<InterventionListBranching />', () => {
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <Provider store={store}>
-          <InterventionListBranching {...defaultProps} />
+          <InterventionBranching {...defaultProps} />
         </Provider>
       </IntlProvider>,
     );
@@ -46,7 +46,7 @@ describe('<InterventionListBranching />', () => {
       .create(
         <IntlProvider locale={DEFAULT_LOCALE}>
           <Provider store={store}>
-            <InterventionListBranching {...defaultProps} />
+            <InterventionBranching {...defaultProps} />
           </Provider>
         </IntlProvider>,
       )

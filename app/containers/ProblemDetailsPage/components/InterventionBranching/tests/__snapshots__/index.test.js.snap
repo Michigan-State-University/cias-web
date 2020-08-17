@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<InterventionListBranching /> Should render and match the snapshot 1`] = `
+exports[`<InterventionBranching /> Should render and match the snapshot 1`] = `
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -90,7 +90,7 @@ exports[`<InterventionListBranching /> Should render and match the snapshot 1`] 
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 25%;
+  width: 33.33333333333333%;
 }
 
 .c8 {

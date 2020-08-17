@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
-import { colors, fontFamily } from 'theme';
+import { colors, borders, fontFamily, themeColors } from 'theme';
+import { margin, layout } from '../BaseComponentStyles';
 
 export const QuillStyled = styled(ReactQuill)`
   width: 100%;
@@ -33,5 +34,47 @@ export const QuillStyled = styled(ReactQuill)`
   .ql-container {
     font-size: initial;
     font-family: ${fontFamily};
+  }
+`;
+
+export const StyledDateInput = styled.button`
+  background-color: ${colors.zirkon};
+  border-radius: ${borders.borderRadius};
+  border-style: ${borders.borderStyle};
+  border-width: ${borders.borderWidth};
+  border-color: ${colors.linkWater};
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+  }
+  ${margin};
+  ${layout};
+`;
+
+export const DatePickerWrapper = styled.div`
+  .schedule-date-picker {
+    font-family: ${fontFamily};
+    background-color: ${colors.linkWater};
+    .react-datepicker__header {
+      background-color: ${colors.zirkon};
+    }
+    .react-datepicker__day--keyboard-selected {
+      background-color: ${themeColors.secondary};
+    }
+    .react-datepicker__day--selected {
+      background-color: ${themeColors.secondary};
+    }
+    .react-datepicker__day:hover {
+      color: ${colors.black};
+      background-color: ${colors.zirkon};
+    }
+    .react-datepicker__year-option {
+      background-color: ${colors.linkWater};
+    }
+    .react-datepicker__month-option {
+      background-color: ${colors.linkWater};
+    }
   }
 `;

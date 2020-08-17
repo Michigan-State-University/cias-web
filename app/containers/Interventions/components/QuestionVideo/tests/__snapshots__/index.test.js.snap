@@ -172,7 +172,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   background-color: transparent;
   border-color: transparent;
   margin-right: 9px;
-  height: 60px;
+  height: auto;
 }
 
 .c4:focus {
@@ -209,7 +209,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
       >
         <input
           className="c4"
-          height="60px"
+          height="auto"
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}

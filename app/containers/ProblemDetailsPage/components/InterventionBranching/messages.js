@@ -1,11 +1,11 @@
 /*
- * HomePage Messages
+ * InterventionBranching Messages
  *
  * This contains all the text for the HomePage container.
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.HomePage';
+export const scope = 'app.containers.InterventionBranching';
 
 export default defineMessages({
   nextSession: {

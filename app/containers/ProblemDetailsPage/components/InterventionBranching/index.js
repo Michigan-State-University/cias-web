@@ -1,6 +1,6 @@
 /**
  *
- * InterventionListBranching
+ * InterventionBranching
  *
  */
 
@@ -22,7 +22,7 @@ const initFormula = {
   patterns: [{ match: '', target: { id: '', type: 'Intervention' } }],
 };
 
-function InterventionListBranching({
+function InterventionBranching({
   intl: { formatMessage },
   nextInterventionName,
   branching,
@@ -46,7 +46,7 @@ function InterventionListBranching({
             )}
           </Row>
         </Column>
-        <Column xs={3}>
+        <Column xs={4}>
           <Row justify="end" align="center" width="100%">
             <Text>{formatMessage(messages.useFormula)}</Text>
             <Switch ml={10} checked={branching} onToggle={handleBranching} />
@@ -79,11 +79,11 @@ function InterventionListBranching({
   );
 }
 
-InterventionListBranching.propTypes = {
+InterventionBranching.propTypes = {
   intl: PropTypes.object,
   nextInterventionName: PropTypes.string,
   branching: PropTypes.bool,
   handleBranching: PropTypes.func,
 };
 
-export default injectIntl(InterventionListBranching);
+export default injectIntl(InterventionBranching);
