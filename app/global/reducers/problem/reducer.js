@@ -33,17 +33,19 @@ export const problemReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case FETCH_PROBLEM_REQUEST:
-        draft.fetchProblemLoading = true;
-        draft.fetchProblemError = null;
+        if (state.problem && action.payload.id === state.problem.id) break;
+        draft.loaders.fetchProblemLoading = true;
+        draft.loaders.fetchProblemError = null;
         draft.problem = null;
         break;
       case FETCH_PROBLEM_SUCCESS:
-        draft.fetchProblemLoading = false;
+        draft.loaders.fetchProblemLoading = false;
         draft.problem = action.payload.problem;
+        draft.cache.problem = action.payload.problem;
         break;
       case FETCH_PROBLEM_ERROR:
-        draft.fetchProblemLoading = false;
-        draft.fetchProblemError = action.payload.error;
+        draft.loaders.fetchProblemLoading = false;
+        draft.errors.fetchProblemError = action.payload.error;
         break;
       case CREATE_PROBLEM_REQUEST:
         draft.loaders.createProblemLoading = true;

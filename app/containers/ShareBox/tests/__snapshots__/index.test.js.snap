@@ -3,135 +3,6 @@
 exports[`<ShareBox /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 gmPDGM"
-    width="fit-content"
-  >
-    <div
-      class="Box-sc-14m3exe-0 iaOvfz"
-    >
-      <div
-        class="Row-x1o3ru-0 diEAcg"
-      >
-        <p
-          class="Text-sc-2lza2m-0 iKKmjm"
-          color="#C866EA"
-          font-weight="bold"
-        >
-          Anyone with the link can access sessions
-        </p>
-        <div
-          class="Box-sc-14m3exe-0 jFRsDB"
-          display="flex"
-        >
-          <img
-            alt="?"
-            class="Img-sc-1kfzr96-0 dlGAit"
-            currentitem="false"
-            data-for="el-tooltip-id-anyone_with_the_link"
-            data-tip="true"
-            src="IMAGE_MOCK"
-          />
-          <div
-            class="__react_component_tooltip t00000000-0000-0000-0000-000000000000 place-top type-dark"
-            data-id="tooltip"
-            id="el-tooltip-id-anyone_with_the_link"
-          >
-            <style>
-              
-  	.t00000000-0000-0000-0000-000000000000 {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.t00000000-0000-0000-0000-000000000000.place-top {
-        margin-top: -10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-bottom {
-        margin-top: 10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-left {
-        margin-left: -10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-right {
-        margin-left: 10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-            </style>
-            <p
-              class="Text-sc-2lza2m-0 zCDei"
-            >
-              <span>
-                It means that any person who click the link will be able to complete the session. However please note, that people who starts session with the link and are not listed below won’t be able to use the branching and multisessions sequences.
-              </span>
-            </p>
-          </div>
-        </div>
-        <img
-          alt="arrow"
-          class="Img-sc-1kfzr96-0 juORtB"
-          src="IMAGE_MOCK"
-          transform=""
-        />
-      </div>
-    </div>
-  </div>
-  <div
     class="Box-sc-14m3exe-0 wWlAl"
     height="fit-content"
     width="100%"
@@ -155,19 +26,20 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       class="Row-x1o3ru-0 fbdBbJ"
     >
       <div
-        class="Column-sc-1n6divy-0 bzgxko"
+        class="Column-sc-1n6divy-0 dmVPOe"
       >
         <div
           class="Row-x1o3ru-0 bKPAyc"
         >
           <div
-            class="styled__StyledChipsInput-sc-16elnyr-0 THIFw"
+            class="styled__StyledChipsInput-sc-16elnyr-0 cIamqz"
           >
             <div
-              class="Row-x1o3ru-0 gNvJAs"
+              class="Row-x1o3ru-0 kvrCRI"
+              width="100%"
             >
               <input
-                class="styled__HiddenInput-sc-16elnyr-1 hWHpzZ"
+                class="styled__HiddenInput-sc-16elnyr-1 hBibUP"
                 placeholder="Invite new participants with e-mails"
                 type="text"
                 value=""
@@ -175,7 +47,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <button
-            class="StyledButton-t20ntd-0 kWxdQZ"
+            class="StyledButton-t20ntd-0 bgLnzG"
             color="primary"
             disabled=""
             width="140"
@@ -186,7 +58,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
           </button>
         </div>
         <div
-          class="Column-sc-1n6divy-0 ehxIEZ"
+          class="Column-sc-1n6divy-0 kjMwlV"
         >
           <div
             class="Row-x1o3ru-0 exvbpM"
@@ -206,7 +78,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
                   src="IMAGE_MOCK"
                 />
                 <p
-                  class="Text-sc-2lza2m-0 evAabw"
+                  class="Text-sc-2lza2m-0 iqVYGz"
                   color="#C866EA"
                   font-weight="bold"
                 >
@@ -253,7 +125,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       class="Row-x1o3ru-0 bhnrrF"
     >
       <div
-        class="Column-sc-1n6divy-0 bzgxko"
+        class="Column-sc-1n6divy-0 dmVPOe"
       >
         <h3
           class="H3-sc-1nwhpi5-0 jXhFJD"
@@ -269,7 +141,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
           class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
         >
           <div
-            class="Row-x1o3ru-0 exvbpM"
+            class="Row-x1o3ru-0 diEAcg"
           >
             <img
               alt="avatar"
@@ -296,7 +168,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
           class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
         >
           <div
-            class="Row-x1o3ru-0 exvbpM"
+            class="Row-x1o3ru-0 diEAcg"
           >
             <img
               alt="avatar"
@@ -323,7 +195,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
           class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
         >
           <div
-            class="Row-x1o3ru-0 exvbpM"
+            class="Row-x1o3ru-0 diEAcg"
           >
             <img
               alt="avatar"
@@ -350,7 +222,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
           class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
         >
           <div
-            class="Row-x1o3ru-0 exvbpM"
+            class="Row-x1o3ru-0 diEAcg"
           >
             <img
               alt="avatar"

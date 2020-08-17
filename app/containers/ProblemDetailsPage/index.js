@@ -10,6 +10,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { Link } from 'react-router-dom';
 
 import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
@@ -19,6 +20,8 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import BackButton from 'components/BackButton';
 import ShareBox from 'containers/ShareBox';
+import TextButton from 'components/Button/TextButton';
+import Text from 'components/Text';
 import {
   fetchProblemRequest,
   makeSelectProblemState,
@@ -33,12 +36,17 @@ import {
 } from 'global/reducers/localState';
 import injectSaga from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { colors } from 'theme';
+
 import problemDetailsPageSagas from 'containers/ProblemDetailsPage/saga';
 import appStages from 'global/appStages';
 import InterventionListItem from './components/InterventionListItem';
 import InterventionCreateButton from './components/InterventionCreateButton';
 
 import messages from './messages';
+
+const mockSetting =
+  'Anyone who is a registered participant can access the session';
 
 export function ProblemDetailsPage({
   intl: { formatMessage },
@@ -48,7 +56,11 @@ export function ProblemDetailsPage({
   match: {
     params: { problemId },
   },
-  problemState: { problem, fetchProblemLoading, fetchProblemError },
+  problemState: {
+    problem,
+    loaders: { fetchProblemLoading },
+    errors: { fetchProblemError },
+  },
   interventionIndex,
   changeInterventionIndex,
 }) {
@@ -61,7 +73,7 @@ export function ProblemDetailsPage({
     reducer: localStateReducer,
   });
 
-  const { interventions, name } = problem || {};
+  const { interventions, name, id } = problem || {};
 
   useLayoutEffect(() => {
     fetchProblem(problemId);
@@ -90,14 +102,14 @@ export function ProblemDetailsPage({
     </>
   );
 
+  if (fetchProblemLoading) return <Loader />;
+
   if (fetchProblemError)
     return (
       <Box>
         <ErrorAlert errorText={fetchProblemError} />
       </Box>
     );
-
-  if (fetchProblemLoading) return <Loader />;
 
   return (
     <Box height="100%" width="100%" padding="60px 160px">
@@ -106,7 +118,7 @@ export function ProblemDetailsPage({
           <FormattedMessage {...messages.back} />
         </BackButton>
       </Row>
-      <Row mt={18}>
+      <Row my={18}>
         <StyledInput
           ml={-12}
           px={12}
@@ -121,6 +133,23 @@ export function ProblemDetailsPage({
       </Row>
       <Row>
         <Column sm={6}>
+          <Row
+            bg={colors.linkWater}
+            borderRadius={10}
+            py={15}
+            px={20}
+            align="center"
+            width="fit-content"
+          >
+            <Text fontWeight="bold" mr={12}>
+              {mockSetting}
+            </Text>
+            <Link to={`/interventions/${id}/settings`}>
+              <TextButton>
+                <FormattedMessage {...messages.adjust} />
+              </TextButton>
+            </Link>
+          </Row>
           {renderList()}
           <Row my={18} align="center">
             <InterventionCreateButton
@@ -129,8 +158,11 @@ export function ProblemDetailsPage({
           </Row>
         </Column>
         {process.env.APP_STAGE === appStages.dev.id && (
-          <Column height="0%" sm={6} ml={38} mt={-25}>
-            <ShareBox />
+          <Column ml={38} sm={6}>
+            <Column position="sticky" top="100px">
+              <ShareBox />
+            </Column>
+            <div />
           </Column>
         )}
       </Row>

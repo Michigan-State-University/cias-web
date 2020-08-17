@@ -167,6 +167,23 @@ exports[`<App /> should render and match the snapshot 1`] = `
           "navbarId": "default",
         }
       }
+      path="/interventions/:problemId/settings"
+      protectedRoute={true}
+    />
+    <Memo(ConnectFunction)
+      allowedRoles={
+        Array [
+          "admin",
+          "researcher",
+        ]
+      }
+      component={[Function]}
+      exact={true}
+      navbarProps={
+        Object {
+          "navbarId": "default",
+        }
+      }
       path="/interventions/:problemId"
       protectedRoute={true}
     />

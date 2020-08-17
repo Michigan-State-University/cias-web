@@ -6,8 +6,8 @@ import { margin } from 'components/BaseComponentStyles';
 import { themeColors, borders, paddings, colors } from 'theme';
 
 export const StyledChipsInput = styled.div`
-  padding: ${paddings.small} 10px
-    ${({ isInputFilled }) => (isInputFilled ? '7px' : '12px')} 10px;
+  padding: ${({ isInputFilled }) =>
+    isInputFilled ? `8px 6px 3px 6px` : paddings.small};
   border-style: ${borders.borderStyle};
   border-width: ${borders.borderWidth};
   border-color: ${({ isFocused }) =>
@@ -24,7 +24,7 @@ export const HiddenInput = styled.input`
   border: none;
   outline: none;
   background-color: ${colors.zirkon};
-  margin-left: 2px;
+  margin-left: ${({ isInputFilled }) => (isInputFilled ? '2px' : '0')};
   flex: 1;
 `;
 

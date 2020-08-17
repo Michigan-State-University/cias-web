@@ -15,6 +15,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import Text from 'components/Text';
+import csvFileIcon from 'assets/svg/csv-file.svg';
 import { themeColors } from 'theme';
 
 import messages from './messages';
@@ -22,7 +23,6 @@ import styles from './styled';
 import { CSV_FILE_UPLOAD_ERROR } from './constants';
 
 const CsvFileReader = ({
-  icon,
   children,
   onUpload,
   intl: { formatMessage },
@@ -51,8 +51,12 @@ const CsvFileReader = ({
     >
       {() => (
         <Row align="center" clickable onClick={handleOpen}>
-          {icon && <Img src={icon} alt="upload" mr={10} />}
-          <Text color={themeColors.secondary} fontWeight="bold">
+          <Img src={csvFileIcon} alt="upload" mr={10} />
+          <Text
+            whiteSpace="nowrap"
+            color={themeColors.secondary}
+            fontWeight="bold"
+          >
             {children}
           </Text>
         </Row>
@@ -62,7 +66,6 @@ const CsvFileReader = ({
 };
 
 CsvFileReader.propTypes = {
-  icon: PropTypes.string,
   children: PropTypes.node,
   onUpload: PropTypes.func,
   intl: intlShape,

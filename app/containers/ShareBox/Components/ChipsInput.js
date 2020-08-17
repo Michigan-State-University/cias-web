@@ -1,7 +1,8 @@
-import React, { useState, useMemo, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import find from 'lodash/find';
 import map from 'lodash/map';
+import isEmpty from 'lodash/isEmpty';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { error } from 'react-toastify-redux';
@@ -23,6 +24,7 @@ const ChipsInput = ({
   value,
   setValue,
   showError,
+  placeholder,
   intl: { formatMessage },
 }) => {
   const hiddenInput = useRef(null);
@@ -30,22 +32,25 @@ const ChipsInput = ({
   const [isFocused, setIsFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
-  const trimmedEmails = useMemo(() => {
-    if (value) {
-      const emails = value.split(',');
-      return emails.map(email => email.trim());
-    }
-    return null;
-  }, [value]);
-
   const setFocus = () => setIsFocused(true);
   const unsetFocus = () => setIsFocused(false);
 
-  const handleChange = ({ target: { value: inputEmailValue } }) => {
+  const handleKeyDown = event => {
+    const { key, keyCode } = event;
+    handleChange({ key, keyCode })(event);
+  };
+
+  const handleChange = ({ key, keyCode }) => ({
+    target: { value: inputEmailValue },
+  }) => {
     const lastChar = inputEmailValue[inputEmailValue.length - 1];
-    if (lastChar === ',' || lastChar === ' ') {
+    if (
+      lastChar === ',' ||
+      lastChar === ' ' ||
+      (key === 'Enter' && keyCode === 13)
+    ) {
       const newEmail = inputEmailValue.trim().replace(',', '');
-      const isAlreadyExist = find(trimmedEmails, email => email === newEmail);
+      const isAlreadyExist = find(value, email => email === newEmail);
       const isValid = validEmailRegExp.test(newEmail);
       if (isAlreadyExist) {
         showError(formatMessage(messages.duplicatedEmail), {
@@ -59,8 +64,9 @@ const ChipsInput = ({
         });
         return;
       }
-      if (value) setValue(value.concat(',', newEmail));
-      else setValue(newEmail);
+      if (isEmpty(value)) setValue([newEmail]);
+      else setValue([...value, newEmail]);
+
       setInputValue('');
     } else setInputValue(inputEmailValue);
   };
@@ -79,21 +85,12 @@ const ChipsInput = ({
     }
   }, [isFocused]);
 
-  const isInputFilled = !!trimmedEmails;
-
-  const handleRemove = email => () => {
-    const lastCommaIndex = value.lastIndexOf(',');
-    const emailIndex = value.indexOf(email);
-    let valueToDelete;
-    if (lastCommaIndex === -1) valueToDelete = email;
-    else if (lastCommaIndex < emailIndex) valueToDelete = `,${email}`;
-    else valueToDelete = `${email},`;
-    setValue(value.replace(valueToDelete, '').trim());
+  const handleRemove = email => event => {
+    event.stopPropagation();
+    setValue(value.filter(val => val !== email));
   };
 
-  const placeholder = isInputFilled
-    ? null
-    : formatMessage(messages.emailPlaceholder);
+  const isInputFilled = !isEmpty(value);
   return (
     <StyledChipsInput
       isInputFilled={isInputFilled}
@@ -102,8 +99,8 @@ const ChipsInput = ({
       ref={chipsInput}
       mt={-5}
     >
-      <Row flexWrap="wrap">
-        {map(trimmedEmails, (email, index) => (
+      <Row flexWrap="wrap" width="100%">
+        {map(value, (email, index) => (
           <Box key={`el-email-${index}`} px={2} mb={5}>
             <Row
               width="fit-content"
@@ -129,8 +126,9 @@ const ChipsInput = ({
           onFocus={setFocus}
           type="text"
           value={inputValue}
-          onChange={handleChange}
-          placeholder={placeholder}
+          onChange={handleChange({})}
+          onKeyDown={handleKeyDown}
+          placeholder={isInputFilled ? null : placeholder}
           isInputFilled={isInputFilled}
         />
       </Row>
@@ -139,10 +137,11 @@ const ChipsInput = ({
 };
 
 ChipsInput.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.array,
   setValue: PropTypes.func,
   intl: intlShape,
   showError: PropTypes.func,
+  placeholder: PropTypes.string,
 };
 
 const mapDispatchToProps = {
