@@ -2,6 +2,12 @@ export const FETCH_PROBLEM_REQUEST = 'app/Dashboard/FETCH_PROBLEM_REQUEST';
 export const FETCH_PROBLEM_SUCCESS = 'app/Dashboard/FETCH_PROBLEM_SUCCESS';
 export const FETCH_PROBLEM_ERROR = 'app/Dashboard/FETCH_PROBLEM_ERROR';
 
+export const SEND_PROBLEM_CSV_REQUEST =
+  'app/Dashboard/SEND_PROBLEM_CSV_REQUEST';
+export const SEND_PROBLEM_CSV_SUCCESS =
+  'app/Dashboard/SEND_PROBLEM_CSV_SUCCESS';
+export const SEND_PROBLEM_CSV_ERROR = 'app/Dashboard/SEND_PROBLEM_CSV_ERROR';
+
 export const CREATE_PROBLEM_REQUEST = 'app/Dashboard/CREATE_PROBLEM_REQUEST';
 export const CREATE_PROBLEM_SUCCESS = 'app/Dashboard/CREATE_PROBLEM_SUCCESS';
 export const CREATE_PROBLEM_ERROR = 'app/Dashboard/CREATE_PROBLEM_ERROR';

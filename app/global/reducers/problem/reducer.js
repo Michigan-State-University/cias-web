@@ -11,6 +11,9 @@ import {
   EDIT_PROBLEM_REQUEST,
   EDIT_PROBLEM_SUCCESS,
   EDIT_PROBLEM_ERROR,
+  SEND_PROBLEM_CSV_REQUEST,
+  SEND_PROBLEM_CSV_SUCCESS,
+  SEND_PROBLEM_CSV_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -21,6 +24,7 @@ export const initialState = {
   loaders: {
     fetchProblemLoading: false,
     createProblemLoading: false,
+    sendCsvLoading: false,
   },
   errors: {
     fetchProblemError: null,
@@ -65,6 +69,15 @@ export const problemReducer = (state = initialState, action) =>
         break;
       case EDIT_PROBLEM_ERROR:
         draft.problem = draft.cache.problem;
+        break;
+      case SEND_PROBLEM_CSV_REQUEST:
+        draft.loaders.sendCsvLoading = true;
+        break;
+      case SEND_PROBLEM_CSV_SUCCESS:
+        draft.loaders.sendCsvLoading = false;
+        break;
+      case SEND_PROBLEM_CSV_ERROR:
+        draft.loaders.sendCsvLoading = false;
         break;
     }
   });
