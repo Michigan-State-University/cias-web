@@ -1,4 +1,5 @@
 import produce from 'immer';
+import isEmpty from 'lodash/isEmpty';
 
 import {
   FETCH_PROBLEMS_ERROR,
@@ -9,7 +10,7 @@ import {
 import { CREATE_PROBLEM_SUCCESS } from '../problem';
 
 export const initialState = {
-  problems: null,
+  problems: [],
   fetchProblemLoading: true,
   fetchProblemError: null,
 };
@@ -19,7 +20,7 @@ export const problemsRedcuer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case FETCH_PROBLEMS_REQUEST:
-        if (!draft.problems) draft.fetchProblemLoading = true;
+        if (isEmpty(draft.problems)) draft.fetchProblemLoading = true;
         draft.fetchProblemError = null;
         break;
       case FETCH_PROBLEMS_SUCCESS:
