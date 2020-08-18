@@ -1,20 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ErrorAlert /> Should render and match the snapshot 1`] = `
+.c1 {
+  width: auto;
+  height: auto;
+  margin-right: 15px;
+}
+
+.c2 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 700;
+}
+
 .c0 {
   padding: 20px;
   width: 100%;
-  background-color: rgba(255,0,0,0.2);
-  border: 1px solid red;
-  border-radius: 10px;
-  margin: 10px 0;
   max-width: 700px;
+  background-color: rgba(239,70,47,0.3);
+  border: 1px solid #EF462F;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 <div
   class="c0"
 >
-  <p>
+  <img
+    alt="error"
+    class="c1"
+    src="IMAGE_MOCK"
+  />
+  <p
+    class="c2"
+    font-size="15"
+    font-weight="bold"
+  >
     error
   </p>
 </div>

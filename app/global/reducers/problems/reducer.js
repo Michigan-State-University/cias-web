@@ -10,7 +10,7 @@ import { CREATE_PROBLEM_SUCCESS } from '../problem';
 
 export const initialState = {
   problems: null,
-  fetchProblemLoading: false,
+  fetchProblemLoading: true,
   fetchProblemError: null,
 };
 

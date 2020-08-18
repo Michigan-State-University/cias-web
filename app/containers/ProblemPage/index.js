@@ -78,13 +78,9 @@ export function ProblemPage({
     <SingleTile tileData={problem} link={`/interventions/${problem.id}/`} />
   );
 
-  if (fetchProblemLoading || finalProblems === null) return <Loader />;
+  if (fetchProblemLoading) return <Loader />;
   if (fetchProblemError)
-    return (
-      <Container>
-        <ErrorAlert errorText={fetchProblemError} />
-      </Container>
-    );
+    return <ErrorAlert errorText={fetchProblemError} fullPage />;
 
   if (!finalProblems.length && !problems.length) {
     return (
