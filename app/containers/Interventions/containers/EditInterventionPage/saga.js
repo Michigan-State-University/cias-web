@@ -14,6 +14,8 @@ import {
   informationQuestion,
   multiQuestion,
 } from 'models/Intervention/QuestionTypes';
+import { addBlock } from 'containers/Interventions/components/QuestionSettings/Settings/actions';
+import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
 import messages from './messages';
 import {
   CREATE_QUESTION_REQUEST,
@@ -72,8 +74,10 @@ function* createQuestion({ payload: { question, id } }) {
     });
 
     const createdQuestion = mapQuestionToStateObject(response.data.data);
+    const { id: newQuestionId } = createdQuestion;
 
     yield put(createQuestionSuccess(createdQuestion));
+    yield put(addBlock(readQuestionBlockType, newQuestionId));
   } catch (error) {
     yield put(createQuestionError(error));
   }

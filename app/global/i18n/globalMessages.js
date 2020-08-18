@@ -38,6 +38,10 @@ export default defineMessages({
       id: `${scope}.HeadAnimation`,
       defaultMessage: 'Head Animation',
     },
+    ReadQuestion: {
+      id: `${scope}.ReadQuestion`,
+      defaultMessage: 'Read question',
+    },
   },
   questionTypes: {
     'Question::Single': {

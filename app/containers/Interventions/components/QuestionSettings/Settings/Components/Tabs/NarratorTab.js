@@ -21,6 +21,7 @@ import {
   speechType,
   headAnimationType,
   blockTypeToColorMap,
+  readQuestionBlockType,
   reflectionType,
 } from 'models/Narrator/BlockTypes';
 import {
@@ -86,6 +87,7 @@ const NarratorTab = ({
           />
         );
       case speechType:
+      case readQuestionBlockType:
         return (
           <SpeechBlock
             formatMessage={formatMessage}
@@ -114,6 +116,8 @@ const NarratorTab = ({
         return animation ? blockTypeToColorMap[type] : colors.grey;
       case speechType:
       case reflectionType:
+        return voice ? blockTypeToColorMap[type] : colors.grey;
+      case readQuestionBlockType:
         return voice ? blockTypeToColorMap[type] : colors.grey;
       case headAnimationType:
         return animation ? blockTypeToColorMap[type] : colors.grey;
@@ -160,6 +164,10 @@ const NarratorTab = ({
   };
 
   const handleDelete = index => () => deleteBlock(index);
+
+  const readQuestionBlockTypePresent = Boolean(
+    narrator.blocks.find(({ type }) => type === readQuestionBlockType),
+  );
 
   return (
     <Fragment>
@@ -231,7 +239,11 @@ const NarratorTab = ({
         <DashedBox mt={14} onClick={toggleTypeChooser}>
           {formatMessage(messages.newStep)}
         </DashedBox>
-        <BlockTypeChooser visible={typeChooserOpen} onClick={onCreateBlock} />
+        <BlockTypeChooser
+          disableReadQuestionBlockType={readQuestionBlockTypePresent}
+          visible={typeChooserOpen}
+          onClick={onCreateBlock}
+        />
       </Box>
     </Fragment>
   );

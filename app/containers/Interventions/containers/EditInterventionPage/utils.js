@@ -129,23 +129,6 @@ export const getAnimationPosition = (draft, state, payload) => {
   }
 };
 
-const getDataTTS = (type, questionData, delimiters) => {
-  switch (type) {
-    case singleQuestion.id:
-    case multiQuestion.id:
-      const textArray = [];
-
-      questionData.forEach(({ payload }) => {
-        textArray.push(...splitAndKeep(htmlToPlainText(payload), delimiters));
-      });
-
-      return textArray;
-
-    default:
-      return [];
-  }
-};
-
 export const getFromQuestionTTS = question => {
   const delimiters = [',', '.', '?', '!'];
 
@@ -155,7 +138,6 @@ export const getFromQuestionTTS = question => {
   const subtileTTS = question.subtitle
     ? splitAndKeep(htmlToPlainText(question.subtitle), delimiters)
     : [];
-  const dataTTS = getDataTTS(question.type, question.body.data, delimiters);
 
-  return concat(titleTTS, subtileTTS, dataTTS);
+  return concat(titleTTS, subtileTTS);
 };

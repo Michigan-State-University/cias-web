@@ -13,9 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { error } from 'react-toastify-redux';
 import get from 'lodash/get';
-import filter from 'lodash/filter';
 
-import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 import { useInjectSaga } from 'utils/injectSaga';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -27,9 +25,6 @@ import Column from 'components/Column';
 import Loader from 'components/Loader';
 import { DESKTOP_MODE } from 'utils/previewMode';
 
-import { instantiateBlockForType } from 'models/Intervention/utils';
-
-import { elements } from 'theme';
 import {
   BackButton,
   AnswerInterventionContent,
@@ -113,36 +108,12 @@ export function AnswerInterventionPage({
   useInjectReducer({ key: 'answerInterventionPage', reducer });
   useInjectSaga({ key: 'answerInterventionPage', saga });
 
-  const hasSpeechBlocks = question =>
-    filter(
-      question.narrator.blocks,
-      ({ type }) => type === speechType || type === reflectionType,
-    ).length !== 0;
-
   const assignCurrentQuestion = () => {
     const question = interventionQuestions[questionIndex];
 
     if (!question) return null;
 
-    if (hasSpeechBlocks(question)) return question;
-
-    const { narrator } = question;
-    return {
-      ...question,
-      narrator: {
-        ...narrator,
-        blocks: [
-          {
-            ...instantiateBlockForType(speechType, {
-              x: 0,
-              y: elements.peedyInitialYPosition,
-            }),
-            ...narrator.from_question[0],
-          },
-          ...narrator.blocks,
-        ],
-      },
-    };
+    return question;
   };
 
   const currentQuestion = interventionQuestions

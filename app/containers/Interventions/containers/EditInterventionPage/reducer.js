@@ -8,6 +8,7 @@ import {
   speechType,
   headAnimationType,
   reflectionType,
+  readQuestionBlockType,
 } from 'models/Narrator/BlockTypes';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import settingsTabLabels from 'utils/settingsTabsLabels';
@@ -88,13 +89,18 @@ const getPreviewData = data => {
   }
 };
 
-const assignFromQuestionTTS = (draft, state) =>
-  set(draft.questions[state.selectedQuestion], 'narrator.from_question', [
-    {
-      ...draft.questions[state.selectedQuestion].narrator.from_question[0],
+const assignFromQuestionTTS = (draft, state) => {
+  const { narrator } = draft.questions[state.selectedQuestion];
+  const readQuestionBlockIndex = narrator.blocks.findIndex(
+    ({ type }) => type === readQuestionBlockType,
+  );
+
+  if (readQuestionBlockIndex !== -1)
+    narrator.blocks[readQuestionBlockIndex] = {
+      ...narrator.blocks[readQuestionBlockIndex],
       text: getFromQuestionTTS(draft.questions[state.selectedQuestion]),
-    },
-  ]);
+    };
+};
 
 /* eslint-disable default-case, no-param-reassign */
 const editInterventionPageReducer = (state = initialState, action) =>
@@ -216,7 +222,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.questions = action.payload.reorderedList;
         break;
 
-      case EDIT_QUESTION_REQUEST:
+      case EDIT_QUESTION_REQUEST: {
         set(
           draft.questions[state.selectedQuestion],
           action.payload.path,
@@ -225,6 +231,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
 
         assignFromQuestionTTS(draft, state);
         break;
+      }
 
       case UPDATE_QUESTION_DATA:
         draft.questions[state.selectedQuestion] = {

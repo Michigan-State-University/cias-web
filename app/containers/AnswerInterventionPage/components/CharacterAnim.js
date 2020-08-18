@@ -9,6 +9,7 @@ import {
   speechType,
   headAnimationType,
   reflectionType,
+  readQuestionBlockType,
 } from 'models/Narrator/BlockTypes';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
@@ -70,6 +71,7 @@ const CharacterAnim = ({
           break;
         case speechType:
         case reflectionType:
+        case readQuestionBlockType:
           changeSpeech(nextBlock, nextIndex);
           break;
         default:
@@ -129,6 +131,7 @@ const CharacterAnim = ({
       switch (blocks[0].type) {
         case speechType:
         case reflectionType:
+        case readQuestionBlockType:
           return getInitialSpeechAnimation();
 
         case headAnimationType:
@@ -167,6 +170,7 @@ const CharacterAnim = ({
 
         case speechType:
         case reflectionType:
+        case readQuestionBlockType:
           if (!settings.voice) changeBlock();
           else handleAudioBlock();
           break;
@@ -189,7 +193,8 @@ const CharacterAnim = ({
     ) {
       const isSpeechType =
         state.currentData.type === speechType ||
-        state.currentData.type === reflectionType;
+        state.currentData.type === reflectionType ||
+        state.currentData.type === readQuestionBlockType;
 
       return {
         name: state.currentData.name,

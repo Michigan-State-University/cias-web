@@ -2,7 +2,11 @@
 /* eslint-disable no-restricted-syntax */
 import uniqBy from 'lodash/uniqBy';
 import filter from 'lodash/filter';
-import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
+import {
+  speechType,
+  reflectionType,
+  readQuestionBlockType,
+} from 'models/Narrator/BlockTypes';
 import AudioWrapper from 'utils/audioWrapper';
 import { useRef } from 'react';
 import { speechAnimations } from 'utils/animations/animationsNames';
@@ -30,7 +34,10 @@ const useAudioHelper = (
   const loadSpeechAnimations = async () => {
     const speechBlocks = filter(
       blocks,
-      ({ type }) => type === speechType || type === reflectionType,
+      ({ type }) =>
+        type === speechType ||
+        type === reflectionType ||
+        type === readQuestionBlockType,
     );
 
     const uniqAnimations = uniqBy(
@@ -78,6 +85,7 @@ const useAudioHelper = (
 
     switch (nextBlock.type) {
       case speechType:
+      case readQuestionBlockType:
         dispatchUpdate({
           currentData: {
             ...speechData,
@@ -137,6 +145,7 @@ const useAudioHelper = (
 
     switch (blocks[0].type) {
       case speechType:
+      case readQuestionBlockType:
         return {
           ...blocks[0],
           ...speechData,
@@ -171,6 +180,7 @@ const useAudioHelper = (
     } else if (currentData.currentAnimation === 'speech') {
       switch (currentData.type) {
         case speechType:
+        case readQuestionBlockType:
           handleSpeech(currentData.audio_urls);
           break;
         case reflectionType:
@@ -298,6 +308,7 @@ const useAudioHelper = (
   const speechEndUpdate = () => {
     switch (currentData.type) {
       case speechType:
+      case readQuestionBlockType:
         changeBlock();
         break;
       case reflectionType:
@@ -334,7 +345,8 @@ const useAudioHelper = (
     if (
       currentData &&
       (currentData.type === speechType ||
-        currentData.type === reflectionType) &&
+        currentData.type === reflectionType ||
+        currentData.type === readQuestionBlockType) &&
       (audio.current.paused || audio.current.stopped) &&
       (currentData.currentAnimation !== 'start' &&
         currentData.currentAnimation !== 'end')

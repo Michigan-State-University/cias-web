@@ -80,7 +80,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
           ...question.narrator,
           blocks: [
             ...question.narrator.blocks,
-            instantiateBlockForType(payload.data.type, pos),
+            instantiateBlockForType(payload.data.type, pos, question),
           ],
         },
       };
