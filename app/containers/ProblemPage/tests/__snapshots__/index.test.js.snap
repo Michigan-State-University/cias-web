@@ -154,44 +154,35 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
 </div>
 `;
 
+exports[`<ProblemPage /> Should render and match the snapshot with loader 1`] = `
+<div>
+  <div
+    class="styled__FillScreenLoader-tle2yi-0 jcBUSp"
+    data-testid="fullscreen-loader"
+    opacity="0.5"
+  >
+    <div
+      class="styled__StyledSpinner-d123q3-0 dOefMO"
+      color="#C866EA"
+      size="100"
+      width="6"
+    />
+  </div>
+</div>
+`;
+
 exports[`<ProblemPage /> Should render and match the snapshot without interventions 1`] = `
 <div>
   <div
-    style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
+    class="styled__FillScreenLoader-tle2yi-0 jcBUSp"
+    data-testid="fullscreen-loader"
+    opacity="0.5"
   >
-    <h1
-      class="H1-tncdg6-0 datGXs"
-    >
-      <span>
-        You don't have any interventions
-      </span>
-    </h1>
     <div
-      style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
-    >
-      <div
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
-      >
-        <div
-          class="styled__NewElementContainer-sc-1wlulo8-1 dweXER"
-        >
-          <div
-            class="Box-sc-14m3exe-0 hkJBrh"
-            direction="column"
-            display="flex"
-          >
-            <img
-              alt="add"
-              class="Img-sc-1kfzr96-0 iPwMDW"
-              src="IMAGE_MOCK"
-            />
-            Create a new intervention
-          </div>
-        </div>
-      </div>
-    </div>
-    <span
-      style="display: table; clear: both;"
+      class="styled__StyledSpinner-d123q3-0 dOefMO"
+      color="#C866EA"
+      size="100"
+      width="6"
     />
   </div>
 </div>

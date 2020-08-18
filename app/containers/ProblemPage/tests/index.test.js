@@ -22,7 +22,7 @@ describe('<ProblemPage />', () => {
   const initialState = {
     problems: {
       problems: [],
-      fetchProblemLoading: false,
+      fetchProblemLoading: true,
       fetchProblemError: null,
     },
   };
@@ -48,7 +48,30 @@ describe('<ProblemPage />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
+  it('Should render and match the snapshot with loader', () => {
+    const { container } = render(
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <MemoryRouter>
+            <ProblemPage />
+          </MemoryRouter>
+        </IntlProvider>
+      </Provider>,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
   it('Should render and match the snapshot without interventions', () => {
+    store = createStore(reducer, {
+      problems: {
+        problems: [],
+        fetchProblemLoading: false,
+        fetchProblemError: null,
+      },
+    });
+    store.runSaga = () => {};
+    store.injectedReducers = {};
+    store.injectedSagas = {};
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
