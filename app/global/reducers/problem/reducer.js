@@ -14,6 +14,7 @@ import {
   SEND_PROBLEM_CSV_REQUEST,
   SEND_PROBLEM_CSV_SUCCESS,
   SEND_PROBLEM_CSV_ERROR,
+  REORDER_INTERVENTION_LIST,
 } from './constants';
 
 export const initialState = {
@@ -78,6 +79,9 @@ export const problemReducer = (state = initialState, action) =>
         break;
       case SEND_PROBLEM_CSV_ERROR:
         draft.loaders.sendCsvLoading = false;
+        break;
+      case REORDER_INTERVENTION_LIST:
+        draft.problem.interventions = action.payload.reorderedList;
         break;
     }
   });

@@ -15,3 +15,6 @@ export const CREATE_PROBLEM_ERROR = 'app/Dashboard/CREATE_PROBLEM_ERROR';
 export const EDIT_PROBLEM_REQUEST = 'app/Dashboard/EDIT_PROBLEM_REQUEST';
 export const EDIT_PROBLEM_SUCCESS = 'app/Dashboard/EDIT_PROBLEM_SUCCESS';
 export const EDIT_PROBLEM_ERROR = 'app/Dashboard/EDIT_PROBLEM_ERROR';
+
+export const REORDER_INTERVENTION_LIST =
+  'app/Dashboard/REORDER_INTERVENTION_LIST';

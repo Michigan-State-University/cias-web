@@ -4,6 +4,7 @@ export {
   createProblemRequest,
   editProblemRequest,
   sendProblemCsvRequest,
+  reorderInterventionList,
 } from './actions';
 export { problemReducer } from './reducer';
 export {

@@ -13,6 +13,7 @@ import {
   SEND_PROBLEM_CSV_REQUEST,
   SEND_PROBLEM_CSV_SUCCESS,
   SEND_PROBLEM_CSV_ERROR,
+  REORDER_INTERVENTION_LIST,
 } from './constants';
 
 export const fetchProblemRequest = id =>
@@ -41,3 +42,6 @@ export const editProblemRequest = payload =>
 export const editProblemSuccess = problem =>
   actionBuilder(EDIT_PROBLEM_SUCCESS, { problem });
 export const editProblemError = () => actionBuilder(EDIT_PROBLEM_ERROR, {});
+
+export const reorderInterventionList = payload =>
+  actionBuilder(REORDER_INTERVENTION_LIST, payload);

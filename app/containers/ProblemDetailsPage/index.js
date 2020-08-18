@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
+import Reorder, { reorder } from 'react-reorder';
 
 import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
@@ -27,6 +28,7 @@ import {
   makeSelectProblemState,
   editProblemRequest,
   problemReducer,
+  reorderInterventionList,
 } from 'global/reducers/problem';
 import { createInterventionRequest } from 'global/reducers/intervention';
 import {
@@ -62,6 +64,7 @@ export function ProblemDetailsPage({
   },
   interventionIndex,
   changeInterventionIndex,
+  reorderInterventions,
 }) {
   useInjectReducer({
     key: 'problem',
@@ -78,26 +81,51 @@ export function ProblemDetailsPage({
     fetchProblem(problemId);
   }, []);
 
+  const handleReorder = (event, previousIndex, nextIndex) => {
+    const newList = reorder(interventions, previousIndex, nextIndex);
+    let position = 0;
+    const orderdedNewList = newList.map(question => {
+      position += 1;
+      return {
+        ...question,
+        position,
+      };
+    });
+    reorderInterventions({
+      reorderedList: orderdedNewList,
+      problemId,
+    });
+  };
+
   const renderList = () => (
     <>
-      {interventions &&
-        interventions.map((intervention, index) => {
-          const handleClick = () => {
-            changeInterventionIndex(index);
-          };
-          return (
-            <InterventionListItem
-              key={intervention.id}
-              intervention={intervention}
-              index={index}
-              isSelected={index === interventionIndex}
-              handleClick={handleClick}
-              nextInterventionName={
-                interventions[index + 1] ? interventions[index + 1].name : null
-              }
-            />
-          );
-        })}
+      <Reorder
+        reorderId="problem-list"
+        onReorder={handleReorder}
+        holdTime={125}
+      >
+        {interventions &&
+          interventions.map((intervention, index) => {
+            const handleClick = () => {
+              changeInterventionIndex(index);
+            };
+            return (
+              <Row key={intervention.id}>
+                <InterventionListItem
+                  intervention={intervention}
+                  index={index}
+                  isSelected={index === interventionIndex}
+                  handleClick={handleClick}
+                  nextInterventionName={
+                    interventions[index + 1]
+                      ? interventions[index + 1].name
+                      : null
+                  }
+                />
+              </Row>
+            );
+          })}
+      </Reorder>
     </>
   );
 
@@ -182,6 +210,7 @@ ProblemDetailsPage.propTypes = {
   editName: PropTypes.func,
   interventionIndex: PropTypes.number,
   changeInterventionIndex: PropTypes.func,
+  reorderInterventions: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -194,6 +223,7 @@ const mapDispatchToProps = {
   fetchProblem: fetchProblemRequest,
   editName: editProblemRequest,
   changeInterventionIndex: changeCurrentIntervention,
+  reorderInterventions: reorderInterventionList,
 };
 
 const withConnect = connect(

@@ -5,6 +5,7 @@ import Box from 'components/Box';
 import { colors, boxShadows, themeColors } from 'theme';
 
 export const ToggleableBox = styled(Box)`
+  width: 100%;
   margin-top: 18px;
   box-shadow: ${boxShadows.selago};
   border-style: solid;
