@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import Button from 'components/Button';
-import { themeColors } from 'theme';
+import { hexToRgb, themeColors } from 'theme';
 
 export const ShareButton = styled(Button)`
   font-weight: bold;
-  color: white;
+  background-color: ${props => props.bg && `rgba(${hexToRgb(props.bg)}, 1)`};
   ${({ outlined }) =>
     outlined &&
     `

@@ -7,7 +7,6 @@ import {
   layout,
   padding,
   flex,
-  style,
 } from 'components/BaseComponentStyles';
 
 const invertedStyles = color => css`
@@ -38,7 +37,6 @@ export const StyledButton = styled.button`
   ${layout};
   ${padding};
   ${flex};
-  ${style};
 `;
 
 StyledButton.propTypes = {

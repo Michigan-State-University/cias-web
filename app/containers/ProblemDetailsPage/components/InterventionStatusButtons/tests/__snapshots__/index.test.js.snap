@@ -13,12 +13,10 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   width: 200px;
-  color: rgba(0,0,0,1);
 }
 
 .c0 {
   font-weight: bold;
-  color: white;
 }
 
 <button
@@ -48,12 +46,10 @@ Array [
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   margin-right: 10px;
   width: 200px;
-  color: rgba(0,0,0,1);
 }
 
 .c0 {
   font-weight: bold;
-  color: white;
   background-color: transparent;
   border: #107969 solid 1px;
   color: #107969;
@@ -86,13 +82,11 @@ Array [
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   width: 200px;
-  background-color: rgba(240,104,74,1);
-  color: rgba(0,0,0,1);
 }
 
 .c0 {
   font-weight: bold;
-  color: white;
+  background-color: rgba(240,104,74,1);
 }
 
 <button
@@ -122,12 +116,10 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   margin-right: 10px;
   width: 200px;
-  color: rgba(0,0,0,1);
 }
 
 .c0 {
   font-weight: bold;
-  color: white;
   background-color: transparent;
   border: #107969 solid 1px;
   color: #107969;

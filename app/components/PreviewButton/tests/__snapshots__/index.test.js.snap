@@ -32,8 +32,6 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
   height: 35px;
   padding-right: 11px;
   padding-left: 11px;
-  color: rgba(0,0,236,1);
-  border-radius: 5px;
 }
 
 <div>
