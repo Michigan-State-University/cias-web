@@ -4,6 +4,7 @@ import isEqual from 'lodash/isEqual';
 import map from 'lodash/map';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { reorder } from 'react-reorder';
 
 import Accordion from 'components/Accordion';
 import Box from 'components/Box';
@@ -45,6 +46,7 @@ import {
   updateNarratorSettings,
   saveNarratorMovement,
   removeBlock,
+  reorderNarratorBlocks,
 } from '../../actions';
 
 const NarratorTab = ({
@@ -61,6 +63,7 @@ const NarratorTab = ({
   currentQuestionIndex,
   deleteBlock,
   updateNarratorPreviewAnimation,
+  reorderBlocks,
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
@@ -165,6 +168,10 @@ const NarratorTab = ({
 
   const handleDelete = index => () => deleteBlock(index);
 
+  const handleReorder = (event, previousIndex, nextIndex) => {
+    const newList = reorder(narrator.blocks, previousIndex, nextIndex);
+    reorderBlocks(newList, previousIndex, nextIndex);
+  };
   const readQuestionBlockTypePresent = Boolean(
     narrator.blocks.find(({ type }) => type === readQuestionBlockType),
   );
@@ -194,6 +201,7 @@ const NarratorTab = ({
         accordionParentKey={currentQuestionIndex}
         onHide={hideAccordion}
         onOpen={moveAnimation}
+        onReorder={handleReorder}
       >
         {narrator &&
           map(narrator.blocks, (block, blockIndex) => (
@@ -263,6 +271,7 @@ NarratorTab.propTypes = {
   currentQuestionIndex: PropTypes.number,
   deleteBlock: PropTypes.func,
   updateNarratorPreviewAnimation: PropTypes.func,
+  reorderBlocks: PropTypes.func,
 };
 
 const mapDispatchToProps = {
@@ -273,6 +282,7 @@ const mapDispatchToProps = {
   setOffset: setAnimationStopPosition,
   savePosition: saveNarratorMovement,
   updateNarratorPreviewAnimation: updatePreviewAnimation,
+  reorderBlocks: reorderNarratorBlocks,
 };
 
 const mapStateToProps = createStructuredSelector({

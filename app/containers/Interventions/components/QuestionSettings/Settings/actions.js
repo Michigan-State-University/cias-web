@@ -13,6 +13,7 @@ import {
   UPDATE_NARRATOR_MOVEMENT,
   SWITCH_SPEECH_REFLECTION,
   UPDATE_REFLECTION,
+  REORDER_NARRATOR_BLOCKS,
 } from './constants';
 
 export const updateSettings = (property, value) =>
@@ -96,4 +97,14 @@ export const saveNarratorMovement = (index, questionId, position) =>
   updateQuestionSettings({
     type: UPDATE_NARRATOR_MOVEMENT,
     data: { index, questionId, position },
+  });
+
+export const reorderNarratorBlocks = (
+  reorderedBlocks,
+  previousIndex,
+  nextIndex,
+) =>
+  updateQuestionSettings({
+    type: REORDER_NARRATOR_BLOCKS,
+    data: { reorderedBlocks, previousIndex, nextIndex },
   });
