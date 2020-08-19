@@ -127,6 +127,7 @@ export const getAnimationPosition = (draft, state, payload) => {
     }
     return { x: 0, y: elements.peedyInitialYPosition };
   }
+  return state.animationPosition;
 };
 
 export const getFromQuestionTTS = question => {

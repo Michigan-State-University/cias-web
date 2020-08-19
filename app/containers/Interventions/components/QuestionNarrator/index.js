@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useLayoutEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import get from 'lodash/get';
 import PropTypes from 'prop-types';
 import Lottie from 'react-lottie';
@@ -19,35 +19,18 @@ import {
 } from 'containers/Interventions/containers/EditInterventionPage/actions';
 import useAnimationHelper from 'containers/AnswerInterventionPage/animationsHelpers/animationHelper';
 import useAudioHelper from 'containers/AnswerInterventionPage/animationsHelpers/audioHelper';
+import useResizeObserver from 'utils/useResizeObserver';
 
 import { elements } from 'theme';
-import { NarratorContainer } from './styled';
+import { NarratorContainer, lottieStyles } from './styled';
 import {
   makeSelectDraggable,
   makeSelectAnimationPosition,
   makeSelectPreviewData,
 } from './selectors';
 
-const lottieStyles = {
-  margin: 'none',
-};
-
-const UPDATE = 'UPDATE';
-
-const reducer = (state, action) => {
-  const { type, newState } = action;
-  switch (type) {
-    case UPDATE:
-      return newState;
-    default:
-      return state;
-  }
-};
-
-const initialState = {
-  currentData: null,
-  currentBlockIndex: 0,
-};
+import { PEEDY_SIZE } from './utils';
+import { reducer, initialState, UPDATE } from './reducer';
 
 const QuestionNarrator = ({
   questionId,
@@ -59,7 +42,9 @@ const QuestionNarrator = ({
   animationBoundaries,
   settings,
 }) => {
-  const [height, setHeight] = useState(0);
+  const { width, height } = useResizeObserver({
+    targetRef: animationBoundaries,
+  });
   const [state, dispatch] = useReducer(reducer, initialState);
   const dispatchUpdate = newState =>
     dispatch({
@@ -144,11 +129,6 @@ const QuestionNarrator = ({
     }
   };
 
-  const [dragPosition, setDragPosition] = useState({
-    x: 0,
-    y: elements.peedyInitialYPosition,
-  });
-
   const fetchJSON = async () => {
     await fetchBodyAndHeadAnimations();
     await fetchAudioAnimations();
@@ -167,14 +147,6 @@ const QuestionNarrator = ({
     }
   }, [previewData.animation]);
 
-  useLayoutEffect(() => {
-    const cur = animationBoundaries.current;
-    if (cur) {
-      const { clientHeight } = cur;
-      setHeight(clientHeight);
-    }
-  });
-
   useDidUpdateEffect(() => {
     if (settings.animation) {
       const { anim } = animationRef.current;
@@ -186,10 +158,6 @@ const QuestionNarrator = ({
   useDidUpdateEffect(() => {
     if (draggable) updateNarratorPreviewAnimation('standStill');
   }, [draggable]);
-
-  useEffect(() => {
-    setDragPosition(animationPositionStored);
-  }, [animationPositionStored]);
 
   useDidUpdateEffect(() => {
     handlePreview();
@@ -225,23 +193,59 @@ const QuestionNarrator = ({
     ...getAnimationOptions(),
   };
 
-  const getPosition = () => {
-    if (dragPosition) {
-      return {
-        x: dragPosition.x,
-        y: Math.min(
-          height !== 0 ? height - 100 : Number.POSITIVE_INFINITY,
-          dragPosition.y,
-        ),
-      };
+  const handleSaveOffset = (x, y) => {
+    const containerWidthWithBorders = width + 2;
+    const scaleX = Math.max(
+      1,
+      elements.draggableContainerSize / containerWidthWithBorders,
+    );
+    if (scaleX > 1) {
+      const isPeedyOnTheRightHandSide = x > 0.5 * containerWidthWithBorders;
+      const peedySizeOffset = isPeedyOnTheRightHandSide
+        ? PEEDY_SIZE.width * scaleX - PEEDY_SIZE.width
+        : 0;
+      setOffset(Math.ceil(x * scaleX + peedySizeOffset), y);
+    } else {
+      setOffset(x, y);
     }
   };
 
+  const getPosition = () => {
+    const posY = Math.min(
+      height !== 0 ? height - 100 : Number.POSITIVE_INFINITY,
+      animationPositionStored.y,
+    );
+    const containerWidthWithBorders = width + 2;
+    const scaleX = Math.min(
+      1,
+      containerWidthWithBorders / elements.draggableContainerSize,
+    );
+
+    if (scaleX >= 1) {
+      return {
+        x: animationPositionStored.x,
+        y: posY,
+      };
+    }
+
+    const isPeedyOnTheRightHandSide =
+      animationPositionStored.x > 0.5 * elements.draggableContainerSize;
+    const peedySizeOffset = isPeedyOnTheRightHandSide
+      ? PEEDY_SIZE.width - PEEDY_SIZE.width * scaleX
+      : 0;
+    return {
+      x: Math.min(
+        Math.floor(animationPositionStored.x * scaleX - peedySizeOffset),
+        elements.draggableContainerSize - PEEDY_SIZE.width,
+      ),
+      y: posY,
+    };
+  };
+
   return (
-    <NarratorContainer canBeDragged={draggable}>
+    <NarratorContainer canBeDragged={draggable} width={PEEDY_SIZE.width}>
       <Draggable
-        onStop={(_, { x, y }) => setOffset(x, y)}
-        onDrag={(_, { x, y }) => setDragPosition({ x, y })}
+        onStop={(_, { x, y }) => handleSaveOffset(x, y)}
         position={getPosition()}
         disabled={!draggable}
         bounds="parent"
@@ -251,8 +255,8 @@ const QuestionNarrator = ({
             <Lottie
               ref={animationRef}
               options={defaultOptions}
-              height={100}
-              width={100}
+              height={PEEDY_SIZE.height}
+              width={PEEDY_SIZE.width}
               style={lottieStyles}
               isClickToPauseDisabled
               isStopped={

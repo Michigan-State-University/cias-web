@@ -13,7 +13,11 @@ export const NarratorContainer = styled.div`
           width: 0%`}
 
   > div {
-    width: 100px;
+    width: ${({ width }) => `${width}px`};
     cursor: ${props => (props.canBeDragged ? 'grab' : 'default')};
   }
 `;
+
+export const lottieStyles = {
+  margin: 'none',
+};

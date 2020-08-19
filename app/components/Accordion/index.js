@@ -33,9 +33,8 @@ const Accordion = ({
     const { children: content, label, color, onDelete } = child.props;
 
     return (
-      <div>
+      <div key={`accordion-${index}`}>
         <Collapse
-          key={`accordion-${index}`}
           onToggle={handleToggle(index)}
           isOpened={opened === index}
           label={label}
