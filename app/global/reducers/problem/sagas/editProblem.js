@@ -17,7 +17,7 @@ function* editProblem() {
   try {
     const {
       data: { data },
-    } = yield axios.patch(requestURL, problem);
+    } = yield axios.patch(requestURL, { problem });
     const mappedData = defaultMapper(data);
 
     yield put(editProblemSuccess(mappedData));

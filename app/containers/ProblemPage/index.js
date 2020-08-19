@@ -18,7 +18,6 @@ import Loader from 'components/Loader';
 import SingleTile from 'components/SingleTile';
 import TileRenderer from 'components/TileRenderer';
 import search from 'assets/svg/search.svg';
-import StatusFilter from 'containers/ProblemDetailsPage/StatusFilter';
 import useFilter from 'utils/useFilter';
 import { Input } from 'components/Input';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -36,6 +35,7 @@ import {
   makeSelectProblemLoader,
 } from 'global/reducers/problem';
 
+import StatusFilter from './StatusFilter';
 import { InitialRow } from './styled';
 import messages from './messages';
 

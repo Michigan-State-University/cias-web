@@ -208,7 +208,7 @@ exports[`<ProblemSettingsPage /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
               <button
-                class="StyledButton-t20ntd-0 cvUSQJ"
+                class="StyledButton-t20ntd-0 hKsdqA"
                 color="primary"
                 disabled=""
                 width="180"

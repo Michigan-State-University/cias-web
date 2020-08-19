@@ -67,7 +67,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <button
-          class="StyledButton-t20ntd-0 gRivLX"
+          class="StyledButton-t20ntd-0 dDRERJ"
           color="primary"
           height="46"
           type="submit"

@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
+import get from 'lodash/get';
 import Reorder, { reorder } from 'react-reorder';
 
 import { StyledInput } from 'components/Input/StyledInput';
@@ -23,11 +24,13 @@ import BackButton from 'components/BackButton';
 import ShareBox from 'containers/ShareBox';
 import TextButton from 'components/Button/TextButton';
 import Text from 'components/Text';
+import Dropdown from 'components/Dropdown';
 import {
   fetchProblemRequest,
   makeSelectProblemState,
   editProblemRequest,
   problemReducer,
+  sendProblemCsvRequest,
   reorderInterventionList,
 } from 'global/reducers/problem';
 import { createInterventionRequest } from 'global/reducers/intervention';
@@ -40,11 +43,15 @@ import injectSaga from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { colors } from 'theme';
 import appStages from 'global/appStages';
+import globalMessages from 'global/i18n/globalMessages';
 
+import { StatusLabel, InterventionOptions } from './styled';
 import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
+import InterventionStatusButtons from './components/InterventionStatusButtons';
 import InterventionListItem from './components/InterventionListItem';
 import messages from './messages';
+import { updateStatuses, options } from './utils';
 
 const mockSetting =
   'Anyone who is a registered participant can access the session';
@@ -52,7 +59,7 @@ const mockSetting =
 export function ProblemDetailsPage({
   intl: { formatMessage },
   createIntervention,
-  editName,
+  editProblem,
   fetchProblem,
   match: {
     params: { problemId },
@@ -64,6 +71,7 @@ export function ProblemDetailsPage({
   },
   interventionIndex,
   changeInterventionIndex,
+  sendCsv,
   reorderInterventions,
 }) {
   useInjectReducer({
@@ -75,11 +83,19 @@ export function ProblemDetailsPage({
     reducer: localStateReducer,
   });
 
-  const { interventions, name, id } = problem || {};
+  const { interventions, name, id, status } = problem || {};
 
   useLayoutEffect(() => {
     fetchProblem(problemId);
   }, []);
+
+  const editName = val => editProblem({ path: 'name', value: val });
+  const handleChangeStatus = () =>
+    editProblem({
+      path: 'status_event',
+      value: get(updateStatuses, status, ''),
+    });
+  const handleSendCsv = () => sendCsv(id);
 
   const handleReorder = (event, previousIndex, nextIndex) => {
     const newList = reorder(interventions, previousIndex, nextIndex);
@@ -140,43 +156,60 @@ export function ProblemDetailsPage({
 
   return (
     <Box height="100%" width="100%" padding="60px 160px">
-      <Row>
+      <Row justify="between">
         <BackButton to="/">
           <FormattedMessage {...messages.back} />
         </BackButton>
       </Row>
-      <Row my={18}>
-        <StyledInput
-          ml={-12}
-          px={12}
-          py={6}
-          width="400px"
-          value={name}
-          fontSize={23}
-          placeholder={formatMessage(messages.placeholder)}
-          onBlur={val => editName({ path: 'name', value: val })}
-          maxWidth="none"
-        />
+      <Row my={18} justify="between">
+        <Row align="center">
+          <Box mr={15}>
+            <StatusLabel status={status}>
+              {status && formatMessage(globalMessages.statuses[status])}
+            </StatusLabel>
+          </Box>
+          <StyledInput
+            ml={-12}
+            px={12}
+            py={6}
+            width="400px"
+            value={name}
+            fontSize={23}
+            placeholder={formatMessage(messages.placeholder)}
+            onBlur={editName}
+            maxWidth="none"
+          />
+        </Row>
+        <Row>
+          <InterventionStatusButtons
+            status={status}
+            handleChangeStatus={handleChangeStatus}
+            handleSendCsv={handleSendCsv}
+          />
+          <InterventionOptions>
+            <Dropdown options={options} clickable />
+          </InterventionOptions>
+        </Row>
+      </Row>
+      <Row
+        bg={colors.linkWater}
+        borderRadius={10}
+        py={15}
+        px={20}
+        align="center"
+        width="fit-content"
+      >
+        <Text fontWeight="bold" mr={12}>
+          {mockSetting}
+        </Text>
+        <Link to={`/interventions/${id}/settings`}>
+          <TextButton>
+            <FormattedMessage {...messages.adjust} />
+          </TextButton>
+        </Link>
       </Row>
       <Row>
         <Column sm={6}>
-          <Row
-            bg={colors.linkWater}
-            borderRadius={10}
-            py={15}
-            px={20}
-            align="center"
-            width="fit-content"
-          >
-            <Text fontWeight="bold" mr={12}>
-              {mockSetting}
-            </Text>
-            <Link to={`/interventions/${id}/settings`}>
-              <TextButton>
-                <FormattedMessage {...messages.adjust} />
-              </TextButton>
-            </Link>
-          </Row>
           {renderList()}
           <Row my={18} align="center">
             <InterventionCreateButton
@@ -185,7 +218,7 @@ export function ProblemDetailsPage({
           </Row>
         </Column>
         {process.env.APP_STAGE === appStages.dev.id && (
-          <Column ml={38} sm={6}>
+          <Column ml={38} sm={6} mt={18}>
             <Column position="sticky" top="100px">
               <ShareBox />
             </Column>
@@ -207,9 +240,10 @@ ProblemDetailsPage.propTypes = {
     fetchProblemLoading: PropTypes.bool,
   }),
   match: PropTypes.object,
-  editName: PropTypes.func,
+  editProblem: PropTypes.func,
   interventionIndex: PropTypes.number,
   changeInterventionIndex: PropTypes.func,
+  sendCsv: PropTypes.func,
   reorderInterventions: PropTypes.func,
 };
 
@@ -221,8 +255,9 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   createIntervention: createInterventionRequest,
   fetchProblem: fetchProblemRequest,
-  editName: editProblemRequest,
+  editProblem: editProblemRequest,
   changeInterventionIndex: changeCurrentIntervention,
+  sendCsv: sendProblemCsvRequest,
   reorderInterventions: reorderInterventionList,
 };
 

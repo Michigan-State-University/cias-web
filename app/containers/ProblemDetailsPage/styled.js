@@ -1,26 +1,25 @@
 import styled from 'styled-components';
-import { themeColors, colors, boxShadows } from 'theme';
+import { colors, boxShadows } from 'theme';
+import { statusTypeToColorMap } from 'models/Status/StatusTypes';
 
-export const StatusLabel = styled.button`
-  border: none;
+export const InterventionOptions = styled.div`
+  margin-left: 25px;
   display: flex;
-  padding: 5px 10px;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 16px;
+  flex-direction: column;
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${colors.white};
   border-radius: 5px;
-  background: ${props =>
-    props.active ? themeColors.primary : props.color || themeColors.highlight};
-  color: ${props => props.active && colors.white};
   box-shadow: ${boxShadows.selago};
-  transition: 0.3s;
-  &:hover {
-    cursor: pointer;
-    background: ${themeColors.primary};
-    color: ${colors.white};
-  }
-  &:focus {
-    outline: none;
-    outline-offset: 0px;
-  }
+`;
+
+export const StatusLabel = styled.div`
+  color: white;
+  padding: 7px 10px;
+  border-radius: 5px;
+  background: ${props => statusTypeToColorMap[props.status]};
+  display: inline-block;
+  margin-left: 5px;
 `;

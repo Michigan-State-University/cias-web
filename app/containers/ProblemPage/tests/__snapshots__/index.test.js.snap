@@ -24,7 +24,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
         width="250"
       >
         <button
-          class="styled__StatusLabel-sc-132k507-0 glAVLl"
+          class="styled__StatusLabel-sc-14fow03-1 MhfPP"
           color="#BDC7D6"
           value="draft"
         >
@@ -33,7 +33,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           </p>
         </button>
         <button
-          class="styled__StatusLabel-sc-132k507-0 gamNkz"
+          class="styled__StatusLabel-sc-14fow03-1 fKcBVQ"
           color="#8CBD00"
           value="published"
         >
@@ -42,7 +42,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           </p>
         </button>
         <button
-          class="styled__StatusLabel-sc-132k507-0 bIGkyp"
+          class="styled__StatusLabel-sc-14fow03-1 kHEHTZ"
           color="#F0684A"
           value="closed"
         >
