@@ -148,11 +148,7 @@ export function ProblemDetailsPage({
   if (fetchProblemLoading) return <Loader />;
 
   if (fetchProblemError)
-    return (
-      <Box>
-        <ErrorAlert errorText={fetchProblemError} />
-      </Box>
-    );
+    return <ErrorAlert errorText={fetchProblemError} fullPage />;
 
   return (
     <Box height="100%" width="100%" padding="60px 160px">

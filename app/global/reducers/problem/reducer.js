@@ -23,7 +23,7 @@ export const initialState = {
     problem: null,
   },
   loaders: {
-    fetchProblemLoading: false,
+    fetchProblemLoading: true,
     createProblemLoading: false,
     sendCsvLoading: false,
   },

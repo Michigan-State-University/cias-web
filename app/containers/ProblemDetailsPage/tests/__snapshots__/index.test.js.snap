@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ProblemDetailsPage /> Should render and match the snapshot 1`] = `
+exports[`<ProblemDetailsPage /> Should render loader and match the snapshot 1`] = `
 <div>
   <div
     class="styled__FillScreenLoader-tle2yi-0 jcBUSp"
