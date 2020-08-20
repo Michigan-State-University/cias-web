@@ -3,8 +3,14 @@ import { createInterventionSaga } from 'global/reducers/intervention/sagas';
 import {
   editProblemSaga,
   fetchProblemSaga,
+  sendProblemCsvSaga,
 } from 'global/reducers/problem/sagas';
 
 export default function* problemDetailsPageSagas() {
-  yield all([createInterventionSaga(), fetchProblemSaga(), editProblemSaga()]);
+  yield all([
+    createInterventionSaga(),
+    fetchProblemSaga(),
+    editProblemSaga(),
+    sendProblemCsvSaga(),
+  ]);
 }
