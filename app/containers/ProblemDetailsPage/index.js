@@ -187,23 +187,25 @@ export function ProblemDetailsPage({
           </InterventionOptions>
         </Row>
       </Row>
-      <Row
-        bg={colors.linkWater}
-        borderRadius={10}
-        py={15}
-        px={20}
-        align="center"
-        width="fit-content"
-      >
-        <Text fontWeight="bold" mr={12}>
-          {mockSetting}
-        </Text>
-        <Link to={`/interventions/${id}/settings`}>
-          <TextButton>
-            <FormattedMessage {...messages.adjust} />
-          </TextButton>
-        </Link>
-      </Row>
+      {process.env.APP_STAGE === appStages.dev.id && (
+        <Row
+          bg={colors.linkWater}
+          borderRadius={10}
+          py={15}
+          px={20}
+          align="center"
+          width="fit-content"
+        >
+          <Text fontWeight="bold" mr={12}>
+            {mockSetting}
+          </Text>
+          <Link to={`/interventions/${id}/settings`}>
+            <TextButton>
+              <FormattedMessage {...messages.adjust} />
+            </TextButton>
+          </Link>
+        </Row>
+      )}
       <Row>
         <Column sm={6}>
           {renderList()}
