@@ -84,29 +84,6 @@ const ApprovableInput = props => {
     }
   }, [focused, ref.current]);
 
-  const blockQuillBlur = () => {
-    const preventDefault = event => event.preventDefault();
-    const toolbar = quillRef.current.editor.container.querySelector(
-      '.ql-toolbar',
-    );
-
-    const block = () => toolbar.addEventListener('mousedown', preventDefault);
-    const clean = () =>
-      toolbar.removeEventListener('mousedown', preventDefault);
-
-    block();
-
-    return clean;
-  };
-
-  useEffect(() => {
-    if (richText && focused) {
-      const clean = blockQuillBlur();
-
-      return clean;
-    }
-  }, [focused, quillRef.current]);
-
   useEffect(() => {
     setValue(propsValue);
   }, [propsValue]);

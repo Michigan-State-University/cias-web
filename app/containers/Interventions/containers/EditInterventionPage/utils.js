@@ -15,9 +15,6 @@ import Question from 'models/Intervention/Question';
 import { splitAndKeep } from 'utils/splitAndKeep';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
-import { splitAndKeep } from 'utils/splitAndKeep';
-import { htmlToPlainText } from 'utils/htmlToPlainText';
-
 export const instantiateEmptyQuestion = (message, type) => {
   switch (type) {
     case singleQuestion.id:
@@ -174,18 +171,4 @@ const getDataTTS = (type, questionData, delimiters) => {
     default:
       return [];
   }
-};
-
-export const getFromQuestionTTS = question => {
-  const delimiters = [',', '.', '?', '!'];
-
-  const titleTTS = question.title
-    ? splitAndKeep(htmlToPlainText(question.title), delimiters)
-    : [];
-  const subtileTTS = question.subtitle
-    ? splitAndKeep(htmlToPlainText(question.subtitle), delimiters)
-    : [];
-  const dataTTS = getDataTTS(question.type, question.body.data, delimiters);
-
-  return concat(titleTTS, subtileTTS, dataTTS);
 };

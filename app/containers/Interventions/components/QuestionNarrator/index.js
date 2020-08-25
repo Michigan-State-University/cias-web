@@ -32,23 +32,6 @@ import {
 import { PEEDY_SIZE } from './utils';
 import { reducer, initialState, UPDATE } from './reducer';
 
-const UPDATE = 'UPDATE';
-
-const reducer = (state, action) => {
-  const { type, newState } = action;
-  switch (type) {
-    case UPDATE:
-      return newState;
-    default:
-      return state;
-  }
-};
-
-const initialState = {
-  currentData: null,
-  currentBlockIndex: 0,
-};
-
 const QuestionNarrator = ({
   questionId,
   draggable,
