@@ -18,10 +18,9 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
     );
   }, [id]);
 
-  const check = (payload, value, name, index) => {
+  const check = (value, name, index) => {
     const selectedAnswer = {
       var: name,
-      payload,
       value,
       index,
     };

@@ -19,8 +19,8 @@ export const createInterventionSuccess = () =>
 export const createInterventionError = () =>
   actionBuilder(CREATE_INTERVENTION_ERROR, {});
 
-export const getInterventionRequest = id =>
-  actionBuilder(GET_INTERVENTION_REQUEST, { id });
+export const getInterventionRequest = payload =>
+  actionBuilder(GET_INTERVENTION_REQUEST, payload);
 export const getInterventionSuccess = intervention =>
   actionBuilder(GET_INTERVENTION_SUCCESS, { intervention });
 export const getInterventionError = error =>

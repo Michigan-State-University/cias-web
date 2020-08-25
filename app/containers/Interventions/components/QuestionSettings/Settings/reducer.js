@@ -17,34 +17,10 @@ import {
   REMOVE_BLOCK,
   SWITCH_SPEECH_REFLECTION,
   UPDATE_REFLECTION,
+  REORDER_NARRATOR_BLOCKS,
 } from './constants';
 
-const getStartAnimationPoint = (
-  allQuestions,
-  questionIndex,
-  currentQuestion,
-) => {
-  const { blocks } = currentQuestion.narrator;
-  // if first question and there is no blocks
-  if (questionIndex === 0 && blocks.length === 0) {
-    return { x: 0, y: 0 };
-  }
-  // if question already has blocks return position of the last block
-  if (blocks.length !== 0) {
-    return blocks[blocks.length - 1].position.posTo;
-  }
-  // if it's new question
-  for (let i = allQuestions.length - 1; i >= 0; i -= 1) {
-    const {
-      narrator: { blocks: previousQuestionBlocks },
-    } = allQuestions[i];
-    const lastBlock = previousQuestionBlocks[previousQuestionBlocks.length - 1];
-    if (lastBlock) {
-      return lastBlock.position.posTo;
-    }
-  }
-  return { x: 0, y: 0 };
-};
+import { reorderBlocksPositions, getStartAnimationPoint } from '../utils';
 
 /* eslint-disable default-case, no-param-reassign */
 const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
@@ -79,7 +55,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
           ...question.narrator,
           blocks: [
             ...question.narrator.blocks,
-            instantiateBlockForType(payload.data.type, pos),
+            instantiateBlockForType(payload.data.type, pos, question),
           ],
         },
       };
@@ -212,6 +188,22 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
         narrator: {
           ...question.narrator,
           blocks: cloneBlocks,
+        },
+      };
+    }
+
+    case REORDER_NARRATOR_BLOCKS: {
+      const { reorderedBlocks, previousIndex, nextIndex } = payload.data;
+
+      return {
+        ...question,
+        narrator: {
+          ...question.narrator,
+          blocks: reorderBlocksPositions(
+            reorderedBlocks,
+            previousIndex,
+            nextIndex,
+          ),
         },
       };
     }

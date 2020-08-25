@@ -4,19 +4,20 @@
  *
  */
 
-import React, { memo, useState, useEffect, useRef } from 'react';
+import React, { memo, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
+import { compose } from 'redux';
 
 import UserAvatar from 'components/UserAvatar';
 import Box from 'components/Box';
 import Row from 'components/Row';
 import Img from 'components/Img';
 
-import { outsideClickHandler } from 'utils/outsideClickHandler';
+import useOutsideClick from 'utils/useOutsideClick';
 import { makeSelectUser } from 'global/reducers/auth';
 import InterventionsNavbar from './components/InterventionsNavbar';
 
@@ -25,6 +26,8 @@ import {
   RightPanel,
   DropDownContainer,
   DropDownContent,
+  StyledRow,
+  StyledComment,
 } from './styled';
 import messages from './messages';
 import content from './dropdownContent';
@@ -46,38 +49,38 @@ export function Navbar({
   navbarProps,
   match,
   location,
+  intl,
 }) {
   const [menuVisible, setMenuVisible] = useState(false);
   const dropdownRef = useRef(null);
-  useEffect(() => {
-    if (menuVisible) {
-      const cleanUp = outsideClickHandler(dropdownRef, () =>
-        setMenuVisible(false),
-      );
-
-      return cleanUp;
-    }
-  }, [menuVisible]);
+  useOutsideClick(dropdownRef, () => setMenuVisible(false), menuVisible);
   return (
     <NavbarStyled>
-      {renderNavbar({ ...navbarProps, match, location })}
+      {renderNavbar({ ...navbarProps, match, location, intl })}
       <RightPanel onClick={() => !menuVisible && setMenuVisible(true)}>
         <DropDownContainer>
           <UserAvatar lastName={lastName} firstName={firstName} />
-          {menuVisible && (
-            <DropDownContent ref={dropdownRef}>
-              {content[roles[0]].map(({ url, messagesKey, icon }, index) => (
-                <div key={index} onClick={() => setMenuVisible(false)}>
-                  <Link to={url}>
-                    <Row>
-                      <Img mr={13} src={icon} />
-                      <FormattedMessage {...messages[messagesKey]} />
-                    </Row>
-                  </Link>
-                </div>
-              ))}
-            </DropDownContent>
-          )}
+          <div ref={dropdownRef}>
+            {menuVisible && (
+              <DropDownContent>
+                {content[roles[0]].map(({ url, messagesKey, icon }, index) => (
+                  <StyledRow key={index} onClick={() => setMenuVisible(false)}>
+                    <Link to={url}>
+                      <Row>
+                        <Img mr={13} src={icon} />
+                        <StyledComment>
+                          <FormattedMessage
+                            {...messages[messagesKey]}
+                            title={intl.formatMessage(messages[messagesKey])}
+                          />
+                        </StyledComment>
+                      </Row>
+                    </Link>
+                  </StyledRow>
+                ))}
+              </DropDownContent>
+            )}
+          </div>
         </DropDownContainer>
         <Box clickable>{`${firstName} ${lastName}`}</Box>
       </RightPanel>
@@ -96,10 +99,16 @@ Navbar.propTypes = {
   }),
   match: PropTypes.object,
   location: PropTypes.object,
+  intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
 });
 
-export default memo(connect(mapStateToProps)(Navbar));
+export default memo(
+  compose(
+    connect(mapStateToProps),
+    injectIntl,
+  )(Navbar),
+);

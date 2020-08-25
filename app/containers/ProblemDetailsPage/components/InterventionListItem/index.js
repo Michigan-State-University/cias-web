@@ -14,52 +14,39 @@ import H2 from 'components/H2';
 import Dropdown from 'components/Dropdown';
 import Divider from 'components/Divider';
 
-import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
-import archive from 'assets/svg/archive.svg';
-
 import { colors } from 'theme';
 import appStages from 'global/appStages';
+
+import InterventionSchedule from '../InterventionSchedule';
 import messages from './messages';
 import { InterventionIndex, StyledLink, ToggleableBox } from './styled';
-import InterventionListBranching from '../InterventionListBranching';
+import InterventionBranching from '../InterventionBranching';
 
 function InterventionListItem({
-  intl: { formatMessage },
   intervention,
   index,
   isSelected,
+  handleClick,
+  intl: { formatMessage },
   nextInterventionName,
+  handleCopyIntervention,
 }) {
   const [branching, setBranching] = useState(false);
   const { id, name, problem_id: problemId } = intervention || {};
 
   const options = [
     {
-      id: 'copy',
-      label: formatMessage(messages.copy),
-      icon: fileShare,
-      action: () => {},
-      color: colors.bluewood,
-    },
-    {
       id: 'duplicate',
       label: formatMessage(messages.duplicate),
       icon: copy,
-      action: () => {},
-      color: colors.bluewood,
-    },
-    {
-      id: 'archive',
-      label: formatMessage(messages.archive),
-      icon: archive,
-      action: () => {},
+      action: () => handleCopyIntervention(id),
       color: colors.bluewood,
     },
   ];
 
   return (
-    <ToggleableBox isSelected={isSelected}>
+    <ToggleableBox isSelected={isSelected} onClick={handleClick} clickable>
       <Row py={21} px={16} align="center" justify="between">
         <Column xs={1}>
           <InterventionIndex>{index + 1}</InterventionIndex>
@@ -77,10 +64,15 @@ function InterventionListItem({
       </Row>
       {process.env.APP_STAGE === appStages.dev.id && (
         <>
+          {index !== 0 && (
+            <Row px={62}>
+              <InterventionSchedule />
+            </Row>
+          )}
           <Row px={62}>
             <Divider />
           </Row>
-          <InterventionListBranching
+          <InterventionBranching
             nextInterventionName={nextInterventionName}
             branching={branching}
             handleBranching={setBranching}
@@ -95,8 +87,10 @@ InterventionListItem.propTypes = {
   intervention: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   isSelected: PropTypes.bool,
+  handleClick: PropTypes.func,
   nextInterventionName: PropTypes.string,
   intl: PropTypes.object,
+  handleCopyIntervention: PropTypes.func,
 };
 
 export default injectIntl(InterventionListItem);

@@ -21,10 +21,12 @@ const NumberQuestion = ({
   } = question;
 
   const onChange = event => {
-    selectAnswer({
-      var: name,
-      payload: parseInt(event, 10),
-    });
+    selectAnswer([
+      {
+        var: name,
+        value: parseInt(event, 10),
+      },
+    ]);
   };
 
   const onValidation = validationResult =>
@@ -37,7 +39,7 @@ const NumberQuestion = ({
     <NumberQuestionLayout
       formatMessage={formatMessage}
       onChange={onChange}
-      answerBody={answerBody}
+      answerBody={answerBody[0]}
       onValidation={onValidation}
     />
   );

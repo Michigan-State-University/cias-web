@@ -41,7 +41,6 @@ function* submitAnswersAsync({
     if (!data.length) {
       data = [
         {
-          payload: '',
           value: '',
           var: '',
         },

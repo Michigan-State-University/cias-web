@@ -1,4 +1,6 @@
-const decideIfPassValue = (index, array, margin) =>
-  index !== array.length - 1 ? margin : null;
+const decideIfPassValue = ({ index, arrayLength, value, omit = 'end' }) => {
+  const indexToOmit = omit === 'end' ? arrayLength - 1 : 0;
+  return index !== indexToOmit ? value : null;
+};
 
 export default decideIfPassValue;

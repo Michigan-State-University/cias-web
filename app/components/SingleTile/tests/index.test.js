@@ -9,9 +9,11 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
-import { MemoryRouter } from 'react-router-dom';
+import { browserHistory, MemoryRouter } from 'react-router-dom';
 import 'jest-styled-components';
 
+import configureStore from 'configureStore';
+import { Provider } from 'react-redux';
 import SingleTile from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 
@@ -25,25 +27,35 @@ const defaultProps = {
 };
 
 describe('<SingleTile />', () => {
+  let store;
+
+  beforeAll(() => {
+    store = configureStore({}, browserHistory);
+  });
+
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <MemoryRouter>
-          <SingleTile {...defaultProps} />
-        </MemoryRouter>
-      </IntlProvider>,
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <MemoryRouter>
+            <SingleTile {...defaultProps} />
+          </MemoryRouter>
+        </IntlProvider>
+      </Provider>,
     );
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('Should render and match the snapshot', () => {
     const { container } = render(
-      <IntlProvider locale={DEFAULT_LOCALE}>
-        <MemoryRouter>
-          <SingleTile {...defaultProps} />
-        </MemoryRouter>
-      </IntlProvider>,
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <MemoryRouter>
+            <SingleTile {...defaultProps} />
+          </MemoryRouter>
+        </IntlProvider>
+      </Provider>,
     );
     expect(container).toMatchSnapshot();
   });

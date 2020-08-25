@@ -27,7 +27,7 @@ import {
   updatePreviewAnimation,
 } from 'containers/Interventions/containers/EditInterventionPage/actions';
 import { makeSelectPreviewData } from 'containers/Interventions/components/QuestionNarrator/selectors';
-import { speechType } from 'models/Narrator/BlockTypes';
+import { speechType, readQuestionBlockType } from 'models/Narrator/BlockTypes';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { speechAnimations } from 'utils/animations/animationsNames';
@@ -106,7 +106,11 @@ const SpeechBlock = ({
 
   return (
     <Column>
-      <Box mt={15}>{formatMessage(globalMessages.blockTypes[block.type])}</Box>
+      {block.type !== readQuestionBlockType && (
+        <Box mt={15}>
+          {formatMessage(globalMessages.blockTypes[block.type])}
+        </Box>
+      )}
       <Box mt={15}>
         <Select
           selectProps={{
@@ -116,30 +120,37 @@ const SpeechBlock = ({
           }}
         />
       </Box>
-      <Row mt={15} align="center" justify="between">
-        {formatMessage(messages.reflectionToggle)}
-        <Switch mr={15} onToggle={() => switchToReflection(blockIndex, id)} />
-      </Row>
-      <Box position="relative">
-        <Box mt={15} bg={colors.linkWater} width="100%">
-          <StyledInput
-            type="multiline"
-            rows="10"
-            placeholder={formatMessage(messages.speechPlaceholder)}
-            value={text}
-            onBlur={handleBlur}
-            onFocus={() => setHasFocus(true)}
-          />
-        </Box>
-        <Box
-          position="absolute"
-          bottom={BUTTON_MARGIN}
-          right={BUTTON_MARGIN}
-          hidden={hasFocus}
-        >
-          {renderButton()}
-        </Box>
-      </Box>
+      {block.type !== readQuestionBlockType && (
+        <>
+          <Row mt={15} align="center" justify="between">
+            {formatMessage(messages.reflectionToggle)}
+            <Switch
+              mr={15}
+              onToggle={() => switchToReflection(blockIndex, id)}
+            />
+          </Row>
+          <Box position="relative">
+            <Box mt={15} bg={colors.linkWater} width="100%">
+              <StyledInput
+                type="multiline"
+                rows="10"
+                placeholder={formatMessage(messages.speechPlaceholder)}
+                value={text}
+                onBlur={handleBlur}
+                onFocus={() => setHasFocus(true)}
+              />
+            </Box>
+            <Box
+              position="absolute"
+              bottom={BUTTON_MARGIN}
+              right={BUTTON_MARGIN}
+              hidden={hasFocus}
+            >
+              {renderButton()}
+            </Box>
+          </Box>
+        </>
+      )}
     </Column>
   );
 };

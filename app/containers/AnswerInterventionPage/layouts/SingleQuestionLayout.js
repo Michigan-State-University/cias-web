@@ -28,7 +28,7 @@ const SingleQuestionLayout = ({
               py={14}
               width={`calc(100% + ${margin}px)`}
               clickable
-              onClick={() => handleClick(payload, value, index)}
+              onClick={() => handleClick(value, index)}
             >
               <Row align="center" height="44">
                 <Radio checked={isChecked} mr={16} />

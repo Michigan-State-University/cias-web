@@ -18,15 +18,17 @@ const TextBoxQuestion = ({
   } = question;
 
   const onChange = event => {
-    selectAnswer({
-      var: name,
-      payload: event.target.value,
-    });
+    selectAnswer([
+      {
+        var: name,
+        value: event.target.value,
+      },
+    ]);
   };
   return (
     <TextBoxQuestionLayout
       formatMessage={formatMessage}
-      answerBody={answerBody}
+      answerBody={answerBody[0]}
       onChange={onChange}
     />
   );

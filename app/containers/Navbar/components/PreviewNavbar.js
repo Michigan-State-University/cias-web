@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl, intlShape } from 'react-intl';
+import { intlShape } from 'react-intl';
 
 import Box from 'components/Box';
 import CloseIcon from 'components/CloseIcon';
@@ -113,11 +113,9 @@ const mapDispatchToProps = {
   onResetIntervention: resetIntervention,
 };
 
-export const PreviewNavbarWithIntl = injectIntl(PreviewNavbar);
-
 export default compose(
   connect(
     mapStateToProps,
     mapDispatchToProps,
   ),
-)(PreviewNavbarWithIntl);
+)(PreviewNavbar);

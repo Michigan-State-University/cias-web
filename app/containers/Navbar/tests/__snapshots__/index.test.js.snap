@@ -84,6 +84,7 @@ exports[`<Navbar /> Should render and match the snapshot with intervention path 
           TT
         </div>
       </div>
+      <div />
     </div>
     <div
       class="c4"
@@ -178,6 +179,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
           TT
         </div>
       </div>
+      <div />
     </div>
     <div
       class="c4"

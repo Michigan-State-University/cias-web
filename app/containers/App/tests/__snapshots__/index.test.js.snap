@@ -152,6 +152,24 @@ exports[`<App /> should render and match the snapshot 1`] = `
       }
       path="/interventions/:problemId/sessions/:interventionId/preview/:index"
       protectedRoute={true}
+      user={true}
+    />
+    <Memo(ConnectFunction)
+      allowedRoles={
+        Array [
+          "admin",
+          "researcher",
+        ]
+      }
+      component={[Function]}
+      exact={true}
+      navbarProps={
+        Object {
+          "navbarId": "default",
+        }
+      }
+      path="/interventions/:problemId/settings"
+      protectedRoute={true}
     />
     <Memo(ConnectFunction)
       allowedRoles={

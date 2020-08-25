@@ -22,6 +22,7 @@ const colors = {
   casper: '#ABBBD1',
   surfieGreen: '#107969',
   selago: '#E3EEFB',
+  electricViolet: '#B302FF',
 };
 
 const themeColors = {

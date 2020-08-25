@@ -51,10 +51,9 @@ const GridQuestion = ({
     }
   }, [selectedAnswersIndex, updated]);
 
-  const check = (payload, value, name, rowIndex, columnIndex) => {
+  const check = (value, name, rowIndex, columnIndex) => {
     const selectedAnswer = {
       var: name,
-      payload,
       value,
       index: {
         [rowIndex]: columnIndex,

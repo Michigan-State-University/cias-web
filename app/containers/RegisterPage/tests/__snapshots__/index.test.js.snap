@@ -5,26 +5,26 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
   class="Fill-sc-1f4o7x0-0 dHXeMo"
 >
   <div
-    class="Column-sc-1n6divy-0 bUUVwz"
+    class="Column-sc-1n6divy-0 hHeAfP"
   >
     <div
       class="Card-v952e1-0 dvaqLP"
       width="100%"
     >
       <div
-        class="Column-sc-1n6divy-0 bzgxko"
+        class="Column-sc-1n6divy-0 dmVPOe"
       >
         <span>
           Register
         </span>
         <div
-          class="Column-sc-1n6divy-0 iMkjcA"
+          class="Column-sc-1n6divy-0 gkaWeP"
         >
           <p
             class="Text-sc-2lza2m-0 jdGrCy"
           />
           <input
-            class="Input-sc-19txxuq-0 bSnPKz"
+            class="Input-sc-19txxuq-0 bzUIEQ"
             name="firstName"
             placeholder="First name"
             type="text"
@@ -32,13 +32,13 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 iMkjcA"
+          class="Column-sc-1n6divy-0 gkaWeP"
         >
           <p
             class="Text-sc-2lza2m-0 jdGrCy"
           />
           <input
-            class="Input-sc-19txxuq-0 bSnPKz"
+            class="Input-sc-19txxuq-0 bzUIEQ"
             name="lastName"
             placeholder="Last name"
             type="text"
@@ -46,13 +46,13 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 iMkjcA"
+          class="Column-sc-1n6divy-0 gkaWeP"
         >
           <p
             class="Text-sc-2lza2m-0 jdGrCy"
           />
           <input
-            class="Input-sc-19txxuq-0 bSnPKz"
+            class="Input-sc-19txxuq-0 bzUIEQ"
             name="email"
             placeholder="Email"
             type="email"
@@ -60,13 +60,13 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 iMkjcA"
+          class="Column-sc-1n6divy-0 gkaWeP"
         >
           <p
             class="Text-sc-2lza2m-0 jdGrCy"
           />
           <input
-            class="Input-sc-19txxuq-0 bSnPKz"
+            class="Input-sc-19txxuq-0 bzUIEQ"
             name="password"
             placeholder="Password"
             type="password"
@@ -74,13 +74,13 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 iMkjcA"
+          class="Column-sc-1n6divy-0 gkaWeP"
         >
           <p
             class="Text-sc-2lza2m-0 jdGrCy"
           />
           <input
-            class="Input-sc-19txxuq-0 bSnPKz"
+            class="Input-sc-19txxuq-0 bzUIEQ"
             name="passwordConfirmation"
             placeholder="Password confirmation"
             type="password"
@@ -88,7 +88,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <button
-          class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 bdIUUI"
+          class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 iDyndk"
           color="primary"
         >
           Register
@@ -97,7 +97,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           href="/login"
         >
           <button
-            class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 bdIUUI"
+            class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 iDyndk"
             color="primary"
           >
             I already have an account

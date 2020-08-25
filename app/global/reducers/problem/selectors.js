@@ -1,22 +1,22 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const problem = state => state.problem || initialState;
+export const selectProblem = state => state.problem || initialState;
 
 export const makeSelectProblemState = () =>
   createSelector(
-    problem,
+    selectProblem,
     substate => substate,
   );
 
 export const makeSelectProblem = () =>
   createSelector(
-    problem,
+    selectProblem,
     substate => substate.problem,
   );
 
 export const makeSelectProblemLoader = loader =>
   createSelector(
-    problem,
+    selectProblem,
     substate => substate.loaders[loader],
   );

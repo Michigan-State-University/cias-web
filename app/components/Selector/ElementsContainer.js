@@ -6,36 +6,55 @@ import Column from 'components/Column';
 import Text from 'components/Text';
 import { themeColors, colors, boxShadows } from 'theme';
 
-const ElementsContainer = ({ options, selectedOption }) => (
-  <Column
-    bg={colors.white}
-    shadow={boxShadows.selago}
-    px={20}
-    py={15}
-    align="end"
-  >
-    {options.map(({ label, id }, index) => {
-      const isSelected = id === selectedOption.id;
-      return (
-        <Text
-          key={`el-text-option-${id}`}
-          color={isSelected ? themeColors.secondary : null}
-          mb={decideIfPassValue(index, options, 10)}
-          fontWeight="bold"
-          whiteSpace="nowrap"
-          clickable
-        >
-          {label}
-        </Text>
-      );
-    })}
-  </Column>
-);
+const ElementsContainer = ({
+  options,
+  selectedOption,
+  setOption,
+  toggleActive,
+}) => {
+  const handleSelectOption = id => {
+    toggleActive();
+    setOption(id);
+  };
+
+  return (
+    <Column
+      bg={colors.white}
+      shadow={boxShadows.selago}
+      px={20}
+      py={15}
+      align="end"
+    >
+      {options.map(({ label, id }, index) => {
+        const isSelected = id === selectedOption.id;
+        return (
+          <Text
+            key={`el-text-option-${id}`}
+            color={isSelected ? themeColors.secondary : null}
+            mb={decideIfPassValue({
+              index,
+              arrayLength: options.length,
+              value: 10,
+            })}
+            fontWeight="bold"
+            whiteSpace="nowrap"
+            clickable
+            onClick={() => handleSelectOption(id)}
+          >
+            {label}
+          </Text>
+        );
+      })}
+    </Column>
+  );
+};
 
 ElementsContainer.propTypes = {
   options: PropTypes.arrayOf(
     PropTypes.shape({ id: PropTypes.string, label: PropTypes.string }),
   ),
+  setOption: PropTypes.func,
+  toggleActive: PropTypes.func,
   selectedOption: PropTypes.shape({
     id: PropTypes.string,
     label: PropTypes.string,

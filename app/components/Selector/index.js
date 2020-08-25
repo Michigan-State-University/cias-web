@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Tooltip from 'components/Tooltip';
@@ -6,8 +6,8 @@ import arrowDownSelect from 'assets/svg/arrow-down-select.svg';
 import Box from 'components/Box';
 import Row from 'components/Row';
 import Img from 'components/Img';
-import { outsideClickHandler } from 'utils/outsideClickHandler';
 
+import useOutsideClick from 'utils/useOutsideClick';
 import HeaderContainer from './HeaderContainer';
 import ElementsContainer from './ElementsContainer';
 
@@ -17,26 +17,18 @@ const Selector = ({
   tooltipContent,
   ElementsComponent,
   HeaderComponent,
+  rightPosition,
+  setOption,
 }) => {
   const selector = useRef(null);
-  // this will come from redux and redux will have this value from backend - it is mocked local state
-  // eslint-disable-next-line no-unused-vars
-  const [selectedOption, setSelectedOption] = useState(
-    activeOption || options[0],
-  );
+  useOutsideClick(selector, () => setIsActive(false), isActive);
+
+  const selectedOption = activeOption || options[0];
   const [isActive, setIsActive] = useState(false);
   const transform = isActive ? 'rotate(180deg);' : '';
   const transition = 'transform 0.2s;';
 
   const toggleActive = () => setIsActive(!isActive);
-
-  useEffect(() => {
-    if (isActive) {
-      const cleanUp = outsideClickHandler(selector, () => setIsActive(false));
-
-      return cleanUp;
-    }
-  }, [isActive]);
 
   return (
     <Box position="relative" ref={selector}>
@@ -60,10 +52,17 @@ const Selector = ({
         />
       </Row>
       {isActive && (
-        <Row position="absolute" top="30px" right="0" zIndex={999}>
+        <Row
+          position="absolute"
+          top="30px"
+          right={rightPosition || '0'}
+          zIndex={999}
+        >
           <ElementsComponent
             options={options}
             selectedOption={selectedOption}
+            setOption={setOption}
+            toggleActive={toggleActive}
           />
         </Row>
       )}
@@ -82,6 +81,8 @@ Selector.propTypes = {
   tooltipContent: PropTypes.node,
   HeaderComponent: PropTypes.elementType,
   ElementsComponent: PropTypes.elementType,
+  rightPosition: PropTypes.string,
+  setOption: PropTypes.func,
 };
 
 Selector.defaultProps = {

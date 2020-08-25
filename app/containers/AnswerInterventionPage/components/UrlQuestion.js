@@ -16,7 +16,7 @@ const UrlQuestion = ({ question, selectAnswer }) => {
     selectAnswer([
       {
         var: name,
-        payload: state,
+        value: state,
       },
     ]);
   };

@@ -47,13 +47,7 @@ const CopyToClipboard = ({
       >
         <ReactCopyToClipboard text={textToCopy} onCopy={onCopy}>
           <Row align="center">
-            <Icon
-              src={share}
-              ml={8}
-              mr={10}
-              alt="share"
-              fill={textProps.color}
-            />
+            <Icon src={share} mr={10} alt="share" fill={textProps.color} />
             <Text {...textProps}>{children}</Text>
           </Row>
         </ReactCopyToClipboard>

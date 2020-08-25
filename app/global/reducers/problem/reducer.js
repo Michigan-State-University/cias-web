@@ -1,6 +1,7 @@
 import produce from 'immer';
 import set from 'lodash/set';
 
+import { defaultMapper } from 'utils/mapResponseObjects';
 import {
   FETCH_PROBLEM_REQUEST,
   FETCH_PROBLEM_SUCCESS,
@@ -11,6 +12,11 @@ import {
   EDIT_PROBLEM_REQUEST,
   EDIT_PROBLEM_SUCCESS,
   EDIT_PROBLEM_ERROR,
+  SEND_PROBLEM_CSV_REQUEST,
+  SEND_PROBLEM_CSV_SUCCESS,
+  SEND_PROBLEM_CSV_ERROR,
+  COPY_INTERVENTION_SUCCESS,
+  REORDER_INTERVENTION_LIST,
 } from './constants';
 
 export const initialState = {
@@ -19,8 +25,9 @@ export const initialState = {
     problem: null,
   },
   loaders: {
-    fetchProblemLoading: false,
+    fetchProblemLoading: true,
     createProblemLoading: false,
+    sendCsvLoading: false,
   },
   errors: {
     fetchProblemError: null,
@@ -33,17 +40,19 @@ export const problemReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case FETCH_PROBLEM_REQUEST:
-        draft.fetchProblemLoading = true;
-        draft.fetchProblemError = null;
+        if (state.problem && action.payload.id === state.problem.id) break;
+        draft.loaders.fetchProblemLoading = true;
+        draft.loaders.fetchProblemError = null;
         draft.problem = null;
         break;
       case FETCH_PROBLEM_SUCCESS:
-        draft.fetchProblemLoading = false;
+        draft.loaders.fetchProblemLoading = false;
         draft.problem = action.payload.problem;
+        draft.cache.problem = action.payload.problem;
         break;
       case FETCH_PROBLEM_ERROR:
-        draft.fetchProblemLoading = false;
-        draft.fetchProblemError = action.payload.error;
+        draft.loaders.fetchProblemLoading = false;
+        draft.errors.fetchProblemError = action.payload.error;
         break;
       case CREATE_PROBLEM_REQUEST:
         draft.loaders.createProblemLoading = true;
@@ -63,6 +72,23 @@ export const problemReducer = (state = initialState, action) =>
         break;
       case EDIT_PROBLEM_ERROR:
         draft.problem = draft.cache.problem;
+        break;
+      case SEND_PROBLEM_CSV_REQUEST:
+        draft.loaders.sendCsvLoading = true;
+        break;
+      case SEND_PROBLEM_CSV_SUCCESS:
+        draft.loaders.sendCsvLoading = false;
+        break;
+      case SEND_PROBLEM_CSV_ERROR:
+        draft.loaders.sendCsvLoading = false;
+        break;
+      case COPY_INTERVENTION_SUCCESS:
+        draft.problem.interventions.push(
+          defaultMapper(action.payload.intervention),
+        );
+        break;
+      case REORDER_INTERVENTION_LIST:
+        draft.problem.interventions = action.payload.reorderedList;
         break;
     }
   });

@@ -4,12 +4,15 @@
  *
  */
 
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { Link } from 'react-router-dom';
+import get from 'lodash/get';
+import Reorder, { reorder } from 'react-reorder';
 
 import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
@@ -19,88 +22,255 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import BackButton from 'components/BackButton';
 import ShareBox from 'containers/ShareBox';
+import TextButton from 'components/Button/TextButton';
+import Text from 'components/Text';
+import Dropdown from 'components/Dropdown';
+import Modal from 'components/Modal';
 import {
   fetchProblemRequest,
   makeSelectProblemState,
   editProblemRequest,
   problemReducer,
+  sendProblemCsvRequest,
+  reorderInterventionList,
+  copyInterventionRequest,
 } from 'global/reducers/problem';
 import { createInterventionRequest } from 'global/reducers/intervention';
+import {
+  localStateReducer,
+  makeSelectCurrentInterventionIndex,
+  changeCurrentIntervention,
+} from 'global/reducers/localState';
 import injectSaga from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import problemDetailsPageSagas from 'containers/ProblemDetailsPage/saga';
+import { colors } from 'theme';
 import appStages from 'global/appStages';
-import InterventionListItem from './components/InterventionListItem';
-import InterventionCreateButton from './components/InterventionCreateButton';
+import globalMessages from 'global/i18n/globalMessages';
 
+import fileShare from 'assets/svg/file-share.svg';
+import copy from 'assets/svg/copy.svg';
+import archive from 'assets/svg/archive.svg';
+import { closed } from 'models/Status/StatusTypes';
+import { copyProblemRequest } from 'global/reducers/problems';
+import { StatusLabel, InterventionOptions } from './styled';
+import problemDetailsPageSagas from './saga';
+import InterventionCreateButton from './components/InterventionCreateButton';
+import InterventionStatusButtons from './components/InterventionStatusButtons';
+import InterventionListItem from './components/InterventionListItem';
+import SelectResearchers from './components/SelectResearchers';
 import messages from './messages';
+import { updateStatuses } from './utils';
+
+const mockSetting =
+  'Anyone who is a registered participant can access the session';
 
 export function ProblemDetailsPage({
   intl: { formatMessage },
   createIntervention,
-  editName,
+  editProblem,
   fetchProblem,
   match: {
     params: { problemId },
   },
-  problemState: { problem, fetchProblemLoading, fetchProblemError },
+  problemState: {
+    problem,
+    loaders: { fetchProblemLoading },
+    errors: { fetchProblemError },
+  },
+  interventionIndex,
+  changeInterventionIndex,
+  sendCsv,
+  copyIntervention,
+  reorderInterventions,
+  copyProblem,
 }) {
   useInjectReducer({
     key: 'problem',
     reducer: problemReducer,
   });
+  useInjectReducer({
+    key: 'localState',
+    reducer: localStateReducer,
+  });
 
-  const { interventions, name } = problem || {};
+  const { interventions, name, id, status } = problem || {};
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const closeModal = () => setModalVisible(false);
+  const openModal = () => setModalVisible(true);
+  const handleCopyProblem = () => copyProblem({ problemId: id });
+  const handleArchiveProblem = () =>
+    editProblem({
+      path: 'status_event',
+      value: 'to_archive',
+    });
+
+  const options = [
+    {
+      id: 'copy',
+      label: formatMessage(messages.copy),
+      icon: fileShare,
+      action: openModal,
+      color: colors.bluewood,
+    },
+    {
+      id: 'duplicate',
+      label: formatMessage(messages.duplicate),
+      icon: copy,
+      action: handleCopyProblem,
+      color: colors.bluewood,
+    },
+    {
+      id: 'archive',
+      label: formatMessage(messages.archive),
+      icon: archive,
+      action: handleArchiveProblem,
+
+      color: colors.bluewood,
+    },
+  ];
 
   useLayoutEffect(() => {
     fetchProblem(problemId);
   }, []);
 
+  const availableOptions = options.filter(
+    elem => elem.id !== 'archive' || status === closed,
+  );
+
+  const handleCopyIntervention = interventionId => {
+    copyIntervention({ interventionId });
+  };
+
+  const editName = val => editProblem({ path: 'name', value: val });
+
+  const handleChangeStatus = () =>
+    editProblem({
+      path: 'status_event',
+      value: get(updateStatuses, status, ''),
+    });
+
+  const handleSendCsv = () => sendCsv(id);
+
+  const handleReorder = (event, previousIndex, nextIndex) => {
+    const newList = reorder(interventions, previousIndex, nextIndex);
+    let position = 0;
+    const orderdedNewList = newList.map(question => {
+      position += 1;
+      return {
+        ...question,
+        position,
+      };
+    });
+    reorderInterventions({
+      reorderedList: orderdedNewList,
+      problemId,
+    });
+  };
+
   const renderList = () => (
     <>
-      {interventions &&
-        interventions.map((intervention, index) => (
-          <InterventionListItem
-            key={intervention.id}
-            intervention={intervention}
-            index={index}
-            nextInterventionName={
-              interventions[index + 1] ? interventions[index + 1].name : null
-            }
-          />
-        ))}
+      <Reorder
+        reorderId="problem-list"
+        onReorder={handleReorder}
+        holdTime={125}
+      >
+        {interventions &&
+          interventions.map((intervention, index) => {
+            const handleClick = () => {
+              changeInterventionIndex(index);
+            };
+            return (
+              <Row key={intervention.id}>
+                <InterventionListItem
+                  intervention={intervention}
+                  index={index}
+                  isSelected={index === interventionIndex}
+                  handleClick={handleClick}
+                  handleCopyIntervention={handleCopyIntervention}
+                  nextInterventionName={
+                    interventions[index + 1]
+                      ? interventions[index + 1].name
+                      : null
+                  }
+                />
+              </Row>
+            );
+          })}
+      </Reorder>
     </>
   );
 
-  if (fetchProblemError)
-    return (
-      <Box>
-        <ErrorAlert errorText={fetchProblemError} />
-      </Box>
-    );
-
   if (fetchProblemLoading) return <Loader />;
+
+  if (fetchProblemError)
+    return <ErrorAlert errorText={fetchProblemError} fullPage />;
 
   return (
     <Box height="100%" width="100%" padding="60px 160px">
-      <Row>
+      <Modal
+        title={formatMessage(messages.modalTitle)}
+        onClose={closeModal}
+        visible={modalVisible}
+      >
+        <SelectResearchers problemId={id} onClose={closeModal} />
+      </Modal>
+
+      <Row justify="between">
         <BackButton to="/">
           <FormattedMessage {...messages.back} />
         </BackButton>
       </Row>
-      <Row mt={18}>
-        <StyledInput
-          ml={-12}
-          px={12}
-          py={6}
-          width="400px"
-          value={name}
-          fontSize={23}
-          placeholder={formatMessage(messages.placeholder)}
-          onBlur={val => editName({ path: 'name', value: val })}
-          maxWidth="none"
-        />
+      <Row my={18} justify="between">
+        <Row align="center">
+          <Box mr={15}>
+            <StatusLabel status={status}>
+              {status && formatMessage(globalMessages.statuses[status])}
+            </StatusLabel>
+          </Box>
+          <StyledInput
+            ml={-12}
+            px={12}
+            py={6}
+            width="400px"
+            value={name}
+            fontSize={23}
+            placeholder={formatMessage(messages.placeholder)}
+            onBlur={editName}
+            maxWidth="none"
+          />
+        </Row>
+        <Row>
+          <InterventionStatusButtons
+            status={status}
+            handleChangeStatus={handleChangeStatus}
+            handleSendCsv={handleSendCsv}
+          />
+          <InterventionOptions>
+            <Dropdown options={availableOptions} clickable />
+          </InterventionOptions>
+        </Row>
       </Row>
+      {process.env.APP_STAGE === appStages.dev.id && (
+        <Row
+          bg={colors.linkWater}
+          borderRadius={10}
+          py={15}
+          px={20}
+          align="center"
+          width="fit-content"
+        >
+          <Text fontWeight="bold" mr={12}>
+            {mockSetting}
+          </Text>
+          <Link to={`/interventions/${id}/settings`}>
+            <TextButton>
+              <FormattedMessage {...messages.adjust} />
+            </TextButton>
+          </Link>
+        </Row>
+      )}
       <Row>
         <Column sm={6}>
           {renderList()}
@@ -111,8 +281,11 @@ export function ProblemDetailsPage({
           </Row>
         </Column>
         {process.env.APP_STAGE === appStages.dev.id && (
-          <Column height="0%" sm={6}>
-            <ShareBox />
+          <Column ml={38} sm={6} mt={18}>
+            <Column position="sticky" top="100px">
+              <ShareBox />
+            </Column>
+            <div />
           </Column>
         )}
       </Row>
@@ -130,17 +303,29 @@ ProblemDetailsPage.propTypes = {
     fetchProblemLoading: PropTypes.bool,
   }),
   match: PropTypes.object,
-  editName: PropTypes.func,
+  editProblem: PropTypes.func,
+  interventionIndex: PropTypes.number,
+  changeInterventionIndex: PropTypes.func,
+  sendCsv: PropTypes.func,
+  copyIntervention: PropTypes.func,
+  reorderInterventions: PropTypes.func,
+  copyProblem: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   problemState: makeSelectProblemState(),
+  interventionIndex: makeSelectCurrentInterventionIndex(),
 });
 
 const mapDispatchToProps = {
   createIntervention: createInterventionRequest,
   fetchProblem: fetchProblemRequest,
-  editName: editProblemRequest,
+  editProblem: editProblemRequest,
+  changeInterventionIndex: changeCurrentIntervention,
+  sendCsv: sendProblemCsvRequest,
+  copyIntervention: copyInterventionRequest,
+  reorderInterventions: reorderInterventionList,
+  copyProblem: copyProblemRequest,
 };
 
 const withConnect = connect(

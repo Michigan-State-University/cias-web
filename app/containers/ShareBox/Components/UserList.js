@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
 
 import Column from 'components/Column';
-import Dropdown from 'components/Dropdown';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import Text from 'components/Text';
-import bin from 'assets/svg/bin-no-bg.svg';
-import paperAirplane from 'assets/svg/paper-airplane.svg';
+import H3 from 'components/H3';
 import userAvatar from 'assets/svg/user.svg';
 import { colors, fontSizes } from 'theme';
 
-import messages from '../messages';
+import { StyledTextButton, HoverableRow } from '../styled';
 
 const mockUsers = [
   {
@@ -37,28 +34,32 @@ const mockUsers = [
   },
 ];
 
-const UserList = ({ users = mockUsers, intl: { formatMessage } }) => {
-  const options = [
-    {
-      id: 'remove',
-      label: formatMessage(messages.remove),
-      icon: bin,
-      action: () => {},
-      color: colors.bluewood,
-    },
-    {
-      id: 'resend',
-      label: formatMessage(messages.resend),
-      icon: paperAirplane,
-      action: () => {},
-      color: colors.bluewood,
-    },
-  ];
-
+const UserList = ({
+  users = mockUsers,
+  headerText,
+  buttonIsClose,
+  buttonText,
+}) => {
+  const button = (
+    <StyledTextButton fontWeight="bold" ml={buttonIsClose ? 15 : null}>
+      {buttonText}
+    </StyledTextButton>
+  );
   return (
     <Column>
+      {headerText && (
+        <H3
+          mb={15}
+          fontSize={13}
+          fontWeight="bold"
+          color={colors.bluewood}
+          textOpacity={0.6}
+        >
+          {headerText}
+        </H3>
+      )}
       {users.map(user => (
-        <Row
+        <HoverableRow
           key={`el-user-${user.id}`}
           align="center"
           justify="between"
@@ -68,14 +69,15 @@ const UserList = ({ users = mockUsers, intl: { formatMessage } }) => {
           borderRadius={5}
           hoverColor={colors.linkWater}
         >
-          <Row>
+          <Row align="center">
             <Img src={user.avatar} alt="avatar" mr={15} />
             <Text fontSize={fontSizes.regular} lineHeight="270%">
               {user.email}
             </Text>
+            {buttonIsClose && button}
           </Row>
-          <Dropdown options={options} clickable ml={0} />
-        </Row>
+          {!buttonIsClose && button}
+        </HoverableRow>
       ))}
     </Column>
   );
@@ -83,6 +85,13 @@ const UserList = ({ users = mockUsers, intl: { formatMessage } }) => {
 
 UserList.propTypes = {
   users: PropTypes.array,
-  intl: intlShape,
+  headerText: PropTypes.node,
+  buttonIsClose: PropTypes.bool,
+  buttonText: PropTypes.node,
 };
-export default injectIntl(UserList);
+
+UserList.defaultProps = {
+  buttonIsClose: false,
+};
+
+export default UserList;

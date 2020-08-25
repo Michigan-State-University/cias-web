@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import concat from 'lodash/concat';
 
 import {
@@ -9,7 +10,10 @@ import {
   textboxQuestion,
   numberQuestion,
 } from 'models/Intervention/QuestionTypes';
+import { elements } from 'theme';
 import Question from 'models/Intervention/Question';
+import { splitAndKeep } from 'utils/splitAndKeep';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 import { splitAndKeep } from 'utils/splitAndKeep';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
@@ -109,7 +113,10 @@ export const mapQuestionDataForType = question => {
 export const getAnimationPosition = (draft, state, payload) => {
   if (draft.selectedQuestion !== payload) {
     // set position to first block of new question
-    if (state.questions[payload].narrator.blocks[0])
+    if (
+      state.questions[payload].narrator.blocks[0] &&
+      state.questions[payload].narrator.blocks[0].position
+    )
       return state.questions[payload].narrator.blocks[0].position.posTo;
     for (let i = payload - 1; i >= 0; i -= 1) {
       const {
@@ -117,12 +124,39 @@ export const getAnimationPosition = (draft, state, payload) => {
       } = state.questions[i];
       const lastBlock =
         previousQuestionBlocks[previousQuestionBlocks.length - 1];
-      if (lastBlock) {
+      if (lastBlock && lastBlock.position) {
         return lastBlock.position.posTo;
       }
     }
-    return { x: 0, y: 0 };
+    return { x: 0, y: elements.peedyInitialYPosition };
   }
+  return state.animationPosition;
+};
+
+export const getFromQuestionTTS = question => {
+  const delimiters = [',', '.', '?', '!'];
+
+  const titleTTS = question.title
+    ? splitAndKeep(htmlToPlainText(question.title), delimiters)
+    : [];
+  const subtileTTS = question.subtitle
+    ? splitAndKeep(htmlToPlainText(question.subtitle), delimiters)
+    : [];
+
+  return concat(titleTTS, subtileTTS);
+};
+
+export const useLockEditInterventionPageScroll = () => {
+  useEffect(() => {
+    const mainContainer = document.querySelector('#main-app-container');
+    const body = document.querySelector('body');
+    mainContainer.style.height = `calc(100vh - ${elements.navbarHeight}px)`;
+    body.style.removeProperty('overflow');
+    return () => {
+      mainContainer.style.height = `calc(100% - ${elements.navbarHeight}px)`;
+      body.style.overflow = 'auto';
+    };
+  }, []);
 };
 
 const getDataTTS = (type, questionData, delimiters) => {

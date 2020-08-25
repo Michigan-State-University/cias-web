@@ -8,10 +8,10 @@ exports[`<AnswerInterventionPage /> Should render and match the snapshot 1`] = `
   width="100%"
 >
   <div
-    class="styled__AnswerOuterContainer-sc-5f6i11-3 cxBrDd"
+    class="styled__AnswerOuterContainer-sc-5f6i11-3 fwidRY"
   >
     <button
-      class="styled__StyledButton-sc-5f6i11-0 fkseIN StyledButton-t20ntd-0 bdIUUI"
+      class="styled__StyledButton-sc-5f6i11-0 fkseIN StyledButton-t20ntd-0 iDyndk"
       color="primary"
     >
       Start intervention

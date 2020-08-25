@@ -1,10 +1,17 @@
 import React, { useState, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
+import Reorder from 'react-reorder';
 
 import { AccordionContainer } from './styled';
 import Collapse from './Collapse';
 
-const Accordion = ({ children, onHide, onOpen, accordionParentKey }) => {
+const Accordion = ({
+  children,
+  onHide,
+  onOpen,
+  accordionParentKey,
+  onReorder,
+}) => {
   const [opened, setOpened] = useState(-1);
 
   useEffect(() => {
@@ -26,22 +33,27 @@ const Accordion = ({ children, onHide, onOpen, accordionParentKey }) => {
     const { children: content, label, color, onDelete } = child.props;
 
     return (
-      <Collapse
-        key={`accordion-${index}`}
-        onToggle={handleToggle(index)}
-        isOpened={opened === index}
-        label={label}
-        color={color}
-        onDelete={onDelete}
-      >
-        {content}
-      </Collapse>
+      <div key={`accordion-${index}`}>
+        <Collapse
+          onToggle={handleToggle(index)}
+          isOpened={opened === index}
+          label={label}
+          color={color}
+          onDelete={onDelete}
+        >
+          {content}
+        </Collapse>
+      </div>
     );
   };
 
   if (Array.isArray(children))
     return (
-      <AccordionContainer>{children.map(renderCollapse)}</AccordionContainer>
+      <AccordionContainer>
+        <Reorder holdTime={125} reorderId="blocks-list" onReorder={onReorder}>
+          {children.map(renderCollapse)}
+        </Reorder>
+      </AccordionContainer>
     );
 
   return <AccordionContainer>{renderCollapse(children, 0)}</AccordionContainer>;
@@ -55,6 +67,7 @@ Accordion.propTypes = {
   onHide: PropTypes.func,
   accordionParentKey: PropTypes.number,
   onOpen: PropTypes.func,
+  onReorder: PropTypes.func,
 };
 
 Accordion.defaultProps = {};

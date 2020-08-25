@@ -17,6 +17,8 @@ const flex = props => ({
   alignItems: propsToCssMapper[props.align] || '',
   flexGrow: props.filled ? 1 : '',
   flexDirection: props.direction || '',
+  flexWrap: props.flexWrap || '',
+  alignSelf: propsToCssMapper[props.alignSelf] || '',
 });
 
 flex.propTypes = {
@@ -38,6 +40,8 @@ flex.propTypes = {
   ]),
   filled: PropTypes.bool,
   flexDirection: PropTypes.oneOf(['row', 'column']),
+  flexWrap: PropTypes.oneOf(['wrap', 'nowrap', 'wrap-reverse']),
+  alignSelf: PropTypes.oneOf(['start', 'end', 'center']),
 };
 
 export { flex };

@@ -1,7 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-
-import { outsideClickHandler } from 'utils/outsideClickHandler';
 
 import Img from 'components/Img';
 import Box from 'components/Box';
@@ -10,21 +8,26 @@ import Row from 'components/Row';
 import dots from 'assets/svg/dots.svg';
 import { colors, boxShadows } from 'theme';
 
+import useOutsideClick from 'utils/useOutsideClick';
 import { StyledComment, ImageContainer, StyledRow } from './styled';
 
-const Dropdown = ({ options, ...restProps }) => {
+const Dropdown = ({ options, top, ...restProps }) => {
   const [open, setOpen] = useState(false);
 
   const dropdown = useRef(null);
+  useOutsideClick(dropdown, () => setOpen(false), open);
 
-  useEffect(() => {
-    const cleanUp = outsideClickHandler(dropdown, () => setOpen(false));
-
-    return cleanUp;
-  }, []);
+  const getPosition = () => {
+    if (top)
+      return {
+        bottom: '35px',
+      };
+    return { top: '35px' };
+  };
 
   return (
     <Box
+      ref={dropdown}
       display="flex"
       justify="end"
       align="start"
@@ -32,7 +35,6 @@ const Dropdown = ({ options, ...restProps }) => {
       {...restProps}
     >
       <ImageContainer
-        ref={dropdown}
         onClick={() => {
           setOpen(!open);
         }}
@@ -40,7 +42,7 @@ const Dropdown = ({ options, ...restProps }) => {
         <Img src={dots} alt="dots" />
       </ImageContainer>
       {open && (
-        <Row position="absolute" top="35px" right="0" zIndex={999}>
+        <Row position="absolute" right="0" zIndex={999} {...getPosition()}>
           <Column bg={colors.white} shadow={boxShadows.black} borderRadius={10}>
             {options.map(option => (
               <StyledRow
@@ -68,7 +70,7 @@ const Dropdown = ({ options, ...restProps }) => {
 
 Dropdown.propTypes = {
   options: PropTypes.array,
-  id: PropTypes.string,
+  top: PropTypes.bool,
 };
 
 export default Dropdown;

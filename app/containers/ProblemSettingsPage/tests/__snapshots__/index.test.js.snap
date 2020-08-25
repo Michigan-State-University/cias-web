@@ -1,0 +1,335 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProblemSettingsPage /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-14m3exe-0 cfRbfB"
+    height="100%"
+    width="100%"
+  >
+    <a
+      class="styled__StyledLink-sc-1vn5te5-0 iBdJAt"
+      href="/interventions/as120s-as12cs"
+    >
+      <p
+        class="Text-sc-2lza2m-0 hLUsTn"
+        font-weight="bold"
+        type="button"
+      >
+        <img
+          alt="traingle"
+          class="Img-sc-1kfzr96-0 bTgaOd"
+          src="IMAGE_MOCK"
+        />
+        Back
+      </p>
+    </a>
+    <h1
+      class="H1-tncdg6-0 kTWIZf"
+    >
+      <span>
+        Access Settings
+      </span>
+    </h1>
+    <h3
+      class="H3-sc-1nwhpi5-0 cshsWC"
+      font-weight="regular"
+    >
+      Name of the intervention
+    </h3>
+    <div
+      class="Column-sc-1n6divy-0 cDmPKT"
+      width="100%"
+    >
+      <div
+        class="Row-x1o3ru-0 exvbpM"
+      >
+        <div
+          class="Column-sc-1n6divy-0 dmVPOe"
+        >
+          <h2
+            class="H2-egphza-0 eiEAKJ"
+          >
+            <span>
+              Who can access this intervention?
+            </span>
+          </h2>
+          <div
+            class="Box-sc-14m3exe-0 kVXiVZ"
+          >
+            <div
+              class="Row-x1o3ru-0 dSjDRN"
+              width="fit-content"
+            >
+              <img
+                class="Img-sc-1kfzr96-0 kcPFOj"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="Text-sc-2lza2m-0 gHIoGD"
+                font-size="15"
+                font-weight="regular"
+              >
+                <span>
+                  Anyone with the link can access sessions
+                </span>
+              </p>
+            </div>
+            <div
+              class="Row-x1o3ru-0 dSjDRN"
+              width="fit-content"
+            >
+              <img
+                class="Img-sc-1kfzr96-0 kcPFOj"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="Text-sc-2lza2m-0 gHIoGD"
+                font-size="15"
+                font-weight="regular"
+              >
+                <span>
+                  Anyone who is a registered participant can access sessions
+                </span>
+              </p>
+            </div>
+            <div
+              class="Row-x1o3ru-0 gHJmeJ"
+              width="fit-content"
+            >
+              <img
+                class="Img-sc-1kfzr96-0 kcPFOj"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="Text-sc-2lza2m-0 dLdWLg"
+                font-size="15"
+                font-weight="bold"
+              >
+                <span>
+                  Only invited registered participants can access sessions
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="Column-sc-1n6divy-0 dmVPOe"
+        >
+          <div
+            class="Box-sc-14m3exe-0 lljHgd"
+            height="100%"
+            width="100%"
+          >
+            <p
+              class="Text-sc-2lza2m-0 dLdWLg"
+              font-size="15"
+              font-weight="bold"
+            >
+              <span>
+                Only invited registered participants can access sessions
+              </span>
+            </p>
+            <p
+              class="Text-sc-2lza2m-0 hOPTkP"
+              font-size="15"
+            >
+              <span>
+                It means that in order to open the session participant would need to log in or create the account. Please note that 
+                <b>
+                  only particpants who are listed below will be able to complete the session.
+                </b>
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Box-sc-14m3exe-0 jMRyrT"
+      >
+        <div
+          class="Column-sc-1n6divy-0 dmVPOe"
+        >
+          <h2
+            class="H2-egphza-0 eiEAKJ"
+          >
+            <span>
+              Select participants who can open this intervention’s sessions
+            </span>
+          </h2>
+          <div
+            class="Row-x1o3ru-0 gwlSzX"
+          >
+            <div
+              class="styled__StyledChipsInput-sc-16elnyr-0 cIamqz"
+            >
+              <div
+                class="Row-x1o3ru-0 kvrCRI"
+                width="100%"
+              >
+                <input
+                  class="styled__HiddenInput-sc-16elnyr-1 hBibUP"
+                  placeholder="Enter e-mail addresses of participants who can open this intervention’s sessions"
+                  type="text"
+                  value=""
+                />
+              </div>
+            </div>
+            <div
+              class="Row-x1o3ru-0 dRrzZS"
+            >
+              <div
+                class="Box-sc-14m3exe-0 bIandp"
+              >
+                <input
+                  accept="text/csv"
+                  style="display: none;"
+                  type="file"
+                />
+                <div>
+                  <div
+                    class="Row-x1o3ru-0 eekyNt"
+                  >
+                    <img
+                      alt="upload"
+                      class="Img-sc-1kfzr96-0 kHuQYD"
+                      src="IMAGE_MOCK"
+                    />
+                    <p
+                      class="Text-sc-2lza2m-0 iqVYGz"
+                      color="#C866EA"
+                      font-weight="bold"
+                    >
+                      <span>
+                        Upload e-mails with CVS file
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="StyledButton-t20ntd-0 cvUSQJ"
+                color="primary"
+                disabled=""
+                width="180"
+              >
+                <span>
+                  Enable access
+                </span>
+              </button>
+            </div>
+          </div>
+          <div
+            class="Box-sc-14m3exe-0 kbHAXq"
+          >
+            <div
+              class="Column-sc-1n6divy-0 dmVPOe"
+            >
+              <div
+                class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
+              >
+                <div
+                  class="Row-x1o3ru-0 diEAcg"
+                >
+                  <img
+                    alt="avatar"
+                    class="Img-sc-1kfzr96-0 dsoWic"
+                    src="IMAGE_MOCK"
+                  />
+                  <p
+                    class="Text-sc-2lza2m-0 liriFs"
+                    font-size="15px"
+                  >
+                    mock@mock.pl
+                  </p>
+                  <button
+                    class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jAClYO"
+                    font-weight="bold"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+              <div
+                class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
+              >
+                <div
+                  class="Row-x1o3ru-0 diEAcg"
+                >
+                  <img
+                    alt="avatar"
+                    class="Img-sc-1kfzr96-0 dsoWic"
+                    src="IMAGE_MOCK"
+                  />
+                  <p
+                    class="Text-sc-2lza2m-0 liriFs"
+                    font-size="15px"
+                  >
+                    mock@mock.pl
+                  </p>
+                  <button
+                    class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jAClYO"
+                    font-weight="bold"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+              <div
+                class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
+              >
+                <div
+                  class="Row-x1o3ru-0 diEAcg"
+                >
+                  <img
+                    alt="avatar"
+                    class="Img-sc-1kfzr96-0 dsoWic"
+                    src="IMAGE_MOCK"
+                  />
+                  <p
+                    class="Text-sc-2lza2m-0 liriFs"
+                    font-size="15px"
+                  >
+                    mock@mock.pl
+                  </p>
+                  <button
+                    class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jAClYO"
+                    font-weight="bold"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+              <div
+                class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
+              >
+                <div
+                  class="Row-x1o3ru-0 diEAcg"
+                >
+                  <img
+                    alt="avatar"
+                    class="Img-sc-1kfzr96-0 dsoWic"
+                    src="IMAGE_MOCK"
+                  />
+                  <p
+                    class="Text-sc-2lza2m-0 liriFs"
+                    font-size="15px"
+                  >
+                    mock@mock.pl
+                  </p>
+                  <button
+                    class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jAClYO"
+                    font-weight="bold"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

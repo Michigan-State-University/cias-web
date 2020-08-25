@@ -4,6 +4,7 @@ import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { MemoryRouter } from 'react-router-dom';
+import { problemReducer } from 'global/reducers/problem';
 
 import ProblemDetailsPage from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
@@ -18,28 +19,15 @@ const defaultProps = {
 
 describe('<ProblemDetailsPage />', () => {
   let store;
-  const reducer = state => state;
-  const initialState = {
-    problemState: {
-      problem: {},
-      cache: {
-        problem: {},
-      },
-      loaders: {
-        fetchProblemLoading: false,
-        createProblemLoading: false,
-      },
-      errors: {
-        fetchProblemError: null,
-        createProblemError: null,
-      },
-    },
-  };
 
+  const initialState = {};
+  const reducer = state => state;
   beforeAll(() => {
     store = createStore(reducer, initialState);
     store.runSaga = () => {};
-    store.injectedReducers = {};
+    store.injectedReducers = {
+      problem: problemReducer,
+    };
     store.injectedSagas = {};
   });
 
@@ -57,7 +45,7 @@ describe('<ProblemDetailsPage />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Should render and match the snapshot', () => {
+  it.only('Should render loader and match the snapshot', () => {
     const { container } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <Provider store={store}>

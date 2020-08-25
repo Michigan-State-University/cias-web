@@ -62,9 +62,13 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  background-color: #FFFFFF;
+  cursor: pointer;
+  width: 100%;
   margin-top: 18px;
   box-shadow: 0px 4px 20px #E3EEFB;
+  border-style: solid;
+  border-width: 1px;
+  border-color: transparent;
 }
 
 .c3 {
@@ -93,6 +97,9 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   -webkit-text-decoration: none;
   text-decoration: none;
   color: black;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 <div

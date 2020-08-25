@@ -34,3 +34,6 @@ export const UPDATE_FORMULA_CASE =
 
 export const UPDATE_NARRATOR_MOVEMENT =
   'app/EditInterventionPage/Settings/UPDATE_NARRATOR_MOVEMENT';
+
+export const REORDER_NARRATOR_BLOCKS =
+  'app/EditInterventionPage/Settings/REORDER_NARRATOR_BLOCKS';

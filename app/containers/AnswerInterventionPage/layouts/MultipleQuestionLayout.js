@@ -29,7 +29,7 @@ const MultipleQuestionLayout = ({
             py={14}
             width={`calc(100% + ${margin}px)`}
             clickable
-            onClick={() => check(payload, value, name, index)}
+            onClick={() => check(value, name, index)}
           >
             <Row align="center" py={10} height="44">
               <Checkbox checked={isChecked} mr={16} />

@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
+import DatePicker from 'react-datepicker';
 import 'react-quill/dist/quill.bubble.css';
+import 'react-datepicker/dist/react-datepicker.css';
 
 import isNumber from 'lodash/isNumber';
 import Column from '../Column';
 import Row from '../Row';
 import { Input } from './index';
-import { QuillStyled } from './styled';
+import { DatePickerWrapper, QuillStyled } from './styled';
 import { TextArea } from './TextArea';
+import DateInput from './DateInput';
 
 import './QuillSinglelineHandler';
 
@@ -53,10 +56,33 @@ const ApprovableInput = props => {
     fontSize,
     mr,
     disabled,
+    height,
+    width,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [focused, setfocused] = useState(false);
-  const quillRef = useRef();
+  const ref = useRef();
+
+  const blockQuillBlur = () => {
+    const preventDefault = event => event.preventDefault();
+    const toolbar = ref.current.editor.container.querySelector('.ql-toolbar');
+
+    const block = () => toolbar.addEventListener('mousedown', preventDefault);
+    const clean = () =>
+      toolbar.removeEventListener('mousedown', preventDefault);
+
+    block();
+
+    return clean;
+  };
+
+  useEffect(() => {
+    if (richText && focused) {
+      const clean = blockQuillBlur();
+
+      return clean;
+    }
+  }, [focused, ref.current]);
 
   const blockQuillBlur = () => {
     const preventDefault = event => event.preventDefault();
@@ -105,7 +131,7 @@ const ApprovableInput = props => {
     if (richText)
       return (
         <QuillStyled
-          ref={quillRef}
+          ref={ref}
           theme="bubble"
           value={value}
           placeholder={placeholder}
@@ -137,10 +163,23 @@ const ApprovableInput = props => {
           disabled={disabled}
         />
       );
-
+    if (type === 'date')
+      return (
+        <DatePickerWrapper>
+          <DatePicker
+            selected={value}
+            onChange={date => onInputChange(date)}
+            placeholderText={placeholder}
+            customInput={<DateInput height={height} width={width} ref={ref} />}
+            showMonthDropdown
+            showYearDropdown
+            calendarClassName="schedule-date-picker"
+          />
+        </DatePickerWrapper>
+      );
     return (
       <Input
-        height="60px"
+        height={height || 60}
         mr={isNumber(mr) ? mr : 9}
         textAlign={textAlign}
         value={value}
@@ -167,7 +206,7 @@ ApprovableInput.propTypes = {
   onCheck: PropTypes.func,
   rows: PropTypes.string,
   placeholder: PropTypes.string,
-  type: PropTypes.oneOf(['multiline', 'singleline']),
+  type: PropTypes.oneOf(['multiline', 'singleline', 'date']),
   keyboard: PropTypes.string,
   validator: PropTypes.func,
   onValidation: PropTypes.func,
@@ -177,6 +216,8 @@ ApprovableInput.propTypes = {
   fontSize: PropTypes.number,
   mr: PropTypes.number,
   disabled: PropTypes.bool,
+  height: PropTypes.number,
+  width: PropTypes.number,
 };
 
 ApprovableInput.defaultProps = {

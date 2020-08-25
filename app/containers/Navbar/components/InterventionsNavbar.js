@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -162,11 +162,9 @@ const mapDispatchToProps = {
   updateInterventionName: editInterventionRequest,
 };
 
-export const InterventionNavbarWithIntl = injectIntl(InterventionNavbar);
-
 export default compose(
   connect(
     mapStateToProps,
     mapDispatchToProps,
   ),
-)(InterventionNavbarWithIntl);
+)(InterventionNavbar);

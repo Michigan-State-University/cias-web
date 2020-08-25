@@ -15,14 +15,20 @@ import { Container } from 'react-grid-system';
 import ErrorAlert from 'components/ErrorAlert';
 import H1 from 'components/H1';
 import Loader from 'components/Loader';
+import Row from 'components/Row';
 import SingleTile from 'components/SingleTile';
 import TileRenderer from 'components/TileRenderer';
 import search from 'assets/svg/search.svg';
-import StatusFilter from 'containers/ProblemDetailsPage/StatusFilter';
 import useFilter from 'utils/useFilter';
 import { Input } from 'components/Input';
+import { archived, draft } from 'models/Status/StatusTypes';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
+import {
+  createProblemRequest,
+  createProblemSaga,
+  makeSelectProblemLoader,
+} from 'global/reducers/problem';
 import {
   fetchProblemsRequest,
   makeSelectProblemsState,
@@ -30,14 +36,9 @@ import {
   fetchProblemsSaga,
 } from 'global/reducers/problems';
 
-import {
-  createProblemRequest,
-  createProblemSaga,
-  makeSelectProblemLoader,
-} from 'global/reducers/problem';
-
-import { InitialRow } from './styled';
+import StatusFilter from './StatusFilter';
 import messages from './messages';
+import { ArchiveFilter, InitialRow } from './styled';
 
 export function ProblemPage({
   fetchProblemsRequest: fetchProblems,
@@ -58,33 +59,34 @@ export function ProblemPage({
   const [finalProblems, filterStatus, setFilterStatus] = useFilter(
     valueFilteredProblems,
     'status',
-    { initialDelay: 0 },
+    { initialDelay: 0, initialValue: [draft] },
   );
 
   useEffect(() => {
     fetchProblems();
   }, []);
 
+  const handleChange = value => () => {
+    if (filterStatus.includes(value))
+      setFilterStatus(filterStatus.filter(el => el !== value));
+    else setFilterStatus([...filterStatus, value]);
+  };
+
   const handleFilterStatus = e => {
     e.preventDefault();
     const {
       currentTarget: { value },
     } = e;
-    if (value === filterStatus) setFilterStatus('');
-    else setFilterStatus(value);
+    handleChange(value)();
   };
 
   const mapProblem = problem => (
     <SingleTile tileData={problem} link={`/interventions/${problem.id}/`} />
   );
 
-  if (fetchProblemLoading || finalProblems === null) return <Loader />;
+  if (fetchProblemLoading) return <Loader />;
   if (fetchProblemError)
-    return (
-      <Container>
-        <ErrorAlert errorText={fetchProblemError} />
-      </Container>
-    );
+    return <ErrorAlert errorText={fetchProblemError} fullPage />;
 
   if (!finalProblems.length && !problems.length) {
     return (
@@ -101,6 +103,8 @@ export function ProblemPage({
       </Container>
     );
   }
+
+  const showArchived = filterStatus.includes(archived);
   return (
     <>
       <Container>
@@ -110,12 +114,19 @@ export function ProblemPage({
           </H1>
         </InitialRow>
         <InitialRow>
-          <StatusFilter
-            onClick={handleFilterStatus}
-            formatMessage={formatMessage}
-            active={filterStatus}
-          />
-          <div>
+          <Row my={35} justify="between" width={250} height={30}>
+            <StatusFilter
+              onClick={handleFilterStatus}
+              formatMessage={formatMessage}
+              active={filterStatus}
+            />
+          </Row>
+          <Row align="center">
+            <ArchiveFilter onClick={handleChange(archived)}>
+              {showArchived
+                ? formatMessage(messages.hideArchived)
+                : formatMessage(messages.showArchived)}
+            </ArchiveFilter>
             <img src={search} alt="Search" />
             <Input
               value={filterValue}
@@ -123,7 +134,7 @@ export function ProblemPage({
               ml={5}
               placeholder={formatMessage(messages.filter)}
             />
-          </div>
+          </Row>
         </InitialRow>
         {filterValue && finalProblems.length === 0 && (
           <h3>

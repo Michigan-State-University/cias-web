@@ -24,13 +24,21 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
 
   const getScaleFactor = () => {
     const { clientWidth, clientHeight } = animationContainer || defaultCurrent;
-    const scaleX = Math.min(1, clientWidth / elements.draggableContainerSize);
-    const scaleY = Math.min(1, clientHeight / elements.draggableContainerSize);
+    const containerWidthWithBorders = clientWidth + 2;
+    const containerHeightWithBorders = clientHeight + 2;
+    const scaleX = Math.min(
+      1,
+      containerWidthWithBorders / elements.draggableContainerSize,
+    );
+    const scaleY = Math.min(
+      1,
+      containerHeightWithBorders / elements.draggableContainerSize,
+    );
     return { x: scaleX, y: scaleY };
   };
 
   const getInitialAnimationPosition = firstBlock => {
-    if (!firstBlock) return { x: 0, y: 0 };
+    if (!firstBlock) return { x: 0, y: elements.peedyInitialYPosition };
     return getScaledPosition(getScaleFactor(), firstBlock.position.posTo);
   };
 

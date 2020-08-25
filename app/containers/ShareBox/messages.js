@@ -11,38 +11,20 @@ export const scope = 'app.containers.ShareBox';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Share Intervention with Participants',
+    defaultMessage: 'Invite to start intervention from:',
   },
   tooltipSelectorContent: {
     id: `${scope}.tooltipSelectorContent`,
     defaultMessage:
       'It means that any person who click the link will be able to complete the session. However please note, that people who starts session with the link and are not listed below won’t be able to use the branching and multisessions sequences.',
   },
-  selectLabel: {
-    id: `${scope}.selectLabel`,
-    defaultMessage: 'Select Starting Session',
-  },
-  tooltipSelectContent: {
-    id: `${scope}.tooltipSelectContent`,
-    defaultMessage:
-      'Participants will be able to take part in the intervention from this particular session',
-  },
-  inviteLabel: {
-    id: `${scope}.inviteLabel`,
-    defaultMessage: 'Invite Participants',
-  },
-  tooltipInviterContent: {
-    id: `${scope}.tooltipInviterContent`,
-    defaultMessage:
-      'These people will be invited to take part in the intervention and answer the selected session',
-  },
   emailPlaceholder: {
     id: `${scope}.emailPlaceholder`,
-    defaultMessage: 'Participants emails',
+    defaultMessage: 'Invite new participants with e-mails',
   },
   uploadText: {
     id: `${scope}.uploadText`,
-    defaultMessage: 'Upload e-mails with CVS file',
+    defaultMessage: 'Upload e-mails with CSV file',
   },
   sendText: {
     id: `${scope}.sendText`,
@@ -50,14 +32,22 @@ export default defineMessages({
   },
   copyLabel: {
     id: `${scope}.copyLabel`,
-    defaultMessage: 'Copy link to this session and share it with participants',
-  },
-  remove: {
-    id: `${scope}.remove`,
-    defaultMessage: 'Remove',
+    defaultMessage: 'Copy link and invite to start with this session externaly',
   },
   resend: {
     id: `${scope}.resend`,
     defaultMessage: 'Resend invite',
+  },
+  userListLabel: {
+    id: `${scope}.userListLabel`,
+    defaultMessage: 'Invite has beed already sent to',
+  },
+  invalidEmail: {
+    id: `${scope}.invalidEmail`,
+    defaultMessage: 'Email is invalid!',
+  },
+  duplicatedEmail: {
+    id: `${scope}.duplicatedEmail`,
+    defaultMessage: 'Such email is already provided!',
   },
 });

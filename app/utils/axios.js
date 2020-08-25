@@ -21,7 +21,7 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   response => {
-    if (response.config.url.endsWith('auth/sign_in')) {
+    if (response.config.url.endsWith('v1/auth/sign_in')) {
       LocalStorageService.setHeaders({
         'Content-Type': 'application/json;charset=utf-8',
         'token-type': 'Bearer',

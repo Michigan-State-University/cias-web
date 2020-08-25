@@ -38,6 +38,10 @@ export default defineMessages({
       id: `${scope}.HeadAnimation`,
       defaultMessage: 'Head Animation',
     },
+    ReadQuestion: {
+      id: `${scope}.ReadQuestion`,
+      defaultMessage: 'Read question',
+    },
   },
   questionTypes: {
     'Question::Single': {
@@ -72,6 +76,10 @@ export default defineMessages({
       id: `${scope}.Question::Url`,
       defaultMessage: 'Url screen',
     },
+    'Question::FollowUpContact': {
+      id: `${scope}.Question::FollowUpContact`,
+      defaultMessage: 'FollowUpContact screen',
+    },
   },
   statuses: {
     draft: {
@@ -86,6 +94,18 @@ export default defineMessages({
       id: `${scope}.closed`,
       defaultMessage: 'Closed',
     },
+    archived: {
+      id: `${scope}.archived`,
+      defaultMessage: 'Archived',
+    },
+  },
+  createProblemError: {
+    id: `${scope}.createProblemError`,
+    defaultMessage: `Couldn't create an intervention`,
+  },
+  editProblemError: {
+    id: `${scope}.editProblemError`,
+    defaultMessage: `Couldn't edit an intervention`,
   },
   createProblemError: {
     id: `${scope}.createProblemError`,

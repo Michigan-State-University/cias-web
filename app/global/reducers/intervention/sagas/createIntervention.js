@@ -7,7 +7,7 @@ import { CREATE_INTERVENTION_REQUEST } from '../constants';
 import { createInterventionSuccess, createInterventionError } from '../actions';
 
 function* createIntervention({ payload: { id } }) {
-  const requestURL = `v1/interventions`;
+  const requestURL = `v1/problems/${id}/interventions`;
 
   try {
     const {
@@ -15,8 +15,7 @@ function* createIntervention({ payload: { id } }) {
     } = yield axios.post(requestURL, {
       intervention: {
         type: 'Intervention::Single',
-        name: 'e-Intervention New',
-        problem_id: id,
+        name: 'New Session',
       },
     });
 

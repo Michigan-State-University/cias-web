@@ -47,7 +47,6 @@ exports[`<UploadFileButton /> Should render and match the snapshot 1`] = `
     class="c0"
   >
     <input
-      accept=".csv"
       autocomplete="off"
       style="display: none;"
       tabindex="-1"

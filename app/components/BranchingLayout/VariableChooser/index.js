@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { compose } from 'redux';
@@ -24,8 +24,8 @@ import { colors, boxShadows } from 'theme';
 import Question from 'models/Intervention/Question';
 import { getAllVariables } from 'models/Intervention/utils';
 import NoContent from 'components/NoContent';
-import { outsideClickHandler } from 'utils/outsideClickHandler';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
+import useOutsideClick from 'utils/useOutsideClick';
 
 const VariableChooser = ({
   onClick,
@@ -40,12 +40,7 @@ const VariableChooser = ({
   });
 
   const variableChooser = useRef(null);
-
-  useEffect(() => {
-    const cleanUp = outsideClickHandler(variableChooser, () => setOpen(false));
-
-    return cleanUp;
-  }, [visible]);
+  useOutsideClick(variableChooser, () => setOpen(false), visible);
 
   const displayContent = () => {
     if (variables && variables.length)

@@ -10,7 +10,7 @@ import messages from './messages';
 
 const TextBoxQuestionLayout = ({ formatMessage, onChange, answerBody }) => {
   const value =
-    answerBody && answerBody.payload ? answerBody.payload.toString() : '';
+    answerBody && answerBody.value ? answerBody.value.toString() : '';
   return (
     <Box bg={themeColors.highlight} width="100%" px={21} py={14}>
       <Row>

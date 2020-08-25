@@ -5,8 +5,10 @@ import {
   bodyAnimationType,
   speechType,
   headAnimationType,
+  readQuestionBlockType,
   reflectionType,
 } from 'models/Narrator/BlockTypes';
+import { getFromQuestionTTS } from 'containers/Interventions/containers/EditInterventionPage/utils';
 
 import Question from './Question';
 import Intervention from './Intervention';
@@ -101,7 +103,7 @@ const getMultiVariables = question =>
 const getGridVariables = question =>
   question.body.data[0].payload.rows.map(row => row.variable.name);
 
-export const instantiateBlockForType = (type, posFrom) => {
+export const instantiateBlockForType = (type, posFrom, question) => {
   switch (type) {
     case bodyAnimationType:
       return {
@@ -143,6 +145,18 @@ export const instantiateBlockForType = (type, posFrom) => {
           posFrom,
           posTo: posFrom,
         },
+      };
+    case readQuestionBlockType:
+      return {
+        type: readQuestionBlockType,
+        animation: 'rest',
+        position: {
+          posFrom,
+          posTo: posFrom,
+        },
+        text: getFromQuestionTTS(question),
+        audio_urls: [],
+        sha256: [],
       };
     default:
       return undefined;

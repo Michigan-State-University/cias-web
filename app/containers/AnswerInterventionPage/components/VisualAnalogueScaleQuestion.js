@@ -10,7 +10,7 @@ const VisualAnalogueScaleQuestion = ({
   answerBody,
   selectAnswer,
 }) => {
-  const { payload: value } = answerBody.length ? answerBody[0] : { payload: 0 };
+  const { value } = answerBody.length ? answerBody[0] : { value: 0 };
   const [answerValue, setAnswerValue] = useState(value);
   const {
     body: {
@@ -29,7 +29,7 @@ const VisualAnalogueScaleQuestion = ({
     selectAnswer([
       {
         var: name,
-        payload: value,
+        value,
       },
     ]);
     setAnswerValue(value);
@@ -41,7 +41,7 @@ const VisualAnalogueScaleQuestion = ({
     selectAnswer([
       {
         var: name,
-        payload: answerValue,
+        value: answerValue,
       },
     ]);
   };

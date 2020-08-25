@@ -6,6 +6,7 @@ import {
   border,
   layout,
   padding,
+  flex,
 } from 'components/BaseComponentStyles';
 
 const invertedStyles = color => css`
@@ -35,6 +36,7 @@ export const StyledButton = styled.button`
   ${border};
   ${layout};
   ${padding};
+  ${flex};
 `;
 
 StyledButton.propTypes = {

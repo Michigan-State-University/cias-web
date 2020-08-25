@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { colors, boxShadows } from 'theme';
+
 import Box from 'components/Box';
+import { colors, boxShadows, themeColors } from 'theme';
 
 export const ToggleableBox = styled(Box)`
-  background-color: ${({ isSelected }) =>
-    isSelected ? colors.linkWater : colors.white};
+  width: 100%;
   margin-top: 18px;
   box-shadow: ${boxShadows.selago};
+  border-style: solid;
+  border-width: 1px;
+  border-color: ${({ isSelected }) =>
+    isSelected ? themeColors.secondary : 'transparent'};
 `;
 
 export const InterventionIndex = styled.div`
@@ -26,4 +30,5 @@ export const InterventionIndex = styled.div`
 export const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
+  width: fit-content;
 `;

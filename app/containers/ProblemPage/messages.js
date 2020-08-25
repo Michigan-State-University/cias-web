@@ -32,4 +32,8 @@ export default defineMessages({
     id: `${scope}.showArchived`,
     defaultMessage: `Show Archived`,
   },
+  hideArchived: {
+    id: `${scope}.hideArchived`,
+    defaultMessage: `Hide Archived`,
+  },
 });

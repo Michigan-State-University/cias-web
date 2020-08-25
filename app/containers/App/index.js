@@ -19,6 +19,7 @@ import ProblemDetailsPage from 'containers/ProblemDetailsPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
+import ProblemSettingsPage from 'containers/ProblemSettingsPage/Loadable';
 import SettingsInterventionPage from 'containers/Interventions/containers/SettingsInterventionPage';
 
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
@@ -137,6 +138,16 @@ export function App({ user }) {
         />
         <AppRoute
           exact
+          path="/interventions/:problemId/settings"
+          component={ProblemSettingsPage}
+          protectedRoute
+          allowedRoles={[ROLES.admin, ROLES.researcher]}
+          navbarProps={{
+            navbarId: 'default',
+          }}
+        />
+        <AppRoute
+          exact
           path="/interventions/:problemId"
           component={ProblemDetailsPage}
           protectedRoute
@@ -145,6 +156,7 @@ export function App({ user }) {
             navbarId: 'default',
           }}
         />
+
         <AppRoute component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
