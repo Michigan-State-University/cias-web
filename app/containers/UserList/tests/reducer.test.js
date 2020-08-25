@@ -7,7 +7,7 @@ describe('userListReducer', () => {
     state = {
       users: [],
       usersError: null,
-      usersLoading: false,
+      usersLoading: true,
     };
   });
 

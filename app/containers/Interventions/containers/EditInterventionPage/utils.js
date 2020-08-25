@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import concat from 'lodash/concat';
 
 import {
@@ -9,11 +10,10 @@ import {
   textboxQuestion,
   numberQuestion,
 } from 'models/Intervention/QuestionTypes';
+import { elements } from 'theme';
 import Question from 'models/Intervention/Question';
-
 import { splitAndKeep } from 'utils/splitAndKeep';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
-import { elements } from 'theme';
 
 export const instantiateEmptyQuestion = (message, type) => {
   switch (type) {
@@ -141,4 +141,17 @@ export const getFromQuestionTTS = question => {
     : [];
 
   return concat(titleTTS, subtileTTS);
+};
+
+export const useLockEditInterventionPageScroll = () => {
+  useEffect(() => {
+    const mainContainer = document.querySelector('#main-app-container');
+    const body = document.querySelector('body');
+    mainContainer.style.height = `calc(100vh - ${elements.navbarHeight}px)`;
+    body.style.removeProperty('overflow');
+    return () => {
+      mainContainer.style.height = `calc(100% - ${elements.navbarHeight}px)`;
+      body.style.overflow = 'auto';
+    };
+  }, []);
 };

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import find from 'lodash/find';
 import map from 'lodash/map';
@@ -12,9 +12,9 @@ import Box from 'components/Box';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import deleteIcon from 'assets/svg/delete.svg';
-import outsideClickHandler from 'utils/outsideClickHandler';
 import { colors } from 'theme';
 
+import useOutsideClick from 'utils/useOutsideClick';
 import messages from '../messages';
 import { INVALID_EMAIL_ERROR, DUPLICATED_EMAIL_ERROR } from '../constants';
 import { StyledChipsInput, HiddenInput } from '../styled';
@@ -34,6 +34,8 @@ const ChipsInput = ({
 
   const setFocus = () => setIsFocused(true);
   const unsetFocus = () => setIsFocused(false);
+
+  useOutsideClick(chipsInput, unsetFocus, isFocused);
 
   const handleKeyDown = event => {
     const { key, keyCode } = event;
@@ -76,15 +78,6 @@ const ChipsInput = ({
     const { current } = hiddenInput;
     if (current) current.focus();
   };
-
-  useEffect(() => {
-    if (isFocused) {
-      const cleanUp = outsideClickHandler(chipsInput, unsetFocus);
-
-      return cleanUp;
-    }
-  }, [isFocused]);
-
   const handleRemove = email => event => {
     event.stopPropagation();
     setValue(value.filter(val => val !== email));

@@ -1,4 +1,5 @@
 import { all } from 'redux-saga/effects';
+import copyInterventionSaga from './copyIntervention';
 import sendProblemCsvSaga from './sendProblemCsv';
 import createProblemSaga from './createProblem';
 import editProblemSaga from './editProblem';
@@ -9,6 +10,7 @@ export {
   editProblemSaga,
   fetchProblemSaga,
   sendProblemCsvSaga,
+  copyInterventionSaga,
 };
 
 export default function* allProblemSagas() {
@@ -17,5 +19,6 @@ export default function* allProblemSagas() {
     editProblemSaga(),
     fetchProblemSaga(),
     sendProblemCsvSaga(),
+    copyInterventionSaga(),
   ]);
 }

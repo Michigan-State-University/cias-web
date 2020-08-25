@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import Row from 'components/Row';
+import Comment from 'components/Comment';
+
 import { elements, colors, hexToRgb } from 'theme';
 
 export const NavbarStyled = styled.div`
@@ -32,21 +35,33 @@ export const DropDownContent = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(${hexToRgb(colors.black)}, 0.08);
   padding: 16px;
+`;
 
-  div {
-    cursor: pointer;
-    white-space: nowrap;
+export const StyledComment = styled(Comment)`
+  color: ${colors.bluewood};
+  &::after {
+    display: block;
+    content: attr(title);
+    font-weight: bold;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+`;
 
-    &:not(:last-child) {
-      margin-bottom: 20px;
-    }
-
-    &:hover {
-      text-shadow: 0 0 1px ${colors.black}; // workaround to prevent shifting on bold
-    }
-    a {
-      color: black !important;
-      text-decoration: none !important;
+export const StyledRow = styled(Row)`
+  cursor: pointer;
+  white-space: nowrap;
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+  a {
+    color: black !important;
+    text-decoration: none !important;
+  }
+  &:hover {
+    ${StyledComment} {
+      font-weight: bold;
     }
   }
 `;

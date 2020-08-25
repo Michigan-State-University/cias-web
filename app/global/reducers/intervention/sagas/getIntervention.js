@@ -6,8 +6,8 @@ import { defaultMapper } from 'utils/mapResponseObjects';
 import { GET_INTERVENTION_REQUEST } from '../constants';
 import { getInterventionSuccess, getInterventionError } from '../actions';
 
-function* getIntervention({ payload: { id } }) {
-  const requestURL = `v1/interventions/${id}`;
+function* getIntervention({ payload: { interventionId, problemId } }) {
+  const requestURL = `v1/problems/${problemId}/interventions/${interventionId}`;
 
   try {
     const {

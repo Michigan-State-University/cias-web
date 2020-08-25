@@ -1,4 +1,4 @@
-export { fetchProblemsRequest } from './actions';
+export { fetchProblemsRequest, copyProblemRequest } from './actions';
 export { problemsRedcuer } from './reducer';
 export {
   makeSelectProblemsState,
@@ -6,4 +6,4 @@ export {
   makeSelectProblemsLoader,
 } from './selectors';
 
-export { fetchProblemsSaga } from './sagas';
+export { fetchProblemsSaga, copyProblemSaga } from './sagas';

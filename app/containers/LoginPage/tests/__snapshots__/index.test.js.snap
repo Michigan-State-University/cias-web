@@ -39,7 +39,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             E-mail address
           </p>
           <input
-            class="Input-sc-19txxuq-0 bTJycn"
+            class="Input-sc-19txxuq-0 lhOXtR"
             height="46"
             name="email"
             placeholder="Enter e-mail address"
@@ -57,7 +57,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             Password
           </p>
           <input
-            class="Input-sc-19txxuq-0 bTJycn"
+            class="Input-sc-19txxuq-0 lhOXtR"
             height="46"
             name="password"
             placeholder="Enter password"

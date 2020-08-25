@@ -1,18 +1,34 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-import { elements } from 'theme';
+const useLockBodyScroll = shouldLock => {
+  const scrollPosition = useRef(0);
+  const html = useRef(null);
 
-const useLockBodyScroll = () => {
+  const enableScrollLock = () => {
+    html.current = document.querySelector('html');
+    scrollPosition.current = window.pageYOffset;
+    html.current.style.overflow = 'hidden';
+    html.current.style.position = 'fixed';
+    html.current.style.top = `-${scrollPosition}px`;
+    html.current.style.width = '100%';
+  };
+
+  const disableScrollLock = () => {
+    if (html.current) {
+      html.current.style.removeProperty('overflow');
+      html.current.style.removeProperty('position');
+      html.current.style.removeProperty('top');
+      html.current.style.removeProperty('width');
+      window.scrollTo(0, scrollPosition.current);
+    }
+  };
+
   useEffect(() => {
-    const mainContainer = document.querySelector('#main-app-container');
-    const body = document.querySelector('body');
-    mainContainer.style.height = `calc(100vh - ${elements.navbarHeight}px)`;
-    body.style.removeProperty('overflow');
+    if (shouldLock) enableScrollLock();
     return () => {
-      mainContainer.style.height = `calc(100% - ${elements.navbarHeight}px)`;
-      body.style.overflow = 'auto';
+      disableScrollLock();
     };
-  }, []);
+  }, [shouldLock]);
 };
 
 export default useLockBodyScroll;

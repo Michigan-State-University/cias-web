@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -25,6 +25,7 @@ import ShareBox from 'containers/ShareBox';
 import TextButton from 'components/Button/TextButton';
 import Text from 'components/Text';
 import Dropdown from 'components/Dropdown';
+import Modal from 'components/Modal';
 import {
   fetchProblemRequest,
   makeSelectProblemState,
@@ -32,6 +33,7 @@ import {
   problemReducer,
   sendProblemCsvRequest,
   reorderInterventionList,
+  copyInterventionRequest,
 } from 'global/reducers/problem';
 import { createInterventionRequest } from 'global/reducers/intervention';
 import {
@@ -45,13 +47,19 @@ import { colors } from 'theme';
 import appStages from 'global/appStages';
 import globalMessages from 'global/i18n/globalMessages';
 
+import fileShare from 'assets/svg/file-share.svg';
+import copy from 'assets/svg/copy.svg';
+import archive from 'assets/svg/archive.svg';
+import { closed } from 'models/Status/StatusTypes';
+import { copyProblemRequest } from 'global/reducers/problems';
 import { StatusLabel, InterventionOptions } from './styled';
 import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
 import InterventionStatusButtons from './components/InterventionStatusButtons';
 import InterventionListItem from './components/InterventionListItem';
+import SelectResearchers from './components/SelectResearchers';
 import messages from './messages';
-import { updateStatuses, options } from './utils';
+import { updateStatuses } from './utils';
 
 const mockSetting =
   'Anyone who is a registered participant can access the session';
@@ -72,7 +80,9 @@ export function ProblemDetailsPage({
   interventionIndex,
   changeInterventionIndex,
   sendCsv,
+  copyIntervention,
   reorderInterventions,
+  copyProblem,
 }) {
   useInjectReducer({
     key: 'problem',
@@ -85,16 +95,62 @@ export function ProblemDetailsPage({
 
   const { interventions, name, id, status } = problem || {};
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const closeModal = () => setModalVisible(false);
+  const openModal = () => setModalVisible(true);
+  const handleCopyProblem = () => copyProblem({ problemId: id });
+  const handleArchiveProblem = () =>
+    editProblem({
+      path: 'status_event',
+      value: 'to_archive',
+    });
+
+  const options = [
+    {
+      id: 'copy',
+      label: formatMessage(messages.copy),
+      icon: fileShare,
+      action: openModal,
+      color: colors.bluewood,
+    },
+    {
+      id: 'duplicate',
+      label: formatMessage(messages.duplicate),
+      icon: copy,
+      action: handleCopyProblem,
+      color: colors.bluewood,
+    },
+    {
+      id: 'archive',
+      label: formatMessage(messages.archive),
+      icon: archive,
+      action: handleArchiveProblem,
+
+      color: colors.bluewood,
+    },
+  ];
+
   useLayoutEffect(() => {
     fetchProblem(problemId);
   }, []);
 
+  const availableOptions = options.filter(
+    elem => elem.id !== 'archive' || status === closed,
+  );
+
+  const handleCopyIntervention = interventionId => {
+    copyIntervention({ interventionId });
+  };
+
   const editName = val => editProblem({ path: 'name', value: val });
+
   const handleChangeStatus = () =>
     editProblem({
       path: 'status_event',
       value: get(updateStatuses, status, ''),
     });
+
   const handleSendCsv = () => sendCsv(id);
 
   const handleReorder = (event, previousIndex, nextIndex) => {
@@ -132,6 +188,7 @@ export function ProblemDetailsPage({
                   index={index}
                   isSelected={index === interventionIndex}
                   handleClick={handleClick}
+                  handleCopyIntervention={handleCopyIntervention}
                   nextInterventionName={
                     interventions[index + 1]
                       ? interventions[index + 1].name
@@ -152,6 +209,14 @@ export function ProblemDetailsPage({
 
   return (
     <Box height="100%" width="100%" padding="60px 160px">
+      <Modal
+        title={formatMessage(messages.modalTitle)}
+        onClose={closeModal}
+        visible={modalVisible}
+      >
+        <SelectResearchers problemId={id} onClose={closeModal} />
+      </Modal>
+
       <Row justify="between">
         <BackButton to="/">
           <FormattedMessage {...messages.back} />
@@ -183,7 +248,7 @@ export function ProblemDetailsPage({
             handleSendCsv={handleSendCsv}
           />
           <InterventionOptions>
-            <Dropdown options={options} clickable />
+            <Dropdown options={availableOptions} clickable />
           </InterventionOptions>
         </Row>
       </Row>
@@ -242,7 +307,9 @@ ProblemDetailsPage.propTypes = {
   interventionIndex: PropTypes.number,
   changeInterventionIndex: PropTypes.func,
   sendCsv: PropTypes.func,
+  copyIntervention: PropTypes.func,
   reorderInterventions: PropTypes.func,
+  copyProblem: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -256,7 +323,9 @@ const mapDispatchToProps = {
   editProblem: editProblemRequest,
   changeInterventionIndex: changeCurrentIntervention,
   sendCsv: sendProblemCsvRequest,
+  copyIntervention: copyInterventionRequest,
   reorderInterventions: reorderInterventionList,
+  copyProblem: copyProblemRequest,
 };
 
 const withConnect = connect(

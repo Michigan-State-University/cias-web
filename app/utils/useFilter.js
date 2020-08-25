@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import get from 'lodash/get';
+import isEmpty from 'lodash/isEmpty';
+import castArray from 'lodash/castArray';
+import isEqual from 'lodash/isEqual';
 
 import useDebounce from 'utils/useDebounce';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
@@ -27,25 +30,27 @@ const useFilter = (array, key, configuration) => {
   const [list, setList] = useState(array);
   const debouncedValue = useDebounce(value, initialDelay);
 
-  useEffect(() => {
+  const filter = () => {
     if (!list) return;
 
-    if (debouncedValue === initialValue) {
-      setList(array);
-      return;
-    }
+    const filteredList = array.filter(element => {
+      const castedValue = castArray(debouncedValue);
+      const checks = castedValue.map(
+        val =>
+          get(element, key, '')
+            .toLowerCase()
+            .indexOf(val.toLowerCase()) !== -1,
+      );
+      return checks.some(booleanVal => booleanVal);
+    });
 
-    const filteredList = array.filter(
-      element =>
-        get(element, key, '')
-          .toLowerCase()
-          .indexOf(debouncedValue.toLowerCase()) !== -1,
-    );
-    setList(filteredList);
-  }, [debouncedValue]);
+    if (!isEqual(filteredList, list)) setList(filteredList);
+  };
+
+  useEffect(filter, [debouncedValue]);
 
   useDidUpdateEffect(() => {
-    if (array) setList(array);
+    if (array && !isEmpty(array)) filter();
   }, [array]);
 
   return [list, value, setValue];

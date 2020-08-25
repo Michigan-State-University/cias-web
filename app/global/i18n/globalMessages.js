@@ -94,6 +94,10 @@ export default defineMessages({
       id: `${scope}.closed`,
       defaultMessage: 'Closed',
     },
+    archived: {
+      id: `${scope}.archived`,
+      defaultMessage: 'Archived',
+    },
   },
   createProblemError: {
     id: `${scope}.createProblemError`,

@@ -20,11 +20,12 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
       class="styled__InitialRow-sc-14fow03-0 eNEjTh"
     >
       <div
-        class="Row-x1o3ru-0 hFDYll"
+        class="Row-x1o3ru-0 bWDcYZ"
+        height="30"
         width="250"
       >
         <button
-          class="styled__StatusLabel-sc-14fow03-1 MhfPP"
+          class="styled__StatusLabel-sc-14fow03-1 EyqKF"
           color="#BDC7D6"
           value="draft"
         >
@@ -51,13 +52,20 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           </p>
         </button>
       </div>
-      <div>
+      <div
+        class="Row-x1o3ru-0 diEAcg"
+      >
+        <button
+          class="styled__ArchiveFilter-sc-14fow03-2 dSzCgH"
+        >
+          Show Archived
+        </button>
         <img
           alt="Search"
           src="IMAGE_MOCK"
         />
         <input
-          class="Input-sc-19txxuq-0 cLUttS"
+          class="Input-sc-19txxuq-0 iEXReM"
           placeholder="Filter by name"
           type="text"
           value=""

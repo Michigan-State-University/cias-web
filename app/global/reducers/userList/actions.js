@@ -11,7 +11,7 @@ import {
   FETCH_USERS_SUCCESS,
 } from './constants';
 
-export const fetchUsers = () => actionBuilder(FETCH_USERS);
+export const fetchUsers = types => actionBuilder(FETCH_USERS, { types });
 export const fetchUsersSuccess = users =>
   actionBuilder(FETCH_USERS_SUCCESS, users);
 export const fetchUsersFailure = error =>

@@ -44,4 +44,20 @@ export default defineMessages({
     id: `${scope}.adjust`,
     defaultMessage: 'Adjust',
   },
+  copy: {
+    id: `${scope}.copy`,
+    defaultMessage: 'Send copy to researcher',
+  },
+  duplicate: {
+    id: `${scope}.duplicate`,
+    defaultMessage: 'Duplicate intervention',
+  },
+  archive: {
+    id: `${scope}.archive`,
+    defaultMessage: 'Archive intervention',
+  },
+  modalTitle: {
+    id: `${scope}.modalTitle`,
+    defaultMessage: 'Choose researchers to send',
+  },
 });

@@ -5,6 +5,7 @@ export {
   editProblemRequest,
   sendProblemCsvRequest,
   reorderInterventionList,
+  copyInterventionRequest,
 } from './actions';
 export { problemReducer } from './reducer';
 export {
@@ -18,4 +19,5 @@ export {
   editProblemSaga,
   fetchProblemSaga,
   sendProblemCsvSaga,
+  copyInterventionSaga,
 } from './sagas';

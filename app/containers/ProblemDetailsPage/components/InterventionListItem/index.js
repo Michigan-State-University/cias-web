@@ -14,10 +14,7 @@ import H2 from 'components/H2';
 import Dropdown from 'components/Dropdown';
 import Divider from 'components/Divider';
 
-import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
-import archive from 'assets/svg/archive.svg';
-
 import { colors } from 'theme';
 import appStages from 'global/appStages';
 
@@ -33,30 +30,17 @@ function InterventionListItem({
   handleClick,
   intl: { formatMessage },
   nextInterventionName,
+  handleCopyIntervention,
 }) {
   const [branching, setBranching] = useState(false);
   const { id, name, problem_id: problemId } = intervention || {};
 
   const options = [
     {
-      id: 'copy',
-      label: formatMessage(messages.copy),
-      icon: fileShare,
-      action: () => {},
-      color: colors.bluewood,
-    },
-    {
       id: 'duplicate',
       label: formatMessage(messages.duplicate),
       icon: copy,
-      action: () => {},
-      color: colors.bluewood,
-    },
-    {
-      id: 'archive',
-      label: formatMessage(messages.archive),
-      icon: archive,
-      action: () => {},
+      action: () => handleCopyIntervention(id),
       color: colors.bluewood,
     },
   ];
@@ -106,6 +90,7 @@ InterventionListItem.propTypes = {
   handleClick: PropTypes.func,
   nextInterventionName: PropTypes.string,
   intl: PropTypes.object,
+  handleCopyIntervention: PropTypes.func,
 };
 
 export default injectIntl(InterventionListItem);

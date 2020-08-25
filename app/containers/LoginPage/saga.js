@@ -8,7 +8,7 @@ import { loginError, loginSuccess } from './actions';
 import { logIn } from '../../global/reducers/auth/actions';
 
 function* login({ payload: { email, password } }) {
-  const requestURL = `auth/sign_in`;
+  const requestURL = `v1/auth/sign_in`;
 
   try {
     const {

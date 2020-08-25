@@ -1,6 +1,7 @@
 import produce from 'immer';
 import set from 'lodash/set';
 
+import { defaultMapper } from 'utils/mapResponseObjects';
 import {
   FETCH_PROBLEM_REQUEST,
   FETCH_PROBLEM_SUCCESS,
@@ -14,6 +15,7 @@ import {
   SEND_PROBLEM_CSV_REQUEST,
   SEND_PROBLEM_CSV_SUCCESS,
   SEND_PROBLEM_CSV_ERROR,
+  COPY_INTERVENTION_SUCCESS,
   REORDER_INTERVENTION_LIST,
 } from './constants';
 
@@ -79,6 +81,11 @@ export const problemReducer = (state = initialState, action) =>
         break;
       case SEND_PROBLEM_CSV_ERROR:
         draft.loaders.sendCsvLoading = false;
+        break;
+      case COPY_INTERVENTION_SUCCESS:
+        draft.problem.interventions.push(
+          defaultMapper(action.payload.intervention),
+        );
         break;
       case REORDER_INTERVENTION_LIST:
         draft.problem.interventions = action.payload.reorderedList;

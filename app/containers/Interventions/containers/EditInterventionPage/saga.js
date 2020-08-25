@@ -182,8 +182,8 @@ function* deleteQuestion({ payload: { questionId, interventionId } }) {
   }
 }
 
-function* copyQuestion({ payload: { questionId, interventionId } }) {
-  const requestURL = `v1/interventions/${interventionId}/questions/${questionId}/clone`;
+function* copyQuestion({ payload: { questionId } }) {
+  const requestURL = `v1/questions/${questionId}/clone`;
 
   try {
     const response = yield axios.get(requestURL);

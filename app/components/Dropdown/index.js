@@ -1,7 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-
-import { outsideClickHandler } from 'utils/outsideClickHandler';
 
 import Img from 'components/Img';
 import Box from 'components/Box';
@@ -10,18 +8,14 @@ import Row from 'components/Row';
 import dots from 'assets/svg/dots.svg';
 import { colors, boxShadows } from 'theme';
 
+import useOutsideClick from 'utils/useOutsideClick';
 import { StyledComment, ImageContainer, StyledRow } from './styled';
 
 const Dropdown = ({ options, top, ...restProps }) => {
   const [open, setOpen] = useState(false);
 
   const dropdown = useRef(null);
-
-  useEffect(() => {
-    const cleanUp = outsideClickHandler(dropdown, () => setOpen(false));
-
-    return cleanUp;
-  }, []);
+  useOutsideClick(dropdown, () => setOpen(false), open);
 
   const getPosition = () => {
     if (top)
@@ -33,6 +27,7 @@ const Dropdown = ({ options, top, ...restProps }) => {
 
   return (
     <Box
+      ref={dropdown}
       display="flex"
       justify="end"
       align="start"
@@ -40,7 +35,6 @@ const Dropdown = ({ options, top, ...restProps }) => {
       {...restProps}
     >
       <ImageContainer
-        ref={dropdown}
         onClick={() => {
           setOpen(!open);
         }}

@@ -31,3 +31,19 @@ export const StatusLabel = styled.button`
     outline-offset: 0px;
   }
 `;
+
+export const ArchiveFilter = styled.button`
+  border: none;
+  background-color: transparent;
+  font-weight: bold;
+  outline: none;
+  font-size: 13px;
+  margin-right: 15px;
+  &:hover {
+    cursor: pointer;
+  }
+  &:focus {
+    outline: none;
+    outline-offset: 0px;
+  }
+`;

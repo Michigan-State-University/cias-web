@@ -20,6 +20,7 @@ const text = props => ({
     textDecoration: props.hoverDecoration || '',
   },
   lineHeight: props.lineHeight || '',
+  textAlign: props.textAlign || '',
 });
 
 text.propTypes = {
@@ -33,6 +34,7 @@ text.propTypes = {
   clickable: PropTypes.bool,
   hoverDecoration: PropTypes.oneOf(['underline', 'overline', 'line-through']),
   lineHeight: PropTypes.string,
+  textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
 };
 
 export { text };

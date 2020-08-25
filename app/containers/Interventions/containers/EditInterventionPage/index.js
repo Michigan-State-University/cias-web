@@ -22,7 +22,6 @@ import {
   getInterventionSaga,
   makeSelectInterventionLoaders,
 } from 'global/reducers/intervention';
-import useLockBodyScroll from 'utils/useLockBodyScroll';
 
 import { borders, themeColors, colors } from 'theme';
 
@@ -44,7 +43,10 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
-import { instantiateEmptyQuestion } from './utils';
+import {
+  instantiateEmptyQuestion,
+  useLockEditInterventionPageScroll,
+} from './utils';
 
 function EditInterventionPage({
   intl: { formatMessage },
@@ -58,7 +60,7 @@ function EditInterventionPage({
   loaders: { questionListLoading },
   interventionLoaders: { getIntervention: getInterventionLoader },
 }) {
-  useLockBodyScroll();
+  useLockEditInterventionPageScroll();
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   useInjectReducer({ key: 'editInterventionPage', reducer });
   useInjectSaga({ key: 'editInterventionPage', saga });
@@ -68,7 +70,10 @@ function EditInterventionPage({
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
 
   useEffect(() => {
-    getIntervention(params.interventionId);
+    getIntervention({
+      interventionId: params.interventionId,
+      problemId: params.problemId,
+    });
     getQuestions(params.interventionId);
   }, []);
 

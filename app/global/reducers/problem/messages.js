@@ -13,4 +13,8 @@ export default defineMessages({
     id: `${scope}.csvError`,
     defaultMessage: 'Unable to generate the file',
   },
+  copyError: {
+    id: `${scope}.copyError`,
+    defaultMessage: 'Cannot copy intervention',
+  },
 });

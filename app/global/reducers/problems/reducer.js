@@ -2,6 +2,7 @@ import produce from 'immer';
 import isEmpty from 'lodash/isEmpty';
 
 import {
+  COPY_PROBLEM_SUCCESS,
   FETCH_PROBLEMS_ERROR,
   FETCH_PROBLEMS_REQUEST,
   FETCH_PROBLEMS_SUCCESS,
@@ -32,6 +33,7 @@ export const problemsRedcuer = (state = initialState, action) =>
         draft.fetchProblemError = action.payload.error;
         break;
       case CREATE_PROBLEM_SUCCESS:
+      case COPY_PROBLEM_SUCCESS:
         draft.problems = [...draft.problems, action.payload.problem];
         break;
     }

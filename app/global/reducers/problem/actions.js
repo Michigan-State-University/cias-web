@@ -13,6 +13,8 @@ import {
   SEND_PROBLEM_CSV_REQUEST,
   SEND_PROBLEM_CSV_SUCCESS,
   SEND_PROBLEM_CSV_ERROR,
+  COPY_INTERVENTION_SUCCESS,
+  COPY_INTERVENTION_REQUEST,
   REORDER_INTERVENTION_LIST,
 } from './constants';
 
@@ -42,6 +44,11 @@ export const editProblemRequest = payload =>
 export const editProblemSuccess = problem =>
   actionBuilder(EDIT_PROBLEM_SUCCESS, { problem });
 export const editProblemError = () => actionBuilder(EDIT_PROBLEM_ERROR, {});
+
+export const copyInterventionRequest = payload =>
+  actionBuilder(COPY_INTERVENTION_REQUEST, payload);
+export const copyInterventionSuccess = intervention =>
+  actionBuilder(COPY_INTERVENTION_SUCCESS, { intervention });
 
 export const reorderInterventionList = payload =>
   actionBuilder(REORDER_INTERVENTION_LIST, payload);

@@ -7,7 +7,7 @@ import { SEND_PROBLEM_CSV_REQUEST } from 'global/reducers/problem/constants';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { sendProblemCsvSuccess, sendProblemCsvError } from '../actions';
-import messages from './messages';
+import messages from '../messages';
 
 function* sendProblemCsv({ payload: { id } }) {
   const requestURL = `v1/problems/${id}/answers.csv`;

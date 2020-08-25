@@ -64,7 +64,7 @@ const QuestionListItem = ({
   const handleCopy = () => {
     const copied = cloneDeep(question);
     set(copied, 'id', uniqueId());
-    copyQuestion({ copied, questionId: id, interventionId });
+    copyQuestion({ copied, questionId: id });
   };
 
   const options = [

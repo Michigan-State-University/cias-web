@@ -1,11 +1,11 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import { boxShadows, colors } from 'theme';
-import { outsideClickHandler } from 'utils/outsideClickHandler';
 
 import Box from 'components/Box';
 
+import useOutsideClick from 'utils/useOutsideClick';
 import Dropdown from './Dropdown';
 import { ArrowDropdownWrapper } from './styled';
 
@@ -19,14 +19,7 @@ const ArrowDropdown = ({
   childWidthScope,
 }) => {
   const dropdown = useRef(null);
-
-  useEffect(() => {
-    if (isOpened) {
-      const cleanUp = outsideClickHandler(dropdown, () => setOpen(false));
-
-      return cleanUp;
-    }
-  }, [isOpened]);
+  useOutsideClick(dropdown, () => setOpen(false), isOpened);
 
   return (
     <ArrowDropdownWrapper ref={dropdown} width={width}>

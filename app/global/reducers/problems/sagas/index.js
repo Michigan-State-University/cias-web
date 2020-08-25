@@ -1,8 +1,9 @@
 import { all } from 'redux-saga/effects';
 import fetchProblemsSaga from './fetchProblems';
+import copyProblemSaga from './copyProblem';
 
-export { fetchProblemsSaga };
+export { fetchProblemsSaga, copyProblemSaga };
 
 export default function* allProblemSagas() {
-  yield all([fetchProblemsSaga()]);
+  yield all([fetchProblemsSaga(), copyProblemSaga()]);
 }
