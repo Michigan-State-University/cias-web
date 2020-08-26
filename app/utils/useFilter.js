@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import get from 'lodash/get';
-import isEmpty from 'lodash/isEmpty';
 import castArray from 'lodash/castArray';
 import isEqual from 'lodash/isEqual';
 
@@ -50,7 +49,7 @@ const useFilter = (array, key, configuration) => {
   useEffect(filter, [debouncedValue]);
 
   useDidUpdateEffect(() => {
-    if (array && !isEmpty(array)) filter();
+    if (array) filter();
   }, [array]);
 
   return [list, value, setValue];
