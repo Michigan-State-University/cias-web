@@ -1,18 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c3 {
+exports[`<QuestionTypeChooser /> should match the snapshot 1`] = `
+.c0 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -23,7 +12,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   height: auto;
 }
 
-.c7 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -41,21 +30,158 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   align-items: center;
 }
 
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  position: relative;
+}
+
+.c4 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(200,102,234,1);
+  color: rgba(200,102,234,1);
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 80px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px dashed #B0BAC9;
+  border-radius: 5px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2:hover {
+  background-color: #E9F1FB;
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <div
+      class="c1"
+      width="100%"
+    >
+      <div
+        class="c2"
+        display="flex"
+        height="80"
+        width="100%"
+      >
+        <div
+          class="c3"
+        >
+          <p
+            class="c4"
+            color="#C866EA"
+            font-weight="bold"
+          >
+            <span>
+              + Add new screen
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] = `
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
 .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  position: relative;
+}
+
+.c5 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
   width: 100%;
   position: absolute;
-  display: none;
   margin-top: 15px;
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
 }
 
-.c1 {
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -64,7 +190,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   border-bottom: 1px solid #E9F1FB;
 }
 
-.c4 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -73,7 +199,16 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   padding: 8px;
 }
 
-.c2 {
+.c4 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(200,102,234,1);
+  color: rgba(200,102,234,1);
+}
+
+.c7 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -81,14 +216,51 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   font-weight: 700;
 }
 
-.c9 {
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   font-weight: 500;
 }
 
-.c6 {
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 80px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px dashed #B0BAC9;
+  border-radius: 5px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2:hover {
+  background-color: #E9F1FB;
+}
+
+.c10 {
   width: auto;
   height: auto;
   display: block;
@@ -100,26 +272,11 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c6:hover {
+.c10:hover {
   background-color: #E9F1FB;
 }
 
-.c15 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  padding: 8px;
-  cursor: pointer;
-  border-radius: 5px;
-  border-radius: 5px;
-}
-
-.c15:hover {
-  background-color: #E9F1FB;
-}
-
-.c8 {
+.c11 {
   border-radius: 50%;
   background-color: #0086F8;
   display: -webkit-box;
@@ -141,7 +298,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   opacity: 1;
 }
 
-.c10 {
+.c13 {
   border-radius: 50%;
   background-color: #C866EA;
   display: -webkit-box;
@@ -163,7 +320,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   opacity: 1;
 }
 
-.c11 {
+.c14 {
   border-radius: 50%;
   background-color: #FFA16C;
   display: -webkit-box;
@@ -185,7 +342,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   opacity: 1;
 }
 
-.c12 {
+.c15 {
   border-radius: 50%;
   background-color: #FFCF5B;
   display: -webkit-box;
@@ -207,7 +364,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   opacity: 1;
 }
 
-.c13 {
+.c16 {
   border-radius: 50%;
   background-color: #FF7691;
   display: -webkit-box;
@@ -229,7 +386,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   opacity: 1;
 }
 
-.c14 {
+.c17 {
   border-radius: 50%;
   background-color: #CED3E4;
   display: -webkit-box;
@@ -251,7 +408,7 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   opacity: 1;
 }
 
-.c16 {
+.c18 {
   border-radius: 50%;
   background-color: #107969;
   display: -webkit-box;
@@ -273,190 +430,204 @@ exports[`<ScreenTypeChooser /> should match the snapshot 1`] = `
   opacity: 1;
 }
 
-<div
-  className="c0"
-  display="none"
-  width="100%"
->
+<div>
   <div
-    className="c1"
-  >
-    <p
-      className="c2"
-      fontSize="15px"
-      fontWeight="bold"
-    >
-      Choose type of screen
-    </p>
-  </div>
-  <div
-    className="c3"
+    class="c0"
   >
     <div
-      className="c4"
+      class="c1"
       width="100%"
     >
       <div
-        className="c5"
+        class="c2"
+        display="flex"
+        height="80"
+        width="100%"
       >
         <div
-          className="c6"
-          onClick={[Function]}
+          class="c3"
         >
-          <div
-            className="c7"
+          <p
+            class="c4"
+            color="#C866EA"
+            font-weight="bold"
           >
-            <div
-              className="c8"
-              opacity={1}
-              size="10px"
-            />
-            <p
-              className="c9"
-              fontWeight="medium"
-            >
-              Single answer screen
-            </p>
-          </div>
+            <span>
+              + Add new screen
+            </span>
+          </p>
+        </div>
+      </div>
+      <div
+        class="c5"
+        width="100%"
+      >
+        <div
+          class="c6"
+        >
+          <p
+            class="c7"
+            font-size="15px"
+            font-weight="bold"
+          >
+            Choose type of screen
+          </p>
         </div>
         <div
-          className="c6"
-          onClick={[Function]}
+          class="c0"
         >
           <div
-            className="c7"
+            class="c8"
+            width="100%"
           >
             <div
-              className="c10"
-              opacity={1}
-              size="10px"
-            />
-            <p
-              className="c9"
-              fontWeight="medium"
+              class="c9"
             >
-              Multi answer screen
-            </p>
-          </div>
-        </div>
-        <div
-          className="c6"
-          onClick={[Function]}
-        >
-          <div
-            className="c7"
-          >
-            <div
-              className="c11"
-              opacity={1}
-              size="10px"
-            />
-            <p
-              className="c9"
-              fontWeight="medium"
-            >
-              Textbox screen
-            </p>
-          </div>
-        </div>
-        <div
-          className="c6"
-          onClick={[Function]}
-        >
-          <div
-            className="c7"
-          >
-            <div
-              className="c12"
-              opacity={1}
-              size="10px"
-            />
-            <p
-              className="c9"
-              fontWeight="medium"
-            >
-              Number screen
-            </p>
-          </div>
-        </div>
-        <div
-          className="c6"
-          onClick={[Function]}
-        >
-          <div
-            className="c7"
-          >
-            <div
-              className="c13"
-              opacity={1}
-              size="10px"
-            />
-            <p
-              className="c9"
-              fontWeight="medium"
-            >
-              Grid screen
-            </p>
-          </div>
-        </div>
-        <div
-          className="c6"
-          onClick={[Function]}
-        >
-          <div
-            className="c7"
-          >
-            <div
-              className="c13"
-              opacity={1}
-              size="10px"
-            />
-            <p
-              className="c9"
-              fontWeight="medium"
-            >
-              Visual Analogue Scale screen
-            </p>
-          </div>
-        </div>
-        <div
-          className="c6"
-          onClick={[Function]}
-        >
-          <div
-            className="c7"
-          >
-            <div
-              className="c14"
-              opacity={1}
-              size="10px"
-            />
-            <p
-              className="c9"
-              fontWeight="medium"
-            >
-              Information screen
-            </p>
-          </div>
-        </div>
-        <div
-          className="c15"
-          onClick={[Function]}
-        >
-          <div
-            className="c7"
-          >
-            <div
-              className="c16"
-              opacity={1}
-              size="10px"
-            />
-            <p
-              className="c9"
-              fontWeight="medium"
-            >
-              Url screen
-            </p>
+              <div
+                class="c10"
+              >
+                <div
+                  class="c3"
+                >
+                  <div
+                    class="c11"
+                    opacity="1"
+                  />
+                  <p
+                    class="c12"
+                    font-weight="medium"
+                  >
+                    Single answer screen
+                  </p>
+                </div>
+              </div>
+              <div
+                class="c10"
+              >
+                <div
+                  class="c3"
+                >
+                  <div
+                    class="c13"
+                    opacity="1"
+                  />
+                  <p
+                    class="c12"
+                    font-weight="medium"
+                  >
+                    Multi answer screen
+                  </p>
+                </div>
+              </div>
+              <div
+                class="c10"
+              >
+                <div
+                  class="c3"
+                >
+                  <div
+                    class="c14"
+                    opacity="1"
+                  />
+                  <p
+                    class="c12"
+                    font-weight="medium"
+                  >
+                    Textbox screen
+                  </p>
+                </div>
+              </div>
+              <div
+                class="c10"
+              >
+                <div
+                  class="c3"
+                >
+                  <div
+                    class="c15"
+                    opacity="1"
+                  />
+                  <p
+                    class="c12"
+                    font-weight="medium"
+                  >
+                    Number screen
+                  </p>
+                </div>
+              </div>
+              <div
+                class="c10"
+              >
+                <div
+                  class="c3"
+                >
+                  <div
+                    class="c16"
+                    opacity="1"
+                  />
+                  <p
+                    class="c12"
+                    font-weight="medium"
+                  >
+                    Grid screen
+                  </p>
+                </div>
+              </div>
+              <div
+                class="c10"
+              >
+                <div
+                  class="c3"
+                >
+                  <div
+                    class="c16"
+                    opacity="1"
+                  />
+                  <p
+                    class="c12"
+                    font-weight="medium"
+                  >
+                    Visual Analogue Scale screen
+                  </p>
+                </div>
+              </div>
+              <div
+                class="c10"
+              >
+                <div
+                  class="c3"
+                >
+                  <div
+                    class="c17"
+                    opacity="1"
+                  />
+                  <p
+                    class="c12"
+                    font-weight="medium"
+                  >
+                    Information screen
+                  </p>
+                </div>
+              </div>
+              <div
+                class="c10"
+              >
+                <div
+                  class="c3"
+                >
+                  <div
+                    class="c18"
+                    opacity="1"
+                  />
+                  <p
+                    class="c12"
+                    font-weight="medium"
+                  >
+                    Url screen
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

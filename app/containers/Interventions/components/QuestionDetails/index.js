@@ -9,7 +9,6 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Question from 'models/Intervention/Question';
-import NoContent from 'components/NoContent';
 import { Button } from 'components/Button';
 
 import { colors } from 'theme';
@@ -70,7 +69,6 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
               animationBoundaries={animationBoundaries}
               settings={settings}
             />
-
             <Row justify="center" filled>
               <Column mx={50} justify="center">
                 <Row width="100%" mt={5} height={30} />
@@ -144,7 +142,7 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
     );
   }
 
-  return <NoContent />;
+  return null;
 };
 
 RenderQuestionDetails.propTypes = {

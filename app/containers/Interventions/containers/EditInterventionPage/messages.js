@@ -7,10 +7,6 @@ export default defineMessages({
     id: `${scope}.pageTitle`,
     defaultMessage: 'e-Intervention New',
   },
-  addScreen: {
-    id: `${scope}.addScreen`,
-    defaultMessage: '+ Add new screen',
-  },
   newQuestionMessage: {
     id: `${scope}.newQuestionMessage`,
     defaultMessage:

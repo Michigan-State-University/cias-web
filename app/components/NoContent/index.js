@@ -11,7 +11,7 @@ import { colors } from 'theme';
 
 import messages from './messages';
 
-const NoContent = ({ image, text, alt }) => (
+const NoContent = ({ image, text, alt, ...styleProps }) => (
   <Box
     width="100%"
     minWidth="max-content"
@@ -21,6 +21,7 @@ const NoContent = ({ image, text, alt }) => (
     align="center"
     borderRadius="0"
     data-testid="no-content"
+    {...styleProps}
   >
     <Column align="center">
       <Img src={image} alt={alt} />

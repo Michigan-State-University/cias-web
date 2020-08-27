@@ -13,4 +13,8 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Choose type of screen',
   },
+  addScreen: {
+    id: `${scope}.addScreen`,
+    defaultMessage: '+ Add new screen',
+  },
 });

@@ -193,7 +193,7 @@ ApprovableInput.propTypes = {
   fontSize: PropTypes.number,
   mr: PropTypes.number,
   disabled: PropTypes.bool,
-  height: PropTypes.number,
+  height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   width: PropTypes.number,
 };
 

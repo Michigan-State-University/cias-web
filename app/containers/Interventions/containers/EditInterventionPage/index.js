@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -12,8 +12,6 @@ import { useInjectReducer } from 'utils/injectReducer';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Row from 'components/Row';
-import HoverableBox from 'components/Box/HoverableBox';
-import Text from 'components/Text';
 import Question from 'models/Intervention/Question';
 import Loader from 'components/Loader';
 import {
@@ -24,7 +22,7 @@ import {
 } from 'global/reducers/intervention';
 import useLockBodyScroll from 'utils/useLockBodyScroll';
 
-import { borders, themeColors, colors } from 'theme';
+import { borders, colors } from 'theme';
 
 import reducer from './reducer';
 import saga from './saga';
@@ -44,6 +42,7 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import QuestionListItem from '../../components/QuestionListItem';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
+import EmptyInterventionPage from '../../components/EmptyInterventionPage';
 import {
   instantiateEmptyQuestion,
   useLockEditInterventionPageScroll,
@@ -62,7 +61,6 @@ function EditInterventionPage({
   interventionLoaders: { getIntervention: getInterventionLoader },
 }) {
   useLockEditInterventionPageScroll();
-  const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   useInjectReducer({ key: 'editInterventionPage', reducer });
   useInjectSaga({ key: 'editInterventionPage', saga });
 
@@ -78,8 +76,6 @@ function EditInterventionPage({
     getQuestions(params.interventionId);
   }, []);
 
-  const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
-
   const onCreateQuestion = type => {
     createQuestion(
       instantiateEmptyQuestion(
@@ -88,7 +84,6 @@ function EditInterventionPage({
       ),
       params.interventionId,
     );
-    toggleTypeChooser();
   };
 
   const handleReorder = (event, previousIndex, nextIndex) => {
@@ -107,6 +102,14 @@ function EditInterventionPage({
       interventionId: params.interventionId,
     });
   };
+
+  if (questions.length === 0 && !questionListLoading)
+    return (
+      <EmptyInterventionPage
+        onCreateQuestion={onCreateQuestion}
+        formatMessage={formatMessage}
+      />
+    );
 
   const loading = questionListLoading || getInterventionLoader;
   const renderList = () => {
@@ -146,34 +149,7 @@ function EditInterventionPage({
           >
             <Box width="100%" padded>
               {renderList()}
-              <Row>
-                <Box position="relative" width="100%">
-                  <HoverableBox
-                    px={21}
-                    py={14}
-                    onClick={toggleTypeChooser}
-                    display="flex"
-                    justify="center"
-                    align="center"
-                    border={`${borders.borderWidth} dashed ${
-                      colors.greyishBlue
-                    }`}
-                    borderRadius={5}
-                    height={80}
-                    width="100%"
-                  >
-                    <Row align="center">
-                      <Text fontWeight="bold" color={themeColors.secondary}>
-                        {formatMessage(messages.addScreen)}
-                      </Text>
-                    </Row>
-                  </HoverableBox>
-                  <QuestionTypeChooser
-                    visible={typeChooserOpen}
-                    onClick={onCreateQuestion}
-                  />
-                </Box>
-              </Row>
+              <QuestionTypeChooser onClick={onCreateQuestion} />
               <Row />
             </Box>
           </Box>

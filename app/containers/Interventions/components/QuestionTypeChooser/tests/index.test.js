@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render, fireEvent } from 'react-testing-library';
 import 'jest-styled-components';
 import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
@@ -7,25 +7,49 @@ import { browserHistory } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 import configureStore from 'configureStore';
-import ScreenTypeChooser from '../index';
+import QuestionTypeChooser from '../index';
 
-describe('<ScreenTypeChooser />', () => {
+describe('<QuestionTypeChooser />', () => {
   let store;
 
   beforeAll(() => {
     store = configureStore({}, browserHistory);
   });
 
+  it('Expect to not log errors in console', () => {
+    const spy = jest.spyOn(global.console, 'error');
+    render(
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <QuestionTypeChooser onClick={jest.fn()} />
+        </IntlProvider>
+      </Provider>,
+    );
+    expect(spy).not.toHaveBeenCalled();
+  });
+
   it('should match the snapshot', () => {
-    const renderedComponent = renderer
-      .create(
-        <Provider store={store}>
-          <IntlProvider locale={DEFAULT_LOCALE}>
-            <ScreenTypeChooser onClick={jest.fn()} />
-          </IntlProvider>
-        </Provider>,
-      )
-      .toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <QuestionTypeChooser onClick={jest.fn()} />
+        </IntlProvider>
+      </Provider>,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should match the snapshot while being open', () => {
+    const { container, getByText } = render(
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <QuestionTypeChooser onClick={jest.fn()} />
+        </IntlProvider>
+      </Provider>,
+    );
+
+    const button = getByText('+ Add new screen');
+    fireEvent.click(button);
+    expect(container).toMatchSnapshot();
   });
 });

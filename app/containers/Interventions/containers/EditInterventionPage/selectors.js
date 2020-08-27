@@ -74,6 +74,12 @@ const makeSelectQuestionsLength = () =>
     substate => substate.questions.length,
   );
 
+const makeSelectCreateQuestionLoader = () =>
+  createSelector(
+    selectEditInterventionPageDomain,
+    substate => substate.loaders.createQuestionLoader,
+  );
+
 export {
   makeSelectEditInterventionPage,
   selectEditInterventionPageDomain,
@@ -87,4 +93,5 @@ export {
   makeSelectLoaders,
   makeSelectAnimationPosition,
   makeSelectQuestionsLength,
+  makeSelectCreateQuestionLoader,
 };

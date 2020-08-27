@@ -40,6 +40,8 @@ import {
   MAKE_PEEDY_DRAGGABLE,
   SET_ANIMATION_STOP_POSITION,
   UPDATE_PREVIEW_DATA,
+  CREATE_QUESTION_REQUEST,
+  CREATE_QUESTION_ERROR,
 } from './constants';
 import questionDataReducer from '../../components/QuestionData/reducer';
 import questionSettingsReducer from '../../components/QuestionSettings/Settings/reducer';
@@ -73,6 +75,7 @@ export const initialState = {
     interventionListLoading: false,
     questionListLoading: true,
     updateQuestion: false,
+    createQuestionLoader: false,
   },
 };
 
@@ -174,6 +177,10 @@ const editInterventionPageReducer = (state = initialState, action) =>
       case COPY_QUESTION_ERROR:
         break;
 
+      case CREATE_QUESTION_REQUEST:
+        draft.loaders.createQuestionLoader = true;
+        break;
+
       case CREATE_QUESTION_SUCCESS:
         draft.cache.questions.push(
           mapQuestionDataForType(action.payload.question),
@@ -181,6 +188,10 @@ const editInterventionPageReducer = (state = initialState, action) =>
 
         draft.questions = cloneDeep(draft.cache.questions);
         draft.selectedQuestion = draft.questions.length - 1;
+        draft.loaders.createQuestionLoader = false;
+        break;
+      case CREATE_QUESTION_ERROR:
+        draft.loaders.createQuestionLoader = false;
         break;
 
       case GET_QUESTIONS_REQUEST:

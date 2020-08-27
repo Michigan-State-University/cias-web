@@ -14,6 +14,17 @@ Object.defineProperty(document, 'getSelection', {
   writable: true,
 });
 
+Object.defineProperty(window, 'ResizeObserver', {
+  value: class ResizeObserver {
+    observe() {}
+
+    unobserve() {}
+  },
+  writable: true,
+});
+
+Object.defineProperty(window, 'scrollTo', { value: () => {}, writable: true });
+
 jest.mock('react-tooltip/node_modules/uuid', () => ({
   v4: () => '00000000-0000-0000-0000-000000000000',
 }));
