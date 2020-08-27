@@ -45,7 +45,7 @@ export default defineMessages({
   },
   newStep: {
     id: `${scope}.newStep`,
-    defaultMessage: '+ Add another block',
+    defaultMessage: '+ Add block',
   },
   selectQuestion: {
     id: `${scope}.selectQuestion`,
