@@ -37,3 +37,6 @@ export const UPDATE_NARRATOR_MOVEMENT =
 
 export const REORDER_NARRATOR_BLOCKS =
   'app/EditInterventionPage/Settings/REORDER_NARRATOR_BLOCKS';
+
+export const UPDATE_PAUSE_DURATION =
+  'app/EditInterventionPage/Settings/UPDATE_PAUSE_DURATION';

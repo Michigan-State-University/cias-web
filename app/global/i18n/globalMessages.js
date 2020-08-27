@@ -42,6 +42,10 @@ export default defineMessages({
       id: `${scope}.ReadQuestion`,
       defaultMessage: 'Read question',
     },
+    Pause: {
+      id: `${scope}.Pause`,
+      defaultMessage: 'Pause',
+    },
   },
   questionTypes: {
     'Question::Single': {

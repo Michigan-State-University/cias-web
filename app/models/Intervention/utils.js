@@ -7,6 +7,7 @@ import {
   headAnimationType,
   readQuestionBlockType,
   reflectionType,
+  pauseType,
 } from 'models/Narrator/BlockTypes';
 import { getFromQuestionTTS } from 'containers/Interventions/containers/EditInterventionPage/utils';
 
@@ -157,6 +158,16 @@ export const instantiateBlockForType = (type, posFrom, question) => {
         text: getFromQuestionTTS(question),
         audio_urls: [],
         sha256: [],
+      };
+    case pauseType:
+      return {
+        type: pauseType,
+        animation: 'standStill',
+        position: {
+          posFrom,
+          posTo: posFrom,
+        },
+        pauseDuration: 2,
       };
     default:
       return undefined;

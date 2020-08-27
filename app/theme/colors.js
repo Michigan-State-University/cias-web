@@ -23,6 +23,7 @@ const colors = {
   surfieGreen: '#107969',
   selago: '#E3EEFB',
   electricViolet: '#B302FF',
+  coral: '#FF7F50',
 };
 
 const themeColors = {

@@ -5,12 +5,14 @@ export const headAnimationType = 'HeadAnimation';
 export const speechType = 'Speech';
 export const readQuestionBlockType = 'ReadQuestion';
 export const reflectionType = 'Reflection';
+export const pauseType = 'Pause';
 
 export const blockTypes = [
   speechType,
   bodyAnimationType,
   headAnimationType,
   readQuestionBlockType,
+  pauseType,
 ];
 
 export const blockTypeToColorMap = {
@@ -19,4 +21,5 @@ export const blockTypeToColorMap = {
   [reflectionType]: colors.azure,
   [headAnimationType]: colors.golden,
   [readQuestionBlockType]: colors.electricViolet,
+  [pauseType]: colors.coral,
 };

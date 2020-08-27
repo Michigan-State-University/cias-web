@@ -106,7 +106,7 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
-.c12 {
+.c13 {
   width: auto;
   height: auto;
   display: block;
@@ -117,7 +117,7 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c12:hover {
+.c13:hover {
   background-color: #E9F1FB;
 }
 
@@ -187,7 +187,7 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   opacity: 1;
 }
 
-.c13 {
+.c12 {
   border-radius: 50%;
   background-color: #B302FF;
   display: -webkit-box;
@@ -206,6 +206,28 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   height: 10px;
   margin-right: 18px;
   background-color: rgba(179,2,255,1);
+  opacity: 1;
+}
+
+.c14 {
+  border-radius: 50%;
+  background-color: #FF7F50;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  margin-right: 18px;
+  background-color: rgba(255,127,80,1);
   opacity: 1;
 }
 
@@ -295,14 +317,14 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
           </div>
         </div>
         <div
-          className="c12"
+          className="c6"
           onClick={[Function]}
         >
           <div
             className="c7"
           >
             <div
-              className="c13"
+              className="c12"
               opacity={1}
               size="10px"
             />
@@ -311,6 +333,26 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
               fontWeight="medium"
             >
               Read question
+            </p>
+          </div>
+        </div>
+        <div
+          className="c13"
+          onClick={[Function]}
+        >
+          <div
+            className="c7"
+          >
+            <div
+              className="c14"
+              opacity={1}
+              size="10px"
+            />
+            <p
+              className="c9"
+              fontWeight="medium"
+            >
+              Pause
             </p>
           </div>
         </div>

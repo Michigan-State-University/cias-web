@@ -14,6 +14,7 @@ import {
   SWITCH_SPEECH_REFLECTION,
   UPDATE_REFLECTION,
   REORDER_NARRATOR_BLOCKS,
+  UPDATE_PAUSE_DURATION,
 } from './constants';
 
 export const updateSettings = (property, value) =>
@@ -107,4 +108,10 @@ export const reorderNarratorBlocks = (
   updateQuestionSettings({
     type: REORDER_NARRATOR_BLOCKS,
     data: { reorderedBlocks, previousIndex, nextIndex },
+  });
+
+export const updatePauseDuration = (index, duration) =>
+  updateQuestionSettings({
+    type: UPDATE_PAUSE_DURATION,
+    data: { index, duration },
   });

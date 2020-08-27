@@ -18,6 +18,7 @@ import {
   SWITCH_SPEECH_REFLECTION,
   UPDATE_REFLECTION,
   REORDER_NARRATOR_BLOCKS,
+  UPDATE_PAUSE_DURATION,
 } from './constants';
 
 import { reorderBlocksPositions, getStartAnimationPoint } from '../utils';
@@ -204,6 +205,20 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
             previousIndex,
             nextIndex,
           ),
+        },
+      };
+    }
+
+    case UPDATE_PAUSE_DURATION: {
+      const { duration, index } = payload.data;
+
+      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      cloneBlocks[index].pauseDuration = duration;
+      return {
+        ...question,
+        narrator: {
+          ...question.narrator,
+          blocks: cloneBlocks,
         },
       };
     }

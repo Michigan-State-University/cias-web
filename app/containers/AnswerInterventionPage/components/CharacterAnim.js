@@ -10,6 +10,7 @@ import {
   headAnimationType,
   reflectionType,
   readQuestionBlockType,
+  pauseType,
 } from 'models/Narrator/BlockTypes';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
@@ -40,6 +41,9 @@ const lottieStyles = {
   margin: 'none',
 };
 
+const pauseCharacter = async time =>
+  new Promise(r => setTimeout(r, time * 1000));
+
 const CharacterAnim = ({
   blocks,
   questionId,
@@ -55,6 +59,17 @@ const CharacterAnim = ({
       type: UPDATE,
       newState,
     });
+
+  const handlePauseBlock = async (nextBlock, nextIndex) => {
+    const { pauseDuration } = nextBlock;
+    const idleAnimation = getIdleAnimation();
+    dispatchUpdate({
+      currentData: idleAnimation,
+      currentBlockIndex: nextIndex,
+    });
+    await pauseCharacter(pauseDuration);
+    changeBlock(nextIndex);
+  };
 
   const changeBlock = async prevIndex => {
     clearAnimationBlock();
@@ -74,6 +89,9 @@ const CharacterAnim = ({
         case reflectionType:
         case readQuestionBlockType:
           changeSpeech(nextBlock, nextIndex);
+          break;
+        case pauseType:
+          handlePauseBlock(nextBlock, nextIndex);
           break;
         default:
           break;
