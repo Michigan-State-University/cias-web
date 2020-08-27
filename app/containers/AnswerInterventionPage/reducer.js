@@ -19,6 +19,7 @@ import {
   START_INTERVENTION,
   CHANGE_PREVIEW_MODE,
   RESET_INTERVENTION,
+  CHANGE_IS_ANIMATING,
 } from './constants';
 
 export const initialState = {
@@ -32,6 +33,7 @@ export const initialState = {
   interventionStarted: false,
   previewMode: DESKTOP_MODE,
   interventionId: null,
+  isAnimationOngoing: true,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -102,6 +104,9 @@ const answerInterventionPageReducer = (
         draft.answers = initialState.answers;
         draft.questionIndex = 0;
         draft.interventionStarted = false;
+        break;
+      case CHANGE_IS_ANIMATING:
+        draft.isAnimationOngoing = payload.isAnimating;
         break;
     }
   });

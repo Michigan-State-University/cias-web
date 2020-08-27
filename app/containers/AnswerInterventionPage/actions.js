@@ -16,6 +16,7 @@ import {
   SET_QUESTION_INDEX,
   CHANGE_PREVIEW_MODE,
   RESET_INTERVENTION,
+  CHANGE_IS_ANIMATING,
 } from './constants';
 import { actionBuilder } from '../../utils/actionBuilder';
 
@@ -52,3 +53,6 @@ export const startIntervention = () => actionBuilder(START_INTERVENTION, {});
 export const changePreviewMode = previewMode =>
   actionBuilder(CHANGE_PREVIEW_MODE, { previewMode });
 export const resetIntervention = () => actionBuilder(RESET_INTERVENTION, {});
+
+export const changeIsAnimating = isAnimating =>
+  actionBuilder(CHANGE_IS_ANIMATING, { isAnimating });

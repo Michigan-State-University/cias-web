@@ -49,6 +49,7 @@ import {
   selectAnswer,
   setQuestionIndex,
   startIntervention,
+  changeIsAnimating,
 } from './actions';
 
 const AnimationRefHelper = ({
@@ -57,6 +58,7 @@ const AnimationRefHelper = ({
   currentQuestionId,
   previewMode,
   answers,
+  changeIsAnimationOngoing,
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
@@ -74,6 +76,7 @@ const AnimationRefHelper = ({
           settings={currentQuestion.narrator.settings}
           previewMode={previewMode}
           answers={answers}
+          changeIsAnimationOngoing={changeIsAnimationOngoing}
         />
       )}
     </AnswerInterventionContent>
@@ -85,6 +88,7 @@ AnimationRefHelper.propTypes = {
   currentQuestionId: PropTypes.any,
   previewMode: PropTypes.any,
   answers: PropTypes.object,
+  changeIsAnimationOngoing: PropTypes.func,
 };
 
 export function AnswerInterventionPage({
@@ -96,6 +100,7 @@ export function AnswerInterventionPage({
   setQuestionIndexAction,
   onStartIntervention,
   showError,
+  changeIsAnimationOngoing,
   answerInterventionPage: {
     interventionQuestions,
     questionError,
@@ -105,6 +110,7 @@ export function AnswerInterventionPage({
     questionIndex,
     interventionStarted,
     previewMode,
+    isAnimationOngoing,
   },
 }) {
   useInjectReducer({ key: 'answerInterventionPage', reducer });
@@ -193,24 +199,25 @@ export function AnswerInterventionPage({
           <Row mt={10}>
             {renderQuestionByType(currentQuestion, sharedProps)}
           </Row>
-          {(isNullOrUndefined(proceedButton) || proceedButton) && (
-            <Row width="100%" my={20}>
-              <Button
-                disabled={isButtonDisabled()}
-                margin={20}
-                width="180px"
-                loading={currentQuestion.loading}
-                onClick={() => {
-                  saveAnswer(questionIndex + 1);
-                }}
-                title={formatMessage(
-                  questionIndex !== interventionQuestions.length - 1
-                    ? messages.nextQuestion
-                    : messages.submitAnswer,
-                )}
-              />
-            </Row>
-          )}
+          {(isNullOrUndefined(proceedButton) || proceedButton) &&
+            !isAnimationOngoing && (
+              <Row width="100%" my={20}>
+                <Button
+                  disabled={isButtonDisabled()}
+                  margin={20}
+                  width="180px"
+                  loading={currentQuestion.loading}
+                  onClick={() => {
+                    saveAnswer(questionIndex + 1);
+                  }}
+                  title={formatMessage(
+                    questionIndex !== interventionQuestions.length - 1
+                      ? messages.nextQuestion
+                      : messages.submitAnswer,
+                  )}
+                />
+              </Row>
+            )}
         </Column>
       </Row>
     );
@@ -251,6 +258,7 @@ export function AnswerInterventionPage({
                   currentQuestionId={currentQuestionId}
                   previewMode={previewMode}
                   answers={answers}
+                  changeIsAnimationOngoing={changeIsAnimationOngoing}
                 >
                   {renderPage()}
                 </AnimationRefHelper>
@@ -281,6 +289,7 @@ AnswerInterventionPage.propTypes = {
   onStartIntervention: PropTypes.func,
   setQuestionIndexAction: PropTypes.func,
   showError: PropTypes.func,
+  changeIsAnimationOngoing: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -294,6 +303,7 @@ const mapDispatchToProps = {
   setQuestionIndexAction: setQuestionIndex,
   onStartIntervention: startIntervention,
   showError: error,
+  changeIsAnimationOngoing: changeIsAnimating,
 };
 
 const withConnect = connect(

@@ -30,3 +30,6 @@ export const NUMBER_VALIDATION_ERROR =
 
 export const CHANGE_PREVIEW_MODE =
   'app/AnswerInterventionPage/CHANGE_PREVIEW_MODE';
+
+export const CHANGE_IS_ANIMATING =
+  'app/AnswerInterventionPage/CHANGE_IS_ANIMATING';

@@ -47,6 +47,7 @@ const CharacterAnim = ({
   animationContainer,
   previewMode,
   answers,
+  changeIsAnimationOngoing,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const dispatchUpdate = newState =>
@@ -180,6 +181,16 @@ const CharacterAnim = ({
       }
   }, [state.currentData, state.currentBlockIndex]);
 
+  useEffect(() => {
+    changeIsAnimationOngoing(blocks.length !== 0);
+  }, [questionId]);
+
+  useEffect(() => {
+    if (state.currentBlockIndex === blocks.length) {
+      changeIsAnimationOngoing(false);
+    }
+  }, [state.currentBlockIndex, blocks.length]);
+
   const decideIfLoopAnimation = () =>
     (get(state, 'currentData.type', 'none') === speechType ||
       get(state, 'currentData.type', 'none') === reflectionType) &&
@@ -257,6 +268,7 @@ CharacterAnim.propTypes = {
   }),
   previewMode: PropTypes.string,
   answers: PropTypes.object,
+  changeIsAnimationOngoing: PropTypes.func,
 };
 
 export default CharacterAnim;
