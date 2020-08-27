@@ -9,7 +9,7 @@ import { makeSelectIntervention } from '../selectors';
 
 function* editIntervention() {
   const intervention = yield select(makeSelectIntervention());
-  const requestURL = `v1/${intervention.problem_id}/interventions/${
+  const requestURL = `v1/problems/${intervention.problem_id}/interventions/${
     intervention.id
   }`;
 
