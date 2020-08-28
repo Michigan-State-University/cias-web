@@ -256,6 +256,8 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   padding-bottom: 12px;
   color: rgba(16,121,105,1);
   text-align: center;
+  background-color: rgba(16,121,105,0.1);
+  color: rgba(16,121,105,1);
 }
 
 .c17:focus {

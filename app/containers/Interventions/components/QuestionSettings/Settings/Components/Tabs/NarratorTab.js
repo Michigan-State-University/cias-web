@@ -1,55 +1,25 @@
-import React, { useState, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
 import map from 'lodash/map';
+import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { reorder } from 'react-reorder';
 
-import Accordion from 'components/Accordion';
 import Box from 'components/Box';
 import H3 from 'components/H3';
 import Row from 'components/Row';
 import Switch from 'components/Switch';
-import globalMessages from 'global/i18n/globalMessages';
+import Text from 'components/Text';
 import lastKey from 'utils/getLastKey';
-import { Button } from 'components/Button';
 import { colors, borders } from 'theme';
-import { createStructuredSelector } from 'reselect';
-import { makeSelectSelectedQuestionIndex } from 'containers/Interventions/containers/EditInterventionPage/selectors';
-import {
-  bodyAnimationType,
-  speechType,
-  headAnimationType,
-  blockTypeToColorMap,
-  readQuestionBlockType,
-  reflectionType,
-  pauseType,
-} from 'models/Narrator/BlockTypes';
-import {
-  makeSelectDraggable,
-  makeSelectAnimationPosition,
-} from 'containers/Interventions/components/QuestionNarrator/selectors';
-import {
-  setPeedyDraggable,
-  setAnimationStopPosition,
-  updatePreviewAnimation,
-} from 'containers/Interventions/containers/EditInterventionPage/actions';
+import { localStateReducer } from 'global/reducers/localState';
+import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
+import { useInjectReducer } from 'utils/injectReducer';
 
-import BlockTypeChooser from '../../../BlockTypeChooser';
-import AnimationBlock from '../Blocks/AnimationBlock';
-import SpeechBlock from '../Blocks/SpeechBlock';
-import ReflectionBlock from '../Blocks/Reflections/ReflectionBlock';
+import BlockTypeChooser from '../BlockTypeChooser';
+import WrappedAccordion from '../WrappedAcoordion';
 import messages from '../messages';
-import PauseBlock from '../Blocks/PauseBlock';
-import { DashedBox } from '../styled';
-import {
-  addBlock,
-  updateNarratorSettings,
-  saveNarratorMovement,
-  removeBlock,
-  reorderNarratorBlocks,
-} from '../../actions';
+import { addBlock, updateNarratorSettings } from '../../actions';
 
 const NarratorTab = ({
   formatMessage,
@@ -57,140 +27,36 @@ const NarratorTab = ({
   onNarratorToggle,
   onCreate,
   id,
-  draggable,
-  setDraggable,
-  setOffset,
-  savePosition,
-  animationPosition,
-  currentQuestionIndex,
-  deleteBlock,
-  updateNarratorPreviewAnimation,
-  reorderBlocks,
 }) => {
-  const [typeChooserOpen, setTypeChooserOpen] = useState(false);
-  const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
+  useInjectReducer({
+    key: 'localState',
+    reducer: localStateReducer,
+  });
+
   if (!narrator) {
     return <></>;
   }
-  const { voice, animation } = narrator.settings;
 
   const onCreateBlock = type => {
     onCreate(type, id);
-    toggleTypeChooser();
   };
 
-  const renderBlock = (block, index) => {
-    switch (block.type) {
-      case bodyAnimationType:
-      case headAnimationType:
-        return (
-          <AnimationBlock
-            formatMessage={formatMessage}
-            block={block}
-            blockIndex={index}
-            id={id}
-          />
-        );
-      case speechType:
-      case readQuestionBlockType:
-        return (
-          <SpeechBlock
-            formatMessage={formatMessage}
-            block={block}
-            blockIndex={index}
-            id={id}
-          />
-        );
-      case reflectionType:
-        return (
-          <ReflectionBlock
-            formatMessage={formatMessage}
-            block={block}
-            blockIndex={index}
-            id={id}
-          />
-        );
-      case pauseType:
-        return (
-          <PauseBlock
-            formatMessage={formatMessage}
-            block={block}
-            blockIndex={index}
-          />
-        );
-      default:
-        return null;
-    }
-  };
-
-  const getBlockColor = type => {
-    switch (type) {
-      case bodyAnimationType:
-        return animation ? blockTypeToColorMap[type] : colors.grey;
-      case speechType:
-      case reflectionType:
-        return voice ? blockTypeToColorMap[type] : colors.grey;
-      case readQuestionBlockType:
-        return voice ? blockTypeToColorMap[type] : colors.grey;
-      case headAnimationType:
-        return animation ? blockTypeToColorMap[type] : colors.grey;
-      case pauseType:
-        return animation ? blockTypeToColorMap[type] : colors.grey;
-      default:
-        return null;
-    }
-  };
-
-  const cancelAction = index => {
-    if (draggable) {
-      const { position: { posFrom } = {} } = narrator.blocks[index] || {};
-      setDraggable(false);
-      savePosition(index, id, posFrom);
-      setOffset(posFrom.x, posFrom.y);
-    }
-  };
-
-  const hideAccordion = index => {
-    if (draggable) {
-      const { position: { posTo } = {} } = narrator.blocks[index] || {};
-      setDraggable(false);
-      setOffset(posTo.x, posTo.y);
-    }
-    updateNarratorPreviewAnimation('standStill');
-  };
-
-  const moveAnimation = index => {
-    const { position: { posTo } = {} } = narrator.blocks[index] || {};
-    if (!isEqual(posTo, animationPosition)) {
-      setOffset(posTo.x, posTo.y);
-    }
-  };
-
-  const handleSave = index => () => {
-    savePosition(index, id, animationPosition);
-    setDraggable(false);
-  };
+  const readQuestionBlockTypePresent = Boolean(
+    narrator.blocks.find(({ type }) => type === readQuestionBlockType),
+  );
 
   const last = lastKey(narrator.settings);
-
   const getBorderBottom = index => {
     if (index === last) return null;
     return `${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`;
   };
 
-  const handleDelete = index => () => deleteBlock(index);
-
-  const handleReorder = (event, previousIndex, nextIndex) => {
-    const newList = reorder(narrator.blocks, previousIndex, nextIndex);
-    reorderBlocks(newList, previousIndex, nextIndex);
-  };
-  const readQuestionBlockTypePresent = Boolean(
-    narrator.blocks.find(({ type }) => type === readQuestionBlockType),
-  );
-
   return (
     <Fragment>
       <Box mb={30}>
+        <Text color={colors.flamingo} mb={30}>
+          <FormattedMessage {...messages.warningMessage} />
+        </Text>
         {narrator &&
           map(narrator.settings, (val, index) => (
             <Row
@@ -209,62 +75,15 @@ const NarratorTab = ({
             </Row>
           ))}
       </Box>
-      <Accordion
-        accordionParentKey={currentQuestionIndex}
-        onHide={hideAccordion}
-        onOpen={moveAnimation}
-        onReorder={handleReorder}
-      >
-        {narrator &&
-          map(narrator.blocks, (block, blockIndex) => (
-            <div
-              key={`${id}-narrator-block-${blockIndex}`}
-              color={getBlockColor(block.type)}
-              label={`${blockIndex + 1}. ${formatMessage(
-                globalMessages.blockTypes[block.type],
-              )}`}
-              onDelete={handleDelete(blockIndex)}
-            >
-              {!draggable && (
-                <Button
-                  onClick={() => setDraggable(true)}
-                  mt={15}
-                  inverted
-                  title={formatMessage(messages.replaceCharacter)}
-                />
-              )}
-              {draggable && (
-                <Row width="100%" mt={15}>
-                  <Button
-                    onClick={handleSave(blockIndex)}
-                    title={formatMessage(messages.save)}
-                    mr={5}
-                    width="50%"
-                  />
-                  <Button
-                    onClick={() => cancelAction(blockIndex)}
-                    ml={5}
-                    inverted
-                    width="50%"
-                    title={formatMessage(messages.cancel)}
-                  />
-                </Row>
-              )}
-
-              {renderBlock(block, blockIndex)}
-            </div>
-          ))}
-      </Accordion>
-      <Box position="relative">
-        <DashedBox mt={14} onClick={toggleTypeChooser}>
-          {formatMessage(messages.newStep)}
-        </DashedBox>
-        <BlockTypeChooser
-          disableReadQuestionBlockType={readQuestionBlockTypePresent}
-          visible={typeChooserOpen}
-          onClick={onCreateBlock}
-        />
-      </Box>
+      <WrappedAccordion
+        id={id}
+        formatMessage={formatMessage}
+        narrator={narrator}
+      />
+      <BlockTypeChooser
+        disableReadQuestionBlockType={readQuestionBlockTypePresent}
+        onClick={onCreateBlock}
+      />
     </Fragment>
   );
 };
@@ -273,38 +92,17 @@ NarratorTab.propTypes = {
   formatMessage: PropTypes.func.isRequired,
   id: PropTypes.string,
   narrator: PropTypes.object,
-  animationPosition: PropTypes.object,
   onNarratorToggle: PropTypes.func.isRequired,
   onCreate: PropTypes.func,
-  setDraggable: PropTypes.func,
-  setOffset: PropTypes.func,
-  savePosition: PropTypes.func,
-  draggable: PropTypes.bool,
-  currentQuestionIndex: PropTypes.number,
-  deleteBlock: PropTypes.func,
-  updateNarratorPreviewAnimation: PropTypes.func,
-  reorderBlocks: PropTypes.func,
 };
 
 const mapDispatchToProps = {
   onCreate: addBlock,
-  deleteBlock: removeBlock,
   onNarratorToggle: updateNarratorSettings,
-  setDraggable: setPeedyDraggable,
-  setOffset: setAnimationStopPosition,
-  savePosition: saveNarratorMovement,
-  updateNarratorPreviewAnimation: updatePreviewAnimation,
-  reorderBlocks: reorderNarratorBlocks,
 };
 
-const mapStateToProps = createStructuredSelector({
-  draggable: makeSelectDraggable(),
-  animationPosition: makeSelectAnimationPosition(),
-  currentQuestionIndex: makeSelectSelectedQuestionIndex(),
-});
-
 const withConnect = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 );
 

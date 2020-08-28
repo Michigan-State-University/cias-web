@@ -13,4 +13,8 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Choose type of block',
   },
+  newStep: {
+    id: `${scope}.newStep`,
+    defaultMessage: '+ Add block',
+  },
 });

@@ -35,10 +35,10 @@ export const addBlock = (type, questionId) =>
     data: { type, questionId },
   });
 
-export const removeBlock = index =>
+export const removeBlock = (index, openedIndex) =>
   updateQuestionSettings({
     type: REMOVE_BLOCK,
-    data: { index },
+    data: { index, openedIndex },
   });
 
 export const updateNarratorAnimation = (index, value, questionId) =>
@@ -100,14 +100,10 @@ export const saveNarratorMovement = (index, questionId, position) =>
     data: { index, questionId, position },
   });
 
-export const reorderNarratorBlocks = (
-  reorderedBlocks,
-  previousIndex,
-  nextIndex,
-) =>
+export const reorderNarratorBlocks = reorderedBlocks =>
   updateQuestionSettings({
     type: REORDER_NARRATOR_BLOCKS,
-    data: { reorderedBlocks, previousIndex, nextIndex },
+    data: { reorderedBlocks },
   });
 
 export const updatePauseDuration = (index, duration) =>

@@ -100,8 +100,10 @@ const ApprovableInput = props => {
   };
 
   const onBlur = () => {
-    setfocused(false);
-    onCheck(value);
+    if (!disabled) {
+      setfocused(false);
+      onCheck(value);
+    }
   };
 
   const renderInput = () => {
@@ -117,10 +119,11 @@ const ApprovableInput = props => {
           onBlur={onBlur}
           modules={type === 'multiline' ? quillModules : quillModulesSingleline}
           bounds="#quill_boundaries"
-          focused={focused}
+          focused={disabled ? false : focused}
           autoSize={autoSize}
           singleline={type === 'singleline'}
           fontSize={fontSize}
+          readOnly={disabled}
         />
       );
 

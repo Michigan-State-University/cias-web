@@ -52,6 +52,9 @@ const SingleQuestion = ({
 
   const { data, variable } = selectedQuestion.body;
 
+  const handleMouseEnter = index => () => {
+    if (!isNarratorTab) setHovered(index);
+  };
   return (
     <Column mt={10}>
       <Row display="flex" hidden={isNarratorTab} mb={10} ml={24}>
@@ -72,15 +75,16 @@ const SingleQuestion = ({
       {data.map((value, index) => (
         <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox
+            hoverColor={isNarratorTab ? null : undefined}
             px={21}
             py={14}
             width="100%"
-            onMouseEnter={() => setHovered(index)}
+            onMouseEnter={handleMouseEnter(index)}
             onMouseLeave={() => setHovered(-1)}
             clickable={false}
           >
             <Column>
-              <Row align="center" justify="between" mb={10}>
+              <Row align="center" justify="between" mb={isNarratorTab ? 0 : 10}>
                 <Row width="90%">
                   <Img ref={radioButtonRef} src={radio} mr={RADIO_MARGIN} />
                   <Box width="100%">
@@ -100,6 +104,7 @@ const SingleQuestion = ({
                         updateAnswer(index, { ...value, payload: newTitle })
                       }
                       richText
+                      disabled={isNarratorTab}
                     />
                   </Box>
                 </Row>

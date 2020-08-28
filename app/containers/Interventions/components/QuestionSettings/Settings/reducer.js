@@ -1,5 +1,3 @@
-import cloneDeep from 'lodash/cloneDeep';
-
 import { instantiateBlockForType } from 'models/Intervention/utils';
 import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 
@@ -21,7 +19,7 @@ import {
   UPDATE_PAUSE_DURATION,
 } from './constants';
 
-import { reorderBlocksPositions, getStartAnimationPoint } from '../utils';
+import { getStartAnimationPoint } from '../utils';
 
 /* eslint-disable default-case, no-param-reassign */
 const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
@@ -62,16 +60,15 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       };
 
     case REMOVE_BLOCK: {
-      const clonedQuestion = cloneDeep(question);
-      const previousBlock =
-        clonedQuestion.narrator.blocks[payload.data.index - 1];
-      const nextBlock = clonedQuestion.narrator.blocks[payload.data.index + 1];
-
-      if (nextBlock && previousBlock) {
-        nextBlock.posFrom = previousBlock.posTo;
-      }
-      clonedQuestion.narrator.blocks.splice(payload.data.index, 1);
-      return clonedQuestion;
+      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      cloneBlocks.splice(payload.data.index, 1);
+      return {
+        ...question,
+        narrator: {
+          ...question.narrator,
+          blocks: cloneBlocks,
+        },
+      };
     }
 
     case UPDATE_NARRATOR_ANIMATION: {
@@ -133,7 +130,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
           : speechType;
       cloneBlocks[payload.data.index] = {
         ...instantiateBlockForType(newBlockType),
-        position: cloneBlocks[payload.data.index].position,
+        position: cloneBlocks[payload.data.index].endPosition,
         animation: cloneBlocks[payload.data.index].animation,
       };
 
@@ -176,13 +173,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       const positionToSet = payload.data.position;
       // update position that animates to in current animation block
       const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
-      cloneBlocks[payload.data.index].position.posTo = positionToSet;
-
-      // update animation position in next block so it starts in same position that last animation finishes
-      const nextBlock = cloneBlocks[payload.data.index + 1];
-      if (nextBlock) {
-        nextBlock.position.posFrom = positionToSet;
-      }
+      cloneBlocks[payload.data.index].endPosition = positionToSet;
 
       return {
         ...question,
@@ -194,17 +185,13 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
     }
 
     case REORDER_NARRATOR_BLOCKS: {
-      const { reorderedBlocks, previousIndex, nextIndex } = payload.data;
+      const { reorderedBlocks } = payload.data;
 
       return {
         ...question,
         narrator: {
           ...question.narrator,
-          blocks: reorderBlocksPositions(
-            reorderedBlocks,
-            previousIndex,
-            nextIndex,
-          ),
+          blocks: reorderedBlocks,
         },
       };
     }

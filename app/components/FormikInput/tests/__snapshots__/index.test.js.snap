@@ -11,7 +11,7 @@ exports[`<FormikInput /> Should render and match the snapshot 1`] = `
       Label
     </p>
     <input
-      class="Input-sc-19txxuq-0 bzUIEQ"
+      class="Input-sc-19txxuq-0 diKRNo"
       name="test"
       placeholder="test"
       type="text"

@@ -22,6 +22,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import { colors } from 'theme';
+import { changeCurrentNarratorBlock } from 'global/reducers/localState';
 
 import { ToggleableBox, ClampedTitle } from './styled';
 
@@ -49,6 +50,7 @@ const QuestionListItem = ({
   intl: { formatMessage },
   copyQuestion,
   interventionId,
+  changeNarratorBlockIndex,
 }) => {
   const isSelected = selectedQuestionIndex === index;
   const gearIcon = settingsVisibility && isSelected ? gearSelected : gear;
@@ -88,6 +90,7 @@ const QuestionListItem = ({
 
   const onChangeItem = () => {
     onSelect(index);
+    changeNarratorBlockIndex(-1);
   };
 
   return (
@@ -143,6 +146,7 @@ QuestionListItem.propTypes = {
   intl: PropTypes.object,
   removeQuestion: PropTypes.func,
   interventionId: PropTypes.string,
+  changeNarratorBlockIndex: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -154,6 +158,7 @@ const mapDispatchToProps = {
   toggleSettings: toggleQuestionSettings,
   removeQuestion: deleteQuestionRequest,
   copyQuestion: copyQuestionRequest,
+  changeNarratorBlockIndex: changeCurrentNarratorBlock,
 };
 
 const withConnect = connect(

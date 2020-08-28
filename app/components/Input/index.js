@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { themeColors, borders, paddings, colors } from 'theme';
-import { margin, layout, padding, text } from '../BaseComponentStyles';
+import { margin, layout, padding, text, style } from '../BaseComponentStyles';
 
 const getBorderColor = (hasError, currentColor) => {
   if (hasError) return colors.flamingo;
@@ -30,6 +30,7 @@ const Input = styled.input.attrs(props => ({ type: props.keyboard }))`
   ${layout};
   ${padding};
   ${text};
+  ${style};
 `;
 
 Input.propTypes = {

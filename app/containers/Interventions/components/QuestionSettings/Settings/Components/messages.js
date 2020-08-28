@@ -43,10 +43,6 @@ export default defineMessages({
     id: `${scope}.voice`,
     defaultMessage: 'Voice',
   },
-  newStep: {
-    id: `${scope}.newStep`,
-    defaultMessage: '+ Add block',
-  },
   selectQuestion: {
     id: `${scope}.selectQuestion`,
     defaultMessage: 'Select Screen',
@@ -86,5 +82,9 @@ export default defineMessages({
   addReflection: {
     id: `${scope}.addReflection`,
     defaultMessage: 'Add Reflection',
+  },
+  warningMessage: {
+    id: `${scope}.warningMessage`,
+    defaultMessage: `Bear in mind that you can't edit the question when you are working with the character. `,
   },
 });

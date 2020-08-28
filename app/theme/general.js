@@ -1,5 +1,5 @@
-import { fontSizes } from 'theme/fonts';
 import { colors } from 'theme/colors';
+import { fontSizes } from 'theme/fonts';
 
 const borders = {
   borderRadius: '5px',
@@ -23,9 +23,15 @@ const elements = {
   peedyInitialYPosition: 600,
 };
 
-const visualAnalogScaleLabel = {
+const visualAnalogScaleLabelStyles = {
   fontSize: fontSizes.regular,
-  width: '100%',
+  width: 'fit-content',
 };
 
-export { borders, paddings, boxShadows, elements, visualAnalogScaleLabel };
+export {
+  borders,
+  paddings,
+  boxShadows,
+  elements,
+  visualAnalogScaleLabelStyles,
+};

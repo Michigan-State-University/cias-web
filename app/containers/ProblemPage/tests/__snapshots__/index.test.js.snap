@@ -65,7 +65,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           src="IMAGE_MOCK"
         />
         <input
-          class="Input-sc-19txxuq-0 iEXReM"
+          class="Input-sc-19txxuq-0 Fnbqh"
           placeholder="Filter by name"
           type="text"
           value=""

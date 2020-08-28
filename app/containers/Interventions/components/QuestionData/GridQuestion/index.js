@@ -117,6 +117,8 @@ const GridQuestion = ({
                         />
                       </Row>
                       <StyledInput
+                        disabled={isNarratorTab}
+                        cursor={isNarratorTab ? 'text' : 'pointer'}
                         width={110}
                         px={0}
                         py={12}
@@ -172,6 +174,8 @@ const GridQuestion = ({
                           />
                         </Row>
                         <StyledInput
+                          disabled={isNarratorTab}
+                          cursor={isNarratorTab ? 'text' : 'pointer'}
                           width={110}
                           px={0}
                           py={12}

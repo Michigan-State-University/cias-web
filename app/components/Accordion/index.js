@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import Reorder from 'react-reorder';
 
@@ -9,37 +9,37 @@ const Accordion = ({
   children,
   onHide,
   onOpen,
-  accordionParentKey,
   onReorder,
+  opened,
+  setOpened,
+  onDelete,
 }) => {
-  const [opened, setOpened] = useState(-1);
-
   useEffect(() => {
     if (opened !== -1) onOpen(opened);
   }, [opened]);
 
-  useEffect(() => {
-    setOpened(-1);
-  }, [accordionParentKey]);
-
-  const handleToggle = index => () => {
-    let newIndex = index;
-    if (opened === index) newIndex = -1;
-    if (opened !== -1) onHide(opened);
-    setOpened(newIndex);
-  };
-
   const renderCollapse = (child, index) => {
-    const { children: content, label, color, onDelete } = child.props;
+    const { children: content, label, color } = child.props;
+
+    const handleToggle = () => {
+      let newIndex = index;
+      if (opened === index) newIndex = -1;
+      if (opened !== -1) onHide(opened);
+      setOpened(newIndex);
+    };
+
+    const handleDelete = () => {
+      onDelete(index);
+    };
 
     return (
       <div key={`accordion-${index}`}>
         <Collapse
-          onToggle={handleToggle(index)}
+          onToggle={handleToggle}
           isOpened={opened === index}
           label={label}
           color={color}
-          onDelete={onDelete}
+          onDelete={handleDelete}
         >
           {content}
         </Collapse>
@@ -50,7 +50,12 @@ const Accordion = ({
   if (Array.isArray(children))
     return (
       <AccordionContainer>
-        <Reorder holdTime={125} reorderId="blocks-list" onReorder={onReorder}>
+        <Reorder
+          holdTime={125}
+          reorderId="blocks-list"
+          onReorder={onReorder}
+          disabled={!onReorder}
+        >
           {children.map(renderCollapse)}
         </Reorder>
       </AccordionContainer>
@@ -65,9 +70,11 @@ Accordion.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
   ]),
   onHide: PropTypes.func,
-  accordionParentKey: PropTypes.number,
   onOpen: PropTypes.func,
   onReorder: PropTypes.func,
+  opened: PropTypes.number,
+  setOpened: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 Accordion.defaultProps = {};

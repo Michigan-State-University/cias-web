@@ -15,12 +15,10 @@ import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
 import Row from 'components/Row';
 import Question from 'models/Intervention/Question';
-
-import { colors } from 'theme/colors';
-import { variableNameValidator } from 'utils/validators';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { visualAnalogScaleLabelStyles, colors } from 'theme';
+import { variableNameValidator } from 'utils/validators';
 
-import { visualAnalogScaleLabel } from 'theme';
 import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
 
@@ -54,7 +52,7 @@ const VisualAnalogueScaleQuestion = ({
           onBlur={value => updateLabel(value, 'start_value')}
         />
       ),
-      style: visualAnalogScaleLabel,
+      style: visualAnalogScaleLabelStyles,
     },
     100: {
       label: (
@@ -67,7 +65,7 @@ const VisualAnalogueScaleQuestion = ({
           onBlur={value => updateLabel(value, 'end_value')}
         />
       ),
-      style: visualAnalogScaleLabel,
+      style: visualAnalogScaleLabelStyles,
     },
   };
 

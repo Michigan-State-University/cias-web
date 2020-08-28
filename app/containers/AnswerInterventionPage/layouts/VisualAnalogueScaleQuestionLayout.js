@@ -5,8 +5,7 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import AppSlider from 'components/AppSlider';
-
-import { visualAnalogScaleLabel } from 'theme';
+import { visualAnalogScaleLabelStyles } from 'theme';
 
 const VisualAnalogueScaleQuestionLayout = ({
   onChange,
@@ -19,11 +18,11 @@ const VisualAnalogueScaleQuestionLayout = ({
   const labels = {
     0: {
       label: <>{startValue}</>,
-      style: visualAnalogScaleLabel,
+      style: visualAnalogScaleLabelStyles,
     },
     100: {
       label: <>{endValue}</>,
-      style: visualAnalogScaleLabel,
+      style: visualAnalogScaleLabelStyles,
     },
   };
 

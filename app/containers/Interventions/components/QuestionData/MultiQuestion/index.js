@@ -49,20 +49,25 @@ const MultiQuestion = ({
       );
   }, [checkboxButtonRef.current]);
 
+  const handleMouseEnter = index => () => {
+    if (!isNarratorTab) setHovered(index);
+  };
+
   return (
     <Column mt={10}>
       {selectedQuestion.body.data.map((value, index) => (
         <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox
+            hoverColor={isNarratorTab ? null : undefined}
             px={21}
             py={14}
             width="100%"
-            onMouseEnter={() => setHovered(index)}
+            onMouseEnter={handleMouseEnter(index)}
             onMouseLeave={() => setHovered(-1)}
             clickable={false}
           >
             <Column>
-              <Row align="center" justify="between" mb={10}>
+              <Row align="center" justify="between" mb={isNarratorTab ? 0 : 10}>
                 <Row width="90%">
                   <Img
                     ref={checkboxButtonRef}
@@ -82,6 +87,7 @@ const MultiQuestion = ({
                         updateAnswer(index, { ...value, payload: newTitle })
                       }
                       richText
+                      disabled={isNarratorTab}
                     />
                   </Box>
                 </Row>

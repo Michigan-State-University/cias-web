@@ -9,3 +9,9 @@ export const makeSelectCurrentInterventionIndex = () =>
     selectLocalState,
     substate => substate.currentInterventionIndex,
   );
+
+export const makeSelectCurrentNarratorBlockIndex = () =>
+  createSelector(
+    selectLocalState,
+    substate => substate.currentNarratorBlockIndex,
+  );

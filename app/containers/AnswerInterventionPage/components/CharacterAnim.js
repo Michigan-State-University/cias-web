@@ -26,7 +26,7 @@ const reducer = (state, action) => {
   const { type, newState } = action;
   switch (type) {
     case UPDATE:
-      return newState;
+      return { ...state, ...newState };
     default:
       return state;
   }

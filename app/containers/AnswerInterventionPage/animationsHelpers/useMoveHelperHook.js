@@ -39,7 +39,7 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
 
   const getInitialAnimationPosition = firstBlock => {
     if (!firstBlock) return { x: 0, y: elements.peedyInitialYPosition };
-    return getScaledPosition(getScaleFactor(), firstBlock.position.posTo);
+    return getScaledPosition(getScaleFactor(), firstBlock.endPosition);
   };
 
   const [animationPos, setAnimationPos] = useState(
@@ -71,12 +71,12 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
     loadedMoveAnimations.current = await loadMoveAnimations();
   };
 
-  const setPosition = posTo =>
-    setAnimationPos(getScaledPosition(scaleFactor, posTo));
+  const setPosition = position =>
+    setAnimationPos(getScaledPosition(scaleFactor, position));
 
-  const findMoveAnimation = posTo => anim => {
+  const findMoveAnimation = position => anim => {
     const direction =
-      getScaledPosition(scaleFactor, posTo).x > animationPos.x
+      getScaledPosition(scaleFactor, position).x > animationPos.x
         ? 'Left'
         : 'Right';
     return anim.name === `move${direction}`;
@@ -84,17 +84,16 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
 
   const moveAnimation = async nextBlock => {
     if (!nextBlock) return;
-    const {
-      position: { posTo },
-    } = nextBlock;
-    if (isEqual(getScaledPosition(scaleFactor, posTo), animationPos)) return;
+    const { endPosition } = nextBlock;
+    if (isEqual(getScaledPosition(scaleFactor, endPosition), animationPos))
+      return;
     const moveAnim = loadedMoveAnimations.current.find(
-      findMoveAnimation(posTo),
+      findMoveAnimation(endPosition),
     );
     dispatchUpdate({
       currentData: moveAnim,
     });
-    setPosition(posTo);
+    setPosition(endPosition);
     await new Promise(r => setTimeout(r, animationDuration + 100));
   };
 

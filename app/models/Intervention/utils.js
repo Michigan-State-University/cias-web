@@ -104,70 +104,50 @@ const getMultiVariables = question =>
 const getGridVariables = question =>
   question.body.data[0].payload.rows.map(row => row.variable.name);
 
-export const instantiateBlockForType = (type, posFrom, question) => {
+export const instantiateBlockForType = (type, endPosition, question) => {
+  const sharedProperties = {
+    type,
+    endPosition,
+  };
   switch (type) {
     case bodyAnimationType:
       return {
-        type: bodyAnimationType,
         animation: null,
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
+        ...sharedProperties,
       };
     case speechType:
       return {
-        type: speechType,
         text: [],
         audio_urls: [],
         sha256: [],
         animation: 'rest',
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
+        ...sharedProperties,
       };
     case reflectionType:
       return {
         question_id: '',
-        type: reflectionType,
         reflections: [],
         animation: 'rest',
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
+        ...sharedProperties,
       };
     case headAnimationType:
       return {
-        type: headAnimationType,
         animation: null,
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
+        ...sharedProperties,
       };
     case readQuestionBlockType:
       return {
-        type: readQuestionBlockType,
         animation: 'rest',
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
         text: getFromQuestionTTS(question),
         audio_urls: [],
         sha256: [],
+        ...sharedProperties,
       };
     case pauseType:
       return {
-        type: pauseType,
         animation: 'standStill',
-        position: {
-          posFrom,
-          posTo: posFrom,
-        },
         pauseDuration: 2,
+        ...sharedProperties,
       };
     default:
       return undefined;

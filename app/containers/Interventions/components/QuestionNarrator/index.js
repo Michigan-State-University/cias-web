@@ -20,6 +20,7 @@ import {
 import useAnimationHelper from 'containers/AnswerInterventionPage/animationsHelpers/animationHelper';
 import useAudioHelper from 'containers/AnswerInterventionPage/animationsHelpers/audioHelper';
 import useResizeObserver from 'utils/useResizeObserver';
+import { makeSelectCurrentNarratorBlockIndex } from 'global/reducers/localState';
 
 import { elements } from 'theme';
 import { NarratorContainer, lottieStyles } from './styled';
@@ -28,6 +29,7 @@ import {
   makeSelectAnimationPosition,
   makeSelectPreviewData,
 } from './selectors';
+import { saveNarratorMovement } from '../QuestionSettings/Settings/actions';
 
 import { PEEDY_SIZE } from './utils';
 import { reducer, initialState, UPDATE } from './reducer';
@@ -41,6 +43,8 @@ const QuestionNarrator = ({
   previewData,
   animationBoundaries,
   settings,
+  savePosition,
+  currentBlockIndex,
 }) => {
   const { width, height } = useResizeObserver({
     targetRef: animationBoundaries,
@@ -204,8 +208,11 @@ const QuestionNarrator = ({
       const peedySizeOffset = isPeedyOnTheRightHandSide
         ? PEEDY_SIZE.width * scaleX - PEEDY_SIZE.width
         : 0;
-      setOffset(Math.ceil(x * scaleX + peedySizeOffset), y);
+      const posX = Math.ceil(x * scaleX + peedySizeOffset);
+      savePosition(currentBlockIndex, questionId, { x: posX, y });
+      setOffset(posX, y);
     } else {
+      savePosition(currentBlockIndex, questionId, { x, y });
       setOffset(x, y);
     }
   };
@@ -260,7 +267,6 @@ const QuestionNarrator = ({
               style={lottieStyles}
               isClickToPauseDisabled
               isStopped={
-                !!draggable ||
                 previewData.animation === 'standStill' ||
                 !decideIfPlaySpeechAnimation()
               }
@@ -281,17 +287,21 @@ QuestionNarrator.propTypes = {
   previewData: PropTypes.object,
   animationBoundaries: PropTypes.any,
   settings: PropTypes.object,
+  savePosition: PropTypes.func,
+  currentBlockIndex: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
   draggable: makeSelectDraggable(),
   animationPositionStored: makeSelectAnimationPosition(),
   previewData: makeSelectPreviewData(),
+  currentBlockIndex: makeSelectCurrentNarratorBlockIndex(),
 });
 
 const mapDispatchToProps = {
   setOffset: setAnimationStopPosition,
   updateNarratorPreviewAnimation: updatePreviewAnimation,
+  savePosition: saveNarratorMovement,
 };
 
 const withConnect = connect(

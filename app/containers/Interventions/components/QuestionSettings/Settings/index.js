@@ -18,15 +18,22 @@ import {
   makeSelectQuestions,
   makeSelectQuestionSettingsTab,
 } from '../../../containers/EditInterventionPage/selectors';
-import { toggleQuestionSettings } from '../../../containers/EditInterventionPage/actions';
+import {
+  toggleQuestionSettings,
+  setPeedyDraggable,
+} from '../../../containers/EditInterventionPage/actions';
 
 const Settings = ({
   selectedQuestion: { narrator, settings, id, formula, type } = {},
   intl: { formatMessage },
   tab,
   changeTab,
+  setDraggable,
 }) => {
-  const handleChange = newTab => changeTab({ tab: newTab });
+  const handleChange = newTab => {
+    changeTab({ tab: newTab });
+    setDraggable(false);
+  };
   return (
     <Column>
       <Tabs
@@ -72,6 +79,7 @@ Settings.propTypes = {
   }),
   tab: PropTypes.string,
   changeTab: PropTypes.func,
+  setDraggable: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -82,6 +90,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   changeTab: toggleQuestionSettings,
+  setDraggable: setPeedyDraggable,
 };
 
 const withConnect = connect(

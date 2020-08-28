@@ -43,6 +43,7 @@ import {
   CREATE_QUESTION_REQUEST,
   CREATE_QUESTION_ERROR,
 } from './constants';
+import { REMOVE_BLOCK } from '../../components/QuestionSettings/Settings/constants';
 import questionDataReducer from '../../components/QuestionData/reducer';
 import questionSettingsReducer from '../../components/QuestionSettings/Settings/reducer';
 import {
@@ -50,6 +51,7 @@ import {
   mapQuestionDataForType,
   getAnimationPosition,
   getFromQuestionTTS,
+  getNarratorPositionToDisplay,
 } from './utils';
 
 export const initialState = {
@@ -189,6 +191,13 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.questions = cloneDeep(draft.cache.questions);
         draft.selectedQuestion = draft.questions.length - 1;
         draft.loaders.createQuestionLoader = false;
+
+        draft.animationPosition = getNarratorPositionToDisplay(
+          0,
+          null,
+          draft.questions,
+          draft.selectedQuestion,
+        );
         break;
       case CREATE_QUESTION_ERROR:
         draft.loaders.createQuestionLoader = false;
@@ -205,11 +214,10 @@ const editInterventionPageReducer = (state = initialState, action) =>
         );
         if (
           !isEmpty(action.payload.questions) &&
-          action.payload.questions[0].narrator.blocks[0] &&
-          action.payload.questions[0].narrator.blocks[0].position
+          action.payload.questions[0].narrator.blocks[0]
         ) {
           draft.animationPosition =
-            action.payload.questions[0].narrator.blocks[0].position.posTo;
+            action.payload.questions[0].narrator.blocks[0].endPosition;
         }
 
         draft.questions = cloneDeep(draft.cache.questions);
@@ -267,6 +275,15 @@ const editInterventionPageReducer = (state = initialState, action) =>
             state.selectedQuestion,
           ),
         };
+
+        if (action.payload.type === REMOVE_BLOCK) {
+          draft.animationPosition = getNarratorPositionToDisplay(
+            action.payload.data.index,
+            action.payload.data.openedIndex,
+            draft.questions,
+            draft.selectedQuestion,
+          );
+        }
         break;
 
       case EDIT_QUESTION_SUCCESS: {
