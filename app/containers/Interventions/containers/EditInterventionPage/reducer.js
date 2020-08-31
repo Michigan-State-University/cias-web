@@ -12,6 +12,10 @@ import {
 } from 'models/Narrator/BlockTypes';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import settingsTabLabels from 'utils/settingsTabsLabels';
+import {
+  getNarratorPositionWhenQuestionIsChanged,
+  getNarratorPositionWhenBlockIsRemoved,
+} from 'utils/getNarratorPosition';
 
 import { elements } from 'theme';
 import {
@@ -49,9 +53,7 @@ import questionSettingsReducer from '../../components/QuestionSettings/Settings/
 import {
   instantiateEmptyQuestion,
   mapQuestionDataForType,
-  getAnimationPosition,
   getFromQuestionTTS,
-  getNarratorPositionToDisplay,
 } from './utils';
 
 export const initialState = {
@@ -136,12 +138,14 @@ const editInterventionPageReducer = (state = initialState, action) =>
         break;
       case SELECT_QUESTION:
         draft.draggable = false;
-        draft.animationPosition = getAnimationPosition(
-          draft,
-          state,
-          action.payload,
-        );
-        draft.selectedQuestion = action.payload;
+        if (state.selectedQuestion !== action.payload.index) {
+          draft.selectedQuestion = action.payload.index;
+          draft.animationPosition = getNarratorPositionWhenQuestionIsChanged(
+            state.questions,
+            action.payload.index,
+          );
+        }
+
         break;
 
       // backend connected states
@@ -192,11 +196,10 @@ const editInterventionPageReducer = (state = initialState, action) =>
         draft.selectedQuestion = draft.questions.length - 1;
         draft.loaders.createQuestionLoader = false;
 
-        draft.animationPosition = getNarratorPositionToDisplay(
-          0,
-          null,
+        draft.animationPosition = getNarratorPositionWhenBlockIsRemoved(
           draft.questions,
           draft.selectedQuestion,
+          0,
         );
         break;
       case CREATE_QUESTION_ERROR:
@@ -277,11 +280,11 @@ const editInterventionPageReducer = (state = initialState, action) =>
         };
 
         if (action.payload.type === REMOVE_BLOCK) {
-          draft.animationPosition = getNarratorPositionToDisplay(
-            action.payload.data.index,
-            action.payload.data.openedIndex,
+          draft.animationPosition = getNarratorPositionWhenBlockIsRemoved(
             draft.questions,
             draft.selectedQuestion,
+            action.payload.data.index,
+            action.payload.data.openedIndex,
           );
         }
         break;

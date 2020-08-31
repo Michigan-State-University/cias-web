@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import concat from 'lodash/concat';
-import isEmpty from 'lodash/isEmpty';
 
 import {
   gridQuestion,
@@ -108,26 +107,6 @@ export const mapQuestionDataForType = question => {
   }
 };
 
-export const getAnimationPosition = (draft, state, payload) => {
-  if (draft.selectedQuestion !== payload) {
-    // set position to first block of new question
-    if (state.questions[payload].narrator.blocks[0])
-      return state.questions[payload].narrator.blocks[0].endPosition;
-    for (let i = payload - 1; i >= 0; i -= 1) {
-      const {
-        narrator: { blocks: previousQuestionBlocks },
-      } = state.questions[i];
-      const lastBlock =
-        previousQuestionBlocks[previousQuestionBlocks.length - 1];
-      if (lastBlock) {
-        return lastBlock.endPosition;
-      }
-    }
-    return { x: 0, y: elements.peedyInitialYPosition };
-  }
-  return state.animationPosition;
-};
-
 export const getFromQuestionTTS = question => {
   const delimiters = [',', '.', '?', '!'];
 
@@ -154,51 +133,6 @@ export const useLockEditInterventionPageScroll = () => {
   }, []);
 };
 
-export const getNarratorPositionToDisplay = (
-  blockIndexToPosition,
-  openedBlockIndex,
-  allQuestions,
-  questionIndex,
-) => {
-  if (isEmpty(allQuestions)) return { x: 0, y: elements.peedyInitialYPosition };
-
-  // check if any of accrodion collapsibles is opened
-  if (openedBlockIndex === -1) {
-    // check if there is first block in this question
-    if (allQuestions[questionIndex].narrator.blocks[0])
-      return allQuestions[questionIndex].narrator.blocks[0].endPosition;
-  }
-
-  // check if this is the first block in this question
-  if (
-    blockIndexToPosition === 0 &&
-    allQuestions[questionIndex].narrator.blocks.length === 0
-  ) {
-    // check if this is the first block in the first question
-    for (let i = questionIndex - 1; i >= 0; i -= 1) {
-      const {
-        narrator: { blocks: previousQuestionBlocks },
-      } = allQuestions[i];
-      const lastBlock =
-        previousQuestionBlocks[previousQuestionBlocks.length - 1];
-      if (lastBlock) {
-        return lastBlock.endPosition;
-      }
-    }
-
-    return { x: 0, y: elements.peedyInitialYPosition };
-  }
-
-  // check if this is the last block in the this question
-  if (
-    blockIndexToPosition === allQuestions[questionIndex].narrator.blocks.length
-  )
-    return allQuestions[questionIndex].narrator.blocks[blockIndexToPosition - 1]
-      .endPosition;
-
-  return allQuestions[questionIndex].narrator.blocks[blockIndexToPosition]
-    .endPosition;
-};
 
 const getDataTTS = (type, questionData, delimiters) => {
   switch (type) {

@@ -1,5 +1,6 @@
 import { instantiateBlockForType } from 'models/Intervention/utils';
 import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
+import { getNarratorPositionForANewBlock } from 'utils/getNarratorPosition';
 
 import {
   UPDATE_QUESTION_SETTINGS,
@@ -18,8 +19,6 @@ import {
   REORDER_NARRATOR_BLOCKS,
   UPDATE_PAUSE_DURATION,
 } from './constants';
-
-import { getStartAnimationPoint } from '../utils';
 
 /* eslint-disable default-case, no-param-reassign */
 const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
@@ -47,7 +46,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       };
 
     case ADD_BLOCK:
-      const pos = getStartAnimationPoint(allQuestions, questionIndex, question);
+      const pos = getNarratorPositionForANewBlock(allQuestions, questionIndex);
       return {
         ...question,
         narrator: {
