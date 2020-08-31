@@ -9,6 +9,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.RegisterPage';
 
 export default defineMessages({
+  header: {
+    id: `${scope}.header`,
+    defaultMessage: 'Register researcher account',
+  },
   register: {
     id: `${scope}.register`,
     defaultMessage: 'Register',
@@ -17,29 +21,45 @@ export default defineMessages({
     id: `${scope}.login`,
     defaultMessage: 'I already have an account',
   },
+  firstNameLabel: {
+    id: `${scope}.firstNameLabel`,
+    defaultMessage: 'First Name',
+  },
   firstName: {
     id: `${scope}.firstName`,
-    defaultMessage: 'First name',
+    defaultMessage: 'Enter first name',
   },
-  middleName: {
-    id: `${scope}.middleName`,
-    defaultMessage: 'Middle name',
+  lastNameLabel: {
+    id: `${scope}.lastNameLabel`,
+    defaultMessage: 'Last name',
   },
   lastName: {
     id: `${scope}.lastName`,
-    defaultMessage: 'Last name',
+    defaultMessage: 'Enter last name',
+  },
+  emailLabel: {
+    id: `${scope}.emailLabel`,
+    defaultMessage: 'E-mail address',
   },
   email: {
     id: `${scope}.email`,
-    defaultMessage: 'Email',
+    defaultMessage: 'Enter e-mail address',
   },
   password: {
     id: `${scope}.password`,
+    defaultMessage: 'Enter password',
+  },
+  passwordLabel: {
+    id: `${scope}.passwordLabel`,
     defaultMessage: 'Password',
+  },
+  confirmPasswordLabel: {
+    id: `${scope}.confirmPasswordLabel`,
+    defaultMessage: 'Password confirmation',
   },
   confirmPassword: {
     id: `${scope}.confirmPassword`,
-    defaultMessage: 'Password confirmation',
+    defaultMessage: 'Retype your password',
   },
   validEmail: {
     id: `${scope}.validEmail`,
@@ -77,5 +97,9 @@ export default defineMessages({
   createdAccount: {
     id: `${scope}.createdAccount`,
     defaultMessage: 'Your account has been created',
+  },
+  pageTitle: {
+    id: `${scope}.pageTitle`,
+    defaultMessage: 'Registration',
   },
 });

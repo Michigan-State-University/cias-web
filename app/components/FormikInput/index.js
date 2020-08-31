@@ -14,8 +14,6 @@ import Column from 'components/Column';
 
 import { ErrorText } from './styled';
 
-const inputMarginVertical = 20;
-
 function FormikInput({
   formikKey,
   placeholder,
@@ -43,9 +41,7 @@ function FormikInput({
         type={type}
         {...inputProps}
       />
-      {hasError && (
-        <ErrorText margin={inputMarginVertical}>{error.toString()}</ErrorText>
-      )}
+      {hasError && <ErrorText>{error.toString()}</ErrorText>}
     </Column>
   );
 }

@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -18,17 +18,20 @@ import { Link } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { Fill } from 'components/Fill';
+import Button from 'components/Button';
+import TextButton from 'components/Button/TextButton';
 import Column from 'components/Column';
-import { Card } from 'components/Card';
+import H1 from 'components/H1';
+import Row from 'components/Row';
 import FormikInput from 'components/FormikInput';
 import ErrorAlert from 'components/ErrorAlert';
+import withPublicLayout from 'containers/PublicLayout';
 
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { register } from './actions';
-import { StyledButton } from './styled';
 
 const passwordLength = 8;
 
@@ -82,71 +85,92 @@ export function RegisterPage({
   };
 
   return (
-    <Fill justify="center" align="center">
-      <Column align="center" sm={8} md={6}>
-        <Card width="100%">
-          <Column>
-            <Helmet>
-              <title>RegisterPage</title>
-              <meta name="description" content="Dezgribczon" />
-            </Helmet>
-            <FormattedMessage {...messages.register} />
-            <Formik
-              validationSchema={validationSchema(formatMessage)}
-              initialValues={initialValues}
-              onSubmit={onSubmit}
-            >
-              {formikProps => {
-                const { handleSubmit } = formikProps;
-                return (
-                  <>
+    <Fragment>
+      <Helmet>
+        <title>{formatMessage(messages.pageTitle)}</title>
+      </Helmet>
+      <Fill justify="center" align="center">
+        <Column sm={10} md={8} lg={6} align="start">
+          <H1 mb={40} fontSize={23}>
+            <FormattedMessage {...messages.header} />
+          </H1>
+          <Formik
+            validationSchema={validationSchema(formatMessage)}
+            initialValues={initialValues}
+            onSubmit={onSubmit}
+          >
+            {formikProps => {
+              const { handleSubmit } = formikProps;
+              const sharedProps = {
+                inputProps: {
+                  height: 46,
+                  width: '100%',
+                },
+                mb: 20,
+              };
+              return (
+                <>
+                  <Row width="100%">
                     <FormikInput
                       formikKey="firstName"
                       placeholder={formatMessage(messages.firstName)}
+                      label={formatMessage(messages.firstNameLabel)}
                       type="text"
-                      mb={20}
+                      mr={20}
+                      {...sharedProps}
                     />
                     <FormikInput
                       formikKey="lastName"
                       placeholder={formatMessage(messages.lastName)}
+                      label={formatMessage(messages.lastNameLabel)}
                       type="text"
-                      mb={20}
+                      {...sharedProps}
                     />
-                    <FormikInput
-                      formikKey="email"
-                      placeholder={formatMessage(messages.email)}
-                      type="email"
-                      mb={20}
-                    />
-                    <FormikInput
-                      formikKey="password"
-                      placeholder={formatMessage(messages.password)}
-                      type="password"
-                      mb={20}
-                    />
-                    <FormikInput
-                      formikKey="passwordConfirmation"
-                      placeholder={formatMessage(messages.confirmPassword)}
-                      type="password"
-                      mb={20}
-                    />
-                    <StyledButton
-                      loading={loading}
-                      onClick={handleSubmit}
-                      title={formatMessage(messages.register)}
-                    />
+                  </Row>
+                  <FormikInput
+                    formikKey="email"
+                    placeholder={formatMessage(messages.email)}
+                    label={formatMessage(messages.emailLabel)}
+                    type="email"
+                    {...sharedProps}
+                  />
+                  <FormikInput
+                    formikKey="password"
+                    placeholder={formatMessage(messages.password)}
+                    label={formatMessage(messages.passwordLabel)}
+                    type="password"
+                    {...sharedProps}
+                  />
+                  <FormikInput
+                    formikKey="passwordConfirmation"
+                    placeholder={formatMessage(messages.confirmPassword)}
+                    label={formatMessage(messages.confirmPasswordLabel)}
+                    type="password"
+                    {...sharedProps}
+                  />
+                  <Button
+                    height={46}
+                    borderRadius={5}
+                    my={25}
+                    loading={loading}
+                    onClick={handleSubmit}
+                    title={formatMessage(messages.register)}
+                  />
+                  <Row justify="center" width="100%">
                     <Link to="/login">
-                      <StyledButton title={formatMessage(messages.login)} />
+                      <TextButton>
+                        <FormattedMessage {...messages.login} />
+                      </TextButton>
                     </Link>
-                  </>
-                );
-              }}
-            </Formik>
-            {error && <ErrorAlert errorText={error} />}
-          </Column>
-        </Card>
-      </Column>
-    </Fill>
+                  </Row>
+                </>
+              );
+            }}
+          </Formik>
+          {error && <ErrorAlert errorText={error} />}
+        </Column>
+      </Fill>
+    </Fragment>
   );
 }
 
@@ -173,4 +197,5 @@ export default compose(
   withConnect,
   memo,
   injectIntl,
+  withPublicLayout,
 )(RegisterPage);

@@ -2,61 +2,93 @@
 
 exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
 <div
-  class="Fill-sc-1f4o7x0-0 dHXeMo"
+  class="styled__Background-sc-1r4kg53-0 jqrSlU"
 >
   <div
-    class="Column-sc-1n6divy-0 hHeAfP"
+    class="styled__TopBackground-sc-1r4kg53-1 nQFgX"
+  />
+  <div
+    class="styled__Header-sc-1r4kg53-2 fIXxOZ"
+  >
+    <img
+      class="styled__Logo-sc-1r4kg53-3 jPiNjm"
+      src="IMAGE_MOCK"
+    />
+  </div>
+  <div
+    class="styled__Content-sc-1r4kg53-4 hBhonq"
   >
     <div
-      class="Card-v952e1-0 dvaqLP"
-      width="100%"
+      class="Fill-sc-1f4o7x0-0 dHXeMo"
     >
       <div
-        class="Column-sc-1n6divy-0 dmVPOe"
+        class="Column-sc-1n6divy-0 fSnMtg"
       >
-        <span>
-          Register
-        </span>
-        <div
-          class="Column-sc-1n6divy-0 gkaWeP"
+        <h1
+          class="H1-tncdg6-0 fdwqP"
+          font-size="23"
         >
-          <p
-            class="Text-sc-2lza2m-0 jdGrCy"
-          />
-          <input
-            class="Input-sc-19txxuq-0 diKRNo"
-            name="firstName"
-            placeholder="First name"
-            type="text"
-            value=""
-          />
+          <span>
+            Register researcher account
+          </span>
+        </h1>
+        <div
+          class="Row-x1o3ru-0 eLUxLg"
+          width="100%"
+        >
+          <div
+            class="Column-sc-1n6divy-0 knwgCP"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jdGrCy"
+            >
+              First Name
+            </p>
+            <input
+              class="Input-sc-19txxuq-0 geBkNT"
+              height="46"
+              name="firstName"
+              placeholder="Enter first name"
+              type="text"
+              value=""
+              width="100%"
+            />
+          </div>
+          <div
+            class="Column-sc-1n6divy-0 gkaWeP"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jdGrCy"
+            >
+              Last name
+            </p>
+            <input
+              class="Input-sc-19txxuq-0 geBkNT"
+              height="46"
+              name="lastName"
+              placeholder="Enter last name"
+              type="text"
+              value=""
+              width="100%"
+            />
+          </div>
         </div>
         <div
           class="Column-sc-1n6divy-0 gkaWeP"
         >
           <p
             class="Text-sc-2lza2m-0 jdGrCy"
-          />
+          >
+            E-mail address
+          </p>
           <input
-            class="Input-sc-19txxuq-0 diKRNo"
-            name="lastName"
-            placeholder="Last name"
-            type="text"
-            value=""
-          />
-        </div>
-        <div
-          class="Column-sc-1n6divy-0 gkaWeP"
-        >
-          <p
-            class="Text-sc-2lza2m-0 jdGrCy"
-          />
-          <input
-            class="Input-sc-19txxuq-0 diKRNo"
+            class="Input-sc-19txxuq-0 geBkNT"
+            height="46"
             name="email"
-            placeholder="Email"
+            placeholder="Enter e-mail address"
             type="email"
             value=""
+            width="100%"
           />
         </div>
         <div
@@ -64,13 +96,17 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
         >
           <p
             class="Text-sc-2lza2m-0 jdGrCy"
-          />
+          >
+            Password
+          </p>
           <input
-            class="Input-sc-19txxuq-0 diKRNo"
+            class="Input-sc-19txxuq-0 geBkNT"
+            height="46"
             name="password"
-            placeholder="Password"
+            placeholder="Enter password"
             type="password"
             value=""
+            width="100%"
           />
         </div>
         <div
@@ -78,31 +114,42 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
         >
           <p
             class="Text-sc-2lza2m-0 jdGrCy"
-          />
+          >
+            Password confirmation
+          </p>
           <input
-            class="Input-sc-19txxuq-0 diKRNo"
+            class="Input-sc-19txxuq-0 geBkNT"
+            height="46"
             name="passwordConfirmation"
-            placeholder="Password confirmation"
+            placeholder="Retype your password"
             type="password"
             value=""
+            width="100%"
           />
         </div>
         <button
-          class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 iDyndk"
+          class="StyledButton-t20ntd-0 fsmsOL"
           color="primary"
+          height="46"
         >
           Register
         </button>
-        <a
-          href="/login"
+        <div
+          class="Row-x1o3ru-0 bXtLKJ"
+          width="100%"
         >
-          <button
-            class="styled__StyledButton-da6kmt-0 RMSan StyledButton-t20ntd-0 iDyndk"
-            color="primary"
+          <a
+            href="/login"
           >
-            I already have an account
-          </button>
-        </a>
+            <button
+              class="TextButton-sc-12pwroy-0 StYFP"
+            >
+              <span>
+                I already have an account
+              </span>
+            </button>
+          </a>
+        </div>
         
       </div>
     </div>
