@@ -11,16 +11,15 @@ exports[`<ProblemSettingsPage /> Should render and match the snapshot 1`] = `
       class="styled__StyledLink-sc-1vn5te5-0 iBdJAt"
       href="/interventions/as120s-as12cs"
     >
+      <img
+        alt="traingle"
+        class="Img-sc-1kfzr96-0 bTgaOd"
+        src="IMAGE_MOCK"
+      />
       <p
         class="Text-sc-2lza2m-0 hLUsTn"
         font-weight="bold"
-        type="button"
       >
-        <img
-          alt="traingle"
-          class="Img-sc-1kfzr96-0 bTgaOd"
-          src="IMAGE_MOCK"
-        />
         Back
       </p>
     </a>

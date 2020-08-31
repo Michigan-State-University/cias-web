@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BackButton /> Should render and match the snapshot 1`] = `
-.c2 {
+.c1 {
   width: auto;
   height: auto;
   margin-bottom: 2px;
   margin-right: 8px;
 }
 
-.c1 {
+.c2 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -34,16 +34,15 @@ exports[`<BackButton /> Should render and match the snapshot 1`] = `
     class="c0"
     href="/"
   >
-    <p
+    <img
+      alt="traingle"
       class="c1"
+      src="IMAGE_MOCK"
+    />
+    <p
+      class="c2"
       font-weight="bold"
-      type="button"
     >
-      <img
-        alt="traingle"
-        class="c2"
-        src="IMAGE_MOCK"
-      />
       <span>
         Back button
       </span>

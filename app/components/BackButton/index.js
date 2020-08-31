@@ -14,8 +14,8 @@ import { StyledLink } from './styled';
 
 const BackButton = ({ className, to, children }) => (
   <StyledLink to={to}>
-    <Text className={className} type="button" fontWeight="bold">
-      <Img src={triangleBack} alt="traingle" mr={8} mb={2} />
+    <Img src={triangleBack} alt="traingle" mr={8} mb={2} />
+    <Text className={className} fontWeight="bold">
       {children}
     </Text>
   </StyledLink>
