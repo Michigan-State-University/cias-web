@@ -16,6 +16,9 @@ export const NarratorContainer = styled.div`
     width: ${({ width }) => `${width}px`};
     cursor: ${props => (props.canBeDragged ? 'grab' : 'default')};
   }
+  image {
+    pointer-events: none;
+  }
 `;
 
 export const lottieStyles = {
