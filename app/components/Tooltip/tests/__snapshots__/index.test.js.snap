@@ -13,11 +13,6 @@ exports[`<Tooltip /> Should render and match the snapshot 1`] = `
 }
 
 .c1 {
-  width: auto;
-  height: auto;
-}
-
-.c2 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -28,14 +23,13 @@ exports[`<Tooltip /> Should render and match the snapshot 1`] = `
     class="c0"
     display="flex"
   >
-    <img
-      alt="?"
-      class="c1"
+    <div
       currentitem="false"
       data-for="assda1-123dsa"
       data-tip="true"
-      src="IMAGE_MOCK"
-    />
+    >
+      Tooltip text
+    </div>
     <div
       class="__react_component_tooltip t00000000-0000-0000-0000-000000000000 place-top type-dark"
       data-id="tooltip"
@@ -119,10 +113,8 @@ exports[`<Tooltip /> Should render and match the snapshot 1`] = `
   
       </style>
       <p
-        class="c2"
-      >
-        Tooltip text
-      </p>
+        class="c1"
+      />
     </div>
   </div>
 </div>

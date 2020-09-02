@@ -42,30 +42,6 @@ export const StatusIndicator = styled.span`
   margin-left: 5px;
 `;
 
-export const Title = styled.div`
-  position: relative;
-  font-weight: bold;
-  font-size: 18px;
-  div {
-    position: absolute;
-    overflow: hidden;
-    width: 100%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    height: 20px;
-  }
-  &:hover {
-    div {
-      z-index: 1;
-      background-color: white;
-      overflow: visible;
-      white-space: initial;
-      height: auto;
-      box-shadow: ${boxShadows.selago};
-    }
-  }
-`;
-
 export const TileInfo = styled.div`
   display: flex;
   div {

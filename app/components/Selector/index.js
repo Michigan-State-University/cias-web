@@ -2,10 +2,11 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Tooltip from 'components/Tooltip';
-import arrowDownSelect from 'assets/svg/arrow-down-select.svg';
 import Box from 'components/Box';
 import Row from 'components/Row';
 import Img from 'components/Img';
+import arrowDownSelect from 'assets/svg/arrow-down-select.svg';
+import questionMark from 'assets/svg/question-mark.svg';
 
 import useOutsideClick from 'utils/useOutsideClick';
 import HeaderContainer from './HeaderContainer';
@@ -37,9 +38,12 @@ const Selector = ({
           {selectedOption.label}
         </HeaderComponent>
         {tooltipContent && (
-          <Tooltip id={`el-tooltip-id-${selectedOption.id}`} ml={8}>
-            {tooltipContent}
-          </Tooltip>
+          <Tooltip
+            id={`el-tooltip-id-${selectedOption.id}`}
+            ml={8}
+            icon={questionMark}
+            text={tooltipContent}
+          />
         )}
         <Img
           src={arrowDownSelect}
@@ -78,7 +82,7 @@ Selector.propTypes = {
     id: PropTypes.string,
     label: PropTypes.string,
   }),
-  tooltipContent: PropTypes.node,
+  tooltipContent: PropTypes.string,
   HeaderComponent: PropTypes.elementType,
   ElementsComponent: PropTypes.elementType,
   rightPosition: PropTypes.string,

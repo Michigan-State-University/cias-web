@@ -21,13 +21,13 @@ import {
   sendProblemCsvRequest,
 } from 'global/reducers/problem';
 
+import EllipsisText from 'components/Text/EllipsisText';
 import messages from './messages';
 import {
   TileContainer,
   StyledLink,
   Heading,
   StatusIndicator,
-  Title,
   TileInfo,
 } from './styled';
 
@@ -66,9 +66,7 @@ const SingleTile = ({ tileData, participantView, link, sendCsv }) => {
             </div>
           )}
         </Heading>
-        <Title>
-          <div>{name}</div>
-        </Title>
+        <EllipsisText text={name} />
         <TileInfo>
           {interventions && (
             <div>

@@ -136,14 +136,16 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
               </div>
             </div>
             <div
-              class="styled__Title-vwtndu-4 cnHTKf"
+              class="Row-x1o3ru-0 exvbpM"
             >
-              <div>
+              <div
+                class="styled__StyledEllipsisText-x30pqb-0 jODJUp"
+              >
                 Name
               </div>
             </div>
             <div
-              class="styled__TileInfo-vwtndu-5 jSsgUn"
+              class="styled__TileInfo-vwtndu-4 kpGKYM"
             >
               <div>
                 <span>

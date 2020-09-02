@@ -7,6 +7,28 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   margin-left: 15px;
 }
 
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c6 {
+  position: relative;
+  font-weight: bold;
+  font-size: 18px;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 20px;
+}
+
 .c1 {
   padding: 15px;
   height: 150px;
@@ -60,38 +82,14 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
-.c5 {
-  position: relative;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.c5 div {
-  position: absolute;
-  overflow: hidden;
-  width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  height: 20px;
-}
-
-.c5:hover div {
-  z-index: 1;
-  background-color: white;
-  overflow: visible;
-  white-space: initial;
-  height: auto;
-  box-shadow: 0px 4px 20px #E3EEFB;
-}
-
-.c6 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c6 div {
+.c7 div {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -139,12 +137,14 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
       <div
         class="c5"
       >
-        <div>
+        <div
+          class="c6"
+        >
           Name
         </div>
       </div>
       <div
-        class="c6"
+        class="c7"
       />
     </div>
   </a>
