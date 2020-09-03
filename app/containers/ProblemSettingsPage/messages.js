@@ -28,7 +28,7 @@ export default defineMessages({
   },
   onlyInvitedRegisteredParticipantsLabel: {
     id: `${scope}.onlyInvitedRegisteredParticipantsLabel`,
-    defaultMessage: 'Only invited registered participants can access sessions',
+    defaultMessage: 'Only selected registered participants can access sessions',
   },
   anyoneWithTheLinkSublabel: {
     id: `${scope}.anyoneWithTheLinkSublabel`,
@@ -57,7 +57,7 @@ export default defineMessages({
   },
   uploadText: {
     id: `${scope}.uploadText`,
-    defaultMessage: 'Upload e-mails with CVS file',
+    defaultMessage: 'Upload e-mails with CSV file',
   },
   sendText: {
     id: `${scope}.sendText`,

@@ -71,6 +71,6 @@ export default defineMessages({
   },
   invited: {
     id: `${scope}.invited`,
-    defaultMessage: 'Only invited registered participants can access sessions',
+    defaultMessage: 'Only selected registered participants can access sessions',
   },
 });
