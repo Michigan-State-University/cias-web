@@ -13,6 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import { Link } from 'react-router-dom';
 import get from 'lodash/get';
 import Reorder, { reorder } from 'react-reorder';
+import orderBy from 'lodash/orderBy';
 
 import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
@@ -151,6 +152,9 @@ export function ProblemDetailsPage({
 
   const handleSendCsv = () => sendCsv(id);
 
+  const createInterventionCall = () => () =>
+    createIntervention(problemId, interventions.length);
+
   const handleReorder = (event, previousIndex, nextIndex) => {
     const newList = reorder(interventions, previousIndex, nextIndex);
     let position = 0;
@@ -175,10 +179,13 @@ export function ProblemDetailsPage({
         holdTime={125}
       >
         {interventions &&
-          interventions.map((intervention, index) => {
+          orderBy(interventions, 'position').map((intervention, index) => {
             const handleClick = () => {
               changeInterventionIndex(index);
             };
+            const nextIntervention = interventions.find(
+              ({ position }) => position === intervention.position + 1,
+            );
             return (
               <Row key={intervention.id}>
                 <InterventionListItem
@@ -188,9 +195,7 @@ export function ProblemDetailsPage({
                   handleClick={handleClick}
                   handleCopyIntervention={handleCopyIntervention}
                   nextInterventionName={
-                    interventions[index + 1]
-                      ? interventions[index + 1].name
-                      : null
+                    nextIntervention ? nextIntervention.name : null
                   }
                 />
               </Row>
@@ -271,9 +276,7 @@ export function ProblemDetailsPage({
         <Column sm={6}>
           {renderList()}
           <Row my={18} align="center">
-            <InterventionCreateButton
-              handleClick={() => createIntervention(problemId)}
-            />
+            <InterventionCreateButton handleClick={createInterventionCall} />
           </Row>
         </Column>
         {process.env.APP_STAGE === appStages.dev.id && (

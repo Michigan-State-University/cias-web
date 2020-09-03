@@ -16,6 +16,8 @@ import {
   COPY_INTERVENTION_SUCCESS,
   COPY_INTERVENTION_REQUEST,
   REORDER_INTERVENTION_LIST,
+  REORDER_INTERVENTION_LIST_SUCCESS,
+  REORDER_INTERVENTION_LIST_ERROR,
   CHANGE_ACCESS_SETTING_REQUEST,
   CHANGE_ACCESS_SETTING_SUCCESS,
   CHANGE_ACCESS_SETTING_ERROR,
@@ -64,6 +66,10 @@ export const copyInterventionSuccess = intervention =>
 
 export const reorderInterventionList = payload =>
   actionBuilder(REORDER_INTERVENTION_LIST, payload);
+export const reorderSessionsSuccess = payload =>
+  actionBuilder(REORDER_INTERVENTION_LIST_SUCCESS, payload);
+export const reorderSessionsError = payload =>
+  actionBuilder(REORDER_INTERVENTION_LIST_ERROR, payload);
 
 export const changeAccessSettingRequest = (id, setting) =>
   actionBuilder(CHANGE_ACCESS_SETTING_REQUEST, { id, setting });

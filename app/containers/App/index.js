@@ -85,7 +85,6 @@ export function App({ user }) {
           exact
           path="/interventions/:problemId/sessions/:interventionId/fill"
           component={AnswerInterventionPage}
-          protectedRoute
           allowedRoles={ROLES.allRoles}
           user
           navbarProps={{

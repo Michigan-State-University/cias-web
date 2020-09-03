@@ -12,8 +12,8 @@ import {
   EDIT_INTERVENTION_ERROR,
 } from './constants';
 
-export const createInterventionRequest = id =>
-  actionBuilder(CREATE_INTERVENTION_REQUEST, { id });
+export const createInterventionRequest = (id, lastPosition) =>
+  actionBuilder(CREATE_INTERVENTION_REQUEST, { id, lastPosition });
 export const createInterventionSuccess = () =>
   actionBuilder(CREATE_INTERVENTION_SUCCESS, {});
 export const createInterventionError = () =>

@@ -6,7 +6,7 @@ import { CREATE_INTERVENTION_REQUEST } from '../constants';
 
 import { createInterventionSuccess, createInterventionError } from '../actions';
 
-function* createIntervention({ payload: { id } }) {
+function* createIntervention({ payload: { id, lastPosition } }) {
   const requestURL = `v1/problems/${id}/interventions`;
 
   try {
@@ -16,6 +16,7 @@ function* createIntervention({ payload: { id } }) {
       intervention: {
         type: 'Intervention::Single',
         name: 'New Session',
+        position: lastPosition + 1,
       },
     });
 

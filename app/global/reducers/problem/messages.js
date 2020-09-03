@@ -17,6 +17,10 @@ export default defineMessages({
     id: `${scope}.copyError`,
     defaultMessage: 'Cannot copy intervention',
   },
+  reorderError: {
+    id: `${scope}.reorderError`,
+    defaultMessage: 'Cannot reorder sessions in intervention',
+  },
   giveUserAccessError: {
     id: `${scope}.giveUserAccessError`,
     defaultMessage: 'Cannot give user/users access to intervention',

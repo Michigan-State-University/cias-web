@@ -17,6 +17,8 @@ import {
   SEND_PROBLEM_CSV_ERROR,
   COPY_INTERVENTION_SUCCESS,
   REORDER_INTERVENTION_LIST,
+  REORDER_INTERVENTION_LIST_SUCCESS,
+  REORDER_INTERVENTION_LIST_ERROR,
   CHANGE_ACCESS_SETTING_REQUEST,
   CHANGE_ACCESS_SETTING_SUCCESS,
   CHANGE_ACCESS_SETTING_ERROR,
@@ -104,7 +106,14 @@ export const problemReducer = (state = initialState, action) =>
         );
         break;
       case REORDER_INTERVENTION_LIST:
+        draft.cache.problem = state.problem;
         draft.problem.interventions = action.payload.reorderedList;
+        break;
+      case REORDER_INTERVENTION_LIST_SUCCESS:
+        draft.cache.problem = draft.problem;
+        break;
+      case REORDER_INTERVENTION_LIST_ERROR:
+        draft.problem = state.cache.problem;
         break;
       case CHANGE_ACCESS_SETTING_REQUEST:
         draft.problem.shared_to = action.payload.setting;

@@ -24,6 +24,7 @@ export {
   fetchProblemSaga,
   sendProblemCsvSaga,
   copyInterventionSaga,
+  reorderSessionsSaga,
   changeAccessSettingSaga,
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
