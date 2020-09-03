@@ -152,7 +152,7 @@ export function ProblemDetailsPage({
 
   const handleSendCsv = () => sendCsv(id);
 
-  const createInterventionCall = () => () =>
+  const createInterventionCall = () =>
     createIntervention(problemId, interventions.length);
 
   const handleReorder = (event, previousIndex, nextIndex) => {

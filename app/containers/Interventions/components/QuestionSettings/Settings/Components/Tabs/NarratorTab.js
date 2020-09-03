@@ -81,7 +81,11 @@ const NarratorTab = ({
             </Row>
           ))}
       </Box>
-      <Text color={colors[isPeedyMovable ? 'jungleGreen' : 'flamingo']} mb={15}>
+      <Text
+        fontWeight="bold"
+        color={colors[isPeedyMovable ? 'jungleGreen' : 'flamingo']}
+        mb={15}
+      >
         <FormattedMessage
           {...messages[isPeedyMovable ? 'peedyeMovable' : 'peedyBlocked']}
         />
