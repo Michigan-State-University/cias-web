@@ -4,6 +4,7 @@ import map from 'lodash/map';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import Box from 'components/Box';
 import H3 from 'components/H3';
@@ -12,7 +13,10 @@ import Switch from 'components/Switch';
 import Text from 'components/Text';
 import lastKey from 'utils/getLastKey';
 import { colors, borders } from 'theme';
-import { localStateReducer } from 'global/reducers/localState';
+import {
+  localStateReducer,
+  makeSelectCurrentNarratorBlockIndex,
+} from 'global/reducers/localState';
 import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
 import { useInjectReducer } from 'utils/injectReducer';
 
@@ -27,6 +31,7 @@ const NarratorTab = ({
   onNarratorToggle,
   onCreate,
   id,
+  currentBlockIndex,
 }) => {
   useInjectReducer({
     key: 'localState',
@@ -51,9 +56,10 @@ const NarratorTab = ({
     return `${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`;
   };
 
+  const isPeedyMovable = currentBlockIndex !== -1;
   return (
     <Fragment>
-      <Box mb={30}>
+      <Box mb={20}>
         <Text color={colors.flamingo} mb={30}>
           <FormattedMessage {...messages.warningMessage} />
         </Text>
@@ -75,6 +81,11 @@ const NarratorTab = ({
             </Row>
           ))}
       </Box>
+      <Text color={colors[isPeedyMovable ? 'jungleGreen' : 'flamingo']} mb={15}>
+        <FormattedMessage
+          {...messages[isPeedyMovable ? 'peedyeMovable' : 'peedyBlocked']}
+        />
+      </Text>
       <WrappedAccordion
         id={id}
         formatMessage={formatMessage}
@@ -94,7 +105,12 @@ NarratorTab.propTypes = {
   narrator: PropTypes.object,
   onNarratorToggle: PropTypes.func.isRequired,
   onCreate: PropTypes.func,
+  currentBlockIndex: PropTypes.number,
 };
+
+const mapStateToProps = createStructuredSelector({
+  currentBlockIndex: makeSelectCurrentNarratorBlockIndex(),
+});
 
 const mapDispatchToProps = {
   onCreate: addBlock,
@@ -102,7 +118,7 @@ const mapDispatchToProps = {
 };
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 

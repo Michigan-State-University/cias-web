@@ -5,16 +5,15 @@ import map from 'lodash/map';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { reorder } from 'react-reorder';
+import { createStructuredSelector } from 'reselect';
 
 import Accordion from 'components/Accordion';
-
 import globalMessages from 'global/i18n/globalMessages';
 import {
   setPeedyDraggable,
   setAnimationStopPosition,
   updatePreviewAnimation,
 } from 'containers/Interventions/containers/EditInterventionPage/actions';
-import { createStructuredSelector } from 'reselect';
 import {
   changeCurrentNarratorBlock,
   makeSelectCurrentNarratorBlockIndex,
