@@ -43,7 +43,7 @@ export default defineMessages({
   onlyInvitedRegisteredParticipantsSublabel: {
     id: `${scope}.onlyInvitedRegisteredParticipantsSublabel`,
     defaultMessage:
-      'It means that in order to open the session participant would need to log in or create the account. Please note that <b>only particpants who are listed below will be able to complete the session.</b>',
+      'It means that in order to open the session participant would need to log in or create the account. Please note that <b>only participants who are listed below will be able to complete the session.</b>',
   },
   accessGiverHeader: {
     id: `${scope}.accessGiverHeader`,
