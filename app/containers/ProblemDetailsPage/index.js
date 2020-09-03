@@ -61,9 +61,6 @@ import SelectResearchers from './components/SelectResearchers';
 import messages from './messages';
 import { updateStatuses } from './utils';
 
-const mockSetting =
-  'Anyone who is a registered participant can access the session';
-
 export function ProblemDetailsPage({
   intl: { formatMessage },
   createIntervention,
@@ -93,7 +90,8 @@ export function ProblemDetailsPage({
     reducer: localStateReducer,
   });
 
-  const { interventions, name, id, status } = problem || {};
+  const { interventions, name, id, status, shared_to: sharedTo } =
+    problem || {};
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -252,25 +250,23 @@ export function ProblemDetailsPage({
           </InterventionOptions>
         </Row>
       </Row>
-      {process.env.APP_STAGE === appStages.dev.id && (
-        <Row
-          bg={colors.linkWater}
-          borderRadius={10}
-          py={15}
-          px={20}
-          align="center"
-          width="fit-content"
-        >
-          <Text fontWeight="bold" mr={12}>
-            {mockSetting}
-          </Text>
-          <Link to={`/interventions/${id}/settings`}>
-            <TextButton>
-              <FormattedMessage {...messages.adjust} />
-            </TextButton>
-          </Link>
-        </Row>
-      )}
+      <Row
+        bg={colors.linkWater}
+        borderRadius={10}
+        py={15}
+        px={20}
+        align="center"
+        width="fit-content"
+      >
+        <Text fontWeight="bold" mr={12}>
+          {sharedTo && <FormattedMessage {...messages[sharedTo]} />}
+        </Text>
+        <Link to={`/interventions/${id}/settings`}>
+          <TextButton>
+            <FormattedMessage {...messages.adjust} />
+          </TextButton>
+        </Link>
+      </Row>
       <Row>
         <Column sm={6}>
           {renderList()}

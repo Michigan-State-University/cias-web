@@ -16,6 +16,18 @@ import {
   COPY_INTERVENTION_SUCCESS,
   COPY_INTERVENTION_REQUEST,
   REORDER_INTERVENTION_LIST,
+  CHANGE_ACCESS_SETTING_REQUEST,
+  CHANGE_ACCESS_SETTING_SUCCESS,
+  CHANGE_ACCESS_SETTING_ERROR,
+  ENABLE_USER_ACCESS_REQUEST,
+  ENABLE_USER_ACCESS_SUCCESS,
+  ENABLE_USER_ACCESS_ERROR,
+  FETCH_USERS_WITH_ACCESS_REQUEST,
+  FETCH_USERS_WITH_ACCESS_SUCCESS,
+  FETCH_USERS_WITH_ACCESS_ERROR,
+  REVOKE_USER_ACCESS_REQUEST,
+  REVOKE_USER_ACCESS_SUCCESS,
+  REVOKE_USER_ACCESS_ERROR,
 } from './constants';
 
 export const fetchProblemRequest = id =>
@@ -52,3 +64,31 @@ export const copyInterventionSuccess = intervention =>
 
 export const reorderInterventionList = payload =>
   actionBuilder(REORDER_INTERVENTION_LIST, payload);
+
+export const changeAccessSettingRequest = (id, setting) =>
+  actionBuilder(CHANGE_ACCESS_SETTING_REQUEST, { id, setting });
+export const changeAccessSettingSuccess = () =>
+  actionBuilder(CHANGE_ACCESS_SETTING_SUCCESS, {});
+export const changeAccessSettingFailure = payload =>
+  actionBuilder(CHANGE_ACCESS_SETTING_ERROR, payload);
+
+export const enableUserAccessRequest = (id, emails) =>
+  actionBuilder(ENABLE_USER_ACCESS_REQUEST, { id, emails });
+export const enableUserAccessSuccess = emails =>
+  actionBuilder(ENABLE_USER_ACCESS_SUCCESS, { emails });
+export const enableUserAccessFailure = payload =>
+  actionBuilder(ENABLE_USER_ACCESS_ERROR, payload);
+
+export const fetchUsersWithAccessRequest = id =>
+  actionBuilder(FETCH_USERS_WITH_ACCESS_REQUEST, { id });
+export const fetchUsersWithAccessSuccess = userAccess =>
+  actionBuilder(FETCH_USERS_WITH_ACCESS_SUCCESS, { userAccess });
+export const fetchUsersWithAccessFailure = payload =>
+  actionBuilder(FETCH_USERS_WITH_ACCESS_ERROR, payload);
+
+export const revokeUserAccessRequest = (problemId, userId) =>
+  actionBuilder(REVOKE_USER_ACCESS_REQUEST, { problemId, userId });
+export const revokeUserAccessSuccess = userId =>
+  actionBuilder(REVOKE_USER_ACCESS_SUCCESS, { userId });
+export const revokeUserAccessFailure = (userId, error) =>
+  actionBuilder(REVOKE_USER_ACCESS_ERROR, { userId, error });

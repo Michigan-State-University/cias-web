@@ -6,6 +6,10 @@ export {
   sendProblemCsvRequest,
   reorderInterventionList,
   copyInterventionRequest,
+  changeAccessSettingRequest,
+  enableUserAccessRequest,
+  fetchUsersWithAccessRequest,
+  revokeUserAccessRequest,
 } from './actions';
 export { problemReducer } from './reducer';
 export {
@@ -20,4 +24,8 @@ export {
   fetchProblemSaga,
   sendProblemCsvSaga,
   copyInterventionSaga,
+  changeAccessSettingSaga,
+  giveUserAccessSaga,
+  fetchUsersWithAccessSaga,
+  revokeUserAccessSaga,
 } from './sagas';

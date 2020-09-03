@@ -4,9 +4,9 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 import messages from './messages';
 
 export const ids = {
-  anyoneWithTheLink: 'anyone_with_the_link',
-  anyoneWhoIsARegisterdParticipant: 'anyone_who_is_a_registerd_participant',
-  onlyInvitedRegisteredParticipant: 'only_invited_registered_participants',
+  anyoneWithTheLink: 'anyone',
+  anyoneWhoIsARegisteredParticipant: 'registered',
+  onlyInvitedRegisteredParticipant: 'invited',
 };
 
 export const shareOptions = [
@@ -16,9 +16,9 @@ export const shareOptions = [
     sublabel: <FormattedHTMLMessage {...messages.anyoneWithTheLinkSublabel} />,
   },
   {
-    id: ids.anyoneWhoIsARegisterdParticipant,
+    id: ids.anyoneWhoIsARegisteredParticipant,
     label: (
-      <FormattedMessage {...messages.anyoneWhoIsARegisterdParticipantLabel} />
+      <FormattedMessage {...messages.anyoneWhoIsARegisteredParticipantLabel} />
     ),
     sublabel: (
       <FormattedHTMLMessage

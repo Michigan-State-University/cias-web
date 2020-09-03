@@ -60,4 +60,17 @@ export default defineMessages({
     id: `${scope}.modalTitle`,
     defaultMessage: 'Choose researchers to send',
   },
+  anyone: {
+    id: `${scope}.anyone`,
+    defaultMessage: 'Anyone with the link can access sessions',
+  },
+  registered: {
+    id: `${scope}.registered`,
+    defaultMessage:
+      'Anyone who is a registered participant can access sessions',
+  },
+  invited: {
+    id: `${scope}.invited`,
+    defaultMessage: 'Only invited registered participants can access sessions',
+  },
 });

@@ -13,7 +13,7 @@ import decideIfPassValue from 'utils/decideIfPassValue';
 import messages from '../messages';
 import { shareOptions } from '../utils';
 
-const LeftColumn = ({ currentOption, dispatchUpdate }) => {
+const LeftColumn = ({ currentOption, dispatchUpdate, updateAccessSetting }) => {
   const changeInfo = (id, label, sublabel) => () =>
     dispatchUpdate({
       id,
@@ -27,7 +27,7 @@ const LeftColumn = ({ currentOption, dispatchUpdate }) => {
       </H2>
       <Box mt={25}>
         {shareOptions.map((option, index) => {
-          const isChecked = option.id === currentOption.id;
+          const isChecked = currentOption && option.id === currentOption.id;
           return (
             <Row
               key={`el-option-radio-${index}`}
@@ -43,12 +43,16 @@ const LeftColumn = ({ currentOption, dispatchUpdate }) => {
                 option.label,
                 option.sublabel,
               )}
-              onMouseLeave={changeInfo(
-                currentOption.id,
-                currentOption.label,
-                currentOption.sublabel,
-              )}
+              onMouseLeave={() =>
+                currentOption &&
+                changeInfo(
+                  currentOption.id,
+                  currentOption.label,
+                  currentOption.sublabel,
+                )
+              }
               width="fit-content"
+              onClick={() => updateAccessSetting(option.id)}
             >
               <Radio checked={isChecked} mr={12} />
               <Text fontSize={15} fontWeight={isChecked ? 'bold' : 'regular'}>
@@ -69,6 +73,7 @@ LeftColumn.propTypes = {
     sublabel: PropTypes.node,
   }),
   dispatchUpdate: PropTypes.func,
+  updateAccessSetting: PropTypes.func,
 };
 
 export default LeftColumn;

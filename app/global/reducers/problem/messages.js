@@ -17,4 +17,16 @@ export default defineMessages({
     id: `${scope}.copyError`,
     defaultMessage: 'Cannot copy intervention',
   },
+  giveUserAccessError: {
+    id: `${scope}.giveUserAccessError`,
+    defaultMessage: 'Cannot give user/users access to intervention',
+  },
+  changeAccessSettingFailure: {
+    id: `${scope}.changeAccessSettingFailure`,
+    defaultMessage: 'Cannot change access setting',
+  },
+  revokeAccessError: {
+    id: `${scope}.revokeAccessError`,
+    defaultMessage: 'Cannot revoke user access to intervention',
+  },
 });

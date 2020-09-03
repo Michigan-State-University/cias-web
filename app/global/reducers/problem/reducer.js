@@ -17,6 +17,18 @@ import {
   SEND_PROBLEM_CSV_ERROR,
   COPY_INTERVENTION_SUCCESS,
   REORDER_INTERVENTION_LIST,
+  CHANGE_ACCESS_SETTING_REQUEST,
+  CHANGE_ACCESS_SETTING_SUCCESS,
+  CHANGE_ACCESS_SETTING_ERROR,
+  ENABLE_USER_ACCESS_REQUEST,
+  ENABLE_USER_ACCESS_SUCCESS,
+  ENABLE_USER_ACCESS_ERROR,
+  FETCH_USERS_WITH_ACCESS_REQUEST,
+  FETCH_USERS_WITH_ACCESS_SUCCESS,
+  FETCH_USERS_WITH_ACCESS_ERROR,
+  REVOKE_USER_ACCESS_REQUEST,
+  REVOKE_USER_ACCESS_SUCCESS,
+  REVOKE_USER_ACCESS_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -28,10 +40,14 @@ export const initialState = {
     fetchProblemLoading: true,
     createProblemLoading: false,
     sendCsvLoading: false,
+    changeAccessSettingLoading: false,
+    fetchUserAccessLoading: false,
   },
   errors: {
     fetchProblemError: null,
     createProblemError: null,
+    changeAccessSettingError: null,
+    fetchUserAccessError: null,
   },
 };
 
@@ -89,6 +105,58 @@ export const problemReducer = (state = initialState, action) =>
         break;
       case REORDER_INTERVENTION_LIST:
         draft.problem.interventions = action.payload.reorderedList;
+        break;
+      case CHANGE_ACCESS_SETTING_REQUEST:
+        draft.problem.shared_to = action.payload.setting;
+        draft.cache.problem = state.problem;
+        break;
+      case CHANGE_ACCESS_SETTING_SUCCESS:
+        draft.cache.problem = draft.problem;
+        break;
+      case CHANGE_ACCESS_SETTING_ERROR:
+        draft.problem = state.cache.problem;
+        break;
+      case ENABLE_USER_ACCESS_REQUEST:
+        draft.loaders.enableAccessLoading = true;
+        break;
+      case ENABLE_USER_ACCESS_SUCCESS:
+        draft.loaders.enableAccessLoading = false;
+        draft.problem.usersWithAccess = [
+          ...state.problem.usersWithAccess,
+          ...action.payload.emails,
+        ];
+        break;
+      case ENABLE_USER_ACCESS_ERROR:
+        draft.loaders.enableAccessLoading = false;
+        draft.errors.enableAccessError = action.payload.error;
+        break;
+      case FETCH_USERS_WITH_ACCESS_REQUEST:
+        draft.loaders.fetchUserAccessLoading = true;
+        break;
+      case FETCH_USERS_WITH_ACCESS_SUCCESS:
+        draft.loaders.fetchUserAccessLoading = false;
+        draft.problem.usersWithAccess = action.payload.userAccess;
+        break;
+      case FETCH_USERS_WITH_ACCESS_ERROR:
+        draft.loaders.fetchUserAccessLoading = false;
+        draft.errors.fetchUserAccessError = action.payload.message;
+        break;
+      case REVOKE_USER_ACCESS_REQUEST:
+        let userIndex = state.problem.usersWithAccess.findIndex(
+          ({ id }) => id === action.payload.userId,
+        );
+        draft.problem.usersWithAccess[userIndex].loading = true;
+        break;
+      case REVOKE_USER_ACCESS_SUCCESS:
+        draft.problem.usersWithAccess = state.problem.usersWithAccess.filter(
+          ({ id }) => id !== action.payload.userId,
+        );
+        break;
+      case REVOKE_USER_ACCESS_ERROR:
+        userIndex = state.problem.usersWithAccess.findIndex(
+          ({ id }) => id === action.payload.userId,
+        );
+        draft.problem.usersWithAccess[userIndex].loading = false;
         break;
     }
   });

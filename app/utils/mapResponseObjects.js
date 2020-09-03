@@ -11,3 +11,12 @@ export const defaultMapper = object => ({
   ...object.attributes,
   id: object.id,
 });
+
+export const mapAccessToStateObject = ({
+  attributes: {
+    user: { id, email },
+  },
+}) => ({
+  id,
+  email,
+});

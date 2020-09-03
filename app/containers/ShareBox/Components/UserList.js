@@ -6,8 +6,10 @@ import Img from 'components/Img';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import H3 from 'components/H3';
+import Spinner from 'components/Spinner';
+import Box from 'components/Box';
 import userAvatar from 'assets/svg/user.svg';
-import { colors, fontSizes } from 'theme';
+import { colors, fontSizes, themeColors } from 'theme';
 
 import { StyledTextButton, HoverableRow } from '../styled';
 
@@ -39,12 +41,27 @@ const UserList = ({
   headerText,
   buttonIsClose,
   buttonText,
+  buttonAction,
 }) => {
-  const button = (
-    <StyledTextButton fontWeight="bold" ml={buttonIsClose ? 15 : null}>
+  const button = userId => (
+    <StyledTextButton
+      onClick={() => buttonAction(userId)}
+      fontWeight="bold"
+      ml={buttonIsClose ? 15 : null}
+    >
       {buttonText}
     </StyledTextButton>
   );
+
+  const getAction = user =>
+    user.loading ? (
+      <Box ml={buttonIsClose ? 15 : null}>
+        <Spinner color={themeColors.secondary} />
+      </Box>
+    ) : (
+      button(user.id)
+    );
+
   return (
     <Column>
       {headerText && (
@@ -70,13 +87,13 @@ const UserList = ({
           hoverColor={colors.linkWater}
         >
           <Row align="center">
-            <Img src={user.avatar} alt="avatar" mr={15} />
+            <Img src={user.avatar || userAvatar} alt="avatar" mr={15} />
             <Text fontSize={fontSizes.regular} lineHeight="270%">
               {user.email}
             </Text>
-            {buttonIsClose && button}
+            {buttonIsClose && getAction(user)}
           </Row>
-          {!buttonIsClose && button}
+          {!buttonIsClose && getAction(user)}
         </HoverableRow>
       ))}
     </Column>
@@ -88,6 +105,7 @@ UserList.propTypes = {
   headerText: PropTypes.node,
   buttonIsClose: PropTypes.bool,
   buttonText: PropTypes.node,
+  buttonAction: PropTypes.func,
 };
 
 UserList.defaultProps = {

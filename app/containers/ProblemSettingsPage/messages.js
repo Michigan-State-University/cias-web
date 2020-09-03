@@ -18,30 +18,30 @@ export default defineMessages({
     defaultMessage: 'Who can access this intervention?',
   },
   anyoneWithTheLinkLabel: {
-    id: `${scope}.anyoneWithTheLink`,
+    id: `${scope}.anyoneWithTheLinkLabel`,
     defaultMessage: 'Anyone with the link can access sessions',
   },
-  anyoneWhoIsARegisterdParticipantLabel: {
-    id: `${scope}.anyoneWhoIsARegisterdParticipant`,
+  anyoneWhoIsARegisteredParticipantLabel: {
+    id: `${scope}.anyoneWhoIsARegisteredParticipantLabel`,
     defaultMessage:
       'Anyone who is a registered participant can access sessions',
   },
   onlyInvitedRegisteredParticipantsLabel: {
-    id: `${scope}.onlyInvitedRegisteredParticipants`,
+    id: `${scope}.onlyInvitedRegisteredParticipantsLabel`,
     defaultMessage: 'Only invited registered participants can access sessions',
   },
   anyoneWithTheLinkSublabel: {
-    id: `${scope}.anyoneWithTheLink`,
+    id: `${scope}.anyoneWithTheLinkSublabel`,
     defaultMessage:
       'It means that any person is able to complete the session. However please note, <span style="color:#EF462F;">that branching and multisessions sequences are not possible in this case.</span>',
   },
   anyoneWhoIsARegisterdParticipantSublabel: {
-    id: `${scope}.anyoneWhoIsARegisterdParticipant`,
+    id: `${scope}.anyoneWhoIsARegisterdParticipantSublabel`,
     defaultMessage:
       'It means that in order to open the session participant would need to log in or create the account.',
   },
   onlyInvitedRegisteredParticipantsSublabel: {
-    id: `${scope}.onlyInvitedRegisteredParticipants`,
+    id: `${scope}.onlyInvitedRegisteredParticipantsSublabel`,
     defaultMessage:
       'It means that in order to open the session participant would need to log in or create the account. Please note that <b>only particpants who are listed below will be able to complete the session.</b>',
   },
@@ -66,5 +66,9 @@ export default defineMessages({
   remove: {
     id: `${scope}.remove`,
     defaultMessage: 'Remove',
+  },
+  usersWithAccessError: {
+    id: `${scope}.usersWithAccessError`,
+    defaultMessage: `Couldn't fetch users with access to this intervention`,
   },
 });

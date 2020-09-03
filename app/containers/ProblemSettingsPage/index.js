@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useLayoutEffect, useReducer } from 'react';
+import React, { useLayoutEffect, useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
@@ -23,35 +23,39 @@ import { useInjectReducer } from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import {
   problemReducer,
-  fetchProblemSaga,
   fetchProblemRequest,
   makeSelectProblemState,
+  changeAccessSettingRequest,
 } from 'global/reducers/problem';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
-import AccessGiver from './Components/AccessGiver';
+import Spinner from 'components/Spinner';
+import AccessGiver from './containers/AccessGiver';
 import LeftColumn from './Components/LeftColumn';
 import RightColumn from './Components/RightColumn';
 import messages from './messages';
-import { initialState, reducer, UPDATE } from './reducer';
-import { shareOptions } from './utils';
-
-const mockId = 'only_invited_registered_participants';
+import { reducer, UPDATE } from './reducer';
+import { shareOptions, ids } from './utils';
+import { problemSettingPageSaga } from './sagas';
 
 const ProblemSettingsPage = ({
   match: {
     params: { problemId },
   },
   fetchProblem,
+  changeAccessSetting,
   problemState: {
     problem,
-    loaders: { fetchProblemLoading },
-    errors: { fetchProblemError },
+    loaders: {
+      fetchProblemLoading,
+      changeAccessSettingLoading,
+      enableAccessLoading,
+      fetchUserAccessLoading,
+    },
+    errors: { fetchProblemError, fetchUserAccessError },
   },
 }) => {
-  const currentOption = shareOptions.find(option => option.id === mockId);
-  const [state, dispatch] = useReducer(reducer, initialState(currentOption));
-
+  const [state, dispatch] = useReducer(reducer, {});
   useInjectReducer({
     key: 'problem',
     reducer: problemReducer,
@@ -61,13 +65,22 @@ const ProblemSettingsPage = ({
     fetchProblem(problemId);
   }, []);
 
+  const updateSetting = newSetting =>
+    changeAccessSetting(problemId, newSetting);
+
+  const { name, id, shared_to: sharedTo, usersWithAccess } = problem || {};
+
   const dispatchUpdate = newState =>
     dispatch({
       type: UPDATE,
       newState,
     });
 
-  const { name, id } = problem || {};
+  useEffect(() => {
+    dispatchUpdate(shareOptions.find(option => option.id === sharedTo));
+  }, [sharedTo]);
+
+  const currentOption = shareOptions.find(option => option.id === sharedTo);
 
   if (fetchProblemLoading) return <Loader />;
   if (fetchProblemError) return <ErrorAlert errorText={fetchProblemError} />;
@@ -82,14 +95,31 @@ const ProblemSettingsPage = ({
         {name}
       </H3>
       <Column mt={35} bg={colors.white} width="100%" padding={35}>
-        <Row>
-          <LeftColumn
-            currentOption={currentOption}
-            dispatchUpdate={dispatchUpdate}
-          />
-          <RightColumn state={state} />
-        </Row>
-        <AccessGiver />
+        {!changeAccessSettingLoading && (
+          <>
+            <Row>
+              <LeftColumn
+                currentOption={currentOption}
+                dispatchUpdate={dispatchUpdate}
+                updateAccessSetting={updateSetting}
+              />
+              {state && <RightColumn state={state} />}
+            </Row>
+            {currentOption &&
+              currentOption.id === ids.onlyInvitedRegisteredParticipant && (
+                <AccessGiver
+                  usersWithAccess={usersWithAccess}
+                  problemId={problemId}
+                  enableAccessLoading={enableAccessLoading}
+                  fetchUserAccessLoading={fetchUserAccessLoading}
+                  fetchUserAccessError={fetchUserAccessError}
+                />
+              )}
+          </>
+        )}
+        {changeAccessSettingLoading && (
+          <Spinner color={themeColors.secondary} size={100} />
+        )}
       </Column>
     </Box>
   );
@@ -98,6 +128,7 @@ const ProblemSettingsPage = ({
 ProblemSettingsPage.propTypes = {
   match: PropTypes.object,
   fetchProblem: PropTypes.func,
+  changeAccessSetting: PropTypes.func,
   problemState: PropTypes.shape({
     problem: PropTypes.object,
   }),
@@ -109,6 +140,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   fetchProblem: fetchProblemRequest,
+  changeAccessSetting: changeAccessSettingRequest,
 };
 
 const withConnect = connect(
@@ -116,7 +148,10 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withSaga = injectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
+const withSaga = injectSaga({
+  key: 'problemSettingPage',
+  saga: problemSettingPageSaga,
+});
 
 export default compose(
   withConnect,

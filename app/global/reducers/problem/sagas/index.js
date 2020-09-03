@@ -4,6 +4,10 @@ import sendProblemCsvSaga from './sendProblemCsv';
 import createProblemSaga from './createProblem';
 import editProblemSaga from './editProblem';
 import fetchProblemSaga from './fetchProblem';
+import changeAccessSettingSaga from './changeAccessSetting';
+import giveUserAccessSaga from './giveUserAccess';
+import fetchUsersWithAccessSaga from './fetchUsersWithAccess';
+import revokeUserAccessSaga from './revokeUserAccess';
 
 export {
   createProblemSaga,
@@ -11,6 +15,10 @@ export {
   fetchProblemSaga,
   sendProblemCsvSaga,
   copyInterventionSaga,
+  changeAccessSettingSaga,
+  giveUserAccessSaga,
+  fetchUsersWithAccessSaga,
+  revokeUserAccessSaga,
 };
 
 export default function* allProblemSagas() {
@@ -20,5 +28,9 @@ export default function* allProblemSagas() {
     fetchProblemSaga(),
     sendProblemCsvSaga(),
     copyInterventionSaga(),
+    changeAccessSettingSaga(),
+    giveUserAccessSaga(),
+    fetchUsersWithAccessSaga(),
+    revokeUserAccessSaga(),
   ]);
 }
