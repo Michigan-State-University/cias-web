@@ -43,7 +43,7 @@ const LeftColumn = ({ currentOption, dispatchUpdate, updateAccessSetting }) => {
                 option.label,
                 option.sublabel,
               )}
-              onMouseLeave={() =>
+              onMouseLeave={
                 currentOption &&
                 changeInfo(
                   currentOption.id,
