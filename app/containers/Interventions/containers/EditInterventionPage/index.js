@@ -21,7 +21,6 @@ import {
   makeSelectInterventionLoaders,
 } from 'global/reducers/intervention';
 import useLockBodyScroll from 'utils/useLockBodyScroll';
-
 import { borders, colors } from 'theme';
 
 import reducer from './reducer';

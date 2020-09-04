@@ -133,8 +133,7 @@ export const useLockEditInterventionPageScroll = () => {
   }, []);
 };
 
-
-const getDataTTS = (type, questionData, delimiters) => {
+export const getDataTTS = (type, questionData, delimiters) => {
   switch (type) {
     case singleQuestion.id:
     case multiQuestion.id:
@@ -149,4 +148,5 @@ const getDataTTS = (type, questionData, delimiters) => {
     default:
       return [];
   }
+};
 };
