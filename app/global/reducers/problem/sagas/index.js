@@ -9,6 +9,7 @@ import changeAccessSettingSaga from './changeAccessSetting';
 import giveUserAccessSaga from './giveUserAccess';
 import fetchUsersWithAccessSaga from './fetchUsersWithAccess';
 import revokeUserAccessSaga from './revokeUserAccess';
+import createInterventionSaga from './createIntervention';
 
 export {
   createProblemSaga,
@@ -21,6 +22,7 @@ export {
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
+  createInterventionSaga,
 };
 
 export default function* allProblemSagas() {
@@ -35,5 +37,6 @@ export default function* allProblemSagas() {
     giveUserAccessSaga(),
     fetchUsersWithAccessSaga(),
     revokeUserAccessSaga(),
+    createInterventionSaga(),
   ]);
 }

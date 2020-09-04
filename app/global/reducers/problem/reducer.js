@@ -31,6 +31,9 @@ import {
   REVOKE_USER_ACCESS_REQUEST,
   REVOKE_USER_ACCESS_SUCCESS,
   REVOKE_USER_ACCESS_ERROR,
+  CREATE_INTERVENTION_REQUEST,
+  CREATE_INTERVENTION_ERROR,
+  CREATE_INTERVENTION_SUCCESS,
 } from './constants';
 
 export const initialState = {
@@ -44,12 +47,14 @@ export const initialState = {
     sendCsvLoading: false,
     changeAccessSettingLoading: false,
     fetchUserAccessLoading: false,
+    createInterventionLoading: false,
   },
   errors: {
     fetchProblemError: null,
     createProblemError: null,
     changeAccessSettingError: null,
     fetchUserAccessError: null,
+    createInterventionError: null,
   },
 };
 
@@ -166,6 +171,20 @@ export const problemReducer = (state = initialState, action) =>
           ({ id }) => id === action.payload.userId,
         );
         draft.problem.usersWithAccess[userIndex].loading = false;
+        break;
+      case CREATE_INTERVENTION_REQUEST:
+        draft.loaders.createInterventionLoading = true;
+        break;
+      case CREATE_INTERVENTION_SUCCESS:
+        draft.problem.interventions = [
+          ...state.problem.interventions,
+          action.payload.intervention,
+        ];
+        draft.loaders.createInterventionLoading = false;
+        break;
+      case CREATE_INTERVENTION_ERROR:
+        draft.loaders.createInterventionLoading = false;
+        draft.errors.createInterventionError = action.payload.error;
         break;
     }
   });

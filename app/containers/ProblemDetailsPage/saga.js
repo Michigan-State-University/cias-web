@@ -1,11 +1,11 @@
 import { all } from 'redux-saga/effects';
-import { createInterventionSaga } from 'global/reducers/intervention/sagas';
 import {
   copyInterventionSaga,
   editProblemSaga,
   fetchProblemSaga,
   sendProblemCsvSaga,
   reorderSessionsSaga,
+  createInterventionSaga,
 } from 'global/reducers/problem/sagas';
 import { copyProblemSaga } from 'global/reducers/problems/sagas';
 

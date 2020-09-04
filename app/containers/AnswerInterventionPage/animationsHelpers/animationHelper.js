@@ -97,10 +97,11 @@ const useAnimationHelper = (
 
   const handleBodyOrHeadAnimationBlock = () => {
     const { anim } = animationRef.current;
+    anim.stop();
     if (currentData) {
       anim.addEventListener('complete', reverseAnimation);
       anim.play();
-    } else anim.stop();
+    }
   };
 
   const getIdleAnimation = () =>

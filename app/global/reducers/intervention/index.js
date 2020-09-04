@@ -1,7 +1,4 @@
 export {
-  createInterventionRequest,
-  createInterventionSuccess,
-  createInterventionError,
   getInterventionRequest,
   getInterventionSuccess,
   getInterventionError,
@@ -15,8 +12,4 @@ export {
   makeSelectInterventionLoaders,
   makeSelectInterventionEditLoader,
 } from './selectors';
-export {
-  createInterventionSaga,
-  editInterventionSaga,
-  getInterventionSaga,
-} from './sagas';
+export { editInterventionSaga, getInterventionSaga } from './sagas';

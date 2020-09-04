@@ -1,9 +1,6 @@
 import { actionBuilder } from 'utils/actionBuilder';
 
 import {
-  CREATE_INTERVENTION_REQUEST,
-  CREATE_INTERVENTION_SUCCESS,
-  CREATE_INTERVENTION_ERROR,
   GET_INTERVENTION_REQUEST,
   GET_INTERVENTION_SUCCESS,
   GET_INTERVENTION_ERROR,
@@ -11,13 +8,6 @@ import {
   EDIT_INTERVENTION_SUCCESS,
   EDIT_INTERVENTION_ERROR,
 } from './constants';
-
-export const createInterventionRequest = (id, lastPosition) =>
-  actionBuilder(CREATE_INTERVENTION_REQUEST, { id, lastPosition });
-export const createInterventionSuccess = () =>
-  actionBuilder(CREATE_INTERVENTION_SUCCESS, {});
-export const createInterventionError = () =>
-  actionBuilder(CREATE_INTERVENTION_ERROR, {});
 
 export const getInterventionRequest = payload =>
   actionBuilder(GET_INTERVENTION_REQUEST, payload);

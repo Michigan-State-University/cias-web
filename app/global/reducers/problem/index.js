@@ -10,6 +10,7 @@ export {
   enableUserAccessRequest,
   fetchUsersWithAccessRequest,
   revokeUserAccessRequest,
+  createInterventionRequest,
 } from './actions';
 export { problemReducer } from './reducer';
 export {

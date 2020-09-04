@@ -30,6 +30,9 @@ import {
   REVOKE_USER_ACCESS_REQUEST,
   REVOKE_USER_ACCESS_SUCCESS,
   REVOKE_USER_ACCESS_ERROR,
+  CREATE_INTERVENTION_REQUEST,
+  CREATE_INTERVENTION_SUCCESS,
+  CREATE_INTERVENTION_ERROR,
 } from './constants';
 
 export const fetchProblemRequest = id =>
@@ -98,3 +101,10 @@ export const revokeUserAccessSuccess = userId =>
   actionBuilder(REVOKE_USER_ACCESS_SUCCESS, { userId });
 export const revokeUserAccessFailure = (userId, error) =>
   actionBuilder(REVOKE_USER_ACCESS_ERROR, { userId, error });
+
+export const createInterventionRequest = (id, lastPosition) =>
+  actionBuilder(CREATE_INTERVENTION_REQUEST, { id, lastPosition });
+export const createInterventionSuccess = intervention =>
+  actionBuilder(CREATE_INTERVENTION_SUCCESS, { intervention });
+export const createInterventionError = () =>
+  actionBuilder(CREATE_INTERVENTION_ERROR, {});

@@ -1,7 +1,7 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import { push } from 'connected-react-router';
 
+import { defaultMapper } from 'utils/mapResponseObjects';
 import { CREATE_INTERVENTION_REQUEST } from '../constants';
 
 import { createInterventionSuccess, createInterventionError } from '../actions';
@@ -20,8 +20,7 @@ function* createIntervention({ payload: { id, lastPosition } }) {
       },
     });
 
-    yield put(createInterventionSuccess());
-    yield put(push(`/interventions/${id}/sessions/${data.id}/edit`));
+    yield put(createInterventionSuccess(defaultMapper(data)));
   } catch (error) {
     yield put(createInterventionError(error));
   }

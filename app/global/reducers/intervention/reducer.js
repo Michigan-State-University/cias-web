@@ -19,9 +19,6 @@ import {
   CREATE_QUESTION_ERROR,
 } from 'containers/Interventions/containers/EditInterventionPage/constants';
 import {
-  CREATE_INTERVENTION_REQUEST,
-  CREATE_INTERVENTION_SUCCESS,
-  CREATE_INTERVENTION_ERROR,
   GET_INTERVENTION_REQUEST,
   GET_INTERVENTION_SUCCESS,
   GET_INTERVENTION_ERROR,
@@ -71,16 +68,6 @@ const interventionReducer = (state = initialState, action) =>
     if (saving.includes(action.type)) draft.interventionSaving = true;
     if (saved.includes(action.type)) draft.interventionSaving = false;
     switch (action.type) {
-      case CREATE_INTERVENTION_REQUEST:
-        draft.loaders.createIntervention = true;
-        break;
-      case CREATE_INTERVENTION_SUCCESS:
-        draft.loaders.createIntervention = false;
-        break;
-      case CREATE_INTERVENTION_ERROR:
-        draft.loaders.createIntervention = false;
-        break;
-
       case GET_INTERVENTION_REQUEST:
         draft.loaders.getIntervention = true;
         break;

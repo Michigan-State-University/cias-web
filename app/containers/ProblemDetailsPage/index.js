@@ -35,8 +35,8 @@ import {
   sendProblemCsvRequest,
   reorderInterventionList,
   copyInterventionRequest,
+  createInterventionRequest,
 } from 'global/reducers/problem';
-import { createInterventionRequest } from 'global/reducers/intervention';
 import {
   localStateReducer,
   makeSelectCurrentInterventionIndex,
@@ -44,7 +44,7 @@ import {
 } from 'global/reducers/localState';
 import injectSaga from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 import appStages from 'global/appStages';
 import globalMessages from 'global/i18n/globalMessages';
 
@@ -53,6 +53,7 @@ import copy from 'assets/svg/copy.svg';
 import archive from 'assets/svg/archive.svg';
 import { closed } from 'models/Status/StatusTypes';
 import { copyProblemRequest } from 'global/reducers/problems';
+import Spinner from 'components/Spinner';
 import { StatusLabel, InterventionOptions } from './styled';
 import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
@@ -72,8 +73,8 @@ export function ProblemDetailsPage({
   },
   problemState: {
     problem,
-    loaders: { fetchProblemLoading },
-    errors: { fetchProblemError },
+    loaders: { fetchProblemLoading, createInterventionLoading },
+    errors: { fetchProblemError, createInterventionError },
   },
   interventionIndex,
   changeInterventionIndex,
@@ -275,10 +276,18 @@ export function ProblemDetailsPage({
       <Row>
         <Column sm={6}>
           {renderList()}
+          {createInterventionLoading && (
+            <Row my={18} align="center">
+              <Spinner color={themeColors.secondary} />
+            </Row>
+          )}
           <Row my={18} align="center">
             <InterventionCreateButton handleClick={createInterventionCall} />
           </Row>
         </Column>
+        {createInterventionError && (
+          <ErrorAlert errorText={createInterventionError} />
+        )}
         {process.env.APP_STAGE === appStages.dev.id && (
           <Column ml={38} sm={6} mt={18}>
             <Column position="sticky" top="100px">
