@@ -115,6 +115,7 @@ const editInterventionPageReducer = (state = initialState, action) =>
     switch (action.type) {
       case TOGGLE_QUESTION_SETTINGS:
         if (!isNullOrUndefined(action.payload.index)) {
+          draft.questionSettings.tab = settingsTabLabels.settings;
           if (action.payload.index < 0) {
             draft.questionSettings.visibility = false;
             break;
