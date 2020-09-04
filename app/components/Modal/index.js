@@ -18,9 +18,11 @@ import cross from 'assets/svg/cross.svg';
 import useLockBodyScroll from 'utils/useLockBodyScroll';
 import useKeyPress from 'utils/useKeyPress';
 
+import { StyledBox } from './styled';
+
 const ESC_KEY_CODE = 27;
 
-const Modal = ({ title, onClose, children, visible }) => {
+const Modal = ({ title, onClose, children, visible, ...stylesProps }) => {
   const modalContent = useRef(null);
   const modalOverlay = useRef(null);
   useLockBodyScroll(visible);
@@ -71,27 +73,34 @@ const Modal = ({ title, onClose, children, visible }) => {
           align="center"
           justify="center"
         >
-          <Box
+          <StyledBox
             ref={modalContent}
             minWidth={400}
-            minHeight={300}
+            minHeight={200}
             maxHeight="90%"
             maxWidth={700}
             bg={colors.white}
             px={20}
             py={20}
             overflow="auto"
+            {...stylesProps}
           >
             <Column border="1px solid red">
               <Row align="center" justify="between">
                 <H1>{title}</H1>
-                <Img src={cross} alt="close" onClick={onClose} clickable />
+                <Img
+                  ml={5}
+                  src={cross}
+                  alt="close"
+                  onClick={onClose}
+                  clickable
+                />
               </Row>
             </Column>
             <Box borderRadius="0px" mt={40}>
               {children}
             </Box>
-          </Box>
+          </StyledBox>
         </Box>,
         document.getElementById('modal-portal'),
       )

@@ -33,23 +33,6 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   top: 0px;
 }
 
-.c1 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  max-width: 700px;
-  max-height: 90%;
-  min-width: 400px;
-  min-height: 300px;
-  overflow: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-right: 20px;
-  padding-left: 20px;
-  background-color: rgba(255,255,255,1);
-}
-
 .c6 {
   width: auto;
   height: auto;
@@ -104,7 +87,34 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
 .c5 {
   width: auto;
   height: auto;
+  margin-left: 5px;
   cursor: pointer;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 700px;
+  max-height: 90%;
+  min-width: 400px;
+  min-height: 200px;
+  overflow: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: rgba(255,255,255,1);
+}
+
+@media only screen and (max-width:480px) {
+  .c1 {
+    max-height: calc(100% - 20px);
+    max-width: none;
+    min-width: 0;
+    width: calc(100% - 20px);
+  }
 }
 
 <div>

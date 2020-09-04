@@ -73,6 +73,15 @@ export default defineMessages({
     id: `${scope}.passwordRequired`,
     defaultMessage: 'Password is required',
   },
+  passwordLength: {
+    id: `${scope}.passwordLength`,
+    defaultMessage: 'Password must have at least {length} characters',
+  },
+  passwordInvalid: {
+    id: `${scope}.passwordInvalid`,
+    defaultMessage:
+      'Password must contain capital letter, small letter, special character and digit',
+  },
   passwordMatch: {
     id: `${scope}.passwordMatch`,
     defaultMessage: 'Password must match',
@@ -85,15 +94,7 @@ export default defineMessages({
     id: `${scope}.lastNameRequired`,
     defaultMessage: 'First name is required',
   },
-  passwordLength: {
-    id: `${scope}.passwordLength`,
-    defaultMessage: 'Password must have at least {length} characters',
-  },
-  passwordInvalid: {
-    id: `${scope}.passwordInvalid`,
-    defaultMessage:
-      'Password must contain capital letter, small letter, special character and digit',
-  },
+
   createdAccount: {
     id: `${scope}.createdAccount`,
     defaultMessage: 'Your account has been created',

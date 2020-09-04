@@ -187,6 +187,24 @@ exports[`<App /> should render and match the snapshot 1`] = `
       protectedRoute={true}
     />
     <Memo(ConnectFunction)
+      allowedRoles={
+        Array [
+          "admin",
+          "participant",
+          "researcher",
+        ]
+      }
+      component={[Function]}
+      exact={true}
+      navbarProps={
+        Object {
+          "navbarId": "default",
+        }
+      }
+      path="/profile"
+      protectedRoute={true}
+    />
+    <Memo(ConnectFunction)
       component={[Function]}
     />
   </Switch>

@@ -4,7 +4,14 @@
  *
  */
 import produce from 'immer';
-import { LOG_IN_USER, LOG_OUT } from './constants';
+
+import {
+  LOG_IN_USER,
+  LOG_OUT,
+  EDIT_USER_REQUEST,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_ERROR,
+} from './constants';
 
 export const initialState = {
   isLoggedIn: false,
@@ -22,6 +29,14 @@ export const authReducer = (state = initialState, { type, payload }) =>
       case LOG_OUT:
         draft.isLoggedIn = false;
         draft.user = null;
+        break;
+
+      case EDIT_USER_REQUEST:
+        break;
+      case EDIT_USER_SUCCESS:
+        draft.user = payload.user;
+        break;
+      case EDIT_USER_ERROR:
         break;
     }
   });

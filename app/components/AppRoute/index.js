@@ -20,7 +20,6 @@ class AppRoute extends Route {
       computedMatch,
       location,
     } = this.props;
-
     if (!protectedRoute) {
       return super.render();
     }

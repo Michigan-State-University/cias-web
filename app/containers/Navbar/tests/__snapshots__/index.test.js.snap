@@ -4,6 +4,7 @@ exports[`<Navbar /> Should render and match the snapshot with intervention path 
 .c3 {
   width: 30px;
   height: 30px;
+  font-size: 15px;
   border-radius: 50%;
   background-color: #107969;
   color: white;
@@ -99,6 +100,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
 .c3 {
   width: 30px;
   height: 30px;
+  font-size: 15px;
   border-radius: 50%;
   background-color: #107969;
   color: white;

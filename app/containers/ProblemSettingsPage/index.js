@@ -87,7 +87,9 @@ const ProblemSettingsPage = ({
 
   return (
     <Box height="100%" width="100%" padding="60px 160px">
-      <BackButton to={`/interventions/${id}`}>Back</BackButton>
+      <BackButton to={`/interventions/${id}`}>
+        <FormattedMessage {...messages.back} />
+      </BackButton>
       <H1 mt={20}>
         <FormattedMessage {...messages.header} />
       </H1>

@@ -20,8 +20,10 @@ function* login({ payload: { email, password } }) {
 
     yield put(
       logIn({
+        id: data.id,
         firstName: data.first_name,
         lastName: data.last_name,
+        email: data.email,
         roles: data.roles,
       }),
     );

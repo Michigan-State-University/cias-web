@@ -42,6 +42,9 @@ const Column = styled.div`
   @media only screen and (min-width: 1170px) {
     ${({ lg }) => lg && getWidthString(lg)};
   }
+  @media only screen and (min-width: 1360px) {
+    ${({ xlg }) => xlg && getWidthString(xlg)};
+  }
 
   ${flex};
   ${layout};

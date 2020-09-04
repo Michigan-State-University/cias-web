@@ -137,7 +137,7 @@ export function LoginPage(props) {
               );
             }}
           </Formik>
-          {error && <ErrorAlert errorText={error} />}
+          {error && <ErrorAlert errorText={error} mt={20} />}
         </Column>
       </Fill>
     </Fragment>

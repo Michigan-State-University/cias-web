@@ -26,7 +26,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
               scope="col"
             >
               <div
-                class="Column-sc-1n6divy-0 cYprOR"
+                class="Column-sc-1n6divy-0 jEZsih"
                 width="300"
               >
                 Email
@@ -37,7 +37,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
               scope="col"
             >
               <div
-                class="Column-sc-1n6divy-0 cYprOR"
+                class="Column-sc-1n6divy-0 jEZsih"
                 width="300"
               >
                 Name
@@ -48,7 +48,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
               scope="col"
             >
               <div
-                class="Column-sc-1n6divy-0 cYprOR"
+                class="Column-sc-1n6divy-0 jEZsih"
                 width="300"
               >
                 Roles

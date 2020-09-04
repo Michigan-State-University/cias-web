@@ -26,7 +26,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       class="Row-x1o3ru-0 fbdBbJ"
     >
       <div
-        class="Column-sc-1n6divy-0 dmVPOe"
+        class="Column-sc-1n6divy-0 cVSlLs"
       >
         <div
           class="Row-x1o3ru-0 bKPAyc"
@@ -47,7 +47,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <button
-            class="StyledButton-t20ntd-0 bgLnzG"
+            class="StyledButton-t20ntd-0 QHkrN"
             color="primary"
             disabled=""
             width="140"
@@ -58,7 +58,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
           </button>
         </div>
         <div
-          class="Column-sc-1n6divy-0 kjMwlV"
+          class="Column-sc-1n6divy-0 lelHjj"
         >
           <div
             class="Row-x1o3ru-0 exvbpM"
@@ -125,7 +125,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       class="Row-x1o3ru-0 bhnrrF"
     >
       <div
-        class="Column-sc-1n6divy-0 dmVPOe"
+        class="Column-sc-1n6divy-0 cVSlLs"
       >
         <h3
           class="H3-sc-1nwhpi5-0 jXhFJD"

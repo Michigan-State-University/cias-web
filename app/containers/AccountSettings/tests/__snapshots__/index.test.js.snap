@@ -1,0 +1,177 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-14m3exe-0 styled__StyledBox-k1l7f-0 fEUjEs"
+    height="100%"
+    width="100%"
+  >
+    <div
+      class="Row-x1o3ru-0 exvbpM"
+    >
+      <a
+        class="styled__StyledLink-sc-1vn5te5-0 iBdJAt"
+        href="/"
+      >
+        <img
+          alt="traingle"
+          class="Img-sc-1kfzr96-0 bTgaOd"
+          src="IMAGE_MOCK"
+        />
+        <p
+          class="Text-sc-2lza2m-0 hLUsTn"
+          font-weight="bold"
+        >
+          <span>
+            Back to dashboard
+          </span>
+        </p>
+      </a>
+    </div>
+    <h1
+      class="H1-tncdg6-0 bYhSrV"
+    >
+      <span>
+        Account Settings
+      </span>
+    </h1>
+    <div
+      class="Column-sc-1n6divy-0 styled__StyledColumn-k1l7f-1 hmCzEV"
+    >
+      <div
+        class="Row-x1o3ru-0 exvbpM"
+      >
+        <div
+          class="Row-x1o3ru-0 diEAcg"
+        >
+          <div
+            class="styled__StyledUserAvatar-k1l7f-6 jXVoJb styled__AvatarStyled-sc-15n3teb-0 gZAqyR"
+          >
+            <div>
+              NS
+            </div>
+          </div>
+          <div
+            class="Box-sc-14m3exe-0 bLNNpR"
+            height="fit-content"
+          >
+            <input
+              autocomplete="off"
+              style="display: none;"
+              tabindex="-1"
+              type="file"
+            />
+            <div
+              class="Row-x1o3ru-0 eekyNt"
+            >
+              <p
+                class="Text-sc-2lza2m-0 hbSsWL"
+                color="#C866EA"
+                font-size="14"
+                font-weight="bold"
+              >
+                <span>
+                  Add profile photo
+                </span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Row-x1o3ru-0 bGWQrj"
+      >
+        <div
+          class="Row-x1o3ru-0 styled__StyledFullNameRow-k1l7f-5 fXfTnL"
+          width="100%"
+        >
+          <div
+            class="Column-sc-1n6divy-0 dLXQXG"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jdGrCy"
+            >
+              First Name
+            </p>
+            <input
+              class="Input-sc-19txxuq-0 geBkNT"
+              height="46"
+              name="firstName"
+              placeholder="Enter first name"
+              type="text"
+              value="Name"
+              width="100%"
+            />
+          </div>
+          <div
+            class="Column-sc-1n6divy-0 dihrP"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jdGrCy"
+            >
+              Last name
+            </p>
+            <input
+              class="Input-sc-19txxuq-0 geBkNT"
+              height="46"
+              name="lastName"
+              placeholder="Enter last name"
+              type="text"
+              value="Surname"
+              width="100%"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        class="Row-x1o3ru-0 styled__StyledRow-k1l7f-2 gXxqJd"
+        width="100%"
+      >
+        <div
+          class="Box-sc-14m3exe-0 styled__StyledEmailBox-k1l7f-4 ifyLRJ"
+          width="50%"
+        >
+          <div
+            class="Row-x1o3ru-0 eLUxLg"
+            width="100%"
+          >
+            <div
+              class="Column-sc-1n6divy-0 cVSlLs"
+            >
+              <p
+                class="Text-sc-2lza2m-0 jdGrCy"
+              >
+                E-mail address
+              </p>
+              <input
+                class="Input-sc-19txxuq-0 geBkNT"
+                height="46"
+                name="email"
+                placeholder="Enter e-mail address"
+                type="text"
+                value="admin@cias-api.herokuapp.com"
+                width="100%"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class="Box-sc-14m3exe-0 iLGplY"
+          width="50%"
+        >
+          <button
+            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-k1l7f-3 cmzRrW"
+            font-size="14"
+            font-weight="bold"
+          >
+            <span>
+              Reset password
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

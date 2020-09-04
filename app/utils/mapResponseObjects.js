@@ -20,3 +20,11 @@ export const mapAccessToStateObject = ({
   id,
   email,
 });
+
+export const mapCurrentUser = user => ({
+  id: user.id,
+  firstName: user.attributes.first_name,
+  lastName: user.attributes.last_name,
+  email: user.attributes.email,
+  roles: user.attributes.roles,
+});

@@ -45,7 +45,7 @@ describe('<ProblemDetailsPage />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it.only('Should render loader and match the snapshot', () => {
+  it('Should render loader and match the snapshot', () => {
     const { container } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <Provider store={store}>

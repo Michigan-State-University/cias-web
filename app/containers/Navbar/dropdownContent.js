@@ -4,7 +4,7 @@ import users from 'assets/svg/users.svg';
 
 const sharedNavbarElements = [
   {
-    url: '/#',
+    url: '/profile',
     icon: gear,
     messagesKey: 'editAccount',
   },

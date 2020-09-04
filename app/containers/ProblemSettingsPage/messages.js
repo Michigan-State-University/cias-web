@@ -71,4 +71,8 @@ export default defineMessages({
     id: `${scope}.usersWithAccessError`,
     defaultMessage: `Couldn't fetch users with access to this intervention`,
   },
+  back: {
+    id: `${scope}.back`,
+    defaultMessage: 'Back',
+  },
 });

@@ -6,12 +6,17 @@
 
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+
+import Img from 'components/Img';
+
 import { AvatarStyled } from './styled';
 
-function UserAvatar({ firstName, lastName }) {
-  const nameShort = `${firstName[0]}${lastName[0]}`.toUpperCase();
+function UserAvatar({ avatar, firstName, lastName, ...styleProps }) {
+  if (avatar) return <Img src={avatar} alt="avatar" {...styleProps} />;
+
+  const nameShort = `${firstName.trim()[0]}${lastName.trim()[0]}`.toUpperCase();
   return (
-    <AvatarStyled>
+    <AvatarStyled {...styleProps}>
       <div>{nameShort}</div>
     </AvatarStyled>
   );
@@ -20,6 +25,7 @@ function UserAvatar({ firstName, lastName }) {
 UserAvatar.propTypes = {
   firstName: PropTypes.string,
   lastName: PropTypes.string,
+  avatar: PropTypes.string,
 };
 
 export default memo(UserAvatar);

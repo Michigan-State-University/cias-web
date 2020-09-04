@@ -21,6 +21,7 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
 import ProblemSettingsPage from 'containers/ProblemSettingsPage/Loadable';
 import SettingsInterventionPage from 'containers/Interventions/containers/SettingsInterventionPage';
+import AccountSettings from 'containers/AccountSettings/Loadable';
 
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 
@@ -155,7 +156,16 @@ export function App({ user }) {
             navbarId: 'default',
           }}
         />
-
+        <AppRoute
+          exact
+          path="/profile"
+          component={AccountSettings}
+          protectedRoute
+          allowedRoles={ROLES.allRoles}
+          navbarProps={{
+            navbarId: 'default',
+          }}
+        />
         <AppRoute component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

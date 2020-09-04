@@ -22,7 +22,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
       class="Fill-sc-1f4o7x0-0 dHXeMo"
     >
       <div
-        class="Column-sc-1n6divy-0 fSnMtg"
+        class="Column-sc-1n6divy-0 gaDuUF"
       >
         <h1
           class="H1-tncdg6-0 fdwqP"
@@ -37,7 +37,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           width="100%"
         >
           <div
-            class="Column-sc-1n6divy-0 knwgCP"
+            class="Column-sc-1n6divy-0 dLXQXG"
           >
             <p
               class="Text-sc-2lza2m-0 jdGrCy"
@@ -55,7 +55,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
             />
           </div>
           <div
-            class="Column-sc-1n6divy-0 gkaWeP"
+            class="Column-sc-1n6divy-0 dihrP"
           >
             <p
               class="Text-sc-2lza2m-0 jdGrCy"
@@ -74,7 +74,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="Column-sc-1n6divy-0 gkaWeP"
+          class="Column-sc-1n6divy-0 dihrP"
         >
           <p
             class="Text-sc-2lza2m-0 jdGrCy"
@@ -92,7 +92,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 gkaWeP"
+          class="Column-sc-1n6divy-0 dihrP"
         >
           <p
             class="Text-sc-2lza2m-0 jdGrCy"
@@ -110,7 +110,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 gkaWeP"
+          class="Column-sc-1n6divy-0 dihrP"
         >
           <p
             class="Text-sc-2lza2m-0 jdGrCy"
@@ -128,7 +128,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <button
-          class="StyledButton-t20ntd-0 fsmsOL"
+          class="StyledButton-t20ntd-0 iyaVkJ"
           color="primary"
           height="46"
         >
