@@ -148,4 +148,3 @@ export const getDataTTS = (type, questionData, delimiters) => {
       return [];
   }
 };
-};
