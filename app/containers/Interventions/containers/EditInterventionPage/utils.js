@@ -142,7 +142,6 @@ export const getDataTTS = (type, questionData, delimiters) => {
       questionData.forEach(({ payload }) => {
         textArray.push(...splitAndKeep(htmlToPlainText(payload), delimiters));
       });
-
       return textArray;
 
     default:
