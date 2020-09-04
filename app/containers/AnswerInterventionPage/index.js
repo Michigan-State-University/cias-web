@@ -13,9 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { error } from 'react-toastify-redux';
 import get from 'lodash/get';
-import filter from 'lodash/filter';
 
-import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 import { useInjectSaga } from 'utils/injectSaga';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { useInjectReducer } from 'utils/injectReducer';

@@ -111,12 +111,4 @@ export default defineMessages({
     id: `${scope}.editProblemError`,
     defaultMessage: `Couldn't edit an intervention`,
   },
-  createProblemError: {
-    id: `${scope}.createProblemError`,
-    defaultMessage: `Couldn't create an intervention`,
-  },
-  editProblemError: {
-    id: `${scope}.editProblemError`,
-    defaultMessage: `Couldn't edit an intervention`,
-  },
 });
