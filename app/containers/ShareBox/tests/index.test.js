@@ -19,12 +19,10 @@ describe('<ShareBox />', () => {
   const reducer = state => state;
   const initialState = {
     problem: {
+      currentInterventionIndex: 0,
       problem: {
         interventions: [{ name: 'Name', slug: 'Slug-id-e-intervention' }],
       },
-    },
-    localState: {
-      currentInterventionIndex: 0,
     },
   };
   let store;

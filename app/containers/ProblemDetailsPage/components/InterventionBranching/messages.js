@@ -28,4 +28,8 @@ export default defineMessages({
     id: `${scope}.formula`,
     defaultMessage: 'According to the formula below',
   },
+  selectSession: {
+    id: `${scope}.selectQuestion`,
+    defaultMessage: 'Select session',
+  },
 });

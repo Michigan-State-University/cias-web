@@ -13,7 +13,7 @@ export default defineMessages({
   },
   newCase: {
     id: `${scope}.newCase`,
-    defaultMessage: '+ Add another case',
+    defaultMessage: '+ Add case',
   },
   addVariable: {
     id: `${scope}.addVariable`,

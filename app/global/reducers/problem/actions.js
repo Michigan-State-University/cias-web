@@ -1,5 +1,4 @@
 import { actionBuilder } from 'utils/actionBuilder';
-
 import {
   FETCH_PROBLEM_REQUEST,
   FETCH_PROBLEM_SUCCESS,
@@ -16,6 +15,8 @@ import {
   COPY_INTERVENTION_SUCCESS,
   COPY_INTERVENTION_REQUEST,
   REORDER_INTERVENTION_LIST,
+  UPDATE_INTERVENTION_SETTINGS,
+  CHANGE_CURRENT_INTERVENTION,
   REORDER_INTERVENTION_LIST_SUCCESS,
   REORDER_INTERVENTION_LIST_ERROR,
   CHANGE_ACCESS_SETTING_REQUEST,
@@ -74,6 +75,11 @@ export const reorderSessionsSuccess = payload =>
 export const reorderSessionsError = payload =>
   actionBuilder(REORDER_INTERVENTION_LIST_ERROR, payload);
 
+export const updateInterventionSettings = data =>
+  actionBuilder(UPDATE_INTERVENTION_SETTINGS, data);
+
+export const changeCurrentIntervention = index =>
+  actionBuilder(CHANGE_CURRENT_INTERVENTION, { index });
 export const changeAccessSettingRequest = (id, setting) =>
   actionBuilder(CHANGE_ACCESS_SETTING_REQUEST, { id, setting });
 export const changeAccessSettingSuccess = () =>

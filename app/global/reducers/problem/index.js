@@ -6,6 +6,7 @@ export {
   sendProblemCsvRequest,
   reorderInterventionList,
   copyInterventionRequest,
+  changeCurrentIntervention,
   changeAccessSettingRequest,
   enableUserAccessRequest,
   fetchUsersWithAccessRequest,
@@ -18,6 +19,7 @@ export {
   makeSelectProblem,
   makeSelectProblemLoader,
   makeSelectProblemState,
+  makeSelectCurrentInterventionIndex,
 } from './selectors';
 export {
   createProblemSaga,
@@ -31,3 +33,11 @@ export {
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
 } from './sagas';
+
+export {
+  addFormulaCase,
+  changeFormulaStatus,
+  removeFormulaCase,
+  updateFormula,
+  updateFormulaCase,
+} from './interventionSettings/actions';

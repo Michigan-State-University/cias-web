@@ -20,3 +20,9 @@ export const makeSelectProblemLoader = loader =>
     selectProblem,
     substate => substate.loaders[loader],
   );
+
+export const makeSelectCurrentInterventionIndex = () =>
+  createSelector(
+    selectProblem,
+    substate => substate.currentInterventionIndex,
+  );

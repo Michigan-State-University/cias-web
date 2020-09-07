@@ -15,7 +15,7 @@ export default defineMessages({
   },
   interventionListHeader: {
     id: `${scope}.interventionListHeader`,
-    defaultMessage: 'Your interventions',
+    defaultMessage: 'Your Sessions',
   },
   selectedInterventionBadge: {
     id: `${scope}.selectedInterventionBadge`,

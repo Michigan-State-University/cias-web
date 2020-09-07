@@ -107,7 +107,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
     className="c4"
     onClick={[Function]}
   >
-    + Add another case
+    + Add case
   </div>
 </div>
 `;

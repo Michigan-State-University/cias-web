@@ -2,6 +2,7 @@ import produce from 'immer';
 import set from 'lodash/set';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
+import interventionSettingsReducer from './interventionSettings/reducer';
 import {
   FETCH_PROBLEM_REQUEST,
   FETCH_PROBLEM_SUCCESS,
@@ -17,6 +18,8 @@ import {
   SEND_PROBLEM_CSV_ERROR,
   COPY_INTERVENTION_SUCCESS,
   REORDER_INTERVENTION_LIST,
+  UPDATE_INTERVENTION_SETTINGS,
+  CHANGE_CURRENT_INTERVENTION,
   REORDER_INTERVENTION_LIST_SUCCESS,
   REORDER_INTERVENTION_LIST_ERROR,
   CHANGE_ACCESS_SETTING_REQUEST,
@@ -37,6 +40,7 @@ import {
 } from './constants';
 
 export const initialState = {
+  currentInterventionIndex: 0,
   problem: null,
   cache: {
     problem: null,
@@ -45,6 +49,7 @@ export const initialState = {
     fetchProblemLoading: true,
     createProblemLoading: false,
     sendCsvLoading: false,
+    editProblem: false,
     changeAccessSettingLoading: false,
     fetchUserAccessLoading: false,
     createInterventionLoading: false,
@@ -113,6 +118,18 @@ export const problemReducer = (state = initialState, action) =>
       case REORDER_INTERVENTION_LIST:
         draft.cache.problem = state.problem;
         draft.problem.interventions = action.payload.reorderedList;
+        break;
+      case CHANGE_CURRENT_INTERVENTION:
+        draft.currentInterventionIndex = action.payload.index;
+        break;
+      case UPDATE_INTERVENTION_SETTINGS:
+        draft.loaders.editProblem = true;
+        draft.problem.interventions[state.currentInterventionIndex] = {
+          ...interventionSettingsReducer(
+            draft.problem.interventions[state.currentInterventionIndex],
+            action.payload,
+          ),
+        };
         break;
       case REORDER_INTERVENTION_LIST_SUCCESS:
         draft.cache.problem = draft.problem;

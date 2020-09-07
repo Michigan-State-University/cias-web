@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import orderBy from 'lodash/orderBy';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 
@@ -13,6 +14,8 @@ function* fetchProblem({ payload: { id } }) {
       data: { data },
     } = yield axios.get(requestURL);
     const mappedData = defaultMapper(data);
+    const { interventions } = mappedData;
+    mappedData.interventions = orderBy(interventions, 'position');
     yield put(fetchProblemSuccess(mappedData));
   } catch (error) {
     yield put(fetchProblemError(error));

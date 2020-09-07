@@ -14,13 +14,10 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
 
 .c1 {
   position: relative;
-  font-weight: bold;
-  font-size: 18px;
   overflow: hidden;
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
-  height: 20px;
 }
 
 <div
@@ -46,13 +43,10 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
 
 .c1 {
   position: relative;
-  font-weight: bold;
-  font-size: 18px;
   overflow: hidden;
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
-  height: 20px;
 }
 
 <div

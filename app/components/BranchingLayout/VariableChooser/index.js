@@ -9,13 +9,14 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Text from 'components/Text';
-
 import Img from 'components/Img';
 import Badge from 'components/Badge';
+import Loader from 'components/Loader';
 
 import webpage from 'assets/svg/webpage-mouseover.svg';
 
 import {
+  makeSelectLoader,
   makeSelectQuestions,
   makeSelectSelectedQuestion,
 } from 'containers/Interventions/containers/EditInterventionPage/selectors';
@@ -33,6 +34,7 @@ const VariableChooser = ({
   selectedQuestion: { id } = {},
   visible,
   setOpen,
+  loading,
 }) => {
   const variables = getAllVariables(questions, {
     structure: 'flat',
@@ -92,7 +94,8 @@ const VariableChooser = ({
     >
       <Row>
         <Box padding={8} filled>
-          <Column>{displayContent()}</Column>
+          {loading && <Loader type="inline" />}
+          {!loading && <Column>{displayContent()}</Column>}
         </Box>
       </Row>
     </Box>
@@ -104,12 +107,14 @@ VariableChooser.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.shape(Question),
   visible: PropTypes.bool,
+  loading: PropTypes.bool,
   setOpen: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
+  loading: makeSelectLoader('questionListLoading'),
 });
 
 const withConnect = connect(mapStateToProps);

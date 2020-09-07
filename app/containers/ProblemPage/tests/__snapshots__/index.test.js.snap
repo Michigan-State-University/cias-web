@@ -139,7 +139,9 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
               class="Row-x1o3ru-0 exvbpM"
             >
               <div
-                class="styled__StyledEllipsisText-x30pqb-0 jODJUp"
+                class="styled__StyledEllipsisText-x30pqb-0 cegxVD"
+                font-size="18"
+                font-weight="bold"
               >
                 Name
               </div>

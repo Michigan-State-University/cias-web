@@ -209,6 +209,7 @@ exports[`<InterventionBranching /> Should render and match the snapshot 1`] = `
       <label
         checked={false}
         className="c8"
+        onToggle={[Function]}
       >
         <input
           checked={false}

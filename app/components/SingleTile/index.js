@@ -66,7 +66,7 @@ const SingleTile = ({ tileData, participantView, link, sendCsv }) => {
             </div>
           )}
         </Heading>
-        <EllipsisText text={name} />
+        <EllipsisText text={name} fontSize={18} fontWeight="bold" />
         <TileInfo>
           {interventions && (
             <div>

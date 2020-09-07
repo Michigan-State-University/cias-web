@@ -4,6 +4,7 @@ import {
   editProblemSaga,
   fetchProblemSaga,
   sendProblemCsvSaga,
+  updateInterventionSettingsSaga,
   reorderSessionsSaga,
   createInterventionSaga,
 } from 'global/reducers/problem/sagas';
@@ -17,6 +18,7 @@ export default function* problemDetailsPageSagas() {
     sendProblemCsvSaga(),
     copyInterventionSaga(),
     copyProblemSaga(),
+    updateInterventionSettingsSaga(),
     reorderSessionsSaga(),
   ]);
 }

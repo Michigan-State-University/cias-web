@@ -18,6 +18,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { colors, themeColors } from 'theme';
 import { injectIntl } from 'react-intl';
+import EllipsisText from 'components/Text/EllipsisText';
 import VariableChooser from './VariableChooser';
 import { CaseInput, DashedBox } from './styled';
 
@@ -88,7 +89,7 @@ function BranchingLayout({
               </Box>
             )}
             {!problemBranching && (
-              <Box position="absolute" right={25} top={310}>
+              <Box position="absolute" right={25} top={160}>
                 <VariableChooser
                   visible={variableChooserOpen}
                   setOpen={setVariableChooserOpen}
@@ -128,19 +129,18 @@ function BranchingLayout({
                     positionFrom="right"
                     setOpen={value => setTargetChooserOpen(value ? index : -1)}
                     isOpened={isChooserOpened}
+                    childWidthScope="parent"
                     dropdownContent={
                       <Box maxWidth={140}>
-                        <Text
-                          textOverflow="ellipsis"
-                          whiteSpace="pre"
-                          overflow="hidden"
-                        >
-                          {displayPatternTargetText(pattern.target)}
-                        </Text>
+                        <EllipsisText
+                          text={displayPatternTargetText(pattern.target)}
+                          fontSize={13}
+                        />
                       </Box>
                     }
                   >
                     <TargetQuestionChooser
+                      problemBranching={problemBranching}
                       isVisible={isChooserOpened}
                       pattern={pattern}
                       onClick={value => {

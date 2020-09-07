@@ -36,13 +36,10 @@ import {
   reorderInterventionList,
   copyInterventionRequest,
   createInterventionRequest,
-} from 'global/reducers/problem';
-import {
-  localStateReducer,
   makeSelectCurrentInterventionIndex,
   changeCurrentIntervention,
-} from 'global/reducers/localState';
-import injectSaga from 'utils/injectSaga';
+} from 'global/reducers/problem';
+import injectSaga, { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { colors, themeColors } from 'theme';
 import appStages from 'global/appStages';
@@ -53,6 +50,11 @@ import copy from 'assets/svg/copy.svg';
 import archive from 'assets/svg/archive.svg';
 import { closed } from 'models/Status/StatusTypes';
 import { copyProblemRequest } from 'global/reducers/problems';
+
+import reducer from 'containers/Interventions/containers/EditInterventionPage/reducer';
+import saga from 'containers/Interventions/containers/EditInterventionPage/saga';
+import { getQuestionsRequest } from 'containers/Interventions/containers/EditInterventionPage/actions';
+
 import Spinner from 'components/Spinner';
 import { StatusLabel, InterventionOptions } from './styled';
 import problemDetailsPageSagas from './saga';
@@ -82,15 +84,14 @@ export function ProblemDetailsPage({
   copyIntervention,
   reorderInterventions,
   copyProblem,
+  fetchQuestions,
 }) {
   useInjectReducer({
     key: 'problem',
     reducer: problemReducer,
   });
-  useInjectReducer({
-    key: 'localState',
-    reducer: localStateReducer,
-  });
+  useInjectReducer({ key: 'editInterventionPage', reducer });
+  useInjectSaga({ key: 'editInterventionPage', saga });
 
   const { interventions, name, id, status, shared_to: sharedTo } =
     problem || {};
@@ -182,7 +183,10 @@ export function ProblemDetailsPage({
         {interventions &&
           orderBy(interventions, 'position').map((intervention, index) => {
             const handleClick = () => {
-              changeInterventionIndex(index);
+              if (intervention.position !== interventionIndex + 1) {
+                fetchQuestions(intervention.id);
+                changeInterventionIndex(index);
+              }
             };
             const nextIntervention = interventions.find(
               ({ position }) => position === intervention.position + 1,
@@ -318,6 +322,7 @@ ProblemDetailsPage.propTypes = {
   copyIntervention: PropTypes.func,
   reorderInterventions: PropTypes.func,
   copyProblem: PropTypes.func,
+  fetchQuestions: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -327,6 +332,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   createIntervention: createInterventionRequest,
+  fetchQuestions: getQuestionsRequest,
   fetchProblem: fetchProblemRequest,
   editProblem: editProblemRequest,
   changeInterventionIndex: changeCurrentIntervention,

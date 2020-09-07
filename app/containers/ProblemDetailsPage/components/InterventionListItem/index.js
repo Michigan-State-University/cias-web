@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
@@ -32,8 +32,8 @@ function InterventionListItem({
   nextInterventionName,
   handleCopyIntervention,
 }) {
-  const [branching, setBranching] = useState(false);
-  const { id, name, problem_id: problemId } = intervention || {};
+  const { id, name, problem_id: problemId, formula, settings } =
+    intervention || {};
 
   const options = [
     {
@@ -73,9 +73,10 @@ function InterventionListItem({
             <Divider />
           </Row>
           <InterventionBranching
+            formula={formula}
+            id={id}
             nextInterventionName={nextInterventionName}
-            branching={branching}
-            handleBranching={setBranching}
+            status={settings.formula}
           />
         </>
       )}

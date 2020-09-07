@@ -20,13 +20,12 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
 
 .c6 {
   position: relative;
-  font-weight: bold;
-  font-size: 18px;
   overflow: hidden;
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
-  height: 20px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .c1 {
@@ -139,6 +138,8 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
       >
         <div
           class="c6"
+          font-size="18"
+          font-weight="bold"
         >
           Name
         </div>
