@@ -1,15 +1,9 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-import {
-  margin,
-  layout,
-  text,
-  padding,
-  flex,
-} from 'components/BaseComponentStyles';
+import { margin, layout, padding, flex } from 'components/BaseComponentStyles';
 import { themeColors } from 'theme';
-
-const TextButton = styled.button`
+export const StyledLink = styled(Link)`
   outline: none;
   border: none;
   background: transparent;
@@ -18,11 +12,12 @@ const TextButton = styled.button`
   line-height: 17px;
   color: ${themeColors.secondary};
   cursor: pointer;
-  ${margin};
-  ${layout};
-  ${text};
-  ${padding};
-  ${flex};
+  text-decoration: none;
 `;
 
-export default TextButton;
+export const LinkContainer = styled.div`
+  ${margin};
+  ${padding};
+  ${flex};
+  ${layout};
+`;

@@ -34,6 +34,16 @@ exports[`<App /> should render and match the snapshot 1`] = `
     <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
+      path="/reset-password"
+    />
+    <Memo(ConnectFunction)
+      component={[Function]}
+      exact={true}
+      path="/set-new-password"
+    />
+    <Memo(ConnectFunction)
+      component={[Function]}
+      exact={true}
       path="/logout"
     />
     <Memo(ConnectFunction)

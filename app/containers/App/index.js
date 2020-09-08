@@ -22,6 +22,8 @@ import RegisterPage from 'containers/RegisterPage/Loadable';
 import ProblemSettingsPage from 'containers/ProblemSettingsPage/Loadable';
 import SettingsInterventionPage from 'containers/Interventions/containers/SettingsInterventionPage';
 import AccountSettings from 'containers/AccountSettings/Loadable';
+import ResetPasswordPage from 'containers/ResetPasswordPage/Loadable';
+import SetNewPasswordPage from 'containers/SetNewPasswordPage/Loadable';
 
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 
@@ -71,6 +73,12 @@ export function App({ user }) {
         />
         <AppRoute exact path="/login" component={LoginPage} />
         <AppRoute exact path="/register" component={RegisterPage} />
+        <AppRoute exact path="/reset-password" component={ResetPasswordPage} />
+        <AppRoute
+          exact
+          path="/set-new-password"
+          component={SetNewPasswordPage}
+        />
         <AppRoute exact path="/logout" component={Logout} />
         <AppRoute
           exact

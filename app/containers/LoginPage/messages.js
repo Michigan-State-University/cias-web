@@ -57,4 +57,8 @@ export default defineMessages({
     id: `${scope}.passwordRequired`,
     defaultMessage: 'Password is required',
   },
+  forgotPassword: {
+    id: `${scope}.forgotPassword`,
+    defaultMessage: 'Forgot your password?',
+  },
 });

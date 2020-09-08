@@ -94,7 +94,6 @@ export default defineMessages({
     id: `${scope}.lastNameRequired`,
     defaultMessage: 'First name is required',
   },
-
   createdAccount: {
     id: `${scope}.createdAccount`,
     defaultMessage: 'Your account has been created',

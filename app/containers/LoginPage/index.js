@@ -21,13 +21,12 @@ import Column from 'components/Column';
 import H1 from 'components/H1';
 import Row from 'components/Row';
 import { Button } from 'components/Button';
-import TextButton from 'components/Button/TextButton';
+import LinkButton from 'components/Button/LinkButton';
 import Divider from 'components/Divider';
 import withPublicLayout from 'containers/PublicLayout';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import ErrorAlert from 'components/ErrorAlert';
-import { Link } from 'react-router-dom';
 
 import makeSelectLoginPage from './selectors';
 import { loginRequest } from './actions';
@@ -103,6 +102,15 @@ export function LoginPage(props) {
                     label={formatMessage(messages.emailLabel)}
                     {...sharedProps}
                   />
+                  <LinkButton
+                    tabIndex={-1}
+                    to="/reset-password"
+                    alignSelf="end"
+                    mb={-14}
+                    zIndex={1}
+                  >
+                    <FormattedMessage {...messages.forgotPassword} />
+                  </LinkButton>
                   <FormikInput
                     formikKey="password"
                     placeholder={formatMessage(messages.passwordPlaceholder)}
@@ -127,11 +135,9 @@ export function LoginPage(props) {
                     <Divider ml={15} mt={40} />
                   </Row>
                   <Row width="100%" justify="center" mt={30}>
-                    <Link to="/register">
-                      <TextButton>
-                        <FormattedMessage {...messages.register} />
-                      </TextButton>
-                    </Link>
+                    <LinkButton to="/register">
+                      <FormattedMessage {...messages.register} />
+                    </LinkButton>
                   </Row>
                 </Fragment>
               );

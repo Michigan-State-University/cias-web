@@ -29,7 +29,9 @@ function FormikInput({
 
   return (
     <Column {...columnStyleProps}>
-      <Text mb={5}>{label}</Text>
+      <Text mb={5} width="fit-content">
+        {label}
+      </Text>
       <Input
         mb={hasError ? 5 : null}
         placeholder={placeholder}

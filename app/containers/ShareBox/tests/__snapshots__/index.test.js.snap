@@ -156,7 +156,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             </p>
           </div>
           <button
-            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jUNQmn"
+            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 hBLHRV"
             font-weight="bold"
           >
             <span>
@@ -183,7 +183,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             </p>
           </div>
           <button
-            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jUNQmn"
+            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 hBLHRV"
             font-weight="bold"
           >
             <span>
@@ -210,7 +210,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             </p>
           </div>
           <button
-            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jUNQmn"
+            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 hBLHRV"
             font-weight="bold"
           >
             <span>
@@ -237,7 +237,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             </p>
           </div>
           <button
-            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jUNQmn"
+            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 hBLHRV"
             font-weight="bold"
           >
             <span>
