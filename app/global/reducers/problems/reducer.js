@@ -1,11 +1,15 @@
 import produce from 'immer';
 import isEmpty from 'lodash/isEmpty';
 
+import { archived } from 'models/Status/StatusTypes';
 import {
   COPY_PROBLEM_SUCCESS,
   FETCH_PROBLEMS_ERROR,
   FETCH_PROBLEMS_REQUEST,
   FETCH_PROBLEMS_SUCCESS,
+  ARCHIVE_PROBLEM_ERROR,
+  ARCHIVE_PROBLEM_REQUEST,
+  ARCHIVE_PROBLEM_SUCCESS,
 } from './constants';
 
 import { CREATE_PROBLEM_SUCCESS } from '../problem';
@@ -14,6 +18,9 @@ export const initialState = {
   problems: [],
   fetchProblemLoading: true,
   fetchProblemError: null,
+  cache: {
+    archiveProblem: null,
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -36,6 +43,22 @@ export const problemsRedcuer = (state = initialState, action) =>
       case COPY_PROBLEM_SUCCESS:
         draft.problems = [...draft.problems, action.payload.problem];
         break;
+      case ARCHIVE_PROBLEM_REQUEST:
+        let problemIndex = draft.problems.findIndex(
+          ({ id }) => id === action.payload.problemId,
+        );
+        draft.problems[problemIndex].status = archived;
+        draft.cache.archiveProblem = state.problems[problemIndex];
+        break;
+      case ARCHIVE_PROBLEM_SUCCESS:
+        draft.cache.archiveProblem = null;
+        break;
+      case ARCHIVE_PROBLEM_ERROR:
+        problemIndex = draft.problems.findIndex(
+          ({ id }) => id === action.payload.problemId,
+        );
+        draft.problems[problemIndex] = state.cache.archiveProblem;
+        draft.cache.archiveProblem = null;
     }
   });
 

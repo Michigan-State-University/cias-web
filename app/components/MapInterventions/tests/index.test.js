@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import 'jest-styled-components';
 import { browserHistory, MemoryRouter } from 'react-router-dom';
 
@@ -25,9 +26,19 @@ describe('<MapInterventions />', () => {
     },
   ];
   let store;
+  let modalContainer;
+  let mainAppContainer;
 
   beforeAll(() => {
     store = configureStore({}, browserHistory);
+    ReactDOM.createPortal = jest.fn(element => element);
+    modalContainer = document.createElement('div');
+    modalContainer.setAttribute('id', 'modal-portal');
+    document.body.appendChild(modalContainer);
+
+    mainAppContainer = document.createElement('div');
+    mainAppContainer.setAttribute('id', 'main-app-container');
+    document.body.appendChild(mainAppContainer);
   });
 
   it('Should render and match the snapshot', () => {

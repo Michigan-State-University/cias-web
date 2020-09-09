@@ -25,6 +25,11 @@ const Dropdown = ({ options, top, ...restProps }) => {
     return { top: '35px' };
   };
 
+  const callAction = action => () => {
+    action();
+    setOpen(false);
+  };
+
   return (
     <Box
       ref={dropdown}
@@ -48,7 +53,7 @@ const Dropdown = ({ options, top, ...restProps }) => {
               <StyledRow
                 key={`el-dropdown-${option.id}`}
                 padding={8}
-                onClick={option.action}
+                onClick={callAction(option.action)}
                 align="center"
               >
                 {option.icon && <Img src={option.icon} alt="icon" mr={12} />}

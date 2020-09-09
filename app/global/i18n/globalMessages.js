@@ -111,4 +111,8 @@ export default defineMessages({
     id: `${scope}.editProblemError`,
     defaultMessage: `Couldn't edit an intervention`,
   },
+  archiveProblemError: {
+    id: `${scope}.archiveProblemError`,
+    defaultMessage: `Couldn't archive an intervention`,
+  },
 });

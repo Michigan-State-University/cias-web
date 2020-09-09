@@ -4,10 +4,33 @@ exports[`<MapInterventions /> Should render and match the snapshot 1`] = `
 .c4 {
   width: auto;
   height: auto;
-  margin-left: 15px;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
 }
 
-.c5 {
+.c6 {
+  width: auto;
+  height: auto;
+}
+
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -18,7 +41,7 @@ exports[`<MapInterventions /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c6 {
+.c8 {
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -26,6 +49,14 @@ exports[`<MapInterventions /> Should render and match the snapshot 1`] = `
   white-space: nowrap;
   font-size: 18px;
   font-weight: 700;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 8px;
 }
 
 .c1 {
@@ -81,14 +112,14 @@ exports[`<MapInterventions /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
-.c7 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c7 div {
+.c9 div {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -118,28 +149,27 @@ exports[`<MapInterventions /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div>
-          <img
-            alt="export csv"
+          <div
             class="c4"
-            src="IMAGE_MOCK"
-          />
-          <img
-            alt="share"
-            class="c4"
-            src="IMAGE_MOCK"
-          />
-          <img
-            alt="remove"
-            class="c4"
-            src="IMAGE_MOCK"
-          />
+            display="flex"
+          >
+            <div
+              class="c5"
+            >
+              <img
+                alt="dots"
+                class="c6"
+                src="IMAGE_MOCK"
+              />
+            </div>
+          </div>
         </div>
       </div>
       <div
-        class="c5"
+        class="c7"
       >
         <div
-          class="c6"
+          class="c8"
           font-size="18"
           font-weight="bold"
         >
@@ -147,7 +177,7 @@ exports[`<MapInterventions /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="c7"
+        class="c9"
       />
     </div>
   </a>

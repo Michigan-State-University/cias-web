@@ -118,21 +118,20 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
                 />
               </div>
               <div>
-                <img
-                  alt="export csv"
-                  class="Img-sc-1kfzr96-0 hZkBfU"
-                  src="IMAGE_MOCK"
-                />
-                <img
-                  alt="share"
-                  class="Img-sc-1kfzr96-0 hZkBfU"
-                  src="IMAGE_MOCK"
-                />
-                <img
-                  alt="remove"
-                  class="Img-sc-1kfzr96-0 hZkBfU"
-                  src="IMAGE_MOCK"
-                />
+                <div
+                  class="Box-sc-14m3exe-0 jIDTtt"
+                  display="flex"
+                >
+                  <div
+                    class="styled__ImageContainer-sc-1amzre3-0 fIZBYf"
+                  >
+                    <img
+                      alt="dots"
+                      class="Img-sc-1kfzr96-0 dlGAit"
+                      src="IMAGE_MOCK"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
             <div

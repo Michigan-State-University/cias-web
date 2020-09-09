@@ -59,6 +59,7 @@ const Modal = ({ title, onClose, children, visible, ...stylesProps }) => {
   return visible
     ? ReactDOM.createPortal(
         <Box
+          onClick={e => e.stopPropagation()}
           ref={modalOverlay}
           height="100%"
           width="100%"

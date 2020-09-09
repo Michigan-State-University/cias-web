@@ -5,3 +5,7 @@ export const FETCH_PROBLEMS_ERROR = 'app/Dashboard/FETCH_PROBLEMS_ERROR';
 export const COPY_PROBLEM_REQUEST = 'app/Dashboard/COPY_PROBLEM_REQUEST';
 export const COPY_PROBLEM_SUCCESS = 'app/Dashboard/COPY_PROBLEM_SUCCESS';
 export const COPY_PROBLEM_ERROR = 'app/Dashboard/COPY_PROBLEM_ERROR';
+
+export const ARCHIVE_PROBLEM_REQUEST = 'app/Dashboard/ARCHIVE_PROBLEM_REQUEST';
+export const ARCHIVE_PROBLEM_SUCCESS = 'app/Dashboard/ARCHIVE_PROBLEM_SUCCESS';
+export const ARCHIVE_PROBLEM_ERROR = 'app/Dashboard/ARCHIVE_PROBLEM_ERROR';

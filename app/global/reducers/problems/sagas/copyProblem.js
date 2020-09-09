@@ -7,6 +7,7 @@ import {
 import { formatMessage } from 'utils/intlOutsideReact';
 import { push } from 'connected-react-router';
 
+import { defaultMapper } from 'utils/mapResponseObjects';
 import messages from '../messages';
 import { copyProblemSuccess } from '../actions';
 import {
@@ -15,16 +16,18 @@ import {
   COPY_PROBLEM_SUCCESS,
 } from '../constants';
 
-function* copyProblem({ payload: { problemId, users } }) {
+function* copyProblem({ payload: { problemId, users, withoutRedirect } }) {
   const requestURL = `v1/problems/${problemId}/clone`;
   let params;
   if (users) params = { problem: { user_ids: users } };
   try {
     const response = yield axios.post(requestURL, params);
     if (!params) {
-      const copiedProblem = response.data.data;
+      const copiedProblem = defaultMapper(response.data.data);
       yield put(copyProblemSuccess(copiedProblem));
-      yield put(push('/'));
+      if (!withoutRedirect) {
+        yield put(push('/'));
+      }
     } else
       yield put(
         showSuccess(formatMessage(messages.sendSuccess), {

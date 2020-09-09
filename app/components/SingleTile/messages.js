@@ -25,4 +25,20 @@ export default defineMessages({
     id: `${scope}.sessions`,
     defaultMessage: 'Sessions ({sessionCount})',
   },
+  exportCSV: {
+    id: `${scope}.exportCSV`,
+    defaultMessage: 'Export CSV',
+  },
+  sendCopy: {
+    id: `${scope}.sendCopy`,
+    defaultMessage: 'Send copy to researcher',
+  },
+  archive: {
+    id: `${scope}.archive`,
+    defaultMessage: 'Archive e-intervention',
+  },
+  duplicate: {
+    id: `${scope}.duplicate`,
+    defaultMessage: 'Duplicate',
+  },
 });

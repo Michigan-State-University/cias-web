@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
@@ -18,6 +19,8 @@ import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<ProblemPage />', () => {
   let store;
+  let modalContainer;
+  let mainAppContainer;
   const reducer = state => state;
   const initialState = {
     problems: {
@@ -32,6 +35,14 @@ describe('<ProblemPage />', () => {
     store.runSaga = () => {};
     store.injectedReducers = {};
     store.injectedSagas = {};
+    ReactDOM.createPortal = jest.fn(element => element);
+    modalContainer = document.createElement('div');
+    modalContainer.setAttribute('id', 'modal-portal');
+    document.body.appendChild(modalContainer);
+
+    mainAppContainer = document.createElement('div');
+    mainAppContainer.setAttribute('id', 'main-app-container');
+    document.body.appendChild(mainAppContainer);
   });
 
   it('Expect to not log errors in console', () => {

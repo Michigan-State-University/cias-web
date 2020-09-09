@@ -6,6 +6,9 @@ import {
   FETCH_PROBLEMS_SUCCESS,
   COPY_PROBLEM_REQUEST,
   COPY_PROBLEM_SUCCESS,
+  ARCHIVE_PROBLEM_REQUEST,
+  ARCHIVE_PROBLEM_SUCCESS,
+  ARCHIVE_PROBLEM_ERROR,
 } from './constants';
 
 export const fetchProblemsRequest = () =>
@@ -19,3 +22,10 @@ export const copyProblemRequest = payload =>
   actionBuilder(COPY_PROBLEM_REQUEST, payload);
 export const copyProblemSuccess = problem =>
   actionBuilder(COPY_PROBLEM_SUCCESS, { problem });
+
+export const archiveProblemRequest = problemId =>
+  actionBuilder(ARCHIVE_PROBLEM_REQUEST, { problemId });
+export const archiveProblemSuccess = problemId =>
+  actionBuilder(ARCHIVE_PROBLEM_SUCCESS, { problemId });
+export const archiveProblemFailure = problemId =>
+  actionBuilder(ARCHIVE_PROBLEM_ERROR, { problemId });
