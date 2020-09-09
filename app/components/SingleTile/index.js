@@ -103,41 +103,47 @@ const SingleTile = ({
   };
 
   return (
-    <StyledLink to={link}>
-      <Modal title="Share" onClose={closeModal} visible={modalVisible}>
+    <>
+      <Modal
+        title={formatMessage(messages.modalTitle)}
+        onClose={closeModal}
+        visible={modalVisible}
+      >
         <SelectResearchers problemId={id} onClose={closeModal} />
       </Modal>
-      <TileContainer>
-        <Heading>
-          <div>
-            {status && (
-              <>
-                <FormattedMessage {...globalMessages.statuses[status]} />
-                <StatusIndicator status={status} />
-              </>
-            )}
-          </div>
-          {!participantView && (
-            <div onClick={preventDefault}>
-              <Dropdown options={options} />
-            </div>
-          )}
-        </Heading>
-        <EllipsisText text={name} fontSize={18} fontWeight="bold" />
-        <TileInfo>
-          {interventions && (
+      <StyledLink to={link}>
+        <TileContainer>
+          <Heading>
             <div>
-              <Text>
-                <FormattedMessage
-                  {...messages.sessions}
-                  values={{ sessionCount: interventions.length }}
-                />
-              </Text>
+              {status && (
+                <>
+                  <FormattedMessage {...globalMessages.statuses[status]} />
+                  <StatusIndicator status={status} />
+                </>
+              )}
             </div>
-          )}
-        </TileInfo>
-      </TileContainer>
-    </StyledLink>
+            {!participantView && (
+              <div onClick={preventDefault}>
+                <Dropdown options={options} />
+              </div>
+            )}
+          </Heading>
+          <EllipsisText text={name} fontSize={18} fontWeight="bold" />
+          <TileInfo>
+            {interventions && (
+              <div>
+                <Text>
+                  <FormattedMessage
+                    {...messages.sessions}
+                    values={{ sessionCount: interventions.length }}
+                  />
+                </Text>
+              </div>
+            )}
+          </TileInfo>
+        </TileContainer>
+      </StyledLink>
+    </>
   );
 };
 

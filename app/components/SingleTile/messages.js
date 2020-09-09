@@ -41,4 +41,8 @@ export default defineMessages({
     id: `${scope}.duplicate`,
     defaultMessage: 'Duplicate',
   },
+  modalTitle: {
+    id: `${scope}.modalTitle`,
+    defaultMessage: 'Choose researchers to send',
+  },
 });
