@@ -12,6 +12,7 @@ const sharedContainerStyles = `
   display: flex;
   cursor: pointer;
   flex-direction: column;
+  color: ${themeColors.text};
 `;
 
 export const TileContainer = styled.div`
@@ -31,6 +32,9 @@ export const Heading = styled.div`
   justify-content: space-between;
   align-items: center;
   text-transform: capitalize;
+  span {
+    color: ${themeColors.text};
+  }
 `;
 
 export const StatusIndicator = styled.span`

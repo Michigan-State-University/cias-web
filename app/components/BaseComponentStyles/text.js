@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { hexToRgb } from 'theme';
+import { hexToRgb, themeColors } from 'theme';
 
 const propsToCssMapper = {
   regular: 400,
@@ -11,8 +11,9 @@ const text = props => ({
   fontSize: props.fontSize || '',
   fontWeight: propsToCssMapper[props.fontWeight] || '',
   fontStyle: props.fontStyle || '',
-  color:
-    props.color && `rgba(${hexToRgb(props.color)}, ${props.textOpacity || 1})`,
+  color: props.color
+    ? `rgba(${hexToRgb(props.color)}, ${props.textOpacity || 1})`
+    : `${themeColors.text}`,
   whiteSpace: props.whiteSpace || '',
   textOverflow: props.textOverflow || '',
   cursor: props.clickable ? 'pointer;' : '',

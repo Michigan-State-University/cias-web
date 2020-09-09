@@ -7,7 +7,6 @@ import {
   padding,
   flex,
 } from 'components/BaseComponentStyles';
-import { themeColors } from 'theme';
 
 const TextButton = styled.button`
   outline: none;
@@ -16,7 +15,7 @@ const TextButton = styled.button`
   font-weight: bold;
   font-size: 13px;
   line-height: 17px;
-  color: ${themeColors.secondary};
+  padding: 2px;
   cursor: pointer;
   ${margin};
   ${layout};

@@ -31,6 +31,7 @@ exports[`<InterventionCreateButton /> Should render and match the snapshot 1`] =
   font-family: DM Sans;
   font-size: 15px;
   line-height: 150%;
+  color: #2F3850;
 }
 
 .c0 {

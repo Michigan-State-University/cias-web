@@ -9,7 +9,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
       class="styled__InitialRow-sc-14fow03-0 eNEjTh"
     >
       <h1
-        class="H1-tncdg6-0 faMGC"
+        class="H1-tncdg6-0 ccWxWb"
       >
         <span>
           My e-Interventions
@@ -29,7 +29,10 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           color="#BDC7D6"
           value="draft"
         >
-          <p>
+          <p
+            class="styled__FilterText-sc-14fow03-3 iQnmrJ"
+            color="#000000"
+          >
             Draft
           </p>
         </button>
@@ -38,7 +41,10 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           color="#8CBD00"
           value="published"
         >
-          <p>
+          <p
+            class="styled__FilterText-sc-14fow03-3 iQnmrJ"
+            color="#FFFFFF"
+          >
             Published
           </p>
         </button>
@@ -47,7 +53,10 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           color="#F0684A"
           value="closed"
         >
-          <p>
+          <p
+            class="styled__FilterText-sc-14fow03-3 iQnmrJ"
+            color="#FFFFFF"
+          >
             Closed
           </p>
         </button>
@@ -56,20 +65,26 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
         class="Row-x1o3ru-0 diEAcg"
       >
         <button
-          class="styled__ArchiveFilter-sc-14fow03-2 dSzCgH"
+          class="styled__ArchiveFilter-sc-14fow03-2 gAruBb"
         >
           Show Archived
         </button>
-        <img
-          alt="Search"
-          src="IMAGE_MOCK"
-        />
-        <input
-          class="Input-sc-19txxuq-0 Fnbqh"
-          placeholder="Filter by name"
-          type="text"
-          value=""
-        />
+        <div
+          class="styled__SearchInputStyled-sc-65e6t4-3 jJMjkE"
+        >
+          <input
+            class="Input-sc-19txxuq-0 eyhKEm"
+            placeholder="Filter by name"
+            type="text"
+            value=""
+          />
+          <img
+            alt="search"
+            class="styled__SearchIcon-sc-65e6t4-4 effwnr"
+            src="IMAGE_MOCK"
+          />
+          
+        </div>
       </div>
     </div>
     
@@ -104,10 +119,10 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           href="/interventions/undefined/"
         >
           <div
-            class="styled__TileContainer-vwtndu-0 VjUkX"
+            class="styled__TileContainer-vwtndu-0 cFaDea"
           >
             <div
-              class="styled__Heading-vwtndu-2 dAoPsR"
+              class="styled__Heading-vwtndu-2 eqQAes"
             >
               <div>
                 <span>
@@ -138,7 +153,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
               class="Row-x1o3ru-0 exvbpM"
             >
               <div
-                class="styled__StyledEllipsisText-x30pqb-0 cegxVD"
+                class="styled__StyledEllipsisText-x30pqb-0 egBQHD"
                 font-size="18"
                 font-weight="bold"
               >
@@ -149,9 +164,13 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
               class="styled__TileInfo-vwtndu-4 kpGKYM"
             >
               <div>
-                <span>
-                  Sessions (2)
-                </span>
+                <p
+                  class="Text-sc-2lza2m-0 frDpGz"
+                >
+                  <span>
+                    Sessions (2)
+                  </span>
+                </p>
               </div>
             </div>
           </div>

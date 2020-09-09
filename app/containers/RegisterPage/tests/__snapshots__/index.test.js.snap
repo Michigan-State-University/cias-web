@@ -25,7 +25,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
         class="Column-sc-1n6divy-0 gaDuUF"
       >
         <h1
-          class="H1-tncdg6-0 fdwqP"
+          class="H1-tncdg6-0 jPGMdA"
           font-size="23"
         >
           <span>
@@ -40,13 +40,13 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
             class="Column-sc-1n6divy-0 dLXQXG"
           >
             <p
-              class="Text-sc-2lza2m-0 hRLtGx"
+              class="Text-sc-2lza2m-0 hrnqlx"
               width="fit-content"
             >
               First Name
             </p>
             <input
-              class="Input-sc-19txxuq-0 geBkNT"
+              class="Input-sc-19txxuq-0 hECUtR"
               height="46"
               name="firstName"
               placeholder="Enter first name"
@@ -59,13 +59,13 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
             class="Column-sc-1n6divy-0 dihrP"
           >
             <p
-              class="Text-sc-2lza2m-0 hRLtGx"
+              class="Text-sc-2lza2m-0 hrnqlx"
               width="fit-content"
             >
               Last name
             </p>
             <input
-              class="Input-sc-19txxuq-0 geBkNT"
+              class="Input-sc-19txxuq-0 hECUtR"
               height="46"
               name="lastName"
               placeholder="Enter last name"
@@ -79,13 +79,13 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           class="Column-sc-1n6divy-0 dihrP"
         >
           <p
-            class="Text-sc-2lza2m-0 hRLtGx"
+            class="Text-sc-2lza2m-0 hrnqlx"
             width="fit-content"
           >
             E-mail address
           </p>
           <input
-            class="Input-sc-19txxuq-0 geBkNT"
+            class="Input-sc-19txxuq-0 hECUtR"
             height="46"
             name="email"
             placeholder="Enter e-mail address"
@@ -98,13 +98,13 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           class="Column-sc-1n6divy-0 dihrP"
         >
           <p
-            class="Text-sc-2lza2m-0 hRLtGx"
+            class="Text-sc-2lza2m-0 hrnqlx"
             width="fit-content"
           >
             Password
           </p>
           <input
-            class="Input-sc-19txxuq-0 geBkNT"
+            class="Input-sc-19txxuq-0 hECUtR"
             height="46"
             name="password"
             placeholder="Enter password"
@@ -117,13 +117,13 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           class="Column-sc-1n6divy-0 dihrP"
         >
           <p
-            class="Text-sc-2lza2m-0 hRLtGx"
+            class="Text-sc-2lza2m-0 hrnqlx"
             width="fit-content"
           >
             Password confirmation
           </p>
           <input
-            class="Input-sc-19txxuq-0 geBkNT"
+            class="Input-sc-19txxuq-0 hECUtR"
             height="46"
             name="passwordConfirmation"
             placeholder="Retype your password"
@@ -147,7 +147,8 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
             href="/login"
           >
             <button
-              class="TextButton-sc-12pwroy-0 bZKqAD"
+              class="TextButton-sc-12pwroy-0 hVXcMo"
+              color="#C866EA"
             >
               <span>
                 I already have an account

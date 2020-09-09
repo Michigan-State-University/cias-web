@@ -27,6 +27,7 @@ import FormikInput from 'components/FormikInput';
 import ErrorAlert from 'components/ErrorAlert';
 import withPublicLayout from 'containers/PublicLayout';
 
+import { themeColors } from 'theme';
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -158,7 +159,7 @@ export function RegisterPage({
                   />
                   <Row justify="center" width="100%">
                     <Link to="/login">
-                      <TextButton>
+                      <TextButton color={themeColors.secondary}>
                         <FormattedMessage {...messages.login} />
                       </TextButton>
                     </Link>

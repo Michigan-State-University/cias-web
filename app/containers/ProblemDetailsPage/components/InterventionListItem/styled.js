@@ -12,6 +12,7 @@ export const ToggleableBox = styled(Box)`
   border-width: 1px;
   border-color: ${({ isSelected }) =>
     isSelected ? themeColors.secondary : 'transparent'};
+  background-color: white;
 `;
 
 export const InterventionIndex = styled.div`

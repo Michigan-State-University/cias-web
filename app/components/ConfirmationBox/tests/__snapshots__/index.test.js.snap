@@ -101,6 +101,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   font-family: DM Sans;
   font-size: 25px;
   line-height: 130%;
+  color: #2F3850;
 }
 
 .c1 {
@@ -164,6 +165,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   font-family: DM Sans;
   font-size: 18px;
   line-height: 130%;
+  color: #2F3850;
 }
 
 @media only screen and (max-width:480px) {

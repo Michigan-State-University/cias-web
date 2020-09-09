@@ -167,6 +167,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   line-height: 130%;
   font-size: 15px;
   font-weight: 700;
+  color: #2F3850;
 }
 
 .c11 {
@@ -174,6 +175,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-weight: 500;
+  color: #2F3850;
 }
 
 .c10 {
@@ -196,6 +198,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   margin-right: 18px;
   background-color: rgba(0,134,248,1);
   opacity: 1;
+  color: #2F3850;
 }
 
 .c12 {
@@ -218,6 +221,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   margin-right: 18px;
   background-color: rgba(255,118,145,1);
   opacity: 1;
+  color: #2F3850;
 }
 
 .c13 {
@@ -240,6 +244,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   margin-right: 18px;
   background-color: rgba(255,207,91,1);
   opacity: 1;
+  color: #2F3850;
 }
 
 .c14 {
@@ -262,6 +267,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   margin-right: 18px;
   background-color: rgba(179,2,255,1);
   opacity: 1;
+  color: #2F3850;
 }
 
 .c16 {
@@ -284,6 +290,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   margin-right: 18px;
   background-color: rgba(255,127,80,1);
   opacity: 1;
+  color: #2F3850;
 }
 
 .c1 {

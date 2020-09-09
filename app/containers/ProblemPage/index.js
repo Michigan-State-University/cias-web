@@ -18,9 +18,8 @@ import Loader from 'components/Loader';
 import Row from 'components/Row';
 import SingleTile from 'components/SingleTile';
 import TileRenderer from 'components/TileRenderer';
-import search from 'assets/svg/search.svg';
 import useFilter from 'utils/useFilter';
-import { Input } from 'components/Input';
+import SearchInput from 'components/Input/SearchInput';
 import { archived, draft } from 'models/Status/StatusTypes';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -127,8 +126,7 @@ export function ProblemPage({
                 ? formatMessage(messages.hideArchived)
                 : formatMessage(messages.showArchived)}
             </ArchiveFilter>
-            <img src={search} alt="Search" />
-            <Input
+            <SearchInput
               value={filterValue}
               onChange={e => setFilterValue(e.target.value)}
               ml={5}

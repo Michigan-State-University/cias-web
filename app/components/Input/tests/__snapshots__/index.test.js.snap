@@ -7,6 +7,7 @@ exports[`<Input /> should match the snapshot 1`] = `
   border-width: 1px;
   border-color: #E9F1FB;
   border-radius: 5px;
+  color: #2F3850;
 }
 
 .c0:focus {

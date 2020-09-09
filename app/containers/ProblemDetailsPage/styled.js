@@ -23,3 +23,9 @@ export const StatusLabel = styled.div`
   display: inline-block;
   margin-left: 5px;
 `;
+
+export const DraggedTest = styled.div`
+  .dragged {
+    z-index: 10000;
+  }
+`;

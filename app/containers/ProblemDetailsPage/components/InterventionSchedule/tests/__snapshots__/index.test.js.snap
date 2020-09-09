@@ -27,6 +27,7 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-size: 15px;
+  color: #2F3850;
 }
 
 .c8 {
@@ -35,6 +36,7 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
   line-height: 130%;
   margin-left: 5px;
   font-size: 15px;
+  color: #2F3850;
 }
 
 .c13 {

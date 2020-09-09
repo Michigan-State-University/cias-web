@@ -1,9 +1,13 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
-import { archived, statusTypeToColorMap } from 'models/Status/StatusTypes';
+import {
+  archived,
+  statusTypeToColorMap,
+  statusTypeToFontColorMap,
+} from 'models/Status/StatusTypes';
 import globalMessages from 'global/i18n/globalMessages';
-import { StatusLabel } from './styled';
+import { StatusLabel, FilterText } from './styled';
 
 const StatusFilter = ({ formatMessage, onClick, active }) => {
   const labels = useMemo(
@@ -23,7 +27,12 @@ const StatusFilter = ({ formatMessage, onClick, active }) => {
           onClick={onClick}
           active={active.includes(status)}
         >
-          <p>{formatMessage(globalMessages.statuses[status])}</p>
+          <FilterText
+            color={statusTypeToFontColorMap[status]}
+            active={active.includes(status)}
+          >
+            {formatMessage(globalMessages.statuses[status])}
+          </FilterText>
         </StatusLabel>
       ))}
     </>

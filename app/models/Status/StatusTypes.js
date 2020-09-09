@@ -14,3 +14,10 @@ export const statusTypeToColorMap = {
   [closed]: colors.burntSienna,
   [archived]: colors.heather,
 };
+
+export const statusTypeToFontColorMap = {
+  [draft]: colors.black,
+  [published]: colors.white,
+  [closed]: colors.white,
+  [archived]: colors.black,
+};

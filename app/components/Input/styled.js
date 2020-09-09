@@ -78,3 +78,24 @@ export const DatePickerWrapper = styled.div`
     }
   }
 `;
+
+export const SearchInputStyled = styled.div`
+  position: relative;
+`;
+
+export const SearchIcon = styled.img`
+  position: absolute;
+  left: 10px;
+  top: 10px;
+`;
+
+export const ClearButton = styled.div`
+  cursor: pointer;
+`;
+
+export const ClearIcon = styled.img`
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  height: 15px;
+`;

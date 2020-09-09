@@ -9,7 +9,6 @@ export const AvatarStyled = styled.div`
   font-size: 15px;
   border-radius: 50%;
   background-color: ${colors.surfieGreen};
-  color: white;
   display: flex;
   justify-content: center;
   align-items: center;

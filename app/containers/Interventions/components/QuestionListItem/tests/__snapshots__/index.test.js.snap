@@ -59,6 +59,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-weight: 700;
+  color: #2F3850;
   margin: 0;
   font-family: DM Sans;
   font-size: 13px;
@@ -116,6 +117,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   font-size: 15px;
   line-height: 150%;
   margin-bottom: 6px;
+  color: #2F3850;
   -webkit-line-clamp: 2;
   overflow: hidden;
   -webkit-box-orient: vertical;

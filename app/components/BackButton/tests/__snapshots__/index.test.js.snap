@@ -13,10 +13,11 @@ exports[`<BackButton /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-weight: 700;
+  color: rgba(200,102,234,1);
+  color: rgba(200,102,234,1);
 }
 
 .c0 {
-  color: #C866EA;
   -webkit-text-decoration: none;
   text-decoration: none;
   display: -webkit-box;
@@ -41,6 +42,7 @@ exports[`<BackButton /> Should render and match the snapshot 1`] = `
     />
     <p
       class="c2"
+      color="#C866EA"
       font-weight="bold"
     >
       <span>

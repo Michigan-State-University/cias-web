@@ -15,13 +15,13 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
       class="styled__NameContainer-sc-1q3ma8o-1 izjjMI"
     >
       <h3
-        class="H3-sc-1nwhpi5-0 kgCCwf"
+        class="H3-sc-1nwhpi5-0 ijMmkT"
         font-weight="regular"
       >
         Name
       </h3>
       <input
-        class="styled__Input-sc-1q3ma8o-0 jDUSix Input-sc-19txxuq-0 iPAffp"
+        class="styled__Input-sc-1q3ma8o-0 jDUSix Input-sc-19txxuq-0 cndNPM"
         placeholder="e-Intervention Name"
         type="singleline"
         value="e-Intervention Name"
@@ -29,7 +29,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
       />
     </div>
     <h3
-      class="H3-sc-1nwhpi5-0 gWqef"
+      class="H3-sc-1nwhpi5-0 eWxzix"
     >
       Narrator Settings
     </h3>
@@ -37,7 +37,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
       class="Row-x1o3ru-0 biGHco"
     >
       <p
-        class="Text-sc-2lza2m-0 hLUsTn"
+        class="Text-sc-2lza2m-0 gbTFEp"
         font-weight="bold"
       >
         Narrator Active
@@ -59,7 +59,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
       class="Row-x1o3ru-0 biGHco"
     >
       <p
-        class="Text-sc-2lza2m-0 zCDei"
+        class="Text-sc-2lza2m-0 frDpGz"
       >
         Voice
       </p>
@@ -80,7 +80,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
       class="Row-x1o3ru-0 fZUQFT"
     >
       <p
-        class="Text-sc-2lza2m-0 zCDei"
+        class="Text-sc-2lza2m-0 frDpGz"
       >
         Animated Character
       </p>

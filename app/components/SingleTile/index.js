@@ -28,6 +28,7 @@ import {
 } from 'global/reducers/problems';
 
 import EllipsisText from 'components/Text/EllipsisText';
+import Text from 'components/Text';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import SelectResearchers from 'containers/ProblemDetailsPage/components/SelectResearchers';
@@ -126,10 +127,12 @@ const SingleTile = ({
         <TileInfo>
           {interventions && (
             <div>
-              <FormattedMessage
-                {...messages.sessions}
-                values={{ sessionCount: interventions.length }}
-              />
+              <Text>
+                <FormattedMessage
+                  {...messages.sessions}
+                  values={{ sessionCount: interventions.length }}
+                />
+              </Text>
             </div>
           )}
         </TileInfo>

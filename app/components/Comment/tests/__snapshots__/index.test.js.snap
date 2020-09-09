@@ -6,6 +6,7 @@ exports[`<Comment /> should match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   color: #9AA1B6;
+  color: #2F3850;
 }
 
 <p

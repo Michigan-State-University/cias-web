@@ -173,6 +173,7 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   border-color: transparent;
   margin-right: 9px;
   height: auto;
+  color: #2F3850;
 }
 
 .c4:focus {

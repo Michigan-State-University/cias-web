@@ -58,7 +58,7 @@ import {
 } from 'global/reducers/questions';
 
 import Spinner from 'components/Spinner';
-import { StatusLabel, InterventionOptions } from './styled';
+import { StatusLabel, InterventionOptions, DraggedTest } from './styled';
 import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
 import InterventionStatusButtons from './components/InterventionStatusButtons';
@@ -176,7 +176,7 @@ export function ProblemDetailsPage({
   };
 
   const renderList = () => (
-    <>
+    <DraggedTest>
       <Reorder
         reorderId="problem-list"
         onReorder={handleReorder}
@@ -209,7 +209,7 @@ export function ProblemDetailsPage({
             );
           })}
       </Reorder>
-    </>
+    </DraggedTest>
   );
 
   if (fetchProblemLoading) return <Loader />;
@@ -274,7 +274,7 @@ export function ProblemDetailsPage({
           {sharedTo && <FormattedMessage {...messages[sharedTo]} />}
         </Text>
         <Link to={`/interventions/${id}/settings`}>
-          <TextButton>
+          <TextButton color={themeColors.secondary}>
             <FormattedMessage {...messages.adjust} />
           </TextButton>
         </Link>

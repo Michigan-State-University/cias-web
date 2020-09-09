@@ -152,6 +152,7 @@ exports[`<InterventionBranching /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-size: 13px;
+  color: #2F3850;
 }
 
 .c4 {
@@ -161,12 +162,14 @@ exports[`<InterventionBranching /> Should render and match the snapshot 1`] = `
   margin-left: 10px;
   font-size: 13px;
   font-weight: 700;
+  color: #2F3850;
 }
 
 .c7 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
+  color: #2F3850;
 }
 
 <div

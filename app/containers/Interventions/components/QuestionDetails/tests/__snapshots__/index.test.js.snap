@@ -235,6 +235,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border-color: transparent;
   margin-right: 9px;
   height: 60px;
+  color: #2F3850;
 }
 
 .c19:focus {
