@@ -45,7 +45,7 @@ Object {
   height: auto;
   display: block;
   border-radius: 5px;
-  max-width: 250px;
+  max-width: 140px;
 }
 
 .c6 {
@@ -85,6 +85,16 @@ Object {
   margin-right: 10px;
 }
 
+.c4 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(154,161,182,1);
+  color: rgba(154,161,182,1);
+}
+
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -93,6 +103,7 @@ Object {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
 }
 
 .c7 {
@@ -103,26 +114,17 @@ Object {
   -webkit-flex-direction: row;
   -ms-flex-direction: row;
   flex-direction: row;
+  height: auto;
   margin-bottom: 20px;
 }
 
-.c4 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 15px;
-  font-weight: 700;
-  color: rgba(154,161,182,1);
-}
-
 .c13 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: rgba(154,161,182,1);
-  white-space: pre;
-  text-overflow: ellipsis;
+  position: relative;
   overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: rgba(154,161,182,1);
 }
 
 <body>
@@ -200,14 +202,17 @@ Object {
                     <div
                       class="c12"
                     >
-                      <p
-                        class="c13"
-                        color="#9AA1B6"
-                        font-weight=""
-                        overflow="hidden"
+                      <div
+                        class="c2"
                       >
-                        Test title 1
-                      </p>
+                        <div
+                          class="c13"
+                          color="#9AA1B6"
+                          font-weight=""
+                        >
+                          Test title 1
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -226,7 +231,7 @@ Object {
         class="Box-sc-14m3exe-0 kVsMlK"
       >
         <div
-          class="Row-x1o3ru-0 cXSRYv"
+          class="Row-x1o3ru-0 exvbpM"
         >
           <img
             class="Img-sc-1kfzr96-0 IpfbX"
@@ -236,7 +241,7 @@ Object {
             class="Box-sc-14m3exe-0 gfpMuw"
           >
             <p
-              class="Text-sc-2lza2m-0 trHvP"
+              class="Text-sc-2lza2m-0 cHEYVU"
               color="#9AA1B6"
               font-size="15px"
               font-weight="bold"
@@ -247,17 +252,17 @@ Object {
         </div>
       </div>
       <div
-        class="Row-x1o3ru-0 cXSRYv"
+        class="Row-x1o3ru-0 exvbpM"
       >
         <div
           class="Box-sc-14m3exe-0 dvwSEs"
         >
           <div
-            class="Column-sc-1n6divy-0 gSmTjF"
+            class="Column-sc-1n6divy-0 cVSlLs"
             data-testid="test-id-1-select-target-question"
           >
             <div
-              class="Row-x1o3ru-0 fsbhR"
+              class="Row-x1o3ru-0 jyZyKs"
             >
               <img
                 class="Img-sc-1kfzr96-0 gjmtGq"
@@ -279,10 +284,10 @@ Object {
               overflow="scroll"
             >
               <div
-                class="Column-sc-1n6divy-0 gSmTjF"
+                class="Column-sc-1n6divy-0 cVSlLs"
               >
                 <div
-                  class="Row-x1o3ru-0 cXSRYv"
+                  class="Row-x1o3ru-0 exvbpM"
                   data-testid="test-id-1-select-target-question-el"
                 >
                   <img
@@ -290,16 +295,19 @@ Object {
                     src="IMAGE_MOCK"
                   />
                   <div
-                    class="Box-sc-14m3exe-0 dhhgIW"
+                    class="Box-sc-14m3exe-0 qogds"
                   >
-                    <p
-                      class="Text-sc-2lza2m-0 eGMvQh"
-                      color="#9AA1B6"
-                      font-weight=""
-                      overflow="hidden"
+                    <div
+                      class="Row-x1o3ru-0 exvbpM"
                     >
-                      Test title 1
-                    </p>
+                      <div
+                        class="styled__StyledEllipsisText-x30pqb-0 ifOlqV"
+                        color="#9AA1B6"
+                        font-weight=""
+                      >
+                        Test title 1
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

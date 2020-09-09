@@ -14,10 +14,12 @@ import UrlPreview from 'components/UrlPreview';
 import globalMessages from 'global/i18n/globalMessages';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { colors } from 'theme/colors';
-import { makeSelectSelectedQuestion } from 'containers/Interventions/containers/EditInterventionPage/selectors';
-import { updateQuestionData } from 'containers/Interventions/containers/EditInterventionPage/actions';
 import { urlValidator } from 'utils/validators/urlValidator';
 import { variableNameValidator } from 'utils/validators';
+import {
+  makeSelectSelectedQuestion,
+  updateQuestionData,
+} from 'global/reducers/questions';
 
 import messages from './messages';
 import { UPDATE_URL, UPDATE_VARIABLE } from './constants';

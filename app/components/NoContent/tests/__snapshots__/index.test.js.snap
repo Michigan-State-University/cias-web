@@ -63,29 +63,31 @@ exports[`<NoContent /> should match the snapshot 1`] = `
   color: rgba(176,186,201,1);
 }
 
-<div
-  className="c0"
-  data-testid="no-content"
-  display="flex"
-  height="100%"
-  width="100%"
->
+<div>
   <div
-    className="c1"
+    class="c0"
+    data-testid="no-content"
+    display="flex"
+    height="100%"
+    width="100%"
   >
-    <img
-      alt="No content"
-      className="c2"
-      src="IMAGE_MOCK"
-    />
-    <h2
-      className="c3"
-      color="#B0BAC9"
+    <div
+      class="c1"
     >
-      <span>
-        No content yet
-      </span>
-    </h2>
+      <img
+        alt="No content"
+        class="c2"
+        src="IMAGE_MOCK"
+      />
+      <h2
+        class="c3"
+        color="#B0BAC9"
+      >
+        <span>
+          No content yet
+        </span>
+      </h2>
+    </div>
   </div>
 </div>
 `;

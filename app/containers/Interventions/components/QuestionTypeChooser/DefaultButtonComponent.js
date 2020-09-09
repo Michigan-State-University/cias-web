@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
+import HoverableBox from 'components/Box/HoverableBox';
 import Row from 'components/Row';
 import Text from 'components/Text';
-import HoverableBox from 'components/Box/HoverableBox';
-
 import { colors, borders, themeColors } from 'theme';
+
 import messages from './messages';
 
 const DefaultButtonComponent = ({ onClick }) => (

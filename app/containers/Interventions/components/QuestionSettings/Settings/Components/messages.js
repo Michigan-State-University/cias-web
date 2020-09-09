@@ -87,12 +87,12 @@ export default defineMessages({
     id: `${scope}.warningMessage`,
     defaultMessage: `Bear in mind that you can't edit the question when you are working with the character.`,
   },
-  peedyBlocked: {
-    id: `${scope}.peedyBlocked`,
+  characterBlocked: {
+    id: `${scope}.characterBlocked`,
     defaultMessage: `Open any of the blocks to replace the character.`,
   },
-  peedyeMovable: {
-    id: `${scope}.peedyeMovable`,
+  characterMovable: {
+    id: `${scope}.characterMovable`,
     defaultMessage: `You can now replace the character by dragging it.`,
   },
 });

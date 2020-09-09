@@ -1,4 +1,4 @@
-import { updateQuestionSettings } from 'containers/Interventions/containers/EditInterventionPage/actions';
+import { updateQuestionSettings } from 'global/reducers/questions';
 import {
   UPDATE_QUESTION_SETTINGS,
   ADD_BLOCK,

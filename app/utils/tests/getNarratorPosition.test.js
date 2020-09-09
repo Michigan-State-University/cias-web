@@ -118,10 +118,10 @@ const mockQuestion = ({
   };
 };
 
-const initialPosition = { x: 0, y: elements.peedyInitialYPosition };
+const initialPosition = { x: 0, y: elements.characterInitialYPosition };
 
 describe('findLastPositionInPreviousQuestions', () => {
-  it('Should return initial peedy position when there is no questions', () => {
+  it('Should return initial character position when there is no questions', () => {
     const allQuestions = [];
     const questionIndex = 0;
     const result = findLastPositionInPreviousQuestions(
@@ -131,7 +131,7 @@ describe('findLastPositionInPreviousQuestions', () => {
     expect(result).toEqual(initialPosition);
   });
 
-  it('Should return initial peedy position when current question index is 0', () => {
+  it('Should return initial character position when current question index is 0', () => {
     const allQuestions = [mockQuestion(), mockQuestion(), mockQuestion()];
     const questionIndex = 0;
     const result = findLastPositionInPreviousQuestions(
@@ -141,7 +141,7 @@ describe('findLastPositionInPreviousQuestions', () => {
     expect(result).toEqual(initialPosition);
   });
 
-  it('Should return initial peedy position when previous quesitons have no blocks', () => {
+  it('Should return initial character position when previous quesitons have no blocks', () => {
     const allQuestions = [
       mockQuestion({ noBlocks: true }),
       mockQuestion({ noBlocks: true }),
@@ -155,10 +155,10 @@ describe('findLastPositionInPreviousQuestions', () => {
     expect(result).toEqual(initialPosition);
   });
 
-  it('Should return peedy position when there is last block in the previous question', () => {
-    const peedyPosition = { x: 25, y: 25 };
+  it('Should return character position when there is last block in the previous question', () => {
+    const characterPosition = { x: 25, y: 25 };
     const allQuestions = [
-      mockQuestion({ lastPosition: peedyPosition }),
+      mockQuestion({ lastPosition: characterPosition }),
       mockQuestion(),
       mockQuestion(),
     ];
@@ -167,13 +167,13 @@ describe('findLastPositionInPreviousQuestions', () => {
       allQuestions,
       questionIndex,
     );
-    expect(result2).toEqual(peedyPosition);
+    expect(result2).toEqual(characterPosition);
   });
 
-  it('Should return peedy position when there is block in any of the previous questions', () => {
-    const peedyPosition = { x: 50, y: 50 };
+  it('Should return character position when there is block in any of the previous questions', () => {
+    const characterPosition = { x: 50, y: 50 };
     const allQuestions = [
-      mockQuestion({ lastPosition: peedyPosition }),
+      mockQuestion({ lastPosition: characterPosition }),
       mockQuestion({ noBlocks: true }),
       mockQuestion(),
     ];
@@ -182,12 +182,12 @@ describe('findLastPositionInPreviousQuestions', () => {
       allQuestions,
       questionIndex,
     );
-    expect(result).toEqual(peedyPosition);
+    expect(result).toEqual(characterPosition);
   });
 });
 
 describe('getNarratorPositionForANewBlock', () => {
-  it('Should return initial peedy position when there are no blocks in first question', () => {
+  it('Should return initial character position when there are no blocks in first question', () => {
     const allQuestions = [mockQuestion({ noBlocks: true })];
     const questionIndex = 0;
     const result = getNarratorPositionForANewBlock(allQuestions, questionIndex);
@@ -195,21 +195,21 @@ describe('getNarratorPositionForANewBlock', () => {
   });
 
   it('Should return position of the last block in the same question', () => {
-    const peedyPosition = { x: 75, y: 75 };
+    const characterPosition = { x: 75, y: 75 };
     const allQuestions = [
       mockQuestion(),
-      mockQuestion({ lastPosition: peedyPosition }),
+      mockQuestion({ lastPosition: characterPosition }),
       mockQuestion(),
     ];
     const questionIndex = 1;
     const result = getNarratorPositionForANewBlock(allQuestions, questionIndex);
-    expect(result).toEqual(peedyPosition);
+    expect(result).toEqual(characterPosition);
   });
 
   it('Should return position of the last block in any of the previous questions', () => {
-    const peedyPosition = { x: 100, y: 100 };
+    const characterPosition = { x: 100, y: 100 };
     const allQuestions = [
-      mockQuestion({ lastPosition: peedyPosition }),
+      mockQuestion({ lastPosition: characterPosition }),
       mockQuestion({ noBlocks: true }),
       mockQuestion(),
     ];
@@ -218,7 +218,7 @@ describe('getNarratorPositionForANewBlock', () => {
       allQuestions,
       questionIndex,
     );
-    expect(result2).toEqual(peedyPosition);
+    expect(result2).toEqual(characterPosition);
   });
 
   it('Should return initial position when there is no blocks at all', () => {
@@ -238,10 +238,10 @@ describe('getNarratorPositionForANewBlock', () => {
 
 describe('getNarratorPositionWhenQuestionIsChanged', () => {
   it('Should return position of the first block in the current question', () => {
-    const peedyPosition = { x: 125, y: 125 };
+    const characterPosition = { x: 125, y: 125 };
     const allQuestions = [
       mockQuestion(),
-      mockQuestion({ firstPosition: peedyPosition }),
+      mockQuestion({ firstPosition: characterPosition }),
       mockQuestion(),
     ];
     const questionIndex = 1;
@@ -249,13 +249,13 @@ describe('getNarratorPositionWhenQuestionIsChanged', () => {
       allQuestions,
       questionIndex,
     );
-    expect(result).toEqual(peedyPosition);
+    expect(result).toEqual(characterPosition);
   });
 
   it('Should return position of the last block in any of the previous questions', () => {
-    const peedyPosition = { x: 150, y: 150 };
+    const characterPosition = { x: 150, y: 150 };
     const allQuestions = [
-      mockQuestion({ lastPosition: peedyPosition }),
+      mockQuestion({ lastPosition: characterPosition }),
       mockQuestion({ noBlocks: true }),
       mockQuestion(),
     ];
@@ -264,7 +264,7 @@ describe('getNarratorPositionWhenQuestionIsChanged', () => {
       allQuestions,
       questionIndex,
     );
-    expect(result).toEqual(peedyPosition);
+    expect(result).toEqual(characterPosition);
   });
 
   it('Should return initial position when there is no blocks', () => {
@@ -298,10 +298,10 @@ describe('getNarratorPositionWhenBlockIsRemoved', () => {
   });
 
   it('Should return first block in the current question when all blocks are closed', () => {
-    const peedyPosition = { x: 175, y: 175 };
+    const characterPosition = { x: 175, y: 175 };
     const allQuestions = [
       mockQuestion(),
-      mockQuestion({ firstPosition: peedyPosition }),
+      mockQuestion({ firstPosition: characterPosition }),
       mockQuestion(),
     ];
     const questionIndex = 1;
@@ -313,14 +313,14 @@ describe('getNarratorPositionWhenBlockIsRemoved', () => {
       deletedIndex,
       openedBlockIndex,
     );
-    expect(result).toEqual(peedyPosition);
+    expect(result).toEqual(characterPosition);
   });
 
   it('Should return last position in any of the previous question when only block in the current question is deleted and all blocks are closed', () => {
-    const peedyPosition = { x: 200, y: 200 };
+    const characterPosition = { x: 200, y: 200 };
     const allQuestions = [
       mockQuestion(),
-      mockQuestion({ lastPosition: peedyPosition }),
+      mockQuestion({ lastPosition: characterPosition }),
       mockQuestion({ noBlocks: true }),
     ];
     const questionIndex = 2;
@@ -332,7 +332,7 @@ describe('getNarratorPositionWhenBlockIsRemoved', () => {
       deletedIndex,
       openedBlockIndex,
     );
-    expect(result).toEqual(peedyPosition);
+    expect(result).toEqual(characterPosition);
   });
 
   it('Should return initial position when only block was deleted and there is no previous blocks in previous quesitons and all blocks are closed', () => {
@@ -354,10 +354,10 @@ describe('getNarratorPositionWhenBlockIsRemoved', () => {
   });
 
   it('Should return last position in any of the previous question when only block in the current question is deleted', () => {
-    const peedyPosition = { x: 225, y: 225 };
+    const characterPosition = { x: 225, y: 225 };
     const allQuestions = [
       mockQuestion(),
-      mockQuestion({ lastPosition: peedyPosition }),
+      mockQuestion({ lastPosition: characterPosition }),
       mockQuestion({ noBlocks: true }),
     ];
     const questionIndex = 2;
@@ -369,7 +369,7 @@ describe('getNarratorPositionWhenBlockIsRemoved', () => {
       deletedIndex,
       openedBlockIndex,
     );
-    expect(result).toEqual(peedyPosition);
+    expect(result).toEqual(characterPosition);
   });
 
   it('Should return initial position when only block was deleted and there is no previous blocks in previous quesitons', () => {
@@ -390,14 +390,14 @@ describe('getNarratorPositionWhenBlockIsRemoved', () => {
     expect(result).toEqual(initialPosition);
   });
 
-  it('Should return peedy position of the previous block if the last block was deleted', () => {
-    const peedyPosition = { x: 250, y: 250 };
+  it('Should return character position of the previous block if the last block was deleted', () => {
+    const characterPosition = { x: 250, y: 250 };
     const blocksSize = 4;
     const allQuestions = [
       mockQuestion({ blocksSize }),
       mockQuestion({
         blocksSize,
-        customPosition: { index: blocksSize - 1, position: peedyPosition },
+        customPosition: { index: blocksSize - 1, position: characterPosition },
       }),
       mockQuestion({ blocksSize }),
     ];
@@ -410,14 +410,16 @@ describe('getNarratorPositionWhenBlockIsRemoved', () => {
       deletedIndex,
       openedBlockIndex,
     );
-    expect(result).toEqual(peedyPosition);
+    expect(result).toEqual(characterPosition);
   });
 
-  it('Should return peedy position of the block that current index is the one that was deleted', () => {
-    const peedyPosition = { x: 275, y: 275 };
+  it('Should return character position of the block that current index is the one that was deleted', () => {
+    const characterPosition = { x: 275, y: 275 };
     const allQuestions = [
       mockQuestion(),
-      mockQuestion({ customPosition: { index: 3, position: peedyPosition } }),
+      mockQuestion({
+        customPosition: { index: 3, position: characterPosition },
+      }),
       mockQuestion(),
     ];
     const questionIndex = 1;
@@ -429,6 +431,6 @@ describe('getNarratorPositionWhenBlockIsRemoved', () => {
       deletedIndex,
       openedBlockIndex,
     );
-    expect(result).toEqual(peedyPosition);
+    expect(result).toEqual(characterPosition);
   });
 });

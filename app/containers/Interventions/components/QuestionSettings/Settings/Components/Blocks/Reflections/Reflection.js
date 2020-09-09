@@ -1,32 +1,29 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from 'react';
-import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
+import join from 'lodash/join';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import join from 'lodash/join';
+import { createStructuredSelector } from 'reselect';
 
-import Column from 'components/Column';
 import Box from 'components/Box';
-import { StyledInput } from 'components/Input/StyledInput';
-import Loader from 'components/Loader';
+import Column from 'components/Column';
 import Img from 'components/Img';
+import Loader from 'components/Loader';
 import Text from 'components/Text';
-
 import playButton from 'assets/svg/play-button-1.svg';
 import stopButton from 'assets/svg/stop-button-1.svg';
-
+import { StyledInput } from 'components/Input/StyledInput';
 import { colors, themeColors } from 'theme';
-
-import { makeSelectLoader } from 'containers/Interventions/containers/EditInterventionPage/selectors';
-import { makeSelectPreviewData } from 'containers/Interventions/components/QuestionNarrator/selectors';
+import { makeSelectLoader } from 'global/reducers/questions';
+import { speechType } from 'models/Narrator/BlockTypes';
+import { splitAndKeep } from 'utils/splitAndKeep';
 import {
   updatePreviewData,
   updatePreviewAnimation,
-} from 'containers/Interventions/containers/EditInterventionPage/actions';
+  makeSelectPreviewData,
+} from 'global/reducers/localState';
 
-import { speechType } from 'models/Narrator/BlockTypes';
-import { splitAndKeep } from 'utils/splitAndKeep';
 import messages from '../../messages';
 import { updateReflection } from '../../../actions';
 
@@ -153,7 +150,7 @@ Reflection.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  updateLoader: makeSelectLoader('updateQuestion'),
+  updateLoader: makeSelectLoader('updateQuestionLoading'),
   previewData: makeSelectPreviewData(),
 });
 

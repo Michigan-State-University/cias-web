@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 
+import BranchingLayout from 'components/BranchingLayout';
 import Intervention from 'models/Intervention/Intervention';
 import Question from 'models/Intervention/Question';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
-import { makeSelectQuestions } from 'containers/Interventions/containers/EditInterventionPage/selectors';
+import { makeSelectQuestions } from 'global/reducers/questions';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
@@ -22,8 +24,6 @@ import {
   fetchProblemRequest,
 } from 'global/reducers/problem';
 
-import { injectIntl } from 'react-intl';
-import BranchingLayout from 'components/BranchingLayout';
 import messages from '../messages';
 import {
   updateFormula,

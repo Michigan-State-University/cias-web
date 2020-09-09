@@ -5,25 +5,25 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import globalMessages from 'global/i18n/globalMessages';
-import VisualAnalogueScaleQuestionLayout from 'containers/AnswerInterventionPage/layouts/VisualAnalogueScaleQuestionLayout';
-
 import AppSlider from 'components/AppSlider';
 import Box from 'components/Box';
 import Column from 'components/Column';
+import Question from 'models/Intervention/Question';
+import Row from 'components/Row';
+import VisualAnalogueScaleQuestionLayout from 'containers/AnswerInterventionPage/layouts/VisualAnalogueScaleQuestionLayout';
+import globalMessages from 'global/i18n/globalMessages';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
-import Row from 'components/Row';
-import Question from 'models/Intervention/Question';
-import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { visualAnalogScaleLabelStyles, colors } from 'theme';
 import { variableNameValidator } from 'utils/validators';
+import { visualAnalogScaleLabelStyles, colors } from 'theme';
+import {
+  makeSelectSelectedQuestion,
+  updateQuestionData,
+} from 'global/reducers/questions';
 
 import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
-
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
-import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const VisualAnalogueScaleQuestion = ({
   selectedQuestion,

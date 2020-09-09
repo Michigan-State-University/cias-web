@@ -1,8 +1,35 @@
 import produce from 'immer';
-import { CHANGE_CURRENT_NARRATOR_BLOCK } from './constants';
+
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+import settingsTabLabels from 'utils/settingsTabsLabels';
+import { bodyAnimationType } from 'models/Narrator/BlockTypes';
+import { elements } from 'theme';
+
+import {
+  CHANGE_CURRENT_NARRATOR_BLOCK,
+  UPDATE_PREVIEW_DATA,
+  UPDATE_PREVIEW_ANIMATION,
+  TOGGLE_QUESTION_SETTINGS,
+  MAKE_CHARACTER_DRAGGABLE,
+  SET_ANIMATION_STOP_POSITION,
+} from './constants';
+import { getPreviewData } from './utils';
 
 export const initialState = {
   currentNarratorBlockIndex: -1,
+  questionSettings: {
+    visibility: false,
+    tab: settingsTabLabels.settings,
+  },
+  animationPosition: {
+    x: 0,
+    y: elements.characterInitialYPosition,
+  },
+  draggable: false,
+  previewData: {
+    animation: 'standStill',
+    type: bodyAnimationType,
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -11,6 +38,35 @@ const localStateReducer = (state = initialState, { type, payload }) =>
     switch (type) {
       case CHANGE_CURRENT_NARRATOR_BLOCK:
         draft.currentNarratorBlockIndex = payload.index;
+        break;
+      case MAKE_CHARACTER_DRAGGABLE:
+        draft.draggable = payload.draggable;
+        break;
+      case SET_ANIMATION_STOP_POSITION:
+        draft.animationPosition = payload;
+        break;
+      case TOGGLE_QUESTION_SETTINGS:
+        if (!isNullOrUndefined(payload.index)) {
+          draft.questionSettings.tab = settingsTabLabels.settings;
+          if (payload.index < 0) {
+            draft.questionSettings.visibility = false;
+            break;
+          }
+          if (
+            payload.index === payload.questionIndex &&
+            state.questionSettings.visibility
+          ) {
+            draft.questionSettings.visibility = false;
+            break;
+          }
+          draft.questionSettings.visibility = true;
+        }
+        if (!isNullOrUndefined(payload.tab))
+          draft.questionSettings.tab = payload.tab;
+        break;
+      case UPDATE_PREVIEW_ANIMATION:
+      case UPDATE_PREVIEW_DATA:
+        draft.previewData = getPreviewData(payload);
         break;
     }
   });

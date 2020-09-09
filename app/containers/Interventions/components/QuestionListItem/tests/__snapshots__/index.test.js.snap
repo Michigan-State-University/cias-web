@@ -1,22 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionListItem /> should match the snapshot 1`] = `
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-}
-
-.c4 {
-  width: auto;
-  height: auto;
-}
-
 .c3 {
   width: auto;
   height: auto;
@@ -70,14 +54,6 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   width: 83.33333333333334%;
 }
 
-.c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  padding: 8px;
-}
-
 .c7 {
   font-family: DM Sans;
   font-size: 13px;
@@ -88,6 +64,30 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   color: #9AA1B6;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 8px;
 }
 
 .c0 {

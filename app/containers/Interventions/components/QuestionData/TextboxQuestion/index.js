@@ -14,11 +14,13 @@ import globalMessages from 'global/i18n/globalMessages';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { colors } from 'theme/colors';
 import { variableNameValidator } from 'utils/validators';
+import {
+  makeSelectSelectedQuestion,
+  updateQuestionData,
+} from 'global/reducers/questions';
 
 import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
-import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const TextboxQuestion = ({
   selectedQuestion,

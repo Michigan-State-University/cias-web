@@ -1,45 +1,58 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
-
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
-import { QuestionImageWithIntl as QuestionImage } from '../index';
 
-const defualtProps = {
-  selectedQuestion: {
-    id: 'asda123a-123da1203123-213das',
-    image_url: '',
+import QuestionImage from '../index';
+
+let store;
+const reducer = state => state;
+const initialState = {
+  questions: {
+    selectedQuestion: 0,
+    questions: [{ id: 'asdas23-12', image_url: null }],
   },
-  updateFile: jest.fn(),
 };
+beforeAll(() => {
+  store = createStore(reducer, initialState);
+  store.runSaga = () => {};
+  store.injectedReducers = {};
+  store.injectedSagas = {};
+});
 
 describe('<QuestionImage />', () => {
   it('should match the snapshot without file', () => {
-    const renderedComponent = renderer
-      .create(
+    const { container } = render(
+      <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionImage {...defualtProps} />
-        </IntlProvider>,
-      )
-      .toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+          <QuestionImage />
+        </IntlProvider>
+      </Provider>,
+    );
+    expect(container).toMatchSnapshot();
   });
   it('should match the snapshot with file', () => {
-    const newProps = {
-      ...defualtProps,
-      selectedQuestion: {
-        ...defualtProps.selectedQuestion,
-        image_url: 'mock.png',
+    const newState = {
+      questions: {
+        selectedQuestion: 0,
+        questions: [{ id: 'asdas23-12', image_url: 'mokc_url.png' }],
       },
     };
-    const renderedComponent = renderer
-      .create(
+    store = createStore(reducer, newState);
+    store.runSaga = () => {};
+    store.injectedReducers = {};
+    store.injectedSagas = {};
+
+    const { container } = render(
+      <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionImage {...newProps} />
-        </IntlProvider>,
-      )
-      .toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+          <QuestionImage />
+        </IntlProvider>
+      </Provider>,
+    );
+    expect(container).toMatchSnapshot();
   });
 });

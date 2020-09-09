@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
-
-import Input from 'components/Input';
-import Column from 'components/Column';
 import Box from 'components/Box';
+import Column from 'components/Column';
+import Input from 'components/Input';
+import { updatePreviewAnimation } from 'global/reducers/localState';
+
 import { updatePauseDuration } from '../../actions';
 
 const PauseBlock = ({

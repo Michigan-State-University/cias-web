@@ -10,7 +10,6 @@ import Box from 'components/Box';
 import { colors } from 'theme';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-
 import {
   getInterventionRequest,
   interventionReducer,
@@ -32,7 +31,10 @@ const SettingsInterventionPage = ({
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
 
   useEffect(() => {
-    getIntervention(params.interventionId);
+    getIntervention({
+      problemId: params.problemId,
+      interventionId: params.interventionId,
+    });
   }, []);
 
   return (
@@ -50,7 +52,7 @@ const SettingsInterventionPage = ({
         pb={100}
         bg={colors.zirkon}
       >
-        <StyledColumn height="100%" border="1px solid red">
+        <StyledColumn height="100%">
           <InterventionSettings
             id={id}
             name={name}

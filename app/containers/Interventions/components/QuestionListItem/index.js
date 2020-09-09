@@ -1,40 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 import uniqueId from 'lodash/uniqueId';
-import cloneDeep from 'lodash/cloneDeep';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
-import Row from 'components/Row';
-import Img from 'components/Img';
-import Dropdown from 'components/Dropdown';
-import Comment from 'components/Text/Comment';
-import Column from 'components/Column';
 import Badge from 'components/Badge';
 import Box from 'components/Box';
+import Column from 'components/Column';
+import Comment from 'components/Text/Comment';
+import Dropdown from 'components/Dropdown';
+import Img from 'components/Img';
+import Row from 'components/Row';
 import gear from 'assets/svg/gear.svg';
 import gearSelected from 'assets/svg/gear-selected.svg';
-
 import globalMessages from 'global/i18n/globalMessages';
-import { htmlToPlainText } from 'utils/htmlToPlainText';
-import { hasObjectProperty } from 'utils/hasObjectProperty';
 import { colors } from 'theme';
-import { changeCurrentNarratorBlock } from 'global/reducers/localState';
-
-import { ToggleableBox, ClampedTitle } from './styled';
-
+import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
+import { hasObjectProperty } from 'utils/hasObjectProperty';
+import { htmlToPlainText } from 'utils/htmlToPlainText';
 import {
   selectQuestion,
-  toggleQuestionSettings,
   deleteQuestionRequest,
   copyQuestionRequest,
-} from '../../containers/EditInterventionPage/actions';
+} from 'global/reducers/questions';
+import {
+  toggleQuestionSettings,
+  makeSelectQuestionSettingsVisibility,
+  setAnimationStopPosition,
+  setCharacterDraggable,
+  changeCurrentNarratorBlock,
+} from 'global/reducers/localState';
 
-import { makeSelectQuestionSettingsVisibility } from '../../containers/EditInterventionPage/selectors';
-
+import { ToggleableBox, ClampedTitle } from './styled';
 import messages from './messages';
 import getIndex from './utils';
 
@@ -43,7 +44,7 @@ const QuestionListItem = ({
   index,
   onSelect,
   selectedQuestionIndex,
-  questionsLength,
+  questions,
   settingsVisibility,
   toggleSettings,
   removeQuestion,
@@ -51,15 +52,29 @@ const QuestionListItem = ({
   copyQuestion,
   interventionId,
   changeNarratorBlockIndex,
+  setDraggable,
+  setCharacterPosition,
 }) => {
   const isSelected = selectedQuestionIndex === index;
   const gearIcon = settingsVisibility && isSelected ? gearSelected : gear;
   const { type, title, id, body } = question;
 
+  const handleSelectClick = newIndex => {
+    setDraggable(false);
+    if (selectedQuestionIndex !== newIndex) {
+      onSelect(newIndex);
+      const newPosition = getNarratorPositionWhenQuestionIsChanged(
+        questions,
+        newIndex,
+      );
+      setCharacterPosition(newPosition.x, newPosition.y);
+    }
+  };
+
   const handleDelete = event => {
     event.stopPropagation();
-    const newIndex = getIndex(selectedQuestionIndex, questionsLength);
-    onSelect(newIndex);
+    const newIndex = getIndex(selectedQuestionIndex, questions.length);
+    handleSelectClick(newIndex);
     removeQuestion({ questionId: id, interventionId });
   };
 
@@ -85,11 +100,11 @@ const QuestionListItem = ({
   ];
 
   const onGearClick = () => {
-    toggleSettings({ index });
+    toggleSettings({ index, questionIndex: selectedQuestionIndex });
   };
 
   const onChangeItem = () => {
-    onSelect(index);
+    handleSelectClick(index);
     changeNarratorBlockIndex(-1);
   };
 
@@ -139,7 +154,7 @@ QuestionListItem.propTypes = {
   index: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
   selectedQuestionIndex: PropTypes.number,
-  questionsLength: PropTypes.number,
+  questions: PropTypes.array,
   settingsVisibility: PropTypes.bool,
   toggleSettings: PropTypes.func,
   copyQuestion: PropTypes.func,
@@ -147,6 +162,8 @@ QuestionListItem.propTypes = {
   removeQuestion: PropTypes.func,
   interventionId: PropTypes.string,
   changeNarratorBlockIndex: PropTypes.func,
+  setDraggable: PropTypes.func,
+  setCharacterPosition: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -159,6 +176,8 @@ const mapDispatchToProps = {
   removeQuestion: deleteQuestionRequest,
   copyQuestion: copyQuestionRequest,
   changeNarratorBlockIndex: changeCurrentNarratorBlock,
+  setDraggable: setCharacterDraggable,
+  setCharacterPosition: setAnimationStopPosition,
 };
 
 const withConnect = connect(

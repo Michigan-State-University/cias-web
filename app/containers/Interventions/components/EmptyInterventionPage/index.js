@@ -5,12 +5,12 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import Column from 'components/Column';
-import Row from 'components/Row';
 import NoContent from 'components/NoContent';
+import Row from 'components/Row';
+import { makeSelectLoader } from 'global/reducers/questions';
 
 import ButtonComponent from './ButtonComponent';
 import QuestionTypeChooser from '../QuestionTypeChooser';
-import { makeSelectCreateQuestionLoader } from '../../containers/EditInterventionPage/selectors';
 
 const EmptyInterventionPage = ({ onCreateQuestion, loading }) => (
   <Row height="100%" width="100%" align="start" justify="center" pt={100}>
@@ -34,7 +34,7 @@ EmptyInterventionPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  loading: makeSelectCreateQuestionLoader(),
+  loading: makeSelectLoader('createQuestionLoading'),
 });
 
 const withConnect = connect(mapStateToProps);

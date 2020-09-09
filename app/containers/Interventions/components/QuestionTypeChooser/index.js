@@ -2,21 +2,20 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import Column from 'components/Column';
-import Row from 'components/Row';
 import Box from 'components/Box';
-import Text from 'components/Text';
+import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
+import Row from 'components/Row';
+import Text from 'components/Text';
 import decideIfPassValue from 'utils/decideIfPassValue';
+import globalMessages from 'global/i18n/globalMessages';
 import useOutsideClick from 'utils/useOutsideClick';
-
 import { QuestionTypes } from 'models/Intervention/QuestionTypes';
 import { colors, boxShadows, borders, fontSizes } from 'theme';
-import globalMessages from 'global/i18n/globalMessages';
-import messages from './messages';
-import { DotCircle } from './styled';
 
 import DefaultButtonComponent from './DefaultButtonComponent';
+import messages from './messages';
+import { DotCircle } from './styled';
 
 const QuestionTypeChooser = ({
   intl: { formatMessage },

@@ -6,6 +6,8 @@ import { MemoryRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 
 import { DEFAULT_LOCALE } from 'i18n';
+import { interventionReducer } from 'global/reducers/intervention';
+
 import SettingsInterventionPage from '../index';
 
 describe('<SettingsInterventionPage />', () => {
@@ -41,7 +43,9 @@ describe('<SettingsInterventionPage />', () => {
   beforeAll(() => {
     store = createStore(reducer, initialState);
     store.runSaga = () => {};
-    store.injectedReducers = {};
+    store.injectedReducers = {
+      intervention: interventionReducer,
+    };
     store.injectedSagas = {};
   });
 

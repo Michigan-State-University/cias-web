@@ -1,20 +1,20 @@
 import React, { useMemo, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import map from 'lodash/map';
+import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
-import { map } from 'lodash';
 
 import H3 from 'components/H3';
 import Row from 'components/Row';
 import Select from 'components/Select';
 import Switch from 'components/Switch';
 import Text from 'components/Text';
-import lastKey from 'utils/getLastKey';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import lastKey from 'utils/getLastKey';
 import { QuestionTypes } from 'models/Intervention/QuestionTypes';
+import { changeQuestionTypeRequest } from 'global/reducers/questions';
 import { colors, borders } from 'theme';
-import { changeQuestionType } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
 import messages from '../messages';
 import { updateSettings as updateQuestionSettings } from '../../actions';
@@ -119,7 +119,7 @@ SettingsTab.propTypes = {
 
 const mapDispatchToProps = {
   onQuestionToggle: updateQuestionSettings,
-  changeTypeQuestion: changeQuestionType,
+  changeTypeQuestion: changeQuestionTypeRequest,
 };
 
 const withConnect = connect(

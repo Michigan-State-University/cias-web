@@ -12,14 +12,12 @@ import Text from 'components/Text';
 import Img from 'components/Img';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
-
 import webpage from 'assets/svg/webpage-mouseover.svg';
-
 import {
   makeSelectLoader,
   makeSelectQuestions,
   makeSelectSelectedQuestion,
-} from 'containers/Interventions/containers/EditInterventionPage/selectors';
+} from 'global/reducers/questions';
 
 import { colors, boxShadows } from 'theme';
 import Question from 'models/Intervention/Question';
@@ -114,7 +112,7 @@ VariableChooser.propTypes = {
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
-  loading: makeSelectLoader('questionListLoading'),
+  loading: makeSelectLoader('getQuestionsLoading'),
 });
 
 const withConnect = connect(mapStateToProps);

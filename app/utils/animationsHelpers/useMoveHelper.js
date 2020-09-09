@@ -1,8 +1,10 @@
-import { elements } from 'theme';
 import { useState, useEffect, useRef } from 'react';
-import { moveAnimations as moveAnimationsNames } from 'utils/animations/animationsNames';
 import isEqual from 'lodash/isEqual';
-import { animationDuration } from '../components/styled';
+
+import { elements } from 'theme';
+import { moveAnimations as moveAnimationsNames } from 'utils/animations/animationsNames';
+
+import { animationDuration } from './constants';
 
 const defaultCurrent = {
   clientWidth: elements.draggableContainerSize,
@@ -38,7 +40,7 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
   };
 
   const getInitialAnimationPosition = firstBlock => {
-    if (!firstBlock) return { x: 0, y: elements.peedyInitialYPosition };
+    if (!firstBlock) return { x: 0, y: elements.characterInitialYPosition };
     return getScaledPosition(getScaleFactor(), firstBlock.endPosition);
   };
 

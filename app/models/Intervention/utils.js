@@ -9,7 +9,7 @@ import {
   reflectionType,
   pauseType,
 } from 'models/Narrator/BlockTypes';
-import { getFromQuestionTTS } from 'containers/Interventions/containers/EditInterventionPage/utils';
+import { getFromQuestionTTS } from 'global/reducers/questions/utils';
 
 import Question from './Question';
 import Intervention from './Intervention';

@@ -7,13 +7,17 @@ import { connect } from 'react-redux';
 
 import H3 from 'components/H3';
 import lastKey from 'utils/getLastKey';
+import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
-import { getQuestionsRequest } from 'containers/Interventions/containers/EditInterventionPage/actions';
-
 import {
   editInterventionRequest,
   editInterventionSaga,
 } from 'global/reducers/intervention';
+import {
+  getQuestionsRequest,
+  getQuestionsSaga,
+  questionsReducer,
+} from 'global/reducers/questions';
 
 import Option from './Option';
 import messages from './messages';
@@ -28,6 +32,8 @@ const InterventionSettings = ({
   getQuestions,
 }) => {
   useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
+  useInjectReducer({ key: 'questions', reducer: questionsReducer });
+  useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
 
   const isNarratorActive = some(narratorSettings, setting => setting);
 

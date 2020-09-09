@@ -10,6 +10,7 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
+import PlusCircle from 'components/Circle/PlusCircle';
 import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
@@ -19,12 +20,13 @@ import radio from 'assets/svg/radio-button.svg';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
+import {
+  makeSelectSelectedQuestion,
+  updateQuestionData,
+} from 'global/reducers/questions';
 
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
-import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
-import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
 
 const RADIO_MARGIN = 16;
 const INPUT_PADDING = 15;

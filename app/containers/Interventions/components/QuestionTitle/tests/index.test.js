@@ -12,7 +12,7 @@ describe('<QuestionTitle />', () => {
 
   const reducer = state => state;
   const initialState = {
-    editInterventionPage: {
+    questions: {
       questions: [
         {
           title: 'Example title',

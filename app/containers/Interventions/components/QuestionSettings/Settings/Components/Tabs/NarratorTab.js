@@ -13,12 +13,8 @@ import Switch from 'components/Switch';
 import Text from 'components/Text';
 import lastKey from 'utils/getLastKey';
 import { colors, borders } from 'theme';
-import {
-  localStateReducer,
-  makeSelectCurrentNarratorBlockIndex,
-} from 'global/reducers/localState';
 import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
-import { useInjectReducer } from 'utils/injectReducer';
+import { makeSelectCurrentNarratorBlockIndex } from 'global/reducers/localState';
 
 import BlockTypeChooser from '../BlockTypeChooser';
 import WrappedAccordion from '../WrappedAcoordion';
@@ -33,11 +29,6 @@ const NarratorTab = ({
   id,
   currentBlockIndex,
 }) => {
-  useInjectReducer({
-    key: 'localState',
-    reducer: localStateReducer,
-  });
-
   if (!narrator) {
     return <></>;
   }
@@ -56,7 +47,7 @@ const NarratorTab = ({
     return `${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`;
   };
 
-  const isPeedyMovable = currentBlockIndex !== -1;
+  const isCharacterMovable = currentBlockIndex !== -1;
   return (
     <Fragment>
       <Box mb={20}>
@@ -83,11 +74,13 @@ const NarratorTab = ({
       </Box>
       <Text
         fontWeight="bold"
-        color={colors[isPeedyMovable ? 'jungleGreen' : 'flamingo']}
+        color={colors[isCharacterMovable ? 'jungleGreen' : 'flamingo']}
         mb={15}
       >
         <FormattedMessage
-          {...messages[isPeedyMovable ? 'peedyeMovable' : 'peedyBlocked']}
+          {...messages[
+            isCharacterMovable ? 'characterMovable' : 'characterBlocked'
+          ]}
         />
       </Text>
       <WrappedAccordion

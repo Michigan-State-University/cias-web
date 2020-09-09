@@ -8,8 +8,9 @@ import { createStore } from 'redux';
 
 import { interventionReducer } from 'global/reducers/intervention';
 import { problemReducer } from 'global/reducers/problem';
+import { questionsReducer } from 'global/reducers/questions';
+import { localStateReducer } from 'global/reducers/localState';
 
-import editInterventionPageReducer from 'containers/Interventions/containers/EditInterventionPage/reducer';
 import TargetQuestionChooser from '../index';
 
 const mockSingleQuestion = (suffix = 1, hasVariable = true) => ({
@@ -42,7 +43,7 @@ describe('<TargetQuestionChooser />', () => {
         fetchProblemLoading: false,
       },
     },
-    editInterventionPage: {
+    questions: {
       questions: [mockSingleQuestion(1, true)],
       selectedQuestion: 0,
     },
@@ -53,7 +54,8 @@ describe('<TargetQuestionChooser />', () => {
     store.runSaga = () => {};
     store.injectedReducers = {
       intervention: interventionReducer,
-      editInterventionPage: editInterventionPageReducer,
+      questions: questionsReducer,
+      localState: localStateReducer,
     };
     store.injectedSagas = {};
   });
@@ -105,7 +107,7 @@ describe('<TargetQuestionChooser />', () => {
           fetchProblemLoading: false,
         },
       },
-      editInterventionPage: {
+      questions: {
         questions: [
           mockSingleQuestion(1, true),
           question,
@@ -118,7 +120,8 @@ describe('<TargetQuestionChooser />', () => {
     store.runSaga = () => {};
     store.injectedReducers = {
       intervention: interventionReducer,
-      editInterventionPage: editInterventionPageReducer,
+      questions: questionsReducer,
+      localState: localStateReducer,
     };
     store.injectedSagas = {};
 
@@ -160,7 +163,7 @@ describe('<TargetQuestionChooser />', () => {
           fetchProblemLoading: false,
         },
       },
-      editInterventionPage: {
+      questions: {
         questions: [
           mockSingleQuestion(1, true),
           question,
@@ -172,7 +175,8 @@ describe('<TargetQuestionChooser />', () => {
     store.runSaga = () => {};
     store.injectedReducers = {
       intervention: interventionReducer,
-      editInterventionPage: editInterventionPageReducer,
+      questions: questionsReducer,
+      localState: localStateReducer,
       problem: problemReducer,
     };
     store.injectedSagas = {};
@@ -214,7 +218,7 @@ describe('<TargetQuestionChooser />', () => {
     expect(interventionComponentList).toHaveLength(3);
   });
 
-  it.only('should render spinner on intervention view when loading a list', () => {
+  it('should render spinner on intervention view when loading a list', () => {
     const question = mockSingleQuestion(2, true);
 
     store = createStore(reducer, {
@@ -230,7 +234,7 @@ describe('<TargetQuestionChooser />', () => {
           fetchProblemLoading: true,
         },
       },
-      editInterventionPage: {
+      questions: {
         questions: [
           mockSingleQuestion(1, true),
           question,
@@ -243,7 +247,8 @@ describe('<TargetQuestionChooser />', () => {
     store.runSaga = () => {};
     store.injectedReducers = {
       intervention: interventionReducer,
-      editInterventionPage: editInterventionPageReducer,
+      questions: questionsReducer,
+      localState: localStateReducer,
     };
     store.injectedSagas = {};
 

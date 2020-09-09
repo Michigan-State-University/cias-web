@@ -2,21 +2,21 @@ import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import Column from 'components/Column';
-import Row from 'components/Row';
 import Box from 'components/Box';
-import Text from 'components/Text';
+import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
-import useOutsideClick from 'utils/useOutsideClick';
+import Row from 'components/Row';
+import Text from 'components/Text';
 import decideIfPassValue from 'utils/decideIfPassValue';
-
+import globalMessages from 'global/i18n/globalMessages';
+import useOutsideClick from 'utils/useOutsideClick';
+import { colors, boxShadows, borders, fontSizes } from 'theme';
 import {
   blockTypes,
   blockTypeToColorMap,
   readQuestionBlockType,
 } from 'models/Narrator/BlockTypes';
-import { colors, boxShadows, borders, fontSizes } from 'theme';
-import globalMessages from 'global/i18n/globalMessages';
+
 import messages from './messages';
 import { DotCircle, DashedBox } from './styled';
 

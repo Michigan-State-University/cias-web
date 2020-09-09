@@ -51,9 +51,11 @@ import archive from 'assets/svg/archive.svg';
 import { closed } from 'models/Status/StatusTypes';
 import { copyProblemRequest } from 'global/reducers/problems';
 
-import reducer from 'containers/Interventions/containers/EditInterventionPage/reducer';
-import saga from 'containers/Interventions/containers/EditInterventionPage/saga';
-import { getQuestionsRequest } from 'containers/Interventions/containers/EditInterventionPage/actions';
+import {
+  getQuestionsRequest,
+  questionsReducer,
+  getQuestionsSaga,
+} from 'global/reducers/questions';
 
 import Spinner from 'components/Spinner';
 import { StatusLabel, InterventionOptions } from './styled';
@@ -90,8 +92,8 @@ export function ProblemDetailsPage({
     key: 'problem',
     reducer: problemReducer,
   });
-  useInjectReducer({ key: 'editInterventionPage', reducer });
-  useInjectSaga({ key: 'editInterventionPage', saga });
+  useInjectReducer({ key: 'questions', reducer: questionsReducer });
+  useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
 
   const { interventions, name, id, status, shared_to: sharedTo } =
     problem || {};

@@ -16,7 +16,7 @@ import Img from 'components/Img';
 import {
   makeSelectQuestionsLength,
   makeSelectSelectedQuestionIndex,
-} from 'containers/Interventions/containers/EditInterventionPage/selectors';
+} from 'global/reducers/questions';
 
 import {
   editInterventionRequest,

@@ -4,6 +4,9 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { makeSelectIsNarratorTab } from 'global/reducers/localState';
+import { updateQuestionDataSaga } from 'global/reducers/questions';
+import { useInjectSaga } from 'utils/injectSaga';
 import {
   singleQuestion,
   multiQuestion,
@@ -14,18 +17,18 @@ import {
   urlQuestion,
 } from 'models/Intervention/QuestionTypes';
 
-import SingleQuestion from './SingleQuestion';
-import MultiQuestion from './MultiQuestion';
-import TextboxQuestion from './TextboxQuestion';
-import NumberQuestion from './NumberQuestion';
 import GridQuestion from './GridQuestion';
+import MultiQuestion from './MultiQuestion';
+import NumberQuestion from './NumberQuestion';
+import SingleQuestion from './SingleQuestion';
+import TextboxQuestion from './TextboxQuestion';
 import UrlQuestion from './UrlQuestion';
-
-import { makeSelectSelectedQuestionType } from './selectors';
-import { makeSelectIsNarratorTab } from '../../containers/EditInterventionPage/selectors';
 import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
+import { makeSelectSelectedQuestionType } from './selectors';
 
 const QuestionData = ({ selectedQuestionType, isNarratorTab }) => {
+  useInjectSaga({ key: 'updateQuestionData', saga: updateQuestionDataSaga });
+
   const commonProps = {
     isNarratorTab,
   };

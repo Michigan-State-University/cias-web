@@ -27,8 +27,8 @@ import {
   makeSelectLoader,
   makeSelectSelectedQuestion,
   makeSelectQuestions,
-} from 'containers/Interventions/containers/EditInterventionPage/selectors';
-import { makeSelectPreviewData } from 'containers/Interventions/components/QuestionNarrator/selectors';
+} from 'global/reducers/questions';
+import { makeSelectPreviewData } from 'global/reducers/localState';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { speechAnimations } from 'utils/animations/animationsNames';
@@ -200,7 +200,7 @@ ReflectionBlock.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  updateLoader: makeSelectLoader('updateQuestion'),
+  updateLoader: makeSelectLoader('updateQuestionLoading'),
   previewData: makeSelectPreviewData(),
   selectedQuestion: makeSelectSelectedQuestion(),
   questions: makeSelectQuestions(),

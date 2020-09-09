@@ -8,20 +8,20 @@ import { injectIntl, intlShape } from 'react-intl';
 import Column from 'components/Column';
 import Tabs from 'components/Tabs';
 import settingsTabLabels from 'utils/settingsTabsLabels';
-
-import SettingsTab from './Components/Tabs/SettingsTab';
-import NarratorTab from './Components/Tabs/NarratorTab';
-import BranchingTab from './Components/Tabs/BranchingTab';
-import messages from './messages';
+import {
+  makeSelectQuestionSettingsTab,
+  toggleQuestionSettings,
+  setCharacterDraggable,
+} from 'global/reducers/localState';
 import {
   makeSelectSelectedQuestion,
   makeSelectQuestions,
-  makeSelectQuestionSettingsTab,
-} from '../../../containers/EditInterventionPage/selectors';
-import {
-  toggleQuestionSettings,
-  setPeedyDraggable,
-} from '../../../containers/EditInterventionPage/actions';
+} from 'global/reducers/questions';
+
+import BranchingTab from './Components/Tabs/BranchingTab';
+import NarratorTab from './Components/Tabs/NarratorTab';
+import SettingsTab from './Components/Tabs/SettingsTab';
+import messages from './messages';
 
 const Settings = ({
   selectedQuestion: { narrator, settings, id, formula, type } = {},
@@ -90,7 +90,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   changeTab: toggleQuestionSettings,
-  setDraggable: setPeedyDraggable,
+  setDraggable: setCharacterDraggable,
 };
 
 const withConnect = connect(

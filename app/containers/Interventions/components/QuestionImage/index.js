@@ -1,31 +1,33 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import head from 'lodash/head';
-import { useDropzone } from 'react-dropzone';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { useDropzone } from 'react-dropzone';
 
-import Row from 'components/Row';
-import Img from 'components/Img';
-import H3 from 'components/H3';
-import Dropzone from 'components/Dropzone';
-import Column from 'components/Column';
-import Text from 'components/Text';
 import Box from 'components/Box';
+import Column from 'components/Column';
+import Dropzone from 'components/Dropzone';
+import H3 from 'components/H3';
 import HoverableBox from 'components/Box/HoverableBox';
-import imagePlaceholder from 'assets/svg/image-placeholder.svg';
-import { themeColors, borders } from 'theme';
+import Img from 'components/Img';
+import Row from 'components/Row';
+import Text from 'components/Text';
 import bin from 'assets/svg/bin-red.svg';
-import {
-  addQuestionImage,
-  deleteQuestionImage,
-} from '../../containers/EditInterventionPage/actions';
+import imagePlaceholder from 'assets/svg/image-placeholder.svg';
+import { makeSelectIsNarratorTab } from 'global/reducers/localState';
+import { themeColors, borders } from 'theme';
+import { useInjectSaga } from 'utils/injectSaga';
 import {
   makeSelectSelectedQuestion,
-  makeSelectIsNarratorTab,
-} from '../../containers/EditInterventionPage/selectors';
+  addQuestionImageRequest,
+  deleteQuestionImageRequest,
+  addQuestionImageSaga,
+  deleteQuestionImageSaga,
+} from 'global/reducers/questions';
+
 import { ImageWrapper } from './styled';
 import messages from './messages';
 
@@ -36,6 +38,8 @@ export const QuestionImage = ({
   intl: { formatMessage },
   isNarratorTab,
 }) => {
+  useInjectSaga({ key: 'addQuestionImage', saga: addQuestionImageSaga });
+  useInjectSaga({ key: 'deleteQuestionImage', saga: deleteQuestionImageSaga });
   const [hovered, setHovered] = useState(false);
 
   const handleDrop = useCallback(newFiles => {
@@ -159,15 +163,16 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  addImage: addQuestionImage,
-  deleteImage: deleteQuestionImage,
+  addImage: addQuestionImageRequest,
+  deleteImage: deleteQuestionImageRequest,
 };
-
-export const QuestionImageWithIntl = injectIntl(QuestionImage);
 
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(QuestionImageWithIntl);
+export default compose(
+  injectIntl,
+  withConnect,
+)(QuestionImage);

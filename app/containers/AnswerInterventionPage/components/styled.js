@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const animationDuration = 1480;
+import { animationDuration } from 'utils/animationsHelpers/constants';
 
 export const NarratorContainer = styled.div`
   position: absolute;

@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { injectIntl } from 'react-intl';
 
-import Row from 'components/Row';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Question from 'models/Intervention/Question';
-
+import Row from 'components/Row';
 import { colors } from 'theme';
+import {
+  makeSelectSelectedQuestion,
+  editQuestionRequest,
+} from 'global/reducers/questions';
+
 import messages from './messages';
-
-import { makeSelectSelectedQuestion } from '../../containers/EditInterventionPage/selectors';
-
-import { editQuestionRequest } from '../../containers/EditInterventionPage/actions';
 
 const QuestionTitle = ({
   selectedQuestion: { title },

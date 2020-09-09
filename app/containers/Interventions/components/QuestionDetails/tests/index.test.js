@@ -17,19 +17,7 @@ describe('<QuestionDetails />', () => {
   let store;
   const reducer = state => state;
   const initialState = {
-    editInterventionPage: {
-      questionSettings: {
-        visibility: false,
-        tab: settingsTabLabels.settings,
-      },
-      previewData: {
-        animation: 'standStill',
-        type: 'BodyAnimation',
-      },
-      animationPosition: {
-        x: 0,
-        y: elements.peedyInitialYPosition,
-      },
+    questions: {
       selectedQuestion: 0,
       questions: [
         {
@@ -64,6 +52,20 @@ describe('<QuestionDetails />', () => {
           },
         },
       ],
+    },
+    localState: {
+      questionSettings: {
+        visibility: false,
+        tab: settingsTabLabels.settings,
+      },
+      previewData: {
+        animation: 'standStill',
+        type: 'BodyAnimation',
+      },
+      animationPosition: {
+        x: 0,
+        y: elements.characterInitialYPosition,
+      },
     },
   };
 

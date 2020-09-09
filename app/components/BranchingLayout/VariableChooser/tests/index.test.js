@@ -12,7 +12,7 @@ describe('<VariableChooser />', () => {
   let store;
   const reducer = state => state;
   const initialState = {
-    editInterventionPage: {
+    questions: {
       questions: [],
     },
   };
@@ -70,7 +70,7 @@ describe('<VariableChooser />', () => {
 
   it('should match the snapshot with variables', () => {
     store = createStore(reducer, {
-      editInterventionPage: {
+      questions: {
         questions: [mockSingleQuestion()],
       },
     });
@@ -88,7 +88,7 @@ describe('<VariableChooser />', () => {
 
   it('should render <NoContent /> when all variables are empty strings', () => {
     store = createStore(reducer, {
-      editInterventionPage: {
+      questions: {
         questions: [mockSingleQuestion(1, false)],
       },
     });
@@ -110,7 +110,7 @@ describe('<VariableChooser />', () => {
     const question = mockSingleQuestion(1, true);
 
     store = createStore(reducer, {
-      editInterventionPage: {
+      questions: {
         questions: [question],
         selectedQuestion: 0,
       },

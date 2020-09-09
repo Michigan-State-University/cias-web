@@ -1,37 +1,34 @@
 import React, { useEffect, useReducer } from 'react';
-import get from 'lodash/get';
-import PropTypes from 'prop-types';
-import Lottie from 'react-lottie';
 import Draggable from 'react-draggable';
+import Lottie from 'react-lottie';
+import PropTypes from 'prop-types';
+import get from 'lodash/get';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import useAnimationHelper from 'utils/animationsHelpers/useAnimationHelper';
+import useAudioHelper from 'utils/animationsHelpers/useAudioHelper';
+import useDidUpdateEffect from 'utils/useDidUpdateEffect';
+import useResizeObserver from 'utils/useResizeObserver';
+import {
+  setAnimationStopPosition,
+  updatePreviewAnimation,
+  makeSelectCurrentNarratorBlockIndex,
+  makeSelectDraggable,
+  makeSelectAnimationPosition,
+  makeSelectPreviewData,
+} from 'global/reducers/localState';
 import {
   speechType,
   bodyAnimationType,
   headAnimationType,
 } from 'models/Narrator/BlockTypes';
-import useDidUpdateEffect from 'utils/useDidUpdateEffect';
-import {
-  setAnimationStopPosition,
-  updatePreviewAnimation,
-} from 'containers/Interventions/containers/EditInterventionPage/actions';
-import useAnimationHelper from 'containers/AnswerInterventionPage/animationsHelpers/animationHelper';
-import useAudioHelper from 'containers/AnswerInterventionPage/animationsHelpers/audioHelper';
-import useResizeObserver from 'utils/useResizeObserver';
-import { makeSelectCurrentNarratorBlockIndex } from 'global/reducers/localState';
 
 import { elements } from 'theme';
 import { NarratorContainer, lottieStyles } from './styled';
-import {
-  makeSelectDraggable,
-  makeSelectAnimationPosition,
-  makeSelectPreviewData,
-} from './selectors';
 import { saveNarratorMovement } from '../QuestionSettings/Settings/actions';
-
-import { PEEDY_SIZE } from './utils';
+import { CHARACTER_SIZE } from './utils';
 import { reducer, initialState, UPDATE } from './reducer';
 
 const QuestionNarrator = ({
@@ -204,11 +201,11 @@ const QuestionNarrator = ({
       elements.draggableContainerSize / containerWidthWithBorders,
     );
     if (scaleX > 1) {
-      const isPeedyOnTheRightHandSide = x > 0.5 * containerWidthWithBorders;
-      const peedySizeOffset = isPeedyOnTheRightHandSide
-        ? PEEDY_SIZE.width * scaleX - PEEDY_SIZE.width
+      const isCharacterOnTheRightHandSide = x > 0.5 * containerWidthWithBorders;
+      const characterSizeOffset = isCharacterOnTheRightHandSide
+        ? CHARACTER_SIZE.width * scaleX - CHARACTER_SIZE.width
         : 0;
-      const posX = Math.ceil(x * scaleX + peedySizeOffset);
+      const posX = Math.ceil(x * scaleX + characterSizeOffset);
       savePosition(currentBlockIndex, questionId, { x: posX, y });
       setOffset(posX, y);
     } else {
@@ -235,22 +232,22 @@ const QuestionNarrator = ({
       };
     }
 
-    const isPeedyOnTheRightHandSide =
+    const isCharacterOnTheRightHandSide =
       animationPositionStored.x > 0.5 * elements.draggableContainerSize;
-    const peedySizeOffset = isPeedyOnTheRightHandSide
-      ? PEEDY_SIZE.width - PEEDY_SIZE.width * scaleX
+    const characterSizeOffset = isCharacterOnTheRightHandSide
+      ? CHARACTER_SIZE.width - CHARACTER_SIZE.width * scaleX
       : 0;
     return {
       x: Math.min(
-        Math.floor(animationPositionStored.x * scaleX - peedySizeOffset),
-        elements.draggableContainerSize - PEEDY_SIZE.width,
+        Math.floor(animationPositionStored.x * scaleX - characterSizeOffset),
+        elements.draggableContainerSize - CHARACTER_SIZE.width,
       ),
       y: posY,
     };
   };
 
   return (
-    <NarratorContainer canBeDragged={draggable} width={PEEDY_SIZE.width}>
+    <NarratorContainer canBeDragged={draggable} width={CHARACTER_SIZE.width}>
       <Draggable
         onStop={(_, { x, y }) => handleSaveOffset(x, y)}
         position={getPosition()}
@@ -262,8 +259,8 @@ const QuestionNarrator = ({
             <Lottie
               ref={animationRef}
               options={defaultOptions}
-              height={PEEDY_SIZE.height}
-              width={PEEDY_SIZE.width}
+              height={CHARACTER_SIZE.height}
+              width={CHARACTER_SIZE.width}
               style={lottieStyles}
               isClickToPauseDisabled
               isStopped={

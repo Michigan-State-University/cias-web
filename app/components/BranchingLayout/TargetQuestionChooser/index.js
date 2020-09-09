@@ -33,7 +33,7 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestion,
   makeSelectSelectedQuestionIndex,
-} from 'containers/Interventions/containers/EditInterventionPage/selectors';
+} from 'global/reducers/questions';
 
 import messages from './messages';
 

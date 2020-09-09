@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { injectIntl, intlShape } from 'react-intl';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
@@ -11,14 +11,14 @@ import Img from 'components/Img';
 import Row from 'components/Row';
 import bin from 'assets/svg/bin-red.svg';
 import { colors } from 'theme';
+import { makeSelectIsNarratorTab } from 'global/reducers/localState';
+import {
+  makeSelectSelectedQuestion,
+  editQuestionRequest,
+} from 'global/reducers/questions';
 
 import messages from './messages';
 import { PlayerWrapper, Player } from './styled';
-import {
-  makeSelectSelectedQuestion,
-  makeSelectIsNarratorTab,
-} from '../../containers/EditInterventionPage/selectors';
-import { editQuestionRequest } from '../../containers/EditInterventionPage/actions';
 
 const isURLValid = url =>
   url.includes('youtube') || url.includes('vimeo') || url.includes('youtu.be');

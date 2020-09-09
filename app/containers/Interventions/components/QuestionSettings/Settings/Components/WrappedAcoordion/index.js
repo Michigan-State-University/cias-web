@@ -1,24 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
 import map from 'lodash/map';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { reorder } from 'react-reorder';
 import { createStructuredSelector } from 'reselect';
+import { reorder } from 'react-reorder';
 
 import Accordion from 'components/Accordion';
 import globalMessages from 'global/i18n/globalMessages';
+import { getNarratorPositionWhenBlockIsRemoved } from 'utils/getNarratorPosition';
 import {
-  setPeedyDraggable,
+  makeSelectQuestions,
+  makeSelectSelectedQuestionIndex,
+} from 'global/reducers/questions';
+import {
+  setCharacterDraggable,
   setAnimationStopPosition,
   updatePreviewAnimation,
-} from 'containers/Interventions/containers/EditInterventionPage/actions';
-import {
+  makeSelectAnimationPosition,
   changeCurrentNarratorBlock,
   makeSelectCurrentNarratorBlockIndex,
 } from 'global/reducers/localState';
-import { makeSelectAnimationPosition } from 'containers/Interventions/components/QuestionNarrator/selectors';
 
 import { getBlockColor, renderBlock } from '../utils';
 import { removeBlock, reorderNarratorBlocks } from '../../actions';
@@ -35,6 +39,8 @@ const WrappedAccordion = ({
   reorderBlocks,
   changeNarratorBlockIndex,
   narratorBlockIndex,
+  questions,
+  questionIndex,
 }) => {
   const { voice, animation } = narrator.settings;
 
@@ -57,6 +63,15 @@ const WrappedAccordion = ({
     if (narratorBlockIndex !== -1 && index === narrator.blocks.length - 1)
       changeNarratorBlockIndex(index - 1);
     deleteBlock(index, narratorBlockIndex);
+    const newQuestions = cloneDeep(questions);
+    newQuestions[questionIndex].narrator.blocks.splice(index, 1);
+    const position = getNarratorPositionWhenBlockIsRemoved(
+      newQuestions,
+      questionIndex,
+      index,
+      narratorBlockIndex,
+    );
+    setOffset(position.x, position.y);
   };
 
   const handleReorder = (event, previousIndex, nextIndex) => {
@@ -104,11 +119,13 @@ WrappedAccordion.propTypes = {
   }),
   changeNarratorBlockIndex: PropTypes.func,
   narratorBlockIndex: PropTypes.number,
+  questions: PropTypes.array,
+  questionIndex: PropTypes.number,
 };
 
 const mapDispatchToProps = {
   deleteBlock: removeBlock,
-  setDraggable: setPeedyDraggable,
+  setDraggable: setCharacterDraggable,
   setOffset: setAnimationStopPosition,
   updateNarratorPreviewAnimation: updatePreviewAnimation,
   reorderBlocks: reorderNarratorBlocks,
@@ -118,6 +135,8 @@ const mapDispatchToProps = {
 const mapStateToProps = createStructuredSelector({
   animationPosition: makeSelectAnimationPosition(),
   narratorBlockIndex: makeSelectCurrentNarratorBlockIndex(),
+  questions: makeSelectQuestions(),
+  questionIndex: makeSelectSelectedQuestionIndex(),
 });
 
 const withConnect = connect(

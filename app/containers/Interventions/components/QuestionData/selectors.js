@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
-import { selectEditInterventionPageDomain } from '../../containers/EditInterventionPage/selectors';
+import { selectQuestions } from 'global/reducers/questions';
 
 const makeSelectSelectedQuestionType = () =>
   createSelector(
-    selectEditInterventionPageDomain,
+    selectQuestions,
     substate => substate.questions[substate.selectedQuestion].type,
   );
 

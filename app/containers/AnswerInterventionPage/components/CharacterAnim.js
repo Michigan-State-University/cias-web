@@ -4,6 +4,10 @@ import isNumber from 'lodash/isNumber';
 import get from 'lodash/get';
 import Lottie from 'react-lottie';
 
+import useDidUpdateEffect from 'utils/useDidUpdateEffect';
+import useMoveHelper from 'utils/animationsHelpers/useMoveHelper';
+import useAudioHelper from 'utils/animationsHelpers/useAudioHelper';
+import useAnimationHelper from 'utils/animationsHelpers/useAnimationHelper';
 import {
   bodyAnimationType,
   speechType,
@@ -12,13 +16,9 @@ import {
   readQuestionBlockType,
   pauseType,
 } from 'models/Narrator/BlockTypes';
-import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
 import Draggable from 'react-draggable';
 import { NarratorContainer } from './styled';
-import useMoveHelper from '../animationsHelpers/useMoveHelperHook';
-import useAudioHelper from '../animationsHelpers/audioHelper';
-import useAnimationHelper from '../animationsHelpers/animationHelper';
 
 const UPDATE = 'UPDATE';
 

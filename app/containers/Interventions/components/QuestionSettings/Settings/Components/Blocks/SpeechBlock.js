@@ -1,38 +1,35 @@
 import React, { useEffect, useState, useMemo } from 'react';
-import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
+import join from 'lodash/join';
+import keys from 'lodash/keys';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import keys from 'lodash/keys';
-import join from 'lodash/join';
+import { createStructuredSelector } from 'reselect';
 
-import Column from 'components/Column';
 import Box from 'components/Box';
+import Column from 'components/Column';
 import Img from 'components/Img';
 import Loader from 'components/Loader';
-import { StyledInput } from 'components/Input/StyledInput';
-import Select from 'components/Select';
 import Row from 'components/Row';
+import Select from 'components/Select';
 import Switch from 'components/Switch';
-
+import globalMessages from 'global/i18n/globalMessages';
 import playButton from 'assets/svg/play-button-1.svg';
 import stopButton from 'assets/svg/stop-button-1.svg';
-
-import { splitAndKeep } from 'utils/splitAndKeep';
+import { StyledInput } from 'components/Input/StyledInput';
 import { colors } from 'theme';
-
-import { makeSelectLoader } from 'containers/Interventions/containers/EditInterventionPage/selectors';
+import { makeSelectLoader } from 'global/reducers/questions';
+import { speechAnimations } from 'utils/animations/animationsNames';
+import { speechType, readQuestionBlockType } from 'models/Narrator/BlockTypes';
+import { splitAndKeep } from 'utils/splitAndKeep';
 import {
+  makeSelectPreviewData,
   updatePreviewData,
   updatePreviewAnimation,
-} from 'containers/Interventions/containers/EditInterventionPage/actions';
-import { makeSelectPreviewData } from 'containers/Interventions/components/QuestionNarrator/selectors';
-import { speechType, readQuestionBlockType } from 'models/Narrator/BlockTypes';
+} from 'global/reducers/localState';
 
-import globalMessages from 'global/i18n/globalMessages';
-import { speechAnimations } from 'utils/animations/animationsNames';
-import messages from '../messages';
 import animationMessages from './messages';
+import messages from '../messages';
 import { updateSpeechSettings, switchSpeechReflection } from '../../actions';
 
 const BUTTON_MARGIN = '10px';
@@ -174,7 +171,7 @@ SpeechBlock.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  updateLoader: makeSelectLoader('updateQuestion'),
+  updateLoader: makeSelectLoader('updateQuestionLoading'),
   previewData: makeSelectPreviewData(),
 });
 

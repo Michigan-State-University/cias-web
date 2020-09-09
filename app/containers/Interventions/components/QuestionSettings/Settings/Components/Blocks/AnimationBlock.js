@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import camelCase from 'lodash/camelCase';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import camelCase from 'lodash/camelCase';
 
 import Chips from 'components/Chips';
+import { colors } from 'theme';
+import { updatePreviewAnimation } from 'global/reducers/localState';
 import {
   bodyAnimationType,
   headAnimationType,
 } from 'models/Narrator/BlockTypes';
-import { colors } from 'theme';
-import { updatePreviewAnimation } from 'containers/Interventions/containers/EditInterventionPage/actions';
 
 import { bodyAnimations, headAnimations } from './animations';
 import { updateNarratorAnimation } from '../../actions';

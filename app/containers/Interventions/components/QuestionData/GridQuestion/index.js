@@ -9,6 +9,7 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
+import PlusCircle from 'components/Circle/PlusCircle';
 import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
@@ -20,11 +21,13 @@ import { StyledInput } from 'components/Input/StyledInput';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors, elements } from 'theme';
+import {
+  makeSelectSelectedQuestion,
+  updateQuestionData,
+} from 'global/reducers/questions';
 
 import messages from './messages';
-import { PlusCircle } from '../../../containers/EditInterventionPage/styled';
-import { makeSelectSelectedQuestion } from '../../../containers/EditInterventionPage/selectors';
-import { updateQuestionData } from '../../../containers/EditInterventionPage/actions';
+
 import {
   ADD_ROW,
   ADD_COLUMN,

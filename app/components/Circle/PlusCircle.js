@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { colors, themeColors } from 'theme';
 import Circle from 'components/Circle';
 import plusSign from 'assets/svg/plus-white.svg';
@@ -14,4 +15,4 @@ PlusCircle.defaultProps = {
   color: colors.white,
 };
 
-export { PlusCircle };
+export default PlusCircle;

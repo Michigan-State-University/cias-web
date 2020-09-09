@@ -13,7 +13,7 @@ describe('<QuestionSubtitle />', () => {
 
   const reducer = state => state;
   const initialState = {
-    editInterventionPage: {
+    questions: {
       questions: [
         {
           subtitle: 'Example subtitle',

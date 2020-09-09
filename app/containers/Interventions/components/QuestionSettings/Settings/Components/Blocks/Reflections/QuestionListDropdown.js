@@ -17,7 +17,7 @@ import { htmlToPlainText } from 'utils/htmlToPlainText';
 import {
   makeSelectQuestions,
   makeSelectSelectedQuestion,
-} from 'containers/Interventions/containers/EditInterventionPage/selectors';
+} from 'global/reducers/questions';
 import {
   singleQuestion,
   multiQuestion,

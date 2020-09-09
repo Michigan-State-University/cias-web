@@ -21,7 +21,7 @@ export const findLastPositionInPreviousQuestions = (
     }
   }
 
-  return { x: 0, y: elements.peedyInitialYPosition };
+  return { x: 0, y: elements.characterInitialYPosition };
 };
 
 /**
@@ -39,7 +39,7 @@ export const getNarratorPositionForANewBlock = (
 
   // check if it is first question and there is no blocks
   if (questionIndex === 0 && blocks.length === 0) {
-    return { x: 0, y: elements.peedyInitialYPosition };
+    return { x: 0, y: elements.characterInitialYPosition };
   }
   // check if question already has blocks return position of the last block
   if (blocks.length !== 0) {
@@ -83,7 +83,8 @@ export const getNarratorPositionWhenBlockIsRemoved = (
   deletedIndex,
   openedBlockIndex,
 ) => {
-  if (isEmpty(allQuestions)) return { x: 0, y: elements.peedyInitialYPosition };
+  if (isEmpty(allQuestions))
+    return { x: 0, y: elements.characterInitialYPosition };
 
   const {
     narrator: { blocks },
@@ -105,3 +106,5 @@ export const getNarratorPositionWhenBlockIsRemoved = (
 
   return blocks[deletedIndex].endPosition;
 };
+
+export const getNarratorPositionWhenQuestionIsAdded = getNarratorPositionWhenBlockIsRemoved;

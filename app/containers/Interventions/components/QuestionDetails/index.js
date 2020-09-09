@@ -5,28 +5,30 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import Column from 'components/Column';
-import Row from 'components/Row';
 import Box from 'components/Box';
+import Column from 'components/Column';
 import Question from 'models/Intervention/Question';
-import { Button } from 'components/Button';
 
-import { colors } from 'theme';
-import QuestionPreview from 'containers/Interventions/components/QuestionDetails/QuestionPreview';
+import Row from 'components/Row';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { Button } from 'components/Button';
+import { colors } from 'theme';
+import { makeSelectIsNarratorTab } from 'global/reducers/localState';
+import { useInjectSaga } from 'utils/injectSaga';
 import {
   makeSelectSelectedQuestion,
-  makeSelectIsNarratorTab,
-} from '../../containers/EditInterventionPage/selectors';
-import { AnswerOuterContainer, AnswerInterventionContent } from './styled';
-import messages from './messages';
+  editQuestionSaga,
+} from 'global/reducers/questions';
 
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
-import QuestionVideo from '../QuestionVideo';
 import QuestionNarrator from '../QuestionNarrator';
+import QuestionPreview from './QuestionPreview';
 import QuestionSubtitle from '../QuestionSubtitle';
 import QuestionTitle from '../QuestionTitle';
+import QuestionVideo from '../QuestionVideo';
+import messages from './messages';
+import { AnswerOuterContainer, AnswerInterventionContent } from './styled';
 
 const QuestionDetails = props => (
   <Box
@@ -41,6 +43,7 @@ const QuestionDetails = props => (
 );
 
 const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
+  useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
   const animationBoundaries = useRef(null);
 
   if (selectedQuestion != null) {
