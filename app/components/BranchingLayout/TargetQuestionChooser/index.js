@@ -81,7 +81,7 @@ const TargetQuestionChooser = ({
 
   const chooseIntervention = (targetInterventionId, event) => {
     if (canSelectIntervention(targetInterventionId)) {
-      if (targetInterventionId === interventionId)
+      if (!problemBranching && targetInterventionId === interventionId)
         setIsInterventionView(false, event);
       else onClick({ type: 'Intervention', id: targetInterventionId });
     }
