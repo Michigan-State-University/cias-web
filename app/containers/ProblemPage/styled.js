@@ -17,13 +17,13 @@ export const StatusLabel = styled.button`
   line-height: 16px;
   border-radius: 5px;
   background: ${props =>
-    props.active ? themeColors.primary : props.color || themeColors.highlight};
+    props.active ? props.color || themeColors.highlight : colors.heather};
   color: ${props => props.active && colors.white};
   box-shadow: ${boxShadows.selago};
   transition: 0.3s;
   &:hover {
     cursor: pointer;
-    background: ${themeColors.primary};
+    background: ${props => props.color || themeColors.highlight};
     color: ${colors.white};
   }
   &:focus {

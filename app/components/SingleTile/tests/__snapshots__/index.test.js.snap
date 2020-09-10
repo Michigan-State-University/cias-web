@@ -113,7 +113,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #BDC7D6;
+  background: #107969;
   display: inline-block;
   margin-left: 5px;
 }
