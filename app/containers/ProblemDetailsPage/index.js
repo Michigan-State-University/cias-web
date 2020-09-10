@@ -143,7 +143,10 @@ export function ProblemDetailsPage({
   }, []);
 
   useEffect(() => {
-    if (!isNullOrUndefined(problem))
+    if (
+      !isNullOrUndefined(problem) &&
+      !isNullOrUndefined(interventions[interventionIndex])
+    )
       fetchQuestions(interventions[interventionIndex].id);
   }, [problem]);
 
