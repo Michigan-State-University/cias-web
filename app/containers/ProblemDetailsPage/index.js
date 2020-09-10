@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -27,6 +27,7 @@ import TextButton from 'components/Button/TextButton';
 import Text from 'components/Text';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
+import Spinner from 'components/Spinner';
 import {
   fetchProblemRequest,
   makeSelectProblemState,
@@ -58,7 +59,8 @@ import {
   getQuestionsSaga,
 } from 'global/reducers/questions';
 
-import Spinner from 'components/Spinner';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+
 import { StatusLabel, InterventionOptions, DraggedTest } from './styled';
 import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
@@ -139,6 +141,11 @@ export function ProblemDetailsPage({
   useLayoutEffect(() => {
     fetchProblem(problemId);
   }, []);
+
+  useEffect(() => {
+    if (!isNullOrUndefined(problem))
+      fetchQuestions(interventions[interventionIndex].id);
+  }, [problem]);
 
   const availableOptions = options.filter(
     elem => elem.id !== 'archive' || status === closed,
