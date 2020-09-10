@@ -15,4 +15,8 @@ export default defineMessages({
     id: `${scope}.numberValidationError`,
     defaultMessage: 'Only numerical values are allowed. E.g. 1, 2, 100.',
   },
+  endUserValue: {
+    id: `${scope}.endUserValue`,
+    defaultMessage: 'You',
+  },
 });

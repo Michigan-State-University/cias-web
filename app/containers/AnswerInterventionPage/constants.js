@@ -33,3 +33,6 @@ export const CHANGE_PREVIEW_MODE =
 
 export const CHANGE_IS_ANIMATING =
   'app/AnswerInterventionPage/CHANGE_IS_ANIMATING';
+
+export const SET_FEEDBACK_SCREEN_SETTINGS =
+  'app/AnswerInterventionPage/SET_FEEDBACK_SCREEN_SETTINGS';

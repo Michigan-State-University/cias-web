@@ -6,6 +6,7 @@ export const speechType = 'Speech';
 export const readQuestionBlockType = 'ReadQuestion';
 export const reflectionType = 'Reflection';
 export const pauseType = 'Pause';
+export const feedbackBlockType = 'Feedback';
 
 export const blockTypes = [
   speechType,
@@ -13,6 +14,7 @@ export const blockTypes = [
   headAnimationType,
   readQuestionBlockType,
   pauseType,
+  feedbackBlockType,
 ];
 
 export const blockTypeToColorMap = {
@@ -22,4 +24,5 @@ export const blockTypeToColorMap = {
   [headAnimationType]: colors.golden,
   [readQuestionBlockType]: colors.electricViolet,
   [pauseType]: colors.coral,
+  [feedbackBlockType]: colors.black,
 };

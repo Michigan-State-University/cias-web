@@ -9,6 +9,7 @@ import {
   readQuestionBlockType,
   reflectionType,
   pauseType,
+  feedbackBlockType,
 } from 'models/Narrator/BlockTypes';
 
 import AnimationBlock from './Blocks/AnimationBlock';
@@ -29,6 +30,8 @@ export const getBlockColor = (type, { animation, voice }) => {
       return animation ? blockTypeToColorMap[type] : colors.grey;
     case pauseType:
       return animation || voice ? blockTypeToColorMap[type] : colors.grey;
+    case feedbackBlockType:
+      return blockTypeToColorMap[type];
     default:
       return null;
   }

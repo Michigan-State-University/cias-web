@@ -4,6 +4,7 @@ import {
   multiQuestion,
   singleQuestion,
   informationQuestion,
+  feedbackQuestion,
 } from 'models/Intervention/QuestionTypes';
 import Question from 'models/Intervention/Question';
 
@@ -51,6 +52,16 @@ const instantiateEmptyQuestion = (message, type) => {
     case informationQuestion.id:
       return new Question(message, type, {
         data: [],
+      });
+
+    case feedbackQuestion.id:
+      return new Question(message, type, {
+        data: [
+          {
+            payload: { start_value: '', end_value: '', target_value: '' },
+            spectrum: { payload: '', patterns: [] },
+          },
+        ],
       });
 
     default:

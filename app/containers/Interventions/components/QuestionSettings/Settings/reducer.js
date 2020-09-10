@@ -10,7 +10,7 @@ import {
   UPDATE_FORMULA,
   ADD_FORMULA_CASE,
   REMOVE_FORMULA_CASE,
-  UPDATE_SPEECH_SETTINGS,
+  UPDATE_BLOCK_SETTINGS,
   UPDATE_NARRATOR_MOVEMENT,
   UPDATE_FORMULA_CASE,
   REMOVE_BLOCK,
@@ -82,7 +82,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       };
     }
 
-    case UPDATE_SPEECH_SETTINGS: {
+    case UPDATE_BLOCK_SETTINGS: {
       const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
       cloneBlocks[payload.data.index] = {
         ...cloneBlocks[payload.data.index],
@@ -129,8 +129,9 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
           : speechType;
       cloneBlocks[payload.data.index] = {
         ...instantiateBlockForType(newBlockType),
-        position: cloneBlocks[payload.data.index].endPosition,
+        endPosition: cloneBlocks[payload.data.index].endPosition,
         animation: cloneBlocks[payload.data.index].animation,
+        action: cloneBlocks[payload.data.index].action,
       };
 
       return {

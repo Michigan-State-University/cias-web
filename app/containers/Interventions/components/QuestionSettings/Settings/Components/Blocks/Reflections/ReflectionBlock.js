@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import keys from 'lodash/keys';
+import values from 'lodash/values';
 
 import Column from 'components/Column';
 import Box from 'components/Box';
@@ -19,6 +20,7 @@ import {
   singleQuestion,
   gridQuestion,
   multiQuestion,
+  feedbackQuestion,
 } from 'models/Intervention/QuestionTypes';
 import { findQuestionById } from 'models/Intervention/utils';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
@@ -27,14 +29,15 @@ import {
   makeSelectLoader,
   makeSelectSelectedQuestion,
   makeSelectQuestions,
+  makeSelectSelectedQuestionType,
 } from 'global/reducers/questions';
 import { makeSelectPreviewData } from 'global/reducers/localState';
 
-import globalMessages from 'global/i18n/globalMessages';
+import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import { speechAnimations } from 'utils/animations/animationsNames';
 import messages from '../../messages';
 import animationMessages from '../messages';
-import { updateSpeechSettings, switchSpeechReflection } from '../../../actions';
+import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
 
 import QuestionListDropdown from './QuestionListDropdown';
 import Reflection from './Reflection';
@@ -99,6 +102,8 @@ const ReflectionBlock = ({
   switchToSpeech,
   questions,
   updateQuestion,
+  currentQuestionType,
+  updateAction,
 }) => {
   const [targetChooserOpen, setTargetChooserOpen] = useState(false);
 
@@ -113,23 +118,58 @@ const ReflectionBlock = ({
     }));
   }, [speechAnimations]);
 
+  const feedbackOptions = useMemo(() => {
+    const options = values(feedbackActions).filter(
+      action => action !== feedbackActions.showSpectrum,
+    );
+
+    return options.map(option => ({
+      value: option,
+      label: formatMessage(messages[option]),
+    }));
+  }, [feedbackActions]);
+
   const selectedOption = selectOptions.find(
     option => option.value === block.animation,
   );
 
+  const selectedFeedbackOption = feedbackOptions.find(
+    option => option.value === block.action,
+  );
+
+  const hasSpecialPositioning = block.action !== feedbackActions.noAction;
+
   return (
     <Column>
-      <Box mt={15}>{formatMessage(globalMessages.blockTypes[block.type])}</Box>
-      <Box my={15}>
-        <Select
-          selectProps={{
-            options: selectOptions,
-            value: selectedOption,
-            onChange: ({ value }) => updateAnimation(blockIndex, value, id),
-          }}
-        />
-      </Box>
-      <Row mb={15} align="center" justify="between">
+      {currentQuestionType === feedbackQuestion.id && (
+        <>
+          <Box mt={15}>{formatMessage(messages.selectActionPosition)}</Box>
+          <Box mt={15}>
+            <Select
+              selectProps={{
+                options: feedbackOptions,
+                value: selectedFeedbackOption,
+                onChange: ({ value }) => updateAction(blockIndex, value, id),
+              }}
+            />
+          </Box>
+        </>
+      )}
+      {!hasSpecialPositioning && (
+        <>
+          <Box mt={15}>{formatMessage(messages.speechAnimation)}</Box>
+          <Box mt={15}>
+            <Select
+              selectProps={{
+                options: selectOptions,
+                value: selectedOption,
+                onChange: ({ value }) => updateAnimation(blockIndex, value, id),
+              }}
+            />
+          </Box>
+        </>
+      )}
+      <Row my={15} align="center" justify="between">
         {formatMessage(messages.reflectionToggle)}
         <Switch
           checked
@@ -197,6 +237,8 @@ ReflectionBlock.propTypes = {
   switchToSpeech: PropTypes.func,
   updateQuestion: PropTypes.func,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
+  updateAction: PropTypes.func,
+  currentQuestionType: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -204,15 +246,25 @@ const mapStateToProps = createStructuredSelector({
   previewData: makeSelectPreviewData(),
   selectedQuestion: makeSelectSelectedQuestion(),
   questions: makeSelectQuestions(),
+  currentQuestionType: makeSelectSelectedQuestionType(),
 });
 
 const mapDispatchToProps = {
-  updateText: (index, text, id) => updateSpeechSettings(index, { text }, id),
+  updateText: (index, text, id) => updateBlockSettings(index, { text }, id),
   updateAnimation: (index, animation, id) =>
-    updateSpeechSettings(index, { animation }, id),
+    updateBlockSettings(index, { animation }, id),
   switchToSpeech: (index, id) => switchSpeechReflection(index, id),
   updateQuestion: (index, { questionId, reflections }, id) =>
-    updateSpeechSettings(index, { question_id: questionId, reflections }, id),
+    updateBlockSettings(index, { question_id: questionId, reflections }, id),
+  updateAction: (index, action, id) =>
+    updateBlockSettings(
+      index,
+      {
+        action,
+        animation: action === feedbackActions.noAction ? 'rest' : 'pointUp',
+      },
+      id,
+    ),
 };
 
 const withConnect = connect(

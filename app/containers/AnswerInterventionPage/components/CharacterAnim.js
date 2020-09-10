@@ -15,10 +15,12 @@ import {
   reflectionType,
   readQuestionBlockType,
   pauseType,
+  feedbackBlockType,
 } from 'models/Narrator/BlockTypes';
 
 import Draggable from 'react-draggable';
 import { NarratorContainer } from './styled';
+import useFeedbackHelper from '../animationsHelpers/feedbackHelper';
 
 const UPDATE = 'UPDATE';
 
@@ -52,6 +54,8 @@ const CharacterAnim = ({
   previewMode,
   answers,
   changeIsAnimationOngoing,
+  setFeedbackSettings,
+  feedbackScreenSettings: { sliderRef },
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const dispatchUpdate = newState =>
@@ -79,21 +83,34 @@ const CharacterAnim = ({
       (isNumber(prevIndex) ? prevIndex : state.currentBlockIndex) + 1;
     const nextBlock = blocks[nextIndex];
     if (nextBlock) {
-      await moveAnimation(nextBlock);
+      const newPosition = calculatePosition(
+        nextBlock.action,
+        nextBlock.endPosition,
+      );
+
+      await moveAnimation({ ...nextBlock, endPosition: newPosition });
       switch (nextBlock.type) {
         case bodyAnimationType:
         case headAnimationType:
           changeAnimation(nextBlock, nextIndex);
           break;
+
         case speechType:
         case reflectionType:
         case readQuestionBlockType:
           changeSpeech(nextBlock, nextIndex);
           break;
+
         case pauseType:
           handlePauseBlock(nextBlock, nextIndex);
           break;
+
+        case feedbackBlockType:
+          changeFeedback(nextBlock, nextIndex);
+          break;
+
         default:
+          changeBlock(nextIndex);
           break;
       }
     } else {
@@ -113,6 +130,7 @@ const CharacterAnim = ({
     clearAnimationBlock,
     animationRef,
     fetchBodyAndHeadAnimations,
+    loadedAnimations,
   } = useAnimationHelper(
     blocks,
     dispatchUpdate,
@@ -139,6 +157,22 @@ const CharacterAnim = ({
     settings,
   );
 
+  const {
+    getInitialFeedbackData,
+    changeFeedback,
+    handleFeedbackBlock,
+    calculatePosition,
+  } = useFeedbackHelper(
+    blocks,
+    dispatchUpdate,
+    changeBlock,
+    state.currentData,
+    setFeedbackSettings,
+    sliderRef,
+    animationRef.current,
+    loadedAnimations,
+  );
+
   const { animationPos, moveAnimation, fetchMoveAnimations } = useMoveHelper(
     animationContainer,
     blocks,
@@ -157,6 +191,9 @@ const CharacterAnim = ({
         case bodyAnimationType:
           return getInitialBodyOrHeadAnimation();
 
+        case feedbackBlockType:
+          return getInitialFeedbackData();
+
         default:
           break;
       }
@@ -165,7 +202,14 @@ const CharacterAnim = ({
 
   useEffect(() => {
     const fetch = async () => {
-      await moveAnimation(blocks[0]);
+      if (blocks[0]) {
+        const newPosition = calculatePosition(
+          blocks[0].action,
+          blocks[0].endPosition,
+        );
+
+        await moveAnimation({ ...blocks[0], endPosition: newPosition });
+      }
       await fetchBodyAndHeadAnimations();
       await fetchAudioAnimations();
       await fetchMoveAnimations();
@@ -194,6 +238,10 @@ const CharacterAnim = ({
           else handleAudioBlock();
           break;
 
+        case feedbackBlockType:
+          handleFeedbackBlock();
+          break;
+
         default:
           break;
       }
@@ -211,7 +259,8 @@ const CharacterAnim = ({
 
   const decideIfLoopAnimation = () =>
     (get(state, 'currentData.type', 'none') === speechType ||
-      get(state, 'currentData.type', 'none') === reflectionType) &&
+      get(state, 'currentData.type', 'none') === reflectionType ||
+      get(state, 'currentData.type', 'none') === readQuestionBlockType) &&
     get(state, 'currentData.isLoop', false);
 
   const getAnimationOptions = () => {
@@ -287,6 +336,8 @@ CharacterAnim.propTypes = {
   previewMode: PropTypes.string,
   answers: PropTypes.object,
   changeIsAnimationOngoing: PropTypes.func,
+  setFeedbackSettings: PropTypes.func,
+  feedbackScreenSettings: PropTypes.object,
 };
 
 export default CharacterAnim;

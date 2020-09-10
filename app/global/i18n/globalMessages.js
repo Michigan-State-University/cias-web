@@ -46,6 +46,10 @@ export default defineMessages({
       id: `${scope}.Pause`,
       defaultMessage: 'Pause',
     },
+    Feedback: {
+      id: `${scope}.Feedback`,
+      defaultMessage: 'Show Spectrum',
+    },
   },
   questionTypes: {
     'Question::Single': {
@@ -83,6 +87,10 @@ export default defineMessages({
     'Question::FollowUpContact': {
       id: `${scope}.Question::FollowUpContact`,
       defaultMessage: 'FollowUpContact screen',
+    },
+    'Question::Feedback': {
+      id: `${scope}.Question::Feedback`,
+      defaultMessage: 'Feedback screen',
     },
   },
   statuses: {

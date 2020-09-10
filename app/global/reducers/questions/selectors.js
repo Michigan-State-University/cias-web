@@ -46,3 +46,9 @@ export const makeSelectQuestionsLength = () =>
     selectQuestions,
     substate => substate.questions.length,
   );
+
+export const makeSelectSelectedQuestionType = () =>
+  createSelector(
+    selectQuestions,
+    substate => substate.questions[substate.selectedQuestion].type,
+  );

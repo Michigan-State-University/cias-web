@@ -48,6 +48,7 @@ import {
   setQuestionIndex,
   startIntervention,
   changeIsAnimating,
+  setFeedbackScreenSettings,
 } from './actions';
 
 const AnimationRefHelper = ({
@@ -57,6 +58,8 @@ const AnimationRefHelper = ({
   previewMode,
   answers,
   changeIsAnimationOngoing,
+  setFeedbackSettings,
+  feedbackScreenSettings,
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
@@ -75,6 +78,8 @@ const AnimationRefHelper = ({
           previewMode={previewMode}
           answers={answers}
           changeIsAnimationOngoing={changeIsAnimationOngoing}
+          setFeedbackSettings={setFeedbackSettings}
+          feedbackScreenSettings={feedbackScreenSettings}
         />
       )}
     </AnswerInterventionContent>
@@ -87,6 +92,8 @@ AnimationRefHelper.propTypes = {
   previewMode: PropTypes.any,
   answers: PropTypes.object,
   changeIsAnimationOngoing: PropTypes.func,
+  setFeedbackSettings: PropTypes.func,
+  feedbackScreenSettings: PropTypes.object,
 };
 
 export function AnswerInterventionPage({
@@ -99,6 +106,7 @@ export function AnswerInterventionPage({
   onStartIntervention,
   showError,
   changeIsAnimationOngoing,
+  setFeedbackSettings,
   answerInterventionPage: {
     interventionQuestions,
     questionError,
@@ -109,6 +117,7 @@ export function AnswerInterventionPage({
     interventionStarted,
     previewMode,
     isAnimationOngoing,
+    feedbackScreenSettings,
   },
 }) {
   useInjectReducer({ key: 'answerInterventionPage', reducer });
@@ -174,6 +183,8 @@ export function AnswerInterventionPage({
       questionIndex,
       saveAnswer,
       showError,
+      feedbackScreenSettings,
+      setFeedbackSettings,
     };
     const handleBackClick = () => {
       if (answers[currentQuestionId]) {
@@ -257,6 +268,8 @@ export function AnswerInterventionPage({
                   previewMode={previewMode}
                   answers={answers}
                   changeIsAnimationOngoing={changeIsAnimationOngoing}
+                  setFeedbackSettings={setFeedbackSettings}
+                  feedbackScreenSettings={feedbackScreenSettings}
                 >
                   {renderPage()}
                 </AnimationRefHelper>
@@ -288,6 +301,7 @@ AnswerInterventionPage.propTypes = {
   setQuestionIndexAction: PropTypes.func,
   showError: PropTypes.func,
   changeIsAnimationOngoing: PropTypes.func,
+  setFeedbackSettings: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -298,10 +312,11 @@ const mapDispatchToProps = {
   fetchQuestionsAction: fetchQuestions,
   submitAnswerRequest: submitAnswer,
   saveSelectedAnswer: selectAnswer,
-  setQuestionIndexAction: setQuestionIndex,
+  setQuestionIndexAction: index => setQuestionIndex({ index }),
   onStartIntervention: startIntervention,
   showError: error,
   changeIsAnimationOngoing: changeIsAnimating,
+  setFeedbackSettings: setFeedbackScreenSettings,
 };
 
 const withConnect = connect(

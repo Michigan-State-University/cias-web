@@ -4,15 +4,20 @@ import map from 'lodash/map';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import lastKey from 'utils/getLastKey';
 
+import SpectrumSettings from 'containers/Interventions/components/QuestionData/FeedbackQuestion/SpectrumSettings';
+import Box from 'components/Box';
 import H3 from 'components/H3';
 import Row from 'components/Row';
 import Select from 'components/Select';
 import Switch from 'components/Switch';
 import Text from 'components/Text';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import lastKey from 'utils/getLastKey';
-import { QuestionTypes } from 'models/Intervention/QuestionTypes';
+import {
+  QuestionTypes,
+  feedbackQuestion,
+} from 'models/Intervention/QuestionTypes';
 import { changeQuestionTypeRequest } from 'global/reducers/questions';
 import { colors, borders } from 'theme';
 
@@ -48,6 +53,32 @@ const SettingsTab = ({
 }) => {
   const orderedSettings = orderSettings(settings);
   const last = lastKey(orderedSettings);
+
+  const renderQuestionSpecificSettings = () => {
+    let component;
+
+    switch (type) {
+      case feedbackQuestion.id:
+        component = <SpectrumSettings />;
+        break;
+      default:
+        component = null;
+        break;
+    }
+
+    if (component)
+      return (
+        <Box
+          borderTop={`${borders.borderWidth} ${borders.borderStyle} ${
+            colors.linkWater
+          }`}
+        >
+          {component}
+        </Box>
+      );
+
+    return null;
+  };
 
   const selectOptions = useMemo(
     () =>
@@ -104,6 +135,7 @@ const SettingsTab = ({
           />
         </Row>
       ))}
+      {renderQuestionSpecificSettings()}
     </Fragment>
   );
 };

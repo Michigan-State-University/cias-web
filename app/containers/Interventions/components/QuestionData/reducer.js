@@ -6,6 +6,7 @@ import {
   gridQuestion,
   visualAnalogueScaleQuestion,
   urlQuestion,
+  feedbackQuestion,
 } from 'models/Intervention/QuestionTypes';
 
 import gridQuestionReducer from './GridQuestion/reducer';
@@ -14,6 +15,7 @@ import numberQuestionReducer from './NumberQuestion/reducer';
 import singleQuestionReducer from './SingleQuestion/reducer';
 import textboxQuestionReducer from './TextboxQuestion/reducer';
 import urlQuestionReducer from './UrlQuestion/reducer';
+import feedbackQuestionReducer from './FeedbackQuestion/reducer';
 import visualAnalogueScaleQuestionReducer from './VisualAnalogueScaleQuestion/reducer';
 
 /* eslint-disable default-case, no-param-reassign */
@@ -33,6 +35,8 @@ const questionDataReducer = (question, data) => {
       return visualAnalogueScaleQuestionReducer(question, data);
     case urlQuestion.id:
       return urlQuestionReducer(question, data);
+    case feedbackQuestion.id:
+      return feedbackQuestionReducer(question, data);
     default:
       return question;
   }

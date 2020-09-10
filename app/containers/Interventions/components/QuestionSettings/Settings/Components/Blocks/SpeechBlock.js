@@ -5,6 +5,7 @@ import keys from 'lodash/keys';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import values from 'lodash/values';
 
 import Box from 'components/Box';
 import Column from 'components/Column';
@@ -13,12 +14,15 @@ import Loader from 'components/Loader';
 import Row from 'components/Row';
 import Select from 'components/Select';
 import Switch from 'components/Switch';
-import globalMessages from 'global/i18n/globalMessages';
+
 import playButton from 'assets/svg/play-button-1.svg';
 import stopButton from 'assets/svg/stop-button-1.svg';
 import { StyledInput } from 'components/Input/StyledInput';
 import { colors } from 'theme';
-import { makeSelectLoader } from 'global/reducers/questions';
+import {
+  makeSelectLoader,
+  makeSelectSelectedQuestionType,
+} from 'global/reducers/questions';
 import { speechAnimations } from 'utils/animations/animationsNames';
 import { speechType, readQuestionBlockType } from 'models/Narrator/BlockTypes';
 import { splitAndKeep } from 'utils/splitAndKeep';
@@ -28,9 +32,11 @@ import {
   updatePreviewAnimation,
 } from 'global/reducers/localState';
 
+import { feedbackQuestion } from 'models/Intervention/QuestionTypes';
+import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import animationMessages from './messages';
+import { updateBlockSettings, switchSpeechReflection } from '../../actions';
 import messages from '../messages';
-import { updateSpeechSettings, switchSpeechReflection } from '../../actions';
 
 const BUTTON_MARGIN = '10px';
 
@@ -46,6 +52,8 @@ const SpeechBlock = ({
   updateNarratorPreviewAnimation,
   previewData,
   switchToReflection,
+  updateAction,
+  currentQuestionType,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(block.text, ''));
@@ -68,6 +76,17 @@ const SpeechBlock = ({
       label: formatMessage(animationMessages[animation]),
     }));
   }, [speechAnimations]);
+
+  const feedbackOptions = useMemo(() => {
+    const options = values(feedbackActions).filter(
+      action => action !== feedbackActions.showSpectrum,
+    );
+
+    return options.map(option => ({
+      value: option,
+      label: formatMessage(messages[option]),
+    }));
+  }, [feedbackActions]);
 
   const handleTextUpdate = value =>
     updateText(blockIndex, splitAndKeep(value, [',', '.', '?', '!']), id);
@@ -95,6 +114,12 @@ const SpeechBlock = ({
     option => option.value === block.animation,
   );
 
+  const selectedFeedbackOption = feedbackOptions.find(
+    option => option.value === block.action,
+  );
+
+  const hasSpecialPositioning = block.action !== feedbackActions.noAction;
+
   const renderButton = () => {
     if (isSpeechUpdating) return <Loader size={24} type="inline" />;
 
@@ -103,20 +128,35 @@ const SpeechBlock = ({
 
   return (
     <Column>
-      {block.type !== readQuestionBlockType && (
-        <Box mt={15}>
-          {formatMessage(globalMessages.blockTypes[block.type])}
-        </Box>
+      {currentQuestionType === feedbackQuestion.id &&
+        block.type !== readQuestionBlockType && (
+          <>
+            <Box mt={15}>{formatMessage(messages.selectActionPosition)}</Box>
+            <Box mt={15}>
+              <Select
+                selectProps={{
+                  options: feedbackOptions,
+                  value: selectedFeedbackOption,
+                  onChange: ({ value }) => updateAction(blockIndex, value, id),
+                }}
+              />
+            </Box>
+          </>
+        )}
+      {!hasSpecialPositioning && (
+        <>
+          <Box mt={15}>{formatMessage(messages.speechAnimation)}</Box>
+          <Box mt={15}>
+            <Select
+              selectProps={{
+                options: selectOptions,
+                value: selectedOption,
+                onChange: ({ value }) => updateAnimation(blockIndex, value, id),
+              }}
+            />
+          </Box>
+        </>
       )}
-      <Box mt={15}>
-        <Select
-          selectProps={{
-            options: selectOptions,
-            value: selectedOption,
-            onChange: ({ value }) => updateAnimation(blockIndex, value, id),
-          }}
-        />
-      </Box>
       {block.type !== readQuestionBlockType && (
         <>
           <Row mt={15} align="center" justify="between">
@@ -168,20 +208,32 @@ SpeechBlock.propTypes = {
   updateNarratorPreviewAnimation: PropTypes.func,
   previewData: PropTypes.object,
   switchToReflection: PropTypes.func,
+  updateAction: PropTypes.func,
+  currentQuestionType: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   updateLoader: makeSelectLoader('updateQuestionLoading'),
   previewData: makeSelectPreviewData(),
+  currentQuestionType: makeSelectSelectedQuestionType(),
 });
 
 const mapDispatchToProps = {
-  updateText: (index, text, id) => updateSpeechSettings(index, { text }, id),
+  updateText: (index, text, id) => updateBlockSettings(index, { text }, id),
   updateAnimation: (index, animation, id) =>
-    updateSpeechSettings(index, { animation }, id),
+    updateBlockSettings(index, { animation }, id),
   updateNarratorPreviewData: updatePreviewData,
   updateNarratorPreviewAnimation: updatePreviewAnimation,
   switchToReflection: (index, id) => switchSpeechReflection(index, id),
+  updateAction: (index, action, id) =>
+    updateBlockSettings(
+      index,
+      {
+        action,
+        animation: action === feedbackActions.noAction ? 'rest' : 'pointUp',
+      },
+      id,
+    ),
 };
 
 const withConnect = connect(

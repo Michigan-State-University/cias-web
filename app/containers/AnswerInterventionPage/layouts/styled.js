@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import ReactPlayer from 'react-player/lazy';
 
+import { themeColors } from 'theme';
+
+import AppSlider from 'components/AppSlider';
+
 const aspectRatio = 9 / 16;
 
 export const PlayerWrapper = styled.div`
@@ -20,4 +24,40 @@ export const Player = styled(ReactPlayer)`
 export const ImageWrapper = styled.div`
   height: 100%;
   max-width: 100%;
+`;
+
+export const ValueSliderStyled = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 25px;
+  border: none;
+  color: ${themeColors.secondary};
+  font-weight: 600;
+`;
+
+export const ValueSliderWrapperStyled = styled.div`
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+`;
+
+export const CustomSlider = styled(AppSlider)`
+  .rc-slider-step {
+    .rc-slider-dot:not(:first-child):not(:last-child) {
+      visibility: hidden;
+    }
+  }
+
+  &.rc-slider-disabled {
+    background-color: transparent;
+  }
+
+  ${({ withSpectrum }) =>
+    !withSpectrum && {
+      '.rc-slider-handle': { visibility: 'hidden' },
+      '.rc-slider-track': { visibility: 'hidden' },
+    }}
 `;

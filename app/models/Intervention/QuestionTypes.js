@@ -49,6 +49,12 @@ export const urlQuestion = new QuestionType(
   colors.jungleGreen,
 );
 
+export const feedbackQuestion = new QuestionType(
+  'Question::Feedback',
+  'Feedback',
+  colors.grey,
+);
+
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
@@ -58,4 +64,5 @@ export const QuestionTypes = [
   visualAnalogueScaleQuestion,
   informationQuestion,
   urlQuestion,
+  feedbackQuestion,
 ];

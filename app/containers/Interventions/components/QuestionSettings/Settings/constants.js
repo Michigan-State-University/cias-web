@@ -11,8 +11,8 @@ export const REMOVE_BLOCK = 'app/EditInterventionPage/Settings/REMOVE_BLOCK';
 export const UPDATE_NARRATOR_ANIMATION =
   'app/EditInterventionPage/Settings/UPDATE_NARRATOR_ANIMATION';
 
-export const UPDATE_SPEECH_SETTINGS =
-  'app/EditInterventionPage/Settings/UPDATE_SPEECH_SETTINGS';
+export const UPDATE_BLOCK_SETTINGS =
+  'app/EditInterventionPage/Settings/UPDATE_BLOCK_SETTINGS';
 
 export const UPDATE_REFLECTION =
   'app/EditInterventionPage/Settings/UPDATE_REFLECTION';

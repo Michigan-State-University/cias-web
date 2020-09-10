@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
+import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
 import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 
 import Box from 'components/Box';
 import H3 from 'components/H3';
@@ -15,6 +15,7 @@ import lastKey from 'utils/getLastKey';
 import { colors, borders } from 'theme';
 import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
 import { makeSelectCurrentNarratorBlockIndex } from 'global/reducers/localState';
+import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 
 import BlockTypeChooser from '../BlockTypeChooser';
 import WrappedAccordion from '../WrappedAcoordion';
@@ -28,6 +29,7 @@ const NarratorTab = ({
   onCreate,
   id,
   currentBlockIndex,
+  currentQuestionType,
 }) => {
   if (!narrator) {
     return <></>;
@@ -89,6 +91,7 @@ const NarratorTab = ({
         narrator={narrator}
       />
       <BlockTypeChooser
+        questionType={currentQuestionType}
         disableReadQuestionBlockType={readQuestionBlockTypePresent}
         onClick={onCreateBlock}
       />
@@ -103,10 +106,12 @@ NarratorTab.propTypes = {
   onNarratorToggle: PropTypes.func.isRequired,
   onCreate: PropTypes.func,
   currentBlockIndex: PropTypes.number,
+  currentQuestionType: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   currentBlockIndex: makeSelectCurrentNarratorBlockIndex(),
+  currentQuestionType: makeSelectSelectedQuestionType(),
 });
 
 const mapDispatchToProps = {

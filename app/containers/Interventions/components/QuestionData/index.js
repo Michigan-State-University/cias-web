@@ -5,7 +5,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
-import { updateQuestionDataSaga } from 'global/reducers/questions';
+import {
+  updateQuestionDataSaga,
+  makeSelectSelectedQuestionType,
+} from 'global/reducers/questions';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
   singleQuestion,
@@ -15,6 +18,7 @@ import {
   gridQuestion,
   visualAnalogueScaleQuestion,
   urlQuestion,
+  feedbackQuestion,
 } from 'models/Intervention/QuestionTypes';
 
 import GridQuestion from './GridQuestion';
@@ -24,7 +28,7 @@ import SingleQuestion from './SingleQuestion';
 import TextboxQuestion from './TextboxQuestion';
 import UrlQuestion from './UrlQuestion';
 import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
-import { makeSelectSelectedQuestionType } from './selectors';
+import FeedbackQuestion from './FeedbackQuestion';
 
 const QuestionData = ({ selectedQuestionType, isNarratorTab }) => {
   useInjectSaga({ key: 'updateQuestionData', saga: updateQuestionDataSaga });
@@ -47,6 +51,8 @@ const QuestionData = ({ selectedQuestionType, isNarratorTab }) => {
       return <VisualAnalogueScaleQuestion {...commonProps} />;
     case urlQuestion.id:
       return <UrlQuestion {...commonProps} />;
+    case feedbackQuestion.id:
+      return <FeedbackQuestion {...commonProps} />;
     default:
       return null;
   }

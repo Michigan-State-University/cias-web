@@ -34,12 +34,14 @@ import {
   makeSelectLoader,
 } from 'global/reducers/questions';
 
+import editInterventionPageSaga from './saga';
+
 import EmptyInterventionPage from '../../components/EmptyInterventionPage';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionListItem from '../../components/QuestionListItem';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
-import editInterventionPageSaga from './saga';
+
 import messages from './messages';
 import { useLockEditInterventionPageScroll } from './utils';
 

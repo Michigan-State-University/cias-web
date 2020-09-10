@@ -1,4 +1,5 @@
 import { defineMessages } from 'react-intl';
+import { feedbackActions } from 'models/Narrator/FeedbackActions';
 
 export const scope = 'app.containers.DefaultSettings';
 
@@ -94,5 +95,37 @@ export default defineMessages({
   characterMovable: {
     id: `${scope}.characterMovable`,
     defaultMessage: `You can now replace the character by dragging it.`,
+  },
+  [feedbackActions.showSpectrum]: {
+    id: `${scope}.${feedbackActions.showSpectrum}`,
+    defaultMessage: 'Show Spectrum',
+  },
+  [feedbackActions.showUserValue]: {
+    id: `${scope}.${feedbackActions.showUserValue}`,
+    defaultMessage: 'Show End-User Value',
+  },
+  [feedbackActions.showLowerValue]: {
+    id: `${scope}.${feedbackActions.showLowerValue}`,
+    defaultMessage: 'Show Lower Value',
+  },
+  [feedbackActions.showHigherValue]: {
+    id: `${scope}.${feedbackActions.showHigherValue}`,
+    defaultMessage: 'Show Higher Value',
+  },
+  [feedbackActions.noAction]: {
+    id: `${scope}.${feedbackActions.noAction}`,
+    defaultMessage: 'Manual positioning',
+  },
+  selectAction: {
+    id: `${scope}.selectAction`,
+    defaultMessage: 'Select Feedback Action',
+  },
+  selectActionPosition: {
+    id: `${scope}.selectActionPosition`,
+    defaultMessage: 'Select Character Position',
+  },
+  speechAnimation: {
+    id: `${scope}.speechAnimation`,
+    defaultMessage: 'Select Speech Animation',
   },
 });

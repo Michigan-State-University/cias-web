@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
@@ -9,12 +9,14 @@ import Row from 'components/Row';
 import Text from 'components/Text';
 import decideIfPassValue from 'utils/decideIfPassValue';
 import globalMessages from 'global/i18n/globalMessages';
+import { feedbackQuestion } from 'models/Intervention/QuestionTypes';
 import useOutsideClick from 'utils/useOutsideClick';
 import { colors, boxShadows, borders, fontSizes } from 'theme';
 import {
   blockTypes,
   blockTypeToColorMap,
   readQuestionBlockType,
+  feedbackBlockType,
 } from 'models/Narrator/BlockTypes';
 
 import messages from './messages';
@@ -24,6 +26,7 @@ const BlockTypeChooser = ({
   intl: { formatMessage },
   onClick,
   disableReadQuestionBlockType,
+  questionType,
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
@@ -35,9 +38,24 @@ const BlockTypeChooser = ({
     onClick(type);
     toggleTypeChooser();
   };
-  const visibleBlockTypes = disableReadQuestionBlockType
-    ? blockTypes.filter(type => type !== readQuestionBlockType)
-    : blockTypes;
+  const isFeedbackScreen = questionType === feedbackQuestion.id;
+
+  const visibleBlockTypes = useMemo(() => {
+    let filteredBlockTypes = blockTypes;
+
+    if (disableReadQuestionBlockType)
+      filteredBlockTypes = blockTypes.filter(
+        type => type !== readQuestionBlockType,
+      );
+
+    if (!isFeedbackScreen)
+      filteredBlockTypes = blockTypes.filter(
+        type => type !== feedbackBlockType,
+      );
+
+    return filteredBlockTypes;
+  }, [disableReadQuestionBlockType, isFeedbackScreen]);
+
   return (
     <Box position="relative" ref={chooser}>
       <DashedBox mt={14} onClick={toggleTypeChooser}>
@@ -96,6 +114,7 @@ BlockTypeChooser.propTypes = {
   intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
   disableReadQuestionBlockType: PropTypes.bool,
+  questionType: PropTypes.string,
 };
 
 export default injectIntl(BlockTypeChooser);

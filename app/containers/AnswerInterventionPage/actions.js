@@ -17,6 +17,7 @@ import {
   CHANGE_PREVIEW_MODE,
   RESET_INTERVENTION,
   CHANGE_IS_ANIMATING,
+  SET_FEEDBACK_SCREEN_SETTINGS,
 } from './constants';
 import { actionBuilder } from '../../utils/actionBuilder';
 
@@ -45,8 +46,8 @@ export const submitAnswerSuccess = answerId =>
 export const submitAnswerFailure = (answerId, error) =>
   actionBuilder(SUBMIT_ANSWER_ERROR, { error, answerId });
 
-export const setQuestionIndex = index =>
-  actionBuilder(SET_QUESTION_INDEX, { index });
+export const setQuestionIndex = ({ index, question }) =>
+  actionBuilder(SET_QUESTION_INDEX, { index, question });
 
 export const startIntervention = () => actionBuilder(START_INTERVENTION, {});
 
@@ -56,3 +57,6 @@ export const resetIntervention = () => actionBuilder(RESET_INTERVENTION, {});
 
 export const changeIsAnimating = isAnimating =>
   actionBuilder(CHANGE_IS_ANIMATING, { isAnimating });
+
+export const setFeedbackScreenSettings = (setting, value) =>
+  actionBuilder(SET_FEEDBACK_SCREEN_SETTINGS, { setting, value });

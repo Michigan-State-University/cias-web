@@ -2,10 +2,16 @@ import { takeLatest, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 import omit from 'lodash/omit';
 import map from 'lodash/map';
+import { push } from 'connected-react-router';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 
-import { informationQuestion } from 'models/Intervention/QuestionTypes';
+import { makeSelectLocation } from 'containers/App/selectors';
+import { ternary } from 'utils/ternary';
+import {
+  informationQuestion,
+  feedbackQuestion,
+} from 'models/Intervention/QuestionTypes';
 import { FETCH_QUESTIONS, SUBMIT_ANSWER_REQUEST } from './constants';
 import {
   fetchQuestionsFailure,
@@ -15,6 +21,19 @@ import {
   setQuestionIndex,
 } from './actions';
 import { makeSelectAnswers } from './selectors';
+
+const sessionPathRegex = /\/sessions\/.*/;
+const isPreviewRegex = /.*\/preview($|\/\d+$)/;
+
+const calculatePath = (currentPath, sessionId) => {
+  const isPreview = isPreviewRegex.test(currentPath);
+  const commonPathPart = currentPath.replace(
+    sessionPathRegex,
+    `/sessions/${sessionId}`,
+  );
+
+  return commonPathPart.concat(ternary(isPreview, '/preview', '/fill'));
+};
 
 function* fetchQuestionsAsync({ payload: { interventionId } }) {
   try {
@@ -46,14 +65,47 @@ function* submitAnswersAsync({
         },
       ];
     }
-    if (questionType !== informationQuestion.id) {
+
+    if (
+      questionType !== informationQuestion.id &&
+      questionType !== feedbackQuestion.id
+    ) {
       const type = questionType.replace('Question', 'Answer');
-      yield axios.post(`/v1/questions/${answerId}/answers`, {
+      const {
+        data: { data: branchingResult },
+      } = yield axios.post(`/v1/questions/${answerId}/answers`, {
         answer: { type, body: { data } },
       });
+
+      if (branchingResult) {
+        switch (branchingResult.type) {
+          case 'question':
+            yield put(submitAnswerSuccess(answerId));
+            yield put(
+              setQuestionIndex({
+                question: mapQuestionToStateObject(branchingResult),
+              }),
+            );
+            return;
+
+          case 'intervention':
+            const { id: sessionId } = branchingResult;
+            const { pathname } = yield select(makeSelectLocation());
+
+            const newPath = calculatePath(pathname, sessionId);
+
+            yield put(push(newPath));
+            window.location.reload();
+            return;
+
+          default:
+            break;
+        }
+      }
     }
+
     yield put(submitAnswerSuccess(answerId));
-    yield put(setQuestionIndex(nextQuestionIndex));
+    yield put(setQuestionIndex({ index: nextQuestionIndex }));
   } else {
     yield put(submitAnswerFailure(answerId, 'Choose answer'));
   }

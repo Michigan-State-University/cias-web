@@ -12,6 +12,7 @@ import {
   gridQuestion,
   informationQuestion,
   multiQuestion,
+  feedbackQuestion,
 } from 'models/Intervention/QuestionTypes';
 import messages from '../messages';
 import {
@@ -44,7 +45,10 @@ function* editQuestion() {
     question.body.data[0].payload.rows.forEach(element => {
       if (hasDuplicates(variables, element.variable.name)) duplicates = true;
     });
-  } else if (question.type === informationQuestion.id) {
+  } else if (
+    question.type === informationQuestion.id ||
+    question.type === feedbackQuestion.id
+  ) {
     duplicates = false;
   } else {
     duplicates = hasDuplicates(variables, question.body.variable.name);

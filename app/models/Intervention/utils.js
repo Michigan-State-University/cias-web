@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import pick from 'lodash/pick';
 
+import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import {
   bodyAnimationType,
   speechType,
@@ -8,6 +9,7 @@ import {
   readQuestionBlockType,
   reflectionType,
   pauseType,
+  feedbackBlockType,
 } from 'models/Narrator/BlockTypes';
 import { getFromQuestionTTS } from 'global/reducers/questions/utils';
 
@@ -18,6 +20,7 @@ import {
   multiQuestion,
   gridQuestion,
   informationQuestion,
+  feedbackQuestion,
 } from './QuestionTypes';
 
 /**
@@ -61,6 +64,7 @@ export const getAllVariables = (questions, options) => {
         questionVariables = getGridVariables(question);
         break;
       case informationQuestion.id:
+      case feedbackQuestion.id:
         questionVariables = [];
         break;
       default:
@@ -115,26 +119,32 @@ export const instantiateBlockForType = (type, endPosition, question) => {
         animation: null,
         ...sharedProperties,
       };
+
     case speechType:
       return {
+        action: feedbackActions.noAction,
         text: [],
         audio_urls: [],
         sha256: [],
         animation: 'rest',
         ...sharedProperties,
       };
+
     case reflectionType:
       return {
+        action: feedbackActions.noAction,
         question_id: '',
         reflections: [],
         animation: 'rest',
         ...sharedProperties,
       };
+
     case headAnimationType:
       return {
         animation: null,
         ...sharedProperties,
       };
+
     case readQuestionBlockType:
       return {
         animation: 'rest',
@@ -144,9 +154,12 @@ export const instantiateBlockForType = (type, endPosition, question) => {
         ...sharedProperties,
       };
     case pauseType:
+      return { pauseDuration: 2, ...sharedProperties, animation: 'standStill' };
+
+    case feedbackBlockType:
       return {
         animation: 'standStill',
-        pauseDuration: 2,
+        action: feedbackActions.showSpectrum,
         ...sharedProperties,
       };
     default:

@@ -71,8 +71,7 @@ const QuestionListItem = ({
     }
   };
 
-  const handleDelete = event => {
-    event.stopPropagation();
+  const handleDelete = () => {
     const newIndex = getIndex(selectedQuestionIndex, questions.length);
     handleSelectClick(newIndex);
     removeQuestion({ questionId: id, interventionId });

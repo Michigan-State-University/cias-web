@@ -10,6 +10,7 @@ import {
   textboxQuestion,
   informationQuestion,
   urlQuestion,
+  feedbackQuestion,
 } from 'models/Intervention/QuestionTypes';
 import UrlQuestion from './UrlQuestion';
 import InformationSlide from './InformationSlide';
@@ -19,6 +20,7 @@ import GridQuestion from './GridQuestion';
 import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
 import TextBoxQuestion from './TextBoxQuestion';
 import NumberQuestion from './NumberQuestion';
+import FeedbackQuestion from './FeedbackQuestion';
 
 export const renderQuestionByType = (question, sharedProps) => {
   const { type } = question;
@@ -33,6 +35,8 @@ export const renderQuestionByType = (question, sharedProps) => {
       return (
         <VisualAnalogueScaleQuestion question={question} {...sharedProps} />
       );
+    case feedbackQuestion.id:
+      return <FeedbackQuestion question={question} {...sharedProps} />;
     case textboxQuestion.id:
       return <TextBoxQuestion question={question} {...sharedProps} />;
     case numberQuestion.id:
