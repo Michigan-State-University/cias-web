@@ -22,12 +22,27 @@ describe('<AccountSettings />', () => {
 
   const initialState = {
     auth: {
-      isLoggedIn: true,
       user: {
         id: '85d1c37e-b921-4eaa-8ad6-0f255c4ecdc5',
         firstName: 'Name',
         lastName: 'Surname',
         email: 'admin@cias-api.herokuapp.com',
+      },
+      errors: {
+        changePasswordError: null,
+        changeEmailError: null,
+      },
+      loaders: {
+        changePasswordLoading: false,
+        changeEmailLoading: null,
+      },
+      cache: {
+        user: {
+          id: '85d1c37e-b921-4eaa-8ad6-0f255c4ecdc5',
+          firstName: 'Name',
+          lastName: 'Surname',
+          email: 'admin@cias-api.herokuapp.com',
+        },
       },
     },
   };

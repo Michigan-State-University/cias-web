@@ -5,20 +5,48 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import TextButton from 'components/Button/TextButton';
 import ConfirmationBox from 'components/ConfirmationBox';
 import Row from 'components/Row';
-import UploadFileButton from 'components/UploadFileButton';
-import { makeSelectUser, editUserRequest } from 'global/reducers/auth';
+import {
+  makeSelectUser,
+  addAvatarRequest,
+  addAvatarSaga,
+  deleteAvatarRequest,
+  deleteAvatarSaga,
+} from 'global/reducers/auth';
 import { themeColors, colors } from 'theme';
+import { useInjectSaga } from 'utils/injectSaga';
 
 import messages from '../messages';
-import { StyledUserAvatar } from '../styled';
+import {
+  StyledUserAvatar,
+  StyledButtonsRow,
+  StyledDeleteButton,
+  StyledUploadFileButton,
+} from '../styled';
 
-const AvatarForm = ({ user: { avatar, firstName, lastName } }) => {
+const AvatarForm = ({
+  user: { avatar, firstName, lastName },
+  addAvatar,
+  deleteAvatar,
+}) => {
+  useInjectSaga({ key: 'addAvatar', saga: addAvatarSaga });
+  useInjectSaga({ key: 'deleteAvatar', saga: deleteAvatarSaga });
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const openConfirmation = () => setConfirmationOpen(true);
   const closeConfirmation = () => setConfirmationOpen(false);
+
+  const handleUpload = file => {
+    addAvatar({
+      image: file,
+      imageUrl: window.URL.createObjectURL(file),
+    });
+  };
+
+  const handleRemoval = () => {
+    deleteAvatar();
+    closeConfirmation();
+  };
 
   return (
     <Fragment>
@@ -26,37 +54,41 @@ const AvatarForm = ({ user: { avatar, firstName, lastName } }) => {
         visible={confirmationOpen}
         onClose={closeConfirmation}
         description={<FormattedMessage {...messages.removeConfirmation} />}
+        confirmAction={handleRemoval}
       />
-      <Row align="center">
+      <Row align="center" width="100%">
         <StyledUserAvatar
           avatar={avatar}
           firstName={firstName}
           lastName={lastName}
         />
-        <UploadFileButton
-          ml={20}
-          textProps={{
-            color: themeColors.secondary,
-            fontWeight: 'bold',
-            fontSize: 14,
-          }}
-          height="fit-content"
-        >
-          <FormattedMessage
-            {...messages[avatar ? 'changeAvatar' : 'addAvatar']}
-          />
-        </UploadFileButton>
-        {avatar && (
-          <TextButton
-            ml={30}
-            color={colors.flamingo}
-            fontWeight="bold"
-            fontSize={14}
-            onClick={openConfirmation}
-          >
-            <FormattedMessage {...messages.removeAvatar} />
-          </TextButton>
-        )}
+        <Row filled>
+          <StyledButtonsRow>
+            <StyledUploadFileButton
+              textProps={{
+                color: themeColors.secondary,
+                fontWeight: 'bold',
+                fontSize: 14,
+              }}
+              height="fit-content"
+              onUpload={handleUpload}
+            >
+              <FormattedMessage
+                {...messages[avatar ? 'changeAvatar' : 'addAvatar']}
+              />
+            </StyledUploadFileButton>
+            {avatar && (
+              <StyledDeleteButton
+                color={colors.flamingo}
+                fontWeight="bold"
+                fontSize={14}
+                onClick={openConfirmation}
+              >
+                <FormattedMessage {...messages.removeAvatar} />
+              </StyledDeleteButton>
+            )}
+          </StyledButtonsRow>
+        </Row>
       </Row>
     </Fragment>
   );
@@ -68,6 +100,8 @@ AvatarForm.propTypes = {
     firstName: PropTypes.string,
     lastName: PropTypes.string,
   }),
+  addAvatar: PropTypes.func,
+  deleteAvatar: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -75,7 +109,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  editUser: editUserRequest,
+  addAvatar: addAvatarRequest,
+  deleteAvatar: deleteAvatarRequest,
 };
 
 const withConnect = connect(

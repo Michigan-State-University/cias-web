@@ -6,14 +6,13 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import Navbar from 'containers/Navbar';
-import { makeSelectIsLoggedIn, makeSelectUser } from 'global/reducers/auth';
+import { makeSelectUser } from 'global/reducers/auth';
 import { MainAppContainer } from './styled';
 
 class AppRoute extends Route {
   render() {
     const {
       protectedRoute,
-      isLoggedIn,
       allowedRoles,
       user,
       navbarProps,
@@ -23,10 +22,10 @@ class AppRoute extends Route {
     if (!protectedRoute) {
       return super.render();
     }
-    if (!isLoggedIn || !user.roles) {
+    if (!user || !user.roles) {
       return <Redirect to="/login" />;
     }
-    if (isLoggedIn && allowedRoles.includes(user.roles[0])) {
+    if (user && allowedRoles.includes(user.roles[0])) {
       return (
         <>
           <Navbar
@@ -55,7 +54,6 @@ AppRoute.defaultProps = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  isLoggedIn: makeSelectIsLoggedIn(),
   user: makeSelectUser(),
 });
 

@@ -2,40 +2,26 @@ import { createSelector } from 'reselect';
 
 const selectAuth = state => state.auth;
 
-const makeSelectAuth = () =>
+export const makeSelectAuth = () =>
   createSelector(
     selectAuth,
     authState => authState,
   );
 
-const makeSelectToken = () =>
-  createSelector(
-    selectAuth,
-    authState => authState.headers.token,
-  );
-
-const makeSelectHeaders = () =>
-  createSelector(
-    selectAuth,
-    authState => authState.headers,
-  );
-
-const makeSelectIsLoggedIn = () =>
-  createSelector(
-    selectAuth,
-    authState => authState.isLoggedIn,
-  );
-
-const makeSelectUser = () =>
+export const makeSelectUser = () =>
   createSelector(
     selectAuth,
     authState => authState.user,
   );
 
-export {
-  makeSelectAuth,
-  makeSelectToken,
-  makeSelectIsLoggedIn,
-  makeSelectHeaders,
-  makeSelectUser,
-};
+export const makeSelectErrors = error =>
+  createSelector(
+    selectAuth,
+    authState => (error ? authState.errors[error] : authState.errors),
+  );
+
+export const makeSelectLoaders = loader =>
+  createSelector(
+    selectAuth,
+    authState => (loader ? authState.loaders[loader] : authState.loaders),
+  );

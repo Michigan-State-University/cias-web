@@ -6,12 +6,13 @@
 
 import React, { Fragment, useState } from 'react';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { Helmet } from 'react-helmet';
 
 import Box from 'components/Box';
 import Row from 'components/Row';
 import BackButton from 'components/BackButton';
 import H1 from 'components/H1';
-import { colors, boxShadows } from 'theme';
+import { colors, themeColors, boxShadows } from 'theme';
 
 import messages from './messages';
 import FullNameForm from './Containers/FullNameForm';
@@ -34,6 +35,9 @@ const AccountSettings = ({ intl: { formatMessage } }) => {
 
   return (
     <Fragment>
+      <Helmet>
+        <title>{formatMessage(messages.pageTitle)}</title>
+      </Helmet>
       <PasswordForm
         visible={passwordReset}
         onClose={closeReset}
@@ -70,6 +74,7 @@ const AccountSettings = ({ intl: { formatMessage } }) => {
                 whiteSpace="nowrap"
                 fontWeight="bold"
                 fontSize={14}
+                color={themeColors.secondary}
               >
                 <FormattedMessage {...messages.changePassword} />
               </StyledTextButton>

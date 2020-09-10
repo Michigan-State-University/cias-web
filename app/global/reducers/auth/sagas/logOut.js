@@ -7,6 +7,7 @@ import { LOG_OUT } from '../constants';
 
 function* logOut() {
   yield call(LocalStorageService.clearHeaders);
+  yield call(LocalStorageService.clearState);
 
   yield put(push('/login'));
 }

@@ -45,7 +45,7 @@ const renderNavbar = navbarProps => {
 };
 
 export function Navbar({
-  user: { firstName, lastName, roles },
+  user: { firstName, lastName, roles, avatar },
   navbarProps,
   match,
   location,
@@ -59,7 +59,14 @@ export function Navbar({
       {renderNavbar({ ...navbarProps, match, location, intl })}
       <RightPanel onClick={() => !menuVisible && setMenuVisible(true)}>
         <DropDownContainer>
-          <UserAvatar lastName={lastName} firstName={firstName} />
+          <UserAvatar
+            mr={10}
+            width={30}
+            height={30}
+            avatar={avatar}
+            lastName={lastName}
+            firstName={firstName}
+          />
           <div ref={dropdownRef}>
             {menuVisible && (
               <DropDownContent>

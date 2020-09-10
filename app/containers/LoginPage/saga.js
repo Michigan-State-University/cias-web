@@ -1,8 +1,8 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axios from 'axios';
-import get from 'lodash/get';
 
+import LocalStorageService from 'utils/localStorageService';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
 import { logIn } from 'global/reducers/auth/actions';
 
@@ -19,18 +19,13 @@ function* login({ payload: { email, password } }) {
       email,
       password,
     });
-
     const mappedUser = mapCurrentUser(data);
+    yield call(LocalStorageService.setState, mappedUser);
     yield put(logIn(mappedUser));
     yield put(loginSuccess());
     yield put(push('/'));
   } catch (error) {
-    const errorMessage = get(
-      error,
-      'response.data.errors[0]',
-      error.toString().split('\n')[0],
-    );
-    yield put(loginError(errorMessage));
+    yield put(loginError(error.toString()));
   }
 }
 

@@ -23,6 +23,7 @@ export const RightPanel = styled.div`
   margin-right: 0;
   display: flex;
   align-items: center;
+  min-width: 150px;
 `;
 
 export const DropDownContent = styled.div`

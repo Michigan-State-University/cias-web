@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
@@ -12,12 +12,16 @@ import Column from 'components/Column';
 import FormikInput from 'components/FormikInput';
 import H3 from 'components/H3';
 import Modal from 'components/Modal';
+import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
-  editUserRequest,
-  editUserSaga,
+  changeEmailRequest,
+  changeEmailSaga,
   makeSelectUser,
+  makeSelectLoaders,
+  makeSelectErrors,
+  changeErrorStatus,
 } from 'global/reducers/auth';
 
 import messages from '../messages';
@@ -35,21 +39,39 @@ const initialValues = user => ({
   passwordConfirmation: '',
 });
 
-const EmailForm = ({ formatMessage, user }) => {
+const EmailForm = ({
+  formatMessage,
+  user,
+  changeEmail,
+  error,
+  loading,
+  changeErrorValue,
+}) => {
+  const previousLoadingState = useRef(loading);
   const [modalVisible, setModalVisible] = useState(false);
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
 
-  useInjectSaga({ key: 'editUser', saga: editUserSaga });
+  useInjectSaga({ key: 'changeEmail', saga: changeEmailSaga });
 
-  // eslint-disable-next-line no-unused-vars
   const onSubmit = ({ email, passwordConfirmation }, { setSubmitting }) => {
+    changeEmail({ newEmail: email, oldPassword: passwordConfirmation });
     setSubmitting(false);
   };
 
   const handleBlur = email => () => {
     if (user.email !== email) openModal();
   };
+
+  const handleClose = () => {
+    changeErrorValue('changeEmailError', null);
+    closeModal();
+  };
+
+  useEffect(() => {
+    if (previousLoadingState.current && !loading && !error) handleClose();
+    previousLoadingState.current = loading;
+  }, [loading]);
 
   return (
     <Fragment>
@@ -68,7 +90,7 @@ const EmailForm = ({ formatMessage, user }) => {
               <Modal
                 visible={modalVisible}
                 title={formatMessage(messages.changeYourEmail)}
-                onClose={closeModal}
+                onClose={handleClose}
                 maxWidth={500}
               >
                 <Column>
@@ -87,15 +109,21 @@ const EmailForm = ({ formatMessage, user }) => {
                       mr={20}
                       inverted
                       hoverable
-                      onClick={closeModal}
+                      onClick={handleClose}
                       type="button"
                     >
                       <FormattedMessage {...messages.cancel} />
                     </Button>
-                    <Button hoverable onClick={handleSubmit} type="button">
+                    <Button
+                      hoverable
+                      onClick={handleSubmit}
+                      type="button"
+                      loading={loading}
+                    >
                       <FormattedMessage {...messages.changeEmail} />
                     </Button>
                   </Row>
+                  {error && <ErrorAlert mt={25} errorText={error} />}
                 </Column>
               </Modal>
               <Row width="100%">
@@ -123,14 +151,21 @@ EmailForm.propTypes = {
   user: PropTypes.shape({
     email: PropTypes.string,
   }),
+  loading: PropTypes.bool,
+  error: PropTypes.string,
+  changeEmail: PropTypes.func,
+  changeErrorValue: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
+  loading: makeSelectLoaders('changeEmailLoading'),
+  error: makeSelectErrors('changeEmailError'),
 });
 
 const mapDispatchToProps = {
-  editUser: editUserRequest,
+  changeEmail: changeEmailRequest,
+  changeErrorValue: changeErrorStatus,
 };
 
 const withConnect = connect(

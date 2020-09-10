@@ -19,9 +19,11 @@ exports[`<Navbar /> Should render and match the snapshot with intervention path 
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin: 0 10px;
   position: relative;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
   color: rgba(255,255,255,1);
 }
 
@@ -63,6 +65,7 @@ exports[`<Navbar /> Should render and match the snapshot with intervention path 
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  min-width: 150px;
 }
 
 .c2 {
@@ -81,6 +84,8 @@ exports[`<Navbar /> Should render and match the snapshot with intervention path 
       <div
         class="c3"
         color="#FFFFFF"
+        height="30"
+        width="30"
       >
         <div>
           TT
@@ -116,9 +121,11 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin: 0 10px;
   position: relative;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
   color: rgba(255,255,255,1);
 }
 
@@ -160,6 +167,7 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  min-width: 150px;
 }
 
 .c2 {
@@ -178,6 +186,8 @@ exports[`<Navbar /> Should render and match the snapshot withou matching path 1`
       <div
         class="c3"
         color="#FFFFFF"
+        height="30"
+        width="30"
       >
         <div>
           TT

@@ -5,7 +5,10 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
+
 import utilsHistory from 'utils/history';
+import { initialState as authReducerInitialState } from 'global/reducers/auth/reducer';
+
 import createReducer from './reducers';
 import { loadState } from './utils/persist';
 
@@ -59,6 +62,8 @@ export default function configureStore(initialState = {}, history) {
 
   return store;
 }
-const initialState = loadState();
+const state = loadState();
 
-export const store = configureStore(initialState, utilsHistory);
+const initialStore = { auth: { ...authReducerInitialState, user: state } };
+
+export const store = configureStore(initialStore, utilsHistory);

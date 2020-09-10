@@ -1,11 +1,26 @@
 export { LOG_IN_USER, LOG_OUT } from './constants';
-export { logIn, logOut, editUserRequest } from './actions';
+export {
+  logIn,
+  logOut,
+  editUserRequest,
+  changePasswordRequest,
+  changeErrorStatus,
+  addAvatarRequest,
+  deleteAvatarRequest,
+  changeEmailRequest,
+} from './actions';
 export { authReducer } from './reducer';
 export {
   makeSelectAuth,
-  makeSelectToken,
-  makeSelectIsLoggedIn,
-  makeSelectHeaders,
   makeSelectUser,
+  makeSelectErrors,
+  makeSelectLoaders,
 } from './selectors';
-export { logOutSaga, editUserSaga } from './sagas';
+export {
+  logOutSaga,
+  editUserSaga,
+  changePasswordSaga,
+  addAvatarSaga,
+  deleteAvatarSaga,
+  changeEmailSaga,
+} from './sagas';

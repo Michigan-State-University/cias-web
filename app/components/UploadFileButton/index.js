@@ -7,6 +7,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import head from 'lodash/head';
+import isEmpty from 'lodash/isEmpty';
 import { useDropzone } from 'react-dropzone';
 
 import Box from 'components/Box';
@@ -18,9 +19,10 @@ import { themeColors } from 'theme';
 const UploadFileButton = ({
   icon,
   children,
-  onUpload = () => {},
+  onUpload,
   textProps,
   accept,
+  className,
   ...restProps
 }) => {
   const { getRootProps, getInputProps, open, acceptedFiles } = useDropzone({
@@ -31,11 +33,11 @@ const UploadFileButton = ({
   });
 
   useEffect(() => {
-    if (acceptedFiles) onUpload(head(acceptedFiles));
+    if (!isEmpty(acceptedFiles)) onUpload(head(acceptedFiles));
   }, [acceptedFiles]);
 
   return (
-    <Box {...getRootProps()} {...restProps}>
+    <Box {...getRootProps()} className={className} {...restProps}>
       <input {...getInputProps()} />
       <Row align="center" onClick={open} clickable>
         {icon && <Img src={icon} alt="upload" mr={10} />}
@@ -51,6 +53,7 @@ UploadFileButton.propTypes = {
   onUpload: PropTypes.func,
   textProps: PropTypes.object,
   accept: PropTypes.string,
+  className: PropTypes.string,
 };
 
 UploadFileButton.defaultProps = {

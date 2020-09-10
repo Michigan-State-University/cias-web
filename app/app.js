@@ -18,7 +18,6 @@ import { ToastContainer } from 'react-toastify-redux';
 
 import 'sanitize.css/sanitize.css';
 import 'react-toastify/dist/ReactToastify.css';
-import { throttle } from 'lodash';
 
 // Import root app
 import App from 'containers/App';
@@ -38,15 +37,6 @@ import { store } from './configureStore';
 import { translationMessages } from './i18n';
 
 import 'utils/axios';
-import { saveState } from './utils/persist';
-
-store.subscribe(
-  throttle(() => {
-    saveState({
-      auth: store.getState().auth,
-    });
-  }, 1000),
-);
 
 const MOUNT_NODE = document.getElementById('app');
 

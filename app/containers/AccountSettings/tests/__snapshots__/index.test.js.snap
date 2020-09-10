@@ -44,10 +44,11 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
         class="Row-x1o3ru-0 exvbpM"
       >
         <div
-          class="Row-x1o3ru-0 diEAcg"
+          class="Row-x1o3ru-0 hCbdXJ"
+          width="100%"
         >
           <div
-            class="styled__StyledUserAvatar-k1l7f-6 jXVoJb styled__AvatarStyled-sc-15n3teb-0 krWyiW"
+            class="styled__StyledUserAvatar-k1l7f-6 jXVoJb styled__AvatarStyled-sc-15n3teb-0 kuKnqe"
             color="#FFFFFF"
           >
             <div>
@@ -55,28 +56,36 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="Box-sc-14m3exe-0 bLNNpR"
-            height="fit-content"
+            class="Row-x1o3ru-0 guWYC"
           >
-            <input
-              autocomplete="off"
-              style="display: none;"
-              tabindex="-1"
-              type="file"
-            />
             <div
-              class="Row-x1o3ru-0 eekyNt"
+              class="Row-x1o3ru-0 styled__StyledButtonsRow-k1l7f-7 jxXrOD"
             >
-              <p
-                class="Text-sc-2lza2m-0 hbSsWL"
-                color="#C866EA"
-                font-size="14"
-                font-weight="bold"
+              <div
+                class="styled__StyledUploadFileButton-k1l7f-10 gWdmQl Box-sc-14m3exe-0 gaBLLA"
+                height="fit-content"
               >
-                <span>
-                  Add profile photo
-                </span>
-              </p>
+                <input
+                  autocomplete="off"
+                  style="display: none;"
+                  tabindex="-1"
+                  type="file"
+                />
+                <div
+                  class="Row-x1o3ru-0 eekyNt"
+                >
+                  <p
+                    class="Text-sc-2lza2m-0 hbSsWL"
+                    color="#C866EA"
+                    font-size="14"
+                    font-weight="bold"
+                  >
+                    <span>
+                      Add profile photo
+                    </span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -166,7 +175,8 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
           width="50%"
         >
           <button
-            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-k1l7f-3 kwxeUA"
+            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-k1l7f-3 ljBZKC"
+            color="#C866EA"
             font-size="14"
             font-weight="bold"
           >

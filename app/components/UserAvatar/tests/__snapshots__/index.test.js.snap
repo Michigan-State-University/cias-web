@@ -19,7 +19,6 @@ exports[`<UserAvatar /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin: 0 10px;
   position: relative;
   cursor: pointer;
   color: rgba(255,255,255,1);

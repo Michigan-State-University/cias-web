@@ -9,6 +9,10 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.AccountSettings';
 
 export default defineMessages({
+  pageTitle: {
+    id: `${scope}.pageTitle`,
+    defaultMessage: 'Profile',
+  },
   back: {
     id: `${scope}.back`,
     defaultMessage: 'Back to dashboard',
@@ -84,7 +88,7 @@ export default defineMessages({
   passwordInvalid: {
     id: `${scope}.passwordInvalid`,
     defaultMessage:
-      'Password must contain capital letter, small letter, special character and digit',
+      'Capital letter, small letter, special character and digit are required',
   },
   passwordMatch: {
     id: `${scope}.passwordMatch`,

@@ -27,4 +27,5 @@ export const mapCurrentUser = user => ({
   lastName: user.attributes.last_name,
   email: user.attributes.email,
   roles: user.attributes.roles,
+  avatar: user.attributes.avatar_url,
 });
