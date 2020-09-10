@@ -13,7 +13,10 @@ import Switch from 'components/Switch';
 import Text from 'components/Text';
 import lastKey from 'utils/getLastKey';
 import { colors, borders } from 'theme';
-import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
+import {
+  readQuestionBlockType,
+  feedbackBlockType,
+} from 'models/Narrator/BlockTypes';
 import { makeSelectCurrentNarratorBlockIndex } from 'global/reducers/localState';
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 
@@ -41,6 +44,10 @@ const NarratorTab = ({
 
   const readQuestionBlockTypePresent = Boolean(
     narrator.blocks.find(({ type }) => type === readQuestionBlockType),
+  );
+
+  const showSpectrumBlockTypePresent = Boolean(
+    narrator.blocks.find(({ type }) => type === feedbackBlockType),
   );
 
   const last = lastKey(narrator.settings);
@@ -93,6 +100,7 @@ const NarratorTab = ({
       <BlockTypeChooser
         questionType={currentQuestionType}
         disableReadQuestionBlockType={readQuestionBlockTypePresent}
+        disableFeedbackBlock={showSpectrumBlockTypePresent}
         onClick={onCreateBlock}
       />
     </Fragment>

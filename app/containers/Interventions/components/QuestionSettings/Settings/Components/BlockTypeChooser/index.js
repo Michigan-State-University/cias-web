@@ -26,6 +26,7 @@ const BlockTypeChooser = ({
   intl: { formatMessage },
   onClick,
   disableReadQuestionBlockType,
+  disableFeedbackBlock,
   questionType,
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
@@ -48,13 +49,18 @@ const BlockTypeChooser = ({
         type => type !== readQuestionBlockType,
       );
 
+    if (disableFeedbackBlock)
+      filteredBlockTypes = filteredBlockTypes.filter(
+        type => type !== feedbackBlockType,
+      );
+
     if (!isFeedbackScreen)
-      filteredBlockTypes = blockTypes.filter(
+      filteredBlockTypes = filteredBlockTypes.filter(
         type => type !== feedbackBlockType,
       );
 
     return filteredBlockTypes;
-  }, [disableReadQuestionBlockType, isFeedbackScreen]);
+  }, [disableReadQuestionBlockType, disableFeedbackBlock, isFeedbackScreen]);
 
   return (
     <Box position="relative" ref={chooser}>
@@ -114,6 +120,7 @@ BlockTypeChooser.propTypes = {
   intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
   disableReadQuestionBlockType: PropTypes.bool,
+  disableFeedbackBlock: PropTypes.bool,
   questionType: PropTypes.string,
 };
 

@@ -147,6 +147,7 @@ export const instantiateBlockForType = (type, endPosition, question) => {
 
     case readQuestionBlockType:
       return {
+        action: feedbackActions.noAction,
         animation: 'rest',
         text: getFromQuestionTTS(question),
         audio_urls: [],

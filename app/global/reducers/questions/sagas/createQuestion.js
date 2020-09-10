@@ -3,7 +3,11 @@ import axios from 'axios';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { ADD_BLOCK } from 'containers/Interventions/components/QuestionSettings/Settings/constants';
-import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
+import { feedbackQuestion } from 'models/Intervention/QuestionTypes';
+import {
+  readQuestionBlockType,
+  feedbackBlockType,
+} from 'models/Narrator/BlockTypes';
 import { setAnimationStopPosition } from 'global/reducers/localState';
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
 
@@ -39,6 +43,14 @@ function* createQuestion({ payload: { question, id } }) {
         data: { type: readQuestionBlockType, questionId: newQuestionId },
       }),
     );
+
+    if (createdQuestion.type === feedbackQuestion.id)
+      yield put(
+        updateQuestionSettings({
+          type: ADD_BLOCK,
+          data: { type: feedbackBlockType, questionId: newQuestionId },
+        }),
+      );
   } catch (error) {
     yield put(createQuestionError(error));
   }
