@@ -38,6 +38,7 @@ import {
   createInterventionRequest,
   makeSelectCurrentInterventionIndex,
   changeCurrentIntervention,
+  sendProblemCsvSaga,
 } from 'global/reducers/problem';
 import injectSaga, { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -94,6 +95,7 @@ export function ProblemDetailsPage({
   });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
+  useInjectSaga({ key: 'sendProblemCsv', saga: sendProblemCsvSaga });
 
   const { interventions, name, id, status, shared_to: sharedTo } =
     problem || {};

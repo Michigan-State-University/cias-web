@@ -58,6 +58,7 @@ const ApprovableInput = props => {
     disabled,
     height,
     width,
+    padding,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [focused, setfocused] = useState(false);
@@ -148,9 +149,16 @@ const ApprovableInput = props => {
         <DatePickerWrapper>
           <DatePicker
             selected={value}
-            onChange={date => onInputChange(date)}
+            onChange={date => onCheck(date)}
             placeholderText={placeholder}
-            customInput={<DateInput height={height} width={width} ref={ref} />}
+            customInput={
+              <DateInput
+                fontSize={fontSize}
+                height={height}
+                width={width}
+                ref={ref}
+              />
+            }
             showMonthDropdown
             showYearDropdown
             calendarClassName="schedule-date-picker"
@@ -170,6 +178,8 @@ const ApprovableInput = props => {
         keyboard={keyboard}
         transparent
         disabled={disabled}
+        fontSize={fontSize}
+        padding={padding}
       />
     );
   };
@@ -182,7 +192,7 @@ const ApprovableInput = props => {
 };
 
 ApprovableInput.propTypes = {
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onCheck: PropTypes.func,
   rows: PropTypes.string,
   placeholder: PropTypes.string,
@@ -198,6 +208,7 @@ ApprovableInput.propTypes = {
   disabled: PropTypes.bool,
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   width: PropTypes.number,
+  padding: PropTypes.number,
 };
 
 ApprovableInput.defaultProps = {

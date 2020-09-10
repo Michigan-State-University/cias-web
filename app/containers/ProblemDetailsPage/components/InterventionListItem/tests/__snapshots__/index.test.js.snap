@@ -28,6 +28,138 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   padding-left: 16px;
 }
 
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  padding-right: 62px;
+  padding-left: 62px;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: space-between;
+  -ms-flex-line-pack: space-between;
+  align-content: space-between;
+  -webkit-align-items: space-between;
+  -webkit-box-align: space-between;
+  -ms-flex-align: space-between;
+  align-items: space-between;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  padding-right: 62px;
+  padding-left: 62px;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c21 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-right: 62px;
+  margin-left: 62px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.c22 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c29 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
 .c2 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -48,6 +180,30 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   width: 83.33333333333334%;
+  width: 100%;
+  padding-left: 8px;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 33.33333333333333%;
 }
 
 .c6 {
@@ -56,6 +212,130 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   font-size: 18px;
   line-height: 130%;
   color: #2F3850;
+}
+
+.c23 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.c25 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 8px;
+  padding-left: 8px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: rgba(233,241,251,1);
+}
+
+.c27 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+  top: -90px;
+}
+
+.c28 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: auto;
+  position: absolute;
+  display: none;
+  background-color: rgba(255,255,255,1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  right: 0px;
+}
+
+.c30 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 8px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c8 {
+  height: 0;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border: 1px solid #D5DEEA;
+}
+
+.c12 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 13px;
+  color: #2F3850;
+}
+
+.c13 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-left: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c16 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c24 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(200,102,234,1);
+  color: rgba(200,102,234,1);
+}
+
+.c24:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c26 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  margin-right: 9px;
+  width: 100%;
+  height: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c26:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
 }
 
 .c0 {
@@ -104,6 +384,133 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   width: fit-content;
 }
 
+.c17 {
+  position: relative;
+  display: inline-block;
+  min-width: 40px;
+  height: 21px;
+  margin-left: 10px;
+}
+
+.c19 {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.c20 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  cursor: pointer;
+  background-color: #CED3E4;
+  border-radius: 21px;
+}
+
+.c18:checked + .c20 {
+  background-color: #C866EA;
+}
+
+.c18:focus + .c20 {
+  box-shadow: 0 0 1px #C866EA;
+}
+
+.c20:before {
+  position: absolute;
+  content: '';
+  left: 4px;
+  bottom: 4px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  height: 13px;
+  width: 13px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.c18:checked + .c20:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+.c32 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 50px;
+  height: 50px;
+}
+
+.c32:after {
+  content: ' ';
+  display: block;
+  width: 33.33333333333333px;
+  height: 33.33333333333333px;
+  border-radius: 50%;
+  border: 6px solid #C866EA;
+  border-color: #C866EA transparent #C866EA transparent;
+  -webkit-animation: ixzqdH 1.2s linear infinite;
+  animation: ixzqdH 1.2s linear infinite;
+}
+
+.c31 {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c33 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 20px;
+  height: 40px;
+  border: 1px dashed #B0BAC9;
+  color: #B0BAC9;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
 <div
   className="c0"
 >
@@ -121,6 +528,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
     </div>
     <div
       className="c4"
+      width="100%"
     >
       <a
         className="c5"
@@ -133,6 +541,148 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
           Intervention
         </h2>
       </a>
+    </div>
+  </div>
+  <div
+    className="c7"
+  >
+    <div
+      className="c8"
+    />
+  </div>
+  <div
+    className="c9"
+  >
+    <div
+      className="c10"
+    >
+      <div
+        className="c11"
+        width="100%"
+      >
+        <p
+          className="c12"
+          fontSize={13}
+        >
+          Next Session:
+        </p>
+        <p
+          className="c13"
+          fontSize={13}
+          fontWeight="bold"
+        >
+          According to the formula below
+        </p>
+      </div>
+    </div>
+    <div
+      className="c14"
+    >
+      <div
+        className="c15"
+        width="100%"
+      >
+        <p
+          className="c16"
+        >
+          Use formula
+        </p>
+        <label
+          checked={true}
+          className="c17"
+          onToggle={[Function]}
+        >
+          <input
+            checked={true}
+            className="c18 c19"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="c20"
+          />
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="c21"
+  >
+    <div
+      className="c10"
+    >
+      <div
+        className="c10"
+      >
+        <div
+          className="c22"
+        >
+          Formula
+          <div
+            className="c23"
+            onClick={[Function]}
+          >
+            <p
+              className="c24"
+              color="#C866EA"
+              fontWeight="bold"
+            >
+              + From list
+            </p>
+          </div>
+        </div>
+        <div
+          className="c25"
+          width="100%"
+        >
+          <textarea
+            className="c26"
+            height="auto"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="Enter formula here..."
+            rows="1"
+            value=""
+            width="100%"
+          />
+        </div>
+        <div
+          className="c27"
+        >
+          <div
+            className="c28"
+            display="none"
+            width="auto"
+          >
+            <div
+              className="c29"
+            >
+              <div
+                className="c30"
+              >
+                <div
+                  className="c31"
+                  data-testid="inline-loader"
+                >
+                  <div
+                    className="c32"
+                    color="#C866EA"
+                    size={50}
+                    width={6}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="c33"
+          onClick={[Function]}
+        >
+          + Add case
+        </div>
+      </div>
     </div>
   </div>
 </div>

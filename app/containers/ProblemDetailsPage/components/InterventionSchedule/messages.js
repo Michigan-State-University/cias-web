@@ -15,7 +15,7 @@ export default defineMessages({
   },
   send: {
     id: `${scope}.send`,
-    defaultMessage: 'Send',
+    defaultMessage: 'Send ',
   },
   daysAfter: {
     id: `${scope}.daysAfter`,
@@ -48,5 +48,9 @@ export default defineMessages({
   chooseDate: {
     id: `${scope}.chooseDate`,
     defaultMessage: 'Choose date',
+  },
+  default: {
+    id: `${scope}.default`,
+    defaultMessage: 'Select option',
   },
 });

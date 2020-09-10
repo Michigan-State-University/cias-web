@@ -96,7 +96,7 @@ exports[`<InterventionListBranching /> Should render and match the snapshot 1`] 
 .c8 {
   position: relative;
   display: inline-block;
-  width: 40px;
+  min-width: 40px;
   height: 21px;
   margin-left: 10px;
 }

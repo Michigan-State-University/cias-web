@@ -15,6 +15,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 import configureStore from 'configureStore';
 import { browserHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { SCHEDULE_OPTIONS } from 'global/reducers/problem';
 import InterventionSchedule from '../index';
 
 describe('<InterventionSchedule />', () => {
@@ -24,12 +25,17 @@ describe('<InterventionSchedule />', () => {
     store = configureStore({}, browserHistory);
   });
 
+  const exactDateProps = {
+    selectedScheduleOption: SCHEDULE_OPTIONS.exactDate,
+    scheduleAt: Date(),
+  };
+
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <Provider store={store}>
-          <InterventionSchedule />
+          <InterventionSchedule {...exactDateProps} />
         </Provider>
       </IntlProvider>,
     );
@@ -40,7 +46,7 @@ describe('<InterventionSchedule />', () => {
     const { container } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <Provider store={store}>
-          <InterventionSchedule />
+          <InterventionSchedule {...exactDateProps} />
         </Provider>
       </IntlProvider>,
     );

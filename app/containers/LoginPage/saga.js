@@ -3,9 +3,11 @@ import { push } from 'connected-react-router';
 import axios from 'axios';
 import get from 'lodash/get';
 
+import { mapCurrentUser } from 'utils/mapResponseObjects';
+import { logIn } from 'global/reducers/auth/actions';
+
 import { LOGIN_REQUEST } from './constants';
 import { loginError, loginSuccess } from './actions';
-import { logIn } from '../../global/reducers/auth/actions';
 
 function* login({ payload: { email, password } }) {
   const requestURL = `v1/auth/sign_in`;
@@ -18,15 +20,8 @@ function* login({ payload: { email, password } }) {
       password,
     });
 
-    yield put(
-      logIn({
-        id: data.id,
-        firstName: data.first_name,
-        lastName: data.last_name,
-        email: data.email,
-        roles: data.roles,
-      }),
-    );
+    const mappedUser = mapCurrentUser(data);
+    yield put(logIn(mappedUser));
     yield put(loginSuccess());
     yield put(push('/'));
   } catch (error) {

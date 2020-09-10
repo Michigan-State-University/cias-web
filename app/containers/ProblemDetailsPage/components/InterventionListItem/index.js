@@ -32,8 +32,15 @@ function InterventionListItem({
   nextInterventionName,
   handleCopyIntervention,
 }) {
-  const { id, name, problem_id: problemId, formula, settings } =
-    intervention || {};
+  const {
+    id,
+    name,
+    problem_id: problemId,
+    formula,
+    schedule,
+    schedule_at: scheduleAt,
+    settings,
+  } = intervention || {};
 
   const options = [
     {
@@ -51,7 +58,7 @@ function InterventionListItem({
         <Column xs={1}>
           <InterventionIndex>{index + 1}</InterventionIndex>
         </Column>
-        <Column xs={10}>
+        <Column pl={8} xs={10} width="100%">
           <StyledLink to={`/interventions/${problemId}/sessions/${id}/edit`}>
             <H2>{name}</H2>
           </StyledLink>
@@ -62,24 +69,24 @@ function InterventionListItem({
           </Column>
         )}
       </Row>
-      {process.env.APP_STAGE === appStages.dev.id && (
-        <>
-          {index !== 0 && (
-            <Row px={62}>
-              <InterventionSchedule />
-            </Row>
-          )}
-          <Row px={62}>
-            <Divider />
-          </Row>
-          <InterventionBranching
-            formula={formula}
-            id={id}
-            nextInterventionName={nextInterventionName}
-            status={settings.formula}
+      {index !== 0 && (
+        <Row px={62}>
+          <InterventionSchedule
+            interventionId={id}
+            selectedScheduleOption={schedule}
+            scheduleAt={scheduleAt}
           />
-        </>
+        </Row>
       )}
+      <Row px={62}>
+        <Divider />
+      </Row>
+      <InterventionBranching
+        formula={formula}
+        id={id}
+        nextInterventionName={nextInterventionName}
+        status={settings.formula}
+      />
     </ToggleableBox>
   );
 }

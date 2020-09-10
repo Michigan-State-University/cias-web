@@ -5,7 +5,7 @@ import { margin, padding } from '../BaseComponentStyles';
 const SwitchWrapper = styled.label`
   position: relative;
   display: inline-block;
-  width: 40px;
+  min-width: 40px;
   height: 21px;
   ${margin};
   ${padding};

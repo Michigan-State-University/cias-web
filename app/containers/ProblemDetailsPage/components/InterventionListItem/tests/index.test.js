@@ -21,6 +21,25 @@ import InterventionListItem from '../index';
 describe('<InterventionListItem />', () => {
   let store;
 
+  const props = {
+    intervention: {
+      id: '1',
+      name: 'Intervention',
+      problem_id: '1',
+      settings: {
+        formula: true,
+      },
+      formula: {
+        patterns: [],
+        payload: '',
+      },
+      schedule: '',
+      schedule_at: '',
+    },
+    index: 0,
+    nextInterventionName: 'test-2',
+  };
+
   beforeAll(() => {
     store = configureStore({}, browserHistory);
   });
@@ -31,11 +50,7 @@ describe('<InterventionListItem />', () => {
       <IntlProvider locale={DEFAULT_LOCALE}>
         <Provider store={store}>
           <MemoryRouter>
-            <InterventionListItem
-              intervention={{ id: '1', name: 'Intervention', problem_id: '1' }}
-              index={0}
-              nextInterventionName="test-2"
-            />
+            <InterventionListItem {...props} />
           </MemoryRouter>
         </Provider>
       </IntlProvider>,
@@ -49,15 +64,7 @@ describe('<InterventionListItem />', () => {
         <IntlProvider locale={DEFAULT_LOCALE}>
           <Provider store={store}>
             <MemoryRouter>
-              <InterventionListItem
-                intervention={{
-                  id: '1',
-                  name: 'Intervention',
-                  problem_id: '1',
-                }}
-                index={0}
-                nextInterventionName="test-2"
-              />
+              <InterventionListItem {...props} />
             </MemoryRouter>
           </Provider>
         </IntlProvider>,

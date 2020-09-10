@@ -8,6 +8,6 @@ export const StyledInputWrapper = styled.div`
   border-style: ${borders.borderStyle};
   border-width: ${borders.borderWidth};
   border-color: ${colors.linkWater};
-  width: 130px;
+  max-width: 110px;
   height: 50px;
 `;

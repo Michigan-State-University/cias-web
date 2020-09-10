@@ -20,11 +20,12 @@ const Selector = ({
   HeaderComponent,
   rightPosition,
   setOption,
+  selectOptionPlaceholder,
 }) => {
   const selector = useRef(null);
   useOutsideClick(selector, () => setIsActive(false), isActive);
 
-  const selectedOption = activeOption || options[0];
+  const selectedOption = activeOption || { label: selectOptionPlaceholder };
   const [isActive, setIsActive] = useState(false);
   const transform = isActive ? 'rotate(180deg);' : '';
   const transition = 'transform 0.2s;';
@@ -87,6 +88,7 @@ Selector.propTypes = {
   ElementsComponent: PropTypes.elementType,
   rightPosition: PropTypes.string,
   setOption: PropTypes.func,
+  selectOptionPlaceholder: PropTypes.string,
 };
 
 Selector.defaultProps = {

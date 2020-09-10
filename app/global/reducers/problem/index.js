@@ -40,4 +40,8 @@ export {
   removeFormulaCase,
   updateFormula,
   updateFormulaCase,
+  changeSchedulingType,
+  updateSchedulingValue,
 } from './interventionSettings/actions';
+
+export { SCHEDULE_OPTIONS } from './interventionSettings/constants';

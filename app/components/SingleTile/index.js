@@ -14,14 +14,13 @@ import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
 import globalMessages from 'global/i18n/globalMessages';
 import { useInjectSaga } from 'utils/injectSaga';
-
 import { connect } from 'react-redux';
 
 import {
   sendProblemCsvRequest,
   editProblemRequest,
+  sendProblemCsvSaga,
 } from 'global/reducers/problem';
-
 import {
   copyProblemRequest,
   archiveProblemRequest,
@@ -52,6 +51,7 @@ const SingleTile = ({
   intl: { formatMessage },
 }) => {
   useInjectSaga({ key: 'tileSaga', saga });
+  useInjectSaga({ key: 'sendProblemCsv', saga: sendProblemCsvSaga });
 
   const [modalVisible, setModalVisible] = useState(false);
 
