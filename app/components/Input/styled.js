@@ -81,6 +81,7 @@ export const DatePickerWrapper = styled.div`
 
 export const SearchInputStyled = styled.div`
   position: relative;
+  ${layout}
 `;
 
 export const SearchIcon = styled.img`

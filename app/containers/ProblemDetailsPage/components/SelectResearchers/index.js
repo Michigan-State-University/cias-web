@@ -22,8 +22,7 @@ import { StripedTR, Table, TBody, TD, TH, THead } from 'components/Table';
 import Checkbox from 'components/Checkbox';
 import { StyledButton } from 'components/Button/StyledButton';
 import ErrorAlert from 'components/ErrorAlert';
-import search from 'assets/svg/search.svg';
-import { Input } from 'components/Input';
+import SearchInput from 'components/Input/SearchInput';
 import { useInjectReducer } from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
 import { ROLES } from 'global/reducers/auth/constants';
@@ -35,6 +34,7 @@ import {
 } from 'global/reducers/userList';
 import { copyProblemRequest } from 'global/reducers/problems';
 
+import { makeSelectUser } from 'global/reducers/auth';
 import messages from './messages';
 
 const SelectResearchers = ({
@@ -44,13 +44,14 @@ const SelectResearchers = ({
   copyProblemToResearchers,
   problemId,
   onClose,
+  user: { id: currentUserId },
 }) => {
   useInjectReducer({ key: 'userList', reducer: UserListReducer });
 
   const [selected, setSelected] = useState([]);
 
   const [finalUsers, filterValue, setFilterValue] = useFilter(
-    users,
+    users.filter(({ id }) => id !== currentUserId),
     'full_name',
   );
   useLayoutEffect(() => {
@@ -77,8 +78,7 @@ const SelectResearchers = ({
   return (
     <Box>
       <Row pt={10} width="100%">
-        <img src={search} alt="Search" />
-        <Input
+        <SearchInput
           ml={5}
           width="100%"
           placeholder={formatMessage(messages.find)}
@@ -139,6 +139,7 @@ const SelectResearchers = ({
 SelectResearchers.propTypes = {
   intl: PropTypes.object,
   userList: PropTypes.object,
+  user: PropTypes.object,
   fetchUsersRequest: PropTypes.func.isRequired,
   copyProblemToResearchers: PropTypes.func,
   problemId: PropTypes.string,
@@ -147,6 +148,7 @@ SelectResearchers.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   userList: makeSelectUserList(),
+  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = {

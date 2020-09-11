@@ -13,9 +13,9 @@ import {
 } from './styled';
 
 const SearchInput = ({ icon, ...inputProps }) => {
-  const { value, onChange } = inputProps;
+  const { value, onChange, width } = inputProps;
   return (
-    <SearchInputStyled>
+    <SearchInputStyled width={width}>
       <Input {...inputProps} px={30} />
       <SearchIcon src={search} alt="search" />
       {value && (

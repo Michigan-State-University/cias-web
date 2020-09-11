@@ -15,16 +15,23 @@ import { Provider } from 'react-redux';
 import renderer from 'react-test-renderer';
 import { createStore } from 'redux';
 import { UserListReducer } from 'global/reducers/userList';
+import { authReducer } from 'global/reducers/auth';
 import SelectResearchers from '../index';
 
 describe('<SelectResearchers />', () => {
   let store;
   const reducer = state => state;
+  const initialState = {
+    auth: {
+      user: { id: 1 },
+    },
+  };
   beforeAll(() => {
-    store = createStore(reducer, {});
+    store = createStore(reducer, initialState);
     store.runSaga = () => {};
     store.injectedReducers = {
       problem: UserListReducer,
+      auth: authReducer,
     };
     store.injectedSagas = {};
   });
