@@ -19,13 +19,13 @@ import { connect } from 'react-redux';
 import {
   sendProblemCsvRequest,
   editProblemRequest,
-  sendProblemCsvSaga,
 } from 'global/reducers/problem';
 import {
   copyProblemRequest,
   archiveProblemRequest,
 } from 'global/reducers/problems';
 
+import { problemOptionsSaga } from 'global/sagas/problemOptionsSaga';
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
 import Dropdown from 'components/Dropdown';
@@ -39,7 +39,6 @@ import {
   StatusIndicator,
   TileInfo,
 } from './styled';
-import saga from './saga';
 
 const SingleTile = ({
   tileData,
@@ -50,8 +49,7 @@ const SingleTile = ({
   archiveProblem,
   intl: { formatMessage },
 }) => {
-  useInjectSaga({ key: 'tileSaga', saga });
-  useInjectSaga({ key: 'sendProblemCsv', saga: sendProblemCsvSaga });
+  useInjectSaga({ key: 'problemOptionsSaga', saga: problemOptionsSaga });
 
   const [modalVisible, setModalVisible] = useState(false);
 

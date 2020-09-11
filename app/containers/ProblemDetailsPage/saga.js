@@ -7,7 +7,6 @@ import {
   reorderSessionsSaga,
   createInterventionSaga,
 } from 'global/reducers/problem/sagas';
-import { copyProblemSaga } from 'global/reducers/problems/sagas';
 
 export default function* problemDetailsPageSagas() {
   yield all([
@@ -15,7 +14,6 @@ export default function* problemDetailsPageSagas() {
     fetchProblemSaga(),
     editProblemSaga(),
     copyInterventionSaga(),
-    copyProblemSaga(),
     updateInterventionSettingsSaga(),
     reorderSessionsSaga(),
   ]);

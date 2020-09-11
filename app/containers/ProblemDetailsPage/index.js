@@ -39,8 +39,9 @@ import {
   createInterventionRequest,
   makeSelectCurrentInterventionIndex,
   changeCurrentIntervention,
-  sendProblemCsvSaga,
 } from 'global/reducers/problem';
+import { problemOptionsSaga } from 'global/sagas/problemOptionsSaga';
+
 import injectSaga, { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { colors, themeColors } from 'theme';
@@ -97,7 +98,7 @@ export function ProblemDetailsPage({
   });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
-  useInjectSaga({ key: 'sendProblemCsv', saga: sendProblemCsvSaga });
+  useInjectSaga({ key: 'problemOptionsSaga', saga: problemOptionsSaga });
 
   const { interventions, name, id, status, shared_to: sharedTo } =
     problem || {};
