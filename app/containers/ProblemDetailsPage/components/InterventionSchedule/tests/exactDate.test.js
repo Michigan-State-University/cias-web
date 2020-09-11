@@ -27,7 +27,7 @@ describe('<InterventionSchedule />', () => {
 
   const exactDateProps = {
     selectedScheduleOption: SCHEDULE_OPTIONS.exactDate,
-    scheduleAt: Date(),
+    scheduleAt: new Date(2018, 11, 24, 10, 33, 30, 0),
   };
 
   it('Expect to not log errors in console', () => {
