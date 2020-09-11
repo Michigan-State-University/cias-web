@@ -23,7 +23,7 @@ export default defineMessages({
   },
   daysAfterFill: {
     id: `${scope}.daysAfterFill`,
-    defaultMessage: 'Send [X] days after previous session filled date',
+    defaultMessage: 'Send [X] days after previous session completed date',
   },
   exactDate: {
     id: `${scope}.exactDate`,
@@ -35,7 +35,7 @@ export default defineMessages({
   },
   daysAfterFillInfo: {
     id: `${scope}.daysAfterFillInfo`,
-    defaultMessage: 'days after previous session filled date.',
+    defaultMessage: 'days after previous session completed date.',
   },
   exactDateInfo: {
     id: `${scope}.exactDateInfo`,
@@ -52,5 +52,9 @@ export default defineMessages({
   default: {
     id: `${scope}.default`,
     defaultMessage: 'Select option',
+  },
+  timeInfo: {
+    id: `${scope}.timeInfo`,
+    defaultMessage: '*The information will be sent at 12.00 AM [UTC -5]',
   },
 });

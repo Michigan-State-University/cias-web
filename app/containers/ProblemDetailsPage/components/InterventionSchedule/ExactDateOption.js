@@ -6,6 +6,7 @@ import ApprovableInput from 'components/Input/ApprovableInput';
 import Text from 'components/Text';
 import Box from 'components/Box';
 
+import { colors } from 'theme';
 import messages from './messages';
 
 const ExactDateOption = ({ intl: { formatMessage }, value, setValue }) => (
@@ -25,6 +26,9 @@ const ExactDateOption = ({ intl: { formatMessage }, value, setValue }) => (
         fontSize={15}
       />
     </Box>
+    <Text ml={5} fontSize={12} color={colors.flamingo}>
+      {formatMessage(messages.timeInfo)}
+    </Text>
   </>
 );
 

@@ -163,7 +163,7 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
           color="#C866EA"
           font-weight="bold"
         >
-          Send [X] days after previous session filled date
+          Send [X] days after previous session completed date
         </p>
         <img
           alt="arrow"
@@ -207,7 +207,7 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
         class="c7"
         font-size="15"
       >
-        days after previous session filled date.
+        days after previous session completed date.
       </p>
     </div>
   </div>

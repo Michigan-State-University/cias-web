@@ -40,6 +40,16 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
   color: rgba(47,56,80,0.6);
 }
 
+.c13 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-left: 5px;
+  font-size: 12px;
+  color: rgba(239,70,47,1);
+  color: rgba(239,70,47,1);
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -256,6 +266,13 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
           </div>
         </div>
       </div>
+      <p
+        class="c13"
+        color="#EF462F"
+        font-size="12"
+      >
+        *The information will be sent at 12.00 AM [UTC -5]
+      </p>
     </div>
   </div>
 </div>
