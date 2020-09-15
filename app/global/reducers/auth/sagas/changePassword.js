@@ -29,6 +29,6 @@ function* changePassword({
   }
 }
 
-export default function* editUserSaga() {
+export default function* changePasswordSaga() {
   yield takeLatest(CHANGE_PASSWORD_REQUEST, changePassword);
 }

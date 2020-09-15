@@ -34,6 +34,6 @@ function* changeEmail({ payload: { oldPassword, newEmail } }) {
   }
 }
 
-export default function* editUserSaga() {
+export default function* changeEmailSaga() {
   yield takeLatest(CHANGE_EMAIL_REQUEST, changeEmail);
 }

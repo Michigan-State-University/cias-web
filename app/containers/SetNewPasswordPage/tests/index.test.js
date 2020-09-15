@@ -27,13 +27,19 @@ describe('<SetNewPasswordPage />', () => {
     store.injectedSagas = {};
   });
 
+  const defaultProps = {
+    location: {
+      search:
+        '?access-token=enCB7gVfDNS5liLLEGCF8A&client=-CmrrhiGqVQ7283-93uZEg&client_id=-CmrrhiGqVQ7283-93uZEg&config=default&expiry=1601367987&reset_password=true&token=enCB7gVfDNS5liLLEGCF8A&uid=petters1111%40gmail.com',
+    },
+  };
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <SetNewPasswordPage />
+            <SetNewPasswordPage {...defaultProps} />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,
@@ -46,7 +52,7 @@ describe('<SetNewPasswordPage />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <SetNewPasswordPage />
+            <SetNewPasswordPage {...defaultProps} />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,

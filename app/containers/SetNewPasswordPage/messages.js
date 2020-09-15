@@ -54,4 +54,8 @@ export default defineMessages({
     id: `${scope}.resetPassword`,
     defaultMessage: 'Set password',
   },
+  passwordChanged: {
+    id: `${scope}.passwordChanged`,
+    defaultMessage: 'New password was successfully set!',
+  },
 });

@@ -5,13 +5,16 @@
  */
 
 import React, { Fragment } from 'react';
-// import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { compose } from 'redux';
-import { Helmet } from 'react-helmet';
-import { Formik } from 'formik';
 import * as Yup from 'yup';
+import PropTypes from 'prop-types';
+import queryString from 'query-string';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { Formik } from 'formik';
+import { Helmet } from 'react-helmet';
+import { Redirect } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { Fill } from 'components/Fill';
 import Column from 'components/Column';
@@ -19,8 +22,16 @@ import H1 from 'components/H1';
 import withPublicLayout from 'containers/PublicLayout';
 import FormikInput from 'components/FormikInput';
 import Button from 'components/Button';
+import ErrorAlert from 'components/ErrorAlert';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
 
 import messages from './messages';
+import { setNewPasswordRequest } from './actions';
+import { makeSelectLoader, makeSelectError } from './selectors';
+import setNewPasswordSaga from './saga';
+import { setNewPasswordReducer } from './reducer';
+import { shouldRedirectToLogin } from './utils';
 
 const passwordLength = 8;
 
@@ -52,8 +63,31 @@ const initialValues = {
   passwordConfirmation: '',
 };
 
-const SetNewPasswordPage = ({ intl: { formatMessage } }) => {
-  const onSubmit = () => {};
+const SetNewPasswordPage = ({
+  intl: { formatMessage },
+  loading,
+  error,
+  setNewPassword,
+  location,
+}) => {
+  useInjectReducer({ key: 'setNewPassword', reducer: setNewPasswordReducer });
+  useInjectSaga({ key: 'setNewPassword', saga: setNewPasswordSaga });
+  const queryObj = queryString.parse(location.search);
+
+  if (shouldRedirectToLogin(queryObj)) {
+    return <Redirect to="/login" />;
+  }
+
+  const { 'access-token': accessToken, client, uid } = queryObj;
+
+  const onSubmit = ({ password, passwordConfirmation }, { setSubmitting }) => {
+    setNewPassword({
+      password,
+      passwordConfirmation,
+      configuration: { accessToken, client, uid },
+    });
+    setSubmitting(false);
+  };
   return (
     <Fragment>
       <Helmet>
@@ -97,12 +131,13 @@ const SetNewPasswordPage = ({ intl: { formatMessage } }) => {
                     height={46}
                     borderRadius={5}
                     mt={25}
-                    loading={false}
+                    loading={loading}
                     onClick={handleSubmit}
                     type="submit"
                   >
                     <FormattedMessage {...messages.resetPassword} />
                   </Button>
+                  {error && <ErrorAlert errorText={error} mt={25} />}
                 </Fragment>
               );
             }}
@@ -115,12 +150,23 @@ const SetNewPasswordPage = ({ intl: { formatMessage } }) => {
 
 SetNewPasswordPage.propTypes = {
   intl: intlShape,
+  loading: PropTypes.bool,
+  error: PropTypes.string,
+  setNewPassword: PropTypes.func,
+  location: PropTypes.object,
 };
 
-const mapDispatchToProps = {};
+const mapStateToProps = createStructuredSelector({
+  loading: makeSelectLoader(),
+  error: makeSelectError(),
+});
+
+const mapDispatchToProps = {
+  setNewPassword: setNewPasswordRequest,
+};
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 

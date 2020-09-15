@@ -28,10 +28,10 @@ const passwordLength = 8;
 const validationSchema = formatMessage =>
   Yup.object().shape({
     oldPassword: Yup.string().required(
-      formatMessage(messages.newPasswordRequired),
+      formatMessage(messages.oldPasswordRequired),
     ),
     newPassword: Yup.string()
-      .required(formatMessage(messages.oldPasswordRequired))
+      .required(formatMessage(messages.newPasswordRequired))
       .min(
         passwordLength,
         formatMessage(messages.passwordLength, { length: 8 }),

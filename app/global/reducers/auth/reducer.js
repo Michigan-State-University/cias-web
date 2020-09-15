@@ -34,7 +34,7 @@ export const initialState = {
   },
   loaders: {
     changePasswordLoading: false,
-    changeEmailLoading: null,
+    changeEmailLoading: false,
   },
   cache: {
     user: null,

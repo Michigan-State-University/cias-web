@@ -5,12 +5,13 @@
  */
 
 import React, { Fragment } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { compose } from 'redux';
 import { Helmet } from 'react-helmet';
 import { Formik } from 'formik';
+import { createStructuredSelector } from 'reselect';
 import * as Yup from 'yup';
 
 import { Fill } from 'components/Fill';
@@ -20,8 +21,15 @@ import withPublicLayout from 'containers/PublicLayout';
 import FormikInput from 'components/FormikInput';
 import Button from 'components/Button';
 import LinkButton from 'components/Button/LinkButton';
+import ErrorAlert from 'components/ErrorAlert';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
 
 import messages from './messages';
+import { resetPasswordRequest } from './actions';
+import { makeSelectLoader, makeSelectError } from './selectors';
+import resetPasswordSaga from './saga';
+import { resetPasswordReducer } from './reducer';
 
 const validationSchema = formatMessage =>
   Yup.object().shape({
@@ -34,8 +42,18 @@ const initialValues = {
   email: '',
 };
 
-const ResetPasswordPage = ({ intl: { formatMessage } }) => {
-  const onSubmit = () => {};
+const ResetPasswordPage = ({
+  intl: { formatMessage },
+  resetPassword,
+  loading,
+  error,
+}) => {
+  useInjectReducer({ key: 'resetPassword', reducer: resetPasswordReducer });
+  useInjectSaga({ key: 'resetPassword', saga: resetPasswordSaga });
+  const onSubmit = ({ email }, { setSubmitting }) => {
+    resetPassword(email);
+    setSubmitting(false);
+  };
   return (
     <Fragment>
       <Helmet>
@@ -67,7 +85,7 @@ const ResetPasswordPage = ({ intl: { formatMessage } }) => {
                   height={46}
                   borderRadius={5}
                   mt={45}
-                  loading={false}
+                  loading={loading}
                   onClick={handleSubmit}
                   type="submit"
                 >
@@ -76,6 +94,7 @@ const ResetPasswordPage = ({ intl: { formatMessage } }) => {
                 <LinkButton to="/login" mt={25} alignSelf="center">
                   <FormattedMessage {...messages.return} />
                 </LinkButton>
+                {error && <ErrorAlert errorText={error} mt={25} />}
               </Fragment>
             )}
           </Formik>
@@ -87,12 +106,22 @@ const ResetPasswordPage = ({ intl: { formatMessage } }) => {
 
 ResetPasswordPage.propTypes = {
   intl: intlShape,
+  loading: PropTypes.bool,
+  error: PropTypes.string,
+  resetPassword: PropTypes.func,
 };
 
-const mapDispatchToProps = {};
+const mapStateToProps = createStructuredSelector({
+  loading: makeSelectLoader(),
+  error: makeSelectError(),
+});
+
+const mapDispatchToProps = {
+  resetPassword: resetPasswordRequest,
+};
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 

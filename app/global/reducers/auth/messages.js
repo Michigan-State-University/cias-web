@@ -13,15 +13,15 @@ export default defineMessages({
   },
   sendSuccess: {
     id: `${scope}.sendSuccess`,
-    defaultMessage: 'You have successfuly sent a copy of the intervention!',
+    defaultMessage: 'You have successfully sent a copy of the intervention!',
   },
   changePasswordSuccess: {
     id: `${scope}.changePasswordSuccess`,
-    defaultMessage: 'You have successfuly changed your password!',
+    defaultMessage: 'You have successfully changed your password!',
   },
   changeEmailSuccess: {
     id: `${scope}.changeEmailSuccess`,
-    defaultMessage: 'You have successfuly changed your e-mail address!',
+    defaultMessage: 'You have successfully changed your e-mail address!',
   },
   deleteAvatarError: {
     id: `${scope}.deleteAvatarError`,

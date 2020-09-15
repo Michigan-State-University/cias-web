@@ -41,4 +41,8 @@ export default defineMessages({
     id: `${scope}.return`,
     defaultMessage: 'Back to login',
   },
+  linkSent: {
+    id: `${scope}.linkSent`,
+    defaultMessage: 'Reset link was sent! Check your e-mail address.',
+  },
 });
