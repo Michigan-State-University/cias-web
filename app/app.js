@@ -7,6 +7,7 @@
 
 // Needed for redux-saga es6 generator support
 import '@babel/polyfill';
+import * as Sentry from '@sentry/react';
 
 // Import all the third party stuff
 import React from 'react';
@@ -25,6 +26,8 @@ import App from 'containers/App';
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./assets/images/logo.png';
@@ -37,6 +40,12 @@ import { store } from './configureStore';
 import { translationMessages } from './i18n';
 
 import 'utils/axios';
+
+if (!isNullOrUndefined(process.env.SENTRY_DSN))
+  Sentry.init({
+    environment: process.env.SENTRY_ENV,
+    dsn: process.env.SENTRY_DSN,
+  });
 
 const MOUNT_NODE = document.getElementById('app');
 
