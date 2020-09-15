@@ -19,8 +19,9 @@ import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { colors, themeColors } from 'theme';
 import { injectIntl } from 'react-intl';
 import EllipsisText from 'components/Text/EllipsisText';
+import InequalityChooser from 'components/InequalityChooser';
 import VariableChooser from './VariableChooser';
-import { CaseInput, DashedBox } from './styled';
+import { DashedBox } from './styled';
 
 import TargetQuestionChooser from './TargetQuestionChooser';
 
@@ -109,18 +110,12 @@ function BranchingLayout({
                   mb={8}
                 >
                   <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
-                  <Box bg={colors.linkWater} mx={10}>
-                    <CaseInput
-                      px={0}
-                      py={12}
-                      textAlign="center"
-                      placeholder="..."
-                      value={pattern.match}
-                      onBlur={value =>
-                        onUpdateCase(index, { ...pattern, match: value }, id)
-                      }
-                    />
-                  </Box>
+                  <InequalityChooser
+                    onSuccessfulChange={value =>
+                      onUpdateCase(index, { ...pattern, match: value }, id)
+                    }
+                    inequalityValue={pattern.match}
+                  />
                   <Text whiteSpace="pre" mr={10}>
                     {formatMessage(messages.goTo)}
                   </Text>
@@ -129,7 +124,7 @@ function BranchingLayout({
                     positionFrom="right"
                     setOpen={value => setTargetChooserOpen(value ? index : -1)}
                     isOpened={isChooserOpened}
-                    childWidthScope="parent"
+                    childWidthScope="child"
                     dropdownContent={
                       <Box maxWidth={140}>
                         <EllipsisText

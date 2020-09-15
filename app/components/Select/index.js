@@ -5,15 +5,15 @@
  */
 
 import React from 'react';
-import ReactSelect from 'react-select';
 import PropTypes from 'prop-types';
 
 import Box from 'components/Box';
 import { themeColors } from 'theme';
 
+import ReactSelect from 'react-select';
 import { DropdownIndicator, Option } from './components';
 
-const customStyles = isMulti => ({
+const customStyles = ({ isMulti, bg }) => ({
   control: provided => ({
     ...provided,
     borderWidth: '1px',
@@ -23,6 +23,7 @@ const customStyles = isMulti => ({
     height: isMulti ? 'auto' : '45px',
     minHeight: '45px',
     width: '100%',
+    background: `${bg || 'auto'}`,
     '&:hover': {
       borderColor: `${themeColors.highlight}`,
     },
@@ -49,7 +50,7 @@ const Select = ({ selectProps, ...restProps }) => (
   <Box {...restProps}>
     <ReactSelect
       components={customComponents(selectProps.isMulti)}
-      styles={customStyles(selectProps.isMulti)}
+      styles={customStyles(selectProps)}
       {...selectProps}
     />
   </Box>
@@ -57,6 +58,7 @@ const Select = ({ selectProps, ...restProps }) => (
 
 Select.propTypes = {
   selectProps: PropTypes.object,
+  bg: PropTypes.string,
 };
 
 export default Select;

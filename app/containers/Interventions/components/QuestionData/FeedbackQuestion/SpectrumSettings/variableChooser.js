@@ -19,6 +19,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
 import { themeColors, colors } from 'theme';
+import InequalityChooser from 'components/InequalityChooser';
 import messages from '../messages';
 import { CaseInput, DashedBox } from './styled';
 
@@ -77,18 +78,12 @@ const SpectrumVariableChooser = ({
           mb={8}
         >
           <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
-          <Box bg={colors.linkWater} mx={10}>
-            <CaseInput
-              px={0}
-              py={12}
-              textAlign="center"
-              placeholder="..."
-              value={pattern.match}
-              onBlur={value =>
-                onUpdateCase(index, { ...pattern, match: value }, id)
-              }
-            />
-          </Box>
+          <InequalityChooser
+            onSuccessfulChange={value =>
+              onUpdateCase(index, { ...pattern, match: value }, id)
+            }
+            inequalityValue={pattern.match}
+          />
           <Text whiteSpace="pre" mr={10}>
             {formatMessage(messages.equalsTo)}
           </Text>

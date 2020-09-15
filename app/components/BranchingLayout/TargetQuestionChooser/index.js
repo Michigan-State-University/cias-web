@@ -117,7 +117,7 @@ const TargetQuestionChooser = ({
                 src={target.id === question.id ? webpageSelected : webpage}
                 mr={10}
               />
-              <Box maxWidth={140}>
+              <Box maxWidth={280}>
                 <EllipsisText
                   text={htmlToPlainText(question.title)}
                   color={!canSelectQuestion(question.id) ? colors.grey : ''}
@@ -197,7 +197,7 @@ const TargetQuestionChooser = ({
   };
 
   return (
-    <Box>
+    <Box width={300}>
       {!problemBranching && (
         <Box
           borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
