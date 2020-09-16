@@ -14,6 +14,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       exact={true}
       navbarProps={
         Object {
+          "activeTab": "interventions",
           "navbarId": "default",
         }
       }
@@ -75,6 +76,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       exact={true}
       navbarProps={
         Object {
+          "activeTab": "interventions",
           "navbarId": "default",
         }
       }
@@ -108,12 +110,8 @@ exports[`<App /> should render and match the snapshot 1`] = `
       exact={true}
       navbarProps={
         Object {
+          "activeTab": "accounts",
           "navbarId": "default",
-          "navbarName": <FormattedMessage
-            defaultMessage="User list"
-            id="app.navbarNames.userList"
-            values={Object {}}
-          />,
         }
       }
       path="/users"
@@ -173,6 +171,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       exact={true}
       navbarProps={
         Object {
+          "activeTab": "interventions",
           "navbarId": "default",
         }
       }
@@ -190,6 +189,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       exact={true}
       navbarProps={
         Object {
+          "activeTab": "interventions",
           "navbarId": "default",
         }
       }
@@ -208,6 +208,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       exact={true}
       navbarProps={
         Object {
+          "activeTab": "interventions",
           "navbarId": "default",
         }
       }

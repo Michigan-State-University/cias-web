@@ -8,20 +8,50 @@ const navbarMessages = defineMessages({
     id: `${scope}.preview`,
     defaultMessage: 'Preview',
   },
-  userList: {
-    id: `${scope}.userList`,
-    defaultMessage: 'User list',
+  adminInterventions: {
+    id: `${scope}.adminInterventions`,
+    defaultMessage: 'Interventions',
   },
-  logo: {
-    id: `${scope}.logo`,
+  adminAccounts: {
+    id: `${scope}.adminAccounts`,
+    defaultMessage: 'Manage accounts',
+  },
+  researcherInterventions: {
+    id: `${scope}.researcherInterventions`,
+    defaultMessage: 'My Interventions',
+  },
+  researcherAccounts: {
+    id: `${scope}.researcherAccounts`,
+    defaultMessage: 'Manage My Participants',
+  },
+  participantInterventions: {
+    id: `${scope}.participantInterventions`,
+    defaultMessage: 'CIAS',
+  },
+  guestInterventions: {
+    id: `${scope}.guestInterventions`,
     defaultMessage: 'CIAS',
   },
 });
 
 const navbarNames = {
   preview: <FormattedMessage {...navbarMessages.preview} />,
-  userList: <FormattedMessage {...navbarMessages.userList} />,
-  logo: <FormattedMessage {...navbarMessages.logo} />,
+  adminInterventions: (
+    <FormattedMessage {...navbarMessages.adminInterventions} />
+  ),
+  adminAccounts: <FormattedMessage {...navbarMessages.adminAccounts} />,
+  researcherInterventions: (
+    <FormattedMessage {...navbarMessages.researcherInterventions} />
+  ),
+  researcherAccounts: (
+    <FormattedMessage {...navbarMessages.researcherAccounts} />
+  ),
+  participantInterventions: (
+    <FormattedMessage {...navbarMessages.participantInterventions} />
+  ),
+  guestInterventions: (
+    <FormattedMessage {...navbarMessages.guestInterventions} />
+  ),
 };
 
 export default navbarNames;

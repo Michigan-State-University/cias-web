@@ -25,7 +25,7 @@ import ErrorAlert from 'components/ErrorAlert';
 import SearchInput from 'components/Input/SearchInput';
 import { useInjectReducer } from 'utils/injectReducer';
 import injectSaga from 'utils/injectSaga';
-import { ROLES } from 'global/reducers/auth/constants';
+import { Roles } from 'models/User/UserRoles';
 import {
   fetchUsers,
   makeSelectUserList,
@@ -55,7 +55,7 @@ const SelectResearchers = ({
     'full_name',
   );
   useLayoutEffect(() => {
-    fetchUsersRequest([ROLES.researcher]);
+    fetchUsersRequest([Roles.researcher]);
   }, []);
 
   const handleSend = () => {

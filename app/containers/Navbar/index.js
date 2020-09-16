@@ -56,7 +56,13 @@ export function Navbar({
   useOutsideClick(dropdownRef, () => setMenuVisible(false), menuVisible);
   return (
     <NavbarStyled>
-      {renderNavbar({ ...navbarProps, match, location, intl })}
+      {renderNavbar({
+        ...navbarProps,
+        match,
+        location,
+        intl,
+        userRole: roles[0],
+      })}
       <RightPanel onClick={() => !menuVisible && setMenuVisible(true)}>
         <DropDownContainer>
           <UserAvatar

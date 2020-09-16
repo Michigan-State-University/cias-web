@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import unescape from 'lodash/unescape';
 
 import Badge from 'components/Badge';
 import Box from 'components/Box';
@@ -124,7 +125,9 @@ const QuestionListItem = ({
         </Column>
         <Column xs={10}>
           <Row>
-            <ClampedTitle mb={6}>{htmlToPlainText(title)}</ClampedTitle>
+            <ClampedTitle mb={6}>
+              {unescape(htmlToPlainText(title))}
+            </ClampedTitle>
           </Row>
           <Row>
             <Comment fontWeight="bold">

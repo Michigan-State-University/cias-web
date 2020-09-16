@@ -22,10 +22,3 @@ export const DELETE_AVATAR_SUCCESS = 'app/auth/DELETE_AVATAR_SUCCESS';
 export const DELETE_AVATAR_ERROR = 'app/auth/DELETE_AVATAR_ERROR';
 
 export const CHANGE_ERROR_STATUS = 'app/auth/CHANGE_ERROR_STATUS';
-
-export const ROLES = {
-  admin: 'admin',
-  participant: 'participant',
-  researcher: 'researcher',
-  allRoles: ['admin', 'participant', 'researcher'],
-};

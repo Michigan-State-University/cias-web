@@ -26,6 +26,7 @@ describe('<UserList />', () => {
   beforeEach(() => {
     props = {
       fetchUsersRequest: jest.fn(),
+      intl: { formatMessage: jest.fn() },
       userList: {
         users: [
           {

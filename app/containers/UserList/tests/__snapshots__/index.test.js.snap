@@ -9,77 +9,191 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
     overflow="scroll"
   >
     <div
-      class="Box-sc-14m3exe-0 dkaNbU"
-      width="900px"
+      class="Box-sc-14m3exe-0 ifjGfb"
+      width="100%"
     >
-      <table
-        class="Table-jgz9dg-0 hpgAdc"
+      <div
+        class="Box-sc-14m3exe-0 iUeXoD"
+        display="flex"
       >
-        <thead
-          class="THead-sc-1pp8kl6-0 eAjaUx"
+        <h1
+          class="H1-tncdg6-0 iKFMn"
         >
-          <tr
-            class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 eXDpQb"
-          >
-            <th
-              class="TH-sc-1qq1mcj-0 eCwubA"
-              scope="col"
-            >
-              <div
-                class="Column-sc-1n6divy-0 jEZsih"
-                width="300"
-              >
-                Email
-              </div>
-            </th>
-            <th
-              class="TH-sc-1qq1mcj-0 eCwubA"
-              scope="col"
-            >
-              <div
-                class="Column-sc-1n6divy-0 jEZsih"
-                width="300"
-              >
-                Name
-              </div>
-            </th>
-            <th
-              class="TH-sc-1qq1mcj-0 eCwubA"
-              scope="col"
-            >
-              <div
-                class="Column-sc-1n6divy-0 jEZsih"
-                width="300"
-              >
-                Roles
-              </div>
-            </th>
-          </tr>
-        </thead>
-        <tbody
-          class="TBody-sc-1332v38-0 ekZOxU"
+          <span>
+            Manage accounts
+          </span>
+        </h1>
+        <button
+          class="TextButton-sc-12pwroy-0 hVXcMo"
+          color="#C866EA"
         >
-          <tr
-            class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 eXDpQb"
+          <span>
+            + Invite researcher
+          </span>
+        </button>
+      </div>
+      <div>
+        <div
+          class="Box-sc-14m3exe-0 bysEqX"
+          display="flex"
+        >
+          <div
+            class="Box-sc-14m3exe-0 UQIrx"
+            display="flex"
           >
-            <td
-              class="TD-sc-4t6406-0 bALMwj"
+            <div
+              class="Box-sc-14m3exe-0 hhkNsM"
+              display="inline-block"
+              width="100%"
             >
-              test@test.pl
-            </td>
-            <td
-              class="TD-sc-4t6406-0 bALMwj"
+              <div
+                class="Box-sc-14m3exe-0 UQIrx"
+                display="flex"
+              >
+                <div
+                  class="Box-sc-14m3exe-0 dinzFt"
+                  display="inline-flex"
+                  width="120px"
+                >
+                  <p
+                    class="Text-sc-2lza2m-0 Mihre"
+                    color="#FFFFFF"
+                    font-size="14"
+                    font-weight="bold"
+                  >
+                    Participant
+                  </p>
+                </div>
+                <div
+                  class="Box-sc-14m3exe-0 iacQEz"
+                  display="inline-flex"
+                  width="120px"
+                >
+                  <p
+                    class="Text-sc-2lza2m-0 Mihre"
+                    color="#FFFFFF"
+                    font-size="14"
+                    font-weight="bold"
+                  >
+                    Researcher
+                  </p>
+                </div>
+                <div
+                  class="Box-sc-14m3exe-0 cyLJtZ"
+                  cursor="pointer"
+                  display="inline-flex"
+                >
+                  <img
+                    class="Img-sc-1kfzr96-0 loOcPM"
+                    src="IMAGE_MOCK"
+                  />
+                  <span>
+                    Show inactive accounts
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="styled__SearchInputStyled-sc-65e6t4-3 jJMjkE"
+          >
+            <input
+              class="Input-sc-19txxuq-0 iFXcKH"
+              type="text"
+              value=""
+            />
+            <img
+              alt="search"
+              class="styled__SearchIcon-sc-65e6t4-4 effwnr"
+              src="IMAGE_MOCK"
+            />
+            
+          </div>
+        </div>
+        <table
+          class="Table-jgz9dg-0 cDuKtB"
+          width="100%"
+        >
+          <thead
+            class="THead-sc-1pp8kl6-0 eAjaUx"
+          >
+            <tr
+              class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 hnyHFB"
             >
-              test
-            </td>
-            <td
-              class="TD-sc-4t6406-0 bALMwj"
+              <th
+                class="TH-sc-1qq1mcj-0 hLWyGK"
+                color="#2F3850"
+                opacity="0.6"
+                scope="col"
+              >
+                <div
+                  class="Column-sc-1n6divy-0 jlAmPL"
+                  width="33.333333333333336%"
+                />
+              </th>
+              <th
+                class="TH-sc-1qq1mcj-0 hLWyGK"
+                color="#2F3850"
+                opacity="0.6"
+                scope="col"
+              >
+                <div
+                  class="Column-sc-1n6divy-0 jlAmPL"
+                  width="33.333333333333336%"
+                />
+              </th>
+              <th
+                class="TH-sc-1qq1mcj-0 hLWyGK"
+                color="#2F3850"
+                opacity="0.6"
+                scope="col"
+              >
+                <div
+                  class="Column-sc-1n6divy-0 jlAmPL"
+                  width="33.333333333333336%"
+                />
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="TBody-sc-1332v38-0 ekZOxU"
+          >
+            <tr
+              class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 cKBlsf"
+              color="#FFFFFF"
             >
-              participant
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              <td
+                class="TD-sc-4t6406-0 kEmNCT"
+              >
+                test
+              </td>
+              <td
+                class="TD-sc-4t6406-0 kEmNCT"
+              >
+                test@test.pl
+              </td>
+              <td
+                class="TD-sc-4t6406-0 kEmNCT"
+              >
+                <div
+                  class="Box-sc-14m3exe-0 fvMroj"
+                  display="inline-flex"
+                  width="120px"
+                >
+                  <p
+                    class="Text-sc-2lza2m-0 Mihre"
+                    color="#FFFFFF"
+                    font-size="14"
+                    font-weight="bold"
+                  >
+                    Participant
+                  </p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

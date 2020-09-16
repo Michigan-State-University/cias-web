@@ -27,7 +27,7 @@ import SetNewPasswordPage from 'containers/SetNewPasswordPage/Loadable';
 
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 
-import { ROLES } from 'global/reducers/auth/constants';
+import { Roles } from 'models/User/UserRoles';
 
 import ProblemPage from 'containers/ProblemPage/Loadable';
 import UserListPage from 'containers/UserList/Loadable';
@@ -39,6 +39,7 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectUser } from 'global/reducers/auth';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { accountsTabId, interventionsTabId } from 'utils/defaultNavbarTabs';
 
 export function App({ user }) {
   useInjectSaga({ key: 'app', saga: rootSaga });
@@ -46,11 +47,11 @@ export function App({ user }) {
   const renderDashboardByRole = () => {
     if (user) {
       switch (user.roles[0]) {
-        case ROLES.admin:
+        case Roles.admin:
           return <ProblemPage />;
-        case ROLES.researcher:
+        case Roles.researcher:
           return <ProblemPage />;
-        case ROLES.participant:
+        case Roles.participant:
           return <ParticipantDashboard />;
         default:
           return NotFoundPage;
@@ -66,9 +67,10 @@ export function App({ user }) {
           path="/"
           render={() => renderDashboardByRole()}
           protectedRoute
-          allowedRoles={ROLES.allRoles}
+          allowedRoles={Roles.allRoles}
           navbarProps={{
             navbarId: 'default',
+            activeTab: interventionsTabId,
           }}
         />
         <AppRoute exact path="/login" component={LoginPage} />
@@ -85,7 +87,7 @@ export function App({ user }) {
           path="/interventions/:problemId/sessions/:interventionId/edit"
           component={EditInterventionPage}
           protectedRoute
-          allowedRoles={[ROLES.admin, ROLES.researcher]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: 'interventions',
           }}
@@ -94,10 +96,11 @@ export function App({ user }) {
           exact
           path="/interventions/:problemId/sessions/:interventionId/fill"
           component={AnswerInterventionPage}
-          allowedRoles={ROLES.allRoles}
+          allowedRoles={Roles.allRoles}
           user
           navbarProps={{
             navbarId: 'default',
+            activeTab: interventionsTabId,
           }}
         />
         <AppRoute
@@ -105,7 +108,7 @@ export function App({ user }) {
           path="/interventions/:problemId/sessions/:interventionId/settings"
           component={SettingsInterventionPage}
           protectedRoute
-          allowedRoles={[ROLES.admin, ROLES.researcher]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: 'interventions',
           }}
@@ -115,10 +118,10 @@ export function App({ user }) {
           path="/users"
           component={UserListPage}
           protectedRoute
-          allowedRoles={[ROLES.admin]}
+          allowedRoles={[Roles.admin]}
           navbarProps={{
             navbarId: 'default',
-            navbarName: navbarNames.userList,
+            activeTab: accountsTabId,
           }}
         />
         <AppRoute
@@ -127,7 +130,7 @@ export function App({ user }) {
           path="/interventions/:problemId/sessions/:interventionId/preview"
           component={AnswerInterventionPage}
           protectedRoute
-          allowedRoles={[ROLES.admin, ROLES.researcher]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: 'preview',
             navbarName: navbarNames.preview,
@@ -138,7 +141,7 @@ export function App({ user }) {
           path="/interventions/:problemId/sessions/:interventionId/preview/:index"
           component={AnswerInterventionPage}
           protectedRoute
-          allowedRoles={[ROLES.admin, ROLES.researcher]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: 'preview',
             navbarName: navbarNames.preview,
@@ -149,9 +152,10 @@ export function App({ user }) {
           path="/interventions/:problemId/settings"
           component={ProblemSettingsPage}
           protectedRoute
-          allowedRoles={[ROLES.admin, ROLES.researcher]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: 'default',
+            activeTab: interventionsTabId,
           }}
         />
         <AppRoute
@@ -159,9 +163,10 @@ export function App({ user }) {
           path="/interventions/:problemId"
           component={ProblemDetailsPage}
           protectedRoute
-          allowedRoles={[ROLES.admin, ROLES.researcher]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: 'default',
+            activeTab: interventionsTabId,
           }}
         />
         <AppRoute
@@ -169,9 +174,10 @@ export function App({ user }) {
           path="/profile"
           component={AccountSettings}
           protectedRoute
-          allowedRoles={ROLES.allRoles}
+          allowedRoles={Roles.allRoles}
           navbarProps={{
             navbarId: 'default',
+            activeTab: interventionsTabId,
           }}
         />
         <AppRoute component={NotFoundPage} />

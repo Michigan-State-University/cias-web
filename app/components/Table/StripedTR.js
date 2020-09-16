@@ -7,9 +7,11 @@ import { TBody } from './TBody';
 
 const StripedTR = styled(TR)`
   ${TBody} &:nth-child(${props => props.stripesPlacement}) {
+  background: ${props =>
+    props.color ? props.color : `rgba(${hexToRgb(colors.jungleGreen)}, 0.1)`};
+
     td,
     th {
-      background: rgba(${hexToRgb(colors.jungleGreen)}, 0.1);
 
       &:first-child {
         border-bottom-left-radius: ${borders.borderRadius};
@@ -21,6 +23,9 @@ const StripedTR = styled(TR)`
         border-top-right-radius: ${borders.borderRadius};
       }
     }
+  }
+  &:hover {
+    background: ${props => props.hoverBg && props.hoverBg} !important;
   }
 `;
 

@@ -2,28 +2,44 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import Text from 'components/Text';
 import Img from 'components/Img';
 import logo from 'assets/svg/logo.svg';
-import navbarNames from 'utils/navbarNames';
+import Text from 'components/Text';
+import navbarTabs from 'utils/defaultNavbarTabs';
+import { NavbarTabLink } from './styled';
 
-const DefaultNavbar = ({ navbarName }) => (
+const renderNavbarTab = (activeTab, role) => tabData => {
+  const { message, id, path } = tabData;
+  if (!path)
+    return (
+      <Text key={`${role}-${id}`} fontSize={23}>
+        {message}
+      </Text>
+    );
+  return (
+    <NavbarTabLink
+      ml={10}
+      key={`${role}-${id}`}
+      active={id === activeTab ? 1 : undefined}
+      to={id === activeTab ? '#' : path}
+    >
+      <Text fontSize={15}>{message}</Text>
+    </NavbarTabLink>
+  );
+};
+
+const DefaultNavbar = ({ activeTab, userRole }) => (
   <Fragment>
     <Link to="/">
       <Img alt="logo" src={logo} height={51} width={56} mr={15} />
     </Link>
-    <Text color="black" fontSize={23}>
-      {navbarName}
-    </Text>
+    {navbarTabs[userRole].map(renderNavbarTab(activeTab, userRole))}
   </Fragment>
 );
 
 DefaultNavbar.propTypes = {
-  navbarName: PropTypes.node,
-};
-
-DefaultNavbar.defaultProps = {
-  navbarName: navbarNames.logo,
+  activeTab: PropTypes.string,
+  userRole: PropTypes.string,
 };
 
 export default DefaultNavbar;
