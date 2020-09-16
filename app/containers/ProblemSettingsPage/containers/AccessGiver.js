@@ -114,7 +114,7 @@ const AccessGiver = ({
             />
           )}
           <UserList
-            users={usersWithAccess || []}
+            emails={usersWithAccess || []}
             buttonIsClose
             buttonText={formatMessage(messages.remove)}
             buttonAction={revokeAction}

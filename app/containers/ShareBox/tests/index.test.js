@@ -21,7 +21,20 @@ describe('<ShareBox />', () => {
     problem: {
       currentInterventionIndex: 0,
       problem: {
-        interventions: [{ name: 'Name', slug: 'Slug-id-e-intervention' }],
+        interventions: [
+          {
+            name: 'Name',
+            slug: 'Slug-id-e-intervention',
+            emails: ['mail@mail.com'],
+          },
+        ],
+      },
+      loaders: {
+        sendInterventionLoading: false,
+        resendInterventionLoading: {
+          email: null,
+          loading: false,
+        },
       },
     },
   };

@@ -12,7 +12,7 @@ import { registerFailure, registerSuccess } from './actions';
 import messages from './messages';
 
 function* register({ payload }) {
-  const requestURL = `auth`;
+  const requestURL = `v1/auth`;
 
   try {
     yield axios.post(requestURL, {

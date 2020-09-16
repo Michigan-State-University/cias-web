@@ -34,6 +34,10 @@ import {
   CREATE_INTERVENTION_REQUEST,
   CREATE_INTERVENTION_SUCCESS,
   CREATE_INTERVENTION_ERROR,
+  SEND_INTERVENTION_INVITE_REQUEST,
+  SEND_INTERVENTION_INVITE_SUCCESS,
+  SEND_INTERVENTION_INVITE_ERROR,
+  RESEND_INTERVENTION_INVITE_REQUEST,
 } from './constants';
 
 export const fetchProblemRequest = id =>
@@ -114,3 +118,15 @@ export const createInterventionSuccess = intervention =>
   actionBuilder(CREATE_INTERVENTION_SUCCESS, { intervention });
 export const createInterventionError = () =>
   actionBuilder(CREATE_INTERVENTION_ERROR, {});
+
+export const sendInterventionInviteRequest = emails =>
+  actionBuilder(SEND_INTERVENTION_INVITE_REQUEST, { emails });
+
+export const sendInterventionInviteSuccess = () =>
+  actionBuilder(SEND_INTERVENTION_INVITE_SUCCESS, {});
+
+export const sendInterventionInviteError = () =>
+  actionBuilder(SEND_INTERVENTION_INVITE_ERROR, {});
+
+export const resendInterventionInviteRequest = emails =>
+  actionBuilder(RESEND_INTERVENTION_INVITE_REQUEST, { emails });

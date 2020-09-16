@@ -46,16 +46,21 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               />
             </div>
           </div>
-          <button
-            class="StyledButton-t20ntd-0 QHkrN"
-            color="primary"
-            disabled=""
+          <div
+            class="Box-sc-14m3exe-0 jcBRan"
             width="140"
           >
-            <span>
-              Send invite
-            </span>
-          </button>
+            <button
+              class="StyledButton-t20ntd-0 QHkrN"
+              color="primary"
+              disabled=""
+              width="140"
+            >
+              <span>
+                Send invite
+              </span>
+            </button>
+          </div>
         </div>
         <div
           class="Column-sc-1n6divy-0 lelHjj"
@@ -121,22 +126,23 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
         </div>
       </div>
     </div>
+    <h3
+      class="H3-sc-1nwhpi5-0 iiFP"
+      color="#2F3850"
+      font-size="13"
+      font-weight="bold"
+    >
+      <span>
+        Invite has beed already sent to
+      </span>
+    </h3>
     <div
-      class="Row-x1o3ru-0 bhnrrF"
+      class="Row-x1o3ru-0 dyEqAR"
+      overflow="scroll"
     >
       <div
         class="Column-sc-1n6divy-0 cVSlLs"
       >
-        <h3
-          class="H3-sc-1nwhpi5-0 jXhFJD"
-          color="#2F3850"
-          font-size="13"
-          font-weight="bold"
-        >
-          <span>
-            Invite has beed already sent to
-          </span>
-        </h3>
         <div
           class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
         >
@@ -152,98 +158,24 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               class="Text-sc-2lza2m-0 jUbcWG"
               font-size="15px"
             >
-              mock@mock.pl
+              mail@mail.com
             </p>
-          </div>
-          <button
-            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jLAfHW"
-            font-weight="bold"
-          >
-            <span>
-              Resend invite
-            </span>
-          </button>
-        </div>
-        <div
-          class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
-        >
-          <div
-            class="Row-x1o3ru-0 diEAcg"
-          >
-            <img
-              alt="avatar"
-              class="Img-sc-1kfzr96-0 dsoWic"
-              src="IMAGE_MOCK"
+            <div
+              class="Box-sc-14m3exe-0 gfpMuw"
             />
-            <p
-              class="Text-sc-2lza2m-0 jUbcWG"
-              font-size="15px"
-            >
-              mock@mock.pl
-            </p>
           </div>
-          <button
-            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jLAfHW"
-            font-weight="bold"
-          >
-            <span>
-              Resend invite
-            </span>
-          </button>
-        </div>
-        <div
-          class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
-        >
           <div
-            class="Row-x1o3ru-0 diEAcg"
+            class="Box-sc-14m3exe-0 gfpMuw"
           >
-            <img
-              alt="avatar"
-              class="Img-sc-1kfzr96-0 dsoWic"
-              src="IMAGE_MOCK"
-            />
-            <p
-              class="Text-sc-2lza2m-0 jUbcWG"
-              font-size="15px"
+            <button
+              class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jLAfHW"
+              font-weight="bold"
             >
-              mock@mock.pl
-            </p>
+              <span>
+                Resend invite
+              </span>
+            </button>
           </div>
-          <button
-            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jLAfHW"
-            font-weight="bold"
-          >
-            <span>
-              Resend invite
-            </span>
-          </button>
-        </div>
-        <div
-          class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 cVibnt"
-        >
-          <div
-            class="Row-x1o3ru-0 diEAcg"
-          >
-            <img
-              alt="avatar"
-              class="Img-sc-1kfzr96-0 dsoWic"
-              src="IMAGE_MOCK"
-            />
-            <p
-              class="Text-sc-2lza2m-0 jUbcWG"
-              font-size="15px"
-            >
-              mock@mock.pl
-            </p>
-          </div>
-          <button
-            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-sc-16elnyr-2 jLAfHW"
-            font-weight="bold"
-          >
-            <span>
-              Resend invite
-            </span>
-          </button>
         </div>
       </div>
     </div>

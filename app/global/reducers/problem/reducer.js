@@ -1,5 +1,6 @@
 import produce from 'immer';
 import set from 'lodash/set';
+import union from 'lodash/union';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 import interventionSettingsReducer from './interventionSettings/reducer';
@@ -37,6 +38,10 @@ import {
   CREATE_INTERVENTION_REQUEST,
   CREATE_INTERVENTION_ERROR,
   CREATE_INTERVENTION_SUCCESS,
+  SEND_INTERVENTION_INVITE_ERROR,
+  SEND_INTERVENTION_INVITE_REQUEST,
+  SEND_INTERVENTION_INVITE_SUCCESS,
+  RESEND_INTERVENTION_INVITE_REQUEST,
 } from './constants';
 
 export const initialState = {
@@ -53,6 +58,11 @@ export const initialState = {
     changeAccessSettingLoading: false,
     fetchUserAccessLoading: false,
     createInterventionLoading: false,
+    sendInterventionLoading: false,
+    resendInterventionLoading: {
+      email: null,
+      loading: false,
+    },
   },
   errors: {
     fetchProblemError: null,
@@ -131,6 +141,40 @@ export const problemReducer = (state = initialState, action) =>
           ),
         };
         break;
+
+      case SEND_INTERVENTION_INVITE_REQUEST:
+        draft.loaders.sendInterventionLoading = true;
+        draft.cache.problem = state.problem;
+        const { emails } = action.payload;
+        const uniqEmails = union(
+          state.problem.interventions[state.currentInterventionIndex].emails,
+          emails,
+        );
+        draft.problem.interventions[
+          state.currentInterventionIndex
+        ].emails = uniqEmails;
+        break;
+
+      case SEND_INTERVENTION_INVITE_SUCCESS:
+        draft.loaders.sendInterventionLoading = false;
+        draft.loaders.resendInterventionLoading =
+          initialState.loaders.resendInterventionLoading;
+        break;
+
+      case SEND_INTERVENTION_INVITE_ERROR:
+        draft.loaders.sendInterventionLoading = false;
+        draft.loaders.resendInterventionLoading =
+          initialState.loaders.resendInterventionLoading;
+        draft.problem = draft.cache.problem;
+        break;
+
+      case RESEND_INTERVENTION_INVITE_REQUEST:
+        draft.loaders.resendInterventionLoading = {
+          email: action.payload.emails[0],
+          loading: true,
+        };
+        break;
+
       case REORDER_INTERVENTION_LIST_SUCCESS:
         draft.cache.problem = draft.problem;
         break;

@@ -5,79 +5,42 @@ import Column from 'components/Column';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import Text from 'components/Text';
-import H3 from 'components/H3';
 import Spinner from 'components/Spinner';
 import Box from 'components/Box';
+
 import userAvatar from 'assets/svg/user.svg';
 import { colors, fontSizes, themeColors } from 'theme';
 
 import { StyledTextButton, HoverableRow } from '../styled';
 
-const mockUsers = [
-  {
-    avatar: userAvatar,
-    email: 'mock@mock.pl',
-    id: 1,
-  },
-  {
-    avatar: userAvatar,
-    email: 'mock@mock.pl',
-    id: 2,
-  },
-  {
-    avatar: userAvatar,
-    email: 'mock@mock.pl',
-    id: 3,
-  },
-  {
-    avatar: userAvatar,
-    email: 'mock@mock.pl',
-    id: 4,
-  },
-];
-
 const UserList = ({
-  users = mockUsers,
-  headerText,
+  emails,
   buttonIsClose,
   buttonText,
   buttonAction,
+  resendLoading,
 }) => {
-  const button = userId => (
-    <StyledTextButton
-      onClick={() => buttonAction(userId)}
-      fontWeight="bold"
-      ml={buttonIsClose ? 15 : null}
-    >
-      {buttonText}
-    </StyledTextButton>
-  );
+  const { loading, email: loadingEmail } = resendLoading || {};
 
-  const getAction = user =>
-    user.loading ? (
-      <Box ml={buttonIsClose ? 15 : null}>
-        <Spinner color={themeColors.secondary} />
-      </Box>
-    ) : (
-      button(user.id)
+  const getActionButton = email => {
+    if (loading && loadingEmail === email)
+      return <Spinner color={themeColors.secondary} />;
+    return (
+      <StyledTextButton
+        onClick={() => buttonAction([email])}
+        fontWeight="bold"
+        ml={buttonIsClose ? 15 : null}
+      >
+        {buttonText}
+      </StyledTextButton>
     );
+  };
 
   return (
     <Column>
-      {headerText && (
-        <H3
-          mb={15}
-          fontSize={13}
-          fontWeight="bold"
-          color={colors.bluewood}
-          textOpacity={0.6}
-        >
-          {headerText}
-        </H3>
-      )}
-      {users.map(user => (
+      {emails.map(email => (
         <HoverableRow
-          key={`el-user-${user.id}`}
+          key={`el-user-${email}`}
           align="center"
           justify="between"
           mx={-20}
@@ -87,13 +50,13 @@ const UserList = ({
           hoverColor={colors.linkWater}
         >
           <Row align="center">
-            <Img src={user.avatar || userAvatar} alt="avatar" mr={15} />
+            <Img src={userAvatar} alt="avatar" mr={15} />
             <Text fontSize={fontSizes.regular} lineHeight="270%">
-              {user.email}
+              {email}
             </Text>
-            {buttonIsClose && getAction(user)}
+            <Box>{buttonIsClose && getActionButton(email)}</Box>
           </Row>
-          {!buttonIsClose && getAction(user)}
+          <Box>{!buttonIsClose && getActionButton(email)}</Box>
         </HoverableRow>
       ))}
     </Column>
@@ -101,11 +64,11 @@ const UserList = ({
 };
 
 UserList.propTypes = {
-  users: PropTypes.array,
-  headerText: PropTypes.node,
+  emails: PropTypes.array,
   buttonIsClose: PropTypes.bool,
   buttonText: PropTypes.node,
   buttonAction: PropTypes.func,
+  resendLoading: PropTypes.object,
 };
 
 UserList.defaultProps = {

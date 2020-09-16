@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import head from 'lodash/head';
 import map from 'lodash/map';
 import uniq from 'lodash/uniq';
 import filter from 'lodash/filter';
 import isEmpty from 'lodash/isEmpty';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import Button from 'components/Button';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import CsvFileReader from 'components/CsvFileReader';
+import Box from 'components/Box';
 
-import messages from '../messages';
-import ChipsInput from './ChipsInput';
 import { validEmailRegExp } from '../utils';
+import ChipsInput from './ChipsInput';
+import messages from '../messages';
 
-const ParticipantInviter = ({ intl: { formatMessage } }) => {
-  const [value, setValue] = useState([]);
+const ParticipantInviter = ({
+  intl: { formatMessage },
+  sendInvite,
+  loading,
+}) => {
+  const [emails, setEmails] = useState([]);
 
   const handleUploadCsv = data => {
     const parsedData = uniq(
@@ -30,26 +35,35 @@ const ParticipantInviter = ({ intl: { formatMessage } }) => {
         val => val !== null,
       ),
     );
-    setValue(parsedData);
+    setEmails(parsedData);
+  };
+
+  const handleSend = () => {
+    sendInvite(emails);
+    setEmails([]);
   };
 
   return (
     <Column>
       <Row align="center" justify="between">
         <ChipsInput
-          value={value}
-          setValue={setValue}
+          value={emails}
+          setValue={setEmails}
           placeholder={formatMessage(messages.emailPlaceholder)}
         />
-        <Button
-          disabled={isEmpty(value)}
-          width={140}
-          ml={12}
-          hoverable
-          alignSelf="start"
-        >
-          <FormattedMessage {...messages.sendText} />
-        </Button>
+        <Box width={140}>
+          <Button
+            disabled={isEmpty(emails)}
+            width={140}
+            ml={12}
+            hoverable
+            alignSelf="start"
+            onClick={handleSend}
+            loading={loading}
+          >
+            <FormattedMessage {...messages.sendText} />
+          </Button>
+        </Box>
       </Row>
       <Column mt={12}>
         <Row>
@@ -64,6 +78,8 @@ const ParticipantInviter = ({ intl: { formatMessage } }) => {
 
 ParticipantInviter.propTypes = {
   intl: intlShape,
+  sendInvite: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 export default injectIntl(ParticipantInviter);

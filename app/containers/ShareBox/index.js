@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -16,18 +16,32 @@ import CopyToClipboard from 'components/CopyToClipboard';
 import H2 from 'components/H2';
 import Row from 'components/Row';
 import H3 from 'components/H3';
+
 import { colors, boxShadows } from 'theme';
+import {
+  sendInterventionInviteRequest,
+  resendInterventionInviteRequest,
+  makeSelectProblemLoader,
+} from 'global/reducers/problem';
 
 import ParticipantInviter from './Components/ParticipantInviter';
 import UserList from './Components/UserList';
 import messages from './messages';
 import { makeSelectCurrenIntervention } from './selectors';
 
-const ShareBox = ({ intervention }) => {
+const ShareBox = ({
+  intervention,
+  sendInvite,
+  resendInvite,
+  sendLoading,
+  resendLoading,
+}) => {
+  const { problem_id: problemId, slug, emails } = intervention || {};
+
   if (intervention) {
-    const link = `${process.env.WEB_URL}/interventions/${
-      intervention.problem_id
-    }/sessions/${intervention.slug}/fill`;
+    const link = `${
+      process.env.WEB_URL
+    }/interventions/${problemId}/sessions/${slug}/fill`;
     return (
       <Box
         shadow={boxShadows.selago}
@@ -49,17 +63,31 @@ const ShareBox = ({ intervention }) => {
         </H3>
         <H2>{intervention.name}</H2>
         <Row mt={20}>
-          <ParticipantInviter />
+          <ParticipantInviter loading={sendLoading} sendInvite={sendInvite} />
         </Row>
         <Row mt={15}>
           <CopyToClipboard textToCopy={link}>
             <FormattedMessage {...messages.copyLabel} />
           </CopyToClipboard>
         </Row>
-        <Row mt={40}>
+        {emails && emails.length !== 0 && (
+          <H3
+            mt={40}
+            mb={15}
+            fontSize={13}
+            fontWeight="bold"
+            color={colors.bluewood}
+            textOpacity={0.6}
+          >
+            <FormattedMessage {...messages.userListLabel} />
+          </H3>
+        )}
+        <Row maxHeight={350} overflow="scroll" padding={10}>
           <UserList
-            headerText={<FormattedMessage {...messages.userListLabel} />}
             buttonText={<FormattedMessage {...messages.resend} />}
+            buttonAction={resendInvite}
+            emails={emails}
+            resendLoading={resendLoading}
           />
         </Row>
       </Box>
@@ -72,12 +100,29 @@ ShareBox.propTypes = {
   intervention: PropTypes.shape({
     name: PropTypes.string,
   }),
+  sendInvite: PropTypes.func,
+  resendInvite: PropTypes.func,
+  sendLoading: PropTypes.bool,
+  resendLoading: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectCurrenIntervention(),
+  sendLoading: makeSelectProblemLoader('sendInterventionLoading'),
+  resendLoading: makeSelectProblemLoader('resendInterventionLoading'),
 });
 
-const withConnect = connect(mapStateToProps);
+const mapDispatchToProps = {
+  sendInvite: sendInterventionInviteRequest,
+  resendInvite: resendInterventionInviteRequest,
+};
 
-export default compose(withConnect)(ShareBox);
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(
+  withConnect,
+  injectIntl,
+)(ShareBox);
