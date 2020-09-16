@@ -10,6 +10,7 @@ import {
   reflectionType,
   pauseType,
   feedbackBlockType,
+  reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
 import { getFromQuestionTTS } from 'global/reducers/questions/utils';
 
@@ -134,6 +135,15 @@ export const instantiateBlockForType = (type, endPosition, question) => {
       return {
         action: feedbackActions.noAction,
         question_id: '',
+        reflections: [],
+        animation: 'rest',
+        ...sharedProperties,
+      };
+
+    case reflectionFormulaType:
+      return {
+        action: feedbackActions.noAction,
+        payload: '',
         reflections: [],
         animation: 'rest',
         ...sharedProperties,

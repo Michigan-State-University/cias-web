@@ -19,9 +19,7 @@ const VisualAnalogueScaleQuestionLayout = ({
   setFeedbackSettings,
 }) => {
   const sliderRef = useRef(null);
-  const targetNumber = parseInt(targetValue, 10)
-    ? parseInt(targetValue, 10)
-    : 0;
+  const targetNumber = parseInt(targetValue, 10);
   const higherValue = 100 - targetNumber;
   const lowerPosition = targetNumber / 2;
   const higherPosition = targetNumber + higherValue / 2;

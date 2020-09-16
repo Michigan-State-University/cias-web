@@ -76,6 +76,10 @@ export default defineMessages({
     id: `${scope}.reflectionToggle`,
     defaultMessage: 'Use Reflection',
   },
+  formulaToggle: {
+    id: `${scope}.formulaToggle`,
+    defaultMessage: 'Use Formula',
+  },
   chooseQuestion: {
     id: `${scope}.chooseQuestion`,
     defaultMessage: 'Choose Question',
@@ -127,5 +131,30 @@ export default defineMessages({
   speechAnimation: {
     id: `${scope}.speechAnimation`,
     defaultMessage: 'Select Speech Animation',
+  },
+  formulaPlaceholder: {
+    id: `${scope}.formulaPlaceholder`,
+    defaultMessage:
+      'Enter formula here... (You can use mathematical operators +, -, *, /)',
+  },
+  newCase: {
+    id: `${scope}.newCase`,
+    defaultMessage: '+ Add another case',
+  },
+  if: {
+    id: `${scope}.if`,
+    defaultMessage: 'If',
+  },
+  equalsTo: {
+    id: `${scope}.equalsTo`,
+    defaultMessage: 'narrator will say:',
+  },
+  formulaHeader: {
+    id: `${scope}.formulaHeader`,
+    defaultMessage: 'Formula',
+  },
+  addVariable: {
+    id: `${scope}.addVariable`,
+    defaultMessage: '+ From list',
   },
 });

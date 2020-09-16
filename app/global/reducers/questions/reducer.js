@@ -189,10 +189,10 @@ export const questionsReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_QUESTION_DATA:
-        draft.questions[state.selectedQuestion] = {
-          ...draft.questions[state.selectedQuestion],
+        draft.questions[draft.selectedQuestion] = {
+          ...draft.questions[draft.selectedQuestion],
           ...questionDataReducer(
-            state.questions[state.selectedQuestion],
+            draft.questions[draft.selectedQuestion],
             action.payload,
           ),
         };
@@ -201,13 +201,13 @@ export const questionsReducer = (state = initialState, action) =>
 
       case UPDATE_QUESTION_SETTINGS:
         const settings = questionSettingsReducer(
-          state.questions,
+          draft.questions,
           action.payload,
-          state.selectedQuestion,
+          draft.selectedQuestion,
         );
         draft.loaders.updateQuestionLoading = true;
-        draft.questions[state.selectedQuestion] = {
-          ...draft.questions[state.selectedQuestion],
+        draft.questions[draft.selectedQuestion] = {
+          ...draft.questions[draft.selectedQuestion],
           ...settings,
         };
         break;

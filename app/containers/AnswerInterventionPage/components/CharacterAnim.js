@@ -16,6 +16,7 @@ import {
   readQuestionBlockType,
   pauseType,
   feedbackBlockType,
+  reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
 
 import Draggable from 'react-draggable';
@@ -98,6 +99,7 @@ const CharacterAnim = ({
         case speechType:
         case reflectionType:
         case readQuestionBlockType:
+        case reflectionFormulaType:
           changeSpeech(nextBlock, nextIndex);
           break;
 
@@ -185,6 +187,7 @@ const CharacterAnim = ({
         case speechType:
         case reflectionType:
         case readQuestionBlockType:
+        case reflectionFormulaType:
           return getInitialSpeechAnimation();
 
         case headAnimationType:
@@ -234,6 +237,7 @@ const CharacterAnim = ({
         case speechType:
         case reflectionType:
         case readQuestionBlockType:
+        case reflectionFormulaType:
           if (!settings.voice) changeBlock();
           else handleAudioBlock();
           break;
@@ -260,7 +264,8 @@ const CharacterAnim = ({
   const decideIfLoopAnimation = () =>
     (get(state, 'currentData.type', 'none') === speechType ||
       get(state, 'currentData.type', 'none') === reflectionType ||
-      get(state, 'currentData.type', 'none') === readQuestionBlockType) &&
+      get(state, 'currentData.type', 'none') === readQuestionBlockType ||
+      get(state, 'currentData.type', 'none') === reflectionFormulaType) &&
     get(state, 'currentData.isLoop', false);
 
   const getAnimationOptions = () => {
@@ -272,7 +277,8 @@ const CharacterAnim = ({
       const isSpeechType =
         state.currentData.type === speechType ||
         state.currentData.type === reflectionType ||
-        state.currentData.type === readQuestionBlockType;
+        state.currentData.type === readQuestionBlockType ||
+        state.currentData.type === reflectionFormulaType;
 
       return {
         name: state.currentData.name,

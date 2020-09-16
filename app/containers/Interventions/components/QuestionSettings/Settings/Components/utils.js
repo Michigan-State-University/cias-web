@@ -10,12 +10,15 @@ import {
   reflectionType,
   pauseType,
   feedbackBlockType,
+  reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
 
 import AnimationBlock from './Blocks/AnimationBlock';
 import ReflectionBlock from './Blocks/Reflections/ReflectionBlock';
 import SpeechBlock from './Blocks/SpeechBlock';
 import PauseBlock from './Blocks/PauseBlock';
+import FeedbackBlock from './Blocks/FeedbackBlock';
+import ReflectionFormulaBlock from './Blocks/Reflections/ReflectionFormulaBlock';
 
 export const getBlockColor = (type, { animation, voice }) => {
   switch (type) {
@@ -23,6 +26,7 @@ export const getBlockColor = (type, { animation, voice }) => {
       return animation ? blockTypeToColorMap[type] : colors.grey;
     case speechType:
     case reflectionType:
+    case reflectionFormulaType:
       return voice ? blockTypeToColorMap[type] : colors.grey;
     case readQuestionBlockType:
       return voice ? blockTypeToColorMap[type] : colors.grey;
@@ -53,8 +57,12 @@ export const renderBlock = (block, index, id, formatMessage) => {
       return <SpeechBlock {...sharedProps} />;
     case reflectionType:
       return <ReflectionBlock {...sharedProps} />;
+    case reflectionFormulaType:
+      return <ReflectionFormulaBlock {...sharedProps} />;
     case pauseType:
       return <PauseBlock {...sharedProps} />;
+    case feedbackBlockType:
+      return <FeedbackBlock {...sharedProps} />;
     default:
       return null;
   }

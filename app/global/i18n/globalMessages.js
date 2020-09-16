@@ -1,5 +1,16 @@
 import { defineMessages } from 'react-intl';
 
+import {
+  bodyAnimationType,
+  speechType,
+  reflectionType,
+  headAnimationType,
+  readQuestionBlockType,
+  pauseType,
+  feedbackBlockType,
+  reflectionFormulaType,
+} from 'models/Narrator/BlockTypes';
+
 export const scope = 'app.GlobalMessages';
 
 export default defineMessages({
@@ -22,32 +33,36 @@ export default defineMessages({
     },
   },
   blockTypes: {
-    BodyAnimation: {
-      id: `${scope}.BodyAnimation`,
+    [bodyAnimationType]: {
+      id: `${scope}.${bodyAnimationType}`,
       defaultMessage: 'Body Animation',
     },
-    Speech: {
-      id: `${scope}.Speech`,
+    [speechType]: {
+      id: `${scope}.${speechType}`,
       defaultMessage: 'Speech',
     },
-    Reflection: {
-      id: `${scope}.Reflection`,
+    [reflectionType]: {
+      id: `${scope}.${reflectionType}`,
       defaultMessage: 'Speech',
     },
-    HeadAnimation: {
-      id: `${scope}.HeadAnimation`,
+    [reflectionFormulaType]: {
+      id: `${scope}.${reflectionFormulaType}`,
+      defaultMessage: 'Speech',
+    },
+    [headAnimationType]: {
+      id: `${scope}.${headAnimationType}`,
       defaultMessage: 'Head Animation',
     },
-    ReadQuestion: {
-      id: `${scope}.ReadQuestion`,
+    [readQuestionBlockType]: {
+      id: `${scope}.${readQuestionBlockType}`,
       defaultMessage: 'Read question',
     },
-    Pause: {
-      id: `${scope}.Pause`,
+    [pauseType]: {
+      id: `${scope}.${pauseType}`,
       defaultMessage: 'Pause',
     },
-    Feedback: {
-      id: `${scope}.Feedback`,
+    [feedbackBlockType]: {
+      id: `${scope}.${feedbackBlockType}`,
       defaultMessage: 'Show Spectrum',
     },
   },

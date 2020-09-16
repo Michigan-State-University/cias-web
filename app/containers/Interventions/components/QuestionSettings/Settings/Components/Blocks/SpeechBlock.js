@@ -24,13 +24,17 @@ import {
   makeSelectSelectedQuestionType,
 } from 'global/reducers/questions';
 import { speechAnimations } from 'utils/animations/animationsNames';
-import { speechType, readQuestionBlockType } from 'models/Narrator/BlockTypes';
 import { splitAndKeep } from 'utils/splitAndKeep';
 import {
   makeSelectPreviewData,
   updatePreviewData,
   updatePreviewAnimation,
 } from 'global/reducers/localState';
+import {
+  speechType,
+  readQuestionBlockType,
+  reflectionType,
+} from 'models/Narrator/BlockTypes';
 
 import { feedbackQuestion } from 'models/Intervention/QuestionTypes';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
@@ -224,7 +228,8 @@ const mapDispatchToProps = {
     updateBlockSettings(index, { animation }, id),
   updateNarratorPreviewData: updatePreviewData,
   updateNarratorPreviewAnimation: updatePreviewAnimation,
-  switchToReflection: (index, id) => switchSpeechReflection(index, id),
+  switchToReflection: (index, id) =>
+    switchSpeechReflection(index, id, reflectionType),
   updateAction: (index, action, id) =>
     updateBlockSettings(
       index,

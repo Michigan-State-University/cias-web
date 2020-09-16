@@ -7,23 +7,20 @@ import { connect } from 'react-redux';
 import keys from 'lodash/keys';
 import values from 'lodash/values';
 
+import { colors, themeColors } from 'theme';
+
+import VariableChooser from 'components/BranchingLayout/VariableChooser';
 import Column from 'components/Column';
 import Box from 'components/Box';
 import Select from 'components/Select';
 import Row from 'components/Row';
 import Switch from 'components/Switch';
 import Text from 'components/Text';
-import ArrowDropdown from 'components/ArrowDropdown';
 
-import Question from 'models/Intervention/Question';
-import {
-  singleQuestion,
-  gridQuestion,
-  multiQuestion,
-  feedbackQuestion,
-} from 'models/Intervention/QuestionTypes';
-import { findQuestionById } from 'models/Intervention/utils';
-import { htmlToPlainText } from 'utils/htmlToPlainText';
+import { StyledInput } from 'components/Input/StyledInput';
+
+import { feedbackQuestion } from 'models/Intervention/QuestionTypes';
+import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 
 import {
   makeSelectLoader,
@@ -33,83 +30,30 @@ import {
 } from 'global/reducers/questions';
 import { makeSelectPreviewData } from 'global/reducers/localState';
 
-import { speechType, reflectionFormulaType } from 'models/Narrator/BlockTypes';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import { speechAnimations } from 'utils/animations/animationsNames';
 import messages from '../../messages';
 import animationMessages from '../messages';
 import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
 
-import QuestionListDropdown from './QuestionListDropdown';
-import Reflection from './Reflection';
+import { DashedBox } from './styled';
+import { updateFormula, addFormulaCase } from './actions';
+import ReflectionFormula from './ReflectionFormula';
 
-const setUpReflections = question => {
-  switch (question.type) {
-    case singleQuestion.id: {
-      const variableName = question.body.variable.name;
-
-      return question.body.data.map(el => ({
-        variable: variableName,
-        value: el.value,
-        payload: htmlToPlainText(el.payload),
-        text: [],
-        sha256: [],
-        audio_urls: [],
-      }));
-    }
-    case multiQuestion.id: {
-      return question.body.data.map(el => ({
-        variable: el.variable.name,
-        value: el.variable.value,
-        payload: htmlToPlainText(el.payload),
-        text: [],
-        sha256: [],
-        audio_urls: [],
-      }));
-    }
-    case gridQuestion.id: {
-      const reflections = [];
-      const { rows } = question.body.data[0].payload;
-      const { columns } = question.body.data[0].payload;
-
-      for (const row of rows) {
-        for (const column of columns) {
-          reflections.push({
-            variable: row.variable.name,
-            value: column.variable.value,
-            payload: `${htmlToPlainText(row.payload)} - ${htmlToPlainText(
-              column.payload,
-            )}`,
-            text: [],
-            sha256: [],
-            audio_urls: [],
-          });
-        }
-      }
-
-      return reflections;
-    }
-    default:
-      return [];
-  }
-};
-
-const ReflectionBlock = ({
+const ReflectionFormulaBlock = ({
   formatMessage,
   block,
   updateAnimation,
   blockIndex,
   id,
   switchToSpeech,
-  questions,
-  updateQuestion,
   currentQuestionType,
   updateAction,
-  switchToReflectionFormula,
+  switchToReflection,
+  onFormulaUpdate,
+  onAddCase,
 }) => {
-  const [targetChooserOpen, setTargetChooserOpen] = useState(false);
-
-  const selectedQuestion = findQuestionById(questions, block.question_id);
+  const [variableChooserOpen, setVariableChooserOpen] = useState(false);
 
   const selectOptions = useMemo(() => {
     const animations = keys(speechAnimations);
@@ -182,60 +126,66 @@ const ReflectionBlock = ({
       <Row mb={15} align="center" justify="between">
         {formatMessage(messages.formulaToggle)}
         <Switch
+          checked
           mr={15}
-          onToggle={() => switchToReflectionFormula(blockIndex, id)}
+          onToggle={() => switchToReflection(blockIndex, id)}
         />
       </Row>
-      <ArrowDropdown
-        width="100%"
-        childWidthScope="parent"
-        positionFrom="right"
-        setOpen={value => setTargetChooserOpen(value)}
-        isOpened={targetChooserOpen}
-        dropdownContent={
-          <Box>
-            <Text textOverflow="ellipsis" whiteSpace="pre" overflow="hidden">
-              {selectedQuestion
-                ? htmlToPlainText(selectedQuestion.title)
-                : formatMessage(messages.chooseQuestion)}
-            </Text>
-          </Box>
-        }
-      >
-        <QuestionListDropdown
-          isVisible={targetChooserOpen}
-          chosenQuestionId={block.question_id}
-          onClick={question => {
-            setTargetChooserOpen(false);
-            updateQuestion(
-              blockIndex,
-              {
-                questionId: question.id,
-                reflections: setUpReflections(question),
-              },
-              id,
-            );
+
+      <Row mt={20} align="center" justify="between">
+        <Text fontWeight="bold">{formatMessage(messages.formulaHeader)}</Text>
+        <Box
+          onClick={() => setVariableChooserOpen(!variableChooserOpen)}
+          clickable
+        >
+          <Text
+            fontWeight="bold"
+            color={themeColors.secondary}
+            hoverDecoration="underline"
+          >
+            {formatMessage(messages.addVariable)}
+          </Text>
+        </Box>
+      </Row>
+      <Box position="relative">
+        <VariableChooser
+          visible={variableChooserOpen}
+          setOpen={setVariableChooserOpen}
+          onClick={value => {
+            setVariableChooserOpen(false);
+            onFormulaUpdate(`${block.payload}${value}`, id, blockIndex);
           }}
         />
-      </ArrowDropdown>
-      <Box mt={15}>
-        {block.reflections.map((reflection, index) => (
-          <Reflection
-            key={`${id}-reflection-${index}`}
-            formatMessage={formatMessage}
-            id={id}
-            reflectionIndex={index}
-            blockIndex={blockIndex}
-            reflection={reflection}
-            block={block}
-          />
-        ))}
       </Box>
+      <Box bg={colors.linkWater} width="100%" mt={10} mb={40} px={8} py={8}>
+        <StyledInput
+          type="multiline"
+          rows="5"
+          width="auto"
+          placeholder={formatMessage(messages.formulaPlaceholder)}
+          value={block.payload}
+          onBlur={value => onFormulaUpdate(value, id, blockIndex)}
+        />
+      </Box>
+      {block.reflections.map((reflection, index) => (
+        <ReflectionFormula
+          key={`${id}-reflection-${index}`}
+          formatMessage={formatMessage}
+          id={id}
+          reflectionIndex={index}
+          blockIndex={blockIndex}
+          reflection={reflection}
+          block={block}
+        />
+      ))}
+      <DashedBox mt={20} onClick={() => onAddCase(id, blockIndex)}>
+        {formatMessage(messages.newCase)}
+      </DashedBox>
     </Column>
   );
 };
 
-ReflectionBlock.propTypes = {
+ReflectionFormulaBlock.propTypes = {
   formatMessage: PropTypes.func.isRequired,
   block: PropTypes.shape({
     type: PropTypes.string,
@@ -244,15 +194,15 @@ ReflectionBlock.propTypes = {
   blockIndex: PropTypes.number,
   updateAnimation: PropTypes.func,
   switchToSpeech: PropTypes.func,
-  switchToReflectionFormula: PropTypes.func,
-  updateQuestion: PropTypes.func,
-  questions: PropTypes.arrayOf(PropTypes.shape(Question)),
+  switchToReflection: PropTypes.func,
   updateAction: PropTypes.func,
   currentQuestionType: PropTypes.string,
+  onFormulaUpdate: PropTypes.func,
+  onAddCase: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  updateLoader: makeSelectLoader('updateQuestionLoading'),
+  updateLoader: makeSelectLoader('updateQuestion'),
   previewData: makeSelectPreviewData(),
   selectedQuestion: makeSelectSelectedQuestion(),
   questions: makeSelectQuestions(),
@@ -264,10 +214,8 @@ const mapDispatchToProps = {
   updateAnimation: (index, animation, id) =>
     updateBlockSettings(index, { animation }, id),
   switchToSpeech: (index, id) => switchSpeechReflection(index, id, speechType),
-  switchToReflectionFormula: (index, id) =>
-    switchSpeechReflection(index, id, reflectionFormulaType),
-  updateQuestion: (index, { questionId, reflections }, id) =>
-    updateBlockSettings(index, { question_id: questionId, reflections }, id),
+  switchToReflection: (index, id) =>
+    switchSpeechReflection(index, id, reflectionType),
   updateAction: (index, action, id) =>
     updateBlockSettings(
       index,
@@ -277,6 +225,8 @@ const mapDispatchToProps = {
       },
       id,
     ),
+  onFormulaUpdate: updateFormula,
+  onAddCase: addFormulaCase,
 };
 
 const withConnect = connect(
@@ -284,4 +234,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(ReflectionBlock);
+export default compose(withConnect)(ReflectionFormulaBlock);

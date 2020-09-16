@@ -15,6 +15,7 @@ import {
   UPDATE_REFLECTION,
   REORDER_NARRATOR_BLOCKS,
   UPDATE_PAUSE_DURATION,
+  UPDATE_REFLECTION_FORMULA,
 } from './constants';
 
 export const updateSettings = (property, value) =>
@@ -64,10 +65,16 @@ export const updateReflection = (
     data: { blockIndex, reflectionIndex, value, questionId },
   });
 
-export const switchSpeechReflection = (index, questionId) =>
+export const switchSpeechReflection = (index, questionId, switchTo) =>
   updateQuestionSettings({
     type: SWITCH_SPEECH_REFLECTION,
-    data: { index, questionId },
+    data: { index, questionId, switchTo },
+  });
+
+export const updateReflectionFormulaBlock = (index, questionId, data) =>
+  updateQuestionSettings({
+    type: UPDATE_REFLECTION_FORMULA,
+    data: { ...data, questionId, index },
   });
 
 export const updateFormula = (value, questionId) =>

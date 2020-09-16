@@ -1,5 +1,4 @@
 import { instantiateBlockForType } from 'models/Intervention/utils';
-import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 import { getNarratorPositionForANewBlock } from 'utils/getNarratorPosition';
 
 import {
@@ -18,7 +17,9 @@ import {
   UPDATE_REFLECTION,
   REORDER_NARRATOR_BLOCKS,
   UPDATE_PAUSE_DURATION,
+  UPDATE_REFLECTION_FORMULA,
 } from './constants';
+import reflectionFormulaBlockReducer from './Components/Blocks/Reflections/reducer';
 
 /* eslint-disable default-case, no-param-reassign */
 const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
@@ -123,16 +124,31 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
 
     case SWITCH_SPEECH_REFLECTION: {
       const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
-      const newBlockType =
-        cloneBlocks[payload.data.index].type === speechType
-          ? reflectionType
-          : speechType;
+      const newBlockType = payload.data.switchTo;
+
       cloneBlocks[payload.data.index] = {
         ...instantiateBlockForType(newBlockType),
         endPosition: cloneBlocks[payload.data.index].endPosition,
         animation: cloneBlocks[payload.data.index].animation,
         action: cloneBlocks[payload.data.index].action,
       };
+
+      return {
+        ...question,
+        narrator: {
+          ...question.narrator,
+          blocks: cloneBlocks,
+        },
+      };
+    }
+
+    case UPDATE_REFLECTION_FORMULA: {
+      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+
+      cloneBlocks[payload.data.index] = reflectionFormulaBlockReducer(
+        cloneBlocks[payload.data.index],
+        payload.data,
+      );
 
       return {
         ...question,

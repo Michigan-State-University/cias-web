@@ -6,6 +6,7 @@ import {
   speechType,
   reflectionType,
   readQuestionBlockType,
+  reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
 import AudioWrapper from 'utils/audioWrapper';
 import { useRef } from 'react';
@@ -37,7 +38,8 @@ const useAudioHelper = (
       ({ type }) =>
         type === speechType ||
         type === reflectionType ||
-        type === readQuestionBlockType,
+        type === readQuestionBlockType ||
+        type === reflectionFormulaType,
     );
 
     const uniqAnimations = uniqBy(
@@ -76,6 +78,35 @@ const useAudioHelper = (
     return animations;
   };
 
+  const getReflectionData = block => {
+    const answer = answers[block.question_id];
+    const reflections = [];
+
+    if (answer && answer.answerBody) {
+      for (let i = 0; i < answer.answerBody.length; i += 1) {
+        const answerBody = answer.answerBody[i];
+        const matchReflection = block.reflections.find(
+          reflection =>
+            reflection.variable === answerBody.var &&
+            reflection.value === answerBody.value,
+        );
+
+        if (matchReflection) reflections.push(matchReflection);
+      }
+    }
+
+    return { audio_urls: [], reflections };
+  };
+
+  const getReflectionFormulaData = block =>
+    !Array.isArray(block.target_value) && block.target_value
+      ? block.target_value
+      : {
+          audio_urls: [],
+          sha256: [],
+          text: block.text,
+        };
+
   const changeSpeech = (nextBlock, nextIndex) => {
     const speechData = loadedSpeechAnimations.current.find(
       anim => anim.name === (nextBlock ? nextBlock.animation : undefined),
@@ -97,6 +128,7 @@ const useAudioHelper = (
           currentBlockIndex: nextIndex,
         });
         break;
+
       case reflectionType:
         dispatchUpdate({
           currentData: {
@@ -112,28 +144,24 @@ const useAudioHelper = (
           currentBlockIndex: nextIndex,
         });
         break;
+
+      case reflectionFormulaType:
+        dispatchUpdate({
+          currentData: {
+            ...speechData,
+            ...nextBlock,
+            ...getReflectionFormulaData(nextBlock),
+            currentAnimation: initialAnimation,
+            isLoop: initialAnimation !== 'start',
+            currentAudioIndex: 0,
+          },
+          currentBlockIndex: nextIndex,
+        });
+        break;
+
       default:
         break;
     }
-  };
-
-  const getReflectionData = block => {
-    const answer = answers[block.question_id];
-    const reflections = [];
-
-    if (answer && answer.answerBody) {
-      answer.answerBody.forEach(answerBody => {
-        const matchReflection = block.reflections.find(
-          reflection =>
-            reflection.variable === answerBody.var &&
-            reflection.value === answerBody.value,
-        );
-
-        if (matchReflection) reflections.push(matchReflection);
-      });
-    }
-
-    return { audio_urls: [], reflections };
   };
 
   const getInitialSpeechAnimation = () => {
@@ -153,6 +181,7 @@ const useAudioHelper = (
           isLoop: initialAnimation !== 'start',
           currentAudioIndex: 0,
         };
+
       case reflectionType:
         return {
           ...blocks[0],
@@ -164,6 +193,17 @@ const useAudioHelper = (
           currentAudioIndex: 0,
           currentReflectionIndex: 0,
         };
+
+      case reflectionFormulaType:
+        return {
+          ...blocks[0],
+          ...speechData,
+          ...getReflectionFormulaData(blocks[0]),
+          currentAnimation: initialAnimation,
+          isLoop: initialAnimation !== 'start',
+          currentAudioIndex: 0,
+        };
+
       default:
         return undefined;
     }
@@ -181,8 +221,10 @@ const useAudioHelper = (
       switch (currentData.type) {
         case speechType:
         case readQuestionBlockType:
+        case reflectionFormulaType:
           handleSpeech(currentData.audio_urls);
           break;
+
         case reflectionType:
           handleSpeech(
             currentData.reflections.length
@@ -191,6 +233,7 @@ const useAudioHelper = (
               : [],
           );
           break;
+
         default:
           break;
       }
@@ -309,6 +352,7 @@ const useAudioHelper = (
     switch (currentData.type) {
       case speechType:
       case readQuestionBlockType:
+      case reflectionFormulaType:
         changeBlock();
         break;
       case reflectionType:
@@ -346,7 +390,8 @@ const useAudioHelper = (
       currentData &&
       (currentData.type === speechType ||
         currentData.type === reflectionType ||
-        currentData.type === readQuestionBlockType) &&
+        currentData.type === readQuestionBlockType ||
+        currentData.type === reflectionFormulaType) &&
       (audio.current.paused || audio.current.stopped) &&
       (currentData.currentAnimation !== 'start' &&
         currentData.currentAnimation !== 'end')

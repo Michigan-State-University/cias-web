@@ -17,6 +17,9 @@ export const UPDATE_BLOCK_SETTINGS =
 export const UPDATE_REFLECTION =
   'app/EditInterventionPage/Settings/UPDATE_REFLECTION';
 
+export const UPDATE_REFLECTION_FORMULA =
+  'app/EditInterventionPage/Settings/UPDATE_REFLECTION_FORMULA';
+
 export const SWITCH_SPEECH_REFLECTION =
   'app/EditInterventionPage/Settings/SWITCH_SPEECH_REFLECTION';
 
