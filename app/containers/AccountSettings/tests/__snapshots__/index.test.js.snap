@@ -247,7 +247,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
           class="Box-sc-14m3exe-0 gCvoQs"
         >
           <button
-            class="TextButton-sc-12pwroy-0 styled__StyledTextButton-k1l7f-3 ljBZKC"
+            class="StyledTextButton-sc-17cmh3t-0 styled__TextButton-k1l7f-3 cACMPB"
             color="#C866EA"
             font-size="14"
             font-weight="bold"

@@ -13,6 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { error } from 'react-toastify-redux';
 import get from 'lodash/get';
+import { Redirect } from 'react-router-dom';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -122,6 +123,28 @@ export function AnswerInterventionPage({
 }) {
   useInjectReducer({ key: 'answerInterventionPage', reducer });
   useInjectSaga({ key: 'answerInterventionPage', saga });
+  const { interventionId, index } = params;
+
+  useEffect(() => {
+    fetchQuestionsAction(interventionId);
+    if (index) {
+      setQuestionIndexAction(parseInt(index, 10));
+      onStartIntervention();
+    }
+  }, []);
+
+  if (questionError)
+    return (
+      <Redirect
+        to={{
+          pathname: '/not-found-page',
+          state: {
+            header: formatMessage(messages.noEntranceHeader),
+            text: formatMessage(messages.noEntranceText),
+          },
+        }}
+      />
+    );
 
   const assignCurrentQuestion = () => {
     const question = interventionQuestions[questionIndex];
@@ -136,16 +159,6 @@ export function AnswerInterventionPage({
     : null;
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
-
-  const { interventionId, index } = params;
-
-  useEffect(() => {
-    fetchQuestionsAction(interventionId);
-    if (index) {
-      setQuestionIndexAction(parseInt(index, 10));
-      onStartIntervention();
-    }
-  }, []);
 
   const saveAnswer = nextQuestionIndex =>
     submitAnswerRequest(
@@ -234,6 +247,8 @@ export function AnswerInterventionPage({
 
   const renderPage = () => <Fragment>{renderQuestion()}</Fragment>;
 
+  if (questionLoading) return <Loader />;
+
   const isDesktop = previewMode === DESKTOP_MODE;
   return (
     <Box
@@ -275,9 +290,7 @@ export function AnswerInterventionPage({
                 </AnimationRefHelper>
               )}
             </Box>
-            {questionError && <ErrorAlert errorText={questionError} />}
             {answersError && <ErrorAlert errorText={answersError} />}
-            {questionLoading && <Loader />}
             {!questionLoading && !currentQuestion && (
               <Box mt={50}>
                 <FormattedMessage {...messages.completeIntervention} />

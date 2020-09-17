@@ -24,7 +24,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
           </span>
         </h1>
         <button
-          class="TextButton-sc-12pwroy-0 hVXcMo"
+          class="StyledTextButton-sc-17cmh3t-0 kyRCKj"
           color="#C866EA"
         >
           <span>
@@ -93,7 +93,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   </p>
                 </div>
                 <button
-                  class="TextButton-sc-12pwroy-0 cctrGb"
+                  class="StyledTextButton-sc-17cmh3t-0 emjvYX"
                   color="#9AA1B6"
                   disabled=""
                 >

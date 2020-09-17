@@ -1,6 +1,7 @@
 import produce from 'immer';
 import set from 'lodash/set';
 import union from 'lodash/union';
+import get from 'lodash/get';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 import interventionSettingsReducer from './interventionSettings/reducer';
@@ -61,7 +62,6 @@ export const initialState = {
     sendInterventionLoading: false,
     resendInterventionLoading: {
       email: null,
-      loading: false,
     },
   },
   errors: {
@@ -85,7 +85,10 @@ export const problemReducer = (state = initialState, action) =>
         break;
       case FETCH_PROBLEM_SUCCESS:
         draft.loaders.fetchProblemLoading = false;
+        // to discuss the solution in the future, FETCH_PROBLEM_SUCCESS overwrites FETCH_USERS_WITH_ACCESS_SUCCESS
+        const temp = get(draft.problem, 'usersWithAccess', null);
         draft.problem = action.payload.problem;
+        set(draft.problem, 'usersWithAccess', temp);
         draft.cache.problem = action.payload.problem;
         break;
       case FETCH_PROBLEM_ERROR:
@@ -171,7 +174,6 @@ export const problemReducer = (state = initialState, action) =>
       case RESEND_INTERVENTION_INVITE_REQUEST:
         draft.loaders.resendInterventionLoading = {
           email: action.payload.emails[0],
-          loading: true,
         };
         break;
 

@@ -33,4 +33,12 @@ export default defineMessages({
     id: `${scope}.completeIntervention`,
     defaultMessage: 'Thanks for completing intervention',
   },
+  noEntranceHeader: {
+    id: `${scope}.noEntranceText`,
+    defaultMessage: `You can't open this session!`,
+  },
+  noEntranceText: {
+    id: `${scope}.noEntranceText`,
+    defaultMessage: `The session is not published yet or you were not given an access to it. Please, contact the support if this issue should not have occurred.`,
+  },
 });

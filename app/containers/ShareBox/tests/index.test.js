@@ -33,7 +33,6 @@ describe('<ShareBox />', () => {
         sendInterventionLoading: false,
         resendInterventionLoading: {
           email: null,
-          loading: false,
         },
       },
     },

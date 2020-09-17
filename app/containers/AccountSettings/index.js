@@ -12,20 +12,19 @@ import Box from 'components/Box';
 import Row from 'components/Row';
 import BackButton from 'components/BackButton';
 import H1 from 'components/H1';
-
 import { colors, themeColors, boxShadows } from 'theme';
-import TimezoneForm from 'containers/AccountSettings/Containers/TimezoneForm';
 import messages from './messages';
 import FullNameForm from './Containers/FullNameForm';
 import PasswordForm from './Containers/PasswordForm';
 import AvatarForm from './Containers/AvatarForm';
 import EmailForm from './Containers/EmailForm';
+import TimezoneForm from './Containers/TimezoneForm';
 
 import {
   StyledBox,
   StyledColumn,
   StyledRow,
-  StyledTextButton,
+  TextButton,
   StyledInputBox,
 } from './styled';
 
@@ -72,7 +71,7 @@ const AccountSettings = ({ intl: { formatMessage } }) => {
               <TimezoneForm formatMessage={formatMessage} />
             </StyledInputBox>
             <Box mb={10}>
-              <StyledTextButton
+              <TextButton
                 onClick={openReset}
                 whiteSpace="nowrap"
                 fontWeight="bold"
@@ -80,7 +79,7 @@ const AccountSettings = ({ intl: { formatMessage } }) => {
                 color={themeColors.secondary}
               >
                 <FormattedMessage {...messages.changePassword} />
-              </StyledTextButton>
+              </TextButton>
             </Box>
           </StyledRow>
         </StyledColumn>

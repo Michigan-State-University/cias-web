@@ -23,7 +23,7 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import BackButton from 'components/BackButton';
 import ShareBox from 'containers/ShareBox';
-import TextButton from 'components/Button/TextButton';
+import StyledTextButton from 'components/Button/StyledTextButton';
 import Text from 'components/Text';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
@@ -287,9 +287,9 @@ export function ProblemDetailsPage({
           {sharedTo && <FormattedMessage {...messages[sharedTo]} />}
         </Text>
         <Link to={`/interventions/${id}/settings`}>
-          <TextButton color={themeColors.secondary}>
+          <StyledTextButton color={themeColors.secondary}>
             <FormattedMessage {...messages.adjust} />
-          </TextButton>
+          </StyledTextButton>
         </Link>
       </Row>
       <Row>

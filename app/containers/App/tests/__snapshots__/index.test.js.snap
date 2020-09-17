@@ -217,6 +217,8 @@ exports[`<App /> should render and match the snapshot 1`] = `
     />
     <Memo(ConnectFunction)
       component={[Function]}
+      exact={true}
+      path="/not-found-page"
     />
   </Switch>
   <GlobalStyleComponent />

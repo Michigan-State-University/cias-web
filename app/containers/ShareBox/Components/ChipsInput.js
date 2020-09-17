@@ -8,13 +8,12 @@ import { connect } from 'react-redux';
 import { error } from 'react-toastify-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { emailValidator } from 'utils/validators/emailValidator';
-
 import Box from 'components/Box';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import deleteIcon from 'assets/svg/delete.svg';
 import { colors } from 'theme';
+import { emailValidator } from 'utils/validators/emailValidator';
 
 import useOutsideClick from 'utils/useOutsideClick';
 import messages from '../messages';

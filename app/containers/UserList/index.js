@@ -37,7 +37,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 
 import H1 from 'components/H1';
 import UserRoleTile from 'components/UserRoleTile';
-import TextButton from 'components/Button/TextButton';
+import StyledTextButton from 'components/Button/StyledTextButton';
 import SearchInput from 'components/Input/SearchInput';
 import { Roles } from 'models/User/UserRoles';
 import Checkbox from 'components/Checkbox';
@@ -92,7 +92,7 @@ export function UserList({
                     disabled={!selectRoles.includes(role)}
                   />
                 ))}
-                <TextButton
+                <StyledTextButton
                   mr={10}
                   color={
                     selectRoles.length !== rolesToFilter.length
@@ -103,7 +103,7 @@ export function UserList({
                   onClick={() => setSelectRoles(rolesToFilter)}
                 >
                   <FormattedMessage {...messages.resetRoles} />
-                </TextButton>
+                </StyledTextButton>
                 <Box
                   cursor="pointer"
                   onClick={() => setShowInactive(!showInactive)}
@@ -192,12 +192,12 @@ export function UserList({
           <H1 mr={10}>
             <FormattedMessage {...messages.manageAccount} />
           </H1>
-          <TextButton
+          <StyledTextButton
             color={themeColors.secondary}
             onClick={() => console.log('showModal')}
           >
             <FormattedMessage {...messages.inviteResearcher} />
-          </TextButton>
+          </StyledTextButton>
         </Box>
         {getContent()}
       </Box>

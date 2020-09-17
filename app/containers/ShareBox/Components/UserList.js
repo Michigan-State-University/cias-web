@@ -5,31 +5,33 @@ import Column from 'components/Column';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import Text from 'components/Text';
-import Spinner from 'components/Spinner';
-import Box from 'components/Box';
 
 import userAvatar from 'assets/svg/user.svg';
 import { colors, fontSizes, themeColors } from 'theme';
 
-import { StyledTextButton, HoverableRow } from '../styled';
+import { HoverableRow, StyledTextButton } from '../styled';
 
 const UserList = ({
-  emails,
+  users,
   buttonIsClose,
   buttonText,
   buttonAction,
-  resendLoading,
+  userWithLoading,
 }) => {
-  const { loading, email: loadingEmail } = resendLoading || {};
-
-  const getActionButton = email => {
-    if (loading && loadingEmail === email)
-      return <Spinner color={themeColors.secondary} />;
+  const getActionButton = user => {
+    const handleClick = () => buttonAction(user);
     return (
       <StyledTextButton
-        onClick={() => buttonAction([email])}
-        fontWeight="bold"
-        ml={buttonIsClose ? 15 : null}
+        loading={userWithLoading.email === user.email}
+        onClick={handleClick}
+        buttonProps={{
+          ml: buttonIsClose ? 15 : null,
+          color: themeColors.secondary,
+        }}
+        loaderProps={{
+          ml: buttonIsClose ? 15 : null,
+          alignSelf: buttonIsClose ? null : 'end',
+        }}
       >
         {buttonText}
       </StyledTextButton>
@@ -38,9 +40,9 @@ const UserList = ({
 
   return (
     <Column>
-      {emails.map(email => (
+      {users.map(user => (
         <HoverableRow
-          key={`el-user-${email}`}
+          key={`el-user-${user.email}`}
           align="center"
           justify="between"
           mx={-20}
@@ -52,11 +54,11 @@ const UserList = ({
           <Row align="center">
             <Img src={userAvatar} alt="avatar" mr={15} />
             <Text fontSize={fontSizes.regular} lineHeight="270%">
-              {email}
+              {user.email}
             </Text>
-            <Box>{buttonIsClose && getActionButton(email)}</Box>
+            {buttonIsClose && getActionButton(user)}
           </Row>
-          <Box>{!buttonIsClose && getActionButton(email)}</Box>
+          {!buttonIsClose && getActionButton(user)}
         </HoverableRow>
       ))}
     </Column>
@@ -64,11 +66,14 @@ const UserList = ({
 };
 
 UserList.propTypes = {
-  emails: PropTypes.array,
+  users: PropTypes.array,
   buttonIsClose: PropTypes.bool,
   buttonText: PropTypes.node,
   buttonAction: PropTypes.func,
-  resendLoading: PropTypes.object,
+  userWithLoading: PropTypes.shape({
+    email: PropTypes.string,
+    id: PropTypes.string,
+  }),
 };
 
 UserList.defaultProps = {

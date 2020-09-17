@@ -23,7 +23,7 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { Fill } from 'components/Fill';
 import Button from 'components/Button';
-import TextButton from 'components/Button/TextButton';
+import StyledTextButton from 'components/Button/StyledTextButton';
 import Column from 'components/Column';
 import H1 from 'components/H1';
 import Row from 'components/Row';
@@ -168,9 +168,9 @@ export function RegisterPage({
                   />
                   <Row justify="center" width="100%">
                     <Link to="/login">
-                      <TextButton color={themeColors.secondary}>
+                      <StyledTextButton color={themeColors.secondary}>
                         <FormattedMessage {...messages.login} />
-                      </TextButton>
+                      </StyledTextButton>
                     </Link>
                   </Row>
                 </>

@@ -38,6 +38,8 @@ const ShareBox = ({
 }) => {
   const { problem_id: problemId, slug, emails } = intervention || {};
 
+  const handleResend = user => resendInvite([user.email]);
+
   if (intervention) {
     const link = `${
       process.env.WEB_URL
@@ -85,9 +87,9 @@ const ShareBox = ({
         <Row maxHeight={350} overflow="scroll" padding={10}>
           <UserList
             buttonText={<FormattedMessage {...messages.resend} />}
-            buttonAction={resendInvite}
-            emails={emails}
-            resendLoading={resendLoading}
+            buttonAction={handleResend}
+            users={emails.map(email => ({ email }))}
+            userWithLoading={{ email: resendLoading.email }}
           />
         </Row>
       </Box>

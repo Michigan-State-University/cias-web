@@ -4,7 +4,7 @@ import Box from 'components/Box';
 import Row from 'components/Row';
 import Column from 'components/Column';
 import UserAvatar from 'components/UserAvatar';
-import TextButton from 'components/Button/TextButton';
+import StyledTextButton from 'components/Button/StyledTextButton';
 import UploadFileButton from 'components/UploadFileButton';
 import { mediaQuery } from 'theme';
 
@@ -40,7 +40,7 @@ export const StyledRow = styled(Row)`
   `}
 `;
 
-export const StyledTextButton = styled(TextButton)`
+export const TextButton = styled(StyledTextButton)`
   margin-left: 25px;
   margin-top: 22px;
   ${mediaQuery.tablet`
@@ -85,7 +85,7 @@ export const StyledButtonsRow = styled(Row)`
   `}
 `;
 
-export const StyledDeleteButton = styled(TextButton)`
+export const StyledDeleteButton = styled(StyledTextButton)`
   margin-left: 30px;
   ${mediaQuery.tablet`
     margin-top: 20px;

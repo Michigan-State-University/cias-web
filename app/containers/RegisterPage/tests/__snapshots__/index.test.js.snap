@@ -29,7 +29,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
           font-size="23"
         >
           <span>
-            Register researcher account
+            Register participant account
           </span>
         </h1>
         <div
@@ -147,7 +147,7 @@ exports[`<RegisterPage /> Should render and match the snapshot 1`] = `
             href="/login"
           >
             <button
-              class="TextButton-sc-12pwroy-0 hVXcMo"
+              class="StyledTextButton-sc-17cmh3t-0 kyRCKj"
               color="#C866EA"
             >
               <span>

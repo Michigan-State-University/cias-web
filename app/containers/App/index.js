@@ -180,7 +180,7 @@ export function App({ user }) {
             activeTab: interventionsTabId,
           }}
         />
-        <AppRoute component={NotFoundPage} />
+        <AppRoute exact path="/not-found-page" component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
     </Fragment>

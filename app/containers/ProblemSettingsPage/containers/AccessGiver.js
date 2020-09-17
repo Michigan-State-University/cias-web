@@ -5,6 +5,7 @@ import head from 'lodash/head';
 import map from 'lodash/map';
 import uniq from 'lodash/uniq';
 import isEmpty from 'lodash/isEmpty';
+import find from 'lodash/find';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import Box from 'components/Box';
@@ -69,7 +70,10 @@ const AccessGiver = ({
     setValue([]);
   };
 
-  const revokeAction = userId => revokeUserAccess(problemId, userId);
+  const revokeAction = user => {
+    const { id } = user;
+    if (id) revokeUserAccess(problemId, id);
+  };
 
   if (fetchUserAccessLoading)
     return (
@@ -114,10 +118,11 @@ const AccessGiver = ({
             />
           )}
           <UserList
-            emails={usersWithAccess || []}
+            users={usersWithAccess || []}
             buttonIsClose
             buttonText={formatMessage(messages.remove)}
             buttonAction={revokeAction}
+            userWithLoading={find(usersWithAccess, user => user.loading) || {}}
           />
           {enableAccessLoading && <Spinner color={themeColors.secondary} />}
         </Box>

@@ -11,7 +11,7 @@ export const scope = 'app.containers.RegisterPage';
 export default defineMessages({
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Register researcher account',
+    defaultMessage: 'Register participant account',
   },
   register: {
     id: `${scope}.register`,

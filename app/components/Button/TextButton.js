@@ -1,27 +1,62 @@
-import styled from 'styled-components';
+import React, { useRef } from 'react';
+import PropTypes from 'prop-types';
 
-import {
-  margin,
-  layout,
-  text,
-  padding,
-  flex,
-} from 'components/BaseComponentStyles';
+import Row from 'components/Row';
+import Spinner from 'components/Spinner';
+import { themeColors } from 'theme';
 
-const TextButton = styled.button`
-  outline: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 17px;
-  padding: 2px;
-  cursor: pointer;
-  ${margin};
-  ${layout};
-  ${text};
-  ${padding};
-  ${flex};
-`;
+import StyledTextButton from './StyledTextButton';
+
+const DEFAULT_WIDTH = 100;
+
+const getWidth = button => {
+  const { current } = button;
+  if (current) return current.clientWidth;
+  return DEFAULT_WIDTH;
+};
+
+const TextButton = ({
+  className,
+  children,
+  loading,
+  onClick,
+  buttonProps,
+  loaderProps,
+}) => {
+  const button = useRef(null);
+  if (loading)
+    return (
+      <Row
+        className={className}
+        width={getWidth(button)}
+        height="100%"
+        align="center"
+        justify="center"
+        {...loaderProps}
+      >
+        <Spinner color={themeColors.secondary} />
+      </Row>
+    );
+  return (
+    <StyledTextButton
+      ref={button}
+      className={className}
+      fontWeight="bold"
+      onClick={onClick}
+      {...buttonProps}
+    >
+      {children}
+    </StyledTextButton>
+  );
+};
+
+TextButton.propTypes = {
+  className: PropTypes.string,
+  children: PropTypes.node,
+  loading: PropTypes.bool,
+  onClick: PropTypes.func,
+  buttonProps: PropTypes.object,
+  loaderProps: PropTypes.object,
+};
 
 export default TextButton;
