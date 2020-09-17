@@ -15,8 +15,8 @@ import CsvFileReader from 'components/CsvFileReader';
 import H2 from 'components/H2';
 import Row from 'components/Row';
 import UserList from 'containers/ShareBox/Components/UserList';
-import { validEmailRegExp } from 'containers/ShareBox/utils';
 
+import { emailValidator } from 'utils/validators/emailValidator';
 import {
   enableUserAccessRequest,
   fetchUsersWithAccessRequest,
@@ -54,7 +54,7 @@ const AccessGiver = ({
       filter(
         map(data, columns => {
           const email = head(columns.data);
-          if (email && validEmailRegExp.test(email)) return email;
+          if (email && emailValidator.isValidSync(email)) return email;
           return null;
         }),
         val => val !== null,

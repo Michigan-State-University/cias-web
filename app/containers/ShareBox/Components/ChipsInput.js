@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { error } from 'react-toastify-redux';
 import { injectIntl, intlShape } from 'react-intl';
 
+import { emailValidator } from 'utils/validators/emailValidator';
+
 import Box from 'components/Box';
 import Img from 'components/Img';
 import Row from 'components/Row';
@@ -18,7 +20,6 @@ import useOutsideClick from 'utils/useOutsideClick';
 import messages from '../messages';
 import { INVALID_EMAIL_ERROR, DUPLICATED_EMAIL_ERROR } from '../constants';
 import { StyledChipsInput, HiddenInput } from '../styled';
-import { validEmailRegExp } from '../utils';
 
 const ChipsInput = ({
   value,
@@ -53,7 +54,7 @@ const ChipsInput = ({
     ) {
       const newEmail = inputEmailValue.trim().replace(',', '');
       const isAlreadyExist = find(value, email => email === newEmail);
-      const isValid = validEmailRegExp.test(newEmail);
+      const isValid = emailValidator.isValidSync(newEmail);
       if (isAlreadyExist) {
         showError(formatMessage(messages.duplicatedEmail), {
           id: DUPLICATED_EMAIL_ERROR,
