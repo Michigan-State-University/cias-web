@@ -14,6 +14,10 @@ import { compose } from 'redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+import set from 'lodash/set';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -33,6 +37,9 @@ import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
 import { register } from './actions';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const passwordLength = 8;
 
@@ -81,6 +88,8 @@ export function RegisterPage({
   useInjectSaga({ key: 'registerPage', saga });
 
   const onSubmit = (values, { setSubmitting }) => {
+    const currentTimeZone = dayjs.tz.guess();
+    set(values, 'time_zone', currentTimeZone);
     registerAction(values);
     setSubmitting(false);
   };

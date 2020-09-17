@@ -49,7 +49,7 @@ export const StyledTextButton = styled(TextButton)`
   `}
 `;
 
-export const StyledEmailBox = styled(Box)`
+export const StyledInputBox = styled(Box)`
   width: 50%;
   ${mediaQuery.tablet`
     width: 100%;

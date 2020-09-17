@@ -118,6 +118,10 @@ export default defineMessages({
     id: `${scope}.removeConfirmation`,
     defaultMessage: 'Are you sure you want to remove your profile photo?',
   },
+  timeZoneLabel: {
+    id: `${scope}.timeZoneLabel`,
+    defaultMessage: 'Time zone',
+  },
   emailLabel: {
     id: `${scope}.emailLabel`,
     defaultMessage: 'E-mail address',

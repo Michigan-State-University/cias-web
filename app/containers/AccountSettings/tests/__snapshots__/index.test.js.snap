@@ -138,11 +138,11 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Row-x1o3ru-0 styled__StyledRow-k1l7f-2 gXxqJd"
+        class="Row-x1o3ru-0 styled__StyledRow-k1l7f-2 ZHtXs"
         width="100%"
       >
         <div
-          class="Box-sc-14m3exe-0 styled__StyledEmailBox-k1l7f-4 ifyLRJ"
+          class="Box-sc-14m3exe-0 styled__StyledInputBox-k1l7f-4 bSoFiM"
           width="50%"
         >
           <div
@@ -171,8 +171,80 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="Box-sc-14m3exe-0 iLGplY"
-          width="50%"
+          class="Box-sc-14m3exe-0 styled__StyledInputBox-k1l7f-4 cwJDNV"
+        >
+          <div
+            class="Column-sc-1n6divy-0 cVSlLs"
+          >
+            <p
+              class="Text-sc-2lza2m-0 hrnqlx"
+              width="fit-content"
+            >
+              Time zone
+            </p>
+            <div
+              class="Box-sc-14m3exe-0 gfpMuw"
+            >
+              <div
+                class=" css-2b097c-container"
+              >
+                <div
+                  class=" css-4iyz22-control"
+                >
+                  <div
+                    class=" css-g1d714-ValueContainer"
+                  >
+                    <div
+                      class=" css-1uccc91-singleValue"
+                    >
+                      America/New_York (UTC -04:00)
+                    </div>
+                    <div
+                      class="css-b8ldur-Input"
+                    >
+                      <div
+                        class=""
+                        style="display: inline-block;"
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          autocapitalize="none"
+                          autocomplete="off"
+                          autocorrect="off"
+                          id="react-select-3-input"
+                          spellcheck="false"
+                          style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
+                          tabindex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class=" css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <div
+                      aria-hidden="true"
+                      class=" css-tlfecz-indicatorContainer"
+                    >
+                      <img
+                        class="Img-sc-1kfzr96-0 dxGzl"
+                        src="IMAGE_MOCK"
+                        transform=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="Box-sc-14m3exe-0 gCvoQs"
         >
           <button
             class="TextButton-sc-12pwroy-0 styled__StyledTextButton-k1l7f-3 ljBZKC"

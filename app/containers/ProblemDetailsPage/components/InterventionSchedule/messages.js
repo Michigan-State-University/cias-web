@@ -55,6 +55,6 @@ export default defineMessages({
   },
   timeInfo: {
     id: `${scope}.timeInfo`,
-    defaultMessage: '*The information will be sent at 12.00 AM [UTC -5]',
+    defaultMessage: '*The information will be sent at',
   },
 });

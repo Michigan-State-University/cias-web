@@ -12,8 +12,9 @@ import Box from 'components/Box';
 import Row from 'components/Row';
 import BackButton from 'components/BackButton';
 import H1 from 'components/H1';
-import { colors, themeColors, boxShadows } from 'theme';
 
+import { colors, themeColors, boxShadows } from 'theme';
+import TimezoneForm from 'containers/AccountSettings/Containers/TimezoneForm';
 import messages from './messages';
 import FullNameForm from './Containers/FullNameForm';
 import PasswordForm from './Containers/PasswordForm';
@@ -25,14 +26,13 @@ import {
   StyledColumn,
   StyledRow,
   StyledTextButton,
-  StyledEmailBox,
+  StyledInputBox,
 } from './styled';
 
 const AccountSettings = ({ intl: { formatMessage } }) => {
   const [passwordReset, setPasswordReset] = useState(false);
   const openReset = () => setPasswordReset(true);
   const closeReset = () => setPasswordReset(false);
-
   return (
     <Fragment>
       <Helmet>
@@ -64,11 +64,14 @@ const AccountSettings = ({ intl: { formatMessage } }) => {
           <Row mt={50}>
             <FullNameForm formatMessage={formatMessage} />
           </Row>
-          <StyledRow width="100%" align="center">
-            <StyledEmailBox width="50%">
+          <StyledRow width="100%" align="center" justify="end">
+            <StyledInputBox width="50%" mr={20}>
               <EmailForm formatMessage={formatMessage} />
-            </StyledEmailBox>
-            <Box width="50%">
+            </StyledInputBox>
+            <StyledInputBox>
+              <TimezoneForm formatMessage={formatMessage} />
+            </StyledInputBox>
+            <Box mb={10}>
               <StyledTextButton
                 onClick={openReset}
                 whiteSpace="nowrap"

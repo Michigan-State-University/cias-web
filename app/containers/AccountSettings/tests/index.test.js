@@ -27,6 +27,7 @@ describe('<AccountSettings />', () => {
         firstName: 'Name',
         lastName: 'Surname',
         email: 'admin@cias-api.herokuapp.com',
+        timeZone: 'America/New_York',
       },
       errors: {
         changePasswordError: null,

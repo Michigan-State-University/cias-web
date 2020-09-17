@@ -40,7 +40,7 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
   color: rgba(47,56,80,0.6);
 }
 
-.c13 {
+.c14 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -136,6 +136,24 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  margin-top: 10px;
+  width: 100%;
+}
+
 .c11 {
   background-color: #F8FBFF;
   border-radius: 5px;
@@ -221,58 +239,71 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
     <div
       class="c6"
     >
-      <p
-        class="c7"
-        font-size="15"
-      >
-        Send 
-        on exact date
-      </p>
       <div
-        class="c8"
+        class="c0"
       >
         <div
-          class="c9"
-          width="100%"
+          class="c3"
         >
+          <p
+            class="c7"
+            font-size="15"
+          >
+            Send 
+            on exact date
+          </p>
           <div
-            class="c0"
+            class="c8"
           >
             <div
-              class="c10"
+              class="c9"
+              width="100%"
             >
               <div
-                class="react-datepicker-wrapper"
+                class="c0"
               >
                 <div
-                  class="react-datepicker__input-container"
+                  class="c10"
                 >
-                  <button
-                    class="c11"
-                    height="50"
-                    width="120"
+                  <div
+                    class="react-datepicker-wrapper"
                   >
-                    <p
-                      class="c12"
-                      color="#2F3850"
-                      font-size="15"
+                    <div
+                      class="react-datepicker__input-container"
                     >
-                      12/24/2018
-                    </p>
-                  </button>
+                      <button
+                        class="c11"
+                        height="50"
+                        width="120"
+                      >
+                        <p
+                          class="c12"
+                          color="#2F3850"
+                          font-size="15"
+                        >
+                          12/24/2018
+                        </p>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div
+          class="c13"
+          width="100%"
+        >
+          <p
+            class="c14"
+            color="#EF462F"
+            font-size="12"
+          >
+            *The information will be sent at 10:00 am
+          </p>
+        </div>
       </div>
-      <p
-        class="c13"
-        color="#EF462F"
-        font-size="12"
-      >
-        *The information will be sent at 12.00 AM [UTC -5]
-      </p>
     </div>
   </div>
 </div>

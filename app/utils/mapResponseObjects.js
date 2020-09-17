@@ -28,4 +28,5 @@ export const mapCurrentUser = user => ({
   email: user.attributes.email,
   roles: user.attributes.roles,
   avatar: user.attributes.avatar_url,
+  timeZone: user.attributes.time_zone,
 });
