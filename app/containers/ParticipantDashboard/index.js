@@ -28,6 +28,7 @@ import {
   makeSelectInterventionsState,
 } from 'global/reducers/interventions';
 
+import { Roles } from 'models/User/UserRoles';
 import messages from './messages';
 export function ParticipantDashboard({
   fetchInterventions,
@@ -44,7 +45,7 @@ export function ParticipantDashboard({
   useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
 
   useEffect(() => {
-    fetchInterventions();
+    fetchInterventions(Roles.participant);
   }, []);
 
   if (fetchInterventionLoading) return <Loader />;
@@ -63,10 +64,7 @@ export function ParticipantDashboard({
             <FormattedMessage {...messages.interventions} />
           </H1>
           <Row>
-            <MapInterventions
-              interventions={interventions}
-              participantPreview
-            />
+            <MapInterventions interventions={interventions} participantView />
             {interventions.length === 0 && (
               <Column align="center" mt={100}>
                 <FormattedMessage {...messages.noResults} />

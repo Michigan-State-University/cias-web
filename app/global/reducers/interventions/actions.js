@@ -6,8 +6,8 @@ import {
   FETCH_INTERVENTIONS_SUCCESS,
 } from './constants';
 
-export const fetchInterventionsRequest = () =>
-  actionBuilder(FETCH_INTERVENTIONS_REQUEST, {});
+export const fetchInterventionsRequest = role =>
+  actionBuilder(FETCH_INTERVENTIONS_REQUEST, { role });
 export const fetchInterventionsSuccess = interventions =>
   actionBuilder(FETCH_INTERVENTIONS_SUCCESS, { interventions });
 export const fetchInterventionsError = error =>

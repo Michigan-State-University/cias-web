@@ -3,11 +3,13 @@ import { put, takeLatest } from 'redux-saga/effects';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 
+import { Roles } from 'models/User/UserRoles';
 import { FETCH_INTERVENTIONS_REQUEST } from '../constants';
 import { fetchInterventionsSuccess, fetchInterventionsError } from '../actions';
 
-function* fetchInterventions() {
-  const requestURL = `v1/interventions`;
+function* fetchInterventions({ payload: { role } }) {
+  let requestURL = `v1/interventions`;
+  if (role === Roles.participant) requestURL = `v1/problems`;
 
   try {
     const {
