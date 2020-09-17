@@ -20,46 +20,61 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
       class="styled__InitialRow-sc-14fow03-0 eNEjTh"
     >
       <div
-        class="Row-x1o3ru-0 bWDcYZ"
+        class="Row-x1o3ru-0 irzjeT"
         height="30"
-        width="250"
+        width="300"
       >
-        <button
-          class="styled__StatusLabel-sc-14fow03-1 EyqKF"
-          color="#107969"
-          value="draft"
+        <div
+          class="Row-x1o3ru-0 hCbdXJ"
+          width="100%"
         >
-          <p
-            class="styled__FilterText-sc-14fow03-3 iQnmrJ"
-            color="#FFFFFF"
+          <button
+            class="styled__StatusLabel-sc-14fow03-1 ATlAp"
+            color="#107969"
+            value="draft"
           >
-            Draft
-          </p>
-        </button>
-        <button
-          class="styled__StatusLabel-sc-14fow03-1 bSCKVH"
-          color="#8CBD00"
-          value="published"
-        >
-          <p
-            class="styled__FilterText-sc-14fow03-3 iQnmrJ"
-            color="#FFFFFF"
+            <p
+              class="styled__FilterText-sc-14fow03-3 iQnmrJ"
+              color="#FFFFFF"
+            >
+              Draft
+            </p>
+          </button>
+          <button
+            class="styled__StatusLabel-sc-14fow03-1 bWCJCZ"
+            color="#8CBD00"
+            value="published"
           >
-            Published
-          </p>
-        </button>
-        <button
-          class="styled__StatusLabel-sc-14fow03-1 jQKiSZ"
-          color="#F0684A"
-          value="closed"
-        >
-          <p
-            class="styled__FilterText-sc-14fow03-3 iQnmrJ"
-            color="#FFFFFF"
+            <p
+              class="styled__FilterText-sc-14fow03-3 iQnmrJ"
+              color="#FFFFFF"
+            >
+              Published
+            </p>
+          </button>
+          <button
+            class="styled__StatusLabel-sc-14fow03-1 kuYltB"
+            color="#F0684A"
+            value="closed"
           >
-            Closed
-          </p>
-        </button>
+            <p
+              class="styled__FilterText-sc-14fow03-3 iQnmrJ"
+              color="#FFFFFF"
+            >
+              Closed
+            </p>
+          </button>
+          <button
+            class="styled__CrossButton-sc-12g1ykd-1 nkEpI"
+            height="15"
+            width="15"
+          >
+            <img
+              alt="cross"
+              src="IMAGE_MOCK"
+            />
+          </button>
+        </div>
       </div>
       <div
         class="Row-x1o3ru-0 diEAcg"

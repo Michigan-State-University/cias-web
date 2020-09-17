@@ -20,7 +20,7 @@ import SingleTile from 'components/SingleTile';
 import TileRenderer from 'components/TileRenderer';
 import useFilter from 'utils/useFilter';
 import SearchInput from 'components/Input/SearchInput';
-import { archived, draft } from 'models/Status/StatusTypes';
+import { archived, statusTypes } from 'models/Status/StatusTypes';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
@@ -58,7 +58,7 @@ export function ProblemPage({
   const [finalProblems, filterStatus, setFilterStatus] = useFilter(
     valueFilteredProblems,
     'status',
-    { initialDelay: 0, initialValue: [draft] },
+    { initialDelay: 0, initialValue: statusTypes },
   );
 
   useEffect(() => {
@@ -77,6 +77,10 @@ export function ProblemPage({
       currentTarget: { value },
     } = e;
     handleChange(value)();
+  };
+
+  const handleClearFilters = () => {
+    setFilterStatus([]);
   };
 
   const mapProblem = problem => (
@@ -113,11 +117,12 @@ export function ProblemPage({
           </H1>
         </InitialRow>
         <InitialRow>
-          <Row my={35} justify="between" width={250} height={30}>
+          <Row my={35} justify="between" width={300} height={30}>
             <StatusFilter
               onClick={handleFilterStatus}
               formatMessage={formatMessage}
               active={filterStatus}
+              onClear={handleClearFilters}
             />
           </Row>
           <Row align="center">

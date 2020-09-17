@@ -2,15 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import search from 'assets/svg/search.svg';
-import cross from 'assets/svg/cross.svg';
-
+import CloseIcon from 'components/CloseIcon';
 import Input from '.';
-import {
-  SearchInputStyled,
-  SearchIcon,
-  ClearButton,
-  ClearIcon,
-} from './styled';
+import { SearchInputStyled, SearchIcon } from './styled';
 
 const SearchInput = ({ icon, ...inputProps }) => {
   const { value, onChange, width } = inputProps;
@@ -19,9 +13,15 @@ const SearchInput = ({ icon, ...inputProps }) => {
       <Input {...inputProps} px={30} />
       <SearchIcon src={search} alt="search" />
       {value && (
-        <ClearButton onClick={() => onChange({ target: { value: '' } })}>
-          <ClearIcon src={cross} alt="clear" />
-        </ClearButton>
+        <CloseIcon
+          onClick={() => onChange({ target: { value: '' } })}
+          position="absolute"
+          right="-20px"
+          top="14px"
+          height={15}
+          width={15}
+          background="none"
+        />
       )}
     </SearchInputStyled>
   );

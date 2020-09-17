@@ -10,6 +10,7 @@ export const InitialRow = styled.div`
 
 export const StatusLabel = styled.button`
   border: none;
+  margin-left: 16px;
   display: flex;
   padding: 5px 10px;
   font-size: 14px;

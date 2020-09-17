@@ -10,6 +10,7 @@ const style = props => ({
   '&:hover': {
     backgroundColor: props.hoverColor || '',
   },
+  background: props.background || '',
   borderRadius: props.borderRadius || '',
   boxShadow: props.shadow || '',
   transform: props.transform || '',
@@ -19,6 +20,7 @@ const style = props => ({
 
 style.propTypes = {
   bg: PropTypes.string,
+  background: PropTypes.string,
   color: PropTypes.string,
   opacity: PropTypes.number,
   bgOpacity: PropTypes.number,

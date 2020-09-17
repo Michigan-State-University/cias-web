@@ -1,11 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CloseIcon /> Should render and match the snapshot as button 1`] = `
-.c1 {
-  width: auto;
-  height: auto;
-}
-
 .c0 {
   height: 28px;
   width: 28px;
@@ -27,6 +22,7 @@ exports[`<CloseIcon /> Should render and match the snapshot as button 1`] = `
   cursor: pointer;
   border: none;
   outline: none;
+  padding: 0;
 }
 
 <div>
@@ -35,7 +31,6 @@ exports[`<CloseIcon /> Should render and match the snapshot as button 1`] = `
   >
     <img
       alt="cross"
-      class="c1"
       src="IMAGE_MOCK"
     />
   </button>
@@ -43,11 +38,6 @@ exports[`<CloseIcon /> Should render and match the snapshot as button 1`] = `
 `;
 
 exports[`<CloseIcon /> Should render and match the snapshot as link 1`] = `
-.c1 {
-  width: auto;
-  height: auto;
-}
-
 .c0 {
   height: 28px;
   width: 28px;
@@ -76,7 +66,6 @@ exports[`<CloseIcon /> Should render and match the snapshot as link 1`] = `
   >
     <img
       alt="cross"
-      class="c1"
       src="IMAGE_MOCK"
     />
   </a>
