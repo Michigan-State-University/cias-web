@@ -51,7 +51,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                 display="flex"
               >
                 <div
-                  class="Box-sc-14m3exe-0 dinzFt"
+                  class="Box-sc-14m3exe-0 ijFnzf"
                   display="inline-flex"
                   width="120px"
                 >
@@ -65,7 +65,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 iacQEz"
+                  class="Box-sc-14m3exe-0 dtcBxi"
                   display="inline-flex"
                   width="120px"
                 >
@@ -79,7 +79,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 jfsTbv"
+                  class="Box-sc-14m3exe-0 kWaEdQ"
                   display="inline-flex"
                   width="120px"
                 >
@@ -92,15 +92,10 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                     Admin
                   </p>
                 </div>
-                <button
-                  class="StyledTextButton-sc-17cmh3t-0 emjvYX"
-                  color="#9AA1B6"
-                  disabled=""
-                >
-                  <span>
-                    Reset role filters
-                  </span>
-                </button>
+                <div
+                  class="Box-sc-14m3exe-0 dmCAYd"
+                  width="25"
+                />
                 <div
                   class="Box-sc-14m3exe-0 cyLJtZ"
                   cursor="pointer"
@@ -202,7 +197,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   class="TD-sc-4t6406-0 kEmNCT"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 fvMroj"
+                    class="Box-sc-14m3exe-0 MECNj"
                     display="inline-flex"
                     width="120px"
                   >

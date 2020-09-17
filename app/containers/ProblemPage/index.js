@@ -80,7 +80,7 @@ export function ProblemPage({
   };
 
   const handleClearFilters = () => {
-    setFilterStatus([]);
+    setFilterStatus(statusTypes);
   };
 
   const mapProblem = problem => (

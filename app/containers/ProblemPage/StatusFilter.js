@@ -38,7 +38,7 @@ const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
           </FilterText>
         </StatusLabel>
       ))}
-      {active && active.length !== 0 && (
+      {active && active.length !== labels.length && (
         <CloseIcon
           height={15}
           width={15}

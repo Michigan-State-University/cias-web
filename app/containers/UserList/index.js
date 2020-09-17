@@ -42,6 +42,7 @@ import SearchInput from 'components/Input/SearchInput';
 import { Roles } from 'models/User/UserRoles';
 import Checkbox from 'components/Checkbox';
 import useDebounce from 'utils/useDebounce';
+import CloseIcon from 'components/CloseIcon';
 import messages from './messages';
 import PaginationHandler from './Components/PaginationHelper';
 
@@ -65,6 +66,8 @@ export function UserList({
   const [showInactive, setShowInactive] = useState(false);
   const [page, setPage] = useState(1);
   const debouncedFilterText = useDebounce(filterText, initialDelay);
+
+  const clearFilters = selectRoles.length === rolesToFilter.length;
 
   useEffect(() => {
     fetchUsersRequest(selectRoles, debouncedFilterText, page);
@@ -92,18 +95,16 @@ export function UserList({
                     disabled={!selectRoles.includes(role)}
                   />
                 ))}
-                <StyledTextButton
-                  mr={10}
-                  color={
-                    selectRoles.length !== rolesToFilter.length
-                      ? themeColors.secondary
-                      : colors.grey
-                  }
-                  disabled={selectRoles.length === rolesToFilter.length}
-                  onClick={() => setSelectRoles(rolesToFilter)}
-                >
-                  <FormattedMessage {...messages.resetRoles} />
-                </StyledTextButton>
+                {!clearFilters && (
+                  <CloseIcon
+                    height={15}
+                    width={15}
+                    mr={10}
+                    onClick={() => setSelectRoles(rolesToFilter)}
+                    background="none"
+                  />
+                )}
+                {clearFilters && <Box width={25} />}
                 <Box
                   cursor="pointer"
                   onClick={() => setShowInactive(!showInactive)}

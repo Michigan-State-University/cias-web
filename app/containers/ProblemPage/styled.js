@@ -24,8 +24,6 @@ export const StatusLabel = styled.button`
   transition: 0.3s;
   &:hover {
     cursor: pointer;
-    background: ${props => props.color || themeColors.highlight};
-    color: ${colors.white};
   }
   &:focus {
     outline: none;

@@ -22,7 +22,7 @@ const UserRoleTile = ({ role, disabled, onClick }) => (
     align="center"
     px={10}
     py={5}
-    mr={15}
+    mx={7}
     clickable={!!onClick}
     onClick={onClick}
   >
