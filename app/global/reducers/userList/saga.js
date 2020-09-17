@@ -2,16 +2,24 @@ import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
-import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { FETCH_USERS } from './constants';
+import { FETCH_USERS, PER_PAGE } from './constants';
 
 import { fetchUsersFailure, fetchUsersSuccess } from './actions';
 
-function* fetchUsers({ payload: { types } }) {
+function* fetchUsers({ payload: { roles, name, page } }) {
   const requestUrl = `/v1/users?`;
   let params = '';
-  if (!isNullOrUndefined(types)) {
-    params = types.reduce((acc, val) => acc.concat(`roles[]=${val}&`), params);
+  if (roles) {
+    params = roles.reduce((acc, val) => acc.concat(`roles[]=${val}&`), params);
+    if (roles.length === 0) {
+      params += `roles[]=&`;
+    }
+  }
+  if (name) {
+    params += `name=${name}&`;
+  }
+  if (page) {
+    params += `page=${page}&per_page=${PER_PAGE}&`;
   }
 
   try {

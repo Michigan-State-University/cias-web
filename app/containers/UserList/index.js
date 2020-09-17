@@ -16,7 +16,14 @@ import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import Loader from 'components/Loader';
 import ErrorAlert from 'components/ErrorAlert';
-import { StripedTR, Table, TBody, TD, TH, THead } from 'components/Table';
+import {
+  StripedTR,
+  TableLoading,
+  TBody,
+  TD,
+  TH,
+  THead,
+} from 'components/Table';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import {
@@ -34,14 +41,17 @@ import TextButton from 'components/Button/TextButton';
 import SearchInput from 'components/Input/SearchInput';
 import { Roles } from 'models/User/UserRoles';
 import Checkbox from 'components/Checkbox';
+import useDebounce from 'utils/useDebounce';
 import messages from './messages';
+import PaginationHandler from './Components/PaginationHelper';
 
 const columns = formatMessage => [
   formatMessage(messages.name),
   formatMessage(messages.email),
   formatMessage(messages.role),
 ];
-const rolesToFilter = [Roles.participant, Roles.researcher];
+const rolesToFilter = [Roles.participant, Roles.researcher, Roles.admin];
+const initialDelay = 500;
 
 export function UserList({
   userList: { users, usersLoading, usersError },
@@ -53,10 +63,12 @@ export function UserList({
   const [filterText, setFilterText] = useState('');
   const [selectRoles, setSelectRoles] = useState(rolesToFilter);
   const [showInactive, setShowInactive] = useState(false);
+  const [page, setPage] = useState(1);
+  const debouncedFilterText = useDebounce(filterText, initialDelay);
 
   useEffect(() => {
-    fetchUsersRequest();
-  }, []);
+    fetchUsersRequest(selectRoles, debouncedFilterText, page);
+  }, [selectRoles, debouncedFilterText, page]);
 
   const toggleRole = role => () => {
     const toggledArray = xor(selectRoles, [role]);
@@ -64,7 +76,7 @@ export function UserList({
   };
 
   const getContent = () => {
-    if (usersLoading) return <Loader />;
+    if (usersLoading && users.length === 0) return <Loader />;
     if (usersError) return <ErrorAlert errorText={usersError} />;
     return (
       <div>
@@ -80,6 +92,18 @@ export function UserList({
                     disabled={!selectRoles.includes(role)}
                   />
                 ))}
+                <TextButton
+                  mr={10}
+                  color={
+                    selectRoles.length !== rolesToFilter.length
+                      ? themeColors.secondary
+                      : colors.grey
+                  }
+                  disabled={selectRoles.length === rolesToFilter.length}
+                  onClick={() => setSelectRoles(rolesToFilter)}
+                >
+                  <FormattedMessage {...messages.resetRoles} />
+                </TextButton>
                 <Box
                   cursor="pointer"
                   onClick={() => setShowInactive(!showInactive)}
@@ -98,40 +122,61 @@ export function UserList({
             onChange={e => setFilterText(e.target.value)}
           />
         </Box>
-        <Table width="100%" mb={20} shadow={boxShadows.selago}>
-          <THead>
-            <StripedTR>
-              {columns(formatMessage).map((column, columnIndex) => (
-                <TH
-                  bg={colors.white}
-                  color={colors.bluewood}
-                  opacity={0.6}
-                  scope="col"
-                  key={`col-th-${columnIndex}`}
-                >
-                  <Column pl={20} align="start" width={`${100 / 3}%`}>
-                    {column}
-                  </Column>
-                </TH>
-              ))}
-            </StripedTR>
-          </THead>
-          <TBody>
-            {users.map(({ id, email, full_name: fullName, roles }) => (
-              <StripedTR
-                hoverBg={colors.linkWater}
-                color={colors.white}
-                key={`row-th-${id}`}
-              >
-                <TD pl={20}>{fullName}</TD>
-                <TD pl={20}>{email}</TD>
-                <TD pl={20}>
-                  <UserRoleTile role={roles[0]} />
-                </TD>
+        {users.length === 0 && (
+          <H1>
+            <FormattedMessage {...messages.noUsers} />
+          </H1>
+        )}
+        {users.length !== 0 && (
+          <TableLoading
+            loading={usersLoading}
+            width="100%"
+            mb={20}
+            shadow={boxShadows.selago}
+          >
+            <THead>
+              <StripedTR>
+                {columns(formatMessage).map((column, columnIndex) => (
+                  <TH
+                    bg={colors.white}
+                    color={colors.bluewood}
+                    opacity={0.6}
+                    scope="col"
+                    key={`col-th-${columnIndex}`}
+                  >
+                    <Column
+                      pl={20}
+                      align="start"
+                      width={`${100 / columns.length}%`}
+                    >
+                      {column}
+                    </Column>
+                  </TH>
+                ))}
               </StripedTR>
-            ))}
-          </TBody>
-        </Table>
+            </THead>
+            <TBody>
+              {users.map(({ id, email, full_name: fullName, roles }) => (
+                <StripedTR
+                  hoverBg={colors.linkWater}
+                  color={colors.white}
+                  key={`row-th-${id}`}
+                >
+                  <TD pl={20}>{fullName}</TD>
+                  <TD pl={20}>{email}</TD>
+                  <TD pl={20}>
+                    <UserRoleTile role={roles[0]} />
+                  </TD>
+                </StripedTR>
+              ))}
+            </TBody>
+          </TableLoading>
+        )}
+        <PaginationHandler
+          setPage={setPage}
+          page={page}
+          userSize={users.length}
+        />
       </div>
     );
   };

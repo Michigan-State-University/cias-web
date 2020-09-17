@@ -33,4 +33,12 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Email',
   },
+  noUsers: {
+    id: `${scope}.noUsers`,
+    defaultMessage: 'There are no users matching given criteria',
+  },
+  resetRoles: {
+    id: `${scope}.resetRoles`,
+    defaultMessage: 'Reset role filters',
+  },
 });

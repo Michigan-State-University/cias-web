@@ -5,3 +5,4 @@ export * from './TR';
 export * from './StripedTR';
 export * from './TD';
 export * from './TH';
+export * from './TableLoading';

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { fontSizes, fontFamily, lineHeights } from 'theme';
-import { margin, text } from '../BaseComponentStyles';
+import { margin, text, style } from '../BaseComponentStyles';
 
 const H1 = styled.h1`
   margin: 0;
@@ -9,6 +9,7 @@ const H1 = styled.h1`
   line-height: ${lineHeights.small};
   ${margin};
   ${text};
+  ${style};
 `;
 
 export default H1;
