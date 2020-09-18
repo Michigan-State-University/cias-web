@@ -45,7 +45,6 @@ import { problemOptionsSaga } from 'global/sagas/problemOptionsSaga';
 import injectSaga, { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 import { colors, themeColors } from 'theme';
-import appStages from 'global/appStages';
 import globalMessages from 'global/i18n/globalMessages';
 
 import fileShare from 'assets/svg/file-share.svg';
@@ -307,14 +306,12 @@ export function ProblemDetailsPage({
         {createInterventionError && (
           <ErrorAlert errorText={createInterventionError} />
         )}
-        {process.env.APP_STAGE === appStages.dev.id && (
-          <Column ml={38} sm={6} mt={18}>
-            <Column position="sticky" top="100px">
-              <ShareBox />
-            </Column>
-            <div />
+        <Column ml={38} sm={6} mt={18}>
+          <Column position="sticky" top="100px">
+            <ShareBox />
           </Column>
-        )}
+          <div />
+        </Column>
       </Row>
     </Box>
   );
