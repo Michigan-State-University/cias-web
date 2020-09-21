@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import 'jest-styled-components';
 
@@ -36,5 +36,18 @@ describe('<CopyToClipboard />', () => {
       </IntlProvider>,
     );
     expect(container).toMatchSnapshot();
+  });
+
+  it('Should invoke onCopy function', () => {
+    window.prompt = jest.fn();
+
+    const { getByText, container } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <CopyToClipboard {...defaultProps}>Copy</CopyToClipboard>
+      </IntlProvider>,
+    );
+    const copyButton = getByText('Copy');
+    fireEvent.click(copyButton);
+    expect(container.innerHTML).toContain('Copied!');
   });
 });

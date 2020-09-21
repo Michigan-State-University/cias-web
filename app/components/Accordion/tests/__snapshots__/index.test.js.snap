@@ -1,0 +1,607 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+}
+
+.c0 {
+  margin-bottom: 7px;
+}
+
+.c3 {
+  height: 40px;
+  border-radius: 5px;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  background-color: rgba(0,0,237,1);
+}
+
+.c7 .ReactCollapse--collapse {
+  -webkit-transition: height 480ms ease;
+  transition: height 480ms ease;
+}
+
+.c2 > div:first-child {
+  margin-right: 0;
+}
+
+.c2 img[alt='bin'] {
+  display: none;
+}
+
+.c2:hover img[alt='bin'] {
+  display: block;
+}
+
+.c2:hover > div:first-child {
+  margin-right: 5px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+<div>
+  <div
+    class="styled__AccordionContainer-sc-1ls4m2z-0"
+  >
+    <div>
+      <div
+        class=" "
+      >
+        <div
+          class="c0"
+        >
+          <div
+            class="c1 c2"
+          >
+            <div
+              class="c3"
+            >
+              <div
+                class="c4"
+              >
+                Label0
+                 
+                <img
+                  class="c5"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+            <img
+              alt="bin"
+              class="c6"
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <div
+            class="c7"
+          >
+            <div
+              class="ReactCollapse--collapse"
+              style="height: 0px; overflow: hidden;"
+            >
+              <div
+                class="ReactCollapse--content"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class=" "
+      >
+        <div
+          class="c0"
+        >
+          <div
+            class="c1 c2"
+          >
+            <div
+              class="c3"
+            >
+              <div
+                class="c4"
+              >
+                Label1
+                 
+                <img
+                  class="c5"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+            <img
+              alt="bin"
+              class="c6"
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <div
+            class="c7"
+          >
+            <div
+              class="ReactCollapse--collapse"
+              style="height: 0px; overflow: hidden;"
+            >
+              <div
+                class="ReactCollapse--content"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class=" "
+      >
+        <div
+          class="c0"
+        >
+          <div
+            class="c1 c2"
+          >
+            <div
+              class="c3"
+            >
+              <div
+                class="c4"
+              >
+                Label2
+                 
+                <img
+                  class="c5"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+            <img
+              alt="bin"
+              class="c6"
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <div
+            class="c7"
+          >
+            <div
+              class="ReactCollapse--collapse"
+              style="height: 0px; overflow: hidden;"
+            >
+              <div
+                class="ReactCollapse--content"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Card /> Should render only one element and match the snapshot 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+}
+
+.c0 {
+  margin-bottom: 7px;
+}
+
+.c3 {
+  height: 40px;
+  border-radius: 5px;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  background-color: rgba(0,0,237,1);
+}
+
+.c7 .ReactCollapse--collapse {
+  -webkit-transition: height 480ms ease;
+  transition: height 480ms ease;
+}
+
+.c2 > div:first-child {
+  margin-right: 0;
+}
+
+.c2 img[alt='bin'] {
+  display: none;
+}
+
+.c2:hover img[alt='bin'] {
+  display: block;
+}
+
+.c2:hover > div:first-child {
+  margin-right: 5px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+<div>
+  <div
+    class="styled__AccordionContainer-sc-1ls4m2z-0"
+  >
+    <div>
+      <div
+        class="c0"
+      >
+        <div
+          class="c1 c2"
+        >
+          <div
+            class="c3"
+          >
+            <div
+              class="c4"
+            >
+              Label0
+               
+              <img
+                class="c5"
+                src="IMAGE_MOCK"
+              />
+            </div>
+          </div>
+          <img
+            alt="bin"
+            class="c6"
+            src="IMAGE_MOCK"
+          />
+        </div>
+        <div
+          class="c7"
+        >
+          <div
+            class="ReactCollapse--collapse"
+            style="height: 0px; overflow: hidden;"
+          >
+            <div
+              class="ReactCollapse--content"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Card /> Should render with one element opened and match the snapshot 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+}
+
+.c0 {
+  margin-bottom: 7px;
+}
+
+.c3 {
+  height: 40px;
+  border-radius: 5px;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  background-color: rgba(0,0,237,1);
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.c7 .ReactCollapse--collapse {
+  -webkit-transition: height 480ms ease;
+  transition: height 480ms ease;
+}
+
+.c2 > div:first-child {
+  margin-right: 0;
+}
+
+.c2 img[alt='bin'] {
+  display: none;
+}
+
+.c2:hover img[alt='bin'] {
+  display: block;
+}
+
+.c2:hover > div:first-child {
+  margin-right: 5px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+<div>
+  <div
+    class="styled__AccordionContainer-sc-1ls4m2z-0"
+  >
+    <div>
+      <div
+        class=" "
+      >
+        <div
+          class="c0"
+        >
+          <div
+            class="c1 c2"
+          >
+            <div
+              class="c3"
+            >
+              <div
+                class="c4"
+              >
+                Label0
+                 
+                <img
+                  class="c5"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+            <img
+              alt="bin"
+              class="c6"
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <div
+            class="c7"
+          >
+            <div
+              class="ReactCollapse--collapse"
+              style="height: 0px; overflow: hidden;"
+            >
+              <div
+                class="ReactCollapse--content"
+              >
+                <div
+                  class="c8"
+                >
+                  Content0
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class=" "
+      >
+        <div
+          class="c0"
+        >
+          <div
+            class="c1 c2"
+          >
+            <div
+              class="c3"
+            >
+              <div
+                class="c4"
+              >
+                Label1
+                 
+                <img
+                  class="c5"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+            <img
+              alt="bin"
+              class="c6"
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <div
+            class="c7"
+          >
+            <div
+              class="ReactCollapse--collapse"
+              style="height: 0px; overflow: hidden;"
+            >
+              <div
+                class="ReactCollapse--content"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class=" "
+      >
+        <div
+          class="c0"
+        >
+          <div
+            class="c1 c2"
+          >
+            <div
+              class="c3"
+            >
+              <div
+                class="c4"
+              >
+                Label2
+                 
+                <img
+                  class="c5"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+            <img
+              alt="bin"
+              class="c6"
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <div
+            class="c7"
+          >
+            <div
+              class="ReactCollapse--collapse"
+              style="height: 0px; overflow: hidden;"
+            >
+              <div
+                class="ReactCollapse--content"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

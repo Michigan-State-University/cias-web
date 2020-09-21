@@ -27,3 +27,5 @@ TextArea.propTypes = {
 };
 
 export { TextArea };
+
+export default TextArea;

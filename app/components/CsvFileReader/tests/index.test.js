@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -53,5 +53,17 @@ describe('<CsvFileReader />', () => {
       </Provider>,
     );
     expect(container).toMatchSnapshot();
+  });
+
+  it('Should open the file reader', () => {
+    const { getByText } = render(
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <CsvFileReader {...defaultProps}>Upload CSV</CsvFileReader>
+        </IntlProvider>
+      </Provider>,
+    );
+    const row = getByText('Upload CSV');
+    fireEvent.click(row);
   });
 });

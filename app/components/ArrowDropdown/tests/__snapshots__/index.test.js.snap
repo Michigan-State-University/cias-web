@@ -1,0 +1,317 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArrowDropdown /> Should render and match the snapshot when is closed 1`] = `
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  position: absolute;
+  display: none;
+  margin-top: 15px;
+  background-color: rgba(255,255,255,1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  right: 0;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 100%px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+}
+
+.c0 {
+  position: relative;
+  width: 100%;
+}
+
+.c1 {
+  overflow: hidden;
+  cursor: pointer;
+  height: 50px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #E9F1FB;
+}
+
+<div>
+  <div
+    class="c0"
+    width="100%"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+        height="100%"
+      >
+        <div
+          class="c3"
+        >
+          <span>
+            Content
+          </span>
+        </div>
+        <img
+          class="c4"
+          src="IMAGE_MOCK"
+        />
+      </div>
+    </div>
+    <div
+      class="c5"
+      display="none"
+      width="max-content"
+    >
+      <div>
+        Children
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ArrowDropdown /> Should render and match the snapshot when is opened 1`] = `
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  position: absolute;
+  z-index: 1;
+  margin-top: 15px;
+  background-color: rgba(255,255,255,1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  right: 0;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 100%px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+}
+
+.c0 {
+  position: relative;
+  width: 100%;
+}
+
+.c1 {
+  overflow: hidden;
+  cursor: pointer;
+  height: 50px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #E9F1FB;
+}
+
+<div>
+  <div
+    class="c0"
+    width="100%"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+        height="100%"
+      >
+        <div
+          class="c3"
+        >
+          <span>
+            Content
+          </span>
+        </div>
+        <img
+          class="c4"
+          src="IMAGE_MOCK"
+        />
+      </div>
+    </div>
+    <div
+      class="c5"
+      width="max-content"
+    >
+      <div>
+        Children
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<ArrowDropdown /> Should render and match the snapshot with different settings than default 1`] = `
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  position: absolute;
+  z-index: 1;
+  margin-top: 15px;
+  background-color: rgba(255,255,255,1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  border-radius: 10px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 100%px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+}
+
+.c0 {
+  position: relative;
+  width: 100%;
+}
+
+.c1 {
+  overflow: hidden;
+  cursor: pointer;
+  height: 50px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #E9F1FB;
+}
+
+<div>
+  <div
+    class="c0"
+    width="100%"
+  >
+    <div
+      class="c1"
+    >
+      <div
+        class="c2"
+        height="100%"
+      >
+        <div
+          class="c3"
+        >
+          <span>
+            Content
+          </span>
+        </div>
+        <img
+          class="c4"
+          src="IMAGE_MOCK"
+        />
+      </div>
+    </div>
+    <div
+      class="c5"
+      width="100%"
+    >
+      <div>
+        Children
+      </div>
+    </div>
+  </div>
+</div>
+`;

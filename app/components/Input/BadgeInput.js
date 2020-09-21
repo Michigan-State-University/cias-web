@@ -37,3 +37,5 @@ BadgeInput.defaultProps = {
 };
 
 export { BadgeInput };
+
+export default BadgeInput;

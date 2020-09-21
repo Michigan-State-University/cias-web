@@ -205,7 +205,10 @@ const TargetQuestionChooser = ({
           }`}
           padded
         >
-          <Row onClick={chooseNextQuestion}>
+          <Row
+            data-testid={`${id}-next-question-target`}
+            onClick={chooseNextQuestion}
+          >
             <Img src={navigationNext} mr={5} />
             <Box clickable={!isLast}>
               <Text

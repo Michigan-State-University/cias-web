@@ -1,12 +1,17 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
 import Circle from '../index';
+import PlusCircle from '../PlusCircle';
 
 describe('<Circle />', () => {
-  it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<Circle child={2} />).toJSON();
+  it('circle should match the snapshot', () => {
+    const renderedComponent = render(<Circle child={2} />);
+    expect(renderedComponent).toMatchSnapshot();
+  });
+  it('plus circle should match the snapshot', () => {
+    const renderedComponent = render(<PlusCircle />);
     expect(renderedComponent).toMatchSnapshot();
   });
 });

@@ -1,7 +1,7 @@
-const regex = /^[0-9\b]+$/;
+import { numericRegex } from 'global/constants/regex';
 
 export const numericValidator = target => {
-  if (regex.test(target) || target === '') return true;
+  if (numericRegex.test(target) || target === '') return true;
 
   return false;
 };

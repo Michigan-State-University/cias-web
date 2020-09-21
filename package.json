@@ -41,7 +41,7 @@
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:update": "cross-env NODE_ENV=test jest --coverage -u",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
-    "test:local": "cross-env NODE_ENV=test jest",
+    "test:local": "cross-env NODE_ENV=test jest --watch",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettify": "prettier --write",
     "heroku-postbuild": "npm run build"
