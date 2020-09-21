@@ -1,5 +1,3 @@
-import concat from 'lodash/concat';
-
 import {
   gridQuestion,
   textboxQuestion,
@@ -50,14 +48,11 @@ export const mapQuestionDataForType = question => {
 export const getFromQuestionTTS = question => {
   const delimiters = [',', '.', '?', '!'];
 
-  const titleTTS = question.title
-    ? splitAndKeep(htmlToPlainText(question.title), delimiters)
-    : [];
   const subtileTTS = question.subtitle
     ? splitAndKeep(htmlToPlainText(question.subtitle), delimiters)
     : [];
 
-  return concat(titleTTS, subtileTTS);
+  return subtileTTS;
 };
 
 export const assignFromQuestionTTS = (draft, state) => {

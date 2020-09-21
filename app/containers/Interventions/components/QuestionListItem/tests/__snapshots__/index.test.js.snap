@@ -166,63 +166,60 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
 }
 
 <div
-  className="HoverableBox-sc-1syy6g3-0 c0 "
-  onClick={[Function]}
+  class="HoverableBox-sc-1syy6g3-0 c0 "
   width="100%"
 >
   <div
-    className="c1"
+    class="c1"
   >
     <div
-      className="c2"
+      class="c2"
     >
       <div
-        className="c3"
-        onClick={[Function]}
+        class="c3"
       >
         <img
-          className="c4"
+          class="c4"
           src="IMAGE_MOCK"
         />
       </div>
     </div>
     <div
-      className="c5"
+      class="c5"
     >
       <div
-        className="c1"
+        class="c1"
       >
         <h3
-          className="c6 c7"
+          class="c6 c7"
         >
-          Test
+          Test subtitle
         </h3>
       </div>
       <div
-        className="c1"
+        class="c1"
       >
         <p
-          className="c8 c9"
-          fontWeight="bold"
+          class="c8 c9"
+          font-weight="bold"
         >
           Single answer screen
         </p>
       </div>
     </div>
     <div
-      className="c2"
+      class="c2"
     >
       <div
-        className="c10"
+        class="c10"
         display="flex"
       >
         <div
-          className="c11"
-          onClick={[Function]}
+          class="c11"
         >
           <img
             alt="dots"
-            className="c4"
+            class="c4"
             src="IMAGE_MOCK"
           />
         </div>

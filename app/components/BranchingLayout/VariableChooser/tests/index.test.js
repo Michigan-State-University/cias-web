@@ -148,7 +148,7 @@ describe('<VariableChooser />', () => {
         </IntlProvider>
       </Provider>,
     );
-    const row = getByText(`Test title 1`);
+    const row = getByText(`Test subtitle 1`);
     fireEvent.click(row);
     expect(props.onClick).toHaveBeenCalledWith('var_single_1');
   });
@@ -157,6 +157,7 @@ describe('<VariableChooser />', () => {
 const mockSingleQuestion = (suffix = 1, hasVariable = true) => ({
   id: `test-id-${suffix}`,
   title: `Test title ${suffix}`,
+  subtitle: `Test subtitle ${suffix}`,
   type: 'Question::Single',
   body: {
     variable: { name: hasVariable ? `var_single_${suffix}` : '' },

@@ -7,9 +7,13 @@ export default defineMessages({
     id: `${scope}.pageTitle`,
     defaultMessage: 'e-Intervention New',
   },
-  newQuestionMessage: {
+  newQuestionTitle: {
     id: `${scope}.newQuestionMessage`,
-    defaultMessage: 'Enter main text of the slide here',
+    defaultMessage: 'Enter title here',
+  },
+  newQuestionSubtitle: {
+    id: `${scope}.newQuestionSubtitle`,
+    defaultMessage: 'Enter main text/question for screen here',
   },
   errors: {
     duplicateVariable: {

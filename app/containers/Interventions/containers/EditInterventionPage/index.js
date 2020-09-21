@@ -76,8 +76,9 @@ function EditInterventionPage({
   const onCreateQuestion = type => {
     createQuestion(
       instantiateEmptyQuestion(
-        formatMessage(messages.newQuestionMessage),
+        formatMessage(messages.newQuestionTitle),
         type,
+        formatMessage(messages.newQuestionSubtitle),
       ),
       params.interventionId,
     );

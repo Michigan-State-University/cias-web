@@ -38,7 +38,7 @@ const VariableChooser = ({
 }) => {
   const variables = getAllVariables(questions, {
     structure: 'flat',
-    include: ['id', 'title'],
+    include: ['id', 'subtitle'],
   });
 
   const variableChooser = useRef(null);
@@ -65,7 +65,7 @@ const VariableChooser = ({
               maxWidth={200}
               mr={20}
             >
-              {htmlToPlainText(variable.title)}
+              {htmlToPlainText(variable.subtitle)}
             </Text>
           </Row>
           <Badge maxWidth={300} color={colors.jungleGreen} bgWithOpacity>
