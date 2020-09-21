@@ -36,6 +36,14 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   cursor: pointer;
   font-weight: bold;
   border-radius: 4px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.c2:hover {
+  background-color: #107969;
+  color: #FFFFFF;
+  border: none;
 }
 
 <div>
@@ -323,6 +331,17 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   cursor: pointer;
   font-weight: bold;
   border-radius: 4px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: none;
+}
+
+.c2:hover {
+  background-color: #107969;
+  color: #FFFFFF;
+  border: none;
 }
 
 @media only screen and (min-width:768px) {

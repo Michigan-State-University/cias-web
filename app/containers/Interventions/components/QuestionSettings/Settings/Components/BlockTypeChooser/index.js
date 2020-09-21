@@ -64,7 +64,7 @@ const BlockTypeChooser = ({
 
   return (
     <Box position="relative" ref={chooser}>
-      <DashedBox mt={14} onClick={toggleTypeChooser}>
+      <DashedBox active={typeChooserOpen} mt={14} onClick={toggleTypeChooser}>
         {formatMessage(messages.newStep)}
       </DashedBox>
       {typeChooserOpen && (

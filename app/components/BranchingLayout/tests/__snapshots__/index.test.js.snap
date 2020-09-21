@@ -84,6 +84,14 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   font-weight: bold;
   border-radius: 4px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.c5:hover {
+  background-color: #107969;
+  color: #FFFFFF;
+  border: none;
 }
 
 @media only screen and (min-width:768px) {

@@ -1,11 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import StyledCircle from 'components/Circle/StyledCircle';
 import Box from 'components/Box';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 export const DotCircle = props => <StyledCircle {...props} size="10px" />;
+
+const hoverStyles = css`
+  background-color: ${themeColors.primary};
+  color: ${colors.white};
+  border: none;
+`;
 
 export const DashedBox = styled(Box)`
   height: 40px;
@@ -17,4 +23,9 @@ export const DashedBox = styled(Box)`
   cursor: pointer;
   font-weight: bold;
   border-radius: 4px;
+  transition: 0.2s;
+  ${({ active }) => active && hoverStyles};
+  &:hover {
+    ${hoverStyles}
+  }
 `;
