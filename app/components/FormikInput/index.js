@@ -40,7 +40,7 @@ function FormikInput({
         onChange={onChange}
         onBlur={onBlur}
         hasError={hasError}
-        type={type}
+        keyboard={type}
         {...inputProps}
       />
       {hasError && <ErrorText>{error.toString()}</ErrorText>}

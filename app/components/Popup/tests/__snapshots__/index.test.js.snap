@@ -2,7 +2,7 @@
 
 exports[`<Popup /> Should render and match the snapshot 1`] = `
 <div
-  class="styled__Container-e4ycn-0 fbBlX"
+  class="styled__Container-e4ycn-0 dKiddJ"
 >
   <div>
     Test

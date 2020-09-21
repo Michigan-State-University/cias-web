@@ -1,6 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionListItem /> should match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  margin-bottom: 36px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+}
+
+.c0:hover {
+  background-color: #E9F1FB;
+}
+
 .c3 {
   width: auto;
   height: auto;
@@ -8,7 +28,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c8 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
@@ -54,12 +74,15 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   width: 83.33333333333334%;
 }
 
-.c7 {
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   font-weight: 700;
   color: #2F3850;
+}
+
+.c9 {
   margin: 0;
   font-family: DM Sans;
   font-size: 13px;
@@ -83,32 +106,12 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   height: auto;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   padding: 8px;
-}
-
-.c0 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
-  margin-bottom: 36px;
-  cursor: pointer;
-  border-radius: 5px;
-  border-radius: 5px;
-}
-
-.c0:hover {
-  background-color: #E9F1FB;
 }
 
 .c6 {
@@ -118,6 +121,9 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   line-height: 150%;
   margin-bottom: 6px;
   color: #2F3850;
+}
+
+.c7 {
   -webkit-line-clamp: 2;
   overflow: hidden;
   -webkit-box-orient: vertical;
@@ -127,8 +133,40 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   display: -webkit-box;
 }
 
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
-  className="c0"
+  className="HoverableBox-sc-1syy6g3-0 c0 "
   onClick={[Function]}
   width="100%"
 >
@@ -155,7 +193,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
         className="c1"
       >
         <h3
-          className="c6"
+          className="c6 c7"
         >
           Test
         </h3>
@@ -164,7 +202,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
         className="c1"
       >
         <p
-          className="c7"
+          className="c8 c9"
           fontWeight="bold"
         >
           Single answer screen
@@ -175,11 +213,11 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
       className="c2"
     >
       <div
-        className="c8"
+        className="c10"
         display="flex"
       >
         <div
-          className="c9"
+          className="c11"
           onClick={[Function]}
         >
           <img

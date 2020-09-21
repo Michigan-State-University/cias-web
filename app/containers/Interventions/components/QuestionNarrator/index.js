@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import Draggable from 'react-draggable';
 import Lottie from 'react-lottie';
 import PropTypes from 'prop-types';
@@ -140,7 +140,7 @@ const QuestionNarrator = ({
     });
   };
 
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     if (previewData.animation) {
       fetchJSON();
 

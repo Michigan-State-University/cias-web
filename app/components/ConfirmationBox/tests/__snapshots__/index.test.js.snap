@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -24,7 +24,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c8 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -36,7 +36,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   margin-top: 25px;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
   margin-left: 5px;
@@ -75,35 +75,6 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   top: 0px;
 }
 
-.c6 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  margin-top: 40px;
-  border-radius: 0px;
-  border-radius: 0px;
-}
-
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c4 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 25px;
-  line-height: 130%;
-  color: #2F3850;
-}
-
 .c1 {
   width: auto;
   height: auto;
@@ -121,7 +92,36 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c9 {
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 40px;
+  border-radius: 0px;
+  border-radius: 0px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c10 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -136,12 +136,12 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   margin-right: 25px;
 }
 
-.c9:hover {
+.c10:hover {
   background-color: #107969;
   color: #FFFFFF;
 }
 
-.c10 {
+.c11 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -154,13 +154,13 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c10:hover {
+.c11:hover {
   background-color: #FFFFFF;
   color: #107969;
   border: 1px solid #107969;
 }
 
-.c7 {
+.c8 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -168,8 +168,24 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 @media only screen and (max-width:480px) {
-  .c1 {
+  .c2 {
     max-height: calc(100% - 20px);
     max-width: none;
     min-width: 0;
@@ -185,45 +201,45 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
     width="100%"
   >
     <div
-      class="c1"
+      class="c1 c2"
       overflow="auto"
     >
       <div
-        class="c2"
+        class="c3"
       >
         <div
-          class="c3"
+          class="c4"
         >
           <h1
-            class="c4"
+            class="c5"
           >
             Test
           </h1>
           <img
             alt="close"
-            class="c5"
+            class="c6"
             src="IMAGE_MOCK"
           />
         </div>
       </div>
       <div
-        class="c6"
+        class="c7"
       >
         <div
-          class="c2"
+          class="c3"
         >
           <h2
-            class="c7"
+            class="c8"
           >
             <span>
               Are you sure you want to perfrom this action?
             </span>
           </h2>
           <div
-            class="c8"
+            class="c9"
           >
             <button
-              class="c9"
+              class="c10"
               color="primary"
               type="button"
             >
@@ -232,7 +248,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
               </span>
             </button>
             <button
-              class="c10"
+              class="c11"
               color="primary"
               type="button"
             >

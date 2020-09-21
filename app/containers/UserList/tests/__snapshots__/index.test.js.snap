@@ -3,28 +3,28 @@
 exports[`<UserList /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 esRSnJ"
+    class="Box-sc-14m3exe-0 kHKtqA"
     display="flex"
     height="100%"
     overflow="scroll"
   >
     <div
-      class="Box-sc-14m3exe-0 ifjGfb"
+      class="Box-sc-14m3exe-0 lldiaj"
       width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 iUeXoD"
+        class="Box-sc-14m3exe-0 gnsdoH"
         display="flex"
       >
         <h1
-          class="H1-tncdg6-0 elnBgm"
+          class="H1-tncdg6-0 eeKdog"
         >
           <span>
             Manage accounts
           </span>
         </h1>
         <button
-          class="StyledTextButton-sc-17cmh3t-0 kyRCKj"
+          class="StyledTextButton-sc-17cmh3t-0 haWluJ"
           color="#C866EA"
         >
           <span>
@@ -34,29 +34,29 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
       </div>
       <div>
         <div
-          class="Box-sc-14m3exe-0 bysEqX"
+          class="Box-sc-14m3exe-0 kXYZlv"
           display="flex"
         >
           <div
-            class="Box-sc-14m3exe-0 UQIrx"
+            class="Box-sc-14m3exe-0 lbVVSW"
             display="flex"
           >
             <div
-              class="Box-sc-14m3exe-0 hhkNsM"
+              class="Box-sc-14m3exe-0 pJENk"
               display="inline-block"
               width="100%"
             >
               <div
-                class="Box-sc-14m3exe-0 UQIrx"
+                class="Box-sc-14m3exe-0 lbVVSW"
                 display="flex"
               >
                 <div
-                  class="Box-sc-14m3exe-0 ijFnzf"
+                  class="Box-sc-14m3exe-0 bcYhgU"
                   display="inline-flex"
                   width="120px"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 Mihre"
+                    class="Text-sc-2lza2m-0 iJDAyw"
                     color="#FFFFFF"
                     font-size="14"
                     font-weight="bold"
@@ -65,12 +65,12 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 dtcBxi"
+                  class="Box-sc-14m3exe-0 fznBPJ"
                   display="inline-flex"
                   width="120px"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 Mihre"
+                    class="Text-sc-2lza2m-0 iJDAyw"
                     color="#FFFFFF"
                     font-size="14"
                     font-weight="bold"
@@ -79,12 +79,12 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 kWaEdQ"
+                  class="Box-sc-14m3exe-0 ijKtzR"
                   display="inline-flex"
                   width="120px"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 Mihre"
+                    class="Text-sc-2lza2m-0 iJDAyw"
                     color="#FFFFFF"
                     font-size="14"
                     font-weight="bold"
@@ -93,16 +93,16 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 dmCAYd"
+                  class="Box-sc-14m3exe-0 fQWHDN"
                   width="25"
                 />
                 <div
-                  class="Box-sc-14m3exe-0 cyLJtZ"
+                  class="Box-sc-14m3exe-0 kRyuMZ"
                   cursor="pointer"
                   display="inline-flex"
                 >
                   <img
-                    class="Img-sc-1kfzr96-0 loOcPM"
+                    class="Img-sc-1kfzr96-0 gdifFs"
                     src="IMAGE_MOCK"
                   />
                   <span>
@@ -113,96 +113,96 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="styled__SearchInputStyled-sc-65e6t4-3 jJMjkE"
+            class="styled__SearchInputStyled-sc-65e6t4-3 drvUyz"
           >
             <input
-              class="Input-sc-19txxuq-0 iFXcKH"
+              class="Input-sc-19txxuq-0 bUsoDb"
               type="text"
               value=""
             />
             <img
               alt="search"
-              class="styled__SearchIcon-sc-65e6t4-4 effwnr"
+              class="styled__SearchIcon-sc-65e6t4-4 kfTzOI"
               src="IMAGE_MOCK"
             />
             
           </div>
         </div>
         <div
-          class="styled__TableLoadingContainer-x75ncs-0 gXymdF"
+          class="styled__TableLoadingContainer-x75ncs-0 dPLvAE"
         >
           <table
-            class="Table-jgz9dg-0 cDuKtB"
+            class="Table-jgz9dg-0 iZtGcE"
             width="100%"
           >
             <thead
-              class="THead-sc-1pp8kl6-0 eAjaUx"
+              class="THead-sc-1pp8kl6-0"
             >
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 hnyHFB"
+                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 MCfLu gTAgZb"
               >
                 <th
-                  class="TH-sc-1qq1mcj-0 hLWyGK"
+                  class="TH-sc-1qq1mcj-0 fNvcPY"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 fmXpFz"
+                    class="Column-sc-1n6divy-0 giDIoU"
                     width="100%"
                   />
                 </th>
                 <th
-                  class="TH-sc-1qq1mcj-0 hLWyGK"
+                  class="TH-sc-1qq1mcj-0 fNvcPY"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 fmXpFz"
+                    class="Column-sc-1n6divy-0 giDIoU"
                     width="100%"
                   />
                 </th>
                 <th
-                  class="TH-sc-1qq1mcj-0 hLWyGK"
+                  class="TH-sc-1qq1mcj-0 fNvcPY"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 fmXpFz"
+                    class="Column-sc-1n6divy-0 giDIoU"
                     width="100%"
                   />
                 </th>
               </tr>
             </thead>
             <tbody
-              class="TBody-sc-1332v38-0 ekZOxU"
+              class="TBody-sc-1332v38-0"
             >
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 cKBlsf"
+                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 MCfLu kyVodR"
                 color="#FFFFFF"
               >
                 <td
-                  class="TD-sc-4t6406-0 kEmNCT"
+                  class="TD-sc-4t6406-0 cFOkDZ"
                 >
                   test
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 kEmNCT"
+                  class="TD-sc-4t6406-0 cFOkDZ"
                 >
                   test@test.pl
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 kEmNCT"
+                  class="TD-sc-4t6406-0 cFOkDZ"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 MECNj"
+                    class="Box-sc-14m3exe-0 hWckNX"
                     display="inline-flex"
                     width="120px"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 Mihre"
+                      class="Text-sc-2lza2m-0 iJDAyw"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -216,16 +216,16 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
           </table>
         </div>
         <div
-          class="Box-sc-14m3exe-0 fJzRZf"
+          class="Box-sc-14m3exe-0 hPQuzG"
           display="flex"
           width="100%"
         >
           <div
-            class="Box-sc-14m3exe-0 ktrahT"
+            class="Box-sc-14m3exe-0 giUERR"
             display="flex"
           >
             <p
-              class="Text-sc-2lza2m-0 jXaLNm"
+              class="Text-sc-2lza2m-0 bYWmEr"
               color="#FFFFFF"
             >
               1

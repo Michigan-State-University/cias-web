@@ -2,98 +2,98 @@
 
 exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-14m3exe-0 eowDf"
+  class="Box-sc-14m3exe-0 dqtvvK"
   display="flex"
   height="100%"
   width="100%"
 >
   <div
-    class="Column-sc-1n6divy-0 styled__StyledColumn-sc-17rp6q7-0 izNtvO"
+    class="Column-sc-1n6divy-0 styled__StyledColumn-sc-17rp6q7-0 FsCHi kUzlDr"
     height="100%"
   >
     <div
-      class="styled__NameContainer-sc-1q3ma8o-1 izjjMI"
+      class="styled__NameContainer-sc-1q3ma8o-1 ijCmbU"
     >
       <h3
-        class="H3-sc-1nwhpi5-0 ijMmkT"
+        class="H3-sc-1nwhpi5-0 fEtsWy"
         font-weight="regular"
       >
         Name
       </h3>
       <input
-        class="styled__Input-sc-1q3ma8o-0 jDUSix Input-sc-19txxuq-0 cndNPM"
+        class="Input-sc-19txxuq-0 jtsCaR styled__Input-sc-1q3ma8o-0 bHmaey"
         placeholder="e-Intervention Name"
-        type="singleline"
+        type="text"
         value="e-Intervention Name"
         width="100%"
       />
     </div>
     <h3
-      class="H3-sc-1nwhpi5-0 eWxzix"
+      class="H3-sc-1nwhpi5-0 kAwkjI"
     >
       Narrator Settings
     </h3>
     <div
-      class="Row-x1o3ru-0 biGHco"
+      class="Row-x1o3ru-0 liVEuR"
     >
       <p
-        class="Text-sc-2lza2m-0 gbTFEp"
+        class="Text-sc-2lza2m-0 dmhzxO"
         font-weight="bold"
       >
         Narrator Active
       </p>
       <label
-        class="styled__SwitchWrapper-sc-1eitgbj-0 fOjBgC"
+        class="styled__SwitchWrapper-sc-1eitgbj-0 dEOiVq"
       >
         <input
           checked=""
-          class="styled__SwitchInput-sc-1eitgbj-1 bEerDp"
+          class="styled__SwitchInput-sc-1eitgbj-1 dzitpY"
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 hQAhzn"
+          class="styled__Slider-sc-1eitgbj-2 ebxSLO"
         />
       </label>
     </div>
     <div
-      class="Row-x1o3ru-0 biGHco"
+      class="Row-x1o3ru-0 liVEuR"
     >
       <p
-        class="Text-sc-2lza2m-0 frDpGz"
+        class="Text-sc-2lza2m-0 fDTusK"
       >
         Voice
       </p>
       <label
-        class="styled__SwitchWrapper-sc-1eitgbj-0 fOjBgC"
+        class="styled__SwitchWrapper-sc-1eitgbj-0 dEOiVq"
       >
         <input
           checked=""
-          class="styled__SwitchInput-sc-1eitgbj-1 bEerDp"
+          class="styled__SwitchInput-sc-1eitgbj-1 dzitpY"
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 hQAhzn"
+          class="styled__Slider-sc-1eitgbj-2 ebxSLO"
         />
       </label>
     </div>
     <div
-      class="Row-x1o3ru-0 fZUQFT"
+      class="Row-x1o3ru-0 fRmYGC"
     >
       <p
-        class="Text-sc-2lza2m-0 frDpGz"
+        class="Text-sc-2lza2m-0 fDTusK"
       >
         Animated Character
       </p>
       <label
-        class="styled__SwitchWrapper-sc-1eitgbj-0 fOjBgC"
+        class="styled__SwitchWrapper-sc-1eitgbj-0 dEOiVq"
       >
         <input
           checked=""
-          class="styled__SwitchInput-sc-1eitgbj-1 bEerDp"
+          class="styled__SwitchInput-sc-1eitgbj-1 dzitpY"
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 hQAhzn"
+          class="styled__Slider-sc-1eitgbj-2 ebxSLO"
         />
       </label>
     </div>
