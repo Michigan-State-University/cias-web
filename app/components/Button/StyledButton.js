@@ -20,12 +20,21 @@ const basicStyles = (outlined, color) => css`
   color: ${colors.white};
 `;
 
-const getHover = props => {
+const getHoverStyles = props => {
   if (props.hoverable && !props.disabled) {
     if (props.inverted) return basicStyles(props.outlined, props.color);
     return invertedStyles(props.color);
   }
   return '';
+};
+
+const getDisabledStyles = inverted => {
+  if (inverted)
+    return `cursor: default; color: ${colors.grey}; border-color: ${
+      colors.grey
+    }`;
+
+  return `cursor: default; background-color: ${colors.grey};`;
 };
 
 export const StyledButton = styled.button`
@@ -39,10 +48,10 @@ export const StyledButton = styled.button`
     props.inverted
       ? invertedStyles(props.color)
       : basicStyles(props.outlined, props.color)};
-  ${props => props.disabled && `cursor: default; background-color: grey;`};
+  ${props => props.disabled && getDisabledStyles(props.inverted)};
   transition: background-color 300ms ease, color 300ms ease, border 300ms ease;
   &:hover {
-    ${props => getHover(props)};
+    ${props => getHoverStyles(props)};
   }
   ${margin};
   ${border};

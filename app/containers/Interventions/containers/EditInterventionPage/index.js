@@ -100,6 +100,8 @@ function EditInterventionPage({
     });
   };
 
+  const loading = getQuestionsLoading || getInterventionLoader;
+
   if (questions.length === 0 && !getQuestionsLoading)
     return (
       <EmptyInterventionPage
@@ -108,26 +110,7 @@ function EditInterventionPage({
       />
     );
 
-  const loading = getQuestionsLoading || getInterventionLoader;
-  const renderList = () => {
-    if (loading) return <Loader type="inline" width={4} />;
-
-    return (
-      <Reorder reorderId="question-list" onReorder={handleReorder}>
-        {questions.map((question, index) => (
-          <Row key={question.id}>
-            <QuestionListItem
-              index={index}
-              selectedQuestionIndex={selectedQuestion}
-              questions={questions}
-              question={question}
-              interventionId={params.interventionId}
-            />
-          </Row>
-        ))}
-      </Reorder>
-    );
-  };
+  if (loading) return <Loader size={100} />;
 
   return (
     <Fragment>
@@ -145,20 +128,29 @@ function EditInterventionPage({
             padded
           >
             <Box width="100%" padded>
-              {renderList()}
+              <Reorder reorderId="question-list" onReorder={handleReorder}>
+                {questions.map((question, index) => (
+                  <Row key={question.id}>
+                    <QuestionListItem
+                      index={index}
+                      selectedQuestionIndex={selectedQuestion}
+                      questions={questions}
+                      question={question}
+                      interventionId={params.interventionId}
+                    />
+                  </Row>
+                ))}
+              </Reorder>
               <QuestionTypeChooser onClick={onCreateQuestion} />
               <Row />
             </Box>
           </Box>
         </Column>
         <Column sm={8} id="quill_boundaries">
-          <Loader hidden={!loading} type="inline" size={100} />
-          {!loading && (
-            <Row overflow="hidden" filled>
-              <QuestionDetails />
-              <QuestionSettings />
-            </Row>
-          )}
+          <Row overflow="hidden" filled>
+            <QuestionDetails />
+            <QuestionSettings />
+          </Row>
         </Column>
       </Row>
     </Fragment>

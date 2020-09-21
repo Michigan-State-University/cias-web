@@ -194,6 +194,8 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   outline: none;
   background-color: #107969;
   color: #FFFFFF;
+  cursor: default;
+  background-color: #9AA1B6;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   margin-top: 20px;
@@ -3318,6 +3320,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                 <button
                   class="c21"
                   color="primary"
+                  disabled=""
                   width="180px"
                 >
                   <span>

@@ -7,10 +7,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Img from 'components/Img';
-import { StyledLink } from 'containers/Navbar/components/styled';
-import { Button } from 'components/Button';
+import Icon from 'components/Icon';
 import eye from 'assets/svg/eye.svg';
+import { Button } from 'components/Button';
+import { StyledLink } from 'containers/Navbar/components/styled';
+import { colors } from 'theme';
 
 const PreviewButton = ({ to, target, previewDisabled, text, handleClick }) => (
   <div>
@@ -30,7 +31,12 @@ const PreviewButton = ({ to, target, previewDisabled, text, handleClick }) => (
         px={11}
         mx={5}
       >
-        <Img src={eye} alt="eye" mr={6} />
+        <Icon
+          src={eye}
+          alt="eye"
+          mr={6}
+          fill={previewDisabled ? colors.grey : null}
+        />
         {text}
       </Button>
     </StyledLink>
