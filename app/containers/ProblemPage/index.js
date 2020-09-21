@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import uniq from 'lodash/uniq';
 
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
@@ -80,7 +81,7 @@ export function ProblemPage({
   };
 
   const handleClearFilters = () => {
-    setFilterStatus(statusTypes);
+    setFilterStatus(uniq([...statusTypes, ...filterStatus]));
   };
 
   const mapProblem = problem => (

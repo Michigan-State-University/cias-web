@@ -1,6 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
+.c0 {
+  margin-bottom: 7px;
+}
+
+.c2 {
+  height: 40px;
+  border-radius: 5px;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  margin-right: 5px;
+  background-color: rgba(0,0,237,1);
+}
+
+.c6 .ReactCollapse--collapse {
+  -webkit-transition: height 480ms ease;
+  transition: height 480ms ease;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -24,7 +44,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -40,47 +60,12 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
   justify-items: space-between;
 }
 
-.c0 {
-  margin-bottom: 7px;
-}
-
-.c3 {
-  height: 40px;
-  border-radius: 5px;
-  padding: 12px;
-  color: white;
-  cursor: pointer;
-  width: 100%;
-  background-color: rgba(0,0,237,1);
-}
-
-.c7 .ReactCollapse--collapse {
-  -webkit-transition: height 480ms ease;
-  transition: height 480ms ease;
-}
-
-.c2 > div:first-child {
-  margin-right: 0;
-}
-
-.c2 img[alt='bin'] {
-  display: none;
-}
-
-.c2:hover img[alt='bin'] {
-  display: block;
-}
-
-.c2:hover > div:first-child {
-  margin-right: 5px;
-}
-
-.c5 {
+.c4 {
   width: auto;
   height: auto;
 }
 
-.c6 {
+.c5 {
   width: auto;
   height: auto;
   cursor: pointer;
@@ -98,30 +83,30 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
           class="c0"
         >
           <div
-            class="c1 c2"
+            class="c1"
           >
             <div
-              class="c3"
+              class="c2"
             >
               <div
-                class="c4"
+                class="c3"
               >
                 Label0
                  
                 <img
-                  class="c5"
+                  class="c4"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
             <img
               alt="bin"
-              class="c6"
+              class="c5"
               src="IMAGE_MOCK"
             />
           </div>
           <div
-            class="c7"
+            class="c6"
           >
             <div
               class="ReactCollapse--collapse"
@@ -141,30 +126,30 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
           class="c0"
         >
           <div
-            class="c1 c2"
+            class="c1"
           >
             <div
-              class="c3"
+              class="c2"
             >
               <div
-                class="c4"
+                class="c3"
               >
                 Label1
                  
                 <img
-                  class="c5"
+                  class="c4"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
             <img
               alt="bin"
-              class="c6"
+              class="c5"
               src="IMAGE_MOCK"
             />
           </div>
           <div
-            class="c7"
+            class="c6"
           >
             <div
               class="ReactCollapse--collapse"
@@ -184,30 +169,30 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
           class="c0"
         >
           <div
-            class="c1 c2"
+            class="c1"
           >
             <div
-              class="c3"
+              class="c2"
             >
               <div
-                class="c4"
+                class="c3"
               >
                 Label2
                  
                 <img
-                  class="c5"
+                  class="c4"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
             <img
               alt="bin"
-              class="c6"
+              class="c5"
               src="IMAGE_MOCK"
             />
           </div>
           <div
-            class="c7"
+            class="c6"
           >
             <div
               class="ReactCollapse--collapse"
@@ -226,6 +211,26 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
 `;
 
 exports[`<Card /> Should render only one element and match the snapshot 1`] = `
+.c0 {
+  margin-bottom: 7px;
+}
+
+.c2 {
+  height: 40px;
+  border-radius: 5px;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  margin-right: 5px;
+  background-color: rgba(0,0,237,1);
+}
+
+.c6 .ReactCollapse--collapse {
+  -webkit-transition: height 480ms ease;
+  transition: height 480ms ease;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -249,7 +254,7 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -265,47 +270,12 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
   justify-items: space-between;
 }
 
-.c0 {
-  margin-bottom: 7px;
-}
-
-.c3 {
-  height: 40px;
-  border-radius: 5px;
-  padding: 12px;
-  color: white;
-  cursor: pointer;
-  width: 100%;
-  background-color: rgba(0,0,237,1);
-}
-
-.c7 .ReactCollapse--collapse {
-  -webkit-transition: height 480ms ease;
-  transition: height 480ms ease;
-}
-
-.c2 > div:first-child {
-  margin-right: 0;
-}
-
-.c2 img[alt='bin'] {
-  display: none;
-}
-
-.c2:hover img[alt='bin'] {
-  display: block;
-}
-
-.c2:hover > div:first-child {
-  margin-right: 5px;
-}
-
-.c5 {
+.c4 {
   width: auto;
   height: auto;
 }
 
-.c6 {
+.c5 {
   width: auto;
   height: auto;
   cursor: pointer;
@@ -320,30 +290,30 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
         class="c0"
       >
         <div
-          class="c1 c2"
+          class="c1"
         >
           <div
-            class="c3"
+            class="c2"
           >
             <div
-              class="c4"
+              class="c3"
             >
               Label0
                
               <img
-                class="c5"
+                class="c4"
                 src="IMAGE_MOCK"
               />
             </div>
           </div>
           <img
             alt="bin"
-            class="c6"
+            class="c5"
             src="IMAGE_MOCK"
           />
         </div>
         <div
-          class="c7"
+          class="c6"
         >
           <div
             class="ReactCollapse--collapse"
@@ -361,6 +331,41 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
 `;
 
 exports[`<Card /> Should render with one element opened and match the snapshot 1`] = `
+.c0 {
+  margin-bottom: 7px;
+}
+
+.c2 {
+  height: 40px;
+  border-radius: 5px;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  margin-right: 5px;
+  background-color: rgba(0,0,237,1);
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.c6 .ReactCollapse--collapse {
+  -webkit-transition: height 480ms ease;
+  transition: height 480ms ease;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -384,7 +389,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
   align-items: center;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -400,62 +405,12 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
   justify-items: space-between;
 }
 
-.c0 {
-  margin-bottom: 7px;
-}
-
-.c3 {
-  height: 40px;
-  border-radius: 5px;
-  padding: 12px;
-  color: white;
-  cursor: pointer;
-  width: 100%;
-  background-color: rgba(0,0,237,1);
-}
-
-.c8 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.c7 .ReactCollapse--collapse {
-  -webkit-transition: height 480ms ease;
-  transition: height 480ms ease;
-}
-
-.c2 > div:first-child {
-  margin-right: 0;
-}
-
-.c2 img[alt='bin'] {
-  display: none;
-}
-
-.c2:hover img[alt='bin'] {
-  display: block;
-}
-
-.c2:hover > div:first-child {
-  margin-right: 5px;
-}
-
-.c5 {
+.c4 {
   width: auto;
   height: auto;
 }
 
-.c6 {
+.c5 {
   width: auto;
   height: auto;
   cursor: pointer;
@@ -473,30 +428,30 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
           class="c0"
         >
           <div
-            class="c1 c2"
+            class="c1"
           >
             <div
-              class="c3"
+              class="c2"
             >
               <div
-                class="c4"
+                class="c3"
               >
                 Label0
                  
                 <img
-                  class="c5"
+                  class="c4"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
             <img
               alt="bin"
-              class="c6"
+              class="c5"
               src="IMAGE_MOCK"
             />
           </div>
           <div
-            class="c7"
+            class="c6"
           >
             <div
               class="ReactCollapse--collapse"
@@ -506,7 +461,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
                 class="ReactCollapse--content"
               >
                 <div
-                  class="c8"
+                  class="c7"
                 >
                   Content0
                 </div>
@@ -522,30 +477,30 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
           class="c0"
         >
           <div
-            class="c1 c2"
+            class="c1"
           >
             <div
-              class="c3"
+              class="c2"
             >
               <div
-                class="c4"
+                class="c3"
               >
                 Label1
                  
                 <img
-                  class="c5"
+                  class="c4"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
             <img
               alt="bin"
-              class="c6"
+              class="c5"
               src="IMAGE_MOCK"
             />
           </div>
           <div
-            class="c7"
+            class="c6"
           >
             <div
               class="ReactCollapse--collapse"
@@ -565,30 +520,30 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
           class="c0"
         >
           <div
-            class="c1 c2"
+            class="c1"
           >
             <div
-              class="c3"
+              class="c2"
             >
               <div
-                class="c4"
+                class="c3"
               >
                 Label2
                  
                 <img
-                  class="c5"
+                  class="c4"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
             <img
               alt="bin"
-              class="c6"
+              class="c5"
               src="IMAGE_MOCK"
             />
           </div>
           <div
-            class="c7"
+            class="c6"
           >
             <div
               class="ReactCollapse--collapse"

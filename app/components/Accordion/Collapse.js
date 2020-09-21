@@ -14,29 +14,20 @@ import {
   StyledCollapseContainer,
   StyledCollapseContent,
   Content,
-  HoverableContainer,
 } from './styled';
 
 const CollapseLabel = ({ isOpened, onToggle, label, color, onDelete }) => {
   const img = isOpened ? arrowUp : arrowDown;
 
   return (
-    <HoverableContainer
-      justify="between"
-      align="center"
-      isDeletable={!!onDelete}
-    >
-      <StyledCollapseLabel
-        bg={color}
-        onClick={onToggle}
-        isDeletable={!!onDelete}
-      >
+    <Row justify="between" align="center">
+      <StyledCollapseLabel bg={color} onClick={onToggle}>
         <Row justify="between">
           {label} <Img src={img} />
         </Row>
       </StyledCollapseLabel>
       <Img src={bin} alt="bin" clickable onClick={onDelete} />
-    </HoverableContainer>
+    </Row>
   );
 };
 
