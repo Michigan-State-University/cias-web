@@ -25,8 +25,10 @@ import { getAllVariables } from 'models/Intervention/utils';
 import NoContent from 'components/NoContent';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import useOutsideClick from 'utils/useOutsideClick';
+import messages from './messages';
 
 const VariableChooser = ({
+  intl: { formatMessage },
   onClick,
   questions,
   selectedQuestion: { id } = {},
@@ -74,7 +76,7 @@ const VariableChooser = ({
 
     return (
       <Box padding={30}>
-        <NoContent />
+        <NoContent text={formatMessage(messages.noVariables)} />
       </Box>
     );
   };
@@ -101,6 +103,7 @@ const VariableChooser = ({
 };
 
 VariableChooser.propTypes = {
+  intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.shape(Question),

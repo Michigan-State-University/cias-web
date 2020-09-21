@@ -13,4 +13,8 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Next Screen',
   },
+  noVariables: {
+    id: `${scope}.noVariables`,
+    defaultMessage: 'No variables defined yet',
+  },
 });
