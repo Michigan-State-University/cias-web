@@ -15,6 +15,7 @@ import { error } from 'react-toastify-redux';
 import get from 'lodash/get';
 import { Redirect } from 'react-router-dom';
 
+import AudioWrapper from 'utils/audioWrapper';
 import { useInjectSaga } from 'utils/injectSaga';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -25,6 +26,8 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
 import { DESKTOP_MODE } from 'utils/previewMode';
+
+import { makeSelectAudioInstance } from 'global/reducers/globalState';
 
 import {
   BackButton,
@@ -61,6 +64,7 @@ const AnimationRefHelper = ({
   changeIsAnimationOngoing,
   setFeedbackSettings,
   feedbackScreenSettings,
+  audioInstance,
 }) => {
   const animationParentRef = useRef();
   const [refState, setRefState] = useState(null);
@@ -81,6 +85,7 @@ const AnimationRefHelper = ({
           changeIsAnimationOngoing={changeIsAnimationOngoing}
           setFeedbackSettings={setFeedbackSettings}
           feedbackScreenSettings={feedbackScreenSettings}
+          audioInstance={audioInstance}
         />
       )}
     </AnswerInterventionContent>
@@ -95,6 +100,7 @@ AnimationRefHelper.propTypes = {
   changeIsAnimationOngoing: PropTypes.func,
   setFeedbackSettings: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,
+  audioInstance: PropTypes.object,
 };
 
 export function AnswerInterventionPage({
@@ -108,6 +114,7 @@ export function AnswerInterventionPage({
   showError,
   changeIsAnimationOngoing,
   setFeedbackSettings,
+  audioInstance,
   answerInterventionPage: {
     interventionQuestions,
     questionError,
@@ -127,10 +134,9 @@ export function AnswerInterventionPage({
 
   useEffect(() => {
     fetchQuestionsAction(interventionId);
-    if (index) {
-      setQuestionIndexAction(parseInt(index, 10));
-      onStartIntervention();
-    }
+
+    // cannot skip start screen => user have to click button to enable auto-play
+    if (index) setQuestionIndexAction(parseInt(index, 10));
   }, []);
 
   if (questionError)
@@ -245,6 +251,12 @@ export function AnswerInterventionPage({
     );
   };
 
+  const startInterventionAsync = async () => {
+    await audioInstance.prepareAutoPlay();
+
+    onStartIntervention();
+  };
+
   const renderPage = () => <Fragment>{renderQuestion()}</Fragment>;
 
   if (questionLoading) return <Loader />;
@@ -266,9 +278,9 @@ export function AnswerInterventionPage({
         previewMode={previewMode}
         interventionStarted={interventionStarted}
       >
-        {!index && !interventionStarted && (
+        {!interventionStarted && (
           <StyledButton
-            onClick={onStartIntervention}
+            onClick={startInterventionAsync}
             title={formatMessage(messages.startIntervention)}
             isDesktop={isDesktop}
           />
@@ -285,6 +297,7 @@ export function AnswerInterventionPage({
                   changeIsAnimationOngoing={changeIsAnimationOngoing}
                   setFeedbackSettings={setFeedbackSettings}
                   feedbackScreenSettings={feedbackScreenSettings}
+                  audioInstance={audioInstance}
                 >
                   {renderPage()}
                 </AnimationRefHelper>
@@ -315,10 +328,12 @@ AnswerInterventionPage.propTypes = {
   showError: PropTypes.func,
   changeIsAnimationOngoing: PropTypes.func,
   setFeedbackSettings: PropTypes.func,
+  audioInstance: PropTypes.shape(AudioWrapper),
 };
 
 const mapStateToProps = createStructuredSelector({
   answerInterventionPage: makeSelectAnswerInterventionPage(),
+  audioInstance: makeSelectAudioInstance(),
 });
 
 const mapDispatchToProps = {

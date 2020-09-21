@@ -37,7 +37,7 @@ class AudioWrapper extends Audio {
 
   play = () => {
     this.stopped = false;
-    super.play();
+    return super.play();
   };
 
   /**
@@ -94,6 +94,21 @@ class AudioWrapper extends Audio {
       this.removeEventListener('error', this.onErrorHandler);
     if (this.onPlayHandler)
       this.removeEventListener('play', this.onPlayHandler);
+  };
+
+  /**
+   * Prepare everything for auto-play functionality.
+   */
+  prepareAutoPlay = () => {
+    this.clean(); // remove all events
+    this.setSrc(''); // make sure there is no 'real' audio
+    this.onPlay(() => {
+      // on onPlay event immediately stop audio and clean events
+      this.stop();
+      this.clean();
+    });
+
+    return this.play().catch(() => {}); // catch needed to suppress console exception (empty audio)
   };
 
   /**

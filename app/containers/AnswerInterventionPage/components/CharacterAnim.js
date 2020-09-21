@@ -57,6 +57,7 @@ const CharacterAnim = ({
   changeIsAnimationOngoing,
   setFeedbackSettings,
   feedbackScreenSettings: { sliderRef },
+  audioInstance,
 }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const dispatchUpdate = newState =>
@@ -157,6 +158,7 @@ const CharacterAnim = ({
     changeBlock,
     answers,
     settings,
+    audioInstance,
   );
 
   const {
@@ -344,6 +346,7 @@ CharacterAnim.propTypes = {
   changeIsAnimationOngoing: PropTypes.func,
   setFeedbackSettings: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,
+  audioInstance: PropTypes.object,
 };
 
 export default CharacterAnim;
