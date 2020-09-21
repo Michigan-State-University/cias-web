@@ -42,17 +42,23 @@ export const StyledRow = styled(Row)`
 
 export const TextButton = styled(StyledTextButton)`
   margin-left: 25px;
-  margin-top: 22px;
+  margin-top: 30px;
   ${mediaQuery.tablet`
     margin-left: 0;
     margin-top: 25px;
   `}
 `;
 
-export const StyledInputBox = styled(Box)`
+export const StyledEmailBox = styled(Box)`
   width: 50%;
   ${mediaQuery.tablet`
     width: 100%;
+  `}
+`;
+
+export const StyledTimezoneBox = styled(StyledEmailBox)`
+  ${mediaQuery.tablet`
+    margin-top: 20px;
   `}
 `;
 

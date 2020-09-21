@@ -1,23 +1,13 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
-import { compose } from 'redux';
 import { Formik } from 'formik';
-import { createStructuredSelector } from 'reselect';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 
-import {
-  editUserRequest,
-  editUserSaga,
-  makeSelectUser,
-} from 'global/reducers/auth';
-import { useInjectSaga } from 'utils/injectSaga';
-
 import FormikSelect from 'components/FormikSelect';
 import TIMEZONES from 'utils/timezones';
+
 import messages from '../messages';
 
 dayjs.extend(utc);
@@ -39,8 +29,6 @@ const initialValues = user => {
 };
 
 const TimezoneForm = ({ formatMessage, user, editUser }) => {
-  useInjectSaga({ key: 'editUser', saga: editUserSaga });
-
   const onSubmit = ({ timeZone }, { setSubmitting }) => {
     const { value } = timeZone || {};
     if (value) editUser({ timeZone: value });
@@ -77,20 +65,4 @@ TimezoneForm.propTypes = {
   editUser: PropTypes.func,
 };
 
-const mapStateToProps = createStructuredSelector({
-  user: makeSelectUser(),
-});
-
-const mapDispatchToProps = {
-  editUser: editUserRequest,
-};
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-export default compose(
-  withConnect,
-  injectIntl,
-)(TimezoneForm);
+export default TimezoneForm;

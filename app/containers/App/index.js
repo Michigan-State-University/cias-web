@@ -180,6 +180,17 @@ export function App({ user }) {
             activeTab: interventionsTabId,
           }}
         />
+        <AppRoute
+          exact
+          path="/profile/:id"
+          component={AccountSettings}
+          protectedRoute
+          allowedRoles={[Roles.admin]}
+          navbarProps={{
+            navbarId: 'default',
+            activeTab: interventionsTabId,
+          }}
+        />
         <AppRoute exact path="/not-found-page" component={NotFoundPage} />
       </Switch>
       <GlobalStyle />

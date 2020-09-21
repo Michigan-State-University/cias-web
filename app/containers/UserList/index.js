@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import xor from 'lodash/xor';
+import { withRouter } from 'react-router-dom';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -58,6 +59,7 @@ export function UserList({
   userList: { users, usersLoading, usersError },
   fetchUsersRequest,
   intl: { formatMessage },
+  history,
 }) {
   useInjectReducer({ key: 'userList', reducer: UserListReducer });
   useInjectSaga({ key: 'userList', saga: userListSaga });
@@ -77,6 +79,8 @@ export function UserList({
     const toggledArray = xor(selectRoles, [role]);
     setSelectRoles(toggledArray);
   };
+
+  const handleClick = id => () => history.push(`/profile/${id}`);
 
   const getContent = () => {
     if (usersLoading && users.length === 0) return <Loader />;
@@ -162,6 +166,8 @@ export function UserList({
                   hoverBg={colors.linkWater}
                   color={colors.white}
                   key={`row-th-${id}`}
+                  cursor="pointer"
+                  onClick={handleClick(id)}
                 >
                   <TD pl={20}>{fullName}</TD>
                   <TD pl={20}>{email}</TD>
@@ -229,4 +235,5 @@ export default compose(
   withConnect,
   memo,
   injectIntl,
+  withRouter,
 )(UserList);

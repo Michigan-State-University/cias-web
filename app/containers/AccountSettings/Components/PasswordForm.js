@@ -1,20 +1,8 @@
 import React, { useEffect, useRef, Fragment } from 'react';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
-import { compose } from 'redux';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import {
-  changePasswordRequest,
-  changePasswordSaga,
-  makeSelectErrors,
-  makeSelectLoaders,
-  changeErrorStatus,
-} from 'global/reducers/auth';
-import { useInjectSaga } from 'utils/injectSaga';
-import { createStructuredSelector } from 'reselect';
 
 import Modal from 'components/Modal';
 import ErrorAlert from 'components/ErrorAlert';
@@ -66,7 +54,6 @@ const PasswordForm = ({
   error,
   loading,
 }) => {
-  useInjectSaga({ key: 'changePassword', saga: changePasswordSaga });
   const previousLoadingState = useRef(loading);
 
   const onSubmit = (
@@ -159,22 +146,4 @@ PasswordForm.propTypes = {
   changeErrorValue: PropTypes.func,
 };
 
-const mapStateToProps = createStructuredSelector({
-  error: makeSelectErrors('changePasswordError'),
-  loading: makeSelectLoaders('changePasswordLoading'),
-});
-
-const mapDispatchToProps = {
-  changePassword: changePasswordRequest,
-  changeErrorValue: changeErrorStatus,
-};
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-export default compose(
-  withConnect,
-  injectIntl,
-)(PasswordForm);
+export default PasswordForm;

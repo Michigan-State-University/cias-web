@@ -6,6 +6,7 @@ import { TR } from './TR';
 import { TBody } from './TBody';
 
 const StripedTR = styled(TR)`
+  cursor: ${({ cursor }) => cursor || 'default'};
   ${TBody} &:nth-child(${props => props.stripesPlacement}) {
   background: ${props =>
     props.color ? props.color : `rgba(${hexToRgb(colors.jungleGreen)}, 0.1)`};

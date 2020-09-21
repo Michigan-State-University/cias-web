@@ -14,21 +14,30 @@ import BackButton from 'components/BackButton';
 import H1 from 'components/H1';
 import { colors, themeColors, boxShadows } from 'theme';
 import messages from './messages';
-import FullNameForm from './Containers/FullNameForm';
-import PasswordForm from './Containers/PasswordForm';
-import AvatarForm from './Containers/AvatarForm';
-import EmailForm from './Containers/EmailForm';
-import TimezoneForm from './Containers/TimezoneForm';
+
+import WrappedFullNameForm from './Containers/WrappedFullNameForm';
+import WrappedPasswordForm from './Containers/WrappedPasswordForm';
+import WrappedAvatarForm from './Containers/WrappedAvatarForm';
+import WrappedEmailForm from './Containers/WrappedEmailForm';
+import WrappedTimezoneForm from './Containers/WrappedTimezoneForm';
 
 import {
   StyledBox,
   StyledColumn,
   StyledRow,
   TextButton,
-  StyledInputBox,
+  StyledEmailBox,
+  StyledTimezoneBox,
 } from './styled';
 
-const AccountSettings = ({ intl: { formatMessage } }) => {
+const AccountSettings = ({
+  intl: { formatMessage },
+  PasswordComponent,
+  AvatarComponent,
+  FullNameComponent,
+  EmailComponent,
+  TimezoneComponent,
+}) => {
   const [passwordReset, setPasswordReset] = useState(false);
   const openReset = () => setPasswordReset(true);
   const closeReset = () => setPasswordReset(false);
@@ -37,7 +46,7 @@ const AccountSettings = ({ intl: { formatMessage } }) => {
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
-      <PasswordForm
+      <PasswordComponent
         visible={passwordReset}
         onClose={closeReset}
         formatMessage={formatMessage}
@@ -58,18 +67,18 @@ const AccountSettings = ({ intl: { formatMessage } }) => {
           shadow={boxShadows.selago}
         >
           <Row>
-            <AvatarForm />
+            <AvatarComponent />
           </Row>
           <Row mt={50}>
-            <FullNameForm formatMessage={formatMessage} />
+            <FullNameComponent formatMessage={formatMessage} />
           </Row>
           <StyledRow width="100%" align="center" justify="end">
-            <StyledInputBox width="50%" mr={20}>
-              <EmailForm formatMessage={formatMessage} />
-            </StyledInputBox>
-            <StyledInputBox>
-              <TimezoneForm formatMessage={formatMessage} />
-            </StyledInputBox>
+            <StyledEmailBox width="50%" mr={20}>
+              <EmailComponent formatMessage={formatMessage} />
+            </StyledEmailBox>
+            <StyledTimezoneBox>
+              <TimezoneComponent formatMessage={formatMessage} />
+            </StyledTimezoneBox>
             <Box mb={10}>
               <TextButton
                 onClick={openReset}
@@ -90,6 +99,14 @@ const AccountSettings = ({ intl: { formatMessage } }) => {
 
 AccountSettings.propTypes = {
   intl: intlShape,
+};
+
+AccountSettings.defaultProps = {
+  PasswordComponent: WrappedPasswordForm,
+  AvatarComponent: WrappedAvatarForm,
+  FullNameComponent: WrappedFullNameForm,
+  EmailComponent: WrappedEmailForm,
+  TimezoneComponent: WrappedTimezoneForm,
 };
 
 export default injectIntl(AccountSettings);
