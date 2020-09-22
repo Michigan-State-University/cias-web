@@ -1,25 +1,52 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render, fireEvent } from 'react-testing-library';
 import 'jest-styled-components';
 
 import Dropdown from '../index';
 
 const defaultProps = {
+  top: false,
   options: [
     {
       id: 'id',
       label: 'Label',
       action: jest.fn(),
-      colo: 'red',
+      color: 'red',
+      icon: 'img.png',
     },
   ],
 };
 
 describe('<Dropdown />', () => {
-  it('should match the snapshot', () => {
-    const renderedComponent = renderer
-      .create(<Dropdown {...defaultProps} />)
-      .toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+  it('Expect to not log errors in console', () => {
+    const spy = jest.spyOn(global.console, 'error');
+    render(<Dropdown {...defaultProps} />);
+    expect(spy).not.toHaveBeenCalled();
+  });
+  it('should render on top and  match the snapshot', () => {
+    const { container } = render(<Dropdown {...defaultProps} />);
+    expect(container).toMatchSnapshot();
+  });
+  it('should render on bottom and match the snapshot', () => {
+    const newProps = {
+      ...defaultProps,
+      top: true,
+    };
+    const { container } = render(<Dropdown {...newProps} />);
+    expect(container).toMatchSnapshot();
+  });
+  it('should open dropdown', () => {
+    const { container } = render(<Dropdown {...defaultProps} />);
+    const img = document.querySelectorAll('img')[0];
+    fireEvent.click(img);
+    expect(container.innerHTML).toContain('Label');
+  });
+  it('should call action in dropdown', () => {
+    const { getByText } = render(<Dropdown {...defaultProps} />);
+    const img = document.querySelectorAll('img')[0];
+    fireEvent.click(img);
+    const label = getByText('Label');
+    fireEvent.click(label);
+    expect(defaultProps.options[0].action).toHaveBeenCalledTimes(1);
   });
 });

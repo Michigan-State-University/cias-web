@@ -15,7 +15,6 @@ import { DEFAULT_LOCALE } from 'i18n';
 import configureStore from 'configureStore';
 import { browserHistory } from 'react-router-dom';
 
-import renderer from 'react-test-renderer';
 import BranchingLayout from '../index';
 
 describe('<BranchingLayout />', () => {
@@ -38,15 +37,13 @@ describe('<BranchingLayout />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-    const renderedComponent = renderer
-      .create(
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <Provider store={store}>
-            <BranchingLayout />
-          </Provider>
-        </IntlProvider>,
-      )
-      .toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <Provider store={store}>
+          <BranchingLayout />
+        </Provider>
+      </IntlProvider>,
+    );
+    expect(container).toMatchSnapshot();
   });
 });

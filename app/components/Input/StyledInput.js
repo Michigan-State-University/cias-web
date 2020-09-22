@@ -106,3 +106,5 @@ StyledInput.defaultProps = {
 };
 
 export { StyledInput };
+
+export default StyledInput;

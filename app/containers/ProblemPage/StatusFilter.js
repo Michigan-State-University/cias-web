@@ -13,13 +13,19 @@ import CloseIcon from 'components/CloseIcon';
 import { FilterText, StatusLabel } from './styled';
 
 const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
+  const filterArchived = statuses =>
+    statuses.filter(status => status !== archived);
+
   const labels = useMemo(
     () =>
-      Object.keys(globalMessages.statuses).filter(
+      filterArchived(Object.keys(globalMessages.statuses)).filter(
         status => status !== archived,
       ),
     [globalMessages.statuses],
   );
+
+  const showIcon = active && filterArchived(active).length !== labels.length;
+
   return (
     <Row align="center" width="100%">
       {labels.map(status => (
@@ -38,7 +44,7 @@ const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
           </FilterText>
         </StatusLabel>
       ))}
-      {active && active.length !== labels.length && (
+      {showIcon && (
         <CloseIcon
           height={15}
           width={15}

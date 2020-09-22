@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Dropdown /> should match the snapshot 1`] = `
+exports[`<Dropdown /> should render on bottom and match the snapshot 1`] = `
 .c2 {
   width: auto;
   height: auto;
@@ -38,19 +38,76 @@ exports[`<Dropdown /> should match the snapshot 1`] = `
   padding: 8px;
 }
 
-<div
-  className="c0"
-  display="flex"
->
+<div>
   <div
-    className="c1"
-    onClick={[Function]}
+    class="c0"
+    display="flex"
   >
-    <img
-      alt="dots"
-      className="c2"
-      src="IMAGE_MOCK"
-    />
+    <div
+      class="c1"
+    >
+      <img
+        alt="dots"
+        class="c2"
+        src="IMAGE_MOCK"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Dropdown /> should render on top and  match the snapshot 1`] = `
+.c2 {
+  width: auto;
+  height: auto;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 8px;
+}
+
+<div>
+  <div
+    class="c0"
+    display="flex"
+  >
+    <div
+      class="c1"
+    >
+      <img
+        alt="dots"
+        class="c2"
+        src="IMAGE_MOCK"
+      />
+    </div>
   </div>
 </div>
 `;

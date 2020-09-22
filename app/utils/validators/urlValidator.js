@@ -1,11 +1,3 @@
-const regex = new RegExp(
-  '^(https?:\\/\\/)?' + // protocol
-  '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' + // domain name
-  '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-  '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-  '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-    '(\\#[-a-z\\d_]*)?$',
-  'i',
-);
+import { urlRegex } from 'global/constants/regex';
 
-export const urlValidator = target => regex.test(target) || target === '';
+export const urlValidator = target => urlRegex.test(target) || target === '';

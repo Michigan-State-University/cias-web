@@ -8,7 +8,6 @@ import {
   readQuestionBlockType,
   reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
-import AudioWrapper from 'utils/audioWrapper';
 import { useRef } from 'react';
 import { speechAnimations } from 'utils/animations/animationsNames';
 import toPairs from 'lodash/toPairs';
@@ -24,8 +23,8 @@ const useAudioHelper = (
   changeBlock,
   answers,
   settings,
+  audioInstance,
 ) => {
-  const audio = useRef(new AudioWrapper());
   const loadedSpeechAnimations = useRef([]);
 
   const fetchAudioAnimations = async () => {
@@ -209,7 +208,7 @@ const useAudioHelper = (
     }
   };
 
-  const cleanAudio = () => audio.current.clean();
+  const cleanAudio = () => audioInstance.clean();
 
   const handleAudioBlock = () => {
     if (currentData.currentAnimation === 'start') {
@@ -246,15 +245,15 @@ const useAudioHelper = (
   };
 
   const handleSpeech = audioUrls => {
-    audio.current.onPlay(playAnimation);
-    audio.current.onLoaded(onSpeechReady);
-    audio.current.onEnded(() => onSpeechEnded(audioUrls));
-    audio.current.onError(() => onSpeechEnded(audioUrls));
+    audioInstance.onPlay(playAnimation);
+    audioInstance.onLoaded(onSpeechReady);
+    audioInstance.onEnded(() => onSpeechEnded(audioUrls));
+    audioInstance.onError(() => onSpeechEnded(audioUrls));
 
     if (!audioUrls.length || !audioUrls[currentData.currentAudioIndex])
       onSpeechEnded(audioUrls);
     else
-      audio.current.setSrc(
+      audioInstance.setSrc(
         `${process.env.API_URL}${audioUrls[currentData.currentAudioIndex]}`,
       );
   };
@@ -302,7 +301,7 @@ const useAudioHelper = (
     }
   };
 
-  const onSpeechReady = () => audio.current.play();
+  const onSpeechReady = () => audioInstance.play();
 
   const onSpeechEnded = audioUrls => {
     cleanAudio();
@@ -327,7 +326,7 @@ const useAudioHelper = (
 
   const moveToNextAudio = () => {
     stopAnimation();
-    audio.current.pause();
+    audioInstance.pause();
 
     dispatchUpdate({
       currentData: {
@@ -374,8 +373,8 @@ const useAudioHelper = (
   };
 
   const stopSpeech = () => {
-    audio.current.clean();
-    audio.current.stop();
+    audioInstance.clean();
+    audioInstance.stop();
   };
 
   const stopAnimation = () => {
@@ -392,7 +391,7 @@ const useAudioHelper = (
         currentData.type === reflectionType ||
         currentData.type === readQuestionBlockType ||
         currentData.type === reflectionFormulaType) &&
-      (audio.current.paused || audio.current.stopped) &&
+      (audioInstance.paused || audioInstance.stopped) &&
       (currentData.currentAnimation !== 'start' &&
         currentData.currentAnimation !== 'end')
     )

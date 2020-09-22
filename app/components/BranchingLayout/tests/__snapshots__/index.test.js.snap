@@ -43,6 +43,14 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
 .c3 {
   font-family: DM Sans;
   font-size: 13px;
@@ -57,12 +65,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   text-decoration: underline;
 }
 
-.c4 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  margin-top: 20px;
+.c5 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -81,33 +84,57 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   font-weight: bold;
   border-radius: 4px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
 }
 
-<div
-  className="c0"
->
+.c5:hover {
+  background-color: #107969;
+  color: #FFFFFF;
+  border: none;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+<div>
   <div
-    className="c1"
+    class="c0"
   >
-    Formula
     <div
-      className="c2"
-      onClick={[Function]}
+      class="c1"
     >
-      <p
-        className="c3"
-        color="#C866EA"
-        fontWeight="bold"
+      Formula
+      <div
+        class="c2"
       >
-        + From list
-      </p>
+        <p
+          class="c3"
+          color="#C866EA"
+          font-weight="bold"
+        >
+          + From list
+        </p>
+      </div>
     </div>
-  </div>
-  <div
-    className="c4"
-    onClick={[Function]}
-  >
-    + Add case
+    <div
+      class="c4 c5"
+    >
+      + Add case
+    </div>
   </div>
 </div>
 `;

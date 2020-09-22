@@ -90,7 +90,7 @@ function BranchingLayout({
               </Box>
             )}
             {!problemBranching && (
-              <Box position="absolute" right={25} top={160}>
+              <Box position="absolute" right={25} top={160} width="100%">
                 <VariableChooser
                   visible={variableChooserOpen}
                   setOpen={setVariableChooserOpen}

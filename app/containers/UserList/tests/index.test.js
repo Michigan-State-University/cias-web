@@ -13,19 +13,32 @@ import { browserHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from 'configureStore';
 
+import { DEFAULT_LOCALE } from 'i18n';
+import ReactDOM from 'react-dom';
 import { UserList } from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<UserList />', () => {
   let store;
   let props;
 
+  let modalContainer;
+  let mainAppContainer;
+
   beforeAll(() => {
     store = configureStore({}, browserHistory);
+
+    ReactDOM.createPortal = jest.fn(element => element);
+    modalContainer = document.createElement('div');
+    modalContainer.setAttribute('id', 'modal-portal');
+    document.body.appendChild(modalContainer);
+    mainAppContainer = document.createElement('div');
+    mainAppContainer.setAttribute('id', 'main-app-container');
+    document.body.appendChild(mainAppContainer);
   });
   beforeEach(() => {
     props = {
       fetchUsersRequest: jest.fn(),
+      changeActivateStatus: jest.fn(),
       intl: { formatMessage: jest.fn() },
       userList: {
         users: [
@@ -34,6 +47,21 @@ describe('<UserList />', () => {
             full_name: 'test',
             roles: ['participant'],
             email: 'test@test.pl',
+            deactivated: false,
+          },
+          {
+            id: 2,
+            full_name: 'test2',
+            roles: ['researcher'],
+            email: 'test2@test.pl',
+            deactivated: true,
+          },
+          {
+            id: 3,
+            full_name: 'test3',
+            roles: ['admin'],
+            email: 'test3@test.pl',
+            deactivated: false,
           },
         ],
       },

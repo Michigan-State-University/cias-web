@@ -5,15 +5,22 @@
  */
 import produce from 'immer';
 import isEmpty from 'lodash/isEmpty';
+import findIndex from 'lodash/findIndex';
 
 import {
+  CHANGE_ACTIVATE_STATUS_REQUEST,
   FETCH_USERS,
   FETCH_USERS_FAILURE,
   FETCH_USERS_SUCCESS,
+  CHANGE_ACTIVATE_STATUS_FAILURE,
+  CHANGE_ACTIVATE_STATUS_SUCCESS,
 } from './constants';
 
 export const initialState = {
   users: [],
+  cache: {
+    users: [],
+  },
   usersError: null,
   usersLoading: true,
 };
@@ -33,6 +40,20 @@ const userListReducer = (state = initialState, { type, payload }) =>
       case FETCH_USERS_FAILURE:
         draft.usersError = payload;
         draft.usersLoading = false;
+        break;
+      case CHANGE_ACTIVATE_STATUS_REQUEST:
+        const { users } = state;
+        draft.cache.users = users;
+        const { id, deactivated } = payload;
+        const index = findIndex(users, user => user.id === id);
+        draft.users[index].deactivated = deactivated;
+        break;
+      case CHANGE_ACTIVATE_STATUS_SUCCESS:
+        draft.cache.users = [];
+        break;
+      case CHANGE_ACTIVATE_STATUS_FAILURE:
+        draft.users = state.cache.users;
+        draft.cache.users = [];
         break;
     }
   });

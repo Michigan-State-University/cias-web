@@ -58,7 +58,7 @@ const QuestionListItem = ({
 }) => {
   const isSelected = selectedQuestionIndex === index;
   const gearIcon = settingsVisibility && isSelected ? gearSelected : gear;
-  const { type, title, id, body } = question;
+  const { type, subtitle, id, body } = question;
 
   const handleSelectClick = newIndex => {
     setDraggable(false);
@@ -126,7 +126,7 @@ const QuestionListItem = ({
         <Column xs={10}>
           <Row>
             <ClampedTitle mb={6}>
-              {unescape(htmlToPlainText(title))}
+              {unescape(htmlToPlainText(subtitle))}
             </ClampedTitle>
           </Row>
           <Row>

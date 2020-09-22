@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import 'jest-styled-components';
 import { Provider } from 'react-redux';
 
@@ -130,11 +130,34 @@ describe('<VariableChooser />', () => {
 
     expect(variableComponentList).toHaveLength(1);
   });
+
+  it('should invoke onClick', () => {
+    const question = mockSingleQuestion(1, true);
+
+    store = createStore(reducer, {
+      questions: {
+        questions: [question],
+        selectedQuestion: 0,
+      },
+    });
+
+    const { getByText } = render(
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <VariableChooser {...props} />
+        </IntlProvider>
+      </Provider>,
+    );
+    const row = getByText(`Test subtitle 1`);
+    fireEvent.click(row);
+    expect(props.onClick).toHaveBeenCalledWith('var_single_1');
+  });
 });
 
 const mockSingleQuestion = (suffix = 1, hasVariable = true) => ({
   id: `test-id-${suffix}`,
   title: `Test title ${suffix}`,
+  subtitle: `Test subtitle ${suffix}`,
   type: 'Question::Single',
   body: {
     variable: { name: hasVariable ? `var_single_${suffix}` : '' },

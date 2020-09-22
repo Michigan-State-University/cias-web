@@ -33,17 +33,34 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   top: 0px;
 }
 
-.c6 {
+.c1 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  margin-top: 40px;
+  max-width: 700px;
+  max-height: 90%;
+  min-width: 400px;
+  min-height: 200px;
+  overflow: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: rgba(255,255,255,1);
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
 }
 
-.c2 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -54,7 +71,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c4 {
+.c5 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -62,7 +79,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -85,32 +102,51 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c5 {
-  width: auto;
-  height: auto;
-  margin-left: 5px;
+.c6 {
+  height: 28px;
+  width: 28px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  background: #E9F1FB;
+  margin-right: 35px;
   cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0;
+  position: relative;
+  left: 40px;
+  top: -8px;
 }
 
-.c1 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  max-width: 700px;
-  max-height: 90%;
-  min-width: 400px;
-  min-height: 200px;
-  overflow: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  padding-right: 20px;
-  padding-left: 20px;
-  background-color: rgba(255,255,255,1);
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 @media only screen and (max-width:480px) {
-  .c1 {
+  .c2 {
     max-height: calc(100% - 20px);
     max-width: none;
     min-width: 0;
@@ -126,29 +162,32 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
     width="100%"
   >
     <div
-      class="c1"
+      class="c1 c2"
       overflow="auto"
     >
       <div
-        class="c2"
+        class="c3"
       >
         <div
-          class="c3"
+          class="c4"
         >
           <h1
-            class="c4"
+            class="c5"
           >
             Test
           </h1>
-          <img
-            alt="close"
-            class="c5"
-            src="IMAGE_MOCK"
-          />
+          <button
+            class="c6"
+          >
+            <img
+              alt="cross"
+              src="IMAGE_MOCK"
+            />
+          </button>
         </div>
       </div>
       <div
-        class="c6"
+        class="c7"
       />
     </div>
   </div>

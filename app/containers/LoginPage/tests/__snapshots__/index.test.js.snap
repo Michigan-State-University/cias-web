@@ -2,45 +2,45 @@
 
 exports[`<LoginPage /> Should render and match the snapshot 1`] = `
 <div
-  class="styled__Background-sc-1r4kg53-0 jqrSlU"
+  class="styled__Background-sc-1r4kg53-0 gRYivG"
 >
   <div
-    class="styled__TopBackground-sc-1r4kg53-1 nQFgX"
+    class="styled__TopBackground-sc-1r4kg53-1 bylLTk"
   />
   <div
-    class="styled__Header-sc-1r4kg53-2 fIXxOZ"
+    class="styled__Header-sc-1r4kg53-2 clPpsO"
   >
     <img
-      class="styled__Logo-sc-1r4kg53-3 jPiNjm"
+      class="styled__Logo-sc-1r4kg53-3 gDviEu"
       src="IMAGE_MOCK"
     />
   </div>
   <div
-    class="styled__Content-sc-1r4kg53-4 hBhonq"
+    class="styled__Content-sc-1r4kg53-4 irxPWB"
   >
     <div
-      class="Fill-sc-1f4o7x0-0 dHXeMo"
+      class="Fill-sc-1f4o7x0-0 cYCtnS"
     >
       <div
-        class="Column-sc-1n6divy-0 gaDuUF"
+        class="Column-sc-1n6divy-0 dZTnes"
       >
         <h1
-          class="H1-tncdg6-0 jiPrOh"
+          class="H1-tncdg6-0 eygGOx"
           font-size="23"
         >
           Login in to CIAS
         </h1>
         <div
-          class="Column-sc-1n6divy-0 dihrP"
+          class="Column-sc-1n6divy-0 npKUP"
         >
           <p
-            class="Text-sc-2lza2m-0 hrnqlx"
+            class="Text-sc-2lza2m-0 fivaRy"
             width="fit-content"
           >
             E-mail address
           </p>
           <input
-            class="Input-sc-19txxuq-0 hECUtR"
+            class="Input-sc-19txxuq-0 iCEjLf"
             height="46"
             name="email"
             placeholder="Enter e-mail address"
@@ -50,10 +50,10 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          class="styled__LinkContainer-ubqahw-1 kdHZzx"
+          class="styled__LinkContainer-ubqahw-1 eKpqlh"
         >
           <a
-            class="styled__StyledLink-ubqahw-0 bPozoC"
+            class="styled__StyledLink-ubqahw-0 izYIgK"
             href="/reset-password"
             tabindex="-1"
           >
@@ -63,16 +63,16 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           </a>
         </div>
         <div
-          class="Column-sc-1n6divy-0 dihrP"
+          class="Column-sc-1n6divy-0 npKUP"
         >
           <p
-            class="Text-sc-2lza2m-0 hrnqlx"
+            class="Text-sc-2lza2m-0 fivaRy"
             width="fit-content"
           >
             Password
           </p>
           <input
-            class="Input-sc-19txxuq-0 hECUtR"
+            class="Input-sc-19txxuq-0 iCEjLf"
             height="46"
             name="password"
             placeholder="Enter password"
@@ -82,7 +82,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <button
-          class="StyledButton-t20ntd-0 djaxDd"
+          class="StyledButton-t20ntd-0 iHvPvE"
           color="primary"
           height="46"
           type="submit"
@@ -90,14 +90,14 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           Log in
         </button>
         <div
-          class="Row-x1o3ru-0 eLUxLg"
+          class="Row-x1o3ru-0 hNBpWq"
           width="100%"
         >
           <div
-            class="styled__StyledDivider-sc-77qn3o-0 gKTNZB"
+            class="styled__StyledDivider-sc-77qn3o-0 iitkhv"
           />
           <p
-            class="Text-sc-2lza2m-0 styled__Or-sc-13sgwpa-0 zXitj"
+            class="Text-sc-2lza2m-0 styled__Or-sc-13sgwpa-0 jqAMcb dcQBsY"
             font-weight="bold"
           >
             <span>
@@ -105,18 +105,18 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             </span>
           </p>
           <div
-            class="styled__StyledDivider-sc-77qn3o-0 gnpZVF"
+            class="styled__StyledDivider-sc-77qn3o-0 fMtOUI"
           />
         </div>
         <div
-          class="Row-x1o3ru-0 hVhpXE"
+          class="Row-x1o3ru-0 iVsbcL"
           width="100%"
         >
           <div
-            class="styled__LinkContainer-ubqahw-1 kmCOTX"
+            class="styled__LinkContainer-ubqahw-1 gMbuxJ"
           >
             <a
-              class="styled__StyledLink-ubqahw-0 bPozoC"
+              class="styled__StyledLink-ubqahw-0 izYIgK"
               href="/register"
             >
               <span>

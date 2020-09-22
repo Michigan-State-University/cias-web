@@ -6,6 +6,9 @@ describe('userListReducer', () => {
   beforeEach(() => {
     state = {
       users: [],
+      cache: {
+        users: [],
+      },
       usersError: null,
       usersLoading: true,
     };

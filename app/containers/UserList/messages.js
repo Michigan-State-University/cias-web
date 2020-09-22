@@ -33,6 +33,22 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Email',
   },
+  deactivateAccountConfirm: {
+    id: `${scope}.deactivateAccountConfirm`,
+    defaultMessage: 'Are you sure you want to deactivate this account',
+  },
+  activateAccountConfirm: {
+    id: `${scope}.activateAccountConfirm`,
+    defaultMessage: 'Are you sure you want to activate this account',
+  },
+  deactivateAccount: {
+    id: `${scope}.deactivateAccount`,
+    defaultMessage: 'Deactivate account',
+  },
+  activateAccount: {
+    id: `${scope}.activateAccount`,
+    defaultMessage: 'Activate account',
+  },
   noUsers: {
     id: `${scope}.noUsers`,
     defaultMessage: 'There are no users matching given criteria',

@@ -27,6 +27,48 @@ const mockIntervention = (suffix = 1) => ({
   name: `Intervention test title ${suffix}`,
 });
 
+const mockMostUsedStore = question => {
+  const reducer = state => state;
+  const store = createStore(reducer, {
+    intervention: {
+      intervention: {
+        name: 'e-Intervention Name',
+        id: 'asd12ca-daiud12',
+      },
+    },
+
+    problem: {
+      problem: {
+        interventions: [
+          mockIntervention(1),
+          mockIntervention(2),
+          mockIntervention(3),
+        ],
+      },
+      loaders: {
+        fetchProblemLoading: false,
+      },
+    },
+    questions: {
+      questions: [
+        mockSingleQuestion(1, true),
+        question,
+        mockSingleQuestion(3, true),
+      ],
+      selectedQuestion: 1,
+    },
+  });
+  store.runSaga = () => {};
+  store.injectedReducers = {
+    intervention: interventionReducer,
+    questions: questionsReducer,
+    localState: localStateReducer,
+    problem: problemReducer,
+  };
+  store.injectedSagas = {};
+  return store;
+};
+
 describe('<TargetQuestionChooser />', () => {
   let store;
   const reducer = state => state;
@@ -270,5 +312,69 @@ describe('<TargetQuestionChooser />', () => {
     );
 
     expect(interventionViewSpinner).not.toEqual(null);
+  });
+
+  it('should invoke onClick when question is selected', () => {
+    const newProps = { ...props, onClick: jest.fn(), isVisible: false };
+    const question = mockSingleQuestion(2, true);
+
+    store = mockMostUsedStore(question);
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <TargetQuestionChooser {...newProps} />
+        </IntlProvider>
+      </Provider>,
+    );
+    const questionRow = getByTestId(`${question.id}-select-target-question-el`);
+    fireEvent.click(questionRow);
+    expect(newProps.onClick).toHaveBeenCalledWith({
+      type: 'Question',
+      id: 'test-id-1',
+    });
+  });
+
+  it('should invoke onClick when intervention is selected', () => {
+    const newProps = { ...props, onClick: jest.fn(), isVisible: false };
+    const question = mockSingleQuestion(2, true);
+    store = mockMostUsedStore(question);
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <TargetQuestionChooser {...newProps} />
+        </IntlProvider>
+      </Provider>,
+    );
+    const img = getByTestId(
+      `${question.id}-select-target-question-interview-view-setter`,
+    );
+    fireEvent.click(img);
+    const interventionRow = getByTestId(
+      `${question.id}-select-target-intervention-el`,
+    );
+    fireEvent.click(interventionRow);
+    expect(newProps.onClick).toHaveBeenCalledWith({
+      type: 'Intervention',
+      id: 'intervention-test-id-1',
+    });
+  });
+
+  it('should invoke onClick when next question is selected', () => {
+    const newProps = { ...props, onClick: jest.fn(), isVisible: false };
+    const question = mockSingleQuestion(2, true);
+    store = mockMostUsedStore(question);
+    const { getByTestId } = render(
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <TargetQuestionChooser {...newProps} />
+        </IntlProvider>
+      </Provider>,
+    );
+    const nextQuestion = getByTestId(`${question.id}-next-question-target`);
+    fireEvent.click(nextQuestion);
+    expect(newProps.onClick).toHaveBeenCalledWith({
+      type: 'Question',
+      id: 'test-id-3',
+    });
   });
 });

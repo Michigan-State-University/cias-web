@@ -5,7 +5,8 @@ import { toastsReducer } from 'react-toastify-redux';
 import history from 'utils/history';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
 
-import { authReducer } from './global/reducers/auth';
+import { authReducer } from 'global/reducers/auth';
+import { globalStateReducer } from 'global/reducers/globalState';
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -16,6 +17,7 @@ export default function createReducer(injectedReducers = {}) {
     auth: authReducer,
     language: languageProviderReducer,
     router: connectRouter(history),
+    global: globalStateReducer,
     ...injectedReducers,
   });
 

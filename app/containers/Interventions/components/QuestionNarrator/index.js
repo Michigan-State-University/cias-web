@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import Draggable from 'react-draggable';
 import Lottie from 'react-lottie';
 import PropTypes from 'prop-types';
@@ -24,6 +24,7 @@ import {
   bodyAnimationType,
   headAnimationType,
 } from 'models/Narrator/BlockTypes';
+import { makeSelectAudioInstance } from 'global/reducers/globalState';
 
 import { elements } from 'theme';
 import { NarratorContainer, lottieStyles } from './styled';
@@ -42,6 +43,7 @@ const QuestionNarrator = ({
   settings,
   savePosition,
   currentBlockIndex,
+  audioInstance,
 }) => {
   const { width, height } = useResizeObserver({
     targetRef: animationBoundaries,
@@ -96,6 +98,7 @@ const QuestionNarrator = ({
     onBlockFinish,
     {},
     settings,
+    audioInstance,
   );
 
   const getInitialData = () => {
@@ -140,7 +143,7 @@ const QuestionNarrator = ({
     });
   };
 
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     if (previewData.animation) {
       fetchJSON();
 
@@ -286,6 +289,7 @@ QuestionNarrator.propTypes = {
   settings: PropTypes.object,
   savePosition: PropTypes.func,
   currentBlockIndex: PropTypes.number,
+  audioInstance: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -293,6 +297,7 @@ const mapStateToProps = createStructuredSelector({
   animationPositionStored: makeSelectAnimationPosition(),
   previewData: makeSelectPreviewData(),
   currentBlockIndex: makeSelectCurrentNarratorBlockIndex(),
+  audioInstance: makeSelectAudioInstance(),
 });
 
 const mapDispatchToProps = {

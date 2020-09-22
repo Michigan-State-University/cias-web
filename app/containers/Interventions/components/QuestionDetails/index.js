@@ -132,7 +132,7 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
                 </Row>
                 {(isNullOrUndefined(proceedButton) || proceedButton) && (
                   <Box my={20}>
-                    <Button my={20} width="180px">
+                    <Button my={20} width="180px" disabled>
                       <FormattedMessage {...messages.nextQuestion} />
                     </Button>
                   </Box>

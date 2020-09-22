@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] = `
-.c1 {
+.c0 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -15,7 +15,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
   width: 200px;
 }
 
-.c0 {
+.c1 {
   font-weight: bold;
 }
 
@@ -33,7 +33,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
 
 exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] = `
 Array [
-  .c1 {
+  .c0 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -48,14 +48,14 @@ Array [
   width: 200px;
 }
 
-.c0 {
+.c1 {
   font-weight: bold;
   background-color: transparent;
   border: #107969 solid 1px;
   color: #107969;
 }
 
-.c0:hover {
+.c1:hover {
   background-color: #107969;
   color: white;
 }
@@ -70,7 +70,7 @@ Array [
       Get CSV with results
     </span>
   </button>,
-  .c1 {
+  .c0 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -84,7 +84,7 @@ Array [
   width: 200px;
 }
 
-.c0 {
+.c1 {
   font-weight: bold;
   background-color: rgba(240,104,74,1);
 }
@@ -103,7 +103,7 @@ Array [
 `;
 
 exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] = `
-.c1 {
+.c0 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -118,14 +118,14 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
   width: 200px;
 }
 
-.c0 {
+.c1 {
   font-weight: bold;
   background-color: transparent;
   border: #107969 solid 1px;
   color: #107969;
 }
 
-.c0:hover {
+.c1:hover {
   background-color: #107969;
   color: white;
 }

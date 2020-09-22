@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Box from 'components/Box';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 export const DashedBox = styled(Box)`
   height: 40px;
@@ -12,4 +12,10 @@ export const DashedBox = styled(Box)`
   cursor: pointer;
   font-weight: bold;
   border-radius: 4px;
+  transition: 0.2s;
+  &:hover {
+    background-color: ${themeColors.primary};
+    color: ${colors.white};
+    border: none;
+  }
 `;

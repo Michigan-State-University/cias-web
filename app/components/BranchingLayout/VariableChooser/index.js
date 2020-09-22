@@ -25,8 +25,10 @@ import { getAllVariables } from 'models/Intervention/utils';
 import NoContent from 'components/NoContent';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import useOutsideClick from 'utils/useOutsideClick';
+import messages from './messages';
 
 const VariableChooser = ({
+  intl: { formatMessage },
   onClick,
   questions,
   selectedQuestion: { id } = {},
@@ -36,7 +38,7 @@ const VariableChooser = ({
 }) => {
   const variables = getAllVariables(questions, {
     structure: 'flat',
-    include: ['id', 'title'],
+    include: ['id', 'subtitle'],
   });
 
   const variableChooser = useRef(null);
@@ -63,7 +65,7 @@ const VariableChooser = ({
               maxWidth={200}
               mr={20}
             >
-              {htmlToPlainText(variable.title)}
+              {htmlToPlainText(variable.subtitle)}
             </Text>
           </Row>
           <Badge maxWidth={300} color={colors.jungleGreen} bgWithOpacity>
@@ -74,7 +76,7 @@ const VariableChooser = ({
 
     return (
       <Box padding={30}>
-        <NoContent />
+        <NoContent text={formatMessage(messages.noVariables)} />
       </Box>
     );
   };
@@ -101,6 +103,7 @@ const VariableChooser = ({
 };
 
 VariableChooser.propTypes = {
+  intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.shape(Question),

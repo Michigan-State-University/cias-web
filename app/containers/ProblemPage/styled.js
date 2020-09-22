@@ -50,4 +50,5 @@ export const ArchiveFilter = styled.button`
 
 export const FilterText = styled.p`
   color: ${props => (props.active ? colors.white : props.color)};
+  white-space: pre;
 `;

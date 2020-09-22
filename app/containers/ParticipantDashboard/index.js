@@ -9,8 +9,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Container, Row } from 'react-grid-system';
+import { Row } from 'react-grid-system';
 
+import AppContainer from 'components/Container';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
@@ -51,14 +52,14 @@ export function ParticipantDashboard({
   if (fetchInterventionLoading) return <Loader />;
   if (fetchInterventionError)
     return (
-      <Container>
+      <AppContainer>
         <ErrorAlert errorText={fetchInterventionError} />
-      </Container>
+      </AppContainer>
     );
 
   return (
     <Fragment>
-      <Container>
+      <AppContainer>
         <Box mt={20}>
           <H1 my={20}>
             <FormattedMessage {...messages.interventions} />
@@ -72,7 +73,7 @@ export function ParticipantDashboard({
             )}
           </Row>
         </Box>
-      </Container>
+      </AppContainer>
     </Fragment>
   );
 }

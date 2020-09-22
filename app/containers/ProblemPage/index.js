@@ -10,8 +10,9 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Container } from 'react-grid-system';
+import uniq from 'lodash/uniq';
 
+import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import H1 from 'components/H1';
 import Loader from 'components/Loader';
@@ -80,7 +81,7 @@ export function ProblemPage({
   };
 
   const handleClearFilters = () => {
-    setFilterStatus(statusTypes);
+    setFilterStatus(uniq([...statusTypes, ...filterStatus]));
   };
 
   const mapProblem = problem => (
@@ -93,7 +94,7 @@ export function ProblemPage({
 
   if (!finalProblems.length && !problems.length) {
     return (
-      <Container>
+      <AppContainer>
         <H1 my={35}>
           <FormattedMessage {...messages.noInterventions} />
         </H1>
@@ -103,57 +104,55 @@ export function ProblemPage({
           onCreateCall={createProblem}
           createLoading={createProblemLoading}
         />
-      </Container>
+      </AppContainer>
     );
   }
 
   const showArchived = filterStatus.includes(archived);
   return (
-    <>
-      <Container>
-        <InitialRow>
-          <H1 mt={35}>
-            <FormattedMessage {...messages.myProblems} />
-          </H1>
-        </InitialRow>
-        <InitialRow>
-          <Row my={35} justify="between" width={300} height={30}>
-            <StatusFilter
-              onClick={handleFilterStatus}
-              formatMessage={formatMessage}
-              active={filterStatus}
-              onClear={handleClearFilters}
-            />
-          </Row>
-          <Row align="center">
-            <ArchiveFilter onClick={handleChange(archived)}>
-              {showArchived
-                ? formatMessage(messages.hideArchived)
-                : formatMessage(messages.showArchived)}
-            </ArchiveFilter>
-            <SearchInput
-              value={filterValue}
-              onChange={e => setFilterValue(e.target.value)}
-              ml={5}
-              placeholder={formatMessage(messages.filter)}
-            />
-          </Row>
-        </InitialRow>
-        {filterValue && finalProblems.length === 0 && (
-          <h3>
-            <FormattedMessage {...messages.noFilterResults} />
-          </h3>
-        )}
-        <TileRenderer
-          containerKey="problem"
-          elements={finalProblems}
-          mapFunction={mapProblem}
-          newLabel={formatMessage(messages.createProblem)}
-          onCreateCall={createProblem}
-          createLoading={createProblemLoading}
-        />
-      </Container>
-    </>
+    <AppContainer>
+      <InitialRow>
+        <H1 mt={35}>
+          <FormattedMessage {...messages.myProblems} />
+        </H1>
+      </InitialRow>
+      <InitialRow>
+        <Row my={35} justify="between" width={250} height={30}>
+          <StatusFilter
+            onClick={handleFilterStatus}
+            formatMessage={formatMessage}
+            active={filterStatus}
+            onClear={handleClearFilters}
+          />
+        </Row>
+        <Row align="center">
+          <ArchiveFilter onClick={handleChange(archived)}>
+            {showArchived
+              ? formatMessage(messages.hideArchived)
+              : formatMessage(messages.showArchived)}
+          </ArchiveFilter>
+          <SearchInput
+            value={filterValue}
+            onChange={e => setFilterValue(e.target.value)}
+            ml={5}
+            placeholder={formatMessage(messages.filter)}
+          />
+        </Row>
+      </InitialRow>
+      {filterValue && finalProblems.length === 0 && (
+        <h3>
+          <FormattedMessage {...messages.noFilterResults} />
+        </h3>
+      )}
+      <TileRenderer
+        containerKey="problem"
+        elements={finalProblems}
+        mapFunction={mapProblem}
+        newLabel={formatMessage(messages.createProblem)}
+        onCreateCall={createProblem}
+        createLoading={createProblemLoading}
+      />
+    </AppContainer>
   );
 }
 

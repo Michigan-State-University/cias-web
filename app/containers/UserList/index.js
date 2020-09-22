@@ -12,9 +12,8 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import xor from 'lodash/xor';
 import { withRouter } from 'react-router-dom';
+import { FormattedMessage, injectIntl } from 'react-intl';
 
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
 import Loader from 'components/Loader';
 import ErrorAlert from 'components/ErrorAlert';
 import {
@@ -27,23 +26,32 @@ import {
 } from 'components/Table';
 import Box from 'components/Box';
 import Column from 'components/Column';
+import H1 from 'components/H1';
+import UserRoleTile from 'components/UserRoleTile';
+import StyledTextButton from 'components/Button/StyledTextButton';
+import SearchInput from 'components/Input/SearchInput';
+import Text from 'components/Text';
+import Checkbox from 'components/Checkbox';
+import ConfirmationBox from 'components/ConfirmationBox';
+import CloseIcon from 'components/CloseIcon';
+import Row from 'components/Row';
+
 import {
   fetchUsers,
   userListSaga,
   UserListReducer,
   makeSelectUserList,
+  changeActivateStatusRequest,
 } from 'global/reducers/userList';
 import { boxShadows, colors, themeColors } from 'theme';
-import { FormattedMessage, injectIntl } from 'react-intl';
 
-import H1 from 'components/H1';
-import UserRoleTile from 'components/UserRoleTile';
-import StyledTextButton from 'components/Button/StyledTextButton';
-import SearchInput from 'components/Input/SearchInput';
 import { Roles } from 'models/User/UserRoles';
-import Checkbox from 'components/Checkbox';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
 import useDebounce from 'utils/useDebounce';
-import CloseIcon from 'components/CloseIcon';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import { ternary } from 'utils/ternary';
+
 import messages from './messages';
 import PaginationHandler from './Components/PaginationHelper';
 
@@ -51,6 +59,7 @@ const columns = formatMessage => [
   formatMessage(messages.name),
   formatMessage(messages.email),
   formatMessage(messages.role),
+  null,
 ];
 const rolesToFilter = [Roles.participant, Roles.researcher, Roles.admin];
 const initialDelay = 500;
@@ -58,14 +67,17 @@ const initialDelay = 500;
 export function UserList({
   userList: { users, usersLoading, usersError },
   fetchUsersRequest,
+  changeActivateStatus,
   intl: { formatMessage },
   history,
 }) {
   useInjectReducer({ key: 'userList', reducer: UserListReducer });
   useInjectSaga({ key: 'userList', saga: userListSaga });
+
   const [filterText, setFilterText] = useState('');
   const [selectRoles, setSelectRoles] = useState(rolesToFilter);
   const [showInactive, setShowInactive] = useState(false);
+  const [deactivateModal, setDeactivateModal] = useState({});
   const [page, setPage] = useState(1);
   const debouncedFilterText = useDebounce(filterText, initialDelay);
 
@@ -82,11 +94,42 @@ export function UserList({
 
   const handleClick = id => () => history.push(`/profile/${id}`);
 
+  const handleOpenDeactivateModal = user => setDeactivateModal(user);
+  const handleDeactivate = () => {
+    const { deactivated, id } = deactivateModal;
+    changeActivateStatus(id, !deactivated);
+    setDeactivateModal({});
+  };
+
+  const contentText = () => {
+    const { email, fullName } = deactivateModal || {};
+    return (
+      <>
+        <Text textAlign="center" fontWeight="bold">
+          {fullName}
+        </Text>
+        <Text textAlign="center">{email}</Text>
+      </>
+    );
+  };
+  const modalDescription = ternary(
+    deactivateModal.deactivated,
+    formatMessage(messages.activateAccountConfirm),
+    formatMessage(messages.deactivateAccountConfirm),
+  );
+
   const getContent = () => {
     if (usersLoading && users.length === 0) return <Loader />;
     if (usersError) return <ErrorAlert errorText={usersError} />;
     return (
       <div>
+        <ConfirmationBox
+          visible={!isNullOrUndefined(deactivateModal.id)}
+          onClose={() => setDeactivateModal({})}
+          description={modalDescription}
+          content={contentText()}
+          confirmAction={handleDeactivate}
+        />
         <Box display="flex" justify="between" mb={40}>
           <Box display="flex" align="center">
             <Box display="inline-block" width="100%">
@@ -148,12 +191,9 @@ export function UserList({
                     opacity={0.6}
                     scope="col"
                     key={`col-th-${columnIndex}`}
+                    width="auto"
                   >
-                    <Column
-                      pl={20}
-                      align="start"
-                      width={`${100 / columns.length}%`}
-                    >
+                    <Column pl={20} align="start">
                       {column}
                     </Column>
                   </TH>
@@ -161,18 +201,40 @@ export function UserList({
               </StripedTR>
             </THead>
             <TBody>
-              {users.map(({ id, email, fullName, roles }) => (
+              {users.map(({ id, email, fullName, roles, deactivated }) => (
                 <StripedTR
+                  cursor="pointer"
                   hoverBg={colors.linkWater}
                   color={colors.white}
                   key={`row-th-${id}`}
-                  cursor="pointer"
+                  textColor={deactivated ? colors.grey : colors.black}
                   onClick={handleClick(id)}
                 >
                   <TD pl={20}>{fullName}</TD>
                   <TD pl={20}>{email}</TD>
                   <TD pl={20}>
-                    <UserRoleTile role={roles[0]} />
+                    <UserRoleTile role={roles[0]} disabled={deactivated} />
+                  </TD>
+                  <TD>
+                    <Row width="100%" justify="end" pr={20}>
+                      <StyledTextButton
+                        onClick={e => {
+                          e.stopPropagation();
+                          handleOpenDeactivateModal({
+                            id,
+                            email,
+                            fullName,
+                            deactivated,
+                          });
+                        }}
+                      >
+                        <Text color={colors.flamingo} fontWeight="bold">
+                          {deactivated
+                            ? formatMessage(messages.activateAccount)
+                            : formatMessage(messages.deactivateAccount)}
+                        </Text>
+                      </StyledTextButton>
+                    </Row>
                   </TD>
                 </StripedTR>
               ))}
@@ -214,6 +276,7 @@ export function UserList({
 
 UserList.propTypes = {
   fetchUsersRequest: PropTypes.func.isRequired,
+  changeActivateStatus: PropTypes.func.isRequired,
   userList: PropTypes.object,
   intl: PropTypes.object,
   history: PropTypes.object,
@@ -225,6 +288,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   fetchUsersRequest: fetchUsers,
+  changeActivateStatus: changeActivateStatusRequest,
 };
 
 const withConnect = connect(
