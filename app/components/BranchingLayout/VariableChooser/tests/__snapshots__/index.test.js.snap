@@ -131,22 +131,6 @@ Object {
   max-width: 300px;
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
 <div>
       <div
         class="c0"
@@ -195,39 +179,39 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Box-sc-14m3exe-0 jseseK"
+      class="Box-sc-14m3exe-0 cPjBvu"
       display="none"
       width="auto"
     >
       <div
-        class="Row-x1o3ru-0 iJOjSZ"
+        class="Row-x1o3ru-0 exvbpM"
       >
         <div
-          class="Box-sc-14m3exe-0 hjBUNi"
+          class="Box-sc-14m3exe-0 dvwSEs"
         >
           <div
-            class="Column-sc-1n6divy-0 dfNUrc"
+            class="Column-sc-1n6divy-0 cVSlLs"
           >
             <div
-              class="Row-x1o3ru-0 fZOBlm"
+              class="Row-x1o3ru-0 ceyBBW"
               data-testid="undefined-select-variable"
             >
               <div
-                class="Row-x1o3ru-0 gHqqvy"
+                class="Row-x1o3ru-0 diEAcg"
               >
                 <img
-                  class="Img-sc-1kfzr96-0 cxoQdy"
+                  class="Img-sc-1kfzr96-0 dsoWic"
                   src="IMAGE_MOCK"
                 />
                 <p
-                  class="Text-sc-2lza2m-0 ghjDRR"
+                  class="Text-sc-2lza2m-0 cruGgs"
                   overflow="hidden"
                 >
                   Test subtitle 1
                 </p>
               </div>
               <div
-                class="Badge-sc-1bivynt-0 dKurdL"
+                class="Badge-sc-1bivynt-0 eZpQcn"
                 color="#107969"
               >
                 var_single_1
@@ -423,38 +407,6 @@ Object {
   color: rgba(176,186,201,1);
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
 <body>
     <div>
       <div
@@ -506,39 +458,39 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Box-sc-14m3exe-0 jseseK"
+      class="Box-sc-14m3exe-0 cPjBvu"
       display="none"
       width="auto"
     >
       <div
-        class="Row-x1o3ru-0 iJOjSZ"
+        class="Row-x1o3ru-0 exvbpM"
       >
         <div
-          class="Box-sc-14m3exe-0 hjBUNi"
+          class="Box-sc-14m3exe-0 dvwSEs"
         >
           <div
-            class="Column-sc-1n6divy-0 dfNUrc"
+            class="Column-sc-1n6divy-0 cVSlLs"
           >
             <div
-              class="Box-sc-14m3exe-0 ebXHGy"
+              class="Box-sc-14m3exe-0 iSZNVz"
             >
               <div
-                class="Box-sc-14m3exe-0 kdSFQ"
+                class="Box-sc-14m3exe-0 bQMnda"
                 data-testid="no-content"
                 display="flex"
                 height="100%"
                 width="100%"
               >
                 <div
-                  class="Column-sc-1n6divy-0 bPmHLf"
+                  class="Column-sc-1n6divy-0 hHryBE"
                 >
                   <img
                     alt="No content"
-                    class="Img-sc-1kfzr96-0 eEXYbw"
+                    class="Img-sc-1kfzr96-0 dlGAit"
                     src="IMAGE_MOCK"
                   />
                   <h2
-                    class="H2-egphza-0 gNedGT"
+                    class="H2-egphza-0 yTNxj"
                     color="#B0BAC9"
                   >
                     No variables defined yet

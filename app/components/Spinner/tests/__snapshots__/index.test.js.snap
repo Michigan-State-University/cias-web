@@ -27,8 +27,8 @@ exports[`<Spinner /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
   border: 6px solid #FFFFFF;
   border-color: #FFFFFF transparent #FFFFFF transparent;
-  -webkit-animation: hAjVGa 1.2s linear infinite;
-  animation: hAjVGa 1.2s linear infinite;
+  -webkit-animation: ixzqdH 1.2s linear infinite;
+  animation: ixzqdH 1.2s linear infinite;
 }
 
 <div

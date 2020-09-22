@@ -83,7 +83,7 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   height: auto;
 }
 
-.c4 {
+.c3 {
   margin: 25px 10px;
 }
 
@@ -99,7 +99,18 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c3 {
+.c1 a {
+  color: #2F3850;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1 a:visited,
+.c1 a:hover {
+  color: #2F3850;
+}
+
+.c2 {
   margin: 0 10px;
   padding-bottom: 10px;
   border-bottom-width: 2px;
@@ -107,7 +118,7 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   border-bottom-style: none;
 }
 
-.c3 div {
+.c2 div {
   cursor: pointer;
 }
 
@@ -129,7 +140,7 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
     class="c0"
   >
     <div
-      class="c1 c2"
+      class="c1"
     >
       <div>
         <a
@@ -140,7 +151,7 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c3 c2"
+      class="c2"
     >
       <div>
         <a
@@ -152,7 +163,7 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="c4"
+    class="c3"
   />
 </div>
 `;

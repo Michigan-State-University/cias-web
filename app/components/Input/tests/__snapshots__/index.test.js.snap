@@ -83,22 +83,6 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
   width: 100%;
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
 <div>
   <div
     class="c0"
@@ -178,22 +162,6 @@ exports[`<ApprovableInput /> Should render and match the snapshot as multiline 1
   border: 1px solid #107969;
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
 <div>
   <div
     class="c0"
@@ -266,22 +234,6 @@ exports[`<ApprovableInput /> Should render and match the snapshot as richText 1`
   flex-direction: row;
   height: auto;
   width: 100%;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 <div>
@@ -1728,22 +1680,6 @@ exports[`<ApprovableInput /> Should render and match the snapshot as singleline 
   width: 100%;
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
 <div>
   <div
     class="c0"
@@ -1766,7 +1702,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as singleline 
 `;
 
 exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
-.c0 {
+.c1 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -1781,13 +1717,13 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
   color: rgba(0,0,0,1);
 }
 
-.c0:focus {
+.c1:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c1 {
+.c0 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
@@ -1796,7 +1732,7 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
   color: rgba(0,0,0,1);
 }
 
-.c1:focus {
+.c0:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
@@ -1807,7 +1743,7 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
     class="c0 c1"
     color="black"
     placeholder="Placeholder"
-    type="text"
+    type="singleline"
     value=""
     width="113px"
   />
@@ -1987,7 +1923,7 @@ exports[`<StyledInput /> Should render and match the snapshot as singleline 1`] 
   <input
     class="c0"
     placeholder="Placeholder"
-    type="text"
+    type="singleline"
     value=""
     width="100%"
   />

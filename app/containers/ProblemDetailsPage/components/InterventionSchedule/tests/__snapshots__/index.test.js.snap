@@ -89,22 +89,6 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
   margin-bottom: 17px;
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
 <div>
   <div
     class="c0"

@@ -73,7 +73,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
 
 <div>
   <div
-    class="styled__AccordionContainer-sc-1ls4m2z-0"
+    class=""
   >
     <div>
       <div
@@ -283,7 +283,7 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
 
 <div>
   <div
-    class="styled__AccordionContainer-sc-1ls4m2z-0"
+    class=""
   >
     <div>
       <div
@@ -418,7 +418,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
 
 <div>
   <div
-    class="styled__AccordionContainer-sc-1ls4m2z-0"
+    class=""
   >
     <div>
       <div

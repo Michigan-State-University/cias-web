@@ -238,6 +238,6 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/not-found-page"
     />
   </Switch>
-  <Memo(l) />
+  <GlobalStyleComponent />
 </React.Fragment>
 `;

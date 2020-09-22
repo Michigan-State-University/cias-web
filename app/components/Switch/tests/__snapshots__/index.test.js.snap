@@ -14,7 +14,7 @@ exports[`<Switch /> should match the snapshot 1`] = `
   height: 0;
 }
 
-.c4 {
+.c3 {
   position: absolute;
   top: 0;
   left: 0;
@@ -35,7 +35,7 @@ exports[`<Switch /> should match the snapshot 1`] = `
   box-shadow: 0 0 1px #C866EA;
 }
 
-.c4:before {
+.c3:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -65,7 +65,7 @@ exports[`<Switch /> should match the snapshot 1`] = `
     type="checkbox"
   />
   <span
-    className="c3 c4"
+    className="c3"
   />
 </label>
 `;

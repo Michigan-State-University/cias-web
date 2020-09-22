@@ -10,6 +10,16 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   margin-top: 10px;
 }
 
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  visibility: hidden;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
 .c1 {
   width: auto;
   height: auto;
@@ -28,14 +38,9 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   background-color: #E9F1FB;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
-  display: block;
-  border-radius: 5px;
-  visibility: hidden;
-  margin-left: 15px;
-  cursor: pointer;
 }
 
 .c4 {
@@ -43,11 +48,6 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   height: auto;
   max-width: 100%;
   max-height: 50vh;
-}
-
-.c6 {
-  width: auto;
-  height: auto;
 }
 
 .c2 {
@@ -85,7 +85,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
     width="100%"
   >
     <div
-      class="HoverableBox-sc-1syy6g3-0 c1"
+      class="c1"
       width="100%"
     >
       <div
@@ -203,22 +203,6 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 <div>

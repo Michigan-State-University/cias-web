@@ -29,8 +29,8 @@ Object {
   border-radius: 50%;
   border: 6px solid #C866EA;
   border-color: #C866EA transparent #C866EA transparent;
-  -webkit-animation: hAjVGa 1.2s linear infinite;
-  animation: hAjVGa 1.2s linear infinite;
+  -webkit-animation: ixzqdH 1.2s linear infinite;
+  animation: ixzqdH 1.2s linear infinite;
 }
 
 .c0 {
@@ -74,12 +74,12 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="styled__FillScreenLoader-tle2yi-0 fDUeBu"
+      class="styled__FillScreenLoader-tle2yi-0 jcBUSp"
       data-testid="fullscreen-loader"
       opacity="0.5"
     >
       <div
-        class="styled__StyledSpinner-d123q3-0 hXQJFy"
+        class="styled__StyledSpinner-d123q3-0 dOefMO"
         color="#C866EA"
         size="100"
         width="6"

@@ -3,21 +3,21 @@
 exports[`<ProblemSettingsPage /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 jctAiR"
+    class="Box-sc-14m3exe-0 cfRbfB"
     height="100%"
     width="100%"
   >
     <a
-      class="styled__StyledLink-sc-1vn5te5-0 iVmEKE"
+      class="styled__StyledLink-sc-1vn5te5-0 iuDPLL"
       href="/interventions/as120s-as12cs"
     >
       <img
         alt="traingle"
-        class="Img-sc-1kfzr96-0 fMvNhZ"
+        class="Img-sc-1kfzr96-0 bTgaOd"
         src="IMAGE_MOCK"
       />
       <p
-        class="Text-sc-2lza2m-0 dTiSdf"
+        class="Text-sc-2lza2m-0 evAabw"
         color="#C866EA"
         font-weight="bold"
       >
@@ -27,48 +27,48 @@ exports[`<ProblemSettingsPage /> Should render and match the snapshot 1`] = `
       </p>
     </a>
     <h1
-      class="H1-tncdg6-0 kuDEWg"
+      class="H1-tncdg6-0 dLbrBx"
     >
       <span>
         Access Settings
       </span>
     </h1>
     <h3
-      class="H3-sc-1nwhpi5-0 YYGUq"
+      class="H3-sc-1nwhpi5-0 hIvJQB"
       font-weight="regular"
     >
       Name of the intervention
     </h3>
     <div
-      class="Column-sc-1n6divy-0 jVuqOR"
+      class="Column-sc-1n6divy-0 dVjRIy"
       width="100%"
     >
       <div
-        class="Row-x1o3ru-0 iJOjSZ"
+        class="Row-x1o3ru-0 exvbpM"
       >
         <div
-          class="Column-sc-1n6divy-0 dfNUrc"
+          class="Column-sc-1n6divy-0 cVSlLs"
         >
           <h2
-            class="H2-egphza-0 hVuWpH"
+            class="H2-egphza-0 dWsfJf"
           >
             <span>
               Who can access this intervention?
             </span>
           </h2>
           <div
-            class="Box-sc-14m3exe-0 ieQSGL"
+            class="Box-sc-14m3exe-0 kVXiVZ"
           >
             <div
-              class="Row-x1o3ru-0 fnPUbe"
+              class="Row-x1o3ru-0 dSjDRN"
               width="fit-content"
             >
               <img
-                class="Img-sc-1kfzr96-0 isicqy"
+                class="Img-sc-1kfzr96-0 kcPFOj"
                 src="IMAGE_MOCK"
               />
               <p
-                class="Text-sc-2lza2m-0 WmJYz"
+                class="Text-sc-2lza2m-0 cIFaPw"
                 font-size="15"
                 font-weight="regular"
               >
@@ -78,15 +78,15 @@ exports[`<ProblemSettingsPage /> Should render and match the snapshot 1`] = `
               </p>
             </div>
             <div
-              class="Row-x1o3ru-0 fnPUbe"
+              class="Row-x1o3ru-0 dSjDRN"
               width="fit-content"
             >
               <img
-                class="Img-sc-1kfzr96-0 isicqy"
+                class="Img-sc-1kfzr96-0 kcPFOj"
                 src="IMAGE_MOCK"
               />
               <p
-                class="Text-sc-2lza2m-0 WmJYz"
+                class="Text-sc-2lza2m-0 cIFaPw"
                 font-size="15"
                 font-weight="regular"
               >
@@ -96,15 +96,15 @@ exports[`<ProblemSettingsPage /> Should render and match the snapshot 1`] = `
               </p>
             </div>
             <div
-              class="Row-x1o3ru-0 gOOpWF"
+              class="Row-x1o3ru-0 gHJmeJ"
               width="fit-content"
             >
               <img
-                class="Img-sc-1kfzr96-0 isicqy"
+                class="Img-sc-1kfzr96-0 kcPFOj"
                 src="IMAGE_MOCK"
               />
               <p
-                class="Text-sc-2lza2m-0 WmJYz"
+                class="Text-sc-2lza2m-0 cIFaPw"
                 font-size="15"
                 font-weight="regular"
               >

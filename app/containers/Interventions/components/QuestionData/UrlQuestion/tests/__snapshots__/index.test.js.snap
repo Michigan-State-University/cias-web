@@ -63,7 +63,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c2 {
+.c3 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -81,7 +81,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   color: rgba(16,121,105,1);
 }
 
-.c2:focus {
+.c3:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
@@ -161,8 +161,8 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   border-radius: 50%;
   border: 6px solid #C866EA;
   border-color: #C866EA transparent #C866EA transparent;
-  -webkit-animation: hAjVGa 1.2s linear infinite;
-  animation: hAjVGa 1.2s linear infinite;
+  -webkit-animation: ixzqdH 1.2s linear infinite;
+  animation: ixzqdH 1.2s linear infinite;
 }
 
 .c11 {
@@ -182,7 +182,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   align-items: center;
 }
 
-.c3 {
+.c2 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
@@ -191,42 +191,10 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   color: rgba(16,121,105,1);
 }
 
-.c3:focus {
+.c2:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 <div
@@ -243,7 +211,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
       onChange={[Function]}
       onFocus={[Function]}
       placeholder="Variable name..."
-      type="tel"
+      type="singleline"
       value=""
       width="153px"
     />

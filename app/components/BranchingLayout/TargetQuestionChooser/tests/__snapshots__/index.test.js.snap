@@ -136,22 +136,6 @@ Object {
   color: rgba(154,161,182,1);
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
 <body>
     <div>
       <div
@@ -252,25 +236,25 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Box-sc-14m3exe-0 laqfsx"
+      class="Box-sc-14m3exe-0 bRDLLj"
       width="300"
     >
       <div
-        class="Box-sc-14m3exe-0 ia-dbYy"
+        class="Box-sc-14m3exe-0 kVsMlK"
       >
         <div
-          class="Row-x1o3ru-0 iJOjSZ"
+          class="Row-x1o3ru-0 exvbpM"
           data-testid="test-id-1-next-question-target"
         >
           <img
-            class="Img-sc-1kfzr96-0 kubXYn"
+            class="Img-sc-1kfzr96-0 IpfbX"
             src="IMAGE_MOCK"
           />
           <div
-            class="Box-sc-14m3exe-0 jmcBzp"
+            class="Box-sc-14m3exe-0 gfpMuw"
           >
             <p
-              class="Text-sc-2lza2m-0 bcrpdl"
+              class="Text-sc-2lza2m-0 cHEYVU"
               color="#9AA1B6"
               font-size="15px"
               font-weight="bold"
@@ -281,56 +265,56 @@ Object {
         </div>
       </div>
       <div
-        class="Row-x1o3ru-0 iJOjSZ"
+        class="Row-x1o3ru-0 exvbpM"
       >
         <div
-          class="Box-sc-14m3exe-0 hjBUNi"
+          class="Box-sc-14m3exe-0 dvwSEs"
         >
           <div
-            class="Column-sc-1n6divy-0 dfNUrc"
+            class="Column-sc-1n6divy-0 cVSlLs"
             data-testid="test-id-1-select-target-question"
           >
             <div
-              class="Row-x1o3ru-0 ddISbW"
+              class="Row-x1o3ru-0 jyZyKs"
             >
               <img
-                class="Img-sc-1kfzr96-0 cNNjlU"
+                class="Img-sc-1kfzr96-0 gjmtGq"
                 data-testid="test-id-1-select-target-question-interview-view-setter"
                 src="IMAGE_MOCK"
               />
               <img
-                class="Img-sc-1kfzr96-0 gvKdyb"
+                class="Img-sc-1kfzr96-0 kHuQYD"
                 src="IMAGE_MOCK"
               />
               <h3
-                class="H3-sc-1nwhpi5-0 xSpVx"
+                class="H3-sc-1nwhpi5-0 cAnmyd"
               >
                 e-Intervention Name
               </h3>
             </div>
             <div
-              class="Box-sc-14m3exe-0 kkZuUh"
+              class="Box-sc-14m3exe-0 kghdhh"
               overflow="scroll"
             >
               <div
-                class="Column-sc-1n6divy-0 dfNUrc"
+                class="Column-sc-1n6divy-0 cVSlLs"
               >
                 <div
-                  class="Row-x1o3ru-0 iJOjSZ"
+                  class="Row-x1o3ru-0 exvbpM"
                   data-testid="test-id-1-select-target-question-el"
                 >
                   <img
-                    class="Img-sc-1kfzr96-0 gvKdyb"
+                    class="Img-sc-1kfzr96-0 kHuQYD"
                     src="IMAGE_MOCK"
                   />
                   <div
-                    class="Box-sc-14m3exe-0 jtCzjB"
+                    class="Box-sc-14m3exe-0 klKXLh"
                   >
                     <div
-                      class="Row-x1o3ru-0 iJOjSZ"
+                      class="Row-x1o3ru-0 exvbpM"
                     >
                       <div
-                        class="styled__StyledEllipsisText-x30pqb-0 VaEzZ"
+                        class="styled__StyledEllipsisText-x30pqb-0 ifOlqV"
                         color="#9AA1B6"
                         font-weight=""
                       >

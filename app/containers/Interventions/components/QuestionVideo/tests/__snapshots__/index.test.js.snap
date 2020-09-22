@@ -32,6 +32,16 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   width: 100%;
 }
 
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  visibility: hidden;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
 .c1 {
   width: auto;
   height: auto;
@@ -48,16 +58,6 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
 
 .c1:hover {
   background-color: #E9F1FB;
-}
-
-.c5 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  visibility: hidden;
-  margin-left: 15px;
-  cursor: pointer;
 }
 
 .c6 {
@@ -83,7 +83,7 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
   width="100%"
 >
   <div
-    className="HoverableBox-sc-1syy6g3-0 c1"
+    className="c1"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
     width="100%"
@@ -191,22 +191,6 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   padding-right: 16px;
   padding-left: 16px;
   background-color: rgba(233,241,251,1);
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 <div
