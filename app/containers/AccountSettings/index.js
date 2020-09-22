@@ -5,6 +5,7 @@
  */
 
 import React, { Fragment, useState } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Helmet } from 'react-helmet';
 
@@ -30,14 +31,16 @@ import {
   StyledTimezoneBox,
 } from './styled';
 
-const AccountSettings = ({
-  intl: { formatMessage },
-  PasswordComponent,
-  AvatarComponent,
-  FullNameComponent,
-  EmailComponent,
-  TimezoneComponent,
-}) => {
+const AccountSettings = props => {
+  const {
+    intl: { formatMessage },
+    PasswordComponent,
+    AvatarComponent,
+    FullNameComponent,
+    EmailComponent,
+    TimezoneComponent,
+    userId,
+  } = props;
   const [passwordReset, setPasswordReset] = useState(false);
   const openReset = () => setPasswordReset(true);
   const closeReset = () => setPasswordReset(false);
@@ -46,15 +49,19 @@ const AccountSettings = ({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
-      <PasswordComponent
-        visible={passwordReset}
-        onClose={closeReset}
-        formatMessage={formatMessage}
-      />
+      {PasswordComponent && (
+        <PasswordComponent
+          userId={userId}
+          visible={passwordReset}
+          onClose={closeReset}
+          formatMessage={formatMessage}
+        />
+      )}
       <StyledBox height="100%" width="100%">
         <Row>
-          <BackButton to="/">
-            <FormattedMessage {...messages.back} />
+          <BackButton to={userId ? '/users' : '/'}>
+            {userId && <FormattedMessage {...messages.backToUsers} />}
+            {!userId && <FormattedMessage {...messages.back} />}
           </BackButton>
         </Row>
         <H1 my={25}>
@@ -66,30 +73,42 @@ const AccountSettings = ({
           borderRadius={5}
           shadow={boxShadows.selago}
         >
-          <Row>
-            <AvatarComponent />
-          </Row>
+          <Row>{AvatarComponent && <AvatarComponent userId={userId} />}</Row>
           <Row mt={50}>
-            <FullNameComponent formatMessage={formatMessage} />
+            {FullNameComponent && (
+              <FullNameComponent
+                userId={userId}
+                formatMessage={formatMessage}
+              />
+            )}
           </Row>
           <StyledRow width="100%" align="center" justify="end">
-            <StyledEmailBox width="50%" mr={20}>
-              <EmailComponent formatMessage={formatMessage} />
-            </StyledEmailBox>
-            <StyledTimezoneBox>
-              <TimezoneComponent formatMessage={formatMessage} />
-            </StyledTimezoneBox>
-            <Box mb={10}>
-              <TextButton
-                onClick={openReset}
-                whiteSpace="nowrap"
-                fontWeight="bold"
-                fontSize={14}
-                color={themeColors.secondary}
-              >
-                <FormattedMessage {...messages.changePassword} />
-              </TextButton>
-            </Box>
+            {EmailComponent && (
+              <StyledEmailBox width="50%" mr={20}>
+                <EmailComponent userId={userId} formatMessage={formatMessage} />
+              </StyledEmailBox>
+            )}
+            {TimezoneComponent && (
+              <StyledTimezoneBox>
+                <TimezoneComponent
+                  userId={userId}
+                  formatMessage={formatMessage}
+                />
+              </StyledTimezoneBox>
+            )}
+            {PasswordComponent && (
+              <Box mb={10}>
+                <TextButton
+                  onClick={openReset}
+                  whiteSpace="nowrap"
+                  fontWeight="bold"
+                  fontSize={14}
+                  color={themeColors.secondary}
+                >
+                  <FormattedMessage {...messages.changePassword} />
+                </TextButton>
+              </Box>
+            )}
           </StyledRow>
         </StyledColumn>
       </StyledBox>
@@ -99,6 +118,12 @@ const AccountSettings = ({
 
 AccountSettings.propTypes = {
   intl: intlShape,
+  userId: PropTypes.string,
+  PasswordComponent: PropTypes.object,
+  AvatarComponent: PropTypes.object,
+  FullNameComponent: PropTypes.object,
+  EmailComponent: PropTypes.object,
+  TimezoneComponent: PropTypes.object,
 };
 
 AccountSettings.defaultProps = {

@@ -139,7 +139,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
               class="THead-sc-1pp8kl6-0 eAjaUx"
             >
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 hnyHFB"
+                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 kTnATn"
               >
                 <th
                   class="TH-sc-1qq1mcj-0 hLWyGK"
@@ -180,14 +180,13 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
               class="TBody-sc-1332v38-0 ekZOxU"
             >
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 cKBlsf"
+                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 gAVoBn"
                 color="#FFFFFF"
+                cursor="pointer"
               >
                 <td
                   class="TD-sc-4t6406-0 kEmNCT"
-                >
-                  test
-                </td>
+                />
                 <td
                   class="TD-sc-4t6406-0 kEmNCT"
                 >

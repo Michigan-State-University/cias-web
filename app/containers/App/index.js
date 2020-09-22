@@ -24,14 +24,14 @@ import SettingsInterventionPage from 'containers/Interventions/containers/Settin
 import AccountSettings from 'containers/AccountSettings/Loadable';
 import ResetPasswordPage from 'containers/ResetPasswordPage/Loadable';
 import SetNewPasswordPage from 'containers/SetNewPasswordPage/Loadable';
-
+import ProblemPage from 'containers/ProblemPage/Loadable';
+import UserListPage from 'containers/UserList/Loadable';
+import Logout from 'containers/Logout/Loadable';
+import UserDetails from 'containers/UserDetails/Loadable';
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 
 import { Roles } from 'models/User/UserRoles';
 
-import ProblemPage from 'containers/ProblemPage/Loadable';
-import UserListPage from 'containers/UserList/Loadable';
-import Logout from 'containers/Logout/Loadable';
 import navbarNames from 'utils/navbarNames';
 import rootSaga from 'global/sagas/rootSaga';
 import { useInjectSaga } from 'utils/injectSaga';
@@ -177,18 +177,18 @@ export function App({ user }) {
           allowedRoles={Roles.allRoles}
           navbarProps={{
             navbarId: 'default',
-            activeTab: interventionsTabId,
+            activeTab: accountsTabId,
           }}
         />
         <AppRoute
           exact
           path="/profile/:id"
-          component={AccountSettings}
+          component={UserDetails}
           protectedRoute
           allowedRoles={[Roles.admin]}
           navbarProps={{
             navbarId: 'default',
-            activeTab: interventionsTabId,
+            activeTab: accountsTabId,
           }}
         />
         <AppRoute exact path="/not-found-page" component={NotFoundPage} />

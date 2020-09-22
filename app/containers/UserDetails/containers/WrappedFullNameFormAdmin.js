@@ -6,38 +6,45 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
 import {
-  editUserRequest,
-  editUserSaga,
   makeSelectUser,
-} from 'global/reducers/auth';
+  editOtherUserRequest,
+  editSingleUserSaga,
+} from 'global/reducers/user';
 import { useInjectSaga } from 'utils/injectSaga';
 
-import TimezoneForm from 'components/AccountSettings/TimezoneForm';
+import FullNameForm from 'components/AccountSettings/FullNameForm';
 
-const WrappedTimezoneForm = ({ formatMessage, user, editUser }) => {
-  useInjectSaga({ key: 'editUser', saga: editUserSaga });
-
+const WrappedFullNameForm = ({
+  formatMessage,
+  userState: { user },
+  editUser,
+}) => {
+  useInjectSaga({ key: 'editSingleUser', saga: editSingleUserSaga });
+  const editUserCall = userData => editUser({ userId: user.id, ...userData });
+  if (!user) {
+    return null;
+  }
   return (
-    <TimezoneForm
+    <FullNameForm
       formatMessage={formatMessage}
       user={user}
-      editUser={editUser}
+      editUser={editUserCall}
     />
   );
 };
 
-WrappedTimezoneForm.propTypes = {
+WrappedFullNameForm.propTypes = {
   formatMessage: PropTypes.func,
-  user: PropTypes.object,
+  userState: PropTypes.object,
   editUser: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  user: makeSelectUser(),
+  userState: makeSelectUser(),
 });
 
 const mapDispatchToProps = {
-  editUser: editUserRequest,
+  editUser: editOtherUserRequest,
 };
 
 const withConnect = connect(
@@ -48,4 +55,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   injectIntl,
-)(WrappedTimezoneForm);
+)(WrappedFullNameForm);

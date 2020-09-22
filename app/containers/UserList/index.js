@@ -161,7 +161,7 @@ export function UserList({
               </StripedTR>
             </THead>
             <TBody>
-              {users.map(({ id, email, full_name: fullName, roles }) => (
+              {users.map(({ id, email, fullName, roles }) => (
                 <StripedTR
                   hoverBg={colors.linkWater}
                   color={colors.white}
@@ -216,6 +216,7 @@ UserList.propTypes = {
   fetchUsersRequest: PropTypes.func.isRequired,
   userList: PropTypes.object,
   intl: PropTypes.object,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -4,32 +4,78 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 
+import {
+  makeSelectUser,
+  fetchUserRequest,
+  fetchUserSaga,
+  UserReducer,
+} from 'global/reducers/user';
+
+import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga } from 'utils/injectSaga';
+
+import Spinner from 'components/Spinner';
+import { themeColors } from 'theme';
+import ErrorAlert from 'components/ErrorAlert';
 import AccountSettings from '../AccountSettings';
+import WrappedAvatarFormAdmin from './containers/WrappedAvatarFormAdmin';
+import WrappedFullNameFormAdmin from './containers/WrappedFullNameFormAdmin';
 
-import messages from './messages';
+export const UserDetails = ({
+  userState: { user, userError, userLoading },
+  fetchUser,
+  match: {
+    params: { id },
+  },
+}) => {
+  useInjectReducer({ key: 'singleUser', reducer: UserReducer });
+  useInjectSaga({ key: 'singleUserSaga', saga: fetchUserSaga });
 
-const UserDetails = () => {
-  return <AccountSettings />;
+  useEffect(() => {
+    fetchUser(id);
+  }, []);
+
+  if (userLoading) {
+    return <Spinner color={themeColors.secondary} />;
+  }
+  if (userError) {
+    return <ErrorAlert errorText={userError} />;
+  }
+
+  return (
+    <AccountSettings
+      TimezoneComponent={null}
+      EmailComponent={null}
+      PasswordComponent={null}
+      AvatarComponent={WrappedAvatarFormAdmin}
+      FullNameComponent={WrappedFullNameFormAdmin}
+      userId={user.id}
+    />
+  );
 };
 
 UserDetails.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  userState: PropTypes.object,
+  match: PropTypes.object,
+  fetchUser: PropTypes.func,
 };
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
+const mapStateToProps = createStructuredSelector({
+  userState: makeSelectUser(),
+});
+
+const mapDispatchToProps = {
+  fetchUser: fetchUserRequest,
+};
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 

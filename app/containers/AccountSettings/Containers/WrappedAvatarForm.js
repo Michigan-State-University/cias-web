@@ -13,7 +13,7 @@ import {
 } from 'global/reducers/auth';
 import { useInjectSaga } from 'utils/injectSaga';
 
-import AvatarForm from '../Components/AvatarForm';
+import AvatarForm from 'components/AccountSettings/AvatarForm';
 
 const WrappedAvatarForm = ({ user, addAvatar, deleteAvatar }) => {
   useInjectSaga({ key: 'addAvatar', saga: addAvatarSaga });

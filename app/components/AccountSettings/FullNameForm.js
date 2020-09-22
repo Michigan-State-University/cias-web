@@ -5,8 +5,8 @@ import * as Yup from 'yup';
 
 import FormikInput from 'components/FormikInput';
 
-import messages from '../messages';
-import { StyledFullNameRow } from '../styled';
+import messages from './messages';
+import { StyledFullNameRow } from './styled';
 
 const validationSchema = formatMessage =>
   Yup.object().shape({

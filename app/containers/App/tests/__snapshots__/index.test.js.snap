@@ -208,11 +208,28 @@ exports[`<App /> should render and match the snapshot 1`] = `
       exact={true}
       navbarProps={
         Object {
-          "activeTab": "interventions",
+          "activeTab": "accounts",
           "navbarId": "default",
         }
       }
       path="/profile"
+      protectedRoute={true}
+    />
+    <Memo(ConnectFunction)
+      allowedRoles={
+        Array [
+          "admin",
+        ]
+      }
+      component={[Function]}
+      exact={true}
+      navbarProps={
+        Object {
+          "activeTab": "accounts",
+          "navbarId": "default",
+        }
+      }
+      path="/profile/:id"
       protectedRoute={true}
     />
     <Memo(ConnectFunction)

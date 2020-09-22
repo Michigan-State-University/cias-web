@@ -8,7 +8,7 @@ import timezone from 'dayjs/plugin/timezone';
 import FormikSelect from 'components/FormikSelect';
 import TIMEZONES from 'utils/timezones';
 
-import messages from '../messages';
+import messages from './messages';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);

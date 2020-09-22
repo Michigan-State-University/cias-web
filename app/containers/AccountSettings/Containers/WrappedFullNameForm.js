@@ -12,7 +12,7 @@ import {
 } from 'global/reducers/auth';
 import { useInjectSaga } from 'utils/injectSaga';
 
-import FullNameForm from '../Components/FullNameForm';
+import FullNameForm from 'components/AccountSettings/FullNameForm';
 
 const WrappedFullNameForm = ({ formatMessage, user, editUser }) => {
   useInjectSaga({ key: 'editUser', saga: editUserSaga });

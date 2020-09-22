@@ -12,7 +12,7 @@ import Modal from 'components/Modal';
 import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
 
-import messages from '../messages';
+import messages from './messages';
 
 const validationSchema = formatMessage =>
   Yup.object().shape({

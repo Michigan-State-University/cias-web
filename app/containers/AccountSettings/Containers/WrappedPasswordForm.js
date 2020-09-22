@@ -14,7 +14,7 @@ import {
 import { useInjectSaga } from 'utils/injectSaga';
 import { createStructuredSelector } from 'reselect';
 
-import PasswordForm from '../Components/PasswordForm';
+import PasswordForm from 'components/AccountSettings/PasswordForm';
 
 const WrappedPasswordForm = ({
   formatMessage,

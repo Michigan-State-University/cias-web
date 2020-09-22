@@ -14,7 +14,7 @@ import {
   changeErrorStatus,
 } from 'global/reducers/auth';
 
-import EmailForm from '../Components/EmailForm';
+import EmailForm from 'components/AccountSettings/EmailForm';
 
 const WrappedEmailForm = ({
   formatMessage,

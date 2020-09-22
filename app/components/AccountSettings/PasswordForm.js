@@ -9,7 +9,7 @@ import ErrorAlert from 'components/ErrorAlert';
 import Button from 'components/Button';
 import FormikInput from 'components/FormikInput';
 
-import messages from '../messages';
+import messages from './messages';
 
 const passwordLength = 8;
 

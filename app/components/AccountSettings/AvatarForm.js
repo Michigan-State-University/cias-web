@@ -6,13 +6,13 @@ import ConfirmationBox from 'components/ConfirmationBox';
 import Row from 'components/Row';
 import { themeColors, colors } from 'theme';
 
-import messages from '../messages';
+import messages from './messages';
 import {
   StyledUserAvatar,
   StyledButtonsRow,
   StyledDeleteButton,
   StyledUploadFileButton,
-} from '../styled';
+} from './styled';
 
 const AvatarForm = ({
   user: { avatar, firstName, lastName },
