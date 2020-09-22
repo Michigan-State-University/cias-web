@@ -9,14 +9,6 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.AccountSettings';
 
 export default defineMessages({
-  pageTitle: {
-    id: `${scope}.pageTitle`,
-    defaultMessage: 'Profile',
-  },
-  back: {
-    id: `${scope}.back`,
-    defaultMessage: 'Back to dashboard',
-  },
   firstNameLabel: {
     id: `${scope}.firstNameLabel`,
     defaultMessage: 'First Name',
@@ -98,10 +90,6 @@ export default defineMessages({
     id: `${scope}.changePassword`,
     defaultMessage: 'Reset password',
   },
-  header: {
-    id: `${scope}.header`,
-    defaultMessage: 'Account Settings',
-  },
   changeAvatar: {
     id: `${scope}.changeAvatar`,
     defaultMessage: 'Change profile photo',
@@ -162,9 +150,5 @@ export default defineMessages({
     id: `${scope}.changeYourEmail`,
     defaultMessage:
       'In order to change your e-mail you have to confirm it by providing your password.',
-  },
-  backToUsers: {
-    id: `${scope}.backToUsers`,
-    defaultMessage: 'Back to user list',
   },
 });
