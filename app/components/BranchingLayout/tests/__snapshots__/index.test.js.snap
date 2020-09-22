@@ -43,6 +43,14 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
 .c3 {
   font-family: DM Sans;
   font-size: 13px;
@@ -57,12 +65,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   text-decoration: underline;
 }
 
-.c4 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  margin-top: 20px;
+.c5 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -85,10 +88,26 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   transition: 0.2s;
 }
 
-.c4:hover {
+.c5:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 <div>
@@ -112,7 +131,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c4"
+      class="c4 c5"
     >
       + Add case
     </div>

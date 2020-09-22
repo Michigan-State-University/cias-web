@@ -203,7 +203,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 180px;
 }
 
-.c17 {
+.c16 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -221,7 +221,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: rgba(16,121,105,1);
 }
 
-.c17:focus {
+.c16:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
@@ -246,7 +246,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border-color: #107969;
 }
 
-.c16 {
+.c17 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
@@ -255,7 +255,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: rgba(16,121,105,1);
 }
 
-.c16:focus {
+.c17:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
@@ -349,6 +349,54 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   justify-content: flex-start;
   padding: 0 10px;
   width: 100%;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 <div>
@@ -3233,7 +3281,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                       class="c16 c17"
                       color="#107969"
                       placeholder="Variable name..."
-                      type="singleline"
+                      type="tel"
                       value=""
                       width="153px"
                     />

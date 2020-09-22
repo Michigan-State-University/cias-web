@@ -107,7 +107,7 @@ exports[`<InterventionBranching /> Should render and match the snapshot 1`] = `
   height: 0;
 }
 
-.c11 {
+.c12 {
   position: absolute;
   top: 0;
   left: 0;
@@ -128,7 +128,7 @@ exports[`<InterventionBranching /> Should render and match the snapshot 1`] = `
   box-shadow: 0 0 1px #C866EA;
 }
 
-.c11:before {
+.c12:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -170,6 +170,38 @@ exports[`<InterventionBranching /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 <div
@@ -221,7 +253,7 @@ exports[`<InterventionBranching /> Should render and match the snapshot 1`] = `
           type="checkbox"
         />
         <span
-          className="c11"
+          className="c11 c12"
         />
       </label>
     </div>

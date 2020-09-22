@@ -2,12 +2,12 @@
 
 exports[`<ParticipantDashboard /> should render and match the snapshot 1`] = `
 <div
-  class="styled__FillScreenLoader-tle2yi-0 jcBUSp"
+  class="styled__FillScreenLoader-tle2yi-0 fDUeBu"
   data-testid="fullscreen-loader"
   opacity="0.5"
 >
   <div
-    class="styled__StyledSpinner-d123q3-0 dOefMO"
+    class="styled__StyledSpinner-d123q3-0 hXQJFy"
     color="#C866EA"
     size="100"
     width="6"

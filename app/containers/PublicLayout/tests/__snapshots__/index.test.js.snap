@@ -3,21 +3,21 @@
 exports[`<PublicLayout /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="styled__Background-sc-1r4kg53-0 jqrSlU"
+    class="styled__Background-sc-1r4kg53-0 gRYivG"
   >
     <div
-      class="styled__TopBackground-sc-1r4kg53-1 nQFgX"
+      class="styled__TopBackground-sc-1r4kg53-1 bylLTk"
     />
     <div
-      class="styled__Header-sc-1r4kg53-2 fIXxOZ"
+      class="styled__Header-sc-1r4kg53-2 clPpsO"
     >
       <img
-        class="styled__Logo-sc-1r4kg53-3 jPiNjm"
+        class="styled__Logo-sc-1r4kg53-3 gDviEu"
         src="IMAGE_MOCK"
       />
     </div>
     <div
-      class="styled__Content-sc-1r4kg53-4 hBhonq"
+      class="styled__Content-sc-1r4kg53-4 irxPWB"
     >
       <div>
         Children

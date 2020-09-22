@@ -15,6 +15,9 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-top: 14px;
+}
+
+.c2 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -37,7 +40,7 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
   transition: 0.2s;
 }
 
-.c1:hover {
+.c2:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
@@ -48,7 +51,7 @@ exports[`<BlockTypeChooser /> should match the snapshot 1`] = `
     class="c0"
   >
     <div
-      class="c1"
+      class="c1 c2"
     >
       + Add block
     </div>
@@ -65,7 +68,15 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   position: relative;
 }
 
-.c2 {
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 14px;
+}
+
+.c3 {
   width: auto;
   height: auto;
   display: block;
@@ -77,7 +88,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   border-radius: 10px;
 }
 
-.c3 {
+.c4 {
   width: auto;
   height: auto;
   display: block;
@@ -86,7 +97,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   border-bottom: 1px solid #E9F1FB;
 }
 
-.c6 {
+.c7 {
   width: auto;
   height: auto;
   display: block;
@@ -98,18 +109,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   flex-grow: 1;
 }
 
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c8 {
+.c9 {
   width: auto;
   height: auto;
   display: block;
@@ -121,11 +121,11 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   border-radius: 5px;
 }
 
-.c8:hover {
+.c9:hover {
   background-color: #E9F1FB;
 }
 
-.c15 {
+.c16 {
   width: auto;
   height: auto;
   display: block;
@@ -136,11 +136,22 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   border-radius: 5px;
 }
 
-.c15:hover {
+.c16:hover {
   background-color: #E9F1FB;
 }
 
-.c5 {
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -151,7 +162,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   height: auto;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -169,7 +180,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   align-items: center;
 }
 
-.c4 {
+.c5 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -178,7 +189,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   color: #2F3850;
 }
 
-.c11 {
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -186,7 +197,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   color: #2F3850;
 }
 
-.c10 {
+.c11 {
   border-radius: 50%;
   background-color: #0086F8;
   display: -webkit-box;
@@ -209,7 +220,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   color: #2F3850;
 }
 
-.c12 {
+.c13 {
   border-radius: 50%;
   background-color: #FF7691;
   display: -webkit-box;
@@ -232,7 +243,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   color: #2F3850;
 }
 
-.c13 {
+.c14 {
   border-radius: 50%;
   background-color: #FFCF5B;
   display: -webkit-box;
@@ -255,7 +266,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   color: #2F3850;
 }
 
-.c14 {
+.c15 {
   border-radius: 50%;
   background-color: #B302FF;
   display: -webkit-box;
@@ -278,7 +289,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   color: #2F3850;
 }
 
-.c16 {
+.c17 {
   border-radius: 50%;
   background-color: #FF7F50;
   display: -webkit-box;
@@ -301,12 +312,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   color: #2F3850;
 }
 
-.c1 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  margin-top: 14px;
+.c2 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -332,10 +338,26 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   border: none;
 }
 
-.c1:hover {
+.c2:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 <div>
@@ -343,19 +365,19 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
     class="c0"
   >
     <div
-      class="c1"
+      class="c1 c2"
     >
       + Add block
     </div>
     <div
-      class="c2"
+      class="c3"
       width="100%"
     >
       <div
-        class="c3"
+        class="c4"
       >
         <p
-          class="c4"
+          class="c5"
           font-size="15px"
           font-weight="bold"
         >
@@ -363,26 +385,26 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
         </p>
       </div>
       <div
-        class="c5"
+        class="c6"
       >
         <div
-          class="c6"
+          class="c7"
         >
           <div
-            class="c7"
+            class="c8"
           >
             <div
-              class="c8"
+              class="HoverableBox-sc-1syy6g3-0 c9"
             >
               <div
-                class="c9"
+                class="c10"
               >
                 <div
-                  class="c10"
+                  class="c11"
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
                   Speech
@@ -390,17 +412,17 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
               </div>
             </div>
             <div
-              class="c8"
+              class="HoverableBox-sc-1syy6g3-0 c9"
             >
               <div
-                class="c9"
+                class="c10"
               >
                 <div
-                  class="c12"
+                  class="c13"
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
                   Body Animation
@@ -408,17 +430,17 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
               </div>
             </div>
             <div
-              class="c8"
+              class="HoverableBox-sc-1syy6g3-0 c9"
             >
               <div
-                class="c9"
+                class="c10"
               >
                 <div
-                  class="c13"
+                  class="c14"
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
                   Head Animation
@@ -426,17 +448,17 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
               </div>
             </div>
             <div
-              class="c8"
+              class="HoverableBox-sc-1syy6g3-0 c9"
             >
               <div
-                class="c9"
+                class="c10"
               >
                 <div
-                  class="c14"
+                  class="c15"
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
                   Read question
@@ -444,17 +466,17 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
               </div>
             </div>
             <div
-              class="c15"
+              class="HoverableBox-sc-1syy6g3-0 c16"
             >
               <div
-                class="c9"
+                class="c10"
               >
                 <div
-                  class="c16"
+                  class="c17"
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
                   Pause

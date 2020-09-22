@@ -3,21 +3,21 @@
 exports[`<QuestionTitle /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 jEoxdd"
+    class="Box-sc-14m3exe-0 jiPGix"
     width="100%"
   >
     <div
-      class="Row-x1o3ru-0 exvbpM"
+      class="Row-x1o3ru-0 iJOjSZ"
     >
       <div
-        class="Row-x1o3ru-0 eLUxLg"
+        class="Row-x1o3ru-0 hNBpWq"
         width="100%"
       >
         <div
-          class="Column-sc-1n6divy-0 cVSlLs"
+          class="Column-sc-1n6divy-0 dfNUrc"
         >
           <div
-            class="quill styled__QuillStyled-sc-65e6t4-0 eyAAtU"
+            class="quill styled__QuillStyled-sc-65e6t4-0 bhQGKF"
           >
             <div
               class="ql-container ql-bubble"
