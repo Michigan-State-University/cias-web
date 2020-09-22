@@ -17,10 +17,6 @@ export default defineMessages({
     id: `${scope}.confirmCanceling`,
     defaultMessage: `Confirm`,
   },
-  defaultTitle: {
-    id: `${scope}.defaultTitle`,
-    defaultMessage: `Please confirm`,
-  },
   defaultDescription: {
     id: `${scope}.defaultDescription`,
     defaultMessage: 'Are you sure you want to perfrom this action?',

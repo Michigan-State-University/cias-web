@@ -55,7 +55,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  margin-top: 40px;
+  margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
 }
@@ -103,10 +103,30 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
 }
 
 .c6 {
-  width: auto;
-  height: auto;
-  margin-left: 5px;
+  height: 28px;
+  width: 28px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  background: #E9F1FB;
+  margin-right: 35px;
   cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0;
+  position: relative;
+  left: 40px;
+  top: -8px;
 }
 
 @media only screen and (min-width:768px) {
@@ -156,11 +176,14 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
           >
             Test
           </h1>
-          <img
-            alt="close"
+          <button
             class="c6"
-            src="IMAGE_MOCK"
-          />
+          >
+            <img
+              alt="cross"
+              src="IMAGE_MOCK"
+            />
+          </button>
         </div>
       </div>
       <div

@@ -24,17 +24,27 @@ const StripedTR = styled(TR)`
       }
     }
   }
+  td:last-child {
+    opacity: 0
+  }
+
   &:hover {
     background: ${props => props.hoverBg && props.hoverBg} !important;
+    td:last-child {
+      opacity: 100%
+      }
   }
+  color: ${props => props.textColor};
 `;
 
 StripedTR.propTypes = {
   stripesPlacement: PropTypes.string,
+  textColor: PropTypes.string,
 };
 
 StripedTR.defaultProps = {
   stripesPlacement: 'even',
+  textColor: colors.black,
 };
 
 export { StripedTR };

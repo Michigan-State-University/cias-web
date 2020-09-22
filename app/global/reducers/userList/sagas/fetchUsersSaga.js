@@ -2,9 +2,9 @@ import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
-import { FETCH_USERS, PER_PAGE } from './constants';
 
-import { fetchUsersFailure, fetchUsersSuccess } from './actions';
+import { FETCH_USERS, PER_PAGE } from '../constants';
+import { fetchUsersFailure, fetchUsersSuccess } from '../actions';
 
 function* fetchUsers({ payload: { roles, name, page } }) {
   const requestUrl = `/v1/users?`;
@@ -31,6 +31,6 @@ function* fetchUsers({ payload: { roles, name, page } }) {
   }
 }
 
-export default function* userListSaga() {
+export default function* fetchUsersSaga() {
   yield takeLatest(FETCH_USERS, fetchUsers);
 }

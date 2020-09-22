@@ -13,11 +13,10 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import H1 from 'components/H1';
 import Row from 'components/Row';
-import Img from 'components/Img';
-import cross from 'assets/svg/cross.svg';
 import useLockBodyScroll from 'utils/useLockBodyScroll';
 import useKeyPress from 'utils/useKeyPress';
 
+import CloseIcon from 'components/CloseIcon';
 import { StyledBox } from './styled';
 
 const ESC_KEY_CODE = 27;
@@ -88,16 +87,15 @@ const Modal = ({ title, onClose, children, visible, ...stylesProps }) => {
             <Column border="1px solid red">
               <Row align="center" justify="between">
                 <H1>{title}</H1>
-                <Img
-                  ml={5}
-                  src={cross}
-                  alt="close"
+                <CloseIcon
+                  position="relative"
+                  top="-8px"
+                  left="40px"
                   onClick={onClose}
-                  clickable
                 />
               </Row>
             </Column>
-            <Box borderRadius="0px" mt={40}>
+            <Box borderRadius="0px" mt={10}>
               {children}
             </Box>
           </StyledBox>

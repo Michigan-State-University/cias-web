@@ -33,6 +33,7 @@ const themeColors = {
   secondary: colors.lavender,
   text: colors.bluewood,
   highlight: colors.linkWater,
+  warning: colors.flamingo,
 };
 
 export { colors, themeColors };

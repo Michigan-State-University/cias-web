@@ -61,7 +61,7 @@ export const StyledButton = styled.button`
 `;
 
 StyledButton.propTypes = {
-  color: PropTypes.oneOf(['primary', 'secondary']),
+  color: PropTypes.oneOf(['primary', 'secondary', 'warning']),
   outlined: PropTypes.bool,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,
