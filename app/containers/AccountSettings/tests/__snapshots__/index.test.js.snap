@@ -48,7 +48,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
           width="100%"
         >
           <div
-            class="styled__AvatarStyled-sc-15n3teb-0 kNBpjK styled__StyledUserAvatar-k1l7f-6 jyxleb"
+            class="styled__AvatarStyled-sc-15n3teb-0 kNBpjK styled__StyledUserAvatar-awa645-1 iILneb"
             color="#FFFFFF"
           >
             <div>
@@ -59,10 +59,10 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
             class="Row-x1o3ru-0 dVByuK"
           >
             <div
-              class="Row-x1o3ru-0 styled__StyledButtonsRow-k1l7f-7 iJOjSZ hfCBQN"
+              class="Row-x1o3ru-0 styled__StyledButtonsRow-awa645-2 iJOjSZ jYBBYf"
             >
               <div
-                class="Box-sc-14m3exe-0 cmFbkA styled__StyledUploadFileButton-k1l7f-10 jWqwAL"
+                class="Box-sc-14m3exe-0 cmFbkA styled__StyledUploadFileButton-awa645-4 dcKYCV"
                 height="fit-content"
               >
                 <input
@@ -94,7 +94,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
         class="Row-x1o3ru-0 hjyxCh"
       >
         <div
-          class="Row-x1o3ru-0 styled__StyledFullNameRow-k1l7f-5 hNBpWq eFVyra"
+          class="Row-x1o3ru-0 styled__StyledFullNameRow-awa645-0 hNBpWq guCwSM"
           width="100%"
         >
           <div
@@ -142,7 +142,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
         width="100%"
       >
         <div
-          class="Box-sc-14m3exe-0 styled__StyledInputBox-k1l7f-4 hihPNq jMnTMl"
+          class="Box-sc-14m3exe-0 styled__StyledEmailBox-k1l7f-4 hihPNq ZHlxn"
           width="50%"
         >
           <div
@@ -171,7 +171,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="Box-sc-14m3exe-0 styled__StyledInputBox-k1l7f-4 jmcBzp jMnTMl"
+          class="Box-sc-14m3exe-0 styled__StyledEmailBox-k1l7f-4 styled__StyledTimezoneBox-k1l7f-5 jmcBzp ZHlxn hdgaof"
         >
           <div
             class="Column-sc-1n6divy-0 dfNUrc"
@@ -247,7 +247,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
           class="Box-sc-14m3exe-0 dnkZCh"
         >
           <button
-            class="StyledTextButton-sc-17cmh3t-0 styled__TextButton-k1l7f-3 kFnXaw fMvKj"
+            class="StyledTextButton-sc-17cmh3t-0 styled__TextButton-k1l7f-3 kFnXaw hSTsnM"
             color="#C866EA"
             font-size="14"
             font-weight="bold"

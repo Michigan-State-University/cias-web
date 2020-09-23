@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import xor from 'lodash/xor';
+import { withRouter } from 'react-router-dom';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
 import Loader from 'components/Loader';
@@ -68,6 +69,7 @@ export function UserList({
   fetchUsersRequest,
   changeActivateStatus,
   intl: { formatMessage },
+  history,
 }) {
   useInjectReducer({ key: 'userList', reducer: UserListReducer });
   useInjectSaga({ key: 'userList', saga: userListSaga });
@@ -89,6 +91,8 @@ export function UserList({
     const toggledArray = xor(selectRoles, [role]);
     setSelectRoles(toggledArray);
   };
+
+  const handleClick = id => () => history.push(`/profile/${id}`);
 
   const handleOpenDeactivateModal = user => setDeactivateModal(user);
   const handleDeactivate = () => {
@@ -197,42 +201,43 @@ export function UserList({
               </StripedTR>
             </THead>
             <TBody>
-              {users.map(
-                ({ id, email, full_name: fullName, roles, deactivated }) => (
-                  <StripedTR
-                    hoverBg={colors.linkWater}
-                    color={colors.white}
-                    key={`row-th-${id}`}
-                    textColor={deactivated ? colors.grey : colors.black}
-                  >
-                    <TD pl={20}>{fullName}</TD>
-                    <TD pl={20}>{email}</TD>
-                    <TD pl={20}>
-                      <UserRoleTile role={roles[0]} disabled={deactivated} />
-                    </TD>
-                    <TD>
-                      <Row width="100%" justify="end" pr={20}>
-                        <StyledTextButton
-                          onClick={() =>
-                            handleOpenDeactivateModal({
-                              id,
-                              email,
-                              fullName,
-                              deactivated,
-                            })
-                          }
-                        >
-                          <Text color={colors.flamingo} fontWeight="bold">
-                            {deactivated
-                              ? formatMessage(messages.activateAccount)
-                              : formatMessage(messages.deactivateAccount)}
-                          </Text>
-                        </StyledTextButton>
-                      </Row>
-                    </TD>
-                  </StripedTR>
-                ),
-              )}
+              {users.map(({ id, email, fullName, roles, deactivated }) => (
+                <StripedTR
+                  cursor="pointer"
+                  hoverBg={colors.linkWater}
+                  color={colors.white}
+                  key={`row-th-${id}`}
+                  textColor={deactivated ? colors.grey : colors.black}
+                  onClick={handleClick(id)}
+                >
+                  <TD pl={20}>{fullName}</TD>
+                  <TD pl={20}>{email}</TD>
+                  <TD pl={20}>
+                    <UserRoleTile role={roles[0]} disabled={deactivated} />
+                  </TD>
+                  <TD>
+                    <Row width="100%" justify="end" pr={20}>
+                      <StyledTextButton
+                        onClick={e => {
+                          e.stopPropagation();
+                          handleOpenDeactivateModal({
+                            id,
+                            email,
+                            fullName,
+                            deactivated,
+                          });
+                        }}
+                      >
+                        <Text color={colors.flamingo} fontWeight="bold">
+                          {deactivated
+                            ? formatMessage(messages.activateAccount)
+                            : formatMessage(messages.deactivateAccount)}
+                        </Text>
+                      </StyledTextButton>
+                    </Row>
+                  </TD>
+                </StripedTR>
+              ))}
             </TBody>
           </TableLoading>
         )}
@@ -274,6 +279,7 @@ UserList.propTypes = {
   changeActivateStatus: PropTypes.func.isRequired,
   userList: PropTypes.object,
   intl: PropTypes.object,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -294,4 +300,5 @@ export default compose(
   withConnect,
   memo,
   injectIntl,
+  withRouter,
 )(UserList);

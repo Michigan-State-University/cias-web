@@ -1,7 +1,7 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { defaultMapper } from 'utils/mapResponseObjects';
+import { mapCurrentUser } from 'utils/mapResponseObjects';
 
 import { FETCH_USERS, PER_PAGE } from '../constants';
 import { fetchUsersFailure, fetchUsersSuccess } from '../actions';
@@ -24,7 +24,7 @@ function* fetchUsers({ payload: { roles, name, page } }) {
 
   try {
     const { data } = yield axios.get(requestUrl.concat(params));
-    const mappedData = data.data.map(defaultMapper);
+    const mappedData = data.data.map(mapCurrentUser);
     yield put(fetchUsersSuccess(mappedData));
   } catch (error) {
     yield put(fetchUsersFailure(error));

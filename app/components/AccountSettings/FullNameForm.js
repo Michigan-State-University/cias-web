@@ -1,22 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { injectIntl } from 'react-intl';
-import { compose } from 'redux';
 import { Formik } from 'formik';
-import { createStructuredSelector } from 'reselect';
 import * as Yup from 'yup';
 
 import FormikInput from 'components/FormikInput';
-import {
-  editUserRequest,
-  editUserSaga,
-  makeSelectUser,
-} from 'global/reducers/auth';
-import { useInjectSaga } from 'utils/injectSaga';
 
-import messages from '../messages';
-import { StyledFullNameRow } from '../styled';
+import messages from './messages';
+import { StyledFullNameRow } from './styled';
 
 const validationSchema = formatMessage =>
   Yup.object().shape({
@@ -30,8 +20,6 @@ const initialValues = user => ({
 });
 
 const FullNameForm = ({ formatMessage, user, editUser }) => {
-  useInjectSaga({ key: 'editUser', saga: editUserSaga });
-
   const onSubmit = ({ firstName, lastName }, { setSubmitting }) => {
     if (user.firstName !== firstName || user.lastName !== lastName)
       editUser({ firstName, lastName });
@@ -86,20 +74,4 @@ FullNameForm.propTypes = {
   editUser: PropTypes.func,
 };
 
-const mapStateToProps = createStructuredSelector({
-  user: makeSelectUser(),
-});
-
-const mapDispatchToProps = {
-  editUser: editUserRequest,
-};
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-export default compose(
-  withConnect,
-  injectIntl,
-)(FullNameForm);
+export default FullNameForm;

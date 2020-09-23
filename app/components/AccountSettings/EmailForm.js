@@ -1,10 +1,7 @@
 import React, { Fragment, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { compose } from 'redux';
 import { Formik } from 'formik';
-import { createStructuredSelector } from 'reselect';
 import * as Yup from 'yup';
 
 import Button from 'components/Button';
@@ -14,17 +11,8 @@ import H3 from 'components/H3';
 import Modal from 'components/Modal';
 import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
-import { useInjectSaga } from 'utils/injectSaga';
-import {
-  changeEmailRequest,
-  changeEmailSaga,
-  makeSelectUser,
-  makeSelectLoaders,
-  makeSelectErrors,
-  changeErrorStatus,
-} from 'global/reducers/auth';
 
-import messages from '../messages';
+import messages from './messages';
 
 const validationSchema = formatMessage =>
   Yup.object().shape({
@@ -51,8 +39,6 @@ const EmailForm = ({
   const [modalVisible, setModalVisible] = useState(false);
   const openModal = () => setModalVisible(true);
   const closeModal = () => setModalVisible(false);
-
-  useInjectSaga({ key: 'changeEmail', saga: changeEmailSaga });
 
   const onSubmit = ({ email, passwordConfirmation }, { setSubmitting }) => {
     changeEmail({ newEmail: email, oldPassword: passwordConfirmation });
@@ -157,20 +143,4 @@ EmailForm.propTypes = {
   changeErrorValue: PropTypes.func,
 };
 
-const mapStateToProps = createStructuredSelector({
-  user: makeSelectUser(),
-  loading: makeSelectLoaders('changeEmailLoading'),
-  error: makeSelectErrors('changeEmailError'),
-});
-
-const mapDispatchToProps = {
-  changeEmail: changeEmailRequest,
-  changeErrorValue: changeErrorStatus,
-};
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-export default compose(withConnect)(EmailForm);
+export default EmailForm;

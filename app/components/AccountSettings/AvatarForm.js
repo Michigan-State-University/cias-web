@@ -1,37 +1,24 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import { compose } from 'redux';
-import { createStructuredSelector } from 'reselect';
+import { FormattedMessage } from 'react-intl';
 
 import ConfirmationBox from 'components/ConfirmationBox';
 import Row from 'components/Row';
-import {
-  makeSelectUser,
-  addAvatarRequest,
-  addAvatarSaga,
-  deleteAvatarRequest,
-  deleteAvatarSaga,
-} from 'global/reducers/auth';
 import { themeColors, colors } from 'theme';
-import { useInjectSaga } from 'utils/injectSaga';
 
-import messages from '../messages';
+import messages from './messages';
 import {
   StyledUserAvatar,
   StyledButtonsRow,
   StyledDeleteButton,
   StyledUploadFileButton,
-} from '../styled';
+} from './styled';
 
 const AvatarForm = ({
   user: { avatar, firstName, lastName },
   addAvatar,
   deleteAvatar,
 }) => {
-  useInjectSaga({ key: 'addAvatar', saga: addAvatarSaga });
-  useInjectSaga({ key: 'deleteAvatar', saga: deleteAvatarSaga });
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const openConfirmation = () => setConfirmationOpen(true);
   const closeConfirmation = () => setConfirmationOpen(false);
@@ -104,21 +91,4 @@ AvatarForm.propTypes = {
   deleteAvatar: PropTypes.func,
 };
 
-const mapStateToProps = createStructuredSelector({
-  user: makeSelectUser(),
-});
-
-const mapDispatchToProps = {
-  addAvatar: addAvatarRequest,
-  deleteAvatar: deleteAvatarRequest,
-};
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
-
-export default compose(
-  withConnect,
-  injectIntl,
-)(AvatarForm);
+export default AvatarForm;
