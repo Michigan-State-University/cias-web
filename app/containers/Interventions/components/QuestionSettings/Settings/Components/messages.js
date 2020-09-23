@@ -38,7 +38,7 @@ export default defineMessages({
   },
   animation: {
     id: `${scope}.animation`,
-    defaultMessage: 'Animation',
+    defaultMessage: 'Display Character',
   },
   voice: {
     id: `${scope}.voice`,
@@ -155,6 +155,6 @@ export default defineMessages({
   },
   addVariable: {
     id: `${scope}.addVariable`,
-    defaultMessage: '+ From list',
+    defaultMessage: 'Add variable',
   },
 });

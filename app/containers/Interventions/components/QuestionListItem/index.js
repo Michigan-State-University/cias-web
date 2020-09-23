@@ -138,7 +138,7 @@ const QuestionListItem = ({
             <Row mt={5}>
               <Badge color={colors.jungleGreen} bgWithOpacity>
                 {(body.variable.name && body.variable.name.trim()) ||
-                  formatMessage(globalMessages.variables.emptyBadge)}
+                  formatMessage(globalMessages.variables.emptyVariable)}
               </Badge>
             </Row>
           )}

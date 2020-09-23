@@ -151,4 +151,12 @@ export default defineMessages({
     defaultMessage:
       'In order to change your e-mail you have to confirm it by providing your password.',
   },
+  activate: {
+    id: `${scope}.activate`,
+    defaultMessage: 'Activate account',
+  },
+  deactivate: {
+    id: `${scope}.deactivate`,
+    defaultMessage: 'Deactivate account',
+  },
 });

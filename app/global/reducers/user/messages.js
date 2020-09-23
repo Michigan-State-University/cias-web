@@ -11,4 +11,12 @@ export default defineMessages({
     id: `${scope}.addAvatarError`,
     defaultMessage: 'Cannot change user avatar.',
   },
+  changeStatusSuccess: {
+    id: `${scope}.changeStatusSuccess`,
+    defaultMessage: 'User status has changed',
+  },
+  changeStatusFailure: {
+    id: `${scope}.changeStatusFailure`,
+    defaultMessage: 'Cannot change user status',
+  },
 });

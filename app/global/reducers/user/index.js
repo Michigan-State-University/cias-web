@@ -6,6 +6,7 @@ export {
   editOtherUserRequest,
   addOtherUserAvatarRequest,
   deleteOtherUserAvatarRequest,
+  changeActivateStatusRequest,
 } from './actions';
 export { initialState } from './reducer';
 

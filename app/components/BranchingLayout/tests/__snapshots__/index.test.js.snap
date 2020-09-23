@@ -126,7 +126,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
           color="#C866EA"
           font-weight="bold"
         >
-          + From list
+          Add variable
         </p>
       </div>
     </div>

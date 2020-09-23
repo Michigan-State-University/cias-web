@@ -5,7 +5,7 @@ export const scope = 'app.containers.Answer.layouts';
 export default defineMessages({
   textPlaceholder: {
     id: `${scope}.textPlaceholder`,
-    defaultMessage: 'Answer the screen...',
+    defaultMessage: 'Enter your response here',
   },
   numberPlaceholder: {
     id: `${scope}.numberPlaceholder`,

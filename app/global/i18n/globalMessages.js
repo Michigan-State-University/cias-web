@@ -27,9 +27,13 @@ export default defineMessages({
       id: `${scope}.value`,
       defaultMessage: 'Value:',
     },
-    emptyBadge: {
+    emptyValue: {
       id: `${scope}.emptyBadge`,
       defaultMessage: 'No assigned value',
+    },
+    emptyVariable: {
+      id: `${scope}.emptyBadge`,
+      defaultMessage: 'No assigned variable',
     },
   },
   blockTypes: {

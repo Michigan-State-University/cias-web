@@ -13,7 +13,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
         class="H1-tncdg6-0 kWGkBM"
       >
         <span>
-          My e-Interventions
+          My Dashboard
         </span>
       </h1>
     </div>
