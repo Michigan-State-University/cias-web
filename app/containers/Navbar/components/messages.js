@@ -14,7 +14,7 @@ export default defineMessages({
   },
   content: {
     id: `${scope}.content`,
-    defaultMessage: 'Screens Content',
+    defaultMessage: 'Screen Creation',
   },
   settings: {
     id: `${scope}.settings`,

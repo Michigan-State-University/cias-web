@@ -27,6 +27,7 @@ import {
 
 import { themeColors } from 'theme';
 import check from 'assets/svg/check.svg';
+import Box from 'components/Box';
 import messages from './messages';
 import {
   StyledLink,
@@ -67,24 +68,6 @@ const InterventionNavbar = ({
     <Row align="center" justify="between" width="100%" mr={35}>
       <Row align="center">
         <CloseIcon to={`/interventions/${problemId}`} />
-        <SaveInfoContainer>
-          {interventionEditing && (
-            <SavingContainer>
-              <Spinner color={themeColors.secondary} />
-              <FormattedMessage {...messages.saving} />
-            </SavingContainer>
-          )}
-          {!interventionEditing && (
-            <SaveInfoContainer
-              style={{ display: 'flex', alignItems: 'center' }}
-            >
-              <CheckBackground>
-                <Img src={check} />
-              </CheckBackground>
-              <FormattedMessage {...messages.saved} />
-            </SaveInfoContainer>
-          )}
-        </SaveInfoContainer>
         <StyledInput
           px={12}
           py={6}
@@ -127,12 +110,32 @@ const InterventionNavbar = ({
           }
         />
       </Tabs>
-      <PreviewButton
-        to={`/interventions/${problemId}/sessions/${interventionId}/preview/${selectedQuestion}`}
-        previewDisabled={previewDisabled}
-        text={formatMessage(messages.previewCurrent)}
-        target="_blank"
-      />
+      <Box display="flex" align="center">
+        <SaveInfoContainer>
+          {interventionEditing && (
+            <SavingContainer>
+              <Spinner color={themeColors.secondary} />
+              <FormattedMessage {...messages.saving} />
+            </SavingContainer>
+          )}
+          {!interventionEditing && (
+            <SaveInfoContainer
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
+              <CheckBackground>
+                <Img src={check} />
+              </CheckBackground>
+              <FormattedMessage {...messages.saved} />
+            </SaveInfoContainer>
+          )}
+        </SaveInfoContainer>
+        <PreviewButton
+          to={`/interventions/${problemId}/sessions/${interventionId}/preview/${selectedQuestion}`}
+          previewDisabled={previewDisabled}
+          text={formatMessage(messages.previewCurrent)}
+          target="_blank"
+        />
+      </Box>
     </Row>
   );
 };
