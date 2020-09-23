@@ -82,7 +82,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
       <p
         class="Text-sc-2lza2m-0 fDTusK"
       >
-        Animated Character
+        Display Character
       </p>
       <label
         class="styled__SwitchWrapper-sc-1eitgbj-0 dEOiVq"

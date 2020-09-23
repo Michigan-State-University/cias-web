@@ -25,7 +25,7 @@ export default defineMessages({
   },
   animation: {
     id: `${scope}.animation`,
-    defaultMessage: 'Animated Character',
+    defaultMessage: 'Display Character',
   },
   getLink: {
     id: `${scope}.getLink`,

@@ -25,10 +25,6 @@ export default defineMessages({
     id: `${scope}.startIntervention`,
     defaultMessage: 'Start intervention',
   },
-  answerPlaceholder: {
-    id: `${scope}.placeholder`,
-    defaultMessage: 'Answer the screen...',
-  },
   completeIntervention: {
     id: `${scope}.completeIntervention`,
     defaultMessage: 'Thanks for completing intervention',

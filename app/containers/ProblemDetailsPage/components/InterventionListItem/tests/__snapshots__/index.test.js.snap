@@ -697,7 +697,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
               color="#C866EA"
               fontWeight="bold"
             >
-              + From list
+              Add variable
             </p>
           </div>
         </div>
