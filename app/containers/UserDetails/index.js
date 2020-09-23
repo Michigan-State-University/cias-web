@@ -26,6 +26,7 @@ import ErrorAlert from 'components/ErrorAlert';
 import AccountSettings from '../AccountSettings';
 import WrappedAvatarFormAdmin from './containers/WrappedAvatarFormAdmin';
 import WrappedFullNameFormAdmin from './containers/WrappedFullNameFormAdmin';
+import WrappedDeactivationAdmin from './containers/WrappedDeactivationAdmin';
 
 export const UserDetails = ({
   userState: { user, userError, userLoading },
@@ -55,6 +56,7 @@ export const UserDetails = ({
       PasswordComponent={null}
       AvatarComponent={WrappedAvatarFormAdmin}
       FullNameComponent={WrappedFullNameFormAdmin}
+      DeactivationComponent={WrappedDeactivationAdmin}
       userId={user.id}
     />
   );
