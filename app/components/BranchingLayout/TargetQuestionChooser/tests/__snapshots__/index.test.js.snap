@@ -53,7 +53,7 @@ Object {
   height: auto;
   display: block;
   border-radius: 5px;
-  max-width: 280px;
+  max-width: 260px;
 }
 
 .c7 {
@@ -237,7 +237,7 @@ Object {
                           color="#9AA1B6"
                           font-weight=""
                         >
-                          Test title 1
+                          Test subtitle 1
                         </div>
                       </div>
                     </div>
@@ -324,7 +324,7 @@ Object {
                     src="IMAGE_MOCK"
                   />
                   <div
-                    class="Box-sc-14m3exe-0 jtCzjB"
+                    class="Box-sc-14m3exe-0 iQyhOH"
                   >
                     <div
                       class="Row-x1o3ru-0 iJOjSZ"
@@ -334,7 +334,7 @@ Object {
                         color="#9AA1B6"
                         font-weight=""
                       >
-                        Test title 1
+                        Test subtitle 1
                       </div>
                     </div>
                   </div>

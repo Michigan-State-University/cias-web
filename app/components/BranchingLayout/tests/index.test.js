@@ -19,9 +19,11 @@ import BranchingLayout from '../index';
 
 describe('<BranchingLayout />', () => {
   let store;
+  let props;
 
   beforeAll(() => {
     store = configureStore({}, browserHistory);
+    props = { formula: { patterns: [] } };
   });
 
   it('Expect to not log errors in console', () => {
@@ -29,7 +31,7 @@ describe('<BranchingLayout />', () => {
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <BranchingLayout />
+          <BranchingLayout {...props} />
         </IntlProvider>
       </Provider>,
     );
@@ -40,7 +42,7 @@ describe('<BranchingLayout />', () => {
     const { container } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <Provider store={store}>
-          <BranchingLayout />
+          <BranchingLayout {...props} />
         </Provider>
       </IntlProvider>,
     );

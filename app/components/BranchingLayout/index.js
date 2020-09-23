@@ -17,7 +17,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { colors, themeColors } from 'theme';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import EllipsisText from 'components/Text/EllipsisText';
 import InequalityChooser from 'components/InequalityChooser';
 import VariableChooser from './VariableChooser';
@@ -40,6 +40,9 @@ function BranchingLayout({
 }) {
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
   const [variableChooserOpen, setVariableChooserOpen] = useState(false);
+
+  const shouldDisplayElseStatement = formula.patterns.length !== 0;
+
   return (
     <>
       <Column>
@@ -139,7 +142,7 @@ function BranchingLayout({
                       isVisible={isChooserOpened}
                       pattern={pattern}
                       onClick={value => {
-                        setTargetChooserOpen(false);
+                        setTargetChooserOpen(-1);
                         onUpdateCase(index, { ...pattern, target: value }, id);
                       }}
                     />
@@ -153,6 +156,23 @@ function BranchingLayout({
                 </Row>
               );
             })}
+            {shouldDisplayElseStatement && (
+              // FormattedMessage needed for rich text to work
+              <Text>
+                <FormattedMessage
+                  {...messages.else}
+                  values={{
+                    message: (
+                      <b>
+                        {problemBranching
+                          ? formatMessage(messages.nextSession)
+                          : formatMessage(messages.nextScreen)}
+                      </b>
+                    ),
+                  }}
+                />
+              </Text>
+            )}
           </>
         )}
         <DashedBox mt={20} onClick={() => onAddCase(id)}>

@@ -16,6 +16,7 @@ import TargetQuestionChooser from '../index';
 const mockSingleQuestion = (suffix = 1, hasVariable = true) => ({
   id: `test-id-${suffix}`,
   title: `Test title ${suffix}`,
+  subtitle: `Test subtitle ${suffix}`,
   type: 'Question::Single',
   body: {
     variable: { name: hasVariable ? `var_single_${suffix}` : '' },

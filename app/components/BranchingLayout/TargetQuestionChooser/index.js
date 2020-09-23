@@ -117,9 +117,9 @@ const TargetQuestionChooser = ({
                 src={target.id === question.id ? webpageSelected : webpage}
                 mr={10}
               />
-              <Box maxWidth={280}>
+              <Box maxWidth={260}>
                 <EllipsisText
-                  text={htmlToPlainText(question.title)}
+                  text={htmlToPlainText(question.subtitle)}
                   color={!canSelectQuestion(question.id) ? colors.grey : ''}
                   fontWeight={target.id === question.id ? 'bold' : ''}
                 />
