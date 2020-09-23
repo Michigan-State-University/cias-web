@@ -18,6 +18,9 @@ import {
   DELETE_OTHER_USER_AVATAR_ERROR,
   DELETE_OTHER_USER_AVATAR_REQUEST,
   DELETE_OTHER_USER_AVATAR_SUCCESS,
+  CHANGE_ACTIVATE_STATUS_REQUEST,
+  CHANGE_ACTIVATE_STATUS_ERROR,
+  CHANGE_ACTIVATE_STATUS_SUCCESS,
 } from './constants';
 
 export const initialState = {
@@ -78,6 +81,17 @@ const userReducer = (state = initialState, { type, payload }) =>
         draft.cache.user = null;
         break;
       case DELETE_OTHER_USER_AVATAR_ERROR:
+        draft.user = draft.cache.user;
+        draft.cache.user = null;
+        break;
+      case CHANGE_ACTIVATE_STATUS_REQUEST:
+        draft.user.deactivated = payload.deactivated;
+        draft.cache.user = state.user;
+        break;
+      case CHANGE_ACTIVATE_STATUS_SUCCESS:
+        draft.cache.user = null;
+        break;
+      case CHANGE_ACTIVATE_STATUS_ERROR:
         draft.user = draft.cache.user;
         draft.cache.user = null;
         break;

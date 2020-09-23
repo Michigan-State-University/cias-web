@@ -18,6 +18,9 @@ import {
   DELETE_OTHER_USER_AVATAR_REQUEST,
   DELETE_OTHER_USER_AVATAR_SUCCESS,
   DELETE_OTHER_USER_AVATAR_ERROR,
+  CHANGE_ACTIVATE_STATUS_REQUEST,
+  CHANGE_ACTIVATE_STATUS_SUCCESS,
+  CHANGE_ACTIVATE_STATUS_ERROR,
 } from './constants';
 
 export const fetchUserRequest = id => actionBuilder(FETCH_USER_REQUEST, { id });
@@ -45,3 +48,10 @@ export const deleteOtherUserAvatarSuccess = user =>
   actionBuilder(DELETE_OTHER_USER_AVATAR_SUCCESS, { user });
 export const deleteOtherUserAvatarError = error =>
   actionBuilder(DELETE_OTHER_USER_AVATAR_ERROR, error);
+
+export const changeActivateStatusRequest = (userId, deactivated) =>
+  actionBuilder(CHANGE_ACTIVATE_STATUS_REQUEST, { userId, deactivated });
+export const changeActivateStatusSuccess = user =>
+  actionBuilder(CHANGE_ACTIVATE_STATUS_SUCCESS, { user });
+export const changeActivateStatusError = error =>
+  actionBuilder(CHANGE_ACTIVATE_STATUS_ERROR, error);
