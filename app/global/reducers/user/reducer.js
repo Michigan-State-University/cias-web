@@ -6,7 +6,7 @@
 import produce from 'immer';
 
 import {
-  FETCH_USER,
+  FETCH_USER_REQUEST,
   FETCH_USER_FAILURE,
   FETCH_USER_SUCCESS,
   EDIT_OTHER_USER_ERROR,
@@ -33,7 +33,7 @@ export const initialState = {
 const userReducer = (state = initialState, { type, payload }) =>
   produce(state, draft => {
     switch (type) {
-      case FETCH_USER:
+      case FETCH_USER_REQUEST:
         draft.userLoading = true;
         draft.userError = null;
         draft.user = null;
