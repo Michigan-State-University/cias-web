@@ -14,7 +14,7 @@ export default defineMessages({
   },
   myProblems: {
     id: `${scope}.myProblems`,
-    defaultMessage: 'My e-Interventions',
+    defaultMessage: 'My Dashboard',
   },
   noInterventions: {
     id: `${scope}.noInterventions`,

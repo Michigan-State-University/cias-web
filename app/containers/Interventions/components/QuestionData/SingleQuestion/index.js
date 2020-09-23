@@ -138,7 +138,7 @@ const SingleQuestion = ({
                   keyboard="tel"
                   placeholder={
                     !isNarratorTab
-                      ? formatMessage(globalMessages.variables.emptyBadge, {
+                      ? formatMessage(globalMessages.variables.emptyValue, {
                           index: index + 1,
                         })
                       : ''

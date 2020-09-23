@@ -13,7 +13,7 @@ export default defineMessages({
   },
   addVariable: {
     id: `${scope}.addVariable`,
-    defaultMessage: '+ From list',
+    defaultMessage: 'Add variable',
   },
   spectrumHeader: {
     id: `${scope}.spectrumHeader`,

@@ -39,6 +39,7 @@ const AccountSettings = props => {
     FullNameComponent,
     EmailComponent,
     TimezoneComponent,
+    DeactivationComponent,
     userId,
   } = props;
   const [passwordReset, setPasswordReset] = useState(false);
@@ -73,7 +74,18 @@ const AccountSettings = props => {
           borderRadius={5}
           shadow={boxShadows.selago}
         >
-          <Row>{AvatarComponent && <AvatarComponent userId={userId} />}</Row>
+          <Row display="flex" justify="between" align="center">
+            {AvatarComponent && (
+              <div>
+                <AvatarComponent userId={userId} />
+              </div>
+            )}
+            {DeactivationComponent && (
+              <div>
+                <DeactivationComponent userId={userId} />
+              </div>
+            )}
+          </Row>
           <Row mt={50}>
             {FullNameComponent && (
               <FullNameComponent
@@ -124,6 +136,7 @@ AccountSettings.propTypes = {
   FullNameComponent: PropTypes.object,
   EmailComponent: PropTypes.object,
   TimezoneComponent: PropTypes.object,
+  DeactivationComponent: PropTypes.object,
 };
 
 AccountSettings.defaultProps = {
@@ -132,6 +145,7 @@ AccountSettings.defaultProps = {
   FullNameComponent: WrappedFullNameForm,
   EmailComponent: WrappedEmailForm,
   TimezoneComponent: WrappedTimezoneForm,
+  DeactivationComponent: null,
 };
 
 export default injectIntl(AccountSettings);

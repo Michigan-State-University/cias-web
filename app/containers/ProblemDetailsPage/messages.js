@@ -12,10 +12,6 @@ export default defineMessages({
     id: `${scope}.createIntervention`,
     defaultMessage: 'Create intervention',
   },
-  myIntervention: {
-    id: `${scope}.myIntervention`,
-    defaultMessage: 'My e-Interventions',
-  },
   noInterventions: {
     id: `${scope}.noInterventions`,
     defaultMessage: `You don't have any interventions`,
@@ -42,7 +38,7 @@ export default defineMessages({
   },
   adjust: {
     id: `${scope}.adjust`,
-    defaultMessage: 'Adjust',
+    defaultMessage: 'Edit',
   },
   copy: {
     id: `${scope}.copy`,
