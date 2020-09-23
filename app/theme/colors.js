@@ -26,6 +26,9 @@ const colors = {
   coral: '#FF7F50',
   jungleGreenLighter: '#23B7A0',
   buddhaGold: '#C2B200',
+  red: '#ff0000',
+  navyBlue: '#000080',
+  olive: '#808000',
 };
 
 const themeColors = {
