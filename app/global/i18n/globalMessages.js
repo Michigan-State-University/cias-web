@@ -73,43 +73,43 @@ export default defineMessages({
   questionTypes: {
     'Question::Single': {
       id: `${scope}.Question::Single`,
-      defaultMessage: 'Single answer screen',
+      defaultMessage: 'Single answer',
     },
     'Question::Multiple': {
       id: `${scope}.Question::Multiple`,
-      defaultMessage: 'Multi answer screen',
+      defaultMessage: 'Multi answer',
     },
     'Question::TextBox': {
       id: `${scope}.Question::TextBox`,
-      defaultMessage: 'Textbox screen',
+      defaultMessage: 'Free Response',
     },
     'Question::Number': {
       id: `${scope}.Question::Number`,
-      defaultMessage: 'Number screen',
+      defaultMessage: 'Number',
     },
     'Question::Grid': {
       id: `${scope}.Question::Grid`,
-      defaultMessage: 'Grid screen',
+      defaultMessage: 'Grid',
     },
     'Question::AnalogueScale': {
       id: `${scope}.Question::AnalogueScale`,
-      defaultMessage: 'Visual Analogue Scale screen',
+      defaultMessage: 'Slider',
     },
     'Question::Information': {
       id: `${scope}.Question::Information`,
-      defaultMessage: 'Information screen',
+      defaultMessage: 'Information Only',
     },
     'Question::Url': {
       id: `${scope}.Question::Url`,
-      defaultMessage: 'Url screen',
+      defaultMessage: 'External Link',
     },
     'Question::FollowUpContact': {
       id: `${scope}.Question::FollowUpContact`,
-      defaultMessage: 'FollowUpContact screen',
+      defaultMessage: 'FollowUpContact',
     },
     'Question::Feedback': {
       id: `${scope}.Question::Feedback`,
-      defaultMessage: 'Feedback screen',
+      defaultMessage: 'Feedback',
     },
   },
   statuses: {

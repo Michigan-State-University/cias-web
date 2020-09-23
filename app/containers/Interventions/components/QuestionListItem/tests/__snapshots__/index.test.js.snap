@@ -203,7 +203,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
           class="c8 c9"
           font-weight="bold"
         >
-          Single answer screen
+          Single answer
         </p>
       </div>
     </div>

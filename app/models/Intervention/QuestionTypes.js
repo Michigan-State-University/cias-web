@@ -3,56 +3,56 @@ import QuestionType from './QuestionType';
 
 export const singleQuestion = new QuestionType(
   'Question::Single',
-  'Single answer question',
+  'Single answer',
   colors.azure,
 );
 
 export const multiQuestion = new QuestionType(
   'Question::Multiple',
-  'Multi answer question',
+  'Multi answer',
   colors.lavender,
 );
 
 export const textboxQuestion = new QuestionType(
   'Question::TextBox',
-  'Textbox question',
+  'Free Response',
   colors.tangerine,
 );
 
 export const numberQuestion = new QuestionType(
   'Question::Number',
-  'Number question',
+  'Number',
   colors.golden,
 );
 
 export const gridQuestion = new QuestionType(
   'Question::Grid',
-  'Grid question',
+  'Grid',
   colors.pink,
 );
 
 export const visualAnalogueScaleQuestion = new QuestionType(
   'Question::AnalogueScale',
-  'Visual Analogue Scale',
+  'Slider',
   colors.pink,
 );
 
 export const informationQuestion = new QuestionType(
   'Question::Information',
-  'Information',
-  colors.blueHaze,
+  'Information Only',
+  colors.navyBlue,
 );
 
 export const urlQuestion = new QuestionType(
   'Question::Url',
-  'Url',
+  'External Link',
   colors.jungleGreen,
 );
 
 export const feedbackQuestion = new QuestionType(
   'Question::Feedback',
   'Feedback',
-  colors.grey,
+  colors.olive,
 );
 
 export const QuestionTypes = [

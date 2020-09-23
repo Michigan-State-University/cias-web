@@ -395,7 +395,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
 
 .c17 {
   border-radius: 50%;
-  background-color: #CED3E4;
+  background-color: #000080;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -411,7 +411,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   width: 10px;
   height: 10px;
   margin-right: 18px;
-  background-color: rgba(206,211,228,1);
+  background-color: rgba(0,0,128,1);
   opacity: 1;
   color: #2F3850;
 }
@@ -441,7 +441,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
 
 .c19 {
   border-radius: 50%;
-  background-color: #9AA1B6;
+  background-color: #808000;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -457,7 +457,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   width: 10px;
   height: 10px;
   margin-right: 18px;
-  background-color: rgba(154,161,182,1);
+  background-color: rgba(128,128,0,1);
   opacity: 1;
   color: #2F3850;
 }
@@ -545,7 +545,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                     class="c12"
                     font-weight="medium"
                   >
-                    Single answer screen
+                    Single answer
                   </p>
                 </div>
               </div>
@@ -563,7 +563,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                     class="c12"
                     font-weight="medium"
                   >
-                    Multi answer screen
+                    Multi answer
                   </p>
                 </div>
               </div>
@@ -581,7 +581,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                     class="c12"
                     font-weight="medium"
                   >
-                    Textbox screen
+                    Free Response
                   </p>
                 </div>
               </div>
@@ -599,7 +599,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                     class="c12"
                     font-weight="medium"
                   >
-                    Number screen
+                    Number
                   </p>
                 </div>
               </div>
@@ -617,7 +617,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                     class="c12"
                     font-weight="medium"
                   >
-                    Grid screen
+                    Grid
                   </p>
                 </div>
               </div>
@@ -635,7 +635,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                     class="c12"
                     font-weight="medium"
                   >
-                    Visual Analogue Scale screen
+                    Slider
                   </p>
                 </div>
               </div>
@@ -653,7 +653,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                     class="c12"
                     font-weight="medium"
                   >
-                    Information screen
+                    Information Only
                   </p>
                 </div>
               </div>
@@ -671,7 +671,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                     class="c12"
                     font-weight="medium"
                   >
-                    Url screen
+                    External Link
                   </p>
                 </div>
               </div>
@@ -689,7 +689,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                     class="c12"
                     font-weight="medium"
                   >
-                    Feedback screen
+                    Feedback
                   </p>
                 </div>
               </div>
