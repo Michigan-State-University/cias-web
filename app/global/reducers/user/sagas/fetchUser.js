@@ -2,7 +2,7 @@ import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { mapCurrentUser } from 'utils/mapResponseObjects';
-import { FETCH_USER } from '../constants';
+import { FETCH_USER_REQUEST } from '../constants';
 
 import { fetchUserFailure, fetchUserSuccess } from '../actions';
 
@@ -18,5 +18,5 @@ function* fetchUser({ payload: { id } }) {
 }
 
 export default function* userSaga() {
-  yield takeLatest(FETCH_USER, fetchUser);
+  yield takeLatest(FETCH_USER_REQUEST, fetchUser);
 }

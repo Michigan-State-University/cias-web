@@ -4,7 +4,7 @@
  *
  */
 
-export const FETCH_USER = 'app/UserList/FETCH_USER';
+export const FETCH_USER_REQUEST = 'app/UserList/FETCH_USER_REQUEST';
 export const FETCH_USER_SUCCESS = 'app/UserList/FETCH_USER_SUCCESS';
 export const FETCH_USER_FAILURE = 'app/UserList/FETCH_USER_FAILURE';
 

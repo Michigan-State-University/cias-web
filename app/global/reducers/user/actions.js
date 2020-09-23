@@ -6,7 +6,7 @@
 
 import { actionBuilder } from 'utils/actionBuilder';
 import {
-  FETCH_USER,
+  FETCH_USER_REQUEST,
   FETCH_USER_FAILURE,
   FETCH_USER_SUCCESS,
   EDIT_OTHER_USER_REQUEST,
@@ -20,7 +20,7 @@ import {
   DELETE_OTHER_USER_AVATAR_ERROR,
 } from './constants';
 
-export const fetchUserRequest = id => actionBuilder(FETCH_USER, { id });
+export const fetchUserRequest = id => actionBuilder(FETCH_USER_REQUEST, { id });
 export const fetchUserSuccess = user => actionBuilder(FETCH_USER_SUCCESS, user);
 export const fetchUserFailure = error =>
   actionBuilder(FETCH_USER_FAILURE, error);
