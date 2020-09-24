@@ -32,7 +32,8 @@ export const QuillStyled = styled(ReactQuill)`
     width: max-content;
   }
   .ql-container {
-    font-size: initial;
+    font-size: ${({ defaultFontSize }) =>
+      defaultFontSize ? `${defaultFontSize}px` : 'initial'};
     font-family: ${fontFamily};
   }
 `;

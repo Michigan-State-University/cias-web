@@ -1,3 +1,6 @@
-import * as Yup from 'yup';
+import { string } from 'yup';
 
-export const emailValidator = Yup.string().email();
+export const emailValidator = target =>
+  string()
+    .email()
+    .isValidSync(target);

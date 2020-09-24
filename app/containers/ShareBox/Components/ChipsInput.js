@@ -53,7 +53,7 @@ const ChipsInput = ({
     ) {
       const newEmail = inputEmailValue.trim().replace(',', '');
       const isAlreadyExist = find(value, email => email === newEmail);
-      const isValid = emailValidator.isValidSync(newEmail);
+      const isValid = emailValidator(newEmail);
       if (isAlreadyExist) {
         showError(formatMessage(messages.duplicatedEmail), {
           id: DUPLICATED_EMAIL_ERROR,
