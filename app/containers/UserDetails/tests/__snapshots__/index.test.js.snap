@@ -94,8 +94,9 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
         </div>
         <div>
           <button
-            class="StyledButton-t20ntd-0 gseqwi"
+            class="StyledButton-t20ntd-0 iPLWUE"
             color="warning"
+            width="180"
           >
             <span>
               Deactivate account
