@@ -9,9 +9,8 @@ describe('urlValidator regex', () => {
     const targets = [
       'https://cias-web.herokuapp.com/',
       'http://cias-web.herokuapp.com/',
-      'google.com',
-      'http://localhost:4200',
-      'localhost:4200',
+      'www.google.com',
+      '172.16.254.1',
     ];
 
     targets.forEach(target => expect(urlValidator(target)).toBeTruthy());

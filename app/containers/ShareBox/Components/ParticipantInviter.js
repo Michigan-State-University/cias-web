@@ -30,7 +30,7 @@ const ParticipantInviter = ({
       filter(
         map(data, columns => {
           const email = head(columns.data);
-          if (email && emailValidator.isValidSync(email)) return email;
+          if (email && emailValidator(email)) return email;
           return null;
         }),
         val => val !== null,
