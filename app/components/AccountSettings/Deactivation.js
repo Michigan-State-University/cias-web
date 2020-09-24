@@ -7,6 +7,7 @@ import messages from './messages';
 
 const Deactivation = ({ user: { deactivated }, changeStatus }) => (
   <Button
+    width={180}
     color={deactivated ? 'primary' : 'warning'}
     onClick={() => changeStatus(!deactivated)}
   >
