@@ -203,6 +203,7 @@ export function UserList({
             <TBody>
               {users.map(({ id, email, fullName, roles, deactivated }) => (
                 <StripedTR
+                  lastItemHoverable
                   cursor="pointer"
                   hoverBg={colors.linkWater}
                   color={colors.white}
