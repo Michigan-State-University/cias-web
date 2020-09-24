@@ -26,7 +26,7 @@ const StripedTR = styled(TR)`
     }
   }
   td:last-child {
-    opacity: 0
+    opacity: ${props => (props.lastItemHoverable ? '0' : '100%')};
   }
 
   &:hover {
@@ -41,6 +41,7 @@ const StripedTR = styled(TR)`
 StripedTR.propTypes = {
   stripesPlacement: PropTypes.string,
   textColor: PropTypes.string,
+  lastItemHoverable: PropTypes.bool,
 };
 
 StripedTR.defaultProps = {
