@@ -132,19 +132,18 @@ const QuestionListItem = ({
             </ClampedTitle>
           </Row>
           <Row>
-            <Comment fontWeight="bold">
-              <Box display="flex" align="center">
-                <StyledCircle
-                  background={
-                    QuestionTypes.find(({ id: typeId }) => typeId === type)
-                      .color
-                  }
-                  size="10px"
-                  mr="5px"
-                />
+            <Box display="flex" align="center">
+              <StyledCircle
+                background={
+                  QuestionTypes.find(({ id: typeId }) => typeId === type).color
+                }
+                size="10px"
+                mr="5px"
+              />
+              <Comment fontWeight="bold">
                 {formatMessage(globalMessages.questionTypes[type])}
-              </Box>
-            </Comment>
+              </Comment>
+            </Box>
           </Row>
           {body && hasObjectProperty(body, 'variable') && (
             <Row mt={5}>
