@@ -9,7 +9,7 @@ import { colors, borders, themeColors } from 'theme';
 
 import messages from './messages';
 
-const DefaultButtonComponent = ({ onClick }) => (
+const DefaultButtonComponent = React.forwardRef(({ onClick }, ref) => (
   <HoverableBox
     px={21}
     py={14}
@@ -21,6 +21,7 @@ const DefaultButtonComponent = ({ onClick }) => (
     borderRadius={5}
     height={80}
     width="100%"
+    ref={ref}
   >
     <Row align="center">
       <Text fontWeight="bold" color={themeColors.secondary}>
@@ -28,7 +29,7 @@ const DefaultButtonComponent = ({ onClick }) => (
       </Text>
     </Row>
   </HoverableBox>
-);
+));
 
 DefaultButtonComponent.propTypes = {
   onClick: PropTypes.func,

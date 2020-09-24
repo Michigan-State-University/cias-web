@@ -19,9 +19,9 @@ const EmptyInterventionPage = ({ onCreateQuestion, loading }) => (
       <Row width="100%" justify="center" mt={50}>
         <QuestionTypeChooser
           onClick={onCreateQuestion}
-          ButtonComponent={props => (
-            <ButtonComponent {...props} loading={loading} />
-          )}
+          ButtonComponent={React.forwardRef((props, ref) => (
+            <ButtonComponent {...props} loading={loading} ref={ref} />
+          ))}
         />
       </Row>
     </Column>

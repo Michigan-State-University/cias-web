@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 /**
  * @param {object} targetRef ref from element for which we want to detect outside clicks
- * @param {func} onClick callback function to execute
+ * @param {function(): void} onClick callback function to execute
  * @param {boolean} active false when we want to disable the outside click handler
  */
 const useOutsideClick = (targetRef, onClick, active) => {

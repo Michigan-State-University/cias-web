@@ -11,7 +11,7 @@ import { themeColors, colors } from 'theme';
 
 import messages from './messages';
 
-const ButtonComponent = ({ onClick, loading }) => (
+const ButtonComponent = React.forwardRef(({ onClick, loading }, ref) => (
   <Row
     width={250}
     bg={themeColors.secondary}
@@ -21,6 +21,7 @@ const ButtonComponent = ({ onClick, loading }) => (
     clickable
     onClick={onClick}
     height={64}
+    ref={ref}
   >
     {loading ? (
       <Loader type="inline" color={colors.white} size={40} />
@@ -33,7 +34,7 @@ const ButtonComponent = ({ onClick, loading }) => (
       </Fragment>
     )}
   </Row>
-);
+));
 
 ButtonComponent.propTypes = {
   onClick: PropTypes.func,

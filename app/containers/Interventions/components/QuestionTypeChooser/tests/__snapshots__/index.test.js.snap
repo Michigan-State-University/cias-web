@@ -171,11 +171,16 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   display: block;
   border-radius: 5px;
   width: 100%;
+  max-height: 350px;
   position: absolute;
+  visibility: hidden;
   margin-top: 15px;
+  background-color: rgba(255,255,255,1);
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
+  top: initial;
+  bottom: initial;
 }
 
 .c6 {
@@ -193,6 +198,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   display: block;
   border-radius: 5px;
   width: 100%;
+  overflow: scroll;
   padding: 8px;
 }
 
@@ -212,15 +218,19 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   background-color: #E9F1FB;
 }
 
-.c9 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
+.c19 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+}
+
+.c19:hover {
+  background-color: #E9F1FB;
 }
 
 .c0 {
@@ -439,7 +449,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c19 {
+.c20 {
   border-radius: 50%;
   background-color: #808000;
   display: -webkit-box;
@@ -462,20 +472,16 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
+.c9:after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: linear-gradient( to bottom,rgba(255,255,255,0),rgba(255,255,255,1) 90% );
+  width: 100%;
+  height: 2.5em;
 }
 
 <div>
@@ -508,6 +514,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
       </div>
       <div
         class="c5"
+        visibility="hidden"
         width="100%"
       >
         <div
@@ -522,177 +529,171 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
           </p>
         </div>
         <div
-          class="c0"
+          class="c8 c9"
+          height="0"
+          overflow="scroll"
+          width="100%"
         >
           <div
-            class="c8"
-            width="100%"
+            class="HoverableBox-sc-1syy6g3-0 c10"
           >
             <div
-              class="c9"
+              class="c3"
             >
               <div
-                class="HoverableBox-sc-1syy6g3-0 c10"
+                class="c11"
+                opacity="1"
+              />
+              <p
+                class="c12"
+                font-weight="medium"
               >
-                <div
-                  class="c3"
-                >
-                  <div
-                    class="c11"
-                    opacity="1"
-                  />
-                  <p
-                    class="c12"
-                    font-weight="medium"
-                  >
-                    Single answer
-                  </p>
-                </div>
-              </div>
+                Single answer
+              </p>
+            </div>
+          </div>
+          <div
+            class="HoverableBox-sc-1syy6g3-0 c10"
+          >
+            <div
+              class="c3"
+            >
               <div
-                class="HoverableBox-sc-1syy6g3-0 c10"
+                class="c13"
+                opacity="1"
+              />
+              <p
+                class="c12"
+                font-weight="medium"
               >
-                <div
-                  class="c3"
-                >
-                  <div
-                    class="c13"
-                    opacity="1"
-                  />
-                  <p
-                    class="c12"
-                    font-weight="medium"
-                  >
-                    Multi answer
-                  </p>
-                </div>
-              </div>
+                Multi answer
+              </p>
+            </div>
+          </div>
+          <div
+            class="HoverableBox-sc-1syy6g3-0 c10"
+          >
+            <div
+              class="c3"
+            >
               <div
-                class="HoverableBox-sc-1syy6g3-0 c10"
+                class="c14"
+                opacity="1"
+              />
+              <p
+                class="c12"
+                font-weight="medium"
               >
-                <div
-                  class="c3"
-                >
-                  <div
-                    class="c14"
-                    opacity="1"
-                  />
-                  <p
-                    class="c12"
-                    font-weight="medium"
-                  >
-                    Free Response
-                  </p>
-                </div>
-              </div>
+                Free Response
+              </p>
+            </div>
+          </div>
+          <div
+            class="HoverableBox-sc-1syy6g3-0 c10"
+          >
+            <div
+              class="c3"
+            >
               <div
-                class="HoverableBox-sc-1syy6g3-0 c10"
+                class="c15"
+                opacity="1"
+              />
+              <p
+                class="c12"
+                font-weight="medium"
               >
-                <div
-                  class="c3"
-                >
-                  <div
-                    class="c15"
-                    opacity="1"
-                  />
-                  <p
-                    class="c12"
-                    font-weight="medium"
-                  >
-                    Number
-                  </p>
-                </div>
-              </div>
+                Number
+              </p>
+            </div>
+          </div>
+          <div
+            class="HoverableBox-sc-1syy6g3-0 c10"
+          >
+            <div
+              class="c3"
+            >
               <div
-                class="HoverableBox-sc-1syy6g3-0 c10"
+                class="c16"
+                opacity="1"
+              />
+              <p
+                class="c12"
+                font-weight="medium"
               >
-                <div
-                  class="c3"
-                >
-                  <div
-                    class="c16"
-                    opacity="1"
-                  />
-                  <p
-                    class="c12"
-                    font-weight="medium"
-                  >
-                    Grid
-                  </p>
-                </div>
-              </div>
+                Grid
+              </p>
+            </div>
+          </div>
+          <div
+            class="HoverableBox-sc-1syy6g3-0 c10"
+          >
+            <div
+              class="c3"
+            >
               <div
-                class="HoverableBox-sc-1syy6g3-0 c10"
+                class="c16"
+                opacity="1"
+              />
+              <p
+                class="c12"
+                font-weight="medium"
               >
-                <div
-                  class="c3"
-                >
-                  <div
-                    class="c16"
-                    opacity="1"
-                  />
-                  <p
-                    class="c12"
-                    font-weight="medium"
-                  >
-                    Slider
-                  </p>
-                </div>
-              </div>
+                Slider
+              </p>
+            </div>
+          </div>
+          <div
+            class="HoverableBox-sc-1syy6g3-0 c10"
+          >
+            <div
+              class="c3"
+            >
               <div
-                class="HoverableBox-sc-1syy6g3-0 c10"
+                class="c17"
+                opacity="1"
+              />
+              <p
+                class="c12"
+                font-weight="medium"
               >
-                <div
-                  class="c3"
-                >
-                  <div
-                    class="c17"
-                    opacity="1"
-                  />
-                  <p
-                    class="c12"
-                    font-weight="medium"
-                  >
-                    Information Only
-                  </p>
-                </div>
-              </div>
+                Information Only
+              </p>
+            </div>
+          </div>
+          <div
+            class="HoverableBox-sc-1syy6g3-0 c10"
+          >
+            <div
+              class="c3"
+            >
               <div
-                class="HoverableBox-sc-1syy6g3-0 c10"
+                class="c18"
+                opacity="1"
+              />
+              <p
+                class="c12"
+                font-weight="medium"
               >
-                <div
-                  class="c3"
-                >
-                  <div
-                    class="c18"
-                    opacity="1"
-                  />
-                  <p
-                    class="c12"
-                    font-weight="medium"
-                  >
-                    External Link
-                  </p>
-                </div>
-              </div>
+                External Link
+              </p>
+            </div>
+          </div>
+          <div
+            class="HoverableBox-sc-1syy6g3-0 c19"
+          >
+            <div
+              class="c3"
+            >
               <div
-                class="HoverableBox-sc-1syy6g3-0 c10"
+                class="c20"
+                opacity="1"
+              />
+              <p
+                class="c12"
+                font-weight="medium"
               >
-                <div
-                  class="c3"
-                >
-                  <div
-                    class="c19"
-                    opacity="1"
-                  />
-                  <p
-                    class="c12"
-                    font-weight="medium"
-                  >
-                    Feedback
-                  </p>
-                </div>
-              </div>
+                Feedback
+              </p>
             </div>
           </div>
         </div>
