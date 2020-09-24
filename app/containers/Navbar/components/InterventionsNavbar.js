@@ -4,7 +4,6 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Link } from 'react-router-dom';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import Row from 'components/Row';
@@ -28,6 +27,7 @@ import { themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
 import backButton from 'assets/svg/arrow-black.svg';
 
+import ActionIcon from 'components/ActionIcon';
 import messages from './messages';
 import {
   StyledLink,
@@ -67,9 +67,7 @@ const InterventionNavbar = ({
   return (
     <Row align="center" justify="between" width="100%" mr={35}>
       <Row align="center">
-        <Link to={`/interventions/${problemId}`}>
-          <Img src={backButton} />
-        </Link>
+        <ActionIcon to={`/interventions/${problemId}`} iconSrc={backButton} />
         <StyledInput
           px={12}
           py={6}

@@ -9,7 +9,7 @@ import {
 } from 'models/Status/StatusTypes';
 import globalMessages from 'global/i18n/globalMessages';
 
-import CloseIcon from 'components/CloseIcon';
+import ActionIcon from 'components/ActionIcon';
 import { FilterText, StatusLabel } from './styled';
 
 const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
@@ -45,7 +45,7 @@ const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
         </StatusLabel>
       ))}
       {showIcon && (
-        <CloseIcon
+        <ActionIcon
           height={15}
           width={15}
           mx={10}
