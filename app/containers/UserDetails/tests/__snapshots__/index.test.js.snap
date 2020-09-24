@@ -50,7 +50,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <div
-              class="styled__AvatarStyled-sc-15n3teb-0 kNBpjK styled__StyledUserAvatar-awa645-1 iILneb"
+              class="styled__AvatarStyled-sc-15n3teb-0 kNBpjK styled__StyledUserAvatar-awa645-1 earxam"
               color="#FFFFFF"
             >
               <div>
@@ -94,9 +94,8 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
         </div>
         <div>
           <button
-            class="StyledTextButton-sc-17cmh3t-0 laeuYf"
-            color="#ff0000"
-            font-weight="bold"
+            class="StyledButton-t20ntd-0 gseqwi"
+            color="warning"
           >
             <span>
               Deactivate account
