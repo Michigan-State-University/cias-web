@@ -196,7 +196,7 @@ const ReflectionBlock = ({
           <Box>
             <Text textOverflow="ellipsis" whiteSpace="pre" overflow="hidden">
               {selectedQuestion
-                ? htmlToPlainText(selectedQuestion.title)
+                ? htmlToPlainText(selectedQuestion.subtitle)
                 : formatMessage(messages.chooseQuestion)}
             </Text>
           </Box>
