@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { intlShape } from 'react-intl';
 
 import Box from 'components/Box';
-import CloseIcon from 'components/CloseIcon';
+import ActionIcon from 'components/ActionIcon';
 import Icon from 'components/Icon';
 import PreviewButton from 'components/PreviewButton';
 import Row from 'components/Row';
@@ -62,7 +62,7 @@ const PreviewNavbar = ({
   return (
     <Row align="center" justify="between" width="100%">
       <Row>
-        <CloseIcon onClick={handleClose} />
+        <ActionIcon onClick={handleClose} />
         <Text color="black" fontSize={23}>
           {navbarName}
         </Text>

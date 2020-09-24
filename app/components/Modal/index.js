@@ -16,7 +16,7 @@ import Row from 'components/Row';
 import useLockBodyScroll from 'utils/useLockBodyScroll';
 import useKeyPress from 'utils/useKeyPress';
 
-import CloseIcon from 'components/CloseIcon';
+import ActionIcon from 'components/ActionIcon';
 import { StyledBox } from './styled';
 
 const ESC_KEY_CODE = 27;
@@ -87,7 +87,7 @@ const Modal = ({ title, onClose, children, visible, ...stylesProps }) => {
             <Column border="1px solid red">
               <Row align="center" justify="between">
                 <H1>{title}</H1>
-                <CloseIcon
+                <ActionIcon
                   position="relative"
                   top="-8px"
                   left="40px"

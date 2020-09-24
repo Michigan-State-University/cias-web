@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<CloseIcon /> Should render and match the snapshot as button 1`] = `
+exports[`<ActionIcon /> Should render and match the snapshot as button 1`] = `
 .c0 {
   height: 28px;
   width: 28px;
@@ -37,7 +37,7 @@ exports[`<CloseIcon /> Should render and match the snapshot as button 1`] = `
 </div>
 `;
 
-exports[`<CloseIcon /> Should render and match the snapshot as link 1`] = `
+exports[`<ActionIcon /> Should render and match the snapshot as link 1`] = `
 .c0 {
   height: 28px;
   width: 28px;
@@ -69,5 +69,42 @@ exports[`<CloseIcon /> Should render and match the snapshot as link 1`] = `
       src="IMAGE_MOCK"
     />
   </a>
+</div>
+`;
+
+exports[`<ActionIcon /> Should render and match the snapshot with different icon 1`] = `
+.c0 {
+  height: 28px;
+  width: 28px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  background: #E9F1FB;
+  margin-right: 35px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+<div>
+  <button
+    class="c0"
+  >
+    <img
+      alt="cross"
+      src="IMAGE_MOCK"
+    />
+  </button>
 </div>
 `;

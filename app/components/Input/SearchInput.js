@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import search from 'assets/svg/search.svg';
-import CloseIcon from 'components/CloseIcon';
+import ActionIcon from 'components/ActionIcon';
 import Input from '.';
 import { SearchInputStyled, SearchIcon } from './styled';
 
@@ -13,7 +13,7 @@ const SearchInput = ({ icon, ...inputProps }) => {
       <Input {...inputProps} px={30} />
       <SearchIcon src={search} alt="search" />
       {value && (
-        <CloseIcon
+        <ActionIcon
           onClick={() => onChange({ target: { value: '' } })}
           position="absolute"
           right="-20px"

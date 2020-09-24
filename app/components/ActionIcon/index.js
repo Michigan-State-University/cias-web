@@ -1,6 +1,6 @@
 /**
  *
- * CloseIcon
+ * ActionIcon
  *
  */
 
@@ -12,8 +12,8 @@ import Icon from 'components/Icon';
 import cross from 'assets/svg/cross.svg';
 import { CrossLink, CrossButton } from './styled';
 
-const CloseIcon = ({ to, onClick, ...restProps }) => {
-  const icon = <Icon src={cross} alt="cross" />;
+const ActionIcon = ({ to, onClick, iconSrc, ...restProps }) => {
+  const icon = <Icon src={iconSrc} alt="cross" />;
   if (to) return <CrossLink to={to}>{icon}</CrossLink>;
   if (onClick)
     return (
@@ -24,9 +24,14 @@ const CloseIcon = ({ to, onClick, ...restProps }) => {
   return null;
 };
 
-CloseIcon.propTypes = {
+ActionIcon.propTypes = {
   to: PropTypes.string,
   onClick: PropTypes.func,
+  iconSrc: PropTypes.any,
 };
 
-export default CloseIcon;
+ActionIcon.defaultProps = {
+  iconSrc: cross,
+};
+
+export default ActionIcon;

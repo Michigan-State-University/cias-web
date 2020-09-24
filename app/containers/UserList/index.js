@@ -33,7 +33,7 @@ import SearchInput from 'components/Input/SearchInput';
 import Text from 'components/Text';
 import Checkbox from 'components/Checkbox';
 import ConfirmationBox from 'components/ConfirmationBox';
-import CloseIcon from 'components/CloseIcon';
+import ActionIcon from 'components/ActionIcon';
 import Row from 'components/Row';
 
 import {
@@ -143,7 +143,7 @@ export function UserList({
                   />
                 ))}
                 {!clearFilters && (
-                  <CloseIcon
+                  <ActionIcon
                     height={15}
                     width={15}
                     mr={10}
