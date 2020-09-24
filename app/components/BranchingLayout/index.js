@@ -162,13 +162,9 @@ function BranchingLayout({
                 <FormattedMessage
                   {...messages.else}
                   values={{
-                    message: (
-                      <b>
-                        {problemBranching
-                          ? formatMessage(messages.nextSession)
-                          : formatMessage(messages.nextScreen)}
-                      </b>
-                    ),
+                    message: problemBranching
+                      ? formatMessage(messages.nextSession)
+                      : formatMessage(messages.nextScreen),
                   }}
                 />
               </Text>

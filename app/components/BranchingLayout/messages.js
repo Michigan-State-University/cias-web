@@ -34,10 +34,10 @@ export default defineMessages({
   },
   nextScreen: {
     id: `${scope}.nextScreen`,
-    defaultMessage: 'Next Screen',
+    defaultMessage: 'following screen',
   },
   nextSession: {
     id: `${scope}.nextSession`,
-    defaultMessage: 'Next Session',
+    defaultMessage: 'following session',
   },
 });

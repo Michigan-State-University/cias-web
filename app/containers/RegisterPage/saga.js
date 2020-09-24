@@ -17,7 +17,7 @@ function* register({ payload }) {
   try {
     yield axios.post(requestURL, {
       ...objectToSnakeCase(payload),
-      confirm_success_url: `http://localhost:4200/login`,
+      confirm_success_url: `${process.env.WEB_URL}/login`,
     });
     yield put(registerSuccess());
     yield put(push('/login'));

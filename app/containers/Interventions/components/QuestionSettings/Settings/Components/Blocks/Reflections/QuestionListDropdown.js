@@ -73,7 +73,7 @@ const QuestionListDropdown = ({
                     color={!canSelectQuestion(question.id) ? colors.grey : ''}
                     fontWeight={chosenQuestionId === question.id ? 'bold' : ''}
                   >
-                    {htmlToPlainText(question.title)}
+                    {htmlToPlainText(question.subtitle)}
                   </Text>
                 </Row>
               ))}
