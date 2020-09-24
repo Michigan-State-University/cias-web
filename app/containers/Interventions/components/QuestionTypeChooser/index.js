@@ -1,9 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
 import Box from 'components/Box';
-import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
 import Row from 'components/Row';
 import Text from 'components/Text';
@@ -11,45 +10,65 @@ import decideIfPassValue from 'utils/decideIfPassValue';
 import globalMessages from 'global/i18n/globalMessages';
 import useOutsideClick from 'utils/useOutsideClick';
 import { QuestionTypes } from 'models/Intervention/QuestionTypes';
-import { colors, boxShadows, borders, fontSizes } from 'theme';
+import { borders, boxShadows, colors, fontSizes } from 'theme';
 
+import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
+import { useChildSizeCalculator } from 'utils/useChildSizeCalculator';
 import DefaultButtonComponent from './DefaultButtonComponent';
 import messages from './messages';
-import { DotCircle } from './styled';
+import { DotCircle, FadedBox } from './styled';
 
 const QuestionTypeChooser = ({
   intl: { formatMessage },
   onClick,
   ButtonComponent,
 }) => {
-  const dropdownRef = useRef(null);
+  const buttonRef = useRef(null);
+  const containerRef = useRef(null);
+  const chooserBoxRef = useRef(null);
 
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
 
-  const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
+  const {
+    ref,
+    callbackRef,
+    positionData: { visible, top, bottom, maxHeight },
+  } = useDropdownPositionHelper(buttonRef);
+
+  const { height } = useChildSizeCalculator(ref, containerRef);
 
   useOutsideClick(
-    dropdownRef,
+    chooserBoxRef,
     () => setTypeChooserOpen(false),
     typeChooserOpen,
   );
+
+  const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
 
   const handleClick = type => {
     onClick(type);
     toggleTypeChooser();
   };
 
+  const isVisible = visible && height;
+
   return (
-    <Row ref={dropdownRef}>
-      <Box position="relative" width="100%">
-        <ButtonComponent onClick={toggleTypeChooser} />
+    <Row>
+      <Box position="relative" width="100%" ref={chooserBoxRef}>
+        <ButtonComponent onClick={toggleTypeChooser} ref={buttonRef} />
         {typeChooserOpen && (
           <Box
+            mt={15}
+            bg={colors.white}
             borderRadius={10}
             shadow={boxShadows.black}
             position="absolute"
             width="100%"
-            mt={15}
+            ref={callbackRef}
+            top={top}
+            bottom={bottom}
+            maxHeight={maxHeight}
+            visibility={isVisible ? 'visible' : 'hidden'}
           >
             <Box
               borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
@@ -61,33 +80,35 @@ const QuestionTypeChooser = ({
                 {formatMessage(messages.header)}
               </Text>
             </Box>
-            <Row>
-              <Box padding={8} width="100%">
-                <Column>
-                  {QuestionTypes.map((questionType, i) => (
-                    <HoverableBox
-                      key={questionType.id}
-                      onClick={() => handleClick(questionType.id)}
-                      padding={8}
-                      mb={decideIfPassValue({
-                        inedx: i,
-                        arrayLength: QuestionTypes.length,
-                        value: 4,
-                      })}
-                    >
-                      <Row align="center">
-                        <DotCircle mr={18} bg={questionType.color} />
-                        <Text fontWeight="medium">
-                          {formatMessage(
-                            globalMessages.questionTypes[questionType.id],
-                          )}
-                        </Text>
-                      </Row>
-                    </HoverableBox>
-                  ))}
-                </Column>
-              </Box>
-            </Row>
+            <FadedBox
+              padding={8}
+              width="100%"
+              overflow="scroll"
+              height={height}
+              ref={containerRef}
+            >
+              {QuestionTypes.map((questionType, i) => (
+                <HoverableBox
+                  key={questionType.id}
+                  onClick={() => handleClick(questionType.id)}
+                  padding={8}
+                  mb={decideIfPassValue({
+                    index: i,
+                    arrayLength: QuestionTypes.length,
+                    value: 4,
+                  })}
+                >
+                  <Row align="center">
+                    <DotCircle mr={18} bg={questionType.color} />
+                    <Text fontWeight="medium">
+                      {formatMessage(
+                        globalMessages.questionTypes[questionType.id],
+                      )}
+                    </Text>
+                  </Row>
+                </HoverableBox>
+              ))}
+            </FadedBox>
           </Box>
         )}
       </Box>
