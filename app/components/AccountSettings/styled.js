@@ -14,14 +14,9 @@ export const StyledFullNameRow = styled(Row)`
 `;
 
 export const StyledUserAvatar = styled(UserAvatar)`
-  height: 125px;
-  width: 125px;
-  font-size: 65px;
-  ${mediaQuery.mobile`
-    height: 80px;
-    width: 80px;
-    font-size: 45px;
-  `}
+  height: 75px;
+  width: 75px;
+  font-size: 40px;
 `;
 
 export const StyledButtonsRow = styled(Row)`
