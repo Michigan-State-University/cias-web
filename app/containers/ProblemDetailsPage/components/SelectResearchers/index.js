@@ -114,7 +114,7 @@ const SelectResearchers = ({
         <TBody>
           {finalUsers &&
             finalUsers.map(user => {
-              const { full_name: fullName, email, id } = user;
+              const { fullName, email, id } = user;
               const isChecked = selected.includes(id);
               const handleClick = () => {
                 if (!isChecked) setSelected([...selected, id]);
