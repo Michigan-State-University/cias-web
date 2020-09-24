@@ -27,6 +27,7 @@ const QuestionTitle = ({
     <Box width="100%" padded hoverColor={colors.linkWater} clickable={false}>
       <Row>
         <ApprovableInput
+          defaultFontSize={30}
           placeholder={formatMessage(messages.placeholder)}
           value={title}
           onCheck={handleUpdate}

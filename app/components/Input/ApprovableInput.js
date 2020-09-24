@@ -59,6 +59,7 @@ const ApprovableInput = props => {
     height,
     width,
     padding,
+    defaultFontSize,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [focused, setfocused] = useState(false);
@@ -125,6 +126,7 @@ const ApprovableInput = props => {
           singleline={type === 'singleline'}
           fontSize={fontSize}
           readOnly={disabled}
+          defaultFontSize={defaultFontSize}
         />
       );
 
@@ -209,6 +211,7 @@ ApprovableInput.propTypes = {
   height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   width: PropTypes.number,
   padding: PropTypes.number,
+  defaultFontSize: PropTypes.number,
 };
 
 ApprovableInput.defaultProps = {

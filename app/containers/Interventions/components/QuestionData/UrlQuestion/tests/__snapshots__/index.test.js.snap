@@ -123,19 +123,12 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-}
-
-.c10 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
   width: 100%;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
-.c12 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -153,7 +146,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   height: 50px;
 }
 
-.c12:after {
+.c11:after {
   content: ' ';
   display: block;
   width: 33.33333333333333px;
@@ -165,7 +158,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   animation: hAjVGa 1.2s linear infinite;
 }
 
-.c11 {
+.c10 {
   width: 100%;
   height: 100%;
   display: -webkit-box;
@@ -268,7 +261,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}
-            placeholder="Paste here a web page link to show it to a respondend."
+            placeholder="Paste or type a web page link to show it to a respondent."
             rows="3"
             value="www.google.com"
             width="100%"
@@ -279,25 +272,21 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   </div>
   <div
     className="c9"
+    width="100%"
   >
     <div
-      className="c10"
-      width="100%"
+      className="c5"
     >
       <div
-        className="c5"
+        className="c10"
+        data-testid="inline-loader"
       >
         <div
           className="c11"
-          data-testid="inline-loader"
-        >
-          <div
-            className="c12"
-            color="#C866EA"
-            size={50}
-            width={6}
-          />
-        </div>
+          color="#C866EA"
+          size={50}
+          width={6}
+        />
       </div>
     </div>
   </div>

@@ -37,7 +37,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
-.c18 {
+.c19 {
   width: auto;
   height: auto;
   display: block;
@@ -50,7 +50,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c20 {
+.c21 {
   width: auto;
   height: auto;
   display: block;
@@ -88,7 +88,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c14 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -169,7 +169,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   margin-top: 10px;
 }
 
-.c15 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -185,7 +185,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   display: flex;
 }
 
-.c21 {
+.c22 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -203,7 +203,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 180px;
 }
 
-.c16 {
+.c17 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -221,13 +221,13 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: rgba(16,121,105,1);
 }
 
-.c16:focus {
+.c17:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c19 {
+.c20 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -240,13 +240,13 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c19:focus {
+.c20:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c17 {
+.c18 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
@@ -255,7 +255,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: rgba(16,121,105,1);
 }
 
-.c17:focus {
+.c18:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
@@ -289,6 +289,38 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 }
 
 .c12 .ql-container {
+  font-size: 30px;
+  font-family: DM Sans;
+}
+
+.c14 {
+  width: 100%;
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
+  border: 1px solid transparent;
+}
+
+.c14 .ql-editor {
+  font-weight: 400;
+  padding: 10px;
+}
+
+.c14 .ql-editor.ql-blank::before {
+  left: 11px;
+}
+
+.c14 .ql-picker-label svg {
+  margin-bottom: 15px !important;
+}
+
+.c14 .ql-toolbar {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c14 .ql-container {
   font-size: initial;
   font-family: DM Sans;
 }
@@ -1874,7 +1906,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                         class="c11"
                       >
                         <div
-                          class="quill c12"
+                          class="quill c14"
                         >
                           <div
                             class="ql-container ql-bubble"
@@ -3271,14 +3303,14 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                 class="c10"
               >
                 <div
-                  class="c14"
+                  class="c15"
                 >
                   <div
-                    class="c15"
+                    class="c16"
                     display="flex"
                   >
                     <input
-                      class="c16 c17"
+                      class="c17 c18"
                       color="#107969"
                       placeholder="Variable name..."
                       type="tel"
@@ -3287,7 +3319,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                     />
                   </div>
                   <div
-                    class="c18"
+                    class="c19"
                     width="100%"
                   >
                     <div
@@ -3301,7 +3333,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                           class="c11"
                         >
                           <input
-                            class="c19"
+                            class="c20"
                             disabled=""
                             height="60"
                             placeholder="Respondent answer goes here..."
@@ -3315,10 +3347,10 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c20"
+                class="c21"
               >
                 <button
-                  class="c21"
+                  class="c22"
                   color="primary"
                   disabled=""
                   width="180px"

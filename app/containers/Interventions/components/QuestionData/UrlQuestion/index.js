@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
@@ -11,6 +11,7 @@ import Column from 'components/Column';
 import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import UrlPreview from 'components/UrlPreview';
+import Text from 'components/Text';
 import globalMessages from 'global/i18n/globalMessages';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { colors } from 'theme/colors';
@@ -34,6 +35,9 @@ const UrlQuestion = ({
   const { payload } = selectedQuestion.body.data[0];
   const { variable } = selectedQuestion.body;
 
+  const isPreviewValid = urlValidator(payload);
+  const displayError = !isPreviewValid && payload;
+  const displayPreview = isPreviewValid && payload;
   return (
     <Column mt={10}>
       <Row display="flex" hidden={isNarratorTab} mb={10}>
@@ -61,7 +65,6 @@ const UrlQuestion = ({
         <Row>
           <ApprovableInput
             rows="3"
-            validator={urlValidator}
             placeholder={formatMessage(messages.placeholder)}
             value={payload}
             onCheck={updateUrl}
@@ -69,7 +72,12 @@ const UrlQuestion = ({
           />
         </Row>
       </Box>
-      <Box>{payload && <UrlPreview link={payload} />}</Box>
+      {displayError && (
+        <Text mt={15} color={colors.flamingo} fontWeight="bold">
+          <FormattedMessage {...messages.invalidUrl} />
+        </Text>
+      )}
+      {displayPreview && <UrlPreview link={payload} />}
     </Column>
   );
 };
