@@ -2,19 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import { colors } from 'theme';
-import TextButton from 'components/Button/TextButton';
+import Button from 'components/Button';
 import messages from './messages';
 
 const Deactivation = ({ user: { deactivated }, changeStatus }) => (
-  <TextButton
-    buttonProps={{
-      color: deactivated ? colors.jungleGreen : colors.red,
-    }}
+  <Button
+    color={deactivated ? 'primary' : 'warning'}
     onClick={() => changeStatus(!deactivated)}
   >
     <FormattedMessage {...messages[deactivated ? 'activate' : 'deactivate']} />
-  </TextButton>
+  </Button>
 );
 
 Deactivation.propTypes = {
