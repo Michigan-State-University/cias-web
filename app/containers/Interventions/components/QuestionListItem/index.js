@@ -36,6 +36,8 @@ import {
   changeCurrentNarratorBlock,
 } from 'global/reducers/localState';
 
+import StyledCircle from 'components/Circle/StyledCircle';
+import { QuestionTypes } from 'models/Intervention/QuestionTypes';
 import { ToggleableBox, ClampedTitle } from './styled';
 import messages from './messages';
 import getIndex from './utils';
@@ -131,7 +133,17 @@ const QuestionListItem = ({
           </Row>
           <Row>
             <Comment fontWeight="bold">
-              {formatMessage(globalMessages.questionTypes[type])}
+              <Box display="flex" align="center">
+                <StyledCircle
+                  background={
+                    QuestionTypes.find(({ id: typeId }) => typeId === type)
+                      .color
+                  }
+                  size="10px"
+                  mr="5px"
+                />
+                {formatMessage(globalMessages.questionTypes[type])}
+              </Box>
             </Comment>
           </Row>
           {body && hasObjectProperty(body, 'variable') && (

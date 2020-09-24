@@ -20,7 +20,6 @@ export const SavingContainer = styled.div`
 `;
 
 export const CheckBackground = styled.div`
-  background-color: ${themeColors.primary};
   width: 30px;
   height: 30px;
   border-radius: 50%;

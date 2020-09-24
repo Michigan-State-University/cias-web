@@ -3,31 +3,31 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { useInjectSaga } from 'utils/injectSaga';
 import { compose } from 'redux';
+import { Link } from 'react-router-dom';
 
-import CloseIcon from 'components/CloseIcon';
+import { useInjectSaga } from 'utils/injectSaga';
 import Row from 'components/Row';
 import Tabs from 'components/Tabs';
 import { StyledInput } from 'components/Input/StyledInput';
 import Spinner from 'components/Spinner';
 import PreviewButton from 'components/PreviewButton';
 import Img from 'components/Img';
+import Box from 'components/Box';
 import {
   makeSelectQuestionsLength,
   makeSelectSelectedQuestionIndex,
 } from 'global/reducers/questions';
-
 import {
   editInterventionRequest,
   makeSelectIntervention,
   editInterventionSaga,
   makeSelectInterventionEditLoader,
 } from 'global/reducers/intervention';
-
 import { themeColors } from 'theme';
-import check from 'assets/svg/check.svg';
-import Box from 'components/Box';
+import check from 'assets/svg/check-green.svg';
+import backButton from 'assets/svg/arrow-black.svg';
+
 import messages from './messages';
 import {
   StyledLink,
@@ -67,7 +67,9 @@ const InterventionNavbar = ({
   return (
     <Row align="center" justify="between" width="100%" mr={35}>
       <Row align="center">
-        <CloseIcon to={`/interventions/${problemId}`} />
+        <Link to={`/interventions/${problemId}`}>
+          <Img src={backButton} />
+        </Link>
         <StyledInput
           px={12}
           py={6}
