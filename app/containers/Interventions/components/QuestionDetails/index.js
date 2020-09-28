@@ -65,11 +65,8 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
 
     return (
       <AnswerOuterContainer>
-        <Box width="100%">
-          <Row width="100%" mb={10}>
-            <QuestionTitle />
-          </Row>
-
+        <Column width="100%" display="flex" align="center">
+          <QuestionTitle />
           <AnswerInterventionContent ref={animationBoundaries}>
             <QuestionNarrator
               questionId={id}
@@ -139,7 +136,7 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
               </Column>
             </Row>
           </AnswerInterventionContent>
-        </Box>
+        </Column>
       </AnswerOuterContainer>
     );
   }

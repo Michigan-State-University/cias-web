@@ -4,6 +4,7 @@ import {
   CHANGE_CURRENT_NARRATOR_BLOCK,
   MAKE_CHARACTER_DRAGGABLE,
   SET_ANIMATION_STOP_POSITION,
+  SET_QUESTION_SETTINGS,
   TOGGLE_QUESTION_SETTINGS,
   UPDATE_PREVIEW_ANIMATION,
   UPDATE_PREVIEW_DATA,
@@ -18,8 +19,11 @@ export const setCharacterDraggable = draggable =>
 export const setAnimationStopPosition = (posX, posY) =>
   actionBuilder(SET_ANIMATION_STOP_POSITION, { x: posX, y: posY });
 
-export const toggleQuestionSettings = ({ index, questionIndex, tab }) =>
-  actionBuilder(TOGGLE_QUESTION_SETTINGS, { index, questionIndex, tab });
+export const setQuestionSettings = ({ index, questionIndex, tab }) =>
+  actionBuilder(SET_QUESTION_SETTINGS, { index, questionIndex, tab });
+
+export const toggleQuestionSettings = () =>
+  actionBuilder(TOGGLE_QUESTION_SETTINGS, {});
 
 export const updatePreviewAnimation = animation =>
   actionBuilder(UPDATE_PREVIEW_ANIMATION, { animation });

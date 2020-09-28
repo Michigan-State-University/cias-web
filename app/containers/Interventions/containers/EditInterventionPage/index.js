@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Reorder, { reorder } from 'react-reorder';
 import { Helmet } from 'react-helmet';
@@ -10,12 +10,15 @@ import { injectIntl } from 'react-intl';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
-import Question from 'models/Intervention/Question';
+import Icon from 'components/Icon';
 import Row from 'components/Row';
+
+import menu from 'assets/svg/triangle-back-black.svg';
+import { borders, colors } from 'theme';
+import Question from 'models/Intervention/Question';
+import { localStateReducer } from 'global/reducers/localState';
 import injectSaga, { useInjectSaga } from 'utils/injectSaga';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
-import { borders, colors } from 'theme';
-import { localStateReducer } from 'global/reducers/localState';
 import { useInjectReducer } from 'utils/injectReducer';
 import {
   getInterventionRequest,
@@ -44,6 +47,7 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 
 import messages from './messages';
 import { useLockEditInterventionPageScroll } from './utils';
+import { QuestionsRow, ShowListButton } from './styled';
 
 function EditInterventionPage({
   intl: { formatMessage },
@@ -64,6 +68,13 @@ function EditInterventionPage({
 
   useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
+
+  const [showList, setShowList] = useState(false);
+
+  const hoverListProps = {
+    onMouseEnter: () => setShowList(true),
+    onMouseLeave: () => setShowList(false),
+  };
 
   useEffect(() => {
     getIntervention({
@@ -119,16 +130,17 @@ function EditInterventionPage({
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
       <Row height="100%" filled>
-        <Column sm={4}>
+        <QuestionsRow sm={4} isVisible={showList}>
           <Box
             height="100%"
             borderRight={`${borders.borderWidth} ${borders.borderStyle} ${
               colors.linkWater
             }`}
             overflow="auto"
-            padded
+            bg={colors.white}
+            {...hoverListProps}
           >
-            <Box width="100%" padded>
+            <Box padded minWidth={300}>
               <Reorder reorderId="question-list" onReorder={handleReorder}>
                 {questions.map((question, index) => (
                   <Row key={question.id}>
@@ -146,8 +158,11 @@ function EditInterventionPage({
               <Row />
             </Box>
           </Box>
-        </Column>
-        <Column sm={8} id="quill_boundaries">
+          <ShowListButton className="show-list-button" {...hoverListProps}>
+            <Icon src={menu} alt="questions-list" />
+          </ShowListButton>
+        </QuestionsRow>
+        <Column id="quill_boundaries" align="between">
           <Row overflow="hidden" filled>
             <QuestionDetails />
             <QuestionSettings />

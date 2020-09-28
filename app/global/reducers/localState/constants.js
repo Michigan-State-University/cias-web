@@ -4,6 +4,9 @@ export const CHANGE_CURRENT_NARRATOR_BLOCK =
 export const TOGGLE_QUESTION_SETTINGS =
   'app/EditInterventionPage/TOGGLE_QUESTION_SETTINGS';
 
+export const SET_QUESTION_SETTINGS =
+  'app/EditInterventionPage/SET_QUESTION_SETTINGS';
+
 export const UPDATE_PREVIEW_ANIMATION =
   'app/EditInterventionPage/UPDATE_PREVIEW_ANIMATION';
 export const UPDATE_PREVIEW_DATA =

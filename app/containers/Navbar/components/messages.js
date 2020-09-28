@@ -20,10 +20,6 @@ export default defineMessages({
     id: `${scope}.settings`,
     defaultMessage: 'General Settings',
   },
-  sharing: {
-    id: `${scope}.sharing`,
-    defaultMessage: 'Manage Sharing',
-  },
   previewStart: {
     id: `${scope}.preview`,
     defaultMessage: 'Preview From Start',

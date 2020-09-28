@@ -10,7 +10,7 @@ import Tabs from 'components/Tabs';
 import settingsTabLabels from 'utils/settingsTabsLabels';
 import {
   makeSelectQuestionSettingsTab,
-  toggleQuestionSettings,
+  setQuestionSettings,
   setCharacterDraggable,
 } from 'global/reducers/localState';
 import {
@@ -89,7 +89,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  changeTab: toggleQuestionSettings,
+  changeTab: setQuestionSettings,
   setDraggable: setCharacterDraggable,
 };
 

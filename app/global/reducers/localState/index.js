@@ -2,9 +2,10 @@ export {
   changeCurrentNarratorBlock,
   setCharacterDraggable,
   setAnimationStopPosition,
-  toggleQuestionSettings,
+  setQuestionSettings,
   updatePreviewData,
   updatePreviewAnimation,
+  toggleQuestionSettings,
 } from './actions';
 
 export { localStateReducer } from './reducer';

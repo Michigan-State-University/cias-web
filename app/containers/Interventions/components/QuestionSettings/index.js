@@ -7,12 +7,14 @@ import { injectIntl } from 'react-intl';
 
 import Box from 'components/Box';
 import H2 from 'components/H2';
-import Img from 'components/Img';
 import Row from 'components/Row';
-import close from 'assets/svg/cross.svg';
+import Icon from 'components/Icon';
+import gear from 'assets/svg/gear-white-background.svg';
+import cross from 'assets/svg/cross-white-small.svg';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
   makeSelectQuestionSettingsVisibility,
+  setQuestionSettings,
   toggleQuestionSettings,
 } from 'global/reducers/localState';
 import {
@@ -22,10 +24,10 @@ import {
 
 import Settings from './Settings';
 import messages from './messages';
-import { SettingsBar, Container } from './styled';
+import { SettingsBar, Container, OpenButton } from './styled';
 
 const QuestionSettings = ({
-  settingsVisiblity,
+  settingsVisibility,
   toggleSettings,
   intl: { formatMessage },
   questionsLength,
@@ -34,35 +36,40 @@ const QuestionSettings = ({
     key: 'updateQuestionSettings',
     saga: updateQuestionSettingsSaga,
   });
-  const onClose = () => toggleSettings({ index: -1 });
+
+  const isVisible = settingsVisibility && questionsLength;
+
   return (
-    <Container isVisible={settingsVisiblity && questionsLength}>
-      <SettingsBar width="400px" height="100%">
-        <Box width="100%" height="100%" padded>
+    <Container isVisible={isVisible}>
+      <SettingsBar isVisible={isVisible} height="100%">
+        <Box width={400} height="100%" padded>
           <Row align="center" justify="between" mb={40}>
             <H2>{formatMessage(messages.header)}</H2>
-            <Img src={close} alt="close" clickable onClick={onClose} />
           </Row>
           <Settings />
         </Box>
       </SettingsBar>
+      <OpenButton onClick={toggleSettings}>
+        <Icon src={isVisible ? cross : gear} alt="show-settings" />
+      </OpenButton>
     </Container>
   );
 };
 
 QuestionSettings.propTypes = {
   intl: PropTypes.object.isRequired,
-  settingsVisiblity: PropTypes.bool,
+  settingsVisibility: PropTypes.bool,
   toggleSettings: PropTypes.func,
   questionsLength: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
-  settingsVisiblity: makeSelectQuestionSettingsVisibility(),
+  settingsVisibility: makeSelectQuestionSettingsVisibility(),
   questionsLength: makeSelectQuestionsLength(),
 });
 
 const mapDispatchToProps = {
+  setSettings: setQuestionSettings,
   toggleSettings: toggleQuestionSettings,
 };
 

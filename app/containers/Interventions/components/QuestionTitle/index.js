@@ -9,7 +9,7 @@ import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
-import { colors } from 'theme';
+import { colors, elements } from 'theme';
 import {
   makeSelectSelectedQuestion,
   editQuestionRequest,
@@ -24,10 +24,16 @@ const QuestionTitle = ({
 }) => {
   const handleUpdate = val => updateTitle({ path: 'title', value: val });
   return (
-    <Box width="100%" padded hoverColor={colors.linkWater} clickable={false}>
+    <Box
+      width="100%"
+      maxWidth={elements.draggableContainerSize}
+      hoverColor={colors.linkWater}
+      clickable={false}
+      mb={10}
+    >
       <Row>
         <ApprovableInput
-          defaultFontSize={30}
+          defaultFontSize={18}
           placeholder={formatMessage(messages.placeholder)}
           value={title}
           onCheck={handleUpdate}
