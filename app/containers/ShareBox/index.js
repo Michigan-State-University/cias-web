@@ -28,6 +28,7 @@ import ParticipantInviter from './Components/ParticipantInviter';
 import UserList from './Components/UserList';
 import messages from './messages';
 import { makeSelectCurrenIntervention } from './selectors';
+import { InterventionIndex } from './styled';
 
 const ShareBox = ({
   intervention,
@@ -36,7 +37,7 @@ const ShareBox = ({
   sendLoading,
   resendLoading,
 }) => {
-  const { problem_id: problemId, slug, emails } = intervention || {};
+  const { problem_id: problemId, slug, emails, position } = intervention || {};
 
   const handleResend = user => resendInvite([user.email]);
 
@@ -63,7 +64,10 @@ const ShareBox = ({
         >
           <FormattedMessage {...messages.header} />
         </H3>
-        <H2>{intervention.name}</H2>
+        <Box display="flex" align="center">
+          <InterventionIndex>{position}</InterventionIndex>
+          <H2 ml={10}>{intervention.name}</H2>
+        </Box>
         <Row mt={20}>
           <ParticipantInviter loading={sendLoading} sendInvite={sendInvite} />
         </Row>
