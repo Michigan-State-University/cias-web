@@ -31,6 +31,7 @@ describe('<UserDetails />', () => {
         avatar: null,
         firstName: 'test',
         lastName: 'test',
+        active: true,
       },
     },
   };
@@ -59,6 +60,7 @@ describe('<UserDetails />', () => {
           roles: ['participant'],
           email: 'test@test.pl',
           avatar: null,
+          active: true,
         },
       },
       match: {

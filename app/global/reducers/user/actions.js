@@ -49,8 +49,8 @@ export const deleteOtherUserAvatarSuccess = user =>
 export const deleteOtherUserAvatarError = error =>
   actionBuilder(DELETE_OTHER_USER_AVATAR_ERROR, error);
 
-export const changeActivateStatusRequest = (userId, deactivated) =>
-  actionBuilder(CHANGE_ACTIVATE_STATUS_REQUEST, { userId, deactivated });
+export const changeActivateStatusRequest = (userId, active) =>
+  actionBuilder(CHANGE_ACTIVATE_STATUS_REQUEST, { userId, active });
 export const changeActivateStatusSuccess = user =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_SUCCESS, { user });
 export const changeActivateStatusError = error =>

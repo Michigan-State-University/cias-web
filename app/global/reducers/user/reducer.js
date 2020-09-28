@@ -85,7 +85,7 @@ const userReducer = (state = initialState, { type, payload }) =>
         draft.cache.user = null;
         break;
       case CHANGE_ACTIVATE_STATUS_REQUEST:
-        draft.user.deactivated = payload.deactivated;
+        draft.user.active = payload.active;
         draft.cache.user = state.user;
         break;
       case CHANGE_ACTIVATE_STATUS_SUCCESS:

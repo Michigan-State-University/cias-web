@@ -191,7 +191,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
               class="TBody-sc-1332v38-0"
             >
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 MCfLu dhslFA"
+                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 MCfLu dYtOgY"
                 color="#FFFFFF"
                 cursor="pointer"
               >
@@ -207,7 +207,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   class="TD-sc-4t6406-0 cFOkDZ"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 hWckNX"
+                    class="Box-sc-14m3exe-0 NrjYZ"
                     display="inline-flex"
                     width="120px"
                   >
@@ -241,7 +241,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 MCfLu dYtOgY"
+                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 MCfLu dhslFA"
                 color="#FFFFFF"
                 cursor="pointer"
               >
@@ -257,7 +257,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   class="TD-sc-4t6406-0 cFOkDZ"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 NrjYZ"
+                    class="Box-sc-14m3exe-0 dSFKaS"
                     display="inline-flex"
                     width="120px"
                   >
@@ -291,7 +291,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 MCfLu dhslFA"
+                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 MCfLu dYtOgY"
                 color="#FFFFFF"
                 cursor="pointer"
               >
@@ -307,7 +307,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   class="TD-sc-4t6406-0 cFOkDZ"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 cJppcm"
+                    class="Box-sc-14m3exe-0 NrjYZ"
                     display="inline-flex"
                     width="120px"
                   >

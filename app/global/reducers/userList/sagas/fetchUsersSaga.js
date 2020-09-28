@@ -6,7 +6,7 @@ import { mapCurrentUser } from 'utils/mapResponseObjects';
 import { FETCH_USERS, PER_PAGE } from '../constants';
 import { fetchUsersFailure, fetchUsersSuccess } from '../actions';
 
-function* fetchUsers({ payload: { roles, name, page } }) {
+function* fetchUsers({ payload: { roles, name, page, includeInactive } }) {
   const requestUrl = `/v1/users?`;
   let params = '';
   if (roles) {
@@ -21,6 +21,8 @@ function* fetchUsers({ payload: { roles, name, page } }) {
   if (page) {
     params += `page=${page}&per_page=${PER_PAGE}&`;
   }
+
+  if (includeInactive) params += 'active[]=true&active[]=false&';
 
   try {
     const { data } = yield axios.get(requestUrl.concat(params));

@@ -5,13 +5,13 @@ import { FormattedMessage } from 'react-intl';
 import Button from 'components/Button';
 import messages from './messages';
 
-const Deactivation = ({ user: { deactivated }, changeStatus }) => (
+const Deactivation = ({ user: { active }, changeStatus }) => (
   <Button
     width={180}
-    color={deactivated ? 'primary' : 'warning'}
-    onClick={() => changeStatus(!deactivated)}
+    color={active ? 'warning' : 'primary'}
+    onClick={() => changeStatus(!active)}
   >
-    <FormattedMessage {...messages[deactivated ? 'activate' : 'deactivate']} />
+    <FormattedMessage {...messages[active ? 'deactivate' : 'activate']} />
   </Button>
 );
 
