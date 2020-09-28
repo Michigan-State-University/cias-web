@@ -9,63 +9,54 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
-import { browserHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import configureStore from 'configureStore';
+import { MemoryRouter } from 'react-router-dom';
+import { createStore } from 'redux';
 
-import { DEFAULT_LOCALE } from 'i18n';
-import ReactDOM from 'react-dom';
-import { UserList } from '../index';
+import createModalForTests from 'utils/createModalForTests';
+import { UserListReducer } from 'global/reducers/userList';
+
+import UserList from '../index';
+import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<UserList />', () => {
+  const reducer = state => state;
+  const initialState = {
+    userList: {
+      users: [
+        {
+          id: 's2as-321',
+          full_name: 'test',
+          roles: ['participant'],
+          email: 'test@test.pl',
+          active: true,
+        },
+        {
+          id: 's2as-3212',
+          full_name: 'test2',
+          roles: ['researcher'],
+          email: 'test2@test.pl',
+          active: true,
+        },
+        {
+          id: 's22as-32321',
+          full_name: 'test3',
+          roles: ['admin'],
+          email: 'test3@test.pl',
+          active: true,
+        },
+      ],
+    },
+  };
   let store;
-  let props;
-
-  let modalContainer;
-  let mainAppContainer;
-
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
-
-    ReactDOM.createPortal = jest.fn(element => element);
-    modalContainer = document.createElement('div');
-    modalContainer.setAttribute('id', 'modal-portal');
-    document.body.appendChild(modalContainer);
-    mainAppContainer = document.createElement('div');
-    mainAppContainer.setAttribute('id', 'main-app-container');
-    document.body.appendChild(mainAppContainer);
-  });
-  beforeEach(() => {
-    props = {
-      fetchUsersRequest: jest.fn(),
-      changeActivateStatus: jest.fn(),
-      intl: { formatMessage: jest.fn() },
-      userList: {
-        users: [
-          {
-            id: 1,
-            full_name: 'test',
-            roles: ['participant'],
-            email: 'test@test.pl',
-            active: false,
-          },
-          {
-            id: 2,
-            full_name: 'test2',
-            roles: ['researcher'],
-            email: 'test2@test.pl',
-            active: true,
-          },
-          {
-            id: 3,
-            full_name: 'test3',
-            roles: ['admin'],
-            email: 'test3@test.pl',
-            active: false,
-          },
-        ],
-      },
+    createModalForTests();
+    store = createStore(reducer, initialState);
+    store.runSaga = () => {};
+    store.injectedReducers = {
+      userList: UserListReducer,
     };
+    store.injectedSagas = {};
   });
 
   it('Expect to not log errors in console', () => {
@@ -73,7 +64,9 @@ describe('<UserList />', () => {
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <UserList {...props} />
+          <MemoryRouter>
+            <UserList />
+          </MemoryRouter>
         </IntlProvider>
       </Provider>,
     );
@@ -84,7 +77,9 @@ describe('<UserList />', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <UserList {...props} />
+          <MemoryRouter>
+            <UserList />
+          </MemoryRouter>
         </IntlProvider>
       </Provider>,
     );

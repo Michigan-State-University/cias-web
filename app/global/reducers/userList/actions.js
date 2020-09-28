@@ -12,6 +12,7 @@ import {
   CHANGE_ACTIVATE_STATUS_REQUEST,
   CHANGE_ACTIVATE_STATUS_FAILURE,
   CHANGE_ACTIVATE_STATUS_SUCCESS,
+  ADD_USER_TO_LIST,
 } from './constants';
 
 export const fetchUsers = (roles, name, page, includeInactive) =>
@@ -27,3 +28,5 @@ export const changeActivateStatusSuccess = () =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_SUCCESS, {});
 export const changeActivateStatusFailure = () =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_FAILURE, {});
+
+export const addUserToList = user => actionBuilder(ADD_USER_TO_LIST, { user });

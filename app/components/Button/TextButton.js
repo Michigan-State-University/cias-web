@@ -22,6 +22,7 @@ const TextButton = ({
   onClick,
   buttonProps,
   loaderProps,
+  spinnerProps,
 }) => {
   const button = useRef(null);
   if (loading)
@@ -34,7 +35,7 @@ const TextButton = ({
         justify="center"
         {...loaderProps}
       >
-        <Spinner color={themeColors.secondary} />
+        <Spinner color={themeColors.secondary} {...spinnerProps} />
       </Row>
     );
   return (
@@ -57,6 +58,7 @@ TextButton.propTypes = {
   onClick: PropTypes.func,
   buttonProps: PropTypes.object,
   loaderProps: PropTypes.object,
+  spinnerProps: PropTypes.object,
 };
 
 export default TextButton;

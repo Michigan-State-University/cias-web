@@ -14,3 +14,5 @@ export const CHANGE_ACTIVATE_STATUS_SUCCESS =
   'app/UserList/CHANGE_ACTIVATE_STATUS_SUCCESS';
 export const CHANGE_ACTIVATE_STATUS_FAILURE = 'app/UserList/LIST_EDIT_FAILURE';
 export const PER_PAGE = 10;
+
+export const ADD_USER_TO_LIST = 'app/UserList/ADD_USER_TO_LIST';

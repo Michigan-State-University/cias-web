@@ -1,0 +1,397 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InviteResearcher /> Should display invalid email error 1`] = `
+<div>
+  <div
+    class="Box-sc-14m3exe-0 cWQJcF"
+    display="flex"
+    height="100%"
+    width="100%"
+  >
+    <div
+      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 aJmuz gGIWyq"
+      overflow="auto"
+    >
+      <div
+        class="Column-sc-1n6divy-0 dfNUrc"
+      >
+        <div
+          class="Row-x1o3ru-0 ezJzDF"
+        >
+          <h1
+            class="H1-tncdg6-0 gjhxuv"
+          >
+            Invite researcher
+          </h1>
+          <button
+            class="styled__CrossButton-sc-4w1fan-1 kkKWak"
+          >
+            <img
+              alt="cross"
+              src="IMAGE_MOCK"
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        class="Box-sc-14m3exe-0 doqjNh"
+      >
+        <div
+          class="Column-sc-1n6divy-0 dfNUrc"
+        >
+          <h3
+            class="H3-sc-1nwhpi5-0 EbaHq"
+          >
+            <span>
+              Send another invite
+            </span>
+          </h3>
+          <div
+            class="Column-sc-1n6divy-0 kzFYko"
+            width="100%"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jQzFkx"
+              font-size="14"
+            >
+              <span>
+                Researcher’s e-mail address
+              </span>
+            </p>
+            <input
+              class="Input-sc-19txxuq-0 eMxSpt"
+              placeholder="e.g john.doe@contact.com"
+              type="text"
+              value="invalidemail"
+              width="100%"
+            />
+            <p
+              class="Text-sc-2lza2m-0 fRXBAn"
+              color="#EF462F"
+              font-weight="bold"
+            >
+              Invalid e-mail address
+            </p>
+          </div>
+          <h3
+            class="H3-sc-1nwhpi5-0 EbaHq"
+          >
+            <span>
+              Invitations sent (2)
+            </span>
+          </h3>
+          <div
+            class="Row-x1o3ru-0 jSmqsy"
+            height="46"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jjfbfN"
+              font-size="14"
+            >
+              email@gmail.com
+            </p>
+            <button
+              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              color="#EF462F"
+              font-weight="bold"
+            >
+              <span>
+                Cancel
+              </span>
+            </button>
+          </div>
+          <div
+            class="Row-x1o3ru-0 jSmqsy"
+            height="46"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jjfbfN"
+              font-size="14"
+            >
+              email2@gmail.com
+            </p>
+            <button
+              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              color="#EF462F"
+              font-weight="bold"
+            >
+              <span>
+                Cancel
+              </span>
+            </button>
+          </div>
+          <button
+            class="StyledButton-t20ntd-0 jmmDPK"
+            color="primary"
+            width="260"
+          >
+            <span>
+              Send invitation
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<InviteResearcher /> Should display server error 1`] = `
+<div>
+  <div
+    class="Box-sc-14m3exe-0 cWQJcF"
+    display="flex"
+    height="100%"
+    width="100%"
+  >
+    <div
+      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 aJmuz gGIWyq"
+      overflow="auto"
+    >
+      <div
+        class="Column-sc-1n6divy-0 dfNUrc"
+      >
+        <div
+          class="Row-x1o3ru-0 ezJzDF"
+        >
+          <h1
+            class="H1-tncdg6-0 gjhxuv"
+          >
+            Invite researcher
+          </h1>
+          <button
+            class="styled__CrossButton-sc-4w1fan-1 kkKWak"
+          >
+            <img
+              alt="cross"
+              src="IMAGE_MOCK"
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        class="Box-sc-14m3exe-0 doqjNh"
+      >
+        <div
+          class="Column-sc-1n6divy-0 dfNUrc"
+        >
+          <h3
+            class="H3-sc-1nwhpi5-0 EbaHq"
+          >
+            <span>
+              Send another invite
+            </span>
+          </h3>
+          <div
+            class="Column-sc-1n6divy-0 kzFYko"
+            width="100%"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jQzFkx"
+              font-size="14"
+            >
+              <span>
+                Researcher’s e-mail address
+              </span>
+            </p>
+            <input
+              class="Input-sc-19txxuq-0 eMxSpt"
+              placeholder="e.g john.doe@contact.com"
+              type="text"
+              value=""
+              width="100%"
+            />
+          </div>
+          <h3
+            class="H3-sc-1nwhpi5-0 EbaHq"
+          >
+            <span>
+              Invitations sent (2)
+            </span>
+          </h3>
+          <div
+            class="Row-x1o3ru-0 jSmqsy"
+            height="46"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jjfbfN"
+              font-size="14"
+            >
+              email@gmail.com
+            </p>
+            <button
+              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              color="#EF462F"
+              font-weight="bold"
+            >
+              <span>
+                Cancel
+              </span>
+            </button>
+          </div>
+          <div
+            class="Row-x1o3ru-0 jSmqsy"
+            height="46"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jjfbfN"
+              font-size="14"
+            >
+              email2@gmail.com
+            </p>
+            <button
+              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              color="#EF462F"
+              font-weight="bold"
+            >
+              <span>
+                Cancel
+              </span>
+            </button>
+          </div>
+          <button
+            class="StyledButton-t20ntd-0 fRvVHe"
+            color="primary"
+            disabled=""
+            width="260"
+          >
+            <span>
+              Send invitation
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-14m3exe-0 cWQJcF"
+    display="flex"
+    height="100%"
+    width="100%"
+  >
+    <div
+      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 aJmuz gGIWyq"
+      overflow="auto"
+    >
+      <div
+        class="Column-sc-1n6divy-0 dfNUrc"
+      >
+        <div
+          class="Row-x1o3ru-0 ezJzDF"
+        >
+          <h1
+            class="H1-tncdg6-0 gjhxuv"
+          >
+            Invite researcher
+          </h1>
+          <button
+            class="styled__CrossButton-sc-4w1fan-1 kkKWak"
+          >
+            <img
+              alt="cross"
+              src="IMAGE_MOCK"
+            />
+          </button>
+        </div>
+      </div>
+      <div
+        class="Box-sc-14m3exe-0 doqjNh"
+      >
+        <div
+          class="Column-sc-1n6divy-0 dfNUrc"
+        >
+          <h3
+            class="H3-sc-1nwhpi5-0 EbaHq"
+          >
+            <span>
+              Send another invite
+            </span>
+          </h3>
+          <div
+            class="Column-sc-1n6divy-0 kzFYko"
+            width="100%"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jQzFkx"
+              font-size="14"
+            >
+              <span>
+                Researcher’s e-mail address
+              </span>
+            </p>
+            <input
+              class="Input-sc-19txxuq-0 eMxSpt"
+              placeholder="e.g john.doe@contact.com"
+              type="text"
+              value=""
+              width="100%"
+            />
+          </div>
+          <h3
+            class="H3-sc-1nwhpi5-0 EbaHq"
+          >
+            <span>
+              Invitations sent (2)
+            </span>
+          </h3>
+          <div
+            class="Row-x1o3ru-0 jSmqsy"
+            height="46"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jjfbfN"
+              font-size="14"
+            >
+              email@gmail.com
+            </p>
+            <button
+              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              color="#EF462F"
+              font-weight="bold"
+            >
+              <span>
+                Cancel
+              </span>
+            </button>
+          </div>
+          <div
+            class="Row-x1o3ru-0 jSmqsy"
+            height="46"
+          >
+            <p
+              class="Text-sc-2lza2m-0 jjfbfN"
+              font-size="14"
+            >
+              email2@gmail.com
+            </p>
+            <button
+              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              color="#EF462F"
+              font-weight="bold"
+            >
+              <span>
+                Cancel
+              </span>
+            </button>
+          </div>
+          <button
+            class="StyledButton-t20ntd-0 fRvVHe"
+            color="primary"
+            disabled=""
+            width="260"
+          >
+            <span>
+              Send invitation
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

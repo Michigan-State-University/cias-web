@@ -1,4 +1,4 @@
-const TIMEZONES = [
+export const TIMEZONES = [
   'Africa/Algiers',
   'Africa/Cairo',
   'Africa/Casablanca',
@@ -135,4 +135,4 @@ const TIMEZONES = [
   'Pacific/Tongatapu',
 ];
 
-export default TIMEZONES;
+export const defaultTimeZone = 'America/New_York';

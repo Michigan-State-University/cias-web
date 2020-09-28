@@ -19,6 +19,6 @@ export default defineMessages({
   },
   defaultDescription: {
     id: `${scope}.defaultDescription`,
-    defaultMessage: 'Are you sure you want to perfrom this action?',
+    defaultMessage: 'Are you sure you want to perform this action?',
   },
 });
