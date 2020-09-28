@@ -10,7 +10,6 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import uniq from 'lodash/uniq';
 
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
@@ -21,7 +20,7 @@ import SingleTile from 'components/SingleTile';
 import TileRenderer from 'components/TileRenderer';
 import useFilter from 'utils/useFilter';
 import SearchInput from 'components/Input/SearchInput';
-import { archived, statusTypes } from 'models/Status/StatusTypes';
+import { statusTypes } from 'models/Status/StatusTypes';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
@@ -38,7 +37,7 @@ import {
 
 import StatusFilter from './StatusFilter';
 import messages from './messages';
-import { ArchiveFilter, InitialRow } from './styled';
+import { InitialRow } from './styled';
 
 export function ProblemPage({
   fetchProblemsRequest: fetchProblems,
@@ -54,6 +53,7 @@ export function ProblemPage({
   const [valueFilteredProblems, filterValue, setFilterValue] = useFilter(
     problems,
     'name',
+    {},
   );
 
   const [finalProblems, filterStatus, setFilterStatus] = useFilter(
@@ -81,7 +81,7 @@ export function ProblemPage({
   };
 
   const handleClearFilters = () => {
-    setFilterStatus(uniq([...statusTypes, ...filterStatus]));
+    setFilterStatus(statusTypes);
   };
 
   const mapProblem = problem => (
@@ -107,8 +107,6 @@ export function ProblemPage({
       </AppContainer>
     );
   }
-
-  const showArchived = filterStatus.includes(archived);
   return (
     <AppContainer>
       <InitialRow>
@@ -117,7 +115,7 @@ export function ProblemPage({
         </H1>
       </InitialRow>
       <InitialRow>
-        <Row my={35} justify="between" width={250} height={30}>
+        <Row my={35} justify="between" width={400} height={30}>
           <StatusFilter
             onClick={handleFilterStatus}
             formatMessage={formatMessage}
@@ -126,11 +124,6 @@ export function ProblemPage({
           />
         </Row>
         <Row align="center">
-          <ArchiveFilter onClick={handleChange(archived)}>
-            {showArchived
-              ? formatMessage(messages.hideArchived)
-              : formatMessage(messages.showArchived)}
-          </ArchiveFilter>
           <SearchInput
             value={filterValue}
             onChange={e => setFilterValue(e.target.value)}

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import Row from 'components/Row';
 import {
-  archived,
   statusTypeToColorMap,
   statusTypeToFontColorMap,
 } from 'models/Status/StatusTypes';
@@ -13,18 +12,11 @@ import ActionIcon from 'components/ActionIcon';
 import { FilterText, StatusLabel } from './styled';
 
 const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
-  const filterArchived = statuses =>
-    statuses.filter(status => status !== archived);
+  const labels = useMemo(() => Object.keys(globalMessages.statuses), [
+    globalMessages.statuses,
+  ]);
 
-  const labels = useMemo(
-    () =>
-      filterArchived(Object.keys(globalMessages.statuses)).filter(
-        status => status !== archived,
-      ),
-    [globalMessages.statuses],
-  );
-
-  const showIcon = active && filterArchived(active).length !== labels.length;
+  const showIcon = active && active.length !== labels.length;
 
   return (
     <Row align="center" width="100%">

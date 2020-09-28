@@ -31,23 +31,6 @@ export const StatusLabel = styled.button`
   }
 `;
 
-export const ArchiveFilter = styled.button`
-  border: none;
-  background-color: transparent;
-  font-weight: bold;
-  outline: none;
-  font-size: 13px;
-  margin-right: 15px;
-  color: ${themeColors.text};
-  &:hover {
-    cursor: pointer;
-  }
-  &:focus {
-    outline: none;
-    outline-offset: 0px;
-  }
-`;
-
 export const FilterText = styled.p`
   color: ${props => (props.active ? colors.white : props.color)};
   white-space: pre;
