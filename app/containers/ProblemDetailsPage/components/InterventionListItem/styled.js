@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Box from 'components/Box';
 import { colors, boxShadows, themeColors } from 'theme';
+import Row from 'components/Row';
 
 export const ToggleableBox = styled(Box)`
   width: 100%;
@@ -32,4 +33,18 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
   width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+export const StyledRow = styled(Row)`
+  cursor: pointer;
+  width: 100%;
+  &:hover * {
+    color: ${themeColors.secondary};
+    ${InterventionIndex} {
+      color: white;
+    }
+  }
 `;

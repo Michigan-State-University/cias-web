@@ -39,3 +39,16 @@ export const HoverableRow = styled(Row)`
     }
   }
 `;
+
+export const InterventionIndex = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: ${colors.surfieGreen};
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+`;

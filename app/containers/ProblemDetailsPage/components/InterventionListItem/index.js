@@ -15,12 +15,19 @@ import Dropdown from 'components/Dropdown';
 import Divider from 'components/Divider';
 
 import copy from 'assets/svg/copy.svg';
+import mail from 'assets/svg/mail.svg';
 import { colors } from 'theme';
 import appStages from 'global/appStages';
 
+import Img from 'components/Img';
 import InterventionSchedule from '../InterventionSchedule';
 import messages from './messages';
-import { InterventionIndex, StyledLink, ToggleableBox } from './styled';
+import {
+  InterventionIndex,
+  ToggleableBox,
+  StyledRow,
+  StyledLink,
+} from './styled';
 import InterventionBranching from '../InterventionBranching';
 
 function InterventionListItem({
@@ -53,21 +60,20 @@ function InterventionListItem({
   ];
 
   return (
-    <ToggleableBox isSelected={isSelected} onClick={handleClick} clickable>
+    <ToggleableBox isSelected={isSelected}>
       <Row py={21} px={16} align="center" justify="between">
-        <Column xs={1}>
-          <InterventionIndex>{index + 1}</InterventionIndex>
-        </Column>
-        <Column pl={8} xs={10} width="100%">
+        <StyledRow align="center" justify="between">
           <StyledLink to={`/interventions/${problemId}/sessions/${id}/edit`}>
-            <H2>{name}</H2>
+            <InterventionIndex>{index + 1}</InterventionIndex>
+            <H2 ml={15}>{name}</H2>
           </StyledLink>
-        </Column>
-        {process.env.APP_STAGE === appStages.dev.id && (
-          <Column xs={1} align="center">
+        </StyledRow>
+        <Column xs={1} align="center">
+          <Img clickable src={mail} onClick={handleClick} alt="emails" />
+          {process.env.APP_STAGE === appStages.dev.id && (
             <Dropdown options={options} clickable id={id} />
-          </Column>
-        )}
+          )}
+        </Column>
       </Row>
       {index !== 0 && (
         <Row px={62}>

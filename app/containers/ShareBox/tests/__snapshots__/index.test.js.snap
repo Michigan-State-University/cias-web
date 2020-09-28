@@ -17,11 +17,19 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
         Invite to start intervention from:
       </span>
     </h3>
-    <h2
-      class="H2-egphza-0 hVuWpH"
+    <div
+      class="Box-sc-14m3exe-0 lbVVSW"
+      display="flex"
     >
-      Name
-    </h2>
+      <div
+        class="styled__InterventionIndex-sc-16elnyr-4 fSxFZf"
+      />
+      <h2
+        class="H2-egphza-0 gIrqD"
+      >
+        Name
+      </h2>
+    </div>
     <div
       class="Row-x1o3ru-0 iuJqoi"
     >

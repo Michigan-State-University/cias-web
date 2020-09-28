@@ -28,7 +28,30 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   padding-left: 16px;
 }
 
-.c8 {
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -41,7 +64,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   padding-left: 62px;
 }
 
-.c10 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -68,7 +91,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   padding-left: 62px;
 }
 
-.c12 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -87,7 +110,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c16 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -111,7 +134,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c23 {
+.c26 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -126,7 +149,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   padding-bottom: 20px;
 }
 
-.c24 {
+.c33 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -135,11 +158,17 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 8.333333333333332%;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -149,42 +178,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c30 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-}
-
-.c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 8.333333333333332%;
-}
-
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 83.33333333333334%;
-  width: 100%;
-  padding-left: 8px;
-}
-
-.c11 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -195,7 +189,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c15 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -206,12 +200,19 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   width: 33.33333333333333%;
 }
 
-.c7 {
+.c8 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
   line-height: 130%;
+  margin-left: 15px;
   color: #2F3850;
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
 }
 
 .c0 {
@@ -219,10 +220,17 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+}
+
+.c27 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.c26 {
+.c29 {
   width: auto;
   height: auto;
   display: block;
@@ -237,7 +245,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c28 {
+.c31 {
   width: auto;
   height: auto;
   display: block;
@@ -246,7 +254,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   top: -90px;
 }
 
-.c29 {
+.c32 {
   width: auto;
   height: auto;
   display: block;
@@ -261,7 +269,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   right: 0px;
 }
 
-.c31 {
+.c34 {
   width: auto;
   height: auto;
   display: block;
@@ -273,7 +281,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   flex-grow: 1;
 }
 
-.c34 {
+.c37 {
   width: auto;
   height: auto;
   display: block;
@@ -281,7 +289,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   margin-top: 20px;
 }
 
-.c9 {
+.c12 {
   height: 0;
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -289,7 +297,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   border: 1px solid #D5DEEA;
 }
 
-.c13 {
+.c16 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -297,7 +305,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c14 {
+.c17 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -307,14 +315,14 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c17 {
+.c20 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c25 {
+.c28 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -323,12 +331,12 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   color: rgba(200,102,234,1);
 }
 
-.c25:hover {
+.c28:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.c27 {
+.c30 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -340,7 +348,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c27:focus {
+.c30:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
@@ -356,7 +364,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   background-color: white;
 }
 
-.c4 {
+.c7 {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -378,16 +386,41 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c6 {
+.c5 {
   -webkit-text-decoration: none;
   text-decoration: none;
   color: black;
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
-.c18 {
+.c4 {
+  cursor: pointer;
+  width: 100%;
+}
+
+.c4:hover * {
+  color: #C866EA;
+}
+
+.c4:hover * .c6 {
+  color: white;
+}
+
+.c21 {
   position: relative;
   display: inline-block;
   min-width: 40px;
@@ -395,13 +428,13 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   margin-left: 10px;
 }
 
-.c20 {
+.c23 {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.c22 {
+.c25 {
   position: absolute;
   top: 0;
   left: 0;
@@ -414,15 +447,15 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   border-radius: 21px;
 }
 
-.c19:checked + .c21 {
+.c22:checked + .c24 {
   background-color: #C866EA;
 }
 
-.c19:focus + .c21 {
+.c22:focus + .c24 {
   box-shadow: 0 0 1px #C866EA;
 }
 
-.c22:before {
+.c25:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -435,13 +468,13 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c19:checked + .c21:before {
+.c22:checked + .c24:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
 
-.c33 {
+.c36 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -459,7 +492,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   height: 50px;
 }
 
-.c33:after {
+.c36:after {
   content: ' ';
   display: block;
   width: 33.33333333333333px;
@@ -471,7 +504,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   animation: hAjVGa 1.2s linear infinite;
 }
 
-.c32 {
+.c35 {
   width: 100%;
   height: 100%;
   display: -webkit-box;
@@ -488,7 +521,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c35 {
+.c38 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -511,26 +544,10 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   transition: 0.2s;
 }
 
-.c35:hover {
+.c38:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 @media only screen and (min-width:768px) {
@@ -588,56 +605,60 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
     className="c2"
   >
     <div
-      className="c3"
-    >
-      <div
-        className="c4"
-      >
-        1
-      </div>
-    </div>
-    <div
-      className="c5"
-      width="100%"
+      className="c3 c4"
     >
       <a
-        className="c6"
+        className="c5"
         href="/interventions/1/sessions/1/edit"
         onClick={[Function]}
       >
+        <div
+          className="c6 c7"
+        >
+          1
+        </div>
         <h2
-          className="c7"
+          className="c8"
         >
           Intervention
         </h2>
       </a>
     </div>
-  </div>
-  <div
-    className="c8"
-  >
     <div
       className="c9"
+    >
+      <img
+        alt="emails"
+        className="c10"
+        src="IMAGE_MOCK"
+      />
+    </div>
+  </div>
+  <div
+    className="c11"
+  >
+    <div
+      className="c12"
     />
   </div>
   <div
-    className="c10"
+    className="c13"
   >
     <div
-      className="c11"
+      className="c14"
     >
       <div
-        className="c12"
+        className="c15"
         width="100%"
       >
         <p
-          className="c13"
+          className="c16"
           fontSize={13}
         >
           Next Session:
         </p>
         <p
-          className="c14"
+          className="c17"
           fontSize={13}
           fontWeight="bold"
         >
@@ -646,54 +667,54 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      className="c15"
+      className="c18"
     >
       <div
-        className="c16"
+        className="c19"
         width="100%"
       >
         <p
-          className="c17"
+          className="c20"
         >
           Use formula
         </p>
         <label
           checked={true}
-          className="c18"
+          className="c21"
           onToggle={[Function]}
         >
           <input
             checked={true}
-            className="c19 c20"
+            className="c22 c23"
             onChange={[Function]}
             type="checkbox"
           />
           <span
-            className="c21 c22"
+            className="c24 c25"
           />
         </label>
       </div>
     </div>
   </div>
   <div
-    className="c23"
+    className="c26"
   >
     <div
-      className="c11"
+      className="c14"
     >
       <div
-        className="c11"
+        className="c14"
       >
         <div
-          className="c24"
+          className="c3"
         >
           Formula
           <div
-            className="c0"
+            className="c27"
             onClick={[Function]}
           >
             <p
-              className="c25"
+              className="c28"
               color="#C866EA"
               fontWeight="bold"
             >
@@ -702,11 +723,11 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          className="c26"
+          className="c29"
           width="100%"
         >
           <textarea
-            className="c27"
+            className="c30"
             height="auto"
             onBlur={[Function]}
             onChange={[Function]}
@@ -718,25 +739,25 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          className="c28"
+          className="c31"
         >
           <div
-            className="c29"
+            className="c32"
             display="none"
             width="auto"
           >
             <div
-              className="c30"
+              className="c33"
             >
               <div
-                className="c31"
+                className="c34"
               >
                 <div
-                  className="c32"
+                  className="c35"
                   data-testid="inline-loader"
                 >
                   <div
-                    className="c33"
+                    className="c36"
                     color="#C866EA"
                     size={50}
                     width={6}
@@ -747,7 +768,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          className="c34 c35"
+          className="c37 c38"
           onClick={[Function]}
         >
           + Add case
