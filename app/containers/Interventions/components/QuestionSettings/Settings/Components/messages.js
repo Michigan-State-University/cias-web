@@ -26,7 +26,7 @@ export default defineMessages({
   },
   subtitle: {
     id: `${scope}.subtitle`,
-    defaultMessage: 'Subtitle',
+    defaultMessage: 'Main Text',
   },
   proceed_button: {
     id: `${scope}.proceed_button`,
