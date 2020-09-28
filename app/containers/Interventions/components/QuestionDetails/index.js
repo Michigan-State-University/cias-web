@@ -49,17 +49,10 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
   if (selectedQuestion != null) {
     const {
       id,
-      title: questionTitle,
       subtitle: questionSubtitle,
       image_url: imageUrl,
       video_url: videoUrl,
-      settings: {
-        video,
-        image,
-        title,
-        subtitle,
-        proceed_button: proceedButton,
-      } = {},
+      settings: { video, image, subtitle, proceed_button: proceedButton } = {},
       narrator: { settings } = {},
     } = selectedQuestion || {};
 
@@ -97,15 +90,8 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
                 )}
                 {isNarratorTab && (
                   <>
-                    {title && questionTitle && (
-                      <QuestionPreview
-                        padding={26}
-                        dangerouslySetInnerHTML={{ __html: questionTitle }}
-                      />
-                    )}
                     {subtitle && questionSubtitle && (
                       <QuestionPreview
-                        mt={10}
                         padding={26}
                         dangerouslySetInnerHTML={{ __html: questionSubtitle }}
                       />
