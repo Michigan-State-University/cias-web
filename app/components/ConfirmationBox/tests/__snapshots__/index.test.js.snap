@@ -285,7 +285,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
             class="c9"
           >
             <span>
-              Are you sure you want to perfrom this action?
+              Are you sure you want to perform this action?
             </span>
           </h1>
           <div

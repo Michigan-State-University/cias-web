@@ -49,27 +49,17 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
   if (selectedQuestion != null) {
     const {
       id,
-      title: questionTitle,
       subtitle: questionSubtitle,
       image_url: imageUrl,
       video_url: videoUrl,
-      settings: {
-        video,
-        image,
-        title,
-        subtitle,
-        proceed_button: proceedButton,
-      } = {},
+      settings: { video, image, subtitle, proceed_button: proceedButton } = {},
       narrator: { settings } = {},
     } = selectedQuestion || {};
 
     return (
       <AnswerOuterContainer>
-        <Box width="100%">
-          <Row width="100%" mb={10}>
-            <QuestionTitle />
-          </Row>
-
+        <Column width="100%" display="flex" align="center">
+          <QuestionTitle />
           <AnswerInterventionContent ref={animationBoundaries}>
             <QuestionNarrator
               questionId={id}
@@ -100,15 +90,8 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
                 )}
                 {isNarratorTab && (
                   <>
-                    {title && questionTitle && (
-                      <QuestionPreview
-                        padding={26}
-                        dangerouslySetInnerHTML={{ __html: questionTitle }}
-                      />
-                    )}
                     {subtitle && questionSubtitle && (
                       <QuestionPreview
-                        mt={10}
                         padding={26}
                         dangerouslySetInnerHTML={{ __html: questionSubtitle }}
                       />
@@ -139,7 +122,7 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
               </Column>
             </Row>
           </AnswerInterventionContent>
-        </Box>
+        </Column>
       </AnswerOuterContainer>
     );
   }

@@ -3,7 +3,6 @@
  * Checkbox
  *
  */
-
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,9 +11,10 @@ import eye from 'assets/svg/eye.svg';
 import { Button } from 'components/Button';
 import { StyledLink } from 'containers/Navbar/components/styled';
 import { colors } from 'theme';
+import { PreviewText, StyledPreviewButton } from './styled';
 
 const PreviewButton = ({ to, target, previewDisabled, text, handleClick }) => (
-  <div>
+  <StyledPreviewButton>
     <StyledLink
       to={to}
       target={target}
@@ -24,7 +24,6 @@ const PreviewButton = ({ to, target, previewDisabled, text, handleClick }) => (
       <Button
         disabled={previewDisabled}
         inverted
-        width="auto"
         height={35}
         color="secondary"
         borderRadius={5}
@@ -34,13 +33,13 @@ const PreviewButton = ({ to, target, previewDisabled, text, handleClick }) => (
         <Icon
           src={eye}
           alt="eye"
-          mr={6}
+          mx={6}
           fill={previewDisabled ? colors.grey : null}
         />
-        {text}
+        <PreviewText className="preview-text">{text}</PreviewText>
       </Button>
     </StyledLink>
-  </div>
+  </StyledPreviewButton>
 );
 
 PreviewButton.propTypes = {

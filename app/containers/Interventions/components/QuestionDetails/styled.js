@@ -12,11 +12,13 @@ const AnswerInterventionContent = styled.div`
   position: relative;
   width: 100%;
   z-index: 0;
+  overflow: auto;
 `;
 
 const AnswerOuterContainer = styled.div`
   align-items: center;
   display: flex;
+  flex-grow: 1;
   height: fit-content;
   justify-content: flex-start;
   padding: 0 10px;

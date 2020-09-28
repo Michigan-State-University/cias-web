@@ -4,38 +4,26 @@
  *
  */
 
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { Helmet } from 'react-helmet';
-import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
 import xor from 'lodash/xor';
-import { withRouter } from 'react-router-dom';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { Helmet } from 'react-helmet';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
-import Loader from 'components/Loader';
-import ErrorAlert from 'components/ErrorAlert';
-import {
-  StripedTR,
-  TableLoading,
-  TBody,
-  TD,
-  TH,
-  THead,
-} from 'components/Table';
-import Box from 'components/Box';
-import Column from 'components/Column';
-import H1 from 'components/H1';
-import UserRoleTile from 'components/UserRoleTile';
-import StyledTextButton from 'components/Button/StyledTextButton';
-import SearchInput from 'components/Input/SearchInput';
-import Text from 'components/Text';
-import Checkbox from 'components/Checkbox';
-import ConfirmationBox from 'components/ConfirmationBox';
 import ActionIcon from 'components/ActionIcon';
-import Row from 'components/Row';
-
+import Box from 'components/Box';
+import Checkbox from 'components/Checkbox';
+import ErrorAlert from 'components/ErrorAlert';
+import H1 from 'components/H1';
+import Loader from 'components/Loader';
+import SearchInput from 'components/Input/SearchInput';
+import TextButton from 'components/Button/TextButton';
+import UserRoleTile from 'components/UserRoleTile';
+import useDebounce from 'utils/useDebounce';
+import { Roles } from 'models/User/UserRoles';
 import {
   fetchUsers,
   userListSaga,
@@ -43,33 +31,22 @@ import {
   makeSelectUserList,
   changeActivateStatusRequest,
 } from 'global/reducers/userList';
-import { boxShadows, colors, themeColors } from 'theme';
-
-import { Roles } from 'models/User/UserRoles';
-import isNullOrUndefined from 'utils/isNullOrUndefined';
-import useDebounce from 'utils/useDebounce';
-import { useInjectSaga } from 'utils/injectSaga';
+import { themeColors } from 'theme';
 import { useInjectReducer } from 'utils/injectReducer';
-import { ternary } from 'utils/ternary';
+import { useInjectSaga } from 'utils/injectSaga';
 
+import InviteResearcher from '../InviteResearcher';
+import UserTable from './Components/UserTable';
 import messages from './messages';
-import PaginationHandler from './Components/PaginationHelper';
 
-const columns = formatMessage => [
-  formatMessage(messages.name),
-  formatMessage(messages.email),
-  formatMessage(messages.role),
-  null,
-];
-const rolesToFilter = [Roles.participant, Roles.researcher, Roles.admin];
+const rolesToFilter = [Roles.participant, Roles.researcher];
 const initialDelay = 500;
 
-export function UserList({
+function UserList({
   userList: { users, usersLoading, usersError },
   fetchUsersRequest,
   changeActivateStatus,
   intl: { formatMessage },
-  history,
 }) {
   useInjectReducer({ key: 'userList', reducer: UserListReducer });
   useInjectSaga({ key: 'userList', saga: userListSaga });
@@ -77,7 +54,7 @@ export function UserList({
   const [filterText, setFilterText] = useState('');
   const [selectRoles, setSelectRoles] = useState(rolesToFilter);
   const [showInactive, setShowInactive] = useState(false);
-  const [deactivateModal, setDeactivateModal] = useState({});
+  const [modalVisible, setModalVisible] = useState(false);
   const [page, setPage] = useState(1);
   const debouncedFilterText = useDebounce(filterText, initialDelay);
 
@@ -92,44 +69,14 @@ export function UserList({
     setSelectRoles(toggledArray);
   };
 
-  const handleClick = id => () => history.push(`/profile/${id}`);
-
-  const handleOpenDeactivateModal = user => setDeactivateModal(user);
-  const handleDeactivate = () => {
-    const { active, id } = deactivateModal;
-    changeActivateStatus(id, !active);
-    setDeactivateModal({});
-  };
-
-  const contentText = () => {
-    const { email, fullName } = deactivateModal || {};
-    return (
-      <>
-        <Text textAlign="center" fontWeight="bold">
-          {fullName}
-        </Text>
-        <Text textAlign="center">{email}</Text>
-      </>
-    );
-  };
-  const modalDescription = ternary(
-    deactivateModal.active,
-    formatMessage(messages.deactivateAccountConfirm),
-    formatMessage(messages.activateAccountConfirm),
-  );
+  const openModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
 
   const getContent = () => {
     if (usersLoading && users.length === 0) return <Loader />;
     if (usersError) return <ErrorAlert errorText={usersError} />;
     return (
       <div>
-        <ConfirmationBox
-          visible={!isNullOrUndefined(deactivateModal.id)}
-          onClose={() => setDeactivateModal({})}
-          description={modalDescription}
-          content={contentText()}
-          confirmAction={handleDeactivate}
-        />
         <Box display="flex" justify="between" mb={40}>
           <Box display="flex" align="center">
             <Box display="inline-block" width="100%">
@@ -170,108 +117,42 @@ export function UserList({
             onChange={e => setFilterText(e.target.value)}
           />
         </Box>
-        {users.length === 0 && (
-          <H1>
-            <FormattedMessage {...messages.noUsers} />
-          </H1>
-        )}
-        {users.length !== 0 && (
-          <TableLoading
-            loading={usersLoading}
-            width="100%"
-            mb={20}
-            shadow={boxShadows.selago}
-          >
-            <THead>
-              <StripedTR>
-                {columns(formatMessage).map((column, columnIndex) => (
-                  <TH
-                    bg={colors.white}
-                    color={colors.bluewood}
-                    opacity={0.6}
-                    scope="col"
-                    key={`col-th-${columnIndex}`}
-                    width="auto"
-                  >
-                    <Column pl={20} align="start">
-                      {column}
-                    </Column>
-                  </TH>
-                ))}
-              </StripedTR>
-            </THead>
-            <TBody>
-              {users.map(({ id, email, fullName, roles, active }) => (
-                <StripedTR
-                  lastItemHoverable
-                  cursor="pointer"
-                  hoverBg={colors.linkWater}
-                  color={colors.white}
-                  key={`row-th-${id}`}
-                  textColor={active ? colors.black : colors.grey}
-                  onClick={handleClick(id)}
-                >
-                  <TD pl={20}>{fullName}</TD>
-                  <TD pl={20}>{email}</TD>
-                  <TD pl={20}>
-                    <UserRoleTile role={roles[0]} disabled={!active} />
-                  </TD>
-                  <TD>
-                    <Row width="100%" justify="end" pr={20}>
-                      <StyledTextButton
-                        onClick={e => {
-                          e.stopPropagation();
-                          handleOpenDeactivateModal({
-                            id,
-                            email,
-                            fullName,
-                            active,
-                          });
-                        }}
-                      >
-                        <Text color={colors.flamingo} fontWeight="bold">
-                          {active
-                            ? formatMessage(messages.deactivateAccount)
-                            : formatMessage(messages.activateAccount)}
-                        </Text>
-                      </StyledTextButton>
-                    </Row>
-                  </TD>
-                </StripedTR>
-              ))}
-            </TBody>
-          </TableLoading>
-        )}
-        <PaginationHandler
+        <UserTable
+          formatMessage={formatMessage}
+          users={users}
+          loading={usersLoading}
+          changeActivateStatus={changeActivateStatus}
           setPage={setPage}
           page={page}
-          userSize={users.length}
         />
       </div>
     );
   };
 
   return (
-    <Box height="100%" overflow="scroll" display="flex" justify="center">
-      <Helmet>
-        <title>Users list</title>
-        <meta name="description" content="List of users" />
-      </Helmet>
-      <Box mt={30} width="100%" px="10%">
-        <Box display="flex" mb={30}>
-          <H1 mr={10}>
-            <FormattedMessage {...messages.manageAccount} />
-          </H1>
-          <StyledTextButton
-            color={themeColors.secondary}
-            onClick={() => console.log('showModal')}
-          >
-            <FormattedMessage {...messages.inviteResearcher} />
-          </StyledTextButton>
+    <Fragment>
+      <InviteResearcher visible={modalVisible} onClose={closeModal} />
+      <Box height="100%" overflow="scroll" display="flex" justify="center">
+        <Helmet>
+          <title>Users list</title>
+          <meta name="description" content="List of users" />
+        </Helmet>
+        <Box mt={30} width="100%" px="10%">
+          <Box display="flex" mb={30}>
+            <H1 mr={10}>
+              <FormattedMessage {...messages.manageAccount} />
+            </H1>
+            <TextButton
+              buttonProps={{ color: themeColors.secondary, fontWeight: 'bold' }}
+              onClick={openModal}
+            >
+              <FormattedMessage {...messages.inviteResearcher} />
+            </TextButton>
+          </Box>
+          {getContent()}
         </Box>
-        {getContent()}
       </Box>
-    </Box>
+    </Fragment>
   );
 }
 
@@ -279,8 +160,7 @@ UserList.propTypes = {
   fetchUsersRequest: PropTypes.func.isRequired,
   changeActivateStatus: PropTypes.func.isRequired,
   userList: PropTypes.object,
-  intl: PropTypes.object,
-  history: PropTypes.object,
+  intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -301,5 +181,4 @@ export default compose(
   withConnect,
   memo,
   injectIntl,
-  withRouter,
 )(UserList);

@@ -24,6 +24,7 @@ const colors = {
   selago: '#E3EEFB',
   electricViolet: '#B302FF',
   coral: '#FF7F50',
+  mystic: '#D7DEE9',
   jungleGreenLighter: '#23B7A0',
   buddhaGold: '#C2B200',
   navyBlue: '#000080',

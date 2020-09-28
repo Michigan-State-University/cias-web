@@ -14,6 +14,7 @@ import {
   FETCH_USERS_SUCCESS,
   CHANGE_ACTIVATE_STATUS_FAILURE,
   CHANGE_ACTIVATE_STATUS_SUCCESS,
+  ADD_USER_TO_LIST,
 } from './constants';
 
 export const initialState = {
@@ -54,6 +55,10 @@ const userListReducer = (state = initialState, { type, payload }) =>
       case CHANGE_ACTIVATE_STATUS_FAILURE:
         draft.users = state.cache.users;
         draft.cache.users = [];
+        break;
+
+      case ADD_USER_TO_LIST:
+        draft.users = [payload.user, ...state.users];
         break;
     }
   });

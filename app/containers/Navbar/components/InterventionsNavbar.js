@@ -76,7 +76,7 @@ const InterventionNavbar = ({
           fontSize={23}
           placeholder={formatMessage(messages.placeholder)}
           onBlur={val => updateInterventionName({ path: 'name', value: val })}
-          maxWidth="none"
+          maxWidth={280}
         />
       </Row>
       <Tabs
@@ -85,6 +85,7 @@ const InterventionNavbar = ({
         controlledTabActive={tabActive}
         controlledSetTabActive={setTabActive}
         controlled
+        minWidth={310}
       >
         <div
           renderAsLink={
@@ -102,11 +103,6 @@ const InterventionNavbar = ({
             >
               {formatMessage(messages.settings)}
             </StyledLink>
-          }
-        />
-        <div
-          renderAsLink={
-            <StyledLink to="/">{formatMessage(messages.sharing)}</StyledLink>
           }
         />
       </Tabs>

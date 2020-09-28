@@ -12,13 +12,14 @@ import {
   TOGGLE_QUESTION_SETTINGS,
   MAKE_CHARACTER_DRAGGABLE,
   SET_ANIMATION_STOP_POSITION,
+  SET_QUESTION_SETTINGS,
 } from './constants';
 import { getPreviewData } from './utils';
 
 export const initialState = {
   currentNarratorBlockIndex: -1,
   questionSettings: {
-    visibility: false,
+    visibility: true,
     tab: settingsTabLabels.settings,
   },
   animationPosition: {
@@ -46,20 +47,12 @@ const localStateReducer = (state = initialState, { type, payload }) =>
         draft.animationPosition = payload;
         break;
       case TOGGLE_QUESTION_SETTINGS:
+        const { visibility } = state.questionSettings;
+        draft.questionSettings.visibility = !visibility;
+        break;
+      case SET_QUESTION_SETTINGS:
         if (!isNullOrUndefined(payload.index)) {
           draft.questionSettings.tab = settingsTabLabels.settings;
-          if (payload.index < 0) {
-            draft.questionSettings.visibility = false;
-            break;
-          }
-          if (
-            payload.index === payload.questionIndex &&
-            state.questionSettings.visibility
-          ) {
-            draft.questionSettings.visibility = false;
-            break;
-          }
-          draft.questionSettings.visibility = true;
         }
         if (!isNullOrUndefined(payload.tab))
           draft.questionSettings.tab = payload.tab;
