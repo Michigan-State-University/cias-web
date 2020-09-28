@@ -20,6 +20,7 @@ const FadedBox = styled(Box)`
     );
     width: 100%;
     height: 2.5em;
+    border-radius: inherit;
   }
 `;
 

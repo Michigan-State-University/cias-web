@@ -12,11 +12,11 @@ import { CHANGE_ACTIVATE_STATUS_REQUEST } from '../constants';
 
 import messages from './messages';
 
-function* changeActivateStatus({ payload: { id, deactivated } }) {
+function* changeActivateStatus({ payload: { id, active } }) {
   const requestUrl = `/v1/users/${id}`;
   try {
-    if (deactivated) yield axios.delete(requestUrl);
-    else yield axios.patch(requestUrl, { deactivated });
+    if (!active) yield axios.delete(requestUrl);
+    else yield axios.patch(requestUrl, { active });
     yield put(changeActivateStatusSuccess());
     yield put(showInfo(formatMessage(messages.changeStatusSuccess)));
   } catch (error) {

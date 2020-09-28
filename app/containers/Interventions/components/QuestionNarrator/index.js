@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useReducer } from 'react';
 import Draggable from 'react-draggable';
 import Lottie from 'react-lottie';
 import PropTypes from 'prop-types';
@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { useAsync } from 'utils/useAsync';
 import useAnimationHelper from 'utils/animationsHelpers/useAnimationHelper';
 import useAudioHelper from 'utils/animationsHelpers/useAudioHelper';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
@@ -136,20 +137,21 @@ const QuestionNarrator = ({
   const fetchJSON = async () => {
     await fetchBodyAndHeadAnimations();
     await fetchAudioAnimations();
-
-    dispatchUpdate({
-      currentData: getInitialData(),
-      currentBlockIndex: 0,
-    });
   };
 
-  useEffect(() => {
-    if (previewData.animation) {
-      fetchJSON();
-
-      return stopSpeech;
-    }
-  }, [previewData.animation]);
+  useAsync(
+    fetchJSON,
+    () =>
+      dispatchUpdate({
+        currentData: getInitialData(),
+        currentBlockIndex: 0,
+      }),
+    {
+      deps: [previewData.animation],
+      conditions: [previewData.animation],
+      cleanUpFunction: stopSpeech,
+    },
+  );
 
   useDidUpdateEffect(() => {
     if (settings.animation) {

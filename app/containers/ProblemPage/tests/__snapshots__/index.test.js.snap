@@ -21,9 +21,9 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
       class="styled__InitialRow-sc-14fow03-0 jXHBhS"
     >
       <div
-        class="Row-x1o3ru-0 iwIRNv"
+        class="Row-x1o3ru-0 fjCOLU"
         height="30"
-        width="250"
+        width="400"
       >
         <div
           class="Row-x1o3ru-0 kAuiUx"
@@ -35,7 +35,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
             value="draft"
           >
             <p
-              class="styled__FilterText-sc-14fow03-3 dekmRY"
+              class="styled__FilterText-sc-14fow03-2 dnqhxZ"
               color="#FFFFFF"
             >
               Draft
@@ -47,7 +47,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
             value="published"
           >
             <p
-              class="styled__FilterText-sc-14fow03-3 dekmRY"
+              class="styled__FilterText-sc-14fow03-2 dnqhxZ"
               color="#FFFFFF"
             >
               Published
@@ -59,10 +59,22 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
             value="closed"
           >
             <p
-              class="styled__FilterText-sc-14fow03-3 dekmRY"
+              class="styled__FilterText-sc-14fow03-2 dnqhxZ"
               color="#FFFFFF"
             >
               Closed
+            </p>
+          </button>
+          <button
+            class="styled__StatusLabel-sc-14fow03-1 rGA-DV"
+            color="#000000"
+            value="archived"
+          >
+            <p
+              class="styled__FilterText-sc-14fow03-2 dnqhxZ"
+              color="#FFFFFF"
+            >
+              Archived
             </p>
           </button>
         </div>
@@ -70,11 +82,6 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
       <div
         class="Row-x1o3ru-0 gHqqvy"
       >
-        <button
-          class="styled__ArchiveFilter-sc-14fow03-2 jWGrpp"
-        >
-          Show Archived
-        </button>
         <div
           class="styled__SearchInputStyled-sc-65e6t4-3 drvUyz"
         >

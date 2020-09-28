@@ -84,8 +84,8 @@ export function UserList({
   const clearFilters = selectRoles.length === rolesToFilter.length;
 
   useEffect(() => {
-    fetchUsersRequest(selectRoles, debouncedFilterText, page);
-  }, [selectRoles, debouncedFilterText, page]);
+    fetchUsersRequest(selectRoles, debouncedFilterText, page, showInactive);
+  }, [selectRoles, debouncedFilterText, page, showInactive]);
 
   const toggleRole = role => () => {
     const toggledArray = xor(selectRoles, [role]);
@@ -96,8 +96,8 @@ export function UserList({
 
   const handleOpenDeactivateModal = user => setDeactivateModal(user);
   const handleDeactivate = () => {
-    const { deactivated, id } = deactivateModal;
-    changeActivateStatus(id, !deactivated);
+    const { active, id } = deactivateModal;
+    changeActivateStatus(id, !active);
     setDeactivateModal({});
   };
 
@@ -113,9 +113,9 @@ export function UserList({
     );
   };
   const modalDescription = ternary(
-    deactivateModal.deactivated,
-    formatMessage(messages.activateAccountConfirm),
+    deactivateModal.active,
     formatMessage(messages.deactivateAccountConfirm),
+    formatMessage(messages.activateAccountConfirm),
   );
 
   const getContent = () => {
@@ -201,20 +201,20 @@ export function UserList({
               </StripedTR>
             </THead>
             <TBody>
-              {users.map(({ id, email, fullName, roles, deactivated }) => (
+              {users.map(({ id, email, fullName, roles, active }) => (
                 <StripedTR
                   lastItemHoverable
                   cursor="pointer"
                   hoverBg={colors.linkWater}
                   color={colors.white}
                   key={`row-th-${id}`}
-                  textColor={deactivated ? colors.grey : colors.black}
+                  textColor={active ? colors.black : colors.grey}
                   onClick={handleClick(id)}
                 >
                   <TD pl={20}>{fullName}</TD>
                   <TD pl={20}>{email}</TD>
                   <TD pl={20}>
-                    <UserRoleTile role={roles[0]} disabled={deactivated} />
+                    <UserRoleTile role={roles[0]} disabled={!active} />
                   </TD>
                   <TD>
                     <Row width="100%" justify="end" pr={20}>
@@ -225,14 +225,14 @@ export function UserList({
                             id,
                             email,
                             fullName,
-                            deactivated,
+                            active,
                           });
                         }}
                       >
                         <Text color={colors.flamingo} fontWeight="bold">
-                          {deactivated
-                            ? formatMessage(messages.activateAccount)
-                            : formatMessage(messages.deactivateAccount)}
+                          {active
+                            ? formatMessage(messages.deactivateAccount)
+                            : formatMessage(messages.activateAccount)}
                         </Text>
                       </StyledTextButton>
                     </Row>
