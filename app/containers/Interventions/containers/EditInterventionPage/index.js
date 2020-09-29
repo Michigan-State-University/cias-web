@@ -5,21 +5,37 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import xor from 'lodash/xor';
 
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
 import Icon from 'components/Icon';
 import Row from 'components/Row';
+import Img from 'components/Img';
+import ActionIcon from 'components/ActionIcon';
+import Text from 'components/Text';
 
 import menu from 'assets/svg/triangle-back-black.svg';
-import { borders, colors } from 'theme';
+import cog from 'assets/svg/gear-selected.svg';
+import copy from 'assets/svg/copy.svg';
+import copyActive from 'assets/svg/copy-active.svg';
+import share from 'assets/svg/file-share.svg';
+import shareActive from 'assets/svg/file-share-active.svg';
+import bin from 'assets/svg/bin-no-bg.svg';
+import binActive from 'assets/svg/bin-active.svg';
+import group from 'assets/svg/group.svg';
+import groupActive from 'assets/svg/group-active.svg';
+
 import Question from 'models/Intervention/Question';
-import { localStateReducer } from 'global/reducers/localState';
+import { borders, colors, themeColors } from 'theme';
+
 import injectSaga, { useInjectSaga } from 'utils/injectSaga';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import { useInjectReducer } from 'utils/injectReducer';
+
+import { localStateReducer } from 'global/reducers/localState';
 import {
   getInterventionRequest,
   interventionReducer,
@@ -48,6 +64,29 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 import messages from './messages';
 import { useLockEditInterventionPageScroll } from './utils';
 import { QuestionsRow, ShowListButton } from './styled';
+
+const groupActions = [
+  {
+    label: <FormattedMessage {...messages.duplicate} />,
+    inactiveIcon: copy,
+    activeIcon: copyActive,
+  },
+  {
+    label: <FormattedMessage {...messages.shareCopy} />,
+    inactiveIcon: share,
+    activeIcon: shareActive,
+  },
+  {
+    label: <FormattedMessage {...messages.delete} />,
+    inactiveIcon: bin,
+    activeIcon: binActive,
+  },
+  {
+    label: <FormattedMessage {...messages.group} />,
+    inactiveIcon: group,
+    activeIcon: groupActive,
+  },
+];
 
 function EditInterventionPage({
   intl: { formatMessage },
@@ -114,6 +153,38 @@ function EditInterventionPage({
 
   const loading = getQuestionsLoading || getInterventionLoader;
 
+  const [manage, setManage] = useState(false);
+  const [selectedSlides, setSelectedSlides] = useState([]);
+
+  const active = selectedSlides.length !== 0;
+  const mapActions = (action, index) => (
+    <Box
+      display="flex"
+      mr={20}
+      direction="column"
+      align="center"
+      key={index}
+      clickable={active}
+    >
+      <div>
+        <Img
+          height={20}
+          mb={5}
+          src={active ? action.activeIcon : action.inactiveIcon}
+          alt="icon"
+        />
+      </div>
+      <div>
+        <Text
+          color={active ? themeColors.secondary : colors.waterloo}
+          size={12}
+        >
+          {action.label}
+        </Text>
+      </div>
+    </Box>
+  );
+
   if (questions.length === 0 && !getQuestionsLoading)
     return (
       <EmptyInterventionPage
@@ -123,6 +194,9 @@ function EditInterventionPage({
     );
 
   if (loading) return <Loader size={100} />;
+
+  const selectSlide = slideId =>
+    setSelectedSlides(xor(selectedSlides, [slideId]));
 
   return (
     <Fragment>
@@ -140,11 +214,33 @@ function EditInterventionPage({
             bg={colors.white}
             {...hoverListProps}
           >
-            <Box padded minWidth={300}>
+            <Box width="100%" padded minWidth={350}>
+              {!manage && (
+                <Row
+                  onClick={() => setManage(true)}
+                  clickable
+                  align="center"
+                  mb={10}
+                >
+                  <Img src={cog} alt="manage" />
+                  <Text ml={10} fontWeight="bold" color={themeColors.secondary}>
+                    <FormattedMessage {...messages.manageSlides} />
+                  </Text>
+                </Row>
+              )}
+              {manage && (
+                <Row mb={10} justify="between">
+                  <Row>{groupActions.map(mapActions)}</Row>
+                  <ActionIcon mr="0" onClick={() => setManage(false)} />
+                </Row>
+              )}
               <Reorder reorderId="question-list" onReorder={handleReorder}>
                 {questions.map((question, index) => (
                   <Row key={question.id}>
                     <QuestionListItem
+                      selectSlide={selectSlide}
+                      checked={selectedSlides.includes(question.id)}
+                      manage={manage}
                       index={index}
                       selectedQuestionIndex={selectedQuestion}
                       questions={questions}

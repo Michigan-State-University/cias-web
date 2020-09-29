@@ -35,6 +35,7 @@ import {
 import StyledCircle from 'components/Circle/StyledCircle';
 import { QuestionTypes } from 'models/Intervention/QuestionTypes';
 import Box from 'components/Box';
+import Radio from 'components/Radio';
 import { ToggleableBox, ClampedTitle } from './styled';
 import messages from './messages';
 import getIndex from './utils';
@@ -53,6 +54,9 @@ const QuestionListItem = ({
   changeNarratorBlockIndex,
   setDraggable,
   setCharacterPosition,
+  checked,
+  selectSlide,
+  manage,
 }) => {
   const isSelected = selectedQuestionIndex === index;
   const { type, subtitle, id, body } = question;
@@ -112,6 +116,17 @@ const QuestionListItem = ({
       isSelected={isSelected}
     >
       <Row justify="between">
+        {manage && (
+          <Column xs={1}>
+            <Radio
+              onClick={e => {
+                selectSlide(id);
+                e.stopPropagation();
+              }}
+              checked={checked}
+            />
+          </Column>
+        )}
         <Column xs={10}>
           <Row>
             <ClampedTitle mb={6}>
@@ -141,9 +156,11 @@ const QuestionListItem = ({
             </Row>
           )}
         </Column>
-        <Column xs={1}>
-          <Dropdown options={options} />
-        </Column>
+        {!manage && (
+          <Column xs={1}>
+            <Dropdown options={options} />
+          </Column>
+        )}
       </Row>
     </ToggleableBox>
   );
@@ -164,6 +181,9 @@ QuestionListItem.propTypes = {
   changeNarratorBlockIndex: PropTypes.func,
   setDraggable: PropTypes.func,
   setCharacterPosition: PropTypes.func,
+  checked: PropTypes.bool,
+  manage: PropTypes.bool,
+  selectSlide: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({

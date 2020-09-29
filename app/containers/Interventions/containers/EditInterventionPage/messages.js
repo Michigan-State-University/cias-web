@@ -15,6 +15,26 @@ export default defineMessages({
     id: `${scope}.newQuestionSubtitle`,
     defaultMessage: 'Enter main text/question for screen here',
   },
+  manageSlides: {
+    id: `${scope}.manageSlides`,
+    defaultMessage: 'Manage slides',
+  },
+  duplicate: {
+    id: `${scope}.duplicate`,
+    defaultMessage: 'Duplicate',
+  },
+  shareCopy: {
+    id: `${scope}.shareCopy`,
+    defaultMessage: 'Share copy',
+  },
+  delete: {
+    id: `${scope}.delete`,
+    defaultMessage: 'Delete',
+  },
+  group: {
+    id: `${scope}.group`,
+    defaultMessage: 'Group',
+  },
   errors: {
     duplicateVariable: {
       id: `${scope}.duplicateVariable`,
