@@ -29,4 +29,8 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Email',
   },
+  waitingForActivation: {
+    id: `${scope}.waitingForActivation`,
+    defaultMessage: 'Waiting for activation',
+  },
 });
