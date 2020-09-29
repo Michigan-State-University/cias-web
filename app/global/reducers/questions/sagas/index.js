@@ -1,11 +1,14 @@
 import { all } from 'redux-saga/effects';
 import addQuestionImageSaga from './addQuestionImage';
 import copyQuestionSaga from './copyQuestion';
+import copyQuestionsSaga from './copyQuestions';
 import createQuestionSaga from './createQuestion';
 import deleteQuestionSaga from './deleteQuestion';
+import deleteQuestionsSaga from './deleteQuestions';
 import deleteQuestionImageSaga from './deleteQuestionImage';
 import getQuestionsSaga from './getQuestions';
 import reorderQuestionsSaga from './reorderQuestions';
+import groupQuestionsSaga from './groupQuestions';
 import editQuestionAllSagas, {
   editQuestionSaga,
   updateQuestionDataSaga,
@@ -26,6 +29,9 @@ export {
   updateQuestionDataSaga,
   updateQuestionSettingsSaga,
   changeQuestionTypeSaga,
+  copyQuestionsSaga,
+  deleteQuestionsSaga,
+  groupQuestionsSaga,
 };
 
 export default function* allQuestionsSagas() {
@@ -41,5 +47,8 @@ export default function* allQuestionsSagas() {
     updateQuestionDataSaga(),
     updateQuestionSettingsSaga(),
     changeQuestionTypeSaga(),
+    copyQuestionsSaga(),
+    deleteQuestionsSaga(),
+    groupQuestionsSaga(),
   ]);
 }

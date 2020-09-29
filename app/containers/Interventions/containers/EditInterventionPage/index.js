@@ -21,8 +21,6 @@ import menu from 'assets/svg/triangle-back-black.svg';
 import cog from 'assets/svg/gear-selected.svg';
 import copy from 'assets/svg/copy.svg';
 import copyActive from 'assets/svg/copy-active.svg';
-import share from 'assets/svg/file-share.svg';
-import shareActive from 'assets/svg/file-share-active.svg';
 import bin from 'assets/svg/bin-no-bg.svg';
 import binActive from 'assets/svg/bin-active.svg';
 import group from 'assets/svg/group.svg';
@@ -51,6 +49,9 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionIndex,
   makeSelectLoader,
+  copyQuestionsRequest,
+  deleteQuestionsRequest,
+  groupQuestionsRequest,
 } from 'global/reducers/questions';
 
 import GroupActionButton from 'containers/Interventions/components/GroupActionButton';
@@ -66,29 +67,6 @@ import messages from './messages';
 import { useLockEditInterventionPageScroll } from './utils';
 import { QuestionsRow, ShowListButton } from './styled';
 
-const groupActions = [
-  {
-    label: <FormattedMessage {...messages.duplicate} />,
-    inactiveIcon: copy,
-    activeIcon: copyActive,
-  },
-  {
-    label: <FormattedMessage {...messages.shareCopy} />,
-    inactiveIcon: share,
-    activeIcon: shareActive,
-  },
-  {
-    label: <FormattedMessage {...messages.delete} />,
-    inactiveIcon: bin,
-    activeIcon: binActive,
-  },
-  {
-    label: <FormattedMessage {...messages.group} />,
-    inactiveIcon: group,
-    activeIcon: groupActive,
-  },
-];
-
 function EditInterventionPage({
   intl: { formatMessage },
   questions,
@@ -100,7 +78,34 @@ function EditInterventionPage({
   reorderQuestions,
   getQuestionsLoading,
   interventionLoaders: { getIntervention: getInterventionLoader },
+  copyQuestions,
+  deleteQuestions,
+  groupQuestions,
 }) {
+  const [manage, setManage] = useState(false);
+  const [selectedSlides, setSelectedSlides] = useState([]);
+  const [showList, setShowList] = useState(false);
+
+  const groupActions = [
+    {
+      label: <FormattedMessage {...messages.duplicate} />,
+      inactiveIcon: copy,
+      activeIcon: copyActive,
+      action: () => copyQuestions(selectedSlides),
+    },
+    {
+      label: <FormattedMessage {...messages.delete} />,
+      inactiveIcon: bin,
+      activeIcon: binActive,
+      action: () => deleteQuestions(selectedSlides),
+    },
+    {
+      label: <FormattedMessage {...messages.group} />,
+      inactiveIcon: group,
+      activeIcon: groupActive,
+      action: () => groupQuestions(selectedSlides),
+    },
+  ];
   useLockEditInterventionPageScroll();
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
@@ -108,8 +113,6 @@ function EditInterventionPage({
 
   useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
-
-  const [showList, setShowList] = useState(false);
 
   const hoverListProps = {
     onMouseEnter: () => setShowList(true),
@@ -153,9 +156,6 @@ function EditInterventionPage({
   };
 
   const loading = getQuestionsLoading || getInterventionLoader;
-
-  const [manage, setManage] = useState(false);
-  const [selectedSlides, setSelectedSlides] = useState([]);
 
   const active = selectedSlides.length !== 0;
   const mapActions = (action, index) => (
@@ -257,6 +257,9 @@ EditInterventionPage.propTypes = {
   reorderQuestions: PropTypes.func,
   getQuestionsLoading: PropTypes.bool,
   interventionLoaders: PropTypes.object,
+  copyQuestions: PropTypes.func,
+  deleteQuestions: PropTypes.func,
+  groupQuestions: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -271,6 +274,9 @@ const mapDispatchToProps = {
   getQuestions: getQuestionsRequest,
   createQuestion: createQuestionRequest,
   reorderQuestions: reorderQuestionListRequest,
+  copyQuestions: copyQuestionsRequest,
+  deleteQuestions: deleteQuestionsRequest,
+  groupQuestions: groupQuestionsRequest,
 };
 
 const withConnect = connect(
