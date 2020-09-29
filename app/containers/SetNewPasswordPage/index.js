@@ -78,9 +78,8 @@ const SetNewPasswordPage = ({
     return <Redirect to="/login" />;
   }
 
-  const { 'access-token': accessToken, client, uid } = queryObj;
-
   const onSubmit = ({ password, passwordConfirmation }, { setSubmitting }) => {
+    const { 'access-token': accessToken, client, uid } = queryObj;
     setNewPassword({
       password,
       passwordConfirmation,

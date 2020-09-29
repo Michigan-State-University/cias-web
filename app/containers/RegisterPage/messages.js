@@ -102,4 +102,8 @@ export default defineMessages({
     id: `${scope}.pageTitle`,
     defaultMessage: 'Registration',
   },
+  headerInvite: {
+    id: `${scope}.headerInvite`,
+    defaultMessage: 'Register researcher account',
+  },
 });

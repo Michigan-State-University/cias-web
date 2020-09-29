@@ -18,6 +18,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import set from 'lodash/set';
+import queryString from 'query-string';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -34,9 +35,12 @@ import withPublicLayout from 'containers/PublicLayout';
 import { themeColors } from 'theme';
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
-import saga from './saga';
+import allRegistrationsSaga from './sagas';
 import messages from './messages';
-import { register } from './actions';
+import {
+  registerParticipantRequest,
+  registerResearcherRequest,
+} from './actions';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -71,26 +75,36 @@ const validationSchema = formatMessage =>
     firstName: Yup.string().required(formatMessage(messages.firstNameRequired)),
   });
 
-const initialValues = {
-  email: '',
+const initialValues = email => ({
+  email: email || '',
   password: '',
   passwordConfirmation: '',
   firstName: '',
   lastName: '',
-};
+});
 
 export function RegisterPage({
-  register: registerAction,
+  registerParticipant,
+  registerResearcher,
   intl: { formatMessage },
   registerPage: { loading, error },
+  location,
 }) {
   useInjectReducer({ key: 'registerPage', reducer });
-  useInjectSaga({ key: 'registerPage', saga });
+  useInjectSaga({ key: 'allRegistrationsSaga', saga: allRegistrationsSaga });
+  const { email, invitation_token: invitationToken } = queryString.parse(
+    location.search,
+  );
+  const isInvite = Boolean(invitationToken) && Boolean(email);
 
   const onSubmit = (values, { setSubmitting }) => {
     const currentTimeZone = dayjs.tz.guess();
-    set(values, 'time_zone', currentTimeZone);
-    registerAction(values);
+    set(values, 'timeZone', currentTimeZone);
+
+    if (isInvite) {
+      set(values, 'invitationToken', invitationToken);
+      registerResearcher(values);
+    } else registerParticipant(values);
     setSubmitting(false);
   };
 
@@ -102,11 +116,13 @@ export function RegisterPage({
       <Fill justify="center" align="center">
         <Column sm={10} md={8} lg={6} align="start">
           <H1 mb={40} fontSize={23}>
-            <FormattedMessage {...messages.header} />
+            <FormattedMessage
+              {...messages[isInvite ? 'headerInvite' : 'header']}
+            />
           </H1>
           <Formik
             validationSchema={validationSchema(formatMessage)}
-            initialValues={initialValues}
+            initialValues={initialValues(email)}
             onSubmit={onSubmit}
           >
             {formikProps => {
@@ -142,7 +158,11 @@ export function RegisterPage({
                     placeholder={formatMessage(messages.email)}
                     label={formatMessage(messages.emailLabel)}
                     type="email"
-                    {...sharedProps}
+                    inputProps={{
+                      ...sharedProps.inputProps,
+                      disabled: isInvite,
+                    }}
+                    mb={20}
                   />
                   <FormikInput
                     formikKey="password"
@@ -159,6 +179,7 @@ export function RegisterPage({
                     {...sharedProps}
                   />
                   <Button
+                    type="submit"
                     height={46}
                     borderRadius={5}
                     my={25}
@@ -166,13 +187,15 @@ export function RegisterPage({
                     onClick={handleSubmit}
                     title={formatMessage(messages.register)}
                   />
-                  <Row justify="center" width="100%">
-                    <Link to="/login">
-                      <StyledTextButton color={themeColors.secondary}>
-                        <FormattedMessage {...messages.login} />
-                      </StyledTextButton>
-                    </Link>
-                  </Row>
+                  {!isInvite && (
+                    <Row justify="center" width="100%">
+                      <Link to="/login">
+                        <StyledTextButton color={themeColors.secondary}>
+                          <FormattedMessage {...messages.login} />
+                        </StyledTextButton>
+                      </Link>
+                    </Row>
+                  )}
                 </>
               );
             }}
@@ -185,9 +208,11 @@ export function RegisterPage({
 }
 
 RegisterPage.propTypes = {
-  register: PropTypes.func,
+  registerParticipant: PropTypes.func,
+  registerResearcher: PropTypes.func,
   intl: PropTypes.object,
   registerPage: PropTypes.object,
+  location: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -195,7 +220,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  register,
+  registerParticipant: registerParticipantRequest,
+  registerResearcher: registerResearcherRequest,
 };
 
 const withConnect = connect(
