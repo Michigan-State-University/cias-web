@@ -99,24 +99,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c11 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  margin-right: 50px;
-  margin-left: 50px;
-}
-
 .c15 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -127,6 +109,11 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   flex-direction: column;
   width: 100%;
   margin-top: 10px;
+}
+
+.c11 {
+  max-width: 960px !important;
+  width: 100%;
 }
 
 .c4 {
@@ -166,10 +153,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   -ms-flex-pack: center;
   justify-content: center;
   justify-items: center;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
+  width: 100%;
 }
 
 .c12 {
@@ -403,22 +387,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   justify-content: flex-start;
   padding: 0 10px;
   width: 100%;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 @media only screen and (min-width:768px) {
@@ -1913,9 +1881,11 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
           </div>
           <div
             class="c10"
+            width="100%"
           >
             <div
               class="c11"
+              style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
             >
               <div
                 class="c12"
@@ -3394,6 +3364,9 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   </span>
                 </button>
               </div>
+              <span
+                style="display: table; clear: both;"
+              />
             </div>
           </div>
         </div>

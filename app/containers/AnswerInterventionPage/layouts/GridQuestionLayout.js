@@ -7,6 +7,10 @@ import Radio from 'components/Radio';
 import Row from 'components/Row';
 import { StripedTR, Table, TBody, TD, TH, THead } from 'components/Table';
 
+import { elements } from 'theme';
+
+import { FirstTH } from './styled';
+
 const GridQuestionLayout = ({
   rows,
   columns,
@@ -19,18 +23,23 @@ const GridQuestionLayout = ({
     check(value, name, rowIndex, columnIndex);
   };
   return (
-    <Row align="center" justify="center" width="100%">
-      <Box overflow="scroll" px={21} py={14}>
+    <Box width="100%">
+      <Box
+        overflow="scroll"
+        pr={21}
+        py={14}
+        ml={elements.grid.colWidth + elements.grid.leftPadding}
+      >
         <Table>
           <THead>
             <StripedTR>
-              <TH scope="col" />
+              <FirstTH left={elements.grid.leftPadding} scope="col" />
               {columns.map((column, columnIndex) => (
                 <TH
                   scope="col"
                   key={`question-${questionId}-col-th-${columnIndex}`}
                 >
-                  <Column>{column.payload}</Column>
+                  <Column width="inherit">{column.payload}</Column>
                 </TH>
               ))}
             </StripedTR>
@@ -38,9 +47,11 @@ const GridQuestionLayout = ({
           <TBody>
             {rows.map((row, rowIndex) => (
               <StripedTR key={`question-${questionId}-row-th-${rowIndex}`}>
-                <TH scope="row">
-                  <Column>{row.payload}</Column>
-                </TH>
+                <FirstTH left={elements.grid.leftPadding} scope="row">
+                  <Column width="inherit" height="inherit" justify="center">
+                    {row.payload}
+                  </Column>
+                </FirstTH>
                 {columns.map((column, columnIndex) => {
                   const isChecked =
                     selectedAnswersIndex[rowIndex] === columnIndex;
@@ -68,7 +79,7 @@ const GridQuestionLayout = ({
           </TBody>
         </Table>
       </Box>
-    </Row>
+    </Box>
   );
 };
 
