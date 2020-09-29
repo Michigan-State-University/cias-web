@@ -53,6 +53,7 @@ import {
   makeSelectLoader,
 } from 'global/reducers/questions';
 
+import GroupActionButton from 'containers/Interventions/components/GroupActionButton';
 import editInterventionPageSaga from './saga';
 
 import EmptyInterventionPage from '../../components/EmptyInterventionPage';
@@ -158,31 +159,7 @@ function EditInterventionPage({
 
   const active = selectedSlides.length !== 0;
   const mapActions = (action, index) => (
-    <Box
-      display="flex"
-      mr={20}
-      direction="column"
-      align="center"
-      key={index}
-      clickable={active}
-    >
-      <div>
-        <Img
-          height={20}
-          mb={5}
-          src={active ? action.activeIcon : action.inactiveIcon}
-          alt="icon"
-        />
-      </div>
-      <div>
-        <Text
-          color={active ? themeColors.secondary : colors.waterloo}
-          size={12}
-        >
-          {action.label}
-        </Text>
-      </div>
-    </Box>
+    <GroupActionButton active={active} {...action} key={index} />
   );
 
   if (questions.length === 0 && !getQuestionsLoading)
