@@ -5,6 +5,9 @@ import {
   copyQuestionSaga,
   createQuestionSaga,
   reorderQuestionsSaga,
+  copyQuestionsSaga,
+  deleteQuestionsSaga,
+  groupQuestionsSaga,
 } from 'global/reducers/questions';
 
 export default function* editInterventionPageSaga() {
@@ -13,5 +16,8 @@ export default function* editInterventionPageSaga() {
     createQuestionSaga(),
     deleteQuestionSaga(),
     copyQuestionSaga(),
+    copyQuestionsSaga(),
+    deleteQuestionsSaga(),
+    groupQuestionsSaga(),
   ]);
 }

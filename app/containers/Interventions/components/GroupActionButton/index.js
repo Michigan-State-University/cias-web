@@ -6,13 +6,22 @@ import Img from 'components/Img';
 import Text from 'components/Text';
 import { themeColors, colors } from 'theme';
 
-const GroupActionButton = ({ activeIcon, inactiveIcon, label, active }) => (
+const GroupActionButton = ({
+  activeIcon,
+  inactiveIcon,
+  label,
+  active,
+  action,
+}) => (
   <Box
     display="flex"
     mr={20}
     direction="column"
     align="center"
     clickable={active}
+    onClick={() => {
+      if (active) action();
+    }}
   >
     <div>
       <Img
@@ -35,6 +44,7 @@ GroupActionButton.propTypes = {
   inactiveIcon: PropTypes.string,
   label: PropTypes.object,
   active: PropTypes.bool,
+  action: PropTypes.func,
 };
 
 export default GroupActionButton;

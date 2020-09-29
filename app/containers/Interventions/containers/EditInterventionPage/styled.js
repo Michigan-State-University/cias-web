@@ -11,6 +11,7 @@ export const QuestionsRow = styled(Row)`
     height: 100%;
     left: -410px;
     ${({ isVisible }) => isVisible && 'left: 0;'}
+  }
 `;
 
 export const ShowListButton = styled.button`
