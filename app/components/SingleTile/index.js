@@ -100,6 +100,9 @@ const SingleTile = ({
     e.preventDefault();
   };
 
+  const copyProblemToResearchers = users =>
+    copyProblem({ problemId: id, users });
+
   return (
     <>
       <Modal
@@ -107,7 +110,10 @@ const SingleTile = ({
         onClose={closeModal}
         visible={modalVisible}
       >
-        <SelectResearchers problemId={id} onClose={closeModal} />
+        <SelectResearchers
+          onClose={closeModal}
+          onResearchersSelected={copyProblemToResearchers}
+        />
       </Modal>
       <StyledLink to={link}>
         <TileContainer>

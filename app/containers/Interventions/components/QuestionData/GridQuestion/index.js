@@ -28,6 +28,8 @@ import {
 
 import messages from './messages';
 
+import { FirstTH } from './styled';
+
 import {
   ADD_ROW,
   ADD_COLUMN,
@@ -63,7 +65,7 @@ const GridQuestion = ({
       width="100%"
       overflow="scroll"
       maxHeight={elements.draggableContainerSize}
-      maxWidth={elements.draggableContainerSize - 150}
+      maxWidth={elements.draggableContainerSize}
     >
       <Row justify="end" display="flex" hidden={isNarratorTab}>
         <HoverableBox px={21} py={14} onClick={addColumn}>
@@ -78,142 +80,180 @@ const GridQuestion = ({
         </HoverableBox>
       </Row>
 
-      <Row overflow="scroll">
-        <Table overflow="scroll">
-          <THead>
-            <StripedTR>
-              <TD />
-              {columns.map((column, columnIndex) => (
-                <TH
+      <Box width="100%">
+        <Box
+          overflow="scroll"
+          pr={21}
+          py={14}
+          ml={
+            isNarratorTab && elements.grid.colWidth + elements.grid.leftPadding
+          }
+        >
+          <Table>
+            <THead>
+              <StripedTR>
+                <FirstTH
+                  left={elements.grid.leftPadding}
+                  isFixed={isNarratorTab}
                   scope="col"
-                  key={`question-${selectedQuestion.id}-col-th-${columnIndex}`}
-                  onMouseEnter={() => setHoveredColumn(columnIndex)}
-                  onMouseLeave={() => setHoveredColumn(-1)}
-                >
-                  <Column align="center">
-                    <Box
-                      px={8}
-                      mb={8}
-                      onClick={() => deleteColumn(columnIndex)}
-                      hidden={isNarratorTab}
-                      clickable
-                      height={35}
-                    >
-                      <Img src={bin} hidden={hoveredColumn !== columnIndex} />
-                    </Box>
-                    <Row display="flex" hidden={isNarratorTab} mb={8}>
-                      <BadgeInput
-                        px={0}
-                        py={12}
-                        textAlign="center"
-                        validator={numericValidator}
-                        keyboard="tel"
-                        placeholder={formatMessage(
-                          globalMessages.variables.variableScorePlaceholder,
-                        )}
-                        value={column.variable.value}
-                        color={colors.azure}
-                        onBlur={val =>
-                          updateColumn(
-                            { variable: { value: val } },
-                            columnIndex,
-                          )
-                        }
-                      />
-                    </Row>
-                    <StyledInput
-                      disabled={isNarratorTab}
-                      cursor={isNarratorTab ? 'text' : 'pointer'}
-                      width={110}
-                      px={0}
-                      py={12}
-                      textAlign="center"
-                      placeholder={getPlaceholder(
-                        'columnPlaceholder',
-                        columnIndex + 1,
-                      )}
-                      value={column.payload}
-                      onBlur={value =>
-                        updateColumn({ payload: value }, columnIndex)
-                      }
-                    />
-                  </Column>
-                </TH>
-              ))}
-            </StripedTR>
-          </THead>
-          <TBody>
-            {rows.map((row, rowIndex) => (
-              <StripedTR
-                key={`question-${selectedQuestion.id}-row-th-${rowIndex}`}
-              >
-                <TH
-                  width="auto"
-                  scope="row"
-                  onMouseEnter={() => setHoveredRow(rowIndex)}
-                  onMouseLeave={() => setHoveredRow(-1)}
-                >
-                  <Row align="center">
-                    <Box
-                      width={60}
-                      onClick={() => deleteRow(rowIndex)}
-                      clickable
-                      hidden={isNarratorTab}
-                    >
-                      <Img src={bin} hidden={hoveredRow !== rowIndex} />
-                    </Box>
-                    <Row align="center" justify="between" width="100%">
-                      <Row display="flex" hidden={isNarratorTab} mr={8}>
+                />
+                {columns.map((column, columnIndex) => (
+                  <TH
+                    scope="col"
+                    key={`question-${
+                      selectedQuestion.id
+                    }-col-th-${columnIndex}`}
+                    onMouseEnter={() => setHoveredColumn(columnIndex)}
+                    onMouseLeave={() => setHoveredColumn(-1)}
+                  >
+                    <Column align="center">
+                      <Box
+                        px={8}
+                        mb={8}
+                        onClick={() => deleteColumn(columnIndex)}
+                        hidden={isNarratorTab}
+                        clickable
+                        height={35}
+                      >
+                        <Img src={bin} hidden={hoveredColumn !== columnIndex} />
+                      </Box>
+                      <Row display="flex" hidden={isNarratorTab} mb={8}>
                         <BadgeInput
                           px={0}
                           py={12}
                           textAlign="center"
-                          validator={variableNameValidator}
+                          validator={numericValidator}
+                          keyboard="tel"
                           placeholder={formatMessage(
-                            globalMessages.variables.variableNamePlaceholder,
+                            globalMessages.variables.variableScorePlaceholder,
                           )}
-                          value={row.variable.name}
-                          color={colors.jungleGreen}
+                          value={column.variable.value}
+                          color={colors.azure}
                           onBlur={val =>
-                            updateRow({ variable: { name: val } }, rowIndex)
+                            updateColumn(
+                              { variable: { value: val } },
+                              columnIndex,
+                            )
                           }
                         />
                       </Row>
-                      <StyledInput
-                        disabled={isNarratorTab}
-                        cursor={isNarratorTab ? 'text' : 'pointer'}
-                        width={110}
-                        px={0}
-                        py={12}
-                        textAlign="center"
-                        placeholder={getPlaceholder(
-                          'rowPlaceholder',
-                          rowIndex + 1,
-                        )}
-                        value={row.payload}
-                        onBlur={value =>
-                          updateRow({ payload: value }, rowIndex)
-                        }
-                      />
-                    </Row>
-                  </Row>
-                </TH>
-                {columns.map((_, columnIndex) => (
-                  <TD
-                    key={`question-${
-                      selectedQuestion.id
-                    }-row-cell-${rowIndex}-${columnIndex}`}
-                  >
-                    <Row justify="center">
-                      <Img src={radio} />
-                    </Row>
-                  </TD>
+                      {isNarratorTab ? (
+                        <Column
+                          width={elements.grid.colWidth}
+                          height="inherit"
+                          justify="center"
+                        >
+                          {column.payload}
+                        </Column>
+                      ) : (
+                        <StyledInput
+                          disabled={isNarratorTab}
+                          cursor={isNarratorTab ? 'text' : 'pointer'}
+                          width={110}
+                          px={0}
+                          py={12}
+                          textAlign="center"
+                          placeholder={getPlaceholder(
+                            'columnPlaceholder',
+                            columnIndex + 1,
+                          )}
+                          value={column.payload}
+                          onBlur={value =>
+                            updateColumn({ payload: value }, columnIndex)
+                          }
+                        />
+                      )}
+                    </Column>
+                  </TH>
                 ))}
               </StripedTR>
-            ))}
-          </TBody>
-        </Table>
-      </Row>
+            </THead>
+            <TBody>
+              {rows.map((row, rowIndex) => (
+                <StripedTR
+                  key={`question-${selectedQuestion.id}-row-th-${rowIndex}`}
+                >
+                  <FirstTH
+                    left={elements.grid.leftPadding}
+                    isFixed={isNarratorTab}
+                    width="auto"
+                    scope="row"
+                    onMouseEnter={() => setHoveredRow(rowIndex)}
+                    onMouseLeave={() => setHoveredRow(-1)}
+                  >
+                    <Row align="center" height="100%">
+                      <Box
+                        width={60}
+                        onClick={() => deleteRow(rowIndex)}
+                        clickable
+                        hidden={isNarratorTab}
+                      >
+                        <Img src={bin} hidden={hoveredRow !== rowIndex} />
+                      </Box>
+                      <Row align="center" justify="between" width="100%">
+                        <Row display="flex" hidden={isNarratorTab} mr={8}>
+                          <BadgeInput
+                            px={0}
+                            py={12}
+                            textAlign="center"
+                            validator={variableNameValidator}
+                            placeholder={formatMessage(
+                              globalMessages.variables.variableNamePlaceholder,
+                            )}
+                            value={row.variable.name}
+                            color={colors.jungleGreen}
+                            onBlur={val =>
+                              updateRow({ variable: { name: val } }, rowIndex)
+                            }
+                          />
+                        </Row>
+                        {isNarratorTab ? (
+                          <Column
+                            width={elements.grid.colWidth}
+                            height="inherit"
+                            justify="center"
+                          >
+                            {row.payload}
+                          </Column>
+                        ) : (
+                          <StyledInput
+                            disabled={isNarratorTab}
+                            cursor={isNarratorTab ? 'text' : 'pointer'}
+                            width={110}
+                            px={0}
+                            py={12}
+                            textAlign="center"
+                            placeholder={getPlaceholder(
+                              'rowPlaceholder',
+                              rowIndex + 1,
+                            )}
+                            value={row.payload}
+                            onBlur={value =>
+                              updateRow({ payload: value }, rowIndex)
+                            }
+                          />
+                        )}
+                      </Row>
+                    </Row>
+                  </FirstTH>
+                  {columns.map((_, columnIndex) => (
+                    <TD
+                      width={elements.grid.colWidth}
+                      key={`question-${
+                        selectedQuestion.id
+                      }-row-cell-${rowIndex}-${columnIndex}`}
+                    >
+                      <Row width="inherit" justify="center">
+                        <Img src={radio} />
+                      </Row>
+                    </TD>
+                  ))}
+                </StripedTR>
+              ))}
+            </TBody>
+          </Table>
+        </Box>
+      </Box>
 
       <Row justify="start" hidden={isNarratorTab}>
         <HoverableBox px={21} py={14} mt={20} onClick={addRow}>

@@ -11,7 +11,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import remove from 'lodash/remove';
+import trim from 'lodash/trim';
 
+import { colors } from 'theme';
 import useFilter from 'utils/useFilter';
 import Row from 'components/Row';
 import Loader from 'components/Loader';
@@ -32,19 +34,18 @@ import {
   UserListReducer,
   userListSaga,
 } from 'global/reducers/userList';
-import { copyProblemRequest } from 'global/reducers/problems';
 
 import { makeSelectUser } from 'global/reducers/auth';
+import { ternary } from 'utils/ternary';
 import messages from './messages';
 
 const SelectResearchers = ({
   intl: { formatMessage },
   userList: { users, usersLoading, usersError },
   fetchUsersRequest,
-  copyProblemToResearchers,
-  problemId,
   onClose,
   user: { id: currentUserId },
+  onResearchersSelected,
 }) => {
   useInjectReducer({ key: 'userList', reducer: UserListReducer });
 
@@ -59,8 +60,19 @@ const SelectResearchers = ({
   }, []);
 
   const handleSend = () => {
-    copyProblemToResearchers({ problemId, users: selected });
+    onResearchersSelected(selected);
     onClose();
+  };
+
+  const getDisplayName = fullName => {
+    const trimmedFullName = trim(fullName);
+    return ternary(
+      trimmedFullName,
+      trimmedFullName,
+      <Text color={colors.flamingo}>
+        {formatMessage(messages.waitingForActivation)}
+      </Text>,
+    );
   };
 
   if (usersLoading)
@@ -122,7 +134,7 @@ const SelectResearchers = ({
               };
               return (
                 <StripedTR key={`row-th-${id}`}>
-                  <TD pl={10}>{fullName}</TD>
+                  <TD pl={10}>{getDisplayName(fullName)}</TD>
                   <TD>{email}</TD>
                   <TD pr={10}>
                     <Checkbox checked={isChecked} onClick={handleClick} />
@@ -144,6 +156,7 @@ SelectResearchers.propTypes = {
   copyProblemToResearchers: PropTypes.func,
   problemId: PropTypes.string,
   onClose: PropTypes.func,
+  onResearchersSelected: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -153,7 +166,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   fetchUsersRequest: fetchUsers,
-  copyProblemToResearchers: copyProblemRequest,
 };
 
 const withConnect = connect(

@@ -4,6 +4,7 @@ import ReactPlayer from 'react-player/lazy';
 import { themeColors } from 'theme';
 
 import AppSlider from 'components/AppSlider';
+import { TH } from 'components/Table';
 
 const aspectRatio = 9 / 16;
 
@@ -60,4 +61,10 @@ export const CustomSlider = styled(AppSlider)`
       '.rc-slider-handle': { visibility: 'hidden' },
       '.rc-slider-track': { visibility: 'hidden' },
     }}
+`;
+
+export const FirstTH = styled(TH)`
+  position: absolute;
+  left: ${({ left }) => left}px;
+  height: inherit;
 `;

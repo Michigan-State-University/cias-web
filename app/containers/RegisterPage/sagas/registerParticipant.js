@@ -7,11 +7,17 @@ import { success as showSuccess } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { REGISTER_REQUEST, REGISTER_SUCCESS } from './constants';
-import { registerFailure, registerSuccess } from './actions';
-import messages from './messages';
+import {
+  REGISTER_PARTICIPANT_REQUEST,
+  REGISTER_PARTICIPANT_SUCCESS,
+} from '../constants';
+import {
+  registerParticipantError,
+  registerParticipantSuccess,
+} from '../actions';
+import messages from '../messages';
 
-function* register({ payload }) {
+function* registerParticipant({ payload }) {
   const requestURL = `v1/auth`;
 
   try {
@@ -19,11 +25,11 @@ function* register({ payload }) {
       ...objectToSnakeCase(payload),
       confirm_success_url: `${process.env.WEB_URL}/login`,
     });
-    yield put(registerSuccess());
+    yield put(registerParticipantSuccess());
     yield put(push('/login'));
     yield put(
       showSuccess(formatMessage(messages.createdAccount), {
-        id: REGISTER_SUCCESS,
+        id: REGISTER_PARTICIPANT_SUCCESS,
       }),
     );
   } catch (error) {
@@ -32,10 +38,10 @@ function* register({ payload }) {
       'response.data.errors.full_messages[0]',
       error.toString().split('\n')[0],
     );
-    yield put(registerFailure(errorMessage));
+    yield put(registerParticipantError(errorMessage));
   }
 }
-// Individual exports for testing
-export default function* registerPageSaga() {
-  yield takeLatest(REGISTER_REQUEST, register);
+
+export default function* registerParticipantSaga() {
+  yield takeLatest(REGISTER_PARTICIPANT_REQUEST, registerParticipant);
 }

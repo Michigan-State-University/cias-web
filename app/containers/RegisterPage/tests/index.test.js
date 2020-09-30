@@ -9,7 +9,6 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
-// import 'jest-dom/extend-expect'; // add some helpful assertions
 
 import { MemoryRouter, browserHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -25,12 +24,17 @@ describe('<RegisterPage />', () => {
   });
 
   it('Expect to not log errors in console', () => {
+    const props = {
+      location: {
+        search: '',
+      },
+    };
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
-            <RegisterPage />
+            <RegisterPage {...props} />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,
@@ -38,14 +42,38 @@ describe('<RegisterPage />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Should render and match the snapshot', () => {
+  it('Should render and match the snapshot for participant', () => {
+    const props = {
+      location: {
+        search: '',
+      },
+    };
     const {
       container: { firstChild },
     } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
-            <RegisterPage />
+            <RegisterPage {...props} />
+          </MemoryRouter>
+        </IntlProvider>
+      </Provider>,
+    );
+    expect(firstChild).toMatchSnapshot();
+  });
+  it('Should render and match the researcher', () => {
+    const props = {
+      location: {
+        search: '?invitation_token=enCB7gVfDNS5liLLEGCF8A&email=test@gmail.com',
+      },
+    };
+    const {
+      container: { firstChild },
+    } = render(
+      <Provider store={store}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <MemoryRouter>
+            <RegisterPage {...props} />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,

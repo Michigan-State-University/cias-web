@@ -19,11 +19,11 @@ import AudioWrapper from 'utils/audioWrapper';
 import { useInjectSaga } from 'utils/injectSaga';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { useInjectReducer } from 'utils/injectReducer';
+import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import { Button } from 'components/Button';
 import Row from 'components/Row';
 import Box from 'components/Box';
-import Column from 'components/Column';
 import Loader from 'components/Loader';
 import { DESKTOP_MODE } from 'utils/previewMode';
 
@@ -215,7 +215,7 @@ export function AnswerInterventionPage({
 
     return (
       <Row justify="center" width="100%">
-        <Column mx={50} justify="center">
+        <AppContainer $width="100%">
           <Row width="100%" mt={5} height={30}>
             {questionIndex !== 0 && currentQuestion && (
               <BackButton onClick={handleBackClick}>
@@ -246,7 +246,7 @@ export function AnswerInterventionPage({
                 />
               </Row>
             )}
-        </Column>
+        </AppContainer>
       </Row>
     );
   };

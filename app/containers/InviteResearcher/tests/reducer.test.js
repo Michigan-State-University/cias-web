@@ -81,7 +81,7 @@ describe('inviteResearcherReducer', () => {
     };
     expect(inviteResearcherReducer(newState, action)).toEqual(expectedResult);
   });
-  it('test GET_INVITATIONS_REQUEST action', () => {
+  it('test GET_INVITATIONS_REQUEST action without array', () => {
     const expectedResult = createState('invitations', {
       list: null,
       loading: true,
@@ -89,6 +89,30 @@ describe('inviteResearcherReducer', () => {
     });
     const action = { type: GET_INVITATIONS_REQUEST };
     expect(inviteResearcherReducer(undefined, action)).toEqual(expectedResult);
+  });
+  it('test GET_INVITATIONS_REQUEST action with array', () => {
+    const invitations = [
+      {
+        id: 'asd-123as',
+        email: 'email@gmail.com',
+      },
+      {
+        id: 'a22sd-2123as',
+        email: 'email2@gmail.com',
+      },
+    ];
+    const newState = createState('invitations', {
+      list: invitations,
+      loading: false,
+      error: null,
+    });
+    const expectedResult = createState('invitations', {
+      list: invitations,
+      loading: false,
+      error: null,
+    });
+    const action = { type: GET_INVITATIONS_REQUEST };
+    expect(inviteResearcherReducer(newState, action)).toEqual(expectedResult);
   });
   it('test GET_INVITATIONS_SUCCESS action', () => {
     const invitations = [

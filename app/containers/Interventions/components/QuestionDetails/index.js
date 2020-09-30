@@ -9,6 +9,7 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import Question from 'models/Intervention/Question';
 
+import AppContainer from 'components/Container';
 import Row from 'components/Row';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { Button } from 'components/Button';
@@ -66,8 +67,8 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
               animationBoundaries={animationBoundaries}
               settings={settings}
             />
-            <Row justify="center" filled>
-              <Column mx={50} justify="center">
+            <Row justify="center" width="100%">
+              <AppContainer $width="100%">
                 <Row width="100%" mt={5} height={30} />
                 {!isNarratorTab && (
                   <>
@@ -119,7 +120,7 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
                     </Button>
                   </Box>
                 )}
-              </Column>
+              </AppContainer>
             </Row>
           </AnswerInterventionContent>
         </Column>

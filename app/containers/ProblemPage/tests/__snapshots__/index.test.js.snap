@@ -3,7 +3,7 @@
 exports[`<ProblemPage /> Should render and match the snapshot with interventions 1`] = `
 <div>
   <div
-    class="styled__StyledContainer-sc-16yio6w-0 gizLNa"
+    class="styled__StyledContainer-sc-16yio6w-0 bhlDvO"
     style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
   >
     <div
