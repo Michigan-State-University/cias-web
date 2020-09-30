@@ -1,51 +1,44 @@
 /**
  *
- * ProblemSettingsPage
+ * SettingsPanel
  *
  */
 
-import React, { useLayoutEffect, useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { FormattedMessage } from 'react-intl';
 
-import BackButton from 'components/BackButton';
-import Box from 'components/Box';
-import H1 from 'components/H1';
-import H3 from 'components/H3';
-import Row from 'components/Row';
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
 import Loader from 'components/Loader';
-import { useInjectReducer } from 'utils/injectReducer';
+import Spinner from 'components/Spinner';
+import H2 from 'components/H2';
 import injectSaga from 'utils/injectSaga';
 import {
-  problemReducer,
   fetchProblemRequest,
   makeSelectProblemState,
   changeAccessSettingRequest,
 } from 'global/reducers/problem';
-import { colors, themeColors } from 'theme';
+import { themeColors } from 'theme';
 
-import Spinner from 'components/Spinner';
 import AccessGiver from './containers/AccessGiver';
 import LeftColumn from './Components/LeftColumn';
 import RightColumn from './Components/RightColumn';
-import messages from './messages';
 import { reducer, UPDATE } from './reducer';
 import { shareOptions, ids } from './utils';
 import { problemSettingPageSaga } from './sagas';
 
-const ProblemSettingsPage = ({
-  match: {
-    params: { problemId },
-  },
-  fetchProblem,
+import messages from './messages';
+
+import { StyledBox } from './styled';
+
+const SettingsPanel = ({
+  problem,
   changeAccessSetting,
   problemState: {
-    problem,
     loaders: {
       fetchProblemLoading,
       changeAccessSettingLoading,
@@ -56,19 +49,11 @@ const ProblemSettingsPage = ({
   },
 }) => {
   const [state, dispatch] = useReducer(reducer, {});
-  useInjectReducer({
-    key: 'problem',
-    reducer: problemReducer,
-  });
-
-  useLayoutEffect(() => {
-    fetchProblem(problemId);
-  }, []);
 
   const updateSetting = newSetting =>
-    changeAccessSetting(problemId, newSetting);
+    changeAccessSetting(problem.id, newSetting);
 
-  const { name, id, shared_to: sharedTo, usersWithAccess } = problem || {};
+  const { shared_to: sharedTo, usersWithAccess } = problem || {};
 
   const dispatchUpdate = newState =>
     dispatch({
@@ -86,32 +71,24 @@ const ProblemSettingsPage = ({
   if (fetchProblemError) return <ErrorAlert errorText={fetchProblemError} />;
 
   return (
-    <Box height="100%" width="100%" padding="60px 160px">
-      <BackButton to={`/interventions/${id}`}>
-        <FormattedMessage {...messages.back} />
-      </BackButton>
-      <H1 mt={20}>
-        <FormattedMessage {...messages.header} />
-      </H1>
-      <H3 mt={10} fontWeight="regular">
-        {name}
-      </H3>
-      <Column mt={35} bg={colors.white} width="100%" padding={35}>
+    <StyledBox>
+      <Column width="100%" padding={35}>
         {!changeAccessSettingLoading && (
           <>
-            <Row>
-              <LeftColumn
-                currentOption={currentOption}
-                dispatchUpdate={dispatchUpdate}
-                updateAccessSetting={updateSetting}
-              />
-              {state && <RightColumn state={state} />}
-            </Row>
+            <H2 mb={25}>
+              <FormattedMessage {...messages.subheader} />
+            </H2>
+            <LeftColumn
+              currentOption={currentOption}
+              dispatchUpdate={dispatchUpdate}
+              updateAccessSetting={updateSetting}
+            />
+            {state && <RightColumn state={state} />}
             {currentOption &&
               currentOption.id === ids.onlyInvitedRegisteredParticipant && (
                 <AccessGiver
                   usersWithAccess={usersWithAccess}
-                  problemId={problemId}
+                  problemId={problem.id}
                   enableAccessLoading={enableAccessLoading}
                   fetchUserAccessLoading={fetchUserAccessLoading}
                   fetchUserAccessError={fetchUserAccessError}
@@ -123,16 +100,15 @@ const ProblemSettingsPage = ({
           <Spinner color={themeColors.secondary} size={100} />
         )}
       </Column>
-    </Box>
+    </StyledBox>
   );
 };
 
-ProblemSettingsPage.propTypes = {
-  match: PropTypes.object,
-  fetchProblem: PropTypes.func,
+SettingsPanel.propTypes = {
+  problem: PropTypes.object,
   changeAccessSetting: PropTypes.func,
   problemState: PropTypes.shape({
-    problem: PropTypes.object,
+    loaders: PropTypes.object,
   }),
 };
 
@@ -158,4 +134,4 @@ const withSaga = injectSaga({
 export default compose(
   withConnect,
   withSaga,
-)(ProblemSettingsPage);
+)(SettingsPanel);

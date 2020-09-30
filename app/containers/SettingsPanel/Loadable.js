@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for ProblemSettingsPage
+ * Asynchronously loads the component for SettingsPanel
  *
  */
 

@@ -19,16 +19,15 @@ export default defineMessages({
   },
   anyoneWithTheLinkLabel: {
     id: `${scope}.anyoneWithTheLinkLabel`,
-    defaultMessage: 'Anyone with the link can access sessions',
+    defaultMessage: 'Anyone with the link',
   },
   anyoneWhoIsARegisteredParticipantLabel: {
     id: `${scope}.anyoneWhoIsARegisteredParticipantLabel`,
-    defaultMessage:
-      'Anyone who is a registered participant can access sessions',
+    defaultMessage: 'All registered participants',
   },
   onlyInvitedRegisteredParticipantsLabel: {
     id: `${scope}.onlyInvitedRegisteredParticipantsLabel`,
-    defaultMessage: 'Only selected registered participants can access sessions',
+    defaultMessage: 'Selected registered participants',
   },
   anyoneWithTheLinkSublabel: {
     id: `${scope}.anyoneWithTheLinkSublabel`,
@@ -52,8 +51,7 @@ export default defineMessages({
   },
   inputPlaceholder: {
     id: `${scope}.inputPlaceholder`,
-    defaultMessage:
-      'Enter e-mail addresses of participants who can open this intervention’s sessions',
+    defaultMessage: 'Enter e-mail addresses of participants',
   },
   uploadText: {
     id: `${scope}.uploadText`,

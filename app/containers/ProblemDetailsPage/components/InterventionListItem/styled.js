@@ -11,9 +11,10 @@ export const ToggleableBox = styled(Box)`
   box-shadow: ${boxShadows.selago};
   border-style: solid;
   border-width: 1px;
-  border-color: ${({ isSelected }) =>
-    isSelected ? themeColors.secondary : 'transparent'};
+  border-color: ${({ isHovered }) =>
+    isHovered ? themeColors.secondary : 'transparent'};
   background-color: white;
+  transition: border-color 0.3s;
 `;
 
 export const InterventionIndex = styled.div`
@@ -36,6 +37,12 @@ export const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  &:hover {
+    ${ToggleableBox} {
+      background-color: black !important;
+    }
+  }
 `;
 
 export const StyledRow = styled(Row)`

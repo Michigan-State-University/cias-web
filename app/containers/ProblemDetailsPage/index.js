@@ -10,7 +10,6 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
-import { Link } from 'react-router-dom';
 import get from 'lodash/get';
 import Reorder, { reorder } from 'react-reorder';
 import orderBy from 'lodash/orderBy';
@@ -23,8 +22,6 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import BackButton from 'components/BackButton';
 import ShareBox from 'containers/ShareBox';
-import StyledTextButton from 'components/Button/StyledTextButton';
-import Text from 'components/Text';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import Spinner from 'components/Spinner';
@@ -61,6 +58,8 @@ import {
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
+import SettingsPanel from 'containers/SettingsPanel';
+import H3 from 'components/H3';
 import { StatusLabel, InterventionOptions, DraggedTest } from './styled';
 import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
@@ -99,10 +98,13 @@ export function ProblemDetailsPage({
   useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
   useInjectSaga({ key: 'problemOptionsSaga', saga: problemOptionsSaga });
 
-  const { interventions, name, id, status, shared_to: sharedTo } =
-    problem || {};
+  const { interventions, name, id, status } = problem || {};
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [
+    participantShareModalVisible,
+    setParticipantShareModalVisible,
+  ] = useState(false);
 
   const closeModal = () => setModalVisible(false);
   const openModal = () => setModalVisible(true);
@@ -174,7 +176,7 @@ export function ProblemDetailsPage({
   const handleReorder = (event, previousIndex, nextIndex) => {
     const newList = reorder(interventions, previousIndex, nextIndex);
     let position = 0;
-    const orderdedNewList = newList.map(question => {
+    const orderedNewList = newList.map(question => {
       position += 1;
       return {
         ...question,
@@ -182,7 +184,7 @@ export function ProblemDetailsPage({
       };
     });
     reorderInterventions({
-      reorderedList: orderdedNewList,
+      reorderedList: orderedNewList,
       problemId,
     });
   };
@@ -203,6 +205,8 @@ export function ProblemDetailsPage({
                 fetchQuestions(intervention.id);
                 changeInterventionIndex(index);
               }
+
+              setParticipantShareModalVisible(true);
             };
             const nextIntervention = interventions.find(
               ({ position }) => position === intervention.position + 1,
@@ -234,7 +238,17 @@ export function ProblemDetailsPage({
   return (
     <Box height="100%" width="100%" padding="60px 160px">
       <Modal
-        title={formatMessage(messages.modalTitle)}
+        title={
+          <H3
+            mb={15}
+            fontSize={13}
+            fontWeight="bold"
+            textOpacity={0.6}
+            color={colors.bluewood}
+          >
+            <FormattedMessage {...messages.modalTitle} />
+          </H3>
+        }
         onClose={closeModal}
         visible={modalVisible}
       >
@@ -242,6 +256,14 @@ export function ProblemDetailsPage({
           onResearchersSelected={copyProblemToResearchers}
           onClose={closeModal}
         />
+      </Modal>
+
+      <Modal
+        title={formatMessage(messages.participantShareModalTitle)}
+        onClose={() => setParticipantShareModalVisible(false)}
+        visible={participantShareModalVisible}
+      >
+        <ShareBox />
       </Modal>
 
       <Row justify="between">
@@ -279,23 +301,6 @@ export function ProblemDetailsPage({
           </InterventionOptions>
         </Row>
       </Row>
-      <Row
-        bg={colors.linkWater}
-        borderRadius={10}
-        py={15}
-        px={20}
-        align="center"
-        width="fit-content"
-      >
-        <Text fontWeight="bold" mr={12}>
-          {sharedTo && <FormattedMessage {...messages[sharedTo]} />}
-        </Text>
-        <Link to={`/interventions/${id}/settings`}>
-          <StyledTextButton color={themeColors.secondary}>
-            <FormattedMessage {...messages.adjust} />
-          </StyledTextButton>
-        </Link>
-      </Row>
       <Row>
         <Column sm={6}>
           {renderList()}
@@ -313,7 +318,7 @@ export function ProblemDetailsPage({
         )}
         <Column ml={38} sm={6} mt={18}>
           <Column position="sticky" top="100px">
-            <ShareBox />
+            <SettingsPanel problem={problem} />
           </Column>
           <div />
         </Column>

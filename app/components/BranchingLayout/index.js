@@ -37,6 +37,7 @@ function BranchingLayout({
   onRemoveCase,
   onAddCase,
   problemBranching,
+  onVariableChooserOpen,
 }) {
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
   const [variableChooserOpen, setVariableChooserOpen] = useState(false);
@@ -49,7 +50,10 @@ function BranchingLayout({
         <Row align="center" justify="between">
           {formatMessage(messages.formula)}
           <Box
-            onClick={() => setVariableChooserOpen(!variableChooserOpen)}
+            onClick={() => {
+              if (onVariableChooserOpen) onVariableChooserOpen();
+              setVariableChooserOpen(!variableChooserOpen);
+            }}
             clickable
           >
             <Text
@@ -189,6 +193,7 @@ BranchingLayout.propTypes = {
   intl: PropTypes.object,
   displayPatternTargetText: PropTypes.func,
   problemBranching: PropTypes.bool,
+  onVariableChooserOpen: PropTypes.func,
 };
 
 export default injectIntl(BranchingLayout);

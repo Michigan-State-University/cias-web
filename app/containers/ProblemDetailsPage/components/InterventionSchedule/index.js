@@ -85,9 +85,11 @@ function InterventionSchedule({
         rightPosition="315"
         setOption={id => changeType(id, interventionId)}
       />
-      <Row mt={28} mb={17} align="center">
-        {renderOption()}
-      </Row>
+      {selectedScheduleOption && (
+        <Row mt={28} mb={17} align="center">
+          {renderOption()}
+        </Row>
+      )}
     </Column>
   );
 }
