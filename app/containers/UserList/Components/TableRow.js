@@ -37,7 +37,9 @@ const TableRow = ({
   const nameColumn = ternary(
     trimmedFullName,
     trimmedFullName,
-    <Text color={colors.flamingo}>Waiting for activation</Text>,
+    <Text color={colors.flamingo}>
+      {formatMessage(messages.waitingForActivation)}
+    </Text>,
   );
   return (
     <StripedTR

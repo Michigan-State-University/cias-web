@@ -187,6 +187,8 @@ export function ProblemDetailsPage({
     });
   };
 
+  const copyProblemToResearchers = users => copyProblem({ problemId, users });
+
   const renderList = () => (
     <DraggedTest>
       <Reorder
@@ -236,7 +238,10 @@ export function ProblemDetailsPage({
         onClose={closeModal}
         visible={modalVisible}
       >
-        <SelectResearchers problemId={id} onClose={closeModal} />
+        <SelectResearchers
+          onResearchersSelected={copyProblemToResearchers}
+          onClose={closeModal}
+        />
       </Modal>
 
       <Row justify="between">

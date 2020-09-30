@@ -57,4 +57,8 @@ export default defineMessages({
     id: `${scope}.resetRoles`,
     defaultMessage: 'Reset role filters',
   },
+  waitingForActivation: {
+    id: `${scope}.waitingForActivation`,
+    defaultMessage: 'Waiting for activation',
+  },
 });
