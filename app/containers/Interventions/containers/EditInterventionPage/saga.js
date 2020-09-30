@@ -8,6 +8,7 @@ import {
   copyQuestionsSaga,
   deleteQuestionsSaga,
   groupQuestionsSaga,
+  shareQuestionsToResearchersSaga,
 } from 'global/reducers/questions';
 
 export default function* editInterventionPageSaga() {
@@ -19,5 +20,6 @@ export default function* editInterventionPageSaga() {
     copyQuestionsSaga(),
     deleteQuestionsSaga(),
     groupQuestionsSaga(),
+    shareQuestionsToResearchersSaga(),
   ]);
 }
