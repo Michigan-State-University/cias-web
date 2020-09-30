@@ -14,7 +14,7 @@ export const multiQuestion = new QuestionType(
 );
 
 export const textboxQuestion = new QuestionType(
-  'Question::TextBox',
+  'Question::FreeResponse',
   'Free Response',
   colors.tangerine,
 );
@@ -32,7 +32,7 @@ export const gridQuestion = new QuestionType(
 );
 
 export const visualAnalogueScaleQuestion = new QuestionType(
-  'Question::AnalogueScale',
+  'Question::Slider',
   'Slider',
   colors.pink,
 );
@@ -44,7 +44,7 @@ export const informationQuestion = new QuestionType(
 );
 
 export const urlQuestion = new QuestionType(
-  'Question::Url',
+  'Question::ExternalLink',
   'External Link',
   colors.jungleGreen,
 );

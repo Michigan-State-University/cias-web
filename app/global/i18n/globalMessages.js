@@ -10,6 +10,17 @@ import {
   feedbackBlockType,
   reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
+import {
+  feedbackQuestion,
+  gridQuestion,
+  informationQuestion,
+  multiQuestion,
+  numberQuestion,
+  singleQuestion,
+  textboxQuestion,
+  urlQuestion,
+  visualAnalogueScaleQuestion,
+} from 'models/Intervention/QuestionTypes';
 
 export const scope = 'app.GlobalMessages';
 
@@ -71,44 +82,44 @@ export default defineMessages({
     },
   },
   questionTypes: {
-    'Question::Single': {
-      id: `${scope}.Question::Single`,
+    [singleQuestion.id]: {
+      id: `${scope}.${singleQuestion.id}`,
       defaultMessage: 'Single answer',
     },
-    'Question::Multiple': {
-      id: `${scope}.Question::Multiple`,
+    [multiQuestion.id]: {
+      id: `${scope}.${multiQuestion.id}`,
       defaultMessage: 'Multi answer',
     },
-    'Question::TextBox': {
-      id: `${scope}.Question::TextBox`,
+    [textboxQuestion.id]: {
+      id: `${scope}.${[textboxQuestion.id]}`,
       defaultMessage: 'Free Response',
     },
-    'Question::Number': {
-      id: `${scope}.Question::Number`,
+    [numberQuestion.id]: {
+      id: `${scope}.${numberQuestion.id}`,
       defaultMessage: 'Number',
     },
-    'Question::Grid': {
-      id: `${scope}.Question::Grid`,
+    [gridQuestion.id]: {
+      id: `${scope}.${gridQuestion.id}`,
       defaultMessage: 'Grid',
     },
-    'Question::AnalogueScale': {
-      id: `${scope}.Question::AnalogueScale`,
+    [visualAnalogueScaleQuestion.id]: {
+      id: `${scope}.${visualAnalogueScaleQuestion.id}`,
       defaultMessage: 'Slider',
     },
-    'Question::Information': {
-      id: `${scope}.Question::Information`,
+    [informationQuestion.id]: {
+      id: `${scope}.${informationQuestion.id}`,
       defaultMessage: 'Information Only',
     },
-    'Question::Url': {
-      id: `${scope}.Question::Url`,
+    [urlQuestion.id]: {
+      id: `${scope}.${urlQuestion.id}`,
       defaultMessage: 'External Link',
     },
     'Question::FollowUpContact': {
       id: `${scope}.Question::FollowUpContact`,
       defaultMessage: 'FollowUpContact',
     },
-    'Question::Feedback': {
-      id: `${scope}.Question::Feedback`,
+    [feedbackQuestion.id]: {
+      id: `${scope}.${feedbackQuestion.id}`,
       defaultMessage: 'Feedback',
     },
   },
