@@ -30,7 +30,7 @@ import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
-import SelectResearchers from 'containers/ProblemDetailsPage/components/SelectResearchers';
+import SelectResearchers from 'containers/SelectResearchers';
 import messages from './messages';
 import {
   TileContainer,

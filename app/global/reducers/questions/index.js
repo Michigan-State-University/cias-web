@@ -14,6 +14,7 @@ export {
   copyQuestionsRequest,
   deleteQuestionsRequest,
   groupQuestionsRequest,
+  shareQuestionsToResearchersRequest,
 } from './actions';
 export { questionsReducer } from './reducer';
 export {
@@ -43,4 +44,5 @@ export {
   copyQuestionsSaga,
   deleteQuestionsSaga,
   groupQuestionsSaga,
+  shareQuestionsToResearchersSaga,
 } from './sagas';

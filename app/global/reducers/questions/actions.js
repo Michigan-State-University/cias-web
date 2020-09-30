@@ -40,6 +40,9 @@ import {
   GROUP_QUESTIONS_REQUEST,
   GROUP_QUESTIONS_SUCCESS,
   GROUP_QUESTIONS_ERROR,
+  SHARE_QUESTIONS_TO_RESEARCHERS_REQUEST,
+  SHARE_QUESTIONS_TO_RESEARCHERS_SUCCESS,
+  SHARE_QUESTIONS_TO_RESEARCHERS_ERROR,
 } from './constants';
 
 export const selectQuestion = index =>
@@ -133,3 +136,16 @@ export const groupQuestionsSuccess = () =>
   actionBuilder(GROUP_QUESTIONS_SUCCESS, {});
 export const groupQuestionsError = error =>
   actionBuilder(GROUP_QUESTIONS_ERROR, { error });
+
+export const shareQuestionsToResearchersRequest = (
+  researcherIds,
+  questionIds,
+) =>
+  actionBuilder(SHARE_QUESTIONS_TO_RESEARCHERS_REQUEST, {
+    questionIds,
+    researcherIds,
+  });
+export const shareQuestionsToResearchersSuccess = () =>
+  actionBuilder(SHARE_QUESTIONS_TO_RESEARCHERS_SUCCESS, {});
+export const shareQuestionsToResearchersError = error =>
+  actionBuilder(SHARE_QUESTIONS_TO_RESEARCHERS_ERROR, { error });

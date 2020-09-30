@@ -35,6 +35,11 @@ export default defineMessages({
     id: `${scope}.group`,
     defaultMessage: 'Group',
   },
+  modalTitle: {
+    id: `${scope}.modalTitle`,
+    defaultMessage: 'Send copy to researchers',
+  },
+
   errors: {
     duplicateVariable: {
       id: `${scope}.duplicateVariable`,

@@ -8,6 +8,7 @@ import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import xor from 'lodash/xor';
 
+import SelectResearchers from 'containers/SelectResearchers';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
@@ -16,6 +17,7 @@ import Row from 'components/Row';
 import Img from 'components/Img';
 import ActionIcon from 'components/ActionIcon';
 import Text from 'components/Text';
+import Modal from 'components/Modal';
 
 import menu from 'assets/svg/triangle-back-black.svg';
 import cog from 'assets/svg/gear-selected.svg';
@@ -23,6 +25,8 @@ import copy from 'assets/svg/copy.svg';
 import copyActive from 'assets/svg/copy-active.svg';
 import bin from 'assets/svg/bin-no-bg.svg';
 import binActive from 'assets/svg/bin-active.svg';
+import share from 'assets/svg/file-share.svg';
+import shareActive from 'assets/svg/file-share-active.svg';
 import group from 'assets/svg/group.svg';
 import groupActive from 'assets/svg/group-active.svg';
 
@@ -52,6 +56,7 @@ import {
   copyQuestionsRequest,
   deleteQuestionsRequest,
   groupQuestionsRequest,
+  shareQuestionsToResearchersRequest,
 } from 'global/reducers/questions';
 
 import GroupActionButton from 'containers/Interventions/components/GroupActionButton';
@@ -81,10 +86,12 @@ function EditInterventionPage({
   copyQuestions,
   deleteQuestions,
   groupQuestions,
+  shareQuestionsToResearchers,
 }) {
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState([]);
   const [showList, setShowList] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const groupActions = [
     {
@@ -92,6 +99,12 @@ function EditInterventionPage({
       inactiveIcon: copy,
       activeIcon: copyActive,
       action: () => copyQuestions(selectedSlides),
+    },
+    {
+      label: <FormattedMessage {...messages.shareCopy} />,
+      inactiveIcon: share,
+      activeIcon: shareActive,
+      action: () => setModalVisible(true),
     },
     {
       label: <FormattedMessage {...messages.delete} />,
@@ -106,6 +119,7 @@ function EditInterventionPage({
       action: () => groupQuestions(selectedSlides),
     },
   ];
+
   useLockEditInterventionPageScroll();
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
@@ -162,6 +176,9 @@ function EditInterventionPage({
     <GroupActionButton active={active} {...action} key={index} />
   );
 
+  const sendSlidesToResearchers = researchers =>
+    shareQuestionsToResearchers(researchers, selectedSlides);
+
   if (questions.length === 0 && !getQuestionsLoading)
     return (
       <EmptyInterventionPage
@@ -180,6 +197,16 @@ function EditInterventionPage({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
+      <Modal
+        title={formatMessage(messages.modalTitle)}
+        onClose={() => setModalVisible(false)}
+        visible={modalVisible}
+      >
+        <SelectResearchers
+          onClose={() => setModalVisible(false)}
+          onResearchersSelected={sendSlidesToResearchers}
+        />
+      </Modal>
       <Row height="100%" filled>
         <QuestionsRow sm={4} isVisible={showList}>
           <Box
@@ -260,6 +287,7 @@ EditInterventionPage.propTypes = {
   copyQuestions: PropTypes.func,
   deleteQuestions: PropTypes.func,
   groupQuestions: PropTypes.func,
+  shareQuestionsToResearchers: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -277,6 +305,7 @@ const mapDispatchToProps = {
   copyQuestions: copyQuestionsRequest,
   deleteQuestions: deleteQuestionsRequest,
   groupQuestions: groupQuestionsRequest,
+  shareQuestionsToResearchers: shareQuestionsToResearchersRequest,
 };
 
 const withConnect = connect(

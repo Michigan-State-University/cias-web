@@ -9,6 +9,7 @@ import deleteQuestionImageSaga from './deleteQuestionImage';
 import getQuestionsSaga from './getQuestions';
 import reorderQuestionsSaga from './reorderQuestions';
 import groupQuestionsSaga from './groupQuestions';
+import shareQuestionsToResearchersSaga from './shareQuestionsToResearchers';
 import editQuestionAllSagas, {
   editQuestionSaga,
   updateQuestionDataSaga,
@@ -32,6 +33,7 @@ export {
   copyQuestionsSaga,
   deleteQuestionsSaga,
   groupQuestionsSaga,
+  shareQuestionsToResearchersSaga,
 };
 
 export default function* allQuestionsSagas() {
@@ -50,5 +52,6 @@ export default function* allQuestionsSagas() {
     copyQuestionsSaga(),
     deleteQuestionsSaga(),
     groupQuestionsSaga(),
+    shareQuestionsToResearchersSaga(),
   ]);
 }

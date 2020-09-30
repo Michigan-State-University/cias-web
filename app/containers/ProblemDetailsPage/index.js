@@ -66,7 +66,7 @@ import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
 import InterventionStatusButtons from './components/InterventionStatusButtons';
 import InterventionListItem from './components/InterventionListItem';
-import SelectResearchers from './components/SelectResearchers';
+import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
 import { updateStatuses } from './utils';
 
