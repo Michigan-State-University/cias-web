@@ -19,7 +19,6 @@ import ProblemDetailsPage from 'containers/ProblemDetailsPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
-import ProblemSettingsPage from 'containers/ProblemSettingsPage/Loadable';
 import SettingsInterventionPage from 'containers/Interventions/containers/SettingsInterventionPage';
 import AccountSettings from 'containers/AccountSettings/Loadable';
 import ResetPasswordPage from 'containers/ResetPasswordPage/Loadable';
@@ -145,17 +144,6 @@ export function App({ user }) {
           navbarProps={{
             navbarId: 'preview',
             navbarName: navbarNames.preview,
-          }}
-        />
-        <AppRoute
-          exact
-          path="/interventions/:problemId/settings"
-          component={ProblemSettingsPage}
-          protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher]}
-          navbarProps={{
-            navbarId: 'default',
-            activeTab: interventionsTabId,
           }}
         />
         <AppRoute

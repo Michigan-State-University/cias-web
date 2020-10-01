@@ -135,28 +135,47 @@ export const problemReducer = (state = initialState, action) =>
       case CHANGE_CURRENT_INTERVENTION:
         draft.currentInterventionIndex = action.payload.index;
         break;
-      case UPDATE_INTERVENTION_SETTINGS:
-        draft.loaders.editProblem = true;
-        draft.problem.interventions[state.currentInterventionIndex] = {
-          ...interventionSettingsReducer(
-            draft.problem.interventions[state.currentInterventionIndex],
-            action.payload,
-          ),
-        };
-        break;
-
-      case SEND_INTERVENTION_INVITE_REQUEST:
-        draft.loaders.sendInterventionLoading = true;
-        draft.cache.problem = state.problem;
-        const { emails } = action.payload;
-        const uniqEmails = union(
-          state.problem.interventions[state.currentInterventionIndex].emails,
-          emails,
+      case UPDATE_INTERVENTION_SETTINGS: {
+        const interventionIndex = draft.problem.interventions.findIndex(
+          intervention =>
+            intervention.id === action.payload.data.interventionId,
         );
-        draft.problem.interventions[
-          state.currentInterventionIndex
-        ].emails = uniqEmails;
+
+        if (interventionIndex > -1) {
+          draft.currentInterventionIndex = interventionIndex;
+          draft.loaders.editProblem = true;
+
+          draft.problem.interventions[interventionIndex] = {
+            ...interventionSettingsReducer(
+              draft.problem.interventions[interventionIndex],
+              action.payload,
+            ),
+          };
+        }
         break;
+      }
+
+      case SEND_INTERVENTION_INVITE_REQUEST: {
+        const interventionIndex = draft.problem.interventions.findIndex(
+          intervention => intervention.id === action.payload.interventionId,
+        );
+
+        if (interventionIndex > -1) {
+          draft.currentInterventionIndex = interventionIndex;
+          draft.loaders.sendInterventionLoading = true;
+
+          draft.cache.problem = state.problem;
+          const { emails } = action.payload;
+          const uniqEmails = union(
+            state.problem.interventions[interventionIndex].emails,
+            emails,
+          );
+
+          draft.problem.interventions[interventionIndex].emails = uniqEmails;
+        }
+
+        break;
+      }
 
       case SEND_INTERVENTION_INVITE_SUCCESS:
         draft.loaders.sendInterventionLoading = false;
@@ -212,6 +231,7 @@ export const problemReducer = (state = initialState, action) =>
         break;
       case FETCH_USERS_WITH_ACCESS_SUCCESS:
         draft.loaders.fetchUserAccessLoading = false;
+        draft.errors.fetchUserAccessError = null;
         draft.problem.usersWithAccess = action.payload.userAccess;
         break;
       case FETCH_USERS_WITH_ACCESS_ERROR:

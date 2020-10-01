@@ -17,7 +17,7 @@ import H2 from 'components/H2';
 import Row from 'components/Row';
 import H3 from 'components/H3';
 
-import { colors, boxShadows } from 'theme';
+import { colors } from 'theme';
 import {
   sendInterventionInviteRequest,
   resendInterventionInviteRequest,
@@ -39,37 +39,23 @@ const ShareBox = ({
 }) => {
   const { problem_id: problemId, slug, emails, position } = intervention || {};
 
-  const handleResend = user => resendInvite([user.email]);
+  const handleResend = user => resendInvite([user.email], intervention.id);
 
   if (intervention) {
     const link = `${
       process.env.WEB_URL
     }/interventions/${problemId}/sessions/${slug}/fill`;
     return (
-      <Box
-        shadow={boxShadows.selago}
-        bg={colors.white}
-        height="fit-content"
-        width="100%"
-        px={30}
-        pt={22}
-        pb={15}
-      >
-        <H3
-          mb={15}
-          fontSize={13}
-          fontWeight="bold"
-          textOpacity={0.6}
-          color={colors.bluewood}
-        >
-          <FormattedMessage {...messages.header} />
-        </H3>
+      <Box height="fit-content" width={500} mt={20}>
         <Box display="flex" align="center">
           <InterventionIndex>{position}</InterventionIndex>
           <H2 ml={10}>{intervention.name}</H2>
         </Box>
         <Row mt={20}>
-          <ParticipantInviter loading={sendLoading} sendInvite={sendInvite} />
+          <ParticipantInviter
+            loading={sendLoading}
+            sendInvite={value => sendInvite(value, intervention.id)}
+          />
         </Row>
         <Row mt={15}>
           <CopyToClipboard textToCopy={link}>

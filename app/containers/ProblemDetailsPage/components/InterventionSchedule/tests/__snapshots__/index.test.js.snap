@@ -69,26 +69,6 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-top: 28px;
-  margin-bottom: 17px;
-}
-
 @media only screen and (min-width:768px) {
 
 }
@@ -137,9 +117,6 @@ exports[`<InterventionSchedule /> Should render and match the snapshot 1`] = `
         />
       </div>
     </div>
-    <div
-      class="c6"
-    />
   </div>
 </div>
 `;

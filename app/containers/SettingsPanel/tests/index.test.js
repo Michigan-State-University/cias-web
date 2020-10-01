@@ -1,6 +1,6 @@
 /**
  *
- * Tests for ProblemSettingsPage
+ * Tests for SettingsPanel
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -13,10 +13,11 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
-import ProblemSettingsPage from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
+import { DEFAULT_LOCALE } from 'i18n';
 
-describe('<ProblemSettingsPage />', () => {
+import SettingsPanel from '../index';
+
+describe('<SettingsPanel />', () => {
   const reducer = state => state;
   const initialState = {
     problem: {
@@ -51,7 +52,7 @@ describe('<ProblemSettingsPage />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <ProblemSettingsPage {...defaultProps} />
+            <SettingsPanel {...defaultProps} />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,
@@ -64,7 +65,7 @@ describe('<ProblemSettingsPage />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <ProblemSettingsPage {...defaultProps} />
+            <SettingsPanel {...defaultProps} />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,

@@ -77,25 +77,25 @@ const AccessGiver = ({
 
   if (fetchUserAccessLoading)
     return (
-      <Box mt={65}>
+      <Box mt={40}>
         <Spinner color={themeColors.secondary} />
       </Box>
     );
 
   return (
-    <Box mt={65}>
+    <Box mt={40}>
       <Column>
         <H2>
           <FormattedMessage {...messages.accessGiverHeader} />
         </H2>
-        <Row mt={20} align="center">
+        <Column mt={20}>
           <ChipsInput
             value={value}
             setValue={setValue}
             placeholder={formatMessage(messages.inputPlaceholder)}
           />
-          <Row mt={-5} align="center" alignSelf="start">
-            <Box ml={30}>
+          <Row mt={25} align="center" justify="between">
+            <Box>
               <CsvFileReader onUpload={handleUploadCsv}>
                 <FormattedMessage {...messages.uploadText} />
               </CsvFileReader>
@@ -110,7 +110,7 @@ const AccessGiver = ({
               <FormattedMessage {...messages.sendText} />
             </Button>
           </Row>
-        </Row>
+        </Column>
         <Box mt={40}>
           {fetchUserAccessError && (
             <ErrorAlert

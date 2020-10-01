@@ -1,7 +1,8 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, select } from 'redux-saga/effects';
 
 import { mapAccessToStateObject } from 'utils/mapResponseObjects';
+import { makeSelectProblem } from 'global/reducers/problem/selectors';
 import { FETCH_USERS_WITH_ACCESS_REQUEST } from '../constants';
 import {
   fetchUsersWithAccessSuccess,
@@ -9,15 +10,19 @@ import {
 } from '../actions';
 
 function* fetchUsersWithAccess({ payload: { id } }) {
-  const requestURL = `v1/problems/${id}/users`;
-  try {
-    const {
-      data: { data },
-    } = yield axios.get(requestURL);
-    const accessMapped = data.map(mapAccessToStateObject);
-    yield put(fetchUsersWithAccessSuccess(accessMapped));
-  } catch (error) {
-    yield put(fetchUsersWithAccessFailure(error));
+  const problem = yield select(makeSelectProblem());
+
+  if (problem && problem.id === id) {
+    const requestURL = `v1/problems/${id}/users`;
+    try {
+      const {
+        data: { data },
+      } = yield axios.get(requestURL);
+      const accessMapped = data.map(mapAccessToStateObject);
+      yield put(fetchUsersWithAccessSuccess(accessMapped));
+    } catch (error) {
+      yield put(fetchUsersWithAccessFailure(error));
+    }
   }
 }
 

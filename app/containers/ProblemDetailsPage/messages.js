@@ -56,6 +56,10 @@ export default defineMessages({
     id: `${scope}.modalTitle`,
     defaultMessage: 'Choose researchers to send',
   },
+  participantShareModalTitle: {
+    id: `${scope}.participantShareModalTitle`,
+    defaultMessage: 'Invite to start intervention from:',
+  },
   anyone: {
     id: `${scope}.anyone`,
     defaultMessage: 'Anyone with the link can access sessions',

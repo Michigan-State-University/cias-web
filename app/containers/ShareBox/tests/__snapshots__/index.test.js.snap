@@ -3,20 +3,10 @@
 exports[`<ShareBox /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 grZWgU"
+    class="Box-sc-14m3exe-0 fyMMml"
     height="fit-content"
-    width="100%"
+    width="500"
   >
-    <h3
-      class="H3-sc-1nwhpi5-0 SwggN"
-      color="#2F3850"
-      font-size="13"
-      font-weight="bold"
-    >
-      <span>
-        Invite to start intervention from:
-      </span>
-    </h3>
     <div
       class="Box-sc-14m3exe-0 lbVVSW"
       display="flex"

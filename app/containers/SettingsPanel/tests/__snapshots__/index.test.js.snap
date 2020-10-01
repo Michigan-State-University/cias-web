@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-14m3exe-0 styled__StyledBox-sc-137nvsy-0 jmcBzp jbHtmE"
+  >
+    <div
+      class="Column-sc-1n6divy-0 izqwPh"
+      width="100%"
+    >
+      <h2
+        class="H2-egphza-0 eFIKXl"
+      >
+        <span>
+          Who can access this intervention?
+        </span>
+      </h2>
+      <div
+        class="Box-sc-14m3exe-0 hyXteb"
+      >
+        <div
+          class="Row-x1o3ru-0 fnPUbe"
+          width="fit-content"
+        >
+          <img
+            class="Img-sc-1kfzr96-0 isicqy"
+            src="IMAGE_MOCK"
+          />
+          <p
+            class="Text-sc-2lza2m-0 WmJYz"
+            font-size="15"
+            font-weight="regular"
+          >
+            <span>
+              Anyone with the link
+            </span>
+          </p>
+        </div>
+        <div
+          class="Row-x1o3ru-0 fnPUbe"
+          width="fit-content"
+        >
+          <img
+            class="Img-sc-1kfzr96-0 isicqy"
+            src="IMAGE_MOCK"
+          />
+          <p
+            class="Text-sc-2lza2m-0 WmJYz"
+            font-size="15"
+            font-weight="regular"
+          >
+            <span>
+              All registered participants
+            </span>
+          </p>
+        </div>
+        <div
+          class="Row-x1o3ru-0 gOOpWF"
+          width="fit-content"
+        >
+          <img
+            class="Img-sc-1kfzr96-0 isicqy"
+            src="IMAGE_MOCK"
+          />
+          <p
+            class="Text-sc-2lza2m-0 WmJYz"
+            font-size="15"
+            font-weight="regular"
+          >
+            <span>
+              Selected registered participants
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -119,8 +119,8 @@ export const createInterventionSuccess = intervention =>
 export const createInterventionError = () =>
   actionBuilder(CREATE_INTERVENTION_ERROR, {});
 
-export const sendInterventionInviteRequest = emails =>
-  actionBuilder(SEND_INTERVENTION_INVITE_REQUEST, { emails });
+export const sendInterventionInviteRequest = (emails, interventionId) =>
+  actionBuilder(SEND_INTERVENTION_INVITE_REQUEST, { emails, interventionId });
 
 export const sendInterventionInviteSuccess = () =>
   actionBuilder(SEND_INTERVENTION_INVITE_SUCCESS, {});
@@ -128,5 +128,5 @@ export const sendInterventionInviteSuccess = () =>
 export const sendInterventionInviteError = () =>
   actionBuilder(SEND_INTERVENTION_INVITE_ERROR, {});
 
-export const resendInterventionInviteRequest = emails =>
-  actionBuilder(RESEND_INTERVENTION_INVITE_REQUEST, { emails });
+export const resendInterventionInviteRequest = (emails, interventionId) =>
+  actionBuilder(RESEND_INTERVENTION_INVITE_REQUEST, { emails, interventionId });

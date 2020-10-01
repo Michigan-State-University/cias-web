@@ -25,7 +25,10 @@ import {
   removeFormulaCase,
   updateFormula,
   updateFormulaCase,
+  makeSelectCurrentInterventionIndex,
+  changeCurrentIntervention,
 } from 'global/reducers/problem';
+import { getQuestionsRequest } from 'global/reducers/questions';
 import messages from './messages';
 
 function InterventionBranching({
@@ -34,12 +37,15 @@ function InterventionBranching({
   status,
   onChangeFormulaStatus,
   formula,
-  id,
+  intervention: { id, position },
   onFormulaUpdate,
   onAddCase,
   onRemoveCase,
   onUpdateCase,
   problem,
+  interventionIndex,
+  changeInterventionIndex,
+  fetchQuestions,
 }) {
   const displayPatternTargetText = target => {
     if (target.id === '') return formatMessage(messages.selectSession);
@@ -50,12 +56,12 @@ function InterventionBranching({
     return intervention.name;
   };
 
-  const handleFormulaStatus = value => onChangeFormulaStatus(value);
+  const handleFormulaStatus = value => onChangeFormulaStatus(value, id);
 
   return (
     <>
       <Row py={18} px={62} align="between" justify="between">
-        <Column xs={12}>
+        <Column xs={12} justify="center">
           <Row align="center" width="100%">
             {(status || nextInterventionName) && (
               <>
@@ -71,7 +77,7 @@ function InterventionBranching({
         </Column>
         <Column xs={4}>
           <Row justify="end" align="center" width="100%">
-            <Text>{formatMessage(messages.useFormula)}</Text>
+            <Text whiteSpace="pre">{formatMessage(messages.useFormula)}</Text>
             <Switch ml={10} checked={status} onToggle={handleFormulaStatus} />
           </Row>
         </Column>
@@ -80,6 +86,12 @@ function InterventionBranching({
         <Row mx={62} py={20}>
           <Column>
             <BranchingLayout
+              onVariableChooserOpen={() => {
+                if (position !== interventionIndex + 1) {
+                  changeInterventionIndex(position - 1);
+                  fetchQuestions(id);
+                }
+              }}
               formatMessage={formatMessage}
               formula={formula}
               id={id}
@@ -102,17 +114,21 @@ InterventionBranching.propTypes = {
   nextInterventionName: PropTypes.string,
   status: PropTypes.bool,
   onChangeFormulaStatus: PropTypes.func,
-  id: PropTypes.string,
+  intervention: PropTypes.object,
   formula: PropTypes.object,
   onFormulaUpdate: PropTypes.func,
   onAddCase: PropTypes.func,
   onRemoveCase: PropTypes.func,
   onUpdateCase: PropTypes.func,
   problem: PropTypes.object,
+  interventionIndex: PropTypes.number,
+  changeInterventionIndex: PropTypes.func,
+  fetchQuestions: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   problem: makeSelectProblem(),
+  interventionIndex: makeSelectCurrentInterventionIndex(),
 });
 
 const mapDispatchToProps = {
@@ -121,6 +137,8 @@ const mapDispatchToProps = {
   onRemoveCase: removeFormulaCase,
   onUpdateCase: updateFormulaCase,
   onChangeFormulaStatus: changeFormulaStatus,
+  changeInterventionIndex: changeCurrentIntervention,
+  fetchQuestions: getQuestionsRequest,
 };
 
 const withConnect = connect(
