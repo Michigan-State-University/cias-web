@@ -153,4 +153,10 @@ export default defineMessages({
     id: `${scope}.archiveProblemError`,
     defaultMessage: `Couldn't archive an intervention`,
   },
+  errors: {
+    unknownRequestError: {
+      id: `${scope}.errors.unknownRequestError`,
+      defaultMessage: `Some error occurred. Please try again or contact a support.`,
+    },
+  },
 });

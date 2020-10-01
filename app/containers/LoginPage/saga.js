@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import LocalStorageService from 'utils/localStorageService';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
+import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
 import { logIn } from 'global/reducers/auth/actions';
 
 import { LOGIN_REQUEST } from './constants';
@@ -25,7 +26,7 @@ function* login({ payload: { email, password } }) {
     yield put(loginSuccess());
     yield put(push('/'));
   } catch (error) {
-    yield put(loginError(error.toString()));
+    yield put(loginError(requestErrorMessageHandler(error)));
   }
 }
 
