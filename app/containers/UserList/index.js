@@ -121,7 +121,9 @@ function UserList({
           formatMessage={formatMessage}
           users={users}
           loading={usersLoading}
-          changeActivateStatus={changeActivateStatus}
+          changeActivateStatus={(id, active) =>
+            changeActivateStatus(id, active, showInactive)
+          }
           setPage={setPage}
           page={page}
         />

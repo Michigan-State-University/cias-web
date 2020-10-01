@@ -45,9 +45,12 @@ const userListReducer = (state = initialState, { type, payload }) =>
       case CHANGE_ACTIVATE_STATUS_REQUEST:
         const { users } = state;
         draft.cache.users = users;
-        const { id, active } = payload;
+        const { id, active, showInactive } = payload;
         const index = findIndex(users, user => user.id === id);
-        draft.users[index].active = active;
+
+        if (showInactive) draft.users[index].active = active;
+        else draft.users.splice(index, 1);
+
         break;
       case CHANGE_ACTIVATE_STATUS_SUCCESS:
         draft.cache.users = [];

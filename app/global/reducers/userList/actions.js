@@ -22,8 +22,8 @@ export const fetchUsersSuccess = users =>
 export const fetchUsersFailure = error =>
   actionBuilder(FETCH_USERS_FAILURE, error);
 
-export const changeActivateStatusRequest = (id, active) =>
-  actionBuilder(CHANGE_ACTIVATE_STATUS_REQUEST, { id, active });
+export const changeActivateStatusRequest = (id, active, showInactive) =>
+  actionBuilder(CHANGE_ACTIVATE_STATUS_REQUEST, { id, active, showInactive });
 export const changeActivateStatusSuccess = () =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_SUCCESS, {});
 export const changeActivateStatusFailure = () =>
