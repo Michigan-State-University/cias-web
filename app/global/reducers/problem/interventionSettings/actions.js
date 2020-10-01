@@ -39,14 +39,14 @@ export const changeFormulaStatus = (value, interventionId) =>
     data: { value, interventionId },
   });
 
-export const changeSchedulingType = value =>
+export const changeSchedulingType = (value, interventionId) =>
   updateInterventionSettings({
     type: CHANGE_SCHEDULING_TYPE,
-    data: { value },
+    data: { value, interventionId },
   });
 
-export const updateSchedulingValue = value =>
+export const updateSchedulingValue = (value, interventionId) =>
   updateInterventionSettings({
     type: UPDATE_SCHEDULING_VALUE,
-    data: { value },
+    data: { value, interventionId },
   });

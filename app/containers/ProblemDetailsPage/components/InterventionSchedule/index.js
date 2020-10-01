@@ -51,20 +51,26 @@ function InterventionSchedule({
     },
   };
 
+  const handleChangeValue = value => updateValue(value, interventionId);
+
   const renderOption = () => {
     switch (selectedScheduleOption) {
       case scheduleOptions.daysAfter.id:
-        return <DaysAfterOption value={scheduleAt} setValue={updateValue} />;
+        return (
+          <DaysAfterOption value={scheduleAt} setValue={handleChangeValue} />
+        );
       case scheduleOptions.daysAfterFill.id:
         return (
           <DaysAfterOption
             value={scheduleAt}
-            setValue={updateValue}
+            setValue={handleChangeValue}
             afterFill
           />
         );
       case scheduleOptions.exactDate.id:
-        return <ExactDateOption value={scheduleAt} setValue={updateValue} />;
+        return (
+          <ExactDateOption value={scheduleAt} setValue={handleChangeValue} />
+        );
       default:
         break;
     }
