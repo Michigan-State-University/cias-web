@@ -3,6 +3,7 @@ import { takeLatest, put, call } from 'redux-saga/effects';
 import { success as showSuccess } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
+import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
 import { addUserToList } from 'global/reducers/userList';
 
 import messages from '../messages';
@@ -28,7 +29,7 @@ export function* inviteResearcher({ payload: { email } }) {
       }),
     );
   } catch (error) {
-    yield put(inviteResearcherError(error.toString()));
+    yield put(inviteResearcherError(requestErrorMessageHandler(error)));
   }
 }
 

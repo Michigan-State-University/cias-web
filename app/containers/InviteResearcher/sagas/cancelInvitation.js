@@ -6,6 +6,7 @@ import {
 } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
+import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
 
 import messages from '../messages';
 import {
@@ -31,7 +32,7 @@ export function* cancelInvitation({ payload: { id } }) {
         id: CANCEL_INVITATION_ERROR,
       }),
     );
-    yield put(cancelInvitationError(error.toString()));
+    yield put(cancelInvitationError(requestErrorMessageHandler(error)));
   }
 }
 
