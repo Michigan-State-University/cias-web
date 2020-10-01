@@ -30,7 +30,6 @@ const orderSettings = settings =>
   settings && {
     video: settings.video,
     image: settings.image,
-    title: settings.title,
     subtitle: settings.subtitle,
     ...(!isNullOrUndefined(settings.proceed_button) && {
       proceed_button: settings.proceed_button,

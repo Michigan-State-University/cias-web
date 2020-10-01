@@ -94,6 +94,7 @@ export function RegisterPage({
   useInjectSaga({ key: 'allRegistrationsSaga', saga: allRegistrationsSaga });
   const { email, invitation_token: invitationToken } = queryString.parse(
     location.search,
+    { decode: false },
   );
   const isInvite = Boolean(invitationToken) && Boolean(email);
 

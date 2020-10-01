@@ -6,5 +6,6 @@ export const requestErrorMessageHandler = error => {
 
   if (status <= 400 || status >= 500)
     return formatMessage(globalMessages.errors.unknownRequestError);
-  return data.message;
+
+  return data.message || data.error;
 };
