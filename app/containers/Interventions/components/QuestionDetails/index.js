@@ -65,7 +65,7 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
     } = selectedQuestion || {};
 
     return (
-      <AnswerOuterContainer>
+      <AnswerOuterContainer id="quill_boundaries">
         <Column width="100%" display="flex" align="center">
           <AnswerInterventionContent ref={animationBoundaries}>
             <QuestionNarrator
