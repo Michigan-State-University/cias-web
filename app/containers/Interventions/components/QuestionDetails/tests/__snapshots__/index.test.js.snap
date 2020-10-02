@@ -458,7 +458,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   >
     <div
       class="c1"
-      id="quill_boundaries"
     >
       <div
         class="c2"
@@ -467,6 +466,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
       >
         <div
           class="c3"
+          id="quill_boundaries"
         >
           <div
             class="c4"
