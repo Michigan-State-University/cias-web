@@ -162,7 +162,7 @@ function EditInterventionPage({
             <Icon src={menu} alt="questions-list" />
           </ShowListButton>
         </QuestionsRow>
-        <Column id="quill_boundaries" align="between">
+        <Column align="between">
           <Row overflow="hidden" filled>
             <QuestionDetails />
             <QuestionSettings />
