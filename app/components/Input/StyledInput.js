@@ -60,7 +60,7 @@ const StyledInput = props => {
 
   return (
     <TextArea
-      width="100%"
+      width={props.width || '100%'}
       height="60px"
       {...(props.rows ? { rows: props.rows, height: 'auto' } : {})}
       mr={9}

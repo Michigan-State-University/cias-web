@@ -29,6 +29,7 @@ const colors = {
   buddhaGold: '#C2B200',
   navyBlue: '#000080',
   olive: '#808000',
+  catskillWhite: '#E2EEF1',
 };
 
 const themeColors = {

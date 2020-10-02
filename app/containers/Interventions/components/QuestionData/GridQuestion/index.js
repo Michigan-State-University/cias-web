@@ -85,13 +85,11 @@ const GridQuestion = ({
           overflow="scroll"
           pr={21}
           py={14}
-          ml={
-            isNarratorTab && elements.grid.colWidth + elements.grid.leftPadding
-          }
+          ml={isNarratorTab && elements.grid.leftPadding}
         >
           <Table>
             <THead>
-              <StripedTR>
+              <StripedTR color={colors.catskillWhite} bg={colors.zirkon}>
                 <FirstTH
                   left={elements.grid.leftPadding}
                   isFixed={isNarratorTab}
@@ -106,7 +104,10 @@ const GridQuestion = ({
                     onMouseEnter={() => setHoveredColumn(columnIndex)}
                     onMouseLeave={() => setHoveredColumn(-1)}
                   >
-                    <Column align="center">
+                    <Column
+                      align="center"
+                      width={isNarratorTab ? elements.grid.colWidth : '100%'}
+                    >
                       <Box
                         px={8}
                         mb={8}
@@ -172,16 +173,17 @@ const GridQuestion = ({
               {rows.map((row, rowIndex) => (
                 <StripedTR
                   key={`question-${selectedQuestion.id}-row-th-${rowIndex}`}
+                  color={colors.catskillWhite}
+                  bg={colors.zirkon}
                 >
                   <FirstTH
                     left={elements.grid.leftPadding}
                     isFixed={isNarratorTab}
-                    width="auto"
                     scope="row"
                     onMouseEnter={() => setHoveredRow(rowIndex)}
                     onMouseLeave={() => setHoveredRow(-1)}
                   >
-                    <Row align="center" height="100%">
+                    <Row align="center" height="100%" padding={5}>
                       <Box
                         width={60}
                         onClick={() => deleteRow(rowIndex)}
@@ -209,7 +211,8 @@ const GridQuestion = ({
                         </Row>
                         {isNarratorTab ? (
                           <Column
-                            width={elements.grid.colWidth}
+                            maxWidth={elements.grid.firstColWidth}
+                            width="max-content"
                             height="inherit"
                             justify="center"
                           >
@@ -217,9 +220,11 @@ const GridQuestion = ({
                           </Column>
                         ) : (
                           <StyledInput
+                            type="multiline"
+                            rows="2"
                             disabled={isNarratorTab}
                             cursor={isNarratorTab ? 'text' : 'pointer'}
-                            width={110}
+                            width={elements.grid.firstColWidth}
                             px={0}
                             py={12}
                             textAlign="center"
@@ -238,12 +243,12 @@ const GridQuestion = ({
                   </FirstTH>
                   {columns.map((_, columnIndex) => (
                     <TD
-                      width={elements.grid.colWidth}
+                      height="inherit"
                       key={`question-${
                         selectedQuestion.id
                       }-row-cell-${rowIndex}-${columnIndex}`}
                     >
-                      <Row width="inherit" justify="center">
+                      <Row justify="center" align="center">
                         <Img src={radio} />
                       </Row>
                     </TD>

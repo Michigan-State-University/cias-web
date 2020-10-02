@@ -366,7 +366,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   border: 1px solid #E9F1FB;
   border-radius: 5px;
   margin-right: 9px;
-  width: 100%;
+  width: auto;
   height: auto;
   background-color: transparent;
   border: 1px solid transparent;
@@ -768,7 +768,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
             placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
             rows="1"
             value=""
-            width="100%"
+            width="auto"
           />
         </div>
         <div
