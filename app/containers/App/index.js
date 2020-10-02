@@ -170,7 +170,7 @@ export function App({ user }) {
         />
         <AppRoute
           exact
-          path="/profile/:id"
+          path="/users/:id"
           component={UserDetails}
           protectedRoute
           allowedRoles={[Roles.admin]}

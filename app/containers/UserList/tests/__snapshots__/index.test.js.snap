@@ -167,6 +167,19 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                     Role
                   </div>
                 </th>
+                <th
+                  class="TH-sc-1qq1mcj-0 eQdxUn"
+                  color="#2F3850"
+                  opacity="0.6"
+                  scope="col"
+                  width="auto"
+                >
+                  <div
+                    class="Column-sc-1n6divy-0 iYxvhz"
+                  >
+                     
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody
