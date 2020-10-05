@@ -116,7 +116,7 @@ function EditInterventionPage({
       label: <FormattedMessage {...messages.group} />,
       inactiveIcon: group,
       activeIcon: groupActive,
-      action: () => groupQuestions(selectedSlides),
+      action: () => groupQuestions(selectedSlides, params.interventionId),
     },
   ];
 

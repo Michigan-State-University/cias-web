@@ -130,8 +130,8 @@ export const deleteQuestionsSuccess = () =>
 export const deleteQuestionsError = error =>
   actionBuilder(DELETE_QUESTIONS_ERROR, { error });
 
-export const groupQuestionsRequest = questionIds =>
-  actionBuilder(GROUP_QUESTIONS_REQUEST, { questionIds });
+export const groupQuestionsRequest = (questionIds, interventionId) =>
+  actionBuilder(GROUP_QUESTIONS_REQUEST, { questionIds, interventionId });
 export const groupQuestionsSuccess = () =>
   actionBuilder(GROUP_QUESTIONS_SUCCESS, {});
 export const groupQuestionsError = error =>

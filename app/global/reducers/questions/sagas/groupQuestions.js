@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga/effects';
-// import axios from 'axios';
+import axios from 'axios';
 // import { error as showError } from 'react-toastify-redux';
 
 // import { formatMessage } from 'utils/intlOutsideReact';
@@ -8,12 +8,16 @@ import { takeLatest } from 'redux-saga/effects';
 import { GROUP_QUESTIONS_REQUEST } from '../constants';
 // import { groupQuestionsSuccess, groupQuestionsError } from '../actions';
 
-function* groupQuestions({ payload: { questionIds } }) {
+function* groupQuestions({ payload: { questionIds, interventionId } }) {
   console.log(questionIds);
-  // const requestURL = `v1/interventions/${interventionId}/questions/${questionId}`;
+  const requestURL = `v1/interventions/${interventionId}/questions_groups`;
 
   try {
-    // yield axios.group(requestURL);
+    const r = yield axios.post(requestURL, {
+      title: 'Group 1',
+      questions: [...questionIds],
+    });
+    console.log(r);
     // yield put(groupQuestionsSuccess());
   } catch (error) {
     // yield put(
