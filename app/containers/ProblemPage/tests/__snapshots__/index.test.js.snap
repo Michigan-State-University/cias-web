@@ -66,7 +66,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
             </p>
           </button>
           <button
-            class="styled__StatusLabel-sc-14fow03-1 rGA-DV"
+            class="styled__StatusLabel-sc-14fow03-1 itQFrS"
             color="#000000"
             value="archived"
           >
