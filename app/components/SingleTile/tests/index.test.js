@@ -21,7 +21,15 @@ import { DEFAULT_LOCALE } from '../../../i18n';
 const defaultProps = {
   tileData: {
     name: 'Name',
+    id: 'test-id',
     status: 'draft',
+    created_at: '2020-09-30T10:00:00',
+    updated_at: '2020-09-30T10:00:00',
+    user: {
+      email: 'test@test.com',
+      first_name: 'UserFirstName',
+      last_name: 'UserLastName',
+    },
   },
   interventions: [{}, {}, {}],
   link: '#',

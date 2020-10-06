@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProblemDetails /> Should render and match the snapshot 1`] = `
+.c0 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c2 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  color: #2F3850;
+}
+
+<div>
+  <p
+    class="c0"
+    font-weight="bold"
+  >
+    Created by: 
+  </p>
+  <p
+    class="c1"
+  >
+    Email: 
+    test@test.com
+  </p>
+  <p
+    class="c1"
+  >
+    First name: 
+    UserFirstName
+  </p>
+  <p
+    class="c2"
+  >
+    Last name: 
+    UserLastName
+  </p>
+  <p
+    class="c0"
+    font-weight="bold"
+  >
+    Created at: 
+  </p>
+  <p
+    class="c2"
+  >
+    2020/09/30 10:00 +00:00
+  </p>
+  <p
+    class="c0"
+    font-weight="bold"
+  >
+    Updated at: 
+  </p>
+  <p
+    class="c2"
+  >
+    2020/09/30 10:00 +00:00
+  </p>
+</div>
+`;

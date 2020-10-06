@@ -53,7 +53,9 @@ function InterventionBranching({
       problem.interventions,
       value => value.id === target.id,
     );
-    return intervention.name;
+    return intervention
+      ? intervention.name
+      : formatMessage(messages.selectSession);
   };
 
   const handleFormulaStatus = value => onChangeFormulaStatus(value, id);

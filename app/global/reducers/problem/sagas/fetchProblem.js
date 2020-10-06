@@ -2,21 +2,21 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 import orderBy from 'lodash/orderBy';
 
-import { defaultMapper } from 'utils/mapResponseObjects';
-
 import { FETCH_PROBLEM_REQUEST } from '../constants';
 import { fetchProblemSuccess, fetchProblemError } from '../actions';
+import { defaultMapper } from '../../../../utils/mapResponseObjects';
 
 function* fetchProblem({ payload: { id } }) {
-  const requestURL = `v1/problems/${id}`;
+  const problemRequestURL = `v1/problems/${id}`;
+  const interventionsRequestURL = `v1/problems/${id}/interventions`;
   try {
+    const { data } = yield axios.get(problemRequestURL);
     const {
-      data: { data },
-    } = yield axios.get(requestURL);
-    const mappedData = defaultMapper(data);
-    const { interventions } = mappedData;
-    mappedData.interventions = orderBy(interventions, 'position');
-    yield put(fetchProblemSuccess(mappedData));
+      data: { data: interventions },
+    } = yield axios.get(interventionsRequestURL);
+    const mappedInterventions = interventions.map(defaultMapper);
+    data.interventions = orderBy(mappedInterventions, 'position');
+    yield put(fetchProblemSuccess(data));
   } catch (error) {
     yield put(fetchProblemError(error));
   }

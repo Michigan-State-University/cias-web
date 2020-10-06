@@ -45,4 +45,28 @@ export default defineMessages({
     id: `${scope}.modalTitle`,
     defaultMessage: 'Choose researchers to send',
   },
+  createdBy: {
+    id: `${scope}.createdBy`,
+    defaultMessage: 'Created by: ',
+  },
+  createdAt: {
+    id: `${scope}.createdAt`,
+    defaultMessage: 'Created at: ',
+  },
+  updatedAt: {
+    id: `${scope}.modalTitle`,
+    defaultMessage: 'Updated at: ',
+  },
+  email: {
+    id: `${scope}.email`,
+    defaultMessage: 'Email: ',
+  },
+  firstName: {
+    id: `${scope}.firstName`,
+    defaultMessage: 'First name: ',
+  },
+  lastName: {
+    id: `${scope}.lastName`,
+    defaultMessage: 'Last name: ',
+  },
 });
