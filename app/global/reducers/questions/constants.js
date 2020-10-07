@@ -68,31 +68,3 @@ export const UPDATE_QUESTION_DATA =
 
 export const UPDATE_QUESTION_SETTINGS =
   'app/EditInterventionPage/UPDATE_QUESTION_SETTINGS';
-
-export const COPY_QUESTIONS_REQUEST =
-  'app/EditInterventionPage/COPY_QUESTIONS_REQUEST';
-export const COPY_QUESTIONS_SUCCESS =
-  'app/EditInterventionPage/COPY_QUESTIONS_SUCCESS';
-export const COPY_QUESTIONS_ERROR =
-  'app/EditInterventionPage/COPY_QUESTIONS_ERROR';
-
-export const DELETE_QUESTIONS_REQUEST =
-  'app/EditInterventionPage/DELETE_QUESTIONS_REQUEST';
-export const DELETE_QUESTIONS_SUCCESS =
-  'app/EditInterventionPage/DELETE_QUESTIONS_SUCCESS';
-export const DELETE_QUESTIONS_ERROR =
-  'app/EditInterventionPage/DELETE_QUESTIONS_ERROR';
-
-export const GROUP_QUESTIONS_REQUEST =
-  'app/EditInterventionPage/GROUP_QUESTIONS_REQUEST';
-export const GROUP_QUESTIONS_SUCCESS =
-  'app/EditInterventionPage/GROUP_QUESTIONS_SUCCESS';
-export const GROUP_QUESTIONS_ERROR =
-  'app/EditInterventionPage/GROUP_QUESTIONS_ERROR';
-
-export const SHARE_QUESTIONS_TO_RESEARCHERS_REQUEST =
-  'app/EditInterventionPage/SHARE_QUESTIONS_TO_RESEARCHERS_REQUEST';
-export const SHARE_QUESTIONS_TO_RESEARCHERS_SUCCESS =
-  'app/EditInterventionPage/SHARE_QUESTIONS_TO_RESEARCHERS_SUCCESS';
-export const SHARE_QUESTIONS_TO_RESEARCHERS_ERROR =
-  'app/EditInterventionPage/SHARE_QUESTIONS_TO_RESEARCHERS_ERROR';

@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import Reorder, { reorder } from 'react-reorder';
+// import Reorder, { reorder } from 'react-reorder';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -18,6 +18,7 @@ import Img from 'components/Img';
 import ActionIcon from 'components/ActionIcon';
 import Text from 'components/Text';
 import Modal from 'components/Modal';
+import { StyledInput } from 'components/Input/StyledInput';
 
 import menu from 'assets/svg/triangle-back-black.svg';
 import cog from 'assets/svg/gear-selected.svg';
@@ -53,13 +54,21 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionIndex,
   makeSelectLoader,
+} from 'global/reducers/questions';
+
+import {
   copyQuestionsRequest,
   deleteQuestionsRequest,
   groupQuestionsRequest,
   shareQuestionsToResearchersRequest,
-} from 'global/reducers/questions';
+  makeSelectQuestionGroups,
+  changeGroupNameRequest,
+  questionGroupsReducer,
+  getQuestionGroupsRequest,
+} from 'global/reducers/questionGroups';
 
 import GroupActionButton from 'containers/Interventions/components/GroupActionButton';
+import Radio from 'components/Radio';
 import editInterventionPageSaga from './saga';
 
 import EmptyInterventionPage from '../../components/EmptyInterventionPage';
@@ -80,19 +89,21 @@ function EditInterventionPage({
   createQuestion,
   match: { params },
   getQuestions,
-  reorderQuestions,
+  // reorderQuestions,
   getQuestionsLoading,
   interventionLoaders: { getIntervention: getInterventionLoader },
   copyQuestions,
   deleteQuestions,
   groupQuestions,
   shareQuestionsToResearchers,
+  groups,
+  changeGroupName,
+  getQuestionGroups,
 }) {
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState([]);
   const [showList, setShowList] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
-
   const groupActions = [
     {
       label: <FormattedMessage {...messages.duplicate} />,
@@ -124,6 +135,7 @@ function EditInterventionPage({
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'localState', reducer: localStateReducer });
+  useInjectReducer({ key: 'questionGroups', reducer: questionGroupsReducer });
 
   useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
@@ -139,6 +151,7 @@ function EditInterventionPage({
       problemId: params.problemId,
     });
     getQuestions(params.interventionId);
+    getQuestionGroups(params.interventionId);
   }, []);
 
   const onCreateQuestion = type => {
@@ -152,22 +165,22 @@ function EditInterventionPage({
     );
   };
 
-  const handleReorder = (event, previousIndex, nextIndex) => {
-    const newList = reorder(questions, previousIndex, nextIndex);
-    let position = 0;
-    const orderdedNewList = newList.map(question => {
-      position += 1;
-      return {
-        ...question,
-        position,
-      };
-    });
+  // const handleReorder = (event, previousIndex, nextIndex) => {
+  //   const newList = reorder(questions, previousIndex, nextIndex);
+  //   let position = 0;
+  //   const orderdedNewList = newList.map(question => {
+  //     position += 1;
+  //     return {
+  //       ...question,
+  //       position,
+  //     };
+  //   });
 
-    reorderQuestions({
-      reorderedList: orderdedNewList,
-      interventionId: params.interventionId,
-    });
-  };
+  //   reorderQuestions({
+  //     reorderedList: orderdedNewList,
+  //     interventionId: params.interventionId,
+  //   });
+  // };
 
   const loading = getQuestionsLoading || getInterventionLoader;
 
@@ -191,6 +204,20 @@ function EditInterventionPage({
 
   const selectSlide = slideId =>
     setSelectedSlides(xor(selectedSlides, [slideId]));
+
+  const checkSelectedGroup = gQuestions =>
+    gQuestions.every(({ id }) => selectedSlides.includes(id));
+
+  const toggleGroup = gQuestions => {
+    const allSelected = checkSelectedGroup(gQuestions);
+    let q = gQuestions;
+    if (!allSelected) {
+      q = gQuestions.filter(({ id }) => !selectedSlides.includes(id));
+    }
+    setSelectedSlides(xor(selectedSlides, q.map(({ id }) => id)));
+  };
+
+  console.log(groups);
 
   return (
     <Fragment>
@@ -238,22 +265,59 @@ function EditInterventionPage({
                   <ActionIcon mr="0" onClick={() => setManage(false)} />
                 </Row>
               )}
-              <Reorder reorderId="question-list" onReorder={handleReorder}>
-                {questions.map((question, index) => (
-                  <Row key={question.id}>
-                    <QuestionListItem
-                      selectSlide={selectSlide}
-                      checked={selectedSlides.includes(question.id)}
-                      manage={manage}
-                      index={index}
-                      selectedQuestionIndex={selectedQuestion}
-                      questions={questions}
-                      question={question}
-                      interventionId={params.interventionId}
-                    />
-                  </Row>
+              {/* <Reorder reorderId="question-list" onReorder={handleReorder}> */}
+              {questions.map((question, index) => (
+                <Row key={question.id}>
+                  <QuestionListItem
+                    selectSlide={selectSlide}
+                    checked={selectedSlides.includes(question.id)}
+                    manage={manage}
+                    index={index}
+                    selectedQuestionIndex={selectedQuestion}
+                    questions={questions}
+                    question={question}
+                    interventionId={params.interventionId}
+                  />
+                </Row>
+              ))}
+              {groups &&
+                groups.map(({ questions: questions2, title, id }) => (
+                  <div key={id}>
+                    <Row>
+                      {manage && (
+                        <Radio
+                          onClick={() => toggleGroup(questions2)}
+                          checked={checkSelectedGroup(questions2)}
+                        />
+                      )}
+                      <StyledInput
+                        px={12}
+                        py={6}
+                        value={title}
+                        fontSize={23}
+                        placeholder="xd"
+                        onBlur={val =>
+                          changeGroupName(val, params.interventionId, id)
+                        }
+                      />
+                    </Row>
+                    {questions2.map((question, index2) => (
+                      <Row key={question.id}>
+                        <QuestionListItem
+                          selectSlide={selectSlide}
+                          checked={selectedSlides.includes(question.id)}
+                          manage={manage}
+                          index={index2}
+                          selectedQuestionIndex={selectedQuestion}
+                          questions={questions2}
+                          question={question}
+                          interventionId={params.interventionId}
+                        />
+                      </Row>
+                    ))}
+                  </div>
                 ))}
-              </Reorder>
+              {/* </Reorder> */}
               <QuestionTypeChooser onClick={onCreateQuestion} />
               <Row />
             </Box>
@@ -275,6 +339,7 @@ function EditInterventionPage({
 
 EditInterventionPage.propTypes = {
   intl: PropTypes.object,
+  groups: PropTypes.array,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.number.isRequired,
   match: PropTypes.object,
@@ -288,6 +353,8 @@ EditInterventionPage.propTypes = {
   deleteQuestions: PropTypes.func,
   groupQuestions: PropTypes.func,
   shareQuestionsToResearchers: PropTypes.func,
+  changeGroupName: PropTypes.func,
+  getQuestionGroups: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -295,6 +362,7 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestionIndex(),
   getQuestionsLoading: makeSelectLoader('getQuestionsLoading'),
   interventionLoaders: makeSelectInterventionLoaders(),
+  groups: makeSelectQuestionGroups(),
 });
 
 const mapDispatchToProps = {
@@ -306,6 +374,8 @@ const mapDispatchToProps = {
   deleteQuestions: deleteQuestionsRequest,
   groupQuestions: groupQuestionsRequest,
   shareQuestionsToResearchers: shareQuestionsToResearchersRequest,
+  changeGroupName: changeGroupNameRequest,
+  getQuestionGroups: getQuestionGroupsRequest,
 };
 
 const withConnect = connect(

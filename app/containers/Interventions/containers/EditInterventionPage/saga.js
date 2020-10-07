@@ -5,11 +5,16 @@ import {
   copyQuestionSaga,
   createQuestionSaga,
   reorderQuestionsSaga,
+} from 'global/reducers/questions';
+
+import {
   copyQuestionsSaga,
   deleteQuestionsSaga,
   groupQuestionsSaga,
   shareQuestionsToResearchersSaga,
-} from 'global/reducers/questions';
+  changeGroupNameSaga,
+  getQuestionGroupsSaga,
+} from 'global/reducers/questionGroups';
 
 export default function* editInterventionPageSaga() {
   yield all([
@@ -21,5 +26,7 @@ export default function* editInterventionPageSaga() {
     deleteQuestionsSaga(),
     groupQuestionsSaga(),
     shareQuestionsToResearchersSaga(),
+    changeGroupNameSaga(),
+    getQuestionGroupsSaga(),
   ]);
 }
