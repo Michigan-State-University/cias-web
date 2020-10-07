@@ -32,6 +32,7 @@ import {
   changeActivateStatusRequest,
 } from 'global/reducers/userList';
 import { themeColors } from 'theme';
+import { PER_PAGE } from 'global/reducers/userList/constants';
 import { useInjectReducer } from 'utils/injectReducer';
 import { useInjectSaga } from 'utils/injectSaga';
 
@@ -43,13 +44,15 @@ const rolesToFilter = [Roles.participant, Roles.researcher];
 const initialDelay = 500;
 
 function UserList({
-  userList: { users, usersLoading, usersError },
+  userList: { users, usersSize, usersLoading, usersError },
   fetchUsersRequest,
   changeActivateStatus,
   intl: { formatMessage },
 }) {
   useInjectReducer({ key: 'userList', reducer: UserListReducer });
   useInjectSaga({ key: 'userList', saga: userListSaga });
+
+  const pages = Math.ceil(usersSize / PER_PAGE);
 
   const [filterText, setFilterText] = useState('');
   const [selectRoles, setSelectRoles] = useState(rolesToFilter);
@@ -63,6 +66,12 @@ function UserList({
   useEffect(() => {
     fetchUsersRequest(selectRoles, debouncedFilterText, page, showInactive);
   }, [selectRoles, debouncedFilterText, page, showInactive]);
+
+  useEffect(() => {
+    if (page > pages) {
+      setPage(1);
+    }
+  }, [usersSize]);
 
   const toggleRole = role => () => {
     const toggledArray = xor(selectRoles, [role]);
@@ -126,6 +135,7 @@ function UserList({
           }
           setPage={setPage}
           page={page}
+          pages={pages}
         />
       </div>
     );

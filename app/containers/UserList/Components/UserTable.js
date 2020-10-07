@@ -24,6 +24,7 @@ const UserTable = ({
   setPage,
   page,
   history,
+  pages,
 }) => {
   const [pickedUser, setPickedUser] = useState({});
 
@@ -79,11 +80,7 @@ const UserTable = ({
           formatMessage={formatMessage}
         />
       </TableLoading>
-      <PaginationHandler
-        setPage={setPage}
-        page={page}
-        userSize={users.length}
-      />
+      <PaginationHandler setPage={setPage} page={page} pages={pages} />
     </Fragment>
   );
 };
@@ -91,6 +88,7 @@ const UserTable = ({
 UserTable.propTypes = {
   formatMessage: PropTypes.func.isRequired,
   users: PropTypes.array,
+  pages: PropTypes.number,
   loading: PropTypes.bool,
   page: PropTypes.number,
   setPage: PropTypes.func,

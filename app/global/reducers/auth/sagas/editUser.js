@@ -2,7 +2,7 @@ import axios from 'axios';
 import { put, select, takeLatest, call } from 'redux-saga/effects';
 import { error as showError } from 'react-toastify-redux';
 
-import { mapCurrentUser } from 'utils/mapResponseObjects';
+import { mapCurrentUserWithoutAttributes } from 'utils/mapResponseObjects';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 import LocalStorageService from 'utils/localStorageService';
 
@@ -16,12 +16,10 @@ function* editUser({ payload }) {
 
   const userData = objectKeysToSnakeCase(payload.user);
   try {
-    const {
-      data: { data },
-    } = yield axios.put(requestURL, {
+    const { data } = yield axios.put(requestURL, {
       user: userData,
     });
-    const mappedUser = mapCurrentUser(data);
+    const mappedUser = mapCurrentUserWithoutAttributes(data);
     yield call(LocalStorageService.updateState, mappedUser);
     yield put(editUserSuccess(mappedUser));
   } catch (error) {

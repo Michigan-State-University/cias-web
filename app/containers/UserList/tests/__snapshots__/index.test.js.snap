@@ -376,12 +376,13 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="Box-sc-14m3exe-0 hPQuzG"
+          class="Row-x1o3ru-0 hxTBae"
           display="flex"
           width="100%"
         >
           <div
-            class="Box-sc-14m3exe-0 giUERR"
+            class="Box-sc-14m3exe-0 bptKZC"
+            cursor="pointer"
             display="flex"
           >
             <p

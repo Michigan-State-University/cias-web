@@ -19,6 +19,7 @@ import {
 
 export const initialState = {
   users: [],
+  usersSize: 0,
   cache: {
     users: [],
   },
@@ -35,7 +36,9 @@ const userListReducer = (state = initialState, { type, payload }) =>
         draft.usersError = null;
         break;
       case FETCH_USERS_SUCCESS:
-        draft.users = payload;
+        const { users: usersList, usersSize } = payload;
+        draft.users = usersList;
+        draft.usersSize = usersSize;
         draft.usersLoading = false;
         break;
       case FETCH_USERS_FAILURE:
