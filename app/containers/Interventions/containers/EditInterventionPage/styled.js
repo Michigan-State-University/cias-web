@@ -8,7 +8,7 @@ export const QuestionsRow = styled(Row)`
   @media only screen and (max-width: 1400px) {
     position: fixed;
     z-index: 2;
-    height: 100%;
+    height: calc(100% - 70px);
     left: -410px;
     ${({ isVisible }) => isVisible && 'left: 0;'}
 `;
