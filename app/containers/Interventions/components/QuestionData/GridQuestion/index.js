@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -10,7 +10,6 @@ import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import PlusCircle from 'components/Circle/PlusCircle';
-import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import bin from 'assets/svg/bin-red.svg';
@@ -19,6 +18,9 @@ import radio from 'assets/svg/radio-button.svg';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
+
+import Question from 'models/Intervention/Question';
+import scrollByRef from 'utils/scrollByRef';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors, elements } from 'theme';
 import {
@@ -57,6 +59,23 @@ const GridQuestion = ({
   const [hoveredRow, setHoveredRow] = useState(-1);
   const [hoveredColumn, setHoveredColumn] = useState(-1);
 
+  const containerRightRef = useRef(null);
+  const containerBottomRef = useRef(null);
+
+  const handleAddColumn = async () => {
+    await addColumn();
+    scrollByRef(containerRightRef, {
+      behavior: 'smooth',
+      block: 'end',
+      inline: 'nearest',
+    });
+  };
+
+  const handleAddRow = async () => {
+    await addRow();
+    scrollByRef(containerBottomRef, { behavior: 'smooth' });
+  };
+
   const getPlaceholder = (name, value) =>
     isNarratorTab ? '' : formatMessage(messages[name], { index: value });
 
@@ -68,7 +87,7 @@ const GridQuestion = ({
       maxWidth={elements.draggableContainerSize}
     >
       <Row justify="end" display="flex" hidden={isNarratorTab}>
-        <HoverableBox px={21} py={14} onClick={addColumn}>
+        <HoverableBox px={21} py={14} onClick={handleAddColumn}>
           <Box>
             <Row align="center">
               <PlusCircle mr={12} />
@@ -167,6 +186,7 @@ const GridQuestion = ({
                     </Column>
                   </TH>
                 ))}
+                <td ref={containerRightRef} />
               </StripedTR>
             </THead>
             <TBody>
@@ -191,6 +211,9 @@ const GridQuestion = ({
                         hidden={isNarratorTab}
                       >
                         <Img src={bin} hidden={hoveredRow !== rowIndex} />
+                        {rowIndex === rows.length - 1 && (
+                          <div ref={containerBottomRef} />
+                        )}
                       </Box>
                       <Row align="center" justify="between" width="100%">
                         <Row display="flex" hidden={isNarratorTab} mr={8}>
@@ -261,7 +284,7 @@ const GridQuestion = ({
       </Box>
 
       <Row justify="start" hidden={isNarratorTab}>
-        <HoverableBox px={21} py={14} mt={20} onClick={addRow}>
+        <HoverableBox px={21} py={14} mt={20} onClick={handleAddRow}>
           <Box>
             <Row align="center" display="flex">
               <PlusCircle mr={12} />
