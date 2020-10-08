@@ -28,6 +28,7 @@ function* getQuestionsGroups({ payload: { interventionId } }) {
     }
     yield put(getQuestionGroupsSuccess(groups));
   } catch (error) {
+    console.log(error);
     yield put(getQuestionsGroupsError(error));
   }
 }

@@ -76,7 +76,7 @@ export const questionsReducer = (state = initialState, action) =>
           mapQuestionDataForType(action.payload.question),
         ];
         draft.cache.questions = draft.questions;
-        draft.selectedQuestion = draft.questions.length - 1;
+        draft.selectedQuestion = action.payload.question.id;
         draft.loaders.createQuestionLoading = false;
         break;
       case CREATE_QUESTION_ERROR:
@@ -88,7 +88,11 @@ export const questionsReducer = (state = initialState, action) =>
         break;
       case GET_QUESTIONS_SUCCESS:
         draft.loaders.getQuestionsLoading = false;
-        draft.selectedQuestion = action.payload.questions[0].id;
+        console.log(action.payload);
+        draft.selectedQuestion =
+          action.payload.questions.length !== 0
+            ? action.payload.questions[0].id
+            : '';
         draft.questions = action.payload.questions.map(question =>
           mapQuestionDataForType(question),
         );
