@@ -26,18 +26,24 @@ const ConfirmationBox = ({
   loading,
   error,
   content,
+  confirmationButtonColor,
+  contentStyles,
   ...modalStyles
 }) => (
   <Modal visible={visible} onClose={onClose} {...modalStyles}>
     <Column px={50} pd={30}>
       <H1 textAlign="center">{description}</H1>
-      {content && <Box padded>{content}</Box>}
+      {content && (
+        <Box padded {...contentStyles}>
+          {content}
+        </Box>
+      )}
       <Row mt={25}>
         <Button inverted hoverable onClick={onClose} type="button" mr={25}>
           <FormattedMessage {...messages.cancel} />
         </Button>
         <Button
-          color="warning"
+          color={confirmationButtonColor}
           hoverable
           disabled={loading}
           loading={loading}
@@ -62,6 +68,8 @@ ConfirmationBox.propTypes = {
   error: PropTypes.array,
   description: PropTypes.node,
   maxWidth: PropTypes.number,
+  confirmationButtonColor: PropTypes.string,
+  contentStyles: PropTypes.object,
 };
 
 ConfirmationBox.defaultProps = {
@@ -72,6 +80,7 @@ ConfirmationBox.defaultProps = {
   visible: false,
   description: <FormattedMessage {...messages.defaultDescription} />,
   maxWidth: 500,
+  confirmationButtonColor: 'warning',
 };
 
 export default ConfirmationBox;

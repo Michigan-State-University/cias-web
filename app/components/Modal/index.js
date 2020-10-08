@@ -29,7 +29,7 @@ const Modal = ({ title, onClose, children, visible, ...stylesProps }) => {
 
   let portalRoot = document.getElementById('modal-portal');
   if (!portalRoot) {
-    const app = document.getElementById('app');
+    const app = document.getElementById('app') || document.createElement('app');
     portalRoot = document.createElement('div');
     portalRoot.setAttribute('id', 'modal-portal');
     app.appendChild(portalRoot);
