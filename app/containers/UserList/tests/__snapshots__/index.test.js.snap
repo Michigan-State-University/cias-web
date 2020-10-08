@@ -57,7 +57,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   width="120px"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 iJDAyw"
+                    class="Text-sc-2lza2m-0 kYEaOo"
                     color="#FFFFFF"
                     font-size="14"
                     font-weight="bold"
@@ -71,7 +71,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   width="120px"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 iJDAyw"
+                    class="Text-sc-2lza2m-0 kYEaOo"
                     color="#FFFFFF"
                     font-size="14"
                     font-weight="bold"
@@ -194,7 +194,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   class="TD-sc-4t6406-0 hZpmML"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 hVbnej"
+                    class="Text-sc-2lza2m-0 crwkIP"
                     color="#EF462F"
                   >
                     Waiting for activation
@@ -214,7 +214,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                     width="120px"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 iJDAyw"
+                      class="Text-sc-2lza2m-0 kYEaOo"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -234,7 +234,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                       class="StyledTextButton-sc-17cmh3t-0 OdTpi"
                     >
                       <p
-                        class="Text-sc-2lza2m-0 nzvKb"
+                        class="Text-sc-2lza2m-0 iKaCKP"
                         color="#EF462F"
                         font-weight="bold"
                       >
@@ -253,7 +253,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   class="TD-sc-4t6406-0 hZpmML"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 hVbnej"
+                    class="Text-sc-2lza2m-0 crwkIP"
                     color="#EF462F"
                   >
                     Waiting for activation
@@ -273,7 +273,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                     width="120px"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 iJDAyw"
+                      class="Text-sc-2lza2m-0 kYEaOo"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -293,7 +293,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                       class="StyledTextButton-sc-17cmh3t-0 OdTpi"
                     >
                       <p
-                        class="Text-sc-2lza2m-0 nzvKb"
+                        class="Text-sc-2lza2m-0 iKaCKP"
                         color="#EF462F"
                         font-weight="bold"
                       >
@@ -312,7 +312,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                   class="TD-sc-4t6406-0 hZpmML"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 hVbnej"
+                    class="Text-sc-2lza2m-0 crwkIP"
                     color="#EF462F"
                   >
                     Waiting for activation
@@ -332,7 +332,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                     width="120px"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 iJDAyw"
+                      class="Text-sc-2lza2m-0 kYEaOo"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -352,7 +352,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
                       class="StyledTextButton-sc-17cmh3t-0 OdTpi"
                     >
                       <p
-                        class="Text-sc-2lza2m-0 nzvKb"
+                        class="Text-sc-2lza2m-0 iKaCKP"
                         color="#EF462F"
                         font-weight="bold"
                       >
@@ -386,7 +386,7 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
             display="flex"
           >
             <p
-              class="Text-sc-2lza2m-0 bYWmEr"
+              class="Text-sc-2lza2m-0 jFTMSH"
               color="#FFFFFF"
             >
               1

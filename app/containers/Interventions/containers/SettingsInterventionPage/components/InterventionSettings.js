@@ -4,6 +4,7 @@ import map from 'lodash/map';
 import some from 'lodash/some';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import H3 from 'components/H3';
 import lastKey from 'utils/getLastKey';
@@ -18,7 +19,13 @@ import {
   getQuestionsSaga,
   questionsReducer,
 } from 'global/reducers/questions';
+import {
+  fetchProblemSaga,
+  makeSelectProblemStatus,
+  problemReducer,
+} from 'global/reducers/problem';
 
+import { canEdit } from 'models/Status/statusPermissions';
 import Option from './Option';
 import messages from './messages';
 import { Input, NameContainer } from './styled';
@@ -30,10 +37,13 @@ const InterventionSettings = ({
   formatMessage,
   editIntervention,
   getQuestions,
+  problemStatus,
 }) => {
-  useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
+  useInjectReducer({ key: 'problem', reducer: problemReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
+  useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
   useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
+  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
 
   const isNarratorActive = some(narratorSettings, setting => setting);
 
@@ -55,6 +65,8 @@ const InterventionSettings = ({
     refetchQuestions();
   };
 
+  const editingPossible = canEdit(problemStatus);
+
   return (
     <Fragment>
       <NameContainer>
@@ -62,6 +74,7 @@ const InterventionSettings = ({
           {formatMessage(messages.nameLabel)}
         </H3>
         <Input
+          disabled={!editingPossible}
           width="100%"
           placeholder={formatMessage(messages.placeholder)}
           value={name}
@@ -73,6 +86,7 @@ const InterventionSettings = ({
       </H3>
       {narratorSettings && (
         <Option
+          disabled={!editingPossible}
           label={formatMessage(messages.narratorActive)}
           withBorder={isNarratorActive}
           value={isNarratorActive}
@@ -83,6 +97,7 @@ const InterventionSettings = ({
       {isNarratorActive &&
         map(narratorSettings, (option, index) => (
           <Option
+            disabled={!editingPossible}
             key={`el-option-${index}`}
             withBorder={index !== lastKey(narratorSettings)}
             label={formatMessage(messages[index])}
@@ -94,13 +109,17 @@ const InterventionSettings = ({
   );
 };
 
+const mapStateToProps = createStructuredSelector({
+  problemStatus: makeSelectProblemStatus(),
+});
+
 const mapDispatchToProps = {
   editIntervention: editInterventionRequest,
   getQuestions: getQuestionsRequest,
 };
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps,
 );
 
@@ -114,6 +133,7 @@ InterventionSettings.propTypes = {
   formatMessage: PropTypes.func,
   editIntervention: PropTypes.func,
   getQuestions: PropTypes.func,
+  problemStatus: PropTypes.string,
 };
 
 export default compose(withConnect)(InterventionSettings);

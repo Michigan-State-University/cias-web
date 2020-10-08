@@ -128,6 +128,11 @@ exports[`<InterventionListBranching /> Should render and match the snapshot 1`] 
   box-shadow: 0 0 1px #C866EA;
 }
 
+.c9:disabled + .c11 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .c12:before {
   position: absolute;
   content: '';

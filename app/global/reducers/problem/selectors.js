@@ -15,6 +15,12 @@ export const makeSelectProblem = () =>
     substate => substate.problem,
   );
 
+export const makeSelectProblemStatus = () =>
+  createSelector(
+    selectProblem,
+    substate => (substate.problem ? substate.problem.status : null),
+  );
+
 export const makeSelectProblemLoader = loader =>
   createSelector(
     selectProblem,

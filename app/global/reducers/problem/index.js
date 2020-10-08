@@ -24,6 +24,7 @@ export {
   makeSelectProblem,
   makeSelectProblemLoader,
   makeSelectProblemState,
+  makeSelectProblemStatus,
   makeSelectCurrentInterventionIndex,
 } from './selectors';
 export {

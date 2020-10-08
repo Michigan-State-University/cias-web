@@ -187,7 +187,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
                 >
                   <div>
                     <p
-                      class="Text-sc-2lza2m-0 fDTusK"
+                      class="Text-sc-2lza2m-0 kBnhnG"
                     >
                       <span>
                         Sessions (2)
@@ -279,7 +279,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
   
                 </style>
                 <p
-                  class="Text-sc-2lza2m-0 fDTusK"
+                  class="Text-sc-2lza2m-0 kBnhnG"
                 />
               </div>
             </div>

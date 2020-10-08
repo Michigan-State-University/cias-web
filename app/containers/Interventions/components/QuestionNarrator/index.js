@@ -26,6 +26,8 @@ import {
   headAnimationType,
 } from 'models/Narrator/BlockTypes';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
+import { makeSelectProblemStatus } from 'global/reducers/problem';
+import { canEdit } from 'models/Status/statusPermissions';
 
 import { elements } from 'theme';
 import { NarratorContainer, lottieStyles } from './styled';
@@ -45,6 +47,7 @@ const QuestionNarrator = ({
   savePosition,
   currentBlockIndex,
   audioInstance,
+  problemStatus,
 }) => {
   const { width, height } = useResizeObserver({
     targetRef: animationBoundaries,
@@ -251,12 +254,17 @@ const QuestionNarrator = ({
     };
   };
 
+  const editingPossible = draggable && canEdit(problemStatus);
+
   return (
-    <NarratorContainer canBeDragged={draggable} width={CHARACTER_SIZE.width}>
+    <NarratorContainer
+      canBeDragged={editingPossible}
+      width={CHARACTER_SIZE.width}
+    >
       <Draggable
         onStop={(_, { x, y }) => handleSaveOffset(x, y)}
         position={getPosition()}
-        disabled={!draggable}
+        disabled={!editingPossible}
         bounds="parent"
       >
         <div>
@@ -292,6 +300,7 @@ QuestionNarrator.propTypes = {
   savePosition: PropTypes.func,
   currentBlockIndex: PropTypes.number,
   audioInstance: PropTypes.object,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -300,6 +309,7 @@ const mapStateToProps = createStructuredSelector({
   previewData: makeSelectPreviewData(),
   currentBlockIndex: makeSelectCurrentNarratorBlockIndex(),
   audioInstance: makeSelectAudioInstance(),
+  problemStatus: makeSelectProblemStatus(),
 });
 
 const mapDispatchToProps = {

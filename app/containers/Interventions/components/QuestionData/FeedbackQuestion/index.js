@@ -16,6 +16,7 @@ import Question from 'models/Intervention/Question';
 
 import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { canEdit } from 'models/Status/statusPermissions';
 
 import { visualAnalogScaleLabelStyles } from 'theme';
 import messages from './messages';
@@ -26,6 +27,7 @@ const FeedbackQuestion = ({
   selectedQuestion,
   onUpdateLabel,
   isNarratorTab,
+  problemStatus,
   intl: { formatMessage },
 }) => {
   const {
@@ -36,10 +38,13 @@ const FeedbackQuestion = ({
     payload: { start_value: startValue, end_value: endValue },
   } = data[0];
 
+  const editingPossible = canEdit(problemStatus);
+
   const labels = {
     0: {
       label: (
         <StyledInput
+          disabled={!editingPossible}
           width={120}
           py={9}
           textAlign="center"
@@ -53,6 +58,7 @@ const FeedbackQuestion = ({
     100: {
       label: (
         <StyledInput
+          disabled={!editingPossible}
           width={120}
           py={9}
           textAlign="center"
@@ -98,6 +104,7 @@ FeedbackQuestion.propTypes = {
   intl: PropTypes.object.isRequired,
   onUpdateLabel: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

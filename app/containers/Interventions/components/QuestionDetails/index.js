@@ -20,7 +20,9 @@ import {
   makeSelectSelectedQuestion,
   editQuestionSaga,
 } from 'global/reducers/questions';
+import { makeSelectProblemStatus } from 'global/reducers/problem';
 
+import { canEdit } from 'models/Status/statusPermissions';
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
 import QuestionNarrator from '../QuestionNarrator';
@@ -43,9 +45,16 @@ const QuestionDetails = props => (
   </Box>
 );
 
-const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
+const RenderQuestionDetails = ({
+  selectedQuestion,
+  isNarratorTab,
+  problemStatus,
+}) => {
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
   const animationBoundaries = useRef(null);
+
+  const editingPossible = canEdit(problemStatus);
+  const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
   if (selectedQuestion != null) {
     const {
@@ -79,7 +88,7 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
             <Row justify="center" width="100%">
               <AppContainer $width="100%">
                 <Row width="100%" mt={5} height={30} />
-                {!isNarratorTab && (
+                {!isNarratorTabOrEditNotPossible && (
                   <>
                     {title && (
                       <Row width="100%">
@@ -103,7 +112,7 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
                     )}
                   </>
                 )}
-                {isNarratorTab && (
+                {isNarratorTabOrEditNotPossible && (
                   <>
                     {title && questionTitle && (
                       <QuestionPreview
@@ -155,11 +164,13 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
 RenderQuestionDetails.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
   isNarratorTab: PropTypes.bool,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
   isNarratorTab: makeSelectIsNarratorTab(),
+  problemStatus: makeSelectProblemStatus(),
 });
 
 const withConnect = connect(mapStateToProps);

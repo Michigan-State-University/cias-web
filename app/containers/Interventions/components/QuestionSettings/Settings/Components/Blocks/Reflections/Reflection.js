@@ -41,6 +41,7 @@ const Reflection = ({
   updateNarratorPreviewData,
   updateNarratorPreviewAnimation,
   block,
+  disabled,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(reflection.text, ''));
@@ -102,6 +103,7 @@ const Reflection = ({
         <Box position="relative">
           <Box mt={15} bg={colors.linkWater} width="100%">
             <StyledInput
+              disabled={disabled}
               type="multiline"
               rows="10"
               placeholder={formatMessage(messages.speechPlaceholder)}
@@ -121,6 +123,7 @@ const Reflection = ({
         </Box>
       ) : (
         <Text
+          disabled={disabled}
           fontWeight="bold"
           color={themeColors.secondary}
           onClick={() => setInputVisible(true)}
@@ -147,6 +150,7 @@ Reflection.propTypes = {
   block: PropTypes.shape({
     type: PropTypes.string,
   }),
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

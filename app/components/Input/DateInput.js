@@ -6,8 +6,9 @@ import Text from 'components/Text';
 import { colors } from 'theme';
 
 const DateInput = React.forwardRef(
-  ({ value, onClick, width, height, placeholder, fontSize }, ref) => (
+  ({ value, onClick, width, height, placeholder, fontSize, disabled }, ref) => (
     <StyledDateInput
+      disabled={disabled}
       ref={ref}
       width={width}
       height={height}
@@ -28,6 +29,7 @@ DateInput.propTypes = {
   height: PropTypes.number,
   placeholder: PropTypes.string,
   fontSize: PropTypes.number,
+  disabled: PropTypes.bool,
 };
 
 export default DateInput;

@@ -43,6 +43,7 @@ const BranchingTab = ({
   questions,
   problem,
   fetchProblem,
+  disabled,
   match: { params },
 }) => {
   const { problemId } = params;
@@ -78,6 +79,7 @@ const BranchingTab = ({
 
   return (
     <BranchingLayout
+      disabled={disabled}
       formula={formula}
       id={id}
       displayPatternTargetText={displayPatternTargetText}
@@ -103,6 +105,7 @@ BranchingTab.propTypes = {
   }),
   fetchProblem: PropTypes.func,
   match: PropTypes.object,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

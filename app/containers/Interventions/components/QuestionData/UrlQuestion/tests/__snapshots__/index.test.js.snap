@@ -232,6 +232,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
     <input
       className="c2 c3"
       color="#107969"
+      disabled={true}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
@@ -257,6 +258,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
         >
           <textarea
             className="c8"
+            disabled={true}
             height="auto"
             onBlur={[Function]}
             onChange={[Function]}

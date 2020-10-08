@@ -28,6 +28,7 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 
+import { canEdit } from 'models/Status/statusPermissions';
 import messages from './messages';
 
 import { FirstTH } from './styled';
@@ -50,6 +51,7 @@ const GridQuestion = ({
   deleteRow,
   deleteColumn,
   isNarratorTab,
+  problemStatus,
   intl: { formatMessage },
 }) => {
   const {
@@ -58,6 +60,9 @@ const GridQuestion = ({
 
   const [hoveredRow, setHoveredRow] = useState(-1);
   const [hoveredColumn, setHoveredColumn] = useState(-1);
+
+  const editingPossible = canEdit(problemStatus);
+  const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
   const containerRightRef = useRef(null);
   const containerBottomRef = useRef(null);
@@ -86,7 +91,7 @@ const GridQuestion = ({
       maxHeight={elements.draggableContainerSize}
       maxWidth={elements.draggableContainerSize}
     >
-      <Row justify="end" display="flex" hidden={isNarratorTab}>
+      <Row justify="end" display="flex" hidden={isNarratorTabOrEditNotPossible}>
         <HoverableBox px={21} py={14} onClick={handleAddColumn}>
           <Box>
             <Row align="center">
@@ -131,7 +136,7 @@ const GridQuestion = ({
                         px={8}
                         mb={8}
                         onClick={() => deleteColumn(columnIndex)}
-                        hidden={isNarratorTab}
+                        hidden={isNarratorTabOrEditNotPossible}
                         clickable
                         height={35}
                       >
@@ -139,6 +144,7 @@ const GridQuestion = ({
                       </Box>
                       <Row display="flex" hidden={isNarratorTab} mb={8}>
                         <BadgeInput
+                          disabled={!editingPossible}
                           px={0}
                           py={12}
                           textAlign="center"
@@ -167,8 +173,10 @@ const GridQuestion = ({
                         </Column>
                       ) : (
                         <StyledInput
-                          disabled={isNarratorTab}
-                          cursor={isNarratorTab ? 'text' : 'pointer'}
+                          disabled={isNarratorTabOrEditNotPossible}
+                          cursor={
+                            isNarratorTabOrEditNotPossible ? 'text' : 'pointer'
+                          }
                           width={110}
                           px={0}
                           py={12}
@@ -208,7 +216,7 @@ const GridQuestion = ({
                         width={60}
                         onClick={() => deleteRow(rowIndex)}
                         clickable
-                        hidden={isNarratorTab}
+                        hidden={isNarratorTabOrEditNotPossible}
                       >
                         <Img src={bin} hidden={hoveredRow !== rowIndex} />
                         {rowIndex === rows.length - 1 && (
@@ -218,6 +226,7 @@ const GridQuestion = ({
                       <Row align="center" justify="between" width="100%">
                         <Row display="flex" hidden={isNarratorTab} mr={8}>
                           <BadgeInput
+                            disabled={!editingPossible}
                             px={0}
                             py={12}
                             textAlign="center"
@@ -245,8 +254,12 @@ const GridQuestion = ({
                           <StyledInput
                             type="multiline"
                             rows="2"
-                            disabled={isNarratorTab}
-                            cursor={isNarratorTab ? 'text' : 'pointer'}
+                            disabled={isNarratorTabOrEditNotPossible}
+                            cursor={
+                              isNarratorTabOrEditNotPossible
+                                ? 'text'
+                                : 'pointer'
+                            }
                             width={elements.grid.firstColWidth}
                             px={0}
                             py={12}
@@ -283,7 +296,7 @@ const GridQuestion = ({
         </Box>
       </Box>
 
-      <Row justify="start" hidden={isNarratorTab}>
+      <Row justify="start" hidden={isNarratorTabOrEditNotPossible}>
         <HoverableBox px={21} py={14} mt={20} onClick={handleAddRow}>
           <Box>
             <Row align="center" display="flex">
@@ -309,6 +322,7 @@ GridQuestion.propTypes = {
   deleteRow: PropTypes.func.isRequired,
   deleteColumn: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -36,6 +36,12 @@ import {
   makeSelectSelectedQuestionIndex,
   makeSelectLoader,
 } from 'global/reducers/questions';
+import {
+  problemReducer,
+  fetchProblemSaga,
+  makeSelectProblemStatus,
+} from 'global/reducers/problem';
+import { canEdit } from 'models/Status/statusPermissions';
 
 import editInterventionPageSaga from './saga';
 
@@ -59,17 +65,22 @@ function EditInterventionPage({
   getQuestions,
   reorderQuestions,
   getQuestionsLoading,
+  problemStatus,
   interventionLoaders: { getIntervention: getInterventionLoader },
 }) {
   useLockEditInterventionPageScroll();
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'localState', reducer: localStateReducer });
+  useInjectReducer({ key: 'problem', reducer: problemReducer });
 
+  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
   useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
 
   const [showList, setShowList] = useState(false);
+
+  const editingPossible = canEdit(problemStatus);
 
   const hoverListProps = {
     onMouseEnter: () => setShowList(true),
@@ -117,6 +128,7 @@ function EditInterventionPage({
   if (questions.length === 0 && !getQuestionsLoading)
     return (
       <EmptyInterventionPage
+        disabled={!editingPossible}
         onCreateQuestion={onCreateQuestion}
         formatMessage={formatMessage}
       />
@@ -140,11 +152,16 @@ function EditInterventionPage({
             bg={colors.white}
             {...hoverListProps}
           >
-            <Box padded minWidth={300}>
-              <Reorder reorderId="question-list" onReorder={handleReorder}>
+            <Box padded minWidth={410}>
+              <Reorder
+                disabled={!editingPossible}
+                reorderId="question-list"
+                onReorder={handleReorder}
+              >
                 {questions.map((question, index) => (
                   <Row key={question.id}>
                     <QuestionListItem
+                      disabled={!editingPossible}
                       index={index}
                       selectedQuestionIndex={selectedQuestion}
                       questions={questions}
@@ -154,7 +171,9 @@ function EditInterventionPage({
                   </Row>
                 ))}
               </Reorder>
-              <QuestionTypeChooser onClick={onCreateQuestion} />
+              {editingPossible && (
+                <QuestionTypeChooser onClick={onCreateQuestion} />
+              )}
               <Row />
             </Box>
           </Box>
@@ -184,6 +203,7 @@ EditInterventionPage.propTypes = {
   reorderQuestions: PropTypes.func,
   getQuestionsLoading: PropTypes.bool,
   interventionLoaders: PropTypes.object,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -191,6 +211,7 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestionIndex(),
   getQuestionsLoading: makeSelectLoader('getQuestionsLoading'),
   interventionLoaders: makeSelectInterventionLoaders(),
+  problemStatus: makeSelectProblemStatus(),
 });
 
 const mapDispatchToProps = {

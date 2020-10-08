@@ -19,6 +19,7 @@ import {
 } from 'models/Narrator/BlockTypes';
 import { makeSelectCurrentNarratorBlockIndex } from 'global/reducers/localState';
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
+import { ternary } from 'utils/ternary';
 
 import BlockTypeChooser from '../BlockTypeChooser';
 import WrappedAccordion from '../WrappedAcoordion';
@@ -33,6 +34,7 @@ const NarratorTab = ({
   id,
   currentBlockIndex,
   currentQuestionType,
+  disabled,
 }) => {
   if (!narrator) {
     return <></>;
@@ -75,6 +77,7 @@ const NarratorTab = ({
             >
               <H3>{formatMessage(messages[`${index}`])}</H3>
               <Switch
+                disabled={disabled}
                 checked={val}
                 onToggle={value => onNarratorToggle(`${index}`, value)}
               />
@@ -83,21 +86,29 @@ const NarratorTab = ({
       </Box>
       <Text
         fontWeight="bold"
-        color={colors[isCharacterMovable ? 'jungleGreen' : 'flamingo']}
+        color={
+          colors[isCharacterMovable && !disabled ? 'jungleGreen' : 'flamingo']
+        }
         mb={15}
       >
         <FormattedMessage
           {...messages[
-            isCharacterMovable ? 'characterMovable' : 'characterBlocked'
+            ternary(
+              disabled,
+              'characterMoveDisabled',
+              isCharacterMovable ? 'characterMovable' : 'characterBlocked',
+            )
           ]}
         />
       </Text>
       <WrappedAccordion
+        disabled={disabled}
         id={id}
         formatMessage={formatMessage}
         narrator={narrator}
       />
       <BlockTypeChooser
+        disabled={disabled}
         questionType={currentQuestionType}
         disableReadQuestionBlockType={readQuestionBlockTypePresent}
         disableFeedbackBlock={showSpectrumBlockTypePresent}
@@ -115,6 +126,7 @@ NarratorTab.propTypes = {
   onCreate: PropTypes.func,
   currentBlockIndex: PropTypes.number,
   currentQuestionType: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

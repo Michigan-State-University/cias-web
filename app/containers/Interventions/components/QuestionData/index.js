@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
+import { makeSelectProblemStatus } from 'global/reducers/problem';
 import {
   updateQuestionDataSaga,
   makeSelectSelectedQuestionType,
@@ -30,12 +31,18 @@ import UrlQuestion from './UrlQuestion';
 import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
 import FeedbackQuestion from './FeedbackQuestion';
 
-const QuestionData = ({ selectedQuestionType, isNarratorTab }) => {
+const QuestionData = ({
+  selectedQuestionType,
+  isNarratorTab,
+  problemStatus,
+}) => {
   useInjectSaga({ key: 'updateQuestionData', saga: updateQuestionDataSaga });
 
   const commonProps = {
     isNarratorTab,
+    problemStatus,
   };
+
   switch (selectedQuestionType) {
     case singleQuestion.id:
       return <SingleQuestion {...commonProps} />;
@@ -61,11 +68,13 @@ const QuestionData = ({ selectedQuestionType, isNarratorTab }) => {
 QuestionData.propTypes = {
   selectedQuestionType: PropTypes.string.isRequired,
   isNarratorTab: PropTypes.bool,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestionType: makeSelectSelectedQuestionType(),
   isNarratorTab: makeSelectIsNarratorTab(),
+  problemStatus: makeSelectProblemStatus(),
 });
 
 const mapDispatchToProps = () => ({});

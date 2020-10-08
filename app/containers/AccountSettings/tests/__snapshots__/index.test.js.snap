@@ -20,7 +20,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
           src="IMAGE_MOCK"
         />
         <p
-          class="Text-sc-2lza2m-0 dTiSdf"
+          class="Text-sc-2lza2m-0 deBxhD"
           color="#C866EA"
           font-weight="bold"
         >
@@ -77,7 +77,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
                     class="Row-x1o3ru-0 eXIwVR"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 bPXeIU"
+                      class="Text-sc-2lza2m-0 fabzps"
                       color="#C866EA"
                       font-size="14"
                       font-weight="bold"
@@ -104,7 +104,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
             class="Column-sc-1n6divy-0 dfGPDf"
           >
             <p
-              class="Text-sc-2lza2m-0 fivaRy"
+              class="Text-sc-2lza2m-0 ggakK"
               width="fit-content"
             >
               First Name
@@ -123,7 +123,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
             class="Column-sc-1n6divy-0 npKUP"
           >
             <p
-              class="Text-sc-2lza2m-0 fivaRy"
+              class="Text-sc-2lza2m-0 ggakK"
               width="fit-content"
             >
               Last name
@@ -156,7 +156,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
               class="Column-sc-1n6divy-0 dfNUrc"
             >
               <p
-                class="Text-sc-2lza2m-0 fivaRy"
+                class="Text-sc-2lza2m-0 ggakK"
                 width="fit-content"
               >
                 E-mail address
@@ -180,7 +180,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
             class="Column-sc-1n6divy-0 dfNUrc"
           >
             <p
-              class="Text-sc-2lza2m-0 fivaRy"
+              class="Text-sc-2lza2m-0 ggakK"
               width="fit-content"
             >
               Time zone

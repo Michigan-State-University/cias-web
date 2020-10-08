@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ReactQuill from 'react-quill';
+
 import { colors, borders, fontFamily, themeColors } from 'theme';
 import { margin, layout } from '../BaseComponentStyles';
 
@@ -45,7 +46,7 @@ export const StyledDateInput = styled.button`
   border-width: ${borders.borderWidth};
   border-color: ${colors.linkWater};
   &:hover {
-    cursor: pointer;
+    ${({ disabled }) => (disabled ? 'cursor: not-allowed' : 'cursor: pointer')};
   }
   &:focus {
     outline: none;

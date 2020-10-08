@@ -24,6 +24,7 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
+import { canEdit } from 'models/Status/statusPermissions';
 
 import messages from './messages';
 import { ADD, UPDATE, REMOVE } from './constants';
@@ -37,6 +38,7 @@ const MultiQuestion = ({
   updateAnswer,
   removeAnswer,
   isNarratorTab,
+  problemStatus,
   intl: { formatMessage },
 }) => {
   const checkboxButtonRef = useRef(null);
@@ -51,8 +53,11 @@ const MultiQuestion = ({
       );
   }, [checkboxButtonRef.current]);
 
+  const editingPossible = canEdit(problemStatus);
+  const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
+
   const handleMouseEnter = index => () => {
-    if (!isNarratorTab) setHovered(index);
+    if (!isNarratorTabOrEditNotPossible) setHovered(index);
   };
 
   return (
@@ -60,7 +65,7 @@ const MultiQuestion = ({
       {selectedQuestion.body.data.map((value, index) => (
         <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox
-            hoverColor={isNarratorTab ? null : undefined}
+            hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
             px={21}
             py={14}
             width="100%"
@@ -69,7 +74,11 @@ const MultiQuestion = ({
             clickable={false}
           >
             <Column>
-              <Row align="center" justify="between" mb={isNarratorTab ? 0 : 10}>
+              <Row
+                align="center"
+                justify="between"
+                mb={isNarratorTabOrEditNotPossible ? 0 : 10}
+              >
                 <Row width="90%">
                   <Img
                     ref={checkboxButtonRef}
@@ -89,7 +98,7 @@ const MultiQuestion = ({
                         updateAnswer(index, { ...value, payload: newTitle })
                       }
                       richText
-                      disabled={isNarratorTab}
+                      disabled={isNarratorTabOrEditNotPossible}
                     />
                   </Box>
                 </Row>
@@ -105,6 +114,7 @@ const MultiQuestion = ({
               </Row>
               <Row align="center" display="flex" hidden={isNarratorTab}>
                 <BadgeInput
+                  disabled={!editingPossible}
                   px={0}
                   py={12}
                   ml={`${leftMargin}px`}
@@ -124,6 +134,7 @@ const MultiQuestion = ({
                   }
                 />
                 <BadgeInput
+                  disabled={!editingPossible}
                   px={0}
                   py={12}
                   textAlign="center"
@@ -146,7 +157,7 @@ const MultiQuestion = ({
           </HoverableBox>
         </Row>
       ))}
-      <Row display="flex" hidden={isNarratorTab}>
+      <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
         <HoverableBox px={21} py={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
@@ -169,6 +180,7 @@ MultiQuestion.propTypes = {
   updateAnswer: PropTypes.func.isRequired,
   removeAnswer: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -60,6 +60,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import SettingsPanel from 'containers/SettingsPanel';
 import H3 from 'components/H3';
+import { canEdit } from 'models/Status/statusPermissions';
 import { StatusLabel, InterventionOptions, DraggedTest } from './styled';
 import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
@@ -99,6 +100,8 @@ export function ProblemDetailsPage({
   useInjectSaga({ key: 'problemOptionsSaga', saga: problemOptionsSaga });
 
   const { interventions, name, id, status } = problem || {};
+
+  const editingPossible = canEdit(status);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [
@@ -197,6 +200,7 @@ export function ProblemDetailsPage({
         reorderId="problem-list"
         onReorder={handleReorder}
         holdTime={125}
+        disabled={!editingPossible}
       >
         {interventions &&
           orderBy(interventions, 'position').map((intervention, index) => {
@@ -214,6 +218,7 @@ export function ProblemDetailsPage({
             return (
               <Row key={intervention.id}>
                 <InterventionListItem
+                  disabled={!editingPossible}
                   intervention={intervention}
                   index={index}
                   isSelected={index === interventionIndex}
@@ -279,6 +284,7 @@ export function ProblemDetailsPage({
             </StatusLabel>
           </Box>
           <StyledInput
+            disabled={!editingPossible}
             ml={-12}
             px={12}
             py={6}
@@ -309,9 +315,11 @@ export function ProblemDetailsPage({
               <Spinner color={themeColors.secondary} />
             </Row>
           )}
-          <Row my={18} align="center">
-            <InterventionCreateButton handleClick={createInterventionCall} />
-          </Row>
+          {editingPossible && (
+            <Row my={18} align="center">
+              <InterventionCreateButton handleClick={createInterventionCall} />
+            </Row>
+          )}
         </Column>
         {createInterventionError && (
           <ErrorAlert errorText={createInterventionError} />

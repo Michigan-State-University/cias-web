@@ -53,6 +53,7 @@ const QuestionListItem = ({
   changeNarratorBlockIndex,
   setDraggable,
   setCharacterPosition,
+  disabled,
 }) => {
   const isSelected = selectedQuestionIndex === index;
   const { type, subtitle, id, body } = question;
@@ -141,7 +142,7 @@ const QuestionListItem = ({
             </Row>
           )}
         </Column>
-        <Column xs={1}>
+        <Column xs={1} hidden={disabled}>
           <Dropdown options={options} />
         </Column>
       </Row>
@@ -164,6 +165,7 @@ QuestionListItem.propTypes = {
   changeNarratorBlockIndex: PropTypes.func,
   setDraggable: PropTypes.func,
   setCharacterPosition: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

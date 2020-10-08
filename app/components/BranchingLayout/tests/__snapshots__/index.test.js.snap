@@ -135,7 +135,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   border: 1px solid #E9F1FB;
   border-radius: 5px;
   margin-right: 9px;
-  width: auto;
+  width: 100%;
   height: auto;
   background-color: transparent;
   border: 1px solid transparent;
@@ -210,11 +210,11 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  cursor: pointer;
   font-weight: bold;
   border-radius: 4px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+  cursor: pointer;
 }
 
 .c13:hover {
@@ -268,7 +268,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
         height="auto"
         placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
         rows="5"
-        width="auto"
+        width="100%"
       />
     </div>
     <div

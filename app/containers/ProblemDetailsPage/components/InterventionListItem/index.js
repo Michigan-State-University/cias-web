@@ -38,6 +38,7 @@ function InterventionListItem({
   intl: { formatMessage },
   nextInterventionName,
   handleCopyIntervention,
+  disabled,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const {
@@ -76,7 +77,7 @@ function InterventionListItem({
         </StyledRow>
         <Row width={80} xs={1} align="center" justify="between">
           <Img clickable src={mail} onClick={handleClick} alt="emails" />
-          {process.env.APP_STAGE === appStages.dev.id && (
+          {process.env.APP_STAGE === appStages.dev.id && !disabled && (
             <Box mb={8}>
               <Dropdown options={options} clickable id={id} />
             </Box>
@@ -89,6 +90,7 @@ function InterventionListItem({
       {index !== 0 && (
         <Row px={62}>
           <InterventionSchedule
+            disabled={disabled}
             interventionId={id}
             selectedScheduleOption={schedule}
             scheduleAt={scheduleAt}
@@ -96,6 +98,7 @@ function InterventionListItem({
         </Row>
       )}
       <InterventionBranching
+        disabled={disabled}
         formula={formula}
         intervention={intervention}
         nextInterventionName={nextInterventionName}
@@ -113,6 +116,7 @@ InterventionListItem.propTypes = {
   nextInterventionName: PropTypes.string,
   intl: PropTypes.object,
   handleCopyIntervention: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default injectIntl(InterventionListItem);

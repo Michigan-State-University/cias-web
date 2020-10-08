@@ -38,6 +38,7 @@ function BranchingLayout({
   onAddCase,
   problemBranching,
   onVariableChooserOpen,
+  disabled,
 }) {
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
   const [variableChooserOpen, setVariableChooserOpen] = useState(false);
@@ -51,12 +52,15 @@ function BranchingLayout({
           {formatMessage(messages.formula)}
           <Box
             onClick={() => {
-              if (onVariableChooserOpen) onVariableChooserOpen();
-              setVariableChooserOpen(!variableChooserOpen);
+              if (!disabled) {
+                if (onVariableChooserOpen) onVariableChooserOpen();
+                setVariableChooserOpen(!variableChooserOpen);
+              }
             }}
             clickable
           >
             <Text
+              disabled={disabled}
               fontWeight="bold"
               color={themeColors.secondary}
               hoverDecoration="underline"
@@ -76,9 +80,10 @@ function BranchingLayout({
               py={8}
             >
               <StyledInput
+                disabled={disabled}
                 type="multiline"
                 rows={problemBranching ? '1' : '5'}
-                width="auto"
+                width="100%"
                 placeholder={formatMessage(messages.formulaPlaceholder)}
                 value={formula.payload}
                 onBlur={val => onFormulaUpdate(val, id)}
@@ -118,6 +123,7 @@ function BranchingLayout({
                 >
                   <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
                   <InequalityChooser
+                    disabled={disabled}
                     onSuccessfulChange={value =>
                       onUpdateCase(index, { ...pattern, match: value }, id)
                     }
@@ -127,6 +133,7 @@ function BranchingLayout({
                     {formatMessage(messages.goTo)}
                   </Text>
                   <ArrowDropdown
+                    disabled={disabled}
                     width="100%"
                     positionFrom="right"
                     setOpen={value => setTargetChooserOpen(value ? index : -1)}
@@ -151,12 +158,14 @@ function BranchingLayout({
                       }}
                     />
                   </ArrowDropdown>
-                  <Img
-                    ml={10}
-                    src={binNoBg}
-                    onClick={() => onRemoveCase(index, id)}
-                    clickable
-                  />
+                  {!disabled && (
+                    <Img
+                      ml={10}
+                      src={binNoBg}
+                      onClick={() => onRemoveCase(index, id)}
+                      clickable
+                    />
+                  )}
                 </Row>
               );
             })}
@@ -175,7 +184,11 @@ function BranchingLayout({
             )}
           </>
         )}
-        <DashedBox mt={20} onClick={() => onAddCase(id)}>
+        <DashedBox
+          disabled={disabled}
+          mt={20}
+          onClick={() => !disabled && onAddCase(id)}
+        >
           {formatMessage(messages.newCase)}
         </DashedBox>
       </Column>
@@ -194,6 +207,7 @@ BranchingLayout.propTypes = {
   displayPatternTargetText: PropTypes.func,
   problemBranching: PropTypes.bool,
   onVariableChooserOpen: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default injectIntl(BranchingLayout);

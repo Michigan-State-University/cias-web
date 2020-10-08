@@ -81,7 +81,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
                   src="IMAGE_MOCK"
                 />
                 <p
-                  class="Text-sc-2lza2m-0 jlgVZp"
+                  class="Text-sc-2lza2m-0 bsTsXV"
                   color="#C866EA"
                   font-weight="bold"
                 >
@@ -112,7 +112,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               src="IMAGE_MOCK"
             />
             <p
-              class="Text-sc-2lza2m-0 dTiSdf"
+              class="Text-sc-2lza2m-0 deBxhD"
               color="#C866EA"
               font-weight="bold"
             >
@@ -153,7 +153,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               src="IMAGE_MOCK"
             />
             <p
-              class="Text-sc-2lza2m-0 edMfsF"
+              class="Text-sc-2lza2m-0 ffvslZ"
               font-size="15px"
             >
               mail@mail.com
