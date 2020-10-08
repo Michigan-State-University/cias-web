@@ -17,7 +17,7 @@ export const makeSelectQuestions = () =>
     substate => substate.questions,
   );
 
-export const makeSelectSelectedQuestionIndex = () =>
+export const makeSelectSelectedQuestionId = () =>
   createSelector(
     selectQuestions,
     substate => substate.selectedQuestion,
@@ -26,7 +26,8 @@ export const makeSelectSelectedQuestionIndex = () =>
 export const makeSelectSelectedQuestion = () =>
   createSelector(
     selectQuestions,
-    substate => substate.questions[substate.selectedQuestion],
+    substate =>
+      substate.questions.find(({ id }) => id === substate.selectedQuestion),
   );
 
 export const makeSelectLoaders = () =>
@@ -51,5 +52,9 @@ export const makeSelectSelectedQuestionType = () =>
   createSelector(
     selectQuestions,
     substate =>
-      get(substate.questions[substate.selectedQuestion], 'type', null),
+      get(
+        substate.questions.find(({ id }) => id === substate.selectedQuestion),
+        'type',
+        null,
+      ),
   );

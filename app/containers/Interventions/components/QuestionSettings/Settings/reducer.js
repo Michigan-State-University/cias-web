@@ -23,7 +23,7 @@ import reflectionFormulaBlockReducer from './Components/Blocks/Reflections/reduc
 
 /* eslint-disable default-case, no-param-reassign */
 const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
-  const question = allQuestions[questionIndex];
+  const question = allQuestions.find(({ id }) => id === questionIndex);
   switch (payload.type) {
     case UPDATE_QUESTION_SETTINGS:
       return {

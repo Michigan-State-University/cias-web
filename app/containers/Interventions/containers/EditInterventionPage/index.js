@@ -46,14 +46,11 @@ import {
   makeSelectInterventionLoaders,
 } from 'global/reducers/intervention';
 import {
-  getQuestionsRequest,
   reorderQuestionListRequest,
   createQuestionRequest,
   questionsReducer,
-  getQuestionsSaga,
   makeSelectQuestions,
-  makeSelectSelectedQuestionIndex,
-  makeSelectLoader,
+  makeSelectSelectedQuestionId,
 } from 'global/reducers/questions';
 
 import {
@@ -88,9 +85,7 @@ function EditInterventionPage({
   getIntervention,
   createQuestion,
   match: { params },
-  getQuestions,
   // reorderQuestions,
-  getQuestionsLoading,
   interventionLoaders: { getIntervention: getInterventionLoader },
   copyQuestions,
   deleteQuestions,
@@ -127,7 +122,10 @@ function EditInterventionPage({
       label: <FormattedMessage {...messages.group} />,
       inactiveIcon: group,
       activeIcon: groupActive,
-      action: () => groupQuestions(selectedSlides, params.interventionId),
+      action: () => {
+        groupQuestions(selectedSlides, params.interventionId);
+        setSelectedSlides([]);
+      },
     },
   ];
 
@@ -137,7 +135,6 @@ function EditInterventionPage({
   useInjectReducer({ key: 'localState', reducer: localStateReducer });
   useInjectReducer({ key: 'questionGroups', reducer: questionGroupsReducer });
 
-  useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
 
   const hoverListProps = {
@@ -150,7 +147,6 @@ function EditInterventionPage({
       interventionId: params.interventionId,
       problemId: params.problemId,
     });
-    getQuestions(params.interventionId);
     getQuestionGroups(params.interventionId);
   }, []);
 
@@ -182,7 +178,7 @@ function EditInterventionPage({
   //   });
   // };
 
-  const loading = getQuestionsLoading || getInterventionLoader;
+  const loading = getInterventionLoader;
 
   const active = selectedSlides.length !== 0;
   const mapActions = (action, index) => (
@@ -192,7 +188,7 @@ function EditInterventionPage({
   const sendSlidesToResearchers = researchers =>
     shareQuestionsToResearchers(researchers, selectedSlides);
 
-  if (questions.length === 0 && !getQuestionsLoading)
+  if (questions.length === 0)
     return (
       <EmptyInterventionPage
         onCreateQuestion={onCreateQuestion}
@@ -216,8 +212,6 @@ function EditInterventionPage({
     }
     setSelectedSlides(xor(selectedSlides, q.map(({ id }) => id)));
   };
-
-  console.log(groups);
 
   return (
     <Fragment>
@@ -266,22 +260,9 @@ function EditInterventionPage({
                 </Row>
               )}
               {/* <Reorder reorderId="question-list" onReorder={handleReorder}> */}
-              {questions.map((question, index) => (
-                <Row key={question.id}>
-                  <QuestionListItem
-                    selectSlide={selectSlide}
-                    checked={selectedSlides.includes(question.id)}
-                    manage={manage}
-                    index={index}
-                    selectedQuestionIndex={selectedQuestion}
-                    questions={questions}
-                    question={question}
-                    interventionId={params.interventionId}
-                  />
-                </Row>
-              ))}
-              {groups &&
-                groups.map(({ questions: questions2, title, id }) => (
+              {groups
+                .filter(({ questions: q }) => q.length !== 0)
+                .map(({ questions: questions2, title, id }) => (
                   <div key={id}>
                     <Row>
                       {manage && (
@@ -294,8 +275,11 @@ function EditInterventionPage({
                         px={12}
                         py={6}
                         value={title}
-                        fontSize={23}
+                        fontSize={18}
+                        fontWeight="bold"
                         placeholder="xd"
+                        width="100%"
+                        maxWidth="initial"
                         onBlur={val =>
                           changeGroupName(val, params.interventionId, id)
                         }
@@ -341,7 +325,7 @@ EditInterventionPage.propTypes = {
   intl: PropTypes.object,
   groups: PropTypes.array,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
-  selectedQuestion: PropTypes.number.isRequired,
+  selectedQuestion: PropTypes.string.isRequired,
   match: PropTypes.object,
   getIntervention: PropTypes.func,
   createQuestion: PropTypes.func,
@@ -359,15 +343,13 @@ EditInterventionPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
-  selectedQuestion: makeSelectSelectedQuestionIndex(),
-  getQuestionsLoading: makeSelectLoader('getQuestionsLoading'),
+  selectedQuestion: makeSelectSelectedQuestionId(),
   interventionLoaders: makeSelectInterventionLoaders(),
   groups: makeSelectQuestionGroups(),
 });
 
 const mapDispatchToProps = {
   getIntervention: getInterventionRequest,
-  getQuestions: getQuestionsRequest,
   createQuestion: createQuestionRequest,
   reorderQuestions: reorderQuestionListRequest,
   copyQuestions: copyQuestionsRequest,

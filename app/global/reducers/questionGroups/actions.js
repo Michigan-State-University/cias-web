@@ -19,6 +19,7 @@ import {
   GET_QUESTION_GROUPS_REQUEST,
   GET_QUESTION_GROUPS_SUCCESS,
   GET_QUESTION_GROUPS_ERROR,
+  CREATE_QUESTION_IN_GROUP,
 } from './constants';
 
 export const copyQuestionsRequest = questionIds =>
@@ -37,8 +38,8 @@ export const deleteQuestionsError = error =>
 
 export const groupQuestionsRequest = (questionIds, interventionId) =>
   actionBuilder(GROUP_QUESTIONS_REQUEST, { questionIds, interventionId });
-export const groupQuestionsSuccess = group =>
-  actionBuilder(GROUP_QUESTIONS_SUCCESS, { group });
+export const groupQuestionsSuccess = (group, questionIds) =>
+  actionBuilder(GROUP_QUESTIONS_SUCCESS, { group, questionIds });
 export const groupQuestionsError = error =>
   actionBuilder(GROUP_QUESTIONS_ERROR, { error });
 
@@ -57,8 +58,8 @@ export const shareQuestionsToResearchersError = error =>
 
 export const changeGroupNameRequest = (title, interventionId, groupId) =>
   actionBuilder(CHANGE_GROUP_NAME_REQUEST, { title, interventionId, groupId });
-export const changeGroupNameSuccess = groupName =>
-  actionBuilder(CHANGE_GROUP_NAME_SUCCESS, { groupName });
+export const changeGroupNameSuccess = (groupId, title) =>
+  actionBuilder(CHANGE_GROUP_NAME_SUCCESS, { groupId, title });
 export const changeGroupNameError = error =>
   actionBuilder(CHANGE_GROUP_NAME_ERROR, { error });
 
@@ -68,3 +69,6 @@ export const getQuestionGroupsSuccess = groups =>
   actionBuilder(GET_QUESTION_GROUPS_SUCCESS, { groups });
 export const getQuestionGroupsError = error =>
   actionBuilder(GET_QUESTION_GROUPS_ERROR, { error });
+
+export const createNewQuestionInGroup = (question, groupId) =>
+  actionBuilder(CREATE_QUESTION_IN_GROUP, { question, groupId });

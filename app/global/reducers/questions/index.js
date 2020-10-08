@@ -17,7 +17,7 @@ export {
   selectQuestions,
   makeSelectQuestionsState,
   makeSelectQuestions,
-  makeSelectSelectedQuestionIndex,
+  makeSelectSelectedQuestionId,
   makeSelectSelectedQuestion,
   makeSelectLoaders,
   makeSelectLoader,

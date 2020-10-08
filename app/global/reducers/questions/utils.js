@@ -56,7 +56,10 @@ export const getFromQuestionTTS = question => {
 };
 
 export const assignFromQuestionTTS = (draft, state) => {
-  const { narrator } = draft.questions[state.selectedQuestion];
+  const selectedQuestion = draft.questions.find(
+    ({ id }) => id === state.selectedQuestion,
+  );
+  const { narrator } = selectedQuestion;
   const readQuestionBlockIndex = narrator.blocks.findIndex(
     ({ type }) => type === readQuestionBlockType,
   );
@@ -64,7 +67,7 @@ export const assignFromQuestionTTS = (draft, state) => {
   if (readQuestionBlockIndex !== -1)
     narrator.blocks[readQuestionBlockIndex] = {
       ...narrator.blocks[readQuestionBlockIndex],
-      text: getFromQuestionTTS(draft.questions[state.selectedQuestion]),
+      text: getFromQuestionTTS(selectedQuestion),
     };
 };
 

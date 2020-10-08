@@ -15,12 +15,12 @@ function* groupQuestions({ payload: { questionIds, interventionId } }) {
     const { data } = yield axios.post(requestURL, {
       questions_group: {
         title: 'Group 1',
-        questions: [...questionIds],
+        questions: questionIds,
       },
     });
-    console.log(data);
-    yield put(groupQuestionsSuccess(data));
+    yield put(groupQuestionsSuccess(data, questionIds));
   } catch (error) {
+    console.log(error);
     yield put(
       showError(formatMessage(messages.groupError), {
         id: GROUP_QUESTIONS_ERROR,

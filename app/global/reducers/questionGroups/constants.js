@@ -39,3 +39,6 @@ export const GET_QUESTION_GROUPS_SUCCESS =
   'app/EditInterventionPage/GET_QUESTION_GROUPS_SUCCESS';
 export const GET_QUESTION_GROUPS_ERROR =
   'app/EditInterventionPage/GET_QUESTION_GROUPS_ERROR';
+
+export const CREATE_QUESTION_IN_GROUP =
+  'app/EditInterventionPage/CREATE_QUESTION_IN_GROUP';

@@ -9,14 +9,13 @@ import {
   CHANGE_GROUP_NAME_REQUEST,
   CHANGE_GROUP_NAME_ERROR,
 } from '../constants';
-import { changeGroupNameError } from '../actions';
+import { changeGroupNameError, changeGroupNameSuccess } from '../actions';
 
 function* changeGroupName({ payload: { title, interventionId, groupId } }) {
   const requestURL = `/v1/interventions/${interventionId}/questions_groups/${groupId}`;
   try {
-    const response = yield axios.put(requestURL, { title });
-    console.log(response);
-    // yield put(changeGroupNameSuccess(copiedQuestion));
+    yield axios.put(requestURL, { title });
+    yield put(changeGroupNameSuccess(groupId, title));
   } catch (error) {
     yield put(
       showError(formatMessage(messages.copyError), {
