@@ -7,6 +7,7 @@ import Row from 'components/Row';
 import Text from 'components/Text';
 import Button from 'components/Button';
 import addSign from 'assets/svg/addSign.svg';
+import addSignDisabled from 'assets/svg/addSign-disabled.svg';
 import { colors } from 'theme';
 
 import messages from './messages';
@@ -24,7 +25,7 @@ const ButtonComponent = React.forwardRef(
       disabled={disabled}
     >
       <Row justify="center" align="center">
-        <Img src={addSign} alt="add" mr={15} />
+        <Img src={disabled ? addSignDisabled : addSign} alt="add" mr={15} />
         <Text fontSize={15} color={colors.white}>
           <FormattedMessage {...messages.addFirstScreen} />
         </Text>

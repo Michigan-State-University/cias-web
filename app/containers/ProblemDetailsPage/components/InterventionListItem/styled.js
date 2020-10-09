@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Box from 'components/Box';
 import { colors, boxShadows, themeColors } from 'theme';
 import Row from 'components/Row';
+import H2 from 'components/H2';
 
 export const ToggleableBox = styled(Box)`
   width: 100%;
@@ -39,6 +40,10 @@ export const StyledLink = styled(Link)`
   justify-content: space-between;
 
   &:hover {
+    ${H2} {
+      color: ${themeColors.secondary} !important;
+    }
+
     ${ToggleableBox} {
       background-color: black !important;
     }
@@ -46,10 +51,8 @@ export const StyledLink = styled(Link)`
 `;
 
 export const StyledRow = styled(Row)`
-  cursor: pointer;
   width: 100%;
   &:hover * {
-    color: ${themeColors.secondary};
     ${InterventionIndex} {
       color: white;
     }

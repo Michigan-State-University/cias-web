@@ -25,6 +25,10 @@ export default defineMessages({
     id: `${scope}.startIntervention`,
     defaultMessage: 'Start intervention',
   },
+  previewDisabled: {
+    id: `${scope}.previewDisabled`,
+    defaultMessage: 'Preview not possible',
+  },
   completeIntervention: {
     id: `${scope}.completeIntervention`,
     defaultMessage: 'Thanks for completing intervention',

@@ -85,7 +85,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             E-mail address
           </p>
           <input
-            class="Input-sc-19txxuq-0 iCEjLf"
+            class="Input-sc-19txxuq-0 hmnJIY"
             disabled=""
             height="46"
             name="email"
@@ -295,7 +295,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             href="/login"
           >
             <button
-              class="StyledTextButton-sc-17cmh3t-0 haWluJ"
+              class="StyledTextButton-sc-17cmh3t-0 kXPqCq"
               color="#C866EA"
             >
               <span>

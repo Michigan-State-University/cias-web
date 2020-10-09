@@ -16,11 +16,13 @@ import mobile from 'assets/svg/mobile.svg';
 import { I_PHONE_8_PLUS_MODE, DESKTOP_MODE } from 'utils/previewMode';
 import { colors, themeColors } from 'theme';
 import { makeSelectPreviewMode } from 'containers/AnswerInterventionPage/selectors';
+import { makeSelectProblemStatus } from 'global/reducers/problem';
 import {
   changePreviewMode as changePreviewModeAction,
   resetIntervention,
 } from 'containers/AnswerInterventionPage/actions';
 
+import { canPreview } from 'models/Status/statusPermissions';
 import messages from './messages';
 
 const PreviewNavbar = ({
@@ -29,6 +31,7 @@ const PreviewNavbar = ({
   onResetIntervention,
   previewMode,
   changePreviewMode,
+  problemStatus,
   match: { params },
 }) => {
   const { problemId, interventionId } = params;
@@ -59,6 +62,8 @@ const PreviewNavbar = ({
   const fillActive = themeColors.secondary;
   const fillInactive = colors.casper;
 
+  const previewDisabled = !canPreview(problemStatus);
+
   return (
     <Row align="center" justify="between" width="100%">
       <Row>
@@ -68,6 +73,7 @@ const PreviewNavbar = ({
         </Text>
         <Box mx={20}>
           <PreviewButton
+            previewDisabled={previewDisabled}
             to={`/interventions/${problemId}/sessions/${interventionId}/preview`}
             handleClick={onResetIntervention}
             text={formatMessage(messages.previewStart)}
@@ -102,10 +108,12 @@ PreviewNavbar.propTypes = {
   onResetIntervention: PropTypes.func,
   intl: intlShape,
   match: PropTypes.object,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   previewMode: makeSelectPreviewMode(),
+  problemStatus: makeSelectProblemStatus(),
 });
 
 const mapDispatchToProps = {

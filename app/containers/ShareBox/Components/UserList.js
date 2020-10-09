@@ -17,16 +17,20 @@ const UserList = ({
   buttonText,
   buttonAction,
   userWithLoading,
+  removingParticipantsPossible,
 }) => {
   const getActionButton = user => {
     const handleClick = () => buttonAction(user);
     return (
       <StyledTextButton
+        disabled={!removingParticipantsPossible}
         loading={userWithLoading.email === user.email}
         onClick={handleClick}
         buttonProps={{
           ml: buttonIsClose ? 15 : null,
-          color: themeColors.secondary,
+          color: removingParticipantsPossible
+            ? themeColors.secondary
+            : colors.grey,
         }}
         loaderProps={{
           ml: buttonIsClose ? 15 : null,
@@ -74,6 +78,7 @@ UserList.propTypes = {
     email: PropTypes.string,
     id: PropTypes.string,
   }),
+  removingParticipantsPossible: PropTypes.bool,
 };
 
 UserList.defaultProps = {

@@ -1,12 +1,17 @@
 import PropTypes from 'prop-types';
 import { hexToRgb } from 'theme';
+import { ternary } from 'utils/ternary';
 
 const style = props => ({
   backgroundColor:
     props.bg && `rgba(${hexToRgb(props.bg)}, ${props.bgOpacity || 1})`,
   color:
     props.color && `rgba(${hexToRgb(props.color)}, ${props.textOpacity || 1})`,
-  cursor: props.cursor || (props.clickable ? 'pointer;' : ''),
+  cursor:
+    props.cursor ||
+    (props.clickable
+      ? ternary(props.disabled, 'not-allowed;', 'pointer;')
+      : ''),
   '&:hover': {
     backgroundColor: props.hoverColor || '',
   },
@@ -15,7 +20,7 @@ const style = props => ({
   boxShadow: props.shadow || '',
   transform: props.transform || '',
   transition: props.transition || '',
-  opacity: props.opacity || '',
+  opacity: props.opacity || ternary(props.disabled, 0.5, ''),
 });
 
 style.propTypes = {
@@ -25,6 +30,7 @@ style.propTypes = {
   opacity: PropTypes.number,
   bgOpacity: PropTypes.number,
   clickable: PropTypes.bool,
+  disabled: PropTypes.bool,
   hoverColor: PropTypes.string,
   borderRadius: PropTypes.string,
   shadow: PropTypes.string,

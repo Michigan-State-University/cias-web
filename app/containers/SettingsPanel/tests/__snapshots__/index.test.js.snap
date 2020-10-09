@@ -20,7 +20,8 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
         class="Box-sc-14m3exe-0 hyXteb"
       >
         <div
-          class="Row-x1o3ru-0 fnPUbe"
+          class="Row-x1o3ru-0 imjEKa"
+          disabled=""
           width="fit-content"
         >
           <img
@@ -38,7 +39,8 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           </p>
         </div>
         <div
-          class="Row-x1o3ru-0 fnPUbe"
+          class="Row-x1o3ru-0 imjEKa"
+          disabled=""
           width="fit-content"
         >
           <img
@@ -56,7 +58,8 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           </p>
         </div>
         <div
-          class="Row-x1o3ru-0 gOOpWF"
+          class="Row-x1o3ru-0 ebPHdB"
+          disabled=""
           width="fit-content"
         >
           <img

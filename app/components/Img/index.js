@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { layout, margin, style, positioning } from '../BaseComponentStyles';
 
-const Img = styled.img`
+const Img = styled.img.attrs(props => ({
+  onClick: props.disabled ? null : props.onClick,
+}))`
   width: auto;
   height: auto;
   pointer-events: ${({ pointerEvents }) => pointerEvents || ''};

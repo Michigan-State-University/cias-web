@@ -91,7 +91,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >
@@ -111,7 +111,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >
@@ -220,7 +220,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >
@@ -240,7 +240,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >
@@ -350,7 +350,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >
@@ -370,7 +370,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >

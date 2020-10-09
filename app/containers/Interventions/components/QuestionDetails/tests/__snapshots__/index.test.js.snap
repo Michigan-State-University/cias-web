@@ -252,6 +252,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   margin-right: 9px;
   height: 60px;
   color: #2F3850;
+  opacity: 0.5;
 }
 
 .c21:focus {

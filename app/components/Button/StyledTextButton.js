@@ -16,7 +16,7 @@ const StyledTextButton = styled.button`
   font-size: 13px;
   line-height: 17px;
   padding: 2px;
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   ${margin};
   ${layout};
   ${text};

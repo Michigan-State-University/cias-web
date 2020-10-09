@@ -79,6 +79,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   text-align: center;
   background-color: rgba(16,121,105,0.1);
   color: rgba(16,121,105,1);
+  opacity: 0.5;
 }
 
 .c2:focus {
@@ -182,6 +183,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   border-radius: 4px;
   background-color: rgba(16,121,105,0.1);
   color: rgba(16,121,105,1);
+  opacity: 0.5;
 }
 
 .c3:focus {

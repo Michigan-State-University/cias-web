@@ -160,8 +160,9 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             </p>
           </div>
           <button
-            class="StyledTextButton-sc-17cmh3t-0 PSJnx styled__StyledTextButton-sc-16elnyr-2 kgVkZa"
-            color="#C866EA"
+            class="StyledTextButton-sc-17cmh3t-0 cJUFVE styled__StyledTextButton-sc-16elnyr-2 kgVkZa"
+            color="#9AA1B6"
+            disabled=""
             font-weight="bold"
           >
             <span>

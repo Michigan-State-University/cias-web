@@ -27,6 +27,7 @@ const CsvFileReader = ({
   onUpload,
   intl: { formatMessage },
   showError,
+  disabled,
 }) => {
   const readerRef = useRef(null);
 
@@ -41,6 +42,7 @@ const CsvFileReader = ({
     });
   return (
     <CSVReader
+      disabled
       ref={readerRef}
       onDrop={onUpload}
       onError={handleError}
@@ -50,7 +52,7 @@ const CsvFileReader = ({
       noProgressBar
     >
       {() => (
-        <Row align="center" clickable onClick={handleOpen}>
+        <Row disabled={disabled} align="center" clickable onClick={handleOpen}>
           <Img src={csvFileIcon} alt="upload" mr={10} />
           <Text
             whiteSpace="nowrap"
@@ -70,6 +72,7 @@ CsvFileReader.propTypes = {
   onUpload: PropTypes.func,
   intl: intlShape,
   showError: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {
