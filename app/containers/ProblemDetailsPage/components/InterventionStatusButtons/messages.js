@@ -27,19 +27,20 @@ export default defineMessages({
   },
   irreversibleInfo: {
     id: `${scope}.irreversible`,
-    defaultMessage: 'THIS OPERATION IS IRREVERSIBLE',
+    defaultMessage: 'This operation is irreversible.',
   },
   editInfo: {
     id: `${scope}.editInfo`,
-    defaultMessage: 'YOU WILL NOT BE ABLE TO EDIT SESSIONS IN THE INTERVENTION',
+    defaultMessage:
+      'You will not be able to edit sessions in the intervention.',
   },
   dataInfo: {
     id: `${scope}.dataInfo`,
-    defaultMessage: 'ENTIRE TEST DATA WILL BE WIPED OUT',
+    defaultMessage: 'Entire test data will be wiped out.',
   },
   accessInfo: {
     id: `${scope}.accessInfo`,
     defaultMessage:
-      'YOU WILL NOT BE ABLE TO CHANGE INTERVENTION ACCESS SETTINGS',
+      'You will not be able to change intervention access settings.',
   },
 });
