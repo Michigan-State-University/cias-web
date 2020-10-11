@@ -18,7 +18,12 @@ function* getQuestionsGroups({ payload: { interventionId } }) {
       data: { questions_groups: groups },
     } = yield axios.get(groupURL);
     const questions = flatten(
-      groups.map(({ questions: groupQuestions }) => groupQuestions),
+      groups.map(({ questions: groupQuestions, id }) =>
+        groupQuestions.map(question => ({
+          ...question,
+          questions_group_id: id,
+        })),
+      ),
     );
     const sortedQuestions = sortBy(questions, 'position');
     yield put(getQuestionsSuccess(sortedQuestions));
@@ -26,9 +31,15 @@ function* getQuestionsGroups({ payload: { interventionId } }) {
       const position = sortedQuestions[0].narrator.blocks[0].endPosition;
       yield put(setAnimationStopPosition(position.x, position.y));
     }
-    yield put(getQuestionGroupsSuccess(groups));
+    yield put(
+      getQuestionGroupsSuccess(
+        groups.map(group => ({
+          ...group,
+          questions: group.questions.length !== 0,
+        })),
+      ),
+    );
   } catch (error) {
-    console.log(error);
     yield put(getQuestionsGroupsError(error));
   }
 }

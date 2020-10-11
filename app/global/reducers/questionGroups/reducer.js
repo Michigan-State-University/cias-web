@@ -23,7 +23,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         const index = state.groups.findIndex(
           ({ id }) => id === payload.groupId,
         );
-        draft.groups[index].questions.push(payload.question);
+        draft.groups[index].questions = true;
         break;
       }
       case CHANGE_GROUP_NAME_SUCCESS: {
@@ -36,11 +36,6 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
       case GROUP_QUESTIONS_SUCCESS: {
         const stateGroups = state.groups;
         const stateGroupsLength = stateGroups.length;
-        for (let index = 0; index < stateGroupsLength; index += 1) {
-          draft.groups[index].questions = stateGroups[index].questions.filter(
-            ({ id }) => !payload.questionIds.includes(id),
-          );
-        }
         draft.groups = [
           ...draft.groups.slice(0, stateGroupsLength - 1),
           payload.group,

@@ -58,3 +58,12 @@ export const makeSelectSelectedQuestionType = () =>
         null,
       ),
   );
+
+export const makeSelectGroupQuestions = id =>
+  createSelector(
+    selectQuestions,
+    substate =>
+      substate.questions.filter(
+        ({ questions_group_id: questionGroupId }) => questionGroupId === id,
+      ),
+  );

@@ -18,7 +18,6 @@ import Img from 'components/Img';
 import ActionIcon from 'components/ActionIcon';
 import Text from 'components/Text';
 import Modal from 'components/Modal';
-import { StyledInput } from 'components/Input/StyledInput';
 
 import menu from 'assets/svg/triangle-back-black.svg';
 import cog from 'assets/svg/gear-selected.svg';
@@ -65,18 +64,17 @@ import {
 } from 'global/reducers/questionGroups';
 
 import GroupActionButton from 'containers/Interventions/components/GroupActionButton';
-import Radio from 'components/Radio';
 import editInterventionPageSaga from './saga';
 
 import EmptyInterventionPage from '../../components/EmptyInterventionPage';
 import QuestionDetails from '../../components/QuestionDetails';
-import QuestionListItem from '../../components/QuestionListItem';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 
 import messages from './messages';
 import { useLockEditInterventionPageScroll } from './utils';
 import { QuestionsRow, ShowListButton } from './styled';
+import QuestionListGroup from '../QuestionListGroup';
 
 function EditInterventionPage({
   intl: { formatMessage },
@@ -261,45 +259,20 @@ function EditInterventionPage({
               )}
               {/* <Reorder reorderId="question-list" onReorder={handleReorder}> */}
               {groups
-                .filter(({ questions: q }) => q.length !== 0)
-                .map(({ questions: questions2, title, id }) => (
-                  <div key={id}>
-                    <Row>
-                      {manage && (
-                        <Radio
-                          onClick={() => toggleGroup(questions2)}
-                          checked={checkSelectedGroup(questions2)}
-                        />
-                      )}
-                      <StyledInput
-                        px={12}
-                        py={6}
-                        value={title}
-                        fontSize={18}
-                        fontWeight="bold"
-                        placeholder="xd"
-                        width="100%"
-                        maxWidth="initial"
-                        onBlur={val =>
-                          changeGroupName(val, params.interventionId, id)
-                        }
-                      />
-                    </Row>
-                    {questions2.map((question, index2) => (
-                      <Row key={question.id}>
-                        <QuestionListItem
-                          selectSlide={selectSlide}
-                          checked={selectedSlides.includes(question.id)}
-                          manage={manage}
-                          index={index2}
-                          selectedQuestionIndex={selectedQuestion}
-                          questions={questions2}
-                          question={question}
-                          interventionId={params.interventionId}
-                        />
-                      </Row>
-                    ))}
-                  </div>
+                .filter(({ questions: hasQuestions }) => hasQuestions)
+                .map(questionGroup => (
+                  <QuestionListGroup
+                    changeGroupName={changeGroupName}
+                    checkSelectedGroup={checkSelectedGroup}
+                    interventionId={params.interventionId}
+                    manage={manage}
+                    questionGroup={questionGroup}
+                    selectSlide={selectSlide}
+                    key={questionGroup.id}
+                    selectedQuestion={selectedQuestion}
+                    selectedSlides={selectedSlides}
+                    toggleGroup={toggleGroup}
+                  />
                 ))}
               {/* </Reorder> */}
               <QuestionTypeChooser onClick={onCreateQuestion} />

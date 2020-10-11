@@ -44,6 +44,7 @@ import {
   editQuestionSuccessCommon,
   editQuestionErrorCommon,
 } from './utils';
+import { GROUP_QUESTIONS_SUCCESS } from '../questionGroups/constants';
 
 export const initialState = {
   selectedQuestion: '',
@@ -88,7 +89,6 @@ export const questionsReducer = (state = initialState, action) =>
         break;
       case GET_QUESTIONS_SUCCESS:
         draft.loaders.getQuestionsLoading = false;
-        console.log(action.payload);
         draft.selectedQuestion =
           action.payload.questions.length !== 0
             ? action.payload.questions[0].id
@@ -238,6 +238,14 @@ export const questionsReducer = (state = initialState, action) =>
           ...settings,
         };
         break;
+      }
+      case GROUP_QUESTIONS_SUCCESS: {
+        draft.questions = draft.questions.map(question => ({
+          ...question,
+          questions_group_id: action.payload.questionIds.includes(question.id)
+            ? action.payload.group.id
+            : question.questions_group_id,
+        }));
       }
     }
   });
