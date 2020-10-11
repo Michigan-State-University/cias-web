@@ -13,7 +13,7 @@ import { themeColors } from 'theme';
 import ReactSelect from 'react-select';
 import { DropdownIndicator, Option } from './components';
 
-const customStyles = ({ isMulti, bg }) => ({
+const customStyles = ({ isMulti, bg, isDisabled }) => ({
   control: provided => ({
     ...provided,
     borderWidth: '1px',
@@ -27,11 +27,11 @@ const customStyles = ({ isMulti, bg }) => ({
     '&:hover': {
       borderColor: `${themeColors.highlight}`,
     },
-    cursor: 'pointer',
+    cursor: isDisabled ? 'not-allowed' : 'pointer',
   }),
   option: provided => ({
     ...provided,
-    cursor: 'pointer',
+    cursor: isDisabled ? 'not-allowed' : 'pointer',
   }),
 });
 

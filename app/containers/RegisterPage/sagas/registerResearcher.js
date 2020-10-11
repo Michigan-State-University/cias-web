@@ -1,11 +1,11 @@
 import { takeLatest, put } from 'redux-saga/effects';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import axios from 'axios';
-import get from 'lodash/get';
 import { push } from 'connected-react-router';
 import { success as showSuccess } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
+import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
 
 import {
   REGISTER_RESEARCHER_REQUEST,
@@ -29,12 +29,7 @@ function* registerResearcher({ payload }) {
       }),
     );
   } catch (error) {
-    const errorMessage = get(
-      error,
-      'response.data.errors.full_messages[0]',
-      error.toString().split('\n')[0],
-    );
-    yield put(registerResearcherError(errorMessage));
+    yield put(registerResearcherError(requestErrorMessageHandler(error)));
   }
 }
 

@@ -17,6 +17,7 @@ const FeedbackBlock = ({
   updateAction,
   blockIndex,
   id,
+  disabled,
 }) => {
   const selectOptions = [
     {
@@ -35,6 +36,7 @@ const FeedbackBlock = ({
       <Box mt={15}>
         <Select
           selectProps={{
+            isDisabled: disabled,
             options: selectOptions,
             value: selectedOption,
             onChange: ({ value }) => updateAction(blockIndex, value, id),
@@ -54,6 +56,7 @@ FeedbackBlock.propTypes = {
   id: PropTypes.string,
   blockIndex: PropTypes.number,
   updateAction: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {

@@ -9,13 +9,23 @@ export const DashedBox = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   font-weight: bold;
   border-radius: 4px;
   transition: 0.2s;
-  &:hover {
-    background-color: ${themeColors.primary};
-    color: ${colors.white};
-    border: none;
-  }
+  ${({ disabled }) =>
+    disabled
+      ? {
+          '&:hover': {
+            backgroundColor: colors.grey,
+            color: colors.white,
+          },
+        }
+      : {
+          '&:hover': {
+            backgroundColor: themeColors.primary,
+            color: colors.white,
+            border: 'none',
+          },
+          cursor: 'pointer',
+        }}
 `;

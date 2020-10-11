@@ -11,7 +11,7 @@ import { colors, boxShadows } from 'theme';
 import useOutsideClick from 'utils/useOutsideClick';
 import { StyledComment, ImageContainer, StyledRow } from './styled';
 
-const Dropdown = ({ options, top, ...restProps }) => {
+const Dropdown = ({ options, top, disabled, ...restProps }) => {
   const [open, setOpen] = useState(false);
 
   const dropdown = useRef(null);
@@ -25,7 +25,7 @@ const Dropdown = ({ options, top, ...restProps }) => {
     return { top: '35px' };
   };
 
-  const callAction = action => () => {
+  const callAction = action => {
     action();
     setOpen(false);
   };
@@ -37,11 +37,12 @@ const Dropdown = ({ options, top, ...restProps }) => {
       justify="end"
       align="start"
       position="relative"
+      disabled={disabled}
       {...restProps}
     >
       <ImageContainer
         onClick={() => {
-          setOpen(!open);
+          if (!disabled) setOpen(!open);
         }}
       >
         <Img src={dots} alt="dots" />
@@ -51,9 +52,10 @@ const Dropdown = ({ options, top, ...restProps }) => {
           <Column bg={colors.white} shadow={boxShadows.black} borderRadius={10}>
             {options.map(option => (
               <StyledRow
+                disabled={option.disabled}
                 key={`el-dropdown-${option.id}`}
                 padding={8}
-                onClick={callAction(option.action)}
+                onClick={() => !option.disabled && callAction(option.action)}
                 align="center"
               >
                 {option.icon && <Img src={option.icon} alt="icon" mr={12} />}
@@ -76,6 +78,7 @@ const Dropdown = ({ options, top, ...restProps }) => {
 Dropdown.propTypes = {
   options: PropTypes.array,
   top: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default Dropdown;

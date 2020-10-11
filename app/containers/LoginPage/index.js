@@ -4,7 +4,7 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
@@ -13,11 +13,14 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { Formik } from 'formik';
+import { parse } from 'query-string';
+import has from 'lodash/has';
+import * as toast from 'react-toastify-redux';
 
 import FormikInput from 'components/FormikInput';
 import { Fill } from 'components/Fill';
-import Column from 'components/Column';
 
+import Column from 'components/Column';
 import H1 from 'components/H1';
 import Row from 'components/Row';
 import { Button } from 'components/Button';
@@ -26,8 +29,13 @@ import Divider from 'components/Divider';
 import withPublicLayout from 'containers/PublicLayout';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
-import ErrorAlert from 'components/ErrorAlert';
 
+import ErrorAlert from 'components/ErrorAlert';
+import { makeSelectLocation } from 'containers/App/selectors';
+import {
+  ACCOUNT_CONFIRMATION_ERROR,
+  ACCOUNT_CONFIRMATION_SUCCESS,
+} from './constants';
 import makeSelectLoginPage from './selectors';
 import { loginRequest } from './actions';
 import reducer from './reducer';
@@ -48,12 +56,24 @@ const initialValues = formData => ({
   password: formData.password || '',
 });
 
-export function LoginPage(props) {
-  const {
-    onLogin,
-    loginPage: { error, loading, formData },
-    intl: { formatMessage },
-  } = props;
+export const LoginPage = ({
+  onLogin,
+  loginPage: { error, loading, formData },
+  intl: { formatMessage },
+  location: { search },
+  showSuccess,
+  showError,
+}) => {
+  const queryObject = parse(search, { parseBooleans: true });
+
+  useEffect(() => {
+    if (has(queryObject, 'account_confirmation_success')) {
+      if (queryObject.account_confirmation_success)
+        showSuccess(formatMessage(messages.accountConfirmation.success));
+      else showError(formatMessage(messages.accountConfirmation.error));
+    }
+  }, [queryObject.account_confirmation_success]);
+
   useInjectReducer({ key: 'loginPage', reducer });
   useInjectSaga({ key: 'loginPage', saga });
 
@@ -148,7 +168,7 @@ export function LoginPage(props) {
       </Fill>
     </Fragment>
   );
-}
+};
 
 LoginPage.propTypes = {
   onLogin: PropTypes.func,
@@ -161,14 +181,22 @@ LoginPage.propTypes = {
       password: PropTypes.string,
     }),
   }),
+  location: PropTypes.shape({ search: PropTypes.string }),
+  showSuccess: PropTypes.func,
+  showError: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   loginPage: makeSelectLoginPage(),
+  location: makeSelectLocation(),
 });
 
 const mapDispatchToProps = {
   onLogin: loginRequest,
+  showSuccess: message =>
+    toast.success(message, { id: ACCOUNT_CONFIRMATION_SUCCESS }),
+  showError: message =>
+    toast.error(message, { id: ACCOUNT_CONFIRMATION_ERROR }),
 };
 
 const withConnect = connect(

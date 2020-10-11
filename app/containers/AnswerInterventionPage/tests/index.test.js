@@ -9,18 +9,23 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
-// import 'jest-dom/extend-expect'; // add some helpful assertions
-
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { MemoryRouter } from 'react-router-dom';
+import { DEFAULT_LOCALE } from 'i18n';
+
 import { AnswerInterventionPageWithIntl as AnswerInterventionPage } from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<AnswerInterventionPage />', () => {
+  const mockedFunctions = {
+    fetchProblem: jest.fn(),
+    fetchQuestionsAction: jest.fn(),
+  };
+
   const defaultProps = {
     match: { params: { id: '12ad120dj012-3a' } },
-    fetchQuestionsAction: jest.fn(),
+    fetchQuestionsAction: mockedFunctions.fetchQuestionsAction,
+    fetchProblem: mockedFunctions.fetchProblem,
     answerInterventionPage: {
       interventionQuestions: [],
     },

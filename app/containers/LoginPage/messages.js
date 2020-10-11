@@ -61,4 +61,15 @@ export default defineMessages({
     id: `${scope}.forgotPassword`,
     defaultMessage: 'Forgot your password?',
   },
+  accountConfirmation: {
+    success: {
+      id: `${scope}.accountConfirmationSuccess`,
+      defaultMessage: 'Account has been successfully confirmed.',
+    },
+    error: {
+      id: `${scope}.accountConfirmationError`,
+      defaultMessage:
+        'There was some error during email confirmation. Please contact a support.',
+    },
+  },
 });

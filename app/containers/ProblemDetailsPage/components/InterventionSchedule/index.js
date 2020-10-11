@@ -35,6 +35,7 @@ function InterventionSchedule({
   changeType,
   updateValue,
   interventionId,
+  disabled,
 }) {
   const scheduleOptions = {
     daysAfter: {
@@ -51,20 +52,35 @@ function InterventionSchedule({
     },
   };
 
+  const handleChangeValue = value => updateValue(value, interventionId);
+
   const renderOption = () => {
     switch (selectedScheduleOption) {
       case scheduleOptions.daysAfter.id:
-        return <DaysAfterOption value={scheduleAt} setValue={updateValue} />;
+        return (
+          <DaysAfterOption
+            disabled={disabled}
+            value={scheduleAt}
+            setValue={handleChangeValue}
+          />
+        );
       case scheduleOptions.daysAfterFill.id:
         return (
           <DaysAfterOption
+            disabled={disabled}
             value={scheduleAt}
-            setValue={updateValue}
+            setValue={handleChangeValue}
             afterFill
           />
         );
       case scheduleOptions.exactDate.id:
-        return <ExactDateOption value={scheduleAt} setValue={updateValue} />;
+        return (
+          <ExactDateOption
+            disabled={disabled}
+            value={scheduleAt}
+            setValue={handleChangeValue}
+          />
+        );
       default:
         break;
     }
@@ -76,6 +92,7 @@ function InterventionSchedule({
         {formatMessage(messages.info)}
       </Text>
       <Selector
+        disabled={disabled}
         selectOptionPlaceholder={formatMessage(messages.default)}
         options={values(scheduleOptions)}
         activeOption={find(
@@ -104,6 +121,7 @@ InterventionSchedule.propTypes = {
   changeType: PropTypes.func,
   updateValue: PropTypes.func,
   interventionId: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {

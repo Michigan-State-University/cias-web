@@ -17,6 +17,7 @@ const ArrowDropdown = ({
   isOpened,
   setOpen,
   childWidthScope,
+  disabled,
 }) => {
   const dropdown = useRef(null);
   useOutsideClick(dropdown, () => setOpen(false), isOpened);
@@ -24,6 +25,7 @@ const ArrowDropdown = ({
   return (
     <ArrowDropdownWrapper ref={dropdown} width={width}>
       <Dropdown
+        disabled={disabled}
         onClick={() => setOpen && setOpen(!isOpened)}
         isOpened={isOpened}
       >
@@ -53,6 +55,7 @@ ArrowDropdown.propTypes = {
   positionFrom: PropTypes.oneOf(['left', 'right']),
   isOpened: PropTypes.bool,
   setOpen: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 ArrowDropdown.defaultProps = {

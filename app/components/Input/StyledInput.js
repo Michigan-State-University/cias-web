@@ -60,7 +60,8 @@ const StyledInput = props => {
 
   return (
     <TextArea
-      width="100%"
+      disabled={props.disabled}
+      width={props.width || '100%'}
       height="60px"
       {...(props.rows ? { rows: props.rows, height: 'auto' } : {})}
       mr={9}
@@ -93,6 +94,7 @@ StyledInput.propTypes = {
   rows: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   transparent: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 StyledInput.defaultProps = {

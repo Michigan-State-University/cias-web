@@ -9,7 +9,12 @@ import decideIfPassValue from 'utils/decideIfPassValue';
 
 import { shareOptions } from '../utils';
 
-const LeftColumn = ({ currentOption, dispatchUpdate, updateAccessSetting }) => {
+const LeftColumn = ({
+  currentOption,
+  dispatchUpdate,
+  updateAccessSetting,
+  disabled,
+}) => {
   const changeInfo = (id, label, sublabel) => () =>
     dispatchUpdate({
       id,
@@ -22,6 +27,7 @@ const LeftColumn = ({ currentOption, dispatchUpdate, updateAccessSetting }) => {
         const isChecked = currentOption && option.id === currentOption.id;
         return (
           <Row
+            disabled={disabled}
             key={`el-option-radio-${index}`}
             mb={decideIfPassValue({
               index,
@@ -61,6 +67,7 @@ LeftColumn.propTypes = {
   }),
   dispatchUpdate: PropTypes.func,
   updateAccessSetting: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default LeftColumn;

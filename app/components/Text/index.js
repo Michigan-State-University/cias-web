@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-import { fontSizes, fontFamily, lineHeights } from 'theme';
+import { fontSizes, fontFamily, lineHeights, colors } from 'theme';
 import { margin, text, layout, style } from '../BaseComponentStyles';
 
-const Text = styled.p`
+const Text = styled.p.attrs(props => ({
+  onClick: props.disabled ? null : props.onClick,
+}))`
   font-family: ${fontFamily};
   font-size: ${fontSizes.small};
   line-height: ${lineHeights.small};
@@ -10,6 +12,8 @@ const Text = styled.p`
   ${text};
   ${layout};
   ${style};
+  ${({ disabled }) =>
+    disabled && { color: colors.grey, cursor: 'not-allowed' }};
 `;
 
 export default Text;

@@ -22,6 +22,7 @@ import {
   makeSelectProblemState,
   changeAccessSettingRequest,
 } from 'global/reducers/problem';
+import { canChangeAccessSettings } from 'models/Status/statusPermissions';
 import { themeColors } from 'theme';
 
 import AccessGiver from './containers/AccessGiver';
@@ -39,6 +40,7 @@ const SettingsPanel = ({
   problem,
   changeAccessSetting,
   problemState: {
+    problem: { status },
     loaders: {
       fetchProblemLoading,
       changeAccessSettingLoading,
@@ -49,6 +51,8 @@ const SettingsPanel = ({
   },
 }) => {
   const [state, dispatch] = useReducer(reducer, {});
+
+  const changingAccessSettingsPossible = canChangeAccessSettings(status);
 
   const updateSetting = newSetting =>
     changeAccessSetting(problem.id, newSetting);
@@ -79,6 +83,7 @@ const SettingsPanel = ({
               <FormattedMessage {...messages.subheader} />
             </H2>
             <LeftColumn
+              disabled={!changingAccessSettingsPossible}
               currentOption={currentOption}
               dispatchUpdate={dispatchUpdate}
               updateAccessSetting={updateSetting}
@@ -88,7 +93,7 @@ const SettingsPanel = ({
               currentOption.id === ids.onlyInvitedRegisteredParticipant && (
                 <AccessGiver
                   usersWithAccess={usersWithAccess}
-                  problemId={problem.id}
+                  problem={problem}
                   enableAccessLoading={enableAccessLoading}
                   fetchUserAccessLoading={fetchUserAccessLoading}
                   fetchUserAccessError={fetchUserAccessError}

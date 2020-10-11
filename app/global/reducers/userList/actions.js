@@ -17,13 +17,13 @@ import {
 
 export const fetchUsers = (roles, name, page, includeInactive) =>
   actionBuilder(FETCH_USERS, { roles, name, page, includeInactive });
-export const fetchUsersSuccess = users =>
-  actionBuilder(FETCH_USERS_SUCCESS, users);
+export const fetchUsersSuccess = (users, usersSize) =>
+  actionBuilder(FETCH_USERS_SUCCESS, { users, usersSize });
 export const fetchUsersFailure = error =>
   actionBuilder(FETCH_USERS_FAILURE, error);
 
-export const changeActivateStatusRequest = (id, active) =>
-  actionBuilder(CHANGE_ACTIVATE_STATUS_REQUEST, { id, active });
+export const changeActivateStatusRequest = (id, active, showInactive) =>
+  actionBuilder(CHANGE_ACTIVATE_STATUS_REQUEST, { id, active, showInactive });
 export const changeActivateStatusSuccess = () =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_SUCCESS, {});
 export const changeActivateStatusFailure = () =>

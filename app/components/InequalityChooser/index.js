@@ -14,7 +14,11 @@ import { CaseInput } from './styled';
 
 const signs = ['=', '<', '>', '<=', '>='];
 
-const InequalityChooser = ({ onSuccessfulChange, inequalityValue }) => {
+const InequalityChooser = ({
+  onSuccessfulChange,
+  inequalityValue,
+  disabled,
+}) => {
   const populateSelectOption = sign => ({
     label: sign,
     value: sign,
@@ -51,6 +55,7 @@ const InequalityChooser = ({ onSuccessfulChange, inequalityValue }) => {
         minWidth={60}
         ml={10}
         selectProps={{
+          isDisabled: disabled,
           bg: colors.linkWater,
           options: signMapper,
           onChange: value => setInequalitySign(value),
@@ -59,6 +64,7 @@ const InequalityChooser = ({ onSuccessfulChange, inequalityValue }) => {
       />
       <Box bg={colors.linkWater} mx={10}>
         <CaseInput
+          disabled={disabled}
           px={0}
           py={12}
           textAlign="center"
@@ -75,6 +81,7 @@ const InequalityChooser = ({ onSuccessfulChange, inequalityValue }) => {
 InequalityChooser.propTypes = {
   inequalityValue: PropTypes.string,
   onSuccessfulChange: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default memo(InequalityChooser);

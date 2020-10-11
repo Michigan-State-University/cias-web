@@ -16,7 +16,14 @@ import {
   Content,
 } from './styled';
 
-const CollapseLabel = ({ isOpened, onToggle, label, color, onDelete }) => {
+const CollapseLabel = ({
+  isOpened,
+  onToggle,
+  label,
+  color,
+  onDelete,
+  disabled,
+}) => {
   const img = isOpened ? arrowUp : arrowDown;
 
   return (
@@ -26,7 +33,7 @@ const CollapseLabel = ({ isOpened, onToggle, label, color, onDelete }) => {
           {label} <Img src={img} />
         </Row>
       </StyledCollapseLabel>
-      <Img src={bin} alt="bin" clickable onClick={onDelete} />
+      {!disabled && <Img src={bin} alt="bin" clickable onClick={onDelete} />}
     </Row>
   );
 };
@@ -37,6 +44,7 @@ CollapseLabel.propTypes = {
   isOpened: PropTypes.bool,
   color: PropTypes.string,
   onDelete: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const CollapseContent = ({ child, isOpened }) => {
@@ -71,7 +79,15 @@ CollapseContent.propTypes = {
   isOpened: PropTypes.bool,
 };
 
-const Collapse = ({ children, isOpened, onToggle, label, color, onDelete }) => (
+const Collapse = ({
+  children,
+  isOpened,
+  onToggle,
+  label,
+  color,
+  onDelete,
+  disabled,
+}) => (
   <StyledCollapseContainer>
     <CollapseLabel
       label={label}
@@ -79,6 +95,7 @@ const Collapse = ({ children, isOpened, onToggle, label, color, onDelete }) => (
       isOpened={isOpened}
       color={color}
       onDelete={onDelete}
+      disabled={disabled}
     />
     <CollapseContent child={children} isOpened={isOpened} />
   </StyledCollapseContainer>
@@ -91,6 +108,7 @@ Collapse.propTypes = {
   isOpened: PropTypes.bool,
   color: PropTypes.string,
   onDelete: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 Collapse.defaultProps = {

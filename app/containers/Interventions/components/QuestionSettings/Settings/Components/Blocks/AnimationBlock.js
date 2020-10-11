@@ -28,6 +28,7 @@ const AnimationBlock = ({
   updateNarratorPreviewAnimation,
   blockIndex,
   id,
+  disabled,
 }) => {
   const onChipsClick = (index, value) => () => {
     const animName = camelCase(value.toLowerCase());
@@ -48,6 +49,7 @@ const AnimationBlock = ({
 
           return (
             <Chips
+              disabled={disabled}
               px={15}
               py={4}
               borderRadius={20}
@@ -77,6 +79,7 @@ AnimationBlock.propTypes = {
   blockIndex: PropTypes.number,
   updateAnimation: PropTypes.func,
   updateNarratorPreviewAnimation: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {

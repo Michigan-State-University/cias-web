@@ -21,4 +21,26 @@ export default defineMessages({
     id: `${scope}.csv`,
     defaultMessage: 'Get CSV with results',
   },
+  confirmationTile: {
+    id: `${scope}.confirmationTile`,
+    defaultMessage: 'Are you sure you want to publish the intervention?',
+  },
+  irreversibleInfo: {
+    id: `${scope}.irreversible`,
+    defaultMessage: 'This operation is irreversible.',
+  },
+  editInfo: {
+    id: `${scope}.editInfo`,
+    defaultMessage:
+      'You will not be able to edit sessions in the intervention.',
+  },
+  dataInfo: {
+    id: `${scope}.dataInfo`,
+    defaultMessage: 'Entire test data will be wiped out.',
+  },
+  accessInfo: {
+    id: `${scope}.accessInfo`,
+    defaultMessage:
+      'You will not be able to change intervention access settings.',
+  },
 });

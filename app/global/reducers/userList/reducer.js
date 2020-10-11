@@ -19,6 +19,7 @@ import {
 
 export const initialState = {
   users: [],
+  usersSize: 0,
   cache: {
     users: [],
   },
@@ -35,7 +36,9 @@ const userListReducer = (state = initialState, { type, payload }) =>
         draft.usersError = null;
         break;
       case FETCH_USERS_SUCCESS:
-        draft.users = payload;
+        const { users: usersList, usersSize } = payload;
+        draft.users = usersList;
+        draft.usersSize = usersSize;
         draft.usersLoading = false;
         break;
       case FETCH_USERS_FAILURE:
@@ -45,9 +48,12 @@ const userListReducer = (state = initialState, { type, payload }) =>
       case CHANGE_ACTIVATE_STATUS_REQUEST:
         const { users } = state;
         draft.cache.users = users;
-        const { id, active } = payload;
+        const { id, active, showInactive } = payload;
         const index = findIndex(users, user => user.id === id);
-        draft.users[index].active = active;
+
+        if (showInactive) draft.users[index].active = active;
+        else draft.users.splice(index, 1);
+
         break;
       case CHANGE_ACTIVATE_STATUS_SUCCESS:
         draft.cache.users = [];

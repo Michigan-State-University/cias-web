@@ -1,3 +1,5 @@
+process.env.TZ = 'UTC';
+
 module.exports = {
   collectCoverageFrom: [
     'app/**/*.{js,jsx}',

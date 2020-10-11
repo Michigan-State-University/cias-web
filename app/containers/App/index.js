@@ -127,7 +127,9 @@ export function App({ user }) {
           exact
           key="previewFromStart"
           path="/interventions/:problemId/sessions/:interventionId/preview"
-          component={AnswerInterventionPage}
+          component={({ match }) => (
+            <AnswerInterventionPage match={match} isPreview />
+          )}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
@@ -138,7 +140,9 @@ export function App({ user }) {
         <AppRoute
           key="previewFromCurrent"
           path="/interventions/:problemId/sessions/:interventionId/preview/:index"
-          component={AnswerInterventionPage}
+          component={({ match }) => (
+            <AnswerInterventionPage match={match} isPreview />
+          )}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
@@ -170,7 +174,7 @@ export function App({ user }) {
         />
         <AppRoute
           exact
-          path="/profile/:id"
+          path="/users/:id"
           component={UserDetails}
           protectedRoute
           allowedRoles={[Roles.admin]}

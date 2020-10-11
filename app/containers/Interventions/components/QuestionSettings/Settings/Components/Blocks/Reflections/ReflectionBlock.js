@@ -106,6 +106,7 @@ const ReflectionBlock = ({
   currentQuestionType,
   updateAction,
   switchToReflectionFormula,
+  disabled,
 }) => {
   const [targetChooserOpen, setTargetChooserOpen] = useState(false);
 
@@ -149,6 +150,7 @@ const ReflectionBlock = ({
           <Box mt={15}>
             <Select
               selectProps={{
+                isDisabled: disabled,
                 options: feedbackOptions,
                 value: selectedFeedbackOption,
                 onChange: ({ value }) => updateAction(blockIndex, value, id),
@@ -163,6 +165,7 @@ const ReflectionBlock = ({
           <Box mt={15}>
             <Select
               selectProps={{
+                isDisabled: disabled,
                 options: selectOptions,
                 value: selectedOption,
                 onChange: ({ value }) => updateAnimation(blockIndex, value, id),
@@ -174,6 +177,7 @@ const ReflectionBlock = ({
       <Row my={15} align="center" justify="between">
         {formatMessage(messages.reflectionToggle)}
         <Switch
+          disabled={disabled}
           checked
           mr={15}
           onToggle={() => switchToSpeech(blockIndex, id)}
@@ -182,11 +186,13 @@ const ReflectionBlock = ({
       <Row mb={15} align="center" justify="between">
         {formatMessage(messages.formulaToggle)}
         <Switch
+          disabled={disabled}
           mr={15}
           onToggle={() => switchToReflectionFormula(blockIndex, id)}
         />
       </Row>
       <ArrowDropdown
+        disabled={disabled}
         width="100%"
         childWidthScope="parent"
         positionFrom="right"
@@ -221,6 +227,7 @@ const ReflectionBlock = ({
       <Box mt={15}>
         {block.reflections.map((reflection, index) => (
           <Reflection
+            disabled={disabled}
             key={`${id}-reflection-${index}`}
             formatMessage={formatMessage}
             id={id}
@@ -249,6 +256,7 @@ ReflectionBlock.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   updateAction: PropTypes.func,
   currentQuestionType: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

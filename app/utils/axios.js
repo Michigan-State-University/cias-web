@@ -30,7 +30,7 @@ axios.interceptors.response.use(
         uid: response.headers.uid,
       });
     } else {
-      LocalStorageService.setToken(response.headers['access-token']);
+      setHeaders(response);
     }
 
     return response;
@@ -38,8 +38,12 @@ axios.interceptors.response.use(
   error => {
     if (get(error, 'response.status') === 401) {
       dispatch(logOut());
-    }
+    } else setHeaders(error.response);
 
     return Promise.reject(error);
   },
 );
+
+const setHeaders = response => {
+  LocalStorageService.setToken(response.headers['access-token']);
+};

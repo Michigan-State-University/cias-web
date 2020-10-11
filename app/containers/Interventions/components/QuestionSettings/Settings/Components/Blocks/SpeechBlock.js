@@ -58,6 +58,7 @@ const SpeechBlock = ({
   switchToReflection,
   updateAction,
   currentQuestionType,
+  disabled,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(block.text, ''));
@@ -139,6 +140,7 @@ const SpeechBlock = ({
             <Box mt={15}>
               <Select
                 selectProps={{
+                  isDisabled: disabled,
                   options: feedbackOptions,
                   value: selectedFeedbackOption,
                   onChange: ({ value }) => updateAction(blockIndex, value, id),
@@ -153,6 +155,7 @@ const SpeechBlock = ({
           <Box mt={15}>
             <Select
               selectProps={{
+                isDisabled: disabled,
                 options: selectOptions,
                 value: selectedOption,
                 onChange: ({ value }) => updateAnimation(blockIndex, value, id),
@@ -166,6 +169,7 @@ const SpeechBlock = ({
           <Row mt={15} align="center" justify="between">
             {formatMessage(messages.reflectionToggle)}
             <Switch
+              disabled={disabled}
               mr={15}
               onToggle={() => switchToReflection(blockIndex, id)}
             />
@@ -173,6 +177,7 @@ const SpeechBlock = ({
           <Box position="relative">
             <Box mt={15} bg={colors.linkWater} width="100%">
               <StyledInput
+                disabled={disabled}
                 type="multiline"
                 rows="10"
                 placeholder={formatMessage(messages.speechPlaceholder)}
@@ -214,6 +219,7 @@ SpeechBlock.propTypes = {
   switchToReflection: PropTypes.func,
   updateAction: PropTypes.func,
   currentQuestionType: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

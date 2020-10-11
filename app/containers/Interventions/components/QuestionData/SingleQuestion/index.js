@@ -24,6 +24,7 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
+import { canEdit } from 'models/Status/statusPermissions';
 
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
@@ -38,6 +39,7 @@ const SingleQuestion = ({
   removeAnswer,
   updateVariable,
   isNarratorTab,
+  problemStatus,
   intl: { formatMessage },
 }) => {
   const radioButtonRef = useRef(null);
@@ -54,13 +56,18 @@ const SingleQuestion = ({
 
   const { data, variable } = selectedQuestion.body;
 
+  const editingPossible = canEdit(problemStatus);
+  const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
+
   const handleMouseEnter = index => () => {
-    if (!isNarratorTab) setHovered(index);
+    if (!isNarratorTabOrEditNotPossible) setHovered(index);
   };
+
   return (
     <Column mt={10}>
       <Row display="flex" hidden={isNarratorTab} mb={10} ml={24}>
         <BadgeInput
+          disabled={!editingPossible}
           px={0}
           py={12}
           textAlign="center"
@@ -77,7 +84,7 @@ const SingleQuestion = ({
       {data.map((value, index) => (
         <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox
-            hoverColor={isNarratorTab ? null : undefined}
+            hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
             px={21}
             py={14}
             width="100%"
@@ -86,7 +93,11 @@ const SingleQuestion = ({
             clickable={false}
           >
             <Column>
-              <Row align="center" justify="between" mb={isNarratorTab ? 0 : 10}>
+              <Row
+                align="center"
+                justify="between"
+                mb={isNarratorTabOrEditNotPossible ? 0 : 10}
+              >
                 <Row width="90%">
                   <Img ref={radioButtonRef} src={radio} mr={RADIO_MARGIN} />
                   <Box width="100%">
@@ -106,7 +117,7 @@ const SingleQuestion = ({
                         updateAnswer(index, { ...value, payload: newTitle })
                       }
                       richText
-                      disabled={isNarratorTab}
+                      disabled={isNarratorTabOrEditNotPossible}
                     />
                   </Box>
                 </Row>
@@ -131,6 +142,7 @@ const SingleQuestion = ({
                 </Text>
 
                 <BadgeInput
+                  disabled={!editingPossible}
                   px={0}
                   py={12}
                   textAlign="center"
@@ -157,7 +169,7 @@ const SingleQuestion = ({
           </HoverableBox>
         </Row>
       ))}
-      <Row display="flex" hidden={isNarratorTab}>
+      <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
         <HoverableBox px={21} py={14} onClick={addAnswer}>
           <Box>
             <Row align="center">
@@ -181,6 +193,7 @@ SingleQuestion.propTypes = {
   removeAnswer: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

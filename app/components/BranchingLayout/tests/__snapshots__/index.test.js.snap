@@ -210,11 +210,11 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  cursor: pointer;
   font-weight: bold;
   border-radius: 4px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+  cursor: pointer;
 }
 
 .c13:hover {

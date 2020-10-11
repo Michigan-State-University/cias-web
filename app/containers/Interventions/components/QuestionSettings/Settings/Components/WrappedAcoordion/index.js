@@ -41,6 +41,7 @@ const WrappedAccordion = ({
   narratorBlockIndex,
   questions,
   questionId,
+  disabled,
 }) => {
   const { voice, animation } = narrator.settings;
 
@@ -85,6 +86,7 @@ const WrappedAccordion = ({
 
   return (
     <Accordion
+      disabled={disabled}
       opened={narratorBlockIndex}
       setOpened={changeNarratorBlockIndex}
       onHide={hideAccordion}
@@ -101,7 +103,7 @@ const WrappedAccordion = ({
               globalMessages.blockTypes[block.type],
             )}`}
           >
-            {renderBlock(block, blockIndex, id, formatMessage)}
+            {renderBlock(block, blockIndex, id, formatMessage, disabled)}
           </div>
         ))}
     </Accordion>
@@ -125,6 +127,7 @@ WrappedAccordion.propTypes = {
   narratorBlockIndex: PropTypes.number,
   questions: PropTypes.array,
   questionId: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {

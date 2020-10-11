@@ -30,6 +30,13 @@ import { DESKTOP_MODE } from 'utils/previewMode';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 
 import {
+  fetchProblemRequest,
+  fetchProblemSaga,
+  makeSelectProblemStatus,
+  problemReducer,
+} from 'global/reducers/problem';
+import { canPreview } from 'models/Status/statusPermissions';
+import {
   BackButton,
   AnswerInterventionContent,
   AnswerOuterContainer,
@@ -127,10 +134,21 @@ export function AnswerInterventionPage({
     isAnimationOngoing,
     feedbackScreenSettings,
   },
+  isPreview,
+  problemStatus,
+  fetchProblem,
 }) {
+  useInjectReducer({ key: 'problem', reducer: problemReducer });
+  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
   useInjectReducer({ key: 'answerInterventionPage', reducer });
   useInjectSaga({ key: 'answerInterventionPage', saga });
-  const { interventionId, index } = params;
+  const { interventionId, index, problemId } = params;
+
+  useEffect(() => {
+    if (isPreview) fetchProblem(problemId);
+  }, [problemId]);
+
+  const previewPossible = !(isPreview && !canPreview(problemStatus));
 
   useEffect(() => {
     fetchQuestionsAction(interventionId);
@@ -280,8 +298,13 @@ export function AnswerInterventionPage({
       >
         {!interventionStarted && (
           <StyledButton
+            disabled={!previewPossible}
             onClick={startInterventionAsync}
-            title={formatMessage(messages.startIntervention)}
+            title={
+              previewPossible || isNullOrUndefined(previewPossible)
+                ? formatMessage(messages.startIntervention)
+                : formatMessage(messages.previewDisabled)
+            }
             isDesktop={isDesktop}
           />
         )}
@@ -329,11 +352,15 @@ AnswerInterventionPage.propTypes = {
   changeIsAnimationOngoing: PropTypes.func,
   setFeedbackSettings: PropTypes.func,
   audioInstance: PropTypes.shape(AudioWrapper),
+  isPreview: PropTypes.bool,
+  problemStatus: PropTypes.string,
+  fetchProblem: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   answerInterventionPage: makeSelectAnswerInterventionPage(),
   audioInstance: makeSelectAudioInstance(),
+  problemStatus: makeSelectProblemStatus(),
 });
 
 const mapDispatchToProps = {
@@ -345,6 +372,7 @@ const mapDispatchToProps = {
   showError: error,
   changeIsAnimationOngoing: changeIsAnimating,
   setFeedbackSettings: setFeedbackScreenSettings,
+  fetchProblem: fetchProblemRequest,
 };
 
 const withConnect = connect(

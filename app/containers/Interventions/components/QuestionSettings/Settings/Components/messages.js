@@ -100,6 +100,10 @@ export default defineMessages({
     id: `${scope}.characterMovable`,
     defaultMessage: `You can now replace the character by dragging it.`,
   },
+  characterMoveDisabled: {
+    id: `${scope}.characterMoveDisabled`,
+    defaultMessage: `Character replacing is disabled for that intervention status.`,
+  },
   [feedbackActions.showSpectrum]: {
     id: `${scope}.${feedbackActions.showSpectrum}`,
     defaultMessage: 'Show Spectrum',

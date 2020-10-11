@@ -35,6 +35,11 @@ exports[`<Switch /> should match the snapshot 1`] = `
   box-shadow: 0 0 1px #C866EA;
 }
 
+.c1:disabled + .c3 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .c4:before {
   position: absolute;
   content: '';

@@ -49,6 +49,7 @@ const Reflection = ({
   onRemoveCase,
   updateText,
   updateCase,
+  disabled,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(reflection.text, ''));
@@ -113,6 +114,7 @@ const Reflection = ({
         <Row align="center">
           <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
           <InequalityChooser
+            disabled={disabled}
             onSuccessfulChange={value =>
               updateCase(reflectionIndex, value, id, blockIndex)
             }
@@ -123,17 +125,20 @@ const Reflection = ({
           </Text>
         </Row>
 
-        <Img
-          ml={10}
-          src={binNoBg}
-          onClick={() => onRemoveCase(reflectionIndex, id, blockIndex)}
-          clickable
-        />
+        {!disabled && (
+          <Img
+            ml={10}
+            src={binNoBg}
+            onClick={() => onRemoveCase(reflectionIndex, id, blockIndex)}
+            clickable
+          />
+        )}
       </Row>
       <Row>
         <Box position="relative" width="100%">
           <Box bg={colors.linkWater}>
             <StyledInput
+              disabled={disabled}
               type="multiline"
               rows="10"
               placeholder={formatMessage(messages.speechPlaceholder)}
@@ -172,6 +177,7 @@ Reflection.propTypes = {
   onRemoveCase: PropTypes.func,
   updateCase: PropTypes.func,
   updateText: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

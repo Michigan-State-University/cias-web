@@ -7,7 +7,7 @@ import Radio from 'components/Radio';
 import Row from 'components/Row';
 import { StripedTR, Table, TBody, TD, TH, THead } from 'components/Table';
 
-import { elements } from 'theme';
+import { colors, elements } from 'theme';
 
 import { FirstTH } from './styled';
 
@@ -24,31 +24,36 @@ const GridQuestionLayout = ({
   };
   return (
     <Box width="100%">
-      <Box
-        overflow="scroll"
-        pr={21}
-        py={14}
-        ml={elements.grid.colWidth + elements.grid.leftPadding}
-      >
+      <Box overflow="scroll" pr={21} py={14} ml={elements.grid.leftPadding}>
         <Table>
           <THead>
-            <StripedTR>
+            <StripedTR color={colors.catskillWhite} bg={colors.zirkon}>
               <FirstTH left={elements.grid.leftPadding} scope="col" />
               {columns.map((column, columnIndex) => (
                 <TH
                   scope="col"
                   key={`question-${questionId}-col-th-${columnIndex}`}
                 >
-                  <Column width="inherit">{column.payload}</Column>
+                  <Column>{column.payload}</Column>
                 </TH>
               ))}
             </StripedTR>
           </THead>
           <TBody>
             {rows.map((row, rowIndex) => (
-              <StripedTR key={`question-${questionId}-row-th-${rowIndex}`}>
+              <StripedTR
+                key={`question-${questionId}-row-th-${rowIndex}`}
+                color={colors.catskillWhite}
+                bg={colors.zirkon}
+              >
                 <FirstTH left={elements.grid.leftPadding} scope="row">
-                  <Column width="inherit" height="inherit" justify="center">
+                  <Column
+                    maxWidth={elements.grid.firstColWidth}
+                    width="max-content"
+                    height="inherit"
+                    justify="center"
+                    padding={5}
+                  >
                     {row.payload}
                   </Column>
                 </FirstTH>
@@ -60,6 +65,7 @@ const GridQuestionLayout = ({
                       key={`question-${questionId}-row-cell-${rowIndex}-${columnIndex}`}
                     >
                       <Row
+                        width={elements.grid.colWidth}
                         align="center"
                         justify="center"
                         onClick={handleClick(

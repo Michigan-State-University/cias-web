@@ -79,6 +79,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   text-align: center;
   background-color: rgba(16,121,105,0.1);
   color: rgba(16,121,105,1);
+  opacity: 0.5;
 }
 
 .c2:focus {
@@ -182,6 +183,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   border-radius: 4px;
   background-color: rgba(16,121,105,0.1);
   color: rgba(16,121,105,1);
+  opacity: 0.5;
 }
 
 .c3:focus {
@@ -232,6 +234,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
     <input
       className="c2 c3"
       color="#107969"
+      disabled={true}
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
@@ -257,6 +260,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
         >
           <textarea
             className="c8"
+            disabled={true}
             height="auto"
             onBlur={[Function]}
             onChange={[Function]}

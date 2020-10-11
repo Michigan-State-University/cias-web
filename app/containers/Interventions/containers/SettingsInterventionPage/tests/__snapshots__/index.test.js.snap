@@ -21,7 +21,8 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
         Name
       </h3>
       <input
-        class="Input-sc-19txxuq-0 jtsCaR styled__Input-sc-1q3ma8o-0 bHmaey"
+        class="Input-sc-19txxuq-0 cHqHvK styled__Input-sc-1q3ma8o-0 bHmaey"
+        disabled=""
         placeholder="e-Intervention Name"
         type="text"
         value="e-Intervention Name"
@@ -37,21 +38,23 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
       class="Row-x1o3ru-0 liVEuR"
     >
       <p
-        class="Text-sc-2lza2m-0 dmhzxO"
+        class="Text-sc-2lza2m-0 heZDhG"
         font-weight="bold"
       >
         Narrator Active
       </p>
       <label
         class="styled__SwitchWrapper-sc-1eitgbj-0 dEOiVq"
+        disabled=""
       >
         <input
           checked=""
           class="styled__SwitchInput-sc-1eitgbj-1 dzitpY"
+          disabled=""
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 ebxSLO"
+          class="styled__Slider-sc-1eitgbj-2 nqXKb"
         />
       </label>
     </div>
@@ -59,20 +62,22 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
       class="Row-x1o3ru-0 liVEuR"
     >
       <p
-        class="Text-sc-2lza2m-0 fDTusK"
+        class="Text-sc-2lza2m-0 kBnhnG"
       >
         Voice
       </p>
       <label
         class="styled__SwitchWrapper-sc-1eitgbj-0 dEOiVq"
+        disabled=""
       >
         <input
           checked=""
           class="styled__SwitchInput-sc-1eitgbj-1 dzitpY"
+          disabled=""
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 ebxSLO"
+          class="styled__Slider-sc-1eitgbj-2 nqXKb"
         />
       </label>
     </div>
@@ -80,20 +85,22 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
       class="Row-x1o3ru-0 fRmYGC"
     >
       <p
-        class="Text-sc-2lza2m-0 fDTusK"
+        class="Text-sc-2lza2m-0 kBnhnG"
       >
         Display Character
       </p>
       <label
         class="styled__SwitchWrapper-sc-1eitgbj-0 dEOiVq"
+        disabled=""
       >
         <input
           checked=""
           class="styled__SwitchInput-sc-1eitgbj-1 dzitpY"
+          disabled=""
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 ebxSLO"
+          class="styled__Slider-sc-1eitgbj-2 nqXKb"
         />
       </label>
     </div>

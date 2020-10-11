@@ -94,6 +94,7 @@ export function RegisterPage({
   useInjectSaga({ key: 'allRegistrationsSaga', saga: allRegistrationsSaga });
   const { email, invitation_token: invitationToken } = queryString.parse(
     location.search,
+    { decode: false },
   );
   const isInvite = Boolean(invitationToken) && Boolean(email);
 
@@ -200,7 +201,7 @@ export function RegisterPage({
               );
             }}
           </Formik>
-          {error && <ErrorAlert errorText={error} />}
+          {error && <ErrorAlert errorText={error} mt={20} />}
         </Column>
       </Fill>
     </Fragment>

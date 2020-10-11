@@ -20,7 +20,9 @@ import {
   makeSelectSelectedQuestion,
   editQuestionSaga,
 } from 'global/reducers/questions';
+import { makeSelectProblemStatus } from 'global/reducers/problem';
 
+import { canEdit } from 'models/Status/statusPermissions';
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
 import QuestionNarrator from '../QuestionNarrator';
@@ -43,25 +45,41 @@ const QuestionDetails = props => (
   </Box>
 );
 
-const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
+const RenderQuestionDetails = ({
+  selectedQuestion,
+  isNarratorTab,
+  problemStatus,
+}) => {
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
   const animationBoundaries = useRef(null);
+
+  const editingPossible = canEdit(problemStatus);
+  const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
   if (selectedQuestion != null) {
     const {
       id,
+      title: questionTitle,
       subtitle: questionSubtitle,
       image_url: imageUrl,
       video_url: videoUrl,
-      settings: { video, image, subtitle, proceed_button: proceedButton } = {},
+      settings: {
+        video,
+        image,
+        title,
+        subtitle,
+        proceed_button: proceedButton,
+      } = {},
       narrator: { settings } = {},
     } = selectedQuestion || {};
 
     return (
       <AnswerOuterContainer>
         <Column width="100%" display="flex" align="center">
-          <QuestionTitle />
-          <AnswerInterventionContent ref={animationBoundaries}>
+          <AnswerInterventionContent
+            ref={animationBoundaries}
+            id="quill_boundaries"
+          >
             <QuestionNarrator
               questionId={id}
               animationBoundaries={animationBoundaries}
@@ -70,10 +88,15 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
             <Row justify="center" width="100%">
               <AppContainer $width="100%">
                 <Row width="100%" mt={5} height={30} />
-                {!isNarratorTab && (
+                {!isNarratorTabOrEditNotPossible && (
                   <>
+                    {title && (
+                      <Row width="100%">
+                        <QuestionTitle />
+                      </Row>
+                    )}
                     {subtitle && (
-                      <Row>
+                      <Row mt={10}>
                         <QuestionSubtitle />
                       </Row>
                     )}
@@ -89,10 +112,17 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
                     )}
                   </>
                 )}
-                {isNarratorTab && (
+                {isNarratorTabOrEditNotPossible && (
                   <>
+                    {title && questionTitle && (
+                      <QuestionPreview
+                        padding={26}
+                        dangerouslySetInnerHTML={{ __html: questionTitle }}
+                      />
+                    )}
                     {subtitle && questionSubtitle && (
                       <QuestionPreview
+                        mt={10}
                         padding={26}
                         dangerouslySetInnerHTML={{ __html: questionSubtitle }}
                       />
@@ -134,11 +164,13 @@ const RenderQuestionDetails = ({ selectedQuestion, isNarratorTab }) => {
 RenderQuestionDetails.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
   isNarratorTab: PropTypes.bool,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
   isNarratorTab: makeSelectIsNarratorTab(),
+  problemStatus: makeSelectProblemStatus(),
 });
 
 const withConnect = connect(mapStateToProps);

@@ -10,11 +10,11 @@ import arrowheadDown from 'assets/svg/arrowhead-down.svg';
 
 import { DropdownContainer } from './styled';
 
-const Dropdown = ({ children, isOpened, onClick }) => {
+const Dropdown = ({ children, isOpened, onClick, disabled }) => {
   const arrow = isOpened ? arrowheadUp : arrowheadDown;
 
   return (
-    <DropdownContainer onClick={onClick}>
+    <DropdownContainer disabled={disabled} onClick={onClick}>
       <Row align="center" justify="between" height="100%">
         <Box>{children}</Box>
         <Img src={arrow} />
@@ -27,6 +27,7 @@ Dropdown.propTypes = {
   children: PropTypes.node,
   isOpened: PropTypes.bool,
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default Dropdown;

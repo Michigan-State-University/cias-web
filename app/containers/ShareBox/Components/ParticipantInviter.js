@@ -22,6 +22,7 @@ const ParticipantInviter = ({
   intl: { formatMessage },
   sendInvite,
   loading,
+  disabled,
 }) => {
   const [emails, setEmails] = useState([]);
 
@@ -54,7 +55,7 @@ const ParticipantInviter = ({
         />
         <Box width={140}>
           <Button
-            disabled={isEmpty(emails)}
+            disabled={disabled || isEmpty(emails)}
             width={140}
             ml={12}
             hoverable
@@ -81,6 +82,7 @@ ParticipantInviter.propTypes = {
   intl: intlShape,
   sendInvite: PropTypes.func,
   loading: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 export default injectIntl(ParticipantInviter);

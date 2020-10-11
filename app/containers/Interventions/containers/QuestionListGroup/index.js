@@ -19,6 +19,7 @@ const QuestionListGroup = ({
   selectedSlides,
   selectedQuestion,
   questions,
+  editingPossible,
 }) => {
   const { title, id } = questionGroup;
   return (
@@ -53,6 +54,7 @@ const QuestionListGroup = ({
             questions={questions}
             question={question}
             interventionId={interventionId}
+            disabled={editingPossible}
           />
         </Row>
       ))}
@@ -65,6 +67,7 @@ QuestionListGroup.propTypes = {
   toggleGroup: PropTypes.func,
   checkSelectedGroup: PropTypes.func,
   changeGroupName: PropTypes.func,
+  editingPossible: PropTypes.bool,
   manage: PropTypes.bool,
   interventionId: PropTypes.string,
   selectSlide: PropTypes.func,

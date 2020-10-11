@@ -1,7 +1,6 @@
 import axios from 'axios';
 import get from 'lodash/get';
 
-import { defaultMapper } from 'utils/mapResponseObjects';
 import { put, takeLatest } from 'redux-saga/effects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -15,11 +14,10 @@ function* fetchProblems() {
 
   try {
     const {
-      data: { data },
+      data: { problems },
     } = yield axios.get(requestURL);
-    const mappedData = data.map(defaultMapper);
 
-    yield put(fetchProblemsSuccess(mappedData));
+    yield put(fetchProblemsSuccess(problems));
   } catch (error) {
     yield put(
       fetchProblemsError(

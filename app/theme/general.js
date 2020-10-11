@@ -21,7 +21,7 @@ const elements = {
   navbarHeight: 70,
   draggableContainerSize: 702,
   characterInitialYPosition: 600,
-  grid: { colWidth: 120, leftPadding: 40 },
+  grid: { firstColWidth: 300, colWidth: 80, leftPadding: 40 },
 };
 
 const visualAnalogScaleLabelStyles = {

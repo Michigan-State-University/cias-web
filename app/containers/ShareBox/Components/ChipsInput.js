@@ -25,6 +25,7 @@ const ChipsInput = ({
   setValue,
   showError,
   placeholder,
+  disabled,
   intl: { formatMessage },
 }) => {
   const hiddenInput = useRef(null);
@@ -88,7 +89,7 @@ const ChipsInput = ({
     <StyledChipsInput
       isInputFilled={isInputFilled}
       isFocused={isFocused}
-      onClick={handleFocus}
+      onClick={() => !disabled && handleFocus()}
       ref={chipsInput}
       mt={-5}
     >
@@ -115,6 +116,7 @@ const ChipsInput = ({
           </Box>
         ))}
         <HiddenInput
+          disabled={disabled}
           ref={hiddenInput}
           onFocus={setFocus}
           type="text"
@@ -135,6 +137,7 @@ ChipsInput.propTypes = {
   intl: intlShape,
   showError: PropTypes.func,
   placeholder: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {

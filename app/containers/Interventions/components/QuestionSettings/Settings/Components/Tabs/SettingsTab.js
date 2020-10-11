@@ -50,16 +50,17 @@ const SettingsTab = ({
   onQuestionToggle,
   changeTypeQuestion,
   id,
+  disabled,
 }) => {
   const orderedSettings = orderSettings(settings);
   const last = lastKey(orderedSettings);
 
-  const renderQuestionSpecificSettings = () => {
+  const renderQuestionSpecificSettings = editingDisabled => {
     let component;
 
     switch (type) {
       case feedbackQuestion.id:
-        component = <SpectrumSettings />;
+        component = <SpectrumSettings disabled={editingDisabled} />;
         break;
       default:
         component = null;
@@ -130,12 +131,13 @@ const SettingsTab = ({
         >
           <H3>{formatMessage(messages[`${index}`])}</H3>
           <Switch
+            disabled={disabled}
             checked={val}
             onToggle={value => onQuestionToggle(`${index}`, value)}
           />
         </Row>
       ))}
-      {renderQuestionSpecificSettings()}
+      {renderQuestionSpecificSettings(disabled)}
     </Fragment>
   );
 };
@@ -147,6 +149,7 @@ SettingsTab.propTypes = {
   type: PropTypes.string,
   id: PropTypes.string,
   changeTypeQuestion: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {

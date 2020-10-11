@@ -51,6 +51,12 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
 } from 'global/reducers/questions';
+import {
+  problemReducer,
+  fetchProblemSaga,
+  makeSelectProblemStatus,
+} from 'global/reducers/problem';
+import { canEdit } from 'models/Status/statusPermissions';
 
 import {
   copyQuestionsRequest,
@@ -84,6 +90,7 @@ function EditInterventionPage({
   createQuestion,
   match: { params },
   // reorderQuestions,
+  problemStatus,
   interventionLoaders: { getIntervention: getInterventionLoader },
   copyQuestions,
   deleteQuestions,
@@ -132,8 +139,12 @@ function EditInterventionPage({
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectReducer({ key: 'localState', reducer: localStateReducer });
   useInjectReducer({ key: 'questionGroups', reducer: questionGroupsReducer });
+  useInjectReducer({ key: 'problem', reducer: problemReducer });
 
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
+  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
+
+  const editingPossible = canEdit(problemStatus);
 
   const hoverListProps = {
     onMouseEnter: () => setShowList(true),
@@ -189,6 +200,7 @@ function EditInterventionPage({
   if (questions.length === 0)
     return (
       <EmptyInterventionPage
+        disabled={!editingPossible}
         onCreateQuestion={onCreateQuestion}
         formatMessage={formatMessage}
       />
@@ -262,6 +274,7 @@ function EditInterventionPage({
                 .filter(({ questions: hasQuestions }) => hasQuestions)
                 .map(questionGroup => (
                   <QuestionListGroup
+                    disabled={!editingPossible}
                     changeGroupName={changeGroupName}
                     checkSelectedGroup={checkSelectedGroup}
                     interventionId={params.interventionId}
@@ -275,7 +288,9 @@ function EditInterventionPage({
                   />
                 ))}
               {/* </Reorder> */}
-              <QuestionTypeChooser onClick={onCreateQuestion} />
+              {editingPossible && (
+                <QuestionTypeChooser onClick={onCreateQuestion} />
+              )}
               <Row />
             </Box>
           </Box>
@@ -283,7 +298,7 @@ function EditInterventionPage({
             <Icon src={menu} alt="questions-list" />
           </ShowListButton>
         </QuestionsRow>
-        <Column id="quill_boundaries" align="between">
+        <Column align="between">
           <Row overflow="hidden" filled>
             <QuestionDetails />
             <QuestionSettings />
@@ -312,6 +327,7 @@ EditInterventionPage.propTypes = {
   shareQuestionsToResearchers: PropTypes.func,
   changeGroupName: PropTypes.func,
   getQuestionGroups: PropTypes.func,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -319,6 +335,7 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestionId(),
   interventionLoaders: makeSelectInterventionLoaders(),
   groups: makeSelectQuestionGroups(),
+  problemStatus: makeSelectProblemStatus(),
 });
 
 const mapDispatchToProps = {

@@ -46,6 +46,7 @@ function InterventionBranching({
   interventionIndex,
   changeInterventionIndex,
   fetchQuestions,
+  disabled,
 }) {
   const displayPatternTargetText = target => {
     if (target.id === '') return formatMessage(messages.selectSession);
@@ -53,7 +54,9 @@ function InterventionBranching({
       problem.interventions,
       value => value.id === target.id,
     );
-    return intervention.name;
+    return intervention
+      ? intervention.name
+      : formatMessage(messages.selectSession);
   };
 
   const handleFormulaStatus = value => onChangeFormulaStatus(value, id);
@@ -78,7 +81,12 @@ function InterventionBranching({
         <Column xs={4}>
           <Row justify="end" align="center" width="100%">
             <Text whiteSpace="pre">{formatMessage(messages.useFormula)}</Text>
-            <Switch ml={10} checked={status} onToggle={handleFormulaStatus} />
+            <Switch
+              disabled={disabled}
+              ml={10}
+              checked={status}
+              onToggle={handleFormulaStatus}
+            />
           </Row>
         </Column>
       </Row>
@@ -86,6 +94,7 @@ function InterventionBranching({
         <Row mx={62} py={20}>
           <Column>
             <BranchingLayout
+              disabled={disabled}
               onVariableChooserOpen={() => {
                 if (position !== interventionIndex + 1) {
                   changeInterventionIndex(position - 1);
@@ -124,6 +133,7 @@ InterventionBranching.propTypes = {
   interventionIndex: PropTypes.number,
   changeInterventionIndex: PropTypes.func,
   fetchQuestions: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
