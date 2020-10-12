@@ -11,17 +11,17 @@ import { GET_QUESTION_GROUPS_REQUEST } from '../constants';
 import { getQuestionsGroupsError, getQuestionGroupsSuccess } from '../actions';
 
 function* getQuestionsGroups({ payload: { interventionId } }) {
-  const groupURL = `/v1/interventions/${interventionId}/questions_groups`;
+  const groupURL = `/v1/interventions/${interventionId}/question_groups`;
 
   try {
     const {
-      data: { questions_groups: groups },
+      data: { question_groups: groups },
     } = yield axios.get(groupURL);
     const questions = flatten(
       groups.map(({ questions: groupQuestions, id }) =>
         groupQuestions.map(question => ({
           ...question,
-          questions_group_id: id,
+          question_group_id: id,
         })),
       ),
     );
@@ -31,14 +31,7 @@ function* getQuestionsGroups({ payload: { interventionId } }) {
       const position = sortedQuestions[0].narrator.blocks[0].endPosition;
       yield put(setAnimationStopPosition(position.x, position.y));
     }
-    yield put(
-      getQuestionGroupsSuccess(
-        groups.map(group => ({
-          ...group,
-          questions: group.questions.length !== 0,
-        })),
-      ),
-    );
+    yield put(getQuestionGroupsSuccess(groups));
   } catch (error) {
     yield put(getQuestionsGroupsError(error));
   }

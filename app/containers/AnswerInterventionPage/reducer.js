@@ -5,7 +5,6 @@
  */
 import produce from 'immer';
 import set from 'lodash/set';
-
 import { findQuestionIndex } from 'models/Intervention/utils';
 import { DESKTOP_MODE } from 'utils/previewMode';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -35,7 +34,7 @@ export const initialState = {
   questionLoading: false,
   questionError: '',
   interventionQuestions: [],
-  questionIndex: 0,
+  questionIndex: '',
   answersLoading: false,
   answersError: '',
   answers: {},
@@ -104,14 +103,16 @@ const answerInterventionPageReducer = (
         draft.feedbackScreenSettings = getEmptyFeedbackScreenSettings();
 
         if (!isNullOrUndefined(payload.question)) {
-          index = findQuestionIndex(
+          index = payload.question.id;
+
+          if (index === -1) index = draft.questionIndex + 1;
+
+          const arrayIndex = findQuestionIndex(
             draft.interventionQuestions,
             payload.question.id,
           );
 
-          if (index === -1) index = draft.questionIndex + 1;
-
-          set(draft, ['interventionQuestions', index], payload.question);
+          set(draft, ['interventionQuestions', arrayIndex], payload.question);
         } else if (!isNullOrUndefined(payload.index)) ({ index } = payload);
         else index = draft.questionIndex + 1;
 

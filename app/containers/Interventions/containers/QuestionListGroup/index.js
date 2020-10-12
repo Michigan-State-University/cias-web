@@ -22,6 +22,7 @@ const QuestionListGroup = ({
   editingPossible,
 }) => {
   const { title, id } = questionGroup;
+  if (questions.length === 0) return <></>;
   return (
     <div>
       <Row>

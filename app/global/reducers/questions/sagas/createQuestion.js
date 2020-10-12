@@ -31,7 +31,7 @@ function* createQuestion({ payload: { question, id } }) {
   try {
     const response = yield axios.post(requestURL, {
       ...question,
-      ...{ questions_group_id: defaultGroupId },
+      ...{ question_group_id: defaultGroupId },
     });
 
     const createdQuestion = mapQuestionToStateObject(response.data.data);
@@ -60,7 +60,6 @@ function* createQuestion({ payload: { question, id } }) {
         }),
       );
   } catch (error) {
-    console.log(error);
     yield put(createQuestionError(error));
   }
 }

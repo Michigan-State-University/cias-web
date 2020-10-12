@@ -154,7 +154,7 @@ export function AnswerInterventionPage({
     fetchQuestionsAction(interventionId);
 
     // cannot skip start screen => user have to click button to enable auto-play
-    if (index) setQuestionIndexAction(parseInt(index, 10));
+    if (index) setQuestionIndexAction(index);
   }, []);
 
   if (questionError)
@@ -171,8 +171,9 @@ export function AnswerInterventionPage({
     );
 
   const assignCurrentQuestion = () => {
-    const question = interventionQuestions[questionIndex];
-
+    const question = interventionQuestions.find(
+      ({ id }) => id === questionIndex,
+    );
     if (!question) return null;
 
     return question;
@@ -192,7 +193,7 @@ export function AnswerInterventionPage({
       get(currentQuestion, 'type', ''),
     );
 
-  const setQuestion = question => setQuestionIndexAction(question);
+  const setQuestion = question => setQuestionIndexAction(question.id);
 
   const renderQuestion = () => {
     const {

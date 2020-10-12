@@ -34,13 +34,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case GROUP_QUESTIONS_SUCCESS: {
-        const stateGroups = state.groups;
-        const stateGroupsLength = stateGroups.length;
-        draft.groups = [
-          ...draft.groups.slice(0, stateGroupsLength - 1),
-          payload.group,
-          ...draft.groups.slice(-1),
-        ];
+        draft.groups = [...draft.groups, payload.group];
         break;
       }
     }

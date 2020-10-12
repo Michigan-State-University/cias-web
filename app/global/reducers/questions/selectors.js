@@ -64,6 +64,6 @@ export const makeSelectGroupQuestions = id =>
     selectQuestions,
     substate =>
       substate.questions.filter(
-        ({ questions_group_id: questionGroupId }) => questionGroupId === id,
+        ({ question_group_id: questionGroupId }) => questionGroupId === id,
       ),
   );

@@ -12,7 +12,7 @@ import {
 import { changeGroupNameError, changeGroupNameSuccess } from '../actions';
 
 function* changeGroupName({ payload: { title, interventionId, groupId } }) {
-  const requestURL = `/v1/interventions/${interventionId}/questions_groups/${groupId}`;
+  const requestURL = `/v1/interventions/${interventionId}/question_groups/${groupId}`;
   try {
     yield axios.put(requestURL, { title });
     yield put(changeGroupNameSuccess(groupId, title));

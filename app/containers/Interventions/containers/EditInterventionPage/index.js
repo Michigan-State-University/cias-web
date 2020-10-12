@@ -270,23 +270,21 @@ function EditInterventionPage({
                 </Row>
               )}
               {/* <Reorder reorderId="question-list" onReorder={handleReorder}> */}
-              {groups
-                .filter(({ questions: hasQuestions }) => hasQuestions)
-                .map(questionGroup => (
-                  <QuestionListGroup
-                    disabled={!editingPossible}
-                    changeGroupName={changeGroupName}
-                    checkSelectedGroup={checkSelectedGroup}
-                    interventionId={params.interventionId}
-                    manage={manage}
-                    questionGroup={questionGroup}
-                    selectSlide={selectSlide}
-                    key={questionGroup.id}
-                    selectedQuestion={selectedQuestion}
-                    selectedSlides={selectedSlides}
-                    toggleGroup={toggleGroup}
-                  />
-                ))}
+              {groups.map(questionGroup => (
+                <QuestionListGroup
+                  disabled={!editingPossible}
+                  changeGroupName={changeGroupName}
+                  checkSelectedGroup={checkSelectedGroup}
+                  interventionId={params.interventionId}
+                  manage={manage}
+                  questionGroup={questionGroup}
+                  selectSlide={selectSlide}
+                  key={questionGroup.id}
+                  selectedQuestion={selectedQuestion}
+                  selectedSlides={selectedSlides}
+                  toggleGroup={toggleGroup}
+                />
+              ))}
               {/* </Reorder> */}
               {editingPossible && (
                 <QuestionTypeChooser onClick={onCreateQuestion} />

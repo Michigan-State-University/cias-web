@@ -242,9 +242,9 @@ export const questionsReducer = (state = initialState, action) =>
       case GROUP_QUESTIONS_SUCCESS: {
         draft.questions = draft.questions.map(question => ({
           ...question,
-          questions_group_id: action.payload.questionIds.includes(question.id)
+          question_group_id: action.payload.questionIds.includes(question.id)
             ? action.payload.group.id
-            : question.questions_group_id,
+            : question.question_group_id,
         }));
       }
     }

@@ -1,4 +1,4 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 import { error as showError } from 'react-toastify-redux';
 
@@ -7,20 +7,22 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import messages from '../messages';
 import { GROUP_QUESTIONS_REQUEST, GROUP_QUESTIONS_ERROR } from '../constants';
 import { groupQuestionsError, groupQuestionsSuccess } from '../actions';
+import { makeSelectVisibleGroupsSize } from '../selectors';
 
 function* groupQuestions({ payload: { questionIds, interventionId } }) {
-  const requestURL = `v1/interventions/${interventionId}/questions_groups`;
+  const requestURL = `v1/interventions/${interventionId}/question_groups`;
+  const groupsLength = yield select(makeSelectVisibleGroupsSize());
 
   try {
     const { data } = yield axios.post(requestURL, {
-      questions_group: {
-        title: 'Group 1',
+      question_group: {
+        title: `Group ${groupsLength}`,
         questions: questionIds,
+        position: groupsLength,
       },
     });
     yield put(groupQuestionsSuccess(data, questionIds));
   } catch (error) {
-    console.log(error);
     yield put(
       showError(formatMessage(messages.groupError), {
         id: GROUP_QUESTIONS_ERROR,
