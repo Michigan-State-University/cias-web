@@ -132,16 +132,8 @@ const SingleQuestion = ({
                 </Row>
               </Row>
               <Row align="center" display="flex" hidden={isNarratorTab}>
-                <Text
-                  ml={`${leftMargin}px`}
-                  mr={8}
-                  fontWeight="bold"
-                  color={colors.azure}
-                >
-                  {formatMessage(globalMessages.variables.value)}
-                </Text>
-
                 <BadgeInput
+                  ml={`${leftMargin}px`}
                   disabled={!editingPossible}
                   px={0}
                   py={12}
@@ -150,9 +142,9 @@ const SingleQuestion = ({
                   keyboard="tel"
                   placeholder={
                     !isNarratorTab
-                      ? formatMessage(globalMessages.variables.emptyValue, {
-                          index: index + 1,
-                        })
+                      ? formatMessage(
+                          globalMessages.variables.variableScorePlaceholder,
+                        )
                       : ''
                   }
                   value={value.value}
