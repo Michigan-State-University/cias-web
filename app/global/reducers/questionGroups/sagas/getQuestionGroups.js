@@ -8,7 +8,7 @@ import { getQuestionsSuccess } from 'global/reducers/questions/actions';
 import { setAnimationStopPosition } from 'global/reducers/localState';
 
 import { GET_QUESTION_GROUPS_REQUEST } from '../constants';
-import { getQuestionsGroupsError, getQuestionGroupsSuccess } from '../actions';
+import { getQuestionGroupsError, getQuestionGroupsSuccess } from '../actions';
 
 function* getQuestionsGroups({ payload: { interventionId } }) {
   const groupURL = `/v1/interventions/${interventionId}/question_groups`;
@@ -33,7 +33,7 @@ function* getQuestionsGroups({ payload: { interventionId } }) {
     }
     yield put(getQuestionGroupsSuccess(groups));
   } catch (error) {
-    yield put(getQuestionsGroupsError(error));
+    yield put(getQuestionGroupsError(error));
   }
 }
 
