@@ -269,7 +269,6 @@ function EditInterventionPage({
                   <ActionIcon mr="0" onClick={() => setManage(false)} />
                 </Row>
               )}
-              {/* <Reorder reorderId="question-list" onReorder={handleReorder}> */}
               {groups.map(questionGroup => (
                 <QuestionListGroup
                   disabled={!editingPossible}
@@ -285,7 +284,6 @@ function EditInterventionPage({
                   toggleGroup={toggleGroup}
                 />
               ))}
-              {/* </Reorder> */}
               {editingPossible && (
                 <QuestionTypeChooser onClick={onCreateQuestion} />
               )}

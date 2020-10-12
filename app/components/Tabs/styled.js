@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { themeColors } from 'theme';
+import { colors, themeColors } from 'theme';
 import { flex, layout } from '../BaseComponentStyles';
 
 export const TabsContainer = styled.div`
@@ -13,8 +13,10 @@ export const ContentContainer = styled.div`
 `;
 
 export const LabelContainer = styled.div`
+  position: relative;
+  bottom: -3px;
   margin: 0 10px;
-  padding-bottom: 10px;
+  padding-bottom: 7px;
   border-bottom-width: 2px;
   border-bottom-color: ${themeColors.secondary};
   border-bottom-style: ${({ isActive }) => (isActive ? 'solid' : 'none')};
@@ -25,7 +27,8 @@ export const LabelContainer = styled.div`
 
 export const LinkContainer = styled(LabelContainer)`
   a {
-    color: ${themeColors.text};
+    color: ${({ isActive }) =>
+      isActive ? themeColors.text : colors.grey} !important;
     text-decoration: none;
   }
   a:visited,

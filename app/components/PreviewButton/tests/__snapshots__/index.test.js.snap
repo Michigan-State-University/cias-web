@@ -22,6 +22,8 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
 }
 
 .c2 {
+  font-size: 13px;
+  font-weight: bold;
   pointer-events: auto;
 }
 
