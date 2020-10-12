@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ScrollFog /> should match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+<div
+  className="c0"
+>
+  <div
+    className="c1"
+  />
+</div>
+`;

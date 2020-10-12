@@ -6,6 +6,7 @@ import Box from 'components/Box';
 import HoverableBox from 'components/Box/HoverableBox';
 import Row from 'components/Row';
 import Text from 'components/Text';
+import { ScrollFogBox } from 'components/Box/ScrollFog';
 import decideIfPassValue from 'utils/decideIfPassValue';
 import globalMessages from 'global/i18n/globalMessages';
 import useOutsideClick from 'utils/useOutsideClick';
@@ -16,7 +17,7 @@ import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
 import { useChildSizeCalculator } from 'utils/useChildSizeCalculator';
 import DefaultButtonComponent from './DefaultButtonComponent';
 import messages from './messages';
-import { DotCircle, FadedBox } from './styled';
+import { DotCircle } from './styled';
 
 const QuestionTypeChooser = ({
   intl: { formatMessage },
@@ -80,12 +81,13 @@ const QuestionTypeChooser = ({
                 {formatMessage(messages.header)}
               </Text>
             </Box>
-            <FadedBox
+            <ScrollFogBox
               padding={8}
               width="100%"
               overflow="scroll"
               height={height}
               ref={containerRef}
+              horizontalFogVisible={false}
             >
               {QuestionTypes.map((questionType, i) => (
                 <HoverableBox
@@ -108,7 +110,7 @@ const QuestionTypeChooser = ({
                   </Row>
                 </HoverableBox>
               ))}
-            </FadedBox>
+            </ScrollFogBox>
           </Box>
         )}
       </Box>
