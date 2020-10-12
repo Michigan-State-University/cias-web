@@ -28,7 +28,7 @@ const TableRow = ({
     });
   };
 
-  const handleRedirect = () => history.push(`/profile/${id}`);
+  const handleRedirect = () => history.push(`/users/${id}`);
   const text = active
     ? formatMessage(messages.deactivateAccount)
     : formatMessage(messages.activateAccount);

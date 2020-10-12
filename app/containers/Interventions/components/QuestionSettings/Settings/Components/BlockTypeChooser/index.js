@@ -28,6 +28,7 @@ const BlockTypeChooser = ({
   disableReadQuestionBlockType,
   disableFeedbackBlock,
   questionType,
+  disabled,
 }) => {
   const [typeChooserOpen, setTypeChooserOpen] = useState(false);
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
@@ -64,7 +65,12 @@ const BlockTypeChooser = ({
 
   return (
     <Box position="relative" ref={chooser}>
-      <DashedBox active={typeChooserOpen} mt={14} onClick={toggleTypeChooser}>
+      <DashedBox
+        disabled={disabled}
+        active={typeChooserOpen}
+        mt={14}
+        onClick={() => !disabled && toggleTypeChooser()}
+      >
         {formatMessage(messages.newStep)}
       </DashedBox>
       {typeChooserOpen && (
@@ -122,6 +128,7 @@ BlockTypeChooser.propTypes = {
   disableReadQuestionBlockType: PropTypes.bool,
   disableFeedbackBlock: PropTypes.bool,
   questionType: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 export default injectIntl(BlockTypeChooser);

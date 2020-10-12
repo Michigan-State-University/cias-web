@@ -43,6 +43,7 @@ const BranchingTab = ({
   questions,
   problem,
   fetchProblem,
+  disabled,
   match: { params },
 }) => {
   const { problemId } = params;
@@ -70,7 +71,7 @@ const BranchingTab = ({
         return formatMessage(messages.nextScreen);
 
       if (targetIndex !== -1)
-        return htmlToPlainText(questions[targetIndex].title);
+        return htmlToPlainText(questions[targetIndex].subtitle);
     } else if (targetIndex !== -1) return interventionList[targetIndex].name;
 
     return formatMessage(messages.selectQuestion);
@@ -78,6 +79,7 @@ const BranchingTab = ({
 
   return (
     <BranchingLayout
+      disabled={disabled}
       formula={formula}
       id={id}
       displayPatternTargetText={displayPatternTargetText}
@@ -103,6 +105,7 @@ BranchingTab.propTypes = {
   }),
   fetchProblem: PropTypes.func,
   match: PropTypes.object,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

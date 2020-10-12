@@ -20,12 +20,19 @@ export const DashedBox = styled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   font-weight: bold;
   border-radius: 4px;
   transition: 0.2s;
-  ${({ active }) => active && hoverStyles};
+  cursor: pointer;
+  ${({ active, disabled }) => active && !disabled && hoverStyles};
   &:hover {
-    ${hoverStyles}
+    ${({ disabled }) =>
+      disabled
+        ? {
+            backgroundColor: colors.grey,
+            color: colors.white,
+            cursor: 'not-allowed',
+          }
+        : hoverStyles};
   }
 `;

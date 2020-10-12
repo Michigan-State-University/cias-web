@@ -47,7 +47,6 @@ import globalMessages from 'global/i18n/globalMessages';
 import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
 import archive from 'assets/svg/archive.svg';
-import { closed } from 'models/Status/StatusTypes';
 import { copyProblemRequest } from 'global/reducers/problems';
 
 import {
@@ -60,6 +59,11 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import SettingsPanel from 'containers/SettingsPanel';
 import H3 from 'components/H3';
+import {
+  canArchive,
+  canEdit,
+  canShareWithParticipants,
+} from 'models/Status/statusPermissions';
 import { StatusLabel, InterventionOptions, DraggedTest } from './styled';
 import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
@@ -100,6 +104,10 @@ export function ProblemDetailsPage({
 
   const { interventions, name, id, status } = problem || {};
 
+  const editingPossible = canEdit(status);
+  const sharingPossible = canShareWithParticipants(status);
+  const archivingPossible = canArchive(status);
+
   const [modalVisible, setModalVisible] = useState(false);
   const [
     participantShareModalVisible,
@@ -135,8 +143,8 @@ export function ProblemDetailsPage({
       label: formatMessage(messages.archive),
       icon: archive,
       action: handleArchiveProblem,
-
       color: colors.bluewood,
+      disabled: !archivingPossible,
     },
   ];
 
@@ -151,10 +159,6 @@ export function ProblemDetailsPage({
     )
       fetchQuestions(interventions[interventionIndex].id);
   }, [problem]);
-
-  const availableOptions = options.filter(
-    elem => elem.id !== 'archive' || status === closed,
-  );
 
   const handleCopyIntervention = interventionId => {
     copyIntervention({ interventionId });
@@ -197,6 +201,7 @@ export function ProblemDetailsPage({
         reorderId="problem-list"
         onReorder={handleReorder}
         holdTime={125}
+        disabled={!editingPossible}
       >
         {interventions &&
           orderBy(interventions, 'position').map((intervention, index) => {
@@ -214,6 +219,8 @@ export function ProblemDetailsPage({
             return (
               <Row key={intervention.id}>
                 <InterventionListItem
+                  disabled={!editingPossible}
+                  sharingPossible={sharingPossible}
                   intervention={intervention}
                   index={index}
                   isSelected={index === interventionIndex}
@@ -279,6 +286,7 @@ export function ProblemDetailsPage({
             </StatusLabel>
           </Box>
           <StyledInput
+            disabled={!editingPossible}
             ml={-12}
             px={12}
             py={6}
@@ -297,7 +305,7 @@ export function ProblemDetailsPage({
             handleSendCsv={handleSendCsv}
           />
           <InterventionOptions>
-            <Dropdown options={availableOptions} clickable />
+            <Dropdown options={options} clickable />
           </InterventionOptions>
         </Row>
       </Row>
@@ -309,9 +317,11 @@ export function ProblemDetailsPage({
               <Spinner color={themeColors.secondary} />
             </Row>
           )}
-          <Row my={18} align="center">
-            <InterventionCreateButton handleClick={createInterventionCall} />
-          </Row>
+          {editingPossible && (
+            <Row my={18} align="center">
+              <InterventionCreateButton handleClick={createInterventionCall} />
+            </Row>
+          )}
         </Column>
         {createInterventionError && (
           <ErrorAlert errorText={createInterventionError} />

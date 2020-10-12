@@ -22,7 +22,7 @@ export const StyledComment = styled(Comment)`
 export const StyledRow = styled(Row)`
   &:hover {
     ${StyledComment} {
-      font-weight: bold;
+      ${({ disabled }) => !disabled && 'font-weight: bold;'}
     }
   }
 `;

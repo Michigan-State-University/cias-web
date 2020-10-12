@@ -62,11 +62,11 @@ exports[`<ArrowDropdown /> Should render and match the snapshot when is closed 1
 
 .c1 {
   overflow: hidden;
-  cursor: pointer;
   height: 50px;
   padding: 5px 10px;
   border-radius: 5px;
   background-color: #E9F1FB;
+  cursor: pointer;
 }
 
 <div>
@@ -169,11 +169,11 @@ exports[`<ArrowDropdown /> Should render and match the snapshot when is opened 1
 
 .c1 {
   overflow: hidden;
-  cursor: pointer;
   height: 50px;
   padding: 5px 10px;
   border-radius: 5px;
   background-color: #E9F1FB;
+  cursor: pointer;
 }
 
 <div>
@@ -272,11 +272,11 @@ exports[`<ArrowDropdown /> Should render and match the snapshot with different s
 
 .c1 {
   overflow: hidden;
-  cursor: pointer;
   height: 50px;
   padding: 5px 10px;
   border-radius: 5px;
   background-color: #E9F1FB;
+  cursor: pointer;
 }
 
 <div>

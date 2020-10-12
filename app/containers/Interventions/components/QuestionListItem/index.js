@@ -57,6 +57,7 @@ const QuestionListItem = ({
   checked,
   selectSlide,
   manage,
+  disabled,
 }) => {
   const isSelected = selectedQuestionIndex === index;
   const { type, subtitle, id, body } = question;
@@ -156,7 +157,7 @@ const QuestionListItem = ({
             </Row>
           )}
         </Column>
-        {!manage && (
+        {!manage && !disabled && (
           <Column xs={1}>
             <Dropdown options={options} />
           </Column>
@@ -184,6 +185,7 @@ QuestionListItem.propTypes = {
   checked: PropTypes.bool,
   manage: PropTypes.bool,
   selectSlide: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

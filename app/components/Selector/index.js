@@ -21,6 +21,7 @@ const Selector = ({
   rightPosition,
   setOption,
   selectOptionPlaceholder,
+  disabled,
 }) => {
   const selector = useRef(null);
   useOutsideClick(selector, () => setIsActive(false), isActive);
@@ -35,7 +36,7 @@ const Selector = ({
   return (
     <Box position="relative" ref={selector}>
       <Row align="center">
-        <HeaderComponent onClick={toggleActive}>
+        <HeaderComponent disabled={disabled} onClick={toggleActive}>
           {selectedOption.label}
         </HeaderComponent>
         {tooltipContent && (
@@ -46,15 +47,17 @@ const Selector = ({
             text={tooltipContent}
           />
         )}
-        <Img
-          src={arrowDownSelect}
-          alt="arrow"
-          clickable
-          ml={8}
-          transform={transform}
-          transition={transition}
-          onClick={toggleActive}
-        />
+        {!disabled && (
+          <Img
+            src={arrowDownSelect}
+            alt="arrow"
+            clickable
+            ml={8}
+            transform={transform}
+            transition={transition}
+            onClick={toggleActive}
+          />
+        )}
       </Row>
       {isActive && (
         <Row
@@ -89,6 +92,7 @@ Selector.propTypes = {
   rightPosition: PropTypes.string,
   setOption: PropTypes.func,
   selectOptionPlaceholder: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 Selector.defaultProps = {

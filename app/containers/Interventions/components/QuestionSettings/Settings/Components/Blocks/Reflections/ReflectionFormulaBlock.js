@@ -52,6 +52,7 @@ const ReflectionFormulaBlock = ({
   switchToReflection,
   onFormulaUpdate,
   onAddCase,
+  disabled,
 }) => {
   const [variableChooserOpen, setVariableChooserOpen] = useState(false);
 
@@ -93,6 +94,7 @@ const ReflectionFormulaBlock = ({
           <Box mt={15}>
             <Select
               selectProps={{
+                isDisabled: disabled,
                 options: feedbackOptions,
                 value: selectedFeedbackOption,
                 onChange: ({ value }) => updateAction(blockIndex, value, id),
@@ -107,6 +109,7 @@ const ReflectionFormulaBlock = ({
           <Box mt={15}>
             <Select
               selectProps={{
+                isDisabled: disabled,
                 options: selectOptions,
                 value: selectedOption,
                 onChange: ({ value }) => updateAnimation(blockIndex, value, id),
@@ -118,6 +121,7 @@ const ReflectionFormulaBlock = ({
       <Row my={15} align="center" justify="between">
         {formatMessage(messages.reflectionToggle)}
         <Switch
+          disabled={disabled}
           checked
           mr={15}
           onToggle={() => switchToSpeech(blockIndex, id)}
@@ -126,6 +130,7 @@ const ReflectionFormulaBlock = ({
       <Row mb={15} align="center" justify="between">
         {formatMessage(messages.formulaToggle)}
         <Switch
+          disabled={disabled}
           checked
           mr={15}
           onToggle={() => switchToReflection(blockIndex, id)}
@@ -135,10 +140,13 @@ const ReflectionFormulaBlock = ({
       <Row mt={20} align="center" justify="between">
         <Text fontWeight="bold">{formatMessage(messages.formulaHeader)}</Text>
         <Box
-          onClick={() => setVariableChooserOpen(!variableChooserOpen)}
+          onClick={() =>
+            !disabled && setVariableChooserOpen(!variableChooserOpen)
+          }
           clickable
         >
           <Text
+            disabled={disabled}
             fontWeight="bold"
             color={themeColors.secondary}
             hoverDecoration="underline"
@@ -147,7 +155,7 @@ const ReflectionFormulaBlock = ({
           </Text>
         </Box>
       </Row>
-      <Box position="relative">
+      <Box position="relative" mt={10}>
         <VariableChooser
           visible={variableChooserOpen}
           setOpen={setVariableChooserOpen}
@@ -159,9 +167,10 @@ const ReflectionFormulaBlock = ({
       </Box>
       <Box bg={colors.linkWater} width="100%" mt={10} mb={40} px={8} py={8}>
         <StyledInput
+          disabled={disabled}
           type="multiline"
           rows="5"
-          width="auto"
+          width="100%"
           placeholder={formatMessage(messages.formulaPlaceholder)}
           value={block.payload}
           onBlur={value => onFormulaUpdate(value, id, blockIndex)}
@@ -169,6 +178,7 @@ const ReflectionFormulaBlock = ({
       </Box>
       {block.reflections.map((reflection, index) => (
         <ReflectionFormula
+          disabled={disabled}
           key={`${id}-reflection-${index}`}
           formatMessage={formatMessage}
           id={id}
@@ -178,7 +188,11 @@ const ReflectionFormulaBlock = ({
           block={block}
         />
       ))}
-      <DashedBox mt={20} onClick={() => onAddCase(id, blockIndex)}>
+      <DashedBox
+        disabled={disabled}
+        mt={20}
+        onClick={() => onAddCase(id, blockIndex)}
+      >
         {formatMessage(messages.newCase)}
       </DashedBox>
     </Column>
@@ -199,6 +213,7 @@ ReflectionFormulaBlock.propTypes = {
   currentQuestionType: PropTypes.string,
   onFormulaUpdate: PropTypes.func,
   onAddCase: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -9,10 +9,12 @@ import { Player, PlayerWrapper, ImageWrapper } from './styled';
 
 const CommonLayout = ({ currentQuestion }) => {
   const {
+    title,
     subtitle,
     video_url: videoUrl,
     image_url: imageUrl,
     settings: {
+      title: settingsTitle,
       subtitle: settingsSubtitle,
       video: settingsVideo,
       image: settingsImage,
@@ -20,6 +22,11 @@ const CommonLayout = ({ currentQuestion }) => {
   } = currentQuestion;
   return (
     <Box>
+      {settingsTitle && title && (
+        <Row>
+          <Box padding={26} dangerouslySetInnerHTML={{ __html: title }} />
+        </Row>
+      )}
       {settingsSubtitle && subtitle && (
         <Row>
           <Box padding={26} dangerouslySetInnerHTML={{ __html: subtitle }} />

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UL /> Should render and match the snapshot 1`] = `
+.c1 {
+  list-style: none;
+}
+
+.c0 {
+  padding: 0;
+  color: #2F3850;
+}
+
+<ul
+  class="c0"
+>
+  <li
+    class="c1"
+  >
+    1
+  </li>
+  <li
+    class="c1"
+  >
+    2
+  </li>
+  <li
+    class="c1"
+  >
+    3
+  </li>
+</ul>
+`;

@@ -28,6 +28,8 @@ import check from 'assets/svg/check-green.svg';
 import backButton from 'assets/svg/arrow-black.svg';
 
 import ActionIcon from 'components/ActionIcon';
+import { makeSelectProblemStatus } from 'global/reducers/problem';
+import { canEdit, canPreview } from 'models/Status/statusPermissions';
 import messages from './messages';
 import {
   StyledLink,
@@ -50,6 +52,7 @@ const InterventionNavbar = ({
   questionsLength,
   selectedQuestion,
   interventionEditing,
+  problemStatus,
   match: { params },
 }) => {
   const { problemId, interventionId } = params;
@@ -62,13 +65,16 @@ const InterventionNavbar = ({
     setTabActive(getActiveTab(pathname, formatMessage));
   }, [pathname]);
 
-  const previewDisabled = !questionsLength;
+  const previewDisabled = !questionsLength || !canPreview(problemStatus);
+
+  const editingPossible = canEdit(problemStatus);
 
   return (
     <Row align="center" justify="between" width="100%" mr={35}>
       <Row align="center">
         <ActionIcon to={`/interventions/${problemId}`} iconSrc={backButton} />
         <StyledInput
+          disabled={!editingPossible}
           px={12}
           py={6}
           width="400px"
@@ -148,6 +154,7 @@ InterventionNavbar.propTypes = {
   selectedQuestion: PropTypes.number,
   interventionEditing: PropTypes.bool,
   match: PropTypes.object,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -155,6 +162,7 @@ const mapStateToProps = createStructuredSelector({
   questionsLength: makeSelectQuestionsLength(),
   selectedQuestion: makeSelectSelectedQuestionIndex(),
   interventionEditing: makeSelectInterventionEditLoader(),
+  problemStatus: makeSelectProblemStatus(),
 });
 
 const mapDispatchToProps = {

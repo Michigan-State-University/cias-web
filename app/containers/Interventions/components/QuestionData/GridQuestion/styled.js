@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { TH } from 'components/Table';
 
 export const FirstTH = styled(TH)`
-  ${({ isFixed, left }) =>
+  ${({ isFixed }) =>
     isFixed && {
-      position: 'absolute',
-      left: `${left}px`,
-      height: 'inherit',
+      position: 'sticky',
+      left: 0,
+      backgroundColor: 'inherit',
     }};
 `;
 

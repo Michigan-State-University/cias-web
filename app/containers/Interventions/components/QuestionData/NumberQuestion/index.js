@@ -19,6 +19,7 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 
+import { canEdit } from 'models/Status/statusPermissions';
 import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
 
@@ -27,15 +28,19 @@ const NumberQuestion = ({
   updateAnswer,
   updateVariable,
   isNarratorTab,
+  problemStatus,
   intl: { formatMessage },
 }) => {
   const { payload } = selectedQuestion.body.data[0];
   const { variable } = selectedQuestion.body;
 
+  const editingPossible = canEdit(problemStatus);
+
   return (
     <Column mt={10}>
       <Row display="flex" hidden={isNarratorTab} mb={10}>
         <BadgeInput
+          disabled={!editingPossible}
           px={0}
           py={12}
           textAlign="center"
@@ -72,6 +77,7 @@ NumberQuestion.propTypes = {
   updateAnswer: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

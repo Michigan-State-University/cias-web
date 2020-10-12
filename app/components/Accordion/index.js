@@ -13,6 +13,7 @@ const Accordion = ({
   opened,
   setOpened,
   onDelete,
+  disabled,
 }) => {
   useEffect(() => {
     if (opened !== -1) onOpen(opened);
@@ -40,6 +41,7 @@ const Accordion = ({
           label={label}
           color={color}
           onDelete={handleDelete}
+          disabled={disabled}
         >
           {content}
         </Collapse>
@@ -54,7 +56,7 @@ const Accordion = ({
           holdTime={125}
           reorderId="blocks-list"
           onReorder={onReorder}
-          disabled={!onReorder}
+          disabled={!onReorder || disabled}
         >
           {children.map(renderCollapse)}
         </Reorder>
@@ -75,6 +77,7 @@ Accordion.propTypes = {
   opened: PropTypes.number,
   setOpened: PropTypes.func,
   onDelete: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 Accordion.defaultProps = {};

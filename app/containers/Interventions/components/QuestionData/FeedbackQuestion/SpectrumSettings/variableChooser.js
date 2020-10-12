@@ -31,6 +31,7 @@ const SpectrumVariableChooser = ({
   onAddCase,
   onRemoveCase,
   onUpdateCase,
+  disabled,
 }) => {
   const [variableChooserOpen, setVariableChooserOpen] = useState(false);
 
@@ -39,10 +40,13 @@ const SpectrumVariableChooser = ({
       <Row mt={20} align="center" justify="between">
         <Text fontWeight="bold">{formatMessage(messages.spectrumHeader)}</Text>
         <Box
-          onClick={() => setVariableChooserOpen(!variableChooserOpen)}
+          onClick={() =>
+            !disabled && setVariableChooserOpen(!variableChooserOpen)
+          }
           clickable
         >
           <Text
+            disabled={disabled}
             fontWeight="bold"
             color={themeColors.secondary}
             hoverDecoration="underline"
@@ -51,7 +55,7 @@ const SpectrumVariableChooser = ({
           </Text>
         </Box>
       </Row>
-      <Box position="relative">
+      <Box position="relative" mt={10}>
         <VariableChooser
           visible={variableChooserOpen}
           setOpen={setVariableChooserOpen}
@@ -63,9 +67,10 @@ const SpectrumVariableChooser = ({
       </Box>
       <Box bg={colors.linkWater} width="100%" mt={10} mb={20} px={8} py={8}>
         <StyledInput
+          disabled={disabled}
           type="multiline"
           rows="5"
-          width="auto"
+          width="100%"
           placeholder={formatMessage(messages.formulaPlaceholder)}
           value={spectrum.payload}
           onBlur={value => onFormulaUpdate(value, id)}
@@ -79,6 +84,7 @@ const SpectrumVariableChooser = ({
         >
           <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
           <InequalityChooser
+            disabled={disabled}
             onSuccessfulChange={value =>
               onUpdateCase(index, { ...pattern, match: value }, id)
             }
@@ -89,6 +95,7 @@ const SpectrumVariableChooser = ({
           </Text>
           <Box bg={colors.linkWater} mx={10}>
             <CaseInput
+              disabled={disabled}
               px={0}
               py={12}
               textAlign="center"
@@ -99,15 +106,21 @@ const SpectrumVariableChooser = ({
               }
             />
           </Box>
-          <Img
-            ml={10}
-            src={binNoBg}
-            onClick={() => onRemoveCase(index, id)}
-            clickable
-          />
+          {!disabled && (
+            <Img
+              ml={10}
+              src={binNoBg}
+              onClick={() => onRemoveCase(index, id)}
+              clickable
+            />
+          )}
         </Row>
       ))}
-      <DashedBox mt={20} onClick={() => onAddCase(id)}>
+      <DashedBox
+        disabled={disabled}
+        mt={20}
+        onClick={() => !disabled && onAddCase(id)}
+      >
         {formatMessage(messages.newCase)}
       </DashedBox>
     </Column>
@@ -127,6 +140,7 @@ SpectrumVariableChooser.propTypes = {
   onAddCase: PropTypes.func,
   onRemoveCase: PropTypes.func,
   onUpdateCase: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default injectIntl(SpectrumVariableChooser);

@@ -211,7 +211,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
           "navbarId": "default",
         }
       }
-      path="/profile/:id"
+      path="/users/:id"
       protectedRoute={true}
     />
     <Memo(ConnectFunction)

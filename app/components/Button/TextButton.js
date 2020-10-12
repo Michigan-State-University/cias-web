@@ -23,6 +23,7 @@ const TextButton = ({
   buttonProps,
   loaderProps,
   spinnerProps,
+  disabled,
 }) => {
   const button = useRef(null);
   if (loading)
@@ -40,6 +41,7 @@ const TextButton = ({
     );
   return (
     <StyledTextButton
+      disabled={disabled}
       ref={button}
       className={className}
       fontWeight="bold"
@@ -59,6 +61,7 @@ TextButton.propTypes = {
   buttonProps: PropTypes.object,
   loaderProps: PropTypes.object,
   spinnerProps: PropTypes.object,
+  disabled: PropTypes.bool,
 };
 
 export default TextButton;

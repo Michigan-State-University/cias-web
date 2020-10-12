@@ -12,7 +12,7 @@ import { makeSelectLoader } from 'global/reducers/questions';
 import ButtonComponent from './ButtonComponent';
 import QuestionTypeChooser from '../QuestionTypeChooser';
 
-const EmptyInterventionPage = ({ onCreateQuestion, loading }) => (
+const EmptyInterventionPage = ({ onCreateQuestion, loading, disabled }) => (
   <Row height="100%" width="100%" align="start" justify="center" pt={100}>
     <Column>
       <NoContent />
@@ -20,7 +20,12 @@ const EmptyInterventionPage = ({ onCreateQuestion, loading }) => (
         <QuestionTypeChooser
           onClick={onCreateQuestion}
           ButtonComponent={React.forwardRef((props, ref) => (
-            <ButtonComponent {...props} loading={loading} ref={ref} />
+            <ButtonComponent
+              disabled={disabled}
+              {...props}
+              loading={loading}
+              ref={ref}
+            />
           ))}
         />
       </Row>
@@ -31,6 +36,7 @@ const EmptyInterventionPage = ({ onCreateQuestion, loading }) => (
 EmptyInterventionPage.propTypes = {
   onCreateQuestion: PropTypes.func,
   loading: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

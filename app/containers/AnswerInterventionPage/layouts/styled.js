@@ -64,7 +64,7 @@ export const CustomSlider = styled(AppSlider)`
 `;
 
 export const FirstTH = styled(TH)`
-  position: absolute;
-  left: ${({ left }) => left}px;
-  height: inherit;
+  position: sticky;
+  left: 0;
+  background-color: inherit;
 `;

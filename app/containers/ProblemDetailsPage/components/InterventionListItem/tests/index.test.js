@@ -38,6 +38,7 @@ describe('<InterventionListItem />', () => {
     },
     index: 0,
     nextInterventionName: 'test-2',
+    sharingPossible: true,
   };
 
   beforeAll(() => {

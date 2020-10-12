@@ -8,6 +8,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { Provider } from 'react-redux';
 import settingsTabLabels from 'utils/settingsTabsLabels';
 import { elements } from 'theme';
+import { draft } from 'models/Status/StatusTypes';
 
 import QuestionDetails from '../index';
 
@@ -17,6 +18,11 @@ describe('<QuestionDetails />', () => {
   let store;
   const reducer = state => state;
   const initialState = {
+    problem: {
+      problem: {
+        status: draft,
+      },
+    },
     questions: {
       selectedQuestion: 0,
       questions: [

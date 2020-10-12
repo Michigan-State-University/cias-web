@@ -33,6 +33,10 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Email',
   },
+  activate: {
+    id: `${scope}.activate`,
+    defaultMessage: ' ',
+  },
   deactivateAccountConfirm: {
     id: `${scope}.deactivateAccountConfirm`,
     defaultMessage: 'Are you sure you want to deactivate this account',

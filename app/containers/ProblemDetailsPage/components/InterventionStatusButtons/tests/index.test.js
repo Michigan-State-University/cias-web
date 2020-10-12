@@ -7,6 +7,7 @@
  */
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { render } from 'react-testing-library';
 import { IntlProvider } from 'react-intl';
 import 'jest-styled-components';
@@ -18,6 +19,13 @@ import InterventionStatusButtons from '../index';
 const statuses = ['draft', 'published', 'closed'];
 
 describe('<InterventionStatusButtons />', () => {
+  let modalContainer;
+  beforeAll(() => {
+    ReactDOM.createPortal = jest.fn(element => element);
+    modalContainer = document.createElement('div');
+    modalContainer.setAttribute('id', 'modal-portal');
+    document.body.appendChild(modalContainer);
+  });
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(

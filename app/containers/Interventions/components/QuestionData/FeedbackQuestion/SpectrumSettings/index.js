@@ -30,10 +30,12 @@ const SpectrumSettings = ({
   onAddCase,
   onRemoveCase,
   onUpdateCase,
+  disabled,
 }) => (
   <Column>
     <SpectrumVariableChooser
       id={id}
+      disabled={disabled}
       spectrum={data[0].spectrum}
       onFormulaUpdate={onFormulaUpdate}
       onAddCase={onAddCase}
@@ -49,6 +51,7 @@ SpectrumSettings.propTypes = {
   onAddCase: PropTypes.func,
   onRemoveCase: PropTypes.func,
   onUpdateCase: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

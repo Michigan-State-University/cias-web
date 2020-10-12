@@ -28,6 +28,8 @@ import {
 import { problemOptionsSaga } from 'global/sagas/problemOptionsSaga';
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
+import ProblemDetails from 'components/SingleTile/ProblemDetails';
+import Tooltip from 'components/Tooltip';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import SelectResearchers from 'containers/SelectResearchers';
@@ -58,7 +60,15 @@ const SingleTile = ({
 
   const handleArchiveProblem = () => archiveProblem(id);
 
-  const { name, status, interventions, id } = tileData || {};
+  const {
+    name,
+    status,
+    interventions,
+    id,
+    user,
+    created_at: createdAt,
+    updated_at: updatedAt,
+  } = tileData || {};
 
   const handleCsvRequest = () => sendCsv(id);
 
@@ -133,18 +143,30 @@ const SingleTile = ({
             )}
           </Heading>
           <EllipsisText text={name} fontSize={18} fontWeight="bold" />
-          <TileInfo>
-            {interventions && (
-              <div>
-                <Text>
-                  <FormattedMessage
-                    {...messages.sessions}
-                    values={{ sessionCount: interventions.length }}
-                  />
-                </Text>
-              </div>
-            )}
-          </TileInfo>
+          <Tooltip
+            id={`${id}-tile-tooltip`}
+            content={
+              <ProblemDetails
+                formatMessage={formatMessage}
+                user={user}
+                createdAt={createdAt}
+                updatedAt={updatedAt}
+              />
+            }
+          >
+            <TileInfo>
+              {interventions && (
+                <div>
+                  <Text>
+                    <FormattedMessage
+                      {...messages.sessions}
+                      values={{ sessionCount: interventions.length }}
+                    />
+                  </Text>
+                </div>
+              )}
+            </TileInfo>
+          </Tooltip>
         </TileContainer>
       </StyledLink>
     </>

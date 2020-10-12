@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash/isEqual';
 
 import Row from 'components/Row';
 import {
+  statusTypes,
   statusTypeToColorMap,
   statusTypeToFontColorMap,
 } from 'models/Status/StatusTypes';
@@ -16,7 +18,7 @@ const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
     globalMessages.statuses,
   ]);
 
-  const showIcon = active && active.length !== labels.length;
+  const showIcon = active && !isEqual(statusTypes, active.sort());
 
   return (
     <Row align="center" width="100%">

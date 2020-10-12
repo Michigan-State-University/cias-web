@@ -15,6 +15,7 @@ const PauseBlock = ({
   blockIndex,
   updateDuration,
   updateNarratorPreviewAnimation,
+  disabled,
 }) => {
   const [pause, setPause] = useState(block.pauseDuration);
   const handleBlur = () => updateDuration(blockIndex, +pause);
@@ -27,6 +28,7 @@ const PauseBlock = ({
     <Column>
       <Box mt={15} display="flex" justify="end" align="center">
         <Input
+          disabled={disabled}
           value={pause}
           onChange={e => setPause(e.target.value)}
           type="number"
@@ -49,6 +51,7 @@ PauseBlock.propTypes = {
   blockIndex: PropTypes.number,
   updateDuration: PropTypes.func,
   updateNarratorPreviewAnimation: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {

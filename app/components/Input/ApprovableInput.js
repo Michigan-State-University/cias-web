@@ -150,11 +150,13 @@ const ApprovableInput = props => {
       return (
         <DatePickerWrapper>
           <DatePicker
+            disabled={disabled}
             selected={value}
             onChange={date => onCheck(date)}
             placeholderText={placeholder}
             customInput={
               <DateInput
+                disabled={disabled}
                 fontSize={fontSize}
                 height={height}
                 width={width}

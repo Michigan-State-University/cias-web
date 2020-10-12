@@ -22,7 +22,9 @@ import {
   sendInterventionInviteRequest,
   resendInterventionInviteRequest,
   makeSelectProblemLoader,
+  makeSelectProblemStatus,
 } from 'global/reducers/problem';
+import { canShareWithParticipants } from 'models/Status/statusPermissions';
 
 import ParticipantInviter from './Components/ParticipantInviter';
 import UserList from './Components/UserList';
@@ -36,10 +38,13 @@ const ShareBox = ({
   resendInvite,
   sendLoading,
   resendLoading,
+  problemStatus,
 }) => {
   const { problem_id: problemId, slug, emails, position } = intervention || {};
 
   const handleResend = user => resendInvite([user.email], intervention.id);
+
+  const sharingPossible = canShareWithParticipants(problemStatus);
 
   if (intervention) {
     const link = `${
@@ -53,6 +58,7 @@ const ShareBox = ({
         </Box>
         <Row mt={20}>
           <ParticipantInviter
+            disabled={!sharingPossible}
             loading={sendLoading}
             sendInvite={value => sendInvite(value, intervention.id)}
           />
@@ -96,12 +102,14 @@ ShareBox.propTypes = {
   resendInvite: PropTypes.func,
   sendLoading: PropTypes.bool,
   resendLoading: PropTypes.object,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectCurrenIntervention(),
   sendLoading: makeSelectProblemLoader('sendInterventionLoading'),
   resendLoading: makeSelectProblemLoader('resendInterventionLoading'),
+  problemStatus: makeSelectProblemStatus(),
 });
 
 const mapDispatchToProps = {

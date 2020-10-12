@@ -2,7 +2,7 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 import { error as showError } from 'react-toastify-redux';
 
-import { mapCurrentUser } from 'utils/mapResponseObjects';
+import { mapCurrentUserWithoutAttributes } from 'utils/mapResponseObjects';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 
 import { editOtherUserSuccess, editOtherUserError } from '../actions';
@@ -13,12 +13,10 @@ function* editSingleUser({ payload: { userId, ...newUserData } }) {
 
   const userData = objectKeysToSnakeCase(newUserData);
   try {
-    const {
-      data: { data },
-    } = yield axios.patch(requestURL, {
+    const { data } = yield axios.patch(requestURL, {
       user: userData,
     });
-    const mappedUser = mapCurrentUser(data);
+    const mappedUser = mapCurrentUserWithoutAttributes(data);
     yield put(editOtherUserSuccess(mappedUser));
   } catch (error) {
     yield put(

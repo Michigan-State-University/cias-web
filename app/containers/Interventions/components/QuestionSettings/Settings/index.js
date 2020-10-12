@@ -17,6 +17,8 @@ import {
   makeSelectSelectedQuestion,
   makeSelectQuestions,
 } from 'global/reducers/questions';
+import { makeSelectProblemStatus } from 'global/reducers/problem';
+import { canEdit } from 'models/Status/statusPermissions';
 
 import BranchingTab from './Components/Tabs/BranchingTab';
 import NarratorTab from './Components/Tabs/NarratorTab';
@@ -29,11 +31,15 @@ const Settings = ({
   tab,
   changeTab,
   setDraggable,
+  problemStatus,
 }) => {
   const handleChange = newTab => {
     changeTab({ tab: newTab });
     setDraggable(false);
   };
+
+  const editingPossible = canEdit(problemStatus);
+
   return (
     <Column>
       <Tabs
@@ -44,6 +50,7 @@ const Settings = ({
         <div label={formatMessage(messages[settingsTabLabels.settings])}>
           <SettingsTab
             formatMessage={formatMessage}
+            disabled={!editingPossible}
             settings={settings}
             type={type}
             id={id}
@@ -52,6 +59,7 @@ const Settings = ({
         <div label={formatMessage(messages[settingsTabLabels.narrator])}>
           <NarratorTab
             formatMessage={formatMessage}
+            disabled={!editingPossible}
             narrator={narrator}
             id={id}
           />
@@ -59,6 +67,7 @@ const Settings = ({
         <div label={formatMessage(messages[settingsTabLabels.branching])}>
           <BranchingTab
             formatMessage={formatMessage}
+            disabled={!editingPossible}
             formula={formula}
             id={id}
           />
@@ -80,12 +89,14 @@ Settings.propTypes = {
   tab: PropTypes.string,
   changeTab: PropTypes.func,
   setDraggable: PropTypes.func,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
   questions: makeSelectQuestions(),
   tab: makeSelectQuestionSettingsTab(),
+  problemStatus: makeSelectProblemStatus(),
 });
 
 const mapDispatchToProps = {

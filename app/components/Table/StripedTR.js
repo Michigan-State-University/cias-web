@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { borders, hexToRgb } from 'theme';
-import { colors } from '../../theme/colors';
+import { colors } from 'theme/colors';
 import { TR } from './TR';
 import { TBody } from './TBody';
 
@@ -36,6 +36,7 @@ const StripedTR = styled(TR)`
       }
   }
   color: ${props => props.textColor};
+  background-color: ${props => props.bg};;
 `;
 
 StripedTR.propTypes = {

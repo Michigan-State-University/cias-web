@@ -22,6 +22,7 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 
+import { canEdit } from 'models/Status/statusPermissions';
 import messages from './messages';
 import { UPDATE_URL, UPDATE_VARIABLE } from './constants';
 
@@ -30,6 +31,7 @@ const UrlQuestion = ({
   updateUrl,
   updateVariable,
   isNarratorTab,
+  problemStatus,
   intl: { formatMessage },
 }) => {
   const { payload } = selectedQuestion.body.data[0];
@@ -38,10 +40,14 @@ const UrlQuestion = ({
   const isPreviewValid = urlValidator(payload);
   const displayError = !isPreviewValid && payload;
   const displayPreview = isPreviewValid && payload;
+
+  const editingPossible = canEdit(problemStatus);
+
   return (
     <Column mt={10}>
       <Row display="flex" hidden={isNarratorTab} mb={10}>
         <BadgeInput
+          disabled={!editingPossible}
           px={0}
           py={12}
           textAlign="center"
@@ -64,6 +70,7 @@ const UrlQuestion = ({
       >
         <Row>
           <ApprovableInput
+            disabled={!editingPossible}
             rows="3"
             placeholder={formatMessage(messages.placeholder)}
             value={payload}
@@ -88,6 +95,7 @@ UrlQuestion.propTypes = {
   updateUrl: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

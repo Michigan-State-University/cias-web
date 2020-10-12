@@ -4,10 +4,14 @@ import { themeColors } from 'theme';
 import { margin } from 'components/BaseComponentStyles';
 
 export const StyledLink = styled(Link)`
+  font-size: 13px;
+  font-weight: bold;
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
 `;
 
 export const SaveInfoContainer = styled.div`
+  font-size: 13px;
+  font-weight: bold;
   width: 110px;
 `;
 

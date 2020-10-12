@@ -9,7 +9,7 @@ export default defineMessages({
   },
   newQuestionTitle: {
     id: `${scope}.newQuestionMessage`,
-    defaultMessage: 'Enter title here',
+    defaultMessage: '<h1>Enter title here</h1>',
   },
   newQuestionSubtitle: {
     id: `${scope}.newQuestionSubtitle`,

@@ -14,11 +14,13 @@ const DaysAfterOption = ({
   afterFill,
   value,
   setValue,
+  disabled,
 }) => (
   <>
     <Text fontSize={15}>{formatMessage(messages.send)}</Text>
     <StyledInputWrapper>
       <ApprovableInput
+        disabled={disabled}
         type="singleline"
         placeholder={formatMessage(messages.enterNumber)}
         validator={numericValidator}
@@ -44,6 +46,7 @@ DaysAfterOption.propTypes = {
   afterFill: PropTypes.bool,
   value: PropTypes.string,
   setValue: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default injectIntl(DaysAfterOption);

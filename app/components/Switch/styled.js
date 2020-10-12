@@ -38,6 +38,11 @@ const Slider = styled.span`
     box-shadow: 0 0 1px ${themeColors.secondary};
   }
 
+  ${SwitchInput}:disabled + & {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
   &:before {
     position: absolute;
     content: '';

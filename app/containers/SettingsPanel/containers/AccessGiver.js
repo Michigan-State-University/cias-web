@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import filter from 'lodash/filter';
 import head from 'lodash/head';
@@ -16,26 +18,28 @@ import CsvFileReader from 'components/CsvFileReader';
 import H2 from 'components/H2';
 import Row from 'components/Row';
 import UserList from 'containers/ShareBox/Components/UserList';
+import Spinner from 'components/Spinner';
+import ErrorAlert from 'components/ErrorAlert';
 
+import { themeColors } from 'theme';
 import { emailValidator } from 'utils/validators/emailValidator';
+import injectSaga from 'utils/injectSaga';
 import {
   enableUserAccessRequest,
   fetchUsersWithAccessRequest,
   revokeUserAccessRequest,
 } from 'global/reducers/problem';
+import {
+  canAddParticipantsToIntervention,
+  canRemoveParticipantsFromIntervention,
+} from 'models/Status/statusPermissions';
 
-import Spinner from 'components/Spinner';
-import { themeColors } from 'theme';
-import { connect } from 'react-redux';
-import injectSaga from 'utils/injectSaga';
-import { compose } from 'redux';
-import ErrorAlert from 'components/ErrorAlert';
 import { accessGiverContainerSaga } from '../sagas';
 import messages from '../messages';
 
 const AccessGiver = ({
   intl: { formatMessage },
-  problemId,
+  problem: { id: problemId, status },
   giveUserAccess,
   usersWithAccess,
   enableAccessLoading,
@@ -45,6 +49,11 @@ const AccessGiver = ({
   fetchUserAccessError,
 }) => {
   const [value, setValue] = useState([]);
+
+  const addingParticipantsPossible = canAddParticipantsToIntervention(status);
+  const removingParticipantsPossible = canRemoveParticipantsFromIntervention(
+    status,
+  );
 
   useEffect(() => {
     fetchUsersWithAccess(problemId);
@@ -90,13 +99,17 @@ const AccessGiver = ({
         </H2>
         <Column mt={20}>
           <ChipsInput
+            disabled={!addingParticipantsPossible}
             value={value}
             setValue={setValue}
             placeholder={formatMessage(messages.inputPlaceholder)}
           />
           <Row mt={25} align="center" justify="between">
             <Box>
-              <CsvFileReader onUpload={handleUploadCsv}>
+              <CsvFileReader
+                disabled={!addingParticipantsPossible}
+                onUpload={handleUploadCsv}
+              >
                 <FormattedMessage {...messages.uploadText} />
               </CsvFileReader>
             </Box>
@@ -118,6 +131,7 @@ const AccessGiver = ({
             />
           )}
           <UserList
+            removingParticipantsPossible={removingParticipantsPossible}
             users={usersWithAccess || []}
             buttonIsClose
             buttonText={formatMessage(messages.remove)}
@@ -133,7 +147,7 @@ const AccessGiver = ({
 
 AccessGiver.propTypes = {
   intl: intlShape,
-  problemId: PropTypes.string,
+  problem: PropTypes.object,
   giveUserAccess: PropTypes.func,
   fetchUsersWithAccess: PropTypes.func,
   revokeUserAccess: PropTypes.func,

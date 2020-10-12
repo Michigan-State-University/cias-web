@@ -22,6 +22,7 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 
+import { canEdit } from 'models/Status/statusPermissions';
 import messages from './messages';
 import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
 
@@ -30,6 +31,7 @@ const VisualAnalogueScaleQuestion = ({
   updateLabel,
   updateVariable,
   isNarratorTab,
+  problemStatus,
   intl: { formatMessage },
 }) => {
   const {
@@ -69,10 +71,14 @@ const VisualAnalogueScaleQuestion = ({
     },
   };
 
+  const editingPossible = canEdit(problemStatus);
+  const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
+
   return (
     <Column mt={10}>
       <Row display="flex" hidden={isNarratorTab} mb={10}>
         <BadgeInput
+          disabled={!editingPossible}
           px={0}
           py={12}
           textAlign="center"
@@ -90,14 +96,14 @@ const VisualAnalogueScaleQuestion = ({
         <Column>
           <Row>
             <Box width="100%">
-              {!isNarratorTab && (
+              {!isNarratorTabOrEditNotPossible && (
                 <AppSlider
                   marks={labels}
                   disabled
                   showValue={!isNullOrUndefined(showNumber) && showNumber}
                 />
               )}
-              {isNarratorTab && (
+              {isNarratorTabOrEditNotPossible && (
                 <VisualAnalogueScaleQuestionLayout
                   startValue={startValue}
                   endValue={endValue}
@@ -118,6 +124,7 @@ VisualAnalogueScaleQuestion.propTypes = {
   updateLabel: PropTypes.func.isRequired,
   updateVariable: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

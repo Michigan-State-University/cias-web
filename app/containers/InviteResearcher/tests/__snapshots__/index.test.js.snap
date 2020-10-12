@@ -51,7 +51,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             width="100%"
           >
             <p
-              class="Text-sc-2lza2m-0 jQzFkx"
+              class="Text-sc-2lza2m-0 kgOhdl"
               font-size="14"
             >
               <span>
@@ -66,7 +66,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
               width="100%"
             />
             <p
-              class="Text-sc-2lza2m-0 fRXBAn"
+              class="Text-sc-2lza2m-0 ibZWBH"
               color="#EF462F"
               font-weight="bold"
             >
@@ -85,13 +85,13 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 jjfbfN"
+              class="Text-sc-2lza2m-0 deGIRh"
               font-size="14"
             >
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >
@@ -105,13 +105,13 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 jjfbfN"
+              class="Text-sc-2lza2m-0 deGIRh"
               font-size="14"
             >
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >
@@ -187,7 +187,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             width="100%"
           >
             <p
-              class="Text-sc-2lza2m-0 jQzFkx"
+              class="Text-sc-2lza2m-0 kgOhdl"
               font-size="14"
             >
               <span>
@@ -214,13 +214,13 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 jjfbfN"
+              class="Text-sc-2lza2m-0 deGIRh"
               font-size="14"
             >
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >
@@ -234,13 +234,13 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 jjfbfN"
+              class="Text-sc-2lza2m-0 deGIRh"
               font-size="14"
             >
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >
@@ -317,7 +317,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <p
-              class="Text-sc-2lza2m-0 jQzFkx"
+              class="Text-sc-2lza2m-0 kgOhdl"
               font-size="14"
             >
               <span>
@@ -344,13 +344,13 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 jjfbfN"
+              class="Text-sc-2lza2m-0 deGIRh"
               font-size="14"
             >
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >
@@ -364,13 +364,13 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 jjfbfN"
+              class="Text-sc-2lza2m-0 deGIRh"
               font-size="14"
             >
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 elWSjp"
+              class="StyledTextButton-sc-17cmh3t-0 kaKtnm"
               color="#EF462F"
               font-weight="bold"
             >

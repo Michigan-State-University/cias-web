@@ -25,9 +25,27 @@ exports[`<MapInterventions /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .c6 {
   width: auto;
   height: auto;
+}
+
+.c11 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
 }
 
 .c7 {
@@ -118,14 +136,14 @@ exports[`<MapInterventions /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
-.c9 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c9 div {
+.c10 div {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -184,7 +202,104 @@ exports[`<MapInterventions /> Should render and match the snapshot 1`] = `
       </div>
       <div
         class="c9"
-      />
+        display="flex"
+      >
+        <div
+          currentitem="false"
+          data-for="1-tile-tooltip"
+          data-tip="true"
+        >
+          <div
+            class="c10"
+          />
+        </div>
+        <div
+          class="__react_component_tooltip t00000000-0000-0000-0000-000000000000 place-top type-dark"
+          data-id="tooltip"
+          id="1-tile-tooltip"
+        >
+          <style>
+            
+  	.t00000000-0000-0000-0000-000000000000 {
+	    color: #fff;
+	    background: #222;
+	    border: 1px solid transparent;
+  	}
+
+  	.t00000000-0000-0000-0000-000000000000.place-top {
+        margin-top: -10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-top::before {
+        border-top: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-top::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        bottom: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-top-color: #222;
+        border-top-style: solid;
+        border-top-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-bottom {
+        margin-top: 10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-bottom::before {
+        border-bottom: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-bottom::after {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        top: -6px;
+        left: 50%;
+        margin-left: -8px;
+        border-bottom-color: #222;
+        border-bottom-style: solid;
+        border-bottom-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-left {
+        margin-left: -10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-left::before {
+        border-left: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-left::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        right: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-left-color: #222;
+        border-left-style: solid;
+        border-left-width: 6px;
+    }
+
+    .t00000000-0000-0000-0000-000000000000.place-right {
+        margin-left: 10px;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-right::before {
+        border-right: 8px solid transparent;
+    }
+    .t00000000-0000-0000-0000-000000000000.place-right::after {
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        left: -6px;
+        top: 50%;
+        margin-top: -4px;
+        border-right-color: #222;
+        border-right-style: solid;
+        border-right-width: 6px;
+    }
+  
+          </style>
+          <p
+            class="c11"
+          />
+        </div>
+      </div>
     </div>
   </a>
 </div>

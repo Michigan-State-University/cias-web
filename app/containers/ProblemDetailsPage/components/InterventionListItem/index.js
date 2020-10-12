@@ -15,6 +15,7 @@ import Divider from 'components/Divider';
 
 import copy from 'assets/svg/copy.svg';
 import mail from 'assets/svg/pink-mail.svg';
+import mailDisabled from 'assets/svg/pink-mail-disabled.svg';
 import { colors } from 'theme';
 import appStages from 'global/appStages';
 
@@ -38,6 +39,8 @@ function InterventionListItem({
   intl: { formatMessage },
   nextInterventionName,
   handleCopyIntervention,
+  disabled,
+  sharingPossible,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const {
@@ -63,22 +66,32 @@ function InterventionListItem({
   return (
     <ToggleableBox isSelected={isSelected} isHovered={isHovered}>
       <Row py={21} px={16} align="center" justify="between">
-        <StyledRow
-          align="center"
-          justify="between"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
-          <StyledLink to={`/interventions/${problemId}/sessions/${id}/edit`}>
+        <StyledRow align="center" justify="between">
+          <StyledLink
+            to={`/interventions/${problemId}/sessions/${id}/edit`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             <InterventionIndex>{index + 1}</InterventionIndex>
             <H2 ml={15}>{name}</H2>
           </StyledLink>
         </StyledRow>
         <Row width={80} xs={1} align="center" justify="between">
-          <Img clickable src={mail} onClick={handleClick} alt="emails" />
+          <Img
+            clickable
+            disabled={!sharingPossible}
+            src={sharingPossible ? mail : mailDisabled}
+            onClick={handleClick}
+            alt="emails"
+          />
           {process.env.APP_STAGE === appStages.dev.id && (
             <Box mb={8}>
-              <Dropdown options={options} clickable id={id} />
+              <Dropdown
+                disabled={disabled}
+                options={options}
+                clickable
+                id={id}
+              />
             </Box>
           )}
         </Row>
@@ -89,6 +102,7 @@ function InterventionListItem({
       {index !== 0 && (
         <Row px={62}>
           <InterventionSchedule
+            disabled={disabled}
             interventionId={id}
             selectedScheduleOption={schedule}
             scheduleAt={scheduleAt}
@@ -96,6 +110,7 @@ function InterventionListItem({
         </Row>
       )}
       <InterventionBranching
+        disabled={disabled}
         formula={formula}
         intervention={intervention}
         nextInterventionName={nextInterventionName}
@@ -113,6 +128,8 @@ InterventionListItem.propTypes = {
   nextInterventionName: PropTypes.string,
   intl: PropTypes.object,
   handleCopyIntervention: PropTypes.func,
+  disabled: PropTypes.bool,
+  sharingPossible: PropTypes.bool,
 };
 
 export default injectIntl(InterventionListItem);

@@ -13,7 +13,12 @@ import Row from 'components/Row';
 import Column from 'components/Column';
 import messages from './messages';
 
-const ExactDateOption = ({ intl: { formatMessage }, value, setValue }) => {
+const ExactDateOption = ({
+  intl: { formatMessage },
+  value,
+  setValue,
+  disabled,
+}) => {
   const timeInfoMessage = () =>
     `${formatMessage(messages.timeInfo)} ${calculateTimeZone()}`;
 
@@ -26,6 +31,7 @@ const ExactDateOption = ({ intl: { formatMessage }, value, setValue }) => {
         </Text>
         <Box>
           <ApprovableInput
+            disabled={disabled}
             width={120}
             height={50}
             placeholder={formatMessage(messages.chooseDate)}
@@ -49,6 +55,7 @@ ExactDateOption.propTypes = {
   intl: PropTypes.object,
   value: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
   setValue: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default injectIntl(ExactDateOption);
