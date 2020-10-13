@@ -1,7 +1,7 @@
 import produce from 'immer';
 import set from 'lodash/set';
-import union from 'lodash/union';
 import get from 'lodash/get';
+import remove from 'lodash/remove';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 import interventionSettingsReducer from './interventionSettings/reducer';
@@ -43,11 +43,18 @@ import {
   SEND_INTERVENTION_INVITE_REQUEST,
   SEND_INTERVENTION_INVITE_SUCCESS,
   RESEND_INTERVENTION_INVITE_REQUEST,
+  FETCH_INTERVENTION_EMAILS_REQUEST,
+  FETCH_INTERVENTION_EMAILS_SUCCESS,
+  FETCH_INTERVENTION_EMAILS_ERROR,
+  DELETE_INTERVENTION_INVITE_REQUEST,
+  DELETE_INTERVENTION_INVITE_SUCCESS,
+  DELETE_INTERVENTION_INVITE_ERROR,
 } from './constants';
 
 export const initialState = {
   currentInterventionIndex: 0,
   problem: null,
+  emails: [],
   cache: {
     problem: null,
   },
@@ -58,20 +65,26 @@ export const initialState = {
     editProblem: false,
     changeAccessSettingLoading: false,
     fetchUserAccessLoading: false,
+    fetchInterventionEmailsLoading: false,
     createInterventionLoading: false,
     sendInterventionLoading: false,
-    resendInterventionLoading: {
+    interventionEmailLoading: {
+      id: null,
       email: null,
     },
   },
   errors: {
     fetchProblemError: null,
+    fetchInterventionEmailsError: null,
     createProblemError: null,
     changeAccessSettingError: null,
     fetchUserAccessError: null,
     createInterventionError: null,
   },
 };
+
+const findInterventionIndex = (problem, interventionId) =>
+  problem.interventions.findIndex(({ id }) => id === interventionId);
 
 /* eslint-disable default-case, no-param-reassign */
 export const problemReducer = (state = initialState, action) =>
@@ -154,48 +167,6 @@ export const problemReducer = (state = initialState, action) =>
         }
         break;
       }
-
-      case SEND_INTERVENTION_INVITE_REQUEST: {
-        const interventionIndex = draft.problem.interventions.findIndex(
-          intervention => intervention.id === action.payload.interventionId,
-        );
-
-        if (interventionIndex > -1) {
-          draft.currentInterventionIndex = interventionIndex;
-          draft.loaders.sendInterventionLoading = true;
-
-          draft.cache.problem = state.problem;
-          const { emails } = action.payload;
-          const uniqEmails = union(
-            state.problem.interventions[interventionIndex].emails,
-            emails,
-          );
-
-          draft.problem.interventions[interventionIndex].emails = uniqEmails;
-        }
-
-        break;
-      }
-
-      case SEND_INTERVENTION_INVITE_SUCCESS:
-        draft.loaders.sendInterventionLoading = false;
-        draft.loaders.resendInterventionLoading =
-          initialState.loaders.resendInterventionLoading;
-        break;
-
-      case SEND_INTERVENTION_INVITE_ERROR:
-        draft.loaders.sendInterventionLoading = false;
-        draft.loaders.resendInterventionLoading =
-          initialState.loaders.resendInterventionLoading;
-        draft.problem = draft.cache.problem;
-        break;
-
-      case RESEND_INTERVENTION_INVITE_REQUEST:
-        draft.loaders.resendInterventionLoading = {
-          email: action.payload.emails[0],
-        };
-        break;
-
       case REORDER_INTERVENTION_LIST_SUCCESS:
         draft.cache.problem = draft.problem;
         break;
@@ -217,10 +188,7 @@ export const problemReducer = (state = initialState, action) =>
         break;
       case ENABLE_USER_ACCESS_SUCCESS:
         draft.loaders.enableAccessLoading = false;
-        draft.problem.usersWithAccess = [
-          ...state.problem.usersWithAccess,
-          ...action.payload.emails,
-        ];
+        draft.problem.usersWithAccess = [...action.payload.emails];
         break;
       case ENABLE_USER_ACCESS_ERROR:
         draft.loaders.enableAccessLoading = false;
@@ -268,6 +236,92 @@ export const problemReducer = (state = initialState, action) =>
       case CREATE_INTERVENTION_ERROR:
         draft.loaders.createInterventionLoading = false;
         draft.errors.createInterventionError = action.payload.error;
+        break;
+
+      case FETCH_INTERVENTION_EMAILS_REQUEST:
+        if (!state.problem.interventions[action.payload.index].emails)
+          draft.loaders.fetchInterventionEmailsLoading = true;
+        break;
+      case FETCH_INTERVENTION_EMAILS_SUCCESS:
+        const { index, emails } = action.payload;
+        draft.problem.interventions[index].emails = emails;
+        draft.loaders.fetchInterventionEmailsLoading = false;
+        break;
+
+      // intervention invitation
+
+      case SEND_INTERVENTION_INVITE_REQUEST: {
+        const { emails: payloadEmails, interventionId } = action.payload;
+
+        const interventionIndex = findInterventionIndex(
+          state.problem,
+          interventionId,
+        );
+
+        if (interventionIndex > -1) {
+          draft.currentInterventionIndex = interventionIndex;
+
+          draft.loaders.sendInterventionLoading = true;
+          draft.cache.problem = state.problem;
+          const mappedEmails = payloadEmails.map(email => ({
+            email,
+          }));
+
+          draft.problem.interventions[interventionIndex].emails = [
+            ...state.problem.interventions[interventionIndex].emails,
+            ...mappedEmails,
+          ];
+        }
+
+        break;
+      }
+
+      case SEND_INTERVENTION_INVITE_SUCCESS:
+        draft.loaders.sendInterventionLoading = false;
+        draft.loaders.interventionEmailLoading =
+          initialState.loaders.interventionEmailLoading;
+        break;
+
+      case SEND_INTERVENTION_INVITE_ERROR:
+        draft.loaders.sendInterventionLoading = false;
+        draft.loaders.interventionEmailLoading =
+          initialState.loaders.interventionEmailLoading;
+        draft.problem = draft.cache.problem;
+        break;
+
+      case RESEND_INTERVENTION_INVITE_REQUEST:
+        draft.cache.problem = state.problem;
+        draft.loaders.interventionEmailLoading = {
+          ...action.payload,
+        };
+        break;
+
+      case FETCH_INTERVENTION_EMAILS_ERROR:
+        draft.loaders.fetchInterventionEmailsLoading = false;
+        draft.errors.fetchInterventionEmailsError = action.payload.error;
+        break;
+
+      case DELETE_INTERVENTION_INVITE_REQUEST:
+        const { id, interventionId } = action.payload;
+
+        const interventionIndex = findInterventionIndex(
+          state.problem,
+          interventionId,
+        );
+        if (interventionIndex > -1) {
+          draft.cache.problem = state.problem;
+
+          remove(
+            draft.problem.interventions[interventionIndex].emails,
+            ({ id: emailId }) => emailId === id,
+          );
+        }
+
+        break;
+      case DELETE_INTERVENTION_INVITE_SUCCESS:
+        break;
+      case DELETE_INTERVENTION_INVITE_ERROR:
+        draft.cache.problem = state.problem;
         break;
     }
   });

@@ -7,6 +7,9 @@ import {
   reorderSessionsSaga,
   createInterventionSaga,
   sendInterventionInviteSaga,
+  resendInterventionInviteSaga,
+  fetchInterventionEmailsSaga,
+  deleteInterventionInviteSaga,
 } from 'global/reducers/problem/sagas';
 
 export default function* problemDetailsPageSagas() {
@@ -18,5 +21,8 @@ export default function* problemDetailsPageSagas() {
     updateInterventionSettingsSaga(),
     reorderSessionsSaga(),
     sendInterventionInviteSaga(),
+    fetchInterventionEmailsSaga(),
+    resendInterventionInviteSaga(),
+    deleteInterventionInviteSaga(),
   ]);
 }

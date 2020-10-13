@@ -17,6 +17,8 @@ export {
   createInterventionRequest,
   sendInterventionInviteRequest,
   resendInterventionInviteRequest,
+  fetchInterventionEmailsRequest,
+  deleteInterventionInviteRequest,
 } from './actions';
 export { problemReducer } from './reducer';
 export {
@@ -49,7 +51,8 @@ export {
   updateFormula,
   updateFormulaCase,
   changeSchedulingType,
-  updateSchedulingValue,
+  updateSchedulingDate,
+  updateSchedulingPayload,
 } from './interventionSettings/actions';
 
 export { SCHEDULE_OPTIONS } from './interventionSettings/constants';

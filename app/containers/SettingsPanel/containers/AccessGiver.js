@@ -79,8 +79,7 @@ const AccessGiver = ({
     setValue([]);
   };
 
-  const revokeAction = user => {
-    const { id } = user;
+  const revokeAction = id => {
     if (id) revokeUserAccess(problemId, id);
   };
 
@@ -90,6 +89,14 @@ const AccessGiver = ({
         <Spinner color={themeColors.secondary} />
       </Box>
     );
+
+  const buttons = [
+    {
+      action: revokeAction,
+      disabled: removingParticipantsPossible,
+      text: <FormattedMessage {...messages.remove} />,
+    },
+  ];
 
   return (
     <Box mt={40}>
@@ -131,11 +138,9 @@ const AccessGiver = ({
             />
           )}
           <UserList
-            removingParticipantsPossible={removingParticipantsPossible}
+            buttons={buttons}
             users={usersWithAccess || []}
             buttonIsClose
-            buttonText={formatMessage(messages.remove)}
-            buttonAction={revokeAction}
             userWithLoading={find(usersWithAccess, user => user.loading) || {}}
           />
           {enableAccessLoading && <Spinner color={themeColors.secondary} />}

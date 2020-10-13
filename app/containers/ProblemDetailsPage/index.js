@@ -3,7 +3,6 @@
  * ProblemDetailsPage
  *
  */
-
 import React, { useLayoutEffect, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -36,6 +35,7 @@ import {
   createInterventionRequest,
   makeSelectCurrentInterventionIndex,
   changeCurrentIntervention,
+  fetchInterventionEmailsRequest,
 } from 'global/reducers/problem';
 import { problemOptionsSaga } from 'global/sagas/problemOptionsSaga';
 
@@ -93,6 +93,7 @@ export function ProblemDetailsPage({
   reorderInterventions,
   copyProblem,
   fetchQuestions,
+  fetchInterventionEmails,
 }) {
   useInjectReducer({
     key: 'problem',
@@ -206,11 +207,11 @@ export function ProblemDetailsPage({
         {interventions &&
           orderBy(interventions, 'position').map((intervention, index) => {
             const handleClick = () => {
+              fetchInterventionEmails(index);
               if (intervention.position !== interventionIndex + 1) {
                 fetchQuestions(intervention.id);
                 changeInterventionIndex(index);
               }
-
               setParticipantShareModalVisible(true);
             };
             const nextIntervention = interventions.find(
@@ -355,6 +356,7 @@ ProblemDetailsPage.propTypes = {
   reorderInterventions: PropTypes.func,
   copyProblem: PropTypes.func,
   fetchQuestions: PropTypes.func,
+  fetchInterventionEmails: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -368,6 +370,7 @@ const mapDispatchToProps = {
   fetchProblem: fetchProblemRequest,
   editProblem: editProblemRequest,
   changeInterventionIndex: changeCurrentIntervention,
+  fetchInterventionEmails: fetchInterventionEmailsRequest,
   sendCsv: sendProblemCsvRequest,
   copyIntervention: copyInterventionRequest,
   reorderInterventions: reorderInterventionList,

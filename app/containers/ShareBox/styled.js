@@ -30,6 +30,7 @@ export const HiddenInput = styled.input`
 
 export const StyledTextButton = styled(TextButton)`
   display: none;
+  margin-left: 20px;
 `;
 
 export const HoverableRow = styled(Row)`

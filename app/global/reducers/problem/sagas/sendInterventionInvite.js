@@ -3,33 +3,34 @@ import { put, select, takeLatest } from 'redux-saga/effects';
 import { info as showInfo, error as showError } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
-
 import {
-  makeSelectCurrentInterventionIndex,
-  makeSelectProblem,
-} from '../selectors';
-import {
+  fetchInterventionEmailsSuccess,
   sendInterventionInviteError,
   sendInterventionInviteSuccess,
 } from '../actions';
 import {
-  RESEND_INTERVENTION_INVITE_REQUEST,
   SEND_INTERVENTION_INVITE_ERROR,
   SEND_INTERVENTION_INVITE_REQUEST,
   SEND_INTERVENTION_INVITE_SUCCESS,
 } from '../constants';
 import messages from '../messages';
+import { makeSelectProblem } from '../selectors';
 
-function* sendInterventionInvite({ payload: { emails } }) {
-  const interventionIndex = yield select(makeSelectCurrentInterventionIndex());
+function* sendInterventionInvite({ payload: { emails, interventionId } }) {
   const problem = yield select(makeSelectProblem());
-  const intervention = problem.interventions[interventionIndex];
-  const requestURL = `v1/problems/${intervention.problem_id}/interventions/${
-    intervention.id
-  }/invite`;
+  const interventionIndex = problem.interventions.findIndex(
+    intervention => intervention.id === interventionId,
+  );
+
+  const requestURL = `v1/interventions/${interventionId}/invitations`;
   try {
-    yield axios.post(requestURL, { intervention: { emails } });
+    const {
+      data: { intervention_invitations: users },
+    } = yield axios.post(requestURL, {
+      intervention_invitation: { emails },
+    });
     yield put(sendInterventionInviteSuccess());
+    yield put(fetchInterventionEmailsSuccess(users, interventionIndex));
     yield put(
       showInfo(formatMessage(messages.sendInviteSuccess), {
         id: SEND_INTERVENTION_INVITE_SUCCESS,
@@ -46,8 +47,5 @@ function* sendInterventionInvite({ payload: { emails } }) {
 }
 
 export default function* sendInterventionInviteSaga() {
-  yield takeLatest(
-    [SEND_INTERVENTION_INVITE_REQUEST, RESEND_INTERVENTION_INVITE_REQUEST],
-    sendInterventionInvite,
-  );
+  yield takeLatest([SEND_INTERVENTION_INVITE_REQUEST], sendInterventionInvite);
 }

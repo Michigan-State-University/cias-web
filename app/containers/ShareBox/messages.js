@@ -38,6 +38,10 @@ export default defineMessages({
     id: `${scope}.resend`,
     defaultMessage: 'Resend invite',
   },
+  remove: {
+    id: `${scope}.remove`,
+    defaultMessage: 'Remove',
+  },
   userListLabel: {
     id: `${scope}.userListLabel`,
     defaultMessage: 'Invite has beed already sent to',

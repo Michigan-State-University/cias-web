@@ -6,7 +6,8 @@ import {
   UPDATE_FORMULA_CASE,
   CHANGE_FORMULA_STATUS,
   CHANGE_SCHEDULING_TYPE,
-  UPDATE_SCHEDULING_VALUE,
+  UPDATE_SCHEDULING_PAYLOAD,
+  UPDATE_SCHEDULING_DATE,
 } from './constants';
 
 const interventionSettingsReducer = (intervention, payload) => {
@@ -39,9 +40,14 @@ const interventionSettingsReducer = (intervention, payload) => {
     case CHANGE_SCHEDULING_TYPE:
       clonedIntervention.schedule = payload.data.value;
       clonedIntervention.schedule_at = '';
+      clonedIntervention.schedule_payload = '';
       return clonedIntervention;
 
-    case UPDATE_SCHEDULING_VALUE:
+    case UPDATE_SCHEDULING_PAYLOAD:
+      clonedIntervention.schedule_payload = parseInt(payload.data.value, 10);
+      return clonedIntervention;
+
+    case UPDATE_SCHEDULING_DATE:
       clonedIntervention.schedule_at = payload.data.value;
       return clonedIntervention;
 

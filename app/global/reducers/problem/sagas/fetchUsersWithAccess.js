@@ -16,9 +16,9 @@ function* fetchUsersWithAccess({ payload: { id } }) {
     const requestURL = `v1/problems/${id}/users`;
     try {
       const {
-        data: { data },
+        data: { user_interventions: users },
       } = yield axios.get(requestURL);
-      const accessMapped = data.map(mapAccessToStateObject);
+      const accessMapped = users.map(mapAccessToStateObject);
       yield put(fetchUsersWithAccessSuccess(accessMapped));
     } catch (error) {
       yield put(fetchUsersWithAccessFailure(error));

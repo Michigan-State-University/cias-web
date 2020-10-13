@@ -42,4 +42,22 @@ export default defineMessages({
     id: `${scope}.sendInviteError`,
     defaultMessage: 'Unable to send the invitation',
   },
+  resendInviteSuccess: {
+    id: `${scope}.resendInviteSuccess`,
+    defaultMessage:
+      'The request to resend the invitation has been successfully created. We will send an email soon.',
+  },
+  resendInviteError: {
+    id: `${scope}.resendInviteError`,
+    defaultMessage: 'Unable to resend the invitation',
+  },
+  deleteInviteSuccess: {
+    id: `${scope}.deleteInviteSuccess`,
+    defaultMessage:
+      'Participant has been removed from the further delivery of e-mail notifications about next sessions',
+  },
+  deleteInviteError: {
+    id: `${scope}.deleteInviteError`,
+    defaultMessage: 'Unable to remove the invitation',
+  },
 });

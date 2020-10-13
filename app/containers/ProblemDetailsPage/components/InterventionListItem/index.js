@@ -50,6 +50,7 @@ function InterventionListItem({
     formula,
     schedule,
     schedule_at: scheduleAt,
+    schedule_payload: schedulePayload,
     settings,
   } = intervention || {};
 
@@ -106,6 +107,7 @@ function InterventionListItem({
             interventionId={id}
             selectedScheduleOption={schedule}
             scheduleAt={scheduleAt}
+            schedulePayload={schedulePayload}
           />
         </Row>
       )}

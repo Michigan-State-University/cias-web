@@ -4,6 +4,7 @@
  *
  */
 
+import Loader from 'components/Loader';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -18,13 +19,14 @@ import Row from 'components/Row';
 import H3 from 'components/H3';
 
 import { colors } from 'theme';
+import { canShareWithParticipants } from 'models/Status/statusPermissions';
 import {
   sendInterventionInviteRequest,
   resendInterventionInviteRequest,
   makeSelectProblemLoader,
   makeSelectProblemStatus,
+  deleteInterventionInviteRequest,
 } from 'global/reducers/problem';
-import { canShareWithParticipants } from 'models/Status/statusPermissions';
 
 import ParticipantInviter from './Components/ParticipantInviter';
 import UserList from './Components/UserList';
@@ -36,15 +38,31 @@ const ShareBox = ({
   intervention,
   sendInvite,
   resendInvite,
+  deleteInvite,
   sendLoading,
-  resendLoading,
+  emailLoading,
+  listLoading,
   problemStatus,
 }) => {
   const { problem_id: problemId, slug, emails, position } = intervention || {};
 
-  const handleResend = user => resendInvite([user.email], intervention.id);
+  const handleResend = id => resendInvite(id, intervention.id);
+  const handleDelete = id => deleteInvite(id, intervention.id);
 
   const sharingPossible = canShareWithParticipants(problemStatus);
+
+  const buttons = [
+    {
+      action: handleResend,
+      disabled: sharingPossible,
+      text: <FormattedMessage {...messages.resend} />,
+    },
+    {
+      action: handleDelete,
+      disabled: sharingPossible,
+      text: <FormattedMessage {...messages.remove} />,
+    },
+  ];
 
   if (intervention) {
     const link = `${
@@ -68,26 +86,28 @@ const ShareBox = ({
             <FormattedMessage {...messages.copyLabel} />
           </CopyToClipboard>
         </Row>
+        {listLoading && <Loader type="inline" />}
         {emails && emails.length !== 0 && (
-          <H3
-            mt={40}
-            mb={15}
-            fontSize={13}
-            fontWeight="bold"
-            color={colors.bluewood}
-            textOpacity={0.6}
-          >
-            <FormattedMessage {...messages.userListLabel} />
-          </H3>
+          <>
+            <H3
+              mt={40}
+              mb={15}
+              fontSize={13}
+              fontWeight="bold"
+              color={colors.bluewood}
+              textOpacity={0.6}
+            >
+              <FormattedMessage {...messages.userListLabel} />
+            </H3>
+            <Row maxHeight={350} overflow="scroll" padding={10}>
+              <UserList
+                buttons={buttons}
+                users={emails}
+                userWithLoading={emailLoading}
+              />
+            </Row>
+          </>
         )}
-        <Row maxHeight={350} overflow="scroll" padding={10}>
-          <UserList
-            buttonText={<FormattedMessage {...messages.resend} />}
-            buttonAction={handleResend}
-            users={emails.map(email => ({ email }))}
-            userWithLoading={{ email: resendLoading.email }}
-          />
-        </Row>
       </Box>
     );
   }
@@ -100,21 +120,25 @@ ShareBox.propTypes = {
   }),
   sendInvite: PropTypes.func,
   resendInvite: PropTypes.func,
+  deleteInvite: PropTypes.func,
   sendLoading: PropTypes.bool,
-  resendLoading: PropTypes.object,
+  listLoading: PropTypes.bool,
+  emailLoading: PropTypes.object,
   problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectCurrenIntervention(),
   sendLoading: makeSelectProblemLoader('sendInterventionLoading'),
-  resendLoading: makeSelectProblemLoader('resendInterventionLoading'),
+  listLoading: makeSelectProblemLoader('fetchInterventionEmailsLoading'),
+  emailLoading: makeSelectProblemLoader('interventionEmailLoading'),
   problemStatus: makeSelectProblemStatus(),
 });
 
 const mapDispatchToProps = {
   sendInvite: sendInterventionInviteRequest,
   resendInvite: resendInterventionInviteRequest,
+  deleteInvite: deleteInterventionInviteRequest,
 };
 
 const withConnect = connect(

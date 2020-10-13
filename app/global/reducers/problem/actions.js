@@ -38,6 +38,12 @@ import {
   SEND_INTERVENTION_INVITE_SUCCESS,
   SEND_INTERVENTION_INVITE_ERROR,
   RESEND_INTERVENTION_INVITE_REQUEST,
+  FETCH_INTERVENTION_EMAILS_REQUEST,
+  FETCH_INTERVENTION_EMAILS_SUCCESS,
+  FETCH_INTERVENTION_EMAILS_ERROR,
+  DELETE_INTERVENTION_INVITE_REQUEST,
+  DELETE_INTERVENTION_INVITE_SUCCESS,
+  DELETE_INTERVENTION_INVITE_ERROR,
 } from './constants';
 
 export const fetchProblemRequest = id =>
@@ -121,12 +127,24 @@ export const createInterventionError = () =>
 
 export const sendInterventionInviteRequest = (emails, interventionId) =>
   actionBuilder(SEND_INTERVENTION_INVITE_REQUEST, { emails, interventionId });
-
 export const sendInterventionInviteSuccess = () =>
   actionBuilder(SEND_INTERVENTION_INVITE_SUCCESS, {});
-
 export const sendInterventionInviteError = () =>
   actionBuilder(SEND_INTERVENTION_INVITE_ERROR, {});
 
-export const resendInterventionInviteRequest = (emails, interventionId) =>
-  actionBuilder(RESEND_INTERVENTION_INVITE_REQUEST, { emails, interventionId });
+export const resendInterventionInviteRequest = (id, interventionId) =>
+  actionBuilder(RESEND_INTERVENTION_INVITE_REQUEST, { id, interventionId });
+
+export const fetchInterventionEmailsRequest = index =>
+  actionBuilder(FETCH_INTERVENTION_EMAILS_REQUEST, { index });
+export const fetchInterventionEmailsSuccess = (emails, index) =>
+  actionBuilder(FETCH_INTERVENTION_EMAILS_SUCCESS, { emails, index });
+export const fetchInterventionEmailsError = error =>
+  actionBuilder(FETCH_INTERVENTION_EMAILS_ERROR, { error });
+
+export const deleteInterventionInviteRequest = (id, interventionId) =>
+  actionBuilder(DELETE_INTERVENTION_INVITE_REQUEST, { id, interventionId });
+export const deleteInterventionInviteSuccess = () =>
+  actionBuilder(DELETE_INTERVENTION_INVITE_SUCCESS, {});
+export const deleteInterventionInviteError = () =>
+  actionBuilder(DELETE_INTERVENTION_INVITE_ERROR, {});
