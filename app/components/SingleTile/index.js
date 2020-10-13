@@ -33,6 +33,7 @@ import Tooltip from 'components/Tooltip';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import SelectResearchers from 'containers/ProblemDetailsPage/components/SelectResearchers';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
 import messages from './messages';
 import {
   TileContainer,
@@ -63,7 +64,7 @@ const SingleTile = ({
   const {
     name,
     status,
-    interventions,
+    interventions_size: interventionsSize,
     id,
     user,
     created_at: createdAt,
@@ -155,13 +156,12 @@ const SingleTile = ({
             }
           >
             <TileInfo>
-              {interventions && (
+              {!isNullOrUndefined(interventionsSize) && (
                 <div>
                   <Text>
-                    <FormattedMessage
-                      {...messages.sessions}
-                      values={{ sessionCount: interventions.length }}
-                    />
+                    {formatMessage(messages.sessions, {
+                      sessionCount: interventionsSize,
+                    })}
                   </Text>
                 </div>
               )}
