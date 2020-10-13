@@ -5,7 +5,6 @@ import { dismiss, error as showError } from 'react-toastify-redux';
 import { getAllVariables } from 'models/Intervention/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
-import { makeSelectIntervention } from 'global/reducers/intervention';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import {
@@ -28,7 +27,6 @@ import { editQuestionSuccess, editQuestionError } from '../actions';
 import { makeSelectSelectedQuestion, makeSelectQuestions } from '../selectors';
 
 function* editQuestion() {
-  const intervention = yield select(makeSelectIntervention());
   const question = yield select(makeSelectSelectedQuestion());
   const questions = yield select(makeSelectQuestions());
   const variables = getAllVariables(questions).filter(
@@ -64,9 +62,9 @@ function* editQuestion() {
   }
   yield put(dismiss(EDIT_QUESTION_ERROR));
 
-  const requestURL = `v1/interventions/${intervention.id}/questions/${
-    question.id
-  }`;
+  const requestURL = `v1/question_groups/${
+    question.question_group_id
+  }/questions/${question.id}`;
   try {
     const response = yield axios.put(requestURL, {
       question,

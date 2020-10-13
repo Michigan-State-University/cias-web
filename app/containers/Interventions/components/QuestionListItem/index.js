@@ -50,7 +50,6 @@ const QuestionListItem = ({
   removeQuestion,
   intl: { formatMessage },
   copyQuestion,
-  interventionId,
   changeNarratorBlockIndex,
   setDraggable,
   setCharacterPosition,
@@ -59,7 +58,7 @@ const QuestionListItem = ({
   manage,
   disabled,
 }) => {
-  const { type, subtitle, id, body } = question;
+  const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
 
   const handleSelectClick = newIndex => {
@@ -77,7 +76,7 @@ const QuestionListItem = ({
   const handleDelete = () => {
     const newIndex = getIndex(selectedQuestionIndex, questions.length);
     handleSelectClick(newIndex);
-    removeQuestion({ questionId: id, interventionId });
+    removeQuestion({ questionId: id, groupId });
   };
 
   const handleCopy = () => {

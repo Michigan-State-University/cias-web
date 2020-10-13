@@ -23,16 +23,13 @@ import {
 } from '../actions';
 import { makeSelectQuestions } from '../selectors';
 
-function* createQuestion({ payload: { question, id } }) {
-  const requestURL = `v1/interventions/${id}/questions`;
-
-  const questions = yield select(makeSelectQuestions());
+function* createQuestion({ payload: { question } }) {
   const defaultGroupId = yield select(makeSelectDefaultGroupId());
+  const questions = yield select(makeSelectQuestions());
+
+  const requestURL = `v1/question_groups/${defaultGroupId}/questions`;
   try {
-    const response = yield axios.post(requestURL, {
-      ...question,
-      ...{ question_group_id: defaultGroupId },
-    });
+    const response = yield axios.post(requestURL, question);
 
     const createdQuestion = mapQuestionToStateObject(response.data.data);
     const { id: newQuestionId } = createdQuestion;
