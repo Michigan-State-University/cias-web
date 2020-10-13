@@ -32,7 +32,7 @@ import {
 import {
   makeSelectQuestions,
   makeSelectSelectedQuestion,
-  makeSelectSelectedQuestionIndex,
+  makeSelectSelectedQuestionId,
 } from 'global/reducers/questions';
 
 import messages from './messages';
@@ -255,7 +255,7 @@ const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
-  currentIndex: makeSelectSelectedQuestionIndex(),
+  currentIndex: makeSelectSelectedQuestionId(),
   problemLoading: makeSelectProblemLoader('fetchProblemLoading'),
   problem: makeSelectProblem(),
   interventionIndex: makeSelectCurrentInterventionIndex(),

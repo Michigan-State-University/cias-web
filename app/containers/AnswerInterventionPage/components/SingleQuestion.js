@@ -54,7 +54,7 @@ SingleQuestion.propTypes = {
   question: PropTypes.shape(Question).isRequired,
   answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
-  questionIndex: PropTypes.number,
+  questionIndex: PropTypes.string,
   saveAnswer: PropTypes.func,
 };
 

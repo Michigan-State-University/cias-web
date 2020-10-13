@@ -14,7 +14,6 @@ function* getQuestions({ payload: { id } }) {
 
   try {
     const response = yield axios.get(requestURL);
-
     const questions = response.data.data.map(question =>
       mapQuestionToStateObject(question),
     );

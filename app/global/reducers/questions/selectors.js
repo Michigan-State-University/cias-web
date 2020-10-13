@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import get from 'lodash/get';
+import uniqBy from 'lodash/uniqBy';
 
 import { initialState } from './reducer';
 
@@ -17,7 +18,7 @@ export const makeSelectQuestions = () =>
     substate => substate.questions,
   );
 
-export const makeSelectSelectedQuestionIndex = () =>
+export const makeSelectSelectedQuestionId = () =>
   createSelector(
     selectQuestions,
     substate => substate.selectedQuestion,
@@ -26,7 +27,8 @@ export const makeSelectSelectedQuestionIndex = () =>
 export const makeSelectSelectedQuestion = () =>
   createSelector(
     selectQuestions,
-    substate => substate.questions[substate.selectedQuestion],
+    substate =>
+      substate.questions.find(({ id }) => id === substate.selectedQuestion),
   );
 
 export const makeSelectLoaders = () =>
@@ -51,5 +53,24 @@ export const makeSelectSelectedQuestionType = () =>
   createSelector(
     selectQuestions,
     substate =>
-      get(substate.questions[substate.selectedQuestion], 'type', null),
+      get(
+        substate.questions.find(({ id }) => id === substate.selectedQuestion),
+        'type',
+        null,
+      ),
+  );
+
+export const makeSelectGroupQuestions = id =>
+  createSelector(
+    selectQuestions,
+    substate =>
+      substate.questions.filter(
+        ({ question_group_id: questionGroupId }) => questionGroupId === id,
+      ),
+  );
+
+export const makeSelectVisibleGroupsSize = () =>
+  createSelector(
+    selectQuestions,
+    substate => uniqBy(substate.questions, 'question_group_id').length,
   );

@@ -13,7 +13,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import { getNarratorPositionWhenBlockIsRemoved } from 'utils/getNarratorPosition';
 import {
   makeSelectQuestions,
-  makeSelectSelectedQuestionIndex,
+  makeSelectSelectedQuestionId,
 } from 'global/reducers/questions';
 import {
   setCharacterDraggable,
@@ -40,7 +40,7 @@ const WrappedAccordion = ({
   changeNarratorBlockIndex,
   narratorBlockIndex,
   questions,
-  questionIndex,
+  questionId,
   disabled,
 }) => {
   const { voice, animation } = narrator.settings;
@@ -65,7 +65,11 @@ const WrappedAccordion = ({
       changeNarratorBlockIndex(index - 1);
     deleteBlock(index, narratorBlockIndex);
     const newQuestions = cloneDeep(questions);
+    const questionIndex = questions.findIndex(
+      ({ id: qId }) => qId === questionId,
+    );
     newQuestions[questionIndex].narrator.blocks.splice(index, 1);
+
     const position = getNarratorPositionWhenBlockIsRemoved(
       newQuestions,
       questionIndex,
@@ -122,7 +126,7 @@ WrappedAccordion.propTypes = {
   changeNarratorBlockIndex: PropTypes.func,
   narratorBlockIndex: PropTypes.number,
   questions: PropTypes.array,
-  questionIndex: PropTypes.number,
+  questionId: PropTypes.string,
   disabled: PropTypes.bool,
 };
 
@@ -139,7 +143,7 @@ const mapStateToProps = createStructuredSelector({
   animationPosition: makeSelectAnimationPosition(),
   narratorBlockIndex: makeSelectCurrentNarratorBlockIndex(),
   questions: makeSelectQuestions(),
-  questionIndex: makeSelectSelectedQuestionIndex(),
+  questionId: makeSelectSelectedQuestionId(),
 });
 
 const withConnect = connect(

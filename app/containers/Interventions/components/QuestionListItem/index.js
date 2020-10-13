@@ -59,13 +59,13 @@ const QuestionListItem = ({
   manage,
   disabled,
 }) => {
-  const isSelected = selectedQuestionIndex === index;
   const { type, subtitle, id, body } = question;
+  const isSelected = selectedQuestionIndex === id;
 
   const handleSelectClick = newIndex => {
     setDraggable(false);
-    if (selectedQuestionIndex !== newIndex) {
-      onSelect(newIndex);
+    if (selectedQuestionIndex !== id) {
+      onSelect(id);
       const newPosition = getNarratorPositionWhenQuestionIsChanged(
         questions,
         newIndex,
@@ -109,12 +109,13 @@ const QuestionListItem = ({
 
   return (
     <ToggleableBox
-      px={21}
-      py={14}
-      mb={36}
+      padding={15}
+      mb={15}
       width="100%"
       onClick={onChangeItem}
       isSelected={isSelected}
+      bg="#F8FBFF"
+      border={`1px solid ${checked ? '#C866EA' : '#EFEFEF'}`}
     >
       <Row justify="between">
         {manage && (
@@ -171,7 +172,7 @@ QuestionListItem.propTypes = {
   question: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
-  selectedQuestionIndex: PropTypes.number,
+  selectedQuestionIndex: PropTypes.string,
   questions: PropTypes.array,
   settingsVisibility: PropTypes.bool,
   toggleSettings: PropTypes.func,

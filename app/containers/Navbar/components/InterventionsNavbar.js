@@ -15,7 +15,7 @@ import Img from 'components/Img';
 import Box from 'components/Box';
 import {
   makeSelectQuestionsLength,
-  makeSelectSelectedQuestionIndex,
+  makeSelectSelectedQuestionId,
 } from 'global/reducers/questions';
 import {
   editInterventionRequest,
@@ -151,7 +151,7 @@ InterventionNavbar.propTypes = {
   intl: intlShape,
   location: PropTypes.object,
   questionsLength: PropTypes.number,
-  selectedQuestion: PropTypes.number,
+  selectedQuestion: PropTypes.string,
   interventionEditing: PropTypes.bool,
   match: PropTypes.object,
   problemStatus: PropTypes.string,
@@ -160,7 +160,7 @@ InterventionNavbar.propTypes = {
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
   questionsLength: makeSelectQuestionsLength(),
-  selectedQuestion: makeSelectSelectedQuestionIndex(),
+  selectedQuestion: makeSelectSelectedQuestionId(),
   interventionEditing: makeSelectInterventionEditLoader(),
   problemStatus: makeSelectProblemStatus(),
 });

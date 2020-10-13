@@ -11,17 +11,13 @@ export {
   deleteQuestionRequest,
   updateQuestionData,
   updateQuestionSettings,
-  copyQuestionsRequest,
-  deleteQuestionsRequest,
-  groupQuestionsRequest,
-  shareQuestionsToResearchersRequest,
 } from './actions';
 export { questionsReducer } from './reducer';
 export {
   selectQuestions,
   makeSelectQuestionsState,
   makeSelectQuestions,
-  makeSelectSelectedQuestionIndex,
+  makeSelectSelectedQuestionId,
   makeSelectSelectedQuestion,
   makeSelectLoaders,
   makeSelectLoader,
@@ -41,8 +37,4 @@ export {
   updateQuestionDataSaga,
   updateQuestionSettingsSaga,
   changeQuestionTypeSaga,
-  copyQuestionsSaga,
-  deleteQuestionsSaga,
-  groupQuestionsSaga,
-  shareQuestionsToResearchersSaga,
 } from './sagas';
