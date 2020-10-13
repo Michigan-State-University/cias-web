@@ -34,7 +34,7 @@ export const initialState = {
   questionLoading: false,
   questionError: '',
   interventionQuestions: [],
-  questionIndex: '',
+  questionIndex: 0,
   answersLoading: false,
   answersError: '',
   answers: {},
@@ -103,16 +103,14 @@ const answerInterventionPageReducer = (
         draft.feedbackScreenSettings = getEmptyFeedbackScreenSettings();
 
         if (!isNullOrUndefined(payload.question)) {
-          index = payload.question.id;
-
-          if (index === -1) index = draft.questionIndex + 1;
-
-          const arrayIndex = findQuestionIndex(
+          index = findQuestionIndex(
             draft.interventionQuestions,
             payload.question.id,
           );
 
-          set(draft, ['interventionQuestions', arrayIndex], payload.question);
+          if (index === -1) index = draft.questionIndex + 1;
+
+          set(draft, ['interventionQuestions', index], payload.question);
         } else if (!isNullOrUndefined(payload.index)) ({ index } = payload);
         else index = draft.questionIndex + 1;
 
