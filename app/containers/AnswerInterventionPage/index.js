@@ -36,7 +36,6 @@ import {
   problemReducer,
 } from 'global/reducers/problem';
 import { canPreview } from 'models/Status/statusPermissions';
-import { findQuestionById } from 'models/Intervention/utils';
 import {
   BackButton,
   AnswerInterventionContent,
@@ -153,10 +152,16 @@ export function AnswerInterventionPage({
 
   useEffect(() => {
     fetchQuestionsAction(interventionId);
-
-    // cannot skip start screen => user have to click button to enable auto-play
-    if (index) setQuestionIndexAction(index);
   }, []);
+
+  useEffect(() => {
+    if (interventionQuestions.length !== 0) {
+      const startQuestionIndex = !index
+        ? 0
+        : interventionQuestions.findIndex(({ id }) => id === index);
+      setQuestionIndexAction(startQuestionIndex);
+    }
+  }, [interventionQuestions.length]);
 
   if (questionError)
     return (
@@ -172,7 +177,8 @@ export function AnswerInterventionPage({
     );
 
   const assignCurrentQuestion = () => {
-    const question = findQuestionById(interventionQuestions, questionIndex);
+    const question = interventionQuestions[questionIndex];
+
     if (!question) return null;
 
     return question;
@@ -192,7 +198,7 @@ export function AnswerInterventionPage({
       get(currentQuestion, 'type', ''),
     );
 
-  const setQuestion = question => setQuestionIndexAction(question.id);
+  const setQuestion = question => setQuestionIndexAction(question);
 
   const renderQuestion = () => {
     const {

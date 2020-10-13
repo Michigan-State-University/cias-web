@@ -87,7 +87,7 @@ GridQuestion.propTypes = {
   question: PropTypes.shape(Question).isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
-  questionIndex: PropTypes.string,
+  questionIndex: PropTypes.number,
   saveAnswer: PropTypes.func,
 };
 
