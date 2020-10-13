@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 import get from 'lodash/get';
+import uniqBy from 'lodash/uniqBy';
 
 import { initialState } from './reducer';
 
@@ -66,4 +67,10 @@ export const makeSelectGroupQuestions = id =>
       substate.questions.filter(
         ({ question_group_id: questionGroupId }) => questionGroupId === id,
       ),
+  );
+
+export const makeSelectVisibleGroupsSize = () =>
+  createSelector(
+    selectQuestions,
+    substate => uniqBy(substate.questions, 'question_group_id').length,
   );

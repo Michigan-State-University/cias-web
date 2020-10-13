@@ -36,6 +36,7 @@ import {
   problemReducer,
 } from 'global/reducers/problem';
 import { canPreview } from 'models/Status/statusPermissions';
+import { findQuestionById } from 'models/Intervention/utils';
 import {
   BackButton,
   AnswerInterventionContent,
@@ -171,9 +172,7 @@ export function AnswerInterventionPage({
     );
 
   const assignCurrentQuestion = () => {
-    const question = interventionQuestions.find(
-      ({ id }) => id === questionIndex,
-    );
+    const question = findQuestionById(interventionQuestions, questionIndex);
     if (!question) return null;
 
     return question;

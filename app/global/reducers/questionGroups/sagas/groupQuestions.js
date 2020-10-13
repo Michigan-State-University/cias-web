@@ -4,10 +4,10 @@ import { error as showError } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import { makeSelectVisibleGroupsSize } from 'global/reducers/questions/selectors';
 import messages from '../messages';
 import { GROUP_QUESTIONS_REQUEST, GROUP_QUESTIONS_ERROR } from '../constants';
 import { groupQuestionsError, groupQuestionsSuccess } from '../actions';
-import { makeSelectVisibleGroupsSize } from '../selectors';
 
 function* groupQuestions({ payload: { questionIds, interventionId } }) {
   const requestURL = `v1/interventions/${interventionId}/question_groups`;
