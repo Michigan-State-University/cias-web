@@ -28,7 +28,13 @@ const TextboxQuestion = ({
 
   return (
     <Column mt={10}>
-      <Box bg={colors.linkWater} width="100%" px={21} py={14}>
+      <Box
+        bgOpacity={0}
+        width="100%"
+        px={21}
+        py={14}
+        border={`1px solid ${colors.casper}`}
+      >
         <Row>
           <ApprovableInput
             rows="5"

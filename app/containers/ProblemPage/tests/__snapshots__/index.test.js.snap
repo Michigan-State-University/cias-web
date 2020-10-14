@@ -86,7 +86,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
           class="styled__SearchInputStyled-sc-65e6t4-3 drvUyz"
         >
           <input
-            class="Input-sc-19txxuq-0 tkGyX"
+            class="Input-sc-19txxuq-0 eNhWGX"
             placeholder="Filter by name"
             type="text"
             value=""

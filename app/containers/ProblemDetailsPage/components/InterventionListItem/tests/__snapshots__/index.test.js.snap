@@ -378,6 +378,10 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   border: 1px solid #107969;
 }
 
+.c33:disabled {
+  color: #ABBBD1;
+}
+
 .c2 {
   width: 100%;
   margin-top: 18px;

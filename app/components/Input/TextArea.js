@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { themeColors, borders, paddings } from 'theme';
+import { themeColors, borders, paddings, colors } from 'theme';
 import { margin, layout } from '../BaseComponentStyles';
 
 const TextArea = styled.textarea`
@@ -20,6 +20,9 @@ const TextArea = styled.textarea`
       backgroundColor: 'transparent',
       border: `${borders.borderWidth} ${borders.borderStyle} transparent`,
     }};
+  &:disabled {
+    color: ${colors.casper};
+  }
 `;
 
 TextArea.propTypes = {

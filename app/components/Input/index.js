@@ -31,6 +31,9 @@ const Input = styled.input.attrs(props => ({ type: props.keyboard }))`
   ${padding};
   ${text};
   ${style};
+  &:disabled {
+    color: ${colors.casper};
+  }
 `;
 
 Input.propTypes = {

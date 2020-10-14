@@ -182,6 +182,10 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
   border-color: #107969;
 }
 
+.c4:disabled {
+  color: #ABBBD1;
+}
+
 .c0 {
   width: auto;
   height: auto;

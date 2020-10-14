@@ -121,7 +121,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
               First Name
             </p>
             <input
-              class="Input-sc-19txxuq-0 iCEjLf"
+              class="Input-sc-19txxuq-0 fcoxGj"
               height="46"
               name="firstName"
               placeholder="Enter first name"
@@ -140,7 +140,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
               Last name
             </p>
             <input
-              class="Input-sc-19txxuq-0 iCEjLf"
+              class="Input-sc-19txxuq-0 fcoxGj"
               height="46"
               name="lastName"
               placeholder="Enter last name"

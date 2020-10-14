@@ -54,7 +54,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   padding-bottom: 14px;
   padding-right: 21px;
   padding-left: 21px;
-  background-color: rgba(233,241,251,1);
+  border: 1px solid #ABBBD1;
 }
 
 .c23 {
@@ -253,6 +253,10 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border-color: #107969;
 }
 
+.c18:disabled {
+  color: #ABBBD1;
+}
+
 .c22 {
   padding: 12px;
   border-style: solid;
@@ -271,6 +275,10 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   box-shadow: none;
   outline: none;
   border-color: #107969;
+}
+
+.c22:disabled {
+  color: #ABBBD1;
 }
 
 .c19 {

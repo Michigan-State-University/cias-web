@@ -59,7 +59,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
               </span>
             </p>
             <input
-              class="Input-sc-19txxuq-0 eMxSpt"
+              class="Input-sc-19txxuq-0 hpaIjl"
               placeholder="e.g john.doe@contact.com"
               type="text"
               value="invalidemail"
@@ -195,7 +195,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
               </span>
             </p>
             <input
-              class="Input-sc-19txxuq-0 eMxSpt"
+              class="Input-sc-19txxuq-0 hpaIjl"
               placeholder="e.g john.doe@contact.com"
               type="text"
               value=""
@@ -325,7 +325,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
               </span>
             </p>
             <input
-              class="Input-sc-19txxuq-0 eMxSpt"
+              class="Input-sc-19txxuq-0 hpaIjl"
               placeholder="e.g john.doe@contact.com"
               type="text"
               value=""
