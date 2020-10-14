@@ -36,8 +36,8 @@ const CollapseLabel = ({
   const displayedImage = !imgWithBackground ? (
     imgElement
   ) : (
-      <ImageWrapper>{imgElement}</ImageWrapper>
-    );
+    <ImageWrapper>{imgElement}</ImageWrapper>
+  );
   return (
     <Row justify="between" align="center">
       <StyledCollapseLabel
