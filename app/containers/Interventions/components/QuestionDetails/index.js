@@ -7,10 +7,11 @@ import { createStructuredSelector } from 'reselect';
 
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Question from 'models/Intervention/Question';
-
 import AppContainer from 'components/Container';
 import Row from 'components/Row';
+
+import Question from 'models/Intervention/Question';
+import { hasObjectProperty } from 'utils/hasObjectProperty';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { Button } from 'components/Button';
 import { colors } from 'theme';
@@ -30,6 +31,7 @@ import QuestionPreview from './QuestionPreview';
 import QuestionSubtitle from '../QuestionSubtitle';
 import QuestionTitle from '../QuestionTitle';
 import QuestionVideo from '../QuestionVideo';
+import VariableInput from './VariableInput';
 import messages from './messages';
 import { AnswerOuterContainer, AnswerInterventionContent } from './styled';
 
@@ -63,6 +65,7 @@ const RenderQuestionDetails = ({
       subtitle: questionSubtitle,
       image_url: imageUrl,
       video_url: videoUrl,
+      body,
       settings: {
         video,
         image,
@@ -98,6 +101,15 @@ const RenderQuestionDetails = ({
                     {subtitle && (
                       <Row mt={10}>
                         <QuestionSubtitle />
+                      </Row>
+                    )}
+                    {body && hasObjectProperty(body, 'variable') && (
+                      <Row mt={10} ml={26}>
+                        <VariableInput
+                          problemStatus={problemStatus}
+                          isNarratorTab={isNarratorTab}
+                          variable={body.variable}
+                        />
                       </Row>
                     )}
                     {video && (

@@ -167,6 +167,7 @@ function EditInterventionPage({
                       questions={questions}
                       question={question}
                       interventionId={params.interventionId}
+                      problemStatus={problemStatus}
                     />
                   </Row>
                 ))}

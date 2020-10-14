@@ -9,11 +9,14 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import unescape from 'lodash/unescape';
 
-import Badge from 'components/Badge';
 import Column from 'components/Column';
 import Comment from 'components/Text/Comment';
 import Dropdown from 'components/Dropdown';
 import Row from 'components/Row';
+import StyledCircle from 'components/Circle/StyledCircle';
+import { QuestionTypes } from 'models/Intervention/QuestionTypes';
+import Box from 'components/Box';
+
 import globalMessages from 'global/i18n/globalMessages';
 import { colors } from 'theme';
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
@@ -32,9 +35,7 @@ import {
   changeCurrentNarratorBlock,
 } from 'global/reducers/localState';
 
-import StyledCircle from 'components/Circle/StyledCircle';
-import { QuestionTypes } from 'models/Intervention/QuestionTypes';
-import Box from 'components/Box';
+import VariableInput from '../QuestionDetails/VariableInput';
 import { ToggleableBox, ClampedTitle } from './styled';
 import messages from './messages';
 import getIndex from './utils';
@@ -53,6 +54,7 @@ const QuestionListItem = ({
   changeNarratorBlockIndex,
   setDraggable,
   setCharacterPosition,
+  problemStatus,
   disabled,
 }) => {
   const isSelected = selectedQuestionIndex === index;
@@ -134,11 +136,11 @@ const QuestionListItem = ({
             </Box>
           </Row>
           {body && hasObjectProperty(body, 'variable') && (
-            <Row mt={5}>
-              <Badge color={colors.jungleGreen} bgWithOpacity>
-                {(body.variable.name && body.variable.name.trim()) ||
-                  formatMessage(globalMessages.variables.emptyVariable)}
-              </Badge>
+            <Row mt={10}>
+              <VariableInput
+                variable={body.variable}
+                problemStatus={problemStatus}
+              />
             </Row>
           )}
         </Column>
@@ -166,6 +168,7 @@ QuestionListItem.propTypes = {
   setDraggable: PropTypes.func,
   setCharacterPosition: PropTypes.func,
   disabled: PropTypes.bool,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
