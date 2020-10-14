@@ -1,6 +1,4 @@
 import { createSelector } from 'reselect';
-// import uniqBy from 'lodash/uniqBy';
-// import { selectQuestions } from '../questions';
 
 import { initialState } from './reducer';
 

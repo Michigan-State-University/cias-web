@@ -14,6 +14,7 @@ import {
   StyledCollapseContainer,
   StyledCollapseContent,
   Content,
+  ImageWrapper,
 } from './styled';
 
 const CollapseLabel = ({
@@ -23,14 +24,31 @@ const CollapseLabel = ({
   color,
   onDelete,
   disabled,
+  onShowImg,
+  onHideImg,
+  height,
+  py,
+  px,
+  imgWithBackground,
 }) => {
-  const img = isOpened ? arrowUp : arrowDown;
-
+  const img = isOpened ? onShowImg : onHideImg;
+  const imgElement = <Img src={img} />;
+  const displayedImage = !imgWithBackground ? (
+    imgElement
+  ) : (
+      <ImageWrapper>{imgElement}</ImageWrapper>
+    );
   return (
     <Row justify="between" align="center">
-      <StyledCollapseLabel bg={color} onClick={onToggle}>
+      <StyledCollapseLabel
+        py={py}
+        px={px}
+        height={height}
+        bg={color}
+        onClick={onToggle}
+      >
         <Row justify="between">
-          {label} <Img src={img} />
+          {label} {displayedImage}
         </Row>
       </StyledCollapseLabel>
       {!disabled && <Img src={bin} alt="bin" clickable onClick={onDelete} />}
@@ -39,12 +57,18 @@ const CollapseLabel = ({
 };
 
 CollapseLabel.propTypes = {
-  label: PropTypes.string,
+  label: PropTypes.any,
   onToggle: PropTypes.func,
   isOpened: PropTypes.bool,
   color: PropTypes.string,
+  height: PropTypes.string,
   onDelete: PropTypes.func,
   disabled: PropTypes.bool,
+  imgWithBackground: PropTypes.bool,
+  onShowImg: PropTypes.any,
+  onHideImg: PropTypes.any,
+  py: PropTypes.number,
+  px: PropTypes.number,
 };
 
 const CollapseContent = ({ child, isOpened }) => {
@@ -87,32 +111,63 @@ const Collapse = ({
   color,
   onDelete,
   disabled,
-}) => (
-  <StyledCollapseContainer>
-    <CollapseLabel
-      label={label}
-      onToggle={onToggle}
-      isOpened={isOpened}
-      color={color}
-      onDelete={onDelete}
-      disabled={disabled}
-    />
-    <CollapseContent child={children} isOpened={isOpened} />
-  </StyledCollapseContainer>
-);
+  onShowImg,
+  onHideImg,
+  height,
+  py,
+  px,
+  imgWithBackground,
+  initialOpened,
+}) => {
+  const [internalOpened, setInternalOpened] = useState(initialOpened);
+  const internalOnToggle = () => setInternalOpened(!internalOpened);
+  return (
+    <StyledCollapseContainer>
+      <CollapseLabel
+        label={label}
+        onToggle={onToggle || internalOnToggle}
+        isOpened={isOpened || internalOpened}
+        color={color}
+        onDelete={onDelete}
+        disabled={disabled}
+        onShowImg={onShowImg}
+        onHideImg={onHideImg}
+        height={height}
+        py={py}
+        px={px}
+        imgWithBackground={imgWithBackground}
+      />
+      <CollapseContent child={children} isOpened={isOpened || internalOpened} />
+    </StyledCollapseContainer>
+  );
+};
 
 Collapse.propTypes = {
   children: PropTypes.node,
-  label: PropTypes.string,
+  label: PropTypes.any,
   onToggle: PropTypes.func,
   isOpened: PropTypes.bool,
   color: PropTypes.string,
   onDelete: PropTypes.func,
   disabled: PropTypes.bool,
+  onShowImg: PropTypes.any,
+  onHideImg: PropTypes.any,
+  height: PropTypes.string,
+  py: PropTypes.number,
+  px: PropTypes.number,
+  imgWithBackground: PropTypes.bool,
+  initialOpened: PropTypes.bool,
 };
 
 Collapse.defaultProps = {
   color: '#000',
+  onShowImg: arrowUp,
+  onHideImg: arrowDown,
+  height: '40px',
+  px: 12,
+  py: 12,
+  imgWithBackground: false,
+  initialOpened: false,
 };
 
 export default Collapse;

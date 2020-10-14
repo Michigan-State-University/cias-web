@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Reorder from 'react-reorder';
 
 import { AccordionContainer } from './styled';
-import Collapse from './Collapse';
+import Collapse from '../Collapse';
 
 const Accordion = ({
   children,
