@@ -24,3 +24,9 @@ export const makeSelectDefaultGroupId = () =>
     selectQuestionGroups,
     substate => substate.groups.find(({ default: dft }) => dft === true).id,
   );
+
+export const makeSelectQuestionGroupsLoader = () =>
+  createSelector(
+    selectQuestionGroups,
+    substate => substate.questionsGroupsSaving,
+  );

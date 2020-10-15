@@ -15,14 +15,14 @@ function* changeGroupName({ payload: { title, interventionId, groupId } }) {
   const requestURL = `/v1/interventions/${interventionId}/question_groups/${groupId}`;
   try {
     yield axios.put(requestURL, { title });
-    yield put(changeGroupNameSuccess(groupId, title));
+    yield put(changeGroupNameSuccess());
   } catch (error) {
+    yield put(changeGroupNameError(error));
     yield put(
-      showError(formatMessage(messages.copyError), {
+      showError(formatMessage(messages.changeGroupName), {
         id: CHANGE_GROUP_NAME_ERROR,
       }),
     );
-    yield put(changeGroupNameError(error));
   }
 }
 

@@ -23,6 +23,7 @@ import {
   editInterventionSaga,
   makeSelectInterventionEditLoader,
 } from 'global/reducers/intervention';
+import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
 import { themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
 import backButton from 'assets/svg/arrow-black.svg';
@@ -52,6 +53,7 @@ const InterventionNavbar = ({
   questionsLength,
   selectedQuestion,
   interventionEditing,
+  questionGroupsEditing,
   problemStatus,
   match: { params },
 }) => {
@@ -68,6 +70,8 @@ const InterventionNavbar = ({
   const previewDisabled = !questionsLength || !canPreview(problemStatus);
 
   const editingPossible = canEdit(problemStatus);
+
+  const isSaving = questionGroupsEditing || interventionEditing;
 
   return (
     <Row align="center" justify="between" width="100%" mr={35}>
@@ -114,13 +118,13 @@ const InterventionNavbar = ({
       </Tabs>
       <Box display="flex" align="center">
         <SaveInfoContainer>
-          {interventionEditing && (
+          {isSaving && (
             <SavingContainer>
               <Spinner color={themeColors.secondary} />
               <FormattedMessage {...messages.saving} />
             </SavingContainer>
           )}
-          {!interventionEditing && (
+          {!isSaving && (
             <SaveInfoContainer
               style={{ display: 'flex', alignItems: 'center' }}
             >
@@ -153,6 +157,7 @@ InterventionNavbar.propTypes = {
   questionsLength: PropTypes.number,
   selectedQuestion: PropTypes.string,
   interventionEditing: PropTypes.bool,
+  questionGroupsEditing: PropTypes.bool,
   match: PropTypes.object,
   problemStatus: PropTypes.string,
 };
@@ -162,6 +167,7 @@ const mapStateToProps = createStructuredSelector({
   questionsLength: makeSelectQuestionsLength(),
   selectedQuestion: makeSelectSelectedQuestionId(),
   interventionEditing: makeSelectInterventionEditLoader(),
+  questionGroupsEditing: makeSelectQuestionGroupsLoader(),
   problemStatus: makeSelectProblemStatus(),
 });
 

@@ -58,8 +58,8 @@ export const shareQuestionsToResearchersError = error =>
 
 export const changeGroupNameRequest = (title, interventionId, groupId) =>
   actionBuilder(CHANGE_GROUP_NAME_REQUEST, { title, interventionId, groupId });
-export const changeGroupNameSuccess = (groupId, title) =>
-  actionBuilder(CHANGE_GROUP_NAME_SUCCESS, { groupId, title });
+export const changeGroupNameSuccess = () =>
+  actionBuilder(CHANGE_GROUP_NAME_SUCCESS, {});
 export const changeGroupNameError = error =>
   actionBuilder(CHANGE_GROUP_NAME_ERROR, { error });
 

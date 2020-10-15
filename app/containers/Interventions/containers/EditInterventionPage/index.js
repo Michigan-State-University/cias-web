@@ -197,7 +197,7 @@ function EditInterventionPage({
   const sendSlidesToResearchers = researchers =>
     shareQuestionsToResearchers(researchers, selectedSlides);
 
-  if (questions.length === 0)
+  if (!loading && questions.length === 0)
     return (
       <EmptyInterventionPage
         disabled={!editingPossible}
@@ -205,7 +205,6 @@ function EditInterventionPage({
         formatMessage={formatMessage}
       />
     );
-
   if (loading) return <Loader size={100} />;
 
   const selectSlide = slideId =>
