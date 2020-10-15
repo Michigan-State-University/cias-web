@@ -4,6 +4,9 @@ import ReactCollapse from 'react-collapse';
 
 import { StyledCollapseContent, Content } from './styled';
 
+const CLOSE_TIMEOUT = 500;
+const TRANSITION_TIMEOUT = 20;
+
 const CollapseContent = ({ child, isOpened }) => {
   const [show, setShow] = useState(isOpened);
   const [transition, setTransition] = useState(false);
@@ -13,12 +16,12 @@ const CollapseContent = ({ child, isOpened }) => {
       setTransition(false);
       setTimeout(() => {
         setShow(false);
-      }, 500);
+      }, CLOSE_TIMEOUT);
     } else {
       setShow(true);
       setTimeout(() => {
         setTransition(true);
-      }, 20);
+      }, TRANSITION_TIMEOUT);
     }
   }, [isOpened]);
 
