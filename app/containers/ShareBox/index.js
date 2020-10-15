@@ -3,7 +3,6 @@
  * ShareBox
  *
  */
-
 import Loader from 'components/Loader';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -14,6 +13,7 @@ import { createStructuredSelector } from 'reselect';
 
 import Box from 'components/Box';
 import CopyToClipboard from 'components/CopyToClipboard';
+import CsvFileExport from 'components/CsvFileExport';
 import H2 from 'components/H2';
 import Row from 'components/Row';
 import H3 from 'components/H3';
@@ -27,6 +27,7 @@ import {
   makeSelectProblemStatus,
   deleteInterventionInviteRequest,
 } from 'global/reducers/problem';
+import { formatMessage } from 'utils/intlOutsideReact';
 
 import ParticipantInviter from './Components/ParticipantInviter';
 import UserList from './Components/UserList';
@@ -44,7 +45,8 @@ const ShareBox = ({
   listLoading,
   problemStatus,
 }) => {
-  const { problem_id: problemId, slug, emails, position } = intervention || {};
+  const { name, problem_id: problemId, slug, emails, position } =
+    intervention || {};
 
   const handleResend = id => resendInvite(id, intervention.id);
   const handleDelete = id => deleteInvite(id, intervention.id);
@@ -64,6 +66,22 @@ const ShareBox = ({
     },
   ];
 
+  const exportCsvButton = () => {
+    if (emails && emails.length > 0)
+      return (
+        <Row mt={22}>
+          <CsvFileExport
+            filename={formatMessage(messages.filename, {
+              interventionName: name,
+            })}
+            data={emails.map(({ email }) => ({ email }))}
+          >
+            {formatMessage(messages.exportCsv)}
+          </CsvFileExport>
+        </Row>
+      );
+  };
+
   if (intervention) {
     const link = `${
       process.env.WEB_URL
@@ -81,6 +99,7 @@ const ShareBox = ({
             sendInvite={value => sendInvite(value, intervention.id)}
           />
         </Row>
+        {exportCsvButton()}
         <Row mt={15}>
           <CopyToClipboard textToCopy={link}>
             <FormattedMessage {...messages.copyLabel} />

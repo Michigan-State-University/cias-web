@@ -54,4 +54,12 @@ export default defineMessages({
     id: `${scope}.duplicatedEmail`,
     defaultMessage: 'Such email is already provided!',
   },
+  filename: {
+    id: `${scope}.filename`,
+    defaultMessage: 'participants_emails_{interventionName}_invite',
+  },
+  exportCsv: {
+    id: `${scope}.exportCsv`,
+    defaultMessage: 'Export e-mails to CSV file',
+  },
 });

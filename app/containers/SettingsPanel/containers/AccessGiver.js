@@ -1,3 +1,4 @@
+import CsvFileExport from 'components/CsvFileExport';
 import React, { useState, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -39,7 +40,7 @@ import messages from '../messages';
 
 const AccessGiver = ({
   intl: { formatMessage },
-  problem: { id: problemId, status },
+  problem: { id: problemId, status, name },
   giveUserAccess,
   usersWithAccess,
   enableAccessLoading,
@@ -98,6 +99,22 @@ const AccessGiver = ({
     },
   ];
 
+  const exportCsvButton = () => {
+    if (usersWithAccess && usersWithAccess.length > 0)
+      return (
+        <Box mt={22}>
+          <CsvFileExport
+            filename={formatMessage(messages.filename, {
+              problemName: name,
+            })}
+            data={usersWithAccess.map(({ email }) => ({ email }))}
+          >
+            {formatMessage(messages.exportCsv)}
+          </CsvFileExport>
+        </Box>
+      );
+  };
+
   return (
     <Box mt={40}>
       <Column>
@@ -119,6 +136,7 @@ const AccessGiver = ({
               >
                 <FormattedMessage {...messages.uploadText} />
               </CsvFileReader>
+              {exportCsvButton()}
             </Box>
             <Button
               onClick={inviteParticipants}
