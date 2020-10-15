@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -29,18 +29,26 @@ const QuestionListGroup = ({
   editingPossible,
 }) => {
   const { title, id } = questionGroup;
+  const [openCollapsable, setOpenCollapsable] = useState(true);
+  const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
+
+  useEffect(() => {
+    setOpenCollapsable(true);
+  }, [questions.length]);
+
   if (questions.length === 0) return <></>;
   return (
     <Row width="100%" display="block">
       <Collapse
         disabled
-        color="transparent"
-        onHideImg={arrowDown}
-        onShowImg={arrowUp}
+        isOpened={openCollapsable}
+        onToggle={toggleCollapsable}
         height="auto"
         px={0}
+        bgOpacity={0}
+        onHideImg={arrowDown}
+        onShowImg={arrowUp}
         imgWithBackground
-        initialOpened
         label={
           <Row>
             {manage && (

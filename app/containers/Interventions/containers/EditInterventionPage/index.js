@@ -249,7 +249,7 @@ function EditInterventionPage({
             bg={colors.white}
             {...hoverListProps}
           >
-            <Box width="100%" padded minWidth={350}>
+            <Box padded width={350}>
               {!manage && (
                 <Row
                   onClick={() => setManage(true)}
