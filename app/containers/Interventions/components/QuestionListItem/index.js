@@ -35,7 +35,7 @@ import {
 import StyledCircle from 'components/Circle/StyledCircle';
 import { QuestionTypes } from 'models/Intervention/QuestionTypes';
 import Box from 'components/Box';
-import Radio from 'components/Radio';
+import Checkbox from 'components/Checkbox';
 import { ToggleableBox, ClampedTitle } from './styled';
 import messages from './messages';
 import getIndex from './utils';
@@ -119,10 +119,11 @@ const QuestionListItem = ({
       <Row justify="between">
         {manage && (
           <Column xs={1}>
-            <Radio
+            <Checkbox
               onClick={e => {
                 selectSlide(id);
                 e.stopPropagation();
+                e.preventDefault();
               }}
               checked={checked}
             />
