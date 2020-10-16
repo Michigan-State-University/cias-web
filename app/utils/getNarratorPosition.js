@@ -26,7 +26,7 @@ export const findLastPositionInPreviousQuestions = (
 
 /**
  * @param {array} allQuestions Array of questions
- * @param {number} questionIndex Index of current selected question
+ * @param {number} questionId Id of current selected question
  * @returns {array} Returns position of character stored in the block before newly added block
  */
 export const getNarratorPositionForANewBlock = (allQuestions, questionId) => {

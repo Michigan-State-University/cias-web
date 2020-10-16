@@ -112,7 +112,7 @@ describe('<VariableChooser />', () => {
     store = createStore(reducer, {
       questions: {
         questions: [question],
-        selectedQuestion: 0,
+        selectedQuestion: question.id,
       },
     });
 
@@ -137,7 +137,7 @@ describe('<VariableChooser />', () => {
     store = createStore(reducer, {
       questions: {
         questions: [question],
-        selectedQuestion: 0,
+        selectedQuestion: question.id,
       },
     });
 

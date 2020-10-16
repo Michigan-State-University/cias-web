@@ -3,17 +3,21 @@
 exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
 .c0 {
   margin-bottom: 7px;
+  width: 100%;
 }
 
 .c2 {
-  height: 40px;
   border-radius: 5px;
-  padding: 12px;
   color: white;
   cursor: pointer;
   width: 100%;
   margin-right: 5px;
   background-color: rgba(0,0,237,1);
+  height: 40px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 12px;
+  padding-left: 12px;
 }
 
 .c6 .ReactCollapse--collapse {
@@ -87,6 +91,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
           >
             <div
               class="c2"
+              height="40px"
             >
               <div
                 class="c3"
@@ -107,16 +112,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
           </div>
           <div
             class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              />
-            </div>
-          </div>
+          />
         </div>
       </div>
       <div
@@ -130,6 +126,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
           >
             <div
               class="c2"
+              height="40px"
             >
               <div
                 class="c3"
@@ -150,16 +147,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
           </div>
           <div
             class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              />
-            </div>
-          </div>
+          />
         </div>
       </div>
       <div
@@ -173,6 +161,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
           >
             <div
               class="c2"
+              height="40px"
             >
               <div
                 class="c3"
@@ -193,16 +182,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
           </div>
           <div
             class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              />
-            </div>
-          </div>
+          />
         </div>
       </div>
     </div>
@@ -213,17 +193,21 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
 exports[`<Card /> Should render only one element and match the snapshot 1`] = `
 .c0 {
   margin-bottom: 7px;
+  width: 100%;
 }
 
 .c2 {
-  height: 40px;
   border-radius: 5px;
-  padding: 12px;
   color: white;
   cursor: pointer;
   width: 100%;
   margin-right: 5px;
   background-color: rgba(0,0,237,1);
+  height: 40px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 12px;
+  padding-left: 12px;
 }
 
 .c6 .ReactCollapse--collapse {
@@ -294,6 +278,7 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
         >
           <div
             class="c2"
+            height="40px"
           >
             <div
               class="c3"
@@ -314,16 +299,7 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
         </div>
         <div
           class="c6"
-        >
-          <div
-            class="ReactCollapse--collapse"
-            style="height: 0px; overflow: hidden;"
-          >
-            <div
-              class="ReactCollapse--content"
-            />
-          </div>
-        </div>
+        />
       </div>
     </div>
   </div>
@@ -333,32 +309,21 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
 exports[`<Card /> Should render with one element opened and match the snapshot 1`] = `
 .c0 {
   margin-bottom: 7px;
+  width: 100%;
 }
 
 .c2 {
-  height: 40px;
   border-radius: 5px;
-  padding: 12px;
   color: white;
   cursor: pointer;
   width: 100%;
   margin-right: 5px;
   background-color: rgba(0,0,237,1);
-}
-
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  width: 100%;
-  margin-bottom: 10px;
+  height: 40px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 12px;
+  padding-left: 12px;
 }
 
 .c6 .ReactCollapse--collapse {
@@ -432,6 +397,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
           >
             <div
               class="c2"
+              height="40px"
             >
               <div
                 class="c3"
@@ -452,22 +418,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
           </div>
           <div
             class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              >
-                <div
-                  class="c7"
-                >
-                  Content0
-                </div>
-              </div>
-            </div>
-          </div>
+          />
         </div>
       </div>
       <div
@@ -481,6 +432,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
           >
             <div
               class="c2"
+              height="40px"
             >
               <div
                 class="c3"
@@ -501,16 +453,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
           </div>
           <div
             class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              />
-            </div>
-          </div>
+          />
         </div>
       </div>
       <div
@@ -524,6 +467,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
           >
             <div
               class="c2"
+              height="40px"
             >
               <div
                 class="c3"
@@ -544,16 +488,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
           </div>
           <div
             class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              />
-            </div>
-          </div>
+          />
         </div>
       </div>
     </div>

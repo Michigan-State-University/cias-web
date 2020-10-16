@@ -37,20 +37,21 @@ import {
 
 import messages from './messages';
 
-const TargetQuestionChooser = ({
-  intl: { formatMessage },
-  onClick,
-  intervention: { name, id: interventionId },
-  questions,
-  selectedQuestion: { id } = {},
-  pattern: { target },
-  currentIndex,
-  isVisible,
-  problem,
-  problemLoading,
-  problemBranching,
-  interventionIndex,
-}) => {
+const TargetQuestionChooser = props => {
+  const {
+    intl: { formatMessage },
+    onClick,
+    intervention: { name, id: interventionId },
+    questions,
+    selectedQuestion: { id } = {},
+    pattern: { target },
+    currentIndex,
+    isVisible,
+    problem,
+    problemLoading,
+    problemBranching,
+    interventionIndex,
+  } = props;
   const { interventions: interventionList } = problem || {};
   const [isInterventionView, _setIsInterventionView] = useState(false);
   const setIsInterventionView = (value, event) => {
@@ -74,7 +75,11 @@ const TargetQuestionChooser = ({
 
   const chooseNextQuestion = () => {
     if (!isLast) {
-      const targetId = questions[currentIndex + 1].id;
+      const nextIndex =
+        questions.findIndex(
+          ({ id: questionId }) => questionId === currentIndex,
+        ) + 1;
+      const targetId = questions[nextIndex].id;
       onClick({ type: 'Question', id: targetId });
     }
   };
@@ -243,7 +248,7 @@ TargetQuestionChooser.propTypes = {
     match: PropTypes.string,
     target: PropTypes.shape({ id: PropTypes.string, type: PropTypes.string }),
   }),
-  currentIndex: PropTypes.number,
+  currentIndex: PropTypes.string,
   interventionIndex: PropTypes.number,
   isVisible: PropTypes.bool,
   problem: PropTypes.object,
