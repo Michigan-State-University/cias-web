@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionListItem /> should match the snapshot 1`] = `
-.c2 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -12,7 +12,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   width: 83.33333333333334%;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -23,7 +23,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   width: 8.333333333333332%;
 }
 
-.c8 {
+.c9 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -31,7 +31,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c9 {
+.c10 {
   margin: 0;
   font-family: DM Sans;
   font-size: 13px;
@@ -39,7 +39,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   color: #9AA1B6;
 }
 
-.c13 {
+.c14 {
   width: auto;
   height: auto;
 }
@@ -50,13 +50,12 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   width: 100%;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
-  margin-bottom: 36px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: rgba(248,251,255,1);
   cursor: pointer;
   border-radius: 5px;
+  border: 1px solid #EFEFEF;
   border-radius: 5px;
 }
 
@@ -64,7 +63,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   background-color: #E9F1FB;
 }
 
-.c6 {
+.c7 {
   width: auto;
   height: auto;
   display: block;
@@ -82,7 +81,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   align-items: center;
 }
 
-.c11 {
+.c12 {
   width: auto;
   height: auto;
   display: block;
@@ -106,7 +105,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c1 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -122,7 +121,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   justify-items: space-between;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -133,7 +132,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   height: auto;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -141,7 +140,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   padding: 8px;
 }
 
-.c7 {
+.c8 {
   border-radius: 50%;
   background-color: #107969;
   display: -webkit-box;
@@ -165,7 +164,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c4 {
+.c5 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -174,7 +173,11 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c5 {
+.c1 {
+  background-color: #E9F1FB;
+}
+
+.c6 {
   -webkit-line-clamp: 2;
   overflow: hidden;
   -webkit-box-orient: vertical;
@@ -217,37 +220,37 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
 }
 
 <div
-  class="HoverableBox-sc-1syy6g3-0 c0 "
+  class="HoverableBox-sc-1syy6g3-0 c0 c1"
   width="100%"
 >
   <div
-    class="c1"
+    class="c2"
   >
     <div
-      class="c2"
+      class="c3"
     >
       <div
-        class="c3"
+        class="c4"
       >
         <h3
-          class="c4 c5"
+          class="c5 c6"
         >
           Test subtitle
         </h3>
       </div>
       <div
-        class="c3"
+        class="c4"
       >
         <div
-          class="c6"
+          class="c7"
           display="flex"
         >
           <div
-            class="c7"
+            class="c8"
             opacity="1"
           />
           <p
-            class="c8 c9"
+            class="c9 c10"
             font-weight="bold"
           >
             Single answer
@@ -256,18 +259,18 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c10"
+      class="c11"
     >
       <div
-        class="c11"
+        class="c12"
         display="flex"
       >
         <div
-          class="c12"
+          class="c13"
         >
           <img
             alt="dots"
-            class="c13"
+            class="c14"
             src="IMAGE_MOCK"
           />
         </div>
