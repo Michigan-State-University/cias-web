@@ -27,6 +27,7 @@ const QuestionListGroup = ({
   selectedQuestion,
   questions,
   editingPossible,
+  problemStatus,
 }) => {
   const { title, id } = questionGroup;
   const [openCollapsable, setOpenCollapsable] = useState(true);
@@ -86,6 +87,7 @@ const QuestionListGroup = ({
               question={question}
               interventionId={interventionId}
               disabled={editingPossible}
+              problemStatus={problemStatus}
             />
           </Row>
         ))}
@@ -107,6 +109,7 @@ QuestionListGroup.propTypes = {
   selectedSlides: PropTypes.array,
   selectedQuestion: PropTypes.string,
   questions: PropTypes.array,
+  problemStatus: PropTypes.string,
 };
 
 const mapStateToProps = (_, props) =>

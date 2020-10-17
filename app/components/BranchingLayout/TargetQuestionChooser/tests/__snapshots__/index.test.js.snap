@@ -48,7 +48,7 @@ Object {
   overflow: scroll;
 }
 
-.c13 {
+.c14 {
   width: auto;
   height: auto;
   display: block;
@@ -127,13 +127,25 @@ Object {
   margin-bottom: 20px;
 }
 
-.c14 {
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  cursor: pointer;
+}
+
+.c15 {
   position: relative;
   overflow: hidden;
   width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: rgba(154,161,182,1);
+  color: #2F3850;
 }
 
 @media only screen and (min-width:768px) {
@@ -163,7 +175,7 @@ Object {
         >
           <div
             class="c2"
-            data-testid="test-id-1-next-question-target"
+            data-testid="undefined-next-question-target"
           >
             <img
               class="c3"
@@ -191,14 +203,14 @@ Object {
           >
             <div
               class="c7"
-              data-testid="test-id-1-select-target-question"
+              data-testid="undefined-select-target-question"
             >
               <div
                 class="c8"
               >
                 <img
                   class="c9"
-                  data-testid="test-id-1-select-target-question-interview-view-setter"
+                  data-testid="undefined-select-target-question-interview-view-setter"
                   src="IMAGE_MOCK"
                 />
                 <img
@@ -219,22 +231,22 @@ Object {
                   class="c7"
                 >
                   <div
-                    class="c2"
-                    data-testid="test-id-1-select-target-question-el"
+                    class="c13"
+                    data-testid="undefined-select-target-question-el"
                   >
                     <img
                       class="c10"
                       src="IMAGE_MOCK"
                     />
                     <div
-                      class="c13"
+                      class="c14"
                     >
                       <div
                         class="c2"
                       >
                         <div
-                          class="c14"
-                          color="#9AA1B6"
+                          class="c15"
+                          color=""
                           font-weight=""
                         >
                           Test subtitle 1
@@ -260,7 +272,7 @@ Object {
       >
         <div
           class="Row-x1o3ru-0 iJOjSZ"
-          data-testid="test-id-1-next-question-target"
+          data-testid="undefined-next-question-target"
         >
           <img
             class="Img-sc-1kfzr96-0 kubXYn"
@@ -288,14 +300,14 @@ Object {
         >
           <div
             class="Column-sc-1n6divy-0 dfNUrc"
-            data-testid="test-id-1-select-target-question"
+            data-testid="undefined-select-target-question"
           >
             <div
               class="Row-x1o3ru-0 ddISbW"
             >
               <img
                 class="Img-sc-1kfzr96-0 cNNjlU"
-                data-testid="test-id-1-select-target-question-interview-view-setter"
+                data-testid="undefined-select-target-question-interview-view-setter"
                 src="IMAGE_MOCK"
               />
               <img
@@ -316,8 +328,8 @@ Object {
                 class="Column-sc-1n6divy-0 dfNUrc"
               >
                 <div
-                  class="Row-x1o3ru-0 iJOjSZ"
-                  data-testid="test-id-1-select-target-question-el"
+                  class="Row-x1o3ru-0 cnXkpS"
+                  data-testid="undefined-select-target-question-el"
                 >
                   <img
                     class="Img-sc-1kfzr96-0 gvKdyb"
@@ -330,8 +342,8 @@ Object {
                       class="Row-x1o3ru-0 iJOjSZ"
                     >
                       <div
-                        class="styled__StyledEllipsisText-x30pqb-0 VaEzZ"
-                        color="#9AA1B6"
+                        class="styled__StyledEllipsisText-x30pqb-0 jnlzf"
+                        color=""
                         font-weight=""
                       >
                         Test subtitle 1
