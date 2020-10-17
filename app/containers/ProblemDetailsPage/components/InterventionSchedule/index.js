@@ -22,7 +22,8 @@ import { compose } from 'redux';
 import {
   SCHEDULE_OPTIONS,
   changeSchedulingType,
-  updateSchedulingValue,
+  updateSchedulingDate,
+  updateSchedulingPayload,
 } from 'global/reducers/problem';
 import ExactDateOption from './ExactDateOption';
 import DaysAfterOption from './DaysAfterOption';
@@ -33,7 +34,9 @@ function InterventionSchedule({
   selectedScheduleOption,
   scheduleAt,
   changeType,
-  updateValue,
+  updatePayload,
+  updateDate,
+  schedulePayload,
   interventionId,
   disabled,
 }) {
@@ -52,24 +55,27 @@ function InterventionSchedule({
     },
   };
 
-  const handleChangeValue = value => updateValue(value, interventionId);
+  const handleChangeDate = date => updateDate(date, interventionId);
+  const handleChangeDays = days => updatePayload(days, interventionId);
 
   const renderOption = () => {
     switch (selectedScheduleOption) {
       case scheduleOptions.daysAfter.id:
         return (
           <DaysAfterOption
+            id={interventionId}
+            value={schedulePayload}
+            setValue={handleChangeDays}
             disabled={disabled}
-            value={scheduleAt}
-            setValue={handleChangeValue}
           />
         );
       case scheduleOptions.daysAfterFill.id:
         return (
           <DaysAfterOption
+            id={interventionId}
+            value={schedulePayload}
+            setValue={handleChangeDays}
             disabled={disabled}
-            value={scheduleAt}
-            setValue={handleChangeValue}
             afterFill
           />
         );
@@ -78,14 +84,13 @@ function InterventionSchedule({
           <ExactDateOption
             disabled={disabled}
             value={scheduleAt}
-            setValue={handleChangeValue}
+            setValue={handleChangeDate}
           />
         );
       default:
         break;
     }
   };
-
   return (
     <Column>
       <Text mb={12} textOpacity={0.6} color={colors.bluewood} fontSize={13}>
@@ -118,15 +123,18 @@ InterventionSchedule.propTypes = {
     PropTypes.instanceOf(Date),
     PropTypes.string,
   ]),
+  schedulePayload: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   changeType: PropTypes.func,
-  updateValue: PropTypes.func,
+  updatePayload: PropTypes.func,
+  updateDate: PropTypes.func,
   interventionId: PropTypes.string,
   disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {
   changeType: changeSchedulingType,
-  updateValue: updateSchedulingValue,
+  updatePayload: updateSchedulingPayload,
+  updateDate: updateSchedulingDate,
 };
 
 const withConnect = connect(

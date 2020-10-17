@@ -43,7 +43,7 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
               Password
             </p>
             <input
-              class="Input-sc-19txxuq-0 iCEjLf"
+              class="Input-sc-19txxuq-0 fcoxGj"
               height="46"
               name="password"
               placeholder="Enter password"
@@ -62,7 +62,7 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
               Password confirmation
             </p>
             <input
-              class="Input-sc-19txxuq-0 iCEjLf"
+              class="Input-sc-19txxuq-0 fcoxGj"
               height="46"
               name="passwordConfirmation"
               placeholder="Retype your password"

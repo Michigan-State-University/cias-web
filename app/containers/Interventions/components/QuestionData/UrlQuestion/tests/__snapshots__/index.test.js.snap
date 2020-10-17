@@ -13,7 +13,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   margin-top: 10px;
 }
 
-.c7 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -24,23 +24,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  margin-bottom: 10px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c5 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -51,7 +35,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   height: auto;
 }
 
-.c6 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -63,32 +47,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c2 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  background-color: transparent;
-  border-color: transparent;
-  width: 153px;
-  max-width: 200px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  color: rgba(16,121,105,1);
-  text-align: center;
-  background-color: rgba(16,121,105,0.1);
-  color: rgba(16,121,105,1);
-  opacity: 0.5;
-}
-
-.c2:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: #107969;
-}
-
-.c8 {
+.c5 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -100,13 +59,17 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c8:focus {
+.c5:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c4 {
+.c5:disabled {
+  color: #ABBBD1;
+}
+
+.c1 {
   width: auto;
   height: auto;
   display: block;
@@ -119,7 +82,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c9 {
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -129,7 +92,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   margin-bottom: 5px;
 }
 
-.c11 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -147,7 +110,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   height: 50px;
 }
 
-.c11:after {
+.c8:after {
   content: ' ';
   display: block;
   width: 33.33333333333333px;
@@ -159,7 +122,7 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   animation: hAjVGa 1.2s linear infinite;
 }
 
-.c10 {
+.c7 {
   width: 100%;
   height: 100%;
   display: -webkit-box;
@@ -174,22 +137,6 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-}
-
-.c3 {
-  padding: 5px 10px;
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 4px;
-  background-color: rgba(16,121,105,0.1);
-  color: rgba(16,121,105,1);
-  opacity: 0.5;
-}
-
-.c3:focus {
-  box-shadow: none;
-  outline: none;
-  border: 1px solid transparent;
 }
 
 @media only screen and (min-width:768px) {
@@ -229,37 +176,20 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
 >
   <div
     className="c1"
-    display="flex"
-  >
-    <input
-      className="c2 c3"
-      color="#107969"
-      disabled={true}
-      onBlur={[Function]}
-      onChange={[Function]}
-      onFocus={[Function]}
-      placeholder="Variable name..."
-      type="tel"
-      value=""
-      width="153px"
-    />
-  </div>
-  <div
-    className="c4"
     width="100%"
   >
     <div
-      className="c5"
+      className="c2"
     >
       <div
-        className="c6"
+        className="c3"
         width="100%"
       >
         <div
-          className="c7"
+          className="c4"
         >
           <textarea
-            className="c8"
+            className="c5"
             disabled={true}
             height="auto"
             onBlur={[Function]}
@@ -275,18 +205,18 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
     </div>
   </div>
   <div
-    className="c9"
+    className="c6"
     width="100%"
   >
     <div
-      className="c5"
+      className="c2"
     >
       <div
-        className="c10"
+        className="c7"
         data-testid="inline-loader"
       >
         <div
-          className="c11"
+          className="c8"
           color="#C866EA"
           size={50}
           width={6}

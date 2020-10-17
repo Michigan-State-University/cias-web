@@ -12,11 +12,8 @@ import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import UrlPreview from 'components/UrlPreview';
 import Text from 'components/Text';
-import globalMessages from 'global/i18n/globalMessages';
-import { BadgeInput } from 'components/Input/BadgeInput';
 import { colors } from 'theme/colors';
 import { urlValidator } from 'utils/validators/urlValidator';
-import { variableNameValidator } from 'utils/validators';
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
@@ -24,18 +21,16 @@ import {
 
 import { canEdit } from 'models/Status/statusPermissions';
 import messages from './messages';
-import { UPDATE_URL, UPDATE_VARIABLE } from './constants';
+import { UPDATE_URL } from './constants';
 
 const UrlQuestion = ({
   selectedQuestion,
   updateUrl,
-  updateVariable,
   isNarratorTab,
   problemStatus,
   intl: { formatMessage },
 }) => {
   const { payload } = selectedQuestion.body.data[0];
-  const { variable } = selectedQuestion.body;
 
   const isPreviewValid = urlValidator(payload);
   const displayError = !isPreviewValid && payload;
@@ -45,22 +40,6 @@ const UrlQuestion = ({
 
   return (
     <Column mt={10}>
-      <Row display="flex" hidden={isNarratorTab} mb={10}>
-        <BadgeInput
-          disabled={!editingPossible}
-          px={0}
-          py={12}
-          textAlign="center"
-          keyboard="tel"
-          validator={variableNameValidator}
-          placeholder={formatMessage(
-            globalMessages.variables.variableNamePlaceholder,
-          )}
-          value={variable.name}
-          color={colors.jungleGreen}
-          onBlur={updateVariable}
-        />
-      </Row>
       <Box
         bg={colors.linkWater}
         width="100%"
@@ -93,7 +72,6 @@ UrlQuestion.propTypes = {
   selectedQuestion: PropTypes.shape(Question).isRequired,
   intl: PropTypes.object.isRequired,
   updateUrl: PropTypes.func.isRequired,
-  updateVariable: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   problemStatus: PropTypes.string,
 };
@@ -104,8 +82,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   updateUrl: url => updateQuestionData({ type: UPDATE_URL, data: { url } }),
-  updateVariable: name =>
-    updateQuestionData({ type: UPDATE_VARIABLE, data: { name } }),
 };
 
 export const QuestionUrlWithIntl = injectIntl(UrlQuestion);

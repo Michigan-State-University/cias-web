@@ -281,6 +281,7 @@ function EditInterventionPage({
                   selectedQuestion={selectedQuestion}
                   selectedSlides={selectedSlides}
                   toggleGroup={toggleGroup}
+                  problemStatus={problemStatus}
                 />
               ))}
               {editingPossible && (

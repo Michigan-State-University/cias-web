@@ -12,11 +12,7 @@ export const defaultMapper = object => ({
   id: object.id,
 });
 
-export const mapAccessToStateObject = ({
-  attributes: {
-    user: { id, email },
-  },
-}) => ({
+export const mapAccessToStateObject = ({ user_id: id, email }) => ({
   id,
   email,
 });

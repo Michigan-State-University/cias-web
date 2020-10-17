@@ -15,14 +15,13 @@ function* enableUserAccess({ payload: { id, emails } }) {
   const requestURL = `v1/problems/${id}/users`;
   try {
     const {
-      data: { data },
+      data: { user_interventions: users },
     } = yield axios.post(requestURL, {
-      user_problem: {
+      user_intervention: {
         emails,
       },
     });
-
-    yield put(enableUserAccessSuccess(data.map(mapAccessToStateObject)));
+    yield put(enableUserAccessSuccess(users.map(mapAccessToStateObject)));
   } catch (error) {
     yield put(
       showError(formatMessage(messages.giveUserAccessError), {

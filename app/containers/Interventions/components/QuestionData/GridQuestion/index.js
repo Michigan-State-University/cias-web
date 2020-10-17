@@ -17,6 +17,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import radio from 'assets/svg/radio-button.svg';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
+import { ScrollFogBox } from 'components/Box/ScrollFog';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
 
 import Question from 'models/Intervention/Question';
@@ -29,6 +30,7 @@ import {
 } from 'global/reducers/questions';
 
 import { canEdit } from 'models/Status/statusPermissions';
+import useComponentSize from 'utils/useComponentSize';
 import messages from './messages';
 
 import { FirstTH } from './styled';
@@ -66,6 +68,10 @@ const GridQuestion = ({
 
   const containerRightRef = useRef(null);
   const containerBottomRef = useRef(null);
+
+  const firstColRef = useRef(null);
+
+  const { width: firstColWidth } = useComponentSize(firstColRef);
 
   const handleAddColumn = async () => {
     await addColumn();
@@ -105,16 +111,20 @@ const GridQuestion = ({
       </Row>
 
       <Box width="100%">
-        <Box
+        <ScrollFogBox
           overflow="scroll"
           pr={21}
           py={14}
           ml={isNarratorTab && elements.grid.leftPadding}
+          horizontalFogVisible={isNarratorTab}
+          verticalFogVisible={false}
+          leftMargin={firstColWidth + elements.grid.leftPadding}
         >
           <Table>
             <THead>
               <StripedTR color={colors.catskillWhite} bg={colors.zirkon}>
                 <FirstTH
+                  ref={firstColRef}
                   left={elements.grid.leftPadding}
                   isFixed={isNarratorTab}
                   scope="col"
@@ -293,7 +303,7 @@ const GridQuestion = ({
               ))}
             </TBody>
           </Table>
-        </Box>
+        </ScrollFogBox>
       </Box>
 
       <Row justify="start" hidden={isNarratorTabOrEditNotPossible}>

@@ -27,7 +27,7 @@ describe('<InterventionSchedule />', () => {
 
   const daysAfterProps = {
     selectedScheduleOption: SCHEDULE_OPTIONS.daysAfter,
-    scheduleAt: '1',
+    schedulePayload: '1',
   };
 
   it('Expect to not log errors in console', () => {

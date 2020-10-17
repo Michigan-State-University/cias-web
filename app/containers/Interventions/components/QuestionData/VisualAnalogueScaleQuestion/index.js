@@ -11,12 +11,9 @@ import Column from 'components/Column';
 import Question from 'models/Intervention/Question';
 import Row from 'components/Row';
 import VisualAnalogueScaleQuestionLayout from 'containers/AnswerInterventionPage/layouts/VisualAnalogueScaleQuestionLayout';
-import globalMessages from 'global/i18n/globalMessages';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { BadgeInput } from 'components/Input/BadgeInput';
 import { StyledInput } from 'components/Input/StyledInput';
-import { variableNameValidator } from 'utils/validators';
-import { visualAnalogScaleLabelStyles, colors } from 'theme';
+import { visualAnalogScaleLabelStyles } from 'theme';
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
@@ -24,18 +21,17 @@ import {
 
 import { canEdit } from 'models/Status/statusPermissions';
 import messages from './messages';
-import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
+import { UPDATE_DATA } from './constants';
 
 const VisualAnalogueScaleQuestion = ({
   selectedQuestion,
   updateLabel,
-  updateVariable,
   isNarratorTab,
   problemStatus,
   intl: { formatMessage },
 }) => {
   const {
-    body: { variable, data },
+    body: { data },
     settings: { show_number: showNumber },
   } = selectedQuestion;
   const {
@@ -76,22 +72,6 @@ const VisualAnalogueScaleQuestion = ({
 
   return (
     <Column mt={10}>
-      <Row display="flex" hidden={isNarratorTab} mb={10}>
-        <BadgeInput
-          disabled={!editingPossible}
-          px={0}
-          py={12}
-          textAlign="center"
-          keyboard="tel"
-          validator={variableNameValidator}
-          placeholder={formatMessage(
-            globalMessages.variables.variableNamePlaceholder,
-          )}
-          value={variable.name}
-          color={colors.jungleGreen}
-          onBlur={val => updateVariable(val)}
-        />
-      </Row>
       <Box width="100%" px={21} py={30}>
         <Column>
           <Row>
@@ -122,7 +102,6 @@ VisualAnalogueScaleQuestion.propTypes = {
   selectedQuestion: PropTypes.shape(Question).isRequired,
   intl: PropTypes.object.isRequired,
   updateLabel: PropTypes.func.isRequired,
-  updateVariable: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   problemStatus: PropTypes.string,
 };
@@ -134,8 +113,6 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   updateLabel: (value, label) =>
     updateQuestionData({ type: UPDATE_DATA, data: { value, label } }),
-  updateVariable: name =>
-    updateQuestionData({ type: UPDATE_VARIABLE, data: { name } }),
 };
 
 const withConnect = connect(

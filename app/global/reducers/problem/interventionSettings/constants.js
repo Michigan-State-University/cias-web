@@ -22,5 +22,8 @@ export const CHANGE_FORMULA_STATUS =
 export const CHANGE_SCHEDULING_TYPE =
   'app/Dashboard/InterventionSettings/CHANGE_SCHEDULING_TYPE';
 
-export const UPDATE_SCHEDULING_VALUE =
-  'app/Dashboard/InterventionSettings/UPDATE_SCHEDULING_VALUE';
+export const UPDATE_SCHEDULING_PAYLOAD =
+  'app/Dashboard/InterventionSettings/UPDATE_SCHEDULING_PAYLOAD';
+
+export const UPDATE_SCHEDULING_DATE =
+  'app/Dashboard/InterventionSettings/UPDATE_SCHEDULING_DATE';

@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Radio from 'components/Radio';
 import Row from 'components/Row';
+import { ScrollFogBox } from 'components/Box/ScrollFog';
 import { StripedTR, Table, TBody, TD, TH, THead } from 'components/Table';
 
 import { colors, elements } from 'theme';
 
+import useComponentSize from 'utils/useComponentSize';
 import { FirstTH } from './styled';
 
 const GridQuestionLayout = ({
@@ -22,13 +24,30 @@ const GridQuestionLayout = ({
     const { variable: { value } = {} } = column || {};
     check(value, name, rowIndex, columnIndex);
   };
+
+  const firstColRef = useRef(null);
+
+  const { width: firstColWidth } = useComponentSize(firstColRef);
+
   return (
     <Box width="100%">
-      <Box overflow="scroll" pr={21} py={14} ml={elements.grid.leftPadding}>
+      <ScrollFogBox
+        overflow="scroll"
+        pr={21}
+        py={14}
+        ml={elements.grid.leftPadding}
+        horizontalFogVisible
+        verticalFogVisible={false}
+        leftMargin={firstColWidth + elements.grid.leftPadding}
+      >
         <Table>
           <THead>
             <StripedTR color={colors.catskillWhite} bg={colors.zirkon}>
-              <FirstTH left={elements.grid.leftPadding} scope="col" />
+              <FirstTH
+                ref={firstColRef}
+                left={elements.grid.leftPadding}
+                scope="col"
+              />
               {columns.map((column, columnIndex) => (
                 <TH
                   scope="col"
@@ -84,7 +103,7 @@ const GridQuestionLayout = ({
             ))}
           </TBody>
         </Table>
-      </Box>
+      </ScrollFogBox>
     </Box>
   );
 };

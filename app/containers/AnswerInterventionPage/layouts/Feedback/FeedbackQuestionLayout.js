@@ -13,7 +13,7 @@ import FeedbackSlider from './FeedbackSlider';
 const VisualAnalogueScaleQuestionLayout = ({
   startValue,
   endValue,
-  targetValue,
+  targetValue: { target: targetValue },
   intl: { formatMessage },
   showSpectrum,
   setFeedbackSettings,
@@ -76,14 +76,14 @@ const VisualAnalogueScaleQuestionLayout = ({
 VisualAnalogueScaleQuestionLayout.propTypes = {
   startValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   endValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  targetValue: PropTypes.string,
+  targetValue: PropTypes.object,
   intl: PropTypes.object,
   showSpectrum: PropTypes.bool,
   setFeedbackSettings: PropTypes.func,
 };
 
 VisualAnalogueScaleQuestionLayout.defaultProps = {
-  targetValue: '0', // default to 0
+  targetValue: { target: '0' }, // default to 0
 };
 
 export default injectIntl(VisualAnalogueScaleQuestionLayout);

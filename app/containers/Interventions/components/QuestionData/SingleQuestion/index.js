@@ -18,7 +18,7 @@ import bin from 'assets/svg/bin-red.svg';
 import globalMessages from 'global/i18n/globalMessages';
 import radio from 'assets/svg/radio-button.svg';
 import { BadgeInput } from 'components/Input/BadgeInput';
-import { numericValidator, variableNameValidator } from 'utils/validators';
+import { numericValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 import {
   makeSelectSelectedQuestion,
@@ -27,7 +27,7 @@ import {
 import { canEdit } from 'models/Status/statusPermissions';
 
 import messages from './messages';
-import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
+import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
 
 const RADIO_MARGIN = 16;
 const INPUT_PADDING = 15;
@@ -37,7 +37,6 @@ const SingleQuestion = ({
   addAnswer,
   updateAnswer,
   removeAnswer,
-  updateVariable,
   isNarratorTab,
   problemStatus,
   intl: { formatMessage },
@@ -54,7 +53,7 @@ const SingleQuestion = ({
       );
   }, [radioButtonRef.current]);
 
-  const { data, variable } = selectedQuestion.body;
+  const { data } = selectedQuestion.body;
 
   const editingPossible = canEdit(problemStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
@@ -65,22 +64,6 @@ const SingleQuestion = ({
 
   return (
     <Column mt={10}>
-      <Row display="flex" hidden={isNarratorTab} mb={10} ml={24}>
-        <BadgeInput
-          disabled={!editingPossible}
-          px={0}
-          py={12}
-          textAlign="center"
-          keyboard="tel"
-          validator={variableNameValidator}
-          placeholder={formatMessage(
-            globalMessages.variables.variableNamePlaceholder,
-          )}
-          value={variable.name}
-          color={colors.jungleGreen}
-          onBlur={val => updateVariable(val)}
-        />
-      </Row>
       {data.map((value, index) => (
         <Row key={`question-${selectedQuestion.id}-el-${index}`}>
           <HoverableBox
@@ -132,16 +115,8 @@ const SingleQuestion = ({
                 </Row>
               </Row>
               <Row align="center" display="flex" hidden={isNarratorTab}>
-                <Text
-                  ml={`${leftMargin}px`}
-                  mr={8}
-                  fontWeight="bold"
-                  color={colors.azure}
-                >
-                  {formatMessage(globalMessages.variables.value)}
-                </Text>
-
                 <BadgeInput
+                  ml={`${leftMargin}px`}
                   disabled={!editingPossible}
                   px={0}
                   py={12}
@@ -150,9 +125,9 @@ const SingleQuestion = ({
                   keyboard="tel"
                   placeholder={
                     !isNarratorTab
-                      ? formatMessage(globalMessages.variables.emptyValue, {
-                          index: index + 1,
-                        })
+                      ? formatMessage(
+                          globalMessages.variables.variableScorePlaceholder,
+                        )
                       : ''
                   }
                   value={value.value}
@@ -191,7 +166,6 @@ SingleQuestion.propTypes = {
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,
   removeAnswer: PropTypes.func.isRequired,
-  updateVariable: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   problemStatus: PropTypes.string,
 };
@@ -204,8 +178,6 @@ const mapDispatchToProps = {
   addAnswer: () => updateQuestionData({ type: ADD }),
   updateAnswer: (index, value) =>
     updateQuestionData({ type: UPDATE_ANSWER, data: { index, value } }),
-  updateVariable: name =>
-    updateQuestionData({ type: UPDATE_VARIABLE, data: { name } }),
   removeAnswer: index => updateQuestionData({ type: REMOVE, data: { index } }),
 };
 

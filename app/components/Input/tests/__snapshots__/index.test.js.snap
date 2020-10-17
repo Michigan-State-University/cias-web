@@ -178,6 +178,10 @@ exports[`<ApprovableInput /> Should render and match the snapshot as multiline 1
   border: 1px solid #107969;
 }
 
+.c2:disabled {
+  color: #ABBBD1;
+}
+
 @media only screen and (min-width:768px) {
 
 }
@@ -1705,6 +1709,10 @@ exports[`<ApprovableInput /> Should render and match the snapshot as singleline 
   border-color: #107969;
 }
 
+.c2:disabled {
+  color: #ABBBD1;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1785,6 +1793,10 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
   box-shadow: none;
   outline: none;
   border-color: #107969;
+}
+
+.c0:disabled {
+  color: #ABBBD1;
 }
 
 .c1 {
@@ -1877,6 +1889,10 @@ exports[`<Input /> Should render and match the snapshot 1`] = `
   border-color: #107969;
 }
 
+.c0:disabled {
+  color: #ABBBD1;
+}
+
 <div>
   <input
     class="c0"
@@ -1901,6 +1917,10 @@ exports[`<Input /> Should render with error and match the snapshot 1`] = `
   box-shadow: none;
   outline: none;
   border-color: #EF462F;
+}
+
+.c0:disabled {
+  color: #ABBBD1;
 }
 
 <div>
@@ -1928,6 +1948,10 @@ exports[`<SearchInput /> Should render and match the snapshot 1`] = `
   box-shadow: none;
   outline: none;
   border-color: #107969;
+}
+
+.c1:disabled {
+  color: #ABBBD1;
 }
 
 .c0 {
@@ -1983,6 +2007,10 @@ exports[`<StyledInput /> Should render and match the snapshot as singleline 1`] 
   border-color: #107969;
 }
 
+.c0:disabled {
+  color: #ABBBD1;
+}
+
 <div>
   <input
     class="c0"
@@ -2013,6 +2041,10 @@ exports[`<StyledInput /> Should render and match the snapshot as textarea 1`] = 
   border: 1px solid #107969;
 }
 
+.c0:disabled {
+  color: #ABBBD1;
+}
+
 <div>
   <textarea
     class="c0"
@@ -2035,6 +2067,10 @@ exports[`<TextArea /> Should render and match the snapshot 1`] = `
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
+}
+
+.c0:disabled {
+  color: #ABBBD1;
 }
 
 <div>

@@ -12,6 +12,9 @@ import fetchUsersWithAccessSaga from './fetchUsersWithAccess';
 import revokeUserAccessSaga from './revokeUserAccess';
 import createInterventionSaga from './createIntervention';
 import sendInterventionInviteSaga from './sendInterventionInvite';
+import fetchInterventionEmailsSaga from './fetchInterventionEmails';
+import resendInterventionInviteSaga from './resendInterventionInvite';
+import deleteInterventionInviteSaga from './deleteInterventionInvite';
 
 export {
   createProblemSaga,
@@ -27,6 +30,9 @@ export {
   revokeUserAccessSaga,
   createInterventionSaga,
   sendInterventionInviteSaga,
+  fetchInterventionEmailsSaga,
+  resendInterventionInviteSaga,
+  deleteInterventionInviteSaga,
 };
 
 export default function* allProblemSagas() {
@@ -44,5 +50,9 @@ export default function* allProblemSagas() {
     revokeUserAccessSaga(),
     createInterventionSaga(),
     sendInterventionInviteSaga(),
+    fetchUsersWithAccessSaga(),
+    fetchInterventionEmailsSaga(),
+    resendInterventionInviteSaga(),
+    deleteInterventionInviteSaga(),
   ]);
 }

@@ -25,6 +25,7 @@ import Button from 'components/Button';
 import ErrorAlert from 'components/ErrorAlert';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+import { passwordRegex } from 'global/constants/regex';
 
 import messages from './messages';
 import { setNewPasswordRequest } from './actions';
@@ -46,11 +47,7 @@ const validationSchema = formatMessage =>
       .test(
         'password',
         formatMessage(messages.passwordInvalid),
-        value =>
-          value &&
-          !!value.match(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gm,
-          ),
+        value => value && !!value.match(passwordRegex),
       ),
     passwordConfirmation: Yup.string().oneOf(
       [Yup.ref('password'), null],

@@ -38,6 +38,10 @@ export default defineMessages({
     id: `${scope}.resend`,
     defaultMessage: 'Resend invite',
   },
+  remove: {
+    id: `${scope}.remove`,
+    defaultMessage: 'Remove',
+  },
   userListLabel: {
     id: `${scope}.userListLabel`,
     defaultMessage: 'Invite has beed already sent to',
@@ -49,5 +53,13 @@ export default defineMessages({
   duplicatedEmail: {
     id: `${scope}.duplicatedEmail`,
     defaultMessage: 'Such email is already provided!',
+  },
+  filename: {
+    id: `${scope}.filename`,
+    defaultMessage: 'participants_emails_{interventionName}_invite',
+  },
+  exportCsv: {
+    id: `${scope}.exportCsv`,
+    defaultMessage: 'Export e-mails to CSV file',
   },
 });

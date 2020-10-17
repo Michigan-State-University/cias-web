@@ -1,3 +1,4 @@
+import CsvFileExport from 'components/CsvFileExport';
 import React, { useState, useEffect } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -39,7 +40,7 @@ import messages from '../messages';
 
 const AccessGiver = ({
   intl: { formatMessage },
-  problem: { id: problemId, status },
+  problem: { id: problemId, status, name },
   giveUserAccess,
   usersWithAccess,
   enableAccessLoading,
@@ -79,8 +80,7 @@ const AccessGiver = ({
     setValue([]);
   };
 
-  const revokeAction = user => {
-    const { id } = user;
+  const revokeAction = id => {
     if (id) revokeUserAccess(problemId, id);
   };
 
@@ -90,6 +90,30 @@ const AccessGiver = ({
         <Spinner color={themeColors.secondary} />
       </Box>
     );
+
+  const buttons = [
+    {
+      action: revokeAction,
+      disabled: removingParticipantsPossible,
+      text: <FormattedMessage {...messages.remove} />,
+    },
+  ];
+
+  const exportCsvButton = () => {
+    if (usersWithAccess && usersWithAccess.length > 0)
+      return (
+        <Box mt={22}>
+          <CsvFileExport
+            filename={formatMessage(messages.filename, {
+              problemName: name,
+            })}
+            data={usersWithAccess.map(({ email }) => ({ email }))}
+          >
+            {formatMessage(messages.exportCsv)}
+          </CsvFileExport>
+        </Box>
+      );
+  };
 
   return (
     <Box mt={40}>
@@ -112,6 +136,7 @@ const AccessGiver = ({
               >
                 <FormattedMessage {...messages.uploadText} />
               </CsvFileReader>
+              {exportCsvButton()}
             </Box>
             <Button
               onClick={inviteParticipants}
@@ -131,11 +156,9 @@ const AccessGiver = ({
             />
           )}
           <UserList
-            removingParticipantsPossible={removingParticipantsPossible}
+            buttons={buttons}
             users={usersWithAccess || []}
             buttonIsClose
-            buttonText={formatMessage(messages.remove)}
-            buttonAction={revokeAction}
             userWithLoading={find(usersWithAccess, user => user.loading) || {}}
           />
           {enableAccessLoading && <Spinner color={themeColors.secondary} />}

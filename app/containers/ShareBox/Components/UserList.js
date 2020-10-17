@@ -5,48 +5,46 @@ import Column from 'components/Column';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import Text from 'components/Text';
+import Spinner from 'components/Spinner';
 
 import userAvatar from 'assets/svg/user.svg';
 import { colors, fontSizes, themeColors } from 'theme';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import { HoverableRow, StyledTextButton } from '../styled';
 
-const UserList = ({
-  users,
-  buttonIsClose,
-  buttonText,
-  buttonAction,
-  userWithLoading,
-  removingParticipantsPossible,
-}) => {
-  const getActionButton = user => {
-    const handleClick = () => buttonAction(user);
+const UserList = ({ users, buttons, buttonIsClose, userWithLoading }) => {
+  const getActionButtons = (email, id) => {
+    const buttonMargin = buttonIsClose ? 15 : null;
     return (
-      <StyledTextButton
-        disabled={!removingParticipantsPossible}
-        loading={userWithLoading.email === user.email}
-        onClick={handleClick}
-        buttonProps={{
-          ml: buttonIsClose ? 15 : null,
-          color: removingParticipantsPossible
-            ? themeColors.secondary
-            : colors.grey,
-        }}
-        loaderProps={{
-          ml: buttonIsClose ? 15 : null,
-          alignSelf: buttonIsClose ? null : 'end',
-        }}
-      >
-        {buttonText}
-      </StyledTextButton>
+      <Row>
+        {userWithLoading.id === id && <Spinner color={themeColors.secondary} />}
+        {buttons.map(({ action, disabled, text }) => (
+          <StyledTextButton
+            key={`${text.props.id}-${id}`}
+            disabled={!disabled}
+            onClick={() => action(id)}
+            buttonProps={{
+              ml: buttonMargin,
+              color: disabled ? themeColors.secondary : colors.grey,
+            }}
+            loaderProps={{
+              ml: buttonMargin,
+              alignSelf: buttonIsClose ? null : 'end',
+            }}
+          >
+            {text}
+          </StyledTextButton>
+        ))}
+      </Row>
     );
   };
 
   return (
     <Column>
-      {users.map(user => (
+      {users.map(({ email, id }) => (
         <HoverableRow
-          key={`el-user-${user.email}`}
+          key={`el-user-${email}`}
           align="center"
           justify="between"
           mx={-20}
@@ -58,11 +56,15 @@ const UserList = ({
           <Row align="center">
             <Img src={userAvatar} alt="avatar" mr={15} />
             <Text fontSize={fontSizes.regular} lineHeight="270%">
-              {user.email}
+              {email}
             </Text>
-            {buttonIsClose && getActionButton(user)}
+            {buttonIsClose &&
+              !isNullOrUndefined(id) &&
+              getActionButtons(email, id)}
           </Row>
-          {!buttonIsClose && getActionButton(user)}
+          {!buttonIsClose &&
+            !isNullOrUndefined(id) &&
+            getActionButtons(email, id)}
         </HoverableRow>
       ))}
     </Column>
@@ -72,13 +74,18 @@ const UserList = ({
 UserList.propTypes = {
   users: PropTypes.array,
   buttonIsClose: PropTypes.bool,
-  buttonText: PropTypes.node,
-  buttonAction: PropTypes.func,
   userWithLoading: PropTypes.shape({
     email: PropTypes.string,
     id: PropTypes.string,
+    type: PropTypes.string,
   }),
-  removingParticipantsPossible: PropTypes.bool,
+  buttons: PropTypes.arrayOf(
+    PropTypes.shape({
+      action: PropTypes.func,
+      disabled: PropTypes.bool,
+      text: PropTypes.node,
+    }),
+  ),
 };
 
 UserList.defaultProps = {

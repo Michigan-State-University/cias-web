@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 
-import { defaultMapper } from 'utils/mapResponseObjects';
-
 import { Roles } from 'models/User/UserRoles';
 import { FETCH_INTERVENTIONS_REQUEST } from '../constants';
 import { fetchInterventionsSuccess, fetchInterventionsError } from '../actions';
@@ -15,8 +13,7 @@ function* fetchInterventions({ payload: { role } }) {
     const {
       data: { data },
     } = yield axios.get(requestURL);
-    const mappedData = data.map(defaultMapper);
-    yield put(fetchInterventionsSuccess(mappedData));
+    yield put(fetchInterventionsSuccess(data));
   } catch (error) {
     yield put(fetchInterventionsError(error));
   }

@@ -1,4 +1,5 @@
-import { UPDATE_URL, UPDATE_VARIABLE } from './constants';
+import { UPDATE_URL } from './constants';
+import { UPDATE_VARIABLE } from '../constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const urlQuestionReducer = (question, payload) => {

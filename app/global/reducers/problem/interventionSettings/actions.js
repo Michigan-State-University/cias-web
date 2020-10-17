@@ -6,7 +6,8 @@ import {
   REMOVE_FORMULA_CASE,
   UPDATE_FORMULA,
   UPDATE_FORMULA_CASE,
-  UPDATE_SCHEDULING_VALUE,
+  UPDATE_SCHEDULING_PAYLOAD,
+  UPDATE_SCHEDULING_DATE,
 } from './constants';
 
 export const updateFormula = (value, interventionId) =>
@@ -45,8 +46,14 @@ export const changeSchedulingType = (value, interventionId) =>
     data: { value, interventionId },
   });
 
-export const updateSchedulingValue = (value, interventionId) =>
+export const updateSchedulingPayload = (value, interventionId) =>
   updateInterventionSettings({
-    type: UPDATE_SCHEDULING_VALUE,
+    type: UPDATE_SCHEDULING_PAYLOAD,
+    data: { value, interventionId },
+  });
+
+export const updateSchedulingDate = (value, interventionId) =>
+  updateInterventionSettings({
+    type: UPDATE_SCHEDULING_DATE,
     data: { value, interventionId },
   });

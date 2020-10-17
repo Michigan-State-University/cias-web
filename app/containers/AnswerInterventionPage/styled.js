@@ -20,7 +20,6 @@ export const BackButton = styled.div`
 
 export const AnswerInterventionContent = styled.div`
   align-items: flex-start;
-  border: 1px dashed ${colors.botticelli};
   display: flex;
   max-width: ${elements.draggableContainerSize}px;
   min-height: ${elements.draggableContainerSize}px;
@@ -35,7 +34,7 @@ const getStyles = previewMode => css`
   width: ${sizes[previewMode].width};
   ${previewMode !== DESKTOP_MODE &&
     `overflow: auto;
-     border: 1px solid ${colors.casper}`}
+     border: 1px solid ${colors.casper};`}
 `;
 
 export const AnswerOuterContainer = styled.div`

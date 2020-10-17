@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
+import dayjs from 'dayjs';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Text from 'components/Text';
@@ -22,6 +23,10 @@ const ExactDateOption = ({
   const timeInfoMessage = () =>
     `${formatMessage(messages.timeInfo)} ${calculateTimeZone()}`;
 
+  const parseDate = date => dayjs(date).format('YYYY-MM-DD');
+
+  const onChange = changeValue => setValue(parseDate(changeValue));
+
   return (
     <Column>
       <Row align="center">
@@ -37,7 +42,7 @@ const ExactDateOption = ({
             placeholder={formatMessage(messages.chooseDate)}
             type="date"
             value={Date.parse(value)}
-            onCheck={date => setValue(date)}
+            onCheck={onChange}
             fontSize={15}
           />
         </Box>

@@ -49,6 +49,10 @@ exports[`<InequalityChooser /> Should render and match the snapshot 1`] = `
   border-color: #107969;
 }
 
+.c3:disabled {
+  color: #ABBBD1;
+}
+
 .c4 {
   width: 50px;
 }

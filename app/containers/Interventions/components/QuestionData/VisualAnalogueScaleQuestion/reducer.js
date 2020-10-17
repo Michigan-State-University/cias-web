@@ -1,4 +1,5 @@
-import { UPDATE_DATA, UPDATE_VARIABLE } from './constants';
+import { UPDATE_DATA } from './constants';
+import { UPDATE_VARIABLE } from '../constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const visualAnalogueScaleQuestionReducer = (question, payload) => {

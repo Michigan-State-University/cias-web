@@ -98,7 +98,7 @@ describe('<ProblemPage />', () => {
   it('Should render and match the snapshot with interventions', () => {
     store = createStore(reducer, {
       problems: {
-        problems: [{ name: 'Name', status: 'draft', interventions: [{}, {}] }],
+        problems: [{ name: 'Name', status: 'draft', interventions_size: 2 }],
         fetchProblemLoading: false,
         fetchProblemError: null,
       },

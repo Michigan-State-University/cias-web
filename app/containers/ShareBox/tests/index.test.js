@@ -31,7 +31,7 @@ describe('<ShareBox />', () => {
       },
       loaders: {
         sendInterventionLoading: false,
-        resendInterventionLoading: {
+        interventionEmailLoading: {
           email: null,
         },
       },

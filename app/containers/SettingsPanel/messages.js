@@ -73,4 +73,12 @@ export default defineMessages({
     id: `${scope}.back`,
     defaultMessage: 'Back',
   },
+  exportCsv: {
+    id: `${scope}.exportCsv`,
+    defaultMessage: 'Export e-mails to CSV file',
+  },
+  filename: {
+    id: `${scope}.filename`,
+    defaultMessage: 'participants_emails_{problemName}_access',
+  },
 });

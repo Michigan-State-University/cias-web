@@ -46,7 +46,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
               First Name
             </p>
             <input
-              class="Input-sc-19txxuq-0 iCEjLf"
+              class="Input-sc-19txxuq-0 fcoxGj"
               height="46"
               name="firstName"
               placeholder="Enter first name"
@@ -65,7 +65,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
               Last name
             </p>
             <input
-              class="Input-sc-19txxuq-0 iCEjLf"
+              class="Input-sc-19txxuq-0 fcoxGj"
               height="46"
               name="lastName"
               placeholder="Enter last name"
@@ -85,7 +85,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             E-mail address
           </p>
           <input
-            class="Input-sc-19txxuq-0 hmnJIY"
+            class="Input-sc-19txxuq-0 fFggWk"
             disabled=""
             height="46"
             name="email"
@@ -105,7 +105,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             Password
           </p>
           <input
-            class="Input-sc-19txxuq-0 iCEjLf"
+            class="Input-sc-19txxuq-0 fcoxGj"
             height="46"
             name="password"
             placeholder="Enter password"
@@ -124,7 +124,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             Password confirmation
           </p>
           <input
-            class="Input-sc-19txxuq-0 iCEjLf"
+            class="Input-sc-19txxuq-0 fcoxGj"
             height="46"
             name="passwordConfirmation"
             placeholder="Retype your password"
@@ -193,7 +193,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               First Name
             </p>
             <input
-              class="Input-sc-19txxuq-0 iCEjLf"
+              class="Input-sc-19txxuq-0 fcoxGj"
               height="46"
               name="firstName"
               placeholder="Enter first name"
@@ -212,7 +212,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               Last name
             </p>
             <input
-              class="Input-sc-19txxuq-0 iCEjLf"
+              class="Input-sc-19txxuq-0 fcoxGj"
               height="46"
               name="lastName"
               placeholder="Enter last name"
@@ -232,7 +232,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             E-mail address
           </p>
           <input
-            class="Input-sc-19txxuq-0 iCEjLf"
+            class="Input-sc-19txxuq-0 fcoxGj"
             height="46"
             name="email"
             placeholder="Enter e-mail address"
@@ -251,7 +251,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             Password
           </p>
           <input
-            class="Input-sc-19txxuq-0 iCEjLf"
+            class="Input-sc-19txxuq-0 fcoxGj"
             height="46"
             name="password"
             placeholder="Enter password"
@@ -270,7 +270,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             Password confirmation
           </p>
           <input
-            class="Input-sc-19txxuq-0 iCEjLf"
+            class="Input-sc-19txxuq-0 fcoxGj"
             height="46"
             name="passwordConfirmation"
             placeholder="Retype your password"

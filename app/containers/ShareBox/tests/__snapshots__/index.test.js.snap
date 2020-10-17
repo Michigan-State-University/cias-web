@@ -96,6 +96,34 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
+      class="Row-x1o3ru-0 jZNWfE"
+    >
+      <div
+        class="styled__StyledCsvFileExport-sc-571lcv-0 ejcYpw"
+      >
+        <button
+          class="button"
+        >
+          <div
+            class="Row-x1o3ru-0 iJOjSZ"
+          >
+            <img
+              alt="upload"
+              class="Img-sc-1kfzr96-0 gvKdyb"
+              src="IMAGE_MOCK"
+            />
+            <p
+              class="Text-sc-2lza2m-0 bsTsXV"
+              color="#C866EA"
+              font-weight="bold"
+            >
+              Export e-mails to CSV file
+            </p>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div
       class="Row-x1o3ru-0 eFjaRk"
     >
       <div
@@ -155,20 +183,8 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             <p
               class="Text-sc-2lza2m-0 ffvslZ"
               font-size="15px"
-            >
-              mail@mail.com
-            </p>
+            />
           </div>
-          <button
-            class="StyledTextButton-sc-17cmh3t-0 cJUFVE styled__StyledTextButton-sc-16elnyr-2 kgVkZa"
-            color="#9AA1B6"
-            disabled=""
-            font-weight="bold"
-          >
-            <span>
-              Resend invite
-            </span>
-          </button>
         </div>
       </div>
     </div>

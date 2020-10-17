@@ -9,6 +9,8 @@ import ErrorAlert from 'components/ErrorAlert';
 import Button from 'components/Button';
 import FormikInput from 'components/FormikInput';
 
+import { passwordRegex } from 'global/constants/regex';
+
 import messages from './messages';
 
 const passwordLength = 8;
@@ -27,11 +29,7 @@ const validationSchema = formatMessage =>
       .test(
         'password',
         formatMessage(messages.passwordInvalid),
-        value =>
-          value &&
-          !!value.match(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/gm,
-          ),
+        value => value && !!value.match(passwordRegex),
       ),
     newPasswordConfirmation: Yup.string().oneOf(
       [Yup.ref('newPassword'), null],

@@ -1,4 +1,5 @@
-import { ADD, UPDATE_ANSWER, REMOVE, UPDATE_VARIABLE } from './constants';
+import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
+import { UPDATE_VARIABLE } from '../constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const singleQuestionReducer = (question, payload) => {
