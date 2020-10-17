@@ -9,16 +9,17 @@ import { DEFAULT_LOCALE } from '../../../../../i18n';
 
 describe('<QuestionTitle />', () => {
   let store;
-
+  const testId = 'test-id';
   const reducer = state => state;
   const initialState = {
     questions: {
       questions: [
         {
+          id: testId,
           title: 'Example title',
         },
       ],
-      selectedQuestion: 0,
+      selectedQuestion: testId,
     },
   };
 

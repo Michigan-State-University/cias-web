@@ -56,7 +56,7 @@ const mockMostUsedStore = question => {
         question,
         mockSingleQuestion(3, true),
       ],
-      selectedQuestion: 1,
+      selectedQuestion: question.id,
     },
   });
   store.runSaga = () => {};
@@ -72,6 +72,7 @@ const mockMostUsedStore = question => {
 
 describe('<TargetQuestionChooser />', () => {
   let store;
+  const mockQuestion = mockSingleQuestion(1, true);
   const reducer = state => state;
   const initialState = {
     intervention: {
@@ -87,8 +88,8 @@ describe('<TargetQuestionChooser />', () => {
       },
     },
     questions: {
-      questions: [mockSingleQuestion(1, true)],
-      selectedQuestion: 0,
+      questions: [mockQuestion],
+      selectedQuestion: mockQuestion.id,
     },
   };
 
@@ -156,7 +157,7 @@ describe('<TargetQuestionChooser />', () => {
           question,
           mockSingleQuestion(3, true),
         ],
-        selectedQuestion: 1,
+        selectedQuestion: question.id,
       },
     });
 
@@ -212,7 +213,7 @@ describe('<TargetQuestionChooser />', () => {
           question,
           mockSingleQuestion(3, true),
         ],
-        selectedQuestion: 1,
+        selectedQuestion: question.id,
       },
     });
     store.runSaga = () => {};
@@ -283,7 +284,7 @@ describe('<TargetQuestionChooser />', () => {
           question,
           mockSingleQuestion(3, true),
         ],
-        selectedQuestion: 1,
+        selectedQuestion: question.id,
       },
     });
 

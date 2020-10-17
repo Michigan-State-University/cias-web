@@ -10,16 +10,17 @@ import QuestionSubtitle from '../index';
 
 describe('<QuestionSubtitle />', () => {
   let store;
-
+  const testId = 'test-id';
   const reducer = state => state;
   const initialState = {
     questions: {
       questions: [
         {
+          id: testId,
           subtitle: 'Example subtitle',
         },
       ],
-      selectedQuestion: 0,
+      selectedQuestion: testId,
     },
   };
 
