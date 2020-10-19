@@ -20,6 +20,9 @@ import {
   GET_QUESTION_GROUPS_SUCCESS,
   GET_QUESTION_GROUPS_ERROR,
   CREATE_QUESTION_IN_GROUP,
+  REORDER_GROUP_LIST_REQUEST,
+  REORDER_GROUP_LIST_SUCCESS,
+  REORDER_GROUP_LIST_ERROR,
 } from './constants';
 
 export const copyQuestionsRequest = questionIds =>
@@ -72,3 +75,10 @@ export const getQuestionGroupsError = error =>
 
 export const createNewQuestionInGroup = (question, groupId) =>
   actionBuilder(CREATE_QUESTION_IN_GROUP, { question, groupId });
+
+export const reorderGroupListRequest = payload =>
+  actionBuilder(REORDER_GROUP_LIST_REQUEST, payload);
+export const reorderGroupListSuccess = () =>
+  actionBuilder(REORDER_GROUP_LIST_SUCCESS, {});
+export const reorderGroupListError = error =>
+  actionBuilder(REORDER_GROUP_LIST_ERROR, { error });

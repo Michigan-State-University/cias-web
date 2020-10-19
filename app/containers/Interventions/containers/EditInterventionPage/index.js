@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-// import Reorder, { reorder } from 'react-reorder';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -35,6 +35,7 @@ import { borders, colors, themeColors } from 'theme';
 
 import injectSaga, { useInjectSaga } from 'utils/injectSaga';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { useInjectReducer } from 'utils/injectReducer';
 
 import { localStateReducer } from 'global/reducers/localState';
@@ -45,20 +46,15 @@ import {
   makeSelectInterventionLoaders,
 } from 'global/reducers/intervention';
 import {
-  reorderQuestionListRequest,
   createQuestionRequest,
   questionsReducer,
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
+  reorderQuestionListRequest,
 } from 'global/reducers/questions';
 import {
-  problemReducer,
-  fetchProblemSaga,
-  makeSelectProblemStatus,
-} from 'global/reducers/problem';
-import { canEdit } from 'models/Status/statusPermissions';
-
-import {
+  reorderGroupListRequest,
+  reorderQuestionGroupsSaga,
   copyQuestionsRequest,
   deleteQuestionsRequest,
   groupQuestionsRequest,
@@ -68,8 +64,16 @@ import {
   questionGroupsReducer,
   getQuestionGroupsRequest,
 } from 'global/reducers/questionGroups';
+import {
+  problemReducer,
+  fetchProblemSaga,
+  makeSelectProblemStatus,
+} from 'global/reducers/problem';
+
+import { canEdit } from 'models/Status/statusPermissions';
 
 import GroupActionButton from 'containers/Interventions/components/GroupActionButton';
+import { reorderScope } from 'models/Intervention/ReorderScope';
 import editInterventionPageSaga from './saga';
 
 import EmptyInterventionPage from '../../components/EmptyInterventionPage';
@@ -89,7 +93,8 @@ function EditInterventionPage({
   getIntervention,
   createQuestion,
   match: { params },
-  // reorderQuestions,
+  reorderQuestions,
+  reorderGroups,
   problemStatus,
   interventionLoaders: { getIntervention: getInterventionLoader },
   copyQuestions,
@@ -104,6 +109,8 @@ function EditInterventionPage({
   const [selectedSlides, setSelectedSlides] = useState([]);
   const [showList, setShowList] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
+
   const groupActions = [
     {
       label: <FormattedMessage {...messages.duplicate} />,
@@ -143,6 +150,10 @@ function EditInterventionPage({
 
   useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
   useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
+  useInjectSaga({
+    key: 'reorderQuestionGroups',
+    saga: reorderQuestionGroupsSaga,
+  });
 
   const editingPossible = canEdit(problemStatus);
 
@@ -170,22 +181,58 @@ function EditInterventionPage({
     );
   };
 
-  // const handleReorder = (event, previousIndex, nextIndex) => {
-  //   const newList = reorder(questions, previousIndex, nextIndex);
-  //   let position = 0;
-  //   const orderdedNewList = newList.map(question => {
-  //     position += 1;
-  //     return {
-  //       ...question,
-  //       position,
-  //     };
-  //   });
+  const onDragEnd = result => {
+    setIsDuringQuestionReorder(false);
 
-  //   reorderQuestions({
-  //     reorderedList: orderdedNewList,
-  //     interventionId: params.interventionId,
-  //   });
-  // };
+    const { draggableId, destination, source, type } = result;
+
+    if (!isNullOrUndefined(destination))
+      switch (type) {
+        case reorderScope.questions: {
+          const sourceIndex = source.index;
+          const sourceGroupId = source.droppableId;
+          const destinationIndex = destination.index;
+          const destinationGroupId = destination.droppableId;
+          const questionId = draggableId;
+
+          reorderQuestions({
+            sourceIndex,
+            sourceGroupId,
+            destinationIndex,
+            destinationGroupId,
+            questionId,
+          });
+
+          break;
+        }
+
+        case reorderScope.groups: {
+          const groupId = draggableId;
+          const destinationIndex = destination.index;
+          const { intervention_id: interventionId } = groups.find(
+            ({ id }) => id === groupId,
+          );
+
+          reorderGroups({ groupId, destinationIndex, interventionId });
+
+          break;
+        }
+        default:
+          break;
+      }
+  };
+
+  const onBeforeDragStart = result => {
+    const { type } = result;
+
+    switch (type) {
+      case reorderScope.questions:
+        setIsDuringQuestionReorder(true);
+
+        break;
+      default:
+    }
+  };
 
   const loading = getInterventionLoader;
 
@@ -268,22 +315,36 @@ function EditInterventionPage({
                   <ActionIcon mr="0" onClick={() => setManage(false)} />
                 </Row>
               )}
-              {groups.map(questionGroup => (
-                <QuestionListGroup
-                  disabled={!editingPossible}
-                  changeGroupName={changeGroupName}
-                  checkSelectedGroup={checkSelectedGroup}
-                  interventionId={params.interventionId}
-                  manage={manage}
-                  questionGroup={questionGroup}
-                  selectSlide={selectSlide}
-                  key={questionGroup.id}
-                  selectedQuestion={selectedQuestion}
-                  selectedSlides={selectedSlides}
-                  toggleGroup={toggleGroup}
-                  problemStatus={problemStatus}
-                />
-              ))}
+              <DragDropContext
+                onBeforeDragStart={onBeforeDragStart}
+                onDragEnd={onDragEnd}
+              >
+                <Droppable droppableId="group-list" type={reorderScope.groups}>
+                  {provided => (
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      {groups.map((questionGroup, index) => (
+                        <QuestionListGroup
+                          index={index}
+                          disabled={!editingPossible}
+                          changeGroupName={changeGroupName}
+                          checkSelectedGroup={checkSelectedGroup}
+                          interventionId={params.interventionId}
+                          manage={manage}
+                          questionGroup={questionGroup}
+                          selectSlide={selectSlide}
+                          key={questionGroup.id}
+                          selectedQuestion={selectedQuestion}
+                          selectedSlides={selectedSlides}
+                          toggleGroup={toggleGroup}
+                          isDuringQuestionReorder={isDuringQuestionReorder}
+                          problemStatus={problemStatus}
+                        />
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
+              </DragDropContext>
               {editingPossible && (
                 <QuestionTypeChooser onClick={onCreateQuestion} />
               )}
@@ -315,6 +376,7 @@ EditInterventionPage.propTypes = {
   createQuestion: PropTypes.func,
   getQuestions: PropTypes.func,
   reorderQuestions: PropTypes.func,
+  reorderGroups: PropTypes.func,
   getQuestionsLoading: PropTypes.bool,
   interventionLoaders: PropTypes.object,
   copyQuestions: PropTypes.func,
@@ -338,6 +400,7 @@ const mapDispatchToProps = {
   getIntervention: getInterventionRequest,
   createQuestion: createQuestionRequest,
   reorderQuestions: reorderQuestionListRequest,
+  reorderGroups: reorderGroupListRequest,
   copyQuestions: copyQuestionsRequest,
   deleteQuestions: deleteQuestionsRequest,
   groupQuestions: groupQuestionsRequest,

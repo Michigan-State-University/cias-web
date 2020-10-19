@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.groupError`,
     defaultMessage: 'Cannot group question',
   },
+  reorderError: {
+    id: `${scope}.reorderError`,
+    defaultMessage: 'Cannot reorder groups!',
+  },
 });

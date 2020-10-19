@@ -1,5 +1,6 @@
 import { all } from 'redux-saga/effects';
 
+import reorderQuestionGroupsSaga from './reorderQuestionGroups';
 import copyQuestionsSaga from './copyQuestions';
 import deleteQuestionsSaga from './deleteQuestions';
 import groupQuestionsSaga from './groupQuestions';
@@ -14,6 +15,7 @@ export {
   shareQuestionsToResearchersSaga,
   changeGroupNameSaga,
   getQuestionGroupsSaga,
+  reorderQuestionGroupsSaga,
 };
 
 export default function* allQuestionsSagas() {
@@ -24,5 +26,6 @@ export default function* allQuestionsSagas() {
     shareQuestionsToResearchersSaga(),
     changeGroupNameSaga(),
     getQuestionGroupsSaga(),
+    reorderQuestionGroupsSaga(),
   ]);
 }

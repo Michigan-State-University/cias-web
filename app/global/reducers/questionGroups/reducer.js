@@ -9,6 +9,9 @@ import {
   SAVED_ACTIONS,
   CHANGE_GROUP_NAME_ERROR,
   CHANGE_GROUP_NAME_SUCCESS,
+  REORDER_GROUP_LIST_REQUEST,
+  REORDER_GROUP_LIST_SUCCESS,
+  REORDER_GROUP_LIST_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -55,7 +58,14 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
       }
       case CHANGE_GROUP_NAME_ERROR: {
         draft.groups = state.cache.groups;
+        break;
       }
+      case REORDER_GROUP_LIST_REQUEST:
+        break;
+      case REORDER_GROUP_LIST_SUCCESS:
+        break;
+      case REORDER_GROUP_LIST_ERROR:
+        break;
     }
   });
 

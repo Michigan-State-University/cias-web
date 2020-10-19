@@ -1,6 +1,5 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import flatten from 'lodash/flatten';
 import sortBy from 'lodash/sortBy';
 import isEmpty from 'lodash/isEmpty';
 import omit from 'lodash/omit';
@@ -8,6 +7,7 @@ import omit from 'lodash/omit';
 import { getQuestionsSuccess } from 'global/reducers/questions/actions';
 import { setAnimationStopPosition } from 'global/reducers/localState';
 
+import { mapGroupsToQuestions } from 'global/reducers/questionGroups/utils';
 import { GET_QUESTION_GROUPS_REQUEST } from '../constants';
 import { getQuestionGroupsError, getQuestionGroupsSuccess } from '../actions';
 
@@ -18,14 +18,7 @@ function* getQuestionsGroups({ payload: { interventionId } }) {
     const {
       data: { question_groups: groups },
     } = yield axios.get(groupURL);
-    const questions = flatten(
-      groups.map(({ questions: groupQuestions, id }) =>
-        groupQuestions.map(question => ({
-          ...question,
-          question_group_id: id,
-        })),
-      ),
-    );
+    const questions = mapGroupsToQuestions(groups);
     const groupsWithoutQuestions = groups.map(group =>
       omit(group, 'questions'),
     );

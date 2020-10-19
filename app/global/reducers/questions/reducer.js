@@ -187,13 +187,10 @@ export const questionsReducer = (state = initialState, action) =>
         break;
 
       case REORDER_QUESTION_LIST_REQUEST:
-        draft.questions = action.payload.reorderedList;
         break;
       case REORDER_QUESTION_LIST_SUCCESS:
-        draft.cache.questions = draft.questions;
         break;
       case REORDER_QUESTION_LIST_ERROR:
-        draft.questions = draft.cache.questions;
         break;
 
       case DELETE_QUESTION_REQUEST:
