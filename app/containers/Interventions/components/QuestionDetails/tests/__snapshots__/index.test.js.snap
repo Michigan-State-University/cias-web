@@ -496,7 +496,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
           >
             <div
               class="react-draggable"
-              style="transform: translate(0px,-100px);"
+              style="transform: translate(-99px,-100px);"
             >
               <div
                 aria-label="animation"

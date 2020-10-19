@@ -68,10 +68,7 @@ describe('<QuestionDetails />', () => {
         animation: 'standStill',
         type: 'BodyAnimation',
       },
-      animationPosition: {
-        x: 0,
-        y: elements.characterInitialYPosition,
-      },
+      animationPosition: elements.characterInitialPosition,
     },
   };
 

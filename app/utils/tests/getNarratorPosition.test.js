@@ -118,7 +118,7 @@ const mockQuestion = ({
   };
 };
 
-const initialPosition = { x: 0, y: elements.characterInitialYPosition };
+const initialPosition = elements.characterInitialPosition;
 
 describe('findLastPositionInPreviousQuestions', () => {
   it('Should return initial character position when there is no questions', () => {
