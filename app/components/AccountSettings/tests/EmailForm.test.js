@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { render, fireEvent, wait, act } from 'react-testing-library';
+import { render, fireEvent, wait } from 'react-testing-library';
 import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 import { IntlProvider } from 'react-intl';
@@ -47,35 +47,31 @@ describe('<EmailForm />', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it.skip('Should edit email correctly', async () => {
+  it('Should edit email correctly', async () => {
     const { getByTestId } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <EmailForm {...defaultProps} />
       </IntlProvider>,
     );
+
+    const newEmail = 'new@test.com';
+    const oldPassword = 'Password1!';
     const emailInput = getByTestId('email-input').querySelector('input');
-    await wait(() => {
-      fireEvent.change(emailInput, { target: { value: 'new@test.com' } });
-    });
-    await wait(() => {
-      fireEvent.blur(emailInput);
-    });
+    fireEvent.change(emailInput, { target: { value: newEmail } });
+    fireEvent.blur(emailInput);
     const passwordInput = getByTestId('password-confirmation').querySelector(
       'input',
     );
-    await wait(() => {
-      fireEvent.change(passwordInput, { target: { value: 'Password1!' } });
-    });
-    await wait(() => {
-      fireEvent.blur(passwordInput);
-    });
+    fireEvent.change(passwordInput, { target: { value: oldPassword } });
+    fireEvent.blur(passwordInput);
     const confirmButton = getByTestId('confirm-button');
-    await wait(() => {
-      fireEvent.click(confirmButton);
-    });
+    fireEvent.click(confirmButton);
 
-    await act(() => {
-      expect(defaultProps.changeEmail).toHaveBeenCalled();
+    await wait(() => {
+      expect(defaultProps.changeEmail).toHaveBeenCalledWith({
+        newEmail,
+        oldPassword,
+      });
     });
   });
 });
