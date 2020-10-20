@@ -1,5 +1,7 @@
 import produce from 'immer';
+import xor from 'lodash/xor';
 
+import { insertAt, removeAt } from 'utils/arrayUtils';
 import {
   GET_QUESTION_GROUPS_SUCCESS,
   CREATE_QUESTION_IN_GROUP,
@@ -12,6 +14,7 @@ import {
   REORDER_GROUP_LIST_REQUEST,
   REORDER_GROUP_LIST_SUCCESS,
   REORDER_GROUP_LIST_ERROR,
+  CLEAN_GROUPS,
 } from './constants';
 
 export const initialState = {
@@ -60,11 +63,47 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         draft.groups = state.cache.groups;
         break;
       }
+      case CLEAN_GROUPS: {
+        const { questions } = payload;
+
+        const currentGroups = state.groups.map(group => group.id);
+        const afterReorderRemainingGroups = questions.map(
+          question => question.question_group_id,
+        );
+
+        const toRemove = xor(currentGroups, afterReorderRemainingGroups);
+
+        draft.groups = state.groups.filter(
+          group => !toRemove.includes(group.id) || group.default,
+        );
+
+        break;
+      }
       case REORDER_GROUP_LIST_REQUEST:
+        draft.cache.groups = state.groups;
+        const { groupId, destinationIndex, sourceIndex } = payload;
+
+        const sourceGroup = {
+          ...state.groups.find(group => group.id === groupId),
+        };
+
+        removeAt(draft.groups, sourceIndex);
+        insertAt(draft.groups, destinationIndex, sourceGroup);
+
+        draft.groups = draft.groups.map((group, index) => ({
+          ...group,
+          position: index + 1,
+        }));
+
         break;
       case REORDER_GROUP_LIST_SUCCESS:
+        draft.cache.groups = null;
+
         break;
       case REORDER_GROUP_LIST_ERROR:
+        draft.groups = state.cache.groups;
+        draft.cache.groups = null;
+
         break;
     }
   });

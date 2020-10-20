@@ -50,6 +50,8 @@ export const REORDER_GROUP_LIST_SUCCESS =
 export const REORDER_GROUP_LIST_ERROR =
   'app/EditInterventionPage/REORDER_GROUP_LIST_ERROR';
 
+export const CLEAN_GROUPS = 'app/EditInterventionPage/CLEAN_GROUPS';
+
 export const SAVED_ACTIONS = [
   GET_QUESTION_GROUPS_SUCCESS,
   GET_QUESTION_GROUPS_ERROR,

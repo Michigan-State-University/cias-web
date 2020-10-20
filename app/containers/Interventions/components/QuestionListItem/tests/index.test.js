@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import 'jest-styled-components';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
@@ -20,6 +21,7 @@ describe('<QuestionListItem />', () => {
   });
   it('should match the snapshot', () => {
     const question = {
+      id: 'test-1',
       title: 'Test title',
       subtitle: 'Test subtitle',
       type: singleQuestion.id,
@@ -30,7 +32,11 @@ describe('<QuestionListItem />', () => {
     } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionListItem question={question} index={0} />
+          <DragDropContext>
+            <Droppable>
+              {() => <QuestionListItem question={question} index={0} />}
+            </Droppable>
+          </DragDropContext>
         </IntlProvider>
       </Provider>,
     );

@@ -7,6 +7,7 @@ export {
   getQuestionGroupsRequest,
   createNewQuestionInGroup,
   reorderGroupListRequest,
+  cleanGroups,
 } from './actions';
 export { questionGroupsReducer } from './reducer';
 export {

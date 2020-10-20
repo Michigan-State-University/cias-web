@@ -1,9 +1,15 @@
 import produce from 'immer';
 import set from 'lodash/set';
+import groupBy from 'lodash/groupBy';
+import keys from 'lodash/keys';
+import values from 'lodash/values';
+import forEach from 'lodash/forEach';
+import concat from 'lodash/concat';
 
 import questionDataReducer from 'containers/Interventions/components/QuestionData/reducer';
 import questionSettingsReducer from 'containers/Interventions/components/QuestionSettings/Settings/reducer';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
+import { insertAt, removeAt } from 'utils/arrayUtils';
 
 import {
   SELECT_QUESTION,
@@ -186,11 +192,51 @@ export const questionsReducer = (state = initialState, action) =>
         draft.questions = draft.cache.questions;
         break;
 
-      case REORDER_QUESTION_LIST_REQUEST:
+      case REORDER_QUESTION_LIST_REQUEST: {
+        const {
+          sourceIndex,
+          destinationIndex,
+          sourceGroupId,
+          destinationGroupId,
+        } = action.payload;
+
+        const groupedQuestions = groupBy(
+          state.questions,
+          question => question.question_group_id,
+        );
+        const sourceQuestion = {
+          ...groupedQuestions[sourceGroupId][sourceIndex],
+          question_group_id: destinationGroupId,
+        };
+
+        removeAt(groupedQuestions[sourceGroupId], sourceIndex);
+
+        insertAt(
+          groupedQuestions[destinationGroupId],
+          destinationIndex,
+          sourceQuestion,
+        );
+
+        const groupKeys = keys(groupedQuestions);
+
+        forEach(groupKeys, groupKey => {
+          groupedQuestions[groupKey] = groupedQuestions[groupKey].map(
+            (question, index) => ({
+              ...question,
+              position: index + 1,
+            }),
+          );
+        });
+
+        draft.questions = concat(...values(groupedQuestions));
+
         break;
+      }
       case REORDER_QUESTION_LIST_SUCCESS:
+        draft.cache.questions = state.questions;
         break;
       case REORDER_QUESTION_LIST_ERROR:
+        draft.questions = state.cache.questions;
         break;
 
       case DELETE_QUESTION_REQUEST:

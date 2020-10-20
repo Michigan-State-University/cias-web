@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, select } from 'redux-saga/effects';
 import axios from 'axios';
 import { error as showError } from 'react-toastify-redux';
 
@@ -8,21 +8,21 @@ import {
   REORDER_GROUP_LIST_ERROR,
   REORDER_GROUP_LIST_REQUEST,
 } from '../constants';
+import { makeSelectQuestionGroups } from '../selectors';
 import { reorderGroupListError, reorderGroupListSuccess } from '../actions';
 
 import messages from '../messages';
 
-function* reorderQuestionGroups({
-  payload: { interventionId, groupId, destinationIndex },
-}) {
+function* reorderQuestionGroups({ payload: { interventionId } }) {
+  const groups = yield select(makeSelectQuestionGroups());
   const requestURL = `/v1/interventions/${interventionId}/question_groups/position`;
 
   try {
     yield axios.patch(requestURL, {
-      question_groups: {
-        id: groupId,
-        position: destinationIndex,
-      },
+      question_groups: groups.map(({ id, position }) => ({
+        id,
+        position,
+      })),
     });
 
     yield put(reorderGroupListSuccess());

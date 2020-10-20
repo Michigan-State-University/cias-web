@@ -1,13 +1,12 @@
-import { put, takeLatest } from 'redux-saga/effects';
+/* eslint-disable camelcase */
+import { put, takeLatest, select } from 'redux-saga/effects';
 import axios from 'axios';
 import { error as showError } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { mapGroupsToQuestions } from 'global/reducers/questionGroups/utils';
-import sortBy from 'lodash/sortBy';
-import isEmpty from 'lodash/isEmpty';
-import { setAnimationStopPosition } from 'global/reducers/localState';
+import { makeSelectQuestions } from 'global/reducers/questions/selectors';
+import { cleanGroups } from 'global/reducers/questionGroups';
 import messages from '../messages';
 import {
   REORDER_QUESTION_LIST_REQUEST,
@@ -16,32 +15,22 @@ import {
 import {
   reorderQuestionListSuccess,
   reorderQuestionListError,
-  getQuestionsSuccess,
 } from '../actions';
 
-function* reorderQuestions({
-  payload: { questionId, sourceGroupId, destinationGroupId, destinationIndex },
-}) {
+function* reorderQuestions({ payload: { questionId, sourceGroupId } }) {
+  const questions = yield select(makeSelectQuestions());
   const requestURL = `v1/question_groups/${sourceGroupId}/questions/${questionId}/move`;
 
   try {
-    const {
-      data: { question_groups: groups },
-    } = yield axios.patch(requestURL, {
-      question: {
-        position: destinationIndex + 1,
-        question_group_id: destinationGroupId,
-      },
+    yield axios.patch(requestURL, {
+      questions: questions.map(({ id, position, question_group_id }) => ({
+        id,
+        position,
+        question_group_id,
+      })),
     });
 
-    const questions = mapGroupsToQuestions(groups);
-    const sortedQuestions = sortBy(questions, 'position');
-    yield put(getQuestionsSuccess(sortedQuestions));
-    if (!isEmpty(sortedQuestions) && sortedQuestions[0].narrator.blocks[0]) {
-      const position = sortedQuestions[0].narrator.blocks[0].endPosition;
-      yield put(setAnimationStopPosition(position.x, position.y));
-    }
-
+    yield put(cleanGroups(questions));
     yield put(reorderQuestionListSuccess());
   } catch (error) {
     yield put(

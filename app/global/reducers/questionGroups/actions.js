@@ -23,6 +23,7 @@ import {
   REORDER_GROUP_LIST_REQUEST,
   REORDER_GROUP_LIST_SUCCESS,
   REORDER_GROUP_LIST_ERROR,
+  CLEAN_GROUPS,
 } from './constants';
 
 export const copyQuestionsRequest = questionIds =>
@@ -82,3 +83,6 @@ export const reorderGroupListSuccess = () =>
   actionBuilder(REORDER_GROUP_LIST_SUCCESS, {});
 export const reorderGroupListError = error =>
   actionBuilder(REORDER_GROUP_LIST_ERROR, { error });
+
+export const cleanGroups = questions =>
+  actionBuilder(CLEAN_GROUPS, { questions });

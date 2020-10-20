@@ -208,12 +208,18 @@ function EditInterventionPage({
 
         case reorderScope.groups: {
           const groupId = draggableId;
+          const sourceIndex = source.index;
           const destinationIndex = destination.index;
           const { intervention_id: interventionId } = groups.find(
             ({ id }) => id === groupId,
           );
 
-          reorderGroups({ groupId, destinationIndex, interventionId });
+          reorderGroups({
+            groupId,
+            sourceIndex,
+            destinationIndex,
+            interventionId,
+          });
 
           break;
         }
