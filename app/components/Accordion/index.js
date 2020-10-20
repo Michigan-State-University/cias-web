@@ -22,7 +22,7 @@ const Accordion = ({
     if (opened !== -1) onOpen(opened);
   }, [opened]);
 
-  const renderCollapse = (child, index, dragDisabled = false) => {
+  const renderCollapse = (child, index) => {
     const { children: content, label, color } = child.props;
 
     const handleToggle = () => {
@@ -37,32 +37,16 @@ const Accordion = ({
     };
 
     return (
-      <Draggable
-        isDragDisabled={dragDisabled}
-        key={`accordion-${index}`}
-        draggableId={`accordion-${index}`}
-        index={index}
+      <Collapse
+        onToggle={handleToggle}
+        isOpened={opened === index}
+        label={label}
+        color={color}
+        onDelete={handleDelete}
+        disabled={disabled}
       >
-        {provided => (
-          <Box
-            mb={7}
-            ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
-          >
-            <Collapse
-              onToggle={handleToggle}
-              isOpened={opened === index}
-              label={label}
-              color={color}
-              onDelete={handleDelete}
-              disabled={disabled}
-            >
-              {content}
-            </Collapse>
-          </Box>
-        )}
-      </Draggable>
+        {content}
+      </Collapse>
     );
   };
 
@@ -88,9 +72,25 @@ const Accordion = ({
                 ref={providedDroppable.innerRef}
                 {...providedDroppable.droppableProps}
               >
-                {children.map((child, index) =>
-                  renderCollapse(child, index, dragDisabled),
-                )}
+                {children.map((child, index) => (
+                  <Draggable
+                    isDragDisabled={dragDisabled}
+                    key={`accordion-${index}`}
+                    draggableId={`accordion-${index}`}
+                    index={index}
+                  >
+                    {provided => (
+                      <Box
+                        mb={7}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        {renderCollapse(child, index, dragDisabled)}
+                      </Box>
+                    )}
+                  </Draggable>
+                ))}
                 {providedDroppable.placeholder}
               </div>
             )}
@@ -99,27 +99,7 @@ const Accordion = ({
       </AccordionContainer>
     );
 
-  return (
-    <AccordionContainer>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable
-          isDropDisabled
-          droppableId="block-list"
-          type={reorderScope.blocks}
-        >
-          {providedDroppable => (
-            <div
-              ref={providedDroppable.innerRef}
-              {...providedDroppable.droppableProps}
-            >
-              {renderCollapse(children, 0, true)}
-              {providedDroppable.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-    </AccordionContainer>
-  );
+  return <AccordionContainer>{renderCollapse(children, 0)}</AccordionContainer>;
 };
 
 Accordion.propTypes = {

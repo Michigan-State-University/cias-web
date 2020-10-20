@@ -87,15 +87,15 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
     class="styled__AccordionContainer-sc-1ls4m2z-0"
   >
     <div
-      data-rbd-droppable-context-id="2"
+      data-rbd-droppable-context-id="1"
       data-rbd-droppable-id="block-list"
     >
       <div
-        aria-describedby="rbd-hidden-text-2-hidden-text-8"
+        aria-describedby="rbd-hidden-text-1-hidden-text-5"
         class="c0"
-        data-rbd-drag-handle-context-id="2"
+        data-rbd-drag-handle-context-id="1"
         data-rbd-drag-handle-draggable-id="accordion-0"
-        data-rbd-draggable-context-id="2"
+        data-rbd-draggable-context-id="1"
         data-rbd-draggable-id="accordion-0"
         draggable="false"
         role="button"
@@ -134,11 +134,11 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        aria-describedby="rbd-hidden-text-2-hidden-text-8"
+        aria-describedby="rbd-hidden-text-1-hidden-text-5"
         class="c0"
-        data-rbd-drag-handle-context-id="2"
+        data-rbd-drag-handle-context-id="1"
         data-rbd-drag-handle-draggable-id="accordion-1"
-        data-rbd-draggable-context-id="2"
+        data-rbd-draggable-context-id="1"
         data-rbd-draggable-id="accordion-1"
         draggable="false"
         role="button"
@@ -177,11 +177,11 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        aria-describedby="rbd-hidden-text-2-hidden-text-8"
+        aria-describedby="rbd-hidden-text-1-hidden-text-5"
         class="c0"
-        data-rbd-drag-handle-context-id="2"
+        data-rbd-drag-handle-context-id="1"
         data-rbd-drag-handle-draggable-id="accordion-2"
-        data-rbd-draggable-context-id="2"
+        data-rbd-draggable-context-id="1"
         data-rbd-draggable-id="accordion-2"
         draggable="false"
         role="button"
@@ -226,18 +226,10 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
 
 exports[`<Card /> Should render only one element and match the snapshot 1`] = `
 .c0 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  margin-bottom: 7px;
-}
-
-.c1 {
   width: 100%;
 }
 
-.c3 {
+.c2 {
   border-radius: 5px;
   color: white;
   cursor: pointer;
@@ -251,12 +243,12 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
   padding-left: 12px;
 }
 
-.c7 .ReactCollapse--collapse {
+.c6 .ReactCollapse--collapse {
   -webkit-transition: height 480ms ease;
   transition: height 480ms ease;
 }
 
-.c2 {
+.c1 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -279,7 +271,7 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c4 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -295,12 +287,12 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
   justify-items: space-between;
 }
 
-.c5 {
+.c4 {
   width: auto;
   height: auto;
 }
 
-.c6 {
+.c5 {
   width: auto;
   height: auto;
   cursor: pointer;
@@ -311,46 +303,35 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
     class="styled__AccordionContainer-sc-1ls4m2z-0"
   >
     <div
-      data-rbd-droppable-context-id="1"
-      data-rbd-droppable-id="block-list"
+      class="c0"
     >
       <div
-        class="c0"
-        data-rbd-draggable-context-id="1"
-        data-rbd-draggable-id="accordion-0"
+        class="c1"
       >
         <div
-          class="c1"
+          class="c2"
+          height="40px"
         >
           <div
-            class="c2"
+            class="c3"
           >
-            <div
-              class="c3"
-              height="40px"
-            >
-              <div
-                class="c4"
-              >
-                Label0
-                 
-                <img
-                  class="c5"
-                  src="IMAGE_MOCK"
-                />
-              </div>
-            </div>
+            Label0
+             
             <img
-              alt="bin"
-              class="c6"
+              class="c4"
               src="IMAGE_MOCK"
             />
           </div>
-          <div
-            class="c7"
-          />
         </div>
+        <img
+          alt="bin"
+          class="c5"
+          src="IMAGE_MOCK"
+        />
       </div>
+      <div
+        class="c6"
+      />
     </div>
   </div>
 </div>
@@ -443,15 +424,15 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
     class="styled__AccordionContainer-sc-1ls4m2z-0"
   >
     <div
-      data-rbd-droppable-context-id="3"
+      data-rbd-droppable-context-id="2"
       data-rbd-droppable-id="block-list"
     >
       <div
-        aria-describedby="rbd-hidden-text-3-hidden-text-13"
+        aria-describedby="rbd-hidden-text-2-hidden-text-10"
         class="c0"
-        data-rbd-drag-handle-context-id="3"
+        data-rbd-drag-handle-context-id="2"
         data-rbd-drag-handle-draggable-id="accordion-0"
-        data-rbd-draggable-context-id="3"
+        data-rbd-draggable-context-id="2"
         data-rbd-draggable-id="accordion-0"
         draggable="false"
         role="button"
@@ -490,11 +471,11 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
         </div>
       </div>
       <div
-        aria-describedby="rbd-hidden-text-3-hidden-text-13"
+        aria-describedby="rbd-hidden-text-2-hidden-text-10"
         class="c0"
-        data-rbd-drag-handle-context-id="3"
+        data-rbd-drag-handle-context-id="2"
         data-rbd-drag-handle-draggable-id="accordion-1"
-        data-rbd-draggable-context-id="3"
+        data-rbd-draggable-context-id="2"
         data-rbd-draggable-id="accordion-1"
         draggable="false"
         role="button"
@@ -533,11 +514,11 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
         </div>
       </div>
       <div
-        aria-describedby="rbd-hidden-text-3-hidden-text-13"
+        aria-describedby="rbd-hidden-text-2-hidden-text-10"
         class="c0"
-        data-rbd-drag-handle-context-id="3"
+        data-rbd-drag-handle-context-id="2"
         data-rbd-drag-handle-draggable-id="accordion-2"
-        data-rbd-draggable-context-id="3"
+        data-rbd-draggable-context-id="2"
         data-rbd-draggable-id="accordion-2"
         draggable="false"
         role="button"
