@@ -3,7 +3,6 @@ import { colors } from 'theme';
 
 import { style, layout, padding } from '../BaseComponentStyles';
 export const StyledCollapseContainer = styled.div`
-  margin-bottom: 7px;
   width: 100%;
 `;
 
