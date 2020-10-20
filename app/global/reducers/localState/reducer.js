@@ -22,10 +22,7 @@ export const initialState = {
     visibility: true,
     tab: settingsTabLabels.settings,
   },
-  animationPosition: {
-    x: 0,
-    y: elements.characterInitialYPosition,
-  },
+  animationPosition: elements.characterInitialPosition,
   draggable: false,
   previewData: {
     animation: 'standStill',

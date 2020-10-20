@@ -40,7 +40,7 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
   };
 
   const getInitialAnimationPosition = firstBlock => {
-    if (!firstBlock) return { x: 0, y: elements.characterInitialYPosition };
+    if (!firstBlock) return elements.characterInitialPosition;
     return getScaledPosition(getScaleFactor(), firstBlock.endPosition);
   };
 
