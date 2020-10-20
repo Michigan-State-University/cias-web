@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Deactivation /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #EF462F;
+  color: #FFFFFF;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  width: 180px;
+}
+
+<div>
+  <button
+    class="c0"
+    color="warning"
+    width="180"
+  >
+    <span>
+      Deactivate account
+    </span>
+  </button>
+</div>
+`;
+
+exports[`<Deactivation /> Should render and match the snapshot for inactive user 1`] = `
+.c0 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  width: 180px;
+}
+
+<div>
+  <button
+    class="c0"
+    color="primary"
+    width="180"
+  >
+    <span>
+      Activate account
+    </span>
+  </button>
+</div>
+`;

@@ -66,6 +66,7 @@ const AvatarForm = ({
             </StyledUploadFileButton>
             {avatar && (
               <StyledDeleteButton
+                data-testid="open-modal"
                 color={colors.flamingo}
                 fontWeight="bold"
                 fontSize={14}

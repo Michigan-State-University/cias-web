@@ -13,7 +13,7 @@ const singleChild = index => (
 
 const multipleChildren = () => times(3, index => singleChild(index));
 
-describe('<Card />', () => {
+describe('<Accordion />', () => {
   const defaultProps = {
     onHide: jest.fn(),
     onOpen: jest.fn(),
@@ -81,11 +81,11 @@ describe('<Card />', () => {
   });
 
   it('Should invoke onDelete function', () => {
-    const { getByText } = render(
+    const { getByTestId } = render(
       <Accordion {...defaultProps}>{multipleChildren()}</Accordion>,
     );
-    const thirdEl = getByText('Label2');
-    fireEvent.mouseOver(thirdEl);
-    expect(defaultProps.setOpened).toHaveBeenCalledWith(2);
+    const thirdEl = getByTestId('bin-Label2');
+    fireEvent.click(thirdEl);
+    expect(defaultProps.onDelete).toHaveBeenCalledWith(2);
   });
 });
