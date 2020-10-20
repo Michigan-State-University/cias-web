@@ -16,6 +16,8 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { Provider } from 'react-redux';
 import configureStore from 'configureStore';
 
+import { withDroppable } from 'utils/testUtils/dndUtils';
+
 import InterventionListItem from '../index';
 
 describe('<InterventionListItem />', () => {
@@ -51,7 +53,7 @@ describe('<InterventionListItem />', () => {
       <IntlProvider locale={DEFAULT_LOCALE}>
         <Provider store={store}>
           <MemoryRouter>
-            <InterventionListItem {...props} />
+            {withDroppable(<InterventionListItem {...props} />)}
           </MemoryRouter>
         </Provider>
       </IntlProvider>,
@@ -65,7 +67,7 @@ describe('<InterventionListItem />', () => {
         <IntlProvider locale={DEFAULT_LOCALE}>
           <Provider store={store}>
             <MemoryRouter>
-              <InterventionListItem {...props} />
+              {withDroppable(<InterventionListItem {...props} />)}
             </MemoryRouter>
           </Provider>
         </IntlProvider>,
