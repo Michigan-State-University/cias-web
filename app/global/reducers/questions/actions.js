@@ -1,11 +1,11 @@
 import { actionBuilder } from 'utils/actionBuilder';
 
+import { GET_QUESTION_GROUPS_REQUEST } from 'global/reducers/questionGroups/constants';
 import {
   SELECT_QUESTION,
   CREATE_QUESTION_REQUEST,
   CREATE_QUESTION_ERROR,
   CREATE_QUESTION_SUCCESS,
-  GET_QUESTIONS_REQUEST,
   GET_QUESTIONS_SUCCESS,
   GET_QUESTIONS_ERROR,
   EDIT_QUESTION_REQUEST,
@@ -43,8 +43,8 @@ export const createQuestionSuccess = question =>
 export const createQuestionError = error =>
   actionBuilder(CREATE_QUESTION_ERROR, { error });
 
-export const getQuestionsRequest = id =>
-  actionBuilder(GET_QUESTIONS_REQUEST, { id });
+export const getQuestionsRequest = interventionId =>
+  actionBuilder(GET_QUESTION_GROUPS_REQUEST, { interventionId });
 export const getQuestionsSuccess = questions =>
   actionBuilder(GET_QUESTIONS_SUCCESS, { questions });
 export const getQuestionsError = error =>

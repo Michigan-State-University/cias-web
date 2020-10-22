@@ -3,7 +3,7 @@
 exports[`<App /> should render and match the snapshot 1`] = `
 <React.Fragment>
   <Switch>
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       allowedRoles={
         Array [
           "admin",
@@ -22,32 +22,32 @@ exports[`<App /> should render and match the snapshot 1`] = `
       protectedRoute={true}
       render={[Function]}
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
       path="/login"
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
       path="/register"
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
       path="/reset-password"
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
       path="/set-new-password"
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
       path="/logout"
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       allowedRoles={
         Array [
           "admin",
@@ -64,7 +64,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/interventions/:problemId/sessions/:interventionId/edit"
       protectedRoute={true}
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       allowedRoles={
         Array [
           "admin",
@@ -83,7 +83,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/interventions/:problemId/sessions/:interventionId/fill"
       user={true}
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       allowedRoles={
         Array [
           "admin",
@@ -100,7 +100,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/interventions/:problemId/sessions/:interventionId/settings"
       protectedRoute={true}
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       allowedRoles={
         Array [
           "admin",
@@ -117,7 +117,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/users"
       protectedRoute={true}
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       allowedRoles={
         Array [
           "admin",
@@ -139,7 +139,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/interventions/:problemId/sessions/:interventionId/preview"
       protectedRoute={true}
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       allowedRoles={
         Array [
           "admin",
@@ -160,7 +160,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/interventions/:problemId/sessions/:interventionId/preview/:index"
       protectedRoute={true}
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       allowedRoles={
         Array [
           "admin",
@@ -178,7 +178,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/interventions/:problemId"
       protectedRoute={true}
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       allowedRoles={
         Array [
           "admin",
@@ -197,7 +197,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/profile"
       protectedRoute={true}
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       allowedRoles={
         Array [
           "admin",
@@ -214,7 +214,7 @@ exports[`<App /> should render and match the snapshot 1`] = `
       path="/users/:id"
       protectedRoute={true}
     />
-    <Memo(Connect(AppRoute))
+    <Memo(ConnectFunction)
       component={[Function]}
       exact={true}
       path="/not-found-page"

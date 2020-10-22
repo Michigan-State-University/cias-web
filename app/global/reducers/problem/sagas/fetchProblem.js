@@ -2,9 +2,9 @@ import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
 import orderBy from 'lodash/orderBy';
 
+import { defaultMapper } from 'utils/mapResponseObjects';
 import { FETCH_PROBLEM_REQUEST } from '../constants';
 import { fetchProblemSuccess, fetchProblemError } from '../actions';
-import { defaultMapper } from '../../../../utils/mapResponseObjects';
 
 function* fetchProblem({ payload: { id } }) {
   const problemRequestURL = `v1/problems/${id}`;

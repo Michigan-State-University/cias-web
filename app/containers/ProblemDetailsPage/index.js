@@ -50,9 +50,8 @@ import archive from 'assets/svg/archive.svg';
 import { copyProblemRequest } from 'global/reducers/problems';
 
 import {
-  getQuestionsRequest,
   questionsReducer,
-  getQuestionsSaga,
+  getQuestionsRequest,
 } from 'global/reducers/questions';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -66,6 +65,8 @@ import {
 } from 'models/Status/statusPermissions';
 import { reorderScope } from 'models/Intervention/ReorderScope';
 import { reorder } from 'utils/reorder';
+import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
+
 import { StatusLabel, InterventionOptions, DraggedTest } from './styled';
 import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
@@ -102,8 +103,8 @@ export function ProblemDetailsPage({
     reducer: problemReducer,
   });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
-  useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
   useInjectSaga({ key: 'problemOptionsSaga', saga: problemOptionsSaga });
+  useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
 
   const { interventions, name, id, status } = problem || {};
 
@@ -161,7 +162,7 @@ export function ProblemDetailsPage({
       !isNullOrUndefined(interventions[interventionIndex])
     )
       fetchQuestions(interventions[interventionIndex].id);
-  }, [problem]);
+  }, [problem ? problem.id : 0]);
 
   const handleCopyIntervention = interventionId => {
     copyIntervention({ interventionId });
