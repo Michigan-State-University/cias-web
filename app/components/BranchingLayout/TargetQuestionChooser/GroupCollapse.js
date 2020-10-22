@@ -17,6 +17,7 @@ import QuestionListItem from './QuestionListItem';
 const GroupCollapse = ({ questionGroup, questions, questionListItemProps }) => {
   const [openCollapsable, setOpenCollapsable] = useState(false);
   const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
+  if (questions.length === 0) return <></>;
   return (
     <Collapse
       disabled
