@@ -15,7 +15,7 @@ const Component = () => <div>Component</div>;
 
 const configureStore = (reducer, initialState) => {
   const store = createStore(reducer, initialState);
-  store.runSaga = () => { };
+  store.runSaga = () => {};
   store.injectedReducers = {};
   store.injectedSagas = {};
   return store;
@@ -47,7 +47,7 @@ describe('<AppRoute />', () => {
       navbarId: 'default',
     },
   };
-  it.skip('Expect to not log errors in console', () => {
+  it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
@@ -60,7 +60,7 @@ describe('<AppRoute />', () => {
     );
     expect(spy).not.toHaveBeenCalled();
   });
-  it.skip('Should render and match the snapshot', () => {
+  it('Should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
@@ -73,7 +73,7 @@ describe('<AppRoute />', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it.skip('Should render public route and match the snapshot', () => {
+  it('Should render public route and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
@@ -104,7 +104,7 @@ describe('<AppRoute />', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it.skip('Should render default', () => {
+  it('Should render default', () => {
     const newState = {
       ...initialState,
       auth: {

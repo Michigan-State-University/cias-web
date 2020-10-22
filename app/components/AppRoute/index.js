@@ -19,7 +19,6 @@ class AppRoute extends Route {
       computedMatch,
       location,
     } = this.props;
-    console.log(protectedRoute, computedMatch, user);
     if (!protectedRoute) {
       return super.render();
     }

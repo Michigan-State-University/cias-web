@@ -40,26 +40,24 @@ describe('<TimezoneForm />', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it.skip('Should handle edit correctly', async () => {
-    const { getByTestId, debug } = render(
+  it('Should handle edit correctly', async () => {
+    const { getByTestId, getByText } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <TimezoneForm {...defaultProps} />
       </IntlProvider>,
     );
 
-    const newTimezone = 'Africa/Harare';
-    const timezoneSelect = getByTestId('select');
-    fireEvent.click(timezoneSelect);
-    debug();
-    fireEvent.change(timezoneSelect, {
-      value: 'Africa/Casablanca',
-      label: 'Africa/Casablanca (UTC +01:00)',
-    });
-    fireEvent.blur(timezoneSelect);
+    const newTimezone = 'Africa/Harare (UTC +02:00)';
+    const timezoneSelect = getByTestId('select').querySelector('input');
+
+    fireEvent.focus(timezoneSelect);
+    fireEvent.keyDown(timezoneSelect, { key: 'ArrowDown', code: 40 });
+    const option1 = getByText(newTimezone);
+    fireEvent.click(option1);
 
     await wait(() => {
       expect(defaultProps.editUser).toHaveBeenCalledWith({
-        timeZone: newTimezone,
+        timeZone: 'Africa/Harare',
       });
     });
   });
