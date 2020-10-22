@@ -47,7 +47,16 @@ describe('<EmailForm />', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('Should edit email correctly', async () => {
+  it('Should render error and match the snapshot', () => {
+    const { container } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <EmailForm {...defaultProps} error="Test error" />
+      </IntlProvider>,
+    );
+    expect(container).toMatchSnapshot();
+  });
+
+  it('Should call edit email correctly', async () => {
     const { getByTestId } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
         <EmailForm {...defaultProps} />
@@ -72,6 +81,25 @@ describe('<EmailForm />', () => {
         newEmail,
         oldPassword,
       });
+    });
+  });
+
+  it('Should call close modal', async () => {
+    const { getByTestId } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <EmailForm {...defaultProps} />
+      </IntlProvider>,
+    );
+
+    const newEmail = 'new@test.com';
+    const emailInput = getByTestId('email-input').querySelector('input');
+    fireEvent.change(emailInput, { target: { value: newEmail } });
+    fireEvent.blur(emailInput);
+    const closeButton = getByTestId('close-button');
+    fireEvent.click(closeButton);
+
+    await wait(() => {
+      expect(defaultProps.changeErrorValue).toHaveBeenCalled();
     });
   });
 });

@@ -93,6 +93,7 @@ const EmailForm = ({
                   />
                   <Row width="100%" mt={30}>
                     <Button
+                      data-testid="close-button"
                       mr={20}
                       inverted
                       hoverable

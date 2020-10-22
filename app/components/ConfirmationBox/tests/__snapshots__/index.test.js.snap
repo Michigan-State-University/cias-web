@@ -267,6 +267,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
           </h1>
           <button
             class="c6"
+            data-testid="close-modal-button"
           >
             <img
               alt="cross"

@@ -25,6 +25,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
           </h1>
           <button
             class="styled__CrossButton-sc-4w1fan-1 kkKWak"
+            data-testid="close-modal-button"
           >
             <img
               alt="cross"
@@ -161,6 +162,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
           </h1>
           <button
             class="styled__CrossButton-sc-4w1fan-1 kkKWak"
+            data-testid="close-modal-button"
           >
             <img
               alt="cross"
@@ -291,6 +293,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
           </h1>
           <button
             class="styled__CrossButton-sc-4w1fan-1 kkKWak"
+            data-testid="close-modal-button"
           >
             <img
               alt="cross"

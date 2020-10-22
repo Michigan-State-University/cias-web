@@ -23,6 +23,7 @@ function FormikSelect({ formikKey, label, options, columnStyleProps }) {
 
   const onChange = async e => {
     setValue(e);
+    console.log(e);
     await submitForm();
   };
 
@@ -32,6 +33,7 @@ function FormikSelect({ formikKey, label, options, columnStyleProps }) {
         {label}
       </Text>
       <Select
+        data-testid="select"
         selectProps={{
           options,
           value,
