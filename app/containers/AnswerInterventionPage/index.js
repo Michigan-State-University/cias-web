@@ -152,10 +152,16 @@ export function AnswerInterventionPage({
 
   useEffect(() => {
     fetchQuestionsAction(interventionId);
-
-    // cannot skip start screen => user have to click button to enable auto-play
-    if (index) setQuestionIndexAction(parseInt(index, 10));
   }, []);
+
+  useEffect(() => {
+    if (interventionQuestions.length !== 0) {
+      const startQuestionIndex = !index
+        ? 0
+        : interventionQuestions.findIndex(({ id }) => id === index);
+      setQuestionIndexAction(startQuestionIndex);
+    }
+  }, [interventionQuestions.length]);
 
   if (questionError)
     return (

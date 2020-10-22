@@ -22,7 +22,7 @@ import messages from './messages';
 import { StyledColumn } from './styled';
 
 const SettingsInterventionPage = ({
-  intervention: { id, name, settings: { narrator: narratorSettings } = {} },
+  intervention: { name, settings: { narrator: narratorSettings } = {} },
   match: { params },
   getIntervention,
   intl: { formatMessage },
@@ -54,7 +54,6 @@ const SettingsInterventionPage = ({
       >
         <StyledColumn height="100%">
           <InterventionSettings
-            id={id}
             name={name}
             narratorSettings={narratorSettings}
             formatMessage={formatMessage}

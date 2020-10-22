@@ -5,7 +5,6 @@
  */
 import produce from 'immer';
 import set from 'lodash/set';
-
 import { findQuestionIndex } from 'models/Intervention/utils';
 import { DESKTOP_MODE } from 'utils/previewMode';
 import isNullOrUndefined from 'utils/isNullOrUndefined';

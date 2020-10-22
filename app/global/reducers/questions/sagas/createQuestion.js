@@ -9,6 +9,10 @@ import {
   feedbackBlockType,
 } from 'models/Narrator/BlockTypes';
 import { setAnimationStopPosition } from 'global/reducers/localState';
+import {
+  makeSelectDefaultGroupId,
+  createNewQuestionInGroup,
+} from 'global/reducers/questionGroups';
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
 
 import { CREATE_QUESTION_REQUEST } from '../constants';
@@ -19,18 +23,19 @@ import {
 } from '../actions';
 import { makeSelectQuestions } from '../selectors';
 
-function* createQuestion({ payload: { question, id } }) {
-  const requestURL = `v1/interventions/${id}/questions`;
+function* createQuestion({ payload: { question } }) {
+  const defaultGroupId = yield select(makeSelectDefaultGroupId());
   const questions = yield select(makeSelectQuestions());
+
+  const requestURL = `v1/question_groups/${defaultGroupId}/questions`;
   try {
-    const response = yield axios.post(requestURL, {
-      question,
-    });
+    const response = yield axios.post(requestURL, question);
 
     const createdQuestion = mapQuestionToStateObject(response.data.data);
     const { id: newQuestionId } = createdQuestion;
 
     yield put(createQuestionSuccess(createdQuestion));
+    yield put(createNewQuestionInGroup(createdQuestion, defaultGroupId));
     const position = getNarratorPositionWhenQuestionIsAdded(
       questions,
       questions.length - 1,

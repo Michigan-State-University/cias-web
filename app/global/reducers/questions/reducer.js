@@ -1,9 +1,15 @@
 import produce from 'immer';
 import set from 'lodash/set';
+import groupBy from 'lodash/groupBy';
+import keys from 'lodash/keys';
+import values from 'lodash/values';
+import forEach from 'lodash/forEach';
+import concat from 'lodash/concat';
 
 import questionDataReducer from 'containers/Interventions/components/QuestionData/reducer';
 import questionSettingsReducer from 'containers/Interventions/components/QuestionSettings/Settings/reducer';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
+import { insertAt, removeAt } from 'utils/arrayUtils';
 
 import {
   SELECT_QUESTION,
@@ -44,9 +50,10 @@ import {
   editQuestionSuccessCommon,
   editQuestionErrorCommon,
 } from './utils';
+import { GROUP_QUESTIONS_SUCCESS } from '../questionGroups/constants';
 
 export const initialState = {
-  selectedQuestion: 0,
+  selectedQuestion: '',
   questions: [],
   cache: {
     questions: [],
@@ -76,7 +83,7 @@ export const questionsReducer = (state = initialState, action) =>
           mapQuestionDataForType(action.payload.question),
         ];
         draft.cache.questions = draft.questions;
-        draft.selectedQuestion = draft.questions.length - 1;
+        draft.selectedQuestion = action.payload.question.id;
         draft.loaders.createQuestionLoading = false;
         break;
       case CREATE_QUESTION_ERROR:
@@ -88,6 +95,10 @@ export const questionsReducer = (state = initialState, action) =>
         break;
       case GET_QUESTIONS_SUCCESS:
         draft.loaders.getQuestionsLoading = false;
+        draft.selectedQuestion =
+          action.payload.questions.length !== 0
+            ? action.payload.questions[0].id
+            : '';
         draft.questions = action.payload.questions.map(question =>
           mapQuestionDataForType(question),
         );
@@ -97,15 +108,19 @@ export const questionsReducer = (state = initialState, action) =>
         draft.loaders.getQuestionsLoading = false;
         break;
 
-      case EDIT_QUESTION_REQUEST:
+      case EDIT_QUESTION_REQUEST: {
         draft.loaders.updateQuestionLoading = true;
+        const questionIndex = state.questions.findIndex(
+          ({ id }) => id === state.selectedQuestion,
+        );
         set(
-          draft.questions[state.selectedQuestion],
+          draft.questions[questionIndex],
           action.payload.path,
           action.payload.value,
         );
         assignFromQuestionTTS(draft, state);
         break;
+      }
       case EDIT_QUESTION_SUCCESS:
         editQuestionSuccessCommon(draft, action.payload);
         break;
@@ -114,10 +129,13 @@ export const questionsReducer = (state = initialState, action) =>
         editQuestionErrorCommon(draft, action.payload);
         break;
 
-      case ADD_QUESTION_IMAGE_REQUEST:
-        draft.questions[state.selectedQuestion].image_url =
-          action.payload.imageUrl;
+      case ADD_QUESTION_IMAGE_REQUEST: {
+        const questionIndex = state.questions.findIndex(
+          ({ id }) => id === state.selectedQuestion,
+        );
+        draft.questions[questionIndex].image_url = action.payload.imageUrl;
         break;
+      }
       case ADD_QUESTION_IMAGE_SUCCESS:
         editQuestionSuccessCommon(draft, action.payload);
         break;
@@ -126,9 +144,13 @@ export const questionsReducer = (state = initialState, action) =>
         editQuestionErrorCommon(draft, action.payload);
         break;
 
-      case DELETE_QUESTION_IMAGE_REQUEST:
-        draft.questions[state.selectedQuestion].image_url = null;
+      case DELETE_QUESTION_IMAGE_REQUEST: {
+        const questionIndex = state.questions.findIndex(
+          ({ id }) => id === state.selectedQuestion,
+        );
+        draft.questions[questionIndex].image_url = null;
         break;
+      }
       case DELETE_QUESTION_IMAGE_SUCCESS:
         editQuestionSuccessCommon(draft, action.payload);
         break;
@@ -144,21 +166,25 @@ export const questionsReducer = (state = initialState, action) =>
           mapQuestionDataForType(action.payload.question),
         ];
         draft.cache.questions = draft.questions;
-        draft.selectedQuestion = draft.questions.length - 1;
+        draft.selectedQuestion = action.payload.question.id;
         break;
       case COPY_QUESTION_ERROR:
         break;
 
-      case CHANGE_QUESTION_TYPE_REQUEST:
-        draft.questions[state.selectedQuestion] = {
-          ...draft.questions[state.selectedQuestion],
+      case CHANGE_QUESTION_TYPE_REQUEST: {
+        const questionIndex = state.questions.findIndex(
+          ({ id }) => id === state.selectedQuestion,
+        );
+        draft.questions[questionIndex] = {
+          ...draft.questions[questionIndex],
           ...instantiateEmptyQuestion(
-            draft.questions[state.selectedQuestion].title,
+            draft.questions[questionIndex].title,
             action.payload.newType,
           ),
           formula: { payload: '', patterns: [] },
         };
         break;
+      }
       case CHANGE_QUESTION_TYPE_SUCCESS:
         draft.cache.questions = draft.questions;
         break;
@@ -166,14 +192,51 @@ export const questionsReducer = (state = initialState, action) =>
         draft.questions = draft.cache.questions;
         break;
 
-      case REORDER_QUESTION_LIST_REQUEST:
-        draft.questions = action.payload.reorderedList;
+      case REORDER_QUESTION_LIST_REQUEST: {
+        const {
+          sourceIndex,
+          destinationIndex,
+          sourceGroupId,
+          destinationGroupId,
+        } = action.payload;
+
+        const groupedQuestions = groupBy(
+          state.questions,
+          question => question.question_group_id,
+        );
+        const sourceQuestion = {
+          ...groupedQuestions[sourceGroupId][sourceIndex],
+          question_group_id: destinationGroupId,
+        };
+
+        removeAt(groupedQuestions[sourceGroupId], sourceIndex);
+
+        insertAt(
+          groupedQuestions[destinationGroupId],
+          destinationIndex,
+          sourceQuestion,
+        );
+
+        const groupKeys = keys(groupedQuestions);
+
+        forEach(groupKeys, groupKey => {
+          groupedQuestions[groupKey] = groupedQuestions[groupKey].map(
+            (question, index) => ({
+              ...question,
+              position: index + 1,
+            }),
+          );
+        });
+
+        draft.questions = concat(...values(groupedQuestions));
+
         break;
+      }
       case REORDER_QUESTION_LIST_SUCCESS:
-        draft.cache.questions = draft.questions;
+        draft.cache.questions = state.questions;
         break;
       case REORDER_QUESTION_LIST_ERROR:
-        draft.questions = draft.cache.questions;
+        draft.questions = state.cache.questions;
         break;
 
       case DELETE_QUESTION_REQUEST:
@@ -188,28 +251,44 @@ export const questionsReducer = (state = initialState, action) =>
         draft.questions = draft.cache.questions;
         break;
 
-      case UPDATE_QUESTION_DATA:
-        draft.questions[draft.selectedQuestion] = {
-          ...draft.questions[draft.selectedQuestion],
+      case UPDATE_QUESTION_DATA: {
+        const selectedQuestionIndex = draft.questions.findIndex(
+          ({ id }) => id === draft.selectedQuestion,
+        );
+        draft.questions[selectedQuestionIndex] = {
+          ...draft.questions[selectedQuestionIndex],
           ...questionDataReducer(
-            draft.questions[draft.selectedQuestion],
+            draft.questions[selectedQuestionIndex],
             action.payload,
           ),
         };
         assignFromQuestionTTS(draft, state);
         break;
+      }
 
-      case UPDATE_QUESTION_SETTINGS:
+      case UPDATE_QUESTION_SETTINGS: {
+        const selectedQuestionIndex = draft.questions.findIndex(
+          ({ id }) => id === draft.selectedQuestion,
+        );
         const settings = questionSettingsReducer(
           draft.questions,
           action.payload,
           draft.selectedQuestion,
         );
         draft.loaders.updateQuestionLoading = true;
-        draft.questions[draft.selectedQuestion] = {
-          ...draft.questions[draft.selectedQuestion],
+        draft.questions[selectedQuestionIndex] = {
+          ...draft.questions[selectedQuestionIndex],
           ...settings,
         };
         break;
+      }
+      case GROUP_QUESTIONS_SUCCESS: {
+        draft.questions = draft.questions.map(question => ({
+          ...question,
+          question_group_id: action.payload.questionIds.includes(question.id)
+            ? action.payload.group.id
+            : question.question_group_id,
+        }));
+      }
     }
   });

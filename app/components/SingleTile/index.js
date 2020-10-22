@@ -32,7 +32,7 @@ import ProblemDetails from 'components/SingleTile/ProblemDetails';
 import Tooltip from 'components/Tooltip';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
-import SelectResearchers from 'containers/ProblemDetailsPage/components/SelectResearchers';
+import SelectResearchers from 'containers/SelectResearchers';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import messages from './messages';
 import {

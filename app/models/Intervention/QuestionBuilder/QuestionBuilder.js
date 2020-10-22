@@ -1,8 +1,19 @@
+/* eslint-disable camelcase */
 import Question from '../Question';
 
 import { getQuestionDataByType } from './getQuestionDataByType';
 
 export class QuestionBuilder {
+  /**
+   * @param  {string} id
+   * @returns  {QuestionBuilder}
+   */
+  withId = id => {
+    this.id = id;
+
+    return this;
+  };
+
   /**
    * @param  {string} title
    * @returns  {QuestionBuilder}
@@ -45,13 +56,36 @@ export class QuestionBuilder {
   };
 
   /**
+   * @param  {number} position
+   * @returns  {QuestionBuilder}
+   */
+  withPosition = position => {
+    this.position = position;
+
+    return this;
+  };
+
+  /**
+   * @param  {string} question_group_id
+   * @returns  {QuestionBuilder}
+   */
+  withQuestionGroupId = question_group_id => {
+    this.question_group_id = question_group_id;
+
+    return this;
+  };
+
+  /**
    * @returns  {Question}
    */
   build = () =>
     new Question({
+      id: this.id,
       title: this.title,
       subtitle: this.subtitle,
       type: this.type,
       body: this.body,
+      position: this.position,
+      question_group_id: this.question_group_id,
     });
 }

@@ -1,22 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cloneDeep from 'lodash/cloneDeep';
-import set from 'lodash/set';
-import uniqueId from 'lodash/uniqueId';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, FormattedMessage } from 'react-intl';
+import { Draggable } from 'react-beautiful-dnd';
+
+import cloneDeep from 'lodash/cloneDeep';
+import set from 'lodash/set';
+import uniqueId from 'lodash/uniqueId';
 import unescape from 'lodash/unescape';
 
 import Column from 'components/Column';
 import Comment from 'components/Text/Comment';
 import Dropdown from 'components/Dropdown';
 import Row from 'components/Row';
-import StyledCircle from 'components/Circle/StyledCircle';
-import { QuestionTypes } from 'models/Intervention/QuestionTypes';
-import Box from 'components/Box';
-
 import globalMessages from 'global/i18n/globalMessages';
 import { colors } from 'theme';
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
@@ -35,6 +33,10 @@ import {
   changeCurrentNarratorBlock,
 } from 'global/reducers/localState';
 
+import StyledCircle from 'components/Circle/StyledCircle';
+import { QuestionTypes } from 'models/Intervention/QuestionTypes';
+import Box from 'components/Box';
+import Checkbox from 'components/Checkbox';
 import VariableInput from '../QuestionDetails/VariableInput';
 import { ToggleableBox, ClampedTitle } from './styled';
 import messages from './messages';
@@ -50,20 +52,22 @@ const QuestionListItem = ({
   removeQuestion,
   intl: { formatMessage },
   copyQuestion,
-  interventionId,
   changeNarratorBlockIndex,
   setDraggable,
   setCharacterPosition,
+  checked,
+  selectSlide,
+  manage,
   problemStatus,
   disabled,
 }) => {
-  const isSelected = selectedQuestionIndex === index;
-  const { type, subtitle, id, body } = question;
+  const { type, subtitle, id, body, question_group_id: groupId } = question;
+  const isSelected = selectedQuestionIndex === id;
 
   const handleSelectClick = newIndex => {
     setDraggable(false);
-    if (selectedQuestionIndex !== newIndex) {
-      onSelect(newIndex);
+    if (selectedQuestionIndex !== id) {
+      onSelect(id);
       const newPosition = getNarratorPositionWhenQuestionIsChanged(
         questions,
         newIndex,
@@ -75,7 +79,7 @@ const QuestionListItem = ({
   const handleDelete = () => {
     const newIndex = getIndex(selectedQuestionIndex, questions.length);
     handleSelectClick(newIndex);
-    removeQuestion({ questionId: id, interventionId });
+    removeQuestion({ questionId: id, groupId });
   };
 
   const handleCopy = () => {
@@ -106,49 +110,83 @@ const QuestionListItem = ({
   };
 
   return (
-    <ToggleableBox
-      px={21}
-      py={14}
-      mb={36}
-      width="100%"
-      onClick={onChangeItem}
-      isSelected={isSelected}
+    <Draggable
+      key={`group-${groupId}-item-${id}`}
+      draggableId={id}
+      index={index}
     >
-      <Row justify="between">
-        <Column xs={10}>
-          <Row>
-            <ClampedTitle mb={6}>
-              {unescape(htmlToPlainText(subtitle))}
-            </ClampedTitle>
-          </Row>
-          <Row>
-            <Box display="flex" align="center">
-              <StyledCircle
-                background={
-                  QuestionTypes.find(({ id: typeId }) => typeId === type).color
-                }
-                size="10px"
-                mr="5px"
-              />
-              <Comment fontWeight="bold">
-                {formatMessage(globalMessages.questionTypes[type])}
-              </Comment>
-            </Box>
-          </Row>
-          {body && hasObjectProperty(body, 'variable') && (
-            <Row mt={10}>
-              <VariableInput
-                variable={body.variable}
-                problemStatus={problemStatus}
-              />
+      {provided => (
+        <Box
+          width="100%"
+          key={id}
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <ToggleableBox
+            padding={15}
+            mb={15}
+            width="100%"
+            onClick={onChangeItem}
+            isSelected={isSelected}
+            bg={colors.zirkon}
+            border={`1px solid ${
+              checked ? colors.lavender : colors.smokeWhite
+            }`}
+          >
+            <Row justify="between">
+              {manage && (
+                <Column xs={1}>
+                  <Checkbox
+                    onClick={e => {
+                      selectSlide(id);
+                      e.stopPropagation();
+                      e.preventDefault();
+                    }}
+                    checked={checked}
+                  />
+                </Column>
+              )}
+              <Column xs={10}>
+                <Row>
+                  <ClampedTitle mb={6}>
+                    {unescape(htmlToPlainText(subtitle))}
+                  </ClampedTitle>
+                </Row>
+                <Row>
+                  <Box display="flex" align="center">
+                    <StyledCircle
+                      background={
+                        QuestionTypes.find(({ id: typeId }) => typeId === type)
+                          .color
+                      }
+                      size="10px"
+                      mr="5px"
+                    />
+                    <Comment fontWeight="bold">
+                      {formatMessage(globalMessages.questionTypes[type])}
+                    </Comment>
+                  </Box>
+                </Row>
+                {body && hasObjectProperty(body, 'variable') && (
+                  <Row mt={10}>
+                    <VariableInput
+                      variable={body.variable}
+                      problemStatus={problemStatus}
+                    />
+                  </Row>
+                )}
+              </Column>
+              {!manage && !disabled && (
+                <Column xs={1}>
+                  <Dropdown options={options} />
+                </Column>
+              )}
             </Row>
-          )}
-        </Column>
-        <Column xs={1} hidden={disabled}>
-          <Dropdown options={options} />
-        </Column>
-      </Row>
-    </ToggleableBox>
+          </ToggleableBox>
+        </Box>
+      )}
+    </Draggable>
   );
 };
 
@@ -156,7 +194,7 @@ QuestionListItem.propTypes = {
   question: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   onSelect: PropTypes.func.isRequired,
-  selectedQuestionIndex: PropTypes.number,
+  selectedQuestionIndex: PropTypes.string,
   questions: PropTypes.array,
   settingsVisibility: PropTypes.bool,
   toggleSettings: PropTypes.func,
@@ -167,6 +205,9 @@ QuestionListItem.propTypes = {
   changeNarratorBlockIndex: PropTypes.func,
   setDraggable: PropTypes.func,
   setCharacterPosition: PropTypes.func,
+  checked: PropTypes.bool,
+  manage: PropTypes.bool,
+  selectSlide: PropTypes.func,
   disabled: PropTypes.bool,
   problemStatus: PropTypes.string,
 };

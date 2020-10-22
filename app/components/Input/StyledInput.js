@@ -39,6 +39,7 @@ const StyledInput = props => {
         {...props}
         textAlign={props.textAlign}
         value={value}
+        onClick={e => e.stopPropagation()}
         onChange={event => onInputChange(event.target.value)}
         onBlur={() => {
           setHasFocus(false);

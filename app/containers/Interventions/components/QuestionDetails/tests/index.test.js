@@ -16,6 +16,7 @@ window.HTMLMediaElement.prototype.pause = () => {};
 
 describe('<QuestionDetails />', () => {
   let store;
+  const testId = 'testId';
   const reducer = state => state;
   const initialState = {
     problem: {
@@ -24,10 +25,10 @@ describe('<QuestionDetails />', () => {
       },
     },
     questions: {
-      selectedQuestion: 0,
+      selectedQuestion: testId,
       questions: [
         {
-          id: '1mna9s2-2as',
+          id: testId,
           intervention_id: 'a8169-faf5e14',
           type: 'Question::Number',
           position: 1,
