@@ -5,7 +5,7 @@ import ReactCollapse from 'react-collapse';
 import { StyledCollapseContent, Content } from './styled';
 
 const CLOSE_TIMEOUT = 500;
-const TRANSITION_TIMEOUT = 20;
+export const TRANSITION_TIMEOUT = 20;
 
 const CollapseContent = ({ child, isOpened }) => {
   const [show, setShow] = useState(isOpened);

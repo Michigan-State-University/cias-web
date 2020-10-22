@@ -3,7 +3,31 @@
 exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c0 {
+  "baseElement": .c13 {
+  margin-bottom: 7px;
+  width: 100%;
+}
+
+.c15 {
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  margin-right: 5px;
+  background-color: rgba(248,251,255,1);
+  height: auto;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.c19 .ReactCollapse--collapse {
+  -webkit-transition: height 480ms ease;
+  transition: height 480ms ease;
+}
+
+.c0 {
   width: auto;
   height: auto;
   display: block;
@@ -49,14 +73,6 @@ Object {
   overflow: scroll;
 }
 
-.c13 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  max-width: 260px;
-}
-
 .c7 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -95,12 +111,25 @@ Object {
   margin-right: 10px;
 }
 
+.c18 {
+  width: auto;
+  height: auto;
+}
+
 .c5 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   font-size: 15px;
   font-weight: 700;
+  color: #2F3850;
+}
+
+.c17 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
   color: #2F3850;
 }
 
@@ -128,12 +157,42 @@ Object {
 }
 
 .c14 {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: rgba(154,161,182,1);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
 }
 
 @media only screen and (min-width:768px) {
@@ -219,28 +278,40 @@ Object {
                   class="c7"
                 >
                   <div
-                    class="c2"
-                    data-testid="test-id-1-select-target-question-el"
+                    class="c13"
                   >
-                    <img
-                      class="c10"
-                      src="IMAGE_MOCK"
-                    />
                     <div
-                      class="c13"
+                      class="c14"
                     >
                       <div
-                        class="c2"
+                        class="c15"
+                        height="auto"
                       >
                         <div
-                          class="c14"
-                          color="#9AA1B6"
-                          font-weight=""
+                          class="c16"
                         >
-                          Test subtitle 1
+                          <div
+                            class="c2"
+                            data-testid="group-test-id-1-select-target-group-el"
+                          >
+                            <p
+                              class="c17"
+                              font-size="15"
+                            >
+                              Group test title 1
+                            </p>
+                          </div>
+                           
+                          <img
+                            class="c18"
+                            src="IMAGE_MOCK"
+                          />
                         </div>
                       </div>
                     </div>
+                    <div
+                      class="c19"
+                    />
                   </div>
                 </div>
               </div>
@@ -316,28 +387,40 @@ Object {
                 class="Column-sc-1n6divy-0 dfNUrc"
               >
                 <div
-                  class="Row-x1o3ru-0 iJOjSZ"
-                  data-testid="test-id-1-select-target-question-el"
+                  class="styled__StyledCollapseContainer-o4e1ys-0 hsnPoI"
                 >
-                  <img
-                    class="Img-sc-1kfzr96-0 gvKdyb"
-                    src="IMAGE_MOCK"
-                  />
                   <div
-                    class="Box-sc-14m3exe-0 iQyhOH"
+                    class="Row-x1o3ru-0 ezJzDF"
                   >
                     <div
-                      class="Row-x1o3ru-0 iJOjSZ"
+                      class="styled__StyledCollapseLabel-o4e1ys-1 elEwAw"
+                      height="auto"
                     >
                       <div
-                        class="styled__StyledEllipsisText-x30pqb-0 VaEzZ"
-                        color="#9AA1B6"
-                        font-weight=""
+                        class="Row-x1o3ru-0 ebldYK"
                       >
-                        Test subtitle 1
+                        <div
+                          class="Row-x1o3ru-0 iJOjSZ"
+                          data-testid="group-test-id-1-select-target-group-el"
+                        >
+                          <p
+                            class="Text-sc-2lza2m-0 dIqIDE"
+                            font-size="15"
+                          >
+                            Group test title 1
+                          </p>
+                        </div>
+                         
+                        <img
+                          class="Img-sc-1kfzr96-0 eEXYbw"
+                          src="IMAGE_MOCK"
+                        />
                       </div>
                     </div>
                   </div>
+                  <div
+                    class="styled__StyledCollapseContent-o4e1ys-3 kuKHQg"
+                  />
                 </div>
               </div>
             </div>

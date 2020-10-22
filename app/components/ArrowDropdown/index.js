@@ -50,7 +50,7 @@ const ArrowDropdown = ({
 ArrowDropdown.propTypes = {
   children: PropTypes.node,
   childWidthScope: PropTypes.oneOf(['parent', 'child']),
-  width: PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   dropdownContent: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
   positionFrom: PropTypes.oneOf(['left', 'right']),
   isOpened: PropTypes.bool,

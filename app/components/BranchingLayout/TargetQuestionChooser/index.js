@@ -19,10 +19,7 @@ import arrowLeft from 'assets/svg/arrow-left.svg';
 import navigationNext from 'assets/svg/navigation-next.svg';
 import presentationProjector from 'assets/svg/presentation-projector.svg';
 import presentationProjectorSelected from 'assets/svg/presentation-projector-selected.svg';
-import webpage from 'assets/svg/webpage-mouseover.svg';
-import webpageSelected from 'assets/svg/webpage-mouseover-selected.svg';
 import { colors, borders, fontSizes, themeColors } from 'theme';
-import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { makeSelectIntervention } from 'global/reducers/intervention';
 import {
   makeSelectProblemLoader,
@@ -34,8 +31,10 @@ import {
   makeSelectSelectedQuestion,
   makeSelectSelectedQuestionId,
 } from 'global/reducers/questions';
+import { makeSelectQuestionGroups } from 'global/reducers/questionGroups';
 
 import messages from './messages';
+import GroupCollapse from './GroupCollapse';
 
 const TargetQuestionChooser = props => {
   const {
@@ -51,6 +50,7 @@ const TargetQuestionChooser = props => {
     problemLoading,
     problemBranching,
     interventionIndex,
+    questionGroups,
   } = props;
   const { interventions: interventionList } = problem || {};
   const [isInterventionView, _setIsInterventionView] = useState(false);
@@ -58,8 +58,6 @@ const TargetQuestionChooser = props => {
     if (event) event.stopPropagation();
     _setIsInterventionView(value);
   };
-
-  const canSelectQuestion = questionId => id !== questionId;
   const canSelectIntervention = selectedInterventionId =>
     !problemBranching ||
     interventionList[interventionIndex].id !== selectedInterventionId;
@@ -107,29 +105,16 @@ const TargetQuestionChooser = props => {
       </Row>
       <Box maxHeight="300px" overflow="scroll">
         <Column>
-          {questions.map((question, index) => (
-            <Row
-              data-testid={`${id}-select-target-question-el`}
-              key={`${id}-select-target-question-${index}`}
-              mb={index !== questions.length - 1 && 15}
-              onClick={() =>
-                canSelectQuestion(question.id) &&
-                onClick({ type: 'Question', id: question.id })
-              }
-              clickable={canSelectQuestion(question.id)}
-            >
-              <Img
-                src={target.id === question.id ? webpageSelected : webpage}
-                mr={10}
-              />
-              <Box maxWidth={260}>
-                <EllipsisText
-                  text={htmlToPlainText(question.subtitle)}
-                  color={!canSelectQuestion(question.id) ? colors.grey : ''}
-                  fontWeight={target.id === question.id ? 'bold' : ''}
-                />
-              </Box>
-            </Row>
+          {questionGroups.map((group, index) => (
+            <GroupCollapse
+              key={`${group.id}-select-group-${index}`}
+              questionGroup={group}
+              questionListItemProps={{
+                onClick,
+                selectedQuestionId: id,
+                target,
+              }}
+            />
           ))}
         </Column>
       </Box>
@@ -254,6 +239,7 @@ TargetQuestionChooser.propTypes = {
   problem: PropTypes.object,
   problemLoading: PropTypes.bool,
   problemBranching: PropTypes.bool,
+  questionGroups: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -264,6 +250,7 @@ const mapStateToProps = createStructuredSelector({
   problemLoading: makeSelectProblemLoader('fetchProblemLoading'),
   problem: makeSelectProblem(),
   interventionIndex: makeSelectCurrentInterventionIndex(),
+  questionGroups: makeSelectQuestionGroups(),
 });
 
 const withConnect = connect(mapStateToProps);

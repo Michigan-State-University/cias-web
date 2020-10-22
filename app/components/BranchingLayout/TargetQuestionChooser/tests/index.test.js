@@ -6,21 +6,34 @@ import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 import { createStore } from 'redux';
 
+import { TRANSITION_TIMEOUT } from 'components/Collapse/CollapsableContent';
+
 import { interventionReducer } from 'global/reducers/intervention';
 import { problemReducer } from 'global/reducers/problem';
 import { questionsReducer } from 'global/reducers/questions';
 import { localStateReducer } from 'global/reducers/localState';
+import { questionGroupsReducer } from 'global/reducers/questionGroups';
 
 import TargetQuestionChooser from '../index';
 
+const executeAfterTransition = func =>
+  setTimeout(() => func(), TRANSITION_TIMEOUT);
+
 const mockSingleQuestion = (suffix = 1, hasVariable = true) => ({
   id: `test-id-${suffix}`,
-  title: `Test title ${suffix}`,
+  title: `Question test title ${suffix}`,
   subtitle: `Test subtitle ${suffix}`,
   type: 'Question::Single',
+  question_group_id: `group-test-id-${suffix}`,
   body: {
     variable: { name: hasVariable ? `var_single_${suffix}` : '' },
   },
+});
+
+const mockSingleGroup = (suffix = 1) => ({
+  id: `group-test-id-${suffix}`,
+  title: `Group test title ${suffix}`,
+  subtitle: `Test subtitle ${suffix}`,
 });
 
 const mockIntervention = (suffix = 1) => ({
@@ -58,6 +71,9 @@ const mockMostUsedStore = question => {
       ],
       selectedQuestion: question.id,
     },
+    questionGroups: {
+      groups: [mockSingleGroup(1), mockSingleGroup(2), mockSingleGroup(3)],
+    },
   });
   store.runSaga = () => {};
   store.injectedReducers = {
@@ -65,6 +81,7 @@ const mockMostUsedStore = question => {
     questions: questionsReducer,
     localState: localStateReducer,
     problem: problemReducer,
+    questionGroups: questionGroupsReducer,
   };
   store.injectedSagas = {};
   return store;
@@ -90,6 +107,9 @@ describe('<TargetQuestionChooser />', () => {
     questions: {
       questions: [mockQuestion],
       selectedQuestion: mockQuestion.id,
+    },
+    questionGroups: {
+      groups: [mockSingleGroup(1)],
     },
   };
 
@@ -137,6 +157,7 @@ describe('<TargetQuestionChooser />', () => {
 
   it('should render list of questions with id of the selected one', () => {
     const question = mockSingleQuestion(2, true);
+    const group = mockSingleGroup(2);
 
     store = createStore(reducer, {
       intervention: {
@@ -159,6 +180,9 @@ describe('<TargetQuestionChooser />', () => {
         ],
         selectedQuestion: question.id,
       },
+      questionGroups: {
+        groups: [mockSingleGroup(1), mockSingleGroup(2), mockSingleGroup(3)],
+      },
     });
 
     store.runSaga = () => {};
@@ -169,7 +193,7 @@ describe('<TargetQuestionChooser />', () => {
     };
     store.injectedSagas = {};
 
-    const { getAllByTestId } = render(
+    const { getAllByTestId, getByTestId } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <TargetQuestionChooser {...props} />
@@ -177,11 +201,16 @@ describe('<TargetQuestionChooser />', () => {
       </Provider>,
     );
 
-    const variableComponentList = getAllByTestId(
-      `${question.id}-select-target-question-el`,
-    );
+    const groupRow = getByTestId(`${group.id}-select-target-group-el`);
+    fireEvent.click(groupRow);
 
-    expect(variableComponentList).toHaveLength(3);
+    executeAfterTransition(() => {
+      const variableComponentList = getAllByTestId(
+        `${question.id}-select-target-question-el`,
+      );
+
+      expect(variableComponentList).toHaveLength(3);
+    });
   });
 
   it('should render intervention view with list of interventions when selected', () => {
@@ -319,6 +348,7 @@ describe('<TargetQuestionChooser />', () => {
   it('should invoke onClick when question is selected', () => {
     const newProps = { ...props, onClick: jest.fn(), isVisible: false };
     const question = mockSingleQuestion(2, true);
+    const group = mockSingleGroup(2);
 
     store = mockMostUsedStore(question);
     const { getByTestId } = render(
@@ -328,11 +358,18 @@ describe('<TargetQuestionChooser />', () => {
         </IntlProvider>
       </Provider>,
     );
-    const questionRow = getByTestId(`${question.id}-select-target-question-el`);
-    fireEvent.click(questionRow);
-    expect(newProps.onClick).toHaveBeenCalledWith({
-      type: 'Question',
-      id: 'test-id-1',
+    const groupRow = getByTestId(`${group.id}-select-target-group-el`);
+    fireEvent.click(groupRow);
+
+    executeAfterTransition(() => {
+      const questionRow = getByTestId(
+        `${question.id}-select-target-question-el`,
+      );
+      fireEvent.click(questionRow);
+      expect(newProps.onClick).toHaveBeenCalledWith({
+        type: 'Question',
+        id: 'test-id-1',
+      });
     });
   });
 
