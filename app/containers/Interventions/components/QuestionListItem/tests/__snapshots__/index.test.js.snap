@@ -224,71 +224,76 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
 }
 
 <div
-  aria-describedby="rbd-hidden-text-0-hidden-text-0"
-  class="c0"
-  data-rbd-drag-handle-context-id="0"
-  data-rbd-drag-handle-draggable-id="test-1"
-  data-rbd-draggable-context-id="0"
-  data-rbd-draggable-id="test-1"
-  draggable="false"
-  role="button"
-  tabindex="0"
-  width="100%"
+  data-rbd-droppable-context-id="0"
+  data-rbd-droppable-id="TEST"
 >
   <div
-    class="HoverableBox-sc-1syy6g3-0 c1 "
+    aria-describedby="rbd-hidden-text-0-hidden-text-0"
+    class="c0"
+    data-rbd-drag-handle-context-id="0"
+    data-rbd-drag-handle-draggable-id="test-1"
+    data-rbd-draggable-context-id="0"
+    data-rbd-draggable-id="test-1"
+    draggable="false"
+    role="button"
+    tabindex="0"
     width="100%"
   >
     <div
-      class="c2"
+      class="HoverableBox-sc-1syy6g3-0 c1 "
+      width="100%"
     >
       <div
-        class="c3"
+        class="c2"
       >
         <div
-          class="c4"
-        >
-          <h3
-            class="c5 c6"
-          >
-            Test subtitle
-          </h3>
-        </div>
-        <div
-          class="c4"
+          class="c3"
         >
           <div
-            class="c7"
+            class="c4"
+          >
+            <h3
+              class="c5 c6"
+            >
+              Test subtitle
+            </h3>
+          </div>
+          <div
+            class="c4"
+          >
+            <div
+              class="c7"
+              display="flex"
+            >
+              <div
+                class="c8"
+                opacity="1"
+              />
+              <p
+                class="c9 c10"
+                font-weight="bold"
+              >
+                Single answer
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          class="c11"
+        >
+          <div
+            class="c12"
             display="flex"
           >
             <div
-              class="c8"
-              opacity="1"
-            />
-            <p
-              class="c9 c10"
-              font-weight="bold"
+              class="c13"
             >
-              Single answer
-            </p>
-          </div>
-        </div>
-      </div>
-      <div
-        class="c11"
-      >
-        <div
-          class="c12"
-          display="flex"
-        >
-          <div
-            class="c13"
-          >
-            <img
-              alt="dots"
-              class="c14"
-              src="IMAGE_MOCK"
-            />
+              <img
+                alt="dots"
+                class="c14"
+                src="IMAGE_MOCK"
+              />
+            </div>
           </div>
         </div>
       </div>

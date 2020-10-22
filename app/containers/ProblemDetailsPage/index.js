@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import get from 'lodash/get';
-import Reorder, { reorder } from 'react-reorder';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import orderBy from 'lodash/orderBy';
 
 import { StyledInput } from 'components/Input/StyledInput';
@@ -64,6 +64,8 @@ import {
   canEdit,
   canShareWithParticipants,
 } from 'models/Status/statusPermissions';
+import { reorderScope } from 'models/Intervention/ReorderScope';
+import { reorder } from 'utils/reorder';
 import { StatusLabel, InterventionOptions, DraggedTest } from './styled';
 import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
@@ -178,13 +180,13 @@ export function ProblemDetailsPage({
   const createInterventionCall = () =>
     createIntervention(problemId, interventions.length);
 
-  const handleReorder = (event, previousIndex, nextIndex) => {
+  const handleReorder = (previousIndex, nextIndex) => {
     const newList = reorder(interventions, previousIndex, nextIndex);
     let position = 0;
-    const orderedNewList = newList.map(question => {
+    const orderedNewList = newList.map(intervention => {
       position += 1;
       return {
-        ...question,
+        ...intervention,
         position,
       };
     });
@@ -196,45 +198,62 @@ export function ProblemDetailsPage({
 
   const copyProblemToResearchers = users => copyProblem({ problemId, users });
 
+  const onDragEnd = result => {
+    const { source, destination } = result;
+
+    if (destination) handleReorder(source.index, destination.index);
+  };
+
   const renderList = () => (
     <DraggedTest>
-      <Reorder
-        reorderId="problem-list"
-        onReorder={handleReorder}
-        holdTime={125}
-        disabled={!editingPossible}
-      >
-        {interventions &&
-          orderBy(interventions, 'position').map((intervention, index) => {
-            const handleClick = () => {
-              fetchInterventionEmails(index);
-              if (intervention.position !== interventionIndex + 1) {
-                fetchQuestions(intervention.id);
-                changeInterventionIndex(index);
-              }
-              setParticipantShareModalVisible(true);
-            };
-            const nextIntervention = interventions.find(
-              ({ position }) => position === intervention.position + 1,
-            );
-            return (
-              <Row key={intervention.id}>
-                <InterventionListItem
-                  disabled={!editingPossible}
-                  sharingPossible={sharingPossible}
-                  intervention={intervention}
-                  index={index}
-                  isSelected={index === interventionIndex}
-                  handleClick={handleClick}
-                  handleCopyIntervention={handleCopyIntervention}
-                  nextInterventionName={
-                    nextIntervention ? nextIntervention.name : null
-                  }
-                />
-              </Row>
-            );
-          })}
-      </Reorder>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable
+          isDropDisabled={!editingPossible}
+          droppableId="session-list"
+          type={reorderScope.sessions}
+        >
+          {providedDroppable => (
+            <div
+              ref={providedDroppable.innerRef}
+              {...providedDroppable.droppableProps}
+            >
+              {interventions &&
+                orderBy(interventions, 'position').map(
+                  (intervention, index) => {
+                    const handleClick = () => {
+                      fetchInterventionEmails(index);
+                      if (intervention.position !== interventionIndex + 1) {
+                        fetchQuestions(intervention.id);
+                        changeInterventionIndex(index);
+                      }
+                      setParticipantShareModalVisible(true);
+                    };
+                    const nextIntervention = interventions.find(
+                      ({ position }) => position === intervention.position + 1,
+                    );
+                    return (
+                      <Row key={intervention.id}>
+                        <InterventionListItem
+                          disabled={!editingPossible}
+                          sharingPossible={sharingPossible}
+                          intervention={intervention}
+                          index={index}
+                          isSelected={index === interventionIndex}
+                          handleClick={handleClick}
+                          handleCopyIntervention={handleCopyIntervention}
+                          nextInterventionName={
+                            nextIntervention ? nextIntervention.name : null
+                          }
+                        />
+                      </Row>
+                    );
+                  },
+                )}
+              {providedDroppable.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </DraggedTest>
   );
 

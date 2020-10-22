@@ -6,11 +6,11 @@ import map from 'lodash/map';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { reorder } from 'react-reorder';
 
 import Accordion from 'components/Accordion';
 import globalMessages from 'global/i18n/globalMessages';
 import { getNarratorPositionWhenBlockIsRemoved } from 'utils/getNarratorPosition';
+import { reorder } from 'utils/reorder';
 import {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
@@ -79,7 +79,7 @@ const WrappedAccordion = ({
     setOffset(position.x, position.y);
   };
 
-  const handleReorder = (event, previousIndex, nextIndex) => {
+  const handleReorder = (previousIndex, nextIndex) => {
     const newList = reorder(narrator.blocks, previousIndex, nextIndex);
     reorderBlocks(newList);
   };

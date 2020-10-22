@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from 'react-testing-library';
 import 'jest-styled-components';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
@@ -10,6 +9,7 @@ import { browserHistory } from 'react-router-dom';
 import configureStore from 'configureStore';
 
 import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { withDroppable } from 'utils/testUtils/dndUtils';
 
 import QuestionListItem from '../index';
 
@@ -32,11 +32,7 @@ describe('<QuestionListItem />', () => {
     } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <DragDropContext>
-            <Droppable>
-              {() => <QuestionListItem question={question} index={0} />}
-            </Droppable>
-          </DragDropContext>
+          {withDroppable(<QuestionListItem question={question} index={0} />)}
         </IntlProvider>
       </Provider>,
     );

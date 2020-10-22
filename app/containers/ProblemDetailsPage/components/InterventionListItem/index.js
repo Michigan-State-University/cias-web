@@ -7,6 +7,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
+import { Draggable } from 'react-beautiful-dnd';
 
 import Row from 'components/Row';
 import H2 from 'components/H2';
@@ -65,60 +66,76 @@ function InterventionListItem({
   ];
 
   return (
-    <ToggleableBox isSelected={isSelected} isHovered={isHovered}>
-      <Row py={21} px={16} align="center" justify="between">
-        <StyledRow align="center" justify="between">
-          <StyledLink
-            to={`/interventions/${problemId}/sessions/${id}/edit`}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            <InterventionIndex>{index + 1}</InterventionIndex>
-            <H2 ml={15}>{name}</H2>
-          </StyledLink>
-        </StyledRow>
-        <Row width={80} xs={1} align="center" justify="between">
-          <Img
-            clickable
-            disabled={!sharingPossible}
-            src={sharingPossible ? mail : mailDisabled}
-            onClick={handleClick}
-            alt="emails"
-          />
-          {process.env.APP_STAGE === appStages.dev.id && (
-            <Box mb={8}>
-              <Dropdown
-                disabled={disabled}
-                options={options}
-                clickable
-                id={id}
-              />
-            </Box>
-          )}
-        </Row>
-      </Row>
-      <Row px={62} mb={20}>
-        <Divider />
-      </Row>
-      {index !== 0 && (
-        <Row px={62}>
-          <InterventionSchedule
-            disabled={disabled}
-            interventionId={id}
-            selectedScheduleOption={schedule}
-            scheduleAt={scheduleAt}
-            schedulePayload={schedulePayload}
-          />
-        </Row>
+    <Draggable
+      isDragDisabled={disabled}
+      key={`accordion-${index}`}
+      draggableId={`accordion-${index}`}
+      index={index}
+    >
+      {provided => (
+        <Box
+          width="100%"
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <ToggleableBox isSelected={isSelected} isHovered={isHovered}>
+            <Row py={21} px={16} align="center" justify="between">
+              <StyledRow align="center" justify="between">
+                <StyledLink
+                  to={`/interventions/${problemId}/sessions/${id}/edit`}
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                >
+                  <InterventionIndex>{index + 1}</InterventionIndex>
+                  <H2 ml={15}>{name}</H2>
+                </StyledLink>
+              </StyledRow>
+              <Row width={80} xs={1} align="center" justify="between">
+                <Img
+                  clickable
+                  disabled={!sharingPossible}
+                  src={sharingPossible ? mail : mailDisabled}
+                  onClick={handleClick}
+                  alt="emails"
+                />
+                {process.env.APP_STAGE === appStages.dev.id && (
+                  <Box mb={8}>
+                    <Dropdown
+                      disabled={disabled}
+                      options={options}
+                      clickable
+                      id={id}
+                    />
+                  </Box>
+                )}
+              </Row>
+            </Row>
+            <Row px={62} mb={20}>
+              <Divider />
+            </Row>
+            {index !== 0 && (
+              <Row px={62}>
+                <InterventionSchedule
+                  disabled={disabled}
+                  interventionId={id}
+                  selectedScheduleOption={schedule}
+                  scheduleAt={scheduleAt}
+                  schedulePayload={schedulePayload}
+                />
+              </Row>
+            )}
+            <InterventionBranching
+              disabled={disabled}
+              formula={formula}
+              intervention={intervention}
+              nextInterventionName={nextInterventionName}
+              status={settings.formula}
+            />
+          </ToggleableBox>
+        </Box>
       )}
-      <InterventionBranching
-        disabled={disabled}
-        formula={formula}
-        intervention={intervention}
-        nextInterventionName={nextInterventionName}
-        status={settings.formula}
-      />
-    </ToggleableBox>
+    </Draggable>
   );
 }
 

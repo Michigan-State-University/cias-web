@@ -1,7 +1,10 @@
 import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
-import Reorder from 'react-reorder';
+import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
+import { reorderScope } from 'models/Intervention/ReorderScope';
+
+import Box from 'components/Box';
 import { AccordionContainer } from './styled';
 import Collapse from '../Collapse';
 
@@ -34,32 +37,65 @@ const Accordion = ({
     };
 
     return (
-      <div key={`accordion-${index}`}>
-        <Collapse
-          onToggle={handleToggle}
-          isOpened={opened === index}
-          label={label}
-          color={color}
-          onDelete={handleDelete}
-          disabled={disabled}
-        >
-          {content}
-        </Collapse>
-      </div>
+      <Collapse
+        onToggle={handleToggle}
+        isOpened={opened === index}
+        label={label}
+        color={color}
+        onDelete={handleDelete}
+        disabled={disabled}
+      >
+        {content}
+      </Collapse>
     );
   };
+
+  const onDragEnd = result => {
+    const { source, destination } = result;
+
+    if (destination) onReorder(source.index, destination.index);
+  };
+
+  const dragDisabled = !onReorder || disabled;
 
   if (Array.isArray(children))
     return (
       <AccordionContainer>
-        <Reorder
-          holdTime={125}
-          reorderId="blocks-list"
-          onReorder={onReorder}
-          disabled={!onReorder || disabled}
-        >
-          {children.map(renderCollapse)}
-        </Reorder>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable
+            isDropDisabled={dragDisabled}
+            droppableId="block-list"
+            type={reorderScope.blocks}
+          >
+            {providedDroppable => (
+              <div
+                ref={providedDroppable.innerRef}
+                {...providedDroppable.droppableProps}
+              >
+                {children.map((child, index) => (
+                  <Draggable
+                    isDragDisabled={dragDisabled}
+                    key={`accordion-${index}`}
+                    draggableId={`accordion-${index}`}
+                    index={index}
+                  >
+                    {provided => (
+                      <Box
+                        mb={7}
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        {renderCollapse(child, index, dragDisabled)}
+                      </Box>
+                    )}
+                  </Draggable>
+                ))}
+                {providedDroppable.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </AccordionContainer>
     );
 
