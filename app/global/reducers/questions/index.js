@@ -30,7 +30,6 @@ export {
   createQuestionSaga,
   deleteQuestionSaga,
   deleteQuestionImageSaga,
-  getQuestionsSaga,
   reorderQuestionsSaga,
   editQuestionAllSagas,
   editQuestionSaga,

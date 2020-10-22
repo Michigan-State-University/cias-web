@@ -14,11 +14,7 @@ import {
   editInterventionRequest,
   editInterventionSaga,
 } from 'global/reducers/intervention';
-import {
-  getQuestionsRequest,
-  getQuestionsSaga,
-  questionsReducer,
-} from 'global/reducers/questions';
+import { questionsReducer } from 'global/reducers/questions';
 import {
   fetchProblemSaga,
   makeSelectProblemStatus,
@@ -31,27 +27,21 @@ import messages from './messages';
 import { Input, NameContainer } from './styled';
 
 const InterventionSettings = ({
-  id,
   name,
   narratorSettings,
   formatMessage,
   editIntervention,
-  getQuestions,
   problemStatus,
 }) => {
   useInjectReducer({ key: 'problem', reducer: problemReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
-  useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
   useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
 
   const isNarratorActive = some(narratorSettings, setting => setting);
 
-  const refetchQuestions = () => getQuestions(id);
-
   const onToggle = index => val => {
     editIntervention({ path: `settings.narrator.${index}`, value: val });
-    refetchQuestions();
   };
 
   const onGlobalToggle = val => {
@@ -62,7 +52,6 @@ const InterventionSettings = ({
         animation: val,
       },
     });
-    refetchQuestions();
   };
 
   const editingPossible = canEdit(problemStatus);
@@ -115,7 +104,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   editIntervention: editInterventionRequest,
-  getQuestions: getQuestionsRequest,
 };
 
 const withConnect = connect(
@@ -124,7 +112,6 @@ const withConnect = connect(
 );
 
 InterventionSettings.propTypes = {
-  id: PropTypes.string,
   name: PropTypes.string,
   narratorSettings: PropTypes.shape({
     voice: PropTypes.bool,
@@ -132,7 +119,6 @@ InterventionSettings.propTypes = {
   }),
   formatMessage: PropTypes.func,
   editIntervention: PropTypes.func,
-  getQuestions: PropTypes.func,
   problemStatus: PropTypes.string,
 };
 

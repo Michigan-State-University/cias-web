@@ -63,6 +63,7 @@ import {
   changeGroupNameRequest,
   questionGroupsReducer,
   getQuestionGroupsRequest,
+  getQuestionGroupsSaga,
 } from 'global/reducers/questionGroups';
 import {
   problemReducer,
@@ -106,6 +107,8 @@ function EditInterventionPage({
   changeGroupName,
   getQuestionGroups,
 }) {
+  useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
+
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState([]);
   const [showList, setShowList] = useState(false);
@@ -386,7 +389,6 @@ EditInterventionPage.propTypes = {
   match: PropTypes.object,
   getIntervention: PropTypes.func,
   createQuestion: PropTypes.func,
-  getQuestions: PropTypes.func,
   reorderQuestions: PropTypes.func,
   reorderGroups: PropTypes.func,
   getQuestionsLoading: PropTypes.bool,

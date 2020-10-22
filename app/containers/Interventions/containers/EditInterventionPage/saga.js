@@ -13,7 +13,6 @@ import {
   groupQuestionsSaga,
   shareQuestionsToResearchersSaga,
   changeGroupNameSaga,
-  getQuestionGroupsSaga,
 } from 'global/reducers/questionGroups';
 
 export default function* editInterventionPageSaga() {
@@ -27,6 +26,5 @@ export default function* editInterventionPageSaga() {
     groupQuestionsSaga(),
     shareQuestionsToResearchersSaga(),
     changeGroupNameSaga(),
-    getQuestionGroupsSaga(),
   ]);
 }
