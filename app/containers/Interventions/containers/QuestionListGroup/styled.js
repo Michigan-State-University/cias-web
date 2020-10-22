@@ -7,3 +7,7 @@ export const Spacer = styled.div`
   margin-left: -${paddings.regular};
   background-color: ${colors.linkWater};
 `;
+
+export const DraggableContainer = styled.div`
+  width: 100%;
+`;

@@ -19,7 +19,8 @@ import reorderIcon from 'assets/svg/reorder-hand.svg';
 
 import { reorderScope } from 'models/Intervention/ReorderScope';
 import QuestionListItem from '../../components/QuestionListItem';
-import { Spacer } from './styled';
+import { Spacer, DraggableContainer } from './styled';
+import messages from './messages';
 
 const QuestionListGroup = ({
   questionGroup,
@@ -35,6 +36,7 @@ const QuestionListGroup = ({
   editingPossible,
   problemStatus,
   index: groupIndex,
+  formatMessage,
 }) => {
   const { title, id } = questionGroup;
   const [openCollapsable, setOpenCollapsable] = useState(true);
@@ -66,7 +68,7 @@ const QuestionListGroup = ({
             imgWithBackground
             label={
               <Row align="center" justify="between" width="100%" mr={10}>
-                <Box>
+                <Box display="flex">
                   {manage && (
                     <Checkbox
                       onClick={e => {
@@ -82,7 +84,7 @@ const QuestionListGroup = ({
                     value={title}
                     fontSize={18}
                     fontWeight="bold"
-                    placeholder="xd"
+                    placeholder={formatMessage(messages.groupPlaceholder)}
                     width="100%"
                     maxWidth="initial"
                     onBlur={val => changeGroupName(val, interventionId, id)}
@@ -101,7 +103,11 @@ const QuestionListGroup = ({
               type={reorderScope.questions}
             >
               {provided => (
-                <div ref={provided.innerRef} {...provided.droppableProps}>
+                <DraggableContainer
+                  style={{ width: '100%' }}
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
                   {questions.map((question, index) => (
                     <Row key={question.id} width="100%">
                       <QuestionListItem
@@ -119,7 +125,7 @@ const QuestionListGroup = ({
                     </Row>
                   ))}
                   {provided.placeholder}
-                </div>
+                </DraggableContainer>
               )}
             </Droppable>
           </Collapse>
@@ -139,6 +145,7 @@ QuestionListGroup.propTypes = {
   manage: PropTypes.bool,
   interventionId: PropTypes.string,
   selectSlide: PropTypes.func,
+  formatMessage: PropTypes.func,
   selectedSlides: PropTypes.array,
   selectedQuestion: PropTypes.string,
   questions: PropTypes.array,
