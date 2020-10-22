@@ -32,15 +32,23 @@ export default defineMessages({
   editInfo: {
     id: `${scope}.editInfo`,
     defaultMessage:
-      'You will not be able to edit sessions in the intervention.',
+      'You will no longer be able to edit content (including access settings)',
   },
-  dataInfo: {
-    id: `${scope}.dataInfo`,
-    defaultMessage: 'Entire test data will be wiped out.',
+  dataDeletedInfo: {
+    id: `${scope}.dataDeleted`,
+    defaultMessage: 'Test data will be deleted',
   },
-  accessInfo: {
-    id: `${scope}.accessInfo`,
+  dataCollectedInfo: {
+    id: `${scope}.dataCollected`,
+    defaultMessage: 'Participant data will be collected',
+  },
+  editParticipantsInfo: {
+    id: `${scope}.editParticipants`,
+    defaultMessage: 'You can still edit participants',
+  },
+  duplicateInfo: {
+    id: `${scope}.editParticipants`,
     defaultMessage:
-      'You will not be able to change intervention access settings.',
+      'You can duplicate the intervention as a draft (e.g. if you need to edit content) ',
   },
 });
