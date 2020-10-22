@@ -4,7 +4,6 @@ exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": .c13 {
-  margin-bottom: 7px;
   width: 100%;
 }
 
@@ -387,7 +386,7 @@ Object {
                 class="Column-sc-1n6divy-0 dfNUrc"
               >
                 <div
-                  class="styled__StyledCollapseContainer-o4e1ys-0 hsnPoI"
+                  class="styled__StyledCollapseContainer-o4e1ys-0 imoaxC"
                 >
                   <div
                     class="Row-x1o3ru-0 ezJzDF"

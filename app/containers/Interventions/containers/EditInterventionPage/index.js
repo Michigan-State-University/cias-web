@@ -74,6 +74,7 @@ import { canEdit } from 'models/Status/statusPermissions';
 
 import GroupActionButton from 'containers/Interventions/components/GroupActionButton';
 import { reorderScope } from 'models/Intervention/ReorderScope';
+import appStages from 'global/appStages';
 import editInterventionPageSaga from './saga';
 
 import EmptyInterventionPage from '../../components/EmptyInterventionPage';
@@ -112,24 +113,28 @@ function EditInterventionPage({
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
 
   const groupActions = [
-    {
-      label: <FormattedMessage {...messages.duplicate} />,
-      inactiveIcon: copy,
-      activeIcon: copyActive,
-      action: () => copyQuestions(selectedSlides),
-    },
-    {
-      label: <FormattedMessage {...messages.shareCopy} />,
-      inactiveIcon: share,
-      activeIcon: shareActive,
-      action: () => setModalVisible(true),
-    },
-    {
-      label: <FormattedMessage {...messages.delete} />,
-      inactiveIcon: bin,
-      activeIcon: binActive,
-      action: () => deleteQuestions(selectedSlides),
-    },
+    ...(process.env.APP_STAGE === appStages.dev.id
+      ? [
+          {
+            label: <FormattedMessage {...messages.duplicate} />,
+            inactiveIcon: copy,
+            activeIcon: copyActive,
+            action: () => copyQuestions(selectedSlides),
+          },
+          {
+            label: <FormattedMessage {...messages.shareCopy} />,
+            inactiveIcon: share,
+            activeIcon: shareActive,
+            action: () => setModalVisible(true),
+          },
+          {
+            label: <FormattedMessage {...messages.delete} />,
+            inactiveIcon: bin,
+            activeIcon: binActive,
+            action: () => deleteQuestions(selectedSlides),
+          },
+        ]
+      : []),
     {
       label: <FormattedMessage {...messages.group} />,
       inactiveIcon: group,
@@ -344,6 +349,7 @@ function EditInterventionPage({
                           toggleGroup={toggleGroup}
                           isDuringQuestionReorder={isDuringQuestionReorder}
                           problemStatus={problemStatus}
+                          formatMessage={formatMessage}
                         />
                       ))}
                       {provided.placeholder}
