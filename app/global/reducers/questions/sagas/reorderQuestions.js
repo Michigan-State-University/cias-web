@@ -17,17 +17,19 @@ import {
   reorderQuestionListError,
 } from '../actions';
 
-function* reorderQuestions({ payload: { questionId, sourceGroupId } }) {
+function* reorderQuestions({ payload: { interventionId } }) {
   const questions = yield select(makeSelectQuestions());
-  const requestURL = `v1/question_groups/${sourceGroupId}/questions/${questionId}/move`;
+  const requestURL = `v1/interventions/${interventionId}/questions`;
 
   try {
     yield axios.patch(requestURL, {
-      questions: questions.map(({ id, position, question_group_id }) => ({
-        id,
-        position,
-        question_group_id,
-      })),
+      question: {
+        position: questions.map(({ id, position, question_group_id }) => ({
+          id,
+          position,
+          question_group_id,
+        })),
+      },
     });
 
     yield put(cleanGroups(questions));

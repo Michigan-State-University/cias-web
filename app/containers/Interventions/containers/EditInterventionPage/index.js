@@ -44,6 +44,7 @@ import {
   interventionReducer,
   getInterventionSaga,
   makeSelectInterventionLoaders,
+  makeSelectIntervention,
 } from 'global/reducers/intervention';
 import {
   createQuestionRequest,
@@ -106,6 +107,7 @@ function EditInterventionPage({
   groups,
   changeGroupName,
   getQuestionGroups,
+  intervention: { id: interventionId },
 }) {
   useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
 
@@ -209,6 +211,7 @@ function EditInterventionPage({
             destinationIndex,
             destinationGroupId,
             questionId,
+            interventionId,
           });
 
           break;
@@ -218,9 +221,6 @@ function EditInterventionPage({
           const groupId = draggableId;
           const sourceIndex = source.index;
           const destinationIndex = destination.index;
-          const { intervention_id: interventionId } = groups.find(
-            ({ id }) => id === groupId,
-          );
 
           reorderGroups({
             groupId,
@@ -400,6 +400,7 @@ EditInterventionPage.propTypes = {
   changeGroupName: PropTypes.func,
   getQuestionGroups: PropTypes.func,
   problemStatus: PropTypes.string,
+  intervention: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -408,6 +409,7 @@ const mapStateToProps = createStructuredSelector({
   interventionLoaders: makeSelectInterventionLoaders(),
   groups: makeSelectQuestionGroups(),
   problemStatus: makeSelectProblemStatus(),
+  intervention: makeSelectIntervention(),
 });
 
 const mapDispatchToProps = {
