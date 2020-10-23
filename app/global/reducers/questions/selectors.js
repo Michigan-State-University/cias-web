@@ -74,3 +74,9 @@ export const makeSelectVisibleGroupsSize = () =>
     selectQuestions,
     substate => uniqBy(substate.questions, 'question_group_id').length,
   );
+
+export const makeSelectQuestionById = questionId =>
+  createSelector(
+    selectQuestions,
+    substate => substate.questions.find(({ id }) => id === questionId),
+  );

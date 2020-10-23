@@ -253,7 +253,8 @@ export const questionsReducer = (state = initialState, action) =>
 
       case UPDATE_QUESTION_DATA: {
         const selectedQuestionIndex = draft.questions.findIndex(
-          ({ id }) => id === draft.selectedQuestion,
+          ({ id }) =>
+            id === (action.payload.data.questionId || draft.selectedQuestion),
         );
         draft.questions[selectedQuestionIndex] = {
           ...draft.questions[selectedQuestionIndex],

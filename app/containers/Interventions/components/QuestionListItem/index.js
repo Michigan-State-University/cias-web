@@ -138,6 +138,7 @@ const QuestionListItem = ({
               {manage && (
                 <Column xs={1}>
                   <Checkbox
+                    mr={2}
                     onClick={e => {
                       selectSlide(id);
                       e.stopPropagation();
@@ -171,6 +172,7 @@ const QuestionListItem = ({
                 {body && hasObjectProperty(body, 'variable') && (
                   <Row mt={10}>
                     <VariableInput
+                      questionId={id}
                       variable={body.variable}
                       problemStatus={problemStatus}
                     />

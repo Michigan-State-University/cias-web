@@ -24,10 +24,22 @@ import {
 
 import { editQuestionSuccess, editQuestionError } from '../actions';
 
-import { makeSelectSelectedQuestion, makeSelectQuestions } from '../selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestions,
+  makeSelectQuestionById,
+} from '../selectors';
 
-function* editQuestion() {
-  const question = yield select(makeSelectSelectedQuestion());
+function* editQuestion({
+  payload: {
+    data: { questionId },
+  },
+}) {
+  const question = yield select(
+    questionId
+      ? makeSelectQuestionById(questionId)
+      : makeSelectSelectedQuestion(),
+  );
   const questions = yield select(makeSelectQuestions());
   const variables = getAllVariables(questions).filter(
     currentVariable => currentVariable && currentVariable.trim(),
