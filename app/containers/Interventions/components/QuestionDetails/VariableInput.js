@@ -38,10 +38,7 @@ const VariableInput = ({
         )}
         value={variable.name}
         color={colors.jungleGreen}
-        onBlur={val => {
-          // console.log(questionId);
-          updateVariable(val, questionId);
-        }}
+        onBlur={val => updateVariable(val, questionId)}
       />
     </Row>
   );
