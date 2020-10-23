@@ -37,7 +37,6 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
     if (SAVED_ACTIONS.includes(type)) draft.questionsGroupsSaving = false;
     switch (type) {
       case GET_QUESTION_GROUPS_REQUEST: {
-        console.log('?');
         draft.loaders.questionGroupsLoading = true;
         draft.groups = [];
         break;
