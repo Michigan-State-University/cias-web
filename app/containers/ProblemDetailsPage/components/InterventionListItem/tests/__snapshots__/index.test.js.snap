@@ -194,10 +194,25 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
+.c43 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-top: 15px;
+  color: rgba(176,186,201,1);
+  color: rgba(176,186,201,1);
+}
+
 .c13 {
   width: auto;
   height: auto;
   cursor: pointer;
+}
+
+.c42 {
+  width: auto;
+  height: auto;
 }
 
 .c0 {
@@ -274,7 +289,45 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   flex-grow: 1;
 }
 
-.c41 {
+.c39 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 30px;
+}
+
+.c40 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 0;
+  border-radius: 0;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c44 {
   width: auto;
   height: auto;
   display: block;
@@ -318,6 +371,24 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%;
+}
+
+.c41 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c15 {
@@ -520,54 +591,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   transform: translateX(18px);
 }
 
-.c40 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin: auto;
-  width: 50px;
-  height: 50px;
-}
-
-.c40:after {
-  content: ' ';
-  display: block;
-  width: 33.33333333333333px;
-  height: 33.33333333333333px;
-  border-radius: 50%;
-  border: 6px solid #C866EA;
-  border-color: #C866EA transparent #C866EA transparent;
-  -webkit-animation: hAjVGa 1.2s linear infinite;
-  animation: hAjVGa 1.2s linear infinite;
-}
-
-.c39 {
-  width: 100%;
-  height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c42 {
+.c45 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -590,10 +614,26 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c42:hover {
+.c45:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 @media only screen and (min-width:768px) {
@@ -827,22 +867,42 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
                     className="c38"
                   >
                     <div
-                      className="c39"
-                      data-testid="inline-loader"
+                      className="c30"
                     >
                       <div
-                        className="c40"
-                        color="#C866EA"
-                        size={50}
-                        width={6}
-                      />
+                        className="c39"
+                      >
+                        <div
+                          className="c40"
+                          data-testid="no-content"
+                          display="flex"
+                          height="100%"
+                          width="100%"
+                        >
+                          <div
+                            className="c41"
+                          >
+                            <img
+                              alt="No content"
+                              className="c42"
+                              src="IMAGE_MOCK"
+                            />
+                            <h2
+                              className="c10 c43"
+                              color="#B0BAC9"
+                            >
+                              No variables defined yet
+                            </h2>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             <div
-              className="c41 c42"
+              className="c44 c45"
               onClick={[Function]}
             >
               + Add case
