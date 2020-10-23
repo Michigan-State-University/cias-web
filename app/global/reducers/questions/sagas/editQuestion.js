@@ -1,6 +1,7 @@
 import { put, takeLatest, select, all } from 'redux-saga/effects';
 import axios from 'axios';
 import { dismiss, error as showError } from 'react-toastify-redux';
+import get from 'lodash/get';
 
 import { getAllVariables } from 'models/Intervention/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
@@ -24,10 +25,19 @@ import {
 
 import { editQuestionSuccess, editQuestionError } from '../actions';
 
-import { makeSelectSelectedQuestion, makeSelectQuestions } from '../selectors';
+import {
+  makeSelectSelectedQuestion,
+  makeSelectQuestions,
+  makeSelectQuestionById,
+} from '../selectors';
 
-function* editQuestion() {
-  const question = yield select(makeSelectSelectedQuestion());
+function* editQuestion({ payload }) {
+  const questionId = get(payload, 'data.questionId', undefined);
+  const question = yield select(
+    questionId
+      ? makeSelectQuestionById(questionId)
+      : makeSelectSelectedQuestion(),
+  );
   const questions = yield select(makeSelectQuestions());
   const variables = getAllVariables(questions).filter(
     currentVariable => currentVariable && currentVariable.trim(),

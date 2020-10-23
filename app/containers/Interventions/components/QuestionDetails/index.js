@@ -106,6 +106,7 @@ const RenderQuestionDetails = ({
                     {body && hasObjectProperty(body, 'variable') && (
                       <Row mt={10} ml={26}>
                         <VariableInput
+                          questionId={id}
                           problemStatus={problemStatus}
                           isNarratorTab={isNarratorTab}
                           variable={body.variable}
