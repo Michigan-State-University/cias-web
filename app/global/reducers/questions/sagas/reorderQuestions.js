@@ -19,7 +19,7 @@ import {
 
 function* reorderQuestions({ payload: { interventionId } }) {
   const questions = yield select(makeSelectQuestions());
-  const requestURL = `v1/interventions/${interventionId}/questions`;
+  const requestURL = `v1/interventions/${interventionId}/questions/move`;
 
   try {
     yield axios.patch(requestURL, {

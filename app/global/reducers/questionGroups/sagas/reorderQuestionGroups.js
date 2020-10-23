@@ -19,10 +19,12 @@ function* reorderQuestionGroups({ payload: { interventionId } }) {
 
   try {
     yield axios.patch(requestURL, {
-      question_groups: groups.map(({ id, position }) => ({
-        id,
-        position,
-      })),
+      question_group: {
+        position: groups.map(({ id, position }) => ({
+          id,
+          position,
+        })),
+      },
     });
 
     yield put(reorderGroupListSuccess());
