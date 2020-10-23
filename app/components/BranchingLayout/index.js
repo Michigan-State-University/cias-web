@@ -134,13 +134,13 @@ function BranchingLayout({
                   </Text>
                   <ArrowDropdown
                     disabled={disabled}
-                    width="100%"
+                    width={130}
                     positionFrom="right"
                     setOpen={value => setTargetChooserOpen(value ? index : -1)}
                     isOpened={isChooserOpened}
                     childWidthScope="child"
                     dropdownContent={
-                      <Box maxWidth={140}>
+                      <Box maxWidth={100}>
                         <EllipsisText
                           text={displayPatternTargetText(pattern.target)}
                           fontSize={13}

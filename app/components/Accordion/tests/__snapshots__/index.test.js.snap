@@ -2,26 +2,37 @@
 
 exports[`<Accordion /> Should render multiple elements and match the snapshot 1`] = `
 .c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
   margin-bottom: 7px;
 }
 
-.c2 {
-  height: 40px;
+.c1 {
+  width: 100%;
+}
+
+.c3 {
   border-radius: 5px;
-  padding: 12px;
   color: white;
   cursor: pointer;
   width: 100%;
   margin-right: 5px;
   background-color: rgba(0,0,237,1);
+  height: 40px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 12px;
+  padding-left: 12px;
 }
 
-.c6 .ReactCollapse--collapse {
+.c7 .ReactCollapse--collapse {
   -webkit-transition: height 480ms ease;
   transition: height 480ms ease;
 }
 
-.c1 {
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -44,7 +55,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   align-items: center;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -60,12 +71,12 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   justify-items: space-between;
 }
 
-.c4 {
+.c5 {
   width: auto;
   height: auto;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
   cursor: pointer;
@@ -75,222 +86,20 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   <div
     class="styled__AccordionContainer-sc-1ls4m2z-0"
   >
-    <div>
+    <div
+      data-rbd-droppable-context-id="1"
+      data-rbd-droppable-id="block-list"
+    >
       <div
-        class=" "
-      >
-        <div
-          class="c0"
-        >
-          <div
-            class="c1"
-          >
-            <div
-              class="c2"
-            >
-              <div
-                class="c3"
-              >
-                Label0
-                 
-                <img
-                  class="c4"
-                  src="IMAGE_MOCK"
-                />
-              </div>
-            </div>
-            <img
-              alt="bin"
-              class="c5"
-              data-testid="bin-Label0"
-              src="IMAGE_MOCK"
-            />
-          </div>
-          <div
-            class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class=" "
-      >
-        <div
-          class="c0"
-        >
-          <div
-            class="c1"
-          >
-            <div
-              class="c2"
-            >
-              <div
-                class="c3"
-              >
-                Label1
-                 
-                <img
-                  class="c4"
-                  src="IMAGE_MOCK"
-                />
-              </div>
-            </div>
-            <img
-              alt="bin"
-              class="c5"
-              data-testid="bin-Label1"
-              src="IMAGE_MOCK"
-            />
-          </div>
-          <div
-            class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        class=" "
-      >
-        <div
-          class="c0"
-        >
-          <div
-            class="c1"
-          >
-            <div
-              class="c2"
-            >
-              <div
-                class="c3"
-              >
-                Label2
-                 
-                <img
-                  class="c4"
-                  src="IMAGE_MOCK"
-                />
-              </div>
-            </div>
-            <img
-              alt="bin"
-              class="c5"
-              data-testid="bin-Label2"
-              src="IMAGE_MOCK"
-            />
-          </div>
-          <div
-            class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`<Accordion /> Should render only one element and match the snapshot 1`] = `
-.c0 {
-  margin-bottom: 7px;
-}
-
-.c2 {
-  height: 40px;
-  border-radius: 5px;
-  padding: 12px;
-  color: white;
-  cursor: pointer;
-  width: 100%;
-  margin-right: 5px;
-  background-color: rgba(0,0,237,1);
-}
-
-.c6 .ReactCollapse--collapse {
-  -webkit-transition: height 480ms ease;
-  transition: height 480ms ease;
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-}
-
-.c4 {
-  width: auto;
-  height: auto;
-}
-
-.c5 {
-  width: auto;
-  height: auto;
-  cursor: pointer;
-}
-
-<div>
-  <div
-    class="styled__AccordionContainer-sc-1ls4m2z-0"
-  >
-    <div>
-      <div
+        aria-describedby="rbd-hidden-text-1-hidden-text-5"
         class="c0"
+        data-rbd-drag-handle-context-id="1"
+        data-rbd-drag-handle-draggable-id="accordion-0"
+        data-rbd-draggable-context-id="1"
+        data-rbd-draggable-id="accordion-0"
+        draggable="false"
+        role="button"
+        tabindex="0"
       >
         <div
           class="c1"
@@ -300,33 +109,117 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
           >
             <div
               class="c3"
+              height="40px"
             >
-              Label0
-               
-              <img
+              <div
                 class="c4"
-                src="IMAGE_MOCK"
-              />
+              >
+                Label0
+                 
+                <img
+                  class="c5"
+                  src="IMAGE_MOCK"
+                />
+              </div>
             </div>
-          </div>
-          <img
-            alt="bin"
-            class="c5"
-            data-testid="bin-Label0"
-            src="IMAGE_MOCK"
-          />
-        </div>
-        <div
-          class="c6"
-        >
-          <div
-            class="ReactCollapse--collapse"
-            style="height: 0px; overflow: hidden;"
-          >
-            <div
-              class="ReactCollapse--content"
+            <img
+              alt="bin"
+              class="c6"
+              data-testid="bin-Label0"
+              src="IMAGE_MOCK"
             />
           </div>
+          <div
+            class="c7"
+          />
+        </div>
+      </div>
+      <div
+        aria-describedby="rbd-hidden-text-1-hidden-text-5"
+        class="c0"
+        data-rbd-drag-handle-context-id="1"
+        data-rbd-drag-handle-draggable-id="accordion-1"
+        data-rbd-draggable-context-id="1"
+        data-rbd-draggable-id="accordion-1"
+        draggable="false"
+        role="button"
+        tabindex="0"
+      >
+        <div
+          class="c1"
+        >
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+              height="40px"
+            >
+              <div
+                class="c4"
+              >
+                Label1
+                 
+                <img
+                  class="c5"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+            <img
+              alt="bin"
+              class="c6"
+              data-testid="bin-Label1"
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <div
+            class="c7"
+          />
+        </div>
+      </div>
+      <div
+        aria-describedby="rbd-hidden-text-1-hidden-text-5"
+        class="c0"
+        data-rbd-drag-handle-context-id="1"
+        data-rbd-drag-handle-draggable-id="accordion-2"
+        data-rbd-draggable-context-id="1"
+        data-rbd-draggable-id="accordion-2"
+        draggable="false"
+        role="button"
+        tabindex="0"
+      >
+        <div
+          class="c1"
+        >
+          <div
+            class="c2"
+          >
+            <div
+              class="c3"
+              height="40px"
+            >
+              <div
+                class="c4"
+              >
+                Label2
+                 
+                <img
+                  class="c5"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+            <img
+              alt="bin"
+              class="c6"
+              data-testid="bin-Label2"
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <div
+            class="c7"
+          />
         </div>
       </div>
     </div>
@@ -334,35 +227,23 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
 </div>
 `;
 
-exports[`<Accordion /> Should render with one element opened and match the snapshot 1`] = `
+exports[`<Accordion /> Should render only one element and match the snapshot 1`] = `
 .c0 {
-  margin-bottom: 7px;
+  width: 100%;
 }
 
 .c2 {
-  height: 40px;
   border-radius: 5px;
-  padding: 12px;
   color: white;
   cursor: pointer;
   width: 100%;
   margin-right: 5px;
   background-color: rgba(0,0,237,1);
-}
-
-.c7 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
-  width: 100%;
-  margin-bottom: 10px;
+  height: 40px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 12px;
+  padding-left: 12px;
 }
 
 .c6 .ReactCollapse--collapse {
@@ -424,143 +305,262 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   <div
     class="styled__AccordionContainer-sc-1ls4m2z-0"
   >
-    <div>
+    <div
+      class="c0"
+    >
       <div
-        class=" "
+        class="c1"
       >
         <div
-          class="c0"
+          class="c2"
+          height="40px"
         >
           <div
-            class="c1"
+            class="c3"
+          >
+            Label0
+             
+            <img
+              class="c4"
+              src="IMAGE_MOCK"
+            />
+          </div>
+        </div>
+        <img
+          alt="bin"
+          class="c5"
+          data-testid="bin-Label0"
+          src="IMAGE_MOCK"
+        />
+      </div>
+      <div
+        class="c6"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Accordion /> Should render with one element opened and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 7px;
+}
+
+.c1 {
+  width: 100%;
+}
+
+.c3 {
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  margin-right: 5px;
+  background-color: rgba(0,0,237,1);
+  height: 40px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.c7 .ReactCollapse--collapse {
+  -webkit-transition: height 480ms ease;
+  transition: height 480ms ease;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+<div>
+  <div
+    class="styled__AccordionContainer-sc-1ls4m2z-0"
+  >
+    <div
+      data-rbd-droppable-context-id="2"
+      data-rbd-droppable-id="block-list"
+    >
+      <div
+        aria-describedby="rbd-hidden-text-2-hidden-text-10"
+        class="c0"
+        data-rbd-drag-handle-context-id="2"
+        data-rbd-drag-handle-draggable-id="accordion-0"
+        data-rbd-draggable-context-id="2"
+        data-rbd-draggable-id="accordion-0"
+        draggable="false"
+        role="button"
+        tabindex="0"
+      >
+        <div
+          class="c1"
+        >
+          <div
+            class="c2"
           >
             <div
-              class="c2"
+              class="c3"
+              height="40px"
             >
               <div
-                class="c3"
+                class="c4"
               >
                 Label0
                  
                 <img
-                  class="c4"
+                  class="c5"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
             <img
               alt="bin"
-              class="c5"
+              class="c6"
               data-testid="bin-Label0"
               src="IMAGE_MOCK"
             />
           </div>
           <div
-            class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              >
-                <div
-                  class="c7"
-                >
-                  Content0
-                </div>
-              </div>
-            </div>
-          </div>
+            class="c7"
+          />
         </div>
       </div>
       <div
-        class=" "
+        aria-describedby="rbd-hidden-text-2-hidden-text-10"
+        class="c0"
+        data-rbd-drag-handle-context-id="2"
+        data-rbd-drag-handle-draggable-id="accordion-1"
+        data-rbd-draggable-context-id="2"
+        data-rbd-draggable-id="accordion-1"
+        draggable="false"
+        role="button"
+        tabindex="0"
       >
         <div
-          class="c0"
+          class="c1"
         >
           <div
-            class="c1"
+            class="c2"
           >
             <div
-              class="c2"
+              class="c3"
+              height="40px"
             >
               <div
-                class="c3"
+                class="c4"
               >
                 Label1
                  
                 <img
-                  class="c4"
+                  class="c5"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
             <img
               alt="bin"
-              class="c5"
+              class="c6"
               data-testid="bin-Label1"
               src="IMAGE_MOCK"
             />
           </div>
           <div
-            class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              />
-            </div>
-          </div>
+            class="c7"
+          />
         </div>
       </div>
       <div
-        class=" "
+        aria-describedby="rbd-hidden-text-2-hidden-text-10"
+        class="c0"
+        data-rbd-drag-handle-context-id="2"
+        data-rbd-drag-handle-draggable-id="accordion-2"
+        data-rbd-draggable-context-id="2"
+        data-rbd-draggable-id="accordion-2"
+        draggable="false"
+        role="button"
+        tabindex="0"
       >
         <div
-          class="c0"
+          class="c1"
         >
           <div
-            class="c1"
+            class="c2"
           >
             <div
-              class="c2"
+              class="c3"
+              height="40px"
             >
               <div
-                class="c3"
+                class="c4"
               >
                 Label2
                  
                 <img
-                  class="c4"
+                  class="c5"
                   src="IMAGE_MOCK"
                 />
               </div>
             </div>
             <img
               alt="bin"
-              class="c5"
+              class="c6"
               data-testid="bin-Label2"
               src="IMAGE_MOCK"
             />
           </div>
           <div
-            class="c6"
-          >
-            <div
-              class="ReactCollapse--collapse"
-              style="height: 0px; overflow: hidden;"
-            >
-              <div
-                class="ReactCollapse--content"
-              />
-            </div>
-          </div>
+            class="c7"
+          />
         </div>
       </div>
     </div>

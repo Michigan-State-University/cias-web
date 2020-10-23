@@ -29,6 +29,8 @@ import {
   changeCurrentIntervention,
 } from 'global/reducers/problem';
 import { getQuestionsRequest } from 'global/reducers/questions';
+import { useInjectReducer } from 'utils/injectReducer';
+import { questionGroupsReducer } from 'global/reducers/questionGroups';
 import messages from './messages';
 
 function InterventionBranching({
@@ -48,6 +50,7 @@ function InterventionBranching({
   fetchQuestions,
   disabled,
 }) {
+  useInjectReducer({ key: 'questionGroups', reducer: questionGroupsReducer });
   const displayPatternTargetText = target => {
     if (target.id === '') return formatMessage(messages.selectSession);
     const intervention = find(

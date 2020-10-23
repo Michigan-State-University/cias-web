@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import get from 'lodash/get';
-import Reorder, { reorder } from 'react-reorder';
+import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import orderBy from 'lodash/orderBy';
 
 import { StyledInput } from 'components/Input/StyledInput';
@@ -50,9 +50,8 @@ import archive from 'assets/svg/archive.svg';
 import { copyProblemRequest } from 'global/reducers/problems';
 
 import {
-  getQuestionsRequest,
   questionsReducer,
-  getQuestionsSaga,
+  getQuestionsRequest,
 } from 'global/reducers/questions';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -64,12 +63,16 @@ import {
   canEdit,
   canShareWithParticipants,
 } from 'models/Status/statusPermissions';
+import { reorderScope } from 'models/Intervention/ReorderScope';
+import { reorder } from 'utils/reorder';
+import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
+
 import { StatusLabel, InterventionOptions, DraggedTest } from './styled';
 import problemDetailsPageSagas from './saga';
 import InterventionCreateButton from './components/InterventionCreateButton';
 import InterventionStatusButtons from './components/InterventionStatusButtons';
 import InterventionListItem from './components/InterventionListItem';
-import SelectResearchers from './components/SelectResearchers';
+import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
 import { updateStatuses } from './utils';
 
@@ -100,8 +103,8 @@ export function ProblemDetailsPage({
     reducer: problemReducer,
   });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
-  useInjectSaga({ key: 'getQuestions', saga: getQuestionsSaga });
   useInjectSaga({ key: 'problemOptionsSaga', saga: problemOptionsSaga });
+  useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
 
   const { interventions, name, id, status } = problem || {};
 
@@ -159,7 +162,7 @@ export function ProblemDetailsPage({
       !isNullOrUndefined(interventions[interventionIndex])
     )
       fetchQuestions(interventions[interventionIndex].id);
-  }, [problem]);
+  }, [problem ? problem.id : 0]);
 
   const handleCopyIntervention = interventionId => {
     copyIntervention({ interventionId });
@@ -178,13 +181,13 @@ export function ProblemDetailsPage({
   const createInterventionCall = () =>
     createIntervention(problemId, interventions.length);
 
-  const handleReorder = (event, previousIndex, nextIndex) => {
+  const handleReorder = (previousIndex, nextIndex) => {
     const newList = reorder(interventions, previousIndex, nextIndex);
     let position = 0;
-    const orderedNewList = newList.map(question => {
+    const orderedNewList = newList.map(intervention => {
       position += 1;
       return {
-        ...question,
+        ...intervention,
         position,
       };
     });
@@ -196,45 +199,62 @@ export function ProblemDetailsPage({
 
   const copyProblemToResearchers = users => copyProblem({ problemId, users });
 
+  const onDragEnd = result => {
+    const { source, destination } = result;
+
+    if (destination) handleReorder(source.index, destination.index);
+  };
+
   const renderList = () => (
     <DraggedTest>
-      <Reorder
-        reorderId="problem-list"
-        onReorder={handleReorder}
-        holdTime={125}
-        disabled={!editingPossible}
-      >
-        {interventions &&
-          orderBy(interventions, 'position').map((intervention, index) => {
-            const handleClick = () => {
-              fetchInterventionEmails(index);
-              if (intervention.position !== interventionIndex + 1) {
-                fetchQuestions(intervention.id);
-                changeInterventionIndex(index);
-              }
-              setParticipantShareModalVisible(true);
-            };
-            const nextIntervention = interventions.find(
-              ({ position }) => position === intervention.position + 1,
-            );
-            return (
-              <Row key={intervention.id}>
-                <InterventionListItem
-                  disabled={!editingPossible}
-                  sharingPossible={sharingPossible}
-                  intervention={intervention}
-                  index={index}
-                  isSelected={index === interventionIndex}
-                  handleClick={handleClick}
-                  handleCopyIntervention={handleCopyIntervention}
-                  nextInterventionName={
-                    nextIntervention ? nextIntervention.name : null
-                  }
-                />
-              </Row>
-            );
-          })}
-      </Reorder>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable
+          isDropDisabled={!editingPossible}
+          droppableId="session-list"
+          type={reorderScope.sessions}
+        >
+          {providedDroppable => (
+            <div
+              ref={providedDroppable.innerRef}
+              {...providedDroppable.droppableProps}
+            >
+              {interventions &&
+                orderBy(interventions, 'position').map(
+                  (intervention, index) => {
+                    const handleClick = () => {
+                      fetchInterventionEmails(index);
+                      if (intervention.position !== interventionIndex + 1) {
+                        fetchQuestions(intervention.id);
+                        changeInterventionIndex(index);
+                      }
+                      setParticipantShareModalVisible(true);
+                    };
+                    const nextIntervention = interventions.find(
+                      ({ position }) => position === intervention.position + 1,
+                    );
+                    return (
+                      <Row key={intervention.id}>
+                        <InterventionListItem
+                          disabled={!editingPossible}
+                          sharingPossible={sharingPossible}
+                          intervention={intervention}
+                          index={index}
+                          isSelected={index === interventionIndex}
+                          handleClick={handleClick}
+                          handleCopyIntervention={handleCopyIntervention}
+                          nextInterventionName={
+                            nextIntervention ? nextIntervention.name : null
+                          }
+                        />
+                      </Row>
+                    );
+                  },
+                )}
+              {providedDroppable.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     </DraggedTest>
   );
 

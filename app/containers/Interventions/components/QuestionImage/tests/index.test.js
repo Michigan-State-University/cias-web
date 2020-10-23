@@ -10,10 +10,11 @@ import QuestionImage from '../index';
 
 let store;
 const reducer = state => state;
+const testId = 'test-id';
 const initialState = {
   questions: {
-    selectedQuestion: 0,
-    questions: [{ id: 'asdas23-12', image_url: null }],
+    selectedQuestion: testId,
+    questions: [{ id: testId, image_url: null }],
   },
 };
 beforeAll(() => {
@@ -37,8 +38,8 @@ describe('<QuestionImage />', () => {
   it('should match the snapshot with file', () => {
     const newState = {
       questions: {
-        selectedQuestion: 0,
-        questions: [{ id: 'asdas23-12', image_url: 'mokc_url.png' }],
+        selectedQuestion: testId,
+        questions: [{ id: testId, image_url: 'mokc_url.png' }],
       },
     };
     store = createStore(reducer, newState);

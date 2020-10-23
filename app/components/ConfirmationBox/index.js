@@ -28,10 +28,11 @@ const ConfirmationBox = ({
   content,
   confirmationButtonColor,
   contentStyles,
+  contentContainerStyles,
   ...modalStyles
 }) => (
   <Modal visible={visible} onClose={onClose} {...modalStyles}>
-    <Column px={50} pd={30}>
+    <Column px={50} pd={30} {...contentContainerStyles}>
       <H1 textAlign="center">{description}</H1>
       {content && (
         <Box padded {...contentStyles}>
@@ -70,6 +71,7 @@ ConfirmationBox.propTypes = {
   maxWidth: PropTypes.number,
   confirmationButtonColor: PropTypes.string,
   contentStyles: PropTypes.object,
+  contentContainerStyles: PropTypes.object,
 };
 
 ConfirmationBox.defaultProps = {

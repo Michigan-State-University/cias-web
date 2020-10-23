@@ -98,6 +98,7 @@ const mockQuestion = ({
   lastPosition = null,
   firstPosition = null,
   customPosition = { index: null, position: null },
+  id,
 } = {}) => {
   const newBlocks = [];
 
@@ -112,13 +113,14 @@ const mockQuestion = ({
     }
   }
   return {
+    id,
     narrator: {
       blocks: newBlocks,
     },
   };
 };
 
-const initialPosition = { x: 0, y: elements.characterInitialYPosition };
+const initialPosition = elements.characterInitialPosition;
 
 describe('findLastPositionInPreviousQuestions', () => {
   it('Should return initial character position when there is no questions', () => {
@@ -188,50 +190,44 @@ describe('findLastPositionInPreviousQuestions', () => {
 
 describe('getNarratorPositionForANewBlock', () => {
   it('Should return initial character position when there are no blocks in first question', () => {
-    const allQuestions = [mockQuestion({ noBlocks: true })];
-    const questionIndex = 0;
-    const result = getNarratorPositionForANewBlock(allQuestions, questionIndex);
+    const questionId = 'test-id';
+    const allQuestions = [mockQuestion({ noBlocks: true, id: questionId })];
+    const result = getNarratorPositionForANewBlock(allQuestions, questionId);
     expect(result).toEqual(initialPosition);
   });
 
   it('Should return position of the last block in the same question', () => {
     const characterPosition = { x: 75, y: 75 };
+    const questionId = 'test-id';
     const allQuestions = [
       mockQuestion(),
-      mockQuestion({ lastPosition: characterPosition }),
+      mockQuestion({ lastPosition: characterPosition, id: questionId }),
       mockQuestion(),
     ];
-    const questionIndex = 1;
-    const result = getNarratorPositionForANewBlock(allQuestions, questionIndex);
+    const result = getNarratorPositionForANewBlock(allQuestions, questionId);
     expect(result).toEqual(characterPosition);
   });
 
   it('Should return position of the last block in any of the previous questions', () => {
     const characterPosition = { x: 100, y: 100 };
+    const questionId = 'test-id';
     const allQuestions = [
       mockQuestion({ lastPosition: characterPosition }),
-      mockQuestion({ noBlocks: true }),
+      mockQuestion({ noBlocks: true, id: questionId }),
       mockQuestion(),
     ];
-    const questionIndex = 1;
-    const result2 = getNarratorPositionForANewBlock(
-      allQuestions,
-      questionIndex,
-    );
+    const result2 = getNarratorPositionForANewBlock(allQuestions, questionId);
     expect(result2).toEqual(characterPosition);
   });
 
   it('Should return initial position when there is no blocks at all', () => {
+    const questionId = 'test-id';
     const allQuestions = [
       mockQuestion({ noBlocks: true }),
       mockQuestion({ noBlocks: true }),
-      mockQuestion({ noBlocks: true }),
+      mockQuestion({ noBlocks: true, id: questionId }),
     ];
-    const questionIndex = 2;
-    const result2 = getNarratorPositionForANewBlock(
-      allQuestions,
-      questionIndex,
-    );
+    const result2 = getNarratorPositionForANewBlock(allQuestions, questionId);
     expect(result2).toEqual(initialPosition);
   });
 });

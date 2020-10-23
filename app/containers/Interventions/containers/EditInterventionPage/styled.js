@@ -9,8 +9,9 @@ export const QuestionsRow = styled(Row)`
     position: fixed;
     z-index: 2;
     height: calc(100% - 70px);
-    left: -410px;
+    left: -350px;
     ${({ isVisible }) => isVisible && 'left: 0;'}
+  }
 `;
 
 export const ShowListButton = styled.button`

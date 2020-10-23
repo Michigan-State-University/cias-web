@@ -4,7 +4,6 @@ import copyQuestionSaga from './copyQuestion';
 import createQuestionSaga from './createQuestion';
 import deleteQuestionSaga from './deleteQuestion';
 import deleteQuestionImageSaga from './deleteQuestionImage';
-import getQuestionsSaga from './getQuestions';
 import reorderQuestionsSaga from './reorderQuestions';
 import editQuestionAllSagas, {
   editQuestionSaga,
@@ -19,7 +18,6 @@ export {
   createQuestionSaga,
   deleteQuestionSaga,
   deleteQuestionImageSaga,
-  getQuestionsSaga,
   reorderQuestionsSaga,
   editQuestionAllSagas,
   editQuestionSaga,
@@ -35,7 +33,6 @@ export default function* allQuestionsSagas() {
     createQuestionSaga(),
     deleteQuestionSaga(),
     deleteQuestionImageSaga(),
-    getQuestionsSaga(),
     reorderQuestionsSaga(),
     editQuestionSaga(),
     updateQuestionDataSaga(),

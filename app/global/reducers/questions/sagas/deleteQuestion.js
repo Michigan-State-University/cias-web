@@ -4,12 +4,12 @@ import { error as showError } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import messages from '../messages';
 import { DELETE_QUESTION_REQUEST, DELETE_QUESTION_ERROR } from '../constants';
 import { deleteQuestionSuccess, deleteQuestionError } from '../actions';
+import messages from '../messages';
 
-function* deleteQuestion({ payload: { questionId, interventionId } }) {
-  const requestURL = `v1/interventions/${interventionId}/questions/${questionId}`;
+function* deleteQuestion({ payload: { questionId, groupId } }) {
+  const requestURL = `v1/question_groups/${groupId}/questions/${questionId}`;
 
   try {
     yield axios.delete(requestURL);

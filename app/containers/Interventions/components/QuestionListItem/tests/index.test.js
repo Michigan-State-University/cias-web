@@ -9,6 +9,7 @@ import { browserHistory } from 'react-router-dom';
 import configureStore from 'configureStore';
 
 import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { withDroppable } from 'utils/testUtils/dndUtils';
 
 import QuestionListItem from '../index';
 
@@ -20,6 +21,7 @@ describe('<QuestionListItem />', () => {
   });
   it('should match the snapshot', () => {
     const question = {
+      id: 'test-1',
       title: 'Test title',
       subtitle: 'Test subtitle',
       type: singleQuestion.id,
@@ -30,7 +32,7 @@ describe('<QuestionListItem />', () => {
     } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionListItem question={question} index={0} />
+          {withDroppable(<QuestionListItem question={question} index={0} />)}
         </IntlProvider>
       </Provider>,
     );

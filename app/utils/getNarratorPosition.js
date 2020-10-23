@@ -21,25 +21,23 @@ export const findLastPositionInPreviousQuestions = (
     }
   }
 
-  return { x: 0, y: elements.characterInitialYPosition };
+  return elements.characterInitialPosition;
 };
 
 /**
  * @param {array} allQuestions Array of questions
- * @param {number} questionIndex Index of current selected question
+ * @param {number} questionId Id of current selected question
  * @returns {array} Returns position of character stored in the block before newly added block
  */
-export const getNarratorPositionForANewBlock = (
-  allQuestions,
-  questionIndex,
-) => {
+export const getNarratorPositionForANewBlock = (allQuestions, questionId) => {
+  const questionIndex = allQuestions.findIndex(({ id }) => id === questionId);
   const {
     narrator: { blocks },
   } = allQuestions[questionIndex];
 
   // check if it is first question and there is no blocks
   if (questionIndex === 0 && blocks.length === 0) {
-    return { x: 0, y: elements.characterInitialYPosition };
+    return elements.characterInitialPosition;
   }
   // check if question already has blocks return position of the last block
   if (blocks.length !== 0) {
@@ -83,8 +81,7 @@ export const getNarratorPositionWhenBlockIsRemoved = (
   deletedIndex,
   openedBlockIndex,
 ) => {
-  if (isEmpty(allQuestions))
-    return { x: 0, y: elements.characterInitialYPosition };
+  if (isEmpty(allQuestions)) return elements.characterInitialPosition;
 
   const {
     narrator: { blocks },

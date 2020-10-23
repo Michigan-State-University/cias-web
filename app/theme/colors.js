@@ -6,6 +6,8 @@ const colors = {
   grey: '#9AA1B6',
   zirkon: '#F8FBFF',
   white: '#FFFFFF',
+  smokeWhite: '#EFEFEF',
+  catskillWhite: '#E2EEF1',
   azure: '#0086F8',
   tangerine: '#FFA16C',
   golden: '#FFCF5B',
@@ -29,7 +31,7 @@ const colors = {
   buddhaGold: '#C2B200',
   navyBlue: '#000080',
   olive: '#808000',
-  catskillWhite: '#E2EEF1',
+  waterloo: '#828896',
 };
 
 const themeColors = {

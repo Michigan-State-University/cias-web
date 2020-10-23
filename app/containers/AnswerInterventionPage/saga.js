@@ -2,6 +2,8 @@ import { takeLatest, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 import omit from 'lodash/omit';
 import map from 'lodash/map';
+import orderBy from 'lodash/orderBy';
+import flatten from 'lodash/flatten';
 import { push } from 'connected-react-router';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
@@ -38,13 +40,15 @@ const calculatePath = (currentPath, sessionId) => {
 function* fetchQuestionsAsync({ payload: { interventionId } }) {
   try {
     const {
-      data: { data },
-    } = yield axios.get(`/v1/interventions/${interventionId}/questions`);
-    yield put(
-      fetchQuestionsSuccess(
-        data.map(question => mapQuestionToStateObject(question)),
+      data: { question_groups: groups },
+    } = yield axios.get(`/v1/interventions/${interventionId}/question_groups`);
+    const orderedGroups = orderBy(groups, 'position');
+    const questions = flatten(
+      orderedGroups.map(({ questions: groupQuestions }) =>
+        orderBy(groupQuestions, 'position'),
       ),
     );
+    yield put(fetchQuestionsSuccess(questions));
   } catch (error) {
     yield put(fetchQuestionsFailure(error));
   }
