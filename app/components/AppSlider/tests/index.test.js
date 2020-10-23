@@ -1,12 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
 import AppSlider from '../index';
 
 describe('<AppSlider />', () => {
   it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<AppSlider />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<AppSlider />);
+    expect(container).toMatchSnapshot();
   });
 });

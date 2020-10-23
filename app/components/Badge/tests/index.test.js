@@ -1,12 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
 import Badge from '../index';
 
 describe('<Badge />', () => {
   it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<Badge />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<Badge />);
+    expect(container).toMatchSnapshot();
   });
 });

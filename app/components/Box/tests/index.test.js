@@ -1,12 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
 import Box from '../index';
 
 describe('<Box />', () => {
   it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<Box />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<Box />);
+    expect(container).toMatchSnapshot();
   });
 });
