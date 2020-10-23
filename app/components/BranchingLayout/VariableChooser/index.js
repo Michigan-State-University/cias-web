@@ -14,7 +14,6 @@ import Badge from 'components/Badge';
 import Loader from 'components/Loader';
 import webpage from 'assets/svg/webpage-mouseover.svg';
 import {
-  makeSelectLoader,
   makeSelectQuestions,
   makeSelectSelectedQuestion,
 } from 'global/reducers/questions';
@@ -25,6 +24,7 @@ import { getAllVariables } from 'models/Intervention/utils';
 import NoContent from 'components/NoContent';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import useOutsideClick from 'utils/useOutsideClick';
+import { makeSelectGetQuestionGroupLoader } from 'global/reducers/questionGroups';
 import messages from './messages';
 
 const VariableChooser = ({
@@ -115,7 +115,7 @@ VariableChooser.propTypes = {
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
-  loading: makeSelectLoader('getQuestionsLoading'),
+  loading: makeSelectGetQuestionGroupLoader(),
 });
 
 const withConnect = connect(mapStateToProps);

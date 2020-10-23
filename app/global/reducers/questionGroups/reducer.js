@@ -15,11 +15,15 @@ import {
   REORDER_GROUP_LIST_SUCCESS,
   REORDER_GROUP_LIST_ERROR,
   CLEAN_GROUPS,
+  GET_QUESTION_GROUPS_ERROR,
+  GET_QUESTION_GROUPS_REQUEST,
 } from './constants';
 
 export const initialState = {
   groups: [],
-  loaders: {},
+  loaders: {
+    questionGroupsLoading: false,
+  },
   cache: {
     groups: null,
   },
@@ -32,8 +36,18 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
     if (SAVING_ACTIONS.includes(type)) draft.questionsGroupsSaving = true;
     if (SAVED_ACTIONS.includes(type)) draft.questionsGroupsSaving = false;
     switch (type) {
+      case GET_QUESTION_GROUPS_REQUEST: {
+        draft.loaders.questionGroupsLoading = true;
+        draft.groups = [];
+        break;
+      }
       case GET_QUESTION_GROUPS_SUCCESS: {
         draft.groups = payload.groups;
+        draft.loaders.questionGroupsLoading = false;
+        break;
+      }
+      case GET_QUESTION_GROUPS_ERROR: {
+        draft.loaders.questionGroupsLoading = false;
         break;
       }
       case CREATE_QUESTION_IN_GROUP: {

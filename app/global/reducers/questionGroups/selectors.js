@@ -28,3 +28,9 @@ export const makeSelectQuestionGroupsLoader = () =>
     selectQuestionGroups,
     substate => substate.questionsGroupsSaving,
   );
+
+export const makeSelectGetQuestionGroupLoader = () =>
+  createSelector(
+    selectQuestionGroups,
+    substate => substate.loaders.questionGroupsLoading,
+  );
