@@ -138,7 +138,6 @@ const QuestionListItem = ({
               {manage && (
                 <Column xs={1}>
                   <Checkbox
-                    mr={2}
                     onClick={e => {
                       selectSlide(id);
                       e.stopPropagation();
