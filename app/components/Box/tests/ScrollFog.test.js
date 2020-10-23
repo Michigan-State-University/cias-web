@@ -1,12 +1,18 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
 import { ScrollFogBox } from 'components/Box/ScrollFog';
 
 describe('<ScrollFog />', () => {
-  it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<ScrollFogBox />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+  it('Expect to not log errors in console', () => {
+    const spy = jest.spyOn(global.console, 'error');
+    render(<ScrollFogBox />);
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('Should render and match the snapshot', () => {
+    const { container } = render(<ScrollFogBox />);
+    expect(container).toMatchSnapshot();
   });
 });

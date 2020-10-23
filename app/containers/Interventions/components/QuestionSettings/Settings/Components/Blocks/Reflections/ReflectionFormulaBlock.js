@@ -9,7 +9,7 @@ import values from 'lodash/values';
 
 import { colors, themeColors } from 'theme';
 
-import VariableChooser from 'components/BranchingLayout/VariableChooser';
+import VariableChooser from 'containers/BranchingLayout/VariableChooser';
 import Column from 'components/Column';
 import Box from 'components/Box';
 import Select from 'components/Select';

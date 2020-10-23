@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 
-import BranchingLayout from 'components/BranchingLayout';
+import BranchingLayout from 'containers/BranchingLayout';
 import Intervention from 'models/Intervention/Intervention';
 import Question from 'models/Intervention/Question';
 import { htmlToPlainText } from 'utils/htmlToPlainText';

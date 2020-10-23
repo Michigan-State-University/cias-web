@@ -2,19 +2,13 @@ import React from 'react';
 import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
-import { Button } from '../index';
 import { StyledButton } from '../StyledButton';
 
-describe('<Button />', () => {
+describe('<StyledButton />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<Button />);
+    render(<StyledButton />);
     expect(spy).not.toHaveBeenCalled();
-  });
-
-  it('Should render and match the snapshot', () => {
-    const { container } = render(<Button />);
-    expect(container).toMatchSnapshot();
   });
 
   it('Should render styled button and match the snapshot', () => {

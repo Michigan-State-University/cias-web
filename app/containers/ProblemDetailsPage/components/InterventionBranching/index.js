@@ -15,7 +15,7 @@ import Row from 'components/Row';
 import Column from 'components/Column';
 import Switch from 'components/Switch';
 import Text from 'components/Text';
-import BranchingLayout from 'components/BranchingLayout';
+import BranchingLayout from 'containers/BranchingLayout';
 
 import { createStructuredSelector } from 'reselect';
 import {
