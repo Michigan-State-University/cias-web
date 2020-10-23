@@ -15,6 +15,7 @@ import {
 } from 'global/reducers/questionGroups';
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
 
+import { makeSelectIntervention } from 'global/reducers/intervention';
 import { CREATE_QUESTION_REQUEST } from '../constants';
 import {
   createQuestionSuccess,
@@ -26,10 +27,15 @@ import { makeSelectQuestions } from '../selectors';
 function* createQuestion({ payload: { question } }) {
   const defaultGroupId = yield select(makeSelectDefaultGroupId());
   const questions = yield select(makeSelectQuestions());
-
+  const {
+    settings: { narrator },
+  } = yield select(makeSelectIntervention());
   const requestURL = `v1/question_groups/${defaultGroupId}/questions`;
   try {
-    const response = yield axios.post(requestURL, question);
+    const response = yield axios.post(requestURL, {
+      ...question,
+      narrator: { blocks: [], settings: narrator },
+    });
 
     const createdQuestion = mapQuestionToStateObject(response.data.data);
     const { id: newQuestionId } = createdQuestion;
