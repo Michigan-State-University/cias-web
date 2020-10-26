@@ -79,13 +79,4 @@ describe('<Card />', () => {
     expect(defaultProps.setOpened).toHaveBeenCalledWith(2);
     expect(defaultProps.onHide).toHaveBeenCalledWith(1);
   });
-
-  it('Should invoke onDelete function', () => {
-    const { getByText } = render(
-      <Accordion {...defaultProps}>{multipleChildren()}</Accordion>,
-    );
-    const thirdEl = getByText('Label2');
-    fireEvent.mouseOver(thirdEl);
-    expect(defaultProps.setOpened).toHaveBeenCalledWith(2);
-  });
 });
