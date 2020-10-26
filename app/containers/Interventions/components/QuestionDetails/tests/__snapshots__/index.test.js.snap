@@ -16,7 +16,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   background-color: rgba(248,251,255,1);
 }
 
-.c9 {
+.c12 {
   width: auto;
   height: auto;
   display: block;
@@ -27,11 +27,11 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   margin-bottom: 10px;
 }
 
-.c9:hover {
+.c12:hover {
   background-color: #E9F1FB;
 }
 
-.c14 {
+.c17 {
   width: auto;
   height: auto;
   display: block;
@@ -40,11 +40,11 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c14:hover {
+.c17:hover {
   background-color: #E9F1FB;
 }
 
-.c21 {
+.c24 {
   width: auto;
   height: auto;
   display: block;
@@ -57,7 +57,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border: 1px solid #ABBBD1;
 }
 
-.c23 {
+.c26 {
   width: auto;
   height: auto;
   display: block;
@@ -89,7 +89,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   display: flex;
 }
 
-.c11 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -100,7 +100,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c20 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -112,12 +112,38 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   margin-top: 10px;
 }
 
-.c6 {
+.c9 {
   max-width: 960px !important;
   width: 100%;
 }
 
-.c5 {
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 10px;
+  width: inherit;
+  max-width: 702px;
+}
+
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -134,7 +160,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c7 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -148,7 +174,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   height: 30px;
 }
 
-.c8 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -160,17 +186,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-}
-
 .c13 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -180,7 +195,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  margin-top: 10px;
 }
 
 .c16 {
@@ -193,10 +207,22 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   flex-direction: row;
   height: auto;
   margin-top: 10px;
+}
+
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-top: 10px;
   margin-left: 26px;
 }
 
-.c17 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -211,25 +237,33 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   display: flex;
 }
 
-.c24 {
-  width: 100%;
-  height: 40px;
-  border-radius: 100px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: #107969;
-  color: #FFFFFF;
-  cursor: default;
-  background-color: #9AA1B6;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  width: 180px;
+.c4 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  max-width: initial;
+  padding-right: 12px;
+  padding-left: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2F3850;
 }
 
-.c18 {
+.c4:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c4:disabled {
+  color: #ABBBD1;
+}
+
+.c21 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -247,17 +281,17 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: rgba(16,121,105,1);
 }
 
-.c18:focus {
+.c21:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c18:disabled {
+.c21:disabled {
   color: #ABBBD1;
 }
 
-.c22 {
+.c25 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -271,17 +305,40 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   opacity: 0.5;
 }
 
-.c22:focus {
+.c25:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c22:disabled {
+.c25:disabled {
   color: #ABBBD1;
 }
 
-.c19 {
+.c5 {
+  width: auto;
+  height: auto;
+}
+
+.c27 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 180px;
+}
+
+.c22 {
   padding: 5px 10px;
   font-size: 13px;
   font-weight: 600;
@@ -290,42 +347,10 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: rgba(16,121,105,1);
 }
 
-.c19:focus {
+.c22:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid transparent;
-}
-
-.c12 {
-  width: 100%;
-  min-height: -webkit-max-content;
-  min-height: -moz-max-content;
-  min-height: max-content;
-  border: 1px solid transparent;
-}
-
-.c12 .ql-editor {
-  font-weight: 400;
-  padding: 10px;
-}
-
-.c12 .ql-editor.ql-blank::before {
-  left: 11px;
-}
-
-.c12 .ql-picker-label svg {
-  margin-bottom: 15px !important;
-}
-
-.c12 .ql-toolbar {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-}
-
-.c12 .ql-container {
-  font-size: 18px;
-  font-family: DM Sans;
 }
 
 .c15 {
@@ -356,11 +381,43 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 }
 
 .c15 .ql-container {
+  font-size: 18px;
+  font-family: DM Sans;
+}
+
+.c18 {
+  width: 100%;
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
+  border: 1px solid transparent;
+}
+
+.c18 .ql-editor {
+  font-weight: 400;
+  padding: 10px;
+}
+
+.c18 .ql-editor.ql-blank::before {
+  left: 11px;
+}
+
+.c18 .ql-picker-label svg {
+  margin-bottom: 15px !important;
+}
+
+.c18 .ql-toolbar {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c18 .ql-container {
   font-size: initial;
   font-family: DM Sans;
 }
 
-.c4 {
+.c7 {
   position: absolute;
   top: 0;
   left: 0;
@@ -368,16 +425,16 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   height: 0%;
 }
 
-.c4 width:0% > div {
+.c7 width:0% > div {
   width: 100px;
   cursor: default;
 }
 
-.c4 image {
+.c7 image {
   pointer-events: none;
 }
 
-.c3 {
+.c6 {
   -webkit-align-items: flex-start;
   -webkit-box-align: flex-start;
   -ms-flex-align: flex-start;
@@ -394,6 +451,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   max-width: 702px;
   min-height: 702px;
   position: relative;
+  padding: 0 10px;
   width: 100%;
   z-index: 0;
   overflow: auto;
@@ -419,7 +477,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   -webkit-justify-content: flex-start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  padding: 0 10px;
   width: 100%;
 }
 
@@ -488,10 +545,27 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
       >
         <div
           class="c3"
+          width="inherit"
+        >
+          <input
+            class="c4"
+            font-size="18"
+            font-weight="bold"
+            placeholder="Group placeholder"
+            type="text"
+            value="Test group"
+          />
+          <img
+            class="c5"
+            src="IMAGE_MOCK"
+          />
+        </div>
+        <div
+          class="c6"
           id="quill_boundaries"
         >
           <div
-            class="c4"
+            class="c7"
             width="100"
           >
             <div
@@ -508,38 +582,38 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c5"
+            class="c8"
             width="100%"
           >
             <div
-              class="c6"
+              class="c9"
               style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
             >
               <div
-                class="c7"
+                class="c10"
                 height="30"
                 width="100%"
               />
               <div
-                class="c8"
+                class="c11"
                 width="100%"
               >
                 <div
-                  class="c9"
+                  class="c12"
                   width="100%"
                 >
                   <div
-                    class="c10"
+                    class="c13"
                   >
                     <div
-                      class="c8"
+                      class="c11"
                       width="100%"
                     >
                       <div
-                        class="c11"
+                        class="c14"
                       >
                         <div
-                          class="quill c12"
+                          class="quill c15"
                         >
                           <div
                             class="ql-container ql-bubble"
@@ -1933,24 +2007,24 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c13"
+                class="c16"
               >
                 <div
-                  class="c14"
+                  class="c17"
                   width="100%"
                 >
                   <div
-                    class="c10"
+                    class="c13"
                   >
                     <div
-                      class="c8"
+                      class="c11"
                       width="100%"
                     >
                       <div
-                        class="c11"
+                        class="c14"
                       >
                         <div
-                          class="quill c15"
+                          class="quill c18"
                         >
                           <div
                             class="ql-container ql-bubble"
@@ -3344,14 +3418,14 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c16"
+                class="c19"
               >
                 <div
-                  class="c17"
+                  class="c20"
                   display="flex"
                 >
                   <input
-                    class="c18 c19"
+                    class="c21 c22"
                     color="#107969"
                     placeholder="Variable name..."
                     type="tel"
@@ -3361,27 +3435,27 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c10"
+                class="c13"
               >
                 <div
-                  class="c20"
+                  class="c23"
                 >
                   <div
-                    class="c21"
+                    class="c24"
                     width="100%"
                   >
                     <div
-                      class="c10"
+                      class="c13"
                     >
                       <div
-                        class="c8"
+                        class="c11"
                         width="100%"
                       >
                         <div
-                          class="c11"
+                          class="c14"
                         >
                           <input
-                            class="c22"
+                            class="c25"
                             disabled=""
                             height="60"
                             placeholder="Respondent answer goes here..."
@@ -3395,10 +3469,10 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c23"
+                class="c26"
               >
                 <button
-                  class="c24"
+                  class="c27"
                   color="primary"
                   disabled=""
                   width="180px"

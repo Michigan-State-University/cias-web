@@ -117,6 +117,11 @@ function EditInterventionPage({
   const [modalVisible, setModalVisible] = useState(false);
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
 
+  const currentQuestion = questions.find(({ id }) => id === selectedQuestion);
+  const currentGroupScope = groups.find(
+    ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
+  );
+
   const groupActions = [
     ...(process.env.APP_STAGE === appStages.dev.id
       ? [
@@ -372,7 +377,12 @@ function EditInterventionPage({
         </QuestionsRow>
         <Column align="between">
           <Row overflow="hidden" filled>
-            <QuestionDetails />
+            <QuestionDetails
+              formatMessage={formatMessage}
+              changeGroupName={changeGroupName}
+              currentGroupScope={currentGroupScope}
+              interventionId={interventionId}
+            />
             <QuestionSettings />
           </Row>
         </Column>

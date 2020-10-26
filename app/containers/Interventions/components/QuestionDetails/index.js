@@ -9,12 +9,14 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import AppContainer from 'components/Container';
 import Row from 'components/Row';
+import StyledInput from 'components/Input/StyledInput';
+import { MSULogo } from 'components/Logo';
 
 import Question from 'models/Intervention/Question';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { Button } from 'components/Button';
-import { colors } from 'theme';
+import { colors, elements } from 'theme';
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import { useInjectSaga } from 'utils/injectSaga';
 import {
@@ -51,6 +53,10 @@ const RenderQuestionDetails = ({
   selectedQuestion,
   isNarratorTab,
   problemStatus,
+  formatMessage,
+  changeGroupName,
+  interventionId,
+  currentGroupScope,
 }) => {
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
   const animationBoundaries = useRef(null);
@@ -79,6 +85,28 @@ const RenderQuestionDetails = ({
     return (
       <AnswerOuterContainer>
         <Column width="100%" display="flex" align="center">
+          {currentGroupScope && (
+            <Row
+              mb={10}
+              width="inherit"
+              maxWidth={elements.draggableContainerSize}
+              justify="between"
+              align="center"
+            >
+              <StyledInput
+                px={12}
+                value={currentGroupScope.title}
+                fontSize={18}
+                fontWeight="bold"
+                placeholder={formatMessage(messages.groupPlaceholder)}
+                maxWidth="initial"
+                onBlur={val =>
+                  changeGroupName(val, interventionId, currentGroupScope.id)
+                }
+              />
+              <MSULogo />
+            </Row>
+          )}
           <AnswerInterventionContent
             ref={animationBoundaries}
             id="quill_boundaries"
@@ -178,6 +206,10 @@ RenderQuestionDetails.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
   isNarratorTab: PropTypes.bool,
   problemStatus: PropTypes.string,
+  formatMessage: PropTypes.func,
+  changeGroupName: PropTypes.func,
+  interventionId: PropTypes.string,
+  currentGroupScope: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

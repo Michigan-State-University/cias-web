@@ -16,4 +16,8 @@ export default defineMessages({
     id: `${scope}.previousQuestion`,
     defaultMessage: '< Previous screen',
   },
+  groupPlaceholder: {
+    id: `${scope}.groupPlaceholder`,
+    defaultMessage: 'Group placeholder',
+  },
 });

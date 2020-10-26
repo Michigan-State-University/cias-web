@@ -26,6 +26,7 @@ import Row from 'components/Row';
 import { Button } from 'components/Button';
 import LinkButton from 'components/Button/LinkButton';
 import Divider from 'components/Divider';
+import { MSULogo } from 'components/Logo';
 import withPublicLayout from 'containers/PublicLayout';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -94,6 +95,7 @@ export const LoginPage = ({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
+      <MSULogo position="absolute" top={35} right={45} />
       <Fill justify="center" align="center">
         <Column sm={10} md={8} lg={6} align="start">
           <H1 mb={40} fontSize={23}>
