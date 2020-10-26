@@ -55,4 +55,13 @@ describe('<ConfirmationBox />', () => {
     );
     expect(container).toMatchSnapshot();
   });
+
+  it('Should render error and match the snapshot', () => {
+    const { container } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <ConfirmationBox {...defaultProps} error={['Error']} />
+      </IntlProvider>,
+    );
+    expect(container).toMatchSnapshot();
+  });
 });

@@ -55,7 +55,7 @@ const ConfirmationBox = ({
         </Button>
       </Row>
     </Column>
-    {error && <ErrorAlert fullWidth>{error}</ErrorAlert>}
+    {error && <ErrorAlert fullWidth errorText={error} />}
   </Modal>
 );
 

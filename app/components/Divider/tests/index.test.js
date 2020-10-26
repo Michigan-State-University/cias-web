@@ -10,7 +10,6 @@ import React from 'react';
 import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
-import renderer from 'react-test-renderer';
 import Divider from '../index';
 
 describe('<Divider />', () => {
@@ -21,7 +20,7 @@ describe('<Divider />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-    const renderedComponent = renderer.create(<Divider />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<Divider />);
+    expect(container).toMatchSnapshot();
   });
 });
