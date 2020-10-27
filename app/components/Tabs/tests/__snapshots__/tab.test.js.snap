@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tab /> should render and match the snapshot for a label 1`] = `
+.c0 {
+  position: relative;
+  bottom: -3px;
+  margin: 0 10px;
+  padding-bottom: 7px;
+  border-bottom-width: 2px;
+  border-bottom-color: #C866EA;
+  border-bottom-style: solid;
+}
+
+.c0 div {
+  cursor: pointer;
+}
+
+<div
+  class="c0"
+>
+  <div>
+    label
+  </div>
+</div>
+`;
+
+exports[`<Tab /> should render as links and match the snapshot 1`] = `
+.c0 {
+  position: relative;
+  bottom: -3px;
+  margin: 0 10px;
+  padding-bottom: 7px;
+  border-bottom-width: 2px;
+  border-bottom-color: #C866EA;
+  border-bottom-style: solid;
+}
+
+.c0 div {
+  cursor: pointer;
+}
+
+.c1 a {
+  color: #2F3850 !important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c1 a:visited,
+.c1 a:hover {
+  color: #2F3850;
+}
+
+<div
+  class="c0 c1"
+>
+  <div>
+    <a
+      href="/url1"
+    >
+      Url1
+    </a>
+  </div>
+</div>
+`;

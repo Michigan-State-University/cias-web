@@ -19,15 +19,20 @@ describe('<UserAvatar />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  /**
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
   it('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
     } = render(<UserAvatar firstName="test" lastName="test" />);
+
+    expect(firstChild).toMatchSnapshot();
+  });
+
+  it('Should render and match the snapshot for avatar', () => {
+    const {
+      container: { firstChild },
+    } = render(
+      <UserAvatar firstName="test" lastName="test" avatar="test.src" />,
+    );
 
     expect(firstChild).toMatchSnapshot();
   });

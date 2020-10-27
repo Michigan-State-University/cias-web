@@ -86,7 +86,7 @@ describe('<AppRoute />', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it.skip('Should redirect to login', () => {
+  it('Should redirect to login', () => {
     const newState = {
       ...initialState,
       auth: { ...initialState.auth, user: undefined },

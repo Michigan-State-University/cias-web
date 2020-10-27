@@ -1,12 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
 import Comment from '../index';
 
 describe('<Comment />', () => {
   it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<Comment />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<Comment />);
+    expect(container).toMatchSnapshot();
   });
 });

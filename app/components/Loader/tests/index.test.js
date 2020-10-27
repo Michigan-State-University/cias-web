@@ -24,6 +24,11 @@ describe('<Loader />', () => {
     expect(renderedComponent).toMatchSnapshot();
   });
 
+  it('Should render with invalid type and match the snapshot', () => {
+    const renderedComponent = render(<Loader type="invalid" />);
+    expect(renderedComponent).toMatchSnapshot();
+  });
+
   it('Should render loader of appropriate type', () => {
     const fullScreenLoaderComponent = render(<Loader type="absolute" />);
     const inlineLoaderComponent = render(<Loader type="inline" />);

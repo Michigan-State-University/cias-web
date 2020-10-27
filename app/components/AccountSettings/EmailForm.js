@@ -84,6 +84,7 @@ const EmailForm = ({
                     <FormattedMessage {...messages.modalDescriptipn} />
                   </H3>
                   <FormikInput
+                    data-testid="password-confirmation"
                     formikKey="passwordConfirmation"
                     placeholder={formatMessage(messages.password)}
                     label={formatMessage(messages.passwordLabel)}
@@ -92,6 +93,7 @@ const EmailForm = ({
                   />
                   <Row width="100%" mt={30}>
                     <Button
+                      data-testid="close-button"
                       mr={20}
                       inverted
                       hoverable
@@ -105,6 +107,7 @@ const EmailForm = ({
                       onClick={handleSubmit}
                       type="button"
                       loading={loading}
+                      data-testid="confirm-button"
                     >
                       <FormattedMessage {...messages.changeEmail} />
                     </Button>
@@ -114,6 +117,7 @@ const EmailForm = ({
               </Modal>
               <Row width="100%">
                 <FormikInput
+                  data-testid="email-input"
                   formikKey="email"
                   placeholder={formatMessage(messages.email)}
                   label={formatMessage(messages.emailLabel)}

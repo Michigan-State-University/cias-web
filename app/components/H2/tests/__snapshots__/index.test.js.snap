@@ -9,7 +9,9 @@ exports[`<H2 /> should match the snapshot 1`] = `
   color: #2F3850;
 }
 
-<h2
-  className="c0"
-/>
+<div>
+  <h2
+    class="c0"
+  />
+</div>
 `;

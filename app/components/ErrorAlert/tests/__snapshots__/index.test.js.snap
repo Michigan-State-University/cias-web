@@ -50,3 +50,54 @@ exports[`<ErrorAlert /> Should render and match the snapshot 1`] = `
   </p>
 </div>
 `;
+
+exports[`<ErrorAlert /> Should render full page error and match the snapshot 1`] = `
+.c1 {
+  width: auto;
+  height: auto;
+  margin-right: 15px;
+}
+
+.c2 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c0 {
+  padding: 20px;
+  width: 100%;
+  max-width: 700px;
+  background-color: rgba(239,70,47,0.3);
+  border: 1px solid #EF462F;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<div
+  class="c0"
+>
+  <img
+    alt="error"
+    class="c1"
+    src="IMAGE_MOCK"
+  />
+  <p
+    class="c2"
+    font-size="15"
+    font-weight="bold"
+  >
+    error
+  </p>
+</div>
+`;

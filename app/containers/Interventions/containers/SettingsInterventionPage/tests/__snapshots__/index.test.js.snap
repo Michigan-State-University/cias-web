@@ -50,6 +50,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
         <input
           checked=""
           class="styled__SwitchInput-sc-1eitgbj-1 dzitpY"
+          data-testid="switch-input"
           disabled=""
           type="checkbox"
         />
@@ -73,6 +74,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
         <input
           checked=""
           class="styled__SwitchInput-sc-1eitgbj-1 dzitpY"
+          data-testid="switch-input"
           disabled=""
           type="checkbox"
         />
@@ -96,6 +98,7 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
         <input
           checked=""
           class="styled__SwitchInput-sc-1eitgbj-1 dzitpY"
+          data-testid="switch-input"
           disabled=""
           type="checkbox"
         />

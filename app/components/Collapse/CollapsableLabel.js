@@ -44,7 +44,15 @@ const CollapseLabel = ({
           {label} {displayedImage}
         </Row>
       </StyledCollapseLabel>
-      {!disabled && <Img src={bin} alt="bin" clickable onClick={onDelete} />}
+      {!disabled && (
+        <Img
+          data-testid={`bin-${label}`}
+          src={bin}
+          alt="bin"
+          clickable
+          onClick={onDelete}
+        />
+      )}
     </Row>
   );
 };

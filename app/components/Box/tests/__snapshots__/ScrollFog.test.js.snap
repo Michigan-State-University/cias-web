@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ScrollFog /> should match the snapshot 1`] = `
+exports[`<ScrollFog /> Should render and match the snapshot 1`] = `
 .c0 {
   width: auto;
   height: auto;
@@ -16,11 +16,13 @@ exports[`<ScrollFog /> should match the snapshot 1`] = `
   border-radius: 5px;
 }
 
-<div
-  className="c0"
->
+<div>
   <div
-    className="c1"
-  />
+    class="c0"
+  >
+    <div
+      class="c1"
+    />
+  </div>
 </div>
 `;

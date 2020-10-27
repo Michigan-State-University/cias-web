@@ -45,6 +45,7 @@ const FullNameForm = ({ formatMessage, user, editUser }) => {
           <StyledFullNameRow width="100%">
             <FormikInput
               formikKey="firstName"
+              data-testid="first-name-input"
               placeholder={formatMessage(messages.firstName)}
               label={formatMessage(messages.firstNameLabel)}
               type="text"

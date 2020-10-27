@@ -32,6 +32,7 @@ function FormikSelect({ formikKey, label, options, columnStyleProps }) {
         {label}
       </Text>
       <Select
+        data-testid="select"
         selectProps={{
           options,
           value,

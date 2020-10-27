@@ -128,21 +128,21 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
       >
         <a
-          class="styled__StyledLink-vwtndu-1 GZhCG"
+          class="styled__StyledLink-xv0l-1 eSJTXu"
           href="/interventions/undefined/"
         >
           <div
-            class="styled__TileContainer-vwtndu-0 hBExqK"
+            class="styled__TileContainer-xv0l-0 jlbSdW"
           >
             <div
-              class="styled__Heading-vwtndu-2 cacPni"
+              class="styled__Heading-xv0l-2 uhKfG"
             >
               <div>
                 <span>
                   Draft
                 </span>
                 <span
-                  class="styled__StatusIndicator-vwtndu-3 rtXgP"
+                  class="styled__StatusIndicator-xv0l-3 cMWgxD"
                 />
               </div>
               <div>
@@ -183,7 +183,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
                 data-tip="true"
               >
                 <div
-                  class="styled__TileInfo-vwtndu-4 gZEroD"
+                  class="styled__TileInfo-xv0l-4 fQEAIv"
                 >
                   <div>
                     <p

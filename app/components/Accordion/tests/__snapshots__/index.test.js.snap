@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
+exports[`<Accordion /> Should render multiple elements and match the snapshot 1`] = `
 .c0 {
   width: auto;
   height: auto;
@@ -125,6 +125,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
             <img
               alt="bin"
               class="c6"
+              data-testid="bin-Label0"
               src="IMAGE_MOCK"
             />
           </div>
@@ -168,6 +169,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
             <img
               alt="bin"
               class="c6"
+              data-testid="bin-Label1"
               src="IMAGE_MOCK"
             />
           </div>
@@ -211,6 +213,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
             <img
               alt="bin"
               class="c6"
+              data-testid="bin-Label2"
               src="IMAGE_MOCK"
             />
           </div>
@@ -224,7 +227,7 @@ exports[`<Card /> Should render multiple elements and match the snapshot 1`] = `
 </div>
 `;
 
-exports[`<Card /> Should render only one element and match the snapshot 1`] = `
+exports[`<Accordion /> Should render only one element and match the snapshot 1`] = `
 .c0 {
   width: 100%;
 }
@@ -326,6 +329,7 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
         <img
           alt="bin"
           class="c5"
+          data-testid="bin-Label0"
           src="IMAGE_MOCK"
         />
       </div>
@@ -337,7 +341,7 @@ exports[`<Card /> Should render only one element and match the snapshot 1`] = `
 </div>
 `;
 
-exports[`<Card /> Should render with one element opened and match the snapshot 1`] = `
+exports[`<Accordion /> Should render with one element opened and match the snapshot 1`] = `
 .c0 {
   width: auto;
   height: auto;
@@ -462,6 +466,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
             <img
               alt="bin"
               class="c6"
+              data-testid="bin-Label0"
               src="IMAGE_MOCK"
             />
           </div>
@@ -505,6 +510,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
             <img
               alt="bin"
               class="c6"
+              data-testid="bin-Label1"
               src="IMAGE_MOCK"
             />
           </div>
@@ -548,6 +554,7 @@ exports[`<Card /> Should render with one element opened and match the snapshot 1
             <img
               alt="bin"
               class="c6"
+              data-testid="bin-Label2"
               src="IMAGE_MOCK"
             />
           </div>

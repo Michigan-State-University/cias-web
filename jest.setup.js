@@ -32,3 +32,18 @@ jest.mock('react-tooltip/node_modules/uuid', () => ({
 Object.defineProperty(document, 'execCommand', { value: jest.fn() });
 
 jest.mock('copy-to-clipboard', () => jest.fn());
+
+const originalError = console.error;
+
+beforeAll(() => {
+  console.error = (...args) => {
+    if (/Warning.*not wrapped in act/.test(args[0])) {
+      return;
+    }
+    originalError.call(console, ...args);
+  };
+});
+
+afterAll(() => {
+  console.error = originalError;
+});

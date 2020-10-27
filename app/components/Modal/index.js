@@ -92,6 +92,7 @@ const Modal = ({ title, onClose, children, visible, ...stylesProps }) => {
                   top="-8px"
                   left="40px"
                   onClick={onClose}
+                  data-testid="close-modal-button"
                 />
               </Row>
             </Column>

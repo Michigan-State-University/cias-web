@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import VariableChooser from 'components/BranchingLayout/VariableChooser';
+import VariableChooser from 'containers/BranchingLayout/VariableChooser';
 import Img from 'components/Img';
 import Box from 'components/Box';
 import Column from 'components/Column';

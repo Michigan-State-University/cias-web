@@ -1,12 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`<Img /> should match disabled snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  opacity: 0.5;
+}
+
+<div>
+  <img
+    class="c0"
+    disabled=""
+  />
+</div>
+`;
+
 exports[`<Img /> should match the snapshot 1`] = `
 .c0 {
   width: auto;
   height: auto;
 }
 
-<img
-  className="c0"
-/>
+<div>
+  <img
+    class="c0"
+  />
+</div>
 `;

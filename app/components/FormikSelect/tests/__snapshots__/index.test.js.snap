@@ -13,6 +13,7 @@ exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
     </p>
     <div
       class="Box-sc-14m3exe-0 jmcBzp"
+      data-testid="select"
     >
       <div
         class=" css-2b097c-container"

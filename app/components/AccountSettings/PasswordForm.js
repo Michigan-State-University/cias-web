@@ -116,6 +116,7 @@ const PasswordForm = ({
                 {...sharedProps}
               />
               <Button
+                data-testid="submit-button"
                 type="submit"
                 height={46}
                 borderRadius={5}

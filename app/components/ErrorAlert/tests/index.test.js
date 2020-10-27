@@ -25,4 +25,11 @@ describe('<ErrorAlert />', () => {
     } = render(<ErrorAlert errorText="error" />);
     expect(firstChild).toMatchSnapshot();
   });
+
+  it('Should render full page error and match the snapshot', () => {
+    const {
+      container: { firstChild },
+    } = render(<ErrorAlert errorText="error" fullPages />);
+    expect(firstChild).toMatchSnapshot();
+  });
 });

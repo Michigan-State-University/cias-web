@@ -1,12 +1,16 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
 import Dropzone from '../index';
 
 describe('<QuestionDetails />', () => {
   it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<Dropzone />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<Dropzone />);
+    expect(container).toMatchSnapshot();
+  });
+  it('should match the snapshot with shadow', () => {
+    const { container } = render(<Dropzone withShadow />);
+    expect(container).toMatchSnapshot();
   });
 });

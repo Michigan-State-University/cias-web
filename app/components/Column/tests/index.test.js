@@ -1,12 +1,25 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
-import Column from '../index';
+import Column, { calculateWidth, getWidthString } from '../index';
 
 describe('<Column />', () => {
   it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<Column />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<Column />);
+    expect(container).toMatchSnapshot();
+  });
+
+  it('should return correct width of columns', () => {
+    expect(calculateWidth(6)).toEqual(50);
+  });
+  it('should return undefined width of columns if no parameter is passed', () => {
+    expect(calculateWidth()).toEqual(undefined);
+  });
+  it('should return correct string', () => {
+    expect(getWidthString(6)).toEqual('width: 50%;');
+  });
+  it('should return undefined string if no parameter is passed', () => {
+    expect(getWidthString()).toEqual('');
   });
 });

@@ -5,7 +5,22 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   border-radius: 5px;
 }
 
-<div
-  className="c0"
-/>
+<div>
+  <div
+    class="c0"
+  />
+</div>
+`;
+
+exports[`<QuestionDetails /> should match the snapshot with shadow 1`] = `
+.c0 {
+  border-radius: 5px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+}
+
+<div>
+  <div
+    class="c0"
+  />
+</div>
 `;

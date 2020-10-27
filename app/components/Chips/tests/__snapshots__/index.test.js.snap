@@ -16,13 +16,77 @@ exports[`<Chips /> should match the snapshot 1`] = `
   color: #0086F8;
 }
 
-<div
-  className="c0"
->
-  <p
-    className="c1"
+<div>
+  <div
+    class="c0"
   >
-    Animation
-  </p>
+    <p
+      class="c1"
+    >
+      Animation
+    </p>
+  </div>
+</div>
+`;
+
+exports[`<Chips /> should match the snapshot for active 1`] = `
+.c0 {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-height: 30px;
+  margin-right: 10px;
+  margin-top: 12px;
+}
+
+.c1 {
+  font-size: 14px;
+  line-height: 150%;
+  color: #FFFFFF;
+}
+
+<div>
+  <div
+    class="c0"
+  >
+    <p
+      class="c1"
+    >
+      Animation
+    </p>
+  </div>
+</div>
+`;
+
+exports[`<Chips /> should match the snapshot for disabled 1`] = `
+.c0 {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-height: 30px;
+  margin-right: 10px;
+  margin-top: 12px;
+  opacity: 0.5;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.c1 {
+  font-size: 14px;
+  line-height: 150%;
+  color: #0086F8;
+}
+
+<div>
+  <div
+    class="c0"
+    disabled=""
+  >
+    <p
+      class="c1"
+    >
+      Animation
+    </p>
+  </div>
 </div>
 `;

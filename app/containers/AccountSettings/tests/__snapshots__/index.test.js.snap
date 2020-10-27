@@ -102,6 +102,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
         >
           <div
             class="Column-sc-1n6divy-0 dfGPDf"
+            data-testid="first-name-input"
           >
             <p
               class="Text-sc-2lza2m-0 ggakK"
@@ -154,6 +155,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
           >
             <div
               class="Column-sc-1n6divy-0 dfNUrc"
+              data-testid="email-input"
             >
               <p
                 class="Text-sc-2lza2m-0 ggakK"
@@ -187,6 +189,7 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
             </p>
             <div
               class="Box-sc-14m3exe-0 jmcBzp"
+              data-testid="select"
             >
               <div
                 class=" css-2b097c-container"

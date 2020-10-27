@@ -59,3 +59,63 @@ exports[`<UserRoleTile /> Should render and match the snapshot 1`] = `
   </div>
 </div>
 `;
+
+exports[`<UserRoleTile /> Should render and match the snapshot for disabled 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 120px;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-right: 7px;
+  margin-left: 7px;
+  background-color: rgba(154,161,182,1);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
+}
+
+<div>
+  <div
+    class="c0"
+    display="inline-flex"
+    width="120px"
+  >
+    <p
+      class="c1"
+      color="#FFFFFF"
+      font-size="14"
+      font-weight="bold"
+    >
+      Admin
+    </p>
+  </div>
+</div>
+`;

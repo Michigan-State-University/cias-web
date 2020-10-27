@@ -59,18 +59,18 @@ exports[`<Switch /> should match the snapshot 1`] = `
   transform: translateX(18px);
 }
 
-<label
-  checked={false}
-  className="c0"
->
-  <input
-    checked={false}
-    className="c1 c2"
-    onChange={[Function]}
-    type="checkbox"
-  />
-  <span
-    className="c3 c4"
-  />
-</label>
+<div>
+  <label
+    class="c0"
+  >
+    <input
+      class="c1 c2"
+      data-testid="switch-input"
+      type="checkbox"
+    />
+    <span
+      class="c3 c4"
+    />
+  </label>
+</div>
 `;
