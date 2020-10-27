@@ -11,7 +11,13 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   margin-right: 15px;
 }
 
-.c6 {
+.c2 {
+  width: auto;
+  height: auto;
+  margin-left: 30px;
+}
+
+.c8 {
   width: 30px;
   height: 30px;
   font-size: 15px;
@@ -37,7 +43,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   color: rgba(255,255,255,1);
 }
 
-.c7 {
+.c9 {
   width: auto;
   height: auto;
   display: block;
@@ -45,13 +51,30 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c2 {
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  width: 100%;
+}
+
+.c4 {
   -webkit-text-decoration: none;
   text-decoration: none;
   margin-left: 10px;
 }
 
-.c2 span {
+.c4 span {
   opacity: 0.6;
 }
 
@@ -74,7 +97,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   height: 70px;
 }
 
-.c4 {
+.c6 {
   margin-left: auto;
   margin-right: 0;
   display: -webkit-box;
@@ -88,11 +111,11 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   min-width: 150px;
 }
 
-.c5 {
+.c7 {
   position: relative;
 }
 
-.c3 {
+.c5 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -100,7 +123,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c8 {
+.c10 {
   margin-top: 70px;
   height: calc(100% - 70px);
 }
@@ -120,42 +143,51 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
         width="56"
       />
     </a>
-    <a
+    <img
       class="c2"
-      href="/"
-      ml="10"
-    >
-      <p
-        class="c3"
-        font-size="15"
-      >
-        <span>
-          Interventions
-        </span>
-      </p>
-    </a>
-    <a
-      class="c2"
-      href="/users"
-      ml="10"
-    >
-      <p
-        class="c3"
-        font-size="15"
-      >
-        <span>
-          Manage accounts
-        </span>
-      </p>
-    </a>
+      src="IMAGE_MOCK"
+    />
     <div
-      class="c4"
+      class="c3"
+      width="100%"
+    >
+      <a
+        class="c4"
+        href="/"
+        ml="10"
+      >
+        <p
+          class="c5"
+          font-size="15"
+        >
+          <span>
+            Interventions
+          </span>
+        </p>
+      </a>
+      <a
+        class="c4"
+        href="/users"
+        ml="10"
+      >
+        <p
+          class="c5"
+          font-size="15"
+        >
+          <span>
+            Manage accounts
+          </span>
+        </p>
+      </a>
+    </div>
+    <div
+      class="c6"
     >
       <div
-        class="c5"
+        class="c7"
       >
         <div
-          class="c6"
+          class="c8"
           color="#FFFFFF"
           height="30"
           width="30"
@@ -167,14 +199,14 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
         <div />
       </div>
       <div
-        class="c7"
+        class="c9"
       >
         John Doe
       </div>
     </div>
   </div>
   <div
-    class="c8"
+    class="c10"
     id="main-app-container"
   />
 </div>

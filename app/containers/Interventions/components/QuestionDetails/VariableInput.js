@@ -21,6 +21,7 @@ const VariableInput = ({
   variable,
   problemStatus,
   updateVariable,
+  questionId,
 }) => {
   const editingPossible = canEdit(problemStatus);
   return (
@@ -37,13 +38,14 @@ const VariableInput = ({
         )}
         value={variable.name}
         color={colors.jungleGreen}
-        onBlur={val => updateVariable(val)}
+        onBlur={val => updateVariable(val, questionId)}
       />
     </Row>
   );
 };
 
 VariableInput.propTypes = {
+  questionId: PropTypes.string,
   variable: PropTypes.object,
   intl: PropTypes.object.isRequired,
   updateVariable: PropTypes.func.isRequired,
@@ -52,8 +54,8 @@ VariableInput.propTypes = {
 };
 
 const mapDispatchToProps = {
-  updateVariable: name =>
-    updateQuestionData({ type: UPDATE_VARIABLE, data: { name } }),
+  updateVariable: (name, questionId) =>
+    updateQuestionData({ type: UPDATE_VARIABLE, data: { name, questionId } }),
 };
 
 const withConnect = connect(

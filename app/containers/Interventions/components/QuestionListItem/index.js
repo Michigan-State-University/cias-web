@@ -171,6 +171,7 @@ const QuestionListItem = ({
                 {body && hasObjectProperty(body, 'variable') && (
                   <Row mt={10}>
                     <VariableInput
+                      questionId={id}
                       variable={body.variable}
                       problemStatus={problemStatus}
                     />

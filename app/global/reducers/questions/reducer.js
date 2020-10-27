@@ -1,5 +1,6 @@
 import produce from 'immer';
 import set from 'lodash/set';
+import get from 'lodash/get';
 import groupBy from 'lodash/groupBy';
 import keys from 'lodash/keys';
 import values from 'lodash/values';
@@ -252,8 +253,9 @@ export const questionsReducer = (state = initialState, action) =>
         break;
 
       case UPDATE_QUESTION_DATA: {
+        const questionId = get(action, 'payload.data.questionId', undefined);
         const selectedQuestionIndex = draft.questions.findIndex(
-          ({ id }) => id === draft.selectedQuestion,
+          ({ id }) => id === (questionId || draft.selectedQuestion),
         );
         draft.questions[selectedQuestionIndex] = {
           ...draft.questions[selectedQuestionIndex],

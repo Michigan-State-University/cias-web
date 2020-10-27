@@ -23,8 +23,10 @@ import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import { Button } from 'components/Button';
 import Row from 'components/Row';
+import Column from 'components/Column';
 import Box from 'components/Box';
 import Loader from 'components/Loader';
+import { MSULogo } from 'components/Logo';
 import { DESKTOP_MODE } from 'utils/previewMode';
 
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
@@ -287,61 +289,68 @@ export function AnswerInterventionPage({
 
   const isDesktop = previewMode === DESKTOP_MODE;
   return (
-    <Box
-      display="flex"
-      align="center"
-      justify="center"
-      height="100%"
-      width="100%"
-    >
-      <Helmet>
-        <title>Answer Intervention</title>
-        <meta name="description" content="Answer Intervention" />
-      </Helmet>
-      <AnswerOuterContainer
-        previewMode={previewMode}
-        interventionStarted={interventionStarted}
+    <Column height="100%">
+      {interventionStarted && (
+        <Row justify="end" padding={30}>
+          <MSULogo />
+        </Row>
+      )}
+      <Box
+        display="flex"
+        align="center"
+        justify="center"
+        height="100%"
+        width="100%"
       >
-        {!interventionStarted && (
-          <StyledButton
-            disabled={!previewPossible}
-            onClick={startInterventionAsync}
-            title={
-              previewPossible || isNullOrUndefined(previewPossible)
-                ? formatMessage(messages.startIntervention)
-                : formatMessage(messages.previewDisabled)
-            }
-            isDesktop={isDesktop}
-          />
-        )}
-        {interventionStarted && (
-          <Fragment>
-            <Box width="100%">
-              {!questionLoading && currentQuestion && interventionStarted && (
-                <AnimationRefHelper
-                  currentQuestion={currentQuestion}
-                  currentQuestionId={currentQuestionId}
-                  previewMode={previewMode}
-                  answers={answers}
-                  changeIsAnimationOngoing={changeIsAnimationOngoing}
-                  setFeedbackSettings={setFeedbackSettings}
-                  feedbackScreenSettings={feedbackScreenSettings}
-                  audioInstance={audioInstance}
-                >
-                  {renderPage()}
-                </AnimationRefHelper>
-              )}
-            </Box>
-            {answersError && <ErrorAlert errorText={answersError} />}
-            {!questionLoading && !currentQuestion && (
-              <Box mt={50}>
-                <FormattedMessage {...messages.completeIntervention} />
+        <Helmet>
+          <title>Answer Intervention</title>
+          <meta name="description" content="Answer Intervention" />
+        </Helmet>
+        <AnswerOuterContainer
+          previewMode={previewMode}
+          interventionStarted={interventionStarted}
+        >
+          {!interventionStarted && (
+            <StyledButton
+              disabled={!previewPossible}
+              onClick={startInterventionAsync}
+              title={
+                previewPossible || isNullOrUndefined(previewPossible)
+                  ? formatMessage(messages.startIntervention)
+                  : formatMessage(messages.previewDisabled)
+              }
+              isDesktop={isDesktop}
+            />
+          )}
+          {interventionStarted && (
+            <Fragment>
+              <Box width="100%">
+                {!questionLoading && currentQuestion && interventionStarted && (
+                  <AnimationRefHelper
+                    currentQuestion={currentQuestion}
+                    currentQuestionId={currentQuestionId}
+                    previewMode={previewMode}
+                    answers={answers}
+                    changeIsAnimationOngoing={changeIsAnimationOngoing}
+                    setFeedbackSettings={setFeedbackSettings}
+                    feedbackScreenSettings={feedbackScreenSettings}
+                    audioInstance={audioInstance}
+                  >
+                    {renderPage()}
+                  </AnimationRefHelper>
+                )}
               </Box>
-            )}
-          </Fragment>
-        )}
-      </AnswerOuterContainer>
-    </Box>
+              {answersError && <ErrorAlert errorText={answersError} />}
+              {!questionLoading && !currentQuestion && (
+                <Box mt={50}>
+                  <FormattedMessage {...messages.completeIntervention} />
+                </Box>
+              )}
+            </Fragment>
+          )}
+        </AnswerOuterContainer>
+      </Box>
+    </Column>
   );
 }
 

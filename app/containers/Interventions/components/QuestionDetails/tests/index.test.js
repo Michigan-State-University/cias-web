@@ -6,9 +6,11 @@ import { createStore } from 'redux';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 import { Provider } from 'react-redux';
-import settingsTabLabels from 'utils/settingsTabsLabels';
 import { elements } from 'theme';
+
 import { draft } from 'models/Status/StatusTypes';
+import settingsTabLabels from 'utils/settingsTabsLabels';
+import { formatMessage } from 'utils/testUtils/formatMessage';
 
 import QuestionDetails from '../index';
 
@@ -73,6 +75,11 @@ describe('<QuestionDetails />', () => {
     },
   };
 
+  const props = {
+    currentGroupScope: { title: 'Test group', id: 'test-group-1' },
+    formatMessage,
+  };
+
   beforeAll(() => {
     store = createStore(reducer, initialState);
     store.runSaga = () => {};
@@ -84,7 +91,7 @@ describe('<QuestionDetails />', () => {
     const { container, getByText } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionDetails />
+          <QuestionDetails {...props} />
         </IntlProvider>
       </Provider>,
     );

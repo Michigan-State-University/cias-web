@@ -10,6 +10,7 @@ const AnswerInterventionContent = styled.div`
   max-width: ${elements.draggableContainerSize}px;
   min-height: ${elements.draggableContainerSize}px;
   position: relative;
+  padding: 0 10px;
   width: 100%;
   z-index: 0;
   overflow: auto;
@@ -21,7 +22,6 @@ const AnswerOuterContainer = styled.div`
   flex-grow: 1;
   height: fit-content;
   justify-content: flex-start;
-  padding: 0 10px;
   width: 100%;
 `;
 

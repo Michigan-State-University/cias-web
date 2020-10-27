@@ -71,6 +71,7 @@ const QuestionListGroup = ({
                 <Box display="flex">
                   {manage && (
                     <Checkbox
+                      mr={2}
                       onClick={e => {
                         e.stopPropagation();
                         toggleGroup(questions);
