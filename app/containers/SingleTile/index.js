@@ -28,7 +28,7 @@ import {
 import { problemOptionsSaga } from 'global/sagas/problemOptionsSaga';
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
-import ProblemDetails from 'components/SingleTile/ProblemDetails';
+import ProblemDetails from 'containers/SingleTile/ProblemDetails';
 import Tooltip from 'components/Tooltip';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';

@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import Popup from '..';
 
 describe('<Popup />', () => {
@@ -24,11 +24,34 @@ describe('<Popup />', () => {
   it('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
+      rerender,
     } = render(
       <Popup popupContent={<>Test content</>}>
         <div>Test</div>
       </Popup>,
     );
+    fireEvent.mouseEnter(firstChild);
+    fireEvent.mouseLeave(firstChild);
+    rerender(
+      <Popup controlled popupContent={<>Test content</>}>
+        <div>Test</div>
+      </Popup>,
+    );
+    fireEvent.mouseEnter(firstChild);
+    fireEvent.mouseLeave(firstChild);
+    expect(firstChild).toMatchSnapshot();
+  });
+
+  it('Should render and match the snapshot with different', () => {
+    const {
+      container: { firstChild },
+    } = render(
+      <Popup top right center popupContent={<>Test content</>}>
+        <div>Test</div>
+      </Popup>,
+    );
+    fireEvent.mouseEnter(firstChild);
+    fireEvent.mouseLeave(firstChild);
     expect(firstChild).toMatchSnapshot();
   });
 });

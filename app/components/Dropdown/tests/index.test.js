@@ -33,6 +33,8 @@ describe('<Dropdown />', () => {
       top: true,
     };
     const { container } = render(<Dropdown {...newProps} />);
+    const img = document.querySelectorAll('img')[0];
+    fireEvent.click(img);
     expect(container).toMatchSnapshot();
   });
   it('should open dropdown', () => {

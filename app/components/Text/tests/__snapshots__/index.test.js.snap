@@ -8,7 +8,28 @@ exports[`<Text /> should match the snapshot 1`] = `
   color: #2F3850;
 }
 
-<p
-  className="c0"
-/>
+<div>
+  <p
+    class="c0"
+  />
+</div>
+`;
+
+exports[`<Text /> should match the snapshot for disabled 1`] = `
+.c0 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+  opacity: 0.5;
+  color: #9AA1B6;
+  cursor: not-allowed;
+}
+
+<div>
+  <p
+    class="c0"
+    disabled=""
+  />
+</div>
 `;

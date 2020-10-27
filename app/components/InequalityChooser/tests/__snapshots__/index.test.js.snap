@@ -60,6 +60,7 @@ exports[`<InequalityChooser /> Should render and match the snapshot 1`] = `
 <div>
   <div
     class="c0"
+    data-testid="select"
   >
     <div
       class=" css-2b097c-container"
@@ -73,7 +74,7 @@ exports[`<InequalityChooser /> Should render and match the snapshot 1`] = `
           <div
             class=" css-1uccc91-singleValue"
           >
-            =
+            +
           </div>
           <div
             class="css-b8ldur-Input"
@@ -122,9 +123,10 @@ exports[`<InequalityChooser /> Should render and match the snapshot 1`] = `
   >
     <input
       class="c3 c4"
+      data-testid="input"
       placeholder="..."
       type="text"
-      value=""
+      value="5"
     />
   </div>
 </div>

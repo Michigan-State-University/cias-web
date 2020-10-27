@@ -1,35 +1,26 @@
-/**
- *
- * Tests for ErrorAlert
- *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
- */
-
 import React from 'react';
 import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
-import ErrorAlert from '../index';
+import NewFloatButton from '../NewFloatButton';
 
-describe('<ErrorAlert />', () => {
+describe('<NewFloatButton />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<ErrorAlert errorText="error" />);
+    render(<NewFloatButton />);
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
-    } = render(<ErrorAlert errorText="error" />);
+    } = render(<NewFloatButton />);
     expect(firstChild).toMatchSnapshot();
   });
-
-  it('Should render full page error and match the snapshot', () => {
+  it('Should render and match the loading snapshot', () => {
     const {
       container: { firstChild },
-    } = render(<ErrorAlert errorText="error" fullPages />);
+    } = render(<NewFloatButton loading />);
     expect(firstChild).toMatchSnapshot();
   });
 });

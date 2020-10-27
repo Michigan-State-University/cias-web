@@ -54,6 +54,7 @@ const InequalityChooser = ({
       <Select
         minWidth={60}
         ml={10}
+        data-testid="select"
         selectProps={{
           isDisabled: disabled,
           bg: colors.linkWater,
@@ -64,6 +65,7 @@ const InequalityChooser = ({
       />
       <Box bg={colors.linkWater} mx={10}>
         <CaseInput
+          data-testid="input"
           disabled={disabled}
           px={0}
           py={12}

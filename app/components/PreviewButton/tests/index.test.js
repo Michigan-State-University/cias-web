@@ -38,4 +38,19 @@ describe('<PreviewButton />', () => {
     );
     expect(firstChild).toMatchSnapshot();
   });
+
+  it('Should render and match the snapshot of disabled button', () => {
+    const {
+      container: { firstChild },
+    } = render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <IntlProvider locale={DEFAULT_LOCALE}>
+            <PreviewButton previewDisabled />
+          </IntlProvider>
+        </MemoryRouter>
+      </Provider>,
+    );
+    expect(firstChild).toMatchSnapshot();
+  });
 });

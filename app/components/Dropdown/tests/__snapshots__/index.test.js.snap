@@ -6,6 +6,12 @@ exports[`<Dropdown /> should render on bottom and match the snapshot 1`] = `
   height: auto;
 }
 
+.c7 {
+  width: auto;
+  height: auto;
+  margin-right: 12px;
+}
+
 .c0 {
   width: auto;
   height: auto;
@@ -30,12 +36,98 @@ exports[`<Dropdown /> should render on bottom and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgba(255,255,255,1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  position: absolute;
+  z-index: 999;
+  right: 0;
+  bottom: 35px;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 8px;
+}
+
+.c9 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #9AA1B6;
+  color: rgba(0,0,237,1);
+  white-space: nowrap;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   padding: 8px;
+}
+
+.c10::after {
+  display: block;
+  content: attr(title);
+  font-weight: bold;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+.c6:hover .c8 {
+  font-weight: bold;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 <div>
@@ -51,6 +143,30 @@ exports[`<Dropdown /> should render on bottom and match the snapshot 1`] = `
         class="c2"
         src="IMAGE_MOCK"
       />
+    </div>
+    <div
+      class="c3"
+    >
+      <div
+        class="c4"
+      >
+        <div
+          class="c5 c6"
+        >
+          <img
+            alt="icon"
+            class="c7"
+            src="img.png"
+          />
+          <p
+            class="c8 c9 c10"
+            color="red"
+            title="Label"
+          >
+            Label
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

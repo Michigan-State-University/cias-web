@@ -15,14 +15,14 @@ import exclamationMark from 'assets/svg/exclamationMark.svg';
 
 import { AlertContainer } from './styled';
 
-const wrapWithRow = child => (
-  <Row width="100%" justify="center" mt={100}>
-    {child}
-  </Row>
-);
-
 const ErrorAlert = ({ errorText, fullPage, ...restProps }) => {
   const toDisplay = errorText.toString().split('\n')[0];
+
+  const wrapWithRow = child => (
+    <Row width="100%" justify="center" mt={100}>
+      {child}
+    </Row>
+  );
 
   const wrapper = fullPage ? wrapWithRow : identity;
   return wrapper(

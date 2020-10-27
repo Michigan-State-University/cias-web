@@ -8,13 +8,12 @@ import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getLinkPreview } from 'link-preview-js';
 
-import { ClampedText, Thumbnail, Url } from 'components/UrlPreview/styled';
 import Box from 'components/Box';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import Loader from 'components/Loader';
-import { ClampedTitle } from 'containers/Interventions/components/QuestionListItem/styled';
 import { colors, themeColors } from 'theme';
+import { ClampedText, Thumbnail, Url, ClampedTitle } from './styled';
 
 const UrlPreview = ({ link, handleClick }) => {
   const [linkData, setLinkData] = useState(null);

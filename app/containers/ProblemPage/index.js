@@ -16,7 +16,7 @@ import ErrorAlert from 'components/ErrorAlert';
 import H1 from 'components/H1';
 import Loader from 'components/Loader';
 import Row from 'components/Row';
-import SingleTile from 'components/SingleTile';
+import SingleTile from 'containers/SingleTile';
 import TileRenderer from 'components/TileRenderer';
 import useFilter from 'utils/useFilter';
 import SearchInput from 'components/Input/SearchInput';

@@ -800,6 +800,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
               <input
                 checked={true}
                 className="c25 c26"
+                data-testid="switch-input"
                 onChange={[Function]}
                 type="checkbox"
               />

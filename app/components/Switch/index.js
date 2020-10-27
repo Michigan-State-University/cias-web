@@ -5,6 +5,7 @@ import { SwitchWrapper, SwitchInput, Slider } from './styled';
 const Switch = props => (
   <SwitchWrapper {...props}>
     <SwitchInput
+      data-testid="switch-input"
       disabled={props.disabled}
       checked={props.checked}
       onChange={event => props.onToggle(event.target.checked)}

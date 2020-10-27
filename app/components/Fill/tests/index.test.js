@@ -1,12 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
 import { Fill } from '../index';
 
 describe('<Fill />', () => {
   it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<Fill />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<Fill />);
+    expect(container).toMatchSnapshot();
   });
 });

@@ -1,12 +1,12 @@
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import { Link, MemoryRouter } from 'react-router-dom';
 import 'jest-styled-components';
 
 import Tabs from '../index';
 
-const defaultTabs = (
-  <Tabs>
+const defaultTabs = extraTabProps => (
+  <Tabs {...extraTabProps}>
     <div label="Tab1">
       <span>Tab1 Content</span>
     </div>
@@ -19,14 +19,14 @@ const defaultTabs = (
 describe('<Tabs />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(defaultTabs);
+    render(defaultTabs());
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('should render and match the snapshot', () => {
     const {
       container: { firstChild },
-    } = render(defaultTabs);
+    } = render(defaultTabs());
     expect(firstChild).toMatchSnapshot();
   });
 
@@ -43,5 +43,19 @@ describe('<Tabs />', () => {
     );
 
     expect(firstChild).toMatchSnapshot();
+  });
+
+  it('should call function correctly', () => {
+    const controlledSetTabActive = jest.fn();
+    const { getByText } = render(
+      defaultTabs({
+        controlled: true,
+        controlledTabActive: 'Tab2',
+        controlledSetTabActive,
+      }),
+    );
+    const tab = getByText('Tab1');
+    fireEvent.click(tab);
+    expect(controlledSetTabActive).toHaveBeenLastCalledWith('Tab1');
   });
 });

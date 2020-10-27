@@ -24,4 +24,9 @@ describe('<UserRoleTile />', () => {
     const { container } = render(<UserRoleTile role={Roles.admin} />);
     expect(container).toMatchSnapshot();
   });
+
+  it('Should render and match the snapshot for disabled', () => {
+    const { container } = render(<UserRoleTile disabled role={Roles.admin} />);
+    expect(container).toMatchSnapshot();
+  });
 });

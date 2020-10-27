@@ -9,3 +9,13 @@ exports[`<Popup /> Should render and match the snapshot 1`] = `
   </div>
 </div>
 `;
+
+exports[`<Popup /> Should render and match the snapshot with different 1`] = `
+<div
+  class="styled__Container-e4ycn-0 dKiddJ"
+>
+  <div>
+    Test
+  </div>
+</div>
+`;
