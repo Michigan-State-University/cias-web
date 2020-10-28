@@ -1,18 +1,16 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
 import EllipsisText from '../EllipsisText';
 
 describe('<EllipsisText />', () => {
   it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<EllipsisText />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<EllipsisText />);
+    expect(container).toMatchSnapshot();
   });
   it('should match the snapshot', () => {
-    const renderedComponent = renderer
-      .create(<EllipsisText text="Test" />)
-      .toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<EllipsisText text="Test" />);
+    expect(container).toMatchSnapshot();
   });
 });

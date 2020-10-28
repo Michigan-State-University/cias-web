@@ -1,12 +1,12 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import 'jest-styled-components';
 
 import { Table } from '../index';
 
 describe('<Table />', () => {
   it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<Table />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<Table />);
+    expect(container).toMatchSnapshot();
   });
 });
