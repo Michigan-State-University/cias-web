@@ -25,4 +25,5 @@ module.exports = {
   setupFiles: ['raf/polyfill', 'jest-canvas-mock'],
   testRegex: 'tests/.*\\.test\\.js$',
   snapshotSerializers: [],
+  clearMocks: true,
 };

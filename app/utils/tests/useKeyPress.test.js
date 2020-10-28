@@ -7,10 +7,10 @@ import useKeyPress from 'utils/useKeyPress';
 import { renderHook } from 'utils/renderHook';
 import { fireEvent } from 'react-testing-library';
 
-const A_KEY_CODE = 65;
-const S_KEY_CODE = 83;
-
 describe('useKeyPress test', () => {
+  const A_KEY_CODE = 65;
+  const S_KEY_CODE = 83;
+
   it('should not invoke onKeyPress on start', () => {
     const onKeyPress = jest.fn();
     renderHook(() => useKeyPress('a', onKeyPress));

@@ -12,17 +12,21 @@ const CollapseContent = ({ child, isOpened }) => {
   const [transition, setTransition] = useState(false);
 
   useLayoutEffect(() => {
+    let timeoutHandle;
+
     if (!isOpened) {
       setTransition(false);
-      setTimeout(() => {
+      timeoutHandle = setTimeout(() => {
         setShow(false);
       }, CLOSE_TIMEOUT);
     } else {
       setShow(true);
-      setTimeout(() => {
+      timeoutHandle = setTimeout(() => {
         setTransition(true);
       }, TRANSITION_TIMEOUT);
     }
+
+    return () => clearTimeout(timeoutHandle);
   }, [isOpened]);
 
   return (
