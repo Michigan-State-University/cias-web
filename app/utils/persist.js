@@ -2,13 +2,13 @@ import LocalStorageService from 'utils/localStorageService';
 
 export const loadState = () => {
   try {
-    const serializedState = LocalStorageService.getState();
+    const state = LocalStorageService.getState();
 
-    if (serializedState === null) {
+    if (state === null) {
       return undefined;
     }
 
-    return JSON.parse(serializedState);
+    return state;
   } catch (err) {
     return undefined;
   }

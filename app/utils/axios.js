@@ -2,8 +2,9 @@
 import axios from 'axios';
 import get from 'lodash/get';
 import { store } from 'configureStore';
+import { logOut } from 'global/reducers/auth';
+import { headersConst } from 'utils/getHeaders';
 import LocalStorageService from './localStorageService';
-import { logOut } from '../global/reducers/auth/actions';
 
 const { dispatch } = store;
 
@@ -21,10 +22,9 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   response => {
-    if (response.config.url.endsWith('v1/auth/sign_in')) {
+    if (response.config.url.endsWith('auth/sign_in')) {
       LocalStorageService.setHeaders({
-        'Content-Type': 'application/json;charset=utf-8',
-        'token-type': 'Bearer',
+        ...headersConst,
         'access-token': response.headers['access-token'],
         client: response.headers.client,
         uid: response.headers.uid,

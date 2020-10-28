@@ -47,3 +47,43 @@ beforeAll(() => {
 afterAll(() => {
   console.error = originalError;
 });
+
+class AudioMock {
+  addEventListener = jest.fn();
+
+  removeEventListener = jest.fn();
+
+  play = jest.fn().mockImplementation(() => {
+    if (this.onPlayHandler) this.onPlayHandler();
+
+    return Promise.resolve();
+  });
+
+  pause = jest.fn();
+
+  load = jest.fn();
+}
+Object.defineProperty(global, 'Audio', { value: () => new AudioMock() });
+
+class LocalStorageMock {
+  constructor() {
+    this.store = {};
+  }
+
+  clear = jest.fn().mockImplementation(() => {
+    this.store = {};
+  });
+
+  getItem = jest.fn().mockImplementation(key => this.store[key] || null);
+
+  setItem = jest.fn().mockImplementation((key, value) => {
+    this.store[key] = value;
+  });
+
+  removeItem = jest.fn().mockImplementation(key => {
+    delete this.store[key];
+  });
+}
+Object.defineProperty(global, 'localStorage', {
+  value: new LocalStorageMock(),
+});

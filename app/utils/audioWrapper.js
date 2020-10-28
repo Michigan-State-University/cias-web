@@ -30,14 +30,17 @@ class AudioWrapper extends Audio {
    * Stops the current playback.
    */
   stop = () => {
-    super.pause();
+    this.pause();
     this.currentTime = 0;
     this.stopped = true;
   };
 
-  play = () => {
+  /**
+   * Starts the current playback.
+   */
+  start = () => {
     this.stopped = false;
-    return super.play();
+    return this.play();
   };
 
   /**
@@ -84,16 +87,30 @@ class AudioWrapper extends Audio {
    * Removes event listeners.
    */
   clean = () => {
-    if (this.onLoadingHandler)
+    if (this.onLoadingHandler) {
       this.removeEventListener('loadstart', this.onLoadingHandler);
-    if (this.onLoadedHandler)
+      this.onLoadingHandler = null;
+    }
+
+    if (this.onLoadedHandler) {
       this.removeEventListener('canplay', this.onLoadedHandler);
-    if (this.onEndedHandler)
+      this.onLoadedHandler = null;
+    }
+
+    if (this.onEndedHandler) {
       this.removeEventListener('ended', this.onEndedHandler);
-    if (this.onErrorHandler)
+      this.onEndedHandler = null;
+    }
+
+    if (this.onErrorHandler) {
       this.removeEventListener('error', this.onErrorHandler);
-    if (this.onPlayHandler)
+      this.onErrorHandler = null;
+    }
+
+    if (this.onPlayHandler) {
       this.removeEventListener('play', this.onPlayHandler);
+      this.onPlayHandler = null;
+    }
   };
 
   /**
@@ -108,7 +125,7 @@ class AudioWrapper extends Audio {
       this.clean();
     });
 
-    return this.play().catch(() => {}); // catch needed to suppress console exception (empty audio)
+    return this.start().catch(() => {}); // catch needed to suppress console exception (empty audio)
   };
 
   /**

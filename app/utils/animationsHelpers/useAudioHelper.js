@@ -301,7 +301,7 @@ const useAudioHelper = (
     }
   };
 
-  const onSpeechReady = () => audioInstance.play();
+  const onSpeechReady = () => audioInstance.start();
 
   const onSpeechEnded = audioUrls => {
     cleanAudio();

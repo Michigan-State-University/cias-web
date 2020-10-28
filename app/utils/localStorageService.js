@@ -1,5 +1,5 @@
-const HEADERS = 'headers';
-const STATE = 'state';
+export const HEADERS = 'headers';
+export const STATE = 'state';
 
 const LocalStorageService = (() => {
   const setToken = token => {
@@ -48,17 +48,17 @@ const LocalStorageService = (() => {
   };
 
   const getState = () => {
-    const state = localStorage.getItem(STATE);
+    const serializedState = localStorage.getItem(STATE);
 
-    if (state) return state;
+    if (serializedState) return JSON.parse(serializedState);
 
     return null;
   };
 
   const updateState = newState => {
     const state = getState();
-    const parsedState = JSON.parse(state);
-    if (parsedState) return setState({ ...parsedState, ...newState });
+
+    if (state) return setState({ ...state, ...newState });
 
     return null;
   };
