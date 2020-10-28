@@ -32,6 +32,7 @@ const colors = {
   navyBlue: '#000080',
   olive: '#808000',
   waterloo: '#828896',
+  brightGreen: '#54F200',
 };
 
 const themeColors = {
