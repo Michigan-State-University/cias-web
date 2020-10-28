@@ -69,23 +69,25 @@ exports[`<UrlPreview /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-<div
-  className="c0"
-  width="100%"
->
+<div>
   <div
-    className="c1"
+    class="c0"
+    width="100%"
   >
     <div
-      className="c2"
-      data-testid="inline-loader"
+      class="c1"
     >
       <div
-        className="c3"
-        color="#C866EA"
-        size={50}
-        width={6}
-      />
+        class="c2"
+        data-testid="inline-loader"
+      >
+        <div
+          class="c3"
+          color="#C866EA"
+          size="50"
+          width="6"
+        />
+      </div>
     </div>
   </div>
 </div>

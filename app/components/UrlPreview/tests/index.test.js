@@ -9,12 +9,12 @@
 import React from 'react';
 import 'jest-styled-components';
 
-import renderer from 'react-test-renderer';
+import { render } from 'react-testing-library';
 import UrlPreview from '../index';
 
 describe('<UrlPreview />', () => {
   it('Should render and match the snapshot', () => {
-    const renderedComponent = renderer.create(<UrlPreview />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+    const { container } = render(<UrlPreview />);
+    expect(container).toMatchSnapshot();
   });
 });

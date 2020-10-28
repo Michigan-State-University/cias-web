@@ -21,12 +21,14 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
   color: #2F3850;
 }
 
-<div
-  className="c0"
->
+<div>
   <div
-    className="c1"
-  />
+    class="c0"
+  >
+    <div
+      class="c1"
+    />
+  </div>
 </div>
 `;
 
@@ -51,13 +53,15 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
   color: #2F3850;
 }
 
-<div
-  className="c0"
->
+<div>
   <div
-    className="c1"
+    class="c0"
   >
-    Test
+    <div
+      class="c1"
+    >
+      Test
+    </div>
   </div>
 </div>
 `;
