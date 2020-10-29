@@ -2,6 +2,7 @@ import produce from 'immer';
 import xor from 'lodash/xor';
 
 import { insertAt, removeAt } from 'utils/arrayUtils';
+import { DefaultGroupType } from 'models/Intervention/GroupTypes';
 import {
   GET_QUESTION_GROUPS_SUCCESS,
   CREATE_QUESTION_IN_GROUP,
@@ -91,7 +92,8 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         const toRemove = xor(currentGroups, afterReorderRemainingGroups);
 
         draft.groups = state.groups.filter(
-          group => !toRemove.includes(group.id) || group.default,
+          group =>
+            !toRemove.includes(group.id) || group.type === DefaultGroupType,
         );
 
         break;

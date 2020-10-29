@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { makeSelectVisibleGroupsSize } from 'global/reducers/questions/selectors';
+import { PlainGroupType } from 'models/Intervention/GroupTypes';
 import messages from '../messages';
 import { GROUP_QUESTIONS_REQUEST, GROUP_QUESTIONS_ERROR } from '../constants';
 import { groupQuestionsError, groupQuestionsSuccess } from '../actions';
@@ -19,6 +20,7 @@ function* groupQuestions({ payload: { questionIds, interventionId } }) {
         title: `Group ${groupsLength}`,
         questions: questionIds,
         position: groupsLength,
+        type: PlainGroupType,
       },
     });
     yield put(groupQuestionsSuccess(data, questionIds));

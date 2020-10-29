@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
 
+import { DefaultGroupType } from 'models/Intervention/GroupTypes';
 import { initialState } from './reducer';
 
 export const selectQuestionGroups = state =>
@@ -20,7 +21,8 @@ export const makeSelectQuestionGroups = () =>
 export const makeSelectDefaultGroupId = () =>
   createSelector(
     selectQuestionGroups,
-    substate => substate.groups.find(({ default: dft }) => dft === true).id,
+    substate =>
+      substate.groups.find(({ type }) => type === DefaultGroupType).id,
   );
 
 export const makeSelectQuestionGroupsLoader = () =>
