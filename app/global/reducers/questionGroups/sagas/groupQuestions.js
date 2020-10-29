@@ -4,25 +4,35 @@ import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { makeSelectVisibleGroupsSize } from 'global/reducers/questions/selectors';
+import {
+  makeSelectQuestions,
+  makeSelectVisibleGroupsSize,
+} from 'global/reducers/questions/selectors';
 import { PlainGroupType } from 'models/Intervention/GroupTypes';
 import messages from '../messages';
 import { GROUP_QUESTIONS_REQUEST, GROUP_QUESTIONS_ERROR } from '../constants';
-import { groupQuestionsError, groupQuestionsSuccess } from '../actions';
+import {
+  cleanGroups,
+  groupQuestionsError,
+  groupQuestionsSuccess,
+} from '../actions';
 
 function* groupQuestions({ payload: { questionIds, interventionId } }) {
   const requestURL = `v1/interventions/${interventionId}/question_groups`;
-  const groupsLength = yield select(makeSelectVisibleGroupsSize());
+  const questions = yield select(makeSelectQuestions());
+  const newGroupPosition = yield select(makeSelectVisibleGroupsSize()) - 1; // subtract Finish Group
 
   try {
     const { data } = yield axios.post(requestURL, {
       question_group: {
-        title: `Group ${groupsLength}`,
+        title: `Group ${newGroupPosition}`,
         questions: questionIds,
-        position: groupsLength,
+        position: newGroupPosition,
         type: PlainGroupType,
       },
     });
+
+    yield put(cleanGroups(questions));
     yield put(groupQuestionsSuccess(data, questionIds));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.groupError), {

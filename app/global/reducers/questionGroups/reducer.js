@@ -2,7 +2,11 @@ import produce from 'immer';
 import xor from 'lodash/xor';
 
 import { insertAt, removeAt } from 'utils/arrayUtils';
-import { DefaultGroupType } from 'models/Intervention/GroupTypes';
+import {
+  DefaultGroupType,
+  FinishGroupType,
+} from 'models/Intervention/GroupTypes';
+import { ternary } from 'utils/ternary';
 import {
   GET_QUESTION_GROUPS_SUCCESS,
   CREATE_QUESTION_IN_GROUP,
@@ -111,7 +115,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
 
         draft.groups = draft.groups.map((group, index) => ({
           ...group,
-          position: index + 1,
+          position: ternary(group.type === FinishGroupType, 9999, index + 1),
         }));
 
         break;

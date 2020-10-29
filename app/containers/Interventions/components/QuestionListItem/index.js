@@ -34,7 +34,10 @@ import {
 } from 'global/reducers/localState';
 
 import StyledCircle from 'components/Circle/StyledCircle';
-import { QuestionTypes } from 'models/Intervention/QuestionTypes';
+import {
+  finishQuestion,
+  QuestionTypes,
+} from 'models/Intervention/QuestionTypes';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
 import VariableInput from '../QuestionDetails/VariableInput';
@@ -64,6 +67,8 @@ const QuestionListItem = ({
 }) => {
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
+
+  const isFinishScreen = type === finishQuestion.id;
 
   const handleSelectClick = newIndex => {
     setDraggable(false);
@@ -163,7 +168,7 @@ const QuestionListItem = ({
             </Row>
           )}
         </Column>
-        {!manage && !disabled && (
+        {!manage && !disabled && !isFinishScreen && (
           <Column xs={1}>
             <Dropdown options={options} />
           </Column>
