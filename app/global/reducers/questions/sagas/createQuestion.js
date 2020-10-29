@@ -3,7 +3,10 @@ import axios from 'axios';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { ADD_BLOCK } from 'containers/Interventions/components/QuestionSettings/Settings/constants';
-import { feedbackQuestion } from 'models/Intervention/QuestionTypes';
+import {
+  feedbackQuestion,
+  finishQuestion,
+} from 'models/Intervention/QuestionTypes';
 import {
   readQuestionBlockType,
   feedbackBlockType,
@@ -14,6 +17,8 @@ import {
   createNewQuestionInGroup,
 } from 'global/reducers/questionGroups';
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { ternary } from 'utils/ternary';
 
 import { makeSelectIntervention } from 'global/reducers/intervention';
 import { CREATE_QUESTION_REQUEST } from '../constants';
@@ -27,9 +32,13 @@ import { makeSelectQuestions, makeSelectSelectedQuestion } from '../selectors';
 function* createQuestion({ payload: { question } }) {
   const selectedQuestion = yield select(makeSelectSelectedQuestion());
   const defaultGroupId = yield select(makeSelectDefaultGroupId());
-  const groupId = selectedQuestion
-    ? selectedQuestion.question_group_id
-    : defaultGroupId;
+  const groupId = ternary(
+    isNullOrUndefined(selectedQuestion) ||
+      selectedQuestion.type === finishQuestion.id,
+    defaultGroupId,
+    selectedQuestion.question_group_id,
+  );
+
   const questions = yield select(makeSelectQuestions());
   const {
     settings: { narrator },
