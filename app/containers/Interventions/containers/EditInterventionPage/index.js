@@ -27,8 +27,8 @@ import bin from 'assets/svg/bin-no-bg.svg';
 import binActive from 'assets/svg/bin-active.svg';
 import share from 'assets/svg/file-share.svg';
 import shareActive from 'assets/svg/file-share-active.svg';
-import group from 'assets/svg/group.svg';
-import groupActive from 'assets/svg/group-active.svg';
+import groupIcon from 'assets/svg/group.svg';
+import groupIconActive from 'assets/svg/group-active.svg';
 
 import Question from 'models/Intervention/Question';
 import { borders, colors, themeColors } from 'theme';
@@ -77,6 +77,7 @@ import { canEdit } from 'models/Status/statusPermissions';
 import GroupActionButton from 'containers/Interventions/components/GroupActionButton';
 import { reorderScope } from 'models/Intervention/ReorderScope';
 import appStages from 'global/appStages';
+import { FinishGroupType } from 'models/Intervention/GroupTypes';
 import scrollByRef from 'utils/scrollByRef';
 import editInterventionPageSaga from './saga';
 
@@ -162,8 +163,8 @@ function EditInterventionPage({
       : []),
     {
       label: <FormattedMessage {...messages.group} />,
-      inactiveIcon: group,
-      activeIcon: groupActive,
+      inactiveIcon: groupIcon,
+      activeIcon: groupIconActive,
       action: () => {
         groupQuestions(selectedSlides, params.interventionId);
         setSelectedSlides([]);
@@ -297,6 +298,9 @@ function EditInterventionPage({
     setSelectedSlides(xor(selectedSlides, q.map(({ id }) => id)));
   };
 
+  const finishGroup = groups.find(group => group.type === FinishGroupType);
+  const filteredGroups = groups.filter(group => group.type !== FinishGroupType);
+
   return (
     <Fragment>
       <Helmet>
@@ -350,7 +354,7 @@ function EditInterventionPage({
                 <Droppable droppableId="group-list" type={reorderScope.groups}>
                   {provided => (
                     <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {groups.map((questionGroup, index) => (
+                      {filteredGroups.map((questionGroup, index) => (
                         <QuestionListGroup
                           index={index}
                           disabled={!editingPossible}
@@ -367,7 +371,6 @@ function EditInterventionPage({
                           isDuringQuestionReorder={isDuringQuestionReorder}
                           problemStatus={problemStatus}
                           formatMessage={formatMessage}
-                          lastItemRef={containerBottomRef}
                         />
                       ))}
                       {provided.placeholder}
@@ -375,6 +378,25 @@ function EditInterventionPage({
                   )}
                 </Droppable>
               </DragDropContext>
+              {finishGroup && (
+                <QuestionListGroup
+                  notDnd
+                  disabled={!editingPossible}
+                  changeGroupName={changeGroupName}
+                  checkSelectedGroup={checkSelectedGroup}
+                  interventionId={params.interventionId}
+                  manage={manage}
+                  questionGroup={finishGroup}
+                  selectSlide={selectSlide}
+                  key={finishGroup.id}
+                  selectedQuestion={selectedQuestion}
+                  selectedSlides={selectedSlides}
+                  toggleGroup={toggleGroup}
+                  isDuringQuestionReorder={isDuringQuestionReorder}
+                  problemStatus={problemStatus}
+                  formatMessage={formatMessage}
+                />
+              )}
               <Row />
               <Spacer />
             </Box>

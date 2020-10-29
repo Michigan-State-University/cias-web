@@ -72,7 +72,7 @@ const QuestionListGroup = ({
           />
         </Row>
       ))}
-      {notDnd && providedGroupDroppable.placeholder}
+      {!notDnd && providedGroupDroppable.placeholder}
     </DraggableContainer>
   );
 
