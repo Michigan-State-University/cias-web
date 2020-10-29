@@ -27,7 +27,6 @@ function* groupQuestions({ payload: { questionIds, interventionId } }) {
       question_group: {
         title: `Group ${newGroupPosition}`,
         questions: questionIds,
-        position: newGroupPosition,
         type: PlainGroupType,
       },
     });
