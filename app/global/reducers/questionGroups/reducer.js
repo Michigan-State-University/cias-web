@@ -1,5 +1,6 @@
 import produce from 'immer';
 import xor from 'lodash/xor';
+import sortBy from 'lodash/sortBy';
 
 import { insertAt, removeAt } from 'utils/arrayUtils';
 import {
@@ -66,7 +67,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case GROUP_QUESTIONS_SUCCESS: {
-        draft.groups = [...draft.groups, payload.group];
+        draft.groups = [...state.groups, payload.group];
         break;
       }
       case CHANGE_GROUP_NAME_REQUEST: {
@@ -95,9 +96,12 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
 
         const toRemove = xor(currentGroups, afterReorderRemainingGroups);
 
-        draft.groups = state.groups.filter(
-          group =>
-            !toRemove.includes(group.id) || group.type === DefaultGroupType,
+        draft.groups = sortBy(
+          state.groups.filter(
+            group =>
+              !toRemove.includes(group.id) || group.type === DefaultGroupType,
+          ),
+          'position',
         );
 
         break;

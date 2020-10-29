@@ -19,8 +19,8 @@ import {
 
 function* groupQuestions({ payload: { questionIds, interventionId } }) {
   const requestURL = `v1/interventions/${interventionId}/question_groups`;
-  const questions = yield select(makeSelectQuestions());
-  const newGroupPosition = yield select(makeSelectVisibleGroupsSize()) - 1; // subtract Finish Group
+  const groupsLength = yield select(makeSelectVisibleGroupsSize());
+  const newGroupPosition = groupsLength - 1; // subtract Finish Group
 
   try {
     const { data } = yield axios.post(requestURL, {
@@ -32,8 +32,10 @@ function* groupQuestions({ payload: { questionIds, interventionId } }) {
       },
     });
 
-    yield put(cleanGroups(questions));
     yield put(groupQuestionsSuccess(data, questionIds));
+
+    const questions = yield select(makeSelectQuestions());
+    yield put(cleanGroups(questions));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.groupError), {
       toastId: GROUP_QUESTIONS_ERROR,
