@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
@@ -10,7 +10,10 @@ import { ScrollFogBox } from 'components/Box/ScrollFog';
 import decideIfPassValue from 'utils/decideIfPassValue';
 import globalMessages from 'global/i18n/globalMessages';
 import useOutsideClick from 'utils/useOutsideClick';
-import { QuestionTypes } from 'models/Intervention/QuestionTypes';
+import {
+  finishQuestion,
+  QuestionTypes,
+} from 'models/Intervention/QuestionTypes';
 import { borders, boxShadows, colors, fontSizes } from 'theme';
 
 import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
@@ -53,6 +56,11 @@ const QuestionTypeChooser = ({
 
   const isVisible = visible && height;
 
+  const filteredQuestions = useMemo(
+    () => QuestionTypes.filter(({ id }) => id !== finishQuestion.id),
+    [QuestionTypes],
+  );
+
   return (
     <Row>
       <Box position="relative" width="100%" ref={chooserBoxRef}>
@@ -89,7 +97,7 @@ const QuestionTypeChooser = ({
               ref={containerRef}
               horizontalFogVisible={false}
             >
-              {QuestionTypes.map((questionType, i) => (
+              {filteredQuestions.map((questionType, i) => (
                 <HoverableBox
                   key={questionType.id}
                   onClick={() => handleClick(questionType.id)}
