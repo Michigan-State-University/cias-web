@@ -58,7 +58,7 @@ export default defineMessages({
   },
   participantShareModalTitle: {
     id: `${scope}.participantShareModalTitle`,
-    defaultMessage: 'Invite to start intervention from:',
+    defaultMessage: 'Send an email with the invitation',
   },
   anyone: {
     id: `${scope}.anyone`,

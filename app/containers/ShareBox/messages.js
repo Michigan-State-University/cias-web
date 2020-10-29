@@ -9,10 +9,6 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.ShareBox';
 
 export default defineMessages({
-  header: {
-    id: `${scope}.header`,
-    defaultMessage: 'Invite to start intervention from:',
-  },
   tooltipSelectorContent: {
     id: `${scope}.tooltipSelectorContent`,
     defaultMessage:
@@ -20,31 +16,27 @@ export default defineMessages({
   },
   emailPlaceholder: {
     id: `${scope}.emailPlaceholder`,
-    defaultMessage: 'Invite new participants with e-mails',
+    defaultMessage: 'Enter emails to send link to this session',
   },
   uploadText: {
     id: `${scope}.uploadText`,
-    defaultMessage: 'Upload e-mails with CSV file',
+    defaultMessage: 'Upload emails with CSV file',
   },
   sendText: {
     id: `${scope}.sendText`,
-    defaultMessage: 'Send invite',
+    defaultMessage: 'Send an email',
   },
   copyLabel: {
     id: `${scope}.copyLabel`,
-    defaultMessage: 'Copy link and invite to start with this session externaly',
+    defaultMessage: 'Copy link to start with this session externaly',
   },
   resend: {
     id: `${scope}.resend`,
-    defaultMessage: 'Resend invite',
-  },
-  remove: {
-    id: `${scope}.remove`,
-    defaultMessage: 'Remove',
+    defaultMessage: 'Resend email',
   },
   userListLabel: {
     id: `${scope}.userListLabel`,
-    defaultMessage: 'Invite has beed already sent to',
+    defaultMessage: 'Email has been already sent to',
   },
   invalidEmail: {
     id: `${scope}.invalidEmail`,
@@ -60,6 +52,6 @@ export default defineMessages({
   },
   exportCsv: {
     id: `${scope}.exportCsv`,
-    defaultMessage: 'Export e-mails to CSV file',
+    defaultMessage: 'Export emails to CSV file',
   },
 });

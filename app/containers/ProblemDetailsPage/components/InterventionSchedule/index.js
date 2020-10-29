@@ -7,6 +7,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import values from 'lodash/values';
 import find from 'lodash/find';
 
@@ -17,14 +19,13 @@ import Row from 'components/Row';
 
 import { colors } from 'theme';
 
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 import {
   SCHEDULE_OPTIONS,
   changeSchedulingType,
   updateSchedulingDate,
   updateSchedulingPayload,
 } from 'global/reducers/problem';
+
 import ExactDateOption from './ExactDateOption';
 import DaysAfterOption from './DaysAfterOption';
 import messages from './messages';

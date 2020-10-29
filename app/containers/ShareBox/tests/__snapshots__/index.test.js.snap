@@ -38,7 +38,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             >
               <input
                 class="styled__HiddenInput-sc-16elnyr-1 ftBdeV"
-                placeholder="Invite new participants with e-mails"
+                placeholder="Enter emails to send link to this session"
                 type="text"
                 value=""
               />
@@ -55,7 +55,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               width="140"
             >
               <span>
-                Send invite
+                Send an email
               </span>
             </button>
           </div>
@@ -86,7 +86,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
                   font-weight="bold"
                 >
                   <span>
-                    Upload e-mails with CSV file
+                    Upload emails with CSV file
                   </span>
                 </p>
               </div>
@@ -117,7 +117,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               color="#C866EA"
               font-weight="bold"
             >
-              Export e-mails to CSV file
+              Export emails to CSV file
             </p>
           </div>
         </button>
@@ -145,7 +145,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               font-weight="bold"
             >
               <span>
-                Copy link and invite to start with this session externaly
+                Copy link to start with this session externaly
               </span>
             </p>
           </div>
@@ -159,7 +159,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       font-weight="bold"
     >
       <span>
-        Invite has beed already sent to
+        Email has been already sent to
       </span>
     </h3>
     <div

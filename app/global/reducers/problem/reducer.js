@@ -1,7 +1,6 @@
 import produce from 'immer';
 import set from 'lodash/set';
 import get from 'lodash/get';
-import remove from 'lodash/remove';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 import interventionSettingsReducer from './interventionSettings/reducer';
@@ -46,9 +45,6 @@ import {
   FETCH_INTERVENTION_EMAILS_REQUEST,
   FETCH_INTERVENTION_EMAILS_SUCCESS,
   FETCH_INTERVENTION_EMAILS_ERROR,
-  DELETE_INTERVENTION_INVITE_REQUEST,
-  DELETE_INTERVENTION_INVITE_SUCCESS,
-  DELETE_INTERVENTION_INVITE_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -299,29 +295,6 @@ export const problemReducer = (state = initialState, action) =>
       case FETCH_INTERVENTION_EMAILS_ERROR:
         draft.loaders.fetchInterventionEmailsLoading = false;
         draft.errors.fetchInterventionEmailsError = action.payload.error;
-        break;
-
-      case DELETE_INTERVENTION_INVITE_REQUEST:
-        const { id, interventionId } = action.payload;
-
-        const interventionIndex = findInterventionIndex(
-          state.problem,
-          interventionId,
-        );
-        if (interventionIndex > -1) {
-          draft.cache.problem = state.problem;
-
-          remove(
-            draft.problem.interventions[interventionIndex].emails,
-            ({ id: emailId }) => emailId === id,
-          );
-        }
-
-        break;
-      case DELETE_INTERVENTION_INVITE_SUCCESS:
-        break;
-      case DELETE_INTERVENTION_INVITE_ERROR:
-        draft.cache.problem = state.problem;
         break;
     }
   });

@@ -18,7 +18,6 @@ export {
   sendInterventionInviteRequest,
   resendInterventionInviteRequest,
   fetchInterventionEmailsRequest,
-  deleteInterventionInviteRequest,
 } from './actions';
 export { problemReducer } from './reducer';
 export {

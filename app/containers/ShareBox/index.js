@@ -25,7 +25,6 @@ import {
   resendInterventionInviteRequest,
   makeSelectProblemLoader,
   makeSelectProblemStatus,
-  deleteInterventionInviteRequest,
 } from 'global/reducers/problem';
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -39,7 +38,6 @@ const ShareBox = ({
   intervention,
   sendInvite,
   resendInvite,
-  deleteInvite,
   sendLoading,
   emailLoading,
   listLoading,
@@ -49,7 +47,6 @@ const ShareBox = ({
     intervention || {};
 
   const handleResend = id => resendInvite(id, intervention.id);
-  const handleDelete = id => deleteInvite(id, intervention.id);
 
   const sharingPossible = canShareWithParticipants(problemStatus);
 
@@ -58,11 +55,6 @@ const ShareBox = ({
       action: handleResend,
       disabled: sharingPossible,
       text: <FormattedMessage {...messages.resend} />,
-    },
-    {
-      action: handleDelete,
-      disabled: sharingPossible,
-      text: <FormattedMessage {...messages.remove} />,
     },
   ];
 
@@ -139,7 +131,6 @@ ShareBox.propTypes = {
   }),
   sendInvite: PropTypes.func,
   resendInvite: PropTypes.func,
-  deleteInvite: PropTypes.func,
   sendLoading: PropTypes.bool,
   listLoading: PropTypes.bool,
   emailLoading: PropTypes.object,
@@ -157,7 +148,6 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   sendInvite: sendInterventionInviteRequest,
   resendInvite: resendInterventionInviteRequest,
-  deleteInvite: deleteInterventionInviteRequest,
 };
 
 const withConnect = connect(

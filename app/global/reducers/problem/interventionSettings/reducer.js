@@ -44,7 +44,9 @@ const interventionSettingsReducer = (intervention, payload) => {
       return clonedIntervention;
 
     case UPDATE_SCHEDULING_PAYLOAD:
-      clonedIntervention.schedule_payload = parseInt(payload.data.value, 10);
+      clonedIntervention.schedule_payload =
+        parseInt(payload.data.value, 10) || '';
+
       return clonedIntervention;
 
     case UPDATE_SCHEDULING_DATE:

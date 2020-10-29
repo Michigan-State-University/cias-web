@@ -9,7 +9,6 @@ import {
   sendInterventionInviteSaga,
   resendInterventionInviteSaga,
   fetchInterventionEmailsSaga,
-  deleteInterventionInviteSaga,
 } from 'global/reducers/problem/sagas';
 
 export default function* problemDetailsPageSagas() {
@@ -23,6 +22,5 @@ export default function* problemDetailsPageSagas() {
     sendInterventionInviteSaga(),
     fetchInterventionEmailsSaga(),
     resendInterventionInviteSaga(),
-    deleteInterventionInviteSaga(),
   ]);
 }
