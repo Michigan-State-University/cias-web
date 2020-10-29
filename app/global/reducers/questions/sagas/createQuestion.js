@@ -22,15 +22,19 @@ import {
   createQuestionError,
   updateQuestionSettings,
 } from '../actions';
-import { makeSelectQuestions } from '../selectors';
+import { makeSelectQuestions, makeSelectSelectedQuestion } from '../selectors';
 
 function* createQuestion({ payload: { question } }) {
+  const selectedQuestion = yield select(makeSelectSelectedQuestion());
   const defaultGroupId = yield select(makeSelectDefaultGroupId());
+  const groupId = selectedQuestion
+    ? selectedQuestion.question_group_id
+    : defaultGroupId;
   const questions = yield select(makeSelectQuestions());
   const {
     settings: { narrator },
   } = yield select(makeSelectIntervention());
-  const requestURL = `v1/question_groups/${defaultGroupId}/questions`;
+  const requestURL = `v1/question_groups/${groupId}/questions`;
   try {
     const response = yield axios.post(requestURL, {
       ...question,
@@ -41,7 +45,7 @@ function* createQuestion({ payload: { question } }) {
     const { id: newQuestionId } = createdQuestion;
 
     yield put(createQuestionSuccess(createdQuestion));
-    yield put(createNewQuestionInGroup(createdQuestion, defaultGroupId));
+    yield put(createNewQuestionInGroup(createdQuestion, groupId));
     const position = getNarratorPositionWhenQuestionIsAdded(
       questions,
       questions.length - 1,
