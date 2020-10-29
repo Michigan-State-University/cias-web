@@ -24,11 +24,11 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-export const problemsRedcuer = (state = initialState, action) =>
+export const problemsReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case FETCH_PROBLEMS_REQUEST:
-        if (isEmpty(draft.problems)) draft.fetchProblemLoading = true;
+        if (isEmpty(state.problems)) draft.fetchProblemLoading = true;
         draft.fetchProblemError = null;
         break;
       case FETCH_PROBLEMS_SUCCESS:
@@ -41,7 +41,7 @@ export const problemsRedcuer = (state = initialState, action) =>
         break;
       case CREATE_PROBLEM_SUCCESS:
       case COPY_PROBLEM_SUCCESS:
-        draft.problems = [...draft.problems, action.payload.problem];
+        draft.problems = [...state.problems, action.payload.problem];
         break;
       case ARCHIVE_PROBLEM_REQUEST:
         let problemIndex = draft.problems.findIndex(
@@ -62,4 +62,4 @@ export const problemsRedcuer = (state = initialState, action) =>
     }
   });
 
-export default problemsRedcuer;
+export default problemsReducer;

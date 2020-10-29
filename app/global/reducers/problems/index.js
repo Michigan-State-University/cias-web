@@ -3,7 +3,7 @@ export {
   copyProblemRequest,
   archiveProblemRequest,
 } from './actions';
-export { problemsRedcuer } from './reducer';
+export { problemsReducer } from './reducer';
 export {
   makeSelectProblemsState,
   makeSelectProblems,

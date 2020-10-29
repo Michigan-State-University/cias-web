@@ -10,12 +10,12 @@ import { changeEmailError, changeEmailSuccess } from '../actions';
 import { CHANGE_EMAIL_SUCCESS, CHANGE_EMAIL_REQUEST } from '../constants';
 import messages from '../messages';
 
-function* changeEmail({ payload: { oldPassword, newEmail } }) {
+export function* changeEmail({ payload: { oldPassword, newEmail } }) {
   const requestURL = `/v1/auth`;
   try {
     const {
       data: { data },
-    } = yield axios.patch(requestURL, {
+    } = yield call(axios.patch, requestURL, {
       current_password: oldPassword,
       email: newEmail,
     });

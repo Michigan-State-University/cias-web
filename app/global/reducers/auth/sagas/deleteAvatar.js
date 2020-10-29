@@ -11,14 +11,14 @@ import { DELETE_AVATAR_REQUEST, DELETE_AVATAR_ERROR } from '../constants';
 import { makeSelectUser } from '../selectors';
 import { deleteAvatarSuccess, deleteAvatarError } from '../actions';
 
-function* deleteAvatar() {
+export function* deleteAvatar() {
   const user = yield select(makeSelectUser());
   const requestURL = `/v1/users/${user.id}/avatars`;
 
   try {
     const {
       data: { data },
-    } = yield axios.delete(requestURL);
+    } = yield call(axios.delete, requestURL);
 
     const mappedUser = mapCurrentUser(data);
     yield call(LocalStorageService.updateState, mappedUser);
@@ -29,7 +29,7 @@ function* deleteAvatar() {
         id: DELETE_AVATAR_ERROR,
       }),
     );
-    yield put(deleteAvatarError(error));
+    yield put(deleteAvatarError());
   }
 }
 

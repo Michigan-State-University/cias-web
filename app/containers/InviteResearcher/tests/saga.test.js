@@ -4,6 +4,7 @@ import { takeLatest, put } from 'redux-saga/effects';
 import { Roles } from 'models/User/UserRoles';
 import { addUserToList } from 'global/reducers/userList';
 import { defaultTimeZone } from 'utils/timezones';
+import { formatMessage } from 'utils/intlOutsideReact';
 
 import messages from '../messages';
 import {
@@ -13,9 +14,7 @@ import {
   INVITE_RESEARCHER_REQUEST,
   INVITE_RESEARCHER_SUCCESS,
 } from '../constants';
-import { formatMessage } from '../../../utils/intlOutsideReact';
 import {
-  // cancelInvitationError,
   cancelInvitationSuccess,
   getInvitationsError,
   getInvitationsSuccess,

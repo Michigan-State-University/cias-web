@@ -32,7 +32,7 @@ const userListReducer = (state = initialState, { type, payload }) =>
   produce(state, draft => {
     switch (type) {
       case FETCH_USERS:
-        if (isEmpty(draft.problems)) draft.usersLoading = true;
+        if (isEmpty(state.users)) draft.usersLoading = true;
         draft.usersError = null;
         break;
       case FETCH_USERS_SUCCESS:

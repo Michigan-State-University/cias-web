@@ -47,15 +47,13 @@ export const changeEmailError = error =>
 export const addAvatarRequest = data => actionBuilder(ADD_AVATAR_REQUEST, data);
 export const addAvatarSuccess = user =>
   actionBuilder(ADD_AVATAR_SUCCESS, { user });
-export const addAvatarError = error =>
-  actionBuilder(ADD_AVATAR_ERROR, { error });
+export const addAvatarError = () => actionBuilder(ADD_AVATAR_ERROR, {});
 
 export const deleteAvatarRequest = () =>
   actionBuilder(DELETE_AVATAR_REQUEST, {});
 export const deleteAvatarSuccess = user =>
   actionBuilder(DELETE_AVATAR_SUCCESS, { user });
-export const deleteAvatarError = error =>
-  actionBuilder(DELETE_AVATAR_ERROR, { error });
+export const deleteAvatarError = () => actionBuilder(DELETE_AVATAR_ERROR, {});
 
 export const changeErrorStatus = (error, value) =>
   actionBuilder(CHANGE_ERROR_STATUS, { error, value });

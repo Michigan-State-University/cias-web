@@ -10,13 +10,13 @@ import { makeSelectUser } from '../selectors';
 import { editUserSuccess, editUserError } from '../actions';
 import { EDIT_USER_REQUEST, EDIT_USER_ERROR } from '../constants';
 
-function* editUser({ payload }) {
+export function* editUser({ payload }) {
   const user = yield select(makeSelectUser());
   const requestURL = `v1/users/${user.id}`;
 
   const userData = objectKeysToSnakeCase(payload.user);
   try {
-    const { data } = yield axios.put(requestURL, {
+    const { data } = yield call(axios.put, requestURL, {
       user: userData,
     });
     const mappedUser = mapCurrentUserWithoutAttributes(data);

@@ -31,7 +31,7 @@ import {
 import {
   fetchProblemsRequest,
   makeSelectProblemsState,
-  problemsRedcuer,
+  problemsReducer,
   fetchProblemsSaga,
 } from 'global/reducers/problems';
 
@@ -46,7 +46,7 @@ export function ProblemPage({
   createProblemRequest: createProblem,
   createProblemLoading,
 }) {
-  useInjectReducer({ key: 'problems', reducer: problemsRedcuer });
+  useInjectReducer({ key: 'problems', reducer: problemsReducer });
   useInjectSaga({ key: 'fetchProblems', saga: fetchProblemsSaga });
   useInjectSaga({ key: 'createProblem', saga: createProblemSaga });
 

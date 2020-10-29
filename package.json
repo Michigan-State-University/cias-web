@@ -175,6 +175,7 @@
     "react-app-polyfill": "0.2.2",
     "react-test-renderer": "16.8.6",
     "react-testing-library": "6.1.2",
+    "redux-saga-test-plan": "^4.0.1",
     "rimraf": "2.6.3",
     "shelljs": "^0.8.3",
     "style-loader": "0.23.1",

@@ -47,7 +47,7 @@ export const authReducer = (state = initialState, { type, payload }) =>
     switch (type) {
       case LOG_IN_USER:
         draft.user = payload.user;
-        draft.cache.user = draft.user;
+        draft.cache.user = state.user;
         break;
       case LOG_OUT:
         draft.user = null;
@@ -61,10 +61,10 @@ export const authReducer = (state = initialState, { type, payload }) =>
         };
         break;
       case EDIT_USER_SUCCESS:
-        draft.cache.user = draft.user;
+        draft.cache.user = state.user;
         break;
       case EDIT_USER_ERROR:
-        draft.user = draft.cache.user;
+        draft.user = state.cache.user;
         break;
 
       case CHANGE_PASSWORD_REQUEST:
@@ -99,10 +99,10 @@ export const authReducer = (state = initialState, { type, payload }) =>
         break;
       case ADD_AVATAR_SUCCESS:
         draft.user = payload.user;
-        draft.cache.user = draft.user;
+        draft.cache.user = state.user;
         break;
       case ADD_AVATAR_ERROR:
-        draft.user = draft.cache.user;
+        draft.user = state.cache.user;
         break;
 
       case DELETE_AVATAR_REQUEST:
@@ -110,7 +110,7 @@ export const authReducer = (state = initialState, { type, payload }) =>
         break;
       case DELETE_AVATAR_SUCCESS:
         draft.user = payload.user;
-        draft.cache.user = draft.user;
+        draft.cache.user = state.user;
         break;
       case DELETE_AVATAR_ERROR:
         draft.user = draft.cache.user;

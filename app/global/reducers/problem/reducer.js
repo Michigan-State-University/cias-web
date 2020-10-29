@@ -145,15 +145,13 @@ export const problemReducer = (state = initialState, action) =>
         draft.currentInterventionIndex = action.payload.index;
         break;
       case UPDATE_INTERVENTION_SETTINGS: {
-        const interventionIndex = draft.problem.interventions.findIndex(
+        const interventionIndex = state.problem.interventions.findIndex(
           intervention =>
             intervention.id === action.payload.data.interventionId,
         );
-
         if (interventionIndex > -1) {
           draft.currentInterventionIndex = interventionIndex;
           draft.loaders.editProblem = true;
-
           draft.problem.interventions[interventionIndex] = {
             ...interventionSettingsReducer(
               draft.problem.interventions[interventionIndex],
@@ -164,7 +162,7 @@ export const problemReducer = (state = initialState, action) =>
         break;
       }
       case REORDER_INTERVENTION_LIST_SUCCESS:
-        draft.cache.problem = draft.problem;
+        draft.cache.problem = state.problem;
         break;
       case REORDER_INTERVENTION_LIST_ERROR:
         draft.problem = state.cache.problem;
@@ -244,7 +242,10 @@ export const problemReducer = (state = initialState, action) =>
         draft.loaders.fetchInterventionEmailsLoading = false;
         break;
 
-      // intervention invitation
+      case FETCH_INTERVENTION_EMAILS_ERROR:
+        draft.loaders.fetchInterventionEmailsLoading = false;
+        draft.errors.fetchInterventionEmailsError = action.payload.error;
+        break;
 
       case SEND_INTERVENTION_INVITE_REQUEST: {
         const { emails: payloadEmails, interventionId } = action.payload;
@@ -282,7 +283,7 @@ export const problemReducer = (state = initialState, action) =>
         draft.loaders.sendInterventionLoading = false;
         draft.loaders.interventionEmailLoading =
           initialState.loaders.interventionEmailLoading;
-        draft.problem = draft.cache.problem;
+        draft.problem = state.cache.problem;
         break;
 
       case RESEND_INTERVENTION_INVITE_REQUEST:
@@ -290,11 +291,6 @@ export const problemReducer = (state = initialState, action) =>
         draft.loaders.interventionEmailLoading = {
           ...action.payload,
         };
-        break;
-
-      case FETCH_INTERVENTION_EMAILS_ERROR:
-        draft.loaders.fetchInterventionEmailsLoading = false;
-        draft.errors.fetchInterventionEmailsError = action.payload.error;
         break;
     }
   });

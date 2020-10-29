@@ -5,7 +5,7 @@ import LocalStorageService from 'utils/localStorageService';
 
 import { LOG_OUT } from '../constants';
 
-function* logOut() {
+export function* logOut() {
   yield call(LocalStorageService.clearHeaders);
   yield call(LocalStorageService.clearState);
 

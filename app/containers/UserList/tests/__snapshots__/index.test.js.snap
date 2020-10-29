@@ -364,16 +364,6 @@ exports[`<UserList /> Should render and match the snapshot 1`] = `
               </tr>
             </tbody>
           </table>
-          <div
-            class="styled__TableLoader-x75ncs-1 cqZHIf"
-          >
-            <div
-              class="styled__StyledSpinner-d123q3-0 hXQJFy"
-              color="#C866EA"
-              size="100"
-              width="6"
-            />
-          </div>
         </div>
         <div
           class="Row-x1o3ru-0 hxTBae"

@@ -11,7 +11,7 @@ import { ADD_AVATAR_REQUEST, ADD_AVATAR_ERROR } from '../constants';
 import { makeSelectUser } from '../selectors';
 import { addAvatarSuccess, addAvatarError } from '../actions';
 
-function* addAvatar({ payload: { image, imageUrl } }) {
+export function* addAvatar({ payload: { image, imageUrl } }) {
   const user = yield select(makeSelectUser());
   const requestURL = `/v1/users/${user.id}/avatars`;
 
@@ -21,12 +21,11 @@ function* addAvatar({ payload: { image, imageUrl } }) {
   try {
     const {
       data: { data },
-    } = yield axios.post(requestURL, formData, {
+    } = yield call(axios.post, requestURL, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
-
     const mappedUser = mapCurrentUser(data);
     yield call(LocalStorageService.updateState, mappedUser);
     yield put(addAvatarSuccess(mappedUser));
@@ -37,7 +36,7 @@ function* addAvatar({ payload: { image, imageUrl } }) {
         id: ADD_AVATAR_ERROR,
       }),
     );
-    yield put(addAvatarError(error));
+    yield put(addAvatarError());
   }
 }
 
