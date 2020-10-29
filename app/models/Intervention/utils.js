@@ -22,6 +22,7 @@ import {
   gridQuestion,
   informationQuestion,
   feedbackQuestion,
+  finishQuestion,
 } from './QuestionTypes';
 
 /**
@@ -66,6 +67,7 @@ export const getAllVariables = (questions, options) => {
         break;
       case informationQuestion.id:
       case feedbackQuestion.id:
+      case finishQuestion.id:
         questionVariables = [];
         break;
       default:

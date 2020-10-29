@@ -12,6 +12,7 @@ import {
 } from 'models/Narrator/BlockTypes';
 import {
   feedbackQuestion,
+  finishQuestion,
   gridQuestion,
   informationQuestion,
   multiQuestion,
@@ -121,6 +122,10 @@ export default defineMessages({
     [feedbackQuestion.id]: {
       id: `${scope}.${feedbackQuestion.id}`,
       defaultMessage: 'Feedback',
+    },
+    [finishQuestion.id]: {
+      id: `${scope}.${finishQuestion.id}`,
+      defaultMessage: 'Finish',
     },
   },
   statuses: {

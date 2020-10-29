@@ -71,4 +71,5 @@ export const QuestionTypes = [
   informationQuestion,
   urlQuestion,
   feedbackQuestion,
+  finishQuestion,
 ];

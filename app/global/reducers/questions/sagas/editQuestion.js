@@ -13,6 +13,7 @@ import {
   informationQuestion,
   multiQuestion,
   feedbackQuestion,
+  finishQuestion,
 } from 'models/Intervention/QuestionTypes';
 import messages from '../messages';
 import {
@@ -55,7 +56,8 @@ function* editQuestion({ payload }) {
     });
   } else if (
     question.type === informationQuestion.id ||
-    question.type === feedbackQuestion.id
+    question.type === feedbackQuestion.id ||
+    question.type === finishQuestion.id
   ) {
     duplicates = false;
   } else {
