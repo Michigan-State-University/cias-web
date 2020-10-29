@@ -126,7 +126,7 @@ const QuestionListItem = ({
       border={`1px solid ${checked ? colors.lavender : colors.smokeWhite}`}
     >
       <Row justify="between">
-        {manage && (
+        {manage && !isFinishScreen && (
           <Column xs={1}>
             <Checkbox
               onClick={e => {

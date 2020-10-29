@@ -18,6 +18,7 @@ import arrowUp from 'assets/svg/arrow-up-black.svg';
 import reorderIcon from 'assets/svg/reorder-hand.svg';
 
 import { reorderScope } from 'models/Intervention/ReorderScope';
+import { FinishGroupType } from 'models/Intervention/GroupTypes';
 import QuestionListItem from '../../components/QuestionListItem';
 import { Spacer, DraggableContainer } from './styled';
 import messages from './messages';
@@ -39,9 +40,11 @@ const QuestionListGroup = ({
   formatMessage,
   notDnd,
 }) => {
-  const { title, id } = questionGroup;
+  const { title, id, type } = questionGroup;
   const [openCollapsable, setOpenCollapsable] = useState(true);
   const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
+
+  const isFinishGroup = type === FinishGroupType;
 
   useEffect(() => {
     setOpenCollapsable(true);
@@ -110,7 +113,7 @@ const QuestionListGroup = ({
         label={
           <Row align="center" justify="between" width="100%" mr={10}>
             <Box display="flex">
-              {manage && (
+              {manage && !isFinishGroup && (
                 <Checkbox
                   mr={2}
                   onClick={e => {
