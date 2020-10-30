@@ -39,6 +39,7 @@ const QuestionListGroup = ({
   index: groupIndex,
   formatMessage,
   noDnd,
+  groupIds,
 }) => {
   const { title, id, type } = questionGroup;
   const [openCollapsable, setOpenCollapsable] = useState(true);
@@ -61,6 +62,7 @@ const QuestionListGroup = ({
       {questions.map((question, index) => (
         <Row key={question.id} width="100%">
           <QuestionListItem
+            groupIds={groupIds}
             selectSlide={selectSlide}
             checked={selectedSlides.includes(question.id)}
             manage={manage}
@@ -177,6 +179,7 @@ QuestionListGroup.propTypes = {
   isDuringQuestionReorder: PropTypes.bool,
   index: PropTypes.number,
   noDnd: PropTypes.bool,
+  groupIds: PropTypes.array,
 };
 
 const mapStateToProps = (_, props) =>

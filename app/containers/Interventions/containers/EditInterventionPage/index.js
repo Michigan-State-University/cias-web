@@ -300,6 +300,7 @@ function EditInterventionPage({
 
   const finishGroup = groups.find(group => group.type === FinishGroupType);
   const filteredGroups = groups.filter(group => group.type !== FinishGroupType);
+  const groupIds = groups.map(({ id }) => id);
 
   return (
     <Fragment>
@@ -371,6 +372,7 @@ function EditInterventionPage({
                           isDuringQuestionReorder={isDuringQuestionReorder}
                           problemStatus={problemStatus}
                           formatMessage={formatMessage}
+                          groupIds={groupIds}
                         />
                       ))}
                       {provided.placeholder}

@@ -64,6 +64,7 @@ const QuestionListItem = ({
   problemStatus,
   disabled,
   noDnd,
+  groupIds,
 }) => {
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
@@ -84,7 +85,7 @@ const QuestionListItem = ({
   const handleDelete = () => {
     const newIndex = getIndex(selectedQuestionIndex, questions.length);
     handleSelectClick(newIndex);
-    removeQuestion({ questionId: id, groupId });
+    removeQuestion({ questionId: id, groupId, groupIds });
   };
 
   const handleCopy = () => {
@@ -220,6 +221,7 @@ QuestionListItem.propTypes = {
   disabled: PropTypes.bool,
   problemStatus: PropTypes.string,
   noDnd: PropTypes.bool,
+  groupIds: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({

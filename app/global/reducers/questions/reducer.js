@@ -50,6 +50,9 @@ import {
   assignFromQuestionTTS,
   editQuestionSuccessCommon,
   editQuestionErrorCommon,
+  getNewQuestionIdInNextGroups,
+  getNewQuestionIdInsideGroup,
+  getNewQuestionIdInPreviousGroups,
 } from './utils';
 import { GROUP_QUESTIONS_SUCCESS } from '../questionGroups/constants';
 
@@ -240,11 +243,51 @@ export const questionsReducer = (state = initialState, action) =>
         draft.questions = state.cache.questions;
         break;
 
-      case DELETE_QUESTION_REQUEST:
+      case DELETE_QUESTION_REQUEST: {
+        const {
+          payload: { questionId, groupId, groupIds },
+        } = action;
+        const { questions } = state;
         draft.questions = draft.questions.filter(
-          question => question.id !== action.payload.questionId,
+          question => question.id !== questionId,
         );
+        const newIdInsideGroup = getNewQuestionIdInsideGroup(
+          questions,
+          groupId,
+          questionId,
+        );
+
+        if (newIdInsideGroup) {
+          draft.selectedQuestion = newIdInsideGroup;
+          return draft;
+        }
+
+        const groupIndex = groupIds.findIndex(index => index === groupId);
+
+        const previewGroupsQuestionId = getNewQuestionIdInPreviousGroups(
+          questions,
+          groupIndex,
+          groupIds,
+        );
+
+        if (previewGroupsQuestionId) {
+          draft.selectedQuestion = previewGroupsQuestionId;
+          return draft;
+        }
+
+        const nextGroupsQuestionId = getNewQuestionIdInNextGroups(
+          questions,
+          groupIndex,
+          groupIds,
+        );
+
+        if (nextGroupsQuestionId) {
+          draft.selectedQuestion = nextGroupsQuestionId;
+          return draft;
+        }
+
         break;
+      }
       case DELETE_QUESTION_SUCCESS:
         draft.cache.questions = draft.questions;
         break;
