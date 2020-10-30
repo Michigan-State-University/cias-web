@@ -380,7 +380,7 @@ function EditInterventionPage({
               </DragDropContext>
               {finishGroup && (
                 <QuestionListGroup
-                  notDnd
+                  noDnd
                   disabled={!editingPossible}
                   changeGroupName={changeGroupName}
                   checkSelectedGroup={checkSelectedGroup}

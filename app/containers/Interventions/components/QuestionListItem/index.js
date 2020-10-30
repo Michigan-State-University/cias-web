@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
 
 import cloneDeep from 'lodash/cloneDeep';
@@ -21,16 +21,16 @@ import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosit
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import {
-  selectQuestion,
-  deleteQuestionRequest,
   copyQuestionRequest,
+  deleteQuestionRequest,
+  selectQuestion,
 } from 'global/reducers/questions';
 import {
-  setQuestionSettings,
+  changeCurrentNarratorBlock,
   makeSelectQuestionSettingsVisibility,
   setAnimationStopPosition,
   setCharacterDraggable,
-  changeCurrentNarratorBlock,
+  setQuestionSettings,
 } from 'global/reducers/localState';
 
 import StyledCircle from 'components/Circle/StyledCircle';
@@ -41,7 +41,7 @@ import {
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
 import VariableInput from '../QuestionDetails/VariableInput';
-import { ToggleableBox, ClampedTitle } from './styled';
+import { ClampedTitle, ToggleableBox } from './styled';
 import messages from './messages';
 import getIndex from './utils';
 
@@ -63,11 +63,10 @@ const QuestionListItem = ({
   manage,
   problemStatus,
   disabled,
-  notDnd,
+  noDnd,
 }) => {
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
-
   const isFinishScreen = type === finishQuestion.id;
 
   const handleSelectClick = newIndex => {
@@ -197,7 +196,7 @@ const QuestionListItem = ({
     </Draggable>
   );
 
-  return notDnd ? renderQuestion() : renderQuestionWithDnd();
+  return noDnd ? renderQuestion() : renderQuestionWithDnd();
 };
 
 QuestionListItem.propTypes = {
@@ -220,7 +219,7 @@ QuestionListItem.propTypes = {
   selectSlide: PropTypes.func,
   disabled: PropTypes.bool,
   problemStatus: PropTypes.string,
-  notDnd: PropTypes.bool,
+  noDnd: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

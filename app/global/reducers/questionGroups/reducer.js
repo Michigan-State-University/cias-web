@@ -1,5 +1,4 @@
 import produce from 'immer';
-import xor from 'lodash/xor';
 import sortBy from 'lodash/sortBy';
 
 import { insertAt, removeAt } from 'utils/arrayUtils';
@@ -89,20 +88,17 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
       case CLEAN_GROUPS: {
         const { questions } = payload;
 
-        const currentGroups = state.groups.map(group => group.id);
         const afterReorderRemainingGroups = questions.map(
           question => question.question_group_id,
         );
 
-        const toRemove = xor(currentGroups, afterReorderRemainingGroups);
-
-        draft.groups = sortBy(
-          state.groups.filter(
-            group =>
-              !toRemove.includes(group.id) || group.type === DefaultGroupType,
-          ),
-          'position',
+        const filteredGroups = state.groups.filter(
+          group =>
+            afterReorderRemainingGroups.includes(group.id) ||
+            group.type === DefaultGroupType,
         );
+
+        draft.groups = sortBy(filteredGroups, 'position');
 
         break;
       }
@@ -114,10 +110,10 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
           ...state.groups.find(group => group.id === groupId),
         };
 
-        removeAt(draft.groups, sourceIndex);
-        insertAt(draft.groups, destinationIndex, sourceGroup);
+        removeAt(state.groups, sourceIndex);
+        insertAt(state.groups, destinationIndex, sourceGroup);
 
-        draft.groups = draft.groups.map((group, index) => ({
+        draft.groups = state.groups.map((group, index) => ({
           ...group,
           position: ternary(
             group.type === FinishGroupType,

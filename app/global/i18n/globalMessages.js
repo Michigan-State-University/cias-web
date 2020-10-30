@@ -2,13 +2,13 @@ import { defineMessages } from 'react-intl';
 
 import {
   bodyAnimationType,
-  speechType,
-  reflectionType,
-  headAnimationType,
-  readQuestionBlockType,
-  pauseType,
   feedbackBlockType,
+  headAnimationType,
+  pauseType,
+  readQuestionBlockType,
   reflectionFormulaType,
+  reflectionType,
+  speechType,
 } from 'models/Narrator/BlockTypes';
 import {
   feedbackQuestion,

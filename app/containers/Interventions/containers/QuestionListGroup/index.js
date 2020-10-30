@@ -38,7 +38,7 @@ const QuestionListGroup = ({
   problemStatus,
   index: groupIndex,
   formatMessage,
-  notDnd,
+  noDnd,
 }) => {
   const { title, id, type } = questionGroup;
   const [openCollapsable, setOpenCollapsable] = useState(true);
@@ -53,7 +53,7 @@ const QuestionListGroup = ({
   const renderQuestions = providedGroupDroppable => (
     <DraggableContainer
       style={{ width: '100%' }}
-      {...!notDnd && {
+      {...!noDnd && {
         ref: providedGroupDroppable.innerRef,
         ...providedGroupDroppable.droppableProps,
       }}
@@ -71,11 +71,11 @@ const QuestionListGroup = ({
             interventionId={interventionId}
             disabled={editingPossible}
             problemStatus={problemStatus}
-            notDnd={notDnd}
+            noDnd={noDnd}
           />
         </Row>
       ))}
-      {!notDnd && providedGroupDroppable.placeholder}
+      {!noDnd && providedGroupDroppable.placeholder}
     </DraggableContainer>
   );
 
@@ -93,7 +93,7 @@ const QuestionListGroup = ({
     <Row
       width="100%"
       display="block"
-      {...(notDnd
+      {...(noDnd
         ? { key: `group-${id}` }
         : {
             ref: providedGroupDraggable.innerRef,
@@ -135,7 +135,7 @@ const QuestionListGroup = ({
                 onBlur={val => changeGroupName(val, interventionId, id)}
               />
             </Box>
-            {!notDnd && (
+            {!noDnd && (
               <Img
                 src={reorderIcon}
                 {...providedGroupDraggable.dragHandleProps}
@@ -144,7 +144,7 @@ const QuestionListGroup = ({
           </Row>
         }
       >
-        {notDnd ? renderQuestions() : renderQuestionsWithDnd()}
+        {noDnd ? renderQuestions() : renderQuestionsWithDnd()}
       </Collapse>
       <Spacer />
     </Row>
@@ -157,7 +157,7 @@ const QuestionListGroup = ({
   );
 
   if (questions.length === 0) return <></>;
-  return notDnd ? renderGroup() : renderGroupWithDnd();
+  return noDnd ? renderGroup() : renderGroupWithDnd();
 };
 
 QuestionListGroup.propTypes = {
@@ -176,7 +176,7 @@ QuestionListGroup.propTypes = {
   problemStatus: PropTypes.string,
   isDuringQuestionReorder: PropTypes.bool,
   index: PropTypes.number,
-  notDnd: PropTypes.bool,
+  noDnd: PropTypes.bool,
 };
 
 const mapStateToProps = (_, props) =>
