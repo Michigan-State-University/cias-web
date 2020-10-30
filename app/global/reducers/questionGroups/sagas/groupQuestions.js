@@ -5,7 +5,6 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
-import { ternary } from 'utils/ternary';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import { makeSelectQuestions } from 'global/reducers/questions/selectors';
@@ -35,11 +34,9 @@ function* groupQuestions({ payload: { questionIds, interventionId } }) {
     ({ type }) => type === DefaultGroupType,
   );
 
-  const newGroupPosition = ternary(
-    isNullOrUndefined(lastPlainGroup),
-    defaultGroup.position + 1,
-    lastPlainGroup.position + 1,
-  );
+  const newGroupPosition = isNullOrUndefined(lastPlainGroup)
+    ? defaultGroup.position + 1
+    : lastPlainGroup.position + 1;
 
   try {
     const { data: group } = yield axios.post(requestURL, {
