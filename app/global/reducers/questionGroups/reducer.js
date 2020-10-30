@@ -119,7 +119,11 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
 
         draft.groups = draft.groups.map((group, index) => ({
           ...group,
-          position: ternary(group.type === FinishGroupType, 9999, index + 1),
+          position: ternary(
+            group.type === FinishGroupType,
+            group.position,
+            index + 1,
+          ),
         }));
 
         break;
