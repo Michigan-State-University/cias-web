@@ -7,8 +7,9 @@ import {
 } from '../utils';
 
 describe('global/reducer/questions/utils', () => {
-  const testGroupId = 1;
-  const otherGroupId = 2;
+  const testGroupId = '1';
+  const otherGroupId = '2';
+  const invalidGroupId = '0';
   const q1 = new QuestionBuilder()
     .withQuestionGroupId(testGroupId)
     .withPosition(3)
@@ -70,7 +71,7 @@ describe('global/reducer/questions/utils', () => {
     it('should omit group without questions and  return last question from previous group', () => {
       const result = getNewQuestionIdInPreviousGroups(testArray, 1, [
         testGroupId,
-        0,
+        invalidGroupId,
         otherGroupId,
       ]);
       expect(result).toEqual(3);
@@ -95,7 +96,7 @@ describe('global/reducer/questions/utils', () => {
     it('should omit group without questions and  return first question from next group', () => {
       const result = getNewQuestionIdInNextGroups(testArray, 0, [
         otherGroupId,
-        0,
+        invalidGroupId,
         testGroupId,
       ]);
       expect(result).toEqual(5);
