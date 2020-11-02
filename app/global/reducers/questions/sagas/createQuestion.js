@@ -18,7 +18,6 @@ import {
 } from 'global/reducers/questionGroups';
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { ternary } from 'utils/ternary';
 
 import { makeSelectIntervention } from 'global/reducers/intervention';
 import { CREATE_QUESTION_REQUEST } from '../constants';
@@ -32,12 +31,11 @@ import { makeSelectQuestions, makeSelectSelectedQuestion } from '../selectors';
 function* createQuestion({ payload: { question } }) {
   const selectedQuestion = yield select(makeSelectSelectedQuestion());
   const defaultGroupId = yield select(makeSelectDefaultGroupId());
-  const groupId = ternary(
+  const groupId =
     isNullOrUndefined(selectedQuestion) ||
-      selectedQuestion.type === finishQuestion.id,
-    defaultGroupId,
-    selectedQuestion.question_group_id,
-  );
+    selectedQuestion.type === finishQuestion.id
+      ? defaultGroupId
+      : selectedQuestion.question_group_id;
 
   const questions = yield select(makeSelectQuestions());
   const {
