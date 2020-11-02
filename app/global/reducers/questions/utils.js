@@ -132,8 +132,8 @@ export const getNewQuestionIdInPreviousGroups = (
     if (newGroupQuestions.length !== 0) {
       return newGroupQuestions[newGroupQuestions.length - 1].id;
     }
-    return null;
   }
+  return null;
 };
 
 export const getNewQuestionIdInNextGroups = (
@@ -154,6 +154,6 @@ export const getNewQuestionIdInNextGroups = (
     if (newGroupQuestions.length !== 0) {
       return newGroupQuestions[0].id;
     }
-    return null;
   }
+  return null;
 };
