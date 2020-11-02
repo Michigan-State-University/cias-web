@@ -29,10 +29,6 @@ export default defineMessages({
     id: `${scope}.previewDisabled`,
     defaultMessage: 'Preview not possible',
   },
-  completeIntervention: {
-    id: `${scope}.completeIntervention`,
-    defaultMessage: 'Thanks for completing intervention',
-  },
   noEntranceHeader: {
     id: `${scope}.noEntranceText`,
     defaultMessage: `You can't open this session!`,

@@ -104,7 +104,7 @@ const answerInterventionPageReducer = (
 
         if (!isNullOrUndefined(payload.question)) {
           index = findQuestionIndex(
-            draft.interventionQuestions,
+            state.interventionQuestions,
             payload.question.id,
           );
 
