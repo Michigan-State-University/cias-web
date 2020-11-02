@@ -179,3 +179,9 @@ export const instantiateBlockForType = (type, endPosition, question) => {
       return undefined;
   }
 };
+
+export const NotAnswerableQuestions = [
+  informationQuestion.id,
+  finishQuestion.id,
+  feedbackQuestion.id,
+];

@@ -10,10 +10,7 @@ import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 
 import { makeSelectLocation } from 'containers/App/selectors';
 import { ternary } from 'utils/ternary';
-import {
-  informationQuestion,
-  feedbackQuestion,
-} from 'models/Intervention/QuestionTypes';
+import { NotAnswerableQuestions } from 'models/Intervention/utils';
 import { FETCH_QUESTIONS, SUBMIT_ANSWER_REQUEST } from './constants';
 import {
   fetchQuestionsFailure,
@@ -70,10 +67,7 @@ function* submitAnswersAsync({
       ];
     }
 
-    if (
-      questionType !== informationQuestion.id &&
-      questionType !== feedbackQuestion.id
-    ) {
+    if (!NotAnswerableQuestions.includes(questionType)) {
       const type = questionType.replace('Question', 'Answer');
       const {
         data: { data: branchingResult },
