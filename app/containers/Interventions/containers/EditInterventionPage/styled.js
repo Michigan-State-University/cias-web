@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors } from 'theme';
+import { colors, paddings } from 'theme';
 
 import Row from 'components/Row';
 
@@ -31,4 +31,17 @@ export const ShowListButton = styled.button`
   @media only screen and (min-width: 1400px) {
     display: none;
   }
+`;
+
+export const StyledQuestionTypeChooser = styled.div`
+  position: sticky;
+  bottom: 0;
+  padding: 10px;
+`;
+
+export const Spacer = styled.div`
+  height: 1px;
+  width: calc(100% + ${paddings.regular} * 2);
+  margin-left: -${paddings.regular};
+  background-color: ${colors.linkWater};
 `;

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Helmet } from 'react-helmet';
@@ -52,6 +52,7 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
   reorderQuestionListRequest,
+  makeSelectLoader,
 } from 'global/reducers/questions';
 import {
   reorderGroupListRequest,
@@ -77,6 +78,7 @@ import { canEdit } from 'models/Status/statusPermissions';
 import GroupActionButton from 'containers/Interventions/components/GroupActionButton';
 import { reorderScope } from 'models/Intervention/ReorderScope';
 import appStages from 'global/appStages';
+import scrollByRef from 'utils/scrollByRef';
 import editInterventionPageSaga from './saga';
 
 import EmptyInterventionPage from '../../components/EmptyInterventionPage';
@@ -86,7 +88,12 @@ import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 
 import messages from './messages';
 import { useLockEditInterventionPageScroll } from './utils';
-import { QuestionsRow, ShowListButton } from './styled';
+import {
+  QuestionsRow,
+  ShowListButton,
+  StyledQuestionTypeChooser,
+  Spacer,
+} from './styled';
 import QuestionListGroup from '../QuestionListGroup';
 
 function EditInterventionPage({
@@ -172,6 +179,8 @@ function EditInterventionPage({
 
   const editingPossible = canEdit(problemStatus);
 
+  const containerBottomRef = useRef(null);
+
   const hoverListProps = {
     onMouseEnter: () => setShowList(true),
     onMouseLeave: () => setShowList(false),
@@ -194,6 +203,10 @@ function EditInterventionPage({
       ),
       params.interventionId,
     );
+    scrollByRef(containerBottomRef, {
+      behavior: 'smooth',
+      block: 'end',
+    });
   };
 
   const onDragEnd = result => {
@@ -358,6 +371,7 @@ function EditInterventionPage({
                           isDuringQuestionReorder={isDuringQuestionReorder}
                           problemStatus={problemStatus}
                           formatMessage={formatMessage}
+                          lastItemRef={containerBottomRef}
                         />
                       ))}
                       {provided.placeholder}
@@ -365,11 +379,16 @@ function EditInterventionPage({
                   )}
                 </Droppable>
               </DragDropContext>
-              {editingPossible && (
-                <QuestionTypeChooser onClick={onCreateQuestion} />
-              )}
               <Row />
+              <Spacer />
             </Box>
+            {editingPossible && (
+              <StyledQuestionTypeChooser>
+                <QuestionTypeChooser onClick={onCreateQuestion} />
+              </StyledQuestionTypeChooser>
+            )}
+
+            <div ref={containerBottomRef} />
           </Box>
           <ShowListButton className="show-list-button" {...hoverListProps}>
             <Icon src={menu} alt="questions-list" />
@@ -417,6 +436,7 @@ const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionId(),
   interventionLoaders: makeSelectInterventionLoaders(),
+  createQuestionsLoader: makeSelectLoader('createQuestionLoading'),
   groups: makeSelectQuestionGroups(),
   problemStatus: makeSelectProblemStatus(),
   intervention: makeSelectIntervention(),

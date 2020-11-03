@@ -25,6 +25,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot 1`] = `
   padding-bottom: 14px;
   padding-right: 21px;
   padding-left: 21px;
+  background-color: rgba(255,255,255,1);
   cursor: pointer;
   border-radius: 5px;
   border: 1px dashed #B0BAC9;
@@ -143,6 +144,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   padding-bottom: 14px;
   padding-right: 21px;
   padding-left: 21px;
+  background-color: rgba(255,255,255,1);
   cursor: pointer;
   border-radius: 5px;
   border: 1px dashed #B0BAC9;

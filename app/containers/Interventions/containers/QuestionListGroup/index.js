@@ -19,7 +19,7 @@ import reorderIcon from 'assets/svg/reorder-hand.svg';
 
 import { reorderScope } from 'models/Intervention/ReorderScope';
 import QuestionListItem from '../../components/QuestionListItem';
-import { Spacer, DraggableContainer } from './styled';
+import { DraggableContainer } from './styled';
 import messages from './messages';
 
 const QuestionListGroup = ({
@@ -130,7 +130,6 @@ const QuestionListGroup = ({
               )}
             </Droppable>
           </Collapse>
-          <Spacer />
         </Row>
       )}
     </Draggable>

@@ -11,6 +11,7 @@ import messages from './messages';
 
 const DefaultButtonComponent = React.forwardRef(({ onClick }, ref) => (
   <HoverableBox
+    bg={colors.white}
     px={21}
     py={14}
     onClick={onClick}
