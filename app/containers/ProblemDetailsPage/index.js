@@ -4,6 +4,7 @@
  *
  */
 import React, { useLayoutEffect, useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -265,6 +266,9 @@ export function ProblemDetailsPage({
 
   return (
     <Box height="100%" width="100%" padding="60px 160px">
+      <Helmet>
+        <title>{name}</title>
+      </Helmet>
       <Modal
         title={
           <H3

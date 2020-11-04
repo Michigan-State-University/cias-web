@@ -117,7 +117,7 @@ const RenderQuestionDetails = ({
               settings={settings}
             />
             <Row justify="center" width="100%">
-              <AppContainer $width="100%">
+              <AppContainer disablePageTitle $width="100%">
                 <Row width="100%" mt={5} height={30} />
                 {!isNarratorTabOrEditNotPossible && (
                   <>

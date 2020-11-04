@@ -40,7 +40,7 @@ const SettingsInterventionPage = ({
   return (
     <Fragment>
       <Helmet>
-        <title>{formatMessage(messages.pageTitle)}</title>
+        <title>{formatMessage(messages.pageTitle, { name })}</title>
       </Helmet>
       <Box
         width="100%"

@@ -3,10 +3,6 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.EditInterventionPage';
 
 export default defineMessages({
-  pageTitle: {
-    id: `${scope}.pageTitle`,
-    defaultMessage: 'e-Intervention New',
-  },
   newQuestionTitle: {
     id: `${scope}.newQuestionMessage`,
     defaultMessage: '<h1>Enter title here</h1>',

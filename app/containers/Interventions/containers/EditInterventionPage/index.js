@@ -114,7 +114,7 @@ function EditInterventionPage({
   groups,
   changeGroupName,
   getQuestionGroups,
-  intervention: { id: interventionId },
+  intervention: { id: interventionId, name: interventionName },
 }) {
   useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
 
@@ -304,7 +304,7 @@ function EditInterventionPage({
   return (
     <Fragment>
       <Helmet>
-        <title>{formatMessage(messages.pageTitle)}</title>
+        <title>{interventionName}</title>
       </Helmet>
       <Modal
         title={formatMessage(messages.modalTitle)}
