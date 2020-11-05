@@ -52,12 +52,10 @@ export const getNarratorPositionForANewBlock = (
   }
 
   // find a position in previous questions because it is a new question
-  return (
-    getNarratorPositionFromPreviousGroups(
-      questionWithNewBlock,
-      groupIds,
-      allQuestions,
-    ) || elements.characterInitialPosition
+  return getNarratorPositionFromPreviousGroups(
+    questionWithNewBlock,
+    groupIds,
+    allQuestions,
   );
 };
 
@@ -81,12 +79,10 @@ export const getNarratorPositionWhenQuestionIsChanged = (
   if (blocks[0]) return blocks[0].endPosition;
 
   // find a position in previous questions because question does not have blocks
-  return (
-    getNarratorPositionFromPreviousGroups(
-      newQuestion,
-      groupIds,
-      allQuestions,
-    ) || elements.characterInitialPosition
+  return getNarratorPositionFromPreviousGroups(
+    newQuestion,
+    groupIds,
+    allQuestions,
   );
 };
 
@@ -118,12 +114,10 @@ export const getNarratorPositionWhenBlockIsRemoved = (
 
   // check if this is the first block in this question
   if (deletedIndex === 0 && blocks.length === 0) {
-    return (
-      getNarratorPositionFromPreviousGroups(
-        questionWithRemovedBlock,
-        groupIds,
-        allQuestions,
-      ) || elements.characterInitialPosition
+    return getNarratorPositionFromPreviousGroups(
+      questionWithRemovedBlock,
+      groupIds,
+      allQuestions,
     );
   }
 
@@ -146,17 +140,19 @@ const getNarratorPositionFromPreviousGroups = (
       questions,
       currentGroupId,
     );
+    const questionToStartFromIndex = groupQuestions.findIndex(
+      ({ id }) => id === questionId,
+    );
     const posInGroup = findLastPositionInPreviousQuestions(
       groupQuestions,
-      currentGroupId === groupId &&
-        groupQuestions.findIndex(({ id }) => id === questionId) !== -1
-        ? groupQuestions.findIndex(({ id }) => id === questionId)
+      currentGroupId === groupId && questionToStartFromIndex !== -1
+        ? questionToStartFromIndex
         : groupQuestions.length,
       null,
     );
     if (posInGroup) return posInGroup;
   }
-  return null;
+  return elements.characterInitialPosition;
 };
 
 export const getNarratorPositionWhenQuestionIsAdded = (
@@ -170,5 +166,5 @@ export const getNarratorPositionWhenQuestionIsAdded = (
     groupIds,
     questions,
   );
-  return animationPosition || elements.characterInitialPosition;
+  return animationPosition;
 };

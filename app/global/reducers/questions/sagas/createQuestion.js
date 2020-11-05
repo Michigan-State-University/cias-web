@@ -81,7 +81,6 @@ function* createQuestion({ payload: { question } }) {
         }),
       );
   } catch (error) {
-    console.log(error);
     yield put(createQuestionError(error));
   }
 }
