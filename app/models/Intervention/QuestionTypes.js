@@ -61,6 +61,8 @@ export const finishQuestion = new QuestionType(
   colors.brightGreen,
 );
 
+export const questionType = 'Question::';
+
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,

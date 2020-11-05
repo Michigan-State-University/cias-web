@@ -16,7 +16,7 @@ const QuestionListItem = ({
   target,
   index,
   selectedQuestionId,
-  question: { id, subtitle },
+  question: { id, subtitle, type },
 }) => {
   const canSelectQuestion = questionId => selectedQuestionId !== questionId;
 
@@ -26,8 +26,9 @@ const QuestionListItem = ({
       key={`${selectedQuestionId}-select-target-question-${index}`}
       px={10}
       mt={20}
-      onClick={() => canSelectQuestion(id) && onClick({ type: 'Question', id })}
+      onClick={() => canSelectQuestion(id) && onClick({ type, id })}
       clickable={canSelectQuestion(id)}
+      width="100%"
     >
       <Img src={target.id === id ? webpageSelected : webpage} mr={10} />
       <Box maxWidth={230}>
@@ -49,6 +50,7 @@ QuestionListItem.propTypes = {
   question: PropTypes.shape({
     id: PropTypes.string,
     subtitle: PropTypes.string,
+    type: PropTypes.string,
   }),
 };
 
