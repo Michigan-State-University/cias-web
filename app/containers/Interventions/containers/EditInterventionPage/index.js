@@ -397,6 +397,7 @@ function EditInterventionPage({
                   isDuringQuestionReorder={isDuringQuestionReorder}
                   problemStatus={problemStatus}
                   formatMessage={formatMessage}
+                  groupIds={groupIds}
                 />
               )}
               <Row />
