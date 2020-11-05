@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { error as showError } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -11,10 +11,10 @@ import {
 import { reorderSessionsSuccess, reorderSessionsError } from '../actions';
 import messages from '../messages';
 
-function* reorderSessions({ payload: { problemId, reorderedList } }) {
+export function* reorderSessions({ payload: { problemId, reorderedList } }) {
   const requestURL = `v1/problems/${problemId}/interventions/position`;
   try {
-    yield axios.patch(requestURL, {
+    yield call(axios.patch, requestURL, {
       intervention: {
         position: reorderedList.map(({ id, position }) => ({ id, position })),
       },

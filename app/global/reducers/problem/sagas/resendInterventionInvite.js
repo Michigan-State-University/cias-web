@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { info as showInfo, error as showError } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -10,10 +10,10 @@ import {
 import { RESEND_INTERVENTION_INVITE_REQUEST } from '../constants';
 import messages from '../messages';
 
-function* resendInterventionInvite({ payload: { id, interventionId } }) {
+export function* resendInterventionInvite({ payload: { id, interventionId } }) {
   const requestURL = `v1/interventions/${interventionId}/invitations/${id}/resend`;
   try {
-    yield axios.get(requestURL);
+    yield call(axios.get, requestURL);
     yield put(sendInterventionInviteSuccess());
     yield put(showInfo(formatMessage(messages.resendInviteSuccess)));
   } catch (error) {

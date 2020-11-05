@@ -117,7 +117,9 @@ function BranchingLayout({
               const isChooserOpened = index === targetChooserOpen;
               return (
                 <Row
-                  key={`${id}-settings-branching-case-${index}`}
+                  key={`${id}-settings-branching-case-${index}-${
+                    pattern.match
+                  }`}
                   align="center"
                   mb={8}
                 >

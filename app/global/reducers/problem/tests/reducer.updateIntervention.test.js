@@ -2,7 +2,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 
 import { actionBuilder } from 'utils/actionBuilder';
-import { UPDATE_INTERVENTION_SETTINGS } from '../constants';
+import { UPDATE_INTERVENTION_SETTINGS_REQUEST } from '../constants';
 import {
   UPDATE_FORMULA,
   CHANGE_FORMULA_STATUS,
@@ -18,7 +18,7 @@ import { initialState, problemReducer } from '../reducer';
 
 describe('problem reducer', () => {
   const createAction = (type, dataValues) =>
-    actionBuilder(UPDATE_INTERVENTION_SETTINGS, {
+    actionBuilder(UPDATE_INTERVENTION_SETTINGS_REQUEST, {
       type,
       data: {
         ...dataValues,
@@ -58,7 +58,7 @@ describe('problem reducer', () => {
     },
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS -> UPDATE_FORMULA', () => {
+  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> UPDATE_FORMULA', () => {
     const payloadValue = 'test';
 
     const intervention = createIntervention('formula.payload', payloadValue);
@@ -73,7 +73,7 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS -> CHANGE_FORMULA_STATUS', () => {
+  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> CHANGE_FORMULA_STATUS', () => {
     const payloadValue = 'test formula';
 
     const intervention = createIntervention('settings.formula', payloadValue);
@@ -87,7 +87,7 @@ describe('problem reducer', () => {
       ),
     ).toEqual(updateState);
   });
-  it('UPDATE_INTERVENTION_SETTINGS -> ADD_FORMULA_CASE', () => {
+  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> ADD_FORMULA_CASE', () => {
     const intervention = createIntervention('formula.patterns', [
       mockPattern,
       {
@@ -106,7 +106,7 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS -> UPDATE_FORMULA_CASE', () => {
+  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> UPDATE_FORMULA_CASE', () => {
     const editedPattern = {
       match: 'edited-match',
       target: { type: 'Intervention', id: 'edited-id' },
@@ -125,7 +125,7 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS -> REMOVE_FORMULA_CASE', () => {
+  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> REMOVE_FORMULA_CASE', () => {
     const intervention = createIntervention('formula.patterns', []);
     const updateState = mockState(intervention);
     set(updateState, 'loaders.editProblem', true);
@@ -138,7 +138,7 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS -> CHANGE_SCHEDULING_TYPE', () => {
+  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> CHANGE_SCHEDULING_TYPE', () => {
     const scheduleType = SCHEDULE_OPTIONS.daysAfter;
     const intervention = createIntervention('schedule', scheduleType);
     const updateState = mockState(intervention);
@@ -152,7 +152,7 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS -> UPDATE_SCHEDULING_PAYLOAD', () => {
+  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> UPDATE_SCHEDULING_PAYLOAD', () => {
     const schedulePayload = 10;
     const intervention = createIntervention(
       'schedule_payload',
@@ -169,7 +169,7 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS -> UPDATE_SCHEDULING_DATE', () => {
+  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> UPDATE_SCHEDULING_DATE', () => {
     const scheduleDate = new Date().toDateString();
     const intervention = createIntervention('schedule_at', scheduleDate);
     const updateState = mockState(intervention);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { info as showInfo, error as showError } from 'react-toastify-redux';
 import get from 'lodash/get';
 
@@ -9,12 +9,12 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import { sendProblemCsvSuccess, sendProblemCsvError } from '../actions';
 import messages from '../messages';
 
-function* sendProblemCsv({ payload: { id } }) {
+export function* sendProblemCsv({ payload: { id } }) {
   const requestURL = `v1/problems/${id}/answers.csv`;
   try {
     const {
       data: { message },
-    } = yield axios.get(requestURL);
+    } = yield call(axios.get, requestURL);
     yield put(sendProblemCsvSuccess(message));
     yield put(showInfo(message));
   } catch (error) {

@@ -1,4 +1,4 @@
-import { put, takeLatest, select } from 'redux-saga/effects';
+import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { EDIT_INTERVENTION_REQUEST } from '../constants';
@@ -7,7 +7,7 @@ import { editInterventionSuccess, editInterventionError } from '../actions';
 
 import { makeSelectIntervention } from '../selectors';
 
-function* editIntervention() {
+export function* editIntervention() {
   const intervention = yield select(makeSelectIntervention());
   const requestURL = `v1/problems/${intervention.problem_id}/interventions/${
     intervention.id
@@ -16,7 +16,7 @@ function* editIntervention() {
   try {
     const {
       data: { data },
-    } = yield axios.put(requestURL, { intervention });
+    } = yield call(axios.put, requestURL, { intervention });
 
     yield put(
       editInterventionSuccess({

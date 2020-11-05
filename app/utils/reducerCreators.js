@@ -1,6 +1,10 @@
+import { ids } from 'containers/SettingsPanel/utils';
+
 export const createIntervention = (id = 0) => ({
   id: `intervention-test-${id}`,
   emails: null,
+  name: `intervention-test-${id}`,
+  position: id,
 });
 
 export const createProblem = (index = 0) => ({
@@ -12,7 +16,7 @@ export const createProblem = (index = 0) => ({
       email: `user-test-${index}@user.com`,
     },
   ],
-  shared_to: 'anyone',
+  shared_to: ids.anyoneWithTheLink,
   interventions: [createIntervention(`${index}`)],
 });
 

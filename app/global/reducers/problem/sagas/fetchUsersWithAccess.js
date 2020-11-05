@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest, select } from 'redux-saga/effects';
+import { put, takeLatest, select, call } from 'redux-saga/effects';
 
 import { mapAccessToStateObject } from 'utils/mapResponseObjects';
 import { makeSelectProblem } from 'global/reducers/problem/selectors';
@@ -9,7 +9,7 @@ import {
   fetchUsersWithAccessFailure,
 } from '../actions';
 
-function* fetchUsersWithAccess({ payload: { id } }) {
+export function* fetchUsersWithAccess({ payload: { id } }) {
   const problem = yield select(makeSelectProblem());
 
   if (problem && problem.id === id) {
@@ -17,7 +17,7 @@ function* fetchUsersWithAccess({ payload: { id } }) {
     try {
       const {
         data: { user_interventions: users },
-      } = yield axios.get(requestURL);
+      } = yield call(axios.get, requestURL);
       const accessMapped = users.map(mapAccessToStateObject);
       yield put(fetchUsersWithAccessSuccess(accessMapped));
     } catch (error) {

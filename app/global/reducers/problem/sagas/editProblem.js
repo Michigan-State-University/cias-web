@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest, select } from 'redux-saga/effects';
+import { put, takeLatest, select, call } from 'redux-saga/effects';
 import { error as showError } from 'react-toastify-redux';
 
 import globalMessages from 'global/i18n/globalMessages';
@@ -10,14 +10,14 @@ import { makeSelectProblem } from '../selectors';
 import { editProblemSuccess } from '../actions';
 import { EDIT_PROBLEM_REQUEST, EDIT_PROBLEM_ERROR } from '../constants';
 
-function* editProblem() {
+export function* editProblem() {
   const problem = yield select(makeSelectProblem());
   const requestURL = `v1/problems/${problem.id}`;
 
   try {
     const {
       data: { data },
-    } = yield axios.patch(requestURL, { problem });
+    } = yield call(axios.patch, requestURL, { problem });
     const mappedData = defaultMapper(data);
     yield put(editProblemSuccess({ ...problem, ...mappedData }));
   } catch (error) {

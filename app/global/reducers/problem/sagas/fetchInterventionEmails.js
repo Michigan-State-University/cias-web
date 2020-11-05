@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { makeSelectProblem } from 'global/reducers/problem/selectors';
-import { put, select, takeLatest } from 'redux-saga/effects';
+import { put, call, select, takeLatest } from 'redux-saga/effects';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import { FETCH_INTERVENTION_EMAILS_REQUEST } from '../constants';
@@ -9,7 +9,7 @@ import {
   fetchInterventionEmailsSuccess,
 } from '../actions';
 
-function* fetchInterventionEmails({ payload: { index } }) {
+export function* fetchInterventionEmails({ payload: { index } }) {
   const problem = yield select(makeSelectProblem());
   const intervention = problem.interventions[index];
   if (isNullOrUndefined(intervention)) return;
@@ -17,7 +17,7 @@ function* fetchInterventionEmails({ payload: { index } }) {
   try {
     const {
       data: { intervention_invitations: users },
-    } = yield axios.get(requestURL);
+    } = yield call(axios.get, requestURL);
     yield put(fetchInterventionEmailsSuccess(users, index));
   } catch (error) {
     yield put(fetchInterventionEmailsError(error));

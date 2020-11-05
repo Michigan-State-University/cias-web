@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { error as showError } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -11,12 +11,12 @@ import {
 import { enableUserAccessSuccess, enableUserAccessFailure } from '../actions';
 import messages from '../messages';
 
-function* enableUserAccess({ payload: { id, emails } }) {
+export function* enableUserAccess({ payload: { id, emails } }) {
   const requestURL = `v1/problems/${id}/users`;
   try {
     const {
       data: { user_interventions: users },
-    } = yield axios.post(requestURL, {
+    } = yield call(axios.post, requestURL, {
       user_intervention: {
         emails,
       },

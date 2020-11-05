@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { error as showError } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -10,10 +10,10 @@ import {
 import { revokeUserAccessSuccess, revokeUserAccessFailure } from '../actions';
 import messages from '../messages';
 
-function* revokeUserAccess({ payload: { problemId, userId } }) {
+export function* revokeUserAccess({ payload: { problemId, userId } }) {
   const requestURL = `v1/problems/${problemId}/users/${userId}`;
   try {
-    yield axios.delete(requestURL);
+    yield call(axios.delete, requestURL);
     yield put(revokeUserAccessSuccess(userId));
   } catch (error) {
     yield put(

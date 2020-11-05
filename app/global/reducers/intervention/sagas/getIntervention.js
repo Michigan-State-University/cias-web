@@ -1,4 +1,4 @@
-import { put, select, takeLatest } from 'redux-saga/effects';
+import { put, select, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
@@ -11,7 +11,7 @@ import {
 import { GET_INTERVENTION_REQUEST } from '../constants';
 import { getInterventionSuccess, getInterventionError } from '../actions';
 
-function* getIntervention({ payload: { interventionId, problemId } }) {
+export function* getIntervention({ payload: { interventionId, problemId } }) {
   const problem = yield select(makeSelectProblem());
 
   if (isNullOrUndefined(problem) || problem.id !== problemId)
@@ -22,7 +22,7 @@ function* getIntervention({ payload: { interventionId, problemId } }) {
   try {
     const {
       data: { data },
-    } = yield axios.get(requestURL);
+    } = yield call(axios.get, requestURL);
 
     yield put(getInterventionSuccess(defaultMapper(data)));
   } catch (error) {

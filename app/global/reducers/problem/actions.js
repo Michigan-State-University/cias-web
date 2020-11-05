@@ -15,7 +15,6 @@ import {
   COPY_INTERVENTION_SUCCESS,
   COPY_INTERVENTION_REQUEST,
   REORDER_INTERVENTION_LIST,
-  UPDATE_INTERVENTION_SETTINGS,
   CHANGE_CURRENT_INTERVENTION,
   REORDER_INTERVENTION_LIST_SUCCESS,
   REORDER_INTERVENTION_LIST_ERROR,
@@ -41,6 +40,9 @@ import {
   FETCH_INTERVENTION_EMAILS_REQUEST,
   FETCH_INTERVENTION_EMAILS_SUCCESS,
   FETCH_INTERVENTION_EMAILS_ERROR,
+  UPDATE_INTERVENTION_SETTINGS_REQUEST,
+  UPDATE_INTERVENTION_SETTINGS_SUCCESS,
+  UPDATE_INTERVENTION_SETTINGS_ERROR,
 } from './constants';
 
 export const fetchProblemRequest = id =>
@@ -83,7 +85,13 @@ export const reorderSessionsError = payload =>
   actionBuilder(REORDER_INTERVENTION_LIST_ERROR, payload);
 
 export const updateInterventionSettings = data =>
-  actionBuilder(UPDATE_INTERVENTION_SETTINGS, data);
+  actionBuilder(UPDATE_INTERVENTION_SETTINGS_REQUEST, data);
+
+export const updateInterventionSettingsSuccess = () =>
+  actionBuilder(UPDATE_INTERVENTION_SETTINGS_SUCCESS, {});
+
+export const updateInterventionSettingsError = () =>
+  actionBuilder(UPDATE_INTERVENTION_SETTINGS_ERROR, {});
 
 export const changeCurrentIntervention = index =>
   actionBuilder(CHANGE_CURRENT_INTERVENTION, { index });

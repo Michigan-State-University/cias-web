@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest } from 'redux-saga/effects';
 import { error as showError } from 'react-toastify-redux';
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -10,11 +10,11 @@ import {
   COPY_INTERVENTION_REQUEST,
 } from '../constants';
 
-function* copyIntervention({ payload: { interventionId } }) {
+export function* copyIntervention({ payload: { interventionId } }) {
   const requestURL = `v1/interventions/${interventionId}/clone`;
 
   try {
-    const response = yield axios.post(requestURL);
+    const response = yield call(axios.post, requestURL);
 
     const copiedInterventions = response.data.data;
 

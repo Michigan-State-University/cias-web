@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
@@ -6,13 +6,13 @@ import { CREATE_INTERVENTION_REQUEST } from '../constants';
 
 import { createInterventionSuccess, createInterventionError } from '../actions';
 
-function* createIntervention({ payload: { id, lastPosition } }) {
+export function* createIntervention({ payload: { id, lastPosition } }) {
   const requestURL = `v1/problems/${id}/interventions`;
 
   try {
     const {
       data: { data },
-    } = yield axios.post(requestURL, {
+    } = yield call(axios.post, requestURL, {
       intervention: {
         type: 'Intervention::Single',
         name: 'New Session',

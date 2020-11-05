@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, call, takeLatest } from 'redux-saga/effects';
 import { error as showError } from 'react-toastify-redux';
 
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -13,10 +13,10 @@ import {
 } from '../actions';
 import messages from '../messages';
 
-function* changeAccessSetting({ payload: { id, setting } }) {
+export function* changeAccessSetting({ payload: { id, setting } }) {
   const requestURL = `v1/problems/${id}`;
   try {
-    yield axios.patch(requestURL, { shared_to: setting });
+    yield call(axios.patch, requestURL, { shared_to: setting });
     yield put(changeAccessSettingSuccess());
   } catch (error) {
     yield put(

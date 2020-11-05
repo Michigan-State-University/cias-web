@@ -1,14 +1,17 @@
-import { put, takeLatest, select } from 'redux-saga/effects';
+import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { editProblemError } from '../actions';
-import { UPDATE_INTERVENTION_SETTINGS } from '../constants';
+import {
+  updateInterventionSettingsSuccess,
+  updateInterventionSettingsError,
+} from '../actions';
+import { UPDATE_INTERVENTION_SETTINGS_REQUEST } from '../constants';
 import {
   makeSelectCurrentInterventionIndex,
   makeSelectProblem,
 } from '../selectors';
 
-function* updateInterventionSettings() {
+export function* updateInterventionSettings() {
   const interventionIndex = yield select(makeSelectCurrentInterventionIndex());
   const problem = yield select(makeSelectProblem());
   const intervention = problem.interventions[interventionIndex];
@@ -17,12 +20,16 @@ function* updateInterventionSettings() {
   }`;
 
   try {
-    yield axios.put(requestURL, { intervention });
+    yield call(axios.put, requestURL, { intervention });
+    yield put(updateInterventionSettingsSuccess());
   } catch (error) {
-    yield put(editProblemError(error));
+    yield put(updateInterventionSettingsError());
   }
 }
 
 export default function* updateInterventionSettingsSaga() {
-  yield takeLatest(UPDATE_INTERVENTION_SETTINGS, updateInterventionSettings);
+  yield takeLatest(
+    UPDATE_INTERVENTION_SETTINGS_REQUEST,
+    updateInterventionSettings,
+  );
 }

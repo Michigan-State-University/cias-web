@@ -19,7 +19,9 @@ import {
   SEND_PROBLEM_CSV_ERROR,
   COPY_INTERVENTION_SUCCESS,
   REORDER_INTERVENTION_LIST,
-  UPDATE_INTERVENTION_SETTINGS,
+  UPDATE_INTERVENTION_SETTINGS_REQUEST,
+  UPDATE_INTERVENTION_SETTINGS_SUCCESS,
+  UPDATE_INTERVENTION_SETTINGS_ERROR,
   CHANGE_CURRENT_INTERVENTION,
   REORDER_INTERVENTION_LIST_SUCCESS,
   REORDER_INTERVENTION_LIST_ERROR,
@@ -144,7 +146,7 @@ export const problemReducer = (state = initialState, action) =>
       case CHANGE_CURRENT_INTERVENTION:
         draft.currentInterventionIndex = action.payload.index;
         break;
-      case UPDATE_INTERVENTION_SETTINGS: {
+      case UPDATE_INTERVENTION_SETTINGS_REQUEST: {
         const interventionIndex = state.problem.interventions.findIndex(
           intervention =>
             intervention.id === action.payload.data.interventionId,
@@ -161,6 +163,12 @@ export const problemReducer = (state = initialState, action) =>
         }
         break;
       }
+      case UPDATE_INTERVENTION_SETTINGS_SUCCESS:
+        draft.cache.problem = state.problem;
+        break;
+      case UPDATE_INTERVENTION_SETTINGS_ERROR:
+        draft.problem = state.cache.problem;
+        break;
       case REORDER_INTERVENTION_LIST_SUCCESS:
         draft.cache.problem = state.problem;
         break;
