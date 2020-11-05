@@ -23,6 +23,7 @@ import { htmlToPlainText } from 'utils/htmlToPlainText';
 import {
   copyQuestionRequest,
   deleteQuestionRequest,
+  makeSelectQuestions,
   selectQuestion,
 } from 'global/reducers/questions';
 import {
@@ -65,18 +66,20 @@ const QuestionListItem = ({
   disabled,
   noDnd,
   groupIds,
+  allQuestions,
 }) => {
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
   const isFinishScreen = type === finishQuestion.id;
 
-  const handleSelectClick = newIndex => {
+  const handleSelectClick = () => {
     setDraggable(false);
     if (selectedQuestionIndex !== id) {
       onSelect(id);
       const newPosition = getNarratorPositionWhenQuestionIsChanged(
-        questions,
-        newIndex,
+        allQuestions,
+        id,
+        groupIds,
       );
       setCharacterPosition(newPosition.x, newPosition.y);
     }
@@ -222,10 +225,12 @@ QuestionListItem.propTypes = {
   problemStatus: PropTypes.string,
   noDnd: PropTypes.bool,
   groupIds: PropTypes.array,
+  allQuestions: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
   settingsVisibility: makeSelectQuestionSettingsVisibility(),
+  allQuestions: makeSelectQuestions(),
 });
 
 const mapDispatchToProps = {

@@ -24,6 +24,7 @@ import {
   makeSelectCurrentNarratorBlockIndex,
 } from 'global/reducers/localState';
 
+import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
 import { feedbackBlockType } from 'models/Narrator/BlockTypes';
 import { getBlockColor, renderBlock } from '../utils';
 import { removeBlock, reorderNarratorBlocks } from '../../actions';
@@ -43,6 +44,7 @@ const WrappedAccordion = ({
   questions,
   questionId,
   disabled,
+  groupIds,
 }) => {
   const { voice, animation } = narrator.settings;
 
@@ -82,6 +84,7 @@ const WrappedAccordion = ({
       questionIndex,
       index,
       narratorBlockIndex,
+      groupIds,
     );
     setOffset(position.x, position.y);
   };
@@ -143,6 +146,7 @@ WrappedAccordion.propTypes = {
   questions: PropTypes.array,
   questionId: PropTypes.string,
   disabled: PropTypes.bool,
+  groupIds: PropTypes.array,
 };
 
 const mapDispatchToProps = {
@@ -159,6 +163,7 @@ const mapStateToProps = createStructuredSelector({
   narratorBlockIndex: makeSelectCurrentNarratorBlockIndex(),
   questions: makeSelectQuestions(),
   questionId: makeSelectSelectedQuestionId(),
+  groupIds: makeSelectQuestionGroupsIds(),
 });
 
 const withConnect = connect(

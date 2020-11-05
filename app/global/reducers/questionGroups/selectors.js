@@ -25,6 +25,12 @@ export const makeSelectDefaultGroupId = () =>
       substate.groups.find(({ type }) => type === DefaultGroupType).id,
   );
 
+export const makeSelectQuestionGroupsIds = () =>
+  createSelector(
+    selectQuestionGroups,
+    substate => substate.groups.map(({ id }) => id),
+  );
+
 export const makeSelectQuestionGroupsLoader = () =>
   createSelector(
     selectQuestionGroups,

@@ -30,10 +30,10 @@ export const updateNarratorSettings = (property, value) =>
     data: { property, value },
   });
 
-export const addBlock = (type, questionId) =>
+export const addBlock = (type, questionId, groupIds) =>
   updateQuestionSettings({
     type: ADD_BLOCK,
-    data: { type, questionId },
+    data: { type, questionId, groupIds },
   });
 
 export const removeBlock = (index, openedIndex) =>

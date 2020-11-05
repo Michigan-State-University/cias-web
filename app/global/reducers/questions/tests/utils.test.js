@@ -1,6 +1,5 @@
 import { QuestionBuilder } from 'models/Intervention/QuestionBuilder/QuestionBuilder';
 import {
-  findOrderedQuestionsByGroupId,
   getNewQuestionIdInNextGroups,
   getNewQuestionIdInPreviousGroups,
   getNewQuestionIdInsideGroup,
@@ -29,18 +28,6 @@ describe('global/reducer/questions/utils', () => {
     .withId(5);
   const testArray = [q1, q2, q3, q4, q5];
   const groupIds = [testGroupId, otherGroupId];
-
-  describe('findOrderedQuestionsByGroupId', () => {
-    it('Should filter all questions with different id and return ordered', () => {
-      const result = findOrderedQuestionsByGroupId(testArray, testGroupId);
-
-      expect(result).toHaveLength(4);
-      expect(result[0].position).toBe(1);
-      expect(result[1].position).toBe(2);
-      expect(result[2].position).toBe(3);
-      expect(result[3].position).toBe(4);
-    });
-  });
 
   describe('getNewQuestionIdInsideGroup', () => {
     it('should return null if there is only one question in group', () => {

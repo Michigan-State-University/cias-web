@@ -1,5 +1,4 @@
-import orderBy from 'lodash/orderBy';
-
+import findOrderedQuestionsByGroupId from 'utils/findOrderedQuestionsByGroupId';
 import {
   gridQuestion,
   textboxQuestion,
@@ -92,14 +91,6 @@ export const editQuestionErrorCommon = (draft, payload) => {
   if (cacheIndex > -1 && index > -1)
     draft.questions[index] = draft.cache.questions[cacheIndex];
 };
-
-export const findOrderedQuestionsByGroupId = (questions, groupId) =>
-  orderBy(
-    questions.filter(
-      ({ question_group_id: questionGroupId }) => questionGroupId === groupId,
-    ),
-    'position',
-  );
 
 export const getNewQuestionIdInsideGroup = (
   questions,

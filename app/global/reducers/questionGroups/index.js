@@ -15,6 +15,7 @@ export {
   makeSelectDefaultGroupId,
   makeSelectQuestionGroupsLoader,
   makeSelectGetQuestionGroupLoader,
+  makeSelectQuestionGroupsIds,
   makeSelectQuestionGroupsInterventionId,
 } from './selectors';
 export {

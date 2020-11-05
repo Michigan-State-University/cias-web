@@ -15,6 +15,7 @@ import { setAnimationStopPosition } from 'global/reducers/localState';
 import {
   makeSelectDefaultGroupId,
   createNewQuestionInGroup,
+  makeSelectQuestionGroups,
 } from 'global/reducers/questionGroups';
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -30,6 +31,8 @@ import { makeSelectQuestions, makeSelectSelectedQuestion } from '../selectors';
 
 function* createQuestion({ payload: { question } }) {
   const selectedQuestion = yield select(makeSelectSelectedQuestion());
+  const groups = yield select(makeSelectQuestionGroups());
+  const groupIds = groups.map(({ id }) => id);
   const defaultGroupId = yield select(makeSelectDefaultGroupId());
   const groupId =
     isNullOrUndefined(selectedQuestion) ||
@@ -55,14 +58,18 @@ function* createQuestion({ payload: { question } }) {
     yield put(createNewQuestionInGroup(createdQuestion, groupId));
     const position = getNarratorPositionWhenQuestionIsAdded(
       questions,
-      questions.length - 1,
-      0,
+      createdQuestion,
+      groupIds,
     );
     yield put(setAnimationStopPosition(position.x, position.y));
     yield put(
       updateQuestionSettings({
         type: ADD_BLOCK,
-        data: { type: readQuestionBlockType, questionId: newQuestionId },
+        data: {
+          type: readQuestionBlockType,
+          questionId: newQuestionId,
+          groupIds,
+        },
       }),
     );
 
@@ -74,6 +81,7 @@ function* createQuestion({ payload: { question } }) {
         }),
       );
   } catch (error) {
+    console.log(error);
     yield put(createQuestionError(error));
   }
 }
