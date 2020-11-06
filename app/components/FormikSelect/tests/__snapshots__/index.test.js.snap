@@ -3,16 +3,16 @@
 exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Column-sc-1n6divy-0 dfNUrc"
+    class="Column-sc-1n6divy-0 SJAYV"
   >
     <p
-      class="Text-sc-2lza2m-0 ggakK"
+      class="Text-sc-2lza2m-0 drfDFr"
       width="fit-content"
     >
       Label
     </p>
     <div
-      class="Box-sc-14m3exe-0 jmcBzp"
+      class="Box-sc-14m3exe-0 cidtM"
       data-testid="select"
     >
       <div
@@ -43,13 +43,13 @@ exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
                   autocorrect="off"
                   id="react-select-3-input"
                   spellcheck="false"
-                  style="box-sizing: content-box; width: 2px; border: 0px; font-size: inherit; opacity: 1; outline: 0; padding: 0px;"
+                  style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
                   tabindex="0"
                   type="text"
                   value=""
                 />
                 <div
-                  style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-size: inherit; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                  style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                 />
               </div>
             </div>
@@ -62,7 +62,7 @@ exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
               class=" css-tlfecz-indicatorContainer"
             >
               <img
-                class="Img-sc-1kfzr96-0 bprPpq"
+                class="Img-sc-1kfzr96-0 sgjBb"
                 src="IMAGE_MOCK"
                 transform=""
               />

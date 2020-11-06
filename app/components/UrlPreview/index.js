@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { getLinkPreview } from 'link-preview-js';
 
@@ -13,23 +13,20 @@ import Row from 'components/Row';
 import Text from 'components/Text';
 import Loader from 'components/Loader';
 import { colors, themeColors } from 'theme';
+import { useAsync } from 'utils/useAsync';
 import { ClampedText, Thumbnail, Url, ClampedTitle } from './styled';
+
+export const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 const UrlPreview = ({ link, handleClick }) => {
   const [linkData, setLinkData] = useState(null);
 
-  const proxy = 'https://cors-anywhere.herokuapp.com/';
+  const fetchData = async () =>
+    getLinkPreview(`${proxy}${link}`, {
+      imagesPropertyType: 'og',
+    });
 
-  useEffect(() => {
-    setLinkData(null);
-    const fetchData = async () => {
-      const data = await getLinkPreview(`${proxy}${link}`, {
-        imagesPropertyType: 'og',
-      });
-      setLinkData(data);
-    };
-    fetchData();
-  }, [link]);
+  useAsync(fetchData, data => setLinkData(data), { deps: [link] });
 
   const redirectToLink = () => {
     if (handleClick) handleClick();

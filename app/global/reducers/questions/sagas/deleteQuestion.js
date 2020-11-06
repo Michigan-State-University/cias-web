@@ -1,6 +1,6 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -16,11 +16,9 @@ function* deleteQuestion({ payload: { questionId, groupId } }) {
 
     yield put(deleteQuestionSuccess());
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.deleteError), {
-        id: DELETE_QUESTION_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.deleteError), {
+      toastId: DELETE_QUESTION_ERROR,
+    });
     yield put(deleteQuestionError(error));
   }
 }

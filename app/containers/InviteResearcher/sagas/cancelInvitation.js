@@ -1,9 +1,6 @@
 import axios from 'axios';
 import { takeLatest, put, call } from 'redux-saga/effects';
-import {
-  error as showError,
-  success as showSuccess,
-} from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
@@ -21,17 +18,13 @@ export function* cancelInvitation({ payload: { id } }) {
   try {
     yield call(axios.delete, requestUrl);
     yield put(cancelInvitationSuccess(id));
-    yield put(
-      showSuccess(formatMessage(messages.successCanceling), {
-        id: CANCEL_INVITATION_SUCCESS,
-      }),
-    );
+    yield call(toast.success, formatMessage(messages.successCanceling), {
+      toastId: CANCEL_INVITATION_SUCCESS,
+    });
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.errorCanceling), {
-        id: CANCEL_INVITATION_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.errorCanceling), {
+      toastId: CANCEL_INVITATION_ERROR,
+    });
     yield put(cancelInvitationError(requestErrorMessageHandler(error)));
   }
 }

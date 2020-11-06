@@ -20,8 +20,8 @@ import Intervention from 'models/Intervention/Intervention';
 import Loader from 'components/Loader';
 import MapInterventions from 'components/MapInterventions/MapInterventions';
 import { FormattedMessage } from 'react-intl';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+
 import {
   fetchInterventionsRequest,
   fetchInterventionsSaga,

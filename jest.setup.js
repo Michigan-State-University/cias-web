@@ -1,9 +1,9 @@
+/* eslint-disable global-require,react/prop-types,no-console */
 import React from 'react';
 import 'mutationobserver-shim';
 
 jest.mock('./app/components/Icon', () => ({
   __esModule: true,
-  // eslint-disable-next-line
   default: ({ src, alt, className }) => (
     <img src={src} alt={alt} className={className} />
   ),
@@ -87,3 +87,12 @@ class LocalStorageMock {
 Object.defineProperty(global, 'localStorage', {
   value: new LocalStorageMock(),
 });
+
+// mock react-player to be loaded synchronously during tests (React.lazy not supported)
+jest.mock('react-player/lazy', () => require('react-player'));
+
+// mock globally to make sure real request is not sent in any test
+jest.mock('link-preview-js');
+
+// make all useEffect synchronous in tests, otherwise test bugs occur
+jest.spyOn(React, 'useEffect').mockImplementation(React.useLayoutEffect);

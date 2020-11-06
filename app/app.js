@@ -15,7 +15,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
-import { ToastContainer } from 'react-toastify-redux';
+import { ToastContainer } from 'react-toastify';
 
 import 'sanitize.css/sanitize.css';
 import 'react-toastify/dist/ReactToastify.css';

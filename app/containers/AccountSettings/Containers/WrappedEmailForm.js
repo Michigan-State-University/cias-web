@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 import {
   changeEmailRequest,
   changeEmailSaga,

@@ -17,9 +17,7 @@ const MapInterventions = ({ interventions, participantView }) => (
           <SingleTile
             tileData={intervention}
             participantView={participantView}
-            // link={`/interventions/${intervention.problem_id}/session/${
-            //   intervention.id
-            // }/fill`}
+            link=""
           />,
           intervention.id,
         ),

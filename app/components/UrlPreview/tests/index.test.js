@@ -2,19 +2,43 @@
  *
  * Tests for UrlPreview
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
 import 'jest-styled-components';
+import { render, waitFor } from '@testing-library/react';
+import { getLinkPreview } from 'link-preview-js';
 
-import { render } from 'react-testing-library';
-import UrlPreview from '../index';
+import UrlPreview, { proxy } from '../index';
 
 describe('<UrlPreview />', () => {
-  it('Should render and match the snapshot', () => {
-    const { container } = render(<UrlPreview />);
+  const url = 'test-url';
+  const props = { link: url };
+  const testResponse = {
+    url,
+    title: 'Test',
+    siteName: 'Test',
+    description: 'Test site - mock data',
+    images: ['image1.png'],
+    mediaType: 'image.other',
+    contentType: 'text/html; charset=utf-8',
+    videos: [],
+    favicons: ['favicon1.ico'],
+  };
+
+  beforeAll(() => {
+    getLinkPreview.mockResolvedValue(testResponse);
+  });
+
+  it('Should render and match the snapshot', async () => {
+    const { container } = render(<UrlPreview {...props} />);
+
     expect(container).toMatchSnapshot();
+    await waitFor(() => expect(getLinkPreview).toHaveBeenCalledTimes(1));
+    await waitFor(() =>
+      expect(getLinkPreview).toHaveBeenCalledWith(`${proxy}${url}`, {
+        imagesPropertyType: 'og',
+      }),
+    );
   });
 });

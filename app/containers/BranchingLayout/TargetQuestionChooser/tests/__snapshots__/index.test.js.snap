@@ -322,25 +322,25 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Box-sc-14m3exe-0 laqfsx"
+      class="Box-sc-14m3exe-0 iWwKDQ"
       width="300"
     >
       <div
-        class="Box-sc-14m3exe-0 ia-dbYy"
+        class="Box-sc-14m3exe-0 gOoTAz"
       >
         <div
-          class="Row-x1o3ru-0 iJOjSZ"
+          class="Row-x1o3ru-0 dAhqIQ"
           data-testid="test-id-1-next-question-target"
         >
           <img
-            class="Img-sc-1kfzr96-0 kubXYn"
+            class="Img-sc-1kfzr96-0 dEDfja"
             src="IMAGE_MOCK"
           />
           <div
-            class="Box-sc-14m3exe-0 BNONm"
+            class="Box-sc-14m3exe-0 lavaAX"
           >
             <p
-              class="Text-sc-2lza2m-0 hPcLmk"
+              class="Text-sc-2lza2m-0 bHaevN"
               color=""
               font-size="15px"
               font-weight="bold"
@@ -351,59 +351,59 @@ Object {
         </div>
       </div>
       <div
-        class="Row-x1o3ru-0 iJOjSZ"
+        class="Row-x1o3ru-0 dAhqIQ"
       >
         <div
-          class="Box-sc-14m3exe-0 hjBUNi"
+          class="Box-sc-14m3exe-0 ketynr"
         >
           <div
-            class="Column-sc-1n6divy-0 dfNUrc"
+            class="Column-sc-1n6divy-0 SJAYV"
             data-testid="test-id-1-select-target-question"
           >
             <div
-              class="Row-x1o3ru-0 ddISbW"
+              class="Row-x1o3ru-0 dwCvvX"
             >
               <img
-                class="Img-sc-1kfzr96-0 cNNjlU"
+                class="Img-sc-1kfzr96-0 ieRSRF"
                 data-testid="test-id-1-select-target-question-interview-view-setter"
                 src="IMAGE_MOCK"
               />
               <img
-                class="Img-sc-1kfzr96-0 gvKdyb"
+                class="Img-sc-1kfzr96-0 iEjuMy"
                 src="IMAGE_MOCK"
               />
               <h3
-                class="H3-sc-1nwhpi5-0 xSpVx"
+                class="H3-sc-1nwhpi5-0 bPzmis"
               >
                 e-Intervention Name
               </h3>
             </div>
             <div
-              class="Box-sc-14m3exe-0 kkZuUh"
+              class="Box-sc-14m3exe-0 lpuvWo"
               overflow="scroll"
             >
               <div
-                class="Column-sc-1n6divy-0 dfNUrc"
+                class="Column-sc-1n6divy-0 SJAYV"
               >
                 <div
-                  class="styled__StyledCollapseContainer-o4e1ys-0 imoaxC"
+                  class="styled__StyledCollapseContainer-o4e1ys-0 dqqsYb"
                 >
                   <div
-                    class="Row-x1o3ru-0 ezJzDF"
+                    class="Row-x1o3ru-0 dSvoas"
                   >
                     <div
-                      class="styled__StyledCollapseLabel-o4e1ys-1 elEwAw"
+                      class="styled__StyledCollapseLabel-o4e1ys-1 wIKgN"
                       height="auto"
                     >
                       <div
-                        class="Row-x1o3ru-0 ebldYK"
+                        class="Row-x1o3ru-0 kuzlqT"
                       >
                         <div
-                          class="Row-x1o3ru-0 iJOjSZ"
+                          class="Row-x1o3ru-0 dAhqIQ"
                           data-testid="group-test-id-1-select-target-group-el"
                         >
                           <p
-                            class="Text-sc-2lza2m-0 dIqIDE"
+                            class="Text-sc-2lza2m-0 iynfNN"
                             font-size="15"
                           >
                             Group test title 1
@@ -411,14 +411,14 @@ Object {
                         </div>
                          
                         <img
-                          class="Img-sc-1kfzr96-0 eEXYbw"
+                          class="Img-sc-1kfzr96-0 lmhFEd"
                           src="IMAGE_MOCK"
                         />
                       </div>
                     </div>
                   </div>
                   <div
-                    class="styled__StyledCollapseContent-o4e1ys-3 kuKHQg"
+                    class="styled__StyledCollapseContent-o4e1ys-3 VaKJd"
                   />
                 </div>
               </div>
@@ -450,41 +450,33 @@ Object {
   "getAllByLabelText": [Function],
   "getAllByPlaceholderText": [Function],
   "getAllByRole": [Function],
-  "getAllBySelectText": [Function],
   "getAllByTestId": [Function],
   "getAllByText": [Function],
   "getAllByTitle": [Function],
-  "getAllByValue": [Function],
   "getByAltText": [Function],
   "getByDisplayValue": [Function],
   "getByLabelText": [Function],
   "getByPlaceholderText": [Function],
   "getByRole": [Function],
-  "getBySelectText": [Function],
   "getByTestId": [Function],
   "getByText": [Function],
   "getByTitle": [Function],
-  "getByValue": [Function],
   "queryAllByAltText": [Function],
   "queryAllByDisplayValue": [Function],
   "queryAllByLabelText": [Function],
   "queryAllByPlaceholderText": [Function],
   "queryAllByRole": [Function],
-  "queryAllBySelectText": [Function],
   "queryAllByTestId": [Function],
   "queryAllByText": [Function],
   "queryAllByTitle": [Function],
-  "queryAllByValue": [Function],
   "queryByAltText": [Function],
   "queryByDisplayValue": [Function],
   "queryByLabelText": [Function],
   "queryByPlaceholderText": [Function],
   "queryByRole": [Function],
-  "queryBySelectText": [Function],
   "queryByTestId": [Function],
   "queryByText": [Function],
   "queryByTitle": [Function],
-  "queryByValue": [Function],
   "rerender": [Function],
   "unmount": [Function],
 }

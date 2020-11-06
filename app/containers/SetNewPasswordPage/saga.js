@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { success as showSuccess } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -37,11 +37,9 @@ function* setNewPassword({
         },
       },
     );
-    yield put(
-      showSuccess(formatMessage(messages.passwordChanged), {
-        id: SET_NEW_PASSWORD_SUCCESS,
-      }),
-    );
+    yield call(toast.success, formatMessage(messages.passwordChanged), {
+      toastId: SET_NEW_PASSWORD_SUCCESS,
+    });
     yield put(setNewPasswordSuccess());
     yield put(push('/'));
   } catch (error) {

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
-import { success as showSuccess } from 'react-toastify-redux';
+import { put, takeLatest, call } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -15,11 +15,9 @@ function* resetPassword({ payload: { email } }) {
       email,
       redirect_url: `${process.env.WEB_URL}/set-new-password`,
     });
-    yield put(
-      showSuccess(formatMessage(messages.linkSent), {
-        id: RESET_PASSWORD_SUCCESS,
-      }),
-    );
+    yield call(toast.success, formatMessage(messages.linkSent), {
+      toastId: RESET_PASSWORD_SUCCESS,
+    });
     yield put(resetPasswordSuccess());
   } catch (error) {
     yield put(resetPasswordError(error.toString()));

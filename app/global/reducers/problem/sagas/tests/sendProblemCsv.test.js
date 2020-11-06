@@ -1,6 +1,6 @@
 import axios from 'axios';
 import get from 'lodash/get';
-import { error as showError, info as showInfo } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { takeLatest } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -22,7 +22,7 @@ describe('sendProblemCsv saga', () => {
     return expectSaga(sendProblemCsv, { payload })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(sendProblemCsvSuccess(apiResponse.message))
-      .put(showInfo(apiResponse.message, { id: 'toast1' }))
+      .call(toast.info, apiResponse.message)
       .run();
   });
 
@@ -31,11 +31,9 @@ describe('sendProblemCsv saga', () => {
     return expectSaga(sendProblemCsv, { payload })
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
       .put(sendProblemCsvError(error))
-      .put(
-        showError(
-          get(error, 'data.message', formatMessage(messages.csvError)),
-          { id: 'toast2' },
-        ),
+      .call(
+        toast.error,
+        get(error, 'data.message', formatMessage(messages.csvError)),
       )
       .run();
   });

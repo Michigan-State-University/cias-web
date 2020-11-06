@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
-import { error as showError } from 'react-toastify-redux';
+import { put, takeLatest, call } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import { mapCurrentUserWithoutAttributes } from 'utils/mapResponseObjects';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
@@ -19,11 +19,9 @@ function* editSingleUser({ payload: { userId, ...newUserData } }) {
     const mappedUser = mapCurrentUserWithoutAttributes(data);
     yield put(editOtherUserSuccess(mappedUser));
   } catch (error) {
-    yield put(
-      showError(error.toString(), {
-        id: EDIT_OTHER_USER_ERROR,
-      }),
-    );
+    yield call(toast.error, error.toString(), {
+      toastId: EDIT_OTHER_USER_ERROR,
+    });
     yield put(editOtherUserError(error));
   }
 }

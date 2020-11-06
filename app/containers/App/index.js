@@ -33,7 +33,7 @@ import { Roles } from 'models/User/UserRoles';
 
 import navbarNames from 'utils/navbarNames';
 import rootSaga from 'global/sagas/rootSaga';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
 import { makeSelectUser } from 'global/reducers/auth';
 import { connect } from 'react-redux';

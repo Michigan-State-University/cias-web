@@ -1,3 +1,5 @@
+patches/
+coverage/
 build/
 node_modules/
 internals/generators/

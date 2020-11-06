@@ -466,7 +466,7 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
                         tabindex="-1"
                       >
                         <span
-                          class="ql-picker-item ql-selected ql-primary"
+                          class="ql-picker-item ql-primary"
                           role="button"
                           tabindex="0"
                         />
@@ -826,8 +826,7 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
                       <span
                         aria-controls="ql-picker-options-3"
                         aria-expanded="false"
-                        class="ql-picker-label ql-active"
-                        data-value="#000000"
+                        class="ql-picker-label"
                         role="button"
                         tabindex="0"
                       >
@@ -837,7 +836,6 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
                            
                           <g
                             class="ql-fill ql-color-label"
-                            style="fill: #000000;"
                           >
                              
                             <polygon
@@ -1141,7 +1139,7 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
                         tabindex="-1"
                       >
                         <span
-                          class="ql-picker-item ql-primary ql-selected"
+                          class="ql-picker-item ql-primary"
                           data-value="#000000"
                           role="button"
                           style="background-color: rgb(0, 0, 0);"

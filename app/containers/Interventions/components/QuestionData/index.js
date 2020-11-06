@@ -10,7 +10,7 @@ import {
   updateQuestionDataSaga,
   makeSelectSelectedQuestionType,
 } from 'global/reducers/questions';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 import {
   singleQuestion,
   multiQuestion,

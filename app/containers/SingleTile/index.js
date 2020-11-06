@@ -13,7 +13,7 @@ import csvIcon from 'assets/svg/csv-icon.svg';
 import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
 import globalMessages from 'global/i18n/globalMessages';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 
 import {

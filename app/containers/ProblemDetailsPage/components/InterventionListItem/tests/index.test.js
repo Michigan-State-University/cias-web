@@ -8,8 +8,7 @@
 
 import React from 'react';
 import { browserHistory, MemoryRouter } from 'react-router-dom';
-import renderer from 'react-test-renderer';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import 'jest-styled-components';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
@@ -62,17 +61,17 @@ describe('<InterventionListItem />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-    const renderedComponent = renderer
-      .create(
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <Provider store={store}>
-            <MemoryRouter>
-              {withDroppable(<InterventionListItem {...props} />)}
-            </MemoryRouter>
-          </Provider>
-        </IntlProvider>,
-      )
-      .toJSON();
+    const {
+      container: { firstChild: renderedComponent },
+    } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <Provider store={store}>
+          <MemoryRouter>
+            {withDroppable(<InterventionListItem {...props} />)}
+          </MemoryRouter>
+        </Provider>
+      </IntlProvider>,
+    );
     expect(renderedComponent).toMatchSnapshot();
   });
 });

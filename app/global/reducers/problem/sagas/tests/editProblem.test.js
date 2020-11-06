@@ -1,6 +1,6 @@
 import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { takeLatest } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -43,11 +43,9 @@ describe('editProblem saga', () => {
     return expectSaga(editProblem)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.patch), throwError(error)]])
-      .put(
-        showError(formatMessage(globalMessages.editProblemError), {
-          id: EDIT_PROBLEM_ERROR,
-        }),
-      )
+      .call(toast.error, formatMessage(globalMessages.editProblemError), {
+        toastId: EDIT_PROBLEM_ERROR,
+      })
       .run();
   });
 

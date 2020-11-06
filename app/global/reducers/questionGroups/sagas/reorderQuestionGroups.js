@@ -1,6 +1,6 @@
-import { put, takeLatest, select } from 'redux-saga/effects';
+import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -29,11 +29,9 @@ function* reorderQuestionGroups({ payload: { interventionId } }) {
 
     yield put(reorderGroupListSuccess());
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.reorderError), {
-        id: REORDER_GROUP_LIST_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.reorderError), {
+      toastId: REORDER_GROUP_LIST_ERROR,
+    });
     yield put(reorderGroupListError(error));
   }
 }

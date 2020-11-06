@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { put, select, takeLatest, call } from 'redux-saga/effects';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { mapCurrentUserWithoutAttributes } from 'utils/mapResponseObjects';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
@@ -23,11 +23,9 @@ export function* editUser({ payload }) {
     yield call(LocalStorageService.updateState, mappedUser);
     yield put(editUserSuccess(mappedUser));
   } catch (error) {
-    yield put(
-      showError(error.toString(), {
-        id: EDIT_USER_ERROR,
-      }),
-    );
+    yield call(toast.error, error.toString(), {
+      toastId: EDIT_USER_ERROR,
+    });
     yield put(editUserError(error));
   }
 }

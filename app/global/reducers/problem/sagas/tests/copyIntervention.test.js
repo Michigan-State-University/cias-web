@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { takeLatest } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -31,11 +31,9 @@ describe('copyIntervention saga', () => {
     const error = new Error('test');
     return expectSaga(copyIntervention, { payload })
       .provide([[matchers.call.fn(axios.post), throwError(error)]])
-      .put(
-        showError(formatMessage(messages.copyError), {
-          id: COPY_INTERVENTION_ERROR,
-        }),
-      )
+      .call(toast.error, formatMessage(messages.copyError), {
+        toastId: COPY_INTERVENTION_ERROR,
+      })
       .run();
   });
 

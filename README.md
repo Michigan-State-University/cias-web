@@ -1,17 +1,13 @@
 ## Install & Start
-
-```shell
-npm install
-npm start
-```
-
-## Features
+1. Copy the contents of `.env.example` to `.env` (create this file)
+1. Run `npm install` to install all required dependencies ***(optional => run only the first time or when dependencies change)**
+1. Run `npm start` to run the project. It will be available at `localhost:4200`
 
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START -->
 <!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
+<!--suppress ALL:START -->
 <table>
   <tr>
     <td align="center"><a href="https://github.com/michal-grzelak">
@@ -37,7 +33,7 @@ npm start
   </tr>
 </table>
 
-<!-- markdownlint-enable -->
+<!--suppress ALL:END -->
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->

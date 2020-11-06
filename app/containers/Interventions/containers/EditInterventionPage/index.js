@@ -33,10 +33,9 @@ import groupActive from 'assets/svg/group-active.svg';
 import Question from 'models/Intervention/Question';
 import { borders, colors, themeColors } from 'theme';
 
-import injectSaga, { useInjectSaga } from 'utils/injectSaga';
+import { injectSaga, useInjectSaga, injectReducer } from 'redux-injectors';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { useInjectReducer } from 'utils/injectReducer';
 
 import { localStateReducer } from 'global/reducers/localState';
 import {
@@ -116,13 +115,22 @@ function EditInterventionPage({
   getQuestionGroups,
   intervention: { id: interventionId, name: interventionName },
 }) {
-  useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
-
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState([]);
   const [showList, setShowList] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
+
+  useInjectSaga({
+    key: 'getQuestionGroupsSaga',
+    saga: getQuestionGroupsSaga,
+  });
+  useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
+  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
+  useInjectSaga({
+    key: 'reorderQuestionGroups',
+    saga: reorderQuestionGroupsSaga,
+  });
 
   const currentQuestion = questions.find(({ id }) => id === selectedQuestion);
   const currentGroupScope = groups.find(
@@ -164,18 +172,6 @@ function EditInterventionPage({
   ];
 
   useLockEditInterventionPageScroll();
-  useInjectReducer({ key: 'questions', reducer: questionsReducer });
-  useInjectReducer({ key: 'intervention', reducer: interventionReducer });
-  useInjectReducer({ key: 'localState', reducer: localStateReducer });
-  useInjectReducer({ key: 'questionGroups', reducer: questionGroupsReducer });
-  useInjectReducer({ key: 'problem', reducer: problemReducer });
-
-  useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
-  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
-  useInjectSaga({
-    key: 'reorderQuestionGroups',
-    saga: reorderQuestionGroupsSaga,
-  });
 
   const editingPossible = canEdit(problemStatus);
 
@@ -465,9 +461,13 @@ const withSaga = injectSaga({
   saga: editInterventionPageSaga,
 });
 
-export default injectIntl(
-  compose(
-    withConnect,
-    withSaga,
-  )(EditInterventionPage),
-);
+export default compose(
+  injectReducer({ key: 'questions', reducer: questionsReducer }),
+  injectReducer({ key: 'intervention', reducer: interventionReducer }),
+  injectReducer({ key: 'localState', reducer: localStateReducer }),
+  injectReducer({ key: 'questionGroups', reducer: questionGroupsReducer }),
+  injectReducer({ key: 'problem', reducer: problemReducer }),
+  injectIntl,
+  withConnect,
+  withSaga,
+)(EditInterventionPage);

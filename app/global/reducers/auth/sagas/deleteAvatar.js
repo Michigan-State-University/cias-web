@@ -1,6 +1,6 @@
 import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import LocalStorageService from 'utils/localStorageService';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
@@ -24,11 +24,9 @@ export function* deleteAvatar() {
     yield call(LocalStorageService.updateState, mappedUser);
     yield put(deleteAvatarSuccess(mappedUser));
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.deleteAvatarError), {
-        id: DELETE_AVATAR_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.deleteAvatarError), {
+      toastId: DELETE_AVATAR_ERROR,
+    });
     yield put(deleteAvatarError());
   }
 }

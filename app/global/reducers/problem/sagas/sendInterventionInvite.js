@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { put, select, takeLatest, call } from 'redux-saga/effects';
-import { info as showInfo, error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import {
@@ -33,18 +33,14 @@ export function* sendInterventionInvite({
     });
     yield put(sendInterventionInviteSuccess());
     yield put(fetchInterventionEmailsSuccess(users, interventionIndex));
-    yield put(
-      showInfo(formatMessage(messages.sendInviteSuccess), {
-        id: SEND_INTERVENTION_INVITE_SUCCESS,
-      }),
-    );
+    yield call(toast.info, formatMessage(messages.sendInviteSuccess), {
+      toastId: SEND_INTERVENTION_INVITE_SUCCESS,
+    });
   } catch (error) {
     yield put(sendInterventionInviteError());
-    yield put(
-      showError(formatMessage(messages.sendInviteError), {
-        id: SEND_INTERVENTION_INVITE_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.sendInviteError), {
+      toastId: SEND_INTERVENTION_INVITE_ERROR,
+    });
   }
 }
 

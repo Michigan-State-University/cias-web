@@ -1,6 +1,6 @@
-import { takeLatest, put, select } from 'redux-saga/effects';
+import { takeLatest, put, select, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -23,11 +23,9 @@ function* groupQuestions({ payload: { questionIds, interventionId } }) {
     });
     yield put(groupQuestionsSuccess(data, questionIds));
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.groupError), {
-        id: GROUP_QUESTIONS_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.groupError), {
+      toastId: GROUP_QUESTIONS_ERROR,
+    });
     yield put(groupQuestionsError(error));
   }
 }

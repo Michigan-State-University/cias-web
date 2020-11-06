@@ -2,30 +2,21 @@
  *
  * Tests for SetNewPasswordPage
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { MemoryRouter } from 'react-router-dom';
 
+import { createTestStore } from 'utils/testUtils/storeUtils';
+import { DEFAULT_LOCALE } from 'i18n';
 import SetNewPasswordPage from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<SetNewPasswordPage />', () => {
-  const reducer = state => state;
   const initialState = {};
-  let store;
-  beforeAll(() => {
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
-    store.injectedReducers = {};
-    store.injectedSagas = {};
-  });
+  const store = createTestStore(initialState);
 
   const defaultProps = {
     location: {

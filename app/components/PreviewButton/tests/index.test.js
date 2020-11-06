@@ -2,13 +2,11 @@
  *
  * Tests for PreviewButton
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
 import { MemoryRouter, browserHistory } from 'react-router-dom';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
 import configureStore from 'configureStore';
@@ -19,6 +17,9 @@ import PreviewButton from '../index';
 
 describe('<PreviewButton />', () => {
   let store;
+  const props = {
+    to: '',
+  };
 
   beforeAll(() => {
     store = configureStore({}, browserHistory);
@@ -31,7 +32,7 @@ describe('<PreviewButton />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <PreviewButton />
+            <PreviewButton {...props} />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,
@@ -46,7 +47,7 @@ describe('<PreviewButton />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <PreviewButton previewDisabled />
+            <PreviewButton {...props} previewDisabled />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,

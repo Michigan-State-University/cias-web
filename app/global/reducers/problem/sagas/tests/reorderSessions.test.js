@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { takeLatest } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -30,11 +30,9 @@ describe('reorderSessions saga', () => {
     const error = new Error('test');
     return expectSaga(reorderSessions, { payload })
       .provide([[matchers.call.fn(axios.patch), throwError(error)]])
-      .put(
-        showError(formatMessage(messages.reorderError), {
-          id: REORDER_INTERVENTION_LIST_ERROR,
-        }),
-      )
+      .call(toast.error, formatMessage(messages.reorderError), {
+        toastId: REORDER_INTERVENTION_LIST_ERROR,
+      })
       .put(reorderSessionsError(error))
       .run();
   });

@@ -1,6 +1,6 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { mapCurrentUser } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -31,9 +31,10 @@ function* addAvatar({ payload: { userId, image, imageUrl } }) {
     yield put(addOtherUserAvatarSuccess(mappedUser));
     window.URL.revokeObjectURL(imageUrl);
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.addAvatarError), {
-        id: ADD_OTHER_USER_AVATAR_ERROR,
+    yield call(
+      toast.error,
+      formatMessage(messages.deleteAvatarError, {
+        toastId: ADD_OTHER_USER_AVATAR_ERROR,
       }),
     );
     yield put(addOtherUserAvatarError(error));

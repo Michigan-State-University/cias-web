@@ -20,8 +20,8 @@ import timezone from 'dayjs/plugin/timezone';
 import set from 'lodash/set';
 import queryString from 'query-string';
 
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga, useInjectReducer } from 'redux-injectors';
+
 import { Fill } from 'components/Fill';
 import Button from 'components/Button';
 import StyledTextButton from 'components/Button/StyledTextButton';

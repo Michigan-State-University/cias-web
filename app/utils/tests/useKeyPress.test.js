@@ -4,35 +4,35 @@
 
 import useKeyPress from 'utils/useKeyPress';
 
-import { renderHook } from 'utils/renderHook';
-import { fireEvent } from 'react-testing-library';
+import { renderHook } from '@testing-library/react-hooks';
+import { fireEvent, waitFor } from '@testing-library/react';
 
 describe('useKeyPress test', () => {
   const A_KEY_CODE = 65;
   const S_KEY_CODE = 83;
 
-  it('should not invoke onKeyPress on start', () => {
+  it('should not invoke onKeyPress on start', async () => {
     const onKeyPress = jest.fn();
     renderHook(() => useKeyPress('a', onKeyPress));
 
-    expect(onKeyPress).not.toHaveBeenCalled();
+    await waitFor(() => expect(onKeyPress).not.toHaveBeenCalled());
   });
 
-  it('should invoke onKeyPress when pressed the right key', () => {
+  it('should invoke onKeyPress when pressed the right key', async () => {
     const onKeyPress = jest.fn();
-    const { component } = renderHook(() => useKeyPress(A_KEY_CODE, onKeyPress));
+    renderHook(() => useKeyPress(A_KEY_CODE, onKeyPress));
 
-    fireEvent.keyUp(component.container, { keyCode: A_KEY_CODE });
+    fireEvent.keyUp(document, { keyCode: A_KEY_CODE });
 
-    expect(onKeyPress).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(onKeyPress).toHaveBeenCalledTimes(1));
   });
 
-  it('should not invoke onKeyPress when pressed the wrong key', () => {
+  it('should not invoke onKeyPress when pressed the wrong key', async () => {
     const onKeyPress = jest.fn();
-    const { component } = renderHook(() => useKeyPress(A_KEY_CODE, onKeyPress));
+    renderHook(() => useKeyPress(A_KEY_CODE, onKeyPress));
 
-    fireEvent.keyUp(component.container, { keyCode: S_KEY_CODE });
+    fireEvent.keyUp(document, { keyCode: S_KEY_CODE });
 
-    expect(onKeyPress).toHaveBeenCalledTimes(0);
+    await waitFor(() => expect(onKeyPress).toHaveBeenCalledTimes(0));
   });
 });

@@ -1,6 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 import axios from 'axios';
-import { success as showSuccess } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { takeLatest } from 'redux-saga/effects';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
@@ -36,19 +36,17 @@ describe('changeEmail saga', () => {
       .provide([[matchers.call.fn(axios.patch), { data: apiResponse }]])
       .call(LocalStorageService.updateState, successUser)
       .call(LocalStorageService.setUid, successUser.email)
-      .put(
-        showSuccess(formatMessage(messages.changeEmailSuccess), {
-          id: CHANGE_EMAIL_SUCCESS,
-        }),
-      )
+      .call(toast.success, formatMessage(messages.changeEmailSuccess), {
+        toastId: CHANGE_EMAIL_SUCCESS,
+      })
       .put(changeEmailSuccess(successUser))
       .run();
   });
   it('Check changeEmail error connection', () => {
     const error = new Error('test-error');
-    expectSaga(changeEmail, { payload })
+    return expectSaga(changeEmail, { payload })
       .withState(mockState)
-      .provide([[matchers.call.fn(axios.post), throwError(error)]])
+      .provide([[matchers.call.fn(axios.patch), throwError(error)]])
       .put(changeEmailError(error.toString()))
       .run();
   });

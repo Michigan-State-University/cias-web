@@ -690,206 +690,186 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
 >
   <div
     aria-describedby="rbd-hidden-text-1-hidden-text-3"
-    className="c0"
+    class="c0"
     data-rbd-drag-handle-context-id="1"
     data-rbd-drag-handle-draggable-id="accordion-0"
     data-rbd-draggable-context-id="1"
     data-rbd-draggable-id="accordion-0"
-    draggable={false}
-    onDragStart={[Function]}
-    onTransitionEnd={null}
+    draggable="false"
     role="button"
-    style={
-      Object {
-        "transform": null,
-        "transition": null,
-      }
-    }
-    tabIndex={0}
+    tabindex="0"
     width="100%"
   >
     <div
-      className="c1 c2 c3"
+      class="c1 c2 c3"
     >
       <div
-        className="c4"
+        class="c4"
       >
         <div
-          className="c5 c6"
+          class="c5 c6"
         >
           <a
-            className="c7"
+            class="c7"
             href="/interventions/1/sessions/1/edit"
-            onClick={[Function]}
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
           >
             <div
-              className="c8 c9"
+              class="c8 c9"
             >
               1
             </div>
             <h2
-              className="c10 c11"
+              class="c10 c11"
             >
               Intervention
             </h2>
           </a>
         </div>
         <div
-          className="c12"
-          width={80}
+          class="c12"
+          width="80"
         >
           <img
             alt="emails"
-            className="c13"
-            disabled={false}
+            class="c13"
             src="IMAGE_MOCK"
           />
         </div>
       </div>
       <div
-        className="c14"
+        class="c14"
       >
         <div
-          className="c15"
+          class="c15"
         />
       </div>
       <div
-        className="c16"
+        class="c16"
       >
         <div
-          className="c17"
+          class="c17"
         >
           <div
-            className="c18"
+            class="c18"
             width="100%"
           >
             <p
-              className="c19"
-              fontSize={13}
+              class="c19"
+              font-size="13"
             >
               Next Session:
             </p>
             <p
-              className="c20"
-              fontSize={13}
-              fontWeight="bold"
+              class="c20"
+              font-size="13"
+              font-weight="bold"
             >
               According to the formula below
             </p>
           </div>
         </div>
         <div
-          className="c21"
+          class="c21"
         >
           <div
-            className="c22"
+            class="c22"
             width="100%"
           >
             <p
-              className="c23"
+              class="c23"
             >
               Use formula
             </p>
             <label
-              checked={true}
-              className="c24"
-              onToggle={[Function]}
+              class="c24"
             >
               <input
-                checked={true}
-                className="c25 c26"
+                checked=""
+                class="c25 c26"
                 data-testid="switch-input"
-                onChange={[Function]}
                 type="checkbox"
               />
               <span
-                className="c27 c28"
+                class="c27 c28"
               />
             </label>
           </div>
         </div>
       </div>
       <div
-        className="c29"
+        class="c29"
       >
         <div
-          className="c30"
+          class="c30"
         >
           <div
-            className="c30"
+            class="c30"
           >
             <div
-              className="c5"
+              class="c5"
             >
               Formula
               <div
-                className="c31"
-                onClick={[Function]}
+                class="c31"
               >
                 <p
-                  className="c32"
+                  class="c32"
                   color="#C866EA"
-                  fontWeight="bold"
+                  font-weight="bold"
                 >
                   Add variable
                 </p>
               </div>
             </div>
             <div
-              className="c33"
+              class="c33"
               width="100%"
             >
               <textarea
-                className="c34"
+                class="c34"
                 height="auto"
-                onBlur={[Function]}
-                onChange={[Function]}
-                onFocus={[Function]}
                 placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
                 rows="1"
-                value=""
                 width="100%"
               />
             </div>
             <div
-              className="c35"
+              class="c35"
             >
               <div
-                className="c36"
+                class="c36"
                 display="none"
                 width="auto"
               >
                 <div
-                  className="c37"
+                  class="c37"
                 >
                   <div
-                    className="c38"
+                    class="c38"
                   >
                     <div
-                      className="c30"
+                      class="c30"
                     >
                       <div
-                        className="c39"
+                        class="c39"
                       >
                         <div
-                          className="c40"
+                          class="c40"
                           data-testid="no-content"
                           display="flex"
                           height="100%"
                           width="100%"
                         >
                           <div
-                            className="c41"
+                            class="c41"
                           >
                             <img
                               alt="No content"
-                              className="c42"
+                              class="c42"
                               src="IMAGE_MOCK"
                             />
                             <h2
-                              className="c10 c43"
+                              class="c10 c43"
                               color="#B0BAC9"
                             >
                               No variables defined yet
@@ -903,8 +883,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
               </div>
             </div>
             <div
-              className="c44 c45"
-              onClick={[Function]}
+              class="c44 c45"
             >
               + Add case
             </div>

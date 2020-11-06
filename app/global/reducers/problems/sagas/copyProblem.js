@@ -1,9 +1,6 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
-import {
-  error as showError,
-  success as showSuccess,
-} from 'react-toastify-redux';
+import { put, takeLatest, call } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { push } from 'connected-react-router';
 
@@ -29,17 +26,13 @@ function* copyProblem({ payload: { problemId, users, withoutRedirect } }) {
         yield put(push('/'));
       }
     } else
-      yield put(
-        showSuccess(formatMessage(messages.sendSuccess), {
-          id: COPY_PROBLEM_SUCCESS,
-        }),
-      );
+      yield call(toast.success, formatMessage(messages.sendSuccess), {
+        toastId: COPY_PROBLEM_SUCCESS,
+      });
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.copyError), {
-        id: COPY_PROBLEM_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.copyError), {
+      toastId: COPY_PROBLEM_ERROR,
+    });
   }
 }
 

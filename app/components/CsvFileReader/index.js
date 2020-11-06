@@ -7,9 +7,8 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CSVReader } from 'react-papaparse';
-import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { error } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { injectIntl, intlShape } from 'react-intl';
 
 import Img from 'components/Img';
@@ -26,7 +25,6 @@ const CsvFileReader = ({
   children,
   onUpload,
   intl: { formatMessage },
-  showError,
   disabled,
 }) => {
   const readerRef = useRef(null);
@@ -37,9 +35,10 @@ const CsvFileReader = ({
   };
 
   const handleError = (err, file) =>
-    showError(formatMessage(messages.error, { file, err }), {
-      id: CSV_FILE_UPLOAD_ERROR,
+    toast.error(formatMessage(messages.error, { file, err }), {
+      toastId: CSV_FILE_UPLOAD_ERROR,
     });
+
   return (
     <CSVReader
       disabled
@@ -71,20 +70,7 @@ CsvFileReader.propTypes = {
   children: PropTypes.node,
   onUpload: PropTypes.func,
   intl: intlShape,
-  showError: PropTypes.func,
   disabled: PropTypes.bool,
 };
 
-const mapDispatchToProps = {
-  showError: error,
-};
-
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
-
-export default compose(
-  injectIntl,
-  withConnect,
-)(CsvFileReader);
+export default compose(injectIntl)(CsvFileReader);

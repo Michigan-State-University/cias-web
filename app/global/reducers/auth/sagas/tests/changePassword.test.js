@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { success as showSuccess } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { takeLatest } from 'redux-saga/effects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -25,16 +25,14 @@ describe('changePassword saga', () => {
   it('Check changePassword generator success connection', () =>
     expectSaga(changePassword, { payload })
       .provide([[matchers.call.fn(axios.patch), {}]])
-      .put(
-        showSuccess(formatMessage(messages.changePasswordSuccess), {
-          id: CHANGE_PASSWORD_SUCCESS,
-        }),
-      )
+      .call(toast.success, formatMessage(messages.changePasswordSuccess), {
+        toastId: CHANGE_PASSWORD_SUCCESS,
+      })
       .put(changePasswordSuccess())
       .run());
   it('Check changePassword generator error connection', () => {
     const error = new Error('test-error');
-    expectSaga(changePassword, { payload })
+    return expectSaga(changePassword, { payload })
       .provide([[matchers.call.fn(axios.patch), throwError(error)]])
       .put(changePasswordError(error.toString()))
       .run();

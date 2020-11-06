@@ -2,30 +2,30 @@
 
 exports[`<RegisterPage /> Should render and match the researcher 1`] = `
 <div
-  class="styled__Background-sc-1r4kg53-0 gRYivG"
+  class="styled__Background-sc-1r4kg53-0 eFWbvX"
 >
   <div
-    class="styled__TopBackground-sc-1r4kg53-1 bylLTk"
+    class="styled__TopBackground-sc-1r4kg53-1 dgkNIN"
   />
   <div
-    class="styled__Header-sc-1r4kg53-2 clPpsO"
+    class="styled__Header-sc-1r4kg53-2 jnMzyr"
   >
     <img
-      class="styled__Logo-sc-1r4kg53-3 gDviEu"
+      class="styled__Logo-sc-1r4kg53-3 dNCrIv"
       src="IMAGE_MOCK"
     />
   </div>
   <div
-    class="styled__Content-sc-1r4kg53-4 irxPWB"
+    class="styled__Content-sc-1r4kg53-4 dRtmJU"
   >
     <div
-      class="Fill-sc-1f4o7x0-0 cYCtnS"
+      class="Fill-sc-1f4o7x0-0 boyhLn"
     >
       <div
-        class="Column-sc-1n6divy-0 dZTnes"
+        class="Column-sc-1n6divy-0 jOCHjp"
       >
         <h1
-          class="H1-tncdg6-0 eygGOx"
+          class="H1-tncdg6-0 khddLc"
           font-size="23"
         >
           <span>
@@ -33,20 +33,20 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           </span>
         </h1>
         <div
-          class="Row-x1o3ru-0 hNBpWq"
+          class="Row-x1o3ru-0 fcuGKr"
           width="100%"
         >
           <div
-            class="Column-sc-1n6divy-0 dfGPDf"
+            class="Column-sc-1n6divy-0 cEBgay"
           >
             <p
-              class="Text-sc-2lza2m-0 ggakK"
+              class="Text-sc-2lza2m-0 drfDFr"
               width="fit-content"
             >
               First Name
             </p>
             <input
-              class="Input-sc-19txxuq-0 fcoxGj"
+              class="Input-sc-19txxuq-0 eQikpS"
               height="46"
               name="firstName"
               placeholder="Enter first name"
@@ -56,16 +56,16 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             />
           </div>
           <div
-            class="Column-sc-1n6divy-0 npKUP"
+            class="Column-sc-1n6divy-0 gWZjHC"
           >
             <p
-              class="Text-sc-2lza2m-0 ggakK"
+              class="Text-sc-2lza2m-0 drfDFr"
               width="fit-content"
             >
               Last name
             </p>
             <input
-              class="Input-sc-19txxuq-0 fcoxGj"
+              class="Input-sc-19txxuq-0 eQikpS"
               height="46"
               name="lastName"
               placeholder="Enter last name"
@@ -76,16 +76,16 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           </div>
         </div>
         <div
-          class="Column-sc-1n6divy-0 npKUP"
+          class="Column-sc-1n6divy-0 gWZjHC"
         >
           <p
-            class="Text-sc-2lza2m-0 ggakK"
+            class="Text-sc-2lza2m-0 drfDFr"
             width="fit-content"
           >
             E-mail address
           </p>
           <input
-            class="Input-sc-19txxuq-0 fFggWk"
+            class="Input-sc-19txxuq-0 ghmQSB"
             disabled=""
             height="46"
             name="email"
@@ -96,16 +96,16 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 npKUP"
+          class="Column-sc-1n6divy-0 gWZjHC"
         >
           <p
-            class="Text-sc-2lza2m-0 ggakK"
+            class="Text-sc-2lza2m-0 drfDFr"
             width="fit-content"
           >
             Password
           </p>
           <input
-            class="Input-sc-19txxuq-0 fcoxGj"
+            class="Input-sc-19txxuq-0 eQikpS"
             height="46"
             name="password"
             placeholder="Enter password"
@@ -115,16 +115,16 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 npKUP"
+          class="Column-sc-1n6divy-0 gWZjHC"
         >
           <p
-            class="Text-sc-2lza2m-0 ggakK"
+            class="Text-sc-2lza2m-0 drfDFr"
             width="fit-content"
           >
             Password confirmation
           </p>
           <input
-            class="Input-sc-19txxuq-0 fcoxGj"
+            class="Input-sc-19txxuq-0 eQikpS"
             height="46"
             name="passwordConfirmation"
             placeholder="Retype your password"
@@ -134,7 +134,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           />
         </div>
         <button
-          class="StyledButton-t20ntd-0 cUeESq"
+          class="StyledButton-t20ntd-0 mCxSH"
           color="primary"
           height="46"
           type="submit"
@@ -149,30 +149,30 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
 
 exports[`<RegisterPage /> Should render and match the snapshot for participant 1`] = `
 <div
-  class="styled__Background-sc-1r4kg53-0 gRYivG"
+  class="styled__Background-sc-1r4kg53-0 eFWbvX"
 >
   <div
-    class="styled__TopBackground-sc-1r4kg53-1 bylLTk"
+    class="styled__TopBackground-sc-1r4kg53-1 dgkNIN"
   />
   <div
-    class="styled__Header-sc-1r4kg53-2 clPpsO"
+    class="styled__Header-sc-1r4kg53-2 jnMzyr"
   >
     <img
-      class="styled__Logo-sc-1r4kg53-3 gDviEu"
+      class="styled__Logo-sc-1r4kg53-3 dNCrIv"
       src="IMAGE_MOCK"
     />
   </div>
   <div
-    class="styled__Content-sc-1r4kg53-4 irxPWB"
+    class="styled__Content-sc-1r4kg53-4 dRtmJU"
   >
     <div
-      class="Fill-sc-1f4o7x0-0 cYCtnS"
+      class="Fill-sc-1f4o7x0-0 boyhLn"
     >
       <div
-        class="Column-sc-1n6divy-0 dZTnes"
+        class="Column-sc-1n6divy-0 jOCHjp"
       >
         <h1
-          class="H1-tncdg6-0 eygGOx"
+          class="H1-tncdg6-0 khddLc"
           font-size="23"
         >
           <span>
@@ -180,20 +180,20 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           </span>
         </h1>
         <div
-          class="Row-x1o3ru-0 hNBpWq"
+          class="Row-x1o3ru-0 fcuGKr"
           width="100%"
         >
           <div
-            class="Column-sc-1n6divy-0 dfGPDf"
+            class="Column-sc-1n6divy-0 cEBgay"
           >
             <p
-              class="Text-sc-2lza2m-0 ggakK"
+              class="Text-sc-2lza2m-0 drfDFr"
               width="fit-content"
             >
               First Name
             </p>
             <input
-              class="Input-sc-19txxuq-0 fcoxGj"
+              class="Input-sc-19txxuq-0 eQikpS"
               height="46"
               name="firstName"
               placeholder="Enter first name"
@@ -203,16 +203,16 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             />
           </div>
           <div
-            class="Column-sc-1n6divy-0 npKUP"
+            class="Column-sc-1n6divy-0 gWZjHC"
           >
             <p
-              class="Text-sc-2lza2m-0 ggakK"
+              class="Text-sc-2lza2m-0 drfDFr"
               width="fit-content"
             >
               Last name
             </p>
             <input
-              class="Input-sc-19txxuq-0 fcoxGj"
+              class="Input-sc-19txxuq-0 eQikpS"
               height="46"
               name="lastName"
               placeholder="Enter last name"
@@ -223,16 +223,16 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           </div>
         </div>
         <div
-          class="Column-sc-1n6divy-0 npKUP"
+          class="Column-sc-1n6divy-0 gWZjHC"
         >
           <p
-            class="Text-sc-2lza2m-0 ggakK"
+            class="Text-sc-2lza2m-0 drfDFr"
             width="fit-content"
           >
             E-mail address
           </p>
           <input
-            class="Input-sc-19txxuq-0 fcoxGj"
+            class="Input-sc-19txxuq-0 eQikpS"
             height="46"
             name="email"
             placeholder="Enter e-mail address"
@@ -242,16 +242,16 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 npKUP"
+          class="Column-sc-1n6divy-0 gWZjHC"
         >
           <p
-            class="Text-sc-2lza2m-0 ggakK"
+            class="Text-sc-2lza2m-0 drfDFr"
             width="fit-content"
           >
             Password
           </p>
           <input
-            class="Input-sc-19txxuq-0 fcoxGj"
+            class="Input-sc-19txxuq-0 eQikpS"
             height="46"
             name="password"
             placeholder="Enter password"
@@ -261,16 +261,16 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 npKUP"
+          class="Column-sc-1n6divy-0 gWZjHC"
         >
           <p
-            class="Text-sc-2lza2m-0 ggakK"
+            class="Text-sc-2lza2m-0 drfDFr"
             width="fit-content"
           >
             Password confirmation
           </p>
           <input
-            class="Input-sc-19txxuq-0 fcoxGj"
+            class="Input-sc-19txxuq-0 eQikpS"
             height="46"
             name="passwordConfirmation"
             placeholder="Retype your password"
@@ -280,7 +280,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           />
         </div>
         <button
-          class="StyledButton-t20ntd-0 cUeESq"
+          class="StyledButton-t20ntd-0 mCxSH"
           color="primary"
           height="46"
           type="submit"
@@ -288,14 +288,14 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           Register
         </button>
         <div
-          class="Row-x1o3ru-0 gJhyEx"
+          class="Row-x1o3ru-0 duXTXk"
           width="100%"
         >
           <a
             href="/login"
           >
             <button
-              class="StyledTextButton-sc-17cmh3t-0 kXPqCq"
+              class="StyledTextButton-sc-17cmh3t-0 cKInGX"
               color="#C866EA"
             >
               <span>

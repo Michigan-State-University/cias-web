@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
 import { IntlProvider } from 'react-intl';
@@ -18,13 +18,13 @@ const defaultProps = {
 
 describe('<UrlQuestion />', () => {
   it('should match the snapshot', () => {
-    const renderedComponent = renderer
-      .create(
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <UrlQuestion {...defaultProps} />
-        </IntlProvider>,
-      )
-      .toJSON();
+    const {
+      container: { firstChild: renderedComponent },
+    } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <UrlQuestion {...defaultProps} />
+      </IntlProvider>,
+    );
     expect(renderedComponent).toMatchSnapshot();
   });
 });

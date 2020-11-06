@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { takeLatest, put, call } from 'redux-saga/effects';
-import { success as showSuccess } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
@@ -23,11 +23,9 @@ export function* inviteResearcher({ payload: { email } }) {
 
     yield put(inviteResearcherSuccess(mappedUser));
     yield put(addUserToList(mappedUser));
-    yield put(
-      showSuccess(formatMessage(messages.invitationSent), {
-        id: INVITE_RESEARCHER_SUCCESS,
-      }),
-    );
+    yield call(toast.success, formatMessage(messages.invitationSent), {
+      toastId: INVITE_RESEARCHER_SUCCESS,
+    });
   } catch (error) {
     yield put(inviteResearcherError(requestErrorMessageHandler(error)));
   }

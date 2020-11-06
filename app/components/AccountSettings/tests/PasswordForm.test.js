@@ -2,12 +2,10 @@
  *
  * Tests for AccountSettings
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render, fireEvent, wait } from 'react-testing-library';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 import { IntlProvider } from 'react-intl';
@@ -67,7 +65,7 @@ describe('<PasswordForm />', () => {
     const closeModalButton = getByTestId('close-modal-button');
     fireEvent.click(closeModalButton);
 
-    await wait(() => {
+    await waitFor(() => {
       expect(defaultProps.changeErrorValue).toHaveBeenCalled();
       expect(defaultProps.onClose).toHaveBeenCalled();
     });
@@ -96,7 +94,7 @@ describe('<PasswordForm />', () => {
     const submitButton = getByTestId('submit-button');
     fireEvent.click(submitButton);
 
-    await wait(() => {
+    await waitFor(() => {
       expect(defaultProps.changePassword).toHaveBeenCalledWith({
         oldPassword,
         newPassword,

@@ -5,7 +5,7 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
 import { mapAccessToStateObject } from 'utils/mapResponseObjects';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import {
@@ -41,11 +41,9 @@ describe('fetchUsersWithAccess saga', () => {
     const error = new Error('test');
     return expectSaga(enableUserAccess, { payload })
       .provide([[matchers.call.fn(axios.post), throwError(error)]])
-      .put(
-        showError(formatMessage(messages.giveUserAccessError), {
-          id: ENABLE_USER_ACCESS_ERROR,
-        }),
-      )
+      .call(toast.error, formatMessage(messages.giveUserAccessError), {
+        toastId: ENABLE_USER_ACCESS_ERROR,
+      })
       .put(enableUserAccessFailure(error))
       .run();
   });

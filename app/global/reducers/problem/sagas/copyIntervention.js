@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { put, call, takeLatest } from 'redux-saga/effects';
-import { error as showError } from 'react-toastify-redux';
+import { put, takeLatest, call } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import messages from '../messages';
@@ -20,11 +20,9 @@ export function* copyIntervention({ payload: { interventionId } }) {
 
     yield put(copyInterventionSuccess(copiedInterventions));
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.copyError), {
-        id: COPY_INTERVENTION_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.copyError), {
+      toastId: COPY_INTERVENTION_ERROR,
+    });
   }
 }
 

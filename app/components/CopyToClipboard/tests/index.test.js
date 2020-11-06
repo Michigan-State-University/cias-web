@@ -2,12 +2,10 @@
  *
  * Tests for CopyToClipboard
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import 'jest-styled-components';
 

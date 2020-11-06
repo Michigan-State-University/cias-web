@@ -1,0 +1,81 @@
+diff --git a/node_modules/react-lottie/dist/index.js b/node_modules/react-lottie/dist/index.js
+index b9015a6..13226ea 100644
+--- a/node_modules/react-lottie/dist/index.js
++++ b/node_modules/react-lottie/dist/index.js
+@@ -71,13 +71,13 @@ var Lottie = function (_React$Component) {
+     key: 'componentDidMount',
+     value: function componentDidMount() {
+       var _props = this.props,
+-          options = _props.options,
+-          eventListeners = _props.eventListeners;
++        options = _props.options,
++        eventListeners = _props.eventListeners;
+       var loop = options.loop,
+-          autoplay = options.autoplay,
+-          animationData = options.animationData,
+-          rendererSettings = options.rendererSettings,
+-          segments = options.segments;
++        autoplay = options.autoplay,
++        animationData = options.animationData,
++        rendererSettings = options.rendererSettings,
++        segments = options.segments;
+ 
+ 
+       this.options = {
+@@ -96,20 +96,17 @@ var Lottie = function (_React$Component) {
+       this.registerEvents(eventListeners);
+     }
+   }, {
+-    key: 'componentWillUpdate',
+-    value: function componentWillUpdate(nextProps /* , nextState */) {
++    key: 'componentDidUpdate',
++    value: function componentDidUpdate(prevProps) {
+       /* Recreate the animation handle if the data is changed */
+-      if (this.options.animationData !== nextProps.options.animationData) {
+-        this.deRegisterEvents(this.props.eventListeners);
++      if (this.options.animationData !== this.props.options.animationData) {
++        this.deRegisterEvents(prevProps.eventListeners);
+         this.destroy();
+-        this.options = (0, _extends3.default)({}, this.options, nextProps.options);
++        this.options = (0, _extends3.default)({}, this.options, this.props.options);
+         this.anim = _lottieWeb2.default.loadAnimation(this.options);
+-        this.registerEvents(nextProps.eventListeners);
++        this.registerEvents(this.props.eventListeners);
+       }
+-    }
+-  }, {
+-    key: 'componentDidUpdate',
+-    value: function componentDidUpdate() {
++
+       if (this.props.isStopped) {
+         this.stop();
+       } else if (this.props.segments) {
+@@ -193,12 +190,12 @@ var Lottie = function (_React$Component) {
+       var _this4 = this;
+ 
+       var _props2 = this.props,
+-          width = _props2.width,
+-          height = _props2.height,
+-          ariaRole = _props2.ariaRole,
+-          ariaLabel = _props2.ariaLabel,
+-          isClickToPauseDisabled = _props2.isClickToPauseDisabled,
+-          title = _props2.title;
++        width = _props2.width,
++        height = _props2.height,
++        ariaRole = _props2.ariaRole,
++        ariaLabel = _props2.ariaLabel,
++        isClickToPauseDisabled = _props2.isClickToPauseDisabled,
++        title = _props2.title;
+ 
+ 
+       var getSize = function getSize(initial) {
+@@ -261,7 +258,8 @@ Lottie.propTypes = {
+   ariaRole: _propTypes2.default.string,
+   ariaLabel: _propTypes2.default.string,
+   isClickToPauseDisabled: _propTypes2.default.bool,
+-  title: _propTypes2.default.string
++  title: _propTypes2.default.string,
++  style: _propTypes2.default.object
+ };
+ 
+ Lottie.defaultProps = {

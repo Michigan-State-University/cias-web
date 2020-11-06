@@ -216,56 +216,52 @@ exports[`<InterventionBranching /> Should render and match the snapshot 1`] = `
 }
 
 <div
-  className="c0"
+  class="c0"
 >
   <div
-    className="c1"
+    class="c1"
   >
     <div
-      className="c2"
+      class="c2"
       width="100%"
     >
       <p
-        className="c3"
-        fontSize={13}
+        class="c3"
+        font-size="13"
       >
         Next Session:
       </p>
       <p
-        className="c4"
-        fontSize={13}
-        fontWeight="bold"
+        class="c4"
+        font-size="13"
+        font-weight="bold"
       >
         test-2
       </p>
     </div>
   </div>
   <div
-    className="c5"
+    class="c5"
   >
     <div
-      className="c6"
+      class="c6"
       width="100%"
     >
       <p
-        className="c7"
+        class="c7"
       >
         Use formula
       </p>
       <label
-        checked={false}
-        className="c8"
-        onToggle={[Function]}
+        class="c8"
       >
         <input
-          checked={false}
-          className="c9 c10"
+          class="c9 c10"
           data-testid="switch-input"
-          onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="c11 c12"
+          class="c11 c12"
         />
       </label>
     </div>

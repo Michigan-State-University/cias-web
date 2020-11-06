@@ -10,7 +10,7 @@ import {
   editUserSaga,
   makeSelectUser,
 } from 'global/reducers/auth';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 
 import TimezoneForm from 'components/AccountSettings/TimezoneForm';
 

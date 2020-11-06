@@ -16,7 +16,7 @@ import ErrorAlert from 'components/ErrorAlert';
 import Loader from 'components/Loader';
 import Spinner from 'components/Spinner';
 import H2 from 'components/H2';
-import injectSaga from 'utils/injectSaga';
+import { injectSaga } from 'redux-injectors';
 import {
   fetchProblemRequest,
   makeSelectProblemState,

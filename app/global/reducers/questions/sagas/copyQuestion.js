@@ -1,6 +1,6 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -18,11 +18,9 @@ function* copyQuestion({ payload: { questionId } }) {
 
     yield put(copyQuestionSuccess(copiedQuestion));
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.copyError), {
-        id: COPY_QUESTION_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.copyError), {
+      id: COPY_QUESTION_ERROR,
+    });
     yield put(copyQuestionError(error));
   }
 }

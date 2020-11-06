@@ -29,7 +29,7 @@ import {
   changeCurrentIntervention,
 } from 'global/reducers/problem';
 import { getQuestionsRequest } from 'global/reducers/questions';
-import { useInjectReducer } from 'utils/injectReducer';
+import { injectReducer } from 'redux-injectors';
 import { questionGroupsReducer } from 'global/reducers/questionGroups';
 import messages from './messages';
 
@@ -50,7 +50,6 @@ function InterventionBranching({
   fetchQuestions,
   disabled,
 }) {
-  useInjectReducer({ key: 'questionGroups', reducer: questionGroupsReducer });
   const displayPatternTargetText = target => {
     if (target.id === '') return formatMessage(messages.selectSession);
     const intervention = find(
@@ -160,6 +159,7 @@ const withConnect = connect(
 );
 
 export default compose(
+  injectReducer({ key: 'questionGroups', reducer: questionGroupsReducer }),
   injectIntl,
   withConnect,
 )(InterventionBranching);

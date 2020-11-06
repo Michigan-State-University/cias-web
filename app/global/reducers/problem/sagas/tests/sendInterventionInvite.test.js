@@ -4,7 +4,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { error as showError, info as showInfo } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { createProblem } from 'utils/reducerCreators';
 
@@ -49,11 +49,9 @@ describe('sendInterventionInvite saga', () => {
           index,
         ),
       )
-      .put(
-        showInfo(formatMessage(messages.sendInviteSuccess), {
-          id: SEND_INTERVENTION_INVITE_SUCCESS,
-        }),
-      )
+      .call(toast.info, formatMessage(messages.sendInviteSuccess), {
+        toastId: SEND_INTERVENTION_INVITE_SUCCESS,
+      })
       .run());
 
   it('Check sendInterventionInvite error connection', () => {
@@ -62,11 +60,9 @@ describe('sendInterventionInvite saga', () => {
       .withState(mockState)
       .provide([[matchers.call.fn(axios.post), throwError(error)]])
       .put(sendInterventionInviteError())
-      .put(
-        showError(formatMessage(messages.sendInviteError), {
-          id: SEND_INTERVENTION_INVITE_ERROR,
-        }),
-      )
+      .call(toast.error, formatMessage(messages.sendInviteError), {
+        toastId: SEND_INTERVENTION_INVITE_ERROR,
+      })
       .run();
   });
 

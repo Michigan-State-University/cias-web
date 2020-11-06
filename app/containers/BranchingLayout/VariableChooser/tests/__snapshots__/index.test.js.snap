@@ -195,39 +195,39 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Box-sc-14m3exe-0 jseseK"
+      class="Box-sc-14m3exe-0 dsNuUD"
       display="none"
       width="auto"
     >
       <div
-        class="Row-x1o3ru-0 iJOjSZ"
+        class="Row-x1o3ru-0 dAhqIQ"
       >
         <div
-          class="Box-sc-14m3exe-0 hjBUNi"
+          class="Box-sc-14m3exe-0 ketynr"
         >
           <div
-            class="Column-sc-1n6divy-0 dfNUrc"
+            class="Column-sc-1n6divy-0 SJAYV"
           >
             <div
-              class="Row-x1o3ru-0 fZOBlm"
+              class="Row-x1o3ru-0 fxPBcH"
               data-testid="undefined-select-variable"
             >
               <div
-                class="Row-x1o3ru-0 gHqqvy"
+                class="Row-x1o3ru-0 fdTqjP"
               >
                 <img
-                  class="Img-sc-1kfzr96-0 cxoQdy"
+                  class="Img-sc-1kfzr96-0 loGjyL"
                   src="IMAGE_MOCK"
                 />
                 <p
-                  class="Text-sc-2lza2m-0 gKhOnl"
+                  class="Text-sc-2lza2m-0 gJZxTA"
                   overflow="hidden"
                 >
                   Test subtitle 1
                 </p>
               </div>
               <div
-                class="Badge-sc-1bivynt-0 dKurdL"
+                class="Badge-sc-1bivynt-0 kRyFbm"
                 color="#107969"
               >
                 var_single_1
@@ -260,41 +260,33 @@ Object {
   "getAllByLabelText": [Function],
   "getAllByPlaceholderText": [Function],
   "getAllByRole": [Function],
-  "getAllBySelectText": [Function],
   "getAllByTestId": [Function],
   "getAllByText": [Function],
   "getAllByTitle": [Function],
-  "getAllByValue": [Function],
   "getByAltText": [Function],
   "getByDisplayValue": [Function],
   "getByLabelText": [Function],
   "getByPlaceholderText": [Function],
   "getByRole": [Function],
-  "getBySelectText": [Function],
   "getByTestId": [Function],
   "getByText": [Function],
   "getByTitle": [Function],
-  "getByValue": [Function],
   "queryAllByAltText": [Function],
   "queryAllByDisplayValue": [Function],
   "queryAllByLabelText": [Function],
   "queryAllByPlaceholderText": [Function],
   "queryAllByRole": [Function],
-  "queryAllBySelectText": [Function],
   "queryAllByTestId": [Function],
   "queryAllByText": [Function],
   "queryAllByTitle": [Function],
-  "queryAllByValue": [Function],
   "queryByAltText": [Function],
   "queryByDisplayValue": [Function],
   "queryByLabelText": [Function],
   "queryByPlaceholderText": [Function],
   "queryByRole": [Function],
-  "queryBySelectText": [Function],
   "queryByTestId": [Function],
   "queryByText": [Function],
   "queryByTitle": [Function],
-  "queryByValue": [Function],
   "rerender": [Function],
   "unmount": [Function],
 }
@@ -506,39 +498,39 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Box-sc-14m3exe-0 jseseK"
+      class="Box-sc-14m3exe-0 dsNuUD"
       display="none"
       width="auto"
     >
       <div
-        class="Row-x1o3ru-0 iJOjSZ"
+        class="Row-x1o3ru-0 dAhqIQ"
       >
         <div
-          class="Box-sc-14m3exe-0 hjBUNi"
+          class="Box-sc-14m3exe-0 ketynr"
         >
           <div
-            class="Column-sc-1n6divy-0 dfNUrc"
+            class="Column-sc-1n6divy-0 SJAYV"
           >
             <div
-              class="Box-sc-14m3exe-0 ebXHGy"
+              class="Box-sc-14m3exe-0 cYhKwr"
             >
               <div
-                class="Box-sc-14m3exe-0 kdSFQ"
+                class="Box-sc-14m3exe-0 gDFvhB"
                 data-testid="no-content"
                 display="flex"
                 height="100%"
                 width="100%"
               >
                 <div
-                  class="Column-sc-1n6divy-0 bPmHLf"
+                  class="Column-sc-1n6divy-0 kCnOyy"
                 >
                   <img
                     alt="No content"
-                    class="Img-sc-1kfzr96-0 eEXYbw"
+                    class="Img-sc-1kfzr96-0 lmhFEd"
                     src="IMAGE_MOCK"
                   />
                   <h2
-                    class="H2-egphza-0 gNedGT"
+                    class="H2-egphza-0 iPVWCm"
                     color="#B0BAC9"
                   >
                     No variables defined yet
@@ -573,41 +565,33 @@ Object {
   "getAllByLabelText": [Function],
   "getAllByPlaceholderText": [Function],
   "getAllByRole": [Function],
-  "getAllBySelectText": [Function],
   "getAllByTestId": [Function],
   "getAllByText": [Function],
   "getAllByTitle": [Function],
-  "getAllByValue": [Function],
   "getByAltText": [Function],
   "getByDisplayValue": [Function],
   "getByLabelText": [Function],
   "getByPlaceholderText": [Function],
   "getByRole": [Function],
-  "getBySelectText": [Function],
   "getByTestId": [Function],
   "getByText": [Function],
   "getByTitle": [Function],
-  "getByValue": [Function],
   "queryAllByAltText": [Function],
   "queryAllByDisplayValue": [Function],
   "queryAllByLabelText": [Function],
   "queryAllByPlaceholderText": [Function],
   "queryAllByRole": [Function],
-  "queryAllBySelectText": [Function],
   "queryAllByTestId": [Function],
   "queryAllByText": [Function],
   "queryAllByTitle": [Function],
-  "queryAllByValue": [Function],
   "queryByAltText": [Function],
   "queryByDisplayValue": [Function],
   "queryByLabelText": [Function],
   "queryByPlaceholderText": [Function],
   "queryByRole": [Function],
-  "queryBySelectText": [Function],
   "queryByTestId": [Function],
   "queryByText": [Function],
   "queryByTitle": [Function],
-  "queryByValue": [Function],
   "rerender": [Function],
   "unmount": [Function],
 }

@@ -2,12 +2,10 @@
  *
  * Tests for AccountSettings
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render, fireEvent, wait } from 'react-testing-library';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 import { IntlProvider } from 'react-intl';
@@ -53,7 +51,7 @@ describe('<FullNameForm />', () => {
     fireEvent.blur(nameInput);
     expect(defaultProps.editUser).not.toHaveBeenCalled();
     fireEvent.change(nameInput, { target: { value: newName } });
-    await wait(() => {
+    await waitFor(() => {
       expect(defaultProps.editUser).toHaveBeenCalledWith({
         firstName: newName,
         lastName: defaultProps.user.lastName,

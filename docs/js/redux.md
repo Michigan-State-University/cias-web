@@ -14,7 +14,7 @@ or a component that will be loaded dynamically. Dynamic means that it will be
 injected when the component it attached to is mounted. In your component's `index.js`:
 
 ```JS
-import injectReducer from 'utils/injectReducer';
+import injectReducer from 'redux-injectors';
 import reducer from './reducer';
 
 // ...

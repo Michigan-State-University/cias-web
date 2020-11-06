@@ -2,12 +2,10 @@
  *
  * Tests for AccountSettings
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render, fireEvent, wait } from 'react-testing-library';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 import { IntlProvider } from 'react-intl';
@@ -20,6 +18,15 @@ describe('<TimezoneForm />', () => {
     editUser: jest.fn(),
     formatMessage: jest.fn(msg => msg.defaultMessage),
   };
+
+  beforeAll(() => {
+    jest.useFakeTimers('modern');
+    jest.setSystemTime(new Date(2020, 9, 31));
+  });
+
+  afterAll(() => {
+    jest.clearAllTimers();
+  });
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
@@ -55,7 +62,7 @@ describe('<TimezoneForm />', () => {
     const option1 = getByText(newTimezone);
     fireEvent.click(option1);
 
-    await wait(() => {
+    await waitFor(() => {
       expect(defaultProps.editUser).toHaveBeenCalledWith({
         timeZone: 'Africa/Harare',
       });

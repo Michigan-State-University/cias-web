@@ -23,8 +23,8 @@ import withPublicLayout from 'containers/PublicLayout';
 import FormikInput from 'components/FormikInput';
 import Button from 'components/Button';
 import ErrorAlert from 'components/ErrorAlert';
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga, useInjectReducer } from 'redux-injectors';
+
 import { passwordRegex } from 'global/constants/regex';
 
 import messages from './messages';

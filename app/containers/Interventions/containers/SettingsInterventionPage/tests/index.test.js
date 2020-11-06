@@ -1,18 +1,14 @@
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { createStore } from 'redux';
-
 import { DEFAULT_LOCALE } from 'i18n';
-import { interventionReducer } from 'global/reducers/intervention';
 
+import { createTestStore } from 'utils/testUtils/storeUtils';
 import SettingsInterventionPage from '../index';
 
 describe('<SettingsInterventionPage />', () => {
-  let store;
-
   const defaultProps = {
     match: { params: { id: '12ad120dj012-3a' } },
     getIntervention: jest.fn(),
@@ -20,7 +16,6 @@ describe('<SettingsInterventionPage />', () => {
     getQuestions: jest.fn(),
   };
 
-  const reducer = state => state;
   const initialState = {
     intervention: {
       intervention: {
@@ -40,14 +35,7 @@ describe('<SettingsInterventionPage />', () => {
       },
     },
   };
-  beforeAll(() => {
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
-    store.injectedReducers = {
-      intervention: interventionReducer,
-    };
-    store.injectedSagas = {};
-  });
+  const store = createTestStore(initialState);
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');

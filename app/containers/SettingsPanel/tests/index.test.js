@@ -2,23 +2,20 @@
  *
  * Tests for SettingsPanel
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 
 import { DEFAULT_LOCALE } from 'i18n';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import SettingsPanel from '../index';
 
 describe('<SettingsPanel />', () => {
-  const reducer = state => state;
   const initialState = {
     problem: {
       problem: {
@@ -33,18 +30,11 @@ describe('<SettingsPanel />', () => {
       },
     },
   };
-  let store;
+  const store = createTestStore(initialState);
 
   const defaultProps = {
-    match: { params: { problemId: 'as120s-as12cs' } },
+    match: { params: { problem: { id: 'as120s-as12cs' } } },
   };
-
-  beforeAll(() => {
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
-    store.injectedReducers = {};
-    store.injectedSagas = {};
-  });
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');

@@ -1,34 +1,30 @@
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { MemoryRouter } from 'react-router-dom';
+import { DEFAULT_LOCALE } from 'i18n';
+
 import { problemReducer } from 'global/reducers/problem';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import ProblemDetailsPage from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
-
-const defaultProps = {
-  match: {
-    params: {
-      problemId: '1jkajsd2-112a',
-    },
-  },
-};
 
 describe('<ProblemDetailsPage />', () => {
-  let store;
-
+  const defaultProps = {
+    match: {
+      params: {
+        problemId: '1jkajsd2-112a',
+      },
+    },
+  };
   const initialState = {};
-  const reducer = state => state;
+  const store = createTestStore(initialState);
+
   beforeAll(() => {
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
     store.injectedReducers = {
       problem: problemReducer,
     };
-    store.injectedSagas = {};
   });
 
   it('Expect to not log errors in console', () => {

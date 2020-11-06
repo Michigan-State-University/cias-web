@@ -10,8 +10,7 @@ import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
 import Modal from 'components/Modal';
 import { emailValidator } from 'utils/validators/emailValidator';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import InvitationList from './Containers/InvitationList';
 import InviteForm from './Containers/InviteForm';

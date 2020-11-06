@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import { mapAccessToStateObject } from 'utils/mapResponseObjects';
@@ -23,11 +23,9 @@ export function* enableUserAccess({ payload: { id, emails } }) {
     });
     yield put(enableUserAccessSuccess(users.map(mapAccessToStateObject)));
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.giveUserAccessError), {
-        id: ENABLE_USER_ACCESS_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.giveUserAccessError), {
+      toastId: ENABLE_USER_ACCESS_ERROR,
+    });
     yield put(enableUserAccessFailure(error));
   }
 }

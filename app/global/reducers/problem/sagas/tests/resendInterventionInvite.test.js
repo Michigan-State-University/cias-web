@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { error as showError, info as showInfo } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { takeLatest } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -23,9 +23,7 @@ describe('reorderSessions saga', () => {
     expectSaga(resendInterventionInvite, { payload })
       .provide([[matchers.call.fn(axios.get), {}]])
       .put(sendInterventionInviteSuccess())
-      .put(
-        showInfo(formatMessage(messages.resendInviteSuccess), { id: 'toast1' }),
-      )
+      .call(toast.info, formatMessage(messages.resendInviteSuccess))
       .run());
 
   it('Check resendInterventionInvite error connection', () => {
@@ -33,9 +31,7 @@ describe('reorderSessions saga', () => {
     return expectSaga(resendInterventionInvite, { payload })
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
       .put(sendInterventionInviteError())
-      .put(
-        showError(formatMessage(messages.resendInviteError), { id: 'toast2' }),
-      )
+      .call(toast.error, formatMessage(messages.resendInviteError))
       .run();
   });
 

@@ -33,8 +33,7 @@ import {
 } from 'global/reducers/userList';
 import { themeColors } from 'theme';
 import { PER_PAGE } from 'global/reducers/userList/constants';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import InviteResearcher from '../InviteResearcher';
 import UserTable from './Components/UserTable';

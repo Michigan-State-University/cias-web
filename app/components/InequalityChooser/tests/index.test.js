@@ -2,12 +2,10 @@
  *
  * Tests for InequalityChooser
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import 'jest-styled-components';
 
 import InequalityChooser from '../index';
@@ -28,7 +26,7 @@ describe('<InequalityChooser />', () => {
     expect(container).toMatchSnapshot();
   });
 
-  it('Should call onSuccessfulChange correctly', () => {
+  it('Should call onSuccessfulChange correctly', async () => {
     const { getByTestId, getByText } = render(
       <InequalityChooser {...defaultProps} />,
     );
@@ -40,15 +38,21 @@ describe('<InequalityChooser />', () => {
     fireEvent.keyDown(select, { key: 'ArrowDown', code: 40 });
     const option1 = getByText(newSign);
     fireEvent.click(option1);
-    expect(defaultProps.onSuccessfulChange).toHaveBeenCalledWith(`${newSign}5`);
+    await waitFor(() =>
+      expect(defaultProps.onSuccessfulChange).toHaveBeenCalledWith(
+        `${newSign}5`,
+      ),
+    );
 
     const newValue = 10;
 
     const numericInput = getByTestId('input');
     fireEvent.change(numericInput, { target: { value: newValue } });
     fireEvent.blur(numericInput);
-    expect(defaultProps.onSuccessfulChange).toHaveBeenCalledWith(
-      `${newSign}${newValue}`,
+    await waitFor(() =>
+      expect(defaultProps.onSuccessfulChange).toHaveBeenCalledWith(
+        `${newSign}${newValue}`,
+      ),
     );
   });
 });

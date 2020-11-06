@@ -1,8 +1,8 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, call } from 'redux-saga/effects';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import axios from 'axios';
 import { push } from 'connected-react-router';
-import { success as showSuccess } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
@@ -27,11 +27,9 @@ function* registerParticipant({ payload }) {
     });
     yield put(registerParticipantSuccess());
     yield put(push('/login'));
-    yield put(
-      showSuccess(formatMessage(messages.createdAccount), {
-        id: REGISTER_PARTICIPANT_SUCCESS,
-      }),
-    );
+    yield call(toast.success, formatMessage(messages.createdAccount), {
+      toastId: REGISTER_PARTICIPANT_SUCCESS,
+    });
   } catch (error) {
     yield put(registerParticipantError(requestErrorMessageHandler(error)));
   }

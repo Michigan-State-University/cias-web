@@ -1,6 +1,6 @@
-import { put, takeLatest, select, all } from 'redux-saga/effects';
+import { put, takeLatest, select, all, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { dismiss, error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import get from 'lodash/get';
 
 import { getAllVariables } from 'models/Intervention/utils';
@@ -63,14 +63,12 @@ function* editQuestion({ payload }) {
   }
 
   if (duplicates) {
-    yield put(
-      showError(formatMessage(messages.duplicateVariable), {
-        id: EDIT_QUESTION_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.duplicateVariable), {
+      toastId: EDIT_QUESTION_ERROR,
+    });
     return yield put(editQuestionError({ questionId: question.id }));
   }
-  yield put(dismiss(EDIT_QUESTION_ERROR));
+  yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
   const requestURL = `v1/question_groups/${
     question.question_group_id

@@ -1,6 +1,6 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { mapCurrentUser } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -26,10 +26,12 @@ function* deleteOtherUserAvatar({ payload: { userId } }) {
     const mappedUser = mapCurrentUser(data);
     yield put(deleteOtherUserAvatarSuccess(mappedUser));
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.deleteOtherUserAvatarError), {
-        id: DELETE_OTHER_USER_AVATAR_ERROR,
-      }),
+    yield call(
+      toast.error,
+      formatMessage(messages.deleteOtherUserAvatarError),
+      {
+        toastId: DELETE_OTHER_USER_AVATAR_ERROR,
+      },
     );
     yield put(deleteOtherUserAvatarError(error));
   }

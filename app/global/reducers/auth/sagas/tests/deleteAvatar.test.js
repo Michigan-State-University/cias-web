@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { initialState } from 'global/reducers/auth/reducer';
 import { throwError } from 'redux-saga-test-plan/providers';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import cloneDeep from 'lodash/cloneDeep';
 import { takeLatest } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
@@ -14,7 +14,7 @@ import { mapCurrentUser } from 'utils/mapResponseObjects';
 
 import { apiResponseWithSnakeCase } from './mockApiResponse';
 import deleteAvatarSaga, { deleteAvatar } from '../deleteAvatar';
-import { deleteAvatarSuccess, addAvatarError } from '../../actions';
+import { deleteAvatarSuccess, deleteAvatarError } from '../../actions';
 import messages from '../../messages';
 import { DELETE_AVATAR_ERROR, DELETE_AVATAR_REQUEST } from '../../constants';
 
@@ -33,18 +33,15 @@ describe('deleteAvatar saga', () => {
       .put(deleteAvatarSuccess(successUser))
       .run();
   });
-  it('Check deleteAvatar error connection', () => {
+  it('Check deleteAvatar error connection', () =>
     expectSaga(deleteAvatar)
       .withState(mockState)
-      .provide([[matchers.call.fn(axios.post), throwError()]])
-      .put(
-        showError(formatMessage(messages.deleteAvatarError), {
-          id: DELETE_AVATAR_ERROR,
-        }),
-      )
-      .put(addAvatarError())
-      .run();
-  });
+      .provide([[matchers.call.fn(axios.delete), throwError()]])
+      .call(toast.error, formatMessage(messages.deleteAvatarError), {
+        toastId: DELETE_AVATAR_ERROR,
+      })
+      .put(deleteAvatarError())
+      .run());
   it('Check deleteAvatar connection', () => {
     const sagaFunction = deleteAvatarSaga();
     const takeLatestDescriptor = sagaFunction.next().value;

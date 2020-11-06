@@ -70,7 +70,7 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
 >
   <a
     class="c2"
-    href=""
+    href="/"
   >
     <button
       class="c3"
@@ -163,7 +163,7 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
   <a
     class="c2"
     disabled=""
-    href=""
+    href="/"
   >
     <button
       class="c3"

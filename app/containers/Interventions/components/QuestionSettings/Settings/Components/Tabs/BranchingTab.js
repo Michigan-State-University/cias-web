@@ -11,8 +11,8 @@ import Intervention from 'models/Intervention/Intervention';
 import Question from 'models/Intervention/Question';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { makeSelectQuestions } from 'global/reducers/questions';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+
 import {
   findQuestionIndex,
   findInterventionIndex,

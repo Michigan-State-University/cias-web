@@ -1,6 +1,6 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -18,11 +18,9 @@ function* changeGroupName({ payload: { title, interventionId, groupId } }) {
     yield put(changeGroupNameSuccess());
   } catch (error) {
     yield put(changeGroupNameError(error));
-    yield put(
-      showError(formatMessage(messages.changeGroupName), {
-        id: CHANGE_GROUP_NAME_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.changeGroupName), {
+      toastId: CHANGE_GROUP_NAME_ERROR,
+    });
   }
 }
 

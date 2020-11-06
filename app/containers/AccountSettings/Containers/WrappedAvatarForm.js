@@ -11,7 +11,7 @@ import {
   deleteAvatarRequest,
   deleteAvatarSaga,
 } from 'global/reducers/auth';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 
 import AvatarForm from 'components/AccountSettings/AvatarForm';
 

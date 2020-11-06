@@ -2,25 +2,21 @@
  *
  * Tests for UserDetails
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-
 import { MemoryRouter } from 'react-router-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
+import { DEFAULT_LOCALE } from 'i18n';
+
+import { createTestStore } from 'utils/testUtils/storeUtils';
 import { UserDetails } from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<UserDetails />', () => {
   let props;
-  const reducer = state => state;
   const initialState = {
     singleUser: {
       user: {
@@ -39,10 +35,7 @@ describe('<UserDetails />', () => {
   let modalContainer;
   let mainAppContainer;
   beforeEach(() => {
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
-    store.injectedReducers = {};
-    store.injectedSagas = {};
+    store = createTestStore(initialState);
 
     ReactDOM.createPortal = jest.fn(element => element);
     modalContainer = document.createElement('div');

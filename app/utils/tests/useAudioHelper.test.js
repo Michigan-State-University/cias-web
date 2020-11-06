@@ -2,8 +2,9 @@
  * Test useAudioHelper
  */
 
+import { renderHook } from '@testing-library/react-hooks';
+
 import useAudioHelper from 'utils/animationsHelpers/useAudioHelper';
-import { renderHook } from 'utils/renderHook';
 import { instantiateBlockForType } from 'models/Intervention/utils';
 import { speechType } from 'models/Narrator/BlockTypes';
 
@@ -28,9 +29,7 @@ describe('useAudioHelper test', () => {
   });
 
   it('should return proper initial data', () => {
-    const {
-      data: { getInitialSpeechAnimation },
-    } = renderHook(() =>
+    const { result } = renderHook(() =>
       useAudioHelper(
         blocks,
         dispatchUpdate,
@@ -42,6 +41,8 @@ describe('useAudioHelper test', () => {
         settings,
       ),
     );
+
+    const { getInitialSpeechAnimation } = result.current;
 
     expect(getInitialSpeechAnimation()).toEqual({
       ...speechBlock,

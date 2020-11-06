@@ -9,9 +9,8 @@
 import React from 'react';
 import { IntlProvider } from 'react-intl';
 import 'jest-styled-components';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { DEFAULT_LOCALE } from 'i18n';
-import renderer from 'react-test-renderer';
 
 import InterventionCreateButton from '../index';
 
@@ -27,13 +26,13 @@ describe('<InterventionCreateButton />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-    const renderedComponent = renderer
-      .create(
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <InterventionCreateButton />
-        </IntlProvider>,
-      )
-      .toJSON();
+    const {
+      container: { firstChild: renderedComponent },
+    } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <InterventionCreateButton />
+      </IntlProvider>,
+    );
     expect(renderedComponent).toMatchSnapshot();
   });
 });

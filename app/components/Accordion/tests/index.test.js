@@ -1,6 +1,6 @@
 import React from 'react';
 import times from 'lodash/times';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent } from '@testing-library/react';
 import 'jest-styled-components';
 
 import Accordion from '../index';

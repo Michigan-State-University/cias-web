@@ -2,12 +2,10 @@
  *
  * Tests for AccountSettings
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { fireEvent, render } from 'react-testing-library';
+import { fireEvent, render } from '@testing-library/react';
 import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 import { IntlProvider } from 'react-intl';

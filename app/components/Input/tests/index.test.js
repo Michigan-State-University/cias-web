@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import 'jest-styled-components';
 
 import Input from '../index';
@@ -67,7 +67,7 @@ describe('<SearchInput />', () => {
     const { container } = render(<SearchInput {...defaultProps} />);
     expect(container).toMatchSnapshot();
   });
-  it('Should invoke onCHange function', () => {
+  it('Should invoke onCHange function', async () => {
     const newProps = {
       ...defaultProps,
       value: 'Value',
@@ -75,7 +75,9 @@ describe('<SearchInput />', () => {
     render(<SearchInput {...newProps} />);
     const img = document.querySelectorAll('img')[1];
     fireEvent.click(img);
-    expect(newProps.onChange).toHaveBeenCalledWith({ target: { value: '' } });
+    await waitFor(() =>
+      expect(newProps.onChange).toHaveBeenCalledWith({ target: { value: '' } }),
+    );
   });
 });
 
@@ -122,24 +124,24 @@ describe('<StyledInput />', () => {
     );
     expect(container).toMatchSnapshot();
   });
-  it('Should change input value for singleline', () => {
+  it('Should change input value for singleline', async () => {
     const { getByPlaceholderText, rerender } = render(
       <StyledInput {...defaultProps} autoSize />,
     );
     const input = getByPlaceholderText('Placeholder');
     fireEvent.change(input, { target: { value: 'Test' } });
-    expect(input.value).toEqual('Test');
+    await waitFor(() => expect(input.value).toEqual('Test'));
     rerender(<StyledInput {...defaultProps} validator={jest.fn(() => true)} />);
     fireEvent.change(input, { target: { value: 'Test2' } });
-    expect(input.value).toEqual('Test2');
+    await waitFor(() => expect(input.value).toEqual('Test2'));
   });
-  it('Should change input value for multiline', () => {
+  it('Should change input value for multiline', async () => {
     const { getByPlaceholderText, rerender } = render(
       <StyledInput {...defaultProps} type="multiline" />,
     );
     const input = getByPlaceholderText('Placeholder');
     fireEvent.change(input, { target: { value: 'Test' } });
-    expect(input.value).toEqual('Test');
+    await waitFor(() => expect(input.value).toEqual('Test'));
     rerender(
       <StyledInput
         {...defaultProps}
@@ -148,21 +150,23 @@ describe('<StyledInput />', () => {
       />,
     );
     fireEvent.change(input, { target: { value: 'Test2' } });
-    expect(input.value).toEqual('Test2');
+    await waitFor(() => expect(input.value).toEqual('Test2'));
   });
-  it('Should invoke onFocus and onBlur for singleline', () => {
+  it('Should invoke onFocus and onBlur for singleline', async () => {
     const { getByPlaceholderText, rerender } = render(
       <StyledInput {...defaultProps} autoSize maxWidth="none" />,
     );
     const input = getByPlaceholderText('Placeholder');
     rerender(<StyledInput {...defaultProps} value="Value" />);
     fireEvent.focus(input);
-    expect(defaultProps.onFocus).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(defaultProps.onFocus).toHaveBeenCalledTimes(1));
     fireEvent.blur(input);
-    expect(defaultProps.onBlur).toHaveBeenCalledWith('Value');
+    await waitFor(() =>
+      expect(defaultProps.onBlur).toHaveBeenCalledWith('Value'),
+    );
     jest.clearAllMocks();
   });
-  it('Should invoke onFocus and onBlur for multiline', () => {
+  it('Should invoke onFocus and onBlur for multiline', async () => {
     const { getByPlaceholderText, rerender } = render(
       <StyledInput {...defaultProps} type="multiline" />,
     );
@@ -170,9 +174,11 @@ describe('<StyledInput />', () => {
 
     rerender(<StyledInput {...defaultProps} value="Value" type="multiline" />);
     fireEvent.focus(input);
-    expect(defaultProps.onFocus).toHaveBeenCalledTimes(1);
+    await waitFor(() => expect(defaultProps.onFocus).toHaveBeenCalledTimes(1));
     fireEvent.blur(input);
-    expect(defaultProps.onBlur).toHaveBeenCalledWith('Value');
+    await waitFor(() =>
+      expect(defaultProps.onBlur).toHaveBeenCalledWith('Value'),
+    );
   });
 });
 
@@ -220,21 +226,25 @@ describe('<ApprovableInput />', () => {
     const { container } = render(<ApprovableInput {...defaultProps} />);
     expect(container).toMatchSnapshot();
   });
-  it('Should change value of the singleline input', () => {
+  it('Should change value of the singleline input', async () => {
     const { getByPlaceholderText, rerender } = render(
       <ApprovableInput {...defaultProps} validator={null} />,
     );
+
     const input = getByPlaceholderText('Placeholder');
     fireEvent.change(input, { target: { value: 'Test' } });
-    expect(input.value).toEqual('Test');
+    await waitFor(() => expect(input.value).toEqual('Test'));
+
     rerender(
       <ApprovableInput {...defaultProps} validator={jest.fn(() => true)} />,
     );
     fireEvent.change(input, { target: { value: 'Test2' } });
-    expect(input.value).toEqual('Test2');
+    await waitFor(() => expect(input.value).toEqual('Test2'));
     fireEvent.focus(input);
     fireEvent.blur(input);
-    expect(defaultProps.onCheck).toHaveBeenCalledWith('Test2');
+    await waitFor(() =>
+      expect(defaultProps.onCheck).toHaveBeenCalledWith('Test2'),
+    );
   });
 
   it('Should render and match the snapshot as multiline', () => {
@@ -243,13 +253,14 @@ describe('<ApprovableInput />', () => {
     );
     expect(container).toMatchSnapshot();
   });
-  it('Should change value of the multiline input', () => {
+  it('Should change value of the multiline input', async () => {
     const { getByPlaceholderText, rerender } = render(
       <ApprovableInput {...defaultProps} type="multiline" validator={null} />,
     );
+
     const input = getByPlaceholderText('Placeholder');
     fireEvent.change(input, { target: { value: 'Test' } });
-    expect(input.value).toEqual('Test');
+    await waitFor(() => expect(input.value).toEqual('Test'));
     rerender(
       <ApprovableInput
         {...defaultProps}
@@ -257,11 +268,14 @@ describe('<ApprovableInput />', () => {
         validator={jest.fn(() => true)}
       />,
     );
+
     fireEvent.change(input, { target: { value: 'Test2' } });
-    expect(input.value).toEqual('Test2');
+    await waitFor(() => expect(input.value).toEqual('Test2'));
     fireEvent.focus(input);
     fireEvent.blur(input);
-    expect(defaultProps.onCheck).toHaveBeenCalledWith('Test2');
+    await waitFor(() =>
+      expect(defaultProps.onCheck).toHaveBeenCalledWith('Test2'),
+    );
   });
   it('Should render and match the snapshot as richText', () => {
     const { container } = render(

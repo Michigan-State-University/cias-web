@@ -20,11 +20,9 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
 }
 
 <button
-  className="c0 c1"
+  class="c0 c1"
   color="primary"
-  disabled={false}
-  onClick={[Function]}
-  width={200}
+  width="200"
 >
   <span>
     Publish Intervention
@@ -33,8 +31,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
 `;
 
 exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] = `
-Array [
-  .c0 {
+.c0 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -62,45 +59,14 @@ Array [
 }
 
 <button
-    className="c0 c1"
-    color="primary"
-    disabled={false}
-    width={200}
-  >
-    <span>
-      Get CSV with results
-    </span>
-  </button>,
-  .c0 {
-  width: 100%;
-  height: 40px;
-  border-radius: 100px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  background-color: #107969;
-  color: #FFFFFF;
-  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  width: 200px;
-}
-
-.c1 {
-  font-weight: bold;
-  background-color: rgba(240,104,74,1);
-}
-
-<button
-    className="c0 c1"
-    color="primary"
-    disabled={false}
-    width={200}
-  >
-    <span>
-      Close Intervention
-    </span>
-  </button>,
-]
+  class="c0 c1"
+  color="primary"
+  width="200"
+>
+  <span>
+    Get CSV with results
+  </span>
+</button>
 `;
 
 exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] = `
@@ -132,10 +98,9 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
 }
 
 <button
-  className="c0 c1"
+  class="c0 c1"
   color="primary"
-  disabled={false}
-  width={200}
+  width="200"
 >
   <span>
     Get CSV with results

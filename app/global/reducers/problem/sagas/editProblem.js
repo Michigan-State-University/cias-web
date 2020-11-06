@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest, select, call } from 'redux-saga/effects';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { defaultMapper } from 'utils/mapResponseObjects';
@@ -21,11 +21,9 @@ export function* editProblem() {
     const mappedData = defaultMapper(data);
     yield put(editProblemSuccess({ ...problem, ...mappedData }));
   } catch (error) {
-    yield put(
-      showError(formatMessage(globalMessages.editProblemError), {
-        id: EDIT_PROBLEM_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(globalMessages.editProblemError), {
+      toastId: EDIT_PROBLEM_ERROR,
+    });
   }
 }
 export default function* editProblemSaga() {

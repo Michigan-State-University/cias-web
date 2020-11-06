@@ -18,7 +18,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { Button } from 'components/Button';
 import { colors, elements } from 'theme';
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 import {
   makeSelectSelectedQuestion,
   editQuestionSaga,

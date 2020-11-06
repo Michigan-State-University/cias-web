@@ -1,4 +1,4 @@
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 import cloneDeep from 'lodash/cloneDeep';
 import { takeLatest } from 'redux-saga/effects';
@@ -42,9 +42,10 @@ describe('addAvatar saga', () => {
     expectSaga(addAvatar, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.post), throwError()]])
-      .put(
-        showError(formatMessage(messages.addAvatarError), {
-          id: ADD_AVATAR_ERROR,
+      .call(
+        toast.error,
+        formatMessage(messages.addAvatarError, {
+          toastId: ADD_AVATAR_ERROR,
         }),
       )
       .put(addAvatarError())

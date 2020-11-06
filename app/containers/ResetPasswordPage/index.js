@@ -22,8 +22,7 @@ import FormikInput from 'components/FormikInput';
 import Button from 'components/Button';
 import LinkButton from 'components/Button/LinkButton';
 import ErrorAlert from 'components/ErrorAlert';
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import messages from './messages';
 import { resetPasswordRequest } from './actions';

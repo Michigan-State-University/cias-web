@@ -3,14 +3,14 @@
 exports[`<ProblemPage /> Should render and match the snapshot with interventions 1`] = `
 <div>
   <div
-    class="styled__StyledContainer-sc-16yio6w-0 bhlDvO"
+    class="styled__StyledContainer-sc-16yio6w-0 cQhApX"
     style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
   >
     <div
-      class="styled__InitialRow-sc-14fow03-0 jXHBhS"
+      class="styled__InitialRow-sc-14fow03-0 iWhzkX"
     >
       <h1
-        class="H1-tncdg6-0 kWGkBM"
+        class="H1-tncdg6-0 kdmzp"
       >
         <span>
           My Dashboard
@@ -18,60 +18,60 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
       </h1>
     </div>
     <div
-      class="styled__InitialRow-sc-14fow03-0 jXHBhS"
+      class="styled__InitialRow-sc-14fow03-0 iWhzkX"
     >
       <div
-        class="Row-x1o3ru-0 fjCOLU"
+        class="Row-x1o3ru-0 dJsvol"
         height="30"
         width="400"
       >
         <div
-          class="Row-x1o3ru-0 kAuiUx"
+          class="Row-x1o3ru-0 jeDFgM"
           width="100%"
         >
           <button
-            class="styled__StatusLabel-sc-14fow03-1 dqprHV"
+            class="styled__StatusLabel-sc-14fow03-1 gWQwGs"
             color="#107969"
             value="draft"
           >
             <p
-              class="styled__FilterText-sc-14fow03-2 dnqhxZ"
+              class="styled__FilterText-sc-14fow03-2 bwynhs"
               color="#FFFFFF"
             >
               Draft
             </p>
           </button>
           <button
-            class="styled__StatusLabel-sc-14fow03-1 hvQpgM"
+            class="styled__StatusLabel-sc-14fow03-1 jprIch"
             color="#8CBD00"
             value="published"
           >
             <p
-              class="styled__FilterText-sc-14fow03-2 dnqhxZ"
+              class="styled__FilterText-sc-14fow03-2 bwynhs"
               color="#FFFFFF"
             >
               Published
             </p>
           </button>
           <button
-            class="styled__StatusLabel-sc-14fow03-1 hSjBMw"
+            class="styled__StatusLabel-sc-14fow03-1 iVkRGp"
             color="#F0684A"
             value="closed"
           >
             <p
-              class="styled__FilterText-sc-14fow03-2 dnqhxZ"
+              class="styled__FilterText-sc-14fow03-2 bwynhs"
               color="#FFFFFF"
             >
               Closed
             </p>
           </button>
           <button
-            class="styled__StatusLabel-sc-14fow03-1 itQFrS"
+            class="styled__StatusLabel-sc-14fow03-1 dyNvKr"
             color="#000000"
             value="archived"
           >
             <p
-              class="styled__FilterText-sc-14fow03-2 dnqhxZ"
+              class="styled__FilterText-sc-14fow03-2 bwynhs"
               color="#FFFFFF"
             >
               Archived
@@ -80,20 +80,20 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
         </div>
       </div>
       <div
-        class="Row-x1o3ru-0 gHqqvy"
+        class="Row-x1o3ru-0 fdTqjP"
       >
         <div
-          class="styled__SearchInputStyled-sc-65e6t4-3 drvUyz"
+          class="styled__SearchInputStyled-sc-65e6t4-3 iSsPYa"
         >
           <input
-            class="Input-sc-19txxuq-0 eNhWGX"
+            class="Input-sc-19txxuq-0 iUbEXC"
             placeholder="Filter by name"
             type="text"
             value=""
           />
           <img
             alt="search"
-            class="styled__SearchIcon-sc-65e6t4-4 kfTzOI"
+            class="styled__SearchIcon-sc-65e6t4-4 jtkbOJ"
             src="IMAGE_MOCK"
           />
           
@@ -108,16 +108,16 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
       >
         <div
-          class="styled__NewElementContainer-sc-1wlulo8-1 izirZm"
+          class="styled__NewElementContainer-sc-1wlulo8-1 dnsdkb"
         >
           <div
-            class="Box-sc-14m3exe-0 dAEVlS"
+            class="Box-sc-14m3exe-0 fByYmj"
             direction="column"
             display="flex"
           >
             <img
               alt="add"
-              class="Img-sc-1kfzr96-0 durfId"
+              class="Img-sc-1kfzr96-0 eIOXBo"
               src="IMAGE_MOCK"
             />
             Create a new intervention
@@ -128,34 +128,34 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
       >
         <a
-          class="styled__StyledLink-xv0l-1 eSJTXu"
+          class="styled__StyledLink-xv0l-1 jTARiP"
           href="/interventions/undefined/"
         >
           <div
-            class="styled__TileContainer-xv0l-0 jlbSdW"
+            class="styled__TileContainer-xv0l-0 exhgan"
           >
             <div
-              class="styled__Heading-xv0l-2 uhKfG"
+              class="styled__Heading-xv0l-2 bOqon"
             >
               <div>
                 <span>
                   Draft
                 </span>
                 <span
-                  class="styled__StatusIndicator-xv0l-3 cMWgxD"
+                  class="styled__StatusIndicator-xv0l-3 cirupC"
                 />
               </div>
               <div>
                 <div
-                  class="Box-sc-14m3exe-0 fjIskl"
+                  class="Box-sc-14m3exe-0 leydUQ"
                   display="flex"
                 >
                   <div
-                    class="styled__ImageContainer-sc-1amzre3-0 xPnXV"
+                    class="styled__ImageContainer-sc-1amzre3-0 fMtzEQ"
                   >
                     <img
                       alt="dots"
-                      class="Img-sc-1kfzr96-0 eEXYbw"
+                      class="Img-sc-1kfzr96-0 lmhFEd"
                       src="IMAGE_MOCK"
                     />
                   </div>
@@ -163,10 +163,10 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
               </div>
             </div>
             <div
-              class="Row-x1o3ru-0 iJOjSZ"
+              class="Row-x1o3ru-0 dAhqIQ"
             >
               <div
-                class="styled__StyledEllipsisText-x30pqb-0 knntnM"
+                class="styled__StyledEllipsisText-x30pqb-0 jalwFp"
                 font-size="18"
                 font-weight="bold"
               >
@@ -174,7 +174,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
               </div>
             </div>
             <div
-              class="Box-sc-14m3exe-0 bqHhlZ"
+              class="Box-sc-14m3exe-0 gXhHYg"
               display="flex"
             >
               <div
@@ -183,11 +183,11 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
                 data-tip="true"
               >
                 <div
-                  class="styled__TileInfo-xv0l-4 fQEAIv"
+                  class="styled__TileInfo-xv0l-4 gudWBG"
                 >
                   <div>
                     <p
-                      class="Text-sc-2lza2m-0 kBnhnG"
+                      class="Text-sc-2lza2m-0 hffaYn"
                     >
                       Sessions (2)
                     </p>
@@ -277,7 +277,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
   
                 </style>
                 <p
-                  class="Text-sc-2lza2m-0 kBnhnG"
+                  class="Text-sc-2lza2m-0 hffaYn"
                 />
               </div>
             </div>
@@ -295,12 +295,12 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
 exports[`<ProblemPage /> Should render and match the snapshot with loader 1`] = `
 <div>
   <div
-    class="styled__FillScreenLoader-tle2yi-0 fDUeBu"
+    class="styled__FillScreenLoader-tle2yi-0 jaQIeH"
     data-testid="fullscreen-loader"
     opacity="0.5"
   >
     <div
-      class="styled__StyledSpinner-d123q3-0 hXQJFy"
+      class="styled__StyledSpinner-d123q3-0 gidDvb"
       color="#C866EA"
       size="100"
       width="6"
@@ -312,12 +312,12 @@ exports[`<ProblemPage /> Should render and match the snapshot with loader 1`] = 
 exports[`<ProblemPage /> Should render and match the snapshot without interventions 1`] = `
 <div>
   <div
-    class="styled__FillScreenLoader-tle2yi-0 fDUeBu"
+    class="styled__FillScreenLoader-tle2yi-0 jaQIeH"
     data-testid="fullscreen-loader"
     opacity="0.5"
   >
     <div
-      class="styled__StyledSpinner-d123q3-0 hXQJFy"
+      class="styled__StyledSpinner-d123q3-0 gidDvb"
       color="#C866EA"
       size="100"
       width="6"

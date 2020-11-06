@@ -40,8 +40,8 @@ import {
 } from 'global/reducers/problem';
 import { problemOptionsSaga } from 'global/sagas/problemOptionsSaga';
 
-import injectSaga, { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
+import { injectSaga, useInjectSaga, useInjectReducer } from 'redux-injectors';
+
 import { colors, themeColors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 

@@ -1,5 +1,5 @@
-import { takeLatest, put } from 'redux-saga/effects';
-import { info as showInfo, error as showError } from 'react-toastify-redux';
+import { takeLatest, put, call } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 import axios from 'axios';
 
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -18,10 +18,10 @@ function* changeActivateStatus({ payload: { userId, active } }) {
     if (!active) yield axios.delete(requestUrl);
     else yield axios.patch(requestUrl, { active });
     yield put(changeActivateStatusSuccess());
-    yield put(showInfo(formatMessage(messages.changeStatusSuccess)));
+    yield call(toast.info, formatMessage(messages.changeStatusSuccess));
   } catch (error) {
     yield put(changeActivateStatusError());
-    yield put(showError(formatMessage(messages.changeStatusFailure)));
+    yield call(toast.error, formatMessage(messages.changeStatusFailure));
   }
 }
 

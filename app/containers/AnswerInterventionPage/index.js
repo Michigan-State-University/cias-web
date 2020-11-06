@@ -11,14 +11,14 @@ import { Helmet } from 'react-helmet';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { error } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import get from 'lodash/get';
 import { Redirect } from 'react-router-dom';
 
 import AudioWrapper from 'utils/audioWrapper';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { useInjectReducer } from 'utils/injectReducer';
+
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import { Button } from 'components/Button';
@@ -120,7 +120,6 @@ export function AnswerInterventionPage({
   submitAnswerRequest,
   setQuestionIndexAction,
   onStartIntervention,
-  showError,
   changeIsAnimationOngoing,
   setFeedbackSettings,
   audioInstance,
@@ -227,7 +226,7 @@ export function AnswerInterventionPage({
       formatMessage,
       questionIndex,
       saveAnswer,
-      showError,
+      showError: toast.error,
       feedbackScreenSettings,
       setFeedbackSettings,
     };
@@ -363,7 +362,6 @@ AnswerInterventionPage.propTypes = {
   submitAnswerRequest: PropTypes.func,
   onStartIntervention: PropTypes.func,
   setQuestionIndexAction: PropTypes.func,
-  showError: PropTypes.func,
   changeIsAnimationOngoing: PropTypes.func,
   setFeedbackSettings: PropTypes.func,
   audioInstance: PropTypes.shape(AudioWrapper),
@@ -384,7 +382,6 @@ const mapDispatchToProps = {
   saveSelectedAnswer: selectAnswer,
   setQuestionIndexAction: index => setQuestionIndex({ index }),
   onStartIntervention: startIntervention,
-  showError: error,
   changeIsAnimationOngoing: changeIsAnimating,
   setFeedbackSettings: setFeedbackScreenSettings,
   fetchProblem: fetchProblemRequest,

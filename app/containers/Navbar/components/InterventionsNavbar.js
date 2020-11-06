@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 import Row from 'components/Row';
 import Tabs from 'components/Tabs';
 import { StyledInput } from 'components/Input/StyledInput';

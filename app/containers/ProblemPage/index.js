@@ -21,8 +21,8 @@ import TileRenderer from 'components/TileRenderer';
 import useFilter from 'utils/useFilter';
 import SearchInput from 'components/Input/SearchInput';
 import { statusTypes } from 'models/Status/StatusTypes';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+
 import {
   createProblemRequest,
   createProblemSaga,

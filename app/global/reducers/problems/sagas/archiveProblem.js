@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
-import { error as showError } from 'react-toastify-redux';
+import { put, takeLatest, call } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { defaultMapper } from 'utils/mapResponseObjects';
@@ -23,11 +23,9 @@ function* archiveProblem({ payload: { problemId } }) {
     yield put(archiveProblemSuccess(mappedData));
   } catch (error) {
     yield put(archiveProblemFailure(problemId));
-    yield put(
-      showError(formatMessage(globalMessages.archiveProblemError), {
-        id: ARCHIVE_PROBLEM_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(globalMessages.archiveProblemError), {
+      toastId: ARCHIVE_PROBLEM_ERROR,
+    });
   }
 }
 export default function* archiveProblemSaga() {

@@ -49,7 +49,7 @@ export default function* rootSaga() {
 Then, in your `index.js`, use a decorator to inject the root saga:
 
 ```JS
-import injectSaga from 'utils/injectSaga';
+import injectSaga from 'redux-injectors';
 import { DAEMON } from 'utils/constants';
 import saga from './saga';
 

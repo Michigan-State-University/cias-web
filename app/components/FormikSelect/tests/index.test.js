@@ -2,12 +2,10 @@
  *
  * Tests for FormikSelect
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React, { Fragment } from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { Formik } from 'formik';
 
 import FormikSelect from '../index';

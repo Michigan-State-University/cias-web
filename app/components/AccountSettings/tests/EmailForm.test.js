@@ -2,12 +2,10 @@
  *
  * Tests for AccountSettings
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render, fireEvent, wait } from 'react-testing-library';
+import { render, fireEvent, waitFor } from '@testing-library/react';
 import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 import { IntlProvider } from 'react-intl';
@@ -76,7 +74,7 @@ describe('<EmailForm />', () => {
     const confirmButton = getByTestId('confirm-button');
     fireEvent.click(confirmButton);
 
-    await wait(() => {
+    await waitFor(() => {
       expect(defaultProps.changeEmail).toHaveBeenCalledWith({
         newEmail,
         oldPassword,
@@ -98,7 +96,7 @@ describe('<EmailForm />', () => {
     const closeButton = getByTestId('close-button');
     fireEvent.click(closeButton);
 
-    await wait(() => {
+    await waitFor(() => {
       expect(defaultProps.changeErrorValue).toHaveBeenCalled();
     });
   });

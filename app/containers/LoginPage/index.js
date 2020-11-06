@@ -15,7 +15,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import { Formik } from 'formik';
 import { parse } from 'query-string';
 import has from 'lodash/has';
-import * as toast from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import FormikInput from 'components/FormikInput';
 import { Fill } from 'components/Fill';
@@ -28,8 +28,7 @@ import LinkButton from 'components/Button/LinkButton';
 import Divider from 'components/Divider';
 import { MSULogo } from 'components/Logo';
 import withPublicLayout from 'containers/PublicLayout';
-import { useInjectSaga } from 'utils/injectSaga';
-import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import ErrorAlert from 'components/ErrorAlert';
 import { makeSelectLocation } from 'containers/App/selectors';
@@ -196,9 +195,9 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   onLogin: loginRequest,
   showSuccess: message =>
-    toast.success(message, { id: ACCOUNT_CONFIRMATION_SUCCESS }),
+    toast.success(message, { toastId: ACCOUNT_CONFIRMATION_SUCCESS }),
   showError: message =>
-    toast.error(message, { id: ACCOUNT_CONFIRMATION_ERROR }),
+    toast.error(message, { toastId: ACCOUNT_CONFIRMATION_ERROR }),
 };
 
 const withConnect = connect(

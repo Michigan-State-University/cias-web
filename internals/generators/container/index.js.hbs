@@ -23,10 +23,10 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 {{#if wantSaga}}
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 {{/if}}
 {{#if wantActionsAndReducer}}
-import { useInjectReducer } from 'utils/injectReducer';
+import { useInjectReducer } from 'redux-injectors';
 import makeSelect{{properCase name}} from './selectors';
 import reducer from './reducer';
 {{/if}}

@@ -2,25 +2,22 @@
  *
  * Tests for UserList
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { createStore } from 'redux';
+import { DEFAULT_LOCALE } from 'i18n';
 
-import createModalForTests from 'utils/createModalForTests';
 import { UserListReducer } from 'global/reducers/userList';
+import createModalForTests from 'utils/createModalForTests';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import UserList from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<UserList />', () => {
-  const reducer = state => state;
   const initialState = {
     userList: {
       users: [
@@ -48,15 +45,13 @@ describe('<UserList />', () => {
       ],
     },
   };
-  let store;
+  const store = createTestStore(initialState);
+
   beforeAll(() => {
     createModalForTests();
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
     store.injectedReducers = {
       userList: UserListReducer,
     };
-    store.injectedSagas = {};
   });
 
   it('Expect to not log errors in console', () => {

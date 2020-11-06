@@ -3,21 +3,21 @@
 exports[`<QuestionTitle /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 cWerGq"
+    class="Box-sc-14m3exe-0 kQNCPT"
     width="100%"
   >
     <div
-      class="Row-x1o3ru-0 iJOjSZ"
+      class="Row-x1o3ru-0 dAhqIQ"
     >
       <div
-        class="Row-x1o3ru-0 hNBpWq"
+        class="Row-x1o3ru-0 fcuGKr"
         width="100%"
       >
         <div
-          class="Column-sc-1n6divy-0 dfNUrc"
+          class="Column-sc-1n6divy-0 SJAYV"
         >
           <div
-            class="quill styled__QuillStyled-sc-65e6t4-0 ixCpga"
+            class="quill styled__QuillStyled-sc-65e6t4-0 gyZIGP"
           >
             <div
               class="ql-container ql-bubble"
@@ -371,7 +371,7 @@ exports[`<QuestionTitle /> Should render and match the snapshot 1`] = `
                         tabindex="-1"
                       >
                         <span
-                          class="ql-picker-item ql-selected ql-primary"
+                          class="ql-picker-item ql-primary"
                           role="button"
                           tabindex="0"
                         />
@@ -731,8 +731,7 @@ exports[`<QuestionTitle /> Should render and match the snapshot 1`] = `
                       <span
                         aria-controls="ql-picker-options-3"
                         aria-expanded="false"
-                        class="ql-picker-label ql-active"
-                        data-value="#000000"
+                        class="ql-picker-label"
                         role="button"
                         tabindex="0"
                       >
@@ -742,7 +741,6 @@ exports[`<QuestionTitle /> Should render and match the snapshot 1`] = `
                            
                           <g
                             class="ql-fill ql-color-label"
-                            style="fill: #000000;"
                           >
                              
                             <polygon
@@ -1046,7 +1044,7 @@ exports[`<QuestionTitle /> Should render and match the snapshot 1`] = `
                         tabindex="-1"
                       >
                         <span
-                          class="ql-picker-item ql-primary ql-selected"
+                          class="ql-picker-item ql-primary"
                           data-value="#000000"
                           role="button"
                           style="background-color: rgb(0, 0, 0);"

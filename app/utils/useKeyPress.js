@@ -12,9 +12,9 @@ const useKeyPress = (targetKey, onKeyPress) => {
   };
 
   useEffect(() => {
-    document.addEventListener('keyup', handleKeyUp, false);
+    document.addEventListener('keyup', handleKeyUp);
     return () => {
-      document.removeEventListener('keyup', handleKeyUp, false);
+      document.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
 };

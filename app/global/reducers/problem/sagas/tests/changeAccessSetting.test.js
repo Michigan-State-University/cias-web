@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { takeLatest } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -35,11 +35,9 @@ describe('changeAccessSetting saga', () => {
     const error = new Error('test');
     return expectSaga(changeAccessSetting, { payload })
       .provide([[matchers.call.fn(axios.patch), throwError(error)]])
-      .put(
-        showError(formatMessage(messages.changeAccessSettingFailure), {
-          id: CHANGE_ACCESS_SETTING_ERROR,
-        }),
-      )
+      .call(toast.error, formatMessage(messages.changeAccessSettingFailure), {
+        toastId: CHANGE_ACCESS_SETTING_ERROR,
+      })
       .put(changeAccessSettingFailure(error))
       .run();
   });

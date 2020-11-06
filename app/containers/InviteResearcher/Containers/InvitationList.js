@@ -13,7 +13,7 @@ import Loader from 'components/Loader';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import TextButton from 'components/Button/TextButton';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 
 import messages from '../messages';
 import { cancelInvitationRequest, getInvitationsRequest } from '../actions';

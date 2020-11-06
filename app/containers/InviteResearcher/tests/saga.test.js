@@ -1,11 +1,14 @@
-import { success as showSuccess } from 'react-toastify-redux';
-import { takeLatest, put } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
+import { takeLatest, put, call } from 'redux-saga/effects';
+import { expectSaga } from 'redux-saga-test-plan';
 
 import { Roles } from 'models/User/UserRoles';
 import { addUserToList } from 'global/reducers/userList';
 import { defaultTimeZone } from 'utils/timezones';
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import * as matchers from 'redux-saga-test-plan/matchers';
+import axios from 'axios';
 import messages from '../messages';
 import {
   CANCEL_INVITATION_REQUEST,
@@ -33,6 +36,8 @@ const stepper = fn => mock => fn.next(mock).value;
 
 describe('inviteResearcher saga', () => {
   it('Check inviteResearcher generator success connection', () => {
+    const email = 'email1';
+
     const apiResponse = {
       data: {
         id: '12-a23mc-21',
@@ -51,23 +56,14 @@ describe('inviteResearcher saga', () => {
       active: true,
     };
 
-    const email = 'email1';
-    const step = stepper(inviteResearcher({ payload: { email } }));
-    step();
-    const successTrigger = step(apiResponse);
-    expect(successTrigger).toEqual(put(inviteResearcherSuccess(mockUser)));
-    const addToUserListTrigger = step();
-    expect(addToUserListTrigger).toEqual(put(addUserToList(mockUser)));
-    const toastTrigger = step();
-    expect(toastTrigger).toEqual(
-      put(
-        showSuccess(formatMessage(messages.invitationSent), {
-          id: INVITE_RESEARCHER_SUCCESS,
-        }),
-      ),
-    );
-    const lastResponse = step();
-    expect(lastResponse).toEqual(undefined);
+    return expectSaga(inviteResearcher, { payload: { email } })
+      .provide([[matchers.call.fn(axios.post), apiResponse]])
+      .put(inviteResearcherSuccess(mockUser))
+      .put(addUserToList(mockUser))
+      .call(toast.success, formatMessage(messages.invitationSent), {
+        toastId: INVITE_RESEARCHER_SUCCESS,
+      })
+      .run();
   });
   it('Check inviteResearcher error connection', () => {
     const error = "TypeError: Cannot read property 'data' of undefined";
@@ -136,11 +132,9 @@ describe('cancelInvitation saga', () => {
     expect(successTrigger).toEqual(put(cancelInvitationSuccess(id)));
     const toastTrigger = step();
     expect(toastTrigger).toEqual(
-      put(
-        showSuccess(formatMessage(messages.successCanceling), {
-          id: CANCEL_INVITATION_SUCCESS,
-        }),
-      ),
+      call(toast.success, formatMessage(messages.successCanceling), {
+        toastId: CANCEL_INVITATION_SUCCESS,
+      }),
     );
     const lastResponse = step();
     expect(lastResponse).toEqual(undefined);

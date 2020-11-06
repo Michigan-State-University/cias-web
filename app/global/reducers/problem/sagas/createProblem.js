@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { put, call, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -22,11 +22,9 @@ export function* createProblem() {
     yield put(createProblemSuccess(mappedData));
     yield put(push(`/interventions/${mappedData.id}`));
   } catch (error) {
-    yield put(
-      showError(formatMessage(globalMessages.createProblemError), {
-        id: CREATE_PROBLEM_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(globalMessages.createProblemError), {
+      toastId: CREATE_PROBLEM_ERROR,
+    });
   }
 }
 export default function* createProblemSaga() {

@@ -2,17 +2,16 @@
  *
  * Tests for AnswerInterventionPage
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
+
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import { AnswerInterventionPageWithIntl as AnswerInterventionPage } from '../index';
 
@@ -30,7 +29,6 @@ describe('<AnswerInterventionPage />', () => {
       interventionQuestions: [],
     },
   };
-  const reducer = state => state;
   const initialState = {
     answerInterventionPage: {
       questionLoading: false,
@@ -43,13 +41,7 @@ describe('<AnswerInterventionPage />', () => {
     },
   };
 
-  let store;
-  beforeAll(() => {
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
-    store.injectedReducers = {};
-    store.injectedSagas = {};
-  });
+  const store = createTestStore(initialState);
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');

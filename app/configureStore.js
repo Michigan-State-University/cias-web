@@ -9,8 +9,9 @@ import createSagaMiddleware from 'redux-saga';
 import utilsHistory from 'utils/history';
 import { initialState as authReducerInitialState } from 'global/reducers/auth/reducer';
 
+import { loadState } from 'utils/persist';
+import { createInjectorsEnhancer } from 'redux-injectors';
 import createReducer from './reducers';
-import { loadState } from './utils/persist';
 
 export default function configureStore(initialState = {}, history) {
   let composeEnhancers = compose;
@@ -39,7 +40,15 @@ export default function configureStore(initialState = {}, history) {
   // 2. routerMiddleware: Syncs the location/URL path to the state
   const middlewares = [sagaMiddleware, routerMiddleware(history)];
 
-  const enhancers = [applyMiddleware(...middlewares)];
+  const runSaga = sagaMiddleware.run;
+
+  const enhancers = [
+    applyMiddleware(...middlewares),
+    createInjectorsEnhancer({
+      createReducer,
+      runSaga,
+    }),
+  ];
 
   const store = createStore(
     createReducer(),
@@ -48,7 +57,6 @@ export default function configureStore(initialState = {}, history) {
   );
 
   // Extensions
-  store.runSaga = sagaMiddleware.run;
   store.injectedReducers = {}; // Reducer registry
   store.injectedSagas = {}; // Saga registry
 
@@ -56,7 +64,7 @@ export default function configureStore(initialState = {}, history) {
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {
-      store.replaceReducer(createReducer(store.injectedReducers));
+      store.replaceReducer(store.createReducer(store.injectedReducers));
     });
   }
 

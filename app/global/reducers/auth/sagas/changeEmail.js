@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { success as showSuccess } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
@@ -22,11 +22,9 @@ export function* changeEmail({ payload: { oldPassword, newEmail } }) {
     const mappedUser = mapCurrentUser(data);
     yield call(LocalStorageService.updateState, mappedUser);
     yield call(LocalStorageService.setUid, mappedUser.email);
-    yield put(
-      showSuccess(formatMessage(messages.changeEmailSuccess), {
-        id: CHANGE_EMAIL_SUCCESS,
-      }),
-    );
+    yield call(toast.success, formatMessage(messages.changeEmailSuccess), {
+      toastId: CHANGE_EMAIL_SUCCESS,
+    });
 
     yield put(changeEmailSuccess(mappedUser));
   } catch (error) {

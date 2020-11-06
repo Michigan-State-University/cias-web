@@ -2,49 +2,49 @@
 
 exports[`<LoginPage /> Should render and match the snapshot 1`] = `
 <div
-  class="styled__Background-sc-1r4kg53-0 gRYivG"
+  class="styled__Background-sc-1r4kg53-0 eFWbvX"
 >
   <div
-    class="styled__TopBackground-sc-1r4kg53-1 bylLTk"
+    class="styled__TopBackground-sc-1r4kg53-1 dgkNIN"
   />
   <div
-    class="styled__Header-sc-1r4kg53-2 clPpsO"
+    class="styled__Header-sc-1r4kg53-2 jnMzyr"
   >
     <img
-      class="styled__Logo-sc-1r4kg53-3 gDviEu"
+      class="styled__Logo-sc-1r4kg53-3 dNCrIv"
       src="IMAGE_MOCK"
     />
   </div>
   <div
-    class="styled__Content-sc-1r4kg53-4 irxPWB"
+    class="styled__Content-sc-1r4kg53-4 dRtmJU"
   >
     <img
-      class="Img-sc-1kfzr96-0 dBmaGP"
+      class="Img-sc-1kfzr96-0 dNA-DPe"
       src="IMAGE_MOCK"
     />
     <div
-      class="Fill-sc-1f4o7x0-0 cYCtnS"
+      class="Fill-sc-1f4o7x0-0 boyhLn"
     >
       <div
-        class="Column-sc-1n6divy-0 dZTnes"
+        class="Column-sc-1n6divy-0 jOCHjp"
       >
         <h1
-          class="H1-tncdg6-0 eygGOx"
+          class="H1-tncdg6-0 khddLc"
           font-size="23"
         >
           Login in to CIAS
         </h1>
         <div
-          class="Column-sc-1n6divy-0 npKUP"
+          class="Column-sc-1n6divy-0 gWZjHC"
         >
           <p
-            class="Text-sc-2lza2m-0 ggakK"
+            class="Text-sc-2lza2m-0 drfDFr"
             width="fit-content"
           >
             E-mail address
           </p>
           <input
-            class="Input-sc-19txxuq-0 fcoxGj"
+            class="Input-sc-19txxuq-0 eQikpS"
             height="46"
             name="email"
             placeholder="Enter e-mail address"
@@ -54,10 +54,10 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          class="styled__LinkContainer-ubqahw-1 eKpqlh"
+          class="styled__LinkContainer-ubqahw-1 cpCATE"
         >
           <a
-            class="styled__StyledLink-ubqahw-0 izYIgK"
+            class="styled__StyledLink-ubqahw-0 bYMLAf"
             href="/reset-password"
             tabindex="-1"
           >
@@ -67,16 +67,16 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           </a>
         </div>
         <div
-          class="Column-sc-1n6divy-0 npKUP"
+          class="Column-sc-1n6divy-0 gWZjHC"
         >
           <p
-            class="Text-sc-2lza2m-0 ggakK"
+            class="Text-sc-2lza2m-0 drfDFr"
             width="fit-content"
           >
             Password
           </p>
           <input
-            class="Input-sc-19txxuq-0 fcoxGj"
+            class="Input-sc-19txxuq-0 eQikpS"
             height="46"
             name="password"
             placeholder="Enter password"
@@ -86,7 +86,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           />
         </div>
         <button
-          class="StyledButton-t20ntd-0 iHvPvE"
+          class="StyledButton-t20ntd-0 kIaylx"
           color="primary"
           height="46"
           type="submit"
@@ -94,14 +94,14 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           Log in
         </button>
         <div
-          class="Row-x1o3ru-0 hNBpWq"
+          class="Row-x1o3ru-0 fcuGKr"
           width="100%"
         >
           <div
-            class="styled__StyledDivider-sc-77qn3o-0 iitkhv"
+            class="styled__StyledDivider-sc-77qn3o-0 fHYbXC"
           />
           <p
-            class="Text-sc-2lza2m-0 styled__Or-sc-13sgwpa-0 fmUwqX dcQBsY"
+            class="Text-sc-2lza2m-0 styled__Or-sc-13sgwpa-0 gRasmG gXxeFF"
             font-weight="bold"
           >
             <span>
@@ -109,18 +109,18 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             </span>
           </p>
           <div
-            class="styled__StyledDivider-sc-77qn3o-0 fMtOUI"
+            class="styled__StyledDivider-sc-77qn3o-0 dWqeMJ"
           />
         </div>
         <div
-          class="Row-x1o3ru-0 iVsbcL"
+          class="Row-x1o3ru-0 cPVUYu"
           width="100%"
         >
           <div
-            class="styled__LinkContainer-ubqahw-1 gMbuxJ"
+            class="styled__LinkContainer-ubqahw-1 elqexI"
           >
             <a
-              class="styled__StyledLink-ubqahw-0 izYIgK"
+              class="styled__StyledLink-ubqahw-0 bYMLAf"
               href="/register"
             >
               <span>

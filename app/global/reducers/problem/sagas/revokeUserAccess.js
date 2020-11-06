@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import {
@@ -16,11 +16,9 @@ export function* revokeUserAccess({ payload: { problemId, userId } }) {
     yield call(axios.delete, requestURL);
     yield put(revokeUserAccessSuccess(userId));
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.revokeAccessError), {
-        id: REVOKE_USER_ACCESS_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.revokeAccessError), {
+      toastId: REVOKE_USER_ACCESS_ERROR,
+    });
     yield put(revokeUserAccessFailure(userId, error));
   }
 }

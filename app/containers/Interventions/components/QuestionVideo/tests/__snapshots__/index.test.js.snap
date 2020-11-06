@@ -79,39 +79,31 @@ exports[`<QuestionVideo /> should match the snapshot with video 1`] = `
 }
 
 <div
-  className="c0"
+  class="c0"
   width="100%"
 >
   <div
-    className="HoverableBox-sc-1syy6g3-0 c1"
-    onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    class="HoverableBox-sc-1syy6g3-0 c1"
     width="100%"
   >
     <div
-      className="c2"
+      class="c2"
     >
       <div
-        className="c3"
+        class="c3"
       >
         <div
-          className="c4"
-          style={
-            Object {
-              "height": "100%",
-              "width": "100%",
-            }
-          }
+          class="c4"
+          style="width: 100%; height: 100%;"
         />
       </div>
       <div
-        className="c5"
-        onClick={[Function]}
+        class="c5"
         visibility="hidden"
       >
         <img
           alt="bin-icon"
-          className="c6"
+          class="c6"
           src="IMAGE_MOCK"
         />
       </div>
@@ -214,26 +206,23 @@ exports[`<QuestionVideo /> should match the snapshot without video 1`] = `
 }
 
 <div
-  className="c0"
+  class="c0"
   width="100%"
 >
   <div
-    className="c1"
-    height={93}
+    class="c1"
+    height="93"
   >
     <div
-      className="c2"
+      class="c2"
       width="100%"
     >
       <div
-        className="c3"
+        class="c3"
       >
         <input
-          className="c4"
+          class="c4"
           height="auto"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
           placeholder="Use videos from YouTube or Vimeo. Paste link here."
           type="text"
           value=""

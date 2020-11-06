@@ -156,7 +156,7 @@ exports[`<MapInterventions /> Should render and match the snapshot 1`] = `
 >
   <a
     class="c0"
-    href=""
+    href="/"
   >
     <div
       class="c1"

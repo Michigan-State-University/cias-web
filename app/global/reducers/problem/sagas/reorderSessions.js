@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -21,11 +21,9 @@ export function* reorderSessions({ payload: { problemId, reorderedList } }) {
     });
     yield put(reorderSessionsSuccess());
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.reorderError), {
-        id: REORDER_INTERVENTION_LIST_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.reorderError), {
+      toastId: REORDER_INTERVENTION_LIST_ERROR,
+    });
     yield put(reorderSessionsError(error));
   }
 }

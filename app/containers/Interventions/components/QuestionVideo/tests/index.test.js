@@ -1,5 +1,5 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
+import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
 import { IntlProvider } from 'react-intl';
@@ -15,13 +15,14 @@ const defualtProps = {
 
 describe('<QuestionVideo />', () => {
   it('should match the snapshot without video', () => {
-    const renderedComponent = renderer
-      .create(
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionVideo {...defualtProps} />
-        </IntlProvider>,
-      )
-      .toJSON();
+    const {
+      container: { firstChild: renderedComponent },
+    } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <QuestionVideo {...defualtProps} />
+      </IntlProvider>,
+    );
+
     expect(renderedComponent).toMatchSnapshot();
   });
   it('should match the snapshot with video', () => {
@@ -32,13 +33,15 @@ describe('<QuestionVideo />', () => {
         video_url: 'https://www.youtube.com/watch?v=ysz5S6PUM-U',
       },
     };
-    const renderedComponent = renderer
-      .create(
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <QuestionVideo {...newProps} />
-        </IntlProvider>,
-      )
-      .toJSON();
+
+    const {
+      container: { firstChild: renderedComponent },
+    } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <QuestionVideo {...newProps} />
+      </IntlProvider>,
+    );
+
     expect(renderedComponent).toMatchSnapshot();
   });
 });

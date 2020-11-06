@@ -2,32 +2,29 @@
  *
  * Tests for SelectResearchersModal
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 import { Provider } from 'react-redux';
-import renderer from 'react-test-renderer';
-import { createStore } from 'redux';
+
 import { UserListReducer } from 'global/reducers/userList';
 import { authReducer } from 'global/reducers/auth';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 import SelectResearchers from '../index';
 
 describe('<SelectResearchers />', () => {
   let store;
-  const reducer = state => state;
   const initialState = {
     auth: {
       user: { id: 1 },
     },
   };
   beforeAll(() => {
-    store = createStore(reducer, initialState);
+    store = createTestStore(initialState);
     store.runSaga = () => {};
     store.injectedReducers = {
       problem: UserListReducer,
@@ -49,15 +46,16 @@ describe('<SelectResearchers />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-    const renderedComponent = renderer
-      .create(
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <Provider store={store}>
-            <SelectResearchers />
-          </Provider>
-        </IntlProvider>,
-      )
-      .toJSON();
+    const {
+      container: { firstChild: renderedComponent },
+    } = render(
+      <IntlProvider locale={DEFAULT_LOCALE}>
+        <Provider store={store}>
+          <SelectResearchers />
+        </Provider>
+      </IntlProvider>,
+    );
+
     expect(renderedComponent).toMatchSnapshot();
   });
 });

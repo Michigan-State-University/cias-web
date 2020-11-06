@@ -3,24 +3,24 @@
 exports[`<UserDetails /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 styled__StyledBox-k1l7f-0 kdFoSA gTkfqb"
+    class="Box-sc-14m3exe-0 styled__StyledBox-k1l7f-0 ktRnSR bOwZqG"
     height="100%"
     width="100%"
   >
     <div
-      class="Row-x1o3ru-0 iJOjSZ"
+      class="Row-x1o3ru-0 dAhqIQ"
     >
       <a
-        class="styled__StyledLink-sc-1vn5te5-0 iVmEKE"
+        class="styled__StyledLink-sc-1vn5te5-0 drkXpt"
         href="/users"
       >
         <img
           alt="traingle"
-          class="Img-sc-1kfzr96-0 fMvNhZ"
+          class="Img-sc-1kfzr96-0 isJQBY"
           src="IMAGE_MOCK"
         />
         <p
-          class="Text-sc-2lza2m-0 deBxhD"
+          class="Text-sc-2lza2m-0 jmEVdS"
           color="#C866EA"
           font-weight="bold"
         >
@@ -31,26 +31,26 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
       </a>
     </div>
     <h1
-      class="H1-tncdg6-0 tnnHn"
+      class="H1-tncdg6-0 bulESG"
     >
       <span>
         Account Settings
       </span>
     </h1>
     <div
-      class="Column-sc-1n6divy-0 styled__StyledColumn-k1l7f-1 ehwCsW cTyNZS"
+      class="Column-sc-1n6divy-0 styled__StyledColumn-k1l7f-1 gDOItD jndRWj"
     >
       <div
-        class="Row-x1o3ru-0 eIxtpJ"
+        class="Row-x1o3ru-0 kaOItc"
         display="flex"
       >
         <div>
           <div
-            class="Row-x1o3ru-0 kAuiUx"
+            class="Row-x1o3ru-0 jeDFgM"
             width="100%"
           >
             <div
-              class="styled__AvatarStyled-sc-15n3teb-0 kNBpjK styled__StyledUserAvatar-awa645-1 earxam"
+              class="styled__AvatarStyled-sc-15n3teb-0 kWwaTf styled__StyledUserAvatar-awa645-1 jwLHtr"
               color="#FFFFFF"
             >
               <div>
@@ -58,13 +58,13 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
               </div>
             </div>
             <div
-              class="Row-x1o3ru-0 dVByuK"
+              class="Row-x1o3ru-0 gyVgFj"
             >
               <div
-                class="Row-x1o3ru-0 styled__StyledButtonsRow-awa645-2 iJOjSZ jYBBYf"
+                class="Row-x1o3ru-0 styled__StyledButtonsRow-awa645-2 dAhqIQ cyZEUK"
               >
                 <div
-                  class="Box-sc-14m3exe-0 cmFbkA styled__StyledUploadFileButton-awa645-4 dcKYCV"
+                  class="Box-sc-14m3exe-0 dmtDa-d styled__StyledUploadFileButton-awa645-4 blnlBs"
                   height="fit-content"
                 >
                   <input
@@ -74,10 +74,10 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                     type="file"
                   />
                   <div
-                    class="Row-x1o3ru-0 eXIwVR"
+                    class="Row-x1o3ru-0 czFUTs"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 fabzps"
+                      class="Text-sc-2lza2m-0 enpkZZ"
                       color="#C866EA"
                       font-size="14"
                       font-weight="bold"
@@ -94,7 +94,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
         </div>
         <div>
           <button
-            class="StyledButton-t20ntd-0 iPLWUE"
+            class="StyledButton-t20ntd-0 goAbbt"
             color="warning"
             width="180"
           >
@@ -105,24 +105,24 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Row-x1o3ru-0 hjyxCh"
+        class="Row-x1o3ru-0 gqBLrI"
       >
         <div
-          class="Row-x1o3ru-0 styled__StyledFullNameRow-awa645-0 hNBpWq guCwSM"
+          class="Row-x1o3ru-0 styled__StyledFullNameRow-awa645-0 fcuGKr haPGft"
           width="100%"
         >
           <div
-            class="Column-sc-1n6divy-0 dfGPDf"
+            class="Column-sc-1n6divy-0 cEBgay"
             data-testid="first-name-input"
           >
             <p
-              class="Text-sc-2lza2m-0 ggakK"
+              class="Text-sc-2lza2m-0 drfDFr"
               width="fit-content"
             >
               First Name
             </p>
             <input
-              class="Input-sc-19txxuq-0 fcoxGj"
+              class="Input-sc-19txxuq-0 eQikpS"
               height="46"
               name="firstName"
               placeholder="Enter first name"
@@ -132,16 +132,16 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
             />
           </div>
           <div
-            class="Column-sc-1n6divy-0 npKUP"
+            class="Column-sc-1n6divy-0 gWZjHC"
           >
             <p
-              class="Text-sc-2lza2m-0 ggakK"
+              class="Text-sc-2lza2m-0 drfDFr"
               width="fit-content"
             >
               Last name
             </p>
             <input
-              class="Input-sc-19txxuq-0 fcoxGj"
+              class="Input-sc-19txxuq-0 eQikpS"
               height="46"
               name="lastName"
               placeholder="Enter last name"
@@ -153,7 +153,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Row-x1o3ru-0 styled__StyledRow-k1l7f-2 gryONu gRpGep"
+        class="Row-x1o3ru-0 styled__StyledRow-k1l7f-2 gzbVEz dSJahs"
         width="100%"
       />
     </div>

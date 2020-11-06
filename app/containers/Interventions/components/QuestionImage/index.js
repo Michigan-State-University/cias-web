@@ -19,7 +19,7 @@ import bin from 'assets/svg/bin-red.svg';
 import imagePlaceholder from 'assets/svg/image-placeholder.svg';
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
 import { themeColors, borders } from 'theme';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 import {
   makeSelectSelectedQuestion,
   addQuestionImageRequest,

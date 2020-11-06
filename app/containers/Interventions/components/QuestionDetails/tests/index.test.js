@@ -1,7 +1,6 @@
 import React from 'react';
-import { render, waitForElement } from 'react-testing-library';
+import { render, waitFor } from '@testing-library/react';
 import 'jest-styled-components';
-import { createStore } from 'redux';
 
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
@@ -11,15 +10,14 @@ import { elements } from 'theme';
 import { draft } from 'models/Status/StatusTypes';
 import settingsTabLabels from 'utils/settingsTabsLabels';
 import { formatMessage } from 'utils/testUtils/formatMessage';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import QuestionDetails from '../index';
 
 window.HTMLMediaElement.prototype.pause = () => {};
 
 describe('<QuestionDetails />', () => {
-  let store;
   const testId = 'testId';
-  const reducer = state => state;
   const initialState = {
     problem: {
       problem: {
@@ -80,12 +78,7 @@ describe('<QuestionDetails />', () => {
     formatMessage,
   };
 
-  beforeAll(() => {
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
-    store.injectedReducers = {};
-    store.injectedSagas = {};
-  });
+  const store = createTestStore(initialState);
 
   it('should match the snapshot', async () => {
     const { container, getByText } = render(
@@ -95,7 +88,7 @@ describe('<QuestionDetails />', () => {
         </IntlProvider>
       </Provider>,
     );
-    await waitForElement(() => getByText('Next screen'));
+    await waitFor(() => getByText('Next screen'));
     expect(container).toMatchSnapshot();
   });
 });

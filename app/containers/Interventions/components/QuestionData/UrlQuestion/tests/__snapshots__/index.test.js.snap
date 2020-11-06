@@ -172,54 +172,52 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
 }
 
 <div
-  className="c0"
+  class="c0"
 >
   <div
-    className="c1"
+    class="c1"
     width="100%"
   >
     <div
-      className="c2"
+      class="c2"
     >
       <div
-        className="c3"
+        class="c3"
         width="100%"
       >
         <div
-          className="c4"
+          class="c4"
         >
           <textarea
-            className="c5"
-            disabled={true}
+            class="c5"
+            disabled=""
             height="auto"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
             placeholder="Paste or type a web page link to show it to a respondent."
             rows="3"
-            value="www.google.com"
             width="100%"
-          />
+          >
+            www.google.com
+          </textarea>
         </div>
       </div>
     </div>
   </div>
   <div
-    className="c6"
+    class="c6"
     width="100%"
   >
     <div
-      className="c2"
+      class="c2"
     >
       <div
-        className="c7"
+        class="c7"
         data-testid="inline-loader"
       >
         <div
-          className="c8"
+          class="c8"
           color="#C866EA"
-          size={50}
-          width={6}
+          size="50"
+          width="6"
         />
       </div>
     </div>

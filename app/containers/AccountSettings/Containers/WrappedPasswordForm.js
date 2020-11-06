@@ -11,7 +11,7 @@ import {
   makeSelectLoaders,
   changeErrorStatus,
 } from 'global/reducers/auth';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
 
 import PasswordForm from 'components/AccountSettings/PasswordForm';

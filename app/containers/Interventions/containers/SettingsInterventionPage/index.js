@@ -8,8 +8,8 @@ import { injectIntl, intlShape } from 'react-intl';
 
 import Box from 'components/Box';
 import { colors } from 'theme';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+
 import {
   getInterventionRequest,
   interventionReducer,

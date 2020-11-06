@@ -10,7 +10,7 @@ import {
   editOtherUserRequest,
   editSingleUserSaga,
 } from 'global/reducers/user';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 
 import FullNameForm from 'components/AccountSettings/FullNameForm';
 

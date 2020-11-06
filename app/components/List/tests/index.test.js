@@ -2,12 +2,10 @@
  *
  * Tests for List
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
 import { LI, UL } from '../index';

@@ -8,11 +8,10 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
-import renderer from 'react-test-renderer';
 
 import InterventionStatusButtons from '../index';
 
@@ -38,7 +37,9 @@ describe('<InterventionStatusButtons />', () => {
 
   it('Should render and match the snapshot', () => {
     statuses.forEach(status => {
-      const renderedComponent = renderer.create(
+      const {
+        container: { firstChild: renderedComponent },
+      } = render(
         <IntlProvider locale={DEFAULT_LOCALE}>
           <InterventionStatusButtons status={status} />
         </IntlProvider>,

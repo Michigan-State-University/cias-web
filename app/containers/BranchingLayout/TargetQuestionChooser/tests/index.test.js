@@ -1,10 +1,9 @@
 import React from 'react';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent } from '@testing-library/react';
 import 'jest-styled-components';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
-import { createStore } from 'redux';
 
 import { TRANSITION_TIMEOUT } from 'components/Collapse/CollapsableContent';
 
@@ -14,6 +13,7 @@ import { questionsReducer } from 'global/reducers/questions';
 import { localStateReducer } from 'global/reducers/localState';
 import { questionGroupsReducer } from 'global/reducers/questionGroups';
 
+import { createTestStore } from 'utils/testUtils/storeUtils';
 import TargetQuestionChooser from '../index';
 
 const executeAfterTransition = func =>
@@ -42,8 +42,7 @@ const mockIntervention = (suffix = 1) => ({
 });
 
 const mockMostUsedStore = question => {
-  const reducer = state => state;
-  const store = createStore(reducer, {
+  const store = createTestStore({
     intervention: {
       intervention: {
         name: 'e-Intervention Name',
@@ -75,7 +74,6 @@ const mockMostUsedStore = question => {
       groups: [mockSingleGroup(1), mockSingleGroup(2), mockSingleGroup(3)],
     },
   });
-  store.runSaga = () => {};
   store.injectedReducers = {
     intervention: interventionReducer,
     questions: questionsReducer,
@@ -83,14 +81,12 @@ const mockMostUsedStore = question => {
     problem: problemReducer,
     questionGroups: questionGroupsReducer,
   };
-  store.injectedSagas = {};
   return store;
 };
 
 describe('<TargetQuestionChooser />', () => {
   let store;
   const mockQuestion = mockSingleQuestion(1, true);
-  const reducer = state => state;
   const initialState = {
     intervention: {
       intervention: {
@@ -114,14 +110,12 @@ describe('<TargetQuestionChooser />', () => {
   };
 
   beforeAll(() => {
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
+    store = createTestStore(initialState);
     store.injectedReducers = {
       intervention: interventionReducer,
       questions: questionsReducer,
       localState: localStateReducer,
     };
-    store.injectedSagas = {};
   });
 
   const props = {
@@ -159,7 +153,7 @@ describe('<TargetQuestionChooser />', () => {
     const question = mockSingleQuestion(2, true);
     const group = mockSingleGroup(2);
 
-    store = createStore(reducer, {
+    store = createTestStore({
       intervention: {
         intervention: {
           name: 'e-Intervention Name',
@@ -216,7 +210,7 @@ describe('<TargetQuestionChooser />', () => {
   it('should render intervention view with list of interventions when selected', () => {
     const question = mockSingleQuestion(2, true);
 
-    store = createStore(reducer, {
+    store = createTestStore({
       intervention: {
         intervention: {
           name: 'e-Intervention Name',
@@ -278,7 +272,7 @@ describe('<TargetQuestionChooser />', () => {
     const questionView = queryByTestId(`${question.id}-select-target-question`);
 
     const interventionComponentList = getAllByTestId(
-      `${question.id}-select-target-intervention-el`,
+      /^.+-select-target-intervention-el-\d+$/,
     );
     const interventionView = getByTestId(
       `${question.id}-select-target-intervention`,
@@ -294,7 +288,7 @@ describe('<TargetQuestionChooser />', () => {
   it('should render spinner on intervention view when loading a list', () => {
     const question = mockSingleQuestion(2, true);
 
-    store = createStore(reducer, {
+    store = createTestStore({
       intervention: {
         intervention: {
           name: 'e-Intervention Name',
@@ -389,7 +383,7 @@ describe('<TargetQuestionChooser />', () => {
     );
     fireEvent.click(img);
     const interventionRow = getByTestId(
-      `${question.id}-select-target-intervention-el`,
+      `${question.id}-select-target-intervention-el-0`,
     );
     fireEvent.click(interventionRow);
     expect(newProps.onClick).toHaveBeenCalledWith({

@@ -2,24 +2,21 @@
  *
  * Tests for AccountSettings
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { MemoryRouter } from 'react-router-dom';
+import { DEFAULT_LOCALE } from 'i18n';
+
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import AccountSettings from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<AccountSettings />', () => {
-  let store;
-
   const initialState = {
     auth: {
       user: {
@@ -47,17 +44,12 @@ describe('<AccountSettings />', () => {
       },
     },
   };
-  const reducer = state => state;
 
   let modalContainer;
   let mainAppContainer;
 
+  const store = createTestStore(initialState);
   beforeAll(() => {
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
-    store.injectedReducers = {};
-    store.injectedSagas = {};
-
     ReactDOM.createPortal = jest.fn(element => element);
     modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal-portal');

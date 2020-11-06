@@ -2,19 +2,17 @@
  *
  * Tests for CsvFileReader
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import 'jest-styled-components';
 
+import { DEFAULT_LOCALE } from 'i18n';
 import CsvFileReader from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
 
 const defaultProps = {
   icon: 'image.svg',

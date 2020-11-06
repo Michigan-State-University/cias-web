@@ -24,7 +24,7 @@ import ErrorAlert from 'components/ErrorAlert';
 
 import { themeColors } from 'theme';
 import { emailValidator } from 'utils/validators/emailValidator';
-import injectSaga from 'utils/injectSaga';
+import { injectSaga } from 'redux-injectors';
 import {
   enableUserAccessRequest,
   fetchUsersWithAccessRequest,

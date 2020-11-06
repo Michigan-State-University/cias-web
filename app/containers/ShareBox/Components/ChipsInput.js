@@ -4,8 +4,7 @@ import find from 'lodash/find';
 import map from 'lodash/map';
 import isEmpty from 'lodash/isEmpty';
 import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { error } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import { injectIntl, intlShape } from 'react-intl';
 
 import Box from 'components/Box';
@@ -23,7 +22,6 @@ import { StyledChipsInput, HiddenInput } from '../styled';
 const ChipsInput = ({
   value,
   setValue,
-  showError,
   placeholder,
   disabled,
   intl: { formatMessage },
@@ -56,14 +54,14 @@ const ChipsInput = ({
       const isAlreadyExist = find(value, email => email === newEmail);
       const isValid = emailValidator(newEmail);
       if (isAlreadyExist) {
-        showError(formatMessage(messages.duplicatedEmail), {
-          id: DUPLICATED_EMAIL_ERROR,
+        toast.error(formatMessage(messages.duplicatedEmail), {
+          toastId: DUPLICATED_EMAIL_ERROR,
         });
         return;
       }
       if (!isValid) {
-        showError(formatMessage(messages.invalidEmail), {
-          id: INVALID_EMAIL_ERROR,
+        toast.error(formatMessage(messages.invalidEmail), {
+          toastId: INVALID_EMAIL_ERROR,
         });
         return;
       }
@@ -135,21 +133,8 @@ ChipsInput.propTypes = {
   value: PropTypes.array,
   setValue: PropTypes.func,
   intl: intlShape,
-  showError: PropTypes.func,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
 };
 
-const mapDispatchToProps = {
-  showError: error,
-};
-
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
-
-export default compose(
-  injectIntl,
-  withConnect,
-)(ChipsInput);
+export default compose(injectIntl)(ChipsInput);

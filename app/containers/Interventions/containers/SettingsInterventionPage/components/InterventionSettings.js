@@ -8,8 +8,8 @@ import { createStructuredSelector } from 'reselect';
 
 import H3 from 'components/H3';
 import lastKey from 'utils/getLastKey';
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+
 import {
   editInterventionRequest,
   editInterventionSaga,

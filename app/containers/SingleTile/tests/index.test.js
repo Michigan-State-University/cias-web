@@ -2,13 +2,11 @@
  *
  * Tests for SingleInterventionPanel
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { browserHistory, MemoryRouter } from 'react-router-dom';
 import 'jest-styled-components';

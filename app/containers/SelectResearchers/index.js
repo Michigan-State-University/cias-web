@@ -25,8 +25,8 @@ import Checkbox from 'components/Checkbox';
 import { StyledButton } from 'components/Button/StyledButton';
 import ErrorAlert from 'components/ErrorAlert';
 import SearchInput from 'components/Input/SearchInput';
-import { useInjectReducer } from 'utils/injectReducer';
-import injectSaga from 'utils/injectSaga';
+import { useInjectReducer, injectSaga } from 'redux-injectors';
+
 import { Roles } from 'models/User/UserRoles';
 import {
   fetchUsers,

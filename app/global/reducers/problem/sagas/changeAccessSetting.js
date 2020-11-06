@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { put, call, takeLatest } from 'redux-saga/effects';
-import { error as showError } from 'react-toastify-redux';
+import { put, takeLatest, call } from 'redux-saga/effects';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import {
@@ -19,10 +19,12 @@ export function* changeAccessSetting({ payload: { id, setting } }) {
     yield call(axios.patch, requestURL, { shared_to: setting });
     yield put(changeAccessSettingSuccess());
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.changeAccessSettingFailure), {
-        id: CHANGE_ACCESS_SETTING_ERROR,
-      }),
+    yield call(
+      toast.error,
+      formatMessage(messages.changeAccessSettingFailure),
+      {
+        toastId: CHANGE_ACCESS_SETTING_ERROR,
+      },
     );
     yield put(changeAccessSettingFailure(error));
   }

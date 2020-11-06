@@ -1,16 +1,15 @@
 import React from 'react';
-import { render, fireEvent } from 'react-testing-library';
+import { render, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
-import { createStore } from 'redux';
 
 import { DEFAULT_LOCALE } from 'i18n';
 import createModalForTests from 'utils/createModalForTests';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import InviteResearcher from '../index';
 
 describe('<InviteResearcher />', () => {
-  const reducer = state => state;
   const initialState = {
     invitations: {
       invite: {
@@ -33,8 +32,9 @@ describe('<InviteResearcher />', () => {
   };
   createModalForTests();
   let store;
+
   beforeAll(() => {
-    store = createStore(reducer, initialState);
+    store = createTestStore(initialState);
     store.runSaga = () => {};
     store.injectedReducers = {};
     store.injectedSagas = {};
@@ -87,10 +87,8 @@ describe('<InviteResearcher />', () => {
         error: 'Server error!',
       },
     };
-    store = createStore(reducer, newState);
-    store.runSaga = () => {};
-    store.injectedReducers = {};
-    store.injectedSagas = {};
+    store = createTestStore(newState);
+
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>

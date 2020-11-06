@@ -11,7 +11,7 @@ import Row from 'components/Row';
 import Icon from 'components/Icon';
 import gear from 'assets/svg/gear-white-background.svg';
 import cross from 'assets/svg/cross-white-small.svg';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectSaga } from 'redux-injectors';
 import {
   makeSelectQuestionSettingsVisibility,
   setQuestionSettings,

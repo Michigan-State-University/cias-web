@@ -3,33 +3,33 @@
 exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 styled__StyledBox-sc-137nvsy-0 jmcBzp jbHtmE"
+    class="Box-sc-14m3exe-0 styled__StyledBox-sc-137nvsy-0 cidtM dRSFYh"
   >
     <div
-      class="Column-sc-1n6divy-0 izqwPh"
+      class="Column-sc-1n6divy-0 ibRVqQ"
       width="100%"
     >
       <h2
-        class="H2-egphza-0 eFIKXl"
+        class="H2-egphza-0 hIKhKE"
       >
         <span>
           Who can access this intervention?
         </span>
       </h2>
       <div
-        class="Box-sc-14m3exe-0 hyXteb"
+        class="Box-sc-14m3exe-0 hNGDYO"
       >
         <div
-          class="Row-x1o3ru-0 imjEKa"
+          class="Row-x1o3ru-0 bUfABv"
           disabled=""
           width="fit-content"
         >
           <img
-            class="Img-sc-1kfzr96-0 isicqy"
+            class="Img-sc-1kfzr96-0 dAVuLv"
             src="IMAGE_MOCK"
           />
           <p
-            class="Text-sc-2lza2m-0 hbawAb"
+            class="Text-sc-2lza2m-0 kOJvnu"
             font-size="15"
             font-weight="regular"
           >
@@ -39,16 +39,16 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           </p>
         </div>
         <div
-          class="Row-x1o3ru-0 imjEKa"
+          class="Row-x1o3ru-0 bUfABv"
           disabled=""
           width="fit-content"
         >
           <img
-            class="Img-sc-1kfzr96-0 isicqy"
+            class="Img-sc-1kfzr96-0 dAVuLv"
             src="IMAGE_MOCK"
           />
           <p
-            class="Text-sc-2lza2m-0 hbawAb"
+            class="Text-sc-2lza2m-0 kOJvnu"
             font-size="15"
             font-weight="regular"
           >
@@ -58,16 +58,16 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
           </p>
         </div>
         <div
-          class="Row-x1o3ru-0 ebPHdB"
+          class="Row-x1o3ru-0 iKhmOM"
           disabled=""
           width="fit-content"
         >
           <img
-            class="Img-sc-1kfzr96-0 isicqy"
+            class="Img-sc-1kfzr96-0 dAVuLv"
             src="IMAGE_MOCK"
           />
           <p
-            class="Text-sc-2lza2m-0 hbawAb"
+            class="Text-sc-2lza2m-0 kOJvnu"
             font-size="15"
             font-weight="regular"
           >

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { info as showInfo, error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 import get from 'lodash/get';
 
 import { SEND_PROBLEM_CSV_REQUEST } from 'global/reducers/problem/constants';
@@ -16,11 +16,12 @@ export function* sendProblemCsv({ payload: { id } }) {
       data: { message },
     } = yield call(axios.get, requestURL);
     yield put(sendProblemCsvSuccess(message));
-    yield put(showInfo(message));
+    yield call(toast.info, message);
   } catch (error) {
     yield put(sendProblemCsvError(error));
-    yield put(
-      showError(get(error, 'data.message', formatMessage(messages.csvError))),
+    yield call(
+      toast.error,
+      get(error, 'data.message', formatMessage(messages.csvError)),
     );
   }
 }

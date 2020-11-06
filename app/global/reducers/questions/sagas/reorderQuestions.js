@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import { put, takeLatest, select } from 'redux-saga/effects';
+import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
-import { error as showError } from 'react-toastify-redux';
+import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -35,11 +35,9 @@ function* reorderQuestions({ payload: { interventionId } }) {
     yield put(cleanGroups(questions));
     yield put(reorderQuestionListSuccess());
   } catch (error) {
-    yield put(
-      showError(formatMessage(messages.reorderError), {
-        id: REORDER_QUESTION_LIST_ERROR,
-      }),
-    );
+    yield call(toast.error, formatMessage(messages.reorderError), {
+      toastId: REORDER_QUESTION_LIST_ERROR,
+    });
     yield put(reorderQuestionListError(error));
   }
 }

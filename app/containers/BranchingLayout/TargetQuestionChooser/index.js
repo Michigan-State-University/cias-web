@@ -143,7 +143,7 @@ const TargetQuestionChooser = props => {
             {interventionList &&
               interventionList.map((intervention, index) => (
                 <Row
-                  data-testid={`${id}-select-target-intervention-el`}
+                  data-testid={`${id}-select-target-intervention-el-${index}`}
                   key={`${id}-select-target-intervention-${index}`}
                   mb={index !== interventionList.length - 1 ? 15 : 5}
                   onClick={event => chooseIntervention(intervention.id, event)}

@@ -2,26 +2,23 @@
  *
  * Tests for ProblemPage
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
 import { MemoryRouter } from 'react-router-dom';
 
+import { createTestStore } from 'utils/testUtils/storeUtils';
+import { DEFAULT_LOCALE } from 'i18n';
 import ProblemPage from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<ProblemPage />', () => {
   let store;
   let modalContainer;
   let mainAppContainer;
-  const reducer = state => state;
   const initialState = {
     problems: {
       problems: [],
@@ -31,10 +28,7 @@ describe('<ProblemPage />', () => {
   };
 
   beforeAll(() => {
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
-    store.injectedReducers = {};
-    store.injectedSagas = {};
+    store = createTestStore(initialState);
     ReactDOM.createPortal = jest.fn(element => element);
     modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal-portal');
@@ -73,16 +67,13 @@ describe('<ProblemPage />', () => {
   });
 
   it('Should render and match the snapshot without interventions', () => {
-    store = createStore(reducer, {
+    store = createTestStore({
       problems: {
         problems: [],
         fetchProblemLoading: false,
         fetchProblemError: null,
       },
     });
-    store.runSaga = () => {};
-    store.injectedReducers = {};
-    store.injectedSagas = {};
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
@@ -96,7 +87,7 @@ describe('<ProblemPage />', () => {
   });
 
   it('Should render and match the snapshot with interventions', () => {
-    store = createStore(reducer, {
+    store = createTestStore({
       problems: {
         problems: [{ name: 'Name', status: 'draft', interventions_size: 2 }],
         fetchProblemLoading: false,

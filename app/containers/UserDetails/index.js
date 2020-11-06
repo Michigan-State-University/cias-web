@@ -17,8 +17,7 @@ import {
   UserReducer,
 } from 'global/reducers/user';
 
-import { useInjectReducer } from 'utils/injectReducer';
-import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import Spinner from 'components/Spinner';
 import { themeColors } from 'theme';

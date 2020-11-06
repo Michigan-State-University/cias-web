@@ -2,12 +2,10 @@
  *
  * Tests for Spinner
  *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
  */
 
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
 import Loader from '../index';
@@ -21,11 +19,6 @@ describe('<Loader />', () => {
 
   it('Should render and match the snapshot', () => {
     const renderedComponent = render(<Loader />);
-    expect(renderedComponent).toMatchSnapshot();
-  });
-
-  it('Should render with invalid type and match the snapshot', () => {
-    const renderedComponent = render(<Loader type="invalid" />);
     expect(renderedComponent).toMatchSnapshot();
   });
 

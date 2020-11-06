@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'jest-styled-components';
 import { browserHistory, MemoryRouter } from 'react-router-dom';
 
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import MapInterventions from 'components/MapInterventions/MapInterventions';
 import { DEFAULT_LOCALE } from 'i18n';
