@@ -6,7 +6,7 @@ const {
   API_URL,
 } = require('../../support/envVariables');
 
-const loginAddress = Cypress.env(API_URL);
+const loginAddress = `${Cypress.env(API_URL)}/login`;
 
 describe('Login test', () => {
   beforeEach(() => {
