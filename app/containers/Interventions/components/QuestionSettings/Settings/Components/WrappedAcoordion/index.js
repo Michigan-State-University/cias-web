@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import cloneDeep from 'lodash/cloneDeep';
 import isEqual from 'lodash/isEqual';
@@ -44,6 +44,12 @@ const WrappedAccordion = ({
   disabled,
 }) => {
   const { voice, animation } = narrator.settings;
+
+  useEffect(() => {
+    if (narrator.blocks.length !== 0) {
+      changeNarratorBlockIndex(0);
+    }
+  }, []);
 
   const hideAccordion = () => {
     setDraggable(false);
