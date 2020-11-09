@@ -23,7 +23,7 @@ const Accordion = ({
   }, [opened]);
 
   const renderCollapse = (child, index) => {
-    const { children: content, label, color } = child.props;
+    const { children: content, label, color, deleteActive } = child.props;
 
     const handleToggle = () => {
       let newIndex = index;
@@ -44,6 +44,7 @@ const Accordion = ({
         color={color}
         onDelete={handleDelete}
         disabled={disabled}
+        deleteActive={deleteActive}
       >
         {content}
       </Collapse>
