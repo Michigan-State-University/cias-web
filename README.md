@@ -2,6 +2,9 @@
 1. Copy the contents of `.env.example` to `.env` (create this file)
 1. Run `npm install` to install all required dependencies ***(optional => run only the first time or when dependencies change)**
 1. Run `npm start` to run the project. It will be available at `localhost:4200`
+## Cypress
+* Open Cypress dashboard `npm run cy:open`
+* Run Cypress tests `npm run cy:test`
 
 ## Contributors
 
