@@ -7,12 +7,13 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
+import {
+  apiProblemResponse,
+  apiInterventionResponse,
+} from 'utils/apiResponseCreators';
 
 import { fetchProblemSuccess, fetchProblemError } from '../../actions';
-import {
-  mockProblemApiResponse,
-  mockInterventionApiResponse,
-} from './mockApiResponse';
+
 import { FETCH_PROBLEM_REQUEST } from '../../constants';
 import fetchProblemSaga, { fetchProblem } from '../fetchProblem';
 
@@ -20,9 +21,9 @@ describe('fetchProblem saga', () => {
   const payload = { id: 'test-id' };
 
   it('Check fetchProblem generator success connection', () => {
-    const problemApiResponse = cloneDeep(mockProblemApiResponse);
+    const problemApiResponse = apiProblemResponse();
     const interventionApiResponse = {
-      data: [cloneDeep(mockInterventionApiResponse.data)],
+      data: [apiInterventionResponse().data],
     };
     const problem = cloneDeep(problemApiResponse.data);
     const interventions = cloneDeep(interventionApiResponse.data);

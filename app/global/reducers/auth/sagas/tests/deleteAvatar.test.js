@@ -2,7 +2,6 @@ import axios from 'axios';
 import { initialState } from 'global/reducers/auth/reducer';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { toast } from 'react-toastify';
-import cloneDeep from 'lodash/cloneDeep';
 import { takeLatest } from 'redux-saga/effects';
 import { expectSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
@@ -11,8 +10,8 @@ import LocalStorageService from 'utils/localStorageService';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { createUser } from 'utils/reducerCreators';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
+import { apiUserResponse } from 'utils/apiResponseCreators';
 
-import { apiResponseWithSnakeCase } from './mockApiResponse';
 import deleteAvatarSaga, { deleteAvatar } from '../deleteAvatar';
 import { deleteAvatarSuccess, deleteAvatarError } from '../../actions';
 import messages from '../../messages';
@@ -22,7 +21,7 @@ describe('deleteAvatar saga', () => {
   const mockState = { auth: { ...initialState, user: createUser() } };
 
   it('Check deleteAvatar generator success connection', () => {
-    const apiResponse = cloneDeep(apiResponseWithSnakeCase);
+    const apiResponse = apiUserResponse();
     apiResponse.data.avatar_url = null;
     const successUser = mapCurrentUser(apiResponse.data);
 

@@ -12,7 +12,7 @@ import {
 } from '../constants';
 import { addOtherUserAvatarSuccess, addOtherUserAvatarError } from '../actions';
 
-function* addAvatar({ payload: { userId, image, imageUrl } }) {
+export function* addAvatar({ payload: { userId, image, imageUrl } }) {
   const requestURL = `/v1/users/${userId}/avatars`;
 
   const formData = new FormData();
@@ -21,7 +21,7 @@ function* addAvatar({ payload: { userId, image, imageUrl } }) {
   try {
     const {
       data: { data },
-    } = yield axios.post(requestURL, formData, {
+    } = yield call(axios.post, requestURL, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -33,7 +33,7 @@ function* addAvatar({ payload: { userId, image, imageUrl } }) {
   } catch (error) {
     yield call(
       toast.error,
-      formatMessage(messages.deleteAvatarError, {
+      formatMessage(messages.addAvatarError, {
         toastId: ADD_OTHER_USER_AVATAR_ERROR,
       }),
     );

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import get from 'lodash/get';
 
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { fetchProblemsSuccess, fetchProblemsError } from '../actions';
@@ -9,13 +9,13 @@ import { FETCH_PROBLEMS_REQUEST } from '../constants';
 
 import messages from '../messages';
 
-function* fetchProblems() {
+export function* fetchProblems() {
   const requestURL = `v1/problems`;
 
   try {
     const {
       data: { problems },
-    } = yield axios.get(requestURL);
+    } = yield call(axios.get, requestURL);
 
     yield put(fetchProblemsSuccess(problems));
   } catch (error) {

@@ -10,22 +10,23 @@ import LocalStorageService from 'utils/localStorageService';
 import { createUser } from 'utils/reducerCreators';
 import { mapCurrentUserWithoutAttributes } from 'utils/mapResponseObjects';
 import { initialState } from 'global/reducers/auth/reducer';
+import { apiUserResponse } from 'utils/apiResponseCreators';
 
-import { apiResponseWithSnakeCase } from './mockApiResponse';
 import { editUserSuccess, editUserError } from '../../actions';
 import { EDIT_USER_REQUEST, EDIT_USER_ERROR } from '../../constants';
 import { editUser } from '../editUser';
 import { editUserSaga } from '../index';
 
 describe('editUser saga', () => {
+  const mockApiResponse = apiUserResponse();
   const payload = createUser();
   const mockState = { auth: { ...initialState, user: createUser() } };
 
   it('Check editUser generator success connection', () => {
     const apiResponse = cloneDeep({
       data: {
-        id: apiResponseWithSnakeCase.data.id,
-        ...apiResponseWithSnakeCase.data.attributes,
+        id: mockApiResponse.data.id,
+        ...mockApiResponse.data.attributes,
       },
     });
     apiResponse.data.first_name = 'test';

@@ -15,24 +15,20 @@ import {
   deleteOtherUserAvatarError,
 } from '../actions';
 
-function* deleteOtherUserAvatar({ payload: { userId } }) {
+export function* deleteOtherUserAvatar({ payload: { userId } }) {
   const requestURL = `/v1/users/${userId}/avatars`;
 
   try {
     const {
       data: { data },
-    } = yield axios.delete(requestURL);
+    } = yield call(axios.delete, requestURL);
 
     const mappedUser = mapCurrentUser(data);
     yield put(deleteOtherUserAvatarSuccess(mappedUser));
   } catch (error) {
-    yield call(
-      toast.error,
-      formatMessage(messages.deleteOtherUserAvatarError),
-      {
-        toastId: DELETE_OTHER_USER_AVATAR_ERROR,
-      },
-    );
+    yield call(toast.error, formatMessage(messages.deleteAvatarError), {
+      toastId: DELETE_OTHER_USER_AVATAR_ERROR,
+    });
     yield put(deleteOtherUserAvatarError(error));
   }
 }

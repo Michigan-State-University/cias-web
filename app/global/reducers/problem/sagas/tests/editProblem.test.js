@@ -1,5 +1,4 @@
 import axios from 'axios';
-import cloneDeep from 'lodash/cloneDeep';
 import { toast } from 'react-toastify';
 import { takeLatest } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
@@ -9,10 +8,10 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { createProblem } from 'utils/reducerCreators';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
+import { apiProblemResponse } from 'utils/apiResponseCreators';
 import globalMessages from 'global/i18n/globalMessages';
 
 import { editProblemSuccess } from '../../actions';
-import { mockProblemApiResponse } from './mockApiResponse';
 import { initialState } from '../../reducer';
 import editProblemSaga, { editProblem } from '../editProblem';
 import { EDIT_PROBLEM_ERROR, EDIT_PROBLEM_REQUEST } from '../../constants';
@@ -24,7 +23,7 @@ describe('editProblem saga', () => {
   };
 
   it('Check editProblem generator success connection', () => {
-    const apiResponse = cloneDeep(mockProblemApiResponse);
+    const apiResponse = apiProblemResponse();
     apiResponse.data.attributes.name = mockProblem.name;
 
     return expectSaga(editProblem)

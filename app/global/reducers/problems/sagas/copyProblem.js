@@ -13,12 +13,14 @@ import {
   COPY_PROBLEM_SUCCESS,
 } from '../constants';
 
-function* copyProblem({ payload: { problemId, users, withoutRedirect } }) {
+export function* copyProblem({
+  payload: { problemId, users, withoutRedirect },
+}) {
   const requestURL = `v1/problems/${problemId}/clone`;
   let params;
   if (users) params = { problem: { user_ids: users } };
   try {
-    const response = yield axios.post(requestURL, params);
+    const response = yield call(axios.post, requestURL, params);
     if (!params) {
       const copiedProblem = defaultMapper(response.data.data);
       yield put(copyProblemSuccess(copiedProblem));
