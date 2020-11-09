@@ -41,13 +41,21 @@ export const getBlockColor = (type, { animation, voice }) => {
   }
 };
 
-export const renderBlock = (block, index, id, formatMessage, disabled) => {
+export const renderBlock = (
+  block,
+  index,
+  id,
+  formatMessage,
+  disabled,
+  animationDisabled,
+) => {
   const sharedProps = {
     formatMessage,
     block,
     id,
     blockIndex: index,
     disabled,
+    animationDisabled,
   };
   switch (block.type) {
     case bodyAnimationType:

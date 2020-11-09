@@ -59,6 +59,7 @@ const SpeechBlock = ({
   updateAction,
   currentQuestionType,
   disabled,
+  animationDisabled,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(block.text, ''));
@@ -124,6 +125,7 @@ const SpeechBlock = ({
   );
 
   const hasSpecialPositioning = block.action !== feedbackActions.noAction;
+  const isAnimationDisabled = disabled || animationDisabled;
 
   const renderButton = () => {
     if (isSpeechUpdating) return <Loader size={24} type="inline" />;
@@ -140,7 +142,7 @@ const SpeechBlock = ({
             <Box mt={15}>
               <Select
                 selectProps={{
-                  isDisabled: disabled,
+                  isDisabled: isAnimationDisabled,
                   options: feedbackOptions,
                   value: selectedFeedbackOption,
                   onChange: ({ value }) => updateAction(blockIndex, value, id),
@@ -155,7 +157,7 @@ const SpeechBlock = ({
           <Box mt={15}>
             <Select
               selectProps={{
-                isDisabled: disabled,
+                isDisabled: isAnimationDisabled,
                 options: selectOptions,
                 value: selectedOption,
                 onChange: ({ value }) => updateAnimation(blockIndex, value, id),
@@ -220,6 +222,7 @@ SpeechBlock.propTypes = {
   updateAction: PropTypes.func,
   currentQuestionType: PropTypes.string,
   disabled: PropTypes.bool,
+  animationDisabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

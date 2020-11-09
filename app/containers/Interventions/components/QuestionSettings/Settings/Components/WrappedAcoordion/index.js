@@ -109,7 +109,14 @@ const WrappedAccordion = ({
               globalMessages.blockTypes[block.type],
             )}`}
           >
-            {renderBlock(block, blockIndex, id, formatMessage, disabled)}
+            {renderBlock(
+              block,
+              blockIndex,
+              id,
+              formatMessage,
+              disabled,
+              !animation,
+            )}
           </div>
         ))}
     </Accordion>
