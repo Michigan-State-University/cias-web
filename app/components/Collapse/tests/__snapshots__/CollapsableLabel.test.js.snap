@@ -45,12 +45,6 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
   height: auto;
 }
 
-.c5 {
-  width: auto;
-  height: auto;
-  cursor: pointer;
-}
-
 .c1 {
   border-radius: 5px;
   color: white;
@@ -103,7 +97,7 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
     </div>
     <img
       alt="bin"
-      class="c5"
+      class="c4"
       data-testid="bin-test"
       src="IMAGE_MOCK"
     />
