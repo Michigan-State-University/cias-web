@@ -24,6 +24,7 @@ import {
   makeSelectCurrentNarratorBlockIndex,
 } from 'global/reducers/localState';
 
+import { feedbackBlockType } from 'models/Narrator/BlockTypes';
 import { getBlockColor, renderBlock } from '../utils';
 import { removeBlock, reorderNarratorBlocks } from '../../actions';
 
@@ -105,11 +106,19 @@ const WrappedAccordion = ({
           <div
             key={`${id}-narrator-block-${blockIndex}`}
             color={getBlockColor(block.type, { animation, voice })}
+            deleteActive={block.type !== feedbackBlockType}
             label={`${blockIndex + 1}. ${formatMessage(
               globalMessages.blockTypes[block.type],
             )}`}
           >
-            {renderBlock(block, blockIndex, id, formatMessage, disabled)}
+            {renderBlock(
+              block,
+              blockIndex,
+              id,
+              formatMessage,
+              disabled,
+              !animation,
+            )}
           </div>
         ))}
     </Accordion>

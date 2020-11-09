@@ -5,6 +5,7 @@ import Row from 'components/Row';
 import Img from 'components/Img';
 
 import bin from 'assets/svg/bin-red.svg';
+import binGrey from 'assets/svg/bin-grey.svg';
 
 import { ImageWrapper, StyledCollapseLabel } from './styled';
 
@@ -22,6 +23,7 @@ const CollapseLabel = ({
   py,
   px,
   bgOpacity,
+  deleteActive,
 }) => {
   const img = isOpened ? onShowImg : onHideImg;
   const imgElement = <Img src={img} />;
@@ -47,10 +49,10 @@ const CollapseLabel = ({
       {!disabled && (
         <Img
           data-testid={`bin-${label}`}
-          src={bin}
+          src={deleteActive ? bin : binGrey}
           alt="bin"
-          clickable
-          onClick={onDelete}
+          clickable={deleteActive}
+          onClick={deleteActive && onDelete}
         />
       )}
     </Row>
@@ -71,6 +73,7 @@ CollapseLabel.propTypes = {
   py: PropTypes.number,
   px: PropTypes.number,
   bgOpacity: PropTypes.number,
+  deleteActive: PropTypes.bool,
 };
 
 export default CollapseLabel;

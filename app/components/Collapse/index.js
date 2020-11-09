@@ -23,6 +23,7 @@ const Collapse = ({
   color,
   bgOpacity,
   imgWithBackground,
+  deleteActive,
 }) => (
   <StyledCollapseContainer>
     <CollapseLabel
@@ -39,6 +40,7 @@ const Collapse = ({
       px={px}
       color={color}
       bgOpacity={bgOpacity}
+      deleteActive={deleteActive}
     />
     <CollapseContent child={children} isOpened={isOpened} />
   </StyledCollapseContainer>
@@ -59,6 +61,7 @@ Collapse.propTypes = {
   px: PropTypes.number,
   bgOpacity: PropTypes.number,
   color: PropTypes.string,
+  deleteActive: PropTypes.bool,
 };
 
 Collapse.defaultProps = {
@@ -69,6 +72,7 @@ Collapse.defaultProps = {
   height: '40px',
   px: 12,
   py: 12,
+  deleteActive: true,
 };
 
 export default Collapse;
