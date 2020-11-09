@@ -20,6 +20,7 @@ import {
 } from 'models/Narrator/BlockTypes';
 
 import Draggable from 'react-draggable';
+import usePauseHelper from 'utils/animationsHelpers/usePauseHelper';
 import { NarratorContainer } from './styled';
 import useFeedbackHelper from '../animationsHelpers/feedbackHelper';
 
@@ -44,9 +45,6 @@ const lottieStyles = {
   margin: 'none',
 };
 
-const pauseCharacter = async time =>
-  new Promise(r => setTimeout(r, time * 1000));
-
 const CharacterAnim = ({
   blocks,
   questionId,
@@ -65,17 +63,6 @@ const CharacterAnim = ({
       type: UPDATE,
       newState,
     });
-
-  const handlePauseBlock = async (nextBlock, nextIndex) => {
-    const { pauseDuration } = nextBlock;
-    const idleAnimation = getIdleAnimation();
-    dispatchUpdate({
-      currentData: idleAnimation,
-      currentBlockIndex: nextIndex,
-    });
-    await pauseCharacter(pauseDuration);
-    changeBlock(nextIndex);
-  };
 
   const changeBlock = async prevIndex => {
     clearAnimationBlock();
@@ -105,7 +92,7 @@ const CharacterAnim = ({
           break;
 
         case pauseType:
-          handlePauseBlock(nextBlock, nextIndex);
+          changePauseBlock(nextBlock, nextIndex);
           break;
 
         case feedbackBlockType:
@@ -113,7 +100,7 @@ const CharacterAnim = ({
           break;
 
         default:
-          changeBlock(nextIndex);
+          await changeBlock(nextIndex);
           break;
       }
     } else {
@@ -139,6 +126,18 @@ const CharacterAnim = ({
     dispatchUpdate,
     changeBlock,
     state.currentData,
+  );
+
+  const {
+    handlePauseBlock,
+    getInitialPauseAnimation,
+    changePauseBlock,
+  } = usePauseHelper(
+    blocks,
+    state.currentData,
+    dispatchUpdate,
+    changeBlock,
+    getIdleAnimation,
   );
 
   const {
@@ -196,6 +195,9 @@ const CharacterAnim = ({
         case bodyAnimationType:
           return getInitialBodyOrHeadAnimation();
 
+        case pauseType:
+          return getInitialPauseAnimation();
+
         case feedbackBlockType:
           return getInitialFeedbackData();
 
@@ -242,6 +244,10 @@ const CharacterAnim = ({
         case reflectionFormulaType:
           if (!settings.voice) changeBlock();
           else handleAudioBlock();
+          break;
+
+        case pauseType:
+          handlePauseBlock();
           break;
 
         case feedbackBlockType:

@@ -1,4 +1,3 @@
-import cloneDeep from 'lodash/cloneDeep';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { takeLatest } from 'redux-saga/effects';
@@ -10,9 +9,9 @@ import LocalStorageService from 'utils/localStorageService';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
 import { createUser } from 'utils/reducerCreators';
+import { apiUserResponse } from 'utils/apiResponseCreators';
 
 import { initialState } from 'global/reducers/auth/reducer';
-import { apiResponseWithSnakeCase } from './mockApiResponse';
 import { CHANGE_EMAIL_REQUEST, CHANGE_EMAIL_SUCCESS } from '../../constants';
 import { changeEmailSaga } from '../../index';
 import { changeEmail } from '../changeEmail';
@@ -27,7 +26,7 @@ describe('changeEmail saga', () => {
 
   const mockState = { auth: { ...initialState, user: createUser() } };
   it('Check changeEmail generator success connection', () => {
-    const apiResponse = cloneDeep(apiResponseWithSnakeCase);
+    const apiResponse = apiUserResponse();
     apiResponse.data.email = payload.newEmail;
     const successUser = mapCurrentUser(apiResponse.data);
 

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import cloneDeep from 'lodash/cloneDeep';
 import { takeLatest } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
@@ -9,9 +8,9 @@ import { createProblem } from 'utils/reducerCreators';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { initialState } from 'global/reducers/problem/reducer';
 import { fetchProblemRequest } from 'global/reducers/problem';
+import { apiInterventionResponse } from 'utils/apiResponseCreators';
 
 import { getInterventionSuccess, getInterventionError } from '../../actions';
-import { mockApiResponse } from './mockApiResponse';
 import { GET_INTERVENTION_REQUEST } from '../../constants';
 import { getIntervention } from '../getIntervention';
 import { getInterventionSaga } from '../index';
@@ -27,7 +26,7 @@ describe('getIntervention saga', () => {
   };
 
   it('Check getIntervention generator success connection', () => {
-    const apiResponse = cloneDeep(mockApiResponse);
+    const apiResponse = apiInterventionResponse();
     return expectSaga(getIntervention, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
@@ -36,7 +35,7 @@ describe('getIntervention saga', () => {
   });
 
   it('Check getIntervention generator success connection with empty state', () => {
-    const apiResponse = cloneDeep(mockApiResponse);
+    const apiResponse = apiInterventionResponse();
     return expectSaga(getIntervention, { payload })
       .withState({ problem: {} })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])

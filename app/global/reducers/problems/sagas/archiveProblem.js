@@ -10,12 +10,12 @@ import { toArchive } from 'models/Status/StatusTypes';
 import { archiveProblemFailure, archiveProblemSuccess } from '../actions';
 import { ARCHIVE_PROBLEM_REQUEST, ARCHIVE_PROBLEM_ERROR } from '../constants';
 
-function* archiveProblem({ payload: { problemId } }) {
+export function* archiveProblem({ payload: { problemId } }) {
   const requestURL = `v1/problems/${problemId}`;
   try {
     const {
       data: { data },
-    } = yield axios.patch(requestURL, {
+    } = yield call(axios.patch, requestURL, {
       problem: { status_event: toArchive },
     });
     const mappedData = defaultMapper(data);

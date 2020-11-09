@@ -52,6 +52,7 @@ function BranchingLayout({
           {formatMessage(messages.formula)}
           <Box
             onClick={() => {
+              document.activeElement.blur();
               if (!disabled) {
                 if (onVariableChooserOpen) onVariableChooserOpen();
                 setVariableChooserOpen(!variableChooserOpen);

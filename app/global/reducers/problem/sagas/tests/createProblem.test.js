@@ -9,15 +9,17 @@ import { push } from 'connected-react-router';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import globalMessages from 'global/i18n/globalMessages';
+import { apiProblemResponse } from 'utils/apiResponseCreators';
 
 import { createProblemSuccess } from '../../actions';
 import { CREATE_PROBLEM_ERROR, CREATE_PROBLEM_REQUEST } from '../../constants';
-import { mockProblemApiResponse } from './mockApiResponse';
 import createProblemSaga, { createProblem } from '../createProblem';
 
 describe('createProblem saga', () => {
+  const mockApiResponse = apiProblemResponse();
+
   it('Check createProblem generator success connection', () => {
-    const apiResponse = { data: { mockProblemApiResponse } };
+    const apiResponse = { data: { mockApiResponse } };
     return expectSaga(createProblem)
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
       .put(createProblemSuccess(defaultMapper(apiResponse.data)))

@@ -1,14 +1,13 @@
 import axios from 'axios';
-import cloneDeep from 'lodash/cloneDeep';
 import { takeLatest } from 'redux-saga/effects';
 import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
 import { createIntervention } from 'utils/reducerCreators';
+import { apiInterventionResponse } from 'utils/apiResponseCreators';
 
 import { editInterventionSuccess, editInterventionError } from '../../actions';
-import { mockApiResponse } from './mockApiResponse';
 import { initialState } from '../../reducer';
 import editInterventionSaga, { editIntervention } from '../editIntervention';
 import { EDIT_INTERVENTION_REQUEST } from '../../constants';
@@ -20,7 +19,7 @@ describe('editIntervention saga', () => {
   };
 
   it('Check editIntervention generator success connection', () => {
-    const apiResponse = cloneDeep(mockApiResponse);
+    const apiResponse = apiInterventionResponse();
     apiResponse.data.attributes.name = mockIntervention.name;
 
     return expectSaga(editIntervention)
