@@ -1,0 +1,6 @@
+{
+  "video": false,
+  "screenshotOnRunFailure": false,
+  "baseUrl": "http://localhost:4200",
+  "projectId": "cias-web"
+}
