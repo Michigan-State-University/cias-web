@@ -8,12 +8,12 @@ import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 import { editOtherUserSuccess, editOtherUserError } from '../actions';
 import { EDIT_OTHER_USER_REQUEST, EDIT_OTHER_USER_ERROR } from '../constants';
 
-function* editSingleUser({ payload: { userId, ...newUserData } }) {
+export function* editSingleUser({ payload: { userId, ...newUserData } }) {
   const requestURL = `v1/users/${userId}`;
 
   const userData = objectKeysToSnakeCase(newUserData);
   try {
-    const { data } = yield axios.patch(requestURL, {
+    const { data } = yield call(axios.patch, requestURL, {
       user: userData,
     });
     const mappedUser = mapCurrentUserWithoutAttributes(data);

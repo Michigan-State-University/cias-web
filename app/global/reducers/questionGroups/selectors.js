@@ -29,6 +29,12 @@ export const makeSelectQuestionGroupsLoader = () =>
     substate => substate.questionsGroupsSaving,
   );
 
+export const makeSelectQuestionGroupsInterventionId = () =>
+  createSelector(
+    selectQuestionGroups,
+    substate => substate.interventionId,
+  );
+
 export const makeSelectGetQuestionGroupLoader = () =>
   createSelector(
     selectQuestionGroups,

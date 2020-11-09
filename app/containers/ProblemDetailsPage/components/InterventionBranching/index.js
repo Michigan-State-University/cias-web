@@ -30,7 +30,10 @@ import {
 } from 'global/reducers/problem';
 import { getQuestionsRequest } from 'global/reducers/questions';
 import { injectReducer } from 'redux-injectors';
-import { questionGroupsReducer } from 'global/reducers/questionGroups';
+import {
+  questionGroupsReducer,
+  makeSelectQuestionGroupsInterventionId,
+} from 'global/reducers/questionGroups';
 import messages from './messages';
 
 function InterventionBranching({
@@ -49,6 +52,7 @@ function InterventionBranching({
   changeInterventionIndex,
   fetchQuestions,
   disabled,
+  activeInterventionId,
 }) {
   const displayPatternTargetText = target => {
     if (target.id === '') return formatMessage(messages.selectSession);
@@ -62,6 +66,15 @@ function InterventionBranching({
   };
 
   const handleFormulaStatus = value => onChangeFormulaStatus(value, id);
+
+  const handleClickAddVariable = () => {
+    if (position !== interventionIndex + 1) {
+      changeInterventionIndex(position - 1);
+    }
+    if (id !== activeInterventionId) {
+      fetchQuestions(id);
+    }
+  };
 
   return (
     <>
@@ -97,12 +110,7 @@ function InterventionBranching({
           <Column>
             <BranchingLayout
               disabled={disabled}
-              onVariableChooserOpen={() => {
-                if (position !== interventionIndex + 1) {
-                  changeInterventionIndex(position - 1);
-                  fetchQuestions(id);
-                }
-              }}
+              onVariableChooserOpen={handleClickAddVariable}
               formatMessage={formatMessage}
               formula={formula}
               id={id}
@@ -136,11 +144,13 @@ InterventionBranching.propTypes = {
   changeInterventionIndex: PropTypes.func,
   fetchQuestions: PropTypes.func,
   disabled: PropTypes.bool,
+  activeInterventionId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   problem: makeSelectProblem(),
   interventionIndex: makeSelectCurrentInterventionIndex(),
+  activeInterventionId: makeSelectQuestionGroupsInterventionId(),
 });
 
 const mapDispatchToProps = {

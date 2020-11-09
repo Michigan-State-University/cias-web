@@ -12,11 +12,11 @@ import { CHANGE_ACTIVATE_STATUS_REQUEST } from '../constants';
 
 import messages from '../messages';
 
-function* changeActivateStatus({ payload: { userId, active } }) {
+export function* changeActivateStatus({ payload: { userId, active } }) {
   const requestUrl = `/v1/users/${userId}`;
   try {
-    if (!active) yield axios.delete(requestUrl);
-    else yield axios.patch(requestUrl, { active });
+    if (!active) yield call(axios.delete, requestUrl);
+    else yield call(axios.patch, requestUrl, { active });
     yield put(changeActivateStatusSuccess());
     yield call(toast.info, formatMessage(messages.changeStatusSuccess));
   } catch (error) {
