@@ -1,12 +1,8 @@
 /* eslint no-unused-expressions: 0 */ // --> OFF
 
-const {
-  ADMIN_EMAIL,
-  ADMIN_PASSWORD,
-  API_URL,
-} = require('../../support/envVariables');
+const { ADMIN_EMAIL, ADMIN_PASSWORD } = require('../../support/envVariables');
 
-const loginAddress = `${Cypress.env(API_URL)}/login`;
+const loginAddress = `/login`;
 
 describe('Login test', () => {
   beforeEach(() => {
