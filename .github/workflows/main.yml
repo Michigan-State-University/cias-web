@@ -1,15 +1,17 @@
-name: Continuous integration
+name: Continuous Integration
 on: push
 
 jobs:
   verify:
-    name: Build
+    name: Lint and set-up test chunks
     runs-on: ubuntu-latest
+    outputs:
+      test-chunks: ${{ steps['set-test-chunks'].outputs['test-chunks'] }}
+      test-chunk-ids: ${{ steps['set-test-chunk-ids'].outputs['test-chunk-ids'] }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
 
       - name: Set up Node
         uses: actions/setup-node@v1
@@ -19,7 +21,9 @@ jobs:
       - name: Cache node modules
         uses: actions/cache@v2
         with:
-          path: ~/.npm
+          path: |
+            ~/.npm
+            ~/.cache
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
@@ -27,11 +31,53 @@ jobs:
             ${{ runner.os }}--
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
-      - name: Lint js and css
+      - name: Lint CSS and JS
         run: npm run lint
 
-      - name: Test
-        run: npm test
+      - id: set-test-chunks
+        name: Set Chunks
+        run: echo "::set-output name=test-chunks::$(npx jest --listTests --json | jq -cM '[_nwise(length / 3 | floor)]')"
 
+      - id: set-test-chunk-ids
+        name: Set Chunk IDs
+        run: echo "::set-output name=test-chunk-ids::$(echo $CHUNKS | jq -cM 'to_entries | map(.key)')"
+        env:
+          CHUNKS: ${{ steps['set-test-chunks'].outputs['test-chunks'] }}
+
+  test:
+    runs-on: ubuntu-latest
+    name: Test (batch ${{ matrix.chunk }})
+    needs: verify
+    strategy:
+      matrix:
+        chunk: ${{ fromJson(needs.verify.outputs['test-chunk-ids']) }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.npm
+            ~/.cache
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}--
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Lint js, css and run Tests
+        run: echo $CHUNKS | jq '.[${{ matrix.chunk }}] | .[] | @text' | xargs npx cross-env NODE_ENV=test jest
+        env:
+          CHUNKS: ${{ needs.verify.outputs['test-chunks'] }}
