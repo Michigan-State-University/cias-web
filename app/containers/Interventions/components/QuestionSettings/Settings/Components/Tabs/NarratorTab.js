@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
-import { FormattedMessage } from 'react-intl';
+import { FormattedHTMLMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
@@ -63,7 +63,7 @@ const NarratorTab = ({
     <Fragment>
       <Box mb={20}>
         <Text color={colors.flamingo} mb={30}>
-          <FormattedMessage {...messages.warningMessage} />
+          <FormattedHTMLMessage {...messages.warningMessage} />
         </Text>
         {narrator &&
           map(narrator.settings, (val, index) => (
@@ -91,7 +91,7 @@ const NarratorTab = ({
         }
         mb={15}
       >
-        <FormattedMessage
+        <FormattedHTMLMessage
           {...messages[
             ternary(
               disabled,
