@@ -68,7 +68,12 @@ const VariableChooser = ({
               {htmlToPlainText(variable.subtitle)}
             </Text>
           </Row>
-          <Badge maxWidth={300} color={colors.jungleGreen} bgWithOpacity>
+          <Badge
+            data-cy="question-variable-chooser"
+            maxWidth={300}
+            color={colors.jungleGreen}
+            bgWithOpacity
+          >
             {variable.variable && variable.variable.trim()}
           </Badge>
         </Row>

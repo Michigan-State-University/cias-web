@@ -18,7 +18,10 @@ import messages from './messages';
 
 function InterventionCreateButton({ handleClick }) {
   return (
-    <NewInterventionContainer onClick={handleClick}>
+    <NewInterventionContainer
+      data-cy="create-intervention-button"
+      onClick={handleClick}
+    >
       <Row align="center">
         <Img src={addSign2} alt="add" mx={10} />
         <H3>

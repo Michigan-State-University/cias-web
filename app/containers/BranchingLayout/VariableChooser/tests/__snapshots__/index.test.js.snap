@@ -183,6 +183,7 @@ Object {
                 <div
                   class="c8"
                   color="#107969"
+                  data-cy="question-variable-chooser"
                 >
                   var_single_1
                 </div>
@@ -229,6 +230,7 @@ Object {
               <div
                 class="Badge-sc-1bivynt-0 kRyFbm"
                 color="#107969"
+                data-cy="question-variable-chooser"
               >
                 var_single_1
               </div>

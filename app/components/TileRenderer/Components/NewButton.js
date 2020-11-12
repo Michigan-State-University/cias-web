@@ -7,7 +7,11 @@ import { NewElementContainer } from './styled';
 import AddLabel from './AddLabel';
 
 const NewButton = forwardRef(({ onClick, loading, label }, ref) => (
-  <NewElementContainer onClick={onClick} ref={ref}>
+  <NewElementContainer
+    data-cy="create-problem-button"
+    onClick={onClick}
+    ref={ref}
+  >
     {!loading && <AddLabel label={label} direction="column" mb={15} />}
     {loading && <Spinner />}
   </NewElementContainer>

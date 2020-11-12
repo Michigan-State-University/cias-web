@@ -90,15 +90,16 @@ export default defineMessages({
   },
   warningMessage: {
     id: `${scope}.warningMessage`,
-    defaultMessage: `Bear in mind that you can't edit the question when you are working with the character.`,
+    defaultMessage: `<b>Note:</b> you can’t edit screen content when the Narrator menu is selected `,
   },
   characterBlocked: {
     id: `${scope}.characterBlocked`,
-    defaultMessage: `Open any of the blocks to replace the character.`,
+    defaultMessage: `Expand any block to move the character.`,
   },
   characterMovable: {
     id: `${scope}.characterMovable`,
-    defaultMessage: `You can now replace the character by dragging it.`,
+    defaultMessage: `Click and drag the character to move it.<br>Only the start and end positions will be recorded.
+`,
   },
   characterMoveDisabled: {
     id: `${scope}.characterMoveDisabled`,

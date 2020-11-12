@@ -5,6 +5,7 @@ import { SwitchWrapper, SwitchInput, Slider } from './styled';
 const Switch = props => (
   <SwitchWrapper {...props}>
     <SwitchInput
+      data-cy="branching-problem-toggle"
       data-testid="switch-input"
       disabled={props.disabled}
       checked={props.checked}

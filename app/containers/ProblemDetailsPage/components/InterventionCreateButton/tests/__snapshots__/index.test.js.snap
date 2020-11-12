@@ -60,6 +60,7 @@ exports[`<InterventionCreateButton /> Should render and match the snapshot 1`] =
 
 <div
   class="c0"
+  data-cy="create-intervention-button"
 >
   <div
     class="c1"

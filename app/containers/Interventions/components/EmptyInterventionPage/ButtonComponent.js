@@ -23,6 +23,7 @@ const ButtonComponent = React.forwardRef(
       height={64}
       borderRadius={5}
       disabled={disabled}
+      data-cy="add-screen-button"
     >
       <Row justify="center" align="center">
         <Img src={disabled ? addSignDisabled : addSign} alt="add" mr={15} />
