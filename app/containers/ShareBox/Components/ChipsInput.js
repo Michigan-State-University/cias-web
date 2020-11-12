@@ -46,7 +46,8 @@ const ChipsInput = ({
   }) => {
     if (key === 'Backspace' || keyCode === 8) {
       if (value.length !== 0 && inputEmailValue.length === 0) {
-        setValue(value.filter((_, index) => index !== value.length - 1));
+        setValue(value.slice(0, -1));
+        return;
       }
     }
     const lastChar = inputEmailValue[inputEmailValue.length - 1];
