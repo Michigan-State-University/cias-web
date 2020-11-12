@@ -109,6 +109,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
       >
         <div
           class="styled__NewElementContainer-sc-1wlulo8-1 dnsdkb"
+          data-cy="create-problem-button"
         >
           <div
             class="Box-sc-14m3exe-0 fByYmj"

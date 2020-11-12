@@ -2,5 +2,9 @@
   "video": false,
   "screenshotOnRunFailure": false,
   "baseUrl": "http://localhost:4200",
-  "projectId": "cias-web"
+  "projectId": "cias-web",
+  "retries": {
+    "runMode": 2,
+    "openMode": 0
+  }
 }

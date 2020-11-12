@@ -14,7 +14,12 @@ import { CrossLink, CrossButton } from './styled';
 
 const ActionIcon = ({ to, onClick, iconSrc, ...restProps }) => {
   const icon = <Icon src={iconSrc} alt="cross" />;
-  if (to) return <CrossLink to={to}>{icon}</CrossLink>;
+  if (to)
+    return (
+      <CrossLink data-cy="back-problem-button" to={to}>
+        {icon}
+      </CrossLink>
+    );
   if (onClick)
     return (
       <CrossButton onClick={onClick} {...restProps}>

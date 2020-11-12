@@ -7,6 +7,7 @@
 ## Tests
 - [ ] Snapshot
 - [ ] Logic
+- [ ] Integration
 
 # Screenshots
 N/A

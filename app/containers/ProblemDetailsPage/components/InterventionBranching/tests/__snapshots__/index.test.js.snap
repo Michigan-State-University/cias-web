@@ -257,6 +257,7 @@ exports[`<InterventionBranching /> Should render and match the snapshot 1`] = `
       >
         <input
           class="c9 c10"
+          data-cy="branching-problem-toggle"
           data-testid="switch-input"
           type="checkbox"
         />

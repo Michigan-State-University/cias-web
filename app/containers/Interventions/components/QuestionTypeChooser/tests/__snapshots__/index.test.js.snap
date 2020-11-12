@@ -96,6 +96,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot 1`] = `
     >
       <div
         class="HoverableBox-sc-1syy6g3-0 c2"
+        data-cy="add-screen-button"
         display="flex"
         height="80"
         width="100%"
@@ -492,6 +493,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
     >
       <div
         class="HoverableBox-sc-1syy6g3-0 c2"
+        data-cy="add-screen-button"
         display="flex"
         height="80"
         width="100%"
