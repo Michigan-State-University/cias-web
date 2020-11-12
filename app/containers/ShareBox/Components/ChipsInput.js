@@ -44,6 +44,12 @@ const ChipsInput = ({
   const handleChange = ({ key, keyCode }) => ({
     target: { value: inputEmailValue },
   }) => {
+    if (key === 'Backspace' || keyCode === 8) {
+      if (value.length !== 0 && inputEmailValue.length === 0) {
+        setValue(value.slice(0, -1));
+        return;
+      }
+    }
     const lastChar = inputEmailValue[inputEmailValue.length - 1];
     if (
       lastChar === ',' ||
