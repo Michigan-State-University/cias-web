@@ -18,7 +18,7 @@ exports[`<AnswerInterventionPage /> Should render and match the snapshot 1`] = `
         class="StyledButton-t20ntd-0 fSeMme styled__StyledButton-sc-5f6i11-0 beKEZj"
         color="primary"
       >
-        Start intervention
+        Start session
       </button>
     </div>
   </div>
