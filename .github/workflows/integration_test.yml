@@ -1,23 +1,23 @@
-#name: Integration tests
-#on:
-#  pull_request_review:
-#    branches:
-#      - dev
-#      - master
-#    types: [submitted]
-#
-#jobs:
-#  integration:
-#    name: Cypress
-#    runs-on: ubuntu-latest
-#    env:
-#      CYPRESS_API_URL: ${{ secrets.CYPRESS_API_URL }}
-#      CYPRESS_ADMIN_EMAIL: ${{ secrets.CYPRESS_ADMIN_EMAIL }}
-#      CYPRESS_ADMIN_PASSWORD: ${{ secrets.CYPRESS_ADMIN_PASSWORD }}
-#
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
+name: Integration tests
+on:
+  pull_request_review:
+    branches:
+      - dev
+      - master
+    types: [submitted]
+
+jobs:
+  integration:
+    name: Cypress
+    runs-on: ubuntu-latest
+    env:
+      CYPRESS_API_URL: ${{ secrets.CYPRESS_API_URL }}
+      CYPRESS_ADMIN_EMAIL: ${{ secrets.CYPRESS_ADMIN_EMAIL }}
+      CYPRESS_ADMIN_PASSWORD: ${{ secrets.CYPRESS_ADMIN_PASSWORD }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 #
 #      - name: Set up Node
 #        uses: actions/setup-node@v1

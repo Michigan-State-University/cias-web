@@ -99,6 +99,7 @@ function InterventionListItem({
                   src={sharingPossible ? mail : mailDisabled}
                   onClick={handleClick}
                   alt="emails"
+                  data-cy={`share-session-modal-open-button-${index}`}
                 />
                 {process.env.APP_STAGE === appStages.dev.id && (
                   <Box mb={8}>

@@ -19,8 +19,9 @@ const UserList = ({ users, buttons, buttonIsClose, userWithLoading }) => {
     return (
       <Row>
         {userWithLoading.id === id && <Spinner color={themeColors.secondary} />}
-        {buttons.map(({ action, disabled, text }) => (
+        {buttons.map(({ action, disabled, text }, index) => (
           <StyledTextButton
+            data-cy={`user-list-action-button-${index}`}
             key={`${text.props.id}-${id}`}
             disabled={!disabled}
             onClick={() => action(id)}
@@ -41,9 +42,10 @@ const UserList = ({ users, buttons, buttonIsClose, userWithLoading }) => {
   };
 
   return (
-    <Column>
-      {users.map(({ email, id }) => (
+    <Column data-cy="user-list">
+      {users.map(({ email, id }, index) => (
         <HoverableRow
+          data-cy={`user-list-item-${index}`}
           key={`el-user-${email}`}
           align="center"
           justify="between"

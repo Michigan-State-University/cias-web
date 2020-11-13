@@ -733,6 +733,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
           <img
             alt="emails"
             class="c13"
+            data-cy="share-session-modal-open-button-0"
             src="IMAGE_MOCK"
           />
         </div>

@@ -267,6 +267,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
           </h1>
           <button
             class="c6"
+            data-cy="modal-close-button"
             data-testid="close-modal-button"
           >
             <img
@@ -304,6 +305,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
             <button
               class="c12"
               color="warning"
+              data-cy="confirmation-box-confirm-button"
               type="button"
             >
               <span>
@@ -617,6 +619,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
           </h1>
           <button
             class="c6"
+            data-cy="modal-close-button"
             data-testid="close-modal-button"
           >
             <img
@@ -654,6 +657,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
             <button
               class="c12"
               color="warning"
+              data-cy="confirmation-box-confirm-button"
               type="button"
             >
               <span>

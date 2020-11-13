@@ -50,6 +50,7 @@ const ConfirmationBox = ({
           loading={loading}
           onClick={confirmAction}
           type="button"
+          data-cy="confirmation-box-confirm-button"
         >
           <FormattedMessage {...messages.confirmCanceling} />
         </Button>

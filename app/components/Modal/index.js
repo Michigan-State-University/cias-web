@@ -88,6 +88,7 @@ const Modal = ({ title, onClose, children, visible, ...stylesProps }) => {
               <Row align="center" justify="between">
                 <H1>{title}</H1>
                 <ActionIcon
+                  data-cy="modal-close-button"
                   position="relative"
                   top="-8px"
                   left="40px"
