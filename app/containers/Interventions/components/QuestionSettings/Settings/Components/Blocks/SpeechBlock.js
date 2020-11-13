@@ -41,6 +41,7 @@ import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import animationMessages from './messages';
 import { updateBlockSettings, switchSpeechReflection } from '../../actions';
 import messages from '../messages';
+import ClearAnimationButton from './clearAnimationButton';
 
 const BUTTON_MARGIN = '10px';
 
@@ -135,6 +136,7 @@ const SpeechBlock = ({
 
   return (
     <Column>
+      <ClearAnimationButton blockIndex={blockIndex} />
       {currentQuestionType === feedbackQuestion.id &&
         block.type !== readQuestionBlockType && (
           <>

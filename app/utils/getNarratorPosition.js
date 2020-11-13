@@ -168,3 +168,22 @@ export const getNarratorPositionWhenQuestionIsAdded = (
   );
   return animationPosition;
 };
+
+export const resetAnimationPosition = (
+  selectedQuestion,
+  resetBlockIndex,
+  questions,
+  groupIds,
+) => {
+  if (resetBlockIndex > 0) {
+    const {
+      narrator: { blocks },
+    } = selectedQuestion;
+    return blocks[resetBlockIndex - 1].endPosition;
+  }
+  return getNarratorPositionFromPreviousGroups(
+    selectedQuestion,
+    groupIds,
+    questions,
+  );
+};

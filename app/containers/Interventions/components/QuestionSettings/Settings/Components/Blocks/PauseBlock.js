@@ -9,7 +9,7 @@ import Input from 'components/Input';
 import { updatePreviewAnimation } from 'global/reducers/localState';
 
 import { updatePauseDuration } from '../../actions';
-
+import ClearAnimationButton from './clearAnimationButton';
 const PauseBlock = ({
   block,
   blockIndex,
@@ -26,6 +26,7 @@ const PauseBlock = ({
 
   return (
     <Column>
+      <ClearAnimationButton blockIndex={blockIndex} />
       <Box mt={15} display="flex" justify="end" align="center">
         <Input
           disabled={disabled}
