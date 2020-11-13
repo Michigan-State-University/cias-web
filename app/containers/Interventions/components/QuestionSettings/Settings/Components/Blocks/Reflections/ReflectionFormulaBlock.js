@@ -39,6 +39,7 @@ import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
 import { DashedBox } from './styled';
 import { updateFormula, addFormulaCase } from './actions';
 import ReflectionFormula from './ReflectionFormula';
+import ClearAnimationButton from '../clearAnimationButton';
 
 const ReflectionFormulaBlock = ({
   formatMessage,
@@ -88,6 +89,7 @@ const ReflectionFormulaBlock = ({
 
   return (
     <Column>
+      <ClearAnimationButton blockIndex={blockIndex} />
       {currentQuestionType === feedbackQuestion.id && (
         <>
           <Box mt={15}>{formatMessage(messages.selectActionPosition)}</Box>

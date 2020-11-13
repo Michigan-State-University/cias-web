@@ -195,4 +195,8 @@ export default defineMessages({
     id: `${scope}.glanceRight`,
     defaultMessage: 'Glance right',
   },
+  resetAnimationPosition: {
+    id: `${scope}.resetAnimationPosition`,
+    defaultMessage: 'Reset animation position',
+  },
 });
