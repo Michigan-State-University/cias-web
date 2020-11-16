@@ -3,17 +3,15 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import get from 'lodash/get';
 
-import { getAllVariables } from 'models/Intervention/utils';
+import {
+  getAllVariables,
+  NotAnswerableQuestions,
+} from 'models/Intervention/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import {
-  gridQuestion,
-  informationQuestion,
-  multiQuestion,
-  feedbackQuestion,
-} from 'models/Intervention/QuestionTypes';
+import { gridQuestion, multiQuestion } from 'models/Intervention/QuestionTypes';
 import messages from '../messages';
 import {
   EDIT_QUESTION_REQUEST,
@@ -53,10 +51,7 @@ function* editQuestion({ payload }) {
     question.body.data[0].payload.rows.forEach(element => {
       if (hasDuplicates(variables, element.variable.name)) duplicates = true;
     });
-  } else if (
-    question.type === informationQuestion.id ||
-    question.type === feedbackQuestion.id
-  ) {
+  } else if (NotAnswerableQuestions.includes(question.type)) {
     duplicates = false;
   } else {
     duplicates = hasDuplicates(variables, question.body.variable.name);

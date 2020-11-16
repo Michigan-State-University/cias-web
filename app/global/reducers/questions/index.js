@@ -23,6 +23,7 @@ export {
   makeSelectLoader,
   makeSelectQuestionsLength,
   makeSelectSelectedQuestionType,
+  makeSelectVisibleGroupsSize,
 } from './selectors';
 export {
   addQuestionImageSaga,

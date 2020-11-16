@@ -55,6 +55,14 @@ export const feedbackQuestion = new QuestionType(
   colors.olive,
 );
 
+export const finishQuestion = new QuestionType(
+  'Question::Finish',
+  'Finish',
+  colors.brightGreen,
+);
+
+export const questionType = 'Question::';
+
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
@@ -65,4 +73,5 @@ export const QuestionTypes = [
   informationQuestion,
   urlQuestion,
   feedbackQuestion,
+  finishQuestion,
 ];

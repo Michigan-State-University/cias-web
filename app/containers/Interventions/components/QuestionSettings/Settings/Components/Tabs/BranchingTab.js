@@ -9,6 +9,10 @@ import { withRouter } from 'react-router-dom';
 import BranchingLayout from 'containers/BranchingLayout';
 import Intervention from 'models/Intervention/Intervention';
 import Question from 'models/Intervention/Question';
+import {
+  questionType,
+  finishQuestion,
+} from 'models/Intervention/QuestionTypes';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { makeSelectQuestions } from 'global/reducers/questions';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
@@ -60,14 +64,15 @@ const BranchingTab = ({
 
   const displayPatternTargetText = target => {
     const selectedIndex = findQuestionIndex(questions, id);
-    const isQuestionType = target.type === 'Question';
+    const isQuestionType = target.type.startsWith(questionType);
+    const isFinishType = target.type === finishQuestion.id;
 
     const targetIndex = isQuestionType
       ? findQuestionIndex(questions, target.id)
       : findInterventionIndex(interventionList || [], target.id);
 
     if (isQuestionType) {
-      if (selectedIndex === targetIndex - 1)
+      if (!isFinishType && selectedIndex === targetIndex - 1)
         return formatMessage(messages.nextScreen);
 
       if (targetIndex !== -1)

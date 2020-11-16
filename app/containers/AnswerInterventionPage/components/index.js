@@ -11,7 +11,9 @@ import {
   informationQuestion,
   urlQuestion,
   feedbackQuestion,
+  finishQuestion,
 } from 'models/Intervention/QuestionTypes';
+import FinishScreen from './FinishScreen';
 import UrlQuestion from './UrlQuestion';
 import InformationSlide from './InformationSlide';
 import SingleQuestion from './SingleQuestion';
@@ -45,6 +47,8 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <InformationSlide {...sharedProps} />;
     case urlQuestion.id:
       return <UrlQuestion question={question} {...sharedProps} />;
+    case finishQuestion.id:
+      return <FinishScreen question={question} {...sharedProps} />;
     default:
       return <ErrorAlert errorText={`CANNOT RENDER ${type}`} />;
   }

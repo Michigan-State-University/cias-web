@@ -1,3 +1,4 @@
+import findOrderedQuestionsByGroupId from 'utils/findOrderedQuestionsByGroupId';
 import {
   gridQuestion,
   textboxQuestion,
@@ -89,4 +90,61 @@ export const editQuestionErrorCommon = (draft, payload) => {
   const index = draft.questions.findIndex(finder);
   if (cacheIndex > -1 && index > -1)
     draft.questions[index] = draft.cache.questions[cacheIndex];
+};
+
+export const getNewQuestionIdInsideGroup = (
+  questions,
+  groupId,
+  removedQuestionId,
+) => {
+  const groupQuestions = findOrderedQuestionsByGroupId(questions, groupId);
+  if (groupQuestions.length === 1) return null;
+  const removedQuestionIndex = groupQuestions.findIndex(
+    ({ id }) => id === removedQuestionId,
+  );
+  return groupQuestions[removedQuestionIndex < 1 ? 1 : removedQuestionIndex - 1]
+    .id;
+};
+
+export const getNewQuestionIdInPreviousGroups = (
+  questions,
+  groupIndex,
+  groupIds,
+) => {
+  for (
+    let newGroupIndex = groupIndex - 1;
+    newGroupIndex >= 0;
+    newGroupIndex -= 1
+  ) {
+    const newGroupQuestions = findOrderedQuestionsByGroupId(
+      questions,
+      groupIds[newGroupIndex],
+    );
+    if (newGroupQuestions.length !== 0) {
+      return newGroupQuestions[newGroupQuestions.length - 1].id;
+    }
+  }
+  return null;
+};
+
+export const getNewQuestionIdInNextGroups = (
+  questions,
+  groupIndex,
+  groupIds,
+) => {
+  for (
+    let newGroupIndex = groupIndex + 1;
+    newGroupIndex < groupIds.length;
+    newGroupIndex += 1
+  ) {
+    const newGroupQuestions = findOrderedQuestionsByGroupId(
+      questions,
+      groupIds[newGroupIndex],
+    );
+
+    if (newGroupQuestions.length !== 0) {
+      return newGroupQuestions[0].id;
+    }
+  }
+  return null;
 };

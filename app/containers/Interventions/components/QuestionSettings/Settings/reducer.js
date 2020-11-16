@@ -47,7 +47,11 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       };
 
     case ADD_BLOCK:
-      const pos = getNarratorPositionForANewBlock(allQuestions, questionIndex);
+      const pos = getNarratorPositionForANewBlock(
+        allQuestions,
+        questionIndex,
+        payload.data.groupIds,
+      );
       return {
         ...question,
         narrator: {

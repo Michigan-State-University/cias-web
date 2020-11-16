@@ -229,21 +229,6 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   background-color: #E9F1FB;
 }
 
-.c19 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  padding: 8px;
-  cursor: pointer;
-  border-radius: 5px;
-  border-radius: 5px;
-}
-
-.c19:hover {
-  background-color: #E9F1FB;
-}
-
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -460,7 +445,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c20 {
+.c19 {
   border-radius: 50%;
   background-color: #808000;
   display: -webkit-box;
@@ -682,13 +667,13 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-sc-1syy6g3-0 c19"
+              class="HoverableBox-sc-1syy6g3-0 c10"
             >
               <div
                 class="c3"
               >
                 <div
-                  class="c20"
+                  class="c19"
                   opacity="1"
                 />
                 <p

@@ -1,6 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 
 import { elements } from 'theme';
+import findOrderedQuestionsByGroupId from './findOrderedQuestionsByGroupId';
 
 /**
  * @param {array} allQuestions Array of questions
@@ -10,6 +11,7 @@ import { elements } from 'theme';
 export const findLastPositionInPreviousQuestions = (
   allQuestions,
   questionIndex,
+  returnValue = elements.characterInitialPosition,
 ) => {
   for (let i = questionIndex - 1; i >= 0; i -= 1) {
     const {
@@ -21,7 +23,7 @@ export const findLastPositionInPreviousQuestions = (
     }
   }
 
-  return elements.characterInitialPosition;
+  return returnValue;
 };
 
 /**
@@ -29,14 +31,19 @@ export const findLastPositionInPreviousQuestions = (
  * @param {number} questionId Id of current selected question
  * @returns {array} Returns position of character stored in the block before newly added block
  */
-export const getNarratorPositionForANewBlock = (allQuestions, questionId) => {
+export const getNarratorPositionForANewBlock = (
+  allQuestions,
+  questionId,
+  groupIds,
+) => {
   const questionIndex = allQuestions.findIndex(({ id }) => id === questionId);
+  const questionWithNewBlock = allQuestions[questionIndex];
   const {
     narrator: { blocks },
-  } = allQuestions[questionIndex];
+  } = questionWithNewBlock;
 
   // check if it is first question and there is no blocks
-  if (questionIndex === 0 && blocks.length === 0) {
+  if (allQuestions.length <= 2 && blocks.length === 0) {
     return elements.characterInitialPosition;
   }
   // check if question already has blocks return position of the last block
@@ -45,7 +52,11 @@ export const getNarratorPositionForANewBlock = (allQuestions, questionId) => {
   }
 
   // find a position in previous questions because it is a new question
-  return findLastPositionInPreviousQuestions(allQuestions, questionIndex);
+  return getNarratorPositionFromPreviousGroups(
+    questionWithNewBlock,
+    groupIds,
+    allQuestions,
+  );
 };
 
 /**
@@ -55,17 +66,24 @@ export const getNarratorPositionForANewBlock = (allQuestions, questionId) => {
  */
 export const getNarratorPositionWhenQuestionIsChanged = (
   allQuestions,
-  questionIndex,
+  questionId,
+  groupIds,
 ) => {
+  const questionIndex = allQuestions.findIndex(({ id }) => id === questionId);
+  const newQuestion = allQuestions[questionIndex];
   const {
     narrator: { blocks },
-  } = allQuestions[questionIndex];
+  } = newQuestion;
 
   // check if there is a first block
   if (blocks[0]) return blocks[0].endPosition;
 
   // find a position in previous questions because question does not have blocks
-  return findLastPositionInPreviousQuestions(allQuestions, questionIndex);
+  return getNarratorPositionFromPreviousGroups(
+    newQuestion,
+    groupIds,
+    allQuestions,
+  );
 };
 
 /**
@@ -80,12 +98,13 @@ export const getNarratorPositionWhenBlockIsRemoved = (
   questionIndex,
   deletedIndex,
   openedBlockIndex,
+  groupIds,
 ) => {
   if (isEmpty(allQuestions)) return elements.characterInitialPosition;
-
+  const questionWithRemovedBlock = allQuestions[questionIndex];
   const {
     narrator: { blocks },
-  } = allQuestions[questionIndex];
+  } = questionWithRemovedBlock;
 
   // check if any of accrodion collapsibles is opened
   if (openedBlockIndex === -1) {
@@ -94,14 +113,77 @@ export const getNarratorPositionWhenBlockIsRemoved = (
   }
 
   // check if this is the first block in this question
-  if (deletedIndex === 0 && blocks.length === 0)
-    return findLastPositionInPreviousQuestions(allQuestions, questionIndex);
+  if (deletedIndex === 0 && blocks.length === 0) {
+    return getNarratorPositionFromPreviousGroups(
+      questionWithRemovedBlock,
+      groupIds,
+      allQuestions,
+    );
+  }
 
   // check if this is the last block in the this question
   if (deletedIndex === blocks.length)
     return blocks[deletedIndex - 1].endPosition;
-
   return blocks[deletedIndex].endPosition;
 };
 
-export const getNarratorPositionWhenQuestionIsAdded = getNarratorPositionWhenBlockIsRemoved;
+const getNarratorPositionFromPreviousGroups = (
+  questionToStartFrom,
+  groupIds,
+  questions,
+) => {
+  const { question_group_id: groupId, id: questionId } = questionToStartFrom;
+  const groupIndex = groupIds.findIndex(id => id === groupId);
+  for (let i = groupIndex; i >= 0; i -= 1) {
+    const currentGroupId = groupIds[i];
+    const groupQuestions = findOrderedQuestionsByGroupId(
+      questions,
+      currentGroupId,
+    );
+    const questionToStartFromIndex = groupQuestions.findIndex(
+      ({ id }) => id === questionId,
+    );
+    const posInGroup = findLastPositionInPreviousQuestions(
+      groupQuestions,
+      currentGroupId === groupId && questionToStartFromIndex !== -1
+        ? questionToStartFromIndex
+        : groupQuestions.length,
+      null,
+    );
+    if (posInGroup) return posInGroup;
+  }
+  return elements.characterInitialPosition;
+};
+
+export const getNarratorPositionWhenQuestionIsAdded = (
+  questions,
+  newQuestion,
+  groupIds,
+) => {
+  if (questions.length <= 1) return elements.characterInitialPosition;
+  const animationPosition = getNarratorPositionFromPreviousGroups(
+    newQuestion,
+    groupIds,
+    questions,
+  );
+  return animationPosition;
+};
+
+export const resetAnimationPosition = (
+  selectedQuestion,
+  resetBlockIndex,
+  questions,
+  groupIds,
+) => {
+  if (resetBlockIndex > 0) {
+    const {
+      narrator: { blocks },
+    } = selectedQuestion;
+    return blocks[resetBlockIndex - 1].endPosition;
+  }
+  return getNarratorPositionFromPreviousGroups(
+    selectedQuestion,
+    groupIds,
+    questions,
+  );
+};

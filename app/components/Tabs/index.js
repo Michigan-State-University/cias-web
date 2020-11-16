@@ -33,7 +33,10 @@ const Tabs = ({
     <TabsContainer {...restProps}>
       <Row>
         {children.map(child => {
-          const { label, renderAsLink } = child.props;
+          const { label, renderAsLink, hidden } = child.props;
+
+          if (hidden) return null;
+
           return (
             <Tab
               activeTab={tab}

@@ -10,7 +10,7 @@ import Box from 'components/Box';
 
 import FeedbackSlider from './FeedbackSlider';
 
-const VisualAnalogueScaleQuestionLayout = ({
+const FeedbackQuestionLayout = ({
   startValue,
   endValue,
   targetValue: { target: targetValue },
@@ -73,7 +73,7 @@ const VisualAnalogueScaleQuestionLayout = ({
   );
 };
 
-VisualAnalogueScaleQuestionLayout.propTypes = {
+FeedbackQuestionLayout.propTypes = {
   startValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   endValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   targetValue: PropTypes.object,
@@ -82,8 +82,8 @@ VisualAnalogueScaleQuestionLayout.propTypes = {
   setFeedbackSettings: PropTypes.func,
 };
 
-VisualAnalogueScaleQuestionLayout.defaultProps = {
+FeedbackQuestionLayout.defaultProps = {
   targetValue: { target: '0' }, // default to 0
 };
 
-export default injectIntl(VisualAnalogueScaleQuestionLayout);
+export default injectIntl(FeedbackQuestionLayout);

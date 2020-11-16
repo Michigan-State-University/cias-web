@@ -238,6 +238,10 @@ export function AnswerInterventionPage({
       }
     };
 
+    const isLastScreen = questionIndex === interventionQuestions.length - 1;
+    const isBeforeLastScreen =
+      questionIndex === interventionQuestions.length - 2;
+
     return (
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
@@ -252,7 +256,8 @@ export function AnswerInterventionPage({
           <Row mt={10}>
             {renderQuestionByType(currentQuestion, sharedProps)}
           </Row>
-          {(isNullOrUndefined(proceedButton) || proceedButton) &&
+          {!isLastScreen &&
+            (isNullOrUndefined(proceedButton) || proceedButton) &&
             !isAnimationOngoing && (
               <Row width="100%" my={20}>
                 <Button
@@ -264,9 +269,10 @@ export function AnswerInterventionPage({
                     saveAnswer(questionIndex + 1);
                   }}
                   title={formatMessage(
-                    questionIndex !== interventionQuestions.length - 1
-                      ? messages.nextQuestion
-                      : messages.submitAnswer,
+                    // show finish button before Finish Screen
+                    isBeforeLastScreen
+                      ? messages.submitAnswer
+                      : messages.nextQuestion,
                   )}
                 />
               </Row>
@@ -344,11 +350,6 @@ export function AnswerInterventionPage({
                 )}
               </Box>
               {answersError && <ErrorAlert errorText={answersError} />}
-              {!questionLoading && !currentQuestion && (
-                <Box mt={50}>
-                  <FormattedMessage {...messages.completeIntervention} />
-                </Box>
-              )}
             </Fragment>
           )}
         </AnswerOuterContainer>

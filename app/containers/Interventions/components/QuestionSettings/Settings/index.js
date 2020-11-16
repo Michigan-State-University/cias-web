@@ -19,6 +19,7 @@ import {
 } from 'global/reducers/questions';
 import { makeSelectProblemStatus } from 'global/reducers/problem';
 import { canEdit } from 'models/Status/statusPermissions';
+import { finishQuestion } from 'models/Intervention/QuestionTypes';
 
 import BranchingTab from './Components/Tabs/BranchingTab';
 import NarratorTab from './Components/Tabs/NarratorTab';
@@ -39,6 +40,7 @@ const Settings = ({
   };
 
   const editingPossible = canEdit(problemStatus);
+  const isFinishScreen = type === finishQuestion.id;
 
   return (
     <Column>
@@ -64,7 +66,10 @@ const Settings = ({
             id={id}
           />
         </div>
-        <div label={formatMessage(messages[settingsTabLabels.branching])}>
+        <div
+          label={formatMessage(messages[settingsTabLabels.branching])}
+          hidden={isFinishScreen}
+        >
           <BranchingTab
             formatMessage={formatMessage}
             disabled={!editingPossible}

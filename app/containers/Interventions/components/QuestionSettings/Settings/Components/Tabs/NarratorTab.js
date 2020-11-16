@@ -19,6 +19,7 @@ import {
 } from 'models/Narrator/BlockTypes';
 import { makeSelectCurrentNarratorBlockIndex } from 'global/reducers/localState';
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
+import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
 import { ternary } from 'utils/ternary';
 
 import BlockTypeChooser from '../BlockTypeChooser';
@@ -35,13 +36,14 @@ const NarratorTab = ({
   currentBlockIndex,
   currentQuestionType,
   disabled,
+  groupIds,
 }) => {
   if (!narrator) {
     return <></>;
   }
 
   const onCreateBlock = type => {
-    onCreate(type, id);
+    onCreate(type, id, groupIds);
   };
 
   const readQuestionBlockTypePresent = Boolean(
@@ -127,11 +129,13 @@ NarratorTab.propTypes = {
   currentBlockIndex: PropTypes.number,
   currentQuestionType: PropTypes.string,
   disabled: PropTypes.bool,
+  groupIds: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
   currentBlockIndex: makeSelectCurrentNarratorBlockIndex(),
   currentQuestionType: makeSelectSelectedQuestionType(),
+  groupIds: makeSelectQuestionGroupsIds(),
 });
 
 const mapDispatchToProps = {
