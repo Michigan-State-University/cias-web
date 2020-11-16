@@ -454,7 +454,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   padding: 0 10px;
   width: 100%;
   z-index: 0;
-  overflow: auto;
 }
 
 .c1 {

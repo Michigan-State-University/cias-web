@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import ResizeObserver from 'resize-observer-polyfill';
 
 const useResizeObserver = ({
   onResize,
@@ -14,18 +15,19 @@ const useResizeObserver = ({
 
   useEffect(() => {
     const { current } = targetRef;
+
     if (current) {
       resizeObserver.current = new ResizeObserver(entries => {
         const element = entries[0];
         const {
           contentRect: { width: elWidth, height: elHeight },
         } = element;
+
         if (handleWidth) setWidth(elWidth);
         if (handleHeight) setHeight(elHeight);
         if (typeof onResize === 'function') {
-          if (firstRender && skipOnMount) {
-            return;
-          }
+          if (firstRender && skipOnMount) return;
+
           onResize(elWidth, elHeight);
         }
       });
@@ -39,8 +41,10 @@ const useResizeObserver = ({
 
   useLayoutEffect(() => {
     const { current } = targetRef;
+
     if (current) {
       const { clientHeight, clientWidth } = current;
+
       if (handleWidth) setWidth(clientWidth);
       if (handleHeight) setHeight(clientHeight);
     }

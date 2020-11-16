@@ -416,7 +416,7 @@ function EditInterventionPage({
             <Icon src={menu} alt="questions-list" />
           </ShowListButton>
         </QuestionsRow>
-        <Column align="between">
+        <Column align="between" overflow="hidden">
           <Row overflow="hidden" filled>
             <QuestionDetails
               formatMessage={formatMessage}

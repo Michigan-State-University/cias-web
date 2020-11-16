@@ -30,7 +30,7 @@ import {
 } from 'global/reducers/questions';
 
 import { canEdit } from 'models/Status/statusPermissions';
-import useComponentSize from 'utils/useComponentSize';
+import useResizeObserver from 'utils/useResizeObserver';
 import messages from './messages';
 
 import { FirstTH } from './styled';
@@ -71,7 +71,9 @@ const GridQuestion = ({
 
   const firstColRef = useRef(null);
 
-  const { width: firstColWidth } = useComponentSize(firstColRef);
+  const { width: firstColWidth } = useResizeObserver({
+    targetRef: firstColRef,
+  });
 
   const handleAddColumn = async () => {
     await addColumn();
@@ -91,12 +93,7 @@ const GridQuestion = ({
     isNarratorTab ? '' : formatMessage(messages[name], { index: value });
 
   return (
-    <Column
-      width="100%"
-      overflow="scroll"
-      maxHeight={elements.draggableContainerSize}
-      maxWidth={elements.draggableContainerSize}
-    >
+    <Column width="100%" maxWidth={elements.draggableContainerSize}>
       <Row justify="end" display="flex" hidden={isNarratorTabOrEditNotPossible}>
         <HoverableBox px={21} py={14} onClick={handleAddColumn}>
           <Box>

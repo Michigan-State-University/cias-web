@@ -13,7 +13,6 @@ const AnswerInterventionContent = styled.div`
   padding: 0 10px;
   width: 100%;
   z-index: 0;
-  overflow: auto;
 `;
 
 const AnswerOuterContainer = styled.div`
