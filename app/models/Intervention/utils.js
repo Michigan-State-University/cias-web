@@ -185,3 +185,8 @@ export const NotAnswerableQuestions = [
   finishQuestion.id,
   feedbackQuestion.id,
 ];
+
+export const DisabledNarratorSettingsByQuestionType = {
+  voice: [feedbackQuestion.id],
+  animation: [feedbackQuestion.id],
+};
