@@ -16,9 +16,29 @@ declare namespace Cypress {
     getBySelLike(selector: string, ...args): Chainable<any>;
 
     /**
-     * Get item by selector*
+     * Login to CIAS
      */
     login(email, password): Chainable<void>;
+
+    /**
+     * Logout from CIAS
+     */
+    logout(): void;
+
+    /**
+     * Create intervention
+     */
+    createIntervention(): void;
+
+    /**
+     * Create sessions in intervention
+     */
+    createSessionsInIntervention(numberOfSession): void;
+
+    /**
+     * Add questions to session
+     */
+    populateSessionWithQuestions(index, questionTypesToPopulate): void;
 
     /**
      * Dismiss all react-toastify toasts

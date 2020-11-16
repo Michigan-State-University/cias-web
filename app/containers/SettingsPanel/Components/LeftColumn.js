@@ -48,7 +48,11 @@ const LeftColumn = ({
             width="fit-content"
             onClick={() => updateAccessSetting(option.id)}
           >
-            <Radio checked={isChecked} mr={12} />
+            <Radio
+              data-cy={isChecked && `access-${option.id}-radio`}
+              checked={isChecked}
+              mr={12}
+            />
             <Text fontSize={15} fontWeight={isChecked ? 'bold' : 'regular'}>
               {option.label}
             </Text>
