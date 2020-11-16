@@ -18,6 +18,7 @@ import {
   feedbackBlockType,
   getRemovedBlockForSetting,
 } from 'models/Narrator/BlockTypes';
+import { DisabledNarratorSettingsByQuestionType } from 'models/Intervention/utils';
 import { makeSelectCurrentNarratorBlockIndex } from 'global/reducers/localState';
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
@@ -41,6 +42,7 @@ const NarratorTab = ({
   currentQuestionType,
   disabled,
   groupIds,
+  questionType,
 }) => {
   const [confirmationOption, setConfirmationOption] = useState('');
 
@@ -135,7 +137,12 @@ const NarratorTab = ({
             >
               <H3>{formatMessage(messages[`${index}`])}</H3>
               <Switch
-                disabled={disabled}
+                disabled={
+                  disabled ||
+                  DisabledNarratorSettingsByQuestionType[index]?.includes(
+                    questionType,
+                  )
+                }
                 checked={val}
                 onToggle={toggleAction(index)}
               />
@@ -186,6 +193,7 @@ NarratorTab.propTypes = {
   currentQuestionType: PropTypes.string,
   disabled: PropTypes.bool,
   groupIds: PropTypes.array,
+  questionType: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

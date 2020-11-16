@@ -10,7 +10,7 @@ import { StripedTR, Table, TBody, TD, TH, THead } from 'components/Table';
 
 import { colors, elements } from 'theme';
 
-import useComponentSize from 'utils/useComponentSize';
+import useResizeObserver from 'utils/useResizeObserver';
 import { FirstTH } from './styled';
 
 const GridQuestionLayout = ({
@@ -27,7 +27,9 @@ const GridQuestionLayout = ({
 
   const firstColRef = useRef(null);
 
-  const { width: firstColWidth } = useComponentSize(firstColRef);
+  const { width: firstColWidth } = useResizeObserver({
+    targetRef: firstColRef,
+  });
 
   return (
     <Box width="100%">

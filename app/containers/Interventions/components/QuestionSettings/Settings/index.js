@@ -63,6 +63,7 @@ const Settings = ({
             formatMessage={formatMessage}
             disabled={!editingPossible}
             narrator={narrator}
+            questionType={type}
             id={id}
           />
         </div>

@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback } from 'react';
+import useResizeObserver from 'utils/useResizeObserver';
 
 /*
  * THIS IS A LIBRARY react-element-scroll-hook
@@ -11,24 +12,6 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 const isEdge =
   typeof navigator !== 'undefined' &&
   /Edge\/\d./i.test(window.navigator.userAgent);
-
-// Small hook to use ResizeOberver if available. This fixes some issues when the component is resized.
-// This needs a polyfill to work on all browsers. The polyfill is not included in order to keep the package light.
-function useResizeObserver(ref, callback) {
-  useEffect(() => {
-    if (typeof window !== 'undefined' && window.ResizeObserver) {
-      const resizeObserver = new ResizeObserver(entries => {
-        callback(entries[0].contentRect);
-      });
-
-      resizeObserver.observe(ref.current);
-
-      return () => {
-        resizeObserver.unobserve(ref.current);
-      };
-    }
-  }, [ref]);
-}
 
 function throttle(func, wait) {
   let context;
@@ -70,12 +53,6 @@ const useScrollInfo = () => {
   const [scroll, setScroll] = useState({ x: {}, y: {} });
   const ref = useRef(null);
   const previousScroll = useRef(null);
-
-  useResizeObserver(ref, () => {
-    update();
-  });
-
-  const throttleTime = 50;
 
   const update = () => {
     const element = ref.current;
@@ -134,23 +111,25 @@ const useScrollInfo = () => {
     setScroll(scrollInfo);
   };
 
+  useResizeObserver({
+    targetRef: ref,
+    onResize: update,
+  });
+
+  const throttleTime = 50;
+
   const throttledUpdate = throttle(update, throttleTime);
 
   const setRef = useCallback(node => {
     if (node) {
       // When the ref is first set (after mounting)
       node.addEventListener('scroll', throttledUpdate);
-      if (!window.ResizeObserver) {
-        window.addEventListener('resize', throttledUpdate); // Fallback if ResizeObserver is not available
-      }
+
       ref.current = node;
       throttledUpdate(); // initialization
     } else if (ref.current) {
       // When unmounting
       ref.current.removeEventListener('scroll', throttledUpdate);
-      if (!window.ResizeObserver) {
-        window.removeEventListener('resize', throttledUpdate);
-      }
     }
   }, []);
 
