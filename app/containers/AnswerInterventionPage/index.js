@@ -288,6 +288,14 @@ export function AnswerInterventionPage({
     onStartIntervention();
   };
 
+  const startButtonText = () => {
+    if (previewPossible || isNullOrUndefined(previewPossible))
+      return isPreview
+        ? formatMessage(messages.startPreview)
+        : formatMessage(messages.startSession);
+    return formatMessage(messages.previewDisabled);
+  };
+
   const renderPage = () => <Fragment>{renderQuestion()}</Fragment>;
 
   if (questionLoading) return <Loader />;
@@ -319,11 +327,7 @@ export function AnswerInterventionPage({
             <StyledButton
               disabled={!previewPossible}
               onClick={startInterventionAsync}
-              title={
-                previewPossible || isNullOrUndefined(previewPossible)
-                  ? formatMessage(messages.startIntervention)
-                  : formatMessage(messages.previewDisabled)
-              }
+              title={startButtonText()}
               isDesktop={isDesktop}
             />
           )}

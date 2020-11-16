@@ -711,6 +711,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
         >
           <a
             class="c7"
+            data-cy="enter-intervention-0"
             href="/interventions/1/sessions/1/edit"
           >
             <div
@@ -732,6 +733,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
           <img
             alt="emails"
             class="c13"
+            data-cy="share-session-modal-open-button-0"
             src="IMAGE_MOCK"
           />
         </div>
@@ -786,6 +788,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
               <input
                 checked=""
                 class="c25 c26"
+                data-cy="branching-problem-toggle"
                 data-testid="switch-input"
                 type="checkbox"
               />

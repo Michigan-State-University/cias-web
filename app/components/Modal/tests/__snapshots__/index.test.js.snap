@@ -178,6 +178,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
           </h1>
           <button
             class="c6"
+            data-cy="modal-close-button"
             data-testid="close-modal-button"
           >
             <img

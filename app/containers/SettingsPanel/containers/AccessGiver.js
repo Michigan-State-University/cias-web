@@ -9,7 +9,12 @@ import map from 'lodash/map';
 import uniq from 'lodash/uniq';
 import isEmpty from 'lodash/isEmpty';
 import find from 'lodash/find';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import {
+  FormattedMessage,
+  injectIntl,
+  intlShape,
+  FormattedHTMLMessage,
+} from 'react-intl';
 
 import Box from 'components/Box';
 import Button from 'components/Button';
@@ -35,6 +40,7 @@ import {
   canRemoveParticipantsFromIntervention,
 } from 'models/Status/statusPermissions';
 
+import Text from 'components/Text';
 import { accessGiverContainerSaga } from '../sagas';
 import messages from '../messages';
 
@@ -121,6 +127,9 @@ const AccessGiver = ({
         <H2>
           <FormattedMessage {...messages.accessGiverHeader} />
         </H2>
+        <Text>
+          <FormattedHTMLMessage {...messages.accessGiverHeaderNote} />
+        </Text>
         <Column mt={20}>
           <ChipsInput
             disabled={!addingParticipantsPossible}

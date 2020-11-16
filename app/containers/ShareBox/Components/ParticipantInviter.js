@@ -62,6 +62,7 @@ const ParticipantInviter = ({
             alignSelf="start"
             onClick={handleSend}
             loading={loading}
+            data-cy="send-email-button"
           >
             <FormattedMessage {...messages.sendText} />
           </Button>

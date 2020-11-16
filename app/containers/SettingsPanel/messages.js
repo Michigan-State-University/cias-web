@@ -23,31 +23,36 @@ export default defineMessages({
   },
   anyoneWhoIsARegisteredParticipantLabel: {
     id: `${scope}.anyoneWhoIsARegisteredParticipantLabel`,
-    defaultMessage: 'All registered participants',
+    defaultMessage: 'Any registered participant',
   },
   onlyInvitedRegisteredParticipantsLabel: {
     id: `${scope}.onlyInvitedRegisteredParticipantsLabel`,
-    defaultMessage: 'Selected registered participants',
+    defaultMessage: 'Specific registered participants',
   },
   anyoneWithTheLinkSublabel: {
     id: `${scope}.anyoneWithTheLinkSublabel`,
     defaultMessage:
-      'It means that any person is able to complete the session. However please note, <span style="color:#EF462F;">that branching and multisessions sequences are not possible in this case.</span>',
+      '<b>Anyone with the link</b> can access the intervention. Responses will be <b>anonymous</b> - therefore branching between sessions is <b>not</b> supported.',
   },
   anyoneWhoIsARegisterdParticipantSublabel: {
     id: `${scope}.anyoneWhoIsARegisterdParticipantSublabel`,
     defaultMessage:
-      'It means that in order to open the session participant would need to log in or create the account.',
+      'To access the intervention, participants must <b>create</b> or <b>have</b> a <b>CIAS account.</b>',
   },
   onlyInvitedRegisteredParticipantsSublabel: {
     id: `${scope}.onlyInvitedRegisteredParticipantsSublabel`,
     defaultMessage:
-      'It means that in order to open the session participant would need to log in or create the account. Please note that <b>only participants who are listed below will be able to complete the session.</b>',
+      'Participants can only access the intervention <b>if access is granted</b> by entering their email address below. Participants must also <b>create</b> or <b>have</b> a <b>CIAS account.</b>',
   },
   accessGiverHeader: {
     id: `${scope}.accessGiverHeader`,
     defaultMessage:
-      'Select participants who can open this intervention’s sessions',
+      'Enter emails to grant participants access to the intervention. ',
+  },
+  accessGiverHeaderNote: {
+    id: `${scope}.accessGiverHeaderNote`,
+    defaultMessage:
+      '<b>Note:</b> this action does not send session invites to participants',
   },
   inputPlaceholder: {
     id: `${scope}.inputPlaceholder`,

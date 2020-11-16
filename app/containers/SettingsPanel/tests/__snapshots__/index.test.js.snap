@@ -53,7 +53,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             font-weight="regular"
           >
             <span>
-              All registered participants
+              Any registered participant
             </span>
           </p>
         </div>
@@ -72,7 +72,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             font-weight="regular"
           >
             <span>
-              Selected registered participants
+              Specific registered participants
             </span>
           </p>
         </div>

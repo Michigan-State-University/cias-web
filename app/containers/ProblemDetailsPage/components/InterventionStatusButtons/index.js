@@ -93,7 +93,11 @@ function InterventionStatusButtons({
           my: 20,
         }}
       />
-      <ShareButton width={200} onClick={openConfirmation}>
+      <ShareButton
+        data-cy="publish-intervention-button"
+        width={200}
+        onClick={openConfirmation}
+      >
         <FormattedMessage {...messages.publish} />
       </ShareButton>
     </>

@@ -83,6 +83,7 @@ function InterventionListItem({
             <Row py={21} px={16} align="center" justify="between">
               <StyledRow align="center" justify="between">
                 <StyledLink
+                  data-cy={`enter-intervention-${index}`}
                   to={`/interventions/${problemId}/sessions/${id}/edit`}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
@@ -98,6 +99,7 @@ function InterventionListItem({
                   src={sharingPossible ? mail : mailDisabled}
                   onClick={handleClick}
                   alt="emails"
+                  data-cy={`share-session-modal-open-button-${index}`}
                 />
                 {process.env.APP_STAGE === appStages.dev.id && (
                   <Box mb={8}>

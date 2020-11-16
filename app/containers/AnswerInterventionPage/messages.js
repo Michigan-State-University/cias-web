@@ -21,9 +21,13 @@ export default defineMessages({
     id: `${scope}.submitAnswer`,
     defaultMessage: 'Finish intervention',
   },
-  startIntervention: {
-    id: `${scope}.startIntervention`,
-    defaultMessage: 'Start intervention',
+  startSession: {
+    id: `${scope}.startSession`,
+    defaultMessage: 'Start session',
+  },
+  startPreview: {
+    id: `${scope}.startPreview`,
+    defaultMessage: 'Start preview',
   },
   previewDisabled: {
     id: `${scope}.previewDisabled`,

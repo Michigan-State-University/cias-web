@@ -23,10 +23,10 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+import LocalStorageService from 'utils/localStorageService';
+import { mapCurrentUser } from 'utils/mapResponseObjects';
+import { headersConst } from 'utils/getHeaders';
 import { API_URL } from './envVariables';
-import LocalStorageService from '../../app/utils/localStorageService';
-import { mapCurrentUser } from '../../app/utils/mapResponseObjects';
-import { headersConst } from '../../app/utils/getHeaders';
 
 Cypress.Commands.add('getBySel', (selector, ...args) =>
   cy.get(`[data-cy=${selector}]`, ...args),
@@ -53,3 +53,7 @@ Cypress.Commands.add('login', (email, password) =>
       });
     }),
 );
+
+Cypress.Commands.add('dismissAllToasts', () => {
+  cy.get('.Toastify__close-button').click({ multiple: true, force: true });
+});
