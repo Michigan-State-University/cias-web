@@ -162,4 +162,13 @@ export default defineMessages({
     id: `${scope}.addVariable`,
     defaultMessage: 'Add variable',
   },
+  blockRemovalConfirmation: {
+    id: `${scope}.blockRemovalConfirmation`,
+    defaultMessage: 'Are you sure you want to disable {setting} setting?',
+  },
+  blockRemovalConfirmationDescription: {
+    id: `${scope}.blockRemovalConfirmationDescription`,
+    defaultMessage:
+      'Those block types will be removed in this question and their data will be wiped out',
+  },
 });

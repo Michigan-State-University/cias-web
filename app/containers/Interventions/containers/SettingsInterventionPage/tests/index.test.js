@@ -6,9 +6,13 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
+import createModalForTests from 'utils/createModalForTests';
 import SettingsInterventionPage from '../index';
 
 describe('<SettingsInterventionPage />', () => {
+  beforeEach(() => {
+    createModalForTests();
+  });
   const defaultProps = {
     match: { params: { id: '12ad120dj012-3a' } },
     getIntervention: jest.fn(),

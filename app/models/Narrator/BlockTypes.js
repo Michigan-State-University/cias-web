@@ -28,3 +28,15 @@ export const blockTypeToColorMap = {
   [pauseType]: colors.coral,
   [feedbackBlockType]: colors.black,
 };
+
+const voiceSettingRemovedBlocks = [readQuestionBlockType, speechType];
+
+const animationSettingRemovedBlocks = [bodyAnimationType, headAnimationType];
+
+export const getRemovedBlockForSetting = setting => {
+  if (setting === 'all')
+    return [...animationSettingRemovedBlocks, ...voiceSettingRemovedBlocks];
+  if (setting === 'animation') return animationSettingRemovedBlocks;
+  if (setting === 'voice') return voiceSettingRemovedBlocks;
+  return [];
+};

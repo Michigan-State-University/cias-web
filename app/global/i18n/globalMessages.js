@@ -164,4 +164,14 @@ export default defineMessages({
       defaultMessage: `Some error occurred. Please try again or contact a support.`,
     },
   },
+  animationSettings: {
+    voice: {
+      id: `${scope}.voice`,
+      defaultMessage: 'Voice',
+    },
+    animation: {
+      id: `${scope}.animation`,
+      defaultMessage: 'Display Character',
+    },
+  },
 });
