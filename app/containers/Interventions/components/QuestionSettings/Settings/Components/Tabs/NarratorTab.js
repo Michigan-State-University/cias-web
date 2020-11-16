@@ -1,8 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
-import { FormattedHTMLMessage } from 'react-intl';
+import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
@@ -16,6 +16,7 @@ import { colors, borders } from 'theme';
 import {
   readQuestionBlockType,
   feedbackBlockType,
+  getRemovedBlockForSetting,
 } from 'models/Narrator/BlockTypes';
 import { DisabledNarratorSettingsByQuestionType } from 'models/Intervention/utils';
 import { makeSelectCurrentNarratorBlockIndex } from 'global/reducers/localState';
@@ -23,6 +24,9 @@ import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
 import { ternary } from 'utils/ternary';
 
+import ConfirmationBox from 'components/ConfirmationBox';
+import { LI, UL } from 'components/List';
+import globalMessages from 'global/i18n/globalMessages';
 import BlockTypeChooser from '../BlockTypeChooser';
 import WrappedAccordion from '../WrappedAcoordion';
 import messages from '../messages';
@@ -40,12 +44,25 @@ const NarratorTab = ({
   groupIds,
   questionType,
 }) => {
+  const [confirmationOption, setConfirmationOption] = useState('');
+
+  const dismissConfirmation = () => setConfirmationOption('');
+  const onConfirm = () => {
+    onNarratorToggle(`${confirmationOption}`, false);
+    dismissConfirmation();
+  };
+
   if (!narrator) {
     return <></>;
   }
 
   const onCreateBlock = type => {
     onCreate(type, id, groupIds);
+  };
+
+  const toggleAction = index => value => {
+    if (value) onNarratorToggle(`${index}`, value);
+    else setConfirmationOption(index);
   };
 
   const readQuestionBlockTypePresent = Boolean(
@@ -63,8 +80,47 @@ const NarratorTab = ({
   };
 
   const isCharacterMovable = currentBlockIndex !== -1;
+  const isConfirmationBoxVisible = confirmationOption !== '';
+
+  const getConfirmationDescription = () => {
+    if (!isConfirmationBoxVisible) return null;
+    return (
+      <FormattedMessage
+        {...messages.blockRemovalConfirmation}
+        values={{
+          setting: formatMessage(
+            globalMessages.animationSettings[confirmationOption],
+          ),
+        }}
+      />
+    );
+  };
+
+  const getConfirmationContent = () => {
+    if (!isConfirmationBoxVisible) return null;
+    return (
+      <>
+        <FormattedMessage {...messages.blockRemovalConfirmationDescription} />
+        <UL>
+          {getRemovedBlockForSetting(confirmationOption).map(blockType => (
+            <LI key={blockType}>
+              {<FormattedMessage {...globalMessages.blockTypes[blockType]} />}
+            </LI>
+          ))}
+        </UL>
+      </>
+    );
+  };
+
   return (
     <Fragment>
+      <ConfirmationBox
+        visible={isConfirmationBoxVisible}
+        onClose={dismissConfirmation}
+        description={getConfirmationDescription()}
+        content={getConfirmationContent()}
+        confirmAction={onConfirm}
+      />
       <Box mb={20}>
         <Text color={colors.flamingo} mb={30}>
           <FormattedHTMLMessage {...messages.warningMessage} />
@@ -88,7 +144,7 @@ const NarratorTab = ({
                   )
                 }
                 checked={val}
-                onToggle={value => onNarratorToggle(`${index}`, value)}
+                onToggle={toggleAction(index)}
               />
             </Row>
           ))}

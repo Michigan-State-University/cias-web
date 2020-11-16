@@ -47,4 +47,17 @@ export default defineMessages({
     id: `${scope}.selectUsers`,
     defaultMessage: 'Enter new user e-mail addresses',
   },
+  globalSettingRemovalConfirmation: {
+    id: `${scope}.globalSettingRemovalConfirmation`,
+    defaultMessage: 'Are you sure you want to disable narrator?',
+  },
+  blockRemovalConfirmation: {
+    id: `${scope}.blockRemovalConfirmation`,
+    defaultMessage: 'Are you sure you want to disable {setting} setting?',
+  },
+  blockRemovalConfirmationDescription: {
+    id: `${scope}.blockRemovalConfirmationDescription`,
+    defaultMessage:
+      'Those block types will be removed in all questions in this session and their data will be wiped out',
+  },
 });

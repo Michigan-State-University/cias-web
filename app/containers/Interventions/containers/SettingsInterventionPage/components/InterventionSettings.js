@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
 import some from 'lodash/some';
@@ -20,8 +20,14 @@ import {
   makeSelectProblemStatus,
   problemReducer,
 } from 'global/reducers/problem';
+import globalMessages from 'global/i18n/globalMessages';
 
 import { canEdit } from 'models/Status/statusPermissions';
+import { FormattedMessage } from 'react-intl';
+
+import { LI, UL } from 'components/List';
+import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
+import ConfirmationBox from 'components/ConfirmationBox';
 import Option from './Option';
 import messages from './messages';
 import { Input, NameContainer } from './styled';
@@ -33,6 +39,28 @@ const InterventionSettings = ({
   editIntervention,
   problemStatus,
 }) => {
+  const [confirmationOption, setConfirmationOption] = useState('');
+  const dismissConfirmation = () => setConfirmationOption('');
+  const isConfirmationBoxVisible = confirmationOption !== '';
+  const isAllSettingsConfirmation = confirmationOption === 'all';
+
+  const onConfirm = () => {
+    if (isAllSettingsConfirmation) {
+      editIntervention({
+        path: `settings.narrator`,
+        value: {
+          voice: false,
+          animation: false,
+        },
+      });
+    } else {
+      editIntervention({
+        path: `settings.narrator.${confirmationOption}`,
+        value: false,
+      });
+    }
+    dismissConfirmation();
+  };
   useInjectReducer({ key: 'problem', reducer: problemReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
@@ -41,23 +69,72 @@ const InterventionSettings = ({
   const isNarratorActive = some(narratorSettings, setting => setting);
 
   const onToggle = index => val => {
-    editIntervention({ path: `settings.narrator.${index}`, value: val });
+    if (val) {
+      editIntervention({ path: `settings.narrator.${index}`, value: val });
+    } else {
+      setConfirmationOption(index);
+    }
   };
 
   const onGlobalToggle = val => {
-    editIntervention({
-      path: `settings.narrator`,
-      value: {
-        voice: val,
-        animation: val,
-      },
-    });
+    if (val) {
+      editIntervention({
+        path: `settings.narrator`,
+        value: {
+          voice: val,
+          animation: val,
+        },
+      });
+    } else {
+      setConfirmationOption('all');
+    }
   };
 
   const editingPossible = canEdit(problemStatus);
 
+  const getConfirmationDescription = () => {
+    if (!isConfirmationBoxVisible) return null;
+    if (isAllSettingsConfirmation)
+      return (
+        <FormattedMessage {...messages.globalSettingRemovalConfirmation} />
+      );
+    return (
+      <FormattedMessage
+        {...messages.blockRemovalConfirmation}
+        values={{
+          setting: formatMessage(
+            globalMessages.animationSettings[confirmationOption],
+          ),
+        }}
+      />
+    );
+  };
+
+  const getConfirmationContent = () => {
+    if (!isConfirmationBoxVisible) return null;
+    return (
+      <>
+        <FormattedMessage {...messages.blockRemovalConfirmationDescription} />
+        <UL>
+          {getRemovedBlockForSetting(confirmationOption).map(blockType => (
+            <LI key={blockType}>
+              {<FormattedMessage {...globalMessages.blockTypes[blockType]} />}
+            </LI>
+          ))}
+        </UL>
+      </>
+    );
+  };
+
   return (
     <Fragment>
+      <ConfirmationBox
+        visible={isConfirmationBoxVisible}
+        onClose={dismissConfirmation}
+        description={getConfirmationDescription()}
+        content={getConfirmationContent()}
+        confirmAction={onConfirm}
+      />
       <NameContainer>
         <H3 mb={5} fontWeight="regular">
           {formatMessage(messages.nameLabel)}
