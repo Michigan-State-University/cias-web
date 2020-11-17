@@ -81,7 +81,6 @@ import { FinishGroupType } from 'models/Intervention/GroupTypes';
 import scrollByRef from 'utils/scrollByRef';
 import editInterventionPageSaga from './saga';
 
-import EmptyInterventionPage from '../../components/EmptyInterventionPage';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
@@ -273,15 +272,7 @@ function EditInterventionPage({
   const sendSlidesToResearchers = researchers =>
     shareQuestionsToResearchers(researchers, selectedSlides);
 
-  if (!loading && questions.length === 0)
-    return (
-      <EmptyInterventionPage
-        disabled={!editingPossible}
-        onCreateQuestion={onCreateQuestion}
-        formatMessage={formatMessage}
-      />
-    );
-  if (loading) return <Loader size={100} />;
+  if (loading || questions.length === 0) return <Loader size={100} />;
 
   const selectSlide = slideId =>
     setSelectedSlides(xor(selectedSlides, [slideId]));

@@ -17,14 +17,14 @@ describe('Create Intervention by Admin', () => {
     cy.getBySel(`enter-intervention-${index}`).click();
     cy.url().should('include', '/edit');
 
-    // Add single question
-    cy.getBySel('add-screen-button').click({ force: true });
-    cy.contains('Single answer').click();
-
     // Change website size
     cy.getBySel('questions-list').should('not.exist');
     cy.viewport(1500, 750);
     cy.getBySel('questions-list').should('be.visible');
+
+    // Add single question
+    cy.getBySel('add-screen-button').click({ force: true });
+    cy.contains('Single answer').click();
 
     // Create questions
     cy.populateSessionWithQuestions(0, questionTypes);

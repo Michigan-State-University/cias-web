@@ -12,6 +12,10 @@ import { makeSelectLoader } from 'global/reducers/questions';
 import ButtonComponent from './ButtonComponent';
 import QuestionTypeChooser from '../QuestionTypeChooser';
 
+/**
+ * The component is not temporarily used in the application due to the addition of a finish screen.
+ * If there are no further changes, it can be deleted.
+ */
 const EmptyInterventionPage = ({ onCreateQuestion, loading, disabled }) => (
   <Row height="100%" width="100%" align="start" justify="center" pt={100}>
     <Column>
