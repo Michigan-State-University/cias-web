@@ -261,6 +261,7 @@ export function AnswerInterventionPage({
             !isAnimationOngoing && (
               <Row width="100%" my={20}>
                 <Button
+                  data-cy="continue-button"
                   disabled={isButtonDisabled()}
                   margin={20}
                   width="180px"

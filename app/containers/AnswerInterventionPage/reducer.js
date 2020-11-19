@@ -31,7 +31,7 @@ const getEmptyFeedbackScreenSettings = () => ({
 });
 
 export const initialState = {
-  questionLoading: false,
+  questionLoading: true,
   questionError: '',
   interventionQuestions: [],
   questionIndex: 0,

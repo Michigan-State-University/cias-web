@@ -116,6 +116,7 @@ const SingleQuestion = ({
               </Row>
               <Row align="center" display="flex" hidden={isNarratorTab}>
                 <BadgeInput
+                  data-cy={`score-${index}-input`}
                   ml={`${leftMargin}px`}
                   disabled={!editingPossible}
                   px={0}

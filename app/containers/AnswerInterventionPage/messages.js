@@ -19,7 +19,7 @@ export default defineMessages({
   },
   submitAnswer: {
     id: `${scope}.submitAnswer`,
-    defaultMessage: 'Finish intervention',
+    defaultMessage: 'Finish session',
   },
   startSession: {
     id: `${scope}.startSession`,

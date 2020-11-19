@@ -23,6 +23,7 @@ export { problemReducer } from './reducer';
 export {
   selectProblem,
   makeSelectProblem,
+  makeSelectCacheProblem,
   makeSelectProblemLoader,
   makeSelectProblemState,
   makeSelectProblemStatus,

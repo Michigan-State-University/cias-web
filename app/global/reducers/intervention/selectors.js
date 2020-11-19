@@ -10,6 +10,12 @@ const makeSelectIntervention = () =>
     substate => substate.intervention,
   );
 
+const makeSelectCacheIntervention = () =>
+  createSelector(
+    selectIntervention,
+    substate => substate.cache.intervention,
+  );
+
 const makeSelectInterventionLoaders = () =>
   createSelector(
     selectIntervention,
@@ -24,6 +30,7 @@ const makeSelectInterventionEditLoader = () =>
 
 export {
   makeSelectIntervention,
+  makeSelectCacheIntervention,
   makeSelectInterventionLoaders,
   makeSelectInterventionEditLoader,
 };

@@ -16,7 +16,13 @@ import { updateInterventionSettings } from '../updateInterventionSettings';
 import { initialState } from '../../reducer';
 
 describe('updateInterventionSettings saga', () => {
-  const mockState = { problem: { ...initialState, problem: createProblem() } };
+  const mockState = {
+    problem: {
+      ...initialState,
+      problem: createProblem(),
+      cache: { problem: createProblem() },
+    },
+  };
   it('Check updateInterventionSettings generator success connection', () => {
     const apiResponse = { message: 'test' };
     return expectSaga(updateInterventionSettings)

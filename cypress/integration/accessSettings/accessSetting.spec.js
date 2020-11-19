@@ -1,6 +1,7 @@
 /* eslint no-unused-expressions: 0 */ // --> OFF
 
 import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { CREATE_QUESTION } from '../../support/aliases';
 const { ADMIN_EMAIL, ADMIN_PASSWORD } = require('../../support/envVariables');
 const index = 0;
 
@@ -8,11 +9,12 @@ describe('Access settings', () => {
   beforeEach(() => {
     cy.server();
     cy.viewport(1500, 750);
+    cy.createAlias(CREATE_QUESTION);
     cy.login(Cypress.env(ADMIN_EMAIL), Cypress.env(ADMIN_PASSWORD));
     cy.createIntervention();
     cy.createSessionsInIntervention(1);
     cy.getBySel(`enter-intervention-${index}`).click();
-    cy.populateSessionWithQuestions(0, [singleQuestion.name]);
+    cy.populateSessionWithQuestions([singleQuestion.name], {});
     cy.getBySel('back-problem-button').click();
 
     cy.route('PATCH', '**/problems/*').as('updateIntervention');
@@ -35,7 +37,7 @@ describe('Access settings', () => {
     cy.getBySel(`enter-intervention-${index}`).click();
     cy.wait('@getSessionQuestionGroups');
     cy.logout();
-    cy.url().then(url => cy.visit(url.replace('edit', 'fill')));
+    cy.answerPage();
     cy.contains('Start session').should('be.visible');
   });
 });

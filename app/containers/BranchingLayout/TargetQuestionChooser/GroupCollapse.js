@@ -35,7 +35,10 @@ const GroupCollapse = ({ questionGroup, questions, questionListItemProps }) => {
       onShowImg={arrowUp}
       color={openCollapsable ? colors.heather : colors.zirkon}
       label={
-        <Row data-testid={`${questionGroup.id}-select-target-group-el`}>
+        <Row
+          data-testid={`${questionGroup.id}-select-target-group-el`}
+          data-cy={`select-group-branching-${questionGroup.title}`}
+        >
           <Text fontSize={15}>{questionGroup.title}</Text>
         </Row>
       }
