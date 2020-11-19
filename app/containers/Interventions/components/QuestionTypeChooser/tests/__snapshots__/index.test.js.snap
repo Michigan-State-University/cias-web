@@ -89,6 +89,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot 1`] = `
 <div>
   <div
     class="c0"
+    data-cy="question-type-chooser"
   >
     <div
       class="c1"
@@ -471,6 +472,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
 <div>
   <div
     class="c0"
+    data-cy="question-type-chooser"
   >
     <div
       class="c1"

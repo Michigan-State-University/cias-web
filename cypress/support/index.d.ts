@@ -18,7 +18,7 @@ declare namespace Cypress {
     /**
      * Login to CIAS
      */
-    login(email, password): Chainable<void>;
+    login(email: string, password: string): Chainable<void>;
 
     /**
      * Logout from CIAS
@@ -33,16 +33,44 @@ declare namespace Cypress {
     /**
      * Create sessions in intervention
      */
-    createSessionsInIntervention(numberOfSession): void;
+    createSessionsInIntervention(numberOfSession: number): void;
 
     /**
      * Add questions to session
      */
-    populateSessionWithQuestions(index, questionTypesToPopulate): void;
+    populateSessionWithQuestions(
+      questionTypesToPopulate: string[],
+      options: object,
+    ): void;
 
     /**
      * Dismiss all react-toastify toasts
      */
     dismissAllToasts(): void;
+
+    /**
+     * Answer questions
+     */
+    answerQuestions(answers): void;
+
+    /**
+     * Redirect to answer page
+     */
+    answerPage(): Chainable<void>;
+
+    /**
+     * Creates alias for a given string. Aliases are placed in `cypress/support/aliases.js`
+     */
+    createAlias(alias: string): void;
+
+    /**
+     * Open specified Settings Tab. `index` starts from `0`.
+     */
+    openSettingsTab(index: number): Chainable<JQuery<HTMLElement>>;
+
+    /**
+     * Set up branching
+     */
+    setUpBranching(formula: string, cases: object): void;
   }
 }

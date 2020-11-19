@@ -2048,6 +2048,7 @@ exports[`<StyledInput /> Should render and match the snapshot as textarea 1`] = 
 <div>
   <textarea
     class="c0"
+    data-cy="text-area"
     height="60px"
     placeholder="Placeholder"
     width="100%"

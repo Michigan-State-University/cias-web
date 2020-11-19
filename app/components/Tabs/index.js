@@ -31,7 +31,7 @@ const Tabs = ({
   const tab = controlled ? controlledTabActive : activeTab;
   return (
     <TabsContainer {...restProps}>
-      <Row>
+      <Row data-cy="tabs">
         {children.map(child => {
           const { label, renderAsLink, hidden } = child.props;
 

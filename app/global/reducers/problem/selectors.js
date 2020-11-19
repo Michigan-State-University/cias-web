@@ -15,6 +15,12 @@ export const makeSelectProblem = () =>
     substate => substate.problem,
   );
 
+export const makeSelectCacheProblem = () =>
+  createSelector(
+    selectProblem,
+    substate => substate.cache.problem,
+  );
+
 export const makeSelectProblemStatus = () =>
   createSelector(
     selectProblem,

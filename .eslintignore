@@ -1,1 +1,2 @@
-cypress/support/index.d.ts
+cypress/support/*.ts
+app/utils/libraries/*.js

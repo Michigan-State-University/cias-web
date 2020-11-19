@@ -29,6 +29,7 @@ const QuestionListItem = ({
       onClick={() => canSelectQuestion(id) && onClick({ type, id })}
       clickable={canSelectQuestion(id)}
       width="100%"
+      data-cy={`choose-question-${htmlToPlainText(subtitle)}`}
     >
       <Img src={target.id === id ? webpageSelected : webpage} mr={10} />
       <Box maxWidth={230}>

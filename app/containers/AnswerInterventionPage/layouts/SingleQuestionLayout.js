@@ -31,7 +31,11 @@ const SingleQuestionLayout = ({
               onClick={() => handleClick(value, index)}
             >
               <Row align="center" height="44">
-                <Radio checked={isChecked} mr={16} />
+                <Radio
+                  data-cy={`single-question-${index}-checkbox`}
+                  checked={isChecked}
+                  mr={16}
+                />
                 <div dangerouslySetInnerHTML={{ __html: payload }} />
               </Row>
             </HoverableBox>

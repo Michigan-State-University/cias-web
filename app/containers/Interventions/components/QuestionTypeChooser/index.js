@@ -62,7 +62,7 @@ const QuestionTypeChooser = ({
   );
 
   return (
-    <Row>
+    <Row data-cy="question-type-chooser">
       <Box position="relative" width="100%" ref={chooserBoxRef}>
         <ButtonComponent onClick={toggleTypeChooser} ref={buttonRef} />
         {typeChooserOpen && (

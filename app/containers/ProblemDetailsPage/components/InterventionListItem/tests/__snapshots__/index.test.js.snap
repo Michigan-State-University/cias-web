@@ -830,6 +830,7 @@ exports[`<InterventionListItem /> Should render and match the snapshot 1`] = `
             >
               <textarea
                 class="c34"
+                data-cy="text-area"
                 height="auto"
                 placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
                 rows="1"

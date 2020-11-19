@@ -143,7 +143,7 @@ function BranchingLayout({
                     isOpened={isChooserOpened}
                     childWidthScope="child"
                     dropdownContent={
-                      <Box maxWidth={100}>
+                      <Box maxWidth={100} data-cy={`select-question-${index}`}>
                         <EllipsisText
                           text={displayPatternTargetText(pattern.target)}
                           fontSize={13}

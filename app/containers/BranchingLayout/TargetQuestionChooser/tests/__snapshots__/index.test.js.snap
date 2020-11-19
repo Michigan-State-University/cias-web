@@ -291,6 +291,7 @@ Object {
                         >
                           <div
                             class="c2"
+                            data-cy="select-group-branching-Group test title 1"
                             data-testid="group-test-id-1-select-target-group-el"
                           >
                             <p
@@ -400,6 +401,7 @@ Object {
                       >
                         <div
                           class="Row-x1o3ru-0 dAhqIQ"
+                          data-cy="select-group-branching-Group test title 1"
                           data-testid="group-test-id-1-select-target-group-el"
                         >
                           <p

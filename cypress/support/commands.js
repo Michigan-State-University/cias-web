@@ -23,11 +23,14 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+import forEach from 'lodash/forEach';
 import LocalStorageService from 'utils/localStorageService';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
 import { headersConst } from 'utils/getHeaders';
 import { API_URL } from './envVariables';
+import { ALIASES, ANSWER_QUESTION, CREATE_QUESTION } from './aliases';
 import { questionTypes, noVarQuestionTypes } from '../fixtures/fixtures';
+import { answerQuestionByType } from './utils';
 
 Cypress.Commands.add('getBySel', (selector, ...args) =>
   cy.get(`[data-cy=${selector}]`, ...args),
@@ -74,14 +77,22 @@ Cypress.Commands.add('createSessionsInIntervention', (numberOfSession = 1) => {
   }
 });
 
+const defaultOptions = {
+  variablePrefix: '',
+  questionDetails: () => {},
+};
+
 Cypress.Commands.add(
   'populateSessionWithQuestions',
-  (index, questionTypesToPopulate = questionTypes) => {
-    questionTypesToPopulate.forEach((questionType, questionIndex) => {
+  (questionTypesToPopulate = questionTypes, options) => {
+    const mergedOptions = { ...defaultOptions, ...options };
+    const { variablePrefix, questionDetails } = mergedOptions;
+    forEach(questionTypesToPopulate, (questionType, questionIndex) => {
       cy.getBySel('add-screen-button').click({ force: true });
-      cy.contains(questionType).click();
-      cy.contains(questionType).should('be.visible');
-
+      cy.getBySel('question-type-chooser').within(() => {
+        cy.contains(questionType).click({ force: true });
+      });
+      cy.wait([CREATE_QUESTION]).then(() => questionDetails(questionIndex));
       // Create variable
       if (!noVarQuestionTypes.includes(questionType))
         cy.get('input[placeholder="Variable name..."]').each(
@@ -89,7 +100,7 @@ Cypress.Commands.add(
             if (questionIndex === inputIndex)
               cy.wrap($input)
                 .clear()
-                .type(`${questionIndex}`)
+                .type(`${variablePrefix}${questionIndex}`)
                 .blur();
           },
         );
@@ -99,4 +110,66 @@ Cypress.Commands.add(
 
 Cypress.Commands.add('dismissAllToasts', () => {
   cy.get('.Toastify__close-button').click({ multiple: true, force: true });
+});
+
+Cypress.Commands.add('answerPage', () =>
+  cy.url().then(url => cy.visit(url.replace('edit', 'fill'))),
+);
+
+Cypress.Commands.add('answerQuestions', answers => {
+  cy.answerPage().then(() => {
+    cy.contains('Start session')
+      .click({ force: true })
+      .then(() => {
+        answers.forEach(answer => {
+          answerQuestionByType(answer);
+          cy.getBySel('continue-button').click();
+          cy.wait([ANSWER_QUESTION]);
+        });
+      });
+  });
+});
+
+Cypress.Commands.add('createAlias', alias => {
+  const { METHOD, URL, ALIAS } = ALIASES[alias];
+
+  cy.route(METHOD, URL).as(ALIAS);
+});
+
+Cypress.Commands.add('openSettingsTab', index =>
+  cy.getBySel('settings-panel').within(() => {
+    cy.getBySel('tabs')
+      .children()
+      .eq(index)
+      .click();
+  }),
+);
+
+Cypress.Commands.add('setUpBranching', (formula, cases) => {
+  cy.openSettingsTab(2);
+
+  cy.getBySel('text-area')
+    .type(formula)
+    .blur();
+
+  cases.forEach(({ sign, value, screen: { group, title } }, index) => {
+    cy.contains('Add case').click();
+    cy.getBySel('case-select')
+      .last()
+      .click()
+      .contains(sign)
+      .click({ force: true });
+    cy.getBySel('case-value-input')
+      .last()
+      .type(value)
+      .blur();
+    cy.getBySel(`select-question-${index}`).click({ force: true });
+    cy.getBySel(`select-question-${index}`).click({ force: true });
+    cy.getBySel(`"select-group-branching-${group}"`)
+      .last()
+      .click();
+    cy.getBySel(`"choose-question-${title}"`)
+      .last()
+      .click();
+  });
 });

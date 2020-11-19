@@ -48,6 +48,7 @@ const Settings = ({
         controlled
         controlledTabActive={tab}
         controlledSetTabActive={handleChange}
+        data-cy="settings-panel"
       >
         <div label={formatMessage(messages[settingsTabLabels.settings])}>
           <SettingsTab

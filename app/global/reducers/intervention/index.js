@@ -9,6 +9,7 @@ export {
 export { interventionReducer } from './reducer';
 export {
   makeSelectIntervention,
+  makeSelectCacheIntervention,
   makeSelectInterventionLoaders,
   makeSelectInterventionEditLoader,
 } from './selectors';

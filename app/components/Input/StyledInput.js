@@ -75,6 +75,7 @@ const StyledInput = props => {
       }}
       placeholder={props.placeholder}
       transparent={props.transparent}
+      data-cy="text-area"
     />
   );
 };
