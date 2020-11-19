@@ -66,11 +66,12 @@ export function ParticipantDashboard({
           </H1>
           <Row>
             <MapInterventions interventions={interventions} participantView />
-            {interventions.length === 0 && (
-              <Column align="center" mt={100}>
-                <FormattedMessage {...messages.noResults} />
-              </Column>
-            )}
+            {!interventions ||
+              (interventions.length === 0 && (
+                <Column align="center" mt={100}>
+                  <FormattedMessage {...messages.noResults} />
+                </Column>
+              ))}
           </Row>
         </Box>
       </AppContainer>
