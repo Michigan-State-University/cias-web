@@ -197,6 +197,6 @@ export default defineMessages({
   },
   resetAnimationPosition: {
     id: `${scope}.resetAnimationPosition`,
-    defaultMessage: 'Reset animation position',
+    defaultMessage: 'Reset character to previous position',
   },
 });
