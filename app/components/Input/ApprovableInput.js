@@ -151,6 +151,7 @@ const ApprovableInput = props => {
         <DatePickerWrapper>
           <DatePicker
             disabled={disabled}
+            minDate={new Date()}
             selected={value}
             onChange={date => onCheck(date)}
             placeholderText={placeholder}
