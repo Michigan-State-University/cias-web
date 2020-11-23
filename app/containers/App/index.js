@@ -117,7 +117,7 @@ export function App({ user }) {
           path="/users"
           component={UserListPage}
           protectedRoute
-          allowedRoles={[Roles.admin]}
+          allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
             navbarId: 'default',
             activeTab: accountsTabId,
