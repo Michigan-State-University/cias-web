@@ -1,7 +1,7 @@
 import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
-import deepDiff from 'utils/libraries/deepDiff';
 
+import deepDiff from 'utils/libraries/deepDiff';
 import { EDIT_INTERVENTION_REQUEST } from '../constants';
 
 import { editInterventionSuccess, editInterventionError } from '../actions';
