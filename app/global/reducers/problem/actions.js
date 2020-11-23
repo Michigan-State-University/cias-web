@@ -84,8 +84,8 @@ export const reorderSessionsSuccess = payload =>
 export const reorderSessionsError = payload =>
   actionBuilder(REORDER_INTERVENTION_LIST_ERROR, payload);
 
-export const updateInterventionSettings = data =>
-  actionBuilder(UPDATE_INTERVENTION_SETTINGS_REQUEST, data);
+export const updateInterventionSettings = (data, fields = []) =>
+  actionBuilder(UPDATE_INTERVENTION_SETTINGS_REQUEST, data, fields);
 
 export const updateInterventionSettingsSuccess = () =>
   actionBuilder(UPDATE_INTERVENTION_SETTINGS_SUCCESS, {});

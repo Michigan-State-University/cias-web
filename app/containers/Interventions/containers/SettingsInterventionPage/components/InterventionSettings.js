@@ -46,18 +46,24 @@ const InterventionSettings = ({
 
   const onConfirm = () => {
     if (isAllSettingsConfirmation) {
-      editIntervention({
-        path: `settings.narrator`,
-        value: {
-          voice: false,
-          animation: false,
+      editIntervention(
+        {
+          path: `settings.narrator`,
+          value: {
+            voice: false,
+            animation: false,
+          },
         },
-      });
+        ['settings.narrator'],
+      );
     } else {
-      editIntervention({
-        path: `settings.narrator.${confirmationOption}`,
-        value: false,
-      });
+      editIntervention(
+        {
+          path: `settings.narrator.${confirmationOption}`,
+          value: false,
+        },
+        ['settings.narrator'],
+      );
     }
     dismissConfirmation();
   };
@@ -70,7 +76,9 @@ const InterventionSettings = ({
 
   const onToggle = index => val => {
     if (val) {
-      editIntervention({ path: `settings.narrator.${index}`, value: val });
+      editIntervention({ path: `settings.narrator.${index}`, value: val }, [
+        'settings.narrator',
+      ]);
     } else {
       setConfirmationOption(index);
     }
@@ -78,13 +86,16 @@ const InterventionSettings = ({
 
   const onGlobalToggle = val => {
     if (val) {
-      editIntervention({
-        path: `settings.narrator`,
-        value: {
-          voice: val,
-          animation: val,
+      editIntervention(
+        {
+          path: `settings.narrator`,
+          value: {
+            voice: val,
+            animation: val,
+          },
         },
-      });
+        ['settings.narrator'],
+      );
     } else {
       setConfirmationOption('all');
     }
@@ -144,7 +155,9 @@ const InterventionSettings = ({
           width="100%"
           placeholder={formatMessage(messages.placeholder)}
           value={name}
-          onBlur={val => editIntervention({ path: 'name', value: val })}
+          onBlur={val =>
+            editIntervention({ path: 'name', value: val }, ['name'])
+          }
         />
       </NameContainer>
       <H3 mt={30} mb={20}>

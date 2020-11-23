@@ -1,24 +1,20 @@
 import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
 
-import deepDiff from 'utils/libraries/deepDiff';
+import pickFields from 'utils/pickFields';
 import { EDIT_INTERVENTION_REQUEST } from '../constants';
 
 import { editInterventionSuccess, editInterventionError } from '../actions';
 
-import {
-  makeSelectCacheIntervention,
-  makeSelectIntervention,
-} from '../selectors';
+import { makeSelectIntervention } from '../selectors';
 
-export function* editIntervention() {
+export function* editIntervention({ fields } = {}) {
   const intervention = yield select(makeSelectIntervention());
-  const cacheIntervention = yield select(makeSelectCacheIntervention());
   const requestURL = `v1/problems/${intervention.problem_id}/interventions/${
     intervention.id
   }`;
 
-  const patchDifference = deepDiff(cacheIntervention, intervention);
+  const patchDifference = pickFields(intervention, fields);
 
   try {
     const {
