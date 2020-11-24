@@ -5,20 +5,25 @@
  */
 
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
+import { Roles } from 'models/User/UserRoles';
 import { UserListReducer } from 'global/reducers/userList';
 import createModalForTests from 'utils/createModalForTests';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import UserList from '../index';
+import messages from '../messages';
 
 describe('<UserList />', () => {
-  const initialState = {
+  const initialState = role => ({
+    auth: {
+      user: { firstName: 'test', lastName: 'test', roles: [role] },
+    },
     userList: {
       users: [
         {
@@ -44,20 +49,24 @@ describe('<UserList />', () => {
         },
       ],
     },
-  };
-  const store = createTestStore(initialState);
+  });
+  const storeAdmin = createTestStore(initialState(Roles.admin));
+  const storeResearcher = createTestStore(initialState(Roles.researcher));
 
   beforeAll(() => {
     createModalForTests();
-    store.injectedReducers = {
+    storeAdmin.injectedReducers = {
+      userList: UserListReducer,
+    };
+    storeResearcher.injectedReducers = {
       userList: UserListReducer,
     };
   });
 
-  it('Expect to not log errors in console', () => {
+  it('Expect to not log errors in console - admin', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
-      <Provider store={store}>
+      <Provider store={storeAdmin}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
             <UserList />
@@ -68,9 +77,10 @@ describe('<UserList />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Should render and match the snapshot', () => {
-    const { container } = render(
-      <Provider store={store}>
+  it('Expect to not log errors in console - researcher', () => {
+    const spy = jest.spyOn(global.console, 'error');
+    render(
+      <Provider store={storeResearcher}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
             <UserList />
@@ -78,6 +88,41 @@ describe('<UserList />', () => {
         </IntlProvider>
       </Provider>,
     );
+    expect(spy).not.toHaveBeenCalled();
+  });
+
+  it('Should render and match the snapshot - researcher', () => {
+    const { container } = render(
+      <Provider store={storeResearcher}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <MemoryRouter>
+            <UserList />
+          </MemoryRouter>
+        </IntlProvider>
+      </Provider>,
+    );
+
+    const inviteButton = screen.queryByText(
+      messages.inviteResearcher.defaultMessage,
+    );
+    expect(inviteButton).toBeNull();
+    expect(container).toMatchSnapshot();
+  });
+
+  it('Should render and match the snapshot - admin', () => {
+    const { container } = render(
+      <Provider store={storeAdmin}>
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <MemoryRouter>
+            <UserList />
+          </MemoryRouter>
+        </IntlProvider>
+      </Provider>,
+    );
+    const inviteButton = screen.queryByText(
+      messages.inviteResearcher.defaultMessage,
+    );
+    expect(inviteButton).toBeInTheDocument();
     expect(container).toMatchSnapshot();
   });
 });

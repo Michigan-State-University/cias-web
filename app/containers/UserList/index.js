@@ -33,6 +33,7 @@ import {
 } from 'global/reducers/userList';
 import { themeColors } from 'theme';
 import { PER_PAGE } from 'global/reducers/userList/constants';
+import { makeSelectUser } from 'global/reducers/auth';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import InviteResearcher from '../InviteResearcher';
@@ -47,10 +48,10 @@ function UserList({
   fetchUsersRequest,
   changeActivateStatus,
   intl: { formatMessage },
+  user: { roles },
 }) {
   useInjectReducer({ key: 'userList', reducer: UserListReducer });
   useInjectSaga({ key: 'userList', saga: userListSaga });
-
   const pages = Math.ceil(usersSize / PER_PAGE);
 
   const [filterText, setFilterText] = useState('');
@@ -153,12 +154,17 @@ function UserList({
             <H1 mr={10}>
               <FormattedMessage {...messages.manageAccount} />
             </H1>
-            <TextButton
-              buttonProps={{ color: themeColors.secondary, fontWeight: 'bold' }}
-              onClick={openModal}
-            >
-              <FormattedMessage {...messages.inviteResearcher} />
-            </TextButton>
+            {roles.includes(Roles.admin) && (
+              <TextButton
+                buttonProps={{
+                  color: themeColors.secondary,
+                  fontWeight: 'bold',
+                }}
+                onClick={openModal}
+              >
+                <FormattedMessage {...messages.inviteResearcher} />
+              </TextButton>
+            )}
           </Box>
           {getContent()}
         </Box>
@@ -172,10 +178,12 @@ UserList.propTypes = {
   changeActivateStatus: PropTypes.func.isRequired,
   userList: PropTypes.object,
   intl: intlShape,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   userList: makeSelectUserList(),
+  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = {
