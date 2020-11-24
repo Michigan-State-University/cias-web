@@ -1,12 +1,14 @@
 import { ADMIN_EMAIL, ADMIN_PASSWORD } from '../../support/envVariables';
 import { questionTypes } from '../../fixtures/fixtures';
-import { CREATE_QUESTION } from '../../support/aliases';
+import { CREATE_QUESTION, UPDATE_QUESTION } from '../../support/aliases';
 
 describe('Create Intervention by Admin', () => {
   const index = 0;
   beforeEach(() => {
     cy.server();
     cy.createAlias(CREATE_QUESTION);
+    cy.createAlias(UPDATE_QUESTION);
+
     cy.login(Cypress.env(ADMIN_EMAIL), Cypress.env(ADMIN_PASSWORD));
   });
   it('Create Intervention by Admin tests', () => {

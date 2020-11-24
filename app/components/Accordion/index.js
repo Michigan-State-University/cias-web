@@ -17,13 +17,20 @@ const Accordion = ({
   setOpened,
   onDelete,
   disabled,
+  'data-cy': cypressId,
 }) => {
   useEffect(() => {
     if (opened !== -1) onOpen(opened);
   }, [opened]);
 
   const renderCollapse = (child, index) => {
-    const { children: content, label, color, deleteActive } = child.props;
+    const {
+      children: content,
+      label,
+      color,
+      deleteActive,
+      'data-cy': childCypressId,
+    } = child.props;
 
     const handleToggle = () => {
       let newIndex = index;
@@ -38,6 +45,7 @@ const Accordion = ({
 
     return (
       <Collapse
+        data-cy={childCypressId}
         onToggle={handleToggle}
         isOpened={opened === index}
         label={label}
@@ -45,6 +53,7 @@ const Accordion = ({
         onDelete={handleDelete}
         disabled={disabled}
         deleteActive={deleteActive}
+        index={index}
       >
         {content}
       </Collapse>
@@ -61,7 +70,7 @@ const Accordion = ({
 
   if (Array.isArray(children))
     return (
-      <AccordionContainer>
+      <AccordionContainer data-cy={cypressId}>
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable
             isDropDisabled={dragDisabled}
@@ -115,6 +124,7 @@ Accordion.propTypes = {
   setOpened: PropTypes.func,
   onDelete: PropTypes.func,
   disabled: PropTypes.bool,
+  'data-cy': PropTypes.string,
 };
 
 Accordion.defaultProps = {};

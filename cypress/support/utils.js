@@ -1,4 +1,5 @@
 import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { UPDATE_QUESTION } from './aliases';
 
 export const answerQuestionByType = ({ type, answer }) => {
   switch (type) {
@@ -16,9 +17,18 @@ export const singleQuestionDetails = answers => questionIndex => {
     .contains('Enter main text/question for screen here')
     .clear()
     .type(title);
+  cy.wait([UPDATE_QUESTION]);
+
   options.forEach(({ name, score }, index) => {
     cy.get(`div[data-placeholder="Answer ${index + 1}"]`).type(name);
+    cy.wait([UPDATE_QUESTION]);
+
     cy.getBySel(`score-${index}-input`).type(score);
-    if (index + 1 !== options.length) cy.contains('Add new answer').click();
+    cy.wait([UPDATE_QUESTION]);
+
+    if (index + 1 !== options.length) {
+      cy.contains('Add new answer').click();
+      cy.wait([UPDATE_QUESTION]);
+    }
   });
 };

@@ -24,8 +24,10 @@ const Collapse = ({
   bgOpacity,
   imgWithBackground,
   deleteActive,
+  index,
+  'data-cy': cypressId,
 }) => (
-  <StyledCollapseContainer>
+  <StyledCollapseContainer data-cy={cypressId}>
     <CollapseLabel
       label={label}
       onToggle={onToggle}
@@ -41,6 +43,7 @@ const Collapse = ({
       color={color}
       bgOpacity={bgOpacity}
       deleteActive={deleteActive}
+      index={index}
     />
     <CollapseContent child={children} isOpened={isOpened} />
   </StyledCollapseContainer>
@@ -62,6 +65,8 @@ Collapse.propTypes = {
   bgOpacity: PropTypes.number,
   color: PropTypes.string,
   deleteActive: PropTypes.bool,
+  index: PropTypes.number,
+  'data-cy': PropTypes.string,
 };
 
 Collapse.defaultProps = {

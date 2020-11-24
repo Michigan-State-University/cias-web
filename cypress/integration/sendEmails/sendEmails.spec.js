@@ -1,3 +1,4 @@
+import { UPDATE_QUESTION } from '../../support/aliases';
 import { ADMIN_EMAIL, ADMIN_PASSWORD } from '../../support/envVariables';
 
 describe('Send emails', () => {
@@ -9,6 +10,7 @@ describe('Send emails', () => {
 
   it('Should add participant to list of sent emails', () => {
     // alias requests so that they can be awaited and checked for success
+    cy.createAlias(UPDATE_QUESTION);
     cy.route('PATCH', '**/problems/*').as('updateIntervention');
     cy.route('POST', '**/problems/*/interventions').as('createSession');
     cy.route('GET', '**/interventions/*/invitations').as(

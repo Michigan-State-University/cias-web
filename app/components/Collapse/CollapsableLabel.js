@@ -24,6 +24,7 @@ const CollapseLabel = ({
   px,
   bgOpacity,
   deleteActive,
+  index,
 }) => {
   const img = isOpened ? onShowImg : onHideImg;
   const imgElement = <Img src={img} />;
@@ -49,6 +50,7 @@ const CollapseLabel = ({
       {!disabled && (
         <Img
           data-testid={`bin-${label}`}
+          data-cy={`accordion-element-delete-${index}`}
           src={deleteActive ? bin : binGrey}
           alt="bin"
           clickable={deleteActive}
@@ -74,6 +76,7 @@ CollapseLabel.propTypes = {
   px: PropTypes.number,
   bgOpacity: PropTypes.number,
   deleteActive: PropTypes.bool,
+  index: PropTypes.number,
 };
 
 export default CollapseLabel;

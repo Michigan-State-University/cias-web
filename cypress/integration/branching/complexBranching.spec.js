@@ -4,6 +4,7 @@ import {
   UPDATE_INTERVENTION,
   GET_SESSION_QUESTION_GROUPS,
   ANSWER_QUESTION,
+  UPDATE_QUESTION,
 } from '../../support/aliases';
 const { ADMIN_EMAIL, ADMIN_PASSWORD } = require('../../support/envVariables');
 const { singleQuestionDetails } = require('../../support/utils');
@@ -74,6 +75,8 @@ describe('Complex branching', () => {
     cy.createAlias(GET_SESSION_QUESTION_GROUPS);
     cy.createAlias(UPDATE_INTERVENTION);
     cy.createAlias(CREATE_QUESTION);
+    cy.createAlias(UPDATE_QUESTION);
+
     cy.createAlias(ANSWER_QUESTION);
 
     cy.viewport(1500, 750);
@@ -93,6 +96,7 @@ describe('Complex branching', () => {
       {
         variablePrefix: 'var_',
         questionDetails: singleQuestionDetails(answerOptions),
+        removeReadQuestionBlock: true,
       },
     );
   });

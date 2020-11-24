@@ -1,7 +1,7 @@
 /* eslint no-unused-expressions: 0 */ // --> OFF
 
 import { singleQuestion } from 'models/Intervention/QuestionTypes';
-import { CREATE_QUESTION } from '../../support/aliases';
+import { CREATE_QUESTION, UPDATE_QUESTION } from '../../support/aliases';
 const { ADMIN_EMAIL, ADMIN_PASSWORD } = require('../../support/envVariables');
 const index = 0;
 
@@ -10,6 +10,8 @@ describe('Access settings', () => {
     cy.server();
     cy.viewport(1500, 750);
     cy.createAlias(CREATE_QUESTION);
+    cy.createAlias(UPDATE_QUESTION);
+
     cy.login(Cypress.env(ADMIN_EMAIL), Cypress.env(ADMIN_PASSWORD));
     cy.createIntervention();
     cy.createSessionsInIntervention(1);

@@ -96,6 +96,7 @@ const WrappedAccordion = ({
 
   return (
     <Accordion
+      data-cy="narrator-blocks"
       disabled={disabled}
       opened={narratorBlockIndex}
       setOpened={changeNarratorBlockIndex}
@@ -107,6 +108,7 @@ const WrappedAccordion = ({
       {narrator &&
         map(narrator.blocks, (block, blockIndex) => (
           <div
+            data-cy={`narrator-block-${blockIndex}`}
             key={`${id}-narrator-block-${blockIndex}`}
             color={getBlockColor(block.type, { animation, voice })}
             deleteActive={block.type !== feedbackBlockType}

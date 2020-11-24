@@ -98,6 +98,7 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
     <img
       alt="bin"
       class="c4"
+      data-cy="accordion-element-delete-0"
       data-testid="bin-test"
       src="IMAGE_MOCK"
     />

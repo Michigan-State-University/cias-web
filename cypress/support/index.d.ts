@@ -40,7 +40,7 @@ declare namespace Cypress {
      */
     populateSessionWithQuestions(
       questionTypesToPopulate: string[],
-      options: object,
+      options: PopulateSessionWithQuestionsOptions,
     ): void;
 
     /**
@@ -71,6 +71,19 @@ declare namespace Cypress {
     /**
      * Set up branching
      */
-    setUpBranching(formula: string, cases: object): void;
+    setUpBranching(formula: string, cases: object[]): void;
+
+    /**
+     * Remove block at index
+     */
+    removeBlock(index: number): void;
   }
+}
+
+interface PopulateSessionWithQuestionsOptions {
+  variablePrefix?: string;
+
+  questionDetails?: Function;
+
+  removeReadQuestionBlock?: boolean;
 }

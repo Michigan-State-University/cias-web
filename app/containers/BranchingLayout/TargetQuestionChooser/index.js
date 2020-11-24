@@ -95,6 +95,7 @@ const TargetQuestionChooser = props => {
       <Row mb={20}>
         <Img
           data-testid={`${id}-select-target-question-interview-view-setter`}
+          data-cy="select-target-question-intervention-view-setter"
           src={arrowLeft}
           mr={10}
           onClick={event => setIsInterventionView(true, event)}
@@ -144,6 +145,7 @@ const TargetQuestionChooser = props => {
               interventionList.map((intervention, index) => (
                 <Row
                   data-testid={`${id}-select-target-intervention-el-${index}`}
+                  data-cy={`choose-intervention-${index}`}
                   key={`${id}-select-target-intervention-${index}`}
                   mb={index !== interventionList.length - 1 ? 15 : 5}
                   onClick={event => chooseIntervention(intervention.id, event)}
