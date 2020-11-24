@@ -18,7 +18,6 @@ import copy from 'assets/svg/copy.svg';
 import mail from 'assets/svg/pink-mail.svg';
 import mailDisabled from 'assets/svg/pink-mail-disabled.svg';
 import { colors } from 'theme';
-import appStages from 'global/appStages';
 
 import Img from 'components/Img';
 import Box from 'components/Box';
@@ -101,16 +100,14 @@ function InterventionListItem({
                   alt="emails"
                   data-cy={`share-session-modal-open-button-${index}`}
                 />
-                {process.env.APP_STAGE === appStages.dev.id && (
-                  <Box mb={8}>
-                    <Dropdown
-                      disabled={disabled}
-                      options={options}
-                      clickable
-                      id={id}
-                    />
-                  </Box>
-                )}
+                <Box mb={8}>
+                  <Dropdown
+                    disabled={disabled}
+                    options={options}
+                    clickable
+                    id={id}
+                  />
+                </Box>
               </Row>
             </Row>
             <Row px={62} mb={20}>
