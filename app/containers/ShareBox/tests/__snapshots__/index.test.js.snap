@@ -38,6 +38,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             >
               <input
                 class="styled__HiddenInput-sc-16elnyr-1 hZOnzQ"
+                data-cy="hidden-input"
                 placeholder="Enter emails to send link to this session"
                 type="text"
                 value=""

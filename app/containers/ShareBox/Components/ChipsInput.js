@@ -120,6 +120,7 @@ const ChipsInput = ({
           </Box>
         ))}
         <HiddenInput
+          data-cy="hidden-input"
           disabled={disabled}
           ref={hiddenInput}
           onFocus={setFocus}

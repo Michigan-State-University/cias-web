@@ -52,7 +52,7 @@ Cypress.Commands.add('login', (email, password) =>
       email,
       password,
     })
-    .then(({ body: { data }, headers }) => {
+    .then(({ body: { data }, headers, status }) => {
       const user = mapCurrentUser(data);
       LocalStorageService.setState(user);
       LocalStorageService.setHeaders({
@@ -61,6 +61,7 @@ Cypress.Commands.add('login', (email, password) =>
         client: headers.client,
         uid: headers.uid,
       });
+      expect(status).to.eq(201);
     }),
 );
 
@@ -131,9 +132,14 @@ Cypress.Commands.add('dismissAllToasts', () => {
   cy.get('.Toastify__close-button').click({ multiple: true, force: true });
 });
 
-Cypress.Commands.add('answerPage', () =>
-  cy.url().then(url => cy.visit(url.replace('edit', 'fill'))),
-);
+Cypress.Commands.add('answerPage', () => {
+  cy.url().then(url => {
+    if (url.includes('/edit')) {
+      cy.wrap(url.replace('edit', 'fill')).as('answerPageUrl');
+    }
+    cy.get('@answerPageUrl').then(answerUrl => cy.visit(answerUrl));
+  });
+});
 
 Cypress.Commands.add('answerQuestions', answers => {
   cy.answerPage().then(() => {
