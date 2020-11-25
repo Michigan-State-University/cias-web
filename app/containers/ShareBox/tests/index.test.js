@@ -24,6 +24,7 @@ describe('<ShareBox />', () => {
             name: 'Name',
             slug: 'Slug-id-e-intervention',
             emails: ['mail@mail.com'],
+            position: 1,
           },
         ],
       },

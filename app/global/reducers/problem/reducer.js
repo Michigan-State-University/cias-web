@@ -264,8 +264,6 @@ export const problemReducer = (state = initialState, action) =>
         );
 
         if (interventionIndex > -1) {
-          draft.currentInterventionIndex = interventionIndex;
-
           draft.loaders.sendInterventionLoading = true;
           draft.cache.problem = state.problem;
           const mappedEmails = payloadEmails.map(email => ({

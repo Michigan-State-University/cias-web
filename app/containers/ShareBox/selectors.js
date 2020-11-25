@@ -1,13 +1,16 @@
+import find from 'lodash/find';
 import { createSelector } from 'reselect';
 import { selectProblem } from 'global/reducers/problem';
 
-export const makeSelectCurrenIntervention = () =>
+export const makeSelectCurrentIntervention = () =>
   createSelector(
     selectProblem,
     problemState => {
       if (problemState.problem && problemState.problem.interventions)
-        return problemState.problem.interventions[
-          problemState.currentInterventionIndex
-        ];
+        return find(
+          problemState.problem.interventions,
+          ({ position }) =>
+            position - 1 === problemState.currentInterventionIndex,
+        );
     },
   );

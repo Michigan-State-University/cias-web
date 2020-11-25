@@ -13,7 +13,9 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
     >
       <div
         class="styled__InterventionIndex-sc-16elnyr-4 kTZbQy"
-      />
+      >
+        1
+      </div>
       <h2
         class="H2-egphza-0 dNhIVG"
       >
