@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
+<div
+  class="Column-sc-1n6divy-0 byYirt"
+>
+  <div
+    class="Box-sc-14m3exe-0 eJhJAg"
+    width="100%"
+  >
+    <div
+      class="Column-sc-1n6divy-0 SJAYV"
+    >
+      <div
+        class="Row-x1o3ru-0 dAhqIQ"
+      >
+        <div
+          class="Box-sc-14m3exe-0 kcsePn"
+          width="100%"
+        >
+          <div
+            class="rc-slider rc-slider-with-marks rc-slider-disabled"
+          >
+            <div
+              class="rc-slider-rail"
+              style="background-color: rgba(47, 56, 80, 0.2);"
+            />
+            <div
+              class="rc-slider-track"
+              style="background-color: rgb(200, 102, 234); left: 0%; width: 0%;"
+            />
+            <div
+              class="rc-slider-step"
+            >
+              <span
+                class="rc-slider-dot rc-slider-dot-active"
+                style="left: 0%;"
+              />
+              <span
+                class="rc-slider-dot"
+                style="left: 100%;"
+              />
+            </div>
+            <div
+              aria-disabled="true"
+              aria-valuemax="100"
+              aria-valuemin="0"
+              class="rc-slider-handle"
+              dragging="false"
+              index="0"
+              role="slider"
+              style="border-color: #c866ea; box-shadow: none; border-width: 3px; left: 0%; transform: translateX(-50%);"
+            >
+              <div
+                class="styled__ValueSliderWrapperStyled-sc-1s7czrk-1 hnyuSa"
+              >
+                <div
+                  class="styled__ValueSliderStyled-sc-1s7czrk-0 eKTJAs"
+                >
+                  <p
+                    class="Text-sc-2lza2m-0 iynfNN"
+                    font-size="15px"
+                  >
+                    0
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div
+              class="rc-slider-mark"
+            >
+              <span
+                class="rc-slider-mark-text rc-slider-mark-text-active"
+                style="transform: translateX(-50%); left: 0%; font-size: 15px;"
+              >
+                <input
+                  class="Input-sc-19txxuq-0 kJChoo"
+                  placeholder="Least"
+                  type="text"
+                  value="0"
+                  width="120"
+                />
+              </span>
+              <span
+                class="rc-slider-mark-text"
+                style="transform: translateX(-50%); left: 100%; font-size: 15px;"
+              >
+                <input
+                  class="Input-sc-19txxuq-0 kJChoo"
+                  placeholder="Most"
+                  type="text"
+                  value="100"
+                  width="120"
+                />
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

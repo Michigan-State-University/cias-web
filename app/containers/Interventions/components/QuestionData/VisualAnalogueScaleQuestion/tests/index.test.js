@@ -7,13 +7,13 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { draft } from 'models/Status/StatusTypes';
-import { urlQuestion } from 'models/Intervention/QuestionTypes';
+import { visualAnalogueScaleQuestion } from 'models/Intervention/QuestionTypes';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
-import UrlQuestion from '../index';
+import VisualAnalogueScaleQuestion from '../index';
 
 const mockedFunctions = {
-  updateUrl: jest.fn(),
+  updateLabel: jest.fn(),
 };
 
 const defaultProps = {
@@ -28,13 +28,23 @@ const initialState = {
         id: 'test',
         title: 'test-title',
         subtitle: 'test-subtitle',
-        type: urlQuestion.id,
+        type: visualAnalogueScaleQuestion.id,
         body: {
-          variable: { name: '' },
-          data: [{ payload: 'www.google.com' }],
+          variable: {
+            name: 'test',
+          },
+          data: [
+            {
+              payload: {
+                start_value: '1',
+                end_value: '100',
+              },
+            },
+          ],
         },
         on: 1,
         question_group_id: 'test',
+        settings: { show_number: true },
       },
     ],
     selectedQuestion: 'test',
@@ -43,14 +53,14 @@ const initialState = {
 
 const store = createTestStore(initialState);
 
-describe('<UrlQuestion />', () => {
+describe('<VisualAnalogueScaleQuestion />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
-            <UrlQuestion {...defaultProps} />
+            <VisualAnalogueScaleQuestion {...defaultProps} />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,
@@ -65,7 +75,7 @@ describe('<UrlQuestion />', () => {
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
-            <UrlQuestion {...defaultProps} />
+            <VisualAnalogueScaleQuestion {...defaultProps} />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,

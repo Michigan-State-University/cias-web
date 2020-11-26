@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<UrlQuestion /> should match the snapshot 1`] = `
+exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -190,7 +190,6 @@ exports[`<UrlQuestion /> should match the snapshot 1`] = `
         >
           <textarea
             class="c5"
-            disabled=""
             height="auto"
             placeholder="Paste or type a web page link to show it to a respondent."
             rows="3"

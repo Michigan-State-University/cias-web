@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-14m3exe-0 TZStE"
+    width="100%"
+  >
+    <div
+      class="Row-x1o3ru-0 dAhqIQ"
+    >
+      <div
+        class="Row-x1o3ru-0 fcuGKr"
+        width="100%"
+      >
+        <div
+          class="Column-sc-1n6divy-0 SJAYV"
+        >
+          <input
+            class="Input-sc-19txxuq-0 bZXKJX"
+            height="60"
+            placeholder="ex: 1, 2, 100"
+            type="tel"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextBoxQuestion /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-14m3exe-0 erFqvu"
+    width="100%"
+  >
+    <div
+      class="Row-x1o3ru-0 dAhqIQ"
+    >
+      <textarea
+        class="TextArea-sc-1g8793c-0 cqUkPR"
+        placeholder="Enter your response here"
+        rows="5"
+        width="100%"
+      />
+    </div>
+  </div>
+</div>
+`;

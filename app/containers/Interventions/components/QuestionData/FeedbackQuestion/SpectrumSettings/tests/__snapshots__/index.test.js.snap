@@ -1,0 +1,304 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SpectrumSettings /> Should render and match the snapshot 1`] = `
+<div
+  class="Column-sc-1n6divy-0 SJAYV"
+>
+  <div
+    class="Column-sc-1n6divy-0 SJAYV"
+  >
+    <div
+      class="Row-x1o3ru-0 eexZYP"
+    >
+      <p
+        class="Text-sc-2lza2m-0 gCOoXP"
+        font-weight="bold"
+      >
+        End-User Value
+      </p>
+      <div
+        class="Box-sc-14m3exe-0 lavaAX"
+      >
+        <p
+          class="Text-sc-2lza2m-0 fJREmD"
+          color="#C866EA"
+          font-weight="bold"
+        >
+          Add variable
+        </p>
+      </div>
+    </div>
+    <div
+      class="Box-sc-14m3exe-0 gFdkaU"
+    >
+      <div
+        class="Box-sc-14m3exe-0 dsNuUD"
+        display="none"
+        width="auto"
+      >
+        <div
+          class="Row-x1o3ru-0 dAhqIQ"
+        >
+          <div
+            class="Box-sc-14m3exe-0 ketynr"
+          >
+            <div
+              class="Column-sc-1n6divy-0 SJAYV"
+            >
+              <div
+                class="Box-sc-14m3exe-0 cYhKwr"
+              >
+                <div
+                  class="Box-sc-14m3exe-0 gDFvhB"
+                  data-testid="no-content"
+                  display="flex"
+                  height="100%"
+                  width="100%"
+                >
+                  <div
+                    class="Column-sc-1n6divy-0 kCnOyy"
+                  >
+                    <img
+                      alt="No content"
+                      class="Img-sc-1kfzr96-0 lmhFEd"
+                      src="IMAGE_MOCK"
+                    />
+                    <h2
+                      class="H2-egphza-0 iPVWCm"
+                      color="#B0BAC9"
+                    >
+                      No variables defined yet
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="Box-sc-14m3exe-0 gptOhZ"
+      width="100%"
+    >
+      <textarea
+        class="TextArea-sc-1g8793c-0 kklhX"
+        data-cy="text-area"
+        height="auto"
+        placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
+        rows="5"
+        width="100%"
+      >
+        1
+      </textarea>
+    </div>
+    <div
+      class="Row-x1o3ru-0 jQPqCG"
+    >
+      <p
+        class="Text-sc-2lza2m-0 jfzQxX"
+      >
+        If
+      </p>
+      <div
+        class="Box-sc-14m3exe-0 dTAoNW"
+        data-cy="case-select"
+        data-testid="select"
+      >
+        <div
+          class=" css-2b097c-container"
+        >
+          <div
+            class=" css-1isrrs2-control"
+          >
+            <div
+              class=" css-g1d714-ValueContainer"
+            >
+              <div
+                class=" css-1uccc91-singleValue"
+              >
+                =
+              </div>
+              <div
+                class="css-b8ldur-Input"
+              >
+                <div
+                  class=""
+                  style="display: inline-block;"
+                >
+                  <input
+                    aria-autocomplete="list"
+                    autocapitalize="none"
+                    autocomplete="off"
+                    autocorrect="off"
+                    id="react-select-4-input"
+                    spellcheck="false"
+                    style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                    tabindex="0"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class=" css-1hb7zxy-IndicatorsContainer"
+            >
+              <div
+                aria-hidden="true"
+                class=" css-tlfecz-indicatorContainer"
+              >
+                <img
+                  class="Img-sc-1kfzr96-0 sgjBb"
+                  src="IMAGE_MOCK"
+                  transform=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Box-sc-14m3exe-0 lhGbOF"
+      >
+        <input
+          class="Input-sc-19txxuq-0 fEeevM styled__CaseInput-sc-95am5d-0 kYuVIm"
+          data-cy="case-value-input"
+          data-testid="input"
+          placeholder="..."
+          type="text"
+          value="1"
+        />
+      </div>
+      <p
+        class="Text-sc-2lza2m-0 fMrnzI"
+      >
+        end user value is
+      </p>
+      <div
+        class="Box-sc-14m3exe-0 lhGbOF"
+      >
+        <input
+          class="Input-sc-19txxuq-0 fEeevM styled__CaseInput-wyqjsg-1 bjVJVS"
+          placeholder="..."
+          type="text"
+          value="50"
+        />
+      </div>
+      <img
+        class="Img-sc-1kfzr96-0 hZGtpK"
+        src="IMAGE_MOCK"
+      />
+    </div>
+    <div
+      class="Row-x1o3ru-0 jQPqCG"
+    >
+      <p
+        class="Text-sc-2lza2m-0 jfzQxX"
+      >
+        If
+      </p>
+      <div
+        class="Box-sc-14m3exe-0 dTAoNW"
+        data-cy="case-select"
+        data-testid="select"
+      >
+        <div
+          class=" css-2b097c-container"
+        >
+          <div
+            class=" css-1isrrs2-control"
+          >
+            <div
+              class=" css-g1d714-ValueContainer"
+            >
+              <div
+                class=" css-1uccc91-singleValue"
+              >
+                =
+              </div>
+              <div
+                class="css-b8ldur-Input"
+              >
+                <div
+                  class=""
+                  style="display: inline-block;"
+                >
+                  <input
+                    aria-autocomplete="list"
+                    autocapitalize="none"
+                    autocomplete="off"
+                    autocorrect="off"
+                    id="react-select-5-input"
+                    spellcheck="false"
+                    style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                    tabindex="0"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class=" css-1hb7zxy-IndicatorsContainer"
+            >
+              <div
+                aria-hidden="true"
+                class=" css-tlfecz-indicatorContainer"
+              >
+                <img
+                  class="Img-sc-1kfzr96-0 sgjBb"
+                  src="IMAGE_MOCK"
+                  transform=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Box-sc-14m3exe-0 lhGbOF"
+      >
+        <input
+          class="Input-sc-19txxuq-0 fEeevM styled__CaseInput-sc-95am5d-0 kYuVIm"
+          data-cy="case-value-input"
+          data-testid="input"
+          placeholder="..."
+          type="text"
+          value="2"
+        />
+      </div>
+      <p
+        class="Text-sc-2lza2m-0 fMrnzI"
+      >
+        end user value is
+      </p>
+      <div
+        class="Box-sc-14m3exe-0 lhGbOF"
+      >
+        <input
+          class="Input-sc-19txxuq-0 fEeevM styled__CaseInput-wyqjsg-1 bjVJVS"
+          placeholder="..."
+          type="text"
+          value="75"
+        />
+      </div>
+      <img
+        class="Img-sc-1kfzr96-0 hZGtpK"
+        src="IMAGE_MOCK"
+      />
+    </div>
+    <div
+      class="Box-sc-14m3exe-0 styled__DashedBox-wyqjsg-0 gnAZuH esUEKz"
+    >
+      + Add another case
+    </div>
+  </div>
+</div>
+`;

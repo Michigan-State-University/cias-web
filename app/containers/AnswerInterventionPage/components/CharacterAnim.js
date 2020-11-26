@@ -8,6 +8,7 @@ import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 import useMoveHelper from 'utils/animationsHelpers/useMoveHelper';
 import useAudioHelper from 'utils/animationsHelpers/useAudioHelper';
 import useAnimationHelper from 'utils/animationsHelpers/useAnimationHelper';
+import { useAsync } from 'utils/useAsync';
 import {
   bodyAnimationType,
   speechType,
@@ -206,28 +207,29 @@ const CharacterAnim = ({
       }
     }
   };
+  const fetchData = async () => {
+    if (blocks[0]) {
+      const newPosition = calculatePosition(
+        blocks[0].action,
+        blocks[0].endPosition,
+      );
 
-  useEffect(() => {
-    const fetch = async () => {
-      if (blocks[0]) {
-        const newPosition = calculatePosition(
-          blocks[0].action,
-          blocks[0].endPosition,
-        );
+      await moveAnimation({ ...blocks[0], endPosition: newPosition });
+    }
+    await fetchBodyAndHeadAnimations();
+    await fetchAudioAnimations();
+    await fetchMoveAnimations();
+  };
 
-        await moveAnimation({ ...blocks[0], endPosition: newPosition });
-      }
-      await fetchBodyAndHeadAnimations();
-      await fetchAudioAnimations();
-      await fetchMoveAnimations();
+  useAsync(
+    fetchData,
+    () =>
       dispatchUpdate({
         currentData: getInitialData(),
         currentBlockIndex: 0,
-      });
-    };
-    fetch();
-    return stopSpeech;
-  }, [questionId, previewMode]);
+      }),
+    { useDeps: [questionId, previewMode], cleanUpFunction: stopSpeech },
+  );
 
   useDidUpdateEffect(() => {
     if (state.currentData)

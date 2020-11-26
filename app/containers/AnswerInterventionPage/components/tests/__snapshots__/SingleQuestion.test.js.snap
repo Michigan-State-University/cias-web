@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Column-sc-1n6divy-0 SJAYV"
+  >
+    <div
+      class="Box-sc-14m3exe-0 cidtM"
+    >
+      <div
+        class="Row-x1o3ru-0 gvStTq"
+      >
+        <div
+          class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 eikLPg"
+          width="calc(100% + 21px)"
+        >
+          <div
+            class="Row-x1o3ru-0 jeQTYm"
+            height="44"
+          >
+            <img
+              class="Img-sc-1kfzr96-0 fUwSCT"
+              data-cy="single-question-0-checkbox"
+              src="IMAGE_MOCK"
+            />
+            <div>
+              test
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Row-x1o3ru-0 gvStTq"
+      >
+        <div
+          class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 eikLPg"
+          width="calc(100% + 21px)"
+        >
+          <div
+            class="Row-x1o3ru-0 jeQTYm"
+            height="44"
+          >
+            <img
+              class="Img-sc-1kfzr96-0 fUwSCT"
+              data-cy="single-question-1-checkbox"
+              src="IMAGE_MOCK"
+            />
+            <div>
+              test
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

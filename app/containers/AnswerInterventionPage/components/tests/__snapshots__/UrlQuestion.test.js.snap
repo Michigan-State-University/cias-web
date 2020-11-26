@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-14m3exe-0 hpYCYD"
+    width="100%"
+  >
+    <div
+      class="Row-x1o3ru-0 dAhqIQ"
+    >
+      <div
+        class="styled__InlineLoader-tle2yi-1 dIAlHd"
+        data-testid="inline-loader"
+      >
+        <div
+          class="styled__StyledSpinner-d123q3-0 iHKSVj"
+          color="#C866EA"
+          size="50"
+          width="6"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
