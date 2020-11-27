@@ -21,6 +21,7 @@ module.exports = {
     '<rootDir>/internals/testing/test-bundler.js',
     '@testing-library/jest-dom/extend-expect',
     '<rootDir>/jest.setup.js',
+    'jest-extended',
   ],
   setupFiles: ['raf/polyfill', 'jest-canvas-mock'],
   testRegex: 'tests/.*\\.test\\.js$',

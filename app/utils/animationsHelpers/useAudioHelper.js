@@ -408,6 +408,7 @@ const useAudioHelper = (
     decideIfPlaySpeechAnimation,
     stopSpeech,
     fetchAudioAnimations,
+    loadedSpeechAnimations,
   };
 };
 

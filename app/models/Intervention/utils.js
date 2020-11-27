@@ -13,6 +13,7 @@ import {
   reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
 import { getFromQuestionTTS } from 'global/reducers/questions/utils';
+import { DEFAULT_PAUSE_DURATION } from 'utils/constants';
 
 import Question from './Question';
 import Intervention from './Intervention';
@@ -167,7 +168,11 @@ export const instantiateBlockForType = (type, endPosition, question) => {
         ...sharedProperties,
       };
     case pauseType:
-      return { pauseDuration: 2, ...sharedProperties, animation: 'standStill' };
+      return {
+        pauseDuration: DEFAULT_PAUSE_DURATION,
+        ...sharedProperties,
+        animation: 'standStill',
+      };
 
     case feedbackBlockType:
       return {
