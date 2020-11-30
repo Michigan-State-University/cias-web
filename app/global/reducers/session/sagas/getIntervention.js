@@ -11,13 +11,13 @@ import {
 import { GET_INTERVENTION_REQUEST } from '../constants';
 import { getInterventionSuccess, getInterventionError } from '../actions';
 
-export function* getIntervention({ payload: { sessionId, problemId } }) {
+export function* getIntervention({ payload: { sessionId, interventionId } }) {
   const problem = yield select(makeSelectProblem());
 
-  if (isNullOrUndefined(problem) || problem.id !== problemId)
-    yield put(fetchProblemRequest(problemId));
+  if (isNullOrUndefined(problem) || problem.id !== interventionId)
+    yield put(fetchProblemRequest(interventionId));
 
-  const requestURL = `v1/interventions/${problemId}/sessions/${sessionId}`;
+  const requestURL = `v1/interventions/${interventionId}/sessions/${sessionId}`;
 
   try {
     const {

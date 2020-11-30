@@ -77,7 +77,7 @@ describe('userList reducer', () => {
   it('ARCHIVE_PROBLEM_REQUEST', () => {
     const index = 0;
     const payloadProblem = {
-      problemId: mockStateWithProblems.problems[index].id,
+      interventionId: mockStateWithProblems.problems[index].id,
     };
 
     const action = actionBuilder(ARCHIVE_PROBLEM_REQUEST, payloadProblem);
@@ -105,7 +105,7 @@ describe('userList reducer', () => {
   it('ARCHIVE_PROBLEM_ERROR', () => {
     const index = 0;
     const payloadProblem = {
-      problemId: mockStateWithProblems.problems[index].id,
+      interventionId: mockStateWithProblems.problems[index].id,
     };
 
     const action = actionBuilder(ARCHIVE_PROBLEM_ERROR, payloadProblem);

@@ -46,7 +46,7 @@ import messages from '../messages';
 
 const AccessGiver = ({
   intl: { formatMessage },
-  problem: { id: problemId, status, name },
+  problem: { id: interventionId, status, name },
   giveUserAccess,
   usersWithAccess,
   enableAccessLoading,
@@ -63,7 +63,7 @@ const AccessGiver = ({
   );
 
   useEffect(() => {
-    fetchUsersWithAccess(problemId);
+    fetchUsersWithAccess(interventionId);
   }, []);
 
   const handleUploadCsv = data => {
@@ -82,12 +82,12 @@ const AccessGiver = ({
   };
 
   const inviteParticipants = () => {
-    giveUserAccess(problemId, value);
+    giveUserAccess(interventionId, value);
     setValue([]);
   };
 
   const revokeAction = id => {
-    if (id) revokeUserAccess(problemId, id);
+    if (id) revokeUserAccess(interventionId, id);
   };
 
   if (fetchUserAccessLoading)

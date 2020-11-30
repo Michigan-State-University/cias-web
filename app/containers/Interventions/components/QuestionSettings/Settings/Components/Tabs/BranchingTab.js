@@ -50,7 +50,7 @@ const BranchingTab = ({
   disabled,
   match: { params },
 }) => {
-  const { problemId } = params;
+  const { interventionId } = params;
   const { interventions: interventionList } = problem || {};
   useInjectReducer({
     key: 'problem',
@@ -59,7 +59,7 @@ const BranchingTab = ({
   useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
 
   useEffect(() => {
-    fetchProblem(problemId);
+    fetchProblem(interventionId);
   }, []);
 
   const displayPatternTargetText = target => {

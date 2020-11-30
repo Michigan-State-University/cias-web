@@ -14,9 +14,9 @@ import {
 } from '../constants';
 
 export function* copyProblem({
-  payload: { problemId, users, withoutRedirect },
+  payload: { interventionId, users, withoutRedirect },
 }) {
-  const requestURL = `v1/interventions/${problemId}/clone`;
+  const requestURL = `v1/interventions/${interventionId}/clone`;
   let params;
   if (users) params = { problem: { user_ids: users } };
   try {

@@ -45,7 +45,7 @@ export const problemsReducer = (state = initialState, action) =>
         break;
       case ARCHIVE_PROBLEM_REQUEST:
         let problemIndex = draft.problems.findIndex(
-          ({ id }) => id === action.payload.problemId,
+          ({ id }) => id === action.payload.interventionId,
         );
         draft.problems[problemIndex].status = archived;
         draft.cache.archiveProblem = state.problems[problemIndex];
@@ -55,7 +55,7 @@ export const problemsReducer = (state = initialState, action) =>
         break;
       case ARCHIVE_PROBLEM_ERROR:
         problemIndex = draft.problems.findIndex(
-          ({ id }) => id === action.payload.problemId,
+          ({ id }) => id === action.payload.interventionId,
         );
         draft.problems[problemIndex] = state.cache.archiveProblem;
         draft.cache.archiveProblem = null;

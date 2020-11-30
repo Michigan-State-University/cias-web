@@ -19,7 +19,7 @@ import archiveProblemSaga, { archiveProblem } from '../archiveProblem';
 
 describe('archiveProblem saga', () => {
   const payload = {
-    problemId: 'problem-test',
+    interventionId: 'problem-test',
   };
 
   it('Check archiveProblem generator success connection', () => {
@@ -34,7 +34,7 @@ describe('archiveProblem saga', () => {
     const error = new Error('test');
     return expectSaga(archiveProblem, { payload })
       .provide([[matchers.call.fn(axios.patch), throwError(error)]])
-      .put(archiveProblemFailure(payload.problemId))
+      .put(archiveProblemFailure(payload.interventionId))
       .call(toast.error, formatMessage(globalMessages.archiveProblemError), {
         toastId: ARCHIVE_PROBLEM_ERROR,
       })

@@ -22,7 +22,7 @@ describe('getIntervention saga', () => {
   };
   const payload = {
     sessionId: mockProblem.interventions[0].id,
-    problemId: mockProblem.id,
+    interventionId: mockProblem.id,
   };
 
   it('Check getIntervention generator success connection', () => {
@@ -39,7 +39,7 @@ describe('getIntervention saga', () => {
     return expectSaga(getIntervention, { payload })
       .withState({ problem: {} })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(fetchProblemRequest(payload.problemId))
+      .put(fetchProblemRequest(payload.interventionId))
       .put(getInterventionSuccess(defaultMapper(apiResponse.data)))
       .run();
   });

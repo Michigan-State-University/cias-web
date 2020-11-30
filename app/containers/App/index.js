@@ -83,7 +83,7 @@ export function App({ user }) {
         <AppRoute exact path="/logout" component={Logout} />
         <AppRoute
           exact
-          path="/interventions/:problemId/sessions/:sessionId/edit"
+          path="/interventions/:interventionId/sessions/:sessionId/edit"
           component={EditInterventionPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
@@ -93,7 +93,7 @@ export function App({ user }) {
         />
         <AppRoute
           exact
-          path="/interventions/:problemId/sessions/:sessionId/fill"
+          path="/interventions/:interventionId/sessions/:sessionId/fill"
           component={AnswerInterventionPage}
           allowedRoles={Roles.allRoles}
           user
@@ -104,7 +104,7 @@ export function App({ user }) {
         />
         <AppRoute
           exact
-          path="/interventions/:problemId/sessions/:sessionId/settings"
+          path="/interventions/:interventionId/sessions/:sessionId/settings"
           component={SettingsInterventionPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
@@ -126,7 +126,7 @@ export function App({ user }) {
         <AppRoute
           exact
           key="previewFromStart"
-          path="/interventions/:problemId/sessions/:sessionId/preview"
+          path="/interventions/:interventionId/sessions/:sessionId/preview"
           component={({ match }) => (
             <AnswerInterventionPage match={match} isPreview />
           )}
@@ -139,7 +139,7 @@ export function App({ user }) {
         />
         <AppRoute
           key="previewFromCurrent"
-          path="/interventions/:problemId/sessions/:sessionId/preview/:index"
+          path="/interventions/:interventionId/sessions/:sessionId/preview/:index"
           component={({ match }) => (
             <AnswerInterventionPage match={match} isPreview />
           )}
@@ -152,7 +152,7 @@ export function App({ user }) {
         />
         <AppRoute
           exact
-          path="/interventions/:problemId"
+          path="/interventions/:interventionId"
           component={ProblemDetailsPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}

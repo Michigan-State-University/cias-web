@@ -11,8 +11,10 @@ import {
 import { reorderSessionsSuccess, reorderSessionsError } from '../actions';
 import messages from '../messages';
 
-export function* reorderSessions({ payload: { problemId, reorderedList } }) {
-  const requestURL = `v1/interventions/${problemId}/sessions/position`;
+export function* reorderSessions({
+  payload: { interventionId, reorderedList },
+}) {
+  const requestURL = `v1/interventions/${interventionId}/sessions/position`;
   try {
     yield call(axios.patch, requestURL, {
       session: {

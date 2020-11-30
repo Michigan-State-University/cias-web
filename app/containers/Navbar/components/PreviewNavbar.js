@@ -34,7 +34,7 @@ const PreviewNavbar = ({
   problemStatus,
   match: { params },
 }) => {
-  const { problemId, sessionId } = params;
+  const { interventionId, sessionId } = params;
   const handleClose = () => {
     window.opener = null;
     window.open('', '_self');
@@ -74,7 +74,7 @@ const PreviewNavbar = ({
         <Box mx={20}>
           <PreviewButton
             previewDisabled={previewDisabled}
-            to={`/interventions/${problemId}/sessions/${sessionId}/preview`}
+            to={`/interventions/${interventionId}/sessions/${sessionId}/preview`}
             handleClick={onResetIntervention}
             text={formatMessage(messages.previewStart)}
           />

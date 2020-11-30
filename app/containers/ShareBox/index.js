@@ -43,7 +43,7 @@ const ShareBox = ({
   listLoading,
   problemStatus,
 }) => {
-  const { name, intervention_id: problemId, emails, position } =
+  const { name, intervention_id: interventionId, emails, position } =
     intervention || {};
 
   const handleResend = id => resendInvite(id, intervention.id);
@@ -74,9 +74,9 @@ const ShareBox = ({
       );
   };
   if (intervention) {
-    const link = `${process.env.WEB_URL}/interventions/${problemId}/sessions/${
-      intervention.id
-    }/fill`;
+    const link = `${
+      process.env.WEB_URL
+    }/interventions/${interventionId}/sessions/${intervention.id}/fill`;
     return (
       <Box height="fit-content" width={500} mt={20}>
         <Box display="flex" align="center">

@@ -185,7 +185,7 @@ function EditInterventionPage({
   useEffect(() => {
     getIntervention({
       sessionId: params.sessionId,
-      problemId: params.problemId,
+      interventionId: params.interventionId,
     });
     getQuestionGroups(params.sessionId);
   }, []);

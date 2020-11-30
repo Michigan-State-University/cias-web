@@ -22,7 +22,7 @@ import copyProblemSaga, { copyProblem } from '../copyProblem';
 
 describe('copyProblem saga', () => {
   const createPayload = withParams => ({
-    problemId: 'problem-test',
+    interventionId: 'problem-test',
     users: withParams ? [createUser(), createUser(1)] : null,
     withoutRedirect: false,
   });

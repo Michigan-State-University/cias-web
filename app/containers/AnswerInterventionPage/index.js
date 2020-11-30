@@ -143,11 +143,11 @@ export function AnswerInterventionPage({
   useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
   useInjectReducer({ key: 'answerInterventionPage', reducer });
   useInjectSaga({ key: 'answerInterventionPage', saga });
-  const { sessionId, index, problemId } = params;
+  const { sessionId, index, interventionId } = params;
 
   useEffect(() => {
-    if (isPreview) fetchProblem(problemId);
-  }, [problemId]);
+    if (isPreview) fetchProblem(interventionId);
+  }, [interventionId]);
 
   const previewPossible = !(isPreview && !canPreview(problemStatus));
 

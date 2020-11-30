@@ -17,7 +17,7 @@ import { resendInterventionInviteSaga } from '../index';
 import { resendInterventionInvite } from '../resendInterventionInvite';
 
 describe('reorderSessions saga', () => {
-  const payload = { problemId: '0', id: '0' };
+  const payload = { interventionId: '0', id: '0' };
 
   it('Check resendInterventionInvite generator success connection', () =>
     expectSaga(resendInterventionInvite, { payload })

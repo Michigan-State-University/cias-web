@@ -14,7 +14,7 @@ describe('<ProblemDetailsPage />', () => {
   const defaultProps = {
     match: {
       params: {
-        problemId: '1jkajsd2-112a',
+        interventionId: '1jkajsd2-112a',
       },
     },
   };

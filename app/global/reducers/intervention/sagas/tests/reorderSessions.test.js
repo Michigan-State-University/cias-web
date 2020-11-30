@@ -19,7 +19,7 @@ import { reorderSessionsSaga } from '../index';
 
 describe('reorderSessions saga', () => {
   const reorderedList = [createIntervention(), createIntervention(1)];
-  const payload = { problemId: '0', reorderedList };
+  const payload = { interventionId: '0', reorderedList };
 
   it('Check reorderSessions generator success connection', () =>
     expectSaga(reorderSessions, { payload })

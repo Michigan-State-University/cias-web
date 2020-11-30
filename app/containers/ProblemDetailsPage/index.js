@@ -83,7 +83,7 @@ export function ProblemDetailsPage({
   editProblem,
   fetchProblem,
   match: {
-    params: { problemId },
+    params: { interventionId },
   },
   problemState: {
     problem,
@@ -121,7 +121,7 @@ export function ProblemDetailsPage({
 
   const closeModal = () => setModalVisible(false);
   const openModal = () => setModalVisible(true);
-  const handleCopyProblem = () => copyProblem({ problemId: id });
+  const handleCopyProblem = () => copyProblem({ interventionId: id });
   const handleArchiveProblem = () =>
     editProblem({
       path: 'status_event',
@@ -154,7 +154,7 @@ export function ProblemDetailsPage({
   ];
 
   useLayoutEffect(() => {
-    fetchProblem(problemId);
+    fetchProblem(interventionId);
   }, []);
 
   useEffect(() => {
@@ -180,7 +180,7 @@ export function ProblemDetailsPage({
   const handleSendCsv = () => sendCsv(id);
 
   const createInterventionCall = () =>
-    createIntervention(problemId, interventions.length);
+    createIntervention(interventionId, interventions.length);
 
   const handleReorder = (previousIndex, nextIndex) => {
     const newList = reorder(interventions, previousIndex, nextIndex);
@@ -194,11 +194,12 @@ export function ProblemDetailsPage({
     });
     reorderInterventions({
       reorderedList: orderedNewList,
-      problemId,
+      interventionId,
     });
   };
 
-  const copyProblemToResearchers = users => copyProblem({ problemId, users });
+  const copyProblemToResearchers = users =>
+    copyProblem({ interventionId, users });
 
   const onDragEnd = result => {
     const { source, destination } = result;

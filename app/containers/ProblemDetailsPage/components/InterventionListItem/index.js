@@ -46,7 +46,7 @@ function InterventionListItem({
   const {
     id,
     name,
-    intervention_id: problemId,
+    intervention_id: interventionId,
     formula,
     schedule,
     schedule_at: scheduleAt,
@@ -83,7 +83,7 @@ function InterventionListItem({
               <StyledRow align="center" justify="between">
                 <StyledLink
                   data-cy={`enter-intervention-${index}`}
-                  to={`/interventions/${problemId}/sessions/${id}/edit`}
+                  to={`/interventions/${interventionId}/sessions/${id}/edit`}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
                 >

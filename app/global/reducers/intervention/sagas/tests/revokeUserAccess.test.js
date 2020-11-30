@@ -20,7 +20,7 @@ import { revokeUserAccessSaga } from '../index';
 import { revokeUserAccess } from '../revokeUserAccess';
 
 describe('revokeUserAccess saga', () => {
-  const payload = { problemId: '0', userId: '0' };
+  const payload = { interventionId: '0', userId: '0' };
 
   it('Check revokeUserAccess generator success connection', () =>
     expectSaga(revokeUserAccess, { payload })

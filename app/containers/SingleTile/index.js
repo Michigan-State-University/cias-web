@@ -74,7 +74,7 @@ const SingleTile = ({
   const handleCsvRequest = () => sendCsv(id);
 
   const handleClone = () =>
-    copyProblem({ problemId: id, withoutRedirect: true });
+    copyProblem({ interventionId: id, withoutRedirect: true });
 
   const options = [
     {
@@ -112,7 +112,7 @@ const SingleTile = ({
   };
 
   const copyProblemToResearchers = users =>
-    copyProblem({ problemId: id, users });
+    copyProblem({ interventionId: id, users });
 
   return (
     <>

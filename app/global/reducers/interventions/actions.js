@@ -23,9 +23,9 @@ export const copyProblemRequest = payload =>
 export const copyProblemSuccess = problem =>
   actionBuilder(COPY_PROBLEM_SUCCESS, { problem });
 
-export const archiveProblemRequest = problemId =>
-  actionBuilder(ARCHIVE_PROBLEM_REQUEST, { problemId });
-export const archiveProblemSuccess = problemId =>
-  actionBuilder(ARCHIVE_PROBLEM_SUCCESS, { problemId });
-export const archiveProblemFailure = problemId =>
-  actionBuilder(ARCHIVE_PROBLEM_ERROR, { problemId });
+export const archiveProblemRequest = interventionId =>
+  actionBuilder(ARCHIVE_PROBLEM_REQUEST, { interventionId });
+export const archiveProblemSuccess = interventionId =>
+  actionBuilder(ARCHIVE_PROBLEM_SUCCESS, { interventionId });
+export const archiveProblemFailure = interventionId =>
+  actionBuilder(ARCHIVE_PROBLEM_ERROR, { interventionId });

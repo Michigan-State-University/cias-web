@@ -57,7 +57,7 @@ const InterventionNavbar = ({
   problemStatus,
   match: { params },
 }) => {
-  const { problemId, sessionId } = params;
+  const { interventionId, sessionId } = params;
 
   useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
   const [tabActive, setTabActive] = useState(
@@ -76,7 +76,10 @@ const InterventionNavbar = ({
   return (
     <Row align="center" justify="between" width="100%" mr={35}>
       <Row align="center">
-        <ActionIcon to={`/interventions/${problemId}`} iconSrc={backButton} />
+        <ActionIcon
+          to={`/interventions/${interventionId}`}
+          iconSrc={backButton}
+        />
         <StyledInput
           disabled={!editingPossible}
           px={12}
@@ -102,7 +105,7 @@ const InterventionNavbar = ({
         <div
           renderAsLink={
             <StyledLink
-              to={`/interventions/${problemId}/sessions/${sessionId}/edit`}
+              to={`/interventions/${interventionId}/sessions/${sessionId}/edit`}
             >
               {formatMessage(messages.content)}
             </StyledLink>
@@ -111,7 +114,7 @@ const InterventionNavbar = ({
         <div
           renderAsLink={
             <StyledLink
-              to={`/interventions/${problemId}/sessions/${sessionId}/settings`}
+              to={`/interventions/${interventionId}/sessions/${sessionId}/settings`}
             >
               {formatMessage(messages.settings)}
             </StyledLink>
@@ -138,7 +141,7 @@ const InterventionNavbar = ({
           )}
         </SaveInfoContainer>
         <PreviewButton
-          to={`/interventions/${problemId}/sessions/${sessionId}/preview/${selectedQuestion}`}
+          to={`/interventions/${interventionId}/sessions/${sessionId}/preview/${selectedQuestion}`}
           previewDisabled={previewDisabled}
           text={formatMessage(messages.previewCurrent)}
           target="_blank"
