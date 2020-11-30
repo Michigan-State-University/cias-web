@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Column-sc-1n6divy-0 ivqkwT"
+  >
+    <div
+      class="Row-x1o3ru-0 gymcGF"
+    >
+      <div
+        class="Row-x1o3ru-0 fdTqjP"
+      >
+        <p
+          class="Text-sc-2lza2m-0 jfzQxX"
+        >
+          If
+        </p>
+        <div
+          class="Box-sc-14m3exe-0 dTAoNW"
+          data-cy="case-select"
+          data-testid="select"
+        >
+          <div
+            class=" css-2b097c-container"
+          >
+            <div
+              class=" css-1isrrs2-control"
+            >
+              <div
+                class=" css-g1d714-ValueContainer"
+              >
+                <div
+                  class=" css-1uccc91-singleValue"
+                >
+                  =
+                </div>
+                <div
+                  class="css-b8ldur-Input"
+                >
+                  <div
+                    class=""
+                    style="display: inline-block;"
+                  >
+                    <input
+                      aria-autocomplete="list"
+                      autocapitalize="none"
+                      autocomplete="off"
+                      autocorrect="off"
+                      id="react-select-3-input"
+                      spellcheck="false"
+                      style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                      tabindex="0"
+                      type="text"
+                      value=""
+                    />
+                    <div
+                      style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class=" css-1hb7zxy-IndicatorsContainer"
+              >
+                <div
+                  aria-hidden="true"
+                  class=" css-tlfecz-indicatorContainer"
+                >
+                  <img
+                    class="Img-sc-1kfzr96-0 sgjBb"
+                    src="IMAGE_MOCK"
+                    transform=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="Box-sc-14m3exe-0 lhGbOF"
+        >
+          <input
+            class="Input-sc-19txxuq-0 fEeevM styled__CaseInput-sc-95am5d-0 kYuVIm"
+            data-cy="case-value-input"
+            data-testid="input"
+            placeholder="..."
+            type="text"
+            value=""
+          />
+        </div>
+        <p
+          class="Text-sc-2lza2m-0 fMrnzI"
+        >
+          narrator will say:
+        </p>
+      </div>
+      <img
+        class="Img-sc-1kfzr96-0 hZGtpK"
+        src="IMAGE_MOCK"
+      />
+    </div>
+    <div
+      class="Row-x1o3ru-0 dAhqIQ"
+    >
+      <div
+        class="Box-sc-14m3exe-0 kGWKEv"
+        width="100%"
+      >
+        <div
+          class="Box-sc-14m3exe-0 eIKZTa"
+        >
+          <textarea
+            class="TextArea-sc-1g8793c-0 kklhX"
+            data-cy="text-area"
+            height="auto"
+            placeholder="Enter speech here..."
+            rows="10"
+            width="100%"
+          >
+            1
+          </textarea>
+        </div>
+        <div
+          class="Box-sc-14m3exe-0 dEhBHo"
+        >
+          <img
+            class="Img-sc-1kfzr96-0 gYrhFK"
+            src="IMAGE_MOCK"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

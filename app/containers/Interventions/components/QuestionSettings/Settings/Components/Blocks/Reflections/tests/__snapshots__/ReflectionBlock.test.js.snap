@@ -1,0 +1,257 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Column-sc-1n6divy-0 SJAYV"
+  >
+    <button
+      class="StyledButton-t20ntd-0 cMKJkP"
+      color="primary"
+    >
+      <span>
+        Reset character to previous position
+      </span>
+    </button>
+    <div
+      class="Box-sc-14m3exe-0 bdeubt"
+    >
+      Select Speech Animation
+    </div>
+    <div
+      class="Box-sc-14m3exe-0 bdeubt"
+    >
+      <div
+        class="Box-sc-14m3exe-0 cidtM"
+      >
+        <div
+          class=" css-2b097c-container"
+        >
+          <div
+            class=" css-4iyz22-control"
+          >
+            <div
+              class=" css-g1d714-ValueContainer"
+            >
+              <div
+                class=" css-1uccc91-singleValue"
+              >
+                Rest
+              </div>
+              <div
+                class="css-b8ldur-Input"
+              >
+                <div
+                  class=""
+                  style="display: inline-block;"
+                >
+                  <input
+                    aria-autocomplete="list"
+                    autocapitalize="none"
+                    autocomplete="off"
+                    autocorrect="off"
+                    id="react-select-3-input"
+                    spellcheck="false"
+                    style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                    tabindex="0"
+                    type="text"
+                    value=""
+                  />
+                  <div
+                    style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                  />
+                </div>
+              </div>
+            </div>
+            <div
+              class=" css-1hb7zxy-IndicatorsContainer"
+            >
+              <div
+                aria-hidden="true"
+                class=" css-tlfecz-indicatorContainer"
+              >
+                <img
+                  class="Img-sc-1kfzr96-0 sgjBb"
+                  src="IMAGE_MOCK"
+                  transform=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="Row-x1o3ru-0 bkZUTY"
+    >
+      Use Reflection
+      <label
+        class="styled__SwitchWrapper-sc-1eitgbj-0 bMVOtN"
+      >
+        <input
+          checked=""
+          class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+          data-cy="branching-problem-toggle"
+          data-testid="switch-input"
+          type="checkbox"
+        />
+        <span
+          class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+        />
+      </label>
+    </div>
+    <div
+      class="Row-x1o3ru-0 gDlNGt"
+    >
+      Use Formula
+      <label
+        class="styled__SwitchWrapper-sc-1eitgbj-0 bMVOtN"
+      >
+        <input
+          class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+          data-cy="branching-problem-toggle"
+          data-testid="switch-input"
+          type="checkbox"
+        />
+        <span
+          class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+        />
+      </label>
+    </div>
+    <div
+      class="styled__ArrowDropdownWrapper-wg7nh8-0 bRJBsx"
+      width="100%"
+    >
+      <div
+        class="styled__DropdownContainer-wg7nh8-1 fZydCX"
+      >
+        <div
+          class="Row-x1o3ru-0 bwHvRF"
+          height="100%"
+        >
+          <div
+            class="Box-sc-14m3exe-0 cidtM"
+          >
+            <div
+              class="Box-sc-14m3exe-0 cidtM"
+            >
+              <p
+                class="Text-sc-2lza2m-0 ZELPo"
+                overflow="hidden"
+              >
+                Choose Question
+              </p>
+            </div>
+          </div>
+          <img
+            class="Img-sc-1kfzr96-0 lmhFEd"
+            src="IMAGE_MOCK"
+          />
+        </div>
+      </div>
+      <div
+        class="Box-sc-14m3exe-0 gukcSd"
+        display="none"
+        width="100%"
+      >
+        <div
+          class="Row-x1o3ru-0 dAhqIQ"
+        >
+          <div
+            class="Box-sc-14m3exe-0 ixuKrU"
+            overflow="hidden"
+          >
+            <div
+              class="Column-sc-1n6divy-0 SJAYV"
+              data-testid="question-test-0-select-target-question"
+            >
+              <div
+                class="Box-sc-14m3exe-0 hPyOqo"
+              >
+                <div
+                  class="Column-sc-1n6divy-0 SJAYV"
+                >
+                  <div
+                    class="Row-x1o3ru-0 QAQuZ"
+                    data-testid="question-test-0-select-target-question-el"
+                  >
+                    <img
+                      class="Img-sc-1kfzr96-0 iEjuMy"
+                      src="IMAGE_MOCK"
+                    />
+                    <p
+                      class="Text-sc-2lza2m-0 dYfZux"
+                      color="#9AA1B6"
+                      font-weight=""
+                      overflow="hidden"
+                    >
+                      subtitle-test-0
+                    </p>
+                  </div>
+                  <div
+                    class="Row-x1o3ru-0 kfzuob"
+                    data-testid="question-test-0-select-target-question-el"
+                  >
+                    <img
+                      class="Img-sc-1kfzr96-0 iEjuMy"
+                      src="IMAGE_MOCK"
+                    />
+                    <p
+                      class="Text-sc-2lza2m-0 ZELPo"
+                      color=""
+                      font-weight=""
+                      overflow="hidden"
+                    >
+                      subtitle-test-1
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="Box-sc-14m3exe-0 bdeubt"
+    >
+      <div
+        class="Column-sc-1n6divy-0 SJAYV"
+      >
+        <div
+          class="Box-sc-14m3exe-0 bdeubt"
+        >
+          1
+        </div>
+        <div
+          class="Box-sc-14m3exe-0 kbuZxI"
+        >
+          <div
+            class="Box-sc-14m3exe-0 cPMJok"
+            width="100%"
+          >
+            <textarea
+              class="TextArea-sc-1g8793c-0 kklhX"
+              data-cy="text-area"
+              height="auto"
+              placeholder="Enter speech here..."
+              rows="10"
+              width="100%"
+            >
+              1
+            </textarea>
+          </div>
+          <div
+            class="Box-sc-14m3exe-0 dEhBHo"
+          >
+            <img
+              class="Img-sc-1kfzr96-0 gYrhFK"
+              src="IMAGE_MOCK"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Column-sc-1n6divy-0 SJAYV"
+  >
+    <div
+      class="Row-x1o3ru-0 dSvoas"
+    >
+      Formula
+      <div
+        class="Box-sc-14m3exe-0 lavaAX"
+      >
+        <p
+          class="Text-sc-2lza2m-0 fJREmD"
+          color="#C866EA"
+          font-weight="bold"
+        >
+          Add variable
+        </p>
+      </div>
+    </div>
+    <div
+      class="Box-sc-14m3exe-0 gptOhZ"
+      width="100%"
+    >
+      <textarea
+        class="TextArea-sc-1g8793c-0 kklhX"
+        data-cy="text-area"
+        height="auto"
+        placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
+        rows="5"
+        width="100%"
+      />
+    </div>
+    <div
+      class="Box-sc-14m3exe-0 iSukIT"
+      width="100%"
+    >
+      <div
+        class="Box-sc-14m3exe-0 dsNuUD"
+        display="none"
+        width="auto"
+      >
+        <div
+          class="Row-x1o3ru-0 dAhqIQ"
+        >
+          <div
+            class="Box-sc-14m3exe-0 ketynr"
+          >
+            <div
+              class="Column-sc-1n6divy-0 SJAYV"
+            >
+              <div
+                class="Box-sc-14m3exe-0 cYhKwr"
+              >
+                <div
+                  class="Box-sc-14m3exe-0 gDFvhB"
+                  data-testid="no-content"
+                  display="flex"
+                  height="100%"
+                  width="100%"
+                >
+                  <div
+                    class="Column-sc-1n6divy-0 kCnOyy"
+                  >
+                    <img
+                      alt="No content"
+                      class="Img-sc-1kfzr96-0 lmhFEd"
+                      src="IMAGE_MOCK"
+                    />
+                    <h2
+                      class="H2-egphza-0 iPVWCm"
+                      color="#B0BAC9"
+                    >
+                      No variables defined yet
+                    </h2>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="Box-sc-14m3exe-0 styled__DashedBox-sc-1h264rd-0 gnAZuH dfODJp"
+    >
+      + Add case
+    </div>
+  </div>
+</div>
+`;

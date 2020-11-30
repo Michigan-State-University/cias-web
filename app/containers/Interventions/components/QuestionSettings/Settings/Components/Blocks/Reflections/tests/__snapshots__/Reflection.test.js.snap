@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Reflection /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Column-sc-1n6divy-0 SJAYV"
+  >
+    <div
+      class="Box-sc-14m3exe-0 bdeubt"
+    >
+      1
+    </div>
+    <div
+      class="Box-sc-14m3exe-0 kbuZxI"
+    >
+      <div
+        class="Box-sc-14m3exe-0 cPMJok"
+        width="100%"
+      >
+        <textarea
+          class="TextArea-sc-1g8793c-0 kklhX"
+          data-cy="text-area"
+          height="auto"
+          placeholder="Enter speech here..."
+          rows="10"
+          width="100%"
+        >
+          1
+        </textarea>
+      </div>
+      <div
+        class="Box-sc-14m3exe-0 dEhBHo"
+      >
+        <img
+          class="Img-sc-1kfzr96-0 gYrhFK"
+          src="IMAGE_MOCK"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,4 +1,12 @@
 import { ids } from 'containers/SettingsPanel/utils';
+import { singleQuestion } from 'models/Intervention/QuestionTypes';
+
+export const createQuestion = (id = 0, type = singleQuestion.id) => ({
+  id: `question-test-${id}`,
+  type,
+  subtitle: `subtitle-test-${id}`,
+  question_group_id: `group-test-${id}`,
+});
 
 export const createIntervention = (id = 0) => ({
   id: `intervention-test-${id}`,
