@@ -6,7 +6,7 @@ import { defaultMapper } from 'utils/mapResponseObjects';
 import { FETCH_PROBLEM_REQUEST } from '../constants';
 import { fetchProblemSuccess, fetchProblemError } from '../actions';
 
-export function* fetchProblem({ payload: { id } }) {
+export function* fetchIntervention({ payload: { id } }) {
   const problemRequestURL = `v1/interventions/${id}`;
   const interventionsRequestURL = `v1/interventions/${id}/sessions`;
   try {
@@ -22,6 +22,6 @@ export function* fetchProblem({ payload: { id } }) {
   }
 }
 
-export default function* fetchProblemSaga() {
-  yield takeLatest(FETCH_PROBLEM_REQUEST, fetchProblem);
+export default function* fetchInterventionSaga() {
+  yield takeLatest(FETCH_PROBLEM_REQUEST, fetchIntervention);
 }

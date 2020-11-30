@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
 import {
-  fetchProblemSaga,
+  fetchInterventionSaga,
   changeAccessSettingSaga,
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
@@ -8,7 +8,7 @@ import {
 } from 'global/reducers/intervention';
 
 function* problemSettingPageSaga() {
-  yield all([fetchProblemSaga(), changeAccessSettingSaga()]);
+  yield all([fetchInterventionSaga(), changeAccessSettingSaga()]);
 }
 
 function* accessGiverContainerSaga() {

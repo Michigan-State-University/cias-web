@@ -10,12 +10,14 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import globalMessages from 'global/i18n/globalMessages';
 import { apiProblemResponse } from 'utils/apiResponseCreators';
 
+import archiveInterventionSaga, {
+  archiveIntervention,
+} from 'global/reducers/interventions/sagas/archiveIntervention';
 import { archiveProblemSuccess, archiveProblemFailure } from '../../actions';
 import {
   ARCHIVE_PROBLEM_ERROR,
   ARCHIVE_PROBLEM_REQUEST,
 } from '../../constants';
-import archiveProblemSaga, { archiveProblem } from '../archiveProblem';
 
 describe('archiveProblem saga', () => {
   const payload = {
@@ -25,14 +27,14 @@ describe('archiveProblem saga', () => {
   it('Check archiveProblem generator success connection', () => {
     const apiResponse = apiProblemResponse();
 
-    return expectSaga(archiveProblem, { payload })
+    return expectSaga(archiveIntervention, { payload })
       .provide([[matchers.call.fn(axios.patch), { data: apiResponse }]])
       .put(archiveProblemSuccess(defaultMapper(apiResponse.data)))
       .run();
   });
   it('Check archiveProblem error connection', () => {
     const error = new Error('test');
-    return expectSaga(archiveProblem, { payload })
+    return expectSaga(archiveIntervention, { payload })
       .provide([[matchers.call.fn(axios.patch), throwError(error)]])
       .put(archiveProblemFailure(payload.interventionId))
       .call(toast.error, formatMessage(globalMessages.archiveProblemError), {
@@ -42,10 +44,10 @@ describe('archiveProblem saga', () => {
   });
 
   it('Check archiveProblem connection', () => {
-    const sagaFunction = archiveProblemSaga();
+    const sagaFunction = archiveInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(ARCHIVE_PROBLEM_REQUEST, archiveProblem),
+      takeLatest(ARCHIVE_PROBLEM_REQUEST, archiveIntervention),
     );
   });
 });

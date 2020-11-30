@@ -9,7 +9,7 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import { sendProblemCsvSuccess, sendProblemCsvError } from '../actions';
 import messages from '../messages';
 
-export function* sendProblemCsv({ payload: { id } }) {
+export function* sendInterventionCsv({ payload: { id } }) {
   const requestURL = `v1/interventions/${id}/answers.csv`;
   try {
     const {
@@ -26,6 +26,6 @@ export function* sendProblemCsv({ payload: { id } }) {
   }
 }
 
-export default function* sendProblemCsvSaga() {
-  yield takeLatest(SEND_PROBLEM_CSV_REQUEST, sendProblemCsv);
+export default function* sendInterventionCsvSaga() {
+  yield takeLatest(SEND_PROBLEM_CSV_REQUEST, sendInterventionCsv);
 }

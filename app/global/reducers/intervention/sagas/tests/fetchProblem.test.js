@@ -12,10 +12,12 @@ import {
   apiInterventionResponse,
 } from 'utils/apiResponseCreators';
 
+import fetchInterventionSaga, {
+  fetchIntervention,
+} from 'global/reducers/intervention/sagas/fetchIntervention';
 import { fetchProblemSuccess, fetchProblemError } from '../../actions';
 
 import { FETCH_PROBLEM_REQUEST } from '../../constants';
-import fetchProblemSaga, { fetchProblem } from '../fetchProblem';
 
 describe('fetchProblem saga', () => {
   const payload = { id: 'test-id' };
@@ -29,7 +31,7 @@ describe('fetchProblem saga', () => {
     const interventions = cloneDeep(interventionApiResponse.data);
     const mappedInterventions = interventions.map(defaultMapper);
     problem.interventions = orderBy(mappedInterventions, 'position');
-    return expectSaga(fetchProblem, { payload })
+    return expectSaga(fetchIntervention, { payload })
       .provide([
         [
           matchers.call(axios.get, `v1/interventions/${payload.id}`),
@@ -45,7 +47,7 @@ describe('fetchProblem saga', () => {
   });
   it('Check fetchProblem error connection', () => {
     const error = new Error('test');
-    return expectSaga(fetchProblem, { payload })
+    return expectSaga(fetchIntervention, { payload })
       .provide([
         [
           matchers.call(axios.get, `v1/interventions/${payload.id}`),
@@ -64,10 +66,10 @@ describe('fetchProblem saga', () => {
   });
 
   it('Check fetchProblem connection', () => {
-    const sagaFunction = fetchProblemSaga();
+    const sagaFunction = fetchInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(FETCH_PROBLEM_REQUEST, fetchProblem),
+      takeLatest(FETCH_PROBLEM_REQUEST, fetchIntervention),
     );
   });
 });

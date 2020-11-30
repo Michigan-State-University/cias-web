@@ -33,7 +33,7 @@ import { makeSelectAudioInstance } from 'global/reducers/globalState';
 
 import {
   fetchProblemRequest,
-  fetchProblemSaga,
+  fetchInterventionSaga,
   makeSelectProblemStatus,
   problemReducer,
 } from 'global/reducers/intervention';
@@ -140,7 +140,7 @@ export function AnswerInterventionPage({
   fetchProblem,
 }) {
   useInjectReducer({ key: 'problem', reducer: problemReducer });
-  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
+  useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
   useInjectReducer({ key: 'answerInterventionPage', reducer });
   useInjectSaga({ key: 'answerInterventionPage', saga });
   const { sessionId, index, interventionId } = params;

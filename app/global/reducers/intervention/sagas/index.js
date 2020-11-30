@@ -5,10 +5,10 @@ import fetchSessionEmailsSaga from 'global/reducers/intervention/sagas/fetchSess
 import resendSessionInviteSaga from 'global/reducers/intervention/sagas/resendSessionInvite';
 import sendSessionInviteSaga from 'global/reducers/intervention/sagas/sendSessionInvite';
 import updateSessionSettingsSaga from 'global/reducers/intervention/sagas/updateSessionSettings';
-import sendProblemCsvSaga from './sendProblemCsv';
-import createProblemSaga from './createProblem';
-import editProblemSaga from './editProblem';
-import fetchProblemSaga from './fetchProblem';
+import createInterventionSaga from 'global/reducers/intervention/sagas/createIntervention';
+import sendInterventionCsvSaga from 'global/reducers/intervention/sagas/sendInterventionCsv';
+import editInterventionSaga from 'global/reducers/intervention/sagas/editIntervention';
+import fetchInterventionSaga from 'global/reducers/intervention/sagas/fetchIntervention';
 import reorderSessionsSaga from './reorderSessions';
 import changeAccessSettingSaga from './changeAccessSetting';
 import giveUserAccessSaga from './giveUserAccess';
@@ -16,10 +16,10 @@ import fetchUsersWithAccessSaga from './fetchUsersWithAccess';
 import revokeUserAccessSaga from './revokeUserAccess';
 
 export {
-  createProblemSaga,
-  editProblemSaga,
-  fetchProblemSaga,
-  sendProblemCsvSaga,
+  createInterventionSaga,
+  editInterventionSaga,
+  fetchInterventionSaga,
+  sendInterventionCsvSaga,
   copySessionSaga,
   updateSessionSettingsSaga,
   reorderSessionsSaga,
@@ -35,10 +35,10 @@ export {
 
 export default function* allProblemSagas() {
   yield all([
-    createProblemSaga(),
-    editProblemSaga(),
-    fetchProblemSaga(),
-    sendProblemCsvSaga(),
+    createInterventionSaga(),
+    editInterventionSaga(),
+    fetchInterventionSaga(),
+    sendInterventionCsvSaga(),
     copySessionSaga(),
     updateSessionSettingsSaga(),
     reorderSessionsSaga(),

@@ -10,7 +10,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import { createProblemSuccess } from '../actions';
 import { CREATE_PROBLEM_REQUEST, CREATE_PROBLEM_ERROR } from '../constants';
 
-export function* createProblem() {
+export function* createIntervention() {
   const requestURL = `v1/interventions`;
 
   try {
@@ -27,6 +27,6 @@ export function* createProblem() {
     });
   }
 }
-export default function* createProblemSaga() {
-  yield takeLatest(CREATE_PROBLEM_REQUEST, createProblem);
+export default function* createInterventionSaga() {
+  yield takeLatest(CREATE_PROBLEM_REQUEST, createIntervention);
 }

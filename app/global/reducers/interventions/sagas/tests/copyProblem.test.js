@@ -12,13 +12,15 @@ import { apiProblemResponse } from 'utils/apiResponseCreators';
 import { createUser } from 'utils/reducerCreators';
 import messages from 'global/reducers/interventions/messages';
 
+import copyInterventionSaga, {
+  copyIntervention,
+} from 'global/reducers/interventions/sagas/copyIntervention';
 import { copyProblemSuccess } from '../../actions';
 import {
   COPY_PROBLEM_SUCCESS,
   COPY_PROBLEM_ERROR,
   COPY_PROBLEM_REQUEST,
 } from '../../constants';
-import copyProblemSaga, { copyProblem } from '../copyProblem';
 
 describe('copyProblem saga', () => {
   const createPayload = withParams => ({
@@ -31,7 +33,7 @@ describe('copyProblem saga', () => {
     const apiResponse = apiProblemResponse();
     const payload = createPayload(true);
 
-    return expectSaga(copyProblem, { payload })
+    return expectSaga(copyIntervention, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
       .call(toast.success, formatMessage(messages.sendSuccess), {
         toastId: COPY_PROBLEM_SUCCESS,
@@ -43,7 +45,7 @@ describe('copyProblem saga', () => {
     const apiResponse = apiProblemResponse();
     const payload = createPayload(false);
 
-    return expectSaga(copyProblem, { payload })
+    return expectSaga(copyIntervention, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
       .put(copyProblemSuccess(defaultMapper(apiResponse.data)))
       .put(push('/'))
@@ -52,7 +54,7 @@ describe('copyProblem saga', () => {
   it('Check copyProblem error connection', () => {
     const error = new Error('test');
     const payload = createPayload(true);
-    return expectSaga(copyProblem, { payload })
+    return expectSaga(copyIntervention, { payload })
       .provide([[matchers.call.fn(axios.post), throwError(error)]])
       .call(toast.error, formatMessage(messages.copyError), {
         toastId: COPY_PROBLEM_ERROR,
@@ -61,10 +63,10 @@ describe('copyProblem saga', () => {
   });
 
   it('Check copyProblem connection', () => {
-    const sagaFunction = copyProblemSaga();
+    const sagaFunction = copyInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(COPY_PROBLEM_REQUEST, copyProblem),
+      takeLatest(COPY_PROBLEM_REQUEST, copyIntervention),
     );
   });
 });

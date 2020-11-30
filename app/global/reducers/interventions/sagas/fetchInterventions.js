@@ -9,7 +9,7 @@ import { FETCH_PROBLEMS_REQUEST } from '../constants';
 
 import messages from '../messages';
 
-export function* fetchProblems() {
+export function* fetchInterventions() {
   const requestURL = `v1/interventions`;
 
   try {
@@ -26,6 +26,6 @@ export function* fetchProblems() {
     );
   }
 }
-export default function* fetchProblemsSaga() {
-  yield takeLatest(FETCH_PROBLEMS_REQUEST, fetchProblems);
+export default function* fetchInterventionsSaga() {
+  yield takeLatest(FETCH_PROBLEMS_REQUEST, fetchInterventions);
 }

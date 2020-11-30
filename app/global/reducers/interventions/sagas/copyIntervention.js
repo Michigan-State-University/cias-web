@@ -13,7 +13,7 @@ import {
   COPY_PROBLEM_SUCCESS,
 } from '../constants';
 
-export function* copyProblem({
+export function* copyIntervention({
   payload: { interventionId, users, withoutRedirect },
 }) {
   const requestURL = `v1/interventions/${interventionId}/clone`;
@@ -38,6 +38,6 @@ export function* copyProblem({
   }
 }
 
-export default function* copyProblemSaga() {
-  yield takeLatest(COPY_PROBLEM_REQUEST, copyProblem);
+export default function* copyInterventionSaga() {
+  yield takeLatest(COPY_PROBLEM_REQUEST, copyIntervention);
 }

@@ -10,7 +10,7 @@ import { makeSelectProblem } from '../selectors';
 import { editProblemSuccess } from '../actions';
 import { EDIT_PROBLEM_REQUEST, EDIT_PROBLEM_ERROR } from '../constants';
 
-export function* editProblem() {
+export function* editIntervention() {
   const intervention = yield select(makeSelectProblem());
   const requestURL = `v1/interventions/${intervention.id}`;
 
@@ -26,6 +26,6 @@ export function* editProblem() {
     });
   }
 }
-export default function* editProblemSaga() {
-  yield takeLatest(EDIT_PROBLEM_REQUEST, editProblem);
+export default function* editInterventionSaga() {
+  yield takeLatest(EDIT_PROBLEM_REQUEST, editIntervention);
 }

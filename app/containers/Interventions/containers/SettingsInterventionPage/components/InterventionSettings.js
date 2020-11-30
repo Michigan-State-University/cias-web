@@ -16,7 +16,7 @@ import {
 } from 'global/reducers/session';
 import { questionsReducer } from 'global/reducers/questions';
 import {
-  fetchProblemSaga,
+  fetchInterventionSaga,
   makeSelectProblemStatus,
   problemReducer,
 } from 'global/reducers/intervention';
@@ -69,8 +69,8 @@ const InterventionSettings = ({
   };
   useInjectReducer({ key: 'problem', reducer: problemReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
-  useInjectSaga({ key: 'editIntervention', saga: editSessionSaga });
-  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
+  useInjectSaga({ key: 'editSession', saga: editSessionSaga });
+  useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
 
   const isNarratorActive = some(narratorSettings, setting => setting);
 

@@ -30,16 +30,16 @@ export {
   makeSelectCurrentInterventionIndex,
 } from './selectors';
 export {
-  createProblemSaga,
-  editProblemSaga,
-  fetchProblemSaga,
+  createInterventionSaga,
+  editInterventionSaga,
+  fetchInterventionSaga,
   copySessionSaga,
   reorderSessionsSaga,
   changeAccessSettingSaga,
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
-  sendProblemCsvSaga,
+  sendInterventionCsvSaga,
   sendSessionInviteSaga,
   createSessionSaga,
 } from './sagas';

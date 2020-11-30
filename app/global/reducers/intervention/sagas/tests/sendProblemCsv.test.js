@@ -8,18 +8,18 @@ import { expectSaga } from 'redux-saga-test-plan';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import { sendInterventionCsv } from 'global/reducers/intervention/sagas/sendInterventionCsv';
 import { sendProblemCsvSuccess, sendProblemCsvError } from '../../actions';
 import { SEND_PROBLEM_CSV_REQUEST } from '../../constants';
 import messages from '../../messages';
-import { sendProblemCsvSaga } from '../index';
-import { sendProblemCsv } from '../sendProblemCsv';
+import { sendInterventionCsvSaga } from '../index';
 
 describe('sendProblemCsv saga', () => {
   const payload = { id: '0' };
 
   it('Check sendProblemCsv generator success connection', () => {
     const apiResponse = { message: 'test' };
-    return expectSaga(sendProblemCsv, { payload })
+    return expectSaga(sendInterventionCsv, { payload })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(sendProblemCsvSuccess(apiResponse.message))
       .call(toast.info, apiResponse.message)
@@ -28,7 +28,7 @@ describe('sendProblemCsv saga', () => {
 
   it('Check sendProblemCsv error connection', () => {
     const error = new Error('test');
-    return expectSaga(sendProblemCsv, { payload })
+    return expectSaga(sendInterventionCsv, { payload })
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
       .put(sendProblemCsvError(error))
       .call(
@@ -39,10 +39,10 @@ describe('sendProblemCsv saga', () => {
   });
 
   it('Check sendProblemCsv connection', () => {
-    const sagaFunction = sendProblemCsvSaga();
+    const sagaFunction = sendInterventionCsvSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(SEND_PROBLEM_CSV_REQUEST, sendProblemCsv),
+      takeLatest(SEND_PROBLEM_CSV_REQUEST, sendInterventionCsv),
     );
   });
 });

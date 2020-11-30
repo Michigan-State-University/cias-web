@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
 import {
   copySessionSaga,
-  editProblemSaga,
-  fetchProblemSaga,
+  editInterventionSaga,
+  fetchInterventionSaga,
   updateSessionSettingsSaga,
   reorderSessionsSaga,
   createSessionSaga,
@@ -14,8 +14,8 @@ import {
 export default function* problemDetailsPageSagas() {
   yield all([
     createSessionSaga(),
-    fetchProblemSaga(),
-    editProblemSaga(),
+    fetchInterventionSaga(),
+    editInterventionSaga(),
     copySessionSaga(),
     updateSessionSettingsSaga(),
     reorderSessionsSaga(),

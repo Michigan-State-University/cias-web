@@ -11,7 +11,7 @@ export {
 } from './selectors';
 
 export {
-  fetchProblemsSaga,
-  copyProblemSaga,
-  archiveProblemSaga,
+  fetchInterventionsSaga,
+  copyInterventionSaga,
+  archiveInterventionSaga,
 } from './sagas';

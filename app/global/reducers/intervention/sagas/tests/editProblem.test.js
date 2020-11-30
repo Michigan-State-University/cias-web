@@ -11,9 +11,11 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import { apiProblemResponse } from 'utils/apiResponseCreators';
 import globalMessages from 'global/i18n/globalMessages';
 
+import editInterventionSaga, {
+  editIntervention,
+} from 'global/reducers/intervention/sagas/editIntervention';
 import { editProblemSuccess } from '../../actions';
 import { initialState } from '../../reducer';
-import editProblemSaga, { editProblem } from '../editProblem';
 import { EDIT_PROBLEM_ERROR, EDIT_PROBLEM_REQUEST } from '../../constants';
 
 describe('editProblem saga', () => {
@@ -26,7 +28,7 @@ describe('editProblem saga', () => {
     const apiResponse = apiProblemResponse();
     apiResponse.data.attributes.name = mockProblem.name;
 
-    return expectSaga(editProblem)
+    return expectSaga(editIntervention)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.patch), { data: apiResponse }]])
       .put(
@@ -39,7 +41,7 @@ describe('editProblem saga', () => {
   });
   it('Check editProblem error connection', () => {
     const error = new Error('test');
-    return expectSaga(editProblem)
+    return expectSaga(editIntervention)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.patch), throwError(error)]])
       .call(toast.error, formatMessage(globalMessages.editProblemError), {
@@ -49,10 +51,10 @@ describe('editProblem saga', () => {
   });
 
   it('Check editProblem connection', () => {
-    const sagaFunction = editProblemSaga();
+    const sagaFunction = editInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(EDIT_PROBLEM_REQUEST, editProblem),
+      takeLatest(EDIT_PROBLEM_REQUEST, editIntervention),
     );
   });
 });

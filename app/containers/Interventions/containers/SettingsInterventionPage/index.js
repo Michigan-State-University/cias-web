@@ -28,7 +28,7 @@ const SettingsInterventionPage = ({
   intl: { formatMessage },
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
-  useInjectSaga({ key: 'getIntervention', saga: getSessionSaga });
+  useInjectSaga({ key: 'getSession', saga: getSessionSaga });
 
   useEffect(() => {
     getIntervention({

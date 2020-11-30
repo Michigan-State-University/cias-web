@@ -43,7 +43,7 @@ export function ParticipantDashboard({
     key: 'interventions',
     reducer: interventionsReducer,
   });
-  useInjectSaga({ key: 'fetchInterventions', saga: fetchSessionsSaga });
+  useInjectSaga({ key: 'fetchSessions', saga: fetchSessionsSaga });
 
   useEffect(() => {
     fetchInterventions(Roles.participant);

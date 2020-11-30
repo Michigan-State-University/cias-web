@@ -25,14 +25,14 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import {
   createProblemRequest,
-  createProblemSaga,
+  createInterventionSaga,
   makeSelectProblemLoader,
 } from 'global/reducers/intervention';
 import {
   fetchProblemsRequest,
   makeSelectProblemsState,
   problemsReducer,
-  fetchProblemsSaga,
+  fetchInterventionsSaga,
 } from 'global/reducers/interventions';
 
 import StatusFilter from './StatusFilter';
@@ -47,8 +47,8 @@ export function ProblemPage({
   createProblemLoading,
 }) {
   useInjectReducer({ key: 'problems', reducer: problemsReducer });
-  useInjectSaga({ key: 'fetchProblems', saga: fetchProblemsSaga });
-  useInjectSaga({ key: 'createProblem', saga: createProblemSaga });
+  useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
+  useInjectSaga({ key: 'createIntervention', saga: createInterventionSaga });
 
   const [valueFilteredProblems, filterValue, setFilterValue] = useFilter(
     problems,

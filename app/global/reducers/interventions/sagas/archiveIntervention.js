@@ -10,7 +10,7 @@ import { toArchive } from 'models/Status/StatusTypes';
 import { archiveProblemFailure, archiveProblemSuccess } from '../actions';
 import { ARCHIVE_PROBLEM_REQUEST, ARCHIVE_PROBLEM_ERROR } from '../constants';
 
-export function* archiveProblem({ payload: { interventionId } }) {
+export function* archiveIntervention({ payload: { interventionId } }) {
   const requestURL = `v1/interventions/${interventionId}`;
   try {
     const {
@@ -28,6 +28,6 @@ export function* archiveProblem({ payload: { interventionId } }) {
     });
   }
 }
-export default function* archiveProblemSaga() {
-  yield takeLatest(ARCHIVE_PROBLEM_REQUEST, archiveProblem);
+export default function* archiveInterventionSaga() {
+  yield takeLatest(ARCHIVE_PROBLEM_REQUEST, archiveIntervention);
 }

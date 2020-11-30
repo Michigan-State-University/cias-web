@@ -84,7 +84,8 @@ describe('userList reducer', () => {
 
     const expectedState = cloneDeep(mockStateWithProblems);
     expectedState.problems[index].status = archived;
-    expectedState.cache.archiveProblem = mockStateWithProblems.problems[index];
+    expectedState.cache.archiveIntervention =
+      mockStateWithProblems.problems[index];
 
     expect(problemsReducer(mockStateWithProblems, action)).toEqual(
       expectedState,
@@ -95,7 +96,7 @@ describe('userList reducer', () => {
     const action = actionBuilder(ARCHIVE_PROBLEM_SUCCESS, {});
 
     const expectedState = cloneDeep(mockStateWithProblems);
-    expectedState.cache.archiveProblem = null;
+    expectedState.cache.archiveIntervention = null;
 
     expect(problemsReducer(mockStateWithProblems, action)).toEqual(
       expectedState,
@@ -112,7 +113,7 @@ describe('userList reducer', () => {
 
     const expectedState = cloneDeep(mockStateWithProblems);
     expectedState.problems[index] = mockStateWithProblems.cache.archiveProblem;
-    expectedState.cache.archiveProblem = null;
+    expectedState.cache.archiveIntervention = null;
 
     expect(problemsReducer(mockStateWithProblems, action)).toEqual(
       expectedState,

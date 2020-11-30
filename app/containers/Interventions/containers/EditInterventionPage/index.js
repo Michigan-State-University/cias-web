@@ -68,7 +68,7 @@ import {
 } from 'global/reducers/questionGroups';
 import {
   problemReducer,
-  fetchProblemSaga,
+  fetchInterventionSaga,
   makeSelectProblemStatus,
 } from 'global/reducers/intervention';
 
@@ -125,8 +125,8 @@ function EditInterventionPage({
     key: 'getQuestionGroupsSaga',
     saga: getQuestionGroupsSaga,
   });
-  useInjectSaga({ key: 'getIntervention', saga: getSessionSaga });
-  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
+  useInjectSaga({ key: 'getSession', saga: getSessionSaga });
+  useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
   useInjectSaga({
     key: 'reorderQuestionGroups',
     saga: reorderQuestionGroupsSaga,

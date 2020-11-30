@@ -48,17 +48,17 @@ export const problemsReducer = (state = initialState, action) =>
           ({ id }) => id === action.payload.interventionId,
         );
         draft.problems[problemIndex].status = archived;
-        draft.cache.archiveProblem = state.problems[problemIndex];
+        draft.cache.archiveIntervention = state.problems[problemIndex];
         break;
       case ARCHIVE_PROBLEM_SUCCESS:
-        draft.cache.archiveProblem = null;
+        draft.cache.archiveIntervention = null;
         break;
       case ARCHIVE_PROBLEM_ERROR:
         problemIndex = draft.problems.findIndex(
           ({ id }) => id === action.payload.interventionId,
         );
         draft.problems[problemIndex] = state.cache.archiveProblem;
-        draft.cache.archiveProblem = null;
+        draft.cache.archiveIntervention = null;
     }
   });
 

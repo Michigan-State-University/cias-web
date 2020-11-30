@@ -59,7 +59,7 @@ const InterventionNavbar = ({
 }) => {
   const { interventionId, sessionId } = params;
 
-  useInjectSaga({ key: 'editIntervention', saga: editSessionSaga });
+  useInjectSaga({ key: 'editSession', saga: editSessionSaga });
   const [tabActive, setTabActive] = useState(
     getActiveTab(pathname, formatMessage),
   );

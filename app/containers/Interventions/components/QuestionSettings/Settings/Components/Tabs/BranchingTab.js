@@ -23,7 +23,7 @@ import {
 } from 'models/Intervention/utils';
 import {
   problemReducer,
-  fetchProblemSaga,
+  fetchInterventionSaga,
   makeSelectProblem,
   fetchProblemRequest,
 } from 'global/reducers/intervention';
@@ -56,7 +56,7 @@ const BranchingTab = ({
     key: 'problem',
     reducer: problemReducer,
   });
-  useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
+  useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
 
   useEffect(() => {
     fetchProblem(interventionId);
