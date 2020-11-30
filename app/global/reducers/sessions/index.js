@@ -1,8 +1,8 @@
 export { fetchInterventionsRequest } from './actions';
 export { interventionsReducer } from './reducer';
 export {
-  makeSelectInterventionsState,
-  makeSelectInterventions,
-  makeSelectInterventionsLoader,
+  makeSelectSessionsState,
+  makeSelectSessions,
+  makeSelectSessionsLoader,
 } from './selectors';
 export { fetchSessionsSaga } from './sagas';

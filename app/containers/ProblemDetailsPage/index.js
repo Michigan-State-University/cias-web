@@ -34,7 +34,7 @@ import {
   reorderInterventionList,
   copyInterventionRequest,
   createInterventionRequest,
-  makeSelectCurrentInterventionIndex,
+  makeSelectCurrentSessionIndex,
   changeCurrentIntervention,
   fetchInterventionEmailsRequest,
 } from 'global/reducers/intervention';
@@ -386,7 +386,7 @@ ProblemDetailsPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   problemState: makeSelectProblemState(),
-  interventionIndex: makeSelectCurrentInterventionIndex(),
+  interventionIndex: makeSelectCurrentSessionIndex(),
 });
 
 const mapDispatchToProps = {

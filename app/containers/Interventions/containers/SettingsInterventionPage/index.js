@@ -13,7 +13,7 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import {
   getInterventionRequest,
   interventionReducer,
-  makeSelectIntervention,
+  makeSelectSession,
   getSessionSaga,
 } from 'global/reducers/session';
 
@@ -82,7 +82,7 @@ SettingsInterventionPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectIntervention(),
+  intervention: makeSelectSession(),
 });
 
 const mapDispatchToProps = {

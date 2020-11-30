@@ -8,9 +8,9 @@ export {
 } from './actions';
 export { interventionReducer } from './reducer';
 export {
-  makeSelectIntervention,
-  makeSelectCacheIntervention,
-  makeSelectInterventionLoaders,
-  makeSelectInterventionEditLoader,
+  makeSelectSession,
+  makeSelectCacheSession,
+  makeSelectSessionLoaders,
+  makeSelectSessionEditLoader,
 } from './selectors';
 export { editSessionSaga, getSessionSaga } from './sagas';

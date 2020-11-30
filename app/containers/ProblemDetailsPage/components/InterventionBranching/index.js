@@ -25,14 +25,14 @@ import {
   removeFormulaCase,
   updateFormula,
   updateFormulaCase,
-  makeSelectCurrentInterventionIndex,
+  makeSelectCurrentSessionIndex,
   changeCurrentIntervention,
 } from 'global/reducers/intervention';
 import { getQuestionsRequest } from 'global/reducers/questions';
 import { injectReducer } from 'redux-injectors';
 import {
   questionGroupsReducer,
-  makeSelectQuestionGroupsInterventionId,
+  makeSelectQuestionGroupsSessionId,
 } from 'global/reducers/questionGroups';
 import messages from './messages';
 
@@ -149,8 +149,8 @@ InterventionBranching.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   problem: makeSelectProblem(),
-  interventionIndex: makeSelectCurrentInterventionIndex(),
-  activeInterventionId: makeSelectQuestionGroupsInterventionId(),
+  interventionIndex: makeSelectCurrentSessionIndex(),
+  activeInterventionId: makeSelectQuestionGroupsSessionId(),
 });
 
 const mapDispatchToProps = {

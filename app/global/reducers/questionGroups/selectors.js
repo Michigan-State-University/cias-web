@@ -37,7 +37,7 @@ export const makeSelectQuestionGroupsLoader = () =>
     substate => substate.questionsGroupsSaving,
   );
 
-export const makeSelectQuestionGroupsInterventionId = () =>
+export const makeSelectQuestionGroupsSessionId = () =>
   createSelector(
     selectQuestionGroups,
     substate => substate.sessionId,

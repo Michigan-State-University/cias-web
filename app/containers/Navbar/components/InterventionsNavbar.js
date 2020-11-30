@@ -19,9 +19,9 @@ import {
 } from 'global/reducers/questions';
 import {
   editInterventionRequest,
-  makeSelectIntervention,
+  makeSelectSession,
   editSessionSaga,
-  makeSelectInterventionEditLoader,
+  makeSelectSessionEditLoader,
 } from 'global/reducers/session';
 import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
 import { themeColors } from 'theme';
@@ -168,10 +168,10 @@ InterventionNavbar.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectIntervention(),
+  intervention: makeSelectSession(),
   questionsLength: makeSelectQuestionsLength(),
   selectedQuestion: makeSelectSelectedQuestionId(),
-  interventionEditing: makeSelectInterventionEditLoader(),
+  interventionEditing: makeSelectSessionEditLoader(),
   questionGroupsEditing: makeSelectQuestionGroupsLoader(),
   problemStatus: makeSelectProblemStatus(),
 });

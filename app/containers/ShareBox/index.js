@@ -31,7 +31,7 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import ParticipantInviter from './Components/ParticipantInviter';
 import UserList from './Components/UserList';
 import messages from './messages';
-import { makeSelectCurrentIntervention } from './selectors';
+import { makeSelectCurrentSession } from './selectors';
 import { InterventionIndex } from './styled';
 
 const ShareBox = ({
@@ -137,7 +137,7 @@ ShareBox.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectCurrentIntervention(),
+  intervention: makeSelectCurrentSession(),
   sendLoading: makeSelectProblemLoader('sendInterventionLoading'),
   listLoading: makeSelectProblemLoader('fetchInterventionEmailsLoading'),
   emailLoading: makeSelectProblemLoader('interventionEmailLoading'),

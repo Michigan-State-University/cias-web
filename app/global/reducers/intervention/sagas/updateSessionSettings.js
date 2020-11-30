@@ -7,13 +7,10 @@ import {
   updateInterventionSettingsError,
 } from '../actions';
 import { UPDATE_INTERVENTION_SETTINGS_REQUEST } from '../constants';
-import {
-  makeSelectCurrentInterventionIndex,
-  makeSelectProblem,
-} from '../selectors';
+import { makeSelectCurrentSessionIndex, makeSelectProblem } from '../selectors';
 
 export function* updateSessionSettings({ fields } = {}) {
-  const interventionIndex = yield select(makeSelectCurrentInterventionIndex());
+  const interventionIndex = yield select(makeSelectCurrentSessionIndex());
   const problem = yield select(makeSelectProblem());
   const intervention = problem.interventions[interventionIndex];
 

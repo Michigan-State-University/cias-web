@@ -16,7 +16,7 @@ export {
   makeSelectQuestionGroupsLoader,
   makeSelectGetQuestionGroupLoader,
   makeSelectQuestionGroupsIds,
-  makeSelectQuestionGroupsInterventionId,
+  makeSelectQuestionGroupsSessionId,
 } from './selectors';
 export {
   copyQuestionsSaga,

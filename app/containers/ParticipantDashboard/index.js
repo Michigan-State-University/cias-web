@@ -26,7 +26,7 @@ import {
   fetchInterventionsRequest,
   fetchSessionsSaga,
   interventionsReducer,
-  makeSelectInterventionsState,
+  makeSelectSessionsState,
 } from 'global/reducers/sessions';
 
 import { Roles } from 'models/User/UserRoles';
@@ -89,7 +89,7 @@ ParticipantDashboard.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  interventions: makeSelectInterventionsState(),
+  interventions: makeSelectSessionsState(),
 });
 
 const mapDispatchToProps = {

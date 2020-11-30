@@ -27,7 +27,7 @@ export {
   makeSelectProblemLoader,
   makeSelectProblemState,
   makeSelectProblemStatus,
-  makeSelectCurrentInterventionIndex,
+  makeSelectCurrentSessionIndex,
 } from './selectors';
 export {
   createInterventionSaga,

@@ -20,7 +20,7 @@ import {
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
-import { makeSelectIntervention } from 'global/reducers/session';
+import { makeSelectSession } from 'global/reducers/session';
 import { CREATE_QUESTION_REQUEST } from '../constants';
 import {
   createQuestionSuccess,
@@ -43,7 +43,7 @@ function* createQuestion({ payload: { question } }) {
   const questions = yield select(makeSelectQuestions());
   const {
     settings: { narrator },
-  } = yield select(makeSelectIntervention());
+  } = yield select(makeSelectSession());
   const requestURL = `v1/question_groups/${groupId}/questions`;
   try {
     const response = yield axios.post(requestURL, {

@@ -2,7 +2,7 @@ import find from 'lodash/find';
 import { createSelector } from 'reselect';
 import { selectProblem } from 'global/reducers/intervention';
 
-export const makeSelectCurrentIntervention = () =>
+export const makeSelectCurrentSession = () =>
   createSelector(
     selectProblem,
     problemState => {

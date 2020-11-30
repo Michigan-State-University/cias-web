@@ -48,7 +48,7 @@ import {
 import renderQuestionByType from './components';
 import CharacterAnim from './components/CharacterAnim';
 import CommonLayout from './layouts/CommonLayout';
-import makeSelectAnswerInterventionPage from './selectors';
+import makeSelectAnswerSessionPage from './selectors';
 
 import reducer from './reducer';
 import saga from './saga';
@@ -377,7 +377,7 @@ AnswerInterventionPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  answerInterventionPage: makeSelectAnswerInterventionPage(),
+  answerInterventionPage: makeSelectAnswerSessionPage(),
   audioInstance: makeSelectAudioInstance(),
   problemStatus: makeSelectProblemStatus(),
 });

@@ -20,11 +20,11 @@ import navigationNext from 'assets/svg/navigation-next.svg';
 import presentationProjector from 'assets/svg/presentation-projector.svg';
 import presentationProjectorSelected from 'assets/svg/presentation-projector-selected.svg';
 import { colors, borders, fontSizes, themeColors } from 'theme';
-import { makeSelectIntervention } from 'global/reducers/session';
+import { makeSelectSession } from 'global/reducers/session';
 import {
   makeSelectProblemLoader,
   makeSelectProblem,
-  makeSelectCurrentInterventionIndex,
+  makeSelectCurrentSessionIndex,
 } from 'global/reducers/intervention';
 import {
   makeSelectQuestions,
@@ -245,13 +245,13 @@ TargetQuestionChooser.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectIntervention(),
+  intervention: makeSelectSession(),
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
   currentIndex: makeSelectSelectedQuestionId(),
   problemLoading: makeSelectProblemLoader('fetchProblemLoading'),
   problem: makeSelectProblem(),
-  interventionIndex: makeSelectCurrentInterventionIndex(),
+  interventionIndex: makeSelectCurrentSessionIndex(),
   questionGroups: makeSelectQuestionGroups(),
 });
 

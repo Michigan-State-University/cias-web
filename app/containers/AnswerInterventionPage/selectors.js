@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the answerInterventionPage state domain
  */
 
-const selectAnswerInterventionPageDomain = state =>
+const selectAnswerSessionPageDomain = state =>
   state.answerInterventionPage || initialState;
 
 /**
@@ -16,27 +16,27 @@ const selectAnswerInterventionPageDomain = state =>
  * Default selector used by AnswerInterventionPage
  */
 
-const makeSelectAnswerInterventionPage = () =>
+const makeSelectAnswerSessionPage = () =>
   createSelector(
-    selectAnswerInterventionPageDomain,
+    selectAnswerSessionPageDomain,
     substate => substate,
   );
 
 const makeSelectAnswers = () =>
   createSelector(
-    selectAnswerInterventionPageDomain,
+    selectAnswerSessionPageDomain,
     substate => substate.answers,
   );
 
 const makeSelectPreviewMode = () =>
   createSelector(
-    selectAnswerInterventionPageDomain,
+    selectAnswerSessionPageDomain,
     substate => substate.previewMode,
   );
 
-export default makeSelectAnswerInterventionPage;
+export default makeSelectAnswerSessionPage;
 export {
-  selectAnswerInterventionPageDomain,
+  selectAnswerSessionPageDomain,
   makeSelectAnswers,
   makeSelectPreviewMode,
 };

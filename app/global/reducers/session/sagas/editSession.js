@@ -6,10 +6,10 @@ import { EDIT_INTERVENTION_REQUEST } from '../constants';
 
 import { editInterventionSuccess, editInterventionError } from '../actions';
 
-import { makeSelectIntervention } from '../selectors';
+import { makeSelectSession } from '../selectors';
 
 export function* editSession({ fields } = {}) {
-  const intervention = yield select(makeSelectIntervention());
+  const intervention = yield select(makeSelectSession());
   const requestURL = `v1/interventions/${
     intervention.intervention_id
   }/sessions/${intervention.id}`;

@@ -42,8 +42,8 @@ import {
   getInterventionRequest,
   interventionReducer,
   getSessionSaga,
-  makeSelectInterventionLoaders,
-  makeSelectIntervention,
+  makeSelectSessionLoaders,
+  makeSelectSession,
 } from 'global/reducers/session';
 import {
   createQuestionRequest,
@@ -448,11 +448,11 @@ EditInterventionPage.propTypes = {
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionId(),
-  interventionLoaders: makeSelectInterventionLoaders(),
+  interventionLoaders: makeSelectSessionLoaders(),
   createQuestionsLoader: makeSelectLoader('createQuestionLoading'),
   groups: makeSelectQuestionGroups(),
   problemStatus: makeSelectProblemStatus(),
-  intervention: makeSelectIntervention(),
+  intervention: makeSelectSession(),
 });
 
 const mapDispatchToProps = {
