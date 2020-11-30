@@ -92,7 +92,7 @@ describe('problem reducer', () => {
       mockPattern,
       {
         match: '',
-        target: { type: 'Intervention', id: '' },
+        target: { type: 'Session', id: '' },
       },
     ]);
     const updateState = mockState(intervention);
@@ -109,7 +109,7 @@ describe('problem reducer', () => {
   it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> UPDATE_FORMULA_CASE', () => {
     const editedPattern = {
       match: 'edited-match',
-      target: { type: 'Intervention', id: 'edited-id' },
+      target: { type: 'Session', id: 'edited-id' },
     };
     const intervention = createIntervention('formula.patterns', [
       editedPattern,

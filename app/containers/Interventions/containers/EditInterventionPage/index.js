@@ -41,7 +41,7 @@ import { localStateReducer } from 'global/reducers/localState';
 import {
   getInterventionRequest,
   interventionReducer,
-  getInterventionSaga,
+  getSessionSaga,
   makeSelectInterventionLoaders,
   makeSelectIntervention,
 } from 'global/reducers/session';
@@ -125,7 +125,7 @@ function EditInterventionPage({
     key: 'getQuestionGroupsSaga',
     saga: getQuestionGroupsSaga,
   });
-  useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
+  useInjectSaga({ key: 'getIntervention', saga: getSessionSaga });
   useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
   useInjectSaga({
     key: 'reorderQuestionGroups',

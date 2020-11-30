@@ -1,9 +1,9 @@
 import { all } from 'redux-saga/effects';
-import editInterventionSaga from './editIntervention';
-import getInterventionSaga from './getIntervention';
+import editSessionSaga from 'global/reducers/session/sagas/editSession';
+import getSessionSaga from 'global/reducers/session/sagas/getSession';
 
-export { editInterventionSaga, getInterventionSaga };
+export { editSessionSaga, getSessionSaga };
 
 export default function* allInterventionSagas() {
-  yield all([editInterventionSaga(), getInterventionSaga()]);
+  yield all([editSessionSaga(), getSessionSaga()]);
 }

@@ -7,9 +7,11 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { createIntervention } from 'utils/reducerCreators';
 import { apiInterventionResponse } from 'utils/apiResponseCreators';
 
+import editSessionSaga, {
+  editSession,
+} from 'global/reducers/session/sagas/editSession';
 import { editInterventionSuccess, editInterventionError } from '../../actions';
 import { initialState } from '../../reducer';
-import editInterventionSaga, { editIntervention } from '../editIntervention';
 import { EDIT_INTERVENTION_REQUEST } from '../../constants';
 
 describe('editIntervention saga', () => {
@@ -22,7 +24,7 @@ describe('editIntervention saga', () => {
     const apiResponse = apiInterventionResponse();
     apiResponse.data.attributes.name = mockIntervention.name;
 
-    return expectSaga(editIntervention)
+    return expectSaga(editSession)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.put), { data: apiResponse }]])
       .put(
@@ -35,7 +37,7 @@ describe('editIntervention saga', () => {
   });
   it('Check addAvatar error connection', () => {
     const error = new Error('test');
-    return expectSaga(editIntervention)
+    return expectSaga(editSession)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.put), throwError(error)]])
       .put(editInterventionError(error))
@@ -43,10 +45,10 @@ describe('editIntervention saga', () => {
   });
 
   it('Check addAvatar connection', () => {
-    const sagaFunction = editInterventionSaga();
+    const sagaFunction = editSessionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(EDIT_INTERVENTION_REQUEST, editIntervention),
+      takeLatest(EDIT_INTERVENTION_REQUEST, editSession),
     );
   });
 });

@@ -1,26 +1,26 @@
 import { all } from 'redux-saga/effects';
 import {
-  copyInterventionSaga,
+  copySessionSaga,
   editProblemSaga,
   fetchProblemSaga,
-  updateInterventionSettingsSaga,
+  updateSessionSettingsSaga,
   reorderSessionsSaga,
-  createInterventionSaga,
-  sendInterventionInviteSaga,
-  resendInterventionInviteSaga,
-  fetchInterventionEmailsSaga,
+  createSessionSaga,
+  sendSessionInviteSaga,
+  resendSessionInviteSaga,
+  fetchSessionEmailsSaga,
 } from 'global/reducers/intervention/sagas';
 
 export default function* problemDetailsPageSagas() {
   yield all([
-    createInterventionSaga(),
+    createSessionSaga(),
     fetchProblemSaga(),
     editProblemSaga(),
-    copyInterventionSaga(),
-    updateInterventionSettingsSaga(),
+    copySessionSaga(),
+    updateSessionSettingsSaga(),
     reorderSessionsSaga(),
-    sendInterventionInviteSaga(),
-    fetchInterventionEmailsSaga(),
-    resendInterventionInviteSaga(),
+    sendSessionInviteSaga(),
+    fetchSessionEmailsSaga(),
+    resendSessionInviteSaga(),
   ]);
 }

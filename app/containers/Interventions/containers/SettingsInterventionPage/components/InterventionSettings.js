@@ -12,7 +12,7 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import {
   editInterventionRequest,
-  editInterventionSaga,
+  editSessionSaga,
 } from 'global/reducers/session';
 import { questionsReducer } from 'global/reducers/questions';
 import {
@@ -69,7 +69,7 @@ const InterventionSettings = ({
   };
   useInjectReducer({ key: 'problem', reducer: problemReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
-  useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
+  useInjectSaga({ key: 'editIntervention', saga: editSessionSaga });
   useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
 
   const isNarratorActive = some(narratorSettings, setting => setting);

@@ -1,36 +1,36 @@
 import { all } from 'redux-saga/effects';
-import copyInterventionSaga from './copyIntervention';
+import copySessionSaga from 'global/reducers/intervention/sagas/copySession';
+import createSessionSaga from 'global/reducers/intervention/sagas/createSession';
+import fetchSessionEmailsSaga from 'global/reducers/intervention/sagas/fetchSessionEmails';
+import resendSessionInviteSaga from 'global/reducers/intervention/sagas/resendSessionInvite';
+import sendSessionInviteSaga from 'global/reducers/intervention/sagas/sendSessionInvite';
+import updateSessionSettingsSaga from 'global/reducers/intervention/sagas/updateSessionSettings';
 import sendProblemCsvSaga from './sendProblemCsv';
 import createProblemSaga from './createProblem';
 import editProblemSaga from './editProblem';
 import fetchProblemSaga from './fetchProblem';
-import updateInterventionSettingsSaga from './updateInterventionSettings';
 import reorderSessionsSaga from './reorderSessions';
 import changeAccessSettingSaga from './changeAccessSetting';
 import giveUserAccessSaga from './giveUserAccess';
 import fetchUsersWithAccessSaga from './fetchUsersWithAccess';
 import revokeUserAccessSaga from './revokeUserAccess';
-import createInterventionSaga from './createIntervention';
-import sendInterventionInviteSaga from './sendInterventionInvite';
-import fetchInterventionEmailsSaga from './fetchInterventionEmails';
-import resendInterventionInviteSaga from './resendInterventionInvite';
 
 export {
   createProblemSaga,
   editProblemSaga,
   fetchProblemSaga,
   sendProblemCsvSaga,
-  copyInterventionSaga,
-  updateInterventionSettingsSaga,
+  copySessionSaga,
+  updateSessionSettingsSaga,
   reorderSessionsSaga,
   changeAccessSettingSaga,
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
-  createInterventionSaga,
-  sendInterventionInviteSaga,
-  fetchInterventionEmailsSaga,
-  resendInterventionInviteSaga,
+  createSessionSaga,
+  sendSessionInviteSaga,
+  fetchSessionEmailsSaga,
+  resendSessionInviteSaga,
 };
 
 export default function* allProblemSagas() {
@@ -39,17 +39,17 @@ export default function* allProblemSagas() {
     editProblemSaga(),
     fetchProblemSaga(),
     sendProblemCsvSaga(),
-    copyInterventionSaga(),
-    updateInterventionSettingsSaga(),
+    copySessionSaga(),
+    updateSessionSettingsSaga(),
     reorderSessionsSaga(),
     changeAccessSettingSaga(),
     giveUserAccessSaga(),
     fetchUsersWithAccessSaga(),
     revokeUserAccessSaga(),
-    createInterventionSaga(),
-    sendInterventionInviteSaga(),
+    createSessionSaga(),
+    sendSessionInviteSaga(),
     fetchUsersWithAccessSaga(),
-    fetchInterventionEmailsSaga(),
-    resendInterventionInviteSaga(),
+    fetchSessionEmailsSaga(),
+    resendSessionInviteSaga(),
   ]);
 }

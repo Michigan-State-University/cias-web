@@ -12,7 +12,7 @@ import {
   makeSelectProblem,
 } from '../selectors';
 
-export function* updateInterventionSettings({ fields } = {}) {
+export function* updateSessionSettings({ fields } = {}) {
   const interventionIndex = yield select(makeSelectCurrentInterventionIndex());
   const problem = yield select(makeSelectProblem());
   const intervention = problem.interventions[interventionIndex];
@@ -31,9 +31,6 @@ export function* updateInterventionSettings({ fields } = {}) {
   }
 }
 
-export default function* updateInterventionSettingsSaga() {
-  yield takeLatest(
-    UPDATE_INTERVENTION_SETTINGS_REQUEST,
-    updateInterventionSettings,
-  );
+export default function* updateSessionSettingsSaga() {
+  yield takeLatest(UPDATE_INTERVENTION_SETTINGS_REQUEST, updateSessionSettings);
 }

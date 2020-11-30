@@ -7,15 +7,15 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { createProblem, createUser } from 'utils/reducerCreators';
 import { apiProblemResponse } from 'utils/apiResponseCreators';
 
+import fetchSessionEmailsSaga, {
+  fetchSessionEmails,
+} from 'global/reducers/intervention/sagas/fetchSessionEmails';
 import {
   fetchInterventionEmailsSuccess,
   fetchInterventionEmailsError,
 } from '../../actions';
 import { initialState } from '../../reducer';
 import { FETCH_INTERVENTION_EMAILS_REQUEST } from '../../constants';
-import fetchInterventionEmailsSaga, {
-  fetchInterventionEmails,
-} from '../fetchInterventionEmails';
 
 describe('fetchInterventionEmails saga', () => {
   const users = [createUser(), createUser()];
@@ -29,7 +29,7 @@ describe('fetchInterventionEmails saga', () => {
     const apiResponse = apiProblemResponse();
     apiResponse.session_invitations = users;
 
-    return expectSaga(fetchInterventionEmails, { payload })
+    return expectSaga(fetchSessionEmails, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(fetchInterventionEmailsSuccess(users, payload.index))
@@ -37,7 +37,7 @@ describe('fetchInterventionEmails saga', () => {
   });
   it('Check fetchInterventionEmails error connection', () => {
     const error = new Error('test');
-    return expectSaga(fetchInterventionEmails, { payload })
+    return expectSaga(fetchSessionEmails, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
       .put(fetchInterventionEmailsError(error))
@@ -45,10 +45,10 @@ describe('fetchInterventionEmails saga', () => {
   });
 
   it('Check fetchInterventionEmails connection', () => {
-    const sagaFunction = fetchInterventionEmailsSaga();
+    const sagaFunction = fetchSessionEmailsSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest([FETCH_INTERVENTION_EMAILS_REQUEST], fetchInterventionEmails),
+      takeLatest([FETCH_INTERVENTION_EMAILS_REQUEST], fetchSessionEmails),
     );
   });
 });

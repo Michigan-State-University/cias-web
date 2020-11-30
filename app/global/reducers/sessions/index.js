@@ -5,4 +5,4 @@ export {
   makeSelectInterventions,
   makeSelectInterventionsLoader,
 } from './selectors';
-export { fetchInterventionsSaga } from './sagas';
+export { fetchSessionsSaga } from './sagas';

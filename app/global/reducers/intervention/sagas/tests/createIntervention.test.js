@@ -8,14 +8,14 @@ import { createProblem } from 'utils/reducerCreators';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { apiInterventionResponse } from 'utils/apiResponseCreators';
 
+import createSessionSaga, {
+  createSession,
+} from 'global/reducers/intervention/sagas/createSession';
 import {
   createInterventionSuccess,
   createInterventionError,
 } from '../../actions';
 import { CREATE_INTERVENTION_REQUEST } from '../../constants';
-import createInterventionSaga, {
-  createIntervention,
-} from '../createIntervention';
 
 describe('createIntervention saga', () => {
   const mockProblem = createProblem();
@@ -28,24 +28,24 @@ describe('createIntervention saga', () => {
 
   it('Check createIntervention generator success connection', () => {
     const apiResponse = { data: { mockApiResponse } };
-    return expectSaga(createIntervention, { payload })
+    return expectSaga(createSession, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
       .put(createInterventionSuccess(defaultMapper(mockApiResponse)))
       .run();
   });
   it('Check createIntervention error connection', () => {
     const error = new Error('test');
-    return expectSaga(createIntervention, { payload })
+    return expectSaga(createSession, { payload })
       .provide([[matchers.call.fn(axios.post), throwError(error)]])
       .put(createInterventionError(error))
       .run();
   });
 
   it('Check changeAccessSetting connection', () => {
-    const sagaFunction = createInterventionSaga();
+    const sagaFunction = createSessionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention),
+      takeLatest(CREATE_INTERVENTION_REQUEST, createSession),
     );
   });
 });

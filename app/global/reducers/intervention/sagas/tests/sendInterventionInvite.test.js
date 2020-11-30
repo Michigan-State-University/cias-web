@@ -8,6 +8,9 @@ import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { createProblem } from 'utils/reducerCreators';
 
+import sendSessionInviteSaga, {
+  sendSessionInvite,
+} from 'global/reducers/intervention/sagas/sendSessionInvite';
 import {
   sendInterventionInviteSuccess,
   fetchInterventionEmailsSuccess,
@@ -20,9 +23,6 @@ import {
 } from '../../constants';
 import messages from '../../messages';
 import { initialState } from '../../reducer';
-import sendInterventionInviteSaga, {
-  sendInterventionInvite,
-} from '../sendInterventionInvite';
 
 describe('sendInterventionInvite saga', () => {
   const index = 0;
@@ -39,7 +39,7 @@ describe('sendInterventionInvite saga', () => {
   };
 
   it('Check sendInterventionInvite generator success connection', () =>
-    expectSaga(sendInterventionInvite, { payload })
+    expectSaga(sendSessionInvite, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
       .put(sendInterventionInviteSuccess())
@@ -53,7 +53,7 @@ describe('sendInterventionInvite saga', () => {
 
   it('Check sendInterventionInvite error connection', () => {
     const error = new Error('test');
-    return expectSaga(sendInterventionInvite, { payload })
+    return expectSaga(sendSessionInvite, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.post), throwError(error)]])
       .put(sendInterventionInviteError())
@@ -64,10 +64,10 @@ describe('sendInterventionInvite saga', () => {
   });
 
   it('Check sendInterventionInvite connection', () => {
-    const sagaFunction = sendInterventionInviteSaga();
+    const sagaFunction = sendSessionInviteSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest([SEND_INTERVENTION_INVITE_REQUEST], sendInterventionInvite),
+      takeLatest([SEND_INTERVENTION_INVITE_REQUEST], sendSessionInvite),
     );
   });
 });

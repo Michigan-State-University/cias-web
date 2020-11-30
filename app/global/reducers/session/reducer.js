@@ -88,15 +88,15 @@ const interventionReducer = (state = initialState, action) =>
     if (saved.includes(action.type)) draft.interventionSaving = false;
     switch (action.type) {
       case GET_INTERVENTION_REQUEST:
-        draft.loaders.getIntervention = true;
+        draft.loaders.getSession = true;
         break;
       case GET_INTERVENTION_SUCCESS:
-        draft.loaders.getIntervention = false;
+        draft.loaders.getSession = false;
         draft.intervention = action.payload.intervention;
         draft.cache.intervention = action.payload.intervention;
         break;
       case GET_INTERVENTION_ERROR:
-        draft.loaders.getIntervention = false;
+        draft.loaders.getSession = false;
         break;
 
       case EDIT_INTERVENTION_REQUEST:

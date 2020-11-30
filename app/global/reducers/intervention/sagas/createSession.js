@@ -6,7 +6,7 @@ import { CREATE_INTERVENTION_REQUEST } from '../constants';
 
 import { createInterventionSuccess, createInterventionError } from '../actions';
 
-export function* createIntervention({ payload: { id, lastPosition } }) {
+export function* createSession({ payload: { id, lastPosition } }) {
   const requestURL = `v1/interventions/${id}/sessions`;
 
   try {
@@ -26,6 +26,6 @@ export function* createIntervention({ payload: { id, lastPosition } }) {
   }
 }
 
-export default function* createInterventionSaga() {
-  yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention);
+export default function* createSessionSaga() {
+  yield takeLatest(CREATE_INTERVENTION_REQUEST, createSession);
 }

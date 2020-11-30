@@ -6,13 +6,13 @@ import { expectSaga } from 'redux-saga-test-plan';
 
 import { createProblem } from 'utils/reducerCreators';
 
+import { updateSessionSettings } from 'global/reducers/intervention/sagas/updateSessionSettings';
 import {
   updateInterventionSettingsError,
   updateInterventionSettingsSuccess,
 } from '../../actions';
 import { UPDATE_INTERVENTION_SETTINGS_REQUEST } from '../../constants';
-import { updateInterventionSettingsSaga } from '../index';
-import { updateInterventionSettings } from '../updateInterventionSettings';
+import { updateSessionSettingsSaga } from '../index';
 import { initialState } from '../../reducer';
 
 describe('updateInterventionSettings saga', () => {
@@ -25,7 +25,7 @@ describe('updateInterventionSettings saga', () => {
   };
   it('Check updateInterventionSettings generator success connection', () => {
     const apiResponse = { message: 'test' };
-    return expectSaga(updateInterventionSettings)
+    return expectSaga(updateSessionSettings)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.put), { data: apiResponse }]])
       .put(updateInterventionSettingsSuccess())
@@ -34,7 +34,7 @@ describe('updateInterventionSettings saga', () => {
 
   it('Check updateInterventionSettings error connection', () => {
     const error = new Error('test');
-    return expectSaga(updateInterventionSettings)
+    return expectSaga(updateSessionSettings)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.put), throwError(error)]])
       .put(updateInterventionSettingsError())
@@ -42,13 +42,10 @@ describe('updateInterventionSettings saga', () => {
   });
 
   it('Check updateInterventionSettings connection', () => {
-    const sagaFunction = updateInterventionSettingsSaga();
+    const sagaFunction = updateSessionSettingsSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(
-        UPDATE_INTERVENTION_SETTINGS_REQUEST,
-        updateInterventionSettings,
-      ),
+      takeLatest(UPDATE_INTERVENTION_SETTINGS_REQUEST, updateSessionSettings),
     );
   });
 });

@@ -9,7 +9,7 @@ import {
   fetchInterventionEmailsSuccess,
 } from '../actions';
 
-export function* fetchInterventionEmails({ payload: { index } }) {
+export function* fetchSessionEmails({ payload: { index } }) {
   const problem = yield select(makeSelectProblem());
   const intervention = problem.interventions[index];
   if (isNullOrUndefined(intervention)) return;
@@ -24,9 +24,6 @@ export function* fetchInterventionEmails({ payload: { index } }) {
   }
 }
 
-export default function* fetchInterventionEmailsSaga() {
-  yield takeLatest(
-    [FETCH_INTERVENTION_EMAILS_REQUEST],
-    fetchInterventionEmails,
-  );
+export default function* fetchSessionEmailsSaga() {
+  yield takeLatest([FETCH_INTERVENTION_EMAILS_REQUEST], fetchSessionEmails);
 }

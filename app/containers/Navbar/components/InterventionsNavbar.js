@@ -20,7 +20,7 @@ import {
 import {
   editInterventionRequest,
   makeSelectIntervention,
-  editInterventionSaga,
+  editSessionSaga,
   makeSelectInterventionEditLoader,
 } from 'global/reducers/session';
 import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
@@ -59,7 +59,7 @@ const InterventionNavbar = ({
 }) => {
   const { interventionId, sessionId } = params;
 
-  useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
+  useInjectSaga({ key: 'editIntervention', saga: editSessionSaga });
   const [tabActive, setTabActive] = useState(
     getActiveTab(pathname, formatMessage),
   );

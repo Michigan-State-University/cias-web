@@ -8,7 +8,7 @@ import { editInterventionSuccess, editInterventionError } from '../actions';
 
 import { makeSelectIntervention } from '../selectors';
 
-export function* editIntervention({ fields } = {}) {
+export function* editSession({ fields } = {}) {
   const intervention = yield select(makeSelectIntervention());
   const requestURL = `v1/interventions/${
     intervention.intervention_id
@@ -32,6 +32,6 @@ export function* editIntervention({ fields } = {}) {
   }
 }
 
-export default function* editInterventionSaga() {
-  yield takeLatest(EDIT_INTERVENTION_REQUEST, editIntervention);
+export default function* editSessionSaga() {
+  yield takeLatest(EDIT_INTERVENTION_REQUEST, editSession);
 }

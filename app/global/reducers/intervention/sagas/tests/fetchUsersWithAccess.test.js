@@ -7,15 +7,15 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { createProblem } from 'utils/reducerCreators';
 import { mapAccessToStateObject } from 'utils/mapResponseObjects';
 
+import fetchSessionEmailsSaga, {
+  fetchSessionEmails,
+} from 'global/reducers/intervention/sagas/fetchSessionEmails';
 import {
   fetchUsersWithAccessSuccess,
   fetchUsersWithAccessFailure,
 } from '../../actions';
 import { initialState } from '../../reducer';
 import { FETCH_INTERVENTION_EMAILS_REQUEST } from '../../constants';
-import fetchInterventionEmailsSaga, {
-  fetchInterventionEmails,
-} from '../fetchInterventionEmails';
 import { fetchUsersWithAccess } from '../fetchUsersWithAccess';
 
 describe('fetchUsersWithAccess saga', () => {
@@ -51,10 +51,10 @@ describe('fetchUsersWithAccess saga', () => {
   });
 
   it('Check fetchUsersWithAccess connection', () => {
-    const sagaFunction = fetchInterventionEmailsSaga();
+    const sagaFunction = fetchSessionEmailsSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest([FETCH_INTERVENTION_EMAILS_REQUEST], fetchInterventionEmails),
+      takeLatest([FETCH_INTERVENTION_EMAILS_REQUEST], fetchSessionEmails),
     );
   });
 });

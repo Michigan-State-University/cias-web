@@ -16,7 +16,7 @@ import {
 import messages from '../messages';
 import { makeSelectProblem } from '../selectors';
 
-export function* sendInterventionInvite({ payload: { emails, sessionId } }) {
+export function* sendSessionInvite({ payload: { emails, sessionId } }) {
   const problem = yield select(makeSelectProblem());
   const interventionIndex = problem.interventions.findIndex(
     intervention => intervention.id === sessionId,
@@ -42,6 +42,6 @@ export function* sendInterventionInvite({ payload: { emails, sessionId } }) {
   }
 }
 
-export default function* sendInterventionInviteSaga() {
-  yield takeLatest([SEND_INTERVENTION_INVITE_REQUEST], sendInterventionInvite);
+export default function* sendSessionInviteSaga() {
+  yield takeLatest([SEND_INTERVENTION_INVITE_REQUEST], sendSessionInvite);
 }

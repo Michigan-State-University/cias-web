@@ -33,15 +33,15 @@ export {
   createProblemSaga,
   editProblemSaga,
   fetchProblemSaga,
-  copyInterventionSaga,
+  copySessionSaga,
   reorderSessionsSaga,
   changeAccessSettingSaga,
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
   sendProblemCsvSaga,
-  sendInterventionInviteSaga,
-  createInterventionSaga,
+  sendSessionInviteSaga,
+  createSessionSaga,
 } from './sagas';
 
 export {

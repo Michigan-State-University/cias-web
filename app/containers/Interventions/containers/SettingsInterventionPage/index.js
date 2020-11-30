@@ -14,7 +14,7 @@ import {
   getInterventionRequest,
   interventionReducer,
   makeSelectIntervention,
-  getInterventionSaga,
+  getSessionSaga,
 } from 'global/reducers/session';
 
 import InterventionSettings from './components/InterventionSettings';
@@ -28,7 +28,7 @@ const SettingsInterventionPage = ({
   intl: { formatMessage },
 }) => {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
-  useInjectSaga({ key: 'getIntervention', saga: getInterventionSaga });
+  useInjectSaga({ key: 'getIntervention', saga: getSessionSaga });
 
   useEffect(() => {
     getIntervention({

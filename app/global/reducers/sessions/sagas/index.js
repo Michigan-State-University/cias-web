@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
-import fetchInterventionsSaga from './fetchInterventions';
+import fetchSessionsSaga from 'global/reducers/sessions/sagas/fetchSessions';
 
-export { fetchInterventionsSaga };
+export { fetchSessionsSaga };
 
 export default function* allInterventionsSagas() {
-  yield all([fetchInterventionsSaga()]);
+  yield all([fetchSessionsSaga()]);
 }

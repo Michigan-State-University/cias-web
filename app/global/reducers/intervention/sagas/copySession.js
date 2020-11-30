@@ -10,7 +10,7 @@ import {
   COPY_INTERVENTION_REQUEST,
 } from '../constants';
 
-export function* copyIntervention({ payload: { sessionId } }) {
+export function* copySession({ payload: { sessionId } }) {
   const requestURL = `v1/sessions/${sessionId}/clone`;
 
   try {
@@ -26,6 +26,6 @@ export function* copyIntervention({ payload: { sessionId } }) {
   }
 }
 
-export default function* copyInterventionSaga() {
-  yield takeLatest(COPY_INTERVENTION_REQUEST, copyIntervention);
+export default function* copySessionSaga() {
+  yield takeLatest(COPY_INTERVENTION_REQUEST, copySession);
 }

@@ -10,10 +10,10 @@ import { initialState } from 'global/reducers/intervention/reducer';
 import { fetchProblemRequest } from 'global/reducers/intervention';
 import { apiInterventionResponse } from 'utils/apiResponseCreators';
 
+import { getSession } from 'global/reducers/session/sagas/getSession';
 import { getInterventionSuccess, getInterventionError } from '../../actions';
 import { GET_INTERVENTION_REQUEST } from '../../constants';
-import { getIntervention } from '../getIntervention';
-import { getInterventionSaga } from '../index';
+import { getSessionSaga } from '../index';
 
 describe('getIntervention saga', () => {
   const mockProblem = createProblem();
@@ -27,7 +27,7 @@ describe('getIntervention saga', () => {
 
   it('Check getIntervention generator success connection', () => {
     const apiResponse = apiInterventionResponse();
-    return expectSaga(getIntervention, { payload })
+    return expectSaga(getSession, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(getInterventionSuccess(defaultMapper(apiResponse.data)))
@@ -36,7 +36,7 @@ describe('getIntervention saga', () => {
 
   it('Check getIntervention generator success connection with empty state', () => {
     const apiResponse = apiInterventionResponse();
-    return expectSaga(getIntervention, { payload })
+    return expectSaga(getSession, { payload })
       .withState({ problem: {} })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(fetchProblemRequest(payload.interventionId))
@@ -45,7 +45,7 @@ describe('getIntervention saga', () => {
   });
   it('Check getIntervention error connection', () => {
     const error = new Error('test');
-    return expectSaga(getIntervention, { payload })
+    return expectSaga(getSession, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
       .put(getInterventionError(error))
@@ -53,10 +53,10 @@ describe('getIntervention saga', () => {
   });
 
   it('Check getIntervention connection', () => {
-    const sagaFunction = getInterventionSaga();
+    const sagaFunction = getSessionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(GET_INTERVENTION_REQUEST, getIntervention),
+      takeLatest(GET_INTERVENTION_REQUEST, getSession),
     );
   });
 });

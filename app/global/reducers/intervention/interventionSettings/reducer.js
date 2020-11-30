@@ -24,7 +24,7 @@ const interventionSettingsReducer = (intervention, payload) => {
     case ADD_FORMULA_CASE:
       clonedIntervention.formula.patterns.push({
         match: '',
-        target: { type: 'Intervention', id: '' },
+        target: { type: 'Session', id: '' },
       });
       return clonedIntervention;
 

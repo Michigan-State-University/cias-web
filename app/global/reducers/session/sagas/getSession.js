@@ -11,7 +11,7 @@ import {
 import { GET_INTERVENTION_REQUEST } from '../constants';
 import { getInterventionSuccess, getInterventionError } from '../actions';
 
-export function* getIntervention({ payload: { sessionId, interventionId } }) {
+export function* getSession({ payload: { sessionId, interventionId } }) {
   const problem = yield select(makeSelectProblem());
 
   if (isNullOrUndefined(problem) || problem.id !== interventionId)
@@ -30,6 +30,6 @@ export function* getIntervention({ payload: { sessionId, interventionId } }) {
   }
 }
 
-export default function* getInterventionSaga() {
-  yield takeLatest(GET_INTERVENTION_REQUEST, getIntervention);
+export default function* getSessionSaga() {
+  yield takeLatest(GET_INTERVENTION_REQUEST, getSession);
 }

@@ -24,7 +24,7 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import {
   fetchInterventionsRequest,
-  fetchInterventionsSaga,
+  fetchSessionsSaga,
   interventionsReducer,
   makeSelectInterventionsState,
 } from 'global/reducers/sessions';
@@ -43,7 +43,7 @@ export function ParticipantDashboard({
     key: 'interventions',
     reducer: interventionsReducer,
   });
-  useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
+  useInjectSaga({ key: 'fetchInterventions', saga: fetchSessionsSaga });
 
   useEffect(() => {
     fetchInterventions(Roles.participant);

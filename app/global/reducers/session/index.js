@@ -13,4 +13,4 @@ export {
   makeSelectInterventionLoaders,
   makeSelectInterventionEditLoader,
 } from './selectors';
-export { editInterventionSaga, getInterventionSaga } from './sagas';
+export { editSessionSaga, getSessionSaga } from './sagas';

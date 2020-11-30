@@ -10,7 +10,7 @@ import {
 import { RESEND_INTERVENTION_INVITE_REQUEST } from '../constants';
 import messages from '../messages';
 
-export function* resendInterventionInvite({ payload: { id, sessionId } }) {
+export function* resendSessionInvite({ payload: { id, sessionId } }) {
   const requestURL = `v1/sessions/${sessionId}/invitations/${id}/resend`;
   try {
     yield call(axios.get, requestURL);
@@ -22,9 +22,6 @@ export function* resendInterventionInvite({ payload: { id, sessionId } }) {
   }
 }
 
-export default function* resendInterventionInviteSaga() {
-  yield takeLatest(
-    [RESEND_INTERVENTION_INVITE_REQUEST],
-    resendInterventionInvite,
-  );
+export default function* resendSessionInviteSaga() {
+  yield takeLatest([RESEND_INTERVENTION_INVITE_REQUEST], resendSessionInvite);
 }
