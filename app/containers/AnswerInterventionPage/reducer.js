@@ -33,7 +33,7 @@ const getEmptyFeedbackScreenSettings = () => ({
 export const initialState = {
   questionLoading: true,
   questionError: '',
-  interventionQuestions: [],
+  sessionQuestions: [],
   questionIndex: 0,
   answersLoading: false,
   answersError: '',
@@ -62,7 +62,7 @@ const answerInterventionPageReducer = (
       case FETCH_QUESTIONS_SUCCESS:
         draft.questionError = '';
         draft.questionLoading = false;
-        draft.interventionQuestions = payload.questions;
+        draft.sessionQuestions = payload.questions;
         break;
 
       case FETCH_QUESTION_FAILURE:
@@ -104,13 +104,13 @@ const answerInterventionPageReducer = (
 
         if (!isNullOrUndefined(payload.question)) {
           index = findQuestionIndex(
-            state.interventionQuestions,
+            state.sessionQuestions,
             payload.question.id,
           );
 
           if (index === -1) index = draft.questionIndex + 1;
 
-          set(draft, ['interventionQuestions', index], payload.question);
+          set(draft, ['sessionQuestions', index], payload.question);
         } else if (!isNullOrUndefined(payload.index)) ({ index } = payload);
         else index = draft.questionIndex + 1;
 

@@ -80,6 +80,7 @@ const AnimationRefHelper = ({
   useEffect(() => {
     setRefState(animationParentRef.current);
   }, [animationParentRef]);
+
   return (
     <AnswerInterventionContent ref={animationParentRef}>
       {children}
@@ -124,7 +125,7 @@ export function AnswerInterventionPage({
   setFeedbackSettings,
   audioInstance,
   answerInterventionPage: {
-    interventionQuestions,
+    sessionQuestions,
     questionError,
     questionLoading,
     answersError,
@@ -156,13 +157,13 @@ export function AnswerInterventionPage({
   }, []);
 
   useEffect(() => {
-    if (interventionQuestions.length !== 0) {
+    if (sessionQuestions.length !== 0) {
       const startQuestionIndex = !index
         ? 0
-        : interventionQuestions.findIndex(({ id }) => id === index);
+        : sessionQuestions.findIndex(({ id }) => id === index);
       setQuestionIndexAction(startQuestionIndex);
     }
-  }, [interventionQuestions.length]);
+  }, [sessionQuestions.length]);
 
   if (questionError)
     return (
@@ -178,16 +179,14 @@ export function AnswerInterventionPage({
     );
 
   const assignCurrentQuestion = () => {
-    const question = interventionQuestions[questionIndex];
+    const question = sessionQuestions[questionIndex];
 
     if (!question) return null;
 
     return question;
   };
 
-  const currentQuestion = interventionQuestions
-    ? assignCurrentQuestion()
-    : null;
+  const currentQuestion = sessionQuestions ? assignCurrentQuestion() : null;
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
 
@@ -238,9 +237,8 @@ export function AnswerInterventionPage({
       }
     };
 
-    const isLastScreen = questionIndex === interventionQuestions.length - 1;
-    const isBeforeLastScreen =
-      questionIndex === interventionQuestions.length - 2;
+    const isLastScreen = questionIndex === sessionQuestions.length - 1;
+    const isBeforeLastScreen = questionIndex === sessionQuestions.length - 2;
 
     return (
       <Row justify="center" width="100%">

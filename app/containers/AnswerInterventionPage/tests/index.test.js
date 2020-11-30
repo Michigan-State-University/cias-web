@@ -26,14 +26,14 @@ describe('<AnswerInterventionPage />', () => {
     fetchQuestionsAction: mockedFunctions.fetchQuestionsAction,
     fetchProblem: mockedFunctions.fetchProblem,
     answerInterventionPage: {
-      interventionQuestions: [],
+      sessionQuestions: [],
     },
   };
   const initialState = {
     answerInterventionPage: {
       questionLoading: false,
       questionError: '',
-      interventionQuestions: [],
+      sessionQuestions: [],
       questionIndex: 0,
       answersLoading: false,
       answersError: '',

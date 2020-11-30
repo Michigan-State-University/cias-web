@@ -228,7 +228,7 @@ const CharacterAnim = ({
         currentData: getInitialData(),
         currentBlockIndex: 0,
       }),
-    { useDeps: [questionId, previewMode], cleanUpFunction: stopSpeech },
+    { deps: [questionId, previewMode], cleanUpFunction: stopSpeech },
   );
 
   useDidUpdateEffect(() => {
