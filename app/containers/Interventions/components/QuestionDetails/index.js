@@ -55,7 +55,7 @@ const RenderQuestionDetails = ({
   problemStatus,
   formatMessage,
   changeGroupName,
-  interventionId,
+  sessionId,
   currentGroupScope,
 }) => {
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
@@ -101,7 +101,7 @@ const RenderQuestionDetails = ({
                 placeholder={formatMessage(messages.groupPlaceholder)}
                 maxWidth="initial"
                 onBlur={val =>
-                  changeGroupName(val, interventionId, currentGroupScope.id)
+                  changeGroupName(val, sessionId, currentGroupScope.id)
                 }
               />
               <MSULogo />
@@ -208,7 +208,7 @@ RenderQuestionDetails.propTypes = {
   problemStatus: PropTypes.string,
   formatMessage: PropTypes.func,
   changeGroupName: PropTypes.func,
-  interventionId: PropTypes.string,
+  sessionId: PropTypes.string,
   currentGroupScope: PropTypes.object,
 };
 

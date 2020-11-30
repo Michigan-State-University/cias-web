@@ -30,8 +30,8 @@ import {
   groupQuestionsSuccess,
 } from '../actions';
 
-function* groupQuestions({ payload: { questionIds, interventionId } }) {
-  const requestURL = `v1/sessions/${interventionId}/question_groups`;
+function* groupQuestions({ payload: { questionIds, sessionId } }) {
+  const requestURL = `v1/sessions/${sessionId}/question_groups`;
   const groups = yield select(makeSelectQuestionGroups());
   const lastPlainGroup = findLast(
     groups,

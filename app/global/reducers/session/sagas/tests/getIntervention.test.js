@@ -21,7 +21,7 @@ describe('getIntervention saga', () => {
     problem: { ...initialState, problem: mockProblem },
   };
   const payload = {
-    interventionId: mockProblem.interventions[0].id,
+    sessionId: mockProblem.interventions[0].id,
     problemId: mockProblem.id,
   };
 

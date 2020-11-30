@@ -33,7 +33,7 @@ const SettingsInterventionPage = ({
   useEffect(() => {
     getIntervention({
       problemId: params.problemId,
-      interventionId: params.interventionId,
+      sessionId: params.sessionId,
     });
   }, []);
 

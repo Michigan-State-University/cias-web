@@ -57,7 +57,7 @@ const InterventionNavbar = ({
   problemStatus,
   match: { params },
 }) => {
-  const { problemId, interventionId } = params;
+  const { problemId, sessionId } = params;
 
   useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
   const [tabActive, setTabActive] = useState(
@@ -102,7 +102,7 @@ const InterventionNavbar = ({
         <div
           renderAsLink={
             <StyledLink
-              to={`/interventions/${problemId}/sessions/${interventionId}/edit`}
+              to={`/interventions/${problemId}/sessions/${sessionId}/edit`}
             >
               {formatMessage(messages.content)}
             </StyledLink>
@@ -111,7 +111,7 @@ const InterventionNavbar = ({
         <div
           renderAsLink={
             <StyledLink
-              to={`/interventions/${problemId}/sessions/${interventionId}/settings`}
+              to={`/interventions/${problemId}/sessions/${sessionId}/settings`}
             >
               {formatMessage(messages.settings)}
             </StyledLink>
@@ -138,7 +138,7 @@ const InterventionNavbar = ({
           )}
         </SaveInfoContainer>
         <PreviewButton
-          to={`/interventions/${problemId}/sessions/${interventionId}/preview/${selectedQuestion}`}
+          to={`/interventions/${problemId}/sessions/${sessionId}/preview/${selectedQuestion}`}
           previewDisabled={previewDisabled}
           text={formatMessage(messages.previewCurrent)}
           target="_blank"

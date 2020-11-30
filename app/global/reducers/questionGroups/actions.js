@@ -40,8 +40,8 @@ export const deleteQuestionsSuccess = () =>
 export const deleteQuestionsError = error =>
   actionBuilder(DELETE_QUESTIONS_ERROR, { error });
 
-export const groupQuestionsRequest = (questionIds, interventionId) =>
-  actionBuilder(GROUP_QUESTIONS_REQUEST, { questionIds, interventionId });
+export const groupQuestionsRequest = (questionIds, sessionId) =>
+  actionBuilder(GROUP_QUESTIONS_REQUEST, { questionIds, sessionId });
 export const groupQuestionsSuccess = (group, questionIds) =>
   actionBuilder(GROUP_QUESTIONS_SUCCESS, { group, questionIds });
 export const groupQuestionsError = error =>
@@ -60,15 +60,15 @@ export const shareQuestionsToResearchersSuccess = () =>
 export const shareQuestionsToResearchersError = error =>
   actionBuilder(SHARE_QUESTIONS_TO_RESEARCHERS_ERROR, { error });
 
-export const changeGroupNameRequest = (title, interventionId, groupId) =>
-  actionBuilder(CHANGE_GROUP_NAME_REQUEST, { title, interventionId, groupId });
+export const changeGroupNameRequest = (title, sessionId, groupId) =>
+  actionBuilder(CHANGE_GROUP_NAME_REQUEST, { title, sessionId, groupId });
 export const changeGroupNameSuccess = () =>
   actionBuilder(CHANGE_GROUP_NAME_SUCCESS, {});
 export const changeGroupNameError = error =>
   actionBuilder(CHANGE_GROUP_NAME_ERROR, { error });
 
-export const getQuestionGroupsRequest = interventionId =>
-  actionBuilder(GET_QUESTION_GROUPS_REQUEST, { interventionId });
+export const getQuestionGroupsRequest = sessionId =>
+  actionBuilder(GET_QUESTION_GROUPS_REQUEST, { sessionId });
 export const getQuestionGroupsSuccess = groups =>
   actionBuilder(GET_QUESTION_GROUPS_SUCCESS, { groups });
 export const getQuestionGroupsError = error =>

@@ -10,74 +10,74 @@ import {
   UPDATE_SCHEDULING_DATE,
 } from './constants';
 
-export const updateFormula = (value, interventionId) =>
+export const updateFormula = (value, sessionId) =>
   updateInterventionSettings(
     {
       type: UPDATE_FORMULA,
-      data: { value, interventionId },
+      data: { value, sessionId },
     },
     ['formula'],
   );
 
-export const addFormulaCase = interventionId =>
+export const addFormulaCase = sessionId =>
   updateInterventionSettings(
     {
       type: ADD_FORMULA_CASE,
-      data: { interventionId },
+      data: { sessionId },
     },
     ['formula'],
   );
 
-export const removeFormulaCase = (index, interventionId) =>
+export const removeFormulaCase = (index, sessionId) =>
   updateInterventionSettings(
     {
       type: REMOVE_FORMULA_CASE,
-      data: { index, interventionId },
+      data: { index, sessionId },
     },
     ['formula'],
   );
 
-export const updateFormulaCase = (index, value, interventionId) =>
+export const updateFormulaCase = (index, value, sessionId) =>
   updateInterventionSettings(
     {
       type: UPDATE_FORMULA_CASE,
-      data: { index, value, interventionId },
+      data: { index, value, sessionId },
     },
     ['formula'],
   );
 
-export const changeFormulaStatus = (value, interventionId) =>
+export const changeFormulaStatus = (value, sessionId) =>
   updateInterventionSettings(
     {
       type: CHANGE_FORMULA_STATUS,
-      data: { value, interventionId },
+      data: { value, sessionId },
     },
     ['settings.formula'],
   );
 
-export const changeSchedulingType = (value, interventionId) =>
+export const changeSchedulingType = (value, sessionId) =>
   updateInterventionSettings(
     {
       type: CHANGE_SCHEDULING_TYPE,
-      data: { value, interventionId },
+      data: { value, sessionId },
     },
     ['schedule', 'schedule_at', 'schedule_payload'],
   );
 
-export const updateSchedulingPayload = (value, interventionId) =>
+export const updateSchedulingPayload = (value, sessionId) =>
   updateInterventionSettings(
     {
       type: UPDATE_SCHEDULING_PAYLOAD,
-      data: { value, interventionId },
+      data: { value, sessionId },
     },
     ['schedule', 'schedule_at', 'schedule_payload'],
   );
 
-export const updateSchedulingDate = (value, interventionId) =>
+export const updateSchedulingDate = (value, sessionId) =>
   updateInterventionSettings(
     {
       type: UPDATE_SCHEDULING_DATE,
-      data: { value, interventionId },
+      data: { value, sessionId },
     },
     ['schedule', 'schedule_at', 'schedule_payload'],
   );

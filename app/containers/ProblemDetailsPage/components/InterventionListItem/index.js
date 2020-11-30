@@ -117,7 +117,7 @@ function InterventionListItem({
               <Row px={62}>
                 <InterventionSchedule
                   disabled={disabled}
-                  interventionId={id}
+                  sessionId={id}
                   selectedScheduleOption={schedule}
                   scheduleAt={scheduleAt}
                   schedulePayload={schedulePayload}

@@ -18,7 +18,7 @@ import copyInterventionSaga, { copyIntervention } from '../copyIntervention';
 
 describe('copyIntervention saga', () => {
   const mockIntervention = createIntervention();
-  const payload = { interventionId: mockIntervention.id };
+  const payload = { sessionId: mockIntervention.id };
 
   it('Check copyIntervention generator success connection', () => {
     const apiResponse = { data: { ...mockIntervention, id: 'test-id-copied' } };

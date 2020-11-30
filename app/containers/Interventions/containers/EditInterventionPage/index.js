@@ -113,7 +113,7 @@ function EditInterventionPage({
   groups,
   changeGroupName,
   getQuestionGroups,
-  intervention: { id: interventionId, name: interventionName },
+  intervention: { id: sessionId, name: interventionName },
 }) {
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState([]);
@@ -165,7 +165,7 @@ function EditInterventionPage({
       inactiveIcon: groupIcon,
       activeIcon: groupIconActive,
       action: () => {
-        groupQuestions(selectedSlides, params.interventionId);
+        groupQuestions(selectedSlides, params.sessionId);
         setSelectedSlides([]);
       },
     },
@@ -184,10 +184,10 @@ function EditInterventionPage({
 
   useEffect(() => {
     getIntervention({
-      interventionId: params.interventionId,
+      sessionId: params.sessionId,
       problemId: params.problemId,
     });
-    getQuestionGroups(params.interventionId);
+    getQuestionGroups(params.sessionId);
   }, []);
 
   const onCreateQuestion = type => {
@@ -197,7 +197,7 @@ function EditInterventionPage({
         type,
         formatMessage(messages.newQuestionSubtitle),
       ),
-      params.interventionId,
+      params.sessionId,
     );
     scrollByRef(containerBottomRef, {
       behavior: 'smooth',
@@ -225,7 +225,7 @@ function EditInterventionPage({
             destinationIndex,
             destinationGroupId,
             questionId,
-            interventionId,
+            sessionId,
           });
 
           break;
@@ -240,7 +240,7 @@ function EditInterventionPage({
             groupId,
             sourceIndex,
             destinationIndex,
-            interventionId,
+            sessionId,
           });
 
           break;
@@ -353,7 +353,7 @@ function EditInterventionPage({
                           disabled={!editingPossible}
                           changeGroupName={changeGroupName}
                           checkSelectedGroup={checkSelectedGroup}
-                          interventionId={params.interventionId}
+                          sessionId={params.sessionId}
                           manage={manage}
                           questionGroup={questionGroup}
                           selectSlide={selectSlide}
@@ -378,7 +378,7 @@ function EditInterventionPage({
                   disabled={!editingPossible}
                   changeGroupName={changeGroupName}
                   checkSelectedGroup={checkSelectedGroup}
-                  interventionId={params.interventionId}
+                  sessionId={params.sessionId}
                   manage={manage}
                   questionGroup={finishGroup}
                   selectSlide={selectSlide}
@@ -413,7 +413,7 @@ function EditInterventionPage({
               formatMessage={formatMessage}
               changeGroupName={changeGroupName}
               currentGroupScope={currentGroupScope}
-              interventionId={interventionId}
+              sessionId={sessionId}
             />
             <QuestionSettings />
           </Row>

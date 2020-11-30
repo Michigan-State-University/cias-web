@@ -81,8 +81,8 @@ export const initialState = {
   },
 };
 
-const findInterventionIndex = (problem, interventionId) =>
-  problem.interventions.findIndex(({ id }) => id === interventionId);
+const findInterventionIndex = (problem, sessionId) =>
+  problem.interventions.findIndex(({ id }) => id === sessionId);
 
 /* eslint-disable default-case, no-param-reassign */
 export const problemReducer = (state = initialState, action) =>
@@ -148,8 +148,7 @@ export const problemReducer = (state = initialState, action) =>
         break;
       case UPDATE_INTERVENTION_SETTINGS_REQUEST: {
         const interventionIndex = state.problem.interventions.findIndex(
-          intervention =>
-            intervention.id === action.payload.data.interventionId,
+          intervention => intervention.id === action.payload.data.sessionId,
         );
         if (interventionIndex > -1) {
           draft.currentInterventionIndex = interventionIndex;
@@ -256,11 +255,11 @@ export const problemReducer = (state = initialState, action) =>
         break;
 
       case SEND_INTERVENTION_INVITE_REQUEST: {
-        const { emails: payloadEmails, interventionId } = action.payload;
+        const { emails: payloadEmails, sessionId } = action.payload;
 
         const interventionIndex = findInterventionIndex(
           state.problem,
-          interventionId,
+          sessionId,
         );
 
         if (interventionIndex > -1) {

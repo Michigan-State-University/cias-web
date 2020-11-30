@@ -21,8 +21,8 @@ import {
   SET_FEEDBACK_SCREEN_SETTINGS,
 } from './constants';
 
-export const fetchQuestions = interventionId =>
-  actionBuilder(FETCH_QUESTIONS, { interventionId });
+export const fetchQuestions = sessionId =>
+  actionBuilder(FETCH_QUESTIONS, { sessionId });
 
 export const fetchQuestionsSuccess = questions =>
   actionBuilder(FETCH_QUESTIONS_SUCCESS, { questions });

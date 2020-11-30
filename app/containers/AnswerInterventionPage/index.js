@@ -143,7 +143,7 @@ export function AnswerInterventionPage({
   useInjectSaga({ key: 'fetchProblem', saga: fetchProblemSaga });
   useInjectReducer({ key: 'answerInterventionPage', reducer });
   useInjectSaga({ key: 'answerInterventionPage', saga });
-  const { interventionId, index, problemId } = params;
+  const { sessionId, index, problemId } = params;
 
   useEffect(() => {
     if (isPreview) fetchProblem(problemId);
@@ -152,7 +152,7 @@ export function AnswerInterventionPage({
   const previewPossible = !(isPreview && !canPreview(problemStatus));
 
   useEffect(() => {
-    fetchQuestionsAction(interventionId);
+    fetchQuestionsAction(sessionId);
   }, []);
 
   useEffect(() => {

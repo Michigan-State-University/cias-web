@@ -10,7 +10,7 @@ import { DELETE_QUESTIONS_REQUEST } from '../constants';
 
 function* deleteQuestions({ payload: { questionIds } }) {
   console.log(questionIds);
-  // const requestURL = `v1/sessions/${interventionId}/questions/${questionId}`;
+  // const requestURL = `v1/sessions/${sessionId}/questions/${questionId}`;
 
   try {
     // yield axios.delete(requestURL);

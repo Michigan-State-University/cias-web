@@ -16,15 +16,13 @@ import {
 import messages from '../messages';
 import { makeSelectProblem } from '../selectors';
 
-export function* sendInterventionInvite({
-  payload: { emails, interventionId },
-}) {
+export function* sendInterventionInvite({ payload: { emails, sessionId } }) {
   const problem = yield select(makeSelectProblem());
   const interventionIndex = problem.interventions.findIndex(
-    intervention => intervention.id === interventionId,
+    intervention => intervention.id === sessionId,
   );
 
-  const requestURL = `v1/sessions/${interventionId}/invitations`;
+  const requestURL = `v1/sessions/${sessionId}/invitations`;
   try {
     const {
       data: { session_invitations: users },

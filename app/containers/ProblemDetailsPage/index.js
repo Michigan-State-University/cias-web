@@ -165,8 +165,8 @@ export function ProblemDetailsPage({
       fetchQuestions(interventions[interventionIndex].id);
   }, [problem ? problem.id : 0]);
 
-  const handleCopyIntervention = interventionId => {
-    copyIntervention({ interventionId });
+  const handleCopyIntervention = sessionId => {
+    copyIntervention({ sessionId });
   };
 
   const editName = val => editProblem({ path: 'name', value: val });

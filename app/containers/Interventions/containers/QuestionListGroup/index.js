@@ -29,7 +29,7 @@ const QuestionListGroup = ({
   checkSelectedGroup,
   changeGroupName,
   manage,
-  interventionId,
+  sessionId,
   selectSlide,
   selectedSlides,
   selectedQuestion,
@@ -70,7 +70,7 @@ const QuestionListGroup = ({
             selectedQuestionIndex={selectedQuestion}
             questions={questions}
             question={question}
-            interventionId={interventionId}
+            sessionId={sessionId}
             disabled={editingPossible}
             problemStatus={problemStatus}
             noDnd={noDnd}
@@ -134,7 +134,7 @@ const QuestionListGroup = ({
                 placeholder={formatMessage(messages.groupPlaceholder)}
                 width="100%"
                 maxWidth="initial"
-                onBlur={val => changeGroupName(val, interventionId, id)}
+                onBlur={val => changeGroupName(val, sessionId, id)}
               />
             </Box>
             {!noDnd && (
@@ -169,7 +169,7 @@ QuestionListGroup.propTypes = {
   changeGroupName: PropTypes.func,
   editingPossible: PropTypes.bool,
   manage: PropTypes.bool,
-  interventionId: PropTypes.string,
+  sessionId: PropTypes.string,
   selectSlide: PropTypes.func,
   formatMessage: PropTypes.func,
   selectedSlides: PropTypes.array,

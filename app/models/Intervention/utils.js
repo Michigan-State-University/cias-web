@@ -42,10 +42,10 @@ export const findQuestionIndex = (questions, questionId) =>
 
 /**
  * @param  {Array<Intervention>} interventions
- * @param  {string} interventionId
+ * @param  {string} sessionId
  */
-export const findInterventionIndex = (interventions, interventionId) =>
-  interventions.findIndex(value => value.id === interventionId);
+export const findInterventionIndex = (interventions, sessionId) =>
+  interventions.findIndex(value => value.id === sessionId);
 
 /**
  * @param  {Array<Question>} questions

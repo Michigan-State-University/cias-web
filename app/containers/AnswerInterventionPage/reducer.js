@@ -40,7 +40,7 @@ export const initialState = {
   answers: {},
   interventionStarted: false,
   previewMode: DESKTOP_MODE,
-  interventionId: null,
+  sessionId: null,
   isAnimationOngoing: true,
   feedbackScreenSettings: getEmptyFeedbackScreenSettings(),
 };
@@ -56,7 +56,7 @@ const answerInterventionPageReducer = (
         draft.questionError = '';
         draft.questionLoading = true;
         draft.interventionStarted = false;
-        draft.interventionId = payload.interventionId;
+        draft.sessionId = payload.sessionId;
         break;
 
       case FETCH_QUESTIONS_SUCCESS:

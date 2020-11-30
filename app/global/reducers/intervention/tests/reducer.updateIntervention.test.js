@@ -22,7 +22,7 @@ describe('problem reducer', () => {
       type,
       data: {
         ...dataValues,
-        interventionId: mockIntervention.id,
+        sessionId: mockIntervention.id,
       },
     });
 

@@ -10,8 +10,8 @@ import {
   COPY_INTERVENTION_REQUEST,
 } from '../constants';
 
-export function* copyIntervention({ payload: { interventionId } }) {
-  const requestURL = `v1/sessions/${interventionId}/clone`;
+export function* copyIntervention({ payload: { sessionId } }) {
+  const requestURL = `v1/sessions/${sessionId}/clone`;
 
   try {
     const response = yield call(axios.post, requestURL);

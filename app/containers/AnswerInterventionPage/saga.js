@@ -34,11 +34,11 @@ const calculatePath = (currentPath, sessionId) => {
   return commonPathPart.concat(ternary(isPreview, '/preview', '/fill'));
 };
 
-function* fetchQuestionsAsync({ payload: { interventionId } }) {
+function* fetchQuestionsAsync({ payload: { sessionId } }) {
   try {
     const {
       data: { question_groups: groups },
-    } = yield axios.get(`/v1/sessions/${interventionId}/question_groups`);
+    } = yield axios.get(`/v1/sessions/${sessionId}/question_groups`);
     const orderedGroups = orderBy(groups, 'position');
     const questions = flatten(
       orderedGroups.map(({ questions: groupQuestions }) =>

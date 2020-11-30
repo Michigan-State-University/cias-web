@@ -11,8 +11,8 @@ import { mapGroupsToQuestions } from 'global/reducers/questionGroups/utils';
 import { GET_QUESTION_GROUPS_REQUEST } from '../constants';
 import { getQuestionGroupsError, getQuestionGroupsSuccess } from '../actions';
 
-function* getQuestionsGroups({ payload: { interventionId } }) {
-  const groupURL = `/v1/sessions/${interventionId}/question_groups`;
+function* getQuestionsGroups({ payload: { sessionId } }) {
+  const groupURL = `/v1/sessions/${sessionId}/question_groups`;
 
   try {
     const {

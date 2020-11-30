@@ -38,7 +38,7 @@ function InterventionSchedule({
   updatePayload,
   updateDate,
   schedulePayload,
-  interventionId,
+  sessionId,
   disabled,
 }) {
   const scheduleOptions = {
@@ -56,15 +56,15 @@ function InterventionSchedule({
     },
   };
 
-  const handleChangeDate = date => updateDate(date, interventionId);
-  const handleChangeDays = days => updatePayload(days, interventionId);
+  const handleChangeDate = date => updateDate(date, sessionId);
+  const handleChangeDays = days => updatePayload(days, sessionId);
 
   const renderOption = () => {
     switch (selectedScheduleOption) {
       case scheduleOptions.daysAfter.id:
         return (
           <DaysAfterOption
-            id={interventionId}
+            id={sessionId}
             value={schedulePayload}
             setValue={handleChangeDays}
             disabled={disabled}
@@ -73,7 +73,7 @@ function InterventionSchedule({
       case scheduleOptions.daysAfterFill.id:
         return (
           <DaysAfterOption
-            id={interventionId}
+            id={sessionId}
             value={schedulePayload}
             setValue={handleChangeDays}
             disabled={disabled}
@@ -106,7 +106,7 @@ function InterventionSchedule({
           elem => elem.id === selectedScheduleOption,
         )}
         rightPosition="315"
-        setOption={id => changeType(id, interventionId)}
+        setOption={id => changeType(id, sessionId)}
       />
       {selectedScheduleOption && (
         <Row mt={28} mb={17} align="center">
@@ -128,7 +128,7 @@ InterventionSchedule.propTypes = {
   changeType: PropTypes.func,
   updatePayload: PropTypes.func,
   updateDate: PropTypes.func,
-  interventionId: PropTypes.string,
+  sessionId: PropTypes.string,
   disabled: PropTypes.bool,
 };
 

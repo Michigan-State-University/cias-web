@@ -83,7 +83,7 @@ export function App({ user }) {
         <AppRoute exact path="/logout" component={Logout} />
         <AppRoute
           exact
-          path="/interventions/:problemId/sessions/:interventionId/edit"
+          path="/interventions/:problemId/sessions/:sessionId/edit"
           component={EditInterventionPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
@@ -93,7 +93,7 @@ export function App({ user }) {
         />
         <AppRoute
           exact
-          path="/interventions/:problemId/sessions/:interventionId/fill"
+          path="/interventions/:problemId/sessions/:sessionId/fill"
           component={AnswerInterventionPage}
           allowedRoles={Roles.allRoles}
           user
@@ -104,7 +104,7 @@ export function App({ user }) {
         />
         <AppRoute
           exact
-          path="/interventions/:problemId/sessions/:interventionId/settings"
+          path="/interventions/:problemId/sessions/:sessionId/settings"
           component={SettingsInterventionPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
@@ -126,7 +126,7 @@ export function App({ user }) {
         <AppRoute
           exact
           key="previewFromStart"
-          path="/interventions/:problemId/sessions/:interventionId/preview"
+          path="/interventions/:problemId/sessions/:sessionId/preview"
           component={({ match }) => (
             <AnswerInterventionPage match={match} isPreview />
           )}
@@ -139,7 +139,7 @@ export function App({ user }) {
         />
         <AppRoute
           key="previewFromCurrent"
-          path="/interventions/:problemId/sessions/:interventionId/preview/:index"
+          path="/interventions/:problemId/sessions/:sessionId/preview/:index"
           component={({ match }) => (
             <AnswerInterventionPage match={match} isPreview />
           )}

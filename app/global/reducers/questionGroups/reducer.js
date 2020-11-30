@@ -25,7 +25,7 @@ import {
 } from './constants';
 
 export const initialState = {
-  interventionId: null,
+  sessionId: null,
   groups: [],
   loaders: {
     questionGroupsLoading: false,
@@ -43,7 +43,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
     if (SAVED_ACTIONS.includes(type)) draft.questionsGroupsSaving = false;
     switch (type) {
       case GET_QUESTION_GROUPS_REQUEST: {
-        draft.interventionId = payload.interventionId;
+        draft.sessionId = payload.sessionId;
         draft.loaders.questionGroupsLoading = true;
         draft.groups = [];
         break;
@@ -54,7 +54,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case GET_QUESTION_GROUPS_ERROR: {
-        draft.interventionId = null;
+        draft.sessionId = null;
         draft.loaders.questionGroupsLoading = false;
         break;
       }

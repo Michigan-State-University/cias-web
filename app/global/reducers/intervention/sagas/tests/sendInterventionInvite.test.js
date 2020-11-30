@@ -34,7 +34,7 @@ describe('sendInterventionInvite saga', () => {
     ],
   };
   const payload = {
-    interventionId: mockState.problem.problem.interventions[index].id,
+    sessionId: mockState.problem.problem.interventions[index].id,
     emails: ['user00@mail.com', 'user10@mail.com'],
   };
 

@@ -40,7 +40,7 @@ const TargetQuestionChooser = props => {
   const {
     intl: { formatMessage },
     onClick,
-    intervention: { name, id: interventionId },
+    intervention: { name, id: sessionId },
     questions,
     selectedQuestion: { id } = {},
     pattern: { target },
@@ -63,7 +63,7 @@ const TargetQuestionChooser = props => {
     interventionList[interventionIndex].id !== selectedInterventionId;
   const isLast = currentIndex === questions.length - 1;
   const isCurrentIntervention = intervention =>
-    !problemBranching && interventionId === intervention.id;
+    !problemBranching && sessionId === intervention.id;
 
   useEffect(() => {
     if (isVisible) {
@@ -84,7 +84,7 @@ const TargetQuestionChooser = props => {
 
   const chooseIntervention = (targetInterventionId, event) => {
     if (canSelectIntervention(targetInterventionId)) {
-      if (!problemBranching && targetInterventionId === interventionId)
+      if (!problemBranching && targetInterventionId === sessionId)
         setIsInterventionView(false, event);
       else onClick({ type: 'Intervention', id: targetInterventionId });
     }

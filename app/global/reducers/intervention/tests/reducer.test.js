@@ -471,7 +471,7 @@ describe('problem reducer', () => {
         ...initState.problem.interventions[index].emails,
         'test@test.com',
       ],
-      interventionId: mockState.problem.interventions[index].id,
+      sessionId: mockState.problem.interventions[index].id,
     };
     const action = actionBuilder(
       SEND_INTERVENTION_INVITE_REQUEST,

@@ -10,8 +10,8 @@ import {
 import { RESEND_INTERVENTION_INVITE_REQUEST } from '../constants';
 import messages from '../messages';
 
-export function* resendInterventionInvite({ payload: { id, interventionId } }) {
-  const requestURL = `v1/sessions/${interventionId}/invitations/${id}/resend`;
+export function* resendInterventionInvite({ payload: { id, sessionId } }) {
+  const requestURL = `v1/sessions/${sessionId}/invitations/${id}/resend`;
   try {
     yield call(axios.get, requestURL);
     yield put(sendInterventionInviteSuccess());

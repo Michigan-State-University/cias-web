@@ -130,15 +130,15 @@ export const createInterventionSuccess = intervention =>
 export const createInterventionError = () =>
   actionBuilder(CREATE_INTERVENTION_ERROR, {});
 
-export const sendInterventionInviteRequest = (emails, interventionId) =>
-  actionBuilder(SEND_INTERVENTION_INVITE_REQUEST, { emails, interventionId });
+export const sendInterventionInviteRequest = (emails, sessionId) =>
+  actionBuilder(SEND_INTERVENTION_INVITE_REQUEST, { emails, sessionId });
 export const sendInterventionInviteSuccess = () =>
   actionBuilder(SEND_INTERVENTION_INVITE_SUCCESS, {});
 export const sendInterventionInviteError = () =>
   actionBuilder(SEND_INTERVENTION_INVITE_ERROR, {});
 
-export const resendInterventionInviteRequest = (id, interventionId) =>
-  actionBuilder(RESEND_INTERVENTION_INVITE_REQUEST, { id, interventionId });
+export const resendInterventionInviteRequest = (id, sessionId) =>
+  actionBuilder(RESEND_INTERVENTION_INVITE_REQUEST, { id, sessionId });
 
 export const fetchInterventionEmailsRequest = index =>
   actionBuilder(FETCH_INTERVENTION_EMAILS_REQUEST, { index });

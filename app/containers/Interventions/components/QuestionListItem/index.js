@@ -214,7 +214,7 @@ QuestionListItem.propTypes = {
   copyQuestion: PropTypes.func,
   intl: PropTypes.object,
   removeQuestion: PropTypes.func,
-  interventionId: PropTypes.string,
+  sessionId: PropTypes.string,
   changeNarratorBlockIndex: PropTypes.func,
   setDraggable: PropTypes.func,
   setCharacterPosition: PropTypes.func,
