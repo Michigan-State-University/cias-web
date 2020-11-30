@@ -16,13 +16,13 @@ describe('<MapInterventions />', () => {
       id: 1,
       name: 'Intervention 1',
       status: 'published',
-      problem_id: 'asd12d',
+      intervention_id: 'asd12d',
     },
     {
       id: 2,
       name: 'Intervention 2',
       status: 'draft',
-      problem_id: 'asdj12dsa',
+      intervention_id: 'asdj12dsa',
     },
   ];
   let store;

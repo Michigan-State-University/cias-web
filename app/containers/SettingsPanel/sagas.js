@@ -5,7 +5,7 @@ import {
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 
 function* problemSettingPageSaga() {
   yield all([fetchProblemSaga(), changeAccessSettingSaga()]);

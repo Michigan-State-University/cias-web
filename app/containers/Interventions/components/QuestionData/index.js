@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
-import { makeSelectProblemStatus } from 'global/reducers/problem';
+import { makeSelectProblemStatus } from 'global/reducers/intervention';
 import {
   updateQuestionDataSaga,
   makeSelectSelectedQuestionType,

@@ -29,7 +29,7 @@ import messages from '../messages';
 function* reorderQuestionGroups({ payload: { interventionId } }) {
   const groups = yield select(makeSelectQuestionGroups());
   const questions = yield select(makeSelectQuestions());
-  const requestURL = `/v1/interventions/${interventionId}/question_groups/position`;
+  const requestURL = `/v1/sessions/${interventionId}/question_groups/position`;
 
   try {
     yield axios.patch(requestURL, {

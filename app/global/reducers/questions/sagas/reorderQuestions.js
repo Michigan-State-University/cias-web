@@ -26,7 +26,7 @@ import {
 } from '../actions';
 
 function* reorderQuestions({ payload: { interventionId } }) {
-  const requestURL = `v1/interventions/${interventionId}/questions/move`;
+  const requestURL = `v1/sessions/${interventionId}/questions/move`;
   const questions = yield select(makeSelectQuestions());
 
   try {

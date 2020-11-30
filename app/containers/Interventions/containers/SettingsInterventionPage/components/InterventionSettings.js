@@ -13,13 +13,13 @@ import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import {
   editInterventionRequest,
   editInterventionSaga,
-} from 'global/reducers/intervention';
+} from 'global/reducers/session';
 import { questionsReducer } from 'global/reducers/questions';
 import {
   fetchProblemSaga,
   makeSelectProblemStatus,
   problemReducer,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 import globalMessages from 'global/i18n/globalMessages';
 
 import { canEdit } from 'models/Status/statusPermissions';

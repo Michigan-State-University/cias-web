@@ -1,6 +1,6 @@
 import find from 'lodash/find';
 import { createSelector } from 'reselect';
-import { selectProblem } from 'global/reducers/problem';
+import { selectProblem } from 'global/reducers/intervention';
 
 export const makeSelectCurrentIntervention = () =>
   createSelector(

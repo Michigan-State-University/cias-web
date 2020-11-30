@@ -1,35 +1,65 @@
 import produce from 'immer';
+import isEmpty from 'lodash/isEmpty';
 
+import { archived } from 'models/Status/StatusTypes';
 import {
-  FETCH_INTERVENTIONS_ERROR,
-  FETCH_INTERVENTIONS_REQUEST,
-  FETCH_INTERVENTIONS_SUCCESS,
+  COPY_PROBLEM_SUCCESS,
+  FETCH_PROBLEMS_ERROR,
+  FETCH_PROBLEMS_REQUEST,
+  FETCH_PROBLEMS_SUCCESS,
+  ARCHIVE_PROBLEM_ERROR,
+  ARCHIVE_PROBLEM_REQUEST,
+  ARCHIVE_PROBLEM_SUCCESS,
 } from './constants';
 
+import { CREATE_PROBLEM_SUCCESS } from '../intervention';
+
 export const initialState = {
-  interventions: null,
-  fetchInterventionLoading: true,
-  fetchInterventionError: null,
+  problems: [],
+  fetchProblemLoading: true,
+  fetchProblemError: null,
+  cache: {
+    archiveProblem: null,
+  },
 };
 
 /* eslint-disable default-case, no-param-reassign */
-
-export const interventionsReducer = (state = initialState, action) =>
+export const problemsReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case FETCH_INTERVENTIONS_REQUEST:
-        if (!draft.interventions) draft.fetchInterventionLoading = true;
-        draft.fetchInterventionError = null;
+      case FETCH_PROBLEMS_REQUEST:
+        if (isEmpty(state.problems)) draft.fetchProblemLoading = true;
+        draft.fetchProblemError = null;
         break;
-      case FETCH_INTERVENTIONS_SUCCESS:
-        draft.fetchInterventionLoading = false;
-        draft.interventions = action.payload.interventions;
+      case FETCH_PROBLEMS_SUCCESS:
+        draft.fetchProblemLoading = false;
+        draft.problems = action.payload.problems;
         break;
-      case FETCH_INTERVENTIONS_ERROR:
-        draft.fetchInterventionLoading = false;
-        draft.fetchInterventionError = action.payload.error;
+      case FETCH_PROBLEMS_ERROR:
+        draft.fetchProblemLoading = false;
+        draft.fetchProblemError = action.payload.error;
         break;
+      case CREATE_PROBLEM_SUCCESS:
+      case COPY_PROBLEM_SUCCESS:
+        draft.problems = [...state.problems, action.payload.problem];
+        break;
+      case ARCHIVE_PROBLEM_REQUEST:
+        let problemIndex = draft.problems.findIndex(
+          ({ id }) => id === action.payload.problemId,
+        );
+        draft.problems[problemIndex].status = archived;
+        draft.cache.archiveProblem = state.problems[problemIndex];
+        break;
+      case ARCHIVE_PROBLEM_SUCCESS:
+        draft.cache.archiveProblem = null;
+        break;
+      case ARCHIVE_PROBLEM_ERROR:
+        problemIndex = draft.problems.findIndex(
+          ({ id }) => id === action.payload.problemId,
+        );
+        draft.problems[problemIndex] = state.cache.archiveProblem;
+        draft.cache.archiveProblem = null;
     }
   });
 
-export default interventionsReducer;
+export default problemsReducer;

@@ -20,12 +20,12 @@ import navigationNext from 'assets/svg/navigation-next.svg';
 import presentationProjector from 'assets/svg/presentation-projector.svg';
 import presentationProjectorSelected from 'assets/svg/presentation-projector-selected.svg';
 import { colors, borders, fontSizes, themeColors } from 'theme';
-import { makeSelectIntervention } from 'global/reducers/intervention';
+import { makeSelectIntervention } from 'global/reducers/session';
 import {
   makeSelectProblemLoader,
   makeSelectProblem,
   makeSelectCurrentInterventionIndex,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 import {
   makeSelectQuestions,
   makeSelectSelectedQuestion,

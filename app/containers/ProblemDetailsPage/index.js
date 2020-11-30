@@ -37,7 +37,7 @@ import {
   makeSelectCurrentInterventionIndex,
   changeCurrentIntervention,
   fetchInterventionEmailsRequest,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 import { problemOptionsSaga } from 'global/sagas/problemOptionsSaga';
 
 import { injectSaga, useInjectSaga, useInjectReducer } from 'redux-injectors';
@@ -48,7 +48,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
 import archive from 'assets/svg/archive.svg';
-import { copyProblemRequest } from 'global/reducers/problems';
+import { copyProblemRequest } from 'global/reducers/interventions';
 
 import {
   questionsReducer,

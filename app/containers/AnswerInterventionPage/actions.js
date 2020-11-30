@@ -4,6 +4,7 @@
  *
  */
 
+import { actionBuilder } from 'utils/actionBuilder';
 import {
   FETCH_QUESTIONS,
   FETCH_QUESTIONS_SUCCESS,
@@ -19,7 +20,6 @@ import {
   CHANGE_IS_ANIMATING,
   SET_FEEDBACK_SCREEN_SETTINGS,
 } from './constants';
-import { actionBuilder } from '../../utils/actionBuilder';
 
 export const fetchQuestions = interventionId =>
   actionBuilder(FETCH_QUESTIONS, { interventionId });

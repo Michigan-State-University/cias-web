@@ -36,7 +36,7 @@ import {
   fetchProblemSaga,
   makeSelectProblemStatus,
   problemReducer,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 import { canPreview } from 'models/Status/statusPermissions';
 import {
   BackButton,

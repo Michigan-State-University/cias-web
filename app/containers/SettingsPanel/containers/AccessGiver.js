@@ -34,7 +34,7 @@ import {
   enableUserAccessRequest,
   fetchUsersWithAccessRequest,
   revokeUserAccessRequest,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 import {
   canAddParticipantsToIntervention,
   canRemoveParticipantsFromIntervention,

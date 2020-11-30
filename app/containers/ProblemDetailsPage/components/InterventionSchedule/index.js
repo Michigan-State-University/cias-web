@@ -24,7 +24,7 @@ import {
   changeSchedulingType,
   updateSchedulingDate,
   updateSchedulingPayload,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 
 import ExactDateOption from './ExactDateOption';
 import DaysAfterOption from './DaysAfterOption';

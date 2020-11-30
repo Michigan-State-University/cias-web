@@ -13,7 +13,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 import configureStore from 'configureStore';
 import { browserHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { SCHEDULE_OPTIONS } from 'global/reducers/problem';
+import { SCHEDULE_OPTIONS } from 'global/reducers/intervention';
 import InterventionSchedule from '../index';
 
 describe('<InterventionSchedule />', () => {

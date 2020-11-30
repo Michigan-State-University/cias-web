@@ -9,7 +9,7 @@ import {
   sendInterventionInviteSaga,
   resendInterventionInviteSaga,
   fetchInterventionEmailsSaga,
-} from 'global/reducers/problem/sagas';
+} from 'global/reducers/intervention/sagas';
 
 export default function* problemDetailsPageSagas() {
   yield all([

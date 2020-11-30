@@ -1,8 +1,17 @@
-export { fetchInterventionsRequest } from './actions';
-export { interventionsReducer } from './reducer';
 export {
-  makeSelectInterventionsState,
-  makeSelectInterventions,
-  makeSelectInterventionsLoader,
+  fetchProblemsRequest,
+  copyProblemRequest,
+  archiveProblemRequest,
+} from './actions';
+export { problemsReducer } from './reducer';
+export {
+  makeSelectProblemsState,
+  makeSelectProblems,
+  makeSelectProblemsLoader,
 } from './selectors';
-export { fetchInterventionsSaga } from './sagas';
+
+export {
+  fetchProblemsSaga,
+  copyProblemSaga,
+  archiveProblemSaga,
+} from './sagas';

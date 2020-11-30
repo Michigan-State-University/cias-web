@@ -29,7 +29,7 @@ describe('<QuestionDetails />', () => {
       questions: [
         {
           id: testId,
-          intervention_id: 'a8169-faf5e14',
+          session_id: 'a8169-faf5e14',
           type: 'Question::Number',
           position: 1,
           title: 'Title',

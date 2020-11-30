@@ -26,7 +26,7 @@ import {
   headAnimationType,
 } from 'models/Narrator/BlockTypes';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
-import { makeSelectProblemStatus } from 'global/reducers/problem';
+import { makeSelectProblemStatus } from 'global/reducers/intervention';
 import { canEdit } from 'models/Status/statusPermissions';
 
 import { elements } from 'theme';

@@ -7,8 +7,8 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { TRANSITION_TIMEOUT } from 'components/Collapse/CollapsableContent';
 
-import { interventionReducer } from 'global/reducers/intervention';
-import { problemReducer } from 'global/reducers/problem';
+import { interventionReducer } from 'global/reducers/session';
+import { problemReducer } from 'global/reducers/intervention';
 import { questionsReducer } from 'global/reducers/questions';
 import { localStateReducer } from 'global/reducers/localState';
 import { questionGroupsReducer } from 'global/reducers/questionGroups';

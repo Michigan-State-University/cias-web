@@ -27,7 +27,7 @@ import {
   updateFormulaCase,
   makeSelectCurrentInterventionIndex,
   changeCurrentIntervention,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 import { getQuestionsRequest } from 'global/reducers/questions';
 import { injectReducer } from 'redux-injectors';
 import {

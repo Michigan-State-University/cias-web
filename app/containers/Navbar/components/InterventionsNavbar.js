@@ -22,14 +22,14 @@ import {
   makeSelectIntervention,
   editInterventionSaga,
   makeSelectInterventionEditLoader,
-} from 'global/reducers/intervention';
+} from 'global/reducers/session';
 import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
 import { themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
 import backButton from 'assets/svg/arrow-black.svg';
 
 import ActionIcon from 'components/ActionIcon';
-import { makeSelectProblemStatus } from 'global/reducers/problem';
+import { makeSelectProblemStatus } from 'global/reducers/intervention';
 import { canEdit, canPreview } from 'models/Status/statusPermissions';
 import messages from './messages';
 import {

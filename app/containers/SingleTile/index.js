@@ -19,11 +19,11 @@ import { connect } from 'react-redux';
 import {
   sendProblemCsvRequest,
   editProblemRequest,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 import {
   copyProblemRequest,
   archiveProblemRequest,
-} from 'global/reducers/problems';
+} from 'global/reducers/interventions';
 
 import { problemOptionsSaga } from 'global/sagas/problemOptionsSaga';
 import EllipsisText from 'components/Text/EllipsisText';

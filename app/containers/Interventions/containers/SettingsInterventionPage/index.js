@@ -15,7 +15,7 @@ import {
   interventionReducer,
   makeSelectIntervention,
   getInterventionSaga,
-} from 'global/reducers/intervention';
+} from 'global/reducers/session';
 
 import InterventionSettings from './components/InterventionSettings';
 import messages from './messages';

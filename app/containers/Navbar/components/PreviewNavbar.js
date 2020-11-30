@@ -16,7 +16,7 @@ import mobile from 'assets/svg/mobile.svg';
 import { I_PHONE_8_PLUS_MODE, DESKTOP_MODE } from 'utils/previewMode';
 import { colors, themeColors } from 'theme';
 import { makeSelectPreviewMode } from 'containers/AnswerInterventionPage/selectors';
-import { makeSelectProblemStatus } from 'global/reducers/problem';
+import { makeSelectProblemStatus } from 'global/reducers/intervention';
 import {
   changePreviewMode as changePreviewModeAction,
   resetIntervention,

@@ -27,7 +27,7 @@ import {
   fetchInterventionsSaga,
   interventionsReducer,
   makeSelectInterventionsState,
-} from 'global/reducers/interventions';
+} from 'global/reducers/sessions';
 
 import { Roles } from 'models/User/UserRoles';
 import messages from './messages';

@@ -26,7 +26,7 @@ import {
   fetchProblemSaga,
   makeSelectProblem,
   fetchProblemRequest,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 
 import messages from '../messages';
 import {

@@ -17,7 +17,7 @@ import {
   makeSelectSelectedQuestion,
   makeSelectQuestions,
 } from 'global/reducers/questions';
-import { makeSelectProblemStatus } from 'global/reducers/problem';
+import { makeSelectProblemStatus } from 'global/reducers/intervention';
 import { canEdit } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Intervention/QuestionTypes';
 

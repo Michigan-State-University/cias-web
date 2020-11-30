@@ -25,7 +25,7 @@ import {
   resendInterventionInviteRequest,
   makeSelectProblemLoader,
   makeSelectProblemStatus,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import ParticipantInviter from './Components/ParticipantInviter';
@@ -43,7 +43,8 @@ const ShareBox = ({
   listLoading,
   problemStatus,
 }) => {
-  const { name, problem_id: problemId, emails, position } = intervention || {};
+  const { name, intervention_id: problemId, emails, position } =
+    intervention || {};
 
   const handleResend = id => resendInvite(id, intervention.id);
 

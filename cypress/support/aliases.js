@@ -4,21 +4,27 @@ export const CREATE_QUESTION = '@createQuestion';
 export const UPDATE_QUESTION = '@updateQuestion';
 export const ANSWER_QUESTION = '@answerQuestion';
 export const GET_PROBLEM_INTERVENTIONS = '@problemInterventions';
+export const LOGIN = '@login';
 
 export const ALIASES = {
+  [LOGIN]: {
+    METHOD: 'POST',
+    URL: '**/auth/sign_in',
+    ALIAS: LOGIN.slice(1),
+  },
   [UPDATE_INTERVENTION]: {
     METHOD: 'PATCH',
-    URL: '**/problems/*',
+    URL: '**/interventions/*',
     ALIAS: UPDATE_INTERVENTION.slice(1),
   },
   [GET_SESSION_QUESTION_GROUPS]: {
     METHOD: 'GET',
-    URL: '**/interventions/*/question_groups',
+    URL: '**/sessions/*/question_groups',
     ALIAS: GET_SESSION_QUESTION_GROUPS.slice(1),
   },
   [GET_PROBLEM_INTERVENTIONS]: {
     METHOD: 'GET',
-    URL: '**/problems/*/interventions',
+    URL: '**/interventions/*/sessions',
     ALIAS: GET_PROBLEM_INTERVENTIONS.slice(1),
   },
   [CREATE_QUESTION]: {

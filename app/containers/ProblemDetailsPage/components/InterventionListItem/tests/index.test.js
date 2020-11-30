@@ -26,7 +26,7 @@ describe('<InterventionListItem />', () => {
     intervention: {
       id: '1',
       name: 'Intervention',
-      problem_id: '1',
+      intervention_id: '1',
       settings: {
         formula: true,
       },

@@ -21,7 +21,7 @@ import {
   fetchProblemRequest,
   makeSelectProblemState,
   changeAccessSettingRequest,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 import { canChangeAccessSettings } from 'models/Status/statusPermissions';
 import { themeColors } from 'theme';
 

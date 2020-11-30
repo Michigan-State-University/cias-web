@@ -23,7 +23,7 @@ import {
   makeSelectSelectedQuestion,
   editQuestionSaga,
 } from 'global/reducers/questions';
-import { makeSelectProblemStatus } from 'global/reducers/problem';
+import { makeSelectProblemStatus } from 'global/reducers/intervention';
 
 import { canEdit } from 'models/Status/statusPermissions';
 import QuestionData from '../QuestionData';

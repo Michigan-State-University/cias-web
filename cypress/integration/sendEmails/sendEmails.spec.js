@@ -11,18 +11,14 @@ describe('Send emails', () => {
   it('Should add participant to list of sent emails', () => {
     // alias requests so that they can be awaited and checked for success
     cy.createAlias(UPDATE_QUESTION);
-    cy.route('PATCH', '**/problems/*').as('updateIntervention');
-    cy.route('POST', '**/problems/*/interventions').as('createSession');
-    cy.route('GET', '**/interventions/*/invitations').as(
-      'getSessionInvitations',
-    );
-    cy.route('POST', '**/interventions/*/invitations').as(
-      'addSessionInvitations',
-    );
-    cy.route('GET', '**/interventions/*/invitations/*/resend').as(
+    cy.route('PATCH', '**/interventions/*').as('updateIntervention');
+    cy.route('POST', '**/interventions/*/sessions').as('createSession');
+    cy.route('GET', '**/sessions/*/invitations').as('getSessionInvitations');
+    cy.route('POST', '**/sessions/*/invitations').as('addSessionInvitations');
+    cy.route('GET', '**/sessions/*/invitations/*/resend').as(
       'resendSessionInvitation',
     );
-    cy.route('GET', '**/interventions/*/question_groups').as(
+    cy.route('GET', '**/sessions/*/question_groups').as(
       'getSessionQuestionGroups',
     );
 

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { problemReducer } from 'global/reducers/problem';
+import { problemReducer } from 'global/reducers/intervention';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import ProblemDetailsPage from '../index';

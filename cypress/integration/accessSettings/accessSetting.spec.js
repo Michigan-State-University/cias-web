@@ -34,8 +34,8 @@ describe('Access settings', () => {
     cy.populateSessionWithQuestions([singleQuestion.name], {});
     cy.getBySel('back-problem-button').click();
 
-    cy.route('PATCH', '**/problems/*').as('updateIntervention');
-    cy.route('GET', '**/interventions/*/question_groups').as(
+    cy.route('PATCH', '**/interventions/*').as('updateIntervention');
+    cy.route('GET', '**/sessions/*/question_groups').as(
       'getSessionQuestionGroups',
     );
   });

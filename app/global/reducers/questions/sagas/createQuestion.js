@@ -20,7 +20,7 @@ import {
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
-import { makeSelectIntervention } from 'global/reducers/intervention';
+import { makeSelectIntervention } from 'global/reducers/session';
 import { CREATE_QUESTION_REQUEST } from '../constants';
 import {
   createQuestionSuccess,
@@ -48,7 +48,10 @@ function* createQuestion({ payload: { question } }) {
   try {
     const response = yield axios.post(requestURL, {
       ...question,
-      narrator: { blocks: [], settings: narrator },
+      narrator: {
+        blocks: [],
+        settings: narrator ?? { voice: true, animation: true },
+      },
     });
 
     const createdQuestion = mapQuestionToStateObject(response.data.data);

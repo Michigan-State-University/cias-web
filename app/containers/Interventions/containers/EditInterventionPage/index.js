@@ -44,7 +44,7 @@ import {
   getInterventionSaga,
   makeSelectInterventionLoaders,
   makeSelectIntervention,
-} from 'global/reducers/intervention';
+} from 'global/reducers/session';
 import {
   createQuestionRequest,
   questionsReducer,
@@ -70,7 +70,7 @@ import {
   problemReducer,
   fetchProblemSaga,
   makeSelectProblemStatus,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 
 import { canEdit } from 'models/Status/statusPermissions';
 

@@ -27,13 +27,13 @@ import {
   createProblemRequest,
   createProblemSaga,
   makeSelectProblemLoader,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 import {
   fetchProblemsRequest,
   makeSelectProblemsState,
   problemsReducer,
   fetchProblemsSaga,
-} from 'global/reducers/problems';
+} from 'global/reducers/interventions';
 
 import StatusFilter from './StatusFilter';
 import messages from './messages';

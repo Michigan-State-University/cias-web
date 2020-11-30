@@ -1,22 +1,22 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const interventions = state => state.interventions || initialState;
+const problems = state => state.problems || initialState;
 
-export const makeSelectInterventionsState = () =>
+export const makeSelectProblemsState = () =>
   createSelector(
-    interventions,
-    substate => substate,
+    problems,
+    problemsState => problemsState,
   );
 
-export const makeSelectInterventions = () =>
+export const makeSelectProblems = () =>
   createSelector(
-    interventions,
-    substate => substate.interventions,
+    problems,
+    problemsState => problemsState.problems,
   );
 
-export const makeSelectInterventionsLoader = () =>
+export const makeSelectProblemsLoader = () =>
   createSelector(
-    interventions,
-    substate => substate.fetchInterventionLoading,
+    problems,
+    problemsState => problemsState.fetchProblemLoading,
   );

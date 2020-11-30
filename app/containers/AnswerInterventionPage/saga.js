@@ -38,7 +38,7 @@ function* fetchQuestionsAsync({ payload: { interventionId } }) {
   try {
     const {
       data: { question_groups: groups },
-    } = yield axios.get(`/v1/interventions/${interventionId}/question_groups`);
+    } = yield axios.get(`/v1/sessions/${interventionId}/question_groups`);
     const orderedGroups = orderBy(groups, 'position');
     const questions = flatten(
       orderedGroups.map(({ questions: groupQuestions }) =>

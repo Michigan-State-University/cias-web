@@ -46,7 +46,7 @@ function InterventionListItem({
   const {
     id,
     name,
-    problem_id: problemId,
+    intervention_id: problemId,
     formula,
     schedule,
     schedule_at: scheduleAt,

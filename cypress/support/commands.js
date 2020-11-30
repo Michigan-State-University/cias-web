@@ -76,7 +76,7 @@ Cypress.Commands.add('createIntervention', () => {
 });
 
 Cypress.Commands.add('createSessionsInIntervention', (numberOfSession = 1) => {
-  cy.route('POST', '**/problems/*/interventions').as('createSession');
+  cy.route('POST', '**/interventions/*/sessions').as('createSession');
   for (let i = 0; i < numberOfSession; i += 1) {
     cy.getBySel('create-intervention-button').click();
     cy.wait('@createSession');
