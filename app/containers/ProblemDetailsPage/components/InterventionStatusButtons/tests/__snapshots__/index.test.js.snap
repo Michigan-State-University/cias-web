@@ -22,7 +22,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
 <button
   class="c0 c1"
   color="primary"
-  data-cy="publish-intervention-button"
+  data-cy="publish-session-button"
   width="200"
 >
   <span>

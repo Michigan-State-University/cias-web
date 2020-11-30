@@ -4,10 +4,7 @@ import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import {
-  REORDER_INTERVENTION_LIST,
-  REORDER_INTERVENTION_LIST_ERROR,
-} from '../constants';
+import { REORDER_SESSION_LIST, REORDER_SESSION_LIST_ERROR } from '../constants';
 import { reorderSessionsSuccess, reorderSessionsError } from '../actions';
 import messages from '../messages';
 
@@ -24,12 +21,12 @@ export function* reorderSessions({
     yield put(reorderSessionsSuccess());
   } catch (error) {
     yield call(toast.error, formatMessage(messages.reorderError), {
-      toastId: REORDER_INTERVENTION_LIST_ERROR,
+      toastId: REORDER_SESSION_LIST_ERROR,
     });
     yield put(reorderSessionsError(error));
   }
 }
 
 export default function* reorderSessionsSaga() {
-  yield takeLatest(REORDER_INTERVENTION_LIST, reorderSessions);
+  yield takeLatest(REORDER_SESSION_LIST, reorderSessions);
 }

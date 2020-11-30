@@ -2,9 +2,9 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
-import { CREATE_INTERVENTION_REQUEST } from '../constants';
+import { CREATE_SESSION_REQUEST } from '../constants';
 
-import { createInterventionSuccess, createInterventionError } from '../actions';
+import { createSessionSuccess, createSessionError } from '../actions';
 
 export function* createSession({ payload: { id, lastPosition } }) {
   const requestURL = `v1/interventions/${id}/sessions`;
@@ -20,12 +20,12 @@ export function* createSession({ payload: { id, lastPosition } }) {
       },
     });
 
-    yield put(createInterventionSuccess(defaultMapper(data)));
+    yield put(createSessionSuccess(defaultMapper(data)));
   } catch (error) {
-    yield put(createInterventionError(error));
+    yield put(createSessionError(error));
   }
 }
 
 export default function* createSessionSaga() {
-  yield takeLatest(CREATE_INTERVENTION_REQUEST, createSession);
+  yield takeLatest(CREATE_SESSION_REQUEST, createSession);
 }

@@ -11,33 +11,30 @@ import { apiInterventionResponse } from 'utils/apiResponseCreators';
 import createSessionSaga, {
   createSession,
 } from 'global/reducers/intervention/sagas/createSession';
-import {
-  createInterventionSuccess,
-  createInterventionError,
-} from '../../actions';
-import { CREATE_INTERVENTION_REQUEST } from '../../constants';
+import { createSessionSuccess, createSessionError } from '../../actions';
+import { CREATE_SESSION_REQUEST } from '../../constants';
 
-describe('createIntervention saga', () => {
+describe('createSession saga', () => {
   const mockProblem = createProblem();
   const payload = {
     id: mockProblem.id,
-    lastPosition: mockProblem.interventions.length,
+    lastPosition: mockProblem.sessions.length,
   };
 
   const mockApiResponse = apiInterventionResponse();
 
-  it('Check createIntervention generator success connection', () => {
+  it('Check createSession generator success connection', () => {
     const apiResponse = { data: { mockApiResponse } };
     return expectSaga(createSession, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .put(createInterventionSuccess(defaultMapper(mockApiResponse)))
+      .put(createSessionSuccess(defaultMapper(mockApiResponse)))
       .run();
   });
-  it('Check createIntervention error connection', () => {
+  it('Check createSession error connection', () => {
     const error = new Error('test');
     return expectSaga(createSession, { payload })
       .provide([[matchers.call.fn(axios.post), throwError(error)]])
-      .put(createInterventionError(error))
+      .put(createSessionError(error))
       .run();
   });
 
@@ -45,7 +42,7 @@ describe('createIntervention saga', () => {
     const sagaFunction = createSessionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(CREATE_INTERVENTION_REQUEST, createSession),
+      takeLatest(CREATE_SESSION_REQUEST, createSession),
     );
   });
 });

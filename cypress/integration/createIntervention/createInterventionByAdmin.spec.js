@@ -13,7 +13,7 @@ describe('Create Intervention by Admin', () => {
   });
   it('Create Intervention by Admin tests', () => {
     cy.visit('/');
-    // Create intervention and session
+    // Create session and session
     cy.createIntervention();
     cy.createSessionsInIntervention(1);
 

@@ -31,7 +31,7 @@ const mockSelectOptions = [
   },
 ];
 
-const InterventionSelect = ({ interventions = mockSelectOptions }) => (
+const InterventionSelect = ({ sessions = mockSelectOptions }) => (
   <Column>
     <Row mb={15} align="center">
       <Text fontWeight="bold">
@@ -43,8 +43,8 @@ const InterventionSelect = ({ interventions = mockSelectOptions }) => (
     </Row>
     <Select
       selectProps={{
-        options: interventions,
-        value: interventions[0],
+        options: sessions,
+        value: sessions[0],
         onChange: () => {},
       }}
     />
@@ -52,7 +52,7 @@ const InterventionSelect = ({ interventions = mockSelectOptions }) => (
 );
 
 InterventionSelect.propTypes = {
-  interventions: PropTypes.array,
+  sessions: PropTypes.array,
 };
 
 export default InterventionSelect;

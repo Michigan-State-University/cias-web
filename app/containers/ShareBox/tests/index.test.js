@@ -17,20 +17,20 @@ describe('<ShareBox />', () => {
   const reducer = state => state;
   const initialState = {
     problem: {
-      currentInterventionIndex: 0,
+      currentSessionIndex: 0,
       problem: {
-        interventions: [
+        sessions: [
           {
             name: 'Name',
-            slug: 'Slug-id-e-intervention',
+            slug: 'Slug-id-e-session',
             emails: ['mail@mail.com'],
             position: 1,
           },
         ],
       },
       loaders: {
-        sendInterventionLoading: false,
-        interventionEmailLoading: {
+        sendSessionLoading: false,
+        sessionEmailLoading: {
           email: null,
         },
       },

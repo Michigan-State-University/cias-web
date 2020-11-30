@@ -1,23 +1,23 @@
 export {
   CREATE_PROBLEM_SUCCESS,
-  SEND_INTERVENTION_INVITE_REQUEST,
+  SEND_SESSION_INVITE_REQUEST,
 } from './constants';
 export {
   fetchProblemRequest,
   createProblemRequest,
   editProblemRequest,
   sendProblemCsvRequest,
-  reorderInterventionList,
-  copyInterventionRequest,
-  changeCurrentIntervention,
+  reorderSessionList,
+  copySessionRequest,
+  changeCurrentSession,
   changeAccessSettingRequest,
   enableUserAccessRequest,
   fetchUsersWithAccessRequest,
   revokeUserAccessRequest,
-  createInterventionRequest,
-  sendInterventionInviteRequest,
-  resendInterventionInviteRequest,
-  fetchInterventionEmailsRequest,
+  createSessionRequest,
+  sendSessionInviteRequest,
+  resendSessionInviteRequest,
+  fetchSessionEmailsRequest,
 } from './actions';
 export { problemReducer } from './reducer';
 export {
@@ -53,6 +53,6 @@ export {
   changeSchedulingType,
   updateSchedulingDate,
   updateSchedulingPayload,
-} from './interventionSettings/actions';
+} from './sessionSettings/actions';
 
-export { SCHEDULE_OPTIONS } from './interventionSettings/constants';
+export { SCHEDULE_OPTIONS } from './sessionSettings/constants';

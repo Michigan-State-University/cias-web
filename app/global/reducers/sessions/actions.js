@@ -1,14 +1,14 @@
 import { actionBuilder } from 'utils/actionBuilder';
 
 import {
-  FETCH_INTERVENTIONS_REQUEST,
-  FETCH_INTERVENTIONS_ERROR,
-  FETCH_INTERVENTIONS_SUCCESS,
+  FETCH_SESSIONS_REQUEST,
+  FETCH_SESSIONS_ERROR,
+  FETCH_SESSIONS_SUCCESS,
 } from './constants';
 
-export const fetchInterventionsRequest = role =>
-  actionBuilder(FETCH_INTERVENTIONS_REQUEST, { role });
-export const fetchInterventionsSuccess = interventions =>
-  actionBuilder(FETCH_INTERVENTIONS_SUCCESS, { interventions });
-export const fetchInterventionsError = error =>
-  actionBuilder(FETCH_INTERVENTIONS_ERROR, { error });
+export const fetchSessionsRequest = role =>
+  actionBuilder(FETCH_SESSIONS_REQUEST, { role });
+export const fetchSessionsSuccess = sessions =>
+  actionBuilder(FETCH_SESSIONS_SUCCESS, { sessions });
+export const fetchSessionsError = error =>
+  actionBuilder(FETCH_SESSIONS_ERROR, { error });

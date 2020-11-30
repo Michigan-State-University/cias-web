@@ -15,7 +15,7 @@ export function* fetchIntervention({ payload: { id } }) {
       data: { data: sessions },
     } = yield call(axios.get, interventionsRequestURL);
     const mappedInterventions = sessions.map(defaultMapper);
-    data.interventions = orderBy(mappedInterventions, 'position');
+    data.sessions = orderBy(mappedInterventions, 'position');
     yield put(fetchProblemSuccess(data));
   } catch (error) {
     yield put(fetchProblemError(error));

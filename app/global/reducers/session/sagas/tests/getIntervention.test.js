@@ -11,52 +11,52 @@ import { fetchProblemRequest } from 'global/reducers/intervention';
 import { apiInterventionResponse } from 'utils/apiResponseCreators';
 
 import { getSession } from 'global/reducers/session/sagas/getSession';
-import { getInterventionSuccess, getInterventionError } from '../../actions';
-import { GET_INTERVENTION_REQUEST } from '../../constants';
+import { getSessionSuccess, getSessionError } from '../../actions';
+import { GET_SESSION_REQUEST } from '../../constants';
 import { getSessionSaga } from '../index';
 
-describe('getIntervention saga', () => {
+describe('getSession saga', () => {
   const mockProblem = createProblem();
   const mockState = {
     problem: { ...initialState, problem: mockProblem },
   };
   const payload = {
-    sessionId: mockProblem.interventions[0].id,
+    sessionId: mockProblem.sessions[0].id,
     interventionId: mockProblem.id,
   };
 
-  it('Check getIntervention generator success connection', () => {
+  it('Check getSession generator success connection', () => {
     const apiResponse = apiInterventionResponse();
     return expectSaga(getSession, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(getInterventionSuccess(defaultMapper(apiResponse.data)))
+      .put(getSessionSuccess(defaultMapper(apiResponse.data)))
       .run();
   });
 
-  it('Check getIntervention generator success connection with empty state', () => {
+  it('Check getSession generator success connection with empty state', () => {
     const apiResponse = apiInterventionResponse();
     return expectSaga(getSession, { payload })
       .withState({ problem: {} })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(fetchProblemRequest(payload.interventionId))
-      .put(getInterventionSuccess(defaultMapper(apiResponse.data)))
+      .put(getSessionSuccess(defaultMapper(apiResponse.data)))
       .run();
   });
-  it('Check getIntervention error connection', () => {
+  it('Check getSession error connection', () => {
     const error = new Error('test');
     return expectSaga(getSession, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
-      .put(getInterventionError(error))
+      .put(getSessionError(error))
       .run();
   });
 
-  it('Check getIntervention connection', () => {
+  it('Check getSession connection', () => {
     const sagaFunction = getSessionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(GET_INTERVENTION_REQUEST, getSession),
+      takeLatest(GET_SESSION_REQUEST, getSession),
     );
   });
 });

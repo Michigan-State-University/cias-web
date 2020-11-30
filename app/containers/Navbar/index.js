@@ -37,8 +37,7 @@ import DefaultNavbar from './components/DefaultNavbar';
 
 const renderNavbar = navbarProps => {
   const { navbarId, ...restProps } = navbarProps || {};
-  if (navbarId === 'interventions')
-    return <InterventionsNavbar {...restProps} />;
+  if (navbarId === 'sessions') return <InterventionsNavbar {...restProps} />;
   if (navbarId === 'preview') return <PreviewNavbar {...restProps} />;
   if (navbarId === 'default') return <DefaultNavbar {...restProps} />;
   return null;

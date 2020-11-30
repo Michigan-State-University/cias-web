@@ -39,8 +39,8 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import { localStateReducer } from 'global/reducers/localState';
 import {
-  getInterventionRequest,
-  interventionReducer,
+  getSessionRequest,
+  sessionReducer,
   getSessionSaga,
   makeSelectSessionLoaders,
   makeSelectSession,
@@ -99,13 +99,13 @@ function EditInterventionPage({
   intl: { formatMessage },
   questions,
   selectedQuestion,
-  getIntervention,
+  getSession,
   createQuestion,
   match: { params },
   reorderQuestions,
   reorderGroups,
   problemStatus,
-  interventionLoaders: { getIntervention: getInterventionLoader },
+  sessionLoaders: { getSession: getInterventionLoader },
   copyQuestions,
   deleteQuestions,
   groupQuestions,
@@ -113,7 +113,7 @@ function EditInterventionPage({
   groups,
   changeGroupName,
   getQuestionGroups,
-  intervention: { id: sessionId, name: interventionName },
+  session: { id: sessionId, name: sessionName },
 }) {
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState([]);
@@ -183,7 +183,7 @@ function EditInterventionPage({
   };
 
   useEffect(() => {
-    getIntervention({
+    getSession({
       sessionId: params.sessionId,
       interventionId: params.interventionId,
     });
@@ -296,7 +296,7 @@ function EditInterventionPage({
   return (
     <Fragment>
       <Helmet>
-        <title>{interventionName}</title>
+        <title>{sessionName}</title>
       </Helmet>
       <Modal
         title={formatMessage(messages.modalTitle)}
@@ -429,12 +429,12 @@ EditInterventionPage.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.string.isRequired,
   match: PropTypes.object,
-  getIntervention: PropTypes.func,
+  getSession: PropTypes.func,
   createQuestion: PropTypes.func,
   reorderQuestions: PropTypes.func,
   reorderGroups: PropTypes.func,
   getQuestionsLoading: PropTypes.bool,
-  interventionLoaders: PropTypes.object,
+  sessionLoaders: PropTypes.object,
   copyQuestions: PropTypes.func,
   deleteQuestions: PropTypes.func,
   groupQuestions: PropTypes.func,
@@ -442,21 +442,21 @@ EditInterventionPage.propTypes = {
   changeGroupName: PropTypes.func,
   getQuestionGroups: PropTypes.func,
   problemStatus: PropTypes.string,
-  intervention: PropTypes.object,
+  session: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionId(),
-  interventionLoaders: makeSelectSessionLoaders(),
+  sessionLoaders: makeSelectSessionLoaders(),
   createQuestionsLoader: makeSelectLoader('createQuestionLoading'),
   groups: makeSelectQuestionGroups(),
   problemStatus: makeSelectProblemStatus(),
-  intervention: makeSelectSession(),
+  session: makeSelectSession(),
 });
 
 const mapDispatchToProps = {
-  getIntervention: getInterventionRequest,
+  getSession: getSessionRequest,
   createQuestion: createQuestionRequest,
   reorderQuestions: reorderQuestionListRequest,
   reorderGroups: reorderGroupListRequest,
@@ -480,7 +480,7 @@ const withSaga = injectSaga({
 
 export default compose(
   injectReducer({ key: 'questions', reducer: questionsReducer }),
-  injectReducer({ key: 'intervention', reducer: interventionReducer }),
+  injectReducer({ key: 'session', reducer: sessionReducer }),
   injectReducer({ key: 'localState', reducer: localStateReducer }),
   injectReducer({ key: 'questionGroups', reducer: questionGroupsReducer }),
   injectReducer({ key: 'problem', reducer: problemReducer }),

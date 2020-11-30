@@ -3,31 +3,31 @@ import axios from 'axios';
 
 import pickFields from 'utils/pickFields';
 import {
-  updateInterventionSettingsSuccess,
-  updateInterventionSettingsError,
+  updateSessionSettingsSuccess,
+  updateSessionSettingsError,
 } from '../actions';
-import { UPDATE_INTERVENTION_SETTINGS_REQUEST } from '../constants';
+import { UPDATE_SESSION_SETTINGS_REQUEST } from '../constants';
 import { makeSelectCurrentSessionIndex, makeSelectProblem } from '../selectors';
 
 export function* updateSessionSettings({ fields } = {}) {
-  const interventionIndex = yield select(makeSelectCurrentSessionIndex());
+  const sessionIndex = yield select(makeSelectCurrentSessionIndex());
   const problem = yield select(makeSelectProblem());
-  const intervention = problem.interventions[interventionIndex];
+  const session = problem.sessions[sessionIndex];
 
-  const requestURL = `v1/interventions/${
-    intervention.intervention_id
-  }/sessions/${intervention.id}`;
+  const requestURL = `v1/interventions/${session.intervention_id}/sessions/${
+    session.id
+  }`;
 
-  const patchDifference = pickFields(intervention, fields);
+  const patchDifference = pickFields(session, fields);
 
   try {
     yield call(axios.put, requestURL, { session: patchDifference });
-    yield put(updateInterventionSettingsSuccess());
+    yield put(updateSessionSettingsSuccess());
   } catch (error) {
-    yield put(updateInterventionSettingsError());
+    yield put(updateSessionSettingsError());
   }
 }
 
 export default function* updateSessionSettingsSaga() {
-  yield takeLatest(UPDATE_INTERVENTION_SETTINGS_REQUEST, updateSessionSettings);
+  yield takeLatest(UPDATE_SESSION_SETTINGS_REQUEST, updateSessionSettings);
 }

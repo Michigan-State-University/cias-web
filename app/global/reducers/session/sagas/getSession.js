@@ -8,8 +8,8 @@ import {
   fetchProblemRequest,
   makeSelectProblem,
 } from 'global/reducers/intervention';
-import { GET_INTERVENTION_REQUEST } from '../constants';
-import { getInterventionSuccess, getInterventionError } from '../actions';
+import { GET_SESSION_REQUEST } from '../constants';
+import { getSessionSuccess, getSessionError } from '../actions';
 
 export function* getSession({ payload: { sessionId, interventionId } }) {
   const problem = yield select(makeSelectProblem());
@@ -24,12 +24,12 @@ export function* getSession({ payload: { sessionId, interventionId } }) {
       data: { data },
     } = yield call(axios.get, requestURL);
 
-    yield put(getInterventionSuccess(defaultMapper(data)));
+    yield put(getSessionSuccess(defaultMapper(data)));
   } catch (error) {
-    yield put(getInterventionError(error));
+    yield put(getSessionError(error));
   }
 }
 
 export default function* getSessionSaga() {
-  yield takeLatest(GET_INTERVENTION_REQUEST, getSession);
+  yield takeLatest(GET_SESSION_REQUEST, getSession);
 }

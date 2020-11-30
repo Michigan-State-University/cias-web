@@ -12,14 +12,14 @@ import sendSessionInviteSaga, {
   sendSessionInvite,
 } from 'global/reducers/intervention/sagas/sendSessionInvite';
 import {
-  sendInterventionInviteSuccess,
-  fetchInterventionEmailsSuccess,
-  sendInterventionInviteError,
+  sendSessionInviteSuccess,
+  fetchSessionEmailsSuccess,
+  sendSessionInviteError,
 } from '../../actions';
 import {
-  SEND_INTERVENTION_INVITE_SUCCESS,
-  SEND_INTERVENTION_INVITE_ERROR,
-  SEND_INTERVENTION_INVITE_REQUEST,
+  SEND_SESSION_INVITE_SUCCESS,
+  SEND_SESSION_INVITE_ERROR,
+  SEND_SESSION_INVITE_REQUEST,
 } from '../../constants';
 import messages from '../../messages';
 import { initialState } from '../../reducer';
@@ -34,7 +34,7 @@ describe('sendInterventionInvite saga', () => {
     ],
   };
   const payload = {
-    sessionId: mockState.problem.problem.interventions[index].id,
+    sessionId: mockState.problem.problem.sessions[index].id,
     emails: ['user00@mail.com', 'user10@mail.com'],
   };
 
@@ -42,12 +42,10 @@ describe('sendInterventionInvite saga', () => {
     expectSaga(sendSessionInvite, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .put(sendInterventionInviteSuccess())
-      .put(
-        fetchInterventionEmailsSuccess(apiResponse.session_invitations, index),
-      )
+      .put(sendSessionInviteSuccess())
+      .put(fetchSessionEmailsSuccess(apiResponse.session_invitations, index))
       .call(toast.info, formatMessage(messages.sendInviteSuccess), {
-        toastId: SEND_INTERVENTION_INVITE_SUCCESS,
+        toastId: SEND_SESSION_INVITE_SUCCESS,
       })
       .run());
 
@@ -56,9 +54,9 @@ describe('sendInterventionInvite saga', () => {
     return expectSaga(sendSessionInvite, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.post), throwError(error)]])
-      .put(sendInterventionInviteError())
+      .put(sendSessionInviteError())
       .call(toast.error, formatMessage(messages.sendInviteError), {
-        toastId: SEND_INTERVENTION_INVITE_ERROR,
+        toastId: SEND_SESSION_INVITE_ERROR,
       })
       .run();
   });
@@ -67,7 +65,7 @@ describe('sendInterventionInvite saga', () => {
     const sagaFunction = sendSessionInviteSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest([SEND_INTERVENTION_INVITE_REQUEST], sendSessionInvite),
+      takeLatest([SEND_SESSION_INVITE_REQUEST], sendSessionInvite),
     );
   });
 });

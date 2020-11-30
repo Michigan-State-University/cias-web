@@ -10,7 +10,7 @@ export const scope = 'app.containers.ProblemPage';
 export default defineMessages({
   createProblem: {
     id: `${scope}.createProblem`,
-    defaultMessage: 'Create a new intervention',
+    defaultMessage: 'Create a new session',
   },
   myProblems: {
     id: `${scope}.myProblems`,

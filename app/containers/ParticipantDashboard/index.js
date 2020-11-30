@@ -23,7 +23,7 @@ import { FormattedMessage } from 'react-intl';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import {
-  fetchInterventionsRequest,
+  fetchSessionsRequest,
   fetchSessionsSaga,
   interventionsReducer,
   makeSelectSessionsState,
@@ -33,14 +33,10 @@ import { Roles } from 'models/User/UserRoles';
 import messages from './messages';
 export function ParticipantDashboard({
   fetchInterventions,
-  interventions: {
-    interventions,
-    fetchInterventionLoading,
-    fetchInterventionError,
-  },
+  sessions: { sessions, fetchSessionLoading, fetchSessionError },
 }) {
   useInjectReducer({
-    key: 'interventions',
+    key: 'sessions',
     reducer: interventionsReducer,
   });
   useInjectSaga({ key: 'fetchSessions', saga: fetchSessionsSaga });
@@ -49,11 +45,11 @@ export function ParticipantDashboard({
     fetchInterventions(Roles.participant);
   }, []);
 
-  if (fetchInterventionLoading) return <Loader />;
-  if (fetchInterventionError)
+  if (fetchSessionLoading) return <Loader />;
+  if (fetchSessionError)
     return (
       <AppContainer>
-        <ErrorAlert errorText={fetchInterventionError} />
+        <ErrorAlert errorText={fetchSessionError} />
       </AppContainer>
     );
 
@@ -62,12 +58,12 @@ export function ParticipantDashboard({
       <AppContainer>
         <Box mt={20}>
           <H1 my={20}>
-            <FormattedMessage {...messages.interventions} />
+            <FormattedMessage {...messages.sessions} />
           </H1>
           <Row>
-            <MapInterventions interventions={interventions} participantView />
-            {!interventions ||
-              (interventions.length === 0 && (
+            <MapInterventions sessions={sessions} participantView />
+            {!sessions ||
+              (sessions.length === 0 && (
                 <Column align="center" mt={100}>
                   <FormattedMessage {...messages.noResults} />
                 </Column>
@@ -80,20 +76,20 @@ export function ParticipantDashboard({
 }
 
 ParticipantDashboard.propTypes = {
-  interventions: PropTypes.shape({
-    interventions: PropTypes.arrayOf(PropTypes.shape(Intervention)),
-    fetchInterventionLoading: PropTypes.bool,
-    fetchInterventionError: PropTypes.string,
+  sessions: PropTypes.shape({
+    sessions: PropTypes.arrayOf(PropTypes.shape(Intervention)),
+    fetchSessionLoading: PropTypes.bool,
+    fetchSessionError: PropTypes.string,
   }),
   fetchInterventions: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  interventions: makeSelectSessionsState(),
+  sessions: makeSelectSessionsState(),
 });
 
 const mapDispatchToProps = {
-  fetchInterventions: fetchInterventionsRequest,
+  fetchInterventions: fetchSessionsRequest,
 };
 
 const withConnect = connect(

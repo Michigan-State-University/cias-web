@@ -15,7 +15,7 @@ export default defineMessages({
   },
   subheader: {
     id: `${scope}.subheader`,
-    defaultMessage: 'Who can access this intervention?',
+    defaultMessage: 'Who can access this session?',
   },
   anyoneWithTheLinkLabel: {
     id: `${scope}.anyoneWithTheLinkLabel`,
@@ -32,22 +32,22 @@ export default defineMessages({
   anyoneWithTheLinkSublabel: {
     id: `${scope}.anyoneWithTheLinkSublabel`,
     defaultMessage:
-      '<b>Anyone with the link</b> can access the intervention. Responses will be <b>anonymous</b> - therefore branching between sessions is <b>not</b> supported.',
+      '<b>Anyone with the link</b> can access the session. Responses will be <b>anonymous</b> - therefore branching between sessions is <b>not</b> supported.',
   },
   anyoneWhoIsARegisterdParticipantSublabel: {
     id: `${scope}.anyoneWhoIsARegisterdParticipantSublabel`,
     defaultMessage:
-      'To access the intervention, participants must <b>create</b> or <b>have</b> a <b>CIAS account.</b>',
+      'To access the session, participants must <b>create</b> or <b>have</b> a <b>CIAS account.</b>',
   },
   onlyInvitedRegisteredParticipantsSublabel: {
     id: `${scope}.onlyInvitedRegisteredParticipantsSublabel`,
     defaultMessage:
-      'Participants can only access the intervention <b>if access is granted</b> by entering their email address below. Participants must also <b>create</b> or <b>have</b> a <b>CIAS account.</b>',
+      'Participants can only access the session <b>if access is granted</b> by entering their email address below. Participants must also <b>create</b> or <b>have</b> a <b>CIAS account.</b>',
   },
   accessGiverHeader: {
     id: `${scope}.accessGiverHeader`,
     defaultMessage:
-      'Enter emails to grant participants access to the intervention. ',
+      'Enter emails to grant participants access to the session. ',
   },
   accessGiverHeaderNote: {
     id: `${scope}.accessGiverHeaderNote`,

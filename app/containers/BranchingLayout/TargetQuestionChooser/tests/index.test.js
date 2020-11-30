@@ -7,7 +7,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { TRANSITION_TIMEOUT } from 'components/Collapse/CollapsableContent';
 
-import { interventionReducer } from 'global/reducers/session';
+import { sessionReducer } from 'global/reducers/session';
 import { problemReducer } from 'global/reducers/intervention';
 import { questionsReducer } from 'global/reducers/questions';
 import { localStateReducer } from 'global/reducers/localState';
@@ -37,14 +37,14 @@ const mockSingleGroup = (suffix = 1) => ({
 });
 
 const mockIntervention = (suffix = 1) => ({
-  id: `intervention-test-id-${suffix}`,
+  id: `session-test-id-${suffix}`,
   name: `Intervention test title ${suffix}`,
 });
 
 const mockMostUsedStore = question => {
   const store = createTestStore({
-    intervention: {
-      intervention: {
+    session: {
+      session: {
         name: 'e-Intervention Name',
         id: 'asd12ca-daiud12',
       },
@@ -52,7 +52,7 @@ const mockMostUsedStore = question => {
 
     problem: {
       problem: {
-        interventions: [
+        sessions: [
           mockIntervention(1),
           mockIntervention(2),
           mockIntervention(3),
@@ -75,7 +75,7 @@ const mockMostUsedStore = question => {
     },
   });
   store.injectedReducers = {
-    intervention: interventionReducer,
+    session: sessionReducer,
     questions: questionsReducer,
     localState: localStateReducer,
     problem: problemReducer,
@@ -88,14 +88,14 @@ describe('<TargetQuestionChooser />', () => {
   let store;
   const mockQuestion = mockSingleQuestion(1, true);
   const initialState = {
-    intervention: {
-      intervention: {
+    session: {
+      session: {
         name: 'e-Intervention Name',
         id: 'asd12ca-daiud12',
       },
     },
     problem: {
-      problem: { interventions: [] },
+      problem: { sessions: [] },
       loaders: {
         fetchProblemLoading: false,
       },
@@ -112,7 +112,7 @@ describe('<TargetQuestionChooser />', () => {
   beforeAll(() => {
     store = createTestStore(initialState);
     store.injectedReducers = {
-      intervention: interventionReducer,
+      session: sessionReducer,
       questions: questionsReducer,
       localState: localStateReducer,
     };
@@ -154,14 +154,14 @@ describe('<TargetQuestionChooser />', () => {
     const group = mockSingleGroup(2);
 
     store = createTestStore({
-      intervention: {
-        intervention: {
+      session: {
+        session: {
           name: 'e-Intervention Name',
           id: 'asd12ca-daiud12',
         },
       },
       problem: {
-        problem: { interventions: [] },
+        problem: { sessions: [] },
         loaders: {
           fetchProblemLoading: false,
         },
@@ -181,7 +181,7 @@ describe('<TargetQuestionChooser />', () => {
 
     store.runSaga = () => {};
     store.injectedReducers = {
-      intervention: interventionReducer,
+      session: sessionReducer,
       questions: questionsReducer,
       localState: localStateReducer,
     };
@@ -207,12 +207,12 @@ describe('<TargetQuestionChooser />', () => {
     });
   });
 
-  it('should render intervention view with list of interventions when selected', () => {
+  it('should render session view with list of sessions when selected', () => {
     const question = mockSingleQuestion(2, true);
 
     store = createTestStore({
-      intervention: {
-        intervention: {
+      session: {
+        session: {
           name: 'e-Intervention Name',
           id: 'asd12ca-daiud12',
         },
@@ -220,7 +220,7 @@ describe('<TargetQuestionChooser />', () => {
 
       problem: {
         problem: {
-          interventions: [
+          sessions: [
             mockIntervention(1),
             mockIntervention(2),
             mockIntervention(3),
@@ -241,7 +241,7 @@ describe('<TargetQuestionChooser />', () => {
     });
     store.runSaga = () => {};
     store.injectedReducers = {
-      intervention: interventionReducer,
+      session: sessionReducer,
       questions: questionsReducer,
       localState: localStateReducer,
       problem: problemReducer,
@@ -272,10 +272,10 @@ describe('<TargetQuestionChooser />', () => {
     const questionView = queryByTestId(`${question.id}-select-target-question`);
 
     const interventionComponentList = getAllByTestId(
-      /^.+-select-target-intervention-el-\d+$/,
+      /^.+-select-target-session-el-\d+$/,
     );
     const interventionView = getByTestId(
-      `${question.id}-select-target-intervention`,
+      `${question.id}-select-target-session`,
     );
 
     expect(questionView).toEqual(null);
@@ -285,18 +285,18 @@ describe('<TargetQuestionChooser />', () => {
     expect(interventionComponentList).toHaveLength(3);
   });
 
-  it('should render spinner on intervention view when loading a list', () => {
+  it('should render spinner on session view when loading a list', () => {
     const question = mockSingleQuestion(2, true);
 
     store = createTestStore({
-      intervention: {
-        intervention: {
+      session: {
+        session: {
           name: 'e-Intervention Name',
           id: 'asd12ca-daiud12',
         },
       },
       problem: {
-        problem: { interventions: [] },
+        problem: { sessions: [] },
         loaders: {
           fetchProblemLoading: true,
         },
@@ -313,7 +313,7 @@ describe('<TargetQuestionChooser />', () => {
 
     store.runSaga = () => {};
     store.injectedReducers = {
-      intervention: interventionReducer,
+      session: sessionReducer,
       questions: questionsReducer,
       localState: localStateReducer,
     };
@@ -333,7 +333,7 @@ describe('<TargetQuestionChooser />', () => {
     fireEvent.click(interventionViewSetter);
 
     const interventionViewSpinner = getByTestId(
-      `${question.id}-select-target-intervention-spinner`,
+      `${question.id}-select-target-session-spinner`,
     );
 
     expect(interventionViewSpinner).not.toEqual(null);
@@ -367,7 +367,7 @@ describe('<TargetQuestionChooser />', () => {
     });
   });
 
-  it('should invoke onClick when intervention is selected', () => {
+  it('should invoke onClick when session is selected', () => {
     const newProps = { ...props, onClick: jest.fn(), isVisible: false };
     const question = mockSingleQuestion(2, true);
     store = mockMostUsedStore(question);
@@ -383,12 +383,12 @@ describe('<TargetQuestionChooser />', () => {
     );
     fireEvent.click(img);
     const interventionRow = getByTestId(
-      `${question.id}-select-target-intervention-el-0`,
+      `${question.id}-select-target-session-el-0`,
     );
     fireEvent.click(interventionRow);
     expect(newProps.onClick).toHaveBeenCalledWith({
       type: 'Intervention',
-      id: 'intervention-test-id-1',
+      id: 'session-test-id-1',
     });
   });
 

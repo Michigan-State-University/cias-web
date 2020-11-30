@@ -13,7 +13,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
         class="H2-egphza-0 hIKhKE"
       >
         <span>
-          Who can access this intervention?
+          Who can access this session?
         </span>
       </h2>
       <div

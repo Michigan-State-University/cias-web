@@ -88,7 +88,7 @@ connection from the instant your users load the app. This is done with a
 ServiceWorker and a fallback to AppCache, so this feature even works on older
 browsers!
 
-> All your files are included automatically. No manual intervention needed
+> All your files are included automatically. No manual session needed
 > thanks to Webpack's [`offline-plugin`](https://github.com/NekR/offline-plugin)
 
 ### Add To Homescreen

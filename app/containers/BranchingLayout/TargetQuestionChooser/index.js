@@ -40,7 +40,7 @@ const TargetQuestionChooser = props => {
   const {
     intl: { formatMessage },
     onClick,
-    intervention: { name, id: sessionId },
+    session: { name, id: sessionId },
     questions,
     selectedQuestion: { id } = {},
     pattern: { target },
@@ -49,10 +49,10 @@ const TargetQuestionChooser = props => {
     problem,
     problemLoading,
     problemBranching,
-    interventionIndex,
+    sessionIndex,
     questionGroups,
   } = props;
-  const { interventions: interventionList } = problem || {};
+  const { sessions: sessionList } = problem || {};
   const [isInterventionView, _setIsInterventionView] = useState(false);
   const setIsInterventionView = (value, event) => {
     if (event) event.stopPropagation();
@@ -60,10 +60,10 @@ const TargetQuestionChooser = props => {
   };
   const canSelectIntervention = selectedInterventionId =>
     !problemBranching ||
-    interventionList[interventionIndex].id !== selectedInterventionId;
+    sessionList[sessionIndex].id !== selectedInterventionId;
   const isLast = currentIndex === questions.length - 1;
-  const isCurrentIntervention = intervention =>
-    !problemBranching && sessionId === intervention.id;
+  const isCurrentIntervention = session =>
+    !problemBranching && sessionId === session.id;
 
   useEffect(() => {
     if (isVisible) {
@@ -95,7 +95,7 @@ const TargetQuestionChooser = props => {
       <Row mb={20}>
         <Img
           data-testid={`${id}-select-target-question-interview-view-setter`}
-          data-cy="select-target-question-intervention-view-setter"
+          data-cy="select-target-question-session-view-setter"
           src={arrowLeft}
           mr={10}
           onClick={event => setIsInterventionView(true, event)}
@@ -128,33 +128,33 @@ const TargetQuestionChooser = props => {
         <Box
           width="100%"
           height="80px"
-          data-testid={`${id}-select-target-intervention-spinner`}
+          data-testid={`${id}-select-target-session-spinner`}
         >
           <Loader type="inline" hidden={false} />
         </Box>
       );
 
     return (
-      <Column data-testid={`${id}-select-target-intervention`}>
+      <Column data-testid={`${id}-select-target-session`}>
         <Row mb={20}>
-          <H3>{formatMessage(messages.interventionListHeader)}</H3>
+          <H3>{formatMessage(messages.sessionListHeader)}</H3>
         </Row>
         <Box maxHeight="300px" overflow="scroll">
           <Column>
-            {interventionList &&
-              interventionList.map((intervention, index) => (
+            {sessionList &&
+              sessionList.map((session, index) => (
                 <Row
-                  data-testid={`${id}-select-target-intervention-el-${index}`}
-                  data-cy={`choose-intervention-${index}`}
-                  key={`${id}-select-target-intervention-${index}`}
-                  mb={index !== interventionList.length - 1 ? 15 : 5}
-                  onClick={event => chooseIntervention(intervention.id, event)}
+                  data-testid={`${id}-select-target-session-el-${index}`}
+                  data-cy={`choose-session-${index}`}
+                  key={`${id}-select-target-session-${index}`}
+                  mb={index !== sessionList.length - 1 ? 15 : 5}
+                  onClick={event => chooseIntervention(session.id, event)}
                   align="center"
-                  clickable={canSelectIntervention(intervention.id)}
+                  clickable={canSelectIntervention(session.id)}
                 >
                   <Img
                     src={
-                      target.id === intervention.id
+                      target.id === session.id
                         ? presentationProjectorSelected
                         : presentationProjector
                     }
@@ -162,20 +162,20 @@ const TargetQuestionChooser = props => {
                   />
                   <Box
                     mr={10}
-                    maxWidth={isCurrentIntervention(intervention) ? 70 : 140}
+                    maxWidth={isCurrentIntervention(session) ? 70 : 140}
                   >
                     <EllipsisText
-                      text={intervention.name}
-                      fontWeight={target.id === intervention.id ? 'bold' : ''}
+                      text={session.name}
+                      fontWeight={target.id === session.id ? 'bold' : ''}
                       fontSize={13}
                       color={
-                        canSelectIntervention(intervention.id)
+                        canSelectIntervention(session.id)
                           ? colors.black
                           : colors.grey
                       }
                     />
                   </Box>
-                  {isCurrentIntervention(intervention) && (
+                  {isCurrentIntervention(session) && (
                     <Badge bg={themeColors.secondary} color={colors.white}>
                       {formatMessage(messages.selectedInterventionBadge)}
                     </Badge>
@@ -228,7 +228,7 @@ const TargetQuestionChooser = props => {
 TargetQuestionChooser.propTypes = {
   intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
-  intervention: PropTypes.object,
+  session: PropTypes.object,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.shape(Question),
   pattern: PropTypes.shape({
@@ -236,7 +236,7 @@ TargetQuestionChooser.propTypes = {
     target: PropTypes.shape({ id: PropTypes.string, type: PropTypes.string }),
   }),
   currentIndex: PropTypes.string,
-  interventionIndex: PropTypes.number,
+  sessionIndex: PropTypes.number,
   isVisible: PropTypes.bool,
   problem: PropTypes.object,
   problemLoading: PropTypes.bool,
@@ -245,13 +245,13 @@ TargetQuestionChooser.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectSession(),
+  session: makeSelectSession(),
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
   currentIndex: makeSelectSelectedQuestionId(),
   problemLoading: makeSelectProblemLoader('fetchProblemLoading'),
   problem: makeSelectProblem(),
-  interventionIndex: makeSelectCurrentSessionIndex(),
+  sessionIndex: makeSelectCurrentSessionIndex(),
   questionGroups: makeSelectQuestionGroups(),
 });
 

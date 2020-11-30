@@ -19,7 +19,7 @@ import messages from './messages';
 function InterventionCreateButton({ handleClick }) {
   return (
     <NewInterventionContainer
-      data-cy="create-intervention-button"
+      data-cy="create-session-button"
       onClick={handleClick}
     >
       <Row align="center">

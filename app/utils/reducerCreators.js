@@ -8,7 +8,7 @@ export const createQuestion = (id = 0, type = singleQuestion.id) => ({
   question_group_id: `group-test-${id}`,
 });
 
-export const createIntervention = (id = 0) => ({
+export const createSession = (id = 0) => ({
   id: `intervention-test-${id}`,
   emails: null,
   name: `intervention-test-${id}`,
@@ -25,7 +25,7 @@ export const createProblem = (index = 0) => ({
     },
   ],
   shared_to: ids.anyoneWithTheLink,
-  interventions: [createIntervention(`${index}`)],
+  sessions: [createSession(`${index}`)],
 });
 
 export const createUser = (index = 0) => ({

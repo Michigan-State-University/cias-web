@@ -13,8 +13,8 @@ export default defineMessages({
     id: `${scope}.header`,
     defaultMessage: 'Next Screen',
   },
-  interventionListHeader: {
-    id: `${scope}.interventionListHeader`,
+  sessionListHeader: {
+    id: `${scope}.sessionListHeader`,
     defaultMessage: 'Your Sessions',
   },
   selectedInterventionBadge: {

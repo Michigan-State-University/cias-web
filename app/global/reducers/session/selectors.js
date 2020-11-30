@@ -2,18 +2,18 @@ import { createSelector } from 'reselect';
 
 import { initialState } from './reducer';
 
-const selectSession = state => state.intervention || initialState;
+const selectSession = state => state.session || initialState;
 
 const makeSelectSession = () =>
   createSelector(
     selectSession,
-    substate => substate.intervention,
+    substate => substate.session,
   );
 
 const makeSelectCacheSession = () =>
   createSelector(
     selectSession,
-    substate => substate.cache.intervention,
+    substate => substate.cache.session,
   );
 
 const makeSelectSessionLoaders = () =>
@@ -25,7 +25,7 @@ const makeSelectSessionLoaders = () =>
 const makeSelectSessionEditLoader = () =>
   createSelector(
     selectSession,
-    substate => substate.interventionSaving,
+    substate => substate.sessionSaving,
   );
 
 export {

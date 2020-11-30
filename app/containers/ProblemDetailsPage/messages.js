@@ -8,9 +8,9 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.HomePage';
 
 export default defineMessages({
-  createIntervention: {
-    id: `${scope}.createIntervention`,
-    defaultMessage: 'Create intervention',
+  createSession: {
+    id: `${scope}.createSession`,
+    defaultMessage: 'Create session',
   },
   noInterventions: {
     id: `${scope}.noInterventions`,
@@ -46,11 +46,11 @@ export default defineMessages({
   },
   duplicate: {
     id: `${scope}.duplicate`,
-    defaultMessage: 'Duplicate intervention',
+    defaultMessage: 'Duplicate session',
   },
   archive: {
     id: `${scope}.archive`,
-    defaultMessage: 'Archive intervention',
+    defaultMessage: 'Archive session',
   },
   modalTitle: {
     id: `${scope}.modalTitle`,

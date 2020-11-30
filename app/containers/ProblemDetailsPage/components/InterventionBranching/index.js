@@ -26,7 +26,7 @@ import {
   updateFormula,
   updateFormulaCase,
   makeSelectCurrentSessionIndex,
-  changeCurrentIntervention,
+  changeCurrentSession,
 } from 'global/reducers/intervention';
 import { getQuestionsRequest } from 'global/reducers/questions';
 import { injectReducer } from 'redux-injectors';
@@ -42,13 +42,13 @@ function InterventionBranching({
   status,
   onChangeFormulaStatus,
   formula,
-  intervention: { id, position },
+  session: { id, position },
   onFormulaUpdate,
   onAddCase,
   onRemoveCase,
   onUpdateCase,
   problem,
-  interventionIndex,
+  sessionIndex,
   changeInterventionIndex,
   fetchQuestions,
   disabled,
@@ -57,7 +57,7 @@ function InterventionBranching({
   const displayPatternTargetText = target => {
     if (target.id === '') return formatMessage(messages.selectSession);
     const intervention = find(
-      problem.interventions,
+      problem.sessions,
       value => value.id === target.id,
     );
     return intervention
@@ -68,7 +68,7 @@ function InterventionBranching({
   const handleFormulaStatus = value => onChangeFormulaStatus(value, id);
 
   const handleClickAddVariable = () => {
-    if (position !== interventionIndex + 1) {
+    if (position !== sessionIndex + 1) {
       changeInterventionIndex(position - 1);
     }
     if (id !== activeInterventionId) {
@@ -133,14 +133,14 @@ InterventionBranching.propTypes = {
   nextInterventionName: PropTypes.string,
   status: PropTypes.bool,
   onChangeFormulaStatus: PropTypes.func,
-  intervention: PropTypes.object,
+  session: PropTypes.object,
   formula: PropTypes.object,
   onFormulaUpdate: PropTypes.func,
   onAddCase: PropTypes.func,
   onRemoveCase: PropTypes.func,
   onUpdateCase: PropTypes.func,
   problem: PropTypes.object,
-  interventionIndex: PropTypes.number,
+  sessionIndex: PropTypes.number,
   changeInterventionIndex: PropTypes.func,
   fetchQuestions: PropTypes.func,
   disabled: PropTypes.bool,
@@ -149,7 +149,7 @@ InterventionBranching.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   problem: makeSelectProblem(),
-  interventionIndex: makeSelectCurrentSessionIndex(),
+  sessionIndex: makeSelectCurrentSessionIndex(),
   activeInterventionId: makeSelectQuestionGroupsSessionId(),
 });
 
@@ -159,7 +159,7 @@ const mapDispatchToProps = {
   onRemoveCase: removeFormulaCase,
   onUpdateCase: updateFormulaCase,
   onChangeFormulaStatus: changeFormulaStatus,
-  changeInterventionIndex: changeCurrentIntervention,
+  changeInterventionIndex: changeCurrentSession,
   fetchQuestions: getQuestionsRequest,
 };
 

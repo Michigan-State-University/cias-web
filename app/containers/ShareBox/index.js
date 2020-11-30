@@ -21,8 +21,8 @@ import H3 from 'components/H3';
 import { colors } from 'theme';
 import { canShareWithParticipants } from 'models/Status/statusPermissions';
 import {
-  sendInterventionInviteRequest,
-  resendInterventionInviteRequest,
+  sendSessionInviteRequest,
+  resendSessionInviteRequest,
   makeSelectProblemLoader,
   makeSelectProblemStatus,
 } from 'global/reducers/intervention';
@@ -35,7 +35,7 @@ import { makeSelectCurrentSession } from './selectors';
 import { InterventionIndex } from './styled';
 
 const ShareBox = ({
-  intervention,
+  session,
   sendInvite,
   resendInvite,
   sendLoading,
@@ -44,9 +44,9 @@ const ShareBox = ({
   problemStatus,
 }) => {
   const { name, intervention_id: interventionId, emails, position } =
-    intervention || {};
+    session || {};
 
-  const handleResend = id => resendInvite(id, intervention.id);
+  const handleResend = id => resendInvite(id, session.id);
 
   const sharingPossible = canShareWithParticipants(problemStatus);
 
@@ -73,21 +73,21 @@ const ShareBox = ({
         </Row>
       );
   };
-  if (intervention) {
+  if (session) {
     const link = `${
       process.env.WEB_URL
-    }/interventions/${interventionId}/sessions/${intervention.id}/fill`;
+    }/interventions/${interventionId}/sessions/${session.id}/fill`;
     return (
       <Box height="fit-content" width={500} mt={20}>
         <Box display="flex" align="center">
           <InterventionIndex>{position}</InterventionIndex>
-          <H2 ml={10}>{intervention.name}</H2>
+          <H2 ml={10}>{session.name}</H2>
         </Box>
         <Row mt={20}>
           <ParticipantInviter
             disabled={!sharingPossible}
             loading={sendLoading}
-            sendInvite={value => sendInvite(value, intervention.id)}
+            sendInvite={value => sendInvite(value, session.id)}
           />
         </Row>
         {exportCsvButton()}
@@ -125,7 +125,7 @@ const ShareBox = ({
 };
 
 ShareBox.propTypes = {
-  intervention: PropTypes.shape({
+  session: PropTypes.shape({
     name: PropTypes.string,
   }),
   sendInvite: PropTypes.func,
@@ -137,16 +137,16 @@ ShareBox.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectCurrentSession(),
-  sendLoading: makeSelectProblemLoader('sendInterventionLoading'),
-  listLoading: makeSelectProblemLoader('fetchInterventionEmailsLoading'),
-  emailLoading: makeSelectProblemLoader('interventionEmailLoading'),
+  session: makeSelectCurrentSession(),
+  sendLoading: makeSelectProblemLoader('sendSessionLoading'),
+  listLoading: makeSelectProblemLoader('fetchSessionEmailsLoading'),
+  emailLoading: makeSelectProblemLoader('sessionEmailLoading'),
   problemStatus: makeSelectProblemStatus(),
 });
 
 const mapDispatchToProps = {
-  sendInvite: sendInterventionInviteRequest,
-  resendInvite: resendInterventionInviteRequest,
+  sendInvite: sendSessionInviteRequest,
+  resendInvite: resendSessionInviteRequest,
 };
 
 const withConnect = connect(

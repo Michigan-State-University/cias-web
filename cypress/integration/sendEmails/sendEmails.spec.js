@@ -24,12 +24,12 @@ describe('Send emails', () => {
 
     cy.visit('/');
 
-    // Create intervention and 2 sessions
+    // Create session and 2 sessions
     cy.getBySel('create-problem-button').click();
-    cy.getBySel('create-intervention-button').click();
+    cy.getBySel('create-session-button').click();
     cy.wait('@createSession');
     cy.get('@createSession').should('have.property', 'status', 201);
-    cy.getBySel('create-intervention-button').click();
+    cy.getBySel('create-session-button').click();
     cy.wait('@createSession');
     cy.get('@createSession').should('have.property', 'status', 201);
 
@@ -37,8 +37,8 @@ describe('Send emails', () => {
     cy.getBySel('share-session-modal-open-button-0').click();
     cy.getBySel('send-email-button').should('not.exist');
 
-    // publish intervention
-    cy.getBySel('publish-intervention-button').click();
+    // publish session
+    cy.getBySel('publish-session-button').click();
     cy.getBySel('confirmation-box-confirm-button').click();
     cy.wait('@updateIntervention');
     cy.get('@updateIntervention').should('have.property', 'status', 200);

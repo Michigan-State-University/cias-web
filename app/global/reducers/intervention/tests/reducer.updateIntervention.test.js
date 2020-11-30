@@ -2,7 +2,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 
 import { actionBuilder } from 'utils/actionBuilder';
-import { UPDATE_INTERVENTION_SETTINGS_REQUEST } from '../constants';
+import { UPDATE_SESSION_SETTINGS_REQUEST } from '../constants';
 import {
   UPDATE_FORMULA,
   CHANGE_FORMULA_STATUS,
@@ -13,12 +13,12 @@ import {
   CHANGE_SCHEDULING_TYPE,
   UPDATE_SCHEDULING_PAYLOAD,
   UPDATE_SCHEDULING_DATE,
-} from '../interventionSettings/constants';
+} from '../sessionSettings/constants';
 import { initialState, problemReducer } from '../reducer';
 
 describe('problem reducer', () => {
   const createAction = (type, dataValues) =>
-    actionBuilder(UPDATE_INTERVENTION_SETTINGS_REQUEST, {
+    actionBuilder(UPDATE_SESSION_SETTINGS_REQUEST, {
       type,
       data: {
         ...dataValues,
@@ -45,24 +45,24 @@ describe('problem reducer', () => {
     schedule_payload: '',
   };
 
-  const createIntervention = (path, value) => {
-    const intervention = cloneDeep(mockIntervention);
-    set(intervention, path, value);
-    return intervention;
+  const createSession = (path, value) => {
+    const session = cloneDeep(mockIntervention);
+    set(session, path, value);
+    return session;
   };
 
-  const mockState = intervention => ({
+  const mockState = session => ({
     ...initialState,
     problem: {
-      interventions: [intervention],
+      sessions: [session],
     },
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> UPDATE_FORMULA', () => {
+  it('UPDATE_SESSION_SETTINGS_REQUEST -> UPDATE_FORMULA', () => {
     const payloadValue = 'test';
 
-    const intervention = createIntervention('formula.payload', payloadValue);
-    const updateState = mockState(intervention);
+    const session = createSession('formula.payload', payloadValue);
+    const updateState = mockState(session);
     set(updateState, 'loaders.editProblem', true);
 
     expect(
@@ -73,11 +73,11 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> CHANGE_FORMULA_STATUS', () => {
+  it('UPDATE_SESSION_SETTINGS_REQUEST -> CHANGE_FORMULA_STATUS', () => {
     const payloadValue = 'test formula';
 
-    const intervention = createIntervention('settings.formula', payloadValue);
-    const updateState = mockState(intervention);
+    const session = createSession('settings.formula', payloadValue);
+    const updateState = mockState(session);
     set(updateState, 'loaders.editProblem', true);
 
     expect(
@@ -87,15 +87,15 @@ describe('problem reducer', () => {
       ),
     ).toEqual(updateState);
   });
-  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> ADD_FORMULA_CASE', () => {
-    const intervention = createIntervention('formula.patterns', [
+  it('UPDATE_SESSION_SETTINGS_REQUEST -> ADD_FORMULA_CASE', () => {
+    const session = createSession('formula.patterns', [
       mockPattern,
       {
         match: '',
         target: { type: 'Session', id: '' },
       },
     ]);
-    const updateState = mockState(intervention);
+    const updateState = mockState(session);
     set(updateState, 'loaders.editProblem', true);
 
     expect(
@@ -106,15 +106,13 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> UPDATE_FORMULA_CASE', () => {
+  it('UPDATE_SESSION_SETTINGS_REQUEST -> UPDATE_FORMULA_CASE', () => {
     const editedPattern = {
       match: 'edited-match',
       target: { type: 'Session', id: 'edited-id' },
     };
-    const intervention = createIntervention('formula.patterns', [
-      editedPattern,
-    ]);
-    const updateState = mockState(intervention);
+    const session = createSession('formula.patterns', [editedPattern]);
+    const updateState = mockState(session);
     set(updateState, 'loaders.editProblem', true);
 
     expect(
@@ -125,9 +123,9 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> REMOVE_FORMULA_CASE', () => {
-    const intervention = createIntervention('formula.patterns', []);
-    const updateState = mockState(intervention);
+  it('UPDATE_SESSION_SETTINGS_REQUEST -> REMOVE_FORMULA_CASE', () => {
+    const session = createSession('formula.patterns', []);
+    const updateState = mockState(session);
     set(updateState, 'loaders.editProblem', true);
 
     expect(
@@ -138,10 +136,10 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> CHANGE_SCHEDULING_TYPE', () => {
+  it('UPDATE_SESSION_SETTINGS_REQUEST -> CHANGE_SCHEDULING_TYPE', () => {
     const scheduleType = SCHEDULE_OPTIONS.daysAfter;
-    const intervention = createIntervention('schedule', scheduleType);
-    const updateState = mockState(intervention);
+    const session = createSession('schedule', scheduleType);
+    const updateState = mockState(session);
     set(updateState, 'loaders.editProblem', true);
 
     expect(
@@ -152,13 +150,10 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> UPDATE_SCHEDULING_PAYLOAD', () => {
+  it('UPDATE_SESSION_SETTINGS_REQUEST -> UPDATE_SCHEDULING_PAYLOAD', () => {
     const schedulePayload = 10;
-    const intervention = createIntervention(
-      'schedule_payload',
-      schedulePayload,
-    );
-    const updateState = mockState(intervention);
+    const session = createSession('schedule_payload', schedulePayload);
+    const updateState = mockState(session);
     set(updateState, 'loaders.editProblem', true);
 
     expect(
@@ -169,10 +164,10 @@ describe('problem reducer', () => {
     ).toEqual(updateState);
   });
 
-  it('UPDATE_INTERVENTION_SETTINGS_REQUEST -> UPDATE_SCHEDULING_DATE', () => {
+  it('UPDATE_SESSION_SETTINGS_REQUEST -> UPDATE_SCHEDULING_DATE', () => {
     const scheduleDate = new Date().toDateString();
-    const intervention = createIntervention('schedule_at', scheduleDate);
-    const updateState = mockState(intervention);
+    const session = createSession('schedule_at', scheduleDate);
+    const updateState = mockState(session);
     set(updateState, 'loaders.editProblem', true);
 
     expect(

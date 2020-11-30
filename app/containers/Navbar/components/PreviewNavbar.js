@@ -102,7 +102,7 @@ PreviewNavbar.propTypes = {
   navbarName: PropTypes.node,
   previewMode: PropTypes.string,
   changePreviewMode: PropTypes.func,
-  intervention: PropTypes.shape({
+  session: PropTypes.shape({
     id: PropTypes.string,
   }),
   onResetIntervention: PropTypes.func,

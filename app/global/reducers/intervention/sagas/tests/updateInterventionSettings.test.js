@@ -8,10 +8,10 @@ import { createProblem } from 'utils/reducerCreators';
 
 import { updateSessionSettings } from 'global/reducers/intervention/sagas/updateSessionSettings';
 import {
-  updateInterventionSettingsError,
-  updateInterventionSettingsSuccess,
+  updateSessionSettingsError,
+  updateSessionSettingsSuccess,
 } from '../../actions';
-import { UPDATE_INTERVENTION_SETTINGS_REQUEST } from '../../constants';
+import { UPDATE_SESSION_SETTINGS_REQUEST } from '../../constants';
 import { updateSessionSettingsSaga } from '../index';
 import { initialState } from '../../reducer';
 
@@ -28,7 +28,7 @@ describe('updateInterventionSettings saga', () => {
     return expectSaga(updateSessionSettings)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.put), { data: apiResponse }]])
-      .put(updateInterventionSettingsSuccess())
+      .put(updateSessionSettingsSuccess())
       .run();
   });
 
@@ -37,7 +37,7 @@ describe('updateInterventionSettings saga', () => {
     return expectSaga(updateSessionSettings)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.put), throwError(error)]])
-      .put(updateInterventionSettingsError())
+      .put(updateSessionSettingsError())
       .run();
   });
 
@@ -45,7 +45,7 @@ describe('updateInterventionSettings saga', () => {
     const sagaFunction = updateSessionSettingsSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(UPDATE_INTERVENTION_SETTINGS_REQUEST, updateSessionSettings),
+      takeLatest(UPDATE_SESSION_SETTINGS_REQUEST, updateSessionSettings),
     );
   });
 });

@@ -121,7 +121,7 @@ exports[`<ProblemPage /> Should render and match the snapshot with interventions
               class="Img-sc-1kfzr96-0 eIOXBo"
               src="IMAGE_MOCK"
             />
-            Create a new intervention
+            Create a new session
           </div>
         </div>
       </div>

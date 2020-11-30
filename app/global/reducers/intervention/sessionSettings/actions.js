@@ -1,4 +1,4 @@
-import { updateInterventionSettings } from '../actions';
+import { updateSessionSettings } from '../actions';
 import {
   ADD_FORMULA_CASE,
   CHANGE_FORMULA_STATUS,
@@ -11,7 +11,7 @@ import {
 } from './constants';
 
 export const updateFormula = (value, sessionId) =>
-  updateInterventionSettings(
+  updateSessionSettings(
     {
       type: UPDATE_FORMULA,
       data: { value, sessionId },
@@ -20,7 +20,7 @@ export const updateFormula = (value, sessionId) =>
   );
 
 export const addFormulaCase = sessionId =>
-  updateInterventionSettings(
+  updateSessionSettings(
     {
       type: ADD_FORMULA_CASE,
       data: { sessionId },
@@ -29,7 +29,7 @@ export const addFormulaCase = sessionId =>
   );
 
 export const removeFormulaCase = (index, sessionId) =>
-  updateInterventionSettings(
+  updateSessionSettings(
     {
       type: REMOVE_FORMULA_CASE,
       data: { index, sessionId },
@@ -38,7 +38,7 @@ export const removeFormulaCase = (index, sessionId) =>
   );
 
 export const updateFormulaCase = (index, value, sessionId) =>
-  updateInterventionSettings(
+  updateSessionSettings(
     {
       type: UPDATE_FORMULA_CASE,
       data: { index, value, sessionId },
@@ -47,7 +47,7 @@ export const updateFormulaCase = (index, value, sessionId) =>
   );
 
 export const changeFormulaStatus = (value, sessionId) =>
-  updateInterventionSettings(
+  updateSessionSettings(
     {
       type: CHANGE_FORMULA_STATUS,
       data: { value, sessionId },
@@ -56,7 +56,7 @@ export const changeFormulaStatus = (value, sessionId) =>
   );
 
 export const changeSchedulingType = (value, sessionId) =>
-  updateInterventionSettings(
+  updateSessionSettings(
     {
       type: CHANGE_SCHEDULING_TYPE,
       data: { value, sessionId },
@@ -65,7 +65,7 @@ export const changeSchedulingType = (value, sessionId) =>
   );
 
 export const updateSchedulingPayload = (value, sessionId) =>
-  updateInterventionSettings(
+  updateSessionSettings(
     {
       type: UPDATE_SCHEDULING_PAYLOAD,
       data: { value, sessionId },
@@ -74,7 +74,7 @@ export const updateSchedulingPayload = (value, sessionId) =>
   );
 
 export const updateSchedulingDate = (value, sessionId) =>
-  updateInterventionSettings(
+  updateSessionSettings(
     {
       type: UPDATE_SCHEDULING_DATE,
       data: { value, sessionId },

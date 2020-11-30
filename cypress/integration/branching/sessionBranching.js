@@ -70,12 +70,12 @@ describe('Session branching', () => {
       const firstSessionFillUrl = firstSessionUrl.replace('/edit', '/fill');
 
       cy.go('back');
-      cy.getBySel('enter-intervention-1').click();
+      cy.getBySel('enter-session-1').click();
       cy.location('pathname').then(secondSessionUrl => {
         const secondSessionFillUrl = secondSessionUrl.replace('/edit', '/fill');
 
         cy.go('back');
-        cy.getBySel('enter-intervention-0').click();
+        cy.getBySel('enter-session-0').click();
         cy.answerPage();
 
         cy.location('pathname').should('eq', firstSessionFillUrl);

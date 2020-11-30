@@ -15,15 +15,15 @@ export default defineMessages({
   },
   copyError: {
     id: `${scope}.copyError`,
-    defaultMessage: 'Cannot copy intervention',
+    defaultMessage: 'Cannot copy session',
   },
   reorderError: {
     id: `${scope}.reorderError`,
-    defaultMessage: 'Cannot reorder sessions in intervention',
+    defaultMessage: 'Cannot reorder sessions in session',
   },
   giveUserAccessError: {
     id: `${scope}.giveUserAccessError`,
-    defaultMessage: 'Cannot give user/users access to intervention',
+    defaultMessage: 'Cannot give user/users access to session',
   },
   changeAccessSettingFailure: {
     id: `${scope}.changeAccessSettingFailure`,
@@ -31,7 +31,7 @@ export default defineMessages({
   },
   revokeAccessError: {
     id: `${scope}.revokeAccessError`,
-    defaultMessage: 'Cannot revoke user access to intervention',
+    defaultMessage: 'Cannot revoke user access to session',
   },
   sendInviteSuccess: {
     id: `${scope}.sendInviteSuccess`,

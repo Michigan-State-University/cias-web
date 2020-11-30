@@ -15,7 +15,7 @@ import {
   fetchUsersWithAccessFailure,
 } from '../../actions';
 import { initialState } from '../../reducer';
-import { FETCH_INTERVENTION_EMAILS_REQUEST } from '../../constants';
+import { FETCH_SESSION_EMAILS_REQUEST } from '../../constants';
 import { fetchUsersWithAccess } from '../fetchUsersWithAccess';
 
 describe('fetchUsersWithAccess saga', () => {
@@ -54,7 +54,7 @@ describe('fetchUsersWithAccess saga', () => {
     const sagaFunction = fetchSessionEmailsSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest([FETCH_INTERVENTION_EMAILS_REQUEST], fetchSessionEmails),
+      takeLatest([FETCH_SESSION_EMAILS_REQUEST], fetchSessionEmails),
     );
   });
 });

@@ -64,7 +64,7 @@ const SingleTile = ({
   const {
     name,
     status,
-    interventions_size: interventionsSize,
+    sessions_size: sessionsSize,
     id,
     user,
     created_at: createdAt,
@@ -94,7 +94,7 @@ const SingleTile = ({
         icon: binNoBg,
         action: handleArchiveProblem,
         label: formatMessage(messages.archive),
-        id: 'Archive e-intervention',
+        id: 'Archive e-session',
       },
     ]) ||
       []),
@@ -156,11 +156,11 @@ const SingleTile = ({
             }
           >
             <TileInfo>
-              {!isNullOrUndefined(interventionsSize) && (
+              {!isNullOrUndefined(sessionsSize) && (
                 <div>
                   <Text>
                     {formatMessage(messages.sessions, {
-                      sessionCount: interventionsSize,
+                      sessionCount: sessionsSize,
                     })}
                   </Text>
                 </div>

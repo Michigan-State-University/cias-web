@@ -2,8 +2,8 @@ import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
 import { Roles } from 'models/User/UserRoles';
-import { FETCH_INTERVENTIONS_REQUEST } from '../constants';
-import { fetchInterventionsSuccess, fetchInterventionsError } from '../actions';
+import { FETCH_SESSIONS_REQUEST } from '../constants';
+import { fetchSessionsSuccess, fetchSessionsError } from '../actions';
 
 export function* fetchSessions({ payload: { role } }) {
   let requestURL = `v1/sessions`;
@@ -13,12 +13,12 @@ export function* fetchSessions({ payload: { role } }) {
     const {
       data: { data },
     } = yield call(axios.get, requestURL);
-    yield put(fetchInterventionsSuccess(data));
+    yield put(fetchSessionsSuccess(data));
   } catch (error) {
-    yield put(fetchInterventionsError(error));
+    yield put(fetchSessionsError(error));
   }
 }
 
 export default function* fetchSessionsSaga() {
-  yield takeLatest(FETCH_INTERVENTIONS_REQUEST, fetchSessions);
+  yield takeLatest(FETCH_SESSIONS_REQUEST, fetchSessions);
 }

@@ -9,10 +9,10 @@ import { formatMessage } from 'utils/intlOutsideReact';
 
 import { resendSessionInvite } from 'global/reducers/intervention/sagas/resendSessionInvite';
 import {
-  sendInterventionInviteSuccess,
-  sendInterventionInviteError,
+  sendSessionInviteSuccess,
+  sendSessionInviteError,
 } from '../../actions';
-import { RESEND_INTERVENTION_INVITE_REQUEST } from '../../constants';
+import { RESEND_SESSION_INVITE_REQUEST } from '../../constants';
 import messages from '../../messages';
 import { resendSessionInviteSaga } from '../index';
 
@@ -22,7 +22,7 @@ describe('reorderSessions saga', () => {
   it('Check resendInterventionInvite generator success connection', () =>
     expectSaga(resendSessionInvite, { payload })
       .provide([[matchers.call.fn(axios.get), {}]])
-      .put(sendInterventionInviteSuccess())
+      .put(sendSessionInviteSuccess())
       .call(toast.info, formatMessage(messages.resendInviteSuccess))
       .run());
 
@@ -30,7 +30,7 @@ describe('reorderSessions saga', () => {
     const error = new Error('test');
     return expectSaga(resendSessionInvite, { payload })
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
-      .put(sendInterventionInviteError())
+      .put(sendSessionInviteError())
       .call(toast.error, formatMessage(messages.resendInviteError))
       .run();
   });
@@ -39,7 +39,7 @@ describe('reorderSessions saga', () => {
     const sagaFunction = resendSessionInviteSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest([RESEND_INTERVENTION_INVITE_REQUEST], resendSessionInvite),
+      takeLatest([RESEND_SESSION_INVITE_REQUEST], resendSessionInvite),
     );
   });
 });

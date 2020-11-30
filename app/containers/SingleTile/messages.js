@@ -35,7 +35,7 @@ export default defineMessages({
   },
   archive: {
     id: `${scope}.archive`,
-    defaultMessage: 'Archive e-intervention',
+    defaultMessage: 'Archive e-session',
   },
   duplicate: {
     id: `${scope}.duplicate`,

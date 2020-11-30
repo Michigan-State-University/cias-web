@@ -13,7 +13,7 @@ export default defineMessages({
   },
   sendSuccess: {
     id: `${scope}.sendSuccess`,
-    defaultMessage: 'You have successfully sent a copy of the intervention!',
+    defaultMessage: 'You have successfully sent a copy of the session!',
   },
   changePasswordSuccess: {
     id: `${scope}.changePasswordSuccess`,

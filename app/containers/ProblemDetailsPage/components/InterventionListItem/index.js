@@ -32,7 +32,7 @@ import {
 import InterventionBranching from '../InterventionBranching';
 
 function InterventionListItem({
-  intervention,
+  session,
   index,
   isSelected,
   handleClick,
@@ -52,7 +52,7 @@ function InterventionListItem({
     schedule_at: scheduleAt,
     schedule_payload: schedulePayload,
     settings,
-  } = intervention || {};
+  } = session || {};
 
   const options = [
     {
@@ -127,7 +127,7 @@ function InterventionListItem({
             <InterventionBranching
               disabled={disabled}
               formula={formula}
-              intervention={intervention}
+              session={session}
               nextInterventionName={nextInterventionName}
               status={settings.formula}
             />
@@ -139,7 +139,7 @@ function InterventionListItem({
 }
 
 InterventionListItem.propTypes = {
-  intervention: PropTypes.object.isRequired,
+  session: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   isSelected: PropTypes.bool,
   handleClick: PropTypes.func,

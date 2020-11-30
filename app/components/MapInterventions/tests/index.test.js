@@ -48,7 +48,7 @@ describe('<MapInterventions />', () => {
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
-            <MapInterventions interventions={mockInterventions} />
+            <MapInterventions sessions={mockInterventions} />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,

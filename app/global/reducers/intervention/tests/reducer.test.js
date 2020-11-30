@@ -3,7 +3,7 @@ import set from 'lodash/set';
 
 import { actionBuilder } from 'utils/actionBuilder';
 import { defaultMapper } from 'utils/mapResponseObjects';
-import { createIntervention, createProblem } from 'utils/reducerCreators';
+import { createSession, createProblem } from 'utils/reducerCreators';
 import {
   FETCH_PROBLEM_REQUEST,
   FETCH_PROBLEM_SUCCESS,
@@ -17,11 +17,11 @@ import {
   SEND_PROBLEM_CSV_REQUEST,
   SEND_PROBLEM_CSV_SUCCESS,
   SEND_PROBLEM_CSV_ERROR,
-  COPY_INTERVENTION_SUCCESS,
-  REORDER_INTERVENTION_LIST,
-  CHANGE_CURRENT_INTERVENTION,
-  REORDER_INTERVENTION_LIST_SUCCESS,
-  REORDER_INTERVENTION_LIST_ERROR,
+  COPY_SESSION_SUCCESS,
+  REORDER_SESSION_LIST,
+  CHANGE_CURRENT_SESSION,
+  REORDER_SESSION_LIST_SUCCESS,
+  REORDER_SESSION_LIST_ERROR,
   CHANGE_ACCESS_SETTING_REQUEST,
   CHANGE_ACCESS_SETTING_SUCCESS,
   CHANGE_ACCESS_SETTING_ERROR,
@@ -34,16 +34,16 @@ import {
   REVOKE_USER_ACCESS_REQUEST,
   REVOKE_USER_ACCESS_SUCCESS,
   REVOKE_USER_ACCESS_ERROR,
-  CREATE_INTERVENTION_REQUEST,
-  CREATE_INTERVENTION_SUCCESS,
-  CREATE_INTERVENTION_ERROR,
-  FETCH_INTERVENTION_EMAILS_REQUEST,
-  FETCH_INTERVENTION_EMAILS_SUCCESS,
-  FETCH_INTERVENTION_EMAILS_ERROR,
-  SEND_INTERVENTION_INVITE_REQUEST,
-  SEND_INTERVENTION_INVITE_SUCCESS,
-  SEND_INTERVENTION_INVITE_ERROR,
-  RESEND_INTERVENTION_INVITE_REQUEST,
+  CREATE_SESSION_REQUEST,
+  CREATE_SESSION_SUCCESS,
+  CREATE_SESSION_ERROR,
+  FETCH_SESSION_EMAILS_REQUEST,
+  FETCH_SESSION_EMAILS_SUCCESS,
+  FETCH_SESSION_EMAILS_ERROR,
+  SEND_SESSION_INVITE_REQUEST,
+  SEND_SESSION_INVITE_SUCCESS,
+  SEND_SESSION_INVITE_ERROR,
+  RESEND_SESSION_INVITE_REQUEST,
 } from '../constants';
 import { initialState, problemReducer } from '../reducer';
 
@@ -177,42 +177,36 @@ describe('problem reducer', () => {
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('COPY_INTERVENTION_SUCCESS', () => {
-    const payloadIntervention = { intervention: createIntervention() };
-    const action = actionBuilder(
-      COPY_INTERVENTION_SUCCESS,
-      payloadIntervention,
-    );
+  it('COPY_SESSION_SUCCESS', () => {
+    const payloadIntervention = { session: createSession() };
+    const action = actionBuilder(COPY_SESSION_SUCCESS, payloadIntervention);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.problem.interventions.push(
-      defaultMapper(payloadIntervention.intervention),
+    expectedState.problem.sessions.push(
+      defaultMapper(payloadIntervention.session),
     );
 
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('REORDER_INTERVENTION_LIST', () => {
+  it('REORDER_SESSION_LIST', () => {
     const payloadInterventionList = {
-      reorderedList: [createIntervention(1), createIntervention(0)],
+      reorderedList: [createSession(1), createSession(0)],
     };
-    const action = actionBuilder(
-      REORDER_INTERVENTION_LIST,
-      payloadInterventionList,
-    );
+    const action = actionBuilder(REORDER_SESSION_LIST, payloadInterventionList);
 
     const initState = cloneDeep(mockState);
-    initState.problem.interventions.push(createIntervention(1));
+    initState.problem.sessions.push(createSession(1));
 
     const reorderState = cloneDeep(initState);
-    reorderState.problem.interventions = payloadInterventionList.reorderedList;
+    reorderState.problem.sessions = payloadInterventionList.reorderedList;
     reorderState.cache.problem = initState.problem;
 
     expect(problemReducer(initState, action)).toEqual(reorderState);
   });
 
-  it('REORDER_INTERVENTION_LIST_SUCCESS', () => {
-    const action = actionBuilder(REORDER_INTERVENTION_LIST_SUCCESS, {});
+  it('REORDER_SESSION_LIST_SUCCESS', () => {
+    const action = actionBuilder(REORDER_SESSION_LIST_SUCCESS, {});
 
     const expectedState = cloneDeep(mockState);
     expectedState.cache.problem = mockState.problem;
@@ -220,8 +214,8 @@ describe('problem reducer', () => {
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('REORDER_INTERVENTION_LIST_ERROR', () => {
-    const action = actionBuilder(REORDER_INTERVENTION_LIST_ERROR, {});
+  it('REORDER_SESSION_LIST_ERROR', () => {
+    const action = actionBuilder(REORDER_SESSION_LIST_ERROR, {});
 
     const expectedState = cloneDeep(mockState);
     expectedState.problem = mockState.cache.problem;
@@ -231,10 +225,10 @@ describe('problem reducer', () => {
 
   it('CHANGE_CURRENT_INTERVENTION', () => {
     const payloadIndex = { index: 2 };
-    const action = actionBuilder(CHANGE_CURRENT_INTERVENTION, payloadIndex);
+    const action = actionBuilder(CHANGE_CURRENT_SESSION, payloadIndex);
 
     const changeState = cloneDeep(mockState);
-    changeState.currentInterventionIndex = payloadIndex.index;
+    changeState.currentSessionIndex = payloadIndex.index;
 
     expect(problemReducer(mockState, action)).toEqual(changeState);
   });
@@ -380,152 +374,134 @@ describe('problem reducer', () => {
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('CREATE_INTERVENTION_REQUEST', () => {
-    const action = actionBuilder(CREATE_INTERVENTION_REQUEST, {});
+  it('CREATE_SESSION_REQUEST', () => {
+    const action = actionBuilder(CREATE_SESSION_REQUEST, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.createInterventionLoading = true;
+    expectedState.loaders.createSessionLoading = true;
 
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('CREATE_INTERVENTION_SUCCESS', () => {
-    const payloadIntervention = { intervention: createIntervention(3) };
-    const action = actionBuilder(
-      CREATE_INTERVENTION_SUCCESS,
-      payloadIntervention,
-    );
+  it('CREATE_SESSION_SUCCESS', () => {
+    const payloadIntervention = { session: createSession(3) };
+    const action = actionBuilder(CREATE_SESSION_SUCCESS, payloadIntervention);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.createInterventionLoading = false;
-    expectedState.problem.interventions = [
-      ...expectedState.problem.interventions,
-      payloadIntervention.intervention,
+    expectedState.loaders.createSessionLoading = false;
+    expectedState.problem.sessions = [
+      ...expectedState.problem.sessions,
+      payloadIntervention.session,
     ];
 
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('CREATE_INTERVENTION_ERROR', () => {
+  it('CREATE_SESSION_ERROR', () => {
     const payloadError = { error: 'test-error' };
-    const action = actionBuilder(CREATE_INTERVENTION_ERROR, payloadError);
+    const action = actionBuilder(CREATE_SESSION_ERROR, payloadError);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.createInterventionLoading = false;
-    expectedState.errors.createInterventionError = payloadError.error;
+    expectedState.loaders.createSessionLoading = false;
+    expectedState.errors.createSessionError = payloadError.error;
 
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('FETCH_INTERVENTION_EMAILS_REQUEST', () => {
+  it('FETCH_SESSION_EMAILS_REQUEST', () => {
     const payloadIndex = { index: 0 };
-    const action = actionBuilder(
-      FETCH_INTERVENTION_EMAILS_REQUEST,
-      payloadIndex,
-    );
+    const action = actionBuilder(FETCH_SESSION_EMAILS_REQUEST, payloadIndex);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.fetchInterventionEmailsLoading = true;
+    expectedState.loaders.fetchSessionEmailsLoading = true;
 
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('FETCH_INTERVENTION_EMAILS_SUCCESS', () => {
+  it('FETCH_SESSION_EMAILS_SUCCESS', () => {
     const payloadEmails = {
       index: 0,
       emails: ['mail@mail.com', 'mail2@mail.com'],
     };
-    const action = actionBuilder(
-      FETCH_INTERVENTION_EMAILS_SUCCESS,
-      payloadEmails,
-    );
+    const action = actionBuilder(FETCH_SESSION_EMAILS_SUCCESS, payloadEmails);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.fetchInterventionEmailsLoading = false;
-    expectedState.problem.interventions[payloadEmails.index].emails =
+    expectedState.loaders.fetchSessionEmailsLoading = false;
+    expectedState.problem.sessions[payloadEmails.index].emails =
       payloadEmails.emails;
 
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('FETCH_INTERVENTION_EMAILS_ERROR', () => {
+  it('FETCH_SESSION_EMAILS_ERROR', () => {
     const payloadError = {
       error: 'test-error',
     };
-    const action = actionBuilder(FETCH_INTERVENTION_EMAILS_ERROR, payloadError);
+    const action = actionBuilder(FETCH_SESSION_EMAILS_ERROR, payloadError);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.fetchInterventionEmailsLoading = false;
-    expectedState.errors.fetchInterventionEmailsError = payloadError.error;
+    expectedState.loaders.fetchSessionEmailsLoading = false;
+    expectedState.errors.fetchSessionEmailsError = payloadError.error;
 
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('SEND_INTERVENTION_INVITE_REQUEST', () => {
+  it('SEND_SESSION_INVITE_REQUEST', () => {
     const index = 0;
     const initState = cloneDeep(mockState);
-    initState.problem.interventions[index].emails = [];
+    initState.problem.sessions[index].emails = [];
 
     const payloadEmails = {
-      emails: [
-        ...initState.problem.interventions[index].emails,
-        'test@test.com',
-      ],
-      sessionId: mockState.problem.interventions[index].id,
+      emails: [...initState.problem.sessions[index].emails, 'test@test.com'],
+      sessionId: mockState.problem.sessions[index].id,
     };
-    const action = actionBuilder(
-      SEND_INTERVENTION_INVITE_REQUEST,
-      payloadEmails,
-    );
+    const action = actionBuilder(SEND_SESSION_INVITE_REQUEST, payloadEmails);
 
     const expectedState = cloneDeep(initState);
-    expectedState.currentInterventionIndex = index;
+    expectedState.currentSessionIndex = index;
 
-    expectedState.loaders.sendInterventionLoading = true;
+    expectedState.loaders.sendSessionLoading = true;
     expectedState.cache.problem = initState.problem;
-    expectedState.problem.interventions[
-      index
-    ].emails = payloadEmails.emails.map(email => ({
-      email,
-    }));
+    expectedState.problem.sessions[index].emails = payloadEmails.emails.map(
+      email => ({
+        email,
+      }),
+    );
 
     expect(problemReducer(initState, action)).toEqual(expectedState);
   });
 
-  it('SEND_INTERVENTION_INVITE_SUCCESS', () => {
-    const action = actionBuilder(SEND_INTERVENTION_INVITE_SUCCESS, {});
+  it('SEND_SESSION_INVITE_SUCCESS', () => {
+    const action = actionBuilder(SEND_SESSION_INVITE_SUCCESS, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.sendInterventionLoading = false;
-    expectedState.loaders.interventionEmailLoading =
-      mockState.loaders.interventionEmailLoading;
+    expectedState.loaders.sendSessionLoading = false;
+    expectedState.loaders.sessionEmailLoading =
+      mockState.loaders.sessionEmailLoading;
 
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('SEND_INTERVENTION_INVITE_ERROR', () => {
-    const action = actionBuilder(SEND_INTERVENTION_INVITE_ERROR, {});
+  it('SEND_SESSION_INVITE_ERROR', () => {
+    const action = actionBuilder(SEND_SESSION_INVITE_ERROR, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.sendInterventionLoading = false;
-    expectedState.loaders.interventionEmailLoading =
-      mockState.loaders.interventionEmailLoading;
+    expectedState.loaders.sendSessionLoading = false;
+    expectedState.loaders.sessionEmailLoading =
+      mockState.loaders.sessionEmailLoading;
     expectedState.problem = mockState.cache.problem;
 
     expect(problemReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('RESEND_INTERVENTION_INVITE_REQUEST', () => {
+  it('RESEND_SESSION_INVITE_REQUEST', () => {
     const payloadEmail = { id: 'test-user', email: 'test-user@test.com' };
 
-    const action = actionBuilder(
-      RESEND_INTERVENTION_INVITE_REQUEST,
-      payloadEmail,
-    );
+    const action = actionBuilder(RESEND_SESSION_INVITE_REQUEST, payloadEmail);
 
     const expectedState = cloneDeep(mockState);
     expectedState.cache.problem = mockState.problem;
-    expectedState.loaders.interventionEmailLoading = {
+    expectedState.loaders.sessionEmailLoading = {
       ...payloadEmail,
     };
 

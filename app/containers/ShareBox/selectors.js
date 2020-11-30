@@ -6,11 +6,10 @@ export const makeSelectCurrentSession = () =>
   createSelector(
     selectProblem,
     problemState => {
-      if (problemState.problem && problemState.problem.interventions)
+      if (problemState.problem && problemState.problem.sessions)
         return find(
-          problemState.problem.interventions,
-          ({ position }) =>
-            position - 1 === problemState.currentInterventionIndex,
+          problemState.problem.sessions,
+          ({ position }) => position - 1 === problemState.currentSessionIndex,
         );
     },
   );

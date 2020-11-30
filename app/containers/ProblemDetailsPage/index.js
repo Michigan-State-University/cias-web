@@ -31,12 +31,12 @@ import {
   editProblemRequest,
   problemReducer,
   sendProblemCsvRequest,
-  reorderInterventionList,
-  copyInterventionRequest,
-  createInterventionRequest,
+  reorderSessionList,
+  copySessionRequest,
+  createSessionRequest,
   makeSelectCurrentSessionIndex,
-  changeCurrentIntervention,
-  fetchInterventionEmailsRequest,
+  changeCurrentSession,
+  fetchSessionEmailsRequest,
 } from 'global/reducers/intervention';
 import { problemOptionsSaga } from 'global/sagas/problemOptionsSaga';
 
@@ -79,7 +79,7 @@ import { updateStatuses } from './utils';
 
 export function ProblemDetailsPage({
   intl: { formatMessage },
-  createIntervention,
+  createSession,
   editProblem,
   fetchProblem,
   match: {
@@ -87,10 +87,10 @@ export function ProblemDetailsPage({
   },
   problemState: {
     problem,
-    loaders: { fetchProblemLoading, createInterventionLoading },
-    errors: { fetchProblemError, createInterventionError },
+    loaders: { fetchProblemLoading, createSessionLoading },
+    errors: { fetchProblemError, createSessionError },
   },
-  interventionIndex,
+  sessionIndex,
   changeInterventionIndex,
   sendCsv,
   copyIntervention,
@@ -107,7 +107,7 @@ export function ProblemDetailsPage({
   useInjectSaga({ key: 'problemOptionsSaga', saga: problemOptionsSaga });
   useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
 
-  const { interventions, name, id, status } = problem || {};
+  const { sessions, name, id, status } = problem || {};
 
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
@@ -160,9 +160,9 @@ export function ProblemDetailsPage({
   useEffect(() => {
     if (
       !isNullOrUndefined(problem) &&
-      !isNullOrUndefined(interventions[interventionIndex])
+      !isNullOrUndefined(sessions[sessionIndex])
     )
-      fetchQuestions(interventions[interventionIndex].id);
+      fetchQuestions(sessions[sessionIndex].id);
   }, [problem ? problem.id : 0]);
 
   const handleCopyIntervention = sessionId => {
@@ -180,15 +180,15 @@ export function ProblemDetailsPage({
   const handleSendCsv = () => sendCsv(id);
 
   const createInterventionCall = () =>
-    createIntervention(interventionId, interventions.length);
+    createSession(interventionId, sessions.length);
 
   const handleReorder = (previousIndex, nextIndex) => {
-    const newList = reorder(interventions, previousIndex, nextIndex);
+    const newList = reorder(sessions, previousIndex, nextIndex);
     let position = 0;
-    const orderedNewList = newList.map(intervention => {
+    const orderedNewList = newList.map(session => {
       position += 1;
       return {
-        ...intervention,
+        ...session,
         position,
       };
     });
@@ -220,38 +220,36 @@ export function ProblemDetailsPage({
               ref={providedDroppable.innerRef}
               {...providedDroppable.droppableProps}
             >
-              {interventions &&
-                orderBy(interventions, 'position').map(
-                  (intervention, index) => {
-                    const handleClick = () => {
-                      fetchInterventionEmails(index);
-                      if (intervention.position !== interventionIndex + 1) {
-                        fetchQuestions(intervention.id);
-                        changeInterventionIndex(index);
-                      }
-                      setParticipantShareModalVisible(true);
-                    };
-                    const nextIntervention = interventions.find(
-                      ({ position }) => position === intervention.position + 1,
-                    );
-                    return (
-                      <Row key={intervention.id}>
-                        <InterventionListItem
-                          disabled={!editingPossible}
-                          sharingPossible={sharingPossible}
-                          intervention={intervention}
-                          index={index}
-                          isSelected={index === interventionIndex}
-                          handleClick={handleClick}
-                          handleCopyIntervention={handleCopyIntervention}
-                          nextInterventionName={
-                            nextIntervention ? nextIntervention.name : null
-                          }
-                        />
-                      </Row>
-                    );
-                  },
-                )}
+              {sessions &&
+                orderBy(sessions, 'position').map((session, index) => {
+                  const handleClick = () => {
+                    fetchInterventionEmails(index);
+                    if (session.position !== sessionIndex + 1) {
+                      fetchQuestions(session.id);
+                      changeInterventionIndex(index);
+                    }
+                    setParticipantShareModalVisible(true);
+                  };
+                  const nextIntervention = sessions.find(
+                    ({ position }) => position === session.position + 1,
+                  );
+                  return (
+                    <Row key={session.id}>
+                      <InterventionListItem
+                        disabled={!editingPossible}
+                        sharingPossible={sharingPossible}
+                        session={session}
+                        index={index}
+                        isSelected={index === sessionIndex}
+                        handleClick={handleClick}
+                        handleCopyIntervention={handleCopyIntervention}
+                        nextInterventionName={
+                          nextIntervention ? nextIntervention.name : null
+                        }
+                      />
+                    </Row>
+                  );
+                })}
               {providedDroppable.placeholder}
             </div>
           )}
@@ -338,7 +336,7 @@ export function ProblemDetailsPage({
       <Row>
         <Column sm={6}>
           {renderList()}
-          {createInterventionLoading && (
+          {createSessionLoading && (
             <Row my={18} align="center">
               <Spinner color={themeColors.secondary} />
             </Row>
@@ -349,9 +347,7 @@ export function ProblemDetailsPage({
             </Row>
           )}
         </Column>
-        {createInterventionError && (
-          <ErrorAlert errorText={createInterventionError} />
-        )}
+        {createSessionError && <ErrorAlert errorText={createSessionError} />}
         <Column ml={38} sm={6} mt={18}>
           <Column position="sticky" top="100px">
             <SettingsPanel problem={problem} />
@@ -365,16 +361,16 @@ export function ProblemDetailsPage({
 
 ProblemDetailsPage.propTypes = {
   intl: PropTypes.object,
-  createIntervention: PropTypes.func,
+  createSession: PropTypes.func,
   fetchProblem: PropTypes.func,
   problemState: PropTypes.shape({
-    interventions: PropTypes.array,
+    sessions: PropTypes.array,
     fetchProblemError: PropTypes.string,
     fetchProblemLoading: PropTypes.bool,
   }),
   match: PropTypes.object,
   editProblem: PropTypes.func,
-  interventionIndex: PropTypes.number,
+  sessionIndex: PropTypes.number,
   changeInterventionIndex: PropTypes.func,
   sendCsv: PropTypes.func,
   copyIntervention: PropTypes.func,
@@ -386,19 +382,19 @@ ProblemDetailsPage.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   problemState: makeSelectProblemState(),
-  interventionIndex: makeSelectCurrentSessionIndex(),
+  sessionIndex: makeSelectCurrentSessionIndex(),
 });
 
 const mapDispatchToProps = {
-  createIntervention: createInterventionRequest,
+  createSession: createSessionRequest,
   fetchQuestions: getQuestionsRequest,
   fetchProblem: fetchProblemRequest,
   editProblem: editProblemRequest,
-  changeInterventionIndex: changeCurrentIntervention,
-  fetchInterventionEmails: fetchInterventionEmailsRequest,
+  changeInterventionIndex: changeCurrentSession,
+  fetchInterventionEmails: fetchSessionEmailsRequest,
   sendCsv: sendProblemCsvRequest,
-  copyIntervention: copyInterventionRequest,
-  reorderInterventions: reorderInterventionList,
+  copyIntervention: copySessionRequest,
+  reorderInterventions: reorderSessionList,
   copyProblem: copyProblemRequest,
 };
 

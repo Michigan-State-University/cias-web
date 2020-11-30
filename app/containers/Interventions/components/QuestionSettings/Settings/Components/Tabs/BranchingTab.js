@@ -51,7 +51,7 @@ const BranchingTab = ({
   match: { params },
 }) => {
   const { interventionId } = params;
-  const { interventions: interventionList } = problem || {};
+  const { sessions: sessionList } = problem || {};
   useInjectReducer({
     key: 'problem',
     reducer: problemReducer,
@@ -69,7 +69,7 @@ const BranchingTab = ({
 
     const targetIndex = isQuestionType
       ? findQuestionIndex(questions, target.id)
-      : findInterventionIndex(interventionList || [], target.id);
+      : findInterventionIndex(sessionList || [], target.id);
 
     if (isQuestionType) {
       if (!isFinishType && selectedIndex === targetIndex - 1)
@@ -77,7 +77,7 @@ const BranchingTab = ({
 
       if (targetIndex !== -1)
         return htmlToPlainText(questions[targetIndex].subtitle);
-    } else if (targetIndex !== -1) return interventionList[targetIndex].name;
+    } else if (targetIndex !== -1) return sessionList[targetIndex].name;
 
     return formatMessage(messages.selectQuestion);
   };
@@ -106,7 +106,7 @@ BranchingTab.propTypes = {
   onUpdateCase: PropTypes.func,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   problem: PropTypes.shape({
-    interventions: PropTypes.arrayOf(PropTypes.shape(Intervention)),
+    sessions: PropTypes.arrayOf(PropTypes.shape(Intervention)),
   }),
   fetchProblem: PropTypes.func,
   match: PropTypes.object,

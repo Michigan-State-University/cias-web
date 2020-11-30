@@ -4,21 +4,21 @@ import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 import {
-  fetchInterventionEmailsSuccess,
-  sendInterventionInviteError,
-  sendInterventionInviteSuccess,
+  fetchSessionEmailsSuccess,
+  sendSessionInviteError,
+  sendSessionInviteSuccess,
 } from '../actions';
 import {
-  SEND_INTERVENTION_INVITE_ERROR,
-  SEND_INTERVENTION_INVITE_REQUEST,
-  SEND_INTERVENTION_INVITE_SUCCESS,
+  SEND_SESSION_INVITE_ERROR,
+  SEND_SESSION_INVITE_REQUEST,
+  SEND_SESSION_INVITE_SUCCESS,
 } from '../constants';
 import messages from '../messages';
 import { makeSelectProblem } from '../selectors';
 
 export function* sendSessionInvite({ payload: { emails, sessionId } }) {
   const problem = yield select(makeSelectProblem());
-  const interventionIndex = problem.interventions.findIndex(
+  const sessionIndex = problem.sessions.findIndex(
     intervention => intervention.id === sessionId,
   );
 
@@ -29,19 +29,19 @@ export function* sendSessionInvite({ payload: { emails, sessionId } }) {
     } = yield call(axios.post, requestURL, {
       session_invitation: { emails },
     });
-    yield put(sendInterventionInviteSuccess());
-    yield put(fetchInterventionEmailsSuccess(users, interventionIndex));
+    yield put(sendSessionInviteSuccess());
+    yield put(fetchSessionEmailsSuccess(users, sessionIndex));
     yield call(toast.info, formatMessage(messages.sendInviteSuccess), {
-      toastId: SEND_INTERVENTION_INVITE_SUCCESS,
+      toastId: SEND_SESSION_INVITE_SUCCESS,
     });
   } catch (error) {
-    yield put(sendInterventionInviteError());
+    yield put(sendSessionInviteError());
     yield call(toast.error, formatMessage(messages.sendInviteError), {
-      toastId: SEND_INTERVENTION_INVITE_ERROR,
+      toastId: SEND_SESSION_INVITE_ERROR,
     });
   }
 }
 
 export default function* sendSessionInviteSaga() {
-  yield takeLatest([SEND_INTERVENTION_INVITE_REQUEST], sendSessionInvite);
+  yield takeLatest([SEND_SESSION_INVITE_REQUEST], sendSessionInvite);
 }

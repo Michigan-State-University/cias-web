@@ -4,11 +4,8 @@ import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import messages from '../messages';
-import { copyInterventionSuccess } from '../actions';
-import {
-  COPY_INTERVENTION_ERROR,
-  COPY_INTERVENTION_REQUEST,
-} from '../constants';
+import { copySessionSuccess } from '../actions';
+import { COPY_SESSION_ERROR, COPY_SESSION_REQUEST } from '../constants';
 
 export function* copySession({ payload: { sessionId } }) {
   const requestURL = `v1/sessions/${sessionId}/clone`;
@@ -18,14 +15,14 @@ export function* copySession({ payload: { sessionId } }) {
 
     const copiedInterventions = response.data.data;
 
-    yield put(copyInterventionSuccess(copiedInterventions));
+    yield put(copySessionSuccess(copiedInterventions));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.copyError), {
-      toastId: COPY_INTERVENTION_ERROR,
+      toastId: COPY_SESSION_ERROR,
     });
   }
 }
 
 export default function* copySessionSaga() {
-  yield takeLatest(COPY_INTERVENTION_REQUEST, copySession);
+  yield takeLatest(COPY_SESSION_REQUEST, copySession);
 }

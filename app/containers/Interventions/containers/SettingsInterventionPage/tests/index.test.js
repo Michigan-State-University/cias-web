@@ -15,14 +15,14 @@ describe('<SettingsInterventionPage />', () => {
   });
   const defaultProps = {
     match: { params: { id: '12ad120dj012-3a' } },
-    getIntervention: jest.fn(),
-    editIntervention: jest.fn(),
+    getSession: jest.fn(),
+    editSession: jest.fn(),
     getQuestions: jest.fn(),
   };
 
   const initialState = {
-    intervention: {
-      intervention: {
+    session: {
+      session: {
         id: '12ad120dj012-3a',
         name: 'e-Intervention Name',
         settings: {
@@ -33,9 +33,9 @@ describe('<SettingsInterventionPage />', () => {
         },
       },
       loaders: {
-        getIntervention: false,
-        createIntervention: false,
-        editIntervention: false,
+        getSession: false,
+        createSession: false,
+        editSession: false,
       },
     },
   };

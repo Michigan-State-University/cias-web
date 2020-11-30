@@ -10,10 +10,7 @@ import H3 from 'components/H3';
 import lastKey from 'utils/getLastKey';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
-import {
-  editInterventionRequest,
-  editSessionSaga,
-} from 'global/reducers/session';
+import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
 import { questionsReducer } from 'global/reducers/questions';
 import {
   fetchInterventionSaga,
@@ -36,7 +33,7 @@ const InterventionSettings = ({
   name,
   narratorSettings,
   formatMessage,
-  editIntervention,
+  editSession,
   problemStatus,
 }) => {
   const [confirmationOption, setConfirmationOption] = useState('');
@@ -46,7 +43,7 @@ const InterventionSettings = ({
 
   const onConfirm = () => {
     if (isAllSettingsConfirmation) {
-      editIntervention(
+      editSession(
         {
           path: `settings.narrator`,
           value: {
@@ -57,7 +54,7 @@ const InterventionSettings = ({
         ['settings.narrator'],
       );
     } else {
-      editIntervention(
+      editSession(
         {
           path: `settings.narrator.${confirmationOption}`,
           value: false,
@@ -76,7 +73,7 @@ const InterventionSettings = ({
 
   const onToggle = index => val => {
     if (val) {
-      editIntervention({ path: `settings.narrator.${index}`, value: val }, [
+      editSession({ path: `settings.narrator.${index}`, value: val }, [
         'settings.narrator',
       ]);
     } else {
@@ -86,7 +83,7 @@ const InterventionSettings = ({
 
   const onGlobalToggle = val => {
     if (val) {
-      editIntervention(
+      editSession(
         {
           path: `settings.narrator`,
           value: {
@@ -155,9 +152,7 @@ const InterventionSettings = ({
           width="100%"
           placeholder={formatMessage(messages.placeholder)}
           value={name}
-          onBlur={val =>
-            editIntervention({ path: 'name', value: val }, ['name'])
-          }
+          onBlur={val => editSession({ path: 'name', value: val }, ['name'])}
         />
       </NameContainer>
       <H3 mt={30} mb={20}>
@@ -193,7 +188,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  editIntervention: editInterventionRequest,
+  editSession: editSessionRequest,
 };
 
 const withConnect = connect(
@@ -208,7 +203,7 @@ InterventionSettings.propTypes = {
     narrator: PropTypes.bool,
   }),
   formatMessage: PropTypes.func,
-  editIntervention: PropTypes.func,
+  editSession: PropTypes.func,
   problemStatus: PropTypes.string,
 };
 

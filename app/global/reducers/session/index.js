@@ -1,12 +1,12 @@
 export {
-  getInterventionRequest,
-  getInterventionSuccess,
-  getInterventionError,
-  editInterventionRequest,
-  editInterventionSuccess,
-  editInterventionError,
+  getSessionRequest,
+  getSessionSuccess,
+  getSessionError,
+  editSessionRequest,
+  editSessionSuccess,
+  editSessionError,
 } from './actions';
-export { interventionReducer } from './reducer';
+export { sessionReducer } from './reducer';
 export {
   makeSelectSession,
   makeSelectCacheSession,

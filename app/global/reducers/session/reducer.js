@@ -29,29 +29,29 @@ import {
 } from 'global/reducers/questions/constants';
 
 import {
-  GET_INTERVENTION_REQUEST,
-  GET_INTERVENTION_SUCCESS,
-  GET_INTERVENTION_ERROR,
-  EDIT_INTERVENTION_REQUEST,
-  EDIT_INTERVENTION_SUCCESS,
-  EDIT_INTERVENTION_ERROR,
+  GET_SESSION_REQUEST,
+  GET_SESSION_SUCCESS,
+  GET_SESSION_ERROR,
+  EDIT_SESSION_REQUEST,
+  EDIT_SESSION_SUCCESS,
+  EDIT_SESSION_ERROR,
 } from './constants';
 
 export const initialState = {
-  intervention: new Intervention('', ''),
-  interventionSaving: false,
+  session: new Intervention('', ''),
+  sessionSaving: false,
   loaders: {
-    createIntervention: false,
-    getIntervention: false,
-    editIntervention: false,
+    createSession: false,
+    getSession: false,
+    editSession: false,
   },
   cache: {
-    intervention: new Intervention('', ''),
+    session: new Intervention('', ''),
   },
 };
 
 const saving = [
-  EDIT_INTERVENTION_REQUEST,
+  EDIT_SESSION_REQUEST,
   EDIT_QUESTION_REQUEST,
   COPY_QUESTION_REQUEST,
   UPDATE_QUESTION_DATA,
@@ -63,8 +63,8 @@ const saving = [
   CREATE_QUESTION_REQUEST,
 ];
 const saved = [
-  EDIT_INTERVENTION_SUCCESS,
-  EDIT_INTERVENTION_ERROR,
+  EDIT_SESSION_SUCCESS,
+  EDIT_SESSION_ERROR,
   EDIT_QUESTION_SUCCESS,
   EDIT_QUESTION_ERROR,
   COPY_QUESTION_SUCCESS,
@@ -82,33 +82,33 @@ const saved = [
 ];
 
 /* eslint-disable default-case, no-param-reassign */
-const interventionReducer = (state = initialState, action) =>
+const sessionReducer = (state = initialState, action) =>
   produce(state, draft => {
-    if (saving.includes(action.type)) draft.interventionSaving = true;
-    if (saved.includes(action.type)) draft.interventionSaving = false;
+    if (saving.includes(action.type)) draft.sessionSaving = true;
+    if (saved.includes(action.type)) draft.sessionSaving = false;
     switch (action.type) {
-      case GET_INTERVENTION_REQUEST:
+      case GET_SESSION_REQUEST:
         draft.loaders.getSession = true;
         break;
-      case GET_INTERVENTION_SUCCESS:
+      case GET_SESSION_SUCCESS:
         draft.loaders.getSession = false;
-        draft.intervention = action.payload.intervention;
-        draft.cache.intervention = action.payload.intervention;
+        draft.session = action.payload.session;
+        draft.cache.session = action.payload.session;
         break;
-      case GET_INTERVENTION_ERROR:
+      case GET_SESSION_ERROR:
         draft.loaders.getSession = false;
         break;
 
-      case EDIT_INTERVENTION_REQUEST:
-        set(draft.intervention, action.payload.path, action.payload.value);
+      case EDIT_SESSION_REQUEST:
+        set(draft.session, action.payload.path, action.payload.value);
         break;
-      case EDIT_INTERVENTION_SUCCESS:
-        draft.intervention = action.payload.intervention;
-        draft.cache.intervention = action.payload.intervention;
+      case EDIT_SESSION_SUCCESS:
+        draft.session = action.payload.session;
+        draft.cache.session = action.payload.session;
         break;
-      case EDIT_INTERVENTION_ERROR:
+      case EDIT_SESSION_ERROR:
         break;
     }
   });
 
-export { interventionReducer };
+export { sessionReducer };

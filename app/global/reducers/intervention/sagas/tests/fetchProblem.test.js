@@ -28,9 +28,9 @@ describe('fetchProblem saga', () => {
       data: [apiInterventionResponse().data],
     };
     const problem = cloneDeep(problemApiResponse.data);
-    const interventions = cloneDeep(interventionApiResponse.data);
-    const mappedInterventions = interventions.map(defaultMapper);
-    problem.interventions = orderBy(mappedInterventions, 'position');
+    const sessions = cloneDeep(interventionApiResponse.data);
+    const mappedInterventions = sessions.map(defaultMapper);
+    problem.sessions = orderBy(mappedInterventions, 'position');
     return expectSaga(fetchIntervention, { payload })
       .provide([
         [

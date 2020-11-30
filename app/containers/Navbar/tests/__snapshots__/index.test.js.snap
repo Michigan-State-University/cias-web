@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Navbar /> Should render and match the snapshot with intervention path 1`] = `
+exports[`<Navbar /> Should render and match the snapshot with session path 1`] = `
 .c3 {
   width: 30px;
   height: 30px;

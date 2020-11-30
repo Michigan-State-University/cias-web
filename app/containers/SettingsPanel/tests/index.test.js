@@ -19,7 +19,7 @@ describe('<SettingsPanel />', () => {
   const initialState = {
     problem: {
       problem: {
-        name: 'Name of the intervention',
+        name: 'Name of the session',
         id: 'as120s-as12cs',
       },
       loaders: {

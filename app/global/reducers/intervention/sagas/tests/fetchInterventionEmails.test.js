@@ -11,11 +11,11 @@ import fetchSessionEmailsSaga, {
   fetchSessionEmails,
 } from 'global/reducers/intervention/sagas/fetchSessionEmails';
 import {
-  fetchInterventionEmailsSuccess,
-  fetchInterventionEmailsError,
+  fetchSessionEmailsSuccess,
+  fetchSessionEmailsError,
 } from '../../actions';
 import { initialState } from '../../reducer';
-import { FETCH_INTERVENTION_EMAILS_REQUEST } from '../../constants';
+import { FETCH_SESSION_EMAILS_REQUEST } from '../../constants';
 
 describe('fetchInterventionEmails saga', () => {
   const users = [createUser(), createUser()];
@@ -32,7 +32,7 @@ describe('fetchInterventionEmails saga', () => {
     return expectSaga(fetchSessionEmails, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(fetchInterventionEmailsSuccess(users, payload.index))
+      .put(fetchSessionEmailsSuccess(users, payload.index))
       .run();
   });
   it('Check fetchInterventionEmails error connection', () => {
@@ -40,7 +40,7 @@ describe('fetchInterventionEmails saga', () => {
     return expectSaga(fetchSessionEmails, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
-      .put(fetchInterventionEmailsError(error))
+      .put(fetchSessionEmailsError(error))
       .run();
   });
 
@@ -48,7 +48,7 @@ describe('fetchInterventionEmails saga', () => {
     const sagaFunction = fetchSessionEmailsSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest([FETCH_INTERVENTION_EMAILS_REQUEST], fetchSessionEmails),
+      takeLatest([FETCH_SESSION_EMAILS_REQUEST], fetchSessionEmails),
     );
   });
 });

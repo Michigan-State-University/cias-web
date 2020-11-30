@@ -36,5 +36,5 @@ export const makeSelectProblemLoader = loader =>
 export const makeSelectCurrentSessionIndex = () =>
   createSelector(
     selectProblem,
-    substate => substate.currentInterventionIndex,
+    substate => substate.currentSessionIndex,
   );

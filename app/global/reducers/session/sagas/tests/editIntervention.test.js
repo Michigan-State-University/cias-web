@@ -4,23 +4,23 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { createIntervention } from 'utils/reducerCreators';
+import { createSession } from 'utils/reducerCreators';
 import { apiInterventionResponse } from 'utils/apiResponseCreators';
 
 import editSessionSaga, {
   editSession,
 } from 'global/reducers/session/sagas/editSession';
-import { editInterventionSuccess, editInterventionError } from '../../actions';
+import { editSessionSuccess, editSessionError } from '../../actions';
 import { initialState } from '../../reducer';
-import { EDIT_INTERVENTION_REQUEST } from '../../constants';
+import { EDIT_SESSION_REQUEST } from '../../constants';
 
-describe('editIntervention saga', () => {
-  const mockIntervention = createIntervention();
+describe('editSession saga', () => {
+  const mockIntervention = createSession();
   const mockState = {
-    intervention: { ...initialState, intervention: mockIntervention },
+    session: { ...initialState, session: mockIntervention },
   };
 
-  it('Check editIntervention generator success connection', () => {
+  it('Check editSession generator success connection', () => {
     const apiResponse = apiInterventionResponse();
     apiResponse.data.attributes.name = mockIntervention.name;
 
@@ -28,7 +28,7 @@ describe('editIntervention saga', () => {
       .withState(mockState)
       .provide([[matchers.call.fn(axios.put), { data: apiResponse }]])
       .put(
-        editInterventionSuccess({
+        editSessionSuccess({
           ...apiResponse.data.attributes,
           id: apiResponse.data.id,
         }),
@@ -40,7 +40,7 @@ describe('editIntervention saga', () => {
     return expectSaga(editSession)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.put), throwError(error)]])
-      .put(editInterventionError(error))
+      .put(editSessionError(error))
       .run();
   });
 
@@ -48,7 +48,7 @@ describe('editIntervention saga', () => {
     const sagaFunction = editSessionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(EDIT_INTERVENTION_REQUEST, editSession),
+      takeLatest(EDIT_SESSION_REQUEST, editSession),
     );
   });
 });

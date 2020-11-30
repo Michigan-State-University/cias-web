@@ -89,7 +89,7 @@ describe('<ProblemPage />', () => {
   it('Should render and match the snapshot with interventions', () => {
     store = createTestStore({
       problems: {
-        problems: [{ name: 'Name', status: 'draft', interventions_size: 2 }],
+        problems: [{ name: 'Name', status: 'draft', sessions_size: 2 }],
         fetchProblemLoading: false,
         fetchProblemError: null,
       },

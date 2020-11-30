@@ -88,7 +88,7 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
-            navbarId: 'interventions',
+            navbarId: 'sessions',
           }}
         />
         <AppRoute
@@ -109,7 +109,7 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
-            navbarId: 'interventions',
+            navbarId: 'sessions',
           }}
         />
         <AppRoute

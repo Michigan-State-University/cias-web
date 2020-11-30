@@ -1,24 +1,24 @@
 import { actionBuilder } from 'utils/actionBuilder';
 
 import {
-  GET_INTERVENTION_REQUEST,
-  GET_INTERVENTION_SUCCESS,
-  GET_INTERVENTION_ERROR,
-  EDIT_INTERVENTION_REQUEST,
-  EDIT_INTERVENTION_SUCCESS,
-  EDIT_INTERVENTION_ERROR,
+  GET_SESSION_REQUEST,
+  GET_SESSION_SUCCESS,
+  GET_SESSION_ERROR,
+  EDIT_SESSION_REQUEST,
+  EDIT_SESSION_SUCCESS,
+  EDIT_SESSION_ERROR,
 } from './constants';
 
-export const getInterventionRequest = payload =>
-  actionBuilder(GET_INTERVENTION_REQUEST, payload);
-export const getInterventionSuccess = intervention =>
-  actionBuilder(GET_INTERVENTION_SUCCESS, { intervention });
-export const getInterventionError = error =>
-  actionBuilder(GET_INTERVENTION_ERROR, { error });
+export const getSessionRequest = payload =>
+  actionBuilder(GET_SESSION_REQUEST, payload);
+export const getSessionSuccess = session =>
+  actionBuilder(GET_SESSION_SUCCESS, { session });
+export const getSessionError = error =>
+  actionBuilder(GET_SESSION_ERROR, { error });
 
-export const editInterventionRequest = (payload, fields = []) =>
-  actionBuilder(EDIT_INTERVENTION_REQUEST, payload, fields);
-export const editInterventionSuccess = intervention =>
-  actionBuilder(EDIT_INTERVENTION_SUCCESS, { intervention });
-export const editInterventionError = error =>
-  actionBuilder(EDIT_INTERVENTION_ERROR, { error });
+export const editSessionRequest = (payload, fields = []) =>
+  actionBuilder(EDIT_SESSION_REQUEST, payload, fields);
+export const editSessionSuccess = session =>
+  actionBuilder(EDIT_SESSION_SUCCESS, { session });
+export const editSessionError = error =>
+  actionBuilder(EDIT_SESSION_ERROR, { error });

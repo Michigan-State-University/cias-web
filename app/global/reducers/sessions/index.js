@@ -1,4 +1,4 @@
-export { fetchInterventionsRequest } from './actions';
+export { fetchSessionsRequest } from './actions';
 export { interventionsReducer } from './reducer';
 export {
   makeSelectSessionsState,

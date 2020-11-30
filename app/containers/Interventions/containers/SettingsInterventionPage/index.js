@@ -11,8 +11,8 @@ import { colors } from 'theme';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import {
-  getInterventionRequest,
-  interventionReducer,
+  getSessionRequest,
+  sessionReducer,
   makeSelectSession,
   getSessionSaga,
 } from 'global/reducers/session';
@@ -22,16 +22,16 @@ import messages from './messages';
 import { StyledColumn } from './styled';
 
 const SettingsInterventionPage = ({
-  intervention: { name, settings: { narrator: narratorSettings } = {} },
+  session: { name, settings: { narrator: narratorSettings } = {} },
   match: { params },
-  getIntervention,
+  getSession,
   intl: { formatMessage },
 }) => {
-  useInjectReducer({ key: 'intervention', reducer: interventionReducer });
+  useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
 
   useEffect(() => {
-    getIntervention({
+    getSession({
       interventionId: params.interventionId,
       sessionId: params.sessionId,
     });
@@ -65,7 +65,7 @@ const SettingsInterventionPage = ({
 };
 
 SettingsInterventionPage.propTypes = {
-  intervention: PropTypes.shape({
+  session: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
     settings: PropTypes.shape({
@@ -77,16 +77,16 @@ SettingsInterventionPage.propTypes = {
     }),
   }),
   match: PropTypes.object,
-  getIntervention: PropTypes.func,
+  getSession: PropTypes.func,
   intl: intlShape,
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectSession(),
+  session: makeSelectSession(),
 });
 
 const mapDispatchToProps = {
-  getIntervention: getInterventionRequest,
+  getSession: getSessionRequest,
 };
 
 const withConnect = connect(

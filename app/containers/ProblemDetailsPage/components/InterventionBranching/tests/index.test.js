@@ -19,7 +19,7 @@ import InterventionBranching from '../index';
 
 const defaultProps = {
   nextInterventionName: 'test-2',
-  intervention: {},
+  session: {},
 };
 
 describe('<InterventionBranching />', () => {

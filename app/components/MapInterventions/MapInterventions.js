@@ -9,10 +9,10 @@ export const wrapWithCol = (child, key) => (
   </Col>
 );
 
-const MapInterventions = ({ interventions, participantView }) => (
+const MapInterventions = ({ sessions, participantView }) => (
   <>
-    {interventions &&
-      interventions.map(intervention =>
+    {sessions &&
+      sessions.map(intervention =>
         wrapWithCol(
           <SingleTile
             tileData={intervention}
@@ -26,7 +26,7 @@ const MapInterventions = ({ interventions, participantView }) => (
 );
 
 MapInterventions.propTypes = {
-  interventions: PropTypes.array,
+  sessions: PropTypes.array,
   participantView: PropTypes.bool,
 };
 

@@ -18,7 +18,7 @@ import {
   makeSelectSelectedQuestionId,
 } from 'global/reducers/questions';
 import {
-  editInterventionRequest,
+  editSessionRequest,
   makeSelectSession,
   editSessionSaga,
   makeSelectSessionEditLoader,
@@ -46,8 +46,8 @@ const getActiveTab = (path, formatMessage) => {
 };
 
 const InterventionNavbar = ({
-  intervention: { name },
-  updateInterventionName,
+  session: { name },
+  updateSessionName,
   intl: { formatMessage },
   location: { pathname },
   questionsLength,
@@ -89,7 +89,7 @@ const InterventionNavbar = ({
           fontSize={23}
           placeholder={formatMessage(messages.placeholder)}
           onBlur={val =>
-            updateInterventionName({ path: 'name', value: val }, ['name'])
+            updateSessionName({ path: 'name', value: val }, ['name'])
           }
           maxWidth={280}
         />
@@ -152,11 +152,11 @@ const InterventionNavbar = ({
 };
 
 InterventionNavbar.propTypes = {
-  intervention: PropTypes.shape({
+  session: PropTypes.shape({
     name: PropTypes.string,
     id: PropTypes.string,
   }),
-  updateInterventionName: PropTypes.func,
+  updateSessionName: PropTypes.func,
   intl: intlShape,
   location: PropTypes.object,
   questionsLength: PropTypes.number,
@@ -168,7 +168,7 @@ InterventionNavbar.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectSession(),
+  session: makeSelectSession(),
   questionsLength: makeSelectQuestionsLength(),
   selectedQuestion: makeSelectSelectedQuestionId(),
   interventionEditing: makeSelectSessionEditLoader(),
@@ -177,7 +177,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateInterventionName: editInterventionRequest,
+  updateSessionName: editSessionRequest,
 };
 
 export default compose(

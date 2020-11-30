@@ -86,7 +86,7 @@ function* submitAnswersAsync({
             );
             return;
 
-          case 'intervention':
+          case 'session':
             const { id: sessionId } = branchingResult;
             const { pathname } = yield select(makeSelectLocation());
 

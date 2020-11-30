@@ -94,7 +94,7 @@ function InterventionStatusButtons({
         }}
       />
       <ShareButton
-        data-cy="publish-intervention-button"
+        data-cy="publish-session-button"
         width={200}
         onClick={openConfirmation}
       >

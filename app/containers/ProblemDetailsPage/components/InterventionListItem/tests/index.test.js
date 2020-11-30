@@ -23,7 +23,7 @@ describe('<InterventionListItem />', () => {
   let store;
 
   const props = {
-    intervention: {
+    session: {
       id: '1',
       name: 'Intervention',
       intervention_id: '1',

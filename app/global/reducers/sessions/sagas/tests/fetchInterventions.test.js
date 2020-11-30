@@ -6,19 +6,16 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
 import { Roles } from 'models/User/UserRoles';
-import { createIntervention } from 'utils/reducerCreators';
+import { createSession } from 'utils/reducerCreators';
 
 import fetchSessionsSaga, {
   fetchSessions,
 } from 'global/reducers/sessions/sagas/fetchSessions';
-import {
-  fetchInterventionsSuccess,
-  fetchInterventionsError,
-} from '../../actions';
-import { FETCH_INTERVENTIONS_REQUEST } from '../../constants';
+import { fetchSessionsSuccess, fetchSessionsError } from '../../actions';
+import { FETCH_SESSIONS_REQUEST } from '../../constants';
 
 describe('fetchInterventions saga', () => {
-  const mockInterventions = [createIntervention(), createIntervention(1)];
+  const mockInterventions = [createSession(), createSession(1)];
   const payload = { role: Roles.admin };
 
   it('Check fetchInterventions generator success connection', () => {
@@ -26,14 +23,14 @@ describe('fetchInterventions saga', () => {
 
     return expectSaga(fetchSessions, { payload })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(fetchInterventionsSuccess(mockInterventions))
+      .put(fetchSessionsSuccess(mockInterventions))
       .run();
   });
   it('Check fetchInterventions error connection', () => {
     const error = new Error('test');
     return expectSaga(fetchSessions, { payload })
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
-      .put(fetchInterventionsError(error))
+      .put(fetchSessionsError(error))
       .run();
   });
 
@@ -41,7 +38,7 @@ describe('fetchInterventions saga', () => {
     const sagaFunction = fetchSessionsSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(FETCH_INTERVENTIONS_REQUEST, fetchSessions),
+      takeLatest(FETCH_SESSIONS_REQUEST, fetchSessions),
     );
   });
 });

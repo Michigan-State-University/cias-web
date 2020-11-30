@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const sessions = state => state.interventions || initialState;
+const sessions = state => state.sessions || initialState;
 
 export const makeSelectSessionsState = () =>
   createSelector(
@@ -12,11 +12,11 @@ export const makeSelectSessionsState = () =>
 export const makeSelectSessions = () =>
   createSelector(
     sessions,
-    substate => substate.interventions,
+    substate => substate.sessions,
   );
 
 export const makeSelectSessionsLoader = () =>
   createSelector(
     sessions,
-    substate => substate.fetchInterventionLoading,
+    substate => substate.fetchSessionLoading,
   );
