@@ -117,8 +117,8 @@ export const fetchUsersWithAccessSuccess = userAccess =>
 export const fetchUsersWithAccessFailure = payload =>
   actionBuilder(FETCH_USERS_WITH_ACCESS_ERROR, payload);
 
-export const revokeUserAccessRequest = (sessionId, userId) =>
-  actionBuilder(REVOKE_USER_ACCESS_REQUEST, { sessionId, userId });
+export const revokeUserAccessRequest = (interventionId, userId) =>
+  actionBuilder(REVOKE_USER_ACCESS_REQUEST, { interventionId, userId });
 export const revokeUserAccessSuccess = userId =>
   actionBuilder(REVOKE_USER_ACCESS_SUCCESS, { userId });
 export const revokeUserAccessFailure = (userId, error) =>
