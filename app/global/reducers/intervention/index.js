@@ -3,10 +3,10 @@ export {
   SEND_SESSION_INVITE_REQUEST,
 } from './constants';
 export {
-  fetchProblemRequest,
-  createProblemRequest,
-  editProblemRequest,
-  sendProblemCsvRequest,
+  fetchInterventionRequest,
+  createInterventionRequest,
+  editInterventionRequest,
+  sendInterventionCsvRequest,
   reorderSessionList,
   copySessionRequest,
   changeCurrentSession,
@@ -19,14 +19,14 @@ export {
   resendSessionInviteRequest,
   fetchSessionEmailsRequest,
 } from './actions';
-export { problemReducer } from './reducer';
+export { interventionReducer } from './reducer';
 export {
-  selectProblem,
-  makeSelectProblem,
-  makeSelectCacheProblem,
-  makeSelectProblemLoader,
-  makeSelectProblemState,
-  makeSelectProblemStatus,
+  selectIntervention,
+  makeSelectIntervention,
+  makeSelectCacheIntervention,
+  makeSelectInterventionLoader,
+  makeSelectInterventionState,
+  makeSelectInterventionStatus,
   makeSelectCurrentSessionIndex,
 } from './selectors';
 export {

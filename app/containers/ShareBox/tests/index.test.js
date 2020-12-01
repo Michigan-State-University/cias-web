@@ -16,9 +16,9 @@ import { DEFAULT_LOCALE } from '../../../i18n';
 describe('<ShareBox />', () => {
   const reducer = state => state;
   const initialState = {
-    problem: {
+    intervention: {
       currentSessionIndex: 0,
-      problem: {
+      intervention: {
         sessions: [
           {
             name: 'Name',

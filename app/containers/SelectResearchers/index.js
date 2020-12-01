@@ -153,7 +153,7 @@ SelectResearchers.propTypes = {
   userList: PropTypes.object,
   user: PropTypes.object,
   fetchUsersRequest: PropTypes.func.isRequired,
-  copyProblemToResearchers: PropTypes.func,
+  copyInterventionToResearchers: PropTypes.func,
   interventionId: PropTypes.string,
   onClose: PropTypes.func,
   onResearchersSelected: PropTypes.func,

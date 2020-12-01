@@ -5,7 +5,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { createProblem } from 'utils/reducerCreators';
+import { createIntervention } from 'utils/reducerCreators';
 import { ids } from 'containers/SettingsPanel/utils';
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -23,8 +23,8 @@ import changeAccessSettingSaga, {
 import messages from '../../messages';
 
 describe('changeAccessSetting saga', () => {
-  const mockProblem = createProblem();
-  const payload = { id: mockProblem.id, setting: ids.anyoneWithTheLink };
+  const mockIntervention = createIntervention();
+  const payload = { id: mockIntervention.id, setting: ids.anyoneWithTheLink };
 
   it('Check changeAccessSetting generator success connection', () =>
     expectSaga(changeAccessSetting, { payload })

@@ -4,8 +4,8 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { createProblem, createUser } from 'utils/reducerCreators';
-import { apiProblemResponse } from 'utils/apiResponseCreators';
+import { createIntervention, createUser } from 'utils/reducerCreators';
+import { apiInterventionResponse } from 'utils/apiResponseCreators';
 
 import fetchSessionEmailsSaga, {
   fetchSessionEmails,
@@ -19,14 +19,14 @@ import { FETCH_SESSION_EMAILS_REQUEST } from '../../constants';
 
 describe('fetchInterventionEmails saga', () => {
   const users = [createUser(), createUser()];
-  const mockProblem = createProblem();
+  const mockIntervention = createIntervention();
   const mockState = {
-    problem: { ...initialState, problem: mockProblem },
+    intervention: { ...initialState, intervention: mockIntervention },
   };
   const payload = { index: 0 };
 
   it('Check fetchInterventionEmails generator success connection', () => {
-    const apiResponse = apiProblemResponse();
+    const apiResponse = apiInterventionResponse();
     apiResponse.session_invitations = users;
 
     return expectSaga(fetchSessionEmails, { payload })

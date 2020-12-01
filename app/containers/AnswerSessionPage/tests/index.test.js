@@ -17,14 +17,14 @@ import { AnswerSessionPageWithIntl as AnswerSessionPage } from '../index';
 
 describe('<AnswerSessionPage />', () => {
   const mockedFunctions = {
-    fetchProblem: jest.fn(),
+    fetchIntervention: jest.fn(),
     fetchQuestionsAction: jest.fn(),
   };
 
   const defaultProps = {
     match: { params: { id: '12ad120dj012-3a' } },
     fetchQuestionsAction: mockedFunctions.fetchQuestionsAction,
-    fetchProblem: mockedFunctions.fetchProblem,
+    fetchIntervention: mockedFunctions.fetchIntervention,
     AnswerSessionPage: {
       sessionQuestions: [],
     },

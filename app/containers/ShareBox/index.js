@@ -23,8 +23,8 @@ import { canShareWithParticipants } from 'models/Status/statusPermissions';
 import {
   sendSessionInviteRequest,
   resendSessionInviteRequest,
-  makeSelectProblemLoader,
-  makeSelectProblemStatus,
+  makeSelectInterventionLoader,
+  makeSelectInterventionStatus,
 } from 'global/reducers/intervention';
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -41,14 +41,14 @@ const ShareBox = ({
   sendLoading,
   emailLoading,
   listLoading,
-  problemStatus,
+  interventionStatus,
 }) => {
   const { name, intervention_id: interventionId, emails, position } =
     session || {};
 
   const handleResend = id => resendInvite(id, session.id);
 
-  const sharingPossible = canShareWithParticipants(problemStatus);
+  const sharingPossible = canShareWithParticipants(interventionStatus);
 
   const buttons = [
     {
@@ -133,15 +133,15 @@ ShareBox.propTypes = {
   sendLoading: PropTypes.bool,
   listLoading: PropTypes.bool,
   emailLoading: PropTypes.object,
-  problemStatus: PropTypes.string,
+  interventionStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   session: makeSelectCurrentSession(),
-  sendLoading: makeSelectProblemLoader('sendSessionLoading'),
-  listLoading: makeSelectProblemLoader('fetchSessionEmailsLoading'),
-  emailLoading: makeSelectProblemLoader('sessionEmailLoading'),
-  problemStatus: makeSelectProblemStatus(),
+  sendLoading: makeSelectInterventionLoader('sendSessionLoading'),
+  listLoading: makeSelectInterventionLoader('fetchSessionEmailsLoading'),
+  emailLoading: makeSelectInterventionLoader('sessionEmailLoading'),
+  interventionStatus: makeSelectInterventionStatus(),
 });
 
 const mapDispatchToProps = {

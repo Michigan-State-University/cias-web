@@ -29,7 +29,7 @@ import check from 'assets/svg/check-green.svg';
 import backButton from 'assets/svg/arrow-black.svg';
 
 import ActionIcon from 'components/ActionIcon';
-import { makeSelectProblemStatus } from 'global/reducers/intervention';
+import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit, canPreview } from 'models/Status/statusPermissions';
 import messages from './messages';
 import {
@@ -54,7 +54,7 @@ const InterventionNavbar = ({
   selectedQuestion,
   interventionEditing,
   questionGroupsEditing,
-  problemStatus,
+  interventionStatus,
   match: { params },
 }) => {
   const { interventionId, sessionId } = params;
@@ -67,9 +67,9 @@ const InterventionNavbar = ({
     setTabActive(getActiveTab(pathname, formatMessage));
   }, [pathname]);
 
-  const previewDisabled = !questionsLength || !canPreview(problemStatus);
+  const previewDisabled = !questionsLength || !canPreview(interventionStatus);
 
-  const editingPossible = canEdit(problemStatus);
+  const editingPossible = canEdit(interventionStatus);
 
   const isSaving = questionGroupsEditing || interventionEditing;
 
@@ -164,7 +164,7 @@ InterventionNavbar.propTypes = {
   interventionEditing: PropTypes.bool,
   questionGroupsEditing: PropTypes.bool,
   match: PropTypes.object,
-  problemStatus: PropTypes.string,
+  interventionStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -173,7 +173,7 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestionId(),
   interventionEditing: makeSelectSessionEditLoader(),
   questionGroupsEditing: makeSelectQuestionGroupsLoader(),
-  problemStatus: makeSelectProblemStatus(),
+  interventionStatus: makeSelectInterventionStatus(),
 });
 
 const mapDispatchToProps = {

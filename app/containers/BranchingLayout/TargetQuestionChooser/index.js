@@ -22,8 +22,8 @@ import presentationProjectorSelected from 'assets/svg/presentation-projector-sel
 import { colors, borders, fontSizes, themeColors } from 'theme';
 import { makeSelectSession } from 'global/reducers/session';
 import {
-  makeSelectProblemLoader,
-  makeSelectProblem,
+  makeSelectInterventionLoader,
+  makeSelectIntervention,
   makeSelectCurrentSessionIndex,
 } from 'global/reducers/intervention';
 import {
@@ -46,24 +46,24 @@ const TargetQuestionChooser = props => {
     pattern: { target },
     currentIndex,
     isVisible,
-    problem,
-    problemLoading,
-    problemBranching,
+    intervention,
+    interventionLoading,
+    interventionBranching,
     sessionIndex,
     questionGroups,
   } = props;
-  const { sessions: sessionList } = problem || {};
+  const { sessions: sessionList } = intervention || {};
   const [isInterventionView, _setIsInterventionView] = useState(false);
   const setIsInterventionView = (value, event) => {
     if (event) event.stopPropagation();
     _setIsInterventionView(value);
   };
   const canSelectIntervention = selectedInterventionId =>
-    !problemBranching ||
+    !interventionBranching ||
     sessionList[sessionIndex].id !== selectedInterventionId;
   const isLast = currentIndex === questions.length - 1;
   const isCurrentIntervention = session =>
-    !problemBranching && sessionId === session.id;
+    !interventionBranching && sessionId === session.id;
 
   useEffect(() => {
     if (isVisible) {
@@ -84,9 +84,9 @@ const TargetQuestionChooser = props => {
 
   const chooseIntervention = (targetInterventionId, event) => {
     if (canSelectIntervention(targetInterventionId)) {
-      if (!problemBranching && targetInterventionId === sessionId)
+      if (!interventionBranching && targetInterventionId === sessionId)
         setIsInterventionView(false, event);
-      else onClick({ type: 'Intervention', id: targetInterventionId });
+      else onClick({ type: 'Session', id: targetInterventionId });
     }
   };
 
@@ -123,7 +123,7 @@ const TargetQuestionChooser = props => {
   );
 
   const renderInterventionChooser = () => {
-    if (problemLoading)
+    if (interventionLoading)
       return (
         <Box
           width="100%"
@@ -190,7 +190,7 @@ const TargetQuestionChooser = props => {
 
   return (
     <Box width={300}>
-      {!problemBranching && (
+      {!interventionBranching && (
         <Box
           borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
             colors.linkWater
@@ -238,9 +238,9 @@ TargetQuestionChooser.propTypes = {
   currentIndex: PropTypes.string,
   sessionIndex: PropTypes.number,
   isVisible: PropTypes.bool,
-  problem: PropTypes.object,
-  problemLoading: PropTypes.bool,
-  problemBranching: PropTypes.bool,
+  intervention: PropTypes.object,
+  interventionLoading: PropTypes.bool,
+  interventionBranching: PropTypes.bool,
   questionGroups: PropTypes.array,
 };
 
@@ -249,8 +249,8 @@ const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
   currentIndex: makeSelectSelectedQuestionId(),
-  problemLoading: makeSelectProblemLoader('fetchProblemLoading'),
-  problem: makeSelectProblem(),
+  interventionLoading: makeSelectInterventionLoader('fetchInterventionLoading'),
+  intervention: makeSelectIntervention(),
   sessionIndex: makeSelectCurrentSessionIndex(),
   questionGroups: makeSelectQuestionGroups(),
 });

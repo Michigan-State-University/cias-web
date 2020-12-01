@@ -15,51 +15,56 @@ import {
 import { CREATE_PROBLEM_SUCCESS } from '../intervention';
 
 export const initialState = {
-  problems: [],
-  fetchProblemLoading: true,
-  fetchProblemError: null,
+  interventions: [],
+  fetchInterventionLoading: true,
+  fetchInterventionError: null,
   cache: {
-    archiveProblem: null,
+    archiveIntervention: null,
   },
 };
 
 /* eslint-disable default-case, no-param-reassign */
-export const problemsReducer = (state = initialState, action) =>
+export const interventionsReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case FETCH_PROBLEMS_REQUEST:
-        if (isEmpty(state.problems)) draft.fetchProblemLoading = true;
-        draft.fetchProblemError = null;
+        if (isEmpty(state.interventions)) draft.fetchInterventionLoading = true;
+        draft.fetchInterventionError = null;
         break;
       case FETCH_PROBLEMS_SUCCESS:
-        draft.fetchProblemLoading = false;
-        draft.problems = action.payload.problems;
+        draft.fetchInterventionLoading = false;
+        draft.interventions = action.payload.interventions;
         break;
       case FETCH_PROBLEMS_ERROR:
-        draft.fetchProblemLoading = false;
-        draft.fetchProblemError = action.payload.error;
+        draft.fetchInterventionLoading = false;
+        draft.fetchInterventionError = action.payload.error;
         break;
       case CREATE_PROBLEM_SUCCESS:
       case COPY_PROBLEM_SUCCESS:
-        draft.problems = [...state.problems, action.payload.problem];
+        draft.interventions = [
+          ...state.interventions,
+          action.payload.intervention,
+        ];
         break;
       case ARCHIVE_PROBLEM_REQUEST:
-        let problemIndex = draft.problems.findIndex(
+        let interventionIndex = draft.interventions.findIndex(
           ({ id }) => id === action.payload.interventionId,
         );
-        draft.problems[problemIndex].status = archived;
-        draft.cache.archiveIntervention = state.problems[problemIndex];
+        draft.interventions[interventionIndex].status = archived;
+        draft.cache.archiveIntervention =
+          state.interventions[interventionIndex];
         break;
       case ARCHIVE_PROBLEM_SUCCESS:
         draft.cache.archiveIntervention = null;
         break;
       case ARCHIVE_PROBLEM_ERROR:
-        problemIndex = draft.problems.findIndex(
+        interventionIndex = draft.interventions.findIndex(
           ({ id }) => id === action.payload.interventionId,
         );
-        draft.problems[problemIndex] = state.cache.archiveProblem;
+        draft.interventions[interventionIndex] =
+          state.cache.archiveIntervention;
         draft.cache.archiveIntervention = null;
     }
   });
 
-export default problemsReducer;
+export default interventionsReducer;

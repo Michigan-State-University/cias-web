@@ -8,44 +8,47 @@ import { expectSaga } from 'redux-saga-test-plan';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 import {
-  apiProblemResponse,
   apiInterventionResponse,
+  apiSessionResponse,
 } from 'utils/apiResponseCreators';
 
 import fetchInterventionSaga, {
   fetchIntervention,
 } from 'global/reducers/intervention/sagas/fetchIntervention';
-import { fetchProblemSuccess, fetchProblemError } from '../../actions';
+import {
+  fetchInterventionSuccess,
+  fetchInterventionError,
+} from '../../actions';
 
 import { FETCH_PROBLEM_REQUEST } from '../../constants';
 
-describe('fetchProblem saga', () => {
+describe('fetchIntervention saga', () => {
   const payload = { id: 'test-id' };
 
-  it('Check fetchProblem generator success connection', () => {
-    const problemApiResponse = apiProblemResponse();
-    const interventionApiResponse = {
-      data: [apiInterventionResponse().data],
+  it('Check fetchIntervention generator success connection', () => {
+    const interventionApiResponse = apiInterventionResponse();
+    const sessionApiResponse = {
+      data: [apiSessionResponse().data],
     };
-    const problem = cloneDeep(problemApiResponse.data);
-    const sessions = cloneDeep(interventionApiResponse.data);
+    const intervention = cloneDeep(interventionApiResponse.data);
+    const sessions = cloneDeep(sessionApiResponse.data);
     const mappedInterventions = sessions.map(defaultMapper);
-    problem.sessions = orderBy(mappedInterventions, 'position');
+    intervention.sessions = orderBy(mappedInterventions, 'position');
     return expectSaga(fetchIntervention, { payload })
       .provide([
         [
           matchers.call(axios.get, `v1/interventions/${payload.id}`),
-          problemApiResponse,
+          interventionApiResponse,
         ],
         [
           matchers.call(axios.get, `v1/interventions/${payload.id}/sessions`),
-          { data: interventionApiResponse },
+          { data: sessionApiResponse },
         ],
       ])
-      .put(fetchProblemSuccess(problem))
+      .put(fetchInterventionSuccess(intervention))
       .run();
   });
-  it('Check fetchProblem error connection', () => {
+  it('Check fetchIntervention error connection', () => {
     const error = new Error('test');
     return expectSaga(fetchIntervention, { payload })
       .provide([
@@ -61,11 +64,11 @@ describe('fetchProblem saga', () => {
           throwError(error),
         ],
       ])
-      .put(fetchProblemError(error))
+      .put(fetchInterventionError(error))
       .run();
   });
 
-  it('Check fetchProblem connection', () => {
+  it('Check fetchIntervention connection', () => {
     const sagaFunction = fetchInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(

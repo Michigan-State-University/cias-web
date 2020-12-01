@@ -14,12 +14,12 @@ import {
   SEND_SESSION_INVITE_SUCCESS,
 } from '../constants';
 import messages from '../messages';
-import { makeSelectProblem } from '../selectors';
+import { makeSelectIntervention } from '../selectors';
 
 export function* sendSessionInvite({ payload: { emails, sessionId } }) {
-  const problem = yield select(makeSelectProblem());
-  const sessionIndex = problem.sessions.findIndex(
-    intervention => intervention.id === sessionId,
+  const intervention = yield select(makeSelectIntervention());
+  const sessionIndex = intervention.sessions.findIndex(
+    session => session.id === sessionId,
   );
 
   const requestURL = `v1/sessions/${sessionId}/invitations`;

@@ -8,7 +8,7 @@ import AddLabel from './AddLabel';
 
 const NewButton = forwardRef(({ onClick, loading, label }, ref) => (
   <NewElementContainer
-    data-cy="create-problem-button"
+    data-cy="create-intervention-button"
     onClick={onClick}
     ref={ref}
   >

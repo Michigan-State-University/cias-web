@@ -51,16 +51,16 @@ import {
 
 export const initialState = {
   currentSessionIndex: 0,
-  problem: null,
+  intervention: null,
   emails: [],
   cache: {
-    problem: null,
+    intervention: null,
   },
   loaders: {
-    fetchProblemLoading: true,
-    createProblemLoading: false,
+    fetchInterventionLoading: true,
+    createInterventionLoading: false,
     sendCsvLoading: false,
-    editProblem: false,
+    editIntervention: false,
     changeAccessSettingLoading: false,
     fetchUserAccessLoading: false,
     fetchSessionEmailsLoading: false,
@@ -72,58 +72,59 @@ export const initialState = {
     },
   },
   errors: {
-    fetchProblemError: null,
+    fetchInterventionError: null,
     fetchSessionEmailsError: null,
-    createProblemError: null,
+    createInterventionError: null,
     changeAccessSettingError: null,
     fetchUserAccessError: null,
     createSessionError: null,
   },
 };
 
-const findInterventionIndex = (problem, sessionId) =>
-  problem.sessions.findIndex(({ id }) => id === sessionId);
+const findInterventionIndex = (intervention, sessionId) =>
+  intervention.sessions.findIndex(({ id }) => id === sessionId);
 
 /* eslint-disable default-case, no-param-reassign */
-export const problemReducer = (state = initialState, action) =>
+export const interventionReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case FETCH_PROBLEM_REQUEST:
-        if (state.problem && action.payload.id === state.problem.id) break;
-        draft.loaders.fetchProblemLoading = true;
-        draft.loaders.fetchProblemError = null;
-        draft.problem = null;
+        if (state.intervention && action.payload.id === state.intervention.id)
+          break;
+        draft.loaders.fetchInterventionLoading = true;
+        draft.loaders.fetchInterventionError = null;
+        draft.intervention = null;
         break;
       case FETCH_PROBLEM_SUCCESS:
-        draft.loaders.fetchProblemLoading = false;
+        draft.loaders.fetchInterventionLoading = false;
         // to discuss the solution in the future, FETCH_PROBLEM_SUCCESS overwrites FETCH_USERS_WITH_ACCESS_SUCCESS
-        const temp = get(draft.problem, 'usersWithAccess', null);
-        draft.problem = action.payload.problem;
-        set(draft.problem, 'usersWithAccess', temp);
-        draft.cache.problem = action.payload.problem;
+        const temp = get(draft.intervention, 'usersWithAccess', null);
+        draft.intervention = action.payload.intervention;
+        set(draft.intervention, 'usersWithAccess', temp);
+        draft.cache.intervention = action.payload.intervention;
         break;
       case FETCH_PROBLEM_ERROR:
-        draft.loaders.fetchProblemLoading = false;
-        draft.errors.fetchProblemError = action.payload.error;
+        draft.loaders.fetchInterventionLoading = false;
+        draft.errors.fetchInterventionError = action.payload.error;
         break;
       case CREATE_PROBLEM_REQUEST:
-        draft.loaders.createProblemLoading = true;
-        draft.loaders.createProblemError = null;
+        draft.loaders.createInterventionLoading = true;
+        draft.loaders.createInterventionError = null;
         break;
       case CREATE_PROBLEM_SUCCESS:
-        draft.loaders.createProblemLoading = false;
+        draft.loaders.createInterventionLoading = false;
         break;
       case CREATE_PROBLEM_ERROR:
         break;
       case EDIT_PROBLEM_REQUEST:
-        set(draft.problem, action.payload.path, action.payload.value);
+        set(draft.intervention, action.payload.path, action.payload.value);
         break;
       case EDIT_PROBLEM_SUCCESS:
-        draft.problem = action.payload.problem;
-        draft.cache.problem = action.payload.problem;
+        draft.intervention = action.payload.intervention;
+        draft.cache.intervention = action.payload.intervention;
         break;
       case EDIT_PROBLEM_ERROR:
-        draft.problem = draft.cache.problem;
+        draft.intervention = draft.cache.intervention;
         break;
       case SEND_PROBLEM_CSV_REQUEST:
         draft.loaders.sendCsvLoading = true;
@@ -135,25 +136,25 @@ export const problemReducer = (state = initialState, action) =>
         draft.loaders.sendCsvLoading = false;
         break;
       case COPY_SESSION_SUCCESS:
-        draft.problem.sessions.push(defaultMapper(action.payload.session));
+        draft.intervention.sessions.push(defaultMapper(action.payload.session));
         break;
       case REORDER_SESSION_LIST:
-        draft.cache.problem = state.problem;
-        draft.problem.sessions = action.payload.reorderedList;
+        draft.cache.intervention = state.intervention;
+        draft.intervention.sessions = action.payload.reorderedList;
         break;
       case CHANGE_CURRENT_SESSION:
         draft.currentSessionIndex = action.payload.index;
         break;
       case UPDATE_SESSION_SETTINGS_REQUEST: {
-        const sessionIndex = state.problem.sessions.findIndex(
+        const sessionIndex = state.intervention.sessions.findIndex(
           intervention => intervention.id === action.payload.data.sessionId,
         );
         if (sessionIndex > -1) {
           draft.currentSessionIndex = sessionIndex;
-          draft.loaders.editProblem = true;
-          draft.problem.sessions[sessionIndex] = {
+          draft.loaders.editIntervention = true;
+          draft.intervention.sessions[sessionIndex] = {
             ...sessionSettingsReducer(
-              draft.problem.sessions[sessionIndex],
+              draft.intervention.sessions[sessionIndex],
               action.payload,
             ),
           };
@@ -161,33 +162,33 @@ export const problemReducer = (state = initialState, action) =>
         break;
       }
       case UPDATE_SESSION_SETTINGS_SUCCESS:
-        draft.cache.problem = state.problem;
+        draft.cache.intervention = state.intervention;
         break;
       case UPDATE_SESSION_SETTINGS_ERROR:
-        draft.problem = state.cache.problem;
+        draft.intervention = state.cache.intervention;
         break;
       case REORDER_SESSION_LIST_SUCCESS:
-        draft.cache.problem = state.problem;
+        draft.cache.intervention = state.intervention;
         break;
       case REORDER_SESSION_LIST_ERROR:
-        draft.problem = state.cache.problem;
+        draft.intervention = state.cache.intervention;
         break;
       case CHANGE_ACCESS_SETTING_REQUEST:
-        draft.problem.shared_to = action.payload.setting;
-        draft.cache.problem = state.problem;
+        draft.intervention.shared_to = action.payload.setting;
+        draft.cache.intervention = state.intervention;
         break;
       case CHANGE_ACCESS_SETTING_SUCCESS:
-        draft.cache.problem = draft.problem;
+        draft.cache.intervention = draft.intervention;
         break;
       case CHANGE_ACCESS_SETTING_ERROR:
-        draft.problem = state.cache.problem;
+        draft.intervention = state.cache.intervention;
         break;
       case ENABLE_USER_ACCESS_REQUEST:
         draft.loaders.enableAccessLoading = true;
         break;
       case ENABLE_USER_ACCESS_SUCCESS:
         draft.loaders.enableAccessLoading = false;
-        draft.problem.usersWithAccess = [...action.payload.emails];
+        draft.intervention.usersWithAccess = [...action.payload.emails];
         break;
       case ENABLE_USER_ACCESS_ERROR:
         draft.loaders.enableAccessLoading = false;
@@ -199,35 +200,35 @@ export const problemReducer = (state = initialState, action) =>
       case FETCH_USERS_WITH_ACCESS_SUCCESS:
         draft.loaders.fetchUserAccessLoading = false;
         draft.errors.fetchUserAccessError = null;
-        draft.problem.usersWithAccess = action.payload.userAccess;
+        draft.intervention.usersWithAccess = action.payload.userAccess;
         break;
       case FETCH_USERS_WITH_ACCESS_ERROR:
         draft.loaders.fetchUserAccessLoading = false;
         draft.errors.fetchUserAccessError = action.payload.message;
         break;
       case REVOKE_USER_ACCESS_REQUEST:
-        let userIndex = state.problem.usersWithAccess.findIndex(
+        let userIndex = state.intervention.usersWithAccess.findIndex(
           ({ id }) => id === action.payload.userId,
         );
-        draft.problem.usersWithAccess[userIndex].loading = true;
+        draft.intervention.usersWithAccess[userIndex].loading = true;
         break;
       case REVOKE_USER_ACCESS_SUCCESS:
-        draft.problem.usersWithAccess = state.problem.usersWithAccess.filter(
+        draft.intervention.usersWithAccess = state.intervention.usersWithAccess.filter(
           ({ id }) => id !== action.payload.userId,
         );
         break;
       case REVOKE_USER_ACCESS_ERROR:
-        userIndex = state.problem.usersWithAccess.findIndex(
+        userIndex = state.intervention.usersWithAccess.findIndex(
           ({ id }) => id === action.payload.userId,
         );
-        draft.problem.usersWithAccess[userIndex].loading = false;
+        draft.intervention.usersWithAccess[userIndex].loading = false;
         break;
       case CREATE_SESSION_REQUEST:
         draft.loaders.createSessionLoading = true;
         break;
       case CREATE_SESSION_SUCCESS:
-        draft.problem.sessions = [
-          ...state.problem.sessions,
+        draft.intervention.sessions = [
+          ...state.intervention.sessions,
           action.payload.session,
         ];
         draft.loaders.createSessionLoading = false;
@@ -238,12 +239,12 @@ export const problemReducer = (state = initialState, action) =>
         break;
 
       case FETCH_SESSION_EMAILS_REQUEST:
-        if (!state.problem.sessions[action.payload.index].emails)
+        if (!state.intervention.sessions[action.payload.index].emails)
           draft.loaders.fetchSessionEmailsLoading = true;
         break;
       case FETCH_SESSION_EMAILS_SUCCESS:
         const { index, emails } = action.payload;
-        draft.problem.sessions[index].emails = emails;
+        draft.intervention.sessions[index].emails = emails;
         draft.loaders.fetchSessionEmailsLoading = false;
         break;
 
@@ -255,17 +256,20 @@ export const problemReducer = (state = initialState, action) =>
       case SEND_SESSION_INVITE_REQUEST: {
         const { emails: payloadEmails, sessionId } = action.payload;
 
-        const sessionIndex = findInterventionIndex(state.problem, sessionId);
+        const sessionIndex = findInterventionIndex(
+          state.intervention,
+          sessionId,
+        );
 
         if (sessionIndex > -1) {
           draft.loaders.sendSessionLoading = true;
-          draft.cache.problem = state.problem;
+          draft.cache.intervention = state.intervention;
           const mappedEmails = payloadEmails.map(email => ({
             email,
           }));
 
-          draft.problem.sessions[sessionIndex].emails = [
-            ...state.problem.sessions[sessionIndex].emails,
+          draft.intervention.sessions[sessionIndex].emails = [
+            ...state.intervention.sessions[sessionIndex].emails,
             ...mappedEmails,
           ];
         }
@@ -283,11 +287,11 @@ export const problemReducer = (state = initialState, action) =>
         draft.loaders.sendSessionLoading = false;
         draft.loaders.sessionEmailLoading =
           initialState.loaders.sessionEmailLoading;
-        draft.problem = state.cache.problem;
+        draft.intervention = state.cache.intervention;
         break;
 
       case RESEND_SESSION_INVITE_REQUEST:
-        draft.cache.problem = state.problem;
+        draft.cache.intervention = state.intervention;
         draft.loaders.sessionEmailLoading = {
           ...action.payload,
         };
@@ -295,4 +299,4 @@ export const problemReducer = (state = initialState, action) =>
     }
   });
 
-export default problemReducer;
+export default interventionReducer;

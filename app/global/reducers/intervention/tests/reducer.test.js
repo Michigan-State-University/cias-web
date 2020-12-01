@@ -3,7 +3,7 @@ import set from 'lodash/set';
 
 import { actionBuilder } from 'utils/actionBuilder';
 import { defaultMapper } from 'utils/mapResponseObjects';
-import { createSession, createProblem } from 'utils/reducerCreators';
+import { createSession, createIntervention } from 'utils/reducerCreators';
 import {
   FETCH_PROBLEM_REQUEST,
   FETCH_PROBLEM_SUCCESS,
@@ -45,43 +45,43 @@ import {
   SEND_SESSION_INVITE_ERROR,
   RESEND_SESSION_INVITE_REQUEST,
 } from '../constants';
-import { initialState, problemReducer } from '../reducer';
+import { initialState, interventionReducer } from '../reducer';
 
-describe('problem reducer', () => {
+describe('intervention reducer', () => {
   const mockState = {
     ...initialState,
-    problem: createProblem(),
-    cache: { problem: createProblem(2) },
+    intervention: createIntervention(),
+    cache: { intervention: createIntervention(2) },
   };
 
   it('FETCH_PROBLEM_REQUEST', () => {
     const action = actionBuilder(FETCH_PROBLEM_REQUEST, { id: 'test-2' });
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.fetchProblemLoading = true;
-    expectedState.loaders.fetchProblemError = null;
-    expectedState.problem = null;
+    expectedState.loaders.fetchInterventionLoading = true;
+    expectedState.loaders.fetchInterventionError = null;
+    expectedState.intervention = null;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('FETCH_PROBLEM_SUCCESS', () => {
-    const payloadProblem = {
-      problem: createProblem(1),
+    const payloadIntervention = {
+      intervention: createIntervention(1),
     };
-    const action = actionBuilder(FETCH_PROBLEM_SUCCESS, payloadProblem);
+    const action = actionBuilder(FETCH_PROBLEM_SUCCESS, payloadIntervention);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.fetchProblemLoading = false;
-    expectedState.problem = payloadProblem.problem;
+    expectedState.loaders.fetchInterventionLoading = false;
+    expectedState.intervention = payloadIntervention.intervention;
     set(
-      expectedState.problem,
+      expectedState.intervention,
       'usersWithAccess',
-      mockState.problem.usersWithAccess,
+      mockState.intervention.usersWithAccess,
     );
-    expectedState.cache.problem = payloadProblem.problem;
+    expectedState.cache.intervention = payloadIntervention.intervention;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('FETCH_PROBLEM_ERROR', () => {
@@ -89,35 +89,35 @@ describe('problem reducer', () => {
     const action = actionBuilder(FETCH_PROBLEM_ERROR, payloadError);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.fetchProblemLoading = false;
-    expectedState.errors.fetchProblemError = payloadError.error;
+    expectedState.loaders.fetchInterventionLoading = false;
+    expectedState.errors.fetchInterventionError = payloadError.error;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('CREATE_PROBLEM_REQUEST', () => {
     const action = actionBuilder(CREATE_PROBLEM_REQUEST, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.createProblemLoading = true;
-    expectedState.loaders.createProblemError = null;
+    expectedState.loaders.createInterventionLoading = true;
+    expectedState.loaders.createInterventionError = null;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('CREATE_PROBLEM_SUCCESS', () => {
     const action = actionBuilder(CREATE_PROBLEM_SUCCESS, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.loaders.createProblemLoading = false;
+    expectedState.loaders.createInterventionLoading = false;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('CREATE_PROBLEM_ERROR', () => {
     const action = actionBuilder(CREATE_PROBLEM_ERROR, {});
 
-    expect(problemReducer(mockState, action)).toEqual(mockState);
+    expect(interventionReducer(mockState, action)).toEqual(mockState);
   });
 
   it('EDIT_PROBLEM_REQUEST', () => {
@@ -125,29 +125,29 @@ describe('problem reducer', () => {
     const action = actionBuilder(EDIT_PROBLEM_REQUEST, payloadValue);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.problem.status = 'published';
+    expectedState.intervention.status = 'published';
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('EDIT_PROBLEM_SUCCESS', () => {
-    const payloadProblem = { problem: createProblem(1) };
-    const action = actionBuilder(EDIT_PROBLEM_SUCCESS, payloadProblem);
+    const payloadIntervention = { intervention: createIntervention(1) };
+    const action = actionBuilder(EDIT_PROBLEM_SUCCESS, payloadIntervention);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.problem = payloadProblem.problem;
-    expectedState.cache.problem = payloadProblem.problem;
+    expectedState.intervention = payloadIntervention.intervention;
+    expectedState.cache.intervention = payloadIntervention.intervention;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('EDIT_PROBLEM_ERROR', () => {
     const action = actionBuilder(EDIT_PROBLEM_ERROR, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.problem = expectedState.cache.problem;
+    expectedState.intervention = expectedState.cache.intervention;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('SEND_PROBLEM_CSV_REQUEST', () => {
@@ -156,7 +156,7 @@ describe('problem reducer', () => {
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.sendCsvLoading = true;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('SEND_PROBLEM_CSV_SUCCESS', () => {
@@ -165,7 +165,7 @@ describe('problem reducer', () => {
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.sendCsvLoading = false;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('SEND_PROBLEM_CSV_ERROR', () => {
@@ -174,7 +174,7 @@ describe('problem reducer', () => {
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.sendCsvLoading = false;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('COPY_SESSION_SUCCESS', () => {
@@ -182,11 +182,11 @@ describe('problem reducer', () => {
     const action = actionBuilder(COPY_SESSION_SUCCESS, payloadIntervention);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.problem.sessions.push(
+    expectedState.intervention.sessions.push(
       defaultMapper(payloadIntervention.session),
     );
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('REORDER_SESSION_LIST', () => {
@@ -196,31 +196,31 @@ describe('problem reducer', () => {
     const action = actionBuilder(REORDER_SESSION_LIST, payloadInterventionList);
 
     const initState = cloneDeep(mockState);
-    initState.problem.sessions.push(createSession(1));
+    initState.intervention.sessions.push(createSession(1));
 
     const reorderState = cloneDeep(initState);
-    reorderState.problem.sessions = payloadInterventionList.reorderedList;
-    reorderState.cache.problem = initState.problem;
+    reorderState.intervention.sessions = payloadInterventionList.reorderedList;
+    reorderState.cache.intervention = initState.intervention;
 
-    expect(problemReducer(initState, action)).toEqual(reorderState);
+    expect(interventionReducer(initState, action)).toEqual(reorderState);
   });
 
   it('REORDER_SESSION_LIST_SUCCESS', () => {
     const action = actionBuilder(REORDER_SESSION_LIST_SUCCESS, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.cache.problem = mockState.problem;
+    expectedState.cache.intervention = mockState.intervention;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('REORDER_SESSION_LIST_ERROR', () => {
     const action = actionBuilder(REORDER_SESSION_LIST_ERROR, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.problem = mockState.cache.problem;
+    expectedState.intervention = mockState.cache.intervention;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('CHANGE_CURRENT_INTERVENTION', () => {
@@ -230,7 +230,7 @@ describe('problem reducer', () => {
     const changeState = cloneDeep(mockState);
     changeState.currentSessionIndex = payloadIndex.index;
 
-    expect(problemReducer(mockState, action)).toEqual(changeState);
+    expect(interventionReducer(mockState, action)).toEqual(changeState);
   });
 
   it('CHANGE_ACCESS_SETTING_REQUEST', () => {
@@ -238,28 +238,28 @@ describe('problem reducer', () => {
     const action = actionBuilder(CHANGE_ACCESS_SETTING_REQUEST, payloadSetting);
 
     const changeState = cloneDeep(mockState);
-    changeState.problem.shared_to = payloadSetting.setting;
-    changeState.cache.problem = mockState.problem;
+    changeState.intervention.shared_to = payloadSetting.setting;
+    changeState.cache.intervention = mockState.intervention;
 
-    expect(problemReducer(mockState, action)).toEqual(changeState);
+    expect(interventionReducer(mockState, action)).toEqual(changeState);
   });
 
   it('CHANGE_ACCESS_SETTING_SUCCESS', () => {
     const action = actionBuilder(CHANGE_ACCESS_SETTING_SUCCESS, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.cache.problem = mockState.problem;
+    expectedState.cache.intervention = mockState.intervention;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('CHANGE_ACCESS_SETTING_ERROR', () => {
     const action = actionBuilder(CHANGE_ACCESS_SETTING_ERROR, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.problem = mockState.cache.problem;
+    expectedState.intervention = mockState.cache.intervention;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('ENABLE_USER_ACCESS_REQUEST', () => {
@@ -268,13 +268,13 @@ describe('problem reducer', () => {
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.enableAccessLoading = true;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('ENABLE_USER_ACCESS_SUCCESS', () => {
     const payloadEmails = {
       emails: [
-        ...mockState.problem.usersWithAccess,
+        ...mockState.intervention.usersWithAccess,
         { id: 'test', email: 'user@test.com' },
       ],
     };
@@ -282,9 +282,9 @@ describe('problem reducer', () => {
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.enableAccessLoading = false;
-    expectedState.problem.usersWithAccess = payloadEmails.emails;
+    expectedState.intervention.usersWithAccess = payloadEmails.emails;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('ENABLE_USER_ACCESS_ERROR', () => {
@@ -295,7 +295,7 @@ describe('problem reducer', () => {
     expectedState.loaders.enableAccessLoading = false;
     expectedState.errors.enableAccessError = payloadError.error;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('FETCH_USERS_WITH_ACCESS_REQUEST', () => {
@@ -304,7 +304,7 @@ describe('problem reducer', () => {
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.fetchUserAccessLoading = true;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('FETCH_USERS_WITH_ACCESS_SUCCESS', () => {
@@ -319,9 +319,9 @@ describe('problem reducer', () => {
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.fetchUserAccessLoading = false;
     expectedState.errors.fetchUserAccessError = null;
-    expectedState.problem.usersWithAccess = payloadUserAccess.userAccess;
+    expectedState.intervention.usersWithAccess = payloadUserAccess.userAccess;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('FETCH_USERS_WITH_ACCESS_ERROR', () => {
@@ -332,46 +332,46 @@ describe('problem reducer', () => {
     expectedState.loaders.fetchUserAccessLoading = false;
     expectedState.errors.fetchUserAccessError = payloadError.message;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('REVOKE_USER_ACCESS_REQUEST', () => {
     const userIndex = 0;
     const payloadUserId = {
-      userId: mockState.problem.usersWithAccess[userIndex].id,
+      userId: mockState.intervention.usersWithAccess[userIndex].id,
     };
     const action = actionBuilder(REVOKE_USER_ACCESS_REQUEST, payloadUserId);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.problem.usersWithAccess[userIndex].loading = true;
+    expectedState.intervention.usersWithAccess[userIndex].loading = true;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('REVOKE_USER_ACCESS_SUCCESS', () => {
     const userIndex = 0;
     const payloadUserId = {
-      userId: mockState.problem.usersWithAccess[userIndex].id,
+      userId: mockState.intervention.usersWithAccess[userIndex].id,
     };
     const action = actionBuilder(REVOKE_USER_ACCESS_SUCCESS, payloadUserId);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.problem.usersWithAccess = [];
+    expectedState.intervention.usersWithAccess = [];
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('REVOKE_USER_ACCESS_ERROR', () => {
     const userIndex = 0;
     const payloadUserId = {
-      userId: mockState.problem.usersWithAccess[userIndex].id,
+      userId: mockState.intervention.usersWithAccess[userIndex].id,
     };
     const action = actionBuilder(REVOKE_USER_ACCESS_ERROR, payloadUserId);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.problem.usersWithAccess[userIndex].loading = false;
+    expectedState.intervention.usersWithAccess[userIndex].loading = false;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('CREATE_SESSION_REQUEST', () => {
@@ -380,7 +380,7 @@ describe('problem reducer', () => {
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.createSessionLoading = true;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('CREATE_SESSION_SUCCESS', () => {
@@ -389,12 +389,12 @@ describe('problem reducer', () => {
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.createSessionLoading = false;
-    expectedState.problem.sessions = [
-      ...expectedState.problem.sessions,
+    expectedState.intervention.sessions = [
+      ...expectedState.intervention.sessions,
       payloadIntervention.session,
     ];
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('CREATE_SESSION_ERROR', () => {
@@ -405,7 +405,7 @@ describe('problem reducer', () => {
     expectedState.loaders.createSessionLoading = false;
     expectedState.errors.createSessionError = payloadError.error;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('FETCH_SESSION_EMAILS_REQUEST', () => {
@@ -415,7 +415,7 @@ describe('problem reducer', () => {
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.fetchSessionEmailsLoading = true;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('FETCH_SESSION_EMAILS_SUCCESS', () => {
@@ -427,10 +427,10 @@ describe('problem reducer', () => {
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.fetchSessionEmailsLoading = false;
-    expectedState.problem.sessions[payloadEmails.index].emails =
+    expectedState.intervention.sessions[payloadEmails.index].emails =
       payloadEmails.emails;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('FETCH_SESSION_EMAILS_ERROR', () => {
@@ -443,17 +443,20 @@ describe('problem reducer', () => {
     expectedState.loaders.fetchSessionEmailsLoading = false;
     expectedState.errors.fetchSessionEmailsError = payloadError.error;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('SEND_SESSION_INVITE_REQUEST', () => {
     const index = 0;
     const initState = cloneDeep(mockState);
-    initState.problem.sessions[index].emails = [];
+    initState.intervention.sessions[index].emails = [];
 
     const payloadEmails = {
-      emails: [...initState.problem.sessions[index].emails, 'test@test.com'],
-      sessionId: mockState.problem.sessions[index].id,
+      emails: [
+        ...initState.intervention.sessions[index].emails,
+        'test@test.com',
+      ],
+      sessionId: mockState.intervention.sessions[index].id,
     };
     const action = actionBuilder(SEND_SESSION_INVITE_REQUEST, payloadEmails);
 
@@ -461,14 +464,14 @@ describe('problem reducer', () => {
     expectedState.currentSessionIndex = index;
 
     expectedState.loaders.sendSessionLoading = true;
-    expectedState.cache.problem = initState.problem;
-    expectedState.problem.sessions[index].emails = payloadEmails.emails.map(
-      email => ({
-        email,
-      }),
-    );
+    expectedState.cache.intervention = initState.intervention;
+    expectedState.intervention.sessions[
+      index
+    ].emails = payloadEmails.emails.map(email => ({
+      email,
+    }));
 
-    expect(problemReducer(initState, action)).toEqual(expectedState);
+    expect(interventionReducer(initState, action)).toEqual(expectedState);
   });
 
   it('SEND_SESSION_INVITE_SUCCESS', () => {
@@ -479,7 +482,7 @@ describe('problem reducer', () => {
     expectedState.loaders.sessionEmailLoading =
       mockState.loaders.sessionEmailLoading;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('SEND_SESSION_INVITE_ERROR', () => {
@@ -489,9 +492,9 @@ describe('problem reducer', () => {
     expectedState.loaders.sendSessionLoading = false;
     expectedState.loaders.sessionEmailLoading =
       mockState.loaders.sessionEmailLoading;
-    expectedState.problem = mockState.cache.problem;
+    expectedState.intervention = mockState.cache.intervention;
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('RESEND_SESSION_INVITE_REQUEST', () => {
@@ -500,11 +503,11 @@ describe('problem reducer', () => {
     const action = actionBuilder(RESEND_SESSION_INVITE_REQUEST, payloadEmail);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.cache.problem = mockState.problem;
+    expectedState.cache.intervention = mockState.intervention;
     expectedState.loaders.sessionEmailLoading = {
       ...payloadEmail,
     };
 
-    expect(problemReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 });

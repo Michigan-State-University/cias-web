@@ -25,7 +25,7 @@ describe('Send emails', () => {
     cy.visit('/');
 
     // Create session and 2 sessions
-    cy.getBySel('create-problem-button').click();
+    cy.getBySel('create-intervention-button').click();
     cy.getBySel('create-session-button').click();
     cy.wait('@createSession');
     cy.get('@createSession').should('have.property', 'status', 201);

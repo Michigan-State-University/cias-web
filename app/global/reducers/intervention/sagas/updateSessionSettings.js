@@ -7,12 +7,15 @@ import {
   updateSessionSettingsError,
 } from '../actions';
 import { UPDATE_SESSION_SETTINGS_REQUEST } from '../constants';
-import { makeSelectCurrentSessionIndex, makeSelectProblem } from '../selectors';
+import {
+  makeSelectCurrentSessionIndex,
+  makeSelectIntervention,
+} from '../selectors';
 
 export function* updateSessionSettings({ fields } = {}) {
   const sessionIndex = yield select(makeSelectCurrentSessionIndex());
-  const problem = yield select(makeSelectProblem());
-  const session = problem.sessions[sessionIndex];
+  const intervention = yield select(makeSelectIntervention());
+  const session = intervention.sessions[sessionIndex];
 
   const requestURL = `v1/interventions/${session.intervention_id}/sessions/${
     session.id

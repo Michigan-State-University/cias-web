@@ -15,8 +15,8 @@ export const createSession = (id = 0) => ({
   position: id,
 });
 
-export const createProblem = (index = 0) => ({
-  id: `problem-test-${index}`,
+export const createIntervention = (index = 0) => ({
+  id: `intervention-test-${index}`,
   status: 'draft',
   usersWithAccess: [
     {

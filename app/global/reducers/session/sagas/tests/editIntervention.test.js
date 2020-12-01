@@ -5,7 +5,7 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
 import { createSession } from 'utils/reducerCreators';
-import { apiInterventionResponse } from 'utils/apiResponseCreators';
+import { apiSessionResponse } from 'utils/apiResponseCreators';
 
 import editSessionSaga, {
   editSession,
@@ -21,7 +21,7 @@ describe('editSession saga', () => {
   };
 
   it('Check editSession generator success connection', () => {
-    const apiResponse = apiInterventionResponse();
+    const apiResponse = apiSessionResponse();
     apiResponse.data.attributes.name = mockIntervention.name;
 
     return expectSaga(editSession)

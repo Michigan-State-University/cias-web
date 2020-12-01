@@ -18,8 +18,8 @@ import Spinner from 'components/Spinner';
 import H2 from 'components/H2';
 import { injectSaga } from 'redux-injectors';
 import {
-  fetchProblemRequest,
-  makeSelectProblemState,
+  fetchInterventionRequest,
+  makeSelectInterventionState,
   changeAccessSettingRequest,
 } from 'global/reducers/intervention';
 import { canChangeAccessSettings } from 'models/Status/statusPermissions';
@@ -30,24 +30,24 @@ import LeftColumn from './Components/LeftColumn';
 import RightColumn from './Components/RightColumn';
 import { reducer, UPDATE } from './reducer';
 import { shareOptions, ids } from './utils';
-import { problemSettingPageSaga } from './sagas';
+import { interventionSettingPageSaga } from './sagas';
 
 import messages from './messages';
 
 import { StyledBox } from './styled';
 
 const SettingsPanel = ({
-  problem,
+  intervention,
   changeAccessSetting,
-  problemState: {
-    problem: { status },
+  interventionState: {
+    intervention: { status },
     loaders: {
-      fetchProblemLoading,
+      fetchInterventionLoading,
       changeAccessSettingLoading,
       enableAccessLoading,
       fetchUserAccessLoading,
     },
-    errors: { fetchProblemError, fetchUserAccessError },
+    errors: { fetchInterventionError, fetchUserAccessError },
   },
 }) => {
   const [state, dispatch] = useReducer(reducer, {});
@@ -55,9 +55,9 @@ const SettingsPanel = ({
   const changingAccessSettingsPossible = canChangeAccessSettings(status);
 
   const updateSetting = newSetting =>
-    changeAccessSetting(problem.id, newSetting);
+    changeAccessSetting(intervention.id, newSetting);
 
-  const { shared_to: sharedTo, usersWithAccess } = problem || {};
+  const { shared_to: sharedTo, usersWithAccess } = intervention || {};
 
   const dispatchUpdate = newState =>
     dispatch({
@@ -71,8 +71,9 @@ const SettingsPanel = ({
 
   const currentOption = shareOptions.find(option => option.id === sharedTo);
 
-  if (fetchProblemLoading) return <Loader />;
-  if (fetchProblemError) return <ErrorAlert errorText={fetchProblemError} />;
+  if (fetchInterventionLoading) return <Loader />;
+  if (fetchInterventionError)
+    return <ErrorAlert errorText={fetchInterventionError} />;
 
   return (
     <StyledBox>
@@ -93,7 +94,7 @@ const SettingsPanel = ({
               currentOption.id === ids.onlyInvitedRegisteredParticipant && (
                 <AccessGiver
                   usersWithAccess={usersWithAccess}
-                  problem={problem}
+                  intervention={intervention}
                   enableAccessLoading={enableAccessLoading}
                   fetchUserAccessLoading={fetchUserAccessLoading}
                   fetchUserAccessError={fetchUserAccessError}
@@ -110,19 +111,19 @@ const SettingsPanel = ({
 };
 
 SettingsPanel.propTypes = {
-  problem: PropTypes.object,
+  intervention: PropTypes.object,
   changeAccessSetting: PropTypes.func,
-  problemState: PropTypes.shape({
+  interventionState: PropTypes.shape({
     loaders: PropTypes.object,
   }),
 };
 
 const mapStateToProps = createStructuredSelector({
-  problemState: makeSelectProblemState(),
+  interventionState: makeSelectInterventionState(),
 });
 
 const mapDispatchToProps = {
-  fetchProblem: fetchProblemRequest,
+  fetchIntervention: fetchInterventionRequest,
   changeAccessSetting: changeAccessSettingRequest,
 };
 
@@ -132,8 +133,8 @@ const withConnect = connect(
 );
 
 const withSaga = injectSaga({
-  key: 'problemSettingPage',
-  saga: problemSettingPageSaga,
+  key: 'interventionSettingPage',
+  saga: interventionSettingPageSaga,
 });
 
 export default compose(

@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.globals.reducers.problems';
+export const scope = 'app.globals.reducers.interventions';
 
 export default defineMessages({
   defaultError: {
@@ -9,7 +9,7 @@ export default defineMessages({
   },
   copyError: {
     id: `${scope}.copyError`,
-    defaultMessage: 'Cannot copy problem',
+    defaultMessage: 'Cannot copy intervention',
   },
   sendSuccess: {
     id: `${scope}.sendSuccess`,

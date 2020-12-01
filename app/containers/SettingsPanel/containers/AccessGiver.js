@@ -46,7 +46,7 @@ import messages from '../messages';
 
 const AccessGiver = ({
   intl: { formatMessage },
-  problem: { id: interventionId, status, name },
+  intervention: { id: interventionId, status, name },
   giveUserAccess,
   usersWithAccess,
   enableAccessLoading,
@@ -111,7 +111,7 @@ const AccessGiver = ({
         <Box mt={22}>
           <CsvFileExport
             filename={formatMessage(messages.filename, {
-              problemName: name,
+              interventionName: name,
             })}
             data={usersWithAccess.map(({ email }) => ({ email }))}
           >
@@ -179,7 +179,7 @@ const AccessGiver = ({
 
 AccessGiver.propTypes = {
   intl: intlShape,
-  problem: PropTypes.object,
+  intervention: PropTypes.object,
   giveUserAccess: PropTypes.func,
   fetchUsersWithAccess: PropTypes.func,
   revokeUserAccess: PropTypes.func,

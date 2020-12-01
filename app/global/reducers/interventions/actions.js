@@ -11,21 +11,21 @@ import {
   ARCHIVE_PROBLEM_ERROR,
 } from './constants';
 
-export const fetchProblemsRequest = () =>
+export const fetchInterventionsRequest = () =>
   actionBuilder(FETCH_PROBLEMS_REQUEST, {});
-export const fetchProblemsSuccess = problems =>
-  actionBuilder(FETCH_PROBLEMS_SUCCESS, { problems });
-export const fetchProblemsError = error =>
+export const fetchInterventionsSuccess = interventions =>
+  actionBuilder(FETCH_PROBLEMS_SUCCESS, { interventions });
+export const fetchInterventionsError = error =>
   actionBuilder(FETCH_PROBLEMS_ERROR, { error });
 
-export const copyProblemRequest = payload =>
+export const copyInterventionRequest = payload =>
   actionBuilder(COPY_PROBLEM_REQUEST, payload);
-export const copyProblemSuccess = problem =>
-  actionBuilder(COPY_PROBLEM_SUCCESS, { problem });
+export const copyInterventionSuccess = intervention =>
+  actionBuilder(COPY_PROBLEM_SUCCESS, { intervention });
 
-export const archiveProblemRequest = interventionId =>
+export const archiveInterventionRequest = interventionId =>
   actionBuilder(ARCHIVE_PROBLEM_REQUEST, { interventionId });
-export const archiveProblemSuccess = interventionId =>
+export const archiveInterventionSuccess = interventionId =>
   actionBuilder(ARCHIVE_PROBLEM_SUCCESS, { interventionId });
-export const archiveProblemFailure = interventionId =>
+export const archiveInterventionFailure = interventionId =>
   actionBuilder(ARCHIVE_PROBLEM_ERROR, { interventionId });

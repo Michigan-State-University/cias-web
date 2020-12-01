@@ -32,10 +32,10 @@ import { DESKTOP_MODE } from 'utils/previewMode';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 
 import {
-  fetchProblemRequest,
+  fetchInterventionRequest,
   fetchInterventionSaga,
-  makeSelectProblemStatus,
-  problemReducer,
+  makeSelectInterventionStatus,
+  interventionReducer,
 } from 'global/reducers/intervention';
 import { canPreview } from 'models/Status/statusPermissions';
 import {
@@ -137,20 +137,20 @@ export function AnswerSessionPage({
     feedbackScreenSettings,
   },
   isPreview,
-  problemStatus,
-  fetchProblem,
+  interventionStatus,
+  fetchIntervention,
 }) {
-  useInjectReducer({ key: 'problem', reducer: problemReducer });
+  useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
   useInjectReducer({ key: 'AnswerSessionPage', reducer });
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   const { sessionId, index, interventionId } = params;
 
   useEffect(() => {
-    if (isPreview) fetchProblem(interventionId);
+    if (isPreview) fetchIntervention(interventionId);
   }, [interventionId]);
 
-  const previewPossible = !(isPreview && !canPreview(problemStatus));
+  const previewPossible = !(isPreview && !canPreview(interventionStatus));
 
   useEffect(() => {
     fetchQuestionsAction(sessionId);
@@ -370,14 +370,14 @@ AnswerSessionPage.propTypes = {
   setFeedbackSettings: PropTypes.func,
   audioInstance: PropTypes.shape(AudioWrapper),
   isPreview: PropTypes.bool,
-  problemStatus: PropTypes.string,
-  fetchProblem: PropTypes.func,
+  interventionStatus: PropTypes.string,
+  fetchIntervention: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   AnswerSessionPage: makeSelectAnswerSessionPage(),
   audioInstance: makeSelectAudioInstance(),
-  problemStatus: makeSelectProblemStatus(),
+  interventionStatus: makeSelectInterventionStatus(),
 });
 
 const mapDispatchToProps = {
@@ -388,7 +388,7 @@ const mapDispatchToProps = {
   onStartSession: startSession,
   changeIsAnimationOngoing: changeIsAnimating,
   setFeedbackSettings: setFeedbackScreenSettings,
-  fetchProblem: fetchProblemRequest,
+  fetchIntervention: fetchInterventionRequest,
 };
 
 const withConnect = connect(

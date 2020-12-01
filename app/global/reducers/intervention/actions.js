@@ -45,32 +45,33 @@ import {
   UPDATE_SESSION_SETTINGS_ERROR,
 } from './constants';
 
-export const fetchProblemRequest = id =>
+export const fetchInterventionRequest = id =>
   actionBuilder(FETCH_PROBLEM_REQUEST, { id });
-export const fetchProblemSuccess = problem =>
-  actionBuilder(FETCH_PROBLEM_SUCCESS, { problem });
-export const fetchProblemError = error =>
+export const fetchInterventionSuccess = intervention =>
+  actionBuilder(FETCH_PROBLEM_SUCCESS, { intervention });
+export const fetchInterventionError = error =>
   actionBuilder(FETCH_PROBLEM_ERROR, { error });
 
-export const sendProblemCsvRequest = id =>
+export const sendInterventionCsvRequest = id =>
   actionBuilder(SEND_PROBLEM_CSV_REQUEST, { id });
-export const sendProblemCsvSuccess = message =>
+export const sendInterventionCsvSuccess = message =>
   actionBuilder(SEND_PROBLEM_CSV_SUCCESS, { message });
-export const sendProblemCsvError = error =>
+export const sendInterventionCsvError = error =>
   actionBuilder(SEND_PROBLEM_CSV_ERROR, { error });
 
-export const createProblemRequest = () =>
+export const createInterventionRequest = () =>
   actionBuilder(CREATE_PROBLEM_REQUEST, {});
-export const createProblemSuccess = problem =>
-  actionBuilder(CREATE_PROBLEM_SUCCESS, { problem });
-export const createProblemError = error =>
+export const createInterventionSuccess = intervention =>
+  actionBuilder(CREATE_PROBLEM_SUCCESS, { intervention });
+export const createInterventionError = error =>
   actionBuilder(CREATE_PROBLEM_ERROR, { error });
 
-export const editProblemRequest = payload =>
+export const editInterventionRequest = payload =>
   actionBuilder(EDIT_PROBLEM_REQUEST, payload);
-export const editProblemSuccess = problem =>
-  actionBuilder(EDIT_PROBLEM_SUCCESS, { problem });
-export const editProblemError = () => actionBuilder(EDIT_PROBLEM_ERROR, {});
+export const editInterventionSuccess = intervention =>
+  actionBuilder(EDIT_PROBLEM_SUCCESS, { intervention });
+export const editInterventionError = () =>
+  actionBuilder(EDIT_PROBLEM_ERROR, {});
 
 export const copySessionRequest = payload =>
   actionBuilder(COPY_SESSION_REQUEST, payload);

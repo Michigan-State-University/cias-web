@@ -3,7 +3,7 @@ export const GET_SESSION_QUESTION_GROUPS = '@getSessionQuestionGroups';
 export const CREATE_QUESTION = '@createQuestion';
 export const UPDATE_QUESTION = '@updateQuestion';
 export const ANSWER_QUESTION = '@answerQuestion';
-export const GET_PROBLEM_INTERVENTIONS = '@problemInterventions';
+export const GET_PROBLEM_INTERVENTIONS = '@interventionSessions';
 export const LOGIN = '@login';
 
 export const ALIASES = {

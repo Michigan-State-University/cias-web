@@ -9,7 +9,7 @@ export {
   archiveInterventionSaga,
 };
 
-export default function* allProblemSagas() {
+export default function* allInterventionSagas() {
   yield all([
     fetchInterventionsSaga(),
     copyInterventionSaga(),

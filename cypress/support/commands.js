@@ -72,7 +72,7 @@ Cypress.Commands.add('logout', () => {
 
 Cypress.Commands.add('createIntervention', () => {
   cy.visit('/');
-  cy.getBySel('create-problem-button').click();
+  cy.getBySel('create-intervention-button').click();
 });
 
 Cypress.Commands.add('createSessionsInIntervention', (numberOfSession = 1) => {
@@ -213,7 +213,7 @@ Cypress.Commands.add('setUpBranching', (formula, cases) => {
       cy.getBySel('select-target-question-session-view-setter').click({
         force: true,
       });
-      cy.getBySel(`choose-intervention-${sessionIndex}`).click();
+      cy.getBySel(`choose-session-${sessionIndex}`).click();
       cy.wait([UPDATE_QUESTION]);
     }
   });

@@ -9,28 +9,31 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { sendInterventionCsv } from 'global/reducers/intervention/sagas/sendInterventionCsv';
-import { sendProblemCsvSuccess, sendProblemCsvError } from '../../actions';
+import {
+  sendInterventionCsvSuccess,
+  sendInterventionCsvError,
+} from '../../actions';
 import { SEND_PROBLEM_CSV_REQUEST } from '../../constants';
 import messages from '../../messages';
 import { sendInterventionCsvSaga } from '../index';
 
-describe('sendProblemCsv saga', () => {
+describe('sendInterventionCsv saga', () => {
   const payload = { id: '0' };
 
-  it('Check sendProblemCsv generator success connection', () => {
+  it('Check sendInterventionCsv generator success connection', () => {
     const apiResponse = { message: 'test' };
     return expectSaga(sendInterventionCsv, { payload })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(sendProblemCsvSuccess(apiResponse.message))
+      .put(sendInterventionCsvSuccess(apiResponse.message))
       .call(toast.info, apiResponse.message)
       .run();
   });
 
-  it('Check sendProblemCsv error connection', () => {
+  it('Check sendInterventionCsv error connection', () => {
     const error = new Error('test');
     return expectSaga(sendInterventionCsv, { payload })
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
-      .put(sendProblemCsvError(error))
+      .put(sendInterventionCsvError(error))
       .call(
         toast.error,
         get(error, 'data.message', formatMessage(messages.csvError)),
@@ -38,7 +41,7 @@ describe('sendProblemCsv saga', () => {
       .run();
   });
 
-  it('Check sendProblemCsv connection', () => {
+  it('Check sendInterventionCsv connection', () => {
     const sagaFunction = sendInterventionCsvSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(

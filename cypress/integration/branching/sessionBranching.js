@@ -52,7 +52,7 @@ describe('Session branching', () => {
     cy.login(Cypress.env(ADMIN_EMAIL), Cypress.env(ADMIN_PASSWORD));
     cy.createIntervention();
     cy.createSessionsInIntervention(2);
-    cy.getBySel(`enter-intervention-${index}`).click();
+    cy.getBySel(`enter-session-${index}`).click();
 
     cy.populateSessionWithQuestions([singleQuestion.name], {
       variablePrefix: 'var_',

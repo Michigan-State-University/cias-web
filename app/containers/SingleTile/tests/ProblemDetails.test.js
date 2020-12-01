@@ -1,6 +1,6 @@
 /**
  *
- * Tests for ProblemDetails
+ * Tests for InterventionDetails
  *
  */
 import React from 'react';
@@ -9,7 +9,7 @@ import { IntlProvider } from 'react-intl';
 import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import ProblemDetails from '../ProblemDetails';
+import InterventionDetails from '../InterventionDetails';
 
 const defaultProps = {
   createdAt: '2020-09-30T10:00:00',
@@ -21,12 +21,12 @@ const defaultProps = {
   },
 };
 
-describe('<ProblemDetails />', () => {
+describe('<InterventionDetails />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <ProblemDetails {...defaultProps} />
+        <InterventionDetails {...defaultProps} />
       </IntlProvider>,
     );
     expect(spy).not.toHaveBeenCalled();
@@ -35,7 +35,7 @@ describe('<ProblemDetails />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <ProblemDetails {...defaultProps} />
+        <InterventionDetails {...defaultProps} />
       </IntlProvider>,
     );
     expect(container).toMatchSnapshot();

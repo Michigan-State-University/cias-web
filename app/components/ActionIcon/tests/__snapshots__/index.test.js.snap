@@ -62,7 +62,7 @@ exports[`<ActionIcon /> Should render and match the snapshot as link 1`] = `
 <div>
   <a
     class="c0"
-    data-cy="back-problem-button"
+    data-cy="back-intervention-button"
     href="/"
   >
     <img

@@ -8,29 +8,29 @@ import { expectSaga } from 'redux-saga-test-plan';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
-import { apiProblemResponse } from 'utils/apiResponseCreators';
+import { apiInterventionResponse } from 'utils/apiResponseCreators';
 import { createUser } from 'utils/reducerCreators';
 import messages from 'global/reducers/interventions/messages';
 
 import copyInterventionSaga, {
   copyIntervention,
 } from 'global/reducers/interventions/sagas/copyIntervention';
-import { copyProblemSuccess } from '../../actions';
+import { copyInterventionSuccess } from '../../actions';
 import {
   COPY_PROBLEM_SUCCESS,
   COPY_PROBLEM_ERROR,
   COPY_PROBLEM_REQUEST,
 } from '../../constants';
 
-describe('copyProblem saga', () => {
+describe('copyIntervention saga', () => {
   const createPayload = withParams => ({
-    interventionId: 'problem-test',
+    interventionId: 'intervention-test',
     users: withParams ? [createUser(), createUser(1)] : null,
     withoutRedirect: false,
   });
 
-  it('Check copyProblem generator success connection', () => {
-    const apiResponse = apiProblemResponse();
+  it('Check copyIntervention generator success connection', () => {
+    const apiResponse = apiInterventionResponse();
     const payload = createPayload(true);
 
     return expectSaga(copyIntervention, { payload })
@@ -41,17 +41,17 @@ describe('copyProblem saga', () => {
       .run();
   });
 
-  it('Check copyProblem generator success connection without params', () => {
-    const apiResponse = apiProblemResponse();
+  it('Check copyIntervention generator success connection without params', () => {
+    const apiResponse = apiInterventionResponse();
     const payload = createPayload(false);
 
     return expectSaga(copyIntervention, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .put(copyProblemSuccess(defaultMapper(apiResponse.data)))
+      .put(copyInterventionSuccess(defaultMapper(apiResponse.data)))
       .put(push('/'))
       .run();
   });
-  it('Check copyProblem error connection', () => {
+  it('Check copyIntervention error connection', () => {
     const error = new Error('test');
     const payload = createPayload(true);
     return expectSaga(copyIntervention, { payload })
@@ -62,7 +62,7 @@ describe('copyProblem saga', () => {
       .run();
   });
 
-  it('Check copyProblem connection', () => {
+  it('Check copyIntervention connection', () => {
     const sagaFunction = copyInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(

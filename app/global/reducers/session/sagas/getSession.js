@@ -5,17 +5,17 @@ import { defaultMapper } from 'utils/mapResponseObjects';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
-  fetchProblemRequest,
-  makeSelectProblem,
+  fetchInterventionRequest,
+  makeSelectIntervention,
 } from 'global/reducers/intervention';
 import { GET_SESSION_REQUEST } from '../constants';
 import { getSessionSuccess, getSessionError } from '../actions';
 
 export function* getSession({ payload: { sessionId, interventionId } }) {
-  const problem = yield select(makeSelectProblem());
+  const intervention = yield select(makeSelectIntervention());
 
-  if (isNullOrUndefined(problem) || problem.id !== interventionId)
-    yield put(fetchProblemRequest(interventionId));
+  if (isNullOrUndefined(intervention) || intervention.id !== interventionId)
+    yield put(fetchInterventionRequest(interventionId));
 
   const requestURL = `v1/interventions/${interventionId}/sessions/${sessionId}`;
 

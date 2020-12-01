@@ -36,7 +36,7 @@ function BranchingLayout({
   displayPatternTargetText,
   onRemoveCase,
   onAddCase,
-  problemBranching,
+  interventionBranching,
   onVariableChooserOpen,
   disabled,
 }) {
@@ -83,14 +83,14 @@ function BranchingLayout({
               <StyledInput
                 disabled={disabled}
                 type="multiline"
-                rows={problemBranching ? '1' : '5'}
+                rows={interventionBranching ? '1' : '5'}
                 width="100%"
                 placeholder={formatMessage(messages.formulaPlaceholder)}
                 value={formula.payload}
                 onBlur={val => onFormulaUpdate(val, id)}
               />
             </Box>
-            {problemBranching && (
+            {interventionBranching && (
               <Box position="relative" top={-90}>
                 <VariableChooser
                   visible={variableChooserOpen}
@@ -102,7 +102,7 @@ function BranchingLayout({
                 />
               </Box>
             )}
-            {!problemBranching && (
+            {!interventionBranching && (
               <Box position="absolute" right={25} top={160} width="100%">
                 <VariableChooser
                   visible={variableChooserOpen}
@@ -152,7 +152,7 @@ function BranchingLayout({
                     }
                   >
                     <TargetQuestionChooser
-                      problemBranching={problemBranching}
+                      interventionBranching={interventionBranching}
                       isVisible={isChooserOpened}
                       pattern={pattern}
                       onClick={value => {
@@ -178,7 +178,7 @@ function BranchingLayout({
                 <FormattedMessage
                   {...messages.else}
                   values={{
-                    message: problemBranching
+                    message: interventionBranching
                       ? formatMessage(messages.nextSession)
                       : formatMessage(messages.nextScreen),
                   }}
@@ -208,7 +208,7 @@ BranchingLayout.propTypes = {
   onUpdateCase: PropTypes.func,
   intl: PropTypes.object,
   displayPatternTargetText: PropTypes.func,
-  problemBranching: PropTypes.bool,
+  interventionBranching: PropTypes.bool,
   onVariableChooserOpen: PropTypes.func,
   disabled: PropTypes.bool,
 };

@@ -7,7 +7,7 @@ import {
   revokeUserAccessSaga,
 } from 'global/reducers/intervention';
 
-function* problemSettingPageSaga() {
+function* interventionSettingPageSaga() {
   yield all([fetchInterventionSaga(), changeAccessSettingSaga()]);
 }
 
@@ -19,4 +19,4 @@ function* accessGiverContainerSaga() {
   ]);
 }
 
-export { problemSettingPageSaga, accessGiverContainerSaga };
+export { interventionSettingPageSaga, accessGiverContainerSaga };

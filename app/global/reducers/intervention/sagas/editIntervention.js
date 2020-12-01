@@ -6,12 +6,12 @@ import globalMessages from 'global/i18n/globalMessages';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { makeSelectProblem } from '../selectors';
-import { editProblemSuccess } from '../actions';
+import { makeSelectIntervention } from '../selectors';
+import { editInterventionSuccess } from '../actions';
 import { EDIT_PROBLEM_REQUEST, EDIT_PROBLEM_ERROR } from '../constants';
 
 export function* editIntervention() {
-  const intervention = yield select(makeSelectProblem());
+  const intervention = yield select(makeSelectIntervention());
   const requestURL = `v1/interventions/${intervention.id}`;
 
   try {
@@ -19,11 +19,15 @@ export function* editIntervention() {
       data: { data },
     } = yield call(axios.patch, requestURL, { intervention });
     const mappedData = defaultMapper(data);
-    yield put(editProblemSuccess({ ...intervention, ...mappedData }));
+    yield put(editInterventionSuccess({ ...intervention, ...mappedData }));
   } catch (error) {
-    yield call(toast.error, formatMessage(globalMessages.editProblemError), {
-      toastId: EDIT_PROBLEM_ERROR,
-    });
+    yield call(
+      toast.error,
+      formatMessage(globalMessages.editInterventionError),
+      {
+        toastId: EDIT_PROBLEM_ERROR,
+      },
+    );
   }
 }
 export default function* editInterventionSaga() {

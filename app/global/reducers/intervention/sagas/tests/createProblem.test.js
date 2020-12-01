@@ -9,36 +9,40 @@ import { push } from 'connected-react-router';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import globalMessages from 'global/i18n/globalMessages';
-import { apiProblemResponse } from 'utils/apiResponseCreators';
+import { apiInterventionResponse } from 'utils/apiResponseCreators';
 
 import createInterventionSaga, {
   createIntervention,
 } from 'global/reducers/intervention/sagas/createIntervention';
-import { createProblemSuccess } from '../../actions';
+import { createInterventionSuccess } from '../../actions';
 import { CREATE_PROBLEM_ERROR, CREATE_PROBLEM_REQUEST } from '../../constants';
 
-describe('createProblem saga', () => {
-  const mockApiResponse = apiProblemResponse();
+describe('createIntervention saga', () => {
+  const mockApiResponse = apiInterventionResponse();
 
-  it('Check createProblem generator success connection', () => {
+  it('Check createIntervention generator success connection', () => {
     const apiResponse = { data: { mockApiResponse } };
     return expectSaga(createIntervention)
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .put(createProblemSuccess(defaultMapper(apiResponse.data)))
+      .put(createInterventionSuccess(defaultMapper(apiResponse.data)))
       .put(push(`/interventions/${apiResponse.data.id}`))
       .run();
   });
-  it('Check createProblem error connection', () => {
+  it('Check createIntervention error connection', () => {
     const error = new Error('test');
     return expectSaga(createIntervention)
       .provide([[matchers.call.fn(axios.post), throwError(error)]])
-      .call(toast.error, formatMessage(globalMessages.createProblemError), {
-        toastId: CREATE_PROBLEM_ERROR,
-      })
+      .call(
+        toast.error,
+        formatMessage(globalMessages.createInterventionError),
+        {
+          toastId: CREATE_PROBLEM_ERROR,
+        },
+      )
       .run();
   });
 
-  it('Check createProblem connection', () => {
+  it('Check createIntervention connection', () => {
     const sagaFunction = createInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(

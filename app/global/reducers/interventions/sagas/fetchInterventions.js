@@ -4,7 +4,7 @@ import get from 'lodash/get';
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { fetchProblemsSuccess, fetchProblemsError } from '../actions';
+import { fetchInterventionsSuccess, fetchInterventionsError } from '../actions';
 import { FETCH_PROBLEMS_REQUEST } from '../constants';
 
 import messages from '../messages';
@@ -17,10 +17,10 @@ export function* fetchInterventions() {
       data: { interventions },
     } = yield call(axios.get, requestURL);
 
-    yield put(fetchProblemsSuccess(interventions));
+    yield put(fetchInterventionsSuccess(interventions));
   } catch (error) {
     yield put(
-      fetchProblemsError(
+      fetchInterventionsError(
         get(error, 'message', formatMessage(messages.defaultError)),
       ),
     );

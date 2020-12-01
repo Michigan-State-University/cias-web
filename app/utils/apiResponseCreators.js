@@ -15,7 +15,7 @@ export const apiUserResponse = (id = 0) => ({
   },
 });
 
-export const apiInterventionResponse = (id = 0) => ({
+export const apiSessionResponse = (id = 0) => ({
   data: {
     id: `intervention-test-${id}`,
     attributes: {
@@ -25,11 +25,11 @@ export const apiInterventionResponse = (id = 0) => ({
   },
 });
 
-export const apiProblemResponse = (id = 0) => ({
+export const apiInterventionResponse = (id = 0) => ({
   data: {
-    id: `problem-test-${id}`,
+    id: `intervention-test-${id}`,
     attributes: {
-      name: `problem-test-${id}`,
+      name: `intervention-test-${id}`,
     },
   },
 });

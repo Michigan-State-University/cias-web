@@ -27,7 +27,7 @@ describe('<SelectResearchers />', () => {
     store = createTestStore(initialState);
     store.runSaga = () => {};
     store.injectedReducers = {
-      problem: UserListReducer,
+      intervention: UserListReducer,
       auth: authReducer,
     };
     store.injectedSagas = {};

@@ -13,17 +13,17 @@ import PropTypes from 'prop-types';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
 import AppRoute from 'components/AppRoute';
-import EditSessionPage from 'containers/Interventions/containers/EditSessionPage';
+import EditSessionPage from 'containers/Sessions/containers/EditSessionPage';
 import GlobalStyle from 'global-styles';
-import ProblemDetailsPage from 'containers/ProblemDetailsPage/Loadable';
+import InterventionDetailsPage from 'containers/InterventionDetailsPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
-import SettingsInterventionPage from 'containers/Interventions/containers/SettingsSessionPage';
+import SettingsInterventionPage from 'containers/Sessions/containers/SettingsSessionPage';
 import AccountSettings from 'containers/AccountSettings/Loadable';
 import ResetPasswordPage from 'containers/ResetPasswordPage/Loadable';
 import SetNewPasswordPage from 'containers/SetNewPasswordPage/Loadable';
-import ProblemPage from 'containers/ProblemPage/Loadable';
+import InterventionPage from 'containers/InterventionPage/Loadable';
 import UserListPage from 'containers/UserList/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import UserDetails from 'containers/UserDetails/Loadable';
@@ -47,9 +47,9 @@ export function App({ user }) {
     if (user) {
       switch (user.roles[0]) {
         case Roles.admin:
-          return <ProblemPage />;
+          return <InterventionPage />;
         case Roles.researcher:
-          return <ProblemPage />;
+          return <InterventionPage />;
         case Roles.participant:
           return <ParticipantDashboard />;
         default:
@@ -153,7 +153,7 @@ export function App({ user }) {
         <AppRoute
           exact
           path="/interventions/:interventionId"
-          component={ProblemDetailsPage}
+          component={InterventionDetailsPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{

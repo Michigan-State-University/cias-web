@@ -11,7 +11,7 @@ export const scope = 'app.containers.ParticipantDashboard';
 export default defineMessages({
   sessions: {
     id: `${scope}.sessions`,
-    defaultMessage: 'My Interventions',
+    defaultMessage: 'My Sessions',
   },
   noResults: {
     id: `${scope}.noResults`,

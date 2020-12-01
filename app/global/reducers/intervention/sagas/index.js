@@ -33,7 +33,7 @@ export {
   resendSessionInviteSaga,
 };
 
-export default function* allProblemSagas() {
+export default function* allInterventionSagas() {
   yield all([
     createInterventionSaga(),
     editInterventionSaga(),

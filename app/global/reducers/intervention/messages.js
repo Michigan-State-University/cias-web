@@ -1,12 +1,12 @@
 /*
- * Problem Messages
+ * Intervention Messages
  *
- * This contains all the text for the Problem saga.
+ * This contains all the text for the Intervention saga.
  */
 
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.Problem';
+export const scope = 'app.containers.Intervention';
 
 export default defineMessages({
   csvError: {

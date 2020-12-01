@@ -8,42 +8,49 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 import globalMessages from 'global/i18n/globalMessages';
-import { apiProblemResponse } from 'utils/apiResponseCreators';
+import { apiInterventionResponse } from 'utils/apiResponseCreators';
 
 import archiveInterventionSaga, {
   archiveIntervention,
 } from 'global/reducers/interventions/sagas/archiveIntervention';
-import { archiveProblemSuccess, archiveProblemFailure } from '../../actions';
+import {
+  archiveInterventionSuccess,
+  archiveInterventionFailure,
+} from '../../actions';
 import {
   ARCHIVE_PROBLEM_ERROR,
   ARCHIVE_PROBLEM_REQUEST,
 } from '../../constants';
 
-describe('archiveProblem saga', () => {
+describe('archiveIntervention saga', () => {
   const payload = {
-    interventionId: 'problem-test',
+    interventionId: 'intervention-test',
   };
 
-  it('Check archiveProblem generator success connection', () => {
-    const apiResponse = apiProblemResponse();
+  it('Check archiveIntervention generator success connection', () => {
+    const apiResponse = apiInterventionResponse();
 
     return expectSaga(archiveIntervention, { payload })
       .provide([[matchers.call.fn(axios.patch), { data: apiResponse }]])
-      .put(archiveProblemSuccess(defaultMapper(apiResponse.data)))
+      .put(archiveInterventionSuccess(defaultMapper(apiResponse.data)))
       .run();
   });
-  it('Check archiveProblem error connection', () => {
+  it('Check archiveIntervention error connection', () => {
     const error = new Error('test');
     return expectSaga(archiveIntervention, { payload })
       .provide([[matchers.call.fn(axios.patch), throwError(error)]])
-      .put(archiveProblemFailure(payload.interventionId))
-      .call(toast.error, formatMessage(globalMessages.archiveProblemError), {
-        toastId: ARCHIVE_PROBLEM_ERROR,
-      })
+      .put(archiveInterventionFailure(payload.interventionId))
+      .call(
+        toast.error,
+        formatMessage(globalMessages.archiveInterventionError),
+        {
+          toastId: ARCHIVE_PROBLEM_ERROR,
+        },
+      )
       .run();
   });
 
-  it('Check archiveProblem connection', () => {
+  it('Check archiveIntervention connection', () => {
     const sagaFunction = archiveInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(

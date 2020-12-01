@@ -1,40 +1,40 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-export const selectProblem = state => state.problem || initialState;
+export const selectIntervention = state => state.intervention || initialState;
 
-export const makeSelectProblemState = () =>
+export const makeSelectInterventionState = () =>
   createSelector(
-    selectProblem,
+    selectIntervention,
     substate => substate,
   );
 
-export const makeSelectProblem = () =>
+export const makeSelectIntervention = () =>
   createSelector(
-    selectProblem,
-    substate => substate.problem,
+    selectIntervention,
+    substate => substate.intervention,
   );
 
-export const makeSelectCacheProblem = () =>
+export const makeSelectCacheIntervention = () =>
   createSelector(
-    selectProblem,
-    substate => substate.cache.problem,
+    selectIntervention,
+    substate => substate.cache.intervention,
   );
 
-export const makeSelectProblemStatus = () =>
+export const makeSelectInterventionStatus = () =>
   createSelector(
-    selectProblem,
-    substate => (substate.problem ? substate.problem.status : null),
+    selectIntervention,
+    substate => (substate.intervention ? substate.intervention.status : null),
   );
 
-export const makeSelectProblemLoader = loader =>
+export const makeSelectInterventionLoader = loader =>
   createSelector(
-    selectProblem,
+    selectIntervention,
     substate => substate.loaders[loader],
   );
 
 export const makeSelectCurrentSessionIndex = () =>
   createSelector(
-    selectProblem,
+    selectIntervention,
     substate => substate.currentSessionIndex,
   );

@@ -8,7 +8,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { TRANSITION_TIMEOUT } from 'components/Collapse/CollapsableContent';
 
 import { sessionReducer } from 'global/reducers/session';
-import { problemReducer } from 'global/reducers/intervention';
+import { interventionReducer } from 'global/reducers/intervention';
 import { questionsReducer } from 'global/reducers/questions';
 import { localStateReducer } from 'global/reducers/localState';
 import { questionGroupsReducer } from 'global/reducers/questionGroups';
@@ -50,8 +50,8 @@ const mockMostUsedStore = question => {
       },
     },
 
-    problem: {
-      problem: {
+    intervention: {
+      intervention: {
         sessions: [
           mockIntervention(1),
           mockIntervention(2),
@@ -59,7 +59,7 @@ const mockMostUsedStore = question => {
         ],
       },
       loaders: {
-        fetchProblemLoading: false,
+        fetchInterventionLoading: false,
       },
     },
     questions: {
@@ -78,7 +78,7 @@ const mockMostUsedStore = question => {
     session: sessionReducer,
     questions: questionsReducer,
     localState: localStateReducer,
-    problem: problemReducer,
+    intervention: interventionReducer,
     questionGroups: questionGroupsReducer,
   };
   return store;
@@ -94,10 +94,10 @@ describe('<TargetQuestionChooser />', () => {
         id: 'asd12ca-daiud12',
       },
     },
-    problem: {
-      problem: { sessions: [] },
+    intervention: {
+      intervention: { sessions: [] },
       loaders: {
-        fetchProblemLoading: false,
+        fetchInterventionLoading: false,
       },
     },
     questions: {
@@ -160,10 +160,10 @@ describe('<TargetQuestionChooser />', () => {
           id: 'asd12ca-daiud12',
         },
       },
-      problem: {
-        problem: { sessions: [] },
+      intervention: {
+        intervention: { sessions: [] },
         loaders: {
-          fetchProblemLoading: false,
+          fetchInterventionLoading: false,
         },
       },
       questions: {
@@ -218,8 +218,8 @@ describe('<TargetQuestionChooser />', () => {
         },
       },
 
-      problem: {
-        problem: {
+      intervention: {
+        intervention: {
           sessions: [
             mockIntervention(1),
             mockIntervention(2),
@@ -227,7 +227,7 @@ describe('<TargetQuestionChooser />', () => {
           ],
         },
         loaders: {
-          fetchProblemLoading: false,
+          fetchInterventionLoading: false,
         },
       },
       questions: {
@@ -244,7 +244,7 @@ describe('<TargetQuestionChooser />', () => {
       session: sessionReducer,
       questions: questionsReducer,
       localState: localStateReducer,
-      problem: problemReducer,
+      intervention: interventionReducer,
     };
     store.injectedSagas = {};
 
@@ -295,10 +295,10 @@ describe('<TargetQuestionChooser />', () => {
           id: 'asd12ca-daiud12',
         },
       },
-      problem: {
-        problem: { sessions: [] },
+      intervention: {
+        intervention: { sessions: [] },
         loaders: {
-          fetchProblemLoading: true,
+          fetchInterventionLoading: true,
         },
       },
       questions: {
@@ -387,7 +387,7 @@ describe('<TargetQuestionChooser />', () => {
     );
     fireEvent.click(interventionRow);
     expect(newProps.onClick).toHaveBeenCalledWith({
-      type: 'Intervention',
+      type: 'Session',
       id: 'session-test-id-1',
     });
   });

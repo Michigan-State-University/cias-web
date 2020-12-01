@@ -30,9 +30,9 @@ describe('Access settings', () => {
     cy.login(Cypress.env(ADMIN_EMAIL), Cypress.env(ADMIN_PASSWORD));
     cy.createIntervention();
     cy.createSessionsInIntervention(1);
-    cy.getBySel(`enter-intervention-${index}`).click();
+    cy.getBySel(`enter-session-${index}`).click();
     cy.populateSessionWithQuestions([singleQuestion.name], {});
-    cy.getBySel('back-problem-button').click();
+    cy.getBySel('back-intervention-button').click();
 
     cy.route('PATCH', '**/interventions/*').as('updateIntervention');
     cy.route('GET', '**/sessions/*/question_groups').as(
@@ -41,7 +41,7 @@ describe('Access settings', () => {
   });
 
   it('Access settings test - not published', () => {
-    cy.getBySel(`enter-intervention-${index}`).click();
+    cy.getBySel(`enter-session-${index}`).click();
 
     // Check Access logged in admin
     cy.answerPage();
@@ -74,7 +74,7 @@ describe('Access settings', () => {
     cy.contains('Close Intervention').should('be.visible');
 
     // Check Access logged in admin
-    cy.getBySel(`enter-intervention-${index}`).click();
+    cy.getBySel(`enter-session-${index}`).click();
     cy.wait('@getSessionQuestionGroups');
     cy.answerPage();
     cy.contains('Start session').should('be.visible');
@@ -113,7 +113,7 @@ describe('Access settings', () => {
     cy.contains('Close Intervention').should('be.visible');
 
     // Check Access logged in admin
-    cy.getBySel(`enter-intervention-${index}`).click();
+    cy.getBySel(`enter-session-${index}`).click();
     cy.wait('@getSessionQuestionGroups');
     cy.answerPage();
     cy.contains('Start session').should('be.visible');
@@ -154,7 +154,7 @@ describe('Access settings', () => {
     cy.contains('Close Intervention').should('be.visible');
 
     // Check Access logged in admin
-    cy.getBySel(`enter-intervention-${index}`).click();
+    cy.getBySel(`enter-session-${index}`).click();
     cy.wait('@getSessionQuestionGroups');
     cy.answerPage();
     cy.contains('Start session').should('be.visible');

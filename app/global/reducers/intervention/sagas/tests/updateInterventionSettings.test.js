@@ -4,7 +4,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { createProblem } from 'utils/reducerCreators';
+import { createIntervention } from 'utils/reducerCreators';
 
 import { updateSessionSettings } from 'global/reducers/intervention/sagas/updateSessionSettings';
 import {
@@ -17,10 +17,10 @@ import { initialState } from '../../reducer';
 
 describe('updateSessionSettings saga', () => {
   const mockState = {
-    problem: {
+    intervention: {
       ...initialState,
-      problem: createProblem(),
-      cache: { problem: createProblem() },
+      intervention: createIntervention(),
+      cache: { intervention: createIntervention() },
     },
   };
   it('Check updateSessionSettings generator success connection', () => {

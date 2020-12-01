@@ -1,7 +1,7 @@
 import cloneDeep from 'lodash/cloneDeep';
 
 import { actionBuilder } from 'utils/actionBuilder';
-import { createProblem } from 'utils/reducerCreators';
+import { createIntervention } from 'utils/reducerCreators';
 import {
   FETCH_PROBLEMS_REQUEST,
   FETCH_PROBLEMS_SUCCESS,
@@ -12,39 +12,43 @@ import {
 } from 'global/reducers/interventions/constants';
 import { CREATE_PROBLEM_SUCCESS } from 'global/reducers/intervention';
 import { archived } from 'models/Status/StatusTypes';
-import problemsReducer, { initialState } from '../reducer';
+import interventionsReducer, { initialState } from '../reducer';
 
 describe('userList reducer', () => {
-  const problems = [createProblem(), createProblem(1), createProblem(2)];
+  const interventions = [
+    createIntervention(),
+    createIntervention(1),
+    createIntervention(2),
+  ];
   const mockState = {
     ...initialState,
   };
-  const mockStateWithProblems = {
+  const mockStateWithInterventions = {
     ...initialState,
-    problems,
-    cache: { archiveProblem: createProblem(4) },
+    interventions,
+    cache: { archiveIntervention: createIntervention(4) },
   };
 
   it('FETCH_PROBLEMS_REQUEST', () => {
     const action = actionBuilder(FETCH_PROBLEMS_REQUEST, {});
 
     const expectedState = cloneDeep(mockState);
-    expectedState.fetchProblemLoading = true;
-    expectedState.fetchProblemError = null;
+    expectedState.fetchInterventionLoading = true;
+    expectedState.fetchInterventionError = null;
 
-    expect(problemsReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionsReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('FETCH_PROBLEMS_SUCCESS', () => {
-    const payloadProblems = { problems };
+    const payloadInterventions = { interventions };
 
-    const action = actionBuilder(FETCH_PROBLEMS_SUCCESS, payloadProblems);
+    const action = actionBuilder(FETCH_PROBLEMS_SUCCESS, payloadInterventions);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.fetchProblemLoading = false;
-    expectedState.problems = payloadProblems.problems;
+    expectedState.fetchInterventionLoading = false;
+    expectedState.interventions = payloadInterventions.interventions;
 
-    expect(problemsReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionsReducer(mockState, action)).toEqual(expectedState);
   });
 
   it('FETCH_PROBLEMS_ERROR', () => {
@@ -53,41 +57,41 @@ describe('userList reducer', () => {
     const action = actionBuilder(FETCH_PROBLEMS_ERROR, payloadError);
 
     const expectedState = cloneDeep(mockState);
-    expectedState.fetchProblemLoading = false;
-    expectedState.fetchProblemError = payloadError.error;
+    expectedState.fetchInterventionLoading = false;
+    expectedState.fetchInterventionError = payloadError.error;
 
-    expect(problemsReducer(mockState, action)).toEqual(expectedState);
+    expect(interventionsReducer(mockState, action)).toEqual(expectedState);
   });
   it('CREATE_PROBLEM_SUCCESS COPY_PROBLEM_SUCCESS', () => {
-    const payloadProblem = { problem: createProblem(5) };
+    const payloadIntervention = { intervention: createIntervention(5) };
 
-    const action = actionBuilder(CREATE_PROBLEM_SUCCESS, payloadProblem);
+    const action = actionBuilder(CREATE_PROBLEM_SUCCESS, payloadIntervention);
 
-    const expectedState = cloneDeep(mockStateWithProblems);
-    expectedState.problems = [
-      ...mockStateWithProblems.problems,
-      payloadProblem.problem,
+    const expectedState = cloneDeep(mockStateWithInterventions);
+    expectedState.interventions = [
+      ...mockStateWithInterventions.interventions,
+      payloadIntervention.intervention,
     ];
 
-    expect(problemsReducer(mockStateWithProblems, action)).toEqual(
+    expect(interventionsReducer(mockStateWithInterventions, action)).toEqual(
       expectedState,
     );
   });
 
   it('ARCHIVE_PROBLEM_REQUEST', () => {
     const index = 0;
-    const payloadProblem = {
-      interventionId: mockStateWithProblems.problems[index].id,
+    const payloadIntervention = {
+      interventionId: mockStateWithInterventions.interventions[index].id,
     };
 
-    const action = actionBuilder(ARCHIVE_PROBLEM_REQUEST, payloadProblem);
+    const action = actionBuilder(ARCHIVE_PROBLEM_REQUEST, payloadIntervention);
 
-    const expectedState = cloneDeep(mockStateWithProblems);
-    expectedState.problems[index].status = archived;
+    const expectedState = cloneDeep(mockStateWithInterventions);
+    expectedState.interventions[index].status = archived;
     expectedState.cache.archiveIntervention =
-      mockStateWithProblems.problems[index];
+      mockStateWithInterventions.interventions[index];
 
-    expect(problemsReducer(mockStateWithProblems, action)).toEqual(
+    expect(interventionsReducer(mockStateWithInterventions, action)).toEqual(
       expectedState,
     );
   });
@@ -95,27 +99,28 @@ describe('userList reducer', () => {
   it('ARCHIVE_PROBLEM_SUCCESS', () => {
     const action = actionBuilder(ARCHIVE_PROBLEM_SUCCESS, {});
 
-    const expectedState = cloneDeep(mockStateWithProblems);
+    const expectedState = cloneDeep(mockStateWithInterventions);
     expectedState.cache.archiveIntervention = null;
 
-    expect(problemsReducer(mockStateWithProblems, action)).toEqual(
+    expect(interventionsReducer(mockStateWithInterventions, action)).toEqual(
       expectedState,
     );
   });
 
   it('ARCHIVE_PROBLEM_ERROR', () => {
     const index = 0;
-    const payloadProblem = {
-      interventionId: mockStateWithProblems.problems[index].id,
+    const payloadIntervention = {
+      interventionId: mockStateWithInterventions.interventions[index].id,
     };
 
-    const action = actionBuilder(ARCHIVE_PROBLEM_ERROR, payloadProblem);
+    const action = actionBuilder(ARCHIVE_PROBLEM_ERROR, payloadIntervention);
 
-    const expectedState = cloneDeep(mockStateWithProblems);
-    expectedState.problems[index] = mockStateWithProblems.cache.archiveProblem;
+    const expectedState = cloneDeep(mockStateWithInterventions);
+    expectedState.interventions[index] =
+      mockStateWithInterventions.cache.archiveIntervention;
     expectedState.cache.archiveIntervention = null;
 
-    expect(problemsReducer(mockStateWithProblems, action)).toEqual(
+    expect(interventionsReducer(mockStateWithInterventions, action)).toEqual(
       expectedState,
     );
   });

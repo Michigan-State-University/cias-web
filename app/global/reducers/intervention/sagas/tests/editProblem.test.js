@@ -5,52 +5,52 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { createProblem } from 'utils/reducerCreators';
+import { createIntervention } from 'utils/reducerCreators';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
-import { apiProblemResponse } from 'utils/apiResponseCreators';
+import { apiInterventionResponse } from 'utils/apiResponseCreators';
 import globalMessages from 'global/i18n/globalMessages';
 
 import editInterventionSaga, {
   editIntervention,
 } from 'global/reducers/intervention/sagas/editIntervention';
-import { editProblemSuccess } from '../../actions';
+import { editInterventionSuccess } from '../../actions';
 import { initialState } from '../../reducer';
 import { EDIT_PROBLEM_ERROR, EDIT_PROBLEM_REQUEST } from '../../constants';
 
-describe('editProblem saga', () => {
-  const mockProblem = createProblem();
+describe('editIntervention saga', () => {
+  const mockIntervention = createIntervention();
   const mockState = {
-    problem: { ...initialState, problem: mockProblem },
+    intervention: { ...initialState, intervention: mockIntervention },
   };
 
-  it('Check editProblem generator success connection', () => {
-    const apiResponse = apiProblemResponse();
-    apiResponse.data.attributes.name = mockProblem.name;
+  it('Check editIntervention generator success connection', () => {
+    const apiResponse = apiInterventionResponse();
+    apiResponse.data.attributes.name = mockIntervention.name;
 
     return expectSaga(editIntervention)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.patch), { data: apiResponse }]])
       .put(
-        editProblemSuccess({
-          ...mockProblem,
+        editInterventionSuccess({
+          ...mockIntervention,
           ...defaultMapper(apiResponse.data),
         }),
       )
       .run();
   });
-  it('Check editProblem error connection', () => {
+  it('Check editIntervention error connection', () => {
     const error = new Error('test');
     return expectSaga(editIntervention)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.patch), throwError(error)]])
-      .call(toast.error, formatMessage(globalMessages.editProblemError), {
+      .call(toast.error, formatMessage(globalMessages.editInterventionError), {
         toastId: EDIT_PROBLEM_ERROR,
       })
       .run();
   });
 
-  it('Check editProblem connection', () => {
+  it('Check editIntervention connection', () => {
     const sagaFunction = editInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(

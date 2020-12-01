@@ -4,21 +4,21 @@ import orderBy from 'lodash/orderBy';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { FETCH_PROBLEM_REQUEST } from '../constants';
-import { fetchProblemSuccess, fetchProblemError } from '../actions';
+import { fetchInterventionSuccess, fetchInterventionError } from '../actions';
 
 export function* fetchIntervention({ payload: { id } }) {
-  const problemRequestURL = `v1/interventions/${id}`;
+  const interventionRequestURL = `v1/interventions/${id}`;
   const interventionsRequestURL = `v1/interventions/${id}/sessions`;
   try {
-    const { data } = yield call(axios.get, problemRequestURL);
+    const { data } = yield call(axios.get, interventionRequestURL);
     const {
       data: { data: sessions },
     } = yield call(axios.get, interventionsRequestURL);
     const mappedInterventions = sessions.map(defaultMapper);
     data.sessions = orderBy(mappedInterventions, 'position');
-    yield put(fetchProblemSuccess(data));
+    yield put(fetchInterventionSuccess(data));
   } catch (error) {
-    yield put(fetchProblemError(error));
+    yield put(fetchInterventionError(error));
   }
 }
 

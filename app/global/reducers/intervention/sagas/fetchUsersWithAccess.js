@@ -2,7 +2,7 @@ import axios from 'axios';
 import { put, takeLatest, select, call } from 'redux-saga/effects';
 
 import { mapAccessToStateObject } from 'utils/mapResponseObjects';
-import { makeSelectProblem } from 'global/reducers/intervention/selectors';
+import { makeSelectIntervention } from 'global/reducers/intervention/selectors';
 import { FETCH_USERS_WITH_ACCESS_REQUEST } from '../constants';
 import {
   fetchUsersWithAccessSuccess,
@@ -10,9 +10,9 @@ import {
 } from '../actions';
 
 export function* fetchUsersWithAccess({ payload: { id } }) {
-  const problem = yield select(makeSelectProblem());
+  const intervention = yield select(makeSelectIntervention());
 
-  if (problem && problem.id === id) {
+  if (intervention && intervention.id === id) {
     const requestURL = `v1/interventions/${id}/users`;
     try {
       const {

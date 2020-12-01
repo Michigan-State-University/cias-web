@@ -6,7 +6,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 
 import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
-import { createProblem } from 'utils/reducerCreators';
+import { createIntervention } from 'utils/reducerCreators';
 
 import sendSessionInviteSaga, {
   sendSessionInvite,
@@ -26,7 +26,9 @@ import { initialState } from '../../reducer';
 
 describe('sendInterventionInvite saga', () => {
   const index = 0;
-  const mockState = { problem: { ...initialState, problem: createProblem() } };
+  const mockState = {
+    intervention: { ...initialState, intervention: createIntervention() },
+  };
   const apiResponse = {
     session_invitations: [
       { user_id: '0', email: 'user0@mail.com' },
@@ -34,7 +36,7 @@ describe('sendInterventionInvite saga', () => {
     ],
   };
   const payload = {
-    sessionId: mockState.problem.problem.sessions[index].id,
+    sessionId: mockState.intervention.intervention.sessions[index].id,
     emails: ['user00@mail.com', 'user10@mail.com'],
   };
 

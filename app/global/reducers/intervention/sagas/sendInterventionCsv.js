@@ -6,7 +6,10 @@ import get from 'lodash/get';
 import { SEND_PROBLEM_CSV_REQUEST } from 'global/reducers/intervention/constants';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { sendProblemCsvSuccess, sendProblemCsvError } from '../actions';
+import {
+  sendInterventionCsvSuccess,
+  sendInterventionCsvError,
+} from '../actions';
 import messages from '../messages';
 
 export function* sendInterventionCsv({ payload: { id } }) {
@@ -15,10 +18,10 @@ export function* sendInterventionCsv({ payload: { id } }) {
     const {
       data: { message },
     } = yield call(axios.get, requestURL);
-    yield put(sendProblemCsvSuccess(message));
+    yield put(sendInterventionCsvSuccess(message));
     yield call(toast.info, message);
   } catch (error) {
-    yield put(sendProblemCsvError(error));
+    yield put(sendInterventionCsvError(error));
     yield call(
       toast.error,
       get(error, 'data.message', formatMessage(messages.csvError)),

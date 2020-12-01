@@ -6,7 +6,7 @@ import { push } from 'connected-react-router';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 import messages from '../messages';
-import { copyProblemSuccess } from '../actions';
+import { copyInterventionSuccess } from '../actions';
 import {
   COPY_PROBLEM_ERROR,
   COPY_PROBLEM_REQUEST,
@@ -18,12 +18,12 @@ export function* copyIntervention({
 }) {
   const requestURL = `v1/interventions/${interventionId}/clone`;
   let params;
-  if (users) params = { problem: { user_ids: users } };
+  if (users) params = { intervention: { user_ids: users } };
   try {
     const response = yield call(axios.post, requestURL, params);
     if (!params) {
-      const copiedProblem = defaultMapper(response.data.data);
-      yield put(copyProblemSuccess(copiedProblem));
+      const copiedIntervention = defaultMapper(response.data.data);
+      yield put(copyInterventionSuccess(copiedIntervention));
       if (!withoutRedirect) {
         yield put(push('/'));
       }

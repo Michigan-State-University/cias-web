@@ -161,7 +161,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
           font-size="15"
         >
           <span>
-            Interventions
+            Sessions
           </span>
         </p>
       </a>

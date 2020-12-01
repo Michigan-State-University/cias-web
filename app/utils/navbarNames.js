@@ -10,7 +10,7 @@ const navbarMessages = defineMessages({
   },
   adminInterventions: {
     id: `${scope}.adminInterventions`,
-    defaultMessage: 'Interventions',
+    defaultMessage: 'Sessions',
   },
   adminAccounts: {
     id: `${scope}.adminAccounts`,
@@ -18,7 +18,7 @@ const navbarMessages = defineMessages({
   },
   researcherInterventions: {
     id: `${scope}.researcherInterventions`,
-    defaultMessage: 'My Interventions',
+    defaultMessage: 'My Sessions',
   },
   researcherAccounts: {
     id: `${scope}.researcherAccounts`,

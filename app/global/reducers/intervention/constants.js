@@ -34,7 +34,7 @@ export const UPDATE_SESSION_SETTINGS_ERROR =
   'app/Dashboard/UPDATE_SESSION_SETTINGS_ERROR';
 
 export const CHANGE_CURRENT_SESSION =
-  'app/containers/ProblemDetailsPage/CHANGE_CURRENT_INTERVENTION';
+  'app/containers/InterventionDetailsPage/CHANGE_CURRENT_INTERVENTION';
 export const CHANGE_ACCESS_SETTING_REQUEST =
   'app/Dashboard/CHANGE_ACCESS_SETTING_REQUEST';
 export const CHANGE_ACCESS_SETTING_SUCCESS =

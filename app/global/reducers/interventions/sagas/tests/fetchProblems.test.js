@@ -6,37 +6,40 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
 import { formatMessage } from 'utils/intlOutsideReact';
-import { createProblem } from 'utils/reducerCreators';
+import { createIntervention } from 'utils/reducerCreators';
 
 import fetchInterventionsSaga, {
   fetchInterventions,
 } from 'global/reducers/interventions/sagas/fetchInterventions';
-import { fetchProblemsSuccess, fetchProblemsError } from '../../actions';
+import {
+  fetchInterventionsSuccess,
+  fetchInterventionsError,
+} from '../../actions';
 import { FETCH_PROBLEMS_REQUEST } from '../../constants';
 import messages from '../../messages';
 
-describe('fetchProblems saga', () => {
-  it('Check fetchProblems generator success connection', () => {
-    const apiResponse = { interventions: [createProblem()] };
+describe('fetchInterventions saga', () => {
+  it('Check fetchInterventions generator success connection', () => {
+    const apiResponse = { interventions: [createIntervention()] };
 
     return expectSaga(fetchInterventions)
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(fetchProblemsSuccess(apiResponse.interventions))
+      .put(fetchInterventionsSuccess(apiResponse.interventions))
       .run();
   });
-  it('Check fetchProblems error connection', () => {
+  it('Check fetchInterventions error connection', () => {
     const error = new Error('test');
     return expectSaga(fetchInterventions)
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
       .put(
-        fetchProblemsError(
+        fetchInterventionsError(
           get(error, 'message', formatMessage(messages.defaultError)),
         ),
       )
       .run();
   });
 
-  it('Check fetchProblems connection', () => {
+  it('Check fetchInterventions connection', () => {
     const sagaFunction = fetchInterventionsSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(

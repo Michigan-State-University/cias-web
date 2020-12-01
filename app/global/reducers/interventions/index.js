@@ -1,13 +1,13 @@
 export {
-  fetchProblemsRequest,
-  copyProblemRequest,
-  archiveProblemRequest,
+  fetchInterventionsRequest,
+  copyInterventionRequest,
+  archiveInterventionRequest,
 } from './actions';
-export { problemsReducer } from './reducer';
+export { interventionsReducer } from './reducer';
 export {
-  makeSelectProblemsState,
-  makeSelectProblems,
-  makeSelectProblemsLoader,
+  makeSelectInterventionsState,
+  makeSelectInterventions,
+  makeSelectInterventionsLoader,
 } from './selectors';
 
 export {

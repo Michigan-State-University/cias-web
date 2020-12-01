@@ -4,7 +4,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { createProblem } from 'utils/reducerCreators';
+import { createIntervention } from 'utils/reducerCreators';
 import { mapAccessToStateObject } from 'utils/mapResponseObjects';
 
 import fetchSessionEmailsSaga, {
@@ -19,9 +19,9 @@ import { FETCH_SESSION_EMAILS_REQUEST } from '../../constants';
 import { fetchUsersWithAccess } from '../fetchUsersWithAccess';
 
 describe('fetchUsersWithAccess saga', () => {
-  const mockProblem = createProblem();
+  const mockIntervention = createIntervention();
   const mockState = {
-    problem: { ...initialState, problem: mockProblem },
+    intervention: { ...initialState, intervention: mockIntervention },
   };
   const apiResponse = {
     user_sessions: [
@@ -29,7 +29,7 @@ describe('fetchUsersWithAccess saga', () => {
       { user_id: '1', email: 'user1@mail.com' },
     ],
   };
-  const payload = { id: mockProblem.id };
+  const payload = { id: mockIntervention.id };
 
   it('Check fetchUsersWithAccess generator success connection', () =>
     expectSaga(fetchUsersWithAccess, { payload })

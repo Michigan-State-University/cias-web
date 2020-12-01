@@ -4,9 +4,9 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { createProblem } from 'utils/reducerCreators';
+import { createIntervention } from 'utils/reducerCreators';
 import { defaultMapper } from 'utils/mapResponseObjects';
-import { apiInterventionResponse } from 'utils/apiResponseCreators';
+import { apiSessionResponse } from 'utils/apiResponseCreators';
 
 import createSessionSaga, {
   createSession,
@@ -15,13 +15,13 @@ import { createSessionSuccess, createSessionError } from '../../actions';
 import { CREATE_SESSION_REQUEST } from '../../constants';
 
 describe('createSession saga', () => {
-  const mockProblem = createProblem();
+  const mockIntervention = createIntervention();
   const payload = {
-    id: mockProblem.id,
-    lastPosition: mockProblem.sessions.length,
+    id: mockIntervention.id,
+    lastPosition: mockIntervention.sessions.length,
   };
 
-  const mockApiResponse = apiInterventionResponse();
+  const mockApiResponse = apiSessionResponse();
 
   it('Check createSession generator success connection', () => {
     const apiResponse = { data: { mockApiResponse } };
