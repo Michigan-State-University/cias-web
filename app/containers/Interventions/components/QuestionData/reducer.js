@@ -7,7 +7,7 @@ import {
   visualAnalogueScaleQuestion,
   urlQuestion,
   feedbackQuestion,
-} from 'models/Intervention/QuestionTypes';
+} from 'models/Session/QuestionTypes';
 
 import gridQuestionReducer from './GridQuestion/reducer';
 import multiQuestionReducer from './MultiQuestion/reducer';

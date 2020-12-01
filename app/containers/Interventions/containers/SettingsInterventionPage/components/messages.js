@@ -5,7 +5,7 @@ export const scope = 'app.containers.SettingsInterventionPage.Components';
 export default defineMessages({
   placeholder: {
     id: `${scope}.placeholder`,
-    defaultMessage: 'e-Intervention Name',
+    defaultMessage: 'e-Session Name',
   },
   nameLabel: {
     id: `${scope}.nameLabel`,

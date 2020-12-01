@@ -18,7 +18,7 @@ export default defineMessages({
   },
   placeholder: {
     id: `${scope}.placeholder`,
-    defaultMessage: 'e-Intervention Name',
+    defaultMessage: 'e-Session Name',
   },
   users: {
     id: `${scope}.users`,

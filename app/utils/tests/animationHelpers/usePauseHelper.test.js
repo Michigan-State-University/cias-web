@@ -5,7 +5,7 @@
 import { renderHook, act } from '@testing-library/react-hooks';
 
 import usePauseHelper from 'utils/animationsHelpers/usePauseHelper';
-import { instantiateBlockForType } from 'models/Intervention/utils';
+import { instantiateBlockForType } from 'models/Session/utils';
 import { pauseType } from 'models/Narrator/BlockTypes';
 import { DEFAULT_PAUSE_DURATION } from 'utils/constants';
 

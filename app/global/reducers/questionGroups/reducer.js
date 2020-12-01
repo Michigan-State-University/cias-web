@@ -2,10 +2,7 @@ import produce from 'immer';
 import sortBy from 'lodash/sortBy';
 
 import { insertAt, removeAt } from 'utils/arrayUtils';
-import {
-  DefaultGroupType,
-  FinishGroupType,
-} from 'models/Intervention/GroupTypes';
+import { DefaultGroupType, FinishGroupType } from 'models/Session/GroupTypes';
 import { ternary } from 'utils/ternary';
 import {
   GET_QUESTION_GROUPS_SUCCESS,

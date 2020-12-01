@@ -21,7 +21,7 @@ import {
   textboxQuestion,
   urlQuestion,
   visualAnalogueScaleQuestion,
-} from 'models/Intervention/QuestionTypes';
+} from 'models/Session/QuestionTypes';
 
 export const scope = 'app.GlobalMessages';
 

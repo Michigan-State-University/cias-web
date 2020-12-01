@@ -15,14 +15,14 @@ import Switch from 'components/Switch';
 import Text from 'components/Text';
 import ArrowDropdown from 'components/ArrowDropdown';
 
-import Question from 'models/Intervention/Question';
+import Question from 'models/Session/Question';
 import {
   singleQuestion,
   gridQuestion,
   multiQuestion,
   feedbackQuestion,
-} from 'models/Intervention/QuestionTypes';
-import { findQuestionById } from 'models/Intervention/utils';
+} from 'models/Session/QuestionTypes';
+import { findQuestionById } from 'models/Session/utils';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 import {

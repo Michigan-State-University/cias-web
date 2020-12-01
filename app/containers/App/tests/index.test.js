@@ -16,7 +16,7 @@ import { Roles } from 'models/User/UserRoles';
 
 import App from '../index';
 
-describe('<AnswerInterventionPage />', () => {
+describe('<AnswerSessionPage />', () => {
   const initialState = {
     auth: {
       user: {

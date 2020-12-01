@@ -7,7 +7,7 @@ import { injectIntl } from 'react-intl';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
-import Question from 'models/Intervention/Question';
+import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import { colors } from 'theme';
 import {

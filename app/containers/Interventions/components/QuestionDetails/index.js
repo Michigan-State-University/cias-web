@@ -12,7 +12,7 @@ import Row from 'components/Row';
 import StyledInput from 'components/Input/StyledInput';
 import { MSULogo } from 'components/Logo';
 
-import Question from 'models/Intervention/Question';
+import Question from 'models/Session/Question';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { Button } from 'components/Button';

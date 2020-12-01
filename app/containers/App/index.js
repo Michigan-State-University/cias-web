@@ -11,9 +11,9 @@ import React, { Fragment } from 'react';
 import { Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import AnswerInterventionPage from 'containers/AnswerInterventionPage/Loadable';
+import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
 import AppRoute from 'components/AppRoute';
-import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage';
+import EditSessionPage from 'containers/Interventions/containers/EditSessionPage';
 import GlobalStyle from 'global-styles';
 import ProblemDetailsPage from 'containers/ProblemDetailsPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
@@ -84,7 +84,7 @@ export function App({ user }) {
         <AppRoute
           exact
           path="/interventions/:interventionId/sessions/:sessionId/edit"
-          component={EditInterventionPage}
+          component={EditSessionPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
@@ -94,7 +94,7 @@ export function App({ user }) {
         <AppRoute
           exact
           path="/interventions/:interventionId/sessions/:sessionId/fill"
-          component={AnswerInterventionPage}
+          component={AnswerSessionPage}
           allowedRoles={Roles.allRoles}
           user
           navbarProps={{
@@ -128,7 +128,7 @@ export function App({ user }) {
           key="previewFromStart"
           path="/interventions/:interventionId/sessions/:sessionId/preview"
           component={({ match }) => (
-            <AnswerInterventionPage match={match} isPreview />
+            <AnswerSessionPage match={match} isPreview />
           )}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
@@ -141,7 +141,7 @@ export function App({ user }) {
           key="previewFromCurrent"
           path="/interventions/:interventionId/sessions/:sessionId/preview/:index"
           component={({ match }) => (
-            <AnswerInterventionPage match={match} isPreview />
+            <AnswerSessionPage match={match} isPreview />
           )}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}

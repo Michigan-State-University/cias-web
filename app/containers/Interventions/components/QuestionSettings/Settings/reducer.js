@@ -1,4 +1,4 @@
-import { instantiateBlockForType } from 'models/Intervention/utils';
+import { instantiateBlockForType } from 'models/Session/utils';
 import { getNarratorPositionForANewBlock } from 'utils/getNarratorPosition';
 
 import {

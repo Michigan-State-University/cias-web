@@ -3,10 +3,10 @@
  */
 
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
-import { singleQuestion } from 'models/Intervention/QuestionTypes';
-import { getQuestionDataByType } from 'models/Intervention/QuestionBuilder/getQuestionDataByType';
+import { singleQuestion } from 'models/Session/QuestionTypes';
+import { getQuestionDataByType } from 'models/Session/QuestionBuilder/getQuestionDataByType';
 
-jest.mock('models/Intervention/QuestionBuilder/getQuestionDataByType');
+jest.mock('models/Session/QuestionBuilder/getQuestionDataByType');
 
 describe('instantiateEmptyQuestion test', () => {
   const title = 'Test title';

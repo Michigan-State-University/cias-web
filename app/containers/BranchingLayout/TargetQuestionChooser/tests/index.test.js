@@ -45,7 +45,7 @@ const mockMostUsedStore = question => {
   const store = createTestStore({
     session: {
       session: {
-        name: 'e-Intervention Name',
+        name: 'e-Session Name',
         id: 'asd12ca-daiud12',
       },
     },
@@ -90,7 +90,7 @@ describe('<TargetQuestionChooser />', () => {
   const initialState = {
     session: {
       session: {
-        name: 'e-Intervention Name',
+        name: 'e-Session Name',
         id: 'asd12ca-daiud12',
       },
     },
@@ -156,7 +156,7 @@ describe('<TargetQuestionChooser />', () => {
     store = createTestStore({
       session: {
         session: {
-          name: 'e-Intervention Name',
+          name: 'e-Session Name',
           id: 'asd12ca-daiud12',
         },
       },
@@ -213,7 +213,7 @@ describe('<TargetQuestionChooser />', () => {
     store = createTestStore({
       session: {
         session: {
-          name: 'e-Intervention Name',
+          name: 'e-Session Name',
           id: 'asd12ca-daiud12',
         },
       },
@@ -291,7 +291,7 @@ describe('<TargetQuestionChooser />', () => {
     store = createTestStore({
       session: {
         session: {
-          name: 'e-Intervention Name',
+          name: 'e-Session Name',
           id: 'asd12ca-daiud12',
         },
       },

@@ -10,7 +10,7 @@ export const scope = 'app.containers.Navbar.components';
 export default defineMessages({
   placeholder: {
     id: `${scope}.placeholder`,
-    defaultMessage: 'e-Intervention Name',
+    defaultMessage: 'e-Session Name',
   },
   content: {
     id: `${scope}.content`,

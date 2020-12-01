@@ -11,7 +11,7 @@ import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import PlusCircle from 'components/Circle/PlusCircle';
-import Question from 'models/Intervention/Question';
+import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import bin from 'assets/svg/bin-red.svg';

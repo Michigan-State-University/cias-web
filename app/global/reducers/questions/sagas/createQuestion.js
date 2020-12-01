@@ -3,10 +3,7 @@ import axios from 'axios';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { ADD_BLOCK } from 'containers/Interventions/components/QuestionSettings/Settings/constants';
-import {
-  feedbackQuestion,
-  finishQuestion,
-} from 'models/Intervention/QuestionTypes';
+import { feedbackQuestion, finishQuestion } from 'models/Session/QuestionTypes';
 import {
   readQuestionBlockType,
   feedbackBlockType,
@@ -50,7 +47,7 @@ function* createQuestion({ payload: { question } }) {
       ...question,
       narrator: {
         blocks: [],
-        settings: narrator ?? { voice: true, animation: true },
+        settings: narrator,
       },
     });
 

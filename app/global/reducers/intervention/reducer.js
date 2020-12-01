@@ -3,7 +3,7 @@ import set from 'lodash/set';
 import get from 'lodash/get';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
-import interventionSettingsReducer from './sessionSettings/reducer';
+import sessionSettingsReducer from './sessionSettings/reducer';
 import {
   FETCH_PROBLEM_REQUEST,
   FETCH_PROBLEM_SUCCESS,
@@ -152,7 +152,7 @@ export const problemReducer = (state = initialState, action) =>
           draft.currentSessionIndex = sessionIndex;
           draft.loaders.editProblem = true;
           draft.problem.sessions[sessionIndex] = {
-            ...interventionSettingsReducer(
+            ...sessionSettingsReducer(
               draft.problem.sessions[sessionIndex],
               action.payload,
             ),

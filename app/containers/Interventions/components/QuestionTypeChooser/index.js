@@ -10,10 +10,7 @@ import { ScrollFogBox } from 'components/Box/ScrollFog';
 import decideIfPassValue from 'utils/decideIfPassValue';
 import globalMessages from 'global/i18n/globalMessages';
 import useOutsideClick from 'utils/useOutsideClick';
-import {
-  finishQuestion,
-  QuestionTypes,
-} from 'models/Intervention/QuestionTypes';
+import { finishQuestion, QuestionTypes } from 'models/Session/QuestionTypes';
 import { borders, boxShadows, colors, fontSizes } from 'theme';
 
 import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';

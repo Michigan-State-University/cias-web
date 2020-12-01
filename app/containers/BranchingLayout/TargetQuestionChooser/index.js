@@ -12,7 +12,7 @@ import H3 from 'components/H3';
 import EllipsisText from 'components/Text/EllipsisText';
 import Img from 'components/Img';
 import Loader from 'components/Loader';
-import Question from 'models/Intervention/Question';
+import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import arrowLeft from 'assets/svg/arrow-left.svg';

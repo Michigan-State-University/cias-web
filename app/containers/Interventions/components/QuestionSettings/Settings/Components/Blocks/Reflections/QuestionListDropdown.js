@@ -7,7 +7,7 @@ import { createStructuredSelector } from 'reselect';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Img from 'components/Img';
-import Question from 'models/Intervention/Question';
+import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import webpage from 'assets/svg/webpage-mouseover.svg';
@@ -22,7 +22,7 @@ import {
   singleQuestion,
   multiQuestion,
   gridQuestion,
-} from 'models/Intervention/QuestionTypes';
+} from 'models/Session/QuestionTypes';
 
 const possibleQuestions = [
   singleQuestion.id,

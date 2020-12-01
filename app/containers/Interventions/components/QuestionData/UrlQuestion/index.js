@@ -8,7 +8,7 @@ import { injectIntl, FormattedMessage } from 'react-intl';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Question from 'models/Intervention/Question';
+import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import UrlPreview from 'components/UrlPreview';
 import Text from 'components/Text';

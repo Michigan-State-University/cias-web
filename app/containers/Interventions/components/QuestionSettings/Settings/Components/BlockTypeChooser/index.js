@@ -9,7 +9,7 @@ import Row from 'components/Row';
 import Text from 'components/Text';
 import decideIfPassValue from 'utils/decideIfPassValue';
 import globalMessages from 'global/i18n/globalMessages';
-import { feedbackQuestion } from 'models/Intervention/QuestionTypes';
+import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import useOutsideClick from 'utils/useOutsideClick';
 import { colors, boxShadows, borders, fontSizes } from 'theme';
 import {

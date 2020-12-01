@@ -34,7 +34,7 @@ export default defineMessages({
   },
   placeholder: {
     id: `${scope}.placeholder`,
-    defaultMessage: 'e-Intervention Name',
+    defaultMessage: 'e-Session Name',
   },
   adjust: {
     id: `${scope}.adjust`,
@@ -46,11 +46,11 @@ export default defineMessages({
   },
   duplicate: {
     id: `${scope}.duplicate`,
-    defaultMessage: 'Duplicate session',
+    defaultMessage: 'Duplicate intervention',
   },
   archive: {
     id: `${scope}.archive`,
-    defaultMessage: 'Archive session',
+    defaultMessage: 'Archive intervention',
   },
   modalTitle: {
     id: `${scope}.modalTitle`,

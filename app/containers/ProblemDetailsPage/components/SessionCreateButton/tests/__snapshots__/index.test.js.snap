@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SessionCreateButton /> Should render and match the snapshot 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.c3 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  color: #2F3850;
+}
+
+.c0 {
+  padding: 20px;
+  width: 100%;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  background: #E9F1FB;
+  color: #C866EA;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+<div
+  class="c0"
+  data-cy="create-session-button"
+>
+  <div
+    class="c1"
+  >
+    <img
+      alt="add"
+      class="c2"
+      src="IMAGE_MOCK"
+    />
+    <h3
+      class="c3"
+    >
+      <span>
+        Create a new Session
+      </span>
+    </h3>
+  </div>
+</div>
+`;

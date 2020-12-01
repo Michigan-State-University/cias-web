@@ -17,7 +17,7 @@ import {
   getSessionSaga,
 } from 'global/reducers/session';
 
-import InterventionSettings from './components/InterventionSettings';
+import SessionSettings from 'containers/Interventions/containers/SettingsInterventionPage/components/SessionSettings';
 import messages from './messages';
 import { StyledColumn } from './styled';
 
@@ -53,7 +53,7 @@ const SettingsInterventionPage = ({
         bg={colors.zirkon}
       >
         <StyledColumn height="100%">
-          <InterventionSettings
+          <SessionSettings
             name={name}
             narratorSettings={narratorSettings}
             formatMessage={formatMessage}

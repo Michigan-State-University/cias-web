@@ -16,7 +16,7 @@ import {
   multiQuestion,
   gridQuestion,
   informationQuestion,
-} from 'models/Intervention/QuestionTypes';
+} from 'models/Session/QuestionTypes';
 
 export const noVarQuestionTypes = [
   feedbackQuestion.name,

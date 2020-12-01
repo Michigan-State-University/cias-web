@@ -16,7 +16,7 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
 import H1 from 'components/H1';
-import Intervention from 'models/Intervention/Intervention';
+import Session from 'models/Session/Session';
 import Loader from 'components/Loader';
 import MapInterventions from 'components/MapInterventions/MapInterventions';
 import { FormattedMessage } from 'react-intl';
@@ -61,7 +61,7 @@ export function ParticipantDashboard({
             <FormattedMessage {...messages.sessions} />
           </H1>
           <Row>
-            <MapInterventions sessions={sessions} participantView />
+            <MapInterventions interventions={sessions} participantView />
             {!sessions ||
               (sessions.length === 0 && (
                 <Column align="center" mt={100}>
@@ -77,7 +77,7 @@ export function ParticipantDashboard({
 
 ParticipantDashboard.propTypes = {
   sessions: PropTypes.shape({
-    sessions: PropTypes.arrayOf(PropTypes.shape(Intervention)),
+    sessions: PropTypes.arrayOf(PropTypes.shape(Session)),
     fetchSessionLoading: PropTypes.bool,
     fetchSessionError: PropTypes.string,
   }),

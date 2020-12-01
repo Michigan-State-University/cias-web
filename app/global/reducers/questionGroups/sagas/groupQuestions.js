@@ -11,10 +11,7 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
 } from 'global/reducers/questions/selectors';
-import {
-  DefaultGroupType,
-  PlainGroupType,
-} from 'models/Intervention/GroupTypes';
+import { DefaultGroupType, PlainGroupType } from 'models/Session/GroupTypes';
 
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
 import { setAnimationStopPosition } from 'global/reducers/localState';

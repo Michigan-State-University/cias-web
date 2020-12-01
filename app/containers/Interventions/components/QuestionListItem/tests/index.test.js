@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { browserHistory } from 'react-router-dom';
 import configureStore from 'configureStore';
 
-import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { singleQuestion } from 'models/Session/QuestionTypes';
 import { withDroppable } from 'utils/testUtils/dndUtils';
 
 import QuestionListItem from '../index';

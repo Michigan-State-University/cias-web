@@ -19,7 +19,7 @@ import Text from 'components/Text';
 
 import { StyledInput } from 'components/Input/StyledInput';
 
-import { feedbackQuestion } from 'models/Intervention/QuestionTypes';
+import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 
 import {

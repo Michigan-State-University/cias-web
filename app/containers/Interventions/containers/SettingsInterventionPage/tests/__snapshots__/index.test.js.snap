@@ -23,9 +23,9 @@ exports[`<SettingsInterventionPage /> Should render and match the snapshot 1`] =
       <input
         class="Input-sc-19txxuq-0 wvSrL styled__Input-sc-1q3ma8o-0 goAwGP"
         disabled=""
-        placeholder="e-Intervention Name"
+        placeholder="e-Session Name"
         type="text"
-        value="e-Intervention Name"
+        value="e-Session Name"
         width="100%"
       />
     </div>

@@ -14,7 +14,7 @@ export function* createSession({ payload: { id, lastPosition } }) {
       data: { data },
     } = yield call(axios.post, requestURL, {
       session: {
-        type: 'Intervention::Single',
+        type: 'Session::Single',
         name: 'New Session',
         position: lastPosition + 1,
       },

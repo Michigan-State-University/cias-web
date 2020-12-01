@@ -17,8 +17,8 @@ import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
 import reorderIcon from 'assets/svg/reorder-hand.svg';
 
-import { reorderScope } from 'models/Intervention/ReorderScope';
-import { FinishGroupType } from 'models/Intervention/GroupTypes';
+import { reorderScope } from 'models/Session/ReorderScope';
+import { FinishGroupType } from 'models/Session/GroupTypes';
 import QuestionListItem from '../../components/QuestionListItem';
 import { Spacer, DraggableContainer } from './styled';
 import messages from './messages';

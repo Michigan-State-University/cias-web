@@ -1,6 +1,6 @@
 /* eslint no-unused-expressions: 0 */ // --> OFF
 
-import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { singleQuestion } from 'models/Session/QuestionTypes';
 import {
   CREATE_QUESTION,
   GET_SESSION_QUESTION_GROUPS,

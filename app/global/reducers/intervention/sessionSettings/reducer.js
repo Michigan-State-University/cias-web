@@ -10,7 +10,7 @@ import {
   UPDATE_SCHEDULING_DATE,
 } from './constants';
 
-const interventionSettingsReducer = (session, payload) => {
+const sessionSettingsReducer = (session, payload) => {
   const clonedSession = cloneDeep(session);
   switch (payload.type) {
     case UPDATE_FORMULA:
@@ -56,4 +56,4 @@ const interventionSettingsReducer = (session, payload) => {
   }
 };
 
-export default interventionSettingsReducer;
+export default sessionSettingsReducer;

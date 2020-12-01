@@ -15,7 +15,7 @@ import { UPDATE_SESSION_SETTINGS_REQUEST } from '../../constants';
 import { updateSessionSettingsSaga } from '../index';
 import { initialState } from '../../reducer';
 
-describe('updateInterventionSettings saga', () => {
+describe('updateSessionSettings saga', () => {
   const mockState = {
     problem: {
       ...initialState,
@@ -23,7 +23,7 @@ describe('updateInterventionSettings saga', () => {
       cache: { problem: createProblem() },
     },
   };
-  it('Check updateInterventionSettings generator success connection', () => {
+  it('Check updateSessionSettings generator success connection', () => {
     const apiResponse = { message: 'test' };
     return expectSaga(updateSessionSettings)
       .withState(mockState)
@@ -32,7 +32,7 @@ describe('updateInterventionSettings saga', () => {
       .run();
   });
 
-  it('Check updateInterventionSettings error connection', () => {
+  it('Check updateSessionSettings error connection', () => {
     const error = new Error('test');
     return expectSaga(updateSessionSettings)
       .withState(mockState)
@@ -41,7 +41,7 @@ describe('updateInterventionSettings saga', () => {
       .run();
   });
 
-  it('Check updateInterventionSettings connection', () => {
+  it('Check updateSessionSettings connection', () => {
     const sagaFunction = updateSessionSettingsSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(

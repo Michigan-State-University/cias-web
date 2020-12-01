@@ -19,7 +19,7 @@ import {
 } from 'global/reducers/questions';
 import { makeSelectProblemStatus } from 'global/reducers/intervention';
 import { canEdit } from 'models/Status/statusPermissions';
-import { finishQuestion } from 'models/Intervention/QuestionTypes';
+import { finishQuestion } from 'models/Session/QuestionTypes';
 
 import BranchingTab from './Components/Tabs/BranchingTab';
 import NarratorTab from './Components/Tabs/NarratorTab';

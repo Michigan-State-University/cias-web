@@ -36,7 +36,7 @@ import {
   reflectionType,
 } from 'models/Narrator/BlockTypes';
 
-import { feedbackQuestion } from 'models/Intervention/QuestionTypes';
+import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import animationMessages from './messages';
 import { updateBlockSettings, switchSpeechReflection } from '../../actions';

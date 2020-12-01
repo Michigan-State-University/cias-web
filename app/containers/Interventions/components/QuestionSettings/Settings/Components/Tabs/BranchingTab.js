@@ -7,20 +7,14 @@ import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 
 import BranchingLayout from 'containers/BranchingLayout';
-import Intervention from 'models/Intervention/Intervention';
-import Question from 'models/Intervention/Question';
-import {
-  questionType,
-  finishQuestion,
-} from 'models/Intervention/QuestionTypes';
+import Session from 'models/Session/Session';
+import Question from 'models/Session/Question';
+import { questionType, finishQuestion } from 'models/Session/QuestionTypes';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { makeSelectQuestions } from 'global/reducers/questions';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
-import {
-  findQuestionIndex,
-  findInterventionIndex,
-} from 'models/Intervention/utils';
+import { findQuestionIndex, findInterventionIndex } from 'models/Session/utils';
 import {
   problemReducer,
   fetchInterventionSaga,
@@ -106,7 +100,7 @@ BranchingTab.propTypes = {
   onUpdateCase: PropTypes.func,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   problem: PropTypes.shape({
-    sessions: PropTypes.arrayOf(PropTypes.shape(Intervention)),
+    sessions: PropTypes.arrayOf(PropTypes.shape(Session)),
   }),
   fetchProblem: PropTypes.func,
   match: PropTypes.object,

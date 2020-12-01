@@ -6,7 +6,7 @@ import { renderHook, act } from '@testing-library/react-hooks';
 
 import useMoveHelper from 'utils/animationsHelpers/useMoveHelper';
 import { CHARACTER_POSITIONS } from 'utils/characterConstants';
-import { instantiateBlockForType } from 'models/Intervention/utils';
+import { instantiateBlockForType } from 'models/Session/utils';
 import { speechType } from 'models/Narrator/BlockTypes';
 import { elements } from 'theme';
 

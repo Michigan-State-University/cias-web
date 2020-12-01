@@ -12,7 +12,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
-import { feedbackQuestion } from 'models/Intervention/QuestionTypes';
+import { feedbackQuestion } from 'models/Session/QuestionTypes';
 
 import SpectrumSettings from '../index';
 

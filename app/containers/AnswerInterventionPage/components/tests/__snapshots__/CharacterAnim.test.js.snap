@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<CharacterAnim /> Should render and match the snapshot 1`] = `
-<div>
-  <div
-    class="styled__NarratorContainer-sc-1ld9zii-0 hzmVmS"
-  />
-</div>
-`;

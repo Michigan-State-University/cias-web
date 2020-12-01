@@ -12,7 +12,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
-import { textboxQuestion } from 'models/Intervention/QuestionTypes';
+import { textboxQuestion } from 'models/Session/QuestionTypes';
 import { draft } from 'models/Status/StatusTypes';
 
 import TextboxQuestion from '../index';

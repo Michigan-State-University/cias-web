@@ -35,10 +35,7 @@ import {
 } from 'global/reducers/localState';
 
 import StyledCircle from 'components/Circle/StyledCircle';
-import {
-  finishQuestion,
-  QuestionTypes,
-} from 'models/Intervention/QuestionTypes';
+import { finishQuestion, QuestionTypes } from 'models/Session/QuestionTypes';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
 import VariableInput from '../QuestionDetails/VariableInput';

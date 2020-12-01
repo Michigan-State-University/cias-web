@@ -3,7 +3,7 @@ import {
   gridQuestion,
   textboxQuestion,
   numberQuestion,
-} from 'models/Intervention/QuestionTypes';
+} from 'models/Session/QuestionTypes';
 import { splitAndKeep } from 'utils/splitAndKeep';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { readQuestionBlockType } from 'models/Narrator/BlockTypes';

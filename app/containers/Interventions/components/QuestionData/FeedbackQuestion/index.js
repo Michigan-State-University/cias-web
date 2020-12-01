@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import FeedbackQuestionLayout from 'containers/AnswerInterventionPage/layouts/Feedback/FeedbackQuestionLayout';
+import FeedbackQuestionLayout from 'containers/AnswerSessionPage/layouts/Feedback/FeedbackQuestionLayout';
 
 import AppSlider from 'components/AppSlider';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import { StyledInput } from 'components/Input/StyledInput';
 import Row from 'components/Row';
-import Question from 'models/Intervention/Question';
+import Question from 'models/Session/Question';
 
 import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 import isNullOrUndefined from 'utils/isNullOrUndefined';

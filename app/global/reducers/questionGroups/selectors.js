@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { DefaultGroupType } from 'models/Intervention/GroupTypes';
+import { DefaultGroupType } from 'models/Session/GroupTypes';
 import { initialState } from './reducer';
 
 export const selectQuestionGroups = state =>

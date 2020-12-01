@@ -15,12 +15,12 @@ import desktop from 'assets/svg/desktop.svg';
 import mobile from 'assets/svg/mobile.svg';
 import { I_PHONE_8_PLUS_MODE, DESKTOP_MODE } from 'utils/previewMode';
 import { colors, themeColors } from 'theme';
-import { makeSelectPreviewMode } from 'containers/AnswerInterventionPage/selectors';
+import { makeSelectPreviewMode } from 'containers/AnswerSessionPage/selectors';
 import { makeSelectProblemStatus } from 'global/reducers/intervention';
 import {
   changePreviewMode as changePreviewModeAction,
-  resetIntervention,
-} from 'containers/AnswerInterventionPage/actions';
+  resetSession,
+} from 'containers/AnswerSessionPage/actions';
 
 import { canPreview } from 'models/Status/statusPermissions';
 import messages from './messages';
@@ -118,7 +118,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   changePreviewMode: changePreviewModeAction,
-  onResetIntervention: resetIntervention,
+  onResetIntervention: resetSession,
 };
 
 export default compose(

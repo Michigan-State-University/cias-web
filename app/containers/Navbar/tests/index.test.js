@@ -29,7 +29,7 @@ describe('<Navbar />', () => {
     session: {
       session: {
         id: '12dasc0123=21-2',
-        name: 'e-Intervention New',
+        name: 'e-Session New',
       },
     },
   };

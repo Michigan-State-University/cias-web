@@ -12,7 +12,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
-import { multiQuestion } from 'models/Intervention/QuestionTypes';
+import { multiQuestion } from 'models/Session/QuestionTypes';
 import { draft } from 'models/Status/StatusTypes';
 
 import MultiQuestion from '../index';

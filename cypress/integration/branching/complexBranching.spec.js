@@ -1,4 +1,4 @@
-import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { singleQuestion } from 'models/Session/QuestionTypes';
 import {
   CREATE_QUESTION,
   UPDATE_INTERVENTION,

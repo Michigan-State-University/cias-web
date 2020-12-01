@@ -6,7 +6,7 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 
 import useAudioHelper from 'utils/animationsHelpers/useAudioHelper';
-import { instantiateBlockForType } from 'models/Intervention/utils';
+import { instantiateBlockForType } from 'models/Session/utils';
 import {
   readQuestionBlockType,
   reflectionFormulaType,

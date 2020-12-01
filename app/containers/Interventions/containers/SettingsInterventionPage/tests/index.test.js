@@ -24,7 +24,7 @@ describe('<SettingsInterventionPage />', () => {
     session: {
       session: {
         id: '12ad120dj012-3a',
-        name: 'e-Intervention Name',
+        name: 'e-Session Name',
         settings: {
           narrator: {
             voice: true,

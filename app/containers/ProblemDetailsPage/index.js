@@ -64,15 +64,15 @@ import {
   canEdit,
   canShareWithParticipants,
 } from 'models/Status/statusPermissions';
-import { reorderScope } from 'models/Intervention/ReorderScope';
+import { reorderScope } from 'models/Session/ReorderScope';
 import { reorder } from 'utils/reorder';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 
 import { StatusLabel, InterventionOptions, DraggedTest } from './styled';
 import problemDetailsPageSagas from './saga';
-import InterventionCreateButton from './components/InterventionCreateButton';
+import SessionCreateButton from './components/SessionCreateButton';
 import InterventionStatusButtons from './components/InterventionStatusButtons';
-import InterventionListItem from './components/InterventionListItem';
+import SessionListItem from './components/SessionListItem';
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
 import { updateStatuses } from './utils';
@@ -91,13 +91,13 @@ export function ProblemDetailsPage({
     errors: { fetchProblemError, createSessionError },
   },
   sessionIndex,
-  changeInterventionIndex,
+  changeSessionIndex,
   sendCsv,
-  copyIntervention,
-  reorderInterventions,
+  copySession,
+  reorderSessions,
   copyProblem,
   fetchQuestions,
-  fetchInterventionEmails,
+  fetchSessionEmails,
 }) {
   useInjectReducer({
     key: 'problem',
@@ -165,8 +165,8 @@ export function ProblemDetailsPage({
       fetchQuestions(sessions[sessionIndex].id);
   }, [problem ? problem.id : 0]);
 
-  const handleCopyIntervention = sessionId => {
-    copyIntervention({ sessionId });
+  const handleCopySession = sessionId => {
+    copySession({ sessionId });
   };
 
   const editName = val => editProblem({ path: 'name', value: val });
@@ -179,7 +179,7 @@ export function ProblemDetailsPage({
 
   const handleSendCsv = () => sendCsv(id);
 
-  const createInterventionCall = () =>
+  const createSessionCall = () =>
     createSession(interventionId, sessions.length);
 
   const handleReorder = (previousIndex, nextIndex) => {
@@ -192,7 +192,7 @@ export function ProblemDetailsPage({
         position,
       };
     });
-    reorderInterventions({
+    reorderSessions({
       reorderedList: orderedNewList,
       interventionId,
     });
@@ -223,10 +223,10 @@ export function ProblemDetailsPage({
               {sessions &&
                 orderBy(sessions, 'position').map((session, index) => {
                   const handleClick = () => {
-                    fetchInterventionEmails(index);
+                    fetchSessionEmails(index);
                     if (session.position !== sessionIndex + 1) {
                       fetchQuestions(session.id);
-                      changeInterventionIndex(index);
+                      changeSessionIndex(index);
                     }
                     setParticipantShareModalVisible(true);
                   };
@@ -235,15 +235,15 @@ export function ProblemDetailsPage({
                   );
                   return (
                     <Row key={session.id}>
-                      <InterventionListItem
+                      <SessionListItem
                         disabled={!editingPossible}
                         sharingPossible={sharingPossible}
                         session={session}
                         index={index}
                         isSelected={index === sessionIndex}
                         handleClick={handleClick}
-                        handleCopyIntervention={handleCopyIntervention}
-                        nextInterventionName={
+                        handleCopySession={handleCopySession}
+                        nextSessionName={
                           nextIntervention ? nextIntervention.name : null
                         }
                       />
@@ -343,7 +343,7 @@ export function ProblemDetailsPage({
           )}
           {editingPossible && (
             <Row my={18} align="center">
-              <InterventionCreateButton handleClick={createInterventionCall} />
+              <SessionCreateButton handleClick={createSessionCall} />
             </Row>
           )}
         </Column>
@@ -371,13 +371,13 @@ ProblemDetailsPage.propTypes = {
   match: PropTypes.object,
   editProblem: PropTypes.func,
   sessionIndex: PropTypes.number,
-  changeInterventionIndex: PropTypes.func,
+  changeSessionIndex: PropTypes.func,
   sendCsv: PropTypes.func,
-  copyIntervention: PropTypes.func,
-  reorderInterventions: PropTypes.func,
+  copySession: PropTypes.func,
+  reorderSessions: PropTypes.func,
   copyProblem: PropTypes.func,
   fetchQuestions: PropTypes.func,
-  fetchInterventionEmails: PropTypes.func,
+  fetchSessionEmails: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -390,11 +390,11 @@ const mapDispatchToProps = {
   fetchQuestions: getQuestionsRequest,
   fetchProblem: fetchProblemRequest,
   editProblem: editProblemRequest,
-  changeInterventionIndex: changeCurrentSession,
-  fetchInterventionEmails: fetchSessionEmailsRequest,
+  changeSessionIndex: changeCurrentSession,
+  fetchSessionEmails: fetchSessionEmailsRequest,
   sendCsv: sendProblemCsvRequest,
-  copyIntervention: copySessionRequest,
-  reorderInterventions: reorderSessionList,
+  copySession: copySessionRequest,
+  reorderSessions: reorderSessionList,
   copyProblem: copyProblemRequest,
 };
 

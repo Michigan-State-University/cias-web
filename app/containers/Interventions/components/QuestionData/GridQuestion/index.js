@@ -20,7 +20,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
 
-import Question from 'models/Intervention/Question';
+import Question from 'models/Session/Question';
 import scrollByRef from 'utils/scrollByRef';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors, elements } from 'theme';

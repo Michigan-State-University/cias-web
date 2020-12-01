@@ -1,4 +1,4 @@
-import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { singleQuestion } from 'models/Session/QuestionTypes';
 import { UPDATE_QUESTION } from './aliases';
 
 export const answerQuestionByType = ({ type, answer }) => {

@@ -18,7 +18,7 @@ import {
   feedbackBlockType,
   getRemovedBlockForSetting,
 } from 'models/Narrator/BlockTypes';
-import { DisabledNarratorSettingsByQuestionType } from 'models/Intervention/utils';
+import { DisabledNarratorSettingsByQuestionType } from 'models/Session/utils';
 import { makeSelectCurrentNarratorBlockIndex } from 'global/reducers/localState';
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';

@@ -14,10 +14,7 @@ import Select from 'components/Select';
 import Switch from 'components/Switch';
 import Text from 'components/Text';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import {
-  QuestionTypes,
-  feedbackQuestion,
-} from 'models/Intervention/QuestionTypes';
+import { QuestionTypes, feedbackQuestion } from 'models/Session/QuestionTypes';
 import { changeQuestionTypeRequest } from 'global/reducers/questions';
 import { colors, borders } from 'theme';
 

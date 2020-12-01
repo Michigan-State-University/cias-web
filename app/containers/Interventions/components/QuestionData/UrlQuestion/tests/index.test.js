@@ -7,7 +7,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { draft } from 'models/Status/StatusTypes';
-import { urlQuestion } from 'models/Intervention/QuestionTypes';
+import { urlQuestion } from 'models/Session/QuestionTypes';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import UrlQuestion from '../index';

@@ -1,5 +1,4 @@
-export const ADD = 'app/EditInterventionPage/Single/ADD';
-export const UPDATE_ANSWER = 'app/EditInterventionPage/Single/UPDATE';
-export const UPDATE_VARIABLE =
-  'app/EditInterventionPage/Single/UPDATE_VARIABLE';
-export const REMOVE = 'app/EditInterventionPage/Single/REMOVE';
+export const ADD = 'app/EditSessionPage/Single/ADD';
+export const UPDATE_ANSWER = 'app/EditSessionPage/Single/UPDATE';
+export const UPDATE_VARIABLE = 'app/EditSessionPage/Single/UPDATE_VARIABLE';
+export const REMOVE = 'app/EditSessionPage/Single/REMOVE';
