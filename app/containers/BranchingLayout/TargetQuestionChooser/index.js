@@ -67,7 +67,7 @@ const TargetQuestionChooser = props => {
 
   useEffect(() => {
     if (isVisible) {
-      setIsInterventionView(target.type === 'Intervention');
+      setIsInterventionView(target.type === 'Session');
     }
   }, [isVisible]);
 
