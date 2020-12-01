@@ -1,5 +1,5 @@
 export {
-  CREATE_PROBLEM_SUCCESS,
+  CREATE_INTERVENTION_SUCCESS,
   SEND_SESSION_INVITE_REQUEST,
 } from './constants';
 export {

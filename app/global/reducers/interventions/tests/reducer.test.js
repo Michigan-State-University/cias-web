@@ -3,14 +3,14 @@ import cloneDeep from 'lodash/cloneDeep';
 import { actionBuilder } from 'utils/actionBuilder';
 import { createIntervention } from 'utils/reducerCreators';
 import {
-  FETCH_PROBLEMS_REQUEST,
-  FETCH_PROBLEMS_SUCCESS,
-  FETCH_PROBLEMS_ERROR,
-  ARCHIVE_PROBLEM_REQUEST,
-  ARCHIVE_PROBLEM_SUCCESS,
-  ARCHIVE_PROBLEM_ERROR,
+  FETCH_INTERVENTIONS_REQUEST,
+  FETCH_INTERVENTIONS_SUCCESS,
+  FETCH_INTERVENTIONS_ERROR,
+  ARCHIVE_INTERVENTION_REQUEST,
+  ARCHIVE_INTERVENTION_SUCCESS,
+  ARCHIVE_INTERVENTION_ERROR,
 } from 'global/reducers/interventions/constants';
-import { CREATE_PROBLEM_SUCCESS } from 'global/reducers/intervention';
+import { CREATE_INTERVENTION_SUCCESS } from 'global/reducers/intervention';
 import { archived } from 'models/Status/StatusTypes';
 import interventionsReducer, { initialState } from '../reducer';
 
@@ -29,8 +29,8 @@ describe('userList reducer', () => {
     cache: { archiveIntervention: createIntervention(4) },
   };
 
-  it('FETCH_PROBLEMS_REQUEST', () => {
-    const action = actionBuilder(FETCH_PROBLEMS_REQUEST, {});
+  it('FETCH_INTERVENTIONS_REQUEST', () => {
+    const action = actionBuilder(FETCH_INTERVENTIONS_REQUEST, {});
 
     const expectedState = cloneDeep(mockState);
     expectedState.fetchInterventionLoading = true;
@@ -39,10 +39,13 @@ describe('userList reducer', () => {
     expect(interventionsReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('FETCH_PROBLEMS_SUCCESS', () => {
+  it('FETCH_INTERVENTIONS_SUCCESS', () => {
     const payloadInterventions = { interventions };
 
-    const action = actionBuilder(FETCH_PROBLEMS_SUCCESS, payloadInterventions);
+    const action = actionBuilder(
+      FETCH_INTERVENTIONS_SUCCESS,
+      payloadInterventions,
+    );
 
     const expectedState = cloneDeep(mockState);
     expectedState.fetchInterventionLoading = false;
@@ -51,10 +54,10 @@ describe('userList reducer', () => {
     expect(interventionsReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('FETCH_PROBLEMS_ERROR', () => {
+  it('FETCH_INTERVENTIONS_ERROR', () => {
     const payloadError = { error: 'test-error' };
 
-    const action = actionBuilder(FETCH_PROBLEMS_ERROR, payloadError);
+    const action = actionBuilder(FETCH_INTERVENTIONS_ERROR, payloadError);
 
     const expectedState = cloneDeep(mockState);
     expectedState.fetchInterventionLoading = false;
@@ -62,10 +65,13 @@ describe('userList reducer', () => {
 
     expect(interventionsReducer(mockState, action)).toEqual(expectedState);
   });
-  it('CREATE_PROBLEM_SUCCESS COPY_PROBLEM_SUCCESS', () => {
+  it('CREATE_INTERVENTION_SUCCESS COPY_INTERVENTION_SUCCESS', () => {
     const payloadIntervention = { intervention: createIntervention(5) };
 
-    const action = actionBuilder(CREATE_PROBLEM_SUCCESS, payloadIntervention);
+    const action = actionBuilder(
+      CREATE_INTERVENTION_SUCCESS,
+      payloadIntervention,
+    );
 
     const expectedState = cloneDeep(mockStateWithInterventions);
     expectedState.interventions = [
@@ -78,13 +84,16 @@ describe('userList reducer', () => {
     );
   });
 
-  it('ARCHIVE_PROBLEM_REQUEST', () => {
+  it('ARCHIVE_INTERVENTION_REQUEST', () => {
     const index = 0;
     const payloadIntervention = {
       interventionId: mockStateWithInterventions.interventions[index].id,
     };
 
-    const action = actionBuilder(ARCHIVE_PROBLEM_REQUEST, payloadIntervention);
+    const action = actionBuilder(
+      ARCHIVE_INTERVENTION_REQUEST,
+      payloadIntervention,
+    );
 
     const expectedState = cloneDeep(mockStateWithInterventions);
     expectedState.interventions[index].status = archived;
@@ -96,8 +105,8 @@ describe('userList reducer', () => {
     );
   });
 
-  it('ARCHIVE_PROBLEM_SUCCESS', () => {
-    const action = actionBuilder(ARCHIVE_PROBLEM_SUCCESS, {});
+  it('ARCHIVE_INTERVENTION_SUCCESS', () => {
+    const action = actionBuilder(ARCHIVE_INTERVENTION_SUCCESS, {});
 
     const expectedState = cloneDeep(mockStateWithInterventions);
     expectedState.cache.archiveIntervention = null;
@@ -107,13 +116,16 @@ describe('userList reducer', () => {
     );
   });
 
-  it('ARCHIVE_PROBLEM_ERROR', () => {
+  it('ARCHIVE_INTERVENTION_ERROR', () => {
     const index = 0;
     const payloadIntervention = {
       interventionId: mockStateWithInterventions.interventions[index].id,
     };
 
-    const action = actionBuilder(ARCHIVE_PROBLEM_ERROR, payloadIntervention);
+    const action = actionBuilder(
+      ARCHIVE_INTERVENTION_ERROR,
+      payloadIntervention,
+    );
 
     const expectedState = cloneDeep(mockStateWithInterventions);
     expectedState.interventions[index] =

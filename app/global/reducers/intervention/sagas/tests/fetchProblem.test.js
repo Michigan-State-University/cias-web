@@ -20,7 +20,7 @@ import {
   fetchInterventionError,
 } from '../../actions';
 
-import { FETCH_PROBLEM_REQUEST } from '../../constants';
+import { FETCH_INTERVENTION_REQUEST } from '../../constants';
 
 describe('fetchIntervention saga', () => {
   const payload = { id: 'test-id' };
@@ -72,7 +72,7 @@ describe('fetchIntervention saga', () => {
     const sagaFunction = fetchInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(FETCH_PROBLEM_REQUEST, fetchIntervention),
+      takeLatest(FETCH_INTERVENTION_REQUEST, fetchIntervention),
     );
   });
 });

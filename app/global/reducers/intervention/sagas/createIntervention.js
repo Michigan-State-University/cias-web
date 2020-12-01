@@ -8,7 +8,10 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import globalMessages from 'global/i18n/globalMessages';
 
 import { createInterventionSuccess } from '../actions';
-import { CREATE_PROBLEM_REQUEST, CREATE_PROBLEM_ERROR } from '../constants';
+import {
+  CREATE_INTERVENTION_REQUEST,
+  CREATE_INTERVENTION_ERROR,
+} from '../constants';
 
 export function* createIntervention() {
   const requestURL = `v1/interventions`;
@@ -26,11 +29,11 @@ export function* createIntervention() {
       toast.error,
       formatMessage(globalMessages.createInterventionError),
       {
-        toastId: CREATE_PROBLEM_ERROR,
+        toastId: CREATE_INTERVENTION_ERROR,
       },
     );
   }
 }
 export default function* createInterventionSaga() {
-  yield takeLatest(CREATE_PROBLEM_REQUEST, createIntervention);
+  yield takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention);
 }

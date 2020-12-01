@@ -17,9 +17,9 @@ import copyInterventionSaga, {
 } from 'global/reducers/interventions/sagas/copyIntervention';
 import { copyInterventionSuccess } from '../../actions';
 import {
-  COPY_PROBLEM_SUCCESS,
-  COPY_PROBLEM_ERROR,
-  COPY_PROBLEM_REQUEST,
+  COPY_INTERVENTION_SUCCESS,
+  COPY_INTERVENTION_ERROR,
+  COPY_INTERVENTION_REQUEST,
 } from '../../constants';
 
 describe('copyIntervention saga', () => {
@@ -36,7 +36,7 @@ describe('copyIntervention saga', () => {
     return expectSaga(copyIntervention, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
       .call(toast.success, formatMessage(messages.sendSuccess), {
-        toastId: COPY_PROBLEM_SUCCESS,
+        toastId: COPY_INTERVENTION_SUCCESS,
       })
       .run();
   });
@@ -57,7 +57,7 @@ describe('copyIntervention saga', () => {
     return expectSaga(copyIntervention, { payload })
       .provide([[matchers.call.fn(axios.post), throwError(error)]])
       .call(toast.error, formatMessage(messages.copyError), {
-        toastId: COPY_PROBLEM_ERROR,
+        toastId: COPY_INTERVENTION_ERROR,
       })
       .run();
   });
@@ -66,7 +66,7 @@ describe('copyIntervention saga', () => {
     const sagaFunction = copyInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(COPY_PROBLEM_REQUEST, copyIntervention),
+      takeLatest(COPY_INTERVENTION_REQUEST, copyIntervention),
     );
   });
 });

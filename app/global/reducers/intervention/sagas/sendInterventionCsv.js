@@ -3,7 +3,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 import get from 'lodash/get';
 
-import { SEND_PROBLEM_CSV_REQUEST } from 'global/reducers/intervention/constants';
+import { SEND_INTERVENTION_CSV_REQUEST } from 'global/reducers/intervention/constants';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import {
@@ -30,5 +30,5 @@ export function* sendInterventionCsv({ payload: { id } }) {
 }
 
 export default function* sendInterventionCsvSaga() {
-  yield takeLatest(SEND_PROBLEM_CSV_REQUEST, sendInterventionCsv);
+  yield takeLatest(SEND_INTERVENTION_CSV_REQUEST, sendInterventionCsv);
 }

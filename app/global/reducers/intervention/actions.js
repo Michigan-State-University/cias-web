@@ -1,17 +1,17 @@
 import { actionBuilder } from 'utils/actionBuilder';
 import {
-  FETCH_PROBLEM_REQUEST,
-  FETCH_PROBLEM_SUCCESS,
-  FETCH_PROBLEM_ERROR,
-  CREATE_PROBLEM_REQUEST,
-  CREATE_PROBLEM_SUCCESS,
-  CREATE_PROBLEM_ERROR,
-  EDIT_PROBLEM_REQUEST,
-  EDIT_PROBLEM_SUCCESS,
-  EDIT_PROBLEM_ERROR,
-  SEND_PROBLEM_CSV_REQUEST,
-  SEND_PROBLEM_CSV_SUCCESS,
-  SEND_PROBLEM_CSV_ERROR,
+  FETCH_INTERVENTION_REQUEST,
+  FETCH_INTERVENTION_SUCCESS,
+  FETCH_INTERVENTION_ERROR,
+  CREATE_INTERVENTION_REQUEST,
+  CREATE_INTERVENTION_SUCCESS,
+  CREATE_INTERVENTION_ERROR,
+  EDIT_INTERVENTION_REQUEST,
+  EDIT_INTERVENTION_SUCCESS,
+  EDIT_INTERVENTION_ERROR,
+  SEND_INTERVENTION_CSV_REQUEST,
+  SEND_INTERVENTION_CSV_SUCCESS,
+  SEND_INTERVENTION_CSV_ERROR,
   COPY_SESSION_SUCCESS,
   COPY_SESSION_REQUEST,
   REORDER_SESSION_LIST,
@@ -46,32 +46,32 @@ import {
 } from './constants';
 
 export const fetchInterventionRequest = id =>
-  actionBuilder(FETCH_PROBLEM_REQUEST, { id });
+  actionBuilder(FETCH_INTERVENTION_REQUEST, { id });
 export const fetchInterventionSuccess = intervention =>
-  actionBuilder(FETCH_PROBLEM_SUCCESS, { intervention });
+  actionBuilder(FETCH_INTERVENTION_SUCCESS, { intervention });
 export const fetchInterventionError = error =>
-  actionBuilder(FETCH_PROBLEM_ERROR, { error });
+  actionBuilder(FETCH_INTERVENTION_ERROR, { error });
 
 export const sendInterventionCsvRequest = id =>
-  actionBuilder(SEND_PROBLEM_CSV_REQUEST, { id });
+  actionBuilder(SEND_INTERVENTION_CSV_REQUEST, { id });
 export const sendInterventionCsvSuccess = message =>
-  actionBuilder(SEND_PROBLEM_CSV_SUCCESS, { message });
+  actionBuilder(SEND_INTERVENTION_CSV_SUCCESS, { message });
 export const sendInterventionCsvError = error =>
-  actionBuilder(SEND_PROBLEM_CSV_ERROR, { error });
+  actionBuilder(SEND_INTERVENTION_CSV_ERROR, { error });
 
 export const createInterventionRequest = () =>
-  actionBuilder(CREATE_PROBLEM_REQUEST, {});
+  actionBuilder(CREATE_INTERVENTION_REQUEST, {});
 export const createInterventionSuccess = intervention =>
-  actionBuilder(CREATE_PROBLEM_SUCCESS, { intervention });
+  actionBuilder(CREATE_INTERVENTION_SUCCESS, { intervention });
 export const createInterventionError = error =>
-  actionBuilder(CREATE_PROBLEM_ERROR, { error });
+  actionBuilder(CREATE_INTERVENTION_ERROR, { error });
 
 export const editInterventionRequest = payload =>
-  actionBuilder(EDIT_PROBLEM_REQUEST, payload);
+  actionBuilder(EDIT_INTERVENTION_REQUEST, payload);
 export const editInterventionSuccess = intervention =>
-  actionBuilder(EDIT_PROBLEM_SUCCESS, { intervention });
+  actionBuilder(EDIT_INTERVENTION_SUCCESS, { intervention });
 export const editInterventionError = () =>
-  actionBuilder(EDIT_PROBLEM_ERROR, {});
+  actionBuilder(EDIT_INTERVENTION_ERROR, {});
 
 export const copySessionRequest = payload =>
   actionBuilder(COPY_SESSION_REQUEST, payload);

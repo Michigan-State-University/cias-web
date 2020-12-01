@@ -5,18 +5,18 @@ import get from 'lodash/get';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import sessionSettingsReducer from './sessionSettings/reducer';
 import {
-  FETCH_PROBLEM_REQUEST,
-  FETCH_PROBLEM_SUCCESS,
-  FETCH_PROBLEM_ERROR,
-  CREATE_PROBLEM_REQUEST,
-  CREATE_PROBLEM_SUCCESS,
-  CREATE_PROBLEM_ERROR,
-  EDIT_PROBLEM_REQUEST,
-  EDIT_PROBLEM_SUCCESS,
-  EDIT_PROBLEM_ERROR,
-  SEND_PROBLEM_CSV_REQUEST,
-  SEND_PROBLEM_CSV_SUCCESS,
-  SEND_PROBLEM_CSV_ERROR,
+  FETCH_INTERVENTION_REQUEST,
+  FETCH_INTERVENTION_SUCCESS,
+  FETCH_INTERVENTION_ERROR,
+  CREATE_INTERVENTION_REQUEST,
+  CREATE_INTERVENTION_SUCCESS,
+  CREATE_INTERVENTION_ERROR,
+  EDIT_INTERVENTION_REQUEST,
+  EDIT_INTERVENTION_SUCCESS,
+  EDIT_INTERVENTION_ERROR,
+  SEND_INTERVENTION_CSV_REQUEST,
+  SEND_INTERVENTION_CSV_SUCCESS,
+  SEND_INTERVENTION_CSV_ERROR,
   COPY_SESSION_SUCCESS,
   REORDER_SESSION_LIST,
   UPDATE_SESSION_SETTINGS_REQUEST,
@@ -88,51 +88,51 @@ const findInterventionIndex = (intervention, sessionId) =>
 export const interventionReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case FETCH_PROBLEM_REQUEST:
+      case FETCH_INTERVENTION_REQUEST:
         if (state.intervention && action.payload.id === state.intervention.id)
           break;
         draft.loaders.fetchInterventionLoading = true;
         draft.loaders.fetchInterventionError = null;
         draft.intervention = null;
         break;
-      case FETCH_PROBLEM_SUCCESS:
+      case FETCH_INTERVENTION_SUCCESS:
         draft.loaders.fetchInterventionLoading = false;
-        // to discuss the solution in the future, FETCH_PROBLEM_SUCCESS overwrites FETCH_USERS_WITH_ACCESS_SUCCESS
+        // to discuss the solution in the future, FETCH_INTERVENTION_SUCCESS overwrites FETCH_USERS_WITH_ACCESS_SUCCESS
         const temp = get(draft.intervention, 'usersWithAccess', null);
         draft.intervention = action.payload.intervention;
         set(draft.intervention, 'usersWithAccess', temp);
         draft.cache.intervention = action.payload.intervention;
         break;
-      case FETCH_PROBLEM_ERROR:
+      case FETCH_INTERVENTION_ERROR:
         draft.loaders.fetchInterventionLoading = false;
         draft.errors.fetchInterventionError = action.payload.error;
         break;
-      case CREATE_PROBLEM_REQUEST:
+      case CREATE_INTERVENTION_REQUEST:
         draft.loaders.createInterventionLoading = true;
         draft.loaders.createInterventionError = null;
         break;
-      case CREATE_PROBLEM_SUCCESS:
+      case CREATE_INTERVENTION_SUCCESS:
         draft.loaders.createInterventionLoading = false;
         break;
-      case CREATE_PROBLEM_ERROR:
+      case CREATE_INTERVENTION_ERROR:
         break;
-      case EDIT_PROBLEM_REQUEST:
+      case EDIT_INTERVENTION_REQUEST:
         set(draft.intervention, action.payload.path, action.payload.value);
         break;
-      case EDIT_PROBLEM_SUCCESS:
+      case EDIT_INTERVENTION_SUCCESS:
         draft.intervention = action.payload.intervention;
         draft.cache.intervention = action.payload.intervention;
         break;
-      case EDIT_PROBLEM_ERROR:
+      case EDIT_INTERVENTION_ERROR:
         draft.intervention = draft.cache.intervention;
         break;
-      case SEND_PROBLEM_CSV_REQUEST:
+      case SEND_INTERVENTION_CSV_REQUEST:
         draft.loaders.sendCsvLoading = true;
         break;
-      case SEND_PROBLEM_CSV_SUCCESS:
+      case SEND_INTERVENTION_CSV_SUCCESS:
         draft.loaders.sendCsvLoading = false;
         break;
-      case SEND_PROBLEM_CSV_ERROR:
+      case SEND_INTERVENTION_CSV_ERROR:
         draft.loaders.sendCsvLoading = false;
         break;
       case COPY_SESSION_SUCCESS:

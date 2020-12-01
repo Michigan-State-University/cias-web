@@ -5,7 +5,7 @@ import {
   CREATE_QUESTION,
   GET_SESSION_QUESTION_GROUPS,
   UPDATE_INTERVENTION,
-  GET_PROBLEM_INTERVENTIONS,
+  GET_INTERVENTION_SESSIONS,
   UPDATE_QUESTION,
 } from '../../support/aliases';
 const {
@@ -25,7 +25,7 @@ describe('Access settings', () => {
     cy.createAlias(CREATE_QUESTION);
     cy.createAlias(GET_SESSION_QUESTION_GROUPS);
     cy.createAlias(UPDATE_INTERVENTION);
-    cy.createAlias(GET_PROBLEM_INTERVENTIONS);
+    cy.createAlias(GET_INTERVENTION_SESSIONS);
     cy.createAlias(UPDATE_QUESTION);
     cy.login(Cypress.env(ADMIN_EMAIL), Cypress.env(ADMIN_PASSWORD));
     cy.createIntervention();
@@ -100,7 +100,7 @@ describe('Access settings', () => {
     cy.reload();
     cy.wait([
       GET_SESSION_QUESTION_GROUPS,
-      GET_PROBLEM_INTERVENTIONS,
+      GET_INTERVENTION_SESSIONS,
       UPDATE_QUESTION,
     ]);
     cy.contains('Any registered participant').click({ force: true });
@@ -109,7 +109,7 @@ describe('Access settings', () => {
     // Publish Intervention
     cy.contains('Publish Intervention').click({ force: true });
     cy.contains('Confirm').click({ force: true });
-    cy.wait([UPDATE_INTERVENTION, GET_PROBLEM_INTERVENTIONS]);
+    cy.wait([UPDATE_INTERVENTION, GET_INTERVENTION_SESSIONS]);
     cy.contains('Close Intervention').should('be.visible');
 
     // Check Access logged in admin
@@ -138,9 +138,9 @@ describe('Access settings', () => {
     // Select access
     cy.reload();
     cy.getBySel('access-anyone-radio').should('be.visible');
-    cy.wait([GET_SESSION_QUESTION_GROUPS, GET_PROBLEM_INTERVENTIONS]);
+    cy.wait([GET_SESSION_QUESTION_GROUPS, GET_INTERVENTION_SESSIONS]);
     cy.contains('Specific registered participants').click({ force: true });
-    cy.wait([UPDATE_INTERVENTION, GET_PROBLEM_INTERVENTIONS]);
+    cy.wait([UPDATE_INTERVENTION, GET_INTERVENTION_SESSIONS]);
     cy.getBySel('access-invited-radio').should('be.visible');
     cy.getBySel('hidden-input').type(
       `${Cypress.env(PARTICIPANT_EMAIL)}{enter}`,

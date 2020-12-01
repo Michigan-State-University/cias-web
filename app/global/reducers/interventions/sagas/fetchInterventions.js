@@ -5,7 +5,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { fetchInterventionsSuccess, fetchInterventionsError } from '../actions';
-import { FETCH_PROBLEMS_REQUEST } from '../constants';
+import { FETCH_INTERVENTIONS_REQUEST } from '../constants';
 
 import messages from '../messages';
 
@@ -27,5 +27,5 @@ export function* fetchInterventions() {
   }
 }
 export default function* fetchInterventionsSaga() {
-  yield takeLatest(FETCH_PROBLEMS_REQUEST, fetchInterventions);
+  yield takeLatest(FETCH_INTERVENTIONS_REQUEST, fetchInterventions);
 }

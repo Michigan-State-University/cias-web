@@ -8,9 +8,9 @@ import { defaultMapper } from 'utils/mapResponseObjects';
 import messages from '../messages';
 import { copyInterventionSuccess } from '../actions';
 import {
-  COPY_PROBLEM_ERROR,
-  COPY_PROBLEM_REQUEST,
-  COPY_PROBLEM_SUCCESS,
+  COPY_INTERVENTION_ERROR,
+  COPY_INTERVENTION_REQUEST,
+  COPY_INTERVENTION_SUCCESS,
 } from '../constants';
 
 export function* copyIntervention({
@@ -29,15 +29,15 @@ export function* copyIntervention({
       }
     } else
       yield call(toast.success, formatMessage(messages.sendSuccess), {
-        toastId: COPY_PROBLEM_SUCCESS,
+        toastId: COPY_INTERVENTION_SUCCESS,
       });
   } catch (error) {
     yield call(toast.error, formatMessage(messages.copyError), {
-      toastId: COPY_PROBLEM_ERROR,
+      toastId: COPY_INTERVENTION_ERROR,
     });
   }
 }
 
 export default function* copyInterventionSaga() {
-  yield takeLatest(COPY_PROBLEM_REQUEST, copyIntervention);
+  yield takeLatest(COPY_INTERVENTION_REQUEST, copyIntervention);
 }

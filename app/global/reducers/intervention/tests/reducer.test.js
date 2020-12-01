@@ -5,18 +5,18 @@ import { actionBuilder } from 'utils/actionBuilder';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { createSession, createIntervention } from 'utils/reducerCreators';
 import {
-  FETCH_PROBLEM_REQUEST,
-  FETCH_PROBLEM_SUCCESS,
-  FETCH_PROBLEM_ERROR,
-  CREATE_PROBLEM_REQUEST,
-  CREATE_PROBLEM_SUCCESS,
-  CREATE_PROBLEM_ERROR,
-  EDIT_PROBLEM_REQUEST,
-  EDIT_PROBLEM_SUCCESS,
-  EDIT_PROBLEM_ERROR,
-  SEND_PROBLEM_CSV_REQUEST,
-  SEND_PROBLEM_CSV_SUCCESS,
-  SEND_PROBLEM_CSV_ERROR,
+  FETCH_INTERVENTION_REQUEST,
+  FETCH_INTERVENTION_SUCCESS,
+  FETCH_INTERVENTION_ERROR,
+  CREATE_INTERVENTION_REQUEST,
+  CREATE_INTERVENTION_SUCCESS,
+  CREATE_INTERVENTION_ERROR,
+  EDIT_INTERVENTION_REQUEST,
+  EDIT_INTERVENTION_SUCCESS,
+  EDIT_INTERVENTION_ERROR,
+  SEND_INTERVENTION_CSV_REQUEST,
+  SEND_INTERVENTION_CSV_SUCCESS,
+  SEND_INTERVENTION_CSV_ERROR,
   COPY_SESSION_SUCCESS,
   REORDER_SESSION_LIST,
   CHANGE_CURRENT_SESSION,
@@ -54,8 +54,8 @@ describe('intervention reducer', () => {
     cache: { intervention: createIntervention(2) },
   };
 
-  it('FETCH_PROBLEM_REQUEST', () => {
-    const action = actionBuilder(FETCH_PROBLEM_REQUEST, { id: 'test-2' });
+  it('FETCH_INTERVENTION_REQUEST', () => {
+    const action = actionBuilder(FETCH_INTERVENTION_REQUEST, { id: 'test-2' });
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.fetchInterventionLoading = true;
@@ -65,11 +65,14 @@ describe('intervention reducer', () => {
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('FETCH_PROBLEM_SUCCESS', () => {
+  it('FETCH_INTERVENTION_SUCCESS', () => {
     const payloadIntervention = {
       intervention: createIntervention(1),
     };
-    const action = actionBuilder(FETCH_PROBLEM_SUCCESS, payloadIntervention);
+    const action = actionBuilder(
+      FETCH_INTERVENTION_SUCCESS,
+      payloadIntervention,
+    );
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.fetchInterventionLoading = false;
@@ -84,9 +87,9 @@ describe('intervention reducer', () => {
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('FETCH_PROBLEM_ERROR', () => {
+  it('FETCH_INTERVENTION_ERROR', () => {
     const payloadError = { error: 'test-error' };
-    const action = actionBuilder(FETCH_PROBLEM_ERROR, payloadError);
+    const action = actionBuilder(FETCH_INTERVENTION_ERROR, payloadError);
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.fetchInterventionLoading = false;
@@ -95,8 +98,8 @@ describe('intervention reducer', () => {
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('CREATE_PROBLEM_REQUEST', () => {
-    const action = actionBuilder(CREATE_PROBLEM_REQUEST, {});
+  it('CREATE_INTERVENTION_REQUEST', () => {
+    const action = actionBuilder(CREATE_INTERVENTION_REQUEST, {});
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.createInterventionLoading = true;
@@ -105,8 +108,8 @@ describe('intervention reducer', () => {
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('CREATE_PROBLEM_SUCCESS', () => {
-    const action = actionBuilder(CREATE_PROBLEM_SUCCESS, {});
+  it('CREATE_INTERVENTION_SUCCESS', () => {
+    const action = actionBuilder(CREATE_INTERVENTION_SUCCESS, {});
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.createInterventionLoading = false;
@@ -114,15 +117,15 @@ describe('intervention reducer', () => {
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('CREATE_PROBLEM_ERROR', () => {
-    const action = actionBuilder(CREATE_PROBLEM_ERROR, {});
+  it('CREATE_INTERVENTION_ERROR', () => {
+    const action = actionBuilder(CREATE_INTERVENTION_ERROR, {});
 
     expect(interventionReducer(mockState, action)).toEqual(mockState);
   });
 
-  it('EDIT_PROBLEM_REQUEST', () => {
+  it('EDIT_INTERVENTION_REQUEST', () => {
     const payloadValue = { path: 'status', value: 'published' };
-    const action = actionBuilder(EDIT_PROBLEM_REQUEST, payloadValue);
+    const action = actionBuilder(EDIT_INTERVENTION_REQUEST, payloadValue);
 
     const expectedState = cloneDeep(mockState);
     expectedState.intervention.status = 'published';
@@ -130,9 +133,12 @@ describe('intervention reducer', () => {
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('EDIT_PROBLEM_SUCCESS', () => {
+  it('EDIT_INTERVENTION_SUCCESS', () => {
     const payloadIntervention = { intervention: createIntervention(1) };
-    const action = actionBuilder(EDIT_PROBLEM_SUCCESS, payloadIntervention);
+    const action = actionBuilder(
+      EDIT_INTERVENTION_SUCCESS,
+      payloadIntervention,
+    );
 
     const expectedState = cloneDeep(mockState);
     expectedState.intervention = payloadIntervention.intervention;
@@ -141,8 +147,8 @@ describe('intervention reducer', () => {
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('EDIT_PROBLEM_ERROR', () => {
-    const action = actionBuilder(EDIT_PROBLEM_ERROR, {});
+  it('EDIT_INTERVENTION_ERROR', () => {
+    const action = actionBuilder(EDIT_INTERVENTION_ERROR, {});
 
     const expectedState = cloneDeep(mockState);
     expectedState.intervention = expectedState.cache.intervention;
@@ -150,8 +156,8 @@ describe('intervention reducer', () => {
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('SEND_PROBLEM_CSV_REQUEST', () => {
-    const action = actionBuilder(SEND_PROBLEM_CSV_REQUEST, {});
+  it('SEND_INTERVENTION_CSV_REQUEST', () => {
+    const action = actionBuilder(SEND_INTERVENTION_CSV_REQUEST, {});
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.sendCsvLoading = true;
@@ -159,8 +165,8 @@ describe('intervention reducer', () => {
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('SEND_PROBLEM_CSV_SUCCESS', () => {
-    const action = actionBuilder(SEND_PROBLEM_CSV_SUCCESS, {});
+  it('SEND_INTERVENTION_CSV_SUCCESS', () => {
+    const action = actionBuilder(SEND_INTERVENTION_CSV_SUCCESS, {});
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.sendCsvLoading = false;
@@ -168,8 +174,8 @@ describe('intervention reducer', () => {
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });
 
-  it('SEND_PROBLEM_CSV_ERROR', () => {
-    const action = actionBuilder(SEND_PROBLEM_CSV_ERROR, {});
+  it('SEND_INTERVENTION_CSV_ERROR', () => {
+    const action = actionBuilder(SEND_INTERVENTION_CSV_ERROR, {});
 
     const expectedState = cloneDeep(mockState);
     expectedState.loaders.sendCsvLoading = false;

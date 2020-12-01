@@ -1,31 +1,31 @@
 import { actionBuilder } from 'utils/actionBuilder';
 
 import {
-  FETCH_PROBLEMS_REQUEST,
-  FETCH_PROBLEMS_ERROR,
-  FETCH_PROBLEMS_SUCCESS,
-  COPY_PROBLEM_REQUEST,
-  COPY_PROBLEM_SUCCESS,
-  ARCHIVE_PROBLEM_REQUEST,
-  ARCHIVE_PROBLEM_SUCCESS,
-  ARCHIVE_PROBLEM_ERROR,
+  FETCH_INTERVENTIONS_REQUEST,
+  FETCH_INTERVENTIONS_ERROR,
+  FETCH_INTERVENTIONS_SUCCESS,
+  COPY_INTERVENTION_REQUEST,
+  COPY_INTERVENTION_SUCCESS,
+  ARCHIVE_INTERVENTION_REQUEST,
+  ARCHIVE_INTERVENTION_SUCCESS,
+  ARCHIVE_INTERVENTION_ERROR,
 } from './constants';
 
 export const fetchInterventionsRequest = () =>
-  actionBuilder(FETCH_PROBLEMS_REQUEST, {});
+  actionBuilder(FETCH_INTERVENTIONS_REQUEST, {});
 export const fetchInterventionsSuccess = interventions =>
-  actionBuilder(FETCH_PROBLEMS_SUCCESS, { interventions });
+  actionBuilder(FETCH_INTERVENTIONS_SUCCESS, { interventions });
 export const fetchInterventionsError = error =>
-  actionBuilder(FETCH_PROBLEMS_ERROR, { error });
+  actionBuilder(FETCH_INTERVENTIONS_ERROR, { error });
 
 export const copyInterventionRequest = payload =>
-  actionBuilder(COPY_PROBLEM_REQUEST, payload);
+  actionBuilder(COPY_INTERVENTION_REQUEST, payload);
 export const copyInterventionSuccess = intervention =>
-  actionBuilder(COPY_PROBLEM_SUCCESS, { intervention });
+  actionBuilder(COPY_INTERVENTION_SUCCESS, { intervention });
 
 export const archiveInterventionRequest = interventionId =>
-  actionBuilder(ARCHIVE_PROBLEM_REQUEST, { interventionId });
+  actionBuilder(ARCHIVE_INTERVENTION_REQUEST, { interventionId });
 export const archiveInterventionSuccess = interventionId =>
-  actionBuilder(ARCHIVE_PROBLEM_SUCCESS, { interventionId });
+  actionBuilder(ARCHIVE_INTERVENTION_SUCCESS, { interventionId });
 export const archiveInterventionFailure = interventionId =>
-  actionBuilder(ARCHIVE_PROBLEM_ERROR, { interventionId });
+  actionBuilder(ARCHIVE_INTERVENTION_ERROR, { interventionId });

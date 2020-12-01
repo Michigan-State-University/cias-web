@@ -15,7 +15,10 @@ import createInterventionSaga, {
   createIntervention,
 } from 'global/reducers/intervention/sagas/createIntervention';
 import { createInterventionSuccess } from '../../actions';
-import { CREATE_PROBLEM_ERROR, CREATE_PROBLEM_REQUEST } from '../../constants';
+import {
+  CREATE_INTERVENTION_ERROR,
+  CREATE_INTERVENTION_REQUEST,
+} from '../../constants';
 
 describe('createIntervention saga', () => {
   const mockApiResponse = apiInterventionResponse();
@@ -36,7 +39,7 @@ describe('createIntervention saga', () => {
         toast.error,
         formatMessage(globalMessages.createInterventionError),
         {
-          toastId: CREATE_PROBLEM_ERROR,
+          toastId: CREATE_INTERVENTION_ERROR,
         },
       )
       .run();
@@ -46,7 +49,7 @@ describe('createIntervention saga', () => {
     const sagaFunction = createInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(CREATE_PROBLEM_REQUEST, createIntervention),
+      takeLatest(CREATE_INTERVENTION_REQUEST, createIntervention),
     );
   });
 });

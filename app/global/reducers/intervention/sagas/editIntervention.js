@@ -8,7 +8,10 @@ import { formatMessage } from 'utils/intlOutsideReact';
 
 import { makeSelectIntervention } from '../selectors';
 import { editInterventionSuccess } from '../actions';
-import { EDIT_PROBLEM_REQUEST, EDIT_PROBLEM_ERROR } from '../constants';
+import {
+  EDIT_INTERVENTION_REQUEST,
+  EDIT_INTERVENTION_ERROR,
+} from '../constants';
 
 export function* editIntervention() {
   const intervention = yield select(makeSelectIntervention());
@@ -25,11 +28,11 @@ export function* editIntervention() {
       toast.error,
       formatMessage(globalMessages.editInterventionError),
       {
-        toastId: EDIT_PROBLEM_ERROR,
+        toastId: EDIT_INTERVENTION_ERROR,
       },
     );
   }
 }
 export default function* editInterventionSaga() {
-  yield takeLatest(EDIT_PROBLEM_REQUEST, editIntervention);
+  yield takeLatest(EDIT_INTERVENTION_REQUEST, editIntervention);
 }

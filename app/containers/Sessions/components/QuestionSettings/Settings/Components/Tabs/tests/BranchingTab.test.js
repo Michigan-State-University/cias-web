@@ -25,7 +25,7 @@ describe('<BranchingTab />', () => {
     onAddCase: jest.fn(),
     onRemoveCase: jest.fn(),
     onUpdateCase: jest.fn(),
-    fetchProblem: jest.fn(),
+    fetchIntervention: jest.fn(),
   };
 
   const initialState = {
@@ -36,11 +36,11 @@ describe('<BranchingTab />', () => {
         createQuestion(2, gridQuestion.id),
       ],
     },
-    problem: {
+    intervention: {
       loaders: {
-        fetchProblemLoading: false,
+        fetchInterventionLoading: false,
       },
-      problem: createIntervention(),
+      intervention: createIntervention(),
     },
   };
 

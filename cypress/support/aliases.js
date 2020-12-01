@@ -3,7 +3,7 @@ export const GET_SESSION_QUESTION_GROUPS = '@getSessionQuestionGroups';
 export const CREATE_QUESTION = '@createQuestion';
 export const UPDATE_QUESTION = '@updateQuestion';
 export const ANSWER_QUESTION = '@answerQuestion';
-export const GET_PROBLEM_INTERVENTIONS = '@interventionSessions';
+export const GET_INTERVENTION_SESSIONS = '@interventionSessions';
 export const LOGIN = '@login';
 
 export const ALIASES = {
@@ -22,10 +22,10 @@ export const ALIASES = {
     URL: '**/sessions/*/question_groups',
     ALIAS: GET_SESSION_QUESTION_GROUPS.slice(1),
   },
-  [GET_PROBLEM_INTERVENTIONS]: {
+  [GET_INTERVENTION_SESSIONS]: {
     METHOD: 'GET',
     URL: '**/interventions/*/sessions',
-    ALIAS: GET_PROBLEM_INTERVENTIONS.slice(1),
+    ALIAS: GET_INTERVENTION_SESSIONS.slice(1),
   },
   [CREATE_QUESTION]: {
     METHOD: 'POST',

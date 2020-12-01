@@ -11,7 +11,10 @@ import {
   archiveInterventionFailure,
   archiveInterventionSuccess,
 } from '../actions';
-import { ARCHIVE_PROBLEM_REQUEST, ARCHIVE_PROBLEM_ERROR } from '../constants';
+import {
+  ARCHIVE_INTERVENTION_REQUEST,
+  ARCHIVE_INTERVENTION_ERROR,
+} from '../constants';
 
 export function* archiveIntervention({ payload: { interventionId } }) {
   const requestURL = `v1/interventions/${interventionId}`;
@@ -30,11 +33,11 @@ export function* archiveIntervention({ payload: { interventionId } }) {
       toast.error,
       formatMessage(globalMessages.archiveInterventionError),
       {
-        toastId: ARCHIVE_PROBLEM_ERROR,
+        toastId: ARCHIVE_INTERVENTION_ERROR,
       },
     );
   }
 }
 export default function* archiveInterventionSaga() {
-  yield takeLatest(ARCHIVE_PROBLEM_REQUEST, archiveIntervention);
+  yield takeLatest(ARCHIVE_INTERVENTION_REQUEST, archiveIntervention);
 }

@@ -3,16 +3,16 @@ import isEmpty from 'lodash/isEmpty';
 
 import { archived } from 'models/Status/StatusTypes';
 import {
-  COPY_PROBLEM_SUCCESS,
-  FETCH_PROBLEMS_ERROR,
-  FETCH_PROBLEMS_REQUEST,
-  FETCH_PROBLEMS_SUCCESS,
-  ARCHIVE_PROBLEM_ERROR,
-  ARCHIVE_PROBLEM_REQUEST,
-  ARCHIVE_PROBLEM_SUCCESS,
+  COPY_INTERVENTION_SUCCESS,
+  FETCH_INTERVENTIONS_ERROR,
+  FETCH_INTERVENTIONS_REQUEST,
+  FETCH_INTERVENTIONS_SUCCESS,
+  ARCHIVE_INTERVENTION_ERROR,
+  ARCHIVE_INTERVENTION_REQUEST,
+  ARCHIVE_INTERVENTION_SUCCESS,
 } from './constants';
 
-import { CREATE_PROBLEM_SUCCESS } from '../intervention';
+import { CREATE_INTERVENTION_SUCCESS } from '../intervention';
 
 export const initialState = {
   interventions: [],
@@ -27,26 +27,26 @@ export const initialState = {
 export const interventionsReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case FETCH_PROBLEMS_REQUEST:
+      case FETCH_INTERVENTIONS_REQUEST:
         if (isEmpty(state.interventions)) draft.fetchInterventionLoading = true;
         draft.fetchInterventionError = null;
         break;
-      case FETCH_PROBLEMS_SUCCESS:
+      case FETCH_INTERVENTIONS_SUCCESS:
         draft.fetchInterventionLoading = false;
         draft.interventions = action.payload.interventions;
         break;
-      case FETCH_PROBLEMS_ERROR:
+      case FETCH_INTERVENTIONS_ERROR:
         draft.fetchInterventionLoading = false;
         draft.fetchInterventionError = action.payload.error;
         break;
-      case CREATE_PROBLEM_SUCCESS:
-      case COPY_PROBLEM_SUCCESS:
+      case CREATE_INTERVENTION_SUCCESS:
+      case COPY_INTERVENTION_SUCCESS:
         draft.interventions = [
           ...state.interventions,
           action.payload.intervention,
         ];
         break;
-      case ARCHIVE_PROBLEM_REQUEST:
+      case ARCHIVE_INTERVENTION_REQUEST:
         let interventionIndex = draft.interventions.findIndex(
           ({ id }) => id === action.payload.interventionId,
         );
@@ -54,10 +54,10 @@ export const interventionsReducer = (state = initialState, action) =>
         draft.cache.archiveIntervention =
           state.interventions[interventionIndex];
         break;
-      case ARCHIVE_PROBLEM_SUCCESS:
+      case ARCHIVE_INTERVENTION_SUCCESS:
         draft.cache.archiveIntervention = null;
         break;
-      case ARCHIVE_PROBLEM_ERROR:
+      case ARCHIVE_INTERVENTION_ERROR:
         interventionIndex = draft.interventions.findIndex(
           ({ id }) => id === action.payload.interventionId,
         );

@@ -18,8 +18,8 @@ import {
   archiveInterventionFailure,
 } from '../../actions';
 import {
-  ARCHIVE_PROBLEM_ERROR,
-  ARCHIVE_PROBLEM_REQUEST,
+  ARCHIVE_INTERVENTION_ERROR,
+  ARCHIVE_INTERVENTION_REQUEST,
 } from '../../constants';
 
 describe('archiveIntervention saga', () => {
@@ -44,7 +44,7 @@ describe('archiveIntervention saga', () => {
         toast.error,
         formatMessage(globalMessages.archiveInterventionError),
         {
-          toastId: ARCHIVE_PROBLEM_ERROR,
+          toastId: ARCHIVE_INTERVENTION_ERROR,
         },
       )
       .run();
@@ -54,7 +54,7 @@ describe('archiveIntervention saga', () => {
     const sagaFunction = archiveInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(ARCHIVE_PROBLEM_REQUEST, archiveIntervention),
+      takeLatest(ARCHIVE_INTERVENTION_REQUEST, archiveIntervention),
     );
   });
 });

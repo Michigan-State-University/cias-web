@@ -16,7 +16,10 @@ import editInterventionSaga, {
 } from 'global/reducers/intervention/sagas/editIntervention';
 import { editInterventionSuccess } from '../../actions';
 import { initialState } from '../../reducer';
-import { EDIT_PROBLEM_ERROR, EDIT_PROBLEM_REQUEST } from '../../constants';
+import {
+  EDIT_INTERVENTION_ERROR,
+  EDIT_INTERVENTION_REQUEST,
+} from '../../constants';
 
 describe('editIntervention saga', () => {
   const mockIntervention = createIntervention();
@@ -45,7 +48,7 @@ describe('editIntervention saga', () => {
       .withState(mockState)
       .provide([[matchers.call.fn(axios.patch), throwError(error)]])
       .call(toast.error, formatMessage(globalMessages.editInterventionError), {
-        toastId: EDIT_PROBLEM_ERROR,
+        toastId: EDIT_INTERVENTION_ERROR,
       })
       .run();
   });
@@ -54,7 +57,7 @@ describe('editIntervention saga', () => {
     const sagaFunction = editInterventionSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(EDIT_PROBLEM_REQUEST, editIntervention),
+      takeLatest(EDIT_INTERVENTION_REQUEST, editIntervention),
     );
   });
 });

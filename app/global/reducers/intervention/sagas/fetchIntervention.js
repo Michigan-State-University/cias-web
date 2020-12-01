@@ -3,7 +3,7 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import orderBy from 'lodash/orderBy';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
-import { FETCH_PROBLEM_REQUEST } from '../constants';
+import { FETCH_INTERVENTION_REQUEST } from '../constants';
 import { fetchInterventionSuccess, fetchInterventionError } from '../actions';
 
 export function* fetchIntervention({ payload: { id } }) {
@@ -23,5 +23,5 @@ export function* fetchIntervention({ payload: { id } }) {
 }
 
 export default function* fetchInterventionSaga() {
-  yield takeLatest(FETCH_PROBLEM_REQUEST, fetchIntervention);
+  yield takeLatest(FETCH_INTERVENTION_REQUEST, fetchIntervention);
 }

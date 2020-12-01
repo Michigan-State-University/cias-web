@@ -13,7 +13,7 @@ import {
   sendInterventionCsvSuccess,
   sendInterventionCsvError,
 } from '../../actions';
-import { SEND_PROBLEM_CSV_REQUEST } from '../../constants';
+import { SEND_INTERVENTION_CSV_REQUEST } from '../../constants';
 import messages from '../../messages';
 import { sendInterventionCsvSaga } from '../index';
 
@@ -45,7 +45,7 @@ describe('sendInterventionCsv saga', () => {
     const sagaFunction = sendInterventionCsvSaga();
     const takeLatestDescriptor = sagaFunction.next().value;
     expect(takeLatestDescriptor).toEqual(
-      takeLatest(SEND_PROBLEM_CSV_REQUEST, sendInterventionCsv),
+      takeLatest(SEND_INTERVENTION_CSV_REQUEST, sendInterventionCsv),
     );
   });
 });
