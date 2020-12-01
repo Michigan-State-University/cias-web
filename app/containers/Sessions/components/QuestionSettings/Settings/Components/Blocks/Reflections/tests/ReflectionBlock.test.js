@@ -1,32 +1,35 @@
 /**
  *
- * Tests for Reflection
+ * Tests for ReflectionBlock
  *
  */
 
 import React from 'react';
 import { render } from '@testing-library/react';
+import { IntlProvider } from 'react-intl';
+import { DEFAULT_LOCALE } from 'i18n';
 import { Provider } from 'react-redux';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
-import { multiQuestion } from 'models/Intervention/QuestionTypes';
-import { reflectionType, bodyAnimationType } from 'models/Narrator/BlockTypes';
+import { multiQuestion } from 'models/Session/QuestionTypes';
+import { reflectionType } from 'models/Narrator/BlockTypes';
 import { createQuestion } from 'utils/reducerCreators';
 import { formatMessage } from 'utils/intlOutsideReact';
+import { instantiateBlockForType } from 'models/Session/utils';
 
-import { instantiateBlockForType } from 'models/Intervention/utils';
-import Reflection from '../Reflection';
+import ReflectionBlock from '../ReflectionBlock';
 
-describe('<Reflection />', () => {
+describe('<ReflectionBlock />', () => {
   const mockFunctions = {
     formatMessage,
-    updateText: jest.fn(),
-    updateNarratorPreviewData: jest.fn(),
-    updateNarratorPreviewAnimation: jest.fn(),
+    updateAnimation: jest.fn(),
+    switchToSpeech: jest.fn(),
+    updateQuestion: jest.fn(),
   };
 
   const block = {
     ...instantiateBlockForType(reflectionType),
+    question_id: 'test',
     reflections: [
       {
         payload: '1',
@@ -37,31 +40,26 @@ describe('<Reflection />', () => {
     ],
   };
 
+  const singleQuestion = createQuestion();
+  const multipleQuestion = createQuestion(1, multiQuestion.id);
+
+  const questions = [singleQuestion, multipleQuestion];
+
   const defaultProps = {
-    reflection: {
-      ...block.reflections[0],
-    },
-    blockIndex: 0,
-    reflectionIndex: 0,
-    id: 'test',
-    previewData: {
-      type: bodyAnimationType,
-      animation: 'standStill',
-    },
-    updateLoader: false,
     block,
+    blockIndex: 0,
+    id: 'test',
+    questions: [],
+    currentQuestionType: singleQuestion.id,
     disabled: false,
     ...mockFunctions,
   };
-
-  const singleQuestion = createQuestion();
-  const multipleQuestion = createQuestion(1, multiQuestion.id);
 
   const initialState = {
     questions: {
       selectedQuestion: singleQuestion.id,
       chosenQuestionId: multipleQuestion.id,
-      questions: [singleQuestion, multipleQuestion],
+      questions,
     },
   };
 
@@ -71,7 +69,9 @@ describe('<Reflection />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <Reflection {...defaultProps} />
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <ReflectionBlock {...defaultProps} />
+        </IntlProvider>
       </Provider>,
     );
     expect(spy).not.toHaveBeenCalled();
@@ -80,7 +80,9 @@ describe('<Reflection />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
-        <Reflection {...defaultProps} />
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <ReflectionBlock {...defaultProps} />
+        </IntlProvider>
       </Provider>,
     );
     expect(container).toMatchSnapshot();

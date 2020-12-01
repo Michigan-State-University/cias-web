@@ -91,7 +91,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
         <input
           checked=""
           class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
-          data-cy="branching-problem-toggle"
+          data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           type="checkbox"
         />
@@ -110,7 +110,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
         <input
           checked=""
           class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
-          data-cy="branching-problem-toggle"
+          data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           type="checkbox"
         />
@@ -333,7 +333,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Box-sc-14m3exe-0 styled__DashedBox-sc-8nb5s7-0 gnAZuH hGHPHS"
+      class="Box-sc-14m3exe-0 styled__DashedBox-p9nasd-0 gnAZuH ffciLv"
     >
       + Add another case
     </div>

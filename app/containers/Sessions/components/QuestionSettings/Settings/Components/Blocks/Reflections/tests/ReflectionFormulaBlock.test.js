@@ -1,6 +1,6 @@
 /**
  *
- * Tests for BranchingTab
+ * Tests for ReflectionFormulaBlock
  *
  */
 
@@ -8,59 +8,57 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { multiQuestion, gridQuestion } from 'models/Intervention/QuestionTypes';
-import { createProblem, createQuestion } from 'utils/reducerCreators';
+import { reflectionType } from 'models/Narrator/BlockTypes';
+import { instantiateBlockForType } from 'models/Session/utils';
+import { singleQuestion } from 'models/Session/QuestionTypes';
 import { formatMessage } from 'utils/intlOutsideReact';
-
 import { createTestStore } from 'utils/testUtils/storeUtils';
-import BranchingTab from '../BranchingTab';
 
-describe('<BranchingTab />', () => {
+import ReflectionFormulaBlock from '../ReflectionFormulaBlock';
+
+describe('<ReflectionFormulaBlock />', () => {
   const mockFunctions = {
     formatMessage,
+    updateAnimation: jest.fn(),
+    switchToSpeech: jest.fn(),
+    switchToReflection: jest.fn(),
+    updateAction: jest.fn(),
     onFormulaUpdate: jest.fn(),
     onAddCase: jest.fn(),
-    onRemoveCase: jest.fn(),
-    onUpdateCase: jest.fn(),
-    fetchProblem: jest.fn(),
   };
 
-  const initialState = {
-    questions: {
-      questions: [
-        createQuestion(),
-        createQuestion(1, multiQuestion.id),
-        createQuestion(2, gridQuestion.id),
-      ],
-    },
-    problem: {
-      loaders: {
-        fetchProblemLoading: false,
+  const block = {
+    ...instantiateBlockForType(reflectionType),
+    question_id: 'test',
+    reflections: [
+      {
+        payload: '1',
+        text: ['1'],
+        value: '1',
+        variable: '1',
       },
-      problem: createProblem(),
-    },
+    ],
   };
 
   const defaultProps = {
-    formula: { payload: '', patterns: [] },
+    block,
+    blockIndex: 0,
     id: 'test',
+    currentQuestionType: singleQuestion.id,
     disabled: false,
     ...mockFunctions,
   };
 
-  const store = createTestStore(initialState);
+  const store = createTestStore({});
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <MemoryRouter>
-            <BranchingTab {...defaultProps} />
-          </MemoryRouter>
+          <ReflectionFormulaBlock {...defaultProps} />
         </IntlProvider>
       </Provider>,
     );
@@ -71,9 +69,7 @@ describe('<BranchingTab />', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <MemoryRouter>
-            <BranchingTab {...defaultProps} />
-          </MemoryRouter>
+          <ReflectionFormulaBlock {...defaultProps} />
         </IntlProvider>
       </Provider>,
     );

@@ -11,7 +11,7 @@ import { IntlProvider } from 'react-intl';
 import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { singleQuestion } from 'models/Session/QuestionTypes';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 

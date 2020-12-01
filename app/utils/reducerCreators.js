@@ -1,5 +1,5 @@
 import { ids } from 'containers/SettingsPanel/utils';
-import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { singleQuestion } from 'models/Session/QuestionTypes';
 
 export const createQuestion = (id = 0, type = singleQuestion.id) => ({
   id: `question-test-${id}`,

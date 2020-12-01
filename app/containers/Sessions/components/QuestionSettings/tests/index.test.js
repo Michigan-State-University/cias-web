@@ -15,7 +15,7 @@ import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import QuestionSettings from '../index';
 
-describe('<AnswerInterventionPage />', () => {
+describe('<QuestionSettings />', () => {
   const defaultProps = {
     toggleSettings: jest.fn(),
   };

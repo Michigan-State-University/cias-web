@@ -10,7 +10,7 @@ import { Provider } from 'react-redux';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { createQuestion } from 'utils/reducerCreators';
-import { multiQuestion } from 'models/Intervention/QuestionTypes';
+import { multiQuestion } from 'models/Session/QuestionTypes';
 
 import QuestionListDropdown from '../QuestionListDropdown';
 

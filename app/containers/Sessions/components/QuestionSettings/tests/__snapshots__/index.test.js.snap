@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<AnswerInterventionPage /> Should render and match the snapshot 1`] = `
+exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-14m3exe-0 styled__Container-sc-1ip4jpu-1 cidtM iQfeEw"
+  class="Box-sc-14m3exe-0 styled__Container-qhc4ah-1 cidtM kGYNVl"
 >
   <div
-    class="Box-sc-14m3exe-0 styled__SettingsBar-sc-1ip4jpu-0 fPHmQW kegQZz"
+    class="Box-sc-14m3exe-0 styled__SettingsBar-qhc4ah-0 fPHmQW dHfBam"
     height="100%"
   >
     <div
@@ -63,7 +63,7 @@ exports[`<AnswerInterventionPage /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <button
-    class="styled__OpenButton-sc-1ip4jpu-2 bwFvzJ"
+    class="styled__OpenButton-qhc4ah-2 kYjWaU"
   >
     <img
       alt="show-settings"

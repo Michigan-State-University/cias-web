@@ -1,32 +1,28 @@
 /**
  *
- * Tests for ReflectionFormulaBlock
+ * Tests for ReflectionBlock
  *
  */
 
 import React from 'react';
 import { Provider } from 'react-redux';
 import { render } from '@testing-library/react';
-import { IntlProvider } from 'react-intl';
-import { DEFAULT_LOCALE } from 'i18n';
 
-import { reflectionType } from 'models/Narrator/BlockTypes';
-import { instantiateBlockForType } from 'models/Intervention/utils';
-import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { reflectionType, bodyAnimationType } from 'models/Narrator/BlockTypes';
+import { instantiateBlockForType } from 'models/Session/utils';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
-import ReflectionFormulaBlock from '../ReflectionFormulaBlock';
+import ReflectionFormula from '../ReflectionFormula';
 
-describe('<ReflectionFormulaBlock />', () => {
+describe('<ReflectionBlock />', () => {
   const mockFunctions = {
     formatMessage,
-    updateAnimation: jest.fn(),
-    switchToSpeech: jest.fn(),
-    switchToReflection: jest.fn(),
-    updateAction: jest.fn(),
-    onFormulaUpdate: jest.fn(),
-    onAddCase: jest.fn(),
+    updateText: jest.fn(),
+    updateCase: jest.fn(),
+    updateNarratorPreviewData: jest.fn(),
+    updateNarratorPreviewAnimation: jest.fn(),
+    onRemoveCase: jest.fn(),
   };
 
   const block = {
@@ -43,10 +39,15 @@ describe('<ReflectionFormulaBlock />', () => {
   };
 
   const defaultProps = {
-    block,
+    reflection: block.reflections[0],
     blockIndex: 0,
+    reflectionIndex: 0,
     id: 'test',
-    currentQuestionType: singleQuestion.id,
+    previewData: {
+      type: bodyAnimationType,
+      animation: 'standStill',
+    },
+    block,
     disabled: false,
     ...mockFunctions,
   };
@@ -57,9 +58,7 @@ describe('<ReflectionFormulaBlock />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <ReflectionFormulaBlock {...defaultProps} />
-        </IntlProvider>
+        <ReflectionFormula {...defaultProps} />
       </Provider>,
     );
     expect(spy).not.toHaveBeenCalled();
@@ -68,9 +67,7 @@ describe('<ReflectionFormulaBlock />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
-          <ReflectionFormulaBlock {...defaultProps} />
-        </IntlProvider>
+        <ReflectionFormula {...defaultProps} />
       </Provider>,
     );
     expect(container).toMatchSnapshot();

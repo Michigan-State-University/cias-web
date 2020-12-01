@@ -91,7 +91,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
         <input
           checked=""
           class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
-          data-cy="branching-problem-toggle"
+          data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           type="checkbox"
         />
@@ -109,7 +109,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
       >
         <input
           class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
-          data-cy="branching-problem-toggle"
+          data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           type="checkbox"
         />
