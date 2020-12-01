@@ -23,7 +23,7 @@ export default defineMessages({
   },
   giveUserAccessError: {
     id: `${scope}.giveUserAccessError`,
-    defaultMessage: 'Cannot give user/users access to session',
+    defaultMessage: 'Cannot give user/users access to intervention',
   },
   changeAccessSettingFailure: {
     id: `${scope}.changeAccessSettingFailure`,
@@ -31,7 +31,7 @@ export default defineMessages({
   },
   revokeAccessError: {
     id: `${scope}.revokeAccessError`,
-    defaultMessage: 'Cannot revoke user access to session',
+    defaultMessage: 'Cannot revoke user access to intervention',
   },
   sendInviteSuccess: {
     id: `${scope}.sendInviteSuccess`,

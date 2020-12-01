@@ -23,7 +23,7 @@ export default defineMessages({
   },
   confirmationTile: {
     id: `${scope}.confirmationTile`,
-    defaultMessage: 'Are you sure you want to publish the session?',
+    defaultMessage: 'Are you sure you want to publish the intervention?',
   },
   irreversibleInfo: {
     id: `${scope}.irreversible`,
@@ -47,8 +47,8 @@ export default defineMessages({
     defaultMessage: 'You can still edit participants',
   },
   duplicateInfo: {
-    id: `${scope}.editParticipants`,
+    id: `${scope}.duplicateInfo`,
     defaultMessage:
-      'You can duplicate the session as a draft (e.g. if you need to edit content) ',
+      'You can duplicate the intervention as a draft (e.g. if you need to edit content) ',
   },
 });
