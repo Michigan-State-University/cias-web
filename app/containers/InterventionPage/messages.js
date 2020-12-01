@@ -10,7 +10,7 @@ export const scope = 'app.containers.InterventionPage';
 export default defineMessages({
   createIntervention: {
     id: `${scope}.createIntervention`,
-    defaultMessage: 'Create a new session',
+    defaultMessage: 'Create a new intervention',
   },
   myInterventions: {
     id: `${scope}.myInterventions`,
