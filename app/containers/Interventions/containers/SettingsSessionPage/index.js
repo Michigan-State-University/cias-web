@@ -17,7 +17,7 @@ import {
   getSessionSaga,
 } from 'global/reducers/session';
 
-import SessionSettings from 'containers/Interventions/containers/SettingsInterventionPage/components/SessionSettings';
+import SessionSettings from 'containers/Interventions/containers/SettingsSessionPage/components/SessionSettings';
 import messages from './messages';
 import { StyledColumn } from './styled';
 

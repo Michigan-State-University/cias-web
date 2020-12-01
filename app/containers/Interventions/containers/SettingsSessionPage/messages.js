@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.SettingsInterventionPage';
+export const scope = 'app.containers.SettingsSessionPage';
 
 export default defineMessages({
   pageTitle: {

@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.SettingsInterventionPage.Components';
+export const scope = 'app.containers.SettingsSessionPage.Components';
 
 export default defineMessages({
   placeholder: {

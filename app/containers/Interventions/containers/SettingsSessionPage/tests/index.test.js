@@ -9,7 +9,7 @@ import { createTestStore } from 'utils/testUtils/storeUtils';
 import createModalForTests from 'utils/createModalForTests';
 import SettingsInterventionPage from '../index';
 
-describe('<SettingsInterventionPage />', () => {
+describe('<SettingsSessionPage />', () => {
   beforeEach(() => {
     createModalForTests();
   });

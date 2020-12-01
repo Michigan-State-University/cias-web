@@ -19,7 +19,7 @@ import ProblemDetailsPage from 'containers/ProblemDetailsPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
-import SettingsInterventionPage from 'containers/Interventions/containers/SettingsInterventionPage';
+import SettingsInterventionPage from 'containers/Interventions/containers/SettingsSessionPage';
 import AccountSettings from 'containers/AccountSettings/Loadable';
 import ResetPasswordPage from 'containers/ResetPasswordPage/Loadable';
 import SetNewPasswordPage from 'containers/SetNewPasswordPage/Loadable';
