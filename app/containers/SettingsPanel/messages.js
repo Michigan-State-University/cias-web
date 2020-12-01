@@ -15,7 +15,7 @@ export default defineMessages({
   },
   subheader: {
     id: `${scope}.subheader`,
-    defaultMessage: 'Who can access this session?',
+    defaultMessage: 'Who can access this intervention?',
   },
   anyoneWithTheLinkLabel: {
     id: `${scope}.anyoneWithTheLinkLabel`,
@@ -47,7 +47,7 @@ export default defineMessages({
   accessGiverHeader: {
     id: `${scope}.accessGiverHeader`,
     defaultMessage:
-      'Enter emails to grant participants access to the session. ',
+      'Enter emails to grant participants access to the intervention. ',
   },
   accessGiverHeaderNote: {
     id: `${scope}.accessGiverHeaderNote`,
