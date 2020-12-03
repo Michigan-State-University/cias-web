@@ -142,44 +142,14 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Row-x1o3ru-0 styled__StyledRow-k1l7f-2 gzbVEz dSJahs"
+        class="Row-x1o3ru-0 styled__StyledRow-k1l7f-2 dRbbcP dSJahs"
         width="100%"
       >
         <div
-          class="Box-sc-14m3exe-0 styled__StyledEmailBox-k1l7f-4 kfAjBH dihrYW"
-          width="50%"
+          class="Box-sc-14m3exe-0 styled__StyledTimezoneBox-k1l7f-4 cidtM fNcuNd"
         >
           <div
-            class="Row-x1o3ru-0 fcuGKr"
-            width="100%"
-          >
-            <div
-              class="Column-sc-1n6divy-0 SJAYV"
-              data-testid="email-input"
-            >
-              <p
-                class="Text-sc-2lza2m-0 drfDFr"
-                width="fit-content"
-              >
-                E-mail address
-              </p>
-              <input
-                class="Input-sc-19txxuq-0 eQikpS"
-                height="46"
-                name="email"
-                placeholder="Enter e-mail address"
-                type="text"
-                value="admin@cias-api.herokuapp.com"
-                width="100%"
-              />
-            </div>
-          </div>
-        </div>
-        <div
-          class="Box-sc-14m3exe-0 styled__StyledEmailBox-k1l7f-4 styled__StyledTimezoneBox-k1l7f-5 cidtM dihrYW nQLdq"
-        >
-          <div
-            class="Column-sc-1n6divy-0 SJAYV"
+            class="Column-sc-1n6divy-0 cFRthN"
           >
             <p
               class="Text-sc-2lza2m-0 drfDFr"
@@ -250,7 +220,8 @@ exports[`<AccountSettings /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="Box-sc-14m3exe-0 giQlKg"
+          class="Column-sc-1n6divy-0 gKyPnx"
+          width="50%"
         >
           <button
             class="StyledTextButton-sc-17cmh3t-0 styled__TextButton-k1l7f-3 bVBqrq eUPCFF"

@@ -47,14 +47,8 @@ export const TextButton = styled(StyledTextButton)`
   `}
 `;
 
-export const StyledEmailBox = styled(Box)`
+export const StyledTimezoneBox = styled(Box)`
   width: 50%;
-  ${mediaQuery.tablet`
-    width: 100%;
-  `}
-`;
-
-export const StyledTimezoneBox = styled(StyledEmailBox)`
   ${mediaQuery.tablet`
     margin-top: 20px;
   `}

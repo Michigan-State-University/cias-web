@@ -9,17 +9,16 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Helmet } from 'react-helmet';
 
-import Box from 'components/Box';
 import Row from 'components/Row';
 import BackButton from 'components/BackButton';
 import H1 from 'components/H1';
+import Column from 'components/Column';
 import { colors, themeColors, boxShadows } from 'theme';
 import messages from './messages';
 
 import WrappedFullNameForm from './Containers/WrappedFullNameForm';
 import WrappedPasswordForm from './Containers/WrappedPasswordForm';
 import WrappedAvatarForm from './Containers/WrappedAvatarForm';
-import WrappedEmailForm from './Containers/WrappedEmailForm';
 import WrappedTimezoneForm from './Containers/WrappedTimezoneForm';
 
 import {
@@ -27,7 +26,6 @@ import {
   StyledColumn,
   StyledRow,
   TextButton,
-  StyledEmailBox,
   StyledTimezoneBox,
 } from './styled';
 
@@ -37,7 +35,6 @@ const AccountSettings = props => {
     PasswordComponent,
     AvatarComponent,
     FullNameComponent,
-    EmailComponent,
     TimezoneComponent,
     DeactivationComponent,
     userId,
@@ -94,12 +91,7 @@ const AccountSettings = props => {
               />
             )}
           </Row>
-          <StyledRow width="100%" align="center" justify="end">
-            {EmailComponent && (
-              <StyledEmailBox width="50%" mr={20}>
-                <EmailComponent userId={userId} formatMessage={formatMessage} />
-              </StyledEmailBox>
-            )}
+          <StyledRow width="100%" align="center" justify="start">
             {TimezoneComponent && (
               <StyledTimezoneBox>
                 <TimezoneComponent
@@ -109,7 +101,7 @@ const AccountSettings = props => {
               </StyledTimezoneBox>
             )}
             {PasswordComponent && (
-              <Box mb={10}>
+              <Column mb={10} width="50%" align="center">
                 <TextButton
                   onClick={openReset}
                   whiteSpace="nowrap"
@@ -119,7 +111,7 @@ const AccountSettings = props => {
                 >
                   <FormattedMessage {...messages.changePassword} />
                 </TextButton>
-              </Box>
+              </Column>
             )}
           </StyledRow>
         </StyledColumn>
@@ -143,7 +135,6 @@ AccountSettings.defaultProps = {
   PasswordComponent: WrappedPasswordForm,
   AvatarComponent: WrappedAvatarForm,
   FullNameComponent: WrappedFullNameForm,
-  EmailComponent: WrappedEmailForm,
   TimezoneComponent: WrappedTimezoneForm,
   DeactivationComponent: null,
 };

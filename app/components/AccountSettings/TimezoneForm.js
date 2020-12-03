@@ -48,6 +48,9 @@ const TimezoneForm = ({ formatMessage, user, editUser }) => {
     <Formik initialValues={initialValues(user)} onSubmit={onSubmit}>
       {() => (
         <FormikSelect
+          columnStyleProps={{
+            pr: 10,
+          }}
           formikKey="timeZone"
           label={formatMessage(messages.timeZoneLabel)}
           options={timezoneOptions}
