@@ -29,7 +29,7 @@ const defaultProps = {
       last_name: 'UserLastName',
     },
   },
-  interventions: [{}, {}, {}],
+  sessions: [{}, {}, {}],
   link: '#',
 };
 

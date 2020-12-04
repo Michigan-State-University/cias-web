@@ -9,7 +9,7 @@ import Text from 'components/Text';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
-import { FinishGroupType } from 'models/Intervention/GroupTypes';
+import { FinishGroupType } from 'models/Session/GroupTypes';
 import { makeSelectGroupQuestions } from 'global/reducers/questions/selectors';
 import { colors } from 'theme';
 

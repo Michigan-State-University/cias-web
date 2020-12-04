@@ -1,5 +1,5 @@
 import { ids } from 'containers/SettingsPanel/utils';
-import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { singleQuestion } from 'models/Session/QuestionTypes';
 
 export const createQuestion = (id = 0, type = singleQuestion.id) => ({
   id: `question-test-${id}`,
@@ -8,15 +8,15 @@ export const createQuestion = (id = 0, type = singleQuestion.id) => ({
   question_group_id: `group-test-${id}`,
 });
 
-export const createIntervention = (id = 0) => ({
+export const createSession = (id = 0) => ({
   id: `intervention-test-${id}`,
   emails: null,
   name: `intervention-test-${id}`,
   position: id,
 });
 
-export const createProblem = (index = 0) => ({
-  id: `problem-test-${index}`,
+export const createIntervention = (index = 0) => ({
+  id: `intervention-test-${index}`,
   status: 'draft',
   usersWithAccess: [
     {
@@ -25,7 +25,7 @@ export const createProblem = (index = 0) => ({
     },
   ],
   shared_to: ids.anyoneWithTheLink,
-  interventions: [createIntervention(`${index}`)],
+  sessions: [createSession(`${index}`)],
 });
 
 export const createUser = (index = 0) => ({

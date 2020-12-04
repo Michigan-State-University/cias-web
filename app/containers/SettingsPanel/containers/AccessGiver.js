@@ -34,7 +34,7 @@ import {
   enableUserAccessRequest,
   fetchUsersWithAccessRequest,
   revokeUserAccessRequest,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 import {
   canAddParticipantsToIntervention,
   canRemoveParticipantsFromIntervention,
@@ -46,7 +46,7 @@ import messages from '../messages';
 
 const AccessGiver = ({
   intl: { formatMessage },
-  problem: { id: problemId, status, name },
+  intervention: { id: interventionId, status, name },
   giveUserAccess,
   usersWithAccess,
   enableAccessLoading,
@@ -63,7 +63,7 @@ const AccessGiver = ({
   );
 
   useEffect(() => {
-    fetchUsersWithAccess(problemId);
+    fetchUsersWithAccess(interventionId);
   }, []);
 
   const handleUploadCsv = data => {
@@ -82,12 +82,12 @@ const AccessGiver = ({
   };
 
   const inviteParticipants = () => {
-    giveUserAccess(problemId, value);
+    giveUserAccess(interventionId, value);
     setValue([]);
   };
 
   const revokeAction = id => {
-    if (id) revokeUserAccess(problemId, id);
+    if (id) revokeUserAccess(interventionId, id);
   };
 
   if (fetchUserAccessLoading)
@@ -111,7 +111,7 @@ const AccessGiver = ({
         <Box mt={22}>
           <CsvFileExport
             filename={formatMessage(messages.filename, {
-              problemName: name,
+              interventionName: name,
             })}
             data={usersWithAccess.map(({ email }) => ({ email }))}
           >
@@ -179,7 +179,7 @@ const AccessGiver = ({
 
 AccessGiver.propTypes = {
   intl: intlShape,
-  problem: PropTypes.object,
+  intervention: PropTypes.object,
   giveUserAccess: PropTypes.func,
   fetchUsersWithAccess: PropTypes.func,
   revokeUserAccess: PropTypes.func,

@@ -2,10 +2,7 @@ import produce from 'immer';
 import sortBy from 'lodash/sortBy';
 
 import { insertAt, removeAt } from 'utils/arrayUtils';
-import {
-  DefaultGroupType,
-  FinishGroupType,
-} from 'models/Intervention/GroupTypes';
+import { DefaultGroupType, FinishGroupType } from 'models/Session/GroupTypes';
 import { ternary } from 'utils/ternary';
 import {
   GET_QUESTION_GROUPS_SUCCESS,
@@ -25,7 +22,7 @@ import {
 } from './constants';
 
 export const initialState = {
-  interventionId: null,
+  sessionId: null,
   groups: [],
   loaders: {
     questionGroupsLoading: false,
@@ -43,7 +40,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
     if (SAVED_ACTIONS.includes(type)) draft.questionsGroupsSaving = false;
     switch (type) {
       case GET_QUESTION_GROUPS_REQUEST: {
-        draft.interventionId = payload.interventionId;
+        draft.sessionId = payload.sessionId;
         draft.loaders.questionGroupsLoading = true;
         draft.groups = [];
         break;
@@ -54,7 +51,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case GET_QUESTION_GROUPS_ERROR: {
-        draft.interventionId = null;
+        draft.sessionId = null;
         draft.loaders.questionGroupsLoading = false;
         break;
       }

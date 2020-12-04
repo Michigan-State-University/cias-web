@@ -1,4 +1,4 @@
-import { QuestionBuilder } from 'models/Intervention/QuestionBuilder/QuestionBuilder';
+import { QuestionBuilder } from 'models/Session/QuestionBuilder/QuestionBuilder';
 import {
   getNewQuestionIdInNextGroups,
   getNewQuestionIdInPreviousGroups,

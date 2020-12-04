@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { DefaultGroupType } from 'models/Intervention/GroupTypes';
+import { DefaultGroupType } from 'models/Session/GroupTypes';
 import { initialState } from './reducer';
 
 export const selectQuestionGroups = state =>
@@ -37,10 +37,10 @@ export const makeSelectQuestionGroupsLoader = () =>
     substate => substate.questionsGroupsSaving,
   );
 
-export const makeSelectQuestionGroupsInterventionId = () =>
+export const makeSelectQuestionGroupsSessionId = () =>
   createSelector(
     selectQuestionGroups,
-    substate => substate.interventionId,
+    substate => substate.sessionId,
   );
 
 export const makeSelectGetQuestionGroupLoader = () =>

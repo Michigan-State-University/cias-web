@@ -17,18 +17,18 @@ import { useInjectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 
 import {
-  sendProblemCsvRequest,
-  editProblemRequest,
-} from 'global/reducers/problem';
+  sendInterventionCsvRequest,
+  editInterventionRequest,
+} from 'global/reducers/intervention';
 import {
-  copyProblemRequest,
-  archiveProblemRequest,
-} from 'global/reducers/problems';
+  copyInterventionRequest,
+  archiveInterventionRequest,
+} from 'global/reducers/interventions';
 
-import { problemOptionsSaga } from 'global/sagas/problemOptionsSaga';
+import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
-import ProblemDetails from 'containers/SingleTile/ProblemDetails';
+import InterventionDetails from 'containers/SingleTile/InterventionDetails';
 import Tooltip from 'components/Tooltip';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
@@ -48,23 +48,26 @@ const SingleTile = ({
   participantView,
   link,
   sendCsv,
-  copyProblem,
-  archiveProblem,
+  copyIntervention,
+  archiveIntervention,
   intl: { formatMessage },
 }) => {
-  useInjectSaga({ key: 'problemOptionsSaga', saga: problemOptionsSaga });
+  useInjectSaga({
+    key: 'interventionOptionsSaga',
+    saga: interventionOptionsSaga,
+  });
 
   const [modalVisible, setModalVisible] = useState(false);
 
   const closeModal = () => setModalVisible(false);
   const openModal = () => setModalVisible(true);
 
-  const handleArchiveProblem = () => archiveProblem(id);
+  const handleArchiveIntervention = () => archiveIntervention(id);
 
   const {
     name,
     status,
-    interventions_size: interventionsSize,
+    sessions_size: sessionsSize,
     id,
     user,
     created_at: createdAt,
@@ -74,7 +77,7 @@ const SingleTile = ({
   const handleCsvRequest = () => sendCsv(id);
 
   const handleClone = () =>
-    copyProblem({ problemId: id, withoutRedirect: true });
+    copyIntervention({ interventionId: id, withoutRedirect: true });
 
   const options = [
     {
@@ -92,9 +95,9 @@ const SingleTile = ({
     ...((status === 'closed' && [
       {
         icon: binNoBg,
-        action: handleArchiveProblem,
+        action: handleArchiveIntervention,
         label: formatMessage(messages.archive),
-        id: 'Archive e-intervention',
+        id: 'Archive e-session',
       },
     ]) ||
       []),
@@ -111,8 +114,8 @@ const SingleTile = ({
     e.preventDefault();
   };
 
-  const copyProblemToResearchers = users =>
-    copyProblem({ problemId: id, users });
+  const copyInterventionToResearchers = users =>
+    copyIntervention({ interventionId: id, users });
 
   return (
     <>
@@ -123,7 +126,7 @@ const SingleTile = ({
       >
         <SelectResearchers
           onClose={closeModal}
-          onResearchersSelected={copyProblemToResearchers}
+          onResearchersSelected={copyInterventionToResearchers}
         />
       </Modal>
       <StyledLink to={link}>
@@ -147,7 +150,7 @@ const SingleTile = ({
           <Tooltip
             id={`${id}-tile-tooltip`}
             content={
-              <ProblemDetails
+              <InterventionDetails
                 formatMessage={formatMessage}
                 user={user}
                 createdAt={createdAt}
@@ -156,11 +159,11 @@ const SingleTile = ({
             }
           >
             <TileInfo>
-              {!isNullOrUndefined(interventionsSize) && (
+              {!isNullOrUndefined(sessionsSize) && (
                 <div>
                   <Text>
                     {formatMessage(messages.sessions, {
-                      sessionCount: interventionsSize,
+                      sessionCount: sessionsSize,
                     })}
                   </Text>
                 </div>
@@ -179,16 +182,16 @@ SingleTile.propTypes = {
   participantView: PropTypes.bool,
   link: PropTypes.string,
   sendCsv: PropTypes.func,
-  copyProblem: PropTypes.func,
-  editProblem: PropTypes.func,
-  archiveProblem: PropTypes.func,
+  copyIntervention: PropTypes.func,
+  editIntervention: PropTypes.func,
+  archiveIntervention: PropTypes.func,
 };
 
 const mapDispatchToProps = {
-  copyProblem: copyProblemRequest,
-  sendCsv: sendProblemCsvRequest,
-  editProblem: editProblemRequest,
-  archiveProblem: archiveProblemRequest,
+  copyIntervention: copyInterventionRequest,
+  sendCsv: sendInterventionCsvRequest,
+  editIntervention: editInterventionRequest,
+  archiveIntervention: archiveInterventionRequest,
 };
 
 const SingleTileWithIntl = injectIntl(SingleTile);

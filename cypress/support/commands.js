@@ -72,13 +72,13 @@ Cypress.Commands.add('logout', () => {
 
 Cypress.Commands.add('createIntervention', () => {
   cy.visit('/');
-  cy.getBySel('create-problem-button').click();
+  cy.getBySel('create-intervention-button').click();
 });
 
 Cypress.Commands.add('createSessionsInIntervention', (numberOfSession = 1) => {
-  cy.route('POST', '**/problems/*/interventions').as('createSession');
+  cy.route('POST', '**/interventions/*/sessions').as('createSession');
   for (let i = 0; i < numberOfSession; i += 1) {
-    cy.getBySel('create-intervention-button').click();
+    cy.getBySel('create-session-button').click();
     cy.wait('@createSession');
     cy.get('@createSession').should('have.property', 'status', 201);
   }
@@ -210,10 +210,10 @@ Cypress.Commands.add('setUpBranching', (formula, cases) => {
     } else if (!isNullOrUndefined(session)) {
       const { index: sessionIndex } = session;
 
-      cy.getBySel('select-target-question-intervention-view-setter').click({
+      cy.getBySel('select-target-question-session-view-setter').click({
         force: true,
       });
-      cy.getBySel(`choose-intervention-${sessionIndex}`).click();
+      cy.getBySel(`choose-session-${sessionIndex}`).click();
       cy.wait([UPDATE_QUESTION]);
     }
   });

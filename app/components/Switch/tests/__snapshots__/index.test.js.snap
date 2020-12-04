@@ -65,7 +65,7 @@ exports[`<Switch /> should match the snapshot 1`] = `
   >
     <input
       class="c1 c2"
-      data-cy="branching-problem-toggle"
+      data-cy="branching-intervention-toggle"
       data-testid="switch-input"
       type="checkbox"
     />

@@ -21,33 +21,34 @@ import H3 from 'components/H3';
 import { colors } from 'theme';
 import { canShareWithParticipants } from 'models/Status/statusPermissions';
 import {
-  sendInterventionInviteRequest,
-  resendInterventionInviteRequest,
-  makeSelectProblemLoader,
-  makeSelectProblemStatus,
-} from 'global/reducers/problem';
+  sendSessionInviteRequest,
+  resendSessionInviteRequest,
+  makeSelectInterventionLoader,
+  makeSelectInterventionStatus,
+} from 'global/reducers/intervention';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import ParticipantInviter from './Components/ParticipantInviter';
 import UserList from './Components/UserList';
 import messages from './messages';
-import { makeSelectCurrentIntervention } from './selectors';
+import { makeSelectCurrentSession } from './selectors';
 import { InterventionIndex } from './styled';
 
 const ShareBox = ({
-  intervention,
+  session,
   sendInvite,
   resendInvite,
   sendLoading,
   emailLoading,
   listLoading,
-  problemStatus,
+  interventionStatus,
 }) => {
-  const { name, problem_id: problemId, emails, position } = intervention || {};
+  const { name, intervention_id: interventionId, emails, position } =
+    session || {};
 
-  const handleResend = id => resendInvite(id, intervention.id);
+  const handleResend = id => resendInvite(id, session.id);
 
-  const sharingPossible = canShareWithParticipants(problemStatus);
+  const sharingPossible = canShareWithParticipants(interventionStatus);
 
   const buttons = [
     {
@@ -72,21 +73,21 @@ const ShareBox = ({
         </Row>
       );
   };
-  if (intervention) {
-    const link = `${process.env.WEB_URL}/interventions/${problemId}/sessions/${
-      intervention.id
-    }/fill`;
+  if (session) {
+    const link = `${
+      process.env.WEB_URL
+    }/interventions/${interventionId}/sessions/${session.id}/fill`;
     return (
       <Box height="fit-content" width={500} mt={20}>
         <Box display="flex" align="center">
           <InterventionIndex>{position}</InterventionIndex>
-          <H2 ml={10}>{intervention.name}</H2>
+          <H2 ml={10}>{session.name}</H2>
         </Box>
         <Row mt={20}>
           <ParticipantInviter
             disabled={!sharingPossible}
             loading={sendLoading}
-            sendInvite={value => sendInvite(value, intervention.id)}
+            sendInvite={value => sendInvite(value, session.id)}
           />
         </Row>
         {exportCsvButton()}
@@ -124,7 +125,7 @@ const ShareBox = ({
 };
 
 ShareBox.propTypes = {
-  intervention: PropTypes.shape({
+  session: PropTypes.shape({
     name: PropTypes.string,
   }),
   sendInvite: PropTypes.func,
@@ -132,20 +133,20 @@ ShareBox.propTypes = {
   sendLoading: PropTypes.bool,
   listLoading: PropTypes.bool,
   emailLoading: PropTypes.object,
-  problemStatus: PropTypes.string,
+  interventionStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectCurrentIntervention(),
-  sendLoading: makeSelectProblemLoader('sendInterventionLoading'),
-  listLoading: makeSelectProblemLoader('fetchInterventionEmailsLoading'),
-  emailLoading: makeSelectProblemLoader('interventionEmailLoading'),
-  problemStatus: makeSelectProblemStatus(),
+  session: makeSelectCurrentSession(),
+  sendLoading: makeSelectInterventionLoader('sendSessionLoading'),
+  listLoading: makeSelectInterventionLoader('fetchSessionEmailsLoading'),
+  emailLoading: makeSelectInterventionLoader('sessionEmailLoading'),
+  interventionStatus: makeSelectInterventionStatus(),
 });
 
 const mapDispatchToProps = {
-  sendInvite: sendInterventionInviteRequest,
-  resendInvite: resendInterventionInviteRequest,
+  sendInvite: sendSessionInviteRequest,
+  resendInvite: resendSessionInviteRequest,
 };
 
 const withConnect = connect(

@@ -26,12 +26,12 @@ declare namespace Cypress {
     logout(): void;
 
     /**
-     * Create intervention
+     * Create session
      */
     createIntervention(): void;
 
     /**
-     * Create sessions in intervention
+     * Create sessions in session
      */
     createSessionsInIntervention(numberOfSession: number): void;
 

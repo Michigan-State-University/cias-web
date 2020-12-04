@@ -11,19 +11,19 @@ import React, { Fragment } from 'react';
 import { Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import AnswerInterventionPage from 'containers/AnswerInterventionPage/Loadable';
+import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
 import AppRoute from 'components/AppRoute';
-import EditInterventionPage from 'containers/Interventions/containers/EditInterventionPage';
+import EditSessionPage from 'containers/Sessions/containers/EditSessionPage';
 import GlobalStyle from 'global-styles';
-import ProblemDetailsPage from 'containers/ProblemDetailsPage/Loadable';
+import InterventionDetailsPage from 'containers/InterventionDetailsPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
-import SettingsInterventionPage from 'containers/Interventions/containers/SettingsInterventionPage';
+import SettingsInterventionPage from 'containers/Sessions/containers/SettingsSessionPage';
 import AccountSettings from 'containers/AccountSettings/Loadable';
 import ResetPasswordPage from 'containers/ResetPasswordPage/Loadable';
 import SetNewPasswordPage from 'containers/SetNewPasswordPage/Loadable';
-import ProblemPage from 'containers/ProblemPage/Loadable';
+import InterventionPage from 'containers/InterventionPage/Loadable';
 import UserListPage from 'containers/UserList/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import UserDetails from 'containers/UserDetails/Loadable';
@@ -47,9 +47,9 @@ export function App({ user }) {
     if (user) {
       switch (user.roles[0]) {
         case Roles.admin:
-          return <ProblemPage />;
+          return <InterventionPage />;
         case Roles.researcher:
-          return <ProblemPage />;
+          return <InterventionPage />;
         case Roles.participant:
           return <ParticipantDashboard />;
         default:
@@ -83,18 +83,18 @@ export function App({ user }) {
         <AppRoute exact path="/logout" component={Logout} />
         <AppRoute
           exact
-          path="/interventions/:problemId/sessions/:interventionId/edit"
-          component={EditInterventionPage}
+          path="/interventions/:interventionId/sessions/:sessionId/edit"
+          component={EditSessionPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
-            navbarId: 'interventions',
+            navbarId: 'sessions',
           }}
         />
         <AppRoute
           exact
-          path="/interventions/:problemId/sessions/:interventionId/fill"
-          component={AnswerInterventionPage}
+          path="/interventions/:interventionId/sessions/:sessionId/fill"
+          component={AnswerSessionPage}
           allowedRoles={Roles.allRoles}
           user
           navbarProps={{
@@ -104,12 +104,12 @@ export function App({ user }) {
         />
         <AppRoute
           exact
-          path="/interventions/:problemId/sessions/:interventionId/settings"
+          path="/interventions/:interventionId/sessions/:sessionId/settings"
           component={SettingsInterventionPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{
-            navbarId: 'interventions',
+            navbarId: 'sessions',
           }}
         />
         <AppRoute
@@ -126,9 +126,9 @@ export function App({ user }) {
         <AppRoute
           exact
           key="previewFromStart"
-          path="/interventions/:problemId/sessions/:interventionId/preview"
+          path="/interventions/:interventionId/sessions/:sessionId/preview"
           component={({ match }) => (
-            <AnswerInterventionPage match={match} isPreview />
+            <AnswerSessionPage match={match} isPreview />
           )}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
@@ -139,9 +139,9 @@ export function App({ user }) {
         />
         <AppRoute
           key="previewFromCurrent"
-          path="/interventions/:problemId/sessions/:interventionId/preview/:index"
+          path="/interventions/:interventionId/sessions/:sessionId/preview/:index"
           component={({ match }) => (
-            <AnswerInterventionPage match={match} isPreview />
+            <AnswerSessionPage match={match} isPreview />
           )}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
@@ -152,8 +152,8 @@ export function App({ user }) {
         />
         <AppRoute
           exact
-          path="/interventions/:problemId"
-          component={ProblemDetailsPage}
+          path="/interventions/:interventionId"
+          component={InterventionDetailsPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{

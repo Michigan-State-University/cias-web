@@ -1,14 +1,14 @@
 import { all } from 'redux-saga/effects';
 import {
-  fetchProblemSaga,
+  fetchInterventionSaga,
   changeAccessSettingSaga,
   giveUserAccessSaga,
   fetchUsersWithAccessSaga,
   revokeUserAccessSaga,
-} from 'global/reducers/problem';
+} from 'global/reducers/intervention';
 
-function* problemSettingPageSaga() {
-  yield all([fetchProblemSaga(), changeAccessSettingSaga()]);
+function* interventionSettingPageSaga() {
+  yield all([fetchInterventionSaga(), changeAccessSettingSaga()]);
 }
 
 function* accessGiverContainerSaga() {
@@ -19,4 +19,4 @@ function* accessGiverContainerSaga() {
   ]);
 }
 
-export { problemSettingPageSaga, accessGiverContainerSaga };
+export { interventionSettingPageSaga, accessGiverContainerSaga };

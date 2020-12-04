@@ -1,7 +1,7 @@
 import { Roles } from 'models/User/UserRoles';
 import navbarNames from './navbarNames';
 
-export const interventionsTabId = 'interventions';
+export const interventionsTabId = 'sessions';
 export const accountsTabId = 'accounts';
 
 const interventionsTab = message => ({

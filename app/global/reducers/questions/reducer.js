@@ -7,8 +7,8 @@ import values from 'lodash/values';
 import forEach from 'lodash/forEach';
 import concat from 'lodash/concat';
 
-import questionDataReducer from 'containers/Interventions/components/QuestionData/reducer';
-import questionSettingsReducer from 'containers/Interventions/components/QuestionSettings/Settings/reducer';
+import questionDataReducer from 'containers/Sessions/components/QuestionData/reducer';
+import questionSettingsReducer from 'containers/Sessions/components/QuestionSettings/Settings/reducer';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import { insertAt, removeAt } from 'utils/arrayUtils';
 

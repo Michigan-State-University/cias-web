@@ -1,12 +1,12 @@
 /*
- * ProblemSettingsPage Messages
+ * InterventionSettingsPage Messages
  *
- * This contains all the text for the ProblemSettingsPage container.
+ * This contains all the text for the InterventionSettingsPage container.
  */
 
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.ProblemSettingsPage';
+export const scope = 'app.containers.InterventionSettingsPage';
 
 export default defineMessages({
   header: {
@@ -84,6 +84,6 @@ export default defineMessages({
   },
   filename: {
     id: `${scope}.filename`,
-    defaultMessage: 'participants_emails_{problemName}_access',
+    defaultMessage: 'participants_emails_{interventionName}_access',
   },
 });

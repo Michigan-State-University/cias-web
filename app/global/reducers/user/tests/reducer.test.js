@@ -21,7 +21,7 @@ import {
   CHANGE_ACTIVATE_STATUS_ERROR,
 } from '../constants';
 
-describe('problem reducer', () => {
+describe('intervention reducer', () => {
   const mockState = {
     ...initialState,
     user: createUser(),

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
+<div
+  class="Column-sc-1n6divy-0 hiFhcL"
+  height="100%"
+>
+  <div
+    class="Box-sc-14m3exe-0 cRgWMV"
+    display="flex"
+    height="100%"
+    width="100%"
+  >
+    <div
+      class="styled__AnswerOuterContainer-obr855-3 laenCo"
+    >
+      <button
+        class="StyledButton-t20ntd-0 fSeMme styled__StyledButton-obr855-0 bXcHdh"
+        color="primary"
+      >
+        Start session
+      </button>
+    </div>
+  </div>
+</div>
+`;

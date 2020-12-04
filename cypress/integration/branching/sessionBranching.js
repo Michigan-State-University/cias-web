@@ -1,4 +1,4 @@
-import { singleQuestion } from 'models/Intervention/QuestionTypes';
+import { singleQuestion } from 'models/Session/QuestionTypes';
 import {
   CREATE_QUESTION,
   UPDATE_INTERVENTION,
@@ -52,7 +52,7 @@ describe('Session branching', () => {
     cy.login(Cypress.env(ADMIN_EMAIL), Cypress.env(ADMIN_PASSWORD));
     cy.createIntervention();
     cy.createSessionsInIntervention(2);
-    cy.getBySel(`enter-intervention-${index}`).click();
+    cy.getBySel(`enter-session-${index}`).click();
 
     cy.populateSessionWithQuestions([singleQuestion.name], {
       variablePrefix: 'var_',
@@ -70,12 +70,12 @@ describe('Session branching', () => {
       const firstSessionFillUrl = firstSessionUrl.replace('/edit', '/fill');
 
       cy.go('back');
-      cy.getBySel('enter-intervention-1').click();
+      cy.getBySel('enter-session-1').click();
       cy.location('pathname').then(secondSessionUrl => {
         const secondSessionFillUrl = secondSessionUrl.replace('/edit', '/fill');
 
         cy.go('back');
-        cy.getBySel('enter-intervention-0').click();
+        cy.getBySel('enter-session-0').click();
         cy.answerPage();
 
         cy.location('pathname').should('eq', firstSessionFillUrl);

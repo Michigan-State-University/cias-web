@@ -17,23 +17,23 @@ import SettingsPanel from '../index';
 
 describe('<SettingsPanel />', () => {
   const initialState = {
-    problem: {
-      problem: {
-        name: 'Name of the intervention',
+    intervention: {
+      intervention: {
+        name: 'Name of the session',
         id: 'as120s-as12cs',
       },
       loaders: {
-        fetchProblemLoading: false,
+        fetchInterventionLoading: false,
       },
       errors: {
-        fetchProblemError: null,
+        fetchInterventionError: null,
       },
     },
   };
   const store = createTestStore(initialState);
 
   const defaultProps = {
-    match: { params: { problem: { id: 'as120s-as12cs' } } },
+    match: { params: { intervention: { id: 'as120s-as12cs' } } },
   };
 
   it('Expect to not log errors in console', () => {

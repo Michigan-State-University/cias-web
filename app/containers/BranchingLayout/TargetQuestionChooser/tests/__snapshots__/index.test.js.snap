@@ -256,7 +256,7 @@ Object {
               >
                 <img
                   class="c9"
-                  data-cy="select-target-question-intervention-view-setter"
+                  data-cy="select-target-question-session-view-setter"
                   data-testid="test-id-1-select-target-question-interview-view-setter"
                   src="IMAGE_MOCK"
                 />
@@ -267,7 +267,7 @@ Object {
                 <h3
                   class="c11"
                 >
-                  e-Intervention Name
+                  e-Session Name
                 </h3>
               </div>
               <div
@@ -367,7 +367,7 @@ Object {
             >
               <img
                 class="Img-sc-1kfzr96-0 ieRSRF"
-                data-cy="select-target-question-intervention-view-setter"
+                data-cy="select-target-question-session-view-setter"
                 data-testid="test-id-1-select-target-question-interview-view-setter"
                 src="IMAGE_MOCK"
               />
@@ -378,7 +378,7 @@ Object {
               <h3
                 class="H3-sc-1nwhpi5-0 bPzmis"
               >
-                e-Intervention Name
+                e-Session Name
               </h3>
             </div>
             <div

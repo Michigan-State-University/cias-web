@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Row-x1o3ru-0 kANvPw"
+  >
+    <h3
+      class="H3-sc-1nwhpi5-0 bPzmis"
+    >
+      Video
+    </h3>
+    <label
+      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+    >
+      <input
+        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        type="checkbox"
+      />
+      <span
+        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+      />
+    </label>
+  </div>
+  <div
+    class="Row-x1o3ru-0 kANvPw"
+  >
+    <h3
+      class="H3-sc-1nwhpi5-0 bPzmis"
+    >
+      Image
+    </h3>
+    <label
+      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+    >
+      <input
+        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        type="checkbox"
+      />
+      <span
+        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+      />
+    </label>
+  </div>
+  <div
+    class="Row-x1o3ru-0 kANvPw"
+  >
+    <h3
+      class="H3-sc-1nwhpi5-0 bPzmis"
+    >
+      Title
+    </h3>
+    <label
+      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+    >
+      <input
+        checked=""
+        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        type="checkbox"
+      />
+      <span
+        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+      />
+    </label>
+  </div>
+  <div
+    class="Row-x1o3ru-0 kANvPw"
+  >
+    <h3
+      class="H3-sc-1nwhpi5-0 bPzmis"
+    >
+      Main Text
+    </h3>
+    <label
+      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+    >
+      <input
+        checked=""
+        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        type="checkbox"
+      />
+      <span
+        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+      />
+    </label>
+  </div>
+  <div
+    class="Row-x1o3ru-0 kANvPw"
+  >
+    <h3
+      class="H3-sc-1nwhpi5-0 bPzmis"
+    >
+      Proceed button
+    </h3>
+    <label
+      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+    >
+      <input
+        checked=""
+        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        type="checkbox"
+      />
+      <span
+        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+      />
+    </label>
+  </div>
+  <div
+    class="Row-x1o3ru-0 kRTAxX"
+  >
+    <h3
+      class="H3-sc-1nwhpi5-0 bPzmis"
+    >
+      Required
+    </h3>
+    <label
+      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+    >
+      <input
+        checked=""
+        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        type="checkbox"
+      />
+      <span
+        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+      />
+    </label>
+  </div>
+</div>
+`;

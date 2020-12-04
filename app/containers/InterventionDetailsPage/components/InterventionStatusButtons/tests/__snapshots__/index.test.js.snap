@@ -1,0 +1,110 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  width: 200px;
+}
+
+.c1 {
+  font-weight: bold;
+}
+
+<button
+  class="c0 c1"
+  color="primary"
+  data-cy="publish-session-button"
+  width="200"
+>
+  <span>
+    Publish Intervention
+  </span>
+</button>
+`;
+
+exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] = `
+.c0 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #FFFFFF;
+  color: #FFFFFF;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-right: 10px;
+  width: 200px;
+}
+
+.c1 {
+  font-weight: bold;
+  background-color: transparent;
+  border: #107969 solid 1px;
+  color: #107969;
+}
+
+.c1:hover {
+  background-color: #107969;
+  color: white;
+}
+
+<button
+  class="c0 c1"
+  color="primary"
+  width="200"
+>
+  <span>
+    Get CSV with results
+  </span>
+</button>
+`;
+
+exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] = `
+.c0 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #FFFFFF;
+  color: #FFFFFF;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-right: 10px;
+  width: 200px;
+}
+
+.c1 {
+  font-weight: bold;
+  background-color: transparent;
+  border: #107969 solid 1px;
+  color: #107969;
+}
+
+.c1:hover {
+  background-color: #107969;
+  color: white;
+}
+
+<button
+  class="c0 c1"
+  color="primary"
+  width="200"
+>
+  <span>
+    Get CSV with results
+  </span>
+</button>
+`;

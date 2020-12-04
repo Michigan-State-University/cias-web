@@ -12,7 +12,7 @@ function* shareQuestionsToResearchers({
   payload: { questionIds, researcherIds },
 }) {
   console.log(questionIds, researcherIds);
-  // const requestURL = `v1/interventions/${interventionId}/questions/${questionId}`;
+  // const requestURL = `v1/sessions/${sessionId}/questions/${questionId}`;
 
   try {
     // yield axios.delete(requestURL);

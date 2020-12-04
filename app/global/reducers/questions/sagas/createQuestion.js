@@ -2,11 +2,8 @@ import { put, takeLatest, select } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
-import { ADD_BLOCK } from 'containers/Interventions/components/QuestionSettings/Settings/constants';
-import {
-  feedbackQuestion,
-  finishQuestion,
-} from 'models/Intervention/QuestionTypes';
+import { ADD_BLOCK } from 'containers/Sessions/components/QuestionSettings/Settings/constants';
+import { feedbackQuestion, finishQuestion } from 'models/Session/QuestionTypes';
 import {
   readQuestionBlockType,
   feedbackBlockType,
@@ -20,7 +17,7 @@ import {
 import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPosition';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
-import { makeSelectIntervention } from 'global/reducers/intervention';
+import { makeSelectSession } from 'global/reducers/session';
 import { CREATE_QUESTION_REQUEST } from '../constants';
 import {
   createQuestionSuccess,
@@ -43,12 +40,15 @@ function* createQuestion({ payload: { question } }) {
   const questions = yield select(makeSelectQuestions());
   const {
     settings: { narrator },
-  } = yield select(makeSelectIntervention());
+  } = yield select(makeSelectSession());
   const requestURL = `v1/question_groups/${groupId}/questions`;
   try {
     const response = yield axios.post(requestURL, {
       ...question,
-      narrator: { blocks: [], settings: narrator },
+      narrator: {
+        blocks: [],
+        settings: narrator,
+      },
     });
 
     const createdQuestion = mapQuestionToStateObject(response.data.data);

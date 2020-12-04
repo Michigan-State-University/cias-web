@@ -21,7 +21,7 @@ import {
   textboxQuestion,
   urlQuestion,
   visualAnalogueScaleQuestion,
-} from 'models/Intervention/QuestionTypes';
+} from 'models/Session/QuestionTypes';
 
 export const scope = 'app.GlobalMessages';
 
@@ -146,16 +146,16 @@ export default defineMessages({
       defaultMessage: 'Archived',
     },
   },
-  createProblemError: {
-    id: `${scope}.createProblemError`,
+  createInterventionError: {
+    id: `${scope}.createInterventionError`,
     defaultMessage: `Couldn't create an intervention`,
   },
-  editProblemError: {
-    id: `${scope}.editProblemError`,
+  editInterventionError: {
+    id: `${scope}.editInterventionError`,
     defaultMessage: `Couldn't edit an intervention`,
   },
-  archiveProblemError: {
-    id: `${scope}.archiveProblemError`,
+  archiveInterventionError: {
+    id: `${scope}.archiveInterventionError`,
     defaultMessage: `Couldn't archive an intervention`,
   },
   errors: {

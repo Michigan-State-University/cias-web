@@ -19,8 +19,8 @@ import {
 } from 'global/reducers/questions';
 
 import { colors, boxShadows } from 'theme';
-import Question from 'models/Intervention/Question';
-import { getAllVariables } from 'models/Intervention/utils';
+import Question from 'models/Session/Question';
+import { getAllVariables } from 'models/Session/utils';
 import NoContent from 'components/NoContent';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import useOutsideClick from 'utils/useOutsideClick';

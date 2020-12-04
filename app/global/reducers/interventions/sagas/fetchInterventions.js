@@ -1,24 +1,31 @@
 import axios from 'axios';
-import { put, call, takeLatest } from 'redux-saga/effects';
+import get from 'lodash/get';
 
-import { Roles } from 'models/User/UserRoles';
-import { FETCH_INTERVENTIONS_REQUEST } from '../constants';
+import { put, takeLatest, call } from 'redux-saga/effects';
+import { formatMessage } from 'utils/intlOutsideReact';
+
 import { fetchInterventionsSuccess, fetchInterventionsError } from '../actions';
+import { FETCH_INTERVENTIONS_REQUEST } from '../constants';
 
-export function* fetchInterventions({ payload: { role } }) {
-  let requestURL = `v1/interventions`;
-  if (role === Roles.participant) requestURL = `v1/problems`;
+import messages from '../messages';
+
+export function* fetchInterventions() {
+  const requestURL = `v1/interventions`;
 
   try {
     const {
-      data: { data },
+      data: { interventions },
     } = yield call(axios.get, requestURL);
-    yield put(fetchInterventionsSuccess(data));
+
+    yield put(fetchInterventionsSuccess(interventions));
   } catch (error) {
-    yield put(fetchInterventionsError(error));
+    yield put(
+      fetchInterventionsError(
+        get(error, 'message', formatMessage(messages.defaultError)),
+      ),
+    );
   }
 }
-
 export default function* fetchInterventionsSaga() {
   yield takeLatest(FETCH_INTERVENTIONS_REQUEST, fetchInterventions);
 }

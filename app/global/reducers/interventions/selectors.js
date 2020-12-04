@@ -6,17 +6,17 @@ const interventions = state => state.interventions || initialState;
 export const makeSelectInterventionsState = () =>
   createSelector(
     interventions,
-    substate => substate,
+    interventionsState => interventionsState,
   );
 
 export const makeSelectInterventions = () =>
   createSelector(
     interventions,
-    substate => substate.interventions,
+    interventionsState => interventionsState.interventions,
   );
 
 export const makeSelectInterventionsLoader = () =>
   createSelector(
     interventions,
-    substate => substate.fetchInterventionLoading,
+    interventionsState => interventionsState.fetchInterventionLoading,
   );

@@ -3,23 +3,29 @@ export const GET_SESSION_QUESTION_GROUPS = '@getSessionQuestionGroups';
 export const CREATE_QUESTION = '@createQuestion';
 export const UPDATE_QUESTION = '@updateQuestion';
 export const ANSWER_QUESTION = '@answerQuestion';
-export const GET_PROBLEM_INTERVENTIONS = '@problemInterventions';
+export const GET_INTERVENTION_SESSIONS = '@interventionSessions';
+export const LOGIN = '@login';
 
 export const ALIASES = {
+  [LOGIN]: {
+    METHOD: 'POST',
+    URL: '**/auth/sign_in',
+    ALIAS: LOGIN.slice(1),
+  },
   [UPDATE_INTERVENTION]: {
     METHOD: 'PATCH',
-    URL: '**/problems/*',
+    URL: '**/interventions/*',
     ALIAS: UPDATE_INTERVENTION.slice(1),
   },
   [GET_SESSION_QUESTION_GROUPS]: {
     METHOD: 'GET',
-    URL: '**/interventions/*/question_groups',
+    URL: '**/sessions/*/question_groups',
     ALIAS: GET_SESSION_QUESTION_GROUPS.slice(1),
   },
-  [GET_PROBLEM_INTERVENTIONS]: {
+  [GET_INTERVENTION_SESSIONS]: {
     METHOD: 'GET',
-    URL: '**/problems/*/interventions',
-    ALIAS: GET_PROBLEM_INTERVENTIONS.slice(1),
+    URL: '**/interventions/*/sessions',
+    ALIAS: GET_INTERVENTION_SESSIONS.slice(1),
   },
   [CREATE_QUESTION]: {
     METHOD: 'POST',

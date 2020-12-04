@@ -43,8 +43,8 @@ export const createQuestionSuccess = question =>
 export const createQuestionError = error =>
   actionBuilder(CREATE_QUESTION_ERROR, { error });
 
-export const getQuestionsRequest = interventionId =>
-  actionBuilder(GET_QUESTION_GROUPS_REQUEST, { interventionId });
+export const getQuestionsRequest = sessionId =>
+  actionBuilder(GET_QUESTION_GROUPS_REQUEST, { sessionId });
 export const getQuestionsSuccess = questions =>
   actionBuilder(GET_QUESTIONS_SUCCESS, { questions });
 export const getQuestionsError = error =>

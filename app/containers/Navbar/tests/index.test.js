@@ -26,10 +26,10 @@ describe('<Navbar />', () => {
     auth: {
       user: { firstName: 'test', lastName: 'test', roles: [Roles.admin] },
     },
-    intervention: {
-      intervention: {
+    session: {
+      session: {
         id: '12dasc0123=21-2',
-        name: 'e-Intervention New',
+        name: 'e-Session New',
       },
     },
   };
@@ -52,7 +52,7 @@ describe('<Navbar />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Should render and match the snapshot with intervention path', () => {
+  it('Should render and match the snapshot with session path', () => {
     const {
       container: { firstChild },
     } = render(

@@ -12,7 +12,7 @@ import H3 from 'components/H3';
 import EllipsisText from 'components/Text/EllipsisText';
 import Img from 'components/Img';
 import Loader from 'components/Loader';
-import Question from 'models/Intervention/Question';
+import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import arrowLeft from 'assets/svg/arrow-left.svg';
@@ -20,12 +20,12 @@ import navigationNext from 'assets/svg/navigation-next.svg';
 import presentationProjector from 'assets/svg/presentation-projector.svg';
 import presentationProjectorSelected from 'assets/svg/presentation-projector-selected.svg';
 import { colors, borders, fontSizes, themeColors } from 'theme';
-import { makeSelectIntervention } from 'global/reducers/intervention';
+import { makeSelectSession } from 'global/reducers/session';
 import {
-  makeSelectProblemLoader,
-  makeSelectProblem,
-  makeSelectCurrentInterventionIndex,
-} from 'global/reducers/problem';
+  makeSelectInterventionLoader,
+  makeSelectIntervention,
+  makeSelectCurrentSessionIndex,
+} from 'global/reducers/intervention';
 import {
   makeSelectQuestions,
   makeSelectSelectedQuestion,
@@ -40,34 +40,34 @@ const TargetQuestionChooser = props => {
   const {
     intl: { formatMessage },
     onClick,
-    intervention: { name, id: interventionId },
+    session: { name, id: sessionId },
     questions,
     selectedQuestion: { id } = {},
     pattern: { target },
     currentIndex,
     isVisible,
-    problem,
-    problemLoading,
-    problemBranching,
-    interventionIndex,
+    intervention,
+    interventionLoading,
+    interventionBranching,
+    sessionIndex,
     questionGroups,
   } = props;
-  const { interventions: interventionList } = problem || {};
+  const { sessions: sessionList } = intervention || {};
   const [isInterventionView, _setIsInterventionView] = useState(false);
   const setIsInterventionView = (value, event) => {
     if (event) event.stopPropagation();
     _setIsInterventionView(value);
   };
   const canSelectIntervention = selectedInterventionId =>
-    !problemBranching ||
-    interventionList[interventionIndex].id !== selectedInterventionId;
+    !interventionBranching ||
+    sessionList[sessionIndex].id !== selectedInterventionId;
   const isLast = currentIndex === questions.length - 1;
-  const isCurrentIntervention = intervention =>
-    !problemBranching && interventionId === intervention.id;
+  const isCurrentIntervention = session =>
+    !interventionBranching && sessionId === session.id;
 
   useEffect(() => {
     if (isVisible) {
-      setIsInterventionView(target.type === 'Intervention');
+      setIsInterventionView(target.type === 'Session');
     }
   }, [isVisible]);
 
@@ -84,9 +84,9 @@ const TargetQuestionChooser = props => {
 
   const chooseIntervention = (targetInterventionId, event) => {
     if (canSelectIntervention(targetInterventionId)) {
-      if (!problemBranching && targetInterventionId === interventionId)
+      if (!interventionBranching && targetInterventionId === sessionId)
         setIsInterventionView(false, event);
-      else onClick({ type: 'Intervention', id: targetInterventionId });
+      else onClick({ type: 'Session', id: targetInterventionId });
     }
   };
 
@@ -95,7 +95,7 @@ const TargetQuestionChooser = props => {
       <Row mb={20}>
         <Img
           data-testid={`${id}-select-target-question-interview-view-setter`}
-          data-cy="select-target-question-intervention-view-setter"
+          data-cy="select-target-question-session-view-setter"
           src={arrowLeft}
           mr={10}
           onClick={event => setIsInterventionView(true, event)}
@@ -123,38 +123,38 @@ const TargetQuestionChooser = props => {
   );
 
   const renderInterventionChooser = () => {
-    if (problemLoading)
+    if (interventionLoading)
       return (
         <Box
           width="100%"
           height="80px"
-          data-testid={`${id}-select-target-intervention-spinner`}
+          data-testid={`${id}-select-target-session-spinner`}
         >
           <Loader type="inline" hidden={false} />
         </Box>
       );
 
     return (
-      <Column data-testid={`${id}-select-target-intervention`}>
+      <Column data-testid={`${id}-select-target-session`}>
         <Row mb={20}>
-          <H3>{formatMessage(messages.interventionListHeader)}</H3>
+          <H3>{formatMessage(messages.sessionListHeader)}</H3>
         </Row>
         <Box maxHeight="300px" overflow="scroll">
           <Column>
-            {interventionList &&
-              interventionList.map((intervention, index) => (
+            {sessionList &&
+              sessionList.map((session, index) => (
                 <Row
-                  data-testid={`${id}-select-target-intervention-el-${index}`}
-                  data-cy={`choose-intervention-${index}`}
-                  key={`${id}-select-target-intervention-${index}`}
-                  mb={index !== interventionList.length - 1 ? 15 : 5}
-                  onClick={event => chooseIntervention(intervention.id, event)}
+                  data-testid={`${id}-select-target-session-el-${index}`}
+                  data-cy={`choose-session-${index}`}
+                  key={`${id}-select-target-session-${index}`}
+                  mb={index !== sessionList.length - 1 ? 15 : 5}
+                  onClick={event => chooseIntervention(session.id, event)}
                   align="center"
-                  clickable={canSelectIntervention(intervention.id)}
+                  clickable={canSelectIntervention(session.id)}
                 >
                   <Img
                     src={
-                      target.id === intervention.id
+                      target.id === session.id
                         ? presentationProjectorSelected
                         : presentationProjector
                     }
@@ -162,20 +162,20 @@ const TargetQuestionChooser = props => {
                   />
                   <Box
                     mr={10}
-                    maxWidth={isCurrentIntervention(intervention) ? 70 : 140}
+                    maxWidth={isCurrentIntervention(session) ? 70 : 140}
                   >
                     <EllipsisText
-                      text={intervention.name}
-                      fontWeight={target.id === intervention.id ? 'bold' : ''}
+                      text={session.name}
+                      fontWeight={target.id === session.id ? 'bold' : ''}
                       fontSize={13}
                       color={
-                        canSelectIntervention(intervention.id)
+                        canSelectIntervention(session.id)
                           ? colors.black
                           : colors.grey
                       }
                     />
                   </Box>
-                  {isCurrentIntervention(intervention) && (
+                  {isCurrentIntervention(session) && (
                     <Badge bg={themeColors.secondary} color={colors.white}>
                       {formatMessage(messages.selectedInterventionBadge)}
                     </Badge>
@@ -190,7 +190,7 @@ const TargetQuestionChooser = props => {
 
   return (
     <Box width={300}>
-      {!problemBranching && (
+      {!interventionBranching && (
         <Box
           borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
             colors.linkWater
@@ -228,7 +228,7 @@ const TargetQuestionChooser = props => {
 TargetQuestionChooser.propTypes = {
   intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
-  intervention: PropTypes.object,
+  session: PropTypes.object,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.shape(Question),
   pattern: PropTypes.shape({
@@ -236,22 +236,22 @@ TargetQuestionChooser.propTypes = {
     target: PropTypes.shape({ id: PropTypes.string, type: PropTypes.string }),
   }),
   currentIndex: PropTypes.string,
-  interventionIndex: PropTypes.number,
+  sessionIndex: PropTypes.number,
   isVisible: PropTypes.bool,
-  problem: PropTypes.object,
-  problemLoading: PropTypes.bool,
-  problemBranching: PropTypes.bool,
+  intervention: PropTypes.object,
+  interventionLoading: PropTypes.bool,
+  interventionBranching: PropTypes.bool,
   questionGroups: PropTypes.array,
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectIntervention(),
+  session: makeSelectSession(),
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
   currentIndex: makeSelectSelectedQuestionId(),
-  problemLoading: makeSelectProblemLoader('fetchProblemLoading'),
-  problem: makeSelectProblem(),
-  interventionIndex: makeSelectCurrentInterventionIndex(),
+  interventionLoading: makeSelectInterventionLoader('fetchInterventionLoading'),
+  intervention: makeSelectIntervention(),
+  sessionIndex: makeSelectCurrentSessionIndex(),
   questionGroups: makeSelectQuestionGroups(),
 });
 

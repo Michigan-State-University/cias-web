@@ -9,9 +9,9 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.ParticipantDashboard';
 
 export default defineMessages({
-  interventions: {
-    id: `${scope}.interventions`,
-    defaultMessage: 'My Interventions',
+  sessions: {
+    id: `${scope}.sessions`,
+    defaultMessage: 'My Sessions',
   },
   noResults: {
     id: `${scope}.noResults`,

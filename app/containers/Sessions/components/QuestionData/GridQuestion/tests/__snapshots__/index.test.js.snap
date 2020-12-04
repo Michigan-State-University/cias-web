@@ -1,0 +1,359 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
+<div
+  class="Column-sc-1n6divy-0 fBWXPd"
+  width="100%"
+>
+  <div
+    class="Row-x1o3ru-0 jGQiKH"
+    display="flex"
+  >
+    <div
+      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 gpmswD"
+    >
+      <div
+        class="Box-sc-14m3exe-0 cidtM"
+      >
+        <div
+          class="Row-x1o3ru-0 fdTqjP"
+        >
+          <div
+            class="StyledCircle-sc-18vml2t-0 kmfkKa"
+            color="#FFFFFF"
+            opacity="1"
+          >
+            <img
+              class="Img-sc-1kfzr96-0 lmhFEd"
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <p
+            class="Text-sc-2lza2m-0 jmEVdS"
+            color="#C866EA"
+            font-weight="bold"
+          >
+            Add new column
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="Box-sc-14m3exe-0 kcsePn"
+    width="100%"
+  >
+    <div
+      class="Box-sc-14m3exe-0 kbuZxI"
+    >
+      <div
+        class="Box-sc-14m3exe-0 jBHNyG"
+        overflow="scroll"
+      >
+        <table
+          class="Table-jgz9dg-0 eJfDii"
+        >
+          <thead
+            class="THead-sc-1pp8kl6-0"
+          >
+            <tr
+              class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD jeviXb"
+              color="#E2EEF1"
+            >
+              <th
+                class="TH-sc-1qq1mcj-0 styled__FirstTH-jwlbpz-0 hAFogX rQhET"
+                scope="col"
+                width="120px"
+              />
+              <th
+                class="TH-sc-1qq1mcj-0 hAFogX"
+                scope="col"
+                width="120px"
+              >
+                <div
+                  class="Column-sc-1n6divy-0 dYyctV"
+                  width="100%"
+                >
+                  <div
+                    class="Box-sc-14m3exe-0 iUfnFJ"
+                    height="35"
+                  >
+                    <img
+                      class="Img-sc-1kfzr96-0 dEFREY"
+                      hidden=""
+                      src="IMAGE_MOCK"
+                    />
+                  </div>
+                  <div
+                    class="Row-x1o3ru-0 iURcyt"
+                    display="flex"
+                  >
+                    <input
+                      class="Input-sc-19txxuq-0 iNUvMl BadgeInput-sc-1viewtw-0 jUphLA"
+                      color="#0086F8"
+                      placeholder="Score"
+                      type="tel"
+                      value="1"
+                      width="33px"
+                    />
+                  </div>
+                  <input
+                    class="Input-sc-19txxuq-0 frqvH"
+                    cursor="pointer"
+                    placeholder="Column 1..."
+                    type="text"
+                    value="test-col-1"
+                    width="110"
+                  />
+                </div>
+              </th>
+              <th
+                class="TH-sc-1qq1mcj-0 hAFogX"
+                scope="col"
+                width="120px"
+              >
+                <div
+                  class="Column-sc-1n6divy-0 dYyctV"
+                  width="100%"
+                >
+                  <div
+                    class="Box-sc-14m3exe-0 iUfnFJ"
+                    height="35"
+                  >
+                    <img
+                      class="Img-sc-1kfzr96-0 dEFREY"
+                      hidden=""
+                      src="IMAGE_MOCK"
+                    />
+                  </div>
+                  <div
+                    class="Row-x1o3ru-0 iURcyt"
+                    display="flex"
+                  >
+                    <input
+                      class="Input-sc-19txxuq-0 iNUvMl BadgeInput-sc-1viewtw-0 jUphLA"
+                      color="#0086F8"
+                      placeholder="Score"
+                      type="tel"
+                      value="2"
+                      width="33px"
+                    />
+                  </div>
+                  <input
+                    class="Input-sc-19txxuq-0 frqvH"
+                    cursor="pointer"
+                    placeholder="Column 2..."
+                    type="text"
+                    value="test-col-2"
+                    width="110"
+                  />
+                </div>
+              </th>
+              <td />
+            </tr>
+          </thead>
+          <tbody
+            class="TBody-sc-1332v38-0"
+          >
+            <tr
+              class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD jeviXb"
+              color="#E2EEF1"
+            >
+              <th
+                class="TH-sc-1qq1mcj-0 styled__FirstTH-jwlbpz-0 hAFogX rQhET"
+                scope="row"
+                width="120px"
+              >
+                <div
+                  class="Row-x1o3ru-0 iEgOaP"
+                  height="100%"
+                >
+                  <div
+                    class="Box-sc-14m3exe-0 hhkNmq"
+                    width="60"
+                  >
+                    <img
+                      class="Img-sc-1kfzr96-0 dEFREY"
+                      hidden=""
+                      src="IMAGE_MOCK"
+                    />
+                  </div>
+                  <div
+                    class="Row-x1o3ru-0 bxIejT"
+                    width="100%"
+                  >
+                    <div
+                      class="Row-x1o3ru-0 xKkmm"
+                      display="flex"
+                    >
+                      <input
+                        class="Input-sc-19txxuq-0 BlJBd BadgeInput-sc-1viewtw-0 fcfUls"
+                        color="#107969"
+                        placeholder="Variable name..."
+                        type="text"
+                        value="11"
+                        width="41px"
+                      />
+                    </div>
+                    <textarea
+                      class="TextArea-sc-1g8793c-0 fhyeqI"
+                      data-cy="text-area"
+                      height="auto"
+                      placeholder="Row 1..."
+                      rows="2"
+                      width="300"
+                    >
+                      test-row-1
+                    </textarea>
+                  </div>
+                </div>
+              </th>
+              <td
+                class="TD-sc-4t6406-0 bUpcjC"
+                height="inherit"
+              >
+                <div
+                  class="Row-x1o3ru-0 iEKQis"
+                >
+                  <img
+                    class="Img-sc-1kfzr96-0 lmhFEd"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
+              </td>
+              <td
+                class="TD-sc-4t6406-0 bUpcjC"
+                height="inherit"
+              >
+                <div
+                  class="Row-x1o3ru-0 iEKQis"
+                >
+                  <img
+                    class="Img-sc-1kfzr96-0 lmhFEd"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr
+              class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD jeviXb"
+              color="#E2EEF1"
+            >
+              <th
+                class="TH-sc-1qq1mcj-0 styled__FirstTH-jwlbpz-0 hAFogX rQhET"
+                scope="row"
+                width="120px"
+              >
+                <div
+                  class="Row-x1o3ru-0 iEgOaP"
+                  height="100%"
+                >
+                  <div
+                    class="Box-sc-14m3exe-0 hhkNmq"
+                    width="60"
+                  >
+                    <img
+                      class="Img-sc-1kfzr96-0 dEFREY"
+                      hidden=""
+                      src="IMAGE_MOCK"
+                    />
+                    <div />
+                  </div>
+                  <div
+                    class="Row-x1o3ru-0 bxIejT"
+                    width="100%"
+                  >
+                    <div
+                      class="Row-x1o3ru-0 xKkmm"
+                      display="flex"
+                    >
+                      <input
+                        class="Input-sc-19txxuq-0 BlJBd BadgeInput-sc-1viewtw-0 fcfUls"
+                        color="#107969"
+                        placeholder="Variable name..."
+                        type="text"
+                        value="22"
+                        width="41px"
+                      />
+                    </div>
+                    <textarea
+                      class="TextArea-sc-1g8793c-0 fhyeqI"
+                      data-cy="text-area"
+                      height="auto"
+                      placeholder="Row 2..."
+                      rows="2"
+                      width="300"
+                    >
+                      test-row-2
+                    </textarea>
+                  </div>
+                </div>
+              </th>
+              <td
+                class="TD-sc-4t6406-0 bUpcjC"
+                height="inherit"
+              >
+                <div
+                  class="Row-x1o3ru-0 iEKQis"
+                >
+                  <img
+                    class="Img-sc-1kfzr96-0 lmhFEd"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
+              </td>
+              <td
+                class="TD-sc-4t6406-0 bUpcjC"
+                height="inherit"
+              >
+                <div
+                  class="Row-x1o3ru-0 iEKQis"
+                >
+                  <img
+                    class="Img-sc-1kfzr96-0 lmhFEd"
+                    src="IMAGE_MOCK"
+                  />
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div
+    class="Row-x1o3ru-0 tGqJH"
+  >
+    <div
+      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 kOPgLc"
+    >
+      <div
+        class="Box-sc-14m3exe-0 cidtM"
+      >
+        <div
+          class="Row-x1o3ru-0 kRLZf"
+          display="flex"
+        >
+          <div
+            class="StyledCircle-sc-18vml2t-0 kmfkKa"
+            color="#FFFFFF"
+            opacity="1"
+          >
+            <img
+              class="Img-sc-1kfzr96-0 lmhFEd"
+              src="IMAGE_MOCK"
+            />
+          </div>
+          <p
+            class="Text-sc-2lza2m-0 jmEVdS"
+            color="#C866EA"
+            font-weight="bold"
+          >
+            Add new row
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

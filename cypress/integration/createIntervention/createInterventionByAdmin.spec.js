@@ -13,12 +13,12 @@ describe('Create Intervention by Admin', () => {
   });
   it('Create Intervention by Admin tests', () => {
     cy.visit('/');
-    // Create intervention and session
+    // Create session and session
     cy.createIntervention();
     cy.createSessionsInIntervention(1);
 
     // Enter to session
-    cy.getBySel(`enter-intervention-${index}`).click();
+    cy.getBySel(`enter-session-${index}`).click();
     cy.url().should('include', '/edit');
 
     // Change website size
@@ -30,8 +30,8 @@ describe('Create Intervention by Admin', () => {
     cy.populateSessionWithQuestions(questionTypes, {});
 
     // Check variables in branching
-    cy.getBySel('back-problem-button').click();
-    cy.getBySel('branching-problem-toggle').check({ force: true });
+    cy.getBySel('back-intervention-button').click();
+    cy.getBySel('branching-intervention-toggle').check({ force: true });
     cy.contains('Add variable').click({ force: true });
     cy.getBySel('question-variable-chooser').should('have.length', 7);
   });

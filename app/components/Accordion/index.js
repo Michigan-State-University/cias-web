@@ -2,7 +2,7 @@ import React, { useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 
-import { reorderScope } from 'models/Intervention/ReorderScope';
+import { reorderScope } from 'models/Session/ReorderScope';
 
 import Box from 'components/Box';
 import { AccordionContainer } from './styled';

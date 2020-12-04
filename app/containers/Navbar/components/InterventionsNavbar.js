@@ -18,18 +18,18 @@ import {
   makeSelectSelectedQuestionId,
 } from 'global/reducers/questions';
 import {
-  editInterventionRequest,
-  makeSelectIntervention,
-  editInterventionSaga,
-  makeSelectInterventionEditLoader,
-} from 'global/reducers/intervention';
+  editSessionRequest,
+  makeSelectSession,
+  editSessionSaga,
+  makeSelectSessionEditLoader,
+} from 'global/reducers/session';
 import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
 import { themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
 import backButton from 'assets/svg/arrow-black.svg';
 
 import ActionIcon from 'components/ActionIcon';
-import { makeSelectProblemStatus } from 'global/reducers/problem';
+import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit, canPreview } from 'models/Status/statusPermissions';
 import messages from './messages';
 import {
@@ -46,20 +46,20 @@ const getActiveTab = (path, formatMessage) => {
 };
 
 const InterventionNavbar = ({
-  intervention: { name },
-  updateInterventionName,
+  session: { name },
+  updateSessionName,
   intl: { formatMessage },
   location: { pathname },
   questionsLength,
   selectedQuestion,
   interventionEditing,
   questionGroupsEditing,
-  problemStatus,
+  interventionStatus,
   match: { params },
 }) => {
-  const { problemId, interventionId } = params;
+  const { interventionId, sessionId } = params;
 
-  useInjectSaga({ key: 'editIntervention', saga: editInterventionSaga });
+  useInjectSaga({ key: 'editSession', saga: editSessionSaga });
   const [tabActive, setTabActive] = useState(
     getActiveTab(pathname, formatMessage),
   );
@@ -67,16 +67,19 @@ const InterventionNavbar = ({
     setTabActive(getActiveTab(pathname, formatMessage));
   }, [pathname]);
 
-  const previewDisabled = !questionsLength || !canPreview(problemStatus);
+  const previewDisabled = !questionsLength || !canPreview(interventionStatus);
 
-  const editingPossible = canEdit(problemStatus);
+  const editingPossible = canEdit(interventionStatus);
 
   const isSaving = questionGroupsEditing || interventionEditing;
 
   return (
     <Row align="center" justify="between" width="100%" mr={35}>
       <Row align="center">
-        <ActionIcon to={`/interventions/${problemId}`} iconSrc={backButton} />
+        <ActionIcon
+          to={`/interventions/${interventionId}`}
+          iconSrc={backButton}
+        />
         <StyledInput
           disabled={!editingPossible}
           px={12}
@@ -86,7 +89,7 @@ const InterventionNavbar = ({
           fontSize={23}
           placeholder={formatMessage(messages.placeholder)}
           onBlur={val =>
-            updateInterventionName({ path: 'name', value: val }, ['name'])
+            updateSessionName({ path: 'name', value: val }, ['name'])
           }
           maxWidth={280}
         />
@@ -102,7 +105,7 @@ const InterventionNavbar = ({
         <div
           renderAsLink={
             <StyledLink
-              to={`/interventions/${problemId}/sessions/${interventionId}/edit`}
+              to={`/interventions/${interventionId}/sessions/${sessionId}/edit`}
             >
               {formatMessage(messages.content)}
             </StyledLink>
@@ -111,7 +114,7 @@ const InterventionNavbar = ({
         <div
           renderAsLink={
             <StyledLink
-              to={`/interventions/${problemId}/sessions/${interventionId}/settings`}
+              to={`/interventions/${interventionId}/sessions/${sessionId}/settings`}
             >
               {formatMessage(messages.settings)}
             </StyledLink>
@@ -138,7 +141,7 @@ const InterventionNavbar = ({
           )}
         </SaveInfoContainer>
         <PreviewButton
-          to={`/interventions/${problemId}/sessions/${interventionId}/preview/${selectedQuestion}`}
+          to={`/interventions/${interventionId}/sessions/${sessionId}/preview/${selectedQuestion}`}
           previewDisabled={previewDisabled}
           text={formatMessage(messages.previewCurrent)}
           target="_blank"
@@ -149,11 +152,11 @@ const InterventionNavbar = ({
 };
 
 InterventionNavbar.propTypes = {
-  intervention: PropTypes.shape({
+  session: PropTypes.shape({
     name: PropTypes.string,
     id: PropTypes.string,
   }),
-  updateInterventionName: PropTypes.func,
+  updateSessionName: PropTypes.func,
   intl: intlShape,
   location: PropTypes.object,
   questionsLength: PropTypes.number,
@@ -161,20 +164,20 @@ InterventionNavbar.propTypes = {
   interventionEditing: PropTypes.bool,
   questionGroupsEditing: PropTypes.bool,
   match: PropTypes.object,
-  problemStatus: PropTypes.string,
+  interventionStatus: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
-  intervention: makeSelectIntervention(),
+  session: makeSelectSession(),
   questionsLength: makeSelectQuestionsLength(),
   selectedQuestion: makeSelectSelectedQuestionId(),
-  interventionEditing: makeSelectInterventionEditLoader(),
+  interventionEditing: makeSelectSessionEditLoader(),
   questionGroupsEditing: makeSelectQuestionGroupsLoader(),
-  problemStatus: makeSelectProblemStatus(),
+  interventionStatus: makeSelectInterventionStatus(),
 });
 
 const mapDispatchToProps = {
-  updateInterventionName: editInterventionRequest,
+  updateSessionName: editSessionRequest,
 };
 
 export default compose(

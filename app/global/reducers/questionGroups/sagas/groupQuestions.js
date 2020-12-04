@@ -11,10 +11,7 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
 } from 'global/reducers/questions/selectors';
-import {
-  DefaultGroupType,
-  PlainGroupType,
-} from 'models/Intervention/GroupTypes';
+import { DefaultGroupType, PlainGroupType } from 'models/Session/GroupTypes';
 
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
 import { setAnimationStopPosition } from 'global/reducers/localState';
@@ -30,8 +27,8 @@ import {
   groupQuestionsSuccess,
 } from '../actions';
 
-function* groupQuestions({ payload: { questionIds, interventionId } }) {
-  const requestURL = `v1/interventions/${interventionId}/question_groups`;
+function* groupQuestions({ payload: { questionIds, sessionId } }) {
+  const requestURL = `v1/sessions/${sessionId}/question_groups`;
   const groups = yield select(makeSelectQuestionGroups());
   const lastPlainGroup = findLast(
     groups,
