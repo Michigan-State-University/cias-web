@@ -2,6 +2,32 @@ Changelog
 =========
 
 
+v0.2.0
+- Add last changes to CHANGELOG and fix version of application in helm chart. [Jerzy Sładkowski]
+- Fix copy mismatch. [Michal Grzelak]
+- Restore access settings copy. [Michal Grzelak]
+- Rename copy. [Michal Grzelak]
+- Rename problem => intervention leftovers. [Michal Grzelak]
+- Fix wrong rename. [Michal Grzelak]
+- Fix tests. [Michal Grzelak]
+- Copy fixes. [Michal Grzelak]
+- Merge fixes. [Michal Grzelak]
+- Branching layout fix. [Michal Grzelak]
+- Fixes. [Michal Grzelak]
+- Rename intervention container. [Michal Grzelak]
+- Rename intervention => session. [Michal Grzelak]
+- Fix CharacterAnim bug. [Michal Grzelak]
+- Rename all structure entities intervention => session. [Michal
+  Grzelak]
+- Rename selectors intervention => session. [Michal Grzelak]
+- Rename sagas problem => intervention and change keys in components.
+  [Michal Grzelak]
+- Rename sagas intervention => session. [Michal Grzelak]
+- Rename problemId => interventionId. [Michal Grzelak]
+- Rename interventionId => sessionId. [Michal Grzelak]
+- Rename endpoints and request structure. [Michal Grzelak]
+- Add CHANGELOG. [Jerzy Sładkowski]
+
 v0.0.0 (15.05.2020) - v0.1.1 (03.12.2020)
 ------------
 - Add version of app in helm chart. [Jerzy Sładkowski]
