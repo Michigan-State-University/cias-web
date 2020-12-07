@@ -39,3 +39,26 @@ export const createUser = (index = 0) => ({
   roles: ['admin'],
   timeZone: 'America/New_York',
 });
+
+export const createReport = (index = 0) => ({
+  id: `report-test-${index}`,
+  title: `Report: ${index}. part - Results`,
+});
+
+export const createParticipantSession = (index = 0, available = false) => ({
+  id: `Session-test-${index}`,
+  title: `Session: ${index}`,
+  available,
+  link: available ? 'start/sessionId' : undefined,
+  report: !available ? 'report/sessionId' : undefined,
+});
+
+export const createParticipantIntervention = (
+  index = 0,
+  sessions = [createParticipantSession(index)],
+) => ({
+  id: `Intervention-test-${index}`,
+  title: `Intervention: ${index}`,
+  sessions,
+  emailNotifications: true,
+});

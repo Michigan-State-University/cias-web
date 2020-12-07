@@ -25,6 +25,7 @@ const Collapse = ({
   imgWithBackground,
   deleteActive,
   index,
+  animatedImg,
   'data-cy': cypressId,
 }) => (
   <StyledCollapseContainer data-cy={cypressId}>
@@ -44,6 +45,7 @@ const Collapse = ({
       bgOpacity={bgOpacity}
       deleteActive={deleteActive}
       index={index}
+      animatedImg={animatedImg}
     />
     <CollapseContent child={children} isOpened={isOpened} />
   </StyledCollapseContainer>
@@ -66,6 +68,7 @@ Collapse.propTypes = {
   color: PropTypes.string,
   deleteActive: PropTypes.bool,
   index: PropTypes.number,
+  animatedImg: PropTypes.bool,
   'data-cy': PropTypes.string,
 };
 

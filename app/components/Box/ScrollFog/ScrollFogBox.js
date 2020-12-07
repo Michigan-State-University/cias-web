@@ -6,7 +6,13 @@ import Box from 'components/Box/index';
 import useScrollInfo from 'utils/useScrollInfo';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
-import { BottomFog, LeftFog, RightFog, TopFog } from './styled';
+import {
+  BottomFog,
+  LeftFog,
+  RightFog,
+  TopFog,
+  HideScrollbarBox,
+} from './styled';
 
 const ScrollFogBox = React.forwardRef(
   (
@@ -69,14 +75,14 @@ const ScrollFogBox = React.forwardRef(
     }, [x.percentage, y.percentage, horizontalFog, verticalFog]);
 
     return (
-      <Box ref={ref} position="relative">
+      <Box ref={ref} position="relative" width="100%">
         {leftFogVisible && <LeftFog leftMargin={leftMargin} />}
         {rightFogVisible && <RightFog rightMargin={rightMargin} />}
         {topFogVisible && <TopFog topMargin={topMargin} />}
         {bottomFogVisible && <BottomFog bottomMargin={bottomMargin} />}
-        <Box ref={setRef} {...props}>
+        <HideScrollbarBox ref={setRef} {...props}>
           {children}
-        </Box>
+        </HideScrollbarBox>
       </Box>
     );
   },

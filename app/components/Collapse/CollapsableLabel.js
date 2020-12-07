@@ -25,9 +25,13 @@ const CollapseLabel = ({
   bgOpacity,
   deleteActive,
   index,
+  animatedImg,
 }) => {
-  const img = isOpened ? onShowImg : onHideImg;
-  const imgElement = <Img src={img} />;
+  const currentImg = isOpened ? onShowImg : onHideImg;
+  const img = animatedImg ? onShowImg : currentImg;
+  const imgElement = (
+    <Img className={animatedImg ? 'animated-img' : 'img'} src={img} />
+  );
   const displayedImage = !imgWithBackground ? (
     imgElement
   ) : (
@@ -42,6 +46,7 @@ const CollapseLabel = ({
         px={px}
         onClick={onToggle}
         bgOpacity={bgOpacity}
+        isOpened={isOpened}
       >
         <Row justify="between">
           {label} {displayedImage}
@@ -77,6 +82,7 @@ CollapseLabel.propTypes = {
   bgOpacity: PropTypes.number,
   deleteActive: PropTypes.bool,
   index: PropTypes.number,
+  animatedImg: PropTypes.bool,
 };
 
 export default CollapseLabel;

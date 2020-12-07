@@ -12,6 +12,10 @@ export default defineMessages({
     id: `${scope}.placeholder`,
     defaultMessage: 'e-Session Name',
   },
+  menu: {
+    id: `${scope}.menu`,
+    defaultMessage: 'Menu',
+  },
   content: {
     id: `${scope}.content`,
     defaultMessage: 'Screen Creation',

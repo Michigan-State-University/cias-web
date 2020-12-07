@@ -6,6 +6,7 @@ exports[`<ScrollFog /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  width: 100%;
   position: relative;
 }
 
@@ -16,12 +17,25 @@ exports[`<ScrollFog /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
 }
 
+.c2 {
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.c2::-webkit-scrollbar {
+  width: 0;
+}
+
 <div>
   <div
     class="c0"
+    width="100%"
   >
     <div
-      class="c1"
+      class="c1 c2"
     />
   </div>
 </div>

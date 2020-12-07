@@ -7,10 +7,11 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
     width="100%"
   >
     <div
-      class="Box-sc-14m3exe-0 kbuZxI"
+      class="Box-sc-14m3exe-0 kGWKEv"
+      width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 eGGOvX"
+        class="Box-sc-14m3exe-0 styled__HideScrollbarBox-hhq8kv-5 eGGOvX enAkpU"
         overflow="scroll"
       >
         <table

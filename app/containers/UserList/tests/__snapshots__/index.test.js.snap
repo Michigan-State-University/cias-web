@@ -382,6 +382,12 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
               1
             </p>
           </div>
+          <h1
+            class="H1-tncdg6-0 hvewsC"
+            cursor="pointer"
+          >
+            &gt;
+          </h1>
         </div>
       </div>
     </div>
@@ -762,6 +768,12 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
               1
             </p>
           </div>
+          <h1
+            class="H1-tncdg6-0 hvewsC"
+            cursor="pointer"
+          >
+            &gt;
+          </h1>
         </div>
       </div>
     </div>

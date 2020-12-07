@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReportTile /> Should render and match the snapshot 1`] = `
+<div
+  class="Box-sc-14m3exe-0 styled__StyledBox-sc-1ufj5af-0 chXRVY bZSfjv"
+>
+  <div
+    height="100%"
+    style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+  >
+    <div
+      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
+    >
+      <div
+        class="Row-x1o3ru-0 fdTqjP"
+      >
+        <img
+          src="IMAGE_MOCK"
+        />
+        <p
+          class="Text-sc-2lza2m-0 fIwRTV"
+          font-size="18"
+          font-weight="bold"
+        >
+          test
+        </p>
+      </div>
+    </div>
+    <div
+      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
+    >
+      <div
+        class="Row-x1o3ru-0 styled__DownloadRow-sc-1ufj5af-1 fdTqjP kTPFvW"
+      >
+        <a
+          class="StyledLink-sc-9buocn-0 kmesRI"
+          href="/file.pdf"
+          target="_blank"
+        >
+          <p
+            class="Text-sc-2lza2m-0 lpqXax"
+            color="#C866EA"
+            font-size="13"
+            font-weight="bold"
+          >
+            <span>
+              Download
+            </span>
+          </p>
+          <img
+            src="IMAGE_MOCK"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -1,10 +1,8 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import Box from 'components/Box';
 import { colors, boxShadows, themeColors } from 'theme';
 import Row from 'components/Row';
-import H2 from 'components/H2';
 
 export const ToggleableBox = styled(Box)`
   width: 100%;
@@ -29,25 +27,6 @@ export const SessionIndex = styled.div`
   align-items: center;
   position: relative;
   cursor: pointer;
-`;
-
-export const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: black;
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  &:hover {
-    ${H2} {
-      color: ${themeColors.secondary} !important;
-    }
-
-    ${ToggleableBox} {
-      background-color: black !important;
-    }
-  }
 `;
 
 export const StyledRow = styled(Row)`

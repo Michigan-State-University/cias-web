@@ -3,59 +3,66 @@
 exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="styled__NavbarStyled-sc-8703sy-0 TuLlD"
+    class="styled__NavbarStyled-sc-8703sy-0 joLgQf"
   >
-    <a
-      href="/"
-    >
-      <img
-        alt="logo"
-        class="Img-sc-1kfzr96-0 dgoNpp"
-        height="51"
-        src="IMAGE_MOCK"
-        width="56"
-      />
-    </a>
-    <img
-      class="Img-sc-1kfzr96-0 geQIqP"
-      src="IMAGE_MOCK"
-    />
     <div
       class="Row-x1o3ru-0 duXTXk"
       width="100%"
     >
-      <a
-        active="1"
-        class="styled__NavbarTabLink-sc-1q1badg-4 gxxSDi"
-        href="/"
-        ml="10"
+      <div
+        class="Row-x1o3ru-0 styled__StyledLogos-sc-1q1badg-6 dAhqIQ huQsJJ"
       >
-        <p
-          class="Text-sc-2lza2m-0 iynfNN"
-          font-size="15"
+        <a
+          href="/"
         >
-          <span>
-            Interventions
-          </span>
-        </p>
-      </a>
-      <a
-        class="styled__NavbarTabLink-sc-1q1badg-4 hwFeBm"
-        href="/users"
-        ml="10"
+          <img
+            alt="logo"
+            class="Img-sc-1kfzr96-0 gNIYBc"
+            src="IMAGE_MOCK"
+          />
+        </a>
+        <img
+          class="Img-sc-1kfzr96-0 KGooO"
+          src="IMAGE_MOCK"
+        />
+      </div>
+      <div
+        class="Row-x1o3ru-0 eeuVv"
+        width="100%"
       >
-        <p
-          class="Text-sc-2lza2m-0 iynfNN"
-          font-size="15"
+        <a
+          active="1"
+          class="styled__NavbarTabLink-sc-1q1badg-4 gxxSDi navbar-tabs"
+          href="/"
+          ml="10"
         >
-          <span>
-            Manage accounts
-          </span>
-        </p>
-      </a>
+          <p
+            class="Text-sc-2lza2m-0 iynfNN"
+            font-size="15"
+          >
+            <span>
+              Interventions
+            </span>
+          </p>
+        </a>
+        <a
+          class="styled__NavbarTabLink-sc-1q1badg-4 hwFeBm navbar-tabs"
+          href="/users"
+          ml="10"
+        >
+          <p
+            class="Text-sc-2lza2m-0 iynfNN"
+            font-size="15"
+          >
+            <span>
+              Manage accounts
+            </span>
+          </p>
+        </a>
+      </div>
     </div>
     <div
-      class="styled__RightPanel-sc-8703sy-1 DsVli"
+      class="styled__RightPanel-sc-8703sy-1 gdymJS"
     >
       <div
         class="styled__DropDownContainer-sc-8703sy-5 exwLrQ"
@@ -73,7 +80,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
         <div />
       </div>
       <div
-        class="Box-sc-14m3exe-0 lavaAX"
+        class="Box-sc-14m3exe-0 lavaAX user-name-info"
       >
         first-name last-name
       </div>

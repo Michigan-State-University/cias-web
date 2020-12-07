@@ -13,6 +13,7 @@ import Row from 'components/Row';
 import H2 from 'components/H2';
 import Dropdown from 'components/Dropdown';
 import Divider from 'components/Divider';
+import StyledLink from 'components/StyledLink';
 
 import copy from 'assets/svg/copy.svg';
 import mail from 'assets/svg/pink-mail.svg';
@@ -23,7 +24,7 @@ import Img from 'components/Img';
 import Box from 'components/Box';
 import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
-import { SessionIndex, ToggleableBox, StyledRow, StyledLink } from './styled';
+import { ToggleableBox, StyledRow, SessionIndex } from './styled';
 import SessionBranching from '../SessionBranching';
 
 function SessionListItem({

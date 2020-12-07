@@ -26,7 +26,11 @@ const navbarMessages = defineMessages({
   },
   participantInterventions: {
     id: `${scope}.participantInterventions`,
-    defaultMessage: 'CIAS',
+    defaultMessage: 'Dashboard',
+  },
+  participantReports: {
+    id: `${scope}.participantReports`,
+    defaultMessage: 'Reports',
   },
   guestInterventions: {
     id: `${scope}.guestInterventions`,
@@ -48,6 +52,9 @@ const navbarNames = {
   ),
   participantInterventions: (
     <FormattedMessage {...navbarMessages.participantInterventions} />
+  ),
+  participantReports: (
+    <FormattedMessage {...navbarMessages.participantReports} />
   ),
   guestInterventions: (
     <FormattedMessage {...navbarMessages.guestInterventions} />

@@ -12,13 +12,21 @@ Object {
   color: white;
   cursor: pointer;
   width: 100%;
-  margin-right: 5px;
   background-color: rgba(248,251,255,1);
   height: auto;
   padding-top: 12px;
   padding-bottom: 12px;
   padding-right: 10px;
   padding-left: 10px;
+}
+
+.c15 .animated-img {
+  -webkit-transition: -webkit-transform 0.3s,height 4s;
+  -webkit-transition: transform 0.3s,height 4s;
+  transition: transform 0.3s,height 4s;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .c19 .ReactCollapse--collapse {
@@ -304,7 +312,7 @@ Object {
                           </div>
                            
                           <img
-                            class="c18"
+                            class="c18 img"
                             src="IMAGE_MOCK"
                           />
                         </div>
@@ -395,7 +403,7 @@ Object {
                     class="Row-x1o3ru-0 dSvoas"
                   >
                     <div
-                      class="styled__StyledCollapseLabel-o4e1ys-1 wIKgN"
+                      class="styled__StyledCollapseLabel-o4e1ys-1 fRycMA"
                       height="auto"
                     >
                       <div
@@ -415,7 +423,7 @@ Object {
                         </div>
                          
                         <img
-                          class="Img-sc-1kfzr96-0 lmhFEd"
+                          class="Img-sc-1kfzr96-0 lmhFEd img"
                           src="IMAGE_MOCK"
                         />
                       </div>

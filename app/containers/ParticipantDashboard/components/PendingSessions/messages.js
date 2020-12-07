@@ -9,12 +9,8 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.ParticipantDashboard';
 
 export default defineMessages({
-  sessions: {
-    id: `${scope}.sessions`,
-    defaultMessage: 'My Sessions',
-  },
-  noResults: {
-    id: `${scope}.noResults`,
-    defaultMessage: 'No Results',
+  pendingSessions: {
+    id: `${scope}.pendingSessions`,
+    defaultMessage: 'Pending Sessions',
   },
 });

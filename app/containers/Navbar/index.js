@@ -94,7 +94,10 @@ export function Navbar({
             )}
           </div>
         </DropDownContainer>
-        <Box clickable>{`${firstName} ${lastName}`}</Box>
+        <Box
+          className="user-name-info"
+          clickable
+        >{`${firstName} ${lastName}`}</Box>
       </RightPanel>
     </NavbarStyled>
   );

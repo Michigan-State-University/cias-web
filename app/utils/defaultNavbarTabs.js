@@ -3,6 +3,8 @@ import navbarNames from './navbarNames';
 
 export const interventionsTabId = 'sessions';
 export const accountsTabId = 'accounts';
+export const participantDashboardTabId = interventionsTabId;
+export const participantReportsTabId = 'reports';
 
 const interventionsTab = message => ({
   id: interventionsTabId,
@@ -16,6 +18,18 @@ const accountsTab = message => ({
   message,
 });
 
+const participantDashboardTab = message => ({
+  id: interventionsTabId,
+  path: '/',
+  message,
+});
+
+const participantReportsTab = message => ({
+  id: participantReportsTabId,
+  path: '/reports',
+  message,
+});
+
 const navbarTabs = {
   [Roles.admin]: [
     interventionsTab(navbarNames.adminInterventions),
@@ -26,9 +40,8 @@ const navbarTabs = {
     accountsTab(navbarNames.researcherAccounts),
   ],
   [Roles.participant]: [
-    {
-      message: navbarNames.participantInterventions,
-    },
+    participantDashboardTab(navbarNames.participantInterventions),
+    participantReportsTab(navbarNames.participantReports),
   ],
   [Roles.guest]: [
     {

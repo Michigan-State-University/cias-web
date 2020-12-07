@@ -18,13 +18,21 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
   color: white;
   cursor: pointer;
   width: 100%;
-  margin-right: 5px;
   background-color: rgba(0,0,237,1);
   height: 40px;
   padding-top: 12px;
   padding-bottom: 12px;
   padding-right: 12px;
   padding-left: 12px;
+}
+
+.c3 .animated-img {
+  -webkit-transition: -webkit-transform 0.3s,height 4s;
+  -webkit-transition: transform 0.3s,height 4s;
+  transition: transform 0.3s,height 4s;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .c7 .ReactCollapse--collapse {
@@ -117,7 +125,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                 Label0
                  
                 <img
-                  class="c5"
+                  class="c5 img"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -162,7 +170,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                 Label1
                  
                 <img
-                  class="c5"
+                  class="c5 img"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -207,7 +215,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                 Label2
                  
                 <img
-                  class="c5"
+                  class="c5 img"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -240,13 +248,21 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
   color: white;
   cursor: pointer;
   width: 100%;
-  margin-right: 5px;
   background-color: rgba(0,0,237,1);
   height: 40px;
   padding-top: 12px;
   padding-bottom: 12px;
   padding-right: 12px;
   padding-left: 12px;
+}
+
+.c2 .animated-img {
+  -webkit-transition: -webkit-transform 0.3s,height 4s;
+  -webkit-transition: transform 0.3s,height 4s;
+  transition: transform 0.3s,height 4s;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .c6 .ReactCollapse--collapse {
@@ -324,7 +340,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
             Label0
              
             <img
-              class="c4"
+              class="c4 img"
               src="IMAGE_MOCK"
             />
           </div>
@@ -363,13 +379,43 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
   color: white;
   cursor: pointer;
   width: 100%;
-  margin-right: 5px;
   background-color: rgba(0,0,237,1);
   height: 40px;
   padding-top: 12px;
   padding-bottom: 12px;
   padding-right: 12px;
   padding-left: 12px;
+}
+
+.c3 .animated-img {
+  -webkit-transition: -webkit-transform 0.3s,height 4s;
+  -webkit-transition: transform 0.3s,height 4s;
+  transition: transform 0.3s,height 4s;
+  -webkit-transform: rotate0deg);
+  -ms-transform: rotate0deg);
+  transform: rotate0deg);
+}
+
+.c8 {
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  background-color: rgba(0,0,237,1);
+  height: 40px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.c8 .animated-img {
+  -webkit-transition: -webkit-transform 0.3s,height 4s;
+  -webkit-transition: transform 0.3s,height 4s;
+  transition: transform 0.3s,height 4s;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 
 .c7 .ReactCollapse--collapse {
@@ -462,7 +508,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                 Label0
                  
                 <img
-                  class="c5"
+                  class="c5 img"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -498,7 +544,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             class="c2"
           >
             <div
-              class="c3"
+              class="c8"
               height="40px"
             >
               <div
@@ -507,7 +553,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                 Label1
                  
                 <img
-                  class="c5"
+                  class="c5 img"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -543,7 +589,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             class="c2"
           >
             <div
-              class="c3"
+              class="c8"
               height="40px"
             >
               <div
@@ -552,7 +598,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                 Label2
                  
                 <img
-                  class="c5"
+                  class="c5 img"
                   src="IMAGE_MOCK"
                 />
               </div>

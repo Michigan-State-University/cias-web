@@ -2,15 +2,119 @@
 
 exports[`<ParticipantDashboard /> should render and match the snapshot 1`] = `
 <div
-  class="styled__FillScreenLoader-tle2yi-0 jaQIeH"
-  data-testid="fullscreen-loader"
-  opacity="0.5"
+  class="styled__StyledContainer-sc-16yio6w-0 cQhApX"
+  style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
 >
   <div
-    class="styled__StyledSpinner-d123q3-0 gidDvb"
-    color="#C866EA"
-    size="100"
-    width="6"
+    class="Row-x1o3ru-0 styled__StyledRow-sc-10azlal-0 jkQtrQ gvTbip"
+    width="100%"
+  >
+    <div
+      class="Column-sc-1n6divy-0 dkFaMN"
+      width="100%"
+    >
+      <div
+        class="Row-x1o3ru-0 gmEEpD"
+      >
+        <h1
+          class="H1-tncdg6-0 eNjQDq"
+        >
+          <span>
+            Pending Sessions
+          </span>
+        </h1>
+      </div>
+      <div
+        class="styled__InlineLoader-tle2yi-1 dIAlHd"
+        data-testid="inline-loader"
+      >
+        <div
+          class="styled__StyledSpinner-d123q3-0 gidDvb"
+          color="#C866EA"
+          size="100"
+          width="6"
+        />
+      </div>
+    </div>
+    <div
+      class="Column-sc-1n6divy-0 CEqUh"
+      width="70"
+    />
+    <div
+      class="Column-sc-1n6divy-0 dkFaMN"
+      width="100%"
+    >
+      <div
+        class="Row-x1o3ru-0 gmEEpD"
+      >
+        <h1
+          class="H1-tncdg6-0 eNjQDq"
+        >
+          <span>
+            Latest Report
+          </span>
+        </h1>
+        <a
+          class="StyledLink-sc-9buocn-0 kmesRI"
+          href="/reports"
+        >
+          <p
+            class="Text-sc-2lza2m-0 jIrass"
+            color="#C866EA"
+            font-weight="bold"
+          >
+            <span>
+              View All Reports
+            </span>
+          </p>
+        </a>
+      </div>
+      <div
+        class="styled__InlineLoader-tle2yi-1 dIAlHd"
+        data-testid="inline-loader"
+      >
+        <div
+          class="styled__StyledSpinner-d123q3-0 gidDvb"
+          color="#C866EA"
+          size="100"
+          width="6"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="Row-x1o3ru-0 duXTXk"
+    width="100%"
+  >
+    <div
+      class="Column-sc-1n6divy-0 cofXgG"
+    >
+      <div
+        class="Row-x1o3ru-0 btlqse"
+      >
+        <h1
+          class="H1-tncdg6-0 eNjQDq"
+        >
+          <span>
+            Your interventions
+          </span>
+        </h1>
+      </div>
+      <div
+        class="styled__InlineLoader-tle2yi-1 dIAlHd"
+        data-testid="inline-loader"
+      >
+        <div
+          class="styled__StyledSpinner-d123q3-0 gidDvb"
+          color="#C866EA"
+          size="100"
+          width="6"
+        />
+      </div>
+    </div>
+  </div>
+  <span
+    style="display: table; clear: both;"
   />
 </div>
 `;

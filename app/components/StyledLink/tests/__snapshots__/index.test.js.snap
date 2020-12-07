@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<H1 /> should match the snapshot 1`] = `
+.c0 {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: black;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c0:hover .H2-egphza-0 {
+  color: #C866EA !important;
+}
+
+.c0:hover .styled__ToggleableBox-sc-1b3iden-0 {
+  background-color: black !important;
+}
+
+<div>
+  <a
+    class="c0"
+    href="/https://example.com"
+  >
+    Click me!
+  </a>
+</div>
+`;
