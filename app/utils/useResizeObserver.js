@@ -1,15 +1,8 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import ResizeObserver from 'resize-observer-polyfill';
 
-const useResizeObserver = ({
-  onResize,
-  handleWidth = true,
-  handleHeight = true,
-  skipOnMount = false,
-  targetRef,
-}) => {
-  const [height, setHeight] = useState(null);
-  const [width, setWidth] = useState(null);
+const useResizeObserver = ({ onResize, skipOnMount = false, targetRef }) => {
+  const [size, setSize] = useState({ width: null, height: null });
   const resizeObserver = useRef(null);
   const firstRender = useRef(true);
 
@@ -18,18 +11,23 @@ const useResizeObserver = ({
 
     if (current) {
       resizeObserver.current = new ResizeObserver(entries => {
-        const element = entries[0];
-        const {
-          contentRect: { width: elWidth, height: elHeight },
-        } = element;
+        requestAnimationFrame(() => {
+          if (!Array.isArray(entries) || !entries.length) {
+            return;
+          }
 
-        if (handleWidth) setWidth(elWidth);
-        if (handleHeight) setHeight(elHeight);
-        if (typeof onResize === 'function') {
-          if (firstRender && skipOnMount) return;
+          const element = entries[0];
+          const {
+            contentRect: { width, height },
+          } = element;
 
-          onResize(elWidth, elHeight);
-        }
+          setSize({ width, height });
+          if (typeof onResize === 'function') {
+            if (firstRender && skipOnMount) return;
+
+            onResize(width, height);
+          }
+        });
       });
 
       resizeObserver.current.observe(current);
@@ -45,12 +43,11 @@ const useResizeObserver = ({
     if (current) {
       const { clientHeight, clientWidth } = current;
 
-      if (handleWidth) setWidth(clientWidth);
-      if (handleHeight) setHeight(clientHeight);
+      setSize({ width: clientWidth, height: clientHeight });
     }
   }, []);
 
-  return { height, width };
+  return size;
 };
 
 export default useResizeObserver;
