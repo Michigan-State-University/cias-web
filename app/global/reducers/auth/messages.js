@@ -23,6 +23,10 @@ export default defineMessages({
     id: `${scope}.changeEmailSuccess`,
     defaultMessage: 'You have successfully changed your e-mail address!',
   },
+  changePhoneNumberSuccess: {
+    id: `${scope}.changePhoneNumberSuccess`,
+    defaultMessage: 'You have successfully changed your phone number!',
+  },
   deleteAvatarError: {
     id: `${scope}.deleteAvatarError`,
     defaultMessage: 'Cannot remove your avatar.',

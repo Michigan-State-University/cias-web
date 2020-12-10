@@ -24,6 +24,9 @@ import {
   DELETE_AVATAR_REQUEST,
   DELETE_AVATAR_SUCCESS,
   DELETE_AVATAR_ERROR,
+  CHANGE_PHONE_NUMBER_REQUEST,
+  CHANGE_PHONE_NUMBER_SUCCESS,
+  CHANGE_PHONE_NUMBER_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -31,10 +34,12 @@ export const initialState = {
   errors: {
     changePasswordError: null,
     changeEmailError: null,
+    changePhoneNumberError: null,
   },
   loaders: {
     changePasswordLoading: false,
     changeEmailLoading: false,
+    changePhoneNumberLoading: false,
   },
   cache: {
     user: null,
@@ -118,5 +123,24 @@ export const authReducer = (state = initialState, { type, payload }) =>
 
       case CHANGE_ERROR_STATUS:
         draft.errors[payload.error] = payload.value;
+        break;
+
+      case CHANGE_PHONE_NUMBER_REQUEST:
+        draft.errors.changePhoneNumberError = null;
+        draft.loaders.changePhoneNumberLoading = true;
+        draft.cache.user = state.user;
+        break;
+      case CHANGE_PHONE_NUMBER_SUCCESS:
+        draft.loaders.changePhoneNumberLoading = false;
+        draft.errors.changePhoneNumberError = null;
+        draft.cache.user = null;
+        draft.user.phoneNumber = payload.phoneNumber;
+        draft.user.countryCode = payload.countryCode;
+        break;
+      case CHANGE_PHONE_NUMBER_ERROR:
+        draft.loaders.changePhoneNumberLoading = false;
+        draft.user = state.cache.user;
+        draft.errors.changePhoneNumberError = payload.error;
+        break;
     }
   });

@@ -237,17 +237,18 @@ describe('authReducer', () => {
 
   it('test CHANGE_ERROR_STATUS action', () => {
     const error = 'Test error';
+    const initState = createState();
     const actionRequest = actionBuilder(CHANGE_ERROR_STATUS, {
       error: 'changePasswordError',
       value: error,
     });
     const changeStatusState = {
-      ...initialState,
+      ...initState,
       errors: {
+        ...initState.errors,
         changePasswordError: error,
-        changeEmailError: null,
       },
     };
-    expect(authReducer(undefined, actionRequest)).toEqual(changeStatusState);
+    expect(authReducer(initState, actionRequest)).toEqual(changeStatusState);
   });
 });

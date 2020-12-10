@@ -81,7 +81,7 @@ const EmailForm = ({
               >
                 <Column>
                   <H3 mb={30}>
-                    <FormattedMessage {...messages.modalDescriptipn} />
+                    <FormattedMessage {...messages.modalDescription} />
                   </H3>
                   <FormikInput
                     data-testid="password-confirmation"

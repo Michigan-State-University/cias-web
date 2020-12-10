@@ -13,6 +13,7 @@ import Row from 'components/Row';
 import BackButton from 'components/BackButton';
 import H1 from 'components/H1';
 import Column from 'components/Column';
+import Box from 'components/Box';
 import { colors, themeColors, boxShadows } from 'theme';
 import messages from './messages';
 
@@ -20,6 +21,7 @@ import WrappedFullNameForm from './Containers/WrappedFullNameForm';
 import WrappedPasswordForm from './Containers/WrappedPasswordForm';
 import WrappedAvatarForm from './Containers/WrappedAvatarForm';
 import WrappedTimezoneForm from './Containers/WrappedTimezoneForm';
+import WrappedPhoneNumberForm from './Containers/WrappedPhoneNumberForm';
 
 import {
   StyledBox,
@@ -37,6 +39,7 @@ const AccountSettings = props => {
     FullNameComponent,
     TimezoneComponent,
     DeactivationComponent,
+    PhoneNumberComponent,
     userId,
   } = props;
   const [passwordReset, setPasswordReset] = useState(false);
@@ -100,8 +103,18 @@ const AccountSettings = props => {
                 />
               </StyledTimezoneBox>
             )}
+            {PhoneNumberComponent && (
+              <Box width="50%" pl={10}>
+                <WrappedPhoneNumberForm
+                  userId={userId}
+                  formatMessage={formatMessage}
+                />
+              </Box>
+            )}
+          </StyledRow>
+          <StyledRow width="100%" align="center" justify="end">
             {PasswordComponent && (
-              <Column mb={10} width="50%" align="center">
+              <Column width="33%" align="center">
                 <TextButton
                   onClick={openReset}
                   whiteSpace="nowrap"
@@ -129,6 +142,7 @@ AccountSettings.propTypes = {
   EmailComponent: PropTypes.object,
   TimezoneComponent: PropTypes.object,
   DeactivationComponent: PropTypes.object,
+  PhoneNumberComponent: PropTypes.object,
 };
 
 AccountSettings.defaultProps = {
@@ -136,6 +150,7 @@ AccountSettings.defaultProps = {
   AvatarComponent: WrappedAvatarForm,
   FullNameComponent: WrappedFullNameForm,
   TimezoneComponent: WrappedTimezoneForm,
+  PhoneNumberComponent: WrappedPhoneNumberForm,
   DeactivationComponent: null,
 };
 

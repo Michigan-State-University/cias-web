@@ -18,6 +18,9 @@ import {
   DELETE_AVATAR_REQUEST,
   DELETE_AVATAR_SUCCESS,
   DELETE_AVATAR_ERROR,
+  CHANGE_PHONE_NUMBER_REQUEST,
+  CHANGE_PHONE_NUMBER_SUCCESS,
+  CHANGE_PHONE_NUMBER_ERROR,
 } from './constants';
 
 export const logIn = user => actionBuilder(LOG_IN_USER, { user });
@@ -54,6 +57,13 @@ export const deleteAvatarRequest = () =>
 export const deleteAvatarSuccess = user =>
   actionBuilder(DELETE_AVATAR_SUCCESS, { user });
 export const deleteAvatarError = () => actionBuilder(DELETE_AVATAR_ERROR, {});
+
+export const changePhoneNumberRequest = data =>
+  actionBuilder(CHANGE_PHONE_NUMBER_REQUEST, { data });
+export const changePhoneNumberSuccess = ({ phoneNumber, countryCode }) =>
+  actionBuilder(CHANGE_PHONE_NUMBER_SUCCESS, { phoneNumber, countryCode });
+export const changePhoneNumberError = error =>
+  actionBuilder(CHANGE_PHONE_NUMBER_ERROR, { error });
 
 export const changeErrorStatus = (error, value) =>
   actionBuilder(CHANGE_ERROR_STATUS, { error, value });
