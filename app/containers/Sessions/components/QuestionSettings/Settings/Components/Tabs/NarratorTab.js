@@ -104,7 +104,7 @@ const NarratorTab = ({
         <UL>
           {getRemovedBlockForSetting(confirmationOption).map(blockType => (
             <LI key={blockType}>
-              {<FormattedMessage {...globalMessages.blockTypes[blockType]} />}
+              <FormattedMessage {...globalMessages.blockTypes[blockType]} />
             </LI>
           ))}
         </UL>
@@ -113,7 +113,7 @@ const NarratorTab = ({
   };
 
   return (
-    <Fragment>
+    <>
       <ConfirmationBox
         visible={isConfirmationBoxVisible}
         onClose={dismissConfirmation}
@@ -179,7 +179,7 @@ const NarratorTab = ({
         disableFeedbackBlock={showSpectrumBlockTypePresent}
         onClick={onCreateBlock}
       />
-    </Fragment>
+    </>
   );
 };
 

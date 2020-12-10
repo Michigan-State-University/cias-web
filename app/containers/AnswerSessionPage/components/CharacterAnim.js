@@ -334,14 +334,11 @@ const CharacterAnim = ({
 
 CharacterAnim.propTypes = {
   blocks: PropTypes.arrayOf(
-    PropTypes.oneOfType([
-      PropTypes.shape({ type: PropTypes.string, animation: PropTypes.string }),
-      PropTypes.shape({
-        type: PropTypes.string,
-        text: PropTypes.string,
-        audio_url: PropTypes.string,
-      }),
-    ]),
+    PropTypes.shape({
+      action: PropTypes.string,
+      endPosition: PropTypes.object,
+      type: PropTypes.string,
+    }),
   ),
   questionId: PropTypes.string,
   settings: PropTypes.object,

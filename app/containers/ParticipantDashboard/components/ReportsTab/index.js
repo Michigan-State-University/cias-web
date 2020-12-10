@@ -77,7 +77,7 @@ export const ReportsPage = ({
     return <Spinner color={themeColors.secondary} size={100} />;
 
   return (
-    <Fragment>
+    <>
       {displayLoader && (
         <Box
           bg={colors.white}
@@ -102,7 +102,7 @@ export const ReportsPage = ({
           size={reportsSize}
         />
       </AppContainer>
-    </Fragment>
+    </>
   );
 };
 

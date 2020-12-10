@@ -54,7 +54,7 @@ const ResetPasswordPage = ({
     setSubmitting(false);
   };
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
@@ -69,7 +69,7 @@ const ResetPasswordPage = ({
             onSubmit={onSubmit}
           >
             {({ handleSubmit }) => (
-              <Fragment>
+              <>
                 <FormikInput
                   formikKey="email"
                   placeholder={formatMessage(messages.emailPlaceholder)}
@@ -94,12 +94,12 @@ const ResetPasswordPage = ({
                   <FormattedMessage {...messages.return} />
                 </LinkButton>
                 {error && <ErrorAlert errorText={error} mt={25} />}
-              </Fragment>
+              </>
             )}
           </Formik>
         </Column>
       </Fill>
-    </Fragment>
+    </>
   );
 };
 

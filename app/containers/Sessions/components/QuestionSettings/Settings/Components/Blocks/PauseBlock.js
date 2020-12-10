@@ -48,6 +48,7 @@ PauseBlock.propTypes = {
   block: PropTypes.shape({
     type: PropTypes.string,
     animation: PropTypes.string,
+    pauseDuration: PropTypes.number,
   }),
   blockIndex: PropTypes.number,
   updateDuration: PropTypes.func,

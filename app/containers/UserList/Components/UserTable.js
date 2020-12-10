@@ -58,7 +58,7 @@ const UserTable = ({
     </>
   );
   return (
-    <Fragment>
+    <>
       <ConfirmationBox
         visible={Boolean(pickedUser.id)}
         onClose={closeModal}
@@ -81,7 +81,7 @@ const UserTable = ({
         />
       </TableLoading>
       <PaginationHandler setPage={setPage} page={page} pages={pages} />
-    </Fragment>
+    </>
   );
 };
 

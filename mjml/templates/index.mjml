@@ -1,0 +1,7 @@
+<mjml>
+  <mj-body>
+    <app-layout>
+    <mj-text font-style="italic" font-size="20px" color="#626262">Some Text!</mj-text>
+    </app-layout>
+  <mj-body>
+</mjml>

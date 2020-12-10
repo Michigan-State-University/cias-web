@@ -28,9 +28,9 @@ describe('<FormikSelect />', () => {
         onSubmit={jest.fn()}
       >
         {() => (
-          <Fragment>
+          <>
             <FormikSelect {...props} />
-          </Fragment>
+          </>
         )}
       </Formik>,
     );
@@ -44,9 +44,9 @@ describe('<FormikSelect />', () => {
         onSubmit={jest.fn()}
       >
         {() => (
-          <Fragment>
+          <>
             <FormikSelect {...props} />
-          </Fragment>
+          </>
         )}
       </Formik>,
     );

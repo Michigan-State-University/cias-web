@@ -28,7 +28,7 @@ export function ParticipantDashboard() {
   useInjectSaga({ key: 'reportsSaga', saga: allReportsSagas });
 
   return (
-    <Fragment>
+    <>
       <AppContainer>
         <StyledRow width="100%" justify="evenly">
           <PendingSessions />
@@ -39,7 +39,7 @@ export function ParticipantDashboard() {
           <Interventions />
         </Row>
       </AppContainer>
-    </Fragment>
+    </>
   );
 }
 

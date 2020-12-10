@@ -295,7 +295,7 @@ export function AnswerSessionPage({
     return formatMessage(messages.previewDisabled);
   };
 
-  const renderPage = () => <Fragment>{renderQuestion()}</Fragment>;
+  const renderPage = () => <>{renderQuestion()}</>;
 
   if (questionLoading) return <Loader />;
 
@@ -331,7 +331,7 @@ export function AnswerSessionPage({
             />
           )}
           {interventionStarted && (
-            <Fragment>
+            <>
               <Box width="100%">
                 {!questionLoading && currentQuestion && interventionStarted && (
                   <AnimationRefHelper
@@ -349,7 +349,7 @@ export function AnswerSessionPage({
                 )}
               </Box>
               {answersError && <ErrorAlert errorText={answersError} />}
-            </Fragment>
+            </>
           )}
         </AnswerOuterContainer>
       </Box>

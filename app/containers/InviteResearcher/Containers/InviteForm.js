@@ -31,7 +31,7 @@ const InviteForm = ({
   };
 
   return (
-    <Fragment>
+    <>
       <H3 mb={20}>
         <FormattedMessage {...messages.sendInvite} />
       </H3>
@@ -56,7 +56,7 @@ const InviteForm = ({
           </Text>
         )}
       </Column>
-    </Fragment>
+    </>
   );
 };
 

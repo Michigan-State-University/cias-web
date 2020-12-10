@@ -6,6 +6,7 @@ const prettierOptions = JSON.parse(
 );
 
 module.exports = {
+  root: true,
   parser: 'babel-eslint',
   extends: [
     'airbnb',
@@ -82,6 +83,8 @@ module.exports = {
     'require-yield': 0,
     'consistent-return': 0,
     'react/no-danger': 0,
+    'react/jsx-props-no-spreading': 0,
+    'react/jsx-fragments': 1,
   },
   settings: {
     'import/resolver': {
@@ -90,4 +93,5 @@ module.exports = {
       },
     },
   },
+  ignorePatterns: ['mjml', 'internals/**/*.js', '*.setup.js'],
 };

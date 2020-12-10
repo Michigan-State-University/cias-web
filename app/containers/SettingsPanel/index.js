@@ -115,6 +115,11 @@ SettingsPanel.propTypes = {
   changeAccessSetting: PropTypes.func,
   interventionState: PropTypes.shape({
     loaders: PropTypes.object,
+    intervention: PropTypes.shape({ status: PropTypes.string }),
+    errors: PropTypes.shape({
+      fetchInterventionError: PropTypes.string,
+      fetchUserAccessError: PropTypes.string,
+    }),
   }),
 };
 

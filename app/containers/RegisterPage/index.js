@@ -107,7 +107,7 @@ export function RegisterPage({
   };
 
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
@@ -201,7 +201,7 @@ export function RegisterPage({
           {error && <ErrorAlert errorText={error} mt={20} />}
         </Column>
       </Fill>
-    </Fragment>
+    </>
   );
 }
 

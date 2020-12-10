@@ -294,7 +294,7 @@ function EditSessionPage({
   const groupIds = groups.map(({ id }) => id);
 
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>{sessionName}</title>
       </Helmet>
@@ -419,7 +419,7 @@ function EditSessionPage({
           </Row>
         </Column>
       </Row>
-    </Fragment>
+    </>
   );
 }
 

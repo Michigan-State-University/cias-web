@@ -93,7 +93,7 @@ const PasswordForm = ({
             mb: 20,
           };
           return (
-            <Fragment>
+            <>
               <FormikInput
                 formikKey="oldPassword"
                 placeholder={formatMessage(messages.oldPassword)}
@@ -127,7 +127,7 @@ const PasswordForm = ({
                 loading={loading}
               />
               {error && <ErrorAlert errorText={error} />}
-            </Fragment>
+            </>
           );
         }}
       </Formik>

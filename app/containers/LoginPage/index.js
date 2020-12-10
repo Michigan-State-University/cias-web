@@ -90,7 +90,7 @@ export const LoginPage = ({
   };
 
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
@@ -115,7 +115,7 @@ export const LoginPage = ({
                 mb: 20,
               };
               return (
-                <Fragment>
+                <>
                   <FormikInput
                     formikKey="email"
                     placeholder={formatMessage(messages.emailPlaceholder)}
@@ -160,14 +160,14 @@ export const LoginPage = ({
                       <FormattedMessage {...messages.register} />
                     </LinkButton>
                   </Row>
-                </Fragment>
+                </>
               );
             }}
           </Formik>
           {error && <ErrorAlert errorText={error} mt={20} />}
         </Column>
       </Fill>
-    </Fragment>
+    </>
   );
 };
 
@@ -175,7 +175,7 @@ LoginPage.propTypes = {
   onLogin: PropTypes.func,
   intl: PropTypes.object,
   loginPage: PropTypes.shape({
-    errors: PropTypes.string,
+    error: PropTypes.string,
     loading: PropTypes.bool,
     formData: PropTypes.shape({
       email: PropTypes.string,

@@ -46,7 +46,7 @@ const AccountSettings = props => {
   const openReset = () => setPasswordReset(true);
   const closeReset = () => setPasswordReset(false);
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
@@ -129,7 +129,7 @@ const AccountSettings = props => {
           </StyledRow>
         </StyledColumn>
       </StyledBox>
-    </Fragment>
+    </>
   );
 };
 

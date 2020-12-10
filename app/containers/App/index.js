@@ -64,7 +64,7 @@ export function App({ user }) {
   };
 
   return (
-    <Fragment>
+    <>
       <Switch>
         <AppRoute
           exact
@@ -202,7 +202,7 @@ export function App({ user }) {
         <AppRoute exact path="/not-found-page" component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
-    </Fragment>
+    </>
   );
 }
 
