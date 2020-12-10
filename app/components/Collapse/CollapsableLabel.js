@@ -59,7 +59,7 @@ const CollapseLabel = ({
           src={deleteActive ? bin : binGrey}
           alt="bin"
           clickable={deleteActive}
-          onClick={deleteActive && onDelete}
+          onClick={deleteActive ? onDelete : undefined}
         />
       )}
     </Row>
