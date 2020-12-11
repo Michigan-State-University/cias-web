@@ -12,10 +12,6 @@ export default defineMessages({
     id: `${scope}.nextQuestion`,
     defaultMessage: 'Next screen',
   },
-  previousQuestion: {
-    id: `${scope}.previousQuestion`,
-    defaultMessage: '< Previous screen',
-  },
   groupPlaceholder: {
     id: `${scope}.groupPlaceholder`,
     defaultMessage: 'Group placeholder',

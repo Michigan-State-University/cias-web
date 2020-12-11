@@ -10,6 +10,7 @@ export function* logOut() {
   yield call(LocalStorageService.clearState);
 
   yield put(push('/login'));
+  yield window.location.reload();
 }
 
 export default function* logOutSaga() {
