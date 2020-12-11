@@ -3,12 +3,12 @@
 exports[`<ShareBox /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 knEDvM"
+    class="Box-sc-14m3exe-0 dXVitu"
     height="fit-content"
     width="500"
   >
     <div
-      class="Box-sc-14m3exe-0 ipvgLn"
+      class="Box-sc-14m3exe-0 bygSYt"
       display="flex"
     >
       <div
@@ -48,7 +48,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="Box-sc-14m3exe-0 dXHjmi"
+            class="Box-sc-14m3exe-0 hWOwnE"
             width="140"
           >
             <button
@@ -131,7 +131,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       class="Row-x1o3ru-0 howMHZ"
     >
       <div
-        class="Box-sc-14m3exe-0 lavaAX"
+        class="Box-sc-14m3exe-0 gSRNBN"
       >
         <div
           class="styled__Container-e4ycn-0 insndc"

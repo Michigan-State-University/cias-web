@@ -10,10 +10,10 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
     display="flex"
   >
     <div
-      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 gpmswD"
+      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 gaYaRJ"
     >
       <div
-        class="Box-sc-14m3exe-0 cidtM"
+        class="Box-sc-14m3exe-0 hbiMlC"
       >
         <div
           class="Row-x1o3ru-0 fdTqjP"
@@ -40,15 +40,15 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="Box-sc-14m3exe-0 kcsePn"
+    class="Box-sc-14m3exe-0 hyPcxF"
     width="100%"
   >
     <div
-      class="Box-sc-14m3exe-0 kGWKEv"
+      class="Box-sc-14m3exe-0 hYFORl"
       width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 styled__HideScrollbarBox-hhq8kv-5 jBHNyG enAkpU"
+        class="Box-sc-14m3exe-0 iHitPu"
         overflow="scroll"
       >
         <table
@@ -76,7 +76,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   width="100%"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 iUfnFJ"
+                    class="Box-sc-14m3exe-0 dcLsXH"
                     height="35"
                   >
                     <img
@@ -118,7 +118,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   width="100%"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 iUfnFJ"
+                    class="Box-sc-14m3exe-0 dcLsXH"
                     height="35"
                   >
                     <img
@@ -170,7 +170,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   height="100%"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 hhkNmq"
+                    class="Box-sc-14m3exe-0 gXZgyA"
                     width="60"
                   >
                     <img
@@ -250,7 +250,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   height="100%"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 hhkNmq"
+                    class="Box-sc-14m3exe-0 gXZgyA"
                     width="60"
                   >
                     <img
@@ -326,10 +326,10 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
     class="Row-x1o3ru-0 tGqJH"
   >
     <div
-      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 kOPgLc"
+      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 ezQCDi"
     >
       <div
-        class="Box-sc-14m3exe-0 cidtM"
+        class="Box-sc-14m3exe-0 hbiMlC"
       >
         <div
           class="Row-x1o3ru-0 kRLZf"

@@ -3,13 +3,13 @@
 exports[`<InviteResearcher /> Should display invalid email error 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 joSrTI"
+    class="Box-sc-14m3exe-0 btkvqm"
     display="flex"
     height="100%"
     width="100%"
   >
     <div
-      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 eNnife iQJIDT"
+      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 bFuztw iQJIDT"
       overflow="auto"
     >
       <div
@@ -36,7 +36,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-14m3exe-0 jRoJkk"
+        class="Box-sc-14m3exe-0 fMhMlm"
       >
         <div
           class="Column-sc-1n6divy-0 SJAYV"
@@ -141,13 +141,13 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
 exports[`<InviteResearcher /> Should display server error 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 joSrTI"
+    class="Box-sc-14m3exe-0 btkvqm"
     display="flex"
     height="100%"
     width="100%"
   >
     <div
-      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 eNnife iQJIDT"
+      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 bFuztw iQJIDT"
       overflow="auto"
     >
       <div
@@ -174,7 +174,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-14m3exe-0 jRoJkk"
+        class="Box-sc-14m3exe-0 fMhMlm"
       >
         <div
           class="Column-sc-1n6divy-0 SJAYV"
@@ -273,13 +273,13 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
 exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 joSrTI"
+    class="Box-sc-14m3exe-0 btkvqm"
     display="flex"
     height="100%"
     width="100%"
   >
     <div
-      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 eNnife iQJIDT"
+      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 bFuztw iQJIDT"
       overflow="auto"
     >
       <div
@@ -306,7 +306,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-14m3exe-0 jRoJkk"
+        class="Box-sc-14m3exe-0 fMhMlm"
       >
         <div
           class="Column-sc-1n6divy-0 SJAYV"

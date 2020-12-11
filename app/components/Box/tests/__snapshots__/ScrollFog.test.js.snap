@@ -15,9 +15,6 @@ exports[`<ScrollFog /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-}
-
-.c2 {
   -webkit-scrollbar-width: none;
   -moz-scrollbar-width: none;
   -ms-scrollbar-width: none;
@@ -25,7 +22,7 @@ exports[`<ScrollFog /> Should render and match the snapshot 1`] = `
   -ms-overflow-style: none;
 }
 
-.c2::-webkit-scrollbar {
+.c1::-webkit-scrollbar {
   width: 0;
 }
 
@@ -35,7 +32,7 @@ exports[`<ScrollFog /> Should render and match the snapshot 1`] = `
     width="100%"
   >
     <div
-      class="c1 c2"
+      class="c1"
     />
   </div>
 </div>

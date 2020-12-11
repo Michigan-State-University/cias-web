@@ -185,7 +185,7 @@ export function App({ user }) {
           allowedRoles={Roles.allRoles}
           navbarProps={{
             navbarId: 'default',
-            activeTab: accountsTabId,
+            activeTab: null,
           }}
         />
         <AppRoute

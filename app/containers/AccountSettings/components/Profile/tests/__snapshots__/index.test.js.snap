@@ -3,7 +3,7 @@
 exports[`<Profile /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 jGWYzY"
+    class="Box-sc-14m3exe-0 dFbJjO"
   >
     <h2
       class="H2-egphza-0 klLMkt"
@@ -36,7 +36,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
               class="Row-x1o3ru-0 styled__StyledButtonsRow-awa645-2 dAhqIQ cyZEUK"
             >
               <div
-                class="Box-sc-14m3exe-0 dmtDa-d styled__StyledUploadFileButton-awa645-4 blnlBs"
+                class="Box-sc-14m3exe-0 dUWMPL styled__StyledUploadFileButton-awa645-4 blnlBs"
                 height="fit-content"
               >
                 <input
@@ -118,7 +118,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 styled__StyledTimezoneBox-hc8ofk-3 cidtM bOVXJs"
+        class="Box-sc-14m3exe-0 styled__StyledTimezoneBox-hc8ofk-3 hbiMlC bOVXJs"
       >
         <div
           class="Column-sc-1n6divy-0 cFRthN"
@@ -130,7 +130,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             Time zone
           </p>
           <div
-            class="Box-sc-14m3exe-0 khinli"
+            class="Box-sc-14m3exe-0 fezhVc"
             data-testid="select"
           >
             <div
@@ -206,7 +206,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             Phone number
           </p>
           <div
-            class="Box-sc-14m3exe-0 khinli"
+            class="Box-sc-14m3exe-0 fezhVc"
             data-testid="select"
           >
             <div

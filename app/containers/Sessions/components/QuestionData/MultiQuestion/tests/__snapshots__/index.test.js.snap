@@ -8,7 +8,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
     class="Row-x1o3ru-0 dAhqIQ"
   >
     <div
-      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 jyyKKD"
+      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 iajdQV"
       width="100%"
     >
       <div
@@ -26,7 +26,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
               src="IMAGE_MOCK"
             />
             <div
-              class="Box-sc-14m3exe-0 kcsePn"
+              class="Box-sc-14m3exe-0 hyPcxF"
               width="100%"
             >
               <div
@@ -1431,7 +1431,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
             class="Row-x1o3ru-0 dAhqIQ"
           >
             <div
-              class="Box-sc-14m3exe-0 fXHeO"
+              class="Box-sc-14m3exe-0 edUuKs"
               hidden=""
             >
               <img
@@ -1470,10 +1470,10 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
     display="flex"
   >
     <div
-      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 gpmswD"
+      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 gaYaRJ"
     >
       <div
-        class="Box-sc-14m3exe-0 cidtM"
+        class="Box-sc-14m3exe-0 hbiMlC"
       >
         <div
           class="Row-x1o3ru-0 fdTqjP"

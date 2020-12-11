@@ -3,17 +3,17 @@
 exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 dfCyFF"
+    class="Box-sc-14m3exe-0 fVEMbn"
     display="flex"
     height="100%"
     overflow="scroll"
   >
     <div
-      class="Box-sc-14m3exe-0 iANPKi"
+      class="Box-sc-14m3exe-0 dtkvkk"
       width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 cYVGUW"
+        class="Box-sc-14m3exe-0 jsQLkQ"
         display="flex"
       >
         <h1
@@ -35,24 +35,24 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
       </div>
       <div>
         <div
-          class="Box-sc-14m3exe-0 lmjTKa"
+          class="Box-sc-14m3exe-0 cEVOdo"
           display="flex"
         >
           <div
-            class="Box-sc-14m3exe-0 ipvgLn"
+            class="Box-sc-14m3exe-0 bygSYt"
             display="flex"
           >
             <div
-              class="Box-sc-14m3exe-0 kOyprt"
+              class="Box-sc-14m3exe-0 hyFUUf"
               display="inline-block"
               width="100%"
             >
               <div
-                class="Box-sc-14m3exe-0 ipvgLn"
+                class="Box-sc-14m3exe-0 bygSYt"
                 display="flex"
               >
                 <div
-                  class="Box-sc-14m3exe-0 cWssmN"
+                  class="Box-sc-14m3exe-0 kapyPP"
                   display="inline-flex"
                   width="120px"
                 >
@@ -66,7 +66,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 hhbgxA"
+                  class="Box-sc-14m3exe-0 ewtKZW"
                   display="inline-flex"
                   width="120px"
                 >
@@ -80,11 +80,11 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 ktLcNU"
+                  class="Box-sc-14m3exe-0 fzsZJK"
                   width="25"
                 />
                 <div
-                  class="Box-sc-14m3exe-0 irvTIY"
+                  class="Box-sc-14m3exe-0 ctokGG"
                   cursor="pointer"
                   display="inline-flex"
                 >
@@ -209,7 +209,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-sc-4t6406-0 dmlVAK"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 NIAku"
+                    class="Box-sc-14m3exe-0 dNmAns"
                     display="inline-flex"
                     width="120px"
                   >
@@ -268,7 +268,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-sc-4t6406-0 dmlVAK"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 iFkYEv"
+                    class="Box-sc-14m3exe-0 exJtcV"
                     display="inline-flex"
                     width="120px"
                   >
@@ -327,7 +327,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-sc-4t6406-0 dmlVAK"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 gvJOtP"
+                    class="Box-sc-14m3exe-0 kgfiHB"
                     display="inline-flex"
                     width="120px"
                   >
@@ -371,7 +371,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           width="100%"
         >
           <div
-            class="Box-sc-14m3exe-0 jnChfL"
+            class="Box-sc-14m3exe-0 JuxSZ"
             cursor="pointer"
             display="flex"
           >
@@ -398,17 +398,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 dfCyFF"
+    class="Box-sc-14m3exe-0 fVEMbn"
     display="flex"
     height="100%"
     overflow="scroll"
   >
     <div
-      class="Box-sc-14m3exe-0 iANPKi"
+      class="Box-sc-14m3exe-0 dtkvkk"
       width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 cYVGUW"
+        class="Box-sc-14m3exe-0 jsQLkQ"
         display="flex"
       >
         <h1
@@ -421,24 +421,24 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
       </div>
       <div>
         <div
-          class="Box-sc-14m3exe-0 lmjTKa"
+          class="Box-sc-14m3exe-0 cEVOdo"
           display="flex"
         >
           <div
-            class="Box-sc-14m3exe-0 ipvgLn"
+            class="Box-sc-14m3exe-0 bygSYt"
             display="flex"
           >
             <div
-              class="Box-sc-14m3exe-0 kOyprt"
+              class="Box-sc-14m3exe-0 hyFUUf"
               display="inline-block"
               width="100%"
             >
               <div
-                class="Box-sc-14m3exe-0 ipvgLn"
+                class="Box-sc-14m3exe-0 bygSYt"
                 display="flex"
               >
                 <div
-                  class="Box-sc-14m3exe-0 cWssmN"
+                  class="Box-sc-14m3exe-0 kapyPP"
                   display="inline-flex"
                   width="120px"
                 >
@@ -452,7 +452,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 hhbgxA"
+                  class="Box-sc-14m3exe-0 ewtKZW"
                   display="inline-flex"
                   width="120px"
                 >
@@ -466,11 +466,11 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 ktLcNU"
+                  class="Box-sc-14m3exe-0 fzsZJK"
                   width="25"
                 />
                 <div
-                  class="Box-sc-14m3exe-0 irvTIY"
+                  class="Box-sc-14m3exe-0 ctokGG"
                   cursor="pointer"
                   display="inline-flex"
                 >
@@ -595,7 +595,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-sc-4t6406-0 dmlVAK"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 NIAku"
+                    class="Box-sc-14m3exe-0 dNmAns"
                     display="inline-flex"
                     width="120px"
                   >
@@ -654,7 +654,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-sc-4t6406-0 dmlVAK"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 iFkYEv"
+                    class="Box-sc-14m3exe-0 exJtcV"
                     display="inline-flex"
                     width="120px"
                   >
@@ -713,7 +713,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-sc-4t6406-0 dmlVAK"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 gvJOtP"
+                    class="Box-sc-14m3exe-0 kgfiHB"
                     display="inline-flex"
                     width="120px"
                   >
@@ -757,7 +757,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           width="100%"
         >
           <div
-            class="Box-sc-14m3exe-0 jnChfL"
+            class="Box-sc-14m3exe-0 JuxSZ"
             cursor="pointer"
             display="flex"
           >

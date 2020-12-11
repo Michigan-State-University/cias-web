@@ -14,15 +14,15 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
       </span>
     </button>
     <div
-      class="Box-sc-14m3exe-0 bdeubt"
+      class="Box-sc-14m3exe-0 yETQv"
     >
       Select Speech Animation
     </div>
     <div
-      class="Box-sc-14m3exe-0 bdeubt"
+      class="Box-sc-14m3exe-0 yETQv"
     >
       <div
-        class="Box-sc-14m3exe-0 cidtM"
+        class="Box-sc-14m3exe-0 hbiMlC"
       >
         <div
           class=" css-2b097c-container"
@@ -130,10 +130,10 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
           height="100%"
         >
           <div
-            class="Box-sc-14m3exe-0 cidtM"
+            class="Box-sc-14m3exe-0 hbiMlC"
           >
             <div
-              class="Box-sc-14m3exe-0 cidtM"
+              class="Box-sc-14m3exe-0 hbiMlC"
             >
               <p
                 class="Text-sc-2lza2m-0 ZELPo"
@@ -150,7 +150,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-14m3exe-0 gukcSd"
+        class="Box-sc-14m3exe-0 lgTdaj"
         display="none"
         width="100%"
       >
@@ -158,7 +158,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
           class="Row-x1o3ru-0 dAhqIQ"
         >
           <div
-            class="Box-sc-14m3exe-0 ixuKrU"
+            class="Box-sc-14m3exe-0 SQgpC"
             overflow="hidden"
           >
             <div
@@ -166,7 +166,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
               data-testid="question-test-0-select-target-question"
             >
               <div
-                class="Box-sc-14m3exe-0 hPyOqo"
+                class="Box-sc-14m3exe-0 gRVPTq"
               >
                 <div
                   class="Column-sc-1n6divy-0 SJAYV"
@@ -213,21 +213,21 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Box-sc-14m3exe-0 bdeubt"
+      class="Box-sc-14m3exe-0 yETQv"
     >
       <div
         class="Column-sc-1n6divy-0 SJAYV"
       >
         <div
-          class="Box-sc-14m3exe-0 bdeubt"
+          class="Box-sc-14m3exe-0 yETQv"
         >
           1
         </div>
         <div
-          class="Box-sc-14m3exe-0 kbuZxI"
+          class="Box-sc-14m3exe-0 xbrTG"
         >
           <div
-            class="Box-sc-14m3exe-0 cPMJok"
+            class="Box-sc-14m3exe-0 gPqTdS"
             width="100%"
           >
             <textarea
@@ -242,7 +242,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
             </textarea>
           </div>
           <div
-            class="Box-sc-14m3exe-0 dEhBHo"
+            class="Box-sc-14m3exe-0 chlihm"
           >
             <img
               class="Img-sc-1kfzr96-0 gYrhFK"

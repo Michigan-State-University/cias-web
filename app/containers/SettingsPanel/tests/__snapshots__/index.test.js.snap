@@ -3,7 +3,7 @@
 exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 styled__StyledBox-sc-137nvsy-0 cidtM dRSFYh"
+    class="Box-sc-14m3exe-0 styled__StyledBox-sc-137nvsy-0 hbiMlC dRSFYh"
   >
     <div
       class="Column-sc-1n6divy-0 ibRVqQ"
@@ -17,7 +17,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
         </span>
       </h2>
       <div
-        class="Box-sc-14m3exe-0 hNGDYO"
+        class="Box-sc-14m3exe-0 aLeLM"
       >
         <div
           class="Row-x1o3ru-0 bUfABv"

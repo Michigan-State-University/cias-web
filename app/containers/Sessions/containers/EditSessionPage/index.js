@@ -311,6 +311,7 @@ function EditSessionPage({
       <Row height="100%" filled>
         <QuestionsRow sm={4} isVisible={showList}>
           <Box
+            disableScrollbar
             data-cy="questions-list"
             height="100%"
             borderRight={`${borders.borderWidth} ${borders.borderStyle} ${

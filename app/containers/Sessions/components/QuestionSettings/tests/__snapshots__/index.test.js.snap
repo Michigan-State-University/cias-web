@@ -2,14 +2,14 @@
 
 exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-14m3exe-0 styled__Container-qhc4ah-1 cidtM kGYNVl"
+  class="Box-sc-14m3exe-0 styled__Container-qhc4ah-1 hbiMlC kGYNVl"
 >
   <div
-    class="Box-sc-14m3exe-0 styled__SettingsBar-qhc4ah-0 fPHmQW dHfBam"
+    class="Box-sc-14m3exe-0 styled__SettingsBar-qhc4ah-0 iyrAjE dHfBam"
     height="100%"
   >
     <div
-      class="Box-sc-14m3exe-0 bMbJSh"
+      class="Box-sc-14m3exe-0 kytzST"
       height="100%"
       width="400"
     >

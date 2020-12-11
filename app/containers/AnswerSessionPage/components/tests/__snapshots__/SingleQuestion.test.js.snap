@@ -6,13 +6,13 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
     class="Column-sc-1n6divy-0 SJAYV"
   >
     <div
-      class="Box-sc-14m3exe-0 cidtM"
+      class="Box-sc-14m3exe-0 hbiMlC"
     >
       <div
         class="Row-x1o3ru-0 gvStTq"
       >
         <div
-          class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 eikLPg"
+          class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 jCDUNu"
           width="calc(100% + 21px)"
         >
           <div
@@ -34,7 +34,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
         class="Row-x1o3ru-0 gvStTq"
       >
         <div
-          class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 eikLPg"
+          class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 jCDUNu"
           width="calc(100% + 21px)"
         >
           <div

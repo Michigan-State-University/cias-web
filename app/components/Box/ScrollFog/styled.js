@@ -54,11 +54,3 @@ export const BottomFog = styled(FogBox).attrs({ side: 'bottom' })`
     bottom: ${({ bottomMargin }) => bottomMargin || 0}px;
   }
 `;
-
-export const HideScrollbarBox = styled(Box)`
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  &::-webkit-scrollbar {
-    width: 0;
-  }
-`;

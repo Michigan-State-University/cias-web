@@ -18,7 +18,7 @@ exports[`<ReportsPage /> Should render and match the snapshot and to not log err
       width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 styled__StyledBox-sc-1ufj5af-0 chXRVY bZSfjv"
+        class="Box-sc-14m3exe-0 styled__StyledBox-sc-1ufj5af-0 kGTLNi bZSfjv"
       >
         <div
           height="100%"
@@ -79,7 +79,7 @@ exports[`<ReportsPage /> Should render and match the snapshot and to not log err
     width="100%"
   >
     <div
-      class="Box-sc-14m3exe-0 jnChfL"
+      class="Box-sc-14m3exe-0 JuxSZ"
       cursor="pointer"
       display="flex"
     >

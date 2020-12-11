@@ -3,7 +3,7 @@
 exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 eHgYuv"
+    class="Box-sc-14m3exe-0 eIdKgx"
   >
     <p
       class="Text-sc-2lza2m-0 lcEiaM"
@@ -82,10 +82,10 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
     />
   </div>
   <div
-    class="Box-sc-14m3exe-0 kbuZxI"
+    class="Box-sc-14m3exe-0 xbrTG"
   >
     <div
-      class="Box-sc-14m3exe-0 styled__DashedBox-zx7lu-0 bEHjZA kkWyYe"
+      class="Box-sc-14m3exe-0 styled__DashedBox-zx7lu-0 hpzkQe kkWyYe"
     >
       + Add block
     </div>

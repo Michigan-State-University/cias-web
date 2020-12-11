@@ -14,15 +14,15 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       </span>
     </button>
     <div
-      class="Box-sc-14m3exe-0 bdeubt"
+      class="Box-sc-14m3exe-0 yETQv"
     >
       Select Speech Animation
     </div>
     <div
-      class="Box-sc-14m3exe-0 bdeubt"
+      class="Box-sc-14m3exe-0 yETQv"
     >
       <div
-        class="Box-sc-14m3exe-0 cidtM"
+        class="Box-sc-14m3exe-0 hbiMlC"
       >
         <div
           class=" css-2b097c-container"
@@ -129,7 +129,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
         Formula
       </p>
       <div
-        class="Box-sc-14m3exe-0 lavaAX"
+        class="Box-sc-14m3exe-0 gSRNBN"
       >
         <p
           class="Text-sc-2lza2m-0 fJREmD"
@@ -141,10 +141,10 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Box-sc-14m3exe-0 gFdkaU"
+      class="Box-sc-14m3exe-0 kbHePW"
     >
       <div
-        class="Box-sc-14m3exe-0 dsNuUD"
+        class="Box-sc-14m3exe-0 iRdzkN"
         display="none"
         width="auto"
       >
@@ -152,16 +152,16 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
           class="Row-x1o3ru-0 dAhqIQ"
         >
           <div
-            class="Box-sc-14m3exe-0 ketynr"
+            class="Box-sc-14m3exe-0 zYwpt"
           >
             <div
               class="Column-sc-1n6divy-0 SJAYV"
             >
               <div
-                class="Box-sc-14m3exe-0 cYhKwr"
+                class="Box-sc-14m3exe-0 iJfNat"
               >
                 <div
-                  class="Box-sc-14m3exe-0 gDFvhB"
+                  class="Box-sc-14m3exe-0 hEtviT"
                   data-testid="no-content"
                   display="flex"
                   height="100%"
@@ -190,7 +190,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Box-sc-14m3exe-0 iHuVFD"
+      class="Box-sc-14m3exe-0 dmpRMR"
       width="100%"
     >
       <textarea
@@ -217,7 +217,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             If
           </p>
           <div
-            class="Box-sc-14m3exe-0 dTAoNW"
+            class="Box-sc-14m3exe-0 irGnVA"
             data-cy="case-select"
             data-testid="select"
           >
@@ -278,7 +278,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="Box-sc-14m3exe-0 lhGbOF"
+            class="Box-sc-14m3exe-0 hgTZef"
           >
             <input
               class="Input-sc-19txxuq-0 fEeevM styled__CaseInput-sc-95am5d-0 kYuVIm"
@@ -304,11 +304,11 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
         class="Row-x1o3ru-0 dAhqIQ"
       >
         <div
-          class="Box-sc-14m3exe-0 kGWKEv"
+          class="Box-sc-14m3exe-0 hYFORl"
           width="100%"
         >
           <div
-            class="Box-sc-14m3exe-0 eIKZTa"
+            class="Box-sc-14m3exe-0 edZiiE"
           >
             <textarea
               class="TextArea-sc-1g8793c-0 kklhX"
@@ -322,7 +322,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             </textarea>
           </div>
           <div
-            class="Box-sc-14m3exe-0 dEhBHo"
+            class="Box-sc-14m3exe-0 chlihm"
           >
             <img
               class="Img-sc-1kfzr96-0 gYrhFK"
@@ -333,7 +333,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Box-sc-14m3exe-0 styled__DashedBox-p9nasd-0 gnAZuH ffciLv"
+      class="Box-sc-14m3exe-0 styled__DashedBox-p9nasd-0 iejGHx ffciLv"
     >
       + Add another case
     </div>

@@ -3,7 +3,7 @@
 exports[`<UserDetails /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 styled__StyledBox-k1l7f-0 ktRnSR bOwZqG"
+    class="Box-sc-14m3exe-0 styled__StyledBox-k1l7f-0 leHiZL bOwZqG"
     height="100%"
     width="100%"
   >
@@ -40,7 +40,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="Box-sc-14m3exe-0 jGWYzY"
+          class="Box-sc-14m3exe-0 dFbJjO"
         >
           <h2
             class="H2-egphza-0 klLMkt"
@@ -73,7 +73,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                     class="Row-x1o3ru-0 styled__StyledButtonsRow-awa645-2 dAhqIQ cyZEUK"
                   >
                     <div
-                      class="Box-sc-14m3exe-0 dmtDa-d styled__StyledUploadFileButton-awa645-4 blnlBs"
+                      class="Box-sc-14m3exe-0 dUWMPL styled__StyledUploadFileButton-awa645-4 blnlBs"
                       height="fit-content"
                     >
                       <input
@@ -180,7 +180,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                   Phone number
                 </p>
                 <div
-                  class="Box-sc-14m3exe-0 khinli"
+                  class="Box-sc-14m3exe-0 fezhVc"
                   data-testid="select"
                 >
                   <div

@@ -112,7 +112,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
           data-cy="create-intervention-button"
         >
           <div
-            class="Box-sc-14m3exe-0 fByYmj"
+            class="Box-sc-14m3exe-0 dEjIyZ"
             direction="column"
             display="flex"
           >
@@ -148,7 +148,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               </div>
               <div>
                 <div
-                  class="Box-sc-14m3exe-0 leydUQ"
+                  class="Box-sc-14m3exe-0 gVsVlS"
                   display="flex"
                 >
                   <div
@@ -175,7 +175,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               </div>
             </div>
             <div
-              class="Box-sc-14m3exe-0 gXhHYg"
+              class="Box-sc-14m3exe-0 jrvBcC"
               display="flex"
             >
               <div
