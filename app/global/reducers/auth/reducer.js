@@ -27,6 +27,9 @@ import {
   CHANGE_PHONE_NUMBER_REQUEST,
   CHANGE_PHONE_NUMBER_SUCCESS,
   CHANGE_PHONE_NUMBER_ERROR,
+  CHANGE_NOTIFICATIONS_SETTINGS_REQUEST,
+  CHANGE_NOTIFICATIONS_SETTINGS_SUCCESS,
+  CHANGE_NOTIFICATIONS_SETTINGS_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -141,6 +144,17 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.loaders.changePhoneNumberLoading = false;
         draft.user = state.cache.user;
         draft.errors.changePhoneNumberError = payload.error;
+        break;
+
+      case CHANGE_NOTIFICATIONS_SETTINGS_REQUEST:
+        draft.cache.user = state.user;
+        draft.user.notificationsSettings = payload.notificationsSettings;
+        break;
+      case CHANGE_NOTIFICATIONS_SETTINGS_SUCCESS:
+        draft.cache.user = null;
+        break;
+      case CHANGE_NOTIFICATIONS_SETTINGS_ERROR:
+        draft.user = state.cache.user;
         break;
     }
   });

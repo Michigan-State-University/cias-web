@@ -17,10 +17,6 @@ export default defineMessages({
     id: `${scope}.back`,
     defaultMessage: 'Back to dashboard',
   },
-  changePassword: {
-    id: `${scope}.changePassword`,
-    defaultMessage: 'Reset password',
-  },
   header: {
     id: `${scope}.header`,
     defaultMessage: 'Account Settings',

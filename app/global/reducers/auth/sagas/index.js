@@ -6,6 +6,7 @@ import addAvatarSaga from './addAvatar';
 import deleteAvatarSaga from './deleteAvatar';
 import changeEmailSaga from './changeEmail';
 import changePhoneNumberSaga from './changePhoneNumber';
+import changeNotificationsSettingsSaga from './changeNotificationsSettings';
 
 export {
   logOutSaga,
@@ -15,6 +16,7 @@ export {
   deleteAvatarSaga,
   changeEmailSaga,
   changePhoneNumberSaga,
+  changeNotificationsSettingsSaga,
 };
 
 export default function* allAuthSagas() {
@@ -26,5 +28,6 @@ export default function* allAuthSagas() {
     deleteAvatarSaga(),
     changeEmailSaga(),
     changePhoneNumberSaga(),
+    changeNotificationsSettingsSaga(),
   ]);
 }

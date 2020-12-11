@@ -50,12 +50,15 @@ export const UserDetails = ({
 
   return (
     <AccountSettings
-      TimezoneComponent={null}
-      EmailComponent={null}
-      PasswordComponent={null}
-      AvatarComponent={WrappedAvatarFormAdmin}
-      FullNameComponent={WrappedFullNameFormAdmin}
-      DeactivationComponent={WrappedDeactivationAdmin}
+      NotificationsComponent={null}
+      formComponents={{
+        TimezoneComponent: null,
+        EmailComponent: null,
+        PasswordComponent: null,
+        AvatarComponent: WrappedAvatarFormAdmin,
+        FullNameComponent: WrappedFullNameFormAdmin,
+        DeactivationComponent: WrappedDeactivationAdmin,
+      }}
       userId={user.id}
     />
   );

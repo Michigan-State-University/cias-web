@@ -14,9 +14,9 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
-import AccountSettings from '../index';
+import Profile from '../index';
 
-describe('<AccountSettings />', () => {
+describe('<Profile />', () => {
   const initialState = {
     auth: {
       user: {
@@ -66,7 +66,7 @@ describe('<AccountSettings />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <AccountSettings dispatch={dispatch} />
+            <Profile dispatch={dispatch} />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,
@@ -79,7 +79,7 @@ describe('<AccountSettings />', () => {
       <Provider store={store}>
         <MemoryRouter>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <AccountSettings />
+            <Profile />
           </IntlProvider>
         </MemoryRouter>
       </Provider>,

@@ -142,7 +142,7 @@ const PhoneNumberForm = ({
                 countryCode={prefix.value}
                 inputProps={{
                   onBlur: handleSubmit,
-                  mt: 15,
+                  mt: 16,
                   width: '100%',
                 }}
               />
