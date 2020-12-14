@@ -3,6 +3,7 @@
     "./lib/MjBasicComponent.js",
     "./lib/MjImageText.js",
     "./lib/MjLayout.js",
-    "./lib/AppLayout.js"
+    "./lib/AppLayout.js",
+    "./lib/AppHeader.js"
   ]
 }

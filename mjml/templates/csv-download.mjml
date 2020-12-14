@@ -1,0 +1,15 @@
+<mjml>
+  <mj-head>
+    <app-header />
+  </mj-head>
+  <mj-body>
+    <app-layout 
+      header="Your CSV file is ready to download" 
+      mainText="CSV file with data from <span style='color:#C866EA;'>{SESSION_NAME}</span> intervention is ready to download in your dashboard"
+      buttonText="Open CIAS dashboard" 
+      buttonUrl="{URL}" 
+      footNote=""
+    >
+    </app-layout>
+  <mj-body>
+</mjml>

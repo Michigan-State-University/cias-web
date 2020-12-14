@@ -1,0 +1,15 @@
+<mjml>
+  <mj-head>
+    <app-header />
+  </mj-head>
+  <mj-body>
+    <app-layout 
+      header="Welcome {NAME}!" 
+      mainText="Confirm your email address to get started on CIAS" 
+      buttonText="Confirm my account" 
+      buttonUrl="{URL}" 
+      footNote="If you didn't request this, please ignore this email."
+    >
+    </app-layout>
+  <mj-body>
+</mjml>
