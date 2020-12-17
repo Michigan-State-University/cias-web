@@ -12,7 +12,7 @@ import { enableUserAccessSuccess, enableUserAccessFailure } from '../actions';
 import messages from '../messages';
 
 export function* enableUserAccess({ payload: { id, emails } }) {
-  const requestURL = `v1/interventions/${id}/users`;
+  const requestURL = `v1/interventions/${id}/invitations`;
   try {
     const {
       data: { user_sessions: users },

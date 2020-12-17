@@ -13,7 +13,7 @@ export function* fetchUsersWithAccess({ payload: { id } }) {
   const intervention = yield select(makeSelectIntervention());
 
   if (intervention && intervention.id === id) {
-    const requestURL = `v1/interventions/${id}/users`;
+    const requestURL = `v1/interventions/${id}/invitations`;
     try {
       const {
         data: { user_sessions: users },
