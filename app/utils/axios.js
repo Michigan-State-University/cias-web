@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
-import get from 'lodash/get';
 import { store } from 'configureStore';
 import { logOut } from 'global/reducers/auth';
 import { headersConst } from 'utils/getHeaders';
@@ -36,9 +35,14 @@ axios.interceptors.response.use(
     return response;
   },
   error => {
-    if (get(error, 'response.status') === 401) {
+    const { response } = error;
+
+    if (
+      response.status === 401 &&
+      !response.config.url.endsWith('auth/sign_in')
+    )
       dispatch(logOut());
-    } else setHeaders(error.response);
+    else setHeaders(error.response);
 
     return Promise.reject(error);
   },
