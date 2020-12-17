@@ -5,9 +5,9 @@
   <mj-body>
     <app-layout 
       header="Complete a new session" 
-      mainText="You have been invited to complete <span style='color:#C866EA;'>{SESSION_NAME}</span> session. <br/><br/>Click the link below to start the session" 
+      mainText="You have been invited to complete <span style='color:#C866EA;'>{SESSION_TITLE}</span> session. <br/><br/>Click the link below to start the session" 
       buttonText="Start the session" 
-      buttonUrl="{URL}" 
+      buttonUrl="{BUTTON_URL}" 
       footNote=""
     >
     </app-layout>

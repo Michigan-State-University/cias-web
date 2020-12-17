@@ -4,10 +4,10 @@
   </mj-head>
   <mj-body>
     <app-layout 
-      header="Welcome {NAME}!" 
+      header="Welcome {RECIPIENT_NAME}!" 
       mainText="Confirm your email address to get started on CIAS" 
       buttonText="Confirm my account" 
-      buttonUrl="{URL}" 
+      buttonUrl="{BUTTON_URL}" 
       footNote="If you didn't request this, please ignore this email."
     >
     </app-layout>

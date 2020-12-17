@@ -5,9 +5,9 @@
   <mj-body>
     <app-layout 
       header="Your CSV file is ready to download" 
-      mainText="CSV file with data from <span style='color:#C866EA;'>{SESSION_NAME}</span> intervention is ready to download in your dashboard"
+      mainText="CSV file with data from <span style='color:#C866EA;'>{SESSION_TITLE}</span> intervention is ready to download in your dashboard"
       buttonText="Open CIAS dashboard" 
-      buttonUrl="{URL}" 
+      buttonUrl="{BUTTON_URL}" 
       footNote=""
     >
     </app-layout>

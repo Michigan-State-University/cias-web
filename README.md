@@ -7,12 +7,10 @@
 * Run Cypress tests `npm run cy:test`
 
 # MJML
-## Info below concerns `mjml` directory! (all directories are relative to that folder)
-
 ### What is MJML?
 Take a look at [official documentation](https://mjml.io/documentation/#getting-started)
 
-3 examples can be found in `examples` directory. Each of them introduce new features, so they should be checked in this order : `MjBasicComponent`, `MjImageText`, `MjLayout`.
+3 examples can be found in `mjml/examples` directory. Each of them introduce new features, so they should be checked in this order : `MjBasicComponent`, `MjImageText`, `MjLayout`.
 
 For more complex examples, have a look at standard MJML components code such as [mj-carousel](https://github.com/mjmlio/mjml/tree/master/packages/mjml-accordion).
 
@@ -20,12 +18,22 @@ For more complex examples, have a look at standard MJML components code such as 
 
 A step-by-step tutorial is available [here](https://medium.com/mjml-making-responsive-email-easy/tutorial-creating-your-own-component-with-mjml-4-1c0e84e97b36).
 
+* Go into `mjml` directory
 * `npm install` inside
 * Add your components inside `components` folder
 * Components have to be added in `.mjmlconfig`
 * Use your own component in `templates/*.mjml`
 * `npm run build` to build, or `npm start` if you want to watch recompile on change you make (to your component or to `templates/*.mjml`)
 * The result will be outputted in `html/*.html`
+
+### Developers info
+* Generated htmls are in `mjml/html` directory
+
+**Variables:** 
+* *confirm-email.html*: {BUTTON_URL}, {RECIPIENT_NAME}
+* *csv-download.html*: {BUTTON_URL}, {SESSION_TITLE}
+* *invite-session.html*: {BUTTON_URL}, {SESSION_TITLE}
+* *reset-password.html*: {BUTTON_URL}
 
 # Contributors
 
