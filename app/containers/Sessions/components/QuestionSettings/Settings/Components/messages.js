@@ -48,10 +48,6 @@ export default defineMessages({
     id: `${scope}.selectQuestion`,
     defaultMessage: 'Select Screen',
   },
-  nextScreen: {
-    id: `${scope}.nextScreen`,
-    defaultMessage: 'Next Screen',
-  },
   speechPlaceholder: {
     id: `${scope}.speechPlaceholder`,
     defaultMessage: 'Enter speech here...',

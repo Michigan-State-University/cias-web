@@ -77,8 +77,8 @@ const TargetQuestionChooser = props => {
         questions.findIndex(
           ({ id: questionId }) => questionId === currentIndex,
         ) + 1;
-      const targetId = questions[nextIndex].id;
-      onClick({ type: 'Question', id: targetId });
+      const { id: targetId, type } = questions[nextIndex];
+      onClick({ type, id: targetId });
     }
   };
 

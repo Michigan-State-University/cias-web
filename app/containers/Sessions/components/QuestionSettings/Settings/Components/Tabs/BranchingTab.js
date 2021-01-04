@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import BranchingLayout from 'containers/BranchingLayout';
 import Session from 'models/Session/Session';
 import Question from 'models/Session/Question';
-import { questionType, finishQuestion } from 'models/Session/QuestionTypes';
+import { questionType } from 'models/Session/QuestionTypes';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { makeSelectQuestions } from 'global/reducers/questions';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
@@ -57,21 +57,18 @@ const BranchingTab = ({
   }, []);
 
   const displayPatternTargetText = target => {
-    const selectedIndex = findQuestionIndex(questions, id);
     const isQuestionType = target.type.startsWith(questionType);
-    const isFinishType = target.type === finishQuestion.id;
 
     const targetIndex = isQuestionType
       ? findQuestionIndex(questions, target.id)
       : findInterventionIndex(sessionList || [], target.id);
 
-    if (isQuestionType) {
-      if (!isFinishType && selectedIndex === targetIndex - 1)
-        return formatMessage(messages.nextScreen);
-
-      if (targetIndex !== -1)
+    if (targetIndex !== -1) {
+      if (isQuestionType)
         return htmlToPlainText(questions[targetIndex].subtitle);
-    } else if (targetIndex !== -1) return sessionList[targetIndex].name;
+
+      return sessionList[targetIndex].name;
+    }
 
     return formatMessage(messages.selectQuestion);
   };
