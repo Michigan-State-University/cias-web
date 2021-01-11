@@ -11,7 +11,7 @@ import { revokeUserAccessSuccess, revokeUserAccessFailure } from '../actions';
 import messages from '../messages';
 
 export function* revokeUserAccess({ payload: { interventionId, userId } }) {
-  const requestURL = `v1/interventions/${interventionId}/users/${userId}`;
+  const requestURL = `v1/interventions/${interventionId}/invitations/${userId}`;
   try {
     yield call(axios.delete, requestURL);
     yield put(revokeUserAccessSuccess(userId));

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest, select, call } from 'redux-saga/effects';
 
-import { mapAccessToStateObject } from 'utils/mapResponseObjects';
 import { makeSelectIntervention } from 'global/reducers/intervention/selectors';
 import { FETCH_USERS_WITH_ACCESS_REQUEST } from '../constants';
 import {
@@ -18,8 +17,7 @@ export function* fetchUsersWithAccess({ payload: { id } }) {
       const {
         data: { user_sessions: users },
       } = yield call(axios.get, requestURL);
-      const accessMapped = users.map(mapAccessToStateObject);
-      yield put(fetchUsersWithAccessSuccess(accessMapped));
+      yield put(fetchUsersWithAccessSuccess(users));
     } catch (error) {
       yield put(fetchUsersWithAccessFailure(error));
     }
