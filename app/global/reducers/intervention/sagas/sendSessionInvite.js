@@ -27,12 +27,11 @@ export function* sendSessionInvite({ payload: { emails, sessionId } }) {
     const test = yield call(axios.post, requestURL, {
       session_invitation: { emails },
     });
-    console.log(test)
     const {
-      data: { session_invitations: users },
-    } = test
+      data: { invitations },
+    } = test;
     yield put(sendSessionInviteSuccess());
-    yield put(fetchSessionEmailsSuccess(users, sessionIndex));
+    yield put(fetchSessionEmailsSuccess(invitations, sessionIndex));
     yield call(toast.info, formatMessage(messages.sendInviteSuccess), {
       toastId: SEND_SESSION_INVITE_SUCCESS,
     });

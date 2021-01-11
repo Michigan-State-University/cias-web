@@ -261,18 +261,18 @@ export const interventionReducer = (state = initialState, action) =>
           sessionId,
         );
 
-        // if (sessionIndex > -1) {
-        //   draft.loaders.sendSessionLoading = true;
-        //   draft.cache.intervention = state.intervention;
-        //   const mappedEmails = payloadEmails.map(email => ({
-        //     email,
-        //   }));
+        if (sessionIndex > -1) {
+          draft.loaders.sendSessionLoading = true;
+          draft.cache.intervention = state.intervention;
+          const mappedEmails = payloadEmails.map(email => ({
+            email,
+          }));
 
-        //   draft.intervention.sessions[sessionIndex].emails = [
-        //     ...state.intervention.sessions[sessionIndex].emails,
-        //     ...mappedEmails,
-        //   ];
-        // }
+          draft.intervention.sessions[sessionIndex].emails = [
+            ...state.intervention.sessions[sessionIndex].emails,
+            ...mappedEmails,
+          ];
+        }
 
         break;
       }
