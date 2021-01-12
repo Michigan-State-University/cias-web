@@ -8,7 +8,9 @@
 
 # MJML
 ### What is MJML?
-Take a look at [official documentation](https://mjml.io/documentation/#getting-started)
+A tool for creation of responsive html templates. It handles gotchas of most modern and known email clients.
+
+Take a look at [official documentation](https://mjml.io/documentation/#getting-started).
 
 3 examples can be found in `mjml/examples` directory. Each of them introduce new features, so they should be checked in this order : `MjBasicComponent`, `MjImageText`, `MjLayout`.
 
@@ -26,7 +28,7 @@ A step-by-step tutorial is available [here](https://medium.com/mjml-making-respo
 * `npm run build` to build, or `npm start` if you want to watch recompile on change you make (to your component or to `templates/*.mjml`)
 * The result will be outputted in `html/*.html`
 
-### Developers info
+### Information for backend developers
 * Generated htmls are in `mjml/html` directory
 
 **Variables:** 
@@ -34,6 +36,7 @@ A step-by-step tutorial is available [here](https://medium.com/mjml-making-respo
 * *csv-download.html*: {BUTTON_URL}, {SESSION_TITLE}
 * *invite-session.html*: {BUTTON_URL}, {SESSION_TITLE}
 * *reset-password.html*: {BUTTON_URL}
+* *invite-email.html*: {BUTTON_URL}
 
 # Contributors
 
