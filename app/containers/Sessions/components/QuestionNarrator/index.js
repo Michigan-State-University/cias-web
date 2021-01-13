@@ -30,7 +30,11 @@ import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit } from 'models/Status/statusPermissions';
 
 import { elements } from 'theme';
-import { NarratorContainer, lottieStyles } from './styled';
+import {
+  NarratorContainer,
+  lottieStyles,
+  CharacterActiveIndicator,
+} from './styled';
 import { saveNarratorMovement } from '../QuestionSettings/Settings/actions';
 import { CHARACTER_SIZE } from './utils';
 import { reducer, initialState, UPDATE } from './reducer';
@@ -266,23 +270,26 @@ const QuestionNarrator = ({
         position={getPosition()}
         disabled={!editingPossible}
         bounds="parent"
+        handle="#lottie"
       >
-        <div>
-          {settings.animation && (
-            <Lottie
-              ref={animationRef}
-              options={defaultOptions}
-              height={CHARACTER_SIZE.height}
-              width={CHARACTER_SIZE.width}
-              style={lottieStyles}
-              isClickToPauseDisabled
-              isStopped={
-                previewData.animation === 'standStill' ||
-                !decideIfPlaySpeechAnimation()
-              }
-            />
-          )}
-        </div>
+        <CharacterActiveIndicator $active={editingPossible}>
+          <div id="lottie">
+            {settings.animation && (
+              <Lottie
+                ref={animationRef}
+                options={defaultOptions}
+                height={CHARACTER_SIZE.height}
+                width={CHARACTER_SIZE.width}
+                style={lottieStyles}
+                isClickToPauseDisabled
+                isStopped={
+                  previewData.animation === 'standStill' ||
+                  !decideIfPlaySpeechAnimation()
+                }
+              />
+            )}
+          </div>
+        </CharacterActiveIndicator>
       </Draggable>
     </NarratorContainer>
   );
