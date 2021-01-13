@@ -113,8 +113,6 @@ Cypress.Commands.add(
               cy.wrap($input)
                 .clear()
                 .type(`${variablePrefix}${questionIndex}`);
-
-              cy.wait([UPDATE_QUESTION]);
             }
           },
         );

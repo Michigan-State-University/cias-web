@@ -41,7 +41,6 @@ const UserList = ({ users, buttons, buttonIsClose, userWithLoading }) => {
     );
   };
 
-  console.log(users);
   return (
     <Column data-cy="user-list">
       {users.map(({ email, id }, index) => (
