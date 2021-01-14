@@ -3,18 +3,18 @@
 exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 edUlFZ"
+    class="Box-sc-1vhutan-0 jpXukf"
     width="100%"
   >
     <div
-      class="Row-x1o3ru-0 dAhqIQ"
+      class="Row-y1cs0u-0 dskFsL"
     >
       <div
-        class="styled__InlineLoader-tle2yi-1 dIAlHd"
+        class="styled__InlineLoader-sc-1aaagww-1 kkTeLU"
         data-testid="inline-loader"
       >
         <div
-          class="styled__StyledSpinner-d123q3-0 iHKSVj"
+          class="styled__StyledSpinner-sc-129uixn-0 OJHNY"
           color="#C866EA"
           size="50"
           width="6"

@@ -3,26 +3,26 @@
 exports[`<Profile /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 dFbJjO"
+    class="Box-sc-1vhutan-0 ejxYds"
   >
     <h2
-      class="H2-egphza-0 klLMkt"
+      class="H2-uw8lbl-0 iUhbVg"
     >
       <span>
         Profile
       </span>
     </h2>
     <div
-      class="Row-x1o3ru-0 kaOItc"
+      class="Row-y1cs0u-0 cUkLOH"
       display="flex"
     >
       <div>
         <div
-          class="Row-x1o3ru-0 jeDFgM"
+          class="Row-y1cs0u-0 fgwsqb"
           width="100%"
         >
           <div
-            class="styled__AvatarStyled-sc-15n3teb-0 kWwaTf styled__StyledUserAvatar-awa645-1 jwLHtr"
+            class="styled__AvatarStyled-bn66gh-0 fvqhMv styled__StyledUserAvatar-sc-4bx7ap-1 dObBuO"
             color="#FFFFFF"
           >
             <div>
@@ -30,13 +30,13 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="Row-x1o3ru-0 gyVgFj"
+            class="Row-y1cs0u-0 jOTCVU"
           >
             <div
-              class="Row-x1o3ru-0 styled__StyledButtonsRow-awa645-2 dAhqIQ cyZEUK"
+              class="Row-y1cs0u-0 styled__StyledButtonsRow-sc-4bx7ap-2 dskFsL fA-DhtD"
             >
               <div
-                class="Box-sc-14m3exe-0 dUWMPL styled__StyledUploadFileButton-awa645-4 blnlBs"
+                class="Box-sc-1vhutan-0 cjmvvN styled__StyledUploadFileButton-sc-4bx7ap-4 GlRFp"
                 height="fit-content"
               >
                 <input
@@ -46,10 +46,10 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                   type="file"
                 />
                 <div
-                  class="Row-x1o3ru-0 czFUTs"
+                  class="Row-y1cs0u-0 bLAOxT"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 enpkZZ"
+                    class="Text-e4p0w3-0 gMPCWD"
                     color="#C866EA"
                     font-size="14"
                     font-weight="bold"
@@ -66,24 +66,24 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-x1o3ru-0 gqBLrI"
+      class="Row-y1cs0u-0 eDtOGP"
     >
       <div
-        class="Row-x1o3ru-0 styled__StyledFullNameRow-awa645-0 fcuGKr haPGft"
+        class="Row-y1cs0u-0 styled__StyledFullNameRow-sc-4bx7ap-0 gQFDhs loGlNM"
         width="100%"
       >
         <div
-          class="Column-sc-1n6divy-0 cEBgay"
+          class="Column-sc-4zswzq-0 ehOEzE"
           data-testid="first-name-input"
         >
           <p
-            class="Text-sc-2lza2m-0 drfDFr"
+            class="Text-e4p0w3-0 kFFPgx"
             width="fit-content"
           >
             First Name
           </p>
           <input
-            class="Input-sc-19txxuq-0 eQikpS"
+            class="Input-t9j2q5-0 ptbLy"
             height="46"
             name="firstName"
             placeholder="Enter first name"
@@ -93,16 +93,16 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           />
         </div>
         <div
-          class="Column-sc-1n6divy-0 gWZjHC"
+          class="Column-sc-4zswzq-0 jCuscc"
         >
           <p
-            class="Text-sc-2lza2m-0 drfDFr"
+            class="Text-e4p0w3-0 kFFPgx"
             width="fit-content"
           >
             Last name
           </p>
           <input
-            class="Input-sc-19txxuq-0 eQikpS"
+            class="Input-t9j2q5-0 ptbLy"
             height="46"
             name="lastName"
             placeholder="Enter last name"
@@ -114,23 +114,23 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-x1o3ru-0 styled__StyledRow-hc8ofk-1 jpQSJf bQGJUd"
+      class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 fyfnXk jKoKLe"
       width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 styled__StyledTimezoneBox-hc8ofk-3 hbiMlC bOVXJs"
+        class="Box-sc-1vhutan-0 styled__StyledTimezoneBox-sc-1pif2s-3 cVZZaQ dFeJUv"
       >
         <div
-          class="Column-sc-1n6divy-0 cFRthN"
+          class="Column-sc-4zswzq-0 laIXbL"
         >
           <p
-            class="Text-sc-2lza2m-0 drfDFr"
+            class="Text-e4p0w3-0 kFFPgx"
             width="fit-content"
           >
             Time zone
           </p>
           <div
-            class="Box-sc-14m3exe-0 fezhVc"
+            class="Box-sc-1vhutan-0 lnJPFa"
             data-testid="select"
           >
             <div
@@ -180,7 +180,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                     class=" css-tlfecz-indicatorContainer"
                   >
                     <img
-                      class="Img-sc-1kfzr96-0 sgjBb"
+                      class="Img-sc-55j3su-0 gTKGj"
                       src="IMAGE_MOCK"
                       transform=""
                     />
@@ -193,28 +193,28 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-x1o3ru-0 styled__StyledRow-hc8ofk-1 jpQSJf bQGJUd"
+      class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 fyfnXk jKoKLe"
       width="100%"
     >
       <div
-        class="Column-sc-1n6divy-0 SJAYV"
+        class="Column-sc-4zswzq-0 ekpwZH"
       >
         <div
-          class="Row-x1o3ru-0 fcuGKr"
+          class="Row-y1cs0u-0 gQFDhs"
           width="100%"
         >
           <div
-            class="Column-sc-1n6divy-0 eTZnrz"
+            class="Column-sc-4zswzq-0 HRVgp"
             width="230"
           >
             <p
-              class="Text-sc-2lza2m-0 drfDFr"
+              class="Text-e4p0w3-0 kFFPgx"
               width="fit-content"
             >
               Phone number
             </p>
             <div
-              class="Box-sc-14m3exe-0 fezhVc"
+              class="Box-sc-1vhutan-0 lnJPFa"
               data-testid="select"
             >
               <div
@@ -264,7 +264,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                       class=" css-tlfecz-indicatorContainer"
                     >
                       <img
-                        class="Img-sc-1kfzr96-0 sgjBb"
+                        class="Img-sc-55j3su-0 gTKGj"
                         src="IMAGE_MOCK"
                         transform=""
                       />
@@ -275,15 +275,15 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="Column-sc-1n6divy-0 SJAYV"
+            class="Column-sc-4zswzq-0 ekpwZH"
             value=""
           >
             <p
-              class="Text-sc-2lza2m-0 drfDFr"
+              class="Text-e4p0w3-0 kFFPgx"
               width="fit-content"
             />
             <input
-              class="Input-sc-19txxuq-0 eLrXII"
+              class="Input-t9j2q5-0 dLTYGo"
               name="number"
               placeholder="Enter phone number"
               type="tel"
@@ -295,15 +295,15 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-x1o3ru-0 styled__StyledRow-hc8ofk-1 gzbVEz bQGJUd"
+      class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 eomgnk jKoKLe"
       width="100%"
     >
       <div
-        class="Column-sc-1n6divy-0 bswLoY"
+        class="Column-sc-4zswzq-0 eSmZPS"
         width="33%"
       >
         <button
-          class="StyledTextButton-sc-17cmh3t-0 styled__TextButton-hc8ofk-2 bVBqrq jlYVDi"
+          class="StyledTextButton-sc-1b7egxw-0 styled__TextButton-sc-1pif2s-2 fiDerw hCmSLB"
           color="#C866EA"
           font-size="14"
           font-weight="bold"

@@ -9,9 +9,9 @@ import { SHARE_QUESTIONS_TO_RESEARCHERS_REQUEST } from '../constants';
 // import { shareQuestionsToResearchersSuccess, shareQuestionsToResearchersError } from '../actions';
 
 function* shareQuestionsToResearchers({
+  // eslint-disable-next-line no-unused-vars
   payload: { questionIds, researcherIds },
 }) {
-  console.log(questionIds, researcherIds);
   // const requestURL = `v1/sessions/${sessionId}/questions/${questionId}`;
 
   try {

@@ -2,7 +2,7 @@
 
 exports[`<ReportTile /> Should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-14m3exe-0 styled__StyledBox-sc-1ufj5af-0 kGTLNi bZSfjv"
+  class="Box-sc-1vhutan-0 styled__StyledBox-onmxmg-0 bqTbKg erHOle"
 >
   <div
     height="100%"
@@ -12,13 +12,13 @@ exports[`<ReportTile /> Should render and match the snapshot 1`] = `
       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
     >
       <div
-        class="Row-x1o3ru-0 fdTqjP"
+        class="Row-y1cs0u-0 ecllgQ"
       >
         <img
           src="IMAGE_MOCK"
         />
         <p
-          class="Text-sc-2lza2m-0 fIwRTV"
+          class="Text-e4p0w3-0 fxvuEz"
           font-size="18"
           font-weight="bold"
         >
@@ -30,15 +30,15 @@ exports[`<ReportTile /> Should render and match the snapshot 1`] = `
       style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
     >
       <div
-        class="Row-x1o3ru-0 styled__DownloadRow-sc-1ufj5af-1 fdTqjP kTPFvW"
+        class="Row-y1cs0u-0 styled__DownloadRow-onmxmg-1 ecllgQ NPQnz"
       >
         <a
-          class="StyledLink-sc-9buocn-0 kmesRI"
+          class="StyledLink-eun179-0 jlCCcr"
           href="/file.pdf"
           target="_blank"
         >
           <p
-            class="Text-sc-2lza2m-0 lpqXax"
+            class="Text-e4p0w3-0 fOFYCf"
             color="#C866EA"
             font-size="13"
             font-weight="bold"

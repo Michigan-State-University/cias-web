@@ -3,28 +3,28 @@
 exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 fVEMbn"
+    class="Box-sc-1vhutan-0 krWeER"
     display="flex"
     height="100%"
     overflow="scroll"
   >
     <div
-      class="Box-sc-14m3exe-0 dtkvkk"
+      class="Box-sc-1vhutan-0 cUyGiG"
       width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 jsQLkQ"
+        class="Box-sc-1vhutan-0 ddJzSG"
         display="flex"
       >
         <h1
-          class="H1-tncdg6-0 ihzbQx"
+          class="H1-sc-1k7m23t-0 hNcBIZ"
         >
           <span>
             Manage accounts
           </span>
         </h1>
         <button
-          class="StyledTextButton-sc-17cmh3t-0 bwXrsr"
+          class="StyledTextButton-sc-1b7egxw-0 bsIeDJ"
           color="#C866EA"
           font-weight="bold"
         >
@@ -35,29 +35,29 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
       </div>
       <div>
         <div
-          class="Box-sc-14m3exe-0 cEVOdo"
+          class="Box-sc-1vhutan-0 cIA-dSO"
           display="flex"
         >
           <div
-            class="Box-sc-14m3exe-0 bygSYt"
+            class="Box-sc-1vhutan-0 jZbfgr"
             display="flex"
           >
             <div
-              class="Box-sc-14m3exe-0 hyFUUf"
+              class="Box-sc-1vhutan-0 ergsuV"
               display="inline-block"
               width="100%"
             >
               <div
-                class="Box-sc-14m3exe-0 bygSYt"
+                class="Box-sc-1vhutan-0 jZbfgr"
                 display="flex"
               >
                 <div
-                  class="Box-sc-14m3exe-0 kapyPP"
+                  class="Box-sc-1vhutan-0 kupsdJ"
                   display="inline-flex"
                   width="120px"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 kVrtVZ"
+                    class="Text-e4p0w3-0 eAccFX"
                     color="#FFFFFF"
                     font-size="14"
                     font-weight="bold"
@@ -66,12 +66,12 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 ewtKZW"
+                  class="Box-sc-1vhutan-0 hUxqTk"
                   display="inline-flex"
                   width="120px"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 kVrtVZ"
+                    class="Text-e4p0w3-0 eAccFX"
                     color="#FFFFFF"
                     font-size="14"
                     font-weight="bold"
@@ -80,16 +80,16 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 fzsZJK"
+                  class="Box-sc-1vhutan-0 jIytus"
                   width="25"
                 />
                 <div
-                  class="Box-sc-14m3exe-0 ctokGG"
+                  class="Box-sc-1vhutan-0 dDbVys"
                   cursor="pointer"
                   display="inline-flex"
                 >
                   <img
-                    class="Img-sc-1kfzr96-0 cfhMhJ"
+                    class="Img-sc-55j3su-0 gyShgd"
                     src="IMAGE_MOCK"
                   />
                   <span>
@@ -100,82 +100,82 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
             </div>
           </div>
           <div
-            class="styled__SearchInputStyled-sc-65e6t4-3 iSsPYa"
+            class="styled__SearchInputStyled-sc-10udg63-3 bhbdBU"
           >
             <input
-              class="Input-sc-19txxuq-0 kVPrzG"
+              class="Input-t9j2q5-0 hjYQaq"
               type="text"
               value=""
             />
             <img
               alt="search"
-              class="styled__SearchIcon-sc-65e6t4-4 jtkbOJ"
+              class="styled__SearchIcon-sc-10udg63-4 VQGbD"
               src="IMAGE_MOCK"
             />
             
           </div>
         </div>
         <div
-          class="styled__TableLoadingContainer-x75ncs-0 cXAbyN"
+          class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
         >
           <table
-            class="Table-jgz9dg-0 dyJvpl"
+            class="Table-sc-1y0iqmn-0 fyHrUS"
             width="100%"
           >
             <thead
-              class="THead-sc-1pp8kl6-0"
+              class="THead-sc-8drp5d-0"
             >
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD iGeZEY"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF NeQvp"
               >
                 <th
-                  class="TH-sc-1qq1mcj-0 fjoWjG"
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 hleKja"
+                    class="Column-sc-4zswzq-0 gzLnhc"
                   >
                     Name
                   </div>
                 </th>
                 <th
-                  class="TH-sc-1qq1mcj-0 fjoWjG"
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 hleKja"
+                    class="Column-sc-4zswzq-0 gzLnhc"
                   >
                     Email
                   </div>
                 </th>
                 <th
-                  class="TH-sc-1qq1mcj-0 fjoWjG"
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 hleKja"
+                    class="Column-sc-4zswzq-0 gzLnhc"
                   >
                     Role
                   </div>
                 </th>
                 <th
-                  class="TH-sc-1qq1mcj-0 fjoWjG"
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 hleKja"
+                    class="Column-sc-4zswzq-0 gzLnhc"
                   >
                      
                   </div>
@@ -183,38 +183,38 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
               </tr>
             </thead>
             <tbody
-              class="TBody-sc-1332v38-0"
+              class="TBody-gqq9cv-0"
             >
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD cPliIm"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
                 color="#FFFFFF"
                 cursor="pointer"
               >
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 llwciq"
+                    class="Text-e4p0w3-0 gjgLec"
                     color="#EF462F"
                   >
                     Waiting for activation
                   </p>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   test@test.pl
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 dNmAns"
+                    class="Box-sc-1vhutan-0 dybmVO"
                     display="inline-flex"
                     width="120px"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 kVrtVZ"
+                      class="Text-e4p0w3-0 eAccFX"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -224,17 +224,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 bUpcjC"
+                  class="TD-y7762g-0 gxeveZ"
                 >
                   <div
-                    class="Row-x1o3ru-0 hEhKQX"
+                    class="Row-y1cs0u-0 loIsns"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-17cmh3t-0 dflcVA"
+                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
                     >
                       <p
-                        class="Text-sc-2lza2m-0 iKfWPK"
+                        class="Text-e4p0w3-0 kcCsRU"
                         color="#EF462F"
                         font-weight="bold"
                       >
@@ -245,35 +245,35 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD cPliIm"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
                 color="#FFFFFF"
                 cursor="pointer"
               >
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 llwciq"
+                    class="Text-e4p0w3-0 gjgLec"
                     color="#EF462F"
                   >
                     Waiting for activation
                   </p>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   test2@test.pl
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 exJtcV"
+                    class="Box-sc-1vhutan-0 JvFTr"
                     display="inline-flex"
                     width="120px"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 kVrtVZ"
+                      class="Text-e4p0w3-0 eAccFX"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -283,17 +283,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 bUpcjC"
+                  class="TD-y7762g-0 gxeveZ"
                 >
                   <div
-                    class="Row-x1o3ru-0 hEhKQX"
+                    class="Row-y1cs0u-0 loIsns"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-17cmh3t-0 dflcVA"
+                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
                     >
                       <p
-                        class="Text-sc-2lza2m-0 iKfWPK"
+                        class="Text-e4p0w3-0 kcCsRU"
                         color="#EF462F"
                         font-weight="bold"
                       >
@@ -304,35 +304,35 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD cPliIm"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
                 color="#FFFFFF"
                 cursor="pointer"
               >
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 llwciq"
+                    class="Text-e4p0w3-0 gjgLec"
                     color="#EF462F"
                   >
                     Waiting for activation
                   </p>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   test3@test.pl
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 kgfiHB"
+                    class="Box-sc-1vhutan-0 gNlqdr"
                     display="inline-flex"
                     width="120px"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 kVrtVZ"
+                      class="Text-e4p0w3-0 eAccFX"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -342,17 +342,17 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 bUpcjC"
+                  class="TD-y7762g-0 gxeveZ"
                 >
                   <div
-                    class="Row-x1o3ru-0 hEhKQX"
+                    class="Row-y1cs0u-0 loIsns"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-17cmh3t-0 dflcVA"
+                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
                     >
                       <p
-                        class="Text-sc-2lza2m-0 iKfWPK"
+                        class="Text-e4p0w3-0 kcCsRU"
                         color="#EF462F"
                         font-weight="bold"
                       >
@@ -366,24 +366,24 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           </table>
         </div>
         <div
-          class="Row-x1o3ru-0 iKdysT"
+          class="Row-y1cs0u-0 cAHLWQ"
           display="flex"
           width="100%"
         >
           <div
-            class="Box-sc-14m3exe-0 JuxSZ"
+            class="Box-sc-1vhutan-0 cfDdZL"
             cursor="pointer"
             display="flex"
           >
             <p
-              class="Text-sc-2lza2m-0 esBmYO"
+              class="Text-e4p0w3-0 eRNSEk"
               color="#FFFFFF"
             >
               1
             </p>
           </div>
           <h1
-            class="H1-tncdg6-0 hvewsC"
+            class="H1-sc-1k7m23t-0 fRhEzm"
             cursor="pointer"
           >
             &gt;
@@ -398,21 +398,21 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 fVEMbn"
+    class="Box-sc-1vhutan-0 krWeER"
     display="flex"
     height="100%"
     overflow="scroll"
   >
     <div
-      class="Box-sc-14m3exe-0 dtkvkk"
+      class="Box-sc-1vhutan-0 cUyGiG"
       width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 jsQLkQ"
+        class="Box-sc-1vhutan-0 ddJzSG"
         display="flex"
       >
         <h1
-          class="H1-tncdg6-0 ihzbQx"
+          class="H1-sc-1k7m23t-0 hNcBIZ"
         >
           <span>
             Manage accounts
@@ -421,29 +421,29 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
       </div>
       <div>
         <div
-          class="Box-sc-14m3exe-0 cEVOdo"
+          class="Box-sc-1vhutan-0 cIA-dSO"
           display="flex"
         >
           <div
-            class="Box-sc-14m3exe-0 bygSYt"
+            class="Box-sc-1vhutan-0 jZbfgr"
             display="flex"
           >
             <div
-              class="Box-sc-14m3exe-0 hyFUUf"
+              class="Box-sc-1vhutan-0 ergsuV"
               display="inline-block"
               width="100%"
             >
               <div
-                class="Box-sc-14m3exe-0 bygSYt"
+                class="Box-sc-1vhutan-0 jZbfgr"
                 display="flex"
               >
                 <div
-                  class="Box-sc-14m3exe-0 kapyPP"
+                  class="Box-sc-1vhutan-0 kupsdJ"
                   display="inline-flex"
                   width="120px"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 kVrtVZ"
+                    class="Text-e4p0w3-0 eAccFX"
                     color="#FFFFFF"
                     font-size="14"
                     font-weight="bold"
@@ -452,12 +452,12 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 ewtKZW"
+                  class="Box-sc-1vhutan-0 hUxqTk"
                   display="inline-flex"
                   width="120px"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 kVrtVZ"
+                    class="Text-e4p0w3-0 eAccFX"
                     color="#FFFFFF"
                     font-size="14"
                     font-weight="bold"
@@ -466,16 +466,16 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </p>
                 </div>
                 <div
-                  class="Box-sc-14m3exe-0 fzsZJK"
+                  class="Box-sc-1vhutan-0 jIytus"
                   width="25"
                 />
                 <div
-                  class="Box-sc-14m3exe-0 ctokGG"
+                  class="Box-sc-1vhutan-0 dDbVys"
                   cursor="pointer"
                   display="inline-flex"
                 >
                   <img
-                    class="Img-sc-1kfzr96-0 cfhMhJ"
+                    class="Img-sc-55j3su-0 gyShgd"
                     src="IMAGE_MOCK"
                   />
                   <span>
@@ -486,82 +486,82 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
             </div>
           </div>
           <div
-            class="styled__SearchInputStyled-sc-65e6t4-3 iSsPYa"
+            class="styled__SearchInputStyled-sc-10udg63-3 bhbdBU"
           >
             <input
-              class="Input-sc-19txxuq-0 kVPrzG"
+              class="Input-t9j2q5-0 hjYQaq"
               type="text"
               value=""
             />
             <img
               alt="search"
-              class="styled__SearchIcon-sc-65e6t4-4 jtkbOJ"
+              class="styled__SearchIcon-sc-10udg63-4 VQGbD"
               src="IMAGE_MOCK"
             />
             
           </div>
         </div>
         <div
-          class="styled__TableLoadingContainer-x75ncs-0 cXAbyN"
+          class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
         >
           <table
-            class="Table-jgz9dg-0 dyJvpl"
+            class="Table-sc-1y0iqmn-0 fyHrUS"
             width="100%"
           >
             <thead
-              class="THead-sc-1pp8kl6-0"
+              class="THead-sc-8drp5d-0"
             >
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD iGeZEY"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF NeQvp"
               >
                 <th
-                  class="TH-sc-1qq1mcj-0 fjoWjG"
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 hleKja"
+                    class="Column-sc-4zswzq-0 gzLnhc"
                   >
                     Name
                   </div>
                 </th>
                 <th
-                  class="TH-sc-1qq1mcj-0 fjoWjG"
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 hleKja"
+                    class="Column-sc-4zswzq-0 gzLnhc"
                   >
                     Email
                   </div>
                 </th>
                 <th
-                  class="TH-sc-1qq1mcj-0 fjoWjG"
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 hleKja"
+                    class="Column-sc-4zswzq-0 gzLnhc"
                   >
                     Role
                   </div>
                 </th>
                 <th
-                  class="TH-sc-1qq1mcj-0 fjoWjG"
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 hleKja"
+                    class="Column-sc-4zswzq-0 gzLnhc"
                   >
                      
                   </div>
@@ -569,38 +569,38 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
               </tr>
             </thead>
             <tbody
-              class="TBody-sc-1332v38-0"
+              class="TBody-gqq9cv-0"
             >
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD cPliIm"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
                 color="#FFFFFF"
                 cursor="pointer"
               >
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 llwciq"
+                    class="Text-e4p0w3-0 gjgLec"
                     color="#EF462F"
                   >
                     Waiting for activation
                   </p>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   test@test.pl
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 dNmAns"
+                    class="Box-sc-1vhutan-0 dybmVO"
                     display="inline-flex"
                     width="120px"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 kVrtVZ"
+                      class="Text-e4p0w3-0 eAccFX"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -610,17 +610,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 bUpcjC"
+                  class="TD-y7762g-0 gxeveZ"
                 >
                   <div
-                    class="Row-x1o3ru-0 hEhKQX"
+                    class="Row-y1cs0u-0 loIsns"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-17cmh3t-0 dflcVA"
+                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
                     >
                       <p
-                        class="Text-sc-2lza2m-0 iKfWPK"
+                        class="Text-e4p0w3-0 kcCsRU"
                         color="#EF462F"
                         font-weight="bold"
                       >
@@ -631,35 +631,35 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD cPliIm"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
                 color="#FFFFFF"
                 cursor="pointer"
               >
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 llwciq"
+                    class="Text-e4p0w3-0 gjgLec"
                     color="#EF462F"
                   >
                     Waiting for activation
                   </p>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   test2@test.pl
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 exJtcV"
+                    class="Box-sc-1vhutan-0 JvFTr"
                     display="inline-flex"
                     width="120px"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 kVrtVZ"
+                      class="Text-e4p0w3-0 eAccFX"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -669,17 +669,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 bUpcjC"
+                  class="TD-y7762g-0 gxeveZ"
                 >
                   <div
-                    class="Row-x1o3ru-0 hEhKQX"
+                    class="Row-y1cs0u-0 loIsns"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-17cmh3t-0 dflcVA"
+                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
                     >
                       <p
-                        class="Text-sc-2lza2m-0 iKfWPK"
+                        class="Text-e4p0w3-0 kcCsRU"
                         color="#EF462F"
                         font-weight="bold"
                       >
@@ -690,35 +690,35 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD cPliIm"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
                 color="#FFFFFF"
                 cursor="pointer"
               >
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-sc-2lza2m-0 llwciq"
+                    class="Text-e4p0w3-0 gjgLec"
                     color="#EF462F"
                   >
                     Waiting for activation
                   </p>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   test3@test.pl
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 dmlVAK"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-14m3exe-0 kgfiHB"
+                    class="Box-sc-1vhutan-0 gNlqdr"
                     display="inline-flex"
                     width="120px"
                   >
                     <p
-                      class="Text-sc-2lza2m-0 kVrtVZ"
+                      class="Text-e4p0w3-0 eAccFX"
                       color="#FFFFFF"
                       font-size="14"
                       font-weight="bold"
@@ -728,17 +728,17 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-sc-4t6406-0 bUpcjC"
+                  class="TD-y7762g-0 gxeveZ"
                 >
                   <div
-                    class="Row-x1o3ru-0 hEhKQX"
+                    class="Row-y1cs0u-0 loIsns"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-17cmh3t-0 dflcVA"
+                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
                     >
                       <p
-                        class="Text-sc-2lza2m-0 iKfWPK"
+                        class="Text-e4p0w3-0 kcCsRU"
                         color="#EF462F"
                         font-weight="bold"
                       >
@@ -752,24 +752,24 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           </table>
         </div>
         <div
-          class="Row-x1o3ru-0 iKdysT"
+          class="Row-y1cs0u-0 cAHLWQ"
           display="flex"
           width="100%"
         >
           <div
-            class="Box-sc-14m3exe-0 JuxSZ"
+            class="Box-sc-1vhutan-0 cfDdZL"
             cursor="pointer"
             display="flex"
           >
             <p
-              class="Text-sc-2lza2m-0 esBmYO"
+              class="Text-e4p0w3-0 eRNSEk"
               color="#FFFFFF"
             >
               1
             </p>
           </div>
           <h1
-            class="H1-tncdg6-0 hvewsC"
+            class="H1-sc-1k7m23t-0 fRhEzm"
             cursor="pointer"
           >
             &gt;

@@ -3,41 +3,41 @@
 exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="styled__NavbarStyled-sc-8703sy-0 joLgQf"
+    class="styled__NavbarStyled-spz26p-0 kACPXx"
   >
     <div
-      class="Row-x1o3ru-0 duXTXk"
+      class="Row-y1cs0u-0 YUCXT"
       width="100%"
     >
       <div
-        class="Row-x1o3ru-0 styled__StyledLogos-sc-1q1badg-6 dAhqIQ huQsJJ"
+        class="Row-y1cs0u-0 styled__StyledLogos-sc-12n1pg-6 dskFsL BTURP"
       >
         <a
           href="/"
         >
           <img
             alt="logo"
-            class="Img-sc-1kfzr96-0 gNIYBc"
+            class="Img-sc-55j3su-0 jveqaA"
             src="IMAGE_MOCK"
           />
         </a>
         <img
-          class="Img-sc-1kfzr96-0 KGooO"
+          class="Img-sc-55j3su-0 fmXdFO"
           src="IMAGE_MOCK"
         />
       </div>
       <div
-        class="Row-x1o3ru-0 eeuVv"
+        class="Row-y1cs0u-0 eDDots"
         width="100%"
       >
         <a
           active="1"
-          class="styled__NavbarTabLink-sc-1q1badg-4 gxxSDi navbar-tabs"
+          class="styled__NavbarTabLink-sc-12n1pg-4 kELUrI navbar-tabs"
           href="/"
           ml="10"
         >
           <p
-            class="Text-sc-2lza2m-0 iynfNN"
+            class="Text-e4p0w3-0 pcigz"
             font-size="15"
           >
             <span>
@@ -46,12 +46,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
           </p>
         </a>
         <a
-          class="styled__NavbarTabLink-sc-1q1badg-4 hwFeBm navbar-tabs"
+          class="styled__NavbarTabLink-sc-12n1pg-4 jquOTU navbar-tabs"
           href="/users"
           ml="10"
         >
           <p
-            class="Text-sc-2lza2m-0 iynfNN"
+            class="Text-e4p0w3-0 pcigz"
             font-size="15"
           >
             <span>
@@ -62,13 +62,13 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="styled__RightPanel-sc-8703sy-1 gdymJS"
+      class="styled__RightPanel-spz26p-1 LyOmU"
     >
       <div
-        class="styled__DropDownContainer-sc-8703sy-5 exwLrQ"
+        class="styled__DropDownContainer-spz26p-5 dODhyO"
       >
         <div
-          class="styled__AvatarStyled-sc-15n3teb-0 kYxpml"
+          class="styled__AvatarStyled-bn66gh-0 fLsauV"
           color="#FFFFFF"
           height="30"
           width="30"
@@ -80,23 +80,23 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
         <div />
       </div>
       <div
-        class="Box-sc-14m3exe-0 gSRNBN user-name-info"
+        class="Box-sc-1vhutan-0 jKoMMz user-name-info"
       >
         first-name last-name
       </div>
     </div>
   </div>
   <div
-    class="styled__MainAppContainer-sc-1kbmjk8-0 gRcCws"
+    class="styled__MainAppContainer-sc-8koytx-0 ycYpJ"
     id="main-app-container"
   >
     <div
-      class="styled__FillScreenLoader-tle2yi-0 jaQIeH"
+      class="styled__FillScreenLoader-sc-1aaagww-0 bcnRTW"
       data-testid="fullscreen-loader"
       opacity="0.5"
     >
       <div
-        class="styled__StyledSpinner-d123q3-0 gidDvb"
+        class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
         color="#C866EA"
         size="100"
         width="6"

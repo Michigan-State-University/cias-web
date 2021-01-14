@@ -22,11 +22,11 @@ exports[`<H1 /> should match the snapshot 1`] = `
   justify-content: space-between;
 }
 
-.c0:hover .H2-egphza-0 {
+.c0:hover .H2-uw8lbl-0 {
   color: #C866EA !important;
 }
 
-.c0:hover .styled__ToggleableBox-sc-1b3iden-0 {
+.c0:hover .styled__ToggleableBox-zk98vs-0 {
   background-color: black !important;
 }
 

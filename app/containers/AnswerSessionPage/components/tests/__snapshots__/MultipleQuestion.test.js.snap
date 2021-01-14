@@ -3,21 +3,21 @@
 exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Column-sc-1n6divy-0 SJAYV"
+    class="Column-sc-4zswzq-0 ekpwZH"
   >
     <div
-      class="Row-x1o3ru-0 bqOTSM"
+      class="Row-y1cs0u-0 eQEaUX"
     >
       <div
-        class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 jCDUNu"
+        class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 jDfcLE"
         width="calc(100% + 21px)"
       >
         <div
-          class="Row-x1o3ru-0 boIURK"
+          class="Row-y1cs0u-0 hqiNOF"
           height="44"
         >
           <img
-            class="Img-sc-1kfzr96-0 fUwSCT"
+            class="Img-sc-55j3su-0 iYjftT"
             src="IMAGE_MOCK"
           />
           <div>
@@ -27,18 +27,18 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-x1o3ru-0 bqOTSM"
+      class="Row-y1cs0u-0 eQEaUX"
     >
       <div
-        class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 jCDUNu"
+        class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 jDfcLE"
         width="calc(100% + 21px)"
       >
         <div
-          class="Row-x1o3ru-0 boIURK"
+          class="Row-y1cs0u-0 hqiNOF"
           height="44"
         >
           <img
-            class="Img-sc-1kfzr96-0 fUwSCT"
+            class="Img-sc-55j3su-0 iYjftT"
             src="IMAGE_MOCK"
           />
           <div>

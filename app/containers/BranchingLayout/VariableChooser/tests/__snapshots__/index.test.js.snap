@@ -196,39 +196,39 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Box-sc-14m3exe-0 iRdzkN"
+      class="Box-sc-1vhutan-0 bBMNIf"
       display="none"
       width="auto"
     >
       <div
-        class="Row-x1o3ru-0 dAhqIQ"
+        class="Row-y1cs0u-0 dskFsL"
       >
         <div
-          class="Box-sc-14m3exe-0 zYwpt"
+          class="Box-sc-1vhutan-0 buKpDj"
         >
           <div
-            class="Column-sc-1n6divy-0 SJAYV"
+            class="Column-sc-4zswzq-0 ekpwZH"
           >
             <div
-              class="Row-x1o3ru-0 fxPBcH"
+              class="Row-y1cs0u-0 dLpgLs"
               data-testid="undefined-select-variable"
             >
               <div
-                class="Row-x1o3ru-0 fdTqjP"
+                class="Row-y1cs0u-0 ecllgQ"
               >
                 <img
-                  class="Img-sc-1kfzr96-0 loGjyL"
+                  class="Img-sc-55j3su-0 gWNtSX"
                   src="IMAGE_MOCK"
                 />
                 <p
-                  class="Text-sc-2lza2m-0 gJZxTA"
+                  class="Text-e4p0w3-0 cHolUu"
                   overflow="hidden"
                 >
                   Test subtitle 1
                 </p>
               </div>
               <div
-                class="Badge-sc-1bivynt-0 kRyFbm"
+                class="Badge-n0b6mf-0 AXzkR"
                 color="#107969"
                 data-cy="question-variable-chooser"
               >
@@ -500,39 +500,39 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Box-sc-14m3exe-0 iRdzkN"
+      class="Box-sc-1vhutan-0 bBMNIf"
       display="none"
       width="auto"
     >
       <div
-        class="Row-x1o3ru-0 dAhqIQ"
+        class="Row-y1cs0u-0 dskFsL"
       >
         <div
-          class="Box-sc-14m3exe-0 zYwpt"
+          class="Box-sc-1vhutan-0 buKpDj"
         >
           <div
-            class="Column-sc-1n6divy-0 SJAYV"
+            class="Column-sc-4zswzq-0 ekpwZH"
           >
             <div
-              class="Box-sc-14m3exe-0 iJfNat"
+              class="Box-sc-1vhutan-0 dbODYP"
             >
               <div
-                class="Box-sc-14m3exe-0 hEtviT"
+                class="Box-sc-1vhutan-0 kTgzBZ"
                 data-testid="no-content"
                 display="flex"
                 height="100%"
                 width="100%"
               >
                 <div
-                  class="Column-sc-1n6divy-0 kCnOyy"
+                  class="Column-sc-4zswzq-0 eExeGs"
                 >
                   <img
                     alt="No content"
-                    class="Img-sc-1kfzr96-0 lmhFEd"
+                    class="Img-sc-55j3su-0 cDhXoN"
                     src="IMAGE_MOCK"
                   />
                   <h2
-                    class="H2-egphza-0 iPVWCm"
+                    class="H2-uw8lbl-0 bnQANz"
                     color="#B0BAC9"
                   >
                     No variables defined yet

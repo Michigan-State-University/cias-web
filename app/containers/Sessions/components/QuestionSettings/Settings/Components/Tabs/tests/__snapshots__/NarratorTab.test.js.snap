@@ -3,10 +3,10 @@
 exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 eIdKgx"
+    class="Box-sc-1vhutan-0 euCCWT"
   >
     <p
-      class="Text-sc-2lza2m-0 lcEiaM"
+      class="Text-e4p0w3-0 cyrMKK"
       color="#EF462F"
     >
       <span>
@@ -17,54 +17,54 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
       </span>
     </p>
     <div
-      class="Row-x1o3ru-0 kANvPw"
+      class="Row-y1cs0u-0 cNUaef"
     >
       <h3
-        class="H3-sc-1nwhpi5-0 bPzmis"
+        class="H3-twxrn4-0 cRKwFK"
       >
         Voice
       </h3>
       <label
-        class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+        class="styled__SwitchWrapper-k9teya-0 hucWtb"
       >
         <input
           checked=""
-          class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+          class="styled__SwitchInput-k9teya-1 hdJnOF"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+          class="styled__Slider-k9teya-2 cGAcbS"
         />
       </label>
     </div>
     <div
-      class="Row-x1o3ru-0 kRTAxX"
+      class="Row-y1cs0u-0 gaoRiI"
     >
       <h3
-        class="H3-sc-1nwhpi5-0 bPzmis"
+        class="H3-twxrn4-0 cRKwFK"
       >
         Display Character
       </h3>
       <label
-        class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+        class="styled__SwitchWrapper-k9teya-0 hucWtb"
       >
         <input
           checked=""
-          class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+          class="styled__SwitchInput-k9teya-1 hdJnOF"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+          class="styled__Slider-k9teya-2 cGAcbS"
         />
       </label>
     </div>
   </div>
   <p
-    class="Text-sc-2lza2m-0 kTjhhT"
+    class="Text-e4p0w3-0 gQqqMd"
     color="#EF462F"
     font-weight="bold"
   >
@@ -73,7 +73,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
     </span>
   </p>
   <div
-    class="styled__AccordionContainer-sc-1ls4m2z-0"
+    class="styled__AccordionContainer-nwquto-0"
     data-cy="narrator-blocks"
   >
     <div
@@ -82,10 +82,10 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
     />
   </div>
   <div
-    class="Box-sc-14m3exe-0 xbrTG"
+    class="Box-sc-1vhutan-0 kjemns"
   >
     <div
-      class="Box-sc-14m3exe-0 styled__DashedBox-zx7lu-0 hpzkQe kkWyYe"
+      class="Box-sc-1vhutan-0 styled__DashedBox-sc-3rwrfw-0 bWNenQ gPoLK"
     >
       + Add block
     </div>

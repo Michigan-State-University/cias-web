@@ -1,8 +1,30 @@
 Changelog
 =========
 
+v0.2.1 (14.01.2021)
+------------
+- [CIAS-745] Phone confirmation modal (#416) [Jakub Zygmunt]
+- [CIAS-690] Merge pull request #429 from HTD-Health/690-fixes [msniec]
+- [CIAS-655] Add animation to distinguish active peedy (#428) [Michal Grzelak]
+- [Cias-398] Email invititation template (#426) [Michal Grzelak]
+- [CIAS-758] Change copy from Proceed button to Next Screen Button (#425) [Michal Grzelak]
+- [CIAS-755] Expand new block (#423) [Jakub Zygmunt]
+- [CIAS-754] Fix speech block autosave (#422) [Jakub Zygmunt]
+- [CIAS-753] Remove Next Screen label in branching (#421) [Jakub Zygmunt]
+- [CIAS-561] HTML minify  (#420) [Michal Grzelak]
+- [CIAS-746] Fix unnecessary page reload on failed login (#419) [Michal Grzelak]
+- [CIAS-561] Create confirm email, reset password and csv download templates (#415) [Michal Grzelak]
+- [CIAS-744] Disable navbar active tab in edit profile view (#414) [Jakub Zygmunt]
+- [CIAS-743] Add notification tab to profile settings (#413) [Jakub Zygmunt]
+- [CIAS-742] Logout data clear (#412) [Michal Grzelak]
+- [CIAS-740] MJML config (#411) [Michal Grzelak]
+- [CIAS-736] Create generic component for Phone Number (#410) [Jakub Zygmunt]
+- [CIAS-719] Initial block creation (#397) [Michal Grzelak]
+- [CIAS-739] Resize observer loop (#409) [Michal Grzelak]
+- [CIAS-405] Participant dashboard init (#399) [Jakub Zygmunt]
 
 v0.2.0
+------------
 - Add last changes to CHANGELOG and fix version of application in helm chart. [Jerzy Sładkowski]
 - Fix copy mismatch. [Michal Grzelak]
 - Restore access settings copy. [Michal Grzelak]

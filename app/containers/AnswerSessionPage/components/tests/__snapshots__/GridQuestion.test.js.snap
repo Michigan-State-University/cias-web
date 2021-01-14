@@ -3,50 +3,50 @@
 exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 hyPcxF"
+    class="Box-sc-1vhutan-0 cGXAij"
     width="100%"
   >
     <div
-      class="Box-sc-14m3exe-0 hYFORl"
+      class="Box-sc-1vhutan-0 fnsWon"
       width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 jWMeKn"
+        class="Box-sc-1vhutan-0 ldEgBJ"
         overflow="scroll"
       >
         <table
-          class="Table-jgz9dg-0 eJfDii"
+          class="Table-sc-1y0iqmn-0 dCDWhF"
         >
           <thead
-            class="THead-sc-1pp8kl6-0"
+            class="THead-sc-8drp5d-0"
           >
             <tr
-              class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD jeviXb"
+              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF hkfhim"
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1qq1mcj-0 styled__FirstTH-s3qknc-6 hAFogX bxnClK"
+                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-6 eqAwGb bVdTDa"
                 scope="col"
                 width="120px"
               />
               <th
-                class="TH-sc-1qq1mcj-0 hAFogX"
+                class="TH-sc-1w7ae0i-0 eqAwGb"
                 scope="col"
                 width="120px"
               >
                 <div
-                  class="Column-sc-1n6divy-0 SJAYV"
+                  class="Column-sc-4zswzq-0 ekpwZH"
                 >
                   test
                 </div>
               </th>
               <th
-                class="TH-sc-1qq1mcj-0 hAFogX"
+                class="TH-sc-1w7ae0i-0 eqAwGb"
                 scope="col"
                 width="120px"
               >
                 <div
-                  class="Column-sc-1n6divy-0 SJAYV"
+                  class="Column-sc-4zswzq-0 ekpwZH"
                 >
                   test
                 </div>
@@ -54,19 +54,19 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
             </tr>
           </thead>
           <tbody
-            class="TBody-sc-1332v38-0"
+            class="TBody-gqq9cv-0"
           >
             <tr
-              class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD jeviXb"
+              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF hkfhim"
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1qq1mcj-0 styled__FirstTH-s3qknc-6 hAFogX bxnClK"
+                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-6 eqAwGb bVdTDa"
                 scope="row"
                 width="120px"
               >
                 <div
-                  class="Column-sc-1n6divy-0 hoqZWS"
+                  class="Column-sc-4zswzq-0 fDUNyM"
                   height="inherit"
                   width="max-content"
                 >
@@ -74,43 +74,43 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 </div>
               </th>
               <td
-                class="TD-sc-4t6406-0 bUpcjC"
+                class="TD-y7762g-0 gxeveZ"
               >
                 <div
-                  class="Row-x1o3ru-0 ffUobb"
+                  class="Row-y1cs0u-0 iQucgI"
                   width="80"
                 >
                   <img
-                    class="Img-sc-1kfzr96-0 gYrhFK"
+                    class="Img-sc-55j3su-0 kDGTCK"
                     src="IMAGE_MOCK"
                   />
                 </div>
               </td>
               <td
-                class="TD-sc-4t6406-0 bUpcjC"
+                class="TD-y7762g-0 gxeveZ"
               >
                 <div
-                  class="Row-x1o3ru-0 ffUobb"
+                  class="Row-y1cs0u-0 iQucgI"
                   width="80"
                 >
                   <img
-                    class="Img-sc-1kfzr96-0 gYrhFK"
+                    class="Img-sc-55j3su-0 kDGTCK"
                     src="IMAGE_MOCK"
                   />
                 </div>
               </td>
             </tr>
             <tr
-              class="TR-ufkqc8-0 StripedTR-sc-185jv5k-0 egSFtD jeviXb"
+              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF hkfhim"
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1qq1mcj-0 styled__FirstTH-s3qknc-6 hAFogX bxnClK"
+                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-6 eqAwGb bVdTDa"
                 scope="row"
                 width="120px"
               >
                 <div
-                  class="Column-sc-1n6divy-0 hoqZWS"
+                  class="Column-sc-4zswzq-0 fDUNyM"
                   height="inherit"
                   width="max-content"
                 >
@@ -118,27 +118,27 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 </div>
               </th>
               <td
-                class="TD-sc-4t6406-0 bUpcjC"
+                class="TD-y7762g-0 gxeveZ"
               >
                 <div
-                  class="Row-x1o3ru-0 ffUobb"
+                  class="Row-y1cs0u-0 iQucgI"
                   width="80"
                 >
                   <img
-                    class="Img-sc-1kfzr96-0 gYrhFK"
+                    class="Img-sc-55j3su-0 kDGTCK"
                     src="IMAGE_MOCK"
                   />
                 </div>
               </td>
               <td
-                class="TD-sc-4t6406-0 bUpcjC"
+                class="TD-y7762g-0 gxeveZ"
               >
                 <div
-                  class="Row-x1o3ru-0 ffUobb"
+                  class="Row-y1cs0u-0 iQucgI"
                   width="80"
                 >
                   <img
-                    class="Img-sc-1kfzr96-0 gYrhFK"
+                    class="Img-sc-55j3su-0 kDGTCK"
                     src="IMAGE_MOCK"
                   />
                 </div>

@@ -1,17 +1,12 @@
 {
-  "name": "react-boilerplate",
-  "version": "4.0.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
-  },
+  "name": "cias-3.0",
+  "version": "0.2.1",
+  "description": "CIAS 3.0 Web Application",
   "engines": {
     "npm": "6.x",
     "node": "12.x || 14.x"
   },
-  "author": "Max Stoiber",
-  "license": "MIT",
+  "author": "HTD Health",
   "scripts": {
     "postinstall": "patch-package",
     "analyze:clean": "rimraf stats.json",
@@ -68,7 +63,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@sentry/react": "^5.27.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "chalk": "^2.4.2",
     "compression": "1.7.4",
     "connected-react-router": "^6.8.0",

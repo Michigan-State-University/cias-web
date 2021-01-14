@@ -27,9 +27,9 @@ describe('<FormikNumberInput />', () => {
     render(
       <Formik initialValues={{ test: '' }} onSubmit={jest.fn()}>
         {() => (
-          <Fragment>
+          <>
             <FormikNumberInput {...props} />
-          </Fragment>
+          </>
         )}
       </Formik>,
     );
@@ -40,9 +40,9 @@ describe('<FormikNumberInput />', () => {
     const { container } = render(
       <Formik initialValues={{ test: '' }} onSubmit={jest.fn()}>
         {() => (
-          <Fragment>
+          <>
             <FormikNumberInput {...props} />
-          </Fragment>
+          </>
         )}
       </Formik>,
     );

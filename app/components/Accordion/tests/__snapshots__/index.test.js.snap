@@ -93,7 +93,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
 
 <div>
   <div
-    class="styled__AccordionContainer-sc-1ls4m2z-0"
+    class="styled__AccordionContainer-nwquto-0"
   >
     <div
       data-rbd-droppable-context-id="1"
@@ -324,7 +324,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
 
 <div>
   <div
-    class="styled__AccordionContainer-sc-1ls4m2z-0"
+    class="styled__AccordionContainer-nwquto-0"
   >
     <div
       class="c0"
@@ -478,7 +478,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
 
 <div>
   <div
-    class="styled__AccordionContainer-sc-1ls4m2z-0"
+    class="styled__AccordionContainer-nwquto-0"
   >
     <div
       data-rbd-droppable-context-id="2"

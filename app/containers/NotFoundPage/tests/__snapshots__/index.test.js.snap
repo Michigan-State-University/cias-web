@@ -2,16 +2,16 @@
 
 exports[`<NotFoundPage /> should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-14m3exe-0 iPSvYJ"
+  class="Box-sc-1vhutan-0 iGbAaz"
   height="100%"
   width="100%"
 >
   <div
-    class="Column-sc-1n6divy-0 iYVlJX"
+    class="Column-sc-4zswzq-0 iSXTjZ"
     height="100%"
   >
     <p
-      class="Text-sc-2lza2m-0 fNyAcA"
+      class="Text-e4p0w3-0 eAunbm"
       color="#107969"
       font-size="10vw"
       font-weight="bold"
@@ -19,20 +19,20 @@ exports[`<NotFoundPage /> should render and match the snapshot 1`] = `
       404
     </p>
     <p
-      class="Text-sc-2lza2m-0 dznXbg"
+      class="Text-e4p0w3-0 bWNnsa"
       font-size="24"
       font-weight="bold"
     >
       Looks like you’re lost.
     </p>
     <p
-      class="Text-sc-2lza2m-0 cabwJn"
+      class="Text-e4p0w3-0 eBqgNV"
       font-size="18"
     >
       We can’t find the page you’re looking for.
     </p>
     <button
-      class="StyledButton-t20ntd-0 tmegE"
+      class="StyledButton-d2s0gt-0 jFzyBC"
       color="primary"
       width="180"
     >

@@ -9,13 +9,13 @@ exports[`<SessionTile /> Should render and match the snapshot 1`] = `
     style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
   >
     <div
-      class="Row-x1o3ru-0 fdTqjP"
+      class="Row-y1cs0u-0 ecllgQ"
     >
       <img
         src="IMAGE_MOCK"
       />
       <p
-        class="Text-sc-2lza2m-0 fIwRTV"
+        class="Text-e4p0w3-0 fxvuEz"
         font-size="18"
         font-weight="bold"
       >
@@ -27,20 +27,20 @@ exports[`<SessionTile /> Should render and match the snapshot 1`] = `
     style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
   >
     <div
-      class="Row-x1o3ru-0 styled__StatusRow-sc-1jkyj19-1 eGKeNM gcNkeP"
+      class="Row-y1cs0u-0 styled__StatusRow-trtiyf-1 eWJxVb kKnMsJ"
     >
       <div
-        class="Row-x1o3ru-0 fdTqjP"
+        class="Row-y1cs0u-0 ecllgQ"
       >
         <a
-          class="StyledLink-sc-9buocn-0 kmesRI"
+          class="StyledLink-eun179-0 jlCCcr"
           href="/report"
         >
           <img
             src="IMAGE_MOCK"
           />
           <p
-            class="Text-sc-2lza2m-0 cWuOKK"
+            class="Text-e4p0w3-0 kLdreM"
             color="#C866EA"
             font-weight="bold"
           >
@@ -53,7 +53,7 @@ exports[`<SessionTile /> Should render and match the snapshot 1`] = `
           src="IMAGE_MOCK"
         />
         <p
-          class="Text-sc-2lza2m-0 kIViBF"
+          class="Text-e4p0w3-0 kNRzzf"
         >
           <span>
             Completed

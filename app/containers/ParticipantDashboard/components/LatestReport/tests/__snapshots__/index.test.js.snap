@@ -3,25 +3,25 @@
 exports[`<LatestReport /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Column-sc-1n6divy-0 dkFaMN"
+    class="Column-sc-4zswzq-0 gOeQAn"
     width="100%"
   >
     <div
-      class="Row-x1o3ru-0 gmEEpD"
+      class="Row-y1cs0u-0 bDCQgo"
     >
       <h1
-        class="H1-tncdg6-0 eNjQDq"
+        class="H1-sc-1k7m23t-0 ewNLte"
       >
         <span>
           Latest Report
         </span>
       </h1>
       <a
-        class="StyledLink-sc-9buocn-0 kmesRI"
+        class="StyledLink-eun179-0 jlCCcr"
         href="/reports"
       >
         <p
-          class="Text-sc-2lza2m-0 jIrass"
+          class="Text-e4p0w3-0 bBleiO"
           color="#C866EA"
           font-weight="bold"
         >
@@ -32,11 +32,11 @@ exports[`<LatestReport /> Should render and match the snapshot 1`] = `
       </a>
     </div>
     <div
-      class="styled__InlineLoader-tle2yi-1 dIAlHd"
+      class="styled__InlineLoader-sc-1aaagww-1 kkTeLU"
       data-testid="inline-loader"
     >
       <div
-        class="styled__StyledSpinner-d123q3-0 gidDvb"
+        class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
         color="#C866EA"
         size="100"
         width="6"

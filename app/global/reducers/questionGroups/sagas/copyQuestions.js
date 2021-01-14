@@ -10,8 +10,8 @@ import { takeLatest } from 'redux-saga/effects';
 import { COPY_QUESTIONS_REQUEST } from '../constants';
 // import { copyQuestionsSuccess, copyQuestionsError } from '../actions';
 
+// eslint-disable-next-line no-unused-vars
 function* copyQuestions({ payload: { questionIds } }) {
-  console.log(questionIds);
   // const requestURL = `v1/questions/${questionId}/clone`;
   try {
     // const response = yield axios.post(requestURL);

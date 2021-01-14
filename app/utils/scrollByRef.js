@@ -1,3 +1,3 @@
-export default function(ref, params) {
+export default function scrollByRef(ref, params) {
   if (ref.current) ref.current.scrollIntoView({ ...params });
 }
