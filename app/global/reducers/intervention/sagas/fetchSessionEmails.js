@@ -13,7 +13,7 @@ export function* fetchSessionEmails({ payload: { index } }) {
   const requestURL = `v1/sessions/${session.id}/invitations`;
   try {
     const {
-      data: { session_invitations: users },
+      data: { invitations: users },
     } = yield call(axios.get, requestURL);
     yield put(fetchSessionEmailsSuccess(users, index));
   } catch (error) {

@@ -5,7 +5,6 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
 import { createIntervention } from 'utils/reducerCreators';
-import { mapAccessToStateObject } from 'utils/mapResponseObjects';
 
 import fetchSessionEmailsSaga, {
   fetchSessionEmails,
@@ -35,11 +34,7 @@ describe('fetchUsersWithAccess saga', () => {
     expectSaga(fetchUsersWithAccess, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(
-        fetchUsersWithAccessSuccess(
-          apiResponse.user_sessions.map(mapAccessToStateObject),
-        ),
-      )
+      .put(fetchUsersWithAccessSuccess(apiResponse.user_sessions))
       .run());
   it('Check fetchUsersWithAccess error connection', () => {
     const error = new Error('test');
