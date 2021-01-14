@@ -1,29 +1,15 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
-import { toast } from 'react-toastify';
-
-import { formatMessage } from 'utils/intlOutsideReact';
+import { put, takeLatest } from 'redux-saga/effects';
 
 import { changePhoneNumberSuccess, changePhoneNumberError } from '../actions';
-import {
-  CHANGE_PHONE_NUMBER_REQUEST,
-  CHANGE_PHONE_NUMBER_SUCCESS,
-} from '../constants';
-import messages from '../messages';
+import { CHANGE_PHONE_NUMBER_REQUEST } from '../constants';
 
 export function* changePhoneNumber({
   payload: {
-    data: { phoneNumber, countryCode },
+    data: { phoneNumber },
   },
 }) {
   try {
-    yield call(
-      toast.success,
-      formatMessage(messages.changePhoneNumberSuccess),
-      {
-        toastId: CHANGE_PHONE_NUMBER_SUCCESS,
-      },
-    );
-    yield put(changePhoneNumberSuccess({ phoneNumber, countryCode }));
+    yield put(changePhoneNumberSuccess({ phoneNumber }));
   } catch (error) {
     yield put(changePhoneNumberError(error.toString()));
   }

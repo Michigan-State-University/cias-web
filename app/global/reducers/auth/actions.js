@@ -24,6 +24,12 @@ import {
   CHANGE_NOTIFICATIONS_SETTINGS_REQUEST,
   CHANGE_NOTIFICATIONS_SETTINGS_SUCCESS,
   CHANGE_NOTIFICATIONS_SETTINGS_ERROR,
+  CONFIRM_PHONE_NUMBER_REQUEST,
+  CONFIRM_PHONE_NUMBER_SUCCESS,
+  CONFIRM_PHONE_NUMBER_ERROR,
+  SEND_SMS_TOKEN_REQUEST,
+  SEND_SMS_TOKEN_SUCCESS,
+  SEND_SMS_TOKEN_ERROR,
 } from './constants';
 
 export const logIn = user => actionBuilder(LOG_IN_USER, { user });
@@ -63,10 +69,24 @@ export const deleteAvatarError = () => actionBuilder(DELETE_AVATAR_ERROR, {});
 
 export const changePhoneNumberRequest = data =>
   actionBuilder(CHANGE_PHONE_NUMBER_REQUEST, { data });
-export const changePhoneNumberSuccess = ({ phoneNumber, countryCode }) =>
-  actionBuilder(CHANGE_PHONE_NUMBER_SUCCESS, { phoneNumber, countryCode });
+export const changePhoneNumberSuccess = ({ phoneNumber }) =>
+  actionBuilder(CHANGE_PHONE_NUMBER_SUCCESS, { phoneNumber });
 export const changePhoneNumberError = error =>
   actionBuilder(CHANGE_PHONE_NUMBER_ERROR, { error });
+
+export const confirmPhoneNumberRequest = (smsToken, onSuccess) =>
+  actionBuilder(CONFIRM_PHONE_NUMBER_REQUEST, { smsToken, onSuccess });
+export const confirmPhoneNumberSuccess = () =>
+  actionBuilder(CONFIRM_PHONE_NUMBER_SUCCESS, {});
+export const confirmPhoneNumberError = error =>
+  actionBuilder(CONFIRM_PHONE_NUMBER_ERROR, { error });
+
+export const sendSmsTokenRequest = () =>
+  actionBuilder(SEND_SMS_TOKEN_REQUEST, {});
+export const sendSmsTokenSuccess = () =>
+  actionBuilder(SEND_SMS_TOKEN_SUCCESS, {});
+export const sendSmsTokenError = error =>
+  actionBuilder(SEND_SMS_TOKEN_ERROR, { error });
 
 export const changeNotificationsSettingsRequest = notificationsSettings =>
   actionBuilder(CHANGE_NOTIFICATIONS_SETTINGS_REQUEST, {

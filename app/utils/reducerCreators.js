@@ -38,6 +38,11 @@ export const createUser = (index = 0) => ({
   email: `test@test.com-${index}`,
   roles: ['admin'],
   timeZone: 'America/New_York',
+  phone: {
+    number: '123123123',
+    prefix: '+48',
+    iso: 'PL',
+  },
 });
 
 export const createReport = (index = 0) => ({

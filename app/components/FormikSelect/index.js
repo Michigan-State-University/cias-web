@@ -20,7 +20,7 @@ function FormikSelect({
   columnStyleProps,
   inputProps,
 }) {
-  const { submitForm } = useFormikContext();
+  const { submitForm, validateForm } = useFormikContext();
   const [field, meta, form] = useField(formikKey);
   const { value } = field;
   const { setValue } = form;
@@ -28,6 +28,7 @@ function FormikSelect({
   const hasError = touched && error;
 
   const onChange = async e => {
+    await validateForm();
     setValue(e);
     await submitForm();
   };

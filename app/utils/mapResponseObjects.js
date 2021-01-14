@@ -27,6 +27,7 @@ export const mapCurrentUser = user => ({
   avatar: user.attributes.avatar_url,
   timeZone: user.attributes.time_zone,
   active: user.attributes.active,
+  phone: user.attributes.phone,
 });
 
 export const mapCurrentUserWithoutAttributes = user => ({
@@ -39,4 +40,5 @@ export const mapCurrentUserWithoutAttributes = user => ({
   avatar: user.avatar_url,
   timeZone: user.time_zone,
   active: user.active,
+  phone: user.phone,
 });

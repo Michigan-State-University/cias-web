@@ -87,6 +87,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
 .c6 {
   width: auto;
   height: auto;
+  margin-left: 5px;
   cursor: pointer;
 }
 
@@ -317,6 +318,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
 .c5 {
   width: auto;
   height: auto;
+  margin-left: 5px;
   cursor: pointer;
 }
 
@@ -470,6 +472,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
 .c6 {
   width: auto;
   height: auto;
+  margin-left: 5px;
   cursor: pointer;
 }
 

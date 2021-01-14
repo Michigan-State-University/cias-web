@@ -43,4 +43,12 @@ export default defineMessages({
     id: `${scope}.changeNotificationsSettingsSuccess`,
     defaultMessage: 'You have successfully changed your notification settings',
   },
+  confirmPhoneNumberSuccess: {
+    id: `${scope}.confirmPhoneNumberSuccess`,
+    defaultMessage: 'You have successfully confirmed your phone number!',
+  },
+  confirmPhoneNumberError: {
+    id: `${scope}.confirmPhoneNumberError`,
+    defaultMessage: 'Failed to confirm your phone number!',
+  },
 });

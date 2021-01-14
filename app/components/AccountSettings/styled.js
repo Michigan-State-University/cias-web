@@ -4,6 +4,7 @@ import Row from 'components/Row';
 import UserAvatar from 'components/UserAvatar';
 import StyledTextButton from 'components/Button/StyledTextButton';
 import UploadFileButton from 'components/UploadFileButton';
+import { StyledButton } from 'components/Button/StyledButton';
 import { mediaQuery } from 'theme';
 
 export const StyledFullNameRow = styled(Row)`
@@ -45,5 +46,13 @@ export const StyledUploadFileButton = styled(UploadFileButton)`
   margin-left: 20px;
   ${mediaQuery.mobileSm`
     margin-left: 10px;
+  `}
+`;
+
+export const ConfirmButton = styled(StyledButton)`
+  margin-top: 12px;
+  width: 40%;
+  ${mediaQuery.tablet`
+    width: 100%;
   `}
 `;

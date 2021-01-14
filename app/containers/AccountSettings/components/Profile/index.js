@@ -67,12 +67,14 @@ const Profile = props => {
           <FullNameComponent userId={userId} formatMessage={formatMessage} />
         )}
       </Row>
-      <StyledRow width="100%" align="center" justify="start">
+      <StyledRow width="100%" align="start" justify="start">
         {TimezoneComponent && (
           <StyledTimezoneBox>
             <TimezoneComponent userId={userId} formatMessage={formatMessage} />
           </StyledTimezoneBox>
         )}
+      </StyledRow>
+      <StyledRow width="100%" align="start" justify="start">
         {PhoneNumberComponent && (
           <WrappedPhoneNumberForm
             userId={userId}

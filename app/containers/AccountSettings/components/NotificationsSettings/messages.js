@@ -19,6 +19,6 @@ export default defineMessages({
   },
   phoneNotifications: {
     id: `${scope}.phoneNotifications`,
-    defaultMessage: 'Enable phone notifications',
+    defaultMessage: 'Enable SMS notifications',
   },
 });

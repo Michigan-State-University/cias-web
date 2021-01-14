@@ -9,31 +9,30 @@ import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
 import { useInjectSaga } from 'redux-injectors';
 import {
   changePhoneNumberSaga,
-  changePhoneNumberRequest,
   makeSelectUser,
   makeSelectLoaders,
   makeSelectErrors,
   changeErrorStatus,
+  editUserRequest,
 } from 'global/reducers/auth';
 
 const WrappedPhoneNumberForm = ({
   formatMessage,
   user,
-  changePhoneNumber,
+  editUser,
   error,
   loading,
   changeErrorValue,
 }) => {
   useInjectSaga({ key: 'changePhoneNumber', saga: changePhoneNumberSaga });
 
-  const { countryCode, phoneNumber } = user ?? {};
+  const { phone } = user ?? {};
 
   return (
     <PhoneNumberForm
       formatMessage={formatMessage}
-      countryCode={countryCode}
-      phoneNumber={phoneNumber}
-      changePhoneNumber={changePhoneNumber}
+      phone={phone}
+      changePhoneNumber={editUser}
       error={error}
       loading={loading}
       changeErrorValue={changeErrorValue}
@@ -46,7 +45,7 @@ WrappedPhoneNumberForm.propTypes = {
   user: PropTypes.object,
   loading: PropTypes.bool,
   error: PropTypes.string,
-  changePhoneNumber: PropTypes.func,
+  editUser: PropTypes.func,
   changeErrorValue: PropTypes.func,
 };
 
@@ -57,7 +56,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  changePhoneNumber: changePhoneNumberRequest,
+  editUser: editUserRequest,
   changeErrorValue: changeErrorStatus,
 };
 

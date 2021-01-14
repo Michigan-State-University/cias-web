@@ -194,6 +194,27 @@ export default defineMessages({
   },
   confirmCode: {
     id: `${scope}.confirmCode`,
-    defaultMessage: 'Confirm',
+    defaultMessage: 'Confirm your phone number',
+  },
+  confirmCodeButton: {
+    id: `${scope}.confirmCodeButton`,
+    defaultMessage: 'Confirm phone number',
+  },
+  code: {
+    id: `${scope}.code`,
+    defaultMessage: 'Code from SMS',
+  },
+  codeRequired: {
+    id: `${scope}.codeRequired`,
+    defaultMessage: 'Code is required',
+  },
+  codeInfo: {
+    id: `${scope}.codeInfo`,
+    defaultMessage:
+      'In a moment, you should receive a text message with the code on your phone number <b>{phone}</b>. <br> Enter the code you received into the form below to confirm the identity of the number.',
+  },
+  resendCode: {
+    id: `${scope}.resendCode`,
+    defaultMessage: 'Resend verification code',
   },
 });
