@@ -30,7 +30,7 @@ describe('sendInterventionInvite saga', () => {
     intervention: { ...initialState, intervention: createIntervention() },
   };
   const apiResponse = {
-    session_invitations: [
+    invitations: [
       { user_id: '0', email: 'user0@mail.com' },
       { user_id: '1', email: 'user1@mail.com' },
     ],
@@ -45,7 +45,7 @@ describe('sendInterventionInvite saga', () => {
       .withState(mockState)
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
       .put(sendSessionInviteSuccess())
-      .put(fetchSessionEmailsSuccess(apiResponse.session_invitations, index))
+      .put(fetchSessionEmailsSuccess(apiResponse.invitations, index))
       .call(toast.info, formatMessage(messages.sendInviteSuccess), {
         toastId: SEND_SESSION_INVITE_SUCCESS,
       })

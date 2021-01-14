@@ -4,7 +4,6 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { mapAccessToStateObject } from 'utils/mapResponseObjects';
 import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 
@@ -31,11 +30,7 @@ describe('fetchUsersWithAccess saga', () => {
   it('Check giveUserAccess generator success connection', () =>
     expectSaga(enableUserAccess, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .put(
-        enableUserAccessSuccess(
-          apiResponse.user_sessions.map(mapAccessToStateObject),
-        ),
-      )
+      .put(enableUserAccessSuccess(apiResponse.user_sessions))
       .run());
   it('Check giveUserAccess error connection', () => {
     const error = new Error('test');
