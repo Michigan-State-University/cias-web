@@ -2,26 +2,26 @@
 
 exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-14m3exe-0 hZBxAH"
+  class="Box-sc-1vhutan-0 fHkToj"
   display="flex"
   height="100%"
   width="100%"
 >
   <div
-    class="Column-sc-1n6divy-0 styled__StyledColumn-sc-1wseccy-0 hiFhcL Jkndn"
+    class="Column-sc-4zswzq-0 styled__StyledColumn-sc-10au7g3-0 iyDzCx bepfRA"
     height="100%"
   >
     <div
-      class="styled__NameContainer-sc-1495y1k-1 dbBjDn"
+      class="styled__NameContainer-sc-12xx0pj-1 exgDKI"
     >
       <h3
-        class="H3-sc-1nwhpi5-0 gWQIQX"
+        class="H3-twxrn4-0 cJvzEt"
         font-weight="regular"
       >
         Name
       </h3>
       <input
-        class="Input-sc-19txxuq-0 wvSrL styled__Input-sc-1495y1k-0 cWgQJ"
+        class="Input-t9j2q5-0 dayPHP styled__Input-sc-12xx0pj-0 lcXNLu"
         disabled=""
         placeholder="e-Session Name"
         type="text"
@@ -30,83 +30,83 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       />
     </div>
     <h3
-      class="H3-sc-1nwhpi5-0 ghcrqh"
+      class="H3-twxrn4-0 bCdqfX"
     >
       Narrator Settings
     </h3>
     <div
-      class="Row-x1o3ru-0 kANvPw"
+      class="Row-y1cs0u-0 cNUaef"
     >
       <p
-        class="Text-sc-2lza2m-0 gCOoXP"
+        class="Text-e4p0w3-0 bmKPFZ"
         font-weight="bold"
       >
         Narrator Active
       </p>
       <label
-        class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+        class="styled__SwitchWrapper-k9teya-0 hucWtb"
         disabled=""
       >
         <input
           checked=""
-          class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+          class="styled__SwitchInput-k9teya-1 hdJnOF"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           disabled=""
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+          class="styled__Slider-k9teya-2 cGAcbS"
         />
       </label>
     </div>
     <div
-      class="Row-x1o3ru-0 kANvPw"
+      class="Row-y1cs0u-0 cNUaef"
     >
       <p
-        class="Text-sc-2lza2m-0 hffaYn"
+        class="Text-e4p0w3-0 fFURPd"
       >
         Voice
       </p>
       <label
-        class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+        class="styled__SwitchWrapper-k9teya-0 hucWtb"
         disabled=""
       >
         <input
           checked=""
-          class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+          class="styled__SwitchInput-k9teya-1 hdJnOF"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           disabled=""
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+          class="styled__Slider-k9teya-2 cGAcbS"
         />
       </label>
     </div>
     <div
-      class="Row-x1o3ru-0 kRTAxX"
+      class="Row-y1cs0u-0 gaoRiI"
     >
       <p
-        class="Text-sc-2lza2m-0 hffaYn"
+        class="Text-e4p0w3-0 fFURPd"
       >
         Display Character
       </p>
       <label
-        class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+        class="styled__SwitchWrapper-k9teya-0 hucWtb"
         disabled=""
       >
         <input
           checked=""
-          class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+          class="styled__SwitchInput-k9teya-1 hdJnOF"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           disabled=""
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+          class="styled__Slider-k9teya-2 cGAcbS"
         />
       </label>
     </div>

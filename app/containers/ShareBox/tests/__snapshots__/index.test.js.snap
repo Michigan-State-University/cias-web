@@ -3,43 +3,43 @@
 exports[`<ShareBox /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 knEDvM"
+    class="Box-sc-1vhutan-0 jSCipg"
     height="fit-content"
     width="500"
   >
     <div
-      class="Box-sc-14m3exe-0 ipvgLn"
+      class="Box-sc-1vhutan-0 jZbfgr"
       display="flex"
     >
       <div
-        class="styled__InterventionIndex-sc-16elnyr-4 kTZbQy"
+        class="styled__InterventionIndex-sc-1achu0i-4 cxhXEe"
       >
         1
       </div>
       <h2
-        class="H2-egphza-0 dNhIVG"
+        class="H2-uw8lbl-0 liYLJP"
       >
         Name
       </h2>
     </div>
     <div
-      class="Row-x1o3ru-0 dttQRf"
+      class="Row-y1cs0u-0 bHvccM"
     >
       <div
-        class="Column-sc-1n6divy-0 SJAYV"
+        class="Column-sc-4zswzq-0 ekpwZH"
       >
         <div
-          class="Row-x1o3ru-0 dSvoas"
+          class="Row-y1cs0u-0 ddPUgf"
         >
           <div
-            class="styled__StyledChipsInput-sc-16elnyr-0 caBXDh"
+            class="styled__StyledChipsInput-sc-1achu0i-0 hmebXJ"
           >
             <div
-              class="Row-x1o3ru-0 gbaTqQ"
+              class="Row-y1cs0u-0 jTyvfb"
               width="100%"
             >
               <input
-                class="styled__HiddenInput-sc-16elnyr-1 hZOnzQ"
+                class="styled__HiddenInput-sc-1achu0i-1 nBUtw"
                 data-cy="hidden-input"
                 placeholder="Enter emails to send link to this session"
                 type="text"
@@ -48,11 +48,11 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="Box-sc-14m3exe-0 dXHjmi"
+            class="Box-sc-1vhutan-0 iHwJxK"
             width="140"
           >
             <button
-              class="StyledButton-t20ntd-0 fVvYzx"
+              class="StyledButton-d2s0gt-0 lxjLX"
               color="primary"
               data-cy="send-email-button"
               disabled=""
@@ -65,10 +65,10 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="Column-sc-1n6divy-0 kbSnmf"
+          class="Column-sc-4zswzq-0 flXEGp"
         >
           <div
-            class="Row-x1o3ru-0 dAhqIQ"
+            class="Row-y1cs0u-0 dskFsL"
           >
             <input
               accept="text/csv"
@@ -77,15 +77,15 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             />
             <div>
               <div
-                class="Row-x1o3ru-0 czFUTs"
+                class="Row-y1cs0u-0 bLAOxT"
               >
                 <img
                   alt="upload"
-                  class="Img-sc-1kfzr96-0 iEjuMy"
+                  class="Img-sc-55j3su-0 cYsgyu"
                   src="IMAGE_MOCK"
                 />
                 <p
-                  class="Text-sc-2lza2m-0 eEVnsk"
+                  class="Text-e4p0w3-0 gdCbSW"
                   color="#C866EA"
                   font-weight="bold"
                 >
@@ -100,24 +100,24 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-x1o3ru-0 kRFdNh"
+      class="Row-y1cs0u-0 cqwlq"
     >
       <div
-        class="styled__StyledCsvFileExport-sc-571lcv-0 gVfvUB"
+        class="styled__StyledCsvFileExport-sc-1gk8m8y-0 hRNcCq"
       >
         <button
           class="button"
         >
           <div
-            class="Row-x1o3ru-0 dAhqIQ"
+            class="Row-y1cs0u-0 dskFsL"
           >
             <img
               alt="upload"
-              class="Img-sc-1kfzr96-0 iEjuMy"
+              class="Img-sc-55j3su-0 cYsgyu"
               src="IMAGE_MOCK"
             />
             <p
-              class="Text-sc-2lza2m-0 eEVnsk"
+              class="Text-e4p0w3-0 gdCbSW"
               color="#C866EA"
               font-weight="bold"
             >
@@ -128,23 +128,23 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-x1o3ru-0 howMHZ"
+      class="Row-y1cs0u-0 eBLItm"
     >
       <div
-        class="Box-sc-14m3exe-0 lavaAX"
+        class="Box-sc-1vhutan-0 jKoMMz"
       >
         <div
-          class="styled__Container-e4ycn-0 insndc"
+          class="styled__Container-u9aus1-0 kMvwSH"
         >
           <div
-            class="Row-x1o3ru-0 fdTqjP"
+            class="Row-y1cs0u-0 ecllgQ"
           >
             <img
               alt="share"
               src="IMAGE_MOCK"
             />
             <p
-              class="Text-sc-2lza2m-0 jmEVdS"
+              class="Text-e4p0w3-0 ikSWkc"
               color="#C866EA"
               font-weight="bold"
             >
@@ -157,7 +157,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <h3
-      class="H3-sc-1nwhpi5-0 SFzRF"
+      class="H3-twxrn4-0 uIlWz"
       color="#2F3850"
       font-size="13"
       font-weight="bold"
@@ -167,27 +167,27 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       </span>
     </h3>
     <div
-      class="Row-x1o3ru-0 iIewDE"
+      class="Row-y1cs0u-0 bslAAf"
       overflow="scroll"
     >
       <div
-        class="Column-sc-1n6divy-0 SJAYV"
+        class="Column-sc-4zswzq-0 ekpwZH"
         data-cy="user-list"
       >
         <div
-          class="Row-x1o3ru-0 styled__HoverableRow-sc-16elnyr-3 fmxgRP bOvnVD"
+          class="Row-y1cs0u-0 styled__HoverableRow-sc-1achu0i-3 dHJeRo gGkmoH"
           data-cy="user-list-item-0"
         >
           <div
-            class="Row-x1o3ru-0 fdTqjP"
+            class="Row-y1cs0u-0 ecllgQ"
           >
             <img
               alt="avatar"
-              class="Img-sc-1kfzr96-0 loGjyL"
+              class="Img-sc-55j3su-0 gWNtSX"
               src="IMAGE_MOCK"
             />
             <p
-              class="Text-sc-2lza2m-0 jCnVog"
+              class="Text-e4p0w3-0 flvIji"
               font-size="15px"
             />
           </div>

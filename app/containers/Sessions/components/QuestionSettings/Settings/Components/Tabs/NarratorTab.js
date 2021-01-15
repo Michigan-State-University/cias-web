@@ -19,7 +19,10 @@ import {
   getRemovedBlockForSetting,
 } from 'models/Narrator/BlockTypes';
 import { DisabledNarratorSettingsByQuestionType } from 'models/Session/utils';
-import { makeSelectCurrentNarratorBlockIndex } from 'global/reducers/localState';
+import {
+  makeSelectCurrentNarratorBlockIndex,
+  changeCurrentNarratorBlock,
+} from 'global/reducers/localState';
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
 import { ternary } from 'utils/ternary';
@@ -43,6 +46,7 @@ const NarratorTab = ({
   disabled,
   groupIds,
   questionType,
+  changeNarratorBlockIndex,
 }) => {
   const [confirmationOption, setConfirmationOption] = useState('');
 
@@ -58,6 +62,8 @@ const NarratorTab = ({
 
   const onCreateBlock = type => {
     onCreate(type, id, groupIds);
+    const blocks = narrator?.blocks?.length ?? 0;
+    changeNarratorBlockIndex(blocks);
   };
 
   const toggleAction = index => value => {
@@ -104,7 +110,7 @@ const NarratorTab = ({
         <UL>
           {getRemovedBlockForSetting(confirmationOption).map(blockType => (
             <LI key={blockType}>
-              {<FormattedMessage {...globalMessages.blockTypes[blockType]} />}
+              <FormattedMessage {...globalMessages.blockTypes[blockType]} />
             </LI>
           ))}
         </UL>
@@ -113,7 +119,7 @@ const NarratorTab = ({
   };
 
   return (
-    <Fragment>
+    <>
       <ConfirmationBox
         visible={isConfirmationBoxVisible}
         onClose={dismissConfirmation}
@@ -179,7 +185,7 @@ const NarratorTab = ({
         disableFeedbackBlock={showSpectrumBlockTypePresent}
         onClick={onCreateBlock}
       />
-    </Fragment>
+    </>
   );
 };
 
@@ -194,6 +200,7 @@ NarratorTab.propTypes = {
   disabled: PropTypes.bool,
   groupIds: PropTypes.array,
   questionType: PropTypes.string,
+  changeNarratorBlockIndex: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -205,6 +212,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   onCreate: addBlock,
   onNarratorToggle: updateNarratorSettings,
+  changeNarratorBlockIndex: changeCurrentNarratorBlock,
 };
 
 const withConnect = connect(

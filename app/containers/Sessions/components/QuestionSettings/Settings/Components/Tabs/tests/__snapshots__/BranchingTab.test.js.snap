@@ -3,17 +3,17 @@
 exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Column-sc-1n6divy-0 SJAYV"
+    class="Column-sc-4zswzq-0 ekpwZH"
   >
     <div
-      class="Row-x1o3ru-0 dSvoas"
+      class="Row-y1cs0u-0 ddPUgf"
     >
       Formula
       <div
-        class="Box-sc-14m3exe-0 lavaAX"
+        class="Box-sc-1vhutan-0 jKoMMz"
       >
         <p
-          class="Text-sc-2lza2m-0 fJREmD"
+          class="Text-e4p0w3-0 iaJrvl"
           color="#C866EA"
           font-weight="bold"
         >
@@ -22,11 +22,11 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Box-sc-14m3exe-0 gptOhZ"
+      class="Box-sc-1vhutan-0 fDbvnd"
       width="100%"
     >
       <textarea
-        class="TextArea-sc-1g8793c-0 kklhX"
+        class="TextArea-sc-175uiux-0 cIMVkN"
         data-cy="text-area"
         height="auto"
         placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
@@ -35,43 +35,43 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
       />
     </div>
     <div
-      class="Box-sc-14m3exe-0 iSukIT"
+      class="Box-sc-1vhutan-0 dwEpkL"
       width="100%"
     >
       <div
-        class="Box-sc-14m3exe-0 dsNuUD"
+        class="Box-sc-1vhutan-0 bBMNIf"
         display="none"
         width="auto"
       >
         <div
-          class="Row-x1o3ru-0 dAhqIQ"
+          class="Row-y1cs0u-0 dskFsL"
         >
           <div
-            class="Box-sc-14m3exe-0 ketynr"
+            class="Box-sc-1vhutan-0 buKpDj"
           >
             <div
-              class="Column-sc-1n6divy-0 SJAYV"
+              class="Column-sc-4zswzq-0 ekpwZH"
             >
               <div
-                class="Box-sc-14m3exe-0 cYhKwr"
+                class="Box-sc-1vhutan-0 dbODYP"
               >
                 <div
-                  class="Box-sc-14m3exe-0 gDFvhB"
+                  class="Box-sc-1vhutan-0 kTgzBZ"
                   data-testid="no-content"
                   display="flex"
                   height="100%"
                   width="100%"
                 >
                   <div
-                    class="Column-sc-1n6divy-0 kCnOyy"
+                    class="Column-sc-4zswzq-0 eExeGs"
                   >
                     <img
                       alt="No content"
-                      class="Img-sc-1kfzr96-0 lmhFEd"
+                      class="Img-sc-55j3su-0 cDhXoN"
                       src="IMAGE_MOCK"
                     />
                     <h2
-                      class="H2-egphza-0 iPVWCm"
+                      class="H2-uw8lbl-0 bnQANz"
                       color="#B0BAC9"
                     >
                       No variables defined yet
@@ -85,7 +85,7 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Box-sc-14m3exe-0 styled__DashedBox-sc-1h264rd-0 gnAZuH dfODJp"
+      class="Box-sc-1vhutan-0 styled__DashedBox-g59fuj-0 iyNhgb dyejuR"
     >
       + Add case
     </div>

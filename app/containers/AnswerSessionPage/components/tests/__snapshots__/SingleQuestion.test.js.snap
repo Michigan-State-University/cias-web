@@ -3,24 +3,24 @@
 exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Column-sc-1n6divy-0 SJAYV"
+    class="Column-sc-4zswzq-0 ekpwZH"
   >
     <div
-      class="Box-sc-14m3exe-0 cidtM"
+      class="Box-sc-1vhutan-0 cVZZaQ"
     >
       <div
-        class="Row-x1o3ru-0 gvStTq"
+        class="Row-y1cs0u-0 kdnhbN"
       >
         <div
-          class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 eikLPg"
+          class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 jDfcLE"
           width="calc(100% + 21px)"
         >
           <div
-            class="Row-x1o3ru-0 jeQTYm"
+            class="Row-y1cs0u-0 hBrQLN"
             height="44"
           >
             <img
-              class="Img-sc-1kfzr96-0 fUwSCT"
+              class="Img-sc-55j3su-0 iYjftT"
               data-cy="single-question-0-checkbox"
               src="IMAGE_MOCK"
             />
@@ -31,18 +31,18 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Row-x1o3ru-0 gvStTq"
+        class="Row-y1cs0u-0 kdnhbN"
       >
         <div
-          class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 eikLPg"
+          class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 jDfcLE"
           width="calc(100% + 21px)"
         >
           <div
-            class="Row-x1o3ru-0 jeQTYm"
+            class="Row-y1cs0u-0 hBrQLN"
             height="44"
           >
             <img
-              class="Img-sc-1kfzr96-0 fUwSCT"
+              class="Img-sc-55j3su-0 iYjftT"
               data-cy="single-question-1-checkbox"
               src="IMAGE_MOCK"
             />

@@ -1,12 +1,44 @@
-## Install & Start
+# Install & Start
 1. Copy the contents of `.env.example` to `.env` (create this file)
 1. Run `npm install` to install all required dependencies ***(optional => run only the first time or when dependencies change)**
 1. Run `npm start` to run the project. It will be available at `localhost:4200`
-## Cypress
+# Cypress
 * Open Cypress dashboard `npm run cy:open`
 * Run Cypress tests `npm run cy:test`
 
-## Contributors
+# MJML
+### What is MJML?
+A tool for creation of responsive html templates. It handles gotchas of most modern and known email clients.
+
+Take a look at [official documentation](https://mjml.io/documentation/#getting-started).
+
+3 examples can be found in `mjml/examples` directory. Each of them introduce new features, so they should be checked in this order : `MjBasicComponent`, `MjImageText`, `MjLayout`.
+
+For more complex examples, have a look at standard MJML components code such as [mj-carousel](https://github.com/mjmlio/mjml/tree/master/packages/mjml-accordion).
+
+### Getting started
+
+A step-by-step tutorial is available [here](https://medium.com/mjml-making-responsive-email-easy/tutorial-creating-your-own-component-with-mjml-4-1c0e84e97b36).
+
+* Go into `mjml` directory
+* `npm install` inside
+* Add your components inside `components` folder
+* Components have to be added in `.mjmlconfig`
+* Use your own component in `templates/*.mjml`
+* `npm run build` to build, or `npm start` if you want to watch recompile on change you make (to your component or to `templates/*.mjml`)
+* The result will be outputted in `html/*.html`
+
+### Information for backend developers
+* Generated htmls are in `mjml/html` directory
+
+**Variables:** 
+* *confirm-email.html*: {BUTTON_URL}, {RECIPIENT_NAME}
+* *csv-download.html*: {BUTTON_URL}, {SESSION_TITLE}
+* *invite-session.html*: {BUTTON_URL}, {SESSION_TITLE}
+* *reset-password.html*: {BUTTON_URL}
+* *invite-email.html*: {BUTTON_URL}
+
+# Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START -->
 <!-- prettier-ignore-start -->

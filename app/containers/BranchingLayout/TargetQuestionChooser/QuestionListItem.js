@@ -32,7 +32,7 @@ const QuestionListItem = ({
       data-cy={`choose-question-${htmlToPlainText(subtitle)}`}
     >
       <Img src={target.id === id ? webpageSelected : webpage} mr={10} />
-      <Box maxWidth={230}>
+      <Box maxWidth={210}>
         <EllipsisText
           text={htmlToPlainText(subtitle)}
           color={!canSelectQuestion(id) ? colors.grey : ''}

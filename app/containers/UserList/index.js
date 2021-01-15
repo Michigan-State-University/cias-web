@@ -142,7 +142,7 @@ function UserList({
   };
 
   return (
-    <Fragment>
+    <>
       <InviteResearcher visible={modalVisible} onClose={closeModal} />
       <Box height="100%" overflow="scroll" display="flex" justify="center">
         <Helmet>
@@ -169,7 +169,7 @@ function UserList({
           {getContent()}
         </Box>
       </Box>
-    </Fragment>
+    </>
   );
 }
 

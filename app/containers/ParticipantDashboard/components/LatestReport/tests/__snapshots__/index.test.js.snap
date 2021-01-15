@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LatestReport /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Column-sc-4zswzq-0 gOeQAn"
+    width="100%"
+  >
+    <div
+      class="Row-y1cs0u-0 bDCQgo"
+    >
+      <h1
+        class="H1-sc-1k7m23t-0 ewNLte"
+      >
+        <span>
+          Latest Report
+        </span>
+      </h1>
+      <a
+        class="StyledLink-eun179-0 jlCCcr"
+        href="/reports"
+      >
+        <p
+          class="Text-e4p0w3-0 bBleiO"
+          color="#C866EA"
+          font-weight="bold"
+        >
+          <span>
+            View All Reports
+          </span>
+        </p>
+      </a>
+    </div>
+    <div
+      class="styled__InlineLoader-sc-1aaagww-1 kkTeLU"
+      data-testid="inline-loader"
+    >
+      <div
+        class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
+        color="#C866EA"
+        size="100"
+        width="6"
+      />
+    </div>
+  </div>
+</div>
+`;

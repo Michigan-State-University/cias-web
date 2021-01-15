@@ -8,6 +8,10 @@ export {
   addAvatarRequest,
   deleteAvatarRequest,
   changeEmailRequest,
+  changePhoneNumberRequest,
+  changeNotificationsSettingsRequest,
+  confirmPhoneNumberRequest,
+  sendSmsTokenRequest,
 } from './actions';
 export { authReducer } from './reducer';
 export {
@@ -23,4 +27,8 @@ export {
   addAvatarSaga,
   deleteAvatarSaga,
   changeEmailSaga,
+  changePhoneNumberSaga,
+  changeNotificationsSettingsSaga,
+  confirmPhoneNumberSaga,
+  sendSmsTokenSaga,
 } from './sagas';

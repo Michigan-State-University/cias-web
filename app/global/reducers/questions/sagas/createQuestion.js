@@ -2,7 +2,6 @@ import { put, takeLatest, select } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
-import { ADD_BLOCK } from 'containers/Sessions/components/QuestionSettings/Settings/constants';
 import { feedbackQuestion, finishQuestion } from 'models/Session/QuestionTypes';
 import {
   readQuestionBlockType,
@@ -18,12 +17,9 @@ import { getNarratorPositionWhenQuestionIsAdded } from 'utils/getNarratorPositio
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import { makeSelectSession } from 'global/reducers/session';
+import { instantiateBlockForType } from 'models/Session/utils';
 import { CREATE_QUESTION_REQUEST } from '../constants';
-import {
-  createQuestionSuccess,
-  createQuestionError,
-  updateQuestionSettings,
-} from '../actions';
+import { createQuestionSuccess, createQuestionError } from '../actions';
 import { makeSelectQuestions, makeSelectSelectedQuestion } from '../selectors';
 
 function* createQuestion({ payload: { question } }) {
@@ -43,43 +39,29 @@ function* createQuestion({ payload: { question } }) {
   } = yield select(makeSelectSession());
   const requestURL = `v1/question_groups/${groupId}/questions`;
   try {
+    const position = getNarratorPositionWhenQuestionIsAdded(
+      questions,
+      question,
+      groupIds,
+    );
+    const blocks = [
+      instantiateBlockForType(readQuestionBlockType, position, question),
+      ...(question.type === feedbackQuestion.id
+        ? [instantiateBlockForType(feedbackBlockType, position, question)]
+        : []),
+    ];
+
     const response = yield axios.post(requestURL, {
       ...question,
-      narrator: {
-        blocks: [],
-        settings: narrator,
-      },
+      narrator: { blocks, settings: narrator },
     });
 
     const createdQuestion = mapQuestionToStateObject(response.data.data);
-    const { id: newQuestionId } = createdQuestion;
 
     yield put(createQuestionSuccess(createdQuestion));
     yield put(createNewQuestionInGroup(createdQuestion, groupId));
-    const position = getNarratorPositionWhenQuestionIsAdded(
-      questions,
-      createdQuestion,
-      groupIds,
-    );
-    yield put(setAnimationStopPosition(position.x, position.y));
-    yield put(
-      updateQuestionSettings({
-        type: ADD_BLOCK,
-        data: {
-          type: readQuestionBlockType,
-          questionId: newQuestionId,
-          groupIds,
-        },
-      }),
-    );
 
-    if (createdQuestion.type === feedbackQuestion.id)
-      yield put(
-        updateQuestionSettings({
-          type: ADD_BLOCK,
-          data: { type: feedbackBlockType, questionId: newQuestionId },
-        }),
-      );
+    yield put(setAnimationStopPosition(position.x, position.y));
   } catch (error) {
     yield put(createQuestionError(error));
   }

@@ -94,7 +94,10 @@ export function Navbar({
             )}
           </div>
         </DropDownContainer>
-        <Box clickable>{`${firstName} ${lastName}`}</Box>
+        <Box
+          className="user-name-info"
+          clickable
+        >{`${firstName} ${lastName}`}</Box>
       </RightPanel>
     </NavbarStyled>
   );
@@ -104,6 +107,8 @@ Navbar.propTypes = {
   user: PropTypes.shape({
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
+    roles: PropTypes.arrayOf(PropTypes.string),
+    avatar: PropTypes.object,
   }),
   navbarProps: PropTypes.shape({
     navbarId: PropTypes.string.isRequired,

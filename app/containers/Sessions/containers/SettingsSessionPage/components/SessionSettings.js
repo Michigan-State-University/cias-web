@@ -126,7 +126,7 @@ const SessionSettings = ({
         <UL>
           {getRemovedBlockForSetting(confirmationOption).map(blockType => (
             <LI key={blockType}>
-              {<FormattedMessage {...globalMessages.blockTypes[blockType]} />}
+              <FormattedMessage {...globalMessages.blockTypes[blockType]} />
             </LI>
           ))}
         </UL>
@@ -135,7 +135,7 @@ const SessionSettings = ({
   };
 
   return (
-    <Fragment>
+    <>
       <ConfirmationBox
         visible={isConfirmationBoxVisible}
         onClose={dismissConfirmation}
@@ -179,7 +179,7 @@ const SessionSettings = ({
             action={onToggle(index)}
           />
         ))}
-    </Fragment>
+    </>
   );
 };
 

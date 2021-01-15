@@ -36,7 +36,7 @@ const AvatarForm = ({
   };
 
   return (
-    <Fragment>
+    <>
       <ConfirmationBox
         visible={confirmationOpen}
         onClose={closeConfirmation}
@@ -78,7 +78,7 @@ const AvatarForm = ({
           </StyledButtonsRow>
         </Row>
       </Row>
-    </Fragment>
+    </>
   );
 };
 

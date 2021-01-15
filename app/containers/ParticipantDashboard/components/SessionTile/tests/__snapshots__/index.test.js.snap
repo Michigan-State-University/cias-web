@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SessionTile /> Should render and match the snapshot 1`] = `
+<div
+  height="100%"
+  style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start; height: 100%;"
+>
+  <div
+    style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
+  >
+    <div
+      class="Row-y1cs0u-0 ecllgQ"
+    >
+      <img
+        src="IMAGE_MOCK"
+      />
+      <p
+        class="Text-e4p0w3-0 fxvuEz"
+        font-size="18"
+        font-weight="bold"
+      >
+        test
+      </p>
+    </div>
+  </div>
+  <div
+    style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
+  >
+    <div
+      class="Row-y1cs0u-0 styled__StatusRow-trtiyf-1 eWJxVb kKnMsJ"
+    >
+      <div
+        class="Row-y1cs0u-0 ecllgQ"
+      >
+        <a
+          class="StyledLink-eun179-0 jlCCcr"
+          href="/report"
+        >
+          <img
+            src="IMAGE_MOCK"
+          />
+          <p
+            class="Text-e4p0w3-0 kLdreM"
+            color="#C866EA"
+            font-weight="bold"
+          >
+            <span>
+              Download Report
+            </span>
+          </p>
+        </a>
+        <img
+          src="IMAGE_MOCK"
+        />
+        <p
+          class="Text-e4p0w3-0 kNRzzf"
+        >
+          <span>
+            Completed
+          </span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

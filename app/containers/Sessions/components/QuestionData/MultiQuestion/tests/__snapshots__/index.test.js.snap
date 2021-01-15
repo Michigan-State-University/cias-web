@@ -2,42 +2,42 @@
 
 exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
 <div
-  class="Column-sc-1n6divy-0 byYirt"
+  class="Column-sc-4zswzq-0 fgvXEf"
 >
   <div
-    class="Row-x1o3ru-0 dAhqIQ"
+    class="Row-y1cs0u-0 dskFsL"
   >
     <div
-      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 jyyKKD"
+      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 bxRuNz"
       width="100%"
     >
       <div
-        class="Column-sc-1n6divy-0 SJAYV"
+        class="Column-sc-4zswzq-0 ekpwZH"
       >
         <div
-          class="Row-x1o3ru-0 FEJIU"
+          class="Row-y1cs0u-0 iUMItT"
         >
           <div
-            class="Row-x1o3ru-0 eAkwdD"
+            class="Row-y1cs0u-0 iUkPIE"
             width="90%"
           >
             <img
-              class="Img-sc-1kfzr96-0 fziVWM"
+              class="Img-sc-55j3su-0 bhqgqY"
               src="IMAGE_MOCK"
             />
             <div
-              class="Box-sc-14m3exe-0 kcsePn"
+              class="Box-sc-1vhutan-0 cGXAij"
               width="100%"
             >
               <div
-                class="Row-x1o3ru-0 fcuGKr"
+                class="Row-y1cs0u-0 gQFDhs"
                 width="100%"
               >
                 <div
-                  class="Column-sc-1n6divy-0 SJAYV"
+                  class="Column-sc-4zswzq-0 ekpwZH"
                 >
                   <div
-                    class="quill styled__QuillStyled-sc-65e6t4-0 elHuLf"
+                    class="quill styled__QuillStyled-sc-10udg63-0 hIRMGR"
                   >
                     <div
                       class="ql-container ql-bubble"
@@ -1428,25 +1428,25 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="Row-x1o3ru-0 dAhqIQ"
+            class="Row-y1cs0u-0 dskFsL"
           >
             <div
-              class="Box-sc-14m3exe-0 fXHeO"
+              class="Box-sc-1vhutan-0 dFubIi"
               hidden=""
             >
               <img
-                class="Img-sc-1kfzr96-0 fziVWM"
+                class="Img-sc-55j3su-0 bhqgqY"
                 src="IMAGE_MOCK"
               />
             </div>
           </div>
         </div>
         <div
-          class="Row-x1o3ru-0 kRLZf"
+          class="Row-y1cs0u-0 OKGLA"
           display="flex"
         >
           <input
-            class="Input-sc-19txxuq-0 dvsZOa BadgeInput-sc-1viewtw-0 fcfUls"
+            class="Input-t9j2q5-0 iaGscC BadgeInput-sc-1ua27xt-0 gmlnZr"
             color="#107969"
             placeholder="Variable name..."
             type="text"
@@ -1454,7 +1454,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
             width="57px"
           />
           <input
-            class="Input-sc-19txxuq-0 iNUvMl BadgeInput-sc-1viewtw-0 jUphLA"
+            class="Input-t9j2q5-0 deKMNB BadgeInput-sc-1ua27xt-0 eSqSHP"
             color="#0086F8"
             placeholder="Score"
             type="tel"
@@ -1466,30 +1466,30 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="Row-x1o3ru-0 gJXxRY"
+    class="Row-y1cs0u-0 dMmARv"
     display="flex"
   >
     <div
-      class="Box-sc-14m3exe-0 HoverableBox-sc-1syy6g3-0 gpmswD"
+      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 cspNrz"
     >
       <div
-        class="Box-sc-14m3exe-0 cidtM"
+        class="Box-sc-1vhutan-0 cVZZaQ"
       >
         <div
-          class="Row-x1o3ru-0 fdTqjP"
+          class="Row-y1cs0u-0 ecllgQ"
         >
           <div
-            class="StyledCircle-sc-18vml2t-0 kmfkKa"
+            class="StyledCircle-sc-1dov7hv-0 jShviD"
             color="#FFFFFF"
             opacity="1"
           >
             <img
-              class="Img-sc-1kfzr96-0 lmhFEd"
+              class="Img-sc-55j3su-0 cDhXoN"
               src="IMAGE_MOCK"
             />
           </div>
           <p
-            class="Text-sc-2lza2m-0 jmEVdS"
+            class="Text-e4p0w3-0 ikSWkc"
             color="#C866EA"
             font-weight="bold"
           >

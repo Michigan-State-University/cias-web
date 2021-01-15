@@ -9,10 +9,6 @@ import { defineMessages } from 'react-intl';
 export const scope = 'app.containers.AnswerSessionPage';
 
 export default defineMessages({
-  previousQuestion: {
-    id: `${scope}.previousQuestion`,
-    defaultMessage: '< Previous screen',
-  },
   nextQuestion: {
     id: `${scope}.nextQuestion`,
     defaultMessage: 'Continue',

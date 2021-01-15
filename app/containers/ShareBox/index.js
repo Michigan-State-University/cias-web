@@ -126,6 +126,7 @@ const ShareBox = ({
 
 ShareBox.propTypes = {
   session: PropTypes.shape({
+    id: PropTypes.string,
     name: PropTypes.string,
   }),
   sendInvite: PropTypes.func,

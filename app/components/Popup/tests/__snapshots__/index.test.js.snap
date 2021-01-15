@@ -2,7 +2,7 @@
 
 exports[`<Popup /> Should render and match the snapshot 1`] = `
 <div
-  class="styled__Container-e4ycn-0 insndc"
+  class="styled__Container-u9aus1-0 kMvwSH"
 >
   <div>
     Test
@@ -12,7 +12,7 @@ exports[`<Popup /> Should render and match the snapshot 1`] = `
 
 exports[`<Popup /> Should render and match the snapshot with different 1`] = `
 <div
-  class="styled__Container-e4ycn-0 insndc"
+  class="styled__Container-u9aus1-0 kMvwSH"
 >
   <div>
     Test

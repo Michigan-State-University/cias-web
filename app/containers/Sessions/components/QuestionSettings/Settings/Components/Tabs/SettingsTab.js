@@ -93,7 +93,7 @@ const SettingsTab = ({
     changeTypeQuestion(value.value);
   };
   return (
-    <Fragment>
+    <>
       {HIDE_CHANGING_QUESTION_TYPE && (
         <Text fontSize={14} mb={6}>
           <FormattedMessage {...messages.type} />
@@ -135,7 +135,7 @@ const SettingsTab = ({
         </Row>
       ))}
       {renderQuestionSpecificSettings(disabled)}
-    </Fragment>
+    </>
   );
 };
 

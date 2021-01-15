@@ -17,6 +17,10 @@ const Box = styled.div`
   display: block;
   border-radius: ${borders.borderRadius};
   ${props => (props.padded ? `padding: ${paddings.regular}` : '')};
+  ${props =>
+    props.disableScrollbar
+      ? 'scrollbar-width: none; -ms-overflow-style: none; &::-webkit-scrollbar { width: 0; }'
+      : ''}
   ${layout};
   ${padding};
   ${margin};
@@ -28,10 +32,12 @@ const Box = styled.div`
 
 Box.propTypes = {
   padded: PropTypes.bool,
+  disableScrollbar: PropTypes.bool,
 };
 
 Box.defaultProps = {
   padded: false,
+  disableScrollbar: false,
 };
 
 export default Box;

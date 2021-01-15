@@ -11,10 +11,14 @@ export const StyledCollapseLabel = styled.div`
   color: white;
   cursor: pointer;
   width: 100%;
-  margin-right: 5px;
+  .animated-img {
+    transition: transform 0.3s, height 4s;
+    transform: ${({ isOpened }) =>
+      isOpened ? 'rotate0deg);' : 'rotate(180deg)'};
+  }
   ${style};
-  ${layout}
-  ${padding}
+  ${layout};
+  ${padding};
 `;
 
 export const Content = styled.div`

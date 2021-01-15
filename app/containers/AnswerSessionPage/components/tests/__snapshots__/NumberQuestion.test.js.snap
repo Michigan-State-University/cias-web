@@ -3,21 +3,21 @@
 exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 TZStE"
+    class="Box-sc-1vhutan-0 SfDIA"
     width="100%"
   >
     <div
-      class="Row-x1o3ru-0 dAhqIQ"
+      class="Row-y1cs0u-0 dskFsL"
     >
       <div
-        class="Row-x1o3ru-0 fcuGKr"
+        class="Row-y1cs0u-0 gQFDhs"
         width="100%"
       >
         <div
-          class="Column-sc-1n6divy-0 SJAYV"
+          class="Column-sc-4zswzq-0 ekpwZH"
         >
           <input
-            class="Input-sc-19txxuq-0 bZXKJX"
+            class="Input-t9j2q5-0 fkGsMH"
             height="60"
             placeholder="ex: 1, 2, 100"
             type="tel"

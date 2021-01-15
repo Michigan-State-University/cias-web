@@ -13,8 +13,14 @@ import Column from 'components/Column';
 import Select from 'components/Select';
 import { ErrorText } from './styled';
 
-function FormikSelect({ formikKey, label, options, columnStyleProps }) {
-  const { submitForm } = useFormikContext();
+function FormikSelect({
+  formikKey,
+  label,
+  options,
+  columnStyleProps,
+  inputProps,
+}) {
+  const { submitForm, validateForm } = useFormikContext();
   const [field, meta, form] = useField(formikKey);
   const { value } = field;
   const { setValue } = form;
@@ -22,6 +28,7 @@ function FormikSelect({ formikKey, label, options, columnStyleProps }) {
   const hasError = touched && error;
 
   const onChange = async e => {
+    await validateForm();
     setValue(e);
     await submitForm();
   };
@@ -32,14 +39,16 @@ function FormikSelect({ formikKey, label, options, columnStyleProps }) {
         {label}
       </Text>
       <Select
+        mb={3}
         data-testid="select"
         selectProps={{
           options,
           value,
           onChange,
+          ...inputProps,
         }}
       />
-      {hasError && <ErrorText>{error.toString()}</ErrorText>}
+      {hasError && <ErrorText>{error.value.toString()}</ErrorText>}
     </Column>
   );
 }

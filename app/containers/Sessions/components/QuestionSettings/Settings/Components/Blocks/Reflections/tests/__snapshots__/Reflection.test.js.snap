@@ -3,22 +3,22 @@
 exports[`<Reflection /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Column-sc-1n6divy-0 SJAYV"
+    class="Column-sc-4zswzq-0 ekpwZH"
   >
     <div
-      class="Box-sc-14m3exe-0 bdeubt"
+      class="Box-sc-1vhutan-0 dtceDR"
     >
       1
     </div>
     <div
-      class="Box-sc-14m3exe-0 kbuZxI"
+      class="Box-sc-1vhutan-0 kjemns"
     >
       <div
-        class="Box-sc-14m3exe-0 cPMJok"
+        class="Box-sc-1vhutan-0 iMXQSQ"
         width="100%"
       >
         <textarea
-          class="TextArea-sc-1g8793c-0 kklhX"
+          class="TextArea-sc-175uiux-0 cIMVkN"
           data-cy="text-area"
           height="auto"
           placeholder="Enter speech here..."
@@ -29,10 +29,10 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
         </textarea>
       </div>
       <div
-        class="Box-sc-14m3exe-0 dEhBHo"
+        class="Box-sc-1vhutan-0 hmgyEc"
       >
         <img
-          class="Img-sc-1kfzr96-0 gYrhFK"
+          class="Img-sc-55j3su-0 kDGTCK"
           src="IMAGE_MOCK"
         />
       </div>

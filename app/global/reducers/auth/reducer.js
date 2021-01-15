@@ -24,6 +24,18 @@ import {
   DELETE_AVATAR_REQUEST,
   DELETE_AVATAR_SUCCESS,
   DELETE_AVATAR_ERROR,
+  CHANGE_PHONE_NUMBER_REQUEST,
+  CHANGE_PHONE_NUMBER_SUCCESS,
+  CHANGE_PHONE_NUMBER_ERROR,
+  CHANGE_NOTIFICATIONS_SETTINGS_REQUEST,
+  CHANGE_NOTIFICATIONS_SETTINGS_SUCCESS,
+  CHANGE_NOTIFICATIONS_SETTINGS_ERROR,
+  SEND_SMS_TOKEN_REQUEST,
+  SEND_SMS_TOKEN_SUCCESS,
+  SEND_SMS_TOKEN_ERROR,
+  CONFIRM_PHONE_NUMBER_REQUEST,
+  CONFIRM_PHONE_NUMBER_SUCCESS,
+  CONFIRM_PHONE_NUMBER_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -31,10 +43,14 @@ export const initialState = {
   errors: {
     changePasswordError: null,
     changeEmailError: null,
+    changePhoneNumberError: null,
   },
   loaders: {
     changePasswordLoading: false,
     changeEmailLoading: false,
+    changePhoneNumberLoading: false,
+    smsTokenLoading: false,
+    confirmPhoneNumberLoading: false,
   },
   cache: {
     user: null,
@@ -55,13 +71,15 @@ export const authReducer = (state = initialState, { type, payload }) =>
         break;
 
       case EDIT_USER_REQUEST:
+        draft.cache.user = state.user;
         draft.user = {
           ...state.user,
           ...payload.user,
         };
         break;
       case EDIT_USER_SUCCESS:
-        draft.cache.user = state.user;
+        draft.user = payload.user;
+        draft.cache.user = payload.user;
         break;
       case EDIT_USER_ERROR:
         draft.user = state.cache.user;
@@ -118,5 +136,55 @@ export const authReducer = (state = initialState, { type, payload }) =>
 
       case CHANGE_ERROR_STATUS:
         draft.errors[payload.error] = payload.value;
+        break;
+
+      case CHANGE_PHONE_NUMBER_REQUEST:
+        draft.errors.changePhoneNumberError = null;
+        draft.loaders.changePhoneNumberLoading = true;
+        draft.cache.user = state.user;
+        break;
+      case CHANGE_PHONE_NUMBER_SUCCESS:
+        draft.loaders.changePhoneNumberLoading = false;
+        draft.errors.changePhoneNumberError = null;
+        draft.cache.user = null;
+        draft.user.phoneNumber = payload.phoneNumber;
+        break;
+      case CHANGE_PHONE_NUMBER_ERROR:
+        draft.loaders.changePhoneNumberLoading = false;
+        draft.user = state.cache.user;
+        draft.errors.changePhoneNumberError = payload.error;
+        break;
+
+      case SEND_SMS_TOKEN_REQUEST:
+        draft.loaders.smsTokenLoading = true;
+        break;
+      case SEND_SMS_TOKEN_SUCCESS:
+        draft.loaders.smsTokenLoading = false;
+        draft.user.phone.confirmed = true;
+        break;
+      case SEND_SMS_TOKEN_ERROR:
+        draft.loaders.smsTokenLoading = false;
+        break;
+
+      case CONFIRM_PHONE_NUMBER_REQUEST:
+        draft.loaders.confirmPhoneNumberLoading = true;
+        break;
+      case CONFIRM_PHONE_NUMBER_SUCCESS:
+        draft.loaders.confirmPhoneNumberLoading = false;
+        break;
+      case CONFIRM_PHONE_NUMBER_ERROR:
+        draft.loaders.confirmPhoneNumberLoading = false;
+        break;
+
+      case CHANGE_NOTIFICATIONS_SETTINGS_REQUEST:
+        draft.cache.user = state.user;
+        draft.user.notificationsSettings = payload.notificationsSettings;
+        break;
+      case CHANGE_NOTIFICATIONS_SETTINGS_SUCCESS:
+        draft.cache.user = null;
+        break;
+      case CHANGE_NOTIFICATIONS_SETTINGS_ERROR:
+        draft.user = state.cache.user;
+        break;
     }
   });

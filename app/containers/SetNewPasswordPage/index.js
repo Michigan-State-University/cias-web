@@ -85,7 +85,7 @@ const SetNewPasswordPage = ({
     setSubmitting(false);
   };
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
@@ -108,7 +108,7 @@ const SetNewPasswordPage = ({
                 mb: 20,
               };
               return (
-                <Fragment>
+                <>
                   <FormikInput
                     formikKey="password"
                     placeholder={formatMessage(messages.password)}
@@ -134,13 +134,13 @@ const SetNewPasswordPage = ({
                     <FormattedMessage {...messages.resetPassword} />
                   </Button>
                   {error && <ErrorAlert errorText={error} mt={25} />}
-                </Fragment>
+                </>
               );
             }}
           </Formik>
         </Column>
       </Fill>
-    </Fragment>
+    </>
   );
 };
 

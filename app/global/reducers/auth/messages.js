@@ -23,6 +23,10 @@ export default defineMessages({
     id: `${scope}.changeEmailSuccess`,
     defaultMessage: 'You have successfully changed your e-mail address!',
   },
+  changePhoneNumberSuccess: {
+    id: `${scope}.changePhoneNumberSuccess`,
+    defaultMessage: 'You have successfully changed your phone number!',
+  },
   deleteAvatarError: {
     id: `${scope}.deleteAvatarError`,
     defaultMessage: 'Cannot remove your avatar.',
@@ -30,5 +34,21 @@ export default defineMessages({
   addAvatarError: {
     id: `${scope}.addAvatarError`,
     defaultMessage: 'Cannot change your avatar.',
+  },
+  changeNotificationsSettingsError: {
+    id: `${scope}.changeNotificationsSettingsError`,
+    defaultMessage: 'Cannot change your notifications settings.',
+  },
+  changeNotificationsSettingsSuccess: {
+    id: `${scope}.changeNotificationsSettingsSuccess`,
+    defaultMessage: 'You have successfully changed your notification settings',
+  },
+  confirmPhoneNumberSuccess: {
+    id: `${scope}.confirmPhoneNumberSuccess`,
+    defaultMessage: 'You have successfully confirmed your phone number!',
+  },
+  confirmPhoneNumberError: {
+    id: `${scope}.confirmPhoneNumberError`,
+    defaultMessage: 'Failed to confirm your phone number!',
   },
 });

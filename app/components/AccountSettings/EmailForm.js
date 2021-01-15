@@ -60,7 +60,7 @@ const EmailForm = ({
   }, [loading]);
 
   return (
-    <Fragment>
+    <>
       <Formik
         validationSchema={validationSchema(formatMessage)}
         initialValues={initialValues(user)}
@@ -72,7 +72,7 @@ const EmailForm = ({
             width: '100%',
           };
           return (
-            <Fragment>
+            <>
               <Modal
                 visible={modalVisible}
                 title={formatMessage(messages.changeYourEmail)}
@@ -81,7 +81,7 @@ const EmailForm = ({
               >
                 <Column>
                   <H3 mb={30}>
-                    <FormattedMessage {...messages.modalDescriptipn} />
+                    <FormattedMessage {...messages.modalDescription} />
                   </H3>
                   <FormikInput
                     data-testid="password-confirmation"
@@ -128,11 +128,11 @@ const EmailForm = ({
                   }}
                 />
               </Row>
-            </Fragment>
+            </>
           );
         }}
       </Formik>
-    </Fragment>
+    </>
   );
 };
 

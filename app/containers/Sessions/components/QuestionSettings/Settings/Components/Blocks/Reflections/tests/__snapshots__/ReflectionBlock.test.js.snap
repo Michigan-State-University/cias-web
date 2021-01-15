@@ -3,10 +3,10 @@
 exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Column-sc-1n6divy-0 SJAYV"
+    class="Column-sc-4zswzq-0 ekpwZH"
   >
     <button
-      class="StyledButton-t20ntd-0 cMKJkP"
+      class="StyledButton-d2s0gt-0 fMiMtZ"
       color="primary"
     >
       <span>
@@ -14,15 +14,15 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
       </span>
     </button>
     <div
-      class="Box-sc-14m3exe-0 bdeubt"
+      class="Box-sc-1vhutan-0 dtceDR"
     >
       Select Speech Animation
     </div>
     <div
-      class="Box-sc-14m3exe-0 bdeubt"
+      class="Box-sc-1vhutan-0 dtceDR"
     >
       <div
-        class="Box-sc-14m3exe-0 cidtM"
+        class="Box-sc-1vhutan-0 cVZZaQ"
       >
         <div
           class=" css-2b097c-container"
@@ -71,7 +71,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
                 class=" css-tlfecz-indicatorContainer"
               >
                 <img
-                  class="Img-sc-1kfzr96-0 sgjBb"
+                  class="Img-sc-55j3su-0 gTKGj"
                   src="IMAGE_MOCK"
                   transform=""
                 />
@@ -82,61 +82,61 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-x1o3ru-0 bkZUTY"
+      class="Row-y1cs0u-0 bGCTtn"
     >
       Use Reflection
       <label
-        class="styled__SwitchWrapper-sc-1eitgbj-0 bMVOtN"
+        class="styled__SwitchWrapper-k9teya-0 gKjzSJ"
       >
         <input
           checked=""
-          class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+          class="styled__SwitchInput-k9teya-1 hdJnOF"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+          class="styled__Slider-k9teya-2 cGAcbS"
         />
       </label>
     </div>
     <div
-      class="Row-x1o3ru-0 gDlNGt"
+      class="Row-y1cs0u-0 gBsZUK"
     >
       Use Formula
       <label
-        class="styled__SwitchWrapper-sc-1eitgbj-0 bMVOtN"
+        class="styled__SwitchWrapper-k9teya-0 gKjzSJ"
       >
         <input
-          class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+          class="styled__SwitchInput-k9teya-1 hdJnOF"
           data-cy="branching-intervention-toggle"
           data-testid="switch-input"
           type="checkbox"
         />
         <span
-          class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+          class="styled__Slider-k9teya-2 cGAcbS"
         />
       </label>
     </div>
     <div
-      class="styled__ArrowDropdownWrapper-wg7nh8-0 bRJBsx"
+      class="styled__ArrowDropdownWrapper-sc-84wil9-0 evREvO"
       width="100%"
     >
       <div
-        class="styled__DropdownContainer-wg7nh8-1 fZydCX"
+        class="styled__DropdownContainer-sc-84wil9-1 eYUsLo"
       >
         <div
-          class="Row-x1o3ru-0 bwHvRF"
+          class="Row-y1cs0u-0 jkgLKe"
           height="100%"
         >
           <div
-            class="Box-sc-14m3exe-0 cidtM"
+            class="Box-sc-1vhutan-0 cVZZaQ"
           >
             <div
-              class="Box-sc-14m3exe-0 cidtM"
+              class="Box-sc-1vhutan-0 cVZZaQ"
             >
               <p
-                class="Text-sc-2lza2m-0 ZELPo"
+                class="Text-e4p0w3-0 imsaiG"
                 overflow="hidden"
               >
                 Choose Question
@@ -144,43 +144,43 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <img
-            class="Img-sc-1kfzr96-0 lmhFEd"
+            class="Img-sc-55j3su-0 cDhXoN"
             src="IMAGE_MOCK"
           />
         </div>
       </div>
       <div
-        class="Box-sc-14m3exe-0 gukcSd"
+        class="Box-sc-1vhutan-0 ehsbWl"
         display="none"
         width="100%"
       >
         <div
-          class="Row-x1o3ru-0 dAhqIQ"
+          class="Row-y1cs0u-0 dskFsL"
         >
           <div
-            class="Box-sc-14m3exe-0 ixuKrU"
+            class="Box-sc-1vhutan-0 ksbYZU"
             overflow="hidden"
           >
             <div
-              class="Column-sc-1n6divy-0 SJAYV"
+              class="Column-sc-4zswzq-0 ekpwZH"
               data-testid="question-test-0-select-target-question"
             >
               <div
-                class="Box-sc-14m3exe-0 hPyOqo"
+                class="Box-sc-1vhutan-0 bOOvNQ"
               >
                 <div
-                  class="Column-sc-1n6divy-0 SJAYV"
+                  class="Column-sc-4zswzq-0 ekpwZH"
                 >
                   <div
-                    class="Row-x1o3ru-0 QAQuZ"
+                    class="Row-y1cs0u-0 bMEIUu"
                     data-testid="question-test-0-select-target-question-el"
                   >
                     <img
-                      class="Img-sc-1kfzr96-0 iEjuMy"
+                      class="Img-sc-55j3su-0 cYsgyu"
                       src="IMAGE_MOCK"
                     />
                     <p
-                      class="Text-sc-2lza2m-0 dYfZux"
+                      class="Text-e4p0w3-0 jlZMzX"
                       color="#9AA1B6"
                       font-weight=""
                       overflow="hidden"
@@ -189,15 +189,15 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
                     </p>
                   </div>
                   <div
-                    class="Row-x1o3ru-0 kfzuob"
+                    class="Row-y1cs0u-0 cRfofY"
                     data-testid="question-test-0-select-target-question-el"
                   >
                     <img
-                      class="Img-sc-1kfzr96-0 iEjuMy"
+                      class="Img-sc-55j3su-0 cYsgyu"
                       src="IMAGE_MOCK"
                     />
                     <p
-                      class="Text-sc-2lza2m-0 ZELPo"
+                      class="Text-e4p0w3-0 imsaiG"
                       color=""
                       font-weight=""
                       overflow="hidden"
@@ -213,25 +213,25 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Box-sc-14m3exe-0 bdeubt"
+      class="Box-sc-1vhutan-0 dtceDR"
     >
       <div
-        class="Column-sc-1n6divy-0 SJAYV"
+        class="Column-sc-4zswzq-0 ekpwZH"
       >
         <div
-          class="Box-sc-14m3exe-0 bdeubt"
+          class="Box-sc-1vhutan-0 dtceDR"
         >
           1
         </div>
         <div
-          class="Box-sc-14m3exe-0 kbuZxI"
+          class="Box-sc-1vhutan-0 kjemns"
         >
           <div
-            class="Box-sc-14m3exe-0 cPMJok"
+            class="Box-sc-1vhutan-0 iMXQSQ"
             width="100%"
           >
             <textarea
-              class="TextArea-sc-1g8793c-0 kklhX"
+              class="TextArea-sc-175uiux-0 cIMVkN"
               data-cy="text-area"
               height="auto"
               placeholder="Enter speech here..."
@@ -242,10 +242,10 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
             </textarea>
           </div>
           <div
-            class="Box-sc-14m3exe-0 dEhBHo"
+            class="Box-sc-1vhutan-0 hmgyEc"
           >
             <img
-              class="Img-sc-1kfzr96-0 gYrhFK"
+              class="Img-sc-55j3su-0 kDGTCK"
               src="IMAGE_MOCK"
             />
           </div>

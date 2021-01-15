@@ -3,28 +3,28 @@
 exports[`<InviteResearcher /> Should display invalid email error 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 joSrTI"
+    class="Box-sc-1vhutan-0 jrRnPA"
     display="flex"
     height="100%"
     width="100%"
   >
     <div
-      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 eNnife iQJIDT"
+      class="Box-sc-1vhutan-0 styled__StyledBox-sc-253ice-0 gniMjS CZPtF"
       overflow="auto"
     >
       <div
-        class="Column-sc-1n6divy-0 SJAYV"
+        class="Column-sc-4zswzq-0 ekpwZH"
       >
         <div
-          class="Row-x1o3ru-0 dSvoas"
+          class="Row-y1cs0u-0 ddPUgf"
         >
           <h1
-            class="H1-tncdg6-0 eNjQDq"
+            class="H1-sc-1k7m23t-0 ewNLte"
           >
             Invite researcher
           </h1>
           <button
-            class="styled__CrossButton-sc-4w1fan-1 bidHul"
+            class="styled__CrossButton-sc-1kp22um-1 fPabiY"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
           >
@@ -36,24 +36,24 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-14m3exe-0 jRoJkk"
+        class="Box-sc-1vhutan-0 hYRzjM"
       >
         <div
-          class="Column-sc-1n6divy-0 SJAYV"
+          class="Column-sc-4zswzq-0 ekpwZH"
         >
           <h3
-            class="H3-sc-1nwhpi5-0 hjYHkn"
+            class="H3-twxrn4-0 yVyBl"
           >
             <span>
               Send another invite
             </span>
           </h3>
           <div
-            class="Column-sc-1n6divy-0 kVAmh"
+            class="Column-sc-4zswzq-0 cPpuJH"
             width="100%"
           >
             <p
-              class="Text-sc-2lza2m-0 bwDCRA"
+              class="Text-e4p0w3-0 fwzRty"
               font-size="14"
             >
               <span>
@@ -61,14 +61,14 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
               </span>
             </p>
             <input
-              class="Input-sc-19txxuq-0 ijnHJY"
+              class="Input-t9j2q5-0 dbCYSA"
               placeholder="e.g john.doe@contact.com"
               type="text"
               value="invalidemail"
               width="100%"
             />
             <p
-              class="Text-sc-2lza2m-0 dFLwwe"
+              class="Text-e4p0w3-0 cuanQw"
               color="#EF462F"
               font-weight="bold"
             >
@@ -76,24 +76,24 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             </p>
           </div>
           <h3
-            class="H3-sc-1nwhpi5-0 hjYHkn"
+            class="H3-twxrn4-0 yVyBl"
           >
             <span>
               Invitations sent (2)
             </span>
           </h3>
           <div
-            class="Row-x1o3ru-0 fuhVhL"
+            class="Row-y1cs0u-0 jzzpxY"
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 kPxpYk"
+              class="Text-e4p0w3-0 iZfJuq"
               font-size="14"
             >
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 hwgxqr"
+              class="StyledTextButton-sc-1b7egxw-0 dkdziF"
               color="#EF462F"
               font-weight="bold"
             >
@@ -103,17 +103,17 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             </button>
           </div>
           <div
-            class="Row-x1o3ru-0 fuhVhL"
+            class="Row-y1cs0u-0 jzzpxY"
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 kPxpYk"
+              class="Text-e4p0w3-0 iZfJuq"
               font-size="14"
             >
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 hwgxqr"
+              class="StyledTextButton-sc-1b7egxw-0 dkdziF"
               color="#EF462F"
               font-weight="bold"
             >
@@ -123,7 +123,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-t20ntd-0 gWvWbv"
+            class="StyledButton-d2s0gt-0 jtHGah"
             color="primary"
             width="260"
           >
@@ -141,28 +141,28 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
 exports[`<InviteResearcher /> Should display server error 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 joSrTI"
+    class="Box-sc-1vhutan-0 jrRnPA"
     display="flex"
     height="100%"
     width="100%"
   >
     <div
-      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 eNnife iQJIDT"
+      class="Box-sc-1vhutan-0 styled__StyledBox-sc-253ice-0 gniMjS CZPtF"
       overflow="auto"
     >
       <div
-        class="Column-sc-1n6divy-0 SJAYV"
+        class="Column-sc-4zswzq-0 ekpwZH"
       >
         <div
-          class="Row-x1o3ru-0 dSvoas"
+          class="Row-y1cs0u-0 ddPUgf"
         >
           <h1
-            class="H1-tncdg6-0 eNjQDq"
+            class="H1-sc-1k7m23t-0 ewNLte"
           >
             Invite researcher
           </h1>
           <button
-            class="styled__CrossButton-sc-4w1fan-1 bidHul"
+            class="styled__CrossButton-sc-1kp22um-1 fPabiY"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
           >
@@ -174,24 +174,24 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-14m3exe-0 jRoJkk"
+        class="Box-sc-1vhutan-0 hYRzjM"
       >
         <div
-          class="Column-sc-1n6divy-0 SJAYV"
+          class="Column-sc-4zswzq-0 ekpwZH"
         >
           <h3
-            class="H3-sc-1nwhpi5-0 hjYHkn"
+            class="H3-twxrn4-0 yVyBl"
           >
             <span>
               Send another invite
             </span>
           </h3>
           <div
-            class="Column-sc-1n6divy-0 kVAmh"
+            class="Column-sc-4zswzq-0 cPpuJH"
             width="100%"
           >
             <p
-              class="Text-sc-2lza2m-0 bwDCRA"
+              class="Text-e4p0w3-0 fwzRty"
               font-size="14"
             >
               <span>
@@ -199,7 +199,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
               </span>
             </p>
             <input
-              class="Input-sc-19txxuq-0 ijnHJY"
+              class="Input-t9j2q5-0 dbCYSA"
               placeholder="e.g john.doe@contact.com"
               type="text"
               value=""
@@ -207,24 +207,24 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             />
           </div>
           <h3
-            class="H3-sc-1nwhpi5-0 hjYHkn"
+            class="H3-twxrn4-0 yVyBl"
           >
             <span>
               Invitations sent (2)
             </span>
           </h3>
           <div
-            class="Row-x1o3ru-0 fuhVhL"
+            class="Row-y1cs0u-0 jzzpxY"
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 kPxpYk"
+              class="Text-e4p0w3-0 iZfJuq"
               font-size="14"
             >
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 hwgxqr"
+              class="StyledTextButton-sc-1b7egxw-0 dkdziF"
               color="#EF462F"
               font-weight="bold"
             >
@@ -234,17 +234,17 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             </button>
           </div>
           <div
-            class="Row-x1o3ru-0 fuhVhL"
+            class="Row-y1cs0u-0 jzzpxY"
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 kPxpYk"
+              class="Text-e4p0w3-0 iZfJuq"
               font-size="14"
             >
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 hwgxqr"
+              class="StyledTextButton-sc-1b7egxw-0 dkdziF"
               color="#EF462F"
               font-weight="bold"
             >
@@ -254,7 +254,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-t20ntd-0 eZXIRT"
+            class="StyledButton-d2s0gt-0 eoiJLt"
             color="primary"
             disabled=""
             width="260"
@@ -273,28 +273,28 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
 exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 joSrTI"
+    class="Box-sc-1vhutan-0 jrRnPA"
     display="flex"
     height="100%"
     width="100%"
   >
     <div
-      class="Box-sc-14m3exe-0 styled__StyledBox-sc-1asgd5t-0 eNnife iQJIDT"
+      class="Box-sc-1vhutan-0 styled__StyledBox-sc-253ice-0 gniMjS CZPtF"
       overflow="auto"
     >
       <div
-        class="Column-sc-1n6divy-0 SJAYV"
+        class="Column-sc-4zswzq-0 ekpwZH"
       >
         <div
-          class="Row-x1o3ru-0 dSvoas"
+          class="Row-y1cs0u-0 ddPUgf"
         >
           <h1
-            class="H1-tncdg6-0 eNjQDq"
+            class="H1-sc-1k7m23t-0 ewNLte"
           >
             Invite researcher
           </h1>
           <button
-            class="styled__CrossButton-sc-4w1fan-1 bidHul"
+            class="styled__CrossButton-sc-1kp22um-1 fPabiY"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
           >
@@ -306,24 +306,24 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-14m3exe-0 jRoJkk"
+        class="Box-sc-1vhutan-0 hYRzjM"
       >
         <div
-          class="Column-sc-1n6divy-0 SJAYV"
+          class="Column-sc-4zswzq-0 ekpwZH"
         >
           <h3
-            class="H3-sc-1nwhpi5-0 hjYHkn"
+            class="H3-twxrn4-0 yVyBl"
           >
             <span>
               Send another invite
             </span>
           </h3>
           <div
-            class="Column-sc-1n6divy-0 kVAmh"
+            class="Column-sc-4zswzq-0 cPpuJH"
             width="100%"
           >
             <p
-              class="Text-sc-2lza2m-0 bwDCRA"
+              class="Text-e4p0w3-0 fwzRty"
               font-size="14"
             >
               <span>
@@ -331,7 +331,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
               </span>
             </p>
             <input
-              class="Input-sc-19txxuq-0 ijnHJY"
+              class="Input-t9j2q5-0 dbCYSA"
               placeholder="e.g john.doe@contact.com"
               type="text"
               value=""
@@ -339,24 +339,24 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             />
           </div>
           <h3
-            class="H3-sc-1nwhpi5-0 hjYHkn"
+            class="H3-twxrn4-0 yVyBl"
           >
             <span>
               Invitations sent (2)
             </span>
           </h3>
           <div
-            class="Row-x1o3ru-0 fuhVhL"
+            class="Row-y1cs0u-0 jzzpxY"
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 kPxpYk"
+              class="Text-e4p0w3-0 iZfJuq"
               font-size="14"
             >
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 hwgxqr"
+              class="StyledTextButton-sc-1b7egxw-0 dkdziF"
               color="#EF462F"
               font-weight="bold"
             >
@@ -366,17 +366,17 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             </button>
           </div>
           <div
-            class="Row-x1o3ru-0 fuhVhL"
+            class="Row-y1cs0u-0 jzzpxY"
             height="46"
           >
             <p
-              class="Text-sc-2lza2m-0 kPxpYk"
+              class="Text-e4p0w3-0 iZfJuq"
               font-size="14"
             >
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-17cmh3t-0 hwgxqr"
+              class="StyledTextButton-sc-1b7egxw-0 dkdziF"
               color="#EF462F"
               font-weight="bold"
             >
@@ -386,7 +386,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-t20ntd-0 eZXIRT"
+            class="StyledButton-d2s0gt-0 eoiJLt"
             color="primary"
             disabled=""
             width="260"

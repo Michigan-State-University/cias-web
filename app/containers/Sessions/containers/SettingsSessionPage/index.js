@@ -38,7 +38,7 @@ const SettingsInterventionPage = ({
   }, []);
 
   return (
-    <Fragment>
+    <>
       <Helmet>
         <title>{formatMessage(messages.pageTitle, { name })}</title>
       </Helmet>
@@ -60,7 +60,7 @@ const SettingsInterventionPage = ({
           />
         </StyledColumn>
       </Box>
-    </Fragment>
+    </>
   );
 };
 

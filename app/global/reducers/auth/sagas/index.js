@@ -1,10 +1,14 @@
 import { all } from 'redux-saga/effects';
+import confirmPhoneNumberSaga from './confirmPhoneNumber';
 import logOutSaga from './logOut';
 import editUserSaga from './editUser';
 import changePasswordSaga from './changePassword';
 import addAvatarSaga from './addAvatar';
 import deleteAvatarSaga from './deleteAvatar';
 import changeEmailSaga from './changeEmail';
+import changePhoneNumberSaga from './changePhoneNumber';
+import changeNotificationsSettingsSaga from './changeNotificationsSettings';
+import sendSmsTokenSaga from './sendSmsToken';
 
 export {
   logOutSaga,
@@ -13,6 +17,10 @@ export {
   addAvatarSaga,
   deleteAvatarSaga,
   changeEmailSaga,
+  changePhoneNumberSaga,
+  changeNotificationsSettingsSaga,
+  confirmPhoneNumberSaga,
+  sendSmsTokenSaga,
 };
 
 export default function* allAuthSagas() {
@@ -23,5 +31,9 @@ export default function* allAuthSagas() {
     addAvatarSaga(),
     deleteAvatarSaga(),
     changeEmailSaga(),
+    changePhoneNumberSaga(),
+    changeNotificationsSettingsSaga(),
+    confirmPhoneNumberSaga(),
+    sendSmsTokenSaga(),
   ]);
 }

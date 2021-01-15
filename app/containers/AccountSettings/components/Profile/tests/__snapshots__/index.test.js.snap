@@ -1,0 +1,319 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Profile /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-1vhutan-0 ejxYds"
+  >
+    <h2
+      class="H2-uw8lbl-0 iUhbVg"
+    >
+      <span>
+        Profile
+      </span>
+    </h2>
+    <div
+      class="Row-y1cs0u-0 cUkLOH"
+      display="flex"
+    >
+      <div>
+        <div
+          class="Row-y1cs0u-0 fgwsqb"
+          width="100%"
+        >
+          <div
+            class="styled__AvatarStyled-bn66gh-0 fvqhMv styled__StyledUserAvatar-sc-4bx7ap-1 dObBuO"
+            color="#FFFFFF"
+          >
+            <div>
+              NS
+            </div>
+          </div>
+          <div
+            class="Row-y1cs0u-0 jOTCVU"
+          >
+            <div
+              class="Row-y1cs0u-0 styled__StyledButtonsRow-sc-4bx7ap-2 dskFsL fA-DhtD"
+            >
+              <div
+                class="Box-sc-1vhutan-0 cjmvvN styled__StyledUploadFileButton-sc-4bx7ap-4 GlRFp"
+                height="fit-content"
+              >
+                <input
+                  autocomplete="off"
+                  style="display: none;"
+                  tabindex="-1"
+                  type="file"
+                />
+                <div
+                  class="Row-y1cs0u-0 bLAOxT"
+                >
+                  <p
+                    class="Text-e4p0w3-0 gMPCWD"
+                    color="#C866EA"
+                    font-size="14"
+                    font-weight="bold"
+                  >
+                    <span>
+                      Add profile photo
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="Row-y1cs0u-0 eDtOGP"
+    >
+      <div
+        class="Row-y1cs0u-0 styled__StyledFullNameRow-sc-4bx7ap-0 gQFDhs loGlNM"
+        width="100%"
+      >
+        <div
+          class="Column-sc-4zswzq-0 ehOEzE"
+          data-testid="first-name-input"
+        >
+          <p
+            class="Text-e4p0w3-0 kFFPgx"
+            width="fit-content"
+          >
+            First Name
+          </p>
+          <input
+            class="Input-t9j2q5-0 ptbLy"
+            height="46"
+            name="firstName"
+            placeholder="Enter first name"
+            type="text"
+            value="Name"
+            width="100%"
+          />
+        </div>
+        <div
+          class="Column-sc-4zswzq-0 jCuscc"
+        >
+          <p
+            class="Text-e4p0w3-0 kFFPgx"
+            width="fit-content"
+          >
+            Last name
+          </p>
+          <input
+            class="Input-t9j2q5-0 ptbLy"
+            height="46"
+            name="lastName"
+            placeholder="Enter last name"
+            type="text"
+            value="Surname"
+            width="100%"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 fyfnXk jKoKLe"
+      width="100%"
+    >
+      <div
+        class="Box-sc-1vhutan-0 styled__StyledTimezoneBox-sc-1pif2s-3 cVZZaQ dFeJUv"
+      >
+        <div
+          class="Column-sc-4zswzq-0 laIXbL"
+        >
+          <p
+            class="Text-e4p0w3-0 kFFPgx"
+            width="fit-content"
+          >
+            Time zone
+          </p>
+          <div
+            class="Box-sc-1vhutan-0 lnJPFa"
+            data-testid="select"
+          >
+            <div
+              class=" css-2b097c-container"
+            >
+              <div
+                class=" css-4iyz22-control"
+              >
+                <div
+                  class=" css-g1d714-ValueContainer"
+                >
+                  <div
+                    class=" css-1uccc91-singleValue"
+                  >
+                    America/New_York (UTC -05:00)
+                  </div>
+                  <div
+                    class="css-b8ldur-Input"
+                  >
+                    <div
+                      class=""
+                      style="display: inline-block;"
+                    >
+                      <input
+                        aria-autocomplete="list"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
+                        id="react-select-4-input"
+                        spellcheck="false"
+                        style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                        tabindex="0"
+                        type="text"
+                        value=""
+                      />
+                      <div
+                        style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class=" css-1hb7zxy-IndicatorsContainer"
+                >
+                  <div
+                    aria-hidden="true"
+                    class=" css-tlfecz-indicatorContainer"
+                  >
+                    <img
+                      class="Img-sc-55j3su-0 gTKGj"
+                      src="IMAGE_MOCK"
+                      transform=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 fyfnXk jKoKLe"
+      width="100%"
+    >
+      <div
+        class="Column-sc-4zswzq-0 ekpwZH"
+      >
+        <div
+          class="Row-y1cs0u-0 gQFDhs"
+          width="100%"
+        >
+          <div
+            class="Column-sc-4zswzq-0 HRVgp"
+            width="230"
+          >
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            >
+              Phone number
+            </p>
+            <div
+              class="Box-sc-1vhutan-0 lnJPFa"
+              data-testid="select"
+            >
+              <div
+                class=" css-2b097c-container"
+              >
+                <div
+                  class=" css-4iyz22-control"
+                >
+                  <div
+                    class=" css-g1d714-ValueContainer"
+                  >
+                    <div
+                      class=" css-1wa3eu0-placeholder"
+                    >
+                      Code
+                    </div>
+                    <div
+                      class="css-b8ldur-Input"
+                    >
+                      <div
+                        class=""
+                        style="display: inline-block;"
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          autocapitalize="none"
+                          autocomplete="off"
+                          autocorrect="off"
+                          id="react-select-5-input"
+                          spellcheck="false"
+                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                          tabindex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class=" css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <div
+                      aria-hidden="true"
+                      class=" css-tlfecz-indicatorContainer"
+                    >
+                      <img
+                        class="Img-sc-55j3su-0 gTKGj"
+                        src="IMAGE_MOCK"
+                        transform=""
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="Column-sc-4zswzq-0 ekpwZH"
+            value=""
+          >
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            />
+            <input
+              class="Input-t9j2q5-0 dLTYGo"
+              name="number"
+              placeholder="Enter phone number"
+              type="tel"
+              value=""
+              width="100%"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 eomgnk jKoKLe"
+      width="100%"
+    >
+      <div
+        class="Column-sc-4zswzq-0 eSmZPS"
+        width="33%"
+      >
+        <button
+          class="StyledTextButton-sc-1b7egxw-0 styled__TextButton-sc-1pif2s-2 fiDerw hCmSLB"
+          color="#C866EA"
+          font-size="14"
+          font-weight="bold"
+        >
+          <span>
+            Reset password
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

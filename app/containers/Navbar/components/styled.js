@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { themeColors } from 'theme';
+import { themeColors, colors, hexToRgb } from 'theme';
 import { margin } from 'components/BaseComponentStyles';
+import Row from 'components/Row';
+import { maxQueries } from 'components/Container/mediaQuery';
 
 export const StyledLink = styled(Link)`
   font-size: 13px;
@@ -49,4 +51,30 @@ export const NavbarTabLink = styled(Link)`
       `}
   }
   ${margin};
+`;
+
+export const MenuContent = styled.div`
+  position: absolute;
+  min-width: 150px;
+  top: calc(100% - 20px);
+  left: calc(100% - 215px);
+  background-color: ${colors.white};
+  text-align: center;
+  color: black;
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(${hexToRgb(colors.black)}, 0.08);
+  padding-bottom: 10px;
+  opacity: ${({ menuVisible }) => (menuVisible ? '100%' : '0')};
+  transition: opacity 0.3s;
+`;
+
+export const StyledLogos = styled(Row)`
+  @media ${maxQueries.sm} {
+    justify-content: start;
+
+    img {
+      width: 70%;
+      margin: 0;
+    }
+  }
 `;

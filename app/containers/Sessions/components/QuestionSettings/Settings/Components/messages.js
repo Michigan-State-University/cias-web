@@ -30,7 +30,7 @@ export default defineMessages({
   },
   proceed_button: {
     id: `${scope}.proceed_button`,
-    defaultMessage: 'Proceed button',
+    defaultMessage: 'Next Screen Button',
   },
   required: {
     id: `${scope}.required`,
@@ -47,10 +47,6 @@ export default defineMessages({
   selectQuestion: {
     id: `${scope}.selectQuestion`,
     defaultMessage: 'Select Screen',
-  },
-  nextScreen: {
-    id: `${scope}.nextScreen`,
-    defaultMessage: 'Next Screen',
   },
   speechPlaceholder: {
     id: `${scope}.speechPlaceholder`,

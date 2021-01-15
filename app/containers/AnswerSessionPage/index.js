@@ -8,7 +8,7 @@ import React, { memo, useEffect, useRef, Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { toast } from 'react-toastify';
@@ -39,7 +39,6 @@ import {
 } from 'global/reducers/intervention';
 import { canPreview } from 'models/Status/statusPermissions';
 import {
-  BackButton,
   AnswerInterventionContent,
   AnswerOuterContainer,
   StyledButton,
@@ -198,8 +197,6 @@ export function AnswerSessionPage({
       get(currentQuestion, 'type', ''),
     );
 
-  const setQuestion = question => setQuestionIndexAction(question);
-
   const renderQuestion = () => {
     const {
       settings: { proceed_button: proceedButton, required },
@@ -229,13 +226,6 @@ export function AnswerSessionPage({
       feedbackScreenSettings,
       setFeedbackSettings,
     };
-    const handleBackClick = () => {
-      if (answers[currentQuestionId]) {
-        saveAnswer(questionIndex - 1);
-      } else {
-        setQuestion(questionIndex - 1);
-      }
-    };
 
     const isLastScreen = questionIndex === sessionQuestions.length - 1;
     const isBeforeLastScreen = questionIndex === sessionQuestions.length - 2;
@@ -243,13 +233,6 @@ export function AnswerSessionPage({
     return (
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
-          <Row width="100%" mt={5} height={30}>
-            {questionIndex !== 0 && currentQuestion && (
-              <BackButton onClick={handleBackClick}>
-                <FormattedMessage {...messages.previousQuestion} />
-              </BackButton>
-            )}
-          </Row>
           <CommonLayout currentQuestion={currentQuestion} />
           <Row mt={10}>
             {renderQuestionByType(currentQuestion, sharedProps)}
@@ -295,7 +278,7 @@ export function AnswerSessionPage({
     return formatMessage(messages.previewDisabled);
   };
 
-  const renderPage = () => <Fragment>{renderQuestion()}</Fragment>;
+  const renderPage = () => <>{renderQuestion()}</>;
 
   if (questionLoading) return <Loader />;
 
@@ -331,7 +314,7 @@ export function AnswerSessionPage({
             />
           )}
           {interventionStarted && (
-            <Fragment>
+            <>
               <Box width="100%">
                 {!questionLoading && currentQuestion && interventionStarted && (
                   <AnimationRefHelper
@@ -349,7 +332,7 @@ export function AnswerSessionPage({
                 )}
               </Box>
               {answersError && <ErrorAlert errorText={answersError} />}
-            </Fragment>
+            </>
           )}
         </AnswerOuterContainer>
       </Box>

@@ -4,6 +4,7 @@ import Row from 'components/Row';
 import Comment from 'components/Comment';
 
 import { elements, colors, hexToRgb } from 'theme';
+import { maxQueries } from 'components/Container/mediaQuery';
 
 export const NavbarStyled = styled.div`
   position: fixed;
@@ -16,6 +17,13 @@ export const NavbarStyled = styled.div`
   align-items: center;
   z-index: 10;
   height: ${elements.navbarHeight}px;
+
+  .user-name-info {
+    white-space: nowrap;
+    @media ${maxQueries.md} {
+      display: none;
+    }
+  }
 `;
 
 export const RightPanel = styled.div`
@@ -23,7 +31,6 @@ export const RightPanel = styled.div`
   margin-right: 0;
   display: flex;
   align-items: center;
-  min-width: 150px;
 `;
 
 export const DropDownContent = styled.div`
@@ -36,6 +43,9 @@ export const DropDownContent = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(${hexToRgb(colors.black)}, 0.08);
   padding: 16px;
+  @media ${maxQueries.sm} {
+    left: calc(100% - 150px);
+  }
 `;
 
 export const StyledComment = styled(Comment)`

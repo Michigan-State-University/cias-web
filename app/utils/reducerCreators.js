@@ -38,4 +38,32 @@ export const createUser = (index = 0) => ({
   email: `test@test.com-${index}`,
   roles: ['admin'],
   timeZone: 'America/New_York',
+  phone: {
+    number: '123123123',
+    prefix: '+48',
+    iso: 'PL',
+  },
+});
+
+export const createReport = (index = 0) => ({
+  id: `report-test-${index}`,
+  title: `Report: ${index}. part - Results`,
+});
+
+export const createParticipantSession = (index = 0, available = false) => ({
+  id: `Session-test-${index}`,
+  title: `Session: ${index}`,
+  available,
+  link: available ? 'start/sessionId' : undefined,
+  report: !available ? 'report/sessionId' : undefined,
+});
+
+export const createParticipantIntervention = (
+  index = 0,
+  sessions = [createParticipantSession(index)],
+) => ({
+  id: `Intervention-test-${index}`,
+  title: `Intervention: ${index}`,
+  sessions,
+  emailNotifications: true,
 });

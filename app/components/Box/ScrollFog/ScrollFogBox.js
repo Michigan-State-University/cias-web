@@ -69,12 +69,12 @@ const ScrollFogBox = React.forwardRef(
     }, [x.percentage, y.percentage, horizontalFog, verticalFog]);
 
     return (
-      <Box ref={ref} position="relative">
+      <Box ref={ref} position="relative" width="100%">
         {leftFogVisible && <LeftFog leftMargin={leftMargin} />}
         {rightFogVisible && <RightFog rightMargin={rightMargin} />}
         {topFogVisible && <TopFog topMargin={topMargin} />}
         {bottomFogVisible && <BottomFog bottomMargin={bottomMargin} />}
-        <Box ref={setRef} {...props}>
+        <Box disableScrollbar ref={setRef} {...props}>
           {children}
         </Box>
       </Box>

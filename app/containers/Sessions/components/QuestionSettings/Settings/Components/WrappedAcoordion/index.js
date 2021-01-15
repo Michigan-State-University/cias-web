@@ -11,6 +11,7 @@ import Accordion from 'components/Accordion';
 import globalMessages from 'global/i18n/globalMessages';
 import { getNarratorPositionWhenBlockIsRemoved } from 'utils/getNarratorPosition';
 import { reorder } from 'utils/reorder';
+import blurDocument from 'utils/blurDocument';
 import {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
@@ -59,6 +60,7 @@ const WrappedAccordion = ({
     const { endPosition } = narrator.blocks[0] || {};
     setOffset(endPosition.x, endPosition.y);
     updateNarratorPreviewAnimation('standStill');
+    blurDocument();
   };
 
   const openAccordion = index => {

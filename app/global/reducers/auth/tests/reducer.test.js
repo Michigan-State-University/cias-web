@@ -6,9 +6,6 @@ import { createUser } from 'utils/reducerCreators';
 import {
   LOG_IN_USER,
   LOG_OUT,
-  EDIT_USER_REQUEST,
-  EDIT_USER_SUCCESS,
-  EDIT_USER_ERROR,
   CHANGE_PASSWORD_REQUEST,
   CHANGE_PASSWORD_SUCCESS,
   CHANGE_PASSWORD_ERROR,
@@ -22,6 +19,9 @@ import {
   DELETE_AVATAR_SUCCESS,
   DELETE_AVATAR_ERROR,
   CHANGE_ERROR_STATUS,
+  EDIT_USER_REQUEST,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_ERROR,
 } from '../constants';
 
 const createState = (key, value) => ({
@@ -61,7 +61,9 @@ describe('authReducer', () => {
     const actionRequest = actionBuilder(EDIT_USER_REQUEST, {
       user: editedUser,
     });
-    const actionSuccess = actionBuilder(EDIT_USER_SUCCESS, {});
+    const actionSuccess = actionBuilder(EDIT_USER_SUCCESS, {
+      user: editedUser,
+    });
     const actionError = actionBuilder(EDIT_USER_ERROR, {});
 
     const afterEditUserStateRequest = createState('user', editedUser);
@@ -237,17 +239,18 @@ describe('authReducer', () => {
 
   it('test CHANGE_ERROR_STATUS action', () => {
     const error = 'Test error';
+    const initState = createState();
     const actionRequest = actionBuilder(CHANGE_ERROR_STATUS, {
       error: 'changePasswordError',
       value: error,
     });
     const changeStatusState = {
-      ...initialState,
+      ...initState,
       errors: {
+        ...initState.errors,
         changePasswordError: error,
-        changeEmailError: null,
       },
     };
-    expect(authReducer(undefined, actionRequest)).toEqual(changeStatusState);
+    expect(authReducer(initState, actionRequest)).toEqual(changeStatusState);
   });
 });

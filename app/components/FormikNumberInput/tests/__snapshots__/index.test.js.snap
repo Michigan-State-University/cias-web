@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormikNumberInput /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Column-sc-4zswzq-0 ekpwZH"
+  >
+    <p
+      class="Text-e4p0w3-0 kFFPgx"
+      width="fit-content"
+    >
+      Label
+    </p>
+    <input
+      class="Input-t9j2q5-0 lfEKYd"
+      name="test"
+      placeholder="test"
+      type="text"
+      value=""
+    />
+  </div>
+</div>
+`;

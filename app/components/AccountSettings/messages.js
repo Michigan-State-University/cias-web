@@ -118,6 +118,18 @@ export default defineMessages({
     id: `${scope}.email`,
     defaultMessage: 'Enter e-mail address',
   },
+  phoneNumberLabel: {
+    id: `${scope}.phoneNumberLabel`,
+    defaultMessage: 'Phone number',
+  },
+  countryCode: {
+    id: `${scope}.countryCode`,
+    defaultMessage: 'Code',
+  },
+  phoneNumber: {
+    id: `${scope}.phoneNumber`,
+    defaultMessage: 'Enter phone number',
+  },
   modalTitle: {
     id: `${scope}.modalTitle`,
     defaultMessage: 'Reset your password',
@@ -125,6 +137,18 @@ export default defineMessages({
   emailRequired: {
     id: `${scope}.emailRequired`,
     defaultMessage: 'Email is required',
+  },
+  phoneNumberRequired: {
+    id: `${scope}.phoneNumberRequired`,
+    defaultMessage: 'Phone number is required',
+  },
+  phoneNumberCodeRequired: {
+    id: `${scope}.phoneNumberCodeRequired`,
+    defaultMessage: 'Code is required',
+  },
+  phoneNumberInvalid: {
+    id: `${scope}.phoneNumberInvalid`,
+    defaultMessage: 'Phone number is invalid',
   },
   firstNameRequired: {
     id: `${scope}.firstNameRequired`,
@@ -146,10 +170,19 @@ export default defineMessages({
     id: `${scope}.changeYourEmail`,
     defaultMessage: 'Change your e-mail',
   },
-  modalDescriptipn: {
-    id: `${scope}.changeYourEmail`,
+  changeYourPhoneNumber: {
+    id: `${scope}.changeYourPhoneNumber`,
+    defaultMessage: 'Change your phone number',
+  },
+  modalDescription: {
+    id: `${scope}.modalDescription`,
     defaultMessage:
       'In order to change your e-mail you have to confirm it by providing your password.',
+  },
+  modalPhoneNumberDescription: {
+    id: `${scope}.modalPhoneNumberDescription`,
+    defaultMessage:
+      'In order to change your phone number you have to confirm it by providing the code that was sent to you.',
   },
   activate: {
     id: `${scope}.activate`,
@@ -158,5 +191,30 @@ export default defineMessages({
   deactivate: {
     id: `${scope}.deactivate`,
     defaultMessage: 'Deactivate account',
+  },
+  confirmCode: {
+    id: `${scope}.confirmCode`,
+    defaultMessage: 'Confirm your phone number',
+  },
+  confirmCodeButton: {
+    id: `${scope}.confirmCodeButton`,
+    defaultMessage: 'Confirm phone number',
+  },
+  code: {
+    id: `${scope}.code`,
+    defaultMessage: 'Code from SMS',
+  },
+  codeRequired: {
+    id: `${scope}.codeRequired`,
+    defaultMessage: 'Code is required',
+  },
+  codeInfo: {
+    id: `${scope}.codeInfo`,
+    defaultMessage:
+      'In a moment, you should receive a text message with the code on your phone number <b>{phone}</b>. <br> Enter the code you received into the form below to confirm the identity of the number.',
+  },
+  resendCode: {
+    id: `${scope}.resendCode`,
+    defaultMessage: 'Resend verification code',
   },
 });

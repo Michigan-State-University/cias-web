@@ -38,7 +38,7 @@ const InvitationList = ({
 
   if (loading) return <Loader type="inline" />;
   return (
-    <Fragment>
+    <>
       <H3 mb={20}>
         <FormattedMessage
           {...messages.invitationsSection}
@@ -68,7 +68,7 @@ const InvitationList = ({
         </Row>
       ))}
       {error && <ErrorAlert errorText={error} mt={25} />}
-    </Fragment>
+    </>
   );
 };
 

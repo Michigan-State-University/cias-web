@@ -27,7 +27,7 @@ describe('fetchInterventionEmails saga', () => {
 
   it('Check fetchInterventionEmails generator success connection', () => {
     const apiResponse = apiInterventionResponse();
-    apiResponse.session_invitations = users;
+    apiResponse.invitations = users;
 
     return expectSaga(fetchSessionEmails, { payload })
       .withState(mockState)

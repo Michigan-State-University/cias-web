@@ -370,6 +370,15 @@ InterventionDetailsPage.propTypes = {
     sessions: PropTypes.array,
     fetchInterventionError: PropTypes.string,
     fetchInterventionLoading: PropTypes.bool,
+    intervention: PropTypes.shape({ id: PropTypes.string }),
+    errors: PropTypes.shape({
+      fetchInterventionError: PropTypes.string,
+      createSessionError: PropTypes.string,
+    }),
+    loaders: PropTypes.shape({
+      fetchInterventionLoading: PropTypes.bool,
+      createSessionLoading: PropTypes.bool,
+    }),
   }),
   match: PropTypes.object,
   editIntervention: PropTypes.func,

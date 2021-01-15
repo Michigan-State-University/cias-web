@@ -209,6 +209,8 @@ SpeechBlock.propTypes = {
   formatMessage: PropTypes.func.isRequired,
   block: PropTypes.shape({
     type: PropTypes.string,
+    animation: PropTypes.string,
+    action: PropTypes.string,
     text: PropTypes.arrayOf(PropTypes.string),
     audio_urls: PropTypes.arrayOf(PropTypes.string),
   }),

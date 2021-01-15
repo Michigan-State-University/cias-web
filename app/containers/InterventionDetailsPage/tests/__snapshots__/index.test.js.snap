@@ -3,12 +3,12 @@
 exports[`<InterventionDetailsPage /> Should render loader and match the snapshot 1`] = `
 <div>
   <div
-    class="styled__FillScreenLoader-tle2yi-0 jaQIeH"
+    class="styled__FillScreenLoader-sc-1aaagww-0 bcnRTW"
     data-testid="fullscreen-loader"
     opacity="0.5"
   >
     <div
-      class="styled__StyledSpinner-d123q3-0 gidDvb"
+      class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
       color="#C866EA"
       size="100"
       width="6"

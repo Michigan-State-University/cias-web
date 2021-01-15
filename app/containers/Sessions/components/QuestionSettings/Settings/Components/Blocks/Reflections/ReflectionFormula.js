@@ -173,6 +173,8 @@ Reflection.propTypes = {
   updateNarratorPreviewAnimation: PropTypes.func,
   block: PropTypes.shape({
     type: PropTypes.string,
+    position: PropTypes.number,
+    animation: PropTypes.string,
   }),
   onRemoveCase: PropTypes.func,
   updateCase: PropTypes.func,

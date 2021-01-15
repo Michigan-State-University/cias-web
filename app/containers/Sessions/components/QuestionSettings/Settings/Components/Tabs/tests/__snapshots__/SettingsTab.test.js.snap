@@ -3,138 +3,138 @@
 exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Row-x1o3ru-0 kANvPw"
+    class="Row-y1cs0u-0 cNUaef"
   >
     <h3
-      class="H3-sc-1nwhpi5-0 bPzmis"
+      class="H3-twxrn4-0 cRKwFK"
     >
       Video
     </h3>
     <label
-      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+      class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
-        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        class="styled__SwitchInput-k9teya-1 hdJnOF"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
         type="checkbox"
       />
       <span
-        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+        class="styled__Slider-k9teya-2 cGAcbS"
       />
     </label>
   </div>
   <div
-    class="Row-x1o3ru-0 kANvPw"
+    class="Row-y1cs0u-0 cNUaef"
   >
     <h3
-      class="H3-sc-1nwhpi5-0 bPzmis"
+      class="H3-twxrn4-0 cRKwFK"
     >
       Image
     </h3>
     <label
-      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+      class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
-        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        class="styled__SwitchInput-k9teya-1 hdJnOF"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
         type="checkbox"
       />
       <span
-        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+        class="styled__Slider-k9teya-2 cGAcbS"
       />
     </label>
   </div>
   <div
-    class="Row-x1o3ru-0 kANvPw"
+    class="Row-y1cs0u-0 cNUaef"
   >
     <h3
-      class="H3-sc-1nwhpi5-0 bPzmis"
+      class="H3-twxrn4-0 cRKwFK"
     >
       Title
     </h3>
     <label
-      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+      class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
         checked=""
-        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        class="styled__SwitchInput-k9teya-1 hdJnOF"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
         type="checkbox"
       />
       <span
-        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+        class="styled__Slider-k9teya-2 cGAcbS"
       />
     </label>
   </div>
   <div
-    class="Row-x1o3ru-0 kANvPw"
+    class="Row-y1cs0u-0 cNUaef"
   >
     <h3
-      class="H3-sc-1nwhpi5-0 bPzmis"
+      class="H3-twxrn4-0 cRKwFK"
     >
       Main Text
     </h3>
     <label
-      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+      class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
         checked=""
-        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        class="styled__SwitchInput-k9teya-1 hdJnOF"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
         type="checkbox"
       />
       <span
-        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+        class="styled__Slider-k9teya-2 cGAcbS"
       />
     </label>
   </div>
   <div
-    class="Row-x1o3ru-0 kANvPw"
+    class="Row-y1cs0u-0 cNUaef"
   >
     <h3
-      class="H3-sc-1nwhpi5-0 bPzmis"
+      class="H3-twxrn4-0 cRKwFK"
     >
-      Proceed button
+      Next Screen Button
     </h3>
     <label
-      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+      class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
         checked=""
-        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        class="styled__SwitchInput-k9teya-1 hdJnOF"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
         type="checkbox"
       />
       <span
-        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+        class="styled__Slider-k9teya-2 cGAcbS"
       />
     </label>
   </div>
   <div
-    class="Row-x1o3ru-0 kRTAxX"
+    class="Row-y1cs0u-0 gaoRiI"
   >
     <h3
-      class="H3-sc-1nwhpi5-0 bPzmis"
+      class="H3-twxrn4-0 cRKwFK"
     >
       Required
     </h3>
     <label
-      class="styled__SwitchWrapper-sc-1eitgbj-0 cuBkdb"
+      class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
         checked=""
-        class="styled__SwitchInput-sc-1eitgbj-1 kDfKPB"
+        class="styled__SwitchInput-k9teya-1 hdJnOF"
         data-cy="branching-intervention-toggle"
         data-testid="switch-input"
         type="checkbox"
       />
       <span
-        class="styled__Slider-sc-1eitgbj-2 hzlhkO"
+        class="styled__Slider-k9teya-2 cGAcbS"
       />
     </label>
   </div>

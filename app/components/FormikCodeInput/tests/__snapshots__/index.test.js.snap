@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Column-sc-4zswzq-0 eExeGs"
+  >
+    <p
+      class="Text-e4p0w3-0 kFFPgx"
+      width="fit-content"
+    >
+      Label
+    </p>
+    <div
+      class="Row-y1cs0u-0 fZNegU"
+    >
+      <input
+        class="Input-t9j2q5-0 iMOhWw"
+        maxlength="1"
+        name="test"
+        size="1"
+        type="text"
+        width="calc(85% / 6)"
+      />
+      <input
+        class="Input-t9j2q5-0 iMOhWw"
+        maxlength="1"
+        name="test"
+        size="1"
+        type="text"
+        width="calc(85% / 6)"
+      />
+      <input
+        class="Input-t9j2q5-0 iMOhWw"
+        maxlength="1"
+        name="test"
+        size="1"
+        type="text"
+        width="calc(85% / 6)"
+      />
+      <input
+        class="Input-t9j2q5-0 iMOhWw"
+        maxlength="1"
+        name="test"
+        size="1"
+        type="text"
+        width="calc(85% / 6)"
+      />
+      <input
+        class="Input-t9j2q5-0 iMOhWw"
+        maxlength="1"
+        name="test"
+        size="1"
+        type="text"
+        width="calc(85% / 6)"
+      />
+      <input
+        class="Input-t9j2q5-0 iMOhWw"
+        maxlength="1"
+        name="test"
+        size="1"
+        type="text"
+        width="calc(85% / 6)"
+      />
+    </div>
+  </div>
+</div>
+`;

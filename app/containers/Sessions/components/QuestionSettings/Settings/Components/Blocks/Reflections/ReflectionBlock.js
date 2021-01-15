@@ -248,6 +248,10 @@ ReflectionBlock.propTypes = {
   formatMessage: PropTypes.func.isRequired,
   block: PropTypes.shape({
     type: PropTypes.string,
+    question_id: PropTypes.string,
+    animation: PropTypes.string,
+    action: PropTypes.string,
+    reflections: PropTypes.arrayOf(PropTypes.object),
   }),
   id: PropTypes.string,
   blockIndex: PropTypes.number,

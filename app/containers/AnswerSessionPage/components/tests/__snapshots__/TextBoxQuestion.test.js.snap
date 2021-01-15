@@ -3,14 +3,14 @@
 exports[`<TextBoxQuestion /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-14m3exe-0 erFqvu"
+    class="Box-sc-1vhutan-0 dKfRuq"
     width="100%"
   >
     <div
-      class="Row-x1o3ru-0 dAhqIQ"
+      class="Row-y1cs0u-0 dskFsL"
     >
       <textarea
-        class="TextArea-sc-1g8793c-0 cqUkPR"
+        class="TextArea-sc-175uiux-0 gRMYNb"
         placeholder="Enter your response here"
         rows="5"
         width="100%"

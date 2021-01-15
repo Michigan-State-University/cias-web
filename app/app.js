@@ -16,6 +16,7 @@ import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
 import { ToastContainer } from 'react-toastify';
+import { ScreenClassProvider } from 'react-grid-system';
 
 import 'sanitize.css/sanitize.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -54,8 +55,10 @@ const render = messages => {
     <Provider store={store}>
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
-          <ToastContainer />
-          <App />
+          <ScreenClassProvider>
+            <ToastContainer />
+            <App />
+          </ScreenClassProvider>
         </ConnectedRouter>
       </LanguageProvider>
     </Provider>,

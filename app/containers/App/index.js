@@ -28,6 +28,7 @@ import UserListPage from 'containers/UserList/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import UserDetails from 'containers/UserDetails/Loadable';
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
+import ReportsPage from 'containers/ParticipantDashboard/components/ReportsTab/Loadable';
 
 import { Roles } from 'models/User/UserRoles';
 
@@ -38,7 +39,11 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectUser } from 'global/reducers/auth';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { accountsTabId, interventionsTabId } from 'utils/defaultNavbarTabs';
+import {
+  accountsTabId,
+  interventionsTabId,
+  participantReportsTabId,
+} from 'utils/defaultNavbarTabs';
 
 export function App({ user }) {
   useInjectSaga({ key: 'app', saga: rootSaga });
@@ -59,7 +64,7 @@ export function App({ user }) {
   };
 
   return (
-    <Fragment>
+    <>
       <Switch>
         <AppRoute
           exact
@@ -70,6 +75,17 @@ export function App({ user }) {
           navbarProps={{
             navbarId: 'default',
             activeTab: interventionsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/reports"
+          component={ReportsPage}
+          protectedRoute
+          allowedRoles={[Roles.participant]}
+          navbarProps={{
+            navbarId: 'default',
+            activeTab: participantReportsTabId,
           }}
         />
         <AppRoute exact path="/login" component={LoginPage} />
@@ -169,7 +185,7 @@ export function App({ user }) {
           allowedRoles={Roles.allRoles}
           navbarProps={{
             navbarId: 'default',
-            activeTab: accountsTabId,
+            activeTab: null,
           }}
         />
         <AppRoute
@@ -186,7 +202,7 @@ export function App({ user }) {
         <AppRoute exact path="/not-found-page" component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
-    </Fragment>
+    </>
   );
 }
 

@@ -3,7 +3,6 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
-import { mapAccessToStateObject } from 'utils/mapResponseObjects';
 import {
   ENABLE_USER_ACCESS_REQUEST,
   ENABLE_USER_ACCESS_ERROR,
@@ -12,7 +11,7 @@ import { enableUserAccessSuccess, enableUserAccessFailure } from '../actions';
 import messages from '../messages';
 
 export function* enableUserAccess({ payload: { id, emails } }) {
-  const requestURL = `v1/interventions/${id}/users`;
+  const requestURL = `v1/interventions/${id}/invitations`;
   try {
     const {
       data: { user_sessions: users },
@@ -21,7 +20,7 @@ export function* enableUserAccess({ payload: { id, emails } }) {
         emails,
       },
     });
-    yield put(enableUserAccessSuccess(users.map(mapAccessToStateObject)));
+    yield put(enableUserAccessSuccess(users));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.giveUserAccessError), {
       toastId: ENABLE_USER_ACCESS_ERROR,

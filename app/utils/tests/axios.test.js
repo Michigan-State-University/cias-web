@@ -140,6 +140,9 @@ describe('axios response test', () => {
       response: {
         statusText: 'Unauthorized',
       },
+      config: {
+        url: 'test',
+      },
       headers,
     };
 

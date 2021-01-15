@@ -361,7 +361,7 @@ describe('<TargetQuestionChooser />', () => {
       );
       fireEvent.click(questionRow);
       expect(newProps.onClick).toHaveBeenCalledWith({
-        type: 'Question',
+        type: 'Question::Single',
         id: 'test-id-1',
       });
     });
@@ -406,7 +406,7 @@ describe('<TargetQuestionChooser />', () => {
     const nextQuestion = getByTestId(`${question.id}-next-question-target`);
     fireEvent.click(nextQuestion);
     expect(newProps.onClick).toHaveBeenCalledWith({
-      type: 'Question',
+      type: 'Question::Single',
       id: 'test-id-3',
     });
   });
