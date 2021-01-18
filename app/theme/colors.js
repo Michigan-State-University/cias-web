@@ -1,6 +1,6 @@
 const colors = {
   jungleGreen: '#107969',
-  lavender: '#C866EA',
+  orchid: '#C866EA',
   bluewood: '#2F3850',
   linkWater: '#E9F1FB',
   grey: '#9AA1B6',
@@ -33,11 +33,12 @@ const colors = {
   olive: '#808000',
   waterloo: '#828896',
   brightGreen: '#54F200',
+  lavender: '#DFEBFC',
 };
 
 const themeColors = {
   primary: colors.jungleGreen,
-  secondary: colors.lavender,
+  secondary: colors.orchid,
   text: colors.bluewood,
   highlight: colors.linkWater,
   warning: colors.flamingo,

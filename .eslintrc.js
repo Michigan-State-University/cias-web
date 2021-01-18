@@ -93,5 +93,11 @@ module.exports = {
       },
     },
   },
-  ignorePatterns: ['mjml', 'internals/**/*.js', '*.setup.js'],
+  ignorePatterns: [
+    'mjml',
+    'internals/**/*.js',
+    '*.setup.js',
+    'cypress/support/*.ts',
+    'app/utils/libraries/*.js',
+  ],
 };

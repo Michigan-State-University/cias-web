@@ -5,17 +5,24 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   <div
     class="Box-sc-1vhutan-0 euCCWT"
   >
-    <p
-      class="Text-e4p0w3-0 cyrMKK"
-      color="#EF462F"
+    <div
+      class="Box-sc-1vhutan-0 InfoBox-gbp8x8-0 iClTaC bljyZP"
     >
-      <span>
-        <b>
-          Note:
-        </b>
-         you can’t edit screen content when the Narrator menu is selected 
-      </span>
-    </p>
+      <p
+        class="Text-e4p0w3-0 iZfJuq"
+        font-size="14px"
+      >
+        <span>
+          Bear in mind that 
+          <span
+            style="color: #EF462F"
+          >
+            you can't edit the question
+          </span>
+           when you are working with the character.
+        </span>
+      </p>
+    </div>
     <div
       class="Row-y1cs0u-0 cNUaef"
     >
@@ -63,15 +70,27 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
       </label>
     </div>
   </div>
-  <p
-    class="Text-e4p0w3-0 gQqqMd"
-    color="#EF462F"
-    font-weight="bold"
+  <div
+    class="Box-sc-1vhutan-0 InfoBox-gbp8x8-0 dZhZwJ bljyZP"
   >
-    <span>
-      Expand any block to move the character.
-    </span>
-  </p>
+    <div
+      class="Row-y1cs0u-0 dskFsL"
+    >
+      <img
+        class="Img-sc-55j3su-0 cYsgyu"
+        src="IMAGE_MOCK"
+      />
+      <p
+        class="Text-e4p0w3-0 fqTAav"
+        color="#EF462F"
+        font-size="14px"
+      >
+        <span>
+          Open any of the blocks to replace the character.
+        </span>
+      </p>
+    </div>
+  </div>
   <div
     class="styled__AccordionContainer-nwquto-0"
     data-cy="narrator-blocks"

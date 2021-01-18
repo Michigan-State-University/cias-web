@@ -123,7 +123,7 @@ const QuestionListItem = ({
       onClick={onChangeItem}
       isSelected={isSelected}
       bg={colors.zirkon}
-      border={`1px solid ${checked ? colors.lavender : colors.smokeWhite}`}
+      border={`1px solid ${checked ? colors.orchid : colors.smokeWhite}`}
     >
       <Row justify="between">
         {manage && !isFinishScreen && (

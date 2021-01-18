@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { colors, borders } from 'theme';
+
 import Box from '.';
-import { colors } from '../../theme/colors';
-import { borders } from '../../theme/general';
 
 const HoverableBox = styled(Box)``;
 

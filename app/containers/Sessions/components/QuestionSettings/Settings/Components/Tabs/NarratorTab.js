@@ -12,7 +12,7 @@ import Row from 'components/Row';
 import Switch from 'components/Switch';
 import Text from 'components/Text';
 import lastKey from 'utils/getLastKey';
-import { colors, borders } from 'theme';
+import { colors, borders, fontSizes } from 'theme';
 import {
   readQuestionBlockType,
   feedbackBlockType,
@@ -27,7 +27,11 @@ import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
 import { ternary } from 'utils/ternary';
 
+import bulb from 'assets/svg/bulb.svg';
+
 import ConfirmationBox from 'components/ConfirmationBox';
+import InfoBox from 'components/Box/InfoBox';
+import Img from 'components/Img';
 import { LI, UL } from 'components/List';
 import globalMessages from 'global/i18n/globalMessages';
 import BlockTypeChooser from '../BlockTypeChooser';
@@ -128,9 +132,11 @@ const NarratorTab = ({
         confirmAction={onConfirm}
       />
       <Box mb={20}>
-        <Text color={colors.flamingo} mb={30}>
-          <FormattedHTMLMessage {...messages.warningMessage} />
-        </Text>
+        <InfoBox mb={30}>
+          <Text fontSize={fontSizes.medium}>
+            <FormattedHTMLMessage {...messages.warningMessage} />
+          </Text>
+        </InfoBox>
         {narrator &&
           map(narrator.settings, (val, index) => (
             <Row
@@ -155,23 +161,29 @@ const NarratorTab = ({
             </Row>
           ))}
       </Box>
-      <Text
-        fontWeight="bold"
-        color={
-          colors[isCharacterMovable && !disabled ? 'jungleGreen' : 'flamingo']
-        }
-        mb={15}
-      >
-        <FormattedHTMLMessage
-          {...messages[
-            ternary(
-              disabled,
-              'characterMoveDisabled',
-              isCharacterMovable ? 'characterMovable' : 'characterBlocked',
-            )
-          ]}
-        />
-      </Text>
+      <InfoBox mb={15}>
+        <Row>
+          <Img src={bulb} mr={10} />
+          <Text
+            fontSize={fontSizes.medium}
+            color={
+              colors[
+                isCharacterMovable && !disabled ? 'jungleGreen' : 'flamingo'
+              ]
+            }
+          >
+            <FormattedHTMLMessage
+              {...messages[
+                ternary(
+                  disabled,
+                  'characterMoveDisabled',
+                  isCharacterMovable ? 'characterMovable' : 'characterBlocked',
+                )
+              ]}
+            />
+          </Text>
+        </Row>
+      </InfoBox>
       <WrappedAccordion
         disabled={disabled}
         id={id}

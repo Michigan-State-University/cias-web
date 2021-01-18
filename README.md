@@ -6,6 +6,11 @@
 * Open Cypress dashboard `npm run cy:open`
 * Run Cypress tests `npm run cy:test`
 
+# Colors
+[COLOR NAME DETECTOR](https://www.color-blindness.com/color-name-hue/)
+
+To name colors, please do not use custom, made-up names and let's use some kind of color name detector. There are many detectors, so to have uniform results let's use that one: [COLOR NAME DETECTOR](https://www.color-blindness.com/color-name-hue/) as it shows not only the name, but also the group/hue of a color (useful when there are similar colors).
+
 # MJML
 ### What is MJML?
 A tool for creation of responsive html templates. It handles gotchas of most modern and known email clients.
