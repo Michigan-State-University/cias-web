@@ -13,7 +13,15 @@ import Text from 'components/Text';
 
 import { StyledTooltip } from './styled';
 
-const Tooltip = ({ id, children, text, icon, content, ...restProps }) => (
+const Tooltip = ({
+  id,
+  children,
+  visible,
+  text,
+  icon,
+  content,
+  ...restProps
+}) => (
   <Box display="flex" {...restProps}>
     {icon && <Img src={icon} alt="?" data-tip data-for={id} />}
     {children && (
@@ -21,7 +29,13 @@ const Tooltip = ({ id, children, text, icon, content, ...restProps }) => (
         {children}
       </div>
     )}
-    <StyledTooltip id={id} type="light" effect="solid" multiline>
+    <StyledTooltip
+      visible={visible}
+      id={id}
+      type="light"
+      effect="solid"
+      multiline
+    >
       <Text>{text}</Text>
       {content}
     </StyledTooltip>
@@ -34,6 +48,11 @@ Tooltip.propTypes = {
   icon: PropTypes.any,
   text: PropTypes.string,
   content: PropTypes.node,
+  visible: PropTypes.bool,
+};
+
+Tooltip.defaultProps = {
+  visible: true,
 };
 
 export default Tooltip;

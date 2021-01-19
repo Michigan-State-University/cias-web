@@ -249,6 +249,7 @@ export function InterventionDetailsPage({
                         nextSessionName={
                           nextIntervention ? nextIntervention.name : null
                         }
+                        status={status}
                       />
                     </Row>
                   );

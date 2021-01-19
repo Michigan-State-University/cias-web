@@ -41,7 +41,7 @@ export const HoverableRow = styled(Row)`
   }
 `;
 
-export const InterventionIndex = styled.div`
+export const SessionIndex = styled.div`
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -52,4 +52,5 @@ export const InterventionIndex = styled.div`
   align-items: center;
   position: relative;
   cursor: pointer;
+  min-width: 30px;
 `;
