@@ -21,34 +21,32 @@ import {
 import messages from './messages';
 import InterventionCollapse from '../InterventionCollapse';
 
-function Interventions({ interventions, error, loading }) {
-  return (
-    <Column align="start" mt={35} filled>
-      <Row align="center" ml={12} mb={24}>
-        <H1>
-          <FormattedMessage {...messages.interventions} />
-        </H1>
+const Interventions = ({ interventions, error, loading }) => (
+  <Column align="start" mt={35} filled>
+    <Row align="center" ml={12} mb={24}>
+      <H1>
+        <FormattedMessage {...messages.interventions} />
+      </H1>
+    </Row>
+    {loading && <Loader size={100} type="inline" />}
+    {error && <ErrorAlert errorText={error} />}
+    {!loading && interventions && (
+      <Row justify="center" flexWrap="wrap" width="100%">
+        <TileMapper
+          items={interventions}
+          component={(props, index) => (
+            <InterventionCollapse
+              /* eslint-disable-next-line react/prop-types */
+              key={`Intervention-Collapse-${props.id}`}
+              itemIndex={index}
+              {...props}
+            />
+          )}
+        />
       </Row>
-      {loading && <Loader size={100} type="inline" />}
-      {error && <ErrorAlert errorText={error} />}
-      {!loading && interventions && (
-        <Row justify="center" flexWrap="wrap" width="100%">
-          <TileMapper
-            items={interventions}
-            component={(props, index) => (
-              <InterventionCollapse
-                /* eslint-disable-next-line react/prop-types */
-                key={`Intervention-Collapse-${props.id}`}
-                itemIndex={index}
-                {...props}
-              />
-            )}
-          />
-        </Row>
-      )}
-    </Column>
-  );
-}
+    )}
+  </Column>
+);
 
 Interventions.propTypes = {
   interventions: PropTypes.array,

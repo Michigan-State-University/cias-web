@@ -1,16 +1,16 @@
 import styled from 'styled-components';
 import { boxShadows, colors, themeColors } from 'theme';
 
-export const InitialRow = styled.div`
+import { Container } from 'react-grid-system';
+
+export const InitialRow = styled(Container)`
+  padding: 0 !important;
   margin-top: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 export const StatusLabel = styled.button`
   border: none;
-  margin-left: 16px;
+  width: max-content;
   display: flex;
   padding: 5px 10px;
   font-size: 14px;

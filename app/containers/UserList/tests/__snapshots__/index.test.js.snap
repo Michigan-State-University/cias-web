@@ -35,85 +35,99 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
       </div>
       <div>
         <div
-          class="Box-sc-1vhutan-0 cIA-dSO"
-          display="flex"
+          style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; margin-bottom: 40px; padding: 0px;"
         >
           <div
-            class="Box-sc-1vhutan-0 jZbfgr"
-            display="flex"
+            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
           >
             <div
-              class="Box-sc-1vhutan-0 ergsuV"
-              display="inline-block"
-              width="100%"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="Box-sc-1vhutan-0 jZbfgr"
-                display="flex"
+                style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
               >
                 <div
-                  class="Box-sc-1vhutan-0 kupsdJ"
-                  display="inline-flex"
-                  width="120px"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
-                  <p
-                    class="Text-e4p0w3-0 eAccFX"
-                    color="#FFFFFF"
-                    font-size="14"
-                    font-weight="bold"
+                  <div
+                    class="Box-sc-1vhutan-0 kmUFrR"
+                    display="inline-flex"
+                    width="max-content"
                   >
-                    Participant
-                  </p>
+                    <p
+                      class="Text-e4p0w3-0 eAccFX"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Participant
+                    </p>
+                  </div>
                 </div>
                 <div
-                  class="Box-sc-1vhutan-0 hUxqTk"
-                  display="inline-flex"
-                  width="120px"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
-                  <p
-                    class="Text-e4p0w3-0 eAccFX"
-                    color="#FFFFFF"
-                    font-size="14"
-                    font-weight="bold"
+                  <div
+                    class="Box-sc-1vhutan-0 fSsxQg"
+                    display="inline-flex"
+                    width="max-content"
                   >
-                    Researcher
-                  </p>
+                    <p
+                      class="Text-e4p0w3-0 eAccFX"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Researcher
+                    </p>
+                  </div>
                 </div>
                 <div
                   class="Box-sc-1vhutan-0 jIytus"
                   width="25"
                 />
                 <div
-                  class="Box-sc-1vhutan-0 dDbVys"
-                  cursor="pointer"
-                  display="inline-flex"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 10px;"
                 >
-                  <img
-                    class="Img-sc-55j3su-0 gyShgd"
-                    src="IMAGE_MOCK"
-                  />
-                  <span>
-                    Show inactive accounts
-                  </span>
+                  <div
+                    class="Box-sc-1vhutan-0 dDbVys"
+                    cursor="pointer"
+                    display="inline-flex"
+                  >
+                    <img
+                      class="Img-sc-55j3su-0 gyShgd"
+                      src="IMAGE_MOCK"
+                    />
+                    <span>
+                      Show inactive accounts
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
+            <div
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+            >
+              <div
+                class="styled__SearchInputStyled-sc-10udg63-3 bhbdBU"
+              >
+                <input
+                  class="Input-t9j2q5-0 hjYQaq"
+                  type="text"
+                  value=""
+                />
+                <img
+                  alt="search"
+                  class="styled__SearchIcon-sc-10udg63-4 VQGbD"
+                  src="IMAGE_MOCK"
+                />
+                
+              </div>
+            </div>
           </div>
-          <div
-            class="styled__SearchInputStyled-sc-10udg63-3 bhbdBU"
-          >
-            <input
-              class="Input-t9j2q5-0 hjYQaq"
-              type="text"
-              value=""
-            />
-            <img
-              alt="search"
-              class="styled__SearchIcon-sc-10udg63-4 VQGbD"
-              src="IMAGE_MOCK"
-            />
-            
-          </div>
+          <span
+            style="display: table; clear: both;"
+          />
         </div>
         <div
           class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
@@ -209,9 +223,9 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 dybmVO"
+                    class="Box-sc-1vhutan-0 dJkvAm"
                     display="inline-flex"
-                    width="120px"
+                    width="max-content"
                   >
                     <p
                       class="Text-e4p0w3-0 eAccFX"
@@ -268,9 +282,9 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 JvFTr"
+                    class="Box-sc-1vhutan-0 kwpOiv"
                     display="inline-flex"
-                    width="120px"
+                    width="max-content"
                   >
                     <p
                       class="Text-e4p0w3-0 eAccFX"
@@ -327,9 +341,9 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 gNlqdr"
+                    class="Box-sc-1vhutan-0 fngfaT"
                     display="inline-flex"
-                    width="120px"
+                    width="max-content"
                   >
                     <p
                       class="Text-e4p0w3-0 eAccFX"
@@ -421,85 +435,99 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
       </div>
       <div>
         <div
-          class="Box-sc-1vhutan-0 cIA-dSO"
-          display="flex"
+          style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; margin-bottom: 40px; padding: 0px;"
         >
           <div
-            class="Box-sc-1vhutan-0 jZbfgr"
-            display="flex"
+            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
           >
             <div
-              class="Box-sc-1vhutan-0 ergsuV"
-              display="inline-block"
-              width="100%"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="Box-sc-1vhutan-0 jZbfgr"
-                display="flex"
+                style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
               >
                 <div
-                  class="Box-sc-1vhutan-0 kupsdJ"
-                  display="inline-flex"
-                  width="120px"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
-                  <p
-                    class="Text-e4p0w3-0 eAccFX"
-                    color="#FFFFFF"
-                    font-size="14"
-                    font-weight="bold"
+                  <div
+                    class="Box-sc-1vhutan-0 kmUFrR"
+                    display="inline-flex"
+                    width="max-content"
                   >
-                    Participant
-                  </p>
+                    <p
+                      class="Text-e4p0w3-0 eAccFX"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Participant
+                    </p>
+                  </div>
                 </div>
                 <div
-                  class="Box-sc-1vhutan-0 hUxqTk"
-                  display="inline-flex"
-                  width="120px"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
-                  <p
-                    class="Text-e4p0w3-0 eAccFX"
-                    color="#FFFFFF"
-                    font-size="14"
-                    font-weight="bold"
+                  <div
+                    class="Box-sc-1vhutan-0 fSsxQg"
+                    display="inline-flex"
+                    width="max-content"
                   >
-                    Researcher
-                  </p>
+                    <p
+                      class="Text-e4p0w3-0 eAccFX"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Researcher
+                    </p>
+                  </div>
                 </div>
                 <div
                   class="Box-sc-1vhutan-0 jIytus"
                   width="25"
                 />
                 <div
-                  class="Box-sc-1vhutan-0 dDbVys"
-                  cursor="pointer"
-                  display="inline-flex"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 10px;"
                 >
-                  <img
-                    class="Img-sc-55j3su-0 gyShgd"
-                    src="IMAGE_MOCK"
-                  />
-                  <span>
-                    Show inactive accounts
-                  </span>
+                  <div
+                    class="Box-sc-1vhutan-0 dDbVys"
+                    cursor="pointer"
+                    display="inline-flex"
+                  >
+                    <img
+                      class="Img-sc-55j3su-0 gyShgd"
+                      src="IMAGE_MOCK"
+                    />
+                    <span>
+                      Show inactive accounts
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
+            <div
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+            >
+              <div
+                class="styled__SearchInputStyled-sc-10udg63-3 bhbdBU"
+              >
+                <input
+                  class="Input-t9j2q5-0 hjYQaq"
+                  type="text"
+                  value=""
+                />
+                <img
+                  alt="search"
+                  class="styled__SearchIcon-sc-10udg63-4 VQGbD"
+                  src="IMAGE_MOCK"
+                />
+                
+              </div>
+            </div>
           </div>
-          <div
-            class="styled__SearchInputStyled-sc-10udg63-3 bhbdBU"
-          >
-            <input
-              class="Input-t9j2q5-0 hjYQaq"
-              type="text"
-              value=""
-            />
-            <img
-              alt="search"
-              class="styled__SearchIcon-sc-10udg63-4 VQGbD"
-              src="IMAGE_MOCK"
-            />
-            
-          </div>
+          <span
+            style="display: table; clear: both;"
+          />
         </div>
         <div
           class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
@@ -595,9 +623,9 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 dybmVO"
+                    class="Box-sc-1vhutan-0 dJkvAm"
                     display="inline-flex"
-                    width="120px"
+                    width="max-content"
                   >
                     <p
                       class="Text-e4p0w3-0 eAccFX"
@@ -654,9 +682,9 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 JvFTr"
+                    class="Box-sc-1vhutan-0 kwpOiv"
                     display="inline-flex"
-                    width="120px"
+                    width="max-content"
                   >
                     <p
                       class="Text-e4p0w3-0 eAccFX"
@@ -713,9 +741,9 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 gNlqdr"
+                    class="Box-sc-1vhutan-0 fngfaT"
                     display="inline-flex"
-                    width="120px"
+                    width="max-content"
                   >
                     <p
                       class="Text-e4p0w3-0 eAccFX"
