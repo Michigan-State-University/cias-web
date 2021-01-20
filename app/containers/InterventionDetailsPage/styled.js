@@ -20,8 +20,11 @@ export const StatusLabel = styled.div`
   padding: 7px 10px;
   border-radius: 5px;
   background: ${props => statusTypeToColorMap[props.status]};
-  display: inline-block;
+  display: flex;
   margin-left: 5px;
+  min-width: 70px;
+  justify-content: center;
+  align-content: center;
 `;
 
 export const DraggedTest = styled.div`

@@ -92,7 +92,7 @@ function SessionListItem({
                   <H2 ml={15}>{name}</H2>
                 </StyledLink>
               </StyledRow>
-              <Row width="30%" xs={1} align="center" justify="around">
+              <Row width="40%" xs={1} align="center" justify="around">
                 <Tooltip
                   id={`tooltip-${id}`}
                   visible={!sharingPossible}

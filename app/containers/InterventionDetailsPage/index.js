@@ -13,6 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import get from 'lodash/get';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import orderBy from 'lodash/orderBy';
+import { Col as GCol, Row as GRow, useScreenClass } from 'react-grid-system';
 
 import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
@@ -25,6 +26,7 @@ import ShareBox from 'containers/ShareBox';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import Spinner from 'components/Spinner';
+import AppContainer from 'components/Container';
 import {
   fetchInterventionRequest,
   makeSelectInterventionState,
@@ -109,6 +111,8 @@ export function InterventionDetailsPage({
     saga: interventionOptionsSaga,
   });
   useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
+
+  const screenClass = useScreenClass();
 
   const { sessions, name, id, status } = intervention || {};
 
@@ -268,7 +272,7 @@ export function InterventionDetailsPage({
     return <ErrorAlert errorText={fetchInterventionError} fullPage />;
 
   return (
-    <Box height="100%" width="100%" padding="60px 160px">
+    <AppContainer>
       <Helmet>
         <title>{name}</title>
       </Helmet>
@@ -300,45 +304,62 @@ export function InterventionDetailsPage({
       >
         <ShareBox />
       </Modal>
+      <GRow>
+        <GCol>
+          <Row justify="between" mt={50}>
+            <BackButton to="/">
+              <FormattedMessage {...messages.back} />
+            </BackButton>
+          </Row>
+        </GCol>
+      </GRow>
 
-      <Row justify="between">
-        <BackButton to="/">
-          <FormattedMessage {...messages.back} />
-        </BackButton>
-      </Row>
-      <Row my={18} justify="between">
-        <Row align="center">
-          <Box mr={15}>
-            <StatusLabel status={status}>
-              {status && formatMessage(globalMessages.statuses[status])}
-            </StatusLabel>
-          </Box>
-          <StyledInput
-            disabled={!editingPossible}
-            ml={-12}
-            px={12}
-            py={6}
-            width="400px"
-            value={name}
-            fontSize={23}
-            placeholder={formatMessage(messages.placeholder)}
-            onBlur={editName}
-            maxWidth="none"
-          />
-        </Row>
-        <Row>
-          <InterventionStatusButtons
-            status={status}
-            handleChangeStatus={handleChangeStatus}
-            handleSendCsv={handleSendCsv}
-          />
-          <InterventionOptions>
-            <Dropdown options={options} clickable />
-          </InterventionOptions>
-        </Row>
-      </Row>
-      <Row>
-        <Column sm={6}>
+      <GRow>
+        <GCol md={6} sm={12}>
+          <Row justify="end" align="center" mt={18}>
+            <Box mr={15}>
+              <StatusLabel status={status}>
+                {status && formatMessage(globalMessages.statuses[status])}
+              </StatusLabel>
+            </Box>
+            <StyledInput
+              disabled={!editingPossible}
+              ml={-12}
+              px={12}
+              py={6}
+              width="100%"
+              value={name}
+              fontSize={23}
+              placeholder={formatMessage(messages.placeholder)}
+              onBlur={editName}
+              maxWidth="none"
+            />
+          </Row>
+        </GCol>
+        <GCol>
+          <Row
+            justify={screenClass === 'sm' ? 'start' : 'end'}
+            align="center"
+            mt={18}
+          >
+            <InterventionStatusButtons
+              status={status}
+              handleChangeStatus={handleChangeStatus}
+              handleSendCsv={handleSendCsv}
+            />
+            <InterventionOptions>
+              <Dropdown options={options} clickable />
+            </InterventionOptions>
+          </Row>
+        </GCol>
+      </GRow>
+
+      <GRow>
+        <GCol
+          md={6}
+          sm={12}
+          style={{ order: ['sm', 'xs'].includes(screenClass) ? 1 : 0 }}
+        >
           {renderList()}
           {createSessionLoading && (
             <Row my={18} align="center">
@@ -350,16 +371,15 @@ export function InterventionDetailsPage({
               <SessionCreateButton handleClick={createSessionCall} />
             </Row>
           )}
-        </Column>
-        {createSessionError && <ErrorAlert errorText={createSessionError} />}
-        <Column ml={38} sm={6} mt={18}>
-          <Column position="sticky" top="100px">
+          {createSessionError && <ErrorAlert errorText={createSessionError} />}
+        </GCol>
+        <GCol>
+          <Column position="sticky" top="100px" mt={18}>
             <SettingsPanel intervention={intervention} />
           </Column>
-          <div />
-        </Column>
-      </Row>
-    </Box>
+        </GCol>
+      </GRow>
+    </AppContainer>
   );
 }
 
