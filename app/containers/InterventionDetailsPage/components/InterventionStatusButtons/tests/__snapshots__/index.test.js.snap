@@ -19,6 +19,12 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
   font-weight: bold;
 }
 
+.c1 a {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
 <button
   class="c0 c1"
   color="primary"
@@ -59,13 +65,19 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
   color: white;
 }
 
+.c1 a {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
 <button
   class="c0 c1"
   color="primary"
   width="200"
 >
   <span>
-    Get CSV with results
+    Generate CSV
   </span>
 </button>
 `;
@@ -98,13 +110,19 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
   color: white;
 }
 
+.c1 a {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
 <button
   class="c0 c1"
   color="primary"
   width="200"
 >
   <span>
-    Get CSV with results
+    Generate CSV
   </span>
 </button>
 `;

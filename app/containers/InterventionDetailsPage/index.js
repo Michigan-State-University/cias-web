@@ -14,6 +14,7 @@ import get from 'lodash/get';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import orderBy from 'lodash/orderBy';
 import { Col as GCol, Row as GRow, useScreenClass } from 'react-grid-system';
+import dayjs from 'dayjs';
 
 import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
@@ -114,7 +115,14 @@ export function InterventionDetailsPage({
 
   const screenClass = useScreenClass();
 
-  const { sessions, name, id, status } = intervention || {};
+  const {
+    sessions,
+    name,
+    id,
+    status,
+    csv_link: csvLink,
+    csv_generated_at: csvGeneratedAt,
+  } = intervention || {};
 
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
@@ -337,20 +345,35 @@ export function InterventionDetailsPage({
           </Row>
         </GCol>
         <GCol>
-          <Row
-            justify={screenClass === 'sm' ? 'start' : 'end'}
-            align="center"
-            mt={18}
-          >
-            <InterventionStatusButtons
-              status={status}
-              handleChangeStatus={handleChangeStatus}
-              handleSendCsv={handleSendCsv}
-            />
-            <InterventionOptions>
-              <Dropdown options={options} clickable />
-            </InterventionOptions>
-          </Row>
+          <GRow justify="between" align="center">
+            {csvGeneratedAt && (
+              <GCol md={4} style={{ marginTop: 18 }}>
+                <H3>
+                  {`${formatMessage(messages.lastCsvDate)}${dayjs(
+                    csvGeneratedAt,
+                  ).format('YYYY/MM/DD HH:mm')}`}
+                </H3>
+              </GCol>
+            )}
+            <GCol md={7} style={{ marginTop: 18 }}>
+              <Row justify="start">
+                <InterventionStatusButtons
+                  status={status}
+                  handleChangeStatus={handleChangeStatus}
+                  handleSendCsv={handleSendCsv}
+                  csvLink={csvLink}
+                  csvGeneratedAt={csvGeneratedAt}
+                />
+              </Row>
+            </GCol>
+            <GCol md={1} style={{ marginTop: 18 }}>
+              <Row justify="end">
+                <InterventionOptions>
+                  <Dropdown options={options} clickable />
+                </InterventionOptions>
+              </Row>
+            </GCol>
+          </GRow>
         </GCol>
       </GRow>
 

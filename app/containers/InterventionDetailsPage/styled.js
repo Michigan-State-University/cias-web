@@ -3,7 +3,6 @@ import { colors, boxShadows } from 'theme';
 import { statusTypeToColorMap } from 'models/Status/StatusTypes';
 
 export const InterventionOptions = styled.div`
-  margin-left: 25px;
   display: flex;
   flex-direction: column;
   width: 44px;

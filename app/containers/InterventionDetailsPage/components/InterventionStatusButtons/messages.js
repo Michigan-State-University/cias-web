@@ -19,7 +19,15 @@ export default defineMessages({
   },
   csv: {
     id: `${scope}.csv`,
-    defaultMessage: 'Get CSV with results',
+    defaultMessage: 'Generate CSV',
+  },
+  csvNew: {
+    id: `${scope}.csvNew`,
+    defaultMessage: 'Generate new CSV',
+  },
+  csvDownload: {
+    id: `${scope}.csvDownload`,
+    defaultMessage: 'Download CSV',
   },
   confirmationTile: {
     id: `${scope}.confirmationTile`,

@@ -16,4 +16,9 @@ export const ShareButton = styled(Button)`
     color: white;
     }
   `}
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;

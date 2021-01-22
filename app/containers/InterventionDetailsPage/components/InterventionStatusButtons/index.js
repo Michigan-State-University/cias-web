@@ -3,7 +3,7 @@
  * InterventionStatusButtons
  *
  */
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
@@ -17,6 +17,7 @@ import Divider from 'components/Divider';
 import Row from 'components/Row';
 import Text from 'components/Text';
 
+import getUrlProtocol from 'utils/getApiProtocol';
 import messages from './messages';
 import { ShareButton } from './styled';
 
@@ -25,10 +26,27 @@ function InterventionStatusButtons({
   status,
   handleChangeStatus,
   handleSendCsv,
+  csvLink,
 }) {
+  const apiProtocol = useMemo(
+    () => (process.env.API_URL ? getUrlProtocol(process.env.API_URL) : ''),
+    [process.env.API_URL],
+  );
+
   const CsvButton = () => (
     <ShareButton mr={10} width={200} outlined onClick={handleSendCsv}>
-      <FormattedMessage {...messages.csv} />
+      <FormattedMessage {...(csvLink ? messages.csvNew : messages.csv)} />
+    </ShareButton>
+  );
+
+  const urlToDownload = /^((http:\/\/)|(https:\/\/)).*$/.test(csvLink)
+    ? csvLink
+    : `${apiProtocol}${csvLink}`;
+  const CsvDownload = () => (
+    <ShareButton mr={10} width={200} outlined>
+      <a href={urlToDownload} download>
+        <FormattedMessage {...messages.csvDownload} />
+      </a>
     </ShareButton>
   );
 
@@ -107,11 +125,17 @@ function InterventionStatusButtons({
     draft: <PublishButton />,
     published: (
       <>
+        {csvLink && <CsvDownload />}
         <CsvButton />
         <CloseButton />
       </>
     ),
-    closed: <CsvButton />,
+    closed: (
+      <>
+        {csvLink && <CsvDownload />}
+        <CsvButton />
+      </>
+    ),
   };
 
   const renderButtons = () => get(statuses, status, <></>);
@@ -124,6 +148,7 @@ InterventionStatusButtons.propTypes = {
   status: PropTypes.string,
   handleChangeStatus: PropTypes.func,
   handleSendCsv: PropTypes.func,
+  csvLink: PropTypes.string,
 };
 
 export default injectIntl(InterventionStatusButtons);

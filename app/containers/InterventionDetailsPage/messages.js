@@ -73,4 +73,8 @@ export default defineMessages({
     id: `${scope}.invited`,
     defaultMessage: 'Only selected registered participants can access sessions',
   },
+  lastCsvDate: {
+    id: `${scope}.lastCsvDate`,
+    defaultMessage: 'CSV last generated at: ',
+  },
 });
