@@ -42,6 +42,10 @@ function SessionSchedule({
   disabled,
 }) {
   const scheduleOptions = {
+    afterFill: {
+      id: SCHEDULE_OPTIONS.afterFill,
+      label: formatMessage(messages.afterFill),
+    },
     daysAfter: {
       id: SCHEDULE_OPTIONS.daysAfter,
       label: formatMessage(messages.daysAfter),
@@ -88,6 +92,8 @@ function SessionSchedule({
             setValue={handleChangeDate}
           />
         );
+      case scheduleOptions.afterFill.id:
+        return <></>;
       default:
         break;
     }

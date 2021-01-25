@@ -32,12 +32,19 @@ export const fetchQuestionsFailure = error =>
 
 export const selectAnswer = payload => actionBuilder(SELECT_ANSWER, payload);
 
-export const submitAnswer = (answerId, nextQuestionIndex, required, type) =>
+export const submitAnswer = (
+  answerId,
+  nextQuestionIndex,
+  required,
+  type,
+  sessionId,
+) =>
   actionBuilder(SUBMIT_ANSWER_REQUEST, {
     answerId,
     nextQuestionIndex,
     required,
     type,
+    sessionId,
   });
 
 export const submitAnswerSuccess = answerId =>

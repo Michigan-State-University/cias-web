@@ -29,6 +29,10 @@ export default defineMessages({
     id: `${scope}.exactDate`,
     defaultMessage: 'Send on exact date',
   },
+  afterFill: {
+    id: `${scope}.afterFill`,
+    defaultMessage: 'Send immediately after previous session completion',
+  },
   daysAfterInfo: {
     id: `${scope}.daysAfterInfo`,
     defaultMessage: 'days after previous session scheduled date.',

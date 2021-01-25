@@ -2,6 +2,7 @@ export const SCHEDULE_OPTIONS = {
   daysAfter: 'days_after',
   daysAfterFill: 'days_after_fill',
   exactDate: 'exact_date',
+  afterFill: 'after_fill',
 };
 
 export const UPDATE_FORMULA = 'app/Dashboard/SessionSettings/UPDATE_FORMULA';

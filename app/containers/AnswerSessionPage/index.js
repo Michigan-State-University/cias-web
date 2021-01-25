@@ -38,6 +38,7 @@ import {
   interventionReducer,
 } from 'global/reducers/intervention';
 import { canPreview } from 'models/Status/statusPermissions';
+import { finishQuestion } from 'models/Session/QuestionTypes';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,
@@ -195,6 +196,7 @@ export function AnswerSessionPage({
       nextQuestionIndex,
       get(currentQuestion, 'settings.required', false),
       get(currentQuestion, 'type', ''),
+      sessionId,
     );
 
   const renderQuestion = () => {
@@ -227,8 +229,7 @@ export function AnswerSessionPage({
       setFeedbackSettings,
     };
 
-    const isLastScreen = questionIndex === sessionQuestions.length - 1;
-    const isBeforeLastScreen = questionIndex === sessionQuestions.length - 2;
+    const isLastScreen = currentQuestion.type === finishQuestion.id;
 
     return (
       <Row justify="center" width="100%">
@@ -250,12 +251,7 @@ export function AnswerSessionPage({
                   onClick={() => {
                     saveAnswer(questionIndex + 1);
                   }}
-                  title={formatMessage(
-                    // show finish button before Finish Screen
-                    isBeforeLastScreen
-                      ? messages.submitAnswer
-                      : messages.nextQuestion,
-                  )}
+                  title={formatMessage(messages.nextQuestion)}
                 />
               </Row>
             )}

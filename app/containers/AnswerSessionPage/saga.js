@@ -52,7 +52,13 @@ function* fetchQuestionsAsync({ payload: { sessionId } }) {
 }
 
 function* submitAnswersAsync({
-  payload: { answerId, nextQuestionIndex, required, type: questionType },
+  payload: {
+    answerId,
+    nextQuestionIndex,
+    required,
+    type: questionType,
+    sessionId,
+  },
 }) {
   const answers = yield select(makeSelectAnswers());
   const { answerBody } = answers[answerId];
@@ -70,10 +76,16 @@ function* submitAnswersAsync({
     if (!NotAnswerableQuestions.includes(questionType)) {
       const type = questionType.replace('Question', 'Answer');
       const {
-        data: { data: branchingResult },
+        data: {
+          data: { id },
+        },
       } = yield axios.post(`/v1/questions/${answerId}/answers`, {
         answer: { type, body: { data } },
       });
+
+      const {
+        data: { data: branchingResult },
+      } = yield axios.get(`/v1/sessions/${sessionId}/flows?answer_id=${id}`);
 
       if (branchingResult) {
         switch (branchingResult.type) {
@@ -87,10 +99,10 @@ function* submitAnswersAsync({
             return;
 
           case 'session':
-            const { id: sessionId } = branchingResult;
+            const { id: branchingResultId } = branchingResult;
             const { pathname } = yield select(makeSelectLocation());
 
-            const newPath = calculatePath(pathname, sessionId);
+            const newPath = calculatePath(pathname, branchingResultId);
 
             yield put(push(newPath));
             window.location.reload();
