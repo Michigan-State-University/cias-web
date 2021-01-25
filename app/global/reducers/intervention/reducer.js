@@ -47,6 +47,9 @@ import {
   FETCH_SESSION_EMAILS_REQUEST,
   FETCH_SESSION_EMAILS_SUCCESS,
   FETCH_SESSION_EMAILS_ERROR,
+  DELETE_SESSION_REQUEST,
+  DELETE_SESSION_SUCCESS,
+  DELETE_SESSION_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -231,6 +234,7 @@ export const interventionReducer = (state = initialState, action) =>
           ...state.intervention.sessions,
           action.payload.session,
         ];
+        draft.cache.intervention.sessions = draft.intervention.sessions;
         draft.loaders.createSessionLoading = false;
         break;
       case CREATE_SESSION_ERROR:
@@ -295,6 +299,20 @@ export const interventionReducer = (state = initialState, action) =>
         draft.loaders.sessionEmailLoading = {
           ...action.payload,
         };
+        break;
+
+      case DELETE_SESSION_REQUEST:
+        draft.intervention.sessions = state.intervention.sessions.filter(
+          ({ id }) => id !== action.payload.sessionId,
+        );
+        break;
+
+      case DELETE_SESSION_SUCCESS:
+        draft.cache.intervention.sessions = state.intervention.sessions;
+        break;
+
+      case DELETE_SESSION_ERROR:
+        draft.intervention.sessions = state.cache.intervention.sessions;
         break;
     }
   });

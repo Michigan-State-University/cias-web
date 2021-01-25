@@ -16,6 +16,7 @@ import orderBy from 'lodash/orderBy';
 import { Col as GCol, Row as GRow, useScreenClass } from 'react-grid-system';
 import dayjs from 'dayjs';
 
+import ConfirmationBox from 'components/ConfirmationBox';
 import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
 import Column from 'components/Column';
@@ -40,6 +41,7 @@ import {
   makeSelectCurrentSessionIndex,
   changeCurrentSession,
   fetchSessionEmailsRequest,
+  deleteSessionRequest,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 
@@ -64,6 +66,7 @@ import SettingsPanel from 'containers/SettingsPanel';
 import H3 from 'components/H3';
 import {
   canArchive,
+  canDeleteSession,
   canEdit,
   canShareWithParticipants,
 } from 'models/Status/statusPermissions';
@@ -101,7 +104,12 @@ export function InterventionDetailsPage({
   copyIntervention,
   fetchQuestions,
   fetchSessionEmails,
+  deleteSession,
 }) {
+  const [
+    deleteConfirmationSessionId,
+    setDeleteConfirmationSessionId,
+  ] = useState(null);
   useInjectReducer({
     key: 'intervention',
     reducer: interventionReducer,
@@ -127,6 +135,7 @@ export function InterventionDetailsPage({
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
   const archivingPossible = canArchive(status);
+  const deletionPossible = canDeleteSession(status);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [
@@ -142,6 +151,10 @@ export function InterventionDetailsPage({
       path: 'status_event',
       value: 'to_archive',
     });
+  const handleDeleteSession = sessionId => {
+    deleteSession(sessionId, id);
+    setDeleteConfirmationSessionId(null);
+  };
 
   const options = [
     {
@@ -253,11 +266,15 @@ export function InterventionDetailsPage({
                       <SessionListItem
                         disabled={!editingPossible}
                         sharingPossible={sharingPossible}
+                        deletionPossible={deletionPossible}
                         session={session}
                         index={index}
                         isSelected={index === sessionIndex}
                         handleClick={handleClick}
                         handleCopySession={handleCopySession}
+                        handleDeleteSession={sessionId =>
+                          setDeleteConfirmationSessionId(sessionId)
+                        }
                         nextSessionName={
                           nextIntervention ? nextIntervention.name : null
                         }
@@ -284,6 +301,13 @@ export function InterventionDetailsPage({
       <Helmet>
         <title>{name}</title>
       </Helmet>
+      <ConfirmationBox
+        visible={!isNullOrUndefined(deleteConfirmationSessionId)}
+        onClose={() => setDeleteConfirmationSessionId(null)}
+        description={formatMessage(messages.sessionDeleteHeader)}
+        content={formatMessage(messages.sessionDeleteMessage)}
+        confirmAction={() => handleDeleteSession(deleteConfirmationSessionId)}
+      />
       <Modal
         title={
           <H3
@@ -434,6 +458,7 @@ InterventionDetailsPage.propTypes = {
   copyIntervention: PropTypes.func,
   fetchQuestions: PropTypes.func,
   fetchSessionEmails: PropTypes.func,
+  deleteSession: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -452,6 +477,7 @@ const mapDispatchToProps = {
   copySession: copySessionRequest,
   reorderSessions: reorderSessionList,
   copyIntervention: copyInterventionRequest,
+  deleteSession: deleteSessionRequest,
 };
 
 const withConnect = connect(

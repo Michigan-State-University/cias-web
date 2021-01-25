@@ -50,7 +50,7 @@ import { initialState, interventionReducer } from '../reducer';
 describe('intervention reducer', () => {
   const mockState = {
     ...initialState,
-    intervention: createIntervention(),
+    intervention: createIntervention(2),
     cache: { intervention: createIntervention(2) },
   };
 
@@ -397,6 +397,10 @@ describe('intervention reducer', () => {
     expectedState.loaders.createSessionLoading = false;
     expectedState.intervention.sessions = [
       ...expectedState.intervention.sessions,
+      payloadIntervention.session,
+    ];
+    expectedState.cache.intervention.sessions = [
+      ...expectedState.cache.intervention.sessions,
       payloadIntervention.session,
     ];
 

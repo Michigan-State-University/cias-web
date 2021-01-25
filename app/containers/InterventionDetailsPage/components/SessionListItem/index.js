@@ -18,6 +18,7 @@ import Tooltip from 'components/Tooltip';
 import H2 from 'components/H2';
 
 import copy from 'assets/svg/copy.svg';
+import bin from 'assets/svg/bin-no-bg.svg';
 import mail from 'assets/svg/pink-mail.svg';
 import mailDisabled from 'assets/svg/pink-mail-disabled.svg';
 import { colors, themeColors } from 'theme';
@@ -40,6 +41,8 @@ function SessionListItem({
   disabled,
   sharingPossible,
   status,
+  deletionPossible,
+  handleDeleteSession,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const {
@@ -60,6 +63,15 @@ function SessionListItem({
       icon: copy,
       action: () => handleCopySession(id),
       color: colors.bluewood,
+      disabled,
+    },
+    {
+      id: 'delete',
+      label: formatMessage(messages.delete),
+      icon: bin,
+      action: () => handleDeleteSession(id),
+      color: colors.bluewood,
+      disabled: !deletionPossible,
     },
   ];
 
@@ -122,12 +134,7 @@ function SessionListItem({
                   </Row>
                 </Tooltip>
                 <Box mb={8}>
-                  <Dropdown
-                    disabled={disabled}
-                    options={options}
-                    clickable
-                    id={id}
-                  />
+                  <Dropdown options={options} clickable id={id} />
                 </Box>
               </Row>
             </Row>
@@ -169,6 +176,8 @@ SessionListItem.propTypes = {
   handleCopySession: PropTypes.func,
   disabled: PropTypes.bool,
   sharingPossible: PropTypes.bool,
+  deletionPossible: PropTypes.bool,
+  handleDeleteSession: PropTypes.func,
   status: PropTypes.string,
 };
 

@@ -14,6 +14,8 @@ const ALLOWED_ADDING_PARTICIPANTS_TO_INTERVENTION = [draft, published];
 
 const ALLOWED_REMOVING_PARTICIPANTS_FROM_INTERVENTION = [draft, published];
 
+const ALLOWED_SESSION_DELETE = [draft];
+
 export const canEdit = interventionStatus =>
   ALLOWED_EDIT.includes(interventionStatus);
 
@@ -34,3 +36,6 @@ export const canAddParticipantsToIntervention = interventionStatus =>
 
 export const canRemoveParticipantsFromIntervention = interventionStatus =>
   ALLOWED_REMOVING_PARTICIPANTS_FROM_INTERVENTION.includes(interventionStatus);
+
+export const canDeleteSession = interventionStatus =>
+  ALLOWED_SESSION_DELETE.includes(interventionStatus);

@@ -13,6 +13,10 @@ export default defineMessages({
     id: `${scope}.duplicate`,
     defaultMessage: 'Duplicate session',
   },
+  delete: {
+    id: `${scope}.delete`,
+    defaultMessage: 'Delete session',
+  },
   inviteLabel: {
     id: `${scope}.inviteLabel`,
     defaultMessage: 'Invite Participants',

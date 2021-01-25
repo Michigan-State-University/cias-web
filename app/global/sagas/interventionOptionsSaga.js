@@ -1,4 +1,7 @@
-import { sendInterventionCsvSaga } from 'global/reducers/intervention';
+import {
+  sendInterventionCsvSaga,
+  deleteSessionSaga,
+} from 'global/reducers/intervention';
 import {
   archiveInterventionSaga,
   copyInterventionSaga,
@@ -10,5 +13,6 @@ export function* interventionOptionsSaga() {
     sendInterventionCsvSaga(),
     copyInterventionSaga(),
     archiveInterventionSaga(),
+    deleteSessionSaga(),
   ]);
 }

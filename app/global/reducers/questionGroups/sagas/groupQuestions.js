@@ -11,7 +11,7 @@ import {
   makeSelectQuestions,
   makeSelectSelectedQuestionId,
 } from 'global/reducers/questions/selectors';
-import { DefaultGroupType, PlainGroupType } from 'models/Session/GroupTypes';
+import { PlainGroupType } from 'models/Session/GroupTypes';
 
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
 import { setAnimationStopPosition } from 'global/reducers/localState';
@@ -34,25 +34,21 @@ function* groupQuestions({ payload: { questionIds, sessionId } }) {
     groups,
     ({ type }) => type === PlainGroupType,
   );
-  const defaultGroup = findLast(
-    groups,
-    ({ type }) => type === DefaultGroupType,
-  );
 
   const newGroupPosition = isNullOrUndefined(lastPlainGroup)
-    ? defaultGroup.position + 1
+    ? 1
     : lastPlainGroup.position + 1;
 
   try {
     const { data: group } = yield axios.post(requestURL, {
       question_group: {
         title: `Group ${newGroupPosition}`,
-        questions: questionIds,
+        question_ids: questionIds,
         type: PlainGroupType,
       },
     });
 
-    const groupWithoutQuestions = omit(group, 'questions');
+    const groupWithoutQuestions = omit(group, 'question_ids');
     yield put(groupQuestionsSuccess(groupWithoutQuestions, questionIds));
 
     const questions = yield select(makeSelectQuestions());

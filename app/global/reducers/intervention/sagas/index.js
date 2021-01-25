@@ -14,6 +14,7 @@ import changeAccessSettingSaga from './changeAccessSetting';
 import giveUserAccessSaga from './giveUserAccess';
 import fetchUsersWithAccessSaga from './fetchUsersWithAccess';
 import revokeUserAccessSaga from './revokeUserAccess';
+import deleteSessionSaga from './deleteSession';
 
 export {
   createInterventionSaga,
@@ -31,6 +32,7 @@ export {
   sendSessionInviteSaga,
   fetchSessionEmailsSaga,
   resendSessionInviteSaga,
+  deleteSessionSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -51,5 +53,6 @@ export default function* allInterventionSagas() {
     fetchUsersWithAccessSaga(),
     fetchSessionEmailsSaga(),
     resendSessionInviteSaga(),
+    deleteSessionSaga(),
   ]);
 }

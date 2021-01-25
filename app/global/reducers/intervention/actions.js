@@ -43,6 +43,9 @@ import {
   UPDATE_SESSION_SETTINGS_REQUEST,
   UPDATE_SESSION_SETTINGS_SUCCESS,
   UPDATE_SESSION_SETTINGS_ERROR,
+  DELETE_SESSION_REQUEST,
+  DELETE_SESSION_SUCCESS,
+  DELETE_SESSION_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = id =>
@@ -146,3 +149,10 @@ export const fetchSessionEmailsSuccess = (emails, index) =>
   actionBuilder(FETCH_SESSION_EMAILS_SUCCESS, { emails, index });
 export const fetchSessionEmailsError = error =>
   actionBuilder(FETCH_SESSION_EMAILS_ERROR, { error });
+
+export const deleteSessionRequest = (sessionId, interventionId) =>
+  actionBuilder(DELETE_SESSION_REQUEST, { sessionId, interventionId });
+export const deleteSessionSuccess = () =>
+  actionBuilder(DELETE_SESSION_SUCCESS, {});
+export const deleteSessionError = error =>
+  actionBuilder(DELETE_SESSION_ERROR, { error });

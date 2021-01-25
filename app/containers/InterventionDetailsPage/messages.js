@@ -77,4 +77,13 @@ export default defineMessages({
     id: `${scope}.lastCsvDate`,
     defaultMessage: 'CSV last generated at: ',
   },
+  sessionDeleteHeader: {
+    id: `${scope}.sessionDeleteHeader`,
+    defaultMessage: 'Delete Session',
+  },
+  sessionDeleteMessage: {
+    id: `${scope}.sessionDeleteMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this session? It will no longer be possible to recover it later.',
+  },
 });

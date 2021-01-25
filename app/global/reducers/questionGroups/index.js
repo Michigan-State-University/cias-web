@@ -12,7 +12,6 @@ export {
 export { questionGroupsReducer } from './reducer';
 export {
   makeSelectQuestionGroups,
-  makeSelectDefaultGroupId,
   makeSelectQuestionGroupsLoader,
   makeSelectGetQuestionGroupLoader,
   makeSelectQuestionGroupsIds,
