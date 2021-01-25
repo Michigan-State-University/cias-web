@@ -51,14 +51,39 @@ function InterventionStatusButtons({
   );
 
   const CloseButton = () => (
-    <ShareButton
-      width={200}
-      bg={colors.burntSienna}
-      onClick={handleChangeStatus}
-    >
-      <FormattedMessage {...messages.close} />
-    </ShareButton>
+    <>
+      <ConfirmationBox
+        visible={closeConfirmationOpen}
+        onClose={closeCloseConfirmation}
+        description={<FormattedMessage {...messages.closeConfirmationHeader} />}
+        confirmAction={handleClose}
+        confirmationButtonColor="primary"
+        content={closeConfirmationDesc()}
+        contentStyles={{
+          padding: '0px',
+        }}
+        contentContainerStyles={{
+          px: 20,
+          my: 20,
+        }}
+      />
+      <ShareButton
+        width={200}
+        bg={colors.burntSienna}
+        onClick={openCloseConfirmation}
+      >
+        <FormattedMessage {...messages.close} />
+      </ShareButton>
+    </>
   );
+
+  const [closeConfirmationOpen, setCloseConfirmationOpen] = useState(false);
+  const openCloseConfirmation = () => setCloseConfirmationOpen(true);
+  const closeCloseConfirmation = () => setCloseConfirmationOpen(false);
+  const handleClose = () => {
+    handleChangeStatus();
+    closeCloseConfirmation();
+  };
 
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const openConfirmation = () => setConfirmationOpen(true);
@@ -89,6 +114,19 @@ function InterventionStatusButtons({
             <LI>{formatMessage(messages.dataDeletedInfo)}</LI>
             <LI>{formatMessage(messages.editInfo)}</LI>
           </UL>
+        </Column>
+      </Row>
+    </>
+  );
+
+  const closeConfirmationDesc = () => (
+    <>
+      <Text mt={10} fontSize={18} color={colors.flamingo} textAlign="center">
+        {formatMessage(messages.irreversibleInfo)}
+      </Text>
+      <Row justify="center" mt={10}>
+        <Column ml={18} mr={5}>
+          <FormattedMessage {...messages.closeConfirmationMessage} />
         </Column>
       </Row>
     </>

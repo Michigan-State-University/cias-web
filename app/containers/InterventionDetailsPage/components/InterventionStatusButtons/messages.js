@@ -59,4 +59,13 @@ export default defineMessages({
     defaultMessage:
       'You can duplicate the intervention as a draft (e.g. if you need to edit content) ',
   },
+  closeConfirmationHeader: {
+    id: `${scope}.closeConfirmationHeader`,
+    defaultMessage: 'Close Session',
+  },
+  closeConfirmationMessage: {
+    id: `${scope}.closeConfirmationMessage`,
+    defaultMessage:
+      "Are you sure you want to close the intervention? It will no longer be possible to gather Participant's data.",
+  },
 });
