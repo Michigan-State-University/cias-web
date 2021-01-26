@@ -15,19 +15,21 @@ const QuestionListItem = ({
   onClick,
   target,
   index,
-  selectedQuestionId,
-  question: { id, subtitle, type },
+  selectedQuestion,
+  question: { id, subtitle, type, position, question_group_id: groupId },
 }) => {
-  const canSelectQuestion = questionId => selectedQuestionId !== questionId;
+  const canSelectQuestion = pos =>
+    pos > selectedQuestion.position ||
+    selectedQuestion.question_group_id !== groupId;
 
   return (
     <Row
-      data-testid={`${selectedQuestionId}-select-target-question-el`}
-      key={`${selectedQuestionId}-select-target-question-${index}`}
+      data-testid={`${selectedQuestion.id}-select-target-question-el`}
+      key={`${selectedQuestion.id}-select-target-question-${index}`}
       px={10}
       mt={20}
-      onClick={() => canSelectQuestion(id) && onClick({ type, id })}
-      clickable={canSelectQuestion(id)}
+      onClick={() => canSelectQuestion(position) && onClick({ type, id })}
+      clickable={canSelectQuestion(position)}
       width="100%"
       data-cy={`choose-question-${htmlToPlainText(subtitle)}`}
     >
@@ -35,7 +37,7 @@ const QuestionListItem = ({
       <Box maxWidth={210}>
         <EllipsisText
           text={htmlToPlainText(subtitle)}
-          color={!canSelectQuestion(id) ? colors.grey : ''}
+          color={!canSelectQuestion(position) ? colors.grey : ''}
           fontWeight={target.id === id ? 'bold' : ''}
         />
       </Box>
@@ -47,11 +49,17 @@ QuestionListItem.propTypes = {
   onClick: PropTypes.func,
   target: PropTypes.object,
   index: PropTypes.number,
-  selectedQuestionId: PropTypes.string,
+  selectedQuestion: PropTypes.shape({
+    id: PropTypes.string,
+    position: PropTypes.number,
+    question_group_id: PropTypes.string,
+  }),
   question: PropTypes.shape({
     id: PropTypes.string,
     subtitle: PropTypes.string,
     type: PropTypes.string,
+    position: PropTypes.number,
+    question_group_id: PropTypes.string,
   }),
 };
 

@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
+import maxBy from 'lodash/maxBy';
 
 import Badge from 'components/Badge';
 import Box from 'components/Box';
@@ -42,7 +43,7 @@ const TargetQuestionChooser = props => {
     onClick,
     session: { name, id: sessionId },
     questions,
-    selectedQuestion: { id } = {},
+    selectedQuestion = {},
     pattern: { target },
     currentIndex,
     isVisible,
@@ -52,6 +53,33 @@ const TargetQuestionChooser = props => {
     sessionIndex,
     questionGroups,
   } = props;
+  const { id, position, question_group_id: questionGroupId } = selectedQuestion;
+  const currentGroup = questionGroups.find(
+    ({ id: groupId }) => groupId === questionGroupId,
+  );
+  const isLastQuestionInGroup = useMemo(() => {
+    const filteredQuestions = questions.filter(
+      ({ question_group_id: groupId }) => groupId === questionGroupId,
+    );
+
+    return (
+      position ===
+      maxBy(filteredQuestions, ({ position: questionPos }) => questionPos)
+        .position
+    );
+  }, [position, questionGroupId, questions, questionGroups]);
+
+  /*
+   * Code below filters groups to show groups which
+   * occur only after current group. Current group is
+   * also included unless it is the last question in a given group
+   * */
+  const filteredGroups = questionGroups.filter(
+    ({ position: groupPosition, id: groupId }) =>
+      groupPosition >= currentGroup.position &&
+      !(isLastQuestionInGroup && groupId === questionGroupId),
+  );
+
   const { sessions: sessionList } = intervention || {};
   const [isInterventionView, _setIsInterventionView] = useState(false);
   const setIsInterventionView = (value, event) => {
@@ -106,13 +134,13 @@ const TargetQuestionChooser = props => {
       </Row>
       <Box maxHeight="300px" overflow="scroll">
         <Column>
-          {questionGroups.map((group, index) => (
+          {filteredGroups.map((group, index) => (
             <GroupCollapse
               key={`${group.id}-select-group-${index}`}
               questionGroup={group}
               questionListItemProps={{
                 onClick,
-                selectedQuestionId: id,
+                selectedQuestion,
                 target,
               }}
             />

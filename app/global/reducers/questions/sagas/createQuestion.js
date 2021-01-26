@@ -63,7 +63,7 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
 
       const newGroupPosition = isNullOrUndefined(lastPlainGroup)
         ? 1
-        : lastPlainGroup.position + 1;
+        : lastPlainGroup.position + 2;
 
       const { data: newGroup } = yield axios.post(requestURL, {
         question_group: {

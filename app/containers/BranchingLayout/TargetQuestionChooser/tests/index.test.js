@@ -28,12 +28,14 @@ const mockSingleQuestion = (suffix = 1, hasVariable = true) => ({
   body: {
     variable: { name: hasVariable ? `var_single_${suffix}` : '' },
   },
+  position: suffix,
 });
 
 const mockSingleGroup = (suffix = 1) => ({
   id: `group-test-id-${suffix}`,
   title: `Group test title ${suffix}`,
   subtitle: `Test subtitle ${suffix}`,
+  position: suffix,
 });
 
 const mockIntervention = (suffix = 1) => ({
@@ -149,7 +151,7 @@ describe('<TargetQuestionChooser />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('should render list of questions with id of the selected one', () => {
+  it('should render list of questions without id of the selected one', () => {
     const question = mockSingleQuestion(2, true);
     const group = mockSingleGroup(2);
 
@@ -187,7 +189,7 @@ describe('<TargetQuestionChooser />', () => {
     };
     store.injectedSagas = {};
 
-    const { getAllByTestId, getByTestId } = render(
+    const { queryByTestId } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <TargetQuestionChooser {...props} />
@@ -195,16 +197,8 @@ describe('<TargetQuestionChooser />', () => {
       </Provider>,
     );
 
-    const groupRow = getByTestId(`${group.id}-select-target-group-el`);
-    fireEvent.click(groupRow);
-
-    executeAfterTransition(() => {
-      const variableComponentList = getAllByTestId(
-        `${question.id}-select-target-question-el`,
-      );
-
-      expect(variableComponentList).toHaveLength(3);
-    });
+    const groupRow = queryByTestId(`${group.id}-select-target-group-el`);
+    expect(groupRow).toBeNull();
   });
 
   it('should render session view with list of sessions when selected', () => {
@@ -341,10 +335,11 @@ describe('<TargetQuestionChooser />', () => {
 
   it('should invoke onClick when question is selected', () => {
     const newProps = { ...props, onClick: jest.fn(), isVisible: false };
-    const question = mockSingleQuestion(2, true);
-    const group = mockSingleGroup(2);
+    const selectedQuestion = mockSingleQuestion(2, true);
+    const groupToSelect = mockSingleGroup(3);
+    const questionToSelect = mockSingleQuestion(3, true);
 
-    store = mockMostUsedStore(question);
+    store = mockMostUsedStore(selectedQuestion);
     const { getByTestId } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
@@ -352,12 +347,12 @@ describe('<TargetQuestionChooser />', () => {
         </IntlProvider>
       </Provider>,
     );
-    const groupRow = getByTestId(`${group.id}-select-target-group-el`);
+    const groupRow = getByTestId(`${groupToSelect.id}-select-target-group-el`);
     fireEvent.click(groupRow);
 
     executeAfterTransition(() => {
       const questionRow = getByTestId(
-        `${question.id}-select-target-question-el`,
+        `${questionToSelect.id}-select-target-question-el`,
       );
       fireEvent.click(questionRow);
       expect(newProps.onClick).toHaveBeenCalledWith({

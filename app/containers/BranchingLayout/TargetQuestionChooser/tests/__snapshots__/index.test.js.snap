@@ -3,38 +3,7 @@
 exports[`<TargetQuestionChooser /> should match the snapshot 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c13 {
-  width: 100%;
-}
-
-.c15 {
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  width: 100%;
-  background-color: rgba(248,251,255,1);
-  height: auto;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-right: 10px;
-  padding-left: 10px;
-}
-
-.c15 .animated-img {
-  -webkit-transition: -webkit-transform 0.3s,height 4s;
-  -webkit-transition: transform 0.3s,height 4s;
-  transition: transform 0.3s,height 4s;
-  -webkit-transform: rotate(180deg);
-  -ms-transform: rotate(180deg);
-  transform: rotate(180deg);
-}
-
-.c19 .ReactCollapse--collapse {
-  -webkit-transition: height 480ms ease;
-  transition: height 480ms ease;
-}
-
-.c0 {
+  "baseElement": .c0 {
   width: auto;
   height: auto;
   display: block;
@@ -118,25 +87,12 @@ Object {
   margin-right: 10px;
 }
 
-.c18 {
-  width: auto;
-  height: auto;
-}
-
 .c5 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   font-size: 15px;
   font-weight: 700;
-  color: #2F3850;
-}
-
-.c17 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 15px;
   color: #2F3850;
 }
 
@@ -161,45 +117,6 @@ Object {
   flex-direction: row;
   height: auto;
   margin-bottom: 20px;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c16 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
 }
 
 @media only screen and (min-width:768px) {
@@ -284,45 +201,7 @@ Object {
               >
                 <div
                   class="c7"
-                >
-                  <div
-                    class="c13"
-                  >
-                    <div
-                      class="c14"
-                    >
-                      <div
-                        class="c15"
-                        height="auto"
-                      >
-                        <div
-                          class="c16"
-                        >
-                          <div
-                            class="c2"
-                            data-cy="select-group-branching-Group test title 1"
-                            data-testid="group-test-id-1-select-target-group-el"
-                          >
-                            <p
-                              class="c17"
-                              font-size="15"
-                            >
-                              Group test title 1
-                            </p>
-                          </div>
-                           
-                          <img
-                            class="c18 img"
-                            src="IMAGE_MOCK"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="c19"
-                    />
-                  </div>
-                </div>
+                />
               </div>
             </div>
           </div>
@@ -395,45 +274,7 @@ Object {
             >
               <div
                 class="Column-sc-4zswzq-0 ekpwZH"
-              >
-                <div
-                  class="styled__StyledCollapseContainer-jfkud-0 lkBaFo"
-                >
-                  <div
-                    class="Row-y1cs0u-0 ddPUgf"
-                  >
-                    <div
-                      class="styled__StyledCollapseLabel-jfkud-1 empBgz"
-                      height="auto"
-                    >
-                      <div
-                        class="Row-y1cs0u-0 btXwSI"
-                      >
-                        <div
-                          class="Row-y1cs0u-0 dskFsL"
-                          data-cy="select-group-branching-Group test title 1"
-                          data-testid="group-test-id-1-select-target-group-el"
-                        >
-                          <p
-                            class="Text-e4p0w3-0 pcigz"
-                            font-size="15"
-                          >
-                            Group test title 1
-                          </p>
-                        </div>
-                         
-                        <img
-                          class="Img-sc-55j3su-0 cDhXoN img"
-                          src="IMAGE_MOCK"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="styled__StyledCollapseContent-jfkud-3 ikoWIe"
-                  />
-                </div>
-              </div>
+              />
             </div>
           </div>
         </div>

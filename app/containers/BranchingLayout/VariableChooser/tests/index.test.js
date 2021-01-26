@@ -2,10 +2,12 @@ import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import 'jest-styled-components';
 import { Provider } from 'react-redux';
-
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
 import { createStore } from 'redux';
+
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+
 import VariableChooser from '../index';
 
 describe('<VariableChooser />', () => {
@@ -14,6 +16,10 @@ describe('<VariableChooser />', () => {
   const initialState = {
     questions: {
       questions: [],
+    },
+    questionGroups: {
+      groups: [],
+      loaders: {},
     },
   };
 
@@ -107,12 +113,17 @@ describe('<VariableChooser />', () => {
   });
 
   it('should render list of variables', () => {
-    const question = mockSingleQuestion(1, true);
+    const group = mockGroup(1);
+    const question = mockSingleQuestion(1, true, group);
 
     store = createStore(reducer, {
       questions: {
         questions: [question],
         selectedQuestion: question.id,
+      },
+      questionGroups: {
+        groups: [group],
+        loaders: {},
       },
     });
 
@@ -132,12 +143,18 @@ describe('<VariableChooser />', () => {
   });
 
   it('should invoke onClick', () => {
-    const question = mockSingleQuestion(1, true);
+    const group = mockGroup(1);
+
+    const question = mockSingleQuestion(1, true, group);
 
     store = createStore(reducer, {
       questions: {
         questions: [question],
         selectedQuestion: question.id,
+      },
+      questionGroups: {
+        groups: [group],
+        loaders: {},
       },
     });
 
@@ -154,12 +171,21 @@ describe('<VariableChooser />', () => {
   });
 });
 
-const mockSingleQuestion = (suffix = 1, hasVariable = true) => ({
+const mockGroup = (suffix = 1) => ({
+  id: `test-group-id-${suffix}`,
+  title: `Test group title ${suffix}`,
+  type: 'QuestionGroup::Plain',
+  position: 0,
+});
+
+const mockSingleQuestion = (suffix = 1, hasVariable = true, group) => ({
   id: `test-id-${suffix}`,
   title: `Test title ${suffix}`,
   subtitle: `Test subtitle ${suffix}`,
   type: 'Question::Single',
+  question_group_id: isNullOrUndefined(group) ? '' : group.id,
   body: {
     variable: { name: hasVariable ? `var_single_${suffix}` : '' },
   },
+  position: 0,
 });
