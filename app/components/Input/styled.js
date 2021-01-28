@@ -82,6 +82,8 @@ export const DatePickerWrapper = styled.div`
 `;
 
 export const SearchInputStyled = styled.div`
+  display: flex;
+  align-items: center;
   position: relative;
   ${layout}
 `;

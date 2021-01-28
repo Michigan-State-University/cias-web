@@ -15,8 +15,7 @@ const SearchInput = ({ icon, ...inputProps }) => {
       {value && (
         <ActionIcon
           onClick={() => onChange({ target: { value: '' } })}
-          position="absolute"
-          right="-20px"
+          ml={10}
           top="14px"
           height={15}
           width={15}

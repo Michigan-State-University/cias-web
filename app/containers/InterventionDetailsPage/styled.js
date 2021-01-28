@@ -24,6 +24,7 @@ export const StatusLabel = styled.div`
   min-width: 70px;
   justify-content: center;
   align-content: center;
+  white-space: pre;
 `;
 
 export const DraggedTest = styled.div`

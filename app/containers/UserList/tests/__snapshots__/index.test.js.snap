@@ -109,7 +109,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
             >
               <div
-                class="styled__SearchInputStyled-sc-10udg63-3 bhbdBU"
+                class="styled__SearchInputStyled-sc-10udg63-3 gtZjEY"
               >
                 <input
                   class="Input-t9j2q5-0 hjYQaq"
@@ -509,7 +509,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
             >
               <div
-                class="styled__SearchInputStyled-sc-10udg63-3 bhbdBU"
+                class="styled__SearchInputStyled-sc-10udg63-3 gtZjEY"
               >
                 <input
                   class="Input-t9j2q5-0 hjYQaq"
