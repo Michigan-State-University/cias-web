@@ -37,7 +37,7 @@ function* groupQuestions({ payload: { questionIds, sessionId } }) {
 
   const newGroupPosition = isNullOrUndefined(lastPlainGroup)
     ? 1
-    : lastPlainGroup.position + 2;
+    : lastPlainGroup.position + 1;
 
   try {
     const { data: group } = yield axios.post(requestURL, {

@@ -113,7 +113,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
           position: ternary(
             group.type === FinishGroupType,
             group.position,
-            index,
+            index + 1,
           ),
         }));
 

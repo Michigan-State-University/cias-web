@@ -42,9 +42,12 @@ function InterventionStatusButtons({
   const urlToDownload = /^((http:\/\/)|(https:\/\/)).*$/.test(csvLink)
     ? csvLink
     : `${apiProtocol}${csvLink}`;
+  const fileName = useMemo(() => urlToDownload.split('/').pop(), [
+    urlToDownload,
+  ]);
   const CsvDownload = () => (
     <ShareButton mr={10} width={200} outlined>
-      <a href={urlToDownload} download>
+      <a href={urlToDownload} download={fileName}>
         <FormattedMessage {...messages.csvDownload} />
       </a>
     </ShareButton>
