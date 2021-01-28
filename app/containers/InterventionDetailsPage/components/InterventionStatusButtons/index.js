@@ -41,7 +41,7 @@ function InterventionStatusButtons({
 
   const urlToDownload = /^((http:\/\/)|(https:\/\/)).*$/.test(csvLink)
     ? csvLink
-    : `${apiProtocol}${csvLink}`;
+    : `${apiProtocol}//${csvLink}`;
   const fileName = useMemo(() => urlToDownload.split('/').pop(), [
     urlToDownload,
   ]);
