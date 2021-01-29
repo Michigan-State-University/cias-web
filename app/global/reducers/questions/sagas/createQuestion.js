@@ -9,7 +9,6 @@ import {
 } from 'models/Narrator/BlockTypes';
 import { setAnimationStopPosition } from 'global/reducers/localState';
 import {
-  makeSelectDefaultGroupId,
   createNewQuestionInGroup,
   makeSelectQuestionGroups,
 } from 'global/reducers/questionGroups';
@@ -18,52 +17,92 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import { makeSelectSession } from 'global/reducers/session';
 import { instantiateBlockForType } from 'models/Session/utils';
+import { PlainGroupType } from 'models/Session/GroupTypes';
+import omit from 'lodash/omit';
+import { groupQuestionsSuccess } from 'global/reducers/questionGroups/actions';
+import findLast from 'lodash/findLast';
 import { CREATE_QUESTION_REQUEST } from '../constants';
 import { createQuestionSuccess, createQuestionError } from '../actions';
 import { makeSelectQuestions, makeSelectSelectedQuestion } from '../selectors';
 
-function* createQuestion({ payload: { question } }) {
+function* createQuestion({ payload: { question, id: sessionId } }) {
   const selectedQuestion = yield select(makeSelectSelectedQuestion());
   const groups = yield select(makeSelectQuestionGroups());
   const groupIds = groups.map(({ id }) => id);
-  const defaultGroupId = yield select(makeSelectDefaultGroupId());
-  const groupId =
-    isNullOrUndefined(selectedQuestion) ||
-    selectedQuestion.type === finishQuestion.id
-      ? defaultGroupId
-      : selectedQuestion.question_group_id;
 
   const questions = yield select(makeSelectQuestions());
   const {
     settings: { narrator },
   } = yield select(makeSelectSession());
-  const requestURL = `v1/question_groups/${groupId}/questions`;
-  try {
-    const position = getNarratorPositionWhenQuestionIsAdded(
-      questions,
-      question,
-      groupIds,
-    );
-    const blocks = [
-      instantiateBlockForType(readQuestionBlockType, position, question),
-      ...(question.type === feedbackQuestion.id
-        ? [instantiateBlockForType(feedbackBlockType, position, question)]
-        : []),
-    ];
+  const position = getNarratorPositionWhenQuestionIsAdded(
+    questions,
+    question,
+    groupIds,
+  );
+  const blocks = [
+    instantiateBlockForType(readQuestionBlockType, position, question),
+    ...(question.type === feedbackQuestion.id
+      ? [instantiateBlockForType(feedbackBlockType, position, question)]
+      : []),
+  ];
+  const newQuestion = { ...question, narrator: { blocks, settings: narrator } };
 
-    const response = yield axios.post(requestURL, {
-      ...question,
-      narrator: { blocks, settings: narrator },
-    });
+  const groupId =
+    selectedQuestion?.type !== finishQuestion.id
+      ? selectedQuestion.question_group_id
+      : null;
 
-    const createdQuestion = mapQuestionToStateObject(response.data.data);
+  if (isNullOrUndefined(groupId)) {
+    try {
+      const requestURL = `v1/sessions/${sessionId}/question_groups`;
 
-    yield put(createQuestionSuccess(createdQuestion));
-    yield put(createNewQuestionInGroup(createdQuestion, groupId));
+      const lastPlainGroup = findLast(
+        groups,
+        ({ type }) => type === PlainGroupType,
+      );
 
-    yield put(setAnimationStopPosition(position.x, position.y));
-  } catch (error) {
-    yield put(createQuestionError(error));
+      const newGroupPosition = isNullOrUndefined(lastPlainGroup)
+        ? 1
+        : lastPlainGroup.position + 1;
+
+      const { data: newGroup } = yield axios.post(requestURL, {
+        question_group: {
+          title: `Group ${newGroupPosition}`,
+          questions: [newQuestion],
+          type: PlainGroupType,
+        },
+      });
+
+      const groupWithoutQuestions = omit(newGroup, 'questions');
+      yield put(groupQuestionsSuccess(groupWithoutQuestions, []));
+
+      const createdQuestion = newGroup.questions[0];
+
+      if (!isNullOrUndefined(createdQuestion)) {
+        yield put(createQuestionSuccess(createdQuestion));
+        yield put(createNewQuestionInGroup(createdQuestion, newGroup.id));
+        yield put(setAnimationStopPosition(position.x, position.y));
+      } else {
+        yield put(createQuestionError());
+      }
+    } catch (error) {
+      yield put(createQuestionError(error));
+    }
+  } else {
+    const requestURL = `v1/question_groups/${groupId}/questions`;
+
+    try {
+      const response = yield axios.post(requestURL, newQuestion);
+
+      const createdQuestion = mapQuestionToStateObject(response.data.data);
+
+      yield put(createQuestionSuccess(createdQuestion));
+      yield put(createNewQuestionInGroup(createdQuestion, groupId));
+
+      yield put(setAnimationStopPosition(position.x, position.y));
+    } catch (error) {
+      yield put(createQuestionError(error));
+    }
   }
 }
 

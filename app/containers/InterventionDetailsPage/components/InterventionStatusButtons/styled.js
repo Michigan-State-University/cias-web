@@ -4,6 +4,8 @@ import { hexToRgb, themeColors } from 'theme';
 
 export const ShareButton = styled(Button)`
   font-weight: bold;
+  width: 180px;
+  margin: 5px;
   background-color: ${props => props.bg && `rgba(${hexToRgb(props.bg)}, 1)`};
   ${({ outlined }) =>
     outlined &&
@@ -16,4 +18,9 @@ export const ShareButton = styled(Button)`
     color: white;
     }
   `}
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 `;

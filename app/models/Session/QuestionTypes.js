@@ -10,7 +10,7 @@ export const singleQuestion = new QuestionType(
 export const multiQuestion = new QuestionType(
   'Question::Multiple',
   'Multi answer',
-  colors.lavender,
+  colors.orchid,
 );
 
 export const textboxQuestion = new QuestionType(

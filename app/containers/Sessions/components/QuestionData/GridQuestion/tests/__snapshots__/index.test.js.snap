@@ -76,11 +76,11 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   width="100%"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 gkUOqx"
+                    class="Box-sc-1vhutan-0 fXErOm"
                     height="35"
                   >
                     <img
-                      class="Img-sc-55j3su-0 cnNtCE"
+                      class="Img-sc-55j3su-0 wXzUn"
                       hidden=""
                       src="IMAGE_MOCK"
                     />
@@ -118,11 +118,11 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   width="100%"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 gkUOqx"
+                    class="Box-sc-1vhutan-0 fXErOm"
                     height="35"
                   >
                     <img
-                      class="Img-sc-55j3su-0 cnNtCE"
+                      class="Img-sc-55j3su-0 wXzUn"
                       hidden=""
                       src="IMAGE_MOCK"
                     />
@@ -170,11 +170,11 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   height="100%"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 hgSsqy"
+                    class="Box-sc-1vhutan-0 hiVyFN"
                     width="60"
                   >
                     <img
-                      class="Img-sc-55j3su-0 cnNtCE"
+                      class="Img-sc-55j3su-0 wXzUn"
                       hidden=""
                       src="IMAGE_MOCK"
                     />
@@ -250,11 +250,11 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   height="100%"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 hgSsqy"
+                    class="Box-sc-1vhutan-0 hiVyFN"
                     width="60"
                   >
                     <img
-                      class="Img-sc-55j3su-0 cnNtCE"
+                      class="Img-sc-55j3su-0 wXzUn"
                       hidden=""
                       src="IMAGE_MOCK"
                     />

@@ -10,15 +10,18 @@ import { injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
 
 import Row from 'components/Row';
-import H2 from 'components/H2';
 import Dropdown from 'components/Dropdown';
 import Divider from 'components/Divider';
 import StyledLink from 'components/StyledLink';
+import Text from 'components/Text';
+import Tooltip from 'components/Tooltip';
+import H2 from 'components/H2';
 
 import copy from 'assets/svg/copy.svg';
+import bin from 'assets/svg/bin-no-bg.svg';
 import mail from 'assets/svg/pink-mail.svg';
 import mailDisabled from 'assets/svg/pink-mail-disabled.svg';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import Img from 'components/Img';
 import Box from 'components/Box';
@@ -37,6 +40,9 @@ function SessionListItem({
   handleCopySession,
   disabled,
   sharingPossible,
+  status,
+  deletionPossible,
+  handleDeleteSession,
 }) {
   const [isHovered, setIsHovered] = useState(false);
   const {
@@ -57,6 +63,15 @@ function SessionListItem({
       icon: copy,
       action: () => handleCopySession(id),
       color: colors.bluewood,
+      disabled,
+    },
+    {
+      id: 'delete',
+      label: formatMessage(messages.delete),
+      icon: bin,
+      action: () => handleDeleteSession(id),
+      color: colors.bluewood,
+      disabled: !deletionPossible,
     },
   ];
 
@@ -76,33 +91,50 @@ function SessionListItem({
         >
           <ToggleableBox isSelected={isSelected} isHovered={isHovered}>
             <Row py={21} px={16} align="center" justify="between">
-              <StyledRow align="center" justify="between">
+              <StyledRow align="center" justify="between" width="100%">
                 <StyledLink
                   data-cy={`enter-session-${index}`}
                   to={`/interventions/${interventionId}/sessions/${id}/edit`}
                   onMouseEnter={() => setIsHovered(true)}
                   onMouseLeave={() => setIsHovered(false)}
+                  width="100%"
+                  justify="start"
                 >
                   <SessionIndex>{index + 1}</SessionIndex>
                   <H2 ml={15}>{name}</H2>
                 </StyledLink>
               </StyledRow>
-              <Row width={80} xs={1} align="center" justify="between">
-                <Img
-                  clickable
-                  disabled={!sharingPossible}
-                  src={sharingPossible ? mail : mailDisabled}
-                  onClick={handleClick}
-                  alt="emails"
-                  data-cy={`share-session-modal-open-button-${index}`}
-                />
+              <Row width="40%" xs={1} align="center" justify="around">
+                <Tooltip
+                  id={`tooltip-${id}`}
+                  visible={!sharingPossible}
+                  content={formatMessage(
+                    messages[`tooltip-${status}`] ?? messages.tooltip,
+                  )}
+                >
+                  <Row justify="end" onClick={handleClick} minWidth={110}>
+                    <Text
+                      fontSize={13}
+                      clickable
+                      disabled={!sharingPossible}
+                      textAlign="center"
+                      fontWeight="bold"
+                      color={themeColors.secondary}
+                      mr={5}
+                    >
+                      {formatMessage(messages.inviteLabel)}
+                    </Text>
+                    <Img
+                      clickable
+                      disabled={!sharingPossible}
+                      src={sharingPossible ? mail : mailDisabled}
+                      alt="emails"
+                      data-cy={`share-session-modal-open-button-${index}`}
+                    />
+                  </Row>
+                </Tooltip>
                 <Box mb={8}>
-                  <Dropdown
-                    disabled={disabled}
-                    options={options}
-                    clickable
-                    id={id}
-                  />
+                  <Dropdown options={options} clickable id={id} />
                 </Box>
               </Row>
             </Row>
@@ -144,6 +176,9 @@ SessionListItem.propTypes = {
   handleCopySession: PropTypes.func,
   disabled: PropTypes.bool,
   sharingPossible: PropTypes.bool,
+  deletionPossible: PropTypes.bool,
+  handleDeleteSession: PropTypes.func,
+  status: PropTypes.string,
 };
 
 export default injectIntl(SessionListItem);

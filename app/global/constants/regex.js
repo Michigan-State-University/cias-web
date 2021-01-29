@@ -1,4 +1,4 @@
-export const variableNameRegex = /^[a-zA-Z0-9_\b]+$/;
+export const variableNameRegex = /^([a-zA-Z]|[0-9]+[a-zA-Z_]+)[a-zA-Z0-9_\b]*$/;
 
 export const urlRegex = new RegExp(
   '^(https?:\\/\\/)?' + // protocol

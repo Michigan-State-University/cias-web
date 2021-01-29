@@ -11,11 +11,12 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
+import { Row, Col } from 'react-grid-system';
+
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import H1 from 'components/H1';
 import Loader from 'components/Loader';
-import Row from 'components/Row';
 import SingleTile from 'containers/SingleTile';
 import TileRenderer from 'components/TileRenderer';
 import useFilter from 'utils/useFilter';
@@ -116,27 +117,44 @@ export function InterventionPage({
   }
   return (
     <AppContainer>
-      <InitialRow>
+      <InitialRow fluid>
         <H1 mt={35}>
           <FormattedMessage {...messages.myInterventions} />
         </H1>
       </InitialRow>
-      <InitialRow>
-        <Row my={35} justify="between" width={400} height={30}>
-          <StatusFilter
-            onClick={handleFilterStatus}
-            formatMessage={formatMessage}
-            active={filterStatus}
-            onClear={handleClearFilters}
-          />
-        </Row>
-        <Row align="center">
-          <SearchInput
-            value={filterValue}
-            onChange={e => setFilterValue(e.target.value)}
-            ml={5}
-            placeholder={formatMessage(messages.filter)}
-          />
+      <InitialRow fluid>
+        <Row>
+          <Col
+            xs={12}
+            md={6}
+            xxl={4}
+            style={{ marginTop: 10, marginBottom: 10 }}
+          >
+            <Row my={35} justify="start" align="center">
+              <StatusFilter
+                onClick={handleFilterStatus}
+                formatMessage={formatMessage}
+                active={filterStatus}
+                onClear={handleClearFilters}
+              />
+            </Row>
+          </Col>
+          <Col
+            xs={12}
+            md={6}
+            xxl={8}
+            style={{ marginTop: 10, marginBottom: 10 }}
+          >
+            <Row align="center">
+              <Col>
+                <SearchInput
+                  value={filterValue}
+                  onChange={e => setFilterValue(e.target.value)}
+                  placeholder={formatMessage(messages.filter)}
+                />
+              </Col>
+            </Row>
+          </Col>
         </Row>
       </InitialRow>
       {filterValue && finalInterventions.length === 0 && (

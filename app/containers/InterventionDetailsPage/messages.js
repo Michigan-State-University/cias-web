@@ -73,4 +73,13 @@ export default defineMessages({
     id: `${scope}.invited`,
     defaultMessage: 'Only selected registered participants can access sessions',
   },
+  sessionDeleteHeader: {
+    id: `${scope}.sessionDeleteHeader`,
+    defaultMessage: 'Delete Session',
+  },
+  sessionDeleteMessage: {
+    id: `${scope}.sessionDeleteMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this session? It will no longer be possible to recover it later.',
+  },
 });

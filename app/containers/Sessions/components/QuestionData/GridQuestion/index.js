@@ -44,6 +44,9 @@ import {
   DELETE_COLUMN,
 } from './constants';
 
+const MINIMAL_COLUMNS_LENGTH = 2;
+const MINIMAL_ROWS_LENGTH = 1;
+
 const GridQuestion = ({
   selectedQuestion,
   addRow,
@@ -142,12 +145,18 @@ const GridQuestion = ({
                       <Box
                         px={8}
                         mb={8}
-                        onClick={() => deleteColumn(columnIndex)}
                         hidden={isNarratorTabOrEditNotPossible}
-                        clickable
                         height={35}
                       >
-                        <Img src={bin} hidden={hoveredColumn !== columnIndex} />
+                        <Img
+                          clickable
+                          onClick={() => deleteColumn(columnIndex)}
+                          src={bin}
+                          hidden={
+                            columns.length <= MINIMAL_COLUMNS_LENGTH ||
+                            hoveredColumn !== columnIndex
+                          }
+                        />
                       </Box>
                       <Row display="flex" hidden={isNarratorTab} mb={8}>
                         <BadgeInput
@@ -219,13 +228,16 @@ const GridQuestion = ({
                     onMouseLeave={() => setHoveredRow(-1)}
                   >
                     <Row align="center" height="100%" padding={5}>
-                      <Box
-                        width={60}
-                        onClick={() => deleteRow(rowIndex)}
-                        clickable
-                        hidden={isNarratorTabOrEditNotPossible}
-                      >
-                        <Img src={bin} hidden={hoveredRow !== rowIndex} />
+                      <Box width={60} hidden={isNarratorTabOrEditNotPossible}>
+                        <Img
+                          clickable
+                          onClick={() => deleteRow(rowIndex)}
+                          src={bin}
+                          hidden={
+                            rows.length <= MINIMAL_ROWS_LENGTH ||
+                            hoveredRow !== rowIndex
+                          }
+                        />
                         {rowIndex === rows.length - 1 && (
                           <div ref={containerBottomRef} />
                         )}

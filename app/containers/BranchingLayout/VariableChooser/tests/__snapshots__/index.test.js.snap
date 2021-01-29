@@ -15,6 +15,24 @@ Object {
   width: 100%;
 }
 
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -24,48 +42,6 @@ Object {
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-}
-
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c0 {
@@ -95,40 +71,73 @@ Object {
   flex-grow: 1;
 }
 
-.c7 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-right: 20px;
-  color: #2F3850;
-  white-space: pre;
-  text-overflow: ellipsis;
-  max-width: 200px;
-  overflow: hidden;
-}
-
-.c6 {
+.c4 {
   width: auto;
   height: auto;
-  margin-right: 15px;
+  display: block;
+  border-radius: 5px;
+  padding: 30px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 0;
+  border-radius: 0;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
 }
 
 .c8 {
-  min-height: 24px;
-  min-width: 25px;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  padding: 5px 10px;
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 4px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  background-color: rgba(16,121,105,0.1);
-  color: rgba(16,121,105,1);
-  max-width: 300px;
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-top: 15px;
+  color: rgba(176,186,201,1);
+  color: rgba(176,186,201,1);
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 @media only screen and (min-width:768px) {
@@ -164,28 +173,29 @@ Object {
             >
               <div
                 class="c4"
-                data-testid="undefined-select-variable"
               >
                 <div
                   class="c5"
+                  data-testid="no-content"
+                  display="flex"
+                  height="100%"
+                  width="100%"
                 >
-                  <img
+                  <div
                     class="c6"
-                    src="IMAGE_MOCK"
-                  />
-                  <p
-                    class="c7"
-                    overflow="hidden"
                   >
-                    Test subtitle 1
-                  </p>
-                </div>
-                <div
-                  class="c8"
-                  color="#107969"
-                  data-cy="question-variable-chooser"
-                >
-                  var_single_1
+                    <img
+                      alt="No content"
+                      class="c7"
+                      src="IMAGE_MOCK"
+                    />
+                    <h2
+                      class="c8"
+                      color="#B0BAC9"
+                    >
+                      No variables defined yet
+                    </h2>
+                  </div>
                 </div>
               </div>
             </div>
@@ -210,29 +220,30 @@ Object {
             class="Column-sc-4zswzq-0 ekpwZH"
           >
             <div
-              class="Row-y1cs0u-0 dLpgLs"
-              data-testid="undefined-select-variable"
+              class="Box-sc-1vhutan-0 dbODYP"
             >
               <div
-                class="Row-y1cs0u-0 ecllgQ"
+                class="Box-sc-1vhutan-0 kTgzBZ"
+                data-testid="no-content"
+                display="flex"
+                height="100%"
+                width="100%"
               >
-                <img
-                  class="Img-sc-55j3su-0 gWNtSX"
-                  src="IMAGE_MOCK"
-                />
-                <p
-                  class="Text-e4p0w3-0 cHolUu"
-                  overflow="hidden"
+                <div
+                  class="Column-sc-4zswzq-0 eExeGs"
                 >
-                  Test subtitle 1
-                </p>
-              </div>
-              <div
-                class="Badge-n0b6mf-0 AXzkR"
-                color="#107969"
-                data-cy="question-variable-chooser"
-              >
-                var_single_1
+                  <img
+                    alt="No content"
+                    class="Img-sc-55j3su-0 cDhXoN"
+                    src="IMAGE_MOCK"
+                  />
+                  <h2
+                    class="H2-uw8lbl-0 bnQANz"
+                    color="#B0BAC9"
+                  >
+                    No variables defined yet
+                  </h2>
+                </div>
               </div>
             </div>
           </div>

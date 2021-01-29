@@ -13,7 +13,9 @@ import { createStructuredSelector } from 'reselect';
 import get from 'lodash/get';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import orderBy from 'lodash/orderBy';
+import { Col as GCol, Row as GRow, useScreenClass } from 'react-grid-system';
 
+import ConfirmationBox from 'components/ConfirmationBox';
 import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
 import Column from 'components/Column';
@@ -25,6 +27,7 @@ import ShareBox from 'containers/ShareBox';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import Spinner from 'components/Spinner';
+import AppContainer from 'components/Container';
 import {
   fetchInterventionRequest,
   makeSelectInterventionState,
@@ -37,6 +40,7 @@ import {
   makeSelectCurrentSessionIndex,
   changeCurrentSession,
   fetchSessionEmailsRequest,
+  deleteSessionRequest,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 
@@ -61,6 +65,7 @@ import SettingsPanel from 'containers/SettingsPanel';
 import H3 from 'components/H3';
 import {
   canArchive,
+  canDeleteSession,
   canEdit,
   canShareWithParticipants,
 } from 'models/Status/statusPermissions';
@@ -98,7 +103,12 @@ export function InterventionDetailsPage({
   copyIntervention,
   fetchQuestions,
   fetchSessionEmails,
+  deleteSession,
 }) {
+  const [
+    deleteConfirmationSessionId,
+    setDeleteConfirmationSessionId,
+  ] = useState(null);
   useInjectReducer({
     key: 'intervention',
     reducer: interventionReducer,
@@ -110,11 +120,21 @@ export function InterventionDetailsPage({
   });
   useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
 
-  const { sessions, name, id, status } = intervention || {};
+  const screenClass = useScreenClass();
+
+  const {
+    sessions,
+    name,
+    id,
+    status,
+    csv_link: csvLink,
+    csv_generated_at: csvGeneratedAt,
+  } = intervention || {};
 
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
   const archivingPossible = canArchive(status);
+  const deletionPossible = canDeleteSession(status);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [
@@ -130,6 +150,10 @@ export function InterventionDetailsPage({
       path: 'status_event',
       value: 'to_archive',
     });
+  const handleDeleteSession = sessionId => {
+    deleteSession(sessionId, id);
+    setDeleteConfirmationSessionId(null);
+  };
 
   const options = [
     {
@@ -241,14 +265,19 @@ export function InterventionDetailsPage({
                       <SessionListItem
                         disabled={!editingPossible}
                         sharingPossible={sharingPossible}
+                        deletionPossible={deletionPossible}
                         session={session}
                         index={index}
                         isSelected={index === sessionIndex}
                         handleClick={handleClick}
                         handleCopySession={handleCopySession}
+                        handleDeleteSession={sessionId =>
+                          setDeleteConfirmationSessionId(sessionId)
+                        }
                         nextSessionName={
                           nextIntervention ? nextIntervention.name : null
                         }
+                        status={status}
                       />
                     </Row>
                   );
@@ -267,10 +296,17 @@ export function InterventionDetailsPage({
     return <ErrorAlert errorText={fetchInterventionError} fullPage />;
 
   return (
-    <Box height="100%" width="100%" padding="60px 160px">
+    <AppContainer>
       <Helmet>
         <title>{name}</title>
       </Helmet>
+      <ConfirmationBox
+        visible={!isNullOrUndefined(deleteConfirmationSessionId)}
+        onClose={() => setDeleteConfirmationSessionId(null)}
+        description={formatMessage(messages.sessionDeleteHeader)}
+        content={formatMessage(messages.sessionDeleteMessage)}
+        confirmAction={() => handleDeleteSession(deleteConfirmationSessionId)}
+      />
       <Modal
         title={
           <H3
@@ -299,45 +335,68 @@ export function InterventionDetailsPage({
       >
         <ShareBox />
       </Modal>
+      <GRow>
+        <GCol>
+          <Row justify="between" mt={50}>
+            <BackButton to="/">
+              <FormattedMessage {...messages.back} />
+            </BackButton>
+          </Row>
+        </GCol>
+      </GRow>
 
-      <Row justify="between">
-        <BackButton to="/">
-          <FormattedMessage {...messages.back} />
-        </BackButton>
-      </Row>
-      <Row my={18} justify="between">
-        <Row align="center">
-          <Box mr={15}>
-            <StatusLabel status={status}>
-              {status && formatMessage(globalMessages.statuses[status])}
-            </StatusLabel>
-          </Box>
-          <StyledInput
-            disabled={!editingPossible}
-            ml={-12}
-            px={12}
-            py={6}
-            width="400px"
-            value={name}
-            fontSize={23}
-            placeholder={formatMessage(messages.placeholder)}
-            onBlur={editName}
-            maxWidth="none"
-          />
-        </Row>
-        <Row>
-          <InterventionStatusButtons
-            status={status}
-            handleChangeStatus={handleChangeStatus}
-            handleSendCsv={handleSendCsv}
-          />
-          <InterventionOptions>
-            <Dropdown options={options} clickable />
-          </InterventionOptions>
-        </Row>
-      </Row>
-      <Row>
-        <Column sm={6}>
+      <GRow>
+        <GCol md={6} sm={12}>
+          <Row justify="end" align="center" mt={18}>
+            <Box mr={15}>
+              <StatusLabel status={status}>
+                {status && formatMessage(globalMessages.statuses[status])}
+              </StatusLabel>
+            </Box>
+            <StyledInput
+              disabled={!editingPossible}
+              ml={-12}
+              px={12}
+              py={6}
+              width="100%"
+              value={name}
+              fontSize={23}
+              placeholder={formatMessage(messages.placeholder)}
+              onBlur={editName}
+              maxWidth="none"
+            />
+          </Row>
+        </GCol>
+        <GCol>
+          <Row align="center" justify="end" width="100%">
+            <Row
+              width="100%"
+              align="center"
+              justify="end"
+              mr={20}
+              flexWrap="wrap"
+            >
+              <InterventionStatusButtons
+                status={status}
+                handleChangeStatus={handleChangeStatus}
+                handleSendCsv={handleSendCsv}
+                csvLink={csvLink}
+                csvGeneratedAt={csvGeneratedAt}
+              />
+            </Row>
+            <InterventionOptions>
+              <Dropdown options={options} clickable />
+            </InterventionOptions>
+          </Row>
+        </GCol>
+      </GRow>
+
+      <GRow>
+        <GCol
+          md={6}
+          sm={12}
+          style={{ order: ['sm', 'xs'].includes(screenClass) ? 1 : 0 }}
+        >
           {renderList()}
           {createSessionLoading && (
             <Row my={18} align="center">
@@ -349,16 +408,15 @@ export function InterventionDetailsPage({
               <SessionCreateButton handleClick={createSessionCall} />
             </Row>
           )}
-        </Column>
-        {createSessionError && <ErrorAlert errorText={createSessionError} />}
-        <Column ml={38} sm={6} mt={18}>
-          <Column position="sticky" top="100px">
+          {createSessionError && <ErrorAlert errorText={createSessionError} />}
+        </GCol>
+        <GCol>
+          <Column position="sticky" top="100px" mt={18}>
             <SettingsPanel intervention={intervention} />
           </Column>
-          <div />
-        </Column>
-      </Row>
-    </Box>
+        </GCol>
+      </GRow>
+    </AppContainer>
   );
 }
 
@@ -390,6 +448,7 @@ InterventionDetailsPage.propTypes = {
   copyIntervention: PropTypes.func,
   fetchQuestions: PropTypes.func,
   fetchSessionEmails: PropTypes.func,
+  deleteSession: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -408,6 +467,7 @@ const mapDispatchToProps = {
   copySession: copySessionRequest,
   reorderSessions: reorderSessionList,
   copyIntervention: copyInterventionRequest,
+  deleteSession: deleteSessionRequest,
 };
 
 const withConnect = connect(

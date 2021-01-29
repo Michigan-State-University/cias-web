@@ -27,10 +27,11 @@ export const SessionIndex = styled.div`
   align-items: center;
   position: relative;
   cursor: pointer;
+  min-width: 30px;
 `;
 
 export const StyledRow = styled(Row)`
-  width: 100%;
+  width: 70%;
   &:hover * {
     ${SessionIndex} {
       color: white;

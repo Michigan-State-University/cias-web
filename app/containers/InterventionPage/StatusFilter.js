@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
 
-import Row from 'components/Row';
+import { Col } from 'react-grid-system';
+
 import {
   statusTypes,
   statusTypeToColorMap,
@@ -21,33 +22,39 @@ const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
   const showIcon = active && !isEqual(statusTypes, active.sort());
 
   return (
-    <Row align="center" width="100%">
+    <>
       {labels.map(status => (
-        <StatusLabel
+        <Col
+          xs="content"
           key={status}
-          value={status}
-          color={statusTypeToColorMap[status]}
-          onClick={onClick}
-          active={active.includes(status)}
+          style={{ marginTop: 5, marginBottom: 5 }}
         >
-          <FilterText
-            color={statusTypeToFontColorMap[status]}
+          <StatusLabel
+            value={status}
+            color={statusTypeToColorMap[status]}
+            onClick={onClick}
             active={active.includes(status)}
           >
-            {formatMessage(globalMessages.statuses[status])}
-          </FilterText>
-        </StatusLabel>
+            <FilterText
+              color={statusTypeToFontColorMap[status]}
+              active={active.includes(status)}
+            >
+              {formatMessage(globalMessages.statuses[status])}
+            </FilterText>
+          </StatusLabel>
+        </Col>
       ))}
       {showIcon && (
-        <ActionIcon
-          height={15}
-          width={15}
-          mx={10}
-          onClick={onClear}
-          background="none"
-        />
+        <Col xs={1}>
+          <ActionIcon
+            height={15}
+            width={15}
+            onClick={onClear}
+            background="none"
+          />
+        </Col>
       )}
-    </Row>
+    </>
   );
 };
 

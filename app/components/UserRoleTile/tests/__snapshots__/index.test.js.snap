@@ -6,7 +6,9 @@ exports[`<UserRoleTile /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 120px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -15,8 +17,6 @@ exports[`<UserRoleTile /> Should render and match the snapshot 1`] = `
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 7px;
-  margin-left: 7px;
   background-color: rgba(194,178,0,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -46,7 +46,7 @@ exports[`<UserRoleTile /> Should render and match the snapshot 1`] = `
   <div
     class="c0"
     display="inline-flex"
-    width="120px"
+    width="max-content"
   >
     <p
       class="c1"
@@ -66,7 +66,9 @@ exports[`<UserRoleTile /> Should render and match the snapshot for disabled 1`] 
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 120px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
@@ -75,8 +77,6 @@ exports[`<UserRoleTile /> Should render and match the snapshot for disabled 1`] 
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-  margin-right: 7px;
-  margin-left: 7px;
   background-color: rgba(154,161,182,1);
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -106,7 +106,7 @@ exports[`<UserRoleTile /> Should render and match the snapshot for disabled 1`] 
   <div
     class="c0"
     display="inline-flex"
-    width="120px"
+    width="max-content"
   >
     <p
       class="c1"

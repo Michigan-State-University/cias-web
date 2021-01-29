@@ -13,6 +13,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
+import { Container, Row, Col } from 'react-grid-system';
+
 import ActionIcon from 'components/ActionIcon';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
@@ -86,46 +88,52 @@ function UserList({
     if (usersError) return <ErrorAlert errorText={usersError} />;
     return (
       <div>
-        <Box display="flex" justify="between" mb={40}>
-          <Box display="flex" align="center">
-            <Box display="inline-block" width="100%">
-              <Box display="flex" align="center">
+        <Container style={{ marginBottom: 40, padding: 0 }} fluid>
+          <Row align="center">
+            <Col xs={12} xl={6} xxl={5}>
+              <Row align="center">
                 {rolesToFilter.map((role, index) => (
-                  <UserRoleTile
-                    role={role}
-                    key={index}
-                    onClick={toggleRole(role)}
-                    disabled={!selectRoles.includes(role)}
-                  />
+                  <Col key={index} xs="content" style={{ marginBottom: 10 }}>
+                    <UserRoleTile
+                      role={role}
+                      onClick={toggleRole(role)}
+                      disabled={!selectRoles.includes(role)}
+                    />
+                  </Col>
                 ))}
                 {!clearFilters && (
-                  <ActionIcon
-                    height={15}
-                    width={15}
-                    mr={10}
-                    onClick={() => setSelectRoles(rolesToFilter)}
-                    background="none"
-                  />
+                  <Col xs={1} style={{ marginBottom: 10 }}>
+                    <ActionIcon
+                      height={15}
+                      width={15}
+                      onClick={() => setSelectRoles(rolesToFilter)}
+                      background="none"
+                    />
+                  </Col>
                 )}
                 {clearFilters && <Box width={25} />}
-                <Box
-                  cursor="pointer"
-                  onClick={() => setShowInactive(!showInactive)}
-                  display="inline-flex"
-                  justify="center"
-                  align="center"
-                >
-                  <Checkbox mr={5} checked={showInactive} />
-                  <FormattedMessage {...messages.showInactive} />
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-          <SearchInput
-            value={filterText}
-            onChange={e => setFilterText(e.target.value)}
-          />
-        </Box>
+                <Col xs={12} sm={4} style={{ marginBottom: 10 }}>
+                  <Box
+                    cursor="pointer"
+                    onClick={() => setShowInactive(!showInactive)}
+                    display="inline-flex"
+                    justify="center"
+                    align="center"
+                  >
+                    <Checkbox mr={5} checked={showInactive} />
+                    <FormattedMessage {...messages.showInactive} />
+                  </Box>
+                </Col>
+              </Row>
+            </Col>
+            <Col xs={12} xl={6} xxl={7} style={{ marginBottom: 10 }}>
+              <SearchInput
+                value={filterText}
+                onChange={e => setFilterText(e.target.value)}
+              />
+            </Col>
+          </Row>
+        </Container>
         <UserTable
           formatMessage={formatMessage}
           users={users}

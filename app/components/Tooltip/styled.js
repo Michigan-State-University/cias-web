@@ -11,4 +11,5 @@ export const StyledTooltip = styled(ReactTooltip).attrs({
   max-width: 380px;
   padding: 15px;
   opacity: 1 !important;
+  ${({ visible }) => !visible && 'display: none;'}
 `;

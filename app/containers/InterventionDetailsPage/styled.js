@@ -3,7 +3,6 @@ import { colors, boxShadows } from 'theme';
 import { statusTypeToColorMap } from 'models/Status/StatusTypes';
 
 export const InterventionOptions = styled.div`
-  margin-left: 25px;
   display: flex;
   flex-direction: column;
   width: 44px;
@@ -20,8 +19,12 @@ export const StatusLabel = styled.div`
   padding: 7px 10px;
   border-radius: 5px;
   background: ${props => statusTypeToColorMap[props.status]};
-  display: inline-block;
+  display: flex;
   margin-left: 5px;
+  min-width: 70px;
+  justify-content: center;
+  align-content: center;
+  white-space: pre;
 `;
 
 export const DraggedTest = styled.div`

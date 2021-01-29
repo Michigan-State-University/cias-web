@@ -1,5 +1,6 @@
 import { defineMessages } from 'react-intl';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
+import { colors } from 'theme';
 
 export const scope = 'app.containers.DefaultSettings';
 
@@ -86,11 +87,13 @@ export default defineMessages({
   },
   warningMessage: {
     id: `${scope}.warningMessage`,
-    defaultMessage: `<b>Note:</b> you can’t edit screen content when the Narrator menu is selected `,
+    defaultMessage: `Bear in mind that <span style="color: ${
+      colors.flamingo
+    }">you can't edit the question</span> when you are working with the character.`,
   },
   characterBlocked: {
     id: `${scope}.characterBlocked`,
-    defaultMessage: `Expand any block to move the character.`,
+    defaultMessage: `Open any of the blocks to replace the character.`,
   },
   characterMovable: {
     id: `${scope}.characterMovable`,

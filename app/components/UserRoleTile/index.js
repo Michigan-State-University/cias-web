@@ -16,13 +16,12 @@ import { colors } from 'theme';
 const UserRoleTile = ({ role, disabled, onClick }) => (
   <Box
     display="inline-flex"
-    width="120px"
+    width="max-content"
     bg={disabled ? colors.grey : RolesColors[role]}
     justify="center"
     align="center"
     px={10}
     py={5}
-    mx={7}
     clickable={!!onClick}
     onClick={onClick}
   >

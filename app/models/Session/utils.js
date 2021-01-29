@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import pick from 'lodash/pick';
+import sortBy from 'lodash/sortBy';
 
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import {
@@ -48,11 +49,49 @@ export const findInterventionIndex = (sessions, sessionId) =>
   sessions.findIndex(value => value.id === sessionId);
 
 /**
+ * @param  {Question} currentQuestion
+ * @param  {Array<Question>} questions
+ * @param  {Array<any>} groups
+ */
+export const getPreviousQuestions = (currentQuestion, questions, groups) => {
+  const currentQuestionGroup = groups.find(
+    ({ id }) => id === currentQuestion.question_group_id,
+  );
+  const filteredGroups = groups.filter(
+    ({ position }) => position <= currentQuestionGroup.position,
+  );
+  const sortedGroups = sortBy(filteredGroups, 'position');
+
+  const filteredQuestions = [];
+
+  sortedGroups.forEach(group => {
+    const currentGroupQuestions = questions.filter(
+      ({ question_group_id: questionGroupId }) => questionGroupId === group.id,
+    );
+
+    const previousQuestionsIncludingCurrent =
+      group.id === currentQuestion.question_group_id
+        ? currentGroupQuestions.filter(
+            ({ position }) => position <= currentQuestion.position,
+          )
+        : currentGroupQuestions;
+
+    filteredQuestions.push(...previousQuestionsIncludingCurrent);
+  });
+
+  return filteredQuestions;
+};
+
+/**
  * @param  {Array<Question>} questions
  * @param  {{structure: 'flat' | 'group', include: Array<string>, noEmpty: boolean}} options
  */
 export const getAllVariables = (questions, options) => {
-  const defaultParams = { structure: 'flat', include: [], noEmpty: true };
+  const defaultParams = {
+    structure: 'flat',
+    include: [],
+    noEmpty: true,
+  };
   const { structure, include, noEmpty } = { ...defaultParams, ...options };
   const variables = [];
 

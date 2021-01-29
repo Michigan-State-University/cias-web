@@ -12,18 +12,25 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
   color: #FFFFFF;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  width: 200px;
 }
 
 .c1 {
   font-weight: bold;
+  width: 180px;
+  margin: 5px;
+  background-color: rgba(140,189,0,1);
+}
+
+.c1 a {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 <button
   class="c0 c1"
   color="primary"
   data-cy="publish-session-button"
-  width="200"
 >
   <span>
     Publish Intervention
@@ -43,12 +50,12 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
   color: #FFFFFF;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-right: 10px;
-  width: 200px;
 }
 
 .c1 {
   font-weight: bold;
+  width: 180px;
+  margin: 5px;
   background-color: transparent;
   border: #107969 solid 1px;
   color: #107969;
@@ -59,13 +66,18 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
   color: white;
 }
 
+.c1 a {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
 <button
   class="c0 c1"
   color="primary"
-  width="200"
 >
   <span>
-    Get CSV with results
+    Generate CSV
   </span>
 </button>
 `;
@@ -82,12 +94,12 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
   color: #FFFFFF;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-right: 10px;
-  width: 200px;
 }
 
 .c1 {
   font-weight: bold;
+  width: 180px;
+  margin: 5px;
   background-color: transparent;
   border: #107969 solid 1px;
   color: #107969;
@@ -98,13 +110,18 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
   color: white;
 }
 
+.c1 a {
+  color: inherit;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
 <button
   class="c0 c1"
   color="primary"
-  width="200"
 >
   <span>
-    Get CSV with results
+    Generate CSV
   </span>
 </button>
 `;

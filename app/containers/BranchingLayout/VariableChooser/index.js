@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { compose } from 'redux';
@@ -20,23 +20,32 @@ import {
 
 import { colors, boxShadows } from 'theme';
 import Question from 'models/Session/Question';
-import { getAllVariables } from 'models/Session/utils';
+import { getAllVariables, getPreviousQuestions } from 'models/Session/utils';
 import NoContent from 'components/NoContent';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import useOutsideClick from 'utils/useOutsideClick';
-import { makeSelectGetQuestionGroupLoader } from 'global/reducers/questionGroups';
+import {
+  makeSelectGetQuestionGroupLoader,
+  makeSelectQuestionGroups,
+} from 'global/reducers/questionGroups';
 import messages from './messages';
 
 const VariableChooser = ({
   intl: { formatMessage },
   onClick,
   questions,
-  selectedQuestion: { id } = {},
+  groups,
+  selectedQuestion = {},
   visible,
   setOpen,
   loading,
 }) => {
-  const variables = getAllVariables(questions, {
+  const { id } = selectedQuestion;
+  const previousQuestions = useMemo(
+    () => getPreviousQuestions(selectedQuestion, questions, groups),
+    [selectedQuestion, questions, groups],
+  );
+  const variables = getAllVariables(previousQuestions, {
     structure: 'flat',
     include: ['id', 'subtitle'],
   });
@@ -111,6 +120,9 @@ VariableChooser.propTypes = {
   intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
+  groups: PropTypes.arrayOf(
+    PropTypes.shape({ id: PropTypes.string, position: PropTypes.number }),
+  ),
   selectedQuestion: PropTypes.shape(Question),
   visible: PropTypes.bool,
   loading: PropTypes.bool,
@@ -119,6 +131,7 @@ VariableChooser.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
+  groups: makeSelectQuestionGroups(),
   selectedQuestion: makeSelectSelectedQuestion(),
   loading: makeSelectGetQuestionGroupLoader(),
 });

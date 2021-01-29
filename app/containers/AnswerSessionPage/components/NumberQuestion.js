@@ -32,7 +32,7 @@ const NumberQuestion = ({
   const onValidation = validationResult =>
     !validationResult &&
     showError(formatMessage(messages.numberValidationError), {
-      id: NUMBER_VALIDATION_ERROR,
+      toastId: NUMBER_VALIDATION_ERROR,
     });
 
   return (

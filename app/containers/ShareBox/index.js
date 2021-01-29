@@ -14,9 +14,9 @@ import { createStructuredSelector } from 'reselect';
 import Box from 'components/Box';
 import CopyToClipboard from 'components/CopyToClipboard';
 import CsvFileExport from 'components/CsvFileExport';
-import H2 from 'components/H2';
 import Row from 'components/Row';
 import H3 from 'components/H3';
+import H2 from 'components/H2';
 
 import { colors } from 'theme';
 import { canShareWithParticipants } from 'models/Status/statusPermissions';
@@ -32,7 +32,7 @@ import ParticipantInviter from './Components/ParticipantInviter';
 import UserList from './Components/UserList';
 import messages from './messages';
 import { makeSelectCurrentSession } from './selectors';
-import { InterventionIndex } from './styled';
+import { SessionIndex } from './styled';
 
 const ShareBox = ({
   session,
@@ -80,8 +80,8 @@ const ShareBox = ({
     return (
       <Box height="fit-content" width={500} mt={20}>
         <Box display="flex" align="center">
-          <InterventionIndex>{position}</InterventionIndex>
-          <H2 ml={10}>{session.name}</H2>
+          <SessionIndex>{position}</SessionIndex>
+          <H2 ml={15}>{name}</H2>
         </Box>
         <Row mt={20}>
           <ParticipantInviter

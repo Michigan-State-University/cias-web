@@ -12,12 +12,12 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       display="flex"
     >
       <div
-        class="styled__InterventionIndex-sc-1achu0i-4 cxhXEe"
+        class="styled__SessionIndex-sc-1achu0i-4 kcBhBq"
       >
         1
       </div>
       <h2
-        class="H2-uw8lbl-0 liYLJP"
+        class="H2-uw8lbl-0 FohuW"
       >
         Name
       </h2>

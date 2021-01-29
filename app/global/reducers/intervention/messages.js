@@ -60,4 +60,12 @@ export default defineMessages({
     id: `${scope}.deleteInviteError`,
     defaultMessage: 'Unable to remove the invitation',
   },
+  deleteSessionError: {
+    id: `${scope}.deleteSessionError`,
+    defaultMessage: 'Unable to remove the session',
+  },
+  deleteSessionSuccess: {
+    id: `${scope}.deleteSessionSuccess`,
+    defaultMessage: 'Successfully deleted session',
+  },
 });

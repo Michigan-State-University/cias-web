@@ -3,10 +3,11 @@
  * InterventionStatusButtons
  *
  */
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
+import dayjs from 'dayjs';
 
 import { colors, themeColors } from 'theme';
 
@@ -16,6 +17,14 @@ import Column from 'components/Column';
 import Divider from 'components/Divider';
 import Row from 'components/Row';
 import Text from 'components/Text';
+import Tooltip from 'components/Tooltip';
+
+import {
+  closed,
+  published,
+  statusTypeToColorMap,
+} from 'models/Status/StatusTypes';
+import getUrlProtocol from 'utils/getApiProtocol';
 
 import messages from './messages';
 import { ShareButton } from './styled';
@@ -25,22 +34,74 @@ function InterventionStatusButtons({
   status,
   handleChangeStatus,
   handleSendCsv,
+  csvLink,
+  csvGeneratedAt,
 }) {
+  const apiProtocol = useMemo(
+    () => (process.env.API_URL ? getUrlProtocol(process.env.API_URL) : ''),
+    [process.env.API_URL],
+  );
+
   const CsvButton = () => (
-    <ShareButton mr={10} width={200} outlined onClick={handleSendCsv}>
-      <FormattedMessage {...messages.csv} />
+    <ShareButton outlined onClick={handleSendCsv}>
+      <FormattedMessage {...(csvLink ? messages.csvNew : messages.csv)} />
     </ShareButton>
   );
 
-  const CloseButton = () => (
-    <ShareButton
-      width={200}
-      bg={colors.burntSienna}
-      onClick={handleChangeStatus}
+  const urlToDownload = /^((http:\/\/)|(https:\/\/)).*$/.test(csvLink)
+    ? csvLink
+    : `${apiProtocol}//${csvLink}`;
+  const fileName = useMemo(() => urlToDownload.split('/').pop(), [
+    urlToDownload,
+  ]);
+  const CsvDownload = () => (
+    <Tooltip
+      id={csvGeneratedAt}
+      text={`${formatMessage(messages.lastCsvDate)}${dayjs(
+        csvGeneratedAt,
+      ).format('YYYY/MM/DD HH:mm')}`}
     >
-      <FormattedMessage {...messages.close} />
-    </ShareButton>
+      <ShareButton outlined>
+        <a href={urlToDownload} download={fileName}>
+          <FormattedMessage {...messages.csvDownload} />
+        </a>
+      </ShareButton>
+    </Tooltip>
   );
+
+  const CloseButton = () => (
+    <>
+      <ConfirmationBox
+        visible={closeConfirmationOpen}
+        onClose={closeCloseConfirmation}
+        description={<FormattedMessage {...messages.closeConfirmationHeader} />}
+        confirmAction={handleClose}
+        confirmationButtonColor="primary"
+        content={closeConfirmationDesc()}
+        contentStyles={{
+          padding: '0px',
+        }}
+        contentContainerStyles={{
+          px: 20,
+          my: 20,
+        }}
+      />
+      <ShareButton
+        bg={statusTypeToColorMap[closed]}
+        onClick={openCloseConfirmation}
+      >
+        <FormattedMessage {...messages.close} />
+      </ShareButton>
+    </>
+  );
+
+  const [closeConfirmationOpen, setCloseConfirmationOpen] = useState(false);
+  const openCloseConfirmation = () => setCloseConfirmationOpen(true);
+  const closeCloseConfirmation = () => setCloseConfirmationOpen(false);
+  const handleClose = () => {
+    handleChangeStatus();
+    closeCloseConfirmation();
+  };
 
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const openConfirmation = () => setConfirmationOpen(true);
@@ -76,6 +137,19 @@ function InterventionStatusButtons({
     </>
   );
 
+  const closeConfirmationDesc = () => (
+    <>
+      <Text mt={10} fontSize={18} color={colors.flamingo} textAlign="center">
+        {formatMessage(messages.irreversibleInfo)}
+      </Text>
+      <Row justify="center" mt={10}>
+        <Column ml={18} mr={5}>
+          <FormattedMessage {...messages.closeConfirmationMessage} />
+        </Column>
+      </Row>
+    </>
+  );
+
   const PublishButton = () => (
     <>
       <ConfirmationBox
@@ -95,8 +169,8 @@ function InterventionStatusButtons({
       />
       <ShareButton
         data-cy="publish-session-button"
-        width={200}
         onClick={openConfirmation}
+        bg={statusTypeToColorMap[published]}
       >
         <FormattedMessage {...messages.publish} />
       </ShareButton>
@@ -107,11 +181,17 @@ function InterventionStatusButtons({
     draft: <PublishButton />,
     published: (
       <>
+        {csvLink && <CsvDownload />}
         <CsvButton />
         <CloseButton />
       </>
     ),
-    closed: <CsvButton />,
+    closed: (
+      <>
+        {csvLink && <CsvDownload />}
+        <CsvButton />
+      </>
+    ),
   };
 
   const renderButtons = () => get(statuses, status, <></>);
@@ -124,6 +204,8 @@ InterventionStatusButtons.propTypes = {
   status: PropTypes.string,
   handleChangeStatus: PropTypes.func,
   handleSendCsv: PropTypes.func,
+  csvLink: PropTypes.string,
+  csvGeneratedAt: PropTypes.string,
 };
 
 export default injectIntl(InterventionStatusButtons);

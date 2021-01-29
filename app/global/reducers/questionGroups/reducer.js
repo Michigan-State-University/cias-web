@@ -2,7 +2,7 @@ import produce from 'immer';
 import sortBy from 'lodash/sortBy';
 
 import { insertAt, removeAt } from 'utils/arrayUtils';
-import { DefaultGroupType, FinishGroupType } from 'models/Session/GroupTypes';
+import { FinishGroupType } from 'models/Session/GroupTypes';
 import { ternary } from 'utils/ternary';
 import {
   GET_QUESTION_GROUPS_SUCCESS,
@@ -89,10 +89,8 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
           question => question.question_group_id,
         );
 
-        const filteredGroups = state.groups.filter(
-          group =>
-            afterReorderRemainingGroups.includes(group.id) ||
-            group.type === DefaultGroupType,
+        const filteredGroups = state.groups.filter(group =>
+          afterReorderRemainingGroups.includes(group.id),
         );
 
         draft.groups = sortBy(filteredGroups, 'position');

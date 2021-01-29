@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 
-import { DefaultGroupType } from 'models/Session/GroupTypes';
 import { initialState } from './reducer';
 
 export const selectQuestionGroups = state =>
@@ -16,13 +15,6 @@ export const makeSelectQuestionGroups = () =>
   createSelector(
     selectQuestionGroups,
     substate => substate.groups,
-  );
-
-export const makeSelectDefaultGroupId = () =>
-  createSelector(
-    selectQuestionGroups,
-    substate =>
-      substate.groups.find(({ type }) => type === DefaultGroupType).id,
   );
 
 export const makeSelectQuestionGroupsIds = () =>
