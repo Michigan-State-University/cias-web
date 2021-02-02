@@ -21,10 +21,15 @@ export const proxy = 'https://cors-anywhere.herokuapp.com/';
 const UrlPreview = ({ link, handleClick }) => {
   const [linkData, setLinkData] = useState(null);
 
-  const fetchData = async () =>
-    getLinkPreview(`${proxy}${link}`, {
-      imagesPropertyType: 'og',
-    });
+  const fetchData = async () => {
+    try {
+      return await getLinkPreview(`${proxy}${link}`, {
+        imagesPropertyType: 'og',
+      });
+    } catch (e) {
+      return { title: link, images: [] };
+    }
+  };
 
   useAsync(fetchData, data => setLinkData(data), { deps: [link] });
 
