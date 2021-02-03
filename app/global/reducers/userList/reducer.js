@@ -15,14 +15,20 @@ import {
   CHANGE_ACTIVATE_STATUS_FAILURE,
   CHANGE_ACTIVATE_STATUS_SUCCESS,
   ADD_USER_TO_LIST,
+  FETCH_USERS_SELECTOR,
+  FETCH_USERS_SELECTOR_SUCCESS,
+  FETCH_USERS_SELECTOR_FAILURE,
 } from './constants';
 
 export const initialState = {
   users: [],
+  usersSelector: [],
   usersSize: 0,
   cache: {
     users: [],
   },
+  usersSelectorError: null,
+  usersSelectorLoading: true,
   usersError: null,
   usersLoading: true,
 };
@@ -35,16 +41,34 @@ const userListReducer = (state = initialState, { type, payload }) =>
         if (isEmpty(state.users)) draft.usersLoading = true;
         draft.usersError = null;
         break;
-      case FETCH_USERS_SUCCESS:
+      case FETCH_USERS_SUCCESS: {
         const { users: usersList, usersSize } = payload;
         draft.users = usersList;
         draft.usersSize = usersSize;
         draft.usersLoading = false;
         break;
+      }
       case FETCH_USERS_FAILURE:
         draft.usersError = payload;
         draft.usersLoading = false;
         break;
+
+      case FETCH_USERS_SELECTOR:
+        if (isEmpty(state.usersSelector)) draft.usersSelectorLoading = true;
+        draft.usersSelectorError = null;
+        break;
+      case FETCH_USERS_SELECTOR_SUCCESS: {
+        const { users: usersList } = payload;
+        draft.usersSelector = usersList;
+        draft.usersSelectorLoading = false;
+        draft.usersSelectorError = null;
+        break;
+      }
+      case FETCH_USERS_SELECTOR_FAILURE:
+        draft.usersSelectorLoading = false;
+        draft.usersSelectorError = payload;
+        break;
+
       case CHANGE_ACTIVATE_STATUS_REQUEST:
         const { users } = state;
         draft.cache.users = users;

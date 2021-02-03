@@ -59,6 +59,20 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             </span>
           </p>
         </a>
+        <a
+          class="styled__NavbarTabLink-sc-12n1pg-4 jquOTU navbar-tabs"
+          href="/teams"
+          ml="10"
+        >
+          <p
+            class="Text-e4p0w3-0 pcigz"
+            font-size="15"
+          >
+            <span>
+              Manage teams
+            </span>
+          </p>
+        </a>
       </div>
     </div>
     <div

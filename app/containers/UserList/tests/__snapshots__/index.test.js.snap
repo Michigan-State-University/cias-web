@@ -83,6 +83,24 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="Box-sc-1vhutan-0 eaYVjB"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="Text-e4p0w3-0 eAccFX"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Team Admin
+                    </p>
+                  </div>
+                </div>
+                <div
                   class="Box-sc-1vhutan-0 jIytus"
                   width="25"
                 />
@@ -109,7 +127,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
             >
               <div
-                class="styled__SearchInputStyled-sc-10udg63-3 gtZjEY"
+                class="styled__SearchInputStyled-sc-10udg63-3 gFHxDg"
               >
                 <input
                   class="Input-t9j2q5-0 hjYQaq"
@@ -483,6 +501,24 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="Box-sc-1vhutan-0 eaYVjB"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="Text-e4p0w3-0 eAccFX"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Team Admin
+                    </p>
+                  </div>
+                </div>
+                <div
                   class="Box-sc-1vhutan-0 jIytus"
                   width="25"
                 />
@@ -509,7 +545,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
             >
               <div
-                class="styled__SearchInputStyled-sc-10udg63-3 gtZjEY"
+                class="styled__SearchInputStyled-sc-10udg63-3 gFHxDg"
               >
                 <input
                   class="Input-t9j2q5-0 hjYQaq"

@@ -1,0 +1,147 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-1vhutan-0 styled__StyledBox-sc-1x1cot6-0 bdpEXp jKbXJq"
+    height="100%"
+    width="100%"
+  >
+    <a
+      class="styled__StyledLink-sc-3pirdo-0 dtoOZi"
+      href="/teams"
+    >
+      <img
+        alt="traingle"
+        class="Img-sc-55j3su-0 gfzPuQ"
+        src="IMAGE_MOCK"
+      />
+      <p
+        class="Text-e4p0w3-0 ikSWkc"
+        color="#C866EA"
+        font-weight="bold"
+      >
+        <span>
+          Back to Team List
+        </span>
+      </p>
+    </a>
+    <h1
+      class="H1-sc-1k7m23t-0 eMTspO"
+    >
+      <span>
+        Team Details
+      </span>
+    </h1>
+    <div
+      style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+    >
+      <div
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+      >
+        <div
+          class="Box-sc-1vhutan-0 styled__CardBox-sc-1x1cot6-3 cVZZaQ gvMXdL"
+        >
+          <h2
+            class="H2-uw8lbl-0 iUhbVg"
+          >
+            <span>
+              Edit Team
+            </span>
+          </h2>
+          <div
+            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+          >
+            <div
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
+            >
+              <p
+                class="Text-e4p0w3-0 fwzRty"
+                font-size="14"
+              >
+                <span>
+                  Change Team name
+                </span>
+              </p>
+              <input
+                class="Input-t9j2q5-0 kyuVel"
+                placeholder="e.g Team n.o. 1"
+                type="text"
+                value="Team 1"
+                width="100%"
+              />
+            </div>
+            <div
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
+            >
+              <p
+                class="Text-e4p0w3-0 iZfJuq"
+                font-size="14"
+              >
+                <span>
+                  Change Team Admin
+                </span>
+              </p>
+              <div
+                class="Box-sc-1vhutan-0 cVZZaQ"
+              >
+                <div
+                  class="styled__InlineLoader-sc-1aaagww-1 kkTeLU"
+                  data-testid="inline-loader"
+                >
+                  <div
+                    class="styled__StyledSpinner-sc-129uixn-0 OJHNY"
+                    color="#C866EA"
+                    size="50"
+                    width="6"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+          >
+            <div
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+            >
+              <button
+                class="StyledButton-d2s0gt-0 ihkoZy"
+                color="primary"
+                disabled=""
+                font-size="14"
+                font-weight="bold"
+                width="200"
+              >
+                <span>
+                  Save
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; margin-top: 75px;"
+    >
+      <div
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+      >
+        <div
+          class="styled__FillScreenLoader-sc-1aaagww-0 bcnRTW"
+          data-testid="fullscreen-loader"
+          opacity="0.5"
+        >
+          <div
+            class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
+            color="#C866EA"
+            size="100"
+            width="6"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

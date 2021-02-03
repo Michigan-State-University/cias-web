@@ -7,7 +7,7 @@
  *
  */
 
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -25,6 +25,8 @@ import ResetPasswordPage from 'containers/ResetPasswordPage/Loadable';
 import SetNewPasswordPage from 'containers/SetNewPasswordPage/Loadable';
 import InterventionPage from 'containers/InterventionPage/Loadable';
 import UserListPage from 'containers/UserList/Loadable';
+import TeamsListPage from 'containers/TeamsList/Loadable';
+import TeamDetails from 'containers/TeamDetails/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import UserDetails from 'containers/UserDetails/Loadable';
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
@@ -43,6 +45,7 @@ import {
   accountsTabId,
   interventionsTabId,
   participantReportsTabId,
+  teamsTabId,
 } from 'utils/defaultNavbarTabs';
 
 export function App({ user }) {
@@ -137,6 +140,28 @@ export function App({ user }) {
           navbarProps={{
             navbarId: 'default',
             activeTab: accountsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/teams"
+          component={TeamsListPage}
+          protectedRoute
+          allowedRoles={[Roles.admin]}
+          navbarProps={{
+            navbarId: 'default',
+            activeTab: teamsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/teams/:id"
+          component={TeamDetails}
+          protectedRoute
+          allowedRoles={[Roles.admin]}
+          navbarProps={{
+            navbarId: 'default',
+            activeTab: teamsTabId,
           }}
         />
         <AppRoute

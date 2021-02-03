@@ -111,7 +111,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="styled__SearchInputStyled-sc-10udg63-3 gtZjEY"
+                class="styled__SearchInputStyled-sc-10udg63-3 gFHxDg"
               >
                 <input
                   class="Input-t9j2q5-0 hjYQaq"

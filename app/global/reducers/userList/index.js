@@ -4,6 +4,7 @@ import UserListReducer from './reducer';
 
 export {
   fetchUsers,
+  fetchUsersSelector,
   changeActivateStatusRequest,
   addUserToList,
 } from './actions';

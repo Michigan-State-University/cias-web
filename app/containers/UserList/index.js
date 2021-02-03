@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useState, Fragment } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import xor from 'lodash/xor';
 import { Helmet } from 'react-helmet';
@@ -42,7 +42,7 @@ import InviteResearcher from '../InviteResearcher';
 import UserTable from './Components/UserTable';
 import messages from './messages';
 
-const rolesToFilter = [Roles.participant, Roles.researcher];
+const rolesToFilter = [Roles.participant, Roles.researcher, Roles.teamAdmin];
 const initialDelay = 500;
 
 function UserList({
@@ -51,6 +51,8 @@ function UserList({
   changeActivateStatus,
   intl: { formatMessage },
   user: { roles },
+  listOnly,
+  teamId,
 }) {
   useInjectReducer({ key: 'userList', reducer: UserListReducer });
   useInjectSaga({ key: 'userList', saga: userListSaga });
@@ -66,8 +68,14 @@ function UserList({
   const clearFilters = selectRoles.length === rolesToFilter.length;
 
   useEffect(() => {
-    fetchUsersRequest(selectRoles, debouncedFilterText, page, showInactive);
-  }, [selectRoles, debouncedFilterText, page, showInactive]);
+    fetchUsersRequest(
+      selectRoles,
+      debouncedFilterText,
+      page,
+      showInactive,
+      teamId,
+    );
+  }, [selectRoles, debouncedFilterText, page, showInactive, teamId]);
 
   useEffect(() => {
     if (page > pages) {
@@ -149,6 +157,8 @@ function UserList({
     );
   };
 
+  if (listOnly) return getContent();
+
   return (
     <>
       <InviteResearcher visible={modalVisible} onClose={closeModal} />
@@ -187,6 +197,12 @@ UserList.propTypes = {
   userList: PropTypes.object,
   intl: intlShape,
   user: PropTypes.object,
+  listOnly: PropTypes.bool,
+  teamId: PropTypes.string,
+};
+
+UserList.defaultProps = {
+  listOnly: false,
 };
 
 const mapStateToProps = createStructuredSelector({

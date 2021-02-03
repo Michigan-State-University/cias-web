@@ -1,0 +1,30 @@
+/*
+ *
+ * TeamList constants
+ *
+ */
+
+export const FETCH_TEAMS_REQUEST = 'app/TeamList/FETCH_TEAMS_REQUEST';
+export const FETCH_TEAMS_SUCCESS = 'app/TeamList/FETCH_TEAMS_SUCCESS';
+export const FETCH_TEAMS_FAILURE = 'app/TeamList/FETCH_TEAMS_FAILURE';
+
+export const FETCH_SINGLE_TEAM_REQUEST =
+  'app/TeamList/FETCH_SINGLE_TEAM_REQUEST';
+export const FETCH_SINGLE_TEAM_SUCCESS =
+  'app/TeamList/FETCH_SINGLE_TEAM_SUCCESS';
+export const FETCH_SINGLE_TEAM_FAILURE =
+  'app/TeamList/FETCH_SINGLE_TEAM_FAILURE';
+
+export const EDIT_SINGLE_TEAM_REQUEST = 'app/TeamList/EDIT_SINGLE_TEAM_REQUEST';
+export const EDIT_SINGLE_TEAM_SUCCESS = 'app/TeamList/EDIT_SINGLE_TEAM_SUCCESS';
+export const EDIT_SINGLE_TEAM_FAILURE = 'app/TeamList/EDIT_SINGLE_TEAM_FAILURE';
+
+export const CREATE_TEAM_REQUEST = 'app/TeamList/CREATE_TEAM_REQUEST';
+export const CREATE_TEAM_SUCCESS = 'app/TeamList/CREATE_TEAM_SUCCESS';
+export const CREATE_TEAM_FAILURE = 'app/TeamList/CREATE_TEAM_FAILURE';
+
+export const DELETE_TEAM_REQUEST = 'app/TeamList/DELETE_TEAM_REQUEST';
+export const DELETE_TEAM_SUCCESS = 'app/TeamList/DELETE_TEAM_SUCCESS';
+export const DELETE_TEAM_FAILURE = 'app/TeamList/DELETE_TEAM_FAILURE';
+
+export const PER_PAGE = 10;

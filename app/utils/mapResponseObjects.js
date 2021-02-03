@@ -42,3 +42,9 @@ export const mapCurrentUserWithoutAttributes = user => ({
   active: user.active,
   phone: user.phone,
 });
+
+export const mapTeam = team => ({
+  id: team.id,
+  name: team.attributes.name,
+  teamAdmin: team.relationships.team_admin,
+});

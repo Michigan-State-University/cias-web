@@ -26,6 +26,28 @@ import {
 export const scope = 'app.GlobalMessages';
 
 export default defineMessages({
+  roles: {
+    admin: {
+      id: `${scope}.admin`,
+      defaultMessage: 'Admin',
+    },
+    team_admin: {
+      id: `${scope}.teamAdmin`,
+      defaultMessage: 'Team Admin',
+    },
+    participant: {
+      id: `${scope}.participant`,
+      defaultMessage: 'Participant',
+    },
+    researcher: {
+      id: `${scope}.researcher`,
+      defaultMessage: 'Researcher',
+    },
+    guest: {
+      id: `${scope}.guest`,
+      defaultMessage: 'Guest',
+    },
+  },
   variables: {
     variableNamePlaceholder: {
       id: `${scope}.variableNamePlaceholder`,
