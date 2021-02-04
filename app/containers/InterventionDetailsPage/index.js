@@ -16,15 +16,11 @@ import orderBy from 'lodash/orderBy';
 import { Col as GCol, Row as GRow, useScreenClass } from 'react-grid-system';
 
 import ConfirmationBox from 'components/ConfirmationBox';
-import { StyledInput } from 'components/Input/StyledInput';
 import Loader from 'components/Loader';
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
-import Box from 'components/Box';
-import BackButton from 'components/BackButton';
 import ShareBox from 'containers/ShareBox';
-import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import Spinner from 'components/Spinner';
 import AppContainer from 'components/Container';
@@ -47,7 +43,6 @@ import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import { injectSaga, useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import { colors, themeColors } from 'theme';
-import globalMessages from 'global/i18n/globalMessages';
 
 import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
@@ -73,10 +68,10 @@ import { reorderScope } from 'models/Session/ReorderScope';
 import { reorder } from 'utils/reorder';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 
-import { StatusLabel, InterventionOptions, DraggedTest } from './styled';
+import Header from './Header';
+import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
 import SessionCreateButton from './components/SessionCreateButton';
-import InterventionStatusButtons from './components/InterventionStatusButtons';
 import SessionListItem from './components/SessionListItem';
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
@@ -335,61 +330,17 @@ export function InterventionDetailsPage({
       >
         <ShareBox />
       </Modal>
-      <GRow>
-        <GCol>
-          <Row justify="between" mt={50}>
-            <BackButton to="/">
-              <FormattedMessage {...messages.back} />
-            </BackButton>
-          </Row>
-        </GCol>
-      </GRow>
-
-      <GRow>
-        <GCol md={6} sm={12}>
-          <Row justify="end" align="center" mt={18}>
-            <Box mr={15}>
-              <StatusLabel status={status}>
-                {status && formatMessage(globalMessages.statuses[status])}
-              </StatusLabel>
-            </Box>
-            <StyledInput
-              disabled={!editingPossible}
-              ml={-12}
-              px={12}
-              py={6}
-              width="100%"
-              value={name}
-              fontSize={23}
-              placeholder={formatMessage(messages.placeholder)}
-              onBlur={editName}
-              maxWidth="none"
-            />
-          </Row>
-        </GCol>
-        <GCol>
-          <Row align="center" justify="end" width="100%">
-            <Row
-              width="100%"
-              align="center"
-              justify="end"
-              mr={20}
-              flexWrap="wrap"
-            >
-              <InterventionStatusButtons
-                status={status}
-                handleChangeStatus={handleChangeStatus}
-                handleSendCsv={handleSendCsv}
-                csvLink={csvLink}
-                csvGeneratedAt={csvGeneratedAt}
-              />
-            </Row>
-            <InterventionOptions>
-              <Dropdown options={options} clickable />
-            </InterventionOptions>
-          </Row>
-        </GCol>
-      </GRow>
+      <Header
+        name={name}
+        csvGeneratedAt={csvGeneratedAt}
+        csvLink={csvLink}
+        editingPossible={editingPossible}
+        editName={editName}
+        handleChangeStatus={handleChangeStatus}
+        handleSendCsv={handleSendCsv}
+        options={options}
+        status={status}
+      />
 
       <GRow>
         <GCol
