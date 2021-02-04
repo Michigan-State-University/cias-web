@@ -10,12 +10,11 @@ import { deleteQuestionError, deleteQuestionSuccess } from '../actions';
 import messages from '../messages';
 import { makeSelectQuestions } from '../selectors';
 
-function* deleteQuestion({ payload: { questionId, groupId } }) {
-  const requestURL = `v1/question_groups/${groupId}/questions/${questionId}`;
+function* deleteQuestion({ payload: { questionId, sessionId } }) {
+  const requestURL = `v1/sessions/${sessionId}/delete_questions`;
 
   try {
-    yield axios.delete(requestURL);
-
+    yield call(axios.delete, requestURL, { data: { ids: [questionId] } });
     const questions = yield select(makeSelectQuestions());
     yield put(cleanGroups(questions));
 

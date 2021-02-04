@@ -131,6 +131,7 @@ export const getNewQuestionIdInNextGroups = (
   questions,
   groupIndex,
   groupIds,
+  questionId,
 ) => {
   for (
     let newGroupIndex = groupIndex + 1;
@@ -143,7 +144,10 @@ export const getNewQuestionIdInNextGroups = (
     );
 
     if (newGroupQuestions.length !== 0) {
-      return newGroupQuestions[0].id;
+      for (let i = 0; i < newGroupQuestions.length; i += 1) {
+        if (newGroupQuestions[i].id !== questionId)
+          return newGroupQuestions[i].id;
+      }
     }
   }
   return null;

@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Helmet } from 'react-helmet';
@@ -52,12 +52,12 @@ import {
   makeSelectSelectedQuestionId,
   reorderQuestionListRequest,
   makeSelectLoader,
+  deleteQuestionsRequest,
 } from 'global/reducers/questions';
 import {
   reorderGroupListRequest,
   reorderQuestionGroupsSaga,
   copyQuestionsRequest,
-  deleteQuestionsRequest,
   groupQuestionsRequest,
   shareQuestionsToResearchersRequest,
   makeSelectQuestionGroups,
@@ -136,6 +136,7 @@ function EditSessionPage({
   const currentGroupScope = groups.find(
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
   );
+  const groupIds = groups.map(({ id }) => id);
 
   const groupActions = [
     ...(process.env.APP_STAGE === appStages.dev.id
@@ -156,7 +157,10 @@ function EditSessionPage({
             label: <FormattedMessage {...messages.delete} />,
             inactiveIcon: bin,
             activeIcon: binActive,
-            action: () => deleteQuestions(selectedSlides),
+            action: () => {
+              deleteQuestions(selectedSlides, params.sessionId, groupIds);
+              setSelectedSlides([]);
+            },
           },
         ]
       : []),
@@ -291,7 +295,6 @@ function EditSessionPage({
 
   const finishGroup = groups.find(group => group.type === FinishGroupType);
   const filteredGroups = groups.filter(group => group.type !== FinishGroupType);
-  const groupIds = groups.map(({ id }) => id);
 
   return (
     <>

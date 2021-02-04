@@ -11,6 +11,7 @@ export {
   deleteQuestionRequest,
   updateQuestionData,
   updateQuestionSettings,
+  deleteQuestionsRequest,
 } from './actions';
 export { questionsReducer } from './reducer';
 export {
@@ -37,4 +38,5 @@ export {
   updateQuestionDataSaga,
   updateQuestionSettingsSaga,
   changeQuestionTypeSaga,
+  deleteQuestionsSaga,
 } from './sagas';

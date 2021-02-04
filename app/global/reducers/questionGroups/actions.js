@@ -4,9 +4,6 @@ import {
   COPY_QUESTIONS_REQUEST,
   COPY_QUESTIONS_SUCCESS,
   COPY_QUESTIONS_ERROR,
-  DELETE_QUESTIONS_REQUEST,
-  DELETE_QUESTIONS_SUCCESS,
-  DELETE_QUESTIONS_ERROR,
   GROUP_QUESTIONS_REQUEST,
   GROUP_QUESTIONS_SUCCESS,
   GROUP_QUESTIONS_ERROR,
@@ -32,13 +29,6 @@ export const copyQuestionsSuccess = questions =>
   actionBuilder(COPY_QUESTIONS_SUCCESS, { questions });
 export const copyQuestionsError = error =>
   actionBuilder(COPY_QUESTIONS_ERROR, { error });
-
-export const deleteQuestionsRequest = questionIds =>
-  actionBuilder(DELETE_QUESTIONS_REQUEST, { questionIds });
-export const deleteQuestionsSuccess = () =>
-  actionBuilder(DELETE_QUESTIONS_SUCCESS, {});
-export const deleteQuestionsError = error =>
-  actionBuilder(DELETE_QUESTIONS_ERROR, { error });
 
 export const groupQuestionsRequest = (questionIds, sessionId) =>
   actionBuilder(GROUP_QUESTIONS_REQUEST, { questionIds, sessionId });

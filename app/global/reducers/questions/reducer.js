@@ -43,6 +43,9 @@ import {
   DELETE_QUESTION_ERROR,
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_SETTINGS,
+  DELETE_QUESTIONS_REQUEST,
+  DELETE_QUESTIONS_SUCCESS,
+  DELETE_QUESTIONS_ERROR,
 } from './constants';
 
 import {
@@ -243,6 +246,69 @@ export const questionsReducer = (state = initialState, action) =>
         draft.questions = state.cache.questions;
         break;
 
+      case DELETE_QUESTIONS_REQUEST: {
+        const { questionIds, groupIds } = action.payload;
+        const filteredQuestions = state.questions.filter(
+          question => !questionIds.includes(question.id),
+        );
+        const firstDeletedQuestion = state.questions.find(
+          ({ id }) => id === questionIds[0],
+        );
+        draft.questions = filteredQuestions;
+
+        const questions = [...filteredQuestions, firstDeletedQuestion];
+
+        const groupIndex = groupIds.findIndex(
+          index => index === firstDeletedQuestion.groupId,
+        );
+
+        const newIdInsideGroup = getNewQuestionIdInsideGroup(
+          questions,
+          firstDeletedQuestion.question_group_id,
+          firstDeletedQuestion.id,
+        );
+
+        if (newIdInsideGroup) {
+          draft.selectedQuestion = newIdInsideGroup;
+          return draft;
+        }
+
+        const previewGroupsQuestionId = getNewQuestionIdInPreviousGroups(
+          questions,
+          groupIndex,
+          groupIds,
+        );
+
+        if (previewGroupsQuestionId) {
+          draft.selectedQuestion = previewGroupsQuestionId;
+          return draft;
+        }
+
+        const nextGroupsQuestionId = getNewQuestionIdInNextGroups(
+          questions,
+          groupIndex,
+          groupIds,
+          firstDeletedQuestion.id,
+        );
+
+        if (nextGroupsQuestionId) {
+          draft.selectedQuestion = nextGroupsQuestionId;
+          return draft;
+        }
+
+        break;
+      }
+
+      case DELETE_QUESTIONS_SUCCESS: {
+        draft.cache.questions = state.questions;
+        break;
+      }
+
+      case DELETE_QUESTIONS_ERROR: {
+        draft.questions = state.cache.questions;
+        break;
+      }
+
       case DELETE_QUESTION_REQUEST: {
         const {
           payload: { questionId, groupId, groupIds },
@@ -279,6 +345,7 @@ export const questionsReducer = (state = initialState, action) =>
           questions,
           groupIndex,
           groupIds,
+          questionId,
         );
 
         if (nextGroupsQuestionId) {
@@ -288,6 +355,7 @@ export const questionsReducer = (state = initialState, action) =>
 
         break;
       }
+
       case DELETE_QUESTION_SUCCESS:
         draft.cache.questions = draft.questions;
         break;

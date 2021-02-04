@@ -64,6 +64,7 @@ const QuestionListItem = ({
   noDnd,
   groupIds,
   allQuestions,
+  sessionId,
 }) => {
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
@@ -85,7 +86,7 @@ const QuestionListItem = ({
   const handleDelete = () => {
     const newIndex = getIndex(selectedQuestionIndex, questions.length);
     handleSelectClick(newIndex);
-    removeQuestion({ questionId: id, groupId, groupIds });
+    removeQuestion({ questionId: id, groupId, groupIds, sessionId });
   };
 
   const handleCopy = () => {
