@@ -7,11 +7,13 @@ import {
   visualAnalogueScaleQuestion,
   urlQuestion,
   feedbackQuestion,
+  dateQuestion,
 } from 'models/Session/QuestionTypes';
 
 import gridQuestionReducer from './GridQuestion/reducer';
 import multiQuestionReducer from './MultiQuestion/reducer';
 import numberQuestionReducer from './NumberQuestion/reducer';
+import dateQuestionReducer from './DateQuestion/reducer';
 import singleQuestionReducer from './SingleQuestion/reducer';
 import textboxQuestionReducer from './TextboxQuestion/reducer';
 import urlQuestionReducer from './UrlQuestion/reducer';
@@ -27,6 +29,8 @@ const questionDataReducer = (question, data) => {
       return multiQuestionReducer(question, data);
     case textboxQuestion.id:
       return textboxQuestionReducer(question, data);
+    case dateQuestion.id:
+      return dateQuestionReducer(question, data);
     case numberQuestion.id:
       return numberQuestionReducer(question, data);
     case gridQuestion.id:

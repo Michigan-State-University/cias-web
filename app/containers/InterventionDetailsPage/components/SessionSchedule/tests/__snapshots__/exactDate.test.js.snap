@@ -36,8 +36,8 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-size: 15px;
-  color: rgba(47,56,80,0.6);
-  color: rgba(47,56,80,0.6);
+  color: rgba(0,0,0,0.6);
+  color: rgba(0,0,0,0.6);
 }
 
 .c14 {
@@ -294,7 +294,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
                       >
                         <p
                           class="c12"
-                          color="#2F3850"
+                          color="#000000"
                           font-size="15"
                         >
                           12/24/2018

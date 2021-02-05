@@ -61,12 +61,19 @@ export const finishQuestion = new QuestionType(
   colors.brightGreen,
 );
 
+export const dateQuestion = new QuestionType(
+  'Question::Date',
+  'Date',
+  colors.bluewood,
+);
+
 export const questionType = 'Question::';
 
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
   textboxQuestion,
+  dateQuestion,
   numberQuestion,
   gridQuestion,
   visualAnalogueScaleQuestion,

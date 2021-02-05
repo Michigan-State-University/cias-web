@@ -357,6 +357,29 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
 
 .c14 {
   border-radius: 50%;
+  background-color: #2F3850;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  margin-right: 18px;
+  background-color: rgba(47,56,80,1);
+  opacity: 1;
+  color: #2F3850;
+}
+
+.c15 {
+  border-radius: 50%;
   background-color: #FFCF5B;
   display: -webkit-box;
   display: -webkit-flex;
@@ -378,7 +401,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c15 {
+.c16 {
   border-radius: 50%;
   background-color: #FF7691;
   display: -webkit-box;
@@ -401,7 +424,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c16 {
+.c17 {
   border-radius: 50%;
   background-color: #000080;
   display: -webkit-box;
@@ -424,7 +447,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c17 {
+.c18 {
   border-radius: 50%;
   background-color: #107969;
   display: -webkit-box;
@@ -447,7 +470,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c18 {
+.c19 {
   border-radius: 50%;
   background-color: #808000;
   display: -webkit-box;
@@ -594,43 +617,25 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   class="c11"
                   font-weight="medium"
                 >
+                  Date
+                </p>
+              </div>
+            </div>
+            <div
+              class="HoverableBox-zvip6a-0 c9"
+            >
+              <div
+                class="c3"
+              >
+                <div
+                  class="c15"
+                  opacity="1"
+                />
+                <p
+                  class="c11"
+                  font-weight="medium"
+                >
                   Number
-                </p>
-              </div>
-            </div>
-            <div
-              class="HoverableBox-zvip6a-0 c9"
-            >
-              <div
-                class="c3"
-              >
-                <div
-                  class="c15"
-                  opacity="1"
-                />
-                <p
-                  class="c11"
-                  font-weight="medium"
-                >
-                  Grid
-                </p>
-              </div>
-            </div>
-            <div
-              class="HoverableBox-zvip6a-0 c9"
-            >
-              <div
-                class="c3"
-              >
-                <div
-                  class="c15"
-                  opacity="1"
-                />
-                <p
-                  class="c11"
-                  font-weight="medium"
-                >
-                  Slider
                 </p>
               </div>
             </div>
@@ -648,7 +653,25 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   class="c11"
                   font-weight="medium"
                 >
-                  Information Only
+                  Grid
+                </p>
+              </div>
+            </div>
+            <div
+              class="HoverableBox-zvip6a-0 c9"
+            >
+              <div
+                class="c3"
+              >
+                <div
+                  class="c16"
+                  opacity="1"
+                />
+                <p
+                  class="c11"
+                  font-weight="medium"
+                >
+                  Slider
                 </p>
               </div>
             </div>
@@ -666,7 +689,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   class="c11"
                   font-weight="medium"
                 >
-                  External Link
+                  Information Only
                 </p>
               </div>
             </div>
@@ -678,6 +701,24 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               >
                 <div
                   class="c18"
+                  opacity="1"
+                />
+                <p
+                  class="c11"
+                  font-weight="medium"
+                >
+                  External Link
+                </p>
+              </div>
+            </div>
+            <div
+              class="HoverableBox-zvip6a-0 c9"
+            >
+              <div
+                class="c3"
+              >
+                <div
+                  class="c19"
                   opacity="1"
                 />
                 <p

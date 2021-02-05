@@ -6,7 +6,19 @@ import Text from 'components/Text';
 import { colors } from 'theme';
 
 const DateInput = React.forwardRef(
-  ({ value, onClick, width, height, placeholder, fontSize, disabled }, ref) => (
+  (
+    {
+      value,
+      onClick,
+      width,
+      height,
+      placeholder,
+      fontSize,
+      disabled,
+      inputStyles,
+    },
+    ref,
+  ) => (
     <StyledDateInput
       disabled={disabled}
       ref={ref}
@@ -14,8 +26,13 @@ const DateInput = React.forwardRef(
       height={height}
       onClick={onClick}
       mx={10}
+      {...inputStyles}
     >
-      <Text textOpacity={0.6} color={colors.bluewood} fontSize={fontSize}>
+      <Text
+        textOpacity={0.6}
+        color={value ? colors.black : colors.bluewood}
+        fontSize={fontSize}
+      >
         {value || placeholder}
       </Text>
     </StyledDateInput>
@@ -30,6 +47,7 @@ DateInput.propTypes = {
   placeholder: PropTypes.string,
   fontSize: PropTypes.number,
   disabled: PropTypes.bool,
+  inputStyles: PropTypes.object,
 };
 
 export default DateInput;

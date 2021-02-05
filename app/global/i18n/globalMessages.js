@@ -21,6 +21,7 @@ import {
   textboxQuestion,
   urlQuestion,
   visualAnalogueScaleQuestion,
+  dateQuestion,
 } from 'models/Session/QuestionTypes';
 
 export const scope = 'app.GlobalMessages';
@@ -148,6 +149,10 @@ export default defineMessages({
     [finishQuestion.id]: {
       id: `${scope}.${finishQuestion.id}`,
       defaultMessage: 'Finish',
+    },
+    [dateQuestion.id]: {
+      id: `${scope}.${dateQuestion.id}`,
+      defaultMessage: 'Date',
     },
   },
   statuses: {

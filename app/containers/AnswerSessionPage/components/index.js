@@ -12,6 +12,7 @@ import {
   urlQuestion,
   feedbackQuestion,
   finishQuestion,
+  dateQuestion,
 } from 'models/Session/QuestionTypes';
 import FinishScreen from './FinishScreen';
 import UrlQuestion from './UrlQuestion';
@@ -23,6 +24,7 @@ import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
 import TextBoxQuestion from './TextBoxQuestion';
 import NumberQuestion from './NumberQuestion';
 import FeedbackQuestion from './FeedbackQuestion';
+import DateQuestion from './DateQuestion';
 
 export const renderQuestionByType = (question, sharedProps) => {
   const { type } = question;
@@ -41,6 +43,8 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <FeedbackQuestion question={question} {...sharedProps} />;
     case textboxQuestion.id:
       return <TextBoxQuestion question={question} {...sharedProps} />;
+    case dateQuestion.id:
+      return <DateQuestion question={question} {...sharedProps} />;
     case numberQuestion.id:
       return <NumberQuestion question={question} {...sharedProps} />;
     case informationQuestion.id:
