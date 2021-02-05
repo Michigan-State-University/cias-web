@@ -21,6 +21,7 @@ import {
   textboxQuestion,
   urlQuestion,
   visualAnalogueScaleQuestion,
+  phoneQuestion,
   dateQuestion,
 } from 'models/Session/QuestionTypes';
 
@@ -117,6 +118,10 @@ export default defineMessages({
     [textboxQuestion.id]: {
       id: `${scope}.${[textboxQuestion.id]}`,
       defaultMessage: 'Free Response',
+    },
+    [phoneQuestion.id]: {
+      id: `${scope}.${phoneQuestion.id}`,
+      defaultMessage: 'Phone',
     },
     [numberQuestion.id]: {
       id: `${scope}.${numberQuestion.id}`,

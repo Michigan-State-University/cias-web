@@ -20,6 +20,7 @@ import {
   visualAnalogueScaleQuestion,
   urlQuestion,
   feedbackQuestion,
+  phoneQuestion,
   dateQuestion,
 } from 'models/Session/QuestionTypes';
 
@@ -31,6 +32,7 @@ import TextboxQuestion from './TextboxQuestion';
 import UrlQuestion from './UrlQuestion';
 import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
 import FeedbackQuestion from './FeedbackQuestion';
+import PhoneQuestion from './PhoneQuestion';
 import DateQuestion from './DateQuestion';
 
 const QuestionData = ({
@@ -52,6 +54,8 @@ const QuestionData = ({
       return <MultiQuestion {...commonProps} />;
     case textboxQuestion.id:
       return <TextboxQuestion {...commonProps} />;
+    case phoneQuestion.id:
+      return <PhoneQuestion {...commonProps} />;
     case dateQuestion.id:
       return <DateQuestion {...commonProps} />;
     case numberQuestion.id:

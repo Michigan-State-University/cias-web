@@ -19,6 +19,7 @@ function FormikSelect({
   options,
   columnStyleProps,
   inputProps,
+  disabled,
 }) {
   const { submitForm, validateForm } = useFormikContext();
   const [field, meta, form] = useField(formikKey);
@@ -39,12 +40,14 @@ function FormikSelect({
         {label}
       </Text>
       <Select
+        isOptionDisabled={disabled}
         mb={3}
         data-testid="select"
         selectProps={{
           options,
           value,
           onChange,
+          isDisabled: disabled,
           ...inputProps,
         }}
       />
@@ -59,6 +62,7 @@ FormikSelect.propTypes = {
   inputProps: PropTypes.object,
   options: PropTypes.array,
   columnStyleProps: PropTypes.object,
+  disabled: PropTypes.bool,
 };
 
 export default memo(FormikSelect);

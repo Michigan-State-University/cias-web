@@ -40,6 +40,7 @@ const PhoneNumberForm = ({
   changePhoneNumber,
   error,
   loading,
+  disabled,
 }) => {
   const previousLoadingState = useRef(loading);
   const inputNumberRef = useRef(null);
@@ -151,6 +152,7 @@ const PhoneNumberForm = ({
                     pr: 10,
                     width: 230,
                   }}
+                  disabled={disabled}
                   label={formatMessage(messages.phoneNumberLabel)}
                   formikKey="iso"
                   options={prefixOptions}
@@ -167,6 +169,7 @@ const PhoneNumberForm = ({
                   }}
                 />
                 <FormikNumberInput
+                  disabled={disabled}
                   value={numberValue}
                   formikKey="number"
                   placeholder={formatMessage(messages.phoneNumber)}
@@ -208,6 +211,11 @@ PhoneNumberForm.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.string,
   changePhoneNumber: PropTypes.func,
+  disabled: PropTypes.bool,
+};
+
+PhoneNumberForm.defaultProps = {
+  disabled: false,
 };
 
 export default PhoneNumberForm;

@@ -12,6 +12,7 @@ import {
 
 import gridQuestionReducer from './GridQuestion/reducer';
 import multiQuestionReducer from './MultiQuestion/reducer';
+import phoneQuestionReducer from './PhoneQuestion/reducer';
 import numberQuestionReducer from './NumberQuestion/reducer';
 import dateQuestionReducer from './DateQuestion/reducer';
 import singleQuestionReducer from './SingleQuestion/reducer';
@@ -29,6 +30,8 @@ const questionDataReducer = (question, data) => {
       return multiQuestionReducer(question, data);
     case textboxQuestion.id:
       return textboxQuestionReducer(question, data);
+    case phoneQuestionReducer(question, data):
+      return phoneQuestionReducer(question, data);
     case dateQuestion.id:
       return dateQuestionReducer(question, data);
     case numberQuestion.id:
