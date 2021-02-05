@@ -30,3 +30,6 @@ export const CHANGE_IS_ANIMATING = 'app/AnswerSessionPage/CHANGE_IS_ANIMATING';
 
 export const SET_FEEDBACK_SCREEN_SETTINGS =
   'app/AnswerSessionPage/SET_FEEDBACK_SCREEN_SETTINGS';
+
+export const ZERO_DIVISION_FORMULA_ERROR = 'ZeroDivisionError';
+export const OTHER_FORMULA_ERROR = 'OtherFormulaError';
