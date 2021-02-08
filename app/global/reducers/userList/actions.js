@@ -17,6 +17,9 @@ import {
   FETCH_USERS_SELECTOR,
   FETCH_USERS_SELECTOR_SUCCESS,
   FETCH_USERS_SELECTOR_FAILURE,
+  DELETE_USER_FROM_TEAM_FAILURE,
+  DELETE_USER_FROM_TEAM_REQUEST,
+  DELETE_USER_FROM_TEAM_SUCCESS,
 } from './constants';
 
 export const fetchUsers = (roles, name, page, includeInactive, teamId) =>
@@ -61,3 +64,10 @@ export const changeActivateStatusFailure = () =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_FAILURE, {});
 
 export const addUserToList = user => actionBuilder(ADD_USER_TO_LIST, { user });
+
+export const deleteUserFromTeamRequest = (userId, teamId) =>
+  actionBuilder(DELETE_USER_FROM_TEAM_REQUEST, { userId, teamId });
+export const deleteUserFromTeamSuccess = () =>
+  actionBuilder(DELETE_USER_FROM_TEAM_SUCCESS, {});
+export const deleteUserFromTeamFailure = error =>
+  actionBuilder(DELETE_USER_FROM_TEAM_FAILURE, error);

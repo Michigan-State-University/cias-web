@@ -75,7 +75,7 @@ exports[`<TeamList /> Should render and match the snapshot 1`] = `
               class="THead-sc-8drp5d-0"
             >
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF NeQvp"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF bdMDKn"
               >
                 <th
                   class="TH-sc-1w7ae0i-0 dcMBuC"
@@ -135,7 +135,7 @@ exports[`<TeamList /> Should render and match the snapshot 1`] = `
               class="TBody-gqq9cv-0"
             >
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
                 color="#FFFFFF"
                 cursor="pointer"
               >
@@ -174,7 +174,7 @@ exports[`<TeamList /> Should render and match the snapshot 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
                 color="#FFFFFF"
                 cursor="pointer"
               >
@@ -213,7 +213,7 @@ exports[`<TeamList /> Should render and match the snapshot 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
                 color="#FFFFFF"
                 cursor="pointer"
               >

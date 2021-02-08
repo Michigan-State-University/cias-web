@@ -22,12 +22,14 @@ import {
   EDIT_SINGLE_TEAM_REQUEST,
   EDIT_SINGLE_TEAM_SUCCESS,
   EDIT_SINGLE_TEAM_FAILURE,
+  PER_PAGE,
 } from './constants';
 
 export const initialState = {
   teams: [],
   singleTeam: {},
   teamsSize: 0,
+  shouldRefetch: false,
   cache: {
     teams: [],
     singleTeam: {},
@@ -51,6 +53,7 @@ const teamListReducer = (state = initialState, { type, payload }) =>
       case FETCH_TEAMS_REQUEST:
         if (isEmpty(state.teams)) draft.loaders.teamsLoading = true;
         draft.errors.teamsFetchError = null;
+        draft.shouldRefetch = false;
         break;
 
       case FETCH_TEAMS_SUCCESS:
@@ -76,8 +79,11 @@ const teamListReducer = (state = initialState, { type, payload }) =>
       case CREATE_TEAM_SUCCESS:
         draft.errors.teamCreateError = null;
         draft.loaders.teamCreateLoading = false;
-        draft.teams.push(payload.team);
-        draft.cache.teams.push(payload.team);
+        if (state.teamsSize < PER_PAGE) {
+          draft.teams.push(payload.team);
+          draft.cache.teams.push(payload.team);
+        }
+        draft.shouldRefetch = true;
         break;
 
       case CREATE_TEAM_FAILURE:
@@ -95,6 +101,7 @@ const teamListReducer = (state = initialState, { type, payload }) =>
 
       case DELETE_TEAM_SUCCESS:
         draft.cache.teams = state.teams;
+        draft.shouldRefetch = true;
         break;
 
       case DELETE_TEAM_FAILURE:

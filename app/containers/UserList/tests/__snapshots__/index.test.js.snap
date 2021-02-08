@@ -158,7 +158,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
               class="THead-sc-8drp5d-0"
             >
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF NeQvp"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF bdMDKn"
               >
                 <th
                   class="TH-sc-1w7ae0i-0 dcMBuC"
@@ -209,7 +209,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   <div
                     class="Column-sc-4zswzq-0 gzLnhc"
                   >
-                     
+                    Activate/Deactivate
                   </div>
                 </th>
               </tr>
@@ -218,7 +218,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
               class="TBody-gqq9cv-0"
             >
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
                 color="#FFFFFF"
                 cursor="pointer"
               >
@@ -256,14 +256,14 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-y7762g-0 gxeveZ"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Row-y1cs0u-0 loIsns"
+                    class="Row-y1cs0u-0 ggPJew"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
+                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"
@@ -277,7 +277,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
                 color="#FFFFFF"
                 cursor="pointer"
               >
@@ -315,14 +315,14 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-y7762g-0 gxeveZ"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Row-y1cs0u-0 loIsns"
+                    class="Row-y1cs0u-0 ggPJew"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
+                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"
@@ -336,7 +336,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
                 color="#FFFFFF"
                 cursor="pointer"
               >
@@ -374,14 +374,14 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-y7762g-0 gxeveZ"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Row-y1cs0u-0 loIsns"
+                    class="Row-y1cs0u-0 ggPJew"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
+                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"
@@ -576,7 +576,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
               class="THead-sc-8drp5d-0"
             >
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF NeQvp"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF bdMDKn"
               >
                 <th
                   class="TH-sc-1w7ae0i-0 dcMBuC"
@@ -627,7 +627,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   <div
                     class="Column-sc-4zswzq-0 gzLnhc"
                   >
-                     
+                    Activate/Deactivate
                   </div>
                 </th>
               </tr>
@@ -636,7 +636,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
               class="TBody-gqq9cv-0"
             >
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
                 color="#FFFFFF"
                 cursor="pointer"
               >
@@ -674,14 +674,14 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-y7762g-0 gxeveZ"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Row-y1cs0u-0 loIsns"
+                    class="Row-y1cs0u-0 ggPJew"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
+                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"
@@ -695,7 +695,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
                 color="#FFFFFF"
                 cursor="pointer"
               >
@@ -733,14 +733,14 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-y7762g-0 gxeveZ"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Row-y1cs0u-0 loIsns"
+                    class="Row-y1cs0u-0 ggPJew"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
+                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"
@@ -754,7 +754,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 </td>
               </tr>
               <tr
-                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF elZHhb"
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
                 color="#FFFFFF"
                 cursor="pointer"
               >
@@ -792,14 +792,14 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </td>
                 <td
-                  class="TD-y7762g-0 gxeveZ"
+                  class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Row-y1cs0u-0 loIsns"
+                    class="Row-y1cs0u-0 ggPJew"
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
+                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"

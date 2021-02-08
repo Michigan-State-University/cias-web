@@ -11,6 +11,7 @@ export {
   deleteTeamRequest,
   fetchSingleTeamRequest,
   editSingleTeamRequest,
+  inviteToTeamRequest,
 } from './actions';
 export { initialState } from './reducer';
 

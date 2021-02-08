@@ -25,4 +25,12 @@ export default defineMessages({
     id: `${scope}.createTeamFailure`,
     defaultMessage: 'Failed to create the team',
   },
+  inviteToTeamSuccess: {
+    id: `${scope}.inviteToTeamSuccess`,
+    defaultMessage: 'Successfully invited researcher to the team',
+  },
+  inviteToTeamFailure: {
+    id: `${scope}.inviteToTeamFailure`,
+    defaultMessage: 'Failed to invite researcher to the team',
+  },
 });

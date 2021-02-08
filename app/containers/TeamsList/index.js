@@ -42,6 +42,7 @@ function TeamsList({
   teamList: {
     teams,
     teamsSize,
+    shouldRefetch,
     loaders: { teamsLoading },
     errors: { teamsFetchError },
   },
@@ -61,6 +62,10 @@ function TeamsList({
   useEffect(() => {
     fetchTeams(debouncedFilterText, page);
   }, [debouncedFilterText, page]);
+
+  useEffect(() => {
+    if (shouldRefetch) fetchTeams(debouncedFilterText, page);
+  }, [shouldRefetch]);
 
   useEffect(() => {
     if (page > pages) {

@@ -20,6 +20,10 @@ const navbarMessages = defineMessages({
     id: `${scope}.adminTeams`,
     defaultMessage: 'Manage teams',
   },
+  teamAdminTeam: {
+    id: `${scope}.teamAdminTeam`,
+    defaultMessage: 'My Team',
+  },
   researcherInterventions: {
     id: `${scope}.researcherInterventions`,
     defaultMessage: 'My Sessions',
@@ -49,6 +53,7 @@ const navbarNames = {
   ),
   adminAccounts: <FormattedMessage {...navbarMessages.adminAccounts} />,
   adminTeams: <FormattedMessage {...navbarMessages.adminTeams} />,
+  teamAdminTeam: <FormattedMessage {...navbarMessages.teamAdminTeam} />,
   researcherInterventions: (
     <FormattedMessage {...navbarMessages.researcherInterventions} />
   ),

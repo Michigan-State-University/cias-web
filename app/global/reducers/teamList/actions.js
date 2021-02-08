@@ -21,6 +21,9 @@ import {
   EDIT_SINGLE_TEAM_REQUEST,
   EDIT_SINGLE_TEAM_SUCCESS,
   EDIT_SINGLE_TEAM_FAILURE,
+  INVITE_TO_TEAM_REQUEST,
+  INVITE_TO_TEAM_SUCCESS,
+  INVITE_TO_TEAM_FAILURE,
 } from './constants';
 
 export const fetchTeamsRequest = (name, page) =>
@@ -51,7 +54,15 @@ export const createTeamSuccess = team =>
 export const createTeamFailure = error =>
   actionBuilder(CREATE_TEAM_FAILURE, error);
 
+export const inviteToTeamRequest = (email, teamId) =>
+  actionBuilder(INVITE_TO_TEAM_REQUEST, { email, teamId });
+export const inviteToTeamSuccess = () =>
+  actionBuilder(INVITE_TO_TEAM_SUCCESS, {});
+export const inviteToTeamFailure = error =>
+  actionBuilder(INVITE_TO_TEAM_FAILURE, error);
+
 export const deleteTeamRequest = id =>
   actionBuilder(DELETE_TEAM_REQUEST, { id });
 export const deleteTeamSuccess = () => actionBuilder(DELETE_TEAM_SUCCESS, {});
-export const deleteTeamFailure = () => actionBuilder(DELETE_TEAM_FAILURE, {});
+export const deleteTeamFailure = error =>
+  actionBuilder(DELETE_TEAM_FAILURE, error);

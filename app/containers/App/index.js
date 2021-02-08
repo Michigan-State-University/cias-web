@@ -32,6 +32,8 @@ import UserDetails from 'containers/UserDetails/Loadable';
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 import ReportsPage from 'containers/ParticipantDashboard/components/ReportsTab/Loadable';
 
+import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
+
 import { Roles } from 'models/User/UserRoles';
 
 import navbarNames from 'utils/navbarNames';
@@ -44,6 +46,7 @@ import { compose } from 'redux';
 import {
   accountsTabId,
   interventionsTabId,
+  myTeamTabId,
   participantReportsTabId,
   teamsTabId,
 } from 'utils/defaultNavbarTabs';
@@ -57,6 +60,8 @@ export function App({ user }) {
         case Roles.admin:
           return <InterventionPage />;
         case Roles.researcher:
+          return <InterventionPage />;
+        case Roles.teamAdmin:
           return <InterventionPage />;
         case Roles.participant:
           return <ParticipantDashboard />;
@@ -166,6 +171,19 @@ export function App({ user }) {
         />
         <AppRoute
           exact
+          path="/my-team"
+          component={() => (
+            <TeamDetails match={{ params: { id: user.teamId } }} />
+          )}
+          protectedRoute
+          allowedRoles={[Roles.teamAdmin]}
+          navbarProps={{
+            navbarId: 'default',
+            activeTab: myTeamTabId,
+          }}
+        />
+        <AppRoute
+          exact
           key="previewFromStart"
           path="/interventions/:interventionId/sessions/:sessionId/preview"
           component={({ match }) => (
@@ -227,6 +245,7 @@ export function App({ user }) {
         <AppRoute exact path="/not-found-page" component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
+      <ApiQueryMessageHandler />
     </>
   );
 }

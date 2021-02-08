@@ -8,6 +8,10 @@ import isEmpty from 'lodash/isEmpty';
 import findIndex from 'lodash/findIndex';
 
 import {
+  EDIT_SINGLE_TEAM_SUCCESS,
+  INVITE_TO_TEAM_SUCCESS,
+} from 'global/reducers/teamList/constants';
+import {
   CHANGE_ACTIVATE_STATUS_REQUEST,
   FETCH_USERS,
   FETCH_USERS_FAILURE,
@@ -18,12 +22,16 @@ import {
   FETCH_USERS_SELECTOR,
   FETCH_USERS_SELECTOR_SUCCESS,
   FETCH_USERS_SELECTOR_FAILURE,
+  DELETE_USER_FROM_TEAM_REQUEST,
+  DELETE_USER_FROM_TEAM_SUCCESS,
+  DELETE_USER_FROM_TEAM_FAILURE,
 } from './constants';
 
 export const initialState = {
   users: [],
   usersSelector: [],
   usersSize: 0,
+  shouldRefetch: false,
   cache: {
     users: [],
   },
@@ -40,10 +48,12 @@ const userListReducer = (state = initialState, { type, payload }) =>
       case FETCH_USERS:
         if (isEmpty(state.users)) draft.usersLoading = true;
         draft.usersError = null;
+        draft.shouldRefetch = false;
         break;
       case FETCH_USERS_SUCCESS: {
         const { users: usersList, usersSize } = payload;
         draft.users = usersList;
+        draft.cache.users = usersList;
         draft.usersSize = usersSize;
         draft.usersLoading = false;
         break;
@@ -69,9 +79,8 @@ const userListReducer = (state = initialState, { type, payload }) =>
         draft.usersSelectorError = payload;
         break;
 
-      case CHANGE_ACTIVATE_STATUS_REQUEST:
+      case CHANGE_ACTIVATE_STATUS_REQUEST: {
         const { users } = state;
-        draft.cache.users = users;
         const { id, active, showInactive } = payload;
         const index = findIndex(users, user => user.id === id);
 
@@ -79,16 +88,44 @@ const userListReducer = (state = initialState, { type, payload }) =>
         else draft.users.splice(index, 1);
 
         break;
+      }
       case CHANGE_ACTIVATE_STATUS_SUCCESS:
-        draft.cache.users = [];
+        draft.cache.users = state.users;
         break;
       case CHANGE_ACTIVATE_STATUS_FAILURE:
         draft.users = state.cache.users;
-        draft.cache.users = [];
         break;
 
       case ADD_USER_TO_LIST:
         draft.users = [payload.user, ...state.users];
+        break;
+
+      case DELETE_USER_FROM_TEAM_REQUEST: {
+        const index = state.users.findIndex(
+          ({ id, teamId }) =>
+            id === payload.userId && teamId === payload.teamId,
+        );
+
+        if (index > -1) draft.users.splice(index, 1);
+
+        break;
+      }
+
+      case DELETE_USER_FROM_TEAM_SUCCESS:
+        draft.cache.users = state.users;
+        draft.shouldRefetch = true;
+        break;
+
+      case DELETE_USER_FROM_TEAM_FAILURE:
+        draft.users = state.cache.users;
+        break;
+
+      case INVITE_TO_TEAM_SUCCESS:
+        draft.shouldRefetch = true;
+        break;
+
+      case EDIT_SINGLE_TEAM_SUCCESS:
+        draft.shouldRefetch = true;
         break;
     }
   });

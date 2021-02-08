@@ -24,7 +24,7 @@ describe('userList reducer', () => {
     ...initialState,
     users,
     usersSize: users.length,
-    cache: { users: [createUser()] },
+    cache: { users },
   };
 
   it('FETCH_USERS', () => {
@@ -44,6 +44,7 @@ describe('userList reducer', () => {
 
     const expectedState = cloneDeep(mockState);
     expectedState.users = payloadUsers.users;
+    expectedState.cache.users = payloadUsers.users;
     expectedState.usersSize = payloadUsers.usersSize;
     expectedState.usersLoading = false;
 
@@ -79,7 +80,6 @@ describe('userList reducer', () => {
     const action = actionBuilder(CHANGE_ACTIVATE_STATUS_SUCCESS, {});
 
     const expectedState = cloneDeep(mockStateWithUsers);
-    expectedState.cache.users = [];
 
     expect(userListReducer(mockStateWithUsers, action)).toEqual(expectedState);
   });
@@ -89,7 +89,6 @@ describe('userList reducer', () => {
 
     const expectedState = cloneDeep(mockStateWithUsers);
     expectedState.users = mockStateWithUsers.cache.users;
-    expectedState.cache.users = [];
 
     expect(userListReducer(mockStateWithUsers, action)).toEqual(expectedState);
   });

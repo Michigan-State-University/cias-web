@@ -30,7 +30,7 @@ const TableRow = ({
   const textColor = colors.flamingo;
   return (
     <StripedTR
-      lastItemHoverable
+      lastItemHoverable={1}
       cursor="pointer"
       hoverBg={colors.linkWater}
       color={colors.white}

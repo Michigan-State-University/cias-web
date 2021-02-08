@@ -12,6 +12,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectReducer, injectSaga } from 'redux-injectors';
 
 import { Container, Row, Col } from 'react-grid-system';
 
@@ -32,40 +33,46 @@ import {
   UserListReducer,
   makeSelectUserList,
   changeActivateStatusRequest,
+  deleteUserFromTeamRequest,
 } from 'global/reducers/userList';
 import { themeColors } from 'theme';
 import { PER_PAGE } from 'global/reducers/userList/constants';
 import { makeSelectUser } from 'global/reducers/auth';
-import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
+import {
+  changeErrorValue,
+  inviteResearcherRequest,
+} from 'containers/InviteResearcher/actions';
 import InviteResearcher from '../InviteResearcher';
 import UserTable from './Components/UserTable';
 import messages from './messages';
+import { TeamIdContext } from './Components/utils';
 
-const rolesToFilter = [Roles.participant, Roles.researcher, Roles.teamAdmin];
 const initialDelay = 500;
 
 function UserList({
-  userList: { users, usersSize, usersLoading, usersError },
+  userList: { users, usersSize, usersLoading, usersError, shouldRefetch },
   fetchUsersRequest,
   changeActivateStatus,
+  removeUserFromTeam,
+  sendInvitation,
+  deleteError,
+  filterableRoles,
   intl: { formatMessage },
   user: { roles },
   listOnly,
   teamId,
 }) {
-  useInjectReducer({ key: 'userList', reducer: UserListReducer });
-  useInjectSaga({ key: 'userList', saga: userListSaga });
   const pages = Math.ceil(usersSize / PER_PAGE);
 
   const [filterText, setFilterText] = useState('');
-  const [selectRoles, setSelectRoles] = useState(rolesToFilter);
+  const [selectRoles, setSelectRoles] = useState(filterableRoles);
   const [showInactive, setShowInactive] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [page, setPage] = useState(1);
   const debouncedFilterText = useDebounce(filterText, initialDelay);
 
-  const clearFilters = selectRoles.length === rolesToFilter.length;
+  const clearFilters = selectRoles.length === filterableRoles.length;
 
   useEffect(() => {
     fetchUsersRequest(
@@ -76,6 +83,17 @@ function UserList({
       teamId,
     );
   }, [selectRoles, debouncedFilterText, page, showInactive, teamId]);
+
+  useEffect(() => {
+    if (shouldRefetch)
+      fetchUsersRequest(
+        selectRoles,
+        debouncedFilterText,
+        page,
+        showInactive,
+        teamId,
+      );
+  }, [shouldRefetch]);
 
   useEffect(() => {
     if (page > pages) {
@@ -100,7 +118,7 @@ function UserList({
           <Row align="center">
             <Col xs={12} xl={6} xxl={5}>
               <Row align="center">
-                {rolesToFilter.map((role, index) => (
+                {filterableRoles.map((role, index) => (
                   <Col key={index} xs="content" style={{ marginBottom: 10 }}>
                     <UserRoleTile
                       role={role}
@@ -114,7 +132,7 @@ function UserList({
                     <ActionIcon
                       height={15}
                       width={15}
-                      onClick={() => setSelectRoles(rolesToFilter)}
+                      onClick={() => setSelectRoles(filterableRoles)}
                       background="none"
                     />
                   </Col>
@@ -142,17 +160,20 @@ function UserList({
             </Col>
           </Row>
         </Container>
-        <UserTable
-          formatMessage={formatMessage}
-          users={users}
-          loading={usersLoading}
-          changeActivateStatus={(id, active) =>
-            changeActivateStatus(id, active, showInactive)
-          }
-          setPage={setPage}
-          page={page}
-          pages={pages}
-        />
+        <TeamIdContext.Provider value={teamId}>
+          <UserTable
+            formatMessage={formatMessage}
+            users={users}
+            loading={usersLoading}
+            changeActivateStatus={(id, active) =>
+              changeActivateStatus(id, active, showInactive)
+            }
+            removeUserFromTeam={removeUserFromTeam}
+            setPage={setPage}
+            page={page}
+            pages={pages}
+          />
+        </TeamIdContext.Provider>
       </div>
     );
   };
@@ -161,7 +182,12 @@ function UserList({
 
   return (
     <>
-      <InviteResearcher visible={modalVisible} onClose={closeModal} />
+      <InviteResearcher
+        visible={modalVisible}
+        onClose={closeModal}
+        sendInvitation={sendInvitation}
+        deleteError={deleteError}
+      />
       <Box height="100%" overflow="scroll" display="flex" justify="center">
         <Helmet>
           <title>Users list</title>
@@ -194,15 +220,20 @@ function UserList({
 UserList.propTypes = {
   fetchUsersRequest: PropTypes.func.isRequired,
   changeActivateStatus: PropTypes.func.isRequired,
+  removeUserFromTeam: PropTypes.func.isRequired,
   userList: PropTypes.object,
   intl: intlShape,
   user: PropTypes.object,
   listOnly: PropTypes.bool,
   teamId: PropTypes.string,
+  deleteError: PropTypes.func,
+  sendInvitation: PropTypes.func,
+  filterableRoles: PropTypes.arrayOf(PropTypes.string),
 };
 
 UserList.defaultProps = {
   listOnly: false,
+  filterableRoles: [Roles.participant, Roles.researcher, Roles.teamAdmin],
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -213,6 +244,9 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   fetchUsersRequest: fetchUsers,
   changeActivateStatus: changeActivateStatusRequest,
+  removeUserFromTeam: deleteUserFromTeamRequest,
+  sendInvitation: inviteResearcherRequest,
+  deleteError: changeErrorValue,
 };
 
 const withConnect = connect(
@@ -222,6 +256,8 @@ const withConnect = connect(
 
 export default compose(
   withConnect,
+  injectReducer({ key: 'userList', reducer: UserListReducer }),
+  injectSaga({ key: 'userList', saga: userListSaga }),
   memo,
   injectIntl,
 )(UserList);
