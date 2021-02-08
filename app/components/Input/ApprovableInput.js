@@ -60,7 +60,7 @@ const ApprovableInput = props => {
     width,
     padding,
     defaultFontSize,
-    dateInputStyles,
+    styles,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [focused, setfocused] = useState(false);
@@ -163,7 +163,7 @@ const ApprovableInput = props => {
                 height={height}
                 width={width}
                 ref={ref}
-                inputStyles={dateInputStyles}
+                inputStyles={styles}
               />
             }
             showMonthDropdown
@@ -187,6 +187,7 @@ const ApprovableInput = props => {
         disabled={disabled}
         fontSize={fontSize}
         padding={padding}
+        {...styles}
       />
     );
   };
@@ -218,6 +219,7 @@ ApprovableInput.propTypes = {
   padding: PropTypes.number,
   defaultFontSize: PropTypes.number,
   dateInputStyles: PropTypes.object,
+  styles: PropTypes.object,
 };
 
 ApprovableInput.defaultProps = {

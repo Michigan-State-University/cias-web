@@ -22,6 +22,7 @@ import {
   feedbackQuestion,
   phoneQuestion,
   dateQuestion,
+  nameQuestion,
 } from 'models/Session/QuestionTypes';
 
 import GridQuestion from './GridQuestion';
@@ -34,6 +35,7 @@ import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
 import FeedbackQuestion from './FeedbackQuestion';
 import PhoneQuestion from './PhoneQuestion';
 import DateQuestion from './DateQuestion';
+import NameQuestion from './NameQuestion';
 
 const QuestionData = ({
   selectedQuestionType,
@@ -58,6 +60,8 @@ const QuestionData = ({
       return <PhoneQuestion {...commonProps} />;
     case dateQuestion.id:
       return <DateQuestion {...commonProps} />;
+    case nameQuestion.id:
+      return <NameQuestion {...commonProps} />;
     case numberQuestion.id:
       return <NumberQuestion {...commonProps} />;
     case gridQuestion.id:

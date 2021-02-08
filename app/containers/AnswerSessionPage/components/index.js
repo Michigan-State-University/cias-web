@@ -14,6 +14,7 @@ import {
   finishQuestion,
   phoneQuestion,
   dateQuestion,
+  nameQuestion,
 } from 'models/Session/QuestionTypes';
 import FinishScreen from './FinishScreen';
 import UrlQuestion from './UrlQuestion';
@@ -27,6 +28,7 @@ import NumberQuestion from './NumberQuestion';
 import FeedbackQuestion from './FeedbackQuestion';
 import PhoneQuestion from './PhoneQuestion';
 import DateQuestion from './DateQuestion';
+import NameQuestion from './NameQuestion';
 
 export const renderQuestionByType = (question, sharedProps) => {
   const { type } = question;
@@ -49,6 +51,8 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <PhoneQuestion question={question} {...sharedProps} />;
     case dateQuestion.id:
       return <DateQuestion question={question} {...sharedProps} />;
+    case nameQuestion.id:
+      return <NameQuestion question={question} {...sharedProps} />;
     case numberQuestion.id:
       return <NumberQuestion question={question} {...sharedProps} />;
     case informationQuestion.id:
