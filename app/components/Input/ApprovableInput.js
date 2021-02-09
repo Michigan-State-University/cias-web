@@ -61,6 +61,7 @@ const ApprovableInput = props => {
     padding,
     defaultFontSize,
     styles,
+    minDate,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [focused, setfocused] = useState(false);
@@ -152,7 +153,7 @@ const ApprovableInput = props => {
         <DatePickerWrapper>
           <DatePicker
             disabled={disabled}
-            minDate={new Date()}
+            minDate={minDate}
             selected={value}
             onChange={date => onCheck(date)}
             placeholderText={placeholder}
@@ -218,7 +219,7 @@ ApprovableInput.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   padding: PropTypes.number,
   defaultFontSize: PropTypes.number,
-  dateInputStyles: PropTypes.object,
+  minDate: PropTypes.object,
   styles: PropTypes.object,
 };
 

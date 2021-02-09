@@ -44,6 +44,7 @@ const ExactDateOption = ({
             value={Date.parse(value)}
             onCheck={onChange}
             fontSize={15}
+            minDate={new Date()}
           />
         </Box>
       </Row>
