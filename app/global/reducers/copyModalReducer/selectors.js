@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const sessions = state => state.sessions || initialState;
+const sessions = state => state.copyModal || initialState;
 
 export const makeSelectSessionsState = () =>
   createSelector(
@@ -15,8 +15,14 @@ export const makeSelectSessions = () =>
     substate => substate.sessions,
   );
 
-export const makeSelectSessionsLoader = () =>
+export const makeSelectQuestionGroups = () =>
   createSelector(
     sessions,
-    substate => substate.fetchSessionLoading,
+    substate => substate.questionGroups,
+  );
+
+export const makeSelectCopyModalLoader = () =>
+  createSelector(
+    sessions,
+    substate => substate.loading,
   );

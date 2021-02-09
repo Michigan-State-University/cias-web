@@ -64,6 +64,7 @@ export const interventionsReducer = (state = initialState, action) =>
         draft.interventions[interventionIndex] =
           state.cache.archiveIntervention;
         draft.cache.archiveIntervention = null;
+        break;
     }
   });
 

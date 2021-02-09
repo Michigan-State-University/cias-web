@@ -8,6 +8,7 @@
 
 import React from 'react';
 import { browserHistory, MemoryRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 import { IntlProvider } from 'react-intl';
@@ -21,6 +22,7 @@ import SessionListItem from '../index';
 
 describe('<SessionListItem />', () => {
   let store;
+  let modalContainer;
 
   const props = {
     session: {
@@ -44,6 +46,10 @@ describe('<SessionListItem />', () => {
 
   beforeAll(() => {
     store = configureStore({}, browserHistory);
+    ReactDOM.createPortal = jest.fn(element => element);
+    modalContainer = document.createElement('div');
+    modalContainer.setAttribute('id', 'modal-portal');
+    document.body.appendChild(modalContainer);
   });
 
   it('Expect to not log errors in console', () => {

@@ -46,6 +46,9 @@ import {
   DELETE_SESSION_REQUEST,
   DELETE_SESSION_SUCCESS,
   DELETE_SESSION_ERROR,
+  EXTERNAL_COPY_SESSION_REQUEST,
+  EXTERNAL_COPY_SESSION_SUCCESS,
+  EXTERNAL_COPY_SESSION_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = id =>
@@ -156,3 +159,10 @@ export const deleteSessionSuccess = () =>
   actionBuilder(DELETE_SESSION_SUCCESS, {});
 export const deleteSessionError = error =>
   actionBuilder(DELETE_SESSION_ERROR, { error });
+
+export const externalCopySessionRequest = payload =>
+  actionBuilder(EXTERNAL_COPY_SESSION_REQUEST, payload);
+export const externalCopySessionSuccess = ({ session, interventionId }) =>
+  actionBuilder(EXTERNAL_COPY_SESSION_SUCCESS, { session, interventionId });
+export const externalCopySessionError = error =>
+  actionBuilder(EXTERNAL_COPY_SESSION_ERROR, { error });

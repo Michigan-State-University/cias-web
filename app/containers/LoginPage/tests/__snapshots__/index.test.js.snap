@@ -99,6 +99,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
         >
           <div
             class="styled__StyledDivider-sc-1v05p1h-0 krrFLu"
+            color="#D5DEEA"
           />
           <p
             class="Text-e4p0w3-0 styled__Or-sc-1pd518n-0 gliHTo brRnoK"
@@ -110,6 +111,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           </p>
           <div
             class="styled__StyledDivider-sc-1v05p1h-0 kYVcVh"
+            color="#D5DEEA"
           />
         </div>
         <div

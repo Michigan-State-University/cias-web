@@ -68,4 +68,8 @@ export default defineMessages({
     id: `${scope}.deleteSessionSuccess`,
     defaultMessage: 'Successfully deleted session',
   },
+  copySuccess: {
+    id: `${scope}.copySuccess`,
+    defaultMessage: 'Successfully copied session',
+  },
 });

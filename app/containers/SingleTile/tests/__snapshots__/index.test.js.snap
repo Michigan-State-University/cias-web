@@ -25,7 +25,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
@@ -41,10 +41,12 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c11 {
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
+  font-size: 18px;
+  font-weight: 700;
   color: #2F3850;
 }
 
@@ -52,11 +54,18 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  font-weight: 700;
   color: #2F3850;
 }
 
 .c13 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c14 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -75,7 +84,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c8 {
+.c9 {
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -152,14 +161,14 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
-.c10 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c10 div {
+.c11 div {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -206,16 +215,16 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
       <div
         class="c7"
       >
-        <div
-          class="c8"
+        <p
+          class="c8 c9"
           font-size="18"
           font-weight="bold"
         >
           Name
-        </div>
+        </p>
       </div>
       <div
-        class="c9"
+        class="c10"
         display="flex"
       >
         <div
@@ -224,7 +233,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
           data-tip="true"
         >
           <div
-            class="c10"
+            class="c11"
           />
         </div>
         <div
@@ -310,51 +319,51 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   
           </style>
           <p
-            class="c11"
+            class="c12"
           />
           <p
-            class="c12"
+            class="c13"
             font-weight="bold"
           >
             Created by: 
           </p>
           <p
-            class="c11"
+            class="c12"
           >
             Email: 
             test@test.com
           </p>
           <p
-            class="c11"
+            class="c12"
           >
             First name: 
             UserFirstName
           </p>
           <p
-            class="c13"
+            class="c14"
           >
             Last name: 
             UserLastName
           </p>
           <p
-            class="c12"
+            class="c13"
             font-weight="bold"
           >
             Created at: 
           </p>
           <p
-            class="c13"
+            class="c14"
           >
             2020/09/30 10:00 +00:00
           </p>
           <p
-            class="c12"
+            class="c13"
             font-weight="bold"
           >
             Updated at: 
           </p>
           <p
-            class="c13"
+            class="c14"
           >
             2020/09/30 10:00 +00:00
           </p>

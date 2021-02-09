@@ -9,6 +9,7 @@ import {
   sendSessionInviteSaga,
   resendSessionInviteSaga,
   fetchSessionEmailsSaga,
+  externalCopySessionSaga,
 } from 'global/reducers/intervention/sagas';
 
 export default function* interventionDetailsPageSagas() {
@@ -22,5 +23,6 @@ export default function* interventionDetailsPageSagas() {
     sendSessionInviteSaga(),
     fetchSessionEmailsSaga(),
     resendSessionInviteSaga(),
+    externalCopySessionSaga(),
   ]);
 }

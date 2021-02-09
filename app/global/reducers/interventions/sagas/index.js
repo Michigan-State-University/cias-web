@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
-import fetchInterventionsSaga from 'global/reducers/interventions/sagas/fetchInterventions';
-import copyInterventionSaga from 'global/reducers/interventions/sagas/copyIntervention';
-import archiveInterventionSaga from 'global/reducers/interventions/sagas/archiveIntervention';
+import fetchInterventionsSaga from './fetchInterventions';
+import copyInterventionSaga from './copyIntervention';
+import archiveInterventionSaga from './archiveIntervention';
 
 export {
   fetchInterventionsSaga,
