@@ -31,22 +31,22 @@ import {
 } from '../selectors';
 
 const validateVariable = (payload, question, variables) => {
-  if (payload.data.name === nameQuestion.reservedVariable)
-    throw new Error(formatMessage(messages.reservedVariable));
+  const duplicateError = new Error(formatMessage(messages.duplicateVariable));
+  const reservedError = new Error(formatMessage(messages.reservedVariable));
+
+  if (payload.data.name === nameQuestion.reservedVariable) throw reservedError;
   else if (question.type === multiQuestion.id) {
     question.body.data.forEach(element => {
-      if (hasDuplicates(variables, element.variable.name))
-        throw new Error(formatMessage(messages.duplicateVariable));
+      if (hasDuplicates(variables, element.variable.name)) throw duplicateError;
     });
   } else if (question.type === gridQuestion.id) {
     question.body.data[0].payload.rows.forEach(element => {
-      if (hasDuplicates(variables, element.variable.name))
-        throw new Error(formatMessage(messages.duplicateVariable));
+      if (hasDuplicates(variables, element.variable.name)) throw duplicateError;
     });
   } else if (NotAnswerableQuestions.includes(question.type)) {
-    throw new Error(formatMessage(messages.duplicateVariable));
+    throw duplicateError;
   } else if (hasDuplicates(variables, question.body.variable.name)) {
-    throw new Error(formatMessage(messages.duplicateVariable));
+    throw duplicateError;
   }
 };
 

@@ -55,7 +55,7 @@ const TextVoicePreviewInput = ({
         onClick={() => setIsPlaying(!isPlaying)}
         clickable
         disabled={!value}
-        height="25px"
+        height={25}
         mt={5}
       >
         {renderPreviewButton()}
