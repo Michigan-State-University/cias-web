@@ -8,7 +8,11 @@ import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { gridQuestion, multiQuestion } from 'models/Session/QuestionTypes';
+import {
+  gridQuestion,
+  multiQuestion,
+  nameQuestion,
+} from 'models/Session/QuestionTypes';
 import messages from '../messages';
 import {
   EDIT_QUESTION_REQUEST,
@@ -26,6 +30,26 @@ import {
   makeSelectQuestionById,
 } from '../selectors';
 
+const validateVariable = (payload, question, variables) => {
+  if (payload.data.name === nameQuestion.reservedVariable)
+    throw new Error(formatMessage(messages.reservedVariable));
+  else if (question.type === multiQuestion.id) {
+    question.body.data.forEach(element => {
+      if (hasDuplicates(variables, element.variable.name))
+        throw new Error(formatMessage(messages.duplicateVariable));
+    });
+  } else if (question.type === gridQuestion.id) {
+    question.body.data[0].payload.rows.forEach(element => {
+      if (hasDuplicates(variables, element.variable.name))
+        throw new Error(formatMessage(messages.duplicateVariable));
+    });
+  } else if (NotAnswerableQuestions.includes(question.type)) {
+    throw new Error(formatMessage(messages.duplicateVariable));
+  } else if (hasDuplicates(variables, question.body.variable.name)) {
+    throw new Error(formatMessage(messages.duplicateVariable));
+  }
+};
+
 function* editQuestion({ payload }) {
   const questionId = get(payload, 'data.questionId', undefined);
   const question = yield select(
@@ -38,28 +62,15 @@ function* editQuestion({ payload }) {
     currentVariable => currentVariable && currentVariable.trim(),
   );
 
-  let duplicates = false;
-
-  if (question.type === multiQuestion.id) {
-    question.body.data.forEach(element => {
-      if (hasDuplicates(variables, element.variable.name)) duplicates = true;
-    });
-  } else if (question.type === gridQuestion.id) {
-    question.body.data[0].payload.rows.forEach(element => {
-      if (hasDuplicates(variables, element.variable.name)) duplicates = true;
-    });
-  } else if (NotAnswerableQuestions.includes(question.type)) {
-    duplicates = false;
-  } else {
-    duplicates = hasDuplicates(variables, question.body.variable.name);
-  }
-
-  if (duplicates) {
-    yield call(toast.error, formatMessage(messages.duplicateVariable), {
+  try {
+    validateVariable(payload, question, variables);
+  } catch (error) {
+    yield call(toast.error, error.message, {
       toastId: EDIT_QUESTION_ERROR,
     });
     return yield put(editQuestionError({ questionId: question.id }));
   }
+
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
   const requestURL = `v1/question_groups/${

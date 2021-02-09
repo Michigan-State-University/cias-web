@@ -22,12 +22,13 @@ const VariableInput = ({
   interventionStatus,
   updateVariable,
   questionId,
+  disabled,
 }) => {
   const editingPossible = canEdit(interventionStatus);
   return (
     <Row display="flex" hidden={isNarratorTab}>
       <BadgeInput
-        disabled={!editingPossible}
+        disabled={!editingPossible || disabled}
         px={0}
         py={12}
         textAlign="center"
@@ -51,6 +52,7 @@ VariableInput.propTypes = {
   updateVariable: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,
   interventionStatus: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 const mapDispatchToProps = {

@@ -18,8 +18,8 @@ const NameQuestionLayout = ({
   const { name, phoneticName } =
     answerBody && answerBody.value ? answerBody.value : {};
   const inputStyles = {
-    width: '100%',
     height: '100%',
+    width: '100%',
     textAlign: 'center',
   };
 
@@ -28,11 +28,11 @@ const NameQuestionLayout = ({
     onChange({ name, phoneticName: value });
 
   return (
-    <Row width="100%" justify="between">
+    <Row width="100%" justify="between" px={25}>
       <Box
         bg={themeColors.highlight}
         width="100%"
-        maxWidth={300}
+        maxWidth={285}
         px={21}
         py={14}
         justify="center"

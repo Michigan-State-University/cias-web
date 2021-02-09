@@ -7,6 +7,10 @@ export default defineMessages({
     id: `${scope}.duplicateVariable`,
     defaultMessage: 'This variable name is already in use!',
   },
+  reservedVariable: {
+    id: `${scope}.reservedVariable`,
+    defaultMessage: 'This variable name is reserved!',
+  },
   copyError: {
     id: `${scope}.copyError`,
     defaultMessage: 'Cannot copy the screen!',

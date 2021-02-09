@@ -23,6 +23,7 @@ export const nameQuestion = new QuestionType(
   'Question::Name',
   'Name',
   colors.olive,
+  'NAME',
 );
 
 export const numberQuestion = new QuestionType(
