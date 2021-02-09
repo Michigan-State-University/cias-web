@@ -4,6 +4,7 @@ import editSingleTeamSaga from './editSingleTeamSaga';
 import fetchTeamsSaga from './fetchTeamsSaga';
 import createTeamSaga from './createTeamSaga';
 import deleteTeamSaga from './deleteTeamSaga';
+import inviteToTeamSaga from './inviteToTeamSaga';
 
 export default function* teamListSaga() {
   yield all([
@@ -12,5 +13,6 @@ export default function* teamListSaga() {
     deleteTeamSaga(),
     fetchSingleTeamSaga(),
     editSingleTeamSaga(),
+    inviteToTeamSaga(),
   ]);
 }

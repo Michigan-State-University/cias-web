@@ -13,11 +13,19 @@ import { Provider } from 'react-redux';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
+import { Roles } from 'models/User/UserRoles';
+import { initialState as authState } from 'global/reducers/auth';
 import { UserDetails } from '../index';
 
 describe('<UserDetails />', () => {
   let props;
   const initialState = {
+    auth: {
+      ...authState,
+      user: {
+        roles: [Roles.admin],
+      },
+    },
     singleUser: {
       user: {
         id: '1',

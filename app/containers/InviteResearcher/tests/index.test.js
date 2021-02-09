@@ -42,6 +42,8 @@ describe('<InviteResearcher />', () => {
   const defaultProps = {
     formatMessage: jest.fn(msg => msg.defaultMessage),
     onClose: jest.fn(),
+    sendInvitation: jest.fn(),
+    deleteError: jest.fn(),
     visible: true,
   };
   it('Expect to not log errors in console', () => {

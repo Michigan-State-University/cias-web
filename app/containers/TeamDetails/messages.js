@@ -41,4 +41,8 @@ export default defineMessages({
     id: `${scope}.saveButton`,
     defaultMessage: 'Save',
   },
+  inviteToTeam: {
+    id: `${scope}.inviteToTeam`,
+    defaultMessage: '+ Invite to team',
+  },
 });

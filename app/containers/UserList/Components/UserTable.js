@@ -11,6 +11,7 @@ import { TableLoading } from 'components/Table';
 import { boxShadows } from 'theme';
 import { ternary } from 'utils/ternary';
 
+import { RemoveFromTeamModalContext } from 'containers/UserList/Components/utils';
 import messages from '../messages';
 import PaginationHandler from './PaginationHelper';
 import TableBody from './TableBody';
@@ -21,20 +22,31 @@ const UserTable = ({
   users,
   loading,
   changeActivateStatus,
+  removeUserFromTeam,
   setPage,
   page,
   history,
   pages,
 }) => {
   const [pickedUser, setPickedUser] = useState({});
+  const [userToRemove, setUserToRemove] = useState({});
 
   const openModal = user => setPickedUser(user);
   const closeModal = () => setPickedUser({});
+
+  const openRemoveUserModal = user => setUserToRemove(user);
+  const closeRemoveUserModal = () => setUserToRemove({});
 
   const handleDeactivate = () => {
     const { active, id } = pickedUser;
     changeActivateStatus(id, !active);
     closeModal();
+  };
+
+  const handleRemoveFromTeam = () => {
+    const { id, teamId } = userToRemove;
+    removeUserFromTeam(id, teamId);
+    closeRemoveUserModal();
   };
 
   if (users.length === 0)
@@ -57,6 +69,16 @@ const UserTable = ({
       <Text textAlign="center">{pickedUser.email}</Text>
     </>
   );
+
+  const userToRemoveModalContent = (
+    <>
+      <Text textAlign="center" fontWeight="bold">
+        {userToRemove.fullName}
+      </Text>
+      <Text textAlign="center">{userToRemove.email}</Text>
+    </>
+  );
+
   return (
     <>
       <ConfirmationBox
@@ -66,6 +88,13 @@ const UserTable = ({
         content={modalContent}
         confirmAction={handleDeactivate}
       />
+      <ConfirmationBox
+        visible={Boolean(userToRemove.id)}
+        onClose={closeRemoveUserModal}
+        description={formatMessage(messages.deleteFromTeamConfirm)}
+        content={userToRemoveModalContent}
+        confirmAction={handleRemoveFromTeam}
+      />
       <TableLoading
         loading={loading}
         width="100%"
@@ -73,12 +102,14 @@ const UserTable = ({
         shadow={boxShadows.selago}
       >
         <TableHeader formatMessage={formatMessage} />
-        <TableBody
-          users={users}
-          history={history}
-          openModal={openModal}
-          formatMessage={formatMessage}
-        />
+        <RemoveFromTeamModalContext.Provider value={openRemoveUserModal}>
+          <TableBody
+            users={users}
+            history={history}
+            openModal={openModal}
+            formatMessage={formatMessage}
+          />
+        </RemoveFromTeamModalContext.Provider>
       </TableLoading>
       <PaginationHandler setPage={setPage} page={page} pages={pages} />
     </>
@@ -93,6 +124,7 @@ UserTable.propTypes = {
   page: PropTypes.number,
   setPage: PropTypes.func,
   changeActivateStatus: PropTypes.func.isRequired,
+  removeUserFromTeam: PropTypes.func.isRequired,
   history: PropTypes.object,
 };
 

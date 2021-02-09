@@ -13,7 +13,7 @@ export {
   confirmPhoneNumberRequest,
   sendSmsTokenRequest,
 } from './actions';
-export { authReducer } from './reducer';
+export { authReducer, initialState } from './reducer';
 export {
   makeSelectAuth,
   makeSelectUser,

@@ -27,4 +27,8 @@ export const DELETE_TEAM_REQUEST = 'app/TeamList/DELETE_TEAM_REQUEST';
 export const DELETE_TEAM_SUCCESS = 'app/TeamList/DELETE_TEAM_SUCCESS';
 export const DELETE_TEAM_FAILURE = 'app/TeamList/DELETE_TEAM_FAILURE';
 
+export const INVITE_TO_TEAM_REQUEST = 'app/TeamList/INVITE_TO_TEAM_REQUEST';
+export const INVITE_TO_TEAM_SUCCESS = 'app/TeamList/INVITE_TO_TEAM_SUCCESS';
+export const INVITE_TO_TEAM_FAILURE = 'app/TeamList/INVITE_TO_TEAM_FAILURE';
+
 export const PER_PAGE = 10;

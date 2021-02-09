@@ -11,6 +11,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { DEFAULT_LOCALE } from 'i18n';
 
+import { initialState as authState } from 'global/reducers/auth';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { TeamBuilder } from 'models/Teams/TeamBuilder';
 import intlOutsideReact from 'utils/intlOutsideReact';
@@ -21,6 +22,7 @@ describe('<TeamDetails />', () => {
   let props;
   const initialState = {
     auth: {
+      ...authState,
       user: {
         id: '1',
         roles: [Roles.admin],
@@ -42,6 +44,7 @@ describe('<TeamDetails />', () => {
     store = createTestStore(initialState);
 
     props = {
+      user: initialState.auth.user,
       teamList: initialState.teamList,
       match: {
         params: {

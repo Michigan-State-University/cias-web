@@ -1,5 +1,6 @@
 import gear from 'assets/svg/gear-wo-background.svg';
 import logoutArrow from 'assets/svg/arrow-right-circle.svg';
+import { Roles } from 'models/User/UserRoles';
 
 const sharedNavbarElements = [
   {
@@ -15,7 +16,8 @@ const sharedNavbarElements = [
 ];
 
 export default {
-  admin: [...sharedNavbarElements],
-  researcher: [...sharedNavbarElements],
-  participant: [...sharedNavbarElements],
+  [Roles.admin]: [...sharedNavbarElements],
+  [Roles.teamAdmin]: [...sharedNavbarElements],
+  [Roles.researcher]: [...sharedNavbarElements],
+  [Roles.participant]: [...sharedNavbarElements],
 };

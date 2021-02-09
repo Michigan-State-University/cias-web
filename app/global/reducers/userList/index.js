@@ -7,6 +7,7 @@ export {
   fetchUsersSelector,
   changeActivateStatusRequest,
   addUserToList,
+  deleteUserFromTeamRequest,
 } from './actions';
 export { initialState } from './reducer';
 
