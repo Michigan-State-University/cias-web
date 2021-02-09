@@ -165,15 +165,6 @@ function EditSessionPage({
             activeIcon: shareActive,
             action: () => setModalVisible(true),
           },
-          {
-            label: <FormattedMessage {...messages.delete} />,
-            inactiveIcon: bin,
-            activeIcon: binActive,
-            action: () => {
-              deleteQuestions(selectedSlides, params.sessionId, groupIds);
-              setSelectedSlides([]);
-            },
-          },
         ]
       : []),
     {
@@ -182,6 +173,15 @@ function EditSessionPage({
       activeIcon: groupIconActive,
       action: () => {
         groupQuestions(selectedSlides, params.sessionId);
+        setSelectedSlides([]);
+      },
+    },
+    {
+      label: <FormattedMessage {...messages.delete} />,
+      inactiveIcon: bin,
+      activeIcon: binActive,
+      action: () => {
+        deleteQuestions(selectedSlides, params.sessionId, groupIds);
         setSelectedSlides([]);
       },
     },
