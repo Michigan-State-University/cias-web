@@ -5,52 +5,24 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
-import Box from 'components/Box';
 import Column from 'components/Column';
-import Question from 'models/Session/Question';
-import Row from 'components/Row';
+import NameQuestionLayout from 'containers/AnswerSessionPage/layouts/NameQuestionLayout';
 
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
 
-import messages from './messages';
 import { UPDATE_DATA } from './constants';
 
-const NameQuestion = ({
-  selectedQuestion,
-  updateAnswer,
-  intl: { formatMessage },
-}) => {
-  const { payload } = selectedQuestion.body.data[0];
-  const { variable } = selectedQuestion.body;
-
-  return (
-    <Column mt={10}>
-      <Box width="100%" padding={15}>
-        <Row>
-          <ApprovableInput
-            disabled
-            width={200}
-            height={50}
-            placeholder={formatMessage(messages.enterName)}
-            type="date"
-            value={Date.parse(payload)}
-            onCheck={value => updateAnswer({ variable, payload: value })}
-            fontSize={15}
-          />
-        </Row>
-      </Box>
-    </Column>
-  );
-};
+const NameQuestion = ({ intl: { formatMessage } }) => (
+  <Column mt={10}>
+    <NameQuestionLayout disabled formatMessage={formatMessage} />
+  </Column>
+);
 
 NameQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
   intl: PropTypes.object.isRequired,
-  updateAnswer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

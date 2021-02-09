@@ -12,7 +12,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
-import { dateQuestion } from 'models/Session/QuestionTypes';
+import { nameQuestion } from 'models/Session/QuestionTypes';
 import { draft } from 'models/Status/StatusTypes';
 
 import NameQuestion from '../index';
@@ -34,7 +34,7 @@ describe('<NameQuestion />', () => {
           id: 'test',
           title: 'test-title',
           subtitle: 'test-subtitle',
-          type: dateQuestion.id,
+          type: nameQuestion.id,
           body: {
             variable: {
               name: '1',

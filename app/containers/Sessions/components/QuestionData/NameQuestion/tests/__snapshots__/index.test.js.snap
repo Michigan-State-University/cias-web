@@ -1,15 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
+exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
 <div
   class="Column-sc-4zswzq-0 fgvXEf"
 >
   <div
-    class="Box-sc-1vhutan-0 gXkPFz"
+    class="Row-y1cs0u-0 gXPeH"
     width="100%"
   >
     <div
-      class="Row-y1cs0u-0 dskFsL"
+      class="Box-sc-1vhutan-0 cPkxZo"
+      height="calc(100% - 30px)"
+      width="100%"
     >
       <div
         class="Row-y1cs0u-0 gQFDhs"
@@ -18,33 +20,51 @@ exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
         <div
           class="Column-sc-4zswzq-0 ekpwZH"
         >
-          <div
-            class="styled__DatePickerWrapper-sc-10udg63-2 isyWyO"
-          >
-            <div
-              class="react-datepicker-wrapper"
-            >
-              <div
-                class="react-datepicker__input-container"
-              >
-                <button
-                  class="styled__StyledDateInput-sc-10udg63-1 knYUti"
-                  disabled=""
-                  height="50"
-                  width="200"
-                >
-                  <p
-                    class="Text-e4p0w3-0 gSFBZi"
-                    color="#2F3850"
-                    font-size="15"
-                  >
-                    Choose date...
-                  </p>
-                </button>
-              </div>
-            </div>
-          </div>
+          <input
+            class="Input-t9j2q5-0 hwMwnZ"
+            disabled=""
+            height="100%"
+            placeholder="Enter your name"
+            type="text"
+            value=""
+            width="100%"
+          />
         </div>
+      </div>
+    </div>
+    <div
+      class="Column-sc-4zswzq-0 hFHwTu"
+    >
+      <div
+        class="Box-sc-1vhutan-0 fxZKpe"
+        width="100%"
+      >
+        <input
+          class="Input-t9j2q5-0 cSqYOu"
+          disabled=""
+          height="100%"
+          placeholder="Enter your name phonetically"
+          type="text"
+          value=""
+          width="100%"
+        />
+      </div>
+      <div
+        class="Row-y1cs0u-0 bslyGl"
+        disabled=""
+        height="25px"
+        width="80"
+      >
+        <img
+          class="Img-sc-55j3su-0 cDhXoN"
+          src="IMAGE_MOCK"
+        />
+        <p
+          class="Text-e4p0w3-0 bdGHSX"
+          color="#C866EA"
+        >
+          Preview
+        </p>
       </div>
     </div>
   </div>

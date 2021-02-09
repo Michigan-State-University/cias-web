@@ -20,7 +20,7 @@ export const textboxQuestion = new QuestionType(
 );
 
 export const nameQuestion = new QuestionType(
-  'Question::Number',
+  'Question::Name',
   'Name',
   colors.olive,
 );

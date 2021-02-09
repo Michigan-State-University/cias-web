@@ -6,6 +6,8 @@ import { Input } from 'components/Input/index';
 import Img from 'components/Img';
 import Text from 'components/Text';
 import Row from 'components/Row';
+import Box from 'components/Box';
+import Column from 'components/Column';
 
 import playButton from 'assets/svg/play-button-1.svg';
 import stopButton from 'assets/svg/stop-button-1.svg';
@@ -16,7 +18,6 @@ import messages from './messages';
 const TextVoicePreviewInput = ({
   intl: { formatMessage },
   value,
-  onInputChange,
   onBlur,
   placeholder,
   disabled,
@@ -30,39 +31,45 @@ const TextVoicePreviewInput = ({
   };
 
   return (
-    <>
-      <Input
-        value={value}
-        onChange={event => onInputChange(event.target.value)}
-        onBlur={e => onBlur(e.target.value)}
-        placeholder={placeholder}
-        transparent
-        disabled={disabled}
-        {...styles}
-      />
+    <Column maxWidth={300}>
+      <Box
+        bg={themeColors.highlight}
+        width="100%"
+        px={21}
+        py={14}
+        justify="center"
+        align="center"
+      >
+        <Input
+          defaultValue={value ?? ''}
+          onBlur={e => onBlur(e.target.value)}
+          placeholder={placeholder}
+          transparent
+          disabled={disabled}
+          {...styles}
+        />
+      </Box>
       <Row
         align="center"
         width={80}
-        position="absolute"
-        top="180px"
-        right="230px"
         onClick={() => setIsPlaying(!isPlaying)}
         clickable
         disabled={!value}
+        height="25px"
+        mt={5}
       >
         {renderPreviewButton()}
         <Text ml={2} color={themeColors.secondary}>
           {formatMessage(messages.preview)}
         </Text>
       </Row>
-    </>
+    </Column>
   );
 };
 
 TextVoicePreviewInput.propTypes = {
   intl: intlShape,
   value: PropTypes.string,
-  onInputChange: PropTypes.func,
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
