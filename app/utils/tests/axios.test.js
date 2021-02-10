@@ -21,7 +21,7 @@ describe('axios request test', () => {
     }));
     const getHeadersSpy = jest.spyOn(LocalStorageService, 'getHeaders');
 
-    const expected = { headers: { test: 'test' } };
+    const expected = { headers: { Test: 'test' } };
 
     const result = await axios.interceptors.request.handlers[0].fulfilled({});
 
@@ -63,9 +63,9 @@ describe('axios response test', () => {
 
   const headers = {
     ...headersConst,
-    'access-token': '123',
-    client: '123',
-    uid: '123',
+    'Access-Token': '123',
+    Client: '123',
+    Uid: '123',
   };
 
   it('should invoke setHeaders with all headers and return response when url is different than "sign_in"', async () => {

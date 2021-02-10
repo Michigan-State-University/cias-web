@@ -8,9 +8,9 @@ import { headersConst } from 'utils/getHeaders';
 describe('LocalStorageService test', () => {
   const initialState = { test: 'test', name: 'TestName', random: '123' };
   const initialHeaders = {
-    'access-token': 'token-123',
-    client: 'client-123',
-    uid: 'uid-123',
+    'Access-Token': 'token-123',
+    Client: 'client-123',
+    Uid: 'uid-123',
   };
 
   beforeEach(() => {
@@ -100,7 +100,7 @@ describe('LocalStorageService test', () => {
     const newToken = 'new-token';
     LocalStorageService.setToken(newToken);
 
-    const { 'access-token': token } = LocalStorageService.getHeaders();
+    const { 'Access-Token': token } = LocalStorageService.getHeaders();
 
     expect(token).toEqual(newToken);
   });
@@ -109,16 +109,16 @@ describe('LocalStorageService test', () => {
     const newUid = 'new-uid';
     LocalStorageService.setUid(newUid);
 
-    const { uid } = LocalStorageService.getHeaders();
+    const { Uid } = LocalStorageService.getHeaders();
 
-    expect(uid).toEqual(newUid);
+    expect(Uid).toEqual(newUid);
   });
 
   it('should set token', () => {
     const newToken = 'new-token';
     LocalStorageService.setToken(newToken);
 
-    const { 'access-token': token } = LocalStorageService.getHeaders();
+    const { 'Access-Token': token } = LocalStorageService.getHeaders();
 
     expect(token).toEqual(newToken);
   });

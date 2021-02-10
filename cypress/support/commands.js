@@ -28,6 +28,7 @@ import LocalStorageService from 'utils/localStorageService';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
 import { headersConst } from 'utils/getHeaders';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
 import { API_URL } from './envVariables';
 import {
   ALIASES,
@@ -55,11 +56,13 @@ Cypress.Commands.add('login', (email, password) =>
     .then(({ body: { data }, headers, status }) => {
       const user = mapCurrentUser(data);
       LocalStorageService.setState(user);
+
+      const kebabCamelCaseHeaders = objectToCamelKebabCase(headers);
       LocalStorageService.setHeaders({
         ...headersConst,
-        'access-token': headers['access-token'],
-        client: headers.client,
-        uid: headers.uid,
+        'Access-Token': kebabCamelCaseHeaders['Access-Token'],
+        Client: kebabCamelCaseHeaders.Client,
+        Uid: kebabCamelCaseHeaders.Uid,
       });
       expect(status).to.eq(201);
     }),

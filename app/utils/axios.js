@@ -3,6 +3,7 @@ import axios from 'axios';
 import { store } from 'configureStore';
 import { logOut } from 'global/reducers/auth';
 import { headersConst } from 'utils/getHeaders';
+import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
 import LocalStorageService from './localStorageService';
 
 const { dispatch } = store;
@@ -12,7 +13,7 @@ axios.interceptors.request.use(
     config.baseURL = process.env.API_URL;
 
     const headers = LocalStorageService.getHeaders();
-    config.headers = { ...headers, ...config.headers };
+    config.headers = objectToCamelKebabCase({ ...headers, ...config.headers });
 
     return config;
   },
@@ -40,10 +41,12 @@ axios.interceptors.response.use(
 );
 
 const setHeaders = response => {
+  const kebabCamelCaseHeaders = objectToCamelKebabCase(response.headers);
+
   LocalStorageService.setHeaders({
     ...headersConst,
-    'access-token': response.headers['access-token'],
-    client: response.headers.client,
-    uid: response.headers.uid,
+    'Access-Token': kebabCamelCaseHeaders['Access-Token'],
+    Client: kebabCamelCaseHeaders.Client,
+    Uid: kebabCamelCaseHeaders.Uid,
   });
 };
