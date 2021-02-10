@@ -21,16 +21,7 @@ axios.interceptors.request.use(
 
 axios.interceptors.response.use(
   response => {
-    if (response.config.url.endsWith('auth/sign_in')) {
-      LocalStorageService.setHeaders({
-        ...headersConst,
-        'access-token': response.headers['access-token'],
-        client: response.headers.client,
-        uid: response.headers.uid,
-      });
-    } else {
-      setHeaders(response);
-    }
+    setHeaders(response);
 
     return response;
   },
@@ -49,5 +40,10 @@ axios.interceptors.response.use(
 );
 
 const setHeaders = response => {
-  LocalStorageService.setToken(response.headers['access-token']);
+  LocalStorageService.setHeaders({
+    ...headersConst,
+    'access-token': response.headers['access-token'],
+    client: response.headers.client,
+    uid: response.headers.uid,
+  });
 };
