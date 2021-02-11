@@ -22,6 +22,7 @@ const CommonLayout = ({ currentQuestion }) => {
   } = currentQuestion;
   return (
     <Box>
+      <Row width="100%" mt={5} height={30} />
       {settingsTitle && title && (
         <Row>
           <Box padding={26} dangerouslySetInnerHTML={{ __html: title }} />

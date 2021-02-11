@@ -10,7 +10,6 @@ const AnswerInterventionContent = styled.div`
   max-width: ${elements.draggableContainerSize}px;
   min-height: ${elements.draggableContainerSize}px;
   position: relative;
-  padding: 0 10px;
   width: 100%;
   z-index: 0;
 `;
