@@ -4,7 +4,6 @@ import { store } from 'configureStore';
 import { logOut } from 'global/reducers/auth';
 import { headersConst } from 'utils/getHeaders';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
-import isNullOrUndefined from 'utils/isNullOrUndefined';
 import LocalStorageService from './localStorageService';
 
 const { dispatch } = store;
@@ -48,7 +47,7 @@ const setHeaders = response => {
 
   LocalStorageService.setHeaders({
     ...headersConst,
-    'Access-Token': isNullOrUndefined(accessToken)
+    'Access-Token': !accessToken
       ? LocalStorageService.getHeaders()['Access-Token']
       : accessToken,
     Client: kebabCamelCaseHeaders.Client,
