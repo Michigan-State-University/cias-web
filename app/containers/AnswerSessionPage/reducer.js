@@ -23,6 +23,8 @@ import {
   RESET_SESSION,
   CHANGE_IS_ANIMATING,
   SET_FEEDBACK_SCREEN_SETTINGS,
+  PHONETIC_PREVIEW_REQUEST,
+  PHONETIC_PREVIEW_SUCCESS,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -43,6 +45,9 @@ export const initialState = {
   sessionId: null,
   isAnimationOngoing: true,
   feedbackScreenSettings: getEmptyFeedbackScreenSettings(),
+  phoneticText: null,
+  phoneticUrl: null,
+  phoneticLoading: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -131,6 +136,15 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
         break;
       case SET_FEEDBACK_SCREEN_SETTINGS:
         draft.feedbackScreenSettings[payload.setting] = payload.value;
+        break;
+      case PHONETIC_PREVIEW_REQUEST:
+        draft.phoneticText = payload;
+        draft.phoneticLoading = true;
+        draft.phoneticUrl = null;
+        break;
+      case PHONETIC_PREVIEW_SUCCESS:
+        draft.phoneticUrl = payload.url;
+        draft.phoneticLoading = false;
         break;
     }
   });

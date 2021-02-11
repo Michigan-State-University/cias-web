@@ -34,7 +34,8 @@ const validateVariable = (payload, question, variables) => {
   const duplicateError = new Error(formatMessage(messages.duplicateVariable));
   const reservedError = new Error(formatMessage(messages.reservedVariable));
 
-  if (payload.data.name === nameQuestion.reservedVariable) throw reservedError;
+  if (payload.data && payload.data.name === nameQuestion.reservedVariable)
+    throw reservedError;
   else if (question.type === multiQuestion.id) {
     question.body.data.forEach(element => {
       if (hasDuplicates(variables, element.variable.name)) throw duplicateError;

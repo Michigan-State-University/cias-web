@@ -34,9 +34,23 @@ const makeSelectPreviewMode = () =>
     substate => substate.previewMode,
   );
 
+const makeSelectPhoneticUrl = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    substate => substate.phoneticUrl,
+  );
+
+const makeSelectPhoneticLoading = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    substate => substate.phoneticLoading,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
   makeSelectAnswers,
   makeSelectPreviewMode,
+  makeSelectPhoneticUrl,
+  makeSelectPhoneticLoading,
 };
