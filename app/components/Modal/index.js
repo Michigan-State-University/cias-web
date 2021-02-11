@@ -21,7 +21,14 @@ import { StyledBox } from './styled';
 
 const ESC_KEY_CODE = 27;
 
-const Modal = ({ title, onClose, children, visible, ...stylesProps }) => {
+const Modal = ({
+  title,
+  onClose,
+  children,
+  visible,
+  titleProps,
+  ...stylesProps
+}) => {
   const modalContent = useRef(null);
   const modalOverlay = useRef(null);
   useLockBodyScroll(visible);
@@ -85,7 +92,7 @@ const Modal = ({ title, onClose, children, visible, ...stylesProps }) => {
             {...stylesProps}
           >
             <Column border="1px solid red">
-              <Row align="center" justify="between">
+              <Row align="center" justify="between" {...titleProps}>
                 <H1>{title}</H1>
                 <ActionIcon
                   data-cy="modal-close-button"
@@ -111,6 +118,7 @@ Modal.propTypes = {
   title: PropTypes.node,
   children: PropTypes.node,
   onClose: PropTypes.func,
+  titleProps: PropTypes.object,
 };
 
 export default Modal;

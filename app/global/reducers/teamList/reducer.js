@@ -38,6 +38,7 @@ export const initialState = {
     teamsLoading: true,
     singleTeamLoading: true,
     teamCreateLoading: false,
+    singleTeamEditLoading: false,
   },
   errors: {
     teamsFetchError: null,
@@ -127,15 +128,18 @@ const teamListReducer = (state = initialState, { type, payload }) =>
         break;
 
       case EDIT_SINGLE_TEAM_REQUEST:
+        draft.loaders.singleTeamEditLoading = true;
         break;
 
       case EDIT_SINGLE_TEAM_SUCCESS:
         draft.singleTeam = payload.team;
         draft.cache.singleTeam = payload.team;
+        draft.loaders.singleTeamEditLoading = false;
         break;
 
       case EDIT_SINGLE_TEAM_FAILURE:
         draft.singleTeam = state.cache.singleTeam;
+        draft.loaders.singleTeamEditLoading = false;
         break;
     }
   });

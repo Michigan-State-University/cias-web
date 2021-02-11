@@ -36,10 +36,11 @@ const UserSelector = ({
   selectedUserId,
   rolesToInclude,
   additionalUsers = [],
+  disabled,
 }) => {
   useLayoutEffect(() => {
     fetchUsersRequest(rolesToInclude);
-  }, []);
+  }, [additionalUsers]);
 
   const options = useMemo(
     () =>
@@ -76,6 +77,7 @@ const UserSelector = ({
         <Select
           width="100%"
           selectProps={{
+            isDisabled: disabled,
             options,
             value: selectedValue,
             onChange: handleOnSelect,
@@ -94,6 +96,7 @@ UserSelector.propTypes = {
   fetchUsersRequest: PropTypes.func.isRequired,
   onSelect: PropTypes.func,
   selectedUserId: PropTypes.string,
+  disabled: PropTypes.bool,
   rolesToInclude: PropTypes.arrayOf(PropTypes.string),
   additionalUsers: PropTypes.arrayOf(PropTypes.object),
 };

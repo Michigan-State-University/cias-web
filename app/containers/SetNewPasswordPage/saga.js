@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
 import { setNewPasswordSuccess, setNewPasswordError } from './actions';
 import {
   SET_NEW_PASSWORD_REQUEST,
@@ -28,13 +29,13 @@ function* setNewPassword({
         password_confirmation: passwordConfirmation,
       },
       {
-        headers: {
+        headers: objectToCamelKebabCase({
           'Content-Type': 'application/json;charset=utf-8',
-          'token-type': 'Bearer',
-          'access-token': accessToken,
+          'Token-Type': 'Bearer',
+          'Access-Token': accessToken,
           client,
           uid,
-        },
+        }),
       },
     );
     yield call(toast.success, formatMessage(messages.passwordChanged), {

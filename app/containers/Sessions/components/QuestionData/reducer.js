@@ -9,8 +9,10 @@ import {
   feedbackQuestion,
   dateQuestion,
   nameQuestion,
+  currencyQuestion,
 } from 'models/Session/QuestionTypes';
 
+import currencyQuestionReducer from './CurrencyQuestion/reducer';
 import gridQuestionReducer from './GridQuestion/reducer';
 import multiQuestionReducer from './MultiQuestion/reducer';
 import phoneQuestionReducer from './PhoneQuestion/reducer';
@@ -48,6 +50,8 @@ const questionDataReducer = (question, data) => {
       return urlQuestionReducer(question, data);
     case feedbackQuestion.id:
       return feedbackQuestionReducer(question, data);
+    case currencyQuestion.id:
+      return currencyQuestionReducer(question, data);
     default:
       return question;
   }

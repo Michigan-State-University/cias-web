@@ -37,6 +37,7 @@ import {
   changeCurrentSession,
   fetchSessionEmailsRequest,
   deleteSessionRequest,
+  externalCopySessionRequest,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 
@@ -47,7 +48,12 @@ import { colors, themeColors } from 'theme';
 import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
 import archive from 'assets/svg/archive.svg';
-import { copyInterventionRequest } from 'global/reducers/interventions';
+import {
+  copyInterventionRequest,
+  fetchInterventionsRequest,
+  interventionsReducer,
+  fetchInterventionsSaga,
+} from 'global/reducers/interventions';
 
 import {
   questionsReducer,
@@ -99,6 +105,8 @@ export function InterventionDetailsPage({
   fetchQuestions,
   fetchSessionEmails,
   deleteSession,
+  fetchInterventions,
+  externalCopySession,
 }) {
   const [
     deleteConfirmationSessionId,
@@ -108,11 +116,13 @@ export function InterventionDetailsPage({
     key: 'intervention',
     reducer: interventionReducer,
   });
+  useInjectReducer({ key: 'interventions', reducer: interventionsReducer });
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   useInjectSaga({
     key: 'interventionOptionsSaga',
     saga: interventionOptionsSaga,
   });
+  useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
   useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
 
   const screenClass = useScreenClass();
@@ -180,6 +190,10 @@ export function InterventionDetailsPage({
   }, []);
 
   useEffect(() => {
+    fetchInterventions();
+  }, []);
+
+  useEffect(() => {
     if (
       !isNullOrUndefined(intervention) &&
       !isNullOrUndefined(sessions[sessionIndex])
@@ -189,6 +203,15 @@ export function InterventionDetailsPage({
 
   const handleCopySession = sessionId => {
     copySession({ sessionId });
+  };
+
+  const handleExternalCopySession = params => {
+    const { sessionId, id: targetInterventionId } = params;
+    externalCopySession({
+      sessionId,
+      currentInterventionId: interventionId,
+      interventionId: targetInterventionId,
+    });
   };
 
   const editName = val => editIntervention({ path: 'name', value: val });
@@ -266,6 +289,7 @@ export function InterventionDetailsPage({
                         isSelected={index === sessionIndex}
                         handleClick={handleClick}
                         handleCopySession={handleCopySession}
+                        handleExternalCopySession={handleExternalCopySession}
                         handleDeleteSession={sessionId =>
                           setDeleteConfirmationSessionId(sessionId)
                         }
@@ -400,6 +424,8 @@ InterventionDetailsPage.propTypes = {
   fetchQuestions: PropTypes.func,
   fetchSessionEmails: PropTypes.func,
   deleteSession: PropTypes.func,
+  fetchInterventions: PropTypes.func,
+  externalCopySession: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -411,6 +437,7 @@ const mapDispatchToProps = {
   createSession: createSessionRequest,
   fetchQuestions: getQuestionsRequest,
   fetchIntervention: fetchInterventionRequest,
+  fetchInterventions: fetchInterventionsRequest,
   editIntervention: editInterventionRequest,
   changeSessionIndex: changeCurrentSession,
   fetchSessionEmails: fetchSessionEmailsRequest,
@@ -419,6 +446,7 @@ const mapDispatchToProps = {
   reorderSessions: reorderSessionList,
   copyIntervention: copyInterventionRequest,
   deleteSession: deleteSessionRequest,
+  externalCopySession: externalCopySessionRequest,
 };
 
 const withConnect = connect(

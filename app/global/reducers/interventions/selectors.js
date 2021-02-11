@@ -1,3 +1,4 @@
+import { draft } from 'models/Status/StatusTypes';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
@@ -13,6 +14,13 @@ export const makeSelectInterventions = () =>
   createSelector(
     interventions,
     interventionsState => interventionsState.interventions,
+  );
+
+export const makeSelectPublishedInterventions = () =>
+  createSelector(
+    interventions,
+    interventionsState =>
+      interventionsState.interventions.filter(({ status }) => status === draft),
   );
 
 export const makeSelectInterventionsLoader = () =>

@@ -31,4 +31,8 @@ export default defineMessages({
     id: `${scope}.enterNamePhonetically`,
     defaultMessage: 'Enter your name phonetically',
   },
+  amountPlaceholder: {
+    id: `${scope}.amountPlaceholder`,
+    defaultMessage: 'E.g. 121.12',
+  },
 });

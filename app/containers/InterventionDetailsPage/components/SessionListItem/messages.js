@@ -13,6 +13,10 @@ export default defineMessages({
     id: `${scope}.duplicate`,
     defaultMessage: 'Duplicate session',
   },
+  copy: {
+    id: `${scope}.copy`,
+    defaultMessage: 'Copy session',
+  },
   delete: {
     id: `${scope}.delete`,
     defaultMessage: 'Delete session',
@@ -40,5 +44,9 @@ export default defineMessages({
     id: `${scope}.tooltip`,
     defaultMessage:
       'This intervention has been archived. You can invite participants only to the active, published interventions.',
+  },
+  pasteSession: {
+    id: `${scope}.pasteSession`,
+    defaultMessage: 'Paste session in this intervention',
   },
 });

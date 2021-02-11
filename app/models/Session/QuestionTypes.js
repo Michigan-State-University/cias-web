@@ -80,6 +80,12 @@ export const dateQuestion = new QuestionType(
   colors.bluewood,
 );
 
+export const currencyQuestion = new QuestionType(
+  'Question::Currency',
+  'Currency',
+  colors.olive,
+);
+
 export const questionType = 'Question::';
 
 export const QuestionTypes = [
@@ -89,6 +95,7 @@ export const QuestionTypes = [
   phoneQuestion,
   dateQuestion,
   nameQuestion,
+  currencyQuestion,
   numberQuestion,
   gridQuestion,
   visualAnalogueScaleQuestion,

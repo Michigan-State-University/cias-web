@@ -8,7 +8,7 @@ const LocalStorageService = (() => {
 
       localStorage.setItem(
         HEADERS,
-        JSON.stringify({ ...headers, 'access-token': token }),
+        JSON.stringify({ ...headers, 'Access-Token': token }),
       );
     }
   };
@@ -17,7 +17,7 @@ const LocalStorageService = (() => {
     if (uid && uid !== '') {
       const headers = getHeaders();
 
-      localStorage.setItem(HEADERS, JSON.stringify({ ...headers, uid }));
+      localStorage.setItem(HEADERS, JSON.stringify({ ...headers, Uid: uid }));
     }
   };
 

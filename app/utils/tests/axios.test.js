@@ -21,7 +21,7 @@ describe('axios request test', () => {
     }));
     const getHeadersSpy = jest.spyOn(LocalStorageService, 'getHeaders');
 
-    const expected = { headers: { test: 'test' } };
+    const expected = { headers: { Test: 'test' } };
 
     const result = await axios.interceptors.request.handlers[0].fulfilled({});
 
@@ -63,12 +63,12 @@ describe('axios response test', () => {
 
   const headers = {
     ...headersConst,
-    'access-token': '123',
-    client: '123',
-    uid: '123',
+    'Access-Token': '123',
+    Client: '123',
+    Uid: '123',
   };
 
-  it('should invoke setToken with "access-token" and return response when url is different than "sign_in"', async () => {
+  it('should invoke setHeaders with all headers and return response when url is different than "sign_in"', async () => {
     const response200 = {
       response: {
         statusText: 'OK',
@@ -84,9 +84,9 @@ describe('axios response test', () => {
       response200,
     );
 
-    expect(LocalStorageService.setToken).toHaveBeenCalledTimes(1);
-    expect(LocalStorageService.setToken).toHaveBeenCalledWith(
-      response200.headers['access-token'],
+    expect(LocalStorageService.setHeaders).toHaveBeenCalledTimes(1);
+    expect(LocalStorageService.setHeaders).toHaveBeenCalledWith(
+      response200.headers,
     );
     expect(result).toStrictEqual(response200);
   });
@@ -114,7 +114,7 @@ describe('axios response test', () => {
     expect(result).toStrictEqual(responseSignIn);
   });
 
-  it('should invoke setToken and not logout on error when status is different than 401', async () => {
+  it('should invoke setHeaders and not logout on error when status is different than 401', async () => {
     const response422 = {
       status: 422,
       response: {
@@ -127,14 +127,14 @@ describe('axios response test', () => {
       .rejected({ response: response422 })
       .catch(error => error);
 
-    expect(LocalStorageService.setToken).toHaveBeenCalledTimes(1);
-    expect(LocalStorageService.setToken).toHaveBeenCalledWith(
-      response422.headers['access-token'],
+    expect(LocalStorageService.setHeaders).toHaveBeenCalledTimes(1);
+    expect(LocalStorageService.setHeaders).toHaveBeenCalledWith(
+      response422.headers,
     );
     expect(logOut).not.toHaveBeenCalled();
   });
 
-  it('should invoke logout and not setToken on error when status is 401', async () => {
+  it('should invoke logout and not setHeaders on error when status is 401', async () => {
     const response401 = {
       status: 401,
       response: {
@@ -150,7 +150,7 @@ describe('axios response test', () => {
       .rejected({ response: response401 })
       .catch(error => error);
 
-    expect(LocalStorageService.setToken).not.toHaveBeenCalled();
+    expect(LocalStorageService.setHeaders).not.toHaveBeenCalled();
     expect(logOut).toHaveBeenCalledTimes(1);
   });
 });

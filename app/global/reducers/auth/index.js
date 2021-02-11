@@ -19,6 +19,7 @@ export {
   makeSelectUser,
   makeSelectErrors,
   makeSelectLoaders,
+  makeSelectUserRoles,
 } from './selectors';
 export {
   logOutSaga,

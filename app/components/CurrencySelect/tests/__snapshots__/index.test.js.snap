@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CurrencySelect /> should match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+<div>
+  <div
+    class="c0"
+    width="100%"
+  >
+    <div
+      class=" css-2b097c-container"
+    >
+      <div
+        class=" css-4iyz22-control"
+      >
+        <div
+          class=" css-g1d714-ValueContainer"
+        >
+          <div
+            class=" css-1wa3eu0-placeholder"
+          >
+            Select currency
+          </div>
+          <div
+            class="css-b8ldur-Input"
+          >
+            <div
+              class=""
+              style="display: inline-block;"
+            >
+              <input
+                aria-autocomplete="list"
+                autocapitalize="none"
+                autocomplete="off"
+                autocorrect="off"
+                id="react-select-2-input"
+                spellcheck="false"
+                style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                tabindex="0"
+                type="text"
+                value=""
+              />
+              <div
+                style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+              />
+            </div>
+          </div>
+        </div>
+        <div
+          class=" css-1hb7zxy-IndicatorsContainer"
+        >
+          <div
+            aria-hidden="true"
+            class=" css-tlfecz-indicatorContainer"
+          >
+            <img
+              class="c1"
+              src="IMAGE_MOCK"
+              transform=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

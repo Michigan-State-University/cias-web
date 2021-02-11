@@ -25,6 +25,8 @@ import { colors, themeColors } from 'theme';
 
 import Img from 'components/Img';
 import Box from 'components/Box';
+import { VIEWS } from 'components/CopyModal/Components';
+import CopyModal from 'components/CopyModal';
 import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
 import { ToggleableBox, StyledRow, SessionIndex } from './styled';
@@ -43,8 +45,10 @@ function SessionListItem({
   status,
   deletionPossible,
   handleDeleteSession,
+  handleExternalCopySession,
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [copyOpen, setCopyOpen] = useState(false);
   const {
     id,
     name,
@@ -57,6 +61,14 @@ function SessionListItem({
   } = session || {};
 
   const options = [
+    {
+      id: 'copy',
+      label: formatMessage(messages.copy),
+      icon: copy,
+      action: () => setCopyOpen(true),
+      color: colors.bluewood,
+      disabled,
+    },
     {
       id: 'duplicate',
       label: formatMessage(messages.duplicate),
@@ -75,6 +87,11 @@ function SessionListItem({
     },
   ];
 
+  const closeCopyModal = () => setCopyOpen(false);
+
+  const externalCopy = params =>
+    handleExternalCopySession({ ...params, sessionId: id });
+
   return (
     <Draggable
       isDragDisabled={disabled}
@@ -91,6 +108,15 @@ function SessionListItem({
         >
           <ToggleableBox isSelected={isSelected} isHovered={isHovered}>
             <Row py={21} px={16} align="center" justify="between">
+              <CopyModal
+                visible={copyOpen}
+                onClose={closeCopyModal}
+                copyAction={externalCopy}
+                disableQuestionGroupCopy
+                disableSessionCopy
+                pasteText={formatMessage(messages.pasteSession)}
+                defaultView={VIEWS.INTERVENTION}
+              />
               <StyledRow align="center" justify="between" width="100%">
                 <StyledLink
                   data-cy={`enter-session-${index}`}
@@ -178,6 +204,7 @@ SessionListItem.propTypes = {
   sharingPossible: PropTypes.bool,
   deletionPossible: PropTypes.bool,
   handleDeleteSession: PropTypes.func,
+  handleExternalCopySession: PropTypes.func,
   status: PropTypes.string,
 };
 

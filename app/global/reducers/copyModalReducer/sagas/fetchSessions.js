@@ -1,19 +1,18 @@
 import axios from 'axios';
 import { put, call, takeLatest } from 'redux-saga/effects';
 
-import { Roles } from 'models/User/UserRoles';
+import { defaultMapper } from 'utils/mapResponseObjects';
 import { FETCH_SESSIONS_REQUEST } from '../constants';
 import { fetchSessionsSuccess, fetchSessionsError } from '../actions';
 
-export function* fetchSessions({ payload: { role } }) {
-  let requestURL = `v1/sessions`;
-  if (role === Roles.participant) requestURL = `v1/interventions`;
-
+export function* fetchSessions({ payload: { id } }) {
+  const interventionsRequestURL = `v1/interventions/${id}/sessions`;
   try {
     const {
-      data: { data },
-    } = yield call(axios.get, requestURL);
-    yield put(fetchSessionsSuccess(data));
+      data: { data: sessions },
+    } = yield call(axios.get, interventionsRequestURL);
+    const mappedSessions = sessions.map(defaultMapper);
+    yield put(fetchSessionsSuccess(mappedSessions));
   } catch (error) {
     yield put(fetchSessionsError(error));
   }

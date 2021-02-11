@@ -457,7 +457,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   max-width: 702px;
   min-height: 702px;
   position: relative;
-  padding: 0 10px;
   width: 100%;
   z-index: 0;
 }

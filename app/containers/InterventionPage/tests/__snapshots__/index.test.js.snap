@@ -200,13 +200,13 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
             <div
               class="Row-y1cs0u-0 dskFsL"
             >
-              <div
-                class="styled__StyledEllipsisText-h4mjfj-0 jYQKYS"
+              <p
+                class="Text-e4p0w3-0 styled__StyledEllipsisText-h4mjfj-0 jKspVy lnRdie"
                 font-size="18"
                 font-weight="bold"
               >
                 Name
-              </div>
+              </p>
             </div>
             <div
               class="Box-sc-1vhutan-0 fdfAmg"

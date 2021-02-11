@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.Number';
+export const scope = 'app.containers.Date';
 
 export default defineMessages({
   chooseDate: {
