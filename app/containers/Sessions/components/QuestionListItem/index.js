@@ -197,43 +197,12 @@ const QuestionListItem = ({
                 />
               </Row>
             )}
-            <Column xs={10}>
-              <Row>
-                <ClampedTitle mb={6}>
-                  {unescape(htmlToPlainText(subtitle))}
-                </ClampedTitle>
-              </Row>
-              <Row>
-                <Box display="flex" align="center">
-                  <StyledCircle
-                    background={
-                      QuestionTypes.find(({ id: typeId }) => typeId === type)
-                        .color
-                    }
-                    size="10px"
-                    mr="5px"
-                  />
-                  <Comment fontWeight="bold">
-                    {formatMessage(globalMessages.questionTypes[type])}
-                  </Comment>
-                </Box>
-              </Row>
-              {body && hasObjectProperty(body, 'variable') && (
-                <Row mt={10}>
-                  <VariableInput
-                    questionId={id}
-                    variable={body.variable}
-                    interventionStatus={interventionStatus}
-                  />
-                </Row>
-              )}
-            </Column>
-            {!manage && !disabled && !isFinishScreen && (
-              <Column xs={1}>
-                <Dropdown options={options} />
-              </Column>
-            )}
           </Column>
+          {!manage && !disabled && !isFinishScreen && (
+            <Column xs={1}>
+              <Dropdown options={options} />
+            </Column>
+          )}
         </Row>
       </ToggleableBox>
     </>
