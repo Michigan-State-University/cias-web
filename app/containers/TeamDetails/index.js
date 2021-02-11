@@ -47,7 +47,7 @@ import { CardBox, StyledBox } from './styled';
 export const TeamDetails = ({
   teamList: {
     singleTeam: team,
-    loaders: { singleTeamLoading },
+    loaders: { singleTeamLoading, singleTeamEditLoading },
     errors: { singleTeamFetchError },
   },
   fetchTeam,
@@ -168,6 +168,7 @@ export const TeamDetails = ({
                     <FormattedMessage {...messages.nameSectionTitle} />
                   </Text>
                   <Input
+                    disabled={singleTeamEditLoading}
                     maxWidth="none"
                     width="100%"
                     transparent={false}
@@ -183,6 +184,7 @@ export const TeamDetails = ({
                       <FormattedMessage {...messages.researcherSectionTitle} />
                     </Text>
                     <UserSelector
+                      disabled={singleTeamEditLoading}
                       selectedUserId={selectedUser?.id}
                       onSelect={handleOnSelect}
                       rolesToInclude={[Roles.researcher]}
