@@ -7,7 +7,6 @@ import React, { useMemo, useState } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import dayjs from 'dayjs';
 
 import { colors, themeColors } from 'theme';
 
@@ -17,7 +16,6 @@ import Column from 'components/Column';
 import Divider from 'components/Divider';
 import Row from 'components/Row';
 import Text from 'components/Text';
-import Tooltip from 'components/Tooltip';
 
 import {
   closed,
@@ -26,6 +24,7 @@ import {
 } from 'models/Status/StatusTypes';
 import getUrlProtocol from 'utils/getApiProtocol';
 
+import CsvButtons from './CsvButtons';
 import messages from './messages';
 import { ShareButton } from './styled';
 
@@ -42,32 +41,12 @@ function InterventionStatusButtons({
     [process.env.API_URL],
   );
 
-  const CsvButton = () => (
-    <ShareButton outlined onClick={handleSendCsv}>
-      <FormattedMessage {...(csvLink ? messages.csvNew : messages.csv)} />
-    </ShareButton>
-  );
-
   const urlToDownload = /^((http:\/\/)|(https:\/\/)).*$/.test(csvLink)
     ? csvLink
     : `${apiProtocol}//${csvLink}`;
   const fileName = useMemo(() => urlToDownload.split('/').pop(), [
     urlToDownload,
   ]);
-  const CsvDownload = () => (
-    <Tooltip
-      id={csvGeneratedAt}
-      text={`${formatMessage(messages.lastCsvDate)}${dayjs(
-        csvGeneratedAt,
-      ).format('YYYY/MM/DD HH:mm')}`}
-    >
-      <ShareButton outlined>
-        <a href={urlToDownload} download={fileName}>
-          <FormattedMessage {...messages.csvDownload} />
-        </a>
-      </ShareButton>
-    </Tooltip>
-  );
 
   const CloseButton = () => (
     <>
@@ -181,16 +160,24 @@ function InterventionStatusButtons({
     draft: <PublishButton />,
     published: (
       <>
-        {csvLink && <CsvDownload />}
-        <CsvButton />
+        <CsvButtons
+          handleSendCsv={handleSendCsv}
+          csvLink={csvLink}
+          csvGeneratedAt={csvGeneratedAt}
+          fileName={fileName}
+          urlToDownload={urlToDownload}
+        />
         <CloseButton />
       </>
     ),
     closed: (
-      <>
-        {csvLink && <CsvDownload />}
-        <CsvButton />
-      </>
+      <CsvButtons
+        handleSendCsv={handleSendCsv}
+        csvLink={csvLink}
+        csvGeneratedAt={csvGeneratedAt}
+        fileName={fileName}
+        urlToDownload={urlToDownload}
+      />
     ),
   };
 

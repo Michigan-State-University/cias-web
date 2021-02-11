@@ -148,6 +148,7 @@ function EditSessionPage({
   const currentGroupScope = groups.find(
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
   );
+
   const groupIds = groups.map(({ id }) => id);
 
   const groupActions = [
