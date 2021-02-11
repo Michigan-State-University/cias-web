@@ -4,6 +4,7 @@ import { store } from 'configureStore';
 import { logOut } from 'global/reducers/auth';
 import { headersConst } from 'utils/getHeaders';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
 import LocalStorageService from './localStorageService';
 
 const { dispatch } = store;
@@ -43,9 +44,13 @@ axios.interceptors.response.use(
 const setHeaders = response => {
   const kebabCamelCaseHeaders = objectToCamelKebabCase(response.headers);
 
+  const accessToken = kebabCamelCaseHeaders['Access-Token'];
+
   LocalStorageService.setHeaders({
     ...headersConst,
-    'Access-Token': kebabCamelCaseHeaders['Access-Token'],
+    'Access-Token': isNullOrUndefined(accessToken)
+      ? LocalStorageService.getHeaders()['Access-Token']
+      : accessToken,
     Client: kebabCamelCaseHeaders.Client,
     Uid: kebabCamelCaseHeaders.Uid,
   });
