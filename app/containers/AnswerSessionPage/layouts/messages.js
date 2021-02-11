@@ -23,4 +23,8 @@ export default defineMessages({
     id: `${scope}.chooseDate`,
     defaultMessage: 'Choose date',
   },
+  amountPlaceholder: {
+    id: `${scope}.amountPlaceholder`,
+    defaultMessage: 'E.g. 121.12',
+  },
 });

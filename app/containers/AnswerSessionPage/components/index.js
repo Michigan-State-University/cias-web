@@ -14,7 +14,9 @@ import {
   finishQuestion,
   phoneQuestion,
   dateQuestion,
+  currencyQuestion,
 } from 'models/Session/QuestionTypes';
+import CurrencyQuestion from './CurrencyQuestion';
 import FinishScreen from './FinishScreen';
 import UrlQuestion from './UrlQuestion';
 import InformationSlide from './InformationSlide';
@@ -57,6 +59,8 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <UrlQuestion question={question} {...sharedProps} />;
     case finishQuestion.id:
       return <FinishScreen question={question} {...sharedProps} />;
+    case currencyQuestion.id:
+      return <CurrencyQuestion question={question} {...sharedProps} />;
     default:
       return <ErrorAlert errorText={`CANNOT RENDER ${type}`} />;
   }

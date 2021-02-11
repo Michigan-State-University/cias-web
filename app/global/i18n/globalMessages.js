@@ -23,6 +23,7 @@ import {
   visualAnalogueScaleQuestion,
   phoneQuestion,
   dateQuestion,
+  currencyQuestion,
 } from 'models/Session/QuestionTypes';
 
 export const scope = 'app.GlobalMessages';
@@ -158,6 +159,10 @@ export default defineMessages({
     [dateQuestion.id]: {
       id: `${scope}.${dateQuestion.id}`,
       defaultMessage: 'Date',
+    },
+    [currencyQuestion.id]: {
+      id: `${scope}.${currencyQuestion.id}`,
+      defaultMessage: 'Currency',
     },
   },
   statuses: {

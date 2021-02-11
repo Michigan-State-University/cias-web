@@ -22,8 +22,10 @@ import {
   feedbackQuestion,
   phoneQuestion,
   dateQuestion,
+  currencyQuestion,
 } from 'models/Session/QuestionTypes';
 
+import CurrencyQuestion from './CurrencyQuestion';
 import GridQuestion from './GridQuestion';
 import MultiQuestion from './MultiQuestion';
 import NumberQuestion from './NumberQuestion';
@@ -68,6 +70,8 @@ const QuestionData = ({
       return <UrlQuestion {...commonProps} />;
     case feedbackQuestion.id:
       return <FeedbackQuestion {...commonProps} />;
+    case currencyQuestion.id:
+      return <CurrencyQuestion {...commonProps} />;
     default:
       return null;
   }
