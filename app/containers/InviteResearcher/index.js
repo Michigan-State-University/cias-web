@@ -43,12 +43,14 @@ const InviteResearcher = ({
   };
 
   const handleKeyDown = event => {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && isValid) {
       sendInvitation(email);
+      changeInput('');
     }
   };
 
   const isValid = emailValidator(email);
+
   return (
     <Modal
       visible={visible}
@@ -71,7 +73,7 @@ const InviteResearcher = ({
           mb={5}
           loading={loading}
           onClick={onSendClick(isValid)}
-          disabled={!email}
+          disabled={!email || !isValid}
         >
           <FormattedMessage {...messages.buttonText} />
         </Button>

@@ -108,7 +108,7 @@ Navbar.propTypes = {
     firstName: PropTypes.string.isRequired,
     lastName: PropTypes.string.isRequired,
     roles: PropTypes.arrayOf(PropTypes.string),
-    avatar: PropTypes.object,
+    avatar: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   }),
   navbarProps: PropTypes.shape({
     navbarId: PropTypes.string.isRequired,

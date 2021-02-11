@@ -29,4 +29,8 @@ export default defineMessages({
     id: `${scope}.backToMyTeam`,
     defaultMessage: 'Back to My Team',
   },
+  backToTeamDetails: {
+    id: `${scope}.backToTeamDetails`,
+    defaultMessage: 'Back to Team Details',
+  },
 });
