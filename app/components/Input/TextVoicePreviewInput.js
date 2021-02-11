@@ -59,7 +59,7 @@ const TextVoicePreviewInput = ({
   };
 
   return (
-    <Column maxWidth={285}>
+    <Column>
       <Box
         bg={themeColors.highlight}
         width="100%"

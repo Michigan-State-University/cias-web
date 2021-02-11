@@ -37,5 +37,8 @@ export const PHONETIC_PREVIEW_REQUEST =
 export const PHONETIC_PREVIEW_SUCCESS =
   'app/AnswerSessionPage/PHONETIC_PREVIEW_SUCCESS';
 
+export const PHONETIC_PREVIEW_FAILURE =
+  'app/AnswerSessionPage/PHONETIC_PREVIEW_FAILURE';
+
 export const ZERO_DIVISION_FORMULA_ERROR = 'ZeroDivisionError';
 export const OTHER_FORMULA_ERROR = 'OtherFormulaError';

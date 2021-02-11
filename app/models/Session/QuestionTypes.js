@@ -22,7 +22,7 @@ export const textboxQuestion = new QuestionType(
 export const nameQuestion = new QuestionType(
   'Question::Name',
   'Name',
-  colors.olive,
+  colors.aqua,
   'NAME',
 );
 

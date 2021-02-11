@@ -22,16 +22,23 @@ const NameQuestion = ({
 }) => {
   const {
     body: {
-      variable: { name },
+      variable: { name: variableName },
     },
   } = question;
 
   const onChange = event => {
-    phoneticPreview(event.phoneticName);
+    const value = { ...event };
+    const { phoneticName, name } = event;
+    if (phoneticName === undefined && name !== undefined) {
+      value.phoneticName = name;
+    }
+    if (value.phoneticName) {
+      phoneticPreview(value.phoneticName);
+    }
     selectAnswer([
       {
-        var: name,
-        value: event,
+        var: variableName,
+        value,
       },
     ]);
   };

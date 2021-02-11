@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Container, Row, Col } from 'react-grid-system';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import TextVoicePreviewInput from 'components/Input/TextVoicePreviewInput';
-import Row from 'components/Row';
 import Box from 'components/Box';
 import { themeColors } from 'theme';
 
@@ -31,37 +31,41 @@ const NameQuestionLayout = ({
     onChange({ name, phoneticName: value });
 
   return (
-    <Row width="100%" justify="between" px={25}>
-      <Box
-        bg={themeColors.highlight}
-        width="100%"
-        maxWidth={285}
-        px={21}
-        py={14}
-        justify="center"
-        height="calc(100% - 30px)"
-      >
-        <ApprovableInput
-          type="singleline"
-          value={name ?? ''}
-          placeholder={formatMessage(messages.enterName)}
-          onCheck={handleNameChange}
-          styles={inputStyles}
-          disabled={disabled}
-        />
-      </Box>
-
-      <TextVoicePreviewInput
-        phoneticUrl={phoneticUrl}
-        phoneticLoading={phoneticLoading}
-        isAnimationOngoing={isAnimationOngoing}
-        value={phoneticName}
-        placeholder={formatMessage(messages.enterNamePhonetically)}
-        onBlur={handlePhoneticNameChange}
-        styles={inputStyles}
-        disabled={disabled}
-      />
-    </Row>
+    <Container fluid>
+      <Row>
+        <Col sm={12} md={6}>
+          <Box
+            bg={themeColors.highlight}
+            width="100%"
+            px={21}
+            py={14}
+            justify="center"
+            mb={10}
+          >
+            <ApprovableInput
+              type="singleline"
+              value={name ?? ''}
+              placeholder={formatMessage(messages.enterName)}
+              onCheck={handleNameChange}
+              styles={inputStyles}
+              disabled={disabled}
+            />
+          </Box>
+        </Col>
+        <Col sm={12} md={6}>
+          <TextVoicePreviewInput
+            phoneticUrl={phoneticUrl}
+            phoneticLoading={phoneticLoading}
+            isAnimationOngoing={isAnimationOngoing}
+            value={phoneticName}
+            placeholder={formatMessage(messages.enterNamePhonetically)}
+            onBlur={handlePhoneticNameChange}
+            styles={inputStyles}
+            disabled={disabled}
+          />
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

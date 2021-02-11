@@ -5,68 +5,81 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
   class="Column-sc-4zswzq-0 fgvXEf"
 >
   <div
-    class="Row-y1cs0u-0 hZxZKA"
-    width="100%"
+    style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
   >
     <div
-      class="Box-sc-1vhutan-0 gzfNrY"
-      height="calc(100% - 30px)"
-      width="100%"
+      style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
-        class="Row-y1cs0u-0 gQFDhs"
-        width="100%"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
+      >
+        <div
+          class="Box-sc-1vhutan-0 iQWKOl"
+          width="100%"
+        >
+          <div
+            class="Row-y1cs0u-0 gQFDhs"
+            width="100%"
+          >
+            <div
+              class="Column-sc-4zswzq-0 ekpwZH"
+            >
+              <input
+                class="Input-t9j2q5-0 hwMwnZ"
+                disabled=""
+                height="100%"
+                placeholder="Enter your name"
+                type="text"
+                value=""
+                width="100%"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
       >
         <div
           class="Column-sc-4zswzq-0 ekpwZH"
         >
-          <input
-            class="Input-t9j2q5-0 hwMwnZ"
-            disabled=""
-            height="100%"
-            placeholder="Enter your name"
-            type="text"
-            value=""
+          <div
+            class="Box-sc-1vhutan-0 fxZKpe"
             width="100%"
-          />
+          >
+            <input
+              class="Input-t9j2q5-0 cSqYOu"
+              disabled=""
+              height="100%"
+              placeholder="Enter your name phonetically"
+              type="text"
+              value=""
+              width="100%"
+            />
+          </div>
+          <div
+            class="Row-y1cs0u-0 bOYLvV"
+            disabled=""
+            height="25"
+            width="80"
+          >
+            <img
+              class="Img-sc-55j3su-0 cDhXoN"
+              src="IMAGE_MOCK"
+            />
+            <p
+              class="Text-e4p0w3-0 ixAmEb"
+              color="#C866EA"
+            >
+              Preview
+            </p>
+          </div>
         </div>
       </div>
     </div>
-    <div
-      class="Column-sc-4zswzq-0 iqYEhi"
-    >
-      <div
-        class="Box-sc-1vhutan-0 fxZKpe"
-        width="100%"
-      >
-        <input
-          class="Input-t9j2q5-0 cSqYOu"
-          disabled=""
-          height="100%"
-          placeholder="Enter your name phonetically"
-          type="text"
-          value=""
-          width="100%"
-        />
-      </div>
-      <div
-        class="Row-y1cs0u-0 bOYLvV"
-        disabled=""
-        height="25"
-        width="80"
-      >
-        <img
-          class="Img-sc-55j3su-0 cDhXoN"
-          src="IMAGE_MOCK"
-        />
-        <p
-          class="Text-e4p0w3-0 bdGHSX"
-          color="#C866EA"
-        >
-          Preview
-        </p>
-      </div>
-    </div>
+    <span
+      style="display: table; clear: both;"
+    />
   </div>
 </div>
 `;

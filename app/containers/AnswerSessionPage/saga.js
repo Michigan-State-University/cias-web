@@ -18,6 +18,7 @@ import {
   FETCH_QUESTIONS,
   SUBMIT_ANSWER_REQUEST,
   PHONETIC_PREVIEW_REQUEST,
+  PHONETIC_PREVIEW_FAILURE,
 } from './constants';
 import {
   fetchQuestionsFailure,
@@ -140,7 +141,9 @@ function* phoneticPreviewAsync({ payload: { text } }) {
     });
     yield put(phoneticPreviewSuccess(`${process.env.API_URL}${mp3Url}`));
   } catch (error) {
-    // yield put(fetchQuestionsFailure(error));
+    yield call(toast.error, error, {
+      toastId: PHONETIC_PREVIEW_FAILURE,
+    });
   }
 }
 
