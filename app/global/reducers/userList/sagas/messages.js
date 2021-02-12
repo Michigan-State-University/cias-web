@@ -17,4 +17,12 @@ export default defineMessages({
     id: `${scope}.changeStatusFailure`,
     defaultMessage: 'Cannot change user status',
   },
+  deleteUserFromTeamSuccess: {
+    id: `${scope}.deleteUserFromTeamSuccess`,
+    defaultMessage: 'Successfully deleted user from the team',
+  },
+  deleteUserFromTeamFailure: {
+    id: `${scope}.deleteUserFromTeamFailure`,
+    defaultMessage: 'Failed to delete user from the team',
+  },
 });

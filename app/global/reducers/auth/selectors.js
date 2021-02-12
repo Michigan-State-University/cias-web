@@ -14,6 +14,12 @@ export const makeSelectUser = () =>
     authState => authState.user,
   );
 
+export const makeSelectUserRoles = () =>
+  createSelector(
+    selectAuth,
+    authState => authState.user.roles,
+  );
+
 export const makeSelectErrors = error =>
   createSelector(
     selectAuth,

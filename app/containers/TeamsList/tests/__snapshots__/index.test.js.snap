@@ -1,0 +1,295 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TeamList /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-1vhutan-0 krWeER"
+    display="flex"
+    height="100%"
+    overflow="scroll"
+  >
+    <div
+      class="Box-sc-1vhutan-0 cUyGiG"
+      width="100%"
+    >
+      <div
+        class="Box-sc-1vhutan-0 ddJzSG"
+        display="flex"
+      >
+        <h1
+          class="H1-sc-1k7m23t-0 hNcBIZ"
+        >
+          <span>
+            Manage teams
+          </span>
+        </h1>
+        <button
+          class="StyledTextButton-sc-1b7egxw-0 bsIeDJ"
+          color="#C866EA"
+          font-weight="bold"
+        >
+          <span>
+            + Create team
+          </span>
+        </button>
+      </div>
+      <div>
+        <div
+          style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; margin-bottom: 40px; padding: 0px;"
+        >
+          <div
+            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+          >
+            <div
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+            >
+              <div
+                class="styled__SearchInputStyled-sc-10udg63-3 gFHxDg"
+              >
+                <input
+                  class="Input-t9j2q5-0 hjYQaq"
+                  type="text"
+                  value=""
+                />
+                <img
+                  alt="search"
+                  class="styled__SearchIcon-sc-10udg63-4 VQGbD"
+                  src="IMAGE_MOCK"
+                />
+                
+              </div>
+            </div>
+          </div>
+          <span
+            style="display: table; clear: both;"
+          />
+        </div>
+        <div
+          class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
+        >
+          <table
+            class="Table-sc-1y0iqmn-0 fyHrUS"
+            width="100%"
+          >
+            <thead
+              class="THead-sc-8drp5d-0"
+            >
+              <tr
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF bdMDKn"
+              >
+                <th
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
+                  color="#2F3850"
+                  opacity="0.6"
+                  scope="col"
+                  width="auto"
+                >
+                  <div
+                    class="Column-sc-4zswzq-0 gzLnhc"
+                  >
+                    Name
+                  </div>
+                </th>
+                <th
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
+                  color="#2F3850"
+                  opacity="0.6"
+                  scope="col"
+                  width="auto"
+                >
+                  <div
+                    class="Column-sc-4zswzq-0 gzLnhc"
+                  >
+                    Team Admin name
+                  </div>
+                </th>
+                <th
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
+                  color="#2F3850"
+                  opacity="0.6"
+                  scope="col"
+                  width="auto"
+                >
+                  <div
+                    class="Column-sc-4zswzq-0 gzLnhc"
+                  >
+                    Team Admin email
+                  </div>
+                </th>
+                <th
+                  class="TH-sc-1w7ae0i-0 dcMBuC"
+                  color="#2F3850"
+                  opacity="0.6"
+                  scope="col"
+                  width="auto"
+                >
+                  <div
+                    class="Column-sc-4zswzq-0 gzLnhc"
+                  >
+                     
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="TBody-gqq9cv-0"
+            >
+              <tr
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
+                color="#FFFFFF"
+                cursor="pointer"
+              >
+                <td
+                  class="TD-y7762g-0 cXNZQh"
+                >
+                  Team 1
+                </td>
+                <td
+                  class="TD-y7762g-0 cXNZQh"
+                />
+                <td
+                  class="TD-y7762g-0 cXNZQh"
+                >
+                  ta-1@test.pl
+                </td>
+                <td
+                  class="TD-y7762g-0 gxeveZ"
+                >
+                  <div
+                    class="Row-y1cs0u-0 loIsns"
+                    width="100%"
+                  >
+                    <button
+                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
+                    >
+                      <p
+                        class="Text-e4p0w3-0 kcCsRU"
+                        color="#EF462F"
+                        font-weight="bold"
+                      >
+                        Delete team
+                      </p>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
+                color="#FFFFFF"
+                cursor="pointer"
+              >
+                <td
+                  class="TD-y7762g-0 cXNZQh"
+                >
+                  Team 2
+                </td>
+                <td
+                  class="TD-y7762g-0 cXNZQh"
+                />
+                <td
+                  class="TD-y7762g-0 cXNZQh"
+                >
+                  ta-2@test.pl
+                </td>
+                <td
+                  class="TD-y7762g-0 gxeveZ"
+                >
+                  <div
+                    class="Row-y1cs0u-0 loIsns"
+                    width="100%"
+                  >
+                    <button
+                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
+                    >
+                      <p
+                        class="Text-e4p0w3-0 kcCsRU"
+                        color="#EF462F"
+                        font-weight="bold"
+                      >
+                        Delete team
+                      </p>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+              <tr
+                class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF dBuhiI"
+                color="#FFFFFF"
+                cursor="pointer"
+              >
+                <td
+                  class="TD-y7762g-0 cXNZQh"
+                >
+                  Team 3
+                </td>
+                <td
+                  class="TD-y7762g-0 cXNZQh"
+                />
+                <td
+                  class="TD-y7762g-0 cXNZQh"
+                >
+                  ta-3@test.pl
+                </td>
+                <td
+                  class="TD-y7762g-0 gxeveZ"
+                >
+                  <div
+                    class="Row-y1cs0u-0 loIsns"
+                    width="100%"
+                  >
+                    <button
+                      class="StyledTextButton-sc-1b7egxw-0 cYPwYa"
+                    >
+                      <p
+                        class="Text-e4p0w3-0 kcCsRU"
+                        color="#EF462F"
+                        font-weight="bold"
+                      >
+                        Delete team
+                      </p>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div
+            class="styled__TableLoader-skadoa-1 edDtst"
+          >
+            <div
+              class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
+              color="#C866EA"
+              size="100"
+              width="6"
+            />
+          </div>
+        </div>
+        <div
+          class="Row-y1cs0u-0 cAHLWQ"
+          display="flex"
+          width="100%"
+        >
+          <div
+            class="Box-sc-1vhutan-0 cfDdZL"
+            cursor="pointer"
+            display="flex"
+          >
+            <p
+              class="Text-e4p0w3-0 eRNSEk"
+              color="#FFFFFF"
+            >
+              1
+            </p>
+          </div>
+          <h1
+            class="H1-sc-1k7m23t-0 fRhEzm"
+            cursor="pointer"
+          >
+            &gt;
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -11,4 +11,12 @@ export default defineMessages({
     id: `${scope}.copy`,
     defaultMessage: 'Copy',
   },
+  duplicate: {
+    id: `${scope}.duplicate`,
+    defaultMessage: 'Duplicate',
+  },
+  pasteQuestion: {
+    id: `${scope}.pasteQuestion`,
+    defaultMessage: 'Paste question in this group',
+  },
 });

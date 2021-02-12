@@ -19,6 +19,7 @@ export {
   resendSessionInviteRequest,
   fetchSessionEmailsRequest,
   deleteSessionRequest,
+  externalCopySessionRequest,
 } from './actions';
 export { interventionReducer } from './reducer';
 export {
@@ -44,6 +45,7 @@ export {
   sendSessionInviteSaga,
   createSessionSaga,
   deleteSessionSaga,
+  externalCopySessionSaga,
 } from './sagas';
 
 export {

@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DateQuestion /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-1vhutan-0 gXkPFz"
+    width="100%"
+  >
+    <div
+      class="Row-y1cs0u-0 dskFsL"
+    >
+      <div
+        class="Row-y1cs0u-0 gQFDhs"
+        width="100%"
+      >
+        <div
+          class="Column-sc-4zswzq-0 ekpwZH"
+        >
+          <div
+            class="styled__DatePickerWrapper-sc-10udg63-2 isyWyO"
+          >
+            <div
+              class="react-datepicker-wrapper"
+            >
+              <div
+                class="react-datepicker__input-container"
+              >
+                <button
+                  class="styled__StyledDateInput-sc-10udg63-1 esA-dpB"
+                  height="50"
+                  width="200"
+                >
+                  <p
+                    class="Text-e4p0w3-0 gSFBZi"
+                    color="#2F3850"
+                    font-size="15"
+                  >
+                    Choose date
+                  </p>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

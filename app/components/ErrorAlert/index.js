@@ -36,7 +36,8 @@ const ErrorAlert = ({ errorText, fullPage, ...restProps }) => {
 };
 
 ErrorAlert.propTypes = {
-  errorText: PropTypes.node.isRequired,
+  errorText: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+    .isRequired,
   fullPage: PropTypes.bool,
 };
 

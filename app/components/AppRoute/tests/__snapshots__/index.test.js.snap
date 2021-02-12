@@ -243,6 +243,20 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
             </span>
           </p>
         </a>
+        <a
+          class="c7 navbar-tabs"
+          href="/teams"
+          ml="10"
+        >
+          <p
+            class="c8"
+            font-size="15"
+          >
+            <span>
+              Manage teams
+            </span>
+          </p>
+        </a>
       </div>
     </div>
     <div

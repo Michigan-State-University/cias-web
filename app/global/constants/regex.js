@@ -13,3 +13,5 @@ export const urlRegex = new RegExp(
 export const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/;
 
 export const numericRegex = /^[0-9\b]+$/;
+
+export const currencyRegex = /^[0-9]+\.?[0-9]{0,2}$/;

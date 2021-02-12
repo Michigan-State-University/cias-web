@@ -5,6 +5,10 @@
  */
 
 import { defineMessages } from 'react-intl';
+import {
+  OTHER_FORMULA_ERROR,
+  ZERO_DIVISION_FORMULA_ERROR,
+} from 'containers/AnswerSessionPage/constants';
 
 export const scope = 'app.containers.AnswerSessionPage';
 
@@ -36,5 +40,13 @@ export default defineMessages({
   noEntranceText: {
     id: `${scope}.noEntranceText`,
     defaultMessage: `The session is not published yet or you were not given an access to it. Please, contact the support if this issue should not have occurred.`,
+  },
+  [ZERO_DIVISION_FORMULA_ERROR]: {
+    id: `${scope}.${ZERO_DIVISION_FORMULA_ERROR}`,
+    defaultMessage: `Formula failed and you were transitioned to the next screen because there was division by 0.`,
+  },
+  [OTHER_FORMULA_ERROR]: {
+    id: `${scope}.${OTHER_FORMULA_ERROR}`,
+    defaultMessage: `Formula failed and you were transitioned to the next screen because of some mathematical error.`,
   },
 });

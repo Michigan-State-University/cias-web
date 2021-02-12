@@ -3,10 +3,18 @@ import axios from 'axios';
 
 import { mapCurrentUserWithoutAttributes } from 'utils/mapResponseObjects';
 
-import { FETCH_USERS, PER_PAGE } from '../constants';
-import { fetchUsersFailure, fetchUsersSuccess } from '../actions';
+import { FETCH_USERS, FETCH_USERS_SELECTOR } from '../constants';
+import {
+  fetchUsersFailure,
+  fetchUsersSelectorFailure,
+  fetchUsersSelectorSuccess,
+  fetchUsersSuccess,
+} from '../actions';
 
-function* fetchUsers({ payload: { roles, name, page, includeInactive } }) {
+function* fetchUsers({
+  payload: { roles, name, page, includeInactive, teamId, perPage },
+  type,
+}) {
   const requestUrl = `/v1/users?`;
   let params = '';
   if (roles) {
@@ -15,11 +23,14 @@ function* fetchUsers({ payload: { roles, name, page, includeInactive } }) {
       params += `roles[]=&`;
     }
   }
+  if (teamId) {
+    params += `team_id=${teamId}&`;
+  }
   if (name) {
     params += `name=${name}&`;
   }
   if (page) {
-    params += `page=${page}&per_page=${PER_PAGE}&`;
+    params += `page=${page}&per_page=${perPage}&`;
   }
 
   if (includeInactive) params += 'active[]=true&active[]=false&';
@@ -29,12 +40,31 @@ function* fetchUsers({ payload: { roles, name, page, includeInactive } }) {
       data: { users, users_size: usersSize },
     } = yield axios.get(requestUrl.concat(params));
     const mappedData = users.map(mapCurrentUserWithoutAttributes);
-    yield put(fetchUsersSuccess(mappedData, usersSize));
+    switch (type) {
+      case FETCH_USERS:
+        yield put(fetchUsersSuccess(mappedData, usersSize));
+        break;
+      case FETCH_USERS_SELECTOR:
+        yield put(fetchUsersSelectorSuccess(mappedData, usersSize));
+        break;
+      default:
+        break;
+    }
   } catch (error) {
-    yield put(fetchUsersFailure(error));
+    switch (type) {
+      case FETCH_USERS:
+        yield put(fetchUsersFailure(error));
+        break;
+      case FETCH_USERS_SELECTOR:
+        yield put(fetchUsersSelectorFailure(error));
+        break;
+      default:
+        break;
+    }
   }
 }
 
 export default function* fetchUsersSaga() {
   yield takeLatest(FETCH_USERS, fetchUsers);
+  yield takeLatest(FETCH_USERS_SELECTOR, fetchUsers);
 }

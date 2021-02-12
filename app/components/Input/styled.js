@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ReactQuill from 'react-quill';
 
 import { colors, borders, fontFamily, themeColors } from 'theme';
-import { margin, layout } from '../BaseComponentStyles';
+import { margin, layout, border } from '../BaseComponentStyles';
 
 export const QuillStyled = styled(ReactQuill)`
   width: 100%;
@@ -53,6 +53,7 @@ export const StyledDateInput = styled.button`
   }
   ${margin};
   ${layout};
+  ${border};
 `;
 
 export const DatePickerWrapper = styled.div`
@@ -85,6 +86,8 @@ export const SearchInputStyled = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  display: flex;
+  align-items: center;
   ${layout}
 `;
 

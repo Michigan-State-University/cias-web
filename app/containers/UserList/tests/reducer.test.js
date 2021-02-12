@@ -1,18 +1,10 @@
-import { UserListReducer } from 'global/reducers/userList';
+import { initialState, UserListReducer } from 'global/reducers/userList';
 
 /* eslint-disable default-case, no-param-reassign */
 describe('userListReducer', () => {
   let state;
   beforeEach(() => {
-    state = {
-      users: [],
-      usersSize: 0,
-      cache: {
-        users: [],
-      },
-      usersError: null,
-      usersLoading: true,
-    };
+    state = initialState;
   });
 
   it('returns the initial state', () => {

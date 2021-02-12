@@ -12,7 +12,11 @@ import {
   urlQuestion,
   feedbackQuestion,
   finishQuestion,
+  phoneQuestion,
+  dateQuestion,
+  currencyQuestion,
 } from 'models/Session/QuestionTypes';
+import CurrencyQuestion from './CurrencyQuestion';
 import FinishScreen from './FinishScreen';
 import UrlQuestion from './UrlQuestion';
 import InformationSlide from './InformationSlide';
@@ -23,6 +27,8 @@ import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
 import TextBoxQuestion from './TextBoxQuestion';
 import NumberQuestion from './NumberQuestion';
 import FeedbackQuestion from './FeedbackQuestion';
+import PhoneQuestion from './PhoneQuestion';
+import DateQuestion from './DateQuestion';
 
 export const renderQuestionByType = (question, sharedProps) => {
   const { type } = question;
@@ -41,6 +47,10 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <FeedbackQuestion question={question} {...sharedProps} />;
     case textboxQuestion.id:
       return <TextBoxQuestion question={question} {...sharedProps} />;
+    case phoneQuestion.id:
+      return <PhoneQuestion question={question} {...sharedProps} />;
+    case dateQuestion.id:
+      return <DateQuestion question={question} {...sharedProps} />;
     case numberQuestion.id:
       return <NumberQuestion question={question} {...sharedProps} />;
     case informationQuestion.id:
@@ -49,6 +59,8 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <UrlQuestion question={question} {...sharedProps} />;
     case finishQuestion.id:
       return <FinishScreen question={question} {...sharedProps} />;
+    case currencyQuestion.id:
+      return <CurrencyQuestion question={question} {...sharedProps} />;
     default:
       return <ErrorAlert errorText={`CANNOT RENDER ${type}`} />;
   }

@@ -1,15 +1,18 @@
-import { takeLatest, put, select } from 'redux-saga/effects';
+import { takeLatest, put, select, call } from 'redux-saga/effects';
 import axios from 'axios';
 import omit from 'lodash/omit';
 import map from 'lodash/map';
 import orderBy from 'lodash/orderBy';
 import flatten from 'lodash/flatten';
 import { push } from 'connected-react-router';
+import { toast } from 'react-toastify';
+import { formatMessage } from 'utils/intlOutsideReact';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 
 import { makeSelectLocation } from 'containers/App/selectors';
 import { ternary } from 'utils/ternary';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { NotAnswerableQuestions } from 'models/Session/utils';
 import { FETCH_QUESTIONS, SUBMIT_ANSWER_REQUEST } from './constants';
 import {
@@ -20,6 +23,7 @@ import {
   setQuestionIndex,
 } from './actions';
 import { makeSelectAnswers } from './selectors';
+import messages from './messages';
 
 const sessionPathRegex = /\/sessions\/.*/;
 const isPreviewRegex = /.*\/preview($|\/\d+$)/;
@@ -84,8 +88,11 @@ function* submitAnswersAsync({
       });
 
       const {
-        data: { data: branchingResult },
+        data: { data: branchingResult, warning },
       } = yield axios.get(`/v1/sessions/${sessionId}/flows?answer_id=${id}`);
+
+      if (!isNullOrUndefined(warning))
+        yield call(toast.warning, formatMessage(messages[warning]));
 
       if (branchingResult) {
         switch (branchingResult.type) {

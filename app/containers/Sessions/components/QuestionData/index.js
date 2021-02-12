@@ -20,8 +20,12 @@ import {
   visualAnalogueScaleQuestion,
   urlQuestion,
   feedbackQuestion,
+  phoneQuestion,
+  dateQuestion,
+  currencyQuestion,
 } from 'models/Session/QuestionTypes';
 
+import CurrencyQuestion from './CurrencyQuestion';
 import GridQuestion from './GridQuestion';
 import MultiQuestion from './MultiQuestion';
 import NumberQuestion from './NumberQuestion';
@@ -30,6 +34,8 @@ import TextboxQuestion from './TextboxQuestion';
 import UrlQuestion from './UrlQuestion';
 import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
 import FeedbackQuestion from './FeedbackQuestion';
+import PhoneQuestion from './PhoneQuestion';
+import DateQuestion from './DateQuestion';
 
 const QuestionData = ({
   selectedQuestionType,
@@ -50,6 +56,10 @@ const QuestionData = ({
       return <MultiQuestion {...commonProps} />;
     case textboxQuestion.id:
       return <TextboxQuestion {...commonProps} />;
+    case phoneQuestion.id:
+      return <PhoneQuestion {...commonProps} />;
+    case dateQuestion.id:
+      return <DateQuestion {...commonProps} />;
     case numberQuestion.id:
       return <NumberQuestion {...commonProps} />;
     case gridQuestion.id:
@@ -60,6 +70,8 @@ const QuestionData = ({
       return <UrlQuestion {...commonProps} />;
     case feedbackQuestion.id:
       return <FeedbackQuestion {...commonProps} />;
+    case currencyQuestion.id:
+      return <CurrencyQuestion {...commonProps} />;
     default:
       return null;
   }

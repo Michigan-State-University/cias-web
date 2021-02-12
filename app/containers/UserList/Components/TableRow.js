@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import trim from 'lodash/trim';
 
@@ -10,14 +10,19 @@ import { StripedTR, TD } from 'components/Table';
 import { colors } from 'theme';
 import { ternary } from 'utils/ternary';
 
+import { RemoveFromTeamModalContext, TeamIdContext } from './utils';
 import messages from '../messages';
 
 const TableRow = ({
   user: { id, email, fullName, roles, active },
   history,
   openModal,
+
   formatMessage,
 }) => {
+  const teamId = useContext(TeamIdContext);
+  const openRemoveFromTeamModal = useContext(RemoveFromTeamModalContext);
+
   const handleClick = e => {
     e.stopPropagation();
     openModal({
@@ -28,7 +33,22 @@ const TableRow = ({
     });
   };
 
-  const handleRedirect = () => history.push(`/users/${id}`);
+  const handleRemoveFromTeamClick = e => {
+    e.stopPropagation();
+    openRemoveFromTeamModal({
+      id,
+      email,
+      fullName,
+      active,
+      teamId,
+    });
+  };
+
+  const handleRedirect = () =>
+    teamId
+      ? history.push(`/users/${id}?teamId=${teamId}`)
+      : history.push(`/users/${id}`);
+
   const text = active
     ? formatMessage(messages.deactivateAccount)
     : formatMessage(messages.activateAccount);
@@ -43,7 +63,7 @@ const TableRow = ({
   );
   return (
     <StripedTR
-      lastItemHoverable
+      lastItemHoverable={teamId ? 2 : 1}
       cursor="pointer"
       hoverBg={colors.linkWater}
       color={colors.white}
@@ -55,15 +75,29 @@ const TableRow = ({
       <TD pl={20}>
         <UserRoleTile role={roles[0]} disabled={!active} />
       </TD>
-      <TD>
-        <Row width="100%" justify="end" pr={20}>
-          <StyledTextButton onClick={handleClick}>
+      <TD pl={20}>
+        <Row width="100%" justify="start" pr={20}>
+          <StyledTextButton onClick={handleClick} textAlign="start">
             <Text color={textColor} fontWeight="bold">
               {text}
             </Text>
           </StyledTextButton>
         </Row>
       </TD>
+      {teamId && (
+        <TD pl={20}>
+          <Row width="100%" justify="start" pr={20}>
+            <StyledTextButton
+              onClick={handleRemoveFromTeamClick}
+              textAlign="start"
+            >
+              <Text color={textColor} fontWeight="bold">
+                {formatMessage(messages.deleteFromTeam)}
+              </Text>
+            </StyledTextButton>
+          </Row>
+        </TD>
+      )}
     </StripedTR>
   );
 };

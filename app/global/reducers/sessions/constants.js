@@ -1,3 +1,0 @@
-export const FETCH_SESSIONS_REQUEST = 'app/Dashboard/FETCH_SESSIONS_REQUEST';
-export const FETCH_SESSIONS_SUCCESS = 'app/Dashboard/FETCH_SESSIONS_SUCCESS';
-export const FETCH_SESSIONS_ERROR = 'app/Dashboard/CREATE_SESSION_ERROR';

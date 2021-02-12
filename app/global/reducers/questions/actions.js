@@ -1,6 +1,5 @@
 import { actionBuilder } from 'utils/actionBuilder';
 
-import { GET_QUESTION_GROUPS_REQUEST } from 'global/reducers/questionGroups/constants';
 import {
   SELECT_QUESTION,
   CREATE_QUESTION_REQUEST,
@@ -31,6 +30,10 @@ import {
   DELETE_QUESTION_ERROR,
   UPDATE_QUESTION_DATA,
   UPDATE_QUESTION_SETTINGS,
+  DELETE_QUESTIONS_REQUEST,
+  DELETE_QUESTIONS_SUCCESS,
+  DELETE_QUESTIONS_ERROR,
+  GET_QUESTIONS_REQUEST,
 } from './constants';
 
 export const selectQuestion = index =>
@@ -44,7 +47,7 @@ export const createQuestionError = error =>
   actionBuilder(CREATE_QUESTION_ERROR, { error });
 
 export const getQuestionsRequest = sessionId =>
-  actionBuilder(GET_QUESTION_GROUPS_REQUEST, { sessionId });
+  actionBuilder(GET_QUESTIONS_REQUEST, { sessionId });
 export const getQuestionsSuccess = questions =>
   actionBuilder(GET_QUESTIONS_SUCCESS, { questions });
 export const getQuestionsError = error =>
@@ -103,3 +106,10 @@ export const updateQuestionData = data =>
   actionBuilder(UPDATE_QUESTION_DATA, data);
 export const updateQuestionSettings = data =>
   actionBuilder(UPDATE_QUESTION_SETTINGS, data);
+
+export const deleteQuestionsRequest = (questionIds, sessionId, groupIds) =>
+  actionBuilder(DELETE_QUESTIONS_REQUEST, { questionIds, sessionId, groupIds });
+export const deleteQuestionsSuccess = () =>
+  actionBuilder(DELETE_QUESTIONS_SUCCESS, {});
+export const deleteQuestionsError = error =>
+  actionBuilder(DELETE_QUESTIONS_ERROR, { error });

@@ -33,6 +33,7 @@ const customStyles = ({ isMulti, bg, isDisabled }) => ({
     ...provided,
     cursor: isDisabled ? 'not-allowed' : 'pointer',
   }),
+  menuPortal: provided => ({ ...provided, zIndex: 999 }),
 });
 
 const customComponents = isMulti => ({
@@ -50,6 +51,7 @@ const Select = ({ selectProps, ...restProps }) => (
   <Box {...restProps}>
     <ReactSelect
       components={customComponents(selectProps.isMulti)}
+      menuPortalTarget={document.body}
       styles={customStyles(selectProps)}
       {...selectProps}
     />

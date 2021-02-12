@@ -25,6 +25,9 @@ import {
   informationQuestion,
   feedbackQuestion,
   finishQuestion,
+  currencyQuestion,
+  phoneQuestion,
+  dateQuestion,
 } from './QuestionTypes';
 
 /**
@@ -108,6 +111,9 @@ export const getAllVariables = (questions, options) => {
       case informationQuestion.id:
       case feedbackQuestion.id:
       case finishQuestion.id:
+      case currencyQuestion.id:
+      case phoneQuestion.id:
+      case dateQuestion.id:
         questionVariables = [];
         break;
       default:

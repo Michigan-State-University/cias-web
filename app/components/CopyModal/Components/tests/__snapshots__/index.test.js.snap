@@ -1,0 +1,718 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CopyChooser /> should match the snapshot 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 280px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  background-color: rgba(248,251,255,1);
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c24 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-top: 10px;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-right: 25px;
+  padding-left: 25px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.c14:hover {
+  background-color: rgba(200,102,234,0.1);
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 10px;
+  width: 100%;
+}
+
+.c20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.c22 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-right: 25px;
+  margin-left: 25px;
+}
+
+.c23 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-top: 20px;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 150px;
+  margin-left: 5px;
+}
+
+.c11 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-height: 300px;
+  overflow: scroll;
+}
+
+.c17 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 170px;
+}
+
+.c15 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+}
+
+.c21 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+.c5 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 2px;
+  margin-left: 5px;
+  color: rgba(200,102,234,1);
+  color: rgba(200,102,234,1);
+}
+
+.c7 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c9 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(200,102,234,1);
+  color: rgba(200,102,234,1);
+}
+
+.c18 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 16px;
+  color: #2F3850;
+}
+
+.c10 {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(200,102,234,1);
+  color: rgba(200,102,234,1);
+}
+
+.c19 {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 16px;
+  color: #2F3850;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+<body>
+    <div>
+      <div
+        class="c0"
+      >
+        <div
+          class="c1"
+        >
+          <div
+            class="c2"
+            data-testid="undefined-select-target-session"
+            height="280"
+          >
+            <div
+              class="c3"
+            >
+              <div
+                class="c4"
+              >
+                <img
+                  src="IMAGE_MOCK"
+                />
+                <p
+                  class="c5"
+                  color="#C866EA"
+                >
+                  Sessions
+                </p>
+              </div>
+              <div
+                class="c6"
+              >
+                <p
+                  class="c7"
+                  font-size="15"
+                  font-weight="bold"
+                >
+                  Question Groups in 
+                </p>
+                <div
+                  class="c8"
+                >
+                  <div
+                    class="c1"
+                  >
+                    <p
+                      class="c9 c10"
+                      color="#C866EA"
+                      font-size="15"
+                      font-weight="bold"
+                    >
+                      Intervention test title 1
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="c11"
+              overflow="scroll"
+            >
+              <div
+                class="c12"
+              >
+                <div
+                  class="c13"
+                >
+                  <div
+                    class="c14"
+                    width="100%"
+                  >
+                    <img
+                      class="c15"
+                      src="IMAGE_MOCK"
+                    />
+                    <div
+                      class="c16"
+                      width="100%"
+                    >
+                      <div
+                        class="c13"
+                      >
+                        <div
+                          class="c17"
+                        >
+                          <div
+                            class="c1"
+                          >
+                            <p
+                              class="c18 c19"
+                              font-size="16"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="c20"
+                      >
+                        <img
+                          class="c21"
+                          src="IMAGE_MOCK"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="c22"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="c23"
+        >
+          <button
+            class="c24"
+            color="primary"
+            disabled=""
+          />
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="Column-sc-4zswzq-0 kVNJHr"
+    >
+      <div
+        class="Row-y1cs0u-0 dskFsL"
+      >
+        <div
+          class="Column-sc-4zswzq-0 crbKIj"
+          data-testid="undefined-select-target-session"
+          height="280"
+        >
+          <div
+            class="Column-sc-4zswzq-0 cgbIvt"
+          >
+            <div
+              class="Row-y1cs0u-0 bLAOxT"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="Text-e4p0w3-0 isTVOL"
+                color="#C866EA"
+              >
+                Sessions
+              </p>
+            </div>
+            <div
+              class="Row-y1cs0u-0 liVUAf"
+            >
+              <p
+                class="Text-e4p0w3-0 kWYQnv"
+                font-size="15"
+                font-weight="bold"
+              >
+                Question Groups in 
+              </p>
+              <div
+                class="Box-sc-1vhutan-0 cDVPPi"
+              >
+                <div
+                  class="Row-y1cs0u-0 dskFsL"
+                >
+                  <p
+                    class="Text-e4p0w3-0 styled__StyledEllipsisText-h4mjfj-0 PyJdq myERG"
+                    color="#C866EA"
+                    font-size="15"
+                    font-weight="bold"
+                  >
+                    Intervention test title 1
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="Box-sc-1vhutan-0 jXkkiw"
+            overflow="scroll"
+          >
+            <div
+              class="Column-sc-4zswzq-0 gLBXpw"
+            >
+              <div
+                class="Column-sc-4zswzq-0 ekpwZH"
+              >
+                <div
+                  class="Row-y1cs0u-0 ezqrjH"
+                  width="100%"
+                >
+                  <img
+                    class="Img-sc-55j3su-0 cYsgyu"
+                    src="IMAGE_MOCK"
+                  />
+                  <div
+                    class="Row-y1cs0u-0 klnYuL"
+                    width="100%"
+                  >
+                    <div
+                      class="Column-sc-4zswzq-0 ekpwZH"
+                    >
+                      <div
+                        class="Box-sc-1vhutan-0 jdLSQs"
+                      >
+                        <div
+                          class="Row-y1cs0u-0 dskFsL"
+                        >
+                          <p
+                            class="Text-e4p0w3-0 styled__StyledEllipsisText-h4mjfj-0 jrKyrE hPLXLE"
+                            font-size="16"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="Row-y1cs0u-0 eUCsFA"
+                    >
+                      <img
+                        class="Img-sc-55j3su-0 kDGTCK"
+                        src="IMAGE_MOCK"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="Row-y1cs0u-0 gjqYvI"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Row-y1cs0u-0 bHvccM"
+      >
+        <button
+          class="StyledButton-d2s0gt-0 bDJTsP"
+          color="primary"
+          disabled=""
+        />
+      </div>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

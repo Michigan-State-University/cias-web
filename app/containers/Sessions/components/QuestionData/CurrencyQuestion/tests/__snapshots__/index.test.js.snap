@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
+<div
+  class="Column-sc-4zswzq-0 fgvXEf"
+>
+  <div
+    class="Box-sc-1vhutan-0 cGXAij"
+    width="100%"
+  >
+    <div
+      style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; padding: 26px;"
+    >
+      <div
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
+      >
+        <div
+          class="Box-sc-1vhutan-0 cGXAij"
+          width="100%"
+        >
+          <div
+            class=" css-14jk2my-container"
+          >
+            <div
+              class=" css-vz7ypb-control"
+            >
+              <div
+                class=" css-g1d714-ValueContainer"
+              >
+                <div
+                  class=" css-1wa3eu0-placeholder"
+                >
+                  Select currency
+                </div>
+                <div
+                  class="css-b8ldur-Input"
+                >
+                  <div
+                    class=""
+                    style="display: inline-block;"
+                  >
+                    <input
+                      aria-autocomplete="list"
+                      autocapitalize="none"
+                      autocomplete="off"
+                      autocorrect="off"
+                      disabled=""
+                      id="react-select-3-input"
+                      spellcheck="false"
+                      style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                      tabindex="0"
+                      type="text"
+                      value=""
+                    />
+                    <div
+                      style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                class=" css-1hb7zxy-IndicatorsContainer"
+              >
+                <div
+                  aria-hidden="true"
+                  class=" css-tlfecz-indicatorContainer"
+                >
+                  <img
+                    class="Img-sc-55j3su-0 gTKGj"
+                    src="IMAGE_MOCK"
+                    transform=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 66.66666666666667%; flex-basis: 66.66666666666667%; flex-grow: 0; flex-shrink: 0; max-width: 66.66666666666667%; margin-left: 0%;"
+      >
+        <input
+          class="Input-t9j2q5-0 eBbTVB"
+          disabled=""
+          font-size="15"
+          placeholder="E.g. 121.12"
+          type="text"
+          value=""
+          width="200"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

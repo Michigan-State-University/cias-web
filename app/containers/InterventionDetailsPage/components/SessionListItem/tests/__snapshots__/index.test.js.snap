@@ -996,6 +996,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
       >
         <div
           class="c22"
+          color="#D5DEEA"
         />
       </div>
       <div

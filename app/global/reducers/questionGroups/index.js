@@ -1,6 +1,5 @@
 export {
   copyQuestionsRequest,
-  deleteQuestionsRequest,
   groupQuestionsRequest,
   shareQuestionsToResearchersRequest,
   changeGroupNameRequest,
@@ -19,7 +18,6 @@ export {
 } from './selectors';
 export {
   copyQuestionsSaga,
-  deleteQuestionsSaga,
   groupQuestionsSaga,
   shareQuestionsToResearchersSaga,
   changeGroupNameSaga,

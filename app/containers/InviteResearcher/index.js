@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { compose } from 'redux';
@@ -10,46 +10,47 @@ import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
 import Modal from 'components/Modal';
 import { emailValidator } from 'utils/validators/emailValidator';
-import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+import { injectReducer, injectSaga } from 'redux-injectors';
 
 import InvitationList from './Containers/InvitationList';
 import InviteForm from './Containers/InviteForm';
 import inviteResearcherReducer from './reducer';
 import messages from './messages';
-import { inviteResearcherRequest, changeErrorValue } from './actions';
 import { inviteResearcherSaga } from './sagas';
 import { makeSelectInviteState } from './selectors';
+import { changeEmailInput } from './actions';
 
 const InviteResearcher = ({
   visible,
   onClose,
   intl: { formatMessage },
   sendInvitation,
+  changeInput,
   deleteError,
+  inviteOnly,
   inviteState: { email, loading, error: apiError },
 }) => {
-  useInjectReducer({
-    key: 'invitations',
-    reducer: inviteResearcherReducer,
-  });
-  useInjectSaga({ key: 'inviteResearcher', saga: inviteResearcherSaga });
-
   const handleClose = () => {
     deleteError('invite', null);
     onClose();
   };
 
   const onSendClick = valid => () => {
-    if (valid) sendInvitation(email);
+    if (valid) {
+      sendInvitation(email);
+      changeInput('');
+    }
   };
 
   const handleKeyDown = event => {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && isValid) {
       sendInvitation(email);
+      changeInput('');
     }
   };
 
   const isValid = emailValidator(email);
+
   return (
     <Modal
       visible={visible}
@@ -64,7 +65,7 @@ const InviteResearcher = ({
           formatMessage={formatMessage}
           handleKeyDown={handleKeyDown}
         />
-        <InvitationList />
+        {!inviteOnly && <InvitationList />}
         <Button
           width={260}
           alignSelf="center"
@@ -72,7 +73,7 @@ const InviteResearcher = ({
           mb={5}
           loading={loading}
           onClick={onSendClick(isValid)}
-          disabled={!email}
+          disabled={!email || !isValid}
         >
           <FormattedMessage {...messages.buttonText} />
         </Button>
@@ -94,6 +95,8 @@ InviteResearcher.propTypes = {
   onInputChange: PropTypes.func,
   deleteError: PropTypes.func,
   sendInvitation: PropTypes.func,
+  changeInput: PropTypes.func,
+  inviteOnly: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -101,8 +104,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  sendInvitation: inviteResearcherRequest,
-  deleteError: changeErrorValue,
+  changeInput: changeEmailInput,
 };
 
 const withConnect = connect(
@@ -111,6 +113,12 @@ const withConnect = connect(
 );
 
 export default compose(
+  injectReducer({
+    key: 'invitations',
+    reducer: inviteResearcherReducer,
+  }),
+  injectSaga({ key: 'inviteResearcher', saga: inviteResearcherSaga }),
   withConnect,
   injectIntl,
+  memo,
 )(InviteResearcher);

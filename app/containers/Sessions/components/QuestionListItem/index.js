@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
-
+import unescape from 'lodash/unescape';
 import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 import uniqueId from 'lodash/uniqueId';
-import unescape from 'lodash/unescape';
 
 import Column from 'components/Column';
 import Comment from 'components/Text/Comment';
 import Dropdown from 'components/Dropdown';
 import Row from 'components/Row';
+import CopyModal from 'components/CopyModal';
 import globalMessages from 'global/i18n/globalMessages';
 import { colors } from 'theme';
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
@@ -64,7 +64,9 @@ const QuestionListItem = ({
   noDnd,
   groupIds,
   allQuestions,
+  sessionId,
 }) => {
+  const [copyOpen, setCopyOpen] = useState(false);
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
   const isFinishScreen = type === finishQuestion.id;
@@ -85,13 +87,19 @@ const QuestionListItem = ({
   const handleDelete = () => {
     const newIndex = getIndex(selectedQuestionIndex, questions.length);
     handleSelectClick(newIndex);
-    removeQuestion({ questionId: id, groupId, groupIds });
+    removeQuestion({ questionId: id, groupId, groupIds, sessionId });
   };
 
-  const handleCopy = () => {
+  const closeCopyModal = () => setCopyOpen(false);
+
+  const handleCopyModal = () => {
+    setCopyOpen(true);
+  };
+
+  const handleCopy = target => {
     const copied = cloneDeep(question);
     set(copied, 'id', uniqueId());
-    copyQuestion({ copied, questionId: id });
+    copyQuestion({ copied, questionId: question.id, target });
   };
 
   const options = [
@@ -102,9 +110,15 @@ const QuestionListItem = ({
       color: colors.flamingo,
     },
     {
+      id: 'duplicate',
+      label: <FormattedMessage {...messages.duplicate} />,
+      action: handleCopy,
+      color: colors.black,
+    },
+    {
       id: 'copy',
       label: <FormattedMessage {...messages.copy} />,
-      action: handleCopy,
+      action: handleCopyModal,
       color: colors.black,
     },
   ];
@@ -116,65 +130,76 @@ const QuestionListItem = ({
   };
 
   const renderQuestion = () => (
-    <ToggleableBox
-      padding={15}
-      mb={15}
-      width="100%"
-      onClick={onChangeItem}
-      isSelected={isSelected}
-      bg={colors.zirkon}
-      border={`1px solid ${checked ? colors.orchid : colors.smokeWhite}`}
-    >
-      <Row justify="between">
-        {manage && !isFinishScreen && (
-          <Column xs={1}>
-            <Checkbox
-              onClick={e => {
-                selectSlide(id);
-                e.stopPropagation();
-                e.preventDefault();
-              }}
-              checked={checked}
-            />
-          </Column>
-        )}
-        <Column xs={10}>
-          <Row>
-            <ClampedTitle mb={6}>
-              {unescape(htmlToPlainText(subtitle))}
-            </ClampedTitle>
-          </Row>
-          <Row>
-            <Box display="flex" align="center">
-              <StyledCircle
-                background={
-                  QuestionTypes.find(({ id: typeId }) => typeId === type).color
-                }
-                size="10px"
-                mr="5px"
+    <>
+      <CopyModal
+        visible={copyOpen}
+        onClose={closeCopyModal}
+        copyAction={handleCopy}
+        disableInterventionCopy
+        disableSessionCopy
+        pasteText={formatMessage(messages.pasteQuestion)}
+      />
+      <ToggleableBox
+        padding={15}
+        mb={15}
+        width="100%"
+        onClick={onChangeItem}
+        isSelected={isSelected}
+        bg={colors.zirkon}
+        border={`1px solid ${checked ? colors.orchid : colors.smokeWhite}`}
+      >
+        <Row justify="between">
+          {manage && !isFinishScreen && (
+            <Column xs={1}>
+              <Checkbox
+                onClick={e => {
+                  selectSlide(id);
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}
+                checked={checked}
               />
-              <Comment fontWeight="bold">
-                {formatMessage(globalMessages.questionTypes[type])}
-              </Comment>
-            </Box>
-          </Row>
-          {body && hasObjectProperty(body, 'variable') && (
-            <Row mt={10}>
-              <VariableInput
-                questionId={id}
-                variable={body.variable}
-                interventionStatus={interventionStatus}
-              />
-            </Row>
+            </Column>
           )}
-        </Column>
-        {!manage && !disabled && !isFinishScreen && (
-          <Column xs={1}>
-            <Dropdown options={options} />
+          <Column xs={10}>
+            <Row>
+              <ClampedTitle mb={6}>
+                {unescape(htmlToPlainText(subtitle))}
+              </ClampedTitle>
+            </Row>
+            <Row>
+              <Box display="flex" align="center">
+                <StyledCircle
+                  background={
+                    QuestionTypes.find(({ id: typeId }) => typeId === type)
+                      .color
+                  }
+                  size="10px"
+                  mr="5px"
+                />
+                <Comment fontWeight="bold">
+                  {formatMessage(globalMessages.questionTypes[type])}
+                </Comment>
+              </Box>
+            </Row>
+            {body && hasObjectProperty(body, 'variable') && (
+              <Row mt={10}>
+                <VariableInput
+                  questionId={id}
+                  variable={body.variable}
+                  interventionStatus={interventionStatus}
+                />
+              </Row>
+            )}
           </Column>
-        )}
-      </Row>
-    </ToggleableBox>
+          {!manage && !disabled && !isFinishScreen && (
+            <Column xs={1}>
+              <Dropdown options={options} />
+            </Column>
+          )}
+        </Row>
+      </ToggleableBox>
+    </>
   );
 
   const renderQuestionWithDnd = () => (

@@ -1,6 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EllipsisText /> should match the snapshot 1`] = `
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -12,7 +19,7 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
   height: auto;
 }
 
-.c1 {
+.c2 {
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -25,14 +32,21 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
   <div
     class="c0"
   >
-    <div
-      class="c1"
+    <p
+      class="c1 c2"
     />
   </div>
 </div>
 `;
 
 exports[`<EllipsisText /> should match the snapshot 2`] = `
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -44,7 +58,7 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
   height: auto;
 }
 
-.c1 {
+.c2 {
   position: relative;
   overflow: hidden;
   width: 100%;
@@ -57,11 +71,11 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
   <div
     class="c0"
   >
-    <div
-      class="c1"
+    <p
+      class="c1 c2"
     >
       Test
-    </div>
+    </p>
   </div>
 </div>
 `;

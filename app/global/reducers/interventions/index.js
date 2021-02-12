@@ -8,6 +8,7 @@ export {
   makeSelectInterventionsState,
   makeSelectInterventions,
   makeSelectInterventionsLoader,
+  makeSelectPublishedInterventions,
 } from './selectors';
 
 export {

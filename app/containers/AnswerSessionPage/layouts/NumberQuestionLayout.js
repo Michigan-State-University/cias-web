@@ -15,8 +15,7 @@ const NumberQuestionLayout = ({
   answerBody,
   onValidation,
 }) => {
-  const value =
-    answerBody && answerBody.value ? answerBody.value.toString() : '';
+  const value = answerBody && answerBody.value ? answerBody.value : '';
 
   return (
     <Box bg={themeColors.highlight} width="100%" maxWidth={150} px={21} py={14}>
@@ -24,6 +23,7 @@ const NumberQuestionLayout = ({
         <ApprovableInput
           width="100%"
           mr={0}
+          height={50}
           type="singleline"
           keyboard="tel"
           value={value}

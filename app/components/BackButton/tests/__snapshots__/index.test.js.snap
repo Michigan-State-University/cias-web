@@ -18,6 +18,9 @@ exports[`<BackButton /> Should render and match the snapshot 1`] = `
 }
 
 .c0 {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
   -webkit-text-decoration: none;
   text-decoration: none;
   display: -webkit-box;

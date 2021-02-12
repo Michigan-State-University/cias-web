@@ -35,11 +35,24 @@ export default defineMessages({
   },
   activate: {
     id: `${scope}.activate`,
-    defaultMessage: ' ',
+    defaultMessage: 'Activate/Deactivate',
+  },
+  deleteFromTeamColumn: {
+    id: `${scope}.deleteFromTeamColumn`,
+    defaultMessage: 'Remove',
+  },
+  deleteFromTeam: {
+    id: `${scope}.deleteFromTeam`,
+    defaultMessage: 'Remove from team',
   },
   deactivateAccountConfirm: {
     id: `${scope}.deactivateAccountConfirm`,
     defaultMessage: 'Are you sure you want to deactivate this account',
+  },
+  deleteFromTeamConfirm: {
+    id: `${scope}.deleteFromTeamConfirm`,
+    defaultMessage:
+      'Are you sure you want to delete this account from the team?',
   },
   activateAccountConfirm: {
     id: `${scope}.activateAccountConfirm`,

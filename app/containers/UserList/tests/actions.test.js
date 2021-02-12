@@ -1,5 +1,5 @@
 import { fetchUsers } from 'global/reducers/userList';
-import { FETCH_USERS } from 'global/reducers/userList/constants';
+import { FETCH_USERS, PER_PAGE } from 'global/reducers/userList/constants';
 import { Roles } from 'models/User/UserRoles';
 
 describe('UserList actions', () => {
@@ -7,12 +7,16 @@ describe('UserList actions', () => {
     it('has a type of FETCH_USERS', () => {
       const expected = {
         payload: {
+          page: 1,
+          perPage: PER_PAGE,
+          includeInactive: true,
+          teamId: undefined,
           name: undefined,
-          roles: ['admin', 'participant', 'researcher'],
+          roles: ['admin', 'team_admin', 'participant', 'researcher'],
         },
         type: FETCH_USERS,
       };
-      expect(fetchUsers(Roles.allRoles, undefined)).toEqual(expected);
+      expect(fetchUsers(Roles.allRoles, undefined, 1, true)).toEqual(expected);
     });
   });
 });

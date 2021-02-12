@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Helmet } from 'react-helmet';
@@ -52,12 +52,12 @@ import {
   makeSelectSelectedQuestionId,
   reorderQuestionListRequest,
   makeSelectLoader,
+  deleteQuestionsRequest,
 } from 'global/reducers/questions';
 import {
   reorderGroupListRequest,
   reorderQuestionGroupsSaga,
   copyQuestionsRequest,
-  deleteQuestionsRequest,
   groupQuestionsRequest,
   shareQuestionsToResearchersRequest,
   makeSelectQuestionGroups,
@@ -71,6 +71,15 @@ import {
   fetchInterventionSaga,
   makeSelectInterventionStatus,
 } from 'global/reducers/intervention';
+import {
+  fetchInterventionsSaga,
+  interventionsReducer,
+  fetchInterventionsRequest,
+} from 'global/reducers/interventions';
+import {
+  copyModalReducer,
+  allCopyModalSagas,
+} from 'global/reducers/copyModalReducer';
 
 import { canEdit } from 'models/Status/statusPermissions';
 
@@ -114,6 +123,7 @@ function EditSessionPage({
   changeGroupName,
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
+  fetchInterventions,
 }) {
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState([]);
@@ -127,6 +137,8 @@ function EditSessionPage({
   });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
+  useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
+  useInjectSaga({ key: 'copyModal', saga: allCopyModalSagas });
   useInjectSaga({
     key: 'reorderQuestionGroups',
     saga: reorderQuestionGroupsSaga,
@@ -136,6 +148,8 @@ function EditSessionPage({
   const currentGroupScope = groups.find(
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
   );
+
+  const groupIds = groups.map(({ id }) => id);
 
   const groupActions = [
     ...(process.env.APP_STAGE === appStages.dev.id
@@ -152,12 +166,6 @@ function EditSessionPage({
             activeIcon: shareActive,
             action: () => setModalVisible(true),
           },
-          {
-            label: <FormattedMessage {...messages.delete} />,
-            inactiveIcon: bin,
-            activeIcon: binActive,
-            action: () => deleteQuestions(selectedSlides),
-          },
         ]
       : []),
     {
@@ -166,6 +174,15 @@ function EditSessionPage({
       activeIcon: groupIconActive,
       action: () => {
         groupQuestions(selectedSlides, params.sessionId);
+        setSelectedSlides([]);
+      },
+    },
+    {
+      label: <FormattedMessage {...messages.delete} />,
+      inactiveIcon: bin,
+      activeIcon: binActive,
+      action: () => {
+        deleteQuestions(selectedSlides, params.sessionId, groupIds);
         setSelectedSlides([]);
       },
     },
@@ -188,6 +205,7 @@ function EditSessionPage({
       interventionId: params.interventionId,
     });
     getQuestionGroups(params.sessionId);
+    fetchInterventions();
   }, []);
 
   const onCreateQuestion = type => {
@@ -291,7 +309,6 @@ function EditSessionPage({
 
   const finishGroup = groups.find(group => group.type === FinishGroupType);
   const filteredGroups = groups.filter(group => group.type !== FinishGroupType);
-  const groupIds = groups.map(({ id }) => id);
 
   return (
     <>
@@ -442,6 +459,7 @@ EditSessionPage.propTypes = {
   shareQuestionsToResearchers: PropTypes.func,
   changeGroupName: PropTypes.func,
   getQuestionGroups: PropTypes.func,
+  fetchInterventions: PropTypes.func,
   interventionStatus: PropTypes.string,
   session: PropTypes.object,
 };
@@ -467,6 +485,7 @@ const mapDispatchToProps = {
   shareQuestionsToResearchers: shareQuestionsToResearchersRequest,
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
+  fetchInterventions: fetchInterventionsRequest,
 };
 
 const withConnect = connect(
@@ -485,6 +504,8 @@ export default compose(
   injectReducer({ key: 'localState', reducer: localStateReducer }),
   injectReducer({ key: 'questionGroups', reducer: questionGroupsReducer }),
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
+  injectReducer({ key: 'interventions', reducer: interventionsReducer }),
+  injectReducer({ key: 'copyModal', reducer: copyModalReducer }),
   injectIntl,
   withConnect,
   withSaga,

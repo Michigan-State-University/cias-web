@@ -111,7 +111,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <div
-                class="styled__SearchInputStyled-sc-10udg63-3 gtZjEY"
+                class="styled__SearchInputStyled-sc-10udg63-3 gFHxDg"
               >
                 <input
                   class="Input-t9j2q5-0 hjYQaq"
@@ -200,13 +200,13 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
             <div
               class="Row-y1cs0u-0 dskFsL"
             >
-              <div
-                class="styled__StyledEllipsisText-h4mjfj-0 jYQKYS"
+              <p
+                class="Text-e4p0w3-0 styled__StyledEllipsisText-h4mjfj-0 jKspVy lnRdie"
                 font-size="18"
                 font-weight="bold"
               >
                 Name
-              </div>
+              </p>
             </div>
             <div
               class="Box-sc-1vhutan-0 fdfAmg"

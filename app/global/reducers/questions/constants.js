@@ -60,6 +60,13 @@ export const DELETE_QUESTION_SUCCESS =
 export const DELETE_QUESTION_ERROR =
   'app/EditSessionPage/DELETE_QUESTION_ERROR';
 
+export const DELETE_QUESTIONS_REQUEST =
+  'app/EditSessionPage/DELETE_QUESTIONS_REQUEST';
+export const DELETE_QUESTIONS_SUCCESS =
+  'app/EditSessionPage/DELETE_QUESTIONS_SUCCESS';
+export const DELETE_QUESTIONS_ERROR =
+  'app/EditSessionPage/DELETE_QUESTIONS_ERROR';
+
 export const UPDATE_QUESTION_DATA = 'app/EditSessionPage/UPDATE_QUESTION_DATA';
 
 export const UPDATE_QUESTION_SETTINGS =

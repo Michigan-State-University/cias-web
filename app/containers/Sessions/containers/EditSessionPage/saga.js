@@ -5,11 +5,11 @@ import {
   copyQuestionSaga,
   createQuestionSaga,
   reorderQuestionsSaga,
+  deleteQuestionsSaga,
 } from 'global/reducers/questions';
 
 import {
   copyQuestionsSaga,
-  deleteQuestionsSaga,
   groupQuestionsSaga,
   shareQuestionsToResearchersSaga,
   changeGroupNameSaga,

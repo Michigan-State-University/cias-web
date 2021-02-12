@@ -21,11 +21,36 @@ import {
   textboxQuestion,
   urlQuestion,
   visualAnalogueScaleQuestion,
+  phoneQuestion,
+  dateQuestion,
+  currencyQuestion,
 } from 'models/Session/QuestionTypes';
 
 export const scope = 'app.GlobalMessages';
 
 export default defineMessages({
+  roles: {
+    admin: {
+      id: `${scope}.admin`,
+      defaultMessage: 'Admin',
+    },
+    team_admin: {
+      id: `${scope}.teamAdmin`,
+      defaultMessage: 'Team Admin',
+    },
+    participant: {
+      id: `${scope}.participant`,
+      defaultMessage: 'Participant',
+    },
+    researcher: {
+      id: `${scope}.researcher`,
+      defaultMessage: 'Researcher',
+    },
+    guest: {
+      id: `${scope}.guest`,
+      defaultMessage: 'Guest',
+    },
+  },
   variables: {
     variableNamePlaceholder: {
       id: `${scope}.variableNamePlaceholder`,
@@ -95,6 +120,10 @@ export default defineMessages({
       id: `${scope}.${[textboxQuestion.id]}`,
       defaultMessage: 'Free Response',
     },
+    [phoneQuestion.id]: {
+      id: `${scope}.${phoneQuestion.id}`,
+      defaultMessage: 'Phone',
+    },
     [numberQuestion.id]: {
       id: `${scope}.${numberQuestion.id}`,
       defaultMessage: 'Number',
@@ -126,6 +155,14 @@ export default defineMessages({
     [finishQuestion.id]: {
       id: `${scope}.${finishQuestion.id}`,
       defaultMessage: 'Finish',
+    },
+    [dateQuestion.id]: {
+      id: `${scope}.${dateQuestion.id}`,
+      defaultMessage: 'Date',
+    },
+    [currencyQuestion.id]: {
+      id: `${scope}.${currencyQuestion.id}`,
+      defaultMessage: 'Currency',
     },
   },
   statuses: {

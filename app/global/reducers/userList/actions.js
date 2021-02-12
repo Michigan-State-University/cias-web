@@ -13,14 +13,48 @@ import {
   CHANGE_ACTIVATE_STATUS_FAILURE,
   CHANGE_ACTIVATE_STATUS_SUCCESS,
   ADD_USER_TO_LIST,
+  PER_PAGE,
+  FETCH_USERS_SELECTOR,
+  FETCH_USERS_SELECTOR_SUCCESS,
+  FETCH_USERS_SELECTOR_FAILURE,
+  DELETE_USER_FROM_TEAM_FAILURE,
+  DELETE_USER_FROM_TEAM_REQUEST,
+  DELETE_USER_FROM_TEAM_SUCCESS,
 } from './constants';
 
-export const fetchUsers = (roles, name, page, includeInactive) =>
-  actionBuilder(FETCH_USERS, { roles, name, page, includeInactive });
+export const fetchUsers = (roles, name, page, includeInactive, teamId) =>
+  actionBuilder(FETCH_USERS, {
+    roles,
+    name,
+    page,
+    includeInactive,
+    teamId,
+    perPage: PER_PAGE,
+  });
 export const fetchUsersSuccess = (users, usersSize) =>
   actionBuilder(FETCH_USERS_SUCCESS, { users, usersSize });
 export const fetchUsersFailure = error =>
   actionBuilder(FETCH_USERS_FAILURE, error);
+
+export const fetchUsersSelector = (
+  roles,
+  name,
+  page,
+  includeInactive,
+  teamId,
+) =>
+  actionBuilder(FETCH_USERS_SELECTOR, {
+    roles,
+    name,
+    page,
+    includeInactive,
+    teamId,
+    perPage: 999999,
+  });
+export const fetchUsersSelectorSuccess = (users, usersSize) =>
+  actionBuilder(FETCH_USERS_SELECTOR_SUCCESS, { users, usersSize });
+export const fetchUsersSelectorFailure = error =>
+  actionBuilder(FETCH_USERS_SELECTOR_FAILURE, error);
 
 export const changeActivateStatusRequest = (id, active, showInactive) =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_REQUEST, { id, active, showInactive });
@@ -30,3 +64,10 @@ export const changeActivateStatusFailure = () =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_FAILURE, {});
 
 export const addUserToList = user => actionBuilder(ADD_USER_TO_LIST, { user });
+
+export const deleteUserFromTeamRequest = (userId, teamId) =>
+  actionBuilder(DELETE_USER_FROM_TEAM_REQUEST, { userId, teamId });
+export const deleteUserFromTeamSuccess = () =>
+  actionBuilder(DELETE_USER_FROM_TEAM_SUCCESS, {});
+export const deleteUserFromTeamFailure = error =>
+  actionBuilder(DELETE_USER_FROM_TEAM_FAILURE, error);

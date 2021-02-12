@@ -50,6 +50,9 @@ import {
   DELETE_SESSION_REQUEST,
   DELETE_SESSION_SUCCESS,
   DELETE_SESSION_ERROR,
+  EXTERNAL_COPY_SESSION_REQUEST,
+  EXTERNAL_COPY_SESSION_SUCCESS,
+  EXTERNAL_COPY_SESSION_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -313,6 +316,22 @@ export const interventionReducer = (state = initialState, action) =>
 
       case DELETE_SESSION_ERROR:
         draft.intervention.sessions = state.cache.intervention.sessions;
+        break;
+      case EXTERNAL_COPY_SESSION_REQUEST:
+        break;
+      case EXTERNAL_COPY_SESSION_SUCCESS:
+        const { session, interventionId } = action.payload;
+        if (state.intervention.id === interventionId) {
+          const updateIntervention = {
+            ...state.intervention,
+            sessions: [...state.intervention.sessions, session],
+          };
+          draft.intervention = updateIntervention;
+          draft.cache.intervention = updateIntervention;
+        }
+        break;
+      case EXTERNAL_COPY_SESSION_ERROR:
+        draft.intervention = state.cache.intervention;
         break;
     }
   });

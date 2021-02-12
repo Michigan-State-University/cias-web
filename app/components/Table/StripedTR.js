@@ -7,9 +7,10 @@ import { TBody } from './TBody';
 
 const StripedTR = styled(TR)`
   cursor: ${({ cursor }) => cursor || 'default'};
+
   ${TBody} &:nth-child(${props => props.stripesPlacement}) {
-  background: ${props =>
-    props.color ? props.color : `rgba(${hexToRgb(colors.jungleGreen)}, 0.1)`};
+    background: ${props =>
+      props.color ? props.color : `rgba(${hexToRgb(colors.jungleGreen)}, 0.1)`};
 
     td,
     th {
@@ -25,16 +26,20 @@ const StripedTR = styled(TR)`
       }
     }
   }
-  td:last-child {
+
+  // select last 'n' elements
+  td:nth-last-child(-n+${props => props.lastItemHoverable}) {
     opacity: ${props => (props.lastItemHoverable ? '0' : '100%')};
   }
 
   &:hover {
     background: ${props => props.hoverBg && props.hoverBg} !important;
-    td:last-child {
+
+    td:hover {
       opacity: 100%
-      }
+    }
   }
+
   color: ${props => props.textColor};
   background-color: ${props => props.bg};;
 `;
@@ -42,7 +47,7 @@ const StripedTR = styled(TR)`
 StripedTR.propTypes = {
   stripesPlacement: PropTypes.string,
   textColor: PropTypes.string,
-  lastItemHoverable: PropTypes.bool,
+  lastItemHoverable: PropTypes.number,
 };
 
 StripedTR.defaultProps = {

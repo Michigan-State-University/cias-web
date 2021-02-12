@@ -19,4 +19,12 @@ export default defineMessages({
     id: `${scope}.endUserValue`,
     defaultMessage: 'You',
   },
+  chooseDate: {
+    id: `${scope}.chooseDate`,
+    defaultMessage: 'Choose date',
+  },
+  amountPlaceholder: {
+    id: `${scope}.amountPlaceholder`,
+    defaultMessage: 'E.g. 121.12',
+  },
 });

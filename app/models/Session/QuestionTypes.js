@@ -61,12 +61,33 @@ export const finishQuestion = new QuestionType(
   colors.brightGreen,
 );
 
+export const phoneQuestion = new QuestionType(
+  'Question::Phone',
+  'Phone',
+  colors.flamingo,
+);
+
+export const dateQuestion = new QuestionType(
+  'Question::Date',
+  'Date',
+  colors.bluewood,
+);
+
+export const currencyQuestion = new QuestionType(
+  'Question::Currency',
+  'Currency',
+  colors.olive,
+);
+
 export const questionType = 'Question::';
 
 export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
   textboxQuestion,
+  phoneQuestion,
+  dateQuestion,
+  currencyQuestion,
   numberQuestion,
   gridQuestion,
   visualAnalogueScaleQuestion,
