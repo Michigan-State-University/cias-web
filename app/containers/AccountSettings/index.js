@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { useLocation } from 'react-router-dom';
 
 import BackButton from 'components/BackButton';
 import H1 from 'components/H1';
@@ -25,11 +26,17 @@ function AccountSettings({
   NotificationsComponent,
   authUser: { roles },
 }) {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
   const isTeamAdmin = roles.includes(Roles.teamAdmin);
 
   const buttonMessage = useMemo(() => {
     if (isTeamAdmin && userId)
       return <FormattedMessage {...messages.backToMyTeam} />;
+
+    if (queryParams.has('teamId'))
+      return <FormattedMessage {...messages.backToTeamDetails} />;
 
     if (userId) return <FormattedMessage {...messages.backToUsers} />;
 
@@ -38,6 +45,8 @@ function AccountSettings({
 
   const redirectUrl = useMemo(() => {
     if (isTeamAdmin && userId) return '/my-team';
+
+    if (queryParams.has('teamId')) return `/teams/${queryParams.get('teamId')}`;
 
     if (userId) return '/users';
 

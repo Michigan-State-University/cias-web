@@ -110,7 +110,7 @@ export function App({ user }) {
           path="/interventions/:interventionId/sessions/:sessionId/edit"
           component={EditSessionPage}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher]}
+          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'sessions',
           }}
@@ -131,7 +131,7 @@ export function App({ user }) {
           path="/interventions/:interventionId/sessions/:sessionId/settings"
           component={SettingsInterventionPage}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher]}
+          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'sessions',
           }}
@@ -190,7 +190,7 @@ export function App({ user }) {
             <AnswerSessionPage match={match} isPreview />
           )}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher]}
+          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'preview',
             navbarName: navbarNames.preview,
@@ -203,7 +203,7 @@ export function App({ user }) {
             <AnswerSessionPage match={match} isPreview />
           )}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher]}
+          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'preview',
             navbarName: navbarNames.preview,
@@ -214,7 +214,7 @@ export function App({ user }) {
           path="/interventions/:interventionId"
           component={InterventionDetailsPage}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher]}
+          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'default',
             activeTab: interventionsTabId,
@@ -236,7 +236,7 @@ export function App({ user }) {
           path="/users/:id"
           component={UserDetails}
           protectedRoute
-          allowedRoles={[Roles.admin]}
+          allowedRoles={[Roles.admin, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'default',
             activeTab: accountsTabId,

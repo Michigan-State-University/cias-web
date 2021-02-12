@@ -123,8 +123,9 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 jtHGah"
+            class="StyledButton-d2s0gt-0 eoiJLt"
             color="primary"
+            disabled=""
             width="260"
           >
             <span>

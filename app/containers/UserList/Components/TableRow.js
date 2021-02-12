@@ -44,7 +44,11 @@ const TableRow = ({
     });
   };
 
-  const handleRedirect = () => history.push(`/users/${id}`);
+  const handleRedirect = () =>
+    teamId
+      ? history.push(`/users/${id}?teamId=${teamId}`)
+      : history.push(`/users/${id}`);
+
   const text = active
     ? formatMessage(messages.deactivateAccount)
     : formatMessage(messages.activateAccount);
