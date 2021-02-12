@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useLayoutEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -30,7 +30,12 @@ import messages from './messages';
 
 const UserSelector = ({
   intl: { formatMessage },
-  userList: { usersSelector, usersSelectorLoading, usersSelectorError },
+  userList: {
+    usersSelector,
+    usersSelectorLoading,
+    usersSelectorError,
+    shouldRefetch,
+  },
   fetchUsersRequest,
   onSelect,
   selectedUserId,
@@ -38,9 +43,13 @@ const UserSelector = ({
   additionalUsers = [],
   disabled,
 }) => {
-  useLayoutEffect(() => {
+  useEffect(() => {
     fetchUsersRequest(rolesToInclude);
-  }, [additionalUsers]);
+  }, []);
+
+  useEffect(() => {
+    if (shouldRefetch) fetchUsersRequest(rolesToInclude);
+  }, [shouldRefetch]);
 
   const options = useMemo(
     () =>
