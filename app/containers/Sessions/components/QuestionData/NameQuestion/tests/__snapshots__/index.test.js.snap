@@ -71,7 +71,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
               class="Text-e4p0w3-0 ixAmEb"
               color="#C866EA"
             >
-              Preview
+              Try it out!
             </p>
           </div>
         </div>

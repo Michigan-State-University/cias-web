@@ -31,6 +31,9 @@ import {
 } from '../selectors';
 
 const validateVariable = (payload, question, variables) => {
+  if (NotAnswerableQuestions.includes(question.type)) {
+    return;
+  }
   const duplicateError = new Error(formatMessage(messages.duplicateVariable));
   const reservedError = new Error(formatMessage(messages.reservedVariable));
 
@@ -44,8 +47,6 @@ const validateVariable = (payload, question, variables) => {
     question.body.data[0].payload.rows.forEach(element => {
       if (hasDuplicates(variables, element.variable.name)) throw duplicateError;
     });
-  } else if (NotAnswerableQuestions.includes(question.type)) {
-    throw duplicateError;
   } else if (hasDuplicates(variables, question.body.variable.name)) {
     throw duplicateError;
   }
