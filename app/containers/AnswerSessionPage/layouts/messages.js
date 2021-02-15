@@ -23,6 +23,14 @@ export default defineMessages({
     id: `${scope}.chooseDate`,
     defaultMessage: 'Choose date',
   },
+  enterName: {
+    id: `${scope}.enterName`,
+    defaultMessage: 'Enter your name',
+  },
+  enterNamePhonetically: {
+    id: `${scope}.enterNamePhonetically`,
+    defaultMessage: 'Enter your name phonetically',
+  },
   amountPlaceholder: {
     id: `${scope}.amountPlaceholder`,
     defaultMessage: 'E.g. 121.12',

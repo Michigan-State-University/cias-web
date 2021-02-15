@@ -8,6 +8,7 @@ import {
   urlQuestion,
   feedbackQuestion,
   dateQuestion,
+  nameQuestion,
   currencyQuestion,
 } from 'models/Session/QuestionTypes';
 
@@ -16,6 +17,7 @@ import gridQuestionReducer from './GridQuestion/reducer';
 import multiQuestionReducer from './MultiQuestion/reducer';
 import phoneQuestionReducer from './PhoneQuestion/reducer';
 import numberQuestionReducer from './NumberQuestion/reducer';
+import nameQuestionReducer from './NameQuestion/reducer';
 import dateQuestionReducer from './DateQuestion/reducer';
 import singleQuestionReducer from './SingleQuestion/reducer';
 import textboxQuestionReducer from './TextboxQuestion/reducer';
@@ -36,6 +38,8 @@ const questionDataReducer = (question, data) => {
       return phoneQuestionReducer(question, data);
     case dateQuestion.id:
       return dateQuestionReducer(question, data);
+    case nameQuestion.id:
+      return nameQuestionReducer(question, data);
     case numberQuestion.id:
       return numberQuestionReducer(question, data);
     case gridQuestion.id:

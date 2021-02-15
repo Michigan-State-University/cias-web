@@ -14,13 +14,19 @@ import { makeSelectLocation } from 'containers/App/selectors';
 import { ternary } from 'utils/ternary';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { NotAnswerableQuestions } from 'models/Session/utils';
-import { FETCH_QUESTIONS, SUBMIT_ANSWER_REQUEST } from './constants';
+import {
+  FETCH_QUESTIONS,
+  SUBMIT_ANSWER_REQUEST,
+  PHONETIC_PREVIEW_REQUEST,
+  PHONETIC_PREVIEW_FAILURE,
+} from './constants';
 import {
   fetchQuestionsFailure,
   fetchQuestionsSuccess,
   submitAnswerSuccess,
   submitAnswerFailure,
   setQuestionIndex,
+  phoneticPreviewSuccess,
 } from './actions';
 import { makeSelectAnswers } from './selectors';
 import messages from './messages';
@@ -128,8 +134,24 @@ function* submitAnswersAsync({
   }
 }
 
+function* phoneticPreviewAsync({ payload: { text } }) {
+  try {
+    const {
+      data: { url: mp3Url },
+    } = yield axios.post(`/v1/phonetic_preview`, {
+      audio: { text },
+    });
+    yield put(phoneticPreviewSuccess(`${process.env.API_URL}${mp3Url}`));
+  } catch (error) {
+    yield call(toast.error, error, {
+      toastId: PHONETIC_PREVIEW_FAILURE,
+    });
+  }
+}
+
 // Individual exports for testing
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(FETCH_QUESTIONS, fetchQuestionsAsync);
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
+  yield takeLatest(PHONETIC_PREVIEW_REQUEST, phoneticPreviewAsync);
 }

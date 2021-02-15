@@ -19,6 +19,13 @@ export const textboxQuestion = new QuestionType(
   colors.tangerine,
 );
 
+export const nameQuestion = new QuestionType(
+  'Question::Name',
+  'Name',
+  colors.aqua,
+  'NAME',
+);
+
 export const numberQuestion = new QuestionType(
   'Question::Number',
   'Number',
@@ -87,6 +94,7 @@ export const QuestionTypes = [
   textboxQuestion,
   phoneQuestion,
   dateQuestion,
+  nameQuestion,
   currencyQuestion,
   numberQuestion,
   gridQuestion,

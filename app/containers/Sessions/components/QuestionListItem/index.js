@@ -35,7 +35,11 @@ import {
 } from 'global/reducers/localState';
 
 import StyledCircle from 'components/Circle/StyledCircle';
-import { finishQuestion, QuestionTypes } from 'models/Session/QuestionTypes';
+import {
+  finishQuestion,
+  QuestionTypes,
+  nameQuestion,
+} from 'models/Session/QuestionTypes';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
 import VariableInput from '../QuestionDetails/VariableInput';
@@ -70,6 +74,7 @@ const QuestionListItem = ({
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
   const isFinishScreen = type === finishQuestion.id;
+  const isNameScreen = type === nameQuestion.id;
 
   const handleSelectClick = () => {
     setDraggable(false);
@@ -188,6 +193,7 @@ const QuestionListItem = ({
                   questionId={id}
                   variable={body.variable}
                   interventionStatus={interventionStatus}
+                  disabled={isNameScreen}
                 />
               </Row>
             )}

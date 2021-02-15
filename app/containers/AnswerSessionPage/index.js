@@ -227,6 +227,7 @@ export function AnswerSessionPage({
       showError: toast.error,
       feedbackScreenSettings,
       setFeedbackSettings,
+      isAnimationOngoing,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;

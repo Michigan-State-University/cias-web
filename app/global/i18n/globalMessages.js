@@ -23,6 +23,7 @@ import {
   visualAnalogueScaleQuestion,
   phoneQuestion,
   dateQuestion,
+  nameQuestion,
   currencyQuestion,
 } from 'models/Session/QuestionTypes';
 
@@ -123,6 +124,10 @@ export default defineMessages({
     [phoneQuestion.id]: {
       id: `${scope}.${phoneQuestion.id}`,
       defaultMessage: 'Phone',
+    },
+    [nameQuestion.id]: {
+      id: `${scope}.${nameQuestion.id}`,
+      defaultMessage: 'Name',
     },
     [numberQuestion.id]: {
       id: `${scope}.${numberQuestion.id}`,
