@@ -136,7 +136,9 @@ function* submitAnswersAsync({
 
 function* phoneticPreviewAsync({ payload: { text } }) {
   try {
-    const { data: mp3Url } = yield axios.post(`/v1/phonetic_preview`, {
+    const {
+      data: { url: mp3Url },
+    } = yield axios.post(`/v1/phonetic_preview`, {
       audio: { text },
     });
     yield put(phoneticPreviewSuccess(`${process.env.API_URL}${mp3Url}`));
