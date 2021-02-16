@@ -44,13 +44,12 @@ const setHeaders = response => {
   const kebabCamelCaseHeaders = objectToCamelKebabCase(response.headers);
 
   const accessToken = kebabCamelCaseHeaders['Access-Token'];
+  const currentHeaders = LocalStorageService.getHeaders();
 
   LocalStorageService.setHeaders({
     ...headersConst,
-    'Access-Token': !accessToken
-      ? LocalStorageService.getHeaders()['Access-Token']
-      : accessToken,
-    Client: kebabCamelCaseHeaders.Client,
-    Uid: kebabCamelCaseHeaders.Uid,
+    'Access-Token': accessToken || currentHeaders['Access-Token'],
+    Client: kebabCamelCaseHeaders.Client || currentHeaders.Client,
+    Uid: kebabCamelCaseHeaders.Uid || currentHeaders.Uid,
   });
 };
