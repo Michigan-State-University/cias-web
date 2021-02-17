@@ -157,7 +157,18 @@ function InterventionStatusButtons({
   );
 
   const statuses = {
-    draft: <PublishButton />,
+    draft: (
+      <>
+        <CsvButtons
+          handleSendCsv={handleSendCsv}
+          csvLink={csvLink}
+          csvGeneratedAt={csvGeneratedAt}
+          fileName={fileName}
+          urlToDownload={urlToDownload}
+        />
+        <PublishButton />
+      </>
+    ),
     published: (
       <>
         <CsvButtons
