@@ -4,8 +4,8 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-
 import { useInjectSaga } from 'redux-injectors';
+
 import Row from 'components/Row';
 import Tabs from 'components/Tabs';
 import { StyledInput } from 'components/Input/StyledInput';
@@ -13,6 +13,8 @@ import Spinner from 'components/Spinner';
 import PreviewButton from 'components/PreviewButton';
 import Img from 'components/Img';
 import Box from 'components/Box';
+import Circle from 'components/Circle';
+import ActionIcon from 'components/ActionIcon';
 import {
   makeSelectQuestionsLength,
   makeSelectSelectedQuestionId,
@@ -24,11 +26,10 @@ import {
   makeSelectSessionEditLoader,
 } from 'global/reducers/session';
 import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
-import { themeColors } from 'theme';
+import { colors, themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
-import backButton from 'assets/svg/arrow-black.svg';
 
-import ActionIcon from 'components/ActionIcon';
+import backButton from 'assets/svg/arrow-black.svg';
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit, canPreview } from 'models/Status/statusPermissions';
 import messages from './messages';
@@ -42,11 +43,13 @@ import {
 const getActiveTab = (path, formatMessage) => {
   if (path.includes('/edit')) return formatMessage(messages.content);
   if (path.includes('/settings')) return formatMessage(messages.settings);
+  if (path.includes('/report-templates'))
+    return formatMessage(messages.reportTemplates);
   return formatMessage(messages.sharing);
 };
 
 const InterventionNavbar = ({
-  session: { name },
+  session: { name, reportsCount },
   updateSessionName,
   intl: { formatMessage },
   location: { pathname },
@@ -120,6 +123,26 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
+        <div
+          linkMatch={formatMessage(messages.reportTemplates)}
+          renderAsLink={
+            <StyledLink
+              to={`/interventions/${interventionId}/sessions/${sessionId}/report-templates`}
+            >
+              <Row align="center">
+                {formatMessage(messages.reportTemplates)}
+                <Circle
+                  bg={themeColors.secondary}
+                  color={colors.white}
+                  child={reportsCount ?? 0}
+                  size="16px"
+                  fontSize={11}
+                  ml={5}
+                />
+              </Row>
+            </StyledLink>
+          }
+        />
       </Tabs>
       <Box display="flex" align="center">
         <SaveInfoContainer>
@@ -154,6 +177,7 @@ const InterventionNavbar = ({
 InterventionNavbar.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
+    reportsCount: PropTypes.number,
     id: PropTypes.string,
   }),
   updateSessionName: PropTypes.func,

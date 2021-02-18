@@ -9,21 +9,22 @@ const Tab = ({
   renderAsLink: LinkComponent,
   onClick,
   activeTab,
+  linkMatch,
 }) => {
   const handleClick = () => {
-    onClick(text);
+    onClick(linkMatch ?? text);
   };
 
   if (label)
     return (
-      <LabelContainer isActive={activeTab === text}>
+      <LabelContainer isActive={activeTab === text || activeTab === linkMatch}>
         <div onClick={handleClick}>{label}</div>
       </LabelContainer>
     );
 
   if (LinkComponent)
     return (
-      <LinkContainer isActive={activeTab === text}>
+      <LinkContainer isActive={activeTab === text || activeTab === linkMatch}>
         <div onClick={handleClick}>{LinkComponent}</div>
       </LinkContainer>
     );
@@ -34,9 +35,10 @@ const Tab = ({
 Tab.propTypes = {
   label: PropTypes.string,
   onClick: PropTypes.func,
-  activeTab: PropTypes.string,
-  text: PropTypes.string,
+  activeTab: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   renderAsLink: PropTypes.node,
+  linkMatch: PropTypes.string,
 };
 
 export default Tab;

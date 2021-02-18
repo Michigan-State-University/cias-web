@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReportTemplatesPage /> Should render and match the snapshot 1`] = `
+<div
+  style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding: 0px;"
+>
+  <div
+    style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between; background-color: rgb(255, 255, 255); height: 70px; padding: 10px;"
+  >
+    <div
+      class="styled__InlineLoader-sc-1aaagww-1 kkTeLU"
+      data-testid="inline-loader"
+    >
+      <div
+        class="styled__StyledSpinner-sc-129uixn-0 OJHNY"
+        color="#C866EA"
+        size="50"
+        width="6"
+      />
+    </div>
+  </div>
+  <span
+    style="display: table; clear: both;"
+  />
+</div>
+`;

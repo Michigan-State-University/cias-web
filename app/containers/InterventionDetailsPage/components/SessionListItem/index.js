@@ -10,6 +10,7 @@ import { injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
 
 import Row from 'components/Row';
+import Column from 'components/Column';
 import Dropdown from 'components/Dropdown';
 import Divider from 'components/Divider';
 import StyledLink from 'components/StyledLink';
@@ -27,6 +28,7 @@ import Img from 'components/Img';
 import Box from 'components/Box';
 import { VIEWS } from 'components/CopyModal/Components';
 import CopyModal from 'components/CopyModal';
+import Badge from 'components/Badge';
 import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
 import { ToggleableBox, StyledRow, SessionIndex } from './styled';
@@ -58,6 +60,7 @@ function SessionListItem({
     schedule_at: scheduleAt,
     schedule_payload: schedulePayload,
     settings,
+    reportsCount,
   } = session || {};
 
   const options = [
@@ -127,7 +130,14 @@ function SessionListItem({
                   justify="start"
                 >
                   <SessionIndex>{index + 1}</SessionIndex>
-                  <H2 ml={15}>{name}</H2>
+                  <Column>
+                    <H2 ml={15}>{name}</H2>
+                    <Badge ml={15} bg={themeColors.secondary}>
+                      {formatMessage(messages.reportsCount, {
+                        count: reportsCount ?? 0,
+                      })}
+                    </Badge>
+                  </Column>
                 </StyledLink>
               </StyledRow>
               <Row width="40%" xs={1} align="center" justify="around">

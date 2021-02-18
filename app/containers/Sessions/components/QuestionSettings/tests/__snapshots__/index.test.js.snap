@@ -30,25 +30,25 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
           data-cy="settings-panel"
         >
           <div
-            class="Row-y1cs0u-0 dskFsL"
+            class="Row-y1cs0u-0 liAqOY"
             data-cy="tabs"
           >
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 csNwIt"
+              class="styled__LabelContainer-sc-1tqggs6-2 gPqsou"
             >
               <div>
                 Settings
               </div>
             </div>
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 csNwIt"
+              class="styled__LabelContainer-sc-1tqggs6-2 gPqsou"
             >
               <div>
                 Narrator
               </div>
             </div>
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 csNwIt"
+              class="styled__LabelContainer-sc-1tqggs6-2 gPqsou"
             >
               <div>
                 Branching

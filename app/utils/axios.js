@@ -43,12 +43,12 @@ axios.interceptors.response.use(
 const setHeaders = response => {
   const kebabCamelCaseHeaders = objectToCamelKebabCase(response.headers);
 
-  const accessToken = kebabCamelCaseHeaders['Access-Token'];
   const currentHeaders = LocalStorageService.getHeaders();
 
   LocalStorageService.setHeaders({
     ...headersConst,
-    'Access-Token': accessToken || currentHeaders['Access-Token'],
+    'Access-Token':
+      kebabCamelCaseHeaders['Access-Token'] || currentHeaders['Access-Token'],
     Client: kebabCamelCaseHeaders.Client || currentHeaders.Client,
     Uid: kebabCamelCaseHeaders.Uid || currentHeaders.Uid,
   });

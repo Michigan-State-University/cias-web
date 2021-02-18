@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UnderlinedLabel /> should render and match the snapshot 1`] = `
+.c0 {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  position: relative;
+  bottom: -3px;
+  margin: 0 10px;
+  padding-bottom: 7px;
+  border-bottom-width: 2px;
+  border-bottom-color: #C866EA;
+  border-bottom-style: none;
+  cursor: pointer;
+  color: #9AA1B6 !important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c0:hover {
+  color: #2F3850;
+}
+
+<div
+  class="c0"
+>
+  Test Label
+</div>
+`;
+
+exports[`<UnderlinedLabel /> should render isActive and match the snapshot 1`] = `
+.c0 {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  position: relative;
+  bottom: -3px;
+  margin: 0 10px;
+  padding-bottom: 7px;
+  border-bottom-width: 2px;
+  border-bottom-color: #C866EA;
+  border-bottom-style: solid;
+  cursor: pointer;
+  color: #2F3850 !important;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c0:hover {
+  color: #2F3850;
+}
+
+<div
+  class="c0"
+>
+  Test Label
+</div>
+`;

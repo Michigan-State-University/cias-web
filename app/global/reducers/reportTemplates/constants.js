@@ -1,0 +1,48 @@
+/*
+ *
+ * ReportTemplates constants
+ *
+ */
+
+export const FETCH_REPORT_TEMPLATES_REQUEST =
+  'app/ReportTemplates/FETCH_REPORT_TEMPLATES_REQUEST';
+export const FETCH_REPORT_TEMPLATES_SUCCESS =
+  'app/ReportTemplates/FETCH_REPORT_TEMPLATES_SUCCESS';
+export const FETCH_REPORT_TEMPLATES_FAILURE =
+  'app/ReportTemplates/FETCH_REPORT_TEMPLATES_FAILURE';
+
+export const ADD_REPORT_TEMPLATE_REQUEST =
+  'app/ReportTemplates/ADD_REPORT_TEMPLATE_REQUEST';
+export const ADD_REPORT_TEMPLATE_SUCCESS =
+  'app/ReportTemplates/ADD_REPORT_TEMPLATE_SUCCESS';
+export const ADD_REPORT_TEMPLATE_FAILURE =
+  'app/ReportTemplates/ADD_REPORT_TEMPLATE_FAILURE';
+
+export const UPDATE_REPORT_TEMPLATE_REQUEST =
+  'app/ReportTemplates/UPDATE_REPORT_TEMPLATE_REQUEST';
+export const UPDATE_REPORT_TEMPLATE_SUCCESS =
+  'app/ReportTemplates/UPDATE_REPORT_TEMPLATE_SUCCESS';
+export const UPDATE_REPORT_TEMPLATE_FAILURE =
+  'app/ReportTemplates/UPDATE_REPORT_TEMPLATE_FAILURE';
+
+export const DELETE_REPORT_TEMPLATE_REQUEST =
+  'app/ReportTemplates/DELETE_REPORT_TEMPLATE_REQUEST';
+export const DELETE_REPORT_TEMPLATE_SUCCESS =
+  'app/ReportTemplates/DELETE_REPORT_TEMPLATE_SUCCESS';
+export const DELETE_REPORT_TEMPLATE_FAILURE =
+  'app/ReportTemplates/DELETE_REPORT_TEMPLATE_FAILURE';
+
+export const DELETE_REPORT_TEMPLATE_LOGO_REQUEST =
+  'app/ReportTemplates/DELETE_REPORT_TEMPLATE_LOGO_REQUEST';
+export const DELETE_REPORT_TEMPLATE_LOGO_SUCCESS =
+  'app/ReportTemplates/DELETE_REPORT_TEMPLATE_LOGO_SUCCESS';
+export const DELETE_REPORT_TEMPLATE_LOGO_FAILURE =
+  'app/ReportTemplates/DELETE_REPORT_TEMPLATE_LOGO_FAILURE';
+
+export const SELECT_REPORT_TEMPLATE =
+  'app/ReportTemplates/SELECT_REPORT_TEMPLATE';
+
+export const ReportFor = {
+  participant: 'participant',
+  thirdParty: 'third_party',
+};

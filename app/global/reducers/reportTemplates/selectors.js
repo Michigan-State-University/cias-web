@@ -1,0 +1,77 @@
+import { createSelector } from 'reselect';
+import { initialState } from './reducer';
+
+/**
+ * Direct selector to the ReportTemplates state domain
+ */
+
+const selectReportTemplatesDomain = state =>
+  state.reportTemplates || initialState;
+
+/**
+ * Other specific selectors
+ */
+
+/**
+ * Default selector used by ReportTemplates
+ */
+
+const makeSelectReportTemplates = () =>
+  createSelector(
+    selectReportTemplatesDomain,
+    substate => substate,
+  );
+
+const makeSelectReportTemplatesList = () =>
+  createSelector(
+    selectReportTemplatesDomain,
+    substate => substate.reportTemplates,
+  );
+
+const makeSelectReportTemplatesLoaders = () =>
+  createSelector(
+    selectReportTemplatesDomain,
+    substate => substate.loaders,
+  );
+
+const makeSelectReportTemplatesErrors = () =>
+  createSelector(
+    selectReportTemplatesDomain,
+    substate => substate.errors,
+  );
+
+const makeSelectReportTemplateId = id =>
+  createSelector(
+    selectReportTemplatesDomain,
+    substate =>
+      substate.reportTemplates.find(
+        ({ id: reportTemplateId }) => reportTemplateId === id,
+      ),
+  );
+
+const makeSelectSelectedReport = () =>
+  createSelector(
+    selectReportTemplatesDomain,
+    substate =>
+      substate.reportTemplates.find(
+        ({ id: reportTemplateId }) =>
+          reportTemplateId === substate.selectedReportId,
+      ),
+  );
+
+const makeSelectSelectedReportId = () =>
+  createSelector(
+    selectReportTemplatesDomain,
+    substate => substate.selectedReportId,
+  );
+
+export default makeSelectReportTemplates;
+export {
+  selectReportTemplatesDomain,
+  makeSelectReportTemplatesList,
+  makeSelectReportTemplatesLoaders,
+  makeSelectReportTemplatesErrors,
+  makeSelectReportTemplateId,
+  makeSelectSelectedReport,
+  makeSelectSelectedReportId,
+};
