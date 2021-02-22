@@ -14,7 +14,7 @@ import Badge from 'components/Badge';
 import Loader from 'components/Loader';
 import webpage from 'assets/svg/webpage-mouseover.svg';
 import {
-  makeSelectQuestions,
+  makeSelectFilteredQuestions,
   makeSelectSelectedQuestion,
 } from 'global/reducers/questions';
 
@@ -136,7 +136,7 @@ VariableChooser.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  questions: makeSelectQuestions(),
+  questions: makeSelectFilteredQuestions(),
   groups: makeSelectQuestionGroups(),
   selectedQuestion: makeSelectSelectedQuestion(),
   loading: makeSelectGetQuestionGroupLoader(),

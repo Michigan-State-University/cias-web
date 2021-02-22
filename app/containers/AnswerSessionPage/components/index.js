@@ -16,6 +16,7 @@ import {
   dateQuestion,
   nameQuestion,
   currencyQuestion,
+  participantReport,
 } from 'models/Session/QuestionTypes';
 
 import CurrencyQuestion from './CurrencyQuestion';
@@ -31,6 +32,7 @@ import NumberQuestion from './NumberQuestion';
 import FeedbackQuestion from './FeedbackQuestion';
 import PhoneQuestion from './PhoneQuestion';
 import DateQuestion from './DateQuestion';
+import ParticipantReport from './ParticipantReportQuestion';
 import NameQuestion from './NameQuestion';
 
 export const renderQuestionByType = (question, sharedProps) => {
@@ -52,6 +54,8 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <TextBoxQuestion question={question} {...sharedProps} />;
     case phoneQuestion.id:
       return <PhoneQuestion question={question} {...sharedProps} />;
+    case participantReport.id:
+      return <ParticipantReport question={question} {...sharedProps} />;
     case dateQuestion.id:
       return <DateQuestion question={question} {...sharedProps} />;
     case nameQuestion.id:

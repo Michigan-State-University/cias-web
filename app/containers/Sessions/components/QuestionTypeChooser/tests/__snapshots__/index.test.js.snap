@@ -539,6 +539,29 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
+.c22 {
+  border-radius: 50%;
+  background-color: #B302FF;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 10px;
+  height: 10px;
+  margin-right: 18px;
+  background-color: rgba(179,2,255,1);
+  opacity: 1;
+  color: #2F3850;
+}
+
 <div>
   <div
     class="c0"
@@ -826,6 +849,24 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   font-weight="medium"
                 >
                   Feedback
+                </p>
+              </div>
+            </div>
+            <div
+              class="HoverableBox-zvip6a-0 c9"
+            >
+              <div
+                class="c3"
+              >
+                <div
+                  class="c22"
+                  opacity="1"
+                />
+                <p
+                  class="c11"
+                  font-weight="medium"
+                >
+                  Participant Report
                 </p>
               </div>
             </div>

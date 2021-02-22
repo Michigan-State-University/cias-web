@@ -49,4 +49,8 @@ export default defineMessages({
     id: `${scope}.${OTHER_FORMULA_ERROR}`,
     defaultMessage: `Formula failed and you were transitioned to the next screen because of some mathematical error.`,
   },
+  emailValidationError: {
+    id: `${scope}.emailValidationError`,
+    defaultMessage: 'The email entered in wrong format',
+  },
 });

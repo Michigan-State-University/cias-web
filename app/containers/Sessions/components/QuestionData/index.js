@@ -24,6 +24,7 @@ import {
   dateQuestion,
   nameQuestion,
   currencyQuestion,
+  participantReport,
 } from 'models/Session/QuestionTypes';
 
 import CurrencyQuestion from './CurrencyQuestion';
@@ -37,6 +38,7 @@ import VisualAnalogueScaleQuestion from './VisualAnalogueScaleQuestion';
 import FeedbackQuestion from './FeedbackQuestion';
 import PhoneQuestion from './PhoneQuestion';
 import DateQuestion from './DateQuestion';
+import ParticipantReportQuestion from './ParticipantReportQuestion';
 import NameQuestion from './NameQuestion';
 
 const QuestionData = ({
@@ -60,6 +62,8 @@ const QuestionData = ({
       return <TextboxQuestion {...commonProps} />;
     case phoneQuestion.id:
       return <PhoneQuestion {...commonProps} />;
+    case participantReport.id:
+      return <ParticipantReportQuestion {...commonProps} />;
     case dateQuestion.id:
       return <DateQuestion {...commonProps} />;
     case nameQuestion.id:

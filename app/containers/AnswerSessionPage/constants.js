@@ -26,6 +26,9 @@ export const REDIRECT_TO_PREVIEW = 'app/AnswerSessionPage/REDIRECT_TO_PREVIEW';
 export const NUMBER_VALIDATION_ERROR =
   'app/AnswerSessionPage/NUMBER_VALIDATION_ERROR';
 
+export const PARTICIPANT_REPORT_VALIDATION_ERROR =
+  'app/AnswerSessionPage/PARTICIPANT_REPORT_VALIDATION_ERROR';
+
 export const CHANGE_PREVIEW_MODE = 'app/AnswerSessionPage/CHANGE_PREVIEW_MODE';
 
 export const CHANGE_IS_ANIMATING = 'app/AnswerSessionPage/CHANGE_IS_ANIMATING';

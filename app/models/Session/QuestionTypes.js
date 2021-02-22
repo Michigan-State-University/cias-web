@@ -80,6 +80,12 @@ export const dateQuestion = new QuestionType(
   colors.bluewood,
 );
 
+export const participantReport = new QuestionType(
+  'Question::ParticipantReport',
+  'ParticipantReport',
+  colors.electricViolet,
+);
+
 export const currencyQuestion = new QuestionType(
   'Question::Currency',
   'Currency',
@@ -103,4 +109,5 @@ export const QuestionTypes = [
   urlQuestion,
   feedbackQuestion,
   finishQuestion,
+  participantReport,
 ];

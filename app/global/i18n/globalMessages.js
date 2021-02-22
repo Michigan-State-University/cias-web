@@ -25,6 +25,7 @@ import {
   dateQuestion,
   nameQuestion,
   currencyQuestion,
+  participantReport,
 } from 'models/Session/QuestionTypes';
 
 export const scope = 'app.GlobalMessages';
@@ -128,6 +129,10 @@ export default defineMessages({
     [nameQuestion.id]: {
       id: `${scope}.${nameQuestion.id}`,
       defaultMessage: 'Name',
+    },
+    [participantReport.id]: {
+      id: `${scope}.${participantReport.id}`,
+      defaultMessage: 'Participant Report',
     },
     [numberQuestion.id]: {
       id: `${scope}.${numberQuestion.id}`,

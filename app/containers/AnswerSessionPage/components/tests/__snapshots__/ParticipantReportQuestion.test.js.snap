@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Box-sc-1vhutan-0 gXkPFz"
+    width="100%"
+  >
+    <div
+      class="Column-sc-4zswzq-0 bGMBAA"
+    >
+      <div
+        class="Row-y1cs0u-0 dskFsL"
+      >
+        <p
+          class="Text-e4p0w3-0 fFURPd"
+        >
+          Would you like to receive a report generated from your responses?
+        </p>
+      </div>
+      <div
+        class="Row-y1cs0u-0 goQUzT"
+      >
+        <img
+          class="Img-sc-55j3su-0 eGlrSF"
+          src="IMAGE_MOCK"
+        />
+        <p
+          class="Text-e4p0w3-0 fFURPd"
+        >
+          Yes
+        </p>
+      </div>
+      <div
+        class="Row-y1cs0u-0 kjTQqN"
+      >
+        <img
+          class="Img-sc-55j3su-0 eGlrSF"
+          src="IMAGE_MOCK"
+        />
+        <p
+          class="Text-e4p0w3-0 fFURPd"
+        >
+          No
+        </p>
+      </div>
+      <div
+        class="Column-sc-4zswzq-0 fGhsBV"
+      >
+        <p
+          class="Text-e4p0w3-0 fFURPd"
+        >
+          Provide your email
+        </p>
+        <div
+          class="Box-sc-1vhutan-0 RwIVu"
+          width="100%"
+        >
+          <input
+            class="Input-t9j2q5-0 cfspKj"
+            disabled=""
+            placeholder="Email..."
+            type="text"
+            value=""
+            width="100%"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

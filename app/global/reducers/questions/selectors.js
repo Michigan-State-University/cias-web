@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 import get from 'lodash/get';
 import uniqBy from 'lodash/uniqBy';
 
-import { nameQuestion } from 'models/Session/QuestionTypes';
+import { nameQuestion, participantReport } from 'models/Session/QuestionTypes';
 import { initialState } from './reducer';
 
 export const selectQuestions = state => state.questions || initialState;
@@ -17,6 +17,13 @@ export const makeSelectQuestions = () =>
   createSelector(
     selectQuestions,
     substate => substate.questions,
+  );
+
+export const makeSelectFilteredQuestions = () =>
+  createSelector(
+    selectQuestions,
+    substate =>
+      substate.questions.filter(({ type }) => type !== participantReport.id),
   );
 
 export const makeSelectSelectedQuestionId = () =>
@@ -86,4 +93,11 @@ export const makeSelectNameQuestionExists = () =>
   createSelector(
     selectQuestions,
     substate => substate.questions?.some(elem => elem.type === nameQuestion.id),
+  );
+
+export const makeSelectParticipantReportQuestionExists = () =>
+  createSelector(
+    selectQuestions,
+    substate =>
+      substate.questions?.some(elem => elem.type === participantReport.id),
   );
