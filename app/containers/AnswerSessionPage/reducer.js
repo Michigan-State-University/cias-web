@@ -20,11 +20,11 @@ import {
   SET_QUESTION_INDEX,
   START_SESSION,
   CHANGE_PREVIEW_MODE,
-  RESET_SESSION,
   CHANGE_IS_ANIMATING,
   SET_FEEDBACK_SCREEN_SETTINGS,
   PHONETIC_PREVIEW_REQUEST,
   PHONETIC_PREVIEW_SUCCESS,
+  RESET_ANSWERS,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -126,7 +126,7 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case CHANGE_PREVIEW_MODE:
         draft.previewMode = payload.previewMode;
         break;
-      case RESET_SESSION:
+      case RESET_ANSWERS:
         draft.answers = initialState.answers;
         draft.questionIndex = 0;
         draft.interventionStarted = false;

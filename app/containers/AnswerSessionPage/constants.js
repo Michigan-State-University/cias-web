@@ -20,6 +20,8 @@ export const SET_QUESTION_INDEX = 'app/AnswerSessionPage/SET_QUESTION_INDEX';
 export const START_SESSION = 'app/AnswerSessionPage/START_SESSION';
 
 export const RESET_SESSION = 'app/AnswerSessionPage/RESET_SESSION';
+export const RESET_ANSWERS = 'app/AnswerSessionPage/RESET_ANSWERS';
+export const REDIRECT_TO_PREVIEW = 'app/AnswerSessionPage/REDIRECT_TO_PREVIEW';
 
 export const NUMBER_VALIDATION_ERROR =
   'app/AnswerSessionPage/NUMBER_VALIDATION_ERROR';

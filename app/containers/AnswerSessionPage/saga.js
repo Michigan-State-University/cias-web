@@ -14,11 +14,15 @@ import { makeSelectLocation } from 'containers/App/selectors';
 import { ternary } from 'utils/ternary';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { NotAnswerableQuestions } from 'models/Session/utils';
+import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
+import LocalStorageService from 'utils/localStorageService';
 import {
   FETCH_QUESTIONS,
   SUBMIT_ANSWER_REQUEST,
   PHONETIC_PREVIEW_REQUEST,
   PHONETIC_PREVIEW_FAILURE,
+  REDIRECT_TO_PREVIEW,
+  RESET_SESSION,
 } from './constants';
 import {
   fetchQuestionsFailure,
@@ -27,6 +31,7 @@ import {
   submitAnswerFailure,
   setQuestionIndex,
   phoneticPreviewSuccess,
+  resetAnswers,
 } from './actions';
 import { makeSelectAnswers } from './selectors';
 import messages from './messages';
@@ -149,9 +154,31 @@ function* phoneticPreviewAsync({ payload: { text } }) {
   }
 }
 
+function* redirectToPreview({
+  payload: { interventionId, sessionId, questionId },
+}) {
+  yield call(logInGuest, { payload: { sessionId } });
+  yield call(
+    window.open,
+    `/interventions/${interventionId}/sessions/${sessionId}/preview/${questionId}`,
+  );
+}
+
+function* resetSession({ payload: { sessionId } }) {
+  yield call(LocalStorageService.clearGuestHeaders);
+  yield call(logInGuest, { payload: { sessionId } });
+  yield call(fetchQuestionsAsync, { payload: { sessionId } });
+  yield put(resetAnswers());
+}
+
 // Individual exports for testing
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(FETCH_QUESTIONS, fetchQuestionsAsync);
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
   yield takeLatest(PHONETIC_PREVIEW_REQUEST, phoneticPreviewAsync);
+  yield takeLatest(RESET_SESSION, resetSession);
+}
+
+export function* redirectToPreviewSaga() {
+  yield takeLatest(REDIRECT_TO_PREVIEW, redirectToPreview);
 }

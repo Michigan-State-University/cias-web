@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
-.c3 {
+.c2 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -19,12 +19,6 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
   height: 35px;
   padding-right: 11px;
   padding-left: 11px;
-}
-
-.c2 {
-  font-size: 13px;
-  font-weight: bold;
-  pointer-events: auto;
 }
 
 .c0 {
@@ -49,7 +43,7 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
   justify-content: center;
 }
 
-.c4 {
+.c3 {
   display: inline;
 }
 
@@ -60,7 +54,7 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
 }
 
 @media only screen and (max-width:1400px) {
-  .c4 {
+  .c3 {
     display: none;
   }
 }
@@ -68,29 +62,24 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
 <div
   class="c0 c1"
 >
-  <a
+  <button
     class="c2"
-    href="/"
+    color="secondary"
+    height="35"
   >
-    <button
-      class="c3"
-      color="secondary"
-      height="35"
-    >
-      <img
-        alt="eye"
-        src="IMAGE_MOCK"
-      />
-      <p
-        class="c4 preview-text"
-      />
-    </button>
-  </a>
+    <img
+      alt="eye"
+      src="IMAGE_MOCK"
+    />
+    <p
+      class="c3 preview-text"
+    />
+  </button>
 </div>
 `;
 
 exports[`<PreviewButton /> Should render and match the snapshot of disabled button 1`] = `
-.c3 {
+.c2 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -113,12 +102,6 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
   padding-left: 11px;
 }
 
-.c2 {
-  font-size: 13px;
-  font-weight: bold;
-  pointer-events: none;
-}
-
 .c0 {
   width: auto;
   height: auto;
@@ -141,7 +124,7 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
   justify-content: center;
 }
 
-.c4 {
+.c3 {
   display: inline;
 }
 
@@ -152,7 +135,7 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
 }
 
 @media only screen and (max-width:1400px) {
-  .c4 {
+  .c3 {
     display: none;
   }
 }
@@ -160,25 +143,19 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
 <div
   class="c0 c1"
 >
-  <a
+  <button
     class="c2"
+    color="secondary"
     disabled=""
-    href="/"
+    height="35"
   >
-    <button
-      class="c3"
-      color="secondary"
-      disabled=""
-      height="35"
-    >
-      <img
-        alt="eye"
-        src="IMAGE_MOCK"
-      />
-      <p
-        class="c4 preview-text"
-      />
-    </button>
-  </a>
+    <img
+      alt="eye"
+      src="IMAGE_MOCK"
+    />
+    <p
+      class="c3 preview-text"
+    />
+  </button>
 </div>
 `;

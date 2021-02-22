@@ -13,8 +13,9 @@ import Spinner from 'components/Spinner';
 import PreviewButton from 'components/PreviewButton';
 import Img from 'components/Img';
 import Box from 'components/Box';
-import Circle from 'components/Circle';
 import ActionIcon from 'components/ActionIcon';
+import Circle from 'components/Circle';
+
 import {
   makeSelectQuestionsLength,
   makeSelectSelectedQuestionId,
@@ -30,6 +31,8 @@ import { colors, themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
 
 import backButton from 'assets/svg/arrow-black.svg';
+
+import { redirectToPreview } from 'containers/AnswerSessionPage/actions';
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit, canPreview } from 'models/Status/statusPermissions';
 import messages from './messages';
@@ -59,6 +62,7 @@ const InterventionNavbar = ({
   questionGroupsEditing,
   interventionStatus,
   match: { params },
+  redirectToPreviewAction,
 }) => {
   const { interventionId, sessionId } = params;
 
@@ -75,6 +79,9 @@ const InterventionNavbar = ({
   const editingPossible = canEdit(interventionStatus);
 
   const isSaving = questionGroupsEditing || interventionEditing;
+
+  const handleRedirect = () =>
+    redirectToPreviewAction(interventionId, sessionId, selectedQuestion);
 
   return (
     <Row align="center" justify="between" width="100%" mr={35}>
@@ -164,10 +171,9 @@ const InterventionNavbar = ({
           )}
         </SaveInfoContainer>
         <PreviewButton
-          to={`/interventions/${interventionId}/sessions/${sessionId}/preview/${selectedQuestion}`}
           previewDisabled={previewDisabled}
           text={formatMessage(messages.previewCurrent)}
-          target="_blank"
+          handleClick={handleRedirect}
         />
       </Box>
     </Row>
@@ -177,8 +183,8 @@ const InterventionNavbar = ({
 InterventionNavbar.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
-    reportsCount: PropTypes.number,
     id: PropTypes.string,
+    reportsCount: PropTypes.number,
   }),
   updateSessionName: PropTypes.func,
   intl: intlShape,
@@ -189,6 +195,7 @@ InterventionNavbar.propTypes = {
   questionGroupsEditing: PropTypes.bool,
   match: PropTypes.object,
   interventionStatus: PropTypes.string,
+  redirectToPreviewAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -202,6 +209,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   updateSessionName: editSessionRequest,
+  redirectToPreviewAction: redirectToPreview,
 };
 
 export default compose(

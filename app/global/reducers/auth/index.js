@@ -12,6 +12,7 @@ export {
   changeNotificationsSettingsRequest,
   confirmPhoneNumberRequest,
   sendSmsTokenRequest,
+  logInGuestRequest,
 } from './actions';
 export { authReducer, initialState } from './reducer';
 export {

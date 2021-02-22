@@ -21,6 +21,8 @@ import {
   SET_FEEDBACK_SCREEN_SETTINGS,
   PHONETIC_PREVIEW_REQUEST,
   PHONETIC_PREVIEW_SUCCESS,
+  REDIRECT_TO_PREVIEW,
+  RESET_ANSWERS,
 } from './constants';
 
 export const fetchQuestions = sessionId =>
@@ -60,7 +62,17 @@ export const setQuestionIndex = ({ index, question }) =>
 
 export const startSession = () => actionBuilder(START_SESSION, {});
 
-export const resetSession = () => actionBuilder(RESET_SESSION, {});
+export const resetSession = sessionId =>
+  actionBuilder(RESET_SESSION, { sessionId });
+
+export const resetAnswers = () => actionBuilder(RESET_ANSWERS, {});
+
+export const redirectToPreview = (interventionId, sessionId, questionId) =>
+  actionBuilder(REDIRECT_TO_PREVIEW, {
+    interventionId,
+    sessionId,
+    questionId,
+  });
 
 export const changePreviewMode = previewMode =>
   actionBuilder(CHANGE_PREVIEW_MODE, { previewMode });
