@@ -8,14 +8,12 @@ import { createStructuredSelector } from 'reselect';
 
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Img from 'components/Img';
-import Loader from 'components/Loader';
 import Text from 'components/Text';
-import playButton from 'assets/svg/play-button-1.svg';
-import stopButton from 'assets/svg/stop-button-1.svg';
-import { StyledInput } from 'components/Input/StyledInput';
-import { colors, themeColors } from 'theme';
-import { makeSelectLoader } from 'global/reducers/questions';
+import { themeColors } from 'theme';
+import {
+  makeSelectLoader,
+  makeSelectNameQuestionExists,
+} from 'global/reducers/questions';
 import { speechType } from 'models/Narrator/BlockTypes';
 import { splitAndKeep } from 'utils/splitAndKeep';
 import {
@@ -26,8 +24,7 @@ import {
 
 import messages from '../../messages';
 import { updateReflection } from '../../../actions';
-
-const BUTTON_MARGIN = '10px';
+import SpeechInput from '../SpeechInput';
 
 const Reflection = ({
   formatMessage,
@@ -42,6 +39,7 @@ const Reflection = ({
   updateNarratorPreviewAnimation,
   block,
   disabled,
+  nameQuestionExists,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(reflection.text, ''));
@@ -88,39 +86,22 @@ const Reflection = ({
     setHasFocus(false);
   };
 
-  const button = isPlaying ? stopButton : playButton;
-
-  const renderButton = () => {
-    if (isSpeechUpdating) return <Loader size={24} type="inline" />;
-
-    return <Img src={button} onClick={handleButtonClick} clickable />;
-  };
-
   return (
     <Column>
       <Box mt={15}>{reflection.payload}</Box>
       {inputVisible ? (
-        <Box position="relative">
-          <Box mt={15} bg={colors.linkWater} width="100%">
-            <StyledInput
-              disabled={disabled}
-              type="multiline"
-              rows="10"
-              placeholder={formatMessage(messages.speechPlaceholder)}
-              value={text}
-              onBlur={handleBlur}
-              onFocus={() => setHasFocus(true)}
-            />
-          </Box>
-          <Box
-            position="absolute"
-            bottom={BUTTON_MARGIN}
-            right={BUTTON_MARGIN}
-            hidden={hasFocus}
-          >
-            {renderButton()}
-          </Box>
-        </Box>
+        <SpeechInput
+          formatMessage={formatMessage}
+          setHasFocus={setHasFocus}
+          isSpeechUpdating={isSpeechUpdating}
+          isPlaying={isPlaying}
+          hasFocus={hasFocus}
+          handleButtonClick={handleButtonClick}
+          handleBlur={handleBlur}
+          text={text}
+          disabled={disabled}
+          nameQuestionExists={nameQuestionExists}
+        />
       ) : (
         <Text
           disabled={disabled}
@@ -153,11 +134,13 @@ Reflection.propTypes = {
     animation: PropTypes.string,
   }),
   disabled: PropTypes.bool,
+  nameQuestionExists: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   updateLoader: makeSelectLoader('updateQuestionLoading'),
   previewData: makeSelectPreviewData(),
+  nameQuestionExists: makeSelectNameQuestionExists(),
 });
 
 const mapDispatchToProps = {

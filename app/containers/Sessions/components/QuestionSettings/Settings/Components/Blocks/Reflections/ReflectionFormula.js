@@ -7,21 +7,16 @@ import { connect } from 'react-redux';
 import join from 'lodash/join';
 
 import Column from 'components/Column';
-import Box from 'components/Box';
-import { StyledInput } from 'components/Input/StyledInput';
-import Loader from 'components/Loader';
 import Img from 'components/Img';
 import Text from 'components/Text';
 import Row from 'components/Row';
 import InequalityChooser from 'components/InequalityChooser';
-
-import playButton from 'assets/svg/play-button-1.svg';
-import stopButton from 'assets/svg/stop-button-1.svg';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
-import { colors } from 'theme';
-
-import { makeSelectLoader } from 'global/reducers/questions';
+import {
+  makeSelectLoader,
+  makeSelectNameQuestionExists,
+} from 'global/reducers/questions';
 import {
   makeSelectPreviewData,
   updatePreviewData,
@@ -32,8 +27,7 @@ import { speechType } from 'models/Narrator/BlockTypes';
 import { splitAndKeep } from 'utils/splitAndKeep';
 import messages from '../../messages';
 import { removeFormulaCase, updateFormulaCase } from './actions';
-
-const BUTTON_MARGIN = '10px';
+import SpeechInput from '../SpeechInput';
 
 const Reflection = ({
   formatMessage,
@@ -50,6 +44,7 @@ const Reflection = ({
   updateText,
   updateCase,
   disabled,
+  nameQuestionExists,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(reflection.text, ''));
@@ -95,14 +90,6 @@ const Reflection = ({
     setHasFocus(false);
   };
 
-  const button = isPlaying ? stopButton : playButton;
-
-  const renderButton = () => {
-    if (isSpeechUpdating) return <Loader size={24} type="inline" />;
-
-    return <Img src={button} onClick={handleButtonClick} clickable />;
-  };
-
   return (
     <Column mb={16}>
       <Row
@@ -135,27 +122,18 @@ const Reflection = ({
         )}
       </Row>
       <Row>
-        <Box position="relative" width="100%">
-          <Box bg={colors.linkWater}>
-            <StyledInput
-              disabled={disabled}
-              type="multiline"
-              rows="10"
-              placeholder={formatMessage(messages.speechPlaceholder)}
-              value={text}
-              onBlur={handleBlur}
-              onFocus={() => setHasFocus(true)}
-            />
-          </Box>
-          <Box
-            position="absolute"
-            bottom={BUTTON_MARGIN}
-            right={BUTTON_MARGIN}
-            hidden={hasFocus}
-          >
-            {renderButton()}
-          </Box>
-        </Box>
+        <SpeechInput
+          formatMessage={formatMessage}
+          setHasFocus={setHasFocus}
+          isSpeechUpdating={isSpeechUpdating}
+          isPlaying={isPlaying}
+          hasFocus={hasFocus}
+          handleButtonClick={handleButtonClick}
+          handleBlur={handleBlur}
+          text={text}
+          disabled={disabled}
+          nameQuestionExists={nameQuestionExists}
+        />
       </Row>
     </Column>
   );
@@ -180,11 +158,13 @@ Reflection.propTypes = {
   updateCase: PropTypes.func,
   updateText: PropTypes.func,
   disabled: PropTypes.bool,
+  nameQuestionExists: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   updateLoader: makeSelectLoader('updateQuestionLoading'),
   previewData: makeSelectPreviewData(),
+  nameQuestionExists: makeSelectNameQuestionExists(),
 });
 
 const mapDispatchToProps = {

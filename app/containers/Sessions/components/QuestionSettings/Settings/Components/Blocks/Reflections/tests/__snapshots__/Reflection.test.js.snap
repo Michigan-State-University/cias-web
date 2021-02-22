@@ -11,30 +11,34 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
       1
     </div>
     <div
-      class="Box-sc-1vhutan-0 kjemns"
+      class="Column-sc-4zswzq-0 ekpwZH"
     >
       <div
-        class="Box-sc-1vhutan-0 iMXQSQ"
-        width="100%"
+        class="Box-sc-1vhutan-0 kjemns"
       >
-        <textarea
-          class="TextArea-sc-175uiux-0 cIMVkN"
-          data-cy="text-area"
-          height="auto"
-          placeholder="Enter speech here..."
-          rows="10"
+        <div
+          class="Box-sc-1vhutan-0 iMXQSQ"
           width="100%"
         >
-          1
-        </textarea>
-      </div>
-      <div
-        class="Box-sc-1vhutan-0 hmgyEc"
-      >
-        <img
-          class="Img-sc-55j3su-0 kDGTCK"
-          src="IMAGE_MOCK"
-        />
+          <textarea
+            class="TextArea-sc-175uiux-0 cIMVkN"
+            data-cy="text-area"
+            height="auto"
+            placeholder="Enter speech here..."
+            rows="10"
+            width="100%"
+          >
+            1
+          </textarea>
+        </div>
+        <div
+          class="Box-sc-1vhutan-0 hmgyEc"
+        >
+          <img
+            class="Img-sc-55j3su-0 kDGTCK"
+            src="IMAGE_MOCK"
+          />
+        </div>
       </div>
     </div>
   </div>

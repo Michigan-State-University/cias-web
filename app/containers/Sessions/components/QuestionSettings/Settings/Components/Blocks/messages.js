@@ -199,4 +199,12 @@ export default defineMessages({
     id: `${scope}.resetAnimationPosition`,
     defaultMessage: 'Reset character to previous position',
   },
+  addNameVariable: {
+    id: `${scope}.addNameVariable`,
+    defaultMessage: '+ Add Name Variable',
+  },
+  speechPlaceholder: {
+    id: `${scope}.speechPlaceholder`,
+    defaultMessage: 'Enter speech here...',
+  },
 });

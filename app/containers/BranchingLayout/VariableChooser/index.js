@@ -28,6 +28,7 @@ import {
   makeSelectGetQuestionGroupLoader,
   makeSelectQuestionGroups,
 } from 'global/reducers/questionGroups';
+import { nameQuestion } from 'models/Session/QuestionTypes';
 import messages from './messages';
 
 const VariableChooser = ({
@@ -54,8 +55,13 @@ const VariableChooser = ({
   useOutsideClick(variableChooser, () => setOpen(false), visible);
 
   const displayContent = () => {
-    if (variables && variables.length)
-      return variables.map((variable, index) => (
+    const filteredVariables = variables?.length
+      ? variables.filter(
+          ({ variable }) => variable !== nameQuestion.reservedVariable,
+        )
+      : undefined;
+    if (filteredVariables && filteredVariables.length)
+      return filteredVariables.map((variable, index) => (
         <Row
           data-testid={`${id}-select-variable`}
           key={`${id}-select-variable-${index}`}
