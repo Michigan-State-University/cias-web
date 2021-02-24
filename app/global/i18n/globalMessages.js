@@ -25,6 +25,7 @@ import {
   dateQuestion,
   nameQuestion,
   currencyQuestion,
+  thirdPartyQuestion,
   participantReport,
 } from 'models/Session/QuestionTypes';
 
@@ -61,6 +62,10 @@ export default defineMessages({
     variableScorePlaceholder: {
       id: `${scope}.variableScorePlaceholder`,
       defaultMessage: 'Score',
+    },
+    emailPlaceholder: {
+      id: `${scope}.emailPlaceholder`,
+      defaultMessage: 'Email',
     },
     value: {
       id: `${scope}.value`,
@@ -173,6 +178,10 @@ export default defineMessages({
     [currencyQuestion.id]: {
       id: `${scope}.${currencyQuestion.id}`,
       defaultMessage: 'Currency',
+    },
+    [thirdPartyQuestion.id]: {
+      id: `${scope}.${thirdPartyQuestion.id}`,
+      defaultMessage: 'Third Party',
     },
   },
   statuses: {

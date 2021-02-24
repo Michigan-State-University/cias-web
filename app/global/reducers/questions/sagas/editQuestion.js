@@ -3,7 +3,10 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import get from 'lodash/get';
 
-import { getAllVariables, NotAnswerableQuestions } from 'models/Session/utils';
+import {
+  getAllVariables,
+  QuestionsWithoutVariable,
+} from 'models/Session/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
@@ -31,7 +34,7 @@ import {
 } from '../selectors';
 
 const validateVariable = (payload, question, variables) => {
-  if (NotAnswerableQuestions.includes(question.type)) {
+  if (QuestionsWithoutVariable.includes(question.type)) {
     return;
   }
   const duplicateError = new Error(formatMessage(messages.duplicateVariable));

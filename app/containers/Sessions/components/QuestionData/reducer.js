@@ -10,6 +10,7 @@ import {
   dateQuestion,
   nameQuestion,
   currencyQuestion,
+  thirdPartyQuestion,
 } from 'models/Session/QuestionTypes';
 
 import currencyQuestionReducer from './CurrencyQuestion/reducer';
@@ -24,10 +25,13 @@ import textboxQuestionReducer from './TextboxQuestion/reducer';
 import urlQuestionReducer from './UrlQuestion/reducer';
 import feedbackQuestionReducer from './FeedbackQuestion/reducer';
 import visualAnalogueScaleQuestionReducer from './VisualAnalogueScaleQuestion/reducer';
+import thirdPartyQuestionReducer from './ThirdPartyQuestion/reducer';
 
 /* eslint-disable default-case, no-param-reassign */
 const questionDataReducer = (question, data) => {
   switch (question.type) {
+    case thirdPartyQuestion.id:
+      return thirdPartyQuestionReducer(question, data);
     case singleQuestion.id:
       return singleQuestionReducer(question, data);
     case multiQuestion.id:

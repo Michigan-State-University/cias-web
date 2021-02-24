@@ -24,6 +24,7 @@ import {
   dateQuestion,
   nameQuestion,
   currencyQuestion,
+  thirdPartyQuestion,
   participantReport,
 } from 'models/Session/QuestionTypes';
 
@@ -40,6 +41,7 @@ import PhoneQuestion from './PhoneQuestion';
 import DateQuestion from './DateQuestion';
 import ParticipantReportQuestion from './ParticipantReportQuestion';
 import NameQuestion from './NameQuestion';
+import ThirdPartyQuestion from './ThirdPartyQuestion';
 
 const QuestionData = ({
   selectedQuestionType,
@@ -54,6 +56,8 @@ const QuestionData = ({
   };
 
   switch (selectedQuestionType) {
+    case thirdPartyQuestion.id:
+      return <ThirdPartyQuestion {...commonProps} />;
     case singleQuestion.id:
       return <SingleQuestion {...commonProps} />;
     case multiQuestion.id:

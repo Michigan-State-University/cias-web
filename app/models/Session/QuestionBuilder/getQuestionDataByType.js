@@ -6,6 +6,7 @@ import {
   informationQuestion,
   feedbackQuestion,
   nameQuestion,
+  thirdPartyQuestion,
 } from '../QuestionTypes';
 
 export const getQuestionDataByType = type => {
@@ -68,6 +69,11 @@ export const getQuestionDataByType = type => {
       return {
         data: [{ payload: '' }],
         variable: { name: nameQuestion.reservedVariable },
+      };
+
+    case thirdPartyQuestion.id:
+      return {
+        data: [{ payload: '', value: '' }],
       };
 
     default:

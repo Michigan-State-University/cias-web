@@ -19,6 +19,12 @@ export const textboxQuestion = new QuestionType(
   colors.tangerine,
 );
 
+export const thirdPartyQuestion = new QuestionType(
+  'Question::ThirdParty',
+  'Third Party',
+  colors.pistachio,
+);
+
 export const nameQuestion = new QuestionType(
   'Question::Name',
   'Name',
@@ -110,4 +116,5 @@ export const QuestionTypes = [
   feedbackQuestion,
   finishQuestion,
   participantReport,
+  thirdPartyQuestion,
 ];
