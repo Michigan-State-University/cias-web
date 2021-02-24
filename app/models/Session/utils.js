@@ -61,7 +61,7 @@ export const getPreviousQuestions = (currentQuestion, questions, groups) => {
     ({ id }) => id === currentQuestion.question_group_id,
   );
   const filteredGroups = groups.filter(
-    ({ position }) => position <= currentQuestionGroup.position,
+    ({ position }) => position <= currentQuestionGroup?.position,
   );
   const sortedGroups = sortBy(filteredGroups, 'position');
 

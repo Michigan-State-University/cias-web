@@ -40,12 +40,17 @@ const VariableChooser = ({
   visible,
   setOpen,
   loading,
+  includeAllVariables,
 }) => {
   const { id } = selectedQuestion;
   const previousQuestions = useMemo(
-    () => getPreviousQuestions(selectedQuestion, questions, groups),
+    () =>
+      includeAllVariables
+        ? questions
+        : getPreviousQuestions(selectedQuestion, questions, groups),
     [selectedQuestion, questions, groups],
   );
+
   const variables = getAllVariables(previousQuestions, {
     structure: 'flat',
     include: ['id', 'subtitle'],
@@ -132,6 +137,7 @@ VariableChooser.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
   visible: PropTypes.bool,
   loading: PropTypes.bool,
+  includeAllVariables: PropTypes.bool,
   setOpen: PropTypes.func,
 };
 

@@ -1,8 +1,9 @@
 import { takeLatest, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { ReportTemplateBuilder } from 'models/ReportTemplate/ReportTemplateBuilder';
-import { makeSelectSelectedReportId } from '../selectors';
+import { mapJsonApiToObject } from 'utils/jsonApiMapper';
+import { ReportTemplate } from 'models/ReportTemplate';
+import { makeSelectSelectedReport } from '../selectors';
 import { FETCH_REPORT_TEMPLATES_REQUEST } from '../constants';
 import {
   fetchReportTemplatesSuccess,
@@ -14,20 +15,20 @@ function* fetchReportTemplates({ payload: { sessionId } }) {
   const requestUrl = `/v1/sessions/${sessionId}/report_templates`;
 
   try {
-    const {
-      data: { data },
-    } = yield axios.get(requestUrl);
+    const { data } = yield axios.get(requestUrl);
 
-    const mappedData = data.map(item =>
-      new ReportTemplateBuilder().fromJson(item).build(),
+    const mappedData = mapJsonApiToObject(data, 'reportTemplate') ?? [];
+
+    yield put(
+      fetchReportTemplatesSuccess(
+        mappedData.map(item => new ReportTemplate({ ...item })),
+      ),
     );
 
-    yield put(fetchReportTemplatesSuccess(mappedData));
+    const selectedReport = yield select(makeSelectSelectedReport());
 
-    const selectedReport = yield select(makeSelectSelectedReportId());
-
-    if (!selectedReport && mappedData.length)
-      yield put(selectReportTemplate(mappedData[0].id));
+    if (!selectedReport || selectedReport?.sessionId !== sessionId)
+      yield put(selectReportTemplate(mappedData[mappedData?.length - 1]?.id));
   } catch (error) {
     yield put(fetchReportTemplatesFailure(error));
   }

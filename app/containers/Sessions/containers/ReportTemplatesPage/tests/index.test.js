@@ -16,7 +16,7 @@ describe('<ReportTemplatesPage />', () => {
     createModalForTests();
   });
   const defaultProps = {
-    match: { params: { id: '12ad120dj012-3a' } },
+    match: { params: { id: 'report-template-1' } },
     getSession: jest.fn(),
     editSession: jest.fn(),
     getQuestions: jest.fn(),

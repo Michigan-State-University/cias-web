@@ -27,6 +27,8 @@ import {
   makeSelectSessionEditLoader,
 } from 'global/reducers/session';
 import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
+import { makeSelectReportTemplatesLoaders } from 'global/reducers/reportTemplates';
+
 import { colors, themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
 
@@ -52,7 +54,8 @@ const getActiveTab = (path, formatMessage) => {
 };
 
 const InterventionNavbar = ({
-  session: { name, reportsCount },
+  session: { name, reportTemplatesCount },
+  reportsLoaders: { updateReportTemplateLoading },
   updateSessionName,
   intl: { formatMessage },
   location: { pathname },
@@ -78,7 +81,8 @@ const InterventionNavbar = ({
 
   const editingPossible = canEdit(interventionStatus);
 
-  const isSaving = questionGroupsEditing || interventionEditing;
+  const isSaving =
+    questionGroupsEditing || interventionEditing || updateReportTemplateLoading;
 
   const handleRedirect = () =>
     redirectToPreviewAction(interventionId, sessionId, selectedQuestion);
@@ -136,12 +140,12 @@ const InterventionNavbar = ({
             <StyledLink
               to={`/interventions/${interventionId}/sessions/${sessionId}/report-templates`}
             >
-              <Row align="center">
+              <Row style={{ lineHeight: 'normal' }} align="center">
                 {formatMessage(messages.reportTemplates)}
                 <Circle
                   bg={themeColors.secondary}
                   color={colors.white}
-                  child={reportsCount ?? 0}
+                  child={reportTemplatesCount ?? 0}
                   size="16px"
                   fontSize={11}
                   ml={5}
@@ -183,8 +187,8 @@ const InterventionNavbar = ({
 InterventionNavbar.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
+    reportTemplatesCount: PropTypes.number,
     id: PropTypes.string,
-    reportsCount: PropTypes.number,
   }),
   updateSessionName: PropTypes.func,
   intl: intlShape,
@@ -195,6 +199,7 @@ InterventionNavbar.propTypes = {
   questionGroupsEditing: PropTypes.bool,
   match: PropTypes.object,
   interventionStatus: PropTypes.string,
+  reportsLoaders: PropTypes.object,
   redirectToPreviewAction: PropTypes.func,
 };
 
@@ -204,6 +209,7 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestionId(),
   interventionEditing: makeSelectSessionEditLoader(),
   questionGroupsEditing: makeSelectQuestionGroupsLoader(),
+  reportsLoaders: makeSelectReportTemplatesLoaders(),
   interventionStatus: makeSelectInterventionStatus(),
 });
 

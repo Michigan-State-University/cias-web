@@ -14,15 +14,15 @@ const Option = ({ withBorder, fontWeight, label, value, action, disabled }) => {
     <Row
       align="center"
       justify="between"
-      pb={15}
-      mb={15}
       borderBottom={
         withBorder
           ? `${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`
           : null
       }
     >
-      <Text fontWeight={fontWeight}>{label}</Text>
+      <Text fontWeight={fontWeight} mr={10}>
+        {label}
+      </Text>
       <Switch disabled={disabled} checked={value} onToggle={handleToggle} />
     </Row>
   );

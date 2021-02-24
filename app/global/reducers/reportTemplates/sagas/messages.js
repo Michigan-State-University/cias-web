@@ -29,4 +29,13 @@ export default defineMessages({
     id: `${scope}.deleteReportTemplateLogoFailure`,
     defaultMessage: 'Failed to delete the report template logo',
   },
+  generateTestReportSuccess: {
+    id: `${scope}.generateTestReportSuccess`,
+    defaultMessage:
+      'Test Report generation is in progress. You will receive an email with Test Report as an attachment when finished.',
+  },
+  generateTestReportFailure: {
+    id: `${scope}.generateTestReportFailure`,
+    defaultMessage: 'Failed to generate Test Report.',
+  },
 });

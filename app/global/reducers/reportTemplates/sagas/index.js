@@ -5,6 +5,15 @@ import fetchReportTemplates from './fetchReportTemplates';
 import updateReportTemplate from './updateReportTemplate';
 import deleteReportTemplate from './deleteReportTemplate';
 import deleteReportTemplateLogo from './deleteReportTemplateLogo';
+import fetchSingleReportTemplate from './fetchSingleReportTemplate';
+import addSectionCase from './addSectionCase';
+import addTemplateSection from './addTemplateSection';
+import deleteSectionCase from './deleteSectionCase';
+import deleteSectionCaseImage from './deleteSectionCaseImage';
+import deleteTemplateSection from './deleteTemplateSection';
+import updateSectionCase from './updateSectionCase';
+import updateTemplateSection from './updateTemplateSection';
+import generateTestReport from './generateTestReport';
 
 export default function* reportTemplatesSaga() {
   yield all([
@@ -13,5 +22,14 @@ export default function* reportTemplatesSaga() {
     updateReportTemplate(),
     deleteReportTemplate(),
     deleteReportTemplateLogo(),
+    fetchSingleReportTemplate(),
+    addSectionCase(),
+    addTemplateSection(),
+    deleteSectionCase(),
+    deleteSectionCaseImage(),
+    deleteTemplateSection(),
+    updateSectionCase(),
+    updateTemplateSection(),
+    generateTestReport(),
   ]);
 }

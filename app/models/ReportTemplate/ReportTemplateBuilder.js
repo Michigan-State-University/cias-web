@@ -1,8 +1,9 @@
-/* eslint-disable camelcase */
+/* eslint-disable camelcase,no-unused-vars */
 import { defaultMapper } from 'utils/mapResponseObjects';
 import objectToCamelCase from 'utils/objectToCamelCase';
 import { ReportFor } from 'global/reducers/reportTemplates/constants';
 import { ReportTemplate } from './ReportTemplate';
+import { TemplateSection } from './TemplateSection';
 
 export class ReportTemplateBuilder {
   reportFor = ReportFor.participant;
@@ -68,11 +69,23 @@ export class ReportTemplateBuilder {
   };
 
   /**
+   * @param  {TemplateSection[]} sections
+   * @returns  {ReportTemplateBuilder}
+   */
+  withSections = sections => {
+    this.sections = sections;
+
+    return this;
+  };
+
+  /**
    * @param  {object} json
    * @returns  {ReportTemplateBuilder}
    */
   fromJson = json => {
-    const reportTemplate = objectToCamelCase(defaultMapper(json));
+    const reportTemplate = new ReportTemplate(
+      objectToCamelCase(defaultMapper(json)),
+    );
 
     this.id = reportTemplate.id;
     this.name = reportTemplate.name;
@@ -80,6 +93,8 @@ export class ReportTemplateBuilder {
     this.summary = reportTemplate.summary;
     this.sessionId = reportTemplate.sessionId;
     this.logoUrl = reportTemplate.logoUrl;
+    this.logoUrl = reportTemplate.logoUrl;
+    this.sections = reportTemplate.sections ?? [];
 
     return this;
   };
@@ -95,5 +110,6 @@ export class ReportTemplateBuilder {
       summary: this.summary,
       logoUrl: this.logoUrl,
       sessionId: this.sessionId,
+      sections: this.sections,
     });
 }

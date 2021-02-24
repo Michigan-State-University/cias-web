@@ -2,7 +2,8 @@ import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
-import { ReportTemplateBuilder } from 'models/ReportTemplate';
+import { ReportTemplate } from 'models/ReportTemplate';
+import { mapJsonApiToObject } from 'utils/jsonApiMapper';
 import { UPDATE_REPORT_TEMPLATE_REQUEST } from '../constants';
 import {
   updateReportTemplateSuccess,
@@ -18,33 +19,37 @@ function* updateReportTemplate({
 
   try {
     if (!imageData) {
-      const {
-        data: { data },
-      } = yield axios.put(
+      const { data } = yield axios.put(
         requestUrl,
         objectToSnakeCase({
           reportTemplate: { ...reportTemplate, logo: imageData },
         }),
       );
 
-      const mappedData = new ReportTemplateBuilder().fromJson(data).build();
+      const mappedData = mapJsonApiToObject(data, 'reportTemplate', {
+        isSingleObject: true,
+      });
 
-      yield put(updateReportTemplateSuccess(mappedData));
+      yield put(
+        updateReportTemplateSuccess(new ReportTemplate({ ...mappedData })),
+      );
     } else {
       const formData = new FormData();
       formData.append('report_template[logo]', imageData);
 
-      const {
-        data: { data },
-      } = yield axios.put(requestUrl, formData, {
+      const { data } = yield axios.put(requestUrl, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
 
-      const mappedData = new ReportTemplateBuilder().fromJson(data).build();
+      const mappedData = mapJsonApiToObject(data, 'reportTemplate', {
+        isSingleObject: true,
+      });
 
-      yield put(updateReportTemplateSuccess(mappedData));
+      yield put(
+        updateReportTemplateSuccess(new ReportTemplate({ ...mappedData })),
+      );
     }
   } catch (error) {
     yield put(updateReportTemplateFailure(error));

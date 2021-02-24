@@ -1,13 +1,15 @@
-import makeSelectReportTemplates, {
+import reportTemplatesSaga from './sagas';
+import reportTemplatesReducer from './reducer';
+import makeSelectReportTemplates from './selectors';
+export {
   makeSelectReportTemplatesList,
   makeSelectReportTemplateId,
   makeSelectReportTemplatesLoaders,
   makeSelectReportTemplatesErrors,
   makeSelectSelectedReport,
   makeSelectSelectedReportId,
+  makeSelectSingleReportTemplate,
 } from './selectors';
-import reportTemplatesSaga from './sagas';
-import reportTemplatesReducer from './reducer';
 
 export {
   fetchReportTemplatesRequest,
@@ -15,18 +17,23 @@ export {
   updateReportTemplateRequest,
   deleteReportTemplateRequest,
   deleteReportTemplateLogoRequest,
+  fetchSingleReportTemplateRequest,
+  addTemplateSectionRequest,
+  updateTemplateSectionRequest,
+  deleteTemplateSectionRequest,
+  addSectionCaseRequest,
+  updateSectionCaseRequest,
+  deleteSectionCaseRequest,
+  deleteSectionCaseImageRequest,
+  selectReportTemplate,
+  selectTemplateSection,
+  generateTestReportRequest,
 } from './actions';
 export { ReportFor } from './constants';
 export { initialState } from './reducer';
 
 export {
   makeSelectReportTemplates,
-  makeSelectReportTemplatesList,
-  makeSelectReportTemplateId,
-  makeSelectReportTemplatesLoaders,
-  makeSelectReportTemplatesErrors,
   reportTemplatesSaga,
   reportTemplatesReducer,
-  makeSelectSelectedReport,
-  makeSelectSelectedReportId,
 };

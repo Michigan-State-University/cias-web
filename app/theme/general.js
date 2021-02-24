@@ -15,7 +15,7 @@ const paddings = {
 
 const boxShadows = {
   black: '0px 0px 50px rgba(0, 0, 0, 0.08)',
-  selago: `0px 4px 20px ${colors.selago};`,
+  selago: `0px 4px 20px ${colors.selago}`,
 };
 
 const elements = {

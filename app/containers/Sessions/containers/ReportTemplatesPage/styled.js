@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import { Container } from 'react-grid-system';
 
-import { colors, themeColors, paddings } from 'theme';
+import { colors, themeColors, paddings, boxShadows } from 'theme';
+import Box from 'components/Box';
 
 export const Tab = styled.div`
   position: relative;
@@ -30,4 +32,45 @@ export const Spacer = styled.div`
   width: calc(100% + ${paddings.regular} * 2);
   margin-left: -${paddings.regular};
   background-color: ${colors.linkWater};
+`;
+
+export const ReportHeader = styled.div`
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 42px;
+  letter-spacing: 0;
+`;
+
+export const SectionTitle = styled.div`
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 17px;
+  letter-spacing: 0;
+  ${({ isSelected }) => isSelected && { color: themeColors.secondary }};
+`;
+
+export const SectionText = styled.p`
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 23px;
+  letter-spacing: 0;
+  vertical-align: top;
+  text-align: justify;
+  margin: 0;
+  ${({ isSelected }) => isSelected && { color: themeColors.secondary }};
+`;
+
+export const SectionContainer = styled(Container)`
+  margin-bottom: 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const CardBox = styled(Box)`
+  width: 100%;
+  background-color: ${colors.white};
+  padding: 30px;
+  box-shadow: ${boxShadows.selago};
 `;

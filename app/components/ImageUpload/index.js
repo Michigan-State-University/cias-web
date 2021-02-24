@@ -24,7 +24,7 @@ import Loader from 'components/Loader';
 import { ImageWrapper } from './styled';
 import messages from './messages';
 
-export const ImageUpload = ({
+const ImageUpload = ({
   onAddImage,
   onDeleteImage,
   isPreview,
@@ -65,6 +65,7 @@ export const ImageUpload = ({
         padding={50}
         withShadow={isDragActive}
         style={{
+          position: 'relative',
           pointerEvents: loading ? 'none' : 'all',
         }}
         {...getRootProps()}

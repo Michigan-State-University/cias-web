@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import { Row, Col, Container } from 'react-grid-system';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
@@ -12,21 +11,18 @@ import {
   deleteReportTemplateRequest,
   selectReportTemplate,
   updateReportTemplateRequest,
-} from 'global/reducers/reportTemplates/actions';
-import {
-  makeSelectSelectedReport,
   ReportFor,
+  generateTestReportRequest,
 } from 'global/reducers/reportTemplates';
-
-import TextButton from 'components/Button/TextButton';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
 import download from 'assets/svg/download-2.svg';
+
+import TextButton from 'components/Button/TextButton';
 import Text from 'components/Text';
 import Collapse from 'components/Collapse';
 import H1 from 'components/H1';
-import { CardBox } from 'containers/TeamDetails/styled';
 import Radio from 'components/Radio';
 import ImageUpload from 'components/ImageUpload';
 import ApprovableInput from 'components/Input/ApprovableInput';
@@ -34,59 +30,66 @@ import Box from 'components/Box';
 import Img from 'components/Img';
 
 import { ReportTemplate } from 'models/ReportTemplate';
-import { Spacer } from '../styled';
-import { ReportTemplatesContext } from '../utils';
-import messages from '../messages';
+import { CardBox, Spacer } from '../../styled';
+import { ReportTemplatesContext } from '../../utils';
+import messages from '../../messages';
 
 const ReportTemplateMainSettings = ({
   intl: { formatMessage },
   updateReportTemplate,
-  selectedReport,
   deleteReportTemplate,
   deleteReportTemplateLogo,
+  generateTestReport,
 }) => {
   const {
     sessionId,
+    singleReportTemplate,
     loaders: {
       deleteReportTemplateLoading,
       deleteReportTemplateLogoLoading,
       updateReportTemplateLoading,
+      generateTestReportLoading,
     },
   } = useContext(ReportTemplatesContext);
 
   useEffect(() => {
-    if (!updateReportTemplateLoading) setIsUploadingImage(setIsUploadingImage);
+    if (!updateReportTemplateLoading) setIsUploadingImage(false);
   }, [updateReportTemplateLoading]);
 
   const [isUploadingImage, setIsUploadingImage] = useState(false);
 
-  const [openCollapsable, setOpenCollapsable] = useState(true);
+  const [openCollapsable, setOpenCollapsable] = useState(false);
   const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
 
   const onNameChange = name => {
-    if (name !== selectedReport.name)
-      updateReportTemplate(sessionId, { ...selectedReport, name });
+    if (name !== singleReportTemplate.name)
+      updateReportTemplate(sessionId, { ...singleReportTemplate, name });
   };
 
   const onReportForChange = reportFor => {
-    if (reportFor !== selectedReport.reportFor)
-      updateReportTemplate(sessionId, { ...selectedReport, reportFor });
+    if (reportFor !== singleReportTemplate.reportFor)
+      updateReportTemplate(sessionId, { ...singleReportTemplate, reportFor });
   };
 
   const onLogoChange = logo => {
     setIsUploadingImage(true);
-    updateReportTemplate(sessionId, selectedReport, logo.image, true);
+    updateReportTemplate(sessionId, singleReportTemplate, logo.image);
   };
 
   const onLogoDelete = () => {
-    deleteReportTemplateLogo(sessionId, selectedReport.id);
+    deleteReportTemplateLogo(sessionId, singleReportTemplate.id);
   };
 
   const onDelete = () => {
-    deleteReportTemplate(sessionId, selectedReport.id);
+    deleteReportTemplate(sessionId, singleReportTemplate.id);
   };
 
-  if (!selectedReport) return <></>;
+  const onTestDownload = event => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    generateTestReport(sessionId, singleReportTemplate.id);
+  };
 
   const imageUploading = updateReportTemplateLoading && isUploadingImage;
 
@@ -111,11 +114,11 @@ const ReportTemplateMainSettings = ({
                 </Col>
                 <Col align="end">
                   <TextButton
-                    onClick={() => {}}
+                    onClick={onTestDownload}
                     whiteSpace="nowrap"
                     fontWeight="bold"
                     fontSize={14}
-                    loading={false}
+                    loading={generateTestReportLoading}
                     buttonProps={{
                       color: themeColors.secondary,
                       fontWeight: 'bold',
@@ -147,7 +150,8 @@ const ReportTemplateMainSettings = ({
                       <Radio
                         mr={10}
                         checked={
-                          selectedReport.reportFor === ReportFor.participant
+                          singleReportTemplate.reportFor ===
+                          ReportFor.participant
                         }
                       />
                       <Text>
@@ -164,7 +168,8 @@ const ReportTemplateMainSettings = ({
                       <Radio
                         mr={10}
                         checked={
-                          selectedReport.reportFor === ReportFor.thirdParty
+                          singleReportTemplate.reportFor ===
+                          ReportFor.thirdParty
                         }
                       />
                       <Text>
@@ -189,7 +194,7 @@ const ReportTemplateMainSettings = ({
                       loading={
                         deleteReportTemplateLogoLoading || imageUploading
                       }
-                      image={selectedReport.logoUrl}
+                      image={singleReportTemplate.logoUrl}
                       onAddImage={onLogoChange}
                       onDeleteImage={onLogoDelete}
                     />
@@ -211,7 +216,7 @@ const ReportTemplateMainSettings = ({
                       <ApprovableInput
                         mr={0}
                         type="singleline"
-                        value={selectedReport.name}
+                        value={singleReportTemplate.name}
                         onCheck={onNameChange}
                         placeholder={formatMessage(
                           messages.settingsNamePlaceholder,
@@ -256,19 +261,16 @@ const ReportTemplateMainSettings = ({
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  selectedReport: makeSelectSelectedReport(),
-});
-
 const mapDispatchToProps = {
   updateReportTemplate: updateReportTemplateRequest,
   deleteReportTemplate: deleteReportTemplateRequest,
   deleteReportTemplateLogo: deleteReportTemplateLogoRequest,
   selectTemplate: selectReportTemplate,
+  generateTestReport: generateTestReportRequest,
 };
 
 const withConnect = connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
 );
 
@@ -277,6 +279,7 @@ ReportTemplateMainSettings.propTypes = {
   updateReportTemplate: PropTypes.func,
   deleteReportTemplate: PropTypes.func,
   deleteReportTemplateLogo: PropTypes.func,
+  generateTestReport: PropTypes.func,
   selectTemplate: PropTypes.func,
   selectedReport: PropTypes.shape(ReportTemplate),
 };

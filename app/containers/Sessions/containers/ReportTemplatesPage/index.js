@@ -16,6 +16,7 @@ import {
   makeSelectReportTemplatesLoaders,
   makeSelectReportTemplatesErrors,
   makeSelectSelectedReportId,
+  makeSelectSingleReportTemplate,
 } from 'global/reducers/reportTemplates';
 
 import {
@@ -23,14 +24,24 @@ import {
   getSessionSaga,
   sessionReducer,
 } from 'global/reducers/session';
-import ReportTemplateMainSettings from './components/ReportTemplateMainSettings';
+import { ReportTemplate } from 'models/ReportTemplate';
+import {
+  makeSelectSelectedSectionTemplate,
+  makeSelectSelectedSectionTemplateId,
+} from 'global/reducers/reportTemplates/selectors';
+import { TemplateSection } from 'models/ReportTemplate/TemplateSection';
+import Box from 'components/Box';
 import ReportTemplatesList from './components/ReportTemplatesList';
 import { ReportTemplatesContext } from './utils';
 import messages from './messages';
+import ReportTemplateDetails from './components/ReportTemplateDetails';
 
 const ReportTemplatesPage = ({
   reportTemplates,
   selectedReportId,
+  singleReportTemplate,
+  selectedTemplateSectionId,
+  selectedTemplateSection,
   loaders,
   errors,
   match: {
@@ -46,7 +57,7 @@ const ReportTemplatesPage = ({
       sessionId,
     });
     fetchReportTemplates(sessionId);
-  }, []);
+  }, [sessionId]);
 
   useEffect(() => {
     if (loaders.shouldRefetch) fetchReportTemplates(sessionId);
@@ -57,18 +68,23 @@ const ReportTemplatesPage = ({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
-      <ReportTemplatesContext.Provider
-        value={{
-          reportTemplates,
-          loaders,
-          errors,
-          selectedReportId,
-          sessionId,
-        }}
-      >
-        <ReportTemplatesList />
-        <ReportTemplateMainSettings />
-      </ReportTemplatesContext.Provider>
+      <Box>
+        <ReportTemplatesContext.Provider
+          value={{
+            reportTemplates,
+            singleReportTemplate,
+            loaders,
+            errors,
+            selectedReportId,
+            sessionId,
+            selectedTemplateSectionId,
+            selectedTemplateSection,
+          }}
+        >
+          <ReportTemplatesList />
+          <ReportTemplateDetails />
+        </ReportTemplatesContext.Provider>
+      </Box>
     </>
   );
 };
@@ -82,6 +98,9 @@ ReportTemplatesPage.propTypes = {
   getSession: PropTypes.func,
   intl: intlShape,
   selectedReportId: PropTypes.string,
+  singleReportTemplate: PropTypes.shape(ReportTemplate),
+  selectedTemplateSectionId: PropTypes.string,
+  selectedTemplateSection: PropTypes.shape(TemplateSection),
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -89,6 +108,9 @@ const mapStateToProps = createStructuredSelector({
   loaders: makeSelectReportTemplatesLoaders(),
   errors: makeSelectReportTemplatesErrors(),
   selectedReportId: makeSelectSelectedReportId(),
+  singleReportTemplate: makeSelectSingleReportTemplate(),
+  selectedTemplateSectionId: makeSelectSelectedSectionTemplateId(),
+  selectedTemplateSection: makeSelectSelectedSectionTemplate(),
 });
 
 const mapDispatchToProps = {

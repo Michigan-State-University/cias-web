@@ -65,6 +65,28 @@ const makeSelectSelectedReportId = () =>
     substate => substate.selectedReportId,
   );
 
+const makeSelectSingleReportTemplate = () =>
+  createSelector(
+    selectReportTemplatesDomain,
+    substate => substate.singleReportTemplate,
+  );
+
+const makeSelectSelectedSectionTemplate = () =>
+  createSelector(
+    selectReportTemplatesDomain,
+    substate =>
+      substate.singleReportTemplate?.sections?.find(
+        ({ id: templateSectionId }) =>
+          templateSectionId === substate.selectedTemplateSectionId,
+      ),
+  );
+
+const makeSelectSelectedSectionTemplateId = () =>
+  createSelector(
+    selectReportTemplatesDomain,
+    substate => substate.selectedTemplateSectionId,
+  );
+
 export default makeSelectReportTemplates;
 export {
   selectReportTemplatesDomain,
@@ -74,4 +96,7 @@ export {
   makeSelectReportTemplateId,
   makeSelectSelectedReport,
   makeSelectSelectedReportId,
+  makeSelectSingleReportTemplate,
+  makeSelectSelectedSectionTemplate,
+  makeSelectSelectedSectionTemplateId,
 };

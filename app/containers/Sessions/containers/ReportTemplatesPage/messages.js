@@ -24,6 +24,10 @@ export default defineMessages({
     id: `${scope}.settingsHeader`,
     defaultMessage: 'Report Settings',
   },
+  sectionSettingsHeader: {
+    id: `${scope}.sectionSettingsHeader`,
+    defaultMessage: 'Section Settings',
+  },
   settingsDownloadReportButton: {
     id: `${scope}.settingsDownloadReportButton`,
     defaultMessage: 'Download test report',
@@ -55,5 +59,78 @@ export default defineMessages({
   settingsDeleteReportTemplateButton: {
     id: `${scope}.settingsDeleteReportTemplateButton`,
     defaultMessage: 'Delete Report Template',
+  },
+  deleteTemplateSectionButton: {
+    id: `${scope}.deleteTemplateSectionButton`,
+    defaultMessage: 'Delete Section',
+  },
+  sectionCaseTitleToggle: {
+    id: `${scope}.sectionCaseTitleToggle`,
+    defaultMessage: 'Section Title',
+  },
+  sectionCaseTitleHeader: {
+    id: `${scope}.sectionCaseTitleHeader`,
+    defaultMessage: 'The Title of the Section is:',
+  },
+  sectionCaseTitlePlaceholder: {
+    id: `${scope}.sectionCaseTitlePlaceholder`,
+    defaultMessage: 'Enter Title here',
+  },
+  sectionCaseContentHeader: {
+    id: `${scope}.sectionCaseContentHeader`,
+    defaultMessage: 'The text in the report is:',
+  },
+  sectionCaseContentPlaceholder: {
+    id: `${scope}.sectionCaseContentPlaceholder`,
+    defaultMessage: 'Enter Text here',
+  },
+  sectionCaseImageHeader: {
+    id: `${scope}.sectionCaseImageHeader`,
+    defaultMessage: 'Image in the report is:',
+  },
+  previewCaseRadio: {
+    id: `${scope}.previewCaseRadio`,
+    defaultMessage: 'Preview this case',
+  },
+  formulaMatchLookup: {
+    id: `${scope}.formulaMatchLookup`,
+    defaultMessage: 'If formula {formulaMatch}',
+  },
+  addCaseButton: {
+    id: `${scope}.addCaseButton`,
+    defaultMessage: '+ Add next case',
+  },
+  addSectionButton: {
+    id: `${scope}.addSectionButton`,
+    defaultMessage: '+ Add next section',
+  },
+  emptySection: {
+    id: `${scope}.emptySection`,
+    defaultMessage: 'Empty Section',
+  },
+  caseTitle: {
+    id: `${scope}.caseTitle`,
+    defaultMessage: 'Case {index}',
+  },
+  reportHeaderPlaceholder: {
+    id: `${scope}.reportHeaderPlaceholder`,
+    defaultMessage: "Enter report's Summary",
+  },
+  formula: {
+    id: `${scope}.formula`,
+    defaultMessage: 'Formula',
+  },
+  formulaPlaceholder: {
+    id: `${scope}.formulaPlaceholder`,
+    defaultMessage:
+      'Enter formula here... (You can use mathematical operators +, -, *, /)',
+  },
+  addVariable: {
+    id: `${scope}.addVariable`,
+    defaultMessage: 'Add variable',
+  },
+  if: {
+    id: `${scope}.if`,
+    defaultMessage: 'If formula',
   },
 });

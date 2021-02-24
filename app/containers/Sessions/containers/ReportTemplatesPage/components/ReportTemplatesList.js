@@ -6,9 +6,11 @@ import { createStructuredSelector } from 'reselect';
 import { Row, Col, Container } from 'react-grid-system';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
-import { colors, elements, themeColors } from 'theme';
-import { selectReportTemplate } from 'global/reducers/reportTemplates/actions';
-import { addReportTemplateRequest } from 'global/reducers/reportTemplates';
+import { boxShadows, colors, elements, themeColors } from 'theme';
+import {
+  selectReportTemplate,
+  addReportTemplateRequest,
+} from 'global/reducers/reportTemplates';
 
 import Loader from 'components/Loader';
 import { UnderlinedLabel } from 'components/UnderlinedLabel';
@@ -104,7 +106,10 @@ const ReportTemplatesList = ({
         style={{
           backgroundColor: colors.white,
           height: elements.navbarHeight,
+          boxShadow: boxShadows.selago,
           padding: 10,
+          zIndex: 1,
+          position: 'relative',
         }}
         justify="between"
         align="center"

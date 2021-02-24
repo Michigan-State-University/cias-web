@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
+import { useHistory } from 'react-router-dom';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -49,6 +50,8 @@ function SessionListItem({
   handleDeleteSession,
   handleExternalCopySession,
 }) {
+  const history = useHistory();
+
   const [isHovered, setIsHovered] = useState(false);
   const [copyOpen, setCopyOpen] = useState(false);
   const {
@@ -60,7 +63,7 @@ function SessionListItem({
     schedule_at: scheduleAt,
     schedule_payload: schedulePayload,
     settings,
-    reportsCount,
+    report_templates_count: reportTemplatesCount,
   } = session || {};
 
   const options = [
@@ -94,6 +97,14 @@ function SessionListItem({
 
   const externalCopy = params =>
     handleExternalCopySession({ ...params, sessionId: id });
+
+  const goToReportTemplates = event => {
+    event.preventDefault();
+
+    const url = `/interventions/${interventionId}/sessions/${id}/report-templates`;
+
+    history.push(url);
+  };
 
   return (
     <Draggable
@@ -132,9 +143,13 @@ function SessionListItem({
                   <SessionIndex>{index + 1}</SessionIndex>
                   <Column>
                     <H2 ml={15}>{name}</H2>
-                    <Badge ml={15} bg={themeColors.secondary}>
+                    <Badge
+                      ml={15}
+                      bg={themeColors.secondary}
+                      onClick={goToReportTemplates}
+                    >
                       {formatMessage(messages.reportsCount, {
-                        count: reportsCount ?? 0,
+                        count: reportTemplatesCount ?? 0,
                       })}
                     </Badge>
                   </Column>
