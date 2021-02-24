@@ -316,53 +316,45 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
         draft.loaders.updateReportTemplateLoading = false;
         draft.errors.updateReportTemplateError = null;
 
-        const sectionIndex = state.singleReportTemplate.sections.findIndex(
-          ({ id }) =>
-            id === payload.sectionId ||
-            id === payload.section?.id ||
-            id === payload.sectionCase?.reportTemplateSectionId,
-        );
+        const sectionId =
+          payload.sectionId ||
+          payload.section?.id ||
+          payload.sectionCase?.reportTemplateSectionId;
 
-        draft.cache.singleReportTemplate.sections = cloneDeep(
-          state.singleReportTemplate.sections,
-        );
+        draft.singleReportTemplate = {
+          ...state.singleReportTemplate,
+          sections: state.singleReportTemplate.sections.map(section => {
+            if (section.id === sectionId)
+              return cloneDeep(
+                sectionReducer(section, {
+                  type,
+                  payload,
+                }),
+              );
 
-        if (sectionIndex >= 0) {
-          draft.singleReportTemplate.sections[sectionIndex] = cloneDeep(
-            sectionReducer(state.singleReportTemplate.sections[sectionIndex], {
-              type,
-              payload,
-            }),
-          );
+            return cloneDeep(section);
+          }),
+        };
 
-          draft.cache.singleReportTemplate.sections[
-            sectionIndex
-          ] = sectionReducer(
-            cloneDeep(state.singleReportTemplate.sections[sectionIndex]),
-            {
-              type,
-              payload,
-            },
-          );
-        }
+        draft.cache.singleReportTemplate = {
+          ...state.cache.singleReportTemplate,
+          sections: state.cache.singleReportTemplate.sections.map(section => {
+            if (section.id === sectionId)
+              return cloneDeep(
+                sectionReducer(section, {
+                  type,
+                  payload,
+                }),
+              );
+
+            return cloneDeep(section);
+          }),
+        };
 
         break;
       }
 
-      case UPDATE_SECTION_CASE_REQUEST: {
-        if (payload.previewChanged) {
-          const sectionIndex = state.singleReportTemplate.sections.findIndex(
-            ({ id }) => id === payload.sectionId,
-          );
-
-          draft.singleReportTemplate.sections[
-            sectionIndex
-          ].variants = state.singleReportTemplate.sections[
-            sectionIndex
-          ].variants.map(variant => ({ ...variant, preview: false }));
-        }
-      }
-      // eslint-disable-next-line no-fallthrough
+      case UPDATE_SECTION_CASE_REQUEST:
       case DELETE_SECTION_CASE_IMAGE_REQUEST:
       case DELETE_SECTION_CASE_REQUEST:
       case ADD_SECTION_CASE_REQUEST:
@@ -370,18 +362,23 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
         draft.loaders.updateReportTemplateLoading = true;
         draft.errors.updateReportTemplateError = null;
 
-        const sectionIndex = state.singleReportTemplate.sections.findIndex(
-          ({ id }) => id === payload.sectionId || id === payload.section?.id,
-        );
+        const sectionId = payload.sectionId || payload.section?.id;
 
-        if (sectionIndex >= 0) {
-          draft.singleReportTemplate.sections[sectionIndex] = cloneDeep(
-            sectionReducer(state.singleReportTemplate.sections[sectionIndex], {
-              type,
-              payload,
-            }),
-          );
-        }
+        draft.singleReportTemplate = {
+          ...state.singleReportTemplate,
+          sections: state.singleReportTemplate.sections.map(section => {
+            if (section.id === sectionId)
+              return cloneDeep(
+                sectionReducer(section, {
+                  type,
+                  payload,
+                }),
+              );
+
+            return cloneDeep(section);
+          }),
+        };
+
         break;
       }
 

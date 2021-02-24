@@ -110,6 +110,7 @@ const ReportTemplatesList = ({
           padding: 10,
           zIndex: 1,
           position: 'relative',
+          margin: 0,
         }}
         justify="between"
         align="center"

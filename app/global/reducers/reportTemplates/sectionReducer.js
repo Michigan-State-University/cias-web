@@ -32,16 +32,23 @@ const templateSectionReducer = (state = initialState, { type, payload }) =>
         return { ...state, ...payload.section };
 
       case ADD_SECTION_CASE_SUCCESS:
-        draft.variants.push(payload.sectionCase);
+        draft.variants = [...state.variants, payload.sectionCase];
         break;
 
       case UPDATE_SECTION_CASE_SUCCESS:
       case UPDATE_SECTION_CASE_REQUEST: {
-        const caseIndex = state.variants.findIndex(
-          ({ id }) => id === payload.sectionCase.id,
-        );
+        draft.variants = state.variants.map(variant => {
+          if (variant.id === payload.sectionCase.id) return payload.sectionCase;
 
-        if (caseIndex >= 0) draft.variants[caseIndex] = payload.sectionCase;
+          if (payload.previewChanged)
+            return {
+              ...variant,
+              preview: false,
+            };
+
+          return variant;
+        });
+
         break;
       }
 

@@ -68,7 +68,7 @@ const ReportTemplatesPage = ({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
-      <Box>
+      <Box overflow="hidden">
         <ReportTemplatesContext.Provider
           value={{
             reportTemplates,

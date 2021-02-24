@@ -124,7 +124,7 @@ const SectionCaseItem = ({
             justify="between"
             style={{ width: '100%', paddingRight: 10 }}
           >
-            <Col xs={5}>
+            <Col xs={6}>
               <H2>{title}</H2>
               {sectionCase.formulaMatch && (
                 <Text color={colors.grey}>
@@ -134,16 +134,16 @@ const SectionCaseItem = ({
                 </Text>
               )}
             </Col>
-            <Col align="end" xs={7}>
+            <Col align="end" xs={6}>
               <Row align="center" justify="end" nogutter>
-                <Col>
+                <Col xs={2}>
                   <Radio
                     mr={10}
                     onClick={handlePreviewChange}
                     checked={sectionCase.preview}
                   />
                 </Col>
-                <Col>
+                <Col xs={10} align="end" style={{ textAlign: 'end' }}>
                   <Text
                     width="max-content"
                     onClick={handlePreviewChange}
