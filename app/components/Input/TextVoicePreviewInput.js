@@ -62,11 +62,11 @@ const TextVoicePreviewInput = ({
     <Column>
       <Box
         bg={themeColors.highlight}
-        width="100%"
         px={21}
         py={14}
         justify="center"
         align="center"
+        minWidth={300}
       >
         <Input
           defaultValue={value ?? ''}

@@ -22,7 +22,7 @@ const EllipsisText = ({ text, ...props }) => {
   return (
     <Row>
       {allowTooltip ? (
-        <Tooltip text={text} id={text} width="100%" display="inline">
+        <Tooltip text={text} id={text ?? ''} width="100%" display="inline">
           <StyledEllipsisText ref={ref} {...props}>
             {text}
           </StyledEllipsisText>

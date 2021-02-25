@@ -47,7 +47,8 @@ export const VIEWS = {
 const CopyChooser = ({
   intl: { formatMessage },
   onClick,
-  session: { id: sessionId, name, intervention_id: interventionId },
+  session: { id: sessionId, name },
+  intervention: { id: interventionId },
   selectedQuestion: { id } = {},
   interventions,
   loading,
@@ -200,6 +201,7 @@ CopyChooser.propTypes = {
   intl: intlShape,
   onClick: PropTypes.func.isRequired,
   session: PropTypes.object,
+  intervention: PropTypes.object,
   sessions: PropTypes.array,
   selectedQuestion: PropTypes.shape(Question),
   loading: PropTypes.bool,
@@ -247,4 +249,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default injectIntl(compose(withConnect)(CopyChooser));
+export default compose(withConnect)(injectIntl(CopyChooser));

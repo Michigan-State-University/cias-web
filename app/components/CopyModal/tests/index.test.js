@@ -16,6 +16,7 @@ import { createTestStore } from 'utils/testUtils/storeUtils';
 import { sessionReducer } from 'global/reducers/session';
 import { localStateReducer } from 'global/reducers/localState';
 import { interventionsReducer } from 'global/reducers/interventions';
+import { interventionReducer } from 'global/reducers/intervention';
 
 import CopyModal from '../index';
 
@@ -55,6 +56,7 @@ describe('<CopyModal />', () => {
     session: {
       session: mockSession(),
     },
+    intervention: { intervention: { ...mockIntervention() } },
   };
   beforeAll(() => {
     ReactDOM.createPortal = jest.fn(element => element);
@@ -72,6 +74,7 @@ describe('<CopyModal />', () => {
       session: sessionReducer,
       localState: localStateReducer,
       interventions: interventionsReducer,
+      intervention: interventionReducer,
     };
   });
   it('Expect to not log errors in console', () => {

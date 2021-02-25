@@ -14,8 +14,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
       >
         <div
-          class="Box-sc-1vhutan-0 iQWKOl"
-          width="100%"
+          class="Box-sc-1vhutan-0 gPXzKJ"
         >
           <div
             class="Row-y1cs0u-0 gQFDhs"
@@ -44,8 +43,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
           class="Column-sc-4zswzq-0 ekpwZH"
         >
           <div
-            class="Box-sc-1vhutan-0 fxZKpe"
-            width="100%"
+            class="Box-sc-1vhutan-0 eRJSy"
           >
             <input
               class="Input-t9j2q5-0 cSqYOu"

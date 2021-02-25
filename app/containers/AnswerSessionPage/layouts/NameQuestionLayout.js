@@ -36,7 +36,7 @@ const NameQuestionLayout = ({
         <Col sm={12} md={6}>
           <Box
             bg={themeColors.highlight}
-            width="100%"
+            minWidth={300}
             px={21}
             py={14}
             justify="center"
