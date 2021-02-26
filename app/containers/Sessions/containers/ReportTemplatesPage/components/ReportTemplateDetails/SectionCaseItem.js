@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Container } from 'react-grid-system';
+import { Row, Container } from 'react-grid-system';
 import { injectIntl, intlShape } from 'react-intl';
 
 import {
@@ -19,6 +19,7 @@ import { colors } from 'theme';
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
 
+import { Col } from 'components/ReactGridSystem';
 import Box from 'components/Box';
 import { StyledInput } from 'components/Input/StyledInput';
 import Text from 'components/Text';
@@ -159,8 +160,8 @@ const SectionCaseItem = ({
         }
       >
         <Container style={{ width: '100%' }}>
-          <Row justfy="between" align="center" style={{ marginBottom: 20 }}>
-            <Col width="content">
+          <Row justify="between" align="center" style={{ marginBottom: 20 }}>
+            <Col xs="content">
               <Row align="center">
                 <Img
                   src={binNoBg}
@@ -175,7 +176,7 @@ const SectionCaseItem = ({
                 />
               </Row>
             </Col>
-            <Col>
+            <Col xs="content">
               <Row justify="end" align="center">
                 <Option
                   key="section-title-toggle"
@@ -188,7 +189,7 @@ const SectionCaseItem = ({
           </Row>
 
           {titleVisible && (
-            <Row justfy="start">
+            <Row justify="start">
               <Text whiteSpace="pre">
                 {formatMessage(messages.sectionCaseTitleHeader)}
               </Text>
@@ -214,7 +215,7 @@ const SectionCaseItem = ({
             </Row>
           )}
 
-          <Row justfy="start">
+          <Row justify="start">
             <Text whiteSpace="pre">
               {formatMessage(messages.sectionCaseContentHeader)}
             </Text>
@@ -239,7 +240,7 @@ const SectionCaseItem = ({
             </Box>
           </Row>
 
-          <Row justfy="start">
+          <Row justify="start">
             <Text whiteSpace="pre">
               {formatMessage(messages.sectionCaseImageHeader)}
             </Text>
