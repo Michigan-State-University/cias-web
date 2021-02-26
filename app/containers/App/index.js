@@ -72,6 +72,19 @@ export function App({ user }) {
     } else return <LoginPage />;
   };
 
+  const renderUserListByRole = () => {
+    if (user) {
+      switch (user.roles[0]) {
+        case Roles.admin:
+          return <UserListPage />;
+        case Roles.researcher:
+          return <UserListPage filterableRoles={[Roles.participant]} />;
+        default:
+          return NotFoundPage;
+      }
+    }
+  };
+
   return (
     <>
       <Switch>
@@ -150,7 +163,7 @@ export function App({ user }) {
         <AppRoute
           exact
           path="/users"
-          component={UserListPage}
+          component={renderUserListByRole}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{

@@ -19,6 +19,11 @@ detectors, so to have uniform results let's use that
 one: [COLOR NAME DETECTOR](https://www.color-blindness.com/color-name-hue/) as it shows not only the name, but also the
 group/hue of a color (useful when there are similar colors).
 
+# Inner HTML
+
+To render HTML elements use `interweave` library. See [DOCS](https://interweave.dev/docs/). It safely renders HTML
+elements (tries to protect against XSS).
+
 # MJML
 
 ### What is MJML?

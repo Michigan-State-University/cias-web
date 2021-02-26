@@ -56,4 +56,9 @@ export default defineMessages({
     id: `${scope}.reportNoOption`,
     defaultMessage: 'No',
   },
+  participantReportUserEmail: {
+    id: `${scope}.participantReportUserEmail`,
+    defaultMessage:
+      'Your email is: <span style="font-weight: 700;">{email}</span>',
+  },
 });

@@ -63,6 +63,7 @@ const ParticipantReportQuestion = ({
       answerBody={answer}
       onValidation={onEmailValidation}
       showEmailInput={isNullOrUndefined(loggedInUserEmail)}
+      userEmail={loggedInUserEmail}
     />
   );
 };

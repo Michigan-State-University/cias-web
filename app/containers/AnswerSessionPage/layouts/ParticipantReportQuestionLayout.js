@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Markup } from 'interweave';
 
 import Box from 'components/Box';
 import Row from 'components/Row';
@@ -23,6 +24,7 @@ const ParticipantReportLayout = ({
   onValidation,
   showEmailInput,
   disabled,
+  userEmail,
 }) => {
   const { email, receive_report: option } =
     answerBody && answerBody.value ? answerBody.value : {};
@@ -77,6 +79,17 @@ const ParticipantReportLayout = ({
             </Box>
           </Column>
         )}
+        {!showEmailInput && userEmail && (
+          <Column mt={25}>
+            <Text>
+              <Markup
+                content={formatMessage(messages.participantReportUserEmail, {
+                  email: userEmail,
+                })}
+              />
+            </Text>
+          </Column>
+        )}
       </Column>
     </Box>
   );
@@ -88,6 +101,7 @@ ParticipantReportLayout.propTypes = {
   onValidation: PropTypes.func,
   answerBody: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   showEmailInput: PropTypes.bool,
+  userEmail: PropTypes.string,
   disabled: PropTypes.bool,
 };
 
