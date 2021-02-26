@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-grid-system';
+import { Row } from 'react-grid-system';
 import { injectIntl, intlShape } from 'react-intl';
 import { injectReducer, useInjectSaga } from 'redux-injectors';
 
@@ -15,6 +15,7 @@ import {
 import { questionsReducer } from 'global/reducers/questions';
 
 import { colors, themeColors } from 'theme';
+import { Col } from 'components/ReactGridSystem';
 import Box from 'components/Box';
 import { StyledInput } from 'components/Input/StyledInput';
 import VariableChooser from 'containers/BranchingLayout/VariableChooser';
@@ -55,7 +56,7 @@ const SectionFormula = ({
 
   return (
     <>
-      <Row align="center" justify="between">
+      <Row align="center" justify="between" style={{ width: '100%' }} nogutter>
         <Col>{formatMessage(messages.formula)}</Col>
         <Col align="end">
           <Box

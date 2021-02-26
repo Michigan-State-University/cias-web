@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Container } from 'react-grid-system';
+import { Row, Container } from 'react-grid-system';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
@@ -19,6 +19,7 @@ import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
 import download from 'assets/svg/download-2.svg';
 
+import { Col } from 'components/ReactGridSystem';
 import TextButton from 'components/Button/TextButton';
 import Text from 'components/Text';
 import Collapse from 'components/Collapse';

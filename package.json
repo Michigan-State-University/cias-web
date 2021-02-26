@@ -101,7 +101,7 @@
     "react-draggable": "4.4.3",
     "react-dropzone": "11.0.1",
     "react-flag-kit": "^0.3.1",
-    "react-grid-system": "7.0.3",
+    "react-grid-system": "^7.1.1",
     "react-helmet": "6.1.0",
     "react-inlinesvg": "2.0.1",
     "react-intl": "2.8.0",

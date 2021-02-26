@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Row, Col, Container } from 'react-grid-system';
+import { Row, Container } from 'react-grid-system';
+
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 
 import {
@@ -14,6 +15,7 @@ import { SectionCaseBuilder } from 'models/ReportTemplate';
 import DashedButton from 'components/Button/DashedButton';
 
 import { colors, elements } from 'theme';
+import { Col } from 'components/ReactGridSystem';
 import H2 from 'components/H2';
 import TextButton from 'components/Button/TextButton';
 import SectionFormula from './SectionFormula';
