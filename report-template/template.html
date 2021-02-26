@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <style>
+      * {
+        font-family: 'DM Sans', Arial, Helvetica, sans-serif;
+      }
+      .container {
+        padding: 50px 40px;
+        width: 800px;
+      }
+
+      .logo > img {
+        max-width: 200px;
+        max-height: 200px;
+      }
+
+      .header {
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 42px;
+        letter-spacing: 0em;
+      }
+
+      .section-title {
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 17px;
+        letter-spacing: 0em;
+      }
+
+      .section-text {
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 23px;
+        letter-spacing: 0em;
+        vertical-align: top;
+        text-align: justify;
+        margin: 0;
+      }
+
+      .section-image {
+        max-width: 200px;
+        max-height: 200px;
+      }
+
+      .d-table {
+        display: table;
+        width: 100%;
+      }
+
+      .d-table-row {
+        display: table-row;
+      }
+
+      .d-table-row .d-table-cell:first-child {
+        width: 100%;
+      }
+
+      .d-table-cell {
+        display: table-cell;
+        vertical-align: top;
+      }
+
+      .mb-small {
+        margin-bottom: 10px;
+      }
+
+      .mb-medium {
+        margin-bottom: 24px;
+      }
+
+      .mb-big {
+        margin-bottom: 30px;
+      }
+
+      .ml-large {
+        margin-left: 60px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- REPORT LOGO -->
+      <div class="logo mb-big"><img src="{LOGO}" /></div>
+
+      <!-- REPORT HEADER -->
+      <div class="header mb-medium">{REPORT_HEADER}</div>
+
+      <!-- SINGLE SECTION -->
+      <div class="section d-table mb-big">
+        <!-- FIRST LINE -->
+        <div class="d-table-row">
+          <!-- TILE -->
+          <div class="d-table-cell">
+            <div class="section-title mb-small">{SECTION_TITLE}</div>
+          </div>
+        </div>
+
+        <!-- SECOND LINE -->
+        <div class="d-table-row">
+          <!-- TEXT -->
+          <div class="d-table-cell">
+            <p class="section-text">{SECTION_TEXT}</p>
+          </div>
+
+          <!-- IMAGE -->
+          <div class="d-table-cell">
+            <img class="section-image ml-large" src="{IMAGE}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

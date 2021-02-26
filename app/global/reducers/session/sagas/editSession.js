@@ -10,9 +10,8 @@ import { makeSelectSession } from '../selectors';
 
 export function* editSession({ fields } = {}) {
   const session = yield select(makeSelectSession());
-  const requestURL = `v1/interventions/${session.intervention_id}/sessions/${
-    session.id
-  }`;
+  const requestURL = `v1/interventions/${session.intervention_id ??
+    session.interventionId}/sessions/${session.id}`;
 
   const patchDifference = pickFields(session, fields);
 

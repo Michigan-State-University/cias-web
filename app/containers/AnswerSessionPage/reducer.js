@@ -20,9 +20,11 @@ import {
   SET_QUESTION_INDEX,
   START_SESSION,
   CHANGE_PREVIEW_MODE,
-  RESET_SESSION,
   CHANGE_IS_ANIMATING,
   SET_FEEDBACK_SCREEN_SETTINGS,
+  PHONETIC_PREVIEW_REQUEST,
+  PHONETIC_PREVIEW_SUCCESS,
+  RESET_ANSWERS,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -43,6 +45,9 @@ export const initialState = {
   sessionId: null,
   isAnimationOngoing: true,
   feedbackScreenSettings: getEmptyFeedbackScreenSettings(),
+  phoneticText: null,
+  phoneticUrl: null,
+  phoneticLoading: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -121,7 +126,7 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case CHANGE_PREVIEW_MODE:
         draft.previewMode = payload.previewMode;
         break;
-      case RESET_SESSION:
+      case RESET_ANSWERS:
         draft.answers = initialState.answers;
         draft.questionIndex = 0;
         draft.interventionStarted = false;
@@ -131,6 +136,15 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
         break;
       case SET_FEEDBACK_SCREEN_SETTINGS:
         draft.feedbackScreenSettings[payload.setting] = payload.value;
+        break;
+      case PHONETIC_PREVIEW_REQUEST:
+        draft.phoneticText = payload;
+        draft.phoneticLoading = true;
+        draft.phoneticUrl = null;
+        break;
+      case PHONETIC_PREVIEW_SUCCESS:
+        draft.phoneticUrl = payload.url;
+        draft.phoneticLoading = false;
         break;
     }
   });

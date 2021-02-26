@@ -68,6 +68,7 @@ const StyledInput = props => {
       mr={9}
       value={value}
       onChange={event => onInputChange(event.target.value)}
+      onInput={props.onInput}
       onFocus={handleFocus}
       onBlur={() => {
         setHasFocus(false);
@@ -97,6 +98,7 @@ StyledInput.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   transparent: PropTypes.bool,
   disabled: PropTypes.bool,
+  onInput: PropTypes.func,
 };
 
 StyledInput.defaultProps = {

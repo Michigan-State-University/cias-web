@@ -22,6 +22,7 @@ export const apiSessionResponse = (id = 0) => ({
       name: `intervention-test-${id}`,
       position: id,
     },
+    type: 'session',
   },
 });
 

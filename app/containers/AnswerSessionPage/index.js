@@ -37,6 +37,7 @@ import {
   makeSelectInterventionStatus,
   interventionReducer,
 } from 'global/reducers/intervention';
+import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import {
@@ -142,6 +143,7 @@ export function AnswerSessionPage({
 }) {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
+  useInjectSaga({ key: 'logInGuest', saga: logInGuestSaga });
   useInjectReducer({ key: 'AnswerSessionPage', reducer });
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   const { sessionId, index, interventionId } = params;
@@ -227,6 +229,7 @@ export function AnswerSessionPage({
       showError: toast.error,
       feedbackScreenSettings,
       setFeedbackSettings,
+      isAnimationOngoing,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;

@@ -1,6 +1,9 @@
 import React, { useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
 
 import Box from 'components/Box';
 import HoverableBox from 'components/Box/HoverableBox';
@@ -9,8 +12,19 @@ import Text from 'components/Text';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
 import decideIfPassValue from 'utils/decideIfPassValue';
 import globalMessages from 'global/i18n/globalMessages';
+import { makeSelectNameQuestionExists } from 'global/reducers/questions';
 import useOutsideClick from 'utils/useOutsideClick';
-import { finishQuestion, QuestionTypes } from 'models/Session/QuestionTypes';
+import {
+  finishQuestion,
+  QuestionTypes,
+  nameQuestion,
+  participantReport,
+  thirdPartyQuestion,
+} from 'models/Session/QuestionTypes';
+import {
+  makeSelectParticipantReportQuestionExists,
+  makeSelectThirdPartyReportQuestionExists,
+} from 'global/reducers/questions/selectors';
 import { borders, boxShadows, colors, fontSizes } from 'theme';
 
 import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
@@ -23,6 +37,9 @@ const QuestionTypeChooser = ({
   intl: { formatMessage },
   onClick,
   ButtonComponent,
+  nameQuestionExists,
+  participantReportExists,
+  thirdPartyReportExists,
 }) => {
   const buttonRef = useRef(null);
   const containerRef = useRef(null);
@@ -54,8 +71,15 @@ const QuestionTypeChooser = ({
   const isVisible = visible && height;
 
   const filteredQuestions = useMemo(
-    () => QuestionTypes.filter(({ id }) => id !== finishQuestion.id),
-    [QuestionTypes],
+    () =>
+      QuestionTypes.filter(
+        ({ id }) =>
+          id !== finishQuestion.id &&
+          !(nameQuestionExists && id === nameQuestion.id) &&
+          !(participantReportExists && id === participantReport.id) &&
+          !(thirdPartyReportExists && id === thirdPartyQuestion.id),
+      ),
+    [QuestionTypes, nameQuestionExists, thirdPartyReportExists],
   );
 
   return (
@@ -127,10 +151,27 @@ QuestionTypeChooser.propTypes = {
   intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
   ButtonComponent: PropTypes.elementType,
+  nameQuestionExists: PropTypes.bool,
+  participantReportExists: PropTypes.bool,
+  thirdPartyReportExists: PropTypes.bool,
 };
 
 QuestionTypeChooser.defaultProps = {
   ButtonComponent: DefaultButtonComponent,
 };
 
-export default injectIntl(QuestionTypeChooser);
+const mapStateToProps = createStructuredSelector({
+  nameQuestionExists: makeSelectNameQuestionExists(),
+  participantReportExists: makeSelectParticipantReportQuestionExists(),
+  thirdPartyReportExists: makeSelectThirdPartyReportQuestionExists(),
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  null,
+);
+
+export default compose(
+  withConnect,
+  injectIntl,
+)(QuestionTypeChooser);

@@ -11,7 +11,7 @@ import {
 } from 'global/reducers/teamList/actions';
 import teamListReducer, { initialState } from '../reducer';
 
-describe('userList reducer', () => {
+describe('teamList reducer', () => {
   const teams = [
     new TeamBuilder()
       .withId('ta-1')

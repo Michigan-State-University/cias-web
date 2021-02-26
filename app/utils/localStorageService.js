@@ -1,4 +1,5 @@
 export const HEADERS = 'headers';
+export const GUEST_HEADERS = 'guest-headers';
 export const STATE = 'state';
 
 const LocalStorageService = (() => {
@@ -30,8 +31,25 @@ const LocalStorageService = (() => {
     };
   };
 
+  const getGuestHeaders = () => {
+    const headers = localStorage.getItem(GUEST_HEADERS);
+    if (headers) return JSON.parse(headers);
+
+    return {
+      'Content-Type': 'application/json; charset=utf-8',
+    };
+  };
+
   const setHeaders = headers => {
     localStorage.setItem(HEADERS, JSON.stringify(headers));
+  };
+
+  const setGuestHeaders = headers => {
+    localStorage.setItem(GUEST_HEADERS, JSON.stringify(headers));
+  };
+
+  const clearGuestHeaders = () => {
+    localStorage.removeItem(GUEST_HEADERS);
   };
 
   const clearHeaders = () => {
@@ -73,6 +91,9 @@ const LocalStorageService = (() => {
     clearState,
     getState,
     updateState,
+    clearGuestHeaders,
+    setGuestHeaders,
+    getGuestHeaders,
   };
 })();
 

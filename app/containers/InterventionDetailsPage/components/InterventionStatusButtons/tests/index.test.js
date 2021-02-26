@@ -17,10 +17,9 @@ import 'jest-styled-components';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { Roles } from 'models/User/UserRoles';
+import { draft, statusTypes } from 'models/Status/StatusTypes';
 
 import InterventionStatusButtons from '../index';
-
-const statuses = ['draft', 'published', 'closed'];
 
 describe('<InterventionStatusButtons />', () => {
   let modalContainer;
@@ -39,6 +38,11 @@ describe('<InterventionStatusButtons />', () => {
     },
   };
 
+  const defaultProps = {
+    csvGeneratedAt: '1/12/2021',
+    csvLink: 'http://example.com',
+  };
+
   beforeAll(() => {
     store = createStore(reducer, initialState);
   });
@@ -47,7 +51,7 @@ describe('<InterventionStatusButtons />', () => {
     render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <InterventionStatusButtons />
+          <InterventionStatusButtons status={draft} {...defaultProps} />
         </IntlProvider>
       </Provider>,
     );
@@ -55,17 +59,15 @@ describe('<InterventionStatusButtons />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-    statuses.forEach(status => {
-      const {
-        container: { firstChild: renderedComponent },
-      } = render(
+    statusTypes.forEach(status => {
+      const { container } = render(
         <Provider store={store}>
           <IntlProvider locale={DEFAULT_LOCALE}>
-            <InterventionStatusButtons status={status} />
+            <InterventionStatusButtons status={status} {...defaultProps} />
           </IntlProvider>
         </Provider>,
       );
-      expect(renderedComponent).toMatchSnapshot();
+      expect(container).toMatchSnapshot();
     });
   });
 });

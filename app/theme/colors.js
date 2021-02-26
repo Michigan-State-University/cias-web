@@ -34,6 +34,7 @@ const colors = {
   waterloo: '#828896',
   brightGreen: '#54F200',
   lavender: '#DFEBFC',
+  aqua: '#00FFF7',
 };
 
 const themeColors = {

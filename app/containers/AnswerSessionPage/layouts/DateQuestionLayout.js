@@ -22,7 +22,7 @@ const DateQuestionLayout = ({ onChange, formatMessage, answerBody }) => {
           value={Date.parse(value)}
           onCheck={onChange}
           fontSize={15}
-          dateInputStyles={{
+          styles={{
             border: `3px solid ${themeColors.primary}`,
           }}
         />

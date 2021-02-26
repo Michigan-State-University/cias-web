@@ -52,7 +52,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -76,7 +76,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   width: 40%;
 }
 
-.c13 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -93,7 +93,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   min-width: 110px;
 }
 
-.c21 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -107,7 +107,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding-left: 62px;
 }
 
-.c23 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -134,7 +134,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding-left: 62px;
 }
 
-.c25 {
+.c27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -153,7 +153,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c29 {
+.c31 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -177,7 +177,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c36 {
+.c38 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -192,7 +192,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding-bottom: 20px;
 }
 
-.c38 {
+.c39 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -215,7 +215,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c45 {
+.c46 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -226,13 +226,69 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c15 {
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c26 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.c30 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 33.33333333333333%;
+}
+
+.c50 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c17 {
   width: auto;
   height: auto;
   cursor: pointer;
 }
 
-.c20 {
+.c22 {
   width: auto;
   height: auto;
 }
@@ -252,7 +308,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c12 {
+.c14 {
   width: auto;
   height: auto;
   display: block;
@@ -263,7 +319,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
-.c17 {
+.c19 {
   width: auto;
   height: auto;
   display: block;
@@ -271,7 +327,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   margin-bottom: 8px;
 }
 
-.c18 {
+.c20 {
   width: auto;
   height: auto;
   display: block;
@@ -296,7 +352,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c39 {
+.c40 {
   width: auto;
   height: auto;
   display: block;
@@ -304,7 +360,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c41 {
+.c42 {
   width: auto;
   height: auto;
   display: block;
@@ -319,7 +375,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c43 {
+.c44 {
   width: auto;
   height: auto;
   display: block;
@@ -328,7 +384,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   top: -90px;
 }
 
-.c44 {
+.c45 {
   width: auto;
   height: auto;
   display: block;
@@ -343,7 +399,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   right: 0px;
 }
 
-.c46 {
+.c47 {
   width: auto;
   height: auto;
   display: block;
@@ -355,7 +411,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   flex-grow: 1;
 }
 
-.c47 {
+.c48 {
   width: auto;
   height: auto;
   display: block;
@@ -363,7 +419,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding: 30px;
 }
 
-.c48 {
+.c49 {
   width: auto;
   height: auto;
   display: block;
@@ -393,7 +449,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c51 {
+.c52 {
   width: auto;
   height: auto;
   display: block;
@@ -401,63 +457,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   margin-top: 20px;
 }
 
-.c24 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-}
-
-.c28 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 33.33333333333333%;
-}
-
-.c37 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c49 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c19 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -465,7 +465,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   padding: 8px;
 }
 
-.c22 {
+.c24 {
   height: 0;
   -webkit-flex: 1;
   -ms-flex: 1;
@@ -473,7 +473,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   border: 1px solid #D5DEEA;
 }
 
-.c10 {
+.c11 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -482,7 +482,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c50 {
+.c51 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -519,7 +519,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   justify-items: flex-start;
 }
 
-.c6:hover .c9 {
+.c6:hover .c10 {
   color: #C866EA !important;
 }
 
@@ -527,7 +527,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   background-color: black !important;
 }
 
-.c14 {
+.c16 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -541,14 +541,14 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c16 {
+.c18 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c26 {
+.c28 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -556,7 +556,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c27 {
+.c29 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -566,7 +566,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c30 {
+.c32 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -574,7 +574,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   white-space: pre;
 }
 
-.c40 {
+.c41 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -583,12 +583,30 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: rgba(200,102,234,1);
 }
 
-.c40:hover {
+.c41:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.c42 {
+.c12 {
+  min-height: 24px;
+  min-width: 25px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: rgba(200,102,234,1);
+  color: rgba(255,255,255,1);
+  margin-left: 15px;
+}
+
+.c43 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -600,13 +618,13 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c42:focus {
+.c43:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c42:disabled {
+.c43:disabled {
   color: #ABBBD1;
 }
 
@@ -653,7 +671,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: white;
 }
 
-.c31 {
+.c33 {
   position: relative;
   display: inline-block;
   min-width: 40px;
@@ -661,13 +679,13 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   margin-left: 10px;
 }
 
-.c33 {
+.c35 {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.c35 {
+.c37 {
   position: absolute;
   top: 0;
   left: 0;
@@ -680,20 +698,20 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   border-radius: 21px;
 }
 
-.c32:checked + .c34 {
+.c34:checked + .c36 {
   background-color: #C866EA;
 }
 
-.c32:focus + .c34 {
+.c34:focus + .c36 {
   box-shadow: 0 0 1px #C866EA;
 }
 
-.c32:disabled + .c34 {
+.c34:disabled + .c36 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c35:before {
+.c37:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -706,13 +724,13 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c32:checked + .c34:before {
+.c34:checked + .c36:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
 
-.c52 {
+.c53 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -735,7 +753,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c52:hover {
+.c53:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
@@ -843,19 +861,29 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
             >
               1
             </div>
-            <h2
-              class="c9 c10"
+            <div
+              class="c9"
             >
-              Intervention
-            </h2>
+              <h2
+                class="c10 c11"
+              >
+                Intervention
+              </h2>
+              <div
+                class="c12"
+                color="#FFFFFF"
+              >
+                0 reports
+              </div>
+            </div>
           </a>
         </div>
         <div
-          class="c11"
+          class="c13"
           width="40%"
         >
           <div
-            class="c12"
+            class="c14"
             display="flex"
           >
             <div
@@ -864,10 +892,10 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               data-tip="true"
             >
               <div
-                class="c13"
+                class="c15"
               >
                 <p
-                  class="c14"
+                  class="c16"
                   color="#C866EA"
                   font-size="13"
                   font-weight="bold"
@@ -876,7 +904,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
                 </p>
                 <img
                   alt="emails"
-                  class="c15"
+                  class="c17"
                   data-cy="share-session-modal-open-button-0"
                   src="IMAGE_MOCK"
                 />
@@ -965,25 +993,25 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   
               </style>
               <p
-                class="c16"
+                class="c18"
               />
               You can invite participants only to the published interventions.
             </div>
           </div>
           <div
-            class="c17"
+            class="c19"
           >
             <div
-              class="c18"
+              class="c20"
               display="flex"
               id="1"
             >
               <div
-                class="c19"
+                class="c21"
               >
                 <img
                   alt="dots"
-                  class="c20"
+                  class="c22"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -992,31 +1020,31 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="c21"
-      >
-        <div
-          class="c22"
-          color="#D5DEEA"
-        />
-      </div>
-      <div
         class="c23"
       >
         <div
           class="c24"
+          color="#D5DEEA"
+        />
+      </div>
+      <div
+        class="c25"
+      >
+        <div
+          class="c26"
         >
           <div
-            class="c25"
+            class="c27"
             width="100%"
           >
             <p
-              class="c26"
+              class="c28"
               font-size="13"
             >
               Next Session:
             </p>
             <p
-              class="c27"
+              class="c29"
               font-size="13"
               font-weight="bold"
             >
@@ -1025,52 +1053,52 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c28"
+          class="c30"
         >
           <div
-            class="c29"
+            class="c31"
             width="100%"
           >
             <p
-              class="c30"
+              class="c32"
             >
               Use formula
             </p>
             <label
-              class="c31"
+              class="c33"
             >
               <input
                 checked=""
-                class="c32 c33"
+                class="c34 c35"
                 data-cy="branching-intervention-toggle"
                 data-testid="switch-input"
                 type="checkbox"
               />
               <span
-                class="c34 c35"
+                class="c36 c37"
               />
             </label>
           </div>
         </div>
       </div>
       <div
-        class="c36"
+        class="c38"
       >
         <div
-          class="c37"
+          class="c9"
         >
           <div
-            class="c37"
+            class="c9"
           >
             <div
-              class="c38"
+              class="c39"
             >
               Formula
               <div
-                class="c39"
+                class="c40"
               >
                 <p
-                  class="c40"
+                  class="c41"
                   color="#C866EA"
                   font-weight="bold"
                 >
@@ -1079,11 +1107,11 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               </div>
             </div>
             <div
-              class="c41"
+              class="c42"
               width="100%"
             >
               <textarea
-                class="c42"
+                class="c43"
                 data-cy="text-area"
                 height="auto"
                 placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
@@ -1092,42 +1120,42 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               />
             </div>
             <div
-              class="c43"
+              class="c44"
             >
               <div
-                class="c44"
+                class="c45"
                 display="none"
                 width="auto"
               >
                 <div
-                  class="c45"
+                  class="c46"
                 >
                   <div
-                    class="c46"
+                    class="c47"
                   >
                     <div
-                      class="c37"
+                      class="c9"
                     >
                       <div
-                        class="c47"
+                        class="c48"
                       >
                         <div
-                          class="c48"
+                          class="c49"
                           data-testid="no-content"
                           display="flex"
                           height="100%"
                           width="100%"
                         >
                           <div
-                            class="c49"
+                            class="c50"
                           >
                             <img
                               alt="No content"
-                              class="c20"
+                              class="c22"
                               src="IMAGE_MOCK"
                             />
                             <h2
-                              class="c9 c50"
+                              class="c10 c51"
                               color="#B0BAC9"
                             >
                               No variables defined yet
@@ -1141,7 +1169,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               </div>
             </div>
             <div
-              class="c51 c52"
+              class="c52 c53"
             >
               + Add case
             </div>

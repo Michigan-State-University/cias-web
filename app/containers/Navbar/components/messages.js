@@ -24,6 +24,10 @@ export default defineMessages({
     id: `${scope}.settings`,
     defaultMessage: 'General Settings',
   },
+  reportTemplates: {
+    id: `${scope}.reportTemplates`,
+    defaultMessage: 'Report Templates',
+  },
   previewStart: {
     id: `${scope}.preview`,
     defaultMessage: 'Preview From Start',

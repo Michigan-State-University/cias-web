@@ -14,8 +14,12 @@ import {
   finishQuestion,
   phoneQuestion,
   dateQuestion,
+  nameQuestion,
   currencyQuestion,
+  thirdPartyQuestion,
+  participantReport,
 } from 'models/Session/QuestionTypes';
+
 import CurrencyQuestion from './CurrencyQuestion';
 import FinishScreen from './FinishScreen';
 import UrlQuestion from './UrlQuestion';
@@ -29,10 +33,15 @@ import NumberQuestion from './NumberQuestion';
 import FeedbackQuestion from './FeedbackQuestion';
 import PhoneQuestion from './PhoneQuestion';
 import DateQuestion from './DateQuestion';
+import ParticipantReport from './ParticipantReportQuestion';
+import NameQuestion from './NameQuestion';
+import ThirdPartyQuestion from './ThirdPartyQuestion';
 
 export const renderQuestionByType = (question, sharedProps) => {
   const { type } = question;
   switch (type) {
+    case thirdPartyQuestion.id:
+      return <ThirdPartyQuestion question={question} {...sharedProps} />;
     case singleQuestion.id:
       return <SingleQuestion question={question} {...sharedProps} />;
     case multiQuestion.id:
@@ -49,8 +58,12 @@ export const renderQuestionByType = (question, sharedProps) => {
       return <TextBoxQuestion question={question} {...sharedProps} />;
     case phoneQuestion.id:
       return <PhoneQuestion question={question} {...sharedProps} />;
+    case participantReport.id:
+      return <ParticipantReport question={question} {...sharedProps} />;
     case dateQuestion.id:
       return <DateQuestion question={question} {...sharedProps} />;
+    case nameQuestion.id:
+      return <NameQuestion question={question} {...sharedProps} />;
     case numberQuestion.id:
       return <NumberQuestion question={question} {...sharedProps} />;
     case informationQuestion.id:

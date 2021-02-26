@@ -28,6 +28,7 @@ import {
   currencyQuestion,
   phoneQuestion,
   dateQuestion,
+  thirdPartyQuestion,
 } from './QuestionTypes';
 
 /**
@@ -61,7 +62,7 @@ export const getPreviousQuestions = (currentQuestion, questions, groups) => {
     ({ id }) => id === currentQuestion.question_group_id,
   );
   const filteredGroups = groups.filter(
-    ({ position }) => position <= currentQuestionGroup.position,
+    ({ position }) => position <= currentQuestionGroup?.position,
   );
   const sortedGroups = sortBy(filteredGroups, 'position');
 
@@ -109,6 +110,7 @@ export const getAllVariables = (questions, options) => {
         questionVariables = getGridVariables(question);
         break;
       case informationQuestion.id:
+      case thirdPartyQuestion.id:
       case feedbackQuestion.id:
       case finishQuestion.id:
       case currencyQuestion.id:
@@ -234,6 +236,11 @@ export const NotAnswerableQuestions = [
   informationQuestion.id,
   finishQuestion.id,
   feedbackQuestion.id,
+];
+
+export const QuestionsWithoutVariable = [
+  ...NotAnswerableQuestions,
+  thirdPartyQuestion.id,
 ];
 
 export const DisabledNarratorSettingsByQuestionType = {

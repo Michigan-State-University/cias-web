@@ -30,9 +30,11 @@ import {
   SEND_SMS_TOKEN_REQUEST,
   SEND_SMS_TOKEN_SUCCESS,
   SEND_SMS_TOKEN_ERROR,
+  LOG_IN_GUEST,
 } from './constants';
 
 export const logIn = user => actionBuilder(LOG_IN_USER, { user });
+export const logInGuestRequest = () => actionBuilder(LOG_IN_GUEST);
 
 export const logOut = () => actionBuilder(LOG_OUT, {});
 

@@ -9,19 +9,13 @@ import values from 'lodash/values';
 
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Img from 'components/Img';
-import Loader from 'components/Loader';
 import Row from 'components/Row';
 import Select from 'components/Select';
 import Switch from 'components/Switch';
-
-import playButton from 'assets/svg/play-button-1.svg';
-import stopButton from 'assets/svg/stop-button-1.svg';
-import { StyledInput } from 'components/Input/StyledInput';
-import { colors } from 'theme';
 import {
   makeSelectLoader,
   makeSelectSelectedQuestionType,
+  makeSelectNameQuestionExists,
 } from 'global/reducers/questions';
 import { speechAnimations } from 'utils/animations/animationsNames';
 import { splitAndKeep } from 'utils/splitAndKeep';
@@ -42,8 +36,7 @@ import animationMessages from './messages';
 import { updateBlockSettings, switchSpeechReflection } from '../../actions';
 import messages from '../messages';
 import ClearAnimationButton from './clearAnimationButton';
-
-const BUTTON_MARGIN = '10px';
+import SpeechInput from './SpeechInput';
 
 const SpeechBlock = ({
   formatMessage,
@@ -61,6 +54,7 @@ const SpeechBlock = ({
   currentQuestionType,
   disabled,
   animationDisabled,
+  nameQuestionExists,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [text, setText] = useState(join(block.text, ''));
@@ -115,8 +109,6 @@ const SpeechBlock = ({
     setHasFocus(false);
   };
 
-  const button = isPlaying ? stopButton : playButton;
-
   const selectedOption = selectOptions.find(
     option => option.value === block.animation,
   );
@@ -127,12 +119,6 @@ const SpeechBlock = ({
 
   const hasSpecialPositioning = block.action !== feedbackActions.noAction;
   const isAnimationDisabled = disabled || animationDisabled;
-
-  const renderButton = () => {
-    if (isSpeechUpdating) return <Loader size={24} type="inline" />;
-
-    return <Img src={button} onClick={handleButtonClick} clickable />;
-  };
 
   return (
     <Column>
@@ -178,27 +164,18 @@ const SpeechBlock = ({
               onToggle={() => switchToReflection(blockIndex, id)}
             />
           </Row>
-          <Box position="relative">
-            <Box mt={15} bg={colors.linkWater} width="100%">
-              <StyledInput
-                disabled={disabled}
-                type="multiline"
-                rows="10"
-                placeholder={formatMessage(messages.speechPlaceholder)}
-                value={text}
-                onBlur={handleBlur}
-                onFocus={() => setHasFocus(true)}
-              />
-            </Box>
-            <Box
-              position="absolute"
-              bottom={BUTTON_MARGIN}
-              right={BUTTON_MARGIN}
-              hidden={hasFocus}
-            >
-              {renderButton()}
-            </Box>
-          </Box>
+          <SpeechInput
+            formatMessage={formatMessage}
+            disabled={disabled}
+            text={text}
+            handleBlur={handleBlur}
+            handleButtonClick={handleButtonClick}
+            hasFocus={hasFocus}
+            isPlaying={isPlaying}
+            isSpeechUpdating={isSpeechUpdating}
+            setHasFocus={setHasFocus}
+            nameQuestionExists={nameQuestionExists}
+          />
         </>
       )}
     </Column>
@@ -227,12 +204,14 @@ SpeechBlock.propTypes = {
   currentQuestionType: PropTypes.string,
   disabled: PropTypes.bool,
   animationDisabled: PropTypes.bool,
+  nameQuestionExists: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   updateLoader: makeSelectLoader('updateQuestionLoading'),
   previewData: makeSelectPreviewData(),
   currentQuestionType: makeSelectSelectedQuestionType(),
+  nameQuestionExists: makeSelectNameQuestionExists(),
 });
 
 const mapDispatchToProps = {

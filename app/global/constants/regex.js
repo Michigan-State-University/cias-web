@@ -15,3 +15,6 @@ export const passwordRegex = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]
 export const numericRegex = /^[0-9\b]+$/;
 
 export const currencyRegex = /^[0-9]+\.?[0-9]{0,2}$/;
+
+export const previewRegex = /(.*)\/interventions($|\/.*)\/sessions($|\/.*)\/preview($|\/.*)/;
+export const guestLogInRegex = /(.*)preview_session_users($|\/.*)/;

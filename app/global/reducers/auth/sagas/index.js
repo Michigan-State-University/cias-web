@@ -9,6 +9,7 @@ import changeEmailSaga from './changeEmail';
 import changePhoneNumberSaga from './changePhoneNumber';
 import changeNotificationsSettingsSaga from './changeNotificationsSettings';
 import sendSmsTokenSaga from './sendSmsToken';
+import logInGuestSaga from './logInGuest';
 
 export {
   logOutSaga,
@@ -21,6 +22,7 @@ export {
   changeNotificationsSettingsSaga,
   confirmPhoneNumberSaga,
   sendSmsTokenSaga,
+  logInGuestSaga,
 };
 
 export default function* allAuthSagas() {
@@ -35,5 +37,6 @@ export default function* allAuthSagas() {
     changeNotificationsSettingsSaga(),
     confirmPhoneNumberSaga(),
     sendSmsTokenSaga(),
+    logInGuestSaga(),
   ]);
 }

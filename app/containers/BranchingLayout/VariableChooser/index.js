@@ -14,7 +14,7 @@ import Badge from 'components/Badge';
 import Loader from 'components/Loader';
 import webpage from 'assets/svg/webpage-mouseover.svg';
 import {
-  makeSelectQuestions,
+  makeSelectFilteredQuestions,
   makeSelectSelectedQuestion,
 } from 'global/reducers/questions';
 
@@ -28,6 +28,7 @@ import {
   makeSelectGetQuestionGroupLoader,
   makeSelectQuestionGroups,
 } from 'global/reducers/questionGroups';
+import { nameQuestion } from 'models/Session/QuestionTypes';
 import messages from './messages';
 
 const VariableChooser = ({
@@ -39,12 +40,17 @@ const VariableChooser = ({
   visible,
   setOpen,
   loading,
+  includeAllVariables,
 }) => {
   const { id } = selectedQuestion;
   const previousQuestions = useMemo(
-    () => getPreviousQuestions(selectedQuestion, questions, groups),
+    () =>
+      includeAllVariables
+        ? questions
+        : getPreviousQuestions(selectedQuestion, questions, groups),
     [selectedQuestion, questions, groups],
   );
+
   const variables = getAllVariables(previousQuestions, {
     structure: 'flat',
     include: ['id', 'subtitle'],
@@ -54,8 +60,13 @@ const VariableChooser = ({
   useOutsideClick(variableChooser, () => setOpen(false), visible);
 
   const displayContent = () => {
-    if (variables && variables.length)
-      return variables.map((variable, index) => (
+    const filteredVariables = variables?.length
+      ? variables.filter(
+          ({ variable }) => variable !== nameQuestion.reservedVariable,
+        )
+      : undefined;
+    if (filteredVariables && filteredVariables.length)
+      return filteredVariables.map((variable, index) => (
         <Row
           data-testid={`${id}-select-variable`}
           key={`${id}-select-variable-${index}`}
@@ -126,11 +137,12 @@ VariableChooser.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
   visible: PropTypes.bool,
   loading: PropTypes.bool,
+  includeAllVariables: PropTypes.bool,
   setOpen: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  questions: makeSelectQuestions(),
+  questions: makeSelectFilteredQuestions(),
   groups: makeSelectQuestionGroups(),
   selectedQuestion: makeSelectSelectedQuestion(),
   loading: makeSelectGetQuestionGroupLoader(),

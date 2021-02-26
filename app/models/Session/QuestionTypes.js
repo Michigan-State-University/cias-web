@@ -19,6 +19,19 @@ export const textboxQuestion = new QuestionType(
   colors.tangerine,
 );
 
+export const thirdPartyQuestion = new QuestionType(
+  'Question::ThirdParty',
+  'Third Party',
+  colors.pistachio,
+);
+
+export const nameQuestion = new QuestionType(
+  'Question::Name',
+  'Name',
+  colors.aqua,
+  '.:name:.',
+);
+
 export const numberQuestion = new QuestionType(
   'Question::Number',
   'Number',
@@ -73,6 +86,12 @@ export const dateQuestion = new QuestionType(
   colors.bluewood,
 );
 
+export const participantReport = new QuestionType(
+  'Question::ParticipantReport',
+  'ParticipantReport',
+  colors.electricViolet,
+);
+
 export const currencyQuestion = new QuestionType(
   'Question::Currency',
   'Currency',
@@ -87,6 +106,7 @@ export const QuestionTypes = [
   textboxQuestion,
   phoneQuestion,
   dateQuestion,
+  nameQuestion,
   currencyQuestion,
   numberQuestion,
   gridQuestion,
@@ -95,4 +115,6 @@ export const QuestionTypes = [
   urlQuestion,
   feedbackQuestion,
   finishQuestion,
+  participantReport,
+  thirdPartyQuestion,
 ];

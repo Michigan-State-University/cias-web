@@ -5,10 +5,10 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
 import { createIntervention } from 'utils/reducerCreators';
-import { defaultMapper } from 'utils/mapResponseObjects';
 import { initialState } from 'global/reducers/intervention/reducer';
 import { fetchInterventionRequest } from 'global/reducers/intervention';
 import { apiSessionResponse } from 'utils/apiResponseCreators';
+import { mapJsonApiToObject } from 'utils/jsonApiMapper';
 
 import { getSession } from 'global/reducers/session/sagas/getSession';
 import { getSessionSuccess, getSessionError } from '../../actions';
@@ -30,7 +30,11 @@ describe('getSession saga', () => {
     return expectSaga(getSession, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(getSessionSuccess(defaultMapper(apiResponse.data)))
+      .put(
+        getSessionSuccess(
+          mapJsonApiToObject(apiResponse, 'session', { isSingleObject: true }),
+        ),
+      )
       .run();
   });
 
@@ -40,7 +44,11 @@ describe('getSession saga', () => {
       .withState({ intervention: {} })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(fetchInterventionRequest(payload.interventionId))
-      .put(getSessionSuccess(defaultMapper(apiResponse.data)))
+      .put(
+        getSessionSuccess(
+          mapJsonApiToObject(apiResponse, 'session', { isSingleObject: true }),
+        ),
+      )
       .run();
   });
   it('Check getSession error connection', () => {

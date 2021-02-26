@@ -4,8 +4,8 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-
 import { useInjectSaga } from 'redux-injectors';
+
 import Row from 'components/Row';
 import Tabs from 'components/Tabs';
 import { StyledInput } from 'components/Input/StyledInput';
@@ -13,6 +13,9 @@ import Spinner from 'components/Spinner';
 import PreviewButton from 'components/PreviewButton';
 import Img from 'components/Img';
 import Box from 'components/Box';
+import ActionIcon from 'components/ActionIcon';
+import Circle from 'components/Circle';
+
 import {
   makeSelectQuestionsLength,
   makeSelectSelectedQuestionId,
@@ -24,11 +27,14 @@ import {
   makeSelectSessionEditLoader,
 } from 'global/reducers/session';
 import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
-import { themeColors } from 'theme';
+import { makeSelectReportTemplatesLoaders } from 'global/reducers/reportTemplates';
+
+import { colors, themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
+
 import backButton from 'assets/svg/arrow-black.svg';
 
-import ActionIcon from 'components/ActionIcon';
+import { redirectToPreview } from 'containers/AnswerSessionPage/actions';
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit, canPreview } from 'models/Status/statusPermissions';
 import messages from './messages';
@@ -42,11 +48,14 @@ import {
 const getActiveTab = (path, formatMessage) => {
   if (path.includes('/edit')) return formatMessage(messages.content);
   if (path.includes('/settings')) return formatMessage(messages.settings);
+  if (path.includes('/report-templates'))
+    return formatMessage(messages.reportTemplates);
   return formatMessage(messages.sharing);
 };
 
 const InterventionNavbar = ({
-  session: { name },
+  session: { name, reportTemplatesCount },
+  reportsLoaders: { updateReportTemplateLoading },
   updateSessionName,
   intl: { formatMessage },
   location: { pathname },
@@ -56,6 +65,7 @@ const InterventionNavbar = ({
   questionGroupsEditing,
   interventionStatus,
   match: { params },
+  redirectToPreviewAction,
 }) => {
   const { interventionId, sessionId } = params;
 
@@ -71,7 +81,11 @@ const InterventionNavbar = ({
 
   const editingPossible = canEdit(interventionStatus);
 
-  const isSaving = questionGroupsEditing || interventionEditing;
+  const isSaving =
+    questionGroupsEditing || interventionEditing || updateReportTemplateLoading;
+
+  const handleRedirect = () =>
+    redirectToPreviewAction(interventionId, sessionId, selectedQuestion);
 
   return (
     <Row align="center" justify="between" width="100%" mr={35}>
@@ -120,6 +134,26 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
+        <div
+          linkMatch={formatMessage(messages.reportTemplates)}
+          renderAsLink={
+            <StyledLink
+              to={`/interventions/${interventionId}/sessions/${sessionId}/report-templates`}
+            >
+              <Row style={{ lineHeight: 'normal' }} align="center">
+                {formatMessage(messages.reportTemplates)}
+                <Circle
+                  bg={themeColors.secondary}
+                  color={colors.white}
+                  child={reportTemplatesCount ?? 0}
+                  size="16px"
+                  fontSize={11}
+                  ml={5}
+                />
+              </Row>
+            </StyledLink>
+          }
+        />
       </Tabs>
       <Box display="flex" align="center">
         <SaveInfoContainer>
@@ -141,10 +175,9 @@ const InterventionNavbar = ({
           )}
         </SaveInfoContainer>
         <PreviewButton
-          to={`/interventions/${interventionId}/sessions/${sessionId}/preview/${selectedQuestion}`}
           previewDisabled={previewDisabled}
           text={formatMessage(messages.previewCurrent)}
-          target="_blank"
+          handleClick={handleRedirect}
         />
       </Box>
     </Row>
@@ -154,6 +187,7 @@ const InterventionNavbar = ({
 InterventionNavbar.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
+    reportTemplatesCount: PropTypes.number,
     id: PropTypes.string,
   }),
   updateSessionName: PropTypes.func,
@@ -165,6 +199,8 @@ InterventionNavbar.propTypes = {
   questionGroupsEditing: PropTypes.bool,
   match: PropTypes.object,
   interventionStatus: PropTypes.string,
+  reportsLoaders: PropTypes.object,
+  redirectToPreviewAction: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -173,11 +209,13 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestionId(),
   interventionEditing: makeSelectSessionEditLoader(),
   questionGroupsEditing: makeSelectQuestionGroupsLoader(),
+  reportsLoaders: makeSelectReportTemplatesLoaders(),
   interventionStatus: makeSelectInterventionStatus(),
 });
 
 const mapDispatchToProps = {
   updateSessionName: editSessionRequest,
+  redirectToPreviewAction: redirectToPreview,
 };
 
 export default compose(

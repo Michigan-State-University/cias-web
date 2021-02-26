@@ -28,9 +28,9 @@ import {
   makeSelectCurrentSessionIndex,
 } from 'global/reducers/intervention';
 import {
-  makeSelectQuestions,
   makeSelectSelectedQuestion,
   makeSelectSelectedQuestionId,
+  makeSelectFilteredQuestions,
 } from 'global/reducers/questions';
 import { makeSelectQuestionGroups } from 'global/reducers/questionGroups';
 
@@ -274,7 +274,7 @@ TargetQuestionChooser.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   session: makeSelectSession(),
-  questions: makeSelectQuestions(),
+  questions: makeSelectFilteredQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
   currentIndex: makeSelectSelectedQuestionId(),
   interventionLoading: makeSelectInterventionLoader('fetchInterventionLoading'),

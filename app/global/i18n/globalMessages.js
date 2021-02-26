@@ -23,7 +23,10 @@ import {
   visualAnalogueScaleQuestion,
   phoneQuestion,
   dateQuestion,
+  nameQuestion,
   currencyQuestion,
+  thirdPartyQuestion,
+  participantReport,
 } from 'models/Session/QuestionTypes';
 
 export const scope = 'app.GlobalMessages';
@@ -59,6 +62,10 @@ export default defineMessages({
     variableScorePlaceholder: {
       id: `${scope}.variableScorePlaceholder`,
       defaultMessage: 'Score',
+    },
+    emailPlaceholder: {
+      id: `${scope}.emailPlaceholder`,
+      defaultMessage: 'Email',
     },
     value: {
       id: `${scope}.value`,
@@ -124,6 +131,14 @@ export default defineMessages({
       id: `${scope}.${phoneQuestion.id}`,
       defaultMessage: 'Phone',
     },
+    [nameQuestion.id]: {
+      id: `${scope}.${nameQuestion.id}`,
+      defaultMessage: 'Name',
+    },
+    [participantReport.id]: {
+      id: `${scope}.${participantReport.id}`,
+      defaultMessage: 'Participant Report',
+    },
     [numberQuestion.id]: {
       id: `${scope}.${numberQuestion.id}`,
       defaultMessage: 'Number',
@@ -163,6 +178,10 @@ export default defineMessages({
     [currencyQuestion.id]: {
       id: `${scope}.${currencyQuestion.id}`,
       defaultMessage: 'Currency',
+    },
+    [thirdPartyQuestion.id]: {
+      id: `${scope}.${thirdPartyQuestion.id}`,
+      defaultMessage: 'Third Party',
     },
   },
   statuses: {

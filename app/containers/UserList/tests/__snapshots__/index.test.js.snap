@@ -151,7 +151,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
         >
           <table
-            class="Table-sc-1y0iqmn-0 fyHrUS"
+            class="Table-sc-1y0iqmn-0 hyqcGV"
             width="100%"
           >
             <thead
@@ -569,7 +569,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           class="styled__TableLoadingContainer-skadoa-0 hSHnNK"
         >
           <table
-            class="Table-sc-1y0iqmn-0 fyHrUS"
+            class="Table-sc-1y0iqmn-0 hyqcGV"
             width="100%"
           >
             <thead

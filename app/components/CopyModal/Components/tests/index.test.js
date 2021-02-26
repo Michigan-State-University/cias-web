@@ -8,6 +8,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { sessionReducer } from 'global/reducers/session';
 import { localStateReducer } from 'global/reducers/localState';
 import { interventionsReducer } from 'global/reducers/interventions';
+import { interventionReducer } from 'global/reducers/intervention';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import CopyChooser from '../index';
@@ -42,6 +43,7 @@ describe('<CopyChooser />', () => {
     session: {
       session: mockSession(),
     },
+    intervention: { intervention: { ...mockIntervention() } },
   };
 
   beforeAll(() => {
@@ -50,6 +52,7 @@ describe('<CopyChooser />', () => {
       session: sessionReducer,
       localState: localStateReducer,
       interventions: interventionsReducer,
+      intervention: interventionReducer,
     };
   });
 

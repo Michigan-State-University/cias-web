@@ -8,8 +8,10 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
+import { useHistory } from 'react-router-dom';
 
 import Row from 'components/Row';
+import Column from 'components/Column';
 import Dropdown from 'components/Dropdown';
 import Divider from 'components/Divider';
 import StyledLink from 'components/StyledLink';
@@ -27,6 +29,7 @@ import Img from 'components/Img';
 import Box from 'components/Box';
 import { VIEWS } from 'components/CopyModal/Components';
 import CopyModal from 'components/CopyModal';
+import Badge from 'components/Badge';
 import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
 import { ToggleableBox, StyledRow, SessionIndex } from './styled';
@@ -47,6 +50,8 @@ function SessionListItem({
   handleDeleteSession,
   handleExternalCopySession,
 }) {
+  const history = useHistory();
+
   const [isHovered, setIsHovered] = useState(false);
   const [copyOpen, setCopyOpen] = useState(false);
   const {
@@ -58,6 +63,7 @@ function SessionListItem({
     schedule_at: scheduleAt,
     schedule_payload: schedulePayload,
     settings,
+    report_templates_count: reportTemplatesCount,
   } = session || {};
 
   const options = [
@@ -91,6 +97,14 @@ function SessionListItem({
 
   const externalCopy = params =>
     handleExternalCopySession({ ...params, sessionId: id });
+
+  const goToReportTemplates = event => {
+    event.preventDefault();
+
+    const url = `/interventions/${interventionId}/sessions/${id}/report-templates`;
+
+    history.push(url);
+  };
 
   return (
     <Draggable
@@ -127,7 +141,18 @@ function SessionListItem({
                   justify="start"
                 >
                   <SessionIndex>{index + 1}</SessionIndex>
-                  <H2 ml={15}>{name}</H2>
+                  <Column>
+                    <H2 ml={15}>{name}</H2>
+                    <Badge
+                      ml={15}
+                      bg={themeColors.secondary}
+                      onClick={goToReportTemplates}
+                    >
+                      {formatMessage(messages.reportsCount, {
+                        count: reportTemplatesCount ?? 0,
+                      })}
+                    </Badge>
+                  </Column>
                 </StyledLink>
               </StyledRow>
               <Row width="40%" xs={1} align="center" justify="around">

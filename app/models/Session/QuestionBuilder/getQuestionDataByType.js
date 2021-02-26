@@ -5,6 +5,8 @@ import {
   visualAnalogueScaleQuestion,
   informationQuestion,
   feedbackQuestion,
+  nameQuestion,
+  thirdPartyQuestion,
 } from '../QuestionTypes';
 
 export const getQuestionDataByType = type => {
@@ -61,6 +63,17 @@ export const getQuestionDataByType = type => {
             spectrum: { payload: '', patterns: [] },
           },
         ],
+      };
+
+    case nameQuestion.id:
+      return {
+        data: [{ payload: '' }],
+        variable: { name: nameQuestion.reservedVariable },
+      };
+
+    case thirdPartyQuestion.id:
+      return {
+        data: [{ payload: '', value: '' }],
       };
 
     default:

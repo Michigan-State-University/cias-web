@@ -61,7 +61,7 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="Box-sc-1vhutan-0 styled__CardBox-sc-1x1cot6-3 cVZZaQ gvMXdL"
+          class="Box-sc-1vhutan-0 styled__CardBox-sc-1x1cot6-3 cVZZaQ jfWIRU"
         >
           <h2
             class="H2-uw8lbl-0 iUhbVg"

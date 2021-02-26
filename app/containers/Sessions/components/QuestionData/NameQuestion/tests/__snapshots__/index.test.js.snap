@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
+<div
+  class="Column-sc-4zswzq-0 fgvXEf"
+>
+  <div
+    style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
+  >
+    <div
+      style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+    >
+      <div
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
+      >
+        <div
+          class="Box-sc-1vhutan-0 gPXzKJ"
+        >
+          <div
+            class="Row-y1cs0u-0 gQFDhs"
+            width="100%"
+          >
+            <div
+              class="Column-sc-4zswzq-0 ekpwZH"
+            >
+              <input
+                class="Input-t9j2q5-0 hwMwnZ"
+                disabled=""
+                height="100%"
+                placeholder="Enter your name"
+                type="text"
+                value=""
+                width="100%"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
+      >
+        <div
+          class="Column-sc-4zswzq-0 ekpwZH"
+        >
+          <div
+            class="Box-sc-1vhutan-0 eRJSy"
+          >
+            <input
+              class="Input-t9j2q5-0 cSqYOu"
+              disabled=""
+              height="100%"
+              placeholder="Enter your name phonetically"
+              type="text"
+              value=""
+              width="100%"
+            />
+          </div>
+          <div
+            class="Row-y1cs0u-0 bOYLvV"
+            disabled=""
+            height="25"
+            width="80"
+          >
+            <img
+              class="Img-sc-55j3su-0 cDhXoN"
+              src="IMAGE_MOCK"
+            />
+            <p
+              class="Text-e4p0w3-0 ixAmEb"
+              color="#C866EA"
+            >
+              Try it out!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span
+      style="display: table; clear: both;"
+    />
+  </div>
+</div>
+`;

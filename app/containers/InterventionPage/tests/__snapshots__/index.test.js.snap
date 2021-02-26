@@ -39,7 +39,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="styled__StatusLabel-ve6hnx-1 idFZxb"
+                class="styled__StatusLabel-ve6hnx-1 jLCcXY"
                 color="#107969"
                 value="draft"
               >
@@ -55,7 +55,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="styled__StatusLabel-ve6hnx-1 dMqeJe"
+                class="styled__StatusLabel-ve6hnx-1 kaTVpF"
                 color="#8CBD00"
                 value="published"
               >
@@ -71,7 +71,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="styled__StatusLabel-ve6hnx-1 kkwIyq"
+                class="styled__StatusLabel-ve6hnx-1 iimraB"
                 color="#F0684A"
                 value="closed"
               >
@@ -87,7 +87,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
             >
               <button
-                class="styled__StatusLabel-ve6hnx-1 lhfJDQ"
+                class="styled__StatusLabel-ve6hnx-1 jWQWjX"
                 color="#000000"
                 value="archived"
               >
@@ -142,7 +142,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
       >
         <div
-          class="styled__NewElementContainer-sc-1527ipx-1 eZiUNr"
+          class="styled__NewElementContainer-sc-1527ipx-1 kvaBVQ"
           data-cy="create-intervention-button"
         >
           <div
@@ -167,7 +167,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
           href="/interventions/undefined/"
         >
           <div
-            class="styled__TileContainer-agddns-0 bxXcFy"
+            class="styled__TileContainer-agddns-0 igcEXR"
           >
             <div
               class="styled__Heading-agddns-2 bzFUQe"

@@ -26,6 +26,7 @@ import {
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 
 import { canEdit } from 'models/Status/statusPermissions';
+import { nameQuestion } from 'models/Session/QuestionTypes';
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
 import QuestionNarrator from '../QuestionNarrator';
@@ -72,6 +73,7 @@ const RenderQuestionDetails = ({
       image_url: imageUrl,
       video_url: videoUrl,
       body,
+      type,
       settings: {
         video,
         image,
@@ -81,6 +83,8 @@ const RenderQuestionDetails = ({
       } = {},
       narrator: { settings } = {},
     } = selectedQuestion || {};
+
+    const isNameScreen = type === nameQuestion.id;
 
     return (
       <AnswerOuterContainer>
@@ -134,6 +138,7 @@ const RenderQuestionDetails = ({
                     {body && hasObjectProperty(body, 'variable') && (
                       <Row mt={10} ml={26}>
                         <VariableInput
+                          disabled={isNameScreen}
                           questionId={id}
                           interventionStatus={interventionStatus}
                           isNarratorTab={isNarratorTab}

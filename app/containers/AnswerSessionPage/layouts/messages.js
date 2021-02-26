@@ -23,8 +23,42 @@ export default defineMessages({
     id: `${scope}.chooseDate`,
     defaultMessage: 'Choose date',
   },
+  enterName: {
+    id: `${scope}.enterName`,
+    defaultMessage: 'Enter your name',
+  },
+  enterNamePhonetically: {
+    id: `${scope}.enterNamePhonetically`,
+    defaultMessage: 'Enter your name phonetically',
+  },
   amountPlaceholder: {
     id: `${scope}.amountPlaceholder`,
     defaultMessage: 'E.g. 121.12',
+  },
+  provideEmail: {
+    id: `${scope}.provideEmail`,
+    defaultMessage: 'Provide your email',
+  },
+  emailPlaceholder: {
+    id: `${scope}.emailPlaceholder`,
+    defaultMessage: 'Email...',
+  },
+  reportHeader: {
+    id: `${scope}.reportHeader`,
+    defaultMessage:
+      'Would you like to receive a report generated from your responses?',
+  },
+  reportYesOption: {
+    id: `${scope}.reportYesOption`,
+    defaultMessage: 'Yes',
+  },
+  reportNoOption: {
+    id: `${scope}.reportNoOption`,
+    defaultMessage: 'No',
+  },
+  participantReportUserEmail: {
+    id: `${scope}.participantReportUserEmail`,
+    defaultMessage:
+      'Your email is: <span style="font-weight: 700;">{email}</span>',
   },
 });

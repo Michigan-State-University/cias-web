@@ -49,4 +49,8 @@ export default defineMessages({
     id: `${scope}.pasteSession`,
     defaultMessage: 'Paste session in this intervention',
   },
+  reportsCount: {
+    id: `${scope}.reportsCount`,
+    defaultMessage: '{count} reports',
+  },
 });

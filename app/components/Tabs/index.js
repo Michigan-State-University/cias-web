@@ -31,9 +31,9 @@ const Tabs = ({
   const tab = controlled ? controlledTabActive : activeTab;
   return (
     <TabsContainer {...restProps}>
-      <Row data-cy="tabs">
+      <Row data-cy="tabs" align="end">
         {children.map(child => {
-          const { label, renderAsLink, hidden } = child.props;
+          const { label, renderAsLink, hidden, linkMatch } = child.props;
 
           if (hidden) return null;
 
@@ -44,6 +44,7 @@ const Tabs = ({
               text={label || renderAsLink.props.children}
               label={label}
               renderAsLink={renderAsLink}
+              linkMatch={linkMatch}
               onClick={onClickTabItem}
             />
           );
@@ -63,7 +64,10 @@ const Tabs = ({
 Tabs.propTypes = {
   children: PropTypes.arrayOf(PropTypes.node),
   controlled: PropTypes.bool,
-  controlledTabActive: PropTypes.string,
+  controlledTabActive: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object,
+  ]),
   controlledSetTabActive: PropTypes.func,
 };
 

@@ -60,7 +60,8 @@ const ApprovableInput = props => {
     width,
     padding,
     defaultFontSize,
-    dateInputStyles,
+    styles,
+    minDate,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [focused, setfocused] = useState(false);
@@ -152,7 +153,7 @@ const ApprovableInput = props => {
         <DatePickerWrapper>
           <DatePicker
             disabled={disabled}
-            minDate={new Date()}
+            minDate={minDate}
             selected={value}
             onChange={date => onCheck(date)}
             placeholderText={placeholder}
@@ -163,7 +164,7 @@ const ApprovableInput = props => {
                 height={height}
                 width={width}
                 ref={ref}
-                inputStyles={dateInputStyles}
+                inputStyles={styles}
               />
             }
             showMonthDropdown
@@ -187,6 +188,7 @@ const ApprovableInput = props => {
         disabled={disabled}
         fontSize={fontSize}
         padding={padding}
+        {...styles}
       />
     );
   };
@@ -217,7 +219,8 @@ ApprovableInput.propTypes = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   padding: PropTypes.number,
   defaultFontSize: PropTypes.number,
-  dateInputStyles: PropTypes.object,
+  minDate: PropTypes.object,
+  styles: PropTypes.object,
 };
 
 ApprovableInput.defaultProps = {

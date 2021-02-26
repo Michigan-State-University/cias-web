@@ -20,6 +20,7 @@ import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
 import SettingsInterventionPage from 'containers/Sessions/containers/SettingsSessionPage';
+import ReportTemplatesPage from 'containers/Sessions/containers/ReportTemplatesPage';
 import AccountSettings from 'containers/AccountSettings/Loadable';
 import ResetPasswordPage from 'containers/ResetPasswordPage/Loadable';
 import SetNewPasswordPage from 'containers/SetNewPasswordPage/Loadable';
@@ -69,6 +70,19 @@ export function App({ user }) {
           return NotFoundPage;
       }
     } else return <LoginPage />;
+  };
+
+  const renderUserListByRole = () => {
+    if (user) {
+      switch (user.roles[0]) {
+        case Roles.admin:
+          return <UserListPage />;
+        case Roles.researcher:
+          return <UserListPage filterableRoles={[Roles.participant]} />;
+        default:
+          return NotFoundPage;
+      }
+    }
   };
 
   return (
@@ -138,8 +152,18 @@ export function App({ user }) {
         />
         <AppRoute
           exact
+          path="/interventions/:interventionId/sessions/:sessionId/report-templates"
+          component={ReportTemplatesPage}
+          protectedRoute
+          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          navbarProps={{
+            navbarId: 'sessions',
+          }}
+        />
+        <AppRoute
+          exact
           path="/users"
-          component={UserListPage}
+          component={renderUserListByRole}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher]}
           navbarProps={{

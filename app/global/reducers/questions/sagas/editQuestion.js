@@ -3,12 +3,19 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import get from 'lodash/get';
 
-import { getAllVariables, NotAnswerableQuestions } from 'models/Session/utils';
+import {
+  getAllVariables,
+  QuestionsWithoutVariable,
+} from 'models/Session/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { gridQuestion, multiQuestion } from 'models/Session/QuestionTypes';
+import {
+  gridQuestion,
+  multiQuestion,
+  nameQuestion,
+} from 'models/Session/QuestionTypes';
 import messages from '../messages';
 import {
   EDIT_QUESTION_REQUEST,
@@ -26,6 +33,28 @@ import {
   makeSelectQuestionById,
 } from '../selectors';
 
+const validateVariable = (payload, question, variables) => {
+  if (QuestionsWithoutVariable.includes(question.type)) {
+    return;
+  }
+  const duplicateError = new Error(formatMessage(messages.duplicateVariable));
+  const reservedError = new Error(formatMessage(messages.reservedVariable));
+
+  if (payload.data && payload.data.name === nameQuestion.reservedVariable)
+    throw reservedError;
+  else if (question.type === multiQuestion.id) {
+    question.body.data.forEach(element => {
+      if (hasDuplicates(variables, element.variable.name)) throw duplicateError;
+    });
+  } else if (question.type === gridQuestion.id) {
+    question.body.data[0].payload.rows.forEach(element => {
+      if (hasDuplicates(variables, element.variable.name)) throw duplicateError;
+    });
+  } else if (hasDuplicates(variables, question.body.variable.name)) {
+    throw duplicateError;
+  }
+};
+
 function* editQuestion({ payload }) {
   const questionId = get(payload, 'data.questionId', undefined);
   const question = yield select(
@@ -38,28 +67,15 @@ function* editQuestion({ payload }) {
     currentVariable => currentVariable && currentVariable.trim(),
   );
 
-  let duplicates = false;
-
-  if (question.type === multiQuestion.id) {
-    question.body.data.forEach(element => {
-      if (hasDuplicates(variables, element.variable.name)) duplicates = true;
-    });
-  } else if (question.type === gridQuestion.id) {
-    question.body.data[0].payload.rows.forEach(element => {
-      if (hasDuplicates(variables, element.variable.name)) duplicates = true;
-    });
-  } else if (NotAnswerableQuestions.includes(question.type)) {
-    duplicates = false;
-  } else {
-    duplicates = hasDuplicates(variables, question.body.variable.name);
-  }
-
-  if (duplicates) {
-    yield call(toast.error, formatMessage(messages.duplicateVariable), {
+  try {
+    validateVariable(payload, question, variables);
+  } catch (error) {
+    yield call(toast.error, error.message, {
       toastId: EDIT_QUESTION_ERROR,
     });
     return yield put(editQuestionError({ questionId: question.id }));
   }
+
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
   const requestURL = `v1/question_groups/${
