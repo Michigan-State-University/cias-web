@@ -284,11 +284,6 @@ export function AnswerSessionPage({
   const isDesktop = previewMode === DESKTOP_MODE;
   return (
     <Column height="100%">
-      {interventionStarted && (
-        <Row justify="end" padding={30}>
-          <MSULogo />
-        </Row>
-      )}
       <Box
         display="flex"
         align="center"
@@ -315,6 +310,13 @@ export function AnswerSessionPage({
           {interventionStarted && (
             <>
               <Box width="100%">
+                <Row justify="end" padding={30}>
+                  <MSULogo
+                    {...(isDesktop
+                      ? { position: 'absolute', right: '30px' }
+                      : {})}
+                  />
+                </Row>
                 {!questionLoading && currentQuestion && interventionStarted && (
                   <AnimationRefHelper
                     currentQuestion={currentQuestion}
