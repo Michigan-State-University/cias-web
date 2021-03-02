@@ -15,7 +15,7 @@ function* inviteToTeam({ payload: { email, teamId } }) {
     yield axios.post(requestUrl, { email });
 
     yield put(inviteToTeamSuccess());
-    yield call(toast.success, formatMessage(messages.inviteToTeamSuccess));
+    yield call(toast.info, formatMessage(messages.inviteToTeamSuccess));
   } catch (error) {
     yield put(inviteToTeamFailure(error));
     yield call(toast.error, formatMessage(messages.inviteToTeamFailure));

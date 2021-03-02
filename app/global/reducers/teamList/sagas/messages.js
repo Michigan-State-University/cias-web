@@ -27,7 +27,8 @@ export default defineMessages({
   },
   inviteToTeamSuccess: {
     id: `${scope}.inviteToTeamSuccess`,
-    defaultMessage: 'Successfully invited researcher to the team',
+    defaultMessage:
+      'Invitation request is being sent. Bear in mind that in the case of existing users only Researcher will get the invitation.',
   },
   inviteToTeamFailure: {
     id: `${scope}.inviteToTeamFailure`,
