@@ -40,9 +40,22 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                     class=" css-g1d714-ValueContainer"
                   >
                     <div
-                      class=" css-1wa3eu0-placeholder"
+                      class=" css-1uccc91-singleValue"
                     >
-                      Code
+                      <div
+                        class="Row-y1cs0u-0 ecllgQ"
+                      >
+                        <img
+                          alt="US"
+                          src="https://unpkg.com/react-flag-kit@0.3.1/assets/US.svg"
+                          style="height: 24px; width: 24px; display: inline-block;"
+                        />
+                        <p
+                          class="Text-e4p0w3-0 kbVxuh"
+                        >
+                          US +1
+                        </p>
+                      </div>
                     </div>
                     <div
                       class="css-b8ldur-Input"

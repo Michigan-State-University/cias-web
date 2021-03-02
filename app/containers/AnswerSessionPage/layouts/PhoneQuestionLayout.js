@@ -6,6 +6,8 @@ import Row from 'components/Row';
 import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
 import { colors } from 'theme';
 
+const usPrefix = { prefix: '+1', iso: 'US' };
+
 const PhoneQuestionLayout = ({ onChange, formatMessage, answerBody }) => {
   const value = answerBody && answerBody.value;
   const { number, iso, prefix } = value ?? {};
@@ -23,8 +25,8 @@ const PhoneQuestionLayout = ({ onChange, formatMessage, answerBody }) => {
           formatMessage={formatMessage}
           phone={{
             number,
-            prefix,
-            iso,
+            prefix: prefix ?? usPrefix.prefix,
+            iso: iso ?? usPrefix.iso,
             confirmed: true,
           }}
           changePhoneNumber={onChange}
