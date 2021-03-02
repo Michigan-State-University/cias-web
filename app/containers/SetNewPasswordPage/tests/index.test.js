@@ -21,7 +21,7 @@ describe('<SetNewPasswordPage />', () => {
   const defaultProps = {
     location: {
       search:
-        '?access-token=enCB7gVfDNS5liLLEGCF8A&client=-CmrrhiGqVQ7283-93uZEg&client_id=-CmrrhiGqVQ7283-93uZEg&config=default&expiry=4105036800&reset_password=true&token=enCB7gVfDNS5liLLEGCF8A&uid=petters1111%40gmail.com',
+        '?Access-Token=enCB7gVfDNS5liLLEGCF8A&Client=-CmrrhiGqVQ7283-93uZEg&client_id=-CmrrhiGqVQ7283-93uZEg&config=default&expiry=4105036800&reset_password=true&token=enCB7gVfDNS5liLLEGCF8A&uid=petters1111%40gmail.com',
     },
   };
   it('Expect to not log errors in console', () => {
