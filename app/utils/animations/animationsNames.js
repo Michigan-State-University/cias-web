@@ -6,7 +6,7 @@ const autoRestBodyAnimations = [
   'doMagic',
   'getAttention',
   'search',
-  'suprised',
+  'surprised',
   'flyIn',
   'flyOut',
   'process',
