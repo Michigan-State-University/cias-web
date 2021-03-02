@@ -2078,7 +2078,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                               class="ql-editor"
                               contenteditable="true"
                               data-gramm="false"
-                              data-placeholder="Type subtitle here..."
+                              data-placeholder="Type main text here..."
                             >
                               <p>
                                 Subtitle
@@ -3521,7 +3521,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   width="180px"
                 >
                   <span>
-                    Next screen
+                    Continue
                   </span>
                 </button>
               </div>

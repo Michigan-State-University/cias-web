@@ -31,7 +31,7 @@ export default defineMessages({
   },
   proceed_button: {
     id: `${scope}.proceed_button`,
-    defaultMessage: 'Next Screen Button',
+    defaultMessage: 'Continue Button',
   },
   required: {
     id: `${scope}.required`,
