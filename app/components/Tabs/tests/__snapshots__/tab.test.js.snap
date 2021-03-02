@@ -7,8 +7,8 @@ exports[`<Tab /> should render and match the snapshot for a label 1`] = `
   margin: 0 10px;
   padding-bottom: 7px;
   border-bottom-width: 2px;
-  border-bottom-color: #C866EA;
   border-bottom-style: solid;
+  border-bottom-color: #C866EA;
 }
 
 .c0 div {
@@ -31,8 +31,8 @@ exports[`<Tab /> should render as links and match the snapshot 1`] = `
   margin: 0 10px;
   padding-bottom: 7px;
   border-bottom-width: 2px;
-  border-bottom-color: #C866EA;
   border-bottom-style: solid;
+  border-bottom-color: #C866EA;
 }
 
 .c0 div {

@@ -41,6 +41,7 @@ const VariableChooser = ({
   setOpen,
   loading,
   includeAllVariables,
+  topPosition,
 }) => {
   const { id } = selectedQuestion;
   const previousQuestions = useMemo(
@@ -115,6 +116,7 @@ const VariableChooser = ({
       position="absolute"
       width="auto"
       right="0px"
+      top={topPosition}
       {...(visible ? { zIndex: 1 } : { display: 'none' })}
     >
       <Row>
@@ -139,6 +141,7 @@ VariableChooser.propTypes = {
   loading: PropTypes.bool,
   includeAllVariables: PropTypes.bool,
   setOpen: PropTypes.func,
+  topPosition: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

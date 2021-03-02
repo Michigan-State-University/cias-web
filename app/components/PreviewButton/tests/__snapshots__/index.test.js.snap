@@ -47,13 +47,13 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
   display: inline;
 }
 
-@media only screen and (max-width:1400px) {
+@media only screen and (max-width:1500px) {
   .c1 {
     width: 50px;
   }
 }
 
-@media only screen and (max-width:1400px) {
+@media only screen and (max-width:1500px) {
   .c3 {
     display: none;
   }
@@ -128,13 +128,13 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
   display: inline;
 }
 
-@media only screen and (max-width:1400px) {
+@media only screen and (max-width:1500px) {
   .c1 {
     width: 50px;
   }
 }
 
-@media only screen and (max-width:1400px) {
+@media only screen and (max-width:1500px) {
   .c3 {
     display: none;
   }

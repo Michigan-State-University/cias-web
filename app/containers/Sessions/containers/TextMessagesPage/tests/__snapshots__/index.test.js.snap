@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
+<div
+  class="Row-y1cs0u-0 dskFsL"
+  style="justify-content: center;"
+>
+  <div
+    style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 66.66666666666667%; flex-basis: 66.66666666666667%; flex-grow: 0; flex-shrink: 0; max-width: 66.66666666666667%; margin-left: 0%;"
+  >
+    <div
+      class="styled__StyledTilesContainer-z65den-3 ZailA"
+      style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
+    >
+      <div
+        md="6"
+        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: center;"
+        xs="12"
+        xxl="4"
+      >
+        <div
+          class="styled__FillScreenLoader-sc-1aaagww-0 bcnRTW"
+          data-testid="fullscreen-loader"
+          opacity="0.5"
+        >
+          <div
+            class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
+            color="#C866EA"
+            size="100"
+            width="6"
+          />
+        </div>
+        <div
+          class="styled__StyledCreateTile-z65den-1 gwAvLD"
+        >
+          <div
+            class="Column-sc-4zswzq-0 kbCNXG"
+            disabled=""
+            height="100%"
+          >
+            <img
+              class="Img-sc-55j3su-0 cDhXoN"
+              src="IMAGE_MOCK"
+            />
+            <p
+              class="Text-e4p0w3-0 gHdUtW"
+              color="#FFFFFF"
+              font-size="15"
+              font-weight="bold"
+            >
+              Create a new SMS
+            </p>
+          </div>
+        </div>
+        <div
+          class="styled__StyledTile-z65den-0 kabuA-D"
+        >
+          <p
+            class="Text-e4p0w3-0 jKspVy"
+            font-size="18"
+            font-weight="bold"
+          >
+            Text message plan 1
+          </p>
+          <p
+            class="Text-e4p0w3-0 jhwTed"
+          >
+            Send 3 days after the session is completed
+          </p>
+        </div>
+        <div
+          class="styled__StyledTile-z65den-0 kabuA-D"
+        >
+          <p
+            class="Text-e4p0w3-0 jKspVy"
+            font-size="18"
+            font-weight="bold"
+          >
+            Text message plan 2
+          </p>
+          <p
+            class="Text-e4p0w3-0 jhwTed"
+          >
+            Send after the session is completed
+          </p>
+        </div>
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+        <div
+          class="styled__StyledEmptyTile-z65den-2 kMstat"
+        />
+      </div>
+      <span
+        style="display: table; clear: both;"
+      />
+    </div>
+  </div>
+</div>
+`;

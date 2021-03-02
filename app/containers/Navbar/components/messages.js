@@ -52,4 +52,8 @@ export default defineMessages({
     id: `${scope}.saved`,
     defaultMessage: 'Saved',
   },
+  smsMessaging: {
+    id: `${scope}.smsMessaging`,
+    defaultMessage: 'SMS Messaging',
+  },
 });

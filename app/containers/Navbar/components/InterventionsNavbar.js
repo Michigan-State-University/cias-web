@@ -33,7 +33,10 @@ import { colors, themeColors } from 'theme';
 import check from 'assets/svg/check-green.svg';
 
 import backButton from 'assets/svg/arrow-black.svg';
-
+import {
+  makeSelectTextMessagesSize,
+  makeSelectAllLoaders,
+} from 'global/reducers/textMessages';
 import { redirectToPreview } from 'containers/AnswerSessionPage/actions';
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit, canPreview } from 'models/Status/statusPermissions';
@@ -50,12 +53,15 @@ const getActiveTab = (path, formatMessage) => {
   if (path.includes('/settings')) return formatMessage(messages.settings);
   if (path.includes('/report-templates'))
     return formatMessage(messages.reportTemplates);
+  if (path.includes('/sms-messaging'))
+    return formatMessage(messages.smsMessaging);
   return formatMessage(messages.sharing);
 };
 
 const InterventionNavbar = ({
-  session: { name, reportTemplatesCount },
+  session: { name, reportTemplatesCount, smsPlansCount },
   reportsLoaders: { updateReportTemplateLoading },
+  textLoaders,
   updateSessionName,
   intl: { formatMessage },
   location: { pathname },
@@ -66,6 +72,7 @@ const InterventionNavbar = ({
   interventionStatus,
   match: { params },
   redirectToPreviewAction,
+  textMessagesCount,
 }) => {
   const { interventionId, sessionId } = params;
 
@@ -81,8 +88,13 @@ const InterventionNavbar = ({
 
   const editingPossible = canEdit(interventionStatus);
 
+  const textMessagesCountValue = textMessagesCount || smsPlansCount || '0';
+
   const isSaving =
-    questionGroupsEditing || interventionEditing || updateReportTemplateLoading;
+    questionGroupsEditing ||
+    interventionEditing ||
+    updateReportTemplateLoading ||
+    textLoaders;
 
   const handleRedirect = () =>
     redirectToPreviewAction(interventionId, sessionId, selectedQuestion);
@@ -94,6 +106,7 @@ const InterventionNavbar = ({
           to={`/interventions/${interventionId}`}
           iconSrc={backButton}
         />
+
         <StyledInput
           disabled={!editingPossible}
           px={12}
@@ -140,15 +153,36 @@ const InterventionNavbar = ({
             <StyledLink
               to={`/interventions/${interventionId}/sessions/${sessionId}/report-templates`}
             >
-              <Row style={{ lineHeight: 'normal' }} align="center">
+              <Row style={{ lineHeight: 'normal' }} align="end">
                 {formatMessage(messages.reportTemplates)}
                 <Circle
                   bg={themeColors.secondary}
                   color={colors.white}
+                  size="20px"
                   child={reportTemplatesCount ?? 0}
-                  size="16px"
                   fontSize={11}
                   ml={5}
+                />
+              </Row>
+            </StyledLink>
+          }
+        />
+
+        <div
+          linkMatch={formatMessage(messages.smsMessaging)}
+          renderAsLink={
+            <StyledLink
+              to={`/interventions/${interventionId}/sessions/${sessionId}/sms-messaging`}
+            >
+              <Row align="end">
+                {formatMessage(messages.smsMessaging)}
+                <Circle
+                  bg={themeColors.secondary}
+                  color={colors.white}
+                  size="20px"
+                  fontSize={11}
+                  ml={5}
+                  child={textMessagesCountValue}
                 />
               </Row>
             </StyledLink>
@@ -188,6 +222,7 @@ InterventionNavbar.propTypes = {
   session: PropTypes.shape({
     name: PropTypes.string,
     reportTemplatesCount: PropTypes.number,
+    smsPlansCount: PropTypes.number,
     id: PropTypes.string,
   }),
   updateSessionName: PropTypes.func,
@@ -196,11 +231,13 @@ InterventionNavbar.propTypes = {
   questionsLength: PropTypes.number,
   selectedQuestion: PropTypes.string,
   interventionEditing: PropTypes.bool,
+  textLoaders: PropTypes.bool,
   questionGroupsEditing: PropTypes.bool,
   match: PropTypes.object,
   interventionStatus: PropTypes.string,
   reportsLoaders: PropTypes.object,
   redirectToPreviewAction: PropTypes.func,
+  textMessagesCount: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -211,6 +248,8 @@ const mapStateToProps = createStructuredSelector({
   questionGroupsEditing: makeSelectQuestionGroupsLoader(),
   reportsLoaders: makeSelectReportTemplatesLoaders(),
   interventionStatus: makeSelectInterventionStatus(),
+  textMessagesCount: makeSelectTextMessagesSize(),
+  textLoaders: makeSelectAllLoaders(),
 });
 
 const mapDispatchToProps = {

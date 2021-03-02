@@ -67,3 +67,8 @@ export const createParticipantIntervention = (
   sessions,
   emailNotifications: true,
 });
+
+export const createTextMessage = (index = 0) => ({
+  id: `Text-Message-test-${index}`,
+  title: `Text Message: ${index}`,
+});

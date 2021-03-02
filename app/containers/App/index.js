@@ -32,6 +32,7 @@ import Logout from 'containers/Logout/Loadable';
 import UserDetails from 'containers/UserDetails/Loadable';
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 import ReportsPage from 'containers/ParticipantDashboard/components/ReportsTab/Loadable';
+import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
 
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 
@@ -154,6 +155,16 @@ export function App({ user }) {
           exact
           path="/interventions/:interventionId/sessions/:sessionId/report-templates"
           component={ReportTemplatesPage}
+          protectedRoute
+          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          navbarProps={{
+            navbarId: 'sessions',
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/sms-messaging"
+          component={TextMessagesPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
           navbarProps={{

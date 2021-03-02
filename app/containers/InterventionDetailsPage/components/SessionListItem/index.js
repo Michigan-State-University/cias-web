@@ -144,6 +144,7 @@ function SessionListItem({
                   <Column>
                     <H2 ml={15}>{name}</H2>
                     <Badge
+                      mt={5}
                       ml={15}
                       bg={themeColors.secondary}
                       onClick={goToReportTemplates}

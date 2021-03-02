@@ -34,21 +34,21 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
             data-cy="tabs"
           >
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 gPqsou"
+              class="styled__LabelContainer-sc-1tqggs6-2 hboPKR"
             >
               <div>
                 Settings
               </div>
             </div>
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 gPqsou"
+              class="styled__LabelContainer-sc-1tqggs6-2 hboPKR"
             >
               <div>
                 Narrator
               </div>
             </div>
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 gPqsou"
+              class="styled__LabelContainer-sc-1tqggs6-2 hboPKR"
             >
               <div>
                 Branching
