@@ -52,7 +52,7 @@ export const changeFormulaStatus = (value, sessionId) =>
       type: CHANGE_FORMULA_STATUS,
       data: { value, sessionId },
     },
-    ['settings.formula'],
+    ['settings'],
   );
 
 export const changeSchedulingType = (value, sessionId) =>
