@@ -8,6 +8,13 @@ import { StyledInput } from './StyledInput';
 const BadgeInput = styled(StyledInput).attrs(({ color }) => ({
   bg: color,
   bgOpacity: 0.1,
+  autoComplete: 'off',
+  /*
+   * Safari logic => 'name' field must contain a 'search' word, because it completely ignores 'autocomplete' value.
+   * Welcome to Apple logic => "Think different".
+   * source: https://bytes.grubhub.com/disabling-safari-autofill-for-a-single-line-address-input-b83137b5b1c7
+   * */
+  name: 'notASearchField',
 }))`
   padding: 5px 10px;
   font-size: ${fontSizes.small};

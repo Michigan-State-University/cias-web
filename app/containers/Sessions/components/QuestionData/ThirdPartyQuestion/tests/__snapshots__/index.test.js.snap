@@ -1429,9 +1429,11 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
               class="Row-y1cs0u-0 jKygjZ"
             >
               <input
+                autocomplete="off"
                 class="Input-t9j2q5-0 kwQpmU BadgeInput-sc-1ua27xt-0 eSqSHP"
                 color="#0086F8"
                 data-cy="score-0-input"
+                name="notASearchField"
                 placeholder="Email"
                 type="text"
                 value=""

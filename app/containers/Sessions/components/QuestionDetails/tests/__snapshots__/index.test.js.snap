@@ -3468,8 +3468,10 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   display="flex"
                 >
                   <input
+                    autocomplete="off"
                     class="c22 c23"
                     color="#107969"
+                    name="notASearchField"
                     placeholder="Variable name..."
                     type="tel"
                     value=""

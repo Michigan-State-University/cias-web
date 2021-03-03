@@ -1816,8 +1816,10 @@ exports[`<BadgeInput /> Should render and match the snapshot 1`] = `
 
 <div>
   <input
+    autocomplete="off"
     class="c0 c1"
     color="black"
+    name="notASearchField"
     placeholder="Placeholder"
     type="text"
     value=""
