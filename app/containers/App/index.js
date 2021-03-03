@@ -67,6 +67,8 @@ export function App({ user }) {
           return <InterventionPage />;
         case Roles.participant:
           return <ParticipantDashboard />;
+        case Roles.thirdParty:
+          return <ReportsPage />;
         default:
           return NotFoundPage;
       }

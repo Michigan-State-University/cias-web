@@ -6,7 +6,8 @@ export const Roles = {
   participant: 'participant',
   researcher: 'researcher',
   guest: 'guest',
-  allRoles: ['admin', 'team_admin', 'participant', 'researcher'],
+  thirdParty: 'third_party',
+  allRoles: ['admin', 'team_admin', 'participant', 'researcher', 'third_party'],
 };
 
 export const RolesColors = {
@@ -15,4 +16,5 @@ export const RolesColors = {
   [Roles.admin]: colors.buddhaGold,
   [Roles.teamAdmin]: colors.navyBlue,
   [Roles.guest]: colors.azure,
+  [Roles.thirdParty]: colors.olive,
 };

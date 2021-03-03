@@ -62,6 +62,7 @@ const navbarTabs = {
     participantDashboardTab(navbarNames.participantInterventions),
     participantReportsTab(navbarNames.participantReports),
   ],
+  [Roles.thirdParty]: [],
   [Roles.guest]: [
     {
       message: navbarNames.guestInterventions,

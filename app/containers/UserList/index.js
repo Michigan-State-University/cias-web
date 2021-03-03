@@ -233,7 +233,12 @@ UserList.propTypes = {
 
 UserList.defaultProps = {
   listOnly: false,
-  filterableRoles: [Roles.participant, Roles.researcher, Roles.teamAdmin],
+  filterableRoles: [
+    Roles.participant,
+    Roles.researcher,
+    Roles.teamAdmin,
+    Roles.thirdParty,
+  ],
 };
 
 const mapStateToProps = createStructuredSelector({

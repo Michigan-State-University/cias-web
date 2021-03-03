@@ -101,6 +101,24 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="Box-sc-1vhutan-0 birkxO"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="Text-e4p0w3-0 eAccFX"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Third Party
+                    </p>
+                  </div>
+                </div>
+                <div
                   class="Box-sc-1vhutan-0 jIytus"
                   width="25"
                 />
@@ -515,6 +533,24 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                       font-weight="bold"
                     >
                       Team Admin
+                    </p>
+                  </div>
+                </div>
+                <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
+                >
+                  <div
+                    class="Box-sc-1vhutan-0 birkxO"
+                    display="inline-flex"
+                    width="max-content"
+                  >
+                    <p
+                      class="Text-e4p0w3-0 eAccFX"
+                      color="#FFFFFF"
+                      font-size="14"
+                      font-weight="bold"
+                    >
+                      Third Party
                     </p>
                   </div>
                 </div>

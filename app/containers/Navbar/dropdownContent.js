@@ -20,4 +20,5 @@ export default {
   [Roles.teamAdmin]: [...sharedNavbarElements],
   [Roles.researcher]: [...sharedNavbarElements],
   [Roles.participant]: [...sharedNavbarElements],
+  [Roles.thirdParty]: [...sharedNavbarElements],
 };

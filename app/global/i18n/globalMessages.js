@@ -53,6 +53,10 @@ export default defineMessages({
       id: `${scope}.guest`,
       defaultMessage: 'Guest',
     },
+    third_party: {
+      id: `${scope}.third_party`,
+      defaultMessage: 'Third Party',
+    },
   },
   variables: {
     variableNamePlaceholder: {
