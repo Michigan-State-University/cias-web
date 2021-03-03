@@ -9,10 +9,10 @@ export default defineMessages({
   },
   copyError: {
     id: `${scope}.copyError`,
-    defaultMessage: 'Cannot copy intervention',
+    defaultMessage: 'There was an error during duplicating the Intervention!',
   },
   sendSuccess: {
     id: `${scope}.sendSuccess`,
-    defaultMessage: 'You have successfuly sent a copy of the session!',
+    defaultMessage: 'Duplicated "{name}" Intervention is now on the Dashboard',
   },
 });

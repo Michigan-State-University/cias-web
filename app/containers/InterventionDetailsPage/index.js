@@ -149,7 +149,8 @@ export function InterventionDetailsPage({
 
   const closeModal = () => setModalVisible(false);
   const openModal = () => setModalVisible(true);
-  const handleCopyIntervention = () => copyIntervention({ interventionId: id });
+  const handleCopyIntervention = () =>
+    copyIntervention({ interventionId: id, withoutRedirect: true });
   const handleArchiveIntervention = () =>
     editIntervention({
       path: 'status_event',
@@ -244,7 +245,7 @@ export function InterventionDetailsPage({
   };
 
   const copyInterventionToResearchers = users =>
-    copyIntervention({ interventionId, users });
+    copyIntervention({ interventionId, users, withoutRedirect: true });
 
   const onDragEnd = result => {
     const { source, destination } = result;

@@ -35,9 +35,15 @@ describe('copyIntervention saga', () => {
 
     return expectSaga(copyIntervention, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .call(toast.success, formatMessage(messages.sendSuccess), {
-        toastId: COPY_INTERVENTION_SUCCESS,
-      })
+      .call(
+        toast.success,
+        formatMessage(messages.sendSuccess, {
+          name: apiResponse.data.attributes.name,
+        }),
+        {
+          toastId: COPY_INTERVENTION_SUCCESS,
+        },
+      )
       .run();
   });
 
