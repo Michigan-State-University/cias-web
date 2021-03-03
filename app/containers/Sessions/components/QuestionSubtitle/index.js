@@ -32,7 +32,7 @@ const QuestionSubtitle = ({
           onCheck={handleUpdate}
           autoSize
           richText
-          fontSize={18}
+          fontSize={36}
         />
       </Row>
     </Box>

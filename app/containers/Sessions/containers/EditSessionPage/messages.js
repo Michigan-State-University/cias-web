@@ -5,11 +5,11 @@ export const scope = 'app.containers.EditSessionPage';
 export default defineMessages({
   newQuestionTitle: {
     id: `${scope}.newQuestionMessage`,
-    defaultMessage: '<h1>Enter title here</h1>',
+    defaultMessage: 'Enter title here',
   },
   newQuestionSubtitle: {
     id: `${scope}.newQuestionSubtitle`,
-    defaultMessage: 'Enter main text/question for screen here',
+    defaultMessage: '<h1>Enter main text/question for screen here</h1>',
   },
   manageSlides: {
     id: `${scope}.manageSlides`,

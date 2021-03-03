@@ -34,7 +34,7 @@ const QuestionTitle = ({
     >
       <Row>
         <ApprovableInput
-          defaultFontSize={18}
+          defaultFontSize={16}
           placeholder={formatMessage(messages.placeholder)}
           value={title}
           onCheck={handleUpdate}
