@@ -6,7 +6,7 @@ import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
 import { createIntervention } from 'utils/reducerCreators';
-import { ids } from 'containers/SettingsPanel/utils';
+import { SHARE_IDS } from 'containers/SettingsPanel/utils';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import {
@@ -24,7 +24,10 @@ import messages from '../../messages';
 
 describe('changeAccessSetting saga', () => {
   const mockIntervention = createIntervention();
-  const payload = { id: mockIntervention.id, setting: ids.anyoneWithTheLink };
+  const payload = {
+    id: mockIntervention.id,
+    setting: SHARE_IDS.anyoneWithTheLink,
+  };
 
   it('Check changeAccessSetting generator success connection', () =>
     expectSaga(changeAccessSetting, { payload })

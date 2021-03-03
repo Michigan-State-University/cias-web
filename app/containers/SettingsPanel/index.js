@@ -29,7 +29,7 @@ import AccessGiver from './containers/AccessGiver';
 import LeftColumn from './Components/LeftColumn';
 import RightColumn from './Components/RightColumn';
 import { reducer, UPDATE } from './reducer';
-import { shareOptions, ids } from './utils';
+import { shareOptions, SHARE_IDS } from './utils';
 import { interventionSettingPageSaga } from './sagas';
 
 import messages from './messages';
@@ -91,7 +91,8 @@ const SettingsPanel = ({
             />
             {state && <RightColumn state={state} />}
             {currentOption &&
-              currentOption.id === ids.onlyInvitedRegisteredParticipant && (
+              currentOption.id ===
+                SHARE_IDS.onlyInvitedRegisteredParticipant && (
                 <AccessGiver
                   usersWithAccess={usersWithAccess}
                   intervention={intervention}

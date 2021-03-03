@@ -134,6 +134,7 @@ export function InterventionDetailsPage({
     status,
     csv_link: csvLink,
     csv_generated_at: csvGeneratedAt,
+    shared_to: sharedTo,
   } = intervention || {};
 
   const editingPossible = canEdit(status);
@@ -285,6 +286,7 @@ export function InterventionDetailsPage({
                         disabled={!editingPossible}
                         sharingPossible={sharingPossible}
                         deletionPossible={deletionPossible}
+                        sharedTo={sharedTo}
                         session={session}
                         index={index}
                         isSelected={index === sessionIndex}

@@ -1,4 +1,4 @@
-import { ids } from 'containers/SettingsPanel/utils';
+import { SHARE_IDS } from 'containers/SettingsPanel/utils';
 import { singleQuestion } from 'models/Session/QuestionTypes';
 
 export const createQuestion = (id = 0, type = singleQuestion.id) => ({
@@ -24,7 +24,7 @@ export const createIntervention = (index = 0) => ({
       email: `user-test-${index}@user.com`,
     },
   ],
-  shared_to: ids.anyoneWithTheLink,
+  shared_to: SHARE_IDS.anyoneWithTheLink,
   sessions: [createSession(`${index}`)],
 });
 

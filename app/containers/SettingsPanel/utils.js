@@ -3,7 +3,7 @@ import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
 
 import messages from './messages';
 
-export const ids = {
+export const SHARE_IDS = {
   anyoneWithTheLink: 'anyone',
   anyoneWhoIsARegisteredParticipant: 'registered',
   onlyInvitedRegisteredParticipant: 'invited',
@@ -11,12 +11,12 @@ export const ids = {
 
 export const shareOptions = [
   {
-    id: ids.anyoneWithTheLink,
+    id: SHARE_IDS.anyoneWithTheLink,
     label: <FormattedMessage {...messages.anyoneWithTheLinkLabel} />,
     sublabel: <FormattedHTMLMessage {...messages.anyoneWithTheLinkSublabel} />,
   },
   {
-    id: ids.anyoneWhoIsARegisteredParticipant,
+    id: SHARE_IDS.anyoneWhoIsARegisteredParticipant,
     label: (
       <FormattedMessage {...messages.anyoneWhoIsARegisteredParticipantLabel} />
     ),
@@ -27,7 +27,7 @@ export const shareOptions = [
     ),
   },
   {
-    id: ids.onlyInvitedRegisteredParticipant,
+    id: SHARE_IDS.onlyInvitedRegisteredParticipant,
     label: (
       <FormattedMessage {...messages.onlyInvitedRegisteredParticipantsLabel} />
     ),
