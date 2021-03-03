@@ -100,6 +100,10 @@ export default defineMessages({
     id: `${scope}.addCaseButton`,
     defaultMessage: '+ Add next case',
   },
+  addNameVariableButton: {
+    id: `${scope}.addNameVariableButton`,
+    defaultMessage: "+ Insert 'name' variable",
+  },
   addSectionButton: {
     id: `${scope}.addSectionButton`,
     defaultMessage: '+ Add next section',

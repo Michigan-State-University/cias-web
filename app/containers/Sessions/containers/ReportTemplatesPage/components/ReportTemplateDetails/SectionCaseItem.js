@@ -14,7 +14,7 @@ import {
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
 import { SectionCase } from 'models/ReportTemplate';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
@@ -29,7 +29,9 @@ import H2 from 'components/H2';
 import Radio from 'components/Radio';
 import InequalityChooser from 'components/InequalityChooser';
 import ImageUpload from 'components/ImageUpload';
+import TextButton from 'components/Button/TextButton';
 
+import { nameQuestion } from 'models/Session/QuestionTypes';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
 import Option from './Option';
@@ -49,6 +51,7 @@ const SectionCaseItem = ({
 
   useEffect(() => {
     if (!updateReportTemplateLoading) setIsUploadingImage(false);
+    if (!updateReportTemplateLoading) setIsUpdatingWithNameVariable(false);
   }, [updateReportTemplateLoading]);
 
   const [openCollapsable, setOpenCollapsable] = useState(false);
@@ -56,6 +59,9 @@ const SectionCaseItem = ({
 
   const [titleVisible, setTitleVisible] = useState(Boolean(sectionCase.title));
   const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [isUpdatingWithNameVariable, setIsUpdatingWithNameVariable] = useState(
+    false,
+  );
 
   const handleSectionCaseUpdate = (
     newSectionCase,
@@ -91,6 +97,13 @@ const SectionCaseItem = ({
 
   const handleContentChange = content => {
     handleSectionCaseUpdate({ ...sectionCase, content });
+  };
+
+  const handleAddNameVariable = () => {
+    setIsUpdatingWithNameVariable(true);
+    handleContentChange(
+      `${sectionCase.content}${nameQuestion.reservedVariable}`,
+    );
   };
 
   const handleImageChange = image => {
@@ -216,9 +229,27 @@ const SectionCaseItem = ({
           )}
 
           <Row justify="start">
-            <Text whiteSpace="pre">
-              {formatMessage(messages.sectionCaseContentHeader)}
-            </Text>
+            <Col style={{ padding: 0 }}>
+              <Text whiteSpace="pre">
+                {formatMessage(messages.sectionCaseContentHeader)}
+              </Text>
+            </Col>
+            <Col style={{ padding: 0, height: 30 }} align="end">
+              <TextButton
+                onClick={handleAddNameVariable}
+                whiteSpace="nowrap"
+                fontWeight="bold"
+                fontSize={14}
+                loading={isUpdatingWithNameVariable}
+                buttonProps={{
+                  color: themeColors.secondary,
+                  fontWeight: 'bold',
+                }}
+                spinnerProps={{ size: 30, width: 2 }}
+              >
+                {formatMessage(messages.addNameVariableButton)}
+              </TextButton>{' '}
+            </Col>
             <Box
               bg={colors.linkWater}
               width="100%"
