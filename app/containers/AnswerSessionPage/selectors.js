@@ -46,6 +46,12 @@ const makeSelectPhoneticLoading = () =>
     substate => substate.phoneticLoading,
   );
 
+const makeSelectUserSession = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    substate => substate.userSession,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -53,4 +59,5 @@ export {
   makeSelectPreviewMode,
   makeSelectPhoneticUrl,
   makeSelectPhoneticLoading,
+  makeSelectUserSession,
 };

@@ -4,19 +4,12 @@
  *
  */
 
-export const FETCH_QUESTIONS = 'app/AnswerSessionPage/FETCH_QUESTIONS';
-export const FETCH_QUESTIONS_SUCCESS =
-  'app/AnswerSessionPage/FETCH_QUESTIONS_SUCCESS';
-export const FETCH_QUESTION_FAILURE =
-  'app/AnswerSessionPage/FETCH_QUESTION_FAILURE';
 export const SUBMIT_ANSWER_REQUEST =
   'app/AnswerSessionPage/SUBMIT_ANSWER_REQUEST';
 export const SUBMIT_ANSWER_SUCCESS =
   'app/AnswerSessionPage/SUBMIT_ANSWER_SUCCESS';
 export const SUBMIT_ANSWER_ERROR = 'app/AnswerSessionPage/SUBMIT_ANSWER_ERROR';
 export const SELECT_ANSWER = 'app/AnswerSessionPage/SELECT_ANSWER';
-export const SET_QUESTION_INDEX = 'app/AnswerSessionPage/SET_QUESTION_INDEX';
-
 export const START_SESSION = 'app/AnswerSessionPage/START_SESSION';
 
 export const RESET_SESSION = 'app/AnswerSessionPage/RESET_SESSION';
@@ -47,3 +40,22 @@ export const PHONETIC_PREVIEW_FAILURE =
 
 export const ZERO_DIVISION_FORMULA_ERROR = 'ZeroDivisionError';
 export const OTHER_FORMULA_ERROR = 'OtherFormulaError';
+export const REFLECTION_MISS_MATCH = 'ReflectionMissMatch';
+
+export const CREATE_USER_SESSION_REQUEST =
+  'app/AnswerSessionPage/CREATE_USER_SESSION_REQUEST';
+
+export const CREATE_USER_SESSION_SUCCESS =
+  'app/AnswerSessionPage/CREATE_USER_SESSION_SUCCESS';
+
+export const CREATE_USER_SESSION_FAILURE =
+  'app/AnswerSessionPage/CREATE_USER_SESSION_FAILURE';
+
+export const NEXT_QUESTION_REQUEST =
+  'app/AnswerSessionPage/NEXT_QUESTION_REQUEST';
+
+export const NEXT_QUESTION_SUCCESS =
+  'app/AnswerSessionPage/NEXT_QUESTION_SUCCESS';
+
+export const NEXT_QUESTION_FAILURE =
+  'app/AnswerSessionPage/NEXT_QUESTION_FAILURE';

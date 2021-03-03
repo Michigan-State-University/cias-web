@@ -6,15 +6,11 @@
 
 import { actionBuilder } from 'utils/actionBuilder';
 import {
-  FETCH_QUESTIONS,
-  FETCH_QUESTIONS_SUCCESS,
-  FETCH_QUESTION_FAILURE,
   SUBMIT_ANSWER_ERROR,
   SUBMIT_ANSWER_REQUEST,
   SUBMIT_ANSWER_SUCCESS,
   SELECT_ANSWER,
   START_SESSION,
-  SET_QUESTION_INDEX,
   CHANGE_PREVIEW_MODE,
   RESET_SESSION,
   CHANGE_IS_ANIMATING,
@@ -23,32 +19,29 @@ import {
   PHONETIC_PREVIEW_SUCCESS,
   REDIRECT_TO_PREVIEW,
   RESET_ANSWERS,
+  CREATE_USER_SESSION_REQUEST,
+  CREATE_USER_SESSION_SUCCESS,
+  CREATE_USER_SESSION_FAILURE,
+  NEXT_QUESTION_REQUEST,
+  NEXT_QUESTION_SUCCESS,
+  NEXT_QUESTION_FAILURE,
 } from './constants';
-
-export const fetchQuestions = sessionId =>
-  actionBuilder(FETCH_QUESTIONS, { sessionId });
-
-export const fetchQuestionsSuccess = questions =>
-  actionBuilder(FETCH_QUESTIONS_SUCCESS, { questions });
-
-export const fetchQuestionsFailure = error =>
-  actionBuilder(FETCH_QUESTION_FAILURE, { error });
 
 export const selectAnswer = payload => actionBuilder(SELECT_ANSWER, payload);
 
 export const submitAnswer = (
   answerId,
-  nextQuestionIndex,
   required,
   type,
   sessionId,
+  userSessionId,
 ) =>
   actionBuilder(SUBMIT_ANSWER_REQUEST, {
     answerId,
-    nextQuestionIndex,
     required,
     type,
     sessionId,
+    userSessionId,
   });
 
 export const submitAnswerSuccess = answerId =>
@@ -56,9 +49,6 @@ export const submitAnswerSuccess = answerId =>
 
 export const submitAnswerFailure = (answerId, error) =>
   actionBuilder(SUBMIT_ANSWER_ERROR, { error, answerId });
-
-export const setQuestionIndex = ({ index, question }) =>
-  actionBuilder(SET_QUESTION_INDEX, { index, question });
 
 export const startSession = () => actionBuilder(START_SESSION, {});
 
@@ -88,3 +78,21 @@ export const phoneticPreviewRequest = text =>
 
 export const phoneticPreviewSuccess = url =>
   actionBuilder(PHONETIC_PREVIEW_SUCCESS, { url });
+
+export const createUserSessionRequest = sessionId =>
+  actionBuilder(CREATE_USER_SESSION_REQUEST, { sessionId });
+
+export const createUserSessionSuccess = userSession =>
+  actionBuilder(CREATE_USER_SESSION_SUCCESS, { userSession });
+
+export const createUserSessionFailure = error =>
+  actionBuilder(CREATE_USER_SESSION_FAILURE, { error });
+
+export const nextQuestionRequest = (userSessionId, questionId) =>
+  actionBuilder(NEXT_QUESTION_REQUEST, { userSessionId, questionId });
+
+export const nextQuestionSuccess = question =>
+  actionBuilder(NEXT_QUESTION_SUCCESS, { question });
+
+export const nextQuestionFailure = error =>
+  actionBuilder(NEXT_QUESTION_FAILURE, { error });

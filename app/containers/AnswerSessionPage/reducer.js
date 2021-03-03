@@ -4,20 +4,13 @@
  *
  */
 import produce from 'immer';
-import set from 'lodash/set';
-import { findQuestionIndex } from 'models/Session/utils';
 import { DESKTOP_MODE } from 'utils/previewMode';
-import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
-  FETCH_QUESTIONS,
-  FETCH_QUESTIONS_SUCCESS,
-  FETCH_QUESTION_FAILURE,
   SUBMIT_ANSWER_ERROR,
   SUBMIT_ANSWER_REQUEST,
   SUBMIT_ANSWER_SUCCESS,
   SELECT_ANSWER,
-  SET_QUESTION_INDEX,
   START_SESSION,
   CHANGE_PREVIEW_MODE,
   CHANGE_IS_ANIMATING,
@@ -25,6 +18,12 @@ import {
   PHONETIC_PREVIEW_REQUEST,
   PHONETIC_PREVIEW_SUCCESS,
   RESET_ANSWERS,
+  CREATE_USER_SESSION_REQUEST,
+  CREATE_USER_SESSION_SUCCESS,
+  CREATE_USER_SESSION_FAILURE,
+  NEXT_QUESTION_REQUEST,
+  NEXT_QUESTION_SUCCESS,
+  NEXT_QUESTION_FAILURE,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -48,30 +47,17 @@ export const initialState = {
   phoneticText: null,
   phoneticUrl: null,
   phoneticLoading: false,
+  userSession: null,
+  userSessionLoading: true,
+  nextQuestionLoading: true,
+  nextQuestionError: null,
+  currentQuestion: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
 const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
   produce(state, draft => {
     switch (type) {
-      case FETCH_QUESTIONS:
-        draft.questionError = '';
-        draft.questionLoading = true;
-        draft.interventionStarted = false;
-        draft.sessionId = payload.sessionId;
-        break;
-
-      case FETCH_QUESTIONS_SUCCESS:
-        draft.questionError = '';
-        draft.questionLoading = false;
-        draft.sessionQuestions = payload.questions;
-        break;
-
-      case FETCH_QUESTION_FAILURE:
-        draft.questionError = payload.error;
-        draft.questionLoading = false;
-        break;
-
       case SELECT_ANSWER:
         draft.answers[payload.id] = payload;
         break;
@@ -100,25 +86,6 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
           : [];
         break;
 
-      case SET_QUESTION_INDEX:
-        let index = null;
-        draft.feedbackScreenSettings = getEmptyFeedbackScreenSettings();
-
-        if (!isNullOrUndefined(payload.question)) {
-          index = findQuestionIndex(
-            state.sessionQuestions,
-            payload.question.id,
-          );
-
-          if (index === -1) index = draft.questionIndex + 1;
-
-          set(draft, ['sessionQuestions', index], payload.question);
-        } else if (!isNullOrUndefined(payload.index)) ({ index } = payload);
-        else index = draft.questionIndex + 1;
-
-        draft.questionIndex = index;
-        break;
-
       case START_SESSION:
         draft.interventionStarted = true;
         break;
@@ -145,6 +112,35 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case PHONETIC_PREVIEW_SUCCESS:
         draft.phoneticUrl = payload.url;
         draft.phoneticLoading = false;
+        break;
+
+      case CREATE_USER_SESSION_REQUEST:
+        draft.userSessionLoading = true;
+        break;
+
+      case CREATE_USER_SESSION_SUCCESS:
+        draft.userSessionLoading = false;
+        draft.userSession = payload.userSession;
+        break;
+
+      case CREATE_USER_SESSION_FAILURE:
+        draft.userSessionLoading = false;
+        draft.questionError = payload;
+        break;
+
+      case NEXT_QUESTION_REQUEST:
+        draft.nextQuestionLoading = true;
+        break;
+
+      case NEXT_QUESTION_SUCCESS:
+        draft.nextQuestionError = null;
+        draft.nextQuestionLoading = false;
+        draft.currentQuestion = payload.question;
+        break;
+
+      case NEXT_QUESTION_FAILURE:
+        draft.nextQuestionError = payload;
+        draft.nextQuestionLoading = false;
         break;
     }
   });
