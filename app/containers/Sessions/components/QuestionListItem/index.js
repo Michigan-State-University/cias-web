@@ -25,6 +25,7 @@ import {
   deleteQuestionRequest,
   makeSelectQuestions,
   selectQuestion,
+  copyExternallyQuestionRequest,
 } from 'global/reducers/questions';
 import {
   changeCurrentNarratorBlock,
@@ -57,6 +58,7 @@ const QuestionListItem = ({
   removeQuestion,
   intl: { formatMessage },
   copyQuestion,
+  copyExternallyQuestion,
   changeNarratorBlockIndex,
   setDraggable,
   setCharacterPosition,
@@ -107,6 +109,12 @@ const QuestionListItem = ({
     copyQuestion({ copied, questionId: question.id, target });
   };
 
+  const handleExternallyCopy = target => {
+    const copied = cloneDeep(question);
+    set(copied, 'id', uniqueId());
+    copyExternallyQuestion(target.sessionId, target.id, copied, [question.id]);
+  };
+
   const options = [
     {
       id: 'delete',
@@ -139,7 +147,7 @@ const QuestionListItem = ({
       <CopyModal
         visible={copyOpen}
         onClose={closeCopyModal}
-        copyAction={handleCopy}
+        copyAction={handleExternallyCopy}
         disableInterventionCopy
         disableSessionCopy
         pasteText={formatMessage(messages.pasteQuestion)}
@@ -240,6 +248,7 @@ QuestionListItem.propTypes = {
   settingsVisibility: PropTypes.bool,
   toggleSettings: PropTypes.func,
   copyQuestion: PropTypes.func,
+  copyExternallyQuestion: PropTypes.func,
   intl: PropTypes.object,
   removeQuestion: PropTypes.func,
   sessionId: PropTypes.string,
@@ -266,6 +275,7 @@ const mapDispatchToProps = {
   toggleSettings: setQuestionSettings,
   removeQuestion: deleteQuestionRequest,
   copyQuestion: copyQuestionRequest,
+  copyExternallyQuestion: copyExternallyQuestionRequest,
   changeNarratorBlockIndex: changeCurrentNarratorBlock,
   setDraggable: setCharacterDraggable,
   setCharacterPosition: setAnimationStopPosition,

@@ -46,6 +46,9 @@ import {
   DELETE_QUESTIONS_REQUEST,
   DELETE_QUESTIONS_SUCCESS,
   DELETE_QUESTIONS_ERROR,
+  COPY_EXTERNALLY_QUESTION_REQUEST,
+  COPY_EXTERNALLY_QUESTION_SUCCESS,
+  COPY_EXTERNALLY_QUESTION_ERROR,
 } from './constants';
 
 import {
@@ -402,6 +405,20 @@ export const questionsReducer = (state = initialState, action) =>
             ? action.payload.group.id
             : question.question_group_id,
         }));
+        break;
       }
+      case COPY_EXTERNALLY_QUESTION_REQUEST:
+        draft.loaders.updateQuestionLoading = true;
+        break;
+      case COPY_EXTERNALLY_QUESTION_SUCCESS:
+        draft.loaders.updateQuestionLoading = false;
+        draft.cache.questions = state.questions;
+        const { isCurrent, question } = action.payload;
+        if (isCurrent) draft.questions = [...state.questions, question];
+        break;
+      case COPY_EXTERNALLY_QUESTION_ERROR:
+        draft.loaders.updateQuestionLoading = false;
+        draft.questions = state.cache.questions;
+        break;
     }
   });

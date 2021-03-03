@@ -50,3 +50,9 @@ export const mapTeam = team => ({
   name: team.attributes.name,
   teamAdmin: team.relationships.team_admin,
 });
+
+export const mapCopiedExternallyQuestion = (copied, response) => ({
+  ...copied,
+  id: response.id,
+  question_group_id: response.question_group_id,
+});

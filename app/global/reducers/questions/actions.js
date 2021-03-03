@@ -34,6 +34,9 @@ import {
   DELETE_QUESTIONS_SUCCESS,
   DELETE_QUESTIONS_ERROR,
   GET_QUESTIONS_REQUEST,
+  COPY_EXTERNALLY_QUESTION_REQUEST,
+  COPY_EXTERNALLY_QUESTION_ERROR,
+  COPY_EXTERNALLY_QUESTION_SUCCESS,
 } from './constants';
 
 export const selectQuestion = index =>
@@ -113,3 +116,25 @@ export const deleteQuestionsSuccess = () =>
   actionBuilder(DELETE_QUESTIONS_SUCCESS, {});
 export const deleteQuestionsError = error =>
   actionBuilder(DELETE_QUESTIONS_ERROR, { error });
+
+export const copyExternallyQuestionRequest = (
+  sessionId,
+  groupId,
+  copied,
+  questionsId,
+) =>
+  actionBuilder(COPY_EXTERNALLY_QUESTION_REQUEST, {
+    sessionId,
+    groupId,
+    copied,
+    questionsId,
+  });
+export const copyExternallyQuestionSuccess = (question, isCurrent) =>
+  actionBuilder(COPY_EXTERNALLY_QUESTION_SUCCESS, {
+    question,
+    isCurrent,
+  });
+export const copyExternallyQuestionError = error =>
+  actionBuilder(COPY_EXTERNALLY_QUESTION_ERROR, {
+    error,
+  });

@@ -93,12 +93,17 @@ const CopyChooser = ({
   }, [currentSession]);
 
   const handleCopyCurrent = () => {
+    if (!selectedItem?.id) return;
     if (currentView === VIEWS.INTERVENTION)
-      onClick({ type: VIEWS.INTERVENTION, id: selectedItem?.id });
+      onClick({ type: VIEWS.INTERVENTION, id: selectedItem.id });
     if (currentView === VIEWS.SESSION)
-      onClick({ type: VIEWS.SESSION, id: selectedItem?.id });
+      onClick({ type: VIEWS.SESSION, id: selectedItem.id });
     if (currentView === VIEWS.QUESTION_GROUP)
-      onClick({ type: VIEWS.QUESTION_GROUP, id: selectedItem?.id });
+      onClick({
+        type: VIEWS.QUESTION_GROUP,
+        id: selectedItem.id,
+        sessionId: currentSession.id,
+      });
   };
 
   const handleSelectAction = selectedId => {
