@@ -26,6 +26,7 @@ import {
   currencyQuestion,
   thirdPartyQuestion,
   participantReport,
+  finishQuestion,
 } from 'models/Session/QuestionTypes';
 
 import CurrencyQuestion from './CurrencyQuestion';
@@ -42,6 +43,7 @@ import DateQuestion from './DateQuestion';
 import ParticipantReportQuestion from './ParticipantReportQuestion';
 import NameQuestion from './NameQuestion';
 import ThirdPartyQuestion from './ThirdPartyQuestion';
+import FinishScreen from './FinishScreen';
 
 const QuestionData = ({
   selectedQuestionType,
@@ -84,6 +86,8 @@ const QuestionData = ({
       return <FeedbackQuestion {...commonProps} />;
     case currencyQuestion.id:
       return <CurrencyQuestion {...commonProps} />;
+    case finishQuestion.id:
+      return <FinishScreen {...commonProps} />;
     default:
       return null;
   }

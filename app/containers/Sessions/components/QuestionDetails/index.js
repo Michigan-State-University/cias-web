@@ -26,7 +26,7 @@ import {
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 
 import { canEdit } from 'models/Status/statusPermissions';
-import { nameQuestion } from 'models/Session/QuestionTypes';
+import { nameQuestion, finishQuestion } from 'models/Session/QuestionTypes';
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
 import QuestionNarrator from '../QuestionNarrator';
@@ -85,6 +85,7 @@ const RenderQuestionDetails = ({
     } = selectedQuestion || {};
 
     const isNameScreen = type === nameQuestion.id;
+    const isFinishScreen = type === finishQuestion.id;
 
     return (
       <AnswerOuterContainer>
@@ -189,13 +190,14 @@ const RenderQuestionDetails = ({
                 <Row>
                   <QuestionData />
                 </Row>
-                {(isNullOrUndefined(proceedButton) || proceedButton) && (
-                  <Box my={20}>
-                    <Button my={20} width="180px" disabled>
-                      <FormattedMessage {...messages.nextQuestion} />
-                    </Button>
-                  </Box>
-                )}
+                {(isNullOrUndefined(proceedButton) || proceedButton) &&
+                  !isFinishScreen && (
+                    <Box my={20}>
+                      <Button my={20} width="180px" disabled>
+                        <FormattedMessage {...messages.nextQuestion} />
+                      </Button>
+                    </Box>
+                  )}
               </AppContainer>
             </Row>
           </AnswerInterventionContent>

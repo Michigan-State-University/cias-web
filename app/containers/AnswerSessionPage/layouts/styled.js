@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ReactPlayer from 'react-player/lazy';
+import { Link } from 'react-router-dom';
 
 import { themeColors } from 'theme';
 
@@ -67,4 +68,9 @@ export const FirstTH = styled(TH)`
   position: sticky;
   left: 0;
   background-color: inherit;
+`;
+
+export const StyledLink = styled(Link)`
+  font-weight: bold;
+  width: auto;
 `;

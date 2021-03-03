@@ -61,4 +61,8 @@ export default defineMessages({
     defaultMessage:
       'Your email is: <span style="font-weight: 700;">{email}</span>',
   },
+  dashboard: {
+    id: `${scope}.dashboard`,
+    defaultMessage: 'Go to dashboard',
+  },
 });
