@@ -43,6 +43,8 @@ import {
 } from 'models/Session/QuestionTypes';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
+import ConfirmationBox from 'components/ConfirmationBox';
+import Text from 'components/Text';
 import VariableInput from '../QuestionDetails/VariableInput';
 import { ClampedTitle, ToggleableBox } from './styled';
 import messages from './messages';
@@ -73,6 +75,7 @@ const QuestionListItem = ({
   sessionId,
 }) => {
   const [copyOpen, setCopyOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
   const isFinishScreen = type === finishQuestion.id;
@@ -119,7 +122,7 @@ const QuestionListItem = ({
     {
       id: 'delete',
       label: <FormattedMessage {...messages.delete} />,
-      action: handleDelete,
+      action: () => setDeleteOpen(true),
       color: colors.flamingo,
     },
     {
@@ -151,6 +154,19 @@ const QuestionListItem = ({
         disableInterventionCopy
         disableSessionCopy
         pasteText={formatMessage(messages.pasteQuestion)}
+      />
+      <ConfirmationBox
+        visible={deleteOpen}
+        onClose={() => setDeleteOpen(false)}
+        description={formatMessage(messages.deleteModalTitle)}
+        content={
+          <Column align="center">
+            <Text color={colors.flamingo}>
+              {formatMessage(messages.deleteModalContent)}
+            </Text>
+          </Column>
+        }
+        confirmAction={handleDelete}
       />
       <ToggleableBox
         padding={15}
