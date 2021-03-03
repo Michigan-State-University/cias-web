@@ -120,10 +120,10 @@ const QuestionListItem = ({
 
   const options = [
     {
-      id: 'delete',
-      label: <FormattedMessage {...messages.delete} />,
-      action: () => setDeleteOpen(true),
-      color: colors.flamingo,
+      id: 'copy',
+      label: <FormattedMessage {...messages.copy} />,
+      action: handleCopyModal,
+      color: colors.black,
     },
     {
       id: 'duplicate',
@@ -132,10 +132,10 @@ const QuestionListItem = ({
       color: colors.black,
     },
     {
-      id: 'copy',
-      label: <FormattedMessage {...messages.copy} />,
-      action: handleCopyModal,
-      color: colors.black,
+      id: 'delete',
+      label: <FormattedMessage {...messages.delete} />,
+      action: () => setDeleteOpen(true),
+      color: colors.flamingo,
     },
   ];
 
