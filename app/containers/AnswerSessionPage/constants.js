@@ -59,3 +59,5 @@ export const NEXT_QUESTION_SUCCESS =
 
 export const NEXT_QUESTION_FAILURE =
   'app/AnswerSessionPage/NEXT_QUESTION_FAILURE';
+
+export const CLEAR_ERROR = 'app/AnswerSessionPage/CLEAR_ERROR';

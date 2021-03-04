@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
@@ -32,6 +32,7 @@ import Logout from 'containers/Logout/Loadable';
 import UserDetails from 'containers/UserDetails/Loadable';
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 import ReportsPage from 'containers/ParticipantDashboard/components/ReportsTab/Loadable';
+import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
 import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
 
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
@@ -279,7 +280,16 @@ export function App({ user }) {
             activeTab: accountsTabId,
           }}
         />
+        <AppRoute
+          exact
+          path="/no-access"
+          component={ForbiddenPage}
+          allowedRoles={Roles.allRoles}
+        />
         <AppRoute exact path="/not-found-page" component={NotFoundPage} />
+        <AppRoute path="*">
+          <Redirect to="/not-found-page" />
+        </AppRoute>
       </Switch>
       <GlobalStyle />
       <ApiQueryMessageHandler />

@@ -12,3 +12,5 @@ export const ACCOUNT_CONFIRMATION_SUCCESS =
   'app/LoginPage/ACCOUNT_CONFIRMATION_SUCCESS';
 export const ACCOUNT_CONFIRMATION_ERROR =
   'app/LoginPage/ACCOUNT_CONFIRMATION_ERROR';
+
+export const REDIRECT_QUERY_KEY = 'redirect_to';

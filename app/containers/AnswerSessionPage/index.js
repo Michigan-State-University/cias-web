@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { toast } from 'react-toastify';
 import get from 'lodash/get';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
 
 import AudioWrapper from 'utils/audioWrapper';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
@@ -41,6 +41,7 @@ import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import H2 from 'components/H2';
+import { REDIRECT_QUERY_KEY } from 'containers/LoginPage/constants';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,
@@ -64,6 +65,7 @@ import {
   setFeedbackScreenSettings,
   createUserSessionRequest,
   nextQuestionRequest,
+  clearError,
 } from './actions';
 
 const AnimationRefHelper = ({
@@ -144,12 +146,16 @@ export function AnswerSessionPage({
   fetchIntervention,
   createUserSession,
   nextQuestion,
+  clearErrors,
 }) {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
   useInjectSaga({ key: 'logInGuest', saga: logInGuestSaga });
   useInjectReducer({ key: 'AnswerSessionPage', reducer });
   useInjectSaga({ key: 'AnswerSessionPage', saga });
+
+  const location = useLocation();
+
   const { sessionId, interventionId, index } = params;
 
   useEffect(() => {
@@ -160,24 +166,24 @@ export function AnswerSessionPage({
 
   useEffect(() => {
     createUserSession(sessionId);
+
+    return clearErrors;
   }, []);
 
   useEffect(() => {
     if (userSession) nextQuestion(userSession.id, index);
   }, [userSession]);
 
-  if (questionError)
-    return (
-      <Redirect
-        to={{
-          pathname: '/not-found-page',
-          state: {
-            header: formatMessage(messages.noEntranceHeader),
-            text: formatMessage(messages.noEntranceText),
-          },
-        }}
-      />
+  if (questionError) {
+    const queryParams = new URLSearchParams(location.search);
+
+    queryParams.append(
+      REDIRECT_QUERY_KEY,
+      encodeURIComponent(location.pathname),
     );
+
+    return <Redirect to={`/no-access?${queryParams.toString()}`} />;
+  }
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
 
@@ -359,6 +365,7 @@ AnswerSessionPage.propTypes = {
   fetchIntervention: PropTypes.func,
   createUserSession: PropTypes.func,
   nextQuestion: PropTypes.func,
+  clearErrors: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -376,6 +383,7 @@ const mapDispatchToProps = {
   fetchIntervention: fetchInterventionRequest,
   createUserSession: createUserSessionRequest,
   nextQuestion: nextQuestionRequest,
+  clearErrors: clearError,
 };
 
 const withConnect = connect(

@@ -24,6 +24,7 @@ import {
   NEXT_QUESTION_REQUEST,
   NEXT_QUESTION_SUCCESS,
   NEXT_QUESTION_FAILURE,
+  CLEAR_ERROR,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -116,11 +117,13 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
 
       case CREATE_USER_SESSION_REQUEST:
         draft.userSessionLoading = true;
+        draft.questionError = null;
         break;
 
       case CREATE_USER_SESSION_SUCCESS:
         draft.userSessionLoading = false;
         draft.userSession = payload.userSession;
+        draft.questionError = null;
         break;
 
       case CREATE_USER_SESSION_FAILURE:
@@ -141,6 +144,11 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case NEXT_QUESTION_FAILURE:
         draft.nextQuestionError = payload;
         draft.nextQuestionLoading = false;
+        break;
+
+      case CLEAR_ERROR:
+        draft.nextQuestionError = null;
+        draft.questionError = null;
         break;
     }
   });

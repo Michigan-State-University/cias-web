@@ -25,6 +25,7 @@ import {
   NEXT_QUESTION_REQUEST,
   NEXT_QUESTION_SUCCESS,
   NEXT_QUESTION_FAILURE,
+  CLEAR_ERROR,
 } from './constants';
 
 export const selectAnswer = payload => actionBuilder(SELECT_ANSWER, payload);
@@ -96,3 +97,5 @@ export const nextQuestionSuccess = question =>
 
 export const nextQuestionFailure = error =>
   actionBuilder(NEXT_QUESTION_FAILURE, { error });
+
+export const clearError = () => actionBuilder(CLEAR_ERROR, {});

@@ -1,7 +1,7 @@
 /**
- * NotFoundPage
+ * ForbiddenPage
  *
- * This is the page we show when the user visits a url that doesn't have a route
+ * This is the page we show when the user tries to load resources and does not have sufficient permissions
  *
  */
 
@@ -9,26 +9,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { useHistory, useLocation } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { Col, Container, Row } from 'react-grid-system';
-
-import { makeSelectUser } from 'global/reducers/auth';
+import { Container, Row, Col } from 'react-grid-system';
 
 import Text from 'components/Text';
 import { StyledButton } from 'components/Button/StyledButton';
 import { themeColors } from 'theme';
 
+import { makeSelectUser } from 'global/reducers/auth';
 import messages from './messages';
 
-const NotFoundPage = ({ location, intl: { formatMessage }, history, user }) => {
+const ForbiddenPage = ({ intl: { formatMessage }, user }) => {
+  const history = useHistory();
+  const location = useLocation();
+
   const header = get(
     location,
     'state.header',
     formatMessage(messages.defaultHeader),
   );
-  const text = get(location, 'state.text', formatMessage(messages.defaultText));
+  const text = get(
+    location,
+    'state.text',
+    formatMessage(user ? messages.textLoggedIn : messages.textNotLoggedIn),
+  );
   const errorCode = get(
     location,
     'state.errorCode',
@@ -109,7 +116,7 @@ const NotFoundPage = ({ location, intl: { formatMessage }, history, user }) => {
   );
 };
 
-NotFoundPage.propTypes = {
+ForbiddenPage.propTypes = {
   location: PropTypes.object,
   intl: intlShape,
   history: PropTypes.object,
@@ -125,4 +132,4 @@ const withConnect = connect(mapStateToProps);
 export default compose(
   injectIntl,
   withConnect,
-)(NotFoundPage);
+)(ForbiddenPage);

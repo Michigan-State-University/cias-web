@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<NotFoundPage /> should render and match the snapshot 1`] = `
+exports[`<ForbiddenPage /> should render and match the snapshot 1`] = `
 <div
   style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px; height: 100%;"
 >
@@ -22,7 +22,7 @@ exports[`<NotFoundPage /> should render and match the snapshot 1`] = `
             font-size="10vw"
             font-weight="bold"
           >
-            Not Found
+            Forbidden
           </p>
         </div>
       </div>
@@ -37,7 +37,7 @@ exports[`<NotFoundPage /> should render and match the snapshot 1`] = `
             font-size="24"
             font-weight="bold"
           >
-            Looks like you’re lost.
+            You do not have access to view this resource.
           </p>
         </div>
       </div>
@@ -51,7 +51,7 @@ exports[`<NotFoundPage /> should render and match the snapshot 1`] = `
             class="Text-e4p0w3-0 eBqgNV"
             font-size="18"
           >
-            We can’t find the page you’re looking for.
+            It seems that you are not logged in. Please log in.
           </p>
         </div>
       </div>

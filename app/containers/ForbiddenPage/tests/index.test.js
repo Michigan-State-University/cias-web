@@ -1,12 +1,13 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
+import { MemoryRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
-import { Provider } from 'react-redux';
-import NotFoundPage from '../index';
+import ForbiddenPage from '../index';
 
-describe('<NotFoundPage />', () => {
+describe('<ForbiddenPage />', () => {
   let store;
 
   beforeAll(() => {
@@ -18,9 +19,11 @@ describe('<NotFoundPage />', () => {
       container: { firstChild },
     } = render(
       <Provider store={store}>
-        <IntlProvider locale="en">
-          <NotFoundPage />
-        </IntlProvider>
+        <MemoryRouter>
+          <IntlProvider locale="en">
+            <ForbiddenPage />
+          </IntlProvider>
+        </MemoryRouter>
       </Provider>,
     );
     expect(firstChild).toMatchSnapshot();

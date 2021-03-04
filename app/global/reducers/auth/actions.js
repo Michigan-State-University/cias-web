@@ -36,7 +36,7 @@ import {
 export const logIn = user => actionBuilder(LOG_IN_USER, { user });
 export const logInGuestRequest = () => actionBuilder(LOG_IN_GUEST);
 
-export const logOut = () => actionBuilder(LOG_OUT, {});
+export const logOut = redirectTo => actionBuilder(LOG_OUT, { redirectTo });
 
 export const editUserRequest = user =>
   actionBuilder(EDIT_USER_REQUEST, { user });

@@ -3,14 +3,22 @@ import { push } from 'connected-react-router';
 
 import LocalStorageService from 'utils/localStorageService';
 
+import { REDIRECT_QUERY_KEY } from 'containers/LoginPage/constants';
 import { LOG_OUT } from '../constants';
 
-export function* logOut() {
+export function* logOut(
+  { payload: { redirectTo } } = { payload: { redirectTo: null } },
+) {
   yield call(LocalStorageService.clearHeaders);
   yield call(LocalStorageService.clearState);
   yield call(LocalStorageService.clearGuestHeaders);
 
-  yield put(push('/login'));
+  const queryParams = new URLSearchParams(window.location.search);
+
+  if (redirectTo)
+    queryParams.append(REDIRECT_QUERY_KEY, encodeURIComponent(redirectTo));
+
+  yield put(push(`/login${redirectTo ? `?${queryParams.toString()}` : ''}`));
   yield window.location.reload();
 }
 
