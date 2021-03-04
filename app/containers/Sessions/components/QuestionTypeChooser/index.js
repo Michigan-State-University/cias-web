@@ -79,7 +79,12 @@ const QuestionTypeChooser = ({
           !(participantReportExists && id === participantReport.id) &&
           !(thirdPartyReportExists && id === thirdPartyQuestion.id),
       ),
-    [QuestionTypes, nameQuestionExists, thirdPartyReportExists],
+    [
+      QuestionTypes,
+      nameQuestionExists,
+      participantReportExists,
+      thirdPartyReportExists,
+    ],
   );
 
   return (
