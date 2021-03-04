@@ -78,7 +78,7 @@ const TextMessagesFormula = ({
           setOpen={setVariableChooserOpen}
           onClick={value => {
             setVariableChooserOpen(false);
-            handleFormulaUpdate(`${formula}${value}`);
+            handleFormulaUpdate(`${formula ?? ''}${value}`);
           }}
         />
       </Box>
