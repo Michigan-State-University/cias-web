@@ -9,6 +9,7 @@ import { useInjectSaga } from 'redux-injectors';
 import Row from 'components/Row';
 import Tabs from 'components/Tabs';
 import { StyledInput } from 'components/Input/StyledInput';
+import { selectInputText } from 'components/Input/utils';
 import Spinner from 'components/Spinner';
 import PreviewButton from 'components/PreviewButton';
 import Img from 'components/Img';
@@ -118,6 +119,7 @@ const InterventionNavbar = ({
           onBlur={val =>
             updateSessionName({ path: 'name', value: val }, ['name'])
           }
+          onFocus={selectInputText}
           maxWidth={280}
         />
       </Row>

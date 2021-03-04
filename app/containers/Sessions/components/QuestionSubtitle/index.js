@@ -7,9 +7,11 @@ import { injectIntl } from 'react-intl';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
-import Question from 'models/Session/Question';
 import Row from 'components/Row';
+import { selectQuillText } from 'components/Input/utils';
+
 import { colors } from 'theme';
+import Question from 'models/Session/Question';
 import {
   makeSelectSelectedQuestion,
   editQuestionRequest,
@@ -23,6 +25,11 @@ const QuestionSubtitle = ({
   updateSubtitle,
 }) => {
   const handleUpdate = val => updateSubtitle({ path: 'subtitle', value: val });
+
+  const onFocus = quill => {
+    selectQuillText(quill);
+  };
+
   return (
     <Box width="100%" padded hoverColor={colors.linkWater} clickable={false}>
       <Row>
@@ -30,6 +37,7 @@ const QuestionSubtitle = ({
           placeholder={formatMessage(messages.placeholder)}
           value={subtitle}
           onCheck={handleUpdate}
+          onFocus={onFocus}
           autoSize
           richText
           fontSize={36}

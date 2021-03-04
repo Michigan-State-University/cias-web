@@ -10,6 +10,7 @@ import Column from 'components/Column';
 import AppContainer from 'components/Container';
 import Row from 'components/Row';
 import StyledInput from 'components/Input/StyledInput';
+import { selectInputText } from 'components/Input/utils';
 import { MSULogo } from 'components/Logo';
 
 import Question from 'models/Session/Question';
@@ -105,6 +106,7 @@ const RenderQuestionDetails = ({
                 fontWeight="bold"
                 placeholder={formatMessage(messages.groupPlaceholder)}
                 maxWidth="initial"
+                onFocus={selectInputText}
                 onBlur={val =>
                   changeGroupName(val, sessionId, currentGroupScope.id)
                 }

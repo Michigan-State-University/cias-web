@@ -50,6 +50,7 @@ const ApprovableInput = props => {
     keyboard,
     type,
     onCheck,
+    onFocus,
     rows,
     richText,
     autoSize,
@@ -64,7 +65,7 @@ const ApprovableInput = props => {
     minDate,
   } = props;
   const [value, setValue] = useState(propsValue);
-  const [focused, setfocused] = useState(false);
+  const [focused, setFocused] = useState(false);
   const ref = useRef();
 
   const blockQuillBlur = () => {
@@ -105,9 +106,14 @@ const ApprovableInput = props => {
 
   const onBlur = () => {
     if (!disabled) {
-      setfocused(false);
+      setFocused(false);
       onCheck(value);
     }
+  };
+
+  const handleFocus = event => {
+    setFocused(true);
+    if (onFocus) onFocus(event);
   };
 
   const renderInput = () => {
@@ -118,7 +124,7 @@ const ApprovableInput = props => {
           theme="bubble"
           value={value}
           placeholder={placeholder}
-          onFocus={() => setfocused(true)}
+          onFocus={() => handleFocus(ref.current)}
           onChange={v => onInputChange(v)}
           onBlur={onBlur}
           modules={type === 'multiline' ? quillModules : quillModulesSingleline}
@@ -141,7 +147,7 @@ const ApprovableInput = props => {
           mr={isNumber(mr) ? mr : 9}
           value={value}
           onChange={event => onInputChange(event.target.value)}
-          onFocus={() => setfocused(true)}
+          onFocus={handleFocus}
           onBlur={onBlur}
           placeholder={props.placeholder}
           transparent
@@ -156,6 +162,7 @@ const ApprovableInput = props => {
             minDate={minDate}
             selected={value}
             onChange={date => onCheck(date)}
+            onFocus={onFocus}
             placeholderText={placeholder}
             customInput={
               <DateInput
@@ -180,7 +187,7 @@ const ApprovableInput = props => {
         textAlign={textAlign}
         value={value}
         onChange={event => onInputChange(event.target.value)}
-        onFocus={() => setfocused(true)}
+        onFocus={handleFocus}
         onBlur={onBlur}
         placeholder={placeholder}
         keyboard={keyboard}
@@ -203,6 +210,7 @@ const ApprovableInput = props => {
 ApprovableInput.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onCheck: PropTypes.func,
+  onFocus: PropTypes.func,
   rows: PropTypes.string,
   placeholder: PropTypes.string,
   type: PropTypes.oneOf(['multiline', 'singleline', 'date']),

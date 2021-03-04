@@ -10,6 +10,7 @@ import Collapse from 'components/Collapse';
 import Row from 'components/Row';
 import Checkbox from 'components/Checkbox';
 import StyledInput from 'components/Input/StyledInput';
+import { selectInputText } from 'components/Input/utils';
 import Img from 'components/Img';
 import Box from 'components/Box';
 
@@ -135,6 +136,7 @@ const QuestionListGroup = ({
                 width="100%"
                 maxWidth="initial"
                 onBlur={val => changeGroupName(val, sessionId, id)}
+                onFocus={selectInputText}
               />
             </Box>
             {!noDnd && (
