@@ -1,7 +1,10 @@
 // Important modules this config uses
+const { getCommitHash } = require('./utils');
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
+const SentryWebpackPlugin = require('@sentry/webpack-plugin');
 const OfflinePlugin = require('offline-plugin');
 const { HashedModuleIdsPlugin } = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -10,7 +13,7 @@ const Dotenv = require('dotenv-webpack');
 
 module.exports = require('./webpack.base.babel')({
   mode: 'production',
-
+  devtool: 'source-map',
   // In production, we skip all hot-reloading stuff
   entry: [
     require.resolve('react-app-polyfill/ie11'),
@@ -151,6 +154,18 @@ module.exports = require('./webpack.base.babel')({
     }),
 
     new Dotenv({ systemvars: true }), // load environmental variables from the system
+
+    new SentryWebpackPlugin({
+      // sentry-cli configuration
+      authToken: process.env.SENTRY_AUTH_TOKEN,
+      org: 'htd',
+      project: 'cias-web',
+
+      // webpack specific configuration
+      include: './build',
+      ignore: ['node_modules', 'webpack.config.js'],
+      release: `${process.env.SENTRY_ENV}-v${process.env.VERSION}`,
+    }),
   ],
 
   performance: {

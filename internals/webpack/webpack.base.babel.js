@@ -1,9 +1,12 @@
 /**
  * COMMON WEBPACK CONFIGURATION
  */
+const { getCommitHash, onHeroku, gitRevisionPlugin } = require('./utils');
 
 const path = require('path');
 const webpack = require('webpack');
+
+const { EnvironmentPlugin } = webpack;
 
 module.exports = options => ({
   mode: options.mode,
@@ -106,11 +109,15 @@ module.exports = options => ({
     ],
   },
   plugins: options.plugins.concat([
+    ...(onHeroku ? [] : [gitRevisionPlugin]),
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; Terser will automatically
     // drop any unreachable code.
-    new webpack.EnvironmentPlugin({
+    new EnvironmentPlugin({
       NODE_ENV: 'development',
+      GIT_HASH: getCommitHash(),
+      // add it in plugin because it is passed during build only, this makes it available during app start
+      VERSION: process.env.VERSION,
     }),
   ]),
   resolve: {

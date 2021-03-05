@@ -46,6 +46,7 @@ if (!isNullOrUndefined(process.env.SENTRY_DSN))
   Sentry.init({
     environment: process.env.SENTRY_ENV,
     dsn: process.env.SENTRY_DSN,
+    release: `${process.env.SENTRY_ENV}-v${process.env.VERSION}`,
   });
 
 const MOUNT_NODE = document.getElementById('app');
