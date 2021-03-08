@@ -3,121 +3,112 @@
 exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-1vhutan-0 iWvcWQ"
-    width="100%"
+    class="Column-sc-4zswzq-0 ekpwZH"
   >
     <div
-      class="Row-y1cs0u-0 dskFsL"
+      class="Row-y1cs0u-0 gQFDhs"
+      width="100%"
     >
       <div
-        class="Column-sc-4zswzq-0 ekpwZH"
+        class="Column-sc-4zswzq-0 HRVgp"
+        width="230"
       >
+        <p
+          class="Text-e4p0w3-0 kFFPgx"
+          width="fit-content"
+        >
+          Phone number
+        </p>
         <div
-          class="Row-y1cs0u-0 gQFDhs"
-          width="100%"
+          class="Box-sc-1vhutan-0 lnJPFa"
+          data-testid="select"
         >
           <div
-            class="Column-sc-4zswzq-0 HRVgp"
-            width="230"
+            class=" css-2b097c-container"
           >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
-            >
-              Phone number
-            </p>
             <div
-              class="Box-sc-1vhutan-0 lnJPFa"
-              data-testid="select"
+              class=" css-4iyz22-control"
             >
               <div
-                class=" css-2b097c-container"
+                class=" css-g1d714-ValueContainer"
               >
                 <div
-                  class=" css-4iyz22-control"
+                  class=" css-1uccc91-singleValue"
                 >
                   <div
-                    class=" css-g1d714-ValueContainer"
+                    class="Row-y1cs0u-0 ecllgQ"
                   >
-                    <div
-                      class=" css-1uccc91-singleValue"
+                    <img
+                      alt="US"
+                      src="https://unpkg.com/react-flag-kit@0.3.1/assets/US.svg"
+                      style="height: 24px; width: 24px; display: inline-block;"
+                    />
+                    <p
+                      class="Text-e4p0w3-0 kbVxuh"
                     >
-                      <div
-                        class="Row-y1cs0u-0 ecllgQ"
-                      >
-                        <img
-                          alt="US"
-                          src="https://unpkg.com/react-flag-kit@0.3.1/assets/US.svg"
-                          style="height: 24px; width: 24px; display: inline-block;"
-                        />
-                        <p
-                          class="Text-e4p0w3-0 kbVxuh"
-                        >
-                          US +1
-                        </p>
-                      </div>
-                    </div>
-                    <div
-                      class="css-b8ldur-Input"
-                    >
-                      <div
-                        class=""
-                        style="display: inline-block;"
-                      >
-                        <input
-                          aria-autocomplete="list"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          id="react-select-3-input"
-                          spellcheck="false"
-                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                        <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                        />
-                      </div>
-                    </div>
+                      US +1
+                    </p>
                   </div>
+                </div>
+                <div
+                  class="css-b8ldur-Input"
+                >
                   <div
-                    class=" css-1hb7zxy-IndicatorsContainer"
+                    class=""
+                    style="display: inline-block;"
                   >
+                    <input
+                      aria-autocomplete="list"
+                      autocapitalize="none"
+                      autocomplete="off"
+                      autocorrect="off"
+                      id="react-select-3-input"
+                      spellcheck="false"
+                      style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                      tabindex="0"
+                      type="text"
+                      value=""
+                    />
                     <div
-                      aria-hidden="true"
-                      class=" css-tlfecz-indicatorContainer"
-                    >
-                      <img
-                        class="Img-sc-55j3su-0 gTKGj"
-                        src="IMAGE_MOCK"
-                        transform=""
-                      />
-                    </div>
+                      style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
+                    />
                   </div>
+                </div>
+              </div>
+              <div
+                class=" css-1hb7zxy-IndicatorsContainer"
+              >
+                <div
+                  aria-hidden="true"
+                  class=" css-tlfecz-indicatorContainer"
+                >
+                  <img
+                    class="Img-sc-55j3su-0 gTKGj"
+                    src="IMAGE_MOCK"
+                    transform=""
+                  />
                 </div>
               </div>
             </div>
           </div>
-          <div
-            class="Column-sc-4zswzq-0 ekpwZH"
-            value=""
-          >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
-            />
-            <input
-              class="Input-t9j2q5-0 dLTYGo"
-              name="number"
-              placeholder="Enter phone number"
-              type="tel"
-              value=""
-              width="100%"
-            />
-          </div>
         </div>
+      </div>
+      <div
+        class="Column-sc-4zswzq-0 ekpwZH"
+        value=""
+      >
+        <p
+          class="Text-e4p0w3-0 kFFPgx"
+          width="fit-content"
+        />
+        <input
+          class="Input-t9j2q5-0 dLTYGo"
+          name="number"
+          placeholder="Enter phone number"
+          type="tel"
+          value=""
+          width="100%"
+        />
       </div>
     </div>
   </div>

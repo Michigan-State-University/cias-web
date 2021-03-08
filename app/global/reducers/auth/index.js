@@ -13,6 +13,7 @@ export {
   confirmPhoneNumberRequest,
   sendSmsTokenRequest,
   logInGuestRequest,
+  editPhoneNumberPreviewRequest,
 } from './actions';
 export { authReducer, initialState } from './reducer';
 export {
@@ -21,6 +22,7 @@ export {
   makeSelectErrors,
   makeSelectLoaders,
   makeSelectUserRoles,
+  makeSelectPhoneNumberPreview,
 } from './selectors';
 export {
   logOutSaga,
@@ -33,4 +35,5 @@ export {
   changeNotificationsSettingsSaga,
   confirmPhoneNumberSaga,
   sendSmsTokenSaga,
+  editPhoneNumberQuestionSaga,
 } from './sagas';

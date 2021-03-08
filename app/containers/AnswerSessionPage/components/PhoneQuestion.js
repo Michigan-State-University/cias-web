@@ -18,11 +18,11 @@ const PhoneQuestion = ({
   } = question;
 
   const onChange = event => {
-    const { prefix, number } = event?.phoneAttributes ?? {};
+    const { prefix, number, iso, confirmed } = event ?? {};
     selectAnswer([
       {
         var: name,
-        value: `${prefix}${number}`,
+        value: { prefix, number, confirmed, iso },
       },
     ]);
   };

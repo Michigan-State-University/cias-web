@@ -16,6 +16,7 @@ import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
 import LocalStorageService from 'utils/localStorageService';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { makeSelectLocation } from 'containers/App/selectors';
+import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
 import {
   SUBMIT_ANSWER_REQUEST,
   PHONETIC_PREVIEW_REQUEST,
@@ -133,6 +134,7 @@ function* createUserSession({ payload: { sessionId } }) {
     const mappedData = defaultMapper(data);
 
     yield put(createUserSessionSuccess(mappedData));
+    yield put(resetPhoneNumberPreview());
   } catch (error) {
     yield put(createUserSessionFailure(error));
   }

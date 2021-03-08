@@ -133,7 +133,7 @@ export default defineMessages({
     },
     [phoneQuestion.id]: {
       id: `${scope}.${phoneQuestion.id}`,
-      defaultMessage: 'Phone',
+      defaultMessage: 'Phone Text Messaging',
     },
     [nameQuestion.id]: {
       id: `${scope}.${nameQuestion.id}`,

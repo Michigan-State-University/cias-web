@@ -31,6 +31,10 @@ import {
   SEND_SMS_TOKEN_SUCCESS,
   SEND_SMS_TOKEN_ERROR,
   LOG_IN_GUEST,
+  EDIT_PHONE_NUMBER_PREVIEW_REQUEST,
+  EDIT_PHONE_NUMBER_PREVIEW_SUCCESS,
+  EDIT_PHONE_NUMBER_PREVIEW_ERROR,
+  RESET_PHONE_NUMBER_PREVIEW,
 } from './constants';
 
 export const logIn = user => actionBuilder(LOG_IN_USER, { user });
@@ -43,6 +47,15 @@ export const editUserRequest = user =>
 export const editUserSuccess = user =>
   actionBuilder(EDIT_USER_SUCCESS, { user });
 export const editUserError = error => actionBuilder(EDIT_USER_ERROR, { error });
+
+export const editPhoneNumberPreviewRequest = (phoneNumber, isPreview) =>
+  actionBuilder(EDIT_PHONE_NUMBER_PREVIEW_REQUEST, { phoneNumber, isPreview });
+export const editPhoneNumberPreviewSuccess = (phoneNumber, isPreview) =>
+  actionBuilder(EDIT_PHONE_NUMBER_PREVIEW_SUCCESS, { phoneNumber, isPreview });
+export const editPhoneNumberPreviewError = error =>
+  actionBuilder(EDIT_PHONE_NUMBER_PREVIEW_ERROR, { error });
+export const resetPhoneNumberPreview = () =>
+  actionBuilder(RESET_PHONE_NUMBER_PREVIEW, {});
 
 export const changePasswordRequest = data =>
   actionBuilder(CHANGE_PASSWORD_REQUEST, data);

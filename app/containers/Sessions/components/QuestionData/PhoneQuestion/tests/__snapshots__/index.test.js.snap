@@ -5,110 +5,105 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   class="Column-sc-4zswzq-0 fgvXEf"
 >
   <div
-    class="Box-sc-1vhutan-0 iWvcWQ"
-    width="100%"
+    class="Row-y1cs0u-0 cbDOds"
+    disabled=""
   >
     <div
-      class="Row-y1cs0u-0 cbDOds"
-      disabled=""
+      class="Column-sc-4zswzq-0 ekpwZH"
     >
       <div
-        class="Column-sc-4zswzq-0 ekpwZH"
+        class="Row-y1cs0u-0 gQFDhs"
+        width="100%"
       >
         <div
-          class="Row-y1cs0u-0 gQFDhs"
-          width="100%"
+          class="Column-sc-4zswzq-0 HRVgp"
+          width="230"
         >
-          <div
-            class="Column-sc-4zswzq-0 HRVgp"
-            width="230"
+          <p
+            class="Text-e4p0w3-0 kFFPgx"
+            width="fit-content"
           >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
-            >
-              Phone number
-            </p>
+            Phone number
+          </p>
+          <div
+            class="Box-sc-1vhutan-0 lnJPFa"
+            data-testid="select"
+          >
             <div
-              class="Box-sc-1vhutan-0 lnJPFa"
-              data-testid="select"
+              class=" css-14jk2my-container"
             >
               <div
-                class=" css-14jk2my-container"
+                class=" css-vz7ypb-control"
               >
                 <div
-                  class=" css-vz7ypb-control"
+                  class=" css-g1d714-ValueContainer"
                 >
                   <div
-                    class=" css-g1d714-ValueContainer"
+                    class=" css-1wa3eu0-placeholder"
                   >
-                    <div
-                      class=" css-1wa3eu0-placeholder"
-                    >
-                      Code
-                    </div>
-                    <div
-                      class="css-b8ldur-Input"
-                    >
-                      <div
-                        class=""
-                        style="display: inline-block;"
-                      >
-                        <input
-                          aria-autocomplete="list"
-                          autocapitalize="none"
-                          autocomplete="off"
-                          autocorrect="off"
-                          disabled=""
-                          id="react-select-3-input"
-                          spellcheck="false"
-                          style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
-                          tabindex="0"
-                          type="text"
-                          value=""
-                        />
-                        <div
-                          style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
-                        />
-                      </div>
-                    </div>
+                    Code
                   </div>
                   <div
-                    class=" css-1hb7zxy-IndicatorsContainer"
+                    class="css-b8ldur-Input"
                   >
                     <div
-                      aria-hidden="true"
-                      class=" css-tlfecz-indicatorContainer"
+                      class=""
+                      style="display: inline-block;"
                     >
-                      <img
-                        class="Img-sc-55j3su-0 gTKGj"
-                        src="IMAGE_MOCK"
-                        transform=""
+                      <input
+                        aria-autocomplete="list"
+                        autocapitalize="none"
+                        autocomplete="off"
+                        autocorrect="off"
+                        disabled=""
+                        id="react-select-3-input"
+                        spellcheck="false"
+                        style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
+                        tabindex="0"
+                        type="text"
+                        value=""
+                      />
+                      <div
+                        style="position: absolute; top: 0px; left: 0px; visibility: hidden; height: 0px; overflow: scroll; white-space: pre; font-family: -webkit-small-control; letter-spacing: normal; text-transform: none;"
                       />
                     </div>
+                  </div>
+                </div>
+                <div
+                  class=" css-1hb7zxy-IndicatorsContainer"
+                >
+                  <div
+                    aria-hidden="true"
+                    class=" css-tlfecz-indicatorContainer"
+                  >
+                    <img
+                      class="Img-sc-55j3su-0 gTKGj"
+                      src="IMAGE_MOCK"
+                      transform=""
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div
-            class="Column-sc-4zswzq-0 bdrEBY"
-            disabled=""
+        </div>
+        <div
+          class="Column-sc-4zswzq-0 bdrEBY"
+          disabled=""
+          value=""
+        >
+          <p
+            class="Text-e4p0w3-0 kFFPgx"
+            width="fit-content"
+          />
+          <input
+            class="Input-t9j2q5-0 dLTYGo"
+            name="number"
+            placeholder="Enter phone number"
+            type="tel"
             value=""
-          >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
-            />
-            <input
-              class="Input-t9j2q5-0 dLTYGo"
-              name="number"
-              placeholder="Enter phone number"
-              type="tel"
-              value=""
-              width="100%"
-            />
-          </div>
+            width="100%"
+          />
         </div>
       </div>
     </div>

@@ -104,7 +104,6 @@ export const QuestionTypes = [
   singleQuestion,
   multiQuestion,
   textboxQuestion,
-  phoneQuestion,
   dateQuestion,
   nameQuestion,
   currencyQuestion,
@@ -117,4 +116,5 @@ export const QuestionTypes = [
   finishQuestion,
   participantReport,
   thirdPartyQuestion,
+  phoneQuestion,
 ];

@@ -37,6 +37,7 @@ import {
   makeSelectInterventionStatus,
   interventionReducer,
 } from 'global/reducers/intervention';
+import { editPhoneNumberQuestionSaga } from 'global/reducers/auth';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
@@ -153,6 +154,7 @@ export function AnswerSessionPage({
   useInjectSaga({ key: 'logInGuest', saga: logInGuestSaga });
   useInjectReducer({ key: 'AnswerSessionPage', reducer });
   useInjectSaga({ key: 'AnswerSessionPage', saga });
+  useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
 
   const location = useLocation();
 

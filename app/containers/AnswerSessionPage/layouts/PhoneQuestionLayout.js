@@ -1,48 +1,90 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { createStructuredSelector } from 'reselect';
 
-import Box from 'components/Box';
-import Row from 'components/Row';
+import { useInjectSaga } from 'redux-injectors';
+import {
+  changePhoneNumberSaga,
+  makeSelectUser,
+  makeSelectLoaders,
+  makeSelectErrors,
+  changeErrorStatus,
+  editPhoneNumberPreviewRequest,
+  makeSelectPhoneNumberPreview,
+} from 'global/reducers/auth';
+import { previewRegex } from 'global/constants/regex';
+import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
 import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
-import { colors } from 'theme';
 
-const usPrefix = { prefix: '+1', iso: 'US' };
+const PhoneQuestionLayout = ({
+  formatMessage,
+  user,
+  phoneNumberPreview,
+  editPhoneNumber,
+  error,
+  loading,
+  changeErrorValue,
+  onChange,
+}) => {
+  const US_PHONE = { iso: 'US', prefix: '+1' };
 
-const PhoneQuestionLayout = ({ onChange, formatMessage, answerBody }) => {
-  const value = answerBody && answerBody.value;
-  const { number, iso, prefix } = value ?? {};
+  useInjectSaga({ key: 'changePhoneNumber', saga: changePhoneNumberSaga });
+
+  const isPreview = previewRegex.test(window.location.href);
+
+  const phone = isPreview ? phoneNumberPreview : user?.phone;
+
+  useEffect(() => {
+    if (phone) onChange(phone);
+  }, [phone]);
+
+  const handleChangePhoneNumber = phoneNumber => {
+    editPhoneNumber(phoneNumber, isPreview);
+    onChange(phoneNumber);
+  };
 
   return (
-    <Box
-      bgOpacity={0}
-      width="100%"
-      px={21}
-      py={14}
-      border={`1px solid ${colors.casper}`}
-    >
-      <Row>
-        <PhoneNumberForm
-          formatMessage={formatMessage}
-          phone={{
-            number,
-            prefix: prefix ?? usPrefix.prefix,
-            iso: iso ?? usPrefix.iso,
-            confirmed: true,
-          }}
-          changePhoneNumber={onChange}
-          error={null}
-          loading={false}
-          changeErrorValue={null}
-        />
-      </Row>
-    </Box>
+    <PhoneNumberForm
+      formatMessage={formatMessage}
+      phone={phone?.iso ? phone : { ...phone, ...US_PHONE }}
+      changePhoneNumber={handleChangePhoneNumber}
+      error={error}
+      loading={loading}
+      changeErrorValue={changeErrorValue}
+      disabled={phone?.confirmed}
+    />
   );
 };
 
 PhoneQuestionLayout.propTypes = {
-  onChange: PropTypes.func,
   formatMessage: PropTypes.func,
-  answerBody: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  user: PropTypes.object,
+  phoneNumberPreview: PropTypes.object,
+  loading: PropTypes.bool,
+  error: PropTypes.string,
+  editPhoneNumber: PropTypes.func,
+  changeErrorValue: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
-export default PhoneQuestionLayout;
+const mapStateToProps = createStructuredSelector({
+  user: makeSelectUser(),
+  phoneNumberPreview: makeSelectPhoneNumberPreview(),
+  loading: makeSelectLoaders('changePhoneNumberLoading'),
+  error: makeSelectErrors('changePhoneNumberError'),
+});
+
+const mapDispatchToProps = {
+  editPhoneNumber: editPhoneNumberPreviewRequest,
+  changeErrorValue: changeErrorStatus,
+  resetPhoneNumber: resetPhoneNumberPreview,
+};
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(withConnect)(PhoneQuestionLayout);

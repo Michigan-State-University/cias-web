@@ -36,10 +36,15 @@ import {
   CONFIRM_PHONE_NUMBER_REQUEST,
   CONFIRM_PHONE_NUMBER_SUCCESS,
   CONFIRM_PHONE_NUMBER_ERROR,
+  EDIT_PHONE_NUMBER_PREVIEW_REQUEST,
+  EDIT_PHONE_NUMBER_PREVIEW_SUCCESS,
+  EDIT_PHONE_NUMBER_PREVIEW_ERROR,
+  RESET_PHONE_NUMBER_PREVIEW,
 } from './constants';
 
 export const initialState = {
   user: null,
+  phoneNumberPreview: null,
   errors: {
     changePasswordError: null,
     changeEmailError: null,
@@ -54,6 +59,7 @@ export const initialState = {
   },
   cache: {
     user: null,
+    phoneNumberPreview: null,
   },
 };
 
@@ -160,7 +166,6 @@ export const authReducer = (state = initialState, { type, payload }) =>
         break;
       case SEND_SMS_TOKEN_SUCCESS:
         draft.loaders.smsTokenLoading = false;
-        draft.user.phone.confirmed = true;
         break;
       case SEND_SMS_TOKEN_ERROR:
         draft.loaders.smsTokenLoading = false;
@@ -171,6 +176,8 @@ export const authReducer = (state = initialState, { type, payload }) =>
         break;
       case CONFIRM_PHONE_NUMBER_SUCCESS:
         draft.loaders.confirmPhoneNumberLoading = false;
+        if (state.phoneNumberPreview) draft.phoneNumberPreview.confirmed = true;
+        else draft.user.phone.confirmed = true;
         break;
       case CONFIRM_PHONE_NUMBER_ERROR:
         draft.loaders.confirmPhoneNumberLoading = false;
@@ -185,6 +192,27 @@ export const authReducer = (state = initialState, { type, payload }) =>
         break;
       case CHANGE_NOTIFICATIONS_SETTINGS_ERROR:
         draft.user = state.cache.user;
+        break;
+      case EDIT_PHONE_NUMBER_PREVIEW_REQUEST:
+        break;
+      case EDIT_PHONE_NUMBER_PREVIEW_SUCCESS:
+        const { phoneNumber, isPreview } = payload;
+        if (isPreview) {
+          draft.phoneNumberPreview = phoneNumber;
+          draft.cache.phoneNumberPreview = phoneNumber;
+        } else if (!state.user) draft.user = { phone: phoneNumber };
+        else draft.user.phone = phoneNumber;
+        draft.cache.user = state.user;
+        break;
+      case EDIT_PHONE_NUMBER_PREVIEW_ERROR:
+        if (payload.isPreview) {
+          draft.phoneNumberPreview = state.cache.phoneNumberPreview;
+        } else {
+          draft.user = state.cache.user;
+        }
+        break;
+      case RESET_PHONE_NUMBER_PREVIEW:
+        draft.phoneNumberPreview = null;
         break;
     }
   });

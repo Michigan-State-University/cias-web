@@ -5,12 +5,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import Box from 'components/Box';
 import Column from 'components/Column';
 import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
 import Question from 'models/Session/Question';
 import Row from 'components/Row';
-import { colors } from 'theme/colors';
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
@@ -28,32 +26,24 @@ const PhoneQuestion = ({
   const { number, iso, prefix } = payload ?? {};
   return (
     <Column mt={10}>
-      <Box
-        bgOpacity={0}
-        width="100%"
-        px={21}
-        py={14}
-        border={`1px solid ${colors.casper}`}
-      >
-        <Row disabled>
-          <PhoneNumberForm
-            disabled
-            formatMessage={formatMessage}
-            phone={{
-              number,
-              prefix,
-              iso,
-              confirmed: true,
-            }}
-            changePhoneNumber={value =>
-              updateAnswer({ variable, payload: value })
-            }
-            error={null}
-            loading={false}
-            changeErrorValue={null}
-          />
-        </Row>
-      </Box>
+      <Row disabled>
+        <PhoneNumberForm
+          disabled
+          formatMessage={formatMessage}
+          phone={{
+            number,
+            prefix,
+            iso,
+            confirmed: true,
+          }}
+          changePhoneNumber={value =>
+            updateAnswer({ variable, payload: value })
+          }
+          error={null}
+          loading={false}
+          changeErrorValue={null}
+        />
+      </Row>
     </Column>
   );
 };
