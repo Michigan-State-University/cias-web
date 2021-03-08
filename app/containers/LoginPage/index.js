@@ -4,7 +4,7 @@
  *
  */
 
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
 import { connect } from 'react-redux';
@@ -61,16 +61,19 @@ export const LoginPage = ({
   loginPage: { error, loading, formData },
   intl: { formatMessage },
   location: { search },
-  showSuccess,
-  showError,
 }) => {
   const queryObject = parse(search, { parseBooleans: true });
 
   useEffect(() => {
     if (has(queryObject, 'account_confirmation_success')) {
       if (queryObject.account_confirmation_success)
-        showSuccess(formatMessage(messages.accountConfirmation.success));
-      else showError(formatMessage(messages.accountConfirmation.error));
+        toast.success(formatMessage(messages.accountConfirmation.success), {
+          toastId: ACCOUNT_CONFIRMATION_SUCCESS,
+        });
+      else
+        toast.error(formatMessage(messages.accountConfirmation.error), {
+          toastId: ACCOUNT_CONFIRMATION_ERROR,
+        });
     }
   }, [queryObject.account_confirmation_success]);
 
@@ -183,8 +186,6 @@ LoginPage.propTypes = {
     }),
   }),
   location: PropTypes.shape({ search: PropTypes.string }),
-  showSuccess: PropTypes.func,
-  showError: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -194,10 +195,6 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   onLogin: loginRequest,
-  showSuccess: message =>
-    toast.success(message, { toastId: ACCOUNT_CONFIRMATION_SUCCESS }),
-  showError: message =>
-    toast.error(message, { toastId: ACCOUNT_CONFIRMATION_ERROR }),
 };
 
 const withConnect = connect(
