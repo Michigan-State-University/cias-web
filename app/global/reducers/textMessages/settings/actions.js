@@ -5,6 +5,7 @@ import {
   CHANGE_SCHEDULING_FREQUENCY,
   CHANGE_FORMULA_VALUE,
   CHANGE_TILE_NAME,
+  CHANGE_FORMULA_USED,
 } from './constants';
 
 export const changeSchedulingType = value =>
@@ -22,7 +23,7 @@ export const changeSchedulingValue = value =>
 export const changeSchedulingFrequency = value =>
   updateTextMessageSettingsRequest({
     type: CHANGE_SCHEDULING_FREQUENCY,
-    data: { value, field: 'frequency' },
+    data: { value, field: '' },
   });
 
 export const changeFormulaValue = value =>
@@ -36,8 +37,14 @@ export const changeTileName = value =>
     data: { value, field: 'name' },
   });
 
-export const changeEndAt = value =>
+export const changeFormulaUsed = value =>
   updateTextMessageSettingsRequest({
-    type: CHANGE_TILE_NAME,
-    data: { value, field: 'endAt' },
+    type: CHANGE_FORMULA_USED,
+    data: { value, field: 'isUsedFormula' },
+  });
+
+export const changeNoFormulaText = value =>
+  updateTextMessageSettingsRequest({
+    type: CHANGE_FORMULA_USED,
+    data: { value, field: 'noFormulaText' },
   });

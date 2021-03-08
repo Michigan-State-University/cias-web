@@ -13,7 +13,6 @@ import {
   fetchVariantsRequest,
   removeTextMessageRequest,
   changeTileName,
-  changeEndAt,
 } from 'global/reducers/textMessages';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
@@ -26,6 +25,8 @@ import { StyledSmsSettings, SectionDivider } from './styled';
 import { TextMessagesContext } from '../../utils';
 import messages from './messages';
 import TextMessageScheduling from '../../components/TextMessageScheduling';
+import FormulaSwitcher from '../../components/FormulaSwitcher';
+import NoFormulaMessage from '../../components/NoFormulaMessages';
 
 const TextMessageSettings = ({
   changeSchedulingTypeAction,
@@ -34,7 +35,6 @@ const TextMessageSettings = ({
   fetchVariants,
   removeTextMessage,
   changeTileNameAction,
-  changeEndAtAction,
 }) => {
   const {
     formatMessage,
@@ -47,12 +47,25 @@ const TextMessageSettings = ({
       schedulePayload,
       formula,
       endAt,
+      isUsedFormula,
+      noFormulaText,
     },
   } = useContext(TextMessagesContext);
 
   useEffect(() => {
     fetchVariants();
   }, [id]);
+
+  const messageSection = () => {
+    if (isUsedFormula)
+      return (
+        <>
+          <TextMessagesFormula disabled={!editingPossible} formula={formula} />
+          <TextMessageVariants />
+        </>
+      );
+    return <NoFormulaMessage noFormulaText={noFormulaText} />;
+  };
 
   return (
     <StyledSmsSettings>
@@ -79,8 +92,8 @@ const TextMessageSettings = ({
           disabled={!editingPossible}
         />
       </Box>
-
       <TextMessageScheduling
+        id={id}
         selectedOption={schedule}
         frequency={frequency}
         endAt={endAt}
@@ -89,12 +102,11 @@ const TextMessageSettings = ({
         onChangeOption={changeSchedulingTypeAction}
         onChangeValue={changeSchedulingValueAction}
         onChangeFrequency={changeSchedulingFrequencyAction}
-        onChangeEndAt={changeEndAtAction}
         disabled={!editingPossible}
       />
       <SectionDivider />
-      <TextMessagesFormula disabled={!editingPossible} formula={formula} />
-      <TextMessageVariants />
+      <FormulaSwitcher isUsedFormula={isUsedFormula} />
+      {messageSection()}
     </StyledSmsSettings>
   );
 };
@@ -106,14 +118,12 @@ TextMessageSettings.propTypes = {
   fetchVariants: PropTypes.func,
   removeTextMessage: PropTypes.func,
   changeTileNameAction: PropTypes.func,
-  changeEndAtAction: PropTypes.func,
 };
 
 const mapDispatchToProps = {
   changeSchedulingTypeAction: changeSchedulingType,
   changeSchedulingValueAction: changeSchedulingValue,
   changeSchedulingFrequencyAction: changeSchedulingFrequency,
-  changeEndAtAction: changeEndAt,
   changeTileNameAction: changeTileName,
   fetchVariants: fetchVariantsRequest,
   removeTextMessage: removeTextMessageRequest,

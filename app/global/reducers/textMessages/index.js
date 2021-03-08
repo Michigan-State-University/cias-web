@@ -15,7 +15,8 @@ export {
   changeSchedulingFrequency,
   changeFormulaValue,
   changeTileName,
-  changeEndAt,
+  changeFormulaUsed,
+  changeNoFormulaText,
 } from './settings/actions';
 
 export { changeFormulaMatch, changeContent } from './variants/actions';

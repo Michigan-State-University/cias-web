@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import values from 'lodash/values';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
@@ -14,11 +14,12 @@ import {
   MESSAGES_SCHEDULE_FREQUENCIES,
 } from 'models/TextMessage/constants';
 import { numericValidator } from 'utils/validators';
+import { themeColors } from 'theme';
 
 import messages from './messages';
 import { StyledInputWrapper } from './styled';
-
 const TextMessageScheduling = ({
+  id,
   selectedOption,
   value,
   frequency,
@@ -27,9 +28,46 @@ const TextMessageScheduling = ({
   onChangeOption,
   onChangeValue,
   onChangeFrequency,
-  onChangeEndAt,
   disabled,
 }) => {
+  const [frequencySettings, setFrequencySettings] = useState({
+    frequency,
+    endAt,
+  });
+
+  useEffect(() => {
+    setFrequencySettings({ frequency, endAt });
+  }, [id]);
+
+  const handleChangeFrequencySettings = updatedSettings => {
+    if (
+      updatedSettings.frequency === MESSAGES_SCHEDULE_FREQUENCIES.once ||
+      (updatedSettings.frequency && updatedSettings.endAt)
+    ) {
+      onChangeFrequency(updatedSettings);
+    }
+  };
+
+  const handleChangeFrequency = frequencyValue => {
+    const updatedSettings = {
+      ...frequencySettings,
+      frequency: frequencyValue,
+    };
+    setFrequencySettings(updatedSettings);
+    handleChangeFrequencySettings(updatedSettings);
+  };
+  const handleChangeEndAt = dateValue => {
+    const updatedSettings = {
+      ...frequencySettings,
+      endAt: dateValue.toLocaleString('en-US'),
+    };
+    setFrequencySettings(updatedSettings);
+    handleChangeFrequencySettings(updatedSettings);
+  };
+
+  const disableDatePicker =
+    frequencySettings.frequency === MESSAGES_SCHEDULE_FREQUENCIES.once;
+
   const ALL_SCHEDULE_OPTIONS = {
     [MESSAGES_SCHEDULE_OPTIONS.afterFill]: {
       id: MESSAGES_SCHEDULE_OPTIONS.afterFill,
@@ -100,39 +138,49 @@ const TextMessageScheduling = ({
             <Selector
               options={values(ALL_FREQUENCIES)}
               rightPosition="315"
-              setOption={onChangeFrequency}
-              activeOption={ALL_FREQUENCIES[frequency]}
+              setOption={handleChangeFrequency}
+              activeOption={ALL_FREQUENCIES[frequencySettings.frequency]}
               disabled={disabled}
             />
           </Row>
         </GCol>
         <GCol>
-          {frequency !== MESSAGES_SCHEDULE_FREQUENCIES.once && (
-            <Row width="100%" align="center" mt={20}>
-              <Text minWidth={70} fontWeight="bold" mr={5} fontSize={15}>
-                {formatMessage(messages.finishBy)}
-              </Text>
-              <Row>
+          <Row
+            disabled={disabled || disableDatePicker}
+            width="100%"
+            align="center"
+            mt={20}
+          >
+            <Text minWidth={70} fontWeight="bold" mr={5} fontSize={15}>
+              {formatMessage(messages.finishBy)}
+            </Text>
+            <Row>
+              <Column justify="center" align="center" height="100%" pt={15}>
                 <ApprovableInput
                   type="date"
                   placeholder={formatMessage(messages.date)}
                   validator={numericValidator}
                   height={50}
                   mr={0}
-                  value={Date.parse(endAt)}
-                  onCheck={dateValue =>
-                    onChangeEndAt(dateValue.toLocaleString())
-                  }
+                  value={Date.parse(frequencySettings.endAt)}
+                  onCheck={handleChangeEndAt}
                   fontSize={15}
                   padding={5}
                   textAlign="center"
                   width={120}
                   minDate={new Date()}
-                  disabled={disabled}
+                  disabled={disabled || disableDatePicker}
                 />
-              </Row>
+                <Row minHeight={16} mt={5}>
+                  {!disableDatePicker && !frequencySettings.endAt && (
+                    <Text color={themeColors.warning}>
+                      {formatMessage(messages.provideDate)}
+                    </Text>
+                  )}
+                </Row>
+              </Column>
             </Row>
-          )}
+          </Row>
         </GCol>
       </GRow>
     </Column>
@@ -141,6 +189,7 @@ const TextMessageScheduling = ({
 
 TextMessageScheduling.propTypes = {
   selectedOption: PropTypes.string,
+  id: PropTypes.string,
   endAt: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   frequency: PropTypes.string,
@@ -148,7 +197,6 @@ TextMessageScheduling.propTypes = {
   onChangeOption: PropTypes.func,
   onChangeFrequency: PropTypes.func,
   onChangeValue: PropTypes.func,
-  onChangeEndAt: PropTypes.func,
   disabled: PropTypes.bool,
 };
 

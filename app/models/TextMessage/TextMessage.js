@@ -10,6 +10,8 @@ export class TextMessage {
    * @param  {string} sessionId
    * @param  {string} endAt
    * @param  {string} formula
+   * @param  {boolean} isUsedFormula
+   * @param  {string} noFormulaText
    */
   constructor({
     id,
@@ -20,6 +22,8 @@ export class TextMessage {
     frequency,
     endAt,
     formula,
+    isUsedFormula,
+    noFormulaText,
   }) {
     this.id = id;
     this.name = name;
@@ -29,5 +33,7 @@ export class TextMessage {
     this.frequency = frequency;
     this.endAt = endAt;
     this.formula = formula;
+    this.isUsedFormula = isUsedFormula;
+    this.noFormulaText = noFormulaText;
   }
 }

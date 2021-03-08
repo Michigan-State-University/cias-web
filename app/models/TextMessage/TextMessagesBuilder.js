@@ -55,6 +55,7 @@ export class TextMessagesBuilder {
     this.frequency = frequency;
     this.endAt = endAt;
     this.formula = formula;
+    this.isUsedFormula = true;
 
     return this;
   };
@@ -74,6 +75,8 @@ export class TextMessagesBuilder {
     this.frequency = textMessage.frequency;
     this.endAt = textMessage.endAt;
     this.formula = textMessage.formula;
+    this.isUsedFormula = textMessage.isUsedFormula;
+    this.noFormulaText = textMessage.noFormulaText;
 
     return this;
   };
@@ -91,6 +94,8 @@ export class TextMessagesBuilder {
       frequency: this.frequency,
       endAt: this.endAt,
       formula: this.formula,
+      isUsedFormula: this.isUsedFormula,
+      noFormulaText: this.noFormulaText,
     });
 
   /**
@@ -104,6 +109,6 @@ export class TextMessagesBuilder {
       name,
       sessionId,
       schedule: MESSAGES_SCHEDULE_OPTIONS.afterFill,
-      frequency: MESSAGES_SCHEDULE_FREQUENCIES.onceWeek,
+      frequency: MESSAGES_SCHEDULE_FREQUENCIES.once,
     });
 }
