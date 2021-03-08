@@ -26,7 +26,7 @@ const navbarMessages = defineMessages({
   },
   researcherInterventions: {
     id: `${scope}.researcherInterventions`,
-    defaultMessage: 'My Sessions',
+    defaultMessage: 'Interventions',
   },
   researcherAccounts: {
     id: `${scope}.researcherAccounts`,

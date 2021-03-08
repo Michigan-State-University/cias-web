@@ -265,7 +265,6 @@ export function App({ user }) {
           allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'default',
-            activeTab: interventionsTabId,
           }}
         />
         <AppRoute
