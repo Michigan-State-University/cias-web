@@ -19,7 +19,7 @@
     "build": "cross-env NODE_ENV=production VERSION=$npm_package_version webpack --config internals/webpack/webpack.prod.babel.js --color -p --progress --hide-modules --display-optimization-bailout",
     "postbuild": "rimraf ./build/**/*.js.map",
     "build:clean": "rimraf ./build",
-    "start": "cross-env NODE_ENV=development node server",
+    "start": "cross-env NODE_ENV=development VERSION=$npm_package_version node server",
     "start:tunnel": "cross-env NODE_ENV=development ENABLE_TUNNEL=true node server",
     "start:production": "npm run test && npm run build && npm run start:prod",
     "start:prod": "cross-env NODE_ENV=production node server",
