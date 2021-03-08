@@ -1449,17 +1449,15 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
             autocomplete="off"
             class="Input-t9j2q5-0 iaGscC BadgeInput-sc-1ua27xt-0 gmlnZr"
             color="#107969"
-            name="notASearchField"
+            name="notASearchField-Variable name..."
             placeholder="Variable name..."
             type="text"
             value="test"
             width="57px"
           />
           <input
-            autocomplete="off"
             class="Input-t9j2q5-0 deKMNB BadgeInput-sc-1ua27xt-0 eSqSHP"
             color="#0086F8"
-            name="notASearchField"
             placeholder="Score"
             type="tel"
             value="1"

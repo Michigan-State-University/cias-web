@@ -61,6 +61,7 @@ const Header = ({
               onBlur={editName}
               onFocus={selectInputText}
               maxWidth="none"
+              autoComplete="off"
             />
           </Row>
         </GCol>

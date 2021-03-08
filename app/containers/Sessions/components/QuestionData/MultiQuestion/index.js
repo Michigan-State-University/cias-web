@@ -132,6 +132,7 @@ const MultiQuestion = ({
                       variable: { ...value.variable, name: val },
                     })
                   }
+                  autoComplete="off"
                 />
                 <BadgeInput
                   disabled={!editingPossible}

@@ -1446,11 +1446,9 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
           display="flex"
         >
           <input
-            autocomplete="off"
             class="Input-t9j2q5-0 ivxnZy BadgeInput-sc-1ua27xt-0 eSqSHP"
             color="#0086F8"
             data-cy="score-0-input"
-            name="notASearchField"
             placeholder="Score"
             type="tel"
             value="1"
@@ -2902,11 +2900,9 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
           display="flex"
         >
           <input
-            autocomplete="off"
             class="Input-t9j2q5-0 ivxnZy BadgeInput-sc-1ua27xt-0 eSqSHP"
             color="#0086F8"
             data-cy="score-1-input"
-            name="notASearchField"
             placeholder="Score"
             type="tel"
             value="2"

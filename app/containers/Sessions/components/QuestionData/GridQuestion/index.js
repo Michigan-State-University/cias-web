@@ -258,6 +258,7 @@ const GridQuestion = ({
                             onBlur={val =>
                               updateRow({ variable: { name: val } }, rowIndex)
                             }
+                            autoComplete="off"
                           />
                         </Row>
                         {isNarratorTab ? (

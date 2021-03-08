@@ -127,6 +127,7 @@ const InterventionNavbar = ({
           }
           onFocus={selectInputText}
           maxWidth={280}
+          autoComplete="off"
         />
       </Row>
       <Tabs
