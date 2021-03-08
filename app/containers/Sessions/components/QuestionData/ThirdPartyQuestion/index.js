@@ -64,7 +64,8 @@ const ThirdPartyQuestion = ({
   };
   const handleChangeTitle = (newTitle, index, value) =>
     updateAnswer(index, { ...value, payload: newTitle });
-  const handleRemove = () => index => removeAnswer(index);
+
+  const handleRemove = index => removeAnswer(index);
 
   return (
     <Column mt={10}>
@@ -130,7 +131,7 @@ const ThirdPartyQuestion = ({
                 {data.length > 1 && (
                   <Row>
                     <Box
-                      onClick={handleRemove(index)}
+                      onClick={() => handleRemove(index)}
                       hidden={hovered !== index}
                       clickable
                     >
