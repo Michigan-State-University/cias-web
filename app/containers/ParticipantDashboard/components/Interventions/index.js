@@ -16,7 +16,7 @@ import {
   makeSelectError,
   makeSelectLoader,
   makeSelectInterventions,
-} from 'global/reducers/participantDashboard';
+} from 'global/reducers/generatedReports';
 
 import messages from './messages';
 import InterventionCollapse from '../InterventionCollapse';

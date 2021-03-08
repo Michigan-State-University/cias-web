@@ -4,6 +4,7 @@ import { IntlProvider } from 'react-intl';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { Provider } from 'react-redux';
+
 import NotFoundPage from '../index';
 
 describe('<NotFoundPage />', () => {

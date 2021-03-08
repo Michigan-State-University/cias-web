@@ -4,43 +4,39 @@
  *
  */
 
-import React, { Fragment, memo } from 'react';
+import React, { memo } from 'react';
 import { compose } from 'redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
+import allReportsSagas from 'global/reducers/generatedReports/sagas';
+import { generatedReportsReducer } from 'global/reducers/generatedReports';
+import { Helmet } from 'react-helmet';
+import messages from 'containers/Sessions/containers/GeneratedReportsPage/messages';
+import ReportsList from 'containers/Reports/containers/ReportsList';
+import { injectIntl, intlShape } from 'react-intl';
 import AppContainer from 'components/Container';
-import Row from 'components/Row';
-import Column from 'components/Column';
 
-import allReportsSagas from 'global/reducers/participantDashboard/sagas';
-import { dashboardReducer } from 'global/reducers/participantDashboard';
-
-import LatestReport from './components/LatestReport';
-import PendingSessions from './components/PendingSessions';
-import Interventions from './components/Interventions';
-import { StyledRow } from './styled';
-
-export function ParticipantDashboard() {
+export function ParticipantDashboard({ intl: { formatMessage } }) {
   useInjectReducer({
-    key: 'dashboard',
-    reducer: dashboardReducer,
+    key: 'generatedReports',
+    reducer: generatedReportsReducer,
   });
   useInjectSaga({ key: 'reportsSaga', saga: allReportsSagas });
 
   return (
-    <>
-      <AppContainer>
-        <StyledRow width="100%" justify="evenly">
-          <PendingSessions />
-          <Column width={70} />
-          <LatestReport />
-        </StyledRow>
-        <Row width="100%" justify="center">
-          <Interventions />
-        </Row>
-      </AppContainer>
-    </>
+    <AppContainer>
+      <Helmet>
+        <title>{formatMessage(messages.pageTitle)}</title>
+      </Helmet>
+      <ReportsList disableFilter />
+    </AppContainer>
   );
 }
+ParticipantDashboard.propTypes = {
+  intl: intlShape,
+};
 
-export default compose(memo)(ParticipantDashboard);
+export default compose(
+  injectIntl,
+  memo,
+)(ParticipantDashboard);

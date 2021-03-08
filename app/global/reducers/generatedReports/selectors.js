@@ -2,7 +2,7 @@ import iterateRecursively from 'utils/iterateRecursively';
 import { createSelector } from 'reselect';
 import { initialState } from './reducer';
 
-const dashboard = state => state.dashboard || initialState;
+const dashboard = state => state.generatedReports || initialState;
 
 export const makeSelectDashboardState = () =>
   createSelector(
@@ -53,4 +53,22 @@ export const makeSelectError = name =>
   createSelector(
     dashboard,
     substate => substate.errors[name],
+  );
+
+export const makeSelectCurrentPage = () =>
+  createSelector(
+    dashboard,
+    substate => substate.reportsPage,
+  );
+
+export const makeSelectCurrentFilterOption = () =>
+  createSelector(
+    dashboard,
+    substate => substate.reportsFilterOption,
+  );
+
+export const makeSelectCurrentSortOption = () =>
+  createSelector(
+    dashboard,
+    substate => substate.reportsSortOption,
   );

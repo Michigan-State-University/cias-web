@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ReportsPage /> Should render and match the snapshot and to not log errors in console 1`] = `
+exports[`<ReportsList /> Should render and match the snapshot and to not log errors in console 1`] = `
 <div
   class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
   color="#C866EA"

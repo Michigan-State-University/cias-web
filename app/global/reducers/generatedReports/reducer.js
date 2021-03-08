@@ -13,11 +13,17 @@ import {
   TOGGLE_NOTIFICATIONS_REQUEST,
   TOGGLE_NOTIFICATIONS_SUCCESS,
   TOGGLE_NOTIFICATIONS_ERROR,
+  SORT_BY_LATEST,
+  PARTICIPANTS,
+  THIRD_PARTY,
 } from './constants';
 
 export const initialState = {
   reports: null,
   reportsSize: 0,
+  reportsPage: 1,
+  reportsSortOption: SORT_BY_LATEST,
+  reportsFilterOption: [PARTICIPANTS, THIRD_PARTY],
   latestReport: null,
   interventions: null,
   loaders: {
@@ -34,10 +40,23 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 
-export const dashboardReducer = (state = initialState, action) =>
+const selectFilter = (currentState, filter) => {
+  if (currentState.includes(filter))
+    return currentState.filter(value => value !== filter);
+  return [...currentState, filter];
+};
+
+export const generatedReportsReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case FETCH_REPORTS_REQUEST:
+        const { page, filterOption, sortOption } = action.payload;
+        draft.reportsPage = page;
+        draft.reportsSortOption = sortOption;
+        draft.reportsFilterOption = selectFilter(
+          state.reportsFilterOption,
+          filterOption,
+        );
         draft.loaders.fetchReportsLoading = true;
         draft.errors.fetchReportsError = null;
         break;
@@ -98,4 +117,4 @@ export const dashboardReducer = (state = initialState, action) =>
     }
   });
 
-export default dashboardReducer;
+export default generatedReportsReducer;

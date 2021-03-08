@@ -4,7 +4,7 @@ export {
   fetchInterventionsRequest,
   toggleNotificationsRequest,
 } from './actions';
-export { dashboardReducer } from './reducer';
+export { generatedReportsReducer } from './reducer';
 export {
   makeSelectDashboardState,
   makeSelectReports,

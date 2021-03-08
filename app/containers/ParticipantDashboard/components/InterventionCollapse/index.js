@@ -13,7 +13,7 @@ import arrowDown from 'assets/svg/arrow-down-select.svg';
 import arrowUp from 'assets/svg/arrow-up-collapse.svg';
 import { colors, boxShadows, themeColors } from 'theme';
 import Checkbox from 'components/Checkbox';
-import { toggleNotificationsRequest } from 'global/reducers/participantDashboard';
+import { toggleNotificationsRequest } from 'global/reducers/generatedReports';
 
 import messages from './messages';
 import { SessionTile } from '../SessionTile';

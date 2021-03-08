@@ -27,6 +27,7 @@ import {
   editSessionSaga,
   makeSelectSessionEditLoader,
 } from 'global/reducers/session';
+import { makeSelectReportsSize } from 'global/reducers/generatedReports';
 import { makeSelectQuestionGroupsLoader } from 'global/reducers/questionGroups';
 import { makeSelectReportTemplatesLoaders } from 'global/reducers/reportTemplates';
 
@@ -54,6 +55,8 @@ const getActiveTab = (path, formatMessage) => {
   if (path.includes('/settings')) return formatMessage(messages.settings);
   if (path.includes('/report-templates'))
     return formatMessage(messages.reportTemplates);
+  if (path.includes('/generated-reports'))
+    return formatMessage(messages.generatedReports);
   if (path.includes('/sms-messaging'))
     return formatMessage(messages.smsMessaging);
   return formatMessage(messages.sharing);
@@ -74,6 +77,7 @@ const InterventionNavbar = ({
   match: { params },
   redirectToPreviewAction,
   textMessagesCount,
+  generatedReportsCount,
 }) => {
   const { interventionId, sessionId } = params;
 
@@ -90,6 +94,8 @@ const InterventionNavbar = ({
   const editingPossible = canEdit(interventionStatus);
 
   const textMessagesCountValue = textMessagesCount || smsPlansCount || '0';
+
+  const generatedReportsCountValue = generatedReportsCount || '0';
 
   const isSaving =
     questionGroupsEditing ||
@@ -169,7 +175,26 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-
+        <div
+          linkMatch={formatMessage(messages.generatedReports)}
+          renderAsLink={
+            <StyledLink
+              to={`/interventions/${interventionId}/sessions/${sessionId}/generated-reports`}
+            >
+              <Row align="end">
+                {formatMessage(messages.generatedReports)}
+                <Circle
+                  bg={themeColors.secondary}
+                  color={colors.white}
+                  child={generatedReportsCountValue}
+                  size="20px"
+                  fontSize={11}
+                  ml={5}
+                />
+              </Row>
+            </StyledLink>
+          }
+        />
         <div
           linkMatch={formatMessage(messages.smsMessaging)}
           renderAsLink={
@@ -240,6 +265,7 @@ InterventionNavbar.propTypes = {
   reportsLoaders: PropTypes.object,
   redirectToPreviewAction: PropTypes.func,
   textMessagesCount: PropTypes.number,
+  generatedReportsCount: PropTypes.number,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -252,6 +278,7 @@ const mapStateToProps = createStructuredSelector({
   interventionStatus: makeSelectInterventionStatus(),
   textMessagesCount: makeSelectTextMessagesSize(),
   textLoaders: makeSelectAllLoaders(),
+  generatedReportsCount: makeSelectReportsSize(),
 });
 
 const mapDispatchToProps = {

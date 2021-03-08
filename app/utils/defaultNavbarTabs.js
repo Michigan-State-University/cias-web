@@ -32,18 +32,6 @@ const myTeamTab = message => ({
   message,
 });
 
-const participantDashboardTab = message => ({
-  id: interventionsTabId,
-  path: '/',
-  message,
-});
-
-const participantReportsTab = message => ({
-  id: participantReportsTabId,
-  path: '/reports',
-  message,
-});
-
 const navbarTabs = {
   [Roles.admin]: [
     interventionsTab(navbarNames.adminInterventions),
@@ -58,10 +46,7 @@ const navbarTabs = {
     interventionsTab(navbarNames.researcherInterventions),
     accountsTab(navbarNames.researcherAccounts),
   ],
-  [Roles.participant]: [
-    participantDashboardTab(navbarNames.participantInterventions),
-    participantReportsTab(navbarNames.participantReports),
-  ],
+  [Roles.participant]: [],
   [Roles.thirdParty]: [],
   [Roles.guest]: [
     {

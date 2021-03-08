@@ -15,8 +15,8 @@ import {
   TOGGLE_NOTIFICATIONS_ERROR,
 } from './constants';
 
-export const fetchReportsRequest = page =>
-  actionBuilder(FETCH_REPORTS_REQUEST, { page });
+export const fetchReportsRequest = (page, filterOption, sortOption) =>
+  actionBuilder(FETCH_REPORTS_REQUEST, { page, filterOption, sortOption });
 export const fetchReportsSuccess = (reports, reportsSize) =>
   actionBuilder(FETCH_REPORTS_SUCCESS, { reports, reportsSize });
 export const fetchReportsError = error =>

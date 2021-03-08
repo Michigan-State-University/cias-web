@@ -30,8 +30,8 @@ import TeamsListPage from 'containers/TeamsList/Loadable';
 import TeamDetails from 'containers/TeamDetails/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import UserDetails from 'containers/UserDetails/Loadable';
-import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 import ReportsPage from 'containers/ParticipantDashboard/components/ReportsTab/Loadable';
+import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReportsPage';
 import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
 import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
 
@@ -67,9 +67,9 @@ export function App({ user }) {
         case Roles.teamAdmin:
           return <InterventionPage />;
         case Roles.participant:
-          return <ParticipantDashboard />;
+          return <GeneratedReportsPage disableFilter />;
         case Roles.thirdParty:
-          return <ReportsPage />;
+          return <GeneratedReportsPage disableFilter />;
         default:
           return NotFoundPage;
       }
@@ -158,6 +158,16 @@ export function App({ user }) {
           exact
           path="/interventions/:interventionId/sessions/:sessionId/report-templates"
           component={ReportTemplatesPage}
+          protectedRoute
+          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          navbarProps={{
+            navbarId: 'sessions',
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/generated-reports"
+          component={GeneratedReportsPage}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
           navbarProps={{

@@ -23,7 +23,7 @@ const ElementsContainer = ({
       shadow={boxShadows.selago}
       px={20}
       py={15}
-      align="end"
+      align="start"
     >
       {options.map(({ label, id }, index) => {
         const isSelected = id === selectedOption.id;

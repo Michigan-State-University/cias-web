@@ -48,6 +48,8 @@ export const createUser = (index = 0) => ({
 export const createReport = (index = 0) => ({
   id: `report-test-${index}`,
   title: `Report: ${index}. part - Results`,
+  date: new Date().toDateString(),
+  session: `Session ${index}`,
 });
 
 export const createParticipantSession = (index = 0, available = false) => ({

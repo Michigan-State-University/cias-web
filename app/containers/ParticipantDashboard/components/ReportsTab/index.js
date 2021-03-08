@@ -22,15 +22,15 @@ import Loader from 'components/Loader';
 import Box from 'components/Box';
 
 import { colors, themeColors } from 'theme';
-import { PER_PAGE } from 'global/reducers/participantDashboard/constants';
-import fetchReportsSaga from 'global/reducers/participantDashboard/sagas/fetchReports';
+import { REPORTS_PER_PAGE } from 'global/reducers/generatedReports/constants';
+import fetchReportsSaga from 'global/reducers/generatedReports/sagas/fetchReports';
 import {
-  dashboardReducer,
+  generatedReportsReducer,
   fetchReportsRequest,
   makeSelectLoader,
   makeSelectReports,
   makeSelectReportsSize,
-} from 'global/reducers/participantDashboard';
+} from 'global/reducers/generatedReports';
 
 import PaginationHandler from 'containers/UserList/Components/PaginationHelper'; // TODO: make it generic later
 import { ReportTile } from '../ReportTile';
@@ -45,8 +45,8 @@ export const ReportsPage = ({
 }) => {
   useInjectSaga({ key: 'reportsSaga', saga: fetchReportsSaga });
   useInjectReducer({
-    key: 'dashboard',
-    reducer: dashboardReducer,
+    key: 'generatedReports',
+    reducer: generatedReportsReducer,
   });
 
   const [page, setPage] = useState(1);
@@ -57,7 +57,7 @@ export const ReportsPage = ({
     setPage(pageNumber);
   };
 
-  const pages = Math.ceil(reportsSize / PER_PAGE);
+  const pages = Math.ceil(reportsSize / REPORTS_PER_PAGE);
 
   useEffect(() => {
     fetchReports(page);
