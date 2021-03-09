@@ -5,7 +5,7 @@ export const scope = 'app.containers.TextMessageCases';
 export default defineMessages({
   label: {
     id: `${scope}.label`,
-    defaultMessage: 'The text i the SMS is:',
+    defaultMessage: 'The text in the SMS is:',
   },
   textMessagePlaceholder: {
     id: `${scope}.textMessagePlaceholder`,
