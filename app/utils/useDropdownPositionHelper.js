@@ -31,7 +31,7 @@ export const useDropdownPositionHelper = (referencePointRef, options = {}) => {
   });
 
   const { ref, callbackRef } = useCallbackRef(node => {
-    if (node && referencePointRef.current) {
+    if (node && referencePointRef && referencePointRef.current) {
       const nodeRect = node.getBoundingClientRect();
       const referencePointRect = referencePointRef.current.getBoundingClientRect();
 

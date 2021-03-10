@@ -17,6 +17,7 @@ import QuestionListDropdown from '../QuestionListDropdown';
 describe('<QuestionListDropdown />', () => {
   const defaultProps = {
     onClick: jest.fn(),
+    isVisible: true,
   };
 
   const singleQuestion = createQuestion();

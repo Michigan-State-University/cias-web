@@ -10,18 +10,20 @@ import arrowheadDown from 'assets/svg/arrowhead-down.svg';
 
 import { DropdownContainer } from './styled';
 
-const Dropdown = ({ children, isOpened, onClick, disabled }) => {
-  const arrow = isOpened ? arrowheadUp : arrowheadDown;
+const Dropdown = React.forwardRef(
+  ({ children, isOpened, onClick, disabled }, ref) => {
+    const arrow = isOpened ? arrowheadUp : arrowheadDown;
 
-  return (
-    <DropdownContainer disabled={disabled} onClick={onClick}>
-      <Row align="center" justify="between" height="100%">
-        <Box>{children}</Box>
-        <Img src={arrow} />
-      </Row>
-    </DropdownContainer>
-  );
-};
+    return (
+      <DropdownContainer disabled={disabled} onClick={onClick} ref={ref}>
+        <Row align="center" justify="between" height="100%">
+          <Box>{children}</Box>
+          <Img src={arrow} />
+        </Row>
+      </DropdownContainer>
+    );
+  },
+);
 
 Dropdown.propTypes = {
   children: PropTypes.node,
