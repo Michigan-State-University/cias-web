@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { injectSaga, injectReducer } from 'redux-injectors';
 import PropTypes from 'prop-types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { Helmet } from 'react-helmet';
@@ -33,7 +34,6 @@ import groupIconActive from 'assets/svg/group-active.svg';
 import Question from 'models/Session/Question';
 import { borders, colors, themeColors } from 'theme';
 
-import { injectSaga, useInjectSaga, injectReducer } from 'redux-injectors';
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -131,19 +131,6 @@ function EditSessionPage({
   const [modalVisible, setModalVisible] = useState(false);
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
 
-  useInjectSaga({
-    key: 'getQuestionGroupsSaga',
-    saga: getQuestionGroupsSaga,
-  });
-  useInjectSaga({ key: 'getSession', saga: getSessionSaga });
-  useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
-  useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
-  useInjectSaga({ key: 'copyModal', saga: allCopyModalSagas });
-  useInjectSaga({
-    key: 'reorderQuestionGroups',
-    saga: reorderQuestionGroupsSaga,
-  });
-
   const currentQuestion = questions.find(({ id }) => id === selectedQuestion);
   const currentGroupScope = groups.find(
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
@@ -159,12 +146,6 @@ function EditSessionPage({
             inactiveIcon: copy,
             activeIcon: copyActive,
             action: () => copyQuestions(selectedSlides),
-          },
-          {
-            label: <FormattedMessage {...messages.shareCopy} />,
-            inactiveIcon: share,
-            activeIcon: shareActive,
-            action: () => setModalVisible(true),
           },
         ]
       : []),
@@ -185,6 +166,12 @@ function EditSessionPage({
         deleteQuestions(selectedSlides, params.sessionId, groupIds);
         setSelectedSlides([]);
       },
+    },
+    {
+      label: <FormattedMessage {...messages.shareCopy} />,
+      inactiveIcon: share,
+      activeIcon: shareActive,
+      action: () => setModalVisible(true),
     },
   ];
 
@@ -298,6 +285,11 @@ function EditSessionPage({
   const checkSelectedGroup = gQuestions =>
     gQuestions.every(({ id }) => selectedSlides.includes(id));
 
+  const handleCloseManage = () => {
+    setManage(false);
+    setSelectedSlides([]);
+  };
+
   const toggleGroup = gQuestions => {
     const allSelected = checkSelectedGroup(gQuestions);
     let q = gQuestions;
@@ -355,7 +347,7 @@ function EditSessionPage({
               {manage && (
                 <Row mb={10} justify="between">
                   <Row>{groupActions.map(mapActions)}</Row>
-                  <ActionIcon mr="0" onClick={() => setManage(false)} />
+                  <ActionIcon mr="0" onClick={handleCloseManage} />
                 </Row>
               )}
               <DragDropContext
@@ -506,6 +498,18 @@ export default compose(
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
   injectReducer({ key: 'interventions', reducer: interventionsReducer }),
   injectReducer({ key: 'copyModal', reducer: copyModalReducer }),
+  injectSaga({ key: 'getSession', saga: getSessionSaga }),
+  injectSaga({
+    key: 'getQuestionGroupsSaga',
+    saga: getQuestionGroupsSaga,
+  }),
+  injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
+  injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
+  injectSaga({ key: 'copyModal', saga: allCopyModalSagas }),
+  injectSaga({
+    key: 'reorderQuestionGroups',
+    saga: reorderQuestionGroupsSaga,
+  }),
   injectIntl,
   withConnect,
   withSaga,

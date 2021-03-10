@@ -8,6 +8,7 @@ export {
   changeActivateStatusRequest,
   addUserToList,
   deleteUserFromTeamRequest,
+  fetchResearchersRequest,
 } from './actions';
 export { initialState } from './reducer';
 

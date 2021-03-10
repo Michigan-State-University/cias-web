@@ -15,4 +15,12 @@ export default defineMessages({
     id: `${scope}.reorderError`,
     defaultMessage: 'Cannot reorder groups!',
   },
+  shareError: {
+    id: `${scope}.shareError`,
+    defaultMessage: 'Cannot share questions!',
+  },
+  shareSuccess: {
+    id: `${scope}.shareSuccess`,
+    defaultMessage: 'Successfully shared questions',
+  },
 });

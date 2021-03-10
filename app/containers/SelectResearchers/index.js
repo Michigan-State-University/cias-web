@@ -25,14 +25,14 @@ import Checkbox from 'components/Checkbox';
 import { StyledButton } from 'components/Button/StyledButton';
 import ErrorAlert from 'components/ErrorAlert';
 import SearchInput from 'components/Input/SearchInput';
-import { useInjectReducer, injectSaga } from 'redux-injectors';
+import { injectSaga, injectReducer } from 'redux-injectors';
 
 import { Roles } from 'models/User/UserRoles';
 import {
-  fetchUsers,
   makeSelectUserList,
   UserListReducer,
   userListSaga,
+  fetchResearchersRequest,
 } from 'global/reducers/userList';
 
 import { makeSelectUser } from 'global/reducers/auth';
@@ -41,19 +41,22 @@ import messages from './messages';
 
 const SelectResearchers = ({
   intl: { formatMessage },
-  userList: { users, usersLoading, usersError },
+  userList: {
+    researchersSelector,
+    researchersSelectorLoading,
+    researchersSelectorError,
+  },
   fetchUsersRequest,
   onClose,
   user: { id: currentUserId },
   onResearchersSelected,
 }) => {
-  useInjectReducer({ key: 'userList', reducer: UserListReducer });
-
   const [selected, setSelected] = useState([]);
 
   const [finalUsers, filterValue, setFilterValue] = useFilter(
-    users.filter(({ id }) => id !== currentUserId),
-    'full_name',
+    researchersSelector.filter(({ id }) => id !== currentUserId),
+    'fullName',
+    {},
   );
   useLayoutEffect(() => {
     fetchUsersRequest([Roles.researcher]);
@@ -75,16 +78,16 @@ const SelectResearchers = ({
     );
   };
 
-  if (usersLoading)
+  if (researchersSelectorLoading)
     return (
       <Box>
         <Loader type="inline" />
       </Box>
     );
-  if (usersError)
+  if (researchersSelectorError)
     return (
       <Box>
-        <ErrorAlert errorText={usersError} />
+        <ErrorAlert errorText={researchersSelectorError} />
       </Box>
     );
   return (
@@ -165,7 +168,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  fetchUsersRequest: fetchUsers,
+  fetchUsersRequest: fetchResearchersRequest,
 };
 
 const withConnect = connect(
@@ -173,10 +176,15 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
+const withReducer = injectReducer({
+  key: 'userList',
+  reducer: UserListReducer,
+});
 const withSaga = injectSaga({ key: 'userList', saga: userListSaga });
 
 export default compose(
   injectIntl,
   withConnect,
+  withReducer,
   withSaga,
 )(SelectResearchers);
