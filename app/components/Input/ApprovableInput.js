@@ -164,6 +164,7 @@ const ApprovableInput = props => {
             onChange={date => onCheck(date)}
             onFocus={onFocus}
             placeholderText={placeholder}
+            dateFormat="MM/dd/yyyy"
             customInput={
               <DateInput
                 disabled={disabled}
@@ -208,7 +209,11 @@ const ApprovableInput = props => {
 };
 
 ApprovableInput.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
   onCheck: PropTypes.func,
   onFocus: PropTypes.func,
   rows: PropTypes.string,

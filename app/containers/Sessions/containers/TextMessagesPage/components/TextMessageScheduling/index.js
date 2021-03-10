@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import values from 'lodash/values';
 import { Col as GCol, Row as GRow } from 'react-grid-system';
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import Selector from 'components/Selector';
 import Column from 'components/Column';
@@ -30,6 +32,7 @@ const TextMessageScheduling = ({
   onChangeFrequency,
   disabled,
 }) => {
+  dayjs.extend(customParseFormat);
   const [frequencySettings, setFrequencySettings] = useState({
     frequency,
     endAt,
@@ -59,7 +62,7 @@ const TextMessageScheduling = ({
   const handleChangeEndAt = dateValue => {
     const updatedSettings = {
       ...frequencySettings,
-      endAt: dateValue.toLocaleString('en-US'),
+      endAt: dateValue.toLocaleString('en-GB'),
     };
     setFrequencySettings(updatedSettings);
     handleChangeFrequencySettings(updatedSettings);
@@ -162,7 +165,7 @@ const TextMessageScheduling = ({
                   validator={numericValidator}
                   height={50}
                   mr={0}
-                  value={Date.parse(frequencySettings.endAt)}
+                  value={dayjs(frequencySettings.endAt, 'DD/MM/YYYY').toDate()}
                   onCheck={handleChangeEndAt}
                   fontSize={15}
                   padding={5}
