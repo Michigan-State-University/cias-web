@@ -165,7 +165,11 @@ const TextMessageScheduling = ({
                   validator={numericValidator}
                   height={50}
                   mr={0}
-                  value={dayjs(frequencySettings.endAt, 'DD/MM/YYYY').toDate()}
+                  value={
+                    frequencySettings.endAt
+                      ? dayjs(frequencySettings.endAt, 'DD/MM/YYYY').toDate()
+                      : ''
+                  }
                   onCheck={handleChangeEndAt}
                   fontSize={15}
                   padding={5}
