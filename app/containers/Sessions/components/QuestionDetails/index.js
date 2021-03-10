@@ -121,7 +121,7 @@ const RenderQuestionDetails = ({
             <QuestionNarrator
               questionId={id}
               animationBoundaries={animationBoundaries}
-              settings={settings}
+              settings={{ ...settings, title, subtitle }}
             />
             <Row justify="center" width="100%">
               <AppContainer disablePageTitle $width="100%">
@@ -173,7 +173,9 @@ const RenderQuestionDetails = ({
                       <QuestionPreview
                         mt={10}
                         padding={26}
-                        dangerouslySetInnerHTML={{ __html: questionSubtitle }}
+                        dangerouslySetInnerHTML={{
+                          __html: questionSubtitle,
+                        }}
                       />
                     )}
                     {video && !isNullOrUndefined(videoUrl) && (

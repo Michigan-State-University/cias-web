@@ -86,6 +86,11 @@ const AnimationRefHelper = ({
     setRefState(animationParentRef.current);
   }, [animationParentRef]);
 
+  const settings = {
+    ...currentQuestion.narrator.settings,
+    ...currentQuestion.settings,
+  };
+
   return (
     <AnswerInterventionContent ref={animationParentRef}>
       {children}
@@ -94,7 +99,7 @@ const AnimationRefHelper = ({
           animationContainer={animationParentRef.current}
           blocks={currentQuestion.narrator.blocks}
           questionId={currentQuestionId}
-          settings={currentQuestion.narrator.settings}
+          settings={settings}
           previewMode={previewMode}
           answers={answers}
           changeIsAnimationOngoing={changeIsAnimationOngoing}

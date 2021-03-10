@@ -240,9 +240,13 @@ const CharacterAnim = ({
           else handleBodyOrHeadAnimationBlock();
           break;
 
+        case readQuestionBlockType:
+          if (!settings.subtitle) {
+            changeBlock();
+            break;
+          } // fallthrough intentionally
         case speechType:
         case reflectionType:
-        case readQuestionBlockType:
         case reflectionFormulaType:
           if (!settings.voice) changeBlock();
           else handleAudioBlock();
