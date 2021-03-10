@@ -31,7 +31,7 @@ const PhoneQuestion = ({
     <PhoneQuestionLayout
       formatMessage={formatMessage}
       onChange={onChange}
-      answerBody={answerBody[0]}
+      answerBody={answerBody?.[0]}
     />
   );
 };

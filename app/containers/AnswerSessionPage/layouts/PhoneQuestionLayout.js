@@ -37,12 +37,12 @@ const PhoneQuestionLayout = ({
   const phone = isPreview ? phoneNumberPreview : user?.phone;
 
   useEffect(() => {
-    if (phone) onChange(phone);
+    if (phone && phone.confirmed) onChange(phone);
   }, [phone]);
 
   const handleChangePhoneNumber = phoneNumber => {
     editPhoneNumber(phoneNumber, isPreview);
-    onChange(phoneNumber);
+    if (phoneNumber && phoneNumber.confirmed) onChange(phoneNumber);
   };
 
   return (
