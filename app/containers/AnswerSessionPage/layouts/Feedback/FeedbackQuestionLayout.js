@@ -1,9 +1,15 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { injectIntl } from 'react-intl';
+import { useContainerQuery } from 'react-container-query';
 
-import { visualAnalogScaleLabelStyles } from 'theme';
+import {
+  visualAnalogScaleBoldLabelStyles,
+  visualAnalogScaleLabelStyles,
+} from 'theme';
 
+import { containerBreakpoints } from 'components/Container/containerBreakpoints';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
@@ -13,11 +19,14 @@ import FeedbackSlider from './FeedbackSlider';
 const FeedbackQuestionLayout = ({
   startValue,
   endValue,
-  targetValue: { target: targetValue },
+  targetValue: { target: targetValue } = { target: 0 },
   intl: { formatMessage },
   showSpectrum,
   setFeedbackSettings,
 }) => {
+  const query = { 'wrap-text': { maxWidth: containerBreakpoints.sm } };
+  const [params, containerRef] = useContainerQuery(query);
+
   const sliderRef = useRef(null);
   const targetNumber = parseInt(targetValue, 10);
   const higherValue = 100 - targetNumber;
@@ -31,13 +40,17 @@ const FeedbackQuestionLayout = ({
     },
     ...(showSpectrum
       ? {
-          [lowerPosition]: {
-            label: <>{targetNumber}</>,
-            style: visualAnalogScaleLabelStyles,
-          },
+          ...(targetNumber
+            ? {
+                [lowerPosition]: {
+                  label: <>{targetNumber}</>,
+                  style: visualAnalogScaleBoldLabelStyles,
+                },
+              }
+            : {}),
           [higherPosition]: {
             label: <>{higherValue}</>,
-            style: visualAnalogScaleLabelStyles,
+            style: visualAnalogScaleBoldLabelStyles,
           },
         }
       : {}),
@@ -58,13 +71,14 @@ const FeedbackQuestionLayout = ({
     <Column mt={10} mb={10}>
       <Box width="100%">
         <Row>
-          <Box width="100%" px={21} py={14}>
+          <Box ref={containerRef} width="100%" px={21} py={14}>
             <FeedbackSlider
               ref={sliderRef}
               targetValue={targetNumber}
               labels={labels}
               formatMessage={formatMessage}
               withSpectrum={showSpectrum}
+              className={classnames(params)}
             />
           </Box>
         </Row>

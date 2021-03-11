@@ -33,7 +33,7 @@ const FeedbackQuestion = ({
     <FeedbackQuestionLayout
       startValue={startValue}
       endValue={endValue}
-      targetValue={targetValue}
+      targetValue={targetValue ?? { target: 0 }}
       showSpectrum={showSpectrum}
       setFeedbackSettings={setFeedbackSettings}
     />

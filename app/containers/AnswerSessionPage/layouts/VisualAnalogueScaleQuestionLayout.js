@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { useContainerQuery } from 'react-container-query';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
-import AppSlider from 'components/AppSlider';
+import { containerBreakpoints } from 'components/Container/containerBreakpoints';
 import { visualAnalogScaleLabelStyles } from 'theme';
+import { VisualAnalogueSlider } from './styled';
 
 const VisualAnalogueScaleQuestionLayout = ({
   onChange,
@@ -15,6 +18,9 @@ const VisualAnalogueScaleQuestionLayout = ({
   answerValue,
   showNumber,
 }) => {
+  const query = { 'wrap-text': { maxWidth: containerBreakpoints.sm } };
+  const [params, containerRef] = useContainerQuery(query);
+
   const labels = {
     0: {
       label: <>{startValue}</>,
@@ -30,14 +36,15 @@ const VisualAnalogueScaleQuestionLayout = ({
     <Column mt={10} mb={10}>
       <Box width="100%">
         <Row>
-          <Box width="100%" px={21} py={14}>
-            <AppSlider
+          <Box ref={containerRef} width="100%" px={21} py={14}>
+            <VisualAnalogueSlider
               step={1}
               onChange={onChange}
               value={answerValue}
               onAfterChange={onAfterChange}
               marks={labels}
               showValue={showNumber}
+              className={classnames(params)}
             />
           </Box>
         </Row>

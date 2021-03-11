@@ -30,10 +30,18 @@ const visualAnalogScaleLabelStyles = {
   width: 'fit-content',
 };
 
+const visualAnalogScaleBoldLabelStyles = {
+  fontSize: fontSizes.regular,
+  width: 'fit-content',
+  fontWeight: 700,
+  color: colors.bluewood,
+};
+
 export {
   borders,
   paddings,
   boxShadows,
   elements,
   visualAnalogScaleLabelStyles,
+  visualAnalogScaleBoldLabelStyles,
 };

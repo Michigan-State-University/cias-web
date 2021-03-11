@@ -17,7 +17,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
           width="100%"
         >
           <div
-            class="rc-slider rc-slider-with-marks rc-slider-disabled styled__CustomSlider-bqo6sz-5 itGhUA"
+            class="rc-slider rc-slider-with-marks rc-slider-disabled styled__CustomSlider-bqo6sz-5 jcixCs"
           >
             <div
               class="rc-slider-rail"
@@ -84,13 +84,13 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
               </span>
               <span
                 class="rc-slider-mark-text rc-slider-mark-text-active"
-                style="transform: translateX(-50%); left: 5%; font-size: 15px;"
+                style="transform: translateX(-50%); left: 5%; font-size: 15px; font-weight: 700; color: rgb(47, 56, 80);"
               >
                 10
               </span>
               <span
                 class="rc-slider-mark-text"
-                style="transform: translateX(-50%); left: 55.00000000000001%; font-size: 15px;"
+                style="transform: translateX(-50%); left: 55.00000000000001%; font-size: 15px; font-weight: 700; color: rgb(47, 56, 80);"
               >
                 90
               </span>

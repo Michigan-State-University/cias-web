@@ -62,6 +62,20 @@ export const CustomSlider = styled(AppSlider)`
       '.rc-slider-handle': { visibility: 'hidden' },
       '.rc-slider-track': { visibility: 'hidden' },
     }}
+
+  &.wrap-text {
+    .rc-slider-mark-text {
+      max-width: 70px;
+    }
+  }
+`;
+
+export const VisualAnalogueSlider = styled(AppSlider)`
+  &.wrap-text {
+    .rc-slider-mark-text {
+      max-width: 70px;
+    }
+  }
 `;
 
 export const FirstTH = styled(TH)`
