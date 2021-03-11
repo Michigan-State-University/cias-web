@@ -28,6 +28,7 @@ export {
   makeSelectVisibleGroupsSize,
   makeSelectNameQuestionExists,
   makeSelectFilteredQuestions,
+  makeSelectPreviousQuestions,
 } from './selectors';
 export {
   addQuestionImageSaga,

@@ -23,6 +23,22 @@ export const makeSelectQuestions = () =>
     substate => substate.questions,
   );
 
+export const makeSelectPreviousQuestions = () =>
+  createSelector(
+    selectQuestions,
+    substate => {
+      const questions = [];
+      substate.questions.some(question => {
+        if (question.id !== substate.selectedQuestion) {
+          questions.push(question);
+          return false;
+        }
+        return true;
+      });
+      return questions;
+    },
+  );
+
 export const makeSelectFilteredQuestions = () =>
   createSelector(
     selectQuestions,

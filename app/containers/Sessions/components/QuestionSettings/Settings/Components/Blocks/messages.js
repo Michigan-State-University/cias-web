@@ -207,4 +207,8 @@ export default defineMessages({
     id: `${scope}.speechPlaceholder`,
     defaultMessage: 'Enter speech here...',
   },
+  noQuestions: {
+    id: `${scope}.noQuestions`,
+    defaultMessage: 'No questions available',
+  },
 });

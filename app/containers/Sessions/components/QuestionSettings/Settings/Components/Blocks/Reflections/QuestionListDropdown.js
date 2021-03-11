@@ -17,14 +17,15 @@ import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
 import { useChildSizeCalculator } from 'utils/useChildSizeCalculator';
 import {
-  makeSelectQuestions,
   makeSelectSelectedQuestion,
+  makeSelectPreviousQuestions,
 } from 'global/reducers/questions';
 import {
   singleQuestion,
   multiQuestion,
   gridQuestion,
 } from 'models/Session/QuestionTypes';
+import messages from '../messages';
 
 const possibleQuestions = [
   singleQuestion.id,
@@ -33,6 +34,7 @@ const possibleQuestions = [
 ];
 
 const QuestionListDropdown = ({
+  formatMessage,
   onClick,
   questions,
   selectedQuestion: { id } = {},
@@ -50,7 +52,6 @@ const QuestionListDropdown = ({
   const { height } = useChildSizeCalculator(ref, containerRef);
 
   const canSelectQuestion = questionId => id !== questionId;
-
   const filteredQuestions = questions.filter(question =>
     possibleQuestions.includes(question.type),
   );
@@ -70,6 +71,7 @@ const QuestionListDropdown = ({
         height={height}
       >
         <ScrollFogBox
+          mt={12}
           padding={8}
           width="100%"
           overflow="scroll"
@@ -78,6 +80,11 @@ const QuestionListDropdown = ({
           height={height}
           data-testid={`${id}-select-target-question`}
         >
+          {!filteredQuestions?.length && (
+            <Row align="center" justify="center">
+              {formatMessage(messages.noQuestions)}
+            </Row>
+          )}
           {filteredQuestions.map((question, index) => (
             <Row
               data-testid={`${id}-select-target-question-el`}
@@ -117,11 +124,12 @@ QuestionListDropdown.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
   chosenQuestionId: PropTypes.string,
   isVisible: PropTypes.bool,
+  formatMessage: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
-  questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestion(),
+  questions: makeSelectPreviousQuestions(),
 });
 
 const withConnect = connect(mapStateToProps);
