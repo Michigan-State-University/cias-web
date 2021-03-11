@@ -6,6 +6,7 @@
 
 import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
+import uniqBy from 'lodash/uniqBy';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -53,10 +54,10 @@ const UserSelector = ({
 
   const options = useMemo(
     () =>
-      additionalUsers
-        .concat(usersSelector)
-        .map(({ email, id }) => ({ value: id, label: email })),
-    [usersSelector],
+      uniqBy(additionalUsers.concat(usersSelector), 'id').map(
+        ({ email, id }) => ({ value: id, label: email }),
+      ),
+    [usersSelector, additionalUsers],
   );
 
   const selectedValue = useMemo(

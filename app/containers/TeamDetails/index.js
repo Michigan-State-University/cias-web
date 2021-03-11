@@ -133,11 +133,9 @@ export const TeamDetails = ({
         />
       )}
       <StyledBox height="100%" width="100%">
-        {isAdmin && (
-          <BackButton to="/teams">
-            <FormattedMessage {...messages.backButton} />
-          </BackButton>
-        )}
+        <BackButton to="/teams">
+          <FormattedMessage {...messages.backButton} />
+        </BackButton>
         <Row align="center">
           <Col xs="content">
             <H1 my={25}>
@@ -187,7 +185,7 @@ export const TeamDetails = ({
                       disabled={singleTeamEditLoading}
                       selectedUserId={selectedUser?.id}
                       onSelect={handleOnSelect}
-                      rolesToInclude={[Roles.researcher]}
+                      rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
                       additionalUsers={[teamAdmin]}
                     />
                   </Col>

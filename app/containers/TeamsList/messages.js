@@ -1,14 +1,18 @@
 /*
- * UserList Messages
+ * TeamsList Messages
  *
- * This contains all the text for the UserList container.
+ * This contains all the text for the TeamsList container.
  */
 
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.containers.UserList';
+export const scope = 'app.containers.TeamsList';
 
 export default defineMessages({
+  pageTitle: {
+    id: `${scope}.pageTitle`,
+    defaultMessage: 'Manage Teams',
+  },
   manageTeams: {
     id: `${scope}.manageTeams`,
     defaultMessage: 'Manage teams',
@@ -67,7 +71,7 @@ export default defineMessages({
   },
   researcherSectionTitle: {
     id: `${scope}.researcherSectionTitle`,
-    defaultMessage: 'Choose researcher',
+    defaultMessage: 'Choose Researcher or Team Admin',
   },
   createTeamNameInput: {
     id: `${scope}.createTeamNameInput`,

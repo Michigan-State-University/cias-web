@@ -49,7 +49,6 @@ import { compose } from 'redux';
 import {
   accountsTabId,
   interventionsTabId,
-  myTeamTabId,
   participantReportsTabId,
   teamsTabId,
 } from 'utils/defaultNavbarTabs';
@@ -200,7 +199,7 @@ export function App({ user }) {
           path="/teams"
           component={TeamsListPage}
           protectedRoute
-          allowedRoles={[Roles.admin]}
+          allowedRoles={[Roles.admin, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'default',
             activeTab: teamsTabId,
@@ -211,23 +210,9 @@ export function App({ user }) {
           path="/teams/:id"
           component={TeamDetails}
           protectedRoute
-          allowedRoles={[Roles.admin]}
+          allowedRoles={[Roles.admin, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'default',
-            activeTab: teamsTabId,
-          }}
-        />
-        <AppRoute
-          exact
-          path="/my-team"
-          component={() => (
-            <TeamDetails match={{ params: { id: user.teamId } }} />
-          )}
-          protectedRoute
-          allowedRoles={[Roles.teamAdmin]}
-          navbarProps={{
-            navbarId: 'default',
-            activeTab: myTeamTabId,
           }}
         />
         <AppRoute

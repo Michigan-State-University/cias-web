@@ -26,12 +26,6 @@ const teamsTab = message => ({
   message,
 });
 
-const myTeamTab = message => ({
-  id: myTeamTabId,
-  path: '/my-team',
-  message,
-});
-
 const navbarTabs = {
   [Roles.admin]: [
     interventionsTab(navbarNames.adminInterventions),
@@ -40,7 +34,7 @@ const navbarTabs = {
   ],
   [Roles.teamAdmin]: [
     interventionsTab(navbarNames.adminInterventions),
-    myTeamTab(navbarNames.teamAdminTeam),
+    teamsTab(navbarNames.adminTeams),
   ],
   [Roles.researcher]: [
     interventionsTab(navbarNames.researcherInterventions),

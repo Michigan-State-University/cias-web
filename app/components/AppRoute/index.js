@@ -35,6 +35,7 @@ class AppRoute extends Route {
 
       return <Redirect to={`/no-access?${queryParams.toString()}`} />;
     }
+
     if (user && allowedRoles.includes(user.roles[0])) {
       return (
         <>
@@ -49,6 +50,10 @@ class AppRoute extends Route {
         </>
       );
     }
+
+    if (user && !allowedRoles.includes(user.roles[0]))
+      return <Redirect to="/no-access" />;
+
     return super.render();
   }
 }
