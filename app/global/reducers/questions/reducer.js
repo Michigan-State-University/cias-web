@@ -409,7 +409,6 @@ export const questionsReducer = (state = initialState, action) =>
           ),
         };
 
-        draft.loaders.updateQuestionLoading = true;
         draft.questions[selectedQuestionIndex] = assignFromQuestionTTS(
           updatedQuestion,
         );
