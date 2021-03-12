@@ -54,7 +54,7 @@ exports[`<TileMapper /> Should render and match the snapshot - empty 1`] = `
       class="c1"
     >
       <span>
-        No Results
+        No reports available at the moment
       </span>
     </h2>
   </div>

@@ -55,6 +55,7 @@ const ReportsList = ({
   currentPage,
   currentSortOption,
   currentFilterOption,
+  match,
 }) => {
   const sortOptions = useMemo(
     () =>
@@ -69,23 +70,33 @@ const ReportsList = ({
 
   const innerSetPage = pageNumber => {
     setDisplayLoader(true);
-    fetchReports(pageNumber, currentFilterOption, currentSortOption);
+    fetchReports(pageNumber, null, currentSortOption, match?.params?.sessionId);
   };
 
   const handleChangeFilter = filter => {
     setDisplayLoader(true);
-    fetchReports(currentPage, filter, currentSortOption);
+    fetchReports(
+      currentPage,
+      filter,
+      currentSortOption,
+      match?.params?.sessionId,
+    );
   };
 
   const handleChangeSort = sort => {
     setDisplayLoader(true);
-    fetchReports(currentPage, currentFilterOption, sort);
+    fetchReports(currentPage, null, sort, match?.params?.sessionId);
   };
 
   const pages = Math.ceil(reportsSize / REPORTS_PER_PAGE);
 
   useEffect(() => {
-    fetchReports(currentPage, currentFilterOption, currentSortOption);
+    fetchReports(
+      currentPage,
+      null,
+      currentSortOption,
+      match?.params?.sessionId,
+    );
   }, []);
 
   useEffect(() => {
@@ -100,6 +111,8 @@ const ReportsList = ({
 
   if (!reports && reportsLoading)
     return <Spinner color={themeColors.secondary} size={100} />;
+
+  const noContent = !reports?.length;
 
   return (
     <>
@@ -124,16 +137,19 @@ const ReportsList = ({
         sortOptions={sortOptions}
         activeFilters={currentFilterOption}
         activeSort={currentSortOption}
+        noContent={noContent}
       />
       <Column mb={20}>
         <TileMapper items={reports} component={renderReport} />
       </Column>
-      <PaginationHandler
-        setPage={innerSetPage}
-        page={currentPage}
-        pages={pages}
-        size={reportsSize}
-      />
+      {!noContent && (
+        <PaginationHandler
+          setPage={innerSetPage}
+          page={currentPage}
+          pages={pages}
+          size={reportsSize}
+        />
+      )}
     </>
   );
 };
@@ -148,6 +164,7 @@ ReportsList.propTypes = {
   currentPage: PropTypes.number,
   currentSortOption: PropTypes.string,
   currentFilterOption: PropTypes.array,
+  match: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -33,6 +33,6 @@ export default defineMessages({
   },
   [SORT_BY_LATEST]: {
     id: `${scope}.${SORT_BY_LATEST}`,
-    defaultMessage: 'Sort by Latest',
+    defaultMessage: 'Sort by Oldest',
   },
 });

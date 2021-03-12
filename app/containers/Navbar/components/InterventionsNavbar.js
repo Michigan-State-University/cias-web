@@ -63,7 +63,7 @@ const getActiveTab = (path, formatMessage) => {
 };
 
 const InterventionNavbar = ({
-  session: { name, reportTemplatesCount, smsPlansCount },
+  session: { name, reportTemplatesCount, smsPlansCount, generatedReportCount },
   reportsLoaders: { updateReportTemplateLoading },
   textLoaders,
   updateSessionName,
@@ -85,6 +85,19 @@ const InterventionNavbar = ({
   const [tabActive, setTabActive] = useState(
     getActiveTab(pathname, formatMessage),
   );
+
+  const [currentReportsCount, setCurrentReportsCount] = useState(
+    generatedReportsCount,
+  );
+
+  useEffect(() => {
+    if (
+      generatedReportsCount !== 0 &&
+      generatedReportsCount > currentReportsCount
+    )
+      setCurrentReportsCount(generatedReportsCount);
+  }, [generatedReportsCount]);
+
   useEffect(() => {
     setTabActive(getActiveTab(pathname, formatMessage));
   }, [pathname]);
@@ -95,7 +108,8 @@ const InterventionNavbar = ({
 
   const textMessagesCountValue = textMessagesCount || smsPlansCount || '0';
 
-  const generatedReportsCountValue = generatedReportsCount || '0';
+  const generatedReportsCountValue =
+    generatedReportCount || currentReportsCount || '0';
 
   const isSaving =
     questionGroupsEditing ||
@@ -252,6 +266,7 @@ InterventionNavbar.propTypes = {
     reportTemplatesCount: PropTypes.number,
     smsPlansCount: PropTypes.number,
     id: PropTypes.string,
+    generatedReportCount: PropTypes.number,
   }),
   updateSessionName: PropTypes.func,
   intl: intlShape,

@@ -1,23 +1,35 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, takeLatest, call, select } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { GeneratedReportBuilder } from 'models/GeneratedReport';
 
-import { FETCH_REPORTS_REQUEST } from '../constants';
+import { FETCH_REPORTS_REQUEST, REPORTS_PER_PAGE } from '../constants';
 import { fetchReportsSuccess, fetchReportsError } from '../actions';
+import { makeSelectCurrentFilterOption } from '../selectors';
 
-// eslint-disable-next-line no-unused-vars
-export function* fetchReports({ payload: { page } }) {
+export function* fetchReports({ payload: { page, sortOption, sessionId } }) {
   try {
+    const filterOption = yield select(makeSelectCurrentFilterOption());
+    let requestParams = {
+      params: {
+        per_page: REPORTS_PER_PAGE,
+        page,
+        report_for: filterOption,
+        order: sortOption,
+      },
+    };
     const requestUrl = '/v1/generated_reports';
+    if (sessionId)
+      requestParams = {
+        params: { ...requestParams.params, session_id: sessionId },
+      };
     const {
-      // eslint-disable-next-line no-unused-vars
-      data: { data: reports },
-    } = yield call(axios.get, requestUrl);
-    const mappedReports = reports.map(report =>
+      data: { data, reports_size: reportsSize },
+    } = yield call(axios.get, requestUrl, requestParams);
+    const mappedReports = data.map(report =>
       new GeneratedReportBuilder().fromJson(report).build(),
     );
-    yield put(fetchReportsSuccess(mappedReports, reports.length));
+    yield put(fetchReportsSuccess(mappedReports, reportsSize));
   } catch (error) {
     yield put(fetchReportsError(error));
   }

@@ -17,6 +17,7 @@ export function ReportsFilter({
   sortOptions,
   filterOptions,
   disableFilter,
+  noContent,
 }) {
   return (
     <Row my={30} align="center" justify={disableFilter ? 'end' : 'between'}>
@@ -41,15 +42,17 @@ export function ReportsFilter({
         </Row>
       )}
       <Row minWidth={150}>
-        <Selector
-          options={sortOptions}
-          activeOption={{
-            value: activeSort,
-            label: formatMessage(messages[activeSort]),
-          }}
-          rightPosition="315"
-          setOption={changeSort}
-        />
+        {!noContent && (
+          <Selector
+            options={sortOptions}
+            activeOption={{
+              value: activeSort,
+              label: formatMessage(messages[activeSort]),
+            }}
+            rightPosition="315"
+            setOption={changeSort}
+          />
+        )}
       </Row>
     </Row>
   );
@@ -62,6 +65,7 @@ ReportsFilter.propTypes = {
   activeFilters: PropTypes.array,
   activeSort: PropTypes.string,
   disableFilter: PropTypes.bool,
+  noContent: PropTypes.bool,
   sortOptions: PropTypes.array,
   filterOptions: PropTypes.array,
 };

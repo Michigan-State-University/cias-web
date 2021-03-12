@@ -9,18 +9,23 @@ import ReportsList from 'containers/Reports/containers/ReportsList';
 
 import messages from './messages';
 
-const GeneratedReportsPage = ({ intl: { formatMessage }, disableFilter }) => (
+const GeneratedReportsPage = ({
+  intl: { formatMessage },
+  disableFilter,
+  match,
+}) => (
   <AppContainer>
     <Helmet>
       <title>{formatMessage(messages.pageTitle)}</title>
     </Helmet>
-    <ReportsList disableFilter={disableFilter} />
+    <ReportsList match={match} disableFilter={disableFilter} />
   </AppContainer>
 );
 
 GeneratedReportsPage.propTypes = {
   intl: intlShape,
   disableFilter: PropTypes.bool,
+  match: PropTypes.object,
 };
 
 export default compose(injectIntl)(GeneratedReportsPage);

@@ -13,10 +13,21 @@ import {
   TOGGLE_NOTIFICATIONS_REQUEST,
   TOGGLE_NOTIFICATIONS_SUCCESS,
   TOGGLE_NOTIFICATIONS_ERROR,
+  RESET_STATE,
 } from './constants';
 
-export const fetchReportsRequest = (page, filterOption, sortOption) =>
-  actionBuilder(FETCH_REPORTS_REQUEST, { page, filterOption, sortOption });
+export const fetchReportsRequest = (
+  page,
+  filterOption,
+  sortOption,
+  sessionId,
+) =>
+  actionBuilder(FETCH_REPORTS_REQUEST, {
+    page,
+    filterOption,
+    sortOption,
+    sessionId,
+  });
 export const fetchReportsSuccess = (reports, reportsSize) =>
   actionBuilder(FETCH_REPORTS_SUCCESS, { reports, reportsSize });
 export const fetchReportsError = error =>
@@ -42,3 +53,5 @@ export const toggleNotificationsSuccess = () =>
   actionBuilder(TOGGLE_NOTIFICATIONS_SUCCESS, {});
 export const toggleNotificationsError = error =>
   actionBuilder(TOGGLE_NOTIFICATIONS_ERROR, { error });
+
+export const resetState = () => actionBuilder(RESET_STATE, {});

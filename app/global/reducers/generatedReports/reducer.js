@@ -16,6 +16,7 @@ import {
   SORT_BY_LATEST,
   PARTICIPANTS,
   THIRD_PARTY,
+  RESET_STATE,
 } from './constants';
 
 export const initialState = {
@@ -41,8 +42,10 @@ export const initialState = {
 /* eslint-disable default-case, no-param-reassign */
 
 const selectFilter = (currentState, filter) => {
-  if (currentState.includes(filter))
+  if (!filter) return currentState;
+  if (currentState.includes(filter)) {
     return currentState.filter(value => value !== filter);
+  }
   return [...currentState, filter];
 };
 
@@ -113,6 +116,10 @@ export const generatedReportsReducer = (state = initialState, action) =>
         break;
       case TOGGLE_NOTIFICATIONS_ERROR:
         draft.errors.fetchInterventionsError = action.payload.error;
+        break;
+      case RESET_STATE:
+        draft.reports = null;
+        draft.reportsSize = 0;
         break;
     }
   });
