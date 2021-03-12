@@ -52,14 +52,9 @@ const ChooserComponent = ({
     <Column data-testid={`${elementId}-select-target-session`} height={280}>
       <Column mx={25} mb={15}>
         {backText && (
-          <Row align="center" clickable>
+          <Row align="center" clickable onClick={() => backAction()}>
             <Icon src={arrowBack} />
-            <Text
-              ml={5}
-              onClick={() => backAction()}
-              mt={2}
-              color={themeColors.secondary}
-            >
+            <Text ml={5} mt={2} color={themeColors.secondary}>
               {backText}
             </Text>
           </Row>
@@ -100,7 +95,7 @@ const ChooserComponent = ({
                   hoverColor={`rgba(${hexToRgb(themeColors.secondary)}, 0.1)`}
                   onClick={() =>
                     disableCopy
-                      ? changeViewAction()
+                      ? changeViewAction({ id })
                       : selectAction({ id, name })
                   }
                   px={25}

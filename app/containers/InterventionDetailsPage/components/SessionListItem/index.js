@@ -18,6 +18,11 @@ import StyledLink from 'components/StyledLink';
 import Text from 'components/Text';
 import Tooltip from 'components/Tooltip';
 import H2 from 'components/H2';
+import Img from 'components/Img';
+import Box from 'components/Box';
+import { VIEWS } from 'components/CopyModal/Components';
+import CopyModal from 'components/CopyModal';
+import Badge from 'components/Badge';
 
 import copy from 'assets/svg/copy.svg';
 import bin from 'assets/svg/bin-no-bg.svg';
@@ -25,11 +30,7 @@ import mail from 'assets/svg/pink-mail.svg';
 import mailDisabled from 'assets/svg/pink-mail-disabled.svg';
 import { colors, themeColors } from 'theme';
 
-import Img from 'components/Img';
-import Box from 'components/Box';
-import { VIEWS } from 'components/CopyModal/Components';
-import CopyModal from 'components/CopyModal';
-import Badge from 'components/Badge';
+import { SHARE_IDS } from 'containers/SettingsPanel/utils';
 import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
 import { ToggleableBox, StyledRow, SessionIndex } from './styled';
@@ -49,6 +50,7 @@ function SessionListItem({
   deletionPossible,
   handleDeleteSession,
   handleExternalCopySession,
+  sharedTo,
 }) {
   const history = useHistory();
 
@@ -106,6 +108,8 @@ function SessionListItem({
     history.push(url);
   };
 
+  const isSchedulingPossible = sharedTo !== SHARE_IDS.anyoneWithTheLink;
+
   return (
     <Draggable
       isDragDisabled={disabled}
@@ -144,6 +148,7 @@ function SessionListItem({
                   <Column>
                     <H2 ml={15}>{name}</H2>
                     <Badge
+                      mt={5}
                       ml={15}
                       bg={themeColors.secondary}
                       onClick={goToReportTemplates}
@@ -192,7 +197,7 @@ function SessionListItem({
             <Row px={62} mb={20}>
               <Divider />
             </Row>
-            {index !== 0 && (
+            {index !== 0 && isSchedulingPossible && (
               <Row px={62}>
                 <SessionSchedule
                   disabled={disabled}
@@ -231,6 +236,7 @@ SessionListItem.propTypes = {
   handleDeleteSession: PropTypes.func,
   handleExternalCopySession: PropTypes.func,
   status: PropTypes.string,
+  sharedTo: PropTypes.string,
 };
 
 export default injectIntl(SessionListItem);

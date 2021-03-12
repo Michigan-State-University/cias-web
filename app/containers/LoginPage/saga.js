@@ -1,4 +1,4 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, takeLatest, call, select } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axios from 'axios';
 
@@ -7,7 +7,8 @@ import { mapCurrentUser } from 'utils/mapResponseObjects';
 import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
 import { logIn } from 'global/reducers/auth/actions';
 
-import { LOGIN_REQUEST } from './constants';
+import { makeSelectLocation } from 'containers/App/selectors';
+import { LOGIN_REQUEST, REDIRECT_QUERY_KEY } from './constants';
 import { loginError, loginSuccess } from './actions';
 
 function* login({ payload: { email, password } }) {
@@ -24,7 +25,13 @@ function* login({ payload: { email, password } }) {
     yield call(LocalStorageService.setState, mappedUser);
     yield put(logIn(mappedUser));
     yield put(loginSuccess());
-    yield put(push('/'));
+
+    const location = yield select(makeSelectLocation());
+    const queryParams = new URLSearchParams(location.search);
+
+    if (queryParams.has(REDIRECT_QUERY_KEY))
+      yield put(push(decodeURIComponent(queryParams.get(REDIRECT_QUERY_KEY))));
+    else yield put(push('/'));
   } catch (error) {
     yield put(loginError(requestErrorMessageHandler(error)));
   }

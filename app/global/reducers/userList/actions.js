@@ -20,6 +20,9 @@ import {
   DELETE_USER_FROM_TEAM_FAILURE,
   DELETE_USER_FROM_TEAM_REQUEST,
   DELETE_USER_FROM_TEAM_SUCCESS,
+  FETCH_RESEARCHERS_REQUEST,
+  FETCH_RESEARCHERS_SUCCESS,
+  FETCH_RESEARCHERS_FAILURE,
 } from './constants';
 
 export const fetchUsers = (roles, name, page, includeInactive, teamId) =>
@@ -35,6 +38,13 @@ export const fetchUsersSuccess = (users, usersSize) =>
   actionBuilder(FETCH_USERS_SUCCESS, { users, usersSize });
 export const fetchUsersFailure = error =>
   actionBuilder(FETCH_USERS_FAILURE, error);
+
+export const fetchResearchersRequest = () =>
+  actionBuilder(FETCH_RESEARCHERS_REQUEST, {});
+export const fetchResearchersSuccess = (users, usersSize) =>
+  actionBuilder(FETCH_RESEARCHERS_SUCCESS, { users, usersSize });
+export const fetchResearchersError = error =>
+  actionBuilder(FETCH_RESEARCHERS_FAILURE, error);
 
 export const fetchUsersSelector = (
   roles,

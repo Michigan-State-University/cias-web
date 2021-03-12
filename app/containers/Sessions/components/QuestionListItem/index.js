@@ -25,6 +25,7 @@ import {
   deleteQuestionRequest,
   makeSelectQuestions,
   selectQuestion,
+  copyExternallyQuestionRequest,
 } from 'global/reducers/questions';
 import {
   changeCurrentNarratorBlock,
@@ -42,6 +43,8 @@ import {
 } from 'models/Session/QuestionTypes';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
+import ConfirmationBox from 'components/ConfirmationBox';
+import Text from 'components/Text';
 import VariableInput from '../QuestionDetails/VariableInput';
 import { ClampedTitle, ToggleableBox } from './styled';
 import messages from './messages';
@@ -57,6 +60,7 @@ const QuestionListItem = ({
   removeQuestion,
   intl: { formatMessage },
   copyQuestion,
+  copyExternallyQuestion,
   changeNarratorBlockIndex,
   setDraggable,
   setCharacterPosition,
@@ -71,6 +75,7 @@ const QuestionListItem = ({
   sessionId,
 }) => {
   const [copyOpen, setCopyOpen] = useState(false);
+  const [deleteOpen, setDeleteOpen] = useState(false);
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
   const isFinishScreen = type === finishQuestion.id;
@@ -107,12 +112,18 @@ const QuestionListItem = ({
     copyQuestion({ copied, questionId: question.id, target });
   };
 
+  const handleExternallyCopy = target => {
+    const copied = cloneDeep(question);
+    set(copied, 'id', uniqueId());
+    copyExternallyQuestion(target.sessionId, target.id, copied, [question.id]);
+  };
+
   const options = [
     {
-      id: 'delete',
-      label: <FormattedMessage {...messages.delete} />,
-      action: handleDelete,
-      color: colors.flamingo,
+      id: 'copy',
+      label: <FormattedMessage {...messages.copy} />,
+      action: handleCopyModal,
+      color: colors.black,
     },
     {
       id: 'duplicate',
@@ -121,10 +132,10 @@ const QuestionListItem = ({
       color: colors.black,
     },
     {
-      id: 'copy',
-      label: <FormattedMessage {...messages.copy} />,
-      action: handleCopyModal,
-      color: colors.black,
+      id: 'delete',
+      label: <FormattedMessage {...messages.delete} />,
+      action: () => setDeleteOpen(true),
+      color: colors.flamingo,
     },
   ];
 
@@ -139,10 +150,23 @@ const QuestionListItem = ({
       <CopyModal
         visible={copyOpen}
         onClose={closeCopyModal}
-        copyAction={handleCopy}
+        copyAction={handleExternallyCopy}
         disableInterventionCopy
         disableSessionCopy
         pasteText={formatMessage(messages.pasteQuestion)}
+      />
+      <ConfirmationBox
+        visible={deleteOpen}
+        onClose={() => setDeleteOpen(false)}
+        description={formatMessage(messages.deleteModalTitle)}
+        content={
+          <Column align="center">
+            <Text color={colors.flamingo}>
+              {formatMessage(messages.deleteModalContent)}
+            </Text>
+          </Column>
+        }
+        confirmAction={handleDelete}
       />
       <ToggleableBox
         padding={15}
@@ -240,6 +264,7 @@ QuestionListItem.propTypes = {
   settingsVisibility: PropTypes.bool,
   toggleSettings: PropTypes.func,
   copyQuestion: PropTypes.func,
+  copyExternallyQuestion: PropTypes.func,
   intl: PropTypes.object,
   removeQuestion: PropTypes.func,
   sessionId: PropTypes.string,
@@ -266,6 +291,7 @@ const mapDispatchToProps = {
   toggleSettings: setQuestionSettings,
   removeQuestion: deleteQuestionRequest,
   copyQuestion: copyQuestionRequest,
+  copyExternallyQuestion: copyExternallyQuestionRequest,
   changeNarratorBlockIndex: changeCurrentNarratorBlock,
   setDraggable: setCharacterDraggable,
   setCharacterPosition: setAnimationStopPosition,

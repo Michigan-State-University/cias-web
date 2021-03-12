@@ -51,7 +51,7 @@ const SessionSettings = ({
             animation: false,
           },
         },
-        ['settings.narrator'],
+        ['settings'],
       );
     } else {
       editSession(
@@ -59,7 +59,7 @@ const SessionSettings = ({
           path: `settings.narrator.${confirmationOption}`,
           value: false,
         },
-        ['settings.narrator'],
+        ['settings'],
       );
     }
     dismissConfirmation();
@@ -74,7 +74,7 @@ const SessionSettings = ({
   const onToggle = index => val => {
     if (val) {
       editSession({ path: `settings.narrator.${index}`, value: val }, [
-        'settings.narrator',
+        'settings',
       ]);
     } else {
       setConfirmationOption(index);
@@ -91,7 +91,7 @@ const SessionSettings = ({
             animation: val,
           },
         },
-        ['settings.narrator'],
+        ['settings'],
       );
     } else {
       setConfirmationOption('all');

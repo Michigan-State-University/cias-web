@@ -7,7 +7,11 @@ import { makeSelectQuestions } from 'global/reducers/questions/selectors';
 import { cleanGroups } from 'global/reducers/questionGroups';
 
 import messages from '../messages';
-import { DELETE_QUESTIONS_REQUEST, DELETE_QUESTIONS_ERROR } from '../constants';
+import {
+  DELETE_QUESTIONS_REQUEST,
+  DELETE_QUESTIONS_ERROR,
+  DELETE_QUESTIONS_SUCCESS,
+} from '../constants';
 import { deleteQuestionsSuccess, deleteQuestionsError } from '../actions';
 
 function* deleteQuestions({ payload: { questionIds, sessionId } }) {
@@ -18,10 +22,21 @@ function* deleteQuestions({ payload: { questionIds, sessionId } }) {
     yield call(axios.delete, requestURL, { data: { ids: questionIds } });
     yield put(deleteQuestionsSuccess());
     yield put(cleanGroups(questions));
+    yield call(
+      toast.success,
+      formatMessage(messages.deleteSuccess, { count: questionIds.length }),
+      {
+        id: DELETE_QUESTIONS_SUCCESS,
+      },
+    );
   } catch (error) {
-    yield call(toast.error, formatMessage(messages.deleteError), {
-      id: DELETE_QUESTIONS_ERROR,
-    });
+    yield call(
+      toast.error,
+      formatMessage(messages.deleteError, { count: questionIds.length }),
+      {
+        id: DELETE_QUESTIONS_ERROR,
+      },
+    );
 
     yield put(deleteQuestionsError(error));
   }

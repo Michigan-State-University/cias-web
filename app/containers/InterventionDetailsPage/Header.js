@@ -9,6 +9,7 @@ import messages from 'containers/InterventionDetailsPage/messages';
 import Box from 'components/Box';
 import Dropdown from 'components/Dropdown';
 import { StyledInput } from 'components/Input/StyledInput';
+import { selectInputText } from 'components/Input/utils';
 
 import globalMessages from 'global/i18n/globalMessages';
 
@@ -58,7 +59,9 @@ const Header = ({
               fontSize={23}
               placeholder={formatMessage(messages.placeholder)}
               onBlur={editName}
+              onFocus={selectInputText}
               maxWidth="none"
+              autoComplete="off"
             />
           </Row>
         </GCol>

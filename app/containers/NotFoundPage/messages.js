@@ -18,10 +18,18 @@ export default defineMessages({
   },
   defaultErrorCode: {
     id: `${scope}.defaultErrorCode`,
-    defaultMessage: '404',
+    defaultMessage: 'Not Found',
   },
   back: {
     id: `${scope}.back`,
     defaultMessage: 'Go Back',
+  },
+  toMainPage: {
+    id: `${scope}.toMainPage`,
+    defaultMessage: 'Go to Main Page',
+  },
+  toLogin: {
+    id: `${scope}.toLogin`,
+    defaultMessage: 'Log in',
   },
 });

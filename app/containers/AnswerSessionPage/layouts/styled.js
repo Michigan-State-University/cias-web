@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ReactPlayer from 'react-player/lazy';
+import { Link } from 'react-router-dom';
 
 import { themeColors } from 'theme';
 
@@ -61,10 +62,29 @@ export const CustomSlider = styled(AppSlider)`
       '.rc-slider-handle': { visibility: 'hidden' },
       '.rc-slider-track': { visibility: 'hidden' },
     }}
+
+  &.wrap-text {
+    .rc-slider-mark-text {
+      max-width: 70px;
+    }
+  }
+`;
+
+export const VisualAnalogueSlider = styled(AppSlider)`
+  &.wrap-text {
+    .rc-slider-mark-text {
+      max-width: 70px;
+    }
+  }
 `;
 
 export const FirstTH = styled(TH)`
   position: sticky;
   left: 0;
   background-color: inherit;
+`;
+
+export const StyledLink = styled(Link)`
+  font-weight: bold;
+  width: auto;
 `;

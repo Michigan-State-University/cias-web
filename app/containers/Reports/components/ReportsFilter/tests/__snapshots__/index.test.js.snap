@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ReportsFilter /> Should render and match the snapshot 1`] = `
+<div
+  class="Row-y1cs0u-0 jxfUsX"
+>
+  <div
+    class="Row-y1cs0u-0 ecllgQ"
+  >
+    <p
+      class="Text-e4p0w3-0 hVpaKH"
+      font-weight="bold"
+    >
+      Show reports generated for:
+    </p>
+    <div
+      class="Row-y1cs0u-0 ecllgQ"
+    >
+      <img
+        class="Img-sc-55j3su-0 gRYaRk"
+        src="IMAGE_MOCK"
+        width="20"
+      />
+      <p
+        class="Text-e4p0w3-0 cDWMBt"
+        font-size="15"
+      >
+        Participants
+      </p>
+    </div>
+    <div
+      class="Row-y1cs0u-0 ecllgQ"
+    >
+      <img
+        class="Img-sc-55j3su-0 gRYaRk"
+        src="IMAGE_MOCK"
+        width="20"
+      />
+      <p
+        class="Text-e4p0w3-0 cDWMBt"
+        font-size="15"
+      >
+        3rd Party Users
+      </p>
+    </div>
+  </div>
+  <div
+    class="Row-y1cs0u-0 kyttPD"
+  >
+    <div
+      class="Box-sc-1vhutan-0 kjemns"
+    >
+      <div
+        class="Row-y1cs0u-0 ecllgQ"
+      >
+        <p
+          class="Text-e4p0w3-0 fCqZhU"
+          color="#C866EA"
+          font-weight="bold"
+        >
+          Sort by Oldest
+        </p>
+        <img
+          alt="arrow"
+          class="Img-sc-55j3su-0 fbIndp"
+          src="IMAGE_MOCK"
+          transform=""
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

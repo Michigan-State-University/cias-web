@@ -13,6 +13,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { DEFAULT_LOCALE } from 'i18n';
+import { Roles } from 'models/User/UserRoles';
 import InterventionPage from '../index';
 
 describe('<InterventionPage />', () => {
@@ -20,6 +21,11 @@ describe('<InterventionPage />', () => {
   let modalContainer;
   let mainAppContainer;
   const initialState = {
+    auth: {
+      user: {
+        roles: [Roles.admin],
+      },
+    },
     interventions: {
       interventions: [],
       fetchInterventionLoading: true,
@@ -68,6 +74,7 @@ describe('<InterventionPage />', () => {
 
   it('Should render and match the snapshot without interventions', () => {
     store = createTestStore({
+      ...initialState,
       interventions: {
         interventions: [],
         fetchInterventionLoading: false,
@@ -88,6 +95,7 @@ describe('<InterventionPage />', () => {
 
   it('Should render and match the snapshot with interventions', () => {
     store = createTestStore({
+      ...initialState,
       interventions: {
         interventions: [{ name: 'Name', status: 'draft', sessions_size: 2 }],
         fetchInterventionLoading: false,

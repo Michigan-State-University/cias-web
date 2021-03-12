@@ -1,29 +1,39 @@
-import { takeLatest } from 'redux-saga/effects';
-// import axios from 'axios';
-// import { error as showError } from 'react-toastify-redux';
+import { takeLatest, call, put } from 'redux-saga/effects';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
-// import { formatMessage } from 'utils/intlOutsideReact';
+import { formatMessage } from 'utils/intlOutsideReact';
 
-// import messages from '../messages';
-import { SHARE_QUESTIONS_TO_RESEARCHERS_REQUEST } from '../constants';
-// import { shareQuestionsToResearchersSuccess, shareQuestionsToResearchersError } from '../actions';
+import messages from '../messages';
+import {
+  SHARE_QUESTIONS_TO_RESEARCHERS_REQUEST,
+  SHARE_QUESTIONS_TO_RESEARCHERS_ERROR,
+  SHARE_QUESTIONS_TO_RESEARCHERS_SUCCESS,
+} from '../constants';
+import {
+  shareQuestionsToResearchersSuccess,
+  shareQuestionsToResearchersError,
+} from '../actions';
 
 function* shareQuestionsToResearchers({
-  // eslint-disable-next-line no-unused-vars
   payload: { questionIds, researcherIds },
 }) {
-  // const requestURL = `v1/sessions/${sessionId}/questions/${questionId}`;
+  const requestURL = `/v1/questions/share`;
 
   try {
-    // yield axios.delete(requestURL);
-    // yield put(shareQuestionsToResearchersSuccess());
+    yield call(axios.post, requestURL, {
+      ids: questionIds,
+      researcher_ids: researcherIds,
+    });
+    yield put(shareQuestionsToResearchersSuccess());
+    yield call(toast.info, formatMessage(messages.shareSuccess), {
+      id: SHARE_QUESTIONS_TO_RESEARCHERS_SUCCESS,
+    });
   } catch (error) {
-    // yield put(
-    //   showError(formatMessage(messages.deleteError), {
-    //     id: SHARE_QUESTIONS_TO_RESEARCHERS_ERROR,
-    //   }),
-    // );
-    // yield put(shareQuestionsToResearchersError(error));
+    yield call(toast.error, formatMessage(messages.shareError), {
+      id: SHARE_QUESTIONS_TO_RESEARCHERS_ERROR,
+    });
+    yield put(shareQuestionsToResearchersError(error));
   }
 }
 

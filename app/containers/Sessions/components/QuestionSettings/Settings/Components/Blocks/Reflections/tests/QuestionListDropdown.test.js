@@ -7,6 +7,9 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { DEFAULT_LOCALE } from 'i18n';
+import { IntlProvider } from 'react-intl';
+import { formatMessage } from 'utils/intlOutsideReact';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { createQuestion } from 'utils/reducerCreators';
@@ -16,7 +19,9 @@ import QuestionListDropdown from '../QuestionListDropdown';
 
 describe('<QuestionListDropdown />', () => {
   const defaultProps = {
+    formatMessage,
     onClick: jest.fn(),
+    isVisible: true,
   };
 
   const singleQuestion = createQuestion();
@@ -44,7 +49,9 @@ describe('<QuestionListDropdown />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <QuestionListDropdown {...defaultProps} />
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <QuestionListDropdown {...defaultProps} />
+        </IntlProvider>
       </Provider>,
     );
     expect(spy).not.toHaveBeenCalled();
@@ -53,7 +60,9 @@ describe('<QuestionListDropdown />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
-        <QuestionListDropdown {...defaultProps} />
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <QuestionListDropdown {...defaultProps} />
+        </IntlProvider>
       </Provider>,
     );
     expect(container).toMatchSnapshot();

@@ -65,7 +65,7 @@ const TargetQuestionChooser = props => {
     return (
       position ===
       maxBy(filteredQuestions, ({ position: questionPos }) => questionPos)
-        .position
+        ?.position
     );
   }, [position, questionGroupId, questions, questionGroups]);
 

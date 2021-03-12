@@ -1,4 +1,4 @@
-import { ids } from 'containers/SettingsPanel/utils';
+import { SHARE_IDS } from 'containers/SettingsPanel/utils';
 import { singleQuestion } from 'models/Session/QuestionTypes';
 
 export const createQuestion = (id = 0, type = singleQuestion.id) => ({
@@ -24,7 +24,7 @@ export const createIntervention = (index = 0) => ({
       email: `user-test-${index}@user.com`,
     },
   ],
-  shared_to: ids.anyoneWithTheLink,
+  shared_to: SHARE_IDS.anyoneWithTheLink,
   sessions: [createSession(`${index}`)],
 });
 
@@ -48,6 +48,8 @@ export const createUser = (index = 0) => ({
 export const createReport = (index = 0) => ({
   id: `report-test-${index}`,
   title: `Report: ${index}. part - Results`,
+  date: new Date().toDateString(),
+  session: `Session ${index}`,
 });
 
 export const createParticipantSession = (index = 0, available = false) => ({
@@ -66,4 +68,9 @@ export const createParticipantIntervention = (
   title: `Intervention: ${index}`,
   sessions,
   emailNotifications: true,
+});
+
+export const createTextMessage = (index = 0) => ({
+  id: `Text-Message-test-${index}`,
+  title: `Text Message: ${index}`,
 });

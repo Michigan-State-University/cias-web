@@ -20,7 +20,10 @@ import {
 
 import { colors, boxShadows } from 'theme';
 import Question from 'models/Session/Question';
-import { getAllVariables, getPreviousQuestions } from 'models/Session/utils';
+import {
+  getBranchingVariables,
+  getPreviousQuestions,
+} from 'models/Session/utils';
 import NoContent from 'components/NoContent';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import useOutsideClick from 'utils/useOutsideClick';
@@ -41,6 +44,7 @@ const VariableChooser = ({
   setOpen,
   loading,
   includeAllVariables,
+  topPosition,
 }) => {
   const { id } = selectedQuestion;
   const previousQuestions = useMemo(
@@ -51,7 +55,7 @@ const VariableChooser = ({
     [selectedQuestion, questions, groups],
   );
 
-  const variables = getAllVariables(previousQuestions, {
+  const variables = getBranchingVariables(previousQuestions, {
     structure: 'flat',
     include: ['id', 'subtitle'],
   });
@@ -115,6 +119,7 @@ const VariableChooser = ({
       position="absolute"
       width="auto"
       right="0px"
+      top={topPosition}
       {...(visible ? { zIndex: 1 } : { display: 'none' })}
     >
       <Row>
@@ -139,6 +144,7 @@ VariableChooser.propTypes = {
   loading: PropTypes.bool,
   includeAllVariables: PropTypes.bool,
   setOpen: PropTypes.func,
+  topPosition: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

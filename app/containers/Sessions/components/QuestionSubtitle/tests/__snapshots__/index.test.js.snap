@@ -121,7 +121,7 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
                 class="ql-editor"
                 contenteditable="true"
                 data-gramm="false"
-                data-placeholder="Type subtitle here..."
+                data-placeholder="Type main text here..."
               >
                 <p>
                   Example subtitle

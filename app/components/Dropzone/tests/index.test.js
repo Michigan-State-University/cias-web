@@ -4,7 +4,7 @@ import 'jest-styled-components';
 
 import Dropzone from '../index';
 
-describe('<QuestionDetails />', () => {
+describe('<Dropzone />', () => {
   it('should match the snapshot', () => {
     const { container } = render(<Dropzone />);
     expect(container).toMatchSnapshot();

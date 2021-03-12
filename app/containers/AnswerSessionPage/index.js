@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useRef, Fragment, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { toast } from 'react-toastify';
 import get from 'lodash/get';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useLocation } from 'react-router-dom';
 
 import AudioWrapper from 'utils/audioWrapper';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
@@ -37,9 +37,12 @@ import {
   makeSelectInterventionStatus,
   interventionReducer,
 } from 'global/reducers/intervention';
+import { editPhoneNumberQuestionSaga } from 'global/reducers/auth';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
+import H2 from 'components/H2';
+import { REDIRECT_QUERY_KEY } from 'containers/LoginPage/constants';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,
@@ -56,13 +59,14 @@ import saga from './saga';
 import messages from './messages';
 
 import {
-  fetchQuestions,
   submitAnswer,
   selectAnswer,
-  setQuestionIndex,
   startSession,
   changeIsAnimating,
   setFeedbackScreenSettings,
+  createUserSessionRequest,
+  nextQuestionRequest,
+  clearError,
 } from './actions';
 
 const AnimationRefHelper = ({
@@ -82,6 +86,11 @@ const AnimationRefHelper = ({
     setRefState(animationParentRef.current);
   }, [animationParentRef]);
 
+  const settings = {
+    ...currentQuestion.narrator.settings,
+    ...currentQuestion.settings,
+  };
+
   return (
     <AnswerInterventionContent ref={animationParentRef}>
       {children}
@@ -90,7 +99,7 @@ const AnimationRefHelper = ({
           animationContainer={animationParentRef.current}
           blocks={currentQuestion.narrator.blocks}
           questionId={currentQuestionId}
-          settings={currentQuestion.narrator.settings}
+          settings={settings}
           previewMode={previewMode}
           answers={answers}
           changeIsAnimationOngoing={changeIsAnimationOngoing}
@@ -117,18 +126,14 @@ AnimationRefHelper.propTypes = {
 export function AnswerSessionPage({
   match: { params },
   intl: { formatMessage },
-  fetchQuestionsAction,
   saveSelectedAnswer,
   submitAnswerRequest,
-  setQuestionIndexAction,
   onStartSession,
   changeIsAnimationOngoing,
   setFeedbackSettings,
   audioInstance,
   AnswerSessionPage: {
-    sessionQuestions,
     questionError,
-    questionLoading,
     answersError,
     answers,
     questionIndex,
@@ -136,17 +141,29 @@ export function AnswerSessionPage({
     previewMode,
     isAnimationOngoing,
     feedbackScreenSettings,
+    userSession,
+    userSessionLoading,
+    nextQuestionLoading,
+    nextQuestionError,
+    currentQuestion,
   },
   isPreview,
   interventionStatus,
   fetchIntervention,
+  createUserSession,
+  nextQuestion,
+  clearErrors,
 }) {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
   useInjectSaga({ key: 'logInGuest', saga: logInGuestSaga });
   useInjectReducer({ key: 'AnswerSessionPage', reducer });
   useInjectSaga({ key: 'AnswerSessionPage', saga });
-  const { sessionId, index, interventionId } = params;
+  useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
+
+  const location = useLocation();
+
+  const { sessionId, interventionId, index } = params;
 
   useEffect(() => {
     if (isPreview) fetchIntervention(interventionId);
@@ -155,50 +172,35 @@ export function AnswerSessionPage({
   const previewPossible = !(isPreview && !canPreview(interventionStatus));
 
   useEffect(() => {
-    fetchQuestionsAction(sessionId);
+    createUserSession(sessionId);
+
+    return clearErrors;
   }, []);
 
   useEffect(() => {
-    if (sessionQuestions.length !== 0) {
-      const startQuestionIndex = !index
-        ? 0
-        : sessionQuestions.findIndex(({ id }) => id === index);
-      setQuestionIndexAction(startQuestionIndex);
-    }
-  }, [sessionQuestions.length]);
+    if (userSession) nextQuestion(userSession.id, index);
+  }, [userSession]);
 
-  if (questionError)
-    return (
-      <Redirect
-        to={{
-          pathname: '/not-found-page',
-          state: {
-            header: formatMessage(messages.noEntranceHeader),
-            text: formatMessage(messages.noEntranceText),
-          },
-        }}
-      />
+  if (questionError) {
+    const queryParams = new URLSearchParams(location.search);
+
+    queryParams.append(
+      REDIRECT_QUERY_KEY,
+      encodeURIComponent(location.pathname),
     );
 
-  const assignCurrentQuestion = () => {
-    const question = sessionQuestions[questionIndex];
-
-    if (!question) return null;
-
-    return question;
-  };
-
-  const currentQuestion = sessionQuestions ? assignCurrentQuestion() : null;
+    return <Redirect to={`/no-access?${queryParams.toString()}`} />;
+  }
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
 
-  const saveAnswer = nextQuestionIndex =>
+  const saveAnswer = () =>
     submitAnswerRequest(
       currentQuestionId,
-      nextQuestionIndex,
       get(currentQuestion, 'settings.required', false),
       get(currentQuestion, 'type', ''),
       sessionId,
+      userSession.id,
     );
 
   const renderQuestion = () => {
@@ -250,10 +252,8 @@ export function AnswerSessionPage({
                   disabled={isButtonDisabled()}
                   margin={20}
                   width="180px"
-                  loading={currentQuestion.loading}
-                  onClick={() => {
-                    saveAnswer(questionIndex + 1);
-                  }}
+                  loading={currentQuestion.loading || nextQuestionLoading}
+                  onClick={saveAnswer}
                   title={formatMessage(messages.nextQuestion)}
                 />
               </Row>
@@ -279,16 +279,11 @@ export function AnswerSessionPage({
 
   const renderPage = () => <>{renderQuestion()}</>;
 
-  if (questionLoading) return <Loader />;
+  if (nextQuestionLoading && interventionStarted) return <Loader />;
 
   const isDesktop = previewMode === DESKTOP_MODE;
   return (
     <Column height="100%">
-      {interventionStarted && (
-        <Row justify="end" padding={30}>
-          <MSULogo />
-        </Row>
-      )}
       <Box
         display="flex"
         align="center"
@@ -304,31 +299,54 @@ export function AnswerSessionPage({
           previewMode={previewMode}
           interventionStarted={interventionStarted}
         >
-          {!interventionStarted && (
+          {interventionStarted && nextQuestionError && (
+            <Column align="center" mt={30}>
+              <H2 textAlign="center" mb={30}>
+                {formatMessage(messages.nextQuestionError)}
+              </H2>
+              <StyledButton
+                loading={nextQuestionLoading}
+                onClick={() => nextQuestion(userSession.id)}
+                title={formatMessage(messages.refetchQuestion)}
+                isDesktop={isDesktop}
+              />
+            </Column>
+          )}
+          {!interventionStarted && !nextQuestionError && (
             <StyledButton
+              loading={userSessionLoading || nextQuestionLoading}
               disabled={!previewPossible}
               onClick={startInterventionAsync}
               title={startButtonText()}
               isDesktop={isDesktop}
             />
           )}
-          {interventionStarted && (
+          {interventionStarted && !nextQuestionError && (
             <>
               <Box width="100%">
-                {!questionLoading && currentQuestion && interventionStarted && (
-                  <AnimationRefHelper
-                    currentQuestion={currentQuestion}
-                    currentQuestionId={currentQuestionId}
-                    previewMode={previewMode}
-                    answers={answers}
-                    changeIsAnimationOngoing={changeIsAnimationOngoing}
-                    setFeedbackSettings={setFeedbackSettings}
-                    feedbackScreenSettings={feedbackScreenSettings}
-                    audioInstance={audioInstance}
-                  >
-                    {renderPage()}
-                  </AnimationRefHelper>
-                )}
+                <Row justify="end" padding={30}>
+                  <MSULogo
+                    {...(isDesktop
+                      ? { position: 'absolute', right: '30px' }
+                      : {})}
+                  />
+                </Row>
+                {!nextQuestionLoading &&
+                  currentQuestion &&
+                  interventionStarted && (
+                    <AnimationRefHelper
+                      currentQuestion={currentQuestion}
+                      currentQuestionId={currentQuestionId}
+                      previewMode={previewMode}
+                      answers={answers}
+                      changeIsAnimationOngoing={changeIsAnimationOngoing}
+                      setFeedbackSettings={setFeedbackSettings}
+                      feedbackScreenSettings={feedbackScreenSettings}
+                      audioInstance={audioInstance}
+                    >
+                      {renderPage()}
+                    </AnimationRefHelper>
+                  )}
               </Box>
               {answersError && <ErrorAlert errorText={answersError} />}
             </>
@@ -344,16 +362,17 @@ AnswerSessionPage.propTypes = {
   intl: PropTypes.object,
   AnswerSessionPage: PropTypes.object,
   saveSelectedAnswer: PropTypes.func,
-  fetchQuestionsAction: PropTypes.func,
   submitAnswerRequest: PropTypes.func,
   onStartSession: PropTypes.func,
-  setQuestionIndexAction: PropTypes.func,
   changeIsAnimationOngoing: PropTypes.func,
   setFeedbackSettings: PropTypes.func,
   audioInstance: PropTypes.shape(AudioWrapper),
   isPreview: PropTypes.bool,
   interventionStatus: PropTypes.string,
   fetchIntervention: PropTypes.func,
+  createUserSession: PropTypes.func,
+  nextQuestion: PropTypes.func,
+  clearErrors: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -363,14 +382,15 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  fetchQuestionsAction: fetchQuestions,
   submitAnswerRequest: submitAnswer,
   saveSelectedAnswer: selectAnswer,
-  setQuestionIndexAction: index => setQuestionIndex({ index }),
   onStartSession: startSession,
   changeIsAnimationOngoing: changeIsAnimating,
   setFeedbackSettings: setFeedbackScreenSettings,
   fetchIntervention: fetchInterventionRequest,
+  createUserSession: createUserSessionRequest,
+  nextQuestion: nextQuestionRequest,
+  clearErrors: clearError,
 };
 
 const withConnect = connect(

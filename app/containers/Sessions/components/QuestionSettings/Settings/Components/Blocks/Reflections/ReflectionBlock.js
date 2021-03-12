@@ -211,6 +211,7 @@ const ReflectionBlock = ({
         }
       >
         <QuestionListDropdown
+          formatMessage={formatMessage}
           isVisible={targetChooserOpen}
           chosenQuestionId={block.question_id}
           onClick={question => {

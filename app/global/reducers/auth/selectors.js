@@ -14,6 +14,12 @@ export const makeSelectUser = () =>
     authState => authState.user,
   );
 
+export const makeSelectPhoneNumberPreview = () =>
+  createSelector(
+    selectAuth,
+    authState => authState.phoneNumberPreview,
+  );
+
 export const makeSelectUserRoles = () =>
   createSelector(
     selectAuth,

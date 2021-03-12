@@ -381,7 +381,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 }
 
 .c16 .ql-container {
-  font-size: 18px;
+  font-size: 16px;
   font-family: DM Sans;
 }
 
@@ -2078,7 +2078,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                               class="ql-editor"
                               contenteditable="true"
                               data-gramm="false"
-                              data-placeholder="Type subtitle here..."
+                              data-placeholder="Type main text here..."
                             >
                               <p>
                                 Subtitle
@@ -3468,8 +3468,10 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   display="flex"
                 >
                   <input
+                    autocomplete="off"
                     class="c22 c23"
                     color="#107969"
+                    name="notASearchField-Variable name..."
                     placeholder="Variable name..."
                     type="tel"
                     value=""
@@ -3521,7 +3523,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   width="180px"
                 >
                   <span>
-                    Next screen
+                    Continue
                   </span>
                 </button>
               </div>

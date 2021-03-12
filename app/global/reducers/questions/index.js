@@ -12,6 +12,7 @@ export {
   updateQuestionData,
   updateQuestionSettings,
   deleteQuestionsRequest,
+  copyExternallyQuestionRequest,
 } from './actions';
 export { questionsReducer } from './reducer';
 export {
@@ -27,6 +28,7 @@ export {
   makeSelectVisibleGroupsSize,
   makeSelectNameQuestionExists,
   makeSelectFilteredQuestions,
+  makeSelectPreviousQuestions,
 } from './selectors';
 export {
   addQuestionImageSaga,
@@ -41,4 +43,5 @@ export {
   updateQuestionSettingsSaga,
   changeQuestionTypeSaga,
   deleteQuestionsSaga,
+  copyExternallyQuestionSaga,
 } from './sagas';

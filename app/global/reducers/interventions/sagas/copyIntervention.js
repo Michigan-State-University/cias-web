@@ -21,16 +21,23 @@ export function* copyIntervention({
   if (users) params = { intervention: { user_ids: users } };
   try {
     const response = yield call(axios.post, requestURL, params);
+
+    const copiedIntervention = defaultMapper(response.data.data);
+
     if (!params) {
-      const copiedIntervention = defaultMapper(response.data.data);
       yield put(copyInterventionSuccess(copiedIntervention));
       if (!withoutRedirect) {
         yield put(push('/'));
       }
-    } else
-      yield call(toast.success, formatMessage(messages.sendSuccess), {
+    }
+
+    yield call(
+      toast.success,
+      formatMessage(messages.sendSuccess, { name: copiedIntervention.name }),
+      {
         toastId: COPY_INTERVENTION_SUCCESS,
-      });
+      },
+    );
   } catch (error) {
     yield call(toast.error, formatMessage(messages.copyError), {
       toastId: COPY_INTERVENTION_ERROR,

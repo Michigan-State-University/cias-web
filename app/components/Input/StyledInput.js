@@ -20,8 +20,8 @@ const StyledInput = props => {
     } else if (!props.validator) setValue(targetValue);
   };
 
-  const handleFocus = () => {
-    if (props.onFocus) props.onFocus();
+  const handleFocus = event => {
+    if (props.onFocus) props.onFocus(event);
 
     setHasFocus(true);
   };

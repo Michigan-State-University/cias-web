@@ -10,6 +10,7 @@ import Column from 'components/Column';
 import AppContainer from 'components/Container';
 import Row from 'components/Row';
 import StyledInput from 'components/Input/StyledInput';
+import { selectInputText } from 'components/Input/utils';
 import { MSULogo } from 'components/Logo';
 
 import Question from 'models/Session/Question';
@@ -26,7 +27,7 @@ import {
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 
 import { canEdit } from 'models/Status/statusPermissions';
-import { nameQuestion } from 'models/Session/QuestionTypes';
+import { nameQuestion, finishQuestion } from 'models/Session/QuestionTypes';
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
 import QuestionNarrator from '../QuestionNarrator';
@@ -85,6 +86,7 @@ const RenderQuestionDetails = ({
     } = selectedQuestion || {};
 
     const isNameScreen = type === nameQuestion.id;
+    const isFinishScreen = type === finishQuestion.id;
 
     return (
       <AnswerOuterContainer>
@@ -104,6 +106,7 @@ const RenderQuestionDetails = ({
                 fontWeight="bold"
                 placeholder={formatMessage(messages.groupPlaceholder)}
                 maxWidth="initial"
+                onFocus={selectInputText}
                 onBlur={val =>
                   changeGroupName(val, sessionId, currentGroupScope.id)
                 }
@@ -118,7 +121,7 @@ const RenderQuestionDetails = ({
             <QuestionNarrator
               questionId={id}
               animationBoundaries={animationBoundaries}
-              settings={settings}
+              settings={{ ...settings, title, subtitle }}
             />
             <Row justify="center" width="100%">
               <AppContainer disablePageTitle $width="100%">
@@ -170,7 +173,9 @@ const RenderQuestionDetails = ({
                       <QuestionPreview
                         mt={10}
                         padding={26}
-                        dangerouslySetInnerHTML={{ __html: questionSubtitle }}
+                        dangerouslySetInnerHTML={{
+                          __html: questionSubtitle,
+                        }}
                       />
                     )}
                     {video && !isNullOrUndefined(videoUrl) && (
@@ -189,13 +194,14 @@ const RenderQuestionDetails = ({
                 <Row>
                   <QuestionData />
                 </Row>
-                {(isNullOrUndefined(proceedButton) || proceedButton) && (
-                  <Box my={20}>
-                    <Button my={20} width="180px" disabled>
-                      <FormattedMessage {...messages.nextQuestion} />
-                    </Button>
-                  </Box>
-                )}
+                {(isNullOrUndefined(proceedButton) || proceedButton) &&
+                  !isFinishScreen && (
+                    <Box my={20}>
+                      <Button my={20} width="180px" disabled>
+                        <FormattedMessage {...messages.nextQuestion} />
+                      </Button>
+                    </Box>
+                  )}
               </AppContainer>
             </Row>
           </AnswerInterventionContent>

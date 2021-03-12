@@ -9,6 +9,7 @@ import { IntlProvider } from 'react-intl';
 import { Roles } from 'models/User/UserRoles';
 import { DEFAULT_LOCALE } from 'i18n';
 
+import history from 'utils/history';
 import AppRoute from '../index';
 
 const Component = () => <div>Component</div>;
@@ -46,6 +47,7 @@ describe('<AppRoute />', () => {
     navbarProps: {
       navbarId: 'default',
     },
+    location: {},
   };
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
@@ -95,7 +97,7 @@ describe('<AppRoute />', () => {
     const { container } = render(
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
-          <MemoryRouter>
+          <MemoryRouter history={history} initialEntries={['/']}>
             <AppRoute {...defaultProps} />
           </MemoryRouter>
         </IntlProvider>

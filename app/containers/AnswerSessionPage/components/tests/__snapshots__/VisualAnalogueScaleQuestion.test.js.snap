@@ -17,7 +17,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
           width="100%"
         >
           <div
-            class="rc-slider rc-slider-with-marks"
+            class="rc-slider rc-slider-with-marks styled__VisualAnalogueSlider-bqo6sz-6 jrCIEu"
           >
             <div
               class="rc-slider-rail"

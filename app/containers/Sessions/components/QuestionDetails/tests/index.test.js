@@ -88,7 +88,7 @@ describe('<QuestionDetails />', () => {
         </IntlProvider>
       </Provider>,
     );
-    await waitFor(() => getByText('Next screen'));
+    await waitFor(() => getByText('Continue'));
     expect(container).toMatchSnapshot();
   });
 });

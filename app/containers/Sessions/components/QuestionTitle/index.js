@@ -9,6 +9,8 @@ import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Question from 'models/Session/Question';
 import Row from 'components/Row';
+import { selectQuillText } from 'components/Input/utils';
+
 import { colors, elements } from 'theme';
 import {
   makeSelectSelectedQuestion,
@@ -23,6 +25,11 @@ const QuestionTitle = ({
   updateTitle,
 }) => {
   const handleUpdate = val => updateTitle({ path: 'title', value: val });
+
+  const onFocus = quill => {
+    selectQuillText(quill);
+  };
+
   return (
     <Box
       width="100%"
@@ -34,10 +41,11 @@ const QuestionTitle = ({
     >
       <Row>
         <ApprovableInput
-          defaultFontSize={18}
+          defaultFontSize={16}
           placeholder={formatMessage(messages.placeholder)}
           value={title}
           onCheck={handleUpdate}
+          onFocus={onFocus}
           autoSize
           richText
         />

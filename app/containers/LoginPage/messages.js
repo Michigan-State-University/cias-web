@@ -15,7 +15,7 @@ export default defineMessages({
   },
   header: {
     id: `${scope}.header`,
-    defaultMessage: 'Login in to CIAS',
+    defaultMessage: 'Log into CIAS',
   },
   loginButton: {
     id: `${scope}.loginButton`,

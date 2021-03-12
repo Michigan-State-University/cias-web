@@ -11,7 +11,7 @@ export const scope = 'app.containers.TeamDetails';
 export default defineMessages({
   pageTitle: {
     id: `${scope}.pageTitle`,
-    defaultMessage: 'Team details',
+    defaultMessage: 'Team Details',
   },
   backButton: {
     id: `${scope}.backButton`,

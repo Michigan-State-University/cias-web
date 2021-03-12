@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ForbiddenPage /> should render and match the snapshot 1`] = `
+<div
+  style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px; height: 100%;"
+>
+  <div
+    style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start; height: 100%;"
+  >
+    <div
+      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+    >
+      <div
+        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: center;"
+      >
+        <div
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+        >
+          <p
+            class="Text-e4p0w3-0 hoDHXd"
+            color="#107969"
+            font-size="10vw"
+            font-weight="bold"
+          >
+            Forbidden
+          </p>
+        </div>
+      </div>
+      <div
+        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: center;"
+      >
+        <div
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+        >
+          <p
+            class="Text-e4p0w3-0 bWNnsa"
+            font-size="24"
+            font-weight="bold"
+          >
+            You do not have access to view this resource.
+          </p>
+        </div>
+      </div>
+      <div
+        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; margin-bottom: 30px;"
+      >
+        <div
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+        >
+          <p
+            class="Text-e4p0w3-0 eBqgNV"
+            font-size="18"
+          >
+            It seems that you are not logged in. Please log in.
+          </p>
+        </div>
+      </div>
+      <div
+        style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: space-around;"
+      >
+        <div
+          style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; max-width: 100%; margin-left: 0%;"
+        >
+          <button
+            class="StyledButton-d2s0gt-0 jFzyBC"
+            color="primary"
+            width="180"
+          >
+            <span>
+              Log in
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <span
+    style="display: table; clear: both;"
+  />
+</div>
+`;

@@ -4,14 +4,16 @@ import { FormattedMessage } from 'react-intl';
 
 import Column from 'components/Column';
 import H2 from 'components/H2';
+import Loader from 'components/Loader';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import messages from './messages';
 
-const TileMapper = ({ items, component }) => (
+const TileMapper = ({ items, component, loading }) => (
   <>
+    {loading && <Loader />}
     {items && items.map((item, itemIndex) => component(item, itemIndex))}
-    {(isNullOrUndefined(items) || items.length === 0) && (
+    {!loading && (isNullOrUndefined(items) || items.length === 0) && (
       <Column width="100%" align="center" mt={50}>
         <H2>
           <FormattedMessage {...messages.noResults} />
@@ -24,6 +26,7 @@ const TileMapper = ({ items, component }) => (
 TileMapper.propTypes = {
   items: PropTypes.array,
   component: PropTypes.func,
+  loading: PropTypes.bool,
 };
 
 export default TileMapper;

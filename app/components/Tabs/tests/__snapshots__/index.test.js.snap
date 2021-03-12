@@ -29,8 +29,8 @@ exports[`<Tabs /> should render and match the snapshot 1`] = `
   margin: 0 10px;
   padding-bottom: 7px;
   border-bottom-width: 2px;
-  border-bottom-color: #C866EA;
   border-bottom-style: solid;
+  border-bottom-color: #C866EA;
 }
 
 .c1 div {
@@ -43,8 +43,8 @@ exports[`<Tabs /> should render and match the snapshot 1`] = `
   margin: 0 10px;
   padding-bottom: 7px;
   border-bottom-width: 2px;
-  border-bottom-color: #C866EA;
-  border-bottom-style: none;
+  border-bottom-style: solid;
+  border-bottom-color: #FFFFFF;
 }
 
 .c2 div {
@@ -112,8 +112,8 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   margin: 0 10px;
   padding-bottom: 7px;
   border-bottom-width: 2px;
-  border-bottom-color: #C866EA;
   border-bottom-style: solid;
+  border-bottom-color: #C866EA;
 }
 
 .c1 div {
@@ -126,8 +126,8 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   margin: 0 10px;
   padding-bottom: 7px;
   border-bottom-width: 2px;
-  border-bottom-color: #C866EA;
-  border-bottom-style: none;
+  border-bottom-style: solid;
+  border-bottom-color: #FFFFFF;
 }
 
 .c3 div {

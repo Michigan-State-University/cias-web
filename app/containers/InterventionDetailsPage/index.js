@@ -134,6 +134,7 @@ export function InterventionDetailsPage({
     status,
     csv_link: csvLink,
     csv_generated_at: csvGeneratedAt,
+    shared_to: sharedTo,
   } = intervention || {};
 
   const editingPossible = canEdit(status);
@@ -149,7 +150,8 @@ export function InterventionDetailsPage({
 
   const closeModal = () => setModalVisible(false);
   const openModal = () => setModalVisible(true);
-  const handleCopyIntervention = () => copyIntervention({ interventionId: id });
+  const handleCopyIntervention = () =>
+    copyIntervention({ interventionId: id, withoutRedirect: true });
   const handleArchiveIntervention = () =>
     editIntervention({
       path: 'status_event',
@@ -244,7 +246,7 @@ export function InterventionDetailsPage({
   };
 
   const copyInterventionToResearchers = users =>
-    copyIntervention({ interventionId, users });
+    copyIntervention({ interventionId, users, withoutRedirect: true });
 
   const onDragEnd = result => {
     const { source, destination } = result;
@@ -284,6 +286,7 @@ export function InterventionDetailsPage({
                         disabled={!editingPossible}
                         sharingPossible={sharingPossible}
                         deletionPossible={deletionPossible}
+                        sharedTo={sharedTo}
                         session={session}
                         index={index}
                         isSelected={index === sessionIndex}

@@ -5,6 +5,6 @@ export const scope = 'app.containers.ParticipantDashboard';
 export default defineMessages({
   noResults: {
     id: `${scope}.noResults`,
-    defaultMessage: 'No Results',
+    defaultMessage: 'No reports available at the moment',
   },
 });

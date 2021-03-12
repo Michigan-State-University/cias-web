@@ -98,7 +98,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     <h3
       class="H3-twxrn4-0 cRKwFK"
     >
-      Next Screen Button
+      Continue Button
     </h3>
     <label
       class="styled__SwitchWrapper-k9teya-0 hucWtb"

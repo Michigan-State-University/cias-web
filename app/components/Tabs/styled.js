@@ -18,8 +18,9 @@ export const LabelContainer = styled.div`
   margin: 0 10px;
   padding-bottom: 7px;
   border-bottom-width: 2px;
-  border-bottom-color: ${themeColors.secondary};
-  border-bottom-style: ${({ isActive }) => (isActive ? 'solid' : 'none')};
+  border-bottom-style: solid;
+  border-bottom-color: ${({ isActive }) =>
+    isActive ? themeColors.secondary : colors.white};
   div {
     cursor: pointer;
   }

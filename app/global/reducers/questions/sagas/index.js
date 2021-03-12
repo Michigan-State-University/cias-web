@@ -12,6 +12,7 @@ import editQuestionAllSagas, {
   updateQuestionSettingsSaga,
   changeQuestionTypeSaga,
 } from './editQuestion';
+import copyExternallyQuestionSaga from './copyExternallyQuestion';
 
 export {
   addQuestionImageSaga,
@@ -26,6 +27,7 @@ export {
   updateQuestionSettingsSaga,
   changeQuestionTypeSaga,
   deleteQuestionsSaga,
+  copyExternallyQuestionSaga,
 };
 
 export default function* allQuestionsSagas() {
@@ -41,5 +43,6 @@ export default function* allQuestionsSagas() {
     updateQuestionSettingsSaga(),
     changeQuestionTypeSaga(),
     deleteQuestionsSaga(),
+    copyExternallyQuestionSaga(),
   ]);
 }

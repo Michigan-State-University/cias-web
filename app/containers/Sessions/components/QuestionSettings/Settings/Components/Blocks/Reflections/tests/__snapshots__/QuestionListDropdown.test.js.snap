@@ -3,57 +3,25 @@
 exports[`<QuestionListDropdown /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Row-y1cs0u-0 dskFsL"
+    class="Row-y1cs0u-0 bXVISe"
+    height="0"
+    width="100%"
   >
     <div
-      class="Box-sc-1vhutan-0 ksbYZU"
-      overflow="hidden"
+      class="Box-sc-1vhutan-0 fnsWon"
+      width="100%"
     >
       <div
-        class="Column-sc-4zswzq-0 ekpwZH"
+        class="Box-sc-1vhutan-0 hxzdPL"
         data-testid="question-test-0-select-target-question"
+        height="0"
+        overflow="scroll"
+        width="100%"
       >
         <div
-          class="Box-sc-1vhutan-0 bOOvNQ"
+          class="Row-y1cs0u-0 jawZan"
         >
-          <div
-            class="Column-sc-4zswzq-0 ekpwZH"
-          >
-            <div
-              class="Row-y1cs0u-0 bMEIUu"
-              data-testid="question-test-0-select-target-question-el"
-            >
-              <img
-                class="Img-sc-55j3su-0 cYsgyu"
-                src="IMAGE_MOCK"
-              />
-              <p
-                class="Text-e4p0w3-0 jlZMzX"
-                color="#9AA1B6"
-                font-weight=""
-                overflow="hidden"
-              >
-                subtitle-test-0
-              </p>
-            </div>
-            <div
-              class="Row-y1cs0u-0 cRfofY"
-              data-testid="question-test-0-select-target-question-el"
-            >
-              <img
-                class="Img-sc-55j3su-0 cYsgyu"
-                src="IMAGE_MOCK"
-              />
-              <p
-                class="Text-e4p0w3-0 imsaiG"
-                color=""
-                font-weight=""
-                overflow="hidden"
-              >
-                subtitle-test-1
-              </p>
-            </div>
-          </div>
+          No questions available
         </div>
       </div>
     </div>

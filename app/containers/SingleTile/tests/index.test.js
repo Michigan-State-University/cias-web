@@ -8,13 +8,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-import { browserHistory, MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import 'jest-styled-components';
 
-import configureStore from 'configureStore';
 import { Provider } from 'react-redux';
+import { Roles } from 'models/User/UserRoles';
+import { DEFAULT_LOCALE } from 'i18n';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 import SingleTile from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
 
 const defaultProps = {
   tileData: {
@@ -37,9 +38,16 @@ describe('<SingleTile />', () => {
   let store;
   let modalContainer;
   let mainAppContainer;
+  const initialState = {
+    auth: {
+      user: {
+        roles: [Roles.admin],
+      },
+    },
+  };
 
   beforeAll(() => {
-    store = configureStore({}, browserHistory);
+    store = createTestStore(initialState);
     ReactDOM.createPortal = jest.fn(element => element);
     modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal-portal');

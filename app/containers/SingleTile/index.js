@@ -6,15 +6,16 @@
 
 import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
-
 import { FormattedMessage, injectIntl } from 'react-intl';
+import { createStructuredSelector } from 'reselect';
+import { useInjectSaga } from 'redux-injectors';
+import { connect } from 'react-redux';
+
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 import csvIcon from 'assets/svg/csv-icon.svg';
 import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
 import globalMessages from 'global/i18n/globalMessages';
-import { useInjectSaga } from 'redux-injectors';
-import { connect } from 'react-redux';
 
 import {
   sendInterventionCsvRequest,
@@ -24,8 +25,9 @@ import {
   copyInterventionRequest,
   archiveInterventionRequest,
 } from 'global/reducers/interventions';
-
+import { makeSelectUserRoles } from 'global/reducers/auth';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
+
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
 import InterventionDetails from 'containers/SingleTile/InterventionDetails';
@@ -34,6 +36,7 @@ import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import SelectResearchers from 'containers/SelectResearchers';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { Roles } from 'models/User/UserRoles';
 import messages from './messages';
 import {
   TileContainer,
@@ -51,6 +54,7 @@ const SingleTile = ({
   copyIntervention,
   archiveIntervention,
   intl: { formatMessage },
+  userRoles,
 }) => {
   useInjectSaga({
     key: 'interventionOptionsSaga',
@@ -80,12 +84,16 @@ const SingleTile = ({
     copyIntervention({ interventionId: id, withoutRedirect: true });
 
   const options = [
-    {
-      icon: csvIcon,
-      action: handleCsvRequest,
-      label: formatMessage(messages.exportCSV),
-      id: 'Export CSV',
-    },
+    ...(userRoles.includes(Roles.admin) || userRoles.includes(Roles.teamAdmin)
+      ? [
+          {
+            icon: csvIcon,
+            action: handleCsvRequest,
+            label: formatMessage(messages.exportCSV),
+            id: 'Export CSV',
+          },
+        ]
+      : []),
     {
       icon: fileShare,
       action: openModal,
@@ -185,7 +193,12 @@ SingleTile.propTypes = {
   copyIntervention: PropTypes.func,
   editIntervention: PropTypes.func,
   archiveIntervention: PropTypes.func,
+  userRoles: PropTypes.arrayOf(PropTypes.string),
 };
+
+const mapStateToProps = createStructuredSelector({
+  userRoles: makeSelectUserRoles(),
+});
 
 const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
@@ -198,7 +211,7 @@ const SingleTileWithIntl = injectIntl(SingleTile);
 
 export default memo(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
   )(SingleTileWithIntl),
 );

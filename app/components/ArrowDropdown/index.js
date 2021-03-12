@@ -6,6 +6,7 @@ import { boxShadows, colors } from 'theme';
 import Box from 'components/Box';
 
 import useOutsideClick from 'utils/useOutsideClick';
+import { ArrowDropdownContext } from 'components/ArrowDropdown/utils';
 import Dropdown from './Dropdown';
 import { ArrowDropdownWrapper } from './styled';
 
@@ -20,11 +21,13 @@ const ArrowDropdown = ({
   disabled,
 }) => {
   const dropdown = useRef(null);
+  const buttonRef = useRef(null);
   useOutsideClick(dropdown, () => setOpen(false), isOpened);
 
   return (
     <ArrowDropdownWrapper ref={dropdown} width={width}>
       <Dropdown
+        ref={buttonRef}
         disabled={disabled}
         onClick={() => setOpen && setOpen(!isOpened)}
         isOpened={isOpened}
@@ -41,7 +44,9 @@ const ArrowDropdown = ({
         {...(isOpened ? { zIndex: 1 } : { display: 'none' })}
         {...positionFrom === 'right' && { right: '0' }}
       >
-        {children}
+        <ArrowDropdownContext.Provider value={{ ref: buttonRef }}>
+          {children}
+        </ArrowDropdownContext.Provider>
       </Box>
     </ArrowDropdownWrapper>
   );

@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 
 export const shouldRedirectToLogin = ({
-  'access-token': accessToken,
+  'Access-Token': accessToken,
   client_id: clientId,
-  client,
+  Client: client,
   config,
   expiry,
   reset_password: resetPassword,

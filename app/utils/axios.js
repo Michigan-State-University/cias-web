@@ -1,13 +1,19 @@
 /* eslint-disable no-param-reassign */
 import axios from 'axios';
+import { push } from 'connected-react-router';
 import { store } from 'configureStore';
 import { logOut } from 'global/reducers/auth';
 import { headersConst } from 'utils/getHeaders';
 import objectToCamelKebabCase from 'utils/objectToCamelKebabCase';
 import { previewRegex, guestLogInRegex } from 'global/constants/regex';
+import { REDIRECT_QUERY_KEY } from 'containers/LoginPage/constants';
 import LocalStorageService from './localStorageService';
+import { HttpMethods, HttpStatusCodes } from './constants';
 
 const { dispatch } = store;
+
+const matchReponseMethod = (response, method) =>
+  response.config.method.toUpperCase() === method.toUpperCase();
 
 const isGuestRequest = (locationUrl, method, requestUrl) =>
   locationUrl.match(previewRegex) &&
@@ -43,10 +49,27 @@ axios.interceptors.response.use(
   error => {
     const { response } = error;
     if (
-      response.status === 401 &&
+      response.status === HttpStatusCodes.UNAUTHORIZED &&
       !response.config.url.endsWith('auth/sign_in')
+    ) {
+      dispatch(logOut(window.location.pathname));
+    } else if (
+      response.status === HttpStatusCodes.FORBIDDEN &&
+      matchReponseMethod(response, HttpMethods.GET)
+    ) {
+      const queryParams = new URLSearchParams(window.location.search);
+
+      queryParams.append(
+        REDIRECT_QUERY_KEY,
+        encodeURIComponent(window.location.pathname),
+      );
+
+      dispatch(push(`/no-access?${queryParams.toString()}`));
+    } else if (
+      response.status === HttpStatusCodes.NOT_FOUND &&
+      matchReponseMethod(response, HttpMethods.GET)
     )
-      dispatch(logOut());
+      dispatch(push('/not-found-page'));
     else
       setHeaders(
         error.response,

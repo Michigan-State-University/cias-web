@@ -1,6 +1,6 @@
 /**
  *
- * Tests for TeamList
+ * Tests for TeamsList
  *
  */
 
@@ -20,9 +20,9 @@ import createModalForTests from 'utils/createModalForTests';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import { TeamBuilder } from 'models/Teams/TeamBuilder';
-import TeamList from '../index';
+import TeamsList from '../index';
 
-describe('<TeamList />', () => {
+describe('<TeamsList />', () => {
   const initialState = role => ({
     auth: {
       user: { firstName: 'test', lastName: 'test', roles: [role] },
@@ -63,7 +63,7 @@ describe('<TeamList />', () => {
       <Provider store={storeAdmin}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
-            <TeamList />
+            <TeamsList />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,
@@ -76,7 +76,7 @@ describe('<TeamList />', () => {
       <Provider store={storeAdmin}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
-            <TeamList />
+            <TeamsList />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,

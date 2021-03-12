@@ -10,6 +10,7 @@ import changePhoneNumberSaga from './changePhoneNumber';
 import changeNotificationsSettingsSaga from './changeNotificationsSettings';
 import sendSmsTokenSaga from './sendSmsToken';
 import logInGuestSaga from './logInGuest';
+import editPhoneNumberQuestionSaga from './editPhoneNumberQuestion';
 
 export {
   logOutSaga,
@@ -23,6 +24,7 @@ export {
   confirmPhoneNumberSaga,
   sendSmsTokenSaga,
   logInGuestSaga,
+  editPhoneNumberQuestionSaga,
 };
 
 export default function* allAuthSagas() {

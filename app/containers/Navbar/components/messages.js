@@ -28,6 +28,10 @@ export default defineMessages({
     id: `${scope}.reportTemplates`,
     defaultMessage: 'Report Templates',
   },
+  generatedReports: {
+    id: `${scope}.generatedReports`,
+    defaultMessage: 'Generated Reports',
+  },
   previewStart: {
     id: `${scope}.preview`,
     defaultMessage: 'Preview From Start',
@@ -51,5 +55,9 @@ export default defineMessages({
   saved: {
     id: `${scope}.saved`,
     defaultMessage: 'Saved',
+  },
+  smsMessaging: {
+    id: `${scope}.smsMessaging`,
+    defaultMessage: 'SMS Messaging',
   },
 });

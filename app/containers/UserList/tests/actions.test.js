@@ -12,7 +12,13 @@ describe('UserList actions', () => {
           includeInactive: true,
           teamId: undefined,
           name: undefined,
-          roles: ['admin', 'team_admin', 'participant', 'researcher'],
+          roles: [
+            'admin',
+            'team_admin',
+            'participant',
+            'researcher',
+            'third_party',
+          ],
         },
         type: FETCH_USERS,
       };

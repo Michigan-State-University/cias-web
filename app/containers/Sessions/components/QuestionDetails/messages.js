@@ -10,7 +10,7 @@ export const scope = 'app.components.QuestionDetails';
 export default defineMessages({
   nextQuestion: {
     id: `${scope}.nextQuestion`,
-    defaultMessage: 'Next screen',
+    defaultMessage: 'Continue',
   },
   groupPlaceholder: {
     id: `${scope}.groupPlaceholder`,

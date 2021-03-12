@@ -40,7 +40,7 @@ const Tabs = ({
           return (
             <Tab
               activeTab={tab}
-              key={label || renderAsLink.props.children}
+              key={label || renderAsLink.props.to}
               text={label || renderAsLink.props.children}
               label={label}
               renderAsLink={renderAsLink}

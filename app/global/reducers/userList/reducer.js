@@ -25,18 +25,25 @@ import {
   DELETE_USER_FROM_TEAM_REQUEST,
   DELETE_USER_FROM_TEAM_SUCCESS,
   DELETE_USER_FROM_TEAM_FAILURE,
+  FETCH_RESEARCHERS_REQUEST,
+  FETCH_RESEARCHERS_SUCCESS,
+  FETCH_RESEARCHERS_FAILURE,
 } from './constants';
 
 export const initialState = {
   users: [],
   usersSelector: [],
+  researchersSelector: [],
   usersSize: 0,
   shouldRefetch: false,
   cache: {
     users: [],
+    researchersSelector: [],
   },
   usersSelectorError: null,
+  researchersSelectorError: null,
   usersSelectorLoading: true,
+  researchersSelectorLoading: true,
   usersError: null,
   usersLoading: true,
 };
@@ -126,6 +133,24 @@ const userListReducer = (state = initialState, { type, payload }) =>
 
       case EDIT_SINGLE_TEAM_SUCCESS:
         draft.shouldRefetch = true;
+        break;
+
+      case FETCH_RESEARCHERS_REQUEST:
+        draft.researchersSelectorLoading = true;
+        draft.researchersSelectorError = null;
+        break;
+      case FETCH_RESEARCHERS_SUCCESS: {
+        const { users: usersList } = payload;
+        draft.researchersSelector = usersList;
+        draft.cache.researchersSelector = usersList;
+        draft.researchersSelectorLoading = false;
+        draft.researchersSelectorError = null;
+        break;
+      }
+      case FETCH_RESEARCHERS_FAILURE:
+        draft.researchersSelectorLoading = false;
+        draft.researchersSelectorError = payload;
+        draft.researchersSelector = state.cache.researchersSelector;
         break;
     }
   });

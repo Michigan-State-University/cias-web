@@ -53,6 +53,10 @@ export default defineMessages({
       id: `${scope}.guest`,
       defaultMessage: 'Guest',
     },
+    third_party: {
+      id: `${scope}.third_party`,
+      defaultMessage: 'Third Party',
+    },
   },
   variables: {
     variableNamePlaceholder: {
@@ -129,7 +133,7 @@ export default defineMessages({
     },
     [phoneQuestion.id]: {
       id: `${scope}.${phoneQuestion.id}`,
-      defaultMessage: 'Phone',
+      defaultMessage: 'Phone Text Messaging',
     },
     [nameQuestion.id]: {
       id: `${scope}.${nameQuestion.id}`,

@@ -15,9 +15,21 @@ export default defineMessages({
     id: `${scope}.copyError`,
     defaultMessage: 'Cannot copy the screen!',
   },
+  deleteSuccess: {
+    id: `${scope}.deleteSuccess`,
+    defaultMessage:
+      'Successfully deleted the selected {count, plural, ' +
+      'one {screen}' +
+      'other {screens}' +
+      '}!',
+  },
   deleteError: {
-    id: `${scope}.copyError`,
-    defaultMessage: 'Cannot delete the screen!',
+    id: `${scope}.deleteError`,
+    defaultMessage:
+      'Failed to delete the selected {count, plural, ' +
+      'one {screen}' +
+      'other {screens}' +
+      '}!',
   },
   reorderError: {
     id: `${scope}.reorderError`,

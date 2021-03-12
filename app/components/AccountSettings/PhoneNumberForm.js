@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash/isEqual';
+import union from 'lodash/union';
 import { Formik, yupToFormErrors, validateYupSchema } from 'formik';
 import parsePhoneNumber, {
   getCountryCallingCode,
@@ -20,6 +21,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import { ConfirmButton } from './styled';
 import messages from './messages';
+import { popularPrefixes } from './constants';
 import phoneNumberSchema from './schemas/phoneNumberSchema';
 import PhoneNumberCodeModal from './PhoneNumberCodeModal';
 
@@ -94,7 +96,7 @@ const PhoneNumberForm = ({
 
   const prefixOptions = useMemo(
     () =>
-      getCountriesCodes().map(country => ({
+      union(popularPrefixes, getCountriesCodes()).map(country => ({
         value: country,
         label: getCodeLabel(country),
         filterData: `${country} +${getCountryCallingCode(country)}`,

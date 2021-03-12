@@ -6,6 +6,7 @@ import {
   createQuestionSaga,
   reorderQuestionsSaga,
   deleteQuestionsSaga,
+  copyExternallyQuestionSaga,
 } from 'global/reducers/questions';
 
 import {
@@ -31,5 +32,6 @@ export default function* editInterventionPageSaga() {
     changeGroupNameSaga(),
     logInGuestSaga(),
     redirectToPreviewSaga(),
+    copyExternallyQuestionSaga(),
   ]);
 }

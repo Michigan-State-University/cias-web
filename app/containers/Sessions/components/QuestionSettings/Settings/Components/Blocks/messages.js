@@ -67,9 +67,9 @@ export default defineMessages({
     id: `${scope}.suggest`,
     defaultMessage: 'Suggest',
   },
-  suprised: {
-    id: `${scope}.suprised`,
-    defaultMessage: 'Suprised',
+  surprised: {
+    id: `${scope}.surprised`,
+    defaultMessage: 'Surprised',
   },
   congratulate: {
     id: `${scope}.congratulate`,
@@ -206,5 +206,9 @@ export default defineMessages({
   speechPlaceholder: {
     id: `${scope}.speechPlaceholder`,
     defaultMessage: 'Enter speech here...',
+  },
+  noQuestions: {
+    id: `${scope}.noQuestions`,
+    defaultMessage: 'No questions available',
   },
 });

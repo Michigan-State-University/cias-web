@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { Switch } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
@@ -30,8 +30,10 @@ import TeamsListPage from 'containers/TeamsList/Loadable';
 import TeamDetails from 'containers/TeamDetails/Loadable';
 import Logout from 'containers/Logout/Loadable';
 import UserDetails from 'containers/UserDetails/Loadable';
-import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 import ReportsPage from 'containers/ParticipantDashboard/components/ReportsTab/Loadable';
+import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReportsPage';
+import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
+import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
 
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 
@@ -47,7 +49,6 @@ import { compose } from 'redux';
 import {
   accountsTabId,
   interventionsTabId,
-  myTeamTabId,
   participantReportsTabId,
   teamsTabId,
 } from 'utils/defaultNavbarTabs';
@@ -65,7 +66,9 @@ export function App({ user }) {
         case Roles.teamAdmin:
           return <InterventionPage />;
         case Roles.participant:
-          return <ParticipantDashboard />;
+          return <GeneratedReportsPage disableFilter />;
+        case Roles.thirdParty:
+          return <GeneratedReportsPage disableFilter />;
         default:
           return NotFoundPage;
       }
@@ -162,6 +165,26 @@ export function App({ user }) {
         />
         <AppRoute
           exact
+          path="/interventions/:interventionId/sessions/:sessionId/generated-reports"
+          component={GeneratedReportsPage}
+          protectedRoute
+          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          navbarProps={{
+            navbarId: 'sessions',
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/sms-messaging"
+          component={TextMessagesPage}
+          protectedRoute
+          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          navbarProps={{
+            navbarId: 'sessions',
+          }}
+        />
+        <AppRoute
+          exact
           path="/users"
           component={renderUserListByRole}
           protectedRoute
@@ -176,7 +199,7 @@ export function App({ user }) {
           path="/teams"
           component={TeamsListPage}
           protectedRoute
-          allowedRoles={[Roles.admin]}
+          allowedRoles={[Roles.admin, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'default',
             activeTab: teamsTabId,
@@ -187,23 +210,9 @@ export function App({ user }) {
           path="/teams/:id"
           component={TeamDetails}
           protectedRoute
-          allowedRoles={[Roles.admin]}
+          allowedRoles={[Roles.admin, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'default',
-            activeTab: teamsTabId,
-          }}
-        />
-        <AppRoute
-          exact
-          path="/my-team"
-          component={() => (
-            <TeamDetails match={{ params: { id: user.teamId } }} />
-          )}
-          protectedRoute
-          allowedRoles={[Roles.teamAdmin]}
-          navbarProps={{
-            navbarId: 'default',
-            activeTab: myTeamTabId,
           }}
         />
         <AppRoute
@@ -241,7 +250,6 @@ export function App({ user }) {
           allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
           navbarProps={{
             navbarId: 'default',
-            activeTab: interventionsTabId,
           }}
         />
         <AppRoute
@@ -266,7 +274,16 @@ export function App({ user }) {
             activeTab: accountsTabId,
           }}
         />
+        <AppRoute
+          exact
+          path="/no-access"
+          component={ForbiddenPage}
+          allowedRoles={Roles.allRoles}
+        />
         <AppRoute exact path="/not-found-page" component={NotFoundPage} />
+        <AppRoute path="*">
+          <Redirect to="/not-found-page" />
+        </AppRoute>
       </Switch>
       <GlobalStyle />
       <ApiQueryMessageHandler />

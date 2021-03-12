@@ -11,7 +11,7 @@ export const scope = 'app.components.UserSelector';
 export default defineMessages({
   inputPlaceholder: {
     id: `${scope}.inputPlaceholder`,
-    defaultMessage: 'Select researcher',
+    defaultMessage: 'Select a user',
   },
   noUsersMessage: {
     id: `${scope}.noUsersMessage`,

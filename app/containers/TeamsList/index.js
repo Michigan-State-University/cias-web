@@ -1,10 +1,10 @@
 /**
  *
- * UserList
+ * TeamsList
  *
  */
 
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
@@ -32,6 +32,9 @@ import { themeColors } from 'theme';
 import { PER_PAGE } from 'global/reducers/userList/constants';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
+import { makeSelectUser } from 'global/reducers/auth';
+import { Roles } from 'models/User/UserRoles';
+import { TeamListContext } from './Components/utils';
 import CreateTeam from './Components/CreateTeam';
 import TeamsTable from './Components/TeamsTable';
 import messages from './messages';
@@ -49,10 +52,13 @@ function TeamsList({
   fetchTeams,
   deleteTeam,
   intl: { formatMessage },
+  user: { roles },
 }) {
   useInjectReducer({ key: 'teamList', reducer: TeamListReducer });
   useInjectSaga({ key: 'teamList', saga: teamListSaga });
   const pages = Math.ceil(teamsSize / PER_PAGE);
+
+  const isAdmin = useMemo(() => roles.includes(Roles.admin), [roles]);
 
   const [filterText, setFilterText] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
@@ -91,15 +97,17 @@ function TeamsList({
             </Col>
           </Row>
         </Container>
-        <TeamsTable
-          formatMessage={formatMessage}
-          teams={teams}
-          loading={teamsLoading}
-          setPage={setPage}
-          page={page}
-          pages={pages}
-          deleteTeam={deleteTeam}
-        />
+        <TeamListContext.Provider value={{ isAdmin }}>
+          <TeamsTable
+            formatMessage={formatMessage}
+            teams={teams}
+            loading={teamsLoading}
+            setPage={setPage}
+            page={page}
+            pages={pages}
+            deleteTeam={deleteTeam}
+          />
+        </TeamListContext.Provider>
       </div>
     );
   };
@@ -109,7 +117,7 @@ function TeamsList({
       <CreateTeam visible={modalVisible} onClose={closeModal} />
       <Box height="100%" overflow="scroll" display="flex" justify="center">
         <Helmet>
-          <title>Teams list</title>
+          <title>{formatMessage(messages.pageTitle)}</title>
           <meta name="description" content="List of teams" />
         </Helmet>
         <Box mt={30} width="100%" px="10%">
@@ -117,15 +125,17 @@ function TeamsList({
             <H1 mr={10}>
               <FormattedMessage {...messages.manageTeams} />
             </H1>
-            <TextButton
-              buttonProps={{
-                color: themeColors.secondary,
-                fontWeight: 'bold',
-              }}
-              onClick={openModal}
-            >
-              <FormattedMessage {...messages.createTeam} />
-            </TextButton>
+            {isAdmin && (
+              <TextButton
+                buttonProps={{
+                  color: themeColors.secondary,
+                  fontWeight: 'bold',
+                }}
+                onClick={openModal}
+              >
+                <FormattedMessage {...messages.createTeam} />
+              </TextButton>
+            )}
           </Box>
           {getContent()}
         </Box>
@@ -139,10 +149,12 @@ TeamsList.propTypes = {
   deleteTeam: PropTypes.func.isRequired,
   teamList: PropTypes.object,
   intl: intlShape,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   teamList: makeSelectTeamList(),
+  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = {

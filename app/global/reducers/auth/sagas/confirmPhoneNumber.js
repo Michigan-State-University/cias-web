@@ -1,9 +1,14 @@
-import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import { call, delay, put, takeLatest, select } from 'redux-saga/effects';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
+import LocalStorageService from 'utils/localStorageService';
 
+import {
+  makeSelectPhoneNumberPreview,
+  makeSelectUser,
+} from 'global/reducers/auth/selectors';
 import { confirmPhoneNumberSuccess, confirmPhoneNumberError } from '../actions';
 import {
   CONFIRM_PHONE_NUMBER_ERROR,
@@ -14,6 +19,7 @@ import messages from '../messages';
 
 export function* confirmPhoneNumber({ payload: { smsToken, onSuccess } }) {
   const requestURL = `v1/users/verify_sms_token`;
+  const phoneNumberPreview = yield select(makeSelectPhoneNumberPreview());
 
   try {
     yield call(axios.patch, requestURL, {
@@ -29,6 +35,13 @@ export function* confirmPhoneNumber({ payload: { smsToken, onSuccess } }) {
       },
     );
     yield put(confirmPhoneNumberSuccess());
+    if (!phoneNumberPreview) {
+      const user = yield select(makeSelectUser());
+      yield call(LocalStorageService.updateState, {
+        ...user,
+        phone: { ...user.phone, confirmed: true },
+      });
+    }
   } catch (error) {
     yield call(toast.error, formatMessage(messages.confirmPhoneNumberError), {
       toastId: CONFIRM_PHONE_NUMBER_ERROR,

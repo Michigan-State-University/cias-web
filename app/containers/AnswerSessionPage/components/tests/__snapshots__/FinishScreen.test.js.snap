@@ -1,3 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<FinishScreen /> Should render and match the snapshot 1`] = `<div />`;
+exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
+<div>
+  <div
+    class="Row-y1cs0u-0 fSJzDH"
+    width="100%"
+  >
+    <a
+      class="styled__StyledLink-bqo6sz-8 dHBaTM"
+      href="/"
+    >
+      <button
+        class="StyledButton-d2s0gt-0 hImTHU"
+        color="primary"
+        width="100%"
+      >
+        Go to dashboard
+      </button>
+    </a>
+  </div>
+</div>
+`;

@@ -78,7 +78,7 @@ const CreateTeam = ({
         <UserSelector
           selectedUserId={selectedUser}
           onSelect={onSelectUser}
-          rolesToInclude={[Roles.researcher]}
+          rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
         />
         <Button
           width={260}

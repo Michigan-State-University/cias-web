@@ -40,6 +40,7 @@ const VariableInput = ({
         value={variable.name}
         color={colors.jungleGreen}
         onBlur={val => updateVariable(val, questionId)}
+        autoComplete="off"
       />
     </Row>
   );

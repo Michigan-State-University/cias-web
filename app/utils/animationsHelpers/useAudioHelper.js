@@ -3,10 +3,10 @@
 import uniqBy from 'lodash/uniqBy';
 import filter from 'lodash/filter';
 import {
-  speechType,
-  reflectionType,
   readQuestionBlockType,
   reflectionFormulaType,
+  reflectionType,
+  speechType,
 } from 'models/Narrator/BlockTypes';
 import { useRef } from 'react';
 import { speechAnimations } from 'utils/animations/animationsNames';
@@ -58,11 +58,10 @@ const useAudioHelper = (
           for (const [key, value] of animationNames) {
             if (key === 'end' && speechAnimations[animation].isEndReversed)
               animationsData.end = animationsData.start;
-            else {
-              const data = await import(`assets/animations/${value}.json`);
-
-              animationsData[key] = data;
-            }
+            else
+              animationsData[key] = await import(
+                `assets/animations/${value}.json`
+              );
           }
 
           animations.push({
@@ -77,130 +76,62 @@ const useAudioHelper = (
     return animations;
   };
 
-  const getReflectionData = block => {
-    const answer = answers[block.question_id];
-    const reflections = [];
-
-    if (answer && answer.answerBody) {
-      for (let i = 0; i < answer.answerBody.length; i += 1) {
-        const answerBody = answer.answerBody[i];
-        const matchReflection = block.reflections.find(
-          reflection =>
-            reflection.variable === answerBody.var &&
-            reflection.value === answerBody.value,
-        );
-
-        if (matchReflection) reflections.push(matchReflection);
-      }
-    }
-
-    return { audio_urls: [], reflections };
-  };
-
-  const getReflectionFormulaData = block =>
-    !Array.isArray(block.target_value) && block.target_value
-      ? block.target_value
-      : {
-          audio_urls: [],
-          sha256: [],
-          text: block.text,
-        };
-
   const changeSpeech = (nextBlock, nextIndex) => {
-    const speechData = loadedSpeechAnimations.current.find(
-      anim => anim.name === (nextBlock ? nextBlock.animation : undefined),
-    );
-    const initialAnimation =
-      speechData && speechData.animationData.start ? 'start' : 'speech';
+    const speechData = getSpeechData(nextIndex);
 
-    switch (nextBlock.type) {
-      case speechType:
-      case readQuestionBlockType:
-        dispatchUpdate({
-          currentData: {
-            ...speechData,
-            ...nextBlock,
-            currentAnimation: initialAnimation,
-            isLoop: initialAnimation !== 'start',
-            currentAudioIndex: 0,
-          },
-          currentBlockIndex: nextIndex,
-        });
-        break;
-
-      case reflectionType:
-        dispatchUpdate({
-          currentData: {
-            ...speechData,
-            ...nextBlock,
-            ...getReflectionData(nextBlock),
-            initialAnimation,
-            currentAnimation: initialAnimation,
-            isLoop: initialAnimation !== 'start',
-            currentAudioIndex: 0,
-            currentReflectionIndex: 0,
-          },
-          currentBlockIndex: nextIndex,
-        });
-        break;
-
-      case reflectionFormulaType:
-        dispatchUpdate({
-          currentData: {
-            ...speechData,
-            ...nextBlock,
-            ...getReflectionFormulaData(nextBlock),
-            currentAnimation: initialAnimation,
-            isLoop: initialAnimation !== 'start',
-            currentAudioIndex: 0,
-          },
-          currentBlockIndex: nextIndex,
-        });
-        break;
-
-      default:
-        break;
-    }
+    if (speechData)
+      dispatchUpdate({
+        currentData: getSpeechData(nextIndex),
+        currentBlockIndex: nextIndex,
+      });
   };
 
-  const getInitialSpeechAnimation = () => {
+  const getReflectionData = block => {
+    const { target_value: targetValue } = block;
+
+    let reflections = [];
+
+    if (Array.isArray(targetValue)) reflections = targetValue;
+    else if (targetValue instanceof Object) reflections.push(targetValue);
+
+    return {
+      audio_urls: [],
+      reflections,
+      sha256: [],
+    };
+  };
+
+  const getSpeechData = index => {
+    const block = blocks[index ?? 0];
+
     const speechData = loadedSpeechAnimations.current.find(
-      anim => anim.name === (blocks[0] ? blocks[0].animation : undefined),
+      anim => anim.name === (block ? block.animation : undefined),
     );
     const initialAnimation =
       speechData && speechData.animationData.start ? 'start' : 'speech';
 
-    switch (blocks[0].type) {
+    switch (block.type) {
       case speechType:
       case readQuestionBlockType:
         return {
-          ...blocks[0],
+          ...block,
           ...speechData,
           currentAnimation: initialAnimation,
           isLoop: initialAnimation !== 'start',
           currentAudioIndex: 0,
         };
 
+      case reflectionFormulaType:
       case reflectionType:
         return {
-          ...blocks[0],
+          ...block,
           ...speechData,
-          ...getReflectionData(blocks[0]),
+          ...getReflectionData(block),
           initialAnimation,
           currentAnimation: initialAnimation,
           isLoop: initialAnimation !== 'start',
           currentAudioIndex: 0,
           currentReflectionIndex: 0,
-        };
-
-      case reflectionFormulaType:
-        return {
-          ...blocks[0],
-          ...speechData,
-          ...getReflectionFormulaData(blocks[0]),
-          currentAnimation: initialAnimation,
-          isLoop: initialAnimation !== 'start',
-          currentAudioIndex: 0,
         };
 
       default:
@@ -220,10 +151,10 @@ const useAudioHelper = (
       switch (currentData.type) {
         case speechType:
         case readQuestionBlockType:
-        case reflectionFormulaType:
           handleSpeech(currentData.audio_urls);
           break;
 
+        case reflectionFormulaType:
         case reflectionType:
           handleSpeech(
             currentData.reflections.length
@@ -272,11 +203,8 @@ const useAudioHelper = (
     const { currentAnimation } = currentData;
     let nextAnimation = '';
 
-    if (currentAnimation === 'start') {
-      nextAnimation = 'speech';
-    } else if (currentAnimation === 'speech') {
-      nextAnimation = 'end';
-    }
+    if (currentAnimation === 'start') nextAnimation = 'speech';
+    else if (currentAnimation === 'speech') nextAnimation = 'end';
 
     dispatchUpdate({
       currentData: {
@@ -313,15 +241,13 @@ const useAudioHelper = (
   const hasMoreAudio = audioUrls => {
     const audioLength = audioUrls.length;
 
-    if (audioLength > currentData.currentAudioIndex + 1) return true;
-    return false;
+    return audioLength > currentData.currentAudioIndex + 1;
   };
 
   const hasMoreReflections = () => {
     const reflectionsLength = currentData.reflections.length;
 
-    if (reflectionsLength > currentData.currentReflectionIndex + 1) return true;
-    return false;
+    return reflectionsLength > currentData.currentReflectionIndex + 1;
   };
 
   const moveToNextAudio = () => {
@@ -351,9 +277,10 @@ const useAudioHelper = (
     switch (currentData.type) {
       case speechType:
       case readQuestionBlockType:
-      case reflectionFormulaType:
         changeBlock();
         break;
+
+      case reflectionFormulaType:
       case reflectionType:
         if (hasMoreReflections())
           dispatchUpdate({
@@ -367,6 +294,7 @@ const useAudioHelper = (
           });
         else changeBlock();
         break;
+
       default:
         break;
     }
@@ -384,8 +312,8 @@ const useAudioHelper = (
     }
   };
 
-  const decideIfPlaySpeechAnimation = () => {
-    if (
+  const decideIfPlaySpeechAnimation = () =>
+    !(
       currentData &&
       (currentData.type === speechType ||
         currentData.type === reflectionType ||
@@ -394,15 +322,11 @@ const useAudioHelper = (
       (audioInstance.paused || audioInstance.stopped) &&
       (currentData.currentAnimation !== 'start' &&
         currentData.currentAnimation !== 'end')
-    )
-      return false;
-
-    return true;
-  };
+    );
 
   return {
     changeSpeech,
-    getInitialSpeechAnimation,
+    getInitialSpeechAnimation: getSpeechData,
     cleanAudio,
     handleAudioBlock,
     decideIfPlaySpeechAnimation,

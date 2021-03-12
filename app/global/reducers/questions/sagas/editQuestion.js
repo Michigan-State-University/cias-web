@@ -4,8 +4,8 @@ import { toast } from 'react-toastify';
 import get from 'lodash/get';
 
 import {
-  getAllVariables,
   QuestionsWithoutVariable,
+  getEditVariables,
 } from 'models/Session/utils';
 import { hasDuplicates } from 'utils/hasDuplicates';
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
@@ -63,7 +63,7 @@ function* editQuestion({ payload }) {
       : makeSelectSelectedQuestion(),
   );
   const questions = yield select(makeSelectQuestions());
-  const variables = getAllVariables(questions).filter(
+  const variables = getEditVariables(questions).filter(
     currentVariable => currentVariable && currentVariable.trim(),
   );
 

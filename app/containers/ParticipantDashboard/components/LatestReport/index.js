@@ -19,7 +19,7 @@ import {
   makeSelectError,
   makeSelectLoader,
   fetchLatestReportRequest,
-} from 'global/reducers/participantDashboard';
+} from 'global/reducers/generatedReports';
 
 import { ReportTile } from '../ReportTile';
 import messages from './messages';

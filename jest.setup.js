@@ -23,6 +23,14 @@ Object.defineProperty(window, 'ResizeObserver', {
   writable: true,
 });
 
+jest.mock('resize-observer-lite', () => ({
+  default: jest.fn().mockImplementation(() => ({
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+    disconnect: jest.fn(),
+  })),
+}));
+
 Object.defineProperty(window, 'scrollTo', { value: () => {}, writable: true });
 
 jest.mock('react-tooltip/node_modules/uuid', () => ({
