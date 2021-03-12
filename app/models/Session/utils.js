@@ -90,7 +90,7 @@ export const getPreviousQuestions = (currentQuestion, questions, groups) => {
  * @param  {Array<Question>} questions
  * @param  {{structure: 'flat' | 'group', include: Array<string>, noEmpty: boolean}} options
  */
-export const getAllVariables = (questions, options) => {
+export const getBranchingVariables = (questions, options) => {
   const defaultParams = {
     structure: 'flat',
     include: [],
@@ -116,6 +116,68 @@ export const getAllVariables = (questions, options) => {
       case currencyQuestion.id:
       case phoneQuestion.id:
       case dateQuestion.id:
+        questionVariables = [];
+        break;
+      default:
+        questionVariables = [getDefaultVariable(question)];
+        break;
+    }
+
+    if (noEmpty)
+      questionVariables = questionVariables.filter(val => val && val.trim());
+
+    switch (structure) {
+      case 'group':
+        variables.push({
+          variables: questionVariables,
+          ...pick(question, include),
+        });
+        break;
+      case 'flat':
+      default:
+        if (include && include.length) {
+          variables.push(
+            ...questionVariables.map(variable => ({
+              ...pick(question, include),
+              variable,
+            })),
+          );
+        } else variables.push(...questionVariables);
+
+        break;
+    }
+  });
+
+  return variables;
+};
+
+/**
+ * @param  {Array<Question>} questions
+ * @param  {{structure: 'flat' | 'group', include: Array<string>, noEmpty: boolean}} options
+ */
+export const getEditVariables = (questions, options) => {
+  const defaultParams = {
+    structure: 'flat',
+    include: [],
+    noEmpty: true,
+  };
+  const { structure, include, noEmpty } = { ...defaultParams, ...options };
+  const variables = [];
+
+  questions.forEach(question => {
+    let questionVariables;
+
+    switch (question.type) {
+      case multiQuestion.id:
+        questionVariables = getMultiVariables(question);
+        break;
+      case gridQuestion.id:
+        questionVariables = getGridVariables(question);
+        break;
+      case informationQuestion.id:
+      case thirdPartyQuestion.id:
+      case feedbackQuestion.id:
+      case finishQuestion.id:
         questionVariables = [];
         break;
       default:

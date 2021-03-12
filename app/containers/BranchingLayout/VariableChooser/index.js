@@ -20,7 +20,10 @@ import {
 
 import { colors, boxShadows } from 'theme';
 import Question from 'models/Session/Question';
-import { getAllVariables, getPreviousQuestions } from 'models/Session/utils';
+import {
+  getBranchingVariables,
+  getPreviousQuestions,
+} from 'models/Session/utils';
 import NoContent from 'components/NoContent';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import useOutsideClick from 'utils/useOutsideClick';
@@ -52,7 +55,7 @@ const VariableChooser = ({
     [selectedQuestion, questions, groups],
   );
 
-  const variables = getAllVariables(previousQuestions, {
+  const variables = getBranchingVariables(previousQuestions, {
     structure: 'flat',
     include: ['id', 'subtitle'],
   });
