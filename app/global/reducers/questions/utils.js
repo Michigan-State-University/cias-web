@@ -56,20 +56,24 @@ export const getFromQuestionTTS = question => {
   return subtileTTS;
 };
 
-export const assignFromQuestionTTS = (draft, state) => {
-  const selectedQuestion = draft.questions.find(
-    ({ id }) => id === state.selectedQuestion,
-  );
-  const { narrator } = selectedQuestion;
-  const readQuestionBlockIndex = narrator.blocks.findIndex(
-    ({ type }) => type === readQuestionBlockType,
-  );
+export const assignFromQuestionTTS = question => {
+  const { subtitle } = question.settings;
 
-  if (readQuestionBlockIndex !== -1)
-    narrator.blocks[readQuestionBlockIndex] = {
-      ...narrator.blocks[readQuestionBlockIndex],
-      text: getFromQuestionTTS(selectedQuestion),
-    };
+  return {
+    ...question,
+    narrator: {
+      ...question.narrator,
+      blocks: question.narrator.blocks.map(block => {
+        if (block.type === readQuestionBlockType)
+          return {
+            ...block,
+            text: subtitle ? getFromQuestionTTS(question) : [],
+          };
+
+        return block;
+      }),
+    },
+  };
 };
 
 /* eslint-disable default-case, no-param-reassign */

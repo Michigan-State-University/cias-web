@@ -1,6 +1,7 @@
 import produce from 'immer';
 import set from 'lodash/set';
 import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
 import groupBy from 'lodash/groupBy';
 import keys from 'lodash/keys';
 import values from 'lodash/values';
@@ -128,14 +129,17 @@ export const questionsReducer = (state = initialState, action) =>
         const questionIndex = state.questions.findIndex(
           ({ id }) => id === state.selectedQuestion,
         );
-        set(
-          draft.questions[questionIndex],
+
+        const updatedQuestion = set(
+          cloneDeep(state.questions[questionIndex]),
           action.payload.path,
           action.payload.value,
         );
-        assignFromQuestionTTS(draft, state);
+
+        draft.questions[questionIndex] = assignFromQuestionTTS(updatedQuestion);
         break;
       }
+
       case EDIT_QUESTION_SUCCESS:
         editQuestionSuccessCommon(draft, action.payload);
         break;
@@ -376,14 +380,18 @@ export const questionsReducer = (state = initialState, action) =>
         const selectedQuestionIndex = draft.questions.findIndex(
           ({ id }) => id === (questionId || draft.selectedQuestion),
         );
-        draft.questions[selectedQuestionIndex] = {
-          ...draft.questions[selectedQuestionIndex],
+
+        const updatedQuestion = {
+          ...state.questions[selectedQuestionIndex],
           ...questionDataReducer(
-            draft.questions[selectedQuestionIndex],
+            state.questions[selectedQuestionIndex],
             action.payload,
           ),
         };
-        assignFromQuestionTTS(draft, state);
+
+        draft.questions[selectedQuestionIndex] = assignFromQuestionTTS(
+          updatedQuestion,
+        );
         break;
       }
 
@@ -391,16 +399,19 @@ export const questionsReducer = (state = initialState, action) =>
         const selectedQuestionIndex = draft.questions.findIndex(
           ({ id }) => id === draft.selectedQuestion,
         );
-        const settings = questionSettingsReducer(
-          draft.questions,
-          action.payload,
-          draft.selectedQuestion,
-        );
-        draft.loaders.updateQuestionLoading = true;
-        draft.questions[selectedQuestionIndex] = {
-          ...draft.questions[selectedQuestionIndex],
-          ...settings,
+
+        const updatedQuestion = {
+          ...state.questions[selectedQuestionIndex],
+          ...questionSettingsReducer(
+            state.questions,
+            action.payload,
+            state.selectedQuestion,
+          ),
         };
+
+        draft.questions[selectedQuestionIndex] = assignFromQuestionTTS(
+          updatedQuestion,
+        );
         break;
       }
       case GROUP_QUESTIONS_SUCCESS: {
