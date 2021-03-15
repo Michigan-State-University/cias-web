@@ -31,6 +31,7 @@ const ImageUpload = ({
   image,
   loading,
   intl: { formatMessage },
+  disabled,
 }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -70,7 +71,7 @@ const ImageUpload = ({
         }}
         {...getRootProps()}
       >
-        {loading && (
+        {(loading || disabled) && (
           <Column
             display="flex"
             align="center"
@@ -87,8 +88,9 @@ const ImageUpload = ({
               bg={colors.white}
               zIndex={1}
               opacity={0.5}
+              disabled={disabled}
             />
-            <Loader type="inline" zIndex={2} />
+            {loading && <Loader type="inline" zIndex={2} />}
           </Column>
         )}
         <Column display="flex" align="center" position="relative">
@@ -122,12 +124,12 @@ const ImageUpload = ({
 
   return (
     <Box mt={10} width="100%">
-      {isPreview && (
+      {(isPreview || disabled) && (
         <ImageWrapper>
           <Img src={image} alt="image" height="100%" width="100%" />
         </ImageWrapper>
       )}
-      {!isPreview && (
+      {!isPreview && !disabled && (
         <HoverableBox
           width="100%"
           onMouseEnter={() => setHovered(true)}
@@ -162,6 +164,7 @@ ImageUpload.propTypes = {
   loading: PropTypes.bool,
   intl: intlShape,
   image: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  disabled: PropTypes.bool,
 };
 
 export default compose(

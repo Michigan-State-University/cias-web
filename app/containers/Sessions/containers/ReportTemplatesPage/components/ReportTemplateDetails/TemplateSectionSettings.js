@@ -34,6 +34,7 @@ const TemplateSectionSettings = ({
     selectedTemplateSectionId,
     selectedTemplateSection,
     loaders: { updateReportTemplateLoading },
+    canEdit,
   } = useContext(ReportTemplatesContext);
 
   useEffect(() => {
@@ -77,6 +78,7 @@ const TemplateSectionSettings = ({
           </Col>
           <Col xs={5} align="end">
             <TextButton
+              disabled={!canEdit}
               onClick={onDelete}
               whiteSpace="nowrap"
               fontWeight="bold"
@@ -112,7 +114,11 @@ const TemplateSectionSettings = ({
         ))}
         <Row style={{ marginTop: 20 }}>
           <Col>
-            <DashedButton loading={isAddingSection} onClick={handleAddCase}>
+            <DashedButton
+              disabled={!canEdit}
+              loading={isAddingSection}
+              onClick={handleAddCase}
+            >
               {formatMessage(messages.addCaseButton)}
             </DashedButton>
           </Col>

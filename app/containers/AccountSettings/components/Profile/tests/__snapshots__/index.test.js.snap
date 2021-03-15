@@ -303,7 +303,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
         width="33%"
       >
         <button
-          class="StyledTextButton-sc-1b7egxw-0 styled__TextButton-sc-1pif2s-2 fiDerw hCmSLB"
+          class="StyledTextButton-sc-1b7egxw-0 styled__TextButton-sc-1pif2s-2 kHsXHs hCmSLB"
           color="#C866EA"
           font-size="14"
           font-weight="bold"

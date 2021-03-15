@@ -47,6 +47,7 @@ const SectionCaseItem = ({
   const {
     selectedTemplateSectionId,
     loaders: { updateReportTemplateLoading },
+    canEdit,
   } = useContext(ReportTemplatesContext);
 
   useEffect(() => {
@@ -153,6 +154,7 @@ const SectionCaseItem = ({
                 <Col xs={2}>
                   <Radio
                     mr={10}
+                    disabled={!canEdit}
                     onClick={handlePreviewChange}
                     checked={sectionCase.preview}
                   />
@@ -160,6 +162,7 @@ const SectionCaseItem = ({
                 <Col xs={10} align="end" style={{ textAlign: 'end' }}>
                   <Text
                     width="max-content"
+                    disabled={!canEdit}
                     onClick={handlePreviewChange}
                     whiteSpace="pre"
                     fontWeight={sectionCase.preview ? 'bold' : 'normal'}
@@ -180,12 +183,14 @@ const SectionCaseItem = ({
                   src={binNoBg}
                   onClick={handleDeleteCase}
                   mr={10}
+                  disabled={!canEdit}
                   clickable
                 />
                 <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
                 <InequalityChooser
                   onSuccessfulChange={handleFormulaMatchChange}
                   inequalityValue={sectionCase.formulaMatch}
+                  disabled={!canEdit}
                 />
               </Row>
             </Col>
@@ -196,6 +201,7 @@ const SectionCaseItem = ({
                   label={formatMessage(messages.sectionCaseTitleToggle)}
                   value={titleVisible}
                   action={handleTitleToggle}
+                  disabled={!canEdit}
                 />
               </Row>
             </Col>
@@ -223,6 +229,7 @@ const SectionCaseItem = ({
                   )}
                   value={sectionCase.title}
                   onBlur={handleTitleChange}
+                  disabled={!canEdit}
                 />
               </Box>
             </Row>
@@ -244,6 +251,7 @@ const SectionCaseItem = ({
                 buttonProps={{
                   color: themeColors.secondary,
                   fontWeight: 'bold',
+                  disabled: !canEdit,
                 }}
                 spinnerProps={{ size: 30, width: 2 }}
               >
@@ -267,6 +275,7 @@ const SectionCaseItem = ({
                 )}
                 value={sectionCase.content}
                 onBlur={handleContentChange}
+                disabled={!canEdit}
               />
             </Box>
           </Row>
@@ -280,6 +289,7 @@ const SectionCaseItem = ({
               loading={isUploadingImage}
               onAddImage={handleImageChange}
               onDeleteImage={handleImageDelete}
+              disabled={!canEdit}
             />
           </Row>
         </Container>

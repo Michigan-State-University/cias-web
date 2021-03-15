@@ -24,7 +24,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           </span>
         </h1>
         <button
-          class="StyledTextButton-sc-1b7egxw-0 bsIeDJ"
+          class="StyledTextButton-sc-1b7egxw-0 gvcXh"
           color="#C866EA"
           font-weight="bold"
         >
@@ -281,7 +281,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
+                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"
@@ -340,7 +340,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
+                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"
@@ -399,7 +399,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
+                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"
@@ -717,7 +717,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
+                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"
@@ -776,7 +776,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
+                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"
@@ -835,7 +835,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     width="100%"
                   >
                     <button
-                      class="StyledTextButton-sc-1b7egxw-0 eODLfa"
+                      class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
                         class="Text-e4p0w3-0 kcCsRU"

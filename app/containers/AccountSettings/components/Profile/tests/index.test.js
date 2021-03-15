@@ -49,6 +49,7 @@ describe('<Profile />', () => {
   let mainAppContainer;
 
   const store = createTestStore(initialState);
+
   beforeAll(() => {
     ReactDOM.createPortal = jest.fn(element => element);
     modalContainer = document.createElement('div');
@@ -57,6 +58,13 @@ describe('<Profile />', () => {
     mainAppContainer = document.createElement('div');
     mainAppContainer.setAttribute('id', 'main-app-container');
     document.body.appendChild(mainAppContainer);
+
+    jest.useFakeTimers('modern');
+    jest.setSystemTime(new Date(2020, 9, 31));
+  });
+
+  afterAll(() => {
+    jest.clearAllTimers();
   });
 
   it('Expect to not log errors in console', () => {

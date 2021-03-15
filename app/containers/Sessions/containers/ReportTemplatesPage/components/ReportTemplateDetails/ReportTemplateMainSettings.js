@@ -51,6 +51,7 @@ const ReportTemplateMainSettings = ({
       updateReportTemplateLoading,
       generateTestReportLoading,
     },
+    canEdit,
   } = useContext(ReportTemplatesContext);
 
   useEffect(() => {
@@ -146,16 +147,19 @@ const ReportTemplateMainSettings = ({
                     <Row
                       align="center"
                       style={{ margin: 0, cursor: 'pointer' }}
-                      onClick={() => onReportForChange(ReportFor.participant)}
+                      onClick={() =>
+                        canEdit && onReportForChange(ReportFor.participant)
+                      }
                     >
                       <Radio
                         mr={10}
+                        disabled={!canEdit}
                         checked={
                           singleReportTemplate.reportFor ===
                           ReportFor.participant
                         }
                       />
-                      <Text>
+                      <Text disabled={!canEdit}>
                         {formatMessage(messages.settingsReportForParticipant)}
                       </Text>
                     </Row>
@@ -163,17 +167,18 @@ const ReportTemplateMainSettings = ({
                   <Col>
                     <Row
                       align="center"
-                      style={{ cursor: 'pointer' }}
+                      style={{ cursor: canEdit ? 'pointer' : 'initial' }}
                       onClick={() => onReportForChange(ReportFor.thirdParty)}
                     >
                       <Radio
                         mr={10}
+                        disabled={!canEdit}
                         checked={
                           singleReportTemplate.reportFor ===
                           ReportFor.thirdParty
                         }
                       />
-                      <Text>
+                      <Text disabled={!canEdit}>
                         {formatMessage(messages.settingsReportFor3rdParty)}
                       </Text>
                     </Row>
@@ -195,6 +200,7 @@ const ReportTemplateMainSettings = ({
                       loading={
                         deleteReportTemplateLogoLoading || imageUploading
                       }
+                      disabled={!canEdit}
                       image={singleReportTemplate.logoUrl}
                       onAddImage={onLogoChange}
                       onDeleteImage={onLogoDelete}
@@ -215,6 +221,7 @@ const ReportTemplateMainSettings = ({
                   <Col>
                     <Box bg={colors.linkWater}>
                       <ApprovableInput
+                        disabled={!canEdit}
                         mr={0}
                         type="singleline"
                         value={singleReportTemplate.name}
@@ -244,6 +251,7 @@ const ReportTemplateMainSettings = ({
                       buttonProps={{
                         color: colors.flamingo,
                         fontWeight: 'bold',
+                        disabled: !canEdit,
                       }}
                       spinnerProps={{ size: 30, width: 2 }}
                     >
