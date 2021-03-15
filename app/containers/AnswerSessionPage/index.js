@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -161,6 +161,18 @@ export function AnswerSessionPage({
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
 
+  const isNewUserSession = useMemo(() => {
+    const { lastAnswerAt } = userSession ?? {};
+
+    return !lastAnswerAt;
+  }, [userSession]);
+
+  const isUserSessionFinished = useMemo(() => {
+    const { finishedAt } = userSession ?? {};
+
+    return Boolean(finishedAt);
+  }, [userSession]);
+
   const location = useLocation();
 
   const { sessionId, interventionId, index } = params;
@@ -169,7 +181,8 @@ export function AnswerSessionPage({
     if (isPreview) fetchIntervention(interventionId);
   }, [interventionId]);
 
-  const previewPossible = !(isPreview && !canPreview(interventionStatus));
+  const previewPossible =
+    !(isPreview && !canPreview(interventionStatus)) && !isUserSessionFinished;
 
   useEffect(() => {
     createUserSession(sessionId);
@@ -277,6 +290,22 @@ export function AnswerSessionPage({
     return formatMessage(messages.previewDisabled);
   };
 
+  const continueButtonText = () => {
+    if (previewPossible || isNullOrUndefined(previewPossible))
+      return isPreview
+        ? formatMessage(messages.continuePreview)
+        : formatMessage(messages.continueSession);
+    return formatMessage(messages.previewDisabled);
+  };
+
+  const buttonText = () => {
+    if (isUserSessionFinished) return formatMessage(messages.sessionFinished);
+
+    if (isNewUserSession || Boolean(index)) return startButtonText();
+
+    return continueButtonText();
+  };
+
   const renderPage = () => <>{renderQuestion()}</>;
 
   if (nextQuestionLoading && interventionStarted) return <Loader />;
@@ -317,7 +346,7 @@ export function AnswerSessionPage({
               loading={userSessionLoading || nextQuestionLoading}
               disabled={!previewPossible}
               onClick={startInterventionAsync}
-              title={startButtonText()}
+              title={buttonText()}
               isDesktop={isDesktop}
             />
           )}

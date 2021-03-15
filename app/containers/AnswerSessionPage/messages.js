@@ -26,9 +26,21 @@ export default defineMessages({
     id: `${scope}.startSession`,
     defaultMessage: 'Start session',
   },
+  continueSession: {
+    id: `${scope}.continueSession`,
+    defaultMessage: 'Continue session',
+  },
   startPreview: {
     id: `${scope}.startPreview`,
     defaultMessage: 'Start preview',
+  },
+  continuePreview: {
+    id: `${scope}.continuePreview`,
+    defaultMessage: 'Continue preview',
+  },
+  sessionFinished: {
+    id: `${scope}.sessionFinished`,
+    defaultMessage: 'Session already finished',
   },
   refetchQuestion: {
     id: `${scope}.refetchQuestion`,

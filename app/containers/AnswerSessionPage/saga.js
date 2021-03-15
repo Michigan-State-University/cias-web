@@ -17,6 +17,7 @@ import LocalStorageService from 'utils/localStorageService';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { makeSelectLocation } from 'containers/App/selectors';
 import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
+import objectToCamelCase from 'utils/objectToCamelCase';
 import {
   SUBMIT_ANSWER_REQUEST,
   PHONETIC_PREVIEW_REQUEST,
@@ -131,7 +132,7 @@ function* createUserSession({ payload: { sessionId } }) {
       objectToSnakeCase({ userSession: { sessionId } }),
     );
 
-    const mappedData = defaultMapper(data);
+    const mappedData = objectToCamelCase(defaultMapper(data));
 
     yield put(createUserSessionSuccess(mappedData));
     yield put(resetPhoneNumberPreview());
