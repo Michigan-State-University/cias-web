@@ -35,7 +35,7 @@ const SectionFormula = ({
     saga: getQuestionGroupsSaga,
   });
 
-  const { sessionId } = useContext(ReportTemplatesContext);
+  const { sessionId, canEdit } = useContext(ReportTemplatesContext);
 
   useEffect(() => {
     getQuestionGroups(sessionId);
@@ -45,7 +45,7 @@ const SectionFormula = ({
     ReportTemplatesContext,
   );
 
-  const [variableChooserOpen, setVariableChooserOpen] = useState();
+  const [variableChooserOpen, setVariableChooserOpen] = useState(false);
 
   const handleFormulaUpdate = newFormula => {
     updateSection(
@@ -60,6 +60,7 @@ const SectionFormula = ({
         <Col>{formatMessage(messages.formula)}</Col>
         <Col align="end">
           <Box
+            disabled={!canEdit}
             onClick={() => {
               setVariableChooserOpen(!variableChooserOpen);
             }}
@@ -94,6 +95,7 @@ const SectionFormula = ({
           placeholder={formatMessage(messages.formulaPlaceholder)}
           value={formula}
           onBlur={handleFormulaUpdate}
+          disabled={!canEdit}
         />
       </Box>
     </>

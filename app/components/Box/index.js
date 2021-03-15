@@ -11,7 +11,9 @@ import {
   positioning,
 } from '../BaseComponentStyles';
 
-const Box = styled.div`
+const Box = styled.div.attrs(({ onClick, disabled }) => ({
+  onClick: disabled ? null : onClick,
+}))`
   width: auto;
   height: auto;
   display: block;
