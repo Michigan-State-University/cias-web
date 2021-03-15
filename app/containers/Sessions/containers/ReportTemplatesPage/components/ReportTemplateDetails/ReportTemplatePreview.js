@@ -77,6 +77,7 @@ const ReportTemplatePreview = ({
                     )}
                     value={singleReportTemplate.summary ?? ''}
                     onBlur={onSummaryChange}
+                    disabled={!canEdit}
                     fontSize={32}
                     maxWidth="none"
                     fontWeight="bold"
