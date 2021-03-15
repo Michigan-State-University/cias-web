@@ -124,12 +124,12 @@ const ImageUpload = ({
 
   return (
     <Box mt={10} width="100%">
-      {isPreview && (
+      {(isPreview || disabled) && (
         <ImageWrapper>
           <Img src={image} alt="image" height="100%" width="100%" />
         </ImageWrapper>
       )}
-      {!isPreview && (
+      {!isPreview && !disabled && (
         <HoverableBox
           width="100%"
           onMouseEnter={() => setHovered(true)}
