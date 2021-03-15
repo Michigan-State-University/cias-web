@@ -19,6 +19,9 @@ import {
   CLEAN_GROUPS,
   GET_QUESTION_GROUPS_ERROR,
   GET_QUESTION_GROUPS_REQUEST,
+  COPY_QUESTIONS_SUCCESS,
+  COPY_QUESTIONS_ERROR,
+  COPY_QUESTIONS_REQUEST,
 } from './constants';
 
 export const initialState = {
@@ -126,6 +129,24 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         draft.groups = state.cache.groups;
         draft.cache.groups = null;
 
+        break;
+
+      case COPY_QUESTIONS_REQUEST:
+        draft.loaders.questionGroupsLoading = true;
+        break;
+      case COPY_QUESTIONS_SUCCESS:
+        const { group } = payload;
+        if (group) {
+          const groupsList = [...state.groups, group];
+          draft.groups = groupsList;
+          draft.cache.groups = groupsList;
+        }
+        draft.loaders.questionGroupsLoading = false;
+        break;
+
+      case COPY_QUESTIONS_ERROR:
+        draft.loaders.questionGroupsLoading = false;
+        draft.groups = state.cache.groups;
         break;
     }
   });

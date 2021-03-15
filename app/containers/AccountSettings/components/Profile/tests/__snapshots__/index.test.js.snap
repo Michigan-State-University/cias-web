@@ -145,7 +145,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                   <div
                     class=" css-1uccc91-singleValue"
                   >
-                    America/New_York (UTC -05:00)
+                    America/New_York (UTC -04:00)
                   </div>
                   <div
                     class="css-b8ldur-Input"

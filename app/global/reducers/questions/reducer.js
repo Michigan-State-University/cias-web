@@ -60,7 +60,12 @@ import {
   getNewQuestionIdInsideGroup,
   getNewQuestionIdInPreviousGroups,
 } from './utils';
-import { GROUP_QUESTIONS_SUCCESS } from '../questionGroups/constants';
+import {
+  GROUP_QUESTIONS_SUCCESS,
+  COPY_QUESTIONS_SUCCESS,
+  COPY_QUESTIONS_REQUEST,
+  COPY_QUESTIONS_ERROR,
+} from '../questionGroups/constants';
 
 export const initialState = {
   selectedQuestion: '',
@@ -417,6 +422,21 @@ export const questionsReducer = (state = initialState, action) =>
         if (isCurrent) draft.questions = [...state.questions, question];
         break;
       case COPY_EXTERNALLY_QUESTION_ERROR:
+        draft.loaders.updateQuestionLoading = false;
+        draft.questions = state.cache.questions;
+        break;
+      case COPY_QUESTIONS_REQUEST:
+        draft.loaders.updateQuestionLoading = true;
+        break;
+      case COPY_QUESTIONS_SUCCESS:
+        const { questions } = action.payload;
+        const questionsList = [...state.questions, ...questions];
+        draft.questions = questionsList;
+        draft.cache.questions = questionsList;
+        draft.loaders.updateQuestionLoading = false;
+        break;
+
+      case COPY_QUESTIONS_ERROR:
         draft.loaders.updateQuestionLoading = false;
         draft.questions = state.cache.questions;
         break;

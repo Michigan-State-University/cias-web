@@ -85,7 +85,6 @@ import { canEdit } from 'models/Status/statusPermissions';
 
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
 import { reorderScope } from 'models/Session/ReorderScope';
-import appStages from 'global/appStages';
 import { FinishGroupType } from 'models/Session/GroupTypes';
 import scrollByRef from 'utils/scrollByRef';
 import editInterventionPageSaga from './saga';
@@ -139,22 +138,21 @@ function EditSessionPage({
   const groupIds = groups.map(({ id }) => id);
 
   const groupActions = [
-    ...(process.env.APP_STAGE === appStages.dev.id
-      ? [
-          {
-            label: <FormattedMessage {...messages.duplicate} />,
-            inactiveIcon: copy,
-            activeIcon: copyActive,
-            action: () => copyQuestions(selectedSlides),
-          },
-        ]
-      : []),
     {
       label: <FormattedMessage {...messages.group} />,
       inactiveIcon: groupIcon,
       activeIcon: groupIconActive,
       action: () => {
         groupQuestions(selectedSlides, params.sessionId);
+        setSelectedSlides([]);
+      },
+    },
+    {
+      label: <FormattedMessage {...messages.duplicate} />,
+      inactiveIcon: copy,
+      activeIcon: copyActive,
+      action: () => {
+        copyQuestions(selectedSlides, params.sessionId);
         setSelectedSlides([]);
       },
     },
