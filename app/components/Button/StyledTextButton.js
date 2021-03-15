@@ -17,6 +17,7 @@ const StyledTextButton = styled.button`
   line-height: 17px;
   padding: 2px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  ${({ disabled }) => disabled && 'opacity: 0.7'};
   ${margin};
   ${layout};
   ${text};
