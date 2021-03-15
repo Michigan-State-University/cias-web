@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
-import { themeColors } from 'theme';
-import { colors } from './theme/colors';
+import { themeColors, colors, fontSizes, lineHeights } from 'theme';
+
 import 'fonts.css';
 
 const GlobalStyle = createGlobalStyle`
@@ -27,6 +27,11 @@ const GlobalStyle = createGlobalStyle`
     min-width: 100%;
     display: flex;
     flex-direction: column;
+  }
+
+  div {
+    font-size: ${fontSizes.small};
+    line-height: ${lineHeights.small};
   }
 
   p,
