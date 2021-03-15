@@ -31,6 +31,7 @@ const ReportTemplatePreview = ({
     sessionId,
     singleReportTemplate,
     loaders: { updateReportTemplateLoading },
+    canEdit,
   } = useContext(ReportTemplatesContext);
 
   useEffect(() => {
@@ -98,6 +99,7 @@ const ReportTemplatePreview = ({
                   <DashedButton
                     loading={isAddingSection}
                     onClick={handleAddSection}
+                    disabled={!canEdit}
                   >
                     {formatMessage(messages.addSectionButton)}
                   </DashedButton>
