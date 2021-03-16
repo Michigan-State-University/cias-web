@@ -15,6 +15,14 @@ export default defineMessages({
     id: `${scope}.manageSlides`,
     defaultMessage: 'Manage slides',
   },
+  expandGroups: {
+    id: `${scope}.expandGroups`,
+    defaultMessage: 'Expand groups',
+  },
+  collapseGroups: {
+    id: `${scope}.collapseGroups`,
+    defaultMessage: 'Collapse groups',
+  },
   duplicate: {
     id: `${scope}.duplicate`,
     defaultMessage: 'Duplicate',
