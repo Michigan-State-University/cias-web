@@ -4,11 +4,12 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { injectReducer } from 'redux-injectors';
 import find from 'lodash/find';
 
 import Row from 'components/Row';
@@ -28,11 +29,10 @@ import {
   makeSelectCurrentSessionIndex,
   changeCurrentSession,
 } from 'global/reducers/intervention';
-import { getQuestionsRequest } from 'global/reducers/questions';
-import { injectReducer } from 'redux-injectors';
 import {
   questionGroupsReducer,
   makeSelectQuestionGroupsSessionId,
+  getQuestionGroupsRequest,
 } from 'global/reducers/questionGroups';
 import messages from './messages';
 
@@ -52,8 +52,12 @@ function SessionBranching({
   changeSessionIndex,
   fetchQuestions,
   disabled,
-  activeInterventionId,
+  activeSessionId,
 }) {
+  useEffect(() => {
+    if (activeSessionId) fetchQuestions(activeSessionId);
+  }, [activeSessionId]);
+
   const displayPatternTargetText = target => {
     if (target.id === '') return formatMessage(messages.selectSession);
     const session = find(
@@ -69,7 +73,7 @@ function SessionBranching({
     if (position !== sessionIndex + 1) {
       changeSessionIndex(position - 1);
     }
-    if (id !== activeInterventionId) {
+    if (id !== activeSessionId) {
       fetchQuestions(id);
     }
   };
@@ -116,6 +120,7 @@ function SessionBranching({
               onUpdateCase={onUpdateCase}
               displayPatternTargetText={displayPatternTargetText}
               interventionBranching
+              includeAllVariables
             />
           </Column>
         </Row>
@@ -140,13 +145,13 @@ SessionBranching.propTypes = {
   changeSessionIndex: PropTypes.func,
   fetchQuestions: PropTypes.func,
   disabled: PropTypes.bool,
-  activeInterventionId: PropTypes.string,
+  activeSessionId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
   sessionIndex: makeSelectCurrentSessionIndex(),
-  activeInterventionId: makeSelectQuestionGroupsSessionId(),
+  activeSessionId: makeSelectQuestionGroupsSessionId(),
 });
 
 const mapDispatchToProps = {
@@ -156,7 +161,7 @@ const mapDispatchToProps = {
   onUpdateCase: updateFormulaCase,
   onChangeFormulaStatus: changeFormulaStatus,
   changeSessionIndex: changeCurrentSession,
-  fetchQuestions: getQuestionsRequest,
+  fetchQuestions: getQuestionGroupsRequest,
 };
 
 const withConnect = connect(
