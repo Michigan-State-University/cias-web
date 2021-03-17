@@ -4,6 +4,7 @@ import set from 'lodash/set';
 import { actionBuilder } from 'utils/actionBuilder';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { createSession, createIntervention } from 'utils/reducerCreators';
+import { editInterventionRequest } from 'global/reducers/intervention';
 import {
   FETCH_INTERVENTION_REQUEST,
   FETCH_INTERVENTION_SUCCESS,
@@ -11,7 +12,6 @@ import {
   CREATE_INTERVENTION_REQUEST,
   CREATE_INTERVENTION_SUCCESS,
   CREATE_INTERVENTION_ERROR,
-  EDIT_INTERVENTION_REQUEST,
   EDIT_INTERVENTION_SUCCESS,
   EDIT_INTERVENTION_ERROR,
   SEND_INTERVENTION_CSV_REQUEST,
@@ -124,8 +124,8 @@ describe('intervention reducer', () => {
   });
 
   it('EDIT_INTERVENTION_REQUEST', () => {
-    const payloadValue = { path: 'status', value: 'published' };
-    const action = actionBuilder(EDIT_INTERVENTION_REQUEST, payloadValue);
+    const payloadValue = { status: 'published' };
+    const action = editInterventionRequest(payloadValue);
 
     const expectedState = cloneDeep(mockState);
     expectedState.intervention.status = 'published';
@@ -141,8 +141,6 @@ describe('intervention reducer', () => {
     );
 
     const expectedState = cloneDeep(mockState);
-    expectedState.intervention = payloadIntervention.intervention;
-    expectedState.cache.intervention = payloadIntervention.intervention;
 
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });

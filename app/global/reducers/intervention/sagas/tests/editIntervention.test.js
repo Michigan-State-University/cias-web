@@ -31,12 +31,15 @@ describe('editIntervention saga', () => {
     const apiResponse = apiInterventionResponse();
     apiResponse.data.attributes.name = mockIntervention.name;
 
-    return expectSaga(editIntervention)
+    return expectSaga(editIntervention, {
+      payload: {
+        intervention: { id: mockIntervention.id, name: mockIntervention.name },
+      },
+    })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.patch), { data: apiResponse }]])
       .put(
         editInterventionSuccess({
-          ...mockIntervention,
           ...defaultMapper(apiResponse.data),
         }),
       )
@@ -44,7 +47,11 @@ describe('editIntervention saga', () => {
   });
   it('Check editIntervention error connection', () => {
     const error = new Error('test');
-    return expectSaga(editIntervention)
+    return expectSaga(editIntervention, {
+      payload: {
+        intervention: { id: mockIntervention.id, name: mockIntervention.name },
+      },
+    })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.patch), throwError(error)]])
       .call(toast.error, formatMessage(globalMessages.editInterventionError), {

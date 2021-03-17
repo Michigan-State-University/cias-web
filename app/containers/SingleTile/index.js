@@ -17,10 +17,7 @@ import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
 import globalMessages from 'global/i18n/globalMessages';
 
-import {
-  sendInterventionCsvRequest,
-  editInterventionRequest,
-} from 'global/reducers/intervention';
+import { sendInterventionCsvRequest } from 'global/reducers/intervention';
 import {
   copyInterventionRequest,
   archiveInterventionRequest,
@@ -191,7 +188,6 @@ SingleTile.propTypes = {
   link: PropTypes.string,
   sendCsv: PropTypes.func,
   copyIntervention: PropTypes.func,
-  editIntervention: PropTypes.func,
   archiveIntervention: PropTypes.func,
   userRoles: PropTypes.arrayOf(PropTypes.string),
 };
@@ -203,7 +199,6 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
   sendCsv: sendInterventionCsvRequest,
-  editIntervention: editInterventionRequest,
   archiveIntervention: archiveInterventionRequest,
 };
 

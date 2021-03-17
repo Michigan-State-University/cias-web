@@ -1,6 +1,7 @@
 import produce from 'immer';
 import set from 'lodash/set';
 import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
 import sessionSettingsReducer from './sessionSettings/reducer';
@@ -123,14 +124,17 @@ export const interventionReducer = (state = initialState, action) =>
       case CREATE_INTERVENTION_ERROR:
         break;
       case EDIT_INTERVENTION_REQUEST:
-        set(draft.intervention, action.payload.path, action.payload.value);
+        draft.intervention = {
+          ...state.intervention,
+          ...action.payload.intervention,
+        };
         break;
-      case EDIT_INTERVENTION_SUCCESS:
-        draft.intervention = action.payload.intervention;
-        draft.cache.intervention = action.payload.intervention;
+      case EDIT_INTERVENTION_SUCCESS: {
+        draft.cache.intervention = cloneDeep(state.intervention);
         break;
+      }
       case EDIT_INTERVENTION_ERROR:
-        draft.intervention = draft.cache.intervention;
+        draft.intervention = cloneDeep(state.cache.intervention);
         break;
       case SEND_INTERVENTION_CSV_REQUEST:
         draft.loaders.sendCsvLoading = true;

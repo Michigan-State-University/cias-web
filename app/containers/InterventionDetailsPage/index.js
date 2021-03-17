@@ -74,6 +74,7 @@ import { reorderScope } from 'models/Session/ReorderScope';
 import { reorder } from 'utils/reorder';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 
+import { archived } from 'models/Status/StatusTypes';
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
@@ -81,7 +82,7 @@ import SessionCreateButton from './components/SessionCreateButton';
 import SessionListItem from './components/SessionListItem';
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
-import { updateStatuses } from './utils';
+import { nextStatus, updateStatuses } from './utils';
 
 export function InterventionDetailsPage({
   intl: { formatMessage },
@@ -154,8 +155,9 @@ export function InterventionDetailsPage({
     copyIntervention({ interventionId: id, withoutRedirect: true });
   const handleArchiveIntervention = () =>
     editIntervention({
-      path: 'status_event',
-      value: 'to_archive',
+      status_event: 'to_archive',
+      status: archived,
+      id: interventionId,
     });
   const handleDeleteSession = sessionId => {
     deleteSession(sessionId, id);
@@ -216,12 +218,13 @@ export function InterventionDetailsPage({
     });
   };
 
-  const editName = val => editIntervention({ path: 'name', value: val });
+  const editName = val => editIntervention({ name: val, id: interventionId });
 
   const handleChangeStatus = () =>
     editIntervention({
-      path: 'status_event',
-      value: get(updateStatuses, status, ''),
+      status_event: get(updateStatuses, status, ''),
+      status: get(nextStatus, status, ''),
+      id: interventionId,
     });
 
   const handleSendCsv = () => sendCsv(id);
