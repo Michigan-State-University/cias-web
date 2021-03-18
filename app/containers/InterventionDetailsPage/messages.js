@@ -46,11 +46,11 @@ export default defineMessages({
   },
   duplicate: {
     id: `${scope}.duplicate`,
-    defaultMessage: 'Duplicate intervention',
+    defaultMessage: 'Duplicate',
   },
   archive: {
     id: `${scope}.archive`,
-    defaultMessage: 'Archive intervention',
+    defaultMessage: 'Archive',
   },
   modalTitle: {
     id: `${scope}.modalTitle`,

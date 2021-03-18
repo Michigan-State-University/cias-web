@@ -34,6 +34,7 @@ import Modal from 'components/Modal';
 import SelectResearchers from 'containers/SelectResearchers';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { Roles } from 'models/User/UserRoles';
+import { canArchive } from 'models/Status/statusPermissions';
 import messages from './messages';
 import {
   TileContainer,
@@ -97,7 +98,7 @@ const SingleTile = ({
       label: formatMessage(messages.sendCopy),
       id: 'Send copy to researcher',
     },
-    ...((status === 'closed' && [
+    ...((canArchive(status) && [
       {
         icon: binNoBg,
         action: handleArchiveIntervention,
