@@ -100,6 +100,7 @@ const ReportTemplatesList = ({
     fetchReportTemplatesError,
     addReportTemplateLoading,
     selectedReportId,
+    canEdit,
   ]);
 
   return (

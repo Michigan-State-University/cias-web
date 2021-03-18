@@ -223,7 +223,6 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
       case DELETE_REPORT_TEMPLATE_SUCCESS: {
         draft.loaders.deleteReportTemplateLoading = false;
         draft.errors.deleteReportTemplateError = null;
-
         break;
       }
 

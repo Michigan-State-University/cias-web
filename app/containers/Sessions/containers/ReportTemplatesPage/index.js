@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
@@ -73,6 +73,8 @@ const ReportTemplatesPage = ({
     if (loaders.shouldRefetch) fetchReportTemplates(sessionId);
   }, [loaders.shouldRefetch]);
 
+  const canEdit = useMemo(() => canEditReportTemplate(status), [status]);
+
   return (
     <>
       <Helmet>
@@ -89,7 +91,7 @@ const ReportTemplatesPage = ({
             sessionId,
             selectedTemplateSectionId,
             selectedTemplateSection,
-            canEdit: canEditReportTemplate(status),
+            canEdit,
           }}
         >
           <ReportTemplatesList />
