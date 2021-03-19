@@ -20,7 +20,9 @@ const DaysAfterOption = ({
   const getValue = () => (isNullOrUndefined(value) ? '' : value);
   return (
     <>
-      <Text fontSize={15}>{formatMessage(messages.send)}</Text>
+      <Text fontSize={15} wordBreak="normal">
+        {formatMessage(messages.send)}
+      </Text>
       <StyledInputWrapper>
         <ApprovableInput
           disabled={disabled}

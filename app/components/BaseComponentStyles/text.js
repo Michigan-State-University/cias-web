@@ -22,6 +22,7 @@ const text = props => ({
   },
   lineHeight: props.lineHeight || '',
   textAlign: props.textAlign || '',
+  wordBreak: props.wordBreak || '',
 });
 
 text.propTypes = {
@@ -36,6 +37,7 @@ text.propTypes = {
   hoverDecoration: PropTypes.oneOf(['underline', 'overline', 'line-through']),
   lineHeight: PropTypes.string,
   textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify']),
+  wordBreak: PropTypes.oneOf(['normal', 'break-all', 'keep-all']),
 };
 
 export { text };

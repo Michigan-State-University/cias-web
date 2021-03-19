@@ -392,9 +392,9 @@ export function InterventionDetailsPage({
 
         <GRow>
           <GCol
-            md={6}
-            sm={12}
-            style={{ order: ['sm', 'xs'].includes(screenClass) ? 1 : 0 }}
+            lg={6}
+            md={12}
+            style={{ order: ['md', 'sm', 'xs'].includes(screenClass) ? 1 : 0 }}
           >
             {renderList()}
             {createSessionLoading && (
