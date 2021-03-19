@@ -116,6 +116,7 @@ const RenderQuestionDetails = ({
                 onBlur={val =>
                   changeGroupName(val, sessionId, currentGroupScope.id)
                 }
+                disabled={!editingPossible}
               />
               <MSULogo logoUrl={logoUrl} />
             </Row>
@@ -157,12 +158,12 @@ const RenderQuestionDetails = ({
                     )}
                     {video && (
                       <Row mt={10}>
-                        <QuestionVideo />
+                        <QuestionVideo disabled={!editingPossible} />
                       </Row>
                     )}
                     {image && (
                       <Row mt={10}>
-                        <QuestionImage />
+                        <QuestionImage disabled={!editingPossible} />
                       </Row>
                     )}
                   </>
@@ -186,12 +187,12 @@ const RenderQuestionDetails = ({
                     )}
                     {video && !isNullOrUndefined(videoUrl) && (
                       <Row mt={10}>
-                        <QuestionVideo />
+                        <QuestionVideo disabled={!editingPossible} />
                       </Row>
                     )}
                     {image && !isNullOrUndefined(imageUrl) && (
                       <Row mt={10}>
-                        <QuestionImage />
+                        <QuestionImage disabled={!editingPossible} />
                       </Row>
                     )}
                   </>

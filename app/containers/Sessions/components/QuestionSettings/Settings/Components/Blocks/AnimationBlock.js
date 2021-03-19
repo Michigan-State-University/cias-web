@@ -44,7 +44,7 @@ const AnimationBlock = ({
 
   return (
     <>
-      <ClearAnimationButton blockIndex={blockIndex} />
+      <ClearAnimationButton blockIndex={blockIndex} disabled={disabled} />
       {getPossibleAnimations(block.type, formatMessage).map(
         (anim, animIndex) => {
           const isActive = block.animation === camelCase(anim.toLowerCase());

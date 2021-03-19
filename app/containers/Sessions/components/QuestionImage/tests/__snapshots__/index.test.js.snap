@@ -134,6 +134,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  position: relative;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -224,6 +225,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
 <div>
   <div
     class="c0"
+    style="position: relative; pointer-events: all;"
     width="100%"
   >
     <div

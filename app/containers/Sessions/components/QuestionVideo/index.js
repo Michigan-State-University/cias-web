@@ -28,6 +28,7 @@ const QuestionVideo = ({
   selectedQuestion: { video_url: videoUrl },
   updateVideo,
   isNarratorTab,
+  disabled,
 }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -52,12 +53,12 @@ const QuestionVideo = ({
 
   return (
     <Box width="100%">
-      {isNarratorTab && (
+      {(isNarratorTab || disabled) && (
         <PlayerWrapper>
           <Player url={videoUrl} controls width="100%" height="100%" />
         </PlayerWrapper>
       )}
-      {!isNarratorTab && (
+      {!isNarratorTab && !disabled && (
         <HoverableBox
           width="100%"
           onMouseEnter={() => setHovered(true)}
@@ -92,6 +93,7 @@ QuestionVideo.propTypes = {
   }),
   updateVideo: PropTypes.func,
   isNarratorTab: PropTypes.bool,
+  disabled: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

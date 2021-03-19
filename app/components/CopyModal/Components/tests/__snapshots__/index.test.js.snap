@@ -61,18 +61,7 @@ Object {
   background-color: rgba(248,251,255,1);
 }
 
-.c13 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c24 {
+.c15 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -140,101 +129,6 @@ Object {
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
-  -webkit-box-pack: start;
-  -webkit-justify-content: flex-start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  justify-items: flex-start;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  padding-right: 25px;
-  padding-left: 25px;
-  width: 100%;
-  cursor: pointer;
-}
-
-.c14:hover {
-  background-color: rgba(200,102,234,0.1);
-}
-
-.c16 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-right: 10px;
-  width: 100%;
-}
-
-.c20 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-right: 10px;
-}
-
-.c22 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  margin-right: 25px;
-  margin-left: 25px;
-}
-
-.c23 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
   margin-top: 20px;
 }
 
@@ -254,26 +148,6 @@ Object {
   border-radius: 5px;
   max-height: 300px;
   overflow: scroll;
-}
-
-.c17 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  max-width: 170px;
-}
-
-.c15 {
-  width: auto;
-  height: auto;
-  margin-right: 10px;
-}
-
-.c21 {
-  width: auto;
-  height: auto;
-  cursor: pointer;
 }
 
 .c5 {
@@ -305,11 +179,11 @@ Object {
   color: rgba(200,102,234,1);
 }
 
-.c18 {
+.c13 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  font-size: 16px;
+  font-size: 12px;
   color: #2F3850;
 }
 
@@ -323,32 +197,6 @@ Object {
   font-weight: 700;
   color: rgba(200,102,234,1);
   color: rgba(200,102,234,1);
-}
-
-.c19 {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 16px;
-  color: #2F3850;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 @media only screen and (min-width:768px) {
@@ -479,60 +327,21 @@ Object {
               <div
                 class="c12"
               >
-                <div
+                <p
                   class="c13"
+                  font-size="12"
                 >
-                  <div
-                    class="c14"
-                    width="100%"
-                  >
-                    <img
-                      class="c15"
-                      src="IMAGE_MOCK"
-                    />
-                    <div
-                      class="c16"
-                      width="100%"
-                    >
-                      <div
-                        class="c13"
-                      >
-                        <div
-                          class="c17"
-                        >
-                          <div
-                            class="c1"
-                          >
-                            <p
-                              class="c18 c19"
-                              font-size="16"
-                            />
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        class="c20"
-                      >
-                        <img
-                          class="c21"
-                          src="IMAGE_MOCK"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="c22"
-                  />
-                </div>
+                  Empty
+                </p>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="c23"
+          class="c14"
         >
           <button
-            class="c24"
+            class="c15"
             color="primary"
             disabled=""
           />
@@ -603,51 +412,12 @@ Object {
             <div
               class="Column-sc-4zswzq-0 gLBXpw"
             >
-              <div
-                class="Column-sc-4zswzq-0 ekpwZH"
+              <p
+                class="Text-e4p0w3-0 fJvJkE"
+                font-size="12"
               >
-                <div
-                  class="Row-y1cs0u-0 ezqrjH"
-                  width="100%"
-                >
-                  <img
-                    class="Img-sc-55j3su-0 cYsgyu"
-                    src="IMAGE_MOCK"
-                  />
-                  <div
-                    class="Row-y1cs0u-0 klnYuL"
-                    width="100%"
-                  >
-                    <div
-                      class="Column-sc-4zswzq-0 ekpwZH"
-                    >
-                      <div
-                        class="Box-sc-1vhutan-0 jdLSQs"
-                      >
-                        <div
-                          class="Row-y1cs0u-0 dskFsL"
-                        >
-                          <p
-                            class="Text-e4p0w3-0 styled__StyledEllipsisText-h4mjfj-0 jrKyrE hPLXLE"
-                            font-size="16"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      class="Row-y1cs0u-0 eUCsFA"
-                    >
-                      <img
-                        class="Img-sc-55j3su-0 kDGTCK"
-                        src="IMAGE_MOCK"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="Row-y1cs0u-0 gjqYvI"
-                />
-              </div>
+                Empty
+              </p>
             </div>
           </div>
         </div>

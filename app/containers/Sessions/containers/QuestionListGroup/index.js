@@ -75,7 +75,7 @@ const QuestionListGroup = ({
             questions={questions}
             question={question}
             sessionId={sessionId}
-            disabled={editingPossible}
+            disabled={!editingPossible}
             interventionStatus={interventionStatus}
             noDnd={noDnd}
           />
@@ -140,11 +140,13 @@ const QuestionListGroup = ({
                 maxWidth="initial"
                 onBlur={val => changeGroupName(val, sessionId, id)}
                 onFocus={selectInputText}
+                disabled={!editingPossible}
               />
             </Box>
             {!noDnd && (
               <Img
                 src={reorderIcon}
+                disabled={!editingPossible}
                 {...providedGroupDraggable.dragHandleProps}
               />
             )}
@@ -158,7 +160,12 @@ const QuestionListGroup = ({
   );
 
   const renderGroupWithDnd = () => (
-    <Draggable key={`group-${id}`} draggableId={id} index={groupIndex}>
+    <Draggable
+      key={`group-${id}`}
+      draggableId={id}
+      index={groupIndex}
+      isDragDisabled={!editingPossible}
+    >
       {providedGroupDraggable => renderGroup(providedGroupDraggable)}
     </Draggable>
   );

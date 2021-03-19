@@ -75,7 +75,6 @@ function SessionListItem({
       icon: copy,
       action: () => setCopyOpen(true),
       color: colors.bluewood,
-      disabled,
     },
     {
       id: 'duplicate',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -81,6 +81,10 @@ const QuestionListItem = ({
   const isFinishScreen = type === finishQuestion.id;
   const isNameScreen = type === nameQuestion.id;
 
+  useEffect(() => {
+    if (selectedQuestionIndex === id) beforeRender();
+  }, [selectedQuestionIndex]);
+
   const handleSelectClick = () => {
     setDraggable(false);
     if (selectedQuestionIndex !== id) {
@@ -130,17 +134,22 @@ const QuestionListItem = ({
       label: <FormattedMessage {...messages.duplicate} />,
       action: handleCopy,
       color: colors.black,
+      disabled,
     },
     {
       id: 'delete',
       label: <FormattedMessage {...messages.delete} />,
       action: () => setDeleteOpen(true),
       color: colors.flamingo,
+      disabled,
     },
   ];
 
   const onChangeItem = () => {
     handleSelectClick(index);
+  };
+
+  const beforeRender = () => {
     changeNarratorBlockIndex(-1);
     toggleSettings({ index, questionIndex: selectedQuestionIndex });
   };
@@ -222,7 +231,7 @@ const QuestionListItem = ({
               </Row>
             )}
           </Column>
-          {!manage && !disabled && !isFinishScreen && (
+          {!manage && !isFinishScreen && (
             <Column xs={1}>
               <Dropdown options={options} />
             </Column>
@@ -237,6 +246,7 @@ const QuestionListItem = ({
       key={`group-${groupId}-item-${id}`}
       draggableId={id}
       index={index}
+      isDragDisabled={disabled}
     >
       {provided => (
         <Box

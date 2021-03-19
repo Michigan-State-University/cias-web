@@ -5,8 +5,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   class="Column-sc-4zswzq-0 fgvXEf"
 >
   <div
-    class="Row-y1cs0u-0 cbDOds"
-    disabled=""
+    class="Row-y1cs0u-0 dskFsL"
   >
     <div
       class="Column-sc-4zswzq-0 ekpwZH"
@@ -88,8 +87,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="Column-sc-4zswzq-0 bdrEBY"
-          disabled=""
+          class="Column-sc-4zswzq-0 ekpwZH"
           value=""
         >
           <p
@@ -97,7 +95,8 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
             width="fit-content"
           />
           <input
-            class="Input-t9j2q5-0 dLTYGo"
+            class="Input-t9j2q5-0 dVjtvP"
+            disabled=""
             name="number"
             placeholder="Enter phone number"
             type="tel"

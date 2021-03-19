@@ -209,6 +209,8 @@ function EditSessionPage({
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
   );
 
+  const editingPossible = canEdit(interventionStatus);
+
   const groupActions = [
     {
       label: <FormattedMessage {...messages.group} />,
@@ -218,6 +220,7 @@ function EditSessionPage({
         groupQuestions(selectedSlides, params.sessionId);
         setSelectedSlides([]);
       },
+      disabled: !editingPossible,
     },
     {
       label: <FormattedMessage {...messages.duplicate} />,
@@ -227,6 +230,7 @@ function EditSessionPage({
         copyQuestions(selectedSlides, params.sessionId);
         setSelectedSlides([]);
       },
+      disabled: !editingPossible,
     },
     {
       label: <FormattedMessage {...messages.delete} />,
@@ -236,6 +240,7 @@ function EditSessionPage({
         deleteQuestions(selectedSlides, params.sessionId, groupIds);
         setSelectedSlides([]);
       },
+      disabled: !editingPossible,
     },
     {
       label: <FormattedMessage {...messages.shareCopy} />,
@@ -246,8 +251,6 @@ function EditSessionPage({
   ];
 
   useLockEditSessionPageScroll();
-
-  const editingPossible = canEdit(interventionStatus);
 
   const containerBottomRef = useRef(null);
 
@@ -446,7 +449,7 @@ function EditSessionPage({
                       {filteredGroups.map((questionGroup, index) => (
                         <QuestionListGroup
                           index={index}
-                          disabled={!editingPossible}
+                          editingPossible={editingPossible}
                           changeGroupName={changeGroupName}
                           checkSelectedGroup={checkSelectedGroup}
                           sessionId={params.sessionId}
@@ -473,7 +476,7 @@ function EditSessionPage({
               {finishGroup && (
                 <QuestionListGroup
                   noDnd
-                  disabled={!editingPossible}
+                  editingPossible={editingPossible}
                   changeGroupName={changeGroupName}
                   checkSelectedGroup={checkSelectedGroup}
                   sessionId={params.sessionId}

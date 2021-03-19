@@ -122,7 +122,7 @@ const SpeechBlock = ({
 
   return (
     <Column>
-      <ClearAnimationButton blockIndex={blockIndex} />
+      <ClearAnimationButton blockIndex={blockIndex} disabled={disabled} />
       {currentQuestionType === feedbackQuestion.id &&
         block.type !== readQuestionBlockType && (
           <>
