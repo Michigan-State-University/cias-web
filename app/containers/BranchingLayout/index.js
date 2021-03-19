@@ -40,6 +40,7 @@ function BranchingLayout({
   onVariableChooserOpen,
   disabled,
   includeAllVariables,
+  includeCurrentQuestion,
 }) {
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
   const [variableChooserOpen, setVariableChooserOpen] = useState(false);
@@ -101,6 +102,7 @@ function BranchingLayout({
                     onFormulaUpdate(`${formula.payload}${value}`, id);
                   }}
                   includeAllVariables={includeAllVariables}
+                  includeCurrentQuestion={includeCurrentQuestion}
                 />
               </Box>
             )}
@@ -114,6 +116,7 @@ function BranchingLayout({
                     onFormulaUpdate(`${formula.payload}${value}`, id);
                   }}
                   includeAllVariables={includeAllVariables}
+                  includeCurrentQuestion={includeCurrentQuestion}
                 />
               </Box>
             )}
@@ -215,6 +218,11 @@ BranchingLayout.propTypes = {
   onVariableChooserOpen: PropTypes.func,
   disabled: PropTypes.bool,
   includeAllVariables: PropTypes.bool,
+  includeCurrentQuestion: PropTypes.bool,
+};
+
+BranchingLayout.defaultProps = {
+  includeCurrentQuestion: true,
 };
 
 export default injectIntl(BranchingLayout);

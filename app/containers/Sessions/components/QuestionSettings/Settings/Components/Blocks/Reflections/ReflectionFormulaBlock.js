@@ -165,6 +165,7 @@ const ReflectionFormulaBlock = ({
             setVariableChooserOpen(false);
             onFormulaUpdate(`${block.payload}${value}`, id, blockIndex);
           }}
+          includeCurrentQuestion={false}
         />
       </Box>
       <Box bg={colors.linkWater} width="100%" mt={10} mb={40} px={8} py={8}>

@@ -13,6 +13,8 @@ export const DropdownContainer = styled.div.attrs(props => ({
   overflow: hidden;
   height: 50px;
   padding: 5px 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   border-radius: ${borders.borderRadius};
   background-color: ${colors.linkWater};
   ${layout};
