@@ -16,12 +16,14 @@ import { createTestStore } from 'utils/testUtils/storeUtils';
 import SettingsPanel from '../index';
 
 describe('<SettingsPanel />', () => {
+  const intervention = {
+    name: 'Name of the session',
+    id: 'as120s-as12cs',
+  };
+
   const initialState = {
     intervention: {
-      intervention: {
-        name: 'Name of the session',
-        id: 'as120s-as12cs',
-      },
+      intervention,
       loaders: {
         fetchInterventionLoading: false,
       },
@@ -33,6 +35,7 @@ describe('<SettingsPanel />', () => {
   const store = createTestStore(initialState);
 
   const defaultProps = {
+    intervention,
     match: { params: { intervention: { id: 'as120s-as12cs' } } },
   };
 

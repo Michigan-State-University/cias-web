@@ -86,4 +86,13 @@ export default defineMessages({
     id: `${scope}.filename`,
     defaultMessage: 'participants_emails_{interventionName}_access',
   },
+  logoHeader: {
+    id: `${scope}.logoHeader`,
+    defaultMessage: 'Put custom logo',
+  },
+  logoText: {
+    id: `${scope}.logoText`,
+    defaultMessage:
+      'Unless you provide a custom image, the logo of Michigan State University will be displayed by default. ',
+  },
 });

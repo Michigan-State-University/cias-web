@@ -161,6 +161,8 @@ export function AnswerSessionPage({
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
 
+  const { logoUrl } = userSession ?? {};
+
   const isNewUserSession = useMemo(() => {
     const { lastAnswerAt } = userSession ?? {};
 
@@ -355,6 +357,7 @@ export function AnswerSessionPage({
               <Box width="100%">
                 <Row justify="end" padding={30}>
                   <MSULogo
+                    logoUrl={logoUrl}
                     {...(isDesktop
                       ? { position: 'absolute', right: '30px' }
                       : {})}

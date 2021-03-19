@@ -3,78 +3,82 @@
 exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-1vhutan-0 styled__StyledBox-w5tasd-0 cVZZaQ dBQBvk"
+    class="Column-sc-4zswzq-0 ekpwZH"
   >
     <div
-      class="Column-sc-4zswzq-0 jnrASG"
-      width="100%"
+      class="Box-sc-1vhutan-0 styled__StyledBox-w5tasd-0 cVZZaQ dBQBvk"
     >
-      <h2
-        class="H2-uw8lbl-0 bzPnix"
-      >
-        <span>
-          Who can access this intervention?
-        </span>
-      </h2>
       <div
-        class="Box-sc-1vhutan-0 dnOjoG"
+        class="Column-sc-4zswzq-0 jnrASG"
+        width="100%"
       >
-        <div
-          class="Row-y1cs0u-0 bNHlls"
-          disabled=""
-          width="fit-content"
+        <h2
+          class="H2-uw8lbl-0 bzPnix"
         >
-          <img
-            class="Img-sc-55j3su-0 coTMv"
-            src="IMAGE_MOCK"
-          />
-          <p
-            class="Text-e4p0w3-0 eDRzdo"
-            font-size="15"
-            font-weight="regular"
-          >
-            <span>
-              Anyone with the link
-            </span>
-          </p>
-        </div>
+          <span>
+            Who can access this intervention?
+          </span>
+        </h2>
         <div
-          class="Row-y1cs0u-0 bNHlls"
-          disabled=""
-          width="fit-content"
+          class="Box-sc-1vhutan-0 dnOjoG"
         >
-          <img
-            class="Img-sc-55j3su-0 coTMv"
-            src="IMAGE_MOCK"
-          />
-          <p
-            class="Text-e4p0w3-0 eDRzdo"
-            font-size="15"
-            font-weight="regular"
+          <div
+            class="Row-y1cs0u-0 bNHlls"
+            disabled=""
+            width="fit-content"
           >
-            <span>
-              Any registered participant
-            </span>
-          </p>
-        </div>
-        <div
-          class="Row-y1cs0u-0 cQENWz"
-          disabled=""
-          width="fit-content"
-        >
-          <img
-            class="Img-sc-55j3su-0 coTMv"
-            src="IMAGE_MOCK"
-          />
-          <p
-            class="Text-e4p0w3-0 eDRzdo"
-            font-size="15"
-            font-weight="regular"
+            <img
+              class="Img-sc-55j3su-0 coTMv"
+              src="IMAGE_MOCK"
+            />
+            <p
+              class="Text-e4p0w3-0 eDRzdo"
+              font-size="15"
+              font-weight="regular"
+            >
+              <span>
+                Anyone with the link
+              </span>
+            </p>
+          </div>
+          <div
+            class="Row-y1cs0u-0 bNHlls"
+            disabled=""
+            width="fit-content"
           >
-            <span>
-              Specific registered participants
-            </span>
-          </p>
+            <img
+              class="Img-sc-55j3su-0 coTMv"
+              src="IMAGE_MOCK"
+            />
+            <p
+              class="Text-e4p0w3-0 eDRzdo"
+              font-size="15"
+              font-weight="regular"
+            >
+              <span>
+                Any registered participant
+              </span>
+            </p>
+          </div>
+          <div
+            class="Row-y1cs0u-0 cQENWz"
+            disabled=""
+            width="fit-content"
+          >
+            <img
+              class="Img-sc-55j3su-0 coTMv"
+              src="IMAGE_MOCK"
+            />
+            <p
+              class="Text-e4p0w3-0 eDRzdo"
+              font-size="15"
+              font-weight="regular"
+            >
+              <span>
+                Specific registered participants
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </div>

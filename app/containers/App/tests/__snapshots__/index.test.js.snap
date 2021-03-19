@@ -22,7 +22,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
           />
         </a>
         <img
-          class="Img-sc-55j3su-0 fmXdFO"
+          class="Img-sc-55j3su-0 inOfMn"
           src="IMAGE_MOCK"
         />
       </div>

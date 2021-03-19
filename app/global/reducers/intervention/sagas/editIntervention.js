@@ -6,7 +6,7 @@ import globalMessages from 'global/i18n/globalMessages';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { editInterventionSuccess } from '../actions';
+import { editInterventionError, editInterventionSuccess } from '../actions';
 import {
   EDIT_INTERVENTION_REQUEST,
   EDIT_INTERVENTION_ERROR,
@@ -29,6 +29,7 @@ export function* editIntervention({ payload: { intervention } }) {
         toastId: EDIT_INTERVENTION_ERROR,
       },
     );
+    yield put(editInterventionError(error));
   }
 }
 export default function* editInterventionSaga() {

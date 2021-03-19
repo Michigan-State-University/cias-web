@@ -3,7 +3,7 @@
  * InterventionDetailsPage
  *
  */
-import React, { useLayoutEffect, useState, useEffect } from 'react';
+import React, { useLayoutEffect, useState, useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -73,8 +73,10 @@ import {
 import { reorderScope } from 'models/Session/ReorderScope';
 import { reorder } from 'utils/reorder';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
+import { makeSelectUserRoles } from 'global/reducers/auth';
 
 import { archived } from 'models/Status/StatusTypes';
+import { RolePermissions } from 'models/User/RolePermissions';
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
@@ -82,7 +84,11 @@ import SessionCreateButton from './components/SessionCreateButton';
 import SessionListItem from './components/SessionListItem';
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
-import { nextStatus, updateStatuses } from './utils';
+import {
+  InterventionDetailsPageContext,
+  nextStatus,
+  updateStatuses,
+} from './utils';
 
 export function InterventionDetailsPage({
   intl: { formatMessage },
@@ -108,6 +114,7 @@ export function InterventionDetailsPage({
   deleteSession,
   fetchInterventions,
   externalCopySession,
+  roles,
 }) {
   const [
     deleteConfirmationSessionId,
@@ -125,6 +132,8 @@ export function InterventionDetailsPage({
   });
   useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
   useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
+
+  const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
 
   const screenClass = useScreenClass();
 
@@ -321,83 +330,95 @@ export function InterventionDetailsPage({
     return <ErrorAlert errorText={fetchInterventionError} fullPage />;
 
   return (
-    <AppContainer>
-      <Helmet>
-        <title>{name}</title>
-      </Helmet>
-      <ConfirmationBox
-        visible={!isNullOrUndefined(deleteConfirmationSessionId)}
-        onClose={() => setDeleteConfirmationSessionId(null)}
-        description={formatMessage(messages.sessionDeleteHeader)}
-        content={formatMessage(messages.sessionDeleteMessage)}
-        confirmAction={() => handleDeleteSession(deleteConfirmationSessionId)}
-      />
-      <Modal
-        title={
-          <H3
-            mb={15}
-            fontSize={13}
-            fontWeight="bold"
-            textOpacity={0.6}
-            color={colors.bluewood}
-          >
-            <FormattedMessage {...messages.modalTitle} />
-          </H3>
-        }
-        onClose={closeModal}
-        visible={modalVisible}
-      >
-        <SelectResearchers
-          onResearchersSelected={copyInterventionToResearchers}
-          onClose={closeModal}
+    <InterventionDetailsPageContext.Provider
+      value={{
+        canEdit: editingPossible,
+        canShareWithParticipants: sharingPossible,
+        canArchive: archivingPossible,
+        canDeleteSession: deletionPossible,
+        rolePermissions,
+      }}
+    >
+      <AppContainer>
+        <Helmet>
+          <title>{name}</title>
+        </Helmet>
+        <ConfirmationBox
+          visible={!isNullOrUndefined(deleteConfirmationSessionId)}
+          onClose={() => setDeleteConfirmationSessionId(null)}
+          description={formatMessage(messages.sessionDeleteHeader)}
+          content={formatMessage(messages.sessionDeleteMessage)}
+          confirmAction={() => handleDeleteSession(deleteConfirmationSessionId)}
         />
-      </Modal>
-
-      <Modal
-        title={formatMessage(messages.participantShareModalTitle)}
-        onClose={() => setParticipantShareModalVisible(false)}
-        visible={participantShareModalVisible}
-      >
-        <ShareBox />
-      </Modal>
-      <Header
-        name={name}
-        csvGeneratedAt={csvGeneratedAt}
-        csvLink={csvLink}
-        editingPossible={editingPossible}
-        editName={editName}
-        handleChangeStatus={handleChangeStatus}
-        handleSendCsv={handleSendCsv}
-        options={options}
-        status={status}
-      />
-
-      <GRow>
-        <GCol
-          md={6}
-          sm={12}
-          style={{ order: ['sm', 'xs'].includes(screenClass) ? 1 : 0 }}
+        <Modal
+          title={
+            <H3
+              mb={15}
+              fontSize={13}
+              fontWeight="bold"
+              textOpacity={0.6}
+              color={colors.bluewood}
+            >
+              <FormattedMessage {...messages.modalTitle} />
+            </H3>
+          }
+          onClose={closeModal}
+          visible={modalVisible}
         >
-          {renderList()}
-          {createSessionLoading && (
-            <Row my={18} align="center">
-              <Spinner color={themeColors.secondary} />
-            </Row>
-          )}
-          {editingPossible && (
-            <Row my={18} align="center">
-              <SessionCreateButton handleClick={createSessionCall} />
-            </Row>
-          )}
-          {createSessionError && <ErrorAlert errorText={createSessionError} />}
-        </GCol>
-        <GCol>
-          <Column position="sticky" top="100px" mt={18}>
-            <SettingsPanel intervention={intervention} />
-          </Column>
-        </GCol>
-      </GRow>
-    </AppContainer>
+          <SelectResearchers
+            onResearchersSelected={copyInterventionToResearchers}
+            onClose={closeModal}
+          />
+        </Modal>
+
+        <Modal
+          title={formatMessage(messages.participantShareModalTitle)}
+          onClose={() => setParticipantShareModalVisible(false)}
+          visible={participantShareModalVisible}
+        >
+          <ShareBox />
+        </Modal>
+        <Header
+          name={name}
+          csvGeneratedAt={csvGeneratedAt}
+          csvLink={csvLink}
+          editingPossible={editingPossible}
+          editName={editName}
+          handleChangeStatus={handleChangeStatus}
+          handleSendCsv={handleSendCsv}
+          options={options}
+          status={status}
+        />
+
+        <GRow>
+          <GCol
+            md={6}
+            sm={12}
+            style={{ order: ['sm', 'xs'].includes(screenClass) ? 1 : 0 }}
+          >
+            {renderList()}
+            {createSessionLoading && (
+              <Row my={18} align="center">
+                <Spinner color={themeColors.secondary} />
+              </Row>
+            )}
+            {editingPossible && (
+              <Row my={18} align="center">
+                <SessionCreateButton handleClick={createSessionCall} />
+              </Row>
+            )}
+            {createSessionError && (
+              <ErrorAlert errorText={createSessionError} />
+            )}
+          </GCol>
+          <GCol>
+            <Column position="sticky" top="100px" mt={18}>
+              <SettingsPanel intervention={intervention} />
+            </Column>
+          </GCol>
+        </GRow>
+      </AppContainer>
+    </InterventionDetailsPageContext.Provider>
   );
 }
 
@@ -432,11 +453,13 @@ InterventionDetailsPage.propTypes = {
   deleteSession: PropTypes.func,
   fetchInterventions: PropTypes.func,
   externalCopySession: PropTypes.func,
+  roles: PropTypes.arrayOf(PropTypes.string),
 };
 
 const mapStateToProps = createStructuredSelector({
   interventionState: makeSelectInterventionState(),
   sessionIndex: makeSelectCurrentSessionIndex(),
+  roles: makeSelectUserRoles(),
 });
 
 const mapDispatchToProps = {

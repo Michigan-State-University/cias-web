@@ -318,6 +318,8 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 .c5 {
   width: auto;
   height: auto;
+  max-width: 200px;
+  max-height: 100px;
 }
 
 .c28 {

@@ -24,7 +24,10 @@ import {
   makeSelectSelectedQuestion,
   editQuestionSaga,
 } from 'global/reducers/questions';
-import { makeSelectInterventionStatus } from 'global/reducers/intervention';
+import {
+  makeSelectIntervention,
+  makeSelectInterventionStatus,
+} from 'global/reducers/intervention';
 
 import { canEdit } from 'models/Status/statusPermissions';
 import { nameQuestion, finishQuestion } from 'models/Session/QuestionTypes';
@@ -59,9 +62,12 @@ const RenderQuestionDetails = ({
   changeGroupName,
   sessionId,
   currentGroupScope,
+  intervention,
 }) => {
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
   const animationBoundaries = useRef(null);
+
+  const { logo_url: logoUrl } = intervention ?? {};
 
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
@@ -111,7 +117,7 @@ const RenderQuestionDetails = ({
                   changeGroupName(val, sessionId, currentGroupScope.id)
                 }
               />
-              <MSULogo />
+              <MSULogo logoUrl={logoUrl} />
             </Row>
           )}
           <AnswerInterventionContent
@@ -221,12 +227,14 @@ RenderQuestionDetails.propTypes = {
   changeGroupName: PropTypes.func,
   sessionId: PropTypes.string,
   currentGroupScope: PropTypes.object,
+  intervention: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
   isNarratorTab: makeSelectIsNarratorTab(),
   interventionStatus: makeSelectInterventionStatus(),
+  intervention: makeSelectIntervention(),
 });
 
 const withConnect = connect(mapStateToProps);

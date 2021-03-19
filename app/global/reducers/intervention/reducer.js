@@ -54,6 +54,12 @@ import {
   EXTERNAL_COPY_SESSION_REQUEST,
   EXTERNAL_COPY_SESSION_SUCCESS,
   EXTERNAL_COPY_SESSION_ERROR,
+  ADD_INTERVENTION_LOGO_REQUEST,
+  ADD_INTERVENTION_LOGO_SUCCESS,
+  ADD_INTERVENTION_LOGO_ERROR,
+  DELETE_INTERVENTION_LOGO_REQUEST,
+  DELETE_INTERVENTION_LOGO_SUCCESS,
+  DELETE_INTERVENTION_LOGO_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -77,6 +83,7 @@ export const initialState = {
       id: null,
       email: null,
     },
+    logoLoading: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -136,6 +143,36 @@ export const interventionReducer = (state = initialState, action) =>
       case EDIT_INTERVENTION_ERROR:
         draft.intervention = cloneDeep(state.cache.intervention);
         break;
+
+      case ADD_INTERVENTION_LOGO_REQUEST:
+        draft.loaders.logoLoading = true;
+        break;
+
+      case ADD_INTERVENTION_LOGO_SUCCESS:
+        draft.loaders.logoLoading = false;
+        draft.intervention.logo_url = action.payload.logoUrl;
+        draft.cache.intervention.logo_url = action.payload.logoUrl;
+        break;
+
+      case ADD_INTERVENTION_LOGO_ERROR:
+        draft.loaders.logoLoading = false;
+        break;
+
+      case DELETE_INTERVENTION_LOGO_REQUEST:
+        draft.loaders.logoLoading = true;
+        draft.intervention.logo_url = null;
+        break;
+
+      case DELETE_INTERVENTION_LOGO_SUCCESS:
+        draft.loaders.logoLoading = false;
+        draft.cache.intervention.logo_url = null;
+        break;
+
+      case DELETE_INTERVENTION_LOGO_ERROR:
+        draft.loaders.logoLoading = false;
+        draft.intervention.logo_url = state.cache.intervention.logo_url;
+        break;
+
       case SEND_INTERVENTION_CSV_REQUEST:
         draft.loaders.sendCsvLoading = true;
         break;
