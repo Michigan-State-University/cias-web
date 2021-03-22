@@ -55,7 +55,7 @@ function SessionBranching({
   activeSessionId,
 }) {
   useEffect(() => {
-    if (activeSessionId) fetchQuestions(activeSessionId);
+    if (activeSessionId === id) fetchQuestions(activeSessionId);
   }, [activeSessionId]);
 
   const displayPatternTargetText = target => {
@@ -111,6 +111,7 @@ function SessionBranching({
             <BranchingLayout
               disabled={disabled}
               onVariableChooserOpen={handleClickAddVariable}
+              onDropdownOpen={handleClickAddVariable}
               formatMessage={formatMessage}
               formula={formula}
               id={id}
@@ -119,7 +120,7 @@ function SessionBranching({
               onRemoveCase={onRemoveCase}
               onUpdateCase={onUpdateCase}
               displayPatternTargetText={displayPatternTargetText}
-              interventionBranching
+              sessionBranching
               includeAllVariables
             />
           </Column>
