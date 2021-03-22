@@ -7,6 +7,7 @@ import createVariantSaga from './createVariant';
 import removeTextMessageSaga from './removeTextMessage';
 import updateTextMessageVariantSaga from './updateTextMessageVariant';
 import removeTextMessageVariantSaga from './removeTextMessageVariant';
+import cloneTextMessageSaga from './cloneTextMessage';
 
 export function* allTextMessagesSagas() {
   yield all([
@@ -18,5 +19,6 @@ export function* allTextMessagesSagas() {
     removeTextMessageSaga(),
     updateTextMessageVariantSaga(),
     removeTextMessageVariantSaga(),
+    cloneTextMessageSaga(),
   ]);
 }

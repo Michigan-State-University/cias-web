@@ -28,6 +28,9 @@ import {
   REMOVE_TEXT_MESSAGE_VARIANT_SUCCESS,
   REMOVE_TEXT_MESSAGE_VARIANT_ERROR,
   CHANGE_SELECTED_VARIANT,
+  CLONE_TEXT_MESSAGE_REQUEST,
+  CLONE_TEXT_MESSAGE_SUCCESS,
+  CLONE_TEXT_MESSAGE_ERROR,
 } from './constants';
 import textMessageSettingsReducer from './settings/reducer';
 import textMessageVariantReducer from './variants/reducer';
@@ -255,6 +258,20 @@ export const textMessagesReducer = (state = initialState, action) =>
         draft.loaders.removeVariantLoading = false;
         draft.textMessages = state.cache.textMessages;
         draft.errors.removeVariantError = action.payload.error;
+        break;
+
+      case CLONE_TEXT_MESSAGE_REQUEST:
+        draft.loaders.createTextMessagesLoading = true;
+        break;
+
+      case CLONE_TEXT_MESSAGE_SUCCESS:
+        const { clonedTextMessage } = action.payload;
+        draft.textMessages = [...state.textMessages, clonedTextMessage];
+        draft.loaders.createTextMessagesLoading = false;
+        break;
+
+      case CLONE_TEXT_MESSAGE_ERROR:
+        draft.loaders.createTextMessagesLoading = false;
         break;
     }
   });
