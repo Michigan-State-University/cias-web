@@ -35,7 +35,7 @@ describe('editUser saga', () => {
     return expectSaga(editUser, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.patch), apiResponse]])
-      .call(LocalStorageService.updateState, successUser)
+      .call(LocalStorageService.updateState, { user: successUser })
       .put(editUserSuccess(successUser))
       .run();
   });

@@ -70,8 +70,8 @@ export default function configureStore(initialState = {}, history) {
 
   return store;
 }
-const state = loadState();
+const { user } = loadState() ?? {};
 
-const initialStore = { auth: { ...authReducerInitialState, user: state } };
+const initialStore = { auth: { ...authReducerInitialState, user } };
 
 export const store = configureStore(initialStore, utilsHistory);

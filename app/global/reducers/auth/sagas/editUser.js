@@ -20,7 +20,7 @@ export function* editUser({ payload }) {
       user: userData,
     });
     const mappedUser = mapCurrentUserWithoutAttributes(data);
-    yield call(LocalStorageService.updateState, mappedUser);
+    yield call(LocalStorageService.updateState, { user: mappedUser });
     yield put(editUserSuccess(mappedUser));
   } catch (error) {
     yield call(toast.error, error.toString(), {

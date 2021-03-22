@@ -18,7 +18,7 @@ export function* editPhoneNumberQuestion({
     yield put(editPhoneNumberPreviewSuccess(phoneAttributes, isPreview));
     if (!isPreview) {
       const user = yield select(makeSelectUser());
-      yield call(LocalStorageService.updateState, user);
+      yield call(LocalStorageService.updateState, { user });
     }
   } catch (error) {
     yield put(editPhoneNumberPreviewError(isPreview));

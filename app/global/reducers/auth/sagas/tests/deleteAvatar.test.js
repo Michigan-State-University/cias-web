@@ -28,7 +28,7 @@ describe('deleteAvatar saga', () => {
     return expectSaga(deleteAvatar)
       .withState(mockState)
       .provide([[matchers.call.fn(axios.delete), { data: apiResponse }]])
-      .call(LocalStorageService.updateState, successUser)
+      .call(LocalStorageService.updateState, { user: successUser })
       .put(deleteAvatarSuccess(successUser))
       .run();
   });

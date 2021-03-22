@@ -22,7 +22,7 @@ function* login({ payload: { email, password } }) {
       password,
     });
     const mappedUser = mapCurrentUser(data);
-    yield call(LocalStorageService.setState, mappedUser);
+    yield call(LocalStorageService.setState, { user: { ...mappedUser } });
     yield put(logIn(mappedUser));
     yield put(loginSuccess());
 

@@ -21,7 +21,7 @@ export function* deleteAvatar() {
     } = yield call(axios.delete, requestURL);
 
     const mappedUser = mapCurrentUser(data);
-    yield call(LocalStorageService.updateState, mappedUser);
+    yield call(LocalStorageService.updateState, { user: mappedUser });
     yield put(deleteAvatarSuccess(mappedUser));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.deleteAvatarError), {

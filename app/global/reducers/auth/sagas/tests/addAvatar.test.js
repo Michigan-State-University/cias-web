@@ -33,7 +33,7 @@ describe('addAvatar saga', () => {
     return expectSaga(addAvatar, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .call(LocalStorageService.updateState, successUser)
+      .call(LocalStorageService.updateState, { user: successUser })
       .put(addAvatarSuccess(successUser))
       .run();
   });

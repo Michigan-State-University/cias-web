@@ -10,19 +10,21 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import { Row, Col } from 'react-grid-system';
 
+import Text from 'components/Text';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import H1 from 'components/H1';
 import Loader from 'components/Loader';
 import SingleTile from 'containers/SingleTile';
 import TileRenderer from 'components/TileRenderer';
-import useFilter from 'utils/useFilter';
 import SearchInput from 'components/Input/SearchInput';
 import { statusTypes } from 'models/Status/StatusTypes';
-import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+
+import useFilter from 'utils/useFilter';
 
 import {
   createInterventionRequest,
@@ -35,7 +37,10 @@ import {
   interventionsReducer,
   fetchInterventionsSaga,
 } from 'global/reducers/interventions';
+import { makeSelectUser } from 'global/reducers/auth';
 
+import { colors, fontSizes } from 'theme';
+import { Markup } from 'interweave';
 import StatusFilter from './StatusFilter';
 import messages from './messages';
 import { InitialRow } from './styled';
@@ -50,10 +55,13 @@ export function InterventionPage({
   intl: { formatMessage },
   createInterventionRequest: createIntervention,
   createInterventionLoading,
+  user,
 }) {
   useInjectReducer({ key: 'interventions', reducer: interventionsReducer });
   useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
   useInjectSaga({ key: 'createIntervention', saga: createInterventionSaga });
+
+  const { teamName } = user ?? {};
 
   const [valueFilteredInterventions, filterValue, setFilterValue] = useFilter(
     interventions,
@@ -103,6 +111,16 @@ export function InterventionPage({
   if (!finalInterventions.length && !interventions.length) {
     return (
       <AppContainer>
+        {teamName && (
+          <InitialRow fluid>
+            <Text color={colors.manatee} fontSize={fontSizes.regular} mt={50}>
+              <Markup
+                content={formatMessage(messages.teamName, { teamName })}
+                noWrap
+              />
+            </Text>
+          </InitialRow>
+        )}
         <H1 my={35}>
           <FormattedMessage {...messages.noInterventions} />
         </H1>
@@ -117,6 +135,16 @@ export function InterventionPage({
   }
   return (
     <AppContainer>
+      {teamName && (
+        <InitialRow fluid>
+          <Text color={colors.manatee} fontSize={fontSizes.regular} mt={50}>
+            <Markup
+              content={formatMessage(messages.teamName, { teamName })}
+              noWrap
+            />
+          </Text>
+        </InitialRow>
+      )}
       <InitialRow fluid>
         <H1 mt={35}>
           <FormattedMessage {...messages.myInterventions} />
@@ -180,6 +208,7 @@ InterventionPage.propTypes = {
   interventionPageState: PropTypes.object,
   intl: PropTypes.object,
   createInterventionLoading: PropTypes.bool,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -187,6 +216,7 @@ const mapStateToProps = createStructuredSelector({
   createInterventionLoading: makeSelectInterventionLoader(
     'createInterventionLoading',
   ),
+  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = {

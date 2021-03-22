@@ -35,6 +35,7 @@ const colors = {
   brightGreen: '#54F200',
   lavender: '#DFEBFC',
   aqua: '#00FFF7',
+  manatee: '#8C94A6',
 };
 
 const themeColors = {

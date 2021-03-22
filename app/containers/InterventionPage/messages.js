@@ -16,6 +16,10 @@ export default defineMessages({
     id: `${scope}.myInterventions`,
     defaultMessage: 'My Dashboard',
   },
+  teamName: {
+    id: `${scope}.teamName`,
+    defaultMessage: '<b>Team</b>: {teamName}',
+  },
   noInterventions: {
     id: `${scope}.noInterventions`,
     defaultMessage: `You don't have any interventions`,
