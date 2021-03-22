@@ -126,7 +126,7 @@ const ImageUpload = ({
     <Box mt={10} width="100%">
       {(isPreview || disabled) && (
         <ImageWrapper>
-          <Img src={image} alt="image" height="100%" width="100%" />
+          <Img src={image} alt="image" />
         </ImageWrapper>
       )}
       {!isPreview && !disabled && (
