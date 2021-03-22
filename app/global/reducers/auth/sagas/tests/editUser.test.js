@@ -34,7 +34,7 @@ describe('editUser saga', () => {
 
     return expectSaga(editUser, { payload })
       .withState(mockState)
-      .provide([[matchers.call.fn(axios.put), apiResponse]])
+      .provide([[matchers.call.fn(axios.patch), apiResponse]])
       .call(LocalStorageService.updateState, successUser)
       .put(editUserSuccess(successUser))
       .run();
@@ -44,7 +44,7 @@ describe('editUser saga', () => {
 
     return expectSaga(editUser, { payload })
       .withState(mockState)
-      .provide([[matchers.call.fn(axios.put), throwError(error)]])
+      .provide([[matchers.call.fn(axios.patch), throwError(error)]])
       .call(toast.error, error.toString(), {
         toastId: EDIT_USER_ERROR,
       })

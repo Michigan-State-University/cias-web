@@ -29,6 +29,8 @@ export const mapCurrentUser = user => ({
   active: user.attributes.active,
   phone: user.attributes.phone,
   teamId: user.attributes.team_id,
+  emailNotification: user.attributes.email_notification,
+  smsNotification: user.attributes.sms_notification,
 });
 
 export const mapCurrentUserWithoutAttributes = user => ({
@@ -43,6 +45,8 @@ export const mapCurrentUserWithoutAttributes = user => ({
   active: user.active,
   phone: user.phone,
   teamId: user.team_id,
+  emailNotification: user.email_notification,
+  smsNotification: user.sms_notification,
 });
 
 export const mapTeam = team => ({

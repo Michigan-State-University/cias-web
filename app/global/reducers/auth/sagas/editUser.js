@@ -16,7 +16,7 @@ export function* editUser({ payload }) {
 
   const userData = objectKeysToSnakeCase(payload.user);
   try {
-    const { data } = yield call(axios.put, requestURL, {
+    const { data } = yield call(axios.patch, requestURL, {
       user: userData,
     });
     const mappedUser = mapCurrentUserWithoutAttributes(data);

@@ -27,9 +27,6 @@ import {
   CHANGE_PHONE_NUMBER_REQUEST,
   CHANGE_PHONE_NUMBER_SUCCESS,
   CHANGE_PHONE_NUMBER_ERROR,
-  CHANGE_NOTIFICATIONS_SETTINGS_REQUEST,
-  CHANGE_NOTIFICATIONS_SETTINGS_SUCCESS,
-  CHANGE_NOTIFICATIONS_SETTINGS_ERROR,
   SEND_SMS_TOKEN_REQUEST,
   SEND_SMS_TOKEN_SUCCESS,
   SEND_SMS_TOKEN_ERROR,
@@ -181,17 +178,6 @@ export const authReducer = (state = initialState, { type, payload }) =>
         break;
       case CONFIRM_PHONE_NUMBER_ERROR:
         draft.loaders.confirmPhoneNumberLoading = false;
-        break;
-
-      case CHANGE_NOTIFICATIONS_SETTINGS_REQUEST:
-        draft.cache.user = state.user;
-        draft.user.notificationsSettings = payload.notificationsSettings;
-        break;
-      case CHANGE_NOTIFICATIONS_SETTINGS_SUCCESS:
-        draft.cache.user = null;
-        break;
-      case CHANGE_NOTIFICATIONS_SETTINGS_ERROR:
-        draft.user = state.cache.user;
         break;
       case EDIT_PHONE_NUMBER_PREVIEW_REQUEST:
         break;
