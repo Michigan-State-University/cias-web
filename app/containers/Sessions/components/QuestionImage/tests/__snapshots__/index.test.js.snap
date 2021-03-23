@@ -75,7 +75,18 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
 }
 
 .c3 {
-  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c3 > img {
   max-width: 100%;
 }
 

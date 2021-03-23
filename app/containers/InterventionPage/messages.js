@@ -40,4 +40,12 @@ export default defineMessages({
     id: `${scope}.hideArchived`,
     defaultMessage: `Hide Archived`,
   },
+  feedbackTitle: {
+    id: `${scope}.feedbackTitle`,
+    defaultMessage: `We’re waiting for your feedback!`,
+  },
+  feedbackDescription: {
+    id: `${scope}.feedbackDescription`,
+    defaultMessage: `Share your opinion on CIAS`,
+  },
 });

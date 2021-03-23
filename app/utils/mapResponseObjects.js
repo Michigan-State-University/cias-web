@@ -32,6 +32,7 @@ export const mapCurrentUser = user => ({
   teamName: user.attributes.team_name,
   emailNotification: user.attributes.email_notification,
   smsNotification: user.attributes.sms_notification,
+  feedbackCompleted: user.attributes.feedback_completed,
 });
 
 export const mapCurrentUserWithoutAttributes = user => ({
@@ -49,6 +50,7 @@ export const mapCurrentUserWithoutAttributes = user => ({
   teamName: user.team_name,
   emailNotification: user.email_notification,
   smsNotification: user.sms_notification,
+  feedbackCompleted: user.feedback_completed,
 });
 
 export const mapTeam = team => ({

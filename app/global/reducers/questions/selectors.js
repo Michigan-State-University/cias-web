@@ -128,3 +128,9 @@ export const makeSelectThirdPartyReportQuestionExists = () =>
     substate =>
       substate.questions?.some(elem => elem.type === thirdPartyQuestion.id),
   );
+
+export const makeSelectLastCreatedQuestionId = () =>
+  createSelector(
+    selectQuestions,
+    substate => substate.lastCreatedQuestionId,
+  );

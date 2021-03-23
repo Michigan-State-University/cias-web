@@ -70,6 +70,7 @@ import {
 
 export const initialState = {
   selectedQuestion: '',
+  lastCreatedQuestionId: null,
   questions: [],
   cache: {
     questions: [],
@@ -100,6 +101,7 @@ export const questionsReducer = (state = initialState, action) =>
         ];
         draft.cache.questions = draft.questions;
         draft.selectedQuestion = action.payload.question.id;
+        draft.lastCreatedQuestionId = action.payload.question.id;
         draft.loaders.createQuestionLoading = false;
         break;
       case CREATE_QUESTION_ERROR:

@@ -7,6 +7,80 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
     style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
   >
     <div
+      class="Box-sc-1vhutan-0 gfgkhE"
+      width="max-content"
+    >
+      <div
+        style="display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; margin: 0px;"
+      >
+        <div
+          align="flex-start"
+          class="Col-zbj3ec-0 gVbrwg"
+          style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
+        >
+          <div
+            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+          >
+            <div
+              align="flex-start"
+              class="Col-zbj3ec-0 gVbrwg"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
+            >
+              <div
+                class="StyledCircle-sc-1dov7hv-0 eDClgE"
+                opacity="1"
+              >
+                <img
+                  class="Img-sc-55j3su-0 cDhXoN"
+                  src="IMAGE_MOCK"
+                />
+              </div>
+            </div>
+            <div
+              align="flex-start"
+              class="Col-zbj3ec-0 gVbrwg"
+              style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
+            >
+              <p
+                class="Text-e4p0w3-0 bmKPFZ"
+                font-weight="bold"
+              >
+                We’re waiting for your feedback!
+              </p>
+              <p
+                class="Text-e4p0w3-0 ikSWkc"
+                color="#C866EA"
+                font-weight="bold"
+              >
+                <a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
+                  style="color: rgb(200, 102, 234);"
+                  target="_blank"
+                >
+                  Share your opinion on CIAS
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          align="end"
+          class="Col-zbj3ec-0 ccYkjT"
+          style="box-sizing: border-box; min-height: 1px; position: relative; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 0px;"
+        >
+          <button
+            class="styled__CrossButton-sc-1kp22um-1 iFPCsG"
+          >
+            <img
+              alt="cross"
+              class="Img-sc-55j3su-0 cDhXoN"
+              src="IMAGE_MOCK"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
       class="styled__InitialRow-ve6hnx-0 cpSsKi"
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
     >

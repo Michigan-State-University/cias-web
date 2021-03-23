@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     height: 100%;
     width: 100%;
     color: ${themeColors.text};
+    scroll-behavior: smooth;
   }
 
   body {

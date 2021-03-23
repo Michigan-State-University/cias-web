@@ -97,7 +97,6 @@ import { canEdit } from 'models/Status/statusPermissions';
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { FinishGroupType } from 'models/Session/GroupTypes';
-import scrollByRef from 'utils/scrollByRef';
 import editInterventionPageSaga from './saga';
 
 import QuestionDetails from '../../components/QuestionDetails';
@@ -277,10 +276,6 @@ function EditSessionPage({
       ),
       params.sessionId,
     );
-    scrollByRef(containerBottomRef, {
-      behavior: 'smooth',
-      block: 'end',
-    });
   };
 
   const onDragEnd = result => {

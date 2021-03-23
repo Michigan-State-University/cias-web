@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -26,6 +26,7 @@ import {
   makeSelectQuestions,
   selectQuestion,
   copyExternallyQuestionRequest,
+  makeSelectLastCreatedQuestionId,
 } from 'global/reducers/questions';
 import {
   changeCurrentNarratorBlock,
@@ -45,6 +46,7 @@ import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
 import ConfirmationBox from 'components/ConfirmationBox';
 import Text from 'components/Text';
+import scrollByRef from 'utils/scrollByRef';
 import VariableInput from '../QuestionDetails/VariableInput';
 import { ClampedTitle, ToggleableBox } from './styled';
 import messages from './messages';
@@ -73,7 +75,9 @@ const QuestionListItem = ({
   groupIds,
   allQuestions,
   sessionId,
+  lastCreatedQuestionId,
 }) => {
+  const questionRef = useRef(null);
   const [copyOpen, setCopyOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const { type, subtitle, id, body, question_group_id: groupId } = question;
@@ -84,6 +88,15 @@ const QuestionListItem = ({
   useEffect(() => {
     if (selectedQuestionIndex === id) beforeRender();
   }, [selectedQuestionIndex]);
+
+  useEffect(() => {
+    if (
+      lastCreatedQuestionId === id &&
+      selectedQuestionIndex === id &&
+      questionRef.current
+    )
+      scrollByRef(questionRef, true);
+  }, [lastCreatedQuestionId, selectedQuestionIndex]);
 
   const handleSelectClick = () => {
     setDraggable(false);
@@ -186,7 +199,7 @@ const QuestionListItem = ({
         bg={colors.zirkon}
         border={`1px solid ${checked ? colors.orchid : colors.smokeWhite}`}
       >
-        <Row justify="between">
+        <Row justify="between" ref={questionRef}>
           {manage && !isFinishScreen && (
             <Column xs={1}>
               <Checkbox
@@ -289,11 +302,13 @@ QuestionListItem.propTypes = {
   noDnd: PropTypes.bool,
   groupIds: PropTypes.array,
   allQuestions: PropTypes.array,
+  lastCreatedQuestionId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   settingsVisibility: makeSelectQuestionSettingsVisibility(),
   allQuestions: makeSelectQuestions(),
+  lastCreatedQuestionId: makeSelectLastCreatedQuestionId(),
 });
 
 const mapDispatchToProps = {

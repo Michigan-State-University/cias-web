@@ -29,6 +29,7 @@ export {
   makeSelectNameQuestionExists,
   makeSelectFilteredQuestions,
   makeSelectPreviousQuestions,
+  makeSelectLastCreatedQuestionId,
 } from './selectors';
 export {
   addQuestionImageSaga,
