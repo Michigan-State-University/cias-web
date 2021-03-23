@@ -84,8 +84,11 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
       data: { data, warning },
     } = yield axios.get(requestUrl);
 
-    if (!isNullOrUndefined(warning) && messages[warning])
-      yield call(toast.warning, formatMessage(messages[warning]));
+    if (!isNullOrUndefined(warning))
+      yield call(
+        toast.warning,
+        formatMessage(messages[warning] ?? messages.unknownWarning),
+      );
 
     yield put(nextQuestionSuccess(mapQuestionToStateObject(data)));
   } catch (error) {

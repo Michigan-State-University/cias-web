@@ -9,6 +9,7 @@ import {
   OTHER_FORMULA_ERROR,
   REFLECTION_MISS_MATCH,
   ZERO_DIVISION_FORMULA_ERROR,
+  NO_BRANCHING_TARGET,
 } from 'containers/AnswerSessionPage/constants';
 
 export const scope = 'app.containers.AnswerSessionPage';
@@ -63,6 +64,10 @@ export default defineMessages({
     id: `${scope}.noEntranceText`,
     defaultMessage: `The session is not published yet or you were not given an access to it. Please, contact the support if this issue should not have occurred.`,
   },
+  unknownWarning: {
+    id: `${scope}.unknownWarning`,
+    defaultMessage: `There was an unknown error that occurred during branching. Check if everything is set up correctly.`,
+  },
   [ZERO_DIVISION_FORMULA_ERROR]: {
     id: `${scope}.${ZERO_DIVISION_FORMULA_ERROR}`,
     defaultMessage: `Formula failed and you were transitioned to the next screen because there was division by 0.`,
@@ -74,6 +79,10 @@ export default defineMessages({
   [REFLECTION_MISS_MATCH]: {
     id: `${scope}.${REFLECTION_MISS_MATCH}`,
     defaultMessage: `There was a reflection error, because variables or score are not set up properly.`,
+  },
+  [NO_BRANCHING_TARGET]: {
+    id: `${scope}.${NO_BRANCHING_TARGET}`,
+    defaultMessage: `There was a branching error, because branching target is missing (deleted) or not set.`,
   },
   emailValidationError: {
     id: `${scope}.emailValidationError`,

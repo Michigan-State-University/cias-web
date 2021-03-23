@@ -168,7 +168,9 @@ const ReportTemplateMainSettings = ({
                     <Row
                       align="center"
                       style={{ cursor: canEdit ? 'pointer' : 'initial' }}
-                      onClick={() => onReportForChange(ReportFor.thirdParty)}
+                      onClick={() =>
+                        canEdit && onReportForChange(ReportFor.thirdParty)
+                      }
                     >
                       <Radio
                         mr={10}
