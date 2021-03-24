@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import DatePicker from 'react-datepicker';
 import 'react-quill/dist/quill.bubble.css';
 import 'react-datepicker/dist/react-datepicker.css';
-
+import ReactQuill from 'react-quill';
 import isNumber from 'lodash/isNumber';
+
+import useOutsideClick from 'utils/useOutsideClick';
+
 import Column from '../Column';
 import Row from '../Row';
 import { Input } from './index';
@@ -67,6 +70,22 @@ const ApprovableInput = props => {
   const [value, setValue] = useState(propsValue);
   const [focused, setFocused] = useState(false);
   const ref = useRef();
+
+  const blur = () => {
+    const instance = ref.current;
+
+    switch (instance.constructor) {
+      case ReactQuill:
+        instance.editor.blur();
+        break;
+      case HTMLElement:
+      default:
+        instance.blur();
+        break;
+    }
+  };
+
+  useOutsideClick(ref, blur, focused);
 
   const blockQuillBlur = () => {
     const preventDefault = event => event.preventDefault();
@@ -141,6 +160,7 @@ const ApprovableInput = props => {
     if (type === 'multiline')
       return (
         <TextArea
+          ref={ref}
           width="100%"
           height="60px"
           {...(rows ? { rows, height: 'auto' } : {})}
@@ -158,6 +178,7 @@ const ApprovableInput = props => {
       return (
         <DatePickerWrapper>
           <DatePicker
+            ref={ref}
             disabled={disabled}
             minDate={minDate}
             selected={value}
@@ -183,6 +204,7 @@ const ApprovableInput = props => {
       );
     return (
       <Input
+        ref={ref}
         height={height || 60}
         mr={isNumber(mr) ? mr : 9}
         textAlign={textAlign}

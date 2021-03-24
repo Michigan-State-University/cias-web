@@ -98,6 +98,7 @@ const QuestionListItem = ({
   }, [lastCreatedQuestionId, selectedQuestionIndex]);
 
   const handleSelectClick = () => {
+    document.activeElement.blur();
     setDraggable(false);
     if (selectedQuestionIndex !== id) {
       onSelect(id);

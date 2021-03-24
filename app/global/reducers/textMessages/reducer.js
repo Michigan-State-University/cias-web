@@ -1,6 +1,9 @@
 import produce from 'immer';
 import remove from 'lodash/remove';
 import clone from 'lodash/cloneDeep';
+
+import { sortTextMessagesByDate } from 'models/TextMessage/utils';
+
 import {
   FETCH_TEXT_MESSAGES_REQUEST,
   FETCH_TEXT_MESSAGES_SUCCESS,
@@ -78,8 +81,11 @@ export const textMessagesReducer = (state = initialState, action) =>
       case FETCH_TEXT_MESSAGES_SUCCESS:
         const { textMessages, textMessagesSize } = action.payload;
         draft.loaders.fetchTextMessagesLoading = false;
-        draft.textMessages = textMessages;
-        draft.cache.textMessages = textMessages;
+
+        const sortedTextMessages = sortTextMessagesByDate(textMessages);
+
+        draft.textMessages = sortedTextMessages;
+        draft.cache.textMessages = sortedTextMessages;
         draft.textMessagesSize = textMessagesSize;
         break;
 
@@ -112,7 +118,10 @@ export const textMessagesReducer = (state = initialState, action) =>
 
       case CREATE_TEXT_MESSAGE_REQUEST:
         const newTextMessage = action.payload.textMessage;
-        draft.textMessages = [...state.textMessages, newTextMessage];
+        draft.textMessages = sortTextMessagesByDate([
+          ...state.textMessages,
+          newTextMessage,
+        ]);
         draft.loaders.createTextMessagesLoading = true;
         break;
 
@@ -175,6 +184,10 @@ export const textMessagesReducer = (state = initialState, action) =>
             type,
           },
         );
+
+        // `draft` used on purpose -> list with updated values is needed
+        // Array copy converts `draft` Proxy Object to a simple Object
+        draft.textMessages = sortTextMessagesByDate([...draft.textMessages]);
 
         break;
 
@@ -266,7 +279,10 @@ export const textMessagesReducer = (state = initialState, action) =>
 
       case CLONE_TEXT_MESSAGE_SUCCESS:
         const { clonedTextMessage } = action.payload;
-        draft.textMessages = [...state.textMessages, clonedTextMessage];
+        draft.textMessages = sortTextMessagesByDate([
+          ...state.textMessages,
+          clonedTextMessage,
+        ]);
         draft.loaders.createTextMessagesLoading = false;
         break;
 

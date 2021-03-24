@@ -398,6 +398,8 @@ export const questionsReducer = (state = initialState, action) =>
       }
 
       case UPDATE_QUESTION_SETTINGS: {
+        draft.loaders.updateQuestionLoading = true;
+
         const selectedQuestionIndex = draft.questions.findIndex(
           ({ id }) => id === draft.selectedQuestion,
         );

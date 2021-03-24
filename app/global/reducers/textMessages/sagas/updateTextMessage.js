@@ -8,7 +8,7 @@ import {
   updateTextMessageSettingsSuccess,
   updateTextMessageSettingsError,
 } from '../actions';
-import { makeSelectSelectedMessageId } from '../selectors';
+import { makeSelectSelectedMessage } from '../selectors';
 
 export function* updateTextMessage({ payload: { value: actionValue } }) {
   try {
@@ -17,11 +17,18 @@ export function* updateTextMessage({ payload: { value: actionValue } }) {
       data: { value, field },
     } = actionValue;
     let body;
+    const currentTextMessage = yield select(makeSelectSelectedMessage());
+
     if (type === CHANGE_SCHEDULING_FREQUENCY)
       body = { sms_plan: { end_at: value.endAt, frequency: value.frequency } };
-    else body = objectToSnakeCase({ sms_plan: { [field]: value } });
-    const currentTextMessageId = yield select(makeSelectSelectedMessageId());
-    const requestUrl = `/v1/sms_plans/${currentTextMessageId}`;
+    else
+      body = objectToSnakeCase({
+        sms_plan: {
+          [field]: value,
+          schedulePayload: currentTextMessage.schedulePayload,
+        },
+      });
+    const requestUrl = `/v1/sms_plans/${currentTextMessage.id}`;
 
     yield call(axios.patch, requestUrl, body);
     yield put(updateTextMessageSettingsSuccess());

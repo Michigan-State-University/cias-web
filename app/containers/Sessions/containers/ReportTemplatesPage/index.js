@@ -19,6 +19,7 @@ import {
   makeSelectSingleReportTemplate,
   makeSelectSelectedSectionTemplate,
   makeSelectSelectedSectionTemplateId,
+  selectReportTemplate,
 } from 'global/reducers/reportTemplates';
 import {
   fetchInterventionSaga,
@@ -58,6 +59,7 @@ const ReportTemplatesPage = ({
   getSession,
   intl: { formatMessage },
   intervention,
+  selectTemplate,
 }) => {
   const { status } = intervention ?? {};
 
@@ -67,6 +69,8 @@ const ReportTemplatesPage = ({
       sessionId,
     });
     fetchReportTemplates(sessionId);
+
+    return () => selectTemplate(null);
   }, [sessionId]);
 
   useEffect(() => {
@@ -115,6 +119,7 @@ ReportTemplatesPage.propTypes = {
   selectedTemplateSectionId: PropTypes.string,
   selectedTemplateSection: PropTypes.shape(TemplateSection),
   intervention: PropTypes.shape({ status: PropTypes.string }),
+  selectTemplate: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -131,6 +136,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   fetchReportTemplates: fetchReportTemplatesRequest,
   getSession: getSessionRequest,
+  selectTemplate: selectReportTemplate,
 };
 
 const withConnect = connect(

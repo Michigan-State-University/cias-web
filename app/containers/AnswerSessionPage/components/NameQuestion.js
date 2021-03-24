@@ -24,6 +24,7 @@ const NameQuestion = ({
     body: {
       variable: { name: variableName },
     },
+    settings: { required },
   } = question;
 
   /*
@@ -31,15 +32,15 @@ const NameQuestion = ({
    * Without it, it crashes when Question is not `required`
    */
   useEffect(() => {
-    selectAnswer([
-      {
-        var: variableName,
-        value: {
-          name: '',
-          phoneticName: '',
+    if (!required)
+      selectAnswer([
+        {
+          var: variableName,
+          value: {
+            name: '',
+          },
         },
-      },
-    ]);
+      ]);
   }, []);
 
   const onChange = event => {
@@ -58,8 +59,6 @@ const NameQuestion = ({
       },
     ]);
   };
-
-  console.log({ question, answerBody });
 
   return (
     <NameQuestionLayout
