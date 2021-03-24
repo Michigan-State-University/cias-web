@@ -16,17 +16,21 @@ import {
   editUserRequest,
 } from 'global/reducers/auth';
 
+import { makeSelectUser as makeSelectOtherUser } from 'global/reducers/user';
+
 const WrappedPhoneNumberForm = ({
+  userId,
   formatMessage,
   user,
   editUser,
   error,
+  otherUser,
   loading,
   changeErrorValue,
 }) => {
   useInjectSaga({ key: 'changePhoneNumber', saga: changePhoneNumberSaga });
-
-  const { phone } = user ?? {};
+  const userToDisplay = userId ? otherUser.user : user;
+  const { phone } = userToDisplay ?? {};
 
   return (
     <PhoneNumberForm
@@ -36,6 +40,7 @@ const WrappedPhoneNumberForm = ({
       error={error}
       loading={loading}
       changeErrorValue={changeErrorValue}
+      disabled={userId !== undefined}
     />
   );
 };
@@ -43,16 +48,19 @@ const WrappedPhoneNumberForm = ({
 WrappedPhoneNumberForm.propTypes = {
   formatMessage: PropTypes.func,
   user: PropTypes.object,
+  otherUser: PropTypes.object,
   loading: PropTypes.bool,
   error: PropTypes.string,
   editUser: PropTypes.func,
   changeErrorValue: PropTypes.func,
+  userId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
   loading: makeSelectLoaders('changePhoneNumberLoading'),
   error: makeSelectErrors('changePhoneNumberError'),
+  otherUser: makeSelectOtherUser(),
 });
 
 const mapDispatchToProps = {
