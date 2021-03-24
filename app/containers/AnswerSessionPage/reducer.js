@@ -25,6 +25,7 @@ import {
   NEXT_QUESTION_SUCCESS,
   NEXT_QUESTION_FAILURE,
   CLEAR_ERROR,
+  CHANGE_USER_SESSION_ID,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -149,6 +150,10 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
       case CLEAR_ERROR:
         draft.nextQuestionError = null;
         draft.questionError = null;
+        break;
+
+      case CHANGE_USER_SESSION_ID:
+        draft.userSession.id = payload.userSessionId;
         break;
     }
   });

@@ -35,6 +35,7 @@ import {
   nextQuestionFailure,
   nextQuestionRequest,
   createUserSessionRequest,
+  changeUserSessionId,
 } from './actions';
 import { makeSelectAnswers } from './selectors';
 import messages from './messages';
@@ -81,7 +82,7 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
 
   try {
     const {
-      data: { data, warning },
+      data: { data, warning, next_user_session_id: newUserSessionId },
     } = yield axios.get(requestUrl);
 
     if (!isNullOrUndefined(warning))
@@ -89,6 +90,10 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
         toast.warning,
         formatMessage(messages[warning] ?? messages.unknownWarning),
       );
+
+    if (newUserSessionId) {
+      yield put(changeUserSessionId(newUserSessionId));
+    }
 
     yield put(nextQuestionSuccess(mapQuestionToStateObject(data)));
   } catch (error) {
