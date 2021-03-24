@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
-import unescape from 'lodash/unescape';
 import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 import uniqueId from 'lodash/uniqueId';
@@ -215,9 +214,7 @@ const QuestionListItem = ({
           )}
           <Column xs={10}>
             <Row>
-              <ClampedTitle mb={6}>
-                {unescape(htmlToPlainText(subtitle))}
-              </ClampedTitle>
+              <ClampedTitle mb={6}>{htmlToPlainText(subtitle)}</ClampedTitle>
             </Row>
             <Row>
               <Box display="flex" align="center">
