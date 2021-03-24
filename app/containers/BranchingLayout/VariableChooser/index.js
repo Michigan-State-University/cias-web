@@ -45,13 +45,19 @@ const VariableChooser = ({
   loading,
   includeAllVariables,
   topPosition,
+  includeCurrentQuestion,
 }) => {
   const { id } = selectedQuestion;
   const previousQuestions = useMemo(
     () =>
       includeAllVariables
         ? questions
-        : getPreviousQuestions(selectedQuestion, questions, groups),
+        : getPreviousQuestions(
+            selectedQuestion,
+            questions,
+            groups,
+            includeCurrentQuestion,
+          ),
     [selectedQuestion, questions, groups],
   );
 
@@ -145,6 +151,11 @@ VariableChooser.propTypes = {
   includeAllVariables: PropTypes.bool,
   setOpen: PropTypes.func,
   topPosition: PropTypes.string,
+  includeCurrentQuestion: PropTypes.bool,
+};
+
+VariableChooser.defaultProps = {
+  includeCurrentQuestion: true,
 };
 
 const mapStateToProps = createStructuredSelector({

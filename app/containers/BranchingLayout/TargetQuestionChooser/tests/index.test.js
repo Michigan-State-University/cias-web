@@ -38,9 +38,10 @@ const mockSingleGroup = (suffix = 1) => ({
   position: suffix,
 });
 
-const mockIntervention = (suffix = 1) => ({
+const mockSession = (suffix = 1) => ({
   id: `session-test-id-${suffix}`,
-  name: `Intervention test title ${suffix}`,
+  name: `Session test title ${suffix}`,
+  position: suffix,
 });
 
 const mockMostUsedStore = question => {
@@ -49,16 +50,14 @@ const mockMostUsedStore = question => {
       session: {
         name: 'e-Session Name',
         id: 'asd12ca-daiud12',
+        position: 1,
       },
     },
 
     intervention: {
+      currentSessionIndex: 0,
       intervention: {
-        sessions: [
-          mockIntervention(1),
-          mockIntervention(2),
-          mockIntervention(3),
-        ],
+        sessions: [mockSession(1), mockSession(2), mockSession(3)],
       },
       loaders: {
         fetchInterventionLoading: false,
@@ -97,6 +96,7 @@ describe('<TargetQuestionChooser />', () => {
       },
     },
     intervention: {
+      currentSessionIndex: 0,
       intervention: { sessions: [] },
       loaders: {
         fetchInterventionLoading: false,
@@ -163,6 +163,7 @@ describe('<TargetQuestionChooser />', () => {
         },
       },
       intervention: {
+        currentSessionIndex: 0,
         intervention: { sessions: [] },
         loaders: {
           fetchInterventionLoading: false,
@@ -201,7 +202,7 @@ describe('<TargetQuestionChooser />', () => {
     expect(groupRow).toBeNull();
   });
 
-  it('should render session view with list of sessions when selected', () => {
+  it('should render session view with list of sessions without current session when selected', () => {
     const question = mockSingleQuestion(2, true);
 
     store = createTestStore({
@@ -209,16 +210,14 @@ describe('<TargetQuestionChooser />', () => {
         session: {
           name: 'e-Session Name',
           id: 'asd12ca-daiud12',
+          position: 1,
         },
       },
 
       intervention: {
+        currentSessionIndex: 0,
         intervention: {
-          sessions: [
-            mockIntervention(1),
-            mockIntervention(2),
-            mockIntervention(3),
-          ],
+          sessions: [mockSession(1), mockSession(2), mockSession(3)],
         },
         loaders: {
           fetchInterventionLoading: false,
@@ -276,7 +275,7 @@ describe('<TargetQuestionChooser />', () => {
     expect(variableComponentList).toHaveLength(0);
 
     expect(interventionView).not.toEqual(null);
-    expect(interventionComponentList).toHaveLength(3);
+    expect(interventionComponentList).toHaveLength(2);
   });
 
   it('should render spinner on session view when loading a list', () => {
@@ -290,6 +289,7 @@ describe('<TargetQuestionChooser />', () => {
         },
       },
       intervention: {
+        currentSessionIndex: 0,
         intervention: { sessions: [] },
         loaders: {
           fetchInterventionLoading: true,
@@ -383,7 +383,7 @@ describe('<TargetQuestionChooser />', () => {
     fireEvent.click(interventionRow);
     expect(newProps.onClick).toHaveBeenCalledWith({
       type: 'Session',
-      id: 'session-test-id-1',
+      id: 'session-test-id-2',
     });
   });
 

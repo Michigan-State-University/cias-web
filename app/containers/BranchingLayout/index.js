@@ -36,30 +36,38 @@ function BranchingLayout({
   displayPatternTargetText,
   onRemoveCase,
   onAddCase,
-  interventionBranching,
+  sessionBranching,
   onVariableChooserOpen,
+  onDropdownOpen,
   disabled,
+  includeAllVariables,
+  includeCurrentQuestion,
 }) {
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
   const [variableChooserOpen, setVariableChooserOpen] = useState(false);
 
   const shouldDisplayElseStatement = formula.patterns.length !== 0;
 
+  const handleVariableChooserClick = () => {
+    document.activeElement.blur();
+
+    if (!disabled) {
+      if (onVariableChooserOpen) onVariableChooserOpen();
+      setVariableChooserOpen(!variableChooserOpen);
+    }
+  };
+
+  const handleDropdownClick = (value, index) => {
+    if (value && onDropdownOpen) onDropdownOpen();
+    setTargetChooserOpen(value ? index : -1);
+  };
+
   return (
     <>
       <Column>
         <Row align="center" justify="between">
           {formatMessage(messages.formula)}
-          <Box
-            onClick={() => {
-              document.activeElement.blur();
-              if (!disabled) {
-                if (onVariableChooserOpen) onVariableChooserOpen();
-                setVariableChooserOpen(!variableChooserOpen);
-              }
-            }}
-            clickable
-          >
+          <Box onClick={handleVariableChooserClick} clickable>
             <Text
               disabled={disabled}
               fontWeight="bold"
@@ -83,14 +91,14 @@ function BranchingLayout({
               <StyledInput
                 disabled={disabled}
                 type="multiline"
-                rows={interventionBranching ? '1' : '5'}
+                rows={sessionBranching ? '1' : '5'}
                 width="100%"
                 placeholder={formatMessage(messages.formulaPlaceholder)}
                 value={formula.payload}
                 onBlur={val => onFormulaUpdate(val, id)}
               />
             </Box>
-            {interventionBranching && (
+            {sessionBranching && (
               <Box position="relative" top={-90}>
                 <VariableChooser
                   visible={variableChooserOpen}
@@ -99,10 +107,12 @@ function BranchingLayout({
                     setVariableChooserOpen(false);
                     onFormulaUpdate(`${formula.payload}${value}`, id);
                   }}
+                  includeAllVariables={includeAllVariables}
+                  includeCurrentQuestion={includeCurrentQuestion}
                 />
               </Box>
             )}
-            {!interventionBranching && (
+            {!sessionBranching && (
               <Box position="absolute" right={25} top={160} width="100%">
                 <VariableChooser
                   visible={variableChooserOpen}
@@ -111,6 +121,8 @@ function BranchingLayout({
                     setVariableChooserOpen(false);
                     onFormulaUpdate(`${formula.payload}${value}`, id);
                   }}
+                  includeAllVariables={includeAllVariables}
+                  includeCurrentQuestion={includeCurrentQuestion}
                 />
               </Box>
             )}
@@ -139,7 +151,7 @@ function BranchingLayout({
                     disabled={disabled}
                     width={130}
                     positionFrom="right"
-                    setOpen={value => setTargetChooserOpen(value ? index : -1)}
+                    setOpen={value => handleDropdownClick(value, index)}
                     isOpened={isChooserOpened}
                     childWidthScope="child"
                     dropdownContent={
@@ -152,7 +164,7 @@ function BranchingLayout({
                     }
                   >
                     <TargetQuestionChooser
-                      interventionBranching={interventionBranching}
+                      sessionBranching={sessionBranching}
                       isVisible={isChooserOpened}
                       pattern={pattern}
                       onClick={value => {
@@ -178,7 +190,7 @@ function BranchingLayout({
                 <FormattedMessage
                   {...messages.else}
                   values={{
-                    message: interventionBranching
+                    message: sessionBranching
                       ? formatMessage(messages.nextSession)
                       : formatMessage(messages.nextScreen),
                   }}
@@ -208,9 +220,16 @@ BranchingLayout.propTypes = {
   onUpdateCase: PropTypes.func,
   intl: PropTypes.object,
   displayPatternTargetText: PropTypes.func,
-  interventionBranching: PropTypes.bool,
+  sessionBranching: PropTypes.bool,
   onVariableChooserOpen: PropTypes.func,
+  onDropdownOpen: PropTypes.func,
   disabled: PropTypes.bool,
+  includeAllVariables: PropTypes.bool,
+  includeCurrentQuestion: PropTypes.bool,
+};
+
+BranchingLayout.defaultProps = {
+  includeCurrentQuestion: true,
 };
 
 export default injectIntl(BranchingLayout);

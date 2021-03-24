@@ -10,19 +10,21 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { Row, Col } from 'react-grid-system';
 
+import SingleTile from 'containers/SingleTile';
+import Text from 'components/Text';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import H1 from 'components/H1';
 import Loader from 'components/Loader';
-import SingleTile from 'containers/SingleTile';
 import TileRenderer from 'components/TileRenderer';
-import useFilter from 'utils/useFilter';
 import SearchInput from 'components/Input/SearchInput';
+import Notification from 'components/Notification';
+
+import useFilter from 'utils/useFilter';
 import { statusTypes } from 'models/Status/StatusTypes';
-import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import {
   createInterventionRequest,
@@ -35,7 +37,10 @@ import {
   interventionsReducer,
   fetchInterventionsSaga,
 } from 'global/reducers/interventions';
+import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
 
+import { colors, fontSizes, themeColors } from 'theme';
+import { Markup } from 'interweave';
 import StatusFilter from './StatusFilter';
 import messages from './messages';
 import { InitialRow } from './styled';
@@ -50,10 +55,14 @@ export function InterventionPage({
   intl: { formatMessage },
   createInterventionRequest: createIntervention,
   createInterventionLoading,
+  user,
+  editUser,
 }) {
   useInjectReducer({ key: 'interventions', reducer: interventionsReducer });
   useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
   useInjectSaga({ key: 'createIntervention', saga: createInterventionSaga });
+
+  const { teamName } = user ?? {};
 
   const [valueFilteredInterventions, filterValue, setFilterValue] = useFilter(
     interventions,
@@ -96,6 +105,29 @@ export function InterventionPage({
     />
   );
 
+  const handleFeedbackClick = () => {
+    editUser({ feedbackCompleted: true });
+  };
+
+  const FeedbackNotification = (
+    <Notification
+      title={formatMessage(messages.feedbackTitle)}
+      description={
+        // URL hardcoded on purpose
+        <a
+          style={{ color: themeColors.secondary }}
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
+          target="_blank"
+          onClick={handleFeedbackClick}
+        >
+          {formatMessage(messages.feedbackDescription)}
+        </a>
+      }
+      onClose={handleFeedbackClick}
+      style={{ position: 'absolute', right: '0px' }}
+    />
+  );
+
   if (fetchInterventionLoading) return <Loader />;
   if (fetchInterventionError)
     return <ErrorAlert errorText={fetchInterventionError} fullPage />;
@@ -103,6 +135,17 @@ export function InterventionPage({
   if (!finalInterventions.length && !interventions.length) {
     return (
       <AppContainer>
+        {!user.feedbackCompleted && FeedbackNotification}
+        {teamName && (
+          <InitialRow fluid>
+            <Text color={colors.manatee} fontSize={fontSizes.regular} mt={50}>
+              <Markup
+                content={formatMessage(messages.teamName, { teamName })}
+                noWrap
+              />
+            </Text>
+          </InitialRow>
+        )}
         <H1 my={35}>
           <FormattedMessage {...messages.noInterventions} />
         </H1>
@@ -117,6 +160,17 @@ export function InterventionPage({
   }
   return (
     <AppContainer>
+      {!user.feedbackCompleted && FeedbackNotification}
+      {teamName && (
+        <InitialRow fluid>
+          <Text color={colors.manatee} fontSize={fontSizes.regular} mt={50}>
+            <Markup
+              content={formatMessage(messages.teamName, { teamName })}
+              noWrap
+            />
+          </Text>
+        </InitialRow>
+      )}
       <InitialRow fluid>
         <H1 mt={35}>
           <FormattedMessage {...messages.myInterventions} />
@@ -180,6 +234,8 @@ InterventionPage.propTypes = {
   interventionPageState: PropTypes.object,
   intl: PropTypes.object,
   createInterventionLoading: PropTypes.bool,
+  editUser: PropTypes.func,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -187,11 +243,13 @@ const mapStateToProps = createStructuredSelector({
   createInterventionLoading: makeSelectInterventionLoader(
     'createInterventionLoading',
   ),
+  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = {
   fetchInterventionsRequest,
   createInterventionRequest,
+  editUser: editUserRequest,
 };
 
 const withConnect = connect(

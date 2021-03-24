@@ -6,6 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import { interventionReducer } from 'global/reducers/intervention';
+import { Roles } from 'models/User/UserRoles';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import InterventionDetailsPage from '../index';
@@ -18,7 +19,7 @@ describe('<InterventionDetailsPage />', () => {
       },
     },
   };
-  const initialState = {};
+  const initialState = { auth: { user: { roles: [Roles.admin] } } };
   const store = createTestStore(initialState);
 
   beforeAll(() => {

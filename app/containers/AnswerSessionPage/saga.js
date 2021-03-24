@@ -6,10 +6,7 @@ import { toast } from 'react-toastify';
 import { push } from 'connected-react-router';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import {
-  defaultMapper,
-  mapQuestionToStateObject,
-} from 'utils/mapResponseObjects';
+import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
@@ -17,6 +14,7 @@ import LocalStorageService from 'utils/localStorageService';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { makeSelectLocation } from 'containers/App/selectors';
 import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import {
   SUBMIT_ANSWER_REQUEST,
   PHONETIC_PREVIEW_REQUEST,
@@ -86,8 +84,11 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
       data: { data, warning },
     } = yield axios.get(requestUrl);
 
-    if (!isNullOrUndefined(warning) && messages[warning])
-      yield call(toast.warning, formatMessage(messages[warning]));
+    if (!isNullOrUndefined(warning))
+      yield call(
+        toast.warning,
+        formatMessage(messages[warning] ?? messages.unknownWarning),
+      );
 
     yield put(nextQuestionSuccess(mapQuestionToStateObject(data)));
   } catch (error) {
@@ -124,14 +125,12 @@ function* createUserSession({ payload: { sessionId } }) {
   const requestUrl = `/v1/user_sessions`;
 
   try {
-    const {
-      data: { data },
-    } = yield axios.post(
+    const { data } = yield axios.post(
       requestUrl,
       objectToSnakeCase({ userSession: { sessionId } }),
     );
 
-    const mappedData = defaultMapper(data);
+    const mappedData = jsonApiToObject(data, 'userSession');
 
     yield put(createUserSessionSuccess(mappedData));
     yield put(resetPhoneNumberPreview());

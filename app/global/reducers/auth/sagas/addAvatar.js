@@ -27,7 +27,7 @@ export function* addAvatar({ payload: { image, imageUrl } }) {
       },
     });
     const mappedUser = mapCurrentUser(data);
-    yield call(LocalStorageService.updateState, mappedUser);
+    yield call(LocalStorageService.updateState, { user: mappedUser });
     yield put(addAvatarSuccess(mappedUser));
     window.URL.revokeObjectURL(imageUrl);
   } catch (error) {

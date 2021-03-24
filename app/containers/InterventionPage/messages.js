@@ -16,6 +16,10 @@ export default defineMessages({
     id: `${scope}.myInterventions`,
     defaultMessage: 'My Dashboard',
   },
+  teamName: {
+    id: `${scope}.teamName`,
+    defaultMessage: '<b>Team</b>: {teamName}',
+  },
   noInterventions: {
     id: `${scope}.noInterventions`,
     defaultMessage: `You don't have any interventions`,
@@ -35,5 +39,13 @@ export default defineMessages({
   hideArchived: {
     id: `${scope}.hideArchived`,
     defaultMessage: `Hide Archived`,
+  },
+  feedbackTitle: {
+    id: `${scope}.feedbackTitle`,
+    defaultMessage: `We’re waiting for your feedback!`,
+  },
+  feedbackDescription: {
+    id: `${scope}.feedbackDescription`,
+    defaultMessage: `Share your opinion on CIAS`,
   },
 });

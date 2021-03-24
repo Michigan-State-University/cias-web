@@ -63,6 +63,12 @@ export const CustomSlider = styled(AppSlider)`
       '.rc-slider-track': { visibility: 'hidden' },
     }}
 
+  .rc-slider-mark-text {
+    word-break: normal;
+    word-wrap: break-word;
+    width: max-content;
+  }
+
   &.wrap-text {
     .rc-slider-mark-text {
       max-width: 70px;
@@ -71,6 +77,12 @@ export const CustomSlider = styled(AppSlider)`
 `;
 
 export const VisualAnalogueSlider = styled(AppSlider)`
+  .rc-slider-mark-text {
+    word-break: normal;
+    word-wrap: break-word;
+    width: max-content;
+  }
+
   &.wrap-text {
     .rc-slider-mark-text {
       max-width: 70px;

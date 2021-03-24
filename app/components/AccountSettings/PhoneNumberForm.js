@@ -168,10 +168,10 @@ const PhoneNumberForm = ({
                           label: getCodeLabel(isoValue.value),
                         }
                       : null,
+                    disabled,
                   }}
                 />
                 <FormikNumberInput
-                  disabled={disabled}
                   value={numberValue}
                   formikKey="number"
                   placeholder={formatMessage(messages.phoneNumber)}
@@ -182,6 +182,7 @@ const PhoneNumberForm = ({
                     mt: 16,
                     width: '100%',
                     onBlur: handleSubmit,
+                    disabled,
                   }}
                 />
               </Row>

@@ -12,32 +12,40 @@ const GroupActionButton = ({
   label,
   active,
   action,
-}) => (
-  <Box
-    display="flex"
-    mr={20}
-    direction="column"
-    align="center"
-    clickable={active}
-    onClick={() => {
-      if (active) action();
-    }}
-  >
-    <div>
-      <Img
-        height={20}
-        mb={5}
-        src={active ? activeIcon : inactiveIcon}
-        alt="icon"
-      />
-    </div>
-    <div>
-      <Text color={active ? themeColors.secondary : colors.waterloo} size={12}>
-        {label}
-      </Text>
-    </div>
-  </Box>
-);
+  disabled,
+}) => {
+  const actionPossible = active && !disabled;
+
+  return (
+    <Box
+      display="flex"
+      mr={20}
+      direction="column"
+      align="center"
+      clickable={actionPossible}
+      onClick={() => {
+        if (actionPossible) action();
+      }}
+    >
+      <div>
+        <Img
+          height={20}
+          mb={5}
+          src={actionPossible ? activeIcon : inactiveIcon}
+          alt="icon"
+        />
+      </div>
+      <div>
+        <Text
+          color={actionPossible ? themeColors.secondary : colors.waterloo}
+          size={12}
+        >
+          {label}
+        </Text>
+      </div>
+    </Box>
+  );
+};
 
 GroupActionButton.propTypes = {
   activeIcon: PropTypes.string,
@@ -45,6 +53,7 @@ GroupActionButton.propTypes = {
   label: PropTypes.object,
   active: PropTypes.bool,
   action: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default GroupActionButton;

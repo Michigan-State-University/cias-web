@@ -27,6 +27,10 @@ import {
   REORDER_QUESTION_LIST_REQUEST,
   DELETE_QUESTION_IMAGE_REQUEST,
 } from 'global/reducers/questions/constants';
+import {
+  ADD_REPORT_TEMPLATE_SUCCESS,
+  DELETE_REPORT_TEMPLATE_SUCCESS,
+} from 'global/reducers/reportTemplates/constants';
 
 import {
   GET_SESSION_REQUEST,
@@ -107,6 +111,13 @@ const sessionReducer = (state = initialState, action) =>
         draft.cache.session = action.payload.session;
         break;
       case EDIT_SESSION_ERROR:
+        break;
+
+      case ADD_REPORT_TEMPLATE_SUCCESS:
+        draft.session.reportTemplatesCount += 1;
+        break;
+      case DELETE_REPORT_TEMPLATE_SUCCESS:
+        draft.session.reportTemplatesCount -= 1;
         break;
     }
   });

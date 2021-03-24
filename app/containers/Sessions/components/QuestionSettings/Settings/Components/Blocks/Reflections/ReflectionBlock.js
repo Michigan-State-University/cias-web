@@ -145,7 +145,7 @@ const ReflectionBlock = ({
 
   return (
     <Column>
-      <ClearAnimationButton blockIndex={blockIndex} />
+      <ClearAnimationButton blockIndex={blockIndex} disabled={disabled} />
       {currentQuestionType === feedbackQuestion.id && (
         <>
           <Box mt={15}>{formatMessage(messages.selectActionPosition)}</Box>

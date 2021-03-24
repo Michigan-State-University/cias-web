@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
@@ -17,24 +17,32 @@ import {
   makeSelectReportTemplatesErrors,
   makeSelectSelectedReportId,
   makeSelectSingleReportTemplate,
+  makeSelectSelectedSectionTemplate,
+  makeSelectSelectedSectionTemplateId,
+  selectReportTemplate,
 } from 'global/reducers/reportTemplates';
-
+import {
+  fetchInterventionSaga,
+  interventionReducer,
+  makeSelectIntervention,
+} from 'global/reducers/intervention';
 import {
   getSessionRequest,
   getSessionSaga,
   sessionReducer,
 } from 'global/reducers/session';
+
 import { ReportTemplate } from 'models/ReportTemplate';
-import {
-  makeSelectSelectedSectionTemplate,
-  makeSelectSelectedSectionTemplateId,
-} from 'global/reducers/reportTemplates/selectors';
 import { TemplateSection } from 'models/ReportTemplate/TemplateSection';
+import { canEditReportTemplate } from 'models/Status/statusPermissions';
+
 import Box from 'components/Box';
+
 import ReportTemplatesList from './components/ReportTemplatesList';
+import ReportTemplateDetails from './components/ReportTemplateDetails';
+
 import { ReportTemplatesContext } from './utils';
 import messages from './messages';
-import ReportTemplateDetails from './components/ReportTemplateDetails';
 
 const ReportTemplatesPage = ({
   reportTemplates,
@@ -50,18 +58,26 @@ const ReportTemplatesPage = ({
   fetchReportTemplates,
   getSession,
   intl: { formatMessage },
+  intervention,
+  selectTemplate,
 }) => {
+  const { status } = intervention ?? {};
+
   useEffect(() => {
     getSession({
       interventionId,
       sessionId,
     });
     fetchReportTemplates(sessionId);
+
+    return () => selectTemplate(null);
   }, [sessionId]);
 
   useEffect(() => {
     if (loaders.shouldRefetch) fetchReportTemplates(sessionId);
   }, [loaders.shouldRefetch]);
+
+  const canEdit = useMemo(() => canEditReportTemplate(status), [status]);
 
   return (
     <>
@@ -79,6 +95,7 @@ const ReportTemplatesPage = ({
             sessionId,
             selectedTemplateSectionId,
             selectedTemplateSection,
+            canEdit,
           }}
         >
           <ReportTemplatesList />
@@ -101,6 +118,8 @@ ReportTemplatesPage.propTypes = {
   singleReportTemplate: PropTypes.shape(ReportTemplate),
   selectedTemplateSectionId: PropTypes.string,
   selectedTemplateSection: PropTypes.shape(TemplateSection),
+  intervention: PropTypes.shape({ status: PropTypes.string }),
+  selectTemplate: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -111,11 +130,13 @@ const mapStateToProps = createStructuredSelector({
   singleReportTemplate: makeSelectSingleReportTemplate(),
   selectedTemplateSectionId: makeSelectSelectedSectionTemplateId(),
   selectedTemplateSection: makeSelectSelectedSectionTemplate(),
+  intervention: makeSelectIntervention(),
 });
 
 const mapDispatchToProps = {
   fetchReportTemplates: fetchReportTemplatesRequest,
   getSession: getSessionRequest,
+  selectTemplate: selectReportTemplate,
 };
 
 const withConnect = connect(
@@ -126,6 +147,8 @@ const withConnect = connect(
 export default compose(
   injectIntl,
   withConnect,
+  injectReducer({ key: 'intervention', reducer: interventionReducer }),
+  injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
   injectReducer({ key: 'session', reducer: sessionReducer }),
   injectSaga({ key: 'getSession', saga: getSessionSaga }),
   injectReducer({ key: 'reportTemplates', reducer: reportTemplatesReducer }),

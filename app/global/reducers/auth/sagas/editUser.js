@@ -16,11 +16,11 @@ export function* editUser({ payload }) {
 
   const userData = objectKeysToSnakeCase(payload.user);
   try {
-    const { data } = yield call(axios.put, requestURL, {
+    const { data } = yield call(axios.patch, requestURL, {
       user: userData,
     });
     const mappedUser = mapCurrentUserWithoutAttributes(data);
-    yield call(LocalStorageService.updateState, mappedUser);
+    yield call(LocalStorageService.updateState, { user: mappedUser });
     yield put(editUserSuccess(mappedUser));
   } catch (error) {
     yield call(toast.error, error.toString(), {

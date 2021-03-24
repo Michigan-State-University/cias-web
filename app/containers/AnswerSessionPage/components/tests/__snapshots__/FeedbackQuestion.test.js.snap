@@ -17,7 +17,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
           width="100%"
         >
           <div
-            class="rc-slider rc-slider-with-marks rc-slider-disabled styled__CustomSlider-bqo6sz-5 jcixCs"
+            class="rc-slider rc-slider-with-marks rc-slider-disabled styled__CustomSlider-bqo6sz-5 OxJBS"
           >
             <div
               class="rc-slider-rail"

@@ -123,7 +123,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
       width="100%"
     >
       <div
-        class="styled__DropdownContainer-sc-84wil9-1 eYUsLo"
+        class="styled__DropdownContainer-sc-84wil9-1 eBiCVQ"
       >
         <div
           class="Row-y1cs0u-0 jkgLKe"
@@ -150,7 +150,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-1vhutan-0 ehsbWl"
+        class="Box-sc-1vhutan-0 gCZhqE"
         display="none"
         width="100%"
       />

@@ -1,4 +1,10 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useRef,
+  useMemo,
+  useLayoutEffect,
+} from 'react';
 import { injectSaga, injectReducer } from 'redux-injectors';
 import PropTypes from 'prop-types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
@@ -8,6 +14,10 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import xor from 'lodash/xor';
+import keyBy from 'lodash/keyBy';
+import mapValues from 'lodash/mapValues';
+import flow from 'lodash/flow';
+import intersection from 'lodash/intersection';
 
 import SelectResearchers from 'containers/SelectResearchers';
 import Box from 'components/Box';
@@ -19,6 +29,7 @@ import Img from 'components/Img';
 import ActionIcon from 'components/ActionIcon';
 import Text from 'components/Text';
 import Modal from 'components/Modal';
+import TextButton from 'components/Button/TextButton';
 
 import menu from 'assets/svg/triangle-back-black.svg';
 import cog from 'assets/svg/gear-selected.svg';
@@ -85,9 +96,7 @@ import { canEdit } from 'models/Status/statusPermissions';
 
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
 import { reorderScope } from 'models/Session/ReorderScope';
-import appStages from 'global/appStages';
 import { FinishGroupType } from 'models/Session/GroupTypes';
-import scrollByRef from 'utils/scrollByRef';
 import editInterventionPageSaga from './saga';
 
 import QuestionDetails from '../../components/QuestionDetails';
@@ -130,25 +139,78 @@ function EditSessionPage({
   const [showList, setShowList] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
+  const openedGroups = useRef([]);
+  const [openedGroupsMap, setOpenedGroupsMap] = useState({});
+
+  const groupIds = useMemo(() => groups.map(({ id }) => id), [groups]);
+
+  // when changing session set all groups to open
+  useLayoutEffect(() => {
+    openedGroups.current = groupIds;
+    mapOpenedGroupsToObject();
+  }, [sessionId]);
+
+  // detect if some groups were deleted
+  // with intersect, non-existing groups are removed
+  useLayoutEffect(() => {
+    openedGroups.current = intersection(openedGroups.current, groupIds);
+    mapOpenedGroupsToObject();
+  }, [groupIds]);
+
+  const allGroupsCollapsed = useMemo(() => openedGroups.current.length === 0, [
+    openedGroups.current,
+  ]);
+
+  // map is created for faster direct access than checking the array on every item
+  const mapOpenedGroupsToObject = (groupsToMap = openedGroups.current) =>
+    setOpenedGroupsMap(
+      flow(
+        keyBy,
+        list => mapValues(list, () => true),
+      )(groupsToMap),
+    );
+
+  const toggleGroupCollapsable = (id, value) => {
+    const groupIndex = openedGroups.current.findIndex(
+      groupId => groupId === id,
+    );
+
+    const isToggled = groupIndex >= 0;
+
+    // if `value` is `null` -> toggle collapsable
+    // otherwise -> set to the passed `value`
+    // additionally check if already toggled to prevent re-render
+    const toSet = isNullOrUndefined(value) ? !isToggled : value;
+
+    if (toSet && !isToggled) {
+      openedGroups.current = [...openedGroups.current, id];
+      mapOpenedGroupsToObject(openedGroups.current);
+    } else if (!toSet && isToggled) {
+      openedGroups.current = openedGroups.current.filter(
+        groupId => groupId !== id,
+      );
+      mapOpenedGroupsToObject();
+    }
+  };
+
+  const expandAllGroups = () => {
+    openedGroups.current = groupIds;
+    mapOpenedGroupsToObject();
+  };
+
+  const collapseAllGroups = () => {
+    openedGroups.current = [];
+    mapOpenedGroupsToObject();
+  };
 
   const currentQuestion = questions.find(({ id }) => id === selectedQuestion);
   const currentGroupScope = groups.find(
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
   );
 
-  const groupIds = groups.map(({ id }) => id);
+  const editingPossible = canEdit(interventionStatus);
 
   const groupActions = [
-    ...(process.env.APP_STAGE === appStages.dev.id
-      ? [
-          {
-            label: <FormattedMessage {...messages.duplicate} />,
-            inactiveIcon: copy,
-            activeIcon: copyActive,
-            action: () => copyQuestions(selectedSlides),
-          },
-        ]
-      : []),
     {
       label: <FormattedMessage {...messages.group} />,
       inactiveIcon: groupIcon,
@@ -157,6 +219,17 @@ function EditSessionPage({
         groupQuestions(selectedSlides, params.sessionId);
         setSelectedSlides([]);
       },
+      disabled: !editingPossible,
+    },
+    {
+      label: <FormattedMessage {...messages.duplicate} />,
+      inactiveIcon: copy,
+      activeIcon: copyActive,
+      action: () => {
+        copyQuestions(selectedSlides, params.sessionId);
+        setSelectedSlides([]);
+      },
+      disabled: !editingPossible,
     },
     {
       label: <FormattedMessage {...messages.delete} />,
@@ -166,6 +239,7 @@ function EditSessionPage({
         deleteQuestions(selectedSlides, params.sessionId, groupIds);
         setSelectedSlides([]);
       },
+      disabled: !editingPossible,
     },
     {
       label: <FormattedMessage {...messages.shareCopy} />,
@@ -176,8 +250,6 @@ function EditSessionPage({
   ];
 
   useLockEditSessionPageScroll();
-
-  const editingPossible = canEdit(interventionStatus);
 
   const containerBottomRef = useRef(null);
 
@@ -204,10 +276,6 @@ function EditSessionPage({
       ),
       params.sessionId,
     );
-    scrollByRef(containerBottomRef, {
-      behavior: 'smooth',
-      block: 'end',
-    });
   };
 
   const onDragEnd = result => {
@@ -332,16 +400,32 @@ function EditSessionPage({
           >
             <Box padded width={350}>
               {!manage && (
-                <Row
-                  onClick={() => setManage(true)}
-                  clickable
-                  align="center"
-                  mb={10}
-                >
-                  <Img src={cog} alt="manage" />
-                  <Text ml={10} fontWeight="bold" color={themeColors.secondary}>
-                    <FormattedMessage {...messages.manageSlides} />
-                  </Text>
+                <Row align="center" justify="between" mb={10}>
+                  <Row onClick={() => setManage(true)} clickable align="center">
+                    <Img src={cog} alt="manage" />
+                    <Text
+                      ml={10}
+                      fontWeight="bold"
+                      color={themeColors.secondary}
+                    >
+                      <FormattedMessage {...messages.manageSlides} />
+                    </Text>
+                  </Row>
+
+                  <TextButton
+                    buttonProps={{
+                      ml: 10,
+                      fontWeight: 'bold',
+                      color: themeColors.secondary,
+                    }}
+                    onClick={
+                      allGroupsCollapsed ? expandAllGroups : collapseAllGroups
+                    }
+                  >
+                    {allGroupsCollapsed
+                      ? formatMessage(messages.expandGroups)
+                      : formatMessage(messages.collapseGroups)}
+                  </TextButton>
                 </Row>
               )}
               {manage && (
@@ -360,7 +444,7 @@ function EditSessionPage({
                       {filteredGroups.map((questionGroup, index) => (
                         <QuestionListGroup
                           index={index}
-                          disabled={!editingPossible}
+                          editingPossible={editingPossible}
                           changeGroupName={changeGroupName}
                           checkSelectedGroup={checkSelectedGroup}
                           sessionId={params.sessionId}
@@ -375,6 +459,8 @@ function EditSessionPage({
                           interventionStatus={interventionStatus}
                           formatMessage={formatMessage}
                           groupIds={groupIds}
+                          toggleCollapsable={toggleGroupCollapsable}
+                          isOpened={questionGroup.id in openedGroupsMap}
                         />
                       ))}
                       {provided.placeholder}
@@ -385,7 +471,7 @@ function EditSessionPage({
               {finishGroup && (
                 <QuestionListGroup
                   noDnd
-                  disabled={!editingPossible}
+                  editingPossible={editingPossible}
                   changeGroupName={changeGroupName}
                   checkSelectedGroup={checkSelectedGroup}
                   sessionId={params.sessionId}
@@ -400,6 +486,8 @@ function EditSessionPage({
                   interventionStatus={interventionStatus}
                   formatMessage={formatMessage}
                   groupIds={groupIds}
+                  toggleCollapsable={toggleGroupCollapsable}
+                  isOpened={finishGroup.id in openedGroupsMap}
                 />
               )}
               <Row />

@@ -33,6 +33,7 @@ const ReportTemplatesList = ({
     sessionId,
     loaders: { fetchReportTemplatesLoading, addReportTemplateLoading },
     errors: { fetchReportTemplatesError },
+    canEdit,
   } = useContext(ReportTemplatesContext);
 
   const handleAddReportTemplate = () => {
@@ -84,6 +85,7 @@ const ReportTemplatesList = ({
               color: themeColors.secondary,
               fontWeight: 'bold',
               style: { marginBottom: 18 },
+              disabled: !canEdit,
             }}
             spinnerProps={{ size: 30, width: 2 }}
           >
@@ -98,6 +100,7 @@ const ReportTemplatesList = ({
     fetchReportTemplatesError,
     addReportTemplateLoading,
     selectedReportId,
+    canEdit,
   ]);
 
   return (

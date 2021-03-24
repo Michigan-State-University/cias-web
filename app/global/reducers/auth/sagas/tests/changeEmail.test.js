@@ -33,7 +33,7 @@ describe('changeEmail saga', () => {
     return expectSaga(changeEmail, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.patch), { data: apiResponse }]])
-      .call(LocalStorageService.updateState, successUser)
+      .call(LocalStorageService.updateState, { user: successUser })
       .call(LocalStorageService.setUid, successUser.email)
       .call(toast.success, formatMessage(messages.changeEmailSuccess), {
         toastId: CHANGE_EMAIL_SUCCESS,

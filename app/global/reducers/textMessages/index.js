@@ -7,6 +7,7 @@ export {
   removeTextMessageRequest,
   removeTextMessageVariantRequest,
   changeSelectedVariantId,
+  cloneTextMessageRequest,
 } from './actions';
 
 export {

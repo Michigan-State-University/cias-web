@@ -40,7 +40,6 @@ const ArrowDropdown = ({
         shadow={boxShadows.black}
         position="absolute"
         width={childWidthScope === 'child' ? 'max-content' : '100%'}
-        mt={15}
         {...(isOpened ? { zIndex: 1 } : { display: 'none' })}
         {...positionFrom === 'right' && { right: '0' }}
       >

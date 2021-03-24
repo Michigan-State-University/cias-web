@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useReducer, useEffect } from 'react';
+import React, { useReducer, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -21,10 +21,15 @@ import {
   fetchInterventionRequest,
   makeSelectInterventionState,
   changeAccessSettingRequest,
+  interventionLogoSaga,
+  addInterventionLogoRequest,
+  deleteInterventionLogoRequest,
 } from 'global/reducers/intervention';
 import { canChangeAccessSettings } from 'models/Status/statusPermissions';
 import { themeColors } from 'theme';
 
+import { InterventionDetailsPageContext } from 'containers/InterventionDetailsPage/utils';
+import LogoUpload from './containers/LogoUpload';
 import AccessGiver from './containers/AccessGiver';
 import LeftColumn from './Components/LeftColumn';
 import RightColumn from './Components/RightColumn';
@@ -39,6 +44,8 @@ import { StyledBox } from './styled';
 const SettingsPanel = ({
   intervention,
   changeAccessSetting,
+  addLogo,
+  deleteLogo,
   interventionState: {
     intervention: { status },
     loaders: {
@@ -46,16 +53,27 @@ const SettingsPanel = ({
       changeAccessSettingLoading,
       enableAccessLoading,
       fetchUserAccessLoading,
+      logoLoading,
     },
     errors: { fetchInterventionError, fetchUserAccessError },
   },
 }) => {
+  const { rolePermissions } = useContext(InterventionDetailsPageContext);
+
   const [state, dispatch] = useReducer(reducer, {});
 
   const changingAccessSettingsPossible = canChangeAccessSettings(status);
 
   const updateSetting = newSetting =>
     changeAccessSetting(intervention.id, newSetting);
+
+  const onAddLogo = logo => {
+    addLogo(intervention.id, logo.image);
+  };
+
+  const onDeleteLogo = () => {
+    deleteLogo(intervention.id);
+  };
 
   const { shared_to: sharedTo, usersWithAccess } = intervention || {};
 
@@ -76,44 +94,58 @@ const SettingsPanel = ({
     return <ErrorAlert errorText={fetchInterventionError} />;
 
   return (
-    <StyledBox>
-      <Column width="100%" padding={35}>
-        {!changeAccessSettingLoading && (
-          <>
-            <H2 mb={25}>
-              <FormattedMessage {...messages.subheader} />
-            </H2>
-            <LeftColumn
-              disabled={!changingAccessSettingsPossible}
-              currentOption={currentOption}
-              dispatchUpdate={dispatchUpdate}
-              updateAccessSetting={updateSetting}
-            />
-            {state && <RightColumn state={state} />}
-            {currentOption &&
-              currentOption.id ===
-                SHARE_IDS.onlyInvitedRegisteredParticipant && (
-                <AccessGiver
-                  usersWithAccess={usersWithAccess}
-                  intervention={intervention}
-                  enableAccessLoading={enableAccessLoading}
-                  fetchUserAccessLoading={fetchUserAccessLoading}
-                  fetchUserAccessError={fetchUserAccessError}
-                />
-              )}
-          </>
-        )}
-        {changeAccessSettingLoading && (
-          <Spinner color={themeColors.secondary} size={100} />
-        )}
-      </Column>
-    </StyledBox>
+    <Column>
+      <StyledBox>
+        <Column width="100%" padding={35}>
+          {!changeAccessSettingLoading && (
+            <>
+              <H2 mb={25}>
+                <FormattedMessage {...messages.subheader} />
+              </H2>
+              <LeftColumn
+                disabled={!changingAccessSettingsPossible}
+                currentOption={currentOption}
+                dispatchUpdate={dispatchUpdate}
+                updateAccessSetting={updateSetting}
+              />
+              {state && <RightColumn state={state} />}
+              {currentOption &&
+                currentOption.id ===
+                  SHARE_IDS.onlyInvitedRegisteredParticipant && (
+                  <AccessGiver
+                    usersWithAccess={usersWithAccess}
+                    intervention={intervention}
+                    enableAccessLoading={enableAccessLoading}
+                    fetchUserAccessLoading={fetchUserAccessLoading}
+                    fetchUserAccessError={fetchUserAccessError}
+                  />
+                )}
+            </>
+          )}
+          {changeAccessSettingLoading && (
+            <Spinner color={themeColors.secondary} size={100} />
+          )}
+        </Column>
+      </StyledBox>
+      {rolePermissions.canEditLogo && (
+        <StyledBox my={30} padding={35}>
+          <LogoUpload
+            intervention={intervention}
+            logoLoading={logoLoading}
+            addImage={onAddLogo}
+            deleteImage={onDeleteLogo}
+          />
+        </StyledBox>
+      )}
+    </Column>
   );
 };
 
 SettingsPanel.propTypes = {
   intervention: PropTypes.object,
   changeAccessSetting: PropTypes.func,
+  addLogo: PropTypes.func,
+  deleteLogo: PropTypes.func,
   interventionState: PropTypes.shape({
     loaders: PropTypes.object,
     intervention: PropTypes.shape({ status: PropTypes.string }),
@@ -131,6 +163,8 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   fetchIntervention: fetchInterventionRequest,
   changeAccessSetting: changeAccessSettingRequest,
+  addLogo: addInterventionLogoRequest,
+  deleteLogo: deleteInterventionLogoRequest,
 };
 
 const withConnect = connect(
@@ -138,12 +172,14 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withSaga = injectSaga({
-  key: 'interventionSettingPage',
-  saga: interventionSettingPageSaga,
-});
-
 export default compose(
   withConnect,
-  withSaga,
+  injectSaga({
+    key: 'interventionSettingPage',
+    saga: interventionSettingPageSaga,
+  }),
+  injectSaga({
+    key: 'interventionLogo',
+    saga: interventionLogoSaga,
+  }),
 )(SettingsPanel);

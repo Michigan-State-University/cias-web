@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -37,6 +37,7 @@ import {
 } from 'global/reducers/copyModalReducer';
 import ChooserComponent from './ChooserComponent';
 import messages from './messages';
+import { CopyModalContext } from '../utils';
 
 export const VIEWS = {
   QUESTION_GROUP: 'QuestionGroup',
@@ -64,6 +65,7 @@ const CopyChooser = ({
   changeView,
   pasteText,
 }) => {
+  const { interventionStatusFilter } = useContext(CopyModalContext);
   const { name: interventionName } =
     interventions.find(({ id: elementId }) => elementId === interventionId) ??
     {};
@@ -91,6 +93,40 @@ const CopyChooser = ({
   useEffect(() => {
     fetchQuestionGroups(currentSession?.id);
   }, [currentSession]);
+
+  const filteredInterventions = useMemo(
+    () =>
+      interventions
+        ? interventions.filter(({ status }) =>
+            interventionStatusFilter.includes(status),
+          )
+        : [],
+    [interventions, interventionStatusFilter],
+  );
+
+  const filteredSessions = useMemo(
+    () =>
+      sessions
+        ? sessions.filter(({ intervention_id: sessionIntId }) =>
+            filteredInterventions.find(
+              ({ id: intId }) => intId === sessionIntId,
+            ),
+          )
+        : [],
+    [filteredInterventions, sessions],
+  );
+
+  const filteredQuestionGroups = useMemo(
+    () =>
+      questionGroups
+        ? questionGroups.filter(({ session_id: groupSessionId }) =>
+            filteredSessions.find(
+              ({ id: sessId }) => sessId === groupSessionId,
+            ),
+          )
+        : [],
+    [filteredSessions, questionGroups],
+  );
 
   const handleCopyCurrent = () => {
     if (!selectedItem?.id) return;
@@ -142,7 +178,7 @@ const CopyChooser = ({
           <ChooserComponent
             elementId={id}
             loading={loading}
-            items={interventions}
+            items={filteredInterventions}
             selectedItem={selectedItem}
             changeViewAction={changeToSessionView}
             selectAction={handleSelectAction}
@@ -157,7 +193,7 @@ const CopyChooser = ({
             elementId={id}
             backAction={changeToInterventionView}
             loading={loading}
-            items={sessions}
+            items={filteredSessions}
             changeViewAction={changeToQuestionGroupsView}
             selectAction={handleSelectAction}
             disableCopy={disableSessionCopy}
@@ -173,7 +209,7 @@ const CopyChooser = ({
             elementId={id}
             backAction={changeToSessionView}
             loading={loading}
-            items={questionGroups}
+            items={filteredQuestionGroups}
             selectAction={handleSelectAction}
             currentPlaceName={currentSession?.name}
             disableCopy={disableQuestionGroupCopy}

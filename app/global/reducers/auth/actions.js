@@ -21,9 +21,6 @@ import {
   CHANGE_PHONE_NUMBER_REQUEST,
   CHANGE_PHONE_NUMBER_SUCCESS,
   CHANGE_PHONE_NUMBER_ERROR,
-  CHANGE_NOTIFICATIONS_SETTINGS_REQUEST,
-  CHANGE_NOTIFICATIONS_SETTINGS_SUCCESS,
-  CHANGE_NOTIFICATIONS_SETTINGS_ERROR,
   CONFIRM_PHONE_NUMBER_REQUEST,
   CONFIRM_PHONE_NUMBER_SUCCESS,
   CONFIRM_PHONE_NUMBER_ERROR,
@@ -102,15 +99,6 @@ export const sendSmsTokenSuccess = () =>
   actionBuilder(SEND_SMS_TOKEN_SUCCESS, {});
 export const sendSmsTokenError = error =>
   actionBuilder(SEND_SMS_TOKEN_ERROR, { error });
-
-export const changeNotificationsSettingsRequest = notificationsSettings =>
-  actionBuilder(CHANGE_NOTIFICATIONS_SETTINGS_REQUEST, {
-    notificationsSettings,
-  });
-export const changeNotificationsSettingsSuccess = () =>
-  actionBuilder(CHANGE_NOTIFICATIONS_SETTINGS_SUCCESS, {});
-export const changeNotificationsSettingsError = () =>
-  actionBuilder(CHANGE_NOTIFICATIONS_SETTINGS_ERROR, {});
 
 export const changeErrorStatus = (error, value) =>
   actionBuilder(CHANGE_ERROR_STATUS, { error, value });

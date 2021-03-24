@@ -38,8 +38,10 @@ export function* confirmPhoneNumber({ payload: { smsToken, onSuccess } }) {
     if (!phoneNumberPreview) {
       const user = yield select(makeSelectUser());
       yield call(LocalStorageService.updateState, {
-        ...user,
-        phone: { ...user.phone, confirmed: true },
+        user: {
+          ...user,
+          phone: { ...user.phone, confirmed: true },
+        },
       });
     }
   } catch (error) {

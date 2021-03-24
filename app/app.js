@@ -18,6 +18,8 @@ import history from 'utils/history';
 import { ToastContainer } from 'react-toastify';
 import { ScreenClassProvider } from 'react-grid-system';
 
+import smoothscroll from 'smoothscroll-polyfill';
+
 import 'sanitize.css/sanitize.css';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -41,6 +43,8 @@ import { store } from './configureStore';
 import { translationMessages } from './i18n';
 
 import 'utils/axios';
+
+smoothscroll.polyfill();
 
 if (!isNullOrUndefined(process.env.SENTRY_DSN))
   Sentry.init({

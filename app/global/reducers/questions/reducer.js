@@ -1,6 +1,7 @@
 import produce from 'immer';
 import set from 'lodash/set';
 import get from 'lodash/get';
+import cloneDeep from 'lodash/cloneDeep';
 import groupBy from 'lodash/groupBy';
 import keys from 'lodash/keys';
 import values from 'lodash/values';
@@ -60,10 +61,16 @@ import {
   getNewQuestionIdInsideGroup,
   getNewQuestionIdInPreviousGroups,
 } from './utils';
-import { GROUP_QUESTIONS_SUCCESS } from '../questionGroups/constants';
+import {
+  GROUP_QUESTIONS_SUCCESS,
+  COPY_QUESTIONS_SUCCESS,
+  COPY_QUESTIONS_REQUEST,
+  COPY_QUESTIONS_ERROR,
+} from '../questionGroups/constants';
 
 export const initialState = {
   selectedQuestion: '',
+  lastCreatedQuestionId: null,
   questions: [],
   cache: {
     questions: [],
@@ -94,6 +101,7 @@ export const questionsReducer = (state = initialState, action) =>
         ];
         draft.cache.questions = draft.questions;
         draft.selectedQuestion = action.payload.question.id;
+        draft.lastCreatedQuestionId = action.payload.question.id;
         draft.loaders.createQuestionLoading = false;
         break;
       case CREATE_QUESTION_ERROR:
@@ -123,14 +131,17 @@ export const questionsReducer = (state = initialState, action) =>
         const questionIndex = state.questions.findIndex(
           ({ id }) => id === state.selectedQuestion,
         );
-        set(
-          draft.questions[questionIndex],
+
+        const updatedQuestion = set(
+          cloneDeep(state.questions[questionIndex]),
           action.payload.path,
           action.payload.value,
         );
-        assignFromQuestionTTS(draft, state);
+
+        draft.questions[questionIndex] = assignFromQuestionTTS(updatedQuestion);
         break;
       }
+
       case EDIT_QUESTION_SUCCESS:
         editQuestionSuccessCommon(draft, action.payload);
         break;
@@ -371,31 +382,40 @@ export const questionsReducer = (state = initialState, action) =>
         const selectedQuestionIndex = draft.questions.findIndex(
           ({ id }) => id === (questionId || draft.selectedQuestion),
         );
-        draft.questions[selectedQuestionIndex] = {
-          ...draft.questions[selectedQuestionIndex],
+
+        const updatedQuestion = {
+          ...state.questions[selectedQuestionIndex],
           ...questionDataReducer(
-            draft.questions[selectedQuestionIndex],
+            state.questions[selectedQuestionIndex],
             action.payload,
           ),
         };
-        assignFromQuestionTTS(draft, state);
+
+        draft.questions[selectedQuestionIndex] = assignFromQuestionTTS(
+          updatedQuestion,
+        );
         break;
       }
 
       case UPDATE_QUESTION_SETTINGS: {
+        draft.loaders.updateQuestionLoading = true;
+
         const selectedQuestionIndex = draft.questions.findIndex(
           ({ id }) => id === draft.selectedQuestion,
         );
-        const settings = questionSettingsReducer(
-          draft.questions,
-          action.payload,
-          draft.selectedQuestion,
-        );
-        draft.loaders.updateQuestionLoading = true;
-        draft.questions[selectedQuestionIndex] = {
-          ...draft.questions[selectedQuestionIndex],
-          ...settings,
+
+        const updatedQuestion = {
+          ...state.questions[selectedQuestionIndex],
+          ...questionSettingsReducer(
+            state.questions,
+            action.payload,
+            state.selectedQuestion,
+          ),
         };
+
+        draft.questions[selectedQuestionIndex] = assignFromQuestionTTS(
+          updatedQuestion,
+        );
         break;
       }
       case GROUP_QUESTIONS_SUCCESS: {
@@ -417,6 +437,21 @@ export const questionsReducer = (state = initialState, action) =>
         if (isCurrent) draft.questions = [...state.questions, question];
         break;
       case COPY_EXTERNALLY_QUESTION_ERROR:
+        draft.loaders.updateQuestionLoading = false;
+        draft.questions = state.cache.questions;
+        break;
+      case COPY_QUESTIONS_REQUEST:
+        draft.loaders.updateQuestionLoading = true;
+        break;
+      case COPY_QUESTIONS_SUCCESS:
+        const { questions } = action.payload;
+        const questionsList = [...state.questions, ...questions];
+        draft.questions = questionsList;
+        draft.cache.questions = questionsList;
+        draft.loaders.updateQuestionLoading = false;
+        break;
+
+      case COPY_QUESTIONS_ERROR:
         draft.loaders.updateQuestionLoading = false;
         draft.questions = state.cache.questions;
         break;

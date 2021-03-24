@@ -20,7 +20,7 @@ export function* changeEmail({ payload: { oldPassword, newEmail } }) {
       email: newEmail,
     });
     const mappedUser = mapCurrentUser(data);
-    yield call(LocalStorageService.updateState, mappedUser);
+    yield call(LocalStorageService.updateState, { user: mappedUser });
     yield call(LocalStorageService.setUid, mappedUser.email);
     yield call(toast.success, formatMessage(messages.changeEmailSuccess), {
       toastId: CHANGE_EMAIL_SUCCESS,

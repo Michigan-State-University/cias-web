@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Question from 'models/Session/Question';
@@ -24,7 +24,24 @@ const NameQuestion = ({
     body: {
       variable: { name: variableName },
     },
+    settings: { required },
   } = question;
+
+  /*
+   * Initial set of answer value
+   * Without it, it crashes when Question is not `required`
+   */
+  useEffect(() => {
+    if (!required)
+      selectAnswer([
+        {
+          var: variableName,
+          value: {
+            name: '',
+          },
+        },
+      ]);
+  }, []);
 
   const onChange = event => {
     const value = { ...event };

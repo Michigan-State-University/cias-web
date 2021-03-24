@@ -35,14 +35,6 @@ export default defineMessages({
     id: `${scope}.addAvatarError`,
     defaultMessage: 'Cannot change your avatar.',
   },
-  changeNotificationsSettingsError: {
-    id: `${scope}.changeNotificationsSettingsError`,
-    defaultMessage: 'Cannot change your notifications settings.',
-  },
-  changeNotificationsSettingsSuccess: {
-    id: `${scope}.changeNotificationsSettingsSuccess`,
-    defaultMessage: 'You have successfully changed your notification settings',
-  },
   confirmPhoneNumberSuccess: {
     id: `${scope}.confirmPhoneNumberSuccess`,
     defaultMessage: 'You have successfully confirmed your phone number!',

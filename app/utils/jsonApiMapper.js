@@ -8,7 +8,10 @@ const defaultConfig = {
 };
 
 /**
- * Map JSON API object to standard object
+ * @deprecated DEPRECATED: I made easier functions separately for Object and Array.
+ *  Look `jsonApiToObject` and `jsonApiToArray` functions.
+ *  This is left for compatibility reasons.
+ * @description Map JSON API object to standard object
  * @param {object} json
  * @param {string} type
  * @param {typeof defaultConfig} [config=defaultConfig]
@@ -25,3 +28,20 @@ export const mapJsonApiToObject = (json, type, config) => {
 
   return mergedConfig.isSingleObject ? normalizedData[0] : normalizedData;
 };
+
+const jsonApiMapper = (json, type) =>
+  build(normalize(json), type, defaultConfig.id, defaultConfig.options);
+
+/**
+ * Map JSON API object to JS object
+ * @param {object} json
+ * @param {string} type
+ */
+export const jsonApiToObject = (json, type) => jsonApiMapper(json, type)[0];
+
+/**
+ * Map JSON API object to JS array
+ * @param {object} json
+ * @param {string} type
+ */
+export const jsonApiToArray = (json, type) => jsonApiMapper(json, type);

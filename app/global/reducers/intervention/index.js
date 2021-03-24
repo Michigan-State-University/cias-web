@@ -20,6 +20,8 @@ export {
   fetchSessionEmailsRequest,
   deleteSessionRequest,
   externalCopySessionRequest,
+  addInterventionLogoRequest,
+  deleteInterventionLogoRequest,
 } from './actions';
 export { interventionReducer } from './reducer';
 export {
@@ -46,6 +48,7 @@ export {
   createSessionSaga,
   deleteSessionSaga,
   externalCopySessionSaga,
+  interventionLogoSaga,
 } from './sagas';
 
 export {

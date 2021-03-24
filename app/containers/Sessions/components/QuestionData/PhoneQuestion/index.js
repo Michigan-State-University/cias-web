@@ -26,7 +26,7 @@ const PhoneQuestion = ({
   const { number, iso, prefix } = payload ?? {};
   return (
     <Column mt={10}>
-      <Row disabled>
+      <Row>
         <PhoneNumberForm
           disabled
           formatMessage={formatMessage}

@@ -1,4 +1,17 @@
 import { useEffect } from 'react';
+import ReactQuill from 'react-quill';
+
+const refContains = (ref, target) => {
+  const instance = ref.current;
+
+  switch (instance.constructor) {
+    case ReactQuill:
+      return instance.editingArea.contains(target);
+    case HTMLElement:
+    default:
+      return instance.contains(target);
+  }
+};
 
 /**
  * @param {object} targetRef ref from element for which we want to detect outside clicks
@@ -8,7 +21,7 @@ import { useEffect } from 'react';
 const useOutsideClick = (targetRef, onClick, active) => {
   const handleClick = event => {
     const { target } = event;
-    if (targetRef.current && !targetRef.current.contains(target)) {
+    if (targetRef.current && !refContains(targetRef, target)) {
       if (onClick) onClick();
     }
   };
@@ -20,7 +33,7 @@ const useOutsideClick = (targetRef, onClick, active) => {
         document.removeEventListener('mousedown', handleClick);
       };
     }
-  }, [targetRef, active]);
+  }, [targetRef, active, onClick]);
 };
 
 export default useOutsideClick;

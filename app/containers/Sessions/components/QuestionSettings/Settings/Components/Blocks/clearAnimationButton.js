@@ -23,6 +23,7 @@ const ClearAnimationButton = ({
   blockIndex,
   setOffset,
   savePosition,
+  disabled,
 }) => {
   const clearAnimationPosition = () => {
     const newPosition = resetAnimationPosition(
@@ -35,7 +36,7 @@ const ClearAnimationButton = ({
     setOffset(newPosition.x, newPosition.y);
   };
   return (
-    <Button mt={15} onClick={clearAnimationPosition}>
+    <Button mt={15} onClick={clearAnimationPosition} disabled={disabled}>
       <FormattedMessage {...messages.resetAnimationPosition} />
     </Button>
   );
@@ -59,6 +60,7 @@ ClearAnimationButton.propTypes = {
   blockIndex: PropTypes.number,
   setOffset: PropTypes.func,
   savePosition: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default connect(

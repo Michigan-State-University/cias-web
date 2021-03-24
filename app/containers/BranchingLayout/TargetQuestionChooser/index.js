@@ -49,7 +49,7 @@ const TargetQuestionChooser = props => {
     isVisible,
     intervention,
     interventionLoading,
-    interventionBranching,
+    sessionBranching,
     sessionIndex,
     questionGroups,
   } = props;
@@ -81,21 +81,31 @@ const TargetQuestionChooser = props => {
   );
 
   const { sessions: sessionList } = intervention || {};
-  const [isInterventionView, _setIsInterventionView] = useState(false);
-  const setIsInterventionView = (value, event) => {
+
+  const filteredSessionList = useMemo(
+    () =>
+      sessionList
+        ? sessionList.filter(session => session.position > sessionIndex + 1)
+        : [],
+    [sessionList, sessionIndex],
+  );
+
+  const [isSessionView, _setIsSessionView] = useState(false);
+  const setIsSessionView = (value, event) => {
     if (event) event.stopPropagation();
-    _setIsInterventionView(value);
+    _setIsSessionView(value);
   };
-  const canSelectIntervention = selectedInterventionId =>
-    !interventionBranching ||
-    sessionList[sessionIndex].id !== selectedInterventionId;
+  const canSelectSession = sessionPosition =>
+    !sessionBranching ||
+    (sessionList[sessionIndex] &&
+      sessionPosition > sessionList[sessionIndex].position);
   const isLast = currentIndex === questions.length - 1;
-  const isCurrentIntervention = session =>
-    !interventionBranching && sessionId === session.id;
+  const isCurrentSession = session =>
+    !sessionBranching && sessionId === session.id;
 
   useEffect(() => {
     if (isVisible) {
-      setIsInterventionView(target.type === 'Session');
+      setIsSessionView(target.type === 'Session');
     }
   }, [isVisible]);
 
@@ -110,11 +120,11 @@ const TargetQuestionChooser = props => {
     }
   };
 
-  const chooseIntervention = (targetInterventionId, event) => {
-    if (canSelectIntervention(targetInterventionId)) {
-      if (!interventionBranching && targetInterventionId === sessionId)
-        setIsInterventionView(false, event);
-      else onClick({ type: 'Session', id: targetInterventionId });
+  const chooseSession = (session, event) => {
+    if (canSelectSession(session.position)) {
+      if (!sessionBranching && session.id === sessionId)
+        setIsSessionView(false, event);
+      else onClick({ type: 'Session', id: session.id });
     }
   };
 
@@ -126,7 +136,7 @@ const TargetQuestionChooser = props => {
           data-cy="select-target-question-session-view-setter"
           src={arrowLeft}
           mr={10}
-          onClick={event => setIsInterventionView(true, event)}
+          onClick={event => setIsSessionView(true, event)}
           clickable
         />
         <Img src={presentationProjector} mr={10} />
@@ -150,7 +160,7 @@ const TargetQuestionChooser = props => {
     </Column>
   );
 
-  const renderInterventionChooser = () => {
+  const renderSessionChooser = () => {
     if (interventionLoading)
       return (
         <Box
@@ -162,6 +172,9 @@ const TargetQuestionChooser = props => {
         </Box>
       );
 
+    if (!filteredSessionList || !filteredSessionList.length)
+      return <H3>{formatMessage(messages.sessionListEmpty)}</H3>;
+
     return (
       <Column data-testid={`${id}-select-target-session`}>
         <Row mb={20}>
@@ -169,16 +182,16 @@ const TargetQuestionChooser = props => {
         </Row>
         <Box maxHeight="300px" overflow="scroll">
           <Column>
-            {sessionList &&
-              sessionList.map((session, index) => (
+            {filteredSessionList &&
+              filteredSessionList.map((session, index) => (
                 <Row
                   data-testid={`${id}-select-target-session-el-${index}`}
                   data-cy={`choose-session-${index}`}
                   key={`${id}-select-target-session-${index}`}
-                  mb={index !== sessionList.length - 1 ? 15 : 5}
-                  onClick={event => chooseIntervention(session.id, event)}
+                  mb={index !== filteredSessionList.length - 1 ? 15 : 5}
+                  onClick={event => chooseSession(session, event)}
                   align="center"
-                  clickable={canSelectIntervention(session.id)}
+                  clickable={canSelectSession(session.position)}
                 >
                   <Img
                     src={
@@ -188,22 +201,19 @@ const TargetQuestionChooser = props => {
                     }
                     mr={10}
                   />
-                  <Box
-                    mr={10}
-                    maxWidth={isCurrentIntervention(session) ? 70 : 140}
-                  >
+                  <Box mr={10} maxWidth={isCurrentSession(session) ? 70 : 140}>
                     <EllipsisText
                       text={session.name}
                       fontWeight={target.id === session.id ? 'bold' : ''}
                       fontSize={13}
                       color={
-                        canSelectIntervention(session.id)
+                        canSelectSession(session.position)
                           ? colors.black
                           : colors.grey
                       }
                     />
                   </Box>
-                  {isCurrentIntervention(session) && (
+                  {isCurrentSession(session) && (
                     <Badge bg={themeColors.secondary} color={colors.white}>
                       {formatMessage(messages.selectedInterventionBadge)}
                     </Badge>
@@ -218,7 +228,7 @@ const TargetQuestionChooser = props => {
 
   return (
     <Box width={300}>
-      {!interventionBranching && (
+      {!sessionBranching && (
         <Box
           borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
             colors.linkWater
@@ -244,9 +254,7 @@ const TargetQuestionChooser = props => {
       )}
       <Row>
         <Box padding={8} filled>
-          {isInterventionView
-            ? renderInterventionChooser()
-            : renderQuestionChooser}
+          {isSessionView ? renderSessionChooser() : renderQuestionChooser}
         </Box>
       </Row>
     </Box>
@@ -268,7 +276,7 @@ TargetQuestionChooser.propTypes = {
   isVisible: PropTypes.bool,
   intervention: PropTypes.object,
   interventionLoading: PropTypes.bool,
-  interventionBranching: PropTypes.bool,
+  sessionBranching: PropTypes.bool,
   questionGroups: PropTypes.array,
 };
 

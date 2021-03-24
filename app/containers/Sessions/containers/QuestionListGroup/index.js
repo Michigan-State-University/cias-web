@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -41,15 +41,18 @@ const QuestionListGroup = ({
   formatMessage,
   noDnd,
   groupIds,
+  isOpened,
+  toggleCollapsable,
 }) => {
   const { title, id, type } = questionGroup;
-  const [openCollapsable, setOpenCollapsable] = useState(true);
-  const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
+
+  const handleToggleCollapsable = (value = null) =>
+    toggleCollapsable(id, value);
 
   const isFinishGroup = type === FinishGroupType;
 
   useEffect(() => {
-    setOpenCollapsable(true);
+    handleToggleCollapsable(true);
   }, [questions.length]);
 
   const renderQuestions = providedGroupDroppable => (
@@ -72,7 +75,7 @@ const QuestionListGroup = ({
             questions={questions}
             question={question}
             sessionId={sessionId}
-            disabled={editingPossible}
+            disabled={!editingPossible}
             interventionStatus={interventionStatus}
             noDnd={noDnd}
           />
@@ -105,8 +108,8 @@ const QuestionListGroup = ({
     >
       <Collapse
         disabled
-        isOpened={openCollapsable}
-        onToggle={toggleCollapsable}
+        isOpened={isOpened}
+        onToggle={() => handleToggleCollapsable()}
         height="auto"
         px={0}
         bgOpacity={0}
@@ -137,11 +140,13 @@ const QuestionListGroup = ({
                 maxWidth="initial"
                 onBlur={val => changeGroupName(val, sessionId, id)}
                 onFocus={selectInputText}
+                disabled={!editingPossible}
               />
             </Box>
             {!noDnd && (
               <Img
                 src={reorderIcon}
+                disabled={!editingPossible}
                 {...providedGroupDraggable.dragHandleProps}
               />
             )}
@@ -155,7 +160,12 @@ const QuestionListGroup = ({
   );
 
   const renderGroupWithDnd = () => (
-    <Draggable key={`group-${id}`} draggableId={id} index={groupIndex}>
+    <Draggable
+      key={`group-${id}`}
+      draggableId={id}
+      index={groupIndex}
+      isDragDisabled={!editingPossible}
+    >
       {providedGroupDraggable => renderGroup(providedGroupDraggable)}
     </Draggable>
   );
@@ -182,6 +192,8 @@ QuestionListGroup.propTypes = {
   index: PropTypes.number,
   noDnd: PropTypes.bool,
   groupIds: PropTypes.array,
+  isOpened: PropTypes.bool,
+  toggleCollapsable: PropTypes.func,
 };
 
 const mapStateToProps = (_, props) =>

@@ -13,8 +13,11 @@ import {
   fetchVariantsRequest,
   removeTextMessageRequest,
   changeTileName,
+  cloneTextMessageRequest,
 } from 'global/reducers/textMessages';
+
 import binNoBg from 'assets/svg/bin-no-bg.svg';
+import copy from 'assets/svg/copy.svg';
 
 import { colors } from 'theme';
 import { StyledInput } from 'components/Input/StyledInput';
@@ -35,6 +38,7 @@ const TextMessageSettings = ({
   fetchVariants,
   removeTextMessage,
   changeTileNameAction,
+  cloneTextMessage,
 }) => {
   const {
     formatMessage,
@@ -73,13 +77,23 @@ const TextMessageSettings = ({
         <Text fontSize={18} fontWeight="bold">
           {formatMessage(messages.header)}
         </Text>
-        <Img
-          src={binNoBg}
-          onClick={() => removeTextMessage(id)}
-          mr={10}
-          clickable
-          disabled={!editingPossible}
-        />
+        <div>
+          <Img
+            src={copy}
+            onClick={() => cloneTextMessage(id)}
+            mr={10}
+            clickable
+            disabled={!editingPossible}
+            height={20}
+          />
+          <Img
+            src={binNoBg}
+            onClick={() => removeTextMessage(id)}
+            mr={10}
+            clickable
+            disabled={!editingPossible}
+          />
+        </div>
       </Row>
       <Box bg={colors.linkWater} width="100%" mt={20} padding={8}>
         <StyledInput
@@ -118,6 +132,7 @@ TextMessageSettings.propTypes = {
   fetchVariants: PropTypes.func,
   removeTextMessage: PropTypes.func,
   changeTileNameAction: PropTypes.func,
+  cloneTextMessage: PropTypes.func,
 };
 
 const mapDispatchToProps = {
@@ -127,6 +142,7 @@ const mapDispatchToProps = {
   changeTileNameAction: changeTileName,
   fetchVariants: fetchVariantsRequest,
   removeTextMessage: removeTextMessageRequest,
+  cloneTextMessage: cloneTextMessageRequest,
 };
 
 const withConnect = connect(

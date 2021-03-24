@@ -23,10 +23,10 @@ import {
   CLEAN_GROUPS,
 } from './constants';
 
-export const copyQuestionsRequest = questionIds =>
-  actionBuilder(COPY_QUESTIONS_REQUEST, { questionIds });
-export const copyQuestionsSuccess = questions =>
-  actionBuilder(COPY_QUESTIONS_SUCCESS, { questions });
+export const copyQuestionsRequest = (questionIds, sessionId) =>
+  actionBuilder(COPY_QUESTIONS_REQUEST, { questionIds, sessionId });
+export const copyQuestionsSuccess = (questions, group) =>
+  actionBuilder(COPY_QUESTIONS_SUCCESS, { questions, group });
 export const copyQuestionsError = error =>
   actionBuilder(COPY_QUESTIONS_ERROR, { error });
 

@@ -17,6 +17,10 @@ export default defineMessages({
     id: `${scope}.sessionListHeader`,
     defaultMessage: 'Your Sessions',
   },
+  sessionListEmpty: {
+    id: `${scope}.sessionListEmpty`,
+    defaultMessage: 'No future Sessions!',
+  },
   selectedInterventionBadge: {
     id: `${scope}.selectedInterventionBadge`,
     defaultMessage: 'Current',

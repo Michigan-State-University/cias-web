@@ -41,6 +41,7 @@ export const PHONETIC_PREVIEW_FAILURE =
 export const ZERO_DIVISION_FORMULA_ERROR = 'ZeroDivisionError';
 export const OTHER_FORMULA_ERROR = 'OtherFormulaError';
 export const REFLECTION_MISS_MATCH = 'ReflectionMissMatch';
+export const NO_BRANCHING_TARGET = 'NoBranchingTarget';
 
 export const CREATE_USER_SESSION_REQUEST =
   'app/AnswerSessionPage/CREATE_USER_SESSION_REQUEST';

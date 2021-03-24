@@ -49,6 +49,12 @@ import {
   EXTERNAL_COPY_SESSION_REQUEST,
   EXTERNAL_COPY_SESSION_SUCCESS,
   EXTERNAL_COPY_SESSION_ERROR,
+  ADD_INTERVENTION_LOGO_REQUEST,
+  ADD_INTERVENTION_LOGO_SUCCESS,
+  ADD_INTERVENTION_LOGO_ERROR,
+  DELETE_INTERVENTION_LOGO_REQUEST,
+  DELETE_INTERVENTION_LOGO_SUCCESS,
+  DELETE_INTERVENTION_LOGO_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = id =>
@@ -72,12 +78,12 @@ export const createInterventionSuccess = intervention =>
 export const createInterventionError = error =>
   actionBuilder(CREATE_INTERVENTION_ERROR, { error });
 
-export const editInterventionRequest = payload =>
-  actionBuilder(EDIT_INTERVENTION_REQUEST, payload);
+export const editInterventionRequest = intervention =>
+  actionBuilder(EDIT_INTERVENTION_REQUEST, { intervention });
 export const editInterventionSuccess = intervention =>
   actionBuilder(EDIT_INTERVENTION_SUCCESS, { intervention });
-export const editInterventionError = () =>
-  actionBuilder(EDIT_INTERVENTION_ERROR, {});
+export const editInterventionError = error =>
+  actionBuilder(EDIT_INTERVENTION_ERROR, { error });
 
 export const copySessionRequest = payload =>
   actionBuilder(COPY_SESSION_REQUEST, payload);
@@ -166,3 +172,21 @@ export const externalCopySessionSuccess = ({ session, interventionId }) =>
   actionBuilder(EXTERNAL_COPY_SESSION_SUCCESS, { session, interventionId });
 export const externalCopySessionError = error =>
   actionBuilder(EXTERNAL_COPY_SESSION_ERROR, { error });
+
+export const addInterventionLogoRequest = (interventionId, logoData, logoUrl) =>
+  actionBuilder(ADD_INTERVENTION_LOGO_REQUEST, {
+    interventionId,
+    logoData,
+    logoUrl,
+  });
+export const addInterventionLogoSuccess = logoUrl =>
+  actionBuilder(ADD_INTERVENTION_LOGO_SUCCESS, { logoUrl });
+export const addInterventionLogoError = error =>
+  actionBuilder(ADD_INTERVENTION_LOGO_ERROR, { error });
+
+export const deleteInterventionLogoRequest = interventionId =>
+  actionBuilder(DELETE_INTERVENTION_LOGO_REQUEST, { interventionId });
+export const deleteInterventionLogoSuccess = () =>
+  actionBuilder(DELETE_INTERVENTION_LOGO_SUCCESS, {});
+export const deleteInterventionLogoError = error =>
+  actionBuilder(DELETE_INTERVENTION_LOGO_ERROR, { error });

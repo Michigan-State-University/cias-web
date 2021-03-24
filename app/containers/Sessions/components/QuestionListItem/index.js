@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Draggable } from 'react-beautiful-dnd';
-import unescape from 'lodash/unescape';
 import cloneDeep from 'lodash/cloneDeep';
 import set from 'lodash/set';
 import uniqueId from 'lodash/uniqueId';
@@ -26,6 +25,7 @@ import {
   makeSelectQuestions,
   selectQuestion,
   copyExternallyQuestionRequest,
+  makeSelectLastCreatedQuestionId,
 } from 'global/reducers/questions';
 import {
   changeCurrentNarratorBlock,
@@ -45,6 +45,7 @@ import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
 import ConfirmationBox from 'components/ConfirmationBox';
 import Text from 'components/Text';
+import scrollByRef from 'utils/scrollByRef';
 import VariableInput from '../QuestionDetails/VariableInput';
 import { ClampedTitle, ToggleableBox } from './styled';
 import messages from './messages';
@@ -73,7 +74,9 @@ const QuestionListItem = ({
   groupIds,
   allQuestions,
   sessionId,
+  lastCreatedQuestionId,
 }) => {
+  const questionRef = useRef(null);
   const [copyOpen, setCopyOpen] = useState(false);
   const [deleteOpen, setDeleteOpen] = useState(false);
   const { type, subtitle, id, body, question_group_id: groupId } = question;
@@ -81,7 +84,21 @@ const QuestionListItem = ({
   const isFinishScreen = type === finishQuestion.id;
   const isNameScreen = type === nameQuestion.id;
 
+  useEffect(() => {
+    if (selectedQuestionIndex === id) beforeRender();
+  }, [selectedQuestionIndex]);
+
+  useEffect(() => {
+    if (
+      lastCreatedQuestionId === id &&
+      selectedQuestionIndex === id &&
+      questionRef.current
+    )
+      scrollByRef(questionRef, true);
+  }, [lastCreatedQuestionId, selectedQuestionIndex]);
+
   const handleSelectClick = () => {
+    document.activeElement.blur();
     setDraggable(false);
     if (selectedQuestionIndex !== id) {
       onSelect(id);
@@ -130,17 +147,22 @@ const QuestionListItem = ({
       label: <FormattedMessage {...messages.duplicate} />,
       action: handleCopy,
       color: colors.black,
+      disabled,
     },
     {
       id: 'delete',
       label: <FormattedMessage {...messages.delete} />,
       action: () => setDeleteOpen(true),
       color: colors.flamingo,
+      disabled,
     },
   ];
 
   const onChangeItem = () => {
     handleSelectClick(index);
+  };
+
+  const beforeRender = () => {
     changeNarratorBlockIndex(-1);
     toggleSettings({ index, questionIndex: selectedQuestionIndex });
   };
@@ -177,7 +199,7 @@ const QuestionListItem = ({
         bg={colors.zirkon}
         border={`1px solid ${checked ? colors.orchid : colors.smokeWhite}`}
       >
-        <Row justify="between">
+        <Row justify="between" ref={questionRef}>
           {manage && !isFinishScreen && (
             <Column xs={1}>
               <Checkbox
@@ -192,9 +214,7 @@ const QuestionListItem = ({
           )}
           <Column xs={10}>
             <Row>
-              <ClampedTitle mb={6}>
-                {unescape(htmlToPlainText(subtitle))}
-              </ClampedTitle>
+              <ClampedTitle mb={6}>{htmlToPlainText(subtitle)}</ClampedTitle>
             </Row>
             <Row>
               <Box display="flex" align="center">
@@ -222,7 +242,7 @@ const QuestionListItem = ({
               </Row>
             )}
           </Column>
-          {!manage && !disabled && !isFinishScreen && (
+          {!manage && !isFinishScreen && (
             <Column xs={1}>
               <Dropdown options={options} />
             </Column>
@@ -237,6 +257,7 @@ const QuestionListItem = ({
       key={`group-${groupId}-item-${id}`}
       draggableId={id}
       index={index}
+      isDragDisabled={disabled}
     >
       {provided => (
         <Box
@@ -279,11 +300,13 @@ QuestionListItem.propTypes = {
   noDnd: PropTypes.bool,
   groupIds: PropTypes.array,
   allQuestions: PropTypes.array,
+  lastCreatedQuestionId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   settingsVisibility: makeSelectQuestionSettingsVisibility(),
   allQuestions: makeSelectQuestions(),
+  lastCreatedQuestionId: makeSelectLastCreatedQuestionId(),
 });
 
 const mapDispatchToProps = {

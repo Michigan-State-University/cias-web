@@ -9,6 +9,8 @@ export {
   makeSelectSelectedReport,
   makeSelectSelectedReportId,
   makeSelectSingleReportTemplate,
+  makeSelectSelectedSectionTemplate,
+  makeSelectSelectedSectionTemplateId,
 } from './selectors';
 
 export {

@@ -17,6 +17,7 @@ import { sessionReducer } from 'global/reducers/session';
 import { localStateReducer } from 'global/reducers/localState';
 import { interventionsReducer } from 'global/reducers/interventions';
 import { interventionReducer } from 'global/reducers/intervention';
+import { draft } from 'models/Status/StatusTypes';
 
 import CopyModal from '../index';
 
@@ -30,6 +31,7 @@ describe('<CopyModal />', () => {
   const mockIntervention = (suffix = 1) => ({
     id: `intervention-test-id-${suffix}`,
     name: `Intervention test title ${suffix}`,
+    status: draft,
   });
 
   const mockSession = (suffix = 1) => ({

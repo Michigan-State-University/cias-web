@@ -1,20 +1,18 @@
 import axios from 'axios';
-import { put, takeLatest, select, call } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import globalMessages from 'global/i18n/globalMessages';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import { makeSelectIntervention } from '../selectors';
-import { editInterventionSuccess } from '../actions';
+import { editInterventionError, editInterventionSuccess } from '../actions';
 import {
   EDIT_INTERVENTION_REQUEST,
   EDIT_INTERVENTION_ERROR,
 } from '../constants';
 
-export function* editIntervention() {
-  const intervention = yield select(makeSelectIntervention());
+export function* editIntervention({ payload: { intervention } }) {
   const requestURL = `v1/interventions/${intervention.id}`;
 
   try {
@@ -31,6 +29,7 @@ export function* editIntervention() {
         toastId: EDIT_INTERVENTION_ERROR,
       },
     );
+    yield put(editInterventionError(error));
   }
 }
 export default function* editInterventionSaga() {

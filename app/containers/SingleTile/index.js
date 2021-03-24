@@ -17,10 +17,7 @@ import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
 import globalMessages from 'global/i18n/globalMessages';
 
-import {
-  sendInterventionCsvRequest,
-  editInterventionRequest,
-} from 'global/reducers/intervention';
+import { sendInterventionCsvRequest } from 'global/reducers/intervention';
 import {
   copyInterventionRequest,
   archiveInterventionRequest,
@@ -37,6 +34,7 @@ import Modal from 'components/Modal';
 import SelectResearchers from 'containers/SelectResearchers';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { Roles } from 'models/User/UserRoles';
+import { canArchive } from 'models/Status/statusPermissions';
 import messages from './messages';
 import {
   TileContainer,
@@ -100,7 +98,7 @@ const SingleTile = ({
       label: formatMessage(messages.sendCopy),
       id: 'Send copy to researcher',
     },
-    ...((status === 'closed' && [
+    ...((canArchive(status) && [
       {
         icon: binNoBg,
         action: handleArchiveIntervention,
@@ -191,7 +189,6 @@ SingleTile.propTypes = {
   link: PropTypes.string,
   sendCsv: PropTypes.func,
   copyIntervention: PropTypes.func,
-  editIntervention: PropTypes.func,
   archiveIntervention: PropTypes.func,
   userRoles: PropTypes.arrayOf(PropTypes.string),
 };
@@ -203,7 +200,6 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
   sendCsv: sendInterventionCsvRequest,
-  editIntervention: editInterventionRequest,
   archiveIntervention: archiveInterventionRequest,
 };
 
