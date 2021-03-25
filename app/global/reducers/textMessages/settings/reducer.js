@@ -19,14 +19,14 @@ import {
 const textMessageSettingsReducer = (textMessage, payload) => {
   const clonedTextMessage = cloneDeep(textMessage);
   switch (payload.type) {
+    case CHANGE_SCHEDULING_VALUE:
+      clonedTextMessage.schedulePayload = +payload.data.value;
+      return clonedTextMessage;
     case CHANGE_SCHEDULING_TYPE:
       // When changing to `afterFill` set `schedulePayload` for correct sorting of the list
       if (payload.data.value === MESSAGES_SCHEDULE_OPTIONS.afterFill)
         clonedTextMessage.schedulePayload = 0;
     // fallthrough intentionally
-    case CHANGE_SCHEDULING_VALUE:
-      clonedTextMessage.schedulePayload = +payload.data.value;
-      return clonedTextMessage;
     case CHANGE_FORMULA_VALUE:
     case CHANGE_TILE_NAME:
     case CHANGE_FORMULA_USED:
