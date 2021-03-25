@@ -25,6 +25,8 @@ const textMessageSettingsReducer = (textMessage, payload) => {
         clonedTextMessage.schedulePayload = 0;
     // fallthrough intentionally
     case CHANGE_SCHEDULING_VALUE:
+      clonedTextMessage.schedulePayload = +payload.data.value;
+      return clonedTextMessage;
     case CHANGE_FORMULA_VALUE:
     case CHANGE_TILE_NAME:
     case CHANGE_FORMULA_USED:
