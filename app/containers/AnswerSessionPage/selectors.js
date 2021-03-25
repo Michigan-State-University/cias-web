@@ -52,6 +52,12 @@ const makeSelectUserSession = () =>
     substate => substate.userSession,
   );
 
+const makeSelectCurrentQuestion = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    substate => substate.currentQuestion,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -60,4 +66,5 @@ export {
   makeSelectPhoneticUrl,
   makeSelectPhoneticLoading,
   makeSelectUserSession,
+  makeSelectCurrentQuestion,
 };
