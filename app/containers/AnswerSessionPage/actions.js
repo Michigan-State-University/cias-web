@@ -26,6 +26,7 @@ import {
   NEXT_QUESTION_SUCCESS,
   NEXT_QUESTION_FAILURE,
   CLEAR_ERROR,
+  CHANGE_USER_SESSION_ID,
 } from './constants';
 
 export const selectAnswer = payload => actionBuilder(SELECT_ANSWER, payload);
@@ -99,3 +100,6 @@ export const nextQuestionFailure = error =>
   actionBuilder(NEXT_QUESTION_FAILURE, { error });
 
 export const clearError = () => actionBuilder(CLEAR_ERROR, {});
+
+export const changeUserSessionId = userSessionId =>
+  actionBuilder(CHANGE_USER_SESSION_ID, { userSessionId });
