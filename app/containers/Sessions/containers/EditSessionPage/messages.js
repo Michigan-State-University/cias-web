@@ -9,11 +9,11 @@ export default defineMessages({
   },
   newQuestionSubtitle: {
     id: `${scope}.newQuestionSubtitle`,
-    defaultMessage: '<h1>Enter main text/question for screen here</h1>',
+    defaultMessage: '<h2>Enter main text/question for screen here</h2>',
   },
   manageSlides: {
     id: `${scope}.manageSlides`,
-    defaultMessage: 'Manage slides',
+    defaultMessage: 'Manage screens',
   },
   expandGroups: {
     id: `${scope}.expandGroups`,

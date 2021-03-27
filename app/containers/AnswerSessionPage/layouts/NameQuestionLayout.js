@@ -16,6 +16,7 @@ const NameQuestionLayout = ({
   disabled,
   phoneticUrl,
   phoneticLoading,
+  isDesktop,
   isAnimationOngoing,
 }) => {
   const { name, phoneticName } =
@@ -30,10 +31,12 @@ const NameQuestionLayout = ({
   const handlePhoneticNameChange = value =>
     onChange({ name, phoneticName: value });
 
+  const mdColSize = isDesktop ? 6 : 12;
+
   return (
     <Container fluid>
       <Row>
-        <Col sm={12} md={6}>
+        <Col sm={12} md={mdColSize}>
           <Box
             bg={themeColors.highlight}
             minWidth={300}
@@ -52,7 +55,7 @@ const NameQuestionLayout = ({
             />
           </Box>
         </Col>
-        <Col sm={12} md={6}>
+        <Col sm={12} md={mdColSize}>
           <TextVoicePreviewInput
             phoneticUrl={phoneticUrl}
             phoneticLoading={phoneticLoading}
@@ -77,6 +80,7 @@ NameQuestionLayout.propTypes = {
   phoneticUrl: PropTypes.any,
   phoneticLoading: PropTypes.bool,
   isAnimationOngoing: PropTypes.bool,
+  isDesktop: PropTypes.bool,
 };
 
 export default NameQuestionLayout;

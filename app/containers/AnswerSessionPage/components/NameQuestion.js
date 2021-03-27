@@ -19,6 +19,7 @@ const NameQuestion = ({
   phoneticUrl,
   phoneticLoading,
   isAnimationOngoing,
+  isDesktop,
 }) => {
   const {
     body: {
@@ -68,6 +69,7 @@ const NameQuestion = ({
       phoneticUrl={phoneticUrl}
       phoneticLoading={phoneticLoading}
       isAnimationOngoing={isAnimationOngoing}
+      isDesktop={isDesktop}
     />
   );
 };
@@ -81,6 +83,7 @@ NameQuestion.propTypes = {
   phoneticUrl: PropTypes.any,
   phoneticLoading: PropTypes.bool,
   isAnimationOngoing: PropTypes.bool,
+  isDesktop: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
