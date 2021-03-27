@@ -5,20 +5,22 @@ import orderBy from 'lodash/orderBy';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { resetState } from 'global/reducers/generatedReports';
 
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { FETCH_INTERVENTION_REQUEST } from '../constants';
 import { fetchInterventionSuccess, fetchInterventionError } from '../actions';
 
 export function* fetchIntervention({ payload: { id } }) {
   const interventionRequestURL = `v1/interventions/${id}`;
-  const interventionsRequestURL = `v1/interventions/${id}/sessions`;
+  const sessionRequestUrl = `v1/interventions/${id}/sessions`;
   try {
     const { data } = yield call(axios.get, interventionRequestURL);
     const {
       data: { data: sessions },
-    } = yield call(axios.get, interventionsRequestURL);
-    const mappedInterventions = sessions.map(defaultMapper);
-    data.sessions = orderBy(mappedInterventions, 'position');
-    yield put(fetchInterventionSuccess(data));
+    } = yield call(axios.get, sessionRequestUrl);
+    const intervention = jsonApiToObject(data, 'intervention');
+    const mappedSessions = sessions.map(defaultMapper);
+    intervention.sessions = orderBy(mappedSessions, 'position');
+    yield put(fetchInterventionSuccess(intervention));
     yield put(resetState());
   } catch (error) {
     yield put(fetchInterventionError(error));

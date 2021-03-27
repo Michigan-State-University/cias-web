@@ -67,7 +67,7 @@ const RenderQuestionDetails = ({
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
   const animationBoundaries = useRef(null);
 
-  const { logo_url: logoUrl } = intervention ?? {};
+  const { logoUrl } = intervention ?? {};
 
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;

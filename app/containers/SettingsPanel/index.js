@@ -75,7 +75,7 @@ const SettingsPanel = ({
     deleteLogo(intervention.id);
   };
 
-  const { shared_to: sharedTo, usersWithAccess } = intervention || {};
+  const { sharedTo, usersWithAccess } = intervention || {};
 
   const dispatchUpdate = newState =>
     dispatch({

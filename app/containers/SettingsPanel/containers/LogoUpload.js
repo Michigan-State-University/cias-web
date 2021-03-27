@@ -13,7 +13,7 @@ import messages from '../messages';
 
 const LogoUpload = ({
   intl: { formatMessage },
-  intervention: { logo_url: logoUrl },
+  intervention: { logoUrl },
   addImage,
   deleteImage,
   logoLoading,
