@@ -88,7 +88,7 @@ function FormikCodeInput({ formikKey, label, codeLength }) {
           <Input
             key={`code-input-${index}`}
             name={name}
-            width={`calc(85% / ${codeLength})`}
+            width={`calc(90% / ${codeLength})`}
             maxLength="1"
             size="1"
             onInput={handleInput}
