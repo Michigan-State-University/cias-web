@@ -5,6 +5,7 @@ import uniqBy from 'lodash/uniqBy';
 import {
   nameQuestion,
   participantReport,
+  phoneQuestion,
   thirdPartyQuestion,
 } from 'models/Session/QuestionTypes';
 import { initialState } from './reducer';
@@ -127,6 +128,13 @@ export const makeSelectThirdPartyReportQuestionExists = () =>
     selectQuestions,
     substate =>
       substate.questions?.some(elem => elem.type === thirdPartyQuestion.id),
+  );
+
+export const makeSelectPhoneQuestionExists = () =>
+  createSelector(
+    selectQuestions,
+    substate =>
+      substate.questions?.some(elem => elem.type === phoneQuestion.id),
   );
 
 export const makeSelectLastCreatedQuestionId = () =>
