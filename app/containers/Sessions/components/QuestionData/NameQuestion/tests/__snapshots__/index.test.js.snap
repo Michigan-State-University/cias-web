@@ -11,7 +11,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
       style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
       >
         <div
           class="Box-sc-1vhutan-0 bhIlsd"
@@ -37,7 +37,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%;"
       >
         <div
           class="Column-sc-4zswzq-0 ekpwZH"
