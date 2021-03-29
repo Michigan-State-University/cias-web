@@ -150,8 +150,8 @@ export const interventionReducer = (state = initialState, action) =>
 
       case ADD_INTERVENTION_LOGO_SUCCESS:
         draft.loaders.logoLoading = false;
-        draft.intervention.logo_url = action.payload.logoUrl;
-        draft.cache.intervention.logo_url = action.payload.logoUrl;
+        draft.intervention.logoUrl = action.payload.logoUrl;
+        draft.cache.intervention.logoUrl = action.payload.logoUrl;
         break;
 
       case ADD_INTERVENTION_LOGO_ERROR:
@@ -160,17 +160,17 @@ export const interventionReducer = (state = initialState, action) =>
 
       case DELETE_INTERVENTION_LOGO_REQUEST:
         draft.loaders.logoLoading = true;
-        draft.intervention.logo_url = null;
+        draft.intervention.logoUrl = null;
         break;
 
       case DELETE_INTERVENTION_LOGO_SUCCESS:
         draft.loaders.logoLoading = false;
-        draft.cache.intervention.logo_url = null;
+        draft.cache.intervention.logoUrl = null;
         break;
 
       case DELETE_INTERVENTION_LOGO_ERROR:
         draft.loaders.logoLoading = false;
-        draft.intervention.logo_url = state.cache.intervention.logo_url;
+        draft.intervention.logoUrl = state.cache.intervention.logoUrl;
         break;
 
       case SEND_INTERVENTION_CSV_REQUEST:
@@ -221,7 +221,7 @@ export const interventionReducer = (state = initialState, action) =>
         draft.intervention = state.cache.intervention;
         break;
       case CHANGE_ACCESS_SETTING_REQUEST:
-        draft.intervention.shared_to = action.payload.setting;
+        draft.intervention.sharedTo = action.payload.setting;
         draft.cache.intervention = state.intervention;
         break;
       case CHANGE_ACCESS_SETTING_SUCCESS:

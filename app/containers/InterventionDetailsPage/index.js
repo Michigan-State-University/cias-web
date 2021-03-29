@@ -137,15 +137,8 @@ export function InterventionDetailsPage({
 
   const screenClass = useScreenClass();
 
-  const {
-    sessions,
-    name,
-    id,
-    status,
-    csv_link: csvLink,
-    csv_generated_at: csvGeneratedAt,
-    shared_to: sharedTo,
-  } = intervention || {};
+  const { sessions, name, id, status, csvLink, csvGeneratedAt, sharedTo } =
+    intervention || {};
 
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
