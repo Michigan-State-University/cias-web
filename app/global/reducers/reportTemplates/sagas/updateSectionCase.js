@@ -1,11 +1,14 @@
-import { takeLatest, put } from 'redux-saga/effects';
+import { takeLatest, put, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { mapJsonApiToObject } from 'utils/jsonApiMapper';
 import { SectionCase } from 'models/ReportTemplate';
+import { formatMessage } from 'utils/intlOutsideReact';
+import { toast } from 'react-toastify';
 import { UPDATE_SECTION_CASE_REQUEST } from '../constants';
 import { updateSectionCaseSuccess, updateSectionCaseFailure } from '../actions';
+import messages from '../messages';
 
 function* updateSectionCase({
   payload: { sectionCase, sectionId, imageData },
@@ -43,6 +46,7 @@ function* updateSectionCase({
       yield put(updateSectionCaseSuccess(new SectionCase({ ...mappedData })));
     }
   } catch (error) {
+    yield call(toast.error, formatMessage(messages.updateSectionCaseError));
     yield put(updateSectionCaseFailure(error));
   }
 }

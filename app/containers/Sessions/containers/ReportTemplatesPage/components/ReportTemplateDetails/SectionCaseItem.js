@@ -290,6 +290,7 @@ const SectionCaseItem = ({
               onAddImage={handleImageChange}
               onDeleteImage={handleImageDelete}
               disabled={!canEdit}
+              acceptedFormats={['JPG', 'PNG']}
             />
           </Row>
         </Container>
