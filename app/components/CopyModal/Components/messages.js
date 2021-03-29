@@ -37,9 +37,9 @@ export default defineMessages({
     id: `${scope}.select`,
     defaultMessage: 'Paste here',
   },
-  empty: {
-    id: `${scope}.empty`,
-    defaultMessage: 'Empty',
+  noValidQuestionGroups: {
+    id: `${scope}.noValidQuestionGroups`,
+    defaultMessage: 'No valid question groups to copy to',
   },
   copyInternally: {
     id: `${scope}.copyInternally`,

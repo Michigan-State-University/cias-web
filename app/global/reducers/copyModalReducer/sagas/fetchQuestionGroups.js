@@ -4,6 +4,7 @@ import sortBy from 'lodash/sortBy';
 
 import { FinishGroupType } from 'models/Session/GroupTypes';
 
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { FETCH_QUESTION_GROUPS_REQUEST } from '../constants';
 import {
   fetchQuestionGroupsSuccess,
@@ -13,9 +14,9 @@ import {
 export function* fetchQuestionsGroups({ payload: { id } }) {
   const groupURL = `/v1/sessions/${id}/question_groups`;
   try {
-    const {
-      data: { question_groups: groups },
-    } = yield axios.get(groupURL);
+    const { data } = yield axios.get(groupURL);
+    const groups = jsonApiToArray(data, 'questionGroup');
+
     const sortedGroups = sortBy(groups, 'position').filter(
       ({ type }) => type !== FinishGroupType,
     );

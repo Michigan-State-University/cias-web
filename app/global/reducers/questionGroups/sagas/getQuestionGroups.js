@@ -6,6 +6,7 @@ import omit from 'lodash/omit';
 
 import { getQuestionsSuccess } from 'global/reducers/questions/actions';
 import { setAnimationStopPosition } from 'global/reducers/localState';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 
 import { mapGroupsToQuestions } from 'global/reducers/questionGroups/utils';
 import { GET_QUESTION_GROUPS_REQUEST } from '../constants';
@@ -15,9 +16,8 @@ function* getQuestionsGroups({ payload: { sessionId } }) {
   const groupURL = `/v1/sessions/${sessionId}/question_groups`;
 
   try {
-    const {
-      data: { question_groups: groups },
-    } = yield axios.get(groupURL);
+    const { data } = yield axios.get(groupURL);
+    const groups = jsonApiToArray(data, 'questionGroup');
     const questions = mapGroupsToQuestions(groups);
     const groupsWithoutQuestions = groups.map(group =>
       omit(group, 'questions'),
