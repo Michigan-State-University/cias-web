@@ -21,6 +21,7 @@ import { PlainGroupType } from 'models/Session/GroupTypes';
 import omit from 'lodash/omit';
 import { groupQuestionsSuccess } from 'global/reducers/questionGroups/actions';
 import findLast from 'lodash/findLast';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { CREATE_QUESTION_REQUEST } from '../constants';
 import { createQuestionSuccess, createQuestionError } from '../actions';
 import { makeSelectQuestions, makeSelectSelectedQuestion } from '../selectors';
@@ -65,7 +66,7 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
         ? 1
         : lastPlainGroup.position + 1;
 
-      const { data: newGroup } = yield axios.post(requestURL, {
+      const { data } = yield axios.post(requestURL, {
         question_group: {
           title: `Group ${newGroupPosition}`,
           questions: [newQuestion],
@@ -73,10 +74,14 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
         },
       });
 
+      const newGroup = jsonApiToObject(data, 'questionGroup');
+
       const groupWithoutQuestions = omit(newGroup, 'questions');
       yield put(groupQuestionsSuccess(groupWithoutQuestions, []));
 
-      const createdQuestion = newGroup.questions[0];
+      const firstQuestion = newGroup.questions[0];
+      const { questionGroupId, ...rest } = firstQuestion;
+      const createdQuestion = { ...rest, question_group_id: questionGroupId };
 
       if (!isNullOrUndefined(createdQuestion)) {
         yield put(createQuestionSuccess(createdQuestion));
