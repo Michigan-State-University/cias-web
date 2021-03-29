@@ -14,6 +14,7 @@ import {
 const Box = styled.div.attrs(({ onClick, disabled }) => ({
   onClick: disabled ? null : onClick,
 }))`
+  ${props => (props.lineHeight ? `line-height: ${props.lineHeight}` : '')};
   width: auto;
   height: auto;
   display: block;

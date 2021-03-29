@@ -25,12 +25,20 @@ const CommonLayout = ({ currentQuestion }) => {
       <Row width="100%" mt={5} height={30} />
       {settingsTitle && title && (
         <Row>
-          <Box padding={26} dangerouslySetInnerHTML={{ __html: title }} />
+          <Box
+            lineHeight="1.42"
+            padding={26}
+            dangerouslySetInnerHTML={{ __html: title }}
+          />
         </Row>
       )}
       {settingsSubtitle && subtitle && (
         <Row>
-          <Box padding={26} dangerouslySetInnerHTML={{ __html: subtitle }} />
+          <Box
+            lineHeight="1.42"
+            padding={26}
+            dangerouslySetInnerHTML={{ __html: subtitle }}
+          />
         </Row>
       )}
       {settingsVideo && videoUrl && (

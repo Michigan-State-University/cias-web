@@ -17,7 +17,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
           If
         </p>
         <div
-          class="Box-sc-1vhutan-0 htKbCu"
+          class="Box-sc-1vhutan-0 kCQyFa"
           data-cy="case-select"
           data-testid="select"
         >
@@ -78,7 +78,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="Box-sc-1vhutan-0 dgKggp"
+          class="Box-sc-1vhutan-0 gTFrB"
         >
           <input
             class="Input-t9j2q5-0 fZLGrQ styled__CaseInput-xvuzq8-0 bQOaOG"
@@ -107,10 +107,10 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
         class="Column-sc-4zswzq-0 ekpwZH"
       >
         <div
-          class="Box-sc-1vhutan-0 kjemns"
+          class="Box-sc-1vhutan-0 eamgEw"
         >
           <div
-            class="Box-sc-1vhutan-0 iMXQSQ"
+            class="Box-sc-1vhutan-0 frPtNM"
             width="100%"
           >
             <textarea
@@ -125,7 +125,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
             </textarea>
           </div>
           <div
-            class="Box-sc-1vhutan-0 hmgyEc"
+            class="Box-sc-1vhutan-0 hbJIgk"
           >
             <img
               class="Img-sc-55j3su-0 kDGTCK"

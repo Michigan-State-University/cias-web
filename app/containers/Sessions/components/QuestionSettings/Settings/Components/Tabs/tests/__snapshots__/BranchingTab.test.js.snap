@@ -10,7 +10,7 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
     >
       Formula
       <div
-        class="Box-sc-1vhutan-0 jKoMMz"
+        class="Box-sc-1vhutan-0 gfyFJD"
       >
         <p
           class="Text-e4p0w3-0 iaJrvl"
@@ -22,7 +22,7 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Box-sc-1vhutan-0 fDbvnd"
+      class="Box-sc-1vhutan-0 dSHbNt"
       width="100%"
     >
       <textarea
@@ -35,11 +35,11 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
       />
     </div>
     <div
-      class="Box-sc-1vhutan-0 dwEpkL"
+      class="Box-sc-1vhutan-0 jtUsdj"
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 bBMNIf"
+        class="Box-sc-1vhutan-0 hMXAvH"
         display="none"
         width="auto"
       >
@@ -47,16 +47,16 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
           class="Row-y1cs0u-0 dskFsL"
         >
           <div
-            class="Box-sc-1vhutan-0 buKpDj"
+            class="Box-sc-1vhutan-0 fOicvH"
           >
             <div
               class="Column-sc-4zswzq-0 ekpwZH"
             >
               <div
-                class="Box-sc-1vhutan-0 dbODYP"
+                class="Box-sc-1vhutan-0 dNQoLv"
               >
                 <div
-                  class="Box-sc-1vhutan-0 kTgzBZ"
+                  class="Box-sc-1vhutan-0 leAXVR"
                   data-testid="no-content"
                   display="flex"
                   height="100%"
@@ -85,7 +85,7 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Box-sc-1vhutan-0 styled__DashedBox-g59fuj-0 iyNhgb dyejuR"
+      class="Box-sc-1vhutan-0 styled__DashedBox-g59fuj-0 kvIAfn dyejuR"
     >
       + Add case
     </div>

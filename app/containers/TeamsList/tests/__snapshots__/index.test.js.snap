@@ -3,17 +3,17 @@
 exports[`<TeamsList /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-1vhutan-0 krWeER"
+    class="Box-sc-1vhutan-0 bOwlot"
     display="flex"
     height="100%"
     overflow="scroll"
   >
     <div
-      class="Box-sc-1vhutan-0 cUyGiG"
+      class="Box-sc-1vhutan-0 cDJCJC"
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 ddJzSG"
+        class="Box-sc-1vhutan-0 erkpdS"
         display="flex"
       >
         <h1
@@ -270,7 +270,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
           width="100%"
         >
           <div
-            class="Box-sc-1vhutan-0 cfDdZL"
+            class="Box-sc-1vhutan-0 dLpxyz"
             cursor="pointer"
             display="flex"
           >

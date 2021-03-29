@@ -14,15 +14,15 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
       </span>
     </button>
     <div
-      class="Box-sc-1vhutan-0 dtceDR"
+      class="Box-sc-1vhutan-0 gjHPvd"
     >
       Select Speech Animation
     </div>
     <div
-      class="Box-sc-1vhutan-0 dtceDR"
+      class="Box-sc-1vhutan-0 gjHPvd"
     >
       <div
-        class="Box-sc-1vhutan-0 cVZZaQ"
+        class="Box-sc-1vhutan-0 dvfkZg"
       >
         <div
           class=" css-2b097c-container"
@@ -130,10 +130,10 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
           height="100%"
         >
           <div
-            class="Box-sc-1vhutan-0 cVZZaQ"
+            class="Box-sc-1vhutan-0 dvfkZg"
           >
             <div
-              class="Box-sc-1vhutan-0 cVZZaQ"
+              class="Box-sc-1vhutan-0 dvfkZg"
             >
               <p
                 class="Text-e4p0w3-0 imsaiG"
@@ -150,19 +150,19 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-1vhutan-0 gCZhqE"
+        class="Box-sc-1vhutan-0 dMwoFk"
         display="none"
         width="100%"
       />
     </div>
     <div
-      class="Box-sc-1vhutan-0 dtceDR"
+      class="Box-sc-1vhutan-0 gjHPvd"
     >
       <div
         class="Column-sc-4zswzq-0 ekpwZH"
       >
         <div
-          class="Box-sc-1vhutan-0 dtceDR"
+          class="Box-sc-1vhutan-0 gjHPvd"
         >
           1
         </div>
@@ -170,10 +170,10 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
           class="Column-sc-4zswzq-0 ekpwZH"
         >
           <div
-            class="Box-sc-1vhutan-0 kjemns"
+            class="Box-sc-1vhutan-0 eamgEw"
           >
             <div
-              class="Box-sc-1vhutan-0 iMXQSQ"
+              class="Box-sc-1vhutan-0 frPtNM"
               width="100%"
             >
               <textarea
@@ -188,7 +188,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
               </textarea>
             </div>
             <div
-              class="Box-sc-1vhutan-0 hmgyEc"
+              class="Box-sc-1vhutan-0 hbJIgk"
             >
               <img
                 class="Img-sc-55j3su-0 kDGTCK"

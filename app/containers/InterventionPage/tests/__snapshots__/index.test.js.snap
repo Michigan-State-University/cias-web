@@ -7,7 +7,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
     style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
   >
     <div
-      class="Box-sc-1vhutan-0 gfgkhE"
+      class="Box-sc-1vhutan-0 crlRBM"
       width="max-content"
     >
       <div
@@ -220,7 +220,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
           data-cy="create-intervention-button"
         >
           <div
-            class="Box-sc-1vhutan-0 hIxZlL"
+            class="Box-sc-1vhutan-0 hgwYuz"
             direction="column"
             display="flex"
           >
@@ -256,7 +256,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               </div>
               <div>
                 <div
-                  class="Box-sc-1vhutan-0 hCHNkc"
+                  class="Box-sc-1vhutan-0 iHhkok"
                   display="flex"
                 >
                   <div
@@ -283,7 +283,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               </p>
             </div>
             <div
-              class="Box-sc-1vhutan-0 fdfAmg"
+              class="Box-sc-1vhutan-0 qxAio"
               display="flex"
             >
               <div

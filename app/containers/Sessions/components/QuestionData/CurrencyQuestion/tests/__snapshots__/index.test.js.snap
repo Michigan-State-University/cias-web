@@ -5,7 +5,7 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
   class="Column-sc-4zswzq-0 fgvXEf"
 >
   <div
-    class="Box-sc-1vhutan-0 cGXAij"
+    class="Box-sc-1vhutan-0 jtfWfT"
     width="100%"
   >
     <div
@@ -15,7 +15,7 @@ exports[`<CurrencyQuestion /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
       >
         <div
-          class="Box-sc-1vhutan-0 cGXAij"
+          class="Box-sc-1vhutan-0 jtfWfT"
           width="100%"
         >
           <div
