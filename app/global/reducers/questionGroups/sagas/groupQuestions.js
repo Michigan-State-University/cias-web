@@ -15,6 +15,7 @@ import { PlainGroupType } from 'models/Session/GroupTypes';
 
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
 import { setAnimationStopPosition } from 'global/reducers/localState';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import messages from '../messages';
 import { GROUP_QUESTIONS_REQUEST, GROUP_QUESTIONS_ERROR } from '../constants';
 import {
@@ -40,13 +41,15 @@ function* groupQuestions({ payload: { questionIds, sessionId } }) {
     : lastPlainGroup.position + 1;
 
   try {
-    const { data: group } = yield axios.post(requestURL, {
+    const { data } = yield axios.post(requestURL, {
       question_group: {
         title: `Group ${newGroupPosition}`,
         question_ids: questionIds,
         type: PlainGroupType,
       },
     });
+
+    const group = jsonApiToObject(data, 'questionGroup');
 
     const groupWithoutQuestions = omit(group, 'question_ids');
     yield put(groupQuestionsSuccess(groupWithoutQuestions, questionIds));

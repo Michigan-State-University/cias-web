@@ -119,7 +119,7 @@ const CopyChooser = ({
   const filteredQuestionGroups = useMemo(
     () =>
       questionGroups
-        ? questionGroups.filter(({ session_id: groupSessionId }) =>
+        ? questionGroups.filter(({ sessionId: groupSessionId }) =>
             filteredSessions.find(
               ({ id: sessId }) => sessId === groupSessionId,
             ),
