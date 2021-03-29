@@ -34,9 +34,8 @@ export const ShowListButton = styled.button`
 `;
 
 export const StyledQuestionTypeChooser = styled.div`
-  position: sticky;
-  bottom: 0;
   padding: 10px;
+  width: 100%;
 `;
 
 export const Spacer = styled.div`

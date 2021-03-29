@@ -30,6 +30,7 @@ const LogoUpload = ({
         disabled={!canEdit}
         onAddImage={addImage}
         onDeleteImage={deleteImage}
+        acceptedFormats={['JPG', 'PNG']}
       />
     </Column>
   );
