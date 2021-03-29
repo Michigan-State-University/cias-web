@@ -6,7 +6,7 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
     class="Column-sc-4zswzq-0 ekpwZH"
   >
     <div
-      class="Box-sc-1vhutan-0 dtceDR"
+      class="Box-sc-1vhutan-0 gjHPvd"
     >
       1
     </div>
@@ -14,10 +14,10 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
       class="Column-sc-4zswzq-0 ekpwZH"
     >
       <div
-        class="Box-sc-1vhutan-0 kjemns"
+        class="Box-sc-1vhutan-0 eamgEw"
       >
         <div
-          class="Box-sc-1vhutan-0 iMXQSQ"
+          class="Box-sc-1vhutan-0 frPtNM"
           width="100%"
         >
           <textarea
@@ -32,7 +32,7 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
           </textarea>
         </div>
         <div
-          class="Box-sc-1vhutan-0 hmgyEc"
+          class="Box-sc-1vhutan-0 hbJIgk"
         >
           <img
             class="Img-sc-55j3su-0 kDGTCK"

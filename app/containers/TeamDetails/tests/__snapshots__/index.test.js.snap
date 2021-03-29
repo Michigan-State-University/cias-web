@@ -3,7 +3,7 @@
 exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-1vhutan-0 styled__StyledBox-sc-1x1cot6-0 bdpEXp jKbXJq"
+    class="Box-sc-1vhutan-0 styled__StyledBox-sc-1x1cot6-0 dISrsd jKbXJq"
     height="100%"
     width="100%"
   >
@@ -61,7 +61,7 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="Box-sc-1vhutan-0 styled__CardBox-sc-1x1cot6-3 cVZZaQ jfWIRU"
+          class="Box-sc-1vhutan-0 styled__CardBox-sc-1x1cot6-3 dvfkZg jfWIRU"
         >
           <h2
             class="H2-uw8lbl-0 iUhbVg"
@@ -104,7 +104,7 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
                 </span>
               </p>
               <div
-                class="Box-sc-1vhutan-0 cVZZaQ"
+                class="Box-sc-1vhutan-0 dvfkZg"
               >
                 <div
                   class="styled__InlineLoader-sc-1aaagww-1 kkTeLU"

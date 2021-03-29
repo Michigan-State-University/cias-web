@@ -29,7 +29,7 @@ export default defineMessages({
   },
   enterNamePhonetically: {
     id: `${scope}.enterNamePhonetically`,
-    defaultMessage: 'Enter your name phonetically',
+    defaultMessage: 'Spell your name how it sounds',
   },
   amountPlaceholder: {
     id: `${scope}.amountPlaceholder`,

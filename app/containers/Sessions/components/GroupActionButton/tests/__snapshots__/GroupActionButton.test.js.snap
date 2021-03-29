@@ -3,7 +3,7 @@
 exports[`<GroupActionButton /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-1vhutan-0 dVgnpg"
+    class="Box-sc-1vhutan-0 cVbCAY"
     direction="column"
     display="flex"
   >

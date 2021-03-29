@@ -208,6 +208,7 @@ export function AnswerSessionPage({
   }
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
+  const isDesktop = previewMode === DESKTOP_MODE;
 
   const saveAnswer = () =>
     submitAnswerRequest(
@@ -247,6 +248,7 @@ export function AnswerSessionPage({
       feedbackScreenSettings,
       setFeedbackSettings,
       isAnimationOngoing,
+      isDesktop,
     };
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;
@@ -312,7 +314,6 @@ export function AnswerSessionPage({
 
   if (nextQuestionLoading && interventionStarted) return <Loader />;
 
-  const isDesktop = previewMode === DESKTOP_MODE;
   return (
     <Column height="100%">
       <Box

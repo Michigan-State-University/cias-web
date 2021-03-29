@@ -25,7 +25,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
             Phone number
           </p>
           <div
-            class="Box-sc-1vhutan-0 lnJPFa"
+            class="Box-sc-1vhutan-0 tbzdy"
             data-testid="select"
           >
             <div

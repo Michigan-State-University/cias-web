@@ -2,7 +2,7 @@
 
 exports[`<ReportTile /> Should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-1vhutan-0 styled__StyledBox-iilfwr-0 fuaRTP fAWbgP"
+  class="Box-sc-1vhutan-0 styled__StyledBox-iilfwr-0 gfxlkT fAWbgP"
 >
   <div
     height="100%"

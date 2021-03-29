@@ -8,7 +8,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
     class="Row-y1cs0u-0 dskFsL"
   >
     <div
-      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 bxRuNz"
+      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 couByT"
       width="100%"
     >
       <div
@@ -26,7 +26,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
               src="IMAGE_MOCK"
             />
             <div
-              class="Box-sc-1vhutan-0 cGXAij"
+              class="Box-sc-1vhutan-0 jtfWfT"
               width="100%"
             >
               <div
@@ -1431,7 +1431,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
             class="Row-y1cs0u-0 dskFsL"
           >
             <div
-              class="Box-sc-1vhutan-0 dFubIi"
+              class="Box-sc-1vhutan-0 ibEpOO"
               hidden=""
             >
               <img
@@ -1462,7 +1462,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
     class="Row-y1cs0u-0 dskFsL"
   >
     <div
-      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 bxRuNz"
+      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 couByT"
       width="100%"
     >
       <div
@@ -1480,7 +1480,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
               src="IMAGE_MOCK"
             />
             <div
-              class="Box-sc-1vhutan-0 cGXAij"
+              class="Box-sc-1vhutan-0 jtfWfT"
               width="100%"
             >
               <div
@@ -2885,7 +2885,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
             class="Row-y1cs0u-0 dskFsL"
           >
             <div
-              class="Box-sc-1vhutan-0 dFubIi"
+              class="Box-sc-1vhutan-0 ibEpOO"
               hidden=""
             >
               <img
@@ -2917,10 +2917,10 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
     display="flex"
   >
     <div
-      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 cspNrz"
+      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 donflz"
     >
       <div
-        class="Box-sc-1vhutan-0 cVZZaQ"
+        class="Box-sc-1vhutan-0 dvfkZg"
       >
         <div
           class="Row-y1cs0u-0 ecllgQ"

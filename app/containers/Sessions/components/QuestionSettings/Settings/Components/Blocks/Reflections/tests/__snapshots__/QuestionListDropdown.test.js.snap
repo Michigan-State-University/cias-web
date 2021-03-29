@@ -8,11 +8,11 @@ exports[`<QuestionListDropdown /> Should render and match the snapshot 1`] = `
     width="100%"
   >
     <div
-      class="Box-sc-1vhutan-0 fnsWon"
+      class="Box-sc-1vhutan-0 hkJeuT"
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 hxzdPL"
+        class="Box-sc-1vhutan-0 ePZqwz"
         data-testid="question-test-0-select-target-question"
         height="0"
         overflow="scroll"
