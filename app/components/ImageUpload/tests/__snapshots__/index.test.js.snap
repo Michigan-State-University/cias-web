@@ -116,7 +116,7 @@ exports[`<ImageUpload /> should match the snapshot 1`] = `
       display="flex"
     >
       <input
-        accept="image/jpeg, image/png, image/gif"
+        accept="image/jpg, image/png, image/gif, image/jpeg"
         autocomplete="off"
         style="display: none;"
         tabindex="-1"
@@ -155,7 +155,7 @@ exports[`<ImageUpload /> should match the snapshot 1`] = `
           class="c7"
         >
           <span>
-            It works for JPG, PNG, and GIF formats—max size 5MB
+            It works for JPG, PNG, GIF formats, max size 5MB
           </span>
         </p>
       </div>

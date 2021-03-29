@@ -32,6 +32,7 @@ const ImageUpload = ({
   loading,
   intl: { formatMessage },
   disabled,
+  acceptedFormats,
 }) => {
   const [hovered, setHovered] = useState(false);
 
@@ -47,12 +48,19 @@ const ImageUpload = ({
 
   const handleRemove = () => onDeleteImage();
 
+  let dropzoneAcceptedFormats = acceptedFormats
+    .map(format => `image/${format.toLowerCase()}`)
+    .join(', ');
+  if (acceptedFormats.includes('JPG')) {
+    dropzoneAcceptedFormats += ', image/jpeg';
+  }
+
   const { getRootProps, getInputProps, open, isDragActive } = useDropzone({
     onDropAccepted: handleDrop,
     onDropRejected: handleReject,
     multiple: false,
     noKeyboard: true,
-    accept: 'image/jpeg, image/png, image/gif',
+    accept: dropzoneAcceptedFormats,
     noClick: true,
     maxSize: 5242880,
   });
@@ -115,7 +123,10 @@ const ImageUpload = ({
           </Row>
           <Row>
             <Text textOpacity={0.5}>
-              <FormattedMessage {...messages.subheader} />
+              <FormattedMessage
+                {...messages.subheader}
+                values={{ formats: acceptedFormats.join(', ') }}
+              />
             </Text>
           </Row>
         </Column>
@@ -165,6 +176,11 @@ ImageUpload.propTypes = {
   intl: intlShape,
   image: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   disabled: PropTypes.bool,
+  acceptedFormats: PropTypes.arrayOf(PropTypes.string),
+};
+
+ImageUpload.defaultProps = {
+  acceptedFormats: ['JPG', 'PNG', 'GIF'],
 };
 
 export default compose(

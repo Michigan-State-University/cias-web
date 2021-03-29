@@ -206,6 +206,7 @@ const ReportTemplateMainSettings = ({
                       image={singleReportTemplate.logoUrl}
                       onAddImage={onLogoChange}
                       onDeleteImage={onLogoDelete}
+                      acceptedFormats={['JPG', 'PNG']}
                     />
                   </Col>
                 </Row>

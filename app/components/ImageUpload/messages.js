@@ -13,7 +13,7 @@ export default defineMessages({
   },
   subheader: {
     id: `${scope}.subheader`,
-    defaultMessage: 'It works for JPG, PNG, and GIF formats—max size 5MB',
+    defaultMessage: 'It works for {formats} formats, max size 5MB',
   },
   drop: {
     id: `${scope}.drop`,
