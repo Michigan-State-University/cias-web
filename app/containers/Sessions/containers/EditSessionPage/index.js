@@ -388,52 +388,49 @@ function EditSessionPage({
       <Row height="100%" filled>
         <QuestionsRow sm={4} isVisible={showList}>
           <Box
-            disableScrollbar
             data-cy="questions-list"
-            height="100%"
             borderRight={`${borders.borderWidth} ${borders.borderStyle} ${
               colors.linkWater
             }`}
-            overflow="auto"
             bg={colors.white}
             {...hoverListProps}
+            display="flex"
+            style={{ flexDirection: 'column' }}
+            width={350}
+            padded
           >
-            <Box padded width={350}>
-              {!manage && (
-                <Row align="center" justify="between" mb={10}>
-                  <Row onClick={() => setManage(true)} clickable align="center">
-                    <Img src={cog} alt="manage" />
-                    <Text
-                      ml={10}
-                      fontWeight="bold"
-                      color={themeColors.secondary}
-                    >
-                      <FormattedMessage {...messages.manageSlides} />
-                    </Text>
-                  </Row>
+            {!manage && (
+              <Row align="center" justify="between" mb={10}>
+                <Row onClick={() => setManage(true)} clickable align="center">
+                  <Img src={cog} alt="manage" />
+                  <Text ml={10} fontWeight="bold" color={themeColors.secondary}>
+                    <FormattedMessage {...messages.manageSlides} />
+                  </Text>
+                </Row>
 
-                  <TextButton
-                    buttonProps={{
-                      ml: 10,
-                      fontWeight: 'bold',
-                      color: themeColors.secondary,
-                    }}
-                    onClick={
-                      allGroupsCollapsed ? expandAllGroups : collapseAllGroups
-                    }
-                  >
-                    {allGroupsCollapsed
-                      ? formatMessage(messages.expandGroups)
-                      : formatMessage(messages.collapseGroups)}
-                  </TextButton>
-                </Row>
-              )}
-              {manage && (
-                <Row mb={10} justify="between">
-                  <Row>{groupActions.map(mapActions)}</Row>
-                  <ActionIcon mr="0" onClick={handleCloseManage} />
-                </Row>
-              )}
+                <TextButton
+                  buttonProps={{
+                    ml: 10,
+                    fontWeight: 'bold',
+                    color: themeColors.secondary,
+                  }}
+                  onClick={
+                    allGroupsCollapsed ? expandAllGroups : collapseAllGroups
+                  }
+                >
+                  {allGroupsCollapsed
+                    ? formatMessage(messages.expandGroups)
+                    : formatMessage(messages.collapseGroups)}
+                </TextButton>
+              </Row>
+            )}
+            {manage && (
+              <Row mb={10} justify="between">
+                <Row>{groupActions.map(mapActions)}</Row>
+                <ActionIcon mr="0" onClick={handleCloseManage} />
+              </Row>
+            )}
+            <Box disableScrollbar overflow="hidden auto">
               <DragDropContext
                 onBeforeDragStart={onBeforeDragStart}
                 onDragEnd={onDragEnd}
@@ -490,9 +487,9 @@ function EditSessionPage({
                   isOpened={finishGroup.id in openedGroupsMap}
                 />
               )}
-              <Row />
-              <Spacer />
             </Box>
+            <Row />
+            <Spacer />
             {editingPossible && (
               <StyledQuestionTypeChooser>
                 <QuestionTypeChooser onClick={onCreateQuestion} />
