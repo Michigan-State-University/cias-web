@@ -44,14 +44,13 @@ const GridQuestion = ({
 
   useEffect(() => {
     if (updated) {
-      if (!required) {
-        selectAnswer(Object.values(selectedAnswers));
-      }
       if (Object.keys(selectedAnswersIndex).length === rows.length) {
         selectAnswer(Object.values(selectedAnswers));
         if (!proceedButton) {
           saveAnswer(questionIndex + 1);
         }
+      } else if (!required) {
+        selectAnswer(Object.values(selectedAnswers));
       }
     }
   }, [selectedAnswersIndex, updated]);
