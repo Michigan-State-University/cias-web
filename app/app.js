@@ -25,6 +25,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Import root app
 import App from 'containers/App';
+import ErrorPage from 'containers/ErrorPage/Loadable';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
@@ -37,10 +38,10 @@ import '!file-loader?name=[name].[ext]!./assets/images/logo.png';
 import 'file-loader?name=.htaccess!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
-import { store } from './configureStore';
+import { store } from 'configureStore';
 
 // Import i18n messages
-import { translationMessages } from './i18n';
+import { translationMessages } from 'i18n';
 
 import 'utils/axios';
 
@@ -61,8 +62,10 @@ const render = messages => {
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <ScreenClassProvider>
-            <ToastContainer />
-            <App />
+            <Sentry.ErrorBoundary fallback={ErrorPage}>
+              <ToastContainer />
+              <App />
+            </Sentry.ErrorBoundary>
           </ScreenClassProvider>
         </ConnectedRouter>
       </LanguageProvider>
