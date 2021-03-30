@@ -7,6 +7,7 @@ import omit from 'lodash/omit';
 import { getQuestionsSuccess } from 'global/reducers/questions/actions';
 import { setAnimationStopPosition } from 'global/reducers/localState';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
+import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 
 import { mapGroupsToQuestions } from 'global/reducers/questionGroups/utils';
 import { GET_QUESTION_GROUPS_REQUEST } from '../constants';
@@ -24,7 +25,10 @@ function* getQuestionsGroups({ payload: { sessionId } }) {
     );
     const sortedQuestions = sortBy(questions, 'position');
     const sortedGroups = sortBy(groupsWithoutQuestions, 'position');
-    yield put(getQuestionsSuccess(sortedQuestions));
+    const mappedQuestions = sortedQuestions.map(q =>
+      objectKeysToSnakeCase(q, ['sha256', 'endPosition']),
+    );
+    yield put(getQuestionsSuccess(mappedQuestions));
     if (!isEmpty(sortedQuestions) && sortedQuestions[0].narrator.blocks[0]) {
       const position = sortedQuestions[0].narrator.blocks[0].endPosition;
       yield put(setAnimationStopPosition(position.x, position.y));
