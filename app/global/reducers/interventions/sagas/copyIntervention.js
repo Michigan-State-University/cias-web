@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
-import { formatMessage } from 'utils/intlOutsideReact';
 import { push } from 'connected-react-router';
 
-import { defaultMapper } from 'utils/mapResponseObjects';
+import { formatMessage } from 'utils/intlOutsideReact';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
+
 import messages from '../messages';
 import { copyInterventionSuccess } from '../actions';
 import {
@@ -22,7 +23,7 @@ export function* copyIntervention({
   try {
     const response = yield call(axios.post, requestURL, params);
 
-    const copiedIntervention = defaultMapper(response.data.data);
+    const copiedIntervention = jsonApiToObject(response.data, 'intervention');
 
     if (!params) {
       yield put(copyInterventionSuccess(copiedIntervention));
