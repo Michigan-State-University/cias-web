@@ -22,6 +22,7 @@ import omit from 'lodash/omit';
 import { groupQuestionsSuccess } from 'global/reducers/questionGroups/actions';
 import findLast from 'lodash/findLast';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 import { CREATE_QUESTION_REQUEST } from '../constants';
 import { createQuestionSuccess, createQuestionError } from '../actions';
 import { makeSelectQuestions, makeSelectSelectedQuestion } from '../selectors';
@@ -80,8 +81,10 @@ function* createQuestion({ payload: { question, id: sessionId } }) {
       yield put(groupQuestionsSuccess(groupWithoutQuestions, []));
 
       const firstQuestion = newGroup.questions[0];
-      const { questionGroupId, ...rest } = firstQuestion;
-      const createdQuestion = { ...rest, question_group_id: questionGroupId };
+      const createdQuestion = objectKeysToSnakeCase(firstQuestion, [
+        'sha256',
+        'endPosition',
+      ]);
 
       if (!isNullOrUndefined(createdQuestion)) {
         yield put(createQuestionSuccess(createdQuestion));
