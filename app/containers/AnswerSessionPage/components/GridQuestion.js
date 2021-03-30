@@ -19,7 +19,7 @@ const GridQuestion = ({
   const {
     id,
     body,
-    settings: { proceed_button: proceedButton },
+    settings: { proceed_button: proceedButton, required },
   } = question;
 
   const {
@@ -43,10 +43,15 @@ const GridQuestion = ({
   }, [id]);
 
   useEffect(() => {
-    if (updated && Object.keys(selectedAnswersIndex).length === rows.length) {
-      selectAnswer(Object.values(selectedAnswers));
-      if (!proceedButton) {
-        saveAnswer(questionIndex + 1);
+    if (updated) {
+      if (!required) {
+        selectAnswer(Object.values(selectedAnswers));
+      }
+      if (Object.keys(selectedAnswersIndex).length === rows.length) {
+        selectAnswer(Object.values(selectedAnswers));
+        if (!proceedButton) {
+          saveAnswer(questionIndex + 1);
+        }
       }
     }
   }, [selectedAnswersIndex, updated]);
