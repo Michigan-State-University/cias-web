@@ -46,9 +46,6 @@ function InterventionStatusButtons({
   const urlToDownload = /^((http:\/\/)|(https:\/\/)).*$/.test(csvLink)
     ? csvLink
     : `${apiProtocol}//${csvLink}`;
-  const fileName = useMemo(() => urlToDownload.split('/').pop(), [
-    urlToDownload,
-  ]);
 
   const CloseButton = () => (
     <>
@@ -165,7 +162,6 @@ function InterventionStatusButtons({
           handleSendCsv={handleSendCsv}
           csvLink={csvLink}
           csvGeneratedAt={csvGeneratedAt}
-          fileName={fileName}
           urlToDownload={urlToDownload}
         />
         <PublishButton />
@@ -177,7 +173,6 @@ function InterventionStatusButtons({
           handleSendCsv={handleSendCsv}
           csvLink={csvLink}
           csvGeneratedAt={csvGeneratedAt}
-          fileName={fileName}
           urlToDownload={urlToDownload}
         />
         <CloseButton />
@@ -188,7 +183,6 @@ function InterventionStatusButtons({
         handleSendCsv={handleSendCsv}
         csvLink={csvLink}
         csvGeneratedAt={csvGeneratedAt}
-        fileName={fileName}
         urlToDownload={urlToDownload}
       />
     ),
@@ -197,7 +191,6 @@ function InterventionStatusButtons({
         handleSendCsv={handleSendCsv}
         csvLink={csvLink}
         csvGeneratedAt={csvGeneratedAt}
-        fileName={fileName}
         urlToDownload={urlToDownload}
       />
     ),

@@ -5,7 +5,7 @@ import { Col, Row as GRow } from 'react-grid-system';
 import Row from 'components/Row';
 import Icon from 'components/Icon';
 import Text from 'components/Text';
-import StyledLink from 'components/StyledLink';
+import FileDownload from 'components/FileDownload';
 
 import pdf from 'assets/svg/pdf.svg';
 import download from 'assets/svg/download.svg';
@@ -42,17 +42,19 @@ export function ReportTile({
           <DownloadRow align="center">
             <Text mr={10}>{new Date(createdAt).toDateString()}</Text>
 
-            <StyledLink to={() => ({ pathname: pdfReportUrl })} target="_blank">
-              <Text
-                mr={5}
-                color={themeColors.secondary}
-                fontSize={13}
-                fontWeight="bold"
-              >
-                {formatMessage(messages.download)}
-              </Text>
-              <Icon src={download} />
-            </StyledLink>
+            <FileDownload url={pdfReportUrl}>
+              <Row clickable>
+                <Text
+                  mr={5}
+                  color={themeColors.secondary}
+                  fontSize={13}
+                  fontWeight="bold"
+                >
+                  {formatMessage(messages.download)}
+                </Text>
+                <Icon src={download} />
+              </Row>
+            </FileDownload>
           </DownloadRow>
         </Col>
       </GRow>

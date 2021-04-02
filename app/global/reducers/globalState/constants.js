@@ -1,0 +1,5 @@
+export const DOWNLOAD_FILE_REQUEST = 'app/Global/DOWNLOAD_FILE_REQUEST';
+
+export const DOWNLOAD_FILE_SUCCESS = 'app/Global/DOWNLOAD_FILE_SUCCESS';
+
+export const DOWNLOAD_FILE_ERROR = 'app/Global/DOWNLOAD_FILE_ERROR';
