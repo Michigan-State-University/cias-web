@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import head from 'lodash/head';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { useDropzone } from 'react-dropzone';
 import { toast } from 'react-toastify';
 
@@ -173,7 +173,7 @@ ImageUpload.propTypes = {
   onDeleteImage: PropTypes.func,
   isPreview: PropTypes.bool,
   loading: PropTypes.bool,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   image: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   disabled: PropTypes.bool,
   acceptedFormats: PropTypes.arrayOf(PropTypes.string),

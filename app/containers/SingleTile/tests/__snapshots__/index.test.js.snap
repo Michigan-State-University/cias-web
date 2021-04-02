@@ -188,9 +188,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
         class="c2"
       >
         <div>
-          <span>
-            Draft
-          </span>
+          Draft
           <span
             class="c3"
           />

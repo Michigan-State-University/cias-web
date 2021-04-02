@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
 import { createStructuredSelector } from 'reselect';
@@ -54,7 +54,7 @@ const CsvButtons = ({
 };
 
 CsvButtons.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   csvGeneratedAt: PropTypes.string,
   fileName: PropTypes.string,
   urlToDownload: PropTypes.string,

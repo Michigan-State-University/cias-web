@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { CSVReader } from 'react-papaparse';
 import { compose } from 'redux';
 import { toast } from 'react-toastify';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Img from 'components/Img';
 import Row from 'components/Row';
@@ -69,7 +69,7 @@ const CsvFileReader = ({
 CsvFileReader.propTypes = {
   children: PropTypes.node,
   onUpload: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   disabled: PropTypes.bool,
 };
 

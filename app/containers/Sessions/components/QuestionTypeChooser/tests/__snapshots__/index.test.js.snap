@@ -110,9 +110,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot 1`] = `
             color="#C866EA"
             font-weight="bold"
           >
-            <span>
-              + Add new screen
-            </span>
+            + Add new screen
           </p>
         </div>
       </div>
@@ -609,9 +607,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
             color="#C866EA"
             font-weight="bold"
           >
-            <span>
-              + Add new screen
-            </span>
+            + Add new screen
           </p>
         </div>
       </div>

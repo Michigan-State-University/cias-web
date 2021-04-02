@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, IntlShape, FormattedMessage } from 'react-intl';
 
 import { Container, Row, Col } from 'react-grid-system';
 
@@ -148,7 +148,7 @@ TeamsList.propTypes = {
   fetchTeams: PropTypes.func.isRequired,
   deleteTeam: PropTypes.func.isRequired,
   teamList: PropTypes.object,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   user: PropTypes.object,
 };
 

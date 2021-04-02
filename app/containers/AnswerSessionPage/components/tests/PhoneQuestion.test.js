@@ -15,6 +15,8 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
+import { intlProviderConfig } from 'containers/LanguageProvider';
+
 import PhoneQuestion from '../PhoneQuestion';
 
 describe('<PhoneQuestion />', () => {
@@ -56,7 +58,7 @@ describe('<PhoneQuestion />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <PhoneQuestion {...defaultProps} />
           </MemoryRouter>
@@ -69,7 +71,7 @@ describe('<PhoneQuestion />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <PhoneQuestion {...defaultProps} />
           </MemoryRouter>

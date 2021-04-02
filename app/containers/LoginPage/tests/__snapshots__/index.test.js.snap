@@ -61,9 +61,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             href="/reset-password"
             tabindex="-1"
           >
-            <span>
-              Forgot your password?
-            </span>
+            Forgot your password?
           </a>
         </div>
         <div
@@ -105,9 +103,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             class="Text-e4p0w3-0 styled__Or-sc-1pd518n-0 gliHTo brRnoK"
             font-weight="bold"
           >
-            <span>
-              or
-            </span>
+            or
           </p>
           <div
             class="styled__StyledDivider-sc-1v05p1h-0 kYVcVh"
@@ -125,9 +121,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
               class="styled__StyledLink-ii5zgx-0 hKXfbX"
               href="/register"
             >
-              <span>
-                Create participant account
-              </span>
+              Create participant account
             </a>
           </div>
         </div>

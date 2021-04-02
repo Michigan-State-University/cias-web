@@ -12,9 +12,7 @@ exports[`<LatestReport /> Should render and match the snapshot 1`] = `
       <h1
         class="H1-sc-1k7m23t-0 ewNLte"
       >
-        <span>
-          Pending Sessions
-        </span>
+        Pending Sessions
       </h1>
     </div>
     <div

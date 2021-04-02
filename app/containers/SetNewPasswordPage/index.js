@@ -8,7 +8,7 @@ import React, { Fragment } from 'react';
 import * as Yup from 'yup';
 import PropTypes from 'prop-types';
 import queryString from 'query-string';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { Formik } from 'formik';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router-dom';
@@ -145,7 +145,7 @@ const SetNewPasswordPage = ({
 };
 
 SetNewPasswordPage.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   loading: PropTypes.bool,
   error: PropTypes.string,
   setNewPassword: PropTypes.func,

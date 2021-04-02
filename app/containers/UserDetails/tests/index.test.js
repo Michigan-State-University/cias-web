@@ -15,6 +15,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 import { createTestStore } from 'utils/testUtils/storeUtils';
 import { Roles } from 'models/User/UserRoles';
 import { initialState as authState } from 'global/reducers/auth';
+import { intlProviderConfig } from 'containers/LanguageProvider';
 import { UserDetails } from '../index';
 
 describe('<UserDetails />', () => {
@@ -77,7 +78,7 @@ describe('<UserDetails />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <UserDetails {...props} />
           </MemoryRouter>
@@ -90,7 +91,7 @@ describe('<UserDetails />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <UserDetails {...props} />
           </MemoryRouter>

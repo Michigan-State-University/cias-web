@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Column from 'components/Column';
 import Box from 'components/Box';
@@ -145,7 +145,7 @@ const ChooserComponent = ({
 };
 
 ChooserComponent.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   items: PropTypes.array,
   selectedItem: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   elementId: PropTypes.string,

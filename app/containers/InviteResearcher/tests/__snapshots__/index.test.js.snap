@@ -44,9 +44,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
           <h3
             class="H3-twxrn4-0 yVyBl"
           >
-            <span>
-              Send another invite
-            </span>
+            Send another invite
           </h3>
           <div
             class="Column-sc-4zswzq-0 cPpuJH"
@@ -56,9 +54,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
               class="Text-e4p0w3-0 fwzRty"
               font-size="14"
             >
-              <span>
-                Researcher’s e-mail address
-              </span>
+              Researcher’s e-mail address
             </p>
             <input
               class="Input-t9j2q5-0 dbCYSA"
@@ -78,9 +74,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
           <h3
             class="H3-twxrn4-0 yVyBl"
           >
-            <span>
-              Invitations sent (2)
-            </span>
+            Invitations sent (2)
           </h3>
           <div
             class="Row-y1cs0u-0 jzzpxY"
@@ -97,9 +91,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
               color="#EF462F"
               font-weight="bold"
             >
-              <span>
-                Cancel
-              </span>
+              Cancel
             </button>
           </div>
           <div
@@ -117,9 +109,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
               color="#EF462F"
               font-weight="bold"
             >
-              <span>
-                Cancel
-              </span>
+              Cancel
             </button>
           </div>
           <button
@@ -128,9 +118,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             disabled=""
             width="260"
           >
-            <span>
-              Send invitation
-            </span>
+            Send invitation
           </button>
         </div>
       </div>
@@ -183,9 +171,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
           <h3
             class="H3-twxrn4-0 yVyBl"
           >
-            <span>
-              Send another invite
-            </span>
+            Send another invite
           </h3>
           <div
             class="Column-sc-4zswzq-0 cPpuJH"
@@ -195,9 +181,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
               class="Text-e4p0w3-0 fwzRty"
               font-size="14"
             >
-              <span>
-                Researcher’s e-mail address
-              </span>
+              Researcher’s e-mail address
             </p>
             <input
               class="Input-t9j2q5-0 dbCYSA"
@@ -210,9 +194,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
           <h3
             class="H3-twxrn4-0 yVyBl"
           >
-            <span>
-              Invitations sent (2)
-            </span>
+            Invitations sent (2)
           </h3>
           <div
             class="Row-y1cs0u-0 jzzpxY"
@@ -229,9 +211,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
               color="#EF462F"
               font-weight="bold"
             >
-              <span>
-                Cancel
-              </span>
+              Cancel
             </button>
           </div>
           <div
@@ -249,9 +229,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
               color="#EF462F"
               font-weight="bold"
             >
-              <span>
-                Cancel
-              </span>
+              Cancel
             </button>
           </div>
           <button
@@ -260,9 +238,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             disabled=""
             width="260"
           >
-            <span>
-              Send invitation
-            </span>
+            Send invitation
           </button>
         </div>
       </div>
@@ -315,9 +291,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
           <h3
             class="H3-twxrn4-0 yVyBl"
           >
-            <span>
-              Send another invite
-            </span>
+            Send another invite
           </h3>
           <div
             class="Column-sc-4zswzq-0 cPpuJH"
@@ -327,9 +301,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
               class="Text-e4p0w3-0 fwzRty"
               font-size="14"
             >
-              <span>
-                Researcher’s e-mail address
-              </span>
+              Researcher’s e-mail address
             </p>
             <input
               class="Input-t9j2q5-0 dbCYSA"
@@ -342,9 +314,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
           <h3
             class="H3-twxrn4-0 yVyBl"
           >
-            <span>
-              Invitations sent (2)
-            </span>
+            Invitations sent (2)
           </h3>
           <div
             class="Row-y1cs0u-0 jzzpxY"
@@ -361,9 +331,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
               color="#EF462F"
               font-weight="bold"
             >
-              <span>
-                Cancel
-              </span>
+              Cancel
             </button>
           </div>
           <div
@@ -381,9 +349,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
               color="#EF462F"
               font-weight="bold"
             >
-              <span>
-                Cancel
-              </span>
+              Cancel
             </button>
           </div>
           <button
@@ -392,9 +358,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             disabled=""
             width="260"
           >
-            <span>
-              Send invitation
-            </span>
+            Send invitation
           </button>
         </div>
       </div>

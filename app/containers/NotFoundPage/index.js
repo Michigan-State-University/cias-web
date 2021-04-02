@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -111,7 +111,7 @@ const NotFoundPage = ({ location, intl: { formatMessage }, history, user }) => {
 
 NotFoundPage.propTypes = {
   location: PropTypes.object,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   history: PropTypes.object,
   user: PropTypes.object,
 };

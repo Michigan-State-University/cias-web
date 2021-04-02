@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Box from 'components/Box';
 import { colors } from 'theme';
@@ -78,7 +78,7 @@ SettingsInterventionPage.propTypes = {
   }),
   match: PropTypes.object,
   getSession: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
 };
 
 const mapStateToProps = createStructuredSelector({

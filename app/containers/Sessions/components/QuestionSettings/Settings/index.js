@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Column from 'components/Column';
 import Tabs from 'components/Tabs';
@@ -85,7 +85,7 @@ const Settings = ({
 };
 
 Settings.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   selectedQuestion: PropTypes.shape({
     narrator: PropTypes.object,
     settings: PropTypes.object,

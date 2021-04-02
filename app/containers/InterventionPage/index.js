@@ -12,6 +12,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { Row, Col } from 'react-grid-system';
+import { Markup } from 'interweave';
 
 import SingleTile from 'containers/SingleTile';
 import Text from 'components/Text';
@@ -40,7 +41,6 @@ import {
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
 
 import { colors, fontSizes, themeColors } from 'theme';
-import { Markup } from 'interweave';
 import StatusFilter from './StatusFilter';
 import messages from './messages';
 import { InitialRow } from './styled';

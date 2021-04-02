@@ -19,18 +19,14 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
         <h1
           class="H1-sc-1k7m23t-0 hNcBIZ"
         >
-          <span>
-            Manage teams
-          </span>
+          Manage teams
         </h1>
         <button
           class="StyledTextButton-sc-1b7egxw-0 gvcXh"
           color="#C866EA"
           font-weight="bold"
         >
-          <span>
-            + Create team
-          </span>
+          + Create team
         </button>
       </div>
       <div>

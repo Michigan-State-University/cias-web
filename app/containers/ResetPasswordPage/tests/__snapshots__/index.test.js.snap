@@ -29,9 +29,7 @@ exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
             class="H1-sc-1k7m23t-0 ikOywA"
             font-size="23"
           >
-            <span>
-              Reset password
-            </span>
+            Reset password
           </h1>
           <div
             class="Column-sc-4zswzq-0 ekpwZH"
@@ -58,9 +56,7 @@ exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
             height="46"
             type="submit"
           >
-            <span>
-              Send a link
-            </span>
+            Send a link
           </button>
           <div
             class="styled__LinkContainer-ii5zgx-1 gKUyUU"
@@ -69,9 +65,7 @@ exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
               class="styled__StyledLink-ii5zgx-0 hKXfbX"
               href="/login"
             >
-              <span>
-                Back to login
-              </span>
+              Back to login
             </a>
           </div>
         </div>

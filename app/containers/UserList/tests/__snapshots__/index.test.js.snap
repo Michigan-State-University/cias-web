@@ -19,18 +19,14 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
         <h1
           class="H1-sc-1k7m23t-0 hNcBIZ"
         >
-          <span>
-            Manage accounts
-          </span>
+          Manage accounts
         </h1>
         <button
           class="StyledTextButton-sc-1b7egxw-0 gvcXh"
           color="#C866EA"
           font-weight="bold"
         >
-          <span>
-            + Invite researcher
-          </span>
+          + Invite researcher
         </button>
       </div>
       <div>
@@ -134,9 +130,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                       class="Img-sc-55j3su-0 gyShgd"
                       src="IMAGE_MOCK"
                     />
-                    <span>
-                      Show inactive accounts
-                    </span>
+                    Show inactive accounts
                   </div>
                 </div>
               </div>
@@ -464,9 +458,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
         <h1
           class="H1-sc-1k7m23t-0 hNcBIZ"
         >
-          <span>
-            Manage accounts
-          </span>
+          Manage accounts
         </h1>
       </div>
       <div>
@@ -570,9 +562,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                       class="Img-sc-55j3su-0 gyShgd"
                       src="IMAGE_MOCK"
                     />
-                    <span>
-                      Show inactive accounts
-                    </span>
+                    Show inactive accounts
                   </div>
                 </div>
               </div>

@@ -66,9 +66,7 @@ exports[`<NotFoundPage /> should render and match the snapshot 1`] = `
             color="primary"
             width="180"
           >
-            <span>
-              Log in
-            </span>
+            Log in
           </button>
         </div>
       </div>

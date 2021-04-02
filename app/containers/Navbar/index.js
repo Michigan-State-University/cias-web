@@ -8,7 +8,7 @@ import React, { memo, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
 import { compose } from 'redux';
 
@@ -116,7 +116,7 @@ Navbar.propTypes = {
   }),
   match: PropTypes.object,
   location: PropTypes.object,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
 };
 
 const mapStateToProps = createStructuredSelector({

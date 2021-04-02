@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -84,7 +84,7 @@ const InviteResearcher = ({
 };
 
 InviteResearcher.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   visible: PropTypes.bool,
   onClose: PropTypes.func,
   inviteState: PropTypes.shape({

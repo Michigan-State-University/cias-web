@@ -5,7 +5,7 @@ import map from 'lodash/map';
 import isEmpty from 'lodash/isEmpty';
 import { compose } from 'redux';
 import { toast } from 'react-toastify';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Box from 'components/Box';
 import Img from 'components/Img';
@@ -139,7 +139,7 @@ const ChipsInput = ({
 ChipsInput.propTypes = {
   value: PropTypes.array,
   setValue: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
 };

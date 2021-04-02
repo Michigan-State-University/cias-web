@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import { injectReducer, injectSaga } from 'redux-injectors';
 
@@ -113,7 +113,7 @@ ReportTemplatesPage.propTypes = {
   match: PropTypes.object,
   fetchReportTemplates: PropTypes.func,
   getSession: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   selectedReportId: PropTypes.string,
   singleReportTemplate: PropTypes.shape(ReportTemplate),
   selectedTemplateSectionId: PropTypes.string,

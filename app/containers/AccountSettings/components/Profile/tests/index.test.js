@@ -14,6 +14,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
+import { intlProviderConfig } from 'containers/LanguageProvider';
 import Profile from '../index';
 
 describe('<Profile />', () => {
@@ -73,7 +74,7 @@ describe('<Profile />', () => {
     render(
       <Provider store={store}>
         <MemoryRouter>
-          <IntlProvider locale={DEFAULT_LOCALE}>
+          <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
             <Profile dispatch={dispatch} />
           </IntlProvider>
         </MemoryRouter>
@@ -86,7 +87,7 @@ describe('<Profile />', () => {
     const { container } = render(
       <Provider store={store}>
         <MemoryRouter>
-          <IntlProvider locale={DEFAULT_LOCALE}>
+          <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
             <Profile />
           </IntlProvider>
         </MemoryRouter>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Container } from 'react-grid-system';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
 import {
@@ -287,7 +287,7 @@ const withConnect = connect(
 );
 
 ReportTemplateMainSettings.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   updateReportTemplate: PropTypes.func,
   deleteReportTemplate: PropTypes.func,
   deleteReportTemplateLogo: PropTypes.func,

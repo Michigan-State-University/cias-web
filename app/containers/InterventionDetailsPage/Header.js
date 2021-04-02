@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Row as GRow, Col as GCol, useScreenClass } from 'react-grid-system';
-import { FormattedMessage, intlShape, injectIntl } from 'react-intl';
+import { FormattedMessage, IntlShape, injectIntl } from 'react-intl';
 
 import Row from 'components/Row';
 import BackButton from 'components/BackButton';
@@ -98,7 +98,7 @@ const Header = ({
 };
 
 Header.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   status: PropTypes.string,
   editingPossible: PropTypes.bool,
   name: PropTypes.string,

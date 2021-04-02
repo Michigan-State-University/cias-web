@@ -80,7 +80,7 @@ export default defineMessages({
   passwordInvalid: {
     id: `${scope}.passwordInvalid`,
     defaultMessage:
-      'Password must contain capital letter, small letter, digit and special character (for example !@#$%^&*"-+=`~:;|\',.?\\\\/[]()<>\\{\\})',
+      "Password must contain capital letter, small letter, digit and special character (for example !@#$%^&*\"-+=`~:;|',.?\\\\/[]()<>'{}')",
   },
   passwordMatch: {
     id: `${scope}.passwordMatch`,

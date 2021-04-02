@@ -12,7 +12,7 @@ import { Roles, RolesColors } from 'models/User/UserRoles';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import { colors } from 'theme';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 import globalMessages from 'global/i18n/globalMessages';
 
 const UserRoleTile = ({ role, disabled, onClick, intl: { formatMessage } }) => (
@@ -37,7 +37,7 @@ UserRoleTile.propTypes = {
   role: PropTypes.oneOf([...Roles.allRoles, Roles.guest]).isRequired,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
 };
 
 export default compose(

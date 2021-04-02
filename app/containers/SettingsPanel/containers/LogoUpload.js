@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Column from 'components/Column';
 import H2 from 'components/H2';
@@ -37,7 +37,7 @@ const LogoUpload = ({
 };
 
 LogoUpload.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   intervention: PropTypes.object,
   addImage: PropTypes.func,
   deleteImage: PropTypes.func,

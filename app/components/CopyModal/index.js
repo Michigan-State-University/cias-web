@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import CopyChooser, { VIEWS } from 'components/CopyModal/Components';
 
@@ -56,7 +56,7 @@ const CopyModal = ({
 };
 
 CopyModal.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   visible: PropTypes.bool,
   onClose: PropTypes.func,
   copyAction: PropTypes.func,

@@ -10,7 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Column from 'components/Column';
 import AppContainer from 'components/Container';
@@ -111,7 +111,7 @@ ReportsPage.propTypes = {
   reportsSize: PropTypes.number,
   reportsLoading: PropTypes.bool,
   fetchReports: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
 };
 
 const mapStateToProps = createStructuredSelector({

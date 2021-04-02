@@ -22,6 +22,12 @@ exports[`<Select /> Should render and match the snapshot 1`] = `
   <div
     class=" css-2b097c-container"
   >
+    <span
+      aria-atomic="false"
+      aria-live="polite"
+      aria-relevant="additions text"
+      class="css-1f43avz-a11yText-A11yText"
+    />
     <div
       class=" css-4iyz22-control"
     >

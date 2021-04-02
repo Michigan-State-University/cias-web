@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Column from 'components/Column';
 import Button from 'components/Button';
@@ -239,7 +239,7 @@ const CopyChooser = ({
 };
 
 CopyChooser.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   onClick: PropTypes.func.isRequired,
   session: PropTypes.object,
   intervention: PropTypes.object,

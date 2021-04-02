@@ -28,9 +28,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           class="H1-sc-1k7m23t-0 ikOywA"
           font-size="23"
         >
-          <span>
-            Register researcher account
-          </span>
+          Register researcher account
         </h1>
         <div
           class="Row-y1cs0u-0 gQFDhs"
@@ -175,9 +173,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           class="H1-sc-1k7m23t-0 ikOywA"
           font-size="23"
         >
-          <span>
-            Register participant account
-          </span>
+          Register participant account
         </h1>
         <div
           class="Row-y1cs0u-0 gQFDhs"
@@ -298,9 +294,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               class="StyledTextButton-sc-1b7egxw-0 fJAMdx"
               color="#C866EA"
             >
-              <span>
-                I already have an account
-              </span>
+              I already have an account
             </button>
           </a>
         </div>

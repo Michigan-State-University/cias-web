@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Helmet } from 'react-helmet';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import Spinner from 'components/Spinner';
@@ -228,7 +228,7 @@ TeamDetails.propTypes = {
   fetchTeam: PropTypes.func,
   editTeam: PropTypes.func,
   inviteToTeam: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   user: PropTypes.shape({ roles: PropTypes.arrayOf(PropTypes.string) }),
 };
 

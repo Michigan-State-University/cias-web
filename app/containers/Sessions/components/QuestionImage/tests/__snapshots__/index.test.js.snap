@@ -264,16 +264,12 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
           cursor="pointer"
           text-decoration="underline"
         >
-          <span>
-            Upload
-          </span>
+          Upload
         </h3>
         <h3
           class="c5"
         >
-          <span>
-             or drop an image right here
-          </span>
+           or drop an image right here
         </h3>
       </div>
       <div
@@ -282,9 +278,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
         <p
           class="c7"
         >
-          <span>
-            It works for JPG, PNG, GIF formats, max size 5MB
-          </span>
+          It works for JPG, PNG, GIF formats, max size 5MB
         </p>
       </div>
     </div>

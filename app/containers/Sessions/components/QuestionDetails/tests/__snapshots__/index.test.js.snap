@@ -3524,9 +3524,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   disabled=""
                   width="180px"
                 >
-                  <span>
-                    Continue
-                  </span>
+                  Continue
                 </button>
               </div>
               <span

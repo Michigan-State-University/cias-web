@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import { Markup } from 'interweave';
 import * as Yup from 'yup';
 import { Formik } from 'formik';
 import { compose } from 'redux';
@@ -64,7 +65,10 @@ function PhoneNumberCodeModal({
     >
       <Column>
         <Text mb={10}>
-          <FormattedHTMLMessage values={{ phone }} {...messages.codeInfo} />
+          <Markup
+            content={formatMessage(messages.codeInfo, { phone })}
+            noWrap
+          />
         </Text>
         <Row>
           <Formik

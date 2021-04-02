@@ -5,7 +5,7 @@ import { compose } from 'redux';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Row from 'components/Row';
 
@@ -85,7 +85,7 @@ const TextMessagingPage = ({
 };
 
 TextMessagingPage.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   fetchTextMessages: PropTypes.func,
   textMessages: PropTypes.array,
   loaders: PropTypes.object,

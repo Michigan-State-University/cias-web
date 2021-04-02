@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
+import { injectIntl, IntlShape, FormattedMessage } from 'react-intl';
 import { injectReducer, injectSaga } from 'redux-injectors';
 
 import { Container, Row, Col } from 'react-grid-system';
@@ -222,7 +222,7 @@ UserList.propTypes = {
   changeActivateStatus: PropTypes.func.isRequired,
   removeUserFromTeam: PropTypes.func.isRequired,
   userList: PropTypes.object,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   user: PropTypes.object,
   listOnly: PropTypes.bool,
   teamId: PropTypes.string,

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 import { Helmet } from 'react-helmet';
 
 import AppContainer from 'components/Container';
@@ -23,7 +23,7 @@ const GeneratedReportsPage = ({
 );
 
 GeneratedReportsPage.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   disableFilter: PropTypes.bool,
   match: PropTypes.object,
 };

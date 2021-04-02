@@ -10,7 +10,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
@@ -159,7 +159,7 @@ ReportsList.propTypes = {
   reportsSize: PropTypes.number,
   reportsLoading: PropTypes.bool,
   fetchReports: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   disableFilter: PropTypes.bool,
   currentPage: PropTypes.number,
   currentSortOption: PropTypes.string,

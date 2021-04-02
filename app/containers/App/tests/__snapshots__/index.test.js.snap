@@ -40,9 +40,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             class="Text-e4p0w3-0 pcigz"
             font-size="15"
           >
-            <span>
-              Interventions
-            </span>
+            Interventions
           </p>
         </a>
         <a
@@ -54,9 +52,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             class="Text-e4p0w3-0 pcigz"
             font-size="15"
           >
-            <span>
-              Manage accounts
-            </span>
+            Manage accounts
           </p>
         </a>
         <a
@@ -68,9 +64,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             class="Text-e4p0w3-0 pcigz"
             font-size="15"
           >
-            <span>
-              Manage teams
-            </span>
+            Manage teams
           </p>
         </a>
       </div>

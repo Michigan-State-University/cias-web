@@ -7,7 +7,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { compose } from 'redux';
 import { Helmet } from 'react-helmet';
 import { Formik } from 'formik';
@@ -104,7 +104,7 @@ const ResetPasswordPage = ({
 };
 
 ResetPasswordPage.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   loading: PropTypes.bool,
   error: PropTypes.string,
   resetPassword: PropTypes.func,

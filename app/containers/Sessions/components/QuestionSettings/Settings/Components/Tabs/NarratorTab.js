@@ -2,9 +2,10 @@ import React, { Fragment, useState } from 'react';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
-import { FormattedHTMLMessage, FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { Markup } from 'interweave';
 
 import Box from 'components/Box';
 import H3 from 'components/H3';
@@ -25,7 +26,6 @@ import {
 } from 'global/reducers/localState';
 import { makeSelectSelectedQuestionType } from 'global/reducers/questions';
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
-import { ternary } from 'utils/ternary';
 
 import bulb from 'assets/svg/bulb.svg';
 
@@ -134,7 +134,7 @@ const NarratorTab = ({
       <Box mb={20}>
         <InfoBox mb={30}>
           <Text fontSize={fontSizes.medium}>
-            <FormattedHTMLMessage {...messages.warningMessage} />
+            <Markup content={formatMessage(messages.warningMessage)} noWrap />
           </Text>
         </InfoBox>
         {narrator &&
@@ -167,19 +167,18 @@ const NarratorTab = ({
           <Text
             fontSize={fontSizes.medium}
             color={
-              colors[
-                isCharacterMovable && !disabled ? 'jungleGreen' : 'flamingo'
-              ]
+              isCharacterMovable && !disabled
+                ? colors.jungleGreen
+                : colors.flamingo
             }
           >
-            <FormattedHTMLMessage
-              {...messages[
-                ternary(
-                  disabled,
-                  'characterMoveDisabled',
-                  isCharacterMovable ? 'characterMovable' : 'characterBlocked',
-                )
-              ]}
+            <Markup
+              content={
+                disabled
+                  ? formatMessage(messages.characterMoveDisabled)
+                  : formatMessage(messages.characterBlocked)
+              }
+              noWrap
             />
           </Text>
         </Row>

@@ -8,9 +8,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
     <h2
       class="H2-uw8lbl-0 iUhbVg"
     >
-      <span>
-        Profile
-      </span>
+      Profile
     </h2>
     <div
       class="Row-y1cs0u-0 cUkLOH"
@@ -54,9 +52,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                     font-size="14"
                     font-weight="bold"
                   >
-                    <span>
-                      Add profile photo
-                    </span>
+                    Add profile photo
                   </p>
                 </div>
               </div>
@@ -136,6 +132,12 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             <div
               class=" css-2b097c-container"
             >
+              <span
+                aria-atomic="false"
+                aria-live="polite"
+                aria-relevant="additions text"
+                class="css-1f43avz-a11yText-A11yText"
+              />
               <div
                 class=" css-4iyz22-control"
               >
@@ -220,6 +222,12 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
               <div
                 class=" css-2b097c-container"
               >
+                <span
+                  aria-atomic="false"
+                  aria-live="polite"
+                  aria-relevant="additions text"
+                  class="css-1f43avz-a11yText-A11yText"
+                />
                 <div
                   class=" css-4iyz22-control"
                 >
@@ -308,9 +316,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           font-size="14"
           font-weight="bold"
         >
-          <span>
-            Reset password
-          </span>
+          Reset password
         </button>
       </div>
     </div>

@@ -12,15 +12,13 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
         class="Text-e4p0w3-0 iZfJuq"
         font-size="14px"
       >
-        <span>
-          Bear in mind that 
-          <span
-            style="color: #EF462F"
-          >
-            you can't edit the question
-          </span>
-           when you are working with the character.
+        Bear in mind that 
+        <span
+          style="color: rgb(239, 70, 47);"
+        >
+          you can't edit the question
         </span>
+         when you are working with the character.
       </p>
     </div>
     <div
@@ -85,9 +83,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
         color="#EF462F"
         font-size="14px"
       >
-        <span>
-          Open any of the blocks to replace the character.
-        </span>
+        Open any of the blocks to replace the character.
       </p>
     </div>
   </div>

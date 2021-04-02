@@ -70,9 +70,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
           download="example.com"
           href="http://example.com"
         >
-          <span>
-            Download CSV
-          </span>
+          Download CSV
         </a>
       </button>
     </div>
@@ -169,9 +167,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
     class="c1 c2"
     color="primary"
   >
-    <span>
-      Generate new CSV
-    </span>
+    Generate new CSV
   </button>
 </div>
 `;
@@ -272,9 +268,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
           download="example.com"
           href="http://example.com"
         >
-          <span>
-            Download CSV
-          </span>
+          Download CSV
         </a>
       </button>
     </div>
@@ -371,18 +365,14 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
     class="c1 c2"
     color="primary"
   >
-    <span>
-      Generate new CSV
-    </span>
+    Generate new CSV
   </button>
   <button
     class="c4 c5"
     color="primary"
     data-cy="publish-session-button"
   >
-    <span>
-      Publish Intervention
-    </span>
+    Publish Intervention
   </button>
 </div>
 `;
@@ -483,9 +473,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
           download="example.com"
           href="http://example.com"
         >
-          <span>
-            Download CSV
-          </span>
+          Download CSV
         </a>
       </button>
     </div>
@@ -582,17 +570,13 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
     class="c1 c2"
     color="primary"
   >
-    <span>
-      Generate new CSV
-    </span>
+    Generate new CSV
   </button>
   <button
     class="c4 c5"
     color="primary"
   >
-    <span>
-      Close Intervention
-    </span>
+    Close Intervention
   </button>
 </div>
 `;

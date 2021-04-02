@@ -11,9 +11,7 @@ exports[`<Interventions /> Should render and match the snapshot 1`] = `
       <h1
         class="H1-sc-1k7m23t-0 ewNLte"
       >
-        <span>
-          Your interventions
-        </span>
+        Your interventions
       </h1>
     </div>
     <div
