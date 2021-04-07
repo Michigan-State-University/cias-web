@@ -50,6 +50,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
       }
       case GET_QUESTION_GROUPS_SUCCESS: {
         draft.groups = payload.groups;
+        draft.cache.groups = payload.groups;
         draft.loaders.questionGroupsLoading = false;
         break;
       }
@@ -70,7 +71,6 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case CHANGE_GROUP_NAME_REQUEST: {
-        draft.cache.groups = state.groups;
         const index = state.groups.findIndex(
           ({ id }) => id === payload.groupId,
         );
@@ -78,7 +78,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case CHANGE_GROUP_NAME_SUCCESS: {
-        draft.cache.groups = null;
+        draft.cache.groups = state.groups;
         break;
       }
       case CHANGE_GROUP_NAME_ERROR: {
@@ -101,7 +101,6 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         break;
       }
       case REORDER_GROUP_LIST_REQUEST:
-        draft.cache.groups = state.groups;
         const { groupId, destinationIndex, sourceIndex } = payload;
 
         const sourceGroup = {
@@ -122,13 +121,11 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
 
         break;
       case REORDER_GROUP_LIST_SUCCESS:
-        draft.cache.groups = null;
-
+        draft.cache.groups = state.groups;
         break;
+
       case REORDER_GROUP_LIST_ERROR:
         draft.groups = state.cache.groups;
-        draft.cache.groups = null;
-
         break;
 
       case COPY_QUESTIONS_REQUEST:
