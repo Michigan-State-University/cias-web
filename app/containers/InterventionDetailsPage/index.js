@@ -73,6 +73,7 @@ import {
 import { reorderScope } from 'models/Session/ReorderScope';
 import { reorder } from 'utils/reorder';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
+import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
 import { makeSelectUserRoles } from 'global/reducers/auth';
 
 import { archived } from 'models/Status/StatusTypes';
@@ -115,6 +116,7 @@ export function InterventionDetailsPage({
   fetchInterventions,
   externalCopySession,
   roles,
+  editSession,
 }) {
   const [
     deleteConfirmationSessionId,
@@ -132,6 +134,7 @@ export function InterventionDetailsPage({
   });
   useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
   useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
+  useInjectSaga({ key: 'editSession', saga: editSessionSaga });
 
   const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
 
@@ -301,6 +304,7 @@ export function InterventionDetailsPage({
                         handleDeleteSession={sessionId =>
                           setDeleteConfirmationSessionId(sessionId)
                         }
+                        editSession={editSession}
                         nextSessionName={
                           nextIntervention ? nextIntervention.name : null
                         }
@@ -446,6 +450,7 @@ InterventionDetailsPage.propTypes = {
   deleteSession: PropTypes.func,
   fetchInterventions: PropTypes.func,
   externalCopySession: PropTypes.func,
+  editSession: PropTypes.func,
   roles: PropTypes.arrayOf(PropTypes.string),
 };
 
@@ -469,6 +474,7 @@ const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
   deleteSession: deleteSessionRequest,
   externalCopySession: externalCopySessionRequest,
+  editSession: editSessionRequest,
 };
 
 const withConnect = connect(

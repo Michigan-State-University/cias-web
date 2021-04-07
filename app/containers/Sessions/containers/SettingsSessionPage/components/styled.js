@@ -14,7 +14,7 @@ export const Input = styled(StyledInput)`
   }
 `;
 
-export const NameContainer = styled.div`
+export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;

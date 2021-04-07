@@ -32,6 +32,7 @@ export {
   makeSelectInterventionState,
   makeSelectInterventionStatus,
   makeSelectCurrentSessionIndex,
+  makeSelectSessionById,
 } from './selectors';
 export {
   createInterventionSaga,

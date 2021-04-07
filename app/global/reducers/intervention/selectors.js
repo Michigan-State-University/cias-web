@@ -38,3 +38,10 @@ export const makeSelectCurrentSessionIndex = () =>
     selectIntervention,
     substate => substate.currentSessionIndex,
   );
+
+export const makeSelectSessionById = sessionId =>
+  createSelector(
+    selectIntervention,
+    substate =>
+      substate.intervention.sessions.find(({ id }) => id === sessionId),
+  );

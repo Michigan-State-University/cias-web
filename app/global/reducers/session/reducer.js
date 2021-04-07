@@ -111,6 +111,7 @@ const sessionReducer = (state = initialState, action) =>
         draft.cache.session = action.payload.session;
         break;
       case EDIT_SESSION_ERROR:
+        draft.session = state.cache.session;
         break;
 
       case ADD_REPORT_TEMPLATE_SUCCESS:

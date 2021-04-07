@@ -23,6 +23,12 @@ import Box from 'components/Box';
 import { VIEWS } from 'components/CopyModal/Components';
 import CopyModal from 'components/CopyModal';
 import Badge from 'components/Badge';
+import BadgeInput from 'components/Input/BadgeInput';
+
+import { SHARE_IDS } from 'containers/SettingsPanel/utils';
+
+import { variableNameValidator } from 'utils/validators';
+import globalMessages from 'global/i18n/globalMessages';
 
 import copy from 'assets/svg/copy.svg';
 import bin from 'assets/svg/bin-no-bg.svg';
@@ -30,7 +36,6 @@ import mail from 'assets/svg/pink-mail.svg';
 import mailDisabled from 'assets/svg/pink-mail-disabled.svg';
 import { colors, themeColors } from 'theme';
 
-import { SHARE_IDS } from 'containers/SettingsPanel/utils';
 import SessionSchedule from '../SessionSchedule';
 import messages from './messages';
 import { ToggleableBox, StyledRow, SessionIndex } from './styled';
@@ -51,6 +56,7 @@ function SessionListItem({
   handleDeleteSession,
   handleExternalCopySession,
   sharedTo,
+  editSession,
 }) {
   const history = useHistory();
 
@@ -59,6 +65,7 @@ function SessionListItem({
   const {
     id,
     name,
+    variable,
     intervention_id: interventionId,
     formula,
     schedule,
@@ -107,6 +114,15 @@ function SessionListItem({
     history.push(url);
   };
 
+  const handleUpdateVariable = value => {
+    editSession({ path: 'variable', value }, ['variable'], id);
+  };
+
+  const preventVariableInputRedirect = event => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
   const isSchedulingPossible = sharedTo !== SHARE_IDS.anyoneWithTheLink;
 
   return (
@@ -144,11 +160,24 @@ function SessionListItem({
                   justify="start"
                 >
                   <SessionIndex>{index + 1}</SessionIndex>
-                  <Column>
-                    <H2 ml={15}>{name}</H2>
+                  <Column px={15}>
+                    <H2>{name}</H2>
+                    <BadgeInput
+                      mt={5}
+                      disabled={disabled}
+                      textAlign="center"
+                      validator={variableNameValidator}
+                      placeholder={formatMessage(
+                        globalMessages.variables.variableNamePlaceholder,
+                      )}
+                      value={variable}
+                      color={colors.jungleGreen}
+                      onBlur={handleUpdateVariable}
+                      onClick={preventVariableInputRedirect}
+                      autoComplete="off"
+                    />
                     <Badge
                       mt={5}
-                      ml={15}
                       bg={themeColors.secondary}
                       onClick={goToReportTemplates}
                     >
@@ -236,6 +265,7 @@ SessionListItem.propTypes = {
   handleExternalCopySession: PropTypes.func,
   status: PropTypes.string,
   sharedTo: PropTypes.string,
+  editSession: PropTypes.func,
 };
 
 export default injectIntl(SessionListItem);

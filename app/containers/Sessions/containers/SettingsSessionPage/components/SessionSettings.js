@@ -1,14 +1,19 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
 import some from 'lodash/some';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
-import H3 from 'components/H3';
-import lastKey from 'utils/getLastKey';
+import { FormattedMessage } from 'react-intl';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+
+import { colors } from 'theme';
+import { variableNameValidator } from 'utils/validators';
+import lastKey from 'utils/getLastKey';
+
+import { canEdit } from 'models/Status/statusPermissions';
+import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
 
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
 import { questionsReducer } from 'global/reducers/questions';
@@ -19,18 +24,17 @@ import {
 } from 'global/reducers/intervention';
 import globalMessages from 'global/i18n/globalMessages';
 
-import { canEdit } from 'models/Status/statusPermissions';
-import { FormattedMessage } from 'react-intl';
-
+import H3 from 'components/H3';
 import { LI, UL } from 'components/List';
-import { getRemovedBlockForSetting } from 'models/Narrator/BlockTypes';
 import ConfirmationBox from 'components/ConfirmationBox';
+import BadgeInput from 'components/Input/BadgeInput';
 import Option from './Option';
 import messages from './messages';
-import { Input, NameContainer } from './styled';
+import { Input, InputContainer } from './styled';
 
 const SessionSettings = ({
   name,
+  variable,
   narratorSettings,
   formatMessage,
   editSession,
@@ -143,7 +147,8 @@ const SessionSettings = ({
         content={getConfirmationContent()}
         confirmAction={onConfirm}
       />
-      <NameContainer>
+
+      <InputContainer>
         <H3 mb={5} fontWeight="regular">
           {formatMessage(messages.nameLabel)}
         </H3>
@@ -154,10 +159,32 @@ const SessionSettings = ({
           value={name}
           onBlur={val => editSession({ path: 'name', value: val }, ['name'])}
         />
-      </NameContainer>
+      </InputContainer>
+
+      <InputContainer style={{ marginTop: 15 }}>
+        <H3 mb={5} fontWeight="regular">
+          {formatMessage(messages.variableLabel)}
+        </H3>
+        <BadgeInput
+          disabled={!editingPossible}
+          textAlign="center"
+          validator={variableNameValidator}
+          placeholder={formatMessage(
+            globalMessages.variables.variableNamePlaceholder,
+          )}
+          value={variable}
+          color={colors.jungleGreen}
+          onBlur={val =>
+            editSession({ path: 'variable', value: val }, ['variable'])
+          }
+          autoComplete="off"
+        />
+      </InputContainer>
+
       <H3 mt={30} mb={20}>
         {formatMessage(messages.narratorSettings)}
       </H3>
+
       {narratorSettings && (
         <Option
           disabled={!editingPossible}
@@ -198,6 +225,7 @@ const withConnect = connect(
 
 SessionSettings.propTypes = {
   name: PropTypes.string,
+  variable: PropTypes.string,
   narratorSettings: PropTypes.shape({
     voice: PropTypes.bool,
     narrator: PropTypes.bool,
