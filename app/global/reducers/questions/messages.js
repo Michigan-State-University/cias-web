@@ -35,4 +35,8 @@ export default defineMessages({
     id: `${scope}.reorderError`,
     defaultMessage: 'Cannot reorder screens!',
   },
+  copySuccess: {
+    id: `${scope}.copySuccess`,
+    defaultMessage: 'Copied screen successfully!',
+  },
 });
