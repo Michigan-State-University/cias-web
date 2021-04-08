@@ -65,7 +65,6 @@ function SessionListItem({
   const {
     id,
     name,
-    variable,
     intervention_id: interventionId,
     formula,
     schedule,
@@ -73,6 +72,8 @@ function SessionListItem({
     schedule_payload: schedulePayload,
     settings,
     report_templates_count: reportTemplatesCount,
+    days_after_date_variable_name: daysAfterDateVariableName,
+    variable,
   } = session || {};
 
   const options = [
@@ -233,6 +234,8 @@ function SessionListItem({
                   selectedScheduleOption={schedule}
                   scheduleAt={scheduleAt}
                   schedulePayload={schedulePayload}
+                  daysAfterDateVariableName={daysAfterDateVariableName}
+                  session={session}
                 />
               </Row>
             )}

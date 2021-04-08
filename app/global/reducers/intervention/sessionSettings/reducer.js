@@ -8,6 +8,7 @@ import {
   CHANGE_SCHEDULING_TYPE,
   UPDATE_SCHEDULING_PAYLOAD,
   UPDATE_SCHEDULING_DATE,
+  UPDATE_DAYS_AFTER_DATE_VARIABLE,
 } from './constants';
 
 const sessionSettingsReducer = (session, payload) => {
@@ -49,6 +50,10 @@ const sessionSettingsReducer = (session, payload) => {
 
     case UPDATE_SCHEDULING_DATE:
       clonedSession.schedule_at = payload.data.value;
+      return clonedSession;
+
+    case UPDATE_DAYS_AFTER_DATE_VARIABLE:
+      clonedSession.days_after_date_variable_name = payload.data.value;
       return clonedSession;
 
     default:

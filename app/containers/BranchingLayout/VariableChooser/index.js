@@ -5,6 +5,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { colors, boxShadows } from 'theme';
+
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
@@ -12,26 +14,28 @@ import Text from 'components/Text';
 import Img from 'components/Img';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
+import NoContent from 'components/NoContent';
+
 import webpage from 'assets/svg/webpage-mouseover.svg';
 import {
   makeSelectFilteredQuestions,
   makeSelectSelectedQuestion,
 } from 'global/reducers/questions';
 
-import { colors, boxShadows } from 'theme';
 import Question from 'models/Session/Question';
 import {
   getBranchingVariables,
+  getEditVariables,
   getPreviousQuestions,
 } from 'models/Session/utils';
-import NoContent from 'components/NoContent';
+import { nameQuestion, QuestionTypes } from 'models/Session/QuestionTypes';
+
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import useOutsideClick from 'utils/useOutsideClick';
 import {
   makeSelectGetQuestionGroupLoader,
   makeSelectQuestionGroups,
 } from 'global/reducers/questionGroups';
-import { nameQuestion } from 'models/Session/QuestionTypes';
 import messages from './messages';
 
 const VariableChooser = ({
@@ -46,22 +50,31 @@ const VariableChooser = ({
   includeAllVariables,
   topPosition,
   includeCurrentQuestion,
+  includeNonDigitVariables,
+  questionTypeWhitelist,
+  style,
 }) => {
   const { id } = selectedQuestion;
-  const previousQuestions = useMemo(
-    () =>
-      includeAllVariables
-        ? questions
-        : getPreviousQuestions(
-            selectedQuestion,
-            questions,
-            groups,
-            includeCurrentQuestion,
-          ),
-    [selectedQuestion, questions, groups],
-  );
+  const filteredQuestions = useMemo(() => {
+    const visibleQuestions = includeAllVariables
+      ? questions
+      : getPreviousQuestions(
+          selectedQuestion,
+          questions,
+          groups,
+          includeCurrentQuestion,
+        );
 
-  const variables = getBranchingVariables(previousQuestions, {
+    return visibleQuestions.filter(({ type }) =>
+      questionTypeWhitelist.includes(type),
+    );
+  }, [selectedQuestion, questions, groups]);
+
+  const variableGetter = includeNonDigitVariables
+    ? getEditVariables
+    : getBranchingVariables;
+
+  const variables = variableGetter(filteredQuestions, {
     structure: 'flat',
     include: ['id', 'subtitle'],
   });
@@ -127,6 +140,7 @@ const VariableChooser = ({
       right="0px"
       top={topPosition}
       {...(visible ? { zIndex: 1 } : { display: 'none' })}
+      {...style}
     >
       <Row>
         <Box padding={8} filled>
@@ -152,10 +166,14 @@ VariableChooser.propTypes = {
   setOpen: PropTypes.func,
   topPosition: PropTypes.string,
   includeCurrentQuestion: PropTypes.bool,
+  includeNonDigitVariables: PropTypes.bool,
+  questionTypeWhitelist: PropTypes.arrayOf(PropTypes.string),
+  style: PropTypes.object,
 };
 
 VariableChooser.defaultProps = {
   includeCurrentQuestion: true,
+  questionTypeWhitelist: QuestionTypes.map(({ id }) => id),
 };
 
 const mapStateToProps = createStructuredSelector({

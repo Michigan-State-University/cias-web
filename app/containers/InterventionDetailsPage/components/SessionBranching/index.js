@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -26,7 +26,6 @@ import {
   removeFormulaCase,
   updateFormula,
   updateFormulaCase,
-  makeSelectCurrentSessionIndex,
   changeCurrentSession,
 } from 'global/reducers/intervention';
 import {
@@ -48,16 +47,11 @@ function SessionBranching({
   onRemoveCase,
   onUpdateCase,
   intervention,
-  sessionIndex,
   changeSessionIndex,
   fetchQuestions,
   disabled,
   activeSessionId,
 }) {
-  useEffect(() => {
-    if (activeSessionId === id) fetchQuestions(activeSessionId);
-  }, [activeSessionId]);
-
   const displayPatternTargetText = target => {
     if (target.id === '') return formatMessage(messages.selectSession);
     const session = find(
@@ -70,10 +64,8 @@ function SessionBranching({
   const handleFormulaStatus = value => onChangeFormulaStatus(value, id);
 
   const handleClickAddVariable = () => {
-    if (position !== sessionIndex + 1) {
-      changeSessionIndex(position - 1);
-    }
     if (id !== activeSessionId) {
+      changeSessionIndex(position - 1);
       fetchQuestions(id);
     }
   };
@@ -142,7 +134,6 @@ SessionBranching.propTypes = {
   onRemoveCase: PropTypes.func,
   onUpdateCase: PropTypes.func,
   intervention: PropTypes.object,
-  sessionIndex: PropTypes.number,
   changeSessionIndex: PropTypes.func,
   fetchQuestions: PropTypes.func,
   disabled: PropTypes.bool,
@@ -151,7 +142,6 @@ SessionBranching.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
-  sessionIndex: makeSelectCurrentSessionIndex(),
   activeSessionId: makeSelectQuestionGroupsSessionId(),
 });
 

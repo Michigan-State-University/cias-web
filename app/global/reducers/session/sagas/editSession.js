@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import pickFields from 'utils/pickFields';
 import { makeSelectSessionById } from 'global/reducers/intervention';
-
 import { EDIT_SESSION_REQUEST } from '../constants';
 
 import { editSessionSuccess, editSessionError } from '../actions';
