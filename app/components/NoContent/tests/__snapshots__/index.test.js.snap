@@ -100,9 +100,7 @@ exports[`<NoContent /> should match the snapshot 1`] = `
         class="c3"
         color="#B0BAC9"
       >
-        <span>
-          No content yet
-        </span>
+        No content yet
       </h2>
     </div>
   </div>

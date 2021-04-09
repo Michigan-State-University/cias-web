@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { intlShape } from 'react-intl';
+import { IntlShape } from 'react-intl';
 
 import Box from 'components/Box';
 import ActionIcon from 'components/ActionIcon';
@@ -107,7 +107,7 @@ PreviewNavbar.propTypes = {
     id: PropTypes.string,
   }),
   onResetIntervention: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   match: PropTypes.object,
   interventionStatus: PropTypes.string,
 };

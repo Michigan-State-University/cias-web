@@ -3,7 +3,7 @@
 exports[`<UserDetails /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-1vhutan-0 styled__StyledBox-sc-18ethpf-0 bdpEXp jmOGcK"
+    class="Box-sc-1vhutan-0 styled__StyledBox-sc-18ethpf-0 dISrsd jmOGcK"
     height="100%"
     width="100%"
   >
@@ -21,17 +21,13 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
         color="#C866EA"
         font-weight="bold"
       >
-        <span>
-          Back to user list
-        </span>
+        Back to user list
       </p>
     </a>
     <h1
       class="H1-sc-1k7m23t-0 eMTspO"
     >
-      <span>
-        Account Settings
-      </span>
+      Account Settings
     </h1>
     <div
       style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
@@ -40,14 +36,12 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="Box-sc-1vhutan-0 iTujjX"
+          class="Box-sc-1vhutan-0 iCDuTP"
         >
           <h2
             class="H2-uw8lbl-0 iUhbVg"
           >
-            <span>
-              Profile
-            </span>
+            Profile
           </h2>
           <div
             class="Row-y1cs0u-0 cUkLOH"
@@ -73,7 +67,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                     class="Row-y1cs0u-0 styled__StyledButtonsRow-sc-4bx7ap-2 dskFsL fA-DhtD"
                   >
                     <div
-                      class="Box-sc-1vhutan-0 cjmvvN styled__StyledUploadFileButton-sc-4bx7ap-4 GlRFp"
+                      class="Box-sc-1vhutan-0 crjFXF styled__StyledUploadFileButton-sc-4bx7ap-4 GlRFp"
                       height="fit-content"
                     >
                       <input
@@ -91,9 +85,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                           font-size="14"
                           font-weight="bold"
                         >
-                          <span>
-                            Add profile photo
-                          </span>
+                          Add profile photo
                         </p>
                       </div>
                     </div>
@@ -107,9 +99,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                 color="warning"
                 width="180"
               >
-                <span>
-                  Deactivate account
-                </span>
+                Deactivate account
               </button>
             </div>
           </div>
@@ -187,12 +177,18 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                     Phone number
                   </p>
                   <div
-                    class="Box-sc-1vhutan-0 lnJPFa"
+                    class="Box-sc-1vhutan-0 tbzdy"
                     data-testid="select"
                   >
                     <div
                       class=" css-14jk2my-container"
                     >
+                      <span
+                        aria-atomic="false"
+                        aria-live="polite"
+                        aria-relevant="additions text"
+                        class="css-1f43avz-a11yText-A11yText"
+                      />
                       <div
                         class=" css-vz7ypb-control"
                       >
@@ -205,7 +201,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                             Code
                           </div>
                           <div
-                            class="css-b8ldur-Input"
+                            class="css-1bwsx9e-Input"
                           >
                             <div
                               class=""

@@ -242,7 +242,7 @@ describe('intervention reducer', () => {
     const action = actionBuilder(CHANGE_ACCESS_SETTING_REQUEST, payloadSetting);
 
     const changeState = cloneDeep(mockState);
-    changeState.intervention.shared_to = payloadSetting.setting;
+    changeState.intervention.sharedTo = payloadSetting.setting;
     changeState.cache.intervention = mockState.intervention;
 
     expect(interventionReducer(mockState, action)).toEqual(changeState);

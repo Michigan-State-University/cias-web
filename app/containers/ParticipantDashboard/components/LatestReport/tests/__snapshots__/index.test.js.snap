@@ -12,9 +12,7 @@ exports[`<LatestReport /> Should render and match the snapshot 1`] = `
       <h1
         class="H1-sc-1k7m23t-0 ewNLte"
       >
-        <span>
-          Latest Report
-        </span>
+        Latest Report
       </h1>
       <a
         class="StyledLink-eun179-0 evBbaE"
@@ -25,9 +23,7 @@ exports[`<LatestReport /> Should render and match the snapshot 1`] = `
           color="#C866EA"
           font-weight="bold"
         >
-          <span>
-            View All Reports
-          </span>
+          View All Reports
         </p>
       </a>
     </div>

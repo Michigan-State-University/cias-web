@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -40,6 +40,9 @@ import {
   finishQuestion,
   QuestionTypes,
   nameQuestion,
+  participantReport,
+  thirdPartyQuestion,
+  phoneQuestion,
 } from 'models/Session/QuestionTypes';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
@@ -81,8 +84,18 @@ const QuestionListItem = ({
   const [deleteOpen, setDeleteOpen] = useState(false);
   const { type, subtitle, id, body, question_group_id: groupId } = question;
   const isSelected = selectedQuestionIndex === id;
-  const isFinishScreen = type === finishQuestion.id;
-  const isNameScreen = type === nameQuestion.id;
+
+  const isFinishScreen = useMemo(() => type === finishQuestion.id, [type]);
+  const isNameScreen = useMemo(() => type === nameQuestion.id, [type]);
+
+  const canDuplicate = useMemo(
+    () =>
+      type !== nameQuestion.id &&
+      type !== participantReport.id &&
+      type !== thirdPartyQuestion.id &&
+      type !== phoneQuestion.id,
+    [type],
+  );
 
   useEffect(() => {
     if (selectedQuestionIndex === id) beforeRender();
@@ -147,7 +160,7 @@ const QuestionListItem = ({
       label: <FormattedMessage {...messages.duplicate} />,
       action: handleCopy,
       color: colors.black,
-      disabled,
+      disabled: disabled || !canDuplicate,
     },
     {
       id: 'delete',

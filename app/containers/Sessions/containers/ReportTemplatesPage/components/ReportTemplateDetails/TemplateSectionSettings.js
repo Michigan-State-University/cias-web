@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Container } from 'react-grid-system';
 
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 
 import {
   addSectionCaseRequest,
@@ -141,7 +141,7 @@ const withConnect = connect(
 TemplateSectionSettings.propTypes = {
   addCase: PropTypes.func,
   deleteSection: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
 };
 
 export default compose(

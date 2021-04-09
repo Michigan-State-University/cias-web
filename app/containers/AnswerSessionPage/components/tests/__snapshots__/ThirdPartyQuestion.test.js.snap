@@ -6,13 +6,13 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
     class="Column-sc-4zswzq-0 ekpwZH"
   >
     <div
-      class="Box-sc-1vhutan-0 cVZZaQ"
+      class="Box-sc-1vhutan-0 dvfkZg"
     >
       <div
         class="Row-y1cs0u-0 kdnhbN"
       >
         <div
-          class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 jDfcLE"
+          class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 kmyFFE"
           width="calc(100% + 21px)"
         >
           <div
@@ -34,7 +34,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
         class="Row-y1cs0u-0 kdnhbN"
       >
         <div
-          class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 jDfcLE"
+          class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 kmyFFE"
           width="calc(100% + 21px)"
         >
           <div

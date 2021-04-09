@@ -16,6 +16,7 @@ import { createTestStore } from 'utils/testUtils/storeUtils';
 import { numberQuestion } from 'models/Session/QuestionTypes';
 import { draft } from 'models/Status/StatusTypes';
 
+import { intlProviderConfig } from 'containers/LanguageProvider';
 import PhoneQuestion from '../index';
 
 describe('<PhoneQuestion />', () => {
@@ -68,7 +69,7 @@ describe('<PhoneQuestion />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <PhoneQuestion {...defaultProps} />
           </MemoryRouter>
@@ -85,7 +86,7 @@ describe('<PhoneQuestion />', () => {
       <Provider store={store}>
         <IntlProvider locale={DEFAULT_LOCALE}>
           <MemoryRouter>
-            <PhoneQuestion {...defaultProps} />
+            <PhoneQuestion {...defaultProps} {...intlProviderConfig} />
           </MemoryRouter>
         </IntlProvider>
       </Provider>,

@@ -25,12 +25,18 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
             Phone number
           </p>
           <div
-            class="Box-sc-1vhutan-0 lnJPFa"
+            class="Box-sc-1vhutan-0 tbzdy"
             data-testid="select"
           >
             <div
               class=" css-14jk2my-container"
             >
+              <span
+                aria-atomic="false"
+                aria-live="polite"
+                aria-relevant="additions text"
+                class="css-1f43avz-a11yText-A11yText"
+              />
               <div
                 class=" css-vz7ypb-control"
               >
@@ -43,7 +49,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                     Code
                   </div>
                   <div
-                    class="css-b8ldur-Input"
+                    class="css-1bwsx9e-Input"
                   >
                     <div
                       class=""

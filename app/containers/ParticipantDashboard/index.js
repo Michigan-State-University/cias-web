@@ -5,6 +5,7 @@
  */
 
 import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
@@ -13,7 +14,7 @@ import { generatedReportsReducer } from 'global/reducers/generatedReports';
 import { Helmet } from 'react-helmet';
 import messages from 'containers/Sessions/containers/GeneratedReportsPage/messages';
 import ReportsList from 'containers/Reports/containers/ReportsList';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 import AppContainer from 'components/Container';
 
 export function ParticipantDashboard({ intl: { formatMessage } }) {
@@ -33,7 +34,7 @@ export function ParticipantDashboard({ intl: { formatMessage } }) {
   );
 }
 ParticipantDashboard.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
 };
 
 export default compose(

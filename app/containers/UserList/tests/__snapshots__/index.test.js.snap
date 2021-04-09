@@ -3,34 +3,30 @@
 exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 <div>
   <div
-    class="Box-sc-1vhutan-0 krWeER"
+    class="Box-sc-1vhutan-0 bOwlot"
     display="flex"
     height="100%"
     overflow="scroll"
   >
     <div
-      class="Box-sc-1vhutan-0 cUyGiG"
+      class="Box-sc-1vhutan-0 cDJCJC"
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 ddJzSG"
+        class="Box-sc-1vhutan-0 erkpdS"
         display="flex"
       >
         <h1
           class="H1-sc-1k7m23t-0 hNcBIZ"
         >
-          <span>
-            Manage accounts
-          </span>
+          Manage accounts
         </h1>
         <button
           class="StyledTextButton-sc-1b7egxw-0 gvcXh"
           color="#C866EA"
           font-weight="bold"
         >
-          <span>
-            + Invite researcher
-          </span>
+          + Invite researcher
         </button>
       </div>
       <div>
@@ -50,7 +46,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 kmUFrR"
+                    class="Box-sc-1vhutan-0 iqNDFB"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -68,7 +64,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 fSsxQg"
+                    class="Box-sc-1vhutan-0 gZjjZA"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -86,7 +82,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 eaYVjB"
+                    class="Box-sc-1vhutan-0 kdPfXJ"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -104,7 +100,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 birkxO"
+                    class="Box-sc-1vhutan-0 hDkbeS"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -119,14 +115,14 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   </div>
                 </div>
                 <div
-                  class="Box-sc-1vhutan-0 jIytus"
+                  class="Box-sc-1vhutan-0 kNvWbw"
                   width="25"
                 />
                 <div
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 dDbVys"
+                    class="Box-sc-1vhutan-0 cVwTmA"
                     cursor="pointer"
                     display="inline-flex"
                   >
@@ -134,9 +130,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                       class="Img-sc-55j3su-0 gyShgd"
                       src="IMAGE_MOCK"
                     />
-                    <span>
-                      Show inactive accounts
-                    </span>
+                    Show inactive accounts
                   </div>
                 </div>
               </div>
@@ -259,7 +253,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 dJkvAm"
+                    class="Box-sc-1vhutan-0 bUeKCS"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -318,7 +312,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 kwpOiv"
+                    class="Box-sc-1vhutan-0 jSbkvP"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -377,7 +371,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 fngfaT"
+                    class="Box-sc-1vhutan-0 iwPbyv"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -421,7 +415,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           width="100%"
         >
           <div
-            class="Box-sc-1vhutan-0 cfDdZL"
+            class="Box-sc-1vhutan-0 dLpxyz"
             cursor="pointer"
             display="flex"
           >
@@ -448,25 +442,23 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
 <div>
   <div
-    class="Box-sc-1vhutan-0 krWeER"
+    class="Box-sc-1vhutan-0 bOwlot"
     display="flex"
     height="100%"
     overflow="scroll"
   >
     <div
-      class="Box-sc-1vhutan-0 cUyGiG"
+      class="Box-sc-1vhutan-0 cDJCJC"
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 ddJzSG"
+        class="Box-sc-1vhutan-0 erkpdS"
         display="flex"
       >
         <h1
           class="H1-sc-1k7m23t-0 hNcBIZ"
         >
-          <span>
-            Manage accounts
-          </span>
+          Manage accounts
         </h1>
       </div>
       <div>
@@ -486,7 +478,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 kmUFrR"
+                    class="Box-sc-1vhutan-0 iqNDFB"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -504,7 +496,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 fSsxQg"
+                    class="Box-sc-1vhutan-0 gZjjZA"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -522,7 +514,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 eaYVjB"
+                    class="Box-sc-1vhutan-0 kdPfXJ"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -540,7 +532,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 birkxO"
+                    class="Box-sc-1vhutan-0 hDkbeS"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -555,14 +547,14 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   </div>
                 </div>
                 <div
-                  class="Box-sc-1vhutan-0 jIytus"
+                  class="Box-sc-1vhutan-0 kNvWbw"
                   width="25"
                 />
                 <div
                   style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%; margin-bottom: 10px;"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 dDbVys"
+                    class="Box-sc-1vhutan-0 cVwTmA"
                     cursor="pointer"
                     display="inline-flex"
                   >
@@ -570,9 +562,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                       class="Img-sc-55j3su-0 gyShgd"
                       src="IMAGE_MOCK"
                     />
-                    <span>
-                      Show inactive accounts
-                    </span>
+                    Show inactive accounts
                   </div>
                 </div>
               </div>
@@ -695,7 +685,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 dJkvAm"
+                    class="Box-sc-1vhutan-0 bUeKCS"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -754,7 +744,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 kwpOiv"
+                    class="Box-sc-1vhutan-0 jSbkvP"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -813,7 +803,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 fngfaT"
+                    class="Box-sc-1vhutan-0 iwPbyv"
                     display="inline-flex"
                     width="max-content"
                   >
@@ -857,7 +847,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           width="100%"
         >
           <div
-            class="Box-sc-1vhutan-0 cfDdZL"
+            class="Box-sc-1vhutan-0 dLpxyz"
             cursor="pointer"
             display="flex"
           >

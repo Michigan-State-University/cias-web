@@ -44,9 +44,7 @@ exports[`<SessionTile /> Should render and match the snapshot 1`] = `
             color="#C866EA"
             font-weight="bold"
           >
-            <span>
-              Download Report
-            </span>
+            Download Report
           </p>
         </a>
         <img
@@ -55,9 +53,7 @@ exports[`<SessionTile /> Should render and match the snapshot 1`] = `
         <p
           class="Text-e4p0w3-0 kNRzzf"
         >
-          <span>
-            Completed
-          </span>
+          Completed
         </p>
       </div>
     </div>

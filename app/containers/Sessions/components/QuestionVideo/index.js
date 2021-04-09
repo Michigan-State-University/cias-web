@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
@@ -87,7 +87,7 @@ const QuestionVideo = ({
 };
 
 QuestionVideo.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   selectedQuestion: PropTypes.shape({
     video_url: PropTypes.string,
   }),

@@ -15,52 +15,52 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
       class="Row-y1cs0u-0 fZNegU"
     >
       <input
-        class="Input-t9j2q5-0 iMOhWw"
+        class="Input-t9j2q5-0 iihhWY"
         maxlength="1"
         name="test"
         size="1"
         type="text"
-        width="calc(85% / 6)"
+        width="calc(90% / 6)"
       />
       <input
-        class="Input-t9j2q5-0 iMOhWw"
+        class="Input-t9j2q5-0 iihhWY"
         maxlength="1"
         name="test"
         size="1"
         type="text"
-        width="calc(85% / 6)"
+        width="calc(90% / 6)"
       />
       <input
-        class="Input-t9j2q5-0 iMOhWw"
+        class="Input-t9j2q5-0 iihhWY"
         maxlength="1"
         name="test"
         size="1"
         type="text"
-        width="calc(85% / 6)"
+        width="calc(90% / 6)"
       />
       <input
-        class="Input-t9j2q5-0 iMOhWw"
+        class="Input-t9j2q5-0 iihhWY"
         maxlength="1"
         name="test"
         size="1"
         type="text"
-        width="calc(85% / 6)"
+        width="calc(90% / 6)"
       />
       <input
-        class="Input-t9j2q5-0 iMOhWw"
+        class="Input-t9j2q5-0 iihhWY"
         maxlength="1"
         name="test"
         size="1"
         type="text"
-        width="calc(85% / 6)"
+        width="calc(90% / 6)"
       />
       <input
-        class="Input-t9j2q5-0 iMOhWw"
+        class="Input-t9j2q5-0 iihhWY"
         maxlength="1"
         name="test"
         size="1"
         type="text"
-        width="calc(85% / 6)"
+        width="calc(90% / 6)"
       />
     </div>
   </div>

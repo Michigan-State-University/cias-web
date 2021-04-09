@@ -21,9 +21,7 @@ exports[`<Deactivation /> Should render and match the snapshot 1`] = `
     color="warning"
     width="180"
   >
-    <span>
-      Deactivate account
-    </span>
+    Deactivate account
   </button>
 </div>
 `;
@@ -49,9 +47,7 @@ exports[`<Deactivation /> Should render and match the snapshot for inactive user
     color="primary"
     width="180"
   >
-    <span>
-      Activate account
-    </span>
+    Activate account
   </button>
 </div>
 `;

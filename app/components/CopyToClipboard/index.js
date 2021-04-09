@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 import { CopyToClipboard as ReactCopyToClipboard } from 'react-copy-to-clipboard';
 
 import Row from 'components/Row';
@@ -58,7 +58,7 @@ const CopyToClipboard = ({
 
 CopyToClipboard.propTypes = {
   textToCopy: PropTypes.string,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   children: PropTypes.node,
   textProps: PropTypes.object,
 };

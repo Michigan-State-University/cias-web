@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -102,7 +102,7 @@ const Profile = props => {
 };
 
 Profile.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   userId: PropTypes.string,
   PasswordComponent: PropTypes.object,
   AvatarComponent: PropTypes.object,

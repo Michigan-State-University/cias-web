@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { useHistory, useLocation } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -118,7 +118,7 @@ const ForbiddenPage = ({ intl: { formatMessage }, user }) => {
 
 ForbiddenPage.propTypes = {
   location: PropTypes.object,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   history: PropTypes.object,
   user: PropTypes.object,
 };

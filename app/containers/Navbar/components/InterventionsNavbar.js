@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { FormattedMessage, IntlShape } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -269,7 +269,7 @@ InterventionNavbar.propTypes = {
     generatedReportCount: PropTypes.number,
   }),
   updateSessionName: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   location: PropTypes.object,
   questionsLength: PropTypes.number,
   selectedQuestion: PropTypes.string,

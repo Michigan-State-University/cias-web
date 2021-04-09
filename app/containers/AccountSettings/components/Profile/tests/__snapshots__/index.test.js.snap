@@ -3,14 +3,12 @@
 exports[`<Profile /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-1vhutan-0 iTujjX"
+    class="Box-sc-1vhutan-0 iCDuTP"
   >
     <h2
       class="H2-uw8lbl-0 iUhbVg"
     >
-      <span>
-        Profile
-      </span>
+      Profile
     </h2>
     <div
       class="Row-y1cs0u-0 cUkLOH"
@@ -36,7 +34,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
               class="Row-y1cs0u-0 styled__StyledButtonsRow-sc-4bx7ap-2 dskFsL fA-DhtD"
             >
               <div
-                class="Box-sc-1vhutan-0 cjmvvN styled__StyledUploadFileButton-sc-4bx7ap-4 GlRFp"
+                class="Box-sc-1vhutan-0 crjFXF styled__StyledUploadFileButton-sc-4bx7ap-4 GlRFp"
                 height="fit-content"
               >
                 <input
@@ -54,9 +52,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                     font-size="14"
                     font-weight="bold"
                   >
-                    <span>
-                      Add profile photo
-                    </span>
+                    Add profile photo
                   </p>
                 </div>
               </div>
@@ -118,7 +114,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 styled__StyledTimezoneBox-sc-1pif2s-3 cVZZaQ dFeJUv"
+        class="Box-sc-1vhutan-0 styled__StyledTimezoneBox-sc-1pif2s-3 dvfkZg dFeJUv"
       >
         <div
           class="Column-sc-4zswzq-0 laIXbL"
@@ -130,12 +126,18 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             Time zone
           </p>
           <div
-            class="Box-sc-1vhutan-0 lnJPFa"
+            class="Box-sc-1vhutan-0 tbzdy"
             data-testid="select"
           >
             <div
               class=" css-2b097c-container"
             >
+              <span
+                aria-atomic="false"
+                aria-live="polite"
+                aria-relevant="additions text"
+                class="css-1f43avz-a11yText-A11yText"
+              />
               <div
                 class=" css-4iyz22-control"
               >
@@ -214,12 +216,18 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
               Phone number
             </p>
             <div
-              class="Box-sc-1vhutan-0 lnJPFa"
+              class="Box-sc-1vhutan-0 tbzdy"
               data-testid="select"
             >
               <div
                 class=" css-2b097c-container"
               >
+                <span
+                  aria-atomic="false"
+                  aria-live="polite"
+                  aria-relevant="additions text"
+                  class="css-1f43avz-a11yText-A11yText"
+                />
                 <div
                   class=" css-4iyz22-control"
                 >
@@ -308,9 +316,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           font-size="14"
           font-weight="bold"
         >
-          <span>
-            Reset password
-          </span>
+          Reset password
         </button>
       </div>
     </div>

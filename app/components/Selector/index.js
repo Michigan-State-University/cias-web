@@ -24,10 +24,12 @@ const Selector = ({
   disabled,
 }) => {
   const selector = useRef(null);
-  useOutsideClick(selector, () => setIsActive(false), isActive);
 
   const selectedOption = activeOption || { label: selectOptionPlaceholder };
   const [isActive, setIsActive] = useState(false);
+
+  useOutsideClick(selector, () => setIsActive(false), isActive);
+
   const transform = isActive ? 'rotate(180deg);' : '';
   const transition = 'transform 0.2s;';
 

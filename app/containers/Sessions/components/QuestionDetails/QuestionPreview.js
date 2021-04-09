@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 const QuestionPreview = ({ dangerouslySetInnerHTML, mt, padding, width }) => (
   <Row mt={mt}>
     <Box
+      lineHeight="1.42"
       padding={padding}
       width={width}
       dangerouslySetInnerHTML={dangerouslySetInnerHTML}

@@ -29,6 +29,7 @@ export const apiSessionResponse = (id = 0) => ({
 export const apiInterventionResponse = (id = 0) => ({
   data: {
     id: `intervention-test-${id}`,
+    type: 'intervention',
     attributes: {
       name: `intervention-test-${id}`,
     },

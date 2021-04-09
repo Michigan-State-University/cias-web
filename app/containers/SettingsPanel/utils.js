@@ -1,5 +1,8 @@
 import React from 'react';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
+import { Markup } from 'interweave';
+
+import { formatMessage } from 'utils/intlOutsideReact';
 
 import messages from './messages';
 
@@ -13,7 +16,12 @@ export const shareOptions = [
   {
     id: SHARE_IDS.anyoneWithTheLink,
     label: <FormattedMessage {...messages.anyoneWithTheLinkLabel} />,
-    sublabel: <FormattedHTMLMessage {...messages.anyoneWithTheLinkSublabel} />,
+    sublabel: (
+      <Markup
+        content={formatMessage(messages.anyoneWithTheLinkSublabel)}
+        noWrap
+      />
+    ),
   },
   {
     id: SHARE_IDS.anyoneWhoIsARegisteredParticipant,
@@ -21,8 +29,11 @@ export const shareOptions = [
       <FormattedMessage {...messages.anyoneWhoIsARegisteredParticipantLabel} />
     ),
     sublabel: (
-      <FormattedHTMLMessage
-        {...messages.anyoneWhoIsARegisterdParticipantSublabel}
+      <Markup
+        content={formatMessage(
+          messages.anyoneWhoIsARegisterdParticipantSublabel,
+        )}
+        noWrap
       />
     ),
   },
@@ -32,8 +43,11 @@ export const shareOptions = [
       <FormattedMessage {...messages.onlyInvitedRegisteredParticipantsLabel} />
     ),
     sublabel: (
-      <FormattedHTMLMessage
-        {...messages.onlyInvitedRegisteredParticipantsSublabel}
+      <Markup
+        content={formatMessage(
+          messages.onlyInvitedRegisteredParticipantsSublabel,
+        )}
+        noWrap
       />
     ),
   },

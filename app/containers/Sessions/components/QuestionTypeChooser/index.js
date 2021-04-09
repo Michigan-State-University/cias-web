@@ -20,9 +20,11 @@ import {
   nameQuestion,
   participantReport,
   thirdPartyQuestion,
+  phoneQuestion,
 } from 'models/Session/QuestionTypes';
 import {
   makeSelectParticipantReportQuestionExists,
+  makeSelectPhoneQuestionExists,
   makeSelectThirdPartyReportQuestionExists,
 } from 'global/reducers/questions/selectors';
 import { borders, boxShadows, colors, fontSizes } from 'theme';
@@ -40,6 +42,7 @@ const QuestionTypeChooser = ({
   nameQuestionExists,
   participantReportExists,
   thirdPartyReportExists,
+  phoneQuestionExists,
 }) => {
   const buttonRef = useRef(null);
   const containerRef = useRef(null);
@@ -77,13 +80,15 @@ const QuestionTypeChooser = ({
           id !== finishQuestion.id &&
           !(nameQuestionExists && id === nameQuestion.id) &&
           !(participantReportExists && id === participantReport.id) &&
-          !(thirdPartyReportExists && id === thirdPartyQuestion.id),
+          !(thirdPartyReportExists && id === thirdPartyQuestion.id) &&
+          !(phoneQuestionExists && id === phoneQuestion.id),
       ),
     [
       QuestionTypes,
       nameQuestionExists,
       participantReportExists,
       thirdPartyReportExists,
+      phoneQuestionExists,
     ],
   );
 
@@ -159,6 +164,7 @@ QuestionTypeChooser.propTypes = {
   nameQuestionExists: PropTypes.bool,
   participantReportExists: PropTypes.bool,
   thirdPartyReportExists: PropTypes.bool,
+  phoneQuestionExists: PropTypes.bool,
 };
 
 QuestionTypeChooser.defaultProps = {
@@ -169,6 +175,7 @@ const mapStateToProps = createStructuredSelector({
   nameQuestionExists: makeSelectNameQuestionExists(),
   participantReportExists: makeSelectParticipantReportQuestionExists(),
   thirdPartyReportExists: makeSelectThirdPartyReportQuestionExists(),
+  phoneQuestionExists: makeSelectPhoneQuestionExists(),
 });
 
 const withConnect = connect(

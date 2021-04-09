@@ -35,8 +35,9 @@ import {
   nextQuestionFailure,
   nextQuestionRequest,
   createUserSessionRequest,
+  changeUserSessionId,
 } from './actions';
-import { makeSelectAnswers } from './selectors';
+import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
 import messages from './messages';
 
 function* submitAnswersAsync({
@@ -75,13 +76,16 @@ function* submitAnswersAsync({
 function* nextQuestion({ payload: { userSessionId, questionId } }) {
   const params = new URLSearchParams();
 
-  if (questionId) params.append('preview_question_id', questionId);
+  const currentQuestion = yield select(makeSelectCurrentQuestion());
+
+  if (questionId && currentQuestion === null)
+    params.append('preview_question_id', questionId);
 
   const requestUrl = `/v1/user_sessions/${userSessionId}/questions?${params.toString()}`;
 
   try {
     const {
-      data: { data, warning },
+      data: { data, warning, next_user_session_id: newUserSessionId },
     } = yield axios.get(requestUrl);
 
     if (!isNullOrUndefined(warning))
@@ -89,6 +93,10 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
         toast.warning,
         formatMessage(messages[warning] ?? messages.unknownWarning),
       );
+
+    if (newUserSessionId) {
+      yield put(changeUserSessionId(newUserSessionId));
+    }
 
     yield put(nextQuestionSuccess(mapQuestionToStateObject(data)));
   } catch (error) {

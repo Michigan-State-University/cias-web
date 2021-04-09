@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Column from 'components/Column';
 import H2 from 'components/H2';
@@ -13,7 +13,7 @@ import messages from '../messages';
 
 const LogoUpload = ({
   intl: { formatMessage },
-  intervention: { logo_url: logoUrl },
+  intervention: { logoUrl },
   addImage,
   deleteImage,
   logoLoading,
@@ -30,13 +30,14 @@ const LogoUpload = ({
         disabled={!canEdit}
         onAddImage={addImage}
         onDeleteImage={deleteImage}
+        acceptedFormats={['JPG', 'PNG']}
       />
     </Column>
   );
 };
 
 LogoUpload.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   intervention: PropTypes.object,
   addImage: PropTypes.func,
   deleteImage: PropTypes.func,

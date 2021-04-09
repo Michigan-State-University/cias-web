@@ -286,9 +286,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
           <h1
             class="c9"
           >
-            <span>
-              Are you sure you want to perform this action?
-            </span>
+            Are you sure you want to perform this action?
           </h1>
           <div
             class="c10"
@@ -298,9 +296,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
               color="primary"
               type="button"
             >
-              <span>
-                Cancel
-              </span>
+              Cancel
             </button>
             <button
               class="c12"
@@ -308,9 +304,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
               data-cy="confirmation-box-confirm-button"
               type="button"
             >
-              <span>
-                Confirm
-              </span>
+              Confirm
             </button>
           </div>
         </div>
@@ -638,9 +632,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
           <h1
             class="c9"
           >
-            <span>
-              Are you sure you want to perform this action?
-            </span>
+            Are you sure you want to perform this action?
           </h1>
           <div
             class="c10"
@@ -650,9 +642,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
               color="primary"
               type="button"
             >
-              <span>
-                Cancel
-              </span>
+              Cancel
             </button>
             <button
               class="c12"
@@ -660,9 +650,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
               data-cy="confirmation-box-confirm-button"
               type="button"
             >
-              <span>
-                Confirm
-              </span>
+              Confirm
             </button>
           </div>
         </div>

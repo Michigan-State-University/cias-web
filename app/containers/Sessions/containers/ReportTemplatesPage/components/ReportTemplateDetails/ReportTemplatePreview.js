@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Col, Container } from 'react-grid-system';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import {
   addTemplateSectionRequest,
@@ -125,7 +125,7 @@ const withConnect = connect(
 );
 
 ReportTemplatePreview.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   addSection: PropTypes.func,
   updateReportTemplate: PropTypes.func,
 };

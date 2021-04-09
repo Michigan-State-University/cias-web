@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Row } from 'react-grid-system';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 import { injectReducer, useInjectSaga } from 'redux-injectors';
 
 import { updateTemplateSectionRequest } from 'global/reducers/reportTemplates';
@@ -116,7 +116,7 @@ SectionFormula.propTypes = {
   formula: PropTypes.string,
   updateSection: PropTypes.func,
   getQuestionGroups: PropTypes.func,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
 };
 
 export default compose(

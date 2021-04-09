@@ -4,7 +4,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { Row, Col, Container } from 'react-grid-system';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 
 import { boxShadows, colors, elements, themeColors } from 'theme';
 import {
@@ -137,7 +137,7 @@ const withConnect = connect(
 );
 
 ReportTemplatesList.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   addReportTemplate: PropTypes.func,
   selectTemplate: PropTypes.func,
 };

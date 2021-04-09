@@ -29,9 +29,7 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
             class="H1-sc-1k7m23t-0 ikOywA"
             font-size="23"
           >
-            <span>
-              Set a new password
-            </span>
+            Set a new password
           </h1>
           <div
             class="Column-sc-4zswzq-0 jCuscc"
@@ -77,9 +75,7 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
             height="46"
             type="submit"
           >
-            <span>
-              Set password
-            </span>
+            Set password
           </button>
         </div>
       </div>

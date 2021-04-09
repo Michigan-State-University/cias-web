@@ -18,8 +18,10 @@ import Row from 'components/Row';
 import Text from 'components/Text';
 
 import {
-  closed,
+  draft,
   published,
+  closed,
+  archived,
   statusTypeToColorMap,
 } from 'models/Status/StatusTypes';
 import getUrlProtocol from 'utils/getApiProtocol';
@@ -44,9 +46,6 @@ function InterventionStatusButtons({
   const urlToDownload = /^((http:\/\/)|(https:\/\/)).*$/.test(csvLink)
     ? csvLink
     : `${apiProtocol}//${csvLink}`;
-  const fileName = useMemo(() => urlToDownload.split('/').pop(), [
-    urlToDownload,
-  ]);
 
   const CloseButton = () => (
     <>
@@ -157,36 +156,41 @@ function InterventionStatusButtons({
   );
 
   const statuses = {
-    draft: (
+    [draft]: (
       <>
         <CsvButtons
           handleSendCsv={handleSendCsv}
           csvLink={csvLink}
           csvGeneratedAt={csvGeneratedAt}
-          fileName={fileName}
           urlToDownload={urlToDownload}
         />
         <PublishButton />
       </>
     ),
-    published: (
+    [published]: (
       <>
         <CsvButtons
           handleSendCsv={handleSendCsv}
           csvLink={csvLink}
           csvGeneratedAt={csvGeneratedAt}
-          fileName={fileName}
           urlToDownload={urlToDownload}
         />
         <CloseButton />
       </>
     ),
-    closed: (
+    [closed]: (
       <CsvButtons
         handleSendCsv={handleSendCsv}
         csvLink={csvLink}
         csvGeneratedAt={csvGeneratedAt}
-        fileName={fileName}
+        urlToDownload={urlToDownload}
+      />
+    ),
+    [archived]: (
+      <CsvButtons
+        handleSendCsv={handleSendCsv}
+        csvLink={csvLink}
+        csvGeneratedAt={csvGeneratedAt}
         urlToDownload={urlToDownload}
       />
     ),

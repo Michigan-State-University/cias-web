@@ -62,3 +62,5 @@ export const NEXT_QUESTION_FAILURE =
   'app/AnswerSessionPage/NEXT_QUESTION_FAILURE';
 
 export const CLEAR_ERROR = 'app/AnswerSessionPage/CLEAR_ERROR';
+export const CHANGE_USER_SESSION_ID =
+  'app/AnswerSessionPage/CHANGE_USER_SESSION_ID';

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import Column from 'components/Column';
 import Box from 'components/Box';
@@ -95,7 +95,7 @@ const ChooserComponent = ({
                   hoverColor={`rgba(${hexToRgb(themeColors.secondary)}, 0.1)`}
                   onClick={() =>
                     disableCopy
-                      ? changeViewAction({ id })
+                      ? changeViewAction({ id, name })
                       : selectAction({ id, name })
                   }
                   px={25}
@@ -130,7 +130,13 @@ const ChooserComponent = ({
               </Column>
             ))}
           {!loading && !items?.length && (
-            <Text fontSize={12}>{formatMessage(messages.empty)}</Text>
+            <Column>
+              <Row px={25} py={15}>
+                <Text fontSize={12}>
+                  {formatMessage(messages.noValidQuestionGroups)}
+                </Text>
+              </Row>
+            </Column>
           )}
         </Column>
       </Box>
@@ -139,7 +145,7 @@ const ChooserComponent = ({
 };
 
 ChooserComponent.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   items: PropTypes.array,
   selectedItem: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   elementId: PropTypes.string,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 
@@ -97,7 +97,7 @@ const CreateTeam = ({
 };
 
 CreateTeam.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   visible: PropTypes.bool,
   onClose: PropTypes.func,
   onInputChange: PropTypes.func,

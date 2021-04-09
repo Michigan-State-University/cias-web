@@ -2,7 +2,7 @@
 
 exports[`<ReportTile /> Should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-1vhutan-0 styled__StyledBox-iilfwr-0 fuaRTP fAWbgP"
+  class="Box-sc-1vhutan-0 styled__StyledBox-iilfwr-0 gfxlkT fAWbgP"
 >
   <div
     height="100%"
@@ -46,21 +46,23 @@ exports[`<ReportTile /> Should render and match the snapshot 1`] = `
         >
           Invalid Date
         </p>
-        <a
-          class="StyledLink-eun179-0 evBbaE"
-          href="/"
-          target="_blank"
+        <div
+          class="Box-sc-1vhutan-0 dvfkZg"
         >
-          <p
-            class="Text-e4p0w3-0 fOFYCf"
-            color="#C866EA"
-            font-size="13"
-            font-weight="bold"
-          />
-          <img
-            src="IMAGE_MOCK"
-          />
-        </a>
+          <div
+            class="Row-y1cs0u-0 cRfofY"
+          >
+            <p
+              class="Text-e4p0w3-0 fOFYCf"
+              color="#C866EA"
+              font-size="13"
+              font-weight="bold"
+            />
+            <img
+              src="IMAGE_MOCK"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>

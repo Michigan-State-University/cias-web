@@ -15,6 +15,7 @@ import {
 import fetchInterventionSaga, {
   fetchIntervention,
 } from 'global/reducers/intervention/sagas/fetchIntervention';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import {
   fetchInterventionSuccess,
   fetchInterventionError,
@@ -26,11 +27,15 @@ describe('fetchIntervention saga', () => {
   const payload = { id: 'test-id' };
 
   it('Check fetchIntervention generator success connection', () => {
-    const interventionApiResponse = apiInterventionResponse();
+    const interventionApiResponse = { data: apiInterventionResponse() };
     const sessionApiResponse = {
       data: [apiSessionResponse().data],
     };
-    const intervention = cloneDeep(interventionApiResponse.data);
+    const intervention = jsonApiToObject(
+      interventionApiResponse.data,
+      'intervention',
+    );
+
     const sessions = cloneDeep(sessionApiResponse.data);
     const mappedInterventions = sessions.map(defaultMapper);
     intervention.sessions = orderBy(mappedInterventions, 'position');

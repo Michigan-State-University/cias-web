@@ -192,9 +192,7 @@ exports[`<AvatarForm /> Should render and match the snapshot 1`] = `
               font-size="14"
               font-weight="bold"
             >
-              <span>
-                Change profile photo
-              </span>
+              Change profile photo
             </p>
           </div>
         </div>
@@ -205,9 +203,7 @@ exports[`<AvatarForm /> Should render and match the snapshot 1`] = `
           font-size="14"
           font-weight="bold"
         >
-          <span>
-            Remove profile photo
-          </span>
+          Remove profile photo
         </button>
       </div>
     </div>

@@ -6,7 +6,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
     class="Column-sc-4zswzq-0 ekpwZH"
   >
     <div
-      class="Box-sc-1vhutan-0 styled__StyledBox-w5tasd-0 cVZZaQ dBQBvk"
+      class="Box-sc-1vhutan-0 styled__StyledBox-w5tasd-0 dvfkZg dBQBvk"
     >
       <div
         class="Column-sc-4zswzq-0 jnrASG"
@@ -15,12 +15,10 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
         <h2
           class="H2-uw8lbl-0 bzPnix"
         >
-          <span>
-            Who can access this intervention?
-          </span>
+          Who can access this intervention?
         </h2>
         <div
-          class="Box-sc-1vhutan-0 dnOjoG"
+          class="Box-sc-1vhutan-0 lmDegy"
         >
           <div
             class="Row-y1cs0u-0 bNHlls"
@@ -36,9 +34,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
               font-size="15"
               font-weight="regular"
             >
-              <span>
-                Anyone with the link
-              </span>
+              Anyone with the link
             </p>
           </div>
           <div
@@ -55,9 +51,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
               font-size="15"
               font-weight="regular"
             >
-              <span>
-                Any registered participant
-              </span>
+              Any registered participant
             </p>
           </div>
           <div
@@ -74,9 +68,7 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
               font-size="15"
               font-weight="regular"
             >
-              <span>
-                Specific registered participants
-              </span>
+              Specific registered participants
             </p>
           </div>
         </div>

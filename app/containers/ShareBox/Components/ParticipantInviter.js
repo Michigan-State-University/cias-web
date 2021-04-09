@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import head from 'lodash/head';
 import map from 'lodash/map';
 import uniq from 'lodash/uniq';
@@ -80,7 +80,7 @@ const ParticipantInviter = ({
 };
 
 ParticipantInviter.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   sendInvite: PropTypes.func,
   loading: PropTypes.bool,
   disabled: PropTypes.bool,

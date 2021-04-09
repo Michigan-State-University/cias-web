@@ -25,6 +25,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Import root app
 import App from 'containers/App';
+import ErrorPage from 'containers/ErrorPage/Loadable';
 
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
@@ -37,10 +38,11 @@ import '!file-loader?name=[name].[ext]!./assets/images/logo.png';
 import 'file-loader?name=.htaccess!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
-import { store } from './configureStore';
+import { store } from 'configureStore';
 
 // Import i18n messages
-import { translationMessages } from './i18n';
+import { translationMessages } from 'i18n';
+import { polyfillI18n } from 'i18nPolyfill';
 
 import 'utils/axios';
 
@@ -61,8 +63,10 @@ const render = messages => {
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <ScreenClassProvider>
-            <ToastContainer />
-            <App />
+            <Sentry.ErrorBoundary fallback={ErrorPage}>
+              <ToastContainer />
+              <App />
+            </Sentry.ErrorBoundary>
           </ScreenClassProvider>
         </ConnectedRouter>
       </LanguageProvider>
@@ -71,29 +75,25 @@ const render = messages => {
   );
 };
 
+const runAppWithPolyfills = messages => {
+  Promise.all([polyfillI18n()])
+    .then(() => render(messages))
+    .catch(err => {
+      throw err;
+    });
+};
+
 if (module.hot) {
   // Hot reloadable React components and translation json files
   // modules.hot.accept does not accept dynamic dependencies,
   // have to be constants at compile-time
-  module.hot.accept(['./i18n', 'containers/App'], () => {
+  module.hot.accept(['./i18nPolyfill.js', './i18n', 'containers/App'], () => {
     ReactDOM.unmountComponentAtNode(MOUNT_NODE);
-    render(translationMessages);
+    runAppWithPolyfills(translationMessages);
   });
 }
 
-// Chunked polyfill for browsers without Intl support
-if (!window.Intl) {
-  new Promise(resolve => {
-    resolve(import('intl'));
-  })
-    .then(() => Promise.all([import('intl/locale-data/jsonp/en.js')]))
-    .then(() => render(translationMessages))
-    .catch(err => {
-      throw err;
-    });
-} else {
-  render(translationMessages);
-}
+runAppWithPolyfills(translationMessages);
 
 // Install ServiceWorker and AppCache in the end since
 // it's not most important operation and if main code fails,

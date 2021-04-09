@@ -73,9 +73,7 @@ exports[`<SessionCreateButton /> Should render and match the snapshot 1`] = `
     <h3
       class="c3"
     >
-      <span>
-        Create a new Session
-      </span>
+      Create a new Session
     </h3>
   </div>
 </div>

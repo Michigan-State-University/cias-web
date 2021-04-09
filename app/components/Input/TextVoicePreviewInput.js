@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { intlShape, injectIntl } from 'react-intl';
+import { IntlShape, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -96,7 +96,7 @@ const TextVoicePreviewInput = ({
 };
 
 TextVoicePreviewInput.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   value: PropTypes.string,
   onBlur: PropTypes.func,
   placeholder: PropTypes.string,

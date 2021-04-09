@@ -9,12 +9,8 @@ import map from 'lodash/map';
 import uniq from 'lodash/uniq';
 import isEmpty from 'lodash/isEmpty';
 import find from 'lodash/find';
-import {
-  FormattedMessage,
-  injectIntl,
-  intlShape,
-  FormattedHTMLMessage,
-} from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
+import { Markup } from 'interweave';
 
 import Box from 'components/Box';
 import Button from 'components/Button';
@@ -128,7 +124,10 @@ const AccessGiver = ({
           <FormattedMessage {...messages.accessGiverHeader} />
         </H2>
         <Text>
-          <FormattedHTMLMessage {...messages.accessGiverHeaderNote} />
+          <Markup
+            content={formatMessage(messages.accessGiverHeaderNote)}
+            noWrap
+          />
         </Text>
         <Column mt={20}>
           <ChipsInput
@@ -178,7 +177,7 @@ const AccessGiver = ({
 };
 
 AccessGiver.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   intervention: PropTypes.object,
   giveUserAccess: PropTypes.func,
   fetchUsersWithAccess: PropTypes.func,

@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Col, Row } from 'react-grid-system';
-import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -73,7 +73,7 @@ function AccountSettings({
 }
 
 AccountSettings.propTypes = {
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
   userId: PropTypes.string,
   formComponents: PropTypes.object,
   ProfileComponent: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),

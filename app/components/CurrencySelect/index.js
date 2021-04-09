@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 import { codes } from 'currency-codes';
 import union from 'lodash/union';
 
@@ -63,7 +63,7 @@ CurrencySelect.propTypes = {
   disabled: PropTypes.bool,
   onSelect: PropTypes.func,
   value: PropTypes.string,
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
 };
 
 export default injectIntl(CurrencySelect);

@@ -2,7 +2,7 @@
 
 exports[`<ReportTile /> Should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-1vhutan-0 styled__StyledBox-onmxmg-0 fuaRTP erHOle"
+  class="Box-sc-1vhutan-0 styled__StyledBox-onmxmg-0 gfxlkT erHOle"
 >
   <div
     height="100%"
@@ -43,9 +43,7 @@ exports[`<ReportTile /> Should render and match the snapshot 1`] = `
             font-size="13"
             font-weight="bold"
           >
-            <span>
-              Download
-            </span>
+            Download
           </p>
           <img
             src="IMAGE_MOCK"

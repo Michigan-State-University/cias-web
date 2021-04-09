@@ -199,6 +199,14 @@ const ApprovableInput = props => {
             showMonthDropdown
             showYearDropdown
             calendarClassName="schedule-date-picker"
+            popperModifiers={{
+              preventOverflow: {
+                padding: 10,
+              },
+            }}
+            popperProps={{
+              positionFixed: true,
+            }}
           />
         </DatePickerWrapper>
       );

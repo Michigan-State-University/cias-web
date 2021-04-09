@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Container } from 'react-grid-system';
-import { injectIntl, intlShape } from 'react-intl';
+import { injectIntl, IntlShape } from 'react-intl';
 
 import {
   deleteSectionCaseImageRequest,
@@ -290,6 +290,7 @@ const SectionCaseItem = ({
               onAddImage={handleImageChange}
               onDeleteImage={handleImageDelete}
               disabled={!canEdit}
+              acceptedFormats={['JPG', 'PNG']}
             />
           </Row>
         </Container>
@@ -315,7 +316,7 @@ SectionCaseItem.propTypes = {
   deleteCase: PropTypes.func,
   deleteImage: PropTypes.func,
   sectionCase: PropTypes.shape(SectionCase),
-  intl: intlShape,
+  intl: PropTypes.shape(IntlShape),
 };
 
 export default compose(

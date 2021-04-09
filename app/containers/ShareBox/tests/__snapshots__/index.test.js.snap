@@ -3,12 +3,12 @@
 exports[`<ShareBox /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-1vhutan-0 jSCipg"
+    class="Box-sc-1vhutan-0 gDdnEI"
     height="fit-content"
     width="500"
   >
     <div
-      class="Box-sc-1vhutan-0 jZbfgr"
+      class="Box-sc-1vhutan-0 hlMeWb"
       display="flex"
     >
       <div
@@ -48,7 +48,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="Box-sc-1vhutan-0 iHwJxK"
+            class="Box-sc-1vhutan-0 bGZFnK"
             width="140"
           >
             <button
@@ -58,9 +58,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               disabled=""
               width="140"
             >
-              <span>
-                Send an email
-              </span>
+              Send an email
             </button>
           </div>
         </div>
@@ -89,9 +87,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
                   color="#C866EA"
                   font-weight="bold"
                 >
-                  <span>
-                    Upload emails with CSV file
-                  </span>
+                  Upload emails with CSV file
                 </p>
               </div>
             </div>
@@ -131,7 +127,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       class="Row-y1cs0u-0 eBLItm"
     >
       <div
-        class="Box-sc-1vhutan-0 jKoMMz"
+        class="Box-sc-1vhutan-0 gfyFJD"
       >
         <div
           class="styled__Container-u9aus1-0 kMvwSH"
@@ -148,9 +144,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               color="#C866EA"
               font-weight="bold"
             >
-              <span>
-                Copy link to start with this session externaly
-              </span>
+              Copy link to start with this session externaly
             </p>
           </div>
         </div>
@@ -162,9 +156,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
       font-size="13"
       font-weight="bold"
     >
-      <span>
-        Email has been already sent to
-      </span>
+      Email has been already sent to
     </h3>
     <div
       class="Row-y1cs0u-0 bslAAf"
