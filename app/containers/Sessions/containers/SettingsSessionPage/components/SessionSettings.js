@@ -30,6 +30,7 @@ import ConfirmationBox from 'components/ConfirmationBox';
 import BadgeInput from 'components/Input/BadgeInput';
 import Option from './Option';
 import messages from './messages';
+import PeedyVoiceSettings from './PeedyVoiceSettings';
 import { Input, InputContainer } from './styled';
 
 const SessionSettings = ({
@@ -206,6 +207,10 @@ const SessionSettings = ({
             action={onToggle(index)}
           />
         ))}
+      <PeedyVoiceSettings
+        formatMessage={formatMessage}
+        editingPossible={editingPossible}
+      />
     </>
   );
 };

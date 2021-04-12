@@ -48,7 +48,7 @@ export default defineMessages({
     defaultMessage: 'Select users',
   },
   emailPlaceholder: {
-    id: `${scope}.selectUsers`,
+    id: `${scope}.emailPlaceholder`,
     defaultMessage: 'Enter new user e-mail addresses',
   },
   globalSettingRemovalConfirmation: {
@@ -63,5 +63,21 @@ export default defineMessages({
     id: `${scope}.blockRemovalConfirmationDescription`,
     defaultMessage:
       'Those block types will be removed in all questions in this session and their data will be wiped out',
+  },
+  voiceSettings: {
+    id: `${scope}.voiceSettings`,
+    defaultMessage: 'Peedy voice settings',
+  },
+  peedyLanguage: {
+    id: `${scope}.peedyLanguage`,
+    defaultMessage: 'Peedy language',
+  },
+  peedyVoiceType: {
+    id: `${scope}.peedyVoiceType`,
+    defaultMessage: 'Peedy voice type',
+  },
+  saveVoiceSettings: {
+    id: `${scope}.saveVoiceSettings`,
+    defaultMessage: 'Save voice settings',
   },
 });
