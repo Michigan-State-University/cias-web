@@ -14,8 +14,11 @@ export default defineMessages({
   },
   header: {
     id: `${scope}.header`,
-    defaultMessage:
-      'Some error occurred in the App. Please refresh or go to the Main Page.',
+    defaultMessage: 'An error has occurred in the system.',
+  },
+  description: {
+    id: `${scope}.description`,
+    defaultMessage: `<b>An error has occurred in the system.</b><br>Our software development team has received a message about this error.<br>Please click here if you’d like to provide our team with any additional information.<br><br>To continue, please refresh or go to the main page.`,
   },
   errorCode: {
     id: `${scope}.errorCode`,
