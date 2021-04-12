@@ -1,23 +1,38 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
-import Text from 'components/Text';
 import { numericValidator } from 'utils/validators';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { SCHEDULE_OPTIONS } from 'global/reducers/intervention';
+
+import ApprovableInput from 'components/Input/ApprovableInput';
+import Text from 'components/Text';
 
 import messages from './messages';
 import { StyledInputWrapper } from './styled';
 
 const DaysAfterOption = ({
   intl: { formatMessage },
-  afterFill,
   value,
   setValue,
   disabled,
+  scheduleOption,
 }) => {
   const getValue = () => (isNullOrUndefined(value) ? '' : value);
+
+  const textInfo = useMemo(() => {
+    switch (scheduleOption) {
+      case SCHEDULE_OPTIONS.daysAfterFill:
+        return formatMessage(messages.daysAfterFillInfo);
+      case SCHEDULE_OPTIONS.daysAfterDate:
+        return formatMessage(messages.daysAfterDateInfo);
+      case SCHEDULE_OPTIONS.daysAfter:
+      default:
+        return formatMessage(messages.daysAfterInfo);
+    }
+  }, [scheduleOption]);
+
   return (
     <>
       <Text fontSize={15} wordBreak="normal">
@@ -38,18 +53,14 @@ const DaysAfterOption = ({
           textAlign="center"
         />
       </StyledInputWrapper>
-      <Text fontSize={15}>
-        {afterFill
-          ? formatMessage(messages.daysAfterFillInfo)
-          : formatMessage(messages.daysAfterInfo)}
-      </Text>
+      <Text fontSize={15}>{textInfo}</Text>
     </>
   );
 };
 
 DaysAfterOption.propTypes = {
   intl: PropTypes.object,
-  afterFill: PropTypes.bool,
+  scheduleOption: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   setValue: PropTypes.func,
   disabled: PropTypes.bool,

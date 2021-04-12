@@ -4,6 +4,11 @@ import get from 'lodash/get';
 import cloneDeep from 'lodash/cloneDeep';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
+import {
+  EDIT_SESSION_ERROR,
+  EDIT_SESSION_REQUEST,
+  EDIT_SESSION_SUCCESS,
+} from 'global/reducers/session/constants';
 import sessionSettingsReducer from './sessionSettings/reducer';
 import {
   FETCH_INTERVENTION_REQUEST,
@@ -194,7 +199,7 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case UPDATE_SESSION_SETTINGS_REQUEST: {
         const sessionIndex = state.intervention.sessions.findIndex(
-          intervention => intervention.id === action.payload.data.sessionId,
+          session => session.id === action.payload.data.sessionId,
         );
         if (sessionIndex > -1) {
           draft.currentSessionIndex = sessionIndex;
@@ -360,7 +365,7 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case EXTERNAL_COPY_SESSION_REQUEST:
         break;
-      case EXTERNAL_COPY_SESSION_SUCCESS:
+      case EXTERNAL_COPY_SESSION_SUCCESS: {
         const { session, interventionId } = action.payload;
         if (state.intervention.id === interventionId) {
           const updateIntervention = {
@@ -371,8 +376,37 @@ export const interventionReducer = (state = initialState, action) =>
           draft.cache.intervention = updateIntervention;
         }
         break;
+      }
       case EXTERNAL_COPY_SESSION_ERROR:
         draft.intervention = state.cache.intervention;
+        break;
+
+      case EDIT_SESSION_REQUEST: {
+        const sessionIndex = state.intervention.sessions.findIndex(
+          session => session.id === action.payload.sessionId,
+        );
+
+        if (sessionIndex > -1)
+          set(
+            draft.intervention.sessions[sessionIndex],
+            action.payload.path,
+            action.payload.value,
+          );
+        break;
+      }
+      case EDIT_SESSION_SUCCESS:
+        const sessionIndex = state.intervention.sessions.findIndex(
+          session => session.id === action.payload.session.id,
+        );
+
+        if (sessionIndex > -1) {
+          draft.intervention.sessions[sessionIndex] = action.payload.session;
+          draft.cache.intervention.sessions[sessionIndex] =
+            action.payload.session;
+        }
+        break;
+      case EDIT_SESSION_ERROR:
+        draft.intervention.sessions = state.cache.intervention.sessions;
         break;
     }
   });

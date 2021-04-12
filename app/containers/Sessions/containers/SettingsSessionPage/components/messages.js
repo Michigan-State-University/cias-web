@@ -11,6 +11,10 @@ export default defineMessages({
     id: `${scope}.nameLabel`,
     defaultMessage: 'Name',
   },
+  variableLabel: {
+    id: `${scope}.variableLabel`,
+    defaultMessage: 'Variable',
+  },
   narratorSettings: {
     id: `${scope}.narratorSettings`,
     defaultMessage: 'Narrator Settings',
