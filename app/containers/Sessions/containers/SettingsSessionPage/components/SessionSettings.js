@@ -28,6 +28,7 @@ import ConfirmationBox from 'components/ConfirmationBox';
 import Option from './Option';
 import messages from './messages';
 import { Input, NameContainer } from './styled';
+import PeedyVoiceSettings from './PeedyVoiceSettings';
 
 const SessionSettings = ({
   name,
@@ -179,6 +180,10 @@ const SessionSettings = ({
             action={onToggle(index)}
           />
         ))}
+      <PeedyVoiceSettings
+        formatMessage={formatMessage}
+        editingPossible={editingPossible}
+      />
     </>
   );
 };
