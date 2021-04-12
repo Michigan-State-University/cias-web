@@ -110,6 +110,22 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         />
       </label>
     </div>
+    <h3
+      class="H3-twxrn4-0 bCdqfX"
+    >
+      Peedy voice settings
+    </h3>
+    <p
+      class="Text-e4p0w3-0 dSyDnZ"
+    >
+      Peedy language
+    </p>
+    <div
+      class="styled__StyledSpinner-sc-129uixn-0 iazDJI"
+      color="#C866EA"
+      size="30"
+      width="6"
+    />
   </div>
 </div>
 `;
