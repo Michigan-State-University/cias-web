@@ -39,6 +39,7 @@ import {
   fetchInterventionsSaga,
 } from 'global/reducers/interventions';
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
+import { GOOGLE_FORM_URL } from 'global/constants';
 
 import { colors, fontSizes, themeColors } from 'theme';
 import StatusFilter from './StatusFilter';
@@ -113,10 +114,9 @@ export function InterventionPage({
     <Notification
       title={formatMessage(messages.feedbackTitle)}
       description={
-        // URL hardcoded on purpose
         <a
           style={{ color: themeColors.secondary }}
-          href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
+          href={GOOGLE_FORM_URL}
           target="_blank"
           onClick={handleFeedbackClick}
         >
