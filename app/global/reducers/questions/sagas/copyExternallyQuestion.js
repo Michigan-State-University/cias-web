@@ -36,7 +36,7 @@ function* copyExternallyQuestion({
     const session = yield select(makeSelectSession());
     yield put(
       copyExternallyQuestionSuccess(
-        objectKeysToSnakeCase(responseQuestion),
+        objectKeysToSnakeCase(responseQuestion, ['sha256', 'endPosition']),
         sessionId === session.id,
       ),
     );
