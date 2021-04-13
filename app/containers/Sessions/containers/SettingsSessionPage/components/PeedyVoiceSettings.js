@@ -30,9 +30,14 @@ const PeedyVoiceSettings = ({
   ttsLanguages: { data, loading, error },
   ttsVoices,
   fetchLanguageVoices,
+  googleTtsVoice: { id: googleVoiceId, googleTtsLanguageId, voiceLabel },
+  editSession,
 }) => {
   const [selectedLanguage, setSelectLanguage] = useState(null);
-  const [selectedVoice, setSelectedVoice] = useState(null);
+  const [selectedVoice, setSelectedVoice] = useState({
+    value: googleVoiceId,
+    label: voiceLabel,
+  });
 
   useEffect(() => {
     if (data === null) {
@@ -41,13 +46,22 @@ const PeedyVoiceSettings = ({
   }, []);
 
   useEffect(() => {
-    if (selectedLanguage !== null) {
+    if (selectedLanguage && selectedLanguage.value) {
       const languageVoices = ttsVoices[selectedLanguage.value];
       if (languageVoices === undefined) {
         fetchLanguageVoices(selectedLanguage.value);
       }
     }
   }, [selectedLanguage]);
+
+  useEffect(() => {
+    if (data && data.length > 0) {
+      const foundLanguage = data.find(
+        ({ value }) => value === googleTtsLanguageId,
+      );
+      setSelectLanguage(foundLanguage);
+    }
+  }, [data]);
 
   const getLanguagesPanel = () => {
     if (loading) {
@@ -71,6 +85,7 @@ const PeedyVoiceSettings = ({
   };
 
   const getVoicesPanel = () => {
+    if (!selectedLanguage || !selectedLanguage.value) return null;
     const languageVoices = ttsVoices[selectedLanguage.value];
     if (!languageVoices) return null;
     const { loading: voicesLoading, data: voicesData } = languageVoices;
@@ -92,6 +107,12 @@ const PeedyVoiceSettings = ({
     );
   };
 
+  const setSessionVoices = () => {
+    editSession({ path: 'google_tts_voice_id', value: selectedVoice.value }, [
+      'google_tts_voice_id',
+    ]);
+  };
+
   return (
     <>
       <H3 mt={30} mb={20}>
@@ -107,8 +128,13 @@ const PeedyVoiceSettings = ({
           {getVoicesPanel()}
         </>
       )}
-      {selectedLanguage !== null && (
-        <Button width={200} mt={10} alignSelf="center">
+      {selectedVoice.value !== googleVoiceId && (
+        <Button
+          onClick={setSessionVoices}
+          width={200}
+          mt={10}
+          alignSelf="center"
+        >
           {formatMessage(messages.saveVoiceSettings)}
         </Button>
       )}
@@ -121,8 +147,10 @@ PeedyVoiceSettings.propTypes = {
   formatMessage: PropTypes.func,
   fetchLanguages: PropTypes.func,
   fetchLanguageVoices: PropTypes.func,
+  editSession: PropTypes.func,
   ttsLanguages: PropTypes.object,
   ttsVoices: PropTypes.object,
+  googleTtsVoice: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

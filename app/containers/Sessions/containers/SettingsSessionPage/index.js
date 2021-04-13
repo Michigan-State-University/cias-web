@@ -23,7 +23,12 @@ import messages from './messages';
 import { StyledColumn } from './styled';
 
 const SettingsInterventionPage = ({
-  session: { name, variable, settings: { narrator: narratorSettings } = {} },
+  session: {
+    name,
+    variable,
+    settings: { narrator: narratorSettings } = {},
+    googleTtsVoice,
+  },
   match: { params },
   getSession,
   intl: { formatMessage },
@@ -59,6 +64,7 @@ const SettingsInterventionPage = ({
             variable={variable ?? ''}
             narratorSettings={narratorSettings}
             formatMessage={formatMessage}
+            googleTtsVoice={googleTtsVoice}
           />
         </StyledColumn>
       </Box>
@@ -78,6 +84,7 @@ SettingsInterventionPage.propTypes = {
       }),
       account_required: PropTypes.bool,
     }),
+    googleTtsVoice: PropTypes.object,
   }),
   match: PropTypes.object,
   getSession: PropTypes.func,
