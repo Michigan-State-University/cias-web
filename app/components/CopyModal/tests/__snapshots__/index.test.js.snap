@@ -223,11 +223,11 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   min-width: 400px;
   min-height: 200px;
   overflow: auto;
+  padding: 25px 0;
   padding-top: 20px;
   padding-bottom: 20px;
   padding-right: 20px;
   padding-left: 20px;
-  padding: 25px 0;
   background-color: rgba(255,255,255,1);
 }
 

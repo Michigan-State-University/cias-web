@@ -30,6 +30,7 @@ export const intlProviderConfig = {
     const showError = !errorsToOmit.some(errorToOmit =>
       error.toString().includes(errorToOmit),
     );
+    // eslint-disable-next-line no-console
     if (showError) console.error(error);
   },
 };
