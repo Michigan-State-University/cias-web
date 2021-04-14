@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import PropTypes from 'prop-types';
 import dayjs from 'dayjs';
@@ -6,11 +6,12 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import Tooltip from 'components/Tooltip';
-import { Roles } from 'models/User/UserRoles';
+import { RolePermissions } from 'models/User/RolePermissions';
 import { makeSelectUserRoles } from 'global/reducers/auth';
 
+import Tooltip from 'components/Tooltip';
 import FileDownload from 'components/FileDownload';
+
 import messages from './messages';
 import { ShareButton } from './styled';
 
@@ -22,6 +23,10 @@ const CsvButtons = ({
   csvLink,
   userRoles,
 }) => {
+  const rolePermissions = useMemo(() => RolePermissions(userRoles), [
+    userRoles,
+  ]);
+
   const CsvDownload = () => (
     <FileDownload url={urlToDownload}>
       {({ isDownloading }) => (
@@ -45,8 +50,7 @@ const CsvButtons = ({
     </ShareButton>
   );
 
-  if (!(userRoles.includes(Roles.admin) || userRoles.includes(Roles.teamAdmin)))
-    return <></>;
+  if (!rolePermissions.canDownloadInterventionCsv) return <></>;
   return (
     <>
       {csvLink && <CsvDownload />}
