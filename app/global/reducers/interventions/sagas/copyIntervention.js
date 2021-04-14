@@ -32,16 +32,25 @@ export function* copyIntervention({
       }
     }
 
+    const successMessage = users
+      ? messages.copySuccess
+      : messages.duplicateSuccess;
+
     yield call(
       toast.success,
-      formatMessage(messages.sendSuccess, { name: copiedIntervention.name }),
+      formatMessage(successMessage, {
+        name: copiedIntervention.name,
+        userCount: users?.length,
+      }),
       {
-        toastId: COPY_INTERVENTION_SUCCESS,
+        toastId: `${COPY_INTERVENTION_SUCCESS}_${Boolean(users)}`,
       },
     );
   } catch (error) {
-    yield call(toast.error, formatMessage(messages.copyError), {
-      toastId: COPY_INTERVENTION_ERROR,
+    const errorMessage = users ? messages.copyError : messages.duplicateError;
+
+    yield call(toast.error, formatMessage(errorMessage), {
+      toastId: `${COPY_INTERVENTION_ERROR}_${Boolean(users)}`,
     });
   }
 }
