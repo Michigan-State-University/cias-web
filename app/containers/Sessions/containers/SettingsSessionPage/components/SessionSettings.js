@@ -40,6 +40,7 @@ const SessionSettings = ({
   formatMessage,
   editSession,
   interventionStatus,
+  googleTtsVoice,
 }) => {
   const [confirmationOption, setConfirmationOption] = useState('');
   const dismissConfirmation = () => setConfirmationOption('');
@@ -207,10 +208,14 @@ const SessionSettings = ({
             action={onToggle(index)}
           />
         ))}
-      <PeedyVoiceSettings
-        formatMessage={formatMessage}
-        editingPossible={editingPossible}
-      />
+      {googleTtsVoice && (
+        <PeedyVoiceSettings
+          googleTtsVoice={googleTtsVoice}
+          editSession={editSession}
+          formatMessage={formatMessage}
+          editingPossible={editingPossible}
+        />
+      )}
     </>
   );
 };
@@ -235,6 +240,7 @@ SessionSettings.propTypes = {
     voice: PropTypes.bool,
     narrator: PropTypes.bool,
   }),
+  googleTtsVoice: PropTypes.object,
   formatMessage: PropTypes.func,
   editSession: PropTypes.func,
   interventionStatus: PropTypes.string,
