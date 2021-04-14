@@ -18,7 +18,7 @@ const CurrencyQuestionLayout = ({ onChange, formatMessage, answerBody }) => {
   const amount = value.substring(currency.length).trim();
 
   useEffect(() => {
-    if (!currency) handleOnSelect('USD');
+    if (!currency) handleOnSelect('USD', false);
   }, []);
 
   const processAmount = number => {
@@ -30,7 +30,8 @@ const CurrencyQuestionLayout = ({ onChange, formatMessage, answerBody }) => {
   const handleOnInput = newValue =>
     onChange(`${currency} ${processAmount(newValue)}`);
 
-  const handleOnSelect = newValue => onChange(`${newValue} ${amount}`);
+  const handleOnSelect = (newValue, selectedByUser = true) =>
+    onChange(`${newValue} ${amount}`, selectedByUser);
 
   return (
     <Box width="100%">

@@ -223,18 +223,24 @@ export function AnswerSessionPage({
     const {
       settings: { proceed_button: proceedButton, required },
     } = currentQuestion;
-    const selectAnswerProp = answerBody => {
+    const selectAnswerProp = (answerBody, selectedByUser = true) => {
       saveSelectedAnswer({
         id: currentQuestionId,
         answerBody,
+        selectedByUser,
       });
     };
 
+    const answer = answers[currentQuestionId];
     const answerBody = answers[currentQuestionId]
       ? answers[currentQuestionId].answerBody
       : [];
 
-    const isAnswered = () => !(Array.isArray(answerBody) && !answerBody.length);
+    const isAnswered = () =>
+      answer &&
+      Array.isArray(answer.answerBody) &&
+      answer.answerBody.length &&
+      answer.selectedByUser;
 
     const isButtonDisabled = () => required && !isAnswered();
 
