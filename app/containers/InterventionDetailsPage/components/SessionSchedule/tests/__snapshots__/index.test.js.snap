@@ -1,6 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
+.c5 {
+  width: auto;
+  height: auto;
+  margin-left: 8px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -30,14 +48,6 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c2 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  position: relative;
-}
-
 .c1 {
   font-family: DM Sans;
   font-size: 13px;
@@ -57,16 +67,6 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   color: rgba(200,102,234,1);
   cursor: pointer;
-}
-
-.c5 {
-  width: auto;
-  height: auto;
-  margin-left: 8px;
-  cursor: pointer;
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
 }
 
 @media only screen and (min-width:768px) {

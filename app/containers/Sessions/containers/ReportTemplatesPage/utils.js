@@ -5,5 +5,6 @@ export const ReportTemplatesContext = createContext({
   ...initialState,
   canEdit: false,
   sessionId: null,
+  interventionId: null,
   selectedTemplateSection: null,
 });

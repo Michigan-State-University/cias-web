@@ -4,47 +4,29 @@ exports[`<VariableChooser /> should match the snapshot with variables 1`] = `
 Object {
   "asFragment": [Function],
   "baseElement": <body>
-    .c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+    .c8 {
+  width: auto;
   height: auto;
+  margin-right: 15px;
 }
 
 .c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.c2 {
   width: auto;
   height: auto;
   display: block;
@@ -56,10 +38,9 @@ Object {
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
-  right: 0px;
 }
 
-.c2 {
+.c4 {
   width: auto;
   height: auto;
   display: block;
@@ -71,35 +52,61 @@ Object {
   flex-grow: 1;
 }
 
-.c4 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  padding: 30px;
-}
-
 .c5 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  min-width: -webkit-max-content;
-  min-width: -moz-max-content;
-  min-width: max-content;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-radius: 0;
-  border-radius: 0;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
   -webkit-align-content: center;
   -ms-flex-line-pack: center;
   align-content: center;
@@ -109,35 +116,34 @@ Object {
   align-items: center;
 }
 
-.c7 {
-  width: auto;
-  height: auto;
-}
-
-.c8 {
-  margin: 0;
+.c9 {
   font-family: DM Sans;
-  font-size: 18px;
+  font-size: 13px;
   line-height: 130%;
-  margin-top: 15px;
-  color: rgba(176,186,201,1);
-  color: rgba(176,186,201,1);
+  margin-right: 20px;
+  color: #2F3850;
+  white-space: pre;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  overflow: hidden;
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
+.c10 {
+  min-height: 24px;
+  min-width: 25px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: rgba(16,121,105,0.1);
+  color: rgba(16,121,105,1);
+  max-width: 300px;
 }
 
 @media only screen and (min-width:768px) {
@@ -159,42 +165,52 @@ Object {
 <div>
       <div
         class="c0"
-        display="none"
-        width="auto"
       >
         <div
           class="c1"
+        />
+        <div
+          class="c2"
+          display="none"
+          width="auto"
         >
           <div
-            class="c2"
+            class="c3"
           >
             <div
-              class="c3"
+              class="c4"
             >
               <div
-                class="c4"
+                class="c5"
               >
                 <div
                   class="c5"
-                  data-testid="no-content"
-                  display="flex"
-                  height="100%"
-                  width="100%"
                 >
                   <div
                     class="c6"
+                    data-testid="test-id-1-select-variable"
                   >
-                    <img
-                      alt="No content"
+                    <div
                       class="c7"
-                      src="IMAGE_MOCK"
-                    />
-                    <h2
-                      class="c8"
-                      color="#B0BAC9"
                     >
-                      No variables defined yet
-                    </h2>
+                      <img
+                        class="c8"
+                        src="IMAGE_MOCK"
+                      />
+                      <p
+                        class="c9"
+                        overflow="hidden"
+                      >
+                        Test subtitle 1
+                      </p>
+                    </div>
+                    <div
+                      class="c10"
+                      color="#107969"
+                      data-cy="question-variable-chooser"
+                    >
+                      var_single_1
+                    </div>
                   </div>
                 </div>
               </div>
@@ -206,43 +222,53 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Box-sc-1vhutan-0 hMXAvH"
-      display="none"
-      width="auto"
+      class="Box-sc-1vhutan-0 eamgEw"
     >
       <div
-        class="Row-y1cs0u-0 dskFsL"
+        class="Box-sc-1vhutan-0 gfyFJD"
+      />
+      <div
+        class="Box-sc-1vhutan-0 bvPvIe"
+        display="none"
+        width="auto"
       >
         <div
-          class="Box-sc-1vhutan-0 fOicvH"
+          class="Row-y1cs0u-0 dskFsL"
         >
           <div
-            class="Column-sc-4zswzq-0 ekpwZH"
+            class="Box-sc-1vhutan-0 fOicvH"
           >
             <div
-              class="Box-sc-1vhutan-0 dNQoLv"
+              class="Column-sc-4zswzq-0 ekpwZH"
             >
               <div
-                class="Box-sc-1vhutan-0 leAXVR"
-                data-testid="no-content"
-                display="flex"
-                height="100%"
-                width="100%"
+                class="Column-sc-4zswzq-0 ekpwZH"
               >
                 <div
-                  class="Column-sc-4zswzq-0 eExeGs"
+                  class="Row-y1cs0u-0 dLpgLs"
+                  data-testid="test-id-1-select-variable"
                 >
-                  <img
-                    alt="No content"
-                    class="Img-sc-55j3su-0 cDhXoN"
-                    src="IMAGE_MOCK"
-                  />
-                  <h2
-                    class="H2-uw8lbl-0 bnQANz"
-                    color="#B0BAC9"
+                  <div
+                    class="Row-y1cs0u-0 ecllgQ"
                   >
-                    No variables defined yet
-                  </h2>
+                    <img
+                      class="Img-sc-55j3su-0 gWNtSX"
+                      src="IMAGE_MOCK"
+                    />
+                    <p
+                      class="Text-e4p0w3-0 cHolUu"
+                      overflow="hidden"
+                    >
+                      Test subtitle 1
+                    </p>
+                  </div>
+                  <div
+                    class="Badge-n0b6mf-0 AXzkR"
+                    color="#107969"
+                    data-cy="question-variable-chooser"
+                  >
+                    var_single_1
+                  </div>
                 </div>
               </div>
             </div>
@@ -308,47 +334,28 @@ Object {
 exports[`<VariableChooser /> should match the snapshot without variables 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": .c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c6 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c1 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
+  "baseElement": .c9 {
+  width: auto;
   height: auto;
 }
 
 .c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.c2 {
   width: auto;
   height: auto;
   display: block;
@@ -360,10 +367,9 @@ Object {
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
-  right: 0px;
 }
 
-.c2 {
+.c4 {
   width: auto;
   height: auto;
   display: block;
@@ -375,7 +381,7 @@ Object {
   flex-grow: 1;
 }
 
-.c4 {
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -383,7 +389,7 @@ Object {
   padding: 30px;
 }
 
-.c5 {
+.c7 {
   width: auto;
   height: auto;
   display: block;
@@ -413,12 +419,36 @@ Object {
   align-items: center;
 }
 
-.c7 {
-  width: auto;
-  height: auto;
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
 }
 
 .c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c10 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -426,6 +456,17 @@ Object {
   margin-top: 15px;
   color: rgba(176,186,201,1);
   color: rgba(176,186,201,1);
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
 }
 
 @media only screen and (min-width:768px) {
@@ -464,42 +505,53 @@ Object {
     <div>
       <div
         class="c0"
-        display="none"
-        width="auto"
       >
         <div
           class="c1"
+        />
+        <div
+          class="c2"
+          display="none"
+          width="auto"
         >
           <div
-            class="c2"
+            class="c3"
           >
             <div
-              class="c3"
+              class="c4"
             >
               <div
-                class="c4"
+                class="c5"
               >
                 <div
                   class="c5"
-                  data-testid="no-content"
-                  display="flex"
-                  height="100%"
-                  width="100%"
                 >
                   <div
                     class="c6"
                   >
-                    <img
-                      alt="No content"
+                    <div
                       class="c7"
-                      src="IMAGE_MOCK"
-                    />
-                    <h2
-                      class="c8"
-                      color="#B0BAC9"
+                      data-testid="no-content"
+                      display="flex"
+                      height="100%"
+                      width="100%"
                     >
-                      No variables defined yet
-                    </h2>
+                      <div
+                        class="c8"
+                      >
+                        <img
+                          alt="No content"
+                          class="c9"
+                          src="IMAGE_MOCK"
+                        />
+                        <h2
+                          class="c10"
+                          color="#B0BAC9"
+                        >
+                          No variables defined yet
+                        </h2>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -511,43 +563,54 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Box-sc-1vhutan-0 hMXAvH"
-      display="none"
-      width="auto"
+      class="Box-sc-1vhutan-0 eamgEw"
     >
       <div
-        class="Row-y1cs0u-0 dskFsL"
+        class="Box-sc-1vhutan-0 gfyFJD"
+      />
+      <div
+        class="Box-sc-1vhutan-0 bvPvIe"
+        display="none"
+        width="auto"
       >
         <div
-          class="Box-sc-1vhutan-0 fOicvH"
+          class="Row-y1cs0u-0 dskFsL"
         >
           <div
-            class="Column-sc-4zswzq-0 ekpwZH"
+            class="Box-sc-1vhutan-0 fOicvH"
           >
             <div
-              class="Box-sc-1vhutan-0 dNQoLv"
+              class="Column-sc-4zswzq-0 ekpwZH"
             >
               <div
-                class="Box-sc-1vhutan-0 leAXVR"
-                data-testid="no-content"
-                display="flex"
-                height="100%"
-                width="100%"
+                class="Column-sc-4zswzq-0 ekpwZH"
               >
                 <div
-                  class="Column-sc-4zswzq-0 eExeGs"
+                  class="Box-sc-1vhutan-0 dNQoLv"
                 >
-                  <img
-                    alt="No content"
-                    class="Img-sc-55j3su-0 cDhXoN"
-                    src="IMAGE_MOCK"
-                  />
-                  <h2
-                    class="H2-uw8lbl-0 bnQANz"
-                    color="#B0BAC9"
+                  <div
+                    class="Box-sc-1vhutan-0 leAXVR"
+                    data-testid="no-content"
+                    display="flex"
+                    height="100%"
+                    width="100%"
                   >
-                    No variables defined yet
-                  </h2>
+                    <div
+                      class="Column-sc-4zswzq-0 eExeGs"
+                    >
+                      <img
+                        alt="No content"
+                        class="Img-sc-55j3su-0 cDhXoN"
+                        src="IMAGE_MOCK"
+                      />
+                      <h2
+                        class="H2-uw8lbl-0 bnQANz"
+                        color="#B0BAC9"
+                      >
+                        No variables defined yet
+                      </h2>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

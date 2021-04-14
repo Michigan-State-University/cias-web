@@ -17,4 +17,12 @@ export default defineMessages({
     id: `${scope}.noVariables`,
     defaultMessage: 'No variables defined yet',
   },
+  noSessions: {
+    id: `${scope}.noSessions`,
+    defaultMessage: 'No sessions to choose',
+  },
+  selectedInterventionBadge: {
+    id: `${scope}.selectedInterventionBadge`,
+    defaultMessage: 'Current',
+  },
 });

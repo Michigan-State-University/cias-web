@@ -68,6 +68,7 @@ const TextMessagingPage = ({
         sessionId,
         selectedMessage,
         editingPossible,
+        interventionId,
       }}
     >
       <Row maxHeigh="100%" style={{ justifyContent: 'center' }}>

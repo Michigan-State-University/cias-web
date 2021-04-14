@@ -6,6 +6,16 @@
 
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { FormattedMessage, injectIntl } from 'react-intl';
+
+import Question from 'models/Session/Question';
+
+import { makeSelectSelectedQuestion } from 'global/reducers/questions';
+
+import { colors, themeColors } from 'theme';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
@@ -14,17 +24,15 @@ import Text from 'components/Text';
 import Img from 'components/Img';
 import ArrowDropdown from 'components/ArrowDropdown';
 import { StyledInput } from 'components/Input/StyledInput';
-
-import binNoBg from 'assets/svg/bin-no-bg.svg';
-import { colors, themeColors } from 'theme';
-import { FormattedMessage, injectIntl } from 'react-intl';
 import EllipsisText from 'components/Text/EllipsisText';
 import InequalityChooser from 'components/InequalityChooser';
-import VariableChooser from './VariableChooser';
-import { DashedBox } from './styled';
+import VariableChooser from 'containers/VariableChooser';
+
+import binNoBg from 'assets/svg/bin-no-bg.svg';
 
 import TargetQuestionChooser from './TargetQuestionChooser';
 
+import { DashedBox } from './styled';
 import messages from './messages';
 
 function BranchingLayout({
@@ -32,30 +40,25 @@ function BranchingLayout({
   intl: { formatMessage },
   onFormulaUpdate,
   id,
+  onDropdownOpen,
   onUpdateCase,
   displayPatternTargetText,
   onRemoveCase,
   onAddCase,
   sessionBranching,
-  onVariableChooserOpen,
-  onDropdownOpen,
   disabled,
   includeAllVariables,
   includeCurrentQuestion,
+  selectedQuestion,
+  sessionId,
+  interventionId,
+  includeAllSessions,
+  includeCurrentSession,
+  isMultiSession,
 }) {
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
-  const [variableChooserOpen, setVariableChooserOpen] = useState(false);
 
   const shouldDisplayElseStatement = formula.patterns.length !== 0;
-
-  const handleVariableChooserClick = () => {
-    document.activeElement.blur();
-
-    if (!disabled) {
-      if (onVariableChooserOpen) onVariableChooserOpen();
-      setVariableChooserOpen(!variableChooserOpen);
-    }
-  };
 
   const handleDropdownClick = (value, index) => {
     if (value && onDropdownOpen) onDropdownOpen();
@@ -67,16 +70,27 @@ function BranchingLayout({
       <Column>
         <Row align="center" justify="between">
           {formatMessage(messages.formula)}
-          <Box onClick={handleVariableChooserClick} clickable>
+
+          <VariableChooser
+            disabled={disabled}
+            sessionId={sessionId}
+            interventionId={interventionId}
+            onClick={value => onFormulaUpdate(`${formula.payload}${value}`, id)}
+            includeAllVariables={includeAllVariables}
+            includeCurrentQuestion={includeCurrentQuestion}
+            includeAllSessions={includeAllSessions}
+            includeCurrentSession={includeCurrentSession}
+            isMultiSession={isMultiSession}
+            selectedQuestion={selectedQuestion}
+          >
             <Text
-              disabled={disabled}
               fontWeight="bold"
               color={themeColors.secondary}
               hoverDecoration="underline"
             >
               {formatMessage(messages.addVariable)}
             </Text>
-          </Box>
+          </VariableChooser>
         </Row>
         {formula && (
           <>
@@ -98,34 +112,7 @@ function BranchingLayout({
                 onBlur={val => onFormulaUpdate(val, id)}
               />
             </Box>
-            {sessionBranching && (
-              <Box position="relative" top={-90}>
-                <VariableChooser
-                  visible={variableChooserOpen}
-                  setOpen={setVariableChooserOpen}
-                  onClick={value => {
-                    setVariableChooserOpen(false);
-                    onFormulaUpdate(`${formula.payload}${value}`, id);
-                  }}
-                  includeAllVariables={includeAllVariables}
-                  includeCurrentQuestion={includeCurrentQuestion}
-                />
-              </Box>
-            )}
-            {!sessionBranching && (
-              <Box position="absolute" right={25} top={160} width="100%">
-                <VariableChooser
-                  visible={variableChooserOpen}
-                  setOpen={setVariableChooserOpen}
-                  onClick={value => {
-                    setVariableChooserOpen(false);
-                    onFormulaUpdate(`${formula.payload}${value}`, id);
-                  }}
-                  includeAllVariables={includeAllVariables}
-                  includeCurrentQuestion={includeCurrentQuestion}
-                />
-              </Box>
-            )}
+
             {formula.patterns.map((pattern, index) => {
               const isChooserOpened = index === targetChooserOpen;
               return (
@@ -213,6 +200,8 @@ function BranchingLayout({
 
 BranchingLayout.propTypes = {
   id: PropTypes.string,
+  sessionId: PropTypes.string,
+  interventionId: PropTypes.string,
   formula: PropTypes.object,
   onFormulaUpdate: PropTypes.func,
   onAddCase: PropTypes.func,
@@ -221,15 +210,27 @@ BranchingLayout.propTypes = {
   intl: PropTypes.object,
   displayPatternTargetText: PropTypes.func,
   sessionBranching: PropTypes.bool,
-  onVariableChooserOpen: PropTypes.func,
   onDropdownOpen: PropTypes.func,
   disabled: PropTypes.bool,
   includeAllVariables: PropTypes.bool,
   includeCurrentQuestion: PropTypes.bool,
+  selectedQuestion: PropTypes.shape(Question),
+  includeAllSessions: PropTypes.bool,
+  includeCurrentSession: PropTypes.bool,
+  isMultiSession: PropTypes.bool,
 };
 
 BranchingLayout.defaultProps = {
   includeCurrentQuestion: true,
 };
 
-export default injectIntl(BranchingLayout);
+const mapStateToProps = createStructuredSelector({
+  selectedQuestion: makeSelectSelectedQuestion(),
+});
+
+const withConnect = connect(mapStateToProps);
+
+export default compose(
+  injectIntl,
+  withConnect,
+)(BranchingLayout);

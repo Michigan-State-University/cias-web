@@ -22,28 +22,33 @@ import {
 } from '../actions';
 
 const SpectrumSettings = ({
-  selectedQuestion: {
-    id,
-    body: { data },
-  },
+  selectedQuestion,
   onFormulaUpdate,
   onAddCase,
   onRemoveCase,
   onUpdateCase,
   disabled,
-}) => (
-  <Column>
-    <SpectrumVariableChooser
-      id={id}
-      disabled={disabled}
-      spectrum={data[0].spectrum}
-      onFormulaUpdate={onFormulaUpdate}
-      onAddCase={onAddCase}
-      onRemoveCase={onRemoveCase}
-      onUpdateCase={onUpdateCase}
-    />
-  </Column>
-);
+}) => {
+  const {
+    id,
+    body: { data },
+  } = selectedQuestion;
+
+  return (
+    <Column>
+      <SpectrumVariableChooser
+        selectedQuestion={selectedQuestion}
+        id={id}
+        disabled={disabled}
+        spectrum={data[0].spectrum}
+        onFormulaUpdate={onFormulaUpdate}
+        onAddCase={onAddCase}
+        onRemoveCase={onRemoveCase}
+        onUpdateCase={onUpdateCase}
+      />
+    </Column>
+  );
+};
 
 SpectrumSettings.propTypes = {
   selectedQuestion: PropTypes.object,

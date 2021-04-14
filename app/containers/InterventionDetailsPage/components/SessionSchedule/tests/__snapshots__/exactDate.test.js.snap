@@ -1,6 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
+.c5 {
+  width: auto;
+  height: auto;
+  margin-left: 8px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -80,21 +105,6 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c2 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  position: relative;
-}
-
-.c8 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-}
-
 .c1 {
   font-family: DM Sans;
   font-size: 13px;
@@ -142,16 +152,6 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   font-size: 12px;
   color: rgba(239,70,47,1);
   color: rgba(239,70,47,1);
-}
-
-.c5 {
-  width: auto;
-  height: auto;
-  margin-left: 8px;
-  cursor: pointer;
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
 }
 
 .c11 {

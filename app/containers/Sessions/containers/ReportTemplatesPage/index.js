@@ -93,6 +93,7 @@ const ReportTemplatesPage = ({
             errors,
             selectedReportId,
             sessionId,
+            interventionId,
             selectedTemplateSectionId,
             selectedTemplateSection,
             canEdit,

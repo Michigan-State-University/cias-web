@@ -21,6 +21,13 @@ export const makeSelectQuestionGroups = () =>
     substate => substate.questionGroups,
   );
 
+export const makeSelectQuestions = () =>
+  createSelector(
+    sessions,
+    substate =>
+      substate.questionGroups.map(({ questions }) => questions).flat(),
+  );
+
 export const makeSelectCopyModalLoader = () =>
   createSelector(
     sessions,

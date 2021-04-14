@@ -9,6 +9,7 @@ export {
   makeSelectSessions,
   makeSelectCopyModalLoader,
   makeSelectQuestionGroups,
+  makeSelectQuestions,
 } from './selectors';
 
 export { allCopyModalSagas } from './sagas';

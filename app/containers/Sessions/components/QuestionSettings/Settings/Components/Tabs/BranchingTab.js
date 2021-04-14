@@ -44,7 +44,7 @@ const BranchingTab = ({
   disabled,
   match: { params },
 }) => {
-  const { interventionId } = params;
+  const { interventionId, sessionId } = params;
   const { sessions: sessionList } = intervention || {};
   useInjectReducer({
     key: 'intervention',
@@ -83,6 +83,10 @@ const BranchingTab = ({
       onFormulaUpdate={onFormulaUpdate}
       onRemoveCase={onRemoveCase}
       onUpdateCase={onUpdateCase}
+      sessionId={sessionId}
+      interventionId={interventionId}
+      includeCurrentSession
+      isMultiSession
     />
   );
 };

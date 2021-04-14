@@ -41,7 +41,7 @@ function SessionBranching({
   status,
   onChangeFormulaStatus,
   formula,
-  session: { id, position },
+  session: { id, position, intervention_id: interventionId },
   onFormulaUpdate,
   onAddCase,
   onRemoveCase,
@@ -102,18 +102,21 @@ function SessionBranching({
           <Column>
             <BranchingLayout
               disabled={disabled}
-              onVariableChooserOpen={handleClickAddVariable}
-              onDropdownOpen={handleClickAddVariable}
+              displayPatternTargetText={displayPatternTargetText}
               formatMessage={formatMessage}
               formula={formula}
               id={id}
+              interventionId={interventionId}
               onAddCase={onAddCase}
+              onDropdownOpen={handleClickAddVariable}
               onFormulaUpdate={onFormulaUpdate}
               onRemoveCase={onRemoveCase}
               onUpdateCase={onUpdateCase}
-              displayPatternTargetText={displayPatternTargetText}
-              sessionBranching
+              sessionId={id}
               includeAllVariables
+              includeCurrentSession
+              isMultiSession
+              sessionBranching
             />
           </Column>
         </Row>

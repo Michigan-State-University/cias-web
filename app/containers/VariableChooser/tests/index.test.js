@@ -4,34 +4,27 @@ import 'jest-styled-components';
 import { Provider } from 'react-redux';
 import { IntlProvider } from 'react-intl';
 import { DEFAULT_LOCALE } from 'i18n';
-import { createStore } from 'redux';
 
-import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import VariableChooser from '../index';
 
 describe('<VariableChooser />', () => {
   let store;
-  const reducer = state => state;
+
   const initialState = {
-    questions: {
-      questions: [],
-    },
-    questionGroups: {
-      groups: [],
-      loaders: {},
+    copyModal: {
+      questionGroups: [],
     },
   };
 
   const props = {
     onClick: jest.fn(),
+    includeAllVariables: true,
   };
 
   beforeAll(() => {
-    store = createStore(reducer, initialState);
-    store.runSaga = () => {};
-    store.injectedReducers = {};
-    store.injectedSagas = {};
+    store = createTestStore(initialState);
   });
 
   it('should match the snapshot without variables', () => {
@@ -75,9 +68,9 @@ describe('<VariableChooser />', () => {
   });
 
   it('should match the snapshot with variables', () => {
-    store = createStore(reducer, {
-      questions: {
-        questions: [mockSingleQuestion()],
+    store = createTestStore({
+      copyModal: {
+        questionGroups: [mockGroup(1, [mockSingleQuestion()])],
       },
     });
 
@@ -93,9 +86,9 @@ describe('<VariableChooser />', () => {
   });
 
   it('should render <NoContent /> when all variables are empty strings', () => {
-    store = createStore(reducer, {
-      questions: {
-        questions: [mockSingleQuestion(1, false)],
+    store = createTestStore({
+      copyModal: {
+        questionGroups: [mockGroup(1, [mockSingleQuestion(1, false)])],
       },
     });
 
@@ -113,17 +106,12 @@ describe('<VariableChooser />', () => {
   });
 
   it('should render list of variables', () => {
-    const group = mockGroup(1);
-    const question = mockSingleQuestion(1, true, group);
+    const question = mockSingleQuestion(1, true, mockGroup(1).id);
+    const group = mockGroup(1, [question]);
 
-    store = createStore(reducer, {
-      questions: {
-        questions: [question],
-        selectedQuestion: question.id,
-      },
-      questionGroups: {
-        groups: [group],
-        loaders: {},
+    store = createTestStore({
+      copyModal: {
+        questionGroups: [group],
       },
     });
 
@@ -143,18 +131,12 @@ describe('<VariableChooser />', () => {
   });
 
   it('should invoke onClick', () => {
-    const group = mockGroup(1);
+    const question = mockSingleQuestion(1, true, mockGroup(1).id);
+    const group = mockGroup(1, [question]);
 
-    const question = mockSingleQuestion(1, true, group);
-
-    store = createStore(reducer, {
-      questions: {
-        questions: [question],
-        selectedQuestion: question.id,
-      },
-      questionGroups: {
-        groups: [group],
-        loaders: {},
+    store = createTestStore({
+      copyModal: {
+        questionGroups: [group],
       },
     });
 
@@ -171,19 +153,20 @@ describe('<VariableChooser />', () => {
   });
 });
 
-const mockGroup = (suffix = 1) => ({
+const mockGroup = (suffix = 1, questions = []) => ({
   id: `test-group-id-${suffix}`,
   title: `Test group title ${suffix}`,
   type: 'QuestionGroup::Plain',
   position: 0,
+  questions,
 });
 
-const mockSingleQuestion = (suffix = 1, hasVariable = true, group) => ({
+const mockSingleQuestion = (suffix = 1, hasVariable = true, groupId) => ({
   id: `test-id-${suffix}`,
   title: `Test title ${suffix}`,
   subtitle: `Test subtitle ${suffix}`,
   type: 'Question::Single',
-  question_group_id: isNullOrUndefined(group) ? '' : group.id,
+  questionGroupId: groupId,
   body: {
     variable: { name: hasVariable ? `var_single_${suffix}` : '' },
   },

@@ -215,7 +215,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c49 {
+.c47 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -277,7 +277,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c53 {
+.c52 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -304,6 +304,16 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
 .c24 {
   width: auto;
   height: auto;
+}
+
+.c49 {
+  width: auto;
+  height: auto;
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  margin-bottom: 10px;
+  cursor: pointer;
 }
 
 .c0 {
@@ -370,10 +380,44 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  position: relative;
+}
+
+.c44 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.c45 {
+.c46 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: auto;
+  position: absolute;
+  display: none;
+  background-color: rgba(255,255,255,1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  border-radius: 10px;
+}
+
+.c48 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 8px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c54 {
   width: auto;
   height: auto;
   display: block;
@@ -388,28 +432,12 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c47 {
+.c56 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  position: relative;
-  top: -90px;
-}
-
-.c48 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: auto;
-  position: absolute;
-  display: none;
-  background-color: rgba(255,255,255,1);
-  border-radius: 10px;
-  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
-  border-radius: 10px;
-  right: 0px;
+  margin-top: 20px;
 }
 
 .c50 {
@@ -417,22 +445,10 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  padding: 8px;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-
-.c51 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
   padding: 30px;
 }
 
-.c52 {
+.c51 {
   width: auto;
   height: auto;
   display: block;
@@ -462,14 +478,6 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c55 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
 .c23 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -494,7 +502,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c54 {
+.c53 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -586,7 +594,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   white-space: pre;
 }
 
-.c44 {
+.c45 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -595,7 +603,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: rgba(200,102,234,1);
 }
 
-.c44:hover {
+.c45:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
@@ -645,7 +653,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c46 {
+.c55 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -657,13 +665,13 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c46:focus {
+.c55:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c46:disabled {
+.c55:disabled {
   color: #ABBBD1;
 }
 
@@ -784,7 +792,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   transform: translateX(18px);
 }
 
-.c56 {
+.c57 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -807,7 +815,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c56:hover {
+.c57:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
@@ -1177,69 +1185,65 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               <div
                 class="c43"
               >
-                <p
-                  class="c44"
-                  color="#C866EA"
-                  font-weight="bold"
-                >
-                  Add variable
-                </p>
-              </div>
-            </div>
-            <div
-              class="c45"
-              width="100%"
-            >
-              <textarea
-                class="c46"
-                data-cy="text-area"
-                height="auto"
-                placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
-                rows="1"
-                width="100%"
-              />
-            </div>
-            <div
-              class="c47"
-            >
-              <div
-                class="c48"
-                display="none"
-                width="auto"
-              >
                 <div
-                  class="c49"
+                  class="c44"
+                >
+                  <p
+                    class="c45"
+                    color="#C866EA"
+                    font-weight="bold"
+                  >
+                    Add variable
+                  </p>
+                </div>
+                <div
+                  class="c46"
+                  display="none"
+                  width="auto"
                 >
                   <div
-                    class="c50"
+                    class="c47"
                   >
                     <div
-                      class="c41"
+                      class="c48"
                     >
                       <div
-                        class="c51"
+                        class="c41"
                       >
+                        <img
+                          class="c49"
+                          src="IMAGE_MOCK"
+                          width="min-content"
+                        />
                         <div
-                          class="c52"
-                          data-testid="no-content"
-                          display="flex"
-                          height="100%"
-                          width="100%"
+                          class="c41"
                         >
                           <div
-                            class="c53"
+                            class="c50"
                           >
-                            <img
-                              alt="No content"
-                              class="c24"
-                              src="IMAGE_MOCK"
-                            />
-                            <h2
-                              class="c10 c54"
-                              color="#B0BAC9"
+                            <div
+                              class="c51"
+                              data-testid="no-content"
+                              display="flex"
+                              height="100%"
+                              width="100%"
                             >
-                              No variables defined yet
-                            </h2>
+                              <div
+                                class="c52"
+                              >
+                                <img
+                                  alt="No content"
+                                  class="c24"
+                                  src="IMAGE_MOCK"
+                                />
+                                <h2
+                                  class="c10 c53"
+                                  color="#B0BAC9"
+                                >
+                                  No variables defined yet
+                                </h2>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1249,7 +1253,20 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               </div>
             </div>
             <div
-              class="c55 c56"
+              class="c54"
+              width="100%"
+            >
+              <textarea
+                class="c55"
+                data-cy="text-area"
+                height="auto"
+                placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
+                rows="1"
+                width="100%"
+              />
+            </div>
+            <div
+              class="c56 c57"
             >
               + Add case
             </div>

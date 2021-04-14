@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -30,13 +30,12 @@ import {
 
 import { colors, themeColors } from 'theme';
 
-import VariableChooser from 'containers/BranchingLayout/VariableChooser';
+import VariableChooser from 'containers/VariableChooser';
 
 import Text from 'components/Text';
 import Column from 'components/Column';
 import Selector from 'components/Selector';
 import Row from 'components/Row';
-import Box from 'components/Box';
 import Badge from 'components/Badge';
 
 import ExactDateOption from './ExactDateOption';
@@ -55,14 +54,9 @@ function SessionSchedule({
   sessionId,
   disabled,
   session,
-  changeSessionIndex,
-  fetchQuestions,
-  activeSessionId,
   updateDateVariable,
 }) {
-  const [variableChooserOpen, setVariableChooserOpen] = useState(false);
-
-  const { position } = session ?? {};
+  const { intervention_id: interventionId } = session ?? {};
 
   const scheduleOptions = {
     afterFill: {
@@ -87,19 +81,8 @@ function SessionSchedule({
     },
   };
 
-  const handleClickAddVariable = () => {
-    if (sessionId !== activeSessionId) {
-      changeSessionIndex(position - 1);
-      fetchQuestions(sessionId);
-    }
-
-    setVariableChooserOpen(!variableChooserOpen);
-  };
-
-  const handleOnClickDateVariable = value => {
+  const handleOnClickDateVariable = value =>
     updateDateVariable(value, sessionId);
-    setVariableChooserOpen(false);
-  };
 
   const handleChangeDate = date => updateDate(date, sessionId);
   const handleChangeDays = days => updatePayload(days, sessionId);
@@ -139,30 +122,27 @@ function SessionSchedule({
               />
             </Row>
             <Row mt={10} align="center">
-              <Badge
-                bg={themeColors.primary}
-                color={colors.white}
-                onClick={handleClickAddVariable}
-                clickable
+              <VariableChooser
+                disabled={disabled}
+                interventionId={interventionId}
+                onClick={handleOnClickDateVariable}
+                placement="left"
+                questionTypeWhitelist={[dateQuestion.id]}
+                sessionId={sessionId}
+                includeAllVariables
+                includeCurrentSession={false}
+                includeNonDigitVariables
+                isMultiSession
               >
-                {daysAfterDateVariableName ??
-                  formatMessage(messages.daysAfterDateVariableEmpty)}
-              </Badge>
+                <Badge bg={themeColors.primary} color={colors.white}>
+                  {daysAfterDateVariableName ??
+                    formatMessage(messages.daysAfterDateVariableEmpty)}
+                </Badge>
+              </VariableChooser>
               <Text ml={5}>
                 {formatMessage(messages.daysAfterDateVariableInfo)}
               </Text>
             </Row>
-            <Box position="relative" mt={10}>
-              <VariableChooser
-                includeAllVariables
-                includeNonDigitVariables
-                visible={variableChooserOpen}
-                setOpen={setVariableChooserOpen}
-                onClick={handleOnClickDateVariable}
-                questionTypeWhitelist={[dateQuestion.id]}
-                style={{ left: '0px' }}
-              />
-            </Box>
           </Column>
         );
       case scheduleOptions.exactDate.id:
@@ -218,11 +198,8 @@ SessionSchedule.propTypes = {
   updateDate: PropTypes.func,
   sessionId: PropTypes.string,
   disabled: PropTypes.bool,
-  changeSessionIndex: PropTypes.func,
   updateDateVariable: PropTypes.func,
-  fetchQuestions: PropTypes.func,
   session: PropTypes.object,
-  activeSessionId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
