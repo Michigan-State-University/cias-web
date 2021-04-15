@@ -10,6 +10,8 @@ import { containerBreakpoints } from 'components/Container/containerBreakpoints'
 import { visualAnalogScaleLabelStyles } from 'theme';
 import { VisualAnalogueSlider } from './styled';
 
+const QUERY = { 'wrap-text': { maxWidth: containerBreakpoints.sm } };
+
 const VisualAnalogueScaleQuestionLayout = ({
   onChange,
   onAfterChange,
@@ -18,8 +20,7 @@ const VisualAnalogueScaleQuestionLayout = ({
   answerValue,
   showNumber,
 }) => {
-  const query = { 'wrap-text': { maxWidth: containerBreakpoints.sm } };
-  const [params, containerRef] = useContainerQuery(query);
+  const [params, containerRef] = useContainerQuery(QUERY);
 
   const labels = {
     0: {

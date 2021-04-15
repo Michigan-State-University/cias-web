@@ -25,8 +25,9 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb liuHfH"
+                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb uqDUt"
                 scope="col"
+                style="position: sticky; left: 0px;"
                 width="120px"
               />
               <th
@@ -61,12 +62,13 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb liuHfH"
+                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb uqDUt"
                 scope="row"
+                style="position: sticky; left: 0px;"
                 width="120px"
               >
                 <div
-                  class="Column-sc-4zswzq-0 fDUNyM"
+                  class="Column-sc-4zswzq-0 hIrqPf"
                   height="inherit"
                   width="max-content"
                 >
@@ -105,12 +107,13 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb liuHfH"
+                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb uqDUt"
                 scope="row"
+                style="position: sticky; left: 0px;"
                 width="120px"
               >
                 <div
-                  class="Column-sc-4zswzq-0 fDUNyM"
+                  class="Column-sc-4zswzq-0 hIrqPf"
                   height="inherit"
                   width="max-content"
                 >

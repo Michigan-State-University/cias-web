@@ -16,6 +16,8 @@ import Box from 'components/Box';
 
 import FeedbackSlider from './FeedbackSlider';
 
+const QUERY = { 'wrap-text': { maxWidth: containerBreakpoints.sm } };
+
 const FeedbackQuestionLayout = ({
   startValue,
   endValue,
@@ -24,8 +26,7 @@ const FeedbackQuestionLayout = ({
   showSpectrum,
   setFeedbackSettings,
 }) => {
-  const query = { 'wrap-text': { maxWidth: containerBreakpoints.sm } };
-  const [params, containerRef] = useContainerQuery(query);
+  const [params, containerRef] = useContainerQuery(QUERY);
 
   const sliderRef = useRef(null);
   const targetNumber = parseInt(targetValue, 10);
