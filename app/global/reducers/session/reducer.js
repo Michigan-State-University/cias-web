@@ -32,6 +32,7 @@ import {
   DELETE_REPORT_TEMPLATE_SUCCESS,
 } from 'global/reducers/reportTemplates/constants';
 
+import objectToCamelCase from 'utils/objectToCamelCase';
 import {
   GET_SESSION_REQUEST,
   GET_SESSION_SUCCESS,
@@ -107,10 +108,11 @@ const sessionReducer = (state = initialState, action) =>
         set(draft.session, action.payload.path, action.payload.value);
         break;
       case EDIT_SESSION_SUCCESS:
-        draft.session = action.payload.session;
+        draft.session = objectToCamelCase(action.payload.session);
         draft.cache.session = action.payload.session;
         break;
       case EDIT_SESSION_ERROR:
+        draft.session = state.cache.session;
         break;
 
       case ADD_REPORT_TEMPLATE_SUCCESS:

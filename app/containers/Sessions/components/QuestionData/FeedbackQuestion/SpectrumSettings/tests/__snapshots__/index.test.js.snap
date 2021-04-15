@@ -16,66 +16,6 @@ exports[`<SpectrumSettings /> Should render and match the snapshot 1`] = `
       >
         End-User Value
       </p>
-      <div
-        class="Box-sc-1vhutan-0 gfyFJD"
-      >
-        <p
-          class="Text-e4p0w3-0 iaJrvl"
-          color="#C866EA"
-          font-weight="bold"
-        >
-          Add variable
-        </p>
-      </div>
-    </div>
-    <div
-      class="Box-sc-1vhutan-0 ijRHOU"
-    >
-      <div
-        class="Box-sc-1vhutan-0 hMXAvH"
-        display="none"
-        width="auto"
-      >
-        <div
-          class="Row-y1cs0u-0 dskFsL"
-        >
-          <div
-            class="Box-sc-1vhutan-0 fOicvH"
-          >
-            <div
-              class="Column-sc-4zswzq-0 ekpwZH"
-            >
-              <div
-                class="Box-sc-1vhutan-0 dNQoLv"
-              >
-                <div
-                  class="Box-sc-1vhutan-0 leAXVR"
-                  data-testid="no-content"
-                  display="flex"
-                  height="100%"
-                  width="100%"
-                >
-                  <div
-                    class="Column-sc-4zswzq-0 eExeGs"
-                  >
-                    <img
-                      alt="No content"
-                      class="Img-sc-55j3su-0 cDhXoN"
-                      src="IMAGE_MOCK"
-                    />
-                    <h2
-                      class="H2-uw8lbl-0 bnQANz"
-                      color="#B0BAC9"
-                    >
-                      No variables defined yet
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <div
       class="Box-sc-1vhutan-0 dSHbNt"

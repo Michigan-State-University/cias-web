@@ -11,6 +11,7 @@ import {
 } from './constants';
 
 export const initialState = {
+  questionGroups: [],
   sessions: null,
   fetchSessionLoading: true,
   fetchSessionError: null,

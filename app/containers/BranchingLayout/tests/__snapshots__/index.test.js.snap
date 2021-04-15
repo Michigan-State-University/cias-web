@@ -12,7 +12,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c12 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -53,7 +53,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c8 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -69,10 +69,44 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  position: relative;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
   cursor: pointer;
 }
 
-.c4 {
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: auto;
+  position: absolute;
+  display: none;
+  background-color: rgba(255,255,255,1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  border-radius: 10px;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 8px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c13 {
   width: auto;
   height: auto;
   display: block;
@@ -87,45 +121,15 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c6 {
+.c15 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 100%;
-  position: absolute;
-  top: 160px;
-  right: 25px;
+  margin-top: 20px;
 }
 
-.c7 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: auto;
-  position: absolute;
-  display: none;
-  background-color: rgba(255,255,255,1);
-  border-radius: 10px;
-  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
-  border-radius: 10px;
-  right: 0px;
-}
-
-.c9 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  padding: 8px;
-  -webkit-box-flex: 1;
-  -webkit-flex-grow: 1;
-  -ms-flex-positive: 1;
-  flex-grow: 1;
-}
-
-.c10 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -133,7 +137,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   padding: 30px;
 }
 
-.c11 {
+.c9 {
   width: auto;
   height: auto;
   display: block;
@@ -163,15 +167,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c15 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
-.c3 {
+.c4 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -180,17 +176,17 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   color: rgba(200,102,234,1);
 }
 
-.c3:hover {
+.c4:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
 
-.c13 {
+.c11 {
   width: auto;
   height: auto;
 }
 
-.c5 {
+.c14 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -202,17 +198,17 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c5:focus {
+.c14:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c5:disabled {
+.c14:disabled {
   color: #ABBBD1;
 }
 
-.c14 {
+.c12 {
   margin: 0;
   font-family: DM Sans;
   font-size: 18px;
@@ -294,70 +290,60 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
       <div
         class="c2"
       >
-        <p
-          class="c3"
-          color="#C866EA"
-          font-weight="bold"
-        >
-          Add variable
-        </p>
-      </div>
-    </div>
-    <div
-      class="c4"
-      width="100%"
-    >
-      <textarea
-        class="c5"
-        data-cy="text-area"
-        height="auto"
-        placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
-        rows="5"
-        width="100%"
-      />
-    </div>
-    <div
-      class="c6"
-      width="100%"
-    >
-      <div
-        class="c7"
-        display="none"
-        width="auto"
-      >
         <div
-          class="c8"
+          class="c3"
+        >
+          <p
+            class="c4"
+            color="#C866EA"
+            font-weight="bold"
+          >
+            Add variable
+          </p>
+        </div>
+        <div
+          class="c5"
+          display="none"
+          width="auto"
         >
           <div
-            class="c9"
+            class="c6"
           >
             <div
-              class="c0"
+              class="c7"
             >
               <div
-                class="c10"
+                class="c0"
               >
                 <div
-                  class="c11"
-                  data-testid="no-content"
-                  display="flex"
-                  height="100%"
-                  width="100%"
+                  class="c0"
                 >
                   <div
-                    class="c12"
+                    class="c8"
                   >
-                    <img
-                      alt="No content"
-                      class="c13"
-                      src="IMAGE_MOCK"
-                    />
-                    <h2
-                      class="c14"
-                      color="#B0BAC9"
+                    <div
+                      class="c9"
+                      data-testid="no-content"
+                      display="flex"
+                      height="100%"
+                      width="100%"
                     >
-                      No variables defined yet
-                    </h2>
+                      <div
+                        class="c10"
+                      >
+                        <img
+                          alt="No content"
+                          class="c11"
+                          src="IMAGE_MOCK"
+                        />
+                        <h2
+                          class="c12"
+                          color="#B0BAC9"
+                        >
+                          No variables defined yet
+                        </h2>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -365,6 +351,19 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
           </div>
         </div>
       </div>
+    </div>
+    <div
+      class="c13"
+      width="100%"
+    >
+      <textarea
+        class="c14"
+        data-cy="text-area"
+        height="auto"
+        placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
+        rows="5"
+        width="100%"
+      />
     </div>
     <div
       class="c15 c16"

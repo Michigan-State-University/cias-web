@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { createContext, useEffect } from 'react';
 
 import { elements } from 'theme';
 
@@ -14,3 +14,8 @@ export const useLockEditSessionPageScroll = () => {
     };
   }, []);
 };
+
+export const EditSessionPageContext = createContext({
+  sessionId: null,
+  interventionId: null,
+});

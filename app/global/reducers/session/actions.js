@@ -16,8 +16,8 @@ export const getSessionSuccess = session =>
 export const getSessionError = error =>
   actionBuilder(GET_SESSION_ERROR, { error });
 
-export const editSessionRequest = (payload, fields = []) =>
-  actionBuilder(EDIT_SESSION_REQUEST, payload, fields);
+export const editSessionRequest = (payload, fields = [], sessionId) =>
+  actionBuilder(EDIT_SESSION_REQUEST, { ...payload, sessionId }, fields);
 export const editSessionSuccess = session =>
   actionBuilder(EDIT_SESSION_SUCCESS, { session });
 export const editSessionError = error =>

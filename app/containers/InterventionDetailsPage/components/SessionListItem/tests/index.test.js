@@ -25,6 +25,7 @@ describe('<SessionListItem />', () => {
   let modalContainer;
 
   const props = {
+    intervention: { id: 1 },
     session: {
       id: '1',
       name: 'Intervention',

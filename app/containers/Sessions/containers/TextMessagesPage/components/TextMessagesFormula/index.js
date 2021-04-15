@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -17,7 +17,7 @@ import { questionsReducer } from 'global/reducers/questions';
 import { colors, themeColors } from 'theme';
 import Box from 'components/Box';
 import { StyledInput } from 'components/Input/StyledInput';
-import VariableChooser from 'containers/BranchingLayout/VariableChooser';
+import VariableChooser from 'containers/VariableChooser';
 
 import Text from 'components/Text';
 import messages from './messages';
@@ -34,13 +34,13 @@ const TextMessagesFormula = ({
     saga: getQuestionGroupsSaga,
   });
 
-  const { sessionId, formatMessage } = useContext(TextMessagesContext);
+  const { sessionId, interventionId, formatMessage } = useContext(
+    TextMessagesContext,
+  );
 
   useEffect(() => {
     getQuestionGroups(sessionId);
   }, []);
-
-  const [variableChooserOpen, setVariableChooserOpen] = useState();
 
   const handleFormulaUpdate = newFormula => {
     updateFormula(newFormula);
@@ -51,13 +51,14 @@ const TextMessagesFormula = ({
       <Row align="center" justify="between">
         <Col>{formatMessage(messages.formula)}</Col>
         <Col align="end">
-          <Box
+          <VariableChooser
+            includeAllVariables
             disabled={disabled}
-            onClick={() => {
-              if (disabled) return;
-              setVariableChooserOpen(!variableChooserOpen);
-            }}
-            clickable
+            onClick={value => handleFormulaUpdate(`${formula ?? ''}${value}`)}
+            sessionId={sessionId}
+            interventionId={interventionId}
+            isMultiSession
+            includeCurrentSession
           >
             <Text
               fontWeight="bold"
@@ -66,22 +67,9 @@ const TextMessagesFormula = ({
             >
               {formatMessage(messages.addVariable)}
             </Text>
-          </Box>
+          </VariableChooser>
         </Col>
       </Row>
-      <Box position="absolute" right={25} top={25} width="100%">
-        <VariableChooser
-          topPosition="320px"
-          includeAllVariables
-          disabled={disabled}
-          visible={variableChooserOpen}
-          setOpen={setVariableChooserOpen}
-          onClick={value => {
-            setVariableChooserOpen(false);
-            handleFormulaUpdate(`${formula ?? ''}${value}`);
-          }}
-        />
-      </Box>
       <Box bg={colors.linkWater} width="100%" mt={10} mb={20} px={8} py={8}>
         <StyledInput
           disabled={disabled}

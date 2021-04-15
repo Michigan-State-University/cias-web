@@ -1,6 +1,7 @@
 export const SCHEDULE_OPTIONS = {
   daysAfter: 'days_after',
   daysAfterFill: 'days_after_fill',
+  daysAfterDate: 'days_after_date',
   exactDate: 'exact_date',
   afterFill: 'after_fill',
 };
@@ -27,3 +28,6 @@ export const UPDATE_SCHEDULING_PAYLOAD =
 
 export const UPDATE_SCHEDULING_DATE =
   'app/Dashboard/SessionSettings/UPDATE_SCHEDULING_DATE';
+
+export const UPDATE_DAYS_AFTER_DATE_VARIABLE =
+  'app/Dashboard/SessionSettings/UPDATE_DAYS_AFTER_DATE_VARIABLE';

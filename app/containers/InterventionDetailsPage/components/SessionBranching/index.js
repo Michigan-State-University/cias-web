@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -26,7 +26,6 @@ import {
   removeFormulaCase,
   updateFormula,
   updateFormulaCase,
-  makeSelectCurrentSessionIndex,
   changeCurrentSession,
 } from 'global/reducers/intervention';
 import {
@@ -42,22 +41,17 @@ function SessionBranching({
   status,
   onChangeFormulaStatus,
   formula,
-  session: { id, position },
+  session: { id, position, intervention_id: interventionId },
   onFormulaUpdate,
   onAddCase,
   onRemoveCase,
   onUpdateCase,
   intervention,
-  sessionIndex,
   changeSessionIndex,
   fetchQuestions,
   disabled,
   activeSessionId,
 }) {
-  useEffect(() => {
-    if (activeSessionId === id) fetchQuestions(activeSessionId);
-  }, [activeSessionId]);
-
   const displayPatternTargetText = target => {
     if (target.id === '') return formatMessage(messages.selectSession);
     const session = find(
@@ -70,10 +64,8 @@ function SessionBranching({
   const handleFormulaStatus = value => onChangeFormulaStatus(value, id);
 
   const handleClickAddVariable = () => {
-    if (position !== sessionIndex + 1) {
-      changeSessionIndex(position - 1);
-    }
     if (id !== activeSessionId) {
+      changeSessionIndex(position - 1);
       fetchQuestions(id);
     }
   };
@@ -110,18 +102,21 @@ function SessionBranching({
           <Column>
             <BranchingLayout
               disabled={disabled}
-              onVariableChooserOpen={handleClickAddVariable}
-              onDropdownOpen={handleClickAddVariable}
+              displayPatternTargetText={displayPatternTargetText}
               formatMessage={formatMessage}
               formula={formula}
               id={id}
+              interventionId={interventionId}
               onAddCase={onAddCase}
+              onDropdownOpen={handleClickAddVariable}
               onFormulaUpdate={onFormulaUpdate}
               onRemoveCase={onRemoveCase}
               onUpdateCase={onUpdateCase}
-              displayPatternTargetText={displayPatternTargetText}
-              sessionBranching
+              sessionId={id}
               includeAllVariables
+              includeCurrentSession
+              isMultiSession
+              sessionBranching
             />
           </Column>
         </Row>
@@ -142,7 +137,6 @@ SessionBranching.propTypes = {
   onRemoveCase: PropTypes.func,
   onUpdateCase: PropTypes.func,
   intervention: PropTypes.object,
-  sessionIndex: PropTypes.number,
   changeSessionIndex: PropTypes.func,
   fetchQuestions: PropTypes.func,
   disabled: PropTypes.bool,
@@ -151,7 +145,6 @@ SessionBranching.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   intervention: makeSelectIntervention(),
-  sessionIndex: makeSelectCurrentSessionIndex(),
   activeSessionId: makeSelectQuestionGroupsSessionId(),
 });
 

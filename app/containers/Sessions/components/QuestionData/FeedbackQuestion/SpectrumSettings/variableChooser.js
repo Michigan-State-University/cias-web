@@ -4,22 +4,24 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import VariableChooser from 'containers/BranchingLayout/VariableChooser';
+import { EditSessionPageContext } from 'containers/Sessions/containers/EditSessionPage/utils';
+import VariableChooser from 'containers/VariableChooser';
 import Img from 'components/Img';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import { StyledInput } from 'components/Input/StyledInput';
+import InequalityChooser from 'components/InequalityChooser';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
+import Question from 'models/Session/Question';
 
 import { themeColors, colors } from 'theme';
-import InequalityChooser from 'components/InequalityChooser';
 import messages from '../messages';
 import { CaseInput, DashedBox } from './styled';
 
@@ -32,39 +34,31 @@ const SpectrumVariableChooser = ({
   onRemoveCase,
   onUpdateCase,
   disabled,
+  selectedQuestion,
 }) => {
-  const [variableChooserOpen, setVariableChooserOpen] = useState(false);
+  const { sessionId, interventionId } = useContext(EditSessionPageContext);
 
   return (
     <Column>
       <Row mt={20} align="center" justify="between">
         <Text fontWeight="bold">{formatMessage(messages.spectrumHeader)}</Text>
-        <Box
-          onClick={() =>
-            !disabled && setVariableChooserOpen(!variableChooserOpen)
-          }
-          clickable
+        <VariableChooser
+          disabled={disabled}
+          selectedQuestion={selectedQuestion}
+          onClick={value => onFormulaUpdate(`${spectrum.payload}${value}`, id)}
+          sessionId={sessionId}
+          interventionId={interventionId}
+          isMultiSession
         >
           <Text
-            disabled={disabled}
             fontWeight="bold"
             color={themeColors.secondary}
             hoverDecoration="underline"
           >
             {formatMessage(messages.addVariable)}
           </Text>
-        </Box>
+        </VariableChooser>
       </Row>
-      <Box position="relative" mt={10}>
-        <VariableChooser
-          visible={variableChooserOpen}
-          setOpen={setVariableChooserOpen}
-          onClick={value => {
-            setVariableChooserOpen(false);
-            onFormulaUpdate(`${spectrum.payload}${value}`, id);
-          }}
-        />
-      </Box>
       <Box bg={colors.linkWater} width="100%" mt={10} mb={20} px={8} py={8}>
         <StyledInput
           disabled={disabled}
@@ -128,6 +122,7 @@ const SpectrumVariableChooser = ({
 };
 
 SpectrumVariableChooser.propTypes = {
+  selectedQuestion: PropTypes.shape(Question),
   id: PropTypes.string,
   intl: PropTypes.object,
   spectrum: PropTypes.shape({
