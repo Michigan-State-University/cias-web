@@ -7,12 +7,24 @@ export default defineMessages({
     id: `${scope}.defaultError`,
     defaultMessage: 'Something went wrong.',
   },
-  copyError: {
-    id: `${scope}.copyError`,
+  duplicateError: {
+    id: `${scope}.duplicateError`,
     defaultMessage: 'There was an error during duplicating the Intervention!',
   },
-  sendSuccess: {
-    id: `${scope}.sendSuccess`,
+  copyError: {
+    id: `${scope}.copyError`,
+    defaultMessage: 'There was an error during copying the Intervention!',
+  },
+  duplicateSuccess: {
+    id: `${scope}.duplicateSuccess`,
     defaultMessage: 'Duplicated "{name}" Intervention is now on the Dashboard',
+  },
+  copySuccess: {
+    id: `${scope}.copySuccess`,
+    defaultMessage: `Copy of "{name}" was sent to the chosen {
+      userCount, plural, 
+        one {researcher}
+        other {researchers}
+    }`,
   },
 });

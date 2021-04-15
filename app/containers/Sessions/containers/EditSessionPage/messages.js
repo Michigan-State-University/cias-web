@@ -13,7 +13,7 @@ export default defineMessages({
   },
   manageSlides: {
     id: `${scope}.manageSlides`,
-    defaultMessage: 'Manage screens',
+    defaultMessage: 'Manage Groups',
   },
   expandGroups: {
     id: `${scope}.expandGroups`,

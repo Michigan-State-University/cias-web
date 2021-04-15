@@ -100,7 +100,12 @@ const SelectResearchers = ({
           value={filterValue}
           onChange={e => setFilterValue(e.target.value)}
         />
-        <StyledButton width={200} ml={10} onClick={handleSend}>
+        <StyledButton
+          disabled={selected.length === 0}
+          width={200}
+          ml={10}
+          onClick={handleSend}
+        >
           <FormattedMessage {...messages.send} />
         </StyledButton>
       </Row>

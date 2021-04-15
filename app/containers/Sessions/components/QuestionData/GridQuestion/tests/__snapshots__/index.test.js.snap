@@ -90,7 +90,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     display="flex"
                   >
                     <input
-                      class="Input-t9j2q5-0 deKMNB BadgeInput-sc-1ua27xt-0 eSqSHP"
+                      class="Input-t9j2q5-0 kTUkta BadgeInput-sc-1ua27xt-0 eSqSHP"
                       color="#0086F8"
                       placeholder="Score"
                       type="tel"
@@ -99,7 +99,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     />
                   </div>
                   <input
-                    class="Input-t9j2q5-0 cwCAhf"
+                    class="Input-t9j2q5-0 tWwZo"
                     cursor="pointer"
                     placeholder="Column 1..."
                     type="text"
@@ -132,7 +132,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     display="flex"
                   >
                     <input
-                      class="Input-t9j2q5-0 deKMNB BadgeInput-sc-1ua27xt-0 eSqSHP"
+                      class="Input-t9j2q5-0 kTUkta BadgeInput-sc-1ua27xt-0 eSqSHP"
                       color="#0086F8"
                       placeholder="Score"
                       type="tel"
@@ -141,7 +141,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     />
                   </div>
                   <input
-                    class="Input-t9j2q5-0 cwCAhf"
+                    class="Input-t9j2q5-0 tWwZo"
                     cursor="pointer"
                     placeholder="Column 2..."
                     type="text"
@@ -189,7 +189,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     >
                       <input
                         autocomplete="off"
-                        class="Input-t9j2q5-0 kkezBp BadgeInput-sc-1ua27xt-0 gmlnZr"
+                        class="Input-t9j2q5-0 cAqUSW BadgeInput-sc-1ua27xt-0 gmlnZr"
                         color="#107969"
                         name="notASearchField-Variable name..."
                         placeholder="Variable name..."
@@ -272,7 +272,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     >
                       <input
                         autocomplete="off"
-                        class="Input-t9j2q5-0 kkezBp BadgeInput-sc-1ua27xt-0 gmlnZr"
+                        class="Input-t9j2q5-0 cAqUSW BadgeInput-sc-1ua27xt-0 gmlnZr"
                         color="#107969"
                         name="notASearchField-Variable name..."
                         placeholder="Variable name..."

@@ -263,9 +263,7 @@ export function AnswerSessionPage({
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
           <CommonLayout currentQuestion={currentQuestion} />
-          <Row mt={10}>
-            {renderQuestionByType(currentQuestion, sharedProps)}
-          </Row>
+          <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           {!isLastScreen &&
             (isNullOrUndefined(proceedButton) || proceedButton) &&
             !isAnimationOngoing && (
@@ -362,7 +360,7 @@ export function AnswerSessionPage({
           {interventionStarted && !nextQuestionError && (
             <>
               <Box width="100%">
-                <Row justify="end" padding={30}>
+                <Row justify="end" padding={30} pb={0}>
                   <MSULogo
                     logoUrl={logoUrl}
                     {...(isDesktop

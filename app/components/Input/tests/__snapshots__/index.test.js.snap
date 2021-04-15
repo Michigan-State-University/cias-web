@@ -1698,6 +1698,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as singleline 
   background-color: transparent;
   border-color: transparent;
   height: 50px;
+  padding: 0;
   font-size: 14px;
   color: #2F3850;
   text-align: left;

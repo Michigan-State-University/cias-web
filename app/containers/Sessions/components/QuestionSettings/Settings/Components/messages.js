@@ -87,13 +87,13 @@ export default defineMessages({
   },
   warningMessage: {
     id: `${scope}.warningMessage`,
-    defaultMessage: `Bear in mind that <span style="color: ${
+    defaultMessage: `You <span style="color: ${
       colors.flamingo
-    }">you can't edit the question</span> when you are working with the character.`,
+    }">cannot edit content</span> on the screen while working with the narrator.`,
   },
   characterBlocked: {
     id: `${scope}.characterBlocked`,
-    defaultMessage: `Open any of the blocks to replace the character.`,
+    defaultMessage: `Open any block to reposition the narrator.`,
   },
   characterMovable: {
     id: `${scope}.characterMovable`,

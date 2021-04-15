@@ -31,10 +31,12 @@ import {
 
 import { canEdit } from 'models/Status/statusPermissions';
 import { nameQuestion, finishQuestion } from 'models/Session/QuestionTypes';
+
+import CommonLayout from 'containers/AnswerSessionPage/layouts/CommonLayout';
+
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
 import QuestionNarrator from '../QuestionNarrator';
-import QuestionPreview from './QuestionPreview';
 import QuestionSubtitle from '../QuestionSubtitle';
 import QuestionTitle from '../QuestionTitle';
 import QuestionVideo from '../QuestionVideo';
@@ -75,10 +77,6 @@ const RenderQuestionDetails = ({
   if (selectedQuestion != null) {
     const {
       id,
-      title: questionTitle,
-      subtitle: questionSubtitle,
-      image_url: imageUrl,
-      video_url: videoUrl,
       body,
       type,
       settings: {
@@ -132,7 +130,6 @@ const RenderQuestionDetails = ({
             />
             <Row justify="center" width="100%">
               <AppContainer disablePageTitle $width="100%">
-                <Row width="100%" mt={5} height={30} />
                 {!isNarratorTabOrEditNotPossible && (
                   <>
                     {title && (
@@ -169,33 +166,7 @@ const RenderQuestionDetails = ({
                   </>
                 )}
                 {isNarratorTabOrEditNotPossible && (
-                  <>
-                    {title && questionTitle && (
-                      <QuestionPreview
-                        padding={26}
-                        dangerouslySetInnerHTML={{ __html: questionTitle }}
-                      />
-                    )}
-                    {subtitle && questionSubtitle && (
-                      <QuestionPreview
-                        mt={10}
-                        padding={26}
-                        dangerouslySetInnerHTML={{
-                          __html: questionSubtitle,
-                        }}
-                      />
-                    )}
-                    {video && !isNullOrUndefined(videoUrl) && (
-                      <Row mt={10}>
-                        <QuestionVideo disabled={!editingPossible} />
-                      </Row>
-                    )}
-                    {image && !isNullOrUndefined(imageUrl) && (
-                      <Row mt={10}>
-                        <QuestionImage disabled={!editingPossible} />
-                      </Row>
-                    )}
-                  </>
+                  <CommonLayout currentQuestion={selectedQuestion ?? {}} />
                 )}
 
                 <Row>
