@@ -27,6 +27,7 @@ import {
   AudioPreviewReducer,
   makeSelectAudioPreviewState,
   phoneticPreviewRequest,
+  resetPhoneticPreview,
 } from 'global/reducers/audioPreview';
 import messages from './messages';
 
@@ -40,7 +41,8 @@ const PeedyVoiceSettings = ({
   googleTtsVoice: { id: googleVoiceId, googleTtsLanguageId, voiceLabel },
   editSession,
   audioPreviewRequest,
-  audioPreview: { phoneticUrl, loading: audioPreviewLoading },
+  audioPreview: { phoneticUrl, phoneticLoading },
+  resetAudioPreview,
 }) => {
   const [selectedLanguage, setSelectLanguage] = useState(null);
   const [selectedVoice, setSelectedVoice] = useState({
@@ -55,6 +57,7 @@ const PeedyVoiceSettings = ({
   };
 
   useEffect(() => {
+    resetAudioPreview();
     if (data === null) {
       fetchLanguages();
     }
@@ -161,7 +164,7 @@ const PeedyVoiceSettings = ({
           boxPx={0}
           boxPy={0}
           phoneticUrl={phoneticUrl}
-          phoneticLoading={audioPreviewLoading}
+          phoneticLoading={phoneticLoading}
           placeholder={formatMessage(messages.testVoice)}
           onBlur={handlePhoneticNameChange}
           styles={inputStyles}
@@ -188,6 +191,7 @@ PeedyVoiceSettings.propTypes = {
   fetchLanguageVoices: PropTypes.func,
   editSession: PropTypes.func,
   audioPreviewRequest: PropTypes.func,
+  resetAudioPreview: PropTypes.func,
   ttsLanguages: PropTypes.object,
   ttsVoices: PropTypes.object,
   googleTtsVoice: PropTypes.object,
@@ -204,6 +208,7 @@ const mapDispatchToProps = {
   fetchLanguages: fetchLanguagesRequest,
   fetchLanguageVoices: fetchLanguageVoiceRequest,
   audioPreviewRequest: phoneticPreviewRequest,
+  resetAudioPreview: resetPhoneticPreview,
 };
 
 const withConnect = connect(
