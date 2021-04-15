@@ -10,20 +10,21 @@ export const scope = 'app.containers.ForbiddenPage';
 export default defineMessages({
   defaultHeader: {
     id: `${scope}.header`,
-    defaultMessage: 'You do not have access to view this resource.',
+    defaultMessage: 'You do not have access',
   },
   textLoggedIn: {
     id: `${scope}.textLoggedIn`,
     defaultMessage:
-      'It seems that your current account does not have sufficient permissions. Go back to main page or log in to different account.',
+      'It seems that your current account does not have sufficient permissions. Go back to main page or log in with different account',
   },
   textNotLoggedIn: {
     id: `${scope}.textNotLoggedIn`,
-    defaultMessage: 'It seems that you are not logged in. Please log in.',
+    defaultMessage:
+      'Please Log In or create an account by clicking on the button below to view this page',
   },
   defaultErrorCode: {
     id: `${scope}.defaultErrorCode`,
-    defaultMessage: 'Forbidden',
+    defaultMessage: 'Logged in?',
   },
   toMainPage: {
     id: `${scope}.toMainPage`,

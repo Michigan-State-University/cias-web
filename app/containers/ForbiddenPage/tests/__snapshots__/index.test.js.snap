@@ -22,7 +22,7 @@ exports[`<ForbiddenPage /> should render and match the snapshot 1`] = `
             font-size="10vw"
             font-weight="bold"
           >
-            Forbidden
+            Logged in?
           </p>
         </div>
       </div>
@@ -37,7 +37,7 @@ exports[`<ForbiddenPage /> should render and match the snapshot 1`] = `
             font-size="24"
             font-weight="bold"
           >
-            You do not have access to view this resource.
+            You do not have access
           </p>
         </div>
       </div>
@@ -51,7 +51,7 @@ exports[`<ForbiddenPage /> should render and match the snapshot 1`] = `
             class="Text-e4p0w3-0 eBqgNV"
             font-size="18"
           >
-            It seems that you are not logged in. Please log in.
+            Please Log In or create an account by clicking on the button below to view this page
           </p>
         </div>
       </div>
