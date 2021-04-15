@@ -37,7 +37,11 @@ import {
   createUserSessionRequest,
   changeUserSessionId,
 } from './actions';
-import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
+import {
+  makeSelectAnswers,
+  makeSelectCurrentQuestion,
+  makeSelectUserSession,
+} from './selectors';
 import messages from './messages';
 
 function* submitAnswersAsync({
@@ -106,10 +110,11 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
 
 function* phoneticPreviewAsync({ payload: { text } }) {
   try {
+    const userSession = yield select(makeSelectUserSession());
     const {
       data: { url: mp3Url },
     } = yield axios.post(`/v1/phonetic_preview`, {
-      audio: { text },
+      audio: { text, user_session_id: userSession.id },
     });
     yield put(phoneticPreviewSuccess(`${process.env.API_URL}${mp3Url}`));
   } catch (error) {

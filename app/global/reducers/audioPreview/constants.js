@@ -1,0 +1,10 @@
+export const RESET_PHONETIC_PREVIEW = 'app/audioPreview/RESET_PHONETIC_PREVIEW';
+
+export const PHONETIC_PREVIEW_REQUEST =
+  'app/audioPreview/PHONETIC_PREVIEW_REQUEST';
+
+export const PHONETIC_PREVIEW_SUCCESS =
+  'app/audioPreview/PHONETIC_PREVIEW_SUCCESS';
+
+export const PHONETIC_PREVIEW_FAILURE =
+  'app/audioPreview/PHONETIC_PREVIEW_FAILURE';
