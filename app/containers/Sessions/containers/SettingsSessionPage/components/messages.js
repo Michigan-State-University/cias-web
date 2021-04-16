@@ -80,4 +80,8 @@ export default defineMessages({
     id: `${scope}.saveVoiceSettings`,
     defaultMessage: 'Save voice settings',
   },
+  testVoice: {
+    id: `${scope}.testVoice`,
+    defaultMessage: 'Test voice!',
+  },
 });

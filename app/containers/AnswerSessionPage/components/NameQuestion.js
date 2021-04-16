@@ -5,10 +5,18 @@ import Question from 'models/Session/Question';
 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { phoneticPreviewRequest } from '../actions';
-import { makeSelectPhoneticUrl, makeSelectPhoneticLoading } from '../selectors';
+import { compose } from 'redux';
+import { injectReducer, injectSaga } from 'redux-injectors';
+import {
+  allAudioPreviewSagas,
+  AudioPreviewReducer,
+  phoneticPreviewRequest,
+  makeSelectAudioPreviewState,
+  resetPhoneticPreview,
+} from 'global/reducers/audioPreview';
 
 import NameQuestionLayout from '../layouts/NameQuestionLayout';
+import { makeSelectUserSession } from '../selectors';
 
 const NameQuestion = ({
   phoneticPreview,
@@ -16,10 +24,11 @@ const NameQuestion = ({
   answerBody,
   selectAnswer,
   formatMessage,
-  phoneticUrl,
-  phoneticLoading,
+  previewState: { phoneticUrl, phoneticLoading },
   isAnimationOngoing,
   isDesktop,
+  resetAudioPreview,
+  userSession: { id },
 }) => {
   const {
     body: {
@@ -33,6 +42,7 @@ const NameQuestion = ({
    * Without it, it crashes when Question is not `required`
    */
   useEffect(() => {
+    resetAudioPreview();
     if (!required)
       selectAnswer([
         {
@@ -51,7 +61,7 @@ const NameQuestion = ({
       value.phoneticName = name;
     }
     if (value.phoneticName) {
-      phoneticPreview(value.phoneticName);
+      phoneticPreview(value.phoneticName, { user_session_id: id });
     }
     selectAnswer([
       {
@@ -80,22 +90,33 @@ NameQuestion.propTypes = {
   phoneticPreview: PropTypes.func,
   answerBody: PropTypes.any,
   formatMessage: PropTypes.func,
-  phoneticUrl: PropTypes.any,
-  phoneticLoading: PropTypes.bool,
+  resetAudioPreview: PropTypes.func,
+  previewState: PropTypes.object,
+  userSession: PropTypes.object,
   isAnimationOngoing: PropTypes.bool,
   isDesktop: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
-  phoneticUrl: makeSelectPhoneticUrl(),
-  phoneticLoading: makeSelectPhoneticLoading(),
+  previewState: makeSelectAudioPreviewState(),
+  userSession: makeSelectUserSession(),
 });
 
 const mapDispatchToProps = {
   phoneticPreview: phoneticPreviewRequest,
+  resetAudioPreview: resetPhoneticPreview,
 };
 
-export default connect(
+const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
+);
+
+export default compose(
+  injectReducer({ key: 'audioPreview', reducer: AudioPreviewReducer }),
+  injectSaga({
+    key: 'audioPreview',
+    saga: allAudioPreviewSagas,
+  }),
+  withConnect,
 )(NameQuestion);

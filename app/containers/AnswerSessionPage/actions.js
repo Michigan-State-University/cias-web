@@ -15,8 +15,6 @@ import {
   RESET_SESSION,
   CHANGE_IS_ANIMATING,
   SET_FEEDBACK_SCREEN_SETTINGS,
-  PHONETIC_PREVIEW_REQUEST,
-  PHONETIC_PREVIEW_SUCCESS,
   REDIRECT_TO_PREVIEW,
   RESET_ANSWERS,
   CREATE_USER_SESSION_REQUEST,
@@ -74,12 +72,6 @@ export const changeIsAnimating = isAnimating =>
 
 export const setFeedbackScreenSettings = (setting, value) =>
   actionBuilder(SET_FEEDBACK_SCREEN_SETTINGS, { setting, value });
-
-export const phoneticPreviewRequest = text =>
-  actionBuilder(PHONETIC_PREVIEW_REQUEST, { text });
-
-export const phoneticPreviewSuccess = url =>
-  actionBuilder(PHONETIC_PREVIEW_SUCCESS, { url });
 
 export const createUserSessionRequest = sessionId =>
   actionBuilder(CREATE_USER_SESSION_REQUEST, { sessionId });

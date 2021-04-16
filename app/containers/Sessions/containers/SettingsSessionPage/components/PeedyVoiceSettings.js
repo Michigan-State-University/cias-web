@@ -21,6 +21,14 @@ import { connect } from 'react-redux';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 import { themeColors } from 'theme';
+import TextVoicePreviewInput from 'components/Input/TextVoicePreviewInput';
+import {
+  allAudioPreviewSagas,
+  AudioPreviewReducer,
+  makeSelectAudioPreviewState,
+  phoneticPreviewRequest,
+  resetPhoneticPreview,
+} from 'global/reducers/audioPreview';
 import messages from './messages';
 
 const PeedyVoiceSettings = ({
@@ -32,14 +40,24 @@ const PeedyVoiceSettings = ({
   fetchLanguageVoices,
   googleTtsVoice: { id: googleVoiceId, googleTtsLanguageId, voiceLabel },
   editSession,
+  audioPreviewRequest,
+  audioPreview: { phoneticUrl, phoneticLoading },
+  resetAudioPreview,
 }) => {
   const [selectedLanguage, setSelectLanguage] = useState(null);
   const [selectedVoice, setSelectedVoice] = useState({
     value: googleVoiceId,
     label: voiceLabel,
   });
+  const [previewText, setPreviewText] = useState('');
+
+  const inputStyles = {
+    height: '100%',
+    width: '100%',
+  };
 
   useEffect(() => {
+    resetAudioPreview();
     if (data === null) {
       fetchLanguages();
     }
@@ -62,6 +80,14 @@ const PeedyVoiceSettings = ({
       setSelectLanguage(foundLanguage);
     }
   }, [data]);
+
+  useEffect(() => {
+    if (previewText.length !== 0 && selectedVoice && selectedVoice.value) {
+      audioPreviewRequest(previewText, {
+        google_tts_voice_id: selectedVoice.value,
+      });
+    }
+  }, [previewText, selectedVoice]);
 
   const getLanguagesPanel = () => {
     if (loading) {
@@ -95,6 +121,7 @@ const PeedyVoiceSettings = ({
 
     return (
       <Select
+        mb={10}
         width="100%"
         selectProps={{
           isDisabled: !editingPossible,
@@ -113,6 +140,10 @@ const PeedyVoiceSettings = ({
     ]);
   };
 
+  const handlePhoneticNameChange = value => {
+    setPreviewText(value);
+  };
+
   return (
     <>
       <H3 mt={30} mb={20}>
@@ -127,6 +158,17 @@ const PeedyVoiceSettings = ({
           </Text>
           {getVoicesPanel()}
         </>
+      )}
+      {editingPossible && (
+        <TextVoicePreviewInput
+          boxPx={0}
+          boxPy={0}
+          phoneticUrl={phoneticUrl}
+          phoneticLoading={phoneticLoading}
+          placeholder={formatMessage(messages.testVoice)}
+          onBlur={handlePhoneticNameChange}
+          styles={inputStyles}
+        />
       )}
       {selectedVoice.value !== googleVoiceId && (
         <Button
@@ -148,19 +190,25 @@ PeedyVoiceSettings.propTypes = {
   fetchLanguages: PropTypes.func,
   fetchLanguageVoices: PropTypes.func,
   editSession: PropTypes.func,
+  audioPreviewRequest: PropTypes.func,
+  resetAudioPreview: PropTypes.func,
   ttsLanguages: PropTypes.object,
   ttsVoices: PropTypes.object,
   googleTtsVoice: PropTypes.object,
+  audioPreview: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   ttsLanguages: makeSelectLanguagesState(),
   ttsVoices: makeSelectVoicesState(),
+  audioPreview: makeSelectAudioPreviewState(),
 });
 
 const mapDispatchToProps = {
   fetchLanguages: fetchLanguagesRequest,
   fetchLanguageVoices: fetchLanguageVoiceRequest,
+  audioPreviewRequest: phoneticPreviewRequest,
+  resetAudioPreview: resetPhoneticPreview,
 };
 
 const withConnect = connect(
@@ -168,13 +216,16 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withSaga = injectSaga({
-  key: 'ttsLanguagesSagas',
-  saga: allLanguagesSagas,
-});
-
 export default compose(
   injectReducer({ key: 'ttsLanguages', reducer: ttsLanguageReducer }),
+  injectReducer({ key: 'audioPreview', reducer: AudioPreviewReducer }),
+  injectSaga({
+    key: 'ttsLanguagesSagas',
+    saga: allLanguagesSagas,
+  }),
+  injectSaga({
+    key: 'audioPreview',
+    saga: allAudioPreviewSagas,
+  }),
   withConnect,
-  withSaga,
 )(PeedyVoiceSettings);
