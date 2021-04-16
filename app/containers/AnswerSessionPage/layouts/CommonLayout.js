@@ -25,14 +25,14 @@ const CommonLayout = ({ currentQuestion }) => {
     <Box>
       {settingsTitle && title && (
         <Row>
-          <Box lineHeight="1.42" padding={26} py={8}>
+          <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
             <Markup content={title} noWrap />
           </Box>
         </Row>
       )}
       {settingsSubtitle && subtitle && (
         <Row>
-          <Box lineHeight="1.42" padding={26} py={8}>
+          <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
             <Markup content={subtitle} noWrap />
           </Box>
         </Row>

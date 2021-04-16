@@ -25,7 +25,7 @@ export default defineMessages({
   },
   animation: {
     id: `${scope}.animation`,
-    defaultMessage: 'Display Character',
+    defaultMessage: 'Display Narrator',
   },
   getLink: {
     id: `${scope}.getLink`,
@@ -49,7 +49,7 @@ export default defineMessages({
   },
   globalSettingRemovalConfirmation: {
     id: `${scope}.globalSettingRemovalConfirmation`,
-    defaultMessage: 'Are you sure you want to disable narrator?',
+    defaultMessage: 'Are you sure you want to disable Narrator?',
   },
   blockRemovalConfirmation: {
     id: `${scope}.blockRemovalConfirmation`,

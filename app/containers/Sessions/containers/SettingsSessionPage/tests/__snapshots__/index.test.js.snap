@@ -91,7 +91,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       <p
         class="Text-e4p0w3-0 fFURPd"
       >
-        Display Character
+        Display Narrator
       </p>
       <label
         class="styled__SwitchWrapper-k9teya-0 hucWtb"
