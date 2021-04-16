@@ -33,11 +33,26 @@ exports[`<ErrorPage /> should render and match the snapshot 1`] = `
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
         >
           <p
-            class="Text-e4p0w3-0 bWNnsa"
+            class="Text-e4p0w3-0 TTVWG"
             font-size="24"
-            font-weight="bold"
           >
-            Some error occurred in the App. Please refresh or go to the Main Page.
+            <b>
+              An error has occurred in the system.
+            </b>
+            <br />
+            Our software development team has received a message about this error.
+            <br />
+            Please 
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
+              target="_blank"
+            >
+              click
+            </a>
+             here if you’d like to provide our team with any additional information.
+            <br />
+            <br />
+            To continue, please refresh or go to the main page.
           </p>
         </div>
       </div>

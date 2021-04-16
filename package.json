@@ -1,6 +1,6 @@
 {
   "name": "cias-3.0",
-  "version": "0.6.1",
+  "version": "0.8.0",
   "description": "CIAS 3.0 Web Application",
   "engines": {
     "npm": "6.x",
@@ -63,6 +63,12 @@
   "pre-commit": "lint:staged",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
+    "@formatjs/intl-datetimeformat": "^3.3.1",
+    "@formatjs/intl-displaynames": "^4.0.12",
+    "@formatjs/intl-getcanonicallocales": "^1.5.8",
+    "@formatjs/intl-listformat": "^5.0.13",
+    "@formatjs/intl-locale": "^2.4.21",
+    "@formatjs/intl-numberformat": "^6.2.5",
     "@formatjs/intl-pluralrules": "^4.0.13",
     "@formatjs/intl-relativetimeformat": "^8.1.4",
     "@sentry/react": "^6.2.4",

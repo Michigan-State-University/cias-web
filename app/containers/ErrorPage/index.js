@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import { compose } from 'redux';
 import { Helmet } from 'react-helmet';
 import { Container, Row, Col } from 'react-grid-system';
+import { Markup } from 'interweave';
 
 import { themeColors } from 'theme';
 import appStages from 'global/appStages';
@@ -69,8 +70,8 @@ const ErrorPage = ({ intl: { formatMessage }, error, resetError }) => {
 
           <Row justify="center">
             <Col>
-              <Text fontSize={24} fontWeight="bold" mt={50} textAlign="center">
-                {formatMessage(messages.header)}
+              <Text fontSize={24} mt={50} textAlign="center">
+                <Markup content={formatMessage(messages.description)} noWrap />
               </Text>
             </Col>
           </Row>

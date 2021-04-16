@@ -39,6 +39,8 @@ exports[`<InequalityChooser /> Should render and match the snapshot 1`] = `
   max-width: 200px;
   padding-top: 12px;
   padding-bottom: 12px;
+  padding-right: 0;
+  padding-left: 0;
   color: #2F3850;
   text-align: center;
 }

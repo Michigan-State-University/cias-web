@@ -26,7 +26,6 @@ export const AnswerInterventionContent = styled.div`
   position: relative;
   width: 100%;
   height: fit-content;
-  margin-top: 15px;
 `;
 
 const getStyles = previewMode => css`

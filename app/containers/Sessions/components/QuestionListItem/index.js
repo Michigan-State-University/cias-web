@@ -176,6 +176,7 @@ const QuestionListItem = ({
   };
 
   const beforeRender = () => {
+    setDraggable(false);
     changeNarratorBlockIndex(-1);
     toggleSettings({ index, questionIndex: selectedQuestionIndex });
   };

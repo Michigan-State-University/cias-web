@@ -12,13 +12,13 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
         class="Text-e4p0w3-0 iZfJuq"
         font-size="14px"
       >
-        Bear in mind that 
+        You 
         <span
           style="color: rgb(239, 70, 47);"
         >
-          you can't edit the question
+          cannot edit content
         </span>
-         when you are working with the character.
+         on the screen while working with the Narrator.
       </p>
     </div>
     <div
@@ -50,7 +50,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
       <h3
         class="H3-twxrn4-0 cRKwFK"
       >
-        Display Character
+        Display Narrator
       </h3>
       <label
         class="styled__SwitchWrapper-k9teya-0 hucWtb"
@@ -83,7 +83,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
         color="#EF462F"
         font-size="14px"
       >
-        Open any of the blocks to replace the character.
+        Open any block to reposition the Narrator.
       </p>
     </div>
   </div>

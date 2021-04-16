@@ -9,6 +9,7 @@ import Box from 'components/Box';
 
 import { colors } from 'theme';
 import calculateTimeZone from 'utils/calculateTimeZone';
+import { getUTCTime } from 'utils/dateUtils';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -41,7 +42,7 @@ const ExactDateOption = ({
             height={50}
             placeholder={formatMessage(messages.chooseDate)}
             type="date"
-            value={Date.parse(value)}
+            value={getUTCTime(new Date(value))}
             onCheck={onChange}
             fontSize={15}
             minDate={new Date()}

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Markup } from 'interweave';
 
 import Row from 'components/Row';
 import Box from 'components/Box';
@@ -22,23 +23,18 @@ const CommonLayout = ({ currentQuestion }) => {
   } = currentQuestion;
   return (
     <Box>
-      <Row width="100%" mt={5} height={30} />
       {settingsTitle && title && (
         <Row>
-          <Box
-            lineHeight="1.42"
-            padding={26}
-            dangerouslySetInnerHTML={{ __html: title }}
-          />
+          <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
+            <Markup content={title} noWrap />
+          </Box>
         </Row>
       )}
       {settingsSubtitle && subtitle && (
         <Row>
-          <Box
-            lineHeight="1.42"
-            padding={26}
-            dangerouslySetInnerHTML={{ __html: subtitle }}
-          />
+          <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
+            <Markup content={subtitle} noWrap />
+          </Box>
         </Row>
       )}
       {settingsVideo && videoUrl && (

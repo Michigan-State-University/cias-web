@@ -76,7 +76,7 @@ const SetNewPasswordPage = ({
   }
 
   const onSubmit = ({ password, passwordConfirmation }, { setSubmitting }) => {
-    const { 'access-token': accessToken, client, uid } = queryObj;
+    const { 'Access-Token': accessToken, Client: client, uid } = queryObj;
     setNewPassword({
       password,
       passwordConfirmation,

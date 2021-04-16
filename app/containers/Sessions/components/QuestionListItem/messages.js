@@ -9,7 +9,7 @@ export default defineMessages({
   },
   copy: {
     id: `${scope}.copy`,
-    defaultMessage: 'Copy',
+    defaultMessage: 'Share copy',
   },
   duplicate: {
     id: `${scope}.duplicate`,

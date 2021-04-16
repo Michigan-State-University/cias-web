@@ -39,7 +39,7 @@ export default defineMessages({
   },
   animation: {
     id: `${scope}.animation`,
-    defaultMessage: 'Display Character',
+    defaultMessage: 'Display Narrator',
   },
   voice: {
     id: `${scope}.voice`,
@@ -55,7 +55,7 @@ export default defineMessages({
   },
   replaceCharacter: {
     id: `${scope}.replaceCharacter`,
-    defaultMessage: 'Replace character',
+    defaultMessage: 'Replace Narrator',
   },
   save: {
     id: `${scope}.save`,
@@ -87,22 +87,22 @@ export default defineMessages({
   },
   warningMessage: {
     id: `${scope}.warningMessage`,
-    defaultMessage: `Bear in mind that <span style="color: ${
+    defaultMessage: `You <span style="color: ${
       colors.flamingo
-    }">you can't edit the question</span> when you are working with the character.`,
+    }">cannot edit content</span> on the screen while working with the Narrator.`,
   },
   characterBlocked: {
     id: `${scope}.characterBlocked`,
-    defaultMessage: `Open any of the blocks to replace the character.`,
+    defaultMessage: `Open any block to reposition the Narrator.`,
   },
   characterMovable: {
     id: `${scope}.characterMovable`,
-    defaultMessage: `Click and drag the character to move it.<br>Only the start and end positions will be recorded.
+    defaultMessage: `Click and drag the Narrator to move it.<br>Only the start and end positions will be recorded.
 `,
   },
   characterMoveDisabled: {
     id: `${scope}.characterMoveDisabled`,
-    defaultMessage: `Character replacing is disabled for that intervention status.`,
+    defaultMessage: `Narrator replacing is disabled for that intervention status.`,
   },
   [feedbackActions.showSpectrum]: {
     id: `${scope}.${feedbackActions.showSpectrum}`,
@@ -130,7 +130,7 @@ export default defineMessages({
   },
   selectActionPosition: {
     id: `${scope}.selectActionPosition`,
-    defaultMessage: 'Select Character Position',
+    defaultMessage: 'Select Narrator Position',
   },
   speechAnimation: {
     id: `${scope}.speechAnimation`,
@@ -151,7 +151,7 @@ export default defineMessages({
   },
   equalsTo: {
     id: `${scope}.equalsTo`,
-    defaultMessage: 'narrator will say:',
+    defaultMessage: 'Narrator will say:',
   },
   formulaHeader: {
     id: `${scope}.formulaHeader`,

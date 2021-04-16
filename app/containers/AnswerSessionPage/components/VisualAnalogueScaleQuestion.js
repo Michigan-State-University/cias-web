@@ -26,12 +26,15 @@ const VisualAnalogueScaleQuestion = ({
   } = question;
 
   useEffect(() => {
-    selectAnswer([
-      {
-        var: name,
-        value,
-      },
-    ]);
+    selectAnswer(
+      [
+        {
+          var: name,
+          value,
+        },
+      ],
+      false,
+    );
     setAnswerValue(value);
   }, [id]);
 

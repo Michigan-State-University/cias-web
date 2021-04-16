@@ -91,9 +91,10 @@ export const VisualAnalogueSlider = styled(AppSlider)`
 `;
 
 export const FirstTH = styled(TH)`
-  position: sticky;
-  left: 0;
   background-color: inherit;
+  text-align: left;
+  word-break: normal;
+  word-wrap: break-word;
 `;
 
 export const StyledLink = styled(Link)`

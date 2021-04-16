@@ -14,10 +14,13 @@ import { compose } from 'redux';
 import { toast } from 'react-toastify';
 import get from 'lodash/get';
 import { Redirect, useLocation } from 'react-router-dom';
+import { useContainerQuery } from 'react-container-query';
 
 import AudioWrapper from 'utils/audioWrapper';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+
+import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
 
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
@@ -123,6 +126,14 @@ AnimationRefHelper.propTypes = {
   audioInstance: PropTypes.object,
 };
 
+const IS_DESKTOP = 'IS_DESKTOP';
+
+const QUERY = {
+  [IS_DESKTOP]: {
+    minWidth: additionalBreakpoints.desktopSm,
+  },
+};
+
 export function AnswerSessionPage({
   match: { params },
   intl: { formatMessage },
@@ -160,6 +171,19 @@ export function AnswerSessionPage({
   useInjectReducer({ key: 'AnswerSessionPage', reducer });
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
+
+  const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
+
+  const isDesktop = useMemo(
+    () => previewMode === DESKTOP_MODE && containerQueryParams[IS_DESKTOP],
+    [previewMode, containerQueryParams],
+  );
+
+  const logoStyles = useMemo(() => {
+    if (isDesktop) return { position: 'absolute', right: '30px' };
+
+    return {};
+  }, [containerQueryParams, isDesktop]);
 
   const { logoUrl } = userSession ?? {};
 
@@ -208,7 +232,6 @@ export function AnswerSessionPage({
   }
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
-  const isDesktop = previewMode === DESKTOP_MODE;
 
   const saveAnswer = () =>
     submitAnswerRequest(
@@ -223,18 +246,24 @@ export function AnswerSessionPage({
     const {
       settings: { proceed_button: proceedButton, required },
     } = currentQuestion;
-    const selectAnswerProp = answerBody => {
+    const selectAnswerProp = (answerBody, selectedByUser = true) => {
       saveSelectedAnswer({
         id: currentQuestionId,
         answerBody,
+        selectedByUser,
       });
     };
 
+    const answer = answers[currentQuestionId];
     const answerBody = answers[currentQuestionId]
       ? answers[currentQuestionId].answerBody
       : [];
 
-    const isAnswered = () => !(Array.isArray(answerBody) && !answerBody.length);
+    const isAnswered = () =>
+      answer &&
+      Array.isArray(answer.answerBody) &&
+      answer.answerBody.length &&
+      answer.selectedByUser;
 
     const isButtonDisabled = () => required && !isAnswered();
 
@@ -257,9 +286,7 @@ export function AnswerSessionPage({
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
           <CommonLayout currentQuestion={currentQuestion} />
-          <Row mt={10}>
-            {renderQuestionByType(currentQuestion, sharedProps)}
-          </Row>
+          <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           {!isLastScreen &&
             (isNullOrUndefined(proceedButton) || proceedButton) &&
             !isAnimationOngoing && (
@@ -315,7 +342,7 @@ export function AnswerSessionPage({
   if (nextQuestionLoading && interventionStarted) return <Loader />;
 
   return (
-    <Column height="100%">
+    <Column height="100%" ref={pageRef}>
       <Box
         display="flex"
         align="center"
@@ -356,13 +383,8 @@ export function AnswerSessionPage({
           {interventionStarted && !nextQuestionError && (
             <>
               <Box width="100%">
-                <Row justify="end" padding={30}>
-                  <MSULogo
-                    logoUrl={logoUrl}
-                    {...(isDesktop
-                      ? { position: 'absolute', right: '30px' }
-                      : {})}
-                  />
+                <Row justify="end" padding={30} pb={isDesktop ? 10 : 0}>
+                  <MSULogo logoUrl={logoUrl} {...logoStyles} />
                 </Row>
                 {!nextQuestionLoading &&
                   currentQuestion &&

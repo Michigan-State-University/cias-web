@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
 const padding = props => ({
-  paddingTop: props.py || props.pt || '',
-  paddingBottom: props.py || props.pb || '',
-  paddingRight: props.px || props.pr || '',
-  paddingLeft: props.px || props.pl || '',
-  padding: props.padding || '',
+  padding: props.padding ?? '',
+  paddingTop: props.py ?? props.pt ?? '',
+  paddingBottom: props.py ?? props.pb ?? '',
+  paddingRight: props.px ?? props.pr ?? '',
+  paddingLeft: props.px ?? props.pl ?? '',
 });
 
 padding.propTypes = {

@@ -87,7 +87,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
           class="Box-sc-1vhutan-0 gTFrB"
         >
           <input
-            class="Input-t9j2q5-0 fZLGrQ styled__CaseInput-xvuzq8-0 bQOaOG"
+            class="Input-t9j2q5-0 gkqnfr styled__CaseInput-xvuzq8-0 bQOaOG"
             data-cy="case-value-input"
             data-testid="input"
             placeholder="..."
@@ -98,7 +98,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
         <p
           class="Text-e4p0w3-0 cYZaiu"
         >
-          narrator will say:
+          Narrator will say:
         </p>
       </div>
       <img
