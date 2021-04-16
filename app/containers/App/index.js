@@ -34,6 +34,7 @@ import ReportsPage from 'containers/ParticipantDashboard/components/ReportsTab/L
 import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReportsPage';
 import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
 import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
+import RaportingDashboardPage from 'containers/RaportingDashboardPage/Loadable';
 
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 
@@ -69,6 +70,10 @@ export function App({ user }) {
           return <GeneratedReportsPage disableFilter />;
         case Roles.thirdParty:
           return <GeneratedReportsPage disableFilter />;
+        case Roles.eInterventionAdmin:
+          return <InterventionPage />;
+        case Roles.organizationAdmin:
+          return <RaportingDashboardPage />;
         default:
           return NotFoundPage;
       }
