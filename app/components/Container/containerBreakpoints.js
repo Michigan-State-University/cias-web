@@ -11,6 +11,10 @@ export const containerBreakpoints = {
   xxl: 1600,
 };
 
+export const additionalBreakpoints = {
+  desktopSm: 1024,
+};
+
 export const containerWidths = [540, 750, 960, 1140, 1540];
 
 export const calculateWidth = width => {
