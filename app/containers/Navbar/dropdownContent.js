@@ -23,4 +23,6 @@ export default {
   [Roles.organizationAdmin]: [...sharedNavbarElements],
   [Roles.participant]: [...sharedNavbarElements],
   [Roles.thirdParty]: [...sharedNavbarElements],
+  [Roles.clinicAdmin]: [...sharedNavbarElements],
+  [Roles.healthSystemAdmin]: [...sharedNavbarElements],
 };

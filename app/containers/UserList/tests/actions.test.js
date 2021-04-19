@@ -20,6 +20,8 @@ describe('UserList actions', () => {
             'third_party',
             'organization_admin',
             'e_intervention_admin',
+            'health_system_admin',
+            'clinic_admin',
           ],
         },
         type: FETCH_USERS,

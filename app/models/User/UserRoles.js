@@ -9,6 +9,8 @@ export const Roles = {
   thirdParty: 'third_party',
   organizationAdmin: 'organization_admin',
   eInterventionAdmin: 'e_intervention_admin',
+  healthSystemAdmin: 'health_system_admin',
+  clinicAdmin: 'clinic_admin',
   allRoles: [
     'admin',
     'team_admin',
@@ -17,6 +19,8 @@ export const Roles = {
     'third_party',
     'organization_admin',
     'e_intervention_admin',
+    'health_system_admin',
+    'clinic_admin',
   ],
 };
 
@@ -31,4 +35,6 @@ export const RolesColors = {
   [Roles.thirdParty]: colors.olive,
   [Roles.organizationAdmin]: colors.mystic,
   [Roles.eInterventionAdmin]: colors.vividPink,
+  [Roles.healthSystemAdmin]: colors.zirkon,
+  [Roles.clinicAdmin]: colors.botticelli,
 };
