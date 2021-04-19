@@ -23,3 +23,10 @@ export const CHARACTER_POSITIONS = {
     y: POSITION_VALUES.maxYPosition,
   },
 };
+
+const offsetFromBottom = 50;
+
+export const characterInitialPosition = {
+  x: CHARACTER_POSITIONS.bottomRightCorner.x,
+  y: CHARACTER_POSITIONS.bottomRightCorner.y - offsetFromBottom,
+};
