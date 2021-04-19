@@ -11,6 +11,7 @@ import {
   nameQuestion,
   currencyQuestion,
   thirdPartyQuestion,
+  phoneQuestion,
 } from 'models/Session/QuestionTypes';
 
 import currencyQuestionReducer from './CurrencyQuestion/reducer';
@@ -38,7 +39,7 @@ const questionDataReducer = (question, data) => {
       return multiQuestionReducer(question, data);
     case textboxQuestion.id:
       return textboxQuestionReducer(question, data);
-    case phoneQuestionReducer(question, data):
+    case phoneQuestion.id:
       return phoneQuestionReducer(question, data);
     case dateQuestion.id:
       return dateQuestionReducer(question, data);
