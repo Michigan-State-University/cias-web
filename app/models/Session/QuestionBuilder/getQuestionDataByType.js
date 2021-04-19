@@ -14,12 +14,12 @@ export const getQuestionDataByType = type => {
     case singleQuestion.id:
       return {
         variable: { name: '' },
-        data: [{ payload: '', value: '' }],
+        data: [{ payload: '', value: '1' }],
       };
 
     case multiQuestion.id:
       return {
-        data: [{ payload: '', variable: { name: '', value: '' } }],
+        data: [{ payload: '', variable: { name: '', value: '1' } }],
       };
 
     case gridQuestion.id:
@@ -32,8 +32,8 @@ export const getQuestionDataByType = type => {
                 { variable: { name: '' }, payload: '' },
               ],
               columns: [
-                { variable: { value: '' }, payload: '' },
-                { variable: { value: '' }, payload: '' },
+                { variable: { value: '1' }, payload: '' },
+                { variable: { value: '2' }, payload: '' },
               ],
             },
           },

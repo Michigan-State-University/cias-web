@@ -1,6 +1,6 @@
 import { colors } from 'theme/colors';
 import { fontSizes } from 'theme/fonts';
-import { CHARACTER_POSITIONS } from 'utils/characterConstants';
+import { characterInitialPosition } from 'utils/characterConstants';
 
 const borders = {
   borderRadius: '5px',
@@ -21,7 +21,7 @@ const boxShadows = {
 const elements = {
   navbarHeight: 70,
   draggableContainerSize: 702,
-  characterInitialPosition: CHARACTER_POSITIONS.bottomRightCorner,
+  characterInitialPosition,
   grid: { firstColWidth: 300, colWidth: 80, leftPadding: 40 },
 };
 

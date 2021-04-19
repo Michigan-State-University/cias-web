@@ -32,6 +32,8 @@ const TextVoicePreviewInput = ({
   audioInstance,
   phoneticLoading,
   isAnimationOngoing,
+  boxPx,
+  boxPy,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioButtonDisabled =
@@ -62,8 +64,8 @@ const TextVoicePreviewInput = ({
     <Column>
       <Box
         bg={themeColors.highlight}
-        px={21}
-        py={14}
+        px={boxPx}
+        py={boxPy}
         justify="center"
         align="center"
         minWidth={300}
@@ -106,6 +108,13 @@ TextVoicePreviewInput.propTypes = {
   audioInstance: PropTypes.shape(AudioWrapper),
   phoneticLoading: PropTypes.bool,
   isAnimationOngoing: PropTypes.bool,
+  boxPy: PropTypes.number,
+  boxPx: PropTypes.number,
+};
+
+TextVoicePreviewInput.defaultProps = {
+  boxPy: 14,
+  boxPx: 21,
 };
 
 const mapStateToProps = createStructuredSelector({

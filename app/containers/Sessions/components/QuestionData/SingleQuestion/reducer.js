@@ -1,3 +1,5 @@
+import { calculateNextValue } from 'utils/sequenceUtils';
+
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
 import { UPDATE_VARIABLE } from '../constants';
 
@@ -10,7 +12,9 @@ const singleQuestionReducer = (question, payload) => {
       }
 
       question.body.data.push({
-        value: '',
+        value: `${calculateNextValue(
+          question.body.data.map(({ value }) => +value),
+        )}`,
         payload: '',
       });
       return question;

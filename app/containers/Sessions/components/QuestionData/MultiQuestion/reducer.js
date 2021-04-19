@@ -1,3 +1,5 @@
+import { calculateNextValue } from 'utils/sequenceUtils';
+
 import { ADD, UPDATE, REMOVE } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
@@ -9,7 +11,12 @@ const multiQuestionReducer = (question, payload) => {
       }
 
       question.body.data.push({
-        variable: { name: '', value: '' },
+        variable: {
+          name: '',
+          value: `${calculateNextValue(
+            question.body.data.map(({ variable: { value } }) => +value),
+          )}`,
+        },
         payload: '',
       });
       return question;
