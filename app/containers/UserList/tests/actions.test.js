@@ -18,6 +18,8 @@ describe('UserList actions', () => {
             'participant',
             'researcher',
             'third_party',
+            'organization_admin',
+            'e_intervention_admin',
           ],
         },
         type: FETCH_USERS,

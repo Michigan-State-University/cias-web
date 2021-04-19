@@ -40,6 +40,11 @@ const navbarTabs = {
     interventionsTab(navbarNames.researcherInterventions),
     accountsTab(navbarNames.researcherAccounts),
   ],
+  [Roles.eInterventionAdmin]: [
+    interventionsTab(navbarNames.researcherInterventions),
+    accountsTab(navbarNames.researcherAccounts),
+  ],
+  [Roles.organizationAdmin]: [],
   [Roles.participant]: [],
   [Roles.thirdParty]: [],
   [Roles.guest]: [

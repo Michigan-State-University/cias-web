@@ -15,10 +15,12 @@ export const Roles = {
     'participant',
     'researcher',
     'third_party',
-    'organizationAdmin',
-    'eInterventionAdmin',
+    'organization_admin',
+    'e_intervention_admin',
   ],
 };
+
+export const ResearcherRoles = [Roles.eInterventionAdmin, Roles.researcher];
 
 export const RolesColors = {
   [Roles.participant]: colors.jungleGreenLighter,
