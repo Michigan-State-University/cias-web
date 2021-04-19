@@ -24,7 +24,11 @@ export const Roles = {
   ],
 };
 
-export const ResearcherRoles = [Roles.eInterventionAdmin, Roles.researcher];
+export const ResearcherRoles = [
+  Roles.eInterventionAdmin,
+  Roles.researcher,
+  Roles.teamAdmin,
+];
 
 export const RolesColors = {
   [Roles.participant]: colors.jungleGreenLighter,
