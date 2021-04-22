@@ -35,6 +35,7 @@ const OrganizationItem = ({ organization: { id, name } }) => {
         const buttonActive = location.pathname === path;
         return (
           <Text
+            clickable
             key={index}
             my={20}
             onClick={() => history.push(path)}
@@ -51,6 +52,7 @@ const OrganizationItem = ({ organization: { id, name } }) => {
   return (
     <>
       <Box
+        clickable
         bg={active ? themeColors.secondary : ''}
         bgOpacity={active ? 0.2 : 1}
         onClick={redirect}
@@ -59,6 +61,7 @@ const OrganizationItem = ({ organization: { id, name } }) => {
         ml={-10}
         display="flex"
         align="center"
+        mb={5}
       >
         <Icon
           fill={active ? themeColors.secondary : ''}

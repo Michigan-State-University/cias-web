@@ -25,7 +25,7 @@ import Spinner from 'components/Spinner';
 import Box from 'components/Box';
 
 import messages from './messages';
-import OrganizationItem from '../../components/organizationItem';
+import OrganizationItem from '../../components/OrganizationItem';
 
 const ReportingDashboardPanel = ({
   organizations,

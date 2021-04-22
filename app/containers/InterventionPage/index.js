@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+import { injectReducer, injectSaga } from 'redux-injectors';
 import { Row, Col } from 'react-grid-system';
 import { Markup } from 'interweave';
 
@@ -58,10 +58,6 @@ export function InterventionPage({
   user,
   editUser,
 }) {
-  useInjectReducer({ key: 'interventions', reducer: interventionsReducer });
-  useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
-  useInjectSaga({ key: 'createIntervention', saga: createInterventionSaga });
-
   const { teamName } = user ?? {};
 
   const [valueFilteredInterventions, filterValue, setFilterValue] = useFilter(
@@ -258,4 +254,7 @@ export default compose(
   withConnect,
   memo,
   injectIntl,
+  injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
+  injectSaga({ key: 'createIntervention', saga: createInterventionSaga }),
+  injectReducer({ key: 'interventions', reducer: interventionsReducer }),
 )(InterventionPage);
