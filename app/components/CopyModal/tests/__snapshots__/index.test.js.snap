@@ -556,6 +556,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
               class="c24"
               color="primary"
               disabled=""
+              radius="100px"
             />
           </div>
         </div>

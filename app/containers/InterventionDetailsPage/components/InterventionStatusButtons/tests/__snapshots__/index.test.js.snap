@@ -75,6 +75,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
         <button
           class="c2 c3"
           color="primary"
+          radius="100px"
         >
           Download CSV
         </button>
@@ -172,6 +173,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
   <button
     class="c2 c3"
     color="primary"
+    radius="100px"
   >
     Generate new CSV
   </button>
@@ -279,6 +281,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
         <button
           class="c2 c3"
           color="primary"
+          radius="100px"
         >
           Download CSV
         </button>
@@ -376,6 +379,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
   <button
     class="c2 c3"
     color="primary"
+    radius="100px"
   >
     Generate new CSV
   </button>
@@ -383,6 +387,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
     class="c5 c6"
     color="primary"
     data-cy="publish-session-button"
+    radius="100px"
   >
     Publish Intervention
   </button>
@@ -490,6 +495,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
         <button
           class="c2 c3"
           color="primary"
+          radius="100px"
         >
           Download CSV
         </button>
@@ -587,12 +593,14 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
   <button
     class="c2 c3"
     color="primary"
+    radius="100px"
   >
     Generate new CSV
   </button>
   <button
     class="c5 c6"
     color="primary"
+    radius="100px"
   >
     Close Intervention
   </button>

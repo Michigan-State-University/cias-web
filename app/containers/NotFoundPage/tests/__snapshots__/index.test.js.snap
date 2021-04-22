@@ -62,8 +62,9 @@ exports[`<NotFoundPage /> should render and match the snapshot 1`] = `
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; max-width: 100%; margin-left: 0%;"
         >
           <button
-            class="StyledButton-d2s0gt-0 jFzyBC"
+            class="StyledButton-d2s0gt-0 dRqMjJ"
             color="primary"
+            radius="100px"
             width="180"
           >
             Log in

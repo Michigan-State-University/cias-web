@@ -3505,6 +3505,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   class="c27"
                   color="primary"
                   disabled=""
+                  radius="100px"
                   width="180px"
                 >
                   Continue

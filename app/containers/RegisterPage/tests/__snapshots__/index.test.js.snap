@@ -132,9 +132,10 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           />
         </div>
         <button
-          class="StyledButton-d2s0gt-0 jvhefl"
+          class="StyledButton-d2s0gt-0 drgoYy"
           color="primary"
           height="46"
+          radius="100px"
           type="submit"
         >
           Register
@@ -276,9 +277,10 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           />
         </div>
         <button
-          class="StyledButton-d2s0gt-0 jvhefl"
+          class="StyledButton-d2s0gt-0 drgoYy"
           color="primary"
           height="46"
+          radius="100px"
           type="submit"
         >
           Register

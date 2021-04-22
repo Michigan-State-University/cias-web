@@ -294,6 +294,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
             <button
               class="c11"
               color="primary"
+              radius="100px"
               type="button"
             >
               Cancel
@@ -302,6 +303,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
               class="c12"
               color="warning"
               data-cy="confirmation-box-confirm-button"
+              radius="100px"
               type="button"
             >
               Confirm
@@ -640,6 +642,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
             <button
               class="c11"
               color="primary"
+              radius="100px"
               type="button"
             >
               Cancel
@@ -648,6 +651,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
               class="c12"
               color="warning"
               data-cy="confirmation-box-confirm-button"
+              radius="100px"
               type="button"
             >
               Confirm

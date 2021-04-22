@@ -18,9 +18,10 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
         data-tip="true"
       >
         <button
-          class="StyledButton-d2s0gt-0 bcnphw"
+          class="StyledButton-d2s0gt-0 iIeWSn"
           color="primary"
           disabled=""
+          radius="100px"
           width="100%"
         >
           Go to dashboard

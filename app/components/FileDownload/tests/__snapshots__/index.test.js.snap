@@ -28,6 +28,7 @@ exports[`<FileDownload /> should match the snapshot 1`] = `
     <button
       class="c1"
       color="primary"
+      radius="100px"
     >
       test
     </button>

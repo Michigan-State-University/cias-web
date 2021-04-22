@@ -34,7 +34,7 @@ import ReportsPage from 'containers/ParticipantDashboard/components/ReportsTab/L
 import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReportsPage';
 import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
 import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
-import RaportingDashboardPage from 'containers/RaportingDashboardPage/Loadable';
+import ReportingDashboardPage from 'containers/ReportingDashboardPage/Loadable';
 
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 
@@ -73,7 +73,7 @@ export function App({ user }) {
         case Roles.eInterventionAdmin:
           return <InterventionPage />;
         case Roles.organizationAdmin:
-          return <RaportingDashboardPage />;
+          return <ReportingDashboardPage />;
         default:
           return NotFoundPage;
       }
@@ -109,6 +109,49 @@ export function App({ user }) {
           sidebarProps={{
             sidebarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/organization/:organizationId"
+          component={ReportingDashboardPage}
+          protectedRoute
+          allowedRoles={[Roles.admin, Roles.eInterventionAdmin]}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+          }}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/organization/:organizationId/dashboard-setup"
+          component={ReportingDashboardPage}
+          protectedRoute
+          allowedRoles={[Roles.admin, Roles.eInterventionAdmin]}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+          }}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/organization/:organizationId/dashboard"
+          component={ReportingDashboardPage}
+          protectedRoute
+          allowedRoles={[
+            Roles.admin,
+            Roles.eInterventionAdmin,
+            Roles.organizationAdmin,
+          ]}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+          }}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
           }}
         />
         <AppRoute

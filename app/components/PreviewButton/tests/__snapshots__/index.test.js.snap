@@ -66,6 +66,7 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
     class="c2"
     color="secondary"
     height="35"
+    radius="100px"
   >
     <img
       alt="eye"
@@ -148,6 +149,7 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
     color="secondary"
     disabled=""
     height="35"
+    radius="100px"
   >
     <img
       alt="eye"

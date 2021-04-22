@@ -19,6 +19,7 @@ exports[`<Deactivation /> Should render and match the snapshot 1`] = `
   <button
     class="c0"
     color="warning"
+    radius="100px"
     width="180"
   >
     Deactivate account
@@ -45,6 +46,7 @@ exports[`<Deactivation /> Should render and match the snapshot for inactive user
   <button
     class="c0"
     color="primary"
+    radius="100px"
     width="180"
   >
     Activate account

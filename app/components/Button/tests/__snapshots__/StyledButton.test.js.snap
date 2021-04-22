@@ -23,6 +23,7 @@ exports[`<StyledButton /> Should render inverted button and match the snapshot 1
     class="c0"
     color="primary"
     disabled=""
+    radius="100px"
   />
 </div>
 `;
@@ -45,6 +46,7 @@ exports[`<StyledButton /> Should render styled button and match the snapshot 1`]
   <button
     class="c0"
     color="primary"
+    radius="100px"
   />
 </div>
 `;
