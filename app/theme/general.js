@@ -20,6 +20,7 @@ const boxShadows = {
 
 const elements = {
   navbarHeight: 70,
+  sidebarWidth: 300,
   draggableContainerSize: 702,
   characterInitialPosition,
   grid: { firstColWidth: 300, colWidth: 80, leftPadding: 40 },

@@ -136,9 +136,8 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="styled__FillScreenLoader-sc-1aaagww-0 bcnRTW"
+          class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
           data-testid="fullscreen-loader"
-          opacity="0.5"
         >
           <div
             class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"

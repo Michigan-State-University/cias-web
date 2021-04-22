@@ -1,7 +1,9 @@
 import styled from 'styled-components';
+import { Container } from 'react-grid-system';
+
 import { boxShadows, colors, themeColors } from 'theme';
 
-import { Container } from 'react-grid-system';
+import Notification from 'components/Notification';
 
 export const InitialRow = styled(Container)`
   padding: 0 !important;
@@ -34,4 +36,13 @@ export const StatusLabel = styled.button`
 export const FilterText = styled.p`
   color: ${props => (props.active ? colors.white : props.color)};
   white-space: pre;
+`;
+
+export const StyledLink = styled.a`
+  color: ${themeColors.secondary};
+`;
+
+export const StyledNotification = styled(Notification)`
+  position: absolute;
+  right: 16px;
 `;

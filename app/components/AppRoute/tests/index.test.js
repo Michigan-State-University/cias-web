@@ -6,6 +6,7 @@ import { createStore } from 'redux';
 import { MemoryRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 
+import { NAVIGATION } from 'utils/navbarNames';
 import { Roles } from 'models/User/UserRoles';
 import { DEFAULT_LOCALE } from 'i18n';
 
@@ -45,7 +46,7 @@ describe('<AppRoute />', () => {
     allowedRoles: Roles.allRoles,
     component: Component,
     navbarProps: {
-      navbarId: 'default',
+      navbarId: NAVIGATION.DEFAULT,
     },
     location: {},
   };

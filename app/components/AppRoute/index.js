@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
+import { Row, Col } from 'react-grid-system';
 
+import Sidebar from 'containers/Sidebar';
 import Navbar from 'containers/Navbar';
 import { makeSelectUser } from 'global/reducers/auth';
 import { REDIRECT_QUERY_KEY } from 'containers/LoginPage/constants';
-import { MainAppContainer } from './styled';
+import { MainAppContainer, PageContainer, RowBelowNavbar } from './styled';
 
 class AppRoute extends Route {
   render() {
@@ -17,6 +19,7 @@ class AppRoute extends Route {
       allowedRoles,
       user,
       navbarProps,
+      sidebarProps,
       computedMatch,
       location,
     } = this.props;
@@ -37,16 +40,38 @@ class AppRoute extends Route {
     }
 
     if (user && allowedRoles.includes(user.roles[0])) {
+      const isSidebarVisible = Boolean(sidebarProps);
+
       return (
         <>
-          <Navbar
-            navbarProps={navbarProps}
-            match={computedMatch}
-            location={location}
-          />
-          <MainAppContainer id="main-app-container">
-            {super.render()}
-          </MainAppContainer>
+          <PageContainer fluid>
+            <Row nogutter>
+              <Navbar
+                navbarProps={navbarProps}
+                match={computedMatch}
+                location={location}
+              />
+            </Row>
+            <RowBelowNavbar nogutter>
+              {isSidebarVisible && (
+                <Col width="content">
+                  <Sidebar
+                    sidebarProps={sidebarProps}
+                    match={computedMatch}
+                    location={location}
+                  />
+                </Col>
+              )}
+              <Col>
+                <MainAppContainer
+                  id="main-app-container"
+                  $isSidebarVisible={isSidebarVisible}
+                >
+                  {super.render()}
+                </MainAppContainer>
+              </Col>
+            </RowBelowNavbar>
+          </PageContainer>
         </>
       );
     }

@@ -22,7 +22,6 @@ import H1 from 'components/H1';
 import Loader from 'components/Loader';
 import TileRenderer from 'components/TileRenderer';
 import SearchInput from 'components/Input/SearchInput';
-import Notification from 'components/Notification';
 
 import useFilter from 'utils/useFilter';
 import { statusTypes } from 'models/Status/StatusTypes';
@@ -41,10 +40,10 @@ import {
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
 import { GOOGLE_FORM_URL } from 'global/constants';
 
-import { colors, fontSizes, themeColors } from 'theme';
+import { colors, fontSizes } from 'theme';
 import StatusFilter from './StatusFilter';
 import messages from './messages';
-import { InitialRow } from './styled';
+import { InitialRow, StyledLink, StyledNotification } from './styled';
 
 export function InterventionPage({
   fetchInterventionsRequest: fetchInterventions,
@@ -111,20 +110,18 @@ export function InterventionPage({
   };
 
   const FeedbackNotification = (
-    <Notification
+    <StyledNotification
       title={formatMessage(messages.feedbackTitle)}
       description={
-        <a
-          style={{ color: themeColors.secondary }}
+        <StyledLink
           href={GOOGLE_FORM_URL}
           target="_blank"
           onClick={handleFeedbackClick}
         >
           {formatMessage(messages.feedbackDescription)}
-        </a>
+        </StyledLink>
       }
       onClose={handleFeedbackClick}
-      style={{ position: 'absolute', right: '0px' }}
     />
   );
 

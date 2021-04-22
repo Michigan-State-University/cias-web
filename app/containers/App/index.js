@@ -40,7 +40,7 @@ import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 
 import { Roles, ResearcherRoles } from 'models/User/UserRoles';
 
-import navbarNames from 'utils/navbarNames';
+import navbarNames, { NAVIGATION } from 'utils/navbarNames';
 import rootSaga from 'global/sagas/rootSaga';
 import { useInjectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
@@ -103,7 +103,11 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={Roles.allRoles}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: interventionsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
           }}
         />
@@ -114,7 +118,11 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.participant]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: participantReportsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
             activeTab: participantReportsTabId,
           }}
         />
@@ -134,7 +142,7 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'sessions',
+            navbarId: NAVIGATION.SESSIONS,
           }}
         />
         <AppRoute
@@ -144,7 +152,7 @@ export function App({ user }) {
           allowedRoles={Roles.allRoles}
           user
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
           }}
         />
@@ -155,7 +163,7 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'sessions',
+            navbarId: NAVIGATION.SESSIONS,
           }}
         />
         <AppRoute
@@ -165,7 +173,7 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'sessions',
+            navbarId: NAVIGATION.SESSIONS,
           }}
         />
         <AppRoute
@@ -175,7 +183,7 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'sessions',
+            navbarId: NAVIGATION.SESSIONS,
           }}
         />
         <AppRoute
@@ -185,7 +193,7 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'sessions',
+            navbarId: NAVIGATION.SESSIONS,
           }}
         />
         <AppRoute
@@ -195,7 +203,11 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: accountsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
             activeTab: accountsTabId,
           }}
         />
@@ -206,7 +218,11 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, Roles.teamAdmin]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: teamsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
             activeTab: teamsTabId,
           }}
         />
@@ -217,7 +233,10 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, Roles.teamAdmin]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
           }}
         />
         <AppRoute
@@ -230,7 +249,7 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'preview',
+            navbarId: NAVIGATION.PREVIEW,
             navbarName: navbarNames.preview,
           }}
         />
@@ -243,7 +262,7 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'preview',
+            navbarId: NAVIGATION.PREVIEW,
             navbarName: navbarNames.preview,
           }}
         />
@@ -254,7 +273,10 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
           }}
         />
         <AppRoute
@@ -264,7 +286,11 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={Roles.allRoles}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: null,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
             activeTab: null,
           }}
         />
@@ -275,7 +301,11 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, Roles.teamAdmin]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: accountsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
             activeTab: accountsTabId,
           }}
         />

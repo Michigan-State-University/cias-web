@@ -14,4 +14,9 @@ const lineHeights = {
   regular: '150%',
 };
 
-export { fontFamily, fontSizes, lineHeights };
+const fontWeights = {
+  regular: 400,
+  bold: 700,
+};
+
+export { fontFamily, fontSizes, lineHeights, fontWeights };

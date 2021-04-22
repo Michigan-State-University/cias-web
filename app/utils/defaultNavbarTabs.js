@@ -1,4 +1,9 @@
 import { Roles } from 'models/User/UserRoles';
+
+import folder from 'assets/svg/folder.svg';
+import peopleHR from 'assets/svg/peopleHR.svg';
+import peopleHRCircle from 'assets/svg/peopleHRCircle.svg';
+
 import navbarNames from './navbarNames';
 
 export const interventionsTabId = 'sessions';
@@ -8,37 +13,40 @@ export const myTeamTabId = 'myTeam';
 export const participantDashboardTabId = interventionsTabId;
 export const participantReportsTabId = 'reports';
 
-const interventionsTab = message => ({
+const interventionsTab = (message, icon) => ({
   id: interventionsTabId,
   path: '/',
   message,
+  icon,
 });
 
-const accountsTab = message => ({
+const accountsTab = (message, icon) => ({
   id: accountsTabId,
   path: '/users',
   message,
+  icon,
 });
 
-const teamsTab = message => ({
+const teamsTab = (message, icon) => ({
   id: teamsTabId,
   path: '/teams',
   message,
+  icon,
 });
 
-const navbarTabs = {
+const navigationTabs = {
   [Roles.admin]: [
-    interventionsTab(navbarNames.adminInterventions),
-    accountsTab(navbarNames.adminAccounts),
-    teamsTab(navbarNames.adminTeams),
+    interventionsTab(navbarNames.adminInterventions, folder),
+    accountsTab(navbarNames.adminAccounts, peopleHR),
+    teamsTab(navbarNames.adminTeams, peopleHRCircle),
   ],
   [Roles.teamAdmin]: [
-    interventionsTab(navbarNames.adminInterventions),
-    teamsTab(navbarNames.adminTeams),
+    interventionsTab(navbarNames.adminInterventions, folder),
+    teamsTab(navbarNames.adminTeams, peopleHRCircle),
   ],
   [Roles.researcher]: [
-    interventionsTab(navbarNames.researcherInterventions),
-    accountsTab(navbarNames.researcherAccounts),
+    interventionsTab(navbarNames.researcherInterventions, folder),
+    accountsTab(navbarNames.researcherAccounts, peopleHR),
   ],
   [Roles.eInterventionAdmin]: [
     interventionsTab(navbarNames.researcherInterventions),
@@ -56,4 +64,4 @@ const navbarTabs = {
   ],
 };
 
-export default navbarTabs;
+export default navigationTabs;

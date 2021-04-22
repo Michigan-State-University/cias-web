@@ -5,9 +5,9 @@ import { style, layout } from 'components/BaseComponentStyles';
 
 export const FillScreenLoader = styled.div.attrs({
   bg: colors.white,
-  opacity: 0.5,
+  bgOpacity: 0.5,
 })`
-  position: absolute;
+  position: fixed;
   display: flex;
   z-index: 1000;
   justify-content: center;

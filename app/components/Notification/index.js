@@ -14,7 +14,7 @@ import Circle from 'components/Circle';
 import Text from 'components/Text';
 import { CrossButton } from 'components/ActionIcon/styled';
 
-const Notification = ({ title, description, onClose, style }) => (
+const Notification = ({ title, description, onClose, className }) => (
   <Box
     width="max-content"
     bg={colors.white}
@@ -22,7 +22,7 @@ const Notification = ({ title, description, onClose, style }) => (
     borderRadius={10}
     padding={8}
     zIndex={1}
-    {...style}
+    className={className}
   >
     <Row style={{ margin: 0 }}>
       <Col style={{ padding: 8 }}>
@@ -52,7 +52,7 @@ const Notification = ({ title, description, onClose, style }) => (
 );
 
 Notification.propTypes = {
-  style: PropTypes.object,
+  className: PropTypes.string,
   title: PropTypes.string,
   description: PropTypes.node,
   onClose: PropTypes.func,

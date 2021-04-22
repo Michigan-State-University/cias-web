@@ -7,7 +7,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
     style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
   >
     <div
-      class="Box-sc-1vhutan-0 crlRBM"
+      class="Box-sc-1vhutan-0 fTNEzq styled__StyledNotification-ve6hnx-4 eUHyWa"
       width="max-content"
     >
       <div
@@ -53,8 +53,8 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                 font-weight="bold"
               >
                 <a
+                  class="styled__StyledLink-ve6hnx-3 ehXrFS"
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
-                  style="color: rgb(200, 102, 234);"
                   target="_blank"
                 >
                   Share your opinion on CIAS
@@ -400,9 +400,8 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
 exports[`<InterventionPage /> Should render and match the snapshot with loader 1`] = `
 <div>
   <div
-    class="styled__FillScreenLoader-sc-1aaagww-0 bcnRTW"
+    class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
     data-testid="fullscreen-loader"
-    opacity="0.5"
   >
     <div
       class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
@@ -417,9 +416,8 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
 exports[`<InterventionPage /> Should render and match the snapshot without interventions 1`] = `
 <div>
   <div
-    class="styled__FillScreenLoader-sc-1aaagww-0 bcnRTW"
+    class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
     data-testid="fullscreen-loader"
-    opacity="0.5"
   >
     <div
       class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"

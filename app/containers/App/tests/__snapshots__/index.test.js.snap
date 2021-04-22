@@ -3,113 +3,154 @@
 exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="styled__NavbarStyled-spz26p-0 kACPXx"
+    class="styled__PageContainer-sc-8koytx-0 boMXzl"
+    style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
   >
     <div
-      class="Row-y1cs0u-0 YUCXT"
-      width="100%"
+      style="margin-left: 0px; margin-right: 0px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
-        class="Row-y1cs0u-0 styled__StyledLogos-sc-12n1pg-6 dskFsL BTURP"
-      >
-        <a
-          href="/"
-        >
-          <img
-            alt="logo"
-            class="Img-sc-55j3su-0 jveqaA"
-            src="IMAGE_MOCK"
-          />
-        </a>
-        <img
-          class="Img-sc-55j3su-0 inOfMn"
-          src="IMAGE_MOCK"
-        />
-      </div>
-      <div
-        class="Row-y1cs0u-0 eDDots"
-        width="100%"
-      >
-        <a
-          active="1"
-          class="styled__NavbarTabLink-sc-12n1pg-4 kELUrI navbar-tabs"
-          href="/"
-          ml="10"
-        >
-          <p
-            class="Text-e4p0w3-0 pcigz"
-            font-size="15"
-          >
-            Interventions
-          </p>
-        </a>
-        <a
-          class="styled__NavbarTabLink-sc-12n1pg-4 jquOTU navbar-tabs"
-          href="/users"
-          ml="10"
-        >
-          <p
-            class="Text-e4p0w3-0 pcigz"
-            font-size="15"
-          >
-            Manage accounts
-          </p>
-        </a>
-        <a
-          class="styled__NavbarTabLink-sc-12n1pg-4 jquOTU navbar-tabs"
-          href="/teams"
-          ml="10"
-        >
-          <p
-            class="Text-e4p0w3-0 pcigz"
-            font-size="15"
-          >
-            Manage teams
-          </p>
-        </a>
-      </div>
-    </div>
-    <div
-      class="styled__RightPanel-spz26p-1 LyOmU"
-    >
-      <div
-        class="styled__DropDownContainer-spz26p-5 dODhyO"
+        class="styled__NavbarStyled-spz26p-0 kACPXx"
       >
         <div
-          class="styled__AvatarStyled-bn66gh-0 fLsauV"
-          color="#FFFFFF"
-          height="30"
-          width="30"
+          class="Row-y1cs0u-0 eMyAbn"
+          width="100%"
         >
-          <div>
-            FL
+          <div
+            class="Row-y1cs0u-0 styled__StyledLogos-sc-12n1pg-6 dskFsL BTURP"
+          >
+            <a
+              href="/"
+            >
+              <img
+                alt="logo"
+                class="Img-sc-55j3su-0 jveqaA"
+                src="IMAGE_MOCK"
+              />
+            </a>
+            <img
+              class="Img-sc-55j3su-0 inOfMn"
+              src="IMAGE_MOCK"
+            />
           </div>
         </div>
-        <div />
-      </div>
-      <div
-        class="Box-sc-1vhutan-0 gfyFJD user-name-info"
-      >
-        first-name last-name
+        <div
+          class="styled__RightPanel-spz26p-1 LyOmU"
+        >
+          <div
+            class="styled__DropDownContainer-spz26p-5 dODhyO"
+          >
+            <div
+              class="styled__AvatarStyled-bn66gh-0 fLsauV"
+              color="#FFFFFF"
+              height="30"
+              width="30"
+            >
+              <div>
+                FL
+              </div>
+            </div>
+            <div />
+          </div>
+          <div
+            class="Box-sc-1vhutan-0 gfyFJD user-name-info"
+          >
+            first-name last-name
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div
-    class="styled__MainAppContainer-sc-8koytx-0 ycYpJ"
-    id="main-app-container"
-  >
     <div
-      class="styled__FillScreenLoader-sc-1aaagww-0 bcnRTW"
-      data-testid="fullscreen-loader"
-      opacity="0.5"
+      class="styled__RowBelowNavbar-sc-8koytx-2 jSTQFK"
+      style="margin-left: 0px; margin-right: 0px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
     >
       <div
-        class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-        color="#C866EA"
-        size="100"
-        width="6"
-      />
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; max-width: 100%; margin-left: 0%;"
+      >
+        <div
+          class="styled__SidebarStyled-faqctv-0 bYWvzH"
+        >
+          <p
+            class="Text-e4p0w3-0 Comment-j8a9v8-0 eMBtpX dVuurw"
+          >
+            CIAS Panel
+          </p>
+          <div
+            class="Column-sc-4zswzq-0 bdMQZf"
+            width="100%"
+          >
+            <a
+              class="styled__SidebarItemLink-faqctv-1 iiA-dDN"
+              href="/"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="Text-e4p0w3-0 kWYQnv"
+                font-size="15"
+                font-weight="bold"
+              >
+                Interventions
+              </p>
+            </a>
+            <a
+              class="styled__SidebarItemLink-faqctv-1 kNCDom"
+              href="/users"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="Text-e4p0w3-0 kWYQnv"
+                font-size="15"
+                font-weight="bold"
+              >
+                Manage accounts
+              </p>
+            </a>
+            <a
+              class="styled__SidebarItemLink-faqctv-1 kNCDom"
+              href="/teams"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="Text-e4p0w3-0 kWYQnv"
+                font-size="15"
+                font-weight="bold"
+              >
+                Manage teams
+              </p>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div
+        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+      >
+        <div
+          class="styled__MainAppContainer-sc-8koytx-1 jLvpNP"
+          id="main-app-container"
+        >
+          <div
+            class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
+            data-testid="fullscreen-loader"
+          >
+            <div
+              class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
+              color="#C866EA"
+              size="100"
+              width="6"
+            />
+          </div>
+        </div>
+      </div>
     </div>
+    <span
+      style="display: table; clear: both;"
+    />
   </div>
 </div>
 `;
