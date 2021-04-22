@@ -394,6 +394,7 @@ Object {
             class="c17"
             color="primary"
             disabled=""
+            radius="100px"
           />
         </div>
       </div>
@@ -484,9 +485,10 @@ Object {
         class="Row-y1cs0u-0 bHvccM"
       >
         <button
-          class="StyledButton-d2s0gt-0 bDJTsP"
+          class="StyledButton-d2s0gt-0 gZIauE"
           color="primary"
           disabled=""
+          radius="100px"
         />
       </div>
     </div>

@@ -20,6 +20,7 @@ import DefaultSidebar from './components/DefaultSidebar';
 
 import { SidebarStyled } from './styled';
 import messages from './messages';
+import ReportingDashboardPanel from './containers/ReportingDashboardPanel';
 
 export function Sidebar({ user: { roles }, sidebarProps }) {
   const { formatMessage } = useIntl();
@@ -39,6 +40,7 @@ export function Sidebar({ user: { roles }, sidebarProps }) {
         {formatMessage(messages.sidebarNavigationHeader)}
       </Comment>
       {renderSidebar()}
+      <ReportingDashboardPanel />
     </SidebarStyled>
   );
 }

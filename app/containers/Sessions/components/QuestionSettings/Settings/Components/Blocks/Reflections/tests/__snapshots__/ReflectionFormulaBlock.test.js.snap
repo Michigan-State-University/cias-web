@@ -6,8 +6,9 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
     class="Column-sc-4zswzq-0 ekpwZH"
   >
     <button
-      class="StyledButton-d2s0gt-0 fMiMtZ"
+      class="StyledButton-d2s0gt-0 iNDYmW"
       color="primary"
+      radius="100px"
     >
       Move Narrator to default position
     </button>

@@ -113,9 +113,10 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 eoiJLt"
+            class="StyledButton-d2s0gt-0 lovtjK"
             color="primary"
             disabled=""
+            radius="100px"
             width="260"
           >
             Send invitation
@@ -233,9 +234,10 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 eoiJLt"
+            class="StyledButton-d2s0gt-0 lovtjK"
             color="primary"
             disabled=""
+            radius="100px"
             width="260"
           >
             Send invitation
@@ -353,9 +355,10 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 eoiJLt"
+            class="StyledButton-d2s0gt-0 lovtjK"
             color="primary"
             disabled=""
+            radius="100px"
             width="260"
           >
             Send invitation

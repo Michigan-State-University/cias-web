@@ -40,7 +40,7 @@ const getDisabledStyles = inverted => {
 export const StyledButton = styled.button`
   width: 100%;
   height: 40px;
-  border-radius: 100px;
+  border-radius: ${props => props.radius};
   cursor: pointer;
   border: none;
   outline: none;
@@ -66,10 +66,12 @@ StyledButton.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,
   hoverable: PropTypes.bool,
+  radius: PropTypes.string,
 };
 
 StyledButton.defaultProps = {
   color: 'primary',
   disabled: false,
   hoverable: false,
+  radius: '100px',
 };
