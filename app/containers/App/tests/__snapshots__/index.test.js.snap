@@ -156,7 +156,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 0px; padding-right: 0px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <div
-          class="styled__MainAppContainer-sc-8koytx-1 jLvpNP"
+          class="styled__MainAppContainer-sc-8koytx-1 ktWSOc"
           id="main-app-container"
         >
           <div

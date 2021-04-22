@@ -11,7 +11,7 @@ export const PageContainer = styled(Container)`
 export const MainAppContainer = styled.div`
   position: relative;
   margin-top: ${elements.navbarHeight}px;
-  height: calc(100vh - ${elements.navbarHeight}px);
+  height: calc(100vh - ${elements.navbarHeight}px) !important;
   width: ${({ $isSidebarVisible }) =>
     `calc(100vw - ${$isSidebarVisible ? elements.sidebarWidth : 0}px)`};
   overflow: auto;

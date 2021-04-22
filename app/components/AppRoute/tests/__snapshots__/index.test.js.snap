@@ -128,7 +128,7 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
 .c12 {
   position: relative;
   margin-top: 70px;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 70px) !important;
   width: calc(100vw - 0px);
   overflow: auto;
 }

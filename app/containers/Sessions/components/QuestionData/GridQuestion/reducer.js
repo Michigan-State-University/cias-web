@@ -23,7 +23,9 @@ const gridQuestionReducer = (question, payload) => {
       question.body.data[0].payload.columns.push({
         variable: {
           value: `${calculateNextValue(
-            question.body.data[0].payload.columns.map(({ value }) => +value),
+            question.body.data[0].payload.columns.map(
+              ({ variable: { value } }) => +value,
+            ),
           )}`,
         },
         payload: '',
