@@ -8,11 +8,16 @@ const ALLOWED_DOWNLOAD_INTERVENTION_CSV = [
   Roles.teamAdmin,
   Roles.researcher,
 ];
+const DISPLAY_ORGANIZATION_SIDEBAR = [Roles.admin, Roles.eInterventionAdmin];
 
 export const RolePermissions = roles => ({
   canEditLogo: includesArray(roles, ALLOWED_EDIT_LOGO),
   canDownloadInterventionCsv: includesArray(
     roles,
     ALLOWED_DOWNLOAD_INTERVENTION_CSV,
+  ),
+  canDisplayOrganizationSidebar: includesArray(
+    roles,
+    DISPLAY_ORGANIZATION_SIDEBAR,
   ),
 });

@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -16,6 +16,7 @@ import { NAVIGATION } from 'utils/navbarNames';
 
 import Comment from 'components/Text/Comment';
 
+import { RolePermissions } from 'models/User/RolePermissions';
 import DefaultSidebar from './components/DefaultSidebar';
 
 import { SidebarStyled } from './styled';
@@ -24,6 +25,8 @@ import ReportingDashboardPanel from './containers/ReportingDashboardPanel';
 
 export function Sidebar({ user: { roles }, sidebarProps }) {
   const { formatMessage } = useIntl();
+
+  const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
 
   const { activeTab, sidebarId } = sidebarProps || {};
 
@@ -40,7 +43,9 @@ export function Sidebar({ user: { roles }, sidebarProps }) {
         {formatMessage(messages.sidebarNavigationHeader)}
       </Comment>
       {renderSidebar()}
-      <ReportingDashboardPanel />
+      {rolePermissions.canDisplayOrganizationSidebar && (
+        <ReportingDashboardPanel />
+      )}
     </SidebarStyled>
   );
 }
