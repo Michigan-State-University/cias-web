@@ -16,6 +16,7 @@ import { NAVIGATION } from 'utils/navbarNames';
 
 import Comment from 'components/Text/Comment';
 
+import { Roles } from 'models/User/UserRoles';
 import DefaultSidebar from './components/DefaultSidebar';
 
 import { SidebarStyled } from './styled';
@@ -40,7 +41,8 @@ export function Sidebar({ user: { roles }, sidebarProps }) {
         {formatMessage(messages.sidebarNavigationHeader)}
       </Comment>
       {renderSidebar()}
-      <ReportingDashboardPanel />
+      {roles.includes(Roles.eInterventionAdmin) ||
+        (roles.includes(Roles.admin) && <ReportingDashboardPanel />)}
     </SidebarStyled>
   );
 }
