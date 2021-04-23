@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Col as GCol } from 'react-grid-system';
 
+import { margin, layout } from 'components/BaseComponentStyles';
+
 const mapFlexProperties = property => {
   switch (property) {
     case 'start':
@@ -18,6 +20,8 @@ export const Col = styled(GCol)`
   display: flex;
   flex-direction: column;
   align-items: ${({ align }) => mapFlexProperties(align ?? 'flex-start')};
+  ${layout};
+  ${margin};
 `;
 
 Col.propTypes = {

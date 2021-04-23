@@ -2,9 +2,8 @@
 
 exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-1vhutan-0 dCliJn"
+  class="Box-sc-1vhutan-0 laeLGt"
   display="flex"
-  height="100%"
   width="100%"
 >
   <div

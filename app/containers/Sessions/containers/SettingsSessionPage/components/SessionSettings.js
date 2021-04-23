@@ -42,6 +42,11 @@ const SessionSettings = ({
   interventionStatus,
   googleTtsVoice,
 }) => {
+  useInjectReducer({ key: 'intervention', reducer: interventionReducer });
+  useInjectReducer({ key: 'questions', reducer: questionsReducer });
+  useInjectSaga({ key: 'editSession', saga: editSessionSaga });
+  useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
+
   const [confirmationOption, setConfirmationOption] = useState('');
   const dismissConfirmation = () => setConfirmationOption('');
   const isConfirmationBoxVisible = confirmationOption !== '';
@@ -70,10 +75,6 @@ const SessionSettings = ({
     }
     dismissConfirmation();
   };
-  useInjectReducer({ key: 'intervention', reducer: interventionReducer });
-  useInjectReducer({ key: 'questions', reducer: questionsReducer });
-  useInjectSaga({ key: 'editSession', saga: editSessionSaga });
-  useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
 
   const isNarratorActive = some(narratorSettings, setting => setting);
 

@@ -32,6 +32,13 @@ import {
   EDIT_PHONE_NUMBER_PREVIEW_SUCCESS,
   EDIT_PHONE_NUMBER_PREVIEW_ERROR,
   RESET_PHONE_NUMBER_PREVIEW,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
+  VERIFICATION_CODE_REQUEST,
+  VERIFICATION_CODE_SUCCESS,
+  VERIFICATION_CODE_ERROR,
+  VERIFICATION_CODE_NEEDED,
 } from './constants';
 
 export const logIn = user => actionBuilder(LOG_IN_USER, { user });
@@ -102,3 +109,22 @@ export const sendSmsTokenError = error =>
 
 export const changeErrorStatus = (error, value) =>
   actionBuilder(CHANGE_ERROR_STATUS, { error, value });
+
+export const loginRequest = (email, password) =>
+  actionBuilder(LOGIN_REQUEST, { email, password });
+
+export const loginSuccess = () => actionBuilder(LOGIN_SUCCESS);
+
+export const loginError = error => actionBuilder(LOGIN_ERROR, { error });
+
+export const verificationCodeNeeded = () =>
+  actionBuilder(VERIFICATION_CODE_NEEDED, {});
+
+export const verificationCodeRequest = verificationCode =>
+  actionBuilder(VERIFICATION_CODE_REQUEST, { verificationCode });
+
+export const verificationCodeSuccess = () =>
+  actionBuilder(VERIFICATION_CODE_SUCCESS);
+
+export const verificationCodeError = error =>
+  actionBuilder(VERIFICATION_CODE_ERROR, { error });

@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 
-export const selectAuth = state => state.auth;
+import { initialState } from './reducer';
+
+export const selectAuth = state => state.auth || initialState;
 
 export const makeSelectAuth = () =>
   createSelector(
@@ -36,4 +38,22 @@ export const makeSelectLoaders = loader =>
   createSelector(
     selectAuth,
     authState => (loader ? authState.loaders[loader] : authState.loaders),
+  );
+
+export const makeSelectLoginFormData = () =>
+  createSelector(
+    selectAuth,
+    authState => authState.loginFormData,
+  );
+
+export const makeSelectVerificationNeeded = () =>
+  createSelector(
+    selectAuth,
+    authState => authState.verificationCodeNeeded,
+  );
+
+export const makeSelectVerificationSuccess = () =>
+  createSelector(
+    selectAuth,
+    authState => authState.verificationCodeSuccess,
   );
