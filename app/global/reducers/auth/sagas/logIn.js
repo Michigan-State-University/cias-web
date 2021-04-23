@@ -1,15 +1,21 @@
-import { put, takeLatest, call, select } from 'redux-saga/effects';
+import { put, takeLatest, call, select, delay } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axios from 'axios';
 
 import LocalStorageService from 'utils/localStorageService';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
+import { HttpStatusCodes } from 'utils/constants';
 import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
-import { logIn } from 'global/reducers/auth/actions';
+import { responseStatusEquals } from 'utils/axiosUtils';
 
 import { makeSelectLocation } from 'containers/App/selectors';
-import { LOGIN_REQUEST, REDIRECT_QUERY_KEY } from './constants';
-import { loginError, loginSuccess } from './actions';
+import {
+  logIn,
+  loginError,
+  loginSuccess,
+  verificationCodeNeeded,
+} from '../actions';
+import { LOGIN_REQUEST, REDIRECT_QUERY_KEY } from '../constants';
 
 function* login({ payload: { email, password } }) {
   const requestURL = `v1/auth/sign_in`;
@@ -17,10 +23,14 @@ function* login({ payload: { email, password } }) {
   try {
     const {
       data: { data },
-    } = yield axios.post(requestURL, {
-      email,
-      password,
-    });
+    } = yield axios.post(
+      requestURL,
+      {
+        email,
+        password,
+      },
+      { withCredentials: true },
+    );
     const mappedUser = mapCurrentUser(data);
     yield call(LocalStorageService.setState, { user: { ...mappedUser } });
     yield put(logIn(mappedUser));
@@ -33,10 +43,14 @@ function* login({ payload: { email, password } }) {
       yield put(push(decodeURIComponent(queryParams.get(REDIRECT_QUERY_KEY))));
     else yield put(push('/'));
   } catch (error) {
+    yield delay(300);
     yield put(loginError(requestErrorMessageHandler(error)));
+
+    if (responseStatusEquals(error.response, HttpStatusCodes.FORBIDDEN))
+      yield put(verificationCodeNeeded());
   }
 }
 
-export default function* loginPageSaga() {
+export default function* loginSaga() {
   yield takeLatest(LOGIN_REQUEST, login);
 }

@@ -126,6 +126,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
   background-color: transparent;
   border-color: transparent;
+  margin-right: 0;
   height: 50px;
   padding: 5px;
   font-size: 15px;

@@ -166,6 +166,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as multiline 1
   padding: 12px;
   border: 1px solid #E9F1FB;
   border-radius: 5px;
+  margin-right: 0;
   width: 100%;
   height: auto;
   background-color: transparent;
@@ -1697,6 +1698,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as singleline 
   border-radius: 5px;
   background-color: transparent;
   border-color: transparent;
+  margin-right: 0;
   height: 50px;
   padding: 0;
   font-size: 14px;

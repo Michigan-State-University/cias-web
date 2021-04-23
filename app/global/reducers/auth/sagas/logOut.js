@@ -3,8 +3,7 @@ import { push } from 'connected-react-router';
 
 import LocalStorageService from 'utils/localStorageService';
 
-import { REDIRECT_QUERY_KEY } from 'containers/LoginPage/constants';
-import { LOG_OUT } from '../constants';
+import { LOG_OUT, REDIRECT_QUERY_KEY } from '../constants';
 
 export function* logOut(
   { payload: { redirectTo } } = { payload: { redirectTo: null } },

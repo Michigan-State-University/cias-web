@@ -37,17 +37,34 @@ import {
   EDIT_PHONE_NUMBER_PREVIEW_SUCCESS,
   EDIT_PHONE_NUMBER_PREVIEW_ERROR,
   RESET_PHONE_NUMBER_PREVIEW,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
+  VERIFICATION_CODE_NEEDED,
+  VERIFICATION_CODE_REQUEST,
+  VERIFICATION_CODE_SUCCESS,
+  VERIFICATION_CODE_ERROR,
 } from './constants';
 
 export const initialState = {
   user: null,
   phoneNumberPreview: null,
+  verificationCodeNeeded: false,
+  verificationCodeSuccess: false,
+  loginFormData: {
+    email: '',
+    password: '',
+  },
   errors: {
+    loginError: null,
+    verificationCodeError: null,
     changePasswordError: null,
     changeEmailError: null,
     changePhoneNumberError: null,
   },
   loaders: {
+    loginLoading: false,
+    verificationCodeLoading: false,
     changePasswordLoading: false,
     changeEmailLoading: false,
     changePhoneNumberLoading: false,
@@ -68,6 +85,7 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.user = payload.user;
         draft.cache.user = state.user;
         break;
+
       case LOG_OUT:
         draft.user = null;
         draft.cache.user = null;
@@ -80,10 +98,12 @@ export const authReducer = (state = initialState, { type, payload }) =>
           ...payload.user,
         };
         break;
+
       case EDIT_USER_SUCCESS:
         draft.user = payload.user;
         draft.cache.user = payload.user;
         break;
+
       case EDIT_USER_ERROR:
         draft.user = state.cache.user;
         break;
@@ -92,10 +112,12 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.errors.changePasswordError = null;
         draft.loaders.changePasswordLoading = true;
         break;
+
       case CHANGE_PASSWORD_SUCCESS:
         draft.loaders.changePasswordLoading = false;
         draft.errors.changePasswordError = null;
         break;
+
       case CHANGE_PASSWORD_ERROR:
         draft.loaders.changePasswordLoading = false;
         draft.errors.changePasswordError = payload.error;
@@ -105,11 +127,13 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.errors.changeEmailError = null;
         draft.loaders.changeEmailLoading = true;
         break;
+
       case CHANGE_EMAIL_SUCCESS:
         draft.loaders.changeEmailLoading = false;
         draft.errors.changeEmailError = null;
         draft.user.email = payload.user.email;
         break;
+
       case CHANGE_EMAIL_ERROR:
         draft.loaders.changeEmailLoading = false;
         draft.errors.changeEmailError = payload.error;
@@ -118,10 +142,12 @@ export const authReducer = (state = initialState, { type, payload }) =>
       case ADD_AVATAR_REQUEST:
         draft.user.avatar = payload.imageUrl;
         break;
+
       case ADD_AVATAR_SUCCESS:
         draft.user = payload.user;
         draft.cache.user = state.user;
         break;
+
       case ADD_AVATAR_ERROR:
         draft.user = state.cache.user;
         break;
@@ -129,10 +155,12 @@ export const authReducer = (state = initialState, { type, payload }) =>
       case DELETE_AVATAR_REQUEST:
         draft.user.avatar = null;
         break;
+
       case DELETE_AVATAR_SUCCESS:
         draft.user = payload.user;
         draft.cache.user = state.user;
         break;
+
       case DELETE_AVATAR_ERROR:
         draft.user = draft.cache.user;
         break;
@@ -146,12 +174,14 @@ export const authReducer = (state = initialState, { type, payload }) =>
         draft.loaders.changePhoneNumberLoading = true;
         draft.cache.user = state.user;
         break;
+
       case CHANGE_PHONE_NUMBER_SUCCESS:
         draft.loaders.changePhoneNumberLoading = false;
         draft.errors.changePhoneNumberError = null;
         draft.cache.user = null;
         draft.user.phoneNumber = payload.phoneNumber;
         break;
+
       case CHANGE_PHONE_NUMBER_ERROR:
         draft.loaders.changePhoneNumberLoading = false;
         draft.user = state.cache.user;
@@ -161,9 +191,11 @@ export const authReducer = (state = initialState, { type, payload }) =>
       case SEND_SMS_TOKEN_REQUEST:
         draft.loaders.smsTokenLoading = true;
         break;
+
       case SEND_SMS_TOKEN_SUCCESS:
         draft.loaders.smsTokenLoading = false;
         break;
+
       case SEND_SMS_TOKEN_ERROR:
         draft.loaders.smsTokenLoading = false;
         break;
@@ -171,16 +203,20 @@ export const authReducer = (state = initialState, { type, payload }) =>
       case CONFIRM_PHONE_NUMBER_REQUEST:
         draft.loaders.confirmPhoneNumberLoading = true;
         break;
+
       case CONFIRM_PHONE_NUMBER_SUCCESS:
         draft.loaders.confirmPhoneNumberLoading = false;
         if (state.phoneNumberPreview) draft.phoneNumberPreview.confirmed = true;
         else draft.user.phone.confirmed = true;
         break;
+
       case CONFIRM_PHONE_NUMBER_ERROR:
         draft.loaders.confirmPhoneNumberLoading = false;
         break;
+
       case EDIT_PHONE_NUMBER_PREVIEW_REQUEST:
         break;
+
       case EDIT_PHONE_NUMBER_PREVIEW_SUCCESS:
         const { phoneNumber, isPreview } = payload;
         if (isPreview) {
@@ -190,6 +226,7 @@ export const authReducer = (state = initialState, { type, payload }) =>
         else draft.user.phone = phoneNumber;
         draft.cache.user = state.user;
         break;
+
       case EDIT_PHONE_NUMBER_PREVIEW_ERROR:
         if (payload.isPreview) {
           draft.phoneNumberPreview = state.cache.phoneNumberPreview;
@@ -197,8 +234,55 @@ export const authReducer = (state = initialState, { type, payload }) =>
           draft.user = state.cache.user;
         }
         break;
+
       case RESET_PHONE_NUMBER_PREVIEW:
         draft.phoneNumberPreview = null;
+        break;
+
+      case LOGIN_REQUEST:
+        draft.loginFormData = {
+          email: payload.email,
+          password: payload.password,
+        };
+        draft.verificationCodeNeeded = false;
+        draft.verificationCodeSuccess = false;
+        draft.errors.loginError = '';
+        draft.loaders.loginLoading = true;
+        break;
+
+      case LOGIN_SUCCESS:
+        draft.loginFormData = {
+          email: '',
+          password: '',
+        };
+        draft.errors.loginError = '';
+        draft.loaders.loginLoading = false;
+        break;
+
+      case LOGIN_ERROR:
+        draft.loaders.loginLoading = false;
+        draft.errors.loginError = payload.error;
+        break;
+
+      case VERIFICATION_CODE_NEEDED:
+        draft.verificationCodeNeeded = true;
+        break;
+
+      case VERIFICATION_CODE_REQUEST:
+        draft.verificationCodeSuccess = false;
+        draft.loaders.verificationCodeLoading = true;
+        draft.errors.verificationCodeError = null;
+        break;
+
+      case VERIFICATION_CODE_SUCCESS:
+        draft.verificationCodeSuccess = true;
+        draft.loaders.verificationCodeLoading = false;
+        draft.errors.verificationCodeError = null;
+        break;
+
+      case VERIFICATION_CODE_ERROR:
+        draft.loaders.verificationCodeLoading = false;
+        draft.errors.verificationCodeError = payload.error;
         break;
     }
   });

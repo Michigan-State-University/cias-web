@@ -15,7 +15,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
       >
         <div
           align="flex-start"
-          class="Col-zbj3ec-0 gVbrwg"
+          class="Col-zbj3ec-0 guvxHM"
           style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
         >
           <div
@@ -23,7 +23,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
           >
             <div
               align="flex-start"
-              class="Col-zbj3ec-0 gVbrwg"
+              class="Col-zbj3ec-0 guvxHM"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
             >
               <div
@@ -38,7 +38,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
             </div>
             <div
               align="flex-start"
-              class="Col-zbj3ec-0 gVbrwg"
+              class="Col-zbj3ec-0 guvxHM"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
             >
               <p
@@ -65,7 +65,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
         </div>
         <div
           align="end"
-          class="Col-zbj3ec-0 ccYkjT"
+          class="Col-zbj3ec-0 LYfLr"
           style="box-sizing: border-box; min-height: 1px; position: relative; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 0px;"
         >
           <button

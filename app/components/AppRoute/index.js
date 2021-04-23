@@ -8,8 +8,7 @@ import { Row, Col } from 'react-grid-system';
 
 import Sidebar from 'containers/Sidebar';
 import Navbar from 'containers/Navbar';
-import { makeSelectUser } from 'global/reducers/auth';
-import { REDIRECT_QUERY_KEY } from 'containers/LoginPage/constants';
+import { makeSelectUser, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
 import { MainAppContainer, PageContainer, RowBelowNavbar } from './styled';
 
 class AppRoute extends Route {
