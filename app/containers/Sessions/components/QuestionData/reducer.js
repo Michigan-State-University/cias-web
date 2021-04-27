@@ -12,6 +12,7 @@ import {
   currencyQuestion,
   thirdPartyQuestion,
   phoneQuestion,
+  participantReport,
 } from 'models/Session/QuestionTypes';
 
 import currencyQuestionReducer from './CurrencyQuestion/reducer';
@@ -27,6 +28,7 @@ import urlQuestionReducer from './UrlQuestion/reducer';
 import feedbackQuestionReducer from './FeedbackQuestion/reducer';
 import visualAnalogueScaleQuestionReducer from './VisualAnalogueScaleQuestion/reducer';
 import thirdPartyQuestionReducer from './ThirdPartyQuestion/reducer';
+import participantReportQuestionReducer from './ParticipantReportQuestion/reducer';
 
 /* eslint-disable default-case, no-param-reassign */
 const questionDataReducer = (question, data) => {
@@ -57,6 +59,8 @@ const questionDataReducer = (question, data) => {
       return feedbackQuestionReducer(question, data);
     case currencyQuestion.id:
       return currencyQuestionReducer(question, data);
+    case participantReport.id:
+      return participantReportQuestionReducer(question, data);
     default:
       return question;
   }
