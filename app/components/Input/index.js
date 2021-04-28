@@ -43,10 +43,10 @@ const Input = styled.input.attrs(props => ({
     border-color: ${({ hasError }) =>
       getBorderColor(hasError, themeColors.primary)};
   }
-  ${({ transparent }) =>
+  ${({ transparent, hasError }) =>
     transparent && {
       backgroundColor: 'transparent',
-      borderColor: 'transparent',
+      ...(!hasError && { borderColor: 'transparent' }),
     }};
   ${margin};
   ${layout};

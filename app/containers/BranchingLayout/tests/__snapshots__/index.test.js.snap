@@ -181,11 +181,6 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   text-decoration: underline;
 }
 
-.c11 {
-  width: auto;
-  height: auto;
-}
-
 .c14 {
   resize: none;
   padding: 12px;
@@ -206,6 +201,11 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
 
 .c14:disabled {
   color: #ABBBD1;
+}
+
+.c11 {
+  width: auto;
+  height: auto;
 }
 
 .c12 {

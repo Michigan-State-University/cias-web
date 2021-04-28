@@ -16,7 +16,7 @@ const FinishGroupItem = ({
     mt={10}
     mb={5}
     onClick={() => onClick({ type, id })}
-    selected={target.id === id}
+    selected={target && target.id === id}
   >
     <Box maxWidth={230}>
       <EllipsisText text={htmlToPlainText(subtitle)} color={colors.white} />

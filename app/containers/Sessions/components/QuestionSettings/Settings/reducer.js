@@ -176,7 +176,10 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
           ...question.formula,
           patterns: [
             ...question.formula.patterns,
-            { match: '', target: { type: 'Question', id: '' } },
+            {
+              match: '',
+              target: [{ type: 'Question', id: '', percentage: '100' }],
+            },
           ],
         },
       };

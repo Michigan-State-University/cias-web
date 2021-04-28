@@ -57,6 +57,7 @@ const BranchingTab = ({
   }, []);
 
   const displayPatternTargetText = target => {
+    if (!target) return formatMessage(messages.selectQuestion);
     const isQuestionType = target.type.startsWith(questionType);
 
     const targetIndex = isQuestionType

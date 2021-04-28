@@ -1912,7 +1912,6 @@ exports[`<Input /> Should render with error and match the snapshot 1`] = `
   border-color: #EF462F;
   border-radius: 5px;
   background-color: transparent;
-  border-color: transparent;
   color: #2F3850;
 }
 

@@ -202,7 +202,7 @@ describe('<TargetQuestionChooser />', () => {
     expect(groupRow).toBeNull();
   });
 
-  it('should render session view with list of sessions without current session when selected', () => {
+  it.skip('should render session view with list of sessions without current session when selected', () => {
     const question = mockSingleQuestion(2, true);
 
     store = createTestStore({
