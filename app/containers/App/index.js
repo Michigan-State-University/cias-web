@@ -35,6 +35,7 @@ import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReport
 import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
 import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
 import ReportingDashboardPage from 'containers/ReportingDashboardPage/Loadable';
+import { VIEW } from 'containers/ReportingDashboardPage/constants';
 
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 
@@ -114,7 +115,9 @@ export function App({ user }) {
         <AppRoute
           exact
           path="/organization/:organizationId"
-          component={ReportingDashboardPage}
+          render={() => (
+            <ReportingDashboardPage view={VIEW.MANAGE_ORGANIZATIONS} />
+          )}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.eInterventionAdmin]}
           sidebarProps={{
@@ -127,7 +130,7 @@ export function App({ user }) {
         <AppRoute
           exact
           path="/organization/:organizationId/dashboard-setup"
-          component={ReportingDashboardPage}
+          render={() => <ReportingDashboardPage view={VIEW.DASHBOARD_SETUP} />}
           protectedRoute
           allowedRoles={[Roles.admin, Roles.eInterventionAdmin]}
           sidebarProps={{
@@ -140,7 +143,7 @@ export function App({ user }) {
         <AppRoute
           exact
           path="/organization/:organizationId/dashboard"
-          component={ReportingDashboardPage}
+          render={() => <ReportingDashboardPage view={VIEW.DASHBOARD_VIEW} />}
           protectedRoute
           allowedRoles={[
             Roles.admin,

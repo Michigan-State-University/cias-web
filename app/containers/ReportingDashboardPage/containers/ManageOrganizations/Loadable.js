@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for ReportingDashboardPage
+ * Asynchronously loads the component for ManageOrganizations
  *
  */
 

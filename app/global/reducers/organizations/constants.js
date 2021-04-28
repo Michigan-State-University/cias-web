@@ -11,3 +11,24 @@ export const FETCH_ORGANIZATIONS_SUCCESS =
   'app/organizations/FETCH_ORGANIZATIONS_SUCCESS';
 export const FETCH_ORGANIZATIONS_ERROR =
   'app/organizations/FETCH_ORGANIZATIONS_ERROR';
+
+export const FETCH_ORGANIZATION_REQUEST =
+  'app/organizations/FETCH_ORGANIZATION_REQUEST';
+export const FETCH_ORGANIZATION_SUCCESS =
+  'app/organizations/FETCH_ORGANIZATION_SUCCESS';
+export const FETCH_ORGANIZATION_ERROR =
+  'app/organizations/FETCH_ORGANIZATION_ERROR';
+
+export const EDIT_ORGANIZATION_REQUEST =
+  'app/organizations/EDIT_ORGANIZATION_REQUEST';
+export const EDIT_ORGANIZATION_SUCCESS =
+  'app/organizations/EDIT_ORGANIZATION_SUCCESS';
+export const EDIT_ORGANIZATION_ERROR =
+  'app/organizations/EDIT_ORGANIZATION_ERROR';
+
+export const DELETE_ORGANIZATION_REQUEST =
+  'app/organizations/DELETE_ORGANIZATION_REQUEST';
+export const DELETE_ORGANIZATION_SUCCESS =
+  'app/organizations/DELETE_ORGANIZATION_SUCCESS';
+export const DELETE_ORGANIZATION_ERROR =
+  'app/organizations/DELETE_ORGANIZATION_ERROR';

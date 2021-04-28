@@ -1,5 +1,6 @@
 import { put, takeLatest, call, select } from 'redux-saga/effects';
 import axios from 'axios';
+import { push } from 'connected-react-router';
 
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { CREATE_ORGANIZATION_REQUEST } from '../constants';
@@ -18,6 +19,9 @@ export function* createOrganization() {
     });
     const organization = jsonApiToObject(data, 'organization');
     yield put(createOrganizationSuccess(organization));
+
+    // Go to the newly created Organization
+    yield put(push(`/organization/${organization.id}`));
   } catch (error) {
     yield put(createOrganizationFailure(error));
   }
