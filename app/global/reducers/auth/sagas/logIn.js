@@ -1,6 +1,7 @@
 import { put, takeLatest, call, select, delay } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import LocalStorageService from 'utils/localStorageService';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
@@ -15,12 +16,24 @@ import {
   loginSuccess,
   verificationCodeNeeded,
 } from '../actions';
-import { LOGIN_REQUEST, REDIRECT_QUERY_KEY } from '../constants';
+import {
+  LOGIN_REQUEST,
+  REDIRECT_QUERY_KEY,
+  VERIFICATION_CODE_COOKIE,
+} from '../constants';
 
 function* login({ payload: { email, password } }) {
   const requestURL = `v1/auth/sign_in`;
 
   try {
+    let config = {};
+    const cookie = Cookies.get(VERIFICATION_CODE_COOKIE);
+
+    if (cookie)
+      config = {
+        headers: { 'Verification-Code': cookie },
+      };
+
     const {
       data: { data },
     } = yield axios.post(
@@ -29,7 +42,7 @@ function* login({ payload: { email, password } }) {
         email,
         password,
       },
-      { withCredentials: true },
+      config,
     );
     const mappedUser = mapCurrentUser(data);
     yield call(LocalStorageService.setState, { user: { ...mappedUser } });

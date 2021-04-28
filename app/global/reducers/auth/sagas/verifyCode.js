@@ -7,7 +7,10 @@ import { HttpStatusCodes } from 'utils/constants';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import { verificationCodeError, verificationCodeSuccess } from '../actions';
-import { VERIFICATION_CODE_REQUEST } from '../constants';
+import {
+  VERIFICATION_CODE_REQUEST,
+  VERIFICATION_CODE_COOKIE,
+} from '../constants';
 import { makeSelectLoginFormData } from '../selectors';
 import messages from '../messages';
 
@@ -24,7 +27,7 @@ function* verifyCode({ payload: { verificationCode } }) {
       headers: { Uid: email },
     });
 
-    Cookies.set('verification_code', verification_code, {
+    Cookies.set(VERIFICATION_CODE_COOKIE, verification_code, {
       expires: 30,
       secure: true,
       sameSite: 'strict',
