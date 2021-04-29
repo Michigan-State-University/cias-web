@@ -118,7 +118,7 @@ Pattern.propTypes = {
   onUpdateTarget: PropTypes.func,
   onRemoveTarget: PropTypes.func,
   newPattern: PropTypes.bool,
-  sessionBranching: PropTypes.object,
+  sessionBranching: PropTypes.bool,
   handleDropdownClick: PropTypes.func,
   formatMessage: PropTypes.func,
   targetChooserOpen: PropTypes.number,

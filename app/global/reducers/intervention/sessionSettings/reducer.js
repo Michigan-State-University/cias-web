@@ -9,6 +9,9 @@ import {
   UPDATE_SCHEDULING_PAYLOAD,
   UPDATE_SCHEDULING_DATE,
   UPDATE_DAYS_AFTER_DATE_VARIABLE,
+  ADD_FORMULA_TARGET,
+  UPDATE_FORMULA_TARGET,
+  REMOVE_FORMULA_TARGET,
 } from './constants';
 
 const sessionSettingsReducer = (session, payload) => {
@@ -25,7 +28,7 @@ const sessionSettingsReducer = (session, payload) => {
     case ADD_FORMULA_CASE:
       clonedSession.formula.patterns.push({
         match: '',
-        target: { type: 'Session', id: '' },
+        target: [{ type: 'Session', id: '', probability: '100' }],
       });
       return clonedSession;
 
@@ -55,6 +58,31 @@ const sessionSettingsReducer = (session, payload) => {
     case UPDATE_DAYS_AFTER_DATE_VARIABLE:
       clonedSession.days_after_date_variable_name = payload.data.value;
       return clonedSession;
+
+    case ADD_FORMULA_TARGET:
+      clonedSession.formula.patterns[payload.data.patternIndex].target.push({
+        type: 'Session',
+        id: '',
+        probability: '0',
+      });
+      return clonedSession;
+
+    case UPDATE_FORMULA_TARGET: {
+      const { patternIndex, targetIndex, targetData } = payload.data;
+      clonedSession.formula.patterns[patternIndex].target[
+        targetIndex
+      ] = targetData;
+      return clonedSession;
+    }
+
+    case REMOVE_FORMULA_TARGET: {
+      const { patternIndex, targetIndex } = payload.data;
+      const newTargets = clonedSession.formula.patterns[
+        patternIndex
+      ].target.filter((_, deleteIndex) => deleteIndex !== targetIndex);
+      clonedSession.formula.patterns[patternIndex].target = newTargets;
+      return clonedSession;
+    }
 
     default:
       return session;

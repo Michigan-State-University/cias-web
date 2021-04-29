@@ -60,7 +60,7 @@ const Target = ({
             py={12}
             textAlign="center"
             placeholder=".."
-            value={target ? target.probability : null}
+            value={target ? target.probability : ''}
             validator={numericValidator}
             onBlur={probability => onUpdateTarget({ probability })}
           />
@@ -128,7 +128,7 @@ Target.propTypes = {
   isChooserOpened: PropTypes.bool,
   invalidPercentage: PropTypes.bool,
   isOnlyTarget: PropTypes.bool,
-  sessionBranching: PropTypes.object,
+  sessionBranching: PropTypes.bool,
   setTargetChooserOpen: PropTypes.func,
   onDeleteTarget: PropTypes.func,
   onAddTarget: PropTypes.func,

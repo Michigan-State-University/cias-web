@@ -41,7 +41,7 @@ import {
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 
-import { injectSaga, useInjectSaga, useInjectReducer } from 'redux-injectors';
+import { injectSaga, injectReducer } from 'redux-injectors';
 
 import { colors, themeColors } from 'theme';
 
@@ -122,19 +122,6 @@ export function InterventionDetailsPage({
     deleteConfirmationSessionId,
     setDeleteConfirmationSessionId,
   ] = useState(null);
-  useInjectReducer({
-    key: 'intervention',
-    reducer: interventionReducer,
-  });
-  useInjectReducer({ key: 'interventions', reducer: interventionsReducer });
-  useInjectReducer({ key: 'questions', reducer: questionsReducer });
-  useInjectSaga({
-    key: 'interventionOptionsSaga',
-    saga: interventionOptionsSaga,
-  });
-  useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
-  useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
-  useInjectSaga({ key: 'editSession', saga: editSessionSaga });
 
   const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
 
@@ -481,14 +468,24 @@ const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
 );
-
-const withSaga = injectSaga({
-  key: 'interventionDetailsPageSagas',
-  saga: interventionDetailsPageSagas,
-});
-
 export default compose(
   withConnect,
-  withSaga,
+  injectReducer({
+    key: 'intervention',
+    reducer: interventionReducer,
+  }),
+  injectReducer({ key: 'interventions', reducer: interventionsReducer }),
+  injectReducer({ key: 'questions', reducer: questionsReducer }),
+  injectSaga({
+    key: 'interventionOptionsSaga',
+    saga: interventionOptionsSaga,
+  }),
+  injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
+  injectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga }),
+  injectSaga({ key: 'editSession', saga: editSessionSaga }),
+  injectSaga({
+    key: 'interventionDetailsPageSagas',
+    saga: interventionDetailsPageSagas,
+  }),
   injectIntl,
 )(InterventionDetailsPage);
