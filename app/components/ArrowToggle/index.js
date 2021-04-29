@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Row from 'components/Row';
-import Img from 'components/Img';
-import arrowDownSelect from 'assets/svg/arrow-down-select.svg';
 import Text from 'components/Text';
 import { themeColors } from 'theme';
+import ToggleArrow from 'components/ToggleArrow';
 
 const ArrowToggle = ({
   state,
@@ -13,9 +12,6 @@ const ArrowToggle = ({
   toggleDownMessage,
   toggleUpMessage,
 }) => {
-  const transform = state ? 'rotate(180deg);' : '';
-  const transition = 'transform 0.2s;';
-
   const toggleActive = () => setState(!state);
 
   return (
@@ -24,13 +20,7 @@ const ArrowToggle = ({
         {state && toggleDownMessage}
         {!state && toggleUpMessage}
       </Text>
-      <Img
-        src={arrowDownSelect}
-        alt="arrow"
-        ml={8}
-        transform={transform}
-        transition={transition}
-      />
+      <ToggleArrow facingUp={state} ml={8} />
     </Row>
   );
 };

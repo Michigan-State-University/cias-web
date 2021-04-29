@@ -29,7 +29,7 @@ export default defineMessages({
     defaultMessage: 'go to',
   },
   percentGoTo: {
-    id: `${scope}.goTo`,
+    id: `${scope}.percentGoTo`,
     defaultMessage: '% go to',
   },
   else: {
@@ -53,7 +53,7 @@ export default defineMessages({
     defaultMessage: 'Show randomization',
   },
   hideRandomization: {
-    id: `${scope}.percentagesSumInvalid`,
+    id: `${scope}.hideRandomization`,
     defaultMessage: 'Hide randomization',
   },
 });

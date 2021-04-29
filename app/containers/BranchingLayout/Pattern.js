@@ -9,7 +9,7 @@ import binNoBg from 'assets/svg/bin-no-bg.svg';
 import { colors } from 'theme';
 import ArrowToggle from 'components/ArrowToggle';
 import messages from './messages';
-import Target from './target';
+import Target from './Target';
 
 const Pattern = ({
   pattern,

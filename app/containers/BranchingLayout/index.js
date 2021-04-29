@@ -26,7 +26,7 @@ import VariableChooser from 'containers/VariableChooser';
 
 import { DashedBox } from './styled';
 import messages from './messages';
-import Pattern from './pattern';
+import Pattern from './Pattern';
 
 function BranchingLayout({
   formula,
