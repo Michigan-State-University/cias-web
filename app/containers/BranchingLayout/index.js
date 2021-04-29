@@ -24,8 +24,6 @@ import Text from 'components/Text';
 import { StyledInput } from 'components/Input/StyledInput';
 import VariableChooser from 'containers/VariableChooser';
 
-import produce from 'immer';
-
 import { DashedBox } from './styled';
 import messages from './messages';
 import Pattern from './pattern';
@@ -50,6 +48,9 @@ function BranchingLayout({
   includeAllSessions,
   includeCurrentSession,
   isMultiSession,
+  onAddTarget,
+  onUpdateTarget,
+  onRemoveTarget,
 }) {
   const [patternsSize, setPatternSize] = useState(formula.patterns.length);
 
@@ -119,17 +120,6 @@ function BranchingLayout({
               const updatePattern = patternObj => {
                 onUpdateCase(index, patternObj, id);
               };
-              const onAddTarget = () => {
-                /* eslint-disable default-case, no-param-reassign */
-                const newTarget = produce(pattern.target, draft => {
-                  draft.push({
-                    type: 'Question',
-                    id: '',
-                    percentage: '0',
-                  });
-                });
-                updatePattern({ ...pattern, target: newTarget });
-              };
               return (
                 <Pattern
                   newPattern={patternsSize <= index}
@@ -139,7 +129,7 @@ function BranchingLayout({
                   handleDropdownClick={handleDropdownClick}
                   index={index}
                   key={index}
-                  onAddTarget={onAddTarget}
+                  onAddTarget={() => onAddTarget(id, index)}
                   onRemoveCase={onRemoveCase}
                   pattern={pattern}
                   questionId={id}
@@ -147,6 +137,8 @@ function BranchingLayout({
                   setTargetChooserOpen={setTargetChooserOpen}
                   targetChooserOpen={targetChooserOpen}
                   updatePattern={updatePattern}
+                  onUpdateTarget={onUpdateTarget}
+                  onRemoveTarget={onRemoveTarget}
                 />
               );
             })}
@@ -190,6 +182,9 @@ BranchingLayout.propTypes = {
   displayPatternTargetText: PropTypes.func,
   sessionBranching: PropTypes.bool,
   onDropdownOpen: PropTypes.func,
+  onAddTarget: PropTypes.func,
+  onUpdateTarget: PropTypes.func,
+  onRemoveTarget: PropTypes.func,
   disabled: PropTypes.bool,
   includeAllVariables: PropTypes.bool,
   includeCurrentQuestion: PropTypes.bool,

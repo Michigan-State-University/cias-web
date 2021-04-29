@@ -60,9 +60,9 @@ const Target = ({
             py={12}
             textAlign="center"
             placeholder=".."
-            value={target ? target.percentage : null}
+            value={target ? target.probability : null}
             validator={numericValidator}
-            onBlur={percentage => onUpdateTarget({ percentage })}
+            onBlur={probability => onUpdateTarget({ probability })}
           />
         </Box>
         <Text whiteSpace="pre" mr={6}>

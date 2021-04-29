@@ -28,6 +28,9 @@ import {
   addFormulaCase,
   removeFormulaCase,
   updateFormulaCase,
+  addFormulaTarget,
+  updateFormulaTarget,
+  removeFormulaTarget,
 } from '../../actions';
 
 const BranchingTab = ({
@@ -43,6 +46,9 @@ const BranchingTab = ({
   fetchIntervention,
   disabled,
   match: { params },
+  onAddTarget,
+  onUpdateTarget,
+  onRemoveTarget,
 }) => {
   const { interventionId, sessionId } = params;
   const { sessions: sessionList } = intervention || {};
@@ -88,6 +94,9 @@ const BranchingTab = ({
       interventionId={interventionId}
       includeCurrentSession
       isMultiSession
+      onAddTarget={onAddTarget}
+      onUpdateTarget={onUpdateTarget}
+      onRemoveTarget={onRemoveTarget}
     />
   );
 };
@@ -105,6 +114,9 @@ BranchingTab.propTypes = {
     sessions: PropTypes.arrayOf(PropTypes.shape(Session)),
   }),
   fetchIntervention: PropTypes.func,
+  onAddTarget: PropTypes.func,
+  onUpdateTarget: PropTypes.func,
+  onRemoveTarget: PropTypes.func,
   match: PropTypes.object,
   disabled: PropTypes.bool,
 };
@@ -120,6 +132,9 @@ const mapDispatchToProps = {
   onRemoveCase: removeFormulaCase,
   onUpdateCase: updateFormulaCase,
   fetchIntervention: fetchInterventionRequest,
+  onAddTarget: addFormulaTarget,
+  onUpdateTarget: updateFormulaTarget,
+  onRemoveTarget: removeFormulaTarget,
 };
 
 const withConnect = connect(

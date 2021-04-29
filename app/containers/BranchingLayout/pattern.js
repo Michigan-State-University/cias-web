@@ -6,7 +6,6 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
-import produce from 'immer';
 import { colors } from 'theme';
 import ArrowToggle from 'components/ArrowToggle';
 import messages from './messages';
@@ -18,6 +17,8 @@ const Pattern = ({
   disabled,
   updatePattern,
   onAddTarget,
+  onUpdateTarget,
+  onRemoveTarget,
   onRemoveCase,
   handleDropdownClick,
   index,
@@ -29,7 +30,8 @@ const Pattern = ({
   newPattern,
 }) => {
   const sumPercentages = useMemo(
-    () => pattern.target.reduce((acc, { percentage }) => acc + +percentage, 0),
+    () =>
+      pattern.target.reduce((acc, { probability }) => acc + +probability, 0),
     [pattern.target],
   );
   const [showRandomization, setShowRandomization] = useState(newPattern);
@@ -65,22 +67,13 @@ const Pattern = ({
         pattern.target.map((target, targetIndex) => {
           const uniqueTargetIndex = index * 100 + targetIndex;
           const isChooserOpened = uniqueTargetIndex === targetChooserOpen;
-          const onUpdateTarget = newValues => {
-            /* eslint-disable default-case, no-param-reassign */
-            const newTarget = produce(pattern.target, draft => {
-              draft[targetIndex] = {
-                ...draft[targetIndex],
-                ...newValues,
-              };
+          const updateTarget = newValues =>
+            onUpdateTarget(questionId, index, targetIndex, {
+              ...target,
+              ...newValues,
             });
-            updatePattern({ ...pattern, target: newTarget });
-          };
-          const onDeleteTarget = () => {
-            const newTarget = produce(pattern.target, draft =>
-              draft.filter((_, deleteIndex) => deleteIndex !== targetIndex),
-            );
-            updatePattern({ ...pattern, target: newTarget });
-          };
+          const onDeleteTarget = () =>
+            onRemoveTarget(questionId, index, targetIndex);
 
           return (
             <Target
@@ -92,7 +85,7 @@ const Pattern = ({
               isChooserOpened={isChooserOpened}
               key={uniqueTargetIndex}
               onDeleteTarget={onDeleteTarget}
-              onUpdateTarget={onUpdateTarget}
+              onUpdateTarget={updateTarget}
               sessionBranching={sessionBranching}
               setTargetChooserOpen={setTargetChooserOpen}
               target={target}
@@ -120,8 +113,10 @@ const Pattern = ({
 
 Pattern.propTypes = {
   pattern: PropTypes.object,
-  onAddTarget: PropTypes.func,
   disabled: PropTypes.bool,
+  onAddTarget: PropTypes.func,
+  onUpdateTarget: PropTypes.func,
+  onRemoveTarget: PropTypes.func,
   newPattern: PropTypes.bool,
   sessionBranching: PropTypes.object,
   handleDropdownClick: PropTypes.func,
