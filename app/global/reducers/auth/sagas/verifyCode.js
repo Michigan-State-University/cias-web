@@ -23,9 +23,13 @@ function* verifyCode({ payload: { verificationCode } }) {
     const {
       // eslint-disable-next-line camelcase
       data: { verification_code },
-    } = yield axios.patch(requestURL, objectToSnakeCase({ verificationCode }), {
-      headers: { Uid: email },
-    });
+    } = yield axios.patch(
+      requestURL,
+      objectToSnakeCase({ verificationCode, email }),
+      {
+        headers: { Uid: email },
+      },
+    );
 
     Cookies.set(VERIFICATION_CODE_COOKIE, verification_code, {
       expires: 30,
