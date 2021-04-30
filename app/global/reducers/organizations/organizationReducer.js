@@ -12,6 +12,9 @@ import {
   DELETE_ORGANIZATION_REQUEST,
   DELETE_ORGANIZATION_SUCCESS,
   DELETE_ORGANIZATION_ERROR,
+  INVITE_ADMIN_REQUEST,
+  INVITE_ADMIN_SUCCESS,
+  INVITE_ADMIN_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -21,12 +24,15 @@ export const initialState = {
     fetchOrganization: false,
     editOrganization: false,
     deleteOrganization: false,
+    inviteAdmin: false,
   },
   errors: {
     fetchOrganization: null,
     editOrganization: null,
     deleteOrganization: null,
+    inviteAdmin: null,
   },
+  shouldRefetch: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -36,6 +42,7 @@ const organizationReducer = (state = initialState, { type, payload }) =>
       case FETCH_ORGANIZATION_REQUEST: {
         draft.loaders.fetchOrganization = true;
         draft.errors.fetchOrganization = null;
+        draft.shouldRefetch = false;
         break;
       }
 
@@ -93,6 +100,25 @@ const organizationReducer = (state = initialState, { type, payload }) =>
       case DELETE_ORGANIZATION_ERROR: {
         draft.loaders.deleteOrganization = false;
         draft.errors.deleteOrganization = payload.error;
+        break;
+      }
+
+      case INVITE_ADMIN_REQUEST: {
+        draft.loaders.inviteAdmin = true;
+        draft.errors.inviteAdmin = null;
+        break;
+      }
+
+      case INVITE_ADMIN_SUCCESS: {
+        draft.loaders.inviteAdmin = false;
+        draft.errors.inviteAdmin = null;
+        draft.shouldRefetch = true;
+        break;
+      }
+
+      case INVITE_ADMIN_ERROR: {
+        draft.loaders.inviteAdmin = false;
+        draft.errors.inviteAdmin = payload.error;
         break;
       }
     }

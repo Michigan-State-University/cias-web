@@ -40,15 +40,20 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
             >
               Password
             </p>
-            <input
-              class="Input-t9j2q5-0 ptbLy"
-              height="46"
-              name="password"
-              placeholder="Enter password"
-              type="password"
-              value=""
+            <div
+              class="Row-y1cs0u-0 fgwsqb"
               width="100%"
-            />
+            >
+              <input
+                class="Input-t9j2q5-0 ptbLy"
+                height="46"
+                name="password"
+                placeholder="Enter password"
+                type="password"
+                value=""
+                width="100%"
+              />
+            </div>
           </div>
           <div
             class="Column-sc-4zswzq-0 jCuscc"
@@ -59,15 +64,20 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
             >
               Password confirmation
             </p>
-            <input
-              class="Input-t9j2q5-0 ptbLy"
-              height="46"
-              name="passwordConfirmation"
-              placeholder="Retype your password"
-              type="password"
-              value=""
+            <div
+              class="Row-y1cs0u-0 fgwsqb"
               width="100%"
-            />
+            >
+              <input
+                class="Input-t9j2q5-0 ptbLy"
+                height="46"
+                name="passwordConfirmation"
+                placeholder="Retype your password"
+                type="password"
+                value=""
+                width="100%"
+              />
+            </div>
           </div>
           <button
             class="StyledButton-d2s0gt-0 lCsKc"

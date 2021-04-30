@@ -1,3 +1,5 @@
+import { Roles } from 'models/User/UserRoles';
+
 export const CREATE_ORGANIZATION_REQUEST =
   'app/organizations/CREATE_ORGANIZATION_REQUEST';
 export const CREATE_ORGANIZATION_SUCCESS =
@@ -32,3 +34,12 @@ export const DELETE_ORGANIZATION_SUCCESS =
   'app/organizations/DELETE_ORGANIZATION_SUCCESS';
 export const DELETE_ORGANIZATION_ERROR =
   'app/organizations/DELETE_ORGANIZATION_ERROR';
+
+export const INVITE_ADMIN_REQUEST = 'app/organizations/INVITE_ADMIN_REQUEST';
+export const INVITE_ADMIN_SUCCESS = 'app/organizations/INVITE_ADMIN_SUCCESS';
+export const INVITE_ADMIN_ERROR = 'app/organizations/INVITE_ADMIN_ERROR';
+
+export const RoleToEndpointMap = {
+  [Roles.eInterventionAdmin]: 'invite_intervention_admin',
+  [Roles.organizationAdmin]: 'invite_organization_admin',
+};

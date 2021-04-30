@@ -4,6 +4,7 @@ export {
   fetchOrganizationRequest,
   deleteOrganizationRequest,
   editOrganizationRequest,
+  inviteAdminRequest,
 } from './actions';
 export { organizationsReducer } from './reducer';
 export {
@@ -14,4 +15,5 @@ export {
   makeSelectOrganization,
   makeSelectOrganizationLoaders,
   makeSelectOrganizationErrors,
+  makeSelectOrganizationShouldRefetch,
 } from './selectors';

@@ -11,13 +11,18 @@ exports[`<FormikInput /> Should render and match the snapshot 1`] = `
     >
       Label
     </p>
-    <input
-      class="Input-t9j2q5-0 lfEKYd"
-      name="test"
-      placeholder="test"
-      type="text"
-      value=""
-    />
+    <div
+      class="Row-y1cs0u-0 fgwsqb"
+      width="100%"
+    >
+      <input
+        class="Input-t9j2q5-0 lfEKYd"
+        name="test"
+        placeholder="test"
+        type="text"
+        value=""
+      />
+    </div>
   </div>
 </div>
 `;

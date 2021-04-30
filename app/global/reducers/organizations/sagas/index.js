@@ -4,12 +4,14 @@ import createOrganizationSaga from './addOrganization';
 import fetchOrganizationSaga from './fetchOrganization';
 import deleteOrganizationSaga from './deleteOrganization';
 import editOrganizationSaga from './editOrganization';
+import inviteAdminSaga from './inviteAdmin';
 
 export {
   fetchOrganizationsSaga,
   deleteOrganizationSaga,
   editOrganizationSaga,
   fetchOrganizationSaga,
+  inviteAdminSaga,
 };
 
 export default function* allOrganizationsSagas() {
@@ -19,5 +21,6 @@ export default function* allOrganizationsSagas() {
     fetchOrganizationSaga(),
     deleteOrganizationSaga(),
     editOrganizationSaga(),
+    inviteAdminSaga(),
   ]);
 }

@@ -13,6 +13,7 @@ import {
   makeSelectOrganization,
   makeSelectOrganizations,
   makeSelectOrganizationsLoader,
+  makeSelectOrganizationShouldRefetch,
 } from 'global/reducers/organizations';
 
 import { Container, Col, Row } from 'components/ReactGridSystem';
@@ -26,12 +27,13 @@ import Settings from './Settings';
 import { ManageOrganizationsContext } from './constants';
 
 const ManageOrganizations = ({
+  errors,
+  fetchOrganization,
+  loaders,
   organization,
   organizations,
   organizationsLoader,
-  loaders,
-  errors,
-  fetchOrganization,
+  shouldRefetch,
 }) => {
   const { organizationId } = useContext(ReportingDashboardPageContext);
   const { formatMessage } = useIntl();
@@ -39,6 +41,10 @@ const ManageOrganizations = ({
   useEffect(() => {
     fetchOrganization(organizationId);
   }, [organizationId]);
+
+  useEffect(() => {
+    if (shouldRefetch) fetchOrganization(organizationId);
+  }, [shouldRefetch]);
 
   const noOrganizations = organizations.length === 0;
 
@@ -68,7 +74,7 @@ const ManageOrganizations = ({
 
   return (
     <ManageOrganizationsContext.Provider
-      value={{ organization, loaders, errors }}
+      value={{ organization, loaders, errors, shouldRefetch }}
     >
       <Helmet>
         <title>{formatMessage(messages.manageOrganizations)}</title>
@@ -80,19 +86,21 @@ const ManageOrganizations = ({
 
 ManageOrganizations.propTypes = {
   errors: PropTypes.object,
+  fetchOrganization: PropTypes.func,
   loaders: PropTypes.object,
   organization: PropTypes.object,
   organizations: PropTypes.arrayOf(PropTypes.object),
   organizationsLoader: PropTypes.bool,
-  fetchOrganization: PropTypes.func,
+  shouldRefetch: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
+  errors: makeSelectOrganizationErrors(),
+  loaders: makeSelectOrganizationLoaders(),
   organization: makeSelectOrganization(),
   organizations: makeSelectOrganizations(),
   organizationsLoader: makeSelectOrganizationsLoader(),
-  loaders: makeSelectOrganizationLoaders(),
-  errors: makeSelectOrganizationErrors(),
+  shouldRefetch: makeSelectOrganizationShouldRefetch(),
 });
 
 const mapDispatchToProps = {
