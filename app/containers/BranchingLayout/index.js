@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -21,19 +21,12 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Text from 'components/Text';
-import Img from 'components/Img';
-import ArrowDropdown from 'components/ArrowDropdown';
 import { StyledInput } from 'components/Input/StyledInput';
-import EllipsisText from 'components/Text/EllipsisText';
-import InequalityChooser from 'components/InequalityChooser';
 import VariableChooser from 'containers/VariableChooser';
-
-import binNoBg from 'assets/svg/bin-no-bg.svg';
-
-import TargetQuestionChooser from './TargetQuestionChooser';
 
 import { DashedBox } from './styled';
 import messages from './messages';
+import Pattern from './Pattern';
 
 function BranchingLayout({
   formula,
@@ -55,7 +48,17 @@ function BranchingLayout({
   includeAllSessions,
   includeCurrentSession,
   isMultiSession,
+  onAddTarget,
+  onUpdateTarget,
+  onRemoveTarget,
 }) {
+  const [patternsSize, setPatternSize] = useState(formula.patterns.length);
+
+  useEffect(() => {
+    if (formula.patterns.length !== patternsSize) {
+      setPatternSize(formula.patterns.length);
+    }
+  }, [formula.patterns.length]);
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
 
   const shouldDisplayElseStatement = formula.patterns.length !== 0;
@@ -114,61 +117,29 @@ function BranchingLayout({
             </Box>
 
             {formula.patterns.map((pattern, index) => {
-              const isChooserOpened = index === targetChooserOpen;
+              const updatePattern = patternObj => {
+                onUpdateCase(index, patternObj, id);
+              };
               return (
-                <Row
-                  key={`${id}-settings-branching-case-${index}-${
-                    pattern.match
-                  }`}
-                  align="center"
-                  mb={8}
-                >
-                  <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
-                  <InequalityChooser
-                    disabled={disabled}
-                    onSuccessfulChange={value =>
-                      onUpdateCase(index, { ...pattern, match: value }, id)
-                    }
-                    inequalityValue={pattern.match}
-                  />
-                  <Text whiteSpace="pre" mr={10}>
-                    {formatMessage(messages.goTo)}
-                  </Text>
-                  <ArrowDropdown
-                    disabled={disabled}
-                    width={130}
-                    positionFrom="right"
-                    setOpen={value => handleDropdownClick(value, index)}
-                    isOpened={isChooserOpened}
-                    childWidthScope="child"
-                    dropdownContent={
-                      <Box maxWidth={100} data-cy={`select-question-${index}`}>
-                        <EllipsisText
-                          text={displayPatternTargetText(pattern.target)}
-                          fontSize={13}
-                        />
-                      </Box>
-                    }
-                  >
-                    <TargetQuestionChooser
-                      sessionBranching={sessionBranching}
-                      isVisible={isChooserOpened}
-                      pattern={pattern}
-                      onClick={value => {
-                        setTargetChooserOpen(-1);
-                        onUpdateCase(index, { ...pattern, target: value }, id);
-                      }}
-                    />
-                  </ArrowDropdown>
-                  {!disabled && (
-                    <Img
-                      ml={10}
-                      src={binNoBg}
-                      onClick={() => onRemoveCase(index, id)}
-                      clickable
-                    />
-                  )}
-                </Row>
+                <Pattern
+                  newPattern={patternsSize <= index}
+                  disabled={disabled}
+                  displayPatternTargetText={displayPatternTargetText}
+                  formatMessage={formatMessage}
+                  handleDropdownClick={handleDropdownClick}
+                  index={index}
+                  key={index}
+                  onAddTarget={() => onAddTarget(id, index)}
+                  onRemoveCase={onRemoveCase}
+                  pattern={pattern}
+                  questionId={id}
+                  sessionBranching={sessionBranching}
+                  setTargetChooserOpen={setTargetChooserOpen}
+                  targetChooserOpen={targetChooserOpen}
+                  updatePattern={updatePattern}
+                  onUpdateTarget={onUpdateTarget}
+                  onRemoveTarget={onRemoveTarget}
+                />
               );
             })}
             {shouldDisplayElseStatement && (
@@ -211,6 +182,9 @@ BranchingLayout.propTypes = {
   displayPatternTargetText: PropTypes.func,
   sessionBranching: PropTypes.bool,
   onDropdownOpen: PropTypes.func,
+  onAddTarget: PropTypes.func,
+  onUpdateTarget: PropTypes.func,
+  onRemoveTarget: PropTypes.func,
   disabled: PropTypes.bool,
   includeAllVariables: PropTypes.bool,
   includeCurrentQuestion: PropTypes.bool,

@@ -123,6 +123,7 @@ exports[`<TimezoneForm /> Should render and match the snapshot 1`] = `
               class=" css-tlfecz-indicatorContainer"
             >
               <img
+                alt="arrow"
                 class="c3"
                 src="IMAGE_MOCK"
                 transform=""

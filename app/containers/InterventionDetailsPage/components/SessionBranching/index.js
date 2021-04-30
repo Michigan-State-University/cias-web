@@ -27,6 +27,9 @@ import {
   updateFormula,
   updateFormulaCase,
   changeCurrentSession,
+  addFormulaTarget,
+  removeFormulaTarget,
+  updateFormulaTarget,
 } from 'global/reducers/intervention';
 import {
   questionGroupsReducer,
@@ -51,9 +54,13 @@ function SessionBranching({
   fetchQuestions,
   disabled,
   activeSessionId,
+  onAddTarget,
+  onUpdateTarget,
+  onDeleteTarget,
 }) {
   const displayPatternTargetText = target => {
-    if (target.id === '') return formatMessage(messages.selectSession);
+    if (!target || target.id === '')
+      return formatMessage(messages.selectSession);
     const session = find(
       intervention.sessions,
       value => value.id === target.id,
@@ -117,6 +124,9 @@ function SessionBranching({
               includeCurrentSession
               isMultiSession
               sessionBranching
+              onAddTarget={onAddTarget}
+              onUpdateTarget={onUpdateTarget}
+              onRemoveTarget={onDeleteTarget}
             />
           </Column>
         </Row>
@@ -141,6 +151,9 @@ SessionBranching.propTypes = {
   fetchQuestions: PropTypes.func,
   disabled: PropTypes.bool,
   activeSessionId: PropTypes.string,
+  onAddTarget: PropTypes.func,
+  onUpdateTarget: PropTypes.func,
+  onDeleteTarget: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -156,6 +169,9 @@ const mapDispatchToProps = {
   onChangeFormulaStatus: changeFormulaStatus,
   changeSessionIndex: changeCurrentSession,
   fetchQuestions: getQuestionGroupsRequest,
+  onAddTarget: addFormulaTarget,
+  onUpdateTarget: updateFormulaTarget,
+  onDeleteTarget: removeFormulaTarget,
 };
 
 const withConnect = connect(

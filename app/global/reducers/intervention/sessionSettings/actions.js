@@ -9,6 +9,9 @@ import {
   UPDATE_SCHEDULING_PAYLOAD,
   UPDATE_SCHEDULING_DATE,
   UPDATE_DAYS_AFTER_DATE_VARIABLE,
+  ADD_FORMULA_TARGET,
+  UPDATE_FORMULA_TARGET,
+  REMOVE_FORMULA_TARGET,
 } from './constants';
 
 export const updateFormula = (value, sessionId) =>
@@ -111,3 +114,26 @@ export const updateDaysAfterDateVariable = (value, sessionId) =>
       'days_after_date_variable_name',
     ],
   );
+
+export const addFormulaTarget = (sessionId, patternIndex) =>
+  updateSessionSettings({
+    type: ADD_FORMULA_TARGET,
+    data: { sessionId, patternIndex },
+  });
+
+export const updateFormulaTarget = (
+  sessionId,
+  patternIndex,
+  targetIndex,
+  targetData,
+) =>
+  updateSessionSettings({
+    type: UPDATE_FORMULA_TARGET,
+    data: { sessionId, patternIndex, targetIndex, targetData },
+  });
+
+export const removeFormulaTarget = (sessionId, patternIndex, targetIndex) =>
+  updateSessionSettings({
+    type: REMOVE_FORMULA_TARGET,
+    data: { sessionId, patternIndex, targetIndex },
+  });

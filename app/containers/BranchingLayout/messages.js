@@ -28,6 +28,10 @@ export default defineMessages({
     id: `${scope}.goTo`,
     defaultMessage: 'go to',
   },
+  percentGoTo: {
+    id: `${scope}.percentGoTo`,
+    defaultMessage: '% go to',
+  },
   else: {
     id: `${scope}.else`,
     defaultMessage: 'In every other case go to { message }',
@@ -39,5 +43,17 @@ export default defineMessages({
   nextSession: {
     id: `${scope}.nextSession`,
     defaultMessage: 'following session',
+  },
+  percentagesSumInvalid: {
+    id: `${scope}.percentagesSumInvalid`,
+    defaultMessage: 'Sum of random branching percentages must equal 100%',
+  },
+  showRandomization: {
+    id: `${scope}.showRandomization`,
+    defaultMessage: 'Show randomization',
+  },
+  hideRandomization: {
+    id: `${scope}.hideRandomization`,
+    defaultMessage: 'Hide randomization',
   },
 });
