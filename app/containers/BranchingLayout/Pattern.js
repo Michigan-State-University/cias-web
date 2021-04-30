@@ -37,7 +37,11 @@ const Pattern = ({
   const [showRandomization, setShowRandomization] = useState(newPattern);
   return (
     <>
-      <Row align="center" mb={8} justify="around">
+      <Row
+        align="center"
+        mb={8}
+        justify={sessionBranching ? 'start' : 'around'}
+      >
         <Box display="flex" align="center">
           <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
           <InequalityChooser

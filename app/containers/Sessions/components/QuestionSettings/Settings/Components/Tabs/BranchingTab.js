@@ -97,6 +97,7 @@ const BranchingTab = ({
       onAddTarget={onAddTarget}
       onUpdateTarget={onUpdateTarget}
       onRemoveTarget={onRemoveTarget}
+      sessionBranching={false}
     />
   );
 };
