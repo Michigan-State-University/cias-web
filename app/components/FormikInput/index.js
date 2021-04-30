@@ -12,6 +12,7 @@ import { Input } from 'components/Input';
 import Text from 'components/Text';
 import Column from 'components/Column';
 
+import Row from 'components/Row';
 import { ErrorText } from './styled';
 
 function FormikInput({
@@ -20,6 +21,7 @@ function FormikInput({
   type,
   label,
   inputProps,
+  children,
   ...columnStyleProps
 }) {
   const [field, meta] = useField(formikKey);
@@ -32,17 +34,20 @@ function FormikInput({
       <Text mb={5} width="fit-content">
         {label}
       </Text>
-      <Input
-        mb={hasError ? 5 : null}
-        placeholder={placeholder}
-        value={value}
-        name={formikKey}
-        onChange={onChange}
-        onBlur={onBlur}
-        hasError={hasError}
-        keyboard={type}
-        {...inputProps}
-      />
+      <Row width="100%" align="center">
+        <Input
+          mb={hasError ? 5 : null}
+          placeholder={placeholder}
+          value={value}
+          name={formikKey}
+          onChange={onChange}
+          onBlur={onBlur}
+          hasError={hasError}
+          keyboard={type}
+          {...inputProps}
+        />
+        {children}
+      </Row>
       {hasError && <ErrorText>{error.toString()}</ErrorText>}
     </Column>
   );
@@ -54,6 +59,7 @@ FormikInput.propTypes = {
   type: PropTypes.string,
   label: PropTypes.string,
   inputProps: PropTypes.object,
+  children: PropTypes.node,
 };
 
 export default memo(FormikInput);

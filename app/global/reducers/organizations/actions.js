@@ -16,6 +16,9 @@ import {
   DELETE_ORGANIZATION_REQUEST,
   DELETE_ORGANIZATION_SUCCESS,
   DELETE_ORGANIZATION_ERROR,
+  INVITE_ADMIN_REQUEST,
+  INVITE_ADMIN_SUCCESS,
+  INVITE_ADMIN_ERROR,
 } from './constants';
 
 export const fetchOrganizationsRequest = () =>
@@ -52,3 +55,10 @@ export const deleteOrganizationSuccess = id =>
   actionBuilder(DELETE_ORGANIZATION_SUCCESS, { id });
 export const deleteOrganizationFailure = error =>
   actionBuilder(DELETE_ORGANIZATION_ERROR, { error });
+
+export const inviteAdminRequest = (organizationId, email, role) =>
+  actionBuilder(INVITE_ADMIN_REQUEST, { email, role, organizationId });
+export const inviteAdminSuccess = user =>
+  actionBuilder(INVITE_ADMIN_SUCCESS, { user });
+export const inviteAdminFailure = error =>
+  actionBuilder(INVITE_ADMIN_ERROR, { error });

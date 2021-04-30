@@ -40,4 +40,46 @@ export default defineMessages({
     id: `${scope}.noOrganizations`,
     defaultMessage: 'No Organizations found!',
   },
+  interventionAdminsHeader: {
+    id: `${scope}.interventionAdminsHeader`,
+    defaultMessage: 'E-Intervention Admins',
+  },
+  interventionAdminsHelper: {
+    id: `${scope}.interventionAdminsHelper`,
+    defaultMessage: 'E-Intervention Admins can manage the whole Organization',
+  },
+  organizationAdminsHeader: {
+    id: `${scope}.organizationAdminsHeader`,
+    defaultMessage: 'Organization Admins',
+  },
+  organizationAdminsHelper: {
+    id: `${scope}.organizationAdminsHelper`,
+    defaultMessage:
+      'Organization Admins have read-only access to the whole Organization',
+  },
+
+  addAdminButton: {
+    id: `${scope}.addAdminButton`,
+    defaultMessage: '+ Add New Admin',
+  },
+  inviteAdminHeader: {
+    id: `${scope}.inviteAdminHeader`,
+    defaultMessage: 'Invite New Admin',
+  },
+  inviteAdminSubheader: {
+    id: `${scope}.inviteAdminSubheader`,
+    defaultMessage: 'to manage {name}',
+  },
+  adminEmailLabel: {
+    id: `${scope}.adminEmailLabel`,
+    defaultMessage: 'E-mail Address',
+  },
+  adminEmailPlaceholder: {
+    id: `${scope}.adminEmailPlaceholder`,
+    defaultMessage: 'Enter e-mail address',
+  },
+  inviteAdminButton: {
+    id: `${scope}.inviteAdminButton`,
+    defaultMessage: 'Send Invite',
+  },
 });

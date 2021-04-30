@@ -51,3 +51,9 @@ export const makeSelectOrganizationErrors = () =>
     selectOrganizationState,
     substate => substate.errors,
   );
+
+export const makeSelectOrganizationShouldRefetch = () =>
+  createSelector(
+    selectOrganizationState,
+    substate => substate.shouldRefetch,
+  );

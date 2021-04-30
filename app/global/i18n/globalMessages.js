@@ -234,4 +234,14 @@ export default defineMessages({
       defaultMessage: 'Display Character',
     },
   },
+  validators: {
+    email: {
+      id: `${scope}.email`,
+      defaultMessage: 'Email has invalid format',
+    },
+    required: {
+      id: `${scope}.required`,
+      defaultMessage: 'This field is required',
+    },
+  },
 });

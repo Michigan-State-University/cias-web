@@ -11,6 +11,7 @@ export function* fetchOrganization({ payload: { id } }) {
   try {
     const { data } = yield call(axios.get, requestURL);
     const organization = jsonApiToObject(data, 'organization');
+
     yield put(fetchOrganizationSuccess(organization));
   } catch (error) {
     yield put(fetchOrganizationFailure(error));

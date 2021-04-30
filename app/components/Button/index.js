@@ -1,13 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { colors } from 'theme';
+
 import Spinner from 'components/Spinner';
 import { StyledButton } from './StyledButton';
 
 const Button = React.forwardRef(
-  ({ loading, title, children, disabled, ...props }, ref) => (
-    <StyledButton disabled={disabled || loading} {...props} ref={ref}>
+  ({ loading, title, children, disabled, inverted, ...props }, ref) => (
+    <StyledButton
+      disabled={disabled || loading}
+      inverted={inverted}
+      {...props}
+      ref={ref}
+    >
       {!loading && (title || children)}
-      {loading && <Spinner />}
+      {loading && <Spinner color={inverted ? colors.grey : colors.white} />}
     </StyledButton>
   ),
 );

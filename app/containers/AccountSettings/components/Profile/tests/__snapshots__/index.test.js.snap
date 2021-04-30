@@ -78,15 +78,20 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           >
             First Name
           </p>
-          <input
-            class="Input-t9j2q5-0 ptbLy"
-            height="46"
-            name="firstName"
-            placeholder="Enter first name"
-            type="text"
-            value="Name"
+          <div
+            class="Row-y1cs0u-0 fgwsqb"
             width="100%"
-          />
+          >
+            <input
+              class="Input-t9j2q5-0 ptbLy"
+              height="46"
+              name="firstName"
+              placeholder="Enter first name"
+              type="text"
+              value="Name"
+              width="100%"
+            />
+          </div>
         </div>
         <div
           class="Column-sc-4zswzq-0 jCuscc"
@@ -97,15 +102,20 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           >
             Last name
           </p>
-          <input
-            class="Input-t9j2q5-0 ptbLy"
-            height="46"
-            name="lastName"
-            placeholder="Enter last name"
-            type="text"
-            value="Surname"
+          <div
+            class="Row-y1cs0u-0 fgwsqb"
             width="100%"
-          />
+          >
+            <input
+              class="Input-t9j2q5-0 ptbLy"
+              height="46"
+              name="lastName"
+              placeholder="Enter last name"
+              type="text"
+              value="Surname"
+              width="100%"
+            />
+          </div>
         </div>
       </div>
     </div>
