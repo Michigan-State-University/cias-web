@@ -195,7 +195,7 @@ const TargetQuestionChooser = props => {
                 >
                   <Img
                     src={
-                      target.id === session.id
+                      target && target.id === session.id
                         ? presentationProjectorSelected
                         : presentationProjector
                     }
@@ -204,7 +204,9 @@ const TargetQuestionChooser = props => {
                   <Box mr={10} maxWidth={isCurrentSession(session) ? 70 : 140}>
                     <EllipsisText
                       text={session.name}
-                      fontWeight={target.id === session.id ? 'bold' : ''}
+                      fontWeight={
+                        target && target.id === session.id ? 'bold' : ''
+                      }
                       fontSize={13}
                       color={
                         canSelectSession(session.position)
