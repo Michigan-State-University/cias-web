@@ -40,8 +40,9 @@ const Target = ({
       onClick={onTargetClick}
       display="flex"
       align="center"
-      justify="end"
+      justify={sessionBranching ? 'start' : 'end'}
       cursor={onAddTarget ? 'pointer' : undefined}
+      ml={sessionBranching ? 80 : null}
     >
       <Box
         opacity={onAddTarget ? 0.3 : 1}
