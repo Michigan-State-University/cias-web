@@ -63,7 +63,17 @@ const PeedyVoiceSettings = ({
     }
   }, []);
 
+  const onVoicesChange = () => {
+    if (selectedLanguage && selectedLanguage.value) {
+      const languageVoices = ttsVoices[selectedLanguage.value];
+      if (languageVoices && languageVoices.data) {
+        setSelectedVoice(languageVoices.data[0]);
+      }
+    }
+  };
+
   useEffect(() => {
+    onVoicesChange();
     if (selectedLanguage && selectedLanguage.value) {
       const languageVoices = ttsVoices[selectedLanguage.value];
       if (languageVoices === undefined) {
@@ -71,6 +81,12 @@ const PeedyVoiceSettings = ({
       }
     }
   }, [selectedLanguage]);
+
+  useEffect(() => {
+    if (ttsVoices) {
+      onVoicesChange();
+    }
+  }, [ttsVoices]);
 
   useEffect(() => {
     if (data && data.length > 0) {
