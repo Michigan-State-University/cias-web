@@ -31,11 +31,14 @@ function* verifyCode({ payload: { verificationCode } }) {
       },
     );
 
-    Cookies.set(VERIFICATION_CODE_COOKIE, verification_code, {
-      expires: 30,
-      secure: true,
-      sameSite: 'strict',
-    });
+    Cookies.set(
+      email,
+      { [VERIFICATION_CODE_COOKIE]: verification_code },
+      {
+        secure: true,
+        sameSite: 'strict',
+      },
+    );
 
     yield delay(300);
     yield put(verificationCodeSuccess());

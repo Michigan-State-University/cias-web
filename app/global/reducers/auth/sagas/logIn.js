@@ -27,11 +27,11 @@ function* login({ payload: { email, password } }) {
 
   try {
     let config = {};
-    const cookie = Cookies.get(VERIFICATION_CODE_COOKIE);
+    const userCookie = Cookies.getJSON(email);
 
-    if (cookie)
+    if (userCookie && userCookie[VERIFICATION_CODE_COOKIE])
       config = {
-        headers: { 'Verification-Code': cookie },
+        headers: { 'Verification-Code': userCookie[VERIFICATION_CODE_COOKIE] },
       };
 
     const {
