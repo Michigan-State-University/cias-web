@@ -1,32 +1,33 @@
 /**
  *
- * FormikInput
+ * FormikHookInput
  *
  */
 
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { useField } from 'formik';
+import { FormikProps } from 'formik';
 
-import InputComponent from './InputComponent';
-import FormikHookInput from './FormikHookInput';
+import TransparentFormikInput from './TransparentFormikInput';
 
-function FormikInput({
+function FormikHookInput({
   formikKey,
-  placeholder,
+  formikState,
   type,
   label,
   inputProps,
   children,
   ...columnStyleProps
 }) {
-  const [field, meta] = useField(formikKey);
+  const field = formikState.getFieldProps(formikKey);
+  const meta = formikState.getFieldMeta(formikKey);
+
   const { value, onBlur, onChange } = field;
   const { error, touched } = meta;
   const hasError = Boolean(touched && error);
 
   return (
-    <InputComponent
+    <TransparentFormikInput
       error={error}
       hasError={hasError}
       inputProps={inputProps}
@@ -34,18 +35,18 @@ function FormikInput({
       name={formikKey}
       onBlur={onBlur}
       onChange={onChange}
-      placeholder={placeholder}
       type={type}
       value={value}
       {...columnStyleProps}
     >
       {children}
-    </InputComponent>
+    </TransparentFormikInput>
   );
 }
 
-FormikInput.propTypes = {
+FormikHookInput.propTypes = {
   formikKey: PropTypes.string.isRequired,
+  formikState: PropTypes.shape(FormikProps).isRequired,
   placeholder: PropTypes.string.isRequired,
   type: PropTypes.string,
   label: PropTypes.string,
@@ -53,5 +54,4 @@ FormikInput.propTypes = {
   children: PropTypes.node,
 };
 
-export { FormikHookInput };
-export default memo(FormikInput);
+export default memo(FormikHookInput);

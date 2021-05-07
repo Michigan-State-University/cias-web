@@ -62,6 +62,7 @@ module.exports = {
     'no-confusing-arrow': 0,
     'no-console': 1,
     'no-case-declarations': 0,
+    'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
     'no-unused-vars': 2,
     'no-use-before-define': 0,
     'prefer-template': 2,

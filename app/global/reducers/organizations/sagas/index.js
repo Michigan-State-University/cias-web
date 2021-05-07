@@ -5,6 +5,7 @@ import fetchOrganizationSaga from './fetchOrganization';
 import deleteOrganizationSaga from './deleteOrganization';
 import editOrganizationSaga from './editOrganization';
 import inviteAdminSaga from './inviteAdmin';
+import addHealthSystemSaga from './addHealthSystem';
 
 export {
   fetchOrganizationsSaga,
@@ -12,6 +13,7 @@ export {
   editOrganizationSaga,
   fetchOrganizationSaga,
   inviteAdminSaga,
+  addHealthSystemSaga,
 };
 
 export default function* allOrganizationsSagas() {
@@ -22,5 +24,6 @@ export default function* allOrganizationsSagas() {
     deleteOrganizationSaga(),
     editOrganizationSaga(),
     inviteAdminSaga(),
+    addHealthSystemSaga(),
   ]);
 }

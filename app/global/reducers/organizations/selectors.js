@@ -10,10 +10,13 @@ export const selectOrganizationState = createSelector(
   substate => substate.organization,
 );
 
-export const makeSelectOrganizations = () =>
+export const makeSelectOrganizations = organizationId =>
   createSelector(
     selectOrganizationsState,
-    substate => substate.organizations,
+    substate =>
+      organizationId
+        ? substate.organizations.find(({ id }) => id === organizationId)
+        : substate.organizations,
   );
 
 export const makeSelectOrganizationsLoader = () =>
@@ -56,4 +59,10 @@ export const makeSelectOrganizationShouldRefetch = () =>
   createSelector(
     selectOrganizationState,
     substate => substate.shouldRefetch,
+  );
+
+export const makeSelectOrganizationSelectedEntity = () =>
+  createSelector(
+    selectOrganizationState,
+    substate => substate.selectedEntity,
   );

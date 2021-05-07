@@ -5,6 +5,8 @@
  */
 import { defineMessages } from 'react-intl';
 
+import { EntityType } from 'global/reducers/organizations';
+
 export const scope = 'app.components.ReportingDashboardPage';
 
 export default defineMessages({
@@ -38,7 +40,7 @@ export default defineMessages({
   },
   noOrganizations: {
     id: `${scope}.noOrganizations`,
-    defaultMessage: 'No Organizations found!',
+    defaultMessage: 'No Organization data found!',
   },
   interventionAdminsHeader: {
     id: `${scope}.interventionAdminsHeader`,
@@ -81,5 +83,37 @@ export default defineMessages({
   inviteAdminButton: {
     id: `${scope}.inviteAdminButton`,
     defaultMessage: 'Send Invite',
+  },
+  addEntityButton: {
+    id: `${scope}.addEntityButton`,
+    defaultMessage: `+ Add {type, select,
+      ${EntityType.organization} {Organization}
+      ${EntityType.healthSystem} {Health System}
+      ${EntityType.clinic} {Clinic}
+    }`,
+  },
+  healthSystemHeader: {
+    id: `${scope}.healthSystemHeader`,
+    defaultMessage: 'Health System',
+  },
+  healthSystemLabel: {
+    id: `${scope}.healthSystemLabel`,
+    defaultMessage: 'Health System Name',
+  },
+  healthSystemPlaceholder: {
+    id: `${scope}.healthSystemPlaceholder`,
+    defaultMessage: 'Enter Health System Name',
+  },
+  clinicHeader: {
+    id: `${scope}.clinicHeader`,
+    defaultMessage: 'Clinic',
+  },
+  clinicLabel: {
+    id: `${scope}.clinicLabel`,
+    defaultMessage: 'Clinic Name',
+  },
+  clinicPlaceholder: {
+    id: `${scope}.clinicPlaceholder`,
+    defaultMessage: 'Enter Clinic Name',
   },
 });

@@ -30,7 +30,7 @@ function UserAvatar({
       backgroundColor={backgroundColor}
       {...styleProps}
     >
-      <div>{nameShort}</div>
+      <div>{nameShort || '?'}</div>
     </AvatarStyled>
   );
 }

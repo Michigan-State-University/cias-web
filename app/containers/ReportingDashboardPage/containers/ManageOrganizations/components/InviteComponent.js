@@ -1,9 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { memo, useContext } from 'react';
 import { useIntl } from 'react-intl';
-import { Form, Formik } from 'formik';
+import { useFormik } from 'formik';
 
 import EditIcon from 'assets/svg/edit.svg';
+import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 
 import { Col, Row, NoMarginRow } from 'components/ReactGridSystem';
 import ActionIcon from 'components/ActionIcon';
@@ -11,9 +12,9 @@ import Comment from 'components/Text/Comment';
 import H2 from 'components/H2';
 import Icon from 'components/Icon';
 import Button from 'components/Button';
-import TransparentFormikInput from 'components/FormikInput/TransparentFormikInput';
+import { FormikHookInput } from 'components/FormikInput';
+import Form from 'components/Form';
 
-import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 import { SettingsContainer } from '../../../styled';
 import messages from '../../../messages';
 import {
@@ -24,19 +25,30 @@ import {
 const InviteComponent = ({ inviteTo, onCancel, onInvite }) => {
   const { formatMessage } = useIntl();
 
+  const onSubmit = (values, actions) => {
+    onInvite(values.email);
+    actions.setSubmitting(false);
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+    },
+    validationSchema: inviteValidationSchema,
+    onSubmit,
+  });
+
   const {
     loaders: { inviteAdmin: inviteAdminLoader },
     errors: { inviteAdmin: inviteAdminError },
   } = useContext(ManageOrganizationsContext);
 
   useDidUpdateEffect(() => {
-    if (!inviteAdminLoader && !inviteAdminError) onCancel();
+    if (!inviteAdminLoader && !inviteAdminError) {
+      onCancel();
+      formik.handleReset();
+    }
   }, [inviteAdminLoader]);
-
-  const onSubmit = (values, actions) => {
-    onInvite(values.email);
-    actions.setSubmitting(false);
-  };
 
   return (
     <SettingsContainer>
@@ -52,45 +64,36 @@ const InviteComponent = ({ inviteTo, onCancel, onInvite }) => {
         </Comment>
       </NoMarginRow>
 
-      <Formik
-        validationSchema={inviteValidationSchema}
-        initialValues={{
-          email: '',
-        }}
-        onSubmit={onSubmit}
-      >
-        {({ isValid, values, isSubmitting }) => (
-          <Form>
-            <Row justify="between" align="center" mt={30}>
-              <Col>
-                <TransparentFormikInput
-                  formikKey="email"
-                  placeholder={formatMessage(messages.adminEmailPlaceholder)}
-                  label={formatMessage(messages.adminEmailLabel)}
-                  type="email"
-                >
-                  <Icon ml={8} src={EditIcon} />
-                </TransparentFormikInput>
-              </Col>
-            </Row>
+      <Form onSubmit={formik.handleSubmit}>
+        <Row justify="between" align="center" mt={30}>
+          <Col>
+            <FormikHookInput
+              formikKey="email"
+              formikState={formik}
+              placeholder={formatMessage(messages.adminEmailPlaceholder)}
+              label={formatMessage(messages.adminEmailLabel)}
+              type="email"
+            >
+              <Icon ml={8} src={EditIcon} />
+            </FormikHookInput>
+          </Col>
+        </Row>
 
-            <Row mt={30}>
-              <Col xs={8}>
-                <Button
-                  type="submit"
-                  disabled={!values.email || !isValid}
-                  loading={isSubmitting || inviteAdminLoader}
-                  hoverable
-                  width="100%"
-                  px={10}
-                >
-                  {formatMessage(messages.inviteAdminButton)}
-                </Button>
-              </Col>
-            </Row>
-          </Form>
-        )}
-      </Formik>
+        <Row mt={30}>
+          <Col xs={8}>
+            <Button
+              type="submit"
+              disabled={!formik.values.email || !formik.isValid}
+              loading={formik.isSubmitting || inviteAdminLoader}
+              hoverable
+              width="100%"
+              px={10}
+            >
+              {formatMessage(messages.inviteAdminButton)}
+            </Button>
+          </Col>
+        </Row>
+      </Form>
     </SettingsContainer>
   );
 };

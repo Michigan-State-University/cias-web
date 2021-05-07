@@ -15,7 +15,6 @@ import {
 import { Roles } from 'models/User/UserRoles';
 
 import { Col, Row } from 'components/ReactGridSystem';
-import Loader from 'components/Loader';
 
 import TopPanelComponent from './TopPanelComponent';
 import UserListComponent from './UserListComponent';
@@ -31,10 +30,7 @@ const OrganizationSettings = ({
 
   const {
     organization,
-    loaders: {
-      deleteOrganization: deleteOrganizationLoader,
-      fetchOrganization: fetchOrganizationLoader,
-    },
+    loaders: { deleteOrganization: deleteOrganizationLoader },
   } = useContext(ManageOrganizationsContext);
 
   const onDelete = useCallback(() => deleteOrganization(organization.id), [
@@ -52,8 +48,6 @@ const OrganizationSettings = ({
     (email, role) => inviteAdmin(organization.id, email, role),
     [organization?.id],
   );
-
-  if (!organization || fetchOrganizationLoader) return <Loader type="inline" />;
 
   return (
     <>

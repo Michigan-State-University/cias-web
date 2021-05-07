@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 import { colors, fontWeights, paddings } from 'theme';
 
-import FormikInput from '.';
+import InputComponent from './InputComponent';
 
-const TransparentFormikInput = styled(FormikInput)`
+const TransparentFormikInput = styled(InputComponent)`
   input {
     margin-bottom: 0;
     background-color: transparent;

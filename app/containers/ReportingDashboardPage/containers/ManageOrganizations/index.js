@@ -14,6 +14,9 @@ import {
   makeSelectOrganizations,
   makeSelectOrganizationsLoader,
   makeSelectOrganizationShouldRefetch,
+  selectEntityAction,
+  EntityType,
+  makeSelectOrganizationSelectedEntity,
 } from 'global/reducers/organizations';
 
 import { Container, Col, Row } from 'components/ReactGridSystem';
@@ -25,6 +28,7 @@ import { ReportingDashboardPageContext } from '../../constants';
 import messages from '../../messages';
 import Settings from './Settings';
 import { ManageOrganizationsContext } from './constants';
+import OrganizationDetails from './OrganizationDetails';
 
 const ManageOrganizations = ({
   errors,
@@ -34,19 +38,23 @@ const ManageOrganizations = ({
   organizations,
   organizationsLoader,
   shouldRefetch,
+  selectEntity,
+  selectedEntity,
 }) => {
   const { organizationId } = useContext(ReportingDashboardPageContext);
   const { formatMessage } = useIntl();
 
   useEffect(() => {
     fetchOrganization(organizationId);
+    selectEntity(organizationId, EntityType.organization);
   }, [organizationId]);
 
   useEffect(() => {
     if (shouldRefetch) fetchOrganization(organizationId);
   }, [shouldRefetch]);
 
-  const noOrganizations = organizations.length === 0;
+  const noOrganizations =
+    organizations.length === 0 || (!organization && !loaders.fetchOrganization);
 
   const render = useCallback(() => {
     if (organizationsLoader) return <Loader />;
@@ -61,7 +69,7 @@ const ManageOrganizations = ({
     return (
       <Row>
         <Col xs={8}>
-          <div>Manage Organizations {organizationId}</div>
+          <OrganizationDetails />
         </Col>
         <Col xs={4}>
           <SidePanel isOpen>
@@ -74,7 +82,7 @@ const ManageOrganizations = ({
 
   return (
     <ManageOrganizationsContext.Provider
-      value={{ organization, loaders, errors, shouldRefetch }}
+      value={{ organization, loaders, errors, shouldRefetch, selectedEntity }}
     >
       <Helmet>
         <title>{formatMessage(messages.manageOrganizations)}</title>
@@ -92,6 +100,11 @@ ManageOrganizations.propTypes = {
   organizations: PropTypes.arrayOf(PropTypes.object),
   organizationsLoader: PropTypes.bool,
   shouldRefetch: PropTypes.bool,
+  selectEntity: PropTypes.func,
+  selectedEntity: PropTypes.shape({
+    id: PropTypes.string,
+    type: PropTypes.string,
+  }),
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -101,10 +114,12 @@ const mapStateToProps = createStructuredSelector({
   organizations: makeSelectOrganizations(),
   organizationsLoader: makeSelectOrganizationsLoader(),
   shouldRefetch: makeSelectOrganizationShouldRefetch(),
+  selectedEntity: makeSelectOrganizationSelectedEntity(),
 });
 
 const mapDispatchToProps = {
   fetchOrganization: fetchOrganizationRequest,
+  selectEntity: selectEntityAction,
 };
 
 const withConnect = connect(

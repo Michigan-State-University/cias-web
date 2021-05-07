@@ -19,6 +19,13 @@ import {
   INVITE_ADMIN_REQUEST,
   INVITE_ADMIN_SUCCESS,
   INVITE_ADMIN_ERROR,
+  ADD_HEALTH_SYSTEM_REQUEST,
+  ADD_HEALTH_SYSTEM_SUCCESS,
+  ADD_HEALTH_SYSTEM_ERROR,
+  ADD_CLINIC_REQUEST,
+  ADD_CLINIC_SUCCESS,
+  ADD_CLINIC_ERROR,
+  SELECT_ENTITY_ACTION,
 } from './constants';
 
 export const fetchOrganizationsRequest = () =>
@@ -62,3 +69,20 @@ export const inviteAdminSuccess = user =>
   actionBuilder(INVITE_ADMIN_SUCCESS, { user });
 export const inviteAdminFailure = error =>
   actionBuilder(INVITE_ADMIN_ERROR, { error });
+
+export const addHealthSystemRequest = (organizationId, name) =>
+  actionBuilder(ADD_HEALTH_SYSTEM_REQUEST, { name, organizationId });
+export const addHealthSystemSuccess = healthSystem =>
+  actionBuilder(ADD_HEALTH_SYSTEM_SUCCESS, { healthSystem });
+export const addHealthSystemFailure = error =>
+  actionBuilder(ADD_HEALTH_SYSTEM_ERROR, { error });
+
+export const addClinicRequest = (healthSystemId, name) =>
+  actionBuilder(ADD_CLINIC_REQUEST, { name, healthSystemId });
+export const addClinicSuccess = clinic =>
+  actionBuilder(ADD_CLINIC_SUCCESS, { clinic });
+export const addClinicFailure = error =>
+  actionBuilder(ADD_CLINIC_ERROR, { error });
+
+export const selectEntityAction = (id, type, parentId) =>
+  actionBuilder(SELECT_ENTITY_ACTION, { id, type, parentId });

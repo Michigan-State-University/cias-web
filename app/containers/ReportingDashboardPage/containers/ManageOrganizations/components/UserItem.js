@@ -36,7 +36,7 @@ const UserItem = ({ avatarColor, user }) => {
           firstName={firstName}
           backgroundColor={avatarColor}
         />
-        <Text fontWeight="bold">{fullName}</Text>
+        <Text fontWeight="bold">{fullName.trim() || email}</Text>
       </>,
     );
 

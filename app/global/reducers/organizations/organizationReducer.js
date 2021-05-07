@@ -1,6 +1,5 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
-import merge from 'lodash/merge';
 
 import {
   FETCH_ORGANIZATION_REQUEST,
@@ -15,9 +14,14 @@ import {
   INVITE_ADMIN_REQUEST,
   INVITE_ADMIN_SUCCESS,
   INVITE_ADMIN_ERROR,
+  ADD_HEALTH_SYSTEM_REQUEST,
+  ADD_HEALTH_SYSTEM_SUCCESS,
+  ADD_HEALTH_SYSTEM_ERROR,
+  SELECT_ENTITY_ACTION,
 } from './constants';
 
 export const initialState = {
+  selectedEntity: null,
   organization: null,
   cache: { organization: null },
   loaders: {
@@ -25,12 +29,14 @@ export const initialState = {
     editOrganization: false,
     deleteOrganization: false,
     inviteAdmin: false,
+    addHealthSystem: false,
   },
   errors: {
     fetchOrganization: null,
     editOrganization: null,
     deleteOrganization: null,
     inviteAdmin: null,
+    addHealthSystem: null,
   },
   shouldRefetch: false,
 };
@@ -43,6 +49,8 @@ const organizationReducer = (state = initialState, { type, payload }) =>
         draft.loaders.fetchOrganization = true;
         draft.errors.fetchOrganization = null;
         draft.shouldRefetch = false;
+
+        if (payload.id !== state.organization?.id) draft.organization = null;
         break;
       }
 
@@ -61,17 +69,20 @@ const organizationReducer = (state = initialState, { type, payload }) =>
       }
 
       case EDIT_ORGANIZATION_REQUEST: {
-        draft.organization = merge(state.organization, payload.organization);
+        draft.organization = {
+          ...state.cache.organization,
+          ...payload.organization,
+        };
         draft.loaders.editOrganization = true;
         draft.errors.editOrganization = null;
         break;
       }
 
       case EDIT_ORGANIZATION_SUCCESS: {
-        draft.cache.organization = merge(
-          state.cache.organization,
-          payload.organization,
-        );
+        draft.cache.organization = {
+          ...state.cache.organization,
+          ...payload.organization,
+        };
         draft.loaders.editOrganization = false;
         draft.errors.editOrganization = null;
         break;
@@ -120,6 +131,33 @@ const organizationReducer = (state = initialState, { type, payload }) =>
         draft.loaders.inviteAdmin = false;
         draft.errors.inviteAdmin = payload.error;
         break;
+      }
+
+      case ADD_HEALTH_SYSTEM_REQUEST: {
+        draft.loaders.addHealthSystem = true;
+        draft.errors.inviteAdmin = null;
+        break;
+      }
+
+      case ADD_HEALTH_SYSTEM_SUCCESS: {
+        draft.loaders.addHealthSystem = false;
+        draft.errors.inviteAdmin = null;
+
+        if (state.organization.id === payload.healthSystem.organizationId) {
+          draft.organization.healthSystems.unshift(payload.healthSystem);
+          draft.cache.organization.healthSystems.unshift(payload.healthSystem);
+        }
+        break;
+      }
+
+      case ADD_HEALTH_SYSTEM_ERROR: {
+        draft.loaders.addHealthSystem = false;
+        draft.errors.inviteAdmin = payload.error;
+        break;
+      }
+
+      case SELECT_ENTITY_ACTION: {
+        draft.selectedEntity = payload;
       }
     }
   });

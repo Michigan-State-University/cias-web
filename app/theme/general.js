@@ -24,6 +24,7 @@ const elements = {
   draggableContainerSize: 702,
   characterInitialPosition,
   grid: { firstColWidth: 300, colWidth: 80, leftPadding: 40 },
+  treeRowHeight: 80,
 };
 
 const visualAnalogScaleLabelStyles = {
