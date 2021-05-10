@@ -117,6 +117,7 @@
     "react-flag-kit": "^0.3.1",
     "react-grid-system": "^7.1.2",
     "react-helmet": "6.1.0",
+    "react-idle-timer": "^4.6.2",
     "react-inlinesvg": "^2.2.2",
     "react-intl": "^5.15.5",
     "react-lottie": "^1.2.3",

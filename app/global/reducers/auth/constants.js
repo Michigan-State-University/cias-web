@@ -1,5 +1,6 @@
 export const LOG_IN_USER = 'app/auth/LOG_IN_USER';
 export const LOG_OUT = 'app/auth/LOG_OUT';
+export const RESET_REDUCER = 'app/auth/RESET_REDUCER';
 
 export const LOG_IN_GUEST = 'app/auth/LOG_IN_GUEST';
 

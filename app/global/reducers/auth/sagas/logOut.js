@@ -4,6 +4,7 @@ import { push } from 'connected-react-router';
 import LocalStorageService from 'utils/localStorageService';
 
 import { LOG_OUT, REDIRECT_QUERY_KEY } from '../constants';
+import { resetReducer } from '../actions';
 
 export function* logOut(
   { payload: { redirectTo } } = { payload: { redirectTo: null } },
@@ -18,7 +19,7 @@ export function* logOut(
     queryParams.append(REDIRECT_QUERY_KEY, encodeURIComponent(redirectTo));
 
   yield put(push(`/login${redirectTo ? `?${queryParams.toString()}` : ''}`));
-  yield window.location.reload();
+  yield put(resetReducer());
 }
 
 export default function* logOutSaga() {
