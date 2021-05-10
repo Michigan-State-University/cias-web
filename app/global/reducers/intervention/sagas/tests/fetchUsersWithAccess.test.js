@@ -9,6 +9,7 @@ import { createIntervention } from 'utils/reducerCreators';
 import fetchSessionEmailsSaga, {
   fetchSessionEmails,
 } from 'global/reducers/intervention/sagas/fetchSessionEmails';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   fetchUsersWithAccessSuccess,
   fetchUsersWithAccessFailure,
@@ -23,9 +24,17 @@ describe('fetchUsersWithAccess saga', () => {
     intervention: { ...initialState, intervention: mockIntervention },
   };
   const apiResponse = {
-    user_sessions: [
-      { user_id: '0', email: 'user0@mail.com' },
-      { user_id: '1', email: 'user1@mail.com' },
+    data: [
+      {
+        id: '0',
+        type: 'invitation',
+        attributes: { email: 'user0@mail.com' },
+      },
+      {
+        id: '1',
+        type: 'invitation',
+        attributes: { email: 'user1@mail.com' },
+      },
     ],
   };
   const payload = { id: mockIntervention.id };
@@ -34,7 +43,9 @@ describe('fetchUsersWithAccess saga', () => {
     expectSaga(fetchUsersWithAccess, { payload })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(fetchUsersWithAccessSuccess(apiResponse.user_sessions))
+      .put(
+        fetchUsersWithAccessSuccess(jsonApiToArray(apiResponse, 'invitation')),
+      )
       .run());
   it('Check fetchUsersWithAccess error connection', () => {
     const error = new Error('test');
