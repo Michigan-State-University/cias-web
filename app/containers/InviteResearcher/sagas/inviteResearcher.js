@@ -6,6 +6,7 @@ import { formatMessage } from 'utils/intlOutsideReact';
 import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
 import { addUserToList } from 'global/reducers/userList';
 
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import messages from '../messages';
 import {
   INVITE_RESEARCHER_REQUEST,
@@ -19,7 +20,8 @@ export function* inviteResearcher({ payload: { email } }) {
   const body = { invitation: { email } };
   try {
     const { data } = yield call(axios.post, requestUrl, body);
-    const mappedUser = mapInvitedResearcher(data);
+    const user = jsonApiToObject(data, 'invitation');
+    const mappedUser = mapInvitedResearcher(user);
 
     yield put(inviteResearcherSuccess(mappedUser));
     yield put(addUserToList(mappedUser));

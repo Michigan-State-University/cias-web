@@ -3,6 +3,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   ENABLE_USER_ACCESS_REQUEST,
   ENABLE_USER_ACCESS_ERROR,
@@ -13,13 +14,12 @@ import messages from '../messages';
 export function* enableUserAccess({ payload: { id, emails } }) {
   const requestURL = `v1/interventions/${id}/invitations`;
   try {
-    const {
-      data: { user_sessions: users },
-    } = yield call(axios.post, requestURL, {
+    const { data } = yield call(axios.post, requestURL, {
       user_session: {
         emails,
       },
     });
+    const users = jsonApiToArray(data, 'invitation');
     yield put(enableUserAccessSuccess(users));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.giveUserAccessError), {

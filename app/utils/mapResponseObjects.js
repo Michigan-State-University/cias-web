@@ -1,3 +1,5 @@
+import pick from 'lodash/pick';
+
 export const mapQuestionToStateObject = question => ({
   ...question.attributes,
   id: question.id,
@@ -52,6 +54,25 @@ export const mapCurrentUserWithoutAttributes = user => ({
   smsNotification: user.sms_notification,
   feedbackCompleted: user.feedback_completed,
 });
+
+export const pickUserAttributes = user =>
+  pick(user, [
+    'id',
+    'firstName',
+    'lastName',
+    'fullName',
+    'email',
+    'roles',
+    'avatar',
+    'timeZone',
+    'active',
+    'phone',
+    'teamId',
+    'teamName',
+    'emailNotification',
+    'smsNotification',
+    'feedbackCompleted',
+  ]);
 
 export const mapTeam = team => ({
   id: team.id,

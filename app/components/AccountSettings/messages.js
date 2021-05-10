@@ -211,7 +211,7 @@ export default defineMessages({
   codeInfo: {
     id: `${scope}.codeInfo`,
     defaultMessage:
-      'In a moment, you should receive a text message with the code on your phone number <b>{phone}</b>. <br> Enter the code you received into the form below to confirm the identity of the number.',
+      'In a moment, you should receive a text message with the code on your phone number <b>{phone}</b>. <br/> Enter the code you received into the form below to confirm the identity of the number.',
   },
   resendCode: {
     id: `${scope}.resendCode`,

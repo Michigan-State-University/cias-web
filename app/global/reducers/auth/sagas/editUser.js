@@ -2,10 +2,11 @@ import axios from 'axios';
 import { put, select, takeLatest, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
-import { mapCurrentUserWithoutAttributes } from 'utils/mapResponseObjects';
+import { pickUserAttributes } from 'utils/mapResponseObjects';
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
 import LocalStorageService from 'utils/localStorageService';
 
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { makeSelectUser } from '../selectors';
 import { editUserSuccess, editUserError } from '../actions';
 import { EDIT_USER_REQUEST, EDIT_USER_ERROR } from '../constants';
@@ -19,9 +20,10 @@ export function* editUser({ payload }) {
     const { data } = yield call(axios.patch, requestURL, {
       user: userData,
     });
-    const mappedUser = mapCurrentUserWithoutAttributes(data);
-    yield call(LocalStorageService.updateState, { user: mappedUser });
-    yield put(editUserSuccess(mappedUser));
+    const editedUser = jsonApiToObject(data, 'user');
+    const pickedUser = pickUserAttributes(editedUser);
+    yield call(LocalStorageService.updateState, { user: pickedUser });
+    yield put(editUserSuccess(pickedUser));
   } catch (error) {
     yield call(toast.error, error.toString(), {
       toastId: EDIT_USER_ERROR,
