@@ -6,7 +6,7 @@ import { colors } from 'theme';
 import DashedCircleIcon from 'assets/svg/circle-dashed.svg';
 
 import { Col, Row, NoMarginRow } from 'components/ReactGridSystem';
-import Text from 'components/Text';
+import EllipsisText from 'components/Text/EllipsisText';
 import UserAvatar from 'components/UserAvatar';
 import Icon from 'components/Icon';
 
@@ -28,24 +28,31 @@ const UserItem = ({ avatarColor, user }) => {
     return wrapper(
       <>
         <UserAvatar
+          avatar={avatar}
+          backgroundColor={avatarColor}
+          firstName={firstName}
+          height={30}
+          lastName={lastName}
           mr={10}
           width={30}
-          height={30}
-          avatar={avatar}
-          lastName={lastName}
-          firstName={firstName}
-          backgroundColor={avatarColor}
         />
-        <Text fontWeight="bold">{fullName.trim() || email}</Text>
+        <EllipsisText
+          fontWeight="bold"
+          maxWidth="200px"
+          text={fullName.trim() || email}
+        />
       </>,
     );
 
   return wrapper(
     <>
       <Icon src={DashedCircleIcon} mr={10} />
-      <Text fontWeight="bold" color={colors.grey}>
-        {email}
-      </Text>
+      <EllipsisText
+        color={colors.grey}
+        fontWeight="bold"
+        maxWidth="200px"
+        text={email}
+      />
     </>,
   );
 };

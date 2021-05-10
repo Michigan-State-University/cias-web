@@ -39,12 +39,15 @@ import {
   VERIFICATION_CODE_SUCCESS,
   VERIFICATION_CODE_ERROR,
   VERIFICATION_CODE_NEEDED,
+  RESET_REDUCER,
 } from './constants';
 
 export const logIn = user => actionBuilder(LOG_IN_USER, { user });
 export const logInGuestRequest = () => actionBuilder(LOG_IN_GUEST);
 
 export const logOut = redirectTo => actionBuilder(LOG_OUT, { redirectTo });
+
+export const resetReducer = () => actionBuilder(RESET_REDUCER, {});
 
 export const editUserRequest = user =>
   actionBuilder(EDIT_USER_REQUEST, { user });

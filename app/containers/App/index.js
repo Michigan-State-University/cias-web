@@ -38,6 +38,7 @@ import ReportingDashboardPage from 'containers/ReportingDashboardPage/Loadable';
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
+import IdleTimer from 'components/IdleTimer/Loadable';
 
 import { Roles, ResearcherRoles } from 'models/User/UserRoles';
 
@@ -96,6 +97,9 @@ export function App({ user }) {
 
   return (
     <>
+      <ApiQueryMessageHandler />
+      <IdleTimer />
+
       <Switch>
         <AppRoute
           exact
@@ -367,7 +371,6 @@ export function App({ user }) {
         </AppRoute>
       </Switch>
       <GlobalStyle />
-      <ApiQueryMessageHandler />
     </>
   );
 }

@@ -4,6 +4,7 @@ export {
   REDIRECT_QUERY_KEY,
   ACCOUNT_CONFIRMATION_ERROR,
   ACCOUNT_CONFIRMATION_SUCCESS,
+  RESET_REDUCER,
 } from './constants';
 export {
   logIn,
