@@ -44,10 +44,10 @@ describe('fetchInterventionEmails saga', () => {
 
     return expectSaga(fetchSessionEmails, { payload })
       .withState(mockState)
-      .provide([[matchers.call.fn(axios.get), apiResponse.data]])
+      .provide([[matchers.call.fn(axios.get), apiResponse]])
       .put(
         fetchSessionEmailsSuccess(
-          jsonApiToArray(apiResponse, 'invitation'),
+          jsonApiToArray(apiResponse.data, 'invitation'),
           payload.index,
         ),
       )

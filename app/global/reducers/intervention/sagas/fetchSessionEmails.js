@@ -15,7 +15,7 @@ export function* fetchSessionEmails({ payload: { index } }) {
   try {
     const { data } = yield call(axios.get, requestURL);
     const users = jsonApiToArray(data, 'invitation');
-    yield put(fetchSessionEmailsSuccess(users, index));
+    yield put(fetchSessionEmailsSuccess(users || [], index));
   } catch (error) {
     yield put(fetchSessionEmailsError(error));
   }
