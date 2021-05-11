@@ -26,6 +26,24 @@ import {
   ADD_CLINIC_SUCCESS,
   ADD_CLINIC_ERROR,
   SELECT_ENTITY_ACTION,
+  EDIT_HEALTH_SYSTEM_REQUEST,
+  EDIT_HEALTH_SYSTEM_SUCCESS,
+  EDIT_HEALTH_SYSTEM_ERROR,
+  DELETE_HEALTH_SYSTEM_REQUEST,
+  DELETE_HEALTH_SYSTEM_SUCCESS,
+  DELETE_HEALTH_SYSTEM_ERROR,
+  EDIT_CLINIC_REQUEST,
+  EDIT_CLINIC_SUCCESS,
+  EDIT_CLINIC_ERROR,
+  DELETE_CLINIC_REQUEST,
+  DELETE_CLINIC_SUCCESS,
+  DELETE_CLINIC_ERROR,
+  FETCH_HEALTH_SYSTEM_REQUEST,
+  FETCH_HEALTH_SYSTEM_SUCCESS,
+  FETCH_HEALTH_SYSTEM_ERROR,
+  FETCH_CLINIC_REQUEST,
+  FETCH_CLINIC_SUCCESS,
+  FETCH_CLINIC_ERROR,
 } from './constants';
 
 export const fetchOrganizationsRequest = () =>
@@ -63,12 +81,19 @@ export const deleteOrganizationSuccess = id =>
 export const deleteOrganizationFailure = error =>
   actionBuilder(DELETE_ORGANIZATION_ERROR, { error });
 
-export const inviteAdminRequest = (organizationId, email, role) =>
-  actionBuilder(INVITE_ADMIN_REQUEST, { email, role, organizationId });
+export const inviteAdminRequest = (id, email, role) =>
+  actionBuilder(INVITE_ADMIN_REQUEST, { email, role, id });
 export const inviteAdminSuccess = user =>
   actionBuilder(INVITE_ADMIN_SUCCESS, { user });
 export const inviteAdminFailure = error =>
   actionBuilder(INVITE_ADMIN_ERROR, { error });
+
+export const fetchHealthSystemRequest = id =>
+  actionBuilder(FETCH_HEALTH_SYSTEM_REQUEST, { id });
+export const fetchHealthSystemSuccess = healthSystem =>
+  actionBuilder(FETCH_HEALTH_SYSTEM_SUCCESS, { healthSystem });
+export const fetchHealthSystemFailure = error =>
+  actionBuilder(FETCH_HEALTH_SYSTEM_ERROR, { error });
 
 export const addHealthSystemRequest = (organizationId, name) =>
   actionBuilder(ADD_HEALTH_SYSTEM_REQUEST, { name, organizationId });
@@ -77,12 +102,47 @@ export const addHealthSystemSuccess = healthSystem =>
 export const addHealthSystemFailure = error =>
   actionBuilder(ADD_HEALTH_SYSTEM_ERROR, { error });
 
+export const editHealthSystemRequest = healthSystem =>
+  actionBuilder(EDIT_HEALTH_SYSTEM_REQUEST, { healthSystem });
+export const editHealthSystemSuccess = healthSystem =>
+  actionBuilder(EDIT_HEALTH_SYSTEM_SUCCESS, { healthSystem });
+export const editHealthSystemFailure = error =>
+  actionBuilder(EDIT_HEALTH_SYSTEM_ERROR, { error });
+
+export const deleteHealthSystemRequest = id =>
+  actionBuilder(DELETE_HEALTH_SYSTEM_REQUEST, { id });
+export const deleteHealthSystemSuccess = id =>
+  actionBuilder(DELETE_HEALTH_SYSTEM_SUCCESS, { id });
+export const deleteHealthSystemFailure = error =>
+  actionBuilder(DELETE_HEALTH_SYSTEM_ERROR, { error });
+
+export const fetchClinicRequest = id =>
+  actionBuilder(FETCH_CLINIC_REQUEST, { id });
+export const fetchClinicSuccess = clinic =>
+  actionBuilder(FETCH_CLINIC_SUCCESS, { clinic });
+export const fetchClinicFailure = error =>
+  actionBuilder(FETCH_CLINIC_ERROR, { error });
+
 export const addClinicRequest = (healthSystemId, name) =>
   actionBuilder(ADD_CLINIC_REQUEST, { name, healthSystemId });
 export const addClinicSuccess = clinic =>
   actionBuilder(ADD_CLINIC_SUCCESS, { clinic });
 export const addClinicFailure = error =>
   actionBuilder(ADD_CLINIC_ERROR, { error });
+
+export const editClinicRequest = clinic =>
+  actionBuilder(EDIT_CLINIC_REQUEST, { clinic });
+export const editClinicSuccess = clinic =>
+  actionBuilder(EDIT_CLINIC_SUCCESS, { clinic });
+export const editClinicFailure = error =>
+  actionBuilder(EDIT_CLINIC_ERROR, { error });
+
+export const deleteClinicRequest = (id, healthSystemId) =>
+  actionBuilder(DELETE_CLINIC_REQUEST, { id, healthSystemId });
+export const deleteClinicSuccess = (id, healthSystemId) =>
+  actionBuilder(DELETE_CLINIC_SUCCESS, { id, healthSystemId });
+export const deleteClinicFailure = error =>
+  actionBuilder(DELETE_CLINIC_ERROR, { error });
 
 export const selectEntityAction = (id, type, parentId) =>
   actionBuilder(SELECT_ENTITY_ACTION, { id, type, parentId });

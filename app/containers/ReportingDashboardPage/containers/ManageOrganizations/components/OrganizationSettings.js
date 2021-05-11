@@ -38,9 +38,7 @@ const OrganizationSettings = ({
   ]);
 
   const onEdit = useCallback(
-    value => {
-      editOrganization({ ...value, id: organization.id });
-    },
+    value => editOrganization({ ...value, id: organization.id }),
     [organization?.id],
   );
 

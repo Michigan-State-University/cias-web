@@ -39,6 +39,6 @@ export const RolesColors = {
   [Roles.thirdParty]: colors.olive,
   [Roles.eInterventionAdmin]: colors.jungleGreen,
   [Roles.organizationAdmin]: colors.azure,
-  [Roles.healthSystemAdmin]: colors.zirkon,
-  [Roles.clinicAdmin]: colors.botticelli,
+  [Roles.healthSystemAdmin]: colors.orangePeel,
+  [Roles.clinicAdmin]: colors.pink,
 };

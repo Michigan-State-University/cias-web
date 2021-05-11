@@ -59,7 +59,23 @@ export default defineMessages({
     defaultMessage:
       'Organization Admins have read-only access to the whole Organization',
   },
-
+  healthSystemAdminsHeader: {
+    id: `${scope}.healthSystemAdminsHeader`,
+    defaultMessage: 'Health System Admins',
+  },
+  healthSystemAdminsHelper: {
+    id: `${scope}.healthSystemAdminsHelper`,
+    defaultMessage:
+      'Health System Admins have read-only access to the whole Health System',
+  },
+  clinicAdminsHeader: {
+    id: `${scope}.clinicAdminsHeader`,
+    defaultMessage: 'Clinic Admins',
+  },
+  clinicAdminsHelper: {
+    id: `${scope}.clinicAdminsHelper`,
+    defaultMessage: 'Clinic Admins have read-only access to the whole Clinic',
+  },
   addAdminButton: {
     id: `${scope}.addAdminButton`,
     defaultMessage: '+ Add New Admin',

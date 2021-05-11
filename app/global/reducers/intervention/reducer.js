@@ -201,7 +201,7 @@ export const interventionReducer = (state = initialState, action) =>
         const sessionIndex = state.intervention.sessions.findIndex(
           session => session.id === action.payload.data.sessionId,
         );
-        if (sessionIndex > -1) {
+        if (sessionIndex !== -1) {
           draft.currentSessionIndex = sessionIndex;
           draft.loaders.editIntervention = true;
           draft.intervention.sessions[sessionIndex] = {
@@ -314,7 +314,7 @@ export const interventionReducer = (state = initialState, action) =>
           sessionId,
         );
 
-        if (sessionIndex > -1) {
+        if (sessionIndex !== -1) {
           draft.loaders.sendSessionLoading = true;
           draft.cache.intervention = state.intervention;
           const mappedEmails = payloadEmails.map(email => ({
@@ -386,7 +386,7 @@ export const interventionReducer = (state = initialState, action) =>
           session => session.id === action.payload.sessionId,
         );
 
-        if (sessionIndex > -1)
+        if (sessionIndex !== -1)
           set(
             draft.intervention.sessions[sessionIndex],
             action.payload.path,
@@ -399,7 +399,7 @@ export const interventionReducer = (state = initialState, action) =>
           session => session.id === action.payload.session.id,
         );
 
-        if (sessionIndex > -1) {
+        if (sessionIndex !== -1) {
           draft.intervention.sessions[sessionIndex] = action.payload.session;
           draft.cache.intervention.sessions[sessionIndex] =
             action.payload.session;

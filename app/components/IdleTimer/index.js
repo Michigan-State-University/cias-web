@@ -50,7 +50,7 @@ const IdleTimer = ({ logOut, user }) => {
     // Handle case when user is logged out earlier than error interceptor kicks in
     if (isUserLogged) reset();
 
-    Promise.reject(error);
+    return Promise.reject(error);
   };
 
   const { reset, pause } = useIdleTimer({
@@ -72,7 +72,7 @@ const IdleTimer = ({ logOut, user }) => {
     if (isUserLogged) {
       const requestInterceptorInstance = axios.interceptors.request.use(
         requestInterceptor,
-        null,
+        undefined,
       );
 
       const responseInterceptorInstance = axios.interceptors.response.use(

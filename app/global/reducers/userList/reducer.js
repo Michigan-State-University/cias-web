@@ -113,7 +113,7 @@ const userListReducer = (state = initialState, { type, payload }) =>
             id === payload.userId && teamId === payload.teamId,
         );
 
-        if (index > -1) draft.users.splice(index, 1);
+        if (index !== -1) draft.users.splice(index, 1);
 
         break;
       }

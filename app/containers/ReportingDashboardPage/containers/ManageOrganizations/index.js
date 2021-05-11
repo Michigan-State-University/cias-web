@@ -50,8 +50,9 @@ const ManageOrganizations = ({
   }, [organizationId]);
 
   useEffect(() => {
-    if (shouldRefetch) fetchOrganization(organizationId);
-  }, [shouldRefetch]);
+    if (shouldRefetch[EntityType.organization])
+      fetchOrganization(organizationId);
+  }, [shouldRefetch[EntityType.organization]]);
 
   const noOrganizations =
     organizations.length === 0 || (!organization && !loaders.fetchOrganization);
@@ -99,7 +100,11 @@ ManageOrganizations.propTypes = {
   organization: PropTypes.object,
   organizations: PropTypes.arrayOf(PropTypes.object),
   organizationsLoader: PropTypes.bool,
-  shouldRefetch: PropTypes.bool,
+  shouldRefetch: PropTypes.shape({
+    [EntityType.organization]: PropTypes.bool,
+    [EntityType.healthSystem]: PropTypes.bool,
+    [EntityType.clinic]: PropTypes.bool,
+  }),
   selectEntity: PropTypes.func,
   selectedEntity: PropTypes.shape({
     id: PropTypes.string,

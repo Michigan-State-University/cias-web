@@ -11,6 +11,7 @@ export const StyledSortableTree = styled(SortableTree)`
     box-shadow: initial;
     background-color: initial;
     padding: 10px;
+    min-width: auto;
   }
 
   .rst__rowContentsDragDisabled {

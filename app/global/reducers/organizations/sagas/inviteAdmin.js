@@ -8,15 +8,13 @@ import {
   INVITE_ADMIN_ERROR,
   INVITE_ADMIN_REQUEST,
   INVITE_ADMIN_SUCCESS,
-  RoleToEndpointMap,
+  mapRoleToInviteEndpoint,
 } from '../constants';
 import { inviteAdminFailure, inviteAdminSuccess } from '../actions';
 import messages from '../messages';
 
-export function* inviteAdmin({ payload: { email, role, organizationId } }) {
-  const requestURL = `v1/organizations/${organizationId}/invitations/${
-    RoleToEndpointMap[role]
-  }`;
+export function* inviteAdmin({ payload: { email, role, id } }) {
+  const requestURL = mapRoleToInviteEndpoint(role, id);
 
   try {
     yield call(axios.post, requestURL, {

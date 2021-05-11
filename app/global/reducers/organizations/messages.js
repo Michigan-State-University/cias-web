@@ -24,4 +24,20 @@ export default defineMessages({
     id: `${scope}.deleteOrganizationError`,
     defaultMessage: 'Failed to delete Organization!',
   },
+  deleteHealthSystemSuccess: {
+    id: `${scope}.deleteHealthSystemSuccess`,
+    defaultMessage: 'Health System deleted successfully!',
+  },
+  deleteHealthSystemError: {
+    id: `${scope}.deleteHealthSystemError`,
+    defaultMessage: 'Failed to delete Health System!',
+  },
+  deleteClinicSuccess: {
+    id: `${scope}.deleteClinicSuccess`,
+    defaultMessage: 'Clinic deleted successfully!',
+  },
+  deleteClinicError: {
+    id: `${scope}.deleteClinicError`,
+    defaultMessage: 'Failed to delete Clinic!',
+  },
 });

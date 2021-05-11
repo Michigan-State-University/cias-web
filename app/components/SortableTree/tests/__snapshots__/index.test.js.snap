@@ -6,6 +6,7 @@ exports[`<SortableTree /> Should render, not log errors in console and match the
   box-shadow: initial;
   background-color: initial;
   padding: 10px;
+  min-width: auto;
 }
 
 .c0 .rst__rowContentsDragDisabled {

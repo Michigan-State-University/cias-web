@@ -66,3 +66,12 @@ export const makeSelectOrganizationSelectedEntity = () =>
     selectOrganizationState,
     substate => substate.selectedEntity,
   );
+
+export const makeSelectHealthSystem = id =>
+  createSelector(
+    selectOrganizationState,
+    substate =>
+      substate.organization.healthSystems.find(
+        ({ id: healthSystemId }) => id === healthSystemId,
+      ),
+  );

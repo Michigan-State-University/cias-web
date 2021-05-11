@@ -92,7 +92,7 @@ export const editQuestionErrorCommon = (draft, payload) => {
   const finder = question => question.id === payload.questionId;
   const cacheIndex = draft.cache.questions.findIndex(finder);
   const index = draft.questions.findIndex(finder);
-  if (cacheIndex > -1 && index > -1)
+  if (cacheIndex !== -1 && index !== -1)
     draft.questions[index] = draft.cache.questions[cacheIndex];
 };
 

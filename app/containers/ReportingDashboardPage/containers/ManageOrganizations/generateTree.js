@@ -8,6 +8,7 @@ export const generateTreeFromOrganization = ({
   organizationData,
   onClick,
   addHealthSystem,
+  addClinic,
   formatMessage,
   addHealthSystemLoader,
 }) => {
@@ -43,7 +44,7 @@ export const generateTreeFromOrganization = ({
     id,
     children: [
       generateButtonNode({
-        onClick: null,
+        onClick: () => addClinic(id),
         text: formatMessage(messages.addEntityButton, {
           type: EntityType.clinic,
         }),

@@ -25,7 +25,7 @@ import {
 } from '../constants';
 
 const createState = (key, value) => ({
-  ...initialState,
+  ...cloneDeep(initialState),
   [key]: value,
 });
 

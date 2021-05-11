@@ -36,6 +36,7 @@ const colors = {
   lavender: '#DFEBFC',
   aqua: '#00FFF7',
   manatee: '#8C94A6',
+  orangePeel: '#FB9B0A',
 };
 
 const themeColors = {

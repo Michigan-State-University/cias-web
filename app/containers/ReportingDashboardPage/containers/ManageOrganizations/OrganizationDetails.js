@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import {
   addHealthSystemRequest,
   selectEntityAction,
+  addClinicRequest,
 } from 'global/reducers/organizations';
 
 import { Col, Row } from 'components/ReactGridSystem';
@@ -22,7 +23,7 @@ import { generateTreeFromOrganization } from './generateTree';
 /**
  * General container for Organization, Health System and Clinic
  */
-const OrganizationDetails = ({ addHealthSystem, selectEntity }) => {
+const OrganizationDetails = ({ addHealthSystem, addClinic, selectEntity }) => {
   const { formatMessage } = useIntl();
   const {
     organization,
@@ -37,6 +38,11 @@ const OrganizationDetails = ({ addHealthSystem, selectEntity }) => {
     [organization],
   );
 
+  const onAddClinic = useCallback(
+    healthSystemId => addClinic(healthSystemId),
+    [],
+  );
+
   const onSelectEntity = useCallback(
     (type, id, parentId) => () => selectEntity(type, id, parentId),
     [],
@@ -47,6 +53,8 @@ const OrganizationDetails = ({ addHealthSystem, selectEntity }) => {
       generateTreeFromOrganization({
         organizationData: organization,
         addHealthSystem: onAddHealthSystem,
+        addClinic: onAddClinic,
+        onAddHealthSystem,
         formatMessage,
         onClick: onSelectEntity,
         addHealthSystemLoader,
@@ -77,11 +85,13 @@ const OrganizationDetails = ({ addHealthSystem, selectEntity }) => {
 
 OrganizationDetails.propTypes = {
   addHealthSystem: PropTypes.func,
+  addClinic: PropTypes.func,
   selectEntity: PropTypes.func,
 };
 
 const mapDispatchToProps = {
   addHealthSystem: addHealthSystemRequest,
+  addClinic: addClinicRequest,
   selectEntity: selectEntityAction,
 };
 
