@@ -8,10 +8,11 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 
 import LocalStorageService from 'utils/localStorageService';
 import { createUser } from 'utils/reducerCreators';
-import { mapCurrentUserWithoutAttributes } from 'utils/mapResponseObjects';
+import { pickUserAttributes } from 'utils/mapResponseObjects';
 import { initialState } from 'global/reducers/auth/reducer';
 import { apiUserResponse } from 'utils/apiResponseCreators';
 
+import objectToCamelCase from 'utils/objectToCamelCase';
 import { editUserSuccess, editUserError } from '../../actions';
 import { EDIT_USER_REQUEST, EDIT_USER_ERROR } from '../../constants';
 import { editUser } from '../editUser';
@@ -26,15 +27,21 @@ describe('editUser saga', () => {
     const apiResponse = cloneDeep({
       data: {
         id: mockApiResponse.data.id,
-        ...mockApiResponse.data.attributes,
+        type: 'user',
+        attributes: {
+          ...mockApiResponse.data.attributes,
+        },
       },
     });
-    apiResponse.data.first_name = 'test';
-    const successUser = mapCurrentUserWithoutAttributes(apiResponse.data);
+    apiResponse.data.attributes.first_name = 'test';
+    const successUser = {
+      id: mockApiResponse.data.id,
+      ...pickUserAttributes(objectToCamelCase(apiResponse.data.attributes)),
+    };
 
     return expectSaga(editUser, { payload })
       .withState(mockState)
-      .provide([[matchers.call.fn(axios.patch), apiResponse]])
+      .provide([[matchers.call.fn(axios.patch), { data: apiResponse }]])
       .call(LocalStorageService.updateState, { user: successUser })
       .put(editUserSuccess(successUser))
       .run();

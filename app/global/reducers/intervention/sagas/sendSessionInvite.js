@@ -3,6 +3,7 @@ import { put, select, takeLatest, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   fetchSessionEmailsSuccess,
   sendSessionInviteError,
@@ -24,12 +25,10 @@ export function* sendSessionInvite({ payload: { emails, sessionId } }) {
 
   const requestURL = `v1/sessions/${sessionId}/invitations`;
   try {
-    const test = yield call(axios.post, requestURL, {
+    const { data } = yield call(axios.post, requestURL, {
       session_invitation: { emails },
     });
-    const {
-      data: { invitations },
-    } = test;
+    const invitations = jsonApiToArray(data, 'invitation');
     yield put(sendSessionInviteSuccess());
     yield put(fetchSessionEmailsSuccess(invitations, sessionIndex));
     yield call(toast.info, formatMessage(messages.sendInviteSuccess), {

@@ -9,6 +9,7 @@ import { formatMessage } from 'utils/intlOutsideReact';
 
 import * as matchers from 'redux-saga-test-plan/matchers';
 import axios from 'axios';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import messages from '../messages';
 import {
   CANCEL_INVITATION_REQUEST,
@@ -41,7 +42,10 @@ describe('inviteResearcher saga', () => {
     const apiResponse = {
       data: {
         id: '12-a23mc-21',
-        email: 'email@gmail.com',
+        type: 'invitation',
+        attributes: {
+          email: 'email@gmail.com',
+        },
       },
     };
     const mockUser = {
@@ -57,7 +61,7 @@ describe('inviteResearcher saga', () => {
     };
 
     return expectSaga(inviteResearcher, { payload: { email } })
-      .provide([[matchers.call.fn(axios.post), apiResponse]])
+      .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
       .put(inviteResearcherSuccess(mockUser))
       .put(addUserToList(mockUser))
       .call(toast.success, formatMessage(messages.invitationSent), {
@@ -86,14 +90,12 @@ describe('getInvitations saga', () => {
   it('Check getInvitations generator success connection', () => {
     const apiResponse = {
       data: {
-        invitations: [
+        data: [
+          { id: 17, type: 'invitation', attributes: { email: 'test@test.pl' } },
           {
-            id: 'asd-123as',
-            email: 'email@gmail.com',
-          },
-          {
-            id: 'a22sd-2123as',
-            email: 'email2@gmail.com',
+            id: 18,
+            type: 'invitation',
+            attributes: { email: 'tetS2@twst.pl' },
           },
         ],
       },
@@ -102,7 +104,9 @@ describe('getInvitations saga', () => {
     step();
     const successTrigger = step(apiResponse);
     expect(successTrigger).toEqual(
-      put(getInvitationsSuccess(apiResponse.data.invitations)),
+      put(
+        getInvitationsSuccess(jsonApiToArray(apiResponse.data, 'invitation')),
+      ),
     );
     const lastResponse = step();
     expect(lastResponse).toEqual(undefined);

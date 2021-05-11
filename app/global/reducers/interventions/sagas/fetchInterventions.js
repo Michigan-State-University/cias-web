@@ -16,7 +16,6 @@ export function* fetchInterventions() {
     const {
       data: { interventions },
     } = yield call(axios.get, requestURL);
-
     yield put(fetchInterventionsSuccess(interventions));
   } catch (error) {
     yield put(

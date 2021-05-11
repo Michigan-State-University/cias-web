@@ -7,7 +7,7 @@ import { FETCH_RESEARCHERS_REQUEST } from '../constants';
 import { fetchResearchersSuccess, fetchResearchersError } from '../actions';
 
 function* fetchResearchers() {
-  const requestUrl = `/v1//users/researchers`;
+  const requestUrl = `/v1/users/researchers`;
 
   try {
     const {

@@ -11,6 +11,7 @@ import { createIntervention } from 'utils/reducerCreators';
 import sendSessionInviteSaga, {
   sendSessionInvite,
 } from 'global/reducers/intervention/sagas/sendSessionInvite';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   sendSessionInviteSuccess,
   fetchSessionEmailsSuccess,
@@ -30,14 +31,14 @@ describe('sendInterventionInvite saga', () => {
     intervention: { ...initialState, intervention: createIntervention() },
   };
   const apiResponse = {
-    invitations: [
-      { user_id: '0', email: 'user0@mail.com' },
-      { user_id: '1', email: 'user1@mail.com' },
+    data: [
+      { id: '0', type: 'invitation', attributes: { email: 'user0@mail.com' } },
+      { id: '1', type: 'invitation', attributes: { email: 'user1@mail.com' } },
     ],
   };
   const payload = {
     sessionId: mockState.intervention.intervention.sessions[index].id,
-    emails: ['user00@mail.com', 'user10@mail.com'],
+    emails: ['user0@mail.com', 'user1@mail.com'],
   };
 
   it('Check sendInterventionInvite generator success connection', () =>
@@ -45,7 +46,12 @@ describe('sendInterventionInvite saga', () => {
       .withState(mockState)
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
       .put(sendSessionInviteSuccess())
-      .put(fetchSessionEmailsSuccess(apiResponse.invitations, index))
+      .put(
+        fetchSessionEmailsSuccess(
+          jsonApiToArray(apiResponse, 'invitation'),
+          index,
+        ),
+      )
       .call(toast.info, formatMessage(messages.sendInviteSuccess), {
         toastId: SEND_SESSION_INVITE_SUCCESS,
       })

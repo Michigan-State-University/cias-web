@@ -5,10 +5,11 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import { expectSaga } from 'redux-saga-test-plan';
 
-import { mapCurrentUserWithoutAttributes } from 'utils/mapResponseObjects';
+import { pickUserAttributes } from 'utils/mapResponseObjects';
 import { createUser } from 'utils/reducerCreators';
 import { apiUserResponse } from 'utils/apiResponseCreators';
 
+import objectToCamelCase from 'utils/objectToCamelCase';
 import { editOtherUserSuccess, editOtherUserError } from '../../actions';
 import {
   EDIT_OTHER_USER_ERROR,
@@ -28,17 +29,26 @@ describe('editSingleUser saga', () => {
     const apiResponse = apiUserResponse();
     const apiResponseWithoutAttributes = {
       id: apiResponse.data.id,
-      ...apiResponse.data.attributes,
+      type: 'user',
+      attributes: {
+        id: apiResponse.data.id,
+        ...apiResponse.data.attributes,
+      },
     };
-    apiResponseWithoutAttributes.first_name = payload.firstName;
+    apiResponseWithoutAttributes.attributes.first_name = payload.firstName;
 
     return expectSaga(editSingleUser, { payload })
       .provide([
-        [matchers.call.fn(axios.patch), { data: apiResponseWithoutAttributes }],
+        [
+          matchers.call.fn(axios.patch),
+          { data: { data: apiResponseWithoutAttributes } },
+        ],
       ])
       .put(
         editOtherUserSuccess(
-          mapCurrentUserWithoutAttributes(apiResponseWithoutAttributes),
+          pickUserAttributes(
+            objectToCamelCase(apiResponseWithoutAttributes.attributes),
+          ),
         ),
       )
       .run();

@@ -1,8 +1,8 @@
 export const apiUserResponse = (id = 0) => ({
   data: {
     id: `test-id-${id}`,
+    type: 'user',
     attributes: {
-      type: 'user',
       email: `test@test.com-${id}`,
       full_name: `test-full-name-${id}`,
       first_name: `test-first-name-${id}`,
