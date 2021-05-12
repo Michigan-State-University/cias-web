@@ -32,6 +32,10 @@ export default defineMessages({
     id: `${scope}.back`,
     defaultMessage: 'Back to dashboard',
   },
+  backToOrganization: {
+    id: `${scope}.backToOrganization`,
+    defaultMessage: 'Back to organization dashboard setup',
+  },
   placeholder: {
     id: `${scope}.placeholder`,
     defaultMessage: 'e-Intervention Name',

@@ -27,16 +27,29 @@ const Header = ({
   csvLink,
   csvGeneratedAt,
   options,
+  organizationId,
 }) => {
   const screenClass = useScreenClass();
+  const renderBackButton = () => {
+    if (organizationId) {
+      return (
+        <BackButton to={`/organization/${organizationId}/dashboard-setup`}>
+          <FormattedMessage {...messages.backToOrganization} />
+        </BackButton>
+      );
+    }
+    return (
+      <BackButton to="/">
+        <FormattedMessage {...messages.back} />
+      </BackButton>
+    );
+  };
   return (
     <GCol>
       <GRow xl={12}>
         <GCol>
           <Row justify="between" mt={50}>
-            <BackButton to="/">
-              <FormattedMessage {...messages.back} />
-            </BackButton>
+            {renderBackButton()}
           </Row>
         </GCol>
       </GRow>
@@ -107,6 +120,7 @@ Header.propTypes = {
   handleSendCsv: PropTypes.func,
   csvLink: PropTypes.string,
   csvGeneratedAt: PropTypes.string,
+  organizationId: PropTypes.string,
   options: PropTypes.array,
 };
 

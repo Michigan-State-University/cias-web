@@ -127,8 +127,16 @@ export function InterventionDetailsPage({
 
   const screenClass = useScreenClass();
 
-  const { sessions, name, id, status, csvLink, csvGeneratedAt, sharedTo } =
-    intervention || {};
+  const {
+    sessions,
+    name,
+    id,
+    status,
+    csvLink,
+    csvGeneratedAt,
+    sharedTo,
+    organizationId,
+  } = intervention || {};
 
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
@@ -372,6 +380,7 @@ export function InterventionDetailsPage({
           handleSendCsv={handleSendCsv}
           options={options}
           status={status}
+          organizationId={organizationId}
         />
 
         <GRow>

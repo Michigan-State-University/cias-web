@@ -136,4 +136,8 @@ export default defineMessages({
     id: `${scope}.reportingInterventions`,
     defaultMessage: 'Reporting interventions',
   },
+  addReportingIntervention: {
+    id: `${scope}.addReportingIntervention`,
+    defaultMessage: 'Add reporting intervention',
+  },
 });

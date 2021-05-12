@@ -57,7 +57,10 @@ const DashboardSetup = ({ organization, fetchOrganization }) => {
             <Comment my={30}>
               {formatMessage(messages.reportingInterventions)}
             </Comment>
-            <OrganizationInterventionRow organizationId={organizationId} />
+            <OrganizationInterventionRow
+              formatMessage={formatMessage}
+              organizationId={organizationId}
+            />
           </Col>
         </Row>
       </Container>

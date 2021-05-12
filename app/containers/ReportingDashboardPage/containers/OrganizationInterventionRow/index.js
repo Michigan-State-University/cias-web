@@ -18,6 +18,7 @@ import SingleTile from 'containers/SingleTile';
 import Spinner from 'components/Spinner';
 import ErrorAlert from 'components/ErrorAlert';
 import { themeColors } from 'theme';
+import messages from '../../messages';
 
 const OrganizationInterventionRow = ({
   organizationId,
@@ -31,6 +32,7 @@ const OrganizationInterventionRow = ({
   organizationErrors: {
     fetchOrganizationInterventions: fetchOrganizationInterventionsError,
   },
+  formatMessage,
 }) => {
   // const emptyRowsSize =
   //   3 - (organizationInterventions ? organizationInterventions.length : 0);
@@ -52,7 +54,7 @@ const OrganizationInterventionRow = ({
           ref={null}
           onClick={() => createOrganizationIntervention(organizationId)}
           loading={addOrganizationIntervention}
-          label="Add"
+          label={formatMessage(messages.addReportingIntervention)}
         />
       </Box>
       {organizationInterventions &&
@@ -82,6 +84,7 @@ OrganizationInterventionRow.propTypes = {
   organizationInterventions: PropTypes.array,
   organizationInterventionsFetchRequest: PropTypes.func,
   createOrganizationIntervention: PropTypes.func,
+  formatMessage: PropTypes.func,
   organizationLoaders: PropTypes.object,
   organizationErrors: PropTypes.object,
 };
