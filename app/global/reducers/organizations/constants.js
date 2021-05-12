@@ -85,6 +85,9 @@ export const DELETE_CLINIC_ERROR = 'app/organizations/DELETE_CLINIC_ERROR';
 
 export const SELECT_ENTITY_ACTION = 'app/organizations/SELECT_ENTITY_ACTION';
 
+export const SET_SHOULD_REFETCH_ACTION =
+  'app/organizations/SET_SHOULD_REFETCH_ACTION';
+
 const RoleToEntityUrlMap = {
   [Roles.eInterventionAdmin]: 'organizations',
   [Roles.organizationAdmin]: 'organizations',

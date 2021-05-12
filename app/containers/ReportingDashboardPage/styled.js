@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { borders, colors, hexToRgb, themeColors } from 'theme';
 
-import { Container, Row } from 'components/ReactGridSystem';
+import { Container, NoMarginRow, Row } from 'components/ReactGridSystem';
 
 export const SettingsContainer = styled(Container)`
   margin: 0;
@@ -26,4 +26,8 @@ export const EntityRow = styled(Row)`
 
   background-color: ${({ $isSelected }) =>
     $isSelected && `rgb(${hexToRgb(themeColors.secondary)}, 0.2) !important`};
+`;
+
+export const UserRow = styled(NoMarginRow)`
+  cursor: pointer;
 `;

@@ -16,6 +16,7 @@ import Circle from 'components/Circle';
 import SidePanel from 'components/SidePanel';
 import Tooltip from 'components/Tooltip';
 
+import UserDetailsComponent from './UserDetailsComponent';
 import UserItem from './UserItem';
 import InviteComponent from './InviteComponent';
 
@@ -33,12 +34,12 @@ const UserListComponent = ({
   const { formatMessage } = useIntl();
 
   const [isInviteFormOpen, setIsInviteFormOpen] = useState(false);
+  const openInviteForm = () => setIsInviteFormOpen(true);
+  const closeInviteForm = useCallback(() => setIsInviteFormOpen(false), []);
 
-  const openInviteForm = () => !isInviteFormOpen && setIsInviteFormOpen(true);
-  const closeInviteForm = useCallback(
-    () => isInviteFormOpen && setIsInviteFormOpen(false),
-    [isInviteFormOpen],
-  );
+  const [selectedUser, setSelectedUser] = useState(null);
+  const openUserDetails = useCallback(user => () => setSelectedUser(user), []);
+  const closeUserDetails = useCallback(() => setSelectedUser(null), []);
 
   const avatarColor = useMemo(() => RolesColors[role], [role]);
 
@@ -78,7 +79,11 @@ const UserListComponent = ({
               key={`UserItem-${user.id}-${index}`}
               mb={index === users.length - 1 ? 0 : 8}
             >
-              <UserItem avatarColor={avatarColor} user={user} />
+              <UserItem
+                avatarColor={avatarColor}
+                user={user}
+                onClick={openUserDetails(user)}
+              />
             </Box>
           ))}
         </Col>
@@ -100,6 +105,16 @@ const UserListComponent = ({
           onCancel={closeInviteForm}
           onInvite={handleInvite}
         />
+      </SidePanel>
+
+      <SidePanel isOpen={Boolean(selectedUser)} style={{ width: 350 }}>
+        {Boolean(selectedUser) && (
+          <UserDetailsComponent
+            onCancel={closeUserDetails}
+            role={role}
+            userId={selectedUser.id}
+          />
+        )}
       </SidePanel>
     </FullWidthContainer>
   );

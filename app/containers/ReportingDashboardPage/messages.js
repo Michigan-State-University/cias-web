@@ -132,4 +132,56 @@ export default defineMessages({
     id: `${scope}.clinicPlaceholder`,
     defaultMessage: 'Enter Clinic Name',
   },
+  userGoBack: {
+    id: `${scope}.userGoBack`,
+    defaultMessage: '< Back to Unit Settings',
+  },
+  userFirstNameLabel: {
+    id: `${scope}.userFirstNameLabel`,
+    defaultMessage: 'First Name',
+  },
+  userFirstNamePlaceholder: {
+    id: `${scope}.userFirstNamePlaceholder`,
+    defaultMessage: 'Enter First Name',
+  },
+  userLastNameLabel: {
+    id: `${scope}.userLastNameLabel`,
+    defaultMessage: 'Last Name',
+  },
+  userLastNamePlaceholder: {
+    id: `${scope}.userLastNamePlaceholder`,
+    defaultMessage: 'Enter Last Name',
+  },
+  userRoleLabel: {
+    id: `${scope}.userRoleLabel`,
+    defaultMessage: 'Role',
+  },
+  userRolePlaceholder: {
+    id: `${scope}.userRolePlaceholder`,
+    defaultMessage: 'Enter Role',
+  },
+  userEmailLabel: {
+    id: `${scope}.userEmailLabel`,
+    defaultMessage: 'E-mail Address',
+  },
+  userEmailPlaceholder: {
+    id: `${scope}.userEmailPlaceholder`,
+    defaultMessage: 'Enter E-mail Address',
+  },
+  userActivate: {
+    id: `${scope}.userActivate`,
+    defaultMessage: 'Activate account',
+  },
+  userDeactivate: {
+    id: `${scope}.userDeactivate`,
+    defaultMessage: 'Deactivate account',
+  },
+  deactivateAccountConfirm: {
+    id: `${scope}.deactivateAccountConfirm`,
+    defaultMessage: 'Are you sure you want to deactivate this account?',
+  },
+  activateAccountConfirm: {
+    id: `${scope}.activateAccountConfirm`,
+    defaultMessage: 'Are you sure you want to activate this account?',
+  },
 });
