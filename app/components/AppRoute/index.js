@@ -6,9 +6,13 @@ import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import { Row, Col } from 'react-grid-system';
 
+import { makeSelectUser, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
+import { RolePermissions } from 'models/User/RolePermissions';
+import { arraysOverlap } from 'utils/arrayUtils';
+
 import Sidebar from 'containers/Sidebar';
 import Navbar from 'containers/Navbar';
-import { makeSelectUser, REDIRECT_QUERY_KEY } from 'global/reducers/auth';
+
 import { MainAppContainer, PageContainer, RowBelowNavbar } from './styled';
 
 class AppRoute extends Route {
@@ -22,6 +26,9 @@ class AppRoute extends Route {
       computedMatch,
       location,
     } = this.props;
+
+    const rolePermissions = RolePermissions(user?.roles);
+
     if (!protectedRoute) {
       return super.render();
     }
@@ -38,8 +45,9 @@ class AppRoute extends Route {
       return <Redirect to={`/no-access?${queryParams.toString()}`} />;
     }
 
-    if (user && allowedRoles.includes(user.roles[0])) {
-      const isSidebarVisible = Boolean(sidebarProps);
+    if (user && arraysOverlap(allowedRoles, user.roles)) {
+      const isSidebarVisible =
+        Boolean(sidebarProps) && rolePermissions.canDisplayLeftSidebar;
 
       return (
         <>
