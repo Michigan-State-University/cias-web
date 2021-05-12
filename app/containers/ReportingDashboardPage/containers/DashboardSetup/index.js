@@ -7,7 +7,6 @@ import { useParams } from 'react-router';
 import { Helmet } from 'react-helmet';
 import { useIntl } from 'react-intl';
 
-import { Container, Col, Row } from 'components/ReactGridSystem';
 import EditIcon from 'assets/svg/edit.svg';
 
 import {
@@ -16,12 +15,17 @@ import {
   selectEntityAction,
   editOrganizationRequest,
 } from 'global/reducers/organizations';
+
+import { Container, Col, Row } from 'components/ReactGridSystem';
 import Loader from 'components/Loader';
 import Comment from 'components/Text/Comment';
 import StyledInput from 'components/Input/StyledInput';
 import Icon from 'components/Icon';
 
 import OrganizationInterventionRow from './containers/OrganizationInterventionRow';
+
+import DashboardSections from './components/DashboardSections';
+
 import messages from '../../messages';
 
 const DashboardSetup = ({
@@ -50,9 +54,9 @@ const DashboardSetup = ({
       <Helmet>
         <title>{formatMessage(messages.dashboardSetup)}</title>
       </Helmet>
-      <Container>
+      <Container px="55px !important">
         <Row>
-          <Col ml="55px !important" mt={30}>
+          <Col mt={30}>
             <Row align="center">
               <StyledInput
                 placeholder="Enter organization name"
@@ -73,6 +77,12 @@ const DashboardSetup = ({
               formatMessage={formatMessage}
               organizationId={organizationId}
             />
+          </Col>
+        </Row>
+
+        <Row>
+          <Col mt={40}>
+            <DashboardSections />
           </Col>
         </Row>
       </Container>
