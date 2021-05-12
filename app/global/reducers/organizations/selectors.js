@@ -75,3 +75,9 @@ export const makeSelectHealthSystem = id =>
         ({ id: healthSystemId }) => id === healthSystemId,
       ),
   );
+
+export const makeSelectOrganizationInterventions = () =>
+  createSelector(
+    selectOrganizationState,
+    substate => substate.organization.interventions,
+  );

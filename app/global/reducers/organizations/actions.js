@@ -4,6 +4,12 @@ import {
   FETCH_ORGANIZATIONS_REQUEST,
   FETCH_ORGANIZATIONS_SUCCESS,
   FETCH_ORGANIZATIONS_ERROR,
+  FETCH_ORGANIZATION_INTERVENTIONS_REQUEST,
+  FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS,
+  FETCH_ORGANIZATION_INTERVENTIONS_ERROR,
+  CREATE_ORGANIZATION_INTERVENTION_REQUEST,
+  CREATE_ORGANIZATION_INTERVENTION_SUCCESS,
+  CREATE_ORGANIZATION_INTERVENTION_ERROR,
   CREATE_ORGANIZATION_REQUEST,
   CREATE_ORGANIZATION_SUCCESS,
   CREATE_ORGANIZATION_ERROR,
@@ -52,6 +58,20 @@ export const fetchOrganizationsSuccess = organizations =>
   actionBuilder(FETCH_ORGANIZATIONS_SUCCESS, { organizations });
 export const fetchOrganizationsFailure = error =>
   actionBuilder(FETCH_ORGANIZATIONS_ERROR, { error });
+
+export const fetchOrganizationInterventionsRequest = organizationId =>
+  actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_REQUEST, { organizationId });
+export const fetchOrganizationInterventionsSuccess = interventions =>
+  actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS, { interventions });
+export const fetchOrganizationInterventionsFailure = error =>
+  actionBuilder(FETCH_ORGANIZATION_INTERVENTIONS_ERROR, { error });
+
+export const createOrganizationInterventionRequest = organizationId =>
+  actionBuilder(CREATE_ORGANIZATION_INTERVENTION_REQUEST, { organizationId });
+export const createOrganizationInterventionSuccess = intervention =>
+  actionBuilder(CREATE_ORGANIZATION_INTERVENTION_SUCCESS, { intervention });
+export const createOrganizationInterventionFailure = error =>
+  actionBuilder(CREATE_ORGANIZATION_INTERVENTION_ERROR, { error });
 
 export const createOrganizationRequest = () =>
   actionBuilder(CREATE_ORGANIZATION_REQUEST, {});

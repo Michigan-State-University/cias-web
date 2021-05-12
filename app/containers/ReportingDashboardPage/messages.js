@@ -132,4 +132,8 @@ export default defineMessages({
     id: `${scope}.clinicPlaceholder`,
     defaultMessage: 'Enter Clinic Name',
   },
+  reportingInterventions: {
+    id: `${scope}.reportingInterventions`,
+    defaultMessage: 'Reporting interventions',
+  },
 });

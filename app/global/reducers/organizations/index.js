@@ -14,6 +14,8 @@ export {
   addClinicRequest,
   editClinicRequest,
   deleteClinicRequest,
+  fetchOrganizationInterventionsRequest,
+  createOrganizationInterventionRequest,
 } from './actions';
 export { organizationsReducer } from './reducer';
 export {
@@ -26,6 +28,7 @@ export {
   makeSelectOrganizationErrors,
   makeSelectOrganizationShouldRefetch,
   makeSelectOrganizationSelectedEntity,
+  makeSelectOrganizationInterventions,
 } from './selectors';
 
 export { EntityType } from './constants';
