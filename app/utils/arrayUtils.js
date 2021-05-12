@@ -1,3 +1,5 @@
+import intersection from 'lodash/intersection';
+
 /**
  * @param {Array<any>} array
  * @param {number} index
@@ -24,3 +26,15 @@ export const findIndexById = (array, id) =>
  */
 export const findById = (array, id) =>
   array.find(({ id: itemId }) => id === itemId);
+
+/**
+ * Check if two arrays overlap
+ * @param  {Array<any>} array
+ * @param  {Array<any>} otherArray
+ * @returns {boolean} `true` if arrays overlap, `false` otherwise
+ */
+export const arraysOverlap = (array, otherArray) => {
+  const mutualValues = intersection(array, otherArray);
+
+  return mutualValues.length > 0;
+};
