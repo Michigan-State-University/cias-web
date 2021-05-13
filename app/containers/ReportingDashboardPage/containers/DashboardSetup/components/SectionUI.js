@@ -29,7 +29,7 @@ const SectionUI = ({
         </Row>
       )}
 
-      <Row mb={10}>
+      <Row>
         <Col>
           <LabelledInput
             placeholder={formatMessage(messages.inputSectionNamePlaceholder)}
@@ -39,7 +39,7 @@ const SectionUI = ({
         </Col>
       </Row>
 
-      <Row mb={10}>
+      <Row mb={15}>
         <Col>
           <StyledInput
             ml={-12}

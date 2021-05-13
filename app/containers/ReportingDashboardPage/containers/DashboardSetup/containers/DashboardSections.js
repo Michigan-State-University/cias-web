@@ -81,7 +81,7 @@ const DashboardSections = ({
           </Col>
         </Row>
 
-        <Row mt={30}>
+        <Row my={30}>
           <Col>
             <DashedButton
               onClick={onAddDashboardSection}

@@ -28,4 +28,20 @@ export default defineMessages({
     id: `${scope}.addChart`,
     defaultMessage: 'Select new chart to add',
   },
+  pieChart: {
+    id: `${scope}.pieChart`,
+    defaultMessage: 'Pie Chart',
+  },
+  barChart: {
+    id: `${scope}.barChart`,
+    defaultMessage: 'Bar Chart',
+  },
+  pieChartHelper: {
+    id: `${scope}.pieChartHelper`,
+    defaultMessage: 'Show relation between different groups',
+  },
+  barChartHelper: {
+    id: `${scope}.barChartHelper`,
+    defaultMessage: 'Show people falling into cut off value',
+  },
 });
