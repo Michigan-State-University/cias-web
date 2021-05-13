@@ -20,8 +20,9 @@ import Loader from 'components/Loader';
 import Comment from 'components/Text/Comment';
 import StyledInput from 'components/Input/StyledInput';
 import Icon from 'components/Icon';
+
+import OrganizationInterventionRow from './containers/OrganizationInterventionRow';
 import messages from '../../messages';
-import OrganizationInterventionRow from '../DashboardView/containers/OrganizationInterventionRow';
 
 const DashboardSetup = ({
   organization,

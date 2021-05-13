@@ -1,7 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { FETCH_ORGANIZATION_INTERVENTIONS_REQUEST } from '../constants';
 import {
   fetchOrganizationInterventionsFailure,
@@ -14,12 +13,11 @@ export function* fetchOrganizationInterventions({
   const requestURL = `v1/organizations/${organizationId}/interventions`;
 
   try {
-    const { data } = yield call(axios.get, requestURL);
-    const organizationInterventions = jsonApiToArray(data, 'intervention');
+    const {
+      data: { interventions },
+    } = yield call(axios.get, requestURL);
 
-    yield put(
-      fetchOrganizationInterventionsSuccess(organizationInterventions || []),
-    );
+    yield put(fetchOrganizationInterventionsSuccess(interventions));
   } catch (error) {
     yield put(fetchOrganizationInterventionsFailure(error));
   }
