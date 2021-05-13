@@ -22,17 +22,16 @@ const SectionUI = ({
   return (
     <FullWidthContainer>
       {showDivider && (
-        <Row mb={30}>
+        <Row mb={10}>
           <Col>
             <Divider />
           </Col>
         </Row>
       )}
 
-      <Row>
+      <Row mb={10}>
         <Col>
           <LabelledInput
-            mb={30}
             placeholder={formatMessage(messages.inputSectionNamePlaceholder)}
             onBlur={onNameChange}
             value={name}
@@ -40,10 +39,9 @@ const SectionUI = ({
         </Col>
       </Row>
 
-      <Row>
+      <Row mb={10}>
         <Col>
           <StyledInput
-            mb={30}
             ml={-12}
             maxWidth={300}
             type="multiline"

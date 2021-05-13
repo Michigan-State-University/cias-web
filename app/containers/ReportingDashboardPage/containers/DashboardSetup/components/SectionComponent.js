@@ -5,6 +5,9 @@ import { compose } from 'redux';
 
 import { editDashboardSectionRequest } from 'global/reducers/dashboardSections';
 
+import Box from 'components/Box';
+
+import AddChart from './AddChart';
 import SectionUI from './SectionUI';
 
 const SectionComponent = ({ section, editDashboardSection, index }) => {
@@ -21,13 +24,19 @@ const SectionComponent = ({ section, editDashboardSection, index }) => {
   );
 
   return (
-    <SectionUI
-      showDivider={index !== 0}
-      name={section.name}
-      description={section.description}
-      onDescriptionChange={onUpdate('description')}
-      onNameChange={onUpdate('name')}
-    />
+    <>
+      <SectionUI
+        showDivider={index !== 0}
+        name={section.name}
+        description={section.description}
+        onDescriptionChange={onUpdate('description')}
+        onNameChange={onUpdate('name')}
+      />
+
+      <Box mb={40}>
+        <AddChart />
+      </Box>
+    </>
   );
 };
 

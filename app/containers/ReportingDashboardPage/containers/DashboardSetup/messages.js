@@ -24,4 +24,8 @@ export default defineMessages({
     id: `${scope}.inputSectionDescriptionPlaceholder`,
     defaultMessage: 'Add section description here',
   },
+  addChart: {
+    id: `${scope}.addChart`,
+    defaultMessage: 'Select new chart to add',
+  },
 });

@@ -70,7 +70,7 @@ const DashboardSections = ({
         </Row>
 
         <Row>
-          <Col mb={30}>
+          <Col mt={10}>
             {dashboardSections.map((section, index) => (
               <SectionComponent
                 key={`SectionComponent-${index}-id-${section.id}`}
@@ -81,8 +81,8 @@ const DashboardSections = ({
           </Col>
         </Row>
 
-        <Row>
-          <Col mb={30}>
+        <Row mt={30}>
+          <Col>
             <DashedButton
               onClick={onAddDashboardSection}
               loading={addDashboardSectionLoader}
