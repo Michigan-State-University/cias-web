@@ -44,4 +44,4 @@ export const jsonApiToObject = (json, type) => jsonApiMapper(json, type)[0];
  * @param {object} json
  * @param {string} type
  */
-export const jsonApiToArray = (json, type) => jsonApiMapper(json, type);
+export const jsonApiToArray = (json, type) => jsonApiMapper(json, type) ?? [];
