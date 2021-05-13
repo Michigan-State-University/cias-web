@@ -10,10 +10,12 @@ import {
   editDashboardSectionSuccess,
 } from '../actions';
 
-export function* editDashboardSection({ payload: { dashboardSection } }) {
+export function* editDashboardSection({
+  payload: { dashboardSection, dashboardSectionId },
+}) {
   const requestURL = `v1/organizations/${
     dashboardSection.organizationId
-  }/dashboard_sections`;
+  }/dashboard_sections/${dashboardSectionId}`;
 
   try {
     const { data } = yield call(
@@ -23,7 +25,9 @@ export function* editDashboardSection({ payload: { dashboardSection } }) {
     );
     const updatedDashboardSection = jsonApiToObject(data, 'dashboardSection');
 
-    yield put(editDashboardSectionSuccess(updatedDashboardSection));
+    yield put(
+      editDashboardSectionSuccess(updatedDashboardSection, dashboardSectionId),
+    );
   } catch (error) {
     yield put(editDashboardSectionError(error));
   }

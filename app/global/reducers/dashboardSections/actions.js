@@ -42,10 +42,16 @@ export const fetchDashboardSectionsSuccess = dashboardSections =>
 export const fetchDashboardSectionsError = error =>
   actionBuilder(FETCH_SECTIONS_ERROR, { error });
 
-export const editDashboardSectionRequest = dashboardSection =>
-  actionBuilder(EDIT_SECTION_REQUEST, { dashboardSection });
-export const editDashboardSectionSuccess = dashboardSection =>
-  actionBuilder(EDIT_SECTION_SUCCESS, { dashboardSection });
+export const editDashboardSectionRequest = (
+  dashboardSection,
+  dashboardSectionId,
+) =>
+  actionBuilder(EDIT_SECTION_REQUEST, { dashboardSection, dashboardSectionId });
+export const editDashboardSectionSuccess = (
+  dashboardSection,
+  dashboardSectionId,
+) =>
+  actionBuilder(EDIT_SECTION_SUCCESS, { dashboardSection, dashboardSectionId });
 export const editDashboardSectionError = error =>
   actionBuilder(EDIT_SECTION_ERROR, { error });
 
