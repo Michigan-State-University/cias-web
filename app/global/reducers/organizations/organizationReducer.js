@@ -532,6 +532,7 @@ const organizationReducer = (state = initialState, action) =>
       }
       case FETCH_ORGANIZATION_INTERVENTIONS_SUCCESS: {
         draft.organization.interventions = payload.interventions;
+        draft.cache.organization = draft.organization;
         draft.loaders.fetchOrganizationInterventions = false;
 
         break;

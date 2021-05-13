@@ -17,7 +17,7 @@ import ErrorAlert from 'components/ErrorAlert';
 import TileRenderer from 'components/TileRenderer';
 import Box from 'components/Box';
 
-import messages from '../../messages';
+import messages from '../../../../messages';
 
 const OrganizationInterventionRow = ({
   organizationId,

@@ -14,15 +14,21 @@ import {
   makeSelectOrganization,
   fetchOrganizationRequest,
   selectEntityAction,
+  editOrganizationRequest,
 } from 'global/reducers/organizations';
 import Loader from 'components/Loader';
 import Comment from 'components/Text/Comment';
 import StyledInput from 'components/Input/StyledInput';
 import Icon from 'components/Icon';
 import messages from '../../messages';
-import OrganizationInterventionRow from '../OrganizationInterventionRow';
+import OrganizationInterventionRow from '../DashboardView/containers/OrganizationInterventionRow';
 
-const DashboardSetup = ({ organization, fetchOrganization, selectEntity }) => {
+const DashboardSetup = ({
+  organization,
+  fetchOrganization,
+  selectEntity,
+  editOrganization,
+}) => {
   const { organizationId } = useParams();
   const { formatMessage } = useIntl();
 
@@ -32,6 +38,9 @@ const DashboardSetup = ({ organization, fetchOrganization, selectEntity }) => {
       selectEntity(organizationId);
     }
   }, []);
+  const onBlur = name => {
+    editOrganization({ id: organizationId, name });
+  };
 
   if (!organization) return <Loader fullSize />;
 
@@ -48,7 +57,7 @@ const DashboardSetup = ({ organization, fetchOrganization, selectEntity }) => {
                 placeholder="Enter organization name"
                 type="singleline"
                 value={organization.name}
-                onBlur={() => {}}
+                onBlur={onBlur}
                 fontSize={32}
                 fontWeight="bold"
                 maxWidth="100%"
@@ -74,6 +83,7 @@ DashboardSetup.propTypes = {
   organization: PropTypes.object,
   fetchOrganization: PropTypes.func,
   selectEntity: PropTypes.func,
+  editOrganization: PropTypes.func,
 };
 
 const mapStateToProps = () =>
@@ -84,6 +94,7 @@ const mapStateToProps = () =>
 const mapDispatchToProps = {
   fetchOrganization: fetchOrganizationRequest,
   selectEntity: selectEntityAction,
+  editOrganization: editOrganizationRequest,
 };
 const withConnect = connect(
   mapStateToProps,
