@@ -7,7 +7,7 @@ import { editDashboardSectionRequest } from 'global/reducers/dashboardSections';
 
 import SectionUI from './SectionUI';
 
-const SectionComponent = ({ section, editDashboardSection }) => {
+const SectionComponent = ({ section, editDashboardSection, index }) => {
   const onUpdate = useCallback(
     field => value =>
       editDashboardSection(
@@ -22,6 +22,7 @@ const SectionComponent = ({ section, editDashboardSection }) => {
 
   return (
     <SectionUI
+      showDivider={index !== 0}
       name={section.name}
       description={section.description}
       onDescriptionChange={onUpdate('description')}
@@ -33,6 +34,7 @@ const SectionComponent = ({ section, editDashboardSection }) => {
 SectionComponent.propTypes = {
   section: PropTypes.object,
   editDashboardSection: PropTypes.func,
+  index: PropTypes.number,
 };
 
 const mapDispatchToProps = {

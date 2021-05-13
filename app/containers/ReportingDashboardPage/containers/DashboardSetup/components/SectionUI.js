@@ -4,8 +4,9 @@ import { useIntl } from 'react-intl';
 
 import { Col, Row } from 'components/ReactGridSystem';
 import LabelledInput from 'components/Input/LabelledInput';
-
 import StyledInput from 'components/Input/StyledInput';
+import Divider from 'components/Divider';
+
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 
@@ -14,11 +15,20 @@ const SectionUI = ({
   name,
   onDescriptionChange,
   onNameChange,
+  showDivider,
 }) => {
   const { formatMessage } = useIntl();
 
   return (
     <FullWidthContainer>
+      {showDivider && (
+        <Row mb={30}>
+          <Col>
+            <Divider />
+          </Col>
+        </Row>
+      )}
+
       <Row>
         <Col>
           <LabelledInput
@@ -54,6 +64,7 @@ SectionUI.propTypes = {
   name: PropTypes.string,
   onDescriptionChange: PropTypes.func,
   onNameChange: PropTypes.func,
+  showDivider: PropTypes.bool,
 };
 
 export default memo(SectionUI);

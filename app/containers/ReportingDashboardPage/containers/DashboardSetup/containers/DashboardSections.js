@@ -75,6 +75,7 @@ const DashboardSections = ({
               <SectionComponent
                 key={`SectionComponent-${index}-id-${section.id}`}
                 section={section}
+                index={index}
               />
             ))}
           </Col>
