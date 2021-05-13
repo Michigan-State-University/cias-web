@@ -16,4 +16,12 @@ export default defineMessages({
     id: `${scope}.addNewSection`,
     defaultMessage: '+ Add next section',
   },
+  inputSectionNamePlaceholder: {
+    id: `${scope}.inputSectionNamePlaceholder`,
+    defaultMessage: 'Enter Section name',
+  },
+  inputSectionDescriptionPlaceholder: {
+    id: `${scope}.inputSectionDescriptionPlaceholder`,
+    defaultMessage: 'Add section description here',
+  },
 });

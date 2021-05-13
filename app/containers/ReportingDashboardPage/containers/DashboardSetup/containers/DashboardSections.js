@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { memo, useCallback, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -23,6 +23,7 @@ import DashedButton from 'components/Button/DashedButton';
 
 import Divider from 'components/Divider';
 
+import SectionComponent from 'containers/ReportingDashboardPage/containers/DashboardSetup/components/SectionComponent';
 import { ReportingDashboardPageContext } from '../../../constants';
 import { FullWidthContainer } from '../../../styled';
 import { DashboardSectionsContext } from '../constants';
@@ -70,8 +71,11 @@ const DashboardSections = ({
 
         <Row>
           <Col mb={30}>
-            {dashboardSections.map(section => (
-              <div>{JSON.stringify(section)}</div>
+            {dashboardSections.map((section, index) => (
+              <SectionComponent
+                key={`SectionComponent-${index}-id-${section.id}`}
+                section={section}
+              />
             ))}
           </Col>
         </Row>
@@ -130,4 +134,5 @@ const reduxInjectors = [
 export default compose(
   withConnect,
   ...reduxInjectors,
+  memo,
 )(DashboardSections);

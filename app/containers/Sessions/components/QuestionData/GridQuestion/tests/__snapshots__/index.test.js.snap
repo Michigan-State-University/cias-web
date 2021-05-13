@@ -199,11 +199,13 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       />
                     </div>
                     <textarea
-                      class="TextArea-sc-175uiux-0 iIRyZu"
+                      class="TextArea-sc-175uiux-0 hDDZSW"
+                      cursor="pointer"
                       data-cy="text-area"
                       height="auto"
                       placeholder="Row 1..."
                       rows="2"
+                      type="multiline"
                       width="300"
                     >
                       test-row-1
@@ -282,11 +284,13 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       />
                     </div>
                     <textarea
-                      class="TextArea-sc-175uiux-0 iIRyZu"
+                      class="TextArea-sc-175uiux-0 hDDZSW"
+                      cursor="pointer"
                       data-cy="text-area"
                       height="auto"
                       placeholder="Row 2..."
                       rows="2"
+                      type="multiline"
                       width="300"
                     >
                       test-row-2

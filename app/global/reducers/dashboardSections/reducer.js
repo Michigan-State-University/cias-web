@@ -122,6 +122,8 @@ const dashboardSectionsReducer = (state = initialState, action) =>
       case EDIT_SECTION_ERROR: {
         draft.loaders.editDashboardSectionLoader = false;
         draft.errors.editDashboardSectionError = payload.error;
+
+        draft.dashboardSections = state.cache.dashboardSections;
         break;
       }
 
