@@ -13,6 +13,7 @@ import EditIcon from 'assets/svg/edit.svg';
 import {
   makeSelectOrganization,
   fetchOrganizationRequest,
+  selectEntityAction,
 } from 'global/reducers/organizations';
 import Loader from 'components/Loader';
 import Comment from 'components/Text/Comment';
@@ -21,13 +22,14 @@ import Icon from 'components/Icon';
 import messages from '../../messages';
 import OrganizationInterventionRow from '../OrganizationInterventionRow';
 
-const DashboardSetup = ({ organization, fetchOrganization }) => {
+const DashboardSetup = ({ organization, fetchOrganization, selectEntity }) => {
   const { organizationId } = useParams();
   const { formatMessage } = useIntl();
 
   useEffect(() => {
     if (!organization) {
       fetchOrganization(organizationId);
+      selectEntity(organizationId);
     }
   }, []);
 
@@ -71,6 +73,7 @@ const DashboardSetup = ({ organization, fetchOrganization }) => {
 DashboardSetup.propTypes = {
   organization: PropTypes.object,
   fetchOrganization: PropTypes.func,
+  selectEntity: PropTypes.func,
 };
 
 const mapStateToProps = () =>
@@ -80,6 +83,7 @@ const mapStateToProps = () =>
 
 const mapDispatchToProps = {
   fetchOrganization: fetchOrganizationRequest,
+  selectEntity: selectEntityAction,
 };
 const withConnect = connect(
   mapStateToProps,

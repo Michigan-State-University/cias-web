@@ -15,9 +15,11 @@ export function* fetchOrganizationInterventions({
 
   try {
     const { data } = yield call(axios.get, requestURL);
-    const organization = jsonApiToArray(data, 'intervention');
+    const organizationInterventions = jsonApiToArray(data, 'intervention');
 
-    yield put(fetchOrganizationInterventionsSuccess(organization));
+    yield put(
+      fetchOrganizationInterventionsSuccess(organizationInterventions || []),
+    );
   } catch (error) {
     yield put(fetchOrganizationInterventionsFailure(error));
   }

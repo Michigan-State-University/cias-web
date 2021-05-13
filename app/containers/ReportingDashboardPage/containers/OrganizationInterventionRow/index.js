@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-// import range from 'lodash/range';
-import Row from 'components/Row';
-import NewButton from 'components/TileRenderer/Components/NewButton';
-import Box from 'components/Box';
-// import { colors } from 'theme';
 import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+
+import { themeColors } from 'theme';
 import {
   fetchOrganizationInterventionsRequest,
   makeSelectOrganizationInterventions,
@@ -13,11 +11,12 @@ import {
   makeSelectOrganizationLoaders,
   makeSelectOrganizationErrors,
 } from 'global/reducers/organizations';
-import { connect } from 'react-redux';
 import SingleTile from 'containers/SingleTile';
 import Spinner from 'components/Spinner';
 import ErrorAlert from 'components/ErrorAlert';
-import { themeColors } from 'theme';
+import TileRenderer from 'components/TileRenderer';
+import Box from 'components/Box';
+
 import messages from '../../messages';
 
 const OrganizationInterventionRow = ({
@@ -34,12 +33,16 @@ const OrganizationInterventionRow = ({
   },
   formatMessage,
 }) => {
-  // const emptyRowsSize =
-  //   3 - (organizationInterventions ? organizationInterventions.length : 0);
-  // const emptyRows = range(Math.max(emptyRowsSize, 0));
   useEffect(() => {
     organizationInterventionsFetchRequest(organizationId);
   }, []);
+
+  const mapIntervention = intervention => (
+    <SingleTile
+      tileData={intervention}
+      link={`/interventions/${intervention.id}/`}
+    />
+  );
 
   if (fetchOrganizationInterventions) {
     return <Spinner color={themeColors.secondary} />;
@@ -48,34 +51,18 @@ const OrganizationInterventionRow = ({
     return <ErrorAlert errorText={fetchOrganizationInterventionsError} />;
   }
   return (
-    <Row>
-      <Box width={250} mr={20}>
-        <NewButton
-          ref={null}
-          onClick={() => createOrganizationIntervention(organizationId)}
-          loading={addOrganizationIntervention}
-          label={formatMessage(messages.addReportingIntervention)}
+    <Box width="100%">
+      {organizationInterventions && (
+        <TileRenderer
+          containerKey="intervention"
+          elements={organizationInterventions}
+          mapFunction={mapIntervention}
+          newLabel={formatMessage(messages.addReportingIntervention)}
+          onCreateCall={() => createOrganizationIntervention(organizationId)}
+          createLoading={addOrganizationIntervention}
         />
-      </Box>
-      {organizationInterventions &&
-        organizationInterventions.map(intervention => (
-          <Box key={intervention.id} width={250} mr={20}>
-            <SingleTile
-              tileData={intervention}
-              link={`/interventions/${intervention.id}/`}
-            />
-          </Box>
-        ))}
-      {/* {emptyRows.map((_, index) => (
-        <Box
-          key={index}
-          mr={20}
-          mb={20}
-          width={250}
-          background={colors.linkWater}
-        />
-      ))} */}
-    </Row>
+      )}
+    </Box>
   );
 };
 
