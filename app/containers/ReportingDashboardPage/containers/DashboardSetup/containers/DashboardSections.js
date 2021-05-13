@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { useIntl } from 'react-intl';
+import { injectReducer, injectSaga } from 'redux-injectors';
 
 import {
   addDashboardSectionRequest,
@@ -22,10 +23,9 @@ import DashedButton from 'components/Button/DashedButton';
 
 import Divider from 'components/Divider';
 
-import { DashboardSectionsContext } from 'containers/ReportingDashboardPage/containers/DashboardSetup/constants';
-import { ReportingDashboardPageContext } from 'containers/ReportingDashboardPage/constants';
-import { injectReducer, injectSaga } from 'redux-injectors';
+import { ReportingDashboardPageContext } from '../../../constants';
 import { FullWidthContainer } from '../../../styled';
+import { DashboardSectionsContext } from '../constants';
 import messages from '../messages';
 
 const DashboardSections = ({

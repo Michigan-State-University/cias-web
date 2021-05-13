@@ -22,9 +22,8 @@ import Comment from 'components/Text/Comment';
 import StyledInput from 'components/Input/StyledInput';
 import Icon from 'components/Icon';
 
+import DashboardSections from './containers/DashboardSections';
 import OrganizationInterventionRow from './containers/OrganizationInterventionRow';
-
-import DashboardSections from './components/DashboardSections';
 
 import messages from '../../messages';
 
