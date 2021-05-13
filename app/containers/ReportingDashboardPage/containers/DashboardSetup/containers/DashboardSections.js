@@ -20,10 +20,9 @@ import { Col, Row } from 'components/ReactGridSystem';
 import Loader from 'components/Loader';
 import Comment from 'components/Text/Comment';
 import DashedButton from 'components/Button/DashedButton';
-
 import Divider from 'components/Divider';
 
-import SectionComponent from 'containers/ReportingDashboardPage/containers/DashboardSetup/components/SectionComponent';
+import SectionComponent from '../components/SectionComponent';
 import { ReportingDashboardPageContext } from '../../../constants';
 import { FullWidthContainer } from '../../../styled';
 import { DashboardSectionsContext } from '../constants';
