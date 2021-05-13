@@ -132,6 +132,14 @@ export default defineMessages({
     id: `${scope}.clinicPlaceholder`,
     defaultMessage: 'Enter Clinic Name',
   },
+  reportingInterventions: {
+    id: `${scope}.reportingInterventions`,
+    defaultMessage: 'Reporting interventions',
+  },
+  addReportingIntervention: {
+    id: `${scope}.addReportingIntervention`,
+    defaultMessage: 'Add reporting intervention',
+  },
   userGoBack: {
     id: `${scope}.userGoBack`,
     defaultMessage: '< Back to Unit Settings',

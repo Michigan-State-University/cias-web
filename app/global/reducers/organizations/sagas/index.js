@@ -13,6 +13,8 @@ import fetchClinicSaga from './fetchClinic';
 import addClinicSaga from './addClinic';
 import editClinicSaga from './editClinic';
 import deleteClinicSaga from './deleteClinic';
+import fetchOrganizationInterventionsSaga from './fetchOrganizationInterventions';
+import addOrganizationInterventionSaga from './addOrganizationIntervention';
 
 export {
   fetchOrganizationsSaga,
@@ -27,6 +29,8 @@ export {
   addClinicSaga,
   editClinicSaga,
   deleteClinicSaga,
+  fetchOrganizationInterventionsSaga,
+  addOrganizationInterventionSaga,
 };
 
 export default function* allOrganizationsSagas() {
@@ -45,5 +49,7 @@ export default function* allOrganizationsSagas() {
     addClinicSaga(),
     editClinicSaga(),
     deleteClinicSaga(),
+    fetchOrganizationInterventionsSaga(),
+    addOrganizationInterventionSaga(),
   ]);
 }
