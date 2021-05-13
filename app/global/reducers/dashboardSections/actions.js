@@ -18,7 +18,7 @@ import {
   FETCH_SECTIONS_SUCCESS,
 } from './constants';
 
-export const addDashboardSectionRequest = (name, organizationId) =>
+export const addDashboardSectionRequest = (organizationId, name) =>
   actionBuilder(ADD_SECTION_REQUEST, { name, organizationId });
 export const addDashboardSectionSuccess = dashboardSection =>
   actionBuilder(ADD_SECTION_SUCCESS, { dashboardSection });

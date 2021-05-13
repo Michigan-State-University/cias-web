@@ -6,6 +6,7 @@ import { compose } from 'redux';
 import { useIntl } from 'react-intl';
 
 import {
+  addDashboardSectionRequest,
   allDashboardSectionsSagas,
   dashboardSectionsReducer,
   fetchDashboardSectionsRequest,
@@ -86,6 +87,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   fetchDashboardSections: fetchDashboardSectionsRequest,
+  addDashboardSection: addDashboardSectionRequest,
 };
 
 const withConnect = connect(
