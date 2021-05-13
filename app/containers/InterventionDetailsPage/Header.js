@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Row as GRow, Col as GCol, useScreenClass } from 'react-grid-system';
 import { FormattedMessage, IntlShape, injectIntl } from 'react-intl';
@@ -30,7 +30,8 @@ const Header = ({
   organizationId,
 }) => {
   const screenClass = useScreenClass();
-  const renderBackButton = () => {
+
+  const renderBackButton = useMemo(() => {
     if (organizationId) {
       return (
         <BackButton to={`/organization/${organizationId}/dashboard-setup`}>
@@ -43,13 +44,14 @@ const Header = ({
         <FormattedMessage {...messages.back} />
       </BackButton>
     );
-  };
+  }, [organizationId]);
+
   return (
     <GCol>
       <GRow xl={12}>
         <GCol>
           <Row justify="between" mt={50}>
-            {renderBackButton()}
+            {renderBackButton}
           </Row>
         </GCol>
       </GRow>
