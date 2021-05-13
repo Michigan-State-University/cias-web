@@ -16,6 +16,7 @@ export {
   deleteClinicRequest,
   fetchOrganizationInterventionsRequest,
   createOrganizationInterventionRequest,
+  setShouldRefetchAction,
 } from './actions';
 export { organizationsReducer } from './reducer';
 export {

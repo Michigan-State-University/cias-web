@@ -50,6 +50,7 @@ import {
   FETCH_CLINIC_REQUEST,
   FETCH_CLINIC_SUCCESS,
   FETCH_CLINIC_ERROR,
+  SET_SHOULD_REFETCH_ACTION,
 } from './constants';
 
 export const fetchOrganizationsRequest = () =>
@@ -166,3 +167,6 @@ export const deleteClinicFailure = error =>
 
 export const selectEntityAction = (id, type, parentId) =>
   actionBuilder(SELECT_ENTITY_ACTION, { id, type, parentId });
+
+export const setShouldRefetchAction = type =>
+  actionBuilder(SET_SHOULD_REFETCH_ACTION, { type });

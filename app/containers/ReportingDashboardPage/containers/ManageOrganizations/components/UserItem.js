@@ -5,19 +5,23 @@ import { colors } from 'theme';
 
 import DashedCircleIcon from 'assets/svg/circle-dashed.svg';
 
-import { Col, Row, NoMarginRow } from 'components/ReactGridSystem';
+import { Col, Row } from 'components/ReactGridSystem';
 import EllipsisText from 'components/Text/EllipsisText';
 import UserAvatar from 'components/UserAvatar';
 import Icon from 'components/Icon';
 
-const UserItem = ({ avatarColor, user }) => {
+import { UserRow } from '../../../styled';
+
+const UserItem = ({ avatarColor, user, onClick }) => {
   const { active, avatar, email, firstName, fullName, lastName } = user;
 
   const wrapper = useCallback(
     component => (
       <Row>
         <Col>
-          <NoMarginRow align="center">{component}</NoMarginRow>
+          <UserRow align="center" onClick={onClick}>
+            {component}
+          </UserRow>
         </Col>
       </Row>
     ),
@@ -66,6 +70,7 @@ UserItem.propTypes = {
     lastName: PropTypes.string,
     fullName: PropTypes.string,
   }),
+  onClick: PropTypes.func,
 };
 
 export default memo(UserItem);

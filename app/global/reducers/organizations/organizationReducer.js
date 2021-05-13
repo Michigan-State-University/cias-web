@@ -48,6 +48,7 @@ import {
   FETCH_CLINIC_SUCCESS,
   FETCH_CLINIC_ERROR,
   EntityType,
+  SET_SHOULD_REFETCH_ACTION,
 } from './constants';
 
 import { healthSystemReducer } from './healthSystemReducer';
@@ -558,6 +559,9 @@ const organizationReducer = (state = initialState, action) =>
       case CREATE_ORGANIZATION_INTERVENTION_ERROR: {
         draft.loaders.addOrganizationIntervention = false;
         break;
+      }
+      case SET_SHOULD_REFETCH_ACTION: {
+        draft.shouldRefetch[payload.type ?? state.selectedEntity.type] = true;
       }
     }
   });
