@@ -1,4 +1,5 @@
 import produce from 'immer';
+import cloneDeep from 'lodash/cloneDeep';
 
 import {
   ADD_SECTION_ERROR,
@@ -21,6 +22,7 @@ import {
 export const initialState = {
   dashboardSections: [],
   singleDashboardSection: null,
+  cache: { dashboardSections: [], singleDashboardSection: null },
   loaders: {
     fetchDashboardSectionLoader: false,
     fetchDashboardSectionsLoader: false,
@@ -52,6 +54,9 @@ const dashboardSectionsReducer = (state = initialState, action) =>
       case ADD_SECTION_SUCCESS: {
         draft.loaders.addDashboardSectionLoader = false;
         draft.errors.addDashboardSectionError = null;
+
+        draft.dashboardSections.push(payload.dashboardSection);
+        draft.cache.dashboardSections.push(cloneDeep(payload.dashboardSection));
         break;
       }
       case ADD_SECTION_ERROR: {
@@ -104,6 +109,11 @@ const dashboardSectionsReducer = (state = initialState, action) =>
       case FETCH_SECTION_SUCCESS: {
         draft.loaders.fetchDashboardSectionLoader = false;
         draft.errors.fetchDashboardSectionError = null;
+
+        draft.singleDashboardSection = payload.dashboardSection;
+        draft.cache.singleDashboardSection = cloneDeep(
+          payload.dashboardSection,
+        );
         break;
       }
 
@@ -122,6 +132,9 @@ const dashboardSectionsReducer = (state = initialState, action) =>
       case FETCH_SECTIONS_SUCCESS: {
         draft.loaders.fetchDashboardSectionsLoader = false;
         draft.errors.fetchDashboardSectionsError = null;
+
+        draft.dashboardSections = payload.dashboardSections;
+        draft.cache.dashboardSections = cloneDeep(payload.dashboardSections);
         break;
       }
 

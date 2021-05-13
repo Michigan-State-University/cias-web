@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -30,6 +30,7 @@ import messages from '../messages';
 
 const DashboardSections = ({
   fetchDashboardSections,
+  addDashboardSection,
   dashboardSections,
   loaders,
   errors,
@@ -37,11 +38,18 @@ const DashboardSections = ({
   const { organizationId } = useContext(ReportingDashboardPageContext);
   const { formatMessage } = useIntl();
 
+  const { addDashboardSectionLoader, fetchDashboardSectionsLoader } = loaders;
+
   useEffect(() => {
     fetchDashboardSections(organizationId);
   }, [organizationId]);
 
-  if (false) return <Loader fullSize />;
+  const onAddDashboardSection = useCallback(
+    () => addDashboardSection(organizationId),
+    [organizationId],
+  );
+
+  if (fetchDashboardSectionsLoader) return <Loader type="inline" />;
 
   return (
     <DashboardSectionsContext.Provider
@@ -62,7 +70,19 @@ const DashboardSections = ({
 
         <Row>
           <Col mb={30}>
-            <DashedButton transparent>
+            {dashboardSections.map(section => (
+              <div>{JSON.stringify(section)}</div>
+            ))}
+          </Col>
+        </Row>
+
+        <Row>
+          <Col mb={30}>
+            <DashedButton
+              onClick={onAddDashboardSection}
+              loading={addDashboardSectionLoader}
+              transparent
+            >
               {formatMessage(messages.addNewSection)}
             </DashedButton>
           </Col>
@@ -74,6 +94,7 @@ const DashboardSections = ({
 
 DashboardSections.propTypes = {
   fetchDashboardSections: PropTypes.func,
+  addDashboardSection: PropTypes.func,
   dashboardSections: PropTypes.arrayOf(PropTypes.object),
   loaders: PropTypes.object,
   errors: PropTypes.object,
