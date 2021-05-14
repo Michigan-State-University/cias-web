@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -22,9 +22,8 @@ import Comment from 'components/Text/Comment';
 import StyledInput from 'components/Input/StyledInput';
 import Icon from 'components/Icon';
 
+import DashboardSections from './containers/DashboardSections';
 import OrganizationInterventionRow from './containers/OrganizationInterventionRow';
-
-import DashboardSections from './components/DashboardSections';
 
 import messages from '../../messages';
 
@@ -112,4 +111,7 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(DashboardSetup);
+export default compose(
+  withConnect,
+  memo,
+)(DashboardSetup);

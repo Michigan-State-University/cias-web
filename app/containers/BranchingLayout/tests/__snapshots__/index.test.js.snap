@@ -189,6 +189,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   margin-right: 9px;
   width: 100%;
   height: auto;
+  max-width: initial;
   background-color: transparent;
   border: 1px solid transparent;
 }
@@ -362,6 +363,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
         height="auto"
         placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
         rows="5"
+        type="multiline"
         width="100%"
       />
     </div>
