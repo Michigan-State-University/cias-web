@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-import { EDIT_SECTION_REQUEST } from './constants';
+import { EDIT_SECTION_REQUEST, EDIT_SECTION_SUCCESS } from './constants';
 
 /* eslint-disable default-case, no-param-reassign */
 const dashboardSectionReducer = (state = null, action) =>
@@ -8,7 +8,8 @@ const dashboardSectionReducer = (state = null, action) =>
     const { type, payload } = action;
 
     switch (type) {
-      case EDIT_SECTION_REQUEST: {
+      case EDIT_SECTION_REQUEST:
+      case EDIT_SECTION_SUCCESS: {
         return { ...state, ...payload.dashboardSection };
       }
     }
