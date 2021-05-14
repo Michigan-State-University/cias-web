@@ -39,6 +39,7 @@ import 'file-loader?name=.htaccess!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import { store } from 'configureStore';
+import { setAutoFreeze } from 'immer';
 
 // Import i18n messages
 import { translationMessages } from 'i18n';
@@ -58,6 +59,9 @@ if (!isNullOrUndefined(process.env.SENTRY_DSN))
 const MOUNT_NODE = document.getElementById('app');
 
 const render = messages => {
+  // preserve old Immer behavior (compatibility after update)
+  setAutoFreeze(false);
+
   ReactDOM.render(
     <Provider store={store}>
       <LanguageProvider messages={messages}>
