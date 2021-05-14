@@ -22,7 +22,7 @@ import {
   copyInterventionRequest,
   archiveInterventionRequest,
 } from 'global/reducers/interventions';
-import { makeSelectUserRoles } from 'global/reducers/auth';
+import { makeSelectUserId } from 'global/reducers/auth';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 
 import EllipsisText from 'components/Text/EllipsisText';
@@ -33,7 +33,6 @@ import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import SelectResearchers from 'containers/SelectResearchers';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { Roles } from 'models/User/UserRoles';
 import { canArchive } from 'models/Status/statusPermissions';
 import messages from './messages';
 import {
@@ -52,7 +51,7 @@ const SingleTile = ({
   copyIntervention,
   archiveIntervention,
   intl: { formatMessage },
-  userRoles,
+  userId,
 }) => {
   useInjectSaga({
     key: 'interventionOptionsSaga',
@@ -78,11 +77,13 @@ const SingleTile = ({
 
   const handleCsvRequest = () => sendCsv(id);
 
+  const canExportCSV = userId === user.id;
+
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
 
   const options = [
-    ...(userRoles.includes(Roles.admin) || userRoles.includes(Roles.teamAdmin)
+    ...(canExportCSV
       ? [
           {
             icon: csvIcon,
@@ -190,11 +191,11 @@ SingleTile.propTypes = {
   sendCsv: PropTypes.func,
   copyIntervention: PropTypes.func,
   archiveIntervention: PropTypes.func,
-  userRoles: PropTypes.arrayOf(PropTypes.string),
+  userId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
-  userRoles: makeSelectUserRoles(),
+  userId: makeSelectUserId(),
 });
 
 const mapDispatchToProps = {
