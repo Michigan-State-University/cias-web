@@ -23,11 +23,13 @@ import {
   FETCH_SECTIONS_ERROR,
   FETCH_SECTIONS_REQUEST,
   FETCH_SECTIONS_SUCCESS,
+  SELECT_CHART_ACTION,
 } from './constants';
 
 export const initialState = {
   dashboardSections: [],
   singleDashboardSection: null,
+  selectedChart: null,
   cache: { dashboardSections: [], singleDashboardSection: null },
   loaders: {
     fetchDashboardSectionLoader: false,
@@ -195,6 +197,17 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         draft.loaders.addChartLoader = false;
         draft.errors.addChartError = payload.error;
         draft.dashboardSections = state.cache.dashboardSections;
+
+        break;
+      }
+
+      case SELECT_CHART_ACTION: {
+        if (state.selectedChart?.chartId !== payload.chartId)
+          draft.selectedChart = {
+            chartId: payload.chartId,
+            dashboardSectionId: payload.dashboardSectionId,
+          };
+        else draft.selectedChart = null;
 
         break;
       }

@@ -19,6 +19,7 @@ import {
   FETCH_SECTIONS_ERROR,
   FETCH_SECTIONS_REQUEST,
   FETCH_SECTIONS_SUCCESS,
+  SELECT_CHART_ACTION,
 } from './constants';
 
 export const addDashboardSectionRequest = (organizationId, name) =>
@@ -81,3 +82,9 @@ export const addChartRequest = (dashboardSectionId, type, name, description) =>
 export const addChartSuccess = (chart, dashboardSectionId) =>
   actionBuilder(ADD_CHART_SUCCESS, { chart, dashboardSectionId });
 export const addChartError = error => actionBuilder(ADD_CHART_ERROR, { error });
+
+export const selectChartAction = (dashboardSectionId, chartId) =>
+  actionBuilder(SELECT_CHART_ACTION, {
+    dashboardSectionId,
+    chartId,
+  });

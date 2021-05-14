@@ -6,6 +6,7 @@ export {
   editDashboardSectionRequest,
   deleteDashboardSectionRequest,
   addChartRequest,
+  selectChartAction,
 } from './actions';
 export { dashboardSectionsReducer, initialState } from './reducer';
 export {
@@ -13,6 +14,7 @@ export {
   makeSelectSingleDashboardSection,
   makeSelectLoaders,
   makeSelectErrors,
+  makeSelectSelectedChart,
 } from './selectors';
 
 export { ChartType } from './constants';

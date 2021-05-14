@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -6,20 +6,29 @@ import { compose } from 'redux';
 import {
   editDashboardSectionRequest,
   addChartRequest,
+  selectChartAction,
 } from 'global/reducers/dashboardSections';
 
-import Box from 'components/Box';
-import { Row } from 'components/ReactGridSystem';
+import { Col, Row } from 'components/ReactGridSystem';
+import SidePanel from 'components/SidePanel';
 
+import ChartTileUI from './ChartTileUI';
 import AddChart from './AddChart';
 import SectionUI from './SectionUI';
+import ChartSettings from './ChartSettings';
+
+import { DashboardSectionsContext } from '../constants';
+import { FullWidthContainer } from '../../../styled';
 
 const SectionComponent = ({
   section,
   editDashboardSection,
   index,
   addChart,
+  selectChart,
 }) => {
+  const { selectedChart } = useContext(DashboardSectionsContext);
+
   const onUpdate = useCallback(
     field => value =>
       editDashboardSection(
@@ -36,6 +45,11 @@ const SectionComponent = ({
     section.id,
   ]);
 
+  const onSelectChart = useCallback(
+    chartId => selectChart(section.id, chartId),
+    [section.id],
+  );
+
   return (
     <>
       <SectionUI
@@ -46,11 +60,37 @@ const SectionComponent = ({
         onNameChange={onUpdate('name')}
       />
 
-      <Box mb={40}>
-        <Row margin="0 !important">
-          <AddChart addChart={onAddChart} />
+      <FullWidthContainer>
+        <Row mb={40}>
+          <Col xs={12} xl={6} mb={10}>
+            <AddChart addChart={onAddChart} />
+          </Col>
+          {section.charts.map(chart => {
+            const isSelected =
+              selectedChart?.id === chart.id &&
+              selectedChart?.dashboardSectionId === section.id;
+
+            return (
+              <Col
+                key={`Chart-${chart.id}-Section-${section.id}`}
+                xs={12}
+                xl={6}
+                mb={10}
+              >
+                <ChartTileUI
+                  chart={chart}
+                  onClick={onSelectChart}
+                  isSelected={isSelected}
+                />
+              </Col>
+            );
+          })}
         </Row>
-      </Box>
+      </FullWidthContainer>
+
+      <SidePanel isOpen={Boolean(selectedChart)}>
+        <ChartSettings chart={selectedChart} />
+      </SidePanel>
     </>
   );
 };
@@ -59,12 +99,14 @@ SectionComponent.propTypes = {
   section: PropTypes.object,
   editDashboardSection: PropTypes.func,
   addChart: PropTypes.func,
+  selectChart: PropTypes.func,
   index: PropTypes.number,
 };
 
 const mapDispatchToProps = {
   editDashboardSection: editDashboardSectionRequest,
   addChart: addChartRequest,
+  selectChart: selectChartAction,
 };
 
 const withConnect = connect(

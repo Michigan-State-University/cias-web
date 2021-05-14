@@ -32,6 +32,8 @@ export const ADD_CHART_REQUEST = 'app/dashboardSections/ADD_CHART_REQUEST';
 export const ADD_CHART_SUCCESS = 'app/dashboardSections/ADD_CHART_SUCCESS';
 export const ADD_CHART_ERROR = 'app/dashboardSections/ADD_CHART_ERROR';
 
+export const SELECT_CHART_ACTION = 'app/dashboardSections/SELECT_CHART_ACTION';
+
 export const ChartType = {
   PIE_CHART: 'PIE_CHART',
   BAR_CHART: 'BAR_CHART',

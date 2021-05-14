@@ -14,6 +14,7 @@ import {
   makeSelectDashboardSections,
   makeSelectErrors,
   makeSelectLoaders,
+  makeSelectSelectedChart,
 } from 'global/reducers/dashboardSections';
 
 import { Col, Row } from 'components/ReactGridSystem';
@@ -32,6 +33,7 @@ const DashboardSections = ({
   fetchDashboardSections,
   addDashboardSection,
   dashboardSections,
+  selectedChart,
   loaders,
   errors,
 }) => {
@@ -53,7 +55,7 @@ const DashboardSections = ({
 
   return (
     <DashboardSectionsContext.Provider
-      value={{ dashboardSections, loaders, errors }}
+      value={{ dashboardSections, loaders, errors, selectedChart }}
     >
       <FullWidthContainer>
         <Row>
@@ -101,6 +103,7 @@ DashboardSections.propTypes = {
   addDashboardSection: PropTypes.func,
   dashboardSections: PropTypes.arrayOf(PropTypes.object),
   loaders: PropTypes.object,
+  selectedChart: PropTypes.object,
   errors: PropTypes.object,
 };
 
@@ -108,6 +111,7 @@ const mapStateToProps = createStructuredSelector({
   loaders: makeSelectLoaders(),
   errors: makeSelectErrors(),
   dashboardSections: makeSelectDashboardSections(),
+  selectedChart: makeSelectSelectedChart(),
 });
 
 const mapDispatchToProps = {

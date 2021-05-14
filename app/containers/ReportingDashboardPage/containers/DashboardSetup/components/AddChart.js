@@ -23,8 +23,14 @@ const AddChart = ({ addChart }) => {
   const onAddChart = useCallback(type => () => addChart(type), []);
 
   return (
-    <Box bg={colors.linkWater} width={600} height={300} padding="40px 120px">
-      <FullWidthContainer height="100%">
+    <Box
+      bg={colors.linkWater}
+      width={400}
+      minWidth={400}
+      height={300}
+      padding="40px"
+    >
+      <FullWidthContainer height="100%" width="100%">
         <Row align="center" height="100%">
           <Col>
             <FullWidthContainer>
