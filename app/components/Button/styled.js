@@ -5,6 +5,38 @@ import { margin, layout, padding, flex } from 'components/BaseComponentStyles';
 import { colors, themeColors } from 'theme';
 import Box from 'components/Box';
 
+const getTransparentStyles = disabled =>
+  disabled
+    ? {
+        '&:hover': {
+          cursor: 'not-allowed',
+        },
+        opacity: 0.7,
+      }
+    : {
+        '&:hover': {
+          backgroundColor: colors.linkWater,
+        },
+        cursor: 'pointer',
+      };
+
+const getStandardStyles = disabled =>
+  disabled
+    ? {
+        '&:hover': {
+          backgroundColor: colors.grey,
+          color: colors.white,
+        },
+      }
+    : {
+        '&:hover': {
+          backgroundColor: themeColors.primary,
+          color: colors.white,
+          border: '1px dashed transparent',
+        },
+        cursor: 'pointer',
+      };
+
 export const StyledLink = styled(Link)`
   outline: none;
   border: none;
@@ -28,30 +60,18 @@ export const StyledDashedButton = styled.button`
   height: 40px;
   width: 100%;
   border: 1px dashed ${colors.greyishBlue};
-  color: ${colors.greyishBlue};
-  background-color: ${colors.white};
+  color: ${({ transparent }) =>
+    transparent ? themeColors.secondary : colors.greyishBlue};
+  background-color: ${({ transparent }) =>
+    transparent ? 'transparent' : colors.white};
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   border-radius: 4px;
   transition: 0.2s;
-  ${({ disabled }) =>
-    disabled
-      ? {
-          '&:hover': {
-            backgroundColor: colors.grey,
-            color: colors.white,
-          },
-        }
-      : {
-          '&:hover': {
-            backgroundColor: themeColors.primary,
-            color: colors.white,
-            border: '1px dashed transparent',
-          },
-          cursor: 'pointer',
-        }}
+  ${({ disabled, transparent }) =>
+    transparent ? getTransparentStyles(disabled) : getStandardStyles(disabled)}
 `;
 
 export const DashedBox = styled(Box)`

@@ -65,6 +65,8 @@ const StyledInput = props => {
 
   return (
     <TextArea
+      {...props}
+      maxWidth="initial"
       disabled={props.disabled}
       width={props.width || '100%'}
       height="60px"

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import Spinner from 'components/Spinner';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import { DashedBox, StyledDashedButton } from './styled';
 
@@ -14,6 +14,7 @@ const DashedButton = ({
   loaderProps,
   spinnerProps,
   disabled,
+  transparent,
 }) => {
   const button = useRef(null);
   if (loading)
@@ -25,7 +26,10 @@ const DashedButton = ({
         justify="center"
         {...loaderProps}
       >
-        <Spinner color={colors.grey} {...spinnerProps} />
+        <Spinner
+          color={disabled ? colors.grey : themeColors.secondary}
+          {...spinnerProps}
+        />
       </DashedBox>
     );
   return (
@@ -34,6 +38,7 @@ const DashedButton = ({
       ref={button}
       fontWeight="bold"
       onClick={onClick}
+      transparent={transparent}
       {...buttonProps}
     >
       {children}
@@ -50,6 +55,7 @@ DashedButton.propTypes = {
   loaderProps: PropTypes.object,
   spinnerProps: PropTypes.object,
   disabled: PropTypes.bool,
+  transparent: PropTypes.bool,
 };
 
 export default DashedButton;

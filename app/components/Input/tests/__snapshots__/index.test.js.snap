@@ -2049,6 +2049,7 @@ exports[`<StyledInput /> Should render and match the snapshot as textarea 1`] = 
   margin-right: 9px;
   width: 100%;
   height: 60px;
+  max-width: initial;
   background-color: transparent;
   border: 1px solid transparent;
 }
@@ -2069,6 +2070,7 @@ exports[`<StyledInput /> Should render and match the snapshot as textarea 1`] = 
     data-cy="text-area"
     height="60px"
     placeholder="Placeholder"
+    type="multiline"
     width="100%"
   />
 </div>
