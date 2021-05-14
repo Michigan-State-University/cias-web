@@ -28,6 +28,7 @@ const Header = ({
   csvGeneratedAt,
   options,
   organizationId,
+  canAccessCsv,
 }) => {
   const screenClass = useScreenClass();
 
@@ -100,6 +101,7 @@ const Header = ({
                 handleSendCsv={handleSendCsv}
                 csvLink={csvLink}
                 csvGeneratedAt={csvGeneratedAt}
+                canAccessCsv={canAccessCsv}
               />
             </Row>
             <InterventionOptions>
@@ -124,6 +126,7 @@ Header.propTypes = {
   csvGeneratedAt: PropTypes.string,
   organizationId: PropTypes.string,
   options: PropTypes.array,
+  canAccessCsv: PropTypes.bool,
 };
 
 export default injectIntl(Header);
