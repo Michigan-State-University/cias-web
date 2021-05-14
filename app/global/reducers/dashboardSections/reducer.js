@@ -1,7 +1,8 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { findIndexById } from 'utils/arrayUtils';
+import { updateItemById } from 'utils/reduxUtils';
+
 import { dashboardSectionReducer } from './dashboardSectionReducer';
 import {
   ADD_SECTION_ERROR,
@@ -88,16 +89,11 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         draft.loaders.editDashboardSectionLoader = true;
         draft.errors.editDashboardSectionError = null;
 
-        const index = findIndexById(
-          state.dashboardSections,
+        updateItemById(
+          draft.dashboardSections,
           payload.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
         );
-
-        if (index !== -1)
-          draft.dashboardSections[index] = dashboardSectionReducer(
-            state.cache.dashboardSections[index],
-            action,
-          );
 
         break;
       }
@@ -106,16 +102,11 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         draft.loaders.editDashboardSectionLoader = false;
         draft.errors.editDashboardSectionError = null;
 
-        const index = findIndexById(
-          state.cache.dashboardSections,
+        updateItemById(
+          draft.cache.dashboardSections,
           payload.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
         );
-
-        if (index !== -1)
-          draft.cache.dashboardSections[index] = dashboardSectionReducer(
-            state.cache.dashboardSections[index],
-            action,
-          );
         break;
       }
 
