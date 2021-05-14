@@ -7,6 +7,8 @@ import { colors } from 'theme';
 import PieChartIcon from 'assets/svg/pieChart.svg';
 import BarChartIcon from 'assets/svg/barChart.svg';
 
+import { ChartType } from 'global/reducers/dashboardSections';
+
 import { Col, Row } from 'components/ReactGridSystem';
 import Box from 'components/Box';
 import H2 from 'components/H2';
@@ -35,7 +37,7 @@ const AddChart = ({ addChart }) => {
               <Row justify="center">
                 <Col xs="content">
                   <ChartButton
-                    onClick={onAddChart('pieChart')}
+                    onClick={onAddChart(ChartType.PIE_CHART)}
                     helperText={formatMessage(messages.pieChartHelper)}
                     title={formatMessage(messages.pieChart)}
                     icon={PieChartIcon}
@@ -44,7 +46,7 @@ const AddChart = ({ addChart }) => {
 
                 <Col xs="content">
                   <ChartButton
-                    onClick={onAddChart('barChart')}
+                    onClick={onAddChart(ChartType.BAR_CHART)}
                     helperText={formatMessage(messages.barChartHelper)}
                     title={formatMessage(messages.barChart)}
                     icon={BarChartIcon}

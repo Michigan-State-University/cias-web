@@ -5,6 +5,9 @@ import { updateItemById } from 'utils/reduxUtils';
 
 import { dashboardSectionReducer } from './dashboardSectionReducer';
 import {
+  ADD_CHART_ERROR,
+  ADD_CHART_REQUEST,
+  ADD_CHART_SUCCESS,
   ADD_SECTION_ERROR,
   ADD_SECTION_REQUEST,
   ADD_SECTION_SUCCESS,
@@ -32,6 +35,7 @@ export const initialState = {
     editDashboardSectionLoader: false,
     addDashboardSectionLoader: false,
     deleteDashboardSectionLoader: false,
+    addChartLoader: false,
   },
   errors: {
     fetchDashboardSectionError: null,
@@ -39,6 +43,7 @@ export const initialState = {
     editDashboardSectionError: null,
     addDashboardSectionError: null,
     deleteDashboardSectionError: null,
+    addChartError: null,
   },
 };
 
@@ -159,6 +164,38 @@ const dashboardSectionsReducer = (state = initialState, action) =>
       case FETCH_SECTIONS_ERROR: {
         draft.loaders.fetchDashboardSectionsLoader = false;
         draft.errors.fetchDashboardSectionsError = payload.error;
+        break;
+      }
+
+      case ADD_CHART_REQUEST: {
+        draft.loaders.addChartLoader = true;
+        draft.errors.addChartError = null;
+        break;
+      }
+
+      case ADD_CHART_SUCCESS: {
+        draft.loaders.addChartLoader = false;
+        draft.errors.addChartError = null;
+
+        updateItemById(
+          draft.dashboardSections,
+          payload.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+
+        updateItemById(
+          draft.cache.dashboardSections,
+          payload.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+        break;
+      }
+
+      case ADD_CHART_ERROR: {
+        draft.loaders.addChartLoader = false;
+        draft.errors.addChartError = payload.error;
+        draft.dashboardSections = state.cache.dashboardSections;
+
         break;
       }
     }

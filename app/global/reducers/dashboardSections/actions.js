@@ -1,6 +1,9 @@
 import { actionBuilder } from 'utils/actionBuilder';
 
 import {
+  ADD_CHART_ERROR,
+  ADD_CHART_REQUEST,
+  ADD_CHART_SUCCESS,
   ADD_SECTION_ERROR,
   ADD_SECTION_REQUEST,
   ADD_SECTION_SUCCESS,
@@ -67,3 +70,14 @@ export const deleteDashboardSectionSuccess = (
   actionBuilder(DELETE_SECTION_SUCCESS, { dashboardSectionId, organizationId });
 export const deleteDashboardSectionError = error =>
   actionBuilder(DELETE_SECTION_ERROR, { error });
+
+export const addChartRequest = (dashboardSectionId, type, name, description) =>
+  actionBuilder(ADD_CHART_REQUEST, {
+    name,
+    description,
+    dashboardSectionId,
+    type,
+  });
+export const addChartSuccess = (chart, dashboardSectionId) =>
+  actionBuilder(ADD_CHART_SUCCESS, { chart, dashboardSectionId });
+export const addChartError = error => actionBuilder(ADD_CHART_ERROR, { error });

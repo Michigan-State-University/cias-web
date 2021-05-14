@@ -3,14 +3,23 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { editDashboardSectionRequest } from 'global/reducers/dashboardSections';
+import {
+  editDashboardSectionRequest,
+  addChartRequest,
+} from 'global/reducers/dashboardSections';
 
 import Box from 'components/Box';
+import { Row } from 'components/ReactGridSystem';
 
 import AddChart from './AddChart';
 import SectionUI from './SectionUI';
 
-const SectionComponent = ({ section, editDashboardSection, index }) => {
+const SectionComponent = ({
+  section,
+  editDashboardSection,
+  index,
+  addChart,
+}) => {
   const onUpdate = useCallback(
     field => value =>
       editDashboardSection(
@@ -20,8 +29,12 @@ const SectionComponent = ({ section, editDashboardSection, index }) => {
         },
         section.id,
       ),
-    [section],
+    [section.id, section.organizationId],
   );
+
+  const onAddChart = useCallback(type => addChart(section.id, type), [
+    section.id,
+  ]);
 
   return (
     <>
@@ -34,7 +47,9 @@ const SectionComponent = ({ section, editDashboardSection, index }) => {
       />
 
       <Box mb={40}>
-        <AddChart />
+        <Row margin="0 !important">
+          <AddChart addChart={onAddChart} />
+        </Row>
       </Box>
     </>
   );
@@ -43,11 +58,13 @@ const SectionComponent = ({ section, editDashboardSection, index }) => {
 SectionComponent.propTypes = {
   section: PropTypes.object,
   editDashboardSection: PropTypes.func,
+  addChart: PropTypes.func,
   index: PropTypes.number,
 };
 
 const mapDispatchToProps = {
   editDashboardSection: editDashboardSectionRequest,
+  addChart: addChartRequest,
 };
 
 const withConnect = connect(

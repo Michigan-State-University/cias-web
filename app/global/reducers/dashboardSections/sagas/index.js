@@ -4,6 +4,7 @@ import fetchDashboardSectionSaga from './fetchDashboardSection';
 import fetchDashboardSectionsSaga from './fetchDashboardSections';
 import addDashboardSectionSaga from './addDashboardSection';
 import deleteDashboardSectionSaga from './deleteDashboardSection';
+import addChartSaga from './addChart';
 
 export {
   fetchDashboardSectionSaga,
@@ -11,6 +12,7 @@ export {
   addDashboardSectionSaga,
   editDashboardSectionSaga,
   deleteDashboardSectionSaga,
+  addChartSaga,
 };
 
 export default function* allDashboardSectionsSagas() {
@@ -20,5 +22,6 @@ export default function* allDashboardSectionsSagas() {
     addDashboardSectionSaga(),
     editDashboardSectionSaga(),
     deleteDashboardSectionSaga(),
+    addChartSaga(),
   ]);
 }
