@@ -89,5 +89,5 @@ ReactColor.defaultProps = {
   color: themeColors.secondary,
 };
 
-export { ColorPickerType };
+export { ColorPickerType, DEFAULT_COLORS };
 export default memo(ReactColor);

@@ -16,6 +16,7 @@ import Button from 'components/Button';
 import Circle from 'components/Circle';
 import Tooltip from 'components/Tooltip';
 import DashedButton from 'components/Button/DashedButton';
+import { DEFAULT_COLORS } from 'components/ReactColor';
 
 import FormulaCase from './FormulaPattern';
 import FormulaOtherCase from './FormulaOtherPattern';
@@ -63,7 +64,13 @@ const PieChartSettings = ({ chart, onEdit, onDelete }) => {
 
     onEditFormula('patterns')([
       ...chart.formula.patterns,
-      { label: '', color: '', match: '=' },
+      {
+        label: '',
+        color:
+          DEFAULT_COLORS[chart.formula.patterns.length] ??
+          themeColors.secondary,
+        match: '=',
+      },
     ]);
   };
 

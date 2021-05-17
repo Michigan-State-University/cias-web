@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
 import { Col, Row } from 'components/ReactGridSystem';
+import ReactColor, { ColorPickerType } from 'components/ReactColor';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
@@ -15,6 +16,8 @@ const FormulaOtherPattern = ({ pattern, onEdit }) => {
 
   const onEditLabel = handleEdit('label');
 
+  const onEditColor = color => handleEdit('color')(color.hex);
+
   return (
     <FullWidthContainer>
       <Row align="center" nogutter>
@@ -22,7 +25,7 @@ const FormulaOtherPattern = ({ pattern, onEdit }) => {
           {formatMessage(messages.chartFormulaOtherCase)}
         </Col>
 
-        <Col xs="content">
+        <Col xs="content" mr={5}>
           <Input
             disabled={false}
             width="120px"
@@ -32,6 +35,14 @@ const FormulaOtherPattern = ({ pattern, onEdit }) => {
             )}
             value={pattern.label}
             onBlur={onEditLabel}
+          />
+        </Col>
+
+        <Col xs="content">
+          <ReactColor
+            type={ColorPickerType.TWITTER}
+            color={pattern.color}
+            onChangeComplete={onEditColor}
           />
         </Col>
       </Row>

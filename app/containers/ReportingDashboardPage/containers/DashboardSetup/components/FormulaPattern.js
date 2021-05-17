@@ -7,6 +7,7 @@ import BinIcon from 'assets/svg/bin-no-bg.svg';
 import { Col, Row } from 'components/ReactGridSystem';
 import Icon from 'components/Icon';
 import InequalityChooser from 'components/InequalityChooser';
+import ReactColor, { ColorPickerType } from 'components/ReactColor';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
@@ -21,6 +22,8 @@ const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
   const onEditMatch = handleEdit('match');
 
   const onEditLabel = handleEdit('label');
+
+  const onEditColor = color => handleEdit('color')(color.hex);
 
   return (
     <FullWidthContainer>
@@ -45,7 +48,7 @@ const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
           {formatMessage(messages.chartFormulaCaseEquals)}
         </Col>
 
-        <Col xs="content">
+        <Col xs="content" mr={5}>
           <Input
             disabled={false}
             width="120px"
@@ -55,6 +58,14 @@ const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
             )}
             value={pattern.label}
             onBlur={onEditLabel}
+          />
+        </Col>
+
+        <Col xs="content">
+          <ReactColor
+            type={ColorPickerType.TWITTER}
+            color={pattern.color}
+            onChangeComplete={onEditColor}
           />
         </Col>
       </Row>
