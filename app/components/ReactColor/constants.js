@@ -1,10 +1,6 @@
 import { colors, themeColors } from 'theme';
 
 export const DEFAULT_COLORS = [
-  themeColors.secondary,
-  colors.amethyst,
-  colors.heliotrope,
-  colors.mauve,
   colors.orangeRed,
   colors.yellowRed,
   colors.turquoiseGreen,
@@ -15,6 +11,10 @@ export const DEFAULT_COLORS = [
   colors.bluewood,
   colors.mauvelous,
   colors.amaranth,
+  colors.amethyst,
+  colors.heliotrope,
+  colors.mauve,
+  themeColors.secondary,
 ];
 
 export const ColorPickerType = {
