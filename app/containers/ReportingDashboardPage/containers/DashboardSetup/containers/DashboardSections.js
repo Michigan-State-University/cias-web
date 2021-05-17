@@ -15,6 +15,7 @@ import {
   makeSelectErrors,
   makeSelectLoaders,
   makeSelectSelectedChart,
+  selectChartAction,
 } from 'global/reducers/dashboardSections';
 
 import { Col, Row } from 'components/ReactGridSystem';
@@ -36,11 +37,17 @@ const DashboardSections = ({
   selectedChart,
   loaders,
   errors,
+  selectChart,
 }) => {
   const { organizationId } = useContext(ReportingDashboardPageContext);
   const { formatMessage } = useIntl();
 
   const { addDashboardSectionLoader, fetchDashboardSectionsLoader } = loaders;
+
+  // Reset settings on Component entry
+  useEffect(() => {
+    selectChart();
+  }, []);
 
   useEffect(() => {
     fetchDashboardSections(organizationId);
@@ -105,6 +112,7 @@ DashboardSections.propTypes = {
   loaders: PropTypes.object,
   selectedChart: PropTypes.object,
   errors: PropTypes.object,
+  selectChart: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -117,6 +125,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   fetchDashboardSections: fetchDashboardSectionsRequest,
   addDashboardSection: addDashboardSectionRequest,
+  selectChart: selectChartAction,
 };
 
 const withConnect = connect(
