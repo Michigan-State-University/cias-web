@@ -17,7 +17,7 @@ describe('<ReactColor />', () => {
     expect(spy).not.toHaveBeenCalled();
   });
 
-  it('Should render checked and match the snapshot', () => {
+  it('Should render and match the snapshot', () => {
     const { container } = render(<ReactColor />);
     expect(container).toMatchSnapshot();
   });
