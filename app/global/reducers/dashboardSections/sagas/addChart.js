@@ -7,6 +7,7 @@ import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { ADD_CHART_REQUEST } from '../constants';
 import { addChartError, addChartSuccess } from '../actions';
 
+// ! TODO: Select new chart
 export function* addChart({
   payload: { name, description, dashboardSectionId, chartType },
 }) {

@@ -269,6 +269,9 @@ const dashboardSectionsReducer = (state = initialState, action) =>
           item => dashboardSectionReducer(item, action),
         );
 
+        if (payload.chartId === state.selectedChart?.chartId)
+          draft.selectedChart = null;
+
         break;
       }
 

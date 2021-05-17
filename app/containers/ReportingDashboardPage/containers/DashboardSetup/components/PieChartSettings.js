@@ -1,7 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
+import merge from 'lodash/merge';
 
 import { colors, themeColors } from 'theme';
 
@@ -23,9 +24,18 @@ import FormulaCase from './FormulaCase';
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
+import { DashboardSectionsContext } from '../constants';
 
-const PieChartSettings = ({ chart }) => {
+const PieChartSettings = ({ chart, onEdit, onDelete }) => {
   const { formatMessage } = useIntl();
+
+  const {
+    loaders: { deleteChartLoader },
+  } = useContext(DashboardSectionsContext);
+
+  const onEditFormula = value => {
+    onEdit('formula')(merge({ ...chart.formula }, { payload: value }));
+  };
 
   return (
     <FullWidthContainer>
@@ -35,7 +45,7 @@ const PieChartSettings = ({ chart }) => {
         </Col>
 
         <Col xs="content">
-          <TextButton loading={false} onClick={undefined}>
+          <TextButton loading={deleteChartLoader} onClick={onDelete}>
             <Row align="center">
               <Icon src={BinIcon} fill={colors.flamingo} mr={8} />
               <Text fontWeight="bold" color={colors.flamingo}>
@@ -89,7 +99,7 @@ const PieChartSettings = ({ chart }) => {
             height="50px"
             placeholder={formatMessage(messages.chartSettingsNamePlaceholder)}
             value={chart.name}
-            onBlur={undefined}
+            onBlur={onEdit('name')}
           />
         </Col>
       </Row>
@@ -110,7 +120,7 @@ const PieChartSettings = ({ chart }) => {
               messages.chartSettingsDescriptionPlaceholder,
             )}
             value={chart.description ?? ''}
-            onBlur={undefined}
+            onBlur={onEdit('description')}
           />
         </Col>
       </Row>
@@ -132,7 +142,7 @@ const PieChartSettings = ({ chart }) => {
               messages.chartSettingsFormulaPlaceholder,
             )}
             value={chart.formula.payload}
-            onBlur={undefined}
+            onBlur={onEditFormula}
           />
         </Col>
       </Row>
@@ -157,6 +167,8 @@ const PieChartSettings = ({ chart }) => {
 
 PieChartSettings.propTypes = {
   chart: PropTypes.object,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 export default memo(PieChartSettings);
