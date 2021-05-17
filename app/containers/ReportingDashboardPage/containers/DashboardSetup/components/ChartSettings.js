@@ -11,12 +11,12 @@ const ChartSettings = ({ chart }) => {
     <SettingsContainer>{component}</SettingsContainer>
   );
 
-  switch (chart.type) {
+  switch (chart.chartType) {
     case ChartType.PIE_CHART:
       return wrapper(<PieChartSettings chart={chart} />);
     case ChartType.BAR_CHART:
     default:
-      return null;
+      return wrapper(<PieChartSettings chart={chart} />);
   }
 };
 
