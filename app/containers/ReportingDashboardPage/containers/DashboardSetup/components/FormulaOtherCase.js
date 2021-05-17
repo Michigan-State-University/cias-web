@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
 import { Col, Row } from 'components/ReactGridSystem';
@@ -7,8 +8,12 @@ import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
 
-const FormulaOtherCase = () => {
+const FormulaOtherCase = ({ pattern, onEdit }) => {
   const { formatMessage } = useIntl();
+
+  const handleEdit = field => value => onEdit({ ...pattern, [field]: value });
+
+  const onEditLabel = handleEdit('label');
 
   return (
     <FullWidthContainer>
@@ -23,8 +28,8 @@ const FormulaOtherCase = () => {
             placeholder={formatMessage(
               messages.chartFormulaCaseLabelPlaceholder,
             )}
-            value=""
-            onBlur={undefined}
+            value={pattern.label}
+            onBlur={onEditLabel}
           />
         </Col>
       </Row>
@@ -32,6 +37,9 @@ const FormulaOtherCase = () => {
   );
 };
 
-FormulaOtherCase.propTypes = {};
+FormulaOtherCase.propTypes = {
+  onEdit: PropTypes.func,
+  pattern: PropTypes.object,
+};
 
 export default memo(FormulaOtherCase);

@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
@@ -11,14 +12,22 @@ import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
 
-const FormulaCase = () => {
+// ! TODO: Rename Case to Pattern
+// ! TODO: Use destructing
+const FormulaCase = ({ pattern, onEdit, onDelete }) => {
   const { formatMessage } = useIntl();
+
+  const handleEdit = field => value => onEdit({ ...pattern, [field]: value });
+
+  const onEditMatch = handleEdit('match');
+
+  const onEditLabel = handleEdit('label');
 
   return (
     <FullWidthContainer>
       <Row align="center" nogutter>
         <Col xs="content">
-          <Icon src={BinIcon} mr={8} />
+          <Icon src={BinIcon} mr={8} onClick={onDelete} />
         </Col>
 
         <Col xs="content">{formatMessage(messages.chartFormulaCaseIf)}</Col>
@@ -27,8 +36,8 @@ const FormulaCase = () => {
           <Row margin="0 !important">
             <InequalityChooser
               disabled={false}
-              onSuccessfulChange={undefined}
-              inequalityValue=""
+              onSuccessfulChange={onEditMatch}
+              inequalityValue={pattern.match}
             />
           </Row>
         </Col>
@@ -43,8 +52,8 @@ const FormulaCase = () => {
             placeholder={formatMessage(
               messages.chartFormulaCaseLabelPlaceholder,
             )}
-            value=""
-            onBlur={undefined}
+            value={pattern.label}
+            onBlur={onEditLabel}
           />
         </Col>
       </Row>
@@ -52,6 +61,10 @@ const FormulaCase = () => {
   );
 };
 
-FormulaCase.propTypes = {};
+FormulaCase.propTypes = {
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func,
+  pattern: PropTypes.object,
+};
 
 export default memo(FormulaCase);

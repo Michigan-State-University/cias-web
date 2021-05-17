@@ -2,7 +2,6 @@ import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
-import merge from 'lodash/merge';
 
 import { colors, themeColors } from 'theme';
 
@@ -26,6 +25,7 @@ import messages from '../messages';
 import { Input } from '../styled';
 import { DashboardSectionsContext } from '../constants';
 
+// TODO: use useCallback
 const PieChartSettings = ({ chart, onEdit, onDelete }) => {
   const { formatMessage } = useIntl();
 
@@ -33,9 +33,33 @@ const PieChartSettings = ({ chart, onEdit, onDelete }) => {
     loaders: { deleteChartLoader },
   } = useContext(DashboardSectionsContext);
 
-  const onEditFormula = value => {
-    onEdit('formula')(merge({ ...chart.formula }, { payload: value }));
-  };
+  const onEditFormula = field => value =>
+    onEdit('formula')({ ...chart.formula, [field]: value });
+
+  const onEditFormulaPayload = onEditFormula('payload');
+
+  const onEditFormulaPattern = index => newPattern =>
+    onEditFormula('patterns')(
+      chart.formula.patterns.map((pattern, i) => {
+        if (index === i) return newPattern;
+
+        return pattern;
+      }),
+    );
+
+  const onDeleteFormulaPattern = index => () =>
+    onEditFormula('patterns')(
+      chart.formula.patterns.filter((_, i) => index !== i),
+    );
+
+  const onAddFormulaPattern = () =>
+    onEditFormula('patterns')([
+      ...chart.formula.patterns,
+      { label: '', color: '', match: '=' },
+    ]);
+
+  const onEditDefaultFormulaPattern = pattern =>
+    onEditFormula('defaultPattern')(pattern);
 
   return (
     <FullWidthContainer>
@@ -142,21 +166,32 @@ const PieChartSettings = ({ chart, onEdit, onDelete }) => {
               messages.chartSettingsFormulaPlaceholder,
             )}
             value={chart.formula.payload}
-            onBlur={onEditFormula}
+            onBlur={onEditFormulaPayload}
           />
         </Col>
       </Row>
 
       <Row mt={36}>
         <Col>
-          <FormulaCase />
-          <FormulaOtherCase />
+          {chart.formula.patterns.map((pattern, index) => (
+            <FormulaCase
+              key={`Pattern-${index}-Chart-${chart.id}`}
+              pattern={pattern}
+              onEdit={onEditFormulaPattern(index)}
+              onDelete={onDeleteFormulaPattern(index)}
+            />
+          ))}
+          <FormulaOtherCase
+            key={`OtherPattern-Chart-${chart.id}`}
+            pattern={chart.formula.defaultPattern}
+            onEdit={onEditDefaultFormulaPattern}
+          />
         </Col>
       </Row>
 
       <Row mt={36}>
         <Col>
-          <DashedButton onClick={undefined} loading={false}>
+          <DashedButton onClick={onAddFormulaPattern} loading={false}>
             {formatMessage(messages.addNewCase)}
           </DashedButton>
         </Col>
