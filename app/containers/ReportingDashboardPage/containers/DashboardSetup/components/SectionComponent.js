@@ -61,8 +61,8 @@ const SectionComponent = ({
       />
 
       <FullWidthContainer>
-        <Row mb={40}>
-          <Col xs={12} xl={6} mb={10}>
+        <Row mb={40} justify="center">
+          <Col xs={12} xl={6} mb={10} align="center">
             <AddChart addChart={onAddChart} />
           </Col>
           {section.charts.map(chart => {
@@ -73,6 +73,7 @@ const SectionComponent = ({
             return (
               <Col
                 key={`Chart-${chart.id}-Section-${section.id}`}
+                align="center"
                 xs={12}
                 xl={6}
                 mb={10}
