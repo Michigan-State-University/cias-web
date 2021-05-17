@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
@@ -29,9 +29,15 @@ import { DashboardSectionsContext } from '../constants';
 const PieChartSettings = ({ chart, onEdit, onDelete }) => {
   const { formatMessage } = useIntl();
 
+  const [isAddingPattern, setIsAddingPattern] = useState(false);
+
   const {
-    loaders: { deleteChartLoader },
+    loaders: { deleteChartLoader, editChartLoader },
   } = useContext(DashboardSectionsContext);
+
+  useEffect(() => {
+    if (isAddingPattern && !editChartLoader) setIsAddingPattern(false);
+  }, [editChartLoader]);
 
   const onEditFormula = field => value =>
     onEdit('formula')({ ...chart.formula, [field]: value });
@@ -52,11 +58,14 @@ const PieChartSettings = ({ chart, onEdit, onDelete }) => {
       chart.formula.patterns.filter((_, i) => index !== i),
     );
 
-  const onAddFormulaPattern = () =>
+  const onAddFormulaPattern = () => {
+    setIsAddingPattern(true);
+
     onEditFormula('patterns')([
       ...chart.formula.patterns,
       { label: '', color: '', match: '=' },
     ]);
+  };
 
   const onEditDefaultFormulaPattern = pattern =>
     onEditFormula('defaultPattern')(pattern);
@@ -191,7 +200,7 @@ const PieChartSettings = ({ chart, onEdit, onDelete }) => {
 
       <Row mt={36}>
         <Col>
-          <DashedButton onClick={onAddFormulaPattern} loading={false}>
+          <DashedButton onClick={onAddFormulaPattern} loading={isAddingPattern}>
             {formatMessage(messages.addNewCase)}
           </DashedButton>
         </Col>
