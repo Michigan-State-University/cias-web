@@ -41,7 +41,9 @@ const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
           </Row>
         </Col>
 
-        <Col xs="content">{formatMessage(messages.chartFormulaCaseEquals)}</Col>
+        <Col xs="content" mr={5}>
+          {formatMessage(messages.chartFormulaCaseEquals)}
+        </Col>
 
         <Col xs="content">
           <Input

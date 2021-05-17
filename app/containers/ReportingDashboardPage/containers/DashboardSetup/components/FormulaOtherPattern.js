@@ -18,7 +18,9 @@ const FormulaOtherPattern = ({ pattern, onEdit }) => {
   return (
     <FullWidthContainer>
       <Row align="center" nogutter>
-        <Col xs="content">{formatMessage(messages.chartFormulaOtherCase)}</Col>
+        <Col xs="content" mr={5}>
+          {formatMessage(messages.chartFormulaOtherCase)}
+        </Col>
 
         <Col xs="content">
           <Input

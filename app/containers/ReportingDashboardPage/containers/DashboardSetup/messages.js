@@ -95,7 +95,7 @@ export default defineMessages({
   },
   chartFormulaCaseEquals: {
     id: `${scope}.chartFormulaCaseEquals`,
-    defaultMessage: 'label is',
+    defaultMessage: 'label is:',
   },
   chartFormulaOtherCase: {
     id: `${scope}.chartFormulaOtherCase`,
