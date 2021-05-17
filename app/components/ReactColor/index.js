@@ -69,7 +69,7 @@ const ReactColor = ({
         <Circle bg={color} child="" size="20px" />
       </Box>
       {isOpen && (
-        <Box position="absolute" right={-10} zIndex={10}>
+        <Box position="absolute" right={-10} top={35} zIndex={10}>
           {renderPicker()}
         </Box>
       )}
