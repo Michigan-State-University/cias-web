@@ -1,4 +1,10 @@
-import React, { memo, useContext, useEffect, useState } from 'react';
+import React, {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
@@ -26,7 +32,6 @@ import messages from '../messages';
 import { Input } from '../styled';
 import { DashboardSectionsContext } from '../constants';
 
-// TODO: use useCallback
 const PieChartSettings = ({ chart, onEdit, onDelete }) => {
   const { formatMessage } = useIntl();
 
@@ -40,26 +45,42 @@ const PieChartSettings = ({ chart, onEdit, onDelete }) => {
     if (isAddingPattern && !editChartLoader) setIsAddingPattern(false);
   }, [editChartLoader]);
 
-  const onEditFormula = field => value =>
-    onEdit('formula')({ ...chart.formula, [field]: value });
+  const onEditName = useCallback(onEdit('name'), [chart.name]);
 
-  const onEditFormulaPayload = onEditFormula('payload');
+  const onEditDescription = useCallback(onEdit('description'), [
+    chart.description,
+  ]);
 
-  const onEditFormulaPattern = index => newPattern =>
-    onEditFormula('patterns')(
-      chart.formula.patterns.map((pattern, i) => {
-        if (index === i) return newPattern;
+  const onEditFormula = useCallback(
+    field => value => onEdit('formula')({ ...chart.formula, [field]: value }),
+    [chart.formula],
+  );
 
-        return pattern;
-      }),
-    );
+  const onEditFormulaPayload = useCallback(onEditFormula('payload'), [
+    chart.formula.payload,
+  ]);
 
-  const onDeleteFormulaPattern = index => () =>
-    onEditFormula('patterns')(
-      chart.formula.patterns.filter((_, i) => index !== i),
-    );
+  const onEditFormulaPattern = useCallback(
+    index => newPattern =>
+      onEditFormula('patterns')(
+        chart.formula.patterns.map((pattern, i) => {
+          if (index === i) return newPattern;
 
-  const onAddFormulaPattern = () => {
+          return pattern;
+        }),
+      ),
+    [chart.formula.patterns],
+  );
+
+  const onDeleteFormulaPattern = useCallback(
+    index => () =>
+      onEditFormula('patterns')(
+        chart.formula.patterns.filter((_, i) => index !== i),
+      ),
+    [chart.formula.patterns],
+  );
+
+  const onAddFormulaPattern = useCallback(() => {
     setIsAddingPattern(true);
 
     onEditFormula('patterns')([
@@ -72,10 +93,12 @@ const PieChartSettings = ({ chart, onEdit, onDelete }) => {
         match: '=',
       },
     ]);
-  };
+  }, [chart.formula.patterns]);
 
-  const onEditDefaultFormulaPattern = pattern =>
-    onEditFormula('defaultPattern')(pattern);
+  const onEditDefaultFormulaPattern = useCallback(
+    pattern => onEditFormula('defaultPattern')(pattern),
+    [chart.formula.defaultPattern],
+  );
 
   return (
     <FullWidthContainer>
@@ -139,7 +162,7 @@ const PieChartSettings = ({ chart, onEdit, onDelete }) => {
             height="50px"
             placeholder={formatMessage(messages.chartSettingsNamePlaceholder)}
             value={chart.name}
-            onBlur={onEdit('name')}
+            onBlur={onEditName}
           />
         </Col>
       </Row>
@@ -160,7 +183,7 @@ const PieChartSettings = ({ chart, onEdit, onDelete }) => {
               messages.chartSettingsDescriptionPlaceholder,
             )}
             value={chart.description ?? ''}
-            onBlur={onEdit('description')}
+            onBlur={onEditDescription}
           />
         </Col>
       </Row>

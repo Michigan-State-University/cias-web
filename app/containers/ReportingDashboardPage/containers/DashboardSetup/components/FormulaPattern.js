@@ -13,9 +13,10 @@ import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
 
-// ! TODO: Use destructing
 const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
   const { formatMessage } = useIntl();
+
+  const { match, label, color } = pattern;
 
   const handleEdit = field => value => onEdit({ ...pattern, [field]: value });
 
@@ -23,7 +24,7 @@ const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
 
   const onEditLabel = handleEdit('label');
 
-  const onEditColor = color => handleEdit('color')(color.hex);
+  const onEditColor = newColor => handleEdit('color')(newColor.hex);
 
   return (
     <FullWidthContainer>
@@ -39,7 +40,7 @@ const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
             <InequalityChooser
               disabled={false}
               onSuccessfulChange={onEditMatch}
-              inequalityValue={pattern.match}
+              inequalityValue={match}
             />
           </Row>
         </Col>
@@ -56,7 +57,7 @@ const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
             placeholder={formatMessage(
               messages.chartFormulaCaseLabelPlaceholder,
             )}
-            value={pattern.label}
+            value={label}
             onBlur={onEditLabel}
           />
         </Col>
@@ -64,7 +65,7 @@ const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
         <Col xs="content">
           <ReactColor
             type={ColorPickerType.TWITTER}
-            color={pattern.color}
+            color={color}
             onChangeComplete={onEditColor}
           />
         </Col>

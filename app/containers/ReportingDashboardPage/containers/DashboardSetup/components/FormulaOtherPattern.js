@@ -12,11 +12,13 @@ import { Input } from '../styled';
 const FormulaOtherPattern = ({ pattern, onEdit }) => {
   const { formatMessage } = useIntl();
 
+  const { label, color } = pattern;
+
   const handleEdit = field => value => onEdit({ ...pattern, [field]: value });
 
   const onEditLabel = handleEdit('label');
 
-  const onEditColor = color => handleEdit('color')(color.hex);
+  const onEditColor = newColor => handleEdit('color')(newColor.hex);
 
   return (
     <FullWidthContainer>
@@ -33,7 +35,7 @@ const FormulaOtherPattern = ({ pattern, onEdit }) => {
             placeholder={formatMessage(
               messages.chartFormulaCaseLabelPlaceholder,
             )}
-            value={pattern.label}
+            value={label}
             onBlur={onEditLabel}
           />
         </Col>
@@ -41,7 +43,7 @@ const FormulaOtherPattern = ({ pattern, onEdit }) => {
         <Col xs="content">
           <ReactColor
             type={ColorPickerType.TWITTER}
-            color={pattern.color}
+            color={color}
             onChangeComplete={onEditColor}
           />
         </Col>
