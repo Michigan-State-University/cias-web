@@ -9,11 +9,11 @@ export const HoverableBox = styled(Box)`
   cursor: pointer;
   transition: 0.2s;
   border: 1px transparent solid;
+  box-shadow: ${boxShadows.black};
 
   ${({ $isSelected }) =>
     $isSelected && {
       borderColor: themeColors.secondary,
-      boxShadow: boxShadows.black,
     }}
 
   &:hover {
