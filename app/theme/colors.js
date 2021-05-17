@@ -37,6 +37,17 @@ const colors = {
   aqua: '#00FFF7',
   manatee: '#8C94A6',
   orangePeel: '#FB9B0A',
+  heliotrope: '#D27EF0',
+  amethyst: '#A667C4',
+  mauve: '#E2B1F4',
+  orangeRed: '#ED722E',
+  yellowRed: '#F2BB40',
+  turquoiseGreen: '#92D9B7',
+  emerald: '#5ECC8A',
+  blueEyes: '#9CD0F8',
+  tuftsBlue: '#4092DD',
+  mauvelous: '#E992A7',
+  amaranth: '#D83450',
 };
 
 const themeColors = {
