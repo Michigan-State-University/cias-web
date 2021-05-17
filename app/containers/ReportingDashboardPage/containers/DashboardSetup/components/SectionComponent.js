@@ -88,7 +88,7 @@ const SectionComponent = ({
         </Row>
       </FullWidthContainer>
 
-      <SidePanel isOpen={Boolean(selectedChart)}>
+      <SidePanel isOpen={Boolean(selectedChart)} style={{ width: 500 }}>
         <ChartSettings chart={selectedChart} />
       </SidePanel>
     </>

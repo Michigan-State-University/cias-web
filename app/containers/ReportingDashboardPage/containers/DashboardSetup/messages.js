@@ -44,4 +44,44 @@ export default defineMessages({
     id: `${scope}.barChartHelper`,
     defaultMessage: 'Show people falling into cut off value',
   },
+  chartSettingsDelete: {
+    id: `${scope}.chartSettingsDelete`,
+    defaultMessage: 'Delete',
+  },
+  chartSettingsStartCollectButton: {
+    id: `${scope}.chartSettingsStartCollectButton`,
+    defaultMessage: 'Start data collection',
+  },
+  chartSettingsStartCollectHelper: {
+    id: `${scope}.chartSettingsStartCollectHelper`,
+    defaultMessage: 'Start data collection',
+  },
+  chartSettingsNameLabel: {
+    id: `${scope}.chartSettingsNameLabel`,
+    defaultMessage: 'Chart Name (If empty field will not be displayed)',
+  },
+  chartSettingsNamePlaceholder: {
+    id: `${scope}.chartSettingsNamePlaceholder`,
+    defaultMessage: 'Enter chart name',
+  },
+  chartSettingsDescriptionLabel: {
+    id: `${scope}.chartSettingsDescriptionLabel`,
+    defaultMessage: 'Chart Description  (If empty field will not be displayed)',
+  },
+  chartSettingsDescriptionPlaceholder: {
+    id: `${scope}.chartSettingsDescriptionPlaceholder`,
+    defaultMessage: 'Enter chart description',
+  },
+  chartSettingsFormulaLabel: {
+    id: `${scope}.chartSettingsFormulaLabel`,
+    defaultMessage: 'Formula *',
+  },
+  chartSettingsFormulaDescription: {
+    id: `${scope}.chartSettingsFormulaDescription`,
+    defaultMessage: 'Enter Formula',
+  },
+  pieChartHeader: {
+    id: `${scope}.pieChartHeader`,
+    defaultMessage: 'Pie Chart Settings',
+  },
 });
