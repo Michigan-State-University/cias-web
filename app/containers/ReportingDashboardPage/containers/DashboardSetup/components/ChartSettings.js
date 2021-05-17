@@ -9,13 +9,23 @@ import {
   editChartRequest,
 } from 'global/reducers/dashboardSections';
 
+import ActionIcon from 'components/ActionIcon';
+import { Col, Row } from 'components/ReactGridSystem';
+
 import PieChartSettings from './PieChartSettings';
 
 import { SettingsContainer } from '../../../styled';
 
-const ChartSettings = ({ chart, editChart, deleteChart }) => {
+const ChartSettings = ({ chart, editChart, deleteChart, onClose }) => {
   const wrapper = component => (
-    <SettingsContainer>{component}</SettingsContainer>
+    <SettingsContainer>
+      <Row>
+        <Col align="end" mb={30}>
+          <ActionIcon onClick={onClose} mr={0} />
+        </Col>
+      </Row>
+      {component}
+    </SettingsContainer>
   );
 
   const onEdit = useCallback(
@@ -48,6 +58,7 @@ ChartSettings.propTypes = {
   chart: PropTypes.object,
   editChart: PropTypes.func,
   deleteChart: PropTypes.func,
+  onClose: PropTypes.func,
 };
 
 const mapDispatchToProps = {

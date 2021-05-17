@@ -29,6 +29,8 @@ const SectionComponent = ({
 }) => {
   const { selectedChart } = useContext(DashboardSectionsContext);
 
+  const closeSettings = useCallback(() => selectChart(), []);
+
   const onUpdate = useCallback(
     field => value =>
       editDashboardSection(
@@ -89,7 +91,7 @@ const SectionComponent = ({
       </FullWidthContainer>
 
       <SidePanel isOpen={Boolean(selectedChart)} style={{ width: 500 }}>
-        <ChartSettings chart={selectedChart} />
+        <ChartSettings onClose={closeSettings} chart={selectedChart} />
       </SidePanel>
     </>
   );
