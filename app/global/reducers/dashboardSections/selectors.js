@@ -5,25 +5,10 @@ import { initialState } from './reducer';
 export const selectDashboardSectionsState = state =>
   state.dashboardSections || initialState;
 
-const mapSections = dashboardSections =>
-  dashboardSections.map(section => ({
-    ...section,
-    charts: [
-      {
-        id: '1',
-        name: 'Chart 1',
-        description: 'This is description of Chart 1',
-        formula: {},
-        type: 'PIE_CHART',
-        dashboardSectionId: section.id,
-      },
-    ],
-  }));
-
 export const makeSelectDashboardSections = () =>
   createSelector(
     selectDashboardSectionsState,
-    substate => mapSections(substate.dashboardSections),
+    substate => substate.dashboardSections,
   );
 
 export const makeSelectSingleDashboardSection = () =>
@@ -36,7 +21,7 @@ export const makeSelectSelectedChart = () =>
   createSelector(
     selectDashboardSectionsState,
     substate => {
-      const dashboardSection = mapSections(substate.dashboardSections).find(
+      const dashboardSection = substate.dashboardSections.find(
         ({ id }) => id === substate.selectedChart?.dashboardSectionId,
       );
 

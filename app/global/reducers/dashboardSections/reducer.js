@@ -181,13 +181,13 @@ const dashboardSectionsReducer = (state = initialState, action) =>
 
         updateItemById(
           draft.dashboardSections,
-          payload.dashboardSectionId,
+          payload.chart.dashboardSectionId,
           item => dashboardSectionReducer(item, action),
         );
 
         updateItemById(
           draft.cache.dashboardSections,
-          payload.dashboardSectionId,
+          payload.chart.dashboardSectionId,
           item => dashboardSectionReducer(item, action),
         );
         break;

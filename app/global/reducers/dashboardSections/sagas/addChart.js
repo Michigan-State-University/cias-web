@@ -8,7 +8,7 @@ import { ADD_CHART_REQUEST } from '../constants';
 import { addChartError, addChartSuccess } from '../actions';
 
 export function* addChart({
-  payload: { name, description, dashboardSectionId, type },
+  payload: { name, description, dashboardSectionId, chartType },
 }) {
   const requestURL = `v1/charts`;
 
@@ -21,7 +21,7 @@ export function* addChart({
           name: name ?? `New Chart`,
           description,
           dashboardSectionId,
-          type,
+          chartType,
         },
       }),
     );

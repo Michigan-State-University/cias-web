@@ -72,12 +72,17 @@ export const deleteDashboardSectionSuccess = (
 export const deleteDashboardSectionError = error =>
   actionBuilder(DELETE_SECTION_ERROR, { error });
 
-export const addChartRequest = (dashboardSectionId, type, name, description) =>
+export const addChartRequest = (
+  dashboardSectionId,
+  chartType,
+  name,
+  description,
+) =>
   actionBuilder(ADD_CHART_REQUEST, {
     name,
     description,
     dashboardSectionId,
-    type,
+    chartType,
   });
 export const addChartSuccess = (chart, dashboardSectionId) =>
   actionBuilder(ADD_CHART_SUCCESS, { chart, dashboardSectionId });
