@@ -13,5 +13,7 @@ export const SVG = styled(({ fill, stroke, ...props }) => (
   *[stroke^='#'] {
     stroke: ${({ stroke }) => stroke};
   }
+
+  cursor: ${({ onClick }) => (onClick ? 'pointer' : 'initial')};
   ${margin};
 `;
