@@ -12,9 +12,8 @@ import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
 
-// ! TODO: Rename Case to Pattern
 // ! TODO: Use destructing
-const FormulaCase = ({ pattern, onEdit, onDelete }) => {
+const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
   const { formatMessage } = useIntl();
 
   const handleEdit = field => value => onEdit({ ...pattern, [field]: value });
@@ -25,7 +24,7 @@ const FormulaCase = ({ pattern, onEdit, onDelete }) => {
 
   return (
     <FullWidthContainer>
-      <Row align="center" nogutter>
+      <Row align="center" mb={20} nogutter>
         <Col xs="content">
           <Icon src={BinIcon} mr={8} onClick={onDelete} />
         </Col>
@@ -61,10 +60,10 @@ const FormulaCase = ({ pattern, onEdit, onDelete }) => {
   );
 };
 
-FormulaCase.propTypes = {
+FormulaPattern.propTypes = {
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
   pattern: PropTypes.object,
 };
 
-export default memo(FormulaCase);
+export default memo(FormulaPattern);

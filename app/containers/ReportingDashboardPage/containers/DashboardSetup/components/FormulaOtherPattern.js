@@ -8,7 +8,7 @@ import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
 
-const FormulaOtherCase = ({ pattern, onEdit }) => {
+const FormulaOtherPattern = ({ pattern, onEdit }) => {
   const { formatMessage } = useIntl();
 
   const handleEdit = field => value => onEdit({ ...pattern, [field]: value });
@@ -37,9 +37,9 @@ const FormulaOtherCase = ({ pattern, onEdit }) => {
   );
 };
 
-FormulaOtherCase.propTypes = {
+FormulaOtherPattern.propTypes = {
   onEdit: PropTypes.func,
   pattern: PropTypes.object,
 };
 
-export default memo(FormulaOtherCase);
+export default memo(FormulaOtherPattern);

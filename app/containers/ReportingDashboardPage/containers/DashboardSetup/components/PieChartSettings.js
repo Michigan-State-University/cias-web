@@ -17,8 +17,8 @@ import Circle from 'components/Circle';
 import Tooltip from 'components/Tooltip';
 import DashedButton from 'components/Button/DashedButton';
 
-import FormulaOtherCase from './FormulaOtherCase';
-import FormulaCase from './FormulaCase';
+import FormulaCase from './FormulaPattern';
+import FormulaOtherCase from './FormulaOtherPattern';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
