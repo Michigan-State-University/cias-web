@@ -56,7 +56,7 @@ exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 fwuJPW"
+            class="StyledButton-d2s0gt-0 jFoIZF"
             color="primary"
             height="46"
             radius="100px"

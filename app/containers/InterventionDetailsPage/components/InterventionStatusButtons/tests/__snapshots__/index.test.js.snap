@@ -35,6 +35,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 1`] 
   outline: none;
   background-color: #FFFFFF;
   color: #FFFFFF;
+  border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
@@ -215,6 +216,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
   outline: none;
   background-color: #FFFFFF;
   color: #FFFFFF;
+  border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
@@ -228,6 +230,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 2`] 
   outline: none;
   background-color: #107969;
   color: #FFFFFF;
+  border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
@@ -429,6 +432,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
   outline: none;
   background-color: #FFFFFF;
   color: #FFFFFF;
+  border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
@@ -442,6 +446,7 @@ exports[`<InterventionStatusButtons /> Should render and match the snapshot 3`] 
   outline: none;
   background-color: #107969;
   color: #FFFFFF;
+  border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }

@@ -18,6 +18,7 @@ const invertedStyles = color => css`
 const basicStyles = (outlined, color) => css`
   background-color: ${outlined ? colors.white : themeColors[color]};
   color: ${colors.white};
+  border: 1px solid transparent;
 `;
 
 const getHoverStyles = props => {
