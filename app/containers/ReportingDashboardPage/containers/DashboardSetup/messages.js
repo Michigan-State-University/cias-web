@@ -16,6 +16,10 @@ export default defineMessages({
     id: `${scope}.addNewSection`,
     defaultMessage: '+ Add next section',
   },
+  addNewCase: {
+    id: `${scope}.addNewCase`,
+    defaultMessage: '+ Add next case',
+  },
   inputSectionNamePlaceholder: {
     id: `${scope}.inputSectionNamePlaceholder`,
     defaultMessage: 'Enter Section name',
@@ -79,6 +83,22 @@ export default defineMessages({
   chartSettingsFormulaDescription: {
     id: `${scope}.chartSettingsFormulaDescription`,
     defaultMessage: 'Enter Formula',
+  },
+  chartFormulaCaseLabelPlaceholder: {
+    id: `${scope}.chartFormulaCaseLabelPlaceholder`,
+    defaultMessage: 'Enter label',
+  },
+  chartFormulaCaseIf: {
+    id: `${scope}.chartFormulaCaseIf`,
+    defaultMessage: 'If formula',
+  },
+  chartFormulaCaseEquals: {
+    id: `${scope}.chartFormulaCaseEquals`,
+    defaultMessage: 'label is',
+  },
+  chartFormulaOtherCase: {
+    id: `${scope}.chartFormulaOtherCase`,
+    defaultMessage: 'If results don’t match any cases then label is',
   },
   pieChartHeader: {
     id: `${scope}.pieChartHeader`,

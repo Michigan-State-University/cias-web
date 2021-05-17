@@ -14,6 +14,10 @@ import H3 from 'components/H3';
 import Button from 'components/Button';
 import Circle from 'components/Circle';
 import Tooltip from 'components/Tooltip';
+import DashedButton from 'components/Button/DashedButton';
+
+import FormulaOtherCase from './FormulaOtherCase';
+import FormulaCase from './FormulaCase';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
@@ -120,6 +124,21 @@ const PieChartSettings = ({ chart }) => {
             value=""
             onBlur={undefined}
           />
+        </Col>
+      </Row>
+
+      <Row mt={36}>
+        <Col>
+          <FormulaCase />
+          <FormulaOtherCase />
+        </Col>
+      </Row>
+
+      <Row mt={36}>
+        <Col>
+          <DashedButton onClick={undefined} loading={false}>
+            {formatMessage(messages.addNewCase)}
+          </DashedButton>
         </Col>
       </Row>
     </FullWidthContainer>
