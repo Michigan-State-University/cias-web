@@ -16,7 +16,7 @@ const ChartSettings = ({ chart }) => {
       return wrapper(<PieChartSettings chart={chart} />);
     case ChartType.BAR_CHART:
     default:
-      return wrapper(<PieChartSettings chart={chart} />);
+      return null;
   }
 };
 
