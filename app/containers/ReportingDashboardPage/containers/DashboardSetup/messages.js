@@ -62,7 +62,7 @@ export default defineMessages({
   },
   chartSettingsNameLabel: {
     id: `${scope}.chartSettingsNameLabel`,
-    defaultMessage: 'Chart Name (If empty field will not be displayed)',
+    defaultMessage: '<b>Chart Name</b> (If empty field will not be displayed)',
   },
   chartSettingsNamePlaceholder: {
     id: `${scope}.chartSettingsNamePlaceholder`,
@@ -70,7 +70,8 @@ export default defineMessages({
   },
   chartSettingsDescriptionLabel: {
     id: `${scope}.chartSettingsDescriptionLabel`,
-    defaultMessage: 'Chart Description  (If empty field will not be displayed)',
+    defaultMessage:
+      '<b>Chart Description</b> (If empty field will not be displayed)',
   },
   chartSettingsDescriptionPlaceholder: {
     id: `${scope}.chartSettingsDescriptionPlaceholder`,
@@ -78,10 +79,10 @@ export default defineMessages({
   },
   chartSettingsFormulaLabel: {
     id: `${scope}.chartSettingsFormulaLabel`,
-    defaultMessage: 'Formula *',
+    defaultMessage: '<b>Formula *</b>',
   },
-  chartSettingsFormulaDescription: {
-    id: `${scope}.chartSettingsFormulaDescription`,
+  chartSettingsFormulaPlaceholder: {
+    id: `${scope}.chartSettingsFormulaPlaceholder`,
     defaultMessage: 'Enter Formula',
   },
   chartFormulaCaseLabelPlaceholder: {

@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
+import { Markup } from 'interweave';
 
 import { colors, themeColors } from 'theme';
 
@@ -76,15 +77,18 @@ const PieChartSettings = ({ chart }) => {
 
       <Row mt={36}>
         <Col>
-          <H3 mb={5} fontWeight="regular">
-            {formatMessage(messages.chartSettingsNameLabel)}
-          </H3>
+          <Text mb={5}>
+            <Markup
+              content={formatMessage(messages.chartSettingsNameLabel)}
+              noWrap
+            />
+          </Text>
           <Input
             disabled={false}
             width="100%"
             height="50px"
             placeholder={formatMessage(messages.chartSettingsNamePlaceholder)}
-            value=""
+            value={chart.name}
             onBlur={undefined}
           />
         </Col>
@@ -92,9 +96,12 @@ const PieChartSettings = ({ chart }) => {
 
       <Row mt={36}>
         <Col>
-          <H3 mb={5} fontWeight="regular">
-            {formatMessage(messages.chartSettingsDescriptionLabel)}
-          </H3>
+          <Text mb={5}>
+            <Markup
+              content={formatMessage(messages.chartSettingsDescriptionLabel)}
+              noWrap
+            />
+          </Text>
           <Input
             disabled={false}
             width="100%"
@@ -102,7 +109,7 @@ const PieChartSettings = ({ chart }) => {
             placeholder={formatMessage(
               messages.chartSettingsDescriptionPlaceholder,
             )}
-            value=""
+            value={chart.description ?? ''}
             onBlur={undefined}
           />
         </Col>
@@ -110,18 +117,21 @@ const PieChartSettings = ({ chart }) => {
 
       <Row mt={36}>
         <Col>
-          <H3 mb={5} fontWeight="regular">
-            {formatMessage(messages.chartSettingsFormulaLabel)}
-          </H3>
+          <Text mb={5}>
+            <Markup
+              content={formatMessage(messages.chartSettingsFormulaLabel)}
+              noWrap
+            />
+          </Text>
           <Input
             rows="5"
             type="multiline"
             disabled={false}
             width="100%"
             placeholder={formatMessage(
-              messages.chartSettingsFormulaDescription,
+              messages.chartSettingsFormulaPlaceholder,
             )}
-            value=""
+            value={chart.formula.payload}
             onBlur={undefined}
           />
         </Col>
