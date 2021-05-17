@@ -62,7 +62,7 @@ export default defineMessages({
   },
   chartSettingsNameLabel: {
     id: `${scope}.chartSettingsNameLabel`,
-    defaultMessage: '<b>Chart Name</b> (If empty field will not be displayed)',
+    defaultMessage: '<b>Chart Name</b> (If empty, field will not be displayed)',
   },
   chartSettingsNamePlaceholder: {
     id: `${scope}.chartSettingsNamePlaceholder`,
@@ -71,7 +71,7 @@ export default defineMessages({
   chartSettingsDescriptionLabel: {
     id: `${scope}.chartSettingsDescriptionLabel`,
     defaultMessage:
-      '<b>Chart Description</b> (If empty field will not be displayed)',
+      '<b>Chart Description</b> (If empty, field will not be displayed)',
   },
   chartSettingsDescriptionPlaceholder: {
     id: `${scope}.chartSettingsDescriptionPlaceholder`,
