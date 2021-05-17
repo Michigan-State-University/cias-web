@@ -11,9 +11,15 @@ import {
   ADD_SECTION_ERROR,
   ADD_SECTION_REQUEST,
   ADD_SECTION_SUCCESS,
+  DELETE_CHART_ERROR,
+  DELETE_CHART_REQUEST,
+  DELETE_CHART_SUCCESS,
   DELETE_SECTION_ERROR,
   DELETE_SECTION_REQUEST,
   DELETE_SECTION_SUCCESS,
+  EDIT_CHART_ERROR,
+  EDIT_CHART_REQUEST,
+  EDIT_CHART_SUCCESS,
   EDIT_SECTION_ERROR,
   EDIT_SECTION_REQUEST,
   EDIT_SECTION_SUCCESS,
@@ -38,6 +44,8 @@ export const initialState = {
     addDashboardSectionLoader: false,
     deleteDashboardSectionLoader: false,
     addChartLoader: false,
+    editChartLoader: false,
+    deleteChartLoader: false,
   },
   errors: {
     fetchDashboardSectionError: null,
@@ -46,6 +54,8 @@ export const initialState = {
     addDashboardSectionError: null,
     deleteDashboardSectionError: null,
     addChartError: null,
+    editChartError: null,
+    deleteChartError: null,
   },
 };
 
@@ -197,6 +207,74 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         draft.loaders.addChartLoader = false;
         draft.errors.addChartError = payload.error;
         draft.dashboardSections = state.cache.dashboardSections;
+
+        break;
+      }
+
+      case EDIT_CHART_REQUEST: {
+        draft.loaders.editChartLoader = true;
+        draft.errors.editChartError = null;
+
+        updateItemById(
+          draft.dashboardSections,
+          payload.chart.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+
+        break;
+      }
+
+      case EDIT_CHART_SUCCESS: {
+        draft.loaders.editChartLoader = false;
+        draft.errors.editChartError = null;
+
+        updateItemById(
+          draft.cache.dashboardSections,
+          payload.chart.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+
+        break;
+      }
+
+      case EDIT_CHART_ERROR: {
+        draft.loaders.editChartLoader = false;
+        draft.errors.editChartError = payload.error;
+
+        draft.dashboardSections = state.cache.dashboardSections;
+
+        break;
+      }
+
+      case DELETE_CHART_REQUEST: {
+        draft.loaders.deleteChartLoader = true;
+        draft.errors.deleteChartError = null;
+
+        break;
+      }
+
+      case DELETE_CHART_SUCCESS: {
+        draft.loaders.deleteChartLoader = false;
+        draft.errors.deleteChartError = null;
+
+        updateItemById(
+          draft.dashboardSections,
+          payload.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+
+        updateItemById(
+          draft.cache.dashboardSections,
+          payload.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+
+        break;
+      }
+
+      case DELETE_CHART_ERROR: {
+        draft.loaders.deleteChartLoader = false;
+        draft.errors.deleteChartError = payload.error;
 
         break;
       }

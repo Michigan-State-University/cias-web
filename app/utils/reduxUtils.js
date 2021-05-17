@@ -29,3 +29,16 @@ export const updateItemById = (draftCollection, id, updater) => {
         break;
     }
 };
+
+/**
+ * Delete Immer draft item from collection based on the `id`
+ *
+ * @param {Draft<T[]>} draftCollection
+ * @param id
+ * @template T
+ */
+export const deleteItemById = (draftCollection, id) => {
+  const index = findIndexById(draftCollection, id);
+
+  if (index !== -1) draftCollection.splice(index, 1);
+};

@@ -6,6 +6,8 @@ export {
   editDashboardSectionRequest,
   deleteDashboardSectionRequest,
   addChartRequest,
+  editChartRequest,
+  deleteChartRequest,
   selectChartAction,
 } from './actions';
 export { dashboardSectionsReducer, initialState } from './reducer';

@@ -7,9 +7,15 @@ import {
   ADD_SECTION_ERROR,
   ADD_SECTION_REQUEST,
   ADD_SECTION_SUCCESS,
+  DELETE_CHART_ERROR,
+  DELETE_CHART_REQUEST,
+  DELETE_CHART_SUCCESS,
   DELETE_SECTION_ERROR,
   DELETE_SECTION_REQUEST,
   DELETE_SECTION_SUCCESS,
+  EDIT_CHART_ERROR,
+  EDIT_CHART_REQUEST,
+  EDIT_CHART_SUCCESS,
   EDIT_SECTION_ERROR,
   EDIT_SECTION_REQUEST,
   EDIT_SECTION_SUCCESS,
@@ -87,6 +93,25 @@ export const addChartRequest = (
 export const addChartSuccess = (chart, dashboardSectionId) =>
   actionBuilder(ADD_CHART_SUCCESS, { chart, dashboardSectionId });
 export const addChartError = error => actionBuilder(ADD_CHART_ERROR, { error });
+
+export const editChartRequest = chart =>
+  actionBuilder(EDIT_CHART_REQUEST, {
+    chart,
+  });
+export const editChartSuccess = chart =>
+  actionBuilder(EDIT_CHART_SUCCESS, { chart });
+export const editChartError = error =>
+  actionBuilder(EDIT_CHART_ERROR, { error });
+
+export const deleteChartRequest = (chartId, dashboardSectionId) =>
+  actionBuilder(DELETE_CHART_REQUEST, {
+    chartId,
+    dashboardSectionId,
+  });
+export const deleteChartSuccess = (chartId, dashboardSectionId) =>
+  actionBuilder(DELETE_CHART_SUCCESS, { chartId, dashboardSectionId });
+export const deleteChartError = error =>
+  actionBuilder(DELETE_CHART_ERROR, { error });
 
 export const selectChartAction = (dashboardSectionId, chartId) =>
   actionBuilder(SELECT_CHART_ACTION, {
