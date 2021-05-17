@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 
 import Box from 'components/Box';
-import { colors, themeColors } from 'theme';
+import { boxShadows, colors, themeColors } from 'theme';
 
 export const HoverableBox = styled(Box)`
   cursor: pointer;
   transition: 0.2s;
-  border: 1px
-    ${({ $isSelected }) =>
-      $isSelected ? themeColors.secondary : 'transparent'}
-    solid;
+  border: 1px transparent solid;
+
+  ${({ $isSelected }) =>
+    $isSelected && {
+      borderColor: themeColors.secondary,
+      boxShadow: boxShadows.black,
+    }}
 
   &:hover {
     border-color: ${themeColors.secondary};
