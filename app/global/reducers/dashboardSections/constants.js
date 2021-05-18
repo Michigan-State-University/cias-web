@@ -46,5 +46,6 @@ export const SELECT_CHART_ACTION = 'app/dashboardSections/SELECT_CHART_ACTION';
 
 export const ChartType = {
   PIE_CHART: 'pie_chart',
-  BAR_CHART: 'bar_chart',
+  NUMERIC_BAR_CHART: 'bar_chart',
+  PERCENTAGE_BAR_CHART: 'percentage_bar_chart',
 };

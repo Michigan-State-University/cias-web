@@ -52,7 +52,7 @@ const AddChart = ({ addChart }) => {
 
                 <Col xs="content">
                   <ChartButton
-                    onClick={onAddChart(ChartType.BAR_CHART)}
+                    onClick={onAddChart(ChartType.NUMERIC_BAR_CHART)}
                     helperText={formatMessage(messages.barChartHelper)}
                     title={formatMessage(messages.barChart)}
                     icon={BarChartIcon}

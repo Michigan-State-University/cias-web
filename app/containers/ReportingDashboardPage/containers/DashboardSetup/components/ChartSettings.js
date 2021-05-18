@@ -134,7 +134,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
           onEditName={onEditName}
         />,
       );
-    case ChartType.BAR_CHART:
+    case ChartType.NUMERIC_BAR_CHART:
     default:
       return null;
   }
