@@ -49,3 +49,9 @@ export const ChartType = {
   NUMERIC_BAR_CHART: 'bar_chart',
   PERCENTAGE_BAR_CHART: 'percentage_bar_chart',
 };
+
+export const ChartStatus = {
+  DRAFT: 'draft',
+  DATA_COLLECTION: 'data_collection',
+  PUBLISHED: 'published',
+};

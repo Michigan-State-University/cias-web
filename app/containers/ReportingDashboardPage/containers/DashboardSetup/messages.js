@@ -50,6 +50,14 @@ export default defineMessages({
     id: `${scope}.barChartHelper`,
     defaultMessage: 'Show people falling into cut off value',
   },
+  chartSettingsHeader: {
+    id: `${scope}.chartSettingsHeader`,
+    defaultMessage: `{chartType, select,
+      ${ChartType.NUMERIC_BAR_CHART} {Bar Chart Settings}
+      ${ChartType.PERCENTAGE_BAR_CHART} {Bar Chart Settings}
+      ${ChartType.PIE_CHART} {Pie Chart Settings}
+    }`,
+  },
   chartSettingsDelete: {
     id: `${scope}.chartSettingsDelete`,
     defaultMessage: 'Delete',
@@ -136,13 +144,5 @@ export default defineMessages({
   barChartFormulaOtherCase: {
     id: `${scope}.barChartFormulaOtherCase`,
     defaultMessage: "If other, participant doesn't match criteria",
-  },
-  pieChartHeader: {
-    id: `${scope}.pieChartHeader`,
-    defaultMessage: 'Pie Chart Settings',
-  },
-  barChartHeader: {
-    id: `${scope}.barChartHeader`,
-    defaultMessage: 'Bar Chart Settings',
   },
 });
