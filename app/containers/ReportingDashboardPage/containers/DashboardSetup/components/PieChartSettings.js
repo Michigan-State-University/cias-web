@@ -1,10 +1,4 @@
-import React, {
-  memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
@@ -22,7 +16,6 @@ import Button from 'components/Button';
 import Circle from 'components/Circle';
 import Tooltip from 'components/Tooltip';
 import DashedButton from 'components/Button/DashedButton';
-import { DEFAULT_COLORS } from 'components/ReactColor';
 
 import FormulaCase from './FormulaPattern';
 import FormulaOtherCase from './FormulaOtherPattern';
@@ -32,73 +25,23 @@ import messages from '../messages';
 import { Input } from '../styled';
 import { DashboardSectionsContext } from '../constants';
 
-const PieChartSettings = ({ chart, onEdit, onDelete }) => {
+const PieChartSettings = ({
+  chart,
+  addPatternLoader,
+  onAddFormulaPattern,
+  onDelete,
+  onDeleteFormulaPattern,
+  onEditDefaultFormulaPattern,
+  onEditDescription,
+  onEditFormulaPattern,
+  onEditFormulaPayload,
+  onEditName,
+}) => {
   const { formatMessage } = useIntl();
 
-  const [isAddingPattern, setIsAddingPattern] = useState(false);
-
   const {
-    loaders: { deleteChartLoader, editChartLoader },
+    loaders: { deleteChartLoader },
   } = useContext(DashboardSectionsContext);
-
-  useEffect(() => {
-    if (isAddingPattern && !editChartLoader) setIsAddingPattern(false);
-  }, [editChartLoader]);
-
-  const onEditName = useCallback(onEdit('name'), [chart.name]);
-
-  const onEditDescription = useCallback(onEdit('description'), [
-    chart.description,
-  ]);
-
-  const onEditFormula = useCallback(
-    field => value => onEdit('formula')({ ...chart.formula, [field]: value }),
-    [chart.formula],
-  );
-
-  const onEditFormulaPayload = useCallback(onEditFormula('payload'), [
-    chart.formula.payload,
-  ]);
-
-  const onEditFormulaPattern = useCallback(
-    index => newPattern =>
-      onEditFormula('patterns')(
-        chart.formula.patterns.map((pattern, i) => {
-          if (index === i) return newPattern;
-
-          return pattern;
-        }),
-      ),
-    [chart.formula.patterns],
-  );
-
-  const onDeleteFormulaPattern = useCallback(
-    index => () =>
-      onEditFormula('patterns')(
-        chart.formula.patterns.filter((_, i) => index !== i),
-      ),
-    [chart.formula.patterns],
-  );
-
-  const onAddFormulaPattern = useCallback(() => {
-    setIsAddingPattern(true);
-
-    onEditFormula('patterns')([
-      ...chart.formula.patterns,
-      {
-        label: '',
-        color:
-          DEFAULT_COLORS[chart.formula.patterns.length] ??
-          themeColors.secondary,
-        match: '=',
-      },
-    ]);
-  }, [chart.formula.patterns]);
-
-  const onEditDefaultFormulaPattern = useCallback(
-    pattern => onEditFormula('defaultPattern')(pattern),
-    [chart.formula.defaultPattern],
-  );
 
   return (
     <FullWidthContainer>
@@ -230,7 +173,10 @@ const PieChartSettings = ({ chart, onEdit, onDelete }) => {
 
       <Row mt={36}>
         <Col>
-          <DashedButton onClick={onAddFormulaPattern} loading={isAddingPattern}>
+          <DashedButton
+            onClick={onAddFormulaPattern}
+            loading={addPatternLoader}
+          >
             {formatMessage(messages.addNewCase)}
           </DashedButton>
         </Col>
@@ -241,8 +187,15 @@ const PieChartSettings = ({ chart, onEdit, onDelete }) => {
 
 PieChartSettings.propTypes = {
   chart: PropTypes.object,
-  onEdit: PropTypes.func,
+  addPatternLoader: PropTypes.bool,
+  onAddFormulaPattern: PropTypes.func,
   onDelete: PropTypes.func,
+  onDeleteFormulaPattern: PropTypes.func,
+  onEditDefaultFormulaPattern: PropTypes.func,
+  onEditDescription: PropTypes.func,
+  onEditFormulaPattern: PropTypes.func,
+  onEditFormulaPayload: PropTypes.func,
+  onEditName: PropTypes.func,
 };
 
 export default memo(PieChartSettings);
