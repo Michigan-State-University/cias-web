@@ -17,8 +17,8 @@ import Circle from 'components/Circle';
 import Tooltip from 'components/Tooltip';
 import DashedButton from 'components/Button/DashedButton';
 
-import FormulaCase from './FormulaPattern';
-import FormulaOtherCase from './FormulaOtherPattern';
+import FormulaPattern from './FormulaPattern';
+import FormulaOtherPattern from './FormulaOtherPattern';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
@@ -156,14 +156,14 @@ const PieChartSettings = ({
       <Row mt={36}>
         <Col>
           {chart.formula.patterns.map((pattern, index) => (
-            <FormulaCase
+            <FormulaPattern
               key={`Pattern-${index}-Chart-${chart.id}`}
               pattern={pattern}
               onEdit={onEditFormulaPattern(index)}
               onDelete={onDeleteFormulaPattern(index)}
             />
           ))}
-          <FormulaOtherCase
+          <FormulaOtherPattern
             key={`OtherPattern-Chart-${chart.id}`}
             pattern={chart.formula.defaultPattern}
             onEdit={onEditFormulaDefaultPattern}

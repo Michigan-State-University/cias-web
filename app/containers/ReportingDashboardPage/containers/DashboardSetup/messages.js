@@ -125,9 +125,17 @@ export default defineMessages({
     id: `${scope}.chartFormulaCaseEquals`,
     defaultMessage: 'label is:',
   },
+  barChartFormulaCaseEquals: {
+    id: `${scope}.barChartFormulaCaseEquals`,
+    defaultMessage: 'participant matches criteria',
+  },
   chartFormulaOtherCase: {
     id: `${scope}.chartFormulaOtherCase`,
     defaultMessage: 'If results don’t match any cases then label is',
+  },
+  barChartFormulaOtherCase: {
+    id: `${scope}.barChartFormulaOtherCase`,
+    defaultMessage: 'If other participant doesn’t match criteria',
   },
   pieChartHeader: {
     id: `${scope}.pieChartHeader`,

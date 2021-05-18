@@ -22,8 +22,8 @@ import Radio from 'components/Radio';
 import Comment from 'components/Text/Comment';
 import Checkbox from 'components/Checkbox';
 
-import FormulaCase from './FormulaPattern';
-import FormulaOtherCase from './FormulaOtherPattern';
+import BarChartFormulaPattern from './BarChartFormulaPattern';
+import BarChartFormulaOtherPattern from './BarChartFormulaOtherPattern';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
@@ -225,14 +225,14 @@ const BarChartSettings = ({
       <Row mt={36}>
         <Col>
           {chart.formula.patterns.map((pattern, index) => (
-            <FormulaCase
+            <BarChartFormulaPattern
               key={`Pattern-${index}-Chart-${chart.id}`}
               pattern={pattern}
               onEdit={onEditFormulaPattern(index)}
               onDelete={onDeleteFormulaPattern(index)}
             />
           ))}
-          <FormulaOtherCase
+          <BarChartFormulaOtherPattern
             key={`OtherPattern-Chart-${chart.id}`}
             pattern={chart.formula.defaultPattern}
             onEdit={onEditFormulaDefaultPattern}
