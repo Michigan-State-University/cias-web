@@ -90,7 +90,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
     [chart.formula.patterns],
   );
 
-  const onEditDefaultFormulaPattern = useCallback(
+  const onEditFormulaDefaultPattern = useCallback(
     pattern => onEditFormula('defaultPattern')(pattern),
     [chart.formula.defaultPattern],
   );
@@ -127,7 +127,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
           onAddFormulaPattern={onAddFormulaPattern}
           onDelete={onDelete}
           onDeleteFormulaPattern={onDeleteFormulaPattern}
-          onEditDefaultFormulaPattern={onEditDefaultFormulaPattern}
+          onEditFormulaDefaultPattern={onEditFormulaDefaultPattern}
           onEditDescription={onEditDescription}
           onEditFormulaPattern={onEditFormulaPattern}
           onEditFormulaPayload={onEditFormulaPayload}

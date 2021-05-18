@@ -31,7 +31,7 @@ const PieChartSettings = ({
   onAddFormulaPattern,
   onDelete,
   onDeleteFormulaPattern,
-  onEditDefaultFormulaPattern,
+  onEditFormulaDefaultPattern,
   onEditDescription,
   onEditFormulaPattern,
   onEditFormulaPayload,
@@ -166,7 +166,7 @@ const PieChartSettings = ({
           <FormulaOtherCase
             key={`OtherPattern-Chart-${chart.id}`}
             pattern={chart.formula.defaultPattern}
-            onEdit={onEditDefaultFormulaPattern}
+            onEdit={onEditFormulaDefaultPattern}
           />
         </Col>
       </Row>
@@ -191,7 +191,7 @@ PieChartSettings.propTypes = {
   onAddFormulaPattern: PropTypes.func,
   onDelete: PropTypes.func,
   onDeleteFormulaPattern: PropTypes.func,
-  onEditDefaultFormulaPattern: PropTypes.func,
+  onEditFormulaDefaultPattern: PropTypes.func,
   onEditDescription: PropTypes.func,
   onEditFormulaPattern: PropTypes.func,
   onEditFormulaPayload: PropTypes.func,
