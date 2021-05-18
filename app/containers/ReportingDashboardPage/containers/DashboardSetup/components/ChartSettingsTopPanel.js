@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
@@ -17,8 +17,12 @@ import Button from 'components/Button';
 import Tooltip from 'components/Tooltip';
 import Circle from 'components/Circle';
 
+import InfoBox from 'components/Box/InfoBox';
+import { Markup } from 'interweave';
+import Badge from 'components/Badge';
 import messages from '../messages';
 import { FullWidthContainer } from '../../../styled';
+import { ChartSettingsContext } from '../constants';
 
 const ChartSettingsTopPanel = ({
   chartStatus,
@@ -28,6 +32,8 @@ const ChartSettingsTopPanel = ({
   onDelete,
 }) => {
   const { formatMessage } = useIntl();
+
+  const { statusPermissions } = useContext(ChartSettingsContext);
 
   const handleStatusChange = () => {
     switch (chartStatus) {
@@ -43,6 +49,57 @@ const ChartSettingsTopPanel = ({
         break;
     }
   };
+
+  const buttonStyles = useMemo(() => {
+    switch (chartStatus) {
+      case ChartStatus.DATA_COLLECTION:
+        return { fontColor: colors.white, color: colors.pistachio };
+
+      case ChartStatus.DRAFT:
+      default:
+        return {};
+    }
+  }, [chartStatus]);
+
+  const buttonContent = useMemo(() => {
+    switch (chartStatus) {
+      case ChartStatus.DRAFT:
+        return formatMessage(messages.chartSettingsStartCollectButton);
+
+      case ChartStatus.DATA_COLLECTION:
+        return formatMessage(messages.chartSettingsPublishButton);
+
+      default:
+        return '';
+    }
+  }, [chartStatus]);
+
+  const renderButtonOrStatusBadge = useCallback(() => {
+    switch (chartStatus) {
+      case ChartStatus.DRAFT:
+      case ChartStatus.DATA_COLLECTION:
+        return (
+          <Button
+            onClick={handleStatusChange}
+            disabled={false}
+            loading={false}
+            hoverable
+            width="100%"
+            px={10}
+            {...buttonStyles}
+          >
+            {buttonContent}
+          </Button>
+        );
+
+      default:
+        return (
+          <Badge bg={colors.pistachio} color={colors.white}>
+            {formatMessage(messages.chartStatus, { chartStatus })}
+          </Badge>
+        );
+    }
+  }, [chartStatus, handleStatusChange]);
 
   return (
     <FullWidthContainer>
@@ -62,18 +119,7 @@ const ChartSettingsTopPanel = ({
           </TextButton>
         </Col>
 
-        <Col xs="content">
-          <Button
-            onClick={handleStatusChange}
-            disabled={false}
-            loading={false}
-            hoverable
-            width="100%"
-            px={10}
-          >
-            {formatMessage(messages.chartSettingsStartCollectButton)}
-          </Button>
-        </Col>
+        <Col xs="content">{renderButtonOrStatusBadge()}</Col>
 
         <Col xs="content">
           <Tooltip
@@ -91,6 +137,30 @@ const ChartSettingsTopPanel = ({
           </Tooltip>
         </Col>
       </Row>
+
+      {!statusPermissions.canBeEdited && (
+        <Row mt={36}>
+          <Col>
+            <InfoBox>
+              <Markup
+                content={formatMessage(messages.chartSettingsNotEditableInfo)}
+                noWrap
+              />
+
+              {chartStatus === ChartStatus.DATA_COLLECTION && (
+                <>
+                  <br />
+                  <br />
+                  <Markup
+                    content={formatMessage(messages.chartSettingsPublishInfo)}
+                    noWrap
+                  />
+                </>
+              )}
+            </InfoBox>
+          </Col>
+        </Row>
+      )}
     </FullWidthContainer>
   );
 };

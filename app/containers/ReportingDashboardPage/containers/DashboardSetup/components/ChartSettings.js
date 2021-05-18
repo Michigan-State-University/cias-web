@@ -13,6 +13,7 @@ import {
   ChartType,
   deleteChartRequest,
   editChartRequest,
+  StatusPermissions,
 } from 'global/reducers/dashboardSections';
 
 import ActionIcon from 'components/ActionIcon';
@@ -22,6 +23,7 @@ import BarChartSettings from './BarChartSettings';
 import PieChartSettings from './PieChartSettings';
 
 import {
+  ChartSettingsContext,
   DashboardSectionsContext,
   generateNewPatternForChartType,
 } from '../constants';
@@ -29,6 +31,8 @@ import { SettingsContainer } from '../../../styled';
 
 const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
   const [isAddingPattern, setIsAddingPattern] = useState(false);
+
+  const statusPermissions = StatusPermissions(chart.status);
 
   const {
     loaders: { editChartLoader },
@@ -39,14 +43,16 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
   }, [editChartLoader]);
 
   const wrapper = component => (
-    <SettingsContainer>
-      <Row>
-        <Col align="end" mb={30}>
-          <ActionIcon onClick={onClose} mr={0} />
-        </Col>
-      </Row>
-      {component}
-    </SettingsContainer>
+    <ChartSettingsContext.Provider value={{ statusPermissions }}>
+      <SettingsContainer>
+        <Row>
+          <Col align="end" mb={30}>
+            <ActionIcon onClick={onClose} mr={0} />
+          </Col>
+        </Row>
+        {component}
+      </SettingsContainer>
+    </ChartSettingsContext.Provider>
   );
 
   const onDelete = useCallback(
@@ -64,25 +70,33 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
     [chart.id, chart.dashboardSectionId],
   );
 
-  const onEditName = useCallback(onEdit('name'), [chart.name]);
+  const onEditName = useCallback(onEdit('name'), [chart.name, onEdit]);
 
-  const onEditStatus = useCallback(onEdit('status'), [chart.status]);
+  const onEditStatus = useCallback(onEdit('status'), [chart.status, onEdit]);
 
   const onEditDescription = useCallback(onEdit('description'), [
     chart.description,
+    onEdit,
   ]);
 
-  const onEditChartType = useCallback(onEdit('chartType'), [chart.chartType]);
+  const onEditChartType = useCallback(onEdit('chartType'), [
+    chart.chartType,
+    onEdit,
+  ]);
 
-  const onEditTrendLine = useCallback(onEdit('trendLine'), [chart.trendLine]);
+  const onEditTrendLine = useCallback(onEdit('trendLine'), [
+    chart.trendLine,
+    onEdit,
+  ]);
 
   const onEditFormula = useCallback(
     field => value => onEdit('formula')({ ...chart.formula, [field]: value }),
-    [chart.formula],
+    [chart.formula, onEdit],
   );
 
   const onEditFormulaPayload = useCallback(onEditFormula('payload'), [
     chart.formula.payload,
+    onEditFormula,
   ]);
 
   const onEditFormulaPattern = useCallback(
@@ -94,12 +108,12 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
           return pattern;
         }),
       ),
-    [chart.formula.patterns],
+    [chart.formula.patterns, onEditFormula],
   );
 
   const onEditFormulaDefaultPattern = useCallback(
     pattern => onEditFormula('defaultPattern')(pattern),
-    [chart.formula.defaultPattern],
+    [chart.formula.defaultPattern, onEditFormula],
   );
 
   const onDeleteFormulaPattern = useCallback(
@@ -107,7 +121,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
       onEditFormula('patterns')(
         chart.formula.patterns.filter((_, i) => i !== index),
       ),
-    [chart.formula.patterns],
+    [chart.formula.patterns, onEditFormula],
   );
 
   const onAddFormulaPattern = useCallback(() => {

@@ -1,12 +1,20 @@
 import { createContext } from 'react';
 
-import { ChartType, initialState } from 'global/reducers/dashboardSections';
+import {
+  ChartType,
+  initialState,
+  StatusPermissions,
+} from 'global/reducers/dashboardSections';
 
 import { themeColors } from 'theme';
 
 import { DEFAULT_COLORS } from 'components/ReactColor';
 
 export const DashboardSectionsContext = createContext(initialState);
+
+export const ChartSettingsContext = createContext({
+  statusPermissions: StatusPermissions(''),
+});
 
 export const generateNewPatternForChartType = (chartType, newIndex) => {
   const pattern = {

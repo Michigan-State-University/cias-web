@@ -55,3 +55,9 @@ export const ChartStatus = {
   DATA_COLLECTION: 'data_collection',
   PUBLISHED: 'published',
 };
+
+export const ALLOWED_CHART_EDIT = [ChartStatus.DRAFT];
+
+export const StatusPermissions = status => ({
+  canBeEdited: ALLOWED_CHART_EDIT.includes(status),
+});

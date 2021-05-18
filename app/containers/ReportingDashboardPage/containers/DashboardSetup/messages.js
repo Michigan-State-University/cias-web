@@ -5,7 +5,9 @@
  */
 import { defineMessages } from 'react-intl';
 
-import { ChartType } from 'global/reducers/dashboardSections';
+import { ChartStatus, ChartType } from 'global/reducers/dashboardSections';
+
+import { colors } from 'theme';
 
 export const scope = 'app.components.DashboardSetup';
 
@@ -65,6 +67,21 @@ export default defineMessages({
   chartSettingsStartCollectButton: {
     id: `${scope}.chartSettingsStartCollectButton`,
     defaultMessage: 'Start data collection',
+  },
+  chartSettingsPublishButton: {
+    id: `${scope}.chartSettingsPublishButton`,
+    defaultMessage: 'Publish chart',
+  },
+  chartSettingsNotEditableInfo: {
+    id: `${scope}.chartSettingsNotEditableInfo`,
+    defaultMessage: `Data are being collected. <span style="color: ${
+      colors.flamingo
+    };">From this moment you can not introduce any changes to the chart</span>.`,
+  },
+  chartSettingsPublishInfo: {
+    id: `${scope}.chartSettingsPublishInfo`,
+    defaultMessage:
+      'You can review the final chart layout and publish it to a wider audience.',
   },
   chartSettingsStartCollectHelper: {
     id: `${scope}.chartSettingsStartCollectHelper`,
@@ -144,5 +161,13 @@ export default defineMessages({
   barChartFormulaOtherCase: {
     id: `${scope}.barChartFormulaOtherCase`,
     defaultMessage: "If other, participant doesn't match criteria",
+  },
+  chartStatus: {
+    id: `${scope}.chartStatus`,
+    defaultMessage: `{chartStatus, select,
+      ${ChartStatus.DRAFT} {Draft}
+      ${ChartStatus.DATA_COLLECTION} {Data Collection}
+      ${ChartStatus.PUBLISHED} {Published}
+    }`,
   },
 });
