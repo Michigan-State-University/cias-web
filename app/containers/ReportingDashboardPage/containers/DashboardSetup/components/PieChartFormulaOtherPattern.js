@@ -9,7 +9,7 @@ import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
 
-const FormulaOtherPattern = ({ pattern, onEdit }) => {
+const PieChartFormulaOtherPattern = ({ pattern, onEdit }) => {
   const { formatMessage } = useIntl();
 
   const { label, color } = pattern;
@@ -52,9 +52,9 @@ const FormulaOtherPattern = ({ pattern, onEdit }) => {
   );
 };
 
-FormulaOtherPattern.propTypes = {
+PieChartFormulaOtherPattern.propTypes = {
   onEdit: PropTypes.func,
   pattern: PropTypes.object,
 };
 
-export default memo(FormulaOtherPattern);
+export default memo(PieChartFormulaOtherPattern);

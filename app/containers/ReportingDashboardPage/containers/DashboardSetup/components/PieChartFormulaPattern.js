@@ -13,7 +13,7 @@ import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
 
-const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
+const PieChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
   const { formatMessage } = useIntl();
 
   const { match, label, color } = pattern;
@@ -74,10 +74,10 @@ const FormulaPattern = ({ pattern, onEdit, onDelete }) => {
   );
 };
 
-FormulaPattern.propTypes = {
+PieChartFormulaPattern.propTypes = {
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
   pattern: PropTypes.object,
 };
 
-export default memo(FormulaPattern);
+export default memo(PieChartFormulaPattern);
