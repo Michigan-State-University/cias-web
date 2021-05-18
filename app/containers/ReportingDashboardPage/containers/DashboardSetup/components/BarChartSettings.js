@@ -12,13 +12,13 @@ import Radio from 'components/Radio';
 import Comment from 'components/Text/Comment';
 import Checkbox from 'components/Checkbox';
 
-import ChartSettingsTopPanel from './ChartSettingsTopPanel';
+import ChartSettingsGeneralSection from './ChartSettingsGeneralSection';
+import ChartSettingsTopSection from './ChartSettingsTopSection';
 import BarChartFormulaPattern from './BarChartFormulaPattern';
 import BarChartFormulaOtherPattern from './BarChartFormulaOtherPattern';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
-import { Input } from '../styled';
 import { DashboardSectionsContext } from '../constants';
 
 const BarChartSettings = ({
@@ -52,7 +52,7 @@ const BarChartSettings = ({
 
   return (
     <FullWidthContainer>
-      <ChartSettingsTopPanel
+      <ChartSettingsTopSection
         chartStatus={chart.status}
         chartType={chart.chartType}
         isDeleting={deleteChartLoader}
@@ -114,67 +114,12 @@ const BarChartSettings = ({
         </Col>
       </Row>
 
-      <Row mt={36}>
-        <Col>
-          <Text mb={5}>
-            <Markup
-              content={formatMessage(messages.chartSettingsNameLabel)}
-              noWrap
-            />
-          </Text>
-          <Input
-            disabled={false}
-            width="100%"
-            height="50px"
-            placeholder={formatMessage(messages.chartSettingsNamePlaceholder)}
-            value={chart.name}
-            onBlur={onEditName}
-          />
-        </Col>
-      </Row>
-
-      <Row mt={36}>
-        <Col>
-          <Text mb={5}>
-            <Markup
-              content={formatMessage(messages.chartSettingsDescriptionLabel)}
-              noWrap
-            />
-          </Text>
-          <Input
-            disabled={false}
-            width="100%"
-            height="50px"
-            placeholder={formatMessage(
-              messages.chartSettingsDescriptionPlaceholder,
-            )}
-            value={chart.description ?? ''}
-            onBlur={onEditDescription}
-          />
-        </Col>
-      </Row>
-
-      <Row mt={36}>
-        <Col>
-          <Text mb={5}>
-            <Markup
-              content={formatMessage(messages.chartSettingsFormulaLabel)}
-              noWrap
-            />
-          </Text>
-          <Input
-            rows="5"
-            type="multiline"
-            disabled={false}
-            width="100%"
-            placeholder={formatMessage(
-              messages.chartSettingsFormulaPlaceholder,
-            )}
-            value={chart.formula.payload}
-            onBlur={onEditFormulaPayload}
-          />
-        </Col>
-      </Row>
+      <ChartSettingsGeneralSection
+        chart={chart}
+        onEditDescription={onEditDescription}
+        onEditFormulaPayload={onEditFormulaPayload}
+        onEditName={onEditName}
+      />
 
       <Row mt={36}>
         <Col>

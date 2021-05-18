@@ -1,19 +1,17 @@
 import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { Markup } from 'interweave';
 
 import { Col, Row } from 'components/ReactGridSystem';
-import Text from 'components/Text';
 import DashedButton from 'components/Button/DashedButton';
 
-import ChartSettingsTopPanel from './ChartSettingsTopPanel';
+import ChartSettingsGeneralSection from './ChartSettingsGeneralSection';
+import ChartSettingsTopSection from './ChartSettingsTopSection';
 import PieChartFormulaOtherPattern from './PieChartFormulaOtherPattern';
 import PieChartFormulaPattern from './PieChartFormulaPattern';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
-import { Input } from '../styled';
 import { DashboardSectionsContext } from '../constants';
 
 const PieChartSettings = ({
@@ -37,7 +35,7 @@ const PieChartSettings = ({
 
   return (
     <FullWidthContainer>
-      <ChartSettingsTopPanel
+      <ChartSettingsTopSection
         chartStatus={chart.status}
         chartType={chart.chartType}
         isDeleting={deleteChartLoader}
@@ -45,67 +43,12 @@ const PieChartSettings = ({
         onDelete={onDelete}
       />
 
-      <Row mt={36}>
-        <Col>
-          <Text mb={5}>
-            <Markup
-              content={formatMessage(messages.chartSettingsNameLabel)}
-              noWrap
-            />
-          </Text>
-          <Input
-            disabled={false}
-            width="100%"
-            height="50px"
-            placeholder={formatMessage(messages.chartSettingsNamePlaceholder)}
-            value={chart.name}
-            onBlur={onEditName}
-          />
-        </Col>
-      </Row>
-
-      <Row mt={36}>
-        <Col>
-          <Text mb={5}>
-            <Markup
-              content={formatMessage(messages.chartSettingsDescriptionLabel)}
-              noWrap
-            />
-          </Text>
-          <Input
-            disabled={false}
-            width="100%"
-            height="50px"
-            placeholder={formatMessage(
-              messages.chartSettingsDescriptionPlaceholder,
-            )}
-            value={chart.description ?? ''}
-            onBlur={onEditDescription}
-          />
-        </Col>
-      </Row>
-
-      <Row mt={36}>
-        <Col>
-          <Text mb={5}>
-            <Markup
-              content={formatMessage(messages.chartSettingsFormulaLabel)}
-              noWrap
-            />
-          </Text>
-          <Input
-            rows="5"
-            type="multiline"
-            disabled={false}
-            width="100%"
-            placeholder={formatMessage(
-              messages.chartSettingsFormulaPlaceholder,
-            )}
-            value={chart.formula.payload}
-            onBlur={onEditFormulaPayload}
-          />
-        </Col>
-      </Row>
+      <ChartSettingsGeneralSection
+        chart={chart}
+        onEditDescription={onEditDescription}
+        onEditFormulaPayload={onEditFormulaPayload}
+        onEditName={onEditName}
+      />
 
       <Row mt={36}>
         <Col>

@@ -24,7 +24,7 @@ import messages from '../messages';
 import { FullWidthContainer } from '../../../styled';
 import { ChartSettingsContext } from '../constants';
 
-const ChartSettingsTopPanel = ({
+const ChartSettingsTopSection = ({
   chartStatus,
   chartType,
   isDeleting,
@@ -165,7 +165,7 @@ const ChartSettingsTopPanel = ({
   );
 };
 
-ChartSettingsTopPanel.propTypes = {
+ChartSettingsTopSection.propTypes = {
   chartStatus: PropTypes.string,
   chartType: PropTypes.string,
   isDeleting: PropTypes.bool,
@@ -173,4 +173,4 @@ ChartSettingsTopPanel.propTypes = {
   onDelete: PropTypes.func,
 };
 
-export default memo(ChartSettingsTopPanel);
+export default memo(ChartSettingsTopSection);
