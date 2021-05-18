@@ -145,8 +145,8 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
           onAddFormulaPattern={onAddFormulaPattern}
           onDelete={onDelete}
           onDeleteFormulaPattern={onDeleteFormulaPattern}
-          onEditFormulaDefaultPattern={onEditFormulaDefaultPattern}
           onEditDescription={onEditDescription}
+          onEditFormulaDefaultPattern={onEditFormulaDefaultPattern}
           onEditFormulaPattern={onEditFormulaPattern}
           onEditFormulaPayload={onEditFormulaPayload}
           onEditName={onEditName}
@@ -161,10 +161,10 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
           addPatternLoader={isAddingPattern}
           onAddFormulaPattern={onAddFormulaPattern}
           onDelete={onDelete}
-          onEditChartType={onEditChartType}
           onDeleteFormulaPattern={onDeleteFormulaPattern}
-          onEditFormulaDefaultPattern={onEditFormulaDefaultPattern}
+          onEditChartType={onEditChartType}
           onEditDescription={onEditDescription}
+          onEditFormulaDefaultPattern={onEditFormulaDefaultPattern}
           onEditFormulaPattern={onEditFormulaPattern}
           onEditFormulaPayload={onEditFormulaPayload}
           onEditName={onEditName}
