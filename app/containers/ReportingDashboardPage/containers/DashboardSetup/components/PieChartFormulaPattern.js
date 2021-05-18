@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
@@ -12,9 +12,14 @@ import ReactColor, { ColorPickerType } from 'components/ReactColor';
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
+import { ChartSettingsContext } from '../constants';
 
 const PieChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
   const { formatMessage } = useIntl();
+
+  const {
+    statusPermissions: { canBeEdited },
+  } = useContext(ChartSettingsContext);
 
   const { match, label, color } = pattern;
 
@@ -30,7 +35,12 @@ const PieChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
     <FullWidthContainer>
       <Row align="center" mb={20} nogutter>
         <Col xs="content">
-          <Icon src={BinIcon} mr={8} onClick={onDelete} />
+          <Icon
+            src={BinIcon}
+            mr={8}
+            onClick={onDelete}
+            disabled={!canBeEdited}
+          />
         </Col>
 
         <Col xs="content">{formatMessage(messages.chartFormulaCaseIf)}</Col>
@@ -38,7 +48,7 @@ const PieChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
         <Col xs="content">
           <Row margin="0 !important">
             <InequalityChooser
-              disabled={false}
+              disabled={!canBeEdited}
               onSuccessfulChange={onEditMatch}
               inequalityValue={match}
             />
@@ -51,7 +61,7 @@ const PieChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
 
         <Col xs="content" mr={5}>
           <Input
-            disabled={false}
+            disabled={!canBeEdited}
             width="120px"
             height="50px"
             placeholder={formatMessage(
@@ -64,6 +74,7 @@ const PieChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
 
         <Col xs="content">
           <ReactColor
+            disabled={!canBeEdited}
             type={ColorPickerType.TWITTER}
             color={color}
             onChangeComplete={onEditColor}

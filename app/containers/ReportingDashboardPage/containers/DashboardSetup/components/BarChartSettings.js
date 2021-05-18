@@ -19,7 +19,7 @@ import BarChartFormulaOtherPattern from './BarChartFormulaOtherPattern';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
-import { DashboardSectionsContext } from '../constants';
+import { ChartSettingsContext, DashboardSectionsContext } from '../constants';
 
 const BarChartSettings = ({
   chart,
@@ -37,6 +37,10 @@ const BarChartSettings = ({
   onEditTrendLine,
 }) => {
   const { formatMessage } = useIntl();
+
+  const {
+    statusPermissions: { canBeEdited },
+  } = useContext(ChartSettingsContext);
 
   const {
     loaders: { deleteChartLoader },
@@ -71,6 +75,7 @@ const BarChartSettings = ({
 
           <NoMarginRow align="center">
             <Radio
+              disabled={!canBeEdited}
               checked={chart.chartType === ChartType.NUMERIC_BAR_CHART}
               onClick={handleChangeTypeToNumeric}
               mr={9}
@@ -80,6 +85,7 @@ const BarChartSettings = ({
             </Text>
 
             <Radio
+              disabled={!canBeEdited}
               checked={chart.chartType === ChartType.PERCENTAGE_BAR_CHART}
               onClick={handleChangeTypeToPercentage}
               mr={9}
@@ -105,6 +111,7 @@ const BarChartSettings = ({
         <Col>
           <NoMarginRow align="center">
             <Checkbox
+              disabled={!canBeEdited}
               checked={chart.trendLine}
               onClick={handleTrendLineChange}
               mr={9}
@@ -142,6 +149,7 @@ const BarChartSettings = ({
       <Row mt={36}>
         <Col>
           <DashedButton
+            disabled={!canBeEdited}
             onClick={onAddFormulaPattern}
             loading={addPatternLoader}
           >

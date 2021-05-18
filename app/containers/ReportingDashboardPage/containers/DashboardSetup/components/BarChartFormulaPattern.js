@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
@@ -11,9 +11,14 @@ import ReactColor, { ColorPickerType } from 'components/ReactColor';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
+import { ChartSettingsContext } from '../constants';
 
 const BarChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
   const { formatMessage } = useIntl();
+
+  const {
+    statusPermissions: { canBeEdited },
+  } = useContext(ChartSettingsContext);
 
   const { match, color } = pattern;
 
@@ -28,7 +33,12 @@ const BarChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
       <Row mb={20} align="center" justify="between" nogutter>
         <NoMarginRow align="center" nogutter>
           <Col xs="content">
-            <Icon src={BinIcon} mr={8} onClick={onDelete} />
+            <Icon
+              src={BinIcon}
+              mr={8}
+              onClick={onDelete}
+              disabled={!canBeEdited}
+            />
           </Col>
 
           <Col xs="content">{formatMessage(messages.chartFormulaCaseIf)}</Col>
@@ -36,7 +46,7 @@ const BarChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
           <Col xs="content">
             <Row margin="0 !important">
               <InequalityChooser
-                disabled={false}
+                disabled={!canBeEdited}
                 onSuccessfulChange={onEditMatch}
                 inequalityValue={match}
               />
@@ -50,6 +60,7 @@ const BarChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
 
         <Col xs="content">
           <ReactColor
+            disabled={!canBeEdited}
             type={ColorPickerType.TWITTER}
             color={color}
             onChangeComplete={onEditColor}

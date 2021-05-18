@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
@@ -7,9 +7,14 @@ import ReactColor, { ColorPickerType } from 'components/ReactColor';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
+import { ChartSettingsContext } from '../constants';
 
 const BarChartFormulaOtherPattern = ({ pattern, onEdit }) => {
   const { formatMessage } = useIntl();
+
+  const {
+    statusPermissions: { canBeEdited },
+  } = useContext(ChartSettingsContext);
 
   const { color } = pattern;
 
@@ -26,6 +31,7 @@ const BarChartFormulaOtherPattern = ({ pattern, onEdit }) => {
 
         <Col xs="content">
           <ReactColor
+            disabled={!canBeEdited}
             type={ColorPickerType.TWITTER}
             color={color}
             onChangeComplete={onEditColor}

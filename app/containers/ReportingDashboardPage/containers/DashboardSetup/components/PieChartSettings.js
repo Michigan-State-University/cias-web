@@ -12,7 +12,7 @@ import PieChartFormulaPattern from './PieChartFormulaPattern';
 
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
-import { DashboardSectionsContext } from '../constants';
+import { ChartSettingsContext, DashboardSectionsContext } from '../constants';
 
 const PieChartSettings = ({
   chart,
@@ -28,6 +28,10 @@ const PieChartSettings = ({
   onEditStatus,
 }) => {
   const { formatMessage } = useIntl();
+
+  const {
+    statusPermissions: { canBeEdited },
+  } = useContext(ChartSettingsContext);
 
   const {
     loaders: { deleteChartLoader },
@@ -73,6 +77,7 @@ const PieChartSettings = ({
           <DashedButton
             onClick={onAddFormulaPattern}
             loading={addPatternLoader}
+            disabled={!canBeEdited}
           >
             {formatMessage(messages.addNewCase)}
           </DashedButton>

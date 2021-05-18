@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
@@ -8,9 +8,14 @@ import ReactColor, { ColorPickerType } from 'components/ReactColor';
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
+import { ChartSettingsContext } from '../constants';
 
 const PieChartFormulaOtherPattern = ({ pattern, onEdit }) => {
   const { formatMessage } = useIntl();
+
+  const {
+    statusPermissions: { canBeEdited },
+  } = useContext(ChartSettingsContext);
 
   const { label, color } = pattern;
 
@@ -29,7 +34,7 @@ const PieChartFormulaOtherPattern = ({ pattern, onEdit }) => {
 
         <Col xs="content" mr={5}>
           <Input
-            disabled={false}
+            disabled={!canBeEdited}
             width="120px"
             height="50px"
             placeholder={formatMessage(
@@ -42,6 +47,7 @@ const PieChartFormulaOtherPattern = ({ pattern, onEdit }) => {
 
         <Col xs="content">
           <ReactColor
+            disabled={!canBeEdited}
             type={ColorPickerType.TWITTER}
             color={color}
             onChangeComplete={onEditColor}

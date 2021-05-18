@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
@@ -9,6 +9,7 @@ import Text from 'components/Text';
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
+import { ChartSettingsContext } from '../constants';
 
 const ChartSettingsGeneralSection = ({
   chart,
@@ -17,6 +18,10 @@ const ChartSettingsGeneralSection = ({
   onEditName,
 }) => {
   const { formatMessage } = useIntl();
+
+  const {
+    statusPermissions: { canBeEdited },
+  } = useContext(ChartSettingsContext);
 
   return (
     <FullWidthContainer>
@@ -29,7 +34,7 @@ const ChartSettingsGeneralSection = ({
             />
           </Text>
           <Input
-            disabled={false}
+            disabled={!canBeEdited}
             width="100%"
             height="50px"
             placeholder={formatMessage(messages.chartSettingsNamePlaceholder)}
@@ -48,7 +53,7 @@ const ChartSettingsGeneralSection = ({
             />
           </Text>
           <Input
-            disabled={false}
+            disabled={!canBeEdited}
             width="100%"
             height="50px"
             placeholder={formatMessage(
@@ -71,7 +76,7 @@ const ChartSettingsGeneralSection = ({
           <Input
             rows="5"
             type="multiline"
-            disabled={false}
+            disabled={!canBeEdited}
             width="100%"
             placeholder={formatMessage(
               messages.chartSettingsFormulaPlaceholder,
