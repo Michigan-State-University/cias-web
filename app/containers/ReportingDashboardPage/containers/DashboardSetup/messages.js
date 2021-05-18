@@ -5,6 +5,8 @@
  */
 import { defineMessages } from 'react-intl';
 
+import { ChartType } from 'global/reducers/dashboardSections';
+
 export const scope = 'app.components.DashboardSetup';
 
 export default defineMessages({
@@ -81,6 +83,32 @@ export default defineMessages({
     id: `${scope}.chartSettingsFormulaLabel`,
     defaultMessage: '<b>Formula *</b>',
   },
+  chartSettingsChartValues: {
+    id: `${scope}.chartSettingsChartValues`,
+    defaultMessage: '<b>Chart Values</b>',
+  },
+  chartSettingsChartValuesNumericOption: {
+    id: `${scope}.chartSettingsChartValuesNumericOption`,
+    defaultMessage: 'Numeric',
+  },
+  chartSettingsChartValuesPercentageOption: {
+    id: `${scope}.chartSettingsChartValuesPercentageOption`,
+    defaultMessage: 'Percentage',
+  },
+  chartSettingsChartValuesDescription: {
+    id: `${scope}.chartSettingsChartValuesDescription`,
+    defaultMessage: `{chartType, select,
+      ${
+        ChartType.NUMERIC_BAR_CHART
+      } {The maximum Y-axis value will be the highest number of participants
+                                      that match the criteria over the given time period}
+      ${ChartType.PERCENTAGE_BAR_CHART} {The maximum Y-axis value will be 100%}
+    }`,
+  },
+  chartSettingsTrendLineOption: {
+    id: `${scope}.chartSettingsTrendLineOption`,
+    defaultMessage: 'Display Trend Line',
+  },
   chartSettingsFormulaPlaceholder: {
     id: `${scope}.chartSettingsFormulaPlaceholder`,
     defaultMessage: 'Enter Formula',
@@ -104,5 +132,9 @@ export default defineMessages({
   pieChartHeader: {
     id: `${scope}.pieChartHeader`,
     defaultMessage: 'Pie Chart Settings',
+  },
+  barChartHeader: {
+    id: `${scope}.barChartHeader`,
+    defaultMessage: 'Bar Chart Settings',
   },
 });

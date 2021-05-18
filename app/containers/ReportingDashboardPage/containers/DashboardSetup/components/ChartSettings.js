@@ -21,6 +21,7 @@ import ActionIcon from 'components/ActionIcon';
 import { Col, Row } from 'components/ReactGridSystem';
 import { DEFAULT_COLORS } from 'components/ReactColor';
 
+import BarChartSettings from './BarChartSettings';
 import PieChartSettings from './PieChartSettings';
 
 import { DashboardSectionsContext } from '../constants';
@@ -68,6 +69,10 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
   const onEditDescription = useCallback(onEdit('description'), [
     chart.description,
   ]);
+
+  const onEditChartType = useCallback(onEdit('chartType'), [chart.chartType]);
+
+  const onEditTrendLine = useCallback(onEdit('trendLine'), [chart.trendLine]);
 
   const onEditFormula = useCallback(
     field => value => onEdit('formula')({ ...chart.formula, [field]: value }),
@@ -135,6 +140,23 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
         />,
       );
     case ChartType.NUMERIC_BAR_CHART:
+    case ChartType.PERCENTAGE_BAR_CHART:
+      return wrapper(
+        <BarChartSettings
+          chart={chart}
+          addPatternLoader={isAddingPattern}
+          onAddFormulaPattern={onAddFormulaPattern}
+          onDelete={onDelete}
+          onEditChartType={onEditChartType}
+          onDeleteFormulaPattern={onDeleteFormulaPattern}
+          onEditFormulaDefaultPattern={onEditFormulaDefaultPattern}
+          onEditDescription={onEditDescription}
+          onEditFormulaPattern={onEditFormulaPattern}
+          onEditFormulaPayload={onEditFormulaPayload}
+          onEditName={onEditName}
+          onEditTrendLine={onEditTrendLine}
+        />,
+      );
     default:
       return null;
   }
