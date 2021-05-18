@@ -33,6 +33,7 @@ const BarChartSettings = ({
   onEditFormulaPattern,
   onEditFormulaPayload,
   onEditName,
+  onEditStatus,
   onEditTrendLine,
 }) => {
   const { formatMessage } = useIntl();
@@ -55,7 +56,7 @@ const BarChartSettings = ({
         chartStatus={chart.status}
         chartType={chart.chartType}
         isDeleting={deleteChartLoader}
-        onChangeStatus={undefined}
+        onChangeStatus={onEditStatus}
         onDelete={onDelete}
       />
 
@@ -219,6 +220,7 @@ BarChartSettings.propTypes = {
   onEditFormulaPattern: PropTypes.func,
   onEditFormulaPayload: PropTypes.func,
   onEditName: PropTypes.func,
+  onEditStatus: PropTypes.func,
   onEditTrendLine: PropTypes.func,
 };
 

@@ -66,6 +66,8 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
 
   const onEditName = useCallback(onEdit('name'), [chart.name]);
 
+  const onEditStatus = useCallback(onEdit('status'), [chart.status]);
+
   const onEditDescription = useCallback(onEdit('description'), [
     chart.description,
   ]);
@@ -134,6 +136,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
           onEditFormulaPattern={onEditFormulaPattern}
           onEditFormulaPayload={onEditFormulaPayload}
           onEditName={onEditName}
+          onEditStatus={onEditStatus}
         />,
       );
     case ChartType.NUMERIC_BAR_CHART:
@@ -151,6 +154,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
           onEditFormulaPattern={onEditFormulaPattern}
           onEditFormulaPayload={onEditFormulaPayload}
           onEditName={onEditName}
+          onEditStatus={onEditStatus}
           onEditTrendLine={onEditTrendLine}
         />,
       );

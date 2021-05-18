@@ -1,9 +1,10 @@
-/* eslint-disable no-unused-vars */
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
+
+import { ChartStatus } from 'global/reducers/dashboardSections';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
 
@@ -28,6 +29,21 @@ const ChartSettingsTopPanel = ({
 }) => {
   const { formatMessage } = useIntl();
 
+  const handleStatusChange = () => {
+    switch (chartStatus) {
+      case ChartStatus.DRAFT:
+        onChangeStatus(ChartStatus.DATA_COLLECTION);
+        break;
+
+      case ChartStatus.DATA_COLLECTION:
+        onChangeStatus(ChartStatus.PUBLISHED);
+        break;
+
+      default:
+        break;
+    }
+  };
+
   return (
     <FullWidthContainer>
       <Row justify="between" align="center">
@@ -48,7 +64,7 @@ const ChartSettingsTopPanel = ({
 
         <Col xs="content">
           <Button
-            type="submit"
+            onClick={handleStatusChange}
             disabled={false}
             loading={false}
             hoverable

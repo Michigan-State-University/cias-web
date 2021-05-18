@@ -27,6 +27,7 @@ const PieChartSettings = ({
   onEditFormulaPattern,
   onEditFormulaPayload,
   onEditName,
+  onEditStatus,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -40,7 +41,7 @@ const PieChartSettings = ({
         chartStatus={chart.status}
         chartType={chart.chartType}
         isDeleting={deleteChartLoader}
-        onChangeStatus={undefined}
+        onChangeStatus={onEditStatus}
         onDelete={onDelete}
       />
 
@@ -149,6 +150,7 @@ PieChartSettings.propTypes = {
   onEditFormulaPattern: PropTypes.func,
   onEditFormulaPayload: PropTypes.func,
   onEditName: PropTypes.func,
+  onEditStatus: PropTypes.func,
 };
 
 export default memo(PieChartSettings);
