@@ -135,7 +135,7 @@ export default defineMessages({
   },
   barChartFormulaOtherCase: {
     id: `${scope}.barChartFormulaOtherCase`,
-    defaultMessage: 'If other participant doesn’t match criteria',
+    defaultMessage: "If other, participant doesn't match criteria",
   },
   pieChartHeader: {
     id: `${scope}.pieChartHeader`,

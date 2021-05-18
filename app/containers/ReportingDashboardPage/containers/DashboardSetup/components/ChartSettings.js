@@ -9,8 +9,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { themeColors } from 'theme';
-
 import {
   ChartType,
   deleteChartRequest,
@@ -19,12 +17,14 @@ import {
 
 import ActionIcon from 'components/ActionIcon';
 import { Col, Row } from 'components/ReactGridSystem';
-import { DEFAULT_COLORS } from 'components/ReactColor';
 
 import BarChartSettings from './BarChartSettings';
 import PieChartSettings from './PieChartSettings';
 
-import { DashboardSectionsContext } from '../constants';
+import {
+  DashboardSectionsContext,
+  generateNewPatternForChartType,
+} from '../constants';
 import { SettingsContainer } from '../../../styled';
 
 const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
@@ -113,13 +113,10 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
 
     onEditFormula('patterns')([
       ...chart.formula.patterns,
-      {
-        label: '',
-        color:
-          DEFAULT_COLORS[chart.formula.patterns.length] ??
-          themeColors.secondary,
-        match: '=',
-      },
+      generateNewPatternForChartType(
+        chart.chartType,
+        chart.formula.patterns.length,
+      ),
     ]);
   }, [chart.formula.patterns]);
 
