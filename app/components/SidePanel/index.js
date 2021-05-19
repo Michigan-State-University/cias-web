@@ -40,7 +40,9 @@ const SidePanel = ({ Handle, onOpen, onClose, isOpen, style, children }) => {
   return (
     <SidePanelWrapper $isVisible={isVisible} width={width}>
       {Handle && <HandleWrapper onClick={toggle}>{Handle}</HandleWrapper>}
-      <StyledSidePanel width={width}>{isOpen && children}</StyledSidePanel>
+      <StyledSidePanel width={width} $isVisible={isVisible}>
+        {isOpen && children}
+      </StyledSidePanel>
     </SidePanelWrapper>
   );
 };

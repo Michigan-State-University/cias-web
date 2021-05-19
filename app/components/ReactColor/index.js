@@ -19,6 +19,7 @@ import { ColorPickerType, DEFAULT_COLORS } from './constants';
 const ReactColor = ({
   type,
   color,
+  disabled,
   onChange,
   onChangeComplete,
   style,
@@ -65,7 +66,7 @@ const ReactColor = ({
 
   return (
     <Box position="relative" ref={pickerRef} {...style}>
-      <Box onClick={toggle} clickable>
+      <Box onClick={toggle} disabled={disabled} clickable>
         <Circle bg={color} child="" size="20px" />
       </Box>
       {isOpen && (
@@ -80,6 +81,7 @@ const ReactColor = ({
 ReactColor.propTypes = {
   type: PropTypes.oneOf(values(ColorPickerType)),
   color: PropTypes.string,
+  disabled: PropTypes.bool,
   style: PropTypes.object,
   onChange: PropTypes.func,
   onChangeComplete: PropTypes.func,

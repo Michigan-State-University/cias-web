@@ -46,5 +46,18 @@ export const SELECT_CHART_ACTION = 'app/dashboardSections/SELECT_CHART_ACTION';
 
 export const ChartType = {
   PIE_CHART: 'pie_chart',
-  BAR_CHART: 'bar_chart',
+  NUMERIC_BAR_CHART: 'bar_chart',
+  PERCENTAGE_BAR_CHART: 'percentage_bar_chart',
 };
+
+export const ChartStatus = {
+  DRAFT: 'draft',
+  DATA_COLLECTION: 'data_collection',
+  PUBLISHED: 'published',
+};
+
+export const ALLOWED_CHART_EDIT = [ChartStatus.DRAFT];
+
+export const StatusPermissions = status => ({
+  canBeEdited: ALLOWED_CHART_EDIT.includes(status),
+});

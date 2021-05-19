@@ -9,25 +9,31 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
-import { themeColors } from 'theme';
-
 import {
   ChartType,
   deleteChartRequest,
   editChartRequest,
+  StatusPermissions,
 } from 'global/reducers/dashboardSections';
 
 import ActionIcon from 'components/ActionIcon';
 import { Col, Row } from 'components/ReactGridSystem';
-import { DEFAULT_COLORS } from 'components/ReactColor';
 
+import BarChartSettings from './BarChartSettings';
 import PieChartSettings from './PieChartSettings';
 
-import { DashboardSectionsContext } from '../constants';
+import {
+  ChartSettingsContext,
+  DashboardSectionsContext,
+  generateNewPatternForChartType,
+} from '../constants';
 import { SettingsContainer } from '../../../styled';
 
 const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
   const [isAddingPattern, setIsAddingPattern] = useState(false);
+  const [isChangingStatus, setIsChangingStatus] = useState(false);
+
+  const statusPermissions = StatusPermissions(chart.status);
 
   const {
     loaders: { editChartLoader },
@@ -35,17 +41,21 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
 
   useEffect(() => {
     if (isAddingPattern && !editChartLoader) setIsAddingPattern(false);
+
+    if (isChangingStatus && !editChartLoader) setIsChangingStatus(false);
   }, [editChartLoader]);
 
   const wrapper = component => (
-    <SettingsContainer>
-      <Row>
-        <Col align="end" mb={30}>
-          <ActionIcon onClick={onClose} mr={0} />
-        </Col>
-      </Row>
-      {component}
-    </SettingsContainer>
+    <ChartSettingsContext.Provider value={{ statusPermissions }}>
+      <SettingsContainer>
+        <Row>
+          <Col align="end" mb={30}>
+            <ActionIcon onClick={onClose} mr={0} />
+          </Col>
+        </Row>
+        {component}
+      </SettingsContainer>
+    </ChartSettingsContext.Provider>
   );
 
   const onDelete = useCallback(
@@ -63,19 +73,40 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
     [chart.id, chart.dashboardSectionId],
   );
 
-  const onEditName = useCallback(onEdit('name'), [chart.name]);
+  const onEditName = useCallback(onEdit('name'), [chart.name, onEdit]);
+
+  const onEditStatus = useCallback(
+    value => {
+      setIsChangingStatus(true);
+
+      onEdit('status')(value);
+    },
+    [chart.status, onEdit],
+  );
 
   const onEditDescription = useCallback(onEdit('description'), [
     chart.description,
+    onEdit,
+  ]);
+
+  const onEditChartType = useCallback(onEdit('chartType'), [
+    chart.chartType,
+    onEdit,
+  ]);
+
+  const onEditTrendLine = useCallback(onEdit('trendLine'), [
+    chart.trendLine,
+    onEdit,
   ]);
 
   const onEditFormula = useCallback(
     field => value => onEdit('formula')({ ...chart.formula, [field]: value }),
-    [chart.formula],
+    [chart.formula, onEdit],
   );
 
   const onEditFormulaPayload = useCallback(onEditFormula('payload'), [
     chart.formula.payload,
+    onEditFormula,
   ]);
 
   const onEditFormulaPattern = useCallback(
@@ -87,12 +118,12 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
           return pattern;
         }),
       ),
-    [chart.formula.patterns],
+    [chart.formula.patterns, onEditFormula],
   );
 
   const onEditFormulaDefaultPattern = useCallback(
     pattern => onEditFormula('defaultPattern')(pattern),
-    [chart.formula.defaultPattern],
+    [chart.formula.defaultPattern, onEditFormula],
   );
 
   const onDeleteFormulaPattern = useCallback(
@@ -100,7 +131,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
       onEditFormula('patterns')(
         chart.formula.patterns.filter((_, i) => i !== index),
       ),
-    [chart.formula.patterns],
+    [chart.formula.patterns, onEditFormula],
   );
 
   const onAddFormulaPattern = useCallback(() => {
@@ -108,13 +139,10 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
 
     onEditFormula('patterns')([
       ...chart.formula.patterns,
-      {
-        label: '',
-        color:
-          DEFAULT_COLORS[chart.formula.patterns.length] ??
-          themeColors.secondary,
-        match: '=',
-      },
+      generateNewPatternForChartType(
+        chart.chartType,
+        chart.formula.patterns.length,
+      ),
     ]);
   }, [chart.formula.patterns]);
 
@@ -124,17 +152,38 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
         <PieChartSettings
           chart={chart}
           addPatternLoader={isAddingPattern}
+          changeStatusLoader={isChangingStatus}
           onAddFormulaPattern={onAddFormulaPattern}
           onDelete={onDelete}
           onDeleteFormulaPattern={onDeleteFormulaPattern}
-          onEditFormulaDefaultPattern={onEditFormulaDefaultPattern}
           onEditDescription={onEditDescription}
+          onEditFormulaDefaultPattern={onEditFormulaDefaultPattern}
           onEditFormulaPattern={onEditFormulaPattern}
           onEditFormulaPayload={onEditFormulaPayload}
           onEditName={onEditName}
+          onEditStatus={onEditStatus}
         />,
       );
-    case ChartType.BAR_CHART:
+    case ChartType.NUMERIC_BAR_CHART:
+    case ChartType.PERCENTAGE_BAR_CHART:
+      return wrapper(
+        <BarChartSettings
+          chart={chart}
+          addPatternLoader={isAddingPattern}
+          changeStatusLoader={isChangingStatus}
+          onAddFormulaPattern={onAddFormulaPattern}
+          onDelete={onDelete}
+          onDeleteFormulaPattern={onDeleteFormulaPattern}
+          onEditChartType={onEditChartType}
+          onEditDescription={onEditDescription}
+          onEditFormulaDefaultPattern={onEditFormulaDefaultPattern}
+          onEditFormulaPattern={onEditFormulaPattern}
+          onEditFormulaPayload={onEditFormulaPayload}
+          onEditName={onEditName}
+          onEditStatus={onEditStatus}
+          onEditTrendLine={onEditTrendLine}
+        />,
+      );
     default:
       return null;
   }

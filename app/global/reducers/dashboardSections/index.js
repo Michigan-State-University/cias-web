@@ -19,4 +19,4 @@ export {
   makeSelectSelectedChart,
 } from './selectors';
 
-export { ChartType } from './constants';
+export { ChartType, ChartStatus, StatusPermissions } from './constants';
