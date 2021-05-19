@@ -31,6 +31,7 @@ import { SettingsContainer } from '../../../styled';
 
 const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
   const [isAddingPattern, setIsAddingPattern] = useState(false);
+  const [isChangingStatus, setIsChangingStatus] = useState(false);
 
   const statusPermissions = StatusPermissions(chart.status);
 
@@ -40,6 +41,8 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
 
   useEffect(() => {
     if (isAddingPattern && !editChartLoader) setIsAddingPattern(false);
+
+    if (isChangingStatus && !editChartLoader) setIsChangingStatus(false);
   }, [editChartLoader]);
 
   const wrapper = component => (
@@ -72,7 +75,14 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
 
   const onEditName = useCallback(onEdit('name'), [chart.name, onEdit]);
 
-  const onEditStatus = useCallback(onEdit('status'), [chart.status, onEdit]);
+  const onEditStatus = useCallback(
+    value => {
+      setIsChangingStatus(true);
+
+      onEdit('status')(value);
+    },
+    [chart.status, onEdit],
+  );
 
   const onEditDescription = useCallback(onEdit('description'), [
     chart.description,
@@ -142,6 +152,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
         <PieChartSettings
           chart={chart}
           addPatternLoader={isAddingPattern}
+          changeStatusLoader={isChangingStatus}
           onAddFormulaPattern={onAddFormulaPattern}
           onDelete={onDelete}
           onDeleteFormulaPattern={onDeleteFormulaPattern}
@@ -159,6 +170,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
         <BarChartSettings
           chart={chart}
           addPatternLoader={isAddingPattern}
+          changeStatusLoader={isChangingStatus}
           onAddFormulaPattern={onAddFormulaPattern}
           onDelete={onDelete}
           onDeleteFormulaPattern={onDeleteFormulaPattern}

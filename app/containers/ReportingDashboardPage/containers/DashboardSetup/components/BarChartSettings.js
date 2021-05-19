@@ -24,6 +24,7 @@ import { ChartSettingsContext, DashboardSectionsContext } from '../constants';
 const BarChartSettings = ({
   chart,
   addPatternLoader,
+  changeStatusLoader,
   onAddFormulaPattern,
   onDelete,
   onDeleteFormulaPattern,
@@ -61,6 +62,7 @@ const BarChartSettings = ({
       <ChartSettingsTopSection
         chartStatus={status}
         chartType={chartType}
+        isChangingStatus={changeStatusLoader}
         isDeleting={deleteChartLoader}
         onChangeStatus={onEditStatus}
         onDelete={onDelete}
@@ -166,6 +168,7 @@ const BarChartSettings = ({
 BarChartSettings.propTypes = {
   chart: PropTypes.object,
   addPatternLoader: PropTypes.bool,
+  changeStatusLoader: PropTypes.bool,
   onAddFormulaPattern: PropTypes.func,
   onDelete: PropTypes.func,
   onDeleteFormulaPattern: PropTypes.func,

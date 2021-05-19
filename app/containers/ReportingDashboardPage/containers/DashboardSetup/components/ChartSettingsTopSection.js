@@ -27,6 +27,7 @@ import { ChartSettingsContext } from '../constants';
 const ChartSettingsTopSection = ({
   chartStatus,
   chartType,
+  isChangingStatus,
   isDeleting,
   onChangeStatus,
   onDelete,
@@ -82,7 +83,7 @@ const ChartSettingsTopSection = ({
           <Button
             onClick={handleStatusChange}
             disabled={false}
-            loading={false}
+            loading={isChangingStatus}
             hoverable
             width="100%"
             px={10}
@@ -99,7 +100,7 @@ const ChartSettingsTopSection = ({
           </Badge>
         );
     }
-  }, [chartStatus, handleStatusChange]);
+  }, [chartStatus, handleStatusChange, isChangingStatus]);
 
   return (
     <FullWidthContainer>
@@ -168,6 +169,7 @@ const ChartSettingsTopSection = ({
 ChartSettingsTopSection.propTypes = {
   chartStatus: PropTypes.string,
   chartType: PropTypes.string,
+  isChangingStatus: PropTypes.bool,
   isDeleting: PropTypes.bool,
   onChangeStatus: PropTypes.func,
   onDelete: PropTypes.func,
