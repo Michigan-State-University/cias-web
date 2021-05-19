@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { colors, themeColors } from 'theme';
-import { flex, layout } from '../BaseComponentStyles';
+import { flex, layout, margin } from '../BaseComponentStyles';
 
 export const TabsContainer = styled.div`
   ${flex};
@@ -10,6 +10,7 @@ export const TabsContainer = styled.div`
 
 export const ContentContainer = styled.div`
   margin: 25px 10px;
+  ${margin};
 `;
 
 export const LabelContainer = styled.div`

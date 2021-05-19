@@ -12,6 +12,7 @@ const Tabs = ({
   controlled,
   controlledTabActive,
   controlledSetTabActive,
+  containerProps,
   ...restProps
 }) => {
   const {
@@ -50,7 +51,7 @@ const Tabs = ({
           );
         })}
       </Row>
-      <ContentContainer>
+      <ContentContainer {...containerProps}>
         {children.map(child => {
           const { label, children: content } = child.props;
           if (label !== tab) return null;
@@ -69,6 +70,7 @@ Tabs.propTypes = {
     PropTypes.object,
   ]),
   controlledSetTabActive: PropTypes.func,
+  containerProps: PropTypes.object,
 };
 
 export default Tabs;

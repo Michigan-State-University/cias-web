@@ -12,22 +12,24 @@ const ClinicParticipantInviter = ({
   updateInvitation,
   invitation,
 }) => {
-  const { emails: invitationEmails, healthClinicId } = invitation;
+  const { emails: invitationEmails, healthClinic } = invitation;
   const [emails, setEmails] = useState(invitationEmails);
-  const [selectedClinic, setSelectedClinic] = useState(healthClinicId);
+  const [selectedClinic, setSelectedClinic] = useState(healthClinic);
 
   useEffect(() => {
     setEmails(invitationEmails);
-    setSelectedClinic(healthClinicId);
+    setSelectedClinic(healthClinic);
   }, [invitation]);
 
   useEffect(() => {
-    if (selectedClinic && selectedClinic.value && emails.length !== 0) {
+    if (
+      (selectedClinic && selectedClinic.value && emails.length !== 0) ||
+      (invitationEmails.length !== 0 && healthClinic !== null)
+    ) {
       updateInvitation({ emails, healthClinic: selectedClinic });
     }
   }, [selectedClinic, emails]);
 
-  console.log(selectedClinic);
   return (
     <Row display="flex" align="center" mb={10}>
       <ChipsInput
@@ -59,7 +61,7 @@ ClinicParticipantInviter.propTypes = {
   selectClinics: PropTypes.array,
   invitation: PropTypes.shape({
     emails: PropTypes.array,
-    healthClinicId: PropTypes.string,
+    healthClinic: PropTypes.object,
   }),
 };
 

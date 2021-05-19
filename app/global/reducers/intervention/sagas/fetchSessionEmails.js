@@ -8,14 +8,21 @@ import { FETCH_SESSION_EMAILS_REQUEST } from '../constants';
 import { fetchSessionEmailsError, fetchSessionEmailsSuccess } from '../actions';
 
 export function* fetchSessionEmails({ payload: { index } }) {
-  const intervention = yield select(makeSelectIntervention());
-  const session = intervention.sessions[index];
+  const { sessions, organizationId } = yield select(makeSelectIntervention());
+  const session = sessions[index];
   if (isNullOrUndefined(session)) return;
-  const requestURL = `v1/sessions/${session.id}/invitations`;
+  const organizationPrefix = organizationId
+    ? `organizations/${organizationId}/`
+    : '';
+  const requestURL = `v1/${organizationPrefix}sessions/${
+    session.id
+  }/invitations`;
   try {
     const { data } = yield call(axios.get, requestURL);
-    const users = jsonApiToArray(data, 'invitation');
-    yield put(fetchSessionEmailsSuccess(users || [], index));
+    const invitations = organizationId
+      ? data
+      : jsonApiToArray(data, 'invitation');
+    yield put(fetchSessionEmailsSuccess(invitations, index));
   } catch (error) {
     yield put(fetchSessionEmailsError(error));
   }

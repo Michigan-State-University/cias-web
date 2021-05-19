@@ -13,6 +13,8 @@ import { createStructuredSelector } from 'reselect';
 import filter from 'lodash/filter';
 import map from 'lodash/map';
 import groupBy from 'lodash/groupBy';
+import reduce from 'lodash/reduce';
+import forEach from 'lodash/forEach';
 
 import CopyToClipboard from 'components/CopyToClipboard';
 import CsvFileExport from 'components/CsvFileExport';
@@ -39,11 +41,12 @@ import Select from 'components/Select';
 import Button from 'components/Button';
 import CsvFileReader from 'components/CsvFileReader';
 import { emailValidator } from 'utils/validators';
-import UserList from './Components/UserList';
+// import UserList from './Components/UserList';
 import messages from './messages';
 import { makeSelectCurrentSession } from './selectors';
 import ShareBoxModalParent from './Components/ShareBoxModalParent';
 import ClinicParticipantInviter from './Components/ClinicParticipantInviter';
+import ClinicUserList from './Components/ClinicUserList';
 
 const OrganizationShareBox = ({
   session,
@@ -102,23 +105,6 @@ const OrganizationShareBox = ({
     },
   ];
 
-  const exampleCSVData = useMemo(() => {
-    if (!organization) return null;
-    const data = [];
-    const { healthSystems } = organization;
-    healthSystems.forEach(({ name: healthSystemName, healthClinics }) => {
-      healthClinics.forEach(({ name: healthClinicName, id }) => {
-        data.push({
-          email: '',
-          healthClinicId: id,
-          healthClinicName,
-          healthSystemName,
-        });
-      });
-    });
-    return data;
-  }, [organization]);
-
   const clinicSelectData = useMemo(() => {
     if (!organization) return null;
     const data = [];
@@ -134,17 +120,24 @@ const OrganizationShareBox = ({
     return data;
   }, [organization]);
 
+  const exampleCSVData = useMemo(() => {
+    if (!clinicSelectData) return null;
+    return clinicSelectData.map(({ label, value }) => ({
+      email: '',
+      healthClinicId: value,
+      healthClinicName: label,
+    }));
+  }, [clinicSelectData]);
+
   const allClinicIds = useMemo(() => {
-    if (!organization) return [];
-    const data = [];
-    const { healthSystems } = organization;
-    healthSystems.forEach(({ healthClinics }) => {
-      healthClinics.forEach(({ id }) => {
-        data.push(id);
-      });
-    });
-    return data;
-  }, [organization]);
+    if (!clinicSelectData) return [];
+    return clinicSelectData.map(({ value }) => value);
+  }, [clinicSelectData]);
+
+  const invitationsSize = useMemo(() => {
+    if (!emails) return 0;
+    return reduce(emails, (acc, arr) => acc + arr.length, 0);
+  }, [emails]);
 
   const exportExampleCsvButton = () => (
     <Row mt={10}>
@@ -194,27 +187,72 @@ const OrganizationShareBox = ({
     </Row>
   );
 
+  const exportData = useMemo(() => {
+    if (!clinicSelectData) return null;
+    const data = [];
+    forEach(emails, (invitedUsers, healthClinicId) => {
+      const healthClinic = clinicSelectData.find(
+        ({ value }) => value === healthClinicId,
+      );
+      forEach(invitedUsers, invitedUser =>
+        data.push({
+          email: invitedUser.email,
+          healthClinicId: healthClinic.value,
+          healthClinicName: healthClinic.label,
+        }),
+      );
+    });
+    return data;
+  }, [emails, clinicSelectData]);
+
+  const exportCsvButton = () => (
+    <Row my={22}>
+      <CsvFileExport
+        filename={formatMessage(messages.filename, {
+          interventionName: name,
+        })}
+        data={exportData}
+      >
+        {formatMessage(messages.exportCsv)}
+      </CsvFileExport>
+    </Row>
+  );
+
   const handleSend = () => {
     const invitationsFiltered = filter(
       invitationArray,
-      ({ emails, healthClinic }) =>
-        emails.length !== 0 && healthClinic !== null,
+      ({ emails: invitationEmails, healthClinic }) =>
+        invitationEmails.length !== 0 && healthClinic !== null,
     );
-    const invitationsMapped = map(
-      invitationsFiltered,
-      ({ emails, healthClinic: { value } }) => ({
-        emails,
-        health_clinic_id: value,
-      }),
-    );
-    sendInvite(invitationsMapped, sessionId);
+    const invitationArrayToSend = [];
+    for (let i = 0; i < invitationsFiltered.length; i++) {
+      const {
+        emails: invitationEmails,
+        healthClinic: { value },
+      } = invitationsFiltered[i];
+      const clinicInvitationIndex = invitationArrayToSend.findIndex(
+        ({ health_clinic_id: healthClinicId }) => healthClinicId === value,
+      );
+      if (clinicInvitationIndex !== -1) {
+        invitationArrayToSend[clinicInvitationIndex].emails.push(
+          ...invitationEmails,
+        );
+      } else {
+        invitationArrayToSend.push({
+          emails: invitationEmails,
+          health_clinic_id: value,
+        });
+      }
+    }
+    setInvitationArray([{ emails: [], healthClinic: null }]);
+    sendInvite(invitationArrayToSend, sessionId, true);
   };
 
   if (session) {
     return (
       <ShareBoxModalParent position={position} name={name}>
         <Box mt={20}>
-          <Tabs>
+          <Tabs containerProps={{ mb: 0 }}>
             <div label={formatMessage(messages.inviteParticipant)}>
               {invitationArray.map((invitationObject, index) => (
                 <ClinicParticipantInviter
@@ -233,7 +271,7 @@ const OrganizationShareBox = ({
                   {exportExampleCsvButton()}
                 </Box>
                 <Button
-                  disabled={!sharingPossible}
+                  disabled={!sharingPossible || invitationArray.length < 2}
                   width="100%"
                   ml={12}
                   hoverable
@@ -275,13 +313,13 @@ const OrganizationShareBox = ({
             </div>
             <div
               label={formatMessage(messages.invitedParticipants, {
-                invitedLength: 3,
+                invitedLength: invitationsSize,
               })}
             >
-              {emails && emails.length !== 0 && (
+              {emails && invitationsSize !== 0 && clinicSelectData && (
                 <>
                   {listLoading && <Loader type="inline" />}
-
+                  {exportCsvButton()}
                   <H3
                     mb={15}
                     fontSize={13}
@@ -291,11 +329,12 @@ const OrganizationShareBox = ({
                   >
                     <FormattedMessage {...messages.userListLabel} />
                   </H3>
-                  <Row maxHeight={350} overflow="scroll" padding={10}>
-                    <UserList
+                  <Row padding={10} display="block">
+                    <ClinicUserList
+                      clinicList={clinicSelectData}
+                      userInvites={emails}
                       buttons={buttons}
-                      users={emails}
-                      userWithLoading={emailLoading}
+                      emailLoading={emailLoading}
                     />
                   </Row>
                 </>
@@ -309,25 +348,6 @@ const OrganizationShareBox = ({
   return null;
 };
 
-// {exportCsvButton()}
-
-/*
-  const exportCsvButton = () => {
-    if (emails && emails.length > 0)
-      return (
-        <Row mt={22}>
-          <CsvFileExport
-            filename={formatMessage(messages.filename, {
-              interventionName: name,
-            })}
-            data={emails.map(({ email }) => ({ email }))}
-          >
-            {formatMessage(messages.exportCsv)}
-          </CsvFileExport>
-        </Row>
-      );
-  };
-*/
 OrganizationShareBox.propTypes = {
   session: PropTypes.shape({
     id: PropTypes.string,
