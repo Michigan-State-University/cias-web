@@ -18,16 +18,21 @@ import messages from '../messages';
 import { makeSelectIntervention } from '../selectors';
 
 export function* sendSessionInvite({ payload: { emails, sessionId } }) {
-  const intervention = yield select(makeSelectIntervention());
-  const sessionIndex = intervention.sessions.findIndex(
-    session => session.id === sessionId,
-  );
-
-  const requestURL = `v1/sessions/${sessionId}/invitations`;
+  const { sessions, organizationId } = yield select(makeSelectIntervention());
+  const sessionIndex = sessions.findIndex(session => session.id === sessionId);
+  const organizationPrefix = organizationId
+    ? `/organizations/${organizationId}/`
+    : '';
+  const requestURL = `v1/${organizationPrefix}sessions/${sessionId}/invitations`;
+  const requestBody = organizationId
+    ? {
+        session_invitations: emails,
+      }
+    : {
+        session_invitation: { emails },
+      };
   try {
-    const { data } = yield call(axios.post, requestURL, {
-      session_invitation: { emails },
-    });
+    const { data } = yield call(axios.post, requestURL, requestBody);
     const invitations = jsonApiToArray(data, 'invitation');
     yield put(sendSessionInviteSuccess());
     yield put(fetchSessionEmailsSuccess(invitations, sessionIndex));

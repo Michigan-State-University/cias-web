@@ -78,6 +78,7 @@ import { makeSelectUserRoles } from 'global/reducers/auth';
 
 import { archived } from 'models/Status/StatusTypes';
 import { RolePermissions } from 'models/User/RolePermissions';
+import OrganizationShareBox from 'containers/ShareBox/OrganizationShareBox';
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
@@ -368,7 +369,10 @@ export function InterventionDetailsPage({
           onClose={() => setParticipantShareModalVisible(false)}
           visible={participantShareModalVisible}
         >
-          <ShareBox />
+          {!organizationId && <ShareBox />}
+          {organizationId && (
+            <OrganizationShareBox organizationId={organizationId} />
+          )}
         </Modal>
         <Header
           name={name}
