@@ -113,6 +113,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
 .c6:hover {
   background-color: #C866EA;
   color: #FFFFFF;
+  border: 1px solid transparent;
 }
 
 .c3 {
@@ -272,6 +273,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
 .c6:hover {
   background-color: #C866EA;
   color: #FFFFFF;
+  border: 1px solid transparent;
 }
 
 .c3 {

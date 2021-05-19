@@ -7,6 +7,8 @@ import { colors } from 'theme';
 import PieChartIcon from 'assets/svg/pieChart.svg';
 import BarChartIcon from 'assets/svg/barChart.svg';
 
+import { ChartType } from 'global/reducers/dashboardSections';
+
 import { Col, Row } from 'components/ReactGridSystem';
 import Box from 'components/Box';
 import H2 from 'components/H2';
@@ -21,8 +23,14 @@ const AddChart = ({ addChart }) => {
   const onAddChart = useCallback(type => () => addChart(type), []);
 
   return (
-    <Box bg={colors.linkWater} width={600} height={300} padding="40px 120px">
-      <FullWidthContainer height="100%">
+    <Box
+      bg={colors.linkWater}
+      width={400}
+      minWidth={400}
+      height={300}
+      padding="40px"
+    >
+      <FullWidthContainer height="100%" width="100%">
         <Row align="center" height="100%">
           <Col>
             <FullWidthContainer>
@@ -35,7 +43,7 @@ const AddChart = ({ addChart }) => {
               <Row justify="center">
                 <Col xs="content">
                   <ChartButton
-                    onClick={onAddChart('pieChart')}
+                    onClick={onAddChart(ChartType.PIE_CHART)}
                     helperText={formatMessage(messages.pieChartHelper)}
                     title={formatMessage(messages.pieChart)}
                     icon={PieChartIcon}
@@ -44,7 +52,7 @@ const AddChart = ({ addChart }) => {
 
                 <Col xs="content">
                   <ChartButton
-                    onClick={onAddChart('barChart')}
+                    onClick={onAddChart(ChartType.NUMERIC_BAR_CHART)}
                     helperText={formatMessage(messages.barChartHelper)}
                     title={formatMessage(messages.barChart)}
                     icon={BarChartIcon}

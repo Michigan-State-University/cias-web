@@ -1,15 +1,25 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { findIndexById } from 'utils/arrayUtils';
+import { updateItemById } from 'utils/reduxUtils';
+
 import { dashboardSectionReducer } from './dashboardSectionReducer';
 import {
+  ADD_CHART_ERROR,
+  ADD_CHART_REQUEST,
+  ADD_CHART_SUCCESS,
   ADD_SECTION_ERROR,
   ADD_SECTION_REQUEST,
   ADD_SECTION_SUCCESS,
+  DELETE_CHART_ERROR,
+  DELETE_CHART_REQUEST,
+  DELETE_CHART_SUCCESS,
   DELETE_SECTION_ERROR,
   DELETE_SECTION_REQUEST,
   DELETE_SECTION_SUCCESS,
+  EDIT_CHART_ERROR,
+  EDIT_CHART_REQUEST,
+  EDIT_CHART_SUCCESS,
   EDIT_SECTION_ERROR,
   EDIT_SECTION_REQUEST,
   EDIT_SECTION_SUCCESS,
@@ -19,11 +29,13 @@ import {
   FETCH_SECTIONS_ERROR,
   FETCH_SECTIONS_REQUEST,
   FETCH_SECTIONS_SUCCESS,
+  SELECT_CHART_ACTION,
 } from './constants';
 
 export const initialState = {
   dashboardSections: [],
   singleDashboardSection: null,
+  selectedChart: null,
   cache: { dashboardSections: [], singleDashboardSection: null },
   loaders: {
     fetchDashboardSectionLoader: false,
@@ -31,6 +43,9 @@ export const initialState = {
     editDashboardSectionLoader: false,
     addDashboardSectionLoader: false,
     deleteDashboardSectionLoader: false,
+    addChartLoader: false,
+    editChartLoader: false,
+    deleteChartLoader: false,
   },
   errors: {
     fetchDashboardSectionError: null,
@@ -38,6 +53,9 @@ export const initialState = {
     editDashboardSectionError: null,
     addDashboardSectionError: null,
     deleteDashboardSectionError: null,
+    addChartError: null,
+    editChartError: null,
+    deleteChartError: null,
   },
 };
 
@@ -88,16 +106,11 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         draft.loaders.editDashboardSectionLoader = true;
         draft.errors.editDashboardSectionError = null;
 
-        const index = findIndexById(
-          state.dashboardSections,
+        updateItemById(
+          draft.dashboardSections,
           payload.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
         );
-
-        if (index !== -1)
-          draft.dashboardSections[index] = dashboardSectionReducer(
-            state.cache.dashboardSections[index],
-            action,
-          );
 
         break;
       }
@@ -106,16 +119,11 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         draft.loaders.editDashboardSectionLoader = false;
         draft.errors.editDashboardSectionError = null;
 
-        const index = findIndexById(
-          state.cache.dashboardSections,
+        updateItemById(
+          draft.cache.dashboardSections,
           payload.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
         );
-
-        if (index !== -1)
-          draft.cache.dashboardSections[index] = dashboardSectionReducer(
-            state.cache.dashboardSections[index],
-            action,
-          );
         break;
       }
 
@@ -168,6 +176,120 @@ const dashboardSectionsReducer = (state = initialState, action) =>
       case FETCH_SECTIONS_ERROR: {
         draft.loaders.fetchDashboardSectionsLoader = false;
         draft.errors.fetchDashboardSectionsError = payload.error;
+        break;
+      }
+
+      case ADD_CHART_REQUEST: {
+        draft.loaders.addChartLoader = true;
+        draft.errors.addChartError = null;
+        break;
+      }
+
+      case ADD_CHART_SUCCESS: {
+        draft.loaders.addChartLoader = false;
+        draft.errors.addChartError = null;
+
+        updateItemById(
+          draft.dashboardSections,
+          payload.chart.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+
+        updateItemById(
+          draft.cache.dashboardSections,
+          payload.chart.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+        break;
+      }
+
+      case ADD_CHART_ERROR: {
+        draft.loaders.addChartLoader = false;
+        draft.errors.addChartError = payload.error;
+        draft.dashboardSections = state.cache.dashboardSections;
+
+        break;
+      }
+
+      case EDIT_CHART_REQUEST: {
+        draft.loaders.editChartLoader = true;
+        draft.errors.editChartError = null;
+
+        updateItemById(
+          draft.dashboardSections,
+          payload.chart.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+
+        break;
+      }
+
+      case EDIT_CHART_SUCCESS: {
+        draft.loaders.editChartLoader = false;
+        draft.errors.editChartError = null;
+
+        updateItemById(
+          draft.cache.dashboardSections,
+          payload.chart.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+
+        break;
+      }
+
+      case EDIT_CHART_ERROR: {
+        draft.loaders.editChartLoader = false;
+        draft.errors.editChartError = payload.error;
+
+        draft.dashboardSections = state.cache.dashboardSections;
+
+        break;
+      }
+
+      case DELETE_CHART_REQUEST: {
+        draft.loaders.deleteChartLoader = true;
+        draft.errors.deleteChartError = null;
+
+        break;
+      }
+
+      case DELETE_CHART_SUCCESS: {
+        draft.loaders.deleteChartLoader = false;
+        draft.errors.deleteChartError = null;
+
+        updateItemById(
+          draft.dashboardSections,
+          payload.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+
+        updateItemById(
+          draft.cache.dashboardSections,
+          payload.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
+
+        if (payload.chartId === state.selectedChart?.chartId)
+          draft.selectedChart = null;
+
+        break;
+      }
+
+      case DELETE_CHART_ERROR: {
+        draft.loaders.deleteChartLoader = false;
+        draft.errors.deleteChartError = payload.error;
+
+        break;
+      }
+
+      case SELECT_CHART_ACTION: {
+        if (state.selectedChart?.chartId !== payload.chartId)
+          draft.selectedChart = {
+            chartId: payload.chartId,
+            dashboardSectionId: payload.dashboardSectionId,
+          };
+        else draft.selectedChart = null;
+
         break;
       }
     }

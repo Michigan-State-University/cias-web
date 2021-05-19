@@ -17,6 +17,20 @@ export const makeSelectSingleDashboardSection = () =>
     substate => substate.singleDashboardSection,
   );
 
+export const makeSelectSelectedChart = () =>
+  createSelector(
+    selectDashboardSectionsState,
+    substate => {
+      const dashboardSection = substate.dashboardSections.find(
+        ({ id }) => id === substate.selectedChart?.dashboardSectionId,
+      );
+
+      return dashboardSection?.charts.find(
+        ({ id }) => id === substate.selectedChart?.chartId,
+      );
+    },
+  );
+
 export const makeSelectLoaders = () =>
   createSelector(
     selectDashboardSectionsState,

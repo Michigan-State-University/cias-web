@@ -113,7 +113,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 lovtjK"
+            class="StyledButton-d2s0gt-0 gIfTt"
             color="primary"
             disabled=""
             radius="100px"
@@ -234,7 +234,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 lovtjK"
+            class="StyledButton-d2s0gt-0 gIfTt"
             color="primary"
             disabled=""
             radius="100px"
@@ -355,7 +355,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 lovtjK"
+            class="StyledButton-d2s0gt-0 gIfTt"
             color="primary"
             disabled=""
             radius="100px"

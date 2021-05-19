@@ -11,7 +11,7 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
       href="/"
     >
       <button
-        class="StyledButton-d2s0gt-0 cHtPSD"
+        class="StyledButton-d2s0gt-0 iFDXaI"
         color="primary"
         radius="100px"
         width="100%"
