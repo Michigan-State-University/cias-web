@@ -23,6 +23,8 @@ const ChartSettingsGeneralSection = ({
     statusPermissions: { canBeEdited },
   } = useContext(ChartSettingsContext);
 
+  const { description, formula, name } = chart;
+
   return (
     <FullWidthContainer>
       <Row mt={36}>
@@ -38,7 +40,7 @@ const ChartSettingsGeneralSection = ({
             width="100%"
             height="50px"
             placeholder={formatMessage(messages.chartSettingsNamePlaceholder)}
-            value={chart.name}
+            value={name}
             onBlur={onEditName}
           />
         </Col>
@@ -59,7 +61,7 @@ const ChartSettingsGeneralSection = ({
             placeholder={formatMessage(
               messages.chartSettingsDescriptionPlaceholder,
             )}
-            value={chart.description ?? ''}
+            value={description ?? ''}
             onBlur={onEditDescription}
           />
         </Col>
@@ -81,7 +83,7 @@ const ChartSettingsGeneralSection = ({
             placeholder={formatMessage(
               messages.chartSettingsFormulaPlaceholder,
             )}
-            value={chart.formula.payload}
+            value={formula.payload}
             onBlur={onEditFormulaPayload}
           />
         </Col>

@@ -42,6 +42,8 @@ const BarChartSettings = ({
     statusPermissions: { canBeEdited },
   } = useContext(ChartSettingsContext);
 
+  const { chartType, formula, id, status, trendLine } = chart;
+
   const {
     loaders: { deleteChartLoader },
   } = useContext(DashboardSectionsContext);
@@ -52,13 +54,13 @@ const BarChartSettings = ({
   const handleChangeTypeToPercentage = () =>
     onEditChartType(ChartType.PERCENTAGE_BAR_CHART);
 
-  const handleTrendLineChange = () => onEditTrendLine(!chart.trendLine);
+  const handleTrendLineChange = () => onEditTrendLine(!trendLine);
 
   return (
     <FullWidthContainer>
       <ChartSettingsTopSection
-        chartStatus={chart.status}
-        chartType={chart.chartType}
+        chartStatus={status}
+        chartType={chartType}
         isDeleting={deleteChartLoader}
         onChangeStatus={onEditStatus}
         onDelete={onDelete}
@@ -76,7 +78,7 @@ const BarChartSettings = ({
           <NoMarginRow align="center">
             <Radio
               disabled={!canBeEdited}
-              checked={chart.chartType === ChartType.NUMERIC_BAR_CHART}
+              checked={chartType === ChartType.NUMERIC_BAR_CHART}
               onClick={handleChangeTypeToNumeric}
               mr={9}
             />
@@ -86,7 +88,7 @@ const BarChartSettings = ({
 
             <Radio
               disabled={!canBeEdited}
-              checked={chart.chartType === ChartType.PERCENTAGE_BAR_CHART}
+              checked={chartType === ChartType.PERCENTAGE_BAR_CHART}
               onClick={handleChangeTypeToPercentage}
               mr={9}
             />
@@ -99,7 +101,7 @@ const BarChartSettings = ({
             <Col>
               <Comment>
                 {formatMessage(messages.chartSettingsChartValuesDescription, {
-                  chartType: chart.chartType,
+                  chartType,
                 })}
               </Comment>
             </Col>
@@ -112,7 +114,7 @@ const BarChartSettings = ({
           <NoMarginRow align="center">
             <Checkbox
               disabled={!canBeEdited}
-              checked={chart.trendLine}
+              checked={trendLine}
               onClick={handleTrendLineChange}
               mr={9}
             />
@@ -130,17 +132,17 @@ const BarChartSettings = ({
 
       <Row mt={36}>
         <Col>
-          {chart.formula.patterns.map((pattern, index) => (
+          {formula.patterns.map((pattern, index) => (
             <BarChartFormulaPattern
-              key={`Pattern-${index}-Chart-${chart.id}`}
+              key={`Pattern-${index}-Chart-${id}`}
               pattern={pattern}
               onEdit={onEditFormulaPattern(index)}
               onDelete={onDeleteFormulaPattern(index)}
             />
           ))}
           <BarChartFormulaOtherPattern
-            key={`OtherPattern-Chart-${chart.id}`}
-            pattern={chart.formula.defaultPattern}
+            key={`OtherPattern-Chart-${id}`}
+            pattern={formula.defaultPattern}
             onEdit={onEditFormulaDefaultPattern}
           />
         </Col>

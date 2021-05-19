@@ -33,6 +33,8 @@ const PieChartSettings = ({
     statusPermissions: { canBeEdited },
   } = useContext(ChartSettingsContext);
 
+  const { chartType, formula, id, status } = chart;
+
   const {
     loaders: { deleteChartLoader },
   } = useContext(DashboardSectionsContext);
@@ -40,8 +42,8 @@ const PieChartSettings = ({
   return (
     <FullWidthContainer>
       <ChartSettingsTopSection
-        chartStatus={chart.status}
-        chartType={chart.chartType}
+        chartStatus={status}
+        chartType={chartType}
         isDeleting={deleteChartLoader}
         onChangeStatus={onEditStatus}
         onDelete={onDelete}
@@ -56,17 +58,17 @@ const PieChartSettings = ({
 
       <Row mt={36}>
         <Col>
-          {chart.formula.patterns.map((pattern, index) => (
+          {formula.patterns.map((pattern, index) => (
             <PieChartFormulaPattern
-              key={`Pattern-${index}-Chart-${chart.id}`}
+              key={`Pattern-${index}-Chart-${id}`}
               pattern={pattern}
               onEdit={onEditFormulaPattern(index)}
               onDelete={onDeleteFormulaPattern(index)}
             />
           ))}
           <PieChartFormulaOtherPattern
-            key={`OtherPattern-Chart-${chart.id}`}
-            pattern={chart.formula.defaultPattern}
+            key={`OtherPattern-Chart-${id}`}
+            pattern={formula.defaultPattern}
             onEdit={onEditFormulaDefaultPattern}
           />
         </Col>
