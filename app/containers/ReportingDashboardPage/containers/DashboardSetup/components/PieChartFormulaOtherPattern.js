@@ -2,7 +2,7 @@ import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
-import { Col, Row } from 'components/ReactGridSystem';
+import { Col, NoMarginRow, Row } from 'components/ReactGridSystem';
 import ReactColor, { ColorPickerType } from 'components/ReactColor';
 
 import { FullWidthContainer } from '../../../styled';
@@ -27,23 +27,25 @@ const PieChartFormulaOtherPattern = ({ pattern, onEdit }) => {
 
   return (
     <FullWidthContainer>
-      <Row align="center" nogutter>
-        <Col xs="content" mr={5}>
-          {formatMessage(messages.chartFormulaOtherCase)}
-        </Col>
+      <Row align="center" justify="between" nogutter>
+        <NoMarginRow align="center" nogutter>
+          <Col xs="content" mr={5}>
+            {formatMessage(messages.chartFormulaOtherCase)}
+          </Col>
 
-        <Col xs="content" mr={5}>
-          <Input
-            disabled={!canBeEdited}
-            width="120px"
-            height="50px"
-            placeholder={formatMessage(
-              messages.chartFormulaCaseLabelPlaceholder,
-            )}
-            value={label}
-            onBlur={onEditLabel}
-          />
-        </Col>
+          <Col xs="content" mr={5}>
+            <Input
+              disabled={!canBeEdited}
+              width="120px"
+              height="50px"
+              placeholder={formatMessage(
+                messages.chartFormulaCaseLabelPlaceholder,
+              )}
+              value={label}
+              onBlur={onEditLabel}
+            />
+          </Col>
+        </NoMarginRow>
 
         <Col xs="content">
           <ReactColor

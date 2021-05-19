@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
 
-import { Col, Row } from 'components/ReactGridSystem';
+import { Col, NoMarginRow, Row } from 'components/ReactGridSystem';
 import Icon from 'components/Icon';
 import InequalityChooser from 'components/InequalityChooser';
 import ReactColor, { ColorPickerType } from 'components/ReactColor';
@@ -33,44 +33,46 @@ const PieChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
 
   return (
     <FullWidthContainer>
-      <Row align="center" mb={20} nogutter>
-        <Col xs="content">
-          <Icon
-            src={BinIcon}
-            mr={8}
-            onClick={onDelete}
-            disabled={!canBeEdited}
-          />
-        </Col>
-
-        <Col xs="content">{formatMessage(messages.chartFormulaCaseIf)}</Col>
-
-        <Col xs="content">
-          <Row margin="0 !important">
-            <InequalityChooser
+      <Row align="center" mb={20} justify="between" nogutter>
+        <NoMarginRow align="center" nogutter>
+          <Col xs="content">
+            <Icon
+              src={BinIcon}
+              mr={8}
+              onClick={onDelete}
               disabled={!canBeEdited}
-              onSuccessfulChange={onEditMatch}
-              inequalityValue={match}
             />
-          </Row>
-        </Col>
+          </Col>
 
-        <Col xs="content" mr={5}>
-          {formatMessage(messages.chartFormulaCaseEquals)}
-        </Col>
+          <Col xs="content">{formatMessage(messages.chartFormulaCaseIf)}</Col>
 
-        <Col xs="content" mr={5}>
-          <Input
-            disabled={!canBeEdited}
-            width="120px"
-            height="50px"
-            placeholder={formatMessage(
-              messages.chartFormulaCaseLabelPlaceholder,
-            )}
-            value={label}
-            onBlur={onEditLabel}
-          />
-        </Col>
+          <Col xs="content">
+            <Row margin="0 !important">
+              <InequalityChooser
+                disabled={!canBeEdited}
+                onSuccessfulChange={onEditMatch}
+                inequalityValue={match}
+              />
+            </Row>
+          </Col>
+
+          <Col xs="content" mr={5}>
+            {formatMessage(messages.chartFormulaCaseEquals)}
+          </Col>
+
+          <Col xs="content" mr={5}>
+            <Input
+              disabled={!canBeEdited}
+              width="120px"
+              height="50px"
+              placeholder={formatMessage(
+                messages.chartFormulaCaseLabelPlaceholder,
+              )}
+              value={label}
+              onBlur={onEditLabel}
+            />
+          </Col>
+        </NoMarginRow>
 
         <Col xs="content">
           <ReactColor
