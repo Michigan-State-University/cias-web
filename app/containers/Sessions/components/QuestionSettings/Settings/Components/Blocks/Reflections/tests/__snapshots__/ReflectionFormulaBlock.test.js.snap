@@ -6,7 +6,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
     class="Column-sc-4zswzq-0 ekpwZH"
   >
     <button
-      class="StyledButton-d2s0gt-0 iNDYmW"
+      class="StyledButton-d2s0gt-0 bWynbR"
       color="primary"
       radius="100px"
     >
@@ -209,11 +209,12 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       width="100%"
     >
       <textarea
-        class="TextArea-sc-175uiux-0 cIMVkN"
+        class="TextArea-sc-175uiux-0 kmGeZJ"
         data-cy="text-area"
         height="auto"
         placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
         rows="5"
+        type="multiline"
         width="100%"
       />
     </div>
@@ -336,11 +337,12 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <textarea
-                class="TextArea-sc-175uiux-0 cIMVkN"
+                class="TextArea-sc-175uiux-0 kmGeZJ"
                 data-cy="text-area"
                 height="auto"
                 placeholder="Enter speech here..."
                 rows="10"
+                type="multiline"
                 width="100%"
               >
                 1

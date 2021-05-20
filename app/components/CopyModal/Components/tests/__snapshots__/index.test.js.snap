@@ -81,6 +81,7 @@ Object {
   outline: none;
   background-color: #107969;
   color: #FFFFFF;
+  border: 1px solid transparent;
   cursor: default;
   background-color: #9AA1B6;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
@@ -485,7 +486,7 @@ Object {
         class="Row-y1cs0u-0 bHvccM"
       >
         <button
-          class="StyledButton-d2s0gt-0 gZIauE"
+          class="StyledButton-d2s0gt-0 bYOfpf"
           color="primary"
           disabled=""
           radius="100px"

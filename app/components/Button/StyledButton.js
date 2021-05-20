@@ -11,13 +11,14 @@ import {
 
 const invertedStyles = color => css`
   background-color: ${colors.white};
-  color: ${themeColors[color]};
+  color: ${themeColors[color] ?? color};
   border: 1px solid ${themeColors[color]};
 `;
 
 const basicStyles = (outlined, color) => css`
-  background-color: ${outlined ? colors.white : themeColors[color]};
+  background-color: ${outlined ? colors.white : themeColors[color] ?? color};
   color: ${colors.white};
+  border: 1px solid transparent;
 `;
 
 const getHoverStyles = props => {
@@ -61,7 +62,7 @@ export const StyledButton = styled.button`
 `;
 
 StyledButton.propTypes = {
-  color: PropTypes.oneOf(['primary', 'secondary', 'warning']),
+  color: PropTypes.string,
   outlined: PropTypes.bool,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,

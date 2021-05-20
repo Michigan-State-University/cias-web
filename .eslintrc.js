@@ -14,7 +14,14 @@ module.exports = {
     'prettier/react',
     'plugin:cypress/recommended',
   ],
-  plugins: ['prettier', 'redux-saga', 'react', 'react-hooks', 'jsx-a11y'],
+  plugins: [
+    'prettier',
+    'redux-saga',
+    'react',
+    'react-hooks',
+    'jsx-a11y',
+    'jsdoc',
+  ],
   env: {
     jest: true,
     browser: true,
@@ -40,6 +47,7 @@ module.exports = {
     'import/no-unresolved': 2,
     'import/no-webpack-loader-syntax': 0,
     'import/prefer-default-export': 0,
+    'jsdoc/no-undefined-types': 1,
     'jsx-a11y/aria-props': 2,
     'jsx-a11y/heading-has-content': 0,
     'jsx-a11y/label-has-associated-control': [
@@ -92,6 +100,9 @@ module.exports = {
       webpack: {
         config: './internals/webpack/webpack.prod.babel.js',
       },
+    },
+    jsdoc: {
+      mode: 'typescript',
     },
   },
   ignorePatterns: [

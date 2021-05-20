@@ -21,11 +21,12 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
           width="100%"
         >
           <textarea
-            class="TextArea-sc-175uiux-0 cIMVkN"
+            class="TextArea-sc-175uiux-0 kmGeZJ"
             data-cy="text-area"
             height="auto"
             placeholder="Enter speech here..."
             rows="10"
+            type="multiline"
             width="100%"
           >
             1

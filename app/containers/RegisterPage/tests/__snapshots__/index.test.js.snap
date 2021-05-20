@@ -157,7 +157,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           </div>
         </div>
         <button
-          class="StyledButton-d2s0gt-0 drgoYy"
+          class="StyledButton-d2s0gt-0 hIkQqV"
           color="primary"
           height="46"
           radius="100px"
@@ -327,7 +327,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           </div>
         </div>
         <button
-          class="StyledButton-d2s0gt-0 drgoYy"
+          class="StyledButton-d2s0gt-0 hIkQqV"
           color="primary"
           height="46"
           radius="100px"

@@ -8,7 +8,8 @@ export const StyledSidePanel = styled.div`
   width: ${({ width }) => `${width}px`};
   height: 100%;
   background-color: ${colors.white};
-  box-shadow: ${boxShadows.black};
+  box-shadow: ${({ $isVisible }) => $isVisible && boxShadows.black};
+  overflow-y: auto;
 `;
 
 export const SidePanelWrapper = styled.div`

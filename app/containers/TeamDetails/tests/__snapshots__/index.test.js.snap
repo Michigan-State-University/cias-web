@@ -115,7 +115,7 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
             >
               <button
-                class="StyledButton-d2s0gt-0 jJKXqR"
+                class="StyledButton-d2s0gt-0 bbEGQm"
                 color="primary"
                 disabled=""
                 font-size="14"

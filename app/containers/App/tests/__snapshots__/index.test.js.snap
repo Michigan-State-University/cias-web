@@ -136,7 +136,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               Reporting panel
             </p>
             <button
-              class="StyledButton-d2s0gt-0 eQaPKW"
+              class="StyledButton-d2s0gt-0 doXOhZ"
               color="secondary"
               radius="5px"
               width="auto"
