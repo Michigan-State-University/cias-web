@@ -57,3 +57,9 @@ export const makeSelectVerificationSuccess = () =>
     selectAuth,
     authState => authState.verificationCodeSuccess,
   );
+
+export const makeSelectUserId = () =>
+  createSelector(
+    selectAuth,
+    authState => authState.user.id,
+  );

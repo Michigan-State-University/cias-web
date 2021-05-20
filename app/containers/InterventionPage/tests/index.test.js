@@ -97,7 +97,14 @@ describe('<InterventionPage />', () => {
     store = createTestStore({
       ...initialState,
       interventions: {
-        interventions: [{ name: 'Name', status: 'draft', sessions_size: 2 }],
+        interventions: [
+          {
+            name: 'Name',
+            status: 'draft',
+            sessions_size: 2,
+            user: { id: 'test' },
+          },
+        ],
         fetchInterventionLoading: false,
         fetchInterventionError: null,
       },

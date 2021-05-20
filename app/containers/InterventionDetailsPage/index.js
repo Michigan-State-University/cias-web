@@ -74,7 +74,7 @@ import { reorderScope } from 'models/Session/ReorderScope';
 import { reorder } from 'utils/reorder';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
-import { makeSelectUserRoles } from 'global/reducers/auth';
+import { makeSelectUserRoles, makeSelectUserId } from 'global/reducers/auth';
 
 import { archived } from 'models/Status/StatusTypes';
 import { RolePermissions } from 'models/User/RolePermissions';
@@ -116,6 +116,7 @@ export function InterventionDetailsPage({
   fetchInterventions,
   externalCopySession,
   roles,
+  userId,
   editSession,
 }) {
   const [
@@ -136,12 +137,14 @@ export function InterventionDetailsPage({
     csvGeneratedAt,
     sharedTo,
     organizationId,
+    userId: interventionOwnerId,
   } = intervention || {};
 
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
   const archivingPossible = canArchive(status);
   const deletionPossible = canDeleteSession(status);
+  const canAccessCsv = interventionOwnerId === userId;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [
@@ -381,6 +384,7 @@ export function InterventionDetailsPage({
           options={options}
           status={status}
           organizationId={organizationId}
+          canAccessCsv={canAccessCsv}
         />
 
         <GRow>
@@ -423,7 +427,10 @@ InterventionDetailsPage.propTypes = {
     sessions: PropTypes.array,
     fetchInterventionError: PropTypes.string,
     fetchInterventionLoading: PropTypes.bool,
-    intervention: PropTypes.shape({ id: PropTypes.string }),
+    intervention: PropTypes.shape({
+      id: PropTypes.string,
+      userId: PropTypes.string,
+    }),
     errors: PropTypes.shape({
       fetchInterventionError: PropTypes.string,
       createSessionError: PropTypes.string,
@@ -448,12 +455,14 @@ InterventionDetailsPage.propTypes = {
   externalCopySession: PropTypes.func,
   editSession: PropTypes.func,
   roles: PropTypes.arrayOf(PropTypes.string),
+  userId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   interventionState: makeSelectInterventionState(),
   sessionIndex: makeSelectCurrentSessionIndex(),
   roles: makeSelectUserRoles(),
+  userId: makeSelectUserId(),
 });
 
 const mapDispatchToProps = {
