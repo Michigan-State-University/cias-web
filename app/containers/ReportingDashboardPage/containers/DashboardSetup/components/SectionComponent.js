@@ -63,8 +63,8 @@ const SectionComponent = ({
       />
 
       <FullWidthContainer>
-        <Row mb={40} justify="between">
-          <Col xs={12} xl={6} mb={10}>
+        <Row mb={40} justify="around">
+          <Col xs="content" mb={40}>
             <AddChart addChart={onAddChart} />
           </Col>
           {section.charts.map(chart => {
@@ -75,9 +75,8 @@ const SectionComponent = ({
             return (
               <Col
                 key={`Chart-${chart.id}-Section-${section.id}`}
-                xs={12}
-                xl={6}
-                mb={10}
+                xs="content"
+                mb={40}
               >
                 <ChartTileUI
                   chart={chart}

@@ -13,6 +13,7 @@ export const HoverableBox = styled(Box)`
 
   ${({ $isSelected }) =>
     $isSelected && {
+      borderWidth: '2px',
       borderColor: themeColors.secondary,
     }}
 

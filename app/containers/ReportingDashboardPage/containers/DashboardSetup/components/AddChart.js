@@ -2,7 +2,7 @@ import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
-import { colors } from 'theme';
+import { colors, elements } from 'theme';
 
 import PieChartIcon from 'assets/svg/pieChart.svg';
 import BarChartIcon from 'assets/svg/barChart.svg';
@@ -25,9 +25,9 @@ const AddChart = ({ addChart }) => {
   return (
     <Box
       bg={colors.linkWater}
-      width={400}
-      minWidth={400}
-      height={300}
+      width={elements.chartTileWidth}
+      minWidth={elements.chartTileWidth}
+      height={elements.chartTileHeight}
       padding="40px"
     >
       <FullWidthContainer height="100%" width="100%">

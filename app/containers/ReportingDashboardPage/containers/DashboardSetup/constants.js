@@ -6,7 +6,7 @@ import {
   StatusPermissions,
 } from 'global/reducers/dashboardSections';
 
-import { themeColors } from 'theme';
+import { elements, themeColors } from 'theme';
 
 import { DEFAULT_COLORS } from 'components/ReactColor';
 
@@ -15,6 +15,10 @@ export const DashboardSectionsContext = createContext(initialState);
 export const ChartSettingsContext = createContext({
   statusPermissions: StatusPermissions(''),
 });
+
+export const CHART_NAME_MAX_WIDTH = elements.chartTileWidth / 2 - 50;
+export const CHART_WIDTH = elements.chartTileWidth - 50;
+export const CHART_HEIGHT = elements.chartTileHeight - 100;
 
 export const generateNewPatternForChartType = (chartType, newIndex) => {
   const pattern = {

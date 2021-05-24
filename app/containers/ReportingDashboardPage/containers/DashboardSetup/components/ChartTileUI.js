@@ -1,28 +1,96 @@
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
 
-import { colors } from 'theme';
+import { colors, elements } from 'theme';
+
+import gear from 'assets/svg/gear-pink-background.svg';
+
+import {
+  ChartStatusToColorMap,
+  ChartType,
+} from 'global/reducers/dashboardSections';
 
 import { Col, Row } from 'components/ReactGridSystem';
+import Box from 'components/Box';
+import H2 from 'components/H2';
+import Badge from 'components/Badge';
+import Icon from 'components/Icon';
+import EllipsisText from 'components/Text/EllipsisText';
 
+import { CHART_HEIGHT, CHART_NAME_MAX_WIDTH, CHART_WIDTH } from '../constants';
+import messages from '../messages';
 import { FullWidthContainer } from '../../../styled';
 import { HoverableBox } from '../styled';
+import PieChart from './PieChart';
 
-const ChartTileUI = ({ chart, onClick, isSelected }) => {
-  const handleOnClick = () => onClick(chart.id);
+const ChartTileUI = ({
+  chart: {
+    chartType,
+    formula: { defaultPattern, patterns },
+    id,
+    name,
+    status,
+  },
+  onClick,
+  isSelected,
+}) => {
+  const { formatMessage } = useIntl();
+
+  const handleOnClick = () => onClick(id);
+
+  const renderChart = useCallback(() => {
+    switch (chartType) {
+      case ChartType.PIE_CHART:
+        return <PieChart patterns={patterns} defaultPattern={defaultPattern} />;
+      default:
+        return null;
+    }
+  }, [patterns, defaultPattern]);
 
   return (
     <HoverableBox
       bg={colors.white}
-      width={400}
-      height={300}
+      width={elements.chartTileWidth}
+      height={elements.chartTileHeight}
       onClick={handleOnClick}
       $isSelected={isSelected}
+      padding={24}
       clickable
     >
       <FullWidthContainer height="100%">
-        <Row align="center" justify="center" height="100%">
-          <Col xs="content">{JSON.stringify(chart)}</Col>
+        <Row align="center" justify="center">
+          <Col xs={1} />
+
+          <Col align="center" xs={9}>
+            <Box maxWidth={CHART_NAME_MAX_WIDTH}>
+              <H2>
+                <EllipsisText text={name} />
+              </H2>
+            </Box>
+          </Col>
+
+          <Col xs={1} align="end">
+            <Icon src={gear} alt="show-settings" />
+          </Col>
+        </Row>
+
+        <Row align="center" justify="center" height={CHART_HEIGHT}>
+          <Col xs="content">
+            <Box width={CHART_WIDTH} height={CHART_HEIGHT}>
+              {renderChart()}
+            </Box>
+          </Col>
+        </Row>
+
+        <Row align="center" justify="end">
+          <Col xs="content">
+            <Badge bg={ChartStatusToColorMap[status]} color={colors.white}>
+              {formatMessage(messages.chartStatus, {
+                chartStatus: status,
+              })}
+            </Badge>
+          </Col>
         </Row>
       </FullWidthContainer>
     </HoverableBox>

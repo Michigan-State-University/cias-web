@@ -1,6 +1,5 @@
 /* eslint-disable no-param-reassign */
 import { Draft } from 'immer';
-import cloneDeep from 'lodash/cloneDeep';
 
 import { findIndexById } from 'utils/arrayUtils';
 
@@ -18,10 +17,7 @@ export const updateItemById = (draftCollection, id, updater) => {
   if (index !== -1)
     switch (updater.constructor) {
       case Function:
-        draftCollection[index] = updater(
-          cloneDeep(draftCollection[index]),
-          index,
-        );
+        draftCollection[index] = updater(draftCollection[index], index);
         break;
       case Object:
       default:
