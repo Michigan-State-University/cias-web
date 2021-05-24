@@ -4,7 +4,10 @@ import { useIntl } from 'react-intl';
 
 import { colors, themeColors } from 'theme';
 
-import { ChartStatus } from 'global/reducers/dashboardSections';
+import {
+  ChartStatus,
+  ChartStatusToColorMap,
+} from 'global/reducers/dashboardSections';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
 
@@ -95,7 +98,7 @@ const ChartSettingsTopSection = ({
 
       default:
         return (
-          <Badge bg={colors.pistachio} color={colors.white}>
+          <Badge bg={ChartStatusToColorMap[chartStatus]} color={colors.white}>
             {formatMessage(messages.chartStatus, { chartStatus })}
           </Badge>
         );

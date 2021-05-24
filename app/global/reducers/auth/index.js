@@ -34,6 +34,7 @@ export {
   makeSelectLoginFormData,
   makeSelectVerificationNeeded,
   makeSelectVerificationSuccess,
+  makeSelectUserId,
 } from './selectors';
 export {
   logOutSaga,

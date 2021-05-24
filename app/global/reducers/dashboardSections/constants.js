@@ -1,3 +1,5 @@
+import { colors } from 'theme';
+
 export const ADD_SECTION_REQUEST = 'app/dashboardSections/ADD_SECTION_REQUEST';
 export const ADD_SECTION_SUCCESS = 'app/dashboardSections/ADD_SECTION_SUCCESS';
 export const ADD_SECTION_ERROR = 'app/dashboardSections/ADD_SECTION_ERROR';
@@ -44,16 +46,30 @@ export const DELETE_CHART_ERROR = 'app/dashboardSections/DELETE_CHART_ERROR';
 
 export const SELECT_CHART_ACTION = 'app/dashboardSections/SELECT_CHART_ACTION';
 
+/**
+ * @readonly
+ * @enum {string}
+ */
 export const ChartType = {
   PIE_CHART: 'pie_chart',
   NUMERIC_BAR_CHART: 'bar_chart',
   PERCENTAGE_BAR_CHART: 'percentage_bar_chart',
 };
 
+/**
+ * @readonly
+ * @enum {string}
+ */
 export const ChartStatus = {
   DRAFT: 'draft',
   DATA_COLLECTION: 'data_collection',
   PUBLISHED: 'published',
+};
+
+export const ChartStatusToColorMap = {
+  [ChartStatus.DRAFT]: colors.jungleGreen,
+  [ChartStatus.DATA_COLLECTION]: colors.bluewood,
+  [ChartStatus.PUBLISHED]: colors.pistachio,
 };
 
 export const ALLOWED_CHART_EDIT = [ChartStatus.DRAFT];

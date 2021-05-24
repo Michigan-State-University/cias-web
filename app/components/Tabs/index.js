@@ -34,6 +34,7 @@ const Tabs = ({
     <TabsContainer {...restProps}>
       <Row data-cy="tabs" align="end">
         {children.map(child => {
+          if (!child || !child.props) return null;
           const { label, renderAsLink, hidden, linkMatch } = child.props;
 
           if (hidden) return null;
@@ -53,6 +54,8 @@ const Tabs = ({
       </Row>
       <ContentContainer {...containerProps}>
         {children.map(child => {
+          if (!child || !child.props) return null;
+
           const { label, children: content } = child.props;
           if (label !== tab) return null;
           return content;

@@ -19,4 +19,9 @@ export {
   makeSelectSelectedChart,
 } from './selectors';
 
-export { ChartType, ChartStatus, StatusPermissions } from './constants';
+export {
+  ChartType,
+  ChartStatus,
+  StatusPermissions,
+  ChartStatusToColorMap,
+} from './constants';

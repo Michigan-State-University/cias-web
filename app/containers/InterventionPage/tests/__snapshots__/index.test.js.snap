@@ -384,6 +384,27 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                 <p
                   class="Text-e4p0w3-0 fFURPd"
                 />
+                <p
+                  class="Text-e4p0w3-0 bmKPFZ"
+                  font-weight="bold"
+                >
+                  Created by: 
+                </p>
+                <p
+                  class="Text-e4p0w3-0 fFURPd"
+                >
+                  Email: 
+                </p>
+                <p
+                  class="Text-e4p0w3-0 fFURPd"
+                >
+                  First name: 
+                </p>
+                <p
+                  class="Text-e4p0w3-0 dSyDnZ"
+                >
+                  Last name: 
+                </p>
               </div>
             </div>
           </div>
