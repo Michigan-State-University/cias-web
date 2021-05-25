@@ -7,4 +7,12 @@ export default defineMessages({
     id: `${scope}.copied`,
     defaultMessage: 'Copied!',
   },
+  generateLink: {
+    id: `${scope}.generateLink`,
+    defaultMessage: 'Generate the link',
+  },
+  linkCopied: {
+    id: `${scope}.linkCopied`,
+    defaultMessage: 'Link copied!',
+  },
 });

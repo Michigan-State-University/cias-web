@@ -307,7 +307,11 @@ export const interventionReducer = (state = initialState, action) =>
         break;
 
       case SEND_SESSION_INVITE_REQUEST: {
-        const { emails: payloadEmails, sessionId } = action.payload;
+        const {
+          emails: payloadEmails,
+          sessionId,
+          shouldNotUpdateStore,
+        } = action.payload;
 
         const sessionIndex = findInterventionIndex(
           state.intervention,
@@ -321,10 +325,12 @@ export const interventionReducer = (state = initialState, action) =>
             email,
           }));
 
-          draft.intervention.sessions[sessionIndex].emails = [
-            ...state.intervention.sessions[sessionIndex].emails,
-            ...mappedEmails,
-          ];
+          if (!shouldNotUpdateStore) {
+            draft.intervention.sessions[sessionIndex].emails = [
+              ...state.intervention.sessions[sessionIndex].emails,
+              ...mappedEmails,
+            ];
+          }
         }
 
         break;

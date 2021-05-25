@@ -142,8 +142,16 @@ export const createSessionSuccess = session =>
   actionBuilder(CREATE_SESSION_SUCCESS, { session });
 export const createSessionError = () => actionBuilder(CREATE_SESSION_ERROR, {});
 
-export const sendSessionInviteRequest = (emails, sessionId) =>
-  actionBuilder(SEND_SESSION_INVITE_REQUEST, { emails, sessionId });
+export const sendSessionInviteRequest = (
+  emails,
+  sessionId,
+  shouldNotUpdateStore,
+) =>
+  actionBuilder(SEND_SESSION_INVITE_REQUEST, {
+    emails,
+    sessionId,
+    shouldNotUpdateStore,
+  });
 export const sendSessionInviteSuccess = () =>
   actionBuilder(SEND_SESSION_INVITE_SUCCESS, {});
 export const sendSessionInviteError = () =>

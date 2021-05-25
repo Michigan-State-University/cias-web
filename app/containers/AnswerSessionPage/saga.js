@@ -112,12 +112,15 @@ function* redirectToPreview({
 }
 
 function* createUserSession({ payload: { sessionId } }) {
+  const { query } = yield select(makeSelectLocation());
   const requestUrl = `/v1/user_sessions`;
 
   try {
     const { data } = yield axios.post(
       requestUrl,
-      objectToSnakeCase({ userSession: { sessionId } }),
+      objectToSnakeCase({
+        userSession: { sessionId, health_clinic_id: query.cid },
+      }),
     );
 
     const mappedData = jsonApiToObject(data, 'userSession');

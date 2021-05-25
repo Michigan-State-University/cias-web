@@ -78,7 +78,7 @@ UserList.propTypes = {
   buttonIsClose: PropTypes.bool,
   userWithLoading: PropTypes.shape({
     email: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     type: PropTypes.string,
   }),
   buttons: PropTypes.arrayOf(

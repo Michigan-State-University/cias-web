@@ -11,12 +11,10 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 
-import Box from 'components/Box';
 import CopyToClipboard from 'components/CopyToClipboard';
 import CsvFileExport from 'components/CsvFileExport';
 import Row from 'components/Row';
 import H3 from 'components/H3';
-import H2 from 'components/H2';
 
 import { colors } from 'theme';
 import { canShareWithParticipants } from 'models/Status/statusPermissions';
@@ -32,7 +30,7 @@ import ParticipantInviter from './Components/ParticipantInviter';
 import UserList from './Components/UserList';
 import messages from './messages';
 import { makeSelectCurrentSession } from './selectors';
-import { SessionIndex } from './styled';
+import ShareBoxModalParent from './Components/ShareBoxModalParent';
 
 const ShareBox = ({
   session,
@@ -78,11 +76,7 @@ const ShareBox = ({
       process.env.WEB_URL
     }/interventions/${interventionId}/sessions/${session.id}/fill`;
     return (
-      <Box height="fit-content" width={500} mt={20}>
-        <Box display="flex" align="center">
-          <SessionIndex>{position}</SessionIndex>
-          <H2 ml={15}>{name}</H2>
-        </Box>
+      <ShareBoxModalParent position={position} name={name}>
         <Row mt={20}>
           <ParticipantInviter
             disabled={!sharingPossible}
@@ -118,7 +112,7 @@ const ShareBox = ({
             </Row>
           </>
         )}
-      </Box>
+      </ShareBoxModalParent>
     );
   }
   return null;

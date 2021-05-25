@@ -24,7 +24,7 @@ export default defineMessages({
   },
   sendText: {
     id: `${scope}.sendText`,
-    defaultMessage: 'Send an email',
+    defaultMessage: 'Send emails',
   },
   copyLabel: {
     id: `${scope}.copyLabel`,
@@ -53,5 +53,41 @@ export default defineMessages({
   exportCsv: {
     id: `${scope}.exportCsv`,
     defaultMessage: 'Export emails to CSV file',
+  },
+  exampleCsvFilename: {
+    id: `${scope}.exampleCsvFilename`,
+    defaultMessage: 'example_csv_{interventionName}',
+  },
+  exportExampleCsv: {
+    id: `${scope}.exportExampleCsv`,
+    defaultMessage: 'Export example CSV to file',
+  },
+  inviteParticipant: {
+    id: `${scope}.inviteParticipant`,
+    defaultMessage: 'Invite participants',
+  },
+  invitedParticipants: {
+    id: `${scope}.invitedParticipants`,
+    defaultMessage: 'Invited ({invitedLength})',
+  },
+  generateLink: {
+    id: `${scope}.generateLink`,
+    defaultMessage: 'Generate the link',
+  },
+  selectClinicForLink: {
+    id: `${scope}.selectClinicForLink`,
+    defaultMessage: 'Select clinic to generate link for',
+  },
+  notFound: {
+    id: `${scope}.notFound`,
+    defaultMessage: 'No clinics',
+  },
+  selectClinic: {
+    id: `${scope}.selectClinic`,
+    defaultMessage: 'Select clinic',
+  },
+  emailOrganizationPlaceholder: {
+    id: `${scope}.emailOrganizationPlaceholder`,
+    defaultMessage: 'Enter participant e-mail addresses',
   },
 });
