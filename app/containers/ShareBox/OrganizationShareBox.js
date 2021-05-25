@@ -16,37 +16,38 @@ import groupBy from 'lodash/groupBy';
 import reduce from 'lodash/reduce';
 import forEach from 'lodash/forEach';
 
-import CopyToClipboard from 'components/CopyToClipboard';
-import CsvFileExport from 'components/CsvFileExport';
-import Row from 'components/Row';
-import H3 from 'components/H3';
-
-import { colors } from 'theme';
-import { canShareWithParticipants } from 'models/Status/statusPermissions';
 import {
   sendSessionInviteRequest,
   resendSessionInviteRequest,
   makeSelectInterventionLoader,
   makeSelectInterventionStatus,
 } from 'global/reducers/intervention';
-import { formatMessage } from 'utils/intlOutsideReact';
-
 import {
   makeSelectOrganization,
   fetchOrganizationRequest,
 } from 'global/reducers/organizations';
+import { colors } from 'theme';
+import { canShareWithParticipants } from 'models/Status/statusPermissions';
+
+import CopyToClipboard from 'components/CopyToClipboard';
+import CsvFileExport from 'components/CsvFileExport';
+import Row from 'components/Row';
+import H3 from 'components/H3';
 import Tabs from 'components/Tabs';
 import Box from 'components/Box';
 import Select from 'components/Select';
 import Button from 'components/Button';
 import CsvFileReader from 'components/CsvFileReader';
+
 import { emailValidator } from 'utils/validators';
-// import UserList from './Components/UserList';
-import messages from './messages';
-import { makeSelectCurrentSession } from './selectors';
+import { formatMessage } from 'utils/intlOutsideReact';
+
 import ShareBoxModalParent from './Components/ShareBoxModalParent';
 import ClinicParticipantInviter from './Components/ClinicParticipantInviter';
 import ClinicUserList from './Components/ClinicUserList';
+
+import messages from './messages';
+import { makeSelectCurrentSession } from './selectors';
 
 const OrganizationShareBox = ({
   session,

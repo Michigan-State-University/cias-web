@@ -30,6 +30,8 @@ const ClinicParticipantInviter = ({
     }
   }, [selectedClinic, emails]);
 
+  const selectDisabled = !selectClinics || selectClinics.length === 0;
+
   return (
     <Row display="flex" align="center" mb={10}>
       <ChipsInput
@@ -43,7 +45,7 @@ const ClinicParticipantInviter = ({
         ml={10}
         selectProps={{
           bg: colors.zirkon,
-          isDisabled: !selectClinics || selectClinics.length === 0,
+          isDisabled: selectDisabled,
           options: selectClinics,
           value: selectedClinic,
           onChange: setSelectedClinic,
