@@ -77,7 +77,7 @@ const SingleTile = ({
 
   const handleCsvRequest = () => sendCsv(id);
 
-  const canExportCSV = userId === user.id;
+  const canExportCSV = userId === user ? user.id : null;
 
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
