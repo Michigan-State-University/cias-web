@@ -35,6 +35,7 @@ import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReport
 import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
 import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
 import ReportingDashboardPage from 'containers/ReportingDashboardPage/Loadable';
+import HealthSystemRedirectionPage from 'containers/HealthSystemRedirectionPage/lodable';
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
@@ -75,7 +76,15 @@ export function App({ user }) {
         case Roles.eInterventionAdmin:
           return <InterventionPage />;
         case Roles.organizationAdmin:
-          return <ReportingDashboardPage />;
+        case Roles.clinicAdmin:
+          return (
+            <ReportingDashboardPage
+              view={VIEW.DASHBOARD_VIEW}
+              organizableId={user.organizableId}
+            />
+          );
+        case Roles.healthSystemAdmin:
+          return <HealthSystemRedirectionPage />;
         default:
           return NotFoundPage;
       }
@@ -174,6 +183,28 @@ export function App({ user }) {
           sidebarProps={{
             sidebarId: NAVIGATION.DEFAULT,
             activeTab: participantReportsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/health-system/:healthSystemId"
+          component={({
+            match: {
+              params: { healthSystemId },
+            },
+          }) => (
+            <ReportingDashboardPage
+              view={VIEW.DASHBOARD_VIEW}
+              organizableId={healthSystemId}
+            />
+          )}
+          protectedRoute
+          allowedRoles={[Roles.healthSystemAdmin]}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
           }}
         />
         <AppRoute exact path="/login" component={LoginPage} />

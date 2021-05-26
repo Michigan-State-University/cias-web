@@ -49,6 +49,9 @@ import {
   FETCH_CLINIC_ERROR,
   EntityType,
   SET_SHOULD_REFETCH_ACTION,
+  FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_FAILURE,
+  FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_SUCCESS,
+  FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_REQUEST,
 } from './constants';
 
 import { healthSystemReducer } from './healthSystemReducer';
@@ -56,6 +59,7 @@ import { healthSystemReducer } from './healthSystemReducer';
 export const initialState = {
   selectedEntity: null,
   organization: null,
+  organizationSelectData: null,
   cache: { organization: null },
   loaders: {
     fetchOrganization: false,
@@ -72,6 +76,7 @@ export const initialState = {
     deleteClinic: false,
     fetchOrganizationInterventions: false,
     createOrganizationIntervention: false,
+    fetchDashboardViewSelect: false,
   },
   errors: {
     fetchOrganization: null,
@@ -87,6 +92,7 @@ export const initialState = {
     editClinic: null,
     deleteClinic: null,
     fetchOrganizationInterventions: null,
+    fetchDashboardViewSelect: null,
   },
   shouldRefetch: {
     [EntityType.organization]: false,
@@ -562,6 +568,26 @@ const organizationReducer = (state = initialState, action) =>
       }
       case SET_SHOULD_REFETCH_ACTION: {
         draft.shouldRefetch[payload.type ?? state.selectedEntity.type] = true;
+        break;
+      }
+
+      case FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_REQUEST: {
+        draft.organizationSelectData = null;
+        draft.loaders.fetchDashboardViewSelect = true;
+        draft.errors.fetchDashboardViewSelect = null;
+        break;
+      }
+
+      case FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_SUCCESS: {
+        draft.organizationSelectData = payload.data;
+        draft.loaders.fetchDashboardViewSelect = false;
+        break;
+      }
+
+      case FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_FAILURE: {
+        draft.loaders.fetchDashboardViewSelect = false;
+        draft.errors.fetchDashboardViewSelect = payload.error;
+        break;
       }
     }
   });

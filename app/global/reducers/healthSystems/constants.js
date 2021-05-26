@@ -1,0 +1,6 @@
+export const FETCH_HEALTH_SYSTEMS_REQUEST =
+  'app/healthSystems/FETCH_HEALTH_SYSTEMS_REQUEST';
+export const FETCH_HEALTH_SYSTEMS_SUCCESS =
+  'app/healthSystems/FETCH_HEALTH_SYSTEMS_SUCCESS';
+export const FETCH_HEALTH_SYSTEMS_ERROR =
+  'app/healthSystems/FETCH_HEALTH_SYSTEMS_ERROR';

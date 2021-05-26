@@ -1,3 +1,5 @@
+import camelCase from 'lodash/camelCase';
+
 import { Roles } from 'models/User/UserRoles';
 
 export const CREATE_ORGANIZATION_REQUEST =
@@ -102,7 +104,15 @@ export const SELECT_ENTITY_ACTION = 'app/organizations/SELECT_ENTITY_ACTION';
 export const SET_SHOULD_REFETCH_ACTION =
   'app/organizations/SET_SHOULD_REFETCH_ACTION';
 
+export const FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_REQUEST =
+  'app/organizations/FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_REQUEST';
+export const FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_SUCCESS =
+  'app/organizations/FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_SUCCESS';
+export const FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_FAILURE =
+  'app/organizations/FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_FAILURE';
+
 const RoleToEntityUrlMap = {
+  [Roles.admin]: 'organizations',
   [Roles.eInterventionAdmin]: 'organizations',
   [Roles.organizationAdmin]: 'organizations',
   [Roles.healthSystemAdmin]: 'health_systems',
@@ -122,6 +132,15 @@ export const mapRoleToInviteEndpoint = (role, id) => {
 
   return `v1/${entityUrl}/${id}/invitations/${inviteUrl}`;
 };
+
+export const mapRoleToFetchEndpoint = (role, id) => {
+  const entityUrl = RoleToEntityUrlMap[role];
+
+  return `v1/${entityUrl}/${id}`;
+};
+
+export const mapRoleToDashboardViewJsonKey = role =>
+  camelCase(RoleToEntityUrlMap[role]).slice(0, -1);
 
 export const EntityType = {
   organization: 'ORGANIZATION',

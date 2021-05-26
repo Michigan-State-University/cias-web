@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Icon from 'components/Icon';
 import Text from 'components/Text';
 import Box from 'components/Box';
 import OrganizationIcon from 'assets/svg/organization-icon.svg';
 import { useHistory, useLocation } from 'react-router';
 import { themeColors } from 'theme';
+import ReportingDashboardItem from './RaportingDashboardItem';
 
 const OrganizationItem = ({ organization: { id, name } }) => {
   const history = useHistory();
@@ -51,28 +51,13 @@ const OrganizationItem = ({ organization: { id, name } }) => {
 
   return (
     <>
-      <Box
-        clickable
-        bg={active ? themeColors.secondary : ''}
-        bgOpacity={active ? 0.2 : 1}
-        onClick={redirect}
-        key={id}
-        padding={10}
-        ml={-10}
-        display="flex"
-        align="center"
-        mb={5}
-      >
-        <Icon
-          fill={active ? themeColors.secondary : ''}
-          mr={10}
-          src={OrganizationIcon}
-          alt="organization"
-        />
-        <Text color={active ? themeColors.secondary : ''} fontWeight="bold">
-          {name}
-        </Text>
-      </Box>
+      <ReportingDashboardItem
+        redirect={redirect}
+        active={active}
+        icon={OrganizationIcon}
+        alt={`organization-${name}`}
+        name={name}
+      />
       {active && renderButtons()}
     </>
   );

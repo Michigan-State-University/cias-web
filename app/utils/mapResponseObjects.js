@@ -35,6 +35,7 @@ export const mapCurrentUser = user => ({
   emailNotification: user.attributes.email_notification,
   smsNotification: user.attributes.sms_notification,
   feedbackCompleted: user.attributes.feedback_completed,
+  organizableId: user.attributes.organizable_id,
 });
 
 export const mapCurrentUserWithoutAttributes = user => ({

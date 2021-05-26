@@ -22,6 +22,7 @@ import DefaultSidebar from './components/DefaultSidebar';
 import { SidebarStyled } from './styled';
 import messages from './messages';
 import ReportingDashboardPanel from './containers/ReportingDashboardPanel';
+import HealthSystemPanel from './containers/HealthSystemPanel';
 
 export function Sidebar({ user: { roles }, sidebarProps }) {
   const { formatMessage } = useIntl();
@@ -36,16 +37,17 @@ export function Sidebar({ user: { roles }, sidebarProps }) {
 
     return null;
   }, [sidebarId, activeTab, roles]);
-
   return (
     <SidebarStyled>
       <Comment mb="8px !important">
-        {formatMessage(messages.sidebarNavigationHeader)}
+        {!rolePermissions.canDisplayHealthSystemsSidebar &&
+          formatMessage(messages.sidebarNavigationHeader)}
       </Comment>
       {renderSidebar()}
       {rolePermissions.canDisplayOrganizationSidebar && (
         <ReportingDashboardPanel />
       )}
+      {rolePermissions.canDisplayHealthSystemsSidebar && <HealthSystemPanel />}
     </SidebarStyled>
   );
 }

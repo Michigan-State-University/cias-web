@@ -13,7 +13,14 @@ const ALLOWED_ORGANIZATION_SIDEBAR_DISPLAY = [
   Roles.eInterventionAdmin,
 ];
 
-const FORBIDDEN_LEFT_SIDEBAR_DISPLAY = [Roles.participant, Roles.thirdParty];
+const FORBIDDEN_LEFT_SIDEBAR_DISPLAY = [
+  Roles.participant,
+  Roles.thirdParty,
+  Roles.organizationAdmin,
+  Roles.clinicAdmin,
+];
+
+const CAN_DISPLAY_ORGANIZATION_SIDEBAR = [Roles.healthSystemAdmin];
 
 export const RolePermissions = roles => ({
   canEditLogo: arraysOverlap(roles, ALLOWED_EDIT_LOGO),
@@ -26,4 +33,8 @@ export const RolePermissions = roles => ({
     ALLOWED_ORGANIZATION_SIDEBAR_DISPLAY,
   ),
   canDisplayLeftSidebar: !arraysOverlap(roles, FORBIDDEN_LEFT_SIDEBAR_DISPLAY),
+  canDisplayHealthSystemsSidebar: arraysOverlap(
+    roles,
+    CAN_DISPLAY_ORGANIZATION_SIDEBAR,
+  ),
 });

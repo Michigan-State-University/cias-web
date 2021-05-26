@@ -81,3 +81,9 @@ export const makeSelectOrganizationInterventions = () =>
     selectOrganizationState,
     substate => substate.organization.interventions,
   );
+
+export const makeSelectDashboardViewOptions = () =>
+  createSelector(
+    selectOrganizationState,
+    substate => substate.organizationSelectData,
+  );

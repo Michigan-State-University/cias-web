@@ -17,6 +17,7 @@ export {
   fetchOrganizationInterventionsRequest,
   createOrganizationInterventionRequest,
   setShouldRefetchAction,
+  fetchDashboardViewSelectOptionsRequest,
 } from './actions';
 export { organizationsReducer } from './reducer';
 export {
@@ -30,6 +31,7 @@ export {
   makeSelectOrganizationShouldRefetch,
   makeSelectOrganizationSelectedEntity,
   makeSelectOrganizationInterventions,
+  makeSelectDashboardViewOptions,
 } from './selectors';
 
 export { EntityType } from './constants';
