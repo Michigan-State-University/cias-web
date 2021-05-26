@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory, useLocation } from 'react-router';
 
+import OrganizationIcon from 'assets/svg/organization-icon.svg';
 import Text from 'components/Text';
 import Box from 'components/Box';
-import OrganizationIcon from 'assets/svg/organization-icon.svg';
-import { useHistory, useLocation } from 'react-router';
 import { themeColors } from 'theme';
+
 import ReportingDashboardItem from './RaportingDashboardItem';
 
 const OrganizationItem = ({ organization: { id, name } }) => {

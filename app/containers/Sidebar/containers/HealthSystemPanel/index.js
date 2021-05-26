@@ -6,20 +6,20 @@ import { connect } from 'react-redux';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { compose } from 'redux';
 
-import { themeColors } from 'theme';
-
-import Comment from 'components/Text/Comment';
-import ErrorAlert from 'components/ErrorAlert';
-import Spinner from 'components/Spinner';
-import Box from 'components/Box';
-
 import {
   allHealthSystemsSagas,
   fetchHealthSystemsRequest,
   makeSelectHealthSystemState,
   healthSystemsReducer,
 } from 'global/reducers/healthSystems';
-import HealthSystemItem from 'containers/Sidebar/components/HealthSystemItem';
+
+import { themeColors } from 'theme';
+import Comment from 'components/Text/Comment';
+import ErrorAlert from 'components/ErrorAlert';
+import Spinner from 'components/Spinner';
+import Box from 'components/Box';
+
+import HealthSystemItem from '../../components/HealthSystemItem';
 import messages from './messages';
 
 const HealthSystemsPanel = ({
@@ -35,6 +35,7 @@ const HealthSystemsPanel = ({
   useEffect(() => {
     fetchHealthSystems();
   }, []);
+
   const renderHealthSystems = () => {
     if (healthSystemsError) {
       return <ErrorAlert errorText={healthSystemsError} />;

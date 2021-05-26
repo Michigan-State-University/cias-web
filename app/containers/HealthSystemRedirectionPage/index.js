@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
-import { makeSelectHealthSystemState } from 'global/reducers/healthSystems';
+import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
+
+import { makeSelectHealthSystemState } from 'global/reducers/healthSystems';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 import { themeColors } from 'theme';
-import { Redirect } from 'react-router';
 
 const HealthSystemRedirectionPage = ({
   healthSystemsState: {

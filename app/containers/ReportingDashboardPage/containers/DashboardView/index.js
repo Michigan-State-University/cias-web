@@ -7,19 +7,21 @@ import { useParams } from 'react-router';
 import { Helmet } from 'react-helmet';
 import { useIntl } from 'react-intl';
 
-import { Container, Col, Row } from 'components/ReactGridSystem';
+import { injectReducer, injectSaga } from 'redux-injectors';
 
-import { ReportingDashboardPageContext } from 'containers/ReportingDashboardPage/constants';
 import {
   fetchDashboardViewSelectOptionsRequest,
   makeSelectDashboardViewOptions,
   organizationsReducer,
 } from 'global/reducers/organizations';
 import { fetchDashboardViewSelectOptionsSaga } from 'global/reducers/organizations/sagas';
-import { injectReducer, injectSaga } from 'redux-injectors';
 import { Roles } from 'models/User/UserRoles';
+import { ReportingDashboardPageContext } from 'containers/ReportingDashboardPage/constants';
+
+import { Container, Col, Row } from 'components/ReactGridSystem';
 import Select from 'components/Select';
 import { arraysOverlap } from 'utils/arrayUtils';
+
 import messages from '../../messages';
 
 const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
@@ -31,8 +33,8 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
     user: { roles },
   } = useContext(ReportingDashboardPageContext);
 
-  const isHealthClinicAdmin = roles[0] === Roles.clinicAdmin;
-  const isHealthSystemAdmin = roles[0] === Roles.healthSystemAdmin;
+  const isHealthClinicAdmin = arraysOverlap(roles, [Roles.clinicAdmin]);
+  const isHealthSystemAdmin = arraysOverlap(roles, [Roles.healthSystemAdmin]);
   const hasFullOrgAccess = arraysOverlap(roles, [
     Roles.admin,
     Roles.organizationAdmin,

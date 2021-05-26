@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import { themeColors } from 'theme';
 import Box from 'components/Box';
 import Icon from 'components/Icon';
 import Text from 'components/Text';
-import { themeColors } from 'theme';
 
 const ReportingDashboardItem = ({ active, redirect, icon, name, alt, id }) => (
   <>

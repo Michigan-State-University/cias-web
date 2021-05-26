@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory, useLocation } from 'react-router';
 
 import HealthSystemIcon from 'assets/svg/health-system-icon.svg';
-import { useHistory, useLocation } from 'react-router';
+
 import ReportingDashboardItem from './RaportingDashboardItem';
 
 const HealthSystemItem = ({ healthSystem: { id, name } }) => {
