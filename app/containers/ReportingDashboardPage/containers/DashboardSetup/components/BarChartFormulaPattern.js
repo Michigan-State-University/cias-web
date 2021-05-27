@@ -2,10 +2,7 @@ import React, { memo, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
-import BinIcon from 'assets/svg/bin-no-bg.svg';
-
 import { Col, NoMarginRow, Row } from 'components/ReactGridSystem';
-import Icon from 'components/Icon';
 import InequalityChooser from 'components/InequalityChooser';
 import ReactColor, { ColorPickerType } from 'components/ReactColor';
 
@@ -13,7 +10,7 @@ import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { ChartSettingsContext } from '../constants';
 
-const BarChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
+const BarChartFormulaPattern = ({ pattern, onEdit }) => {
   const { formatMessage } = useIntl();
 
   const {
@@ -32,15 +29,6 @@ const BarChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
     <FullWidthContainer>
       <Row mb={20} align="center" justify="between" nogutter>
         <NoMarginRow align="center" nogutter>
-          <Col xs="content">
-            <Icon
-              src={BinIcon}
-              mr={8}
-              onClick={onDelete}
-              disabled={!canBeEdited}
-            />
-          </Col>
-
           <Col xs="content">{formatMessage(messages.chartFormulaCaseIf)}</Col>
 
           <Col xs="content">
@@ -72,7 +60,6 @@ const BarChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
 };
 
 BarChartFormulaPattern.propTypes = {
-  onDelete: PropTypes.func,
   onEdit: PropTypes.func,
   pattern: PropTypes.object,
 };

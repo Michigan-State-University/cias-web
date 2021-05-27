@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { RADIAN } from 'components/Chart';
-
-const HUNDRED_PERCENT = 100;
+import { HUNDRED_PERCENT, RADIAN } from 'utils/mathUtils';
 
 /**
  * @typedef {Object} Pattern

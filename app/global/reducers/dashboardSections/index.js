@@ -20,7 +20,7 @@ export {
 } from './selectors';
 
 export {
-  ChartType,
+  ChartTypeDto,
   ChartStatus,
   StatusPermissions,
   ChartStatusToColorMap,

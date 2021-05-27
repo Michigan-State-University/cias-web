@@ -47,10 +47,11 @@ export const DELETE_CHART_ERROR = 'app/dashboardSections/DELETE_CHART_ERROR';
 export const SELECT_CHART_ACTION = 'app/dashboardSections/SELECT_CHART_ACTION';
 
 /**
+ * @description Chart Type used by the API; DTO of charts uses this type internally
  * @readonly
  * @enum {string}
  */
-export const ChartType = {
+export const ChartTypeDto = {
   PIE_CHART: 'pie_chart',
   NUMERIC_BAR_CHART: 'bar_chart',
   PERCENTAGE_BAR_CHART: 'percentage_bar_chart',

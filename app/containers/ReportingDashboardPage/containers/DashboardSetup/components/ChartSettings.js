@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import {
-  ChartType,
+  ChartTypeDto,
   deleteChartRequest,
   editChartRequest,
   StatusPermissions,
@@ -147,7 +147,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
   }, [chart.formula.patterns]);
 
   switch (chart.chartType) {
-    case ChartType.PIE_CHART:
+    case ChartTypeDto.PIE_CHART:
       return wrapper(
         <PieChartSettings
           chart={chart}
@@ -164,19 +164,15 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
           onEditStatus={onEditStatus}
         />,
       );
-    case ChartType.NUMERIC_BAR_CHART:
-    case ChartType.PERCENTAGE_BAR_CHART:
+    case ChartTypeDto.NUMERIC_BAR_CHART:
+    case ChartTypeDto.PERCENTAGE_BAR_CHART:
       return wrapper(
         <BarChartSettings
           chart={chart}
-          addPatternLoader={isAddingPattern}
           changeStatusLoader={isChangingStatus}
-          onAddFormulaPattern={onAddFormulaPattern}
           onDelete={onDelete}
-          onDeleteFormulaPattern={onDeleteFormulaPattern}
           onEditChartType={onEditChartType}
           onEditDescription={onEditDescription}
-          onEditFormulaDefaultPattern={onEditFormulaDefaultPattern}
           onEditFormulaPattern={onEditFormulaPattern}
           onEditFormulaPayload={onEditFormulaPayload}
           onEditName={onEditName}

@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-import { ChartStatus, ChartType } from 'global/reducers/dashboardSections';
+import { ChartStatus, ChartTypeDto } from 'global/reducers/dashboardSections';
 
 import { colors } from 'theme';
 
@@ -55,9 +55,9 @@ export default defineMessages({
   chartSettingsHeader: {
     id: `${scope}.chartSettingsHeader`,
     defaultMessage: `{chartType, select,
-      ${ChartType.NUMERIC_BAR_CHART} {Bar Chart Settings}
-      ${ChartType.PERCENTAGE_BAR_CHART} {Bar Chart Settings}
-      ${ChartType.PIE_CHART} {Pie Chart Settings}
+      ${ChartTypeDto.NUMERIC_BAR_CHART} {Bar Chart Settings}
+      ${ChartTypeDto.PERCENTAGE_BAR_CHART} {Bar Chart Settings}
+      ${ChartTypeDto.PIE_CHART} {Pie Chart Settings}
     }`,
   },
   chartSettingsDelete: {
@@ -124,10 +124,12 @@ export default defineMessages({
     id: `${scope}.chartSettingsChartValuesDescription`,
     defaultMessage: `{chartType, select,
       ${
-        ChartType.NUMERIC_BAR_CHART
+        ChartTypeDto.NUMERIC_BAR_CHART
       } {The maximum Y-axis value will be the highest number of participants
                                       that match the criteria over the given time period}
-      ${ChartType.PERCENTAGE_BAR_CHART} {The maximum Y-axis value will be 100%}
+      ${
+        ChartTypeDto.PERCENTAGE_BAR_CHART
+      } {The maximum Y-axis value will be 100%}
     }`,
   },
   chartSettingsTrendLineOption: {
