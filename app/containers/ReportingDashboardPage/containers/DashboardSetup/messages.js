@@ -108,6 +108,10 @@ export default defineMessages({
     id: `${scope}.chartSettingsFormulaLabel`,
     defaultMessage: '<b>Formula *</b>',
   },
+  chartSettingsAddVariable: {
+    id: `${scope}.chartSettingsAddVariable`,
+    defaultMessage: 'Add variable',
+  },
   chartSettingsChartValues: {
     id: `${scope}.chartSettingsChartValues`,
     defaultMessage: '<b>Chart Values</b>',

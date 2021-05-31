@@ -25,12 +25,14 @@ const Accordion = ({
 
   const renderCollapse = (child, index) => {
     const {
-      children: content,
-      label,
-      color,
-      deleteActive,
-      'data-cy': childCypressId,
-    } = child.props;
+      props: {
+        children: content,
+        label,
+        color,
+        deleteActive,
+        'data-cy': childCypressId,
+      },
+    } = child;
 
     const handleToggle = () => {
       let newIndex = index;
