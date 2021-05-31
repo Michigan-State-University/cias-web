@@ -11,16 +11,17 @@ const ALLOWED_DOWNLOAD_INTERVENTION_CSV = [
 const ALLOWED_ORGANIZATION_SIDEBAR_DISPLAY = [
   Roles.admin,
   Roles.eInterventionAdmin,
+  Roles.clinicAdmin,
 ];
 
 const FORBIDDEN_LEFT_SIDEBAR_DISPLAY = [
   Roles.participant,
   Roles.thirdParty,
   Roles.organizationAdmin,
-  Roles.clinicAdmin,
+  Roles.healthSystemAdmin,
 ];
 
-const CAN_DISPLAY_ORGANIZATION_SIDEBAR = [Roles.healthSystemAdmin];
+const FORBIDDEN_FULL_ORGANIZATIONS_ACCESS = [Roles.clinicAdmin];
 
 export const RolePermissions = roles => ({
   canEditLogo: arraysOverlap(roles, ALLOWED_EDIT_LOGO),
@@ -33,8 +34,8 @@ export const RolePermissions = roles => ({
     ALLOWED_ORGANIZATION_SIDEBAR_DISPLAY,
   ),
   canDisplayLeftSidebar: !arraysOverlap(roles, FORBIDDEN_LEFT_SIDEBAR_DISPLAY),
-  canDisplayHealthSystemsSidebar: arraysOverlap(
+  canAccessOrganizations: !arraysOverlap(
     roles,
-    CAN_DISPLAY_ORGANIZATION_SIDEBAR,
+    FORBIDDEN_FULL_ORGANIZATIONS_ACCESS,
   ),
 });

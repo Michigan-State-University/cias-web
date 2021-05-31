@@ -136,7 +136,9 @@ export const mapRoleToInviteEndpoint = (role, id) => {
 export const mapRoleToFetchEndpoint = (role, id) => {
   const entityUrl = RoleToEntityUrlMap[role];
 
-  return `v1/${entityUrl}/${id}`;
+  if (role !== Roles.clinicAdmin) return `v1/${entityUrl}/${id}`;
+
+  return `v1/${entityUrl}?organization_id=${id}`;
 };
 
 export const mapRoleToDashboardViewJsonKey = role =>

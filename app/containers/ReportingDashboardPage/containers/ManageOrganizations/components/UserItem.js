@@ -28,6 +28,8 @@ const UserItem = ({ avatarColor, user, onClick }) => {
     [],
   );
 
+  const fullNameString = fullName || `${firstName} ${lastName}`;
+
   if (active)
     return wrapper(
       <>
@@ -43,7 +45,7 @@ const UserItem = ({ avatarColor, user, onClick }) => {
         <EllipsisText
           fontWeight="bold"
           maxWidth="200px"
-          text={fullName.trim() || email}
+          text={fullNameString.trim() || email}
         />
       </>,
     );

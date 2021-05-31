@@ -43,22 +43,22 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
 
   useEffect(() => {
     fetchSelectOptions(organizableId || organizationId);
-  }, []);
+  }, [organizableId, organizationId]);
 
   const mapHealthClinic = ({ id, name }) => ({
     label: name,
     value: id,
   });
-
   const mappedSelectOptions = useMemo(() => {
     if (!selectOptions) return null;
-    if (isHealthClinicAdmin) {
-      return selectOptions.map(mapHealthClinic);
-    }
-    if (isHealthSystemAdmin || hasFullOrgAccess) {
-      const selectOptionsSource = isHealthSystemAdmin
+    if (isHealthClinicAdmin || isHealthSystemAdmin) {
+      const selectOptionsSource = isHealthClinicAdmin
         ? selectOptions
-        : selectOptions[0].healthSystems;
+        : selectOptions[0].healthClinics;
+      return selectOptionsSource.map(mapHealthClinic);
+    }
+    if (hasFullOrgAccess) {
+      const selectOptionsSource = selectOptions[0].healthSystems;
       return selectOptionsSource.map(({ name, healthClinics }) => ({
         label: name,
         options: healthClinics.map(mapHealthClinic),
@@ -68,8 +68,8 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
 
   useEffect(() => {
     if (mappedSelectOptions) {
-      if (isHealthClinicAdmin) {
-        setSelectedValue(mappedSelectOptions[0]);
+      if (isHealthClinicAdmin || isHealthSystemAdmin) {
+        setSelectedValue(mappedSelectOptions);
       } else {
         const allHealthClinics = mappedSelectOptions.reduce(
           (arr, { options }) => [...arr, ...options],
@@ -91,7 +91,6 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
             <Select
               width={500}
               selectProps={{
-                isDisabled: isHealthClinicAdmin,
                 options: mappedSelectOptions,
                 value: selectedValue,
                 onChange: setSelectedValue,

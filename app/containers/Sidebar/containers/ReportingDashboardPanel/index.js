@@ -34,6 +34,7 @@ const ReportingDashboardPanel = ({
   fetchOrganizations,
   createOrganization,
   newOrganizationLoading,
+  canAccessOrganizations,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -53,33 +54,41 @@ const ReportingDashboardPanel = ({
       return <Spinner color={themeColors.secondary} />;
     }
     return organizations.map(organization => (
-      <OrganizationItem organization={organization} key={organization.id} />
+      <OrganizationItem
+        canAccessOrganizations={canAccessOrganizations}
+        organization={organization}
+        key={organization.id}
+      />
     ));
   };
 
   return (
     <Box width="100%">
-      <Comment
-        width="100%"
-        pt={20}
-        mt={20}
-        borderTop={`1px solid ${colors.botticelli}`}
-      >
-        {formatMessage(messages.reportingPanel)}
-      </Comment>
-      <Button
-        hoverable
-        radius="5px"
-        my={20}
-        width="auto"
-        px={10}
-        inverted
-        color="secondary"
-        onClick={addNewOrganization}
-      >
-        {formatMessage(messages.addOrganization)}
-      </Button>
-      {newOrganizationLoading && <Spinner color={themeColors.secondary} />}
+      {canAccessOrganizations && (
+        <>
+          <Comment
+            width="100%"
+            pt={20}
+            mt={20}
+            borderTop={`1px solid ${colors.botticelli}`}
+          >
+            {formatMessage(messages.reportingPanel)}
+          </Comment>
+          <Button
+            hoverable
+            radius="5px"
+            my={20}
+            width="auto"
+            px={10}
+            inverted
+            color="secondary"
+            onClick={addNewOrganization}
+          >
+            {formatMessage(messages.addOrganization)}
+          </Button>
+          {newOrganizationLoading && <Spinner color={themeColors.secondary} />}
+        </>
+      )}
       {renderHealthSystems()}
     </Box>
   );
@@ -89,6 +98,7 @@ ReportingDashboardPanel.propTypes = {
   organizations: PropTypes.array,
   organizationsLoading: PropTypes.bool,
   newOrganizationLoading: PropTypes.bool,
+  canAccessOrganizations: PropTypes.bool,
   organizationsError: PropTypes.any,
   fetchOrganizations: PropTypes.func,
   createOrganization: PropTypes.func,
