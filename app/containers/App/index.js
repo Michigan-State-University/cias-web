@@ -35,8 +35,8 @@ import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReport
 import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
 import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
 import ReportingDashboardPage from 'containers/ReportingDashboardPage/Loadable';
+import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable';
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
-
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 import IdleTimer from 'components/IdleTimer/Loadable';
 
@@ -75,7 +75,15 @@ export function App({ user }) {
         case Roles.eInterventionAdmin:
           return <InterventionPage />;
         case Roles.organizationAdmin:
-          return <ReportingDashboardPage />;
+        case Roles.healthSystemAdmin:
+          return (
+            <ReportingDashboardPage
+              view={VIEW.DASHBOARD_VIEW}
+              organizableId={user.organizableId}
+            />
+          );
+        case Roles.clinicAdmin:
+          return <ClinicAdminRedirectPage />;
         default:
           return NotFoundPage;
       }
@@ -153,6 +161,7 @@ export function App({ user }) {
             Roles.admin,
             Roles.eInterventionAdmin,
             Roles.organizationAdmin,
+            Roles.clinicAdmin,
           ]}
           sidebarProps={{
             sidebarId: NAVIGATION.DEFAULT,

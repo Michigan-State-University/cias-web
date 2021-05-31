@@ -51,6 +51,9 @@ import {
   FETCH_CLINIC_SUCCESS,
   FETCH_CLINIC_ERROR,
   SET_SHOULD_REFETCH_ACTION,
+  FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_FAILURE,
+  FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_REQUEST,
+  FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_SUCCESS,
 } from './constants';
 
 export const fetchOrganizationsRequest = () =>
@@ -170,3 +173,11 @@ export const selectEntityAction = (id, type, parentId) =>
 
 export const setShouldRefetchAction = type =>
   actionBuilder(SET_SHOULD_REFETCH_ACTION, { type });
+
+export const fetchDashboardViewSelectOptionsRequest = organizableId =>
+  actionBuilder(FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_REQUEST, { organizableId });
+
+export const fetchDashboardViewSelectOptionsSuccess = data =>
+  actionBuilder(FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_SUCCESS, { data });
+export const fetchDashboardViewSelectOptionsFailure = error =>
+  actionBuilder(FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_FAILURE, { error });

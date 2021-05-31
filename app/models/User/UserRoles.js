@@ -10,7 +10,7 @@ export const Roles = {
   organizationAdmin: 'organization_admin',
   eInterventionAdmin: 'e_intervention_admin',
   healthSystemAdmin: 'health_system_admin',
-  clinicAdmin: 'clinic_admin',
+  clinicAdmin: 'health_clinic_admin',
   allRoles: [
     'admin',
     'team_admin',
@@ -20,7 +20,7 @@ export const Roles = {
     'organization_admin',
     'e_intervention_admin',
     'health_system_admin',
-    'clinic_admin',
+    'health_clinic_admin',
   ],
 };
 

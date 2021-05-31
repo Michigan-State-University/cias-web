@@ -9,4 +9,5 @@ export const VIEW = {
 export const ReportingDashboardPageContext = createContext({
   user: null,
   organizationId: '',
+  organizableId: '',
 });

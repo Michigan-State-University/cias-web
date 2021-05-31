@@ -13,11 +13,13 @@ import DashboardView from './containers/DashboardView/Loadable';
 
 import { VIEW, ReportingDashboardPageContext } from './constants';
 
-const ReportingDashboardPage = ({ user, view }) => {
+const ReportingDashboardPage = ({ user, view, organizableId }) => {
   const { organizationId } = useParams();
 
   const withContext = component => (
-    <ReportingDashboardPageContext.Provider value={{ user, organizationId }}>
+    <ReportingDashboardPageContext.Provider
+      value={{ user, organizationId, organizableId }}
+    >
       {component}
     </ReportingDashboardPageContext.Provider>
   );
@@ -37,6 +39,7 @@ const ReportingDashboardPage = ({ user, view }) => {
 ReportingDashboardPage.propTypes = {
   user: PropTypes.shape({ roles: PropTypes.arrayOf(PropTypes.string) }),
   view: PropTypes.string,
+  organizableId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

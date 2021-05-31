@@ -1,17 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory, useLocation } from 'react-router';
 
-import Icon from 'components/Icon';
+import OrganizationIcon from 'assets/svg/organization-icon.svg';
 import Text from 'components/Text';
 import Box from 'components/Box';
-import OrganizationIcon from 'assets/svg/organization-icon.svg';
-import { useHistory, useLocation } from 'react-router';
 import { themeColors } from 'theme';
 
-const OrganizationItem = ({ organization: { id, name } }) => {
+import ReportingDashboardItem from './ReportingDashboardItem';
+
+const OrganizationItem = ({
+  organization: { id, name },
+  canAccessOrganizations,
+}) => {
   const history = useHistory();
   const location = useLocation();
-  const redirect = () => history.push(`/organization/${id}`);
+  const redirect = () => {
+    const suffix = canAccessOrganizations ? `` : `/dashboard`;
+    history.push(`/organization/${id}${suffix}`);
+  };
   const active = location.pathname.includes(`organization/${id}`);
 
   const buttons = [
@@ -51,29 +58,14 @@ const OrganizationItem = ({ organization: { id, name } }) => {
 
   return (
     <>
-      <Box
-        clickable
-        bg={active ? themeColors.secondary : ''}
-        bgOpacity={active ? 0.2 : 1}
-        onClick={redirect}
-        key={id}
-        padding={10}
-        ml={-10}
-        display="flex"
-        align="center"
-        mb={5}
-      >
-        <Icon
-          fill={active ? themeColors.secondary : ''}
-          mr={10}
-          src={OrganizationIcon}
-          alt="organization"
-        />
-        <Text color={active ? themeColors.secondary : ''} fontWeight="bold">
-          {name}
-        </Text>
-      </Box>
-      {active && renderButtons()}
+      <ReportingDashboardItem
+        redirect={redirect}
+        active={active}
+        icon={OrganizationIcon}
+        alt={`organization-${name}`}
+        name={name}
+      />
+      {active && canAccessOrganizations && renderButtons()}
     </>
   );
 };
@@ -83,6 +75,7 @@ OrganizationItem.propTypes = {
     name: PropTypes.string,
     id: PropTypes.string,
   }),
+  canAccessOrganizations: PropTypes.bool,
 };
 
 export default OrganizationItem;
