@@ -16,12 +16,18 @@ import Box from 'components/Box';
 
 import messages from '../messages';
 
-const SessionRow = ({ id, isInitialSession, isLast, name, onClick }) => {
+const InterventionRow = ({
+  id,
+  isInitialIntervention,
+  isLast,
+  name,
+  onClick,
+}) => {
   const { formatMessage } = useIntl();
 
   return (
     <Row
-      data-testid={`${id}-select-session`}
+      data-testid={`${id}-select-intervention`}
       mb={!isLast && 15}
       onClick={() => onClick(id)}
       align="center"
@@ -29,7 +35,7 @@ const SessionRow = ({ id, isInitialSession, isLast, name, onClick }) => {
     >
       <Img
         src={
-          isInitialSession
+          isInitialIntervention
             ? presentationProjectorSelected
             : presentationProjector
         }
@@ -38,11 +44,11 @@ const SessionRow = ({ id, isInitialSession, isLast, name, onClick }) => {
       <Box mr={10}>
         <EllipsisText
           text={name}
-          fontWeight={isInitialSession ? 'bold' : ''}
+          fontWeight={isInitialIntervention ? 'bold' : ''}
           fontSize={13}
         />
       </Box>
-      {isInitialSession && (
+      {isInitialIntervention && (
         <Badge bg={themeColors.secondary} color={colors.white}>
           {formatMessage(messages.selectedInterventionBadge)}
         </Badge>
@@ -51,12 +57,12 @@ const SessionRow = ({ id, isInitialSession, isLast, name, onClick }) => {
   );
 };
 
-SessionRow.propTypes = {
+InterventionRow.propTypes = {
   id: PropTypes.string,
   isLast: PropTypes.bool,
-  isInitialSession: PropTypes.bool,
+  isInitialIntervention: PropTypes.bool,
   onClick: PropTypes.func,
   name: PropTypes.string,
 };
 
-export default memo(SessionRow);
+export default memo(InterventionRow);

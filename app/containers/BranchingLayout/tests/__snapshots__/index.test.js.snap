@@ -12,24 +12,6 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -106,7 +88,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   flex-grow: 1;
 }
 
-.c13 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -121,50 +103,12 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c15 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
   margin-top: 20px;
-}
-
-.c8 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  padding: 30px;
-}
-
-.c9 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  min-width: -webkit-max-content;
-  min-width: -moz-max-content;
-  min-width: max-content;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  border-radius: 0;
-  border-radius: 0;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
 }
 
 .c4 {
@@ -181,7 +125,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   text-decoration: underline;
 }
 
-.c14 {
+.c9 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -194,32 +138,17 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c14:focus {
+.c9:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c14:disabled {
+.c9:disabled {
   color: #ABBBD1;
 }
 
 .c11 {
-  width: auto;
-  height: auto;
-}
-
-.c12 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 18px;
-  line-height: 130%;
-  margin-top: 15px;
-  color: rgba(176,186,201,1);
-  color: rgba(176,186,201,1);
-}
-
-.c16 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -242,26 +171,10 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c16:hover {
+.c11:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 @media only screen and (min-width:768px) {
@@ -312,53 +225,17 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
           >
             <div
               class="c7"
-            >
-              <div
-                class="c0"
-              >
-                <div
-                  class="c0"
-                >
-                  <div
-                    class="c8"
-                  >
-                    <div
-                      class="c9"
-                      data-testid="no-content"
-                      display="flex"
-                      height="100%"
-                      width="100%"
-                    >
-                      <div
-                        class="c10"
-                      >
-                        <img
-                          alt="No content"
-                          class="c11"
-                          src="IMAGE_MOCK"
-                        />
-                        <h2
-                          class="c12"
-                          color="#B0BAC9"
-                        >
-                          No variables defined yet
-                        </h2>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            />
           </div>
         </div>
       </div>
     </div>
     <div
-      class="c13"
+      class="c8"
       width="100%"
     >
       <textarea
-        class="c14"
+        class="c9"
         data-cy="text-area"
         height="auto"
         placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
@@ -368,7 +245,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
       />
     </div>
     <div
-      class="c15 c16"
+      class="c10 c11"
     >
       + Add case
     </div>

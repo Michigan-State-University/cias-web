@@ -1,4 +1,5 @@
 export {
+  fetchInterventionsRequest,
   fetchSessionsRequest,
   fetchQuestionGroupsRequest,
   changeViewAction,
@@ -10,6 +11,7 @@ export {
   makeSelectCopyModalLoader,
   makeSelectQuestionGroups,
   makeSelectQuestions,
+  makeSelectInterventions,
 } from './selectors';
 
 export { allCopyModalSagas } from './sagas';

@@ -4,53 +4,51 @@
  *
  */
 
-import React, { memo, ReactNode } from 'react';
+import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { PieChart, Pie } from 'recharts';
+import { Cell } from 'recharts';
 
-import { StyledResponsiveContainer } from 'components/Chart/styled';
+import BarChartComponent from './BarChartComponent';
+import PieChartComponent from './PieChartComponent';
 
-import { ChartType, RADIAN } from './constants';
+import { ChartType } from './constants';
 
-/**
- * @typedef {Object} Props
- * @property {string} type
- * @property {ReactNode| ReactNode[]} children
- */
-
-/**
- * @type {React.ForwardRefExoticComponent<Props>}
- */
-const Chart = React.forwardRef(({ type, children, ...chartProps }, ref) => {
-  const wrapper = component => (
-    <StyledResponsiveContainer width="100%" height="100%">
-      {component}
-    </StyledResponsiveContainer>
+const Chart = ({ data, generateCellColor, type, ...chartProps }) => {
+  const commonProps = useMemo(
+    () => ({
+      data,
+      ...chartProps,
+    }),
+    [data, chartProps],
   );
+
+  const renderCells = () =>
+    data.map((entry, index) => (
+      <Cell
+        key={`cell-${index}`}
+        fill={generateCellColor ? generateCellColor(entry, index) : ''}
+      />
+    ));
 
   switch (type) {
     case ChartType.PIE:
-    default:
-      return wrapper(
-        <PieChart>
-          <Pie
-            ref={ref}
-            startAngle={90}
-            endAngle={450}
-            stroke="none"
-            {...chartProps}
-          >
-            {children}
-          </Pie>
-        </PieChart>,
+      return (
+        <PieChartComponent {...commonProps}>{renderCells()}</PieChartComponent>
       );
-  }
-});
 
-Chart.propTypes = {
-  type: PropTypes.string,
-  children: PropTypes.arrayOf(PropTypes.node),
+    case ChartType.BAR:
+      return <BarChartComponent {...commonProps} />;
+
+    default:
+      return null;
+  }
 };
 
-export { ChartType, RADIAN };
+Chart.propTypes = {
+  data: PropTypes.arrayOf(PropTypes.object),
+  generateCellColor: PropTypes.func,
+  type: PropTypes.string,
+};
+
+export { ChartType };
 export default memo(Chart);

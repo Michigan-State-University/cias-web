@@ -8,7 +8,7 @@ import gear from 'assets/svg/gear-pink-background.svg';
 
 import {
   ChartStatusToColorMap,
-  ChartType,
+  ChartTypeDto,
 } from 'global/reducers/dashboardSections';
 
 import { Col, Row } from 'components/ReactGridSystem';
@@ -22,6 +22,7 @@ import { CHART_HEIGHT, CHART_NAME_MAX_WIDTH, CHART_WIDTH } from '../constants';
 import messages from '../messages';
 import { FullWidthContainer } from '../../../styled';
 import { HoverableBox } from '../styled';
+import BarChart from './BarChart';
 import PieChart from './PieChart';
 
 const ChartTileUI = ({
@@ -31,9 +32,10 @@ const ChartTileUI = ({
     id,
     name,
     status,
+    trendLine,
   },
-  onClick,
   isSelected,
+  onClick,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -41,12 +43,24 @@ const ChartTileUI = ({
 
   const renderChart = useCallback(() => {
     switch (chartType) {
-      case ChartType.PIE_CHART:
-        return <PieChart patterns={patterns} defaultPattern={defaultPattern} />;
+      case ChartTypeDto.PIE_CHART:
+        return <PieChart defaultPattern={defaultPattern} patterns={patterns} />;
+
+      case ChartTypeDto.NUMERIC_BAR_CHART:
+      case ChartTypeDto.PERCENTAGE_BAR_CHART:
+        return (
+          <BarChart
+            chartType={chartType}
+            defaultPattern={defaultPattern}
+            patterns={patterns}
+            trendLine={trendLine}
+          />
+        );
+
       default:
         return null;
     }
-  }, [patterns, defaultPattern]);
+  }, [patterns, defaultPattern, chartType, trendLine]);
 
   return (
     <HoverableBox
@@ -99,8 +113,8 @@ const ChartTileUI = ({
 
 ChartTileUI.propTypes = {
   chart: PropTypes.object,
-  onClick: PropTypes.func,
   isSelected: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 export default memo(ChartTileUI);

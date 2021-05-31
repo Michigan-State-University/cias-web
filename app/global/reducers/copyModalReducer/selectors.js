@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+
 import { initialState } from './reducer';
 
 const sessions = state => state.copyModal || initialState;
@@ -7,6 +8,12 @@ export const makeSelectSessionsState = () =>
   createSelector(
     sessions,
     substate => substate,
+  );
+
+export const makeSelectInterventions = () =>
+  createSelector(
+    sessions,
+    substate => substate.interventions,
   );
 
 export const makeSelectSessions = () =>

@@ -18,14 +18,16 @@ import { MainAppContainer, PageContainer, RowBelowNavbar } from './styled';
 class AppRoute extends Route {
   render() {
     const {
-      protectedRoute,
-      allowedRoles,
-      user,
-      navbarProps,
-      sidebarProps,
-      computedMatch,
-      location,
-    } = this.props;
+      props: {
+        protectedRoute,
+        allowedRoles,
+        user,
+        navbarProps,
+        sidebarProps,
+        computedMatch,
+        location,
+      },
+    } = this;
 
     const rolePermissions = RolePermissions(user?.roles);
 

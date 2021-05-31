@@ -277,24 +277,6 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c52 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 .c19 {
   width: auto;
   height: auto;
@@ -304,16 +286,6 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
 .c24 {
   width: auto;
   height: auto;
-}
-
-.c49 {
-  width: auto;
-  height: auto;
-  width: -webkit-min-content;
-  width: -moz-min-content;
-  width: min-content;
-  margin-bottom: 10px;
-  cursor: pointer;
 }
 
 .c0 {
@@ -417,7 +389,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   flex-grow: 1;
 }
 
-.c54 {
+.c49 {
   width: auto;
   height: auto;
   display: block;
@@ -432,50 +404,12 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c56 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
-.c50 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  padding: 30px;
-}
-
 .c51 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 100%;
-  height: 100%;
-  min-width: -webkit-max-content;
-  min-width: -moz-max-content;
-  min-width: max-content;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  border-radius: 0;
-  border-radius: 0;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  justify-items: center;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  margin-top: 20px;
 }
 
 .c23 {
@@ -501,16 +435,6 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   font-size: 18px;
   line-height: 130%;
   color: #2F3850;
-}
-
-.c53 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 18px;
-  line-height: 130%;
-  margin-top: 15px;
-  color: rgba(176,186,201,1);
-  color: rgba(176,186,201,1);
 }
 
 .c6 {
@@ -654,7 +578,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c55 {
+.c50 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -667,13 +591,13 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c55:focus {
+.c50:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c55:disabled {
+.c50:disabled {
   color: #ABBBD1;
 }
 
@@ -794,7 +718,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   transform: translateX(18px);
 }
 
-.c57 {
+.c52 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -817,26 +741,10 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c57:hover {
+.c52:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
 }
 
 @media only screen and (min-width:768px) {
@@ -1208,58 +1116,17 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
                   >
                     <div
                       class="c48"
-                    >
-                      <div
-                        class="c41"
-                      >
-                        <img
-                          class="c49"
-                          src="IMAGE_MOCK"
-                          width="min-content"
-                        />
-                        <div
-                          class="c41"
-                        >
-                          <div
-                            class="c50"
-                          >
-                            <div
-                              class="c51"
-                              data-testid="no-content"
-                              display="flex"
-                              height="100%"
-                              width="100%"
-                            >
-                              <div
-                                class="c52"
-                              >
-                                <img
-                                  alt="No content"
-                                  class="c24"
-                                  src="IMAGE_MOCK"
-                                />
-                                <h2
-                                  class="c10 c53"
-                                  color="#B0BAC9"
-                                >
-                                  No variables defined yet
-                                </h2>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    />
                   </div>
                 </div>
               </div>
             </div>
             <div
-              class="c54"
+              class="c49"
               width="100%"
             >
               <textarea
-                class="c55"
+                class="c50"
                 data-cy="text-area"
                 height="auto"
                 placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
@@ -1269,7 +1136,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               />
             </div>
             <div
-              class="c56 c57"
+              class="c51 c52"
             >
               + Add case
             </div>

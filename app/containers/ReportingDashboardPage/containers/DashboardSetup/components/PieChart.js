@@ -1,6 +1,5 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Cell } from 'recharts';
 
 import Chart, { ChartType } from 'components/Chart';
 
@@ -8,6 +7,7 @@ import {
   generatePieChartLabel,
   generatePieChartPreviewData,
 } from '../generatePieChartData';
+import { Y_AXIS_KEY } from '../constants';
 
 const PieChart = ({ defaultPattern, patterns }) => {
   const data = useMemo(
@@ -15,17 +15,16 @@ const PieChart = ({ defaultPattern, patterns }) => {
     [patterns, defaultPattern],
   );
 
+  const generateCellColor = useCallback(dataItem => dataItem.color, []);
+
   return (
     <Chart
       type={ChartType.PIE}
       data={data}
-      dataKey="value"
+      dataKey={Y_AXIS_KEY}
       label={generatePieChartLabel}
-    >
-      {data.map((entry, index) => (
-        <Cell key={`cell-${index}`} fill={entry.color} />
-      ))}
-    </Chart>
+      generateCellColor={generateCellColor}
+    />
   );
 };
 

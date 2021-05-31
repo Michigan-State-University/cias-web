@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 import {
-  ChartType,
+  ChartTypeDto,
   initialState,
   StatusPermissions,
 } from 'global/reducers/dashboardSections';
@@ -20,6 +20,9 @@ export const CHART_NAME_MAX_WIDTH = elements.chartTileWidth / 2 - 50;
 export const CHART_WIDTH = elements.chartTileWidth - 50;
 export const CHART_HEIGHT = elements.chartTileHeight - 100;
 
+export const X_AXIS_KEY = 'name';
+export const Y_AXIS_KEY = 'value';
+
 export const generateNewPatternForChartType = (chartType, newIndex) => {
   const pattern = {
     color: DEFAULT_COLORS[newIndex] ?? themeColors.secondary,
@@ -27,10 +30,10 @@ export const generateNewPatternForChartType = (chartType, newIndex) => {
   };
 
   switch (chartType) {
-    case ChartType.PIE_CHART:
+    case ChartTypeDto.PIE_CHART:
       return { ...pattern, label: '' };
-    case ChartType.NUMERIC_BAR_CHART:
-    case ChartType.PERCENTAGE_BAR_CHART:
+    case ChartTypeDto.NUMERIC_BAR_CHART:
+    case ChartTypeDto.PERCENTAGE_BAR_CHART:
       return pattern;
     default:
       return null;

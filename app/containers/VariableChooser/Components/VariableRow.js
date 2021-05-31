@@ -12,7 +12,7 @@ import Text from 'components/Text';
 import Img from 'components/Img';
 import Badge from 'components/Badge';
 
-export const VariableRow = ({ id, subtitle, isLast, onClick, variable }) => (
+const VariableRow = ({ id, subtitle, isLast, onClick, variable }) => (
   <Row
     data-testid={`${id}-select-variable`}
     mb={!isLast && 15}
@@ -51,3 +51,5 @@ VariableRow.propTypes = {
   subtitle: PropTypes.string,
   variable: PropTypes.string,
 };
+
+export default VariableRow;

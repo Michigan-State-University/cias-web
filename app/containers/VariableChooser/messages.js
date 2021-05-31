@@ -15,11 +15,15 @@ export default defineMessages({
   },
   noVariables: {
     id: `${scope}.noVariables`,
-    defaultMessage: 'No variables defined yet',
+    defaultMessage: 'No Variables defined yet',
   },
   noSessions: {
     id: `${scope}.noSessions`,
-    defaultMessage: 'No sessions to choose',
+    defaultMessage: 'No Sessions to choose',
+  },
+  noInterventions: {
+    id: `${scope}.noInterventions`,
+    defaultMessage: 'No Interventions to choose',
   },
   selectedInterventionBadge: {
     id: `${scope}.selectedInterventionBadge`,
