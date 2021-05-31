@@ -35,7 +35,7 @@ import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReport
 import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
 import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
 import ReportingDashboardPage from 'containers/ReportingDashboardPage/Loadable';
-import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Lodable';
+import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable';
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 import IdleTimer from 'components/IdleTimer/Loadable';
