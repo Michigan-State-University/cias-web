@@ -60,6 +60,7 @@ const BarChartSettings = ({
         isDeleting={deleteChartLoader}
         onChangeStatus={onEditStatus}
         onDelete={onDelete}
+        hasFormula={formula.payload !== ''}
       />
 
       <Row mt={36}>
