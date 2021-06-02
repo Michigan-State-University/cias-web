@@ -34,6 +34,7 @@ const ChartSettingsTopSection = ({
   isDeleting,
   onChangeStatus,
   onDelete,
+  hasFormula,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -78,6 +79,11 @@ const ChartSettingsTopSection = ({
     }
   }, [chartStatus]);
 
+  const changeStatusButtonDisabled = useMemo(() => {
+    if (chartStatus === ChartStatus.DRAFT && !hasFormula) return true;
+    return false;
+  }, [chartStatus, hasFormula]);
+
   const renderButtonOrStatusBadge = useCallback(() => {
     switch (chartStatus) {
       case ChartStatus.DRAFT:
@@ -85,7 +91,7 @@ const ChartSettingsTopSection = ({
         return (
           <Button
             onClick={handleStatusChange}
-            disabled={false}
+            disabled={changeStatusButtonDisabled}
             loading={isChangingStatus}
             hoverable
             width="100%"
@@ -176,6 +182,7 @@ ChartSettingsTopSection.propTypes = {
   isDeleting: PropTypes.bool,
   onChangeStatus: PropTypes.func,
   onDelete: PropTypes.func,
+  hasFormula: PropTypes.bool,
 };
 
 export default memo(ChartSettingsTopSection);

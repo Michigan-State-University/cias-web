@@ -49,6 +49,7 @@ const PieChartSettings = ({
         isDeleting={deleteChartLoader}
         onChangeStatus={onEditStatus}
         onDelete={onDelete}
+        hasFormula={formula.payload !== ''}
       />
 
       <ChartSettingsGeneralSection
