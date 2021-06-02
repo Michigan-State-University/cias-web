@@ -36,6 +36,7 @@ const ChartTileUI = ({
   },
   isSelected,
   onClick,
+  fromDashboardView,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -74,7 +75,7 @@ const ChartTileUI = ({
     >
       <FullWidthContainer height="100%">
         <Row align="center" justify="center">
-          <Col xs={1} />
+          {!fromDashboardView && <Col xs={1} />}
 
           <Col align="center" xs={9}>
             <Box maxWidth={CHART_NAME_MAX_WIDTH}>
@@ -84,9 +85,11 @@ const ChartTileUI = ({
             </Box>
           </Col>
 
-          <Col xs={1} align="end">
-            <Icon src={gear} alt="show-settings" />
-          </Col>
+          {!fromDashboardView && (
+            <Col xs={1} align="end">
+              <Icon src={gear} alt="show-settings" />
+            </Col>
+          )}
         </Row>
 
         <Row align="center" justify="center" height={CHART_HEIGHT}>
@@ -114,6 +117,7 @@ const ChartTileUI = ({
 ChartTileUI.propTypes = {
   chart: PropTypes.object,
   isSelected: PropTypes.bool,
+  fromDashboardView: PropTypes.bool,
   onClick: PropTypes.func,
 };
 

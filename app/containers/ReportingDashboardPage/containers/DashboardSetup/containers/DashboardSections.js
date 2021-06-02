@@ -38,6 +38,8 @@ const DashboardSections = ({
   loaders,
   errors,
   selectChart,
+  fromDashboardView,
+  organizableId,
 }) => {
   const { organizationId } = useContext(ReportingDashboardPageContext);
   const { formatMessage } = useIntl();
@@ -50,8 +52,8 @@ const DashboardSections = ({
   }, []);
 
   useEffect(() => {
-    fetchDashboardSections(organizationId);
-  }, [organizationId]);
+    fetchDashboardSections(organizableId || organizationId, fromDashboardView);
+  }, [organizableId || organizationId]);
 
   const onAddDashboardSection = useCallback(
     () => addDashboardSection(organizationId),
@@ -62,7 +64,13 @@ const DashboardSections = ({
 
   return (
     <DashboardSectionsContext.Provider
-      value={{ dashboardSections, loaders, errors, selectedChart }}
+      value={{
+        dashboardSections,
+        loaders,
+        errors,
+        selectedChart,
+        fromDashboardView,
+      }}
     >
       <FullWidthContainer>
         <Row>
@@ -84,22 +92,25 @@ const DashboardSections = ({
                 key={`SectionComponent-${index}-id-${section.id}`}
                 section={section}
                 index={index}
+                fromDashboardView={fromDashboardView}
               />
             ))}
           </Col>
         </Row>
 
-        <Row my={30}>
-          <Col>
-            <DashedButton
-              onClick={onAddDashboardSection}
-              loading={addDashboardSectionLoader}
-              transparent
-            >
-              {formatMessage(messages.addNewSection)}
-            </DashedButton>
-          </Col>
-        </Row>
+        {!fromDashboardView && (
+          <Row my={30}>
+            <Col>
+              <DashedButton
+                onClick={onAddDashboardSection}
+                loading={addDashboardSectionLoader}
+                transparent
+              >
+                {formatMessage(messages.addNewSection)}
+              </DashedButton>
+            </Col>
+          </Row>
+        )}
       </FullWidthContainer>
     </DashboardSectionsContext.Provider>
   );
@@ -113,6 +124,8 @@ DashboardSections.propTypes = {
   selectedChart: PropTypes.object,
   errors: PropTypes.object,
   selectChart: PropTypes.func,
+  fromDashboardView: PropTypes.bool,
+  organizableId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({

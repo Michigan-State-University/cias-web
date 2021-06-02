@@ -8,8 +8,11 @@ import {
   fetchDashboardSectionsSuccess,
 } from '../actions';
 
-export function* fetchDashboardSections({ payload: { organizationId } }) {
-  const requestURL = `v1/organizations/${organizationId}/dashboard_sections`;
+export function* fetchDashboardSections({
+  payload: { organizationId, fromDashboardView },
+}) {
+  const suffix = fromDashboardView ? `?published=true` : '';
+  const requestURL = `v1/organizations/${organizationId}/dashboard_sections${suffix}`;
 
   try {
     const { data } = yield call(axios.get, requestURL);

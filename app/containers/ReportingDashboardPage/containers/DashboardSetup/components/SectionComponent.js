@@ -27,7 +27,9 @@ const SectionComponent = ({
   addChart,
   selectChart,
 }) => {
-  const { selectedChart } = useContext(DashboardSectionsContext);
+  const { selectedChart, fromDashboardView } = useContext(
+    DashboardSectionsContext,
+  );
 
   const closeSettings = useCallback(() => selectChart(), []);
 
@@ -48,7 +50,10 @@ const SectionComponent = ({
   ]);
 
   const onSelectChart = useCallback(
-    chartId => selectChart(section.id, chartId),
+    chartId => {
+      if (fromDashboardView) return;
+      selectChart(section.id, chartId);
+    },
     [section.id],
   );
 
@@ -60,13 +65,16 @@ const SectionComponent = ({
         description={section.description}
         onDescriptionChange={onUpdate('description')}
         onNameChange={onUpdate('name')}
+        fromDashboardView={fromDashboardView}
       />
 
       <FullWidthContainer>
         <Row mb={40} justify="around">
-          <Col xs="content" mb={40}>
-            <AddChart addChart={onAddChart} />
-          </Col>
+          {!fromDashboardView && (
+            <Col xs="content" mb={40}>
+              <AddChart addChart={onAddChart} />
+            </Col>
+          )}
           {section.charts.map(chart => {
             const isSelected =
               selectedChart?.id === chart.id &&
@@ -79,6 +87,7 @@ const SectionComponent = ({
                 mb={40}
               >
                 <ChartTileUI
+                  fromDashboardView={fromDashboardView}
                   chart={chart}
                   onClick={onSelectChart}
                   isSelected={isSelected}
@@ -89,9 +98,11 @@ const SectionComponent = ({
         </Row>
       </FullWidthContainer>
 
-      <SidePanel isOpen={Boolean(selectedChart)} style={{ width: 500 }}>
-        <ChartSettings onClose={closeSettings} chart={selectedChart} />
-      </SidePanel>
+      {!fromDashboardView && (
+        <SidePanel isOpen={Boolean(selectedChart)} style={{ width: 500 }}>
+          <ChartSettings onClose={closeSettings} chart={selectedChart} />
+        </SidePanel>
+      )}
     </>
   );
 };
