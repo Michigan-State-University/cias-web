@@ -23,6 +23,7 @@ import Select from 'components/Select';
 import { arraysOverlap } from 'utils/arrayUtils';
 
 import messages from '../../messages';
+import DashboardSections from '../DashboardSetup/containers/DashboardSections';
 
 const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
   const [selectedValue, setSelectedValue] = useState(null);
@@ -58,13 +59,21 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
       return selectOptionsSource.map(mapHealthClinic);
     }
     if (hasFullOrgAccess) {
-      const selectOptionsSource = selectOptions[0].healthSystems;
-      return selectOptionsSource.map(({ name, healthClinics }) => ({
+      return selectOptions[0].healthSystems.map(({ name, healthClinics }) => ({
         label: name,
         options: healthClinics.map(mapHealthClinic),
       }));
     }
   }, [selectOptions]);
+
+  const organizationIdForRole = useMemo(() => {
+    if (isHealthClinicAdmin) return organizationId;
+    if (isHealthSystemAdmin) {
+      if (!selectOptions) return null;
+      return selectOptions[0].organizationId;
+    }
+    if (hasFullOrgAccess) return organizableId || organizationId;
+  }, [roles, organizableId, selectOptions]);
 
   useEffect(() => {
     if (mappedSelectOptions) {
@@ -100,6 +109,12 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
             />
           </Col>
         </Row>
+        {organizationIdForRole && (
+          <DashboardSections
+            organizableId={organizationIdForRole}
+            fromDashboardView
+          />
+        )}
       </Container>
     </>
   );

@@ -45,8 +45,11 @@ export const fetchDashboardSectionSuccess = dashboardSection =>
 export const fetchDashboardSectionError = error =>
   actionBuilder(FETCH_SECTION_ERROR, { error });
 
-export const fetchDashboardSectionsRequest = organizationId =>
-  actionBuilder(FETCH_SECTIONS_REQUEST, { organizationId });
+export const fetchDashboardSectionsRequest = (
+  organizationId,
+  fromDashboardView,
+) =>
+  actionBuilder(FETCH_SECTIONS_REQUEST, { organizationId, fromDashboardView });
 export const fetchDashboardSectionsSuccess = dashboardSections =>
   actionBuilder(FETCH_SECTIONS_SUCCESS, { dashboardSections });
 export const fetchDashboardSectionsError = error =>

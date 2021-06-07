@@ -14,8 +14,8 @@ import {
 } from 'global/reducers/organizations';
 
 const ClinicAdminRedirectPage = ({ organizations, loading, error }) => {
-  if (error) {
-    return <ErrorAlert errorText={error} />;
+  if (error.fetchOrganization) {
+    return <ErrorAlert errorText={error.fetchOrganization} />;
   }
   if (loading || organizations.length === 0) {
     return <Spinner color={themeColors.secondary} />;
