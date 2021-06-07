@@ -18,17 +18,22 @@ import { fetchDashboardViewSelectOptionsSaga } from 'global/reducers/organizatio
 import { Roles } from 'models/User/UserRoles';
 import { ReportingDashboardPageContext } from 'containers/ReportingDashboardPage/constants';
 
-import { Container, Col, Row } from 'components/ReactGridSystem';
+import { Container, Row } from 'components/ReactGridSystem';
 import Select from 'components/Select';
 import { arraysOverlap } from 'utils/arrayUtils';
 
+import Button from 'components/Button';
 import messages from '../../messages';
 import DashboardSections from '../DashboardSetup/containers/DashboardSections';
+import { DEFAULT_OPTION, SELECT_OPTIONS } from './constants';
 
 const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
-  const [selectedValue, setSelectedValue] = useState(null);
-  const { organizationId } = useParams();
   const { formatMessage } = useIntl();
+  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedDateRange, setSelectedDateRange] = useState(
+    DEFAULT_OPTION(formatMessage),
+  );
+  const { organizationId } = useParams();
   const {
     organizableId,
     user: { roles },
@@ -89,25 +94,42 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
     }
   }, [mappedSelectOptions]);
 
+  const setChartDataFilters = () => {
+    console.log(selectedDateRange, selectedValue);
+  };
+
+  const dateSelectOptions = useMemo(() => SELECT_OPTIONS(formatMessage), [
+    SELECT_OPTIONS,
+  ]);
+
   return (
     <>
       <Helmet>
         <title>{formatMessage(messages.dashboardView)}</title>
       </Helmet>
       <Container>
-        <Row>
-          <Col my={30}>
-            <Select
-              width={500}
-              selectProps={{
-                options: mappedSelectOptions,
-                value: selectedValue,
-                onChange: setSelectedValue,
-                isMulti: true,
-                formatLabel: label => label,
-              }}
-            />
-          </Col>
+        <Row my={15} justify="around" width="100%">
+          <Select
+            width={500}
+            selectProps={{
+              options: mappedSelectOptions,
+              value: selectedValue,
+              onChange: setSelectedValue,
+              isMulti: true,
+              formatLabel: label => label,
+            }}
+          />
+          <Select
+            width={500}
+            selectProps={{
+              options: dateSelectOptions,
+              value: selectedDateRange,
+              onChange: setSelectedDateRange,
+            }}
+          />
+        </Row>
+        <Row onClick={setChartDataFilters} mb={15} justify="center">
+          <Button width={200}>Filter data</Button>
         </Row>
         {organizationIdForRole && (
           <DashboardSections

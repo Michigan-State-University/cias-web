@@ -192,4 +192,16 @@ export default defineMessages({
     id: `${scope}.activateAccountConfirm`,
     defaultMessage: 'Are you sure you want to activate this account?',
   },
+  allTime: {
+    id: `${scope}.allTime`,
+    defaultMessage: 'All time',
+  },
+  singleYear: {
+    id: `${scope}.singleYear`,
+    defaultMessage: 'One year',
+  },
+  xDays: {
+    id: `${scope}.xDays`,
+    defaultMessage: '{numberOfDays} days',
+  },
 });
