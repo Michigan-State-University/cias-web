@@ -51,8 +51,7 @@ const SectionComponent = ({
 
   const onSelectChart = useCallback(
     chartId => {
-      if (fromDashboardView) return;
-      selectChart(section.id, chartId);
+      if (!fromDashboardView) selectChart(section.id, chartId);
     },
     [section.id],
   );
