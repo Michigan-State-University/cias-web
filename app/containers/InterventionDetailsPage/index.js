@@ -41,7 +41,7 @@ import {
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 
-import { injectSaga, useInjectSaga, useInjectReducer } from 'redux-injectors';
+import { injectSaga, injectReducer } from 'redux-injectors';
 
 import { colors, themeColors } from 'theme';
 
@@ -73,10 +73,12 @@ import {
 import { reorderScope } from 'models/Session/ReorderScope';
 import { reorder } from 'utils/reorder';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
-import { makeSelectUserRoles } from 'global/reducers/auth';
+import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
+import { makeSelectUserRoles, makeSelectUserId } from 'global/reducers/auth';
 
 import { archived } from 'models/Status/StatusTypes';
 import { RolePermissions } from 'models/User/RolePermissions';
+import OrganizationShareBox from 'containers/ShareBox/OrganizationShareBox';
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
@@ -115,35 +117,35 @@ export function InterventionDetailsPage({
   fetchInterventions,
   externalCopySession,
   roles,
+  userId,
+  editSession,
 }) {
   const [
     deleteConfirmationSessionId,
     setDeleteConfirmationSessionId,
   ] = useState(null);
-  useInjectReducer({
-    key: 'intervention',
-    reducer: interventionReducer,
-  });
-  useInjectReducer({ key: 'interventions', reducer: interventionsReducer });
-  useInjectReducer({ key: 'questions', reducer: questionsReducer });
-  useInjectSaga({
-    key: 'interventionOptionsSaga',
-    saga: interventionOptionsSaga,
-  });
-  useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
-  useInjectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga });
 
   const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
 
   const screenClass = useScreenClass();
 
-  const { sessions, name, id, status, csvLink, csvGeneratedAt, sharedTo } =
-    intervention || {};
+  const {
+    sessions,
+    name,
+    id,
+    status,
+    csvLink,
+    csvGeneratedAt,
+    sharedTo,
+    organizationId,
+    userId: interventionOwnerId,
+  } = intervention || {};
 
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
   const archivingPossible = canArchive(status);
   const deletionPossible = canDeleteSession(status);
+  const canAccessCsv = interventionOwnerId === userId;
 
   const [modalVisible, setModalVisible] = useState(false);
   const [
@@ -301,6 +303,7 @@ export function InterventionDetailsPage({
                         handleDeleteSession={sessionId =>
                           setDeleteConfirmationSessionId(sessionId)
                         }
+                        editSession={editSession}
                         nextSessionName={
                           nextIntervention ? nextIntervention.name : null
                         }
@@ -369,7 +372,10 @@ export function InterventionDetailsPage({
           onClose={() => setParticipantShareModalVisible(false)}
           visible={participantShareModalVisible}
         >
-          <ShareBox />
+          {!organizationId && <ShareBox />}
+          {organizationId && (
+            <OrganizationShareBox organizationId={organizationId} />
+          )}
         </Modal>
         <Header
           name={name}
@@ -381,6 +387,8 @@ export function InterventionDetailsPage({
           handleSendCsv={handleSendCsv}
           options={options}
           status={status}
+          organizationId={organizationId}
+          canAccessCsv={canAccessCsv}
         />
 
         <GRow>
@@ -423,7 +431,10 @@ InterventionDetailsPage.propTypes = {
     sessions: PropTypes.array,
     fetchInterventionError: PropTypes.string,
     fetchInterventionLoading: PropTypes.bool,
-    intervention: PropTypes.shape({ id: PropTypes.string }),
+    intervention: PropTypes.shape({
+      id: PropTypes.string,
+      userId: PropTypes.string,
+    }),
     errors: PropTypes.shape({
       fetchInterventionError: PropTypes.string,
       createSessionError: PropTypes.string,
@@ -446,13 +457,16 @@ InterventionDetailsPage.propTypes = {
   deleteSession: PropTypes.func,
   fetchInterventions: PropTypes.func,
   externalCopySession: PropTypes.func,
+  editSession: PropTypes.func,
   roles: PropTypes.arrayOf(PropTypes.string),
+  userId: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
   interventionState: makeSelectInterventionState(),
   sessionIndex: makeSelectCurrentSessionIndex(),
   roles: makeSelectUserRoles(),
+  userId: makeSelectUserId(),
 });
 
 const mapDispatchToProps = {
@@ -469,20 +483,31 @@ const mapDispatchToProps = {
   copyIntervention: copyInterventionRequest,
   deleteSession: deleteSessionRequest,
   externalCopySession: externalCopySessionRequest,
+  editSession: editSessionRequest,
 };
 
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps,
 );
-
-const withSaga = injectSaga({
-  key: 'interventionDetailsPageSagas',
-  saga: interventionDetailsPageSagas,
-});
-
 export default compose(
   withConnect,
-  withSaga,
+  injectReducer({
+    key: 'intervention',
+    reducer: interventionReducer,
+  }),
+  injectReducer({ key: 'interventions', reducer: interventionsReducer }),
+  injectReducer({ key: 'questions', reducer: questionsReducer }),
+  injectSaga({
+    key: 'interventionOptionsSaga',
+    saga: interventionOptionsSaga,
+  }),
+  injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
+  injectSaga({ key: 'getQuestionGroupsSaga', saga: getQuestionGroupsSaga }),
+  injectSaga({ key: 'editSession', saga: editSessionSaga }),
+  injectSaga({
+    key: 'interventionDetailsPageSagas',
+    saga: interventionDetailsPageSagas,
+  }),
   injectIntl,
 )(InterventionDetailsPage);

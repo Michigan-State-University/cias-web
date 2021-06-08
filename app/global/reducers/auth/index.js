@@ -1,4 +1,11 @@
-export { LOG_IN_USER, LOG_OUT } from './constants';
+export {
+  LOG_IN_USER,
+  LOG_OUT,
+  REDIRECT_QUERY_KEY,
+  ACCOUNT_CONFIRMATION_ERROR,
+  ACCOUNT_CONFIRMATION_SUCCESS,
+  RESET_REDUCER,
+} from './constants';
 export {
   logIn,
   logOut,
@@ -13,6 +20,8 @@ export {
   sendSmsTokenRequest,
   logInGuestRequest,
   editPhoneNumberPreviewRequest,
+  loginRequest,
+  verificationCodeRequest,
 } from './actions';
 export { authReducer, initialState } from './reducer';
 export {
@@ -22,6 +31,10 @@ export {
   makeSelectLoaders,
   makeSelectUserRoles,
   makeSelectPhoneNumberPreview,
+  makeSelectLoginFormData,
+  makeSelectVerificationNeeded,
+  makeSelectVerificationSuccess,
+  makeSelectUserId,
 } from './selectors';
 export {
   logOutSaga,
@@ -34,4 +47,6 @@ export {
   confirmPhoneNumberSaga,
   sendSmsTokenSaga,
   editPhoneNumberQuestionSaga,
+  loginSaga,
+  verifyCodeSaga,
 } from './sagas';

@@ -10,15 +10,32 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
     >
       Formula
       <div
-        class="Box-sc-1vhutan-0 gfyFJD"
+        class="Box-sc-1vhutan-0 eamgEw"
       >
-        <p
-          class="Text-e4p0w3-0 iaJrvl"
-          color="#C866EA"
-          font-weight="bold"
+        <div
+          class="Box-sc-1vhutan-0 gfyFJD"
         >
-          Add variable
-        </p>
+          <p
+            class="Text-e4p0w3-0 iaJrvl"
+            color="#C866EA"
+            font-weight="bold"
+          >
+            Add variable
+          </p>
+        </div>
+        <div
+          class="Box-sc-1vhutan-0 bvPvIe"
+          display="none"
+          width="auto"
+        >
+          <div
+            class="Row-y1cs0u-0 dskFsL"
+          >
+            <div
+              class="Box-sc-1vhutan-0 fOicvH"
+            />
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -26,63 +43,14 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
       width="100%"
     >
       <textarea
-        class="TextArea-sc-175uiux-0 cIMVkN"
+        class="TextArea-sc-175uiux-0 kmGeZJ"
         data-cy="text-area"
         height="auto"
         placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
         rows="5"
+        type="multiline"
         width="100%"
       />
-    </div>
-    <div
-      class="Box-sc-1vhutan-0 jtUsdj"
-      width="100%"
-    >
-      <div
-        class="Box-sc-1vhutan-0 hMXAvH"
-        display="none"
-        width="auto"
-      >
-        <div
-          class="Row-y1cs0u-0 dskFsL"
-        >
-          <div
-            class="Box-sc-1vhutan-0 fOicvH"
-          >
-            <div
-              class="Column-sc-4zswzq-0 ekpwZH"
-            >
-              <div
-                class="Box-sc-1vhutan-0 dNQoLv"
-              >
-                <div
-                  class="Box-sc-1vhutan-0 leAXVR"
-                  data-testid="no-content"
-                  display="flex"
-                  height="100%"
-                  width="100%"
-                >
-                  <div
-                    class="Column-sc-4zswzq-0 eExeGs"
-                  >
-                    <img
-                      alt="No content"
-                      class="Img-sc-55j3su-0 cDhXoN"
-                      src="IMAGE_MOCK"
-                    />
-                    <h2
-                      class="H2-uw8lbl-0 bnQANz"
-                      color="#B0BAC9"
-                    >
-                      No variables defined yet
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
     <div
       class="Box-sc-1vhutan-0 styled__DashedBox-g59fuj-0 kvIAfn dyejuR"

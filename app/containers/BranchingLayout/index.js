@@ -4,58 +4,64 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { FormattedMessage, injectIntl } from 'react-intl';
+
+import Question from 'models/Session/Question';
+
+import { makeSelectSelectedQuestion } from 'global/reducers/questions';
+
+import { colors, themeColors } from 'theme';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Text from 'components/Text';
-import Img from 'components/Img';
-import ArrowDropdown from 'components/ArrowDropdown';
 import { StyledInput } from 'components/Input/StyledInput';
+import VariableChooser from 'containers/VariableChooser';
 
-import binNoBg from 'assets/svg/bin-no-bg.svg';
-import { colors, themeColors } from 'theme';
-import { FormattedMessage, injectIntl } from 'react-intl';
-import EllipsisText from 'components/Text/EllipsisText';
-import InequalityChooser from 'components/InequalityChooser';
-import VariableChooser from './VariableChooser';
 import { DashedBox } from './styled';
-
-import TargetQuestionChooser from './TargetQuestionChooser';
-
 import messages from './messages';
+import Pattern from './Pattern';
 
 function BranchingLayout({
   formula,
   intl: { formatMessage },
   onFormulaUpdate,
   id,
+  onDropdownOpen,
   onUpdateCase,
   displayPatternTargetText,
   onRemoveCase,
   onAddCase,
   sessionBranching,
-  onVariableChooserOpen,
-  onDropdownOpen,
   disabled,
   includeAllVariables,
   includeCurrentQuestion,
+  selectedQuestion,
+  sessionId,
+  interventionId,
+  includeAllSessions,
+  includeCurrentSession,
+  isMultiSession,
+  onAddTarget,
+  onUpdateTarget,
+  onRemoveTarget,
 }) {
+  const [patternsSize, setPatternSize] = useState(formula.patterns.length);
+
+  useEffect(() => {
+    if (formula.patterns.length !== patternsSize) {
+      setPatternSize(formula.patterns.length);
+    }
+  }, [formula.patterns.length]);
   const [targetChooserOpen, setTargetChooserOpen] = useState(-1);
-  const [variableChooserOpen, setVariableChooserOpen] = useState(false);
 
   const shouldDisplayElseStatement = formula.patterns.length !== 0;
-
-  const handleVariableChooserClick = () => {
-    document.activeElement.blur();
-
-    if (!disabled) {
-      if (onVariableChooserOpen) onVariableChooserOpen();
-      setVariableChooserOpen(!variableChooserOpen);
-    }
-  };
 
   const handleDropdownClick = (value, index) => {
     if (value && onDropdownOpen) onDropdownOpen();
@@ -67,16 +73,27 @@ function BranchingLayout({
       <Column>
         <Row align="center" justify="between">
           {formatMessage(messages.formula)}
-          <Box onClick={handleVariableChooserClick} clickable>
+
+          <VariableChooser
+            disabled={disabled}
+            sessionId={sessionId}
+            interventionId={interventionId}
+            onClick={value => onFormulaUpdate(`${formula.payload}${value}`, id)}
+            includeAllVariables={includeAllVariables}
+            includeCurrentQuestion={includeCurrentQuestion}
+            includeAllSessions={includeAllSessions}
+            includeCurrentSession={includeCurrentSession}
+            isMultiSession={isMultiSession}
+            selectedQuestion={selectedQuestion}
+          >
             <Text
-              disabled={disabled}
               fontWeight="bold"
               color={themeColors.secondary}
               hoverDecoration="underline"
             >
               {formatMessage(messages.addVariable)}
             </Text>
-          </Box>
+          </VariableChooser>
         </Row>
         {formula && (
           <>
@@ -98,90 +115,31 @@ function BranchingLayout({
                 onBlur={val => onFormulaUpdate(val, id)}
               />
             </Box>
-            {sessionBranching && (
-              <Box position="relative" top={-90}>
-                <VariableChooser
-                  visible={variableChooserOpen}
-                  setOpen={setVariableChooserOpen}
-                  onClick={value => {
-                    setVariableChooserOpen(false);
-                    onFormulaUpdate(`${formula.payload}${value}`, id);
-                  }}
-                  includeAllVariables={includeAllVariables}
-                  includeCurrentQuestion={includeCurrentQuestion}
-                />
-              </Box>
-            )}
-            {!sessionBranching && (
-              <Box position="absolute" right={25} top={160} width="100%">
-                <VariableChooser
-                  visible={variableChooserOpen}
-                  setOpen={setVariableChooserOpen}
-                  onClick={value => {
-                    setVariableChooserOpen(false);
-                    onFormulaUpdate(`${formula.payload}${value}`, id);
-                  }}
-                  includeAllVariables={includeAllVariables}
-                  includeCurrentQuestion={includeCurrentQuestion}
-                />
-              </Box>
-            )}
+
             {formula.patterns.map((pattern, index) => {
-              const isChooserOpened = index === targetChooserOpen;
+              const updatePattern = patternObj => {
+                onUpdateCase(index, patternObj, id);
+              };
               return (
-                <Row
-                  key={`${id}-settings-branching-case-${index}-${
-                    pattern.match
-                  }`}
-                  align="center"
-                  mb={8}
-                >
-                  <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
-                  <InequalityChooser
-                    disabled={disabled}
-                    onSuccessfulChange={value =>
-                      onUpdateCase(index, { ...pattern, match: value }, id)
-                    }
-                    inequalityValue={pattern.match}
-                  />
-                  <Text whiteSpace="pre" mr={10}>
-                    {formatMessage(messages.goTo)}
-                  </Text>
-                  <ArrowDropdown
-                    disabled={disabled}
-                    width={130}
-                    positionFrom="right"
-                    setOpen={value => handleDropdownClick(value, index)}
-                    isOpened={isChooserOpened}
-                    childWidthScope="child"
-                    dropdownContent={
-                      <Box maxWidth={100} data-cy={`select-question-${index}`}>
-                        <EllipsisText
-                          text={displayPatternTargetText(pattern.target)}
-                          fontSize={13}
-                        />
-                      </Box>
-                    }
-                  >
-                    <TargetQuestionChooser
-                      sessionBranching={sessionBranching}
-                      isVisible={isChooserOpened}
-                      pattern={pattern}
-                      onClick={value => {
-                        setTargetChooserOpen(-1);
-                        onUpdateCase(index, { ...pattern, target: value }, id);
-                      }}
-                    />
-                  </ArrowDropdown>
-                  {!disabled && (
-                    <Img
-                      ml={10}
-                      src={binNoBg}
-                      onClick={() => onRemoveCase(index, id)}
-                      clickable
-                    />
-                  )}
-                </Row>
+                <Pattern
+                  newPattern={patternsSize <= index}
+                  disabled={disabled}
+                  displayPatternTargetText={displayPatternTargetText}
+                  formatMessage={formatMessage}
+                  handleDropdownClick={handleDropdownClick}
+                  index={index}
+                  key={index}
+                  onAddTarget={() => onAddTarget(id, index)}
+                  onRemoveCase={onRemoveCase}
+                  pattern={pattern}
+                  questionId={id}
+                  sessionBranching={sessionBranching}
+                  setTargetChooserOpen={setTargetChooserOpen}
+                  targetChooserOpen={targetChooserOpen}
+                  updatePattern={updatePattern}
+                  onUpdateTarget={onUpdateTarget}
+                  onRemoveTarget={onRemoveTarget}
+                />
               );
             })}
             {shouldDisplayElseStatement && (
@@ -213,6 +171,8 @@ function BranchingLayout({
 
 BranchingLayout.propTypes = {
   id: PropTypes.string,
+  sessionId: PropTypes.string,
+  interventionId: PropTypes.string,
   formula: PropTypes.object,
   onFormulaUpdate: PropTypes.func,
   onAddCase: PropTypes.func,
@@ -221,15 +181,30 @@ BranchingLayout.propTypes = {
   intl: PropTypes.object,
   displayPatternTargetText: PropTypes.func,
   sessionBranching: PropTypes.bool,
-  onVariableChooserOpen: PropTypes.func,
   onDropdownOpen: PropTypes.func,
+  onAddTarget: PropTypes.func,
+  onUpdateTarget: PropTypes.func,
+  onRemoveTarget: PropTypes.func,
   disabled: PropTypes.bool,
   includeAllVariables: PropTypes.bool,
   includeCurrentQuestion: PropTypes.bool,
+  selectedQuestion: PropTypes.shape(Question),
+  includeAllSessions: PropTypes.bool,
+  includeCurrentSession: PropTypes.bool,
+  isMultiSession: PropTypes.bool,
 };
 
 BranchingLayout.defaultProps = {
   includeCurrentQuestion: true,
 };
 
-export default injectIntl(BranchingLayout);
+const mapStateToProps = createStructuredSelector({
+  selectedQuestion: makeSelectSelectedQuestion(),
+});
+
+const withConnect = connect(mapStateToProps);
+
+export default compose(
+  injectIntl,
+  withConnect,
+)(BranchingLayout);

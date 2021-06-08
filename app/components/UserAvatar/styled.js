@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { colors } from 'theme';
 
 import { layout, margin, text } from '../BaseComponentStyles';
 
@@ -8,7 +7,7 @@ export const AvatarStyled = styled.div`
   height: 30px;
   font-size: 15px;
   border-radius: 50%;
-  background-color: ${colors.surfieGreen};
+  background-color: ${({ backgroundColor }) => backgroundColor};
   display: flex;
   justify-content: center;
   align-items: center;

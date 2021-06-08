@@ -7,6 +7,7 @@ import { expectSaga } from 'redux-saga-test-plan';
 import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   enableUserAccessSuccess,
   enableUserAccessFailure,
@@ -20,17 +21,25 @@ import messages from '../../messages';
 
 describe('fetchUsersWithAccess saga', () => {
   const apiResponse = {
-    user_sessions: [
-      { user_id: '0', email: 'user0@mail.com' },
-      { user_id: '1', email: 'user1@mail.com' },
+    data: [
+      {
+        id: '0',
+        type: 'invitation',
+        attributes: { email: 'user0@mail.com' },
+      },
+      {
+        id: '1',
+        type: 'invitation',
+        attributes: { email: 'user1@mail.com' },
+      },
     ],
   };
-  const payload = { id: '0', emails: ['user00@mail.com', 'user10@mail.com'] };
+  const payload = { id: '0', emails: ['user0@mail.com', 'user1@mail.com'] };
 
   it('Check giveUserAccess generator success connection', () =>
     expectSaga(enableUserAccess, { payload })
       .provide([[matchers.call.fn(axios.post), { data: apiResponse }]])
-      .put(enableUserAccessSuccess(apiResponse.user_sessions))
+      .put(enableUserAccessSuccess(jsonApiToArray(apiResponse, 'invitation')))
       .run());
   it('Check giveUserAccess error connection', () => {
     const error = new Error('test');

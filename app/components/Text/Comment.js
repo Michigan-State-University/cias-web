@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { fontSizes, fontFamily, lineHeights, colors } from 'theme';
-import { style } from '../BaseComponentStyles';
+import { style, padding, border, margin } from '../BaseComponentStyles';
 import Text from '.';
 
 const Comment = styled(Text)`
@@ -10,6 +10,9 @@ const Comment = styled(Text)`
   line-height: ${lineHeights.small};
   color: ${colors.grey};
   ${style};
+  ${padding};
+  ${margin};
+  ${border};
 `;
 
 export default Comment;

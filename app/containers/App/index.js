@@ -34,12 +34,15 @@ import ReportsPage from 'containers/ParticipantDashboard/components/ReportsTab/L
 import GeneratedReportsPage from 'containers/Sessions/containers/GeneratedReportsPage';
 import ForbiddenPage from 'containers/ForbiddenPage/Loadable';
 import TextMessagesPage from 'containers/Sessions/containers/TextMessagesPage';
-
+import ReportingDashboardPage from 'containers/ReportingDashboardPage/Loadable';
+import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable';
+import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
+import IdleTimer from 'components/IdleTimer/Loadable';
 
-import { Roles } from 'models/User/UserRoles';
+import { Roles, ResearcherRoles } from 'models/User/UserRoles';
 
-import navbarNames from 'utils/navbarNames';
+import navbarNames, { NAVIGATION } from 'utils/navbarNames';
 import rootSaga from 'global/sagas/rootSaga';
 import { useInjectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
@@ -69,6 +72,18 @@ export function App({ user }) {
           return <GeneratedReportsPage disableFilter />;
         case Roles.thirdParty:
           return <GeneratedReportsPage disableFilter />;
+        case Roles.eInterventionAdmin:
+          return <InterventionPage />;
+        case Roles.organizationAdmin:
+        case Roles.healthSystemAdmin:
+          return (
+            <ReportingDashboardPage
+              view={VIEW.DASHBOARD_VIEW}
+              organizableId={user.organizableId}
+            />
+          );
+        case Roles.clinicAdmin:
+          return <ClinicAdminRedirectPage />;
         default:
           return NotFoundPage;
       }
@@ -90,6 +105,9 @@ export function App({ user }) {
 
   return (
     <>
+      <ApiQueryMessageHandler />
+      <IdleTimer />
+
       <Switch>
         <AppRoute
           exact
@@ -98,8 +116,58 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={Roles.allRoles}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+            activeTab: interventionsTabId,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/organization/:organizationId"
+          render={() => (
+            <ReportingDashboardPage view={VIEW.MANAGE_ORGANIZATIONS} />
+          )}
+          protectedRoute
+          allowedRoles={[Roles.admin, Roles.eInterventionAdmin]}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+          }}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/organization/:organizationId/dashboard-setup"
+          render={() => <ReportingDashboardPage view={VIEW.DASHBOARD_SETUP} />}
+          protectedRoute
+          allowedRoles={[Roles.admin, Roles.eInterventionAdmin]}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+          }}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/organization/:organizationId/dashboard"
+          render={() => <ReportingDashboardPage view={VIEW.DASHBOARD_VIEW} />}
+          protectedRoute
+          allowedRoles={[
+            Roles.admin,
+            Roles.eInterventionAdmin,
+            Roles.organizationAdmin,
+            Roles.clinicAdmin,
+          ]}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
+          }}
+          navbarProps={{
+            navbarId: NAVIGATION.DEFAULT,
           }}
         />
         <AppRoute
@@ -109,7 +177,11 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.participant]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: participantReportsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
             activeTab: participantReportsTabId,
           }}
         />
@@ -127,9 +199,9 @@ export function App({ user }) {
           path="/interventions/:interventionId/sessions/:sessionId/edit"
           component={EditSessionPage}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'sessions',
+            navbarId: NAVIGATION.SESSIONS,
           }}
         />
         <AppRoute
@@ -139,7 +211,7 @@ export function App({ user }) {
           allowedRoles={Roles.allRoles}
           user
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
             activeTab: interventionsTabId,
           }}
         />
@@ -148,9 +220,9 @@ export function App({ user }) {
           path="/interventions/:interventionId/sessions/:sessionId/settings"
           component={SettingsInterventionPage}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'sessions',
+            navbarId: NAVIGATION.SESSIONS,
           }}
         />
         <AppRoute
@@ -158,9 +230,9 @@ export function App({ user }) {
           path="/interventions/:interventionId/sessions/:sessionId/report-templates"
           component={ReportTemplatesPage}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'sessions',
+            navbarId: NAVIGATION.SESSIONS,
           }}
         />
         <AppRoute
@@ -168,9 +240,9 @@ export function App({ user }) {
           path="/interventions/:interventionId/sessions/:sessionId/generated-reports"
           component={GeneratedReportsPage}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'sessions',
+            navbarId: NAVIGATION.SESSIONS,
           }}
         />
         <AppRoute
@@ -178,9 +250,9 @@ export function App({ user }) {
           path="/interventions/:interventionId/sessions/:sessionId/sms-messaging"
           component={TextMessagesPage}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'sessions',
+            navbarId: NAVIGATION.SESSIONS,
           }}
         />
         <AppRoute
@@ -188,9 +260,13 @@ export function App({ user }) {
           path="/users"
           component={renderUserListByRole}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher]}
+          allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: accountsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
             activeTab: accountsTabId,
           }}
         />
@@ -201,7 +277,11 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, Roles.teamAdmin]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: teamsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
             activeTab: teamsTabId,
           }}
         />
@@ -212,7 +292,10 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, Roles.teamAdmin]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
           }}
         />
         <AppRoute
@@ -223,9 +306,9 @@ export function App({ user }) {
             <AnswerSessionPage match={match} isPreview />
           )}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'preview',
+            navbarId: NAVIGATION.PREVIEW,
             navbarName: navbarNames.preview,
           }}
         />
@@ -236,9 +319,9 @@ export function App({ user }) {
             <AnswerSessionPage match={match} isPreview />
           )}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'preview',
+            navbarId: NAVIGATION.PREVIEW,
             navbarName: navbarNames.preview,
           }}
         />
@@ -247,9 +330,12 @@ export function App({ user }) {
           path="/interventions/:interventionId"
           component={InterventionDetailsPage}
           protectedRoute
-          allowedRoles={[Roles.admin, Roles.researcher, Roles.teamAdmin]}
+          allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
           }}
         />
         <AppRoute
@@ -259,7 +345,11 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={Roles.allRoles}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: null,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
             activeTab: null,
           }}
         />
@@ -270,7 +360,11 @@ export function App({ user }) {
           protectedRoute
           allowedRoles={[Roles.admin, Roles.teamAdmin]}
           navbarProps={{
-            navbarId: 'default',
+            navbarId: NAVIGATION.DEFAULT,
+            activeTab: accountsTabId,
+          }}
+          sidebarProps={{
+            sidebarId: NAVIGATION.DEFAULT,
             activeTab: accountsTabId,
           }}
         />
@@ -286,7 +380,6 @@ export function App({ user }) {
         </AppRoute>
       </Switch>
       <GlobalStyle />
-      <ApiQueryMessageHandler />
     </>
   );
 }

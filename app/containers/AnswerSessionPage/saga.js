@@ -17,8 +17,6 @@ import { resetPhoneNumberPreview } from 'global/reducers/auth/actions';
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import {
   SUBMIT_ANSWER_REQUEST,
-  PHONETIC_PREVIEW_REQUEST,
-  PHONETIC_PREVIEW_FAILURE,
   REDIRECT_TO_PREVIEW,
   RESET_SESSION,
   CREATE_USER_SESSION_REQUEST,
@@ -27,7 +25,6 @@ import {
 import {
   submitAnswerSuccess,
   submitAnswerFailure,
-  phoneticPreviewSuccess,
   resetAnswers,
   createUserSessionSuccess,
   createUserSessionFailure,
@@ -104,21 +101,6 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
   }
 }
 
-function* phoneticPreviewAsync({ payload: { text } }) {
-  try {
-    const {
-      data: { url: mp3Url },
-    } = yield axios.post(`/v1/phonetic_preview`, {
-      audio: { text },
-    });
-    yield put(phoneticPreviewSuccess(`${process.env.API_URL}${mp3Url}`));
-  } catch (error) {
-    yield call(toast.error, error, {
-      toastId: PHONETIC_PREVIEW_FAILURE,
-    });
-  }
-}
-
 function* redirectToPreview({
   payload: { interventionId, sessionId, questionId },
 }) {
@@ -130,12 +112,15 @@ function* redirectToPreview({
 }
 
 function* createUserSession({ payload: { sessionId } }) {
+  const { query } = yield select(makeSelectLocation());
   const requestUrl = `/v1/user_sessions`;
 
   try {
     const { data } = yield axios.post(
       requestUrl,
-      objectToSnakeCase({ userSession: { sessionId } }),
+      objectToSnakeCase({
+        userSession: { sessionId, health_clinic_id: query.cid },
+      }),
     );
 
     const mappedData = jsonApiToObject(data, 'userSession');
@@ -167,7 +152,6 @@ function* resetPreviewUrl(sessionId) {
 // Individual exports for testing
 export default function* AnswerSessionPageSaga() {
   yield takeLatest(SUBMIT_ANSWER_REQUEST, submitAnswersAsync);
-  yield takeLatest(PHONETIC_PREVIEW_REQUEST, phoneticPreviewAsync);
   yield takeLatest(RESET_SESSION, resetSession);
   yield takeLatest(CREATE_USER_SESSION_REQUEST, createUserSession);
   yield takeLatest(NEXT_QUESTION_REQUEST, nextQuestion);

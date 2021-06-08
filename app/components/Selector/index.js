@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import Tooltip from 'components/Tooltip';
 import Box from 'components/Box';
 import Row from 'components/Row';
-import Img from 'components/Img';
-import arrowDownSelect from 'assets/svg/arrow-down-select.svg';
 import questionMark from 'assets/svg/question-mark.svg';
 
 import useOutsideClick from 'utils/useOutsideClick';
+import ToggleArrow from 'components/ToggleArrow';
 import HeaderContainer from './HeaderContainer';
 import ElementsContainer from './ElementsContainer';
 
@@ -30,9 +29,6 @@ const Selector = ({
 
   useOutsideClick(selector, () => setIsActive(false), isActive);
 
-  const transform = isActive ? 'rotate(180deg);' : '';
-  const transition = 'transform 0.2s;';
-
   const toggleActive = () => setIsActive(!isActive);
 
   return (
@@ -50,13 +46,10 @@ const Selector = ({
           />
         )}
         {!disabled && (
-          <Img
-            src={arrowDownSelect}
-            alt="arrow"
+          <ToggleArrow
+            facingUp={isActive}
             clickable
             ml={8}
-            transform={transform}
-            transition={transition}
             onClick={toggleActive}
           />
         )}

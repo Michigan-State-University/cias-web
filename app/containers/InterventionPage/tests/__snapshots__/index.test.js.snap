@@ -7,7 +7,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
     style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
   >
     <div
-      class="Box-sc-1vhutan-0 crlRBM"
+      class="Box-sc-1vhutan-0 fTNEzq styled__StyledNotification-ve6hnx-4 eUHyWa"
       width="max-content"
     >
       <div
@@ -15,7 +15,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
       >
         <div
           align="flex-start"
-          class="Col-zbj3ec-0 gVbrwg"
+          class="Col-zbj3ec-0 guvxHM"
           style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
         >
           <div
@@ -23,7 +23,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
           >
             <div
               align="flex-start"
-              class="Col-zbj3ec-0 gVbrwg"
+              class="Col-zbj3ec-0 guvxHM"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
             >
               <div
@@ -38,7 +38,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
             </div>
             <div
               align="flex-start"
-              class="Col-zbj3ec-0 gVbrwg"
+              class="Col-zbj3ec-0 guvxHM"
               style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
             >
               <p
@@ -53,8 +53,8 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                 font-weight="bold"
               >
                 <a
+                  class="styled__StyledLink-ve6hnx-3 ehXrFS"
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
-                  style="color: rgb(200, 102, 234);"
                   target="_blank"
                 >
                   Share your opinion on CIAS
@@ -65,7 +65,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
         </div>
         <div
           align="end"
-          class="Col-zbj3ec-0 ccYkjT"
+          class="Col-zbj3ec-0 LYfLr"
           style="box-sizing: border-box; min-height: 1px; position: relative; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 0px;"
         >
           <button
@@ -384,6 +384,27 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                 <p
                   class="Text-e4p0w3-0 fFURPd"
                 />
+                <p
+                  class="Text-e4p0w3-0 bmKPFZ"
+                  font-weight="bold"
+                >
+                  Created by: 
+                </p>
+                <p
+                  class="Text-e4p0w3-0 fFURPd"
+                >
+                  Email: 
+                </p>
+                <p
+                  class="Text-e4p0w3-0 fFURPd"
+                >
+                  First name: 
+                </p>
+                <p
+                  class="Text-e4p0w3-0 dSyDnZ"
+                >
+                  Last name: 
+                </p>
               </div>
             </div>
           </div>
@@ -400,9 +421,8 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
 exports[`<InterventionPage /> Should render and match the snapshot with loader 1`] = `
 <div>
   <div
-    class="styled__FillScreenLoader-sc-1aaagww-0 bcnRTW"
+    class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
     data-testid="fullscreen-loader"
-    opacity="0.5"
   >
     <div
       class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
@@ -417,9 +437,8 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
 exports[`<InterventionPage /> Should render and match the snapshot without interventions 1`] = `
 <div>
   <div
-    class="styled__FillScreenLoader-sc-1aaagww-0 bcnRTW"
+    class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
     data-testid="fullscreen-loader"
-    opacity="0.5"
   >
     <div
       class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"

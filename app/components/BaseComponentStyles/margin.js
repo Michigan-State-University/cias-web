@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
 
 const margin = props => ({
-  marginTop: props.my || props.mt || '',
-  marginBottom: props.my || props.mb || '',
-  marginRight: props.mx || props.mr || '',
-  marginLeft: props.mx || props.ml || '',
-  margin: props.margin || '',
+  marginTop: props.my ?? props.mt ?? '',
+  marginBottom: props.my ?? props.mb ?? '',
+  marginRight: props.mx ?? props.mr ?? '',
+  marginLeft: props.mx ?? props.ml ?? '',
+  margin: props.margin ?? '',
 });
 
 margin.propTypes = {

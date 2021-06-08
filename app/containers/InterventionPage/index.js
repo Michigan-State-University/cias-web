@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+import { injectReducer, injectSaga } from 'redux-injectors';
 import { Row, Col } from 'react-grid-system';
 import { Markup } from 'interweave';
 
@@ -22,7 +22,6 @@ import H1 from 'components/H1';
 import Loader from 'components/Loader';
 import TileRenderer from 'components/TileRenderer';
 import SearchInput from 'components/Input/SearchInput';
-import Notification from 'components/Notification';
 
 import useFilter from 'utils/useFilter';
 import { statusTypes } from 'models/Status/StatusTypes';
@@ -41,10 +40,10 @@ import {
 import { editUserRequest, makeSelectUser } from 'global/reducers/auth';
 import { GOOGLE_FORM_URL } from 'global/constants';
 
-import { colors, fontSizes, themeColors } from 'theme';
+import { colors, fontSizes } from 'theme';
 import StatusFilter from './StatusFilter';
 import messages from './messages';
-import { InitialRow } from './styled';
+import { InitialRow, StyledLink, StyledNotification } from './styled';
 
 export function InterventionPage({
   fetchInterventionsRequest: fetchInterventions,
@@ -59,10 +58,6 @@ export function InterventionPage({
   user,
   editUser,
 }) {
-  useInjectReducer({ key: 'interventions', reducer: interventionsReducer });
-  useInjectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga });
-  useInjectSaga({ key: 'createIntervention', saga: createInterventionSaga });
-
   const { teamName } = user ?? {};
 
   const [valueFilteredInterventions, filterValue, setFilterValue] = useFilter(
@@ -111,20 +106,18 @@ export function InterventionPage({
   };
 
   const FeedbackNotification = (
-    <Notification
+    <StyledNotification
       title={formatMessage(messages.feedbackTitle)}
       description={
-        <a
-          style={{ color: themeColors.secondary }}
+        <StyledLink
           href={GOOGLE_FORM_URL}
           target="_blank"
           onClick={handleFeedbackClick}
         >
           {formatMessage(messages.feedbackDescription)}
-        </a>
+        </StyledLink>
       }
       onClose={handleFeedbackClick}
-      style={{ position: 'absolute', right: '0px' }}
     />
   );
 
@@ -261,4 +254,7 @@ export default compose(
   withConnect,
   memo,
   injectIntl,
+  injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
+  injectSaga({ key: 'createIntervention', saga: createInterventionSaga }),
+  injectReducer({ key: 'interventions', reducer: interventionsReducer }),
 )(InterventionPage);

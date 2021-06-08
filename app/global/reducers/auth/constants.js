@@ -1,5 +1,6 @@
 export const LOG_IN_USER = 'app/auth/LOG_IN_USER';
 export const LOG_OUT = 'app/auth/LOG_OUT';
+export const RESET_REDUCER = 'app/auth/RESET_REDUCER';
 
 export const LOG_IN_GUEST = 'app/auth/LOG_IN_GUEST';
 
@@ -49,3 +50,17 @@ export const SEND_SMS_TOKEN_ERROR = 'app/auth/SEND_SMS_TOKEN_ERROR';
 export const CHANGE_ERROR_STATUS = 'app/auth/CHANGE_ERROR_STATUS';
 
 export const RESET_PHONE_NUMBER_PREVIEW = 'app/auth/RESET_PHONE_NUMBER_PREVIEW';
+
+export const LOGIN_REQUEST = 'app/auth/LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'app/auth/LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'app/auth/LOGIN_ERROR';
+export const REDIRECT_QUERY_KEY = 'redirect_to';
+export const ACCOUNT_CONFIRMATION_SUCCESS =
+  'app/auth/ACCOUNT_CONFIRMATION_SUCCESS';
+export const ACCOUNT_CONFIRMATION_ERROR = 'app/auth/ACCOUNT_CONFIRMATION_ERROR';
+
+export const VERIFICATION_CODE_NEEDED = 'app/auth/VERIFICATION_CODE_NEEDED';
+export const VERIFICATION_CODE_REQUEST = 'app/auth/VERIFICATION_CODE_REQUEST';
+export const VERIFICATION_CODE_SUCCESS = 'app/auth/VERIFICATION_CODE_SUCCESS';
+export const VERIFICATION_CODE_ERROR = 'app/auth/VERIFICATION_CODE_ERROR';
+export const VERIFICATION_CODE_COOKIE = 'verification_code';

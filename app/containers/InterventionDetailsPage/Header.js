@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { Row as GRow, Col as GCol, useScreenClass } from 'react-grid-system';
 import { FormattedMessage, IntlShape, injectIntl } from 'react-intl';
@@ -27,16 +27,32 @@ const Header = ({
   csvLink,
   csvGeneratedAt,
   options,
+  organizationId,
+  canAccessCsv,
 }) => {
   const screenClass = useScreenClass();
+
+  const renderBackButton = useMemo(() => {
+    if (organizationId) {
+      return (
+        <BackButton to={`/organization/${organizationId}/dashboard-setup`}>
+          <FormattedMessage {...messages.backToOrganization} />
+        </BackButton>
+      );
+    }
+    return (
+      <BackButton to="/">
+        <FormattedMessage {...messages.back} />
+      </BackButton>
+    );
+  }, [organizationId]);
+
   return (
     <GCol>
       <GRow xl={12}>
         <GCol>
           <Row justify="between" mt={50}>
-            <BackButton to="/">
-              <FormattedMessage {...messages.back} />
-            </BackButton>
+            {renderBackButton}
           </Row>
         </GCol>
       </GRow>
@@ -85,6 +101,7 @@ const Header = ({
                 handleSendCsv={handleSendCsv}
                 csvLink={csvLink}
                 csvGeneratedAt={csvGeneratedAt}
+                canAccessCsv={canAccessCsv}
               />
             </Row>
             <InterventionOptions>
@@ -107,7 +124,9 @@ Header.propTypes = {
   handleSendCsv: PropTypes.func,
   csvLink: PropTypes.string,
   csvGeneratedAt: PropTypes.string,
+  organizationId: PropTypes.string,
   options: PropTypes.array,
+  canAccessCsv: PropTypes.bool,
 };
 
 export default injectIntl(Header);

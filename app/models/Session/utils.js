@@ -29,6 +29,7 @@ import {
   phoneQuestion,
   dateQuestion,
   thirdPartyQuestion,
+  nameQuestion,
 } from './QuestionTypes';
 
 /**
@@ -64,23 +65,26 @@ export const getPreviousQuestions = (
   groups,
   includeCurrentQuestion = true,
 ) => {
-  const currentQuestionGroup = groups.find(
-    ({ id }) => id === currentQuestion.question_group_id,
-  );
+  const currentQuestionGroup = currentQuestion?.questionGroupId
+    ? groups.find(({ id }) => id === currentQuestion.questionGroupId)
+    : groups[groups.length - 1];
+
   const filteredGroups = groups.filter(
-    ({ position }) => position <= currentQuestionGroup?.position,
+    ({ position }) =>
+      !currentQuestionGroup || position <= currentQuestionGroup.position,
   );
+
   const sortedGroups = sortBy(filteredGroups, 'position');
 
   const filteredQuestions = [];
 
   sortedGroups.forEach(group => {
     const currentGroupQuestions = questions.filter(
-      ({ question_group_id: questionGroupId }) => questionGroupId === group.id,
+      ({ questionGroupId }) => questionGroupId === group.id,
     );
 
     const previousQuestionsIncludingCurrent =
-      group.id === currentQuestion.question_group_id
+      group.id === currentQuestion?.questionGroupId
         ? currentGroupQuestions.filter(({ position }) =>
             includeCurrentQuestion
               ? position <= currentQuestion.position
@@ -124,6 +128,7 @@ export const getBranchingVariables = (questions, options) => {
       case currencyQuestion.id:
       case phoneQuestion.id:
       case dateQuestion.id:
+      case nameQuestion.id:
         questionVariables = [];
         break;
       default:

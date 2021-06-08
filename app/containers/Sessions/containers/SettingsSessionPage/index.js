@@ -1,14 +1,13 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, IntlShape } from 'react-intl';
-
-import Box from 'components/Box';
-import { colors } from 'theme';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+
+import { colors } from 'theme';
 
 import {
   getSessionRequest,
@@ -17,12 +16,19 @@ import {
   getSessionSaga,
 } from 'global/reducers/session';
 
-import SessionSettings from 'containers/Sessions/containers/SettingsSessionPage/components/SessionSettings';
+import Box from 'components/Box';
+
+import SessionSettings from './components/SessionSettings';
 import messages from './messages';
 import { StyledColumn } from './styled';
 
 const SettingsInterventionPage = ({
-  session: { name, settings: { narrator: narratorSettings } = {} },
+  session: {
+    name,
+    variable,
+    settings: { narrator: narratorSettings } = {},
+    googleTtsVoice,
+  },
   match: { params },
   getSession,
   intl: { formatMessage },
@@ -44,7 +50,6 @@ const SettingsInterventionPage = ({
       </Helmet>
       <Box
         width="100%"
-        height="100%"
         display="flex"
         justify="center"
         align="center"
@@ -55,8 +60,10 @@ const SettingsInterventionPage = ({
         <StyledColumn height="100%">
           <SessionSettings
             name={name}
+            variable={variable ?? ''}
             narratorSettings={narratorSettings}
             formatMessage={formatMessage}
+            googleTtsVoice={googleTtsVoice}
           />
         </StyledColumn>
       </Box>
@@ -68,6 +75,7 @@ SettingsInterventionPage.propTypes = {
   session: PropTypes.shape({
     id: PropTypes.string,
     name: PropTypes.string,
+    variable: PropTypes.string,
     settings: PropTypes.shape({
       narrator: PropTypes.shape({
         voice: PropTypes.bool,
@@ -75,6 +83,7 @@ SettingsInterventionPage.propTypes = {
       }),
       account_required: PropTypes.bool,
     }),
+    googleTtsVoice: PropTypes.object,
   }),
   match: PropTypes.object,
   getSession: PropTypes.func,

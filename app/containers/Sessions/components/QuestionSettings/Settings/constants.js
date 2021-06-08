@@ -41,3 +41,12 @@ export const REORDER_NARRATOR_BLOCKS =
 
 export const UPDATE_PAUSE_DURATION =
   'app/EditSessionPage/Settings/UPDATE_PAUSE_DURATION';
+
+export const ADD_FORMULA_TARGET =
+  'app/EditSessionPage/Settings/ADD_FORMULA_TARGET';
+
+export const UPDATE_FORMULA_TARGET =
+  'app/EditSessionPage/Settings/UPDATE_FORMULA_TARGET';
+
+export const REMOVE_FORMULA_TARGET =
+  'app/EditSessionPage/Settings/REMOVE_FORMULA_TARGET';

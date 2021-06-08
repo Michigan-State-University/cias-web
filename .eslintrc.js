@@ -14,7 +14,14 @@ module.exports = {
     'prettier/react',
     'plugin:cypress/recommended',
   ],
-  plugins: ['prettier', 'redux-saga', 'react', 'react-hooks', 'jsx-a11y'],
+  plugins: [
+    'prettier',
+    'redux-saga',
+    'react',
+    'react-hooks',
+    'jsx-a11y',
+    'jsdoc',
+  ],
   env: {
     jest: true,
     browser: true,
@@ -40,6 +47,7 @@ module.exports = {
     'import/no-unresolved': 2,
     'import/no-webpack-loader-syntax': 0,
     'import/prefer-default-export': 0,
+    'jsdoc/no-undefined-types': 1,
     'jsx-a11y/aria-props': 2,
     'jsx-a11y/heading-has-content': 0,
     'jsx-a11y/label-has-associated-control': [
@@ -62,8 +70,25 @@ module.exports = {
     'no-confusing-arrow': 0,
     'no-console': 1,
     'no-case-declarations': 0,
+    'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
     'no-unused-vars': 2,
     'no-use-before-define': 0,
+    'prefer-destructuring': [
+      1,
+      {
+        VariableDeclarator: {
+          array: false,
+          object: true,
+        },
+        AssignmentExpression: {
+          array: true,
+          object: true,
+        },
+      },
+      {
+        enforceForRenamedProperties: true,
+      },
+    ],
     'prefer-template': 2,
     'react/destructuring-assignment': 0,
     'react-hooks/rules-of-hooks': 'error',
@@ -91,6 +116,9 @@ module.exports = {
       webpack: {
         config: './internals/webpack/webpack.prod.babel.js',
       },
+    },
+    jsdoc: {
+      mode: 'typescript',
     },
   },
   ignorePatterns: [

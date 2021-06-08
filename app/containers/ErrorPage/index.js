@@ -81,7 +81,7 @@ const ErrorPage = ({ intl: { formatMessage }, error, resetError }) => {
               <Row style={{ marginBottom: 30 }}>
                 <Col align="center">
                   <Text mt={10} fontSize={18} textAlign="center">
-                    {error.toString()}
+                    <Markup content={error.toString()} noWrap />
                   </Text>
                 </Col>
               </Row>

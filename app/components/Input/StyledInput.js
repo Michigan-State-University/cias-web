@@ -39,7 +39,11 @@ const StyledInput = props => {
         {...props}
         textAlign={props.textAlign}
         value={value}
-        onClick={e => e.stopPropagation()}
+        onClick={e => {
+          if (props.onClick) props.onClick(e);
+
+          e.stopPropagation();
+        }}
         onChange={event => onInputChange(event.target.value)}
         onBlur={() => {
           setHasFocus(false);
@@ -61,6 +65,8 @@ const StyledInput = props => {
 
   return (
     <TextArea
+      {...props}
+      maxWidth="initial"
       disabled={props.disabled}
       width={props.width || '100%'}
       height="60px"
@@ -89,6 +95,7 @@ StyledInput.propTypes = {
   textAlign: PropTypes.string,
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
+  onClick: PropTypes.func,
   autoSize: PropTypes.bool,
   maxWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   averageLetterWidth: PropTypes.number,

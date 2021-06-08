@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-syntax */
-import React, { useState, useMemo } from 'react';
+import React, { useMemo, useContext } from 'react';
 import { createStructuredSelector } from 'reselect';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
@@ -9,7 +9,8 @@ import values from 'lodash/values';
 
 import { colors, themeColors } from 'theme';
 
-import VariableChooser from 'containers/BranchingLayout/VariableChooser';
+import { EditSessionPageContext } from 'containers/Sessions/containers/EditSessionPage/utils';
+import VariableChooser from 'containers/VariableChooser';
 import Column from 'components/Column';
 import Box from 'components/Box';
 import Select from 'components/Select';
@@ -21,6 +22,8 @@ import { StyledInput } from 'components/Input/StyledInput';
 
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
+import Question from 'models/Session/Question';
+import { feedbackActions } from 'models/Narrator/FeedbackActions';
 
 import {
   makeSelectLoader,
@@ -29,9 +32,8 @@ import {
   makeSelectSelectedQuestionType,
 } from 'global/reducers/questions';
 import { makeSelectPreviewData } from 'global/reducers/localState';
-
-import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import { speechAnimations } from 'utils/animations/animationsNames';
+
 import messages from '../../messages';
 import animationMessages from '../messages';
 import { updateBlockSettings, switchSpeechReflection } from '../../../actions';
@@ -54,8 +56,9 @@ const ReflectionFormulaBlock = ({
   onFormulaUpdate,
   onAddCase,
   disabled,
+  selectedQuestion,
 }) => {
-  const [variableChooserOpen, setVariableChooserOpen] = useState(false);
+  const { sessionId, interventionId } = useContext(EditSessionPageContext);
 
   const selectOptions = useMemo(() => {
     const animations = keys(speechAnimations);
@@ -141,33 +144,26 @@ const ReflectionFormulaBlock = ({
 
       <Row mt={20} align="center" justify="between">
         <Text fontWeight="bold">{formatMessage(messages.formulaHeader)}</Text>
-        <Box
-          onClick={() =>
-            !disabled && setVariableChooserOpen(!variableChooserOpen)
+        <VariableChooser
+          disabled={disabled}
+          onClick={value =>
+            onFormulaUpdate(`${block.payload}${value}`, id, blockIndex)
           }
-          clickable
+          sessionId={sessionId}
+          interventionId={interventionId}
+          selectedQuestion={selectedQuestion}
+          includeCurrentQuestion={false}
+          isMultiSession
         >
           <Text
-            disabled={disabled}
             fontWeight="bold"
             color={themeColors.secondary}
             hoverDecoration="underline"
           >
             {formatMessage(messages.addVariable)}
           </Text>
-        </Box>
+        </VariableChooser>
       </Row>
-      <Box position="relative" mt={10}>
-        <VariableChooser
-          visible={variableChooserOpen}
-          setOpen={setVariableChooserOpen}
-          onClick={value => {
-            setVariableChooserOpen(false);
-            onFormulaUpdate(`${block.payload}${value}`, id, blockIndex);
-          }}
-          includeCurrentQuestion={false}
-        />
-      </Box>
       <Box bg={colors.linkWater} width="100%" mt={10} mb={40} px={8} py={8}>
         <StyledInput
           disabled={disabled}
@@ -221,6 +217,7 @@ ReflectionFormulaBlock.propTypes = {
   onFormulaUpdate: PropTypes.func,
   onAddCase: PropTypes.func,
   disabled: PropTypes.bool,
+  selectedQuestion: PropTypes.shape(Question),
 };
 
 const mapStateToProps = createStructuredSelector({

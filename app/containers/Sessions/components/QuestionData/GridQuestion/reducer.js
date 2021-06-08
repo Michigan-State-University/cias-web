@@ -1,3 +1,5 @@
+import { calculateNextValue } from 'utils/sequenceUtils';
+
 import {
   ADD_ROW,
   ADD_COLUMN,
@@ -19,7 +21,13 @@ const gridQuestionReducer = (question, payload) => {
 
     case ADD_COLUMN:
       question.body.data[0].payload.columns.push({
-        variable: { value: '' },
+        variable: {
+          value: `${calculateNextValue(
+            question.body.data[0].payload.columns.map(
+              ({ variable: { value } }) => +value,
+            ),
+          )}`,
+        },
         payload: '',
       });
       return question;

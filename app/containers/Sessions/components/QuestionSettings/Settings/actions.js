@@ -16,6 +16,9 @@ import {
   REORDER_NARRATOR_BLOCKS,
   UPDATE_PAUSE_DURATION,
   UPDATE_REFLECTION_FORMULA,
+  ADD_FORMULA_TARGET,
+  UPDATE_FORMULA_TARGET,
+  REMOVE_FORMULA_TARGET,
 } from './constants';
 
 export const updateSettings = (property, value) =>
@@ -117,4 +120,27 @@ export const updatePauseDuration = (index, duration) =>
   updateQuestionSettings({
     type: UPDATE_PAUSE_DURATION,
     data: { index, duration },
+  });
+
+export const addFormulaTarget = (questionId, patternIndex) =>
+  updateQuestionSettings({
+    type: ADD_FORMULA_TARGET,
+    data: { questionId, patternIndex },
+  });
+
+export const updateFormulaTarget = (
+  questionId,
+  patternIndex,
+  targetIndex,
+  targetData,
+) =>
+  updateQuestionSettings({
+    type: UPDATE_FORMULA_TARGET,
+    data: { questionId, patternIndex, targetIndex, targetData },
+  });
+
+export const removeFormulaTarget = (questionId, patternIndex, targetIndex) =>
+  updateQuestionSettings({
+    type: REMOVE_FORMULA_TARGET,
+    data: { questionId, patternIndex, targetIndex },
   });

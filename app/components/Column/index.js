@@ -13,8 +13,8 @@ const maxNumberOfColumns = 12;
 
 /**
  * Calculate width of a column in percents
- * @param  {int} columnSpan column span value over maximum of 12 columns
- * @param  {int} return width of column in percents
+ * @param  {number} columnSpan column span value over maximum of 12 columns
+ * @returns  {number} return width of column in percents
  */
 export const calculateWidth = columnSpan => {
   if (columnSpan) return (columnSpan / maxNumberOfColumns) * 100;

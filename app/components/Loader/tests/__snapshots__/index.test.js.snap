@@ -34,7 +34,7 @@ Object {
 }
 
 .c0 {
-  position: absolute;
+  position: fixed;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -52,8 +52,7 @@ Object {
   height: 100vh;
   left: 0;
   top: 0;
-  background-color: rgba(255,255,255,1);
-  opacity: 0.5;
+  background-color: rgba(255,255,255,0.5);
 }
 
 <body>
@@ -61,7 +60,6 @@ Object {
       <div
         class="c0"
         data-testid="fullscreen-loader"
-        opacity="0.5"
       >
         <div
           class="c1"
@@ -74,9 +72,8 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="styled__FillScreenLoader-sc-1aaagww-0 bcnRTW"
+      class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
       data-testid="fullscreen-loader"
-      opacity="0.5"
     >
       <div
         class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"

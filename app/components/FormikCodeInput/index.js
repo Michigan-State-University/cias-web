@@ -40,13 +40,17 @@ function FormikCodeInput({ formikKey, label, codeLength }) {
   }
 
   const handleInput = e => {
-    const inputValue = e.target.value;
+    const {
+      target: { value: inputValue },
+    } = e;
     if (checkNumericInput(inputValue)) e.target.value = '';
   };
 
   const handleChange = (e, index) => {
     const tempCode = [...code];
-    tempCode[index] = e.target.value;
+    ({
+      target: { value: tempCode[index] },
+    } = e);
     setCode(tempCode);
     setValue(tempCode.join(''));
     setTouched(true);
@@ -54,8 +58,10 @@ function FormikCodeInput({ formikKey, label, codeLength }) {
 
   const handleKeyUp = (e, index) => {
     e.preventDefault();
-    const key = e.keyCode;
-    const inputValue = e.target.value;
+    const { keyCode: key } = e;
+    const {
+      target: { value: inputValue },
+    } = e;
     if (key === KEY_BACKSPACE && lastKey === KEY_BACKSPACE) {
       if (index - 1 >= 0) {
         inputsRefs.current[index - 1].current.focus();

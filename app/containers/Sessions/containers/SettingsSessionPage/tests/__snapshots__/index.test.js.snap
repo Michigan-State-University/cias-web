@@ -2,9 +2,8 @@
 
 exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
 <div
-  class="Box-sc-1vhutan-0 dCliJn"
+  class="Box-sc-1vhutan-0 laeLGt"
   display="flex"
-  height="100%"
   width="100%"
 >
   <div
@@ -12,7 +11,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
     height="100%"
   >
     <div
-      class="styled__NameContainer-sc-12xx0pj-1 exgDKI"
+      class="styled__InputContainer-sc-12xx0pj-1 gWMxgR"
     >
       <h3
         class="H3-twxrn4-0 cJvzEt"
@@ -27,6 +26,28 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         type="text"
         value="e-Session Name"
         width="100%"
+      />
+    </div>
+    <div
+      class="styled__InputContainer-sc-12xx0pj-1 gWMxgR"
+      style="margin-top: 15px;"
+    >
+      <h3
+        class="H3-twxrn4-0 cJvzEt"
+        font-weight="regular"
+      >
+        Variable
+      </h3>
+      <input
+        autocomplete="off"
+        class="Input-t9j2q5-0 kMQnkg BadgeInput-sc-1ua27xt-0 locZHQ"
+        color="#107969"
+        disabled=""
+        name="notASearchField-Variable name..."
+        placeholder="Variable name..."
+        type="text"
+        value=""
+        width="153px"
       />
     </div>
     <h3

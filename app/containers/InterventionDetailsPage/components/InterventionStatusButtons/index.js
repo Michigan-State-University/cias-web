@@ -37,6 +37,7 @@ function InterventionStatusButtons({
   handleSendCsv,
   csvLink,
   csvGeneratedAt,
+  canAccessCsv,
 }) {
   const apiProtocol = useMemo(
     () => (process.env.API_URL ? getUrlProtocol(process.env.API_URL) : ''),
@@ -155,45 +156,30 @@ function InterventionStatusButtons({
     </>
   );
 
+  const csvButtons = !canAccessCsv ? null : (
+    <CsvButtons
+      handleSendCsv={handleSendCsv}
+      csvLink={csvLink}
+      csvGeneratedAt={csvGeneratedAt}
+      urlToDownload={urlToDownload}
+    />
+  );
+
   const statuses = {
     [draft]: (
       <>
-        <CsvButtons
-          handleSendCsv={handleSendCsv}
-          csvLink={csvLink}
-          csvGeneratedAt={csvGeneratedAt}
-          urlToDownload={urlToDownload}
-        />
+        {csvButtons}
         <PublishButton />
       </>
     ),
     [published]: (
       <>
-        <CsvButtons
-          handleSendCsv={handleSendCsv}
-          csvLink={csvLink}
-          csvGeneratedAt={csvGeneratedAt}
-          urlToDownload={urlToDownload}
-        />
+        {csvButtons}
         <CloseButton />
       </>
     ),
-    [closed]: (
-      <CsvButtons
-        handleSendCsv={handleSendCsv}
-        csvLink={csvLink}
-        csvGeneratedAt={csvGeneratedAt}
-        urlToDownload={urlToDownload}
-      />
-    ),
-    [archived]: (
-      <CsvButtons
-        handleSendCsv={handleSendCsv}
-        csvLink={csvLink}
-        csvGeneratedAt={csvGeneratedAt}
-        urlToDownload={urlToDownload}
-      />
-    ),
+    [closed]: <>{csvButtons}</>,
+    [archived]: <>{csvButtons}</>,
   };
 
   const renderButtons = () => get(statuses, status, <></>);
@@ -208,6 +194,7 @@ InterventionStatusButtons.propTypes = {
   handleSendCsv: PropTypes.func,
   csvLink: PropTypes.string,
   csvGeneratedAt: PropTypes.string,
+  canAccessCsv: PropTypes.bool,
 };
 
 export default injectIntl(InterventionStatusButtons);

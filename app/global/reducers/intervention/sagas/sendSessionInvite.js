@@ -3,6 +3,7 @@ import { put, select, takeLatest, call } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   fetchSessionEmailsSuccess,
   sendSessionInviteError,
@@ -17,19 +18,24 @@ import messages from '../messages';
 import { makeSelectIntervention } from '../selectors';
 
 export function* sendSessionInvite({ payload: { emails, sessionId } }) {
-  const intervention = yield select(makeSelectIntervention());
-  const sessionIndex = intervention.sessions.findIndex(
-    session => session.id === sessionId,
-  );
-
-  const requestURL = `v1/sessions/${sessionId}/invitations`;
+  const { sessions, organizationId } = yield select(makeSelectIntervention());
+  const sessionIndex = sessions.findIndex(session => session.id === sessionId);
+  const organizationPrefix = organizationId
+    ? `/organizations/${organizationId}/`
+    : '';
+  const requestURL = `v1/${organizationPrefix}sessions/${sessionId}/invitations`;
+  const requestBody = organizationId
+    ? {
+        session_invitations: emails,
+      }
+    : {
+        session_invitation: { emails },
+      };
   try {
-    const test = yield call(axios.post, requestURL, {
-      session_invitation: { emails },
-    });
-    const {
-      data: { invitations },
-    } = test;
+    const { data } = yield call(axios.post, requestURL, requestBody);
+    const invitations = organizationId
+      ? data
+      : jsonApiToArray(data, 'invitation');
     yield put(sendSessionInviteSuccess());
     yield put(fetchSessionEmailsSuccess(invitations, sessionIndex));
     yield call(toast.info, formatMessage(messages.sendInviteSuccess), {

@@ -92,7 +92,7 @@ describe('intervention reducer', () => {
       mockPattern,
       {
         match: '',
-        target: { type: 'Session', id: '' },
+        target: [{ type: 'Session', id: '', probability: '100' }],
       },
     ]);
     const updateState = mockState(session);

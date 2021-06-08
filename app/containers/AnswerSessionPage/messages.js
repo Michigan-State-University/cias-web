@@ -10,6 +10,7 @@ import {
   REFLECTION_MISS_MATCH,
   ZERO_DIVISION_FORMULA_ERROR,
   NO_BRANCHING_TARGET,
+  RANDOMIZATION_MISS_MATCH,
 } from 'containers/AnswerSessionPage/constants';
 
 export const scope = 'app.containers.AnswerSessionPage';
@@ -83,6 +84,10 @@ export default defineMessages({
   [NO_BRANCHING_TARGET]: {
     id: `${scope}.${NO_BRANCHING_TARGET}`,
     defaultMessage: `There was a branching error, because branching target is missing (deleted) or not set.`,
+  },
+  [RANDOMIZATION_MISS_MATCH]: {
+    id: `${scope}.${RANDOMIZATION_MISS_MATCH}`,
+    defaultMessage: `Randomization was setup incorrectly and you were transitioned to next screen`,
   },
   emailValidationError: {
     id: `${scope}.emailValidationError`,

@@ -15,8 +15,6 @@ import {
   CHANGE_PREVIEW_MODE,
   CHANGE_IS_ANIMATING,
   SET_FEEDBACK_SCREEN_SETTINGS,
-  PHONETIC_PREVIEW_REQUEST,
-  PHONETIC_PREVIEW_SUCCESS,
   RESET_ANSWERS,
   CREATE_USER_SESSION_REQUEST,
   CREATE_USER_SESSION_SUCCESS,
@@ -105,15 +103,6 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
         break;
       case SET_FEEDBACK_SCREEN_SETTINGS:
         draft.feedbackScreenSettings[payload.setting] = payload.value;
-        break;
-      case PHONETIC_PREVIEW_REQUEST:
-        draft.phoneticText = payload;
-        draft.phoneticLoading = true;
-        draft.phoneticUrl = null;
-        break;
-      case PHONETIC_PREVIEW_SUCCESS:
-        draft.phoneticUrl = payload.url;
-        draft.phoneticLoading = false;
         break;
 
       case CREATE_USER_SESSION_REQUEST:

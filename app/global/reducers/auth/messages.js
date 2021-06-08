@@ -1,6 +1,6 @@
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.globals.reducers.interventions';
+export const scope = 'app.globals.reducers.auth';
 
 export default defineMessages({
   defaultError: {
@@ -42,5 +42,13 @@ export default defineMessages({
   confirmPhoneNumberError: {
     id: `${scope}.confirmPhoneNumberError`,
     defaultMessage: 'Failed to confirm your phone number!',
+  },
+  codeVerification404Error: {
+    id: `${scope}.codeVerification404Error`,
+    defaultMessage: 'Provided code is invalid!',
+  },
+  codeVerification408Error: {
+    id: `${scope}.codeVerification408Error`,
+    defaultMessage: 'Provided code has timed out!',
   },
 });

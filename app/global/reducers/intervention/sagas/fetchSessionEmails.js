@@ -3,19 +3,26 @@ import { makeSelectIntervention } from 'global/reducers/intervention/selectors';
 import { put, call, select, takeLatest } from 'redux-saga/effects';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
+import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { FETCH_SESSION_EMAILS_REQUEST } from '../constants';
 import { fetchSessionEmailsError, fetchSessionEmailsSuccess } from '../actions';
 
 export function* fetchSessionEmails({ payload: { index } }) {
-  const intervention = yield select(makeSelectIntervention());
-  const session = intervention.sessions[index];
+  const { sessions, organizationId } = yield select(makeSelectIntervention());
+  const session = sessions[index];
   if (isNullOrUndefined(session)) return;
-  const requestURL = `v1/sessions/${session.id}/invitations`;
+  const organizationPrefix = organizationId
+    ? `organizations/${organizationId}/`
+    : '';
+  const requestURL = `v1/${organizationPrefix}sessions/${
+    session.id
+  }/invitations`;
   try {
-    const {
-      data: { invitations: users },
-    } = yield call(axios.get, requestURL);
-    yield put(fetchSessionEmailsSuccess(users, index));
+    const { data } = yield call(axios.get, requestURL);
+    const invitations = organizationId
+      ? data
+      : jsonApiToArray(data, 'invitation');
+    yield put(fetchSessionEmailsSuccess(invitations, index));
   } catch (error) {
     yield put(fetchSessionEmailsError(error));
   }

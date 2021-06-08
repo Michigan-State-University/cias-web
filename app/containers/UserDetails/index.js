@@ -17,7 +17,7 @@ import {
   UserReducer,
 } from 'global/reducers/user';
 
-import { useInjectReducer, useInjectSaga } from 'redux-injectors';
+import { injectReducer, injectSaga } from 'redux-injectors';
 
 import Spinner from 'components/Spinner';
 import { themeColors } from 'theme';
@@ -34,9 +34,6 @@ export const UserDetails = ({
     params: { id },
   },
 }) => {
-  useInjectReducer({ key: 'singleUser', reducer: UserReducer });
-  useInjectSaga({ key: 'singleUserSaga', saga: fetchUserSaga });
-
   useEffect(() => {
     fetchUser(id);
   }, []);
@@ -83,4 +80,8 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(UserDetails);
+export default compose(
+  withConnect,
+  injectSaga({ key: 'singleUserSaga', saga: fetchUserSaga }),
+  injectReducer({ key: 'singleUser', reducer: UserReducer }),
+)(UserDetails);

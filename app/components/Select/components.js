@@ -2,24 +2,16 @@ import React from 'react';
 import get from 'lodash/get';
 import { components } from 'react-select';
 
-import arrowDownSelect from 'assets/svg/arrow-down-select.svg';
-
-import Img from 'components/Img';
 import Checkbox from 'components/Checkbox';
+import ToggleArrow from 'components/ToggleArrow';
 
 import { OptionContainer } from './styled';
 
 const DropdownIndicator = props => {
   const isOpen = get(props, 'selectProps.menuIsOpen', false);
-  const transform = isOpen ? 'rotate(180deg);' : '';
-  const transition = 'transform 0.2s;';
   return (
     <components.DropdownIndicator {...props}>
-      <Img
-        src={arrowDownSelect}
-        transform={transform}
-        transition={transition}
-      />
+      <ToggleArrow facingUp={isOpen} />
     </components.DropdownIndicator>
   );
 };

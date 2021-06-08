@@ -10,6 +10,8 @@ import changePhoneNumberSaga from './changePhoneNumber';
 import sendSmsTokenSaga from './sendSmsToken';
 import logInGuestSaga from './logInGuest';
 import editPhoneNumberQuestionSaga from './editPhoneNumberQuestion';
+import loginSaga from './logIn';
+import verifyCodeSaga from './verifyCode';
 
 export {
   logOutSaga,
@@ -23,6 +25,8 @@ export {
   sendSmsTokenSaga,
   logInGuestSaga,
   editPhoneNumberQuestionSaga,
+  loginSaga,
+  verifyCodeSaga,
 };
 
 export default function* allAuthSagas() {
@@ -37,5 +41,7 @@ export default function* allAuthSagas() {
     confirmPhoneNumberSaga(),
     sendSmsTokenSaga(),
     logInGuestSaga(),
+    loginSaga(),
+    verifyCodeSaga(),
   ]);
 }

@@ -10,6 +10,7 @@ exports[`<Button /> Should render and match the snapshot 1`] = `
   outline: none;
   background-color: #107969;
   color: #FFFFFF;
+  border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
@@ -18,6 +19,7 @@ exports[`<Button /> Should render and match the snapshot 1`] = `
   <button
     class="c0"
     color="primary"
+    radius="100px"
   />
 </div>
 `;

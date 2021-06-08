@@ -18,6 +18,7 @@ import Row from 'components/Row';
 import Img from 'components/Img';
 
 import useOutsideClick from 'utils/useOutsideClick';
+import { NAVIGATION } from 'utils/navbarNames';
 import { makeSelectUser } from 'global/reducers/auth';
 import InterventionsNavbar from './components/InterventionsNavbar';
 
@@ -37,9 +38,10 @@ import DefaultNavbar from './components/DefaultNavbar';
 
 const renderNavbar = navbarProps => {
   const { navbarId, ...restProps } = navbarProps || {};
-  if (navbarId === 'sessions') return <InterventionsNavbar {...restProps} />;
-  if (navbarId === 'preview') return <PreviewNavbar {...restProps} />;
-  if (navbarId === 'default') return <DefaultNavbar {...restProps} />;
+  if (navbarId === NAVIGATION.SESSIONS)
+    return <InterventionsNavbar {...restProps} />;
+  if (navbarId === NAVIGATION.PREVIEW) return <PreviewNavbar {...restProps} />;
+  if (navbarId === NAVIGATION.DEFAULT) return <DefaultNavbar {...restProps} />;
   return null;
 };
 

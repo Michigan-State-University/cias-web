@@ -1,0 +1,321 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Sidebar /> Should render and match the snapshot with session path 1`] = `
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 8px !important;
+  color: #2F3850;
+}
+
+.c4 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 20px;
+  color: #2F3850;
+  width: 100%;
+}
+
+.c2 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #9AA1B6;
+  margin-bottom: 8px !important;
+}
+
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #9AA1B6;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #D5DEEA;
+}
+
+.c0 {
+  width: 300px;
+  height: 100vh;
+  top: 0;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  z-index: 10;
+  margin-top: 70px;
+  height: calc(100vh - 70px);
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+}
+
+.c7:after {
+  content: ' ';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 6px solid #C866EA;
+  border-color: #C866EA transparent #C866EA transparent;
+  -webkit-animation: hAjVGa 1.2s linear infinite;
+  animation: hAjVGa 1.2s linear infinite;
+}
+
+.c6 {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #FFFFFF;
+  color: #C866EA;
+  border: 1px solid #C866EA;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.c6:hover {
+  background-color: #C866EA;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+}
+
+<div
+  class="c0"
+>
+  <p
+    class="c1 c2"
+  >
+    CIAS Panel
+  </p>
+  <div
+    class="c3"
+    width="100%"
+  >
+    <p
+      class="c4 c5"
+      width="100%"
+    >
+      Reporting panel
+    </p>
+    <button
+      class="c6"
+      color="secondary"
+      radius="5px"
+      width="auto"
+    >
+      + Add Organization
+    </button>
+    <div
+      class="c7"
+      color="#C866EA"
+      size="30"
+      width="6"
+    />
+  </div>
+</div>
+`;
+
+exports[`<Sidebar /> Should render and match the snapshot without matching path 1`] = `
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 8px !important;
+  color: #2F3850;
+}
+
+.c4 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 20px;
+  color: #2F3850;
+  width: 100%;
+}
+
+.c2 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #9AA1B6;
+  margin-bottom: 8px !important;
+}
+
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #9AA1B6;
+  padding-top: 20px;
+  margin-top: 20px;
+  border-top: 1px solid #D5DEEA;
+}
+
+.c0 {
+  width: 300px;
+  height: 100vh;
+  top: 0;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  z-index: 10;
+  margin-top: 70px;
+  height: calc(100vh - 70px);
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+}
+
+.c7:after {
+  content: ' ';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 6px solid #C866EA;
+  border-color: #C866EA transparent #C866EA transparent;
+  -webkit-animation: hAjVGa 1.2s linear infinite;
+  animation: hAjVGa 1.2s linear infinite;
+}
+
+.c6 {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #FFFFFF;
+  color: #C866EA;
+  border: 1px solid #C866EA;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.c6:hover {
+  background-color: #C866EA;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+}
+
+<div
+  class="c0"
+>
+  <p
+    class="c1 c2"
+  >
+    CIAS Panel
+  </p>
+  <div
+    class="c3"
+    width="100%"
+  >
+    <p
+      class="c4 c5"
+      width="100%"
+    >
+      Reporting panel
+    </p>
+    <button
+      class="c6"
+      color="secondary"
+      radius="5px"
+      width="auto"
+    >
+      + Add Organization
+    </button>
+    <div
+      class="c7"
+      color="#C866EA"
+      size="30"
+      width="6"
+    />
+  </div>
+</div>
+`;

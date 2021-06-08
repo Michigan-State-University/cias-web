@@ -52,13 +52,14 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
             width="140"
           >
             <button
-              class="StyledButton-d2s0gt-0 lxjLX"
+              class="StyledButton-d2s0gt-0 gheXOv"
               color="primary"
               data-cy="send-email-button"
               disabled=""
+              radius="100px"
               width="140"
             >
-              Send an email
+              Send emails
             </button>
           </div>
         </div>

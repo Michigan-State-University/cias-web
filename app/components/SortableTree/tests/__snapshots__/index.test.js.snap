@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SortableTree /> Should render, not log errors in console and match the snapshot 1`] = `
+.c0 .rst__rowContents {
+  border: initial;
+  box-shadow: initial;
+  background-color: initial;
+  padding: 10px;
+  min-width: auto;
+}
+
+.c0 .rst__rowContentsDragDisabled {
+  border: initial;
+}
+
+.c0 .rst__node .rst__collapseButton,
+.c0 .rst__node .rst__expandButton,
+.c0 .rst__node .rst__collapseButton:hover:not(:active),
+.c0 .rst__node .rst__expandButton:hover:not(:active) {
+  cursor: pointer;
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
+  left: initial !important;
+  right: -15px;
+  z-index: 1;
+  background: initial;
+  background-image: url("IMAGE_MOCK");
+  background-repeat: inherit;
+  box-shadow: none;
+  border-radius: unset;
+  width: 13px;
+  height: 8px;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c0 .rst__node .rst__expandButton,
+.c0 .rst__node .rst__expandButton:hover:not(:active) {
+  -webkit-transform: initial;
+  -ms-transform: initial;
+  transform: initial;
+}
+
+.c0 .rst__node:first-child .rst__lineBlock {
+  display: none;
+}
+
+.c0 .rst__node:first-child .rst__nodeContent button.rst__collapseButton {
+  display: none;
+}
+
+.c0 .rst__lineFullVertical::before,
+.c0 .rst__lineFullVertical::after,
+.c0 .rst__lineChildren::after,
+.c0 .rst__lineHalfVerticalBottom::before,
+.c0 .rst__lineHalfVerticalBottom::after,
+.c0 .rst__lineHalfHorizontalRight::before,
+.c0 .rst__lineHalfHorizontalRight::after,
+.c0 .rst__lineHalfVerticalTop::before,
+.c0 .rst__lineHalfVerticalTop::after {
+  background-color: #C866EA;
+}
+
+.c0 .rst__lineHalfHorizontalRight::before {
+  height: 2px;
+}
+
+.c0 .rst__lineFullVertical::after,
+.c0 .rst__lineChildren::after,
+.c0 .rst__lineHalfVerticalTop::after {
+  width: 2px;
+}
+
+<div>
+  <div
+    class="rst__tree c0"
+  >
+    <div
+      class="rst__node"
+      style="height: 80px;"
+    >
+      <div
+        class="rst__lineBlock rst__lineHalfHorizontalRight rst__lineHalfVerticalBottom"
+        style="width: 44px;"
+      />
+      <div
+        class="rst__nodeContent"
+        style="left: 44px;"
+      >
+        <div
+          style="height: 100%;"
+        >
+          <div>
+            <button
+              aria-label="Expand"
+              class="rst__expandButton"
+              style="left: -22px;"
+              type="button"
+            />
+          </div>
+          <div
+            class="rst__rowWrapper"
+          >
+            <div
+              class="rst__row"
+              style="opacity: 1;"
+            >
+              <div
+                class="rst__rowContents rst__rowContentsDragDisabled"
+              >
+                <div
+                  class="rst__rowLabel"
+                >
+                  <span
+                    class="rst__rowTitle"
+                  >
+                    Chicken
+                  </span>
+                </div>
+                <div
+                  class="rst__rowToolbar"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="rst__node"
+      style="height: 80px;"
+    >
+      <div
+        class="rst__lineBlock rst__lineHalfVerticalTop rst__lineHalfHorizontalRight"
+        style="width: 44px;"
+      />
+      <div
+        class="rst__nodeContent"
+        style="left: 44px;"
+      >
+        <div
+          style="height: 100%;"
+        >
+          <div>
+            <button
+              aria-label="Expand"
+              class="rst__expandButton"
+              style="left: -22px;"
+              type="button"
+            />
+          </div>
+          <div
+            class="rst__rowWrapper"
+          >
+            <div
+              class="rst__row"
+              style="opacity: 1;"
+            >
+              <div
+                class="rst__rowContents rst__rowContentsDragDisabled"
+              >
+                <div
+                  class="rst__rowLabel"
+                >
+                  <span
+                    class="rst__rowTitle"
+                  >
+                    Fish
+                  </span>
+                </div>
+                <div
+                  class="rst__rowToolbar"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

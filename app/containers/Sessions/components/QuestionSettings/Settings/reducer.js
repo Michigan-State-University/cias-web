@@ -18,6 +18,9 @@ import {
   REORDER_NARRATOR_BLOCKS,
   UPDATE_PAUSE_DURATION,
   UPDATE_REFLECTION_FORMULA,
+  ADD_FORMULA_TARGET,
+  UPDATE_FORMULA_TARGET,
+  REMOVE_FORMULA_TARGET,
 } from './constants';
 import reflectionFormulaBlockReducer from './Components/Blocks/Reflections/reducer';
 
@@ -176,7 +179,10 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
           ...question.formula,
           patterns: [
             ...question.formula.patterns,
-            { match: '', target: { type: 'Question', id: '' } },
+            {
+              match: '',
+              target: [{ type: 'Question', id: '', probability: '100' }],
+            },
           ],
         },
       };
@@ -228,6 +234,28 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
           blocks: cloneBlocks,
         },
       };
+    }
+
+    case ADD_FORMULA_TARGET:
+      return question.formula.patterns[payload.data.patternIndex].target.push({
+        type: 'Question',
+        id: '',
+        probability: '0',
+      });
+
+    case UPDATE_FORMULA_TARGET: {
+      const { patternIndex, targetIndex, targetData } = payload.data;
+      question.formula.patterns[patternIndex].target[targetIndex] = targetData;
+      return question;
+    }
+
+    case REMOVE_FORMULA_TARGET: {
+      const { patternIndex, targetIndex } = payload.data;
+      const newTargets = question.formula.patterns[patternIndex].target.filter(
+        (_, deleteIndex) => deleteIndex !== targetIndex,
+      );
+      question.formula.patterns[patternIndex].target = newTargets;
+      return question;
     }
 
     default:

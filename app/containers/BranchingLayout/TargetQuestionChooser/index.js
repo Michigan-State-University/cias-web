@@ -44,7 +44,7 @@ const TargetQuestionChooser = props => {
     session: { name, id: sessionId },
     questions,
     selectedQuestion = {},
-    pattern: { target },
+    target,
     currentIndex,
     isVisible,
     intervention,
@@ -195,7 +195,7 @@ const TargetQuestionChooser = props => {
                 >
                   <Img
                     src={
-                      target.id === session.id
+                      target && target.id === session.id
                         ? presentationProjectorSelected
                         : presentationProjector
                     }
@@ -204,7 +204,9 @@ const TargetQuestionChooser = props => {
                   <Box mr={10} maxWidth={isCurrentSession(session) ? 70 : 140}>
                     <EllipsisText
                       text={session.name}
-                      fontWeight={target.id === session.id ? 'bold' : ''}
+                      fontWeight={
+                        target && target.id === session.id ? 'bold' : ''
+                      }
                       fontSize={13}
                       color={
                         canSelectSession(session.position)
@@ -267,10 +269,7 @@ TargetQuestionChooser.propTypes = {
   session: PropTypes.object,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.shape(Question),
-  pattern: PropTypes.shape({
-    match: PropTypes.string,
-    target: PropTypes.shape({ id: PropTypes.string, type: PropTypes.string }),
-  }),
+  target: PropTypes.shape({ id: PropTypes.string, type: PropTypes.string }),
   currentIndex: PropTypes.string,
   sessionIndex: PropTypes.number,
   isVisible: PropTypes.bool,

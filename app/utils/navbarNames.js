@@ -71,4 +71,10 @@ const navbarNames = {
   ),
 };
 
+export const NAVIGATION = {
+  DEFAULT: 'DEFAULT',
+  SESSIONS: 'SESSIONS',
+  PREVIEW: 'PREVIEW',
+};
+
 export default navbarNames;

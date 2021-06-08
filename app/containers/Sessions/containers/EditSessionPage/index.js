@@ -104,7 +104,7 @@ import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 
 import messages from './messages';
-import { useLockEditSessionPageScroll } from './utils';
+import { EditSessionPageContext, useLockEditSessionPageScroll } from './utils';
 import {
   QuestionsRow,
   ShowListButton,
@@ -371,7 +371,12 @@ function EditSessionPage({
   const filteredGroups = groups.filter(group => group.type !== FinishGroupType);
 
   return (
-    <>
+    <EditSessionPageContext.Provider
+      value={{
+        sessionId: params.sessionId,
+        interventionId: params.interventionId,
+      }}
+    >
       <Helmet>
         <title>{sessionName}</title>
       </Helmet>
@@ -514,7 +519,7 @@ function EditSessionPage({
           </Row>
         </Column>
       </Row>
-    </>
+    </EditSessionPageContext.Provider>
   );
 }
 

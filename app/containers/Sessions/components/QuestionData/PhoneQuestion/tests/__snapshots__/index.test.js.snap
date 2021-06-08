@@ -82,6 +82,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                     class=" css-tlfecz-indicatorContainer"
                   >
                     <img
+                      alt="arrow"
                       class="Img-sc-55j3su-0 gTKGj"
                       src="IMAGE_MOCK"
                       transform=""

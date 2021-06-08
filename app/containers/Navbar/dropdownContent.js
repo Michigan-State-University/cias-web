@@ -19,6 +19,10 @@ export default {
   [Roles.admin]: [...sharedNavbarElements],
   [Roles.teamAdmin]: [...sharedNavbarElements],
   [Roles.researcher]: [...sharedNavbarElements],
+  [Roles.eInterventionAdmin]: [...sharedNavbarElements],
+  [Roles.organizationAdmin]: [...sharedNavbarElements],
   [Roles.participant]: [...sharedNavbarElements],
   [Roles.thirdParty]: [...sharedNavbarElements],
+  [Roles.clinicAdmin]: [...sharedNavbarElements],
+  [Roles.healthSystemAdmin]: [...sharedNavbarElements],
 };

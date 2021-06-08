@@ -15,8 +15,9 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
       class="styled__AnswerOuterContainer-sc-1j1abe3-3 cufUDN"
     >
       <button
-        class="StyledButton-d2s0gt-0 ewZcgc styled__StyledButton-sc-1j1abe3-0 ikJNrY"
+        class="StyledButton-d2s0gt-0 dOJpyk styled__StyledButton-sc-1j1abe3-0 ikJNrY"
         color="primary"
+        radius="100px"
       >
         Start session
       </button>

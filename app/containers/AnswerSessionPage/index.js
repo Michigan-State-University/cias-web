@@ -40,12 +40,14 @@ import {
   makeSelectInterventionStatus,
   interventionReducer,
 } from 'global/reducers/intervention';
-import { editPhoneNumberQuestionSaga } from 'global/reducers/auth';
+import {
+  editPhoneNumberQuestionSaga,
+  REDIRECT_QUERY_KEY,
+} from 'global/reducers/auth';
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
 import H2 from 'components/H2';
-import { REDIRECT_QUERY_KEY } from 'containers/LoginPage/constants';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,

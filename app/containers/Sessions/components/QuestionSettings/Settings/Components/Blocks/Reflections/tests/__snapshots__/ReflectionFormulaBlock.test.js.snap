@@ -6,8 +6,9 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
     class="Column-sc-4zswzq-0 ekpwZH"
   >
     <button
-      class="StyledButton-d2s0gt-0 fMiMtZ"
+      class="StyledButton-d2s0gt-0 bWynbR"
       color="primary"
+      radius="100px"
     >
       Move Narrator to default position
     </button>
@@ -75,6 +76,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
                 class=" css-tlfecz-indicatorContainer"
               >
                 <img
+                  alt="arrow"
                   class="Img-sc-55j3su-0 gTKGj"
                   src="IMAGE_MOCK"
                   transform=""
@@ -133,62 +135,30 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
         Formula
       </p>
       <div
-        class="Box-sc-1vhutan-0 gfyFJD"
-      >
-        <p
-          class="Text-e4p0w3-0 iaJrvl"
-          color="#C866EA"
-          font-weight="bold"
-        >
-          Add variable
-        </p>
-      </div>
-    </div>
-    <div
-      class="Box-sc-1vhutan-0 ijRHOU"
-    >
-      <div
-        class="Box-sc-1vhutan-0 hMXAvH"
-        display="none"
-        width="auto"
+        class="Box-sc-1vhutan-0 eamgEw"
       >
         <div
-          class="Row-y1cs0u-0 dskFsL"
+          class="Box-sc-1vhutan-0 gfyFJD"
+        >
+          <p
+            class="Text-e4p0w3-0 iaJrvl"
+            color="#C866EA"
+            font-weight="bold"
+          >
+            Add variable
+          </p>
+        </div>
+        <div
+          class="Box-sc-1vhutan-0 bvPvIe"
+          display="none"
+          width="auto"
         >
           <div
-            class="Box-sc-1vhutan-0 fOicvH"
+            class="Row-y1cs0u-0 dskFsL"
           >
             <div
-              class="Column-sc-4zswzq-0 ekpwZH"
-            >
-              <div
-                class="Box-sc-1vhutan-0 dNQoLv"
-              >
-                <div
-                  class="Box-sc-1vhutan-0 leAXVR"
-                  data-testid="no-content"
-                  display="flex"
-                  height="100%"
-                  width="100%"
-                >
-                  <div
-                    class="Column-sc-4zswzq-0 eExeGs"
-                  >
-                    <img
-                      alt="No content"
-                      class="Img-sc-55j3su-0 cDhXoN"
-                      src="IMAGE_MOCK"
-                    />
-                    <h2
-                      class="H2-uw8lbl-0 bnQANz"
-                      color="#B0BAC9"
-                    >
-                      No variables defined yet
-                    </h2>
-                  </div>
-                </div>
-              </div>
-            </div>
+              class="Box-sc-1vhutan-0 fOicvH"
+            />
           </div>
         </div>
       </div>
@@ -198,11 +168,12 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       width="100%"
     >
       <textarea
-        class="TextArea-sc-175uiux-0 cIMVkN"
+        class="TextArea-sc-175uiux-0 kmGeZJ"
         data-cy="text-area"
         height="auto"
         placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
         rows="5"
+        type="multiline"
         width="100%"
       />
     </div>
@@ -278,6 +249,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
                     class=" css-tlfecz-indicatorContainer"
                   >
                     <img
+                      alt="arrow"
                       class="Img-sc-55j3su-0 gTKGj"
                       src="IMAGE_MOCK"
                       transform=""
@@ -324,11 +296,12 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <textarea
-                class="TextArea-sc-175uiux-0 cIMVkN"
+                class="TextArea-sc-175uiux-0 kmGeZJ"
                 data-cy="text-area"
                 height="auto"
                 placeholder="Enter speech here..."
                 rows="10"
+                type="multiline"
                 width="100%"
               >
                 1

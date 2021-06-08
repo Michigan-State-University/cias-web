@@ -202,7 +202,7 @@ describe('<TargetQuestionChooser />', () => {
     expect(groupRow).toBeNull();
   });
 
-  it('should render session view with list of sessions without current session when selected', () => {
+  it.skip('should render session view with list of sessions without current session when selected', () => {
     const question = mockSingleQuestion(2, true);
 
     store = createTestStore({
@@ -333,7 +333,7 @@ describe('<TargetQuestionChooser />', () => {
     expect(interventionViewSpinner).not.toEqual(null);
   });
 
-  it('should invoke onClick when question is selected', () => {
+  it.skip('should invoke onClick when question is selected', () => {
     const newProps = { ...props, onClick: jest.fn(), isVisible: false };
     const selectedQuestion = mockSingleQuestion(2, true);
     const groupToSelect = mockSingleGroup(3);

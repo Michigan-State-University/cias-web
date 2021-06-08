@@ -32,6 +32,7 @@ export {
   makeSelectInterventionState,
   makeSelectInterventionStatus,
   makeSelectCurrentSessionIndex,
+  makeSelectSessionById,
 } from './selectors';
 export {
   createInterventionSaga,
@@ -60,6 +61,10 @@ export {
   changeSchedulingType,
   updateSchedulingDate,
   updateSchedulingPayload,
+  updateDaysAfterDateVariable,
+  addFormulaTarget,
+  removeFormulaTarget,
+  updateFormulaTarget,
 } from './sessionSettings/actions';
 
 export { SCHEDULE_OPTIONS } from './sessionSettings/constants';

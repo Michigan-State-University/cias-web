@@ -181,6 +181,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
 .c11:hover {
   background-color: #107969;
   color: #FFFFFF;
+  border: 1px solid transparent;
 }
 
 .c12 {
@@ -192,6 +193,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   outline: none;
   background-color: #EF462F;
   color: #FFFFFF;
+  border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
@@ -294,6 +296,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
             <button
               class="c11"
               color="primary"
+              radius="100px"
               type="button"
             >
               Cancel
@@ -302,6 +305,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
               class="c12"
               color="warning"
               data-cy="confirmation-box-confirm-button"
+              radius="100px"
               type="button"
             >
               Confirm
@@ -527,6 +531,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
 .c11:hover {
   background-color: #107969;
   color: #FFFFFF;
+  border: 1px solid transparent;
 }
 
 .c12 {
@@ -538,6 +543,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   outline: none;
   background-color: #EF462F;
   color: #FFFFFF;
+  border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
@@ -640,6 +646,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
             <button
               class="c11"
               color="primary"
+              radius="100px"
               type="button"
             >
               Cancel
@@ -648,6 +655,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
               class="c12"
               color="warning"
               data-cy="confirmation-box-confirm-button"
+              radius="100px"
               type="button"
             >
               Confirm

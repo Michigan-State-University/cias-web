@@ -34,98 +34,116 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
         >
           Log into CIAS
         </h1>
-        <div
-          class="Column-sc-4zswzq-0 jCuscc"
-        >
-          <p
-            class="Text-e4p0w3-0 kFFPgx"
-            width="fit-content"
-          >
-            E-mail address
-          </p>
-          <input
-            class="Input-t9j2q5-0 ptbLy"
-            height="46"
-            name="email"
-            placeholder="Enter e-mail address"
-            type="text"
-            value=""
-            width="100%"
-          />
-        </div>
-        <div
-          class="styled__LinkContainer-ii5zgx-1 bmFcIc"
-        >
-          <a
-            class="styled__StyledLink-ii5zgx-0 hKXfbX"
-            href="/reset-password"
-            tabindex="-1"
-          >
-            Forgot your password?
-          </a>
-        </div>
-        <div
-          class="Column-sc-4zswzq-0 jCuscc"
-        >
-          <p
-            class="Text-e4p0w3-0 kFFPgx"
-            width="fit-content"
-          >
-            Password
-          </p>
-          <input
-            class="Input-t9j2q5-0 ptbLy"
-            height="46"
-            name="password"
-            placeholder="Enter password"
-            type="password"
-            value=""
-            width="100%"
-          />
-        </div>
-        <button
-          class="StyledButton-d2s0gt-0 iDsoFX"
-          color="primary"
-          height="46"
-          type="submit"
-        >
-          Log in
-        </button>
-        <div
-          class="Row-y1cs0u-0 gQFDhs"
-          width="100%"
+        <form
+          action="#"
+          class="styled__StyledForm-sc-1pd518n-1 cszuPK"
         >
           <div
-            class="styled__StyledDivider-sc-1v05p1h-0 krrFLu"
-            color="#D5DEEA"
-          />
-          <p
-            class="Text-e4p0w3-0 styled__Or-sc-1pd518n-0 gliHTo brRnoK"
-            font-weight="bold"
+            class="Column-sc-4zswzq-0 jCuscc"
           >
-            or
-          </p>
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            >
+              E-mail address
+            </p>
+            <div
+              class="Row-y1cs0u-0 fgwsqb"
+              width="100%"
+            >
+              <input
+                class="Input-t9j2q5-0 ptbLy"
+                height="46"
+                name="email"
+                placeholder="Enter e-mail address"
+                type="text"
+                value=""
+                width="100%"
+              />
+            </div>
+          </div>
           <div
-            class="styled__StyledDivider-sc-1v05p1h-0 kYVcVh"
-            color="#D5DEEA"
-          />
-        </div>
-        <div
-          class="Row-y1cs0u-0 cHZgkR"
-          width="100%"
-        >
-          <div
-            class="styled__LinkContainer-ii5zgx-1 iHHiFA"
+            class="styled__LinkContainer-ii5zgx-1 bmFcIc"
           >
             <a
               class="styled__StyledLink-ii5zgx-0 hKXfbX"
-              href="/register"
+              href="/reset-password"
+              tabindex="-1"
             >
-              Create participant account
+              Forgot your password?
             </a>
           </div>
-        </div>
-        
+          <div
+            class="Column-sc-4zswzq-0 jCuscc"
+          >
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            >
+              Password
+            </p>
+            <div
+              class="Row-y1cs0u-0 fgwsqb"
+              width="100%"
+            >
+              <input
+                class="Input-t9j2q5-0 ptbLy"
+                height="46"
+                name="password"
+                placeholder="Enter password"
+                type="password"
+                value=""
+                width="100%"
+              />
+            </div>
+          </div>
+          <button
+            class="StyledButton-d2s0gt-0 gfZkUL"
+            color="primary"
+            height="46"
+            radius="100px"
+            type="submit"
+          >
+            Log in
+          </button>
+          <div
+            class="Row-ptbd41-0 eRUgHj"
+            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+            width="100%"
+          >
+            <div
+              class="styled__StyledDivider-sc-1v05p1h-0 cnOitH"
+              color="#D5DEEA"
+            />
+            <p
+              class="Text-e4p0w3-0 styled__Or-sc-1pd518n-0 gliHTo brRnoK"
+              font-weight="bold"
+            >
+              or
+            </p>
+            <div
+              class="styled__StyledDivider-sc-1v05p1h-0 eBHkCw"
+              color="#D5DEEA"
+            />
+          </div>
+          <div
+            class="Row-ptbd41-0 AQKMx"
+            mt="30"
+            style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: center;"
+            width="100%"
+          >
+            <div
+              class="styled__LinkContainer-ii5zgx-1 iHHiFA"
+            >
+              <a
+                class="styled__StyledLink-ii5zgx-0 hKXfbX"
+                href="/register"
+              >
+                Create participant account
+              </a>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>

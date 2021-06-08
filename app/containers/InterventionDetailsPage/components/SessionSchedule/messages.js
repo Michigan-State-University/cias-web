@@ -25,6 +25,10 @@ export default defineMessages({
     id: `${scope}.daysAfterFill`,
     defaultMessage: 'Send [X] days after previous session completed date',
   },
+  daysAfterDate: {
+    id: `${scope}.daysAfterDate`,
+    defaultMessage: 'Send [X] days after a date provided by participant',
+  },
   exactDate: {
     id: `${scope}.exactDate`,
     defaultMessage: 'Send on exact date',
@@ -40,6 +44,10 @@ export default defineMessages({
   daysAfterFillInfo: {
     id: `${scope}.daysAfterFillInfo`,
     defaultMessage: 'days after previous session completed date.',
+  },
+  daysAfterDateInfo: {
+    id: `${scope}.daysAfterDateInfo`,
+    defaultMessage: 'days after a date provided by participant',
   },
   exactDateInfo: {
     id: `${scope}.exactDateInfo`,
@@ -60,5 +68,13 @@ export default defineMessages({
   timeInfo: {
     id: `${scope}.timeInfo`,
     defaultMessage: '*The information will be sent at',
+  },
+  daysAfterDateVariableEmpty: {
+    id: `${scope}.daysAfterDateVariableEmpty`,
+    defaultMessage: 'Choose variable',
+  },
+  daysAfterDateVariableInfo: {
+    id: `${scope}.daysAfterDateVariableInfo`,
+    defaultMessage: '(Date Screen variable which should be used)',
   },
 });

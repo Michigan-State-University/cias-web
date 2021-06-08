@@ -55,7 +55,9 @@ const ThirdPartyQuestion = ({
   const handleMouseLeave = () => setHovered(-1);
 
   const handleChangeVariable = (index, value, currentValue) => {
-    if (currentValue === '' || emailValidator(currentValue)) {
+    const commaSeparatedEmails = currentValue.split(',');
+
+    if (currentValue === '' || commaSeparatedEmails.every(emailValidator)) {
       updateAnswer(index, {
         ...value,
         value: currentValue,

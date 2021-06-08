@@ -72,4 +72,29 @@ export default defineMessages({
         'There was some error during email confirmation. Please contact a support.',
     },
   },
+  codeVerificationGoBack: {
+    id: `${scope}.codeVerificationGoBack`,
+    defaultMessage: '< Go back',
+  },
+  codeVerificationDescription: {
+    id: `${scope}.codeVerificationDescription`,
+    defaultMessage:
+      'It seems that this is your first login on that browser or the trust period has ended (30 days). <br /><br />We sent you a <b>verification code</b> on your <b>email</b>.',
+  },
+  codeVerificationPlaceholder: {
+    id: `${scope}.codeVerificationPlaceholder`,
+    defaultMessage: 'Enter verification code',
+  },
+  codeVerificationLabel: {
+    id: `${scope}.codeVerificationLabel`,
+    defaultMessage: 'Verification code',
+  },
+  codeVerificationRequired: {
+    id: `${scope}.codeVerificationRequired`,
+    defaultMessage: 'Verification code is required',
+  },
+  codeVerificationButton: {
+    id: `${scope}.codeVerificationButton`,
+    defaultMessage: 'Verify',
+  },
 });

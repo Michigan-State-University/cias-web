@@ -24,7 +24,7 @@ describe('editSession saga', () => {
     const apiResponse = apiSessionResponse();
     apiResponse.data.attributes.name = mockIntervention.name;
 
-    return expectSaga(editSession)
+    return expectSaga(editSession, { payload: {} })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.put), { data: apiResponse }]])
       .put(
@@ -37,7 +37,7 @@ describe('editSession saga', () => {
   });
   it('Check addAvatar error connection', () => {
     const error = new Error('test');
-    return expectSaga(editSession)
+    return expectSaga(editSession, { payload: {} })
       .withState(mockState)
       .provide([[matchers.call.fn(axios.put), throwError(error)]])
       .put(editSessionError(error))

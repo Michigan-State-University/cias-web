@@ -95,8 +95,9 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
             </div>
             <div>
               <button
-                class="StyledButton-d2s0gt-0 xLQtD"
+                class="StyledButton-d2s0gt-0 crShEr"
                 color="warning"
+                radius="100px"
                 width="180"
               >
                 Deactivate account
@@ -120,15 +121,20 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                 >
                   First Name
                 </p>
-                <input
-                  class="Input-t9j2q5-0 ptbLy"
-                  height="46"
-                  name="firstName"
-                  placeholder="Enter first name"
-                  type="text"
-                  value="test"
+                <div
+                  class="Row-y1cs0u-0 fgwsqb"
                   width="100%"
-                />
+                >
+                  <input
+                    class="Input-t9j2q5-0 ptbLy"
+                    height="46"
+                    name="firstName"
+                    placeholder="Enter first name"
+                    type="text"
+                    value="test"
+                    width="100%"
+                  />
+                </div>
               </div>
               <div
                 class="Column-sc-4zswzq-0 jCuscc"
@@ -139,15 +145,20 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                 >
                   Last name
                 </p>
-                <input
-                  class="Input-t9j2q5-0 ptbLy"
-                  height="46"
-                  name="lastName"
-                  placeholder="Enter last name"
-                  type="text"
-                  value="test"
+                <div
+                  class="Row-y1cs0u-0 fgwsqb"
                   width="100%"
-                />
+                >
+                  <input
+                    class="Input-t9j2q5-0 ptbLy"
+                    height="46"
+                    name="lastName"
+                    placeholder="Enter last name"
+                    type="text"
+                    value="test"
+                    width="100%"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -234,6 +245,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                             class=" css-tlfecz-indicatorContainer"
                           >
                             <img
+                              alt="arrow"
                               class="Img-sc-55j3su-0 gTKGj"
                               src="IMAGE_MOCK"
                               transform=""
