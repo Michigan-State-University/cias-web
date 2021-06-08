@@ -204,4 +204,8 @@ export default defineMessages({
     id: `${scope}.xDays`,
     defaultMessage: '{numberOfDays} days',
   },
+  filterData: {
+    id: `${scope}.filterData`,
+    defaultMessage: 'Filter data',
+  },
 });

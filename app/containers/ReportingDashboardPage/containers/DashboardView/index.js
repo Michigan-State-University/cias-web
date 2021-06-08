@@ -129,7 +129,7 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
           />
         </Row>
         <Row onClick={setChartDataFilters} mb={15} justify="center">
-          <Button width={200}>Filter data</Button>
+          <Button width={200}>{formatMessage(messages.filterData)}</Button>
         </Row>
         {organizationIdForRole && (
           <DashboardSections
