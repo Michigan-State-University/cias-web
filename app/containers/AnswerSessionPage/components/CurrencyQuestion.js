@@ -36,7 +36,7 @@ const CurrencyQuestion = ({
     <CurrencyQuestionLayout
       formatMessage={formatMessage}
       onChange={onChange}
-      answerBody={answerBody[0]}
+      answerBody={answerBody?.[0]}
     />
   );
 };
