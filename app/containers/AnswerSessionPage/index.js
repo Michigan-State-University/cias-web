@@ -15,6 +15,7 @@ import { toast } from 'react-toastify';
 import get from 'lodash/get';
 import { Redirect, useLocation } from 'react-router-dom';
 import { useContainerQuery } from 'react-container-query';
+import { Markup } from 'interweave';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import { colors } from 'theme';
@@ -23,7 +24,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE } from 'utils/previewMode';
 
 import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
-
+import Text from 'components/Text';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import { Button } from 'components/Button';
@@ -37,6 +38,7 @@ import H3 from 'components/H3';
 
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 
+import globalMessages from 'global/i18n/globalMessages';
 import {
   fetchInterventionRequest,
   fetchInterventionSaga,
@@ -176,6 +178,9 @@ export function AnswerSessionPage({
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
 
+  const { settings: { required, proceed_button: proceedButton } = {} } =
+    currentQuestion ?? {};
+
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
 
   const isDesktop = useMemo(
@@ -247,9 +252,6 @@ export function AnswerSessionPage({
     );
 
   const renderQuestion = () => {
-    const {
-      settings: { proceed_button: proceedButton, required },
-    } = currentQuestion;
     const selectAnswerProp = (answerBody, selectedByUser = true) => {
       saveSelectedAnswer({
         id: currentQuestionId,
@@ -289,14 +291,21 @@ export function AnswerSessionPage({
         <AppContainer $width="100%">
           <CommonLayout currentQuestion={currentQuestion} />
           <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
+          {required && (
+            <Text color={colors.sonicSilver} mt={40} ml={20}>
+              <Markup
+                content={formatMessage(globalMessages.questionRequired)}
+                noWrap
+              />
+            </Text>
+          )}
           {!isLastScreen &&
             (isNullOrUndefined(proceedButton) || proceedButton) &&
             !isAnimationOngoing && (
-              <Row width="100%" my={20}>
+              <Row width="100%" my={20} ml={20}>
                 <Button
                   data-cy="continue-button"
                   disabled={isButtonDisabled()}
-                  margin={20}
                   width="180px"
                   loading={currentQuestion.loading || nextQuestionLoading}
                   onClick={saveAnswer}
