@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, FormattedMessage } from 'react-intl';
 
+import H3 from 'components/H3';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
@@ -20,6 +21,7 @@ import {
 } from 'global/reducers/questions';
 
 import { canEdit } from 'models/Status/statusPermissions';
+import answerPageMessages from 'containers/AnswerSessionPage/layouts/messages';
 import messages from './messages';
 import { UPDATE_URL } from './constants';
 
@@ -39,7 +41,7 @@ const UrlQuestion = ({
   const editingPossible = canEdit(interventionStatus);
 
   return (
-    <Column mt={10}>
+    <Column>
       <Box
         bg={colors.linkWater}
         width="100%"
@@ -64,6 +66,12 @@ const UrlQuestion = ({
         </Text>
       )}
       {displayPreview && <UrlPreview link={payload} />}
+
+      {isNarratorTab && (
+        <H3 color={colors.flamingo} textAlign="center">
+          {formatMessage(answerPageMessages.wcagExternalLinkWarning)}
+        </H3>
+      )}
     </Column>
   );
 };

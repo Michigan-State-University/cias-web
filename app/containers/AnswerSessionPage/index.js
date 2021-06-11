@@ -15,13 +15,16 @@ import { toast } from 'react-toastify';
 import get from 'lodash/get';
 import { Redirect, useLocation } from 'react-router-dom';
 import { useContainerQuery } from 'react-container-query';
-
-import AudioWrapper from 'utils/audioWrapper';
+import { Markup } from 'interweave';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
+
+import { colors } from 'theme';
+import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { DESKTOP_MODE } from 'utils/previewMode';
 
 import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
-
+import Text from 'components/Text';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import { Button } from 'components/Button';
@@ -30,10 +33,12 @@ import Column from 'components/Column';
 import Box from 'components/Box';
 import Loader from 'components/Loader';
 import { MSULogo } from 'components/Logo';
-import { DESKTOP_MODE } from 'utils/previewMode';
+import H2 from 'components/H2';
+import H3 from 'components/H3';
 
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 
+import globalMessages from 'global/i18n/globalMessages';
 import {
   fetchInterventionRequest,
   fetchInterventionSaga,
@@ -47,7 +52,6 @@ import {
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
-import H2 from 'components/H2';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,
@@ -174,6 +178,9 @@ export function AnswerSessionPage({
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
 
+  const { settings: { required, proceed_button: proceedButton } = {} } =
+    currentQuestion ?? {};
+
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
 
   const isDesktop = useMemo(
@@ -245,9 +252,6 @@ export function AnswerSessionPage({
     );
 
   const renderQuestion = () => {
-    const {
-      settings: { proceed_button: proceedButton, required },
-    } = currentQuestion;
     const selectAnswerProp = (answerBody, selectedByUser = true) => {
       saveSelectedAnswer({
         id: currentQuestionId,
@@ -256,10 +260,8 @@ export function AnswerSessionPage({
       });
     };
 
-    const answer = answers[currentQuestionId];
-    const answerBody = answers[currentQuestionId]
-      ? answers[currentQuestionId].answerBody
-      : [];
+    const { currentQuestionId: answer } = answers;
+    const answerBody = answers[currentQuestionId]?.answerBody ?? [];
 
     const isAnswered = () =>
       answer &&
@@ -289,14 +291,21 @@ export function AnswerSessionPage({
         <AppContainer $width="100%">
           <CommonLayout currentQuestion={currentQuestion} />
           <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
+          {required && (
+            <Text color={colors.sonicSilver} mt={40} ml={20}>
+              <Markup
+                content={formatMessage(globalMessages.questionRequired)}
+                noWrap
+              />
+            </Text>
+          )}
           {!isLastScreen &&
             (isNullOrUndefined(proceedButton) || proceedButton) &&
             !isAnimationOngoing && (
-              <Row width="100%" my={20}>
+              <Row width="100%" my={20} ml={20}>
                 <Button
                   data-cy="continue-button"
                   disabled={isButtonDisabled()}
-                  margin={20}
                   width="180px"
                   loading={currentQuestion.loading || nextQuestionLoading}
                   onClick={saveAnswer}
@@ -374,13 +383,18 @@ export function AnswerSessionPage({
             </Column>
           )}
           {!interventionStarted && !nextQuestionError && (
-            <StyledButton
-              loading={userSessionLoading || nextQuestionLoading}
-              disabled={!previewPossible}
-              onClick={startInterventionAsync}
-              title={buttonText()}
-              isDesktop={isDesktop}
-            />
+            <>
+              <H3 textAlign="center" color={colors.flamingo} mb={50}>
+                {formatMessage(messages.wcagWarning)}
+              </H3>
+              <StyledButton
+                loading={userSessionLoading || nextQuestionLoading}
+                disabled={!previewPossible}
+                onClick={startInterventionAsync}
+                title={buttonText()}
+                isDesktop={isDesktop}
+              />
+            </>
           )}
           {interventionStarted && !nextQuestionError && (
             <>

@@ -2,10 +2,10 @@
 
 exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
 <div
-  class="Column-sc-4zswzq-0 fgvXEf"
+  class="Column-sc-4zswzq-0 ekpwZH"
 >
   <div
-    class="Row-y1cs0u-0 dskFsL"
+    class="Row-y1cs0u-0 kdnhbN"
   >
     <div
       class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 couByT"
@@ -25,8 +25,9 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
               class="Row-y1cs0u-0 dskFsL"
             >
               <img
-                class="Img-sc-55j3su-0 gWNtSX"
+                class="Img-sc-55j3su-0 gJeocE"
                 src="IMAGE_MOCK"
+                width="max-content"
               />
               <div
                 class="Row-y1cs0u-0 gQFDhs"
