@@ -48,6 +48,8 @@ const colors = {
   tuftsBlue: '#4092DD',
   mauvelous: '#E992A7',
   amaranth: '#D83450',
+  sonicSilver: '#6B707C',
+  vermilion: '#D2371D',
 };
 
 const themeColors = {
@@ -55,7 +57,7 @@ const themeColors = {
   secondary: colors.orchid,
   text: colors.bluewood,
   highlight: colors.linkWater,
-  warning: colors.flamingo,
+  warning: colors.vermilion,
 };
 
 export { colors, themeColors };

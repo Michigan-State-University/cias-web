@@ -191,7 +191,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border: none;
   outline: none;
-  background-color: #EF462F;
+  background-color: #D2371D;
   color: #FFFFFF;
   border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
@@ -200,8 +200,8 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
 
 .c12:hover {
   background-color: #FFFFFF;
-  color: #EF462F;
-  border: 1px solid #EF462F;
+  color: #D2371D;
+  border: 1px solid #D2371D;
 }
 
 @media only screen and (min-width:768px) {
@@ -541,7 +541,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   cursor: pointer;
   border: none;
   outline: none;
-  background-color: #EF462F;
+  background-color: #D2371D;
   color: #FFFFFF;
   border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
@@ -550,8 +550,8 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
 
 .c12:hover {
   background-color: #FFFFFF;
-  color: #EF462F;
-  border: 1px solid #EF462F;
+  color: #D2371D;
+  border: 1px solid #D2371D;
 }
 
 @media only screen and (min-width:768px) {

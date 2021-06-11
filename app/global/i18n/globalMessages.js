@@ -1,5 +1,6 @@
 import { defineMessages } from 'react-intl';
 
+import { themeColors } from 'theme';
 import {
   bodyAnimationType,
   feedbackBlockType,
@@ -243,5 +244,11 @@ export default defineMessages({
       id: `${scope}.required`,
       defaultMessage: 'This field is required',
     },
+  },
+  questionRequired: {
+    id: `${scope}.questionRequired`,
+    defaultMessage: `Required fields are marked with an asterisk<span style='color:${
+      themeColors.warning
+    };'>*</span>`,
   },
 });

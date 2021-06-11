@@ -2,6 +2,7 @@ import axios from 'axios';
 import { makeSelectIntervention } from 'global/reducers/intervention/selectors';
 import { put, call, select, takeLatest } from 'redux-saga/effects';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import groupBy from 'lodash/groupBy';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import { FETCH_SESSION_EMAILS_REQUEST } from '../constants';
@@ -19,9 +20,10 @@ export function* fetchSessionEmails({ payload: { index } }) {
   }/invitations`;
   try {
     const { data } = yield call(axios.get, requestURL);
-    const invitations = organizationId
-      ? data
-      : jsonApiToArray(data, 'invitation');
+    let invitations = jsonApiToArray(data, 'invitation');
+    if (organizationId) {
+      invitations = groupBy(invitations, 'healthClinicId');
+    }
     yield put(fetchSessionEmailsSuccess(invitations, index));
   } catch (error) {
     yield put(fetchSessionEmailsError(error));

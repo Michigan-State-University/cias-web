@@ -95,7 +95,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
             </div>
             <div>
               <button
-                class="StyledButton-d2s0gt-0 crShEr"
+                class="StyledButton-d2s0gt-0 eHTczx"
                 color="warning"
                 radius="100px"
                 width="180"
