@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Markup } from 'interweave';
 
+import { themeColors } from 'theme';
+
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Img from 'components/Img';
+import Text from 'components/Text';
 
 import { Player, PlayerWrapper, ImageWrapper } from './styled';
 
@@ -19,6 +22,7 @@ const CommonLayout = ({ currentQuestion }) => {
       subtitle: settingsSubtitle,
       video: settingsVideo,
       image: settingsImage,
+      required: settingsRequired,
     },
   } = currentQuestion;
   return (
@@ -33,7 +37,10 @@ const CommonLayout = ({ currentQuestion }) => {
       {settingsSubtitle && subtitle && (
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
-            <Markup content={subtitle} noWrap />
+            <Row align="center">
+              <Markup content={subtitle} noWrap />
+              {settingsRequired && <Text color={themeColors.warning}>*</Text>}
+            </Row>
           </Box>
         </Row>
       )}
@@ -66,6 +73,7 @@ CommonLayout.propTypes = {
       subtitle: PropTypes.bool,
       video: PropTypes.bool,
       image: PropTypes.bool,
+      required: PropTypes.bool,
     }),
   }),
 };
