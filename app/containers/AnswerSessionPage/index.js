@@ -15,10 +15,12 @@ import { toast } from 'react-toastify';
 import get from 'lodash/get';
 import { Redirect, useLocation } from 'react-router-dom';
 import { useContainerQuery } from 'react-container-query';
-
-import AudioWrapper from 'utils/audioWrapper';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
+
+import { colors } from 'theme';
+import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { DESKTOP_MODE } from 'utils/previewMode';
 
 import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
 
@@ -30,7 +32,8 @@ import Column from 'components/Column';
 import Box from 'components/Box';
 import Loader from 'components/Loader';
 import { MSULogo } from 'components/Logo';
-import { DESKTOP_MODE } from 'utils/previewMode';
+import H2 from 'components/H2';
+import H3 from 'components/H3';
 
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 
@@ -47,7 +50,6 @@ import {
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
-import H2 from 'components/H2';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,
@@ -256,10 +258,8 @@ export function AnswerSessionPage({
       });
     };
 
-    const answer = answers[currentQuestionId];
-    const answerBody = answers[currentQuestionId]
-      ? answers[currentQuestionId].answerBody
-      : [];
+    const { currentQuestionId: answer } = answers;
+    const answerBody = answers[currentQuestionId]?.answerBody ?? [];
 
     const isAnswered = () =>
       answer &&
@@ -374,13 +374,18 @@ export function AnswerSessionPage({
             </Column>
           )}
           {!interventionStarted && !nextQuestionError && (
-            <StyledButton
-              loading={userSessionLoading || nextQuestionLoading}
-              disabled={!previewPossible}
-              onClick={startInterventionAsync}
-              title={buttonText()}
-              isDesktop={isDesktop}
-            />
+            <>
+              <H3 textAlign="center" color={colors.flamingo} mb={50}>
+                {formatMessage(messages.wcagWarning)}
+              </H3>
+              <StyledButton
+                loading={userSessionLoading || nextQuestionLoading}
+                disabled={!previewPossible}
+                onClick={startInterventionAsync}
+                title={buttonText()}
+                isDesktop={isDesktop}
+              />
+            </>
           )}
           {interventionStarted && !nextQuestionError && (
             <>
