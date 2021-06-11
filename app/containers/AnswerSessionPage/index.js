@@ -260,7 +260,7 @@ export function AnswerSessionPage({
       });
     };
 
-    const { currentQuestionId: answer } = answers;
+    const { [currentQuestionId]: answer } = answers;
     const answerBody = answers[currentQuestionId]?.answerBody ?? [];
 
     const isAnswered = () =>
