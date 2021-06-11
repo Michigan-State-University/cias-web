@@ -4,6 +4,7 @@ import { deleteItemById, updateItemById } from 'utils/reduxUtils';
 
 import {
   ADD_CHART_SUCCESS,
+  COPY_CHART_SUCCESS,
   DELETE_CHART_SUCCESS,
   EDIT_CHART_REQUEST,
   EDIT_CHART_SUCCESS,
@@ -40,6 +41,12 @@ const dashboardSectionReducer = (state = null, action) =>
 
       case DELETE_CHART_SUCCESS: {
         deleteItemById(draft.charts, payload.chartId);
+
+        break;
+      }
+
+      case COPY_CHART_SUCCESS: {
+        draft.charts.push(payload.chart);
 
         break;
       }

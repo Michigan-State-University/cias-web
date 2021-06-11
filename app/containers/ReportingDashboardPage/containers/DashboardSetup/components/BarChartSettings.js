@@ -30,6 +30,7 @@ const BarChartSettings = ({
   onEditName,
   onEditStatus,
   onEditTrendLine,
+  onCopyChart,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -61,6 +62,7 @@ const BarChartSettings = ({
         onChangeStatus={onEditStatus}
         onDelete={onDelete}
         hasFormula={formula.payload !== ''}
+        onCopyChart={onCopyChart}
       />
 
       <Row mt={36}>
@@ -153,6 +155,7 @@ BarChartSettings.propTypes = {
   onEditName: PropTypes.func,
   onEditStatus: PropTypes.func,
   onEditTrendLine: PropTypes.func,
+  onCopyChart: PropTypes.func,
 };
 
 export default memo(BarChartSettings);

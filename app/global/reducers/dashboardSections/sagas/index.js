@@ -7,6 +7,7 @@ import deleteDashboardSectionSaga from './deleteDashboardSection';
 import addChartSaga from './addChart';
 import editChartSaga from './editChart';
 import deleteChartSaga from './deleteChart';
+import copyChartSaga from './copyChart';
 
 export {
   fetchDashboardSectionSaga,
@@ -17,6 +18,7 @@ export {
   addChartSaga,
   editChartSaga,
   deleteChartSaga,
+  copyChartSaga,
 };
 
 export default function* allDashboardSectionsSagas() {
@@ -29,5 +31,6 @@ export default function* allDashboardSectionsSagas() {
     addChartSaga(),
     editChartSaga(),
     deleteChartSaga(),
+    copyChartSaga(),
   ]);
 }

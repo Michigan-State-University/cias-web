@@ -10,6 +10,7 @@ import {
 } from 'global/reducers/dashboardSections';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
+import CopyIcon from 'assets/svg/copy.svg';
 
 import { Col, Row } from 'components/ReactGridSystem';
 import H3 from 'components/H3';
@@ -35,6 +36,7 @@ const ChartSettingsTopSection = ({
   onChangeStatus,
   onDelete,
   hasFormula,
+  onCopyChart,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -148,6 +150,19 @@ const ChartSettingsTopSection = ({
         </Col>
       </Row>
 
+      <Row mr="0!important" mt={36} justify="end">
+        <Col xs="content">
+          <TextButton onClick={onCopyChart}>
+            <Row justify="end">
+              <Icon src={CopyIcon} fill={themeColors.secondary} mr={8} />
+              <Text fontWeight="bold" color={themeColors.secondary}>
+                {formatMessage(messages.chartSettingsCopy)}
+              </Text>
+            </Row>
+          </TextButton>
+        </Col>
+      </Row>
+
       {!statusPermissions.canBeEdited && (
         <Row mt={36}>
           <Col>
@@ -182,6 +197,7 @@ ChartSettingsTopSection.propTypes = {
   isDeleting: PropTypes.bool,
   onChangeStatus: PropTypes.func,
   onDelete: PropTypes.func,
+  onCopyChart: PropTypes.func,
   hasFormula: PropTypes.bool,
 };
 
