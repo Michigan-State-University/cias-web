@@ -13,32 +13,15 @@ import Row from 'components/Row';
 import Select from 'components/Select';
 import Switch from 'components/Switch';
 import Text from 'components/Text';
-import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { QuestionTypes, feedbackQuestion } from 'models/Session/QuestionTypes';
 import { changeQuestionTypeRequest } from 'global/reducers/questions';
 import { colors, borders } from 'theme';
 
 import messages from '../messages';
 import { updateSettings as updateQuestionSettings } from '../../actions';
+import { orderSettings } from './utils';
 
 const HIDE_CHANGING_QUESTION_TYPE = false;
-
-const orderSettings = settings =>
-  settings && {
-    video: settings.video,
-    image: settings.image,
-    title: settings.title,
-    subtitle: settings.subtitle,
-    ...(!isNullOrUndefined(settings.proceed_button) && {
-      proceed_button: settings.proceed_button,
-    }),
-    ...(!isNullOrUndefined(settings.required) && {
-      required: settings.required,
-    }),
-    ...(!isNullOrUndefined(settings.show_number) && {
-      show_number: settings.show_number,
-    }),
-  };
 
 const SettingsTab = ({
   formatMessage,

@@ -29,6 +29,10 @@ export default defineMessages({
     id: `${scope}.subtitle`,
     defaultMessage: 'Main Text',
   },
+  narratorSkippable: {
+    id: `${scope}.narratorSkippable`,
+    defaultMessage: 'Skippable Narrator',
+  },
   proceed_button: {
     id: `${scope}.proceed_button`,
     defaultMessage: 'Continue Button',
