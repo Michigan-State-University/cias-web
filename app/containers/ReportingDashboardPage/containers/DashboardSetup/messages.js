@@ -144,6 +144,10 @@ export default defineMessages({
     id: `${scope}.chartSettingsFormulaPlaceholder`,
     defaultMessage: 'Enter Formula',
   },
+  chartSettingsCopy: {
+    id: `${scope}.chartSettingsCopy`,
+    defaultMessage: 'Copy chart',
+  },
   chartFormulaCaseLabelPlaceholder: {
     id: `${scope}.chartFormulaCaseLabelPlaceholder`,
     defaultMessage: 'Enter label',

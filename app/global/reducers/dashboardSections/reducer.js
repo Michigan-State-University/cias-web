@@ -29,6 +29,7 @@ import {
   FETCH_SECTIONS_ERROR,
   FETCH_SECTIONS_REQUEST,
   FETCH_SECTIONS_SUCCESS,
+  COPY_CHART_SUCCESS,
   SELECT_CHART_ACTION,
 } from './constants';
 
@@ -279,6 +280,15 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         draft.loaders.deleteChartLoader = false;
         draft.errors.deleteChartError = payload.error;
 
+        break;
+      }
+
+      case COPY_CHART_SUCCESS: {
+        updateItemById(
+          draft.dashboardSections,
+          payload.chart.dashboardSectionId,
+          item => dashboardSectionReducer(item, action),
+        );
         break;
       }
 

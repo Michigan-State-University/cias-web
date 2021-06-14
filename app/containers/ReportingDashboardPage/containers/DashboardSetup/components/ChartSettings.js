@@ -14,6 +14,7 @@ import {
   deleteChartRequest,
   editChartRequest,
   StatusPermissions,
+  copyChartRequest,
 } from 'global/reducers/dashboardSections';
 
 import ActionIcon from 'components/ActionIcon';
@@ -29,7 +30,13 @@ import {
 } from '../constants';
 import { SettingsContainer } from '../../../styled';
 
-const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
+const ChartSettings = ({
+  chart,
+  deleteChart,
+  editChart,
+  onClose,
+  copyChart,
+}) => {
   const [isAddingPattern, setIsAddingPattern] = useState(false);
   const [isChangingStatus, setIsChangingStatus] = useState(false);
 
@@ -146,6 +153,10 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
     ]);
   }, [chart.formula.patterns]);
 
+  const onCopyChart = useCallback(() => {
+    copyChart(chart.id);
+  }, [chart.id]);
+
   switch (chart.chartType) {
     case ChartTypeDto.PIE_CHART:
       return wrapper(
@@ -162,6 +173,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
           onEditFormulaPayload={onEditFormulaPayload}
           onEditName={onEditName}
           onEditStatus={onEditStatus}
+          onCopyChart={onCopyChart}
         />,
       );
     case ChartTypeDto.NUMERIC_BAR_CHART:
@@ -178,6 +190,7 @@ const ChartSettings = ({ chart, deleteChart, editChart, onClose }) => {
           onEditName={onEditName}
           onEditStatus={onEditStatus}
           onEditTrendLine={onEditTrendLine}
+          onCopyChart={onCopyChart}
         />,
       );
     default:
@@ -190,11 +203,13 @@ ChartSettings.propTypes = {
   deleteChart: PropTypes.func,
   editChart: PropTypes.func,
   onClose: PropTypes.func,
+  copyChart: PropTypes.func,
 };
 
 const mapDispatchToProps = {
   deleteChart: deleteChartRequest,
   editChart: editChartRequest,
+  copyChart: copyChartRequest,
 };
 
 const withConnect = connect(
