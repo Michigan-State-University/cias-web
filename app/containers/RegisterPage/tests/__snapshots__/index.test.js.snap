@@ -28,7 +28,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           class="H1-sc-1k7m23t-0 ikOywA"
           font-size="23"
         >
-          Register researcher account
+          Register  account
         </h1>
         <div
           class="Row-y1cs0u-0 gQFDhs"

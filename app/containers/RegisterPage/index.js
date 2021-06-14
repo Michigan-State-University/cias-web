@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, Fragment } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -18,6 +18,7 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 import set from 'lodash/set';
+import lowerCase from 'lodash/lowerCase';
 import queryString from 'query-string';
 
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
@@ -89,7 +90,7 @@ export function RegisterPage({
 }) {
   useInjectReducer({ key: 'registerPage', reducer });
   useInjectSaga({ key: 'allRegistrationsSaga', saga: allRegistrationsSaga });
-  const { email, invitation_token: invitationToken } = queryString.parse(
+  const { email, invitation_token: invitationToken, role } = queryString.parse(
     location.search,
     { decode: false },
   );
@@ -116,6 +117,7 @@ export function RegisterPage({
           <H1 mb={40} fontSize={23}>
             <FormattedMessage
               {...messages[isInvite ? 'headerInvite' : 'header']}
+              values={{ role: lowerCase(role) }}
             />
           </H1>
           <Formik
