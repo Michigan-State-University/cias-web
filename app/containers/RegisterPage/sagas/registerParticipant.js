@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
 
+import LocalStorageService from 'utils/localStorageService';
 import {
   REGISTER_PARTICIPANT_REQUEST,
   REGISTER_PARTICIPANT_SUCCESS,
@@ -27,6 +28,9 @@ function* registerParticipant({ payload }) {
     });
     yield put(registerParticipantSuccess());
     yield put(push('/login'));
+    yield call(LocalStorageService.clearHeaders);
+    yield call(LocalStorageService.clearState);
+    yield call(LocalStorageService.clearGuestHeaders);
     yield call(toast.success, formatMessage(messages.createdAccount), {
       toastId: REGISTER_PARTICIPANT_SUCCESS,
     });
