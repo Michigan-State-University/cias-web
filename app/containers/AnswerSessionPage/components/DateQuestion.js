@@ -33,7 +33,7 @@ const DateQuestion = ({
     <DateQuestionLayout
       formatMessage={formatMessage}
       onChange={onChange}
-      answerBody={answerBody[0]}
+      answerBody={answerBody?.[0]}
     />
   );
 };

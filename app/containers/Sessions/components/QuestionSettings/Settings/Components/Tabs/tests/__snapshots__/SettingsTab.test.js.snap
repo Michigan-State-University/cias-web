@@ -98,6 +98,28 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     <h3
       class="H3-twxrn4-0 cRKwFK"
     >
+      Skippable Narrator
+    </h3>
+    <label
+      class="styled__SwitchWrapper-k9teya-0 hucWtb"
+    >
+      <input
+        class="styled__SwitchInput-k9teya-1 hdJnOF"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        type="checkbox"
+      />
+      <span
+        class="styled__Slider-k9teya-2 cGAcbS"
+      />
+    </label>
+  </div>
+  <div
+    class="Row-y1cs0u-0 cNUaef"
+  >
+    <h3
+      class="H3-twxrn4-0 cRKwFK"
+    >
       Continue Button
     </h3>
     <label

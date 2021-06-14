@@ -14,6 +14,12 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
     <div
       class="styled__AnswerOuterContainer-sc-1j1abe3-3 cufUDN"
     >
+      <h3
+        class="H3-twxrn4-0 fEBPSY"
+        color="#EF462F"
+      >
+        Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.
+      </h3>
       <button
         class="StyledButton-d2s0gt-0 dOJpyk styled__StyledButton-sc-1j1abe3-0 ikJNrY"
         color="primary"

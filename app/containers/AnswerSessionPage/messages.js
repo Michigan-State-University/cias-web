@@ -93,4 +93,9 @@ export default defineMessages({
     id: `${scope}.emailValidationError`,
     defaultMessage: 'The email entered in wrong format',
   },
+  wcagWarning: {
+    id: `${scope}.wcagWaring`,
+    defaultMessage:
+      'Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.',
+  },
 });

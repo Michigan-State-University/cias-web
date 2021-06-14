@@ -28,7 +28,7 @@ const TextBoxQuestion = ({
   return (
     <TextBoxQuestionLayout
       formatMessage={formatMessage}
-      answerBody={answerBody[0]}
+      answerBody={answerBody?.[0]}
       onChange={onChange}
     />
   );
