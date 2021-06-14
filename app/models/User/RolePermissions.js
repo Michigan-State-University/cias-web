@@ -23,6 +23,8 @@ const FORBIDDEN_LEFT_SIDEBAR_DISPLAY = [
 
 const FORBIDDEN_FULL_ORGANIZATIONS_ACCESS = [Roles.clinicAdmin];
 
+const ALLOWED_ADD_ORGANIZATION = [Roles.admin];
+
 export const RolePermissions = roles => ({
   canEditLogo: arraysOverlap(roles, ALLOWED_EDIT_LOGO),
   canDownloadInterventionCsv: arraysOverlap(
@@ -38,4 +40,5 @@ export const RolePermissions = roles => ({
     roles,
     FORBIDDEN_FULL_ORGANIZATIONS_ACCESS,
   ),
+  canAddNewOrganization: arraysOverlap(roles, ALLOWED_ADD_ORGANIZATION),
 });

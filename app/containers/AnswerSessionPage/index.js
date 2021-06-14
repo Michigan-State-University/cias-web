@@ -178,8 +178,13 @@ export function AnswerSessionPage({
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
 
-  const { settings: { required, proceed_button: proceedButton } = {} } =
-    currentQuestion ?? {};
+  const {
+    settings: {
+      required,
+      proceed_button: proceedButton,
+      narratorSkippable,
+    } = {},
+  } = currentQuestion ?? {};
 
   const [containerQueryParams, pageRef] = useContainerQuery(QUERY);
 
@@ -260,7 +265,7 @@ export function AnswerSessionPage({
       });
     };
 
-    const { currentQuestionId: answer } = answers;
+    const { [currentQuestionId]: answer } = answers;
     const answerBody = answers[currentQuestionId]?.answerBody ?? [];
 
     const isAnswered = () =>
@@ -286,6 +291,13 @@ export function AnswerSessionPage({
 
     const isLastScreen = currentQuestion.type === finishQuestion.id;
 
+    const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
+
+    const shouldRenderButton =
+      !isLastScreen &&
+      (isNullOrUndefined(proceedButton) || proceedButton) &&
+      canSkipNarrator;
+
     return (
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
@@ -299,20 +311,19 @@ export function AnswerSessionPage({
               />
             </Text>
           )}
-          {!isLastScreen &&
-            (isNullOrUndefined(proceedButton) || proceedButton) &&
-            !isAnimationOngoing && (
-              <Row width="100%" my={20} ml={20}>
-                <Button
-                  data-cy="continue-button"
-                  disabled={isButtonDisabled()}
-                  width="180px"
-                  loading={currentQuestion.loading || nextQuestionLoading}
-                  onClick={saveAnswer}
-                  title={formatMessage(messages.nextQuestion)}
-                />
-              </Row>
-            )}
+          {shouldRenderButton && (
+            <Row width="100%" my={20}>
+              <Button
+                data-cy="continue-button"
+                disabled={isButtonDisabled()}
+                margin={20}
+                width="180px"
+                loading={currentQuestion.loading || nextQuestionLoading}
+                onClick={saveAnswer}
+                title={formatMessage(messages.nextQuestion)}
+              />
+            </Row>
+          )}
         </AppContainer>
       </Row>
     );

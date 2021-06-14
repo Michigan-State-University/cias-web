@@ -39,7 +39,7 @@ const NumberQuestion = ({
     <NumberQuestionLayout
       formatMessage={formatMessage}
       onChange={onChange}
-      answerBody={answerBody[0]}
+      answerBody={answerBody?.[0]}
       onValidation={onValidation}
     />
   );
