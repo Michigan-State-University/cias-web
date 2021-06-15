@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import isNumber from 'lodash/isNumber';
 import get from 'lodash/get';
 import Lottie from 'react-lottie';
+import { useDispatch } from 'react-redux';
+import Draggable from 'react-draggable';
 
+import useFeedbackHelper from 'utils/animationsHelpers/useFeedbackHelper';
+import usePauseHelper from 'utils/animationsHelpers/usePauseHelper';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 import useMoveHelper from 'utils/animationsHelpers/useMoveHelper';
 import useAudioHelper from 'utils/animationsHelpers/useAudioHelper';
@@ -20,10 +24,9 @@ import {
   reflectionFormulaType,
 } from 'models/Narrator/BlockTypes';
 
-import Draggable from 'react-draggable';
-import usePauseHelper from 'utils/animationsHelpers/usePauseHelper';
+import { setCurrentBlockIndex } from 'containers/AnswerSessionPage/actions';
+
 import { NarratorContainer } from './styled';
-import useFeedbackHelper from '../animationsHelpers/feedbackHelper';
 
 const UPDATE = 'UPDATE';
 
@@ -64,6 +67,12 @@ const CharacterAnim = ({
       type: UPDATE,
       newState,
     });
+
+  const globalDispatch = useDispatch();
+
+  // actions
+  const setCurrentBlockIndexAction = index =>
+    globalDispatch(setCurrentBlockIndex(index));
 
   const changeBlock = async prevIndex => {
     clearAnimationBlock();
@@ -223,16 +232,20 @@ const CharacterAnim = ({
 
   useAsync(
     fetchData,
-    () =>
+    () => {
+      setCurrentBlockIndexAction(-1);
       dispatchUpdate({
         currentData: getInitialData(),
         currentBlockIndex: 0,
-      }),
+      });
+    },
     { deps: [questionId, previewMode], cleanUpFunction: stopSpeech },
   );
 
   useDidUpdateEffect(() => {
-    if (state.currentData)
+    if (state.currentData) {
+      setCurrentBlockIndexAction(state.currentBlockIndex);
+
       switch (state.currentData.type) {
         case headAnimationType:
         case bodyAnimationType:
@@ -263,6 +276,7 @@ const CharacterAnim = ({
         default:
           break;
       }
+    }
   }, [state.currentData, state.currentBlockIndex]);
 
   useEffect(() => {

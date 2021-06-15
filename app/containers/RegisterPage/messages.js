@@ -104,6 +104,6 @@ export default defineMessages({
   },
   headerInvite: {
     id: `${scope}.headerInvite`,
-    defaultMessage: 'Register researcher account',
+    defaultMessage: 'Register {role} account',
   },
 });
