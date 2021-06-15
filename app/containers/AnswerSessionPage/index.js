@@ -16,6 +16,7 @@ import get from 'lodash/get';
 import { Redirect, useLocation } from 'react-router-dom';
 import { useContainerQuery } from 'react-container-query';
 import { Markup } from 'interweave';
+import { Hidden, Visible } from 'react-grid-system';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import { colors } from 'theme';
@@ -23,7 +24,10 @@ import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE } from 'utils/previewMode';
 
+import QuestionTranscript from 'containers/QuestionTranscript';
+
 import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
+import Switch from 'components/Switch';
 import Text from 'components/Text';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
@@ -37,7 +41,6 @@ import H2 from 'components/H2';
 import H3 from 'components/H3';
 
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
-
 import globalMessages from 'global/i18n/globalMessages';
 import {
   fetchInterventionRequest,
@@ -76,6 +79,7 @@ import {
   createUserSessionRequest,
   nextQuestionRequest,
   clearError,
+  toggleTextTranscriptAction,
 } from './actions';
 
 const AnimationRefHelper = ({
@@ -163,6 +167,7 @@ export function AnswerSessionPage({
     nextQuestionLoading,
     nextQuestionError,
     currentQuestion,
+    showTextTranscript,
   },
   isPreview,
   interventionStatus,
@@ -170,6 +175,7 @@ export function AnswerSessionPage({
   createUserSession,
   nextQuestion,
   clearErrors,
+  toggleTextTranscript,
 }) {
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
@@ -256,6 +262,42 @@ export function AnswerSessionPage({
       userSession.id,
     );
 
+  const renderQuestionTranscript = isRightSide => {
+    const renderTranscriptComponent = ({ maxWidth, height }) => (
+      <Box mt={30} maxWidth={maxWidth} height={height}>
+        <QuestionTranscript question={currentQuestion} />
+      </Box>
+    );
+
+    const renderRightSide = () => {
+      if (isDesktop)
+        return (
+          <Visible xxl>
+            {renderTranscriptComponent({ maxWidth: 300, height: 600 })}
+          </Visible>
+        );
+
+      return undefined;
+    };
+
+    const renderBottomSide = () => {
+      if (isDesktop)
+        return (
+          <Hidden xxl>
+            {renderTranscriptComponent({ maxWidth: '100%', height: 300 })}
+          </Hidden>
+        );
+
+      return renderTranscriptComponent({ maxWidth: '100%', height: 300 });
+    };
+
+    if (!showTextTranscript) return null;
+
+    if (isRightSide) return renderRightSide();
+
+    return renderBottomSide();
+  };
+
   const renderQuestion = () => {
     const selectAnswerProp = (answerBody, selectedByUser = true) => {
       saveSelectedAnswer({
@@ -301,8 +343,22 @@ export function AnswerSessionPage({
     return (
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
+          <Row padding={26} pb={8} align="center">
+            <Switch
+              id="showTranscript"
+              checked={showTextTranscript}
+              onToggle={toggleTextTranscript}
+              mr={16}
+            />
+            <label htmlFor="showTranscript">
+              {formatMessage(messages.showTranscriptToggle)}
+            </label>
+          </Row>
+
           <CommonLayout currentQuestion={currentQuestion} />
+
           <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
+
           {required && (
             <Text color={colors.sonicSilver} mt={40} ml={20}>
               <Markup
@@ -311,6 +367,7 @@ export function AnswerSessionPage({
               />
             </Text>
           )}
+
           {shouldRenderButton && (
             <Row width="100%" my={20}>
               <Button
@@ -324,6 +381,8 @@ export function AnswerSessionPage({
               />
             </Row>
           )}
+
+          {renderQuestionTranscript(false)}
         </AppContainer>
       </Row>
     );
@@ -410,9 +469,16 @@ export function AnswerSessionPage({
           {interventionStarted && !nextQuestionError && (
             <>
               <Box width="100%">
-                <Row justify="end" padding={30} pb={isDesktop ? 10 : 0}>
-                  <MSULogo logoUrl={logoUrl} {...logoStyles} />
+                <Row padding={30} pb={isDesktop ? 10 : 0}>
+                  <Box {...logoStyles}>
+                    <Row justify="end">
+                      <MSULogo logoUrl={logoUrl} />
+                    </Row>
+
+                    {renderQuestionTranscript(true)}
+                  </Box>
                 </Row>
+
                 {!nextQuestionLoading &&
                   currentQuestion &&
                   interventionStarted && (
@@ -455,6 +521,7 @@ AnswerSessionPage.propTypes = {
   createUserSession: PropTypes.func,
   nextQuestion: PropTypes.func,
   clearErrors: PropTypes.func,
+  toggleTextTranscript: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -473,6 +540,7 @@ const mapDispatchToProps = {
   createUserSession: createUserSessionRequest,
   nextQuestion: nextQuestionRequest,
   clearErrors: clearError,
+  toggleTextTranscript: toggleTextTranscriptAction,
 };
 
 const withConnect = connect(

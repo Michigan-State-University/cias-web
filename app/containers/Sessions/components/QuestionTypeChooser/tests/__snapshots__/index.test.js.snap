@@ -199,6 +199,16 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   height: auto;
   display: block;
   border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
   -webkit-scrollbar-width: none;
   -moz-scrollbar-width: none;
   -ms-scrollbar-width: none;
@@ -209,11 +219,11 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   padding: 8px;
 }
 
-.c8::-webkit-scrollbar {
+.c9::-webkit-scrollbar {
   width: 0;
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
@@ -225,7 +235,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   border-radius: 5px;
 }
 
-.c9:hover {
+.c10:hover {
   background-color: #E9F1FB;
 }
 
@@ -276,7 +286,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c11 {
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -284,7 +294,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c10 {
+.c11 {
   border-radius: 50%;
   background-color: #0086F8;
   display: -webkit-box;
@@ -307,7 +317,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c12 {
+.c13 {
   border-radius: 50%;
   background-color: #C866EA;
   display: -webkit-box;
@@ -330,7 +340,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c13 {
+.c14 {
   border-radius: 50%;
   background-color: #FFA16C;
   display: -webkit-box;
@@ -353,7 +363,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c14 {
+.c15 {
   border-radius: 50%;
   background-color: #2F3850;
   display: -webkit-box;
@@ -376,7 +386,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c15 {
+.c16 {
   border-radius: 50%;
   background-color: #00FFF7;
   display: -webkit-box;
@@ -399,7 +409,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c16 {
+.c17 {
   border-radius: 50%;
   background-color: #808000;
   display: -webkit-box;
@@ -422,7 +432,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c17 {
+.c18 {
   border-radius: 50%;
   background-color: #FFCF5B;
   display: -webkit-box;
@@ -445,7 +455,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c18 {
+.c19 {
   border-radius: 50%;
   background-color: #FF7691;
   display: -webkit-box;
@@ -468,7 +478,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c19 {
+.c20 {
   border-radius: 50%;
   background-color: #000080;
   display: -webkit-box;
@@ -491,7 +501,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c20 {
+.c21 {
   border-radius: 50%;
   background-color: #107969;
   display: -webkit-box;
@@ -514,7 +524,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c21 {
+.c22 {
   border-radius: 50%;
   background-color: #B302FF;
   display: -webkit-box;
@@ -537,7 +547,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c22 {
+.c23 {
   border-radius: 50%;
   background-color: #8CBD00;
   display: -webkit-box;
@@ -560,7 +570,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   color: #2F3850;
 }
 
-.c23 {
+.c24 {
   border-radius: 50%;
   background-color: #EF462F;
   display: -webkit-box;
@@ -628,27 +638,28 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
           </p>
         </div>
         <div
-          class="c1"
+          class="c8"
+          height="100%"
           width="100%"
         >
           <div
-            class="c8"
+            class="c9"
             height="0"
             overflow="scroll"
             width="100%"
           >
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="HoverableBox-zvip6a-0 c10"
             >
               <div
                 class="c3"
               >
                 <div
-                  class="c10"
+                  class="c11"
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
                   Single answer
@@ -656,25 +667,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
-            >
-              <div
-                class="c3"
-              >
-                <div
-                  class="c12"
-                  opacity="1"
-                />
-                <p
-                  class="c11"
-                  font-weight="medium"
-                >
-                  Multi answer
-                </p>
-              </div>
-            </div>
-            <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="HoverableBox-zvip6a-0 c10"
             >
               <div
                 class="c3"
@@ -684,15 +677,15 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
-                  Free Response
+                  Multi answer
                 </p>
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="HoverableBox-zvip6a-0 c10"
             >
               <div
                 class="c3"
@@ -702,15 +695,15 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
-                  Date
+                  Free Response
                 </p>
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="HoverableBox-zvip6a-0 c10"
             >
               <div
                 class="c3"
@@ -720,15 +713,15 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
-                  Name
+                  Date
                 </p>
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="HoverableBox-zvip6a-0 c10"
             >
               <div
                 class="c3"
@@ -738,15 +731,15 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
-                  Currency
+                  Name
                 </p>
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="HoverableBox-zvip6a-0 c10"
             >
               <div
                 class="c3"
@@ -756,7 +749,25 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
+                  font-weight="medium"
+                >
+                  Currency
+                </p>
+              </div>
+            </div>
+            <div
+              class="HoverableBox-zvip6a-0 c10"
+            >
+              <div
+                class="c3"
+              >
+                <div
+                  class="c18"
+                  opacity="1"
+                />
+                <p
+                  class="c12"
                   font-weight="medium"
                 >
                   Number
@@ -764,43 +775,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
-            >
-              <div
-                class="c3"
-              >
-                <div
-                  class="c18"
-                  opacity="1"
-                />
-                <p
-                  class="c11"
-                  font-weight="medium"
-                >
-                  Grid
-                </p>
-              </div>
-            </div>
-            <div
-              class="HoverableBox-zvip6a-0 c9"
-            >
-              <div
-                class="c3"
-              >
-                <div
-                  class="c18"
-                  opacity="1"
-                />
-                <p
-                  class="c11"
-                  font-weight="medium"
-                >
-                  Slider
-                </p>
-              </div>
-            </div>
-            <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="HoverableBox-zvip6a-0 c10"
             >
               <div
                 class="c3"
@@ -810,15 +785,33 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
-                  Information Only
+                  Grid
                 </p>
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="HoverableBox-zvip6a-0 c10"
+            >
+              <div
+                class="c3"
+              >
+                <div
+                  class="c19"
+                  opacity="1"
+                />
+                <p
+                  class="c12"
+                  font-weight="medium"
+                >
+                  Slider
+                </p>
+              </div>
+            </div>
+            <div
+              class="HoverableBox-zvip6a-0 c10"
             >
               <div
                 class="c3"
@@ -828,33 +821,15 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
-                  External Link
+                  Information Only
                 </p>
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
-            >
-              <div
-                class="c3"
-              >
-                <div
-                  class="c16"
-                  opacity="1"
-                />
-                <p
-                  class="c11"
-                  font-weight="medium"
-                >
-                  Feedback
-                </p>
-              </div>
-            </div>
-            <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="HoverableBox-zvip6a-0 c10"
             >
               <div
                 class="c3"
@@ -864,15 +839,33 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
-                  Participant Report
+                  External Link
                 </p>
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="HoverableBox-zvip6a-0 c10"
+            >
+              <div
+                class="c3"
+              >
+                <div
+                  class="c17"
+                  opacity="1"
+                />
+                <p
+                  class="c12"
+                  font-weight="medium"
+                >
+                  Feedback
+                </p>
+              </div>
+            </div>
+            <div
+              class="HoverableBox-zvip6a-0 c10"
             >
               <div
                 class="c3"
@@ -882,15 +875,15 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
                   font-weight="medium"
                 >
-                  Third Party
+                  Participant Report
                 </p>
               </div>
             </div>
             <div
-              class="HoverableBox-zvip6a-0 c9"
+              class="HoverableBox-zvip6a-0 c10"
             >
               <div
                 class="c3"
@@ -900,7 +893,25 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
                   opacity="1"
                 />
                 <p
-                  class="c11"
+                  class="c12"
+                  font-weight="medium"
+                >
+                  Third Party
+                </p>
+              </div>
+            </div>
+            <div
+              class="HoverableBox-zvip6a-0 c10"
+            >
+              <div
+                class="c3"
+              >
+                <div
+                  class="c24"
+                  opacity="1"
+                />
+                <p
+                  class="c12"
                   font-weight="medium"
                 >
                   Phone Text Messaging

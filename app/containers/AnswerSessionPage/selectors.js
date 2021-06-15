@@ -46,6 +46,18 @@ const makeSelectCurrentQuestion = () =>
     substate => substate.currentQuestion,
   );
 
+const makeSelectCurrentBlockIndex = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    substate => substate.currentBlockIndex,
+  );
+
+const makeSelectShowTextTranscript = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    substate => substate.showTextTranscript,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -53,4 +65,6 @@ export {
   makeSelectPreviewMode,
   makeSelectUserSession,
   makeSelectCurrentQuestion,
+  makeSelectCurrentBlockIndex,
+  makeSelectShowTextTranscript,
 };

@@ -98,4 +98,8 @@ export default defineMessages({
     defaultMessage:
       'Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.',
   },
+  showTranscriptToggle: {
+    id: `${scope}.showTranscriptToggle`,
+    defaultMessage: 'Show Transcript',
+  },
 });

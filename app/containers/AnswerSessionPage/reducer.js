@@ -24,6 +24,8 @@ import {
   NEXT_QUESTION_FAILURE,
   CLEAR_ERROR,
   CHANGE_USER_SESSION_ID,
+  SET_CURRENT_BLOCK_INDEX,
+  TOGGLE_TEXT_TRANSCRIPT,
 } from './constants';
 
 const getEmptyFeedbackScreenSettings = () => ({
@@ -52,6 +54,8 @@ export const initialState = {
   nextQuestionLoading: true,
   nextQuestionError: null,
   currentQuestion: null,
+  currentBlockIndex: -1,
+  showTextTranscript: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -143,6 +147,14 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
 
       case CHANGE_USER_SESSION_ID:
         draft.userSession.id = payload.userSessionId;
+        break;
+
+      case SET_CURRENT_BLOCK_INDEX:
+        draft.currentBlockIndex = payload.index;
+        break;
+
+      case TOGGLE_TEXT_TRANSCRIPT:
+        draft.showTextTranscript = !state.showTextTranscript;
         break;
     }
   });

@@ -25,6 +25,8 @@ import {
   NEXT_QUESTION_FAILURE,
   CLEAR_ERROR,
   CHANGE_USER_SESSION_ID,
+  SET_CURRENT_BLOCK_INDEX,
+  TOGGLE_TEXT_TRANSCRIPT,
 } from './constants';
 
 export const selectAnswer = payload => actionBuilder(SELECT_ANSWER, payload);
@@ -95,3 +97,9 @@ export const clearError = () => actionBuilder(CLEAR_ERROR, {});
 
 export const changeUserSessionId = userSessionId =>
   actionBuilder(CHANGE_USER_SESSION_ID, { userSessionId });
+
+export const setCurrentBlockIndex = index =>
+  actionBuilder(SET_CURRENT_BLOCK_INDEX, { index });
+
+export const toggleTextTranscriptAction = () =>
+  actionBuilder(TOGGLE_TEXT_TRANSCRIPT, {});

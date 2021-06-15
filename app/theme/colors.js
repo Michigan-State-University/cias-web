@@ -50,6 +50,7 @@ const colors = {
   amaranth: '#D83450',
   sonicSilver: '#6B707C',
   vermilion: '#D2371D',
+  aliceBlue: '#F1F4F9',
 };
 
 const themeColors = {

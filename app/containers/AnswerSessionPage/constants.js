@@ -56,3 +56,9 @@ export const NEXT_QUESTION_FAILURE =
 export const CLEAR_ERROR = 'app/AnswerSessionPage/CLEAR_ERROR';
 export const CHANGE_USER_SESSION_ID =
   'app/AnswerSessionPage/CHANGE_USER_SESSION_ID';
+
+export const SET_CURRENT_BLOCK_INDEX =
+  'app/AnswerSessionPage/SET_CURRENT_BLOCK_INDEX';
+
+export const TOGGLE_TEXT_TRANSCRIPT =
+  'app/AnswerSessionPage/TOGGLE_TEXT_TRANSCRIPT';
