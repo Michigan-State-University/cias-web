@@ -183,8 +183,8 @@ Object {
   line-height: 130%;
   margin-top: 2px;
   margin-left: 5px;
-  color: rgba(200,102,234,1);
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c7 {
@@ -202,8 +202,8 @@ Object {
   line-height: 130%;
   font-size: 15px;
   font-weight: 700;
-  color: rgba(200,102,234,1);
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c15 {
@@ -222,8 +222,8 @@ Object {
   white-space: nowrap;
   font-size: 15px;
   font-weight: 700;
-  color: rgba(200,102,234,1);
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 @media only screen and (min-width:768px) {
@@ -330,7 +330,7 @@ Object {
                 />
                 <p
                   class="c5"
-                  color="#C866EA"
+                  color="#B727EA"
                 >
                   Sessions
                 </p>
@@ -353,7 +353,7 @@ Object {
                   >
                     <p
                       class="c9 c10"
-                      color="#C866EA"
+                      color="#B727EA"
                       font-size="15"
                       font-weight="bold"
                     >
@@ -423,8 +423,8 @@ Object {
                 src="IMAGE_MOCK"
               />
               <p
-                class="Text-e4p0w3-0 isTVOL"
-                color="#C866EA"
+                class="Text-e4p0w3-0 lnARqL"
+                color="#B727EA"
               >
                 Sessions
               </p>
@@ -446,8 +446,8 @@ Object {
                   class="Row-y1cs0u-0 dskFsL"
                 >
                   <p
-                    class="Text-e4p0w3-0 styled__StyledEllipsisText-h4mjfj-0 PyJdq myERG"
-                    color="#C866EA"
+                    class="Text-e4p0w3-0 styled__StyledEllipsisText-h4mjfj-0 eXkjFa cRKDLi"
+                    color="#B727EA"
                     font-size="15"
                     font-weight="bold"
                   >

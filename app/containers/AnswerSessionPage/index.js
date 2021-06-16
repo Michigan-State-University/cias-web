@@ -19,7 +19,7 @@ import { Markup } from 'interweave';
 import { Hidden, Visible } from 'react-grid-system';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE } from 'utils/previewMode';
@@ -343,18 +343,6 @@ export function AnswerSessionPage({
     return (
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
-          <Row padding={26} pb={8} align="center">
-            <Switch
-              id="showTranscript"
-              checked={showTextTranscript}
-              onToggle={toggleTextTranscript}
-              mr={16}
-            />
-            <label htmlFor="showTranscript">
-              {formatMessage(messages.showTranscriptToggle)}
-            </label>
-          </Row>
-
           <CommonLayout currentQuestion={currentQuestion} />
 
           <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
@@ -418,6 +406,11 @@ export function AnswerSessionPage({
     return continueButtonText();
   };
 
+  const pageHeaderText = () =>
+    isPreview
+      ? formatMessage(messages.previewHeader)
+      : formatMessage(messages.fillHeader);
+
   const renderPage = () => <>{renderQuestion()}</>;
 
   if (nextQuestionLoading && interventionStarted) return <Loader />;
@@ -454,7 +447,10 @@ export function AnswerSessionPage({
           )}
           {!interventionStarted && !nextQuestionError && (
             <>
-              <H3 textAlign="center" color={colors.flamingo} mb={50}>
+              <H2 textAlign="center" mb={50}>
+                {pageHeaderText()}
+              </H2>
+              <H3 textAlign="center" color={themeColors.warning} mb={50}>
                 {formatMessage(messages.wcagWarning)}
               </H3>
               <StyledButton
@@ -478,6 +474,20 @@ export function AnswerSessionPage({
                     {renderQuestionTranscript(true)}
                   </Box>
                 </Row>
+
+                <AppContainer $width="100%">
+                  <Row padding={26} pb={8} align="center">
+                    <Switch
+                      id="showTranscript"
+                      checked={showTextTranscript}
+                      onToggle={toggleTextTranscript}
+                      mr={16}
+                    />
+                    <label htmlFor="showTranscript">
+                      {formatMessage(messages.showTranscriptToggle)}
+                    </label>
+                  </Row>
+                </AppContainer>
 
                 {!nextQuestionLoading &&
                   currentQuestion &&

@@ -17,8 +17,8 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
           data-testid="inline-loader"
         >
           <div
-            class="styled__StyledSpinner-sc-129uixn-0 OJHNY"
-            color="#C866EA"
+            class="styled__StyledSpinner-sc-129uixn-0 ehjfMD"
+            color="#B727EA"
             size="50"
             width="6"
           />
@@ -26,8 +26,8 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <h3
-      class="H3-twxrn4-0 euikok"
-      color="#EF462F"
+      class="H3-twxrn4-0 cksTtw"
+      color="#D2371D"
     >
       Please verify the validity of the External Link.
     </h3>

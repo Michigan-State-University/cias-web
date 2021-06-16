@@ -39,6 +39,7 @@ import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 import IdleTimer from 'components/IdleTimer/Loadable';
+import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 
 import { Roles, ResearcherRoles } from 'models/User/UserRoles';
 
@@ -69,7 +70,7 @@ export function App({ user }) {
         case Roles.teamAdmin:
           return <InterventionPage />;
         case Roles.participant:
-          return <GeneratedReportsPage disableFilter />;
+          return <ParticipantDashboard />;
         case Roles.thirdParty:
           return <GeneratedReportsPage disableFilter />;
         case Roles.eInterventionAdmin:

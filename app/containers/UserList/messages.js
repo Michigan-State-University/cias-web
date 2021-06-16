@@ -78,4 +78,20 @@ export default defineMessages({
     id: `${scope}.waitingForActivation`,
     defaultMessage: 'Waiting for activation',
   },
+  paginationAriaLabel: {
+    id: `${scope}.paginationAriaLabel`,
+    defaultMessage: 'Data list pagination',
+  },
+  paginationPreviousPageAriaLabel: {
+    id: `${scope}.paginationPreviousPageAriaLabel`,
+    defaultMessage: 'Go to previous page',
+  },
+  paginationNextPageAriaLabel: {
+    id: `${scope}.paginationNextPageAriaLabel`,
+    defaultMessage: 'Go to next page',
+  },
+  paginationXPageAriaLabel: {
+    id: `${scope}.paginationNextAriaLabel`,
+    defaultMessage: 'Go to page: {page}',
+  },
 });

@@ -26,7 +26,6 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             width="fit-content"
           >
             <img
-              class="Img-sc-55j3su-0 coTMv"
               src="IMAGE_MOCK"
             />
             <p
@@ -43,7 +42,6 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             width="fit-content"
           >
             <img
-              class="Img-sc-55j3su-0 coTMv"
               src="IMAGE_MOCK"
             />
             <p
@@ -60,7 +58,6 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
             width="fit-content"
           >
             <img
-              class="Img-sc-55j3su-0 coTMv"
               src="IMAGE_MOCK"
             />
             <p

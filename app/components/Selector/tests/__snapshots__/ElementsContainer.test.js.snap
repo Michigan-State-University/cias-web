@@ -31,10 +31,10 @@ exports[`<ElementsContainer /> Should render and match the snapshot 1`] = `
   line-height: 130%;
   margin-bottom: 10px;
   font-weight: 700;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
   white-space: nowrap;
   cursor: pointer;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
   cursor: pointer;
 }
 
@@ -71,14 +71,16 @@ exports[`<ElementsContainer /> Should render and match the snapshot 1`] = `
   >
     <p
       class="c1"
-      color="#C866EA"
+      color="#B727EA"
       font-weight="bold"
+      role="option"
     >
       Label
     </p>
     <p
       class="c2"
       font-weight="bold"
+      role="option"
     >
       Label2
     </p>

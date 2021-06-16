@@ -12,10 +12,12 @@ import { ValueSliderStyled, ValueSliderWrapperStyled } from './styled';
 import Text from '../Text';
 
 const ValueSlider = React.forwardRef(({ value, ...props }, ref) => (
-  <Handle ref={ref} {...props}>
+  <Handle ref={ref} value={value} {...props}>
     <ValueSliderWrapperStyled>
       <ValueSliderStyled>
-        <Text fontSize={fontSizes.regular}>{value}</Text>
+        <Text fontSize={fontSizes.regular} color={colors.white}>
+          {value}
+        </Text>
       </ValueSliderStyled>
     </ValueSliderWrapperStyled>
   </Handle>

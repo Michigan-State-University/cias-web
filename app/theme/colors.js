@@ -51,11 +51,12 @@ const colors = {
   sonicSilver: '#6B707C',
   vermilion: '#D2371D',
   aliceBlue: '#F1F4F9',
+  electricPurple: '#B727EA',
 };
 
 const themeColors = {
   primary: colors.jungleGreen,
-  secondary: colors.orchid,
+  secondary: colors.electricPurple,
   text: colors.bluewood,
   highlight: colors.linkWater,
   warning: colors.vermilion,

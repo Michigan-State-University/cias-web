@@ -33,13 +33,13 @@ exports[`<ReportTile /> Should render and match the snapshot 1`] = `
         class="Row-y1cs0u-0 styled__DownloadRow-onmxmg-1 ecllgQ NPQnz"
       >
         <a
-          class="StyledLink-eun179-0 evBbaE"
+          class="StyledLink-eun179-0 ghZnhP"
           href="/file.pdf"
           target="_blank"
         >
           <p
-            class="Text-e4p0w3-0 fOFYCf"
-            color="#C866EA"
+            class="Text-e4p0w3-0 cVUOKf"
+            color="#B727EA"
             font-size="13"
             font-weight="bold"
           >

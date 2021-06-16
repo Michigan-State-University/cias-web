@@ -465,7 +465,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
 }
 
 .c6:hover .c10 {
-  color: #C866EA !important;
+  color: #B727EA !important;
 }
 
 .c6:hover .styled__ToggleableBox-zk98vs-0 {
@@ -479,10 +479,10 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   margin-right: 5px;
   font-size: 13px;
   font-weight: 700;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
   cursor: pointer;
   text-align: center;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
   cursor: pointer;
 }
 
@@ -524,8 +524,8 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-weight: 700;
-  color: rgba(200,102,234,1);
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c45:hover {
@@ -546,7 +546,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  background-color: rgba(200,102,234,1);
+  background-color: rgba(183,39,234,1);
   color: rgba(255,255,255,1);
   margin-top: 5px;
 }
@@ -687,11 +687,11 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
 }
 
 .c36:checked + .c38 {
-  background-color: #C866EA;
+  background-color: #B727EA;
 }
 
 .c36:focus + .c38 {
-  box-shadow: 0 0 1px #C866EA;
+  box-shadow: 0 0 1px #B727EA;
 }
 
 .c36:disabled + .c38 {
@@ -894,7 +894,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               >
                 <p
                   class="c18"
-                  color="#C866EA"
+                  color="#B727EA"
                   font-size="13"
                   font-weight="bold"
                 >
@@ -1062,7 +1062,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
             >
               Use formula
             </p>
-            <label
+            <div
               class="c35"
             >
               <input
@@ -1075,7 +1075,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               <span
                 class="c38 c39"
               />
-            </label>
+            </div>
           </div>
         </div>
       </div>
@@ -1100,7 +1100,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
                 >
                   <p
                     class="c45"
-                    color="#C866EA"
+                    color="#B727EA"
                     font-weight="bold"
                   >
                     Add variable

@@ -5,9 +5,14 @@ exports[`<ParticipantDashboard /> should render and match the snapshot 1`] = `
   class="styled__StyledContainer-sc-6h8fd4-0 fziHXq"
   style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
 >
+  <h1
+    class="H1-sc-1k7m23t-0 eOavLo"
+  >
+    Dashboard
+  </h1>
   <div
-    class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-    color="#C866EA"
+    class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+    color="#B727EA"
     size="100"
     width="6"
   />

@@ -25,8 +25,8 @@ exports[`<SelectResearchers /> Should render and match the snapshot 1`] = `
   width: 33.33333333333333px;
   height: 33.33333333333333px;
   border-radius: 50%;
-  border: 6px solid #C866EA;
-  border-color: #C866EA transparent #C866EA transparent;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
   -webkit-animation: hAjVGa 1.2s linear infinite;
   animation: hAjVGa 1.2s linear infinite;
 }
@@ -64,7 +64,7 @@ exports[`<SelectResearchers /> Should render and match the snapshot 1`] = `
   >
     <div
       class="c2"
-      color="#C866EA"
+      color="#B727EA"
       size="50"
       width="6"
     />

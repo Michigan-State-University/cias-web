@@ -20,13 +20,15 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
             height="44"
           >
             <img
-              class="Img-sc-55j3su-0 iYjftT"
-              data-cy="single-question-0-checkbox"
               src="IMAGE_MOCK"
             />
-            <div>
-              test
-            </div>
+            <label
+              for="answer-1"
+            >
+              <div>
+                test
+              </div>
+            </label>
           </div>
         </div>
       </div>
@@ -42,20 +44,22 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
             height="44"
           >
             <img
-              class="Img-sc-55j3su-0 iYjftT"
-              data-cy="single-question-1-checkbox"
               src="IMAGE_MOCK"
             />
-            <div>
-              test
-            </div>
+            <label
+              for="answer-2"
+            >
+              <div>
+                test
+              </div>
+            </label>
           </div>
         </div>
       </div>
     </div>
     <h3
-      class="H3-twxrn4-0 euikok"
-      color="#EF462F"
+      class="H3-twxrn4-0 cksTtw"
+      color="#D2371D"
     >
       Please note that selecting a Person in here means that someone outside the system will receive a report based on Your answers in this Session.
     </h3>

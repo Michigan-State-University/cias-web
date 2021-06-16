@@ -11,21 +11,25 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
       class="Column-sc-4zswzq-0 ekpwZH"
     >
       <div
-        class="Row-y1cs0u-0 gQFDhs"
+        class="Row-y1cs0u-0 dVUqCX"
         width="100%"
       >
         <div
           class="Column-sc-4zswzq-0 HRVgp"
           width="230"
         >
-          <p
-            class="Text-e4p0w3-0 kFFPgx"
-            width="fit-content"
+          <label
+            for="iso"
           >
-            Phone number
-          </p>
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            >
+              Phone prefix
+            </p>
+          </label>
           <div
-            class="Box-sc-1vhutan-0 tbzdy"
+            class="Box-sc-1vhutan-0 dvfkZg"
             data-testid="select"
           >
             <div
@@ -44,7 +48,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                   class=" css-g1d714-ValueContainer"
                 >
                   <div
-                    class=" css-1wa3eu0-placeholder"
+                    class=" css-q5ew0g-placeholder"
                   >
                     Code
                   </div>
@@ -61,7 +65,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
                         autocomplete="off"
                         autocorrect="off"
                         disabled=""
-                        id="react-select-3-input"
+                        id="iso"
                         spellcheck="false"
                         style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
                         tabindex="0"
@@ -97,13 +101,20 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
           class="Column-sc-4zswzq-0 ekpwZH"
           value=""
         >
-          <p
-            class="Text-e4p0w3-0 kFFPgx"
-            width="fit-content"
-          />
+          <label
+            for="number"
+          >
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            >
+              Phone number
+            </p>
+          </label>
           <input
-            class="Input-t9j2q5-0 dVjtvP"
+            class="Input-t9j2q5-0 dbKITh"
             disabled=""
+            id="number"
             name="number"
             placeholder="Enter phone number"
             type="tel"

@@ -64,8 +64,8 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
               width="100%"
             />
             <p
-              class="Text-e4p0w3-0 cuanQw"
-              color="#EF462F"
+              class="Text-e4p0w3-0 kPOgQg"
+              color="#D2371D"
               font-weight="bold"
             >
               Invalid e-mail address
@@ -87,8 +87,8 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 cVQKgB"
-              color="#EF462F"
+              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              color="#D2371D"
               font-weight="bold"
             >
               Cancel
@@ -105,8 +105,8 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 cVQKgB"
-              color="#EF462F"
+              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              color="#D2371D"
               font-weight="bold"
             >
               Cancel
@@ -208,8 +208,8 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 cVQKgB"
-              color="#EF462F"
+              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              color="#D2371D"
               font-weight="bold"
             >
               Cancel
@@ -226,8 +226,8 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 cVQKgB"
-              color="#EF462F"
+              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              color="#D2371D"
               font-weight="bold"
             >
               Cancel
@@ -329,8 +329,8 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 cVQKgB"
-              color="#EF462F"
+              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              color="#D2371D"
               font-weight="bold"
             >
               Cancel
@@ -347,8 +347,8 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 cVQKgB"
-              color="#EF462F"
+              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              color="#D2371D"
               font-weight="bold"
             >
               Cancel

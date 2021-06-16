@@ -95,9 +95,9 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-weight: 700;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
   cursor: pointer;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
   cursor: pointer;
 }
 
@@ -187,10 +187,11 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c3"
+        role="button"
       >
         <p
           class="c4"
-          color="#C866EA"
+          color="#B727EA"
           font-weight="bold"
         >
           Send [X] days after previous session scheduled date

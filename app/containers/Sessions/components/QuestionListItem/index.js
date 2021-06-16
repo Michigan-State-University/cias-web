@@ -15,7 +15,7 @@ import Dropdown from 'components/Dropdown';
 import Row from 'components/Row';
 import CopyModal from 'components/CopyModal';
 import globalMessages from 'global/i18n/globalMessages';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 import { getNarratorPositionWhenQuestionIsChanged } from 'utils/getNarratorPosition';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
@@ -166,7 +166,7 @@ const QuestionListItem = ({
       id: 'delete',
       label: <FormattedMessage {...messages.delete} />,
       action: () => setDeleteOpen(true),
-      color: colors.flamingo,
+      color: themeColors.warning,
       disabled,
     },
   ];
@@ -197,7 +197,7 @@ const QuestionListItem = ({
         description={formatMessage(messages.deleteModalTitle)}
         content={
           <Column align="center">
-            <Text color={colors.flamingo}>
+            <Text color={themeColors.warning}>
               {formatMessage(messages.deleteModalContent)}
             </Text>
           </Column>
@@ -211,7 +211,9 @@ const QuestionListItem = ({
         onClick={onChangeItem}
         isSelected={isSelected}
         bg={colors.zirkon}
-        border={`1px solid ${checked ? colors.orchid : colors.smokeWhite}`}
+        border={`1px solid ${
+          checked ? colors.electricPurple : colors.smokeWhite
+        }`}
       >
         <Row justify="between" ref={questionRef}>
           {manage && !isFinishScreen && (

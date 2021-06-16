@@ -5,7 +5,7 @@ import Row from 'components/Row';
 import StyledTextButton from 'components/Button/StyledTextButton';
 import Text from 'components/Text';
 import { StripedTR, TD } from 'components/Table';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import Team from 'models/Teams/Team';
 import { TeamListContext } from './utils';
@@ -32,7 +32,7 @@ const TableRow = ({
 
   const text = formatMessage(messages.deleteTeam);
 
-  const textColor = colors.flamingo;
+  const textColor = themeColors.warning;
 
   return (
     <StripedTR

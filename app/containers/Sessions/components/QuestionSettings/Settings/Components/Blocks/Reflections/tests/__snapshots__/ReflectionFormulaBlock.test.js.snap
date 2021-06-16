@@ -91,7 +91,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       class="Row-y1cs0u-0 bGCTtn"
     >
       Use Reflection
-      <label
+      <div
         class="styled__SwitchWrapper-k9teya-0 gKjzSJ"
       >
         <input
@@ -102,15 +102,15 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
           type="checkbox"
         />
         <span
-          class="styled__Slider-k9teya-2 cGAcbS"
+          class="styled__Slider-k9teya-2 jYsxIO"
         />
-      </label>
+      </div>
     </div>
     <div
       class="Row-y1cs0u-0 gBsZUK"
     >
       Use Formula
-      <label
+      <div
         class="styled__SwitchWrapper-k9teya-0 gKjzSJ"
       >
         <input
@@ -121,9 +121,9 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
           type="checkbox"
         />
         <span
-          class="styled__Slider-k9teya-2 cGAcbS"
+          class="styled__Slider-k9teya-2 jYsxIO"
         />
-      </label>
+      </div>
     </div>
     <div
       class="Row-y1cs0u-0 hwafeU"
@@ -141,8 +141,8 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
           class="Box-sc-1vhutan-0 gfyFJD"
         >
           <p
-            class="Text-e4p0w3-0 iaJrvl"
-            color="#C866EA"
+            class="Text-e4p0w3-0 lmzfCF"
+            color="#B727EA"
             font-weight="bold"
           >
             Add variable

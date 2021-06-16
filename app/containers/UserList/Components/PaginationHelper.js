@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
 
 import Box from 'components/Box';
 import H1 from 'components/H1';
@@ -8,6 +9,7 @@ import Row from 'components/Row';
 
 import { colors, themeColors } from 'theme';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import messages from '../messages';
 
 const PaginationHandler = ({
   setPage,
@@ -16,6 +18,8 @@ const PaginationHandler = ({
   size,
   justify = 'center',
 }) => {
+  const { formatMessage } = useIntl();
+
   useEffect(() => {
     if (!isNullOrUndefined(size) && page > pages) {
       setPage(1);
@@ -45,6 +49,10 @@ const PaginationHandler = ({
         align="center"
         minHeight={25}
         minWidth={25}
+        aria-label={formatMessage(messages.paginationXPageAriaLabel, {
+          page: selectedPage,
+        })}
+        aria-selected={active}
       >
         <Text color={active ? colors.white : colors.black}>{selectedPage}</Text>
       </Box>
@@ -52,9 +60,20 @@ const PaginationHandler = ({
   };
 
   return (
-    <Row width="100%" display="flex" justify={justify} mb={20}>
+    <Row
+      width="100%"
+      display="flex"
+      justify={justify}
+      mb={20}
+      role="navigation"
+      aria-label={formatMessage(messages.paginationAriaLabel)}
+    >
       {notFirstPage && (
-        <H1 cursor="pointer" onClick={changePage(previousPage)}>{`<`}</H1>
+        <H1
+          aria-label={formatMessage(messages.paginationPreviousPageAriaLabel)}
+          cursor="pointer"
+          onClick={changePage(previousPage)}
+        >{`<`}</H1>
       )}
 
       {showFirstPage && (
@@ -79,7 +98,11 @@ const PaginationHandler = ({
 
       {!isLastPage && (
         <>
-          <H1 cursor="pointer" onClick={changePage(nextPage)}>{`>`}</H1>
+          <H1
+            aria-label={formatMessage(messages.paginationNextPageAriaLabel)}
+            cursor="pointer"
+            onClick={changePage(nextPage)}
+          >{`>`}</H1>
         </>
       )}
     </Row>

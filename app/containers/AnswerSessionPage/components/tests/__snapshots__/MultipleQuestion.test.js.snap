@@ -17,12 +17,15 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
           height="44"
         >
           <img
-            class="Img-sc-55j3su-0 iYjftT"
             src="IMAGE_MOCK"
           />
-          <div>
-            test
-          </div>
+          <label
+            for="answer-1"
+          >
+            <div>
+              test
+            </div>
+          </label>
         </div>
       </div>
     </div>
@@ -38,12 +41,15 @@ exports[`<MultipleQuestion /> Should render and match the snapshot 1`] = `
           height="44"
         >
           <img
-            class="Img-sc-55j3su-0 iYjftT"
             src="IMAGE_MOCK"
           />
-          <div>
-            test
-          </div>
+          <label
+            for="answer-2"
+          >
+            <div>
+              test
+            </div>
+          </label>
         </div>
       </div>
     </div>

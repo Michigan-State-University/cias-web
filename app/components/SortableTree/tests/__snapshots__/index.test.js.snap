@@ -60,7 +60,7 @@ exports[`<SortableTree /> Should render, not log errors in console and match the
 .c0 .rst__lineHalfHorizontalRight::after,
 .c0 .rst__lineHalfVerticalTop::before,
 .c0 .rst__lineHalfVerticalTop::after {
-  background-color: #C866EA;
+  background-color: #B727EA;
 }
 
 .c0 .rst__lineHalfHorizontalRight::before {

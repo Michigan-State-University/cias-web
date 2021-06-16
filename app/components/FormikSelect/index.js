@@ -36,18 +36,23 @@ function FormikSelect({
 
   return (
     <Column {...columnStyleProps}>
-      <Text mb={5} width="fit-content">
-        {label}
-      </Text>
+      {label && (
+        <label htmlFor={formikKey}>
+          <Text mb={5} width="fit-content">
+            {label}
+          </Text>
+        </label>
+      )}
+
       <Select
         isOptionDisabled={disabled}
-        mb={3}
         data-testid="select"
         selectProps={{
           options,
           value,
           onChange,
           isDisabled: disabled,
+          inputId: formikKey,
           ...inputProps,
         }}
       />

@@ -85,8 +85,8 @@ exports[`<Notification /> should match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-weight: 700;
-  color: rgba(200,102,234,1);
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c7 {
@@ -158,7 +158,7 @@ exports[`<Notification /> should match the snapshot 1`] = `
             </p>
             <p
               class="c5"
-              color="#C866EA"
+              color="#B727EA"
               font-weight="bold"
             >
               Test description

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Markup } from 'interweave';
 import { useIntl } from 'react-intl';
 
-import { colors } from 'theme';
+import { themeColors } from 'theme';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
@@ -30,6 +30,7 @@ const ThirdPartyQuestionLayout = ({
         {data.map((questionAnswer, index) => {
           const { payload, value } = questionAnswer;
           const isChecked = selectedAnswerIndex === index;
+          const ariaInputId = `answer-${index + 1}`;
 
           return (
             <Row key={`question-${questionId}-el-${index}`} mb={12}>
@@ -42,11 +43,14 @@ const ThirdPartyQuestionLayout = ({
               >
                 <Row align="center" height="44">
                   <Radio
+                    id={ariaInputId}
                     data-cy={`single-question-${index}-checkbox`}
                     checked={isChecked}
                     mr={16}
                   />
-                  <Markup content={payload} />
+                  <label htmlFor={ariaInputId}>
+                    <Markup content={payload} />
+                  </label>
                 </Row>
               </HoverableBox>
             </Row>
@@ -54,7 +58,7 @@ const ThirdPartyQuestionLayout = ({
         })}
       </Box>
 
-      <H3 color={colors.flamingo} textAlign="center">
+      <H3 color={themeColors.warning} textAlign="center">
         {formatMessage(messages.wcagThirdPartyWarning)}
       </H3>
     </Column>

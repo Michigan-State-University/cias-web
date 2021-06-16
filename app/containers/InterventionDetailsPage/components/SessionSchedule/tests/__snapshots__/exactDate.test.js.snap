@@ -120,9 +120,9 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-weight: 700;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
   cursor: pointer;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
   cursor: pointer;
 }
 
@@ -150,8 +150,8 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   line-height: 130%;
   margin-left: 5px;
   font-size: 12px;
-  color: rgba(239,70,47,1);
-  color: rgba(239,70,47,1);
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
 }
 
 .c11 {
@@ -184,11 +184,11 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
 }
 
 .c10 .schedule-date-picker .react-datepicker__day--keyboard-selected {
-  background-color: #C866EA;
+  background-color: #B727EA;
 }
 
 .c10 .schedule-date-picker .react-datepicker__day--selected {
-  background-color: #C866EA;
+  background-color: #B727EA;
 }
 
 .c10 .schedule-date-picker .react-datepicker__day:hover {
@@ -236,10 +236,11 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c3"
+        role="button"
       >
         <p
           class="c4"
-          color="#C866EA"
+          color="#B727EA"
           font-weight="bold"
         >
           Send on exact date
@@ -313,7 +314,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
         >
           <p
             class="c14"
-            color="#EF462F"
+            color="#D2371D"
             font-size="12"
           >
             *The information will be sent at 10:00 am

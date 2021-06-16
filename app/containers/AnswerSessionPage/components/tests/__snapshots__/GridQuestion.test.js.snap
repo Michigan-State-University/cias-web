@@ -85,7 +85,6 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   width="80"
                 >
                   <img
-                    class="Img-sc-55j3su-0 kDGTCK"
                     src="IMAGE_MOCK"
                   />
                 </div>
@@ -98,7 +97,6 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   width="80"
                 >
                   <img
-                    class="Img-sc-55j3su-0 kDGTCK"
                     src="IMAGE_MOCK"
                   />
                 </div>
@@ -130,7 +128,6 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   width="80"
                 >
                   <img
-                    class="Img-sc-55j3su-0 kDGTCK"
                     src="IMAGE_MOCK"
                   />
                 </div>
@@ -143,7 +140,6 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                   width="80"
                 >
                   <img
-                    class="Img-sc-55j3su-0 kDGTCK"
                     src="IMAGE_MOCK"
                   />
                 </div>

@@ -82,8 +82,8 @@ exports[`<QuestionTypeChooser /> should match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-weight: 700;
-  color: rgba(200,102,234,1);
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 <div>
@@ -107,7 +107,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot 1`] = `
         >
           <p
             class="c4"
-            color="#C866EA"
+            color="#B727EA"
             font-weight="bold"
           >
             + Add new screen
@@ -273,8 +273,8 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   font-size: 13px;
   line-height: 130%;
   font-weight: 700;
-  color: rgba(200,102,234,1);
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c7 {
@@ -319,7 +319,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
 
 .c13 {
   border-radius: 50%;
-  background-color: #C866EA;
+  background-color: #B727EA;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -335,7 +335,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   width: 10px;
   height: 10px;
   margin-right: 18px;
-  background-color: rgba(200,102,234,1);
+  background-color: rgba(183,39,234,1);
   opacity: 1;
   color: #2F3850;
 }
@@ -572,7 +572,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
 
 .c24 {
   border-radius: 50%;
-  background-color: #EF462F;
+  background-color: #D2371D;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -588,7 +588,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
   width: 10px;
   height: 10px;
   margin-right: 18px;
-  background-color: rgba(239,70,47,1);
+  background-color: rgba(210,55,29,1);
   opacity: 1;
   color: #2F3850;
 }
@@ -614,7 +614,7 @@ exports[`<QuestionTypeChooser /> should match the snapshot while being open 1`] 
         >
           <p
             class="c4"
-            color="#C866EA"
+            color="#B727EA"
             font-weight="bold"
           >
             + Add new screen

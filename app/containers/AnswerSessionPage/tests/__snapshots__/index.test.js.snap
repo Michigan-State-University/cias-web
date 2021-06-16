@@ -14,9 +14,14 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
     <div
       class="styled__AnswerOuterContainer-sc-1j1abe3-3 cufUDN"
     >
+      <h2
+        class="H2-uw8lbl-0 vHNJM"
+      >
+        Fill Session
+      </h2>
       <h3
-        class="H3-twxrn4-0 fEBPSY"
-        color="#EF462F"
+        class="H3-twxrn4-0 hwldYA"
+        color="#D2371D"
       >
         Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.
       </h3>

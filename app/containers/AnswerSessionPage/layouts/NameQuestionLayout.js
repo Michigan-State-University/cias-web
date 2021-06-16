@@ -52,6 +52,7 @@ const NameQuestionLayout = ({
               onCheck={handleNameChange}
               styles={inputStyles}
               disabled={disabled}
+              ariaLabel={formatMessage(messages.enterName)}
             />
           </Box>
         </Col>
@@ -65,6 +66,7 @@ const NameQuestionLayout = ({
             onBlur={handlePhoneticNameChange}
             styles={inputStyles}
             disabled={disabled}
+            ariaLabel={formatMessage(messages.enterNamePhonetically)}
           />
         </Col>
       </Row>

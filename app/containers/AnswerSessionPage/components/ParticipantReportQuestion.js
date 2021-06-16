@@ -24,7 +24,7 @@ const ParticipantReportQuestion = ({
     },
   } = question;
 
-  const { email: loggedInUserEmail } = loadState() ?? {};
+  const { user: { email: loggedInUserEmail } = {} } = loadState() ?? {};
 
   const [answer, setAnswer] = useState({ value: { email: loggedInUserEmail } });
 
@@ -44,10 +44,10 @@ const ParticipantReportQuestion = ({
 
   const onChange = event => {
     const { email, receive_report: option } = event;
+
     if (option === NO_OPTION) {
-      const value = { value: { email: '', receive_report: option } };
-      setAnswer(value);
-      saveAnswer(value);
+      saveAnswer(event);
+      setAnswer({ value: event });
     }
     if (option === YES_OPTION) {
       if (!isNullOrUndefined(email) && email !== '') saveAnswer(event);

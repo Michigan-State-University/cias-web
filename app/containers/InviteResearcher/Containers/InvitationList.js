@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import map from 'lodash/map';
 import { FormattedMessage } from 'react-intl';
-import { borders, colors } from 'theme';
+import { borders, colors, themeColors } from 'theme';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -60,7 +60,7 @@ const InvitationList = ({
           <TextButton
             onClick={() => cancelInvitation(id)}
             loading={invitationCanceling === id}
-            buttonProps={{ color: colors.flamingo, fontWeight: 'bold' }}
+            buttonProps={{ color: themeColors.warning, fontWeight: 'bold' }}
             spinnerProps={{ size: 18, width: 2 }}
           >
             <FormattedMessage {...messages.cancel} />

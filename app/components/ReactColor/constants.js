@@ -14,7 +14,7 @@ export const DEFAULT_COLORS = [
   colors.amethyst,
   colors.heliotrope,
   colors.mauve,
-  colors.orchid,
+  colors.electricPurple,
 ];
 
 export const ColorPickerType = {

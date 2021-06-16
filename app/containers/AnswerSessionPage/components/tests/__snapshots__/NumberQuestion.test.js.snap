@@ -17,6 +17,7 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
           class="Column-sc-4zswzq-0 ekpwZH"
         >
           <input
+            aria-label="Provide a numeric value:"
             class="Input-t9j2q5-0 fAxtRS"
             height="50"
             placeholder="ex: 1, 2, 100"

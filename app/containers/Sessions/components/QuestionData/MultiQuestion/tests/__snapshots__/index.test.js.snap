@@ -1481,7 +1481,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
           class="Row-y1cs0u-0 ecllgQ"
         >
           <div
-            class="StyledCircle-sc-1dov7hv-0 jShviD"
+            class="StyledCircle-sc-1dov7hv-0 jkyOQV"
             color="#FFFFFF"
             opacity="1"
           >
@@ -1491,8 +1491,8 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
             />
           </div>
           <p
-            class="Text-e4p0w3-0 ikSWkc"
-            color="#C866EA"
+            class="Text-e4p0w3-0 cFbubw"
+            color="#B727EA"
             font-weight="bold"
           >
             Add new answer

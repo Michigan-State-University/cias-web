@@ -15,12 +15,12 @@ exports[`<LatestReport /> Should render and match the snapshot 1`] = `
         Latest Report
       </h1>
       <a
-        class="StyledLink-eun179-0 evBbaE"
+        class="StyledLink-eun179-0 ghZnhP"
         href="/reports"
       >
         <p
-          class="Text-e4p0w3-0 bBleiO"
-          color="#C866EA"
+          class="Text-e4p0w3-0 bERKLe"
+          color="#B727EA"
           font-weight="bold"
         >
           View All Reports
@@ -32,8 +32,8 @@ exports[`<LatestReport /> Should render and match the snapshot 1`] = `
       data-testid="inline-loader"
     >
       <div
-        class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-        color="#C866EA"
+        class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+        color="#B727EA"
         size="100"
         width="6"
       />

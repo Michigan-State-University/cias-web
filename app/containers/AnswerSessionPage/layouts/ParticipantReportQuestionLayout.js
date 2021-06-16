@@ -46,8 +46,15 @@ const ParticipantReportLayout = ({
           align="center"
           onClick={handleChangeOption(YES_OPTION)}
         >
-          <Radio disabled={disabled} checked={option === YES_OPTION} mr={10} />
-          <Text>{formatMessage(messages.reportYesOption)}</Text>
+          <Radio
+            id="answer-yes"
+            disabled={disabled}
+            checked={option === YES_OPTION}
+            mr={10}
+          />
+          <label htmlFor="answer-yes">
+            <Text>{formatMessage(messages.reportYesOption)}</Text>
+          </label>
         </Row>
         <Row
           disabled={disabled}
@@ -55,8 +62,15 @@ const ParticipantReportLayout = ({
           align="center"
           onClick={handleChangeOption(NO_OPTION)}
         >
-          <Radio disabled={disabled} checked={option === NO_OPTION} mr={10} />
-          <Text>{formatMessage(messages.reportNoOption)}</Text>
+          <Radio
+            id="answer-no"
+            disabled={disabled}
+            checked={option === NO_OPTION}
+            mr={10}
+          />
+          <label htmlFor="answer-no">
+            <Text>{formatMessage(messages.reportNoOption)}</Text>
+          </label>
         </Row>
         {showEmailInput && (
           <Column mt={25}>

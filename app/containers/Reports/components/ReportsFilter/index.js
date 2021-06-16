@@ -51,6 +51,7 @@ export function ReportsFilter({
             }}
             rightPosition="315"
             setOption={changeSort}
+            ariaLabel={formatMessage(messages.selectorAriaLabel)}
           />
         )}
       </Row>

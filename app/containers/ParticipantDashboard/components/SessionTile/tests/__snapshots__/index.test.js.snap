@@ -33,15 +33,15 @@ exports[`<SessionTile /> Should render and match the snapshot 1`] = `
         class="Row-y1cs0u-0 ecllgQ"
       >
         <a
-          class="StyledLink-eun179-0 evBbaE"
+          class="StyledLink-eun179-0 ghZnhP"
           href="/report"
         >
           <img
             src="IMAGE_MOCK"
           />
           <p
-            class="Text-e4p0w3-0 kLdreM"
-            color="#C866EA"
+            class="Text-e4p0w3-0 iCzrOw"
+            color="#B727EA"
             font-weight="bold"
           >
             Download Report

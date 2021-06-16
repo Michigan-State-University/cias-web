@@ -13,7 +13,7 @@ exports[`<UnderlinedLabel /> should render and match the snapshot 1`] = `
   margin: 0 10px;
   padding-bottom: 7px;
   border-bottom-width: 2px;
-  border-bottom-color: #C866EA;
+  border-bottom-color: #B727EA;
   border-bottom-style: none;
   cursor: pointer;
   color: #9AA1B6 !important;
@@ -45,7 +45,7 @@ exports[`<UnderlinedLabel /> should render isActive and match the snapshot 1`] =
   margin: 0 10px;
   padding-bottom: 7px;
   border-bottom-width: 2px;
-  border-bottom-color: #C866EA;
+  border-bottom-color: #B727EA;
   border-bottom-style: solid;
   cursor: pointer;
   color: #2F3850 !important;

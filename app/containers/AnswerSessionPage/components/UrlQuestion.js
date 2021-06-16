@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
-import { colors } from 'theme';
+import { themeColors } from 'theme';
 import Question from 'models/Session/Question';
 
 import UrlPreview from 'components/UrlPreview';
@@ -37,7 +37,7 @@ const UrlQuestion = ({ question, selectAnswer }) => {
   return (
     <Column>
       <UrlPreview handleClick={onClick} link={payload} />
-      <H3 color={colors.flamingo} textAlign="center">
+      <H3 color={themeColors.warning} textAlign="center">
         {formatMessage(messages.wcagExternalLinkWarning)}
       </H3>
     </Column>

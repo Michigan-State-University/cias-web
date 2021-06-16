@@ -31,7 +31,14 @@ const renderHandle = (withSpectrum, formatMessage) =>
 
 const FeedbackSlider = React.forwardRef(
   (
-    { targetValue, labels, formatMessage, withSpectrum, className },
+    {
+      targetValue,
+      labels,
+      formatMessage,
+      withSpectrum,
+      className,
+      ariaLabelForHandle,
+    },
     sliderRef,
   ) => (
     <CustomSlider
@@ -41,6 +48,7 @@ const FeedbackSlider = React.forwardRef(
       marks={labels}
       customHandle={renderHandle(withSpectrum, formatMessage)}
       className={className}
+      ariaLabelForHandle={ariaLabelForHandle}
       disabled
     />
   ),
@@ -49,6 +57,7 @@ const FeedbackSlider = React.forwardRef(
 FeedbackSlider.propTypes = {
   targetValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   labels: PropTypes.object,
+  ariaLabelForHandle: PropTypes.string,
   formatMessage: PropTypes.func,
   withSpectrum: PropTypes.bool,
   className: PropTypes.string,

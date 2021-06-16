@@ -13,7 +13,7 @@ import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import UrlPreview from 'components/UrlPreview';
 import Text from 'components/Text';
-import { colors } from 'theme/colors';
+import { colors, themeColors } from 'theme/colors';
 import { urlValidator } from 'utils/validators/urlValidator';
 import {
   makeSelectSelectedQuestion,
@@ -61,14 +61,14 @@ const UrlQuestion = ({
         </Row>
       </Box>
       {displayError && (
-        <Text mt={15} color={colors.flamingo} fontWeight="bold">
+        <Text mt={15} color={themeColors.warning} fontWeight="bold">
           <FormattedMessage {...messages.invalidUrl} />
         </Text>
       )}
       {displayPreview && <UrlPreview link={payload} />}
 
       {isNarratorTab && (
-        <H3 color={colors.flamingo} textAlign="center">
+        <H3 color={themeColors.warning} textAlign="center">
           {formatMessage(answerPageMessages.wcagExternalLinkWarning)}
         </H3>
       )}

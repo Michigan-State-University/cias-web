@@ -13,7 +13,7 @@ import Row from 'components/Row';
 import Switch from 'components/Switch';
 import Text from 'components/Text';
 import lastKey from 'utils/getLastKey';
-import { colors, borders, fontSizes } from 'theme';
+import { colors, borders, fontSizes, themeColors } from 'theme';
 import {
   readQuestionBlockType,
   feedbackBlockType,
@@ -169,7 +169,7 @@ const NarratorTab = ({
             color={
               isCharacterMovable && !disabled
                 ? colors.jungleGreen
-                : colors.flamingo
+                : themeColors.warning
             }
           >
             <Markup

@@ -82,7 +82,7 @@ export const TIMEZONES = [
   'Australia/Melbourne',
   'Australia/Perth',
   'Australia/Sydney',
-  'Etc/UTC',
+  'UTC',
   'Europe/Amsterdam',
   'Europe/Athens',
   'Europe/Belgrade',

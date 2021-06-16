@@ -164,7 +164,7 @@ const ThirdPartyQuestion = ({
       </Row>
 
       {isNarratorTab && (
-        <H3 color={colors.flamingo} textAlign="center">
+        <H3 color={themeColors.warning} textAlign="center">
           {formatMessage(answerPageMessages.wcagThirdPartyWarning)}
         </H3>
       )}

@@ -81,6 +81,7 @@ export const VisualAnalogueSlider = styled(AppSlider)`
     word-break: normal;
     word-wrap: break-word;
     width: max-content;
+    color: #666;
   }
 
   &.wrap-text {

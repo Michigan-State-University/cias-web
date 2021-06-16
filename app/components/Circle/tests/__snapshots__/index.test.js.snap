@@ -103,7 +103,7 @@ Object {
   "baseElement": <body>
     .c0 {
   border-radius: 50%;
-  background-color: #C866EA;
+  background-color: #B727EA;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -118,7 +118,7 @@ Object {
   align-items: center;
   width: 32px;
   height: 32px;
-  background-color: rgba(200,102,234,1);
+  background-color: rgba(183,39,234,1);
   color: rgba(255,255,255,1);
   opacity: 1;
   color: rgba(255,255,255,1);
@@ -144,7 +144,7 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="StyledCircle-sc-1dov7hv-0 fHTBO"
+      class="StyledCircle-sc-1dov7hv-0 khnrpY"
       color="#FFFFFF"
       opacity="1"
     >

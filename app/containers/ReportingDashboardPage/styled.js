@@ -10,6 +10,7 @@ export const SettingsContainer = styled(Container)`
 `;
 
 export const FullWidthContainer = styled(Container)`
+  max-width: 100% !important;
   width: 100%;
   margin: 0 !important;
   padding: 0 !important;

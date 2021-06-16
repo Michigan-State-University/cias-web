@@ -41,12 +41,16 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           <div
             class="Column-sc-4zswzq-0 jCuscc"
           >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
+            <label
+              for="email"
             >
-              E-mail address
-            </p>
+              <p
+                class="Text-e4p0w3-0 kFFPgx"
+                width="fit-content"
+              >
+                E-mail address
+              </p>
+            </label>
             <div
               class="Row-y1cs0u-0 fgwsqb"
               width="100%"
@@ -54,6 +58,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
               <input
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
+                id="email"
                 name="email"
                 placeholder="Enter e-mail address"
                 type="text"
@@ -66,7 +71,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             class="styled__LinkContainer-ii5zgx-1 bmFcIc"
           >
             <a
-              class="styled__StyledLink-ii5zgx-0 hKXfbX"
+              class="styled__StyledLink-ii5zgx-0 iYqTXA"
               href="/reset-password"
               tabindex="-1"
             >
@@ -76,12 +81,16 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
           <div
             class="Column-sc-4zswzq-0 jCuscc"
           >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
+            <label
+              for="password"
             >
-              Password
-            </p>
+              <p
+                class="Text-e4p0w3-0 kFFPgx"
+                width="fit-content"
+              >
+                Password
+              </p>
+            </label>
             <div
               class="Row-y1cs0u-0 fgwsqb"
               width="100%"
@@ -89,6 +98,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
               <input
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
+                id="password"
                 name="password"
                 placeholder="Enter password"
                 type="password"
@@ -136,7 +146,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
               class="styled__LinkContainer-ii5zgx-1 iHHiFA"
             >
               <a
-                class="styled__StyledLink-ii5zgx-0 hKXfbX"
+                class="styled__StyledLink-ii5zgx-0 iYqTXA"
                 href="/register"
               >
                 Create participant account

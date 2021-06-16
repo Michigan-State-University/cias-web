@@ -85,8 +85,8 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 6px solid #C866EA;
-  border-color: #C866EA transparent #C866EA transparent;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
   -webkit-animation: hAjVGa 1.2s linear infinite;
   animation: hAjVGa 1.2s linear infinite;
 }
@@ -99,8 +99,8 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   border: none;
   outline: none;
   background-color: #FFFFFF;
-  color: #C866EA;
-  border: 1px solid #C866EA;
+  color: #B727EA;
+  border: 1px solid #B727EA;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   margin-top: 20px;
@@ -111,7 +111,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
 }
 
 .c6:hover {
-  background-color: #C866EA;
+  background-color: #B727EA;
   color: #FFFFFF;
   border: 1px solid transparent;
 }
@@ -152,7 +152,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
     </button>
     <div
       class="c7"
-      color="#C866EA"
+      color="#B727EA"
       size="30"
       width="6"
     />
@@ -245,8 +245,8 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 6px solid #C866EA;
-  border-color: #C866EA transparent #C866EA transparent;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
   -webkit-animation: hAjVGa 1.2s linear infinite;
   animation: hAjVGa 1.2s linear infinite;
 }
@@ -259,8 +259,8 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   border: none;
   outline: none;
   background-color: #FFFFFF;
-  color: #C866EA;
-  border: 1px solid #C866EA;
+  color: #B727EA;
+  border: 1px solid #B727EA;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   margin-top: 20px;
@@ -271,7 +271,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
 }
 
 .c6:hover {
-  background-color: #C866EA;
+  background-color: #B727EA;
   color: #FFFFFF;
   border: 1px solid transparent;
 }
@@ -312,7 +312,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
     </button>
     <div
       class="c7"
-      color="#C866EA"
+      color="#B727EA"
       size="30"
       width="6"
     />

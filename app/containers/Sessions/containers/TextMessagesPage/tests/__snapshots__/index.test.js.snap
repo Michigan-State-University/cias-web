@@ -23,14 +23,14 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
           data-testid="fullscreen-loader"
         >
           <div
-            class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-            color="#C866EA"
+            class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+            color="#B727EA"
             size="100"
             width="6"
           />
         </div>
         <div
-          class="styled__StyledCreateTile-z65den-1 gwAvLD"
+          class="styled__StyledCreateTile-z65den-1 OOgHM"
         >
           <div
             class="Column-sc-4zswzq-0 kbCNXG"
@@ -52,7 +52,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="styled__StyledTile-z65den-0 kabuA-D"
+          class="styled__StyledTile-z65den-0 bjLbog"
         >
           <p
             class="Text-e4p0w3-0 jKspVy"
@@ -68,7 +68,7 @@ exports[`<TextMessagingPage /> Should render and match the snapshot 1`] = `
           </p>
         </div>
         <div
-          class="styled__StyledTile-z65den-0 kabuA-D"
+          class="styled__StyledTile-z65den-0 bjLbog"
         >
           <p
             class="Text-e4p0w3-0 jKspVy"

@@ -36,7 +36,7 @@ exports[`<NewFloatButton /> Should render and match the loading snapshot 1`] = `
   right: 115px;
   cursor: pointer;
   bottom: 20px;
-  background: #C866EA;
+  background: #B727EA;
   color: white;
   border-radius: 5px;
   padding: 15px;
@@ -99,7 +99,7 @@ exports[`<NewFloatButton /> Should render and match the snapshot 1`] = `
   right: 115px;
   cursor: pointer;
   bottom: 20px;
-  background: #C866EA;
+  background: #B727EA;
   color: white;
   border-radius: 5px;
   padding: 15px;

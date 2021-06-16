@@ -14,7 +14,7 @@ import { SectionCaseBuilder } from 'models/ReportTemplate';
 
 import DashedButton from 'components/Button/DashedButton';
 
-import { colors, elements } from 'theme';
+import { elements, themeColors } from 'theme';
 import { Col } from 'components/ReactGridSystem';
 import H2 from 'components/H2';
 import TextButton from 'components/Button/TextButton';
@@ -85,7 +85,7 @@ const TemplateSectionSettings = ({
               fontSize={14}
               loading={isDeletingSection}
               buttonProps={{
-                color: colors.flamingo,
+                color: themeColors.warning,
                 fontWeight: 'bold',
               }}
               spinnerProps={{ size: 30, width: 2 }}

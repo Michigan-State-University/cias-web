@@ -123,8 +123,8 @@ const ChartSettingsTopSection = ({
         <Col xs="content">
           <TextButton loading={isDeleting} onClick={onDelete}>
             <Row align="center">
-              <Icon src={BinIcon} fill={colors.flamingo} mr={8} />
-              <Text fontWeight="bold" color={colors.flamingo}>
+              <Icon src={BinIcon} fill={themeColors.warning} mr={8} />
+              <Text fontWeight="bold" color={themeColors.warning}>
                 {formatMessage(messages.chartSettingsDelete)}
               </Text>
             </Row>

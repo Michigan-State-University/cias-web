@@ -7,8 +7,8 @@ exports[`<InterventionDetailsPage /> Should render loader and match the snapshot
     data-testid="fullscreen-loader"
   >
     <div
-      class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-      color="#C866EA"
+      class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+      color="#B727EA"
       size="100"
       width="6"
     />

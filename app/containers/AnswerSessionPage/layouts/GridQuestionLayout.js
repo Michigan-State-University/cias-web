@@ -1,6 +1,10 @@
 import React, { memo, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useContainerQuery } from 'react-container-query';
+import { useIntl } from 'react-intl';
+
+import { colors, elements } from 'theme';
+import useResizeObserver from 'utils/useResizeObserver';
 
 import { containerBreakpoints } from 'components/Container/containerBreakpoints';
 import Box from 'components/Box';
@@ -10,9 +14,7 @@ import Row from 'components/Row';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
 import { StripedTR, Table, TBody, TD, TH, THead } from 'components/Table';
 
-import { colors, elements } from 'theme';
-
-import useResizeObserver from 'utils/useResizeObserver';
+import messages from './messages';
 import { FirstTH } from './styled';
 
 const IS_SMALL_SCREEN = 'IS_SMALL_SCREEN';
@@ -32,6 +34,7 @@ const GridQuestionLayout = ({
   selectedAnswersIndex,
   questionId,
 }) => {
+  const { formatMessage } = useIntl();
   const [params, containerRef] = useContainerQuery(QUERY);
 
   const firstColRef = useRef(null);
@@ -83,6 +86,7 @@ const GridQuestionLayout = ({
               ))}
             </StripedTR>
           </THead>
+
           <TBody>
             {rows.map((row, rowIndex) => (
               <StripedTR
@@ -100,9 +104,17 @@ const GridQuestionLayout = ({
                     {row.payload}
                   </Column>
                 </FirstTH>
+
                 {columns.map((column, columnIndex) => {
                   const isChecked =
                     selectedAnswersIndex[rowIndex] === columnIndex;
+                  const ariaLabel = formatMessage(messages.gridLabel, {
+                    questionIndex: rowIndex + 1,
+                    questionText: row.payload,
+                    answerIndex: columnIndex + 1,
+                    answerText: column.payload,
+                  });
+
                   return (
                     <TD
                       key={`question-${questionId}-row-cell-${rowIndex}-${columnIndex}`}
@@ -118,7 +130,7 @@ const GridQuestionLayout = ({
                           columnIndex,
                         )}
                       >
-                        <Radio checked={isChecked} />
+                        <Radio aria-label={ariaLabel} checked={isChecked} />
                       </Row>
                     </TD>
                   );

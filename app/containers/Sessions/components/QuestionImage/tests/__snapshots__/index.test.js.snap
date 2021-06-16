@@ -168,9 +168,9 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   -webkit-text-decoration: underline;
   text-decoration: underline;
   cursor: pointer;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
   cursor: pointer;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c5 {
@@ -260,7 +260,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
       >
         <h3
           class="c4"
-          color="#C866EA"
+          color="#B727EA"
           cursor="pointer"
           text-decoration="underline"
         >

@@ -17,8 +17,8 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
         src="IMAGE_MOCK"
       />
       <p
-        class="Text-e4p0w3-0 ikSWkc"
-        color="#C866EA"
+        class="Text-e4p0w3-0 cFbubw"
+        color="#B727EA"
         font-weight="bold"
       >
         Back to Team List
@@ -40,8 +40,8 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
       >
         <button
-          class="StyledTextButton-sc-1b7egxw-0 gvcXh"
-          color="#C866EA"
+          class="StyledTextButton-sc-1b7egxw-0 hXDmcc"
+          color="#B727EA"
           font-weight="bold"
         >
           + Invite to team
@@ -99,8 +99,8 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
                   data-testid="inline-loader"
                 >
                   <div
-                    class="styled__StyledSpinner-sc-129uixn-0 OJHNY"
-                    color="#C866EA"
+                    class="styled__StyledSpinner-sc-129uixn-0 ehjfMD"
+                    color="#B727EA"
                     size="50"
                     width="6"
                   />
@@ -141,8 +141,8 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
           data-testid="fullscreen-loader"
         >
           <div
-            class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-            color="#C866EA"
+            class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+            color="#B727EA"
             size="100"
             width="6"
           />

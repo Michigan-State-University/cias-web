@@ -38,7 +38,7 @@ exports[`<CurrencySelect /> should match the snapshot 1`] = `
           class=" css-g1d714-ValueContainer"
         >
           <div
-            class=" css-1wa3eu0-placeholder"
+            class=" css-q5ew0g-placeholder"
           >
             Select currency
           </div>

@@ -17,9 +17,7 @@ exports[`<ReportsFilter /> Should render and match the snapshot 1`] = `
       class="Row-y1cs0u-0 ecllgQ"
     >
       <img
-        class="Img-sc-55j3su-0 gRYaRk"
         src="IMAGE_MOCK"
-        width="20"
       />
       <p
         class="Text-e4p0w3-0 cDWMBt"
@@ -32,9 +30,7 @@ exports[`<ReportsFilter /> Should render and match the snapshot 1`] = `
       class="Row-y1cs0u-0 ecllgQ"
     >
       <img
-        class="Img-sc-55j3su-0 gRYaRk"
         src="IMAGE_MOCK"
-        width="20"
       />
       <p
         class="Text-e4p0w3-0 cDWMBt"
@@ -52,10 +48,11 @@ exports[`<ReportsFilter /> Should render and match the snapshot 1`] = `
     >
       <div
         class="Row-y1cs0u-0 ecllgQ"
+        role="button"
       >
         <p
-          class="Text-e4p0w3-0 fCqZhU"
-          color="#C866EA"
+          class="Text-e4p0w3-0 bseYdo"
+          color="#B727EA"
           font-weight="bold"
         >
           Sort by Oldest

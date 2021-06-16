@@ -102,4 +102,12 @@ export default defineMessages({
     id: `${scope}.showTranscriptToggle`,
     defaultMessage: 'Show Transcript',
   },
+  previewHeader: {
+    id: `${scope}.previewHeader`,
+    defaultMessage: 'Preview Session',
+  },
+  fillHeader: {
+    id: `${scope}.fillHeader`,
+    defaultMessage: 'Fill Session',
+  },
 });

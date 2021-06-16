@@ -20,8 +20,8 @@ exports[`<ErrorAlert /> Should render and match the snapshot 1`] = `
   padding: 20px;
   width: 100%;
   max-width: 700px;
-  background-color: rgba(239,70,47,0.3);
-  border: 1px solid #EF462F;
+  background-color: rgba(210,55,29,0.3);
+  border: 1px solid #D2371D;
   border-radius: 5px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -71,8 +71,8 @@ exports[`<ErrorAlert /> Should render full page error and match the snapshot 1`]
   padding: 20px;
   width: 100%;
   max-width: 700px;
-  background-color: rgba(239,70,47,0.3);
-  border: 1px solid #EF462F;
+  background-color: rgba(210,55,29,0.3);
+  border: 1px solid #D2371D;
   border-radius: 5px;
   display: -webkit-box;
   display: -webkit-flex;

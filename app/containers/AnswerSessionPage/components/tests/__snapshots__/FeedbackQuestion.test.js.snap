@@ -25,7 +25,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
             />
             <div
               class="rc-slider-track"
-              style="background-color: rgb(200, 102, 234); left: 0%; width: 10%;"
+              style="background-color: rgb(183, 39, 234); left: 0%; width: 10%;"
             />
             <div
               class="rc-slider-step"
@@ -49,6 +49,7 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
             </div>
             <div
               aria-disabled="true"
+              aria-label="This is your feedback value presented on a slider scale:"
               aria-valuemax="100"
               aria-valuemin="0"
               aria-valuenow="10"
@@ -56,13 +57,13 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
               dragging="false"
               index="0"
               role="slider"
-              style="border-color: #c866ea; box-shadow: none; border-width: 3px; left: 10%; transform: translateX(-50%);"
+              style="border-color: #b727ea; box-shadow: none; border-width: 3px; left: 10%; transform: translateX(-50%);"
             >
               <div
                 class="styled__ValueSliderWrapperStyled-bqo6sz-4 gnOYFs"
               >
                 <div
-                  class="styled__ValueSliderStyled-bqo6sz-3 hQtfAZ"
+                  class="styled__ValueSliderStyled-bqo6sz-3 febGya"
                 >
                   <p
                     class="Text-e4p0w3-0 pcigz"

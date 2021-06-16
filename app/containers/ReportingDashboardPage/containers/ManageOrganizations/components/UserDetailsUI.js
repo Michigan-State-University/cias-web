@@ -112,7 +112,7 @@ const UserDetailsUI = ({
       <Row>
         <Col>
           <Badge
-            color={colors.flamingo}
+            color={themeColors.warning}
             onClick={onStatusChange}
             bgWithOpacity
             clickable

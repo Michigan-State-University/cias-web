@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Markup } from 'interweave';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
@@ -20,6 +21,7 @@ const SingleQuestionLayout = ({
       {data.map((questionAnswer, index) => {
         const { payload, value } = questionAnswer;
         const isChecked = selectedAnswerIndex === index;
+        const ariaInputId = `answer-${index + 1}`;
 
         return (
           <Row key={`question-${questionId}-el-${index}`} mb={12}>
@@ -32,11 +34,15 @@ const SingleQuestionLayout = ({
             >
               <Row align="center" height="44">
                 <Radio
+                  id={ariaInputId}
                   data-cy={`single-question-${index}-checkbox`}
                   checked={isChecked}
                   mr={16}
                 />
-                <div dangerouslySetInnerHTML={{ __html: payload }} />
+
+                <label htmlFor={ariaInputId}>
+                  <Markup content={payload} />
+                </label>
               </Row>
             </HoverableBox>
           </Row>
