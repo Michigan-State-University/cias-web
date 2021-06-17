@@ -1,16 +1,13 @@
 import { delay, put, select, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { HttpStatusCodes } from 'utils/constants';
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import { UserStorageController } from '../UserStorageController';
 import { verificationCodeError, verificationCodeSuccess } from '../actions';
-import {
-  VERIFICATION_CODE_REQUEST,
-  VERIFICATION_CODE_COOKIE,
-} from '../constants';
+import { VERIFICATION_CODE_REQUEST } from '../constants';
 import { makeSelectLoginFormData } from '../selectors';
 import messages from '../messages';
 
@@ -31,14 +28,8 @@ function* verifyCode({ payload: { verificationCode } }) {
       },
     );
 
-    Cookies.set(
-      email,
-      { [VERIFICATION_CODE_COOKIE]: verification_code },
-      {
-        secure: true,
-        sameSite: 'strict',
-      },
-    );
+    const userStorageController = new UserStorageController(email);
+    userStorageController.setVerificationCode(verification_code);
 
     yield delay(300);
     yield put(verificationCodeSuccess());

@@ -81,6 +81,28 @@ const LocalStorageService = (() => {
     return null;
   };
 
+  const setItem = (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+  };
+
+  const removeItem = key => {
+    localStorage.removeItem(key);
+  };
+
+  const getItem = key => {
+    const item = localStorage.getItem(key);
+
+    if (item) return JSON.parse(item);
+    return null;
+  };
+
+  const updateItem = (key, value) => {
+    const item = getItem(key);
+
+    if (item) setItem(key, { ...item, ...value });
+    else setItem(key, value);
+  };
+
   return {
     setToken,
     setUid,
@@ -94,6 +116,10 @@ const LocalStorageService = (() => {
     clearGuestHeaders,
     setGuestHeaders,
     getGuestHeaders,
+    setItem,
+    removeItem,
+    getItem,
+    updateItem,
   };
 })();
 

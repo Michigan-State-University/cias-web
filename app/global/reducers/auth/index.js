@@ -50,3 +50,4 @@ export {
   loginSaga,
   verifyCodeSaga,
 } from './sagas';
+export { UserStorageController } from './UserStorageController';
