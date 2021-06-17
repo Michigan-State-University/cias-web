@@ -9,11 +9,14 @@ import {
 } from '../generatePieChartData';
 import { Y_AXIS_KEY } from '../constants';
 
-const PieChart = ({ defaultPattern, patterns }) => {
-  const data = useMemo(
-    () => generatePieChartPreviewData([...patterns, defaultPattern]),
-    [patterns, defaultPattern],
-  );
+const PieChart = ({ defaultPattern, patterns, singleChartData }) => {
+  const data = useMemo(() => {
+    if (!singleChartData)
+      return generatePieChartPreviewData([...patterns, defaultPattern]);
+    if (singleChartData) {
+      return singleChartData;
+    }
+  }, [patterns, defaultPattern, singleChartData]);
 
   const generateCellColor = useCallback(dataItem => dataItem.color, []);
 
@@ -31,6 +34,7 @@ const PieChart = ({ defaultPattern, patterns }) => {
 PieChart.propTypes = {
   defaultPattern: PropTypes.object,
   patterns: PropTypes.arrayOf(PropTypes.object),
+  singleChartData: PropTypes.any,
 };
 
 export default memo(PieChart);

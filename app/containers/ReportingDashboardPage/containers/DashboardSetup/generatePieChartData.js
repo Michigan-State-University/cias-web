@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { HUNDRED_PERCENT, RADIAN } from 'utils/mathUtils';
+import { X_AXIS_KEY, Y_AXIS_KEY } from './constants';
 
 /**
  * @typedef {Object} Pattern
@@ -23,8 +24,8 @@ export const generatePieChartPreviewData = patterns => {
   if (patternsSizeWithoutDefaultPattern === 0)
     return [
       {
-        name: patterns[0].label,
-        value: HUNDRED_PERCENT,
+        [X_AXIS_KEY]: patterns[0].label,
+        [Y_AXIS_KEY]: HUNDRED_PERCENT,
         color: patterns[0].color,
       },
     ];
@@ -39,8 +40,10 @@ export const generatePieChartPreviewData = patterns => {
     const isLastPattern = index === patternsSize - 1;
 
     return {
-      name: label,
-      value: isLastPattern ? percentForDefaultPattern : percentForSinglePattern,
+      [X_AXIS_KEY]: label,
+      [Y_AXIS_KEY]: isLastPattern
+        ? percentForDefaultPattern
+        : percentForSinglePattern,
       color,
     };
   });
@@ -51,7 +54,7 @@ export const generatePieChartLabel = ({
   cy,
   midAngle,
   outerRadius,
-  name,
+  label,
   color,
   value,
 }) => {
@@ -67,7 +70,7 @@ export const generatePieChartLabel = ({
       textAnchor={x > cx ? 'start' : 'end'}
       dominantBaseline="central"
     >
-      {name} ({`${value}%`})
+      {label} ({`${value}`})
     </text>
   );
 };

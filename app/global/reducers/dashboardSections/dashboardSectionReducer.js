@@ -10,6 +10,7 @@ import {
   EDIT_CHART_SUCCESS,
   EDIT_SECTION_REQUEST,
   EDIT_SECTION_SUCCESS,
+  SET_CHARTS_DATA,
 } from './constants';
 import { chartReducer } from './chartReducer';
 
@@ -49,6 +50,12 @@ const dashboardSectionReducer = (state = null, action) =>
         draft.charts.push(payload.chart);
 
         break;
+      }
+
+      case SET_CHARTS_DATA: {
+        updateItemById(draft.charts, payload.chartId, item =>
+          chartReducer(item, action),
+        );
       }
     }
   });

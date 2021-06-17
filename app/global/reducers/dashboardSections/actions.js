@@ -28,6 +28,7 @@ import {
   COPY_CHART_REQUEST,
   COPY_CHART_SUCCESS,
   SELECT_CHART_ACTION,
+  SET_CHARTS_DATA,
 } from './constants';
 
 export const addDashboardSectionRequest = (organizationId, name) =>
@@ -129,3 +130,6 @@ export const selectChartAction = (dashboardSectionId, chartId) =>
     dashboardSectionId,
     chartId,
   });
+
+export const setChartsData = chartsData =>
+  actionBuilder(SET_CHARTS_DATA, { chartsData });

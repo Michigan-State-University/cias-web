@@ -15,6 +15,7 @@ import {
   Line,
   XAxis,
   YAxis,
+  Tooltip,
 } from 'recharts';
 
 import { generateBarChartTrendData } from './utils';
@@ -30,6 +31,8 @@ const BarChartComponent = ({
   trendLine,
   xAxis,
   yAxis,
+  tooltipFormatter,
+  otherDataKey,
   ...chartProps
 }) => {
   const mergedData = useMemo(() => {
@@ -62,15 +65,34 @@ const BarChartComponent = ({
     [fill, trendLine],
   );
 
+  const otherDataKeyColor = useMemo(
+    () =>
+      otherDataKey &&
+      Color(fill)
+        .lighten(0.5)
+        .hex(),
+    [fill, otherDataKey],
+  );
+
   return (
     <StyledResponsiveContainer width="100%" height="100%">
       <ChartComponent data={mergedData}>
         {cartesianGrid && <CartesianGrid {...cartesianGrid} />}
         {xAxis && <XAxis {...xAxis} />}
         {yAxis && <YAxis {...yAxis} />}
-        <Bar dataKey={dataKey} fill={fill} {...chartProps}>
+        <Bar dataKey={dataKey} fill={fill} stackId="stack-1" {...chartProps}>
           {children}
         </Bar>
+        {otherDataKey && (
+          <Bar
+            dataKey={otherDataKey}
+            fill={otherDataKeyColor}
+            stackId="stack-1"
+            {...chartProps}
+          >
+            {children}
+          </Bar>
+        )}
         {trendLine && (
           <Line
             animationDuration={250}
@@ -79,6 +101,9 @@ const BarChartComponent = ({
             stroke={trendLineColor}
             type="monotone"
           />
+        )}
+        {tooltipFormatter && (
+          <Tooltip cursor={false} content={tooltipFormatter} />
         )}
       </ChartComponent>
     </StyledResponsiveContainer>
@@ -94,6 +119,8 @@ BarChartComponent.propTypes = {
   trendLine: PropTypes.bool,
   xAxis: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   yAxis: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  tooltipFormatter: PropTypes.func,
+  otherDataKey: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default memo(BarChartComponent);

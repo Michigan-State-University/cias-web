@@ -38,3 +38,11 @@ export const Input = styled(StyledInput)`
     border: none;
   }
 `;
+
+export const BarChartTooltip = styled.div`
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border: 1px solid rgba(127, 127, 127, 0.8);
+  font-size: 1.2em;
+  font-weight: bold;
+`;

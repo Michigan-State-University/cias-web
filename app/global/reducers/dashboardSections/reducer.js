@@ -31,6 +31,7 @@ import {
   FETCH_SECTIONS_SUCCESS,
   COPY_CHART_SUCCESS,
   SELECT_CHART_ACTION,
+  SET_CHARTS_DATA,
 } from './constants';
 
 export const initialState = {
@@ -299,6 +300,20 @@ const dashboardSectionsReducer = (state = initialState, action) =>
             dashboardSectionId: payload.dashboardSectionId,
           };
         else draft.selectedChart = null;
+
+        break;
+      }
+
+      case SET_CHARTS_DATA: {
+        const { chartsData } = payload;
+        for (let i = 0; i < chartsData.length; i++) {
+          updateItemById(
+            draft.dashboardSections,
+            chartsData[i].dashboardSectionId,
+            item =>
+              dashboardSectionReducer(item, { type, payload: chartsData[i] }),
+          );
+        }
 
         break;
       }

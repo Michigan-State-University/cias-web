@@ -2,10 +2,12 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
+import objectToCamelCase from 'utils/objectToCamelCase';
 import { FETCH_SECTIONS_REQUEST } from '../constants';
 import {
   fetchDashboardSectionsError,
   fetchDashboardSectionsSuccess,
+  setChartsData,
 } from '../actions';
 
 export function* fetchDashboardSections({
@@ -19,6 +21,10 @@ export function* fetchDashboardSections({
     const dashboardSections = jsonApiToArray(data, 'dashboardSection');
 
     yield put(fetchDashboardSectionsSuccess(dashboardSections));
+    const chartDataUrl = `v1/organizations/${organizationId}/charts_data/generate`;
+    const { data: chartsData } = yield call(axios.get, chartDataUrl);
+    const parsedData = objectToCamelCase(chartsData.data_for_charts);
+    yield put(setChartsData(parsedData));
   } catch (error) {
     yield put(fetchDashboardSectionsError(error));
   }
