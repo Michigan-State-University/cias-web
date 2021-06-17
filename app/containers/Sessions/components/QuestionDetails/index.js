@@ -73,7 +73,7 @@ const RenderQuestionDetails = ({
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
   const animationBoundaries = useRef(null);
 
-  const { logoUrl } = intervention ?? {};
+  const { logoUrl, imageAlt } = intervention ?? {};
 
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
@@ -121,7 +121,7 @@ const RenderQuestionDetails = ({
                 }
                 disabled={!editingPossible}
               />
-              <MSULogo logoUrl={logoUrl} />
+              <MSULogo logoUrl={logoUrl} imageAlt={imageAlt} />
             </Row>
           )}
           <AnswerInterventionContent

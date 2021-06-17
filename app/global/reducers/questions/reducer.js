@@ -13,6 +13,7 @@ import questionSettingsReducer from 'containers/Sessions/components/QuestionSett
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import { insertAt, removeAt } from 'utils/arrayUtils';
 
+import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
 import {
   SELECT_QUESTION,
   CREATE_QUESTION_REQUEST,
@@ -50,6 +51,9 @@ import {
   COPY_EXTERNALLY_QUESTION_REQUEST,
   COPY_EXTERNALLY_QUESTION_SUCCESS,
   COPY_EXTERNALLY_QUESTION_ERROR,
+  UPDATE_QUESTION_IMAGE_REQUEST,
+  UPDATE_QUESTION_IMAGE_SUCCESS,
+  UPDATE_QUESTION_IMAGE_ERROR,
 } from './constants';
 
 import {
@@ -166,6 +170,7 @@ export const questionsReducer = (state = initialState, action) =>
         break;
 
       case DELETE_QUESTION_IMAGE_REQUEST: {
+        draft.loaders.updateQuestionLoading = true;
         const questionIndex = state.questions.findIndex(
           ({ id }) => id === state.selectedQuestion,
         );
@@ -173,9 +178,37 @@ export const questionsReducer = (state = initialState, action) =>
         break;
       }
       case DELETE_QUESTION_IMAGE_SUCCESS:
+        draft.loaders.updateQuestionLoading = false;
         editQuestionSuccessCommon(draft, action.payload);
         break;
       case DELETE_QUESTION_IMAGE_ERROR:
+        draft.loaders.updateQuestionLoading = false;
+        editQuestionErrorCommon(draft, action.payload);
+        break;
+
+      case UPDATE_QUESTION_IMAGE_REQUEST:
+        draft.loaders.updateQuestionLoading = true;
+        updateItemById(
+          draft.questions,
+          action.payload.questionId,
+          question => ({ ...question, image_alt: action.payload.description }),
+        );
+        break;
+      case UPDATE_QUESTION_IMAGE_SUCCESS:
+        draft.loaders.updateQuestionLoading = false;
+        assignDraftItemsById(
+          draft.questions,
+          draft.cache.questions,
+          action.payload.questionId,
+        );
+        break;
+      case UPDATE_QUESTION_IMAGE_ERROR:
+        draft.loaders.updateQuestionLoading = false;
+        assignDraftItemsById(
+          draft.cache.questions,
+          draft.questions,
+          action.payload.questionId,
+        );
         editQuestionErrorCommon(draft, action.payload);
         break;
 

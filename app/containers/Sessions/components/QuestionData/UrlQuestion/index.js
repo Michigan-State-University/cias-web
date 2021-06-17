@@ -41,7 +41,7 @@ const UrlQuestion = ({
   const editingPossible = canEdit(interventionStatus);
 
   return (
-    <Column>
+    <Column mt={10}>
       <Box
         bg={colors.linkWater}
         width="100%"

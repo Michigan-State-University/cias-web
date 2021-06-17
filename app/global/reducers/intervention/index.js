@@ -22,6 +22,7 @@ export {
   externalCopySessionRequest,
   addInterventionLogoRequest,
   deleteInterventionLogoRequest,
+  updateInterventionLogoRequest,
 } from './actions';
 export { interventionReducer } from './reducer';
 export {

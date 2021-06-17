@@ -38,3 +38,19 @@ export const deleteItemById = (draftCollection, id) => {
 
   if (index !== -1) draftCollection.splice(index, 1);
 };
+
+/**
+ * Assign two Immer draft items in a collection based on the `id`
+ *
+ * @param {Draft<T[]>} sourceDraft
+ * @param {Draft<T[]>} targetDraft
+ * @param id
+ * @template T
+ */
+export const assignDraftItemsById = (sourceDraft, targetDraft, id) => {
+  const sourceIndex = findIndexById(sourceDraft, id);
+  const targetIndex = findIndexById(targetDraft, id);
+
+  if (sourceIndex !== -1 && targetIndex !== -1)
+    targetDraft[targetIndex] = sourceDraft[sourceIndex];
+};

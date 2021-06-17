@@ -24,4 +24,9 @@ export default defineMessages({
     defaultMessage:
       'Error! You can upload only one file with maximum size of 5 mb',
   },
+  logoDescriptionPlaceholder: {
+    id: `${scope}.logoDescriptionPlaceholder`,
+    defaultMessage:
+      'Input here the text describing the image for people with disabilities',
+  },
 });

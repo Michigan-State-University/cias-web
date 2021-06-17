@@ -95,4 +95,9 @@ export default defineMessages({
     defaultMessage:
       'Unless you provide a custom image, the logo of Michigan State University will be displayed by default. ',
   },
+  logoDescriptionPlaceholder: {
+    id: `${scope}.logoDescriptionPlaceholder`,
+    defaultMessage:
+      'Input here the text describing the image for people with disabilities',
+  },
 });

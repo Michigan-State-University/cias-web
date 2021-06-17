@@ -17,6 +17,7 @@ const CommonLayout = ({ currentQuestion }) => {
     subtitle,
     video_url: videoUrl,
     image_url: imageUrl,
+    image_alt: imageAlt,
     settings: {
       title: settingsTitle,
       subtitle: settingsSubtitle,
@@ -54,7 +55,12 @@ const CommonLayout = ({ currentQuestion }) => {
       {settingsImage && imageUrl && (
         <Row mt={10} justify="center" align="center" width="100%">
           <ImageWrapper>
-            <Img src={imageUrl} alt="image" maxHeight="50vh" maxWidth="100%" />
+            <Img
+              src={imageUrl}
+              alt={imageAlt}
+              maxHeight="50vh"
+              maxWidth="100%"
+            />
           </ImageWrapper>
         </Row>
       )}
@@ -68,6 +74,7 @@ CommonLayout.propTypes = {
     subtitle: PropTypes.string,
     video_url: PropTypes.string,
     image_url: PropTypes.string,
+    image_alt: PropTypes.string,
     settings: PropTypes.shape({
       title: PropTypes.bool,
       subtitle: PropTypes.bool,

@@ -205,7 +205,7 @@ export function AnswerSessionPage({
     return {};
   }, [containerQueryParams, isDesktop]);
 
-  const { logoUrl } = userSession ?? {};
+  const { logoUrl, imageAlt } = userSession ?? {};
 
   const isNewUserSession = useMemo(() => {
     const { lastAnswerAt } = userSession ?? {};
@@ -468,7 +468,7 @@ export function AnswerSessionPage({
                 <Row padding={30} pb={isDesktop ? 10 : 0}>
                   <Box {...logoStyles}>
                     <Row justify="end">
-                      <MSULogo logoUrl={logoUrl} />
+                      <MSULogo logoUrl={logoUrl} alt={imageAlt} />
                     </Row>
 
                     {renderQuestionTranscript(true)}
