@@ -4,7 +4,7 @@ import { themeColors, borders, paddings, colors } from 'theme';
 import { margin, layout, padding, text, style } from '../BaseComponentStyles';
 
 const getBorderColor = (hasError, currentColor) => {
-  if (hasError) return colors.flamingo;
+  if (hasError) return themeColors.warning;
   return currentColor;
 };
 

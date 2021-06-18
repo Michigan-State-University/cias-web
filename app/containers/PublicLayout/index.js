@@ -7,15 +7,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import logo from 'assets/svg/logo.svg';
+import { CIASLogo } from 'components/Logo';
 
-import { Background, Content, Header, Logo, TopBackground } from './styled';
+import { Background, Content, Header, TopBackground } from './styled';
 
 export const PublicLayout = ({ children }) => (
   <Background>
     <TopBackground />
     <Header>
-      <Logo src={logo} />
+      <CIASLogo />
     </Header>
     <Content>{children}</Content>
   </Background>

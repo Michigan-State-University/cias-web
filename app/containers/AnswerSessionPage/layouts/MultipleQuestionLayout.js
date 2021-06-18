@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Markup } from 'interweave';
 
 import Column from 'components/Column';
 import Row from 'components/Row';
@@ -21,6 +22,7 @@ const MultipleQuestionLayout = ({
         variable: { name, value },
       } = questionAnswer;
       const isChecked = selectedAnswersIndex.includes(index);
+      const ariaInputId = `answer-${index + 1}`;
 
       return (
         <Row key={`question-${questionId}-el-${index}`} mb={10}>
@@ -32,8 +34,11 @@ const MultipleQuestionLayout = ({
             onClick={() => check(value, name, index)}
           >
             <Row align="center" py={10} height="44">
-              <Checkbox checked={isChecked} mr={16} />
-              <div dangerouslySetInnerHTML={{ __html: payload }} />
+              <Checkbox id={ariaInputId} checked={isChecked} mr={16} />
+
+              <label htmlFor={ariaInputId}>
+                <Markup content={payload} />
+              </label>
             </Row>
           </HoverableBox>
         </Row>

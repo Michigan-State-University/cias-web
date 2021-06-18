@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
-import { borders, colors } from 'theme';
+import { borders, colors, themeColors } from 'theme';
 
 import BinIcon from 'assets/svg/bin-no-bg.svg';
 import EditIcon from 'assets/svg/edit.svg';
@@ -55,8 +55,8 @@ const TopPanelComponent = ({
         <Col xs={4}>
           <TextButton loading={isDeleting} onClick={onDelete}>
             <Row align="center">
-              <Icon src={BinIcon} fill={colors.flamingo} mr={8} />
-              <Text fontWeight="bold" color={colors.flamingo}>
+              <Icon src={BinIcon} fill={themeColors.warning} mr={8} />
+              <Text fontWeight="bold" color={themeColors.warning}>
                 {formatMessage(messages.deleteEntity)}
               </Text>
             </Row>

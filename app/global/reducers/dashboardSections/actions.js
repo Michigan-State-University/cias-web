@@ -25,6 +25,8 @@ import {
   FETCH_SECTIONS_ERROR,
   FETCH_SECTIONS_REQUEST,
   FETCH_SECTIONS_SUCCESS,
+  COPY_CHART_REQUEST,
+  COPY_CHART_SUCCESS,
   SELECT_CHART_ACTION,
 } from './constants';
 
@@ -115,6 +117,12 @@ export const deleteChartSuccess = (chartId, dashboardSectionId) =>
   actionBuilder(DELETE_CHART_SUCCESS, { chartId, dashboardSectionId });
 export const deleteChartError = error =>
   actionBuilder(DELETE_CHART_ERROR, { error });
+
+export const copyChartRequest = chartId =>
+  actionBuilder(COPY_CHART_REQUEST, { chartId });
+
+export const copyChartSuccess = (chart, dashboardSectionId) =>
+  actionBuilder(COPY_CHART_SUCCESS, { chart, dashboardSectionId });
 
 export const selectChartAction = (dashboardSectionId, chartId) =>
   actionBuilder(SELECT_CHART_ACTION, {

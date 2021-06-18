@@ -12,7 +12,8 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
       class="styled__Header-hdmnn0-2 hWqYDm"
     >
       <img
-        class="styled__Logo-hdmnn0-3 hnzJby"
+        alt="CIAS Application Logo"
+        class="Img-sc-55j3su-0 cDhXoN"
         src="IMAGE_MOCK"
       />
     </div>
@@ -34,12 +35,16 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
           <div
             class="Column-sc-4zswzq-0 jCuscc"
           >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
+            <label
+              for="password"
             >
-              Password
-            </p>
+              <p
+                class="Text-e4p0w3-0 kFFPgx"
+                width="fit-content"
+              >
+                Password
+              </p>
+            </label>
             <div
               class="Row-y1cs0u-0 fgwsqb"
               width="100%"
@@ -47,6 +52,7 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
               <input
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
+                id="password"
                 name="password"
                 placeholder="Enter password"
                 type="password"
@@ -58,12 +64,16 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
           <div
             class="Column-sc-4zswzq-0 jCuscc"
           >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
+            <label
+              for="passwordConfirmation"
             >
-              Password confirmation
-            </p>
+              <p
+                class="Text-e4p0w3-0 kFFPgx"
+                width="fit-content"
+              >
+                Password confirmation
+              </p>
+            </label>
             <div
               class="Row-y1cs0u-0 fgwsqb"
               width="100%"
@@ -71,6 +81,7 @@ exports[`<SetNewPasswordPage /> Should render and match the snapshot 1`] = `
               <input
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
+                id="passwordConfirmation"
                 name="passwordConfirmation"
                 placeholder="Retype your password"
                 type="password"

@@ -34,6 +34,10 @@ const customStyles = ({ isMulti, bg, isDisabled }) => ({
     cursor: isDisabled ? 'not-allowed' : 'pointer',
   }),
   menuPortal: provided => ({ ...provided, zIndex: 999 }),
+  placeholder: provided => ({
+    ...provided,
+    color: 'hsl(0, 0%, 40%)',
+  }),
 });
 
 const customComponents = isMulti => ({

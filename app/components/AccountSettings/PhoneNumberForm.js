@@ -148,14 +148,14 @@ const PhoneNumberForm = ({
                 modalVisible={modalVisible}
                 phone={currentPhoneNumber}
               />
-              <Row width="100%">
+              <Row width="100%" align="end">
                 <FormikSelect
                   columnStyleProps={{
                     pr: 10,
                     width: 230,
                   }}
                   disabled={disabled}
-                  label={formatMessage(messages.phoneNumberLabel)}
+                  label={formatMessage(messages.phoneNumberPrefixLabel)}
                   formikKey="iso"
                   options={prefixOptions}
                   inputProps={{
@@ -172,6 +172,7 @@ const PhoneNumberForm = ({
                   }}
                 />
                 <FormikNumberInput
+                  label={formatMessage(messages.phoneNumberLabel)}
                   value={numberValue}
                   formikKey="number"
                   placeholder={formatMessage(messages.phoneNumber)}
@@ -179,7 +180,6 @@ const PhoneNumberForm = ({
                   countryCode={isoValue.value}
                   inputProps={{
                     ref: inputNumberRef,
-                    mt: 16,
                     width: '100%',
                     onBlur: handleSubmit,
                     disabled,

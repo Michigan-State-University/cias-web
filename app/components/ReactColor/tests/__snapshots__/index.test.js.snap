@@ -19,7 +19,7 @@ exports[`<ReactColor /> Should render and match the snapshot 1`] = `
 
 .c2 {
   border-radius: 50%;
-  background-color: #C866EA;
+  background-color: #B727EA;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -34,7 +34,7 @@ exports[`<ReactColor /> Should render and match the snapshot 1`] = `
   align-items: center;
   width: 20px;
   height: 20px;
-  background-color: rgba(200,102,234,1);
+  background-color: rgba(183,39,234,1);
   opacity: 1;
   color: #2F3850;
 }

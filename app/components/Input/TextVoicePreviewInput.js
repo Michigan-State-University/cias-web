@@ -87,6 +87,7 @@ const TextVoicePreviewInput = ({
         disabled={audioButtonDisabled}
         height={25}
         mt={5}
+        role="button"
       >
         {renderPreviewButton()}
         <Text whiteSpace="pre" ml={2} color={themeColors.secondary}>

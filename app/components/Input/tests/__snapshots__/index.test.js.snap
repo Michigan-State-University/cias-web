@@ -31,11 +31,11 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
 }
 
 .c2 .schedule-date-picker .react-datepicker__day--keyboard-selected {
-  background-color: #C866EA;
+  background-color: #B727EA;
 }
 
 .c2 .schedule-date-picker .react-datepicker__day--selected {
-  background-color: #C866EA;
+  background-color: #B727EA;
 }
 
 .c2 .schedule-date-picker .react-datepicker__day:hover {
@@ -1909,7 +1909,7 @@ exports[`<Input /> Should render with error and match the snapshot 1`] = `
   padding: 12px;
   border-style: solid;
   border-width: 1px;
-  border-color: #EF462F;
+  border-color: #D2371D;
   border-radius: 5px;
   background-color: transparent;
   color: #2F3850;
@@ -1918,7 +1918,7 @@ exports[`<Input /> Should render with error and match the snapshot 1`] = `
 .c0:focus {
   box-shadow: none;
   outline: none;
-  border-color: #EF462F;
+  border-color: #D2371D;
 }
 
 .c0:disabled {

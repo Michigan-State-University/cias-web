@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
 import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHandler';
 
+import LocalStorageService from 'utils/localStorageService';
 import {
   REGISTER_RESEARCHER_REQUEST,
   REGISTER_RESEARCHER_SUCCESS,
@@ -23,6 +24,9 @@ function* registerResearcher({ payload }) {
     });
     yield put(registerResearcherSuccess());
     yield put(push('/login'));
+    yield call(LocalStorageService.clearHeaders);
+    yield call(LocalStorageService.clearState);
+    yield call(LocalStorageService.clearGuestHeaders);
     yield call(toast.success, formatMessage(messages.createdAccount), {
       toastId: REGISTER_RESEARCHER_SUCCESS,
     });

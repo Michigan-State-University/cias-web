@@ -126,11 +126,11 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
 }
 
 .c9:checked + .c11 {
-  background-color: #C866EA;
+  background-color: #B727EA;
 }
 
 .c9:focus + .c11 {
-  box-shadow: 0 0 1px #C866EA;
+  box-shadow: 0 0 1px #B727EA;
 }
 
 .c9:disabled + .c11 {
@@ -252,7 +252,7 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
       >
         Use formula
       </p>
-      <label
+      <div
         class="c8"
       >
         <input
@@ -264,7 +264,7 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
         <span
           class="c11 c12"
         />
-      </label>
+      </div>
     </div>
   </div>
 </div>

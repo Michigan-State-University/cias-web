@@ -7,7 +7,7 @@ import { defineMessages } from 'react-intl';
 
 import { ChartStatus, ChartTypeDto } from 'global/reducers/dashboardSections';
 
-import { colors } from 'theme';
+import { themeColors } from 'theme';
 
 export const scope = 'app.components.DashboardSetup';
 
@@ -75,7 +75,7 @@ export default defineMessages({
   chartSettingsNotEditableInfo: {
     id: `${scope}.chartSettingsNotEditableInfo`,
     defaultMessage: `Data are being collected. <span style="color: ${
-      colors.flamingo
+      themeColors.warning
     };">From this moment you can not introduce any changes to the chart</span>.`,
   },
   chartSettingsPublishInfo: {
@@ -143,6 +143,10 @@ export default defineMessages({
   chartSettingsFormulaPlaceholder: {
     id: `${scope}.chartSettingsFormulaPlaceholder`,
     defaultMessage: 'Enter Formula',
+  },
+  chartSettingsCopy: {
+    id: `${scope}.chartSettingsCopy`,
+    defaultMessage: 'Copy chart',
   },
   chartFormulaCaseLabelPlaceholder: {
     id: `${scope}.chartFormulaCaseLabelPlaceholder`,

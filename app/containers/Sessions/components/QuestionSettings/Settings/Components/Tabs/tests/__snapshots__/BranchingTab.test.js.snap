@@ -16,8 +16,8 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
           class="Box-sc-1vhutan-0 gfyFJD"
         >
           <p
-            class="Text-e4p0w3-0 iaJrvl"
-            color="#C866EA"
+            class="Text-e4p0w3-0 lmzfCF"
+            color="#B727EA"
             font-weight="bold"
           >
             Add variable

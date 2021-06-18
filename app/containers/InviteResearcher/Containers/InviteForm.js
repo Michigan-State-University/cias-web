@@ -8,7 +8,7 @@ import Column from 'components/Column';
 import H3 from 'components/H3';
 import Input from 'components/Input';
 import Text from 'components/Text';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import messages from '../messages';
 import { changeEmailInput } from '../actions';
@@ -51,7 +51,7 @@ const InviteForm = ({
           onKeyDown={handleKeyDown}
         />
         {error && (
-          <Text mt={5} color={colors.flamingo} fontWeight="bold">
+          <Text mt={5} color={themeColors.warning} fontWeight="bold">
             {error}
           </Text>
         )}

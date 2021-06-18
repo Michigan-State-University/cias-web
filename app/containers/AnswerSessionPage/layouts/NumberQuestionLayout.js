@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
@@ -9,12 +10,8 @@ import { themeColors } from 'theme';
 
 import messages from './messages';
 
-const NumberQuestionLayout = ({
-  onChange,
-  formatMessage,
-  answerBody,
-  onValidation,
-}) => {
+const NumberQuestionLayout = ({ onChange, answerBody, onValidation }) => {
+  const { formatMessage } = useIntl();
   const value = answerBody && answerBody.value ? answerBody.value : '';
 
   return (
@@ -31,6 +28,7 @@ const NumberQuestionLayout = ({
           validator={numericValidator}
           onValidation={onValidation}
           onCheck={onChange}
+          ariaLabel={formatMessage(messages.numberQuestionLabel)}
         />
       </Row>
     </Box>
@@ -39,9 +37,8 @@ const NumberQuestionLayout = ({
 
 NumberQuestionLayout.propTypes = {
   onChange: PropTypes.func,
-  formatMessage: PropTypes.func,
   answerBody: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   onValidation: PropTypes.func,
 };
 
-export default NumberQuestionLayout;
+export default memo(NumberQuestionLayout);

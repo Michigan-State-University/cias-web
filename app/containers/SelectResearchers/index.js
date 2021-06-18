@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import remove from 'lodash/remove';
 import trim from 'lodash/trim';
 
-import { colors } from 'theme';
+import { themeColors } from 'theme';
 import useFilter from 'utils/useFilter';
 import Row from 'components/Row';
 import Loader from 'components/Loader';
@@ -72,7 +72,7 @@ const SelectResearchers = ({
     return ternary(
       trimmedFullName,
       trimmedFullName,
-      <Text color={colors.flamingo}>
+      <Text color={themeColors.warning}>
         {formatMessage(messages.waitingForActivation)}
       </Text>,
     );

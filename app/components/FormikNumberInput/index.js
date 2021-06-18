@@ -39,10 +39,16 @@ function FormikNumberInput({
 
   return (
     <Column {...columnStyleProps}>
-      <Text mb={5} width="fit-content">
-        {label}
-      </Text>
+      {label && (
+        <label htmlFor={formikKey}>
+          <Text mb={5} width="fit-content">
+            {label}
+          </Text>
+        </label>
+      )}
+
       <Input
+        id={formikKey}
         mb={hasError ? 5 : null}
         placeholder={placeholder}
         value={value}

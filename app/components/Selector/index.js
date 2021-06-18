@@ -21,6 +21,7 @@ const Selector = ({
   setOption,
   selectOptionPlaceholder,
   disabled,
+  ariaLabel,
 }) => {
   const selector = useRef(null);
 
@@ -33,7 +34,7 @@ const Selector = ({
 
   return (
     <Box position="relative" ref={selector}>
-      <Row align="center">
+      <Row align="center" role="button">
         <HeaderComponent disabled={disabled} onClick={toggleActive}>
           {selectedOption.label}
         </HeaderComponent>
@@ -60,6 +61,8 @@ const Selector = ({
           top="30px"
           right={rightPosition || '0'}
           zIndex={999}
+          role="listbox"
+          aria-label={ariaLabel}
         >
           <ElementsComponent
             options={options}
@@ -88,6 +91,7 @@ Selector.propTypes = {
   setOption: PropTypes.func,
   selectOptionPlaceholder: PropTypes.string,
   disabled: PropTypes.bool,
+  ariaLabel: PropTypes.string,
 };
 
 Selector.defaultProps = {

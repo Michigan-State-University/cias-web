@@ -27,6 +27,7 @@ const PieChartSettings = ({
   onEditFormulaPayload,
   onEditName,
   onEditStatus,
+  onCopyChart,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -50,6 +51,7 @@ const PieChartSettings = ({
         onChangeStatus={onEditStatus}
         onDelete={onDelete}
         hasFormula={formula.payload !== ''}
+        onCopyChart={onCopyChart}
       />
 
       <ChartSettingsGeneralSection
@@ -105,6 +107,7 @@ PieChartSettings.propTypes = {
   onEditFormulaPayload: PropTypes.func,
   onEditName: PropTypes.func,
   onEditStatus: PropTypes.func,
+  onCopyChart: PropTypes.func,
 };
 
 export default memo(PieChartSettings);

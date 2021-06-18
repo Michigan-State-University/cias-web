@@ -1,13 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Option /> Should render and match the snapshot 1`] = `
-.c1 {
-  width: auto;
-  height: auto;
-  margin-right: 15px;
-  cursor: pointer;
-}
-
 .c0 {
   padding: 10px;
   display: -webkit-box;
@@ -27,7 +20,6 @@ exports[`<Option /> Should render and match the snapshot 1`] = `
     class="c0 custom-option"
   >
     <img
-      class="c1"
       src="IMAGE_MOCK"
     />
     <span>
@@ -38,13 +30,6 @@ exports[`<Option /> Should render and match the snapshot 1`] = `
 `;
 
 exports[`<Option /> Should render and match the snapshot 2`] = `
-.c1 {
-  width: auto;
-  height: auto;
-  margin-right: 15px;
-  cursor: pointer;
-}
-
 .c0 {
   padding: 10px;
   display: -webkit-box;
@@ -64,7 +49,6 @@ exports[`<Option /> Should render and match the snapshot 2`] = `
     class="c0 custom-option"
   >
     <img
-      class="c1"
       src="IMAGE_MOCK"
     />
     <span>

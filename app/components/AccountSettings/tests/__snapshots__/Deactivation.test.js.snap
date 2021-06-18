@@ -8,7 +8,7 @@ exports[`<Deactivation /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   border: none;
   outline: none;
-  background-color: #EF462F;
+  background-color: #D2371D;
   color: #FFFFFF;
   border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;

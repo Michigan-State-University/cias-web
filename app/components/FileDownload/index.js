@@ -37,7 +37,7 @@ const FileDownload = ({
   };
 
   return (
-    <Box onClick={handleClick}>
+    <Box onClick={handleClick} role="button">
       <FileDownloadContext.Provider value={{ isDownloading }}>
         <FileDownloadContext.Consumer>
           {isFunction(children) ? children : () => children}

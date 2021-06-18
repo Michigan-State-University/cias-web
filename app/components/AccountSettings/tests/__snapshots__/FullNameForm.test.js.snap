@@ -142,12 +142,16 @@ exports[`<FullNameForm /> Should render and match the snapshot 1`] = `
       class="c2"
       data-testid="first-name-input"
     >
-      <p
-        class="c3"
-        width="fit-content"
+      <label
+        for="firstName"
       >
-        First Name
-      </p>
+        <p
+          class="c3"
+          width="fit-content"
+        >
+          First Name
+        </p>
+      </label>
       <div
         class="c4"
         width="100%"
@@ -155,6 +159,7 @@ exports[`<FullNameForm /> Should render and match the snapshot 1`] = `
         <input
           class="c5"
           height="46"
+          id="firstName"
           name="firstName"
           placeholder="Enter first name"
           type="text"
@@ -166,12 +171,16 @@ exports[`<FullNameForm /> Should render and match the snapshot 1`] = `
     <div
       class="c6"
     >
-      <p
-        class="c3"
-        width="fit-content"
+      <label
+        for="lastName"
       >
-        Last name
-      </p>
+        <p
+          class="c3"
+          width="fit-content"
+        >
+          Last name
+        </p>
+      </label>
       <div
         class="c4"
         width="100%"
@@ -179,6 +188,7 @@ exports[`<FullNameForm /> Should render and match the snapshot 1`] = `
         <input
           class="c5"
           height="46"
+          id="lastName"
           name="lastName"
           placeholder="Enter last name"
           type="text"

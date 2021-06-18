@@ -15,7 +15,7 @@ exports[`<TileRenderer /> Should render and match the snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  background: #C866EA;
+  background: #B727EA;
   color: #FFFFFF;
   -webkit-box-pack: center;
   -webkit-justify-content: center;

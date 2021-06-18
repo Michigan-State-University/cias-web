@@ -24,6 +24,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
               class="Column-sc-4zswzq-0 ekpwZH"
             >
               <input
+                aria-label="Enter your name"
                 class="Input-t9j2q5-0 hwMwnZ"
                 disabled=""
                 height="100%"
@@ -59,6 +60,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
             class="Row-y1cs0u-0 bOYLvV"
             disabled=""
             height="25"
+            role="button"
             width="80"
           >
             <img
@@ -66,8 +68,8 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
               src="IMAGE_MOCK"
             />
             <p
-              class="Text-e4p0w3-0 ixAmEb"
-              color="#C866EA"
+              class="Text-e4p0w3-0 yWacr"
+              color="#B727EA"
             >
               Try it out!
             </p>

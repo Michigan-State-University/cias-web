@@ -44,6 +44,10 @@ export const DELETE_CHART_SUCCESS =
   'app/dashboardSections/DELETE_CHART_SUCCESS';
 export const DELETE_CHART_ERROR = 'app/dashboardSections/DELETE_CHART_ERROR';
 
+export const COPY_CHART_REQUEST = 'app/dashboardSections/COPY_CHART_REQUEST';
+export const COPY_CHART_SUCCESS = 'app/dashboardSections/COPY_CHART_SUCCESS';
+export const COPY_CHART_ERROR = 'app/dashboardSections/COPY_CHART_ERROR';
+
 export const SELECT_CHART_ACTION = 'app/dashboardSections/SELECT_CHART_ACTION';
 
 /**

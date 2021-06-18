@@ -252,7 +252,7 @@ const ReportTemplateMainSettings = ({
                       fontSize={14}
                       loading={deleteReportTemplateLoading}
                       buttonProps={{
-                        color: colors.flamingo,
+                        color: themeColors.warning,
                         fontWeight: 'bold',
                         disabled: !canEdit,
                       }}

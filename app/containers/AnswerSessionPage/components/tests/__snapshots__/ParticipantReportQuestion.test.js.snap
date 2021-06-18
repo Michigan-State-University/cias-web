@@ -22,27 +22,33 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
         class="Row-y1cs0u-0 goQUzT"
       >
         <img
-          class="Img-sc-55j3su-0 eGlrSF"
           src="IMAGE_MOCK"
         />
-        <p
-          class="Text-e4p0w3-0 fFURPd"
+        <label
+          for="answer-yes"
         >
-          Yes
-        </p>
+          <p
+            class="Text-e4p0w3-0 fFURPd"
+          >
+            Yes
+          </p>
+        </label>
       </div>
       <div
         class="Row-y1cs0u-0 kjTQqN"
       >
         <img
-          class="Img-sc-55j3su-0 eGlrSF"
           src="IMAGE_MOCK"
         />
-        <p
-          class="Text-e4p0w3-0 fFURPd"
+        <label
+          for="answer-no"
         >
-          No
-        </p>
+          <p
+            class="Text-e4p0w3-0 fFURPd"
+          >
+            No
+          </p>
+        </label>
       </div>
       <div
         class="Column-sc-4zswzq-0 fGhsBV"

@@ -40,6 +40,7 @@ const ElementsContainer = ({
             whiteSpace="nowrap"
             clickable
             onClick={() => handleSelectOption(id)}
+            role="option"
           >
             {label}
           </Text>

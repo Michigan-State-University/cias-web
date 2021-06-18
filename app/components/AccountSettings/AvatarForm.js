@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import ConfirmationBox from 'components/ConfirmationBox';
 import Row from 'components/Row';
-import { themeColors, colors } from 'theme';
+import { themeColors } from 'theme';
 
 import messages from './messages';
 import {
@@ -67,7 +67,7 @@ const AvatarForm = ({
             {avatar && (
               <StyledDeleteButton
                 data-testid="open-modal"
-                color={colors.flamingo}
+                color={themeColors.warning}
                 fontWeight="bold"
                 fontSize={14}
                 onClick={openConfirmation}

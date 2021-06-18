@@ -1,122 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionDetails /> should match the snapshot 1`] = `
-.c0 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  overflow: scroll;
-  padding: 30px;
-  background-color: rgba(248,251,255,1);
-}
-
-.c12 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  padding: 16px;
-  width: 100%;
-  max-width: 702px;
-  margin-bottom: 10px;
-}
-
-.c12:hover {
-  background-color: #E9F1FB;
-}
-
-.c17 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  padding: 16px;
-  width: 100%;
-}
-
-.c17:hover {
-  background-color: #E9F1FB;
-}
-
-.c24 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  padding-top: 14px;
-  padding-bottom: 14px;
-  padding-right: 21px;
-  padding-left: 21px;
-  border: 1px solid #ABBBD1;
-}
-
-.c26 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.c2 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c23 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.c10 {
-  max-width: 960px !important;
-  width: 100%;
-}
-
 .c3 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -223,6 +107,130 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   display: flex;
 }
 
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: scroll;
+  padding: 30px;
+  background-color: rgba(248,251,255,1);
+}
+
+.c12 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 16px;
+  width: 100%;
+  max-width: 702px;
+  margin-bottom: 10px;
+}
+
+.c12:hover {
+  background-color: #E9F1FB;
+}
+
+.c17 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 16px;
+  width: 100%;
+}
+
+.c17:hover {
+  background-color: #E9F1FB;
+}
+
+.c24 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  border: 1px solid #ABBBD1;
+}
+
+.c26 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 26px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  max-width: 200px;
+  max-height: 100px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c23 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.c10 {
+  max-width: 960px !important;
+  width: 100%;
+}
+
 .c4 {
   padding: 12px;
   border-style: solid;
@@ -303,13 +311,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c5 {
-  width: auto;
-  height: auto;
-  max-width: 200px;
-  max-height: 100px;
-}
-
 .c27 {
   width: 100%;
   height: 40px;
@@ -324,8 +325,6 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
   background-color: #9AA1B6;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
-  margin-top: 20px;
-  margin-bottom: 20px;
   width: 180px;
 }
 
@@ -551,6 +550,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
             value="Test group"
           />
           <img
+            alt="Michigan State University Logo"
             class="c5"
             src="IMAGE_MOCK"
           />

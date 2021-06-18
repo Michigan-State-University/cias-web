@@ -48,12 +48,12 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                 We’re waiting for your feedback!
               </p>
               <p
-                class="Text-e4p0w3-0 ikSWkc"
-                color="#C866EA"
+                class="Text-e4p0w3-0 cFbubw"
+                color="#B727EA"
                 font-weight="bold"
               >
                 <a
-                  class="styled__StyledLink-ve6hnx-3 ehXrFS"
+                  class="styled__StyledLink-ve6hnx-3 hNOXud"
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
                   target="_blank"
                 >
@@ -214,7 +214,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
         style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
       >
         <div
-          class="styled__NewElementContainer-sc-1527ipx-1 kvaBVQ"
+          class="styled__NewElementContainer-sc-1527ipx-1 ifuPmn"
           data-cy="create-intervention-button"
         >
           <div
@@ -425,8 +425,8 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
     data-testid="fullscreen-loader"
   >
     <div
-      class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-      color="#C866EA"
+      class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+      color="#B727EA"
       size="100"
       width="6"
     />
@@ -441,8 +441,8 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
     data-testid="fullscreen-loader"
   >
     <div
-      class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-      color="#C866EA"
+      class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+      color="#B727EA"
       size="100"
       width="6"
     />

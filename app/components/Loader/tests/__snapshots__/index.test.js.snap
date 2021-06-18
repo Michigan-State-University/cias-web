@@ -27,8 +27,8 @@ Object {
   width: 66.66666666666666px;
   height: 66.66666666666666px;
   border-radius: 50%;
-  border: 6px solid #C866EA;
-  border-color: #C866EA transparent #C866EA transparent;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
   -webkit-animation: hAjVGa 1.2s linear infinite;
   animation: hAjVGa 1.2s linear infinite;
 }
@@ -63,7 +63,7 @@ Object {
       >
         <div
           class="c1"
-          color="#C866EA"
+          color="#B727EA"
           size="100"
           width="6"
         />
@@ -76,8 +76,8 @@ Object {
       data-testid="fullscreen-loader"
     >
       <div
-        class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-        color="#C866EA"
+        class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+        color="#B727EA"
         size="100"
         width="6"
       />

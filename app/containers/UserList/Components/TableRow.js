@@ -7,7 +7,7 @@ import StyledTextButton from 'components/Button/StyledTextButton';
 import Text from 'components/Text';
 import UserRoleTile from 'components/UserRoleTile';
 import { StripedTR, TD } from 'components/Table';
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 import { ternary } from 'utils/ternary';
 
 import { RemoveFromTeamModalContext, TeamIdContext } from './utils';
@@ -52,12 +52,12 @@ const TableRow = ({
   const text = active
     ? formatMessage(messages.deactivateAccount)
     : formatMessage(messages.activateAccount);
-  const textColor = active ? colors.flamingo : colors.jungleGreen;
+  const textColor = active ? themeColors.warning : colors.jungleGreen;
   const trimmedFullName = trim(fullName);
   const nameColumn = ternary(
     trimmedFullName,
     trimmedFullName,
-    <Text color={colors.flamingo}>
+    <Text color={themeColors.warning}>
       {formatMessage(messages.waitingForActivation)}
     </Text>,
   );

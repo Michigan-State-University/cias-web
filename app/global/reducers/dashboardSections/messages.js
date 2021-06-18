@@ -16,4 +16,12 @@ export default defineMessages({
     id: `${scope}.deleteDashboardSectionError`,
     defaultMessage: 'Failed to delete Section!',
   },
+  cloneSuccess: {
+    id: `${scope}.cloneSuccess`,
+    defaultMessage: 'Chart has been cloned successfully',
+  },
+  cloneError: {
+    id: `${scope}.cloneError`,
+    defaultMessage: 'Failed to clone chart!',
+  },
 });

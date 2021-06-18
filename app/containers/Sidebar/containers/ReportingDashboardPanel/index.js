@@ -35,6 +35,7 @@ const ReportingDashboardPanel = ({
   createOrganization,
   newOrganizationLoading,
   canAccessOrganizations,
+  canAddNewOrganization,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -74,18 +75,20 @@ const ReportingDashboardPanel = ({
           >
             {formatMessage(messages.reportingPanel)}
           </Comment>
-          <Button
-            hoverable
-            radius="5px"
-            my={20}
-            width="auto"
-            px={10}
-            inverted
-            color="secondary"
-            onClick={addNewOrganization}
-          >
-            {formatMessage(messages.addOrganization)}
-          </Button>
+          {canAddNewOrganization && (
+            <Button
+              hoverable
+              radius="5px"
+              my={20}
+              width="auto"
+              px={10}
+              inverted
+              color="secondary"
+              onClick={addNewOrganization}
+            >
+              {formatMessage(messages.addOrganization)}
+            </Button>
+          )}
           {newOrganizationLoading && <Spinner color={themeColors.secondary} />}
         </>
       )}
@@ -99,6 +102,7 @@ ReportingDashboardPanel.propTypes = {
   organizationsLoading: PropTypes.bool,
   newOrganizationLoading: PropTypes.bool,
   canAccessOrganizations: PropTypes.bool,
+  canAddNewOrganization: PropTypes.bool,
   organizationsError: PropTypes.any,
   fetchOrganizations: PropTypes.func,
   createOrganization: PropTypes.func,

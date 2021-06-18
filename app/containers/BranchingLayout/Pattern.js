@@ -6,7 +6,7 @@ import Row from 'components/Row';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import binNoBg from 'assets/svg/bin-no-bg.svg';
-import { colors } from 'theme';
+import { themeColors } from 'theme';
 import ArrowToggle from 'components/ArrowToggle';
 import messages from './messages';
 import Target from './Target';
@@ -107,7 +107,7 @@ const Pattern = ({
         />
       )}
       {sumPercentages !== 100 && showRandomization && (
-        <Text my={10} ml={70} color={colors.flamingo}>
+        <Text my={10} ml={70} color={themeColors.warning}>
           {formatMessage(messages.percentagesSumInvalid)}
         </Text>
       )}

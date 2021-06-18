@@ -21,6 +21,7 @@ const TextBoxQuestionLayout = ({ formatMessage, onChange, answerBody }) => {
           rows="5"
           width="100%"
           onChange={onChange}
+          aria-label={formatMessage(messages.textPlaceholder)}
         />
       </Row>
     </Box>

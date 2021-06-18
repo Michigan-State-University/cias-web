@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, IntlShape } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { codes } from 'currency-codes';
 import union from 'lodash/union';
 
@@ -13,12 +13,9 @@ import Text from 'components/Text';
 import { popularCurrencies } from './constants';
 import messages from './messages';
 
-const CurrencySelect = ({
-  disabled,
-  value,
-  onSelect,
-  intl: { formatMessage },
-}) => {
+const CurrencySelect = ({ disabled, value, onSelect, inputId }) => {
+  const { formatMessage } = useIntl();
+
   const getCodeLabel = (currency = 'USD') => (
     <Row align="center">
       <div
@@ -54,6 +51,7 @@ const CurrencySelect = ({
         onChange: handleOnSelect,
         placeholder: formatMessage(messages.placeholder),
         noOptionsMessage: () => formatMessage(messages.notFound),
+        inputId,
       }}
     />
   );
@@ -63,7 +61,7 @@ CurrencySelect.propTypes = {
   disabled: PropTypes.bool,
   onSelect: PropTypes.func,
   value: PropTypes.string,
-  intl: PropTypes.shape(IntlShape),
+  inputId: PropTypes.string,
 };
 
-export default injectIntl(CurrencySelect);
+export default memo(CurrencySelect);

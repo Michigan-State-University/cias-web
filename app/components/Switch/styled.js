@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { themeColors, colors } from 'theme';
 import { margin, padding } from '../BaseComponentStyles';
 
-const SwitchWrapper = styled.label`
+const SwitchWrapper = styled.div`
   position: relative;
   display: inline-block;
   min-width: 40px;

@@ -20,13 +20,15 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
             height="44"
           >
             <img
-              class="Img-sc-55j3su-0 iYjftT"
-              data-cy="single-question-0-checkbox"
               src="IMAGE_MOCK"
             />
-            <div>
-              test
-            </div>
+            <label
+              for="answer-1"
+            >
+              <div>
+                test
+              </div>
+            </label>
           </div>
         </div>
       </div>
@@ -42,13 +44,15 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
             height="44"
           >
             <img
-              class="Img-sc-55j3su-0 iYjftT"
-              data-cy="single-question-1-checkbox"
               src="IMAGE_MOCK"
             />
-            <div>
-              test
-            </div>
+            <label
+              for="answer-2"
+            >
+              <div>
+                test
+              </div>
+            </label>
           </div>
         </div>
       </div>

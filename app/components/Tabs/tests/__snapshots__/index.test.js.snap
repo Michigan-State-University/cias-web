@@ -30,7 +30,7 @@ exports[`<Tabs /> should render and match the snapshot 1`] = `
   padding-bottom: 7px;
   border-bottom-width: 2px;
   border-bottom-style: solid;
-  border-bottom-color: #C866EA;
+  border-bottom-color: #B727EA;
 }
 
 .c1 div {
@@ -113,7 +113,7 @@ exports[`<Tabs /> should render as links and match the snapshot 1`] = `
   padding-bottom: 7px;
   border-bottom-width: 2px;
   border-bottom-style: solid;
-  border-bottom-color: #C866EA;
+  border-bottom-color: #B727EA;
 }
 
 .c1 div {

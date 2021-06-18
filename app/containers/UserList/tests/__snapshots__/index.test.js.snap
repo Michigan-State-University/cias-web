@@ -22,8 +22,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           Manage accounts
         </h1>
         <button
-          class="StyledTextButton-sc-1b7egxw-0 gvcXh"
-          color="#C866EA"
+          class="StyledTextButton-sc-1b7egxw-0 hXDmcc"
+          color="#B727EA"
           font-weight="bold"
         >
           + Invite researcher
@@ -127,7 +127,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                     display="inline-flex"
                   >
                     <img
-                      class="Img-sc-55j3su-0 gyShgd"
                       src="IMAGE_MOCK"
                     />
                     Show inactive accounts
@@ -238,8 +237,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-e4p0w3-0 gjgLec"
-                    color="#EF462F"
+                    class="Text-e4p0w3-0 eFoKic"
+                    color="#D2371D"
                   >
                     Waiting for activation
                   </p>
@@ -278,8 +277,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                       class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
-                        class="Text-e4p0w3-0 kcCsRU"
-                        color="#EF462F"
+                        class="Text-e4p0w3-0 gYitek"
+                        color="#D2371D"
                         font-weight="bold"
                       >
                         Deactivate account
@@ -297,8 +296,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-e4p0w3-0 gjgLec"
-                    color="#EF462F"
+                    class="Text-e4p0w3-0 eFoKic"
+                    color="#D2371D"
                   >
                     Waiting for activation
                   </p>
@@ -337,8 +336,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                       class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
-                        class="Text-e4p0w3-0 kcCsRU"
-                        color="#EF462F"
+                        class="Text-e4p0w3-0 gYitek"
+                        color="#D2371D"
                         font-weight="bold"
                       >
                         Deactivate account
@@ -356,8 +355,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-e4p0w3-0 gjgLec"
-                    color="#EF462F"
+                    class="Text-e4p0w3-0 eFoKic"
+                    color="#D2371D"
                   >
                     Waiting for activation
                   </p>
@@ -396,8 +395,8 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                       class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
-                        class="Text-e4p0w3-0 kcCsRU"
-                        color="#EF462F"
+                        class="Text-e4p0w3-0 gYitek"
+                        color="#D2371D"
                         font-weight="bold"
                       >
                         Deactivate account
@@ -410,12 +409,16 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
           </table>
         </div>
         <div
+          aria-label="Data list pagination"
           class="Row-y1cs0u-0 cAHLWQ"
           display="flex"
+          role="navigation"
           width="100%"
         >
           <div
-            class="Box-sc-1vhutan-0 dLpxyz"
+            aria-label="Go to page: 1"
+            aria-selected="true"
+            class="Box-sc-1vhutan-0 jvUOui"
             cursor="pointer"
             display="flex"
           >
@@ -427,6 +430,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
             </p>
           </div>
           <h1
+            aria-label="Go to next page"
             class="H1-sc-1k7m23t-0 fRhEzm"
             cursor="pointer"
           >
@@ -559,7 +563,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                     display="inline-flex"
                   >
                     <img
-                      class="Img-sc-55j3su-0 gyShgd"
                       src="IMAGE_MOCK"
                     />
                     Show inactive accounts
@@ -670,8 +673,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-e4p0w3-0 gjgLec"
-                    color="#EF462F"
+                    class="Text-e4p0w3-0 eFoKic"
+                    color="#D2371D"
                   >
                     Waiting for activation
                   </p>
@@ -710,8 +713,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                       class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
-                        class="Text-e4p0w3-0 kcCsRU"
-                        color="#EF462F"
+                        class="Text-e4p0w3-0 gYitek"
+                        color="#D2371D"
                         font-weight="bold"
                       >
                         Deactivate account
@@ -729,8 +732,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-e4p0w3-0 gjgLec"
-                    color="#EF462F"
+                    class="Text-e4p0w3-0 eFoKic"
+                    color="#D2371D"
                   >
                     Waiting for activation
                   </p>
@@ -769,8 +772,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                       class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
-                        class="Text-e4p0w3-0 kcCsRU"
-                        color="#EF462F"
+                        class="Text-e4p0w3-0 gYitek"
+                        color="#D2371D"
                         font-weight="bold"
                       >
                         Deactivate account
@@ -788,8 +791,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="TD-y7762g-0 cXNZQh"
                 >
                   <p
-                    class="Text-e4p0w3-0 gjgLec"
-                    color="#EF462F"
+                    class="Text-e4p0w3-0 eFoKic"
+                    color="#D2371D"
                   >
                     Waiting for activation
                   </p>
@@ -828,8 +831,8 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                       class="StyledTextButton-sc-1b7egxw-0 itdyYG"
                     >
                       <p
-                        class="Text-e4p0w3-0 kcCsRU"
-                        color="#EF462F"
+                        class="Text-e4p0w3-0 gYitek"
+                        color="#D2371D"
                         font-weight="bold"
                       >
                         Deactivate account
@@ -842,12 +845,16 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
           </table>
         </div>
         <div
+          aria-label="Data list pagination"
           class="Row-y1cs0u-0 cAHLWQ"
           display="flex"
+          role="navigation"
           width="100%"
         >
           <div
-            class="Box-sc-1vhutan-0 dLpxyz"
+            aria-label="Go to page: 1"
+            aria-selected="true"
+            class="Box-sc-1vhutan-0 jvUOui"
             cursor="pointer"
             display="flex"
           >
@@ -859,6 +866,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
             </p>
           </div>
           <h1
+            aria-label="Go to next page"
             class="H1-sc-1k7m23t-0 fRhEzm"
             cursor="pointer"
           >

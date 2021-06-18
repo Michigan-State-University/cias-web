@@ -5,14 +5,19 @@ exports[`<FormikNumberInput /> Should render and match the snapshot 1`] = `
   <div
     class="Column-sc-4zswzq-0 ekpwZH"
   >
-    <p
-      class="Text-e4p0w3-0 kFFPgx"
-      width="fit-content"
+    <label
+      for="test"
     >
-      Label
-    </p>
+      <p
+        class="Text-e4p0w3-0 kFFPgx"
+        width="fit-content"
+      >
+        Label
+      </p>
+    </label>
     <input
       class="Input-t9j2q5-0 lfEKYd"
+      id="test"
       name="test"
       placeholder="test"
       type="text"

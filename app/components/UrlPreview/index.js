@@ -48,14 +48,18 @@ const UrlPreview = ({ link, handleClick }) => {
               padding={20}
               width={linkData.images[0] ? '70%' : '100%'}
             >
-              <Url href={link} target="_blank" onClick={handleClick}>
-                <ClampedTitle>{linkData.title}</ClampedTitle>
-              </Url>
-              <Url href={link} target="_blank" onClick={handleClick}>
-                <ClampedText mt={8} mb={13} fontSize={11}>
-                  {linkData.description}
-                </ClampedText>
-              </Url>
+              {linkData.title && (
+                <Url href={link} target="_blank" onClick={handleClick}>
+                  <ClampedTitle>{linkData.title}</ClampedTitle>
+                </Url>
+              )}
+              {linkData.description && (
+                <Url href={link} target="_blank" onClick={handleClick}>
+                  <ClampedText mt={8} mb={13} fontSize={11}>
+                    {linkData.description}
+                  </ClampedText>
+                </Url>
+              )}
               <Url href={link} target="_blank" onClick={handleClick}>
                 <Text
                   textOverflow="hidden"

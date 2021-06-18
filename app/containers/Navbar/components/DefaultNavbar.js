@@ -1,10 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import logo from 'assets/svg/logo.svg';
-
-import Img from 'components/Img';
-import { MSULogo } from 'components/Logo';
+import { CIASLogo, MSULogo } from 'components/Logo';
 import Row from 'components/Row';
 
 import useOutsideClick from 'utils/useOutsideClick';
@@ -20,7 +17,7 @@ const DefaultNavbar = () => {
     <Row width="100%" justify="start">
       <StyledLogos>
         <Link to="/">
-          <Img alt="logo" src={logo} maxHeight={51} mr={15} />
+          <CIASLogo maxHeight={51} mr={15} />
         </Link>
         <MSULogo maxHeight={51} ml={10} />
       </StyledLogos>

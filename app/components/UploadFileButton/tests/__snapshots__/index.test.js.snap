@@ -38,8 +38,8 @@ exports[`<UploadFileButton /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-weight: 700;
-  color: rgba(200,102,234,1);
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 <div>
@@ -62,7 +62,7 @@ exports[`<UploadFileButton /> Should render and match the snapshot 1`] = `
       />
       <p
         class="c3"
-        color="#C866EA"
+        color="#B727EA"
         font-weight="bold"
       >
         Upload

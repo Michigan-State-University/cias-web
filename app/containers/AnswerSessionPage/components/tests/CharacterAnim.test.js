@@ -6,13 +6,17 @@
 
 import React from 'react';
 import { render } from '@testing-library/react';
+import { Provider } from 'react-redux';
 
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 
 import CharacterAnim from '../CharacterAnim';
 
 describe('<CharacterAnim />', () => {
+  const store = createTestStore({});
+
   const mockedFunctions = {
     changeIsAnimationOngoing: jest.fn(),
     setFeedbackSettings: jest.fn(),
@@ -44,12 +48,20 @@ describe('<CharacterAnim />', () => {
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<CharacterAnim {...defaultProps} />);
+    render(
+      <Provider store={store}>
+        <CharacterAnim {...defaultProps} />
+      </Provider>,
+    );
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('Should render and match the snapshot', () => {
-    const { container } = render(<CharacterAnim {...defaultProps} />);
+    const { container } = render(
+      <Provider store={store}>
+        <CharacterAnim {...defaultProps} />
+      </Provider>,
+    );
     expect(container).toMatchSnapshot();
   });
 });

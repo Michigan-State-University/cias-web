@@ -48,14 +48,18 @@ const colors = {
   tuftsBlue: '#4092DD',
   mauvelous: '#E992A7',
   amaranth: '#D83450',
+  sonicSilver: '#6B707C',
+  vermilion: '#D2371D',
+  aliceBlue: '#F1F4F9',
+  electricPurple: '#B727EA',
 };
 
 const themeColors = {
   primary: colors.jungleGreen,
-  secondary: colors.orchid,
+  secondary: colors.electricPurple,
   text: colors.bluewood,
   highlight: colors.linkWater,
-  warning: colors.flamingo,
+  warning: colors.vermilion,
 };
 
 export { colors, themeColors };

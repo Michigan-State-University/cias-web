@@ -10,6 +10,7 @@ exports[`<TextBoxQuestion /> Should render and match the snapshot 1`] = `
       class="Row-y1cs0u-0 dskFsL"
     >
       <textarea
+        aria-label="Enter your response here"
         class="TextArea-sc-175uiux-0 gRMYNb"
         placeholder="Enter your response here"
         rows="5"

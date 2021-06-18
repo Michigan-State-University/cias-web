@@ -13,6 +13,7 @@ export {
   updateQuestionSettings,
   deleteQuestionsRequest,
   copyExternallyQuestionRequest,
+  updateQuestionImageRequest,
 } from './actions';
 export { questionsReducer } from './reducer';
 export {
@@ -32,11 +33,9 @@ export {
   makeSelectLastCreatedQuestionId,
 } from './selectors';
 export {
-  addQuestionImageSaga,
   copyQuestionSaga,
   createQuestionSaga,
   deleteQuestionSaga,
-  deleteQuestionImageSaga,
   reorderQuestionsSaga,
   editQuestionAllSagas,
   editQuestionSaga,
@@ -45,4 +44,5 @@ export {
   changeQuestionTypeSaga,
   deleteQuestionsSaga,
   copyExternallyQuestionSaga,
+  questionImageSaga,
 } from './sagas';

@@ -30,11 +30,17 @@ function InputComponent({
 }) {
   return (
     <Column {...columnStyleProps}>
-      <Text mb={5} width="fit-content">
-        {label}
-      </Text>
+      {label && (
+        <label htmlFor={name}>
+          <Text mb={5} width="fit-content">
+            {label}
+          </Text>
+        </label>
+      )}
+
       <Row width="100%" align="center">
         <Input
+          id={name}
           mb={hasError ? 5 : null}
           placeholder={placeholder}
           value={value}

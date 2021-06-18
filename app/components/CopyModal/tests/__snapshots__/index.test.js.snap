@@ -266,8 +266,8 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   line-height: 130%;
   margin-top: 2px;
   margin-left: 5px;
-  color: rgba(200,102,234,1);
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c15 {
@@ -285,8 +285,8 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   line-height: 130%;
   font-size: 15px;
   font-weight: 700;
-  color: rgba(200,102,234,1);
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c22 {
@@ -305,8 +305,8 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   white-space: nowrap;
   font-size: 15px;
   font-weight: 700;
-  color: rgba(200,102,234,1);
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
 }
 
 .c5 {
@@ -492,7 +492,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
                   />
                   <p
                     class="c13"
-                    color="#C866EA"
+                    color="#B727EA"
                   >
                     Sessions
                   </p>
@@ -515,7 +515,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
                     >
                       <p
                         class="c17 c18"
-                        color="#C866EA"
+                        color="#B727EA"
                         font-size="15"
                         font-weight="bold"
                       >

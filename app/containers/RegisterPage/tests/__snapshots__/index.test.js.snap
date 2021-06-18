@@ -11,7 +11,8 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
     class="styled__Header-hdmnn0-2 hWqYDm"
   >
     <img
-      class="styled__Logo-hdmnn0-3 hnzJby"
+      alt="CIAS Application Logo"
+      class="Img-sc-55j3su-0 cDhXoN"
       src="IMAGE_MOCK"
     />
   </div>
@@ -28,7 +29,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           class="H1-sc-1k7m23t-0 ikOywA"
           font-size="23"
         >
-          Register researcher account
+          Register  account
         </h1>
         <div
           class="Row-y1cs0u-0 gQFDhs"
@@ -37,12 +38,16 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           <div
             class="Column-sc-4zswzq-0 ehOEzE"
           >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
+            <label
+              for="firstName"
             >
-              First Name
-            </p>
+              <p
+                class="Text-e4p0w3-0 kFFPgx"
+                width="fit-content"
+              >
+                First Name
+              </p>
+            </label>
             <div
               class="Row-y1cs0u-0 fgwsqb"
               width="100%"
@@ -50,6 +55,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
               <input
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
+                id="firstName"
                 name="firstName"
                 placeholder="Enter first name"
                 type="text"
@@ -61,12 +67,16 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           <div
             class="Column-sc-4zswzq-0 jCuscc"
           >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
+            <label
+              for="lastName"
             >
-              Last name
-            </p>
+              <p
+                class="Text-e4p0w3-0 kFFPgx"
+                width="fit-content"
+              >
+                Last name
+              </p>
+            </label>
             <div
               class="Row-y1cs0u-0 fgwsqb"
               width="100%"
@@ -74,6 +84,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
               <input
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
+                id="lastName"
                 name="lastName"
                 placeholder="Enter last name"
                 type="text"
@@ -86,12 +97,16 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
         <div
           class="Column-sc-4zswzq-0 jCuscc"
         >
-          <p
-            class="Text-e4p0w3-0 kFFPgx"
-            width="fit-content"
+          <label
+            for="email"
           >
-            E-mail address
-          </p>
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            >
+              E-mail address
+            </p>
+          </label>
           <div
             class="Row-y1cs0u-0 fgwsqb"
             width="100%"
@@ -100,6 +115,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
               class="Input-t9j2q5-0 kmneJd"
               disabled=""
               height="46"
+              id="email"
               name="email"
               placeholder="Enter e-mail address"
               type="email"
@@ -111,12 +127,16 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
         <div
           class="Column-sc-4zswzq-0 jCuscc"
         >
-          <p
-            class="Text-e4p0w3-0 kFFPgx"
-            width="fit-content"
+          <label
+            for="password"
           >
-            Password
-          </p>
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            >
+              Password
+            </p>
+          </label>
           <div
             class="Row-y1cs0u-0 fgwsqb"
             width="100%"
@@ -124,6 +144,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             <input
               class="Input-t9j2q5-0 ptbLy"
               height="46"
+              id="password"
               name="password"
               placeholder="Enter password"
               type="password"
@@ -135,12 +156,16 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
         <div
           class="Column-sc-4zswzq-0 jCuscc"
         >
-          <p
-            class="Text-e4p0w3-0 kFFPgx"
-            width="fit-content"
+          <label
+            for="passwordConfirmation"
           >
-            Password confirmation
-          </p>
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            >
+              Password confirmation
+            </p>
+          </label>
           <div
             class="Row-y1cs0u-0 fgwsqb"
             width="100%"
@@ -148,6 +173,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             <input
               class="Input-t9j2q5-0 ptbLy"
               height="46"
+              id="passwordConfirmation"
               name="passwordConfirmation"
               placeholder="Retype your password"
               type="password"
@@ -182,7 +208,8 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
     class="styled__Header-hdmnn0-2 hWqYDm"
   >
     <img
-      class="styled__Logo-hdmnn0-3 hnzJby"
+      alt="CIAS Application Logo"
+      class="Img-sc-55j3su-0 cDhXoN"
       src="IMAGE_MOCK"
     />
   </div>
@@ -208,12 +235,16 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           <div
             class="Column-sc-4zswzq-0 ehOEzE"
           >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
+            <label
+              for="firstName"
             >
-              First Name
-            </p>
+              <p
+                class="Text-e4p0w3-0 kFFPgx"
+                width="fit-content"
+              >
+                First Name
+              </p>
+            </label>
             <div
               class="Row-y1cs0u-0 fgwsqb"
               width="100%"
@@ -221,6 +252,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               <input
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
+                id="firstName"
                 name="firstName"
                 placeholder="Enter first name"
                 type="text"
@@ -232,12 +264,16 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           <div
             class="Column-sc-4zswzq-0 jCuscc"
           >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
+            <label
+              for="lastName"
             >
-              Last name
-            </p>
+              <p
+                class="Text-e4p0w3-0 kFFPgx"
+                width="fit-content"
+              >
+                Last name
+              </p>
+            </label>
             <div
               class="Row-y1cs0u-0 fgwsqb"
               width="100%"
@@ -245,6 +281,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               <input
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
+                id="lastName"
                 name="lastName"
                 placeholder="Enter last name"
                 type="text"
@@ -257,12 +294,16 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
         <div
           class="Column-sc-4zswzq-0 jCuscc"
         >
-          <p
-            class="Text-e4p0w3-0 kFFPgx"
-            width="fit-content"
+          <label
+            for="email"
           >
-            E-mail address
-          </p>
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            >
+              E-mail address
+            </p>
+          </label>
           <div
             class="Row-y1cs0u-0 fgwsqb"
             width="100%"
@@ -270,6 +311,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             <input
               class="Input-t9j2q5-0 ptbLy"
               height="46"
+              id="email"
               name="email"
               placeholder="Enter e-mail address"
               type="email"
@@ -281,12 +323,16 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
         <div
           class="Column-sc-4zswzq-0 jCuscc"
         >
-          <p
-            class="Text-e4p0w3-0 kFFPgx"
-            width="fit-content"
+          <label
+            for="password"
           >
-            Password
-          </p>
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            >
+              Password
+            </p>
+          </label>
           <div
             class="Row-y1cs0u-0 fgwsqb"
             width="100%"
@@ -294,6 +340,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             <input
               class="Input-t9j2q5-0 ptbLy"
               height="46"
+              id="password"
               name="password"
               placeholder="Enter password"
               type="password"
@@ -305,12 +352,16 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
         <div
           class="Column-sc-4zswzq-0 jCuscc"
         >
-          <p
-            class="Text-e4p0w3-0 kFFPgx"
-            width="fit-content"
+          <label
+            for="passwordConfirmation"
           >
-            Password confirmation
-          </p>
+            <p
+              class="Text-e4p0w3-0 kFFPgx"
+              width="fit-content"
+            >
+              Password confirmation
+            </p>
+          </label>
           <div
             class="Row-y1cs0u-0 fgwsqb"
             width="100%"
@@ -318,6 +369,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             <input
               class="Input-t9j2q5-0 ptbLy"
               height="46"
+              id="passwordConfirmation"
               name="passwordConfirmation"
               placeholder="Retype your password"
               type="password"
@@ -343,8 +395,8 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             href="/login"
           >
             <button
-              class="StyledTextButton-sc-1b7egxw-0 fJAMdx"
-              color="#C866EA"
+              class="StyledTextButton-sc-1b7egxw-0 GxeXo"
+              color="#B727EA"
             >
               I already have an account
             </button>

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { memo } from 'react';
 import { layout, margin, style, positioning } from '../BaseComponentStyles';
 
 const Img = styled.img.attrs(props => ({
@@ -18,4 +19,4 @@ Img.propTypes = {
   pointerEvents: PropTypes.string,
 };
 
-export default Img;
+export default memo(Img);

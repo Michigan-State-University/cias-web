@@ -4,10 +4,10 @@ import styled from 'styled-components';
 
 import { margin } from '../BaseComponentStyles';
 
-const getCursorStyle = (onClick, disabled) => {
+const getCursorStyle = ({ $clickable, disabled, onClick }) => {
   if (disabled) return 'not-allowed';
 
-  if (onClick) return 'pointer';
+  if (onClick || $clickable) return 'pointer';
 
   return '';
 };
@@ -24,6 +24,6 @@ export const SVG = styled(({ fill, stroke, ...props }) => (
     stroke: ${({ stroke }) => stroke};
   }
 
-  cursor: ${({ onClick, disabled }) => getCursorStyle(onClick, disabled)};
+  cursor: ${getCursorStyle};
   ${margin};
 `;

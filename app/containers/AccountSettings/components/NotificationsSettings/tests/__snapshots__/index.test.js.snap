@@ -14,7 +14,6 @@ exports[`<NotificationsSettings /> Should render and match the snapshot 1`] = `
       class="Row-y1cs0u-0 khuIzX"
     >
       <img
-        class="Img-sc-55j3su-0 kDGTCK"
         src="IMAGE_MOCK"
       />
       <p
@@ -28,7 +27,6 @@ exports[`<NotificationsSettings /> Should render and match the snapshot 1`] = `
       class="Row-y1cs0u-0 ecllgQ"
     >
       <img
-        class="Img-sc-55j3su-0 kDGTCK"
         src="IMAGE_MOCK"
       />
       <p

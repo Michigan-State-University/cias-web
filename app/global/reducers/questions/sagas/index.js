@@ -1,9 +1,7 @@
 import { all } from 'redux-saga/effects';
-import addQuestionImageSaga from './addQuestionImage';
 import copyQuestionSaga from './copyQuestion';
 import createQuestionSaga from './createQuestion';
 import deleteQuestionSaga from './deleteQuestion';
-import deleteQuestionImageSaga from './deleteQuestionImage';
 import reorderQuestionsSaga from './reorderQuestions';
 import deleteQuestionsSaga from './deleteQuestions';
 import editQuestionAllSagas, {
@@ -13,13 +11,12 @@ import editQuestionAllSagas, {
   changeQuestionTypeSaga,
 } from './editQuestion';
 import copyExternallyQuestionSaga from './copyExternallyQuestion';
+import questionImageSaga from './questionImage';
 
 export {
-  addQuestionImageSaga,
   copyQuestionSaga,
   createQuestionSaga,
   deleteQuestionSaga,
-  deleteQuestionImageSaga,
   reorderQuestionsSaga,
   editQuestionAllSagas,
   editQuestionSaga,
@@ -28,15 +25,14 @@ export {
   changeQuestionTypeSaga,
   deleteQuestionsSaga,
   copyExternallyQuestionSaga,
+  questionImageSaga,
 };
 
 export default function* allQuestionsSagas() {
   yield all([
-    addQuestionImageSaga(),
     copyQuestionSaga(),
     createQuestionSaga(),
     deleteQuestionSaga(),
-    deleteQuestionImageSaga(),
     reorderQuestionsSaga(),
     editQuestionSaga(),
     updateQuestionDataSaga(),
@@ -44,5 +40,6 @@ export default function* allQuestionsSagas() {
     changeQuestionTypeSaga(),
     deleteQuestionsSaga(),
     copyExternallyQuestionSaga(),
+    questionImageSaga(),
   ]);
 }

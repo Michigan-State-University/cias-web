@@ -23,12 +23,13 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               href="/"
             >
               <img
-                alt="logo"
+                alt="CIAS Application Logo"
                 class="Img-sc-55j3su-0 jveqaA"
                 src="IMAGE_MOCK"
               />
             </a>
             <img
+              alt="Michigan State University Logo"
               class="Img-sc-55j3su-0 inOfMn"
               src="IMAGE_MOCK"
             />
@@ -80,7 +81,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <a
-              class="styled__SidebarItemLink-faqctv-1 iiA-dDN"
+              class="styled__SidebarItemLink-faqctv-1 htOTiR"
               href="/"
             >
               <img
@@ -136,7 +137,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               Reporting panel
             </p>
             <button
-              class="StyledButton-d2s0gt-0 doXOhZ"
+              class="StyledButton-d2s0gt-0 DYNTa"
               color="secondary"
               radius="5px"
               width="auto"
@@ -144,8 +145,8 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               + Add Organization
             </button>
             <div
-              class="styled__StyledSpinner-sc-129uixn-0 iazDJI"
-              color="#C866EA"
+              class="styled__StyledSpinner-sc-129uixn-0 bIPmqf"
+              color="#B727EA"
               size="30"
               width="6"
             />
@@ -164,8 +165,8 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             data-testid="fullscreen-loader"
           >
             <div
-              class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-              color="#C866EA"
+              class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+              color="#B727EA"
               size="100"
               width="6"
             />

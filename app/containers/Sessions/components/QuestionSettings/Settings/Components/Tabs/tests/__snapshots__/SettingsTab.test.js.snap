@@ -10,7 +10,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     >
       Video
     </h3>
-    <label
+    <div
       class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
@@ -20,9 +20,9 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
         type="checkbox"
       />
       <span
-        class="styled__Slider-k9teya-2 cGAcbS"
+        class="styled__Slider-k9teya-2 jYsxIO"
       />
-    </label>
+    </div>
   </div>
   <div
     class="Row-y1cs0u-0 cNUaef"
@@ -32,7 +32,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     >
       Image
     </h3>
-    <label
+    <div
       class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
@@ -42,9 +42,9 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
         type="checkbox"
       />
       <span
-        class="styled__Slider-k9teya-2 cGAcbS"
+        class="styled__Slider-k9teya-2 jYsxIO"
       />
-    </label>
+    </div>
   </div>
   <div
     class="Row-y1cs0u-0 cNUaef"
@@ -54,7 +54,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     >
       Title
     </h3>
-    <label
+    <div
       class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
@@ -65,9 +65,9 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
         type="checkbox"
       />
       <span
-        class="styled__Slider-k9teya-2 cGAcbS"
+        class="styled__Slider-k9teya-2 jYsxIO"
       />
-    </label>
+    </div>
   </div>
   <div
     class="Row-y1cs0u-0 cNUaef"
@@ -77,7 +77,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     >
       Main Text
     </h3>
-    <label
+    <div
       class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
@@ -88,9 +88,31 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
         type="checkbox"
       />
       <span
-        class="styled__Slider-k9teya-2 cGAcbS"
+        class="styled__Slider-k9teya-2 jYsxIO"
       />
-    </label>
+    </div>
+  </div>
+  <div
+    class="Row-y1cs0u-0 cNUaef"
+  >
+    <h3
+      class="H3-twxrn4-0 cRKwFK"
+    >
+      Skippable Narrator
+    </h3>
+    <div
+      class="styled__SwitchWrapper-k9teya-0 hucWtb"
+    >
+      <input
+        class="styled__SwitchInput-k9teya-1 hdJnOF"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        type="checkbox"
+      />
+      <span
+        class="styled__Slider-k9teya-2 jYsxIO"
+      />
+    </div>
   </div>
   <div
     class="Row-y1cs0u-0 cNUaef"
@@ -100,7 +122,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     >
       Continue Button
     </h3>
-    <label
+    <div
       class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
@@ -111,9 +133,9 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
         type="checkbox"
       />
       <span
-        class="styled__Slider-k9teya-2 cGAcbS"
+        class="styled__Slider-k9teya-2 jYsxIO"
       />
-    </label>
+    </div>
   </div>
   <div
     class="Row-y1cs0u-0 gaoRiI"
@@ -123,7 +145,7 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     >
       Required
     </h3>
-    <label
+    <div
       class="styled__SwitchWrapper-k9teya-0 hucWtb"
     >
       <input
@@ -134,9 +156,9 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
         type="checkbox"
       />
       <span
-        class="styled__Slider-k9teya-2 cGAcbS"
+        class="styled__Slider-k9teya-2 jYsxIO"
       />
-    </label>
+    </div>
   </div>
 </div>
 `;

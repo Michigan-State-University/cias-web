@@ -2,9 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Markup } from 'interweave';
 
+import { themeColors } from 'theme';
+
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Img from 'components/Img';
+import Text from 'components/Text';
 
 import { Player, PlayerWrapper, ImageWrapper } from './styled';
 
@@ -14,11 +17,13 @@ const CommonLayout = ({ currentQuestion }) => {
     subtitle,
     video_url: videoUrl,
     image_url: imageUrl,
+    image_alt: imageAlt,
     settings: {
       title: settingsTitle,
       subtitle: settingsSubtitle,
       video: settingsVideo,
       image: settingsImage,
+      required: settingsRequired,
     },
   } = currentQuestion;
   return (
@@ -33,7 +38,10 @@ const CommonLayout = ({ currentQuestion }) => {
       {settingsSubtitle && subtitle && (
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
-            <Markup content={subtitle} noWrap />
+            <Row align="center">
+              <Markup content={subtitle} noWrap />
+              {settingsRequired && <Text color={themeColors.warning}>*</Text>}
+            </Row>
           </Box>
         </Row>
       )}
@@ -47,7 +55,12 @@ const CommonLayout = ({ currentQuestion }) => {
       {settingsImage && imageUrl && (
         <Row mt={10} justify="center" align="center" width="100%">
           <ImageWrapper>
-            <Img src={imageUrl} alt="image" maxHeight="50vh" maxWidth="100%" />
+            <Img
+              src={imageUrl}
+              alt={imageAlt}
+              maxHeight="50vh"
+              maxWidth="100%"
+            />
           </ImageWrapper>
         </Row>
       )}
@@ -61,11 +74,13 @@ CommonLayout.propTypes = {
     subtitle: PropTypes.string,
     video_url: PropTypes.string,
     image_url: PropTypes.string,
+    image_alt: PropTypes.string,
     settings: PropTypes.shape({
       title: PropTypes.bool,
       subtitle: PropTypes.bool,
       video: PropTypes.bool,
       image: PropTypes.bool,
+      required: PropTypes.bool,
     }),
   }),
 };

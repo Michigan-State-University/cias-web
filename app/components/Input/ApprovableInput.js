@@ -66,6 +66,8 @@ const ApprovableInput = props => {
     defaultFontSize,
     styles,
     minDate,
+    ariaLabel,
+    id,
   } = props;
   const [value, setValue] = useState(propsValue);
   const [focused, setFocused] = useState(false);
@@ -172,6 +174,8 @@ const ApprovableInput = props => {
           placeholder={props.placeholder}
           transparent
           disabled={disabled}
+          aria-label={ariaLabel}
+          id={id}
         />
       );
     if (type === 'date')
@@ -226,6 +230,8 @@ const ApprovableInput = props => {
         disabled={disabled}
         fontSize={fontSize}
         padding={padding}
+        aria-label={ariaLabel}
+        id={id}
         {...styles}
       />
     );
@@ -264,6 +270,8 @@ ApprovableInput.propTypes = {
   defaultFontSize: PropTypes.number,
   minDate: PropTypes.object,
   styles: PropTypes.object,
+  ariaLabel: PropTypes.string,
+  id: PropTypes.string,
 };
 
 ApprovableInput.defaultProps = {

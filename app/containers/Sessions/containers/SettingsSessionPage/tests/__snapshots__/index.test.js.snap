@@ -64,9 +64,8 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       >
         Narrator Active
       </p>
-      <label
+      <div
         class="styled__SwitchWrapper-k9teya-0 hucWtb"
-        disabled=""
       >
         <input
           checked=""
@@ -77,9 +76,9 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
           type="checkbox"
         />
         <span
-          class="styled__Slider-k9teya-2 cGAcbS"
+          class="styled__Slider-k9teya-2 jYsxIO"
         />
-      </label>
+      </div>
     </div>
     <div
       class="Row-y1cs0u-0 cNUaef"
@@ -89,9 +88,8 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       >
         Voice
       </p>
-      <label
+      <div
         class="styled__SwitchWrapper-k9teya-0 hucWtb"
-        disabled=""
       >
         <input
           checked=""
@@ -102,9 +100,9 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
           type="checkbox"
         />
         <span
-          class="styled__Slider-k9teya-2 cGAcbS"
+          class="styled__Slider-k9teya-2 jYsxIO"
         />
-      </label>
+      </div>
     </div>
     <div
       class="Row-y1cs0u-0 gaoRiI"
@@ -114,9 +112,8 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       >
         Display Narrator
       </p>
-      <label
+      <div
         class="styled__SwitchWrapper-k9teya-0 hucWtb"
-        disabled=""
       >
         <input
           checked=""
@@ -127,9 +124,9 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
           type="checkbox"
         />
         <span
-          class="styled__Slider-k9teya-2 cGAcbS"
+          class="styled__Slider-k9teya-2 jYsxIO"
         />
-      </label>
+      </div>
     </div>
   </div>
 </div>

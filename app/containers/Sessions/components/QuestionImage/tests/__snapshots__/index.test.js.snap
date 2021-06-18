@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionImage /> should match the snapshot with file 1`] = `
-.c0 {
+.c1 {
   width: auto;
   height: auto;
   display: block;
@@ -10,7 +10,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   margin-top: 10px;
 }
 
-.c1 {
+.c2 {
   width: auto;
   height: auto;
   display: block;
@@ -24,11 +24,11 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   border-radius: 5px;
 }
 
-.c1:hover {
+.c2:hover {
   background-color: #E9F1FB;
 }
 
-.c5 {
+.c6 {
   width: auto;
   height: auto;
   display: block;
@@ -38,19 +38,39 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   cursor: pointer;
 }
 
-.c4 {
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 20px;
+  background-color: rgba(233,241,251,1);
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c5 {
   width: auto;
   height: auto;
   max-width: 100%;
   max-height: 50vh;
 }
 
-.c6 {
+.c7 {
   width: auto;
   height: auto;
 }
 
-.c2 {
+.c3 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -74,7 +94,19 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   width: 100%;
 }
 
-.c3 {
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.c4 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -86,40 +118,102 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
   justify-content: center;
 }
 
-.c3 > img {
+.c4 > img {
   max-width: 100%;
+}
+
+.c10 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  margin-right: 9px;
+  width: 100%;
+  height: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c10:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c10:disabled {
+  color: #ABBBD1;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 <div>
   <div
     class="c0"
-    width="100%"
   >
     <div
-      class="HoverableBox-zvip6a-0 c1"
+      class="c1"
       width="100%"
     >
       <div
-        class="c2"
+        class="HoverableBox-zvip6a-0 c2"
         width="100%"
       >
         <div
           class="c3"
+          width="100%"
         >
-          <img
-            alt="image"
+          <div
             class="c4"
-            src="mokc_url.png"
-          />
-        </div>
-        <div
-          class="c5"
-          visibility="hidden"
-        >
-          <img
-            alt="bin-icon"
+          >
+            <img
+              alt="Uploaded image"
+              class="c5"
+              src="mokc_url.png"
+            />
+          </div>
+          <div
             class="c6"
-            src="IMAGE_MOCK"
+            visibility="hidden"
+          >
+            <img
+              alt="bin-icon"
+              class="c7"
+              src="IMAGE_MOCK"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="c8"
+    >
+      <div
+        class="c9"
+        width="100%"
+      >
+        <div
+          class="c0"
+        >
+          <textarea
+            class="c10"
+            height="auto"
+            placeholder="Input here the text describing the image for people with disabilities"
+            rows="4"
+            width="100%"
           />
         </div>
       </div>
@@ -129,7 +223,27 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
 `;
 
 exports[`<QuestionImage /> should match the snapshot without file 1`] = `
-.c1 {
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 20px;
+  background-color: rgba(233,241,251,1);
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -152,7 +266,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   display: flex;
 }
 
-.c0 {
+.c1 {
   border-radius: 5px;
   border: 1px dashed #2F3850;
   background-color: rgba(233,241,251,1);
@@ -160,7 +274,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   width: 100%;
 }
 
-.c4 {
+.c5 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -168,12 +282,12 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   -webkit-text-decoration: underline;
   text-decoration: underline;
   cursor: pointer;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
   cursor: pointer;
-  color: rgba(200,102,234,1);
+  color: rgba(183,39,234,1);
 }
 
-.c5 {
+.c6 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -181,12 +295,12 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   color: #2F3850;
 }
 
-.c2 {
+.c3 {
   width: auto;
   height: auto;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -199,7 +313,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   margin-bottom: 12px;
 }
 
-.c6 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -210,11 +324,61 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
   height: auto;
 }
 
-.c7 {
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
+}
+
+.c11 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  margin-right: 9px;
+  width: 100%;
+  height: auto;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c11:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c11:disabled {
+  color: #ABBBD1;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 @media only screen and (min-width:768px) {
@@ -236,50 +400,74 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
 <div>
   <div
     class="c0"
-    style="position: relative; pointer-events: all;"
-    width="100%"
   >
     <div
       class="c1"
-      display="flex"
+      style="position: relative; pointer-events: all;"
+      width="100%"
     >
-      <input
-        accept="image/jpg, image/png, image/gif, image/jpeg"
-        autocomplete="off"
-        style="display: none;"
-        tabindex="-1"
-        type="file"
-      />
-      <img
-        alt="image"
+      <div
         class="c2"
-        src="IMAGE_MOCK"
-      />
-      <div
-        class="c3"
+        display="flex"
       >
-        <h3
+        <input
+          accept="image/jpg, image/png, image/gif, image/jpeg"
+          autocomplete="off"
+          style="display: none;"
+          tabindex="-1"
+          type="file"
+        />
+        <img
+          alt="image"
+          class="c3"
+          src="IMAGE_MOCK"
+        />
+        <div
           class="c4"
-          color="#C866EA"
-          cursor="pointer"
-          text-decoration="underline"
         >
-          Upload
-        </h3>
-        <h3
-          class="c5"
-        >
-           or drop an image right here
-        </h3>
-      </div>
-      <div
-        class="c6"
-      >
-        <p
+          <h3
+            class="c5"
+            color="#B727EA"
+            cursor="pointer"
+            text-decoration="underline"
+          >
+            Upload
+          </h3>
+          <h3
+            class="c6"
+          >
+             or drop an image right here
+          </h3>
+        </div>
+        <div
           class="c7"
         >
-          It works for JPG, PNG, GIF formats, max size 5MB
-        </p>
+          <p
+            class="c8"
+          >
+            It works for JPG, PNG, GIF formats, max size 5MB
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="c9"
+    >
+      <div
+        class="c10"
+        width="100%"
+      >
+        <div
+          class="c0"
+        >
+          <textarea
+            class="c11"
+            height="auto"
+            placeholder="Input here the text describing the image for people with disabilities"
+            rows="4"
+            width="100%"
+          />
+        </div>
       </div>
     </div>
   </div>

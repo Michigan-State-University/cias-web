@@ -122,6 +122,10 @@ export default defineMessages({
     id: `${scope}.phoneNumberLabel`,
     defaultMessage: 'Phone number',
   },
+  phoneNumberPrefixLabel: {
+    id: `${scope}.phoneNumberPrefixLabel`,
+    defaultMessage: 'Phone prefix',
+  },
   countryCode: {
     id: `${scope}.countryCode`,
     defaultMessage: 'Code',

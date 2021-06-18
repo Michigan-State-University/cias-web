@@ -15,6 +15,7 @@ import PlusCircle from 'components/Circle/PlusCircle';
 import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
+import H3 from 'components/H3';
 
 import bin from 'assets/svg/bin-red.svg';
 import radio from 'assets/svg/radio-button.svg';
@@ -29,6 +30,7 @@ import { BadgeInput } from 'components/Input/BadgeInput';
 import { emailValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
+import answerPageMessages from 'containers/AnswerSessionPage/layouts/messages';
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
 
@@ -43,7 +45,9 @@ const ThirdPartyQuestion = ({
 }) => {
   const [hovered, setHovered] = useState(-1);
 
-  const { data } = selectedQuestion.body;
+  const {
+    body: { data },
+  } = selectedQuestion;
 
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
@@ -70,9 +74,9 @@ const ThirdPartyQuestion = ({
   const handleRemove = index => removeAnswer(index);
 
   return (
-    <Column mt={10}>
+    <Column>
       {data.map((value, index) => (
-        <Row key={`question-${selectedQuestion.id}-el-${index}`}>
+        <Row key={`question-${selectedQuestion.id}-el-${index}`} mb={12}>
           <HoverableBox
             hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
             px={21}
@@ -90,7 +94,7 @@ const ThirdPartyQuestion = ({
               >
                 <Column width="90%">
                   <Row>
-                    <Img src={radio} mr={15} />
+                    <Img width="max-content" src={radio} mr={15} />
                     <ApprovableInput
                       fontSize={18}
                       type="singleline"
@@ -158,6 +162,12 @@ const ThirdPartyQuestion = ({
           </Box>
         </HoverableBox>
       </Row>
+
+      {isNarratorTab && (
+        <H3 color={themeColors.warning} textAlign="center">
+          {formatMessage(answerPageMessages.wcagThirdPartyWarning)}
+        </H3>
+      )}
     </Column>
   );
 };

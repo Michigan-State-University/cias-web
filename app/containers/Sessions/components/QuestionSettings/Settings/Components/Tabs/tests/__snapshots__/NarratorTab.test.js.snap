@@ -14,7 +14,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
       >
         You 
         <span
-          style="color: rgb(239, 70, 47);"
+          style="color: rgb(210, 55, 29);"
         >
           cannot edit content
         </span>
@@ -29,7 +29,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
       >
         Voice
       </h3>
-      <label
+      <div
         class="styled__SwitchWrapper-k9teya-0 hucWtb"
       >
         <input
@@ -40,9 +40,9 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
           type="checkbox"
         />
         <span
-          class="styled__Slider-k9teya-2 cGAcbS"
+          class="styled__Slider-k9teya-2 jYsxIO"
         />
-      </label>
+      </div>
     </div>
     <div
       class="Row-y1cs0u-0 gaoRiI"
@@ -52,7 +52,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
       >
         Display Narrator
       </h3>
-      <label
+      <div
         class="styled__SwitchWrapper-k9teya-0 hucWtb"
       >
         <input
@@ -63,9 +63,9 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
           type="checkbox"
         />
         <span
-          class="styled__Slider-k9teya-2 cGAcbS"
+          class="styled__Slider-k9teya-2 jYsxIO"
         />
-      </label>
+      </div>
     </div>
   </div>
   <div
@@ -79,8 +79,8 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
         src="IMAGE_MOCK"
       />
       <p
-        class="Text-e4p0w3-0 fqTAav"
-        color="#EF462F"
+        class="Text-e4p0w3-0 kDVdNz"
+        color="#D2371D"
         font-size="14px"
       >
         Open any block to reposition the Narrator.

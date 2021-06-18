@@ -46,6 +46,7 @@ export function Sidebar({ user: { roles }, sidebarProps }) {
       {rolePermissions.canDisplayOrganizationSidebar && (
         <ReportingDashboardPanel
           canAccessOrganizations={rolePermissions.canAccessOrganizations}
+          canAddNewOrganization={rolePermissions.canAddNewOrganization}
         />
       )}
     </SidebarStyled>

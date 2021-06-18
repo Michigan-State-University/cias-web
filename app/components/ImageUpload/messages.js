@@ -23,4 +23,8 @@ export default defineMessages({
     id: `${scope}.error`,
     defaultMessage: 'Error! File exceeded 5 mb or file type is not supported!',
   },
+  imageAlt: {
+    id: `${scope}.imageAlt`,
+    defaultMessage: 'Uploaded image',
+  },
 });

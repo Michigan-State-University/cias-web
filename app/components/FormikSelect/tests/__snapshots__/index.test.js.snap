@@ -5,14 +5,18 @@ exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
   <div
     class="Column-sc-4zswzq-0 ekpwZH"
   >
-    <p
-      class="Text-e4p0w3-0 kFFPgx"
-      width="fit-content"
+    <label
+      for="test"
     >
-      Label
-    </p>
+      <p
+        class="Text-e4p0w3-0 kFFPgx"
+        width="fit-content"
+      >
+        Label
+      </p>
+    </label>
     <div
-      class="Box-sc-1vhutan-0 tbzdy"
+      class="Box-sc-1vhutan-0 dvfkZg"
       data-testid="select"
     >
       <div
@@ -47,7 +51,7 @@ exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
                   autocapitalize="none"
                   autocomplete="off"
                   autocorrect="off"
-                  id="react-select-3-input"
+                  id="test"
                   spellcheck="false"
                   style="box-sizing: content-box; width: 2px; border: 0px; opacity: 1; outline: 0; padding: 0px;"
                   tabindex="0"

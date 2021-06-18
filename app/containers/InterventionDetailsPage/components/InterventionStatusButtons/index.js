@@ -8,7 +8,7 @@ import { FormattedMessage, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import get from 'lodash/get';
 
-import { colors, themeColors } from 'theme';
+import { themeColors } from 'theme';
 
 import ConfirmationBox from 'components/ConfirmationBox';
 import { LI, UL } from 'components/List';
@@ -92,7 +92,12 @@ function InterventionStatusButtons({
 
   const publishConfirmationDesc = () => (
     <>
-      <Text mt={10} fontSize={18} color={colors.flamingo} textAlign="center">
+      <Text
+        mt={10}
+        fontSize={18}
+        color={themeColors.warning}
+        textAlign="center"
+      >
         {formatMessage(messages.irreversibleInfo)}
       </Text>
       <Row justify="center" mt={10}>
@@ -118,7 +123,12 @@ function InterventionStatusButtons({
 
   const closeConfirmationDesc = () => (
     <>
-      <Text mt={10} fontSize={18} color={colors.flamingo} textAlign="center">
+      <Text
+        mt={10}
+        fontSize={18}
+        color={themeColors.warning}
+        textAlign="center"
+      >
         {formatMessage(messages.irreversibleInfo)}
       </Text>
       <Row justify="center" mt={10}>

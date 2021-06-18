@@ -2,8 +2,8 @@
 
 exports[`<ReportsPage /> Should render and match the snapshot and to not log errors in console 1`] = `
 <div
-  class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-  color="#C866EA"
+  class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+  color="#B727EA"
   size="100"
   width="6"
 />

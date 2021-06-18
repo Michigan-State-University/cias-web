@@ -55,6 +55,9 @@ import {
   DELETE_INTERVENTION_LOGO_REQUEST,
   DELETE_INTERVENTION_LOGO_SUCCESS,
   DELETE_INTERVENTION_LOGO_ERROR,
+  UPDATE_INTERVENTION_LOGO_REQUEST,
+  UPDATE_INTERVENTION_LOGO_SUCCESS,
+  UPDATE_INTERVENTION_LOGO_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = id =>
@@ -198,3 +201,13 @@ export const deleteInterventionLogoSuccess = () =>
   actionBuilder(DELETE_INTERVENTION_LOGO_SUCCESS, {});
 export const deleteInterventionLogoError = error =>
   actionBuilder(DELETE_INTERVENTION_LOGO_ERROR, { error });
+
+export const updateInterventionLogoRequest = (interventionId, description) =>
+  actionBuilder(UPDATE_INTERVENTION_LOGO_REQUEST, {
+    interventionId,
+    description,
+  });
+export const updateInterventionLogoSuccess = () =>
+  actionBuilder(UPDATE_INTERVENTION_LOGO_SUCCESS, {});
+export const updateInterventionLogoError = error =>
+  actionBuilder(UPDATE_INTERVENTION_LOGO_ERROR, { error });

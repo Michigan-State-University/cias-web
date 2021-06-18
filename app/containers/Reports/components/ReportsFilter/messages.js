@@ -35,4 +35,8 @@ export default defineMessages({
     id: `${scope}.${SORT_BY_LATEST}`,
     defaultMessage: 'Sort by Oldest',
   },
+  selectorAriaLabel: {
+    id: `${scope}.selectorAriaLabel`,
+    defaultMessage: 'Sort reports by date: ascending/descending',
+  },
 });

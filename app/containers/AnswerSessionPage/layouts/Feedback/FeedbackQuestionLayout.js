@@ -1,7 +1,7 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { injectIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { useContainerQuery } from 'react-container-query';
 
 import {
@@ -14,6 +14,7 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 
+import messages from '../messages';
 import FeedbackSlider from './FeedbackSlider';
 
 const QUERY = { 'wrap-text': { maxWidth: containerBreakpoints.sm } };
@@ -22,10 +23,10 @@ const FeedbackQuestionLayout = ({
   startValue,
   endValue,
   targetValue: { target: targetValue } = { target: 0 },
-  intl: { formatMessage },
   showSpectrum,
   setFeedbackSettings,
 }) => {
+  const { formatMessage } = useIntl();
   const [params, containerRef] = useContainerQuery(QUERY);
 
   const sliderRef = useRef(null);
@@ -80,6 +81,7 @@ const FeedbackQuestionLayout = ({
               formatMessage={formatMessage}
               withSpectrum={showSpectrum}
               className={classnames(params)}
+              ariaLabelForHandle={formatMessage(messages.feedbackLabel)}
             />
           </Box>
         </Row>
@@ -92,7 +94,6 @@ FeedbackQuestionLayout.propTypes = {
   startValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   endValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   targetValue: PropTypes.object,
-  intl: PropTypes.object,
   showSpectrum: PropTypes.bool,
   setFeedbackSettings: PropTypes.func,
 };
@@ -101,4 +102,4 @@ FeedbackQuestionLayout.defaultProps = {
   targetValue: { target: '0' }, // default to 0
 };
 
-export default injectIntl(FeedbackQuestionLayout);
+export default memo(FeedbackQuestionLayout);

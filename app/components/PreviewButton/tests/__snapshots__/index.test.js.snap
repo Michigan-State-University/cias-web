@@ -9,8 +9,8 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
   border: none;
   outline: none;
   background-color: #FFFFFF;
-  color: #C866EA;
-  border: 1px solid #C866EA;
+  color: #B727EA;
+  border: 1px solid #B727EA;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   margin-right: 5px;
@@ -88,8 +88,8 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
   border: none;
   outline: none;
   background-color: #FFFFFF;
-  color: #C866EA;
-  border: 1px solid #C866EA;
+  color: #B727EA;
+  border: 1px solid #B727EA;
   cursor: default;
   color: #9AA1B6;
   border-color: #9AA1B6;

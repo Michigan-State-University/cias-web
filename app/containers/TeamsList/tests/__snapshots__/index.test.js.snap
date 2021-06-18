@@ -22,8 +22,8 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
           Manage teams
         </h1>
         <button
-          class="StyledTextButton-sc-1b7egxw-0 gvcXh"
-          color="#C866EA"
+          class="StyledTextButton-sc-1b7egxw-0 hXDmcc"
+          color="#B727EA"
           font-weight="bold"
         >
           + Create team
@@ -159,8 +159,8 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
                       class="StyledTextButton-sc-1b7egxw-0 kMfmRy"
                     >
                       <p
-                        class="Text-e4p0w3-0 kcCsRU"
-                        color="#EF462F"
+                        class="Text-e4p0w3-0 gYitek"
+                        color="#D2371D"
                         font-weight="bold"
                       >
                         Delete team
@@ -198,8 +198,8 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
                       class="StyledTextButton-sc-1b7egxw-0 kMfmRy"
                     >
                       <p
-                        class="Text-e4p0w3-0 kcCsRU"
-                        color="#EF462F"
+                        class="Text-e4p0w3-0 gYitek"
+                        color="#D2371D"
                         font-weight="bold"
                       >
                         Delete team
@@ -237,8 +237,8 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
                       class="StyledTextButton-sc-1b7egxw-0 kMfmRy"
                     >
                       <p
-                        class="Text-e4p0w3-0 kcCsRU"
-                        color="#EF462F"
+                        class="Text-e4p0w3-0 gYitek"
+                        color="#D2371D"
                         font-weight="bold"
                       >
                         Delete team
@@ -253,8 +253,8 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
             class="styled__TableLoader-skadoa-1 edDtst"
           >
             <div
-              class="styled__StyledSpinner-sc-129uixn-0 iMjPBI"
-              color="#C866EA"
+              class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+              color="#B727EA"
               size="100"
               width="6"
             />
@@ -266,7 +266,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
           width="100%"
         >
           <div
-            class="Box-sc-1vhutan-0 dLpxyz"
+            class="Box-sc-1vhutan-0 jvUOui"
             cursor="pointer"
             display="flex"
           >

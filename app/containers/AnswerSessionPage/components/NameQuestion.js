@@ -75,7 +75,7 @@ const NameQuestion = ({
     <NameQuestionLayout
       formatMessage={formatMessage}
       onChange={onChange}
-      answerBody={answerBody[0]}
+      answerBody={answerBody?.[0]}
       phoneticUrl={phoneticUrl}
       phoneticLoading={phoneticLoading}
       isAnimationOngoing={isAnimationOngoing}

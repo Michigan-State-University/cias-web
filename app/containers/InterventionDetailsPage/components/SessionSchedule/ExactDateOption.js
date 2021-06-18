@@ -7,7 +7,7 @@ import ApprovableInput from 'components/Input/ApprovableInput';
 import Text from 'components/Text';
 import Box from 'components/Box';
 
-import { colors } from 'theme';
+import { themeColors } from 'theme';
 import calculateTimeZone from 'utils/calculateTimeZone';
 import { getUTCTime } from 'utils/dateUtils';
 
@@ -50,7 +50,7 @@ const ExactDateOption = ({
         </Box>
       </Row>
       <Row mt={10} width="100%" justify="end">
-        <Text ml={5} fontSize={12} color={colors.flamingo}>
+        <Text ml={5} fontSize={12} color={themeColors.warning}>
           {timeInfoMessage()}
         </Text>
       </Row>

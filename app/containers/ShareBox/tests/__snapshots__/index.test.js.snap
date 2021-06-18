@@ -84,8 +84,8 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
                   src="IMAGE_MOCK"
                 />
                 <p
-                  class="Text-e4p0w3-0 gdCbSW"
-                  color="#C866EA"
+                  class="Text-e4p0w3-0 kxJcki"
+                  color="#B727EA"
                   font-weight="bold"
                 >
                   Upload emails with CSV file
@@ -114,8 +114,8 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               src="IMAGE_MOCK"
             />
             <p
-              class="Text-e4p0w3-0 gdCbSW"
-              color="#C866EA"
+              class="Text-e4p0w3-0 kxJcki"
+              color="#B727EA"
               font-weight="bold"
             >
               Export emails to CSV file
@@ -141,8 +141,8 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
               src="IMAGE_MOCK"
             />
             <p
-              class="Text-e4p0w3-0 ikSWkc"
-              color="#C866EA"
+              class="Text-e4p0w3-0 cFbubw"
+              color="#B727EA"
               font-weight="bold"
             >
               Copy link to start with this session externaly

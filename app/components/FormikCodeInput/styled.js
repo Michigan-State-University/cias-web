@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { colors } from 'theme';
+import { themeColors } from 'theme';
 
 export const ErrorText = styled.div`
-  color: ${colors.flamingo};
+  color: ${themeColors.warning};
   font-size: 0.8rem;
   font-weight: bold;
 `;

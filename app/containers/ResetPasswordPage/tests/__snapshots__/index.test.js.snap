@@ -12,7 +12,8 @@ exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
       class="styled__Header-hdmnn0-2 hWqYDm"
     >
       <img
-        class="styled__Logo-hdmnn0-3 hnzJby"
+        alt="CIAS Application Logo"
+        class="Img-sc-55j3su-0 cDhXoN"
         src="IMAGE_MOCK"
       />
     </div>
@@ -34,12 +35,16 @@ exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
           <div
             class="Column-sc-4zswzq-0 ekpwZH"
           >
-            <p
-              class="Text-e4p0w3-0 kFFPgx"
-              width="fit-content"
+            <label
+              for="email"
             >
-              E-mail address
-            </p>
+              <p
+                class="Text-e4p0w3-0 kFFPgx"
+                width="fit-content"
+              >
+                E-mail address
+              </p>
+            </label>
             <div
               class="Row-y1cs0u-0 fgwsqb"
               width="100%"
@@ -47,6 +52,7 @@ exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
               <input
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
+                id="email"
                 name="email"
                 placeholder="Enter e-mail address"
                 type="text"
@@ -68,7 +74,7 @@ exports[`<ResetPasswordPage /> Should render and match the snapshot 1`] = `
             class="styled__LinkContainer-ii5zgx-1 gKUyUU"
           >
             <a
-              class="styled__StyledLink-ii5zgx-0 hKXfbX"
+              class="styled__StyledLink-ii5zgx-0 iYqTXA"
               href="/login"
             >
               Back to login

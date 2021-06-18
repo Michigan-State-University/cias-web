@@ -4,22 +4,18 @@ import { FormattedMessage } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { useInjectSaga } from 'redux-injectors';
+import { Markup } from 'interweave';
 
-import Box from 'components/Box';
-import Column from 'components/Column';
-import AppContainer from 'components/Container';
-import Row from 'components/Row';
-import StyledInput from 'components/Input/StyledInput';
-import { selectInputText } from 'components/Input/utils';
-import { MSULogo } from 'components/Logo';
+import { colors, elements } from 'theme';
 
 import Question from 'models/Session/Question';
+import { canEdit } from 'models/Status/statusPermissions';
+import { nameQuestion, finishQuestion } from 'models/Session/QuestionTypes';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { Button } from 'components/Button';
-import { colors, elements } from 'theme';
+
 import { makeSelectIsNarratorTab } from 'global/reducers/localState';
-import { useInjectSaga } from 'redux-injectors';
 import {
   makeSelectSelectedQuestion,
   editQuestionSaga,
@@ -28,11 +24,19 @@ import {
   makeSelectIntervention,
   makeSelectInterventionStatus,
 } from 'global/reducers/intervention';
-
-import { canEdit } from 'models/Status/statusPermissions';
-import { nameQuestion, finishQuestion } from 'models/Session/QuestionTypes';
+import globalMessages from 'global/i18n/globalMessages';
 
 import CommonLayout from 'containers/AnswerSessionPage/layouts/CommonLayout';
+
+import Box from 'components/Box';
+import Column from 'components/Column';
+import AppContainer from 'components/Container';
+import Row from 'components/Row';
+import StyledInput from 'components/Input/StyledInput';
+import { selectInputText } from 'components/Input/utils';
+import { MSULogo } from 'components/Logo';
+import Text from 'components/Text';
+import { Button } from 'components/Button';
 
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
@@ -69,7 +73,7 @@ const RenderQuestionDetails = ({
   useInjectSaga({ key: 'editQuestion', saga: editQuestionSaga });
   const animationBoundaries = useRef(null);
 
-  const { logoUrl } = intervention ?? {};
+  const { logoUrl, imageAlt } = intervention ?? {};
 
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
@@ -85,6 +89,7 @@ const RenderQuestionDetails = ({
         title,
         subtitle,
         proceed_button: proceedButton,
+        required,
       } = {},
       narrator: { settings } = {},
     } = selectedQuestion || {};
@@ -116,7 +121,7 @@ const RenderQuestionDetails = ({
                 }
                 disabled={!editingPossible}
               />
-              <MSULogo logoUrl={logoUrl} />
+              <MSULogo logoUrl={logoUrl} imageAlt={imageAlt} />
             </Row>
           )}
           <AnswerInterventionContent
@@ -172,10 +177,21 @@ const RenderQuestionDetails = ({
                 <Row>
                   <QuestionData />
                 </Row>
+
+                {isNarratorTab && required && (
+                  <Row mt={40} ml={26}>
+                    <Text color={colors.sonicSilver}>
+                      <Markup
+                        content={formatMessage(globalMessages.questionRequired)}
+                        noWrap
+                      />
+                    </Text>
+                  </Row>
+                )}
                 {(isNullOrUndefined(proceedButton) || proceedButton) &&
                   !isFinishScreen && (
-                    <Box my={20}>
-                      <Button my={20} width="180px" disabled>
+                    <Box my={20} ml={26}>
+                      <Button width="180px" disabled>
                         <FormattedMessage {...messages.nextQuestion} />
                       </Button>
                     </Box>

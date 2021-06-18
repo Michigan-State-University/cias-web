@@ -17,8 +17,8 @@ exports[`<CsvFileReader /> Should render and match the snapshot 1`] = `
           src="IMAGE_MOCK"
         />
         <p
-          class="Text-e4p0w3-0 gdCbSW"
-          color="#C866EA"
+          class="Text-e4p0w3-0 kxJcki"
+          color="#B727EA"
           font-weight="bold"
         >
           Export CSV
