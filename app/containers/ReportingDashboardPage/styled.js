@@ -30,5 +30,5 @@ export const EntityRow = styled(Row)`
 `;
 
 export const UserRow = styled(NoMarginRow)`
-  cursor: pointer;
+  ${({ active }) => active && `cursor: pointer`};
 `;
