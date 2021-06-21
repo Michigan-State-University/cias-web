@@ -10,6 +10,7 @@ export {
   deleteChartRequest,
   selectChartAction,
   copyChartRequest,
+  setChartFiltersRequest,
 } from './actions';
 export { dashboardSectionsReducer, initialState } from './reducer';
 export {

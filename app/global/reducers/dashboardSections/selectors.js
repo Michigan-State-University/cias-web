@@ -42,3 +42,9 @@ export const makeSelectErrors = () =>
     selectDashboardSectionsState,
     substate => substate.errors,
   );
+
+export const makeSelectFilters = () =>
+  createSelector(
+    selectDashboardSectionsState,
+    substate => substate.filters,
+  );

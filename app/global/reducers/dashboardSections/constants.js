@@ -50,6 +50,7 @@ export const COPY_CHART_ERROR = 'app/dashboardSections/COPY_CHART_ERROR';
 
 export const SELECT_CHART_ACTION = 'app/dashboardSections/SELECT_CHART_ACTION';
 export const SET_CHARTS_DATA = 'app/dashboardSections/SET_CHARTS_DATA';
+export const SET_CHARTS_FILTERS = 'app/dashboardSections/SET_CHARTS_FILTERS';
 
 /**
  * @description Chart Type used by the API; DTO of charts uses this type internally

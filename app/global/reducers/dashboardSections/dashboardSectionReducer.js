@@ -11,6 +11,7 @@ import {
   EDIT_SECTION_REQUEST,
   EDIT_SECTION_SUCCESS,
   SET_CHARTS_DATA,
+  SET_CHARTS_FILTERS,
 } from './constants';
 import { chartReducer } from './chartReducer';
 
@@ -56,6 +57,17 @@ const dashboardSectionReducer = (state = null, action) =>
         updateItemById(draft.charts, payload.chartId, item =>
           chartReducer(item, action),
         );
+        break;
+      }
+
+      case SET_CHARTS_FILTERS: {
+        if (draft.charts) {
+          for (let i = 0; i < draft.charts.length; i++)
+            updateItemById(draft.charts, draft.charts[i].id, item =>
+              chartReducer(item, action),
+            );
+        }
+        break;
       }
     }
   });

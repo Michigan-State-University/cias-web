@@ -180,4 +180,8 @@ export default defineMessages({
       ${ChartStatus.PUBLISHED} {Published}
     }`,
   },
+  noChartsData: {
+    id: `${scope}.noChartsData`,
+    defaultMessage: 'No charts data',
+  },
 });

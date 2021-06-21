@@ -51,6 +51,8 @@ const ChartTileUI = ({
             defaultPattern={defaultPattern}
             patterns={patterns}
             singleChartData={chartData}
+            formatMessage={formatMessage}
+            status={status}
           />
         );
 
@@ -64,6 +66,7 @@ const ChartTileUI = ({
             trendLine={trendLine}
             singleChartData={chartData}
             status={status}
+            formatMessage={formatMessage}
           />
         );
 

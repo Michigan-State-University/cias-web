@@ -5,7 +5,11 @@ import { ChartStatus, ChartTypeDto } from 'global/reducers/dashboardSections';
 import { HUNDRED_PERCENT } from 'utils/mathUtils';
 
 import Chart, { ChartType } from 'components/Chart';
+import Box from 'components/Box';
+import Text from 'components/Text';
 
+import Spinner from 'components/Spinner';
+import { themeColors } from 'theme';
 import {
   generateBarChartPreviewData,
   MAX_NUMERIC_VALUE,
@@ -17,21 +21,23 @@ import {
   POPULATION_KEY,
 } from '../constants';
 import { BarChartTooltip } from '../styled';
+import messages from '../messages';
 
 const BarChart = ({
   chartType,
-  defaultPattern,
   patterns,
   trendLine,
   singleChartData,
   status,
+  formatMessage,
 }) => {
   const data = useMemo(() => {
+    if (!singleChartData && status === ChartStatus.PUBLISHED) return null;
     if (!singleChartData) return generateBarChartPreviewData(chartType);
     if (singleChartData) {
       return singleChartData;
     }
-  }, [patterns, defaultPattern, chartType, singleChartData]);
+  }, [chartType, singleChartData, status]);
 
   const tickFormatter = value => {
     switch (chartType) {
@@ -98,6 +104,29 @@ const BarChart = ({
     [],
   );
 
+  const wrapWithBox = comp => (
+    <Box
+      width="100%"
+      height="100%"
+      display="flex"
+      justify="center"
+      align="center"
+    >
+      {comp}
+    </Box>
+  );
+  if (data === null) {
+    return wrapWithBox(<Spinner color={themeColors.secondary} />);
+  }
+
+  if (data.length === 0) {
+    return wrapWithBox(
+      <Text fontWeight="bold" fontSize="16px">
+        {formatMessage(messages.noChartsData)}
+      </Text>,
+    );
+  }
+
   return (
     <Chart
       cartesianGrid={cartesianGridProps}
@@ -118,11 +147,11 @@ const BarChart = ({
 
 BarChart.propTypes = {
   chartType: PropTypes.string,
-  defaultPattern: PropTypes.object,
   patterns: PropTypes.arrayOf(PropTypes.object),
   trendLine: PropTypes.bool,
   singleChartData: PropTypes.any,
   status: PropTypes.string,
+  formatMessage: PropTypes.func,
 };
 
 export default memo(BarChart);
