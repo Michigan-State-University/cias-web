@@ -52,7 +52,7 @@ export default defineMessages({
   accessGiverHeaderNote: {
     id: `${scope}.accessGiverHeaderNote`,
     defaultMessage:
-      '<b>Note:</b> this action does not send session invites to participants',
+      '<b>Note:</b> Once you complete this step, you will need to invite participants to complete the session',
   },
   inputPlaceholder: {
     id: `${scope}.inputPlaceholder`,

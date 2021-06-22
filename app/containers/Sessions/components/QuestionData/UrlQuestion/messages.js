@@ -9,6 +9,6 @@ export default defineMessages({
   },
   invalidUrl: {
     id: `${scope}.invalidUrl`,
-    defaultMessage: 'A URL is not valid.',
+    defaultMessage: 'Please enter a valid URL',
   },
 });

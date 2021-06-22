@@ -197,7 +197,7 @@ export default defineMessages({
   },
   resetAnimationPosition: {
     id: `${scope}.resetAnimationPosition`,
-    defaultMessage: 'Move Narrator to default position',
+    defaultMessage: 'Reset Narrator to previous block position',
   },
   addNameVariable: {
     id: `${scope}.addNameVariable`,

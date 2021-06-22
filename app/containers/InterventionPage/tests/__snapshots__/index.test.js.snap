@@ -45,7 +45,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                 class="Text-e4p0w3-0 bmKPFZ"
                 font-weight="bold"
               >
-                We’re waiting for your feedback!
+                Something went wrong? Have a new idea?
               </p>
               <p
                 class="Text-e4p0w3-0 cFbubw"
@@ -57,7 +57,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
                   target="_blank"
                 >
-                  Share your opinion on CIAS
+                  Share your thoughts here!
                 </a>
               </p>
             </div>

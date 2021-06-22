@@ -186,7 +186,7 @@ export default defineMessages({
     },
     [thirdPartyQuestion.id]: {
       id: `${scope}.${thirdPartyQuestion.id}`,
-      defaultMessage: 'Third Party',
+      defaultMessage: 'Third Party Report',
     },
   },
   statuses: {
@@ -232,7 +232,7 @@ export default defineMessages({
     },
     animation: {
       id: `${scope}.animation`,
-      defaultMessage: 'Display Character',
+      defaultMessage: 'Display Narrator',
     },
   },
   validators: {
