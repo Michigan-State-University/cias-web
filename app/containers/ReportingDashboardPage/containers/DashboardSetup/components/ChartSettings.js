@@ -151,7 +151,7 @@ const ChartSettings = ({
         chart.formula.patterns.length,
       ),
     ]);
-  }, [chart.formula.patterns]);
+  }, [chart.chartType, chart.formula.patterns, onEditFormula]);
 
   const onCopyChart = useCallback(() => {
     copyChart(chart.id);
