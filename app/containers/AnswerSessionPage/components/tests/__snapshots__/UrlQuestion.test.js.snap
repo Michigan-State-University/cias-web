@@ -8,23 +8,7 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
     <div
       class="Box-sc-1vhutan-0 dyNKoD"
       width="100%"
-    >
-      <div
-        class="Row-y1cs0u-0 dskFsL"
-      >
-        <div
-          class="styled__InlineLoader-sc-1aaagww-1 kkTeLU"
-          data-testid="inline-loader"
-        >
-          <div
-            class="styled__StyledSpinner-sc-129uixn-0 ehjfMD"
-            color="#B727EA"
-            size="50"
-            width="6"
-          />
-        </div>
-      </div>
-    </div>
+    />
     <h3
       class="H3-twxrn4-0 cksTtw"
       color="#D2371D"
