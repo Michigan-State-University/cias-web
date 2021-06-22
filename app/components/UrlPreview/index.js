@@ -4,82 +4,68 @@
  *
  */
 
-import React, { memo, useState } from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { getLinkPreview } from 'link-preview-js';
+
+import { colors, themeColors } from 'theme';
+
+import { useUrlMetadata } from 'utils/useUrlMetadata';
 
 import Box from 'components/Box';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import Loader from 'components/Loader';
-import { colors, themeColors } from 'theme';
-import { useAsync } from 'utils/useAsync';
+
 import { ClampedText, Thumbnail, Url, ClampedTitle } from './styled';
 
-export const proxy = 'https://cors-anywhere.herokuapp.com/';
-
 const UrlPreview = ({ link, handleClick }) => {
-  const [linkData, setLinkData] = useState(null);
-
-  const fetchData = async () => {
-    try {
-      return await getLinkPreview(`${proxy}${link}`, {
-        imagesPropertyType: 'og',
-      });
-    } catch (e) {
-      return { title: link, images: [] };
-    }
-  };
-
-  useAsync(fetchData, data => setLinkData(data), { deps: [link] });
+  const { metadata, isFetching } = useUrlMetadata(link);
 
   const redirectToLink = () => {
     if (handleClick) handleClick();
     window.open(link, '_blank');
   };
 
+  const image = metadata?.image || metadata?.images?.[0];
+
   return (
     <Box my={5} width="100%">
-      {linkData && (
+      {metadata && (
         <Box bg={colors.white}>
           <Row>
-            <Box
-              bgc="transparent"
-              padding={20}
-              width={linkData.images[0] ? '70%' : '100%'}
-            >
-              {linkData.title && (
+            <Box bgc="transparent" padding={20} width={image ? '70%' : '100%'}>
+              {metadata.title && (
                 <Url href={link} target="_blank" onClick={handleClick}>
-                  <ClampedTitle>{linkData.title}</ClampedTitle>
+                  <ClampedTitle>{metadata.title}</ClampedTitle>
                 </Url>
               )}
-              {linkData.description && (
+              {metadata?.description && (
                 <Url href={link} target="_blank" onClick={handleClick}>
                   <ClampedText mt={8} mb={13} fontSize={11}>
-                    {linkData.description}
+                    {metadata?.description}
                   </ClampedText>
                 </Url>
               )}
-              <Url href={link} target="_blank" onClick={handleClick}>
-                <Text
-                  textOverflow="hidden"
-                  whiteSpace="pre"
-                  overflow="hidden"
-                  my={3}
-                  fontSize={9}
-                  color={themeColors.secondary}
-                >
-                  {linkData.url && linkData.url.replace(proxy, '')}
-                </Text>
-              </Url>
+              {metadata.url && (
+                <Url href={link} target="_blank" onClick={handleClick}>
+                  <Text
+                    textOverflow="hidden"
+                    whiteSpace="pre"
+                    overflow="hidden"
+                    my={3}
+                    fontSize={9}
+                    color={themeColors.secondary}
+                  >
+                    {metadata.url}
+                  </Text>
+                </Url>
+              )}
             </Box>
-            {linkData.images[0] && (
-              <Thumbnail image={linkData.images[0]} onClick={redirectToLink} />
-            )}
+            {image && <Thumbnail image={image} onClick={redirectToLink} />}
           </Row>
         </Box>
       )}
-      {!linkData && (
+      {isFetching && (
         <Row>
           <Loader type="inline" />
         </Row>

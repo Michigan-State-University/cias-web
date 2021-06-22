@@ -7,9 +7,9 @@
 import React from 'react';
 import 'jest-styled-components';
 import { render, waitFor } from '@testing-library/react';
-import { getLinkPreview } from 'link-preview-js';
+import { useUrlMetadata } from 'utils/useUrlMetadata';
 
-import UrlPreview, { proxy } from '../index';
+import UrlPreview from '../index';
 
 describe('<UrlPreview />', () => {
   const url = 'test-url';
@@ -27,18 +27,17 @@ describe('<UrlPreview />', () => {
   };
 
   beforeAll(() => {
-    getLinkPreview.mockResolvedValue(testResponse);
+    useUrlMetadata.mockImplementationOnce(() => ({
+      metadata: testResponse,
+      isFetching: false,
+    }));
   });
 
   it('Should render and match the snapshot', async () => {
     const { container } = render(<UrlPreview {...props} />);
 
     expect(container).toMatchSnapshot();
-    await waitFor(() => expect(getLinkPreview).toHaveBeenCalledTimes(1));
-    await waitFor(() =>
-      expect(getLinkPreview).toHaveBeenCalledWith(`${proxy}${url}`, {
-        imagesPropertyType: 'og',
-      }),
-    );
+    await waitFor(() => expect(useUrlMetadata).toHaveBeenCalledTimes(1));
+    await waitFor(() => expect(useUrlMetadata).toHaveBeenCalledWith(url));
   });
 });

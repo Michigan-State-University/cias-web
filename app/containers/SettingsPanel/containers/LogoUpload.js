@@ -44,7 +44,7 @@ const LogoUpload = ({
         <Box mt={30} bg={colors.linkWater}>
           <ApprovableInput
             type="multiline"
-            value={imageAlt}
+            value={imageAlt ?? ''}
             onCheck={updateDescription}
             placeholder={formatMessage(messages.logoDescriptionPlaceholder)}
             rows="4"
