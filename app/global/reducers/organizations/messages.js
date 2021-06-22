@@ -10,7 +10,13 @@ export const scope = 'app.global.reducers.organizations';
 export default defineMessages({
   inviteAdminSuccess: {
     id: `${scope}.inviteAdminSuccess`,
-    defaultMessage: 'Admin invited successfully!',
+    defaultMessage:
+      'Invitation request is being sent. Only users new to the CIAS app will get the invitation!',
+  },
+  inviteClinicAdminSuccess: {
+    id: `${scope}.inviteClinicAdminSuccess`,
+    defaultMessage:
+      'Invitation request is being sent. Only users new to the CIAS app or heath clinic admins will get the invitation!',
   },
   inviteAdminError: {
     id: `${scope}.inviteAdminError`,

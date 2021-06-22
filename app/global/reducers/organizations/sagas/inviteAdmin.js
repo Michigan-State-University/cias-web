@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import { Roles } from 'models/User/UserRoles';
 import {
   INVITE_ADMIN_ERROR,
   INVITE_ADMIN_REQUEST,
@@ -23,7 +24,12 @@ export function* inviteAdmin({ payload: { email, role, id } }) {
 
     yield put(inviteAdminSuccess());
 
-    yield call(toast.success, formatMessage(messages.inviteAdminSuccess), {
+    const message =
+      role === Roles.clinicAdmin
+        ? messages.inviteClinicAdminSuccess
+        : messages.inviteAdminSuccess;
+
+    yield call(toast.info, formatMessage(message), {
       toastId: INVITE_ADMIN_SUCCESS,
     });
   } catch (error) {
