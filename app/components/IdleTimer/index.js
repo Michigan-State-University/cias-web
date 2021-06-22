@@ -62,33 +62,48 @@ const IdleTimer = ({ logOut, user }) => {
     events: [],
   });
 
-  /**
-   * Logic:
-   * - user is not logged -> do nothing
-   * - user is logged/logs -> add interceptor and reset timer
-   * - user logs out -> remove interceptor and pause timer
-   */
   useEffect(() => {
     if (isUserLogged) {
-      const requestInterceptorInstance = axios.interceptors.request.use(
-        requestInterceptor,
-        undefined,
-      );
+      const {
+        requestInterceptorInstance,
+        responseInterceptorInstance,
+      } = addInterceptorsAndResetTimer();
 
-      const responseInterceptorInstance = axios.interceptors.response.use(
-        responseInterceptor,
-        interceptorError,
-      );
-
-      reset();
-
-      return () => {
-        axios.interceptors.request.eject(requestInterceptorInstance);
-        axios.interceptors.response.eject(responseInterceptorInstance);
-        pause();
-      };
+      return () =>
+        removeInterceptorsAndPauseTimer(
+          requestInterceptorInstance,
+          responseInterceptorInstance,
+        );
     }
   }, [isUserLogged]);
+
+  const addInterceptorsAndResetTimer = () => {
+    const requestInterceptorInstance = axios.interceptors.request.use(
+      requestInterceptor,
+      undefined,
+    );
+
+    const responseInterceptorInstance = axios.interceptors.response.use(
+      responseInterceptor,
+      interceptorError,
+    );
+
+    reset();
+
+    return {
+      requestInterceptorInstance,
+      responseInterceptorInstance,
+    };
+  };
+
+  const removeInterceptorsAndPauseTimer = (
+    requestInterceptorInstance,
+    responseInterceptorInstance,
+  ) => {
+    axios.interceptors.request.eject(requestInterceptorInstance);
+    axios.interceptors.response.eject(responseInterceptorInstance);
+    pause();
+  };
 
   return <></>;
 };
