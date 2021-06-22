@@ -1,8 +1,8 @@
 import { takeLatest, put, select } from 'redux-saga/effects';
 import axios from 'axios';
 
-import { mapJsonApiToObject } from 'utils/jsonApiMapper';
-import { ReportTemplate } from 'models/ReportTemplate';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
+
 import { FETCH_SINGLE_REPORT_TEMPLATE_REQUEST } from '../constants';
 import {
   fetchSingleReportTemplateSuccess,
@@ -17,13 +17,9 @@ function* fetchSingleReportTemplate({ payload: { sessionId, reportId } }) {
   try {
     const { data } = yield axios.get(requestUrl);
 
-    const mappedData = mapJsonApiToObject(data, 'reportTemplate', {
-      isSingleObject: true,
-    });
+    const mappedData = jsonApiToObject(data, 'reportTemplate');
 
-    yield put(
-      fetchSingleReportTemplateSuccess(new ReportTemplate({ ...mappedData })),
-    );
+    yield put(fetchSingleReportTemplateSuccess(mappedData));
 
     const selectedTemplateSection = yield select(
       makeSelectSelectedSectionTemplateId(),
