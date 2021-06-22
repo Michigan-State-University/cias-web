@@ -19,7 +19,7 @@ const UserItem = ({ avatarColor, user, onClick }) => {
     component => (
       <Row>
         <Col>
-          <UserRow align="center" onClick={onClick}>
+          <UserRow active={active} align="center" onClick={onClick}>
             {component}
           </UserRow>
         </Col>
