@@ -31,8 +31,8 @@ const BarChartComponent = ({
   trendLine,
   xAxis,
   yAxis,
-  tooltipFormatter,
-  otherDataKey,
+  tooltip,
+  stackDataKey,
   ...chartProps
 }) => {
   const mergedData = useMemo(() => {
@@ -65,13 +65,13 @@ const BarChartComponent = ({
     [fill, trendLine],
   );
 
-  const otherDataKeyColor = useMemo(
+  const stackDataKeyColor = useMemo(
     () =>
-      otherDataKey &&
+      stackDataKey &&
       Color(fill)
         .lighten(0.5)
         .hex(),
-    [fill, otherDataKey],
+    [fill, stackDataKey],
   );
 
   return (
@@ -83,10 +83,10 @@ const BarChartComponent = ({
         <Bar dataKey={dataKey} fill={fill} stackId="stack-1" {...chartProps}>
           {children}
         </Bar>
-        {otherDataKey && (
+        {stackDataKey && (
           <Bar
-            dataKey={otherDataKey}
-            fill={otherDataKeyColor}
+            dataKey={stackDataKey}
+            fill={stackDataKeyColor}
             stackId="stack-1"
             {...chartProps}
           >
@@ -102,9 +102,7 @@ const BarChartComponent = ({
             type="monotone"
           />
         )}
-        {tooltipFormatter && (
-          <Tooltip cursor={false} content={tooltipFormatter} />
-        )}
+        {tooltip && <Tooltip cursor={false} {...tooltip} />}
       </ChartComponent>
     </StyledResponsiveContainer>
   );
@@ -119,8 +117,8 @@ BarChartComponent.propTypes = {
   trendLine: PropTypes.bool,
   xAxis: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   yAxis: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  tooltipFormatter: PropTypes.func,
-  otherDataKey: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
+  tooltip: PropTypes.object,
+  stackDataKey: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default memo(BarChartComponent);

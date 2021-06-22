@@ -2,7 +2,7 @@ import range from 'lodash/range';
 
 import { jsMonthToStringFormatter } from 'utils/formatters/dateFormatters';
 import { ChartTypeDto } from 'global/reducers/dashboardSections';
-import { X_AXIS_KEY, OTHER_Y_AXIS_KEY, POPULATION_KEY } from './constants';
+import { X_AXIS_KEY, STACK_Y_AXIS_KEY, POPULATION_KEY } from './constants';
 
 const NUMBER_OF_MONTHS = 12;
 const LAST_MONTH_INDEX = 11;
@@ -40,7 +40,7 @@ export const generateBarChartPreviewData = chartType => {
         [POPULATION_KEY]: NUMERIC_VALUES[index],
       }),
       ...(chartType !== ChartTypeDto.PERCENTAGE_BAR_CHART && {
-        [OTHER_Y_AXIS_KEY]: NOT_MATCHED_VALUES[index],
+        [STACK_Y_AXIS_KEY]: NOT_MATCHED_VALUES[index],
       }),
     };
 

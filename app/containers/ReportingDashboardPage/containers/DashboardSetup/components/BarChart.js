@@ -15,7 +15,7 @@ import {
   MAX_NUMERIC_VALUE,
 } from '../generateBarChartData';
 import {
-  OTHER_Y_AXIS_KEY,
+  STACK_Y_AXIS_KEY,
   X_AXIS_KEY,
   Y_AXIS_KEY,
   POPULATION_KEY,
@@ -71,7 +71,7 @@ const BarChart = ({
             <BarChartTooltip>
               <p>{`${label}`}</p>
               <p>{`Matched: ${barData[Y_AXIS_KEY]}`}</p>
-              <p>{`Not matched: ${barData[OTHER_Y_AXIS_KEY]}`}</p>
+              <p>{`Not matched: ${barData[STACK_Y_AXIS_KEY]}`}</p>
             </BarChartTooltip>
           );
         }
@@ -103,6 +103,8 @@ const BarChart = ({
     () => ({ vertical: false, strokeDasharray: '4' }),
     [],
   );
+
+  const tooltip = useMemo(() => ({ content: tooltipFormatter }), []);
 
   const wrapWithBox = comp => (
     <Box
@@ -137,9 +139,9 @@ const BarChart = ({
       type={ChartType.BAR}
       xAxis={xAxisProps}
       yAxis={yAxisProps}
-      tooltipFormatter={tooltipFormatter}
-      otherDataKey={
-        chartType === ChartTypeDto.NUMERIC_BAR_CHART && OTHER_Y_AXIS_KEY
+      tooltip={tooltip}
+      stackDataKey={
+        chartType === ChartTypeDto.NUMERIC_BAR_CHART && STACK_Y_AXIS_KEY
       }
     />
   );
