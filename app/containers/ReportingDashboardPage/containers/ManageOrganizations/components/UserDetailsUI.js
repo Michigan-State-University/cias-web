@@ -80,7 +80,7 @@ const UserDetailsUI = ({
         mb={30}
         label={formatMessage(messages.userFirstNameLabel)}
         placeholder={formatMessage(messages.userFirstNamePlaceholder)}
-        onBlur={onEdit('firstName')}
+        onBlur={onEdit('firstName', true)}
         value={user.firstName}
       />
 
@@ -88,7 +88,7 @@ const UserDetailsUI = ({
         mb={30}
         label={formatMessage(messages.userLastNameLabel)}
         placeholder={formatMessage(messages.userLastNamePlaceholder)}
-        onBlur={onEdit('lastName')}
+        onBlur={onEdit('lastName', true)}
         value={user.lastName}
       />
 

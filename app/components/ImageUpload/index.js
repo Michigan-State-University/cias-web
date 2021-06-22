@@ -1,9 +1,14 @@
 import React, { memo, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import head from 'lodash/head';
-import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { useDropzone } from 'react-dropzone';
 import { toast } from 'react-toastify';
+
+import bin from 'assets/svg/bin-red.svg';
+import imagePlaceholder from 'assets/svg/image-placeholder.svg';
+
+import { themeColors, borders, colors } from 'theme';
 
 import Box from 'components/Box';
 import Column from 'components/Column';
@@ -13,14 +18,8 @@ import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import Row from 'components/Row';
 import Text from 'components/Text';
-
-import bin from 'assets/svg/bin-red.svg';
-import imagePlaceholder from 'assets/svg/image-placeholder.svg';
-
-import { themeColors, borders, colors } from 'theme';
-
-import { compose } from 'redux';
 import Loader from 'components/Loader';
+
 import { ImageWrapper } from './styled';
 import messages from './messages';
 
@@ -30,10 +29,10 @@ const ImageUpload = ({
   isPreview,
   image,
   loading,
-  intl: { formatMessage },
   disabled,
   acceptedFormats,
 }) => {
+  const { formatMessage } = useIntl();
   const [hovered, setHovered] = useState(false);
 
   const handleDrop = useCallback(newFiles => {
@@ -112,21 +111,16 @@ const ImageUpload = ({
                 cursor="pointer"
                 onClick={open}
               >
-                <FormattedMessage {...messages.upload} />
+                {formatMessage(messages.upload)}
               </H3>
             )}
-            <H3>
-              <FormattedMessage
-                {...messages[isDragActive ? 'drop' : 'header']}
-              />
-            </H3>
+            <H3>{formatMessage(messages[isDragActive ? 'drop' : 'header'])}</H3>
           </Row>
           <Row>
             <Text textOpacity={0.5}>
-              <FormattedMessage
-                {...messages.subheader}
-                values={{ formats: acceptedFormats.join(', ') }}
-              />
+              {formatMessage(messages.subheader, {
+                formats: acceptedFormats.join(', '),
+              })}
             </Text>
           </Row>
         </Column>
@@ -137,7 +131,7 @@ const ImageUpload = ({
     <Box mt={10} width="100%">
       {(isPreview || disabled) && (
         <ImageWrapper>
-          <Img src={image} alt="image" />
+          <Img src={image} alt={formatMessage(messages.imageAlt)} />
         </ImageWrapper>
       )}
       {!isPreview && !disabled && (
@@ -151,7 +145,12 @@ const ImageUpload = ({
         >
           <Row justify="center" align="center" width="100%">
             <ImageWrapper>
-              <Img src={image} alt="image" maxHeight="50vh" maxWidth="100%" />
+              <Img
+                src={image}
+                alt={formatMessage(messages.imageAlt)}
+                maxHeight="50vh"
+                maxWidth="100%"
+              />
             </ImageWrapper>
             <Box
               onClick={handleRemove}
@@ -173,7 +172,6 @@ ImageUpload.propTypes = {
   onDeleteImage: PropTypes.func,
   isPreview: PropTypes.bool,
   loading: PropTypes.bool,
-  intl: PropTypes.shape(IntlShape),
   image: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   disabled: PropTypes.bool,
   acceptedFormats: PropTypes.arrayOf(PropTypes.string),
@@ -183,7 +181,4 @@ ImageUpload.defaultProps = {
   acceptedFormats: ['JPG', 'PNG', 'GIF'],
 };
 
-export default compose(
-  memo,
-  injectIntl,
-)(ImageUpload);
+export default memo(ImageUpload);

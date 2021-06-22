@@ -10,7 +10,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
       color="primary"
       radius="100px"
     >
-      Move Narrator to default position
+      Reset Narrator to previous block position
     </button>
     <div
       class="Box-sc-1vhutan-0 gjHPvd"

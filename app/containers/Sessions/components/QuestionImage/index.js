@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl } from 'react-intl';
+import { injectIntl, useIntl } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -11,21 +11,29 @@ import {
   makeSelectSelectedQuestion,
   addQuestionImageRequest,
   deleteQuestionImageRequest,
-  addQuestionImageSaga,
-  deleteQuestionImageSaga,
+  updateQuestionImageRequest,
+  questionImageSaga,
 } from 'global/reducers/questions';
 
+import { colors } from 'theme';
+
 import ImageUpload from 'components/ImageUpload';
+import ApprovableInput from 'components/Input/ApprovableInput';
+import Box from 'components/Box';
+import Column from 'components/Column';
+
+import messages from './messages';
 
 export const QuestionImage = ({
   addImage,
   deleteImage,
-  selectedQuestion: { id, image_url: imageUrl },
+  updateImage,
+  selectedQuestion: { id, image_url: imageUrl, image_alt: imageAlt },
   isNarratorTab,
   disabled,
 }) => {
-  useInjectSaga({ key: 'addQuestionImage', saga: addQuestionImageSaga });
-  useInjectSaga({ key: 'deleteQuestionImage', saga: deleteQuestionImageSaga });
+  const { formatMessage } = useIntl();
+  useInjectSaga({ key: 'questionImage', saga: questionImageSaga });
 
   const handleDrop = image => {
     addImage({
@@ -37,22 +45,39 @@ export const QuestionImage = ({
 
   const handleRemove = () => deleteImage({ selectedQuestionId: id });
 
+  const handleUpdateDescription = description => {
+    updateImage(id, description);
+  };
+
   return (
-    <ImageUpload
-      image={imageUrl}
-      disabled={disabled || isNarratorTab}
-      onAddImage={handleDrop}
-      onDeleteImage={handleRemove}
-    />
+    <Column>
+      <ImageUpload
+        image={imageUrl}
+        disabled={disabled || isNarratorTab}
+        onAddImage={handleDrop}
+        onDeleteImage={handleRemove}
+      />
+      <Box mt={20} bg={colors.linkWater}>
+        <ApprovableInput
+          type="multiline"
+          value={imageAlt ?? ''}
+          onCheck={handleUpdateDescription}
+          placeholder={formatMessage(messages.logoDescriptionPlaceholder)}
+          rows="4"
+        />
+      </Box>
+    </Column>
   );
 };
 
 QuestionImage.propTypes = {
   addImage: PropTypes.func,
   deleteImage: PropTypes.func,
+  updateImage: PropTypes.func,
   selectedQuestion: PropTypes.shape({
     id: PropTypes.string,
     image_url: PropTypes.string,
+    image_alt: PropTypes.string,
   }),
   isNarratorTab: PropTypes.bool,
   disabled: PropTypes.bool,
@@ -66,6 +91,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = {
   addImage: addQuestionImageRequest,
   deleteImage: deleteQuestionImageRequest,
+  updateImage: updateQuestionImageRequest,
 };
 
 const withConnect = connect(

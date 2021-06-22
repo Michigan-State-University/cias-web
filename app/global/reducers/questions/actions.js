@@ -37,6 +37,9 @@ import {
   COPY_EXTERNALLY_QUESTION_REQUEST,
   COPY_EXTERNALLY_QUESTION_ERROR,
   COPY_EXTERNALLY_QUESTION_SUCCESS,
+  UPDATE_QUESTION_IMAGE_REQUEST,
+  UPDATE_QUESTION_IMAGE_SUCCESS,
+  UPDATE_QUESTION_IMAGE_ERROR,
 } from './constants';
 
 export const selectQuestion = index =>
@@ -68,14 +71,24 @@ export const addQuestionImageRequest = payload =>
 export const addQuestionImageSuccess = question =>
   actionBuilder(ADD_QUESTION_IMAGE_SUCCESS, { question });
 export const addQuestionImageError = payload =>
-  actionBuilder(ADD_QUESTION_IMAGE_ERROR, { payload });
+  actionBuilder(ADD_QUESTION_IMAGE_ERROR, payload);
 
 export const deleteQuestionImageRequest = payload =>
   actionBuilder(DELETE_QUESTION_IMAGE_REQUEST, payload);
 export const deleteQuestionImageSuccess = question =>
   actionBuilder(DELETE_QUESTION_IMAGE_SUCCESS, { question });
 export const deleteQuestionImageError = payload =>
-  actionBuilder(DELETE_QUESTION_IMAGE_ERROR, { payload });
+  actionBuilder(DELETE_QUESTION_IMAGE_ERROR, payload);
+
+export const updateQuestionImageRequest = (questionId, description) =>
+  actionBuilder(UPDATE_QUESTION_IMAGE_REQUEST, {
+    questionId,
+    description,
+  });
+export const updateQuestionImageSuccess = questionId =>
+  actionBuilder(UPDATE_QUESTION_IMAGE_SUCCESS, { questionId });
+export const updateQuestionImageError = payload =>
+  actionBuilder(UPDATE_QUESTION_IMAGE_ERROR, payload);
 
 export const copyQuestionRequest = payload =>
   actionBuilder(COPY_QUESTION_REQUEST, payload);

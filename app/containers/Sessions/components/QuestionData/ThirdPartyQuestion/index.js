@@ -24,7 +24,6 @@ import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
-import globalMessages from 'global/i18n/globalMessages';
 import { canEdit } from 'models/Status/statusPermissions';
 import { BadgeInput } from 'components/Input/BadgeInput';
 import { emailValidator } from 'utils/validators';
@@ -120,9 +119,7 @@ const ThirdPartyQuestion = ({
                       textAlign="center"
                       placeholder={
                         !isNarratorTab
-                          ? formatMessage(
-                              globalMessages.variables.emailPlaceholder,
-                            )
+                          ? formatMessage(messages.emailPlaceholder)
                           : ''
                       }
                       value={value.value}

@@ -100,7 +100,13 @@ Object.defineProperty(global, 'localStorage', {
 jest.mock('react-player/lazy', () => require('react-player'));
 
 // mock globally to make sure real request is not sent in any test
-jest.mock('link-preview-js');
+jest.mock('utils/useUrlMetadata', () => ({
+  useUrlMetadata: jest.fn().mockImplementation(() => ({
+    metadata: null,
+    error: null,
+    isFetching: false,
+  })),
+}));
 
 // make all useEffect synchronous in tests, otherwise test bugs occur
 jest.spyOn(React, 'useEffect').mockImplementation(React.useLayoutEffect);

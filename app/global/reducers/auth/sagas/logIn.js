@@ -1,7 +1,6 @@
 import { put, takeLatest, call, select, delay } from 'redux-saga/effects';
 import { push } from 'connected-react-router';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 import LocalStorageService from 'utils/localStorageService';
 import { mapCurrentUser } from 'utils/mapResponseObjects';
@@ -10,28 +9,26 @@ import { requestErrorMessageHandler } from 'utils/errors/requestErrorMessageHand
 import { responseStatusEquals } from 'utils/axiosUtils';
 
 import { makeSelectLocation } from 'containers/App/selectors';
+import { UserStorageController } from '../UserStorageController';
 import {
   logIn,
   loginError,
   loginSuccess,
   verificationCodeNeeded,
 } from '../actions';
-import {
-  LOGIN_REQUEST,
-  REDIRECT_QUERY_KEY,
-  VERIFICATION_CODE_COOKIE,
-} from '../constants';
+import { LOGIN_REQUEST, REDIRECT_QUERY_KEY } from '../constants';
 
 function* login({ payload: { email, password } }) {
   const requestURL = `v1/auth/sign_in`;
 
   try {
     let config = {};
-    const userCookie = Cookies.getJSON(email);
+    const userStorageController = new UserStorageController(email);
+    const verificationCode = userStorageController.getVerificationCode();
 
-    if (userCookie && userCookie[VERIFICATION_CODE_COOKIE])
+    if (verificationCode)
       config = {
-        headers: { 'Verification-Code': userCookie[VERIFICATION_CODE_COOKIE] },
+        headers: { 'Verification-Code': verificationCode },
       };
 
     const {

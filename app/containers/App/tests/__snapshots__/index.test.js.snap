@@ -23,12 +23,13 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               href="/"
             >
               <img
-                alt="logo"
+                alt="CIAS Application Logo"
                 class="Img-sc-55j3su-0 jveqaA"
                 src="IMAGE_MOCK"
               />
             </a>
             <img
+              alt="Michigan State University Logo"
               class="Img-sc-55j3su-0 inOfMn"
               src="IMAGE_MOCK"
             />

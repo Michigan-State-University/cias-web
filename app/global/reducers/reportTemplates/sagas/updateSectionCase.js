@@ -1,11 +1,11 @@
 import { takeLatest, put, call } from 'redux-saga/effects';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
-import { mapJsonApiToObject } from 'utils/jsonApiMapper';
-import { SectionCase } from 'models/ReportTemplate';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { formatMessage } from 'utils/intlOutsideReact';
-import { toast } from 'react-toastify';
+
 import { UPDATE_SECTION_CASE_REQUEST } from '../constants';
 import { updateSectionCaseSuccess, updateSectionCaseFailure } from '../actions';
 import messages from '../messages';
@@ -24,11 +24,9 @@ function* updateSectionCase({
         objectToSnakeCase(sectionCase),
       );
 
-      const mappedData = mapJsonApiToObject(data, 'variant', {
-        isSingleObject: true,
-      });
+      const mappedData = jsonApiToObject(data, 'variant');
 
-      yield put(updateSectionCaseSuccess(new SectionCase({ ...mappedData })));
+      yield put(updateSectionCaseSuccess(mappedData));
     } else {
       const formData = new FormData();
       formData.append('variant[image]', imageData);
@@ -39,11 +37,9 @@ function* updateSectionCase({
         },
       });
 
-      const mappedData = mapJsonApiToObject(data, 'variant', {
-        isSingleObject: true,
-      });
+      const mappedData = jsonApiToObject(data, 'variant');
 
-      yield put(updateSectionCaseSuccess(new SectionCase({ ...mappedData })));
+      yield put(updateSectionCaseSuccess(mappedData));
     }
   } catch (error) {
     yield call(toast.error, formatMessage(messages.updateSectionCaseError));

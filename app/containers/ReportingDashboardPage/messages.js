@@ -208,4 +208,8 @@ export default defineMessages({
     id: `${scope}.filterData`,
     defaultMessage: 'Filter data',
   },
+  fieldCannotBeEmpty: {
+    id: `${scope}.fieldCannotBeEmpty`,
+    defaultMessage: '{field} cannot be empty',
+  },
 });

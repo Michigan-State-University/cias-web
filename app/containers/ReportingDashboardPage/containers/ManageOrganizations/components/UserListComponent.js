@@ -38,7 +38,14 @@ const UserListComponent = ({
   const closeInviteForm = useCallback(() => setIsInviteFormOpen(false), []);
 
   const [selectedUser, setSelectedUser] = useState(null);
-  const openUserDetails = useCallback(user => () => setSelectedUser(user), []);
+  const openUserDetails = useCallback(
+    user => () => {
+      if (user.active) {
+        setSelectedUser(user);
+      }
+    },
+    [],
+  );
   const closeUserDetails = useCallback(() => setSelectedUser(null), []);
 
   const avatarColor = useMemo(() => RolesColors[role], [role]);

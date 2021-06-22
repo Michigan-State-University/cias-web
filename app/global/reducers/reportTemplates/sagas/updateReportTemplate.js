@@ -2,8 +2,8 @@ import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
-import { ReportTemplate } from 'models/ReportTemplate';
-import { mapJsonApiToObject } from 'utils/jsonApiMapper';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
+
 import { UPDATE_REPORT_TEMPLATE_REQUEST } from '../constants';
 import {
   updateReportTemplateSuccess,
@@ -26,13 +26,8 @@ function* updateReportTemplate({
         }),
       );
 
-      const mappedData = mapJsonApiToObject(data, 'reportTemplate', {
-        isSingleObject: true,
-      });
-
-      yield put(
-        updateReportTemplateSuccess(new ReportTemplate({ ...mappedData })),
-      );
+      const mappedData = jsonApiToObject(data, 'reportTemplate');
+      yield put(updateReportTemplateSuccess(mappedData));
     } else {
       const formData = new FormData();
       formData.append('report_template[logo]', imageData);
@@ -43,13 +38,8 @@ function* updateReportTemplate({
         },
       });
 
-      const mappedData = mapJsonApiToObject(data, 'reportTemplate', {
-        isSingleObject: true,
-      });
-
-      yield put(
-        updateReportTemplateSuccess(new ReportTemplate({ ...mappedData })),
-      );
+      const mappedData = jsonApiToObject(data, 'reportTemplate');
+      yield put(updateReportTemplateSuccess(mappedData));
     }
   } catch (error) {
     yield put(updateReportTemplateFailure(error));

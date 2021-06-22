@@ -91,7 +91,7 @@ export default defineMessages({
   },
   emailValidationError: {
     id: `${scope}.emailValidationError`,
-    defaultMessage: 'The email entered in wrong format',
+    defaultMessage: 'Please enter a valid email address in the correct format',
   },
   wcagWarning: {
     id: `${scope}.wcagWaring`,

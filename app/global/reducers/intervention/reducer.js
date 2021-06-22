@@ -65,6 +65,9 @@ import {
   DELETE_INTERVENTION_LOGO_REQUEST,
   DELETE_INTERVENTION_LOGO_SUCCESS,
   DELETE_INTERVENTION_LOGO_ERROR,
+  UPDATE_INTERVENTION_LOGO_REQUEST,
+  UPDATE_INTERVENTION_LOGO_SUCCESS,
+  UPDATE_INTERVENTION_LOGO_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -171,11 +174,28 @@ export const interventionReducer = (state = initialState, action) =>
       case DELETE_INTERVENTION_LOGO_SUCCESS:
         draft.loaders.logoLoading = false;
         draft.cache.intervention.logoUrl = null;
+        draft.intervention.imageAlt = '';
+        draft.cache.intervention.imageAlt = '';
         break;
 
       case DELETE_INTERVENTION_LOGO_ERROR:
         draft.loaders.logoLoading = false;
         draft.intervention.logoUrl = state.cache.intervention.logoUrl;
+        break;
+
+      case UPDATE_INTERVENTION_LOGO_REQUEST:
+        draft.loaders.logoLoading = true;
+        draft.intervention.imageAlt = action.payload.description;
+        break;
+
+      case UPDATE_INTERVENTION_LOGO_SUCCESS:
+        draft.loaders.logoLoading = false;
+        draft.cache.intervention.imageAlt = state.intervention.imageAlt;
+        break;
+
+      case UPDATE_INTERVENTION_LOGO_ERROR:
+        draft.loaders.logoLoading = false;
+        draft.intervention.imageAlt = state.cache.intervention.imageAlt;
         break;
 
       case SEND_INTERVENTION_CSV_REQUEST:

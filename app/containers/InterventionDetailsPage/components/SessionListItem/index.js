@@ -197,7 +197,12 @@ function SessionListItem({
                     messages[`tooltip-${status}`] ?? messages.tooltip,
                   )}
                 >
-                  <Row justify="end" onClick={handleClick} minWidth={110}>
+                  <Row
+                    justify="end"
+                    disabled={!sharingPossible}
+                    onClick={handleClick}
+                    minWidth={110}
+                  >
                     <Text
                       fontSize={13}
                       clickable

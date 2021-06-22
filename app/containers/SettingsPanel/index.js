@@ -4,7 +4,7 @@
  *
  */
 
-import React, { useReducer, useEffect, useContext } from 'react';
+import React, { useReducer, useEffect, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -24,6 +24,7 @@ import {
   interventionLogoSaga,
   addInterventionLogoRequest,
   deleteInterventionLogoRequest,
+  updateInterventionLogoRequest,
 } from 'global/reducers/intervention';
 import { canChangeAccessSettings } from 'models/Status/statusPermissions';
 import { themeColors } from 'theme';
@@ -46,6 +47,7 @@ const SettingsPanel = ({
   changeAccessSetting,
   addLogo,
   deleteLogo,
+  updateLogo,
   interventionState: {
     intervention: { status },
     loaders: {
@@ -67,13 +69,23 @@ const SettingsPanel = ({
   const updateSetting = newSetting =>
     changeAccessSetting(intervention.id, newSetting);
 
-  const onAddLogo = logo => {
-    addLogo(intervention.id, logo.image);
-  };
+  const onAddLogo = useCallback(
+    logo => {
+      addLogo(intervention.id, logo.image);
+    },
+    [intervention?.id],
+  );
 
-  const onDeleteLogo = () => {
+  const onDeleteLogo = useCallback(() => {
     deleteLogo(intervention.id);
-  };
+  }, [intervention?.id]);
+
+  const onUpdateLogoDescription = useCallback(
+    description => {
+      updateLogo(intervention.id, description);
+    },
+    [intervention?.id],
+  );
 
   const { sharedTo, usersWithAccess } = intervention || {};
 
@@ -134,6 +146,7 @@ const SettingsPanel = ({
             logoLoading={logoLoading}
             addImage={onAddLogo}
             deleteImage={onDeleteLogo}
+            updateDescription={onUpdateLogoDescription}
           />
         </StyledBox>
       )}
@@ -146,6 +159,7 @@ SettingsPanel.propTypes = {
   changeAccessSetting: PropTypes.func,
   addLogo: PropTypes.func,
   deleteLogo: PropTypes.func,
+  updateLogo: PropTypes.func,
   interventionState: PropTypes.shape({
     loaders: PropTypes.object,
     intervention: PropTypes.shape({ status: PropTypes.string }),
@@ -165,6 +179,7 @@ const mapDispatchToProps = {
   changeAccessSetting: changeAccessSettingRequest,
   addLogo: addInterventionLogoRequest,
   deleteLogo: deleteInterventionLogoRequest,
+  updateLogo: updateInterventionLogoRequest,
 };
 
 const withConnect = connect(

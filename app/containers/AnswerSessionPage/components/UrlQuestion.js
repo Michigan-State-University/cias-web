@@ -35,7 +35,7 @@ const UrlQuestion = ({ question, selectAnswer }) => {
 
   const onClick = () => changeLinkState(true);
   return (
-    <Column>
+    <Column mt={10}>
       <UrlPreview handleClick={onClick} link={payload} />
       <H3 color={themeColors.warning} textAlign="center">
         {formatMessage(messages.wcagExternalLinkWarning)}

@@ -146,7 +146,7 @@ export default defineMessages({
   },
   chartSettingsCopy: {
     id: `${scope}.chartSettingsCopy`,
-    defaultMessage: 'Copy chart',
+    defaultMessage: 'Duplicate chart',
   },
   chartFormulaCaseLabelPlaceholder: {
     id: `${scope}.chartFormulaCaseLabelPlaceholder`,

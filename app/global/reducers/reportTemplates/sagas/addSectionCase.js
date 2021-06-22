@@ -2,8 +2,8 @@ import { takeLatest, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
-import { mapJsonApiToObject } from 'utils/jsonApiMapper';
-import { SectionCase } from 'models/ReportTemplate';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
+
 import { ADD_SECTION_CASE_REQUEST } from '../constants';
 import { addSectionCaseSuccess, addSectionCaseFailure } from '../actions';
 
@@ -16,11 +16,9 @@ function* addSectionCase({ payload: { sectionCase, sectionId } }) {
       objectToSnakeCase({ variant: sectionCase }),
     );
 
-    const mappedData = mapJsonApiToObject(data, 'variant', {
-      isSingleObject: true,
-    });
+    const mappedData = jsonApiToObject(data, 'variant');
 
-    yield put(addSectionCaseSuccess(new SectionCase({ ...mappedData })));
+    yield put(addSectionCaseSuccess(mappedData));
   } catch (error) {
     yield put(addSectionCaseFailure(error));
   }

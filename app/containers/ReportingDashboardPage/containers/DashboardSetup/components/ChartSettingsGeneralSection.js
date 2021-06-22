@@ -9,6 +9,7 @@ import VariableChooser from 'containers/VariableChooser';
 import { Col, NoMarginRow, Row } from 'components/ReactGridSystem';
 import Text from 'components/Text';
 
+import { ChartStatus } from 'global/reducers/dashboardSections';
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 import { Input } from '../styled';
@@ -28,7 +29,7 @@ const ChartSettingsGeneralSection = ({
     statusPermissions: { canBeEdited },
   } = useContext(ChartSettingsContext);
 
-  const { description, formula, name } = chart;
+  const { description, formula, name, status } = chart;
 
   const handleAddVariable = useCallback(
     variable => {
@@ -94,6 +95,7 @@ const ChartSettingsGeneralSection = ({
               isMultiIntervention
               onClick={handleAddVariable}
               organizationId={organizationId}
+              disabled={status !== ChartStatus.DRAFT}
             >
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(messages.chartSettingsAddVariable)}

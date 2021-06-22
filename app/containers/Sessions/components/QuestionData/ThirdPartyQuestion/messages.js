@@ -11,8 +11,13 @@ export default defineMessages({
     id: `${scope}.addAnswer`,
     defaultMessage: 'Add new Third Party',
   },
+  emailPlaceholder: {
+    id: `${scope}.emailPlaceholder`,
+    defaultMessage: 'Email(s)',
+  },
   emailError: {
     id: `${scope}.emailError`,
-    defaultMessage: 'Incorrect email address entered',
+    defaultMessage:
+      'Please enter email(s) in the following format, email1@example.com,email2@example.com',
   },
 });

@@ -11,7 +11,8 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
     class="styled__Header-hdmnn0-2 hWqYDm"
   >
     <img
-      class="styled__Logo-hdmnn0-3 hnzJby"
+      alt="CIAS Application Logo"
+      class="Img-sc-55j3su-0 cDhXoN"
       src="IMAGE_MOCK"
     />
   </div>
@@ -207,7 +208,8 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
     class="styled__Header-hdmnn0-2 hWqYDm"
   >
     <img
-      class="styled__Logo-hdmnn0-3 hnzJby"
+      alt="CIAS Application Logo"
+      class="Img-sc-55j3su-0 cDhXoN"
       src="IMAGE_MOCK"
     />
   </div>

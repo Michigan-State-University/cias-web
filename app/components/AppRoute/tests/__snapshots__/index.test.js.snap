@@ -179,12 +179,13 @@ exports[`<AppRoute /> Should render and match the snapshot 1`] = `
               href="/"
             >
               <img
-                alt="logo"
+                alt="CIAS Application Logo"
                 class="c5"
                 src="IMAGE_MOCK"
               />
             </a>
             <img
+              alt="Michigan State University Logo"
               class="c6"
               src="IMAGE_MOCK"
             />

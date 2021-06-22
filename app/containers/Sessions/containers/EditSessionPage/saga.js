@@ -16,7 +16,7 @@ import {
   changeGroupNameSaga,
 } from 'global/reducers/questionGroups';
 
-import logInGuestSaga from 'global/reducers/auth/sagas';
+import { logInGuestSaga } from 'global/reducers/auth/sagas';
 import { redirectToPreviewSaga } from 'containers/AnswerSessionPage/saga';
 
 export default function* editInterventionPageSaga() {

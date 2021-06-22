@@ -11,7 +11,8 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
     class="styled__Header-hdmnn0-2 hWqYDm"
   >
     <img
-      class="styled__Logo-hdmnn0-3 hnzJby"
+      alt="CIAS Application Logo"
+      class="Img-sc-55j3su-0 cDhXoN"
       src="IMAGE_MOCK"
     />
   </div>
@@ -19,6 +20,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
     class="styled__Content-hdmnn0-4 cwrYjh"
   >
     <img
+      alt="Michigan State University Logo"
       class="Img-sc-55j3su-0 hdKJvI"
       src="IMAGE_MOCK"
     />
