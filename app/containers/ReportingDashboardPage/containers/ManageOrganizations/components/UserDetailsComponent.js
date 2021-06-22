@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
+import { toast } from 'react-toastify';
+import lowerCase from 'lodash/lowerCase';
+import upperFirst from 'lodash/upperFirst';
 
 import { Roles } from 'models/User/UserRoles';
 
@@ -110,7 +113,17 @@ const UserDetailsComponent = ({
   };
 
   const handleEdit = useCallback(
-    field => value => editUser({ userId, [field]: value }),
+    (field, required) => value => {
+      if (value === '' && required === true) {
+        toast.warning(
+          formatMessage(messages.fieldCannotBeEmpty, {
+            field: upperFirst(lowerCase(field)),
+          }),
+        );
+      } else {
+        editUser({ userId, [field]: value });
+      }
+    },
     [userId],
   );
 
