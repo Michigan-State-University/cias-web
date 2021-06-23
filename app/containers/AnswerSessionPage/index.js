@@ -188,7 +188,7 @@ export function AnswerSessionPage({
     settings: {
       required,
       proceed_button: proceedButton,
-      narratorSkippable,
+      narrator_skippable: narratorSkippable,
     } = {},
   } = currentQuestion ?? {};
 
