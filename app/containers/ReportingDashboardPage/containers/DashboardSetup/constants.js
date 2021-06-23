@@ -6,7 +6,7 @@ import {
   StatusPermissions,
 } from 'global/reducers/dashboardSections';
 
-import { elements, themeColors } from 'theme';
+import { elements, fontSizes, themeColors } from 'theme';
 
 import { DEFAULT_COLORS } from 'components/ReactColor';
 
@@ -22,6 +22,9 @@ export const CHART_HEIGHT = elements.chartTileHeight - 100;
 
 export const X_AXIS_KEY = 'name';
 export const Y_AXIS_KEY = 'value';
+
+export const MAX_LABEL_WIDTH = 100;
+export const HALF_LABEL_HEIGHT = +fontSizes.regular.replace('px', '') / 2;
 
 export const generateNewPatternForChartType = (chartType, newIndex) => {
   const pattern = {

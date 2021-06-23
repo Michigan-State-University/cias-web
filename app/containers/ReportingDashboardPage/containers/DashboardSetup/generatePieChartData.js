@@ -2,6 +2,11 @@ import React from 'react';
 
 import { HUNDRED_PERCENT, RADIAN } from 'utils/mathUtils';
 
+import EllipsisText from 'components/Text/EllipsisText';
+import Row from 'components/Row';
+
+import { HALF_LABEL_HEIGHT, MAX_LABEL_WIDTH } from './constants';
+
 /**
  * @typedef {Object} Pattern
  * @property {string} match
@@ -59,15 +64,24 @@ export const generatePieChartLabel = ({
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
+  const isRightSide = x > cx;
+
   return (
-    <text
-      x={x}
-      y={y}
-      fill={color}
-      textAnchor={x > cx ? 'start' : 'end'}
-      dominantBaseline="central"
+    <foreignObject
+      x={x + (isRightSide ? 0 : -MAX_LABEL_WIDTH)}
+      y={y - HALF_LABEL_HEIGHT}
+      width="1"
+      height="1"
+      overflow="visible"
     >
-      {name} ({`${value}%`})
-    </text>
+      <Row width={MAX_LABEL_WIDTH} justify={isRightSide ? 'start' : 'end'}>
+        <EllipsisText
+          maxWidth={MAX_LABEL_WIDTH}
+          dataFor="chart-tooltip"
+          text={`${name} (${value}%)`}
+          color={color}
+        />
+      </Row>
+    </foreignObject>
   );
 };

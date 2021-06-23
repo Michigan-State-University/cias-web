@@ -228,7 +228,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
         <div
           currentitem="false"
           data-for="test-id-tile-tooltip"
-          data-tip="true"
+          data-tip=""
         >
           <div
             class="c11"

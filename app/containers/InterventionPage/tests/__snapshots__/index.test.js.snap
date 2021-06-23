@@ -285,7 +285,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               <div
                 currentitem="false"
                 data-for="undefined-tile-tooltip"
-                data-tip="true"
+                data-tip=""
               >
                 <div
                   class="styled__TileInfo-agddns-4 dElPvb"

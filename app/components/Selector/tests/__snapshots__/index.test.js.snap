@@ -96,7 +96,7 @@ exports[`<Selector /> Should render and match the snapshot 1`] = `
           class="c4"
           currentitem="false"
           data-for="el-tooltip-id-asd02as"
-          data-tip="true"
+          data-tip=""
           src="IMAGE_MOCK"
         />
         <div
@@ -377,7 +377,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
           class="c4"
           currentitem="false"
           data-for="el-tooltip-id-asd02as"
-          data-tip="true"
+          data-tip=""
           src="IMAGE_MOCK"
         />
         <div
