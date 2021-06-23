@@ -6,6 +6,7 @@ import get from 'lodash/get';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { useIntl } from 'react-intl';
 
 import { useAsync } from 'utils/useAsync';
 import useAnimationHelper from 'utils/animationsHelpers/useAnimationHelper';
@@ -30,6 +31,7 @@ import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit } from 'models/Status/statusPermissions';
 
 import { elements } from 'theme';
+import messages from 'containers/AnswerSessionPage/messages';
 import {
   NarratorContainer,
   lottieStyles,
@@ -53,6 +55,7 @@ const QuestionNarrator = ({
   audioInstance,
   interventionStatus,
 }) => {
+  const { formatMessage } = useIntl();
   const { width, height } = useResizeObserver({
     targetRef: animationBoundaries,
   });
@@ -286,6 +289,7 @@ const QuestionNarrator = ({
                   previewData.animation === 'standStill' ||
                   !decideIfPlaySpeechAnimation()
                 }
+                ariaLabel={formatMessage(messages.narratorAlt)}
               />
             )}
           </div>

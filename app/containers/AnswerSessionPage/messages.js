@@ -110,4 +110,9 @@ export default defineMessages({
     id: `${scope}.fillHeader`,
     defaultMessage: 'Fill Session',
   },
+  narratorAlt: {
+    id: `${scope}.narratorAlt`,
+    defaultMessage:
+      'This is a Narrator that speaks and moves around the screen.',
+  },
 });
