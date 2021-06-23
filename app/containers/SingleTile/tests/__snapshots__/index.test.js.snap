@@ -119,7 +119,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   flex-direction: column;
   color: #2F3850;
   background: #FFFFFF;
-  color: #000000;
+  color: #0E0E0E;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;

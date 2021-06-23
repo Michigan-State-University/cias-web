@@ -140,8 +140,8 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
   font-size: 13px;
   line-height: 130%;
   font-size: 15px;
-  color: rgba(0,0,0,0.6);
-  color: rgba(0,0,0,0.6);
+  color: rgba(14,14,14,0.6);
+  color: rgba(14,14,14,0.6);
 }
 
 .c14 {
@@ -192,7 +192,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
 }
 
 .c10 .schedule-date-picker .react-datepicker__day:hover {
-  color: #000000;
+  color: #0E0E0E;
   background-color: #F8FBFF;
 }
 
@@ -295,7 +295,7 @@ exports[`<SessionSchedule /> Should render and match the snapshot 1`] = `
                       >
                         <p
                           class="c12"
-                          color="#000000"
+                          color="#0E0E0E"
                           font-size="15"
                         >
                           12/24/2018
