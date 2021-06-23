@@ -50,7 +50,7 @@ const ChartTileUI = ({
           <PieChart
             defaultPattern={defaultPattern}
             patterns={patterns}
-            singleChartData={chartData}
+            realChartData={chartData}
             formatMessage={formatMessage}
             status={status}
           />
@@ -64,7 +64,7 @@ const ChartTileUI = ({
             defaultPattern={defaultPattern}
             patterns={patterns}
             trendLine={trendLine}
-            singleChartData={chartData}
+            realChartData={chartData}
             status={status}
             formatMessage={formatMessage}
           />

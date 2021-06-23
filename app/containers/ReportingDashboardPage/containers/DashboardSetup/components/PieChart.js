@@ -18,18 +18,18 @@ import messages from '../messages';
 const PieChart = ({
   defaultPattern,
   patterns,
-  singleChartData,
+  realChartData,
   formatMessage,
   status,
 }) => {
   const data = useMemo(() => {
-    if (!singleChartData && status === ChartStatus.PUBLISHED) return null;
-    if (!singleChartData)
+    if (!realChartData && status === ChartStatus.PUBLISHED) return null;
+    if (!realChartData)
       return generatePieChartPreviewData([...patterns, defaultPattern]);
-    if (singleChartData) {
-      return singleChartData;
+    if (realChartData) {
+      return realChartData;
     }
-  }, [patterns, defaultPattern, singleChartData, status]);
+  }, [patterns, defaultPattern, realChartData, status]);
 
   const generateCellColor = useCallback(dataItem => dataItem.color, []);
 
@@ -70,7 +70,7 @@ const PieChart = ({
 PieChart.propTypes = {
   defaultPattern: PropTypes.object,
   patterns: PropTypes.arrayOf(PropTypes.object),
-  singleChartData: PropTypes.any,
+  realChartData: PropTypes.any,
   formatMessage: PropTypes.func,
   status: PropTypes.string,
 };

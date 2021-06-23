@@ -27,17 +27,17 @@ const BarChart = ({
   chartType,
   patterns,
   trendLine,
-  singleChartData,
+  realChartData,
   status,
   formatMessage,
 }) => {
   const data = useMemo(() => {
-    if (!singleChartData && status === ChartStatus.PUBLISHED) return null;
-    if (!singleChartData) return generateBarChartPreviewData(chartType);
-    if (singleChartData) {
-      return singleChartData;
+    if (!realChartData && status === ChartStatus.PUBLISHED) return null;
+    if (!realChartData) return generateBarChartPreviewData(chartType);
+    if (realChartData) {
+      return realChartData;
     }
-  }, [chartType, singleChartData, status]);
+  }, [chartType, realChartData, status]);
 
   const tickFormatter = value => {
     switch (chartType) {
@@ -151,7 +151,7 @@ BarChart.propTypes = {
   chartType: PropTypes.string,
   patterns: PropTypes.arrayOf(PropTypes.object),
   trendLine: PropTypes.bool,
-  singleChartData: PropTypes.any,
+  realChartData: PropTypes.any,
   status: PropTypes.string,
   formatMessage: PropTypes.func,
 };
