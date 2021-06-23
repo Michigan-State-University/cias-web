@@ -6,7 +6,7 @@ export const orderSettings = settings =>
     image: settings.image,
     title: settings.title,
     subtitle: settings.subtitle,
-    narratorSkippable: settings.narratorSkippable,
+    narrator_skippable: settings.narrator_skippable,
     ...(!isNullOrUndefined(settings.proceed_button) && {
       proceed_button: settings.proceed_button,
     }),
