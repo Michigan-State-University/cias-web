@@ -24,4 +24,9 @@ export default defineMessages({
     id: `${scope}.cloneError`,
     defaultMessage: 'Failed to clone chart!',
   },
+  editSectionError: {
+    id: `${scope}.editSectionError`,
+    defaultMessage:
+      'Failed to edit section! Problem in those properties: {properties}.',
+  },
 });

@@ -46,4 +46,9 @@ export default defineMessages({
     id: `${scope}.deleteClinicError`,
     defaultMessage: 'Failed to delete Clinic!',
   },
+  editEntityError: {
+    id: `${scope}.editEntityError`,
+    defaultMessage:
+      'Failed to edit! Problem in those properties: {properties}.',
+  },
 });

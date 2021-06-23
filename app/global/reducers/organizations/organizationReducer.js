@@ -1,8 +1,11 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { findIndexById } from 'utils/arrayUtils';
-
+import {
+  assignDraftItemsById,
+  deleteItemById,
+  updateItemById,
+} from 'utils/reduxUtils';
 import {
   FETCH_ORGANIZATION_REQUEST,
   FETCH_ORGANIZATION_SUCCESS,
@@ -218,27 +221,16 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.fetchHealthSystem = false;
         draft.errors.fetchHealthSystem = null;
 
-        const index = findIndexById(
-          state.organization.healthSystems,
+        updateItemById(
+          draft.organization.healthSystems,
           payload.healthSystem.id,
+          item => healthSystemReducer(item, action),
         );
-
-        const cacheIndex = findIndexById(
-          state.cache.organization.healthSystems,
+        updateItemById(
+          draft.cache.organization.healthSystems,
           payload.healthSystem.id,
+          item => healthSystemReducer(item, action),
         );
-
-        if (index !== -1)
-          draft.organization.healthSystems[index] = healthSystemReducer(
-            state.organization.healthSystems[index],
-            action,
-          );
-
-        if (cacheIndex !== -1)
-          draft.cache.organization.healthSystems[index] = healthSystemReducer(
-            state.cache.organization.healthSystems[index],
-            action,
-          );
 
         break;
       }
@@ -280,32 +272,24 @@ const organizationReducer = (state = initialState, action) =>
       case EDIT_HEALTH_SYSTEM_REQUEST: {
         draft.loaders.editHealthSystem = true;
         draft.errors.editHealthSystem = null;
-
-        const index = findIndexById(
-          state.organization.healthSystems,
+        updateItemById(
+          draft.organization.healthSystems,
           payload.healthSystem.id,
+          item => healthSystemReducer(item, action),
         );
 
-        if (index !== -1)
-          draft.organization.healthSystems[index] = healthSystemReducer(
-            state.organization.healthSystems[index],
-            action,
-          );
         break;
       }
 
       case EDIT_HEALTH_SYSTEM_SUCCESS: {
         draft.loaders.editHealthSystem = false;
         draft.errors.editHealthSystem = null;
-
-        const cacheIndex = findIndexById(
-          state.cache.organization.healthSystems,
+        assignDraftItemsById(
+          draft.organization.healthSystems,
+          draft.cache.organization.healthSystems,
           payload.healthSystem.id,
         );
 
-        if (cacheIndex !== -1)
-          draft.cache.organization.healthSystems[cacheIndex] =
-            payload.healthSystem;
         break;
       }
 
@@ -330,20 +314,8 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.deleteHealthSystem = false;
         draft.errors.deleteHealthSystem = null;
 
-        const index = findIndexById(
-          state.organization.healthSystems,
-          payload.id,
-        );
-
-        const cacheIndex = findIndexById(
-          state.cache.organization.healthSystems,
-          payload.id,
-        );
-
-        if (index !== -1) draft.organization.healthSystems.splice(index, 1);
-
-        if (cacheIndex !== -1)
-          draft.cache.organization.healthSystems.splice(cacheIndex, 1);
+        deleteItemById(draft.organization.healthSystems, payload.id);
+        deleteItemById(draft.cache.organization.healthSystems, payload.id);
 
         break;
       }
@@ -365,27 +337,16 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.fetchClinic = false;
         draft.errors.fetchClinic = null;
 
-        const index = findIndexById(
-          state.organization.healthSystems,
+        updateItemById(
+          draft.organization.healthSystems,
           payload.clinic.healthSystemId,
+          item => healthSystemReducer(item, action),
         );
-
-        const cacheIndex = findIndexById(
-          state.cache.organization.healthSystems,
+        updateItemById(
+          draft.cache.organization.healthSystems,
           payload.clinic.healthSystemId,
+          item => healthSystemReducer(item, action),
         );
-
-        if (index !== -1)
-          draft.organization.healthSystems[index] = healthSystemReducer(
-            state.organization.healthSystems[index],
-            action,
-          );
-
-        if (cacheIndex !== -1)
-          draft.cache.organization.healthSystems[index] = healthSystemReducer(
-            state.cache.organization.healthSystems[index],
-            action,
-          );
 
         break;
       }
@@ -406,29 +367,16 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.addClinic = false;
         draft.errors.addClinic = null;
 
-        const index = findIndexById(
-          state.organization.healthSystems,
+        updateItemById(
+          draft.organization.healthSystems,
           payload.clinic.healthSystemId,
+          item => healthSystemReducer(item, action),
         );
-
-        const cacheIndex = findIndexById(
-          state.cache.organization.healthSystems,
+        updateItemById(
+          draft.cache.organization.healthSystems,
           payload.clinic.healthSystemId,
+          item => healthSystemReducer(item, action),
         );
-
-        if (index !== -1)
-          draft.organization.healthSystems[index] = healthSystemReducer(
-            state.organization.healthSystems[index],
-            action,
-          );
-
-        if (cacheIndex !== -1)
-          draft.cache.organization.healthSystems[
-            cacheIndex
-          ] = healthSystemReducer(
-            state.cache.organization.healthSystems[cacheIndex],
-            action,
-          );
 
         break;
       }
@@ -443,16 +391,11 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.editClinic = true;
         draft.errors.editClinic = null;
 
-        const index = findIndexById(
-          state.organization.healthSystems,
+        updateItemById(
+          draft.organization.healthSystems,
           payload.clinic.healthSystemId,
+          item => healthSystemReducer(item, action),
         );
-
-        if (index !== -1)
-          draft.organization.healthSystems[index] = healthSystemReducer(
-            state.organization.healthSystems[index],
-            action,
-          );
 
         break;
       }
@@ -461,18 +404,11 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.editClinic = false;
         draft.errors.editClinic = null;
 
-        const cacheIndex = findIndexById(
-          state.cache.organization.healthSystems,
+        assignDraftItemsById(
+          draft.organization.healthSystems,
+          draft.cache.organization.healthSystems,
           payload.clinic.healthSystemId,
         );
-
-        if (cacheIndex !== -1)
-          draft.cache.organization.healthSystems[
-            cacheIndex
-          ] = healthSystemReducer(
-            state.cache.organization.healthSystems[cacheIndex],
-            action,
-          );
 
         break;
       }
@@ -498,29 +434,16 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.deleteClinic = false;
         draft.errors.deleteClinic = null;
 
-        const index = findIndexById(
-          state.organization.healthSystems,
+        updateItemById(
+          draft.organization.healthSystems,
           payload.healthSystemId,
+          item => healthSystemReducer(item, action),
         );
-
-        const cacheIndex = findIndexById(
-          state.cache.organization.healthSystems,
+        updateItemById(
+          draft.cache.organization.healthSystems,
           payload.healthSystemId,
+          item => healthSystemReducer(item, action),
         );
-
-        if (index !== -1)
-          draft.organization.healthSystems[index] = healthSystemReducer(
-            state.organization.healthSystems[index],
-            action,
-          );
-
-        if (cacheIndex !== -1)
-          draft.cache.organization.healthSystems[
-            cacheIndex
-          ] = healthSystemReducer(
-            state.cache.organization.healthSystems[cacheIndex],
-            action,
-          );
 
         break;
       }
