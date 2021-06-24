@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
@@ -29,12 +29,15 @@ import StyledTextButton from 'components/Button/StyledTextButton';
 import Column from 'components/Column';
 import H1 from 'components/H1';
 import Row from 'components/Row';
+import Text from 'components/Text';
+import Modal from 'components/Modal';
 import FormikInput from 'components/FormikInput';
 import ErrorAlert from 'components/ErrorAlert';
 import withPublicLayout from 'containers/PublicLayout';
 
 import { themeColors } from 'theme';
 import { passwordRegex } from 'global/constants/regex';
+import FormikCheckbox from 'components/FormikCheckbox';
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import allRegistrationsSaga from './sagas';
@@ -71,6 +74,9 @@ const validationSchema = formatMessage =>
     ),
     lastName: Yup.string().required(formatMessage(messages.lastNameRequired)),
     firstName: Yup.string().required(formatMessage(messages.firstNameRequired)),
+    terms: Yup.boolean()
+      .required(formatMessage(messages.termsRequired))
+      .oneOf([true], formatMessage(messages.termsRequired)),
   });
 
 const initialValues = email => ({
@@ -79,6 +85,7 @@ const initialValues = email => ({
   passwordConfirmation: '',
   firstName: '',
   lastName: '',
+  terms: false,
 });
 
 export function RegisterPage({
@@ -88,6 +95,7 @@ export function RegisterPage({
   registerPage: { loading, error },
   location,
 }) {
+  const [showTermsModal, setShowTermsModal] = useState(false);
   useInjectReducer({ key: 'registerPage', reducer });
   useInjectSaga({ key: 'allRegistrationsSaga', saga: allRegistrationsSaga });
   const { email, invitation_token: invitationToken, role } = queryString.parse(
@@ -112,6 +120,14 @@ export function RegisterPage({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
+      <Modal
+        visible={showTermsModal}
+        title={formatMessage(messages.termsAndConditions)}
+        onClose={() => setShowTermsModal(false)}
+        maxWidth={500}
+      >
+        {formatMessage(messages.termsAndConditionsText)}
+      </Modal>
       <Fill justify="center" align="center">
         <Column sm={10} md={8} lg={6} align="start">
           <H1 mb={40} fontSize={23}>
@@ -178,6 +194,19 @@ export function RegisterPage({
                     type="password"
                     {...sharedProps}
                   />
+                  <FormikCheckbox formikKey="terms">
+                    {formatMessage(messages.accept)}
+                    <Text
+                      ml={3}
+                      fontWeight="bold"
+                      color={themeColors.secondary}
+                      onClick={() => {
+                        setShowTermsModal(true);
+                      }}
+                    >
+                      {formatMessage(messages.termsAndConditions)}
+                    </Text>
+                  </FormikCheckbox>
                   <Button
                     type="submit"
                     height={46}
