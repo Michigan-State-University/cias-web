@@ -33,6 +33,7 @@ const ChartTileUI = ({
     name,
     status,
     trendLine,
+    chartData,
   },
   isSelected,
   onClick,
@@ -45,7 +46,15 @@ const ChartTileUI = ({
   const renderChart = useCallback(() => {
     switch (chartType) {
       case ChartTypeDto.PIE_CHART:
-        return <PieChart defaultPattern={defaultPattern} patterns={patterns} />;
+        return (
+          <PieChart
+            defaultPattern={defaultPattern}
+            patterns={patterns}
+            realChartData={chartData}
+            formatMessage={formatMessage}
+            status={status}
+          />
+        );
 
       case ChartTypeDto.NUMERIC_BAR_CHART:
       case ChartTypeDto.PERCENTAGE_BAR_CHART:
@@ -55,13 +64,16 @@ const ChartTileUI = ({
             defaultPattern={defaultPattern}
             patterns={patterns}
             trendLine={trendLine}
+            realChartData={chartData}
+            status={status}
+            formatMessage={formatMessage}
           />
         );
 
       default:
         return null;
     }
-  }, [patterns, defaultPattern, chartType, trendLine]);
+  }, [patterns, defaultPattern, chartType, trendLine, chartData]);
 
   return (
     <HoverableBox

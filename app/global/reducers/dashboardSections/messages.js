@@ -24,6 +24,10 @@ export default defineMessages({
     id: `${scope}.cloneError`,
     defaultMessage: 'Failed to clone chart!',
   },
+  filterError: {
+    id: `${scope}.filterError`,
+    defaultMessage: `Couldn't fetch chart data`,
+  },
   editSectionError: {
     id: `${scope}.editSectionError`,
     defaultMessage:

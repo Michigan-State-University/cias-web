@@ -31,12 +31,15 @@ import {
   FETCH_SECTIONS_SUCCESS,
   COPY_CHART_SUCCESS,
   SELECT_CHART_ACTION,
+  SET_CHARTS_DATA,
+  SET_CHARTS_FILTERS,
 } from './constants';
 
 export const initialState = {
   dashboardSections: [],
   singleDashboardSection: null,
   selectedChart: null,
+  filters: null,
   cache: { dashboardSections: [], singleDashboardSection: null },
   loaders: {
     fetchDashboardSectionLoader: false,
@@ -300,6 +303,32 @@ const dashboardSectionsReducer = (state = initialState, action) =>
           };
         else draft.selectedChart = null;
 
+        break;
+      }
+
+      case SET_CHARTS_DATA: {
+        const { chartsData } = payload;
+        for (let i = 0; i < chartsData.length; i++) {
+          updateItemById(
+            draft.dashboardSections,
+            chartsData[i].dashboardSectionId,
+            item =>
+              dashboardSectionReducer(item, { type, payload: chartsData[i] }),
+          );
+        }
+
+        break;
+      }
+      case SET_CHARTS_FILTERS: {
+        const { filters } = payload;
+        draft.filters = filters;
+        for (let i = 0; i < draft.dashboardSections.length; i++) {
+          updateItemById(
+            draft.dashboardSections,
+            draft.dashboardSections[i].id,
+            item => dashboardSectionReducer(item, action),
+          );
+        }
         break;
       }
     }

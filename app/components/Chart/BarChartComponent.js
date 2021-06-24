@@ -15,6 +15,8 @@ import {
   Line,
   XAxis,
   YAxis,
+  Tooltip,
+  Brush,
 } from 'recharts';
 
 import { generateBarChartTrendData } from './utils';
@@ -30,6 +32,8 @@ const BarChartComponent = ({
   trendLine,
   xAxis,
   yAxis,
+  tooltip,
+  stackDataKey,
   ...chartProps
 }) => {
   const mergedData = useMemo(() => {
@@ -62,15 +66,37 @@ const BarChartComponent = ({
     [fill, trendLine],
   );
 
+  const stackDataKeyColor = useMemo(
+    () =>
+      stackDataKey &&
+      Color(fill)
+        .lighten(0.5)
+        .hex(),
+    [fill, stackDataKey],
+  );
+
   return (
     <StyledResponsiveContainer width="100%" height="100%">
       <ChartComponent data={mergedData}>
         {cartesianGrid && <CartesianGrid {...cartesianGrid} />}
         {xAxis && <XAxis {...xAxis} />}
         {yAxis && <YAxis {...yAxis} />}
-        <Bar dataKey={dataKey} fill={fill} {...chartProps}>
+        <Bar dataKey={dataKey} fill={fill} stackId="stack-1" {...chartProps}>
           {children}
         </Bar>
+        {stackDataKey && (
+          <Bar
+            dataKey={stackDataKey}
+            fill={stackDataKeyColor}
+            stackId="stack-1"
+            {...chartProps}
+          >
+            {children}
+          </Bar>
+        )}
+        {data?.length > 3 && (
+          <Brush startIndex={0} endIndex={2} dataKey={xAxis?.dataKey} />
+        )}
         {trendLine && (
           <Line
             animationDuration={250}
@@ -80,6 +106,7 @@ const BarChartComponent = ({
             type="monotone"
           />
         )}
+        {tooltip && <Tooltip cursor={false} {...tooltip} />}
       </ChartComponent>
     </StyledResponsiveContainer>
   );
@@ -94,6 +121,8 @@ BarChartComponent.propTypes = {
   trendLine: PropTypes.bool,
   xAxis: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   yAxis: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  tooltip: PropTypes.object,
+  stackDataKey: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default memo(BarChartComponent);
