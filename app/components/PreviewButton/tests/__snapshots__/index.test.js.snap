@@ -17,8 +17,19 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
   border-radius: 5px;
   height: 35px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   padding-right: 11px;
   padding-left: 11px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c0 {
@@ -65,6 +76,7 @@ exports[`<PreviewButton /> Should render and match the snapshot 1`] = `
   <button
     class="c2"
     color="secondary"
+    display="flex"
     height="35"
     radius="100px"
   >
@@ -99,8 +111,19 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
   margin-left: 5px;
   border-radius: 5px;
   height: 35px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   padding-right: 11px;
   padding-left: 11px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .c0 {
@@ -148,6 +171,7 @@ exports[`<PreviewButton /> Should render and match the snapshot of disabled butt
     class="c2"
     color="secondary"
     disabled=""
+    display="flex"
     height="35"
     radius="100px"
   >
