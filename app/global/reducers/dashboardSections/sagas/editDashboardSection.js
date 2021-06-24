@@ -33,10 +33,12 @@ export function* editDashboardSection({
       editDashboardSectionSuccess(updatedDashboardSection, dashboardSectionId),
     );
   } catch (error) {
+    const objectKeys = getObjectKeysWithoutIds(dashboardSection);
     yield call(
       toast.error,
       formatMessage(messages.editSectionError, {
-        properties: JSON.stringify(getObjectKeysWithoutIds(dashboardSection)),
+        properties: objectKeys.join(', '),
+        propertiesCount: objectKeys.length,
       }),
     );
     yield put(editDashboardSectionError(error));

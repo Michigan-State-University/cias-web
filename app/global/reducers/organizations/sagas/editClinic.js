@@ -27,10 +27,12 @@ export function* editClinic({ payload: { clinic } }) {
 
     yield put(editClinicSuccess(updatedClinic));
   } catch (error) {
+    const objectKeys = getObjectKeysWithoutIds(clinic);
     yield call(
       toast.error,
       formatMessage(messages.editEntityError, {
-        properties: JSON.stringify(getObjectKeysWithoutIds(clinic)),
+        properties: objectKeys.join(', '),
+        propertiesCount: objectKeys.length,
       }),
     );
     yield put(editClinicFailure(error));

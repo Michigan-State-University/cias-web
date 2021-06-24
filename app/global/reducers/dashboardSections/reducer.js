@@ -1,7 +1,7 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { updateItemById } from 'utils/reduxUtils';
+import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
 
 import { dashboardSectionReducer } from './dashboardSectionReducer';
 import {
@@ -123,10 +123,10 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         draft.loaders.editDashboardSectionLoader = false;
         draft.errors.editDashboardSectionError = null;
 
-        updateItemById(
+        assignDraftItemsById(
+          draft.dashboardSections,
           draft.cache.dashboardSections,
           payload.dashboardSectionId,
-          item => dashboardSectionReducer(item, action),
         );
         break;
       }

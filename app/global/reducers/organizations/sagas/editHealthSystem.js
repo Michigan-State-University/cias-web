@@ -25,10 +25,12 @@ export function* editHealthSystem({ payload: { healthSystem } }) {
 
     yield put(editHealthSystemSuccess(updatedHealthSystem));
   } catch (error) {
+    const objectKeys = getObjectKeysWithoutIds(healthSystem);
     yield call(
       toast.error,
       formatMessage(messages.editEntityError, {
-        properties: JSON.stringify(getObjectKeysWithoutIds(healthSystem)),
+        properties: objectKeys.join(', '),
+        propertiesCount: objectKeys.length,
       }),
     );
     yield put(editHealthSystemFailure(error));

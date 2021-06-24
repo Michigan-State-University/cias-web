@@ -48,7 +48,9 @@ export default defineMessages({
   },
   editEntityError: {
     id: `${scope}.editEntityError`,
-    defaultMessage:
-      'Failed to edit! Problem in those properties: {properties}.',
+    defaultMessage: `Failed to edit! Check {properties} {propertiesCount, plural,
+       one {property}
+       other {properties}
+     }.`,
   },
 });

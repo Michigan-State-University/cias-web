@@ -25,10 +25,12 @@ export function* editOrganization({ payload: { organization } }) {
 
     yield put(editOrganizationSuccess(updatedOrganization));
   } catch (error) {
+    const objectKeys = getObjectKeysWithoutIds(organization);
     yield call(
       toast.error,
       formatMessage(messages.editEntityError, {
-        properties: JSON.stringify(getObjectKeysWithoutIds(organization)),
+        properties: objectKeys.join(', '),
+        propertiesCount: objectKeys.length,
       }),
     );
     yield put(editOrganizationFailure(error));
