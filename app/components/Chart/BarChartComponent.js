@@ -16,6 +16,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Brush,
 } from 'recharts';
 
 import { generateBarChartTrendData } from './utils';
@@ -92,6 +93,9 @@ const BarChartComponent = ({
           >
             {children}
           </Bar>
+        )}
+        {data?.length > 3 && (
+          <Brush startIndex={0} endIndex={2} dataKey={xAxis?.dataKey} />
         )}
         {trendLine && (
           <Line

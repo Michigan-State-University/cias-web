@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { ChartStatus, ChartTypeDto } from 'global/reducers/dashboardSections';
 import { HUNDRED_PERCENT } from 'utils/mathUtils';
+import maxBy from 'lodash/maxBy';
 
 import Chart, { ChartType } from 'components/Chart';
 import Box from 'components/Box';
@@ -38,6 +39,17 @@ const BarChart = ({
       return realChartData;
     }
   }, [chartType, realChartData, status]);
+
+  const maxNumericValue = useMemo(() => {
+    if (realChartData && chartType === ChartTypeDto.NUMERIC_BAR_CHART) {
+      const maxPopulationData = maxBy(
+        realChartData,
+        ({ value, notMatchedValue }) => value + notMatchedValue,
+      );
+      return maxPopulationData.value + maxPopulationData.notMatchedValue;
+    }
+    return undefined;
+  }, [realChartData, chartType]);
 
   const tickFormatter = value => {
     switch (chartType) {
@@ -87,16 +99,22 @@ const BarChart = ({
       return [0, HUNDRED_PERCENT];
     }
     if (status === ChartStatus.PUBLISHED) {
-      return undefined;
+      return [0, maxNumericValue];
     }
     return [0, MAX_NUMERIC_VALUE];
-  }, [chartType, status]);
+  }, [chartType, status, maxNumericValue]);
 
-  const xAxisProps = useMemo(() => ({ dataKey: X_AXIS_KEY, interval: 0 }), []);
+  const xAxisProps = useMemo(
+    () => ({
+      dataKey: X_AXIS_KEY,
+      interval: 0,
+    }),
+    [],
+  );
 
   const yAxisProps = useMemo(
     () => ({ tickFormatter, domain, allowDecimals: false }),
-    [chartType],
+    [chartType, domain],
   );
 
   const cartesianGridProps = useMemo(
