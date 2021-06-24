@@ -23,6 +23,8 @@ const PreviewButton = ({ previewDisabled, text, handleClick }) => (
       borderRadius={5}
       px={11}
       mx={5}
+      display="flex"
+      align="center"
     >
       <Icon
         src={eye}
