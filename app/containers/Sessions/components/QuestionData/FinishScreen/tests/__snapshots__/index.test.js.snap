@@ -15,7 +15,7 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
       <div
         currentitem="false"
         data-for="tooltip-finish-screen"
-        data-tip="true"
+        data-tip=""
       >
         <button
           class="StyledButton-d2s0gt-0 eUaTKs"

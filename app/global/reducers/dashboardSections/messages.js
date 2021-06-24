@@ -28,4 +28,9 @@ export default defineMessages({
     id: `${scope}.filterError`,
     defaultMessage: `Couldn't fetch chart data`,
   },
+  editSectionError: {
+    id: `${scope}.editSectionError`,
+    defaultMessage:
+      'Failed to edit section! Problem in those properties: {properties}.',
+  },
 });

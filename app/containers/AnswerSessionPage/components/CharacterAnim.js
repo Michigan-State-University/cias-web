@@ -5,6 +5,7 @@ import get from 'lodash/get';
 import Lottie from 'react-lottie';
 import { useDispatch } from 'react-redux';
 import Draggable from 'react-draggable';
+import { useIntl } from 'react-intl';
 
 import useFeedbackHelper from 'utils/animationsHelpers/useFeedbackHelper';
 import usePauseHelper from 'utils/animationsHelpers/usePauseHelper';
@@ -27,6 +28,7 @@ import {
 import { setCurrentBlockIndex } from 'containers/AnswerSessionPage/actions';
 
 import { NarratorContainer } from './styled';
+import messages from '../messages';
 
 const UPDATE = 'UPDATE';
 
@@ -61,6 +63,7 @@ const CharacterAnim = ({
   feedbackScreenSettings: { sliderRef },
   audioInstance,
 }) => {
+  const { formatMessage } = useIntl();
   const [state, dispatch] = useReducer(reducer, initialState);
   const dispatchUpdate = newState =>
     dispatch({
@@ -343,6 +346,7 @@ const CharacterAnim = ({
             style={lottieStyles}
             isClickToPauseDisabled
             isStopped={isStopped}
+            ariaLabel={formatMessage(messages.narratorAlt)}
           />
         </Draggable>
       )}

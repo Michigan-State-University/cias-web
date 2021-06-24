@@ -6,6 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
 
 import Box from 'components/Box';
 import Img from 'components/Img';
@@ -21,26 +22,39 @@ const Tooltip = ({
   icon,
   content,
   ...restProps
-}) => (
-  <Box display="flex" {...restProps}>
-    {icon && <Img src={icon} alt="?" data-tip data-for={id} />}
-    {children && (
-      <div data-tip data-for={id}>
-        {children}
-      </div>
-    )}
-    <StyledTooltip
-      visible={visible}
-      id={id}
-      type="light"
-      effect="solid"
-      multiline
-    >
-      <Text>{text}</Text>
-      {content}
-    </StyledTooltip>
-  </Box>
-);
+}) => {
+  const getContent = dataTip => {
+    // Needed for dynamic content updates, like SVG etc.
+    ReactTooltip.rebuild();
+
+    if (dataTip) return <Text>{dataTip ?? text}</Text>;
+    return (
+      <>
+        <Text>{text}</Text>
+        {content}
+      </>
+    );
+  };
+
+  return (
+    <Box display="flex" {...restProps}>
+      {icon && <Img src={icon} alt="?" data-tip="" data-for={id} />}
+      {children && (
+        <div data-tip="" data-for={id}>
+          {children}
+        </div>
+      )}
+      <StyledTooltip
+        visible={visible}
+        id={id}
+        type="light"
+        effect="solid"
+        multiline
+        getContent={getContent}
+      />
+    </Box>
+  );
+};
 
 Tooltip.propTypes = {
   id: PropTypes.string.isRequired,

@@ -1,12 +1,13 @@
 import produce from 'immer';
 
-import { findIndexById } from 'utils/arrayUtils';
+import { deleteItemById, updateItemById } from 'utils/reduxUtils';
 import { clinicReducer } from './clinicReducer';
 
 import {
   ADD_CLINIC_SUCCESS,
   DELETE_CLINIC_SUCCESS,
   EDIT_CLINIC_REQUEST,
+  EDIT_CLINIC_SUCCESS,
   EDIT_HEALTH_SYSTEM_REQUEST,
   FETCH_CLINIC_SUCCESS,
   FETCH_HEALTH_SYSTEM_SUCCESS,
@@ -31,22 +32,20 @@ const healthSystemReducer = (state = null, action) =>
 
       case FETCH_CLINIC_SUCCESS:
       case EDIT_CLINIC_REQUEST: {
-        const index = findIndexById(state.healthClinics, payload.clinic.id);
-
-        if (index !== -1)
-          draft.healthClinics[index] = clinicReducer(
-            state.healthClinics[index],
-            action,
-          );
+        updateItemById(draft.healthClinics, payload.clinic.id, item =>
+          clinicReducer(item, action),
+        );
 
         break;
       }
 
+      case EDIT_CLINIC_SUCCESS: {
+        updateItemById(draft.healthClinics, payload.clinic.id, payload.clinic);
+        break;
+      }
+
       case DELETE_CLINIC_SUCCESS: {
-        const index = findIndexById(state.healthClinics, payload.id);
-
-        if (index !== -1) draft.healthClinics.splice(index, 1);
-
+        deleteItemById(draft.healthClinics, payload.id);
         break;
       }
     }

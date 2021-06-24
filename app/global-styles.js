@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
-import { themeColors, colors, fontSizes, lineHeights } from 'theme';
-
 import 'fonts.css';
+
+import { themeColors, colors, fontSizes, lineHeights, borders } from 'theme';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -39,6 +39,40 @@ const GlobalStyle = createGlobalStyle`
   label {
     line-height: 1.5em;
     margin: 0;
+  }
+
+  .Toastify__ {
+    &toast {
+      border: 1px solid transparent;
+      border-radius: ${borders.borderRadius};
+      color: ${colors.black};
+
+      &--info {
+        background-color: ${colors.blue5};
+        border-color: ${colors.blue};
+      }
+
+      &--success {
+        background-color: ${colors.green10};
+        border-color: ${colors.green};
+      }
+
+      &--warning {
+        background-color: ${colors.orange5};
+        border-color: ${colors.orange};
+      }
+
+      &--error {
+        background-color: ${colors.red5};
+        border-color: ${colors.red};
+      }
+    }
+
+
+    &close-button {
+      color: ${colors.black60};
+      align-self: center;
+    }
   }
 `;
 

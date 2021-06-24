@@ -39,7 +39,7 @@ exports[`<ApprovableInput /> Should render and match the snapshot as date input 
 }
 
 .c2 .schedule-date-picker .react-datepicker__day:hover {
-  color: #000000;
+  color: #0E0E0E;
   background-color: #F8FBFF;
 }
 

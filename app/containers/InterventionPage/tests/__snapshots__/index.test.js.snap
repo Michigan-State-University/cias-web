@@ -160,7 +160,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
             >
               <button
                 class="styled__StatusLabel-ve6hnx-1 jWQWjX"
-                color="#000000"
+                color="#0E0E0E"
                 value="archived"
               >
                 <p
@@ -239,7 +239,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
           href="/interventions/undefined/"
         >
           <div
-            class="styled__TileContainer-agddns-0 igcEXR"
+            class="styled__TileContainer-agddns-0 ezDoDg"
           >
             <div
               class="styled__Heading-agddns-2 bzFUQe"
@@ -285,7 +285,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               <div
                 currentitem="false"
                 data-for="undefined-tile-tooltip"
-                data-tip="true"
+                data-tip=""
               >
                 <div
                   class="styled__TileInfo-agddns-4 dElPvb"

@@ -6,7 +6,7 @@ import Row from 'components/Row';
 
 import { StyledEllipsisText } from './styled';
 
-const EllipsisText = ({ text, ...props }) => {
+const EllipsisText = ({ text, dataFor, ...props }) => {
   const ref = useRef(null);
   const [allowTooltip, setAllowTooltip] = useState(false);
 
@@ -23,7 +23,12 @@ const EllipsisText = ({ text, ...props }) => {
     <Row>
       {allowTooltip ? (
         <Tooltip text={text} id={text ?? ''} width="100%" display="inline">
-          <StyledEllipsisText ref={ref} {...props}>
+          <StyledEllipsisText
+            ref={ref}
+            data-tip={text}
+            data-for={dataFor ?? text ?? ''}
+            {...props}
+          >
             {text}
           </StyledEllipsisText>
         </Tooltip>
@@ -38,6 +43,7 @@ const EllipsisText = ({ text, ...props }) => {
 
 EllipsisText.propTypes = {
   text: PropTypes.string,
+  dataFor: PropTypes.string,
 };
 
 export default EllipsisText;

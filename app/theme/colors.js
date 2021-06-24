@@ -15,7 +15,8 @@ const colors = {
   vividPink: '#FF5FC0',
   blueHaze: '#CED3E4',
   greyishBlue: '#B0BAC9',
-  black: '#000000',
+  black: '#0E0E0E',
+  black60: '#6E6E6E',
   flamingo: '#EF462F',
   botticelli: '#D5DEEA',
   heather: '#BDC7D6',
@@ -52,6 +53,14 @@ const colors = {
   vermilion: '#D2371D',
   aliceBlue: '#F1F4F9',
   electricPurple: '#B727EA',
+  red: '#BE4745',
+  red5: '#FCF6F6',
+  blue: '#3F88C5',
+  blue5: '#F5F9FC',
+  green: '#2A9D8F',
+  green10: '#EAF5F4',
+  orange: '#EB7900',
+  orange5: '#FEF8F2',
 };
 
 const themeColors = {

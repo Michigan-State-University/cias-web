@@ -24,9 +24,7 @@ export function* addHealthSystem({ payload: { name, organizationId } }) {
         healthSystem: {
           name:
             name ??
-            `New Health System ${organization.healthSystems.length} of ${
-              organization.name
-            }`,
+            `New Health System ${organization.healthSystems.length + 1}`,
           organizationId,
         },
       }),

@@ -22,11 +22,7 @@ export function* addClinic({ payload: { healthSystemId, name } }) {
       requestURL,
       objectKeysToSnakeCase({
         healthClinic: {
-          name:
-            name ??
-            `New Clinic ${healthSystem.healthClinics.length} of ${
-              healthSystem.name
-            }`,
+          name: name ?? `New Clinic ${healthSystem.healthClinics.length + 1}`,
           healthSystemId,
         },
       }),

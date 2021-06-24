@@ -887,7 +887,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
             <div
               currentitem="false"
               data-for="tooltip-1"
-              data-tip="true"
+              data-tip=""
             >
               <div
                 class="c17"
