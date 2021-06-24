@@ -10,15 +10,17 @@ import * as PropTypes from 'prop-types';
 import * as Styled from './styled';
 
 const Icon = ({ src, className, fill, stroke, alt, onClick, ...restProps }) => (
-  <Styled.SVG
-    src={src}
-    className={className}
-    fill={fill}
-    stroke={stroke}
-    alt={alt}
-    onClick={onClick}
-    {...restProps}
-  />
+  <Styled.SvgWrapper>
+    <Styled.SVG
+      src={src}
+      className={className}
+      fill={fill}
+      stroke={stroke}
+      alt={alt}
+      onClick={onClick}
+      {...restProps}
+    />
+  </Styled.SvgWrapper>
 );
 
 Icon.propTypes = {
