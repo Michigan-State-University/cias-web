@@ -53,7 +53,11 @@ const TopPanelComponent = ({
         </Col>
 
         <Col xs={4}>
-          <TextButton loading={isDeleting} onClick={onDelete}>
+          <TextButton
+            buttonProps={{ width: '100%' }}
+            loading={isDeleting}
+            onClick={onDelete}
+          >
             <Row align="center">
               <Icon src={BinIcon} fill={themeColors.warning} mr={8} />
               <Text fontWeight="bold" color={themeColors.warning}>
