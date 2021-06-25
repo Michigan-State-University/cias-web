@@ -7,7 +7,7 @@ import { makeSelectCurrentBlockIndex } from 'containers/AnswerSessionPage/select
 import QuestionTranscriptUI from './QuestionTranscriptUI';
 import { filterAllowedBlocks } from './utils';
 
-const QuestionTranscript = ({ question }) => {
+const QuestionTranscript = ({ question, language }) => {
   // selectors
   const currentBlockIndex = useSelector(makeSelectCurrentBlockIndex());
 
@@ -38,12 +38,14 @@ const QuestionTranscript = ({ question }) => {
     <QuestionTranscriptUI
       blocks={blocks}
       currentBlockIndex={lastVisibleIndex}
+      language={language}
     />
   );
 };
 
 QuestionTranscript.propTypes = {
   question: PropTypes.object,
+  language: PropTypes.string,
 };
 
 export default memo(QuestionTranscript);

@@ -13,7 +13,7 @@ import { DEFAULT_LOCALE } from 'i18n';
 
 import { createTestStore } from 'utils/testUtils/storeUtils';
 
-import { AnswerSessionPageWithIntl as AnswerSessionPage } from '../index';
+import { AnswerSessionPage } from '../index';
 
 describe('<AnswerSessionPage />', () => {
   const mockedFunctions = {

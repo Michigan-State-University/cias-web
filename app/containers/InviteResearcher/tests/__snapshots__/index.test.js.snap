@@ -9,8 +9,11 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
     width="100%"
   >
     <div
+      aria-describedby="modal-description"
+      aria-labelledby="modal-title"
       class="Box-sc-1vhutan-0 styled__StyledBox-sc-253ice-0 irgbRm CZPtF"
       overflow="auto"
+      role="dialog"
     >
       <div
         class="Column-sc-4zswzq-0 ekpwZH"
@@ -20,6 +23,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
         >
           <h1
             class="H1-sc-1k7m23t-0 ewNLte"
+            id="modal-title"
           >
             Invite researcher
           </h1>
@@ -37,6 +41,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
       </div>
       <div
         class="Box-sc-1vhutan-0 bUssfU"
+        id="modal-description"
       >
         <div
           class="Column-sc-4zswzq-0 ekpwZH"
@@ -137,8 +142,11 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
     width="100%"
   >
     <div
+      aria-describedby="modal-description"
+      aria-labelledby="modal-title"
       class="Box-sc-1vhutan-0 styled__StyledBox-sc-253ice-0 irgbRm CZPtF"
       overflow="auto"
+      role="dialog"
     >
       <div
         class="Column-sc-4zswzq-0 ekpwZH"
@@ -148,6 +156,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
         >
           <h1
             class="H1-sc-1k7m23t-0 ewNLte"
+            id="modal-title"
           >
             Invite researcher
           </h1>
@@ -165,6 +174,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
       </div>
       <div
         class="Box-sc-1vhutan-0 bUssfU"
+        id="modal-description"
       >
         <div
           class="Column-sc-4zswzq-0 ekpwZH"
@@ -258,8 +268,11 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
     width="100%"
   >
     <div
+      aria-describedby="modal-description"
+      aria-labelledby="modal-title"
       class="Box-sc-1vhutan-0 styled__StyledBox-sc-253ice-0 irgbRm CZPtF"
       overflow="auto"
+      role="dialog"
     >
       <div
         class="Column-sc-4zswzq-0 ekpwZH"
@@ -269,6 +282,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
         >
           <h1
             class="H1-sc-1k7m23t-0 ewNLte"
+            id="modal-title"
           >
             Invite researcher
           </h1>
@@ -286,6 +300,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
       </div>
       <div
         class="Box-sc-1vhutan-0 bUssfU"
+        id="modal-description"
       >
         <div
           class="Column-sc-4zswzq-0 ekpwZH"

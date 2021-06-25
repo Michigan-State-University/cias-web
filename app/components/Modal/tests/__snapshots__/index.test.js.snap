@@ -162,8 +162,11 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
     width="100%"
   >
     <div
+      aria-describedby="modal-description"
+      aria-labelledby="modal-title"
       class="c1 c2"
       overflow="auto"
+      role="dialog"
     >
       <div
         class="c3"
@@ -173,6 +176,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
         >
           <h1
             class="c5"
+            id="modal-title"
           >
             Test
           </h1>
@@ -190,6 +194,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
       </div>
       <div
         class="c7"
+        id="modal-description"
       />
     </div>
   </div>

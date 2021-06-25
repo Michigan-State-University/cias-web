@@ -441,8 +441,11 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
     width="100%"
   >
     <div
+      aria-describedby="modal-description"
+      aria-labelledby="modal-title"
       class="c1 c2"
       overflow="auto"
+      role="dialog"
     >
       <div
         class="c3"
@@ -452,6 +455,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
         >
           <h1
             class="c5"
+            id="modal-title"
           >
             Select a place to paste
           </h1>
@@ -469,6 +473,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
       </div>
       <div
         class="c7"
+        id="modal-description"
       >
         <div
           class="c8"
