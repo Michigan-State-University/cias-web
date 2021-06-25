@@ -182,6 +182,24 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             />
           </div>
         </div>
+        <div>
+          <div
+            class="Box-sc-1vhutan-0 ilPBiX"
+            display="flex"
+          >
+            <img
+              src="IMAGE_MOCK"
+            />
+            Accept
+            <p
+              class="Text-e4p0w3-0 hhhvNC"
+              color="#B727EA"
+              font-weight="bold"
+            >
+              Terms and conditions
+            </p>
+          </div>
+        </div>
         <button
           class="StyledButton-d2s0gt-0 hIkQqV"
           color="primary"
@@ -376,6 +394,24 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               value=""
               width="100%"
             />
+          </div>
+        </div>
+        <div>
+          <div
+            class="Box-sc-1vhutan-0 ilPBiX"
+            display="flex"
+          >
+            <img
+              src="IMAGE_MOCK"
+            />
+            Accept
+            <p
+              class="Text-e4p0w3-0 hhhvNC"
+              color="#B727EA"
+              font-weight="bold"
+            >
+              Terms and conditions
+            </p>
           </div>
         </div>
         <button
