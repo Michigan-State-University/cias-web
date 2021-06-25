@@ -127,7 +127,8 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             </a>
           </div>
           <div
-            class="Box-sc-1vhutan-0 jtfWfT"
+            class="Column-sc-4zswzq-0 iGQiEb"
+            overflow="hidden"
             width="100%"
           >
             <p
@@ -145,11 +146,16 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
               + Add Organization
             </button>
             <div
-              class="styled__StyledSpinner-sc-129uixn-0 bIPmqf"
-              color="#B727EA"
-              size="30"
-              width="6"
-            />
+              class="Box-sc-1vhutan-0 VMKHE"
+              overflow="scroll"
+            >
+              <div
+                class="styled__StyledSpinner-sc-129uixn-0 bIPmqf"
+                color="#B727EA"
+                size="30"
+                width="6"
+              />
+            </div>
           </div>
         </div>
       </div>
