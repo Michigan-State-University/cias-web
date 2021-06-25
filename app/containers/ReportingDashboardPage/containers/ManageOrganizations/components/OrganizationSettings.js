@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { memo, useCallback, useContext } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { useIntl } from 'react-intl';
 
@@ -12,6 +12,8 @@ import {
   inviteAdminRequest,
 } from 'global/reducers/organizations';
 
+import { makeSelectUserRoles } from 'global/reducers/auth';
+import { RolePermissions } from 'models/User/RolePermissions';
 import { Roles } from 'models/User/UserRoles';
 
 import { Col, Row } from 'components/ReactGridSystem';
@@ -26,7 +28,12 @@ const OrganizationSettings = ({
   editOrganization,
   inviteAdmin,
 }) => {
+  // selectors
+  const userRoles = useSelector(makeSelectUserRoles());
+
   const { formatMessage } = useIntl();
+
+  const { canDeleteOrganization } = RolePermissions(userRoles);
 
   const {
     organization,
@@ -52,6 +59,7 @@ const OrganizationSettings = ({
       <Row>
         <Col>
           <TopPanelComponent
+            canDelete={canDeleteOrganization}
             header={formatMessage(messages.organizationHeader)}
             icon={OrganizationIcon}
             isDeleting={deleteOrganizationLoader}

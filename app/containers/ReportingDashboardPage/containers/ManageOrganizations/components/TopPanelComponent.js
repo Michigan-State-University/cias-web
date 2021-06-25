@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { memo } from 'react';
+import React, { memo, useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
 import { borders, colors, themeColors } from 'theme';
@@ -19,6 +19,7 @@ import Comment from 'components/Text/Comment';
 import messages from '../../../messages';
 
 const TopPanelComponent = ({
+  canDelete,
   header,
   icon,
   isDeleting,
@@ -30,9 +31,12 @@ const TopPanelComponent = ({
 }) => {
   const { formatMessage } = useIntl();
 
-  const onBlur = newName => {
-    onEdit({ name: newName });
-  };
+  const onBlur = useCallback(
+    newName => {
+      onEdit({ name: newName });
+    },
+    [onEdit],
+  );
 
   return (
     <FullWidthContainer>
@@ -56,6 +60,7 @@ const TopPanelComponent = ({
           <TextButton
             buttonProps={{ width: '100%' }}
             loading={isDeleting}
+            disabled={!canDelete}
             onClick={onDelete}
           >
             <Row align="center">
@@ -91,6 +96,7 @@ const TopPanelComponent = ({
 };
 
 TopPanelComponent.propTypes = {
+  canDelete: PropTypes.bool,
   header: PropTypes.string,
   icon: PropTypes.string,
   isDeleting: PropTypes.bool,
@@ -99,6 +105,10 @@ TopPanelComponent.propTypes = {
   onDelete: PropTypes.func,
   onEdit: PropTypes.func,
   placeholder: PropTypes.string,
+};
+
+TopPanelComponent.defaultProps = {
+  canDelete: true,
 };
 
 export default memo(TopPanelComponent);
