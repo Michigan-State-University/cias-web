@@ -190,14 +190,18 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             <img
               src="IMAGE_MOCK"
             />
-            Accept
-            <p
-              class="Text-e4p0w3-0 hhhvNC"
-              color="#B727EA"
-              font-weight="bold"
+            <label
+              for="terms"
             >
-              Terms and conditions
-            </p>
+              Accept
+              <p
+                class="Text-e4p0w3-0 hhhvNC"
+                color="#B727EA"
+                font-weight="bold"
+              >
+                Terms and conditions
+              </p>
+            </label>
           </div>
         </div>
         <button
@@ -404,14 +408,18 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             <img
               src="IMAGE_MOCK"
             />
-            Accept
-            <p
-              class="Text-e4p0w3-0 hhhvNC"
-              color="#B727EA"
-              font-weight="bold"
+            <label
+              for="terms"
             >
-              Terms and conditions
-            </p>
+              Accept
+              <p
+                class="Text-e4p0w3-0 hhhvNC"
+                color="#B727EA"
+                font-weight="bold"
+              >
+                Terms and conditions
+              </p>
+            </label>
           </div>
         </div>
         <button
