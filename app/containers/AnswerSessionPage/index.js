@@ -8,7 +8,7 @@ import React, { memo, useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
-import { injectIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { toast } from 'react-toastify';
@@ -146,7 +146,6 @@ const QUERY = {
 
 export function AnswerSessionPage({
   match: { params },
-  intl: { formatMessage },
   saveSelectedAnswer,
   submitAnswerRequest,
   onStartSession,
@@ -177,6 +176,7 @@ export function AnswerSessionPage({
   clearErrors,
   toggleTextTranscript,
 }) {
+  const { formatMessage } = useIntl();
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
   useInjectSaga({ key: 'logInGuest', saga: logInGuestSaga });
@@ -205,7 +205,7 @@ export function AnswerSessionPage({
     return {};
   }, [containerQueryParams, isDesktop]);
 
-  const { logoUrl, imageAlt } = userSession ?? {};
+  const { logoUrl, imageAlt, languageCode } = userSession ?? {};
 
   const isNewUserSession = useMemo(() => {
     const { lastAnswerAt } = userSession ?? {};
@@ -265,7 +265,10 @@ export function AnswerSessionPage({
   const renderQuestionTranscript = isRightSide => {
     const renderTranscriptComponent = ({ maxWidth, height }) => (
       <Box mt={30} maxWidth={maxWidth} height={height}>
-        <QuestionTranscript question={currentQuestion} />
+        <QuestionTranscript
+          question={currentQuestion}
+          language={languageCode}
+        />
       </Box>
     );
 
@@ -343,9 +346,11 @@ export function AnswerSessionPage({
     return (
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
-          <CommonLayout currentQuestion={currentQuestion} />
+          <Box lang={languageCode} width="100%">
+            <CommonLayout currentQuestion={currentQuestion} />
 
-          <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
+            <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
+          </Box>
 
           {required && (
             <Text color={colors.sonicSilver} mt={40} ml={20}>
@@ -517,7 +522,6 @@ export function AnswerSessionPage({
 
 AnswerSessionPage.propTypes = {
   match: PropTypes.object,
-  intl: PropTypes.object,
   AnswerSessionPage: PropTypes.object,
   saveSelectedAnswer: PropTypes.func,
   submitAnswerRequest: PropTypes.func,
@@ -558,9 +562,7 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export const AnswerSessionPageWithIntl = injectIntl(AnswerSessionPage);
-
 export default compose(
   withConnect,
   memo,
-)(AnswerSessionPageWithIntl);
+)(AnswerSessionPage);

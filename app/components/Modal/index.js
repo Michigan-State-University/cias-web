@@ -80,6 +80,9 @@ const Modal = ({
           justify="center"
         >
           <StyledBox
+            role="dialog"
+            aria-labelledby="modal-title"
+            aria-describedby="modal-description"
             ref={modalContent}
             minWidth={400}
             minHeight={200}
@@ -93,7 +96,7 @@ const Modal = ({
           >
             <Column border="1px solid red">
               <Row align="center" justify="between" {...titleProps}>
-                <H1>{title}</H1>
+                <H1 id="modal-title">{title}</H1>
                 <ActionIcon
                   data-cy="modal-close-button"
                   position="relative"
@@ -104,7 +107,7 @@ const Modal = ({
                 />
               </Row>
             </Column>
-            <Box borderRadius="0px" mt={10}>
+            <Box borderRadius="0px" mt={10} id="modal-description">
               {children}
             </Box>
           </StyledBox>

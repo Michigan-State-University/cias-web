@@ -86,4 +86,20 @@ export default defineMessages({
     defaultMessage:
       'Are you sure you want to delete this session? It will no longer be possible to recover it later.',
   },
+  interventionLanguage: {
+    id: `${scope}.interventionLanguage`,
+    defaultMessage: '<b>Language</b>: {language}',
+  },
+  interventionSettingsIconTooltip: {
+    id: `${scope}.interventionSettingsIconTooltip`,
+    defaultMessage: 'Open Intervention Settings',
+  },
+  interventionSettingsModalTitle: {
+    id: `${scope}.interventionSettingsModalTitle`,
+    defaultMessage: 'Intervention Settings',
+  },
+  interventionSettingsLanguageLabel: {
+    id: `${scope}.interventionSettingsLanguageLabel`,
+    defaultMessage: 'Intervention Language:',
+  },
 });
