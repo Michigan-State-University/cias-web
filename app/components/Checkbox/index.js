@@ -14,7 +14,7 @@ import checkboxChecked from 'assets/svg/checkbox-checked.svg';
 
 import Icon from 'components/Icon';
 
-const Checkbox = ({ checked, ...restProps }) => {
+const Checkbox = ({ checked, stroke, ...restProps }) => {
   const icon = checked ? checkboxChecked : checkbox;
 
   return (
@@ -23,6 +23,7 @@ const Checkbox = ({ checked, ...restProps }) => {
       role="checkbox"
       aria-checked={checked}
       fill={themeColors.secondary}
+      stroke={stroke || themeColors.secondary}
       src={icon}
       $clickable
     />
@@ -31,6 +32,7 @@ const Checkbox = ({ checked, ...restProps }) => {
 
 Checkbox.propTypes = {
   checked: PropTypes.bool,
+  stroke: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 
 export default Checkbox;
