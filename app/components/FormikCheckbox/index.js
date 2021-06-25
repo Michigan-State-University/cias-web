@@ -24,6 +24,7 @@ function FormikCheckbox({ formikKey, children }) {
     <div>
       <Box mb={5} display="flex" align="center">
         <Checkbox
+          id={formikKey}
           onClick={() => {
             setValue(!value);
             setTouched(true);
@@ -32,7 +33,7 @@ function FormikCheckbox({ formikKey, children }) {
           checked={value}
           stroke={hasError && themeColors.warning}
         />
-        {children}
+        <label htmlFor={formikKey}>{children}</label>
       </Box>
       {hasError && <ErrorText>{error}</ErrorText>}
     </div>
