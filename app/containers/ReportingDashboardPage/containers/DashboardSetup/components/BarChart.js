@@ -46,6 +46,8 @@ const BarChart = ({
         realChartData,
         ({ value, notMatchedValue }) => value + notMatchedValue,
       );
+      if (!maxPopulationData) return undefined;
+
       return maxPopulationData.value + maxPopulationData.notMatchedValue;
     }
     return undefined;
