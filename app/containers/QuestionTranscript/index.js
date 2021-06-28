@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { makeSelectCurrentBlockIndex } from 'containers/AnswerSessionPage/selectors';
 
 import QuestionTranscriptUI from './QuestionTranscriptUI';
-import { filterAllowedBlocks } from './utils';
+import { mapBlockToTextWithRealIndex } from './utils';
 
 const QuestionTranscript = ({ question, language }) => {
   // selectors
@@ -17,26 +17,21 @@ const QuestionTranscript = ({ question, language }) => {
     narrator: { blocks: allBlocks },
   } = question;
 
-  const blocks = useMemo(() => {
-    const blocksWithRealIndexMapped = allBlocks.map((block, index) => ({
-      ...block,
-      realIndex: index,
-    }));
-
-    return filterAllowedBlocks(blocksWithRealIndexMapped);
-  }, [allBlocks]);
+  const texts = useMemo(() => mapBlockToTextWithRealIndex(allBlocks), [
+    allBlocks,
+  ]);
 
   useEffect(() => {
-    const indexExists = blocks.some(
+    const indexExists = texts.some(
       ({ realIndex }) => realIndex === currentBlockIndex,
     );
 
     if (indexExists) setLastVisibleIndex(currentBlockIndex);
-  }, [blocks, currentBlockIndex]);
+  }, [texts, currentBlockIndex]);
 
   return (
     <QuestionTranscriptUI
-      blocks={blocks}
+      texts={texts}
       currentBlockIndex={lastVisibleIndex}
       language={language}
     />

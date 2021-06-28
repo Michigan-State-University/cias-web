@@ -1,14 +1,12 @@
-import React, { memo, useEffect, useMemo, useRef } from 'react';
+import React, { memo, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import scrollByRef from 'utils/scrollByRef';
 
-import { extractBlocksText } from './utils';
 import { StyledTextBlock } from './styled';
 
-const TextBlock = ({ block, isCurrent }) => {
+const TextBlock = ({ text, isCurrent }) => {
   const textBlockRef = useRef();
-  const text = useMemo(() => extractBlocksText(block), [block]);
 
   useEffect(() => {
     if (isCurrent) scrollByRef(textBlockRef, { block: 'center' });
@@ -22,7 +20,7 @@ const TextBlock = ({ block, isCurrent }) => {
 };
 
 TextBlock.propTypes = {
-  block: PropTypes.object,
+  text: PropTypes.string,
   isCurrent: PropTypes.bool,
 };
 
