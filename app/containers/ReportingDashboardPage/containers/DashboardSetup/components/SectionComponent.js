@@ -68,7 +68,7 @@ const SectionComponent = ({
       />
 
       <FullWidthContainer>
-        <Row mb={40} justify="around">
+        <Row mb={40} justify="start">
           {!fromDashboardView && (
             <Col xs="content" mb={40}>
               <AddChart addChart={onAddChart} />

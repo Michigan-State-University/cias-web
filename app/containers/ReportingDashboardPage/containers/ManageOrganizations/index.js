@@ -97,7 +97,9 @@ const ManageOrganizations = ({
       <Helmet>
         <title>{formatMessage(messages.manageOrganizations)}</title>
       </Helmet>
-      <Container>{render()}</Container>
+      <Container mx="55px !important" maxWidth="100% !important">
+        {render()}
+      </Container>
     </ManageOrganizationsContext.Provider>
   );
 };

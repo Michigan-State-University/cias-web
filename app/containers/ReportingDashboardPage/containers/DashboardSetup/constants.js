@@ -18,7 +18,7 @@ export const ChartSettingsContext = createContext({
 
 export const CHART_NAME_MAX_WIDTH = elements.chartTileWidth / 2 - 50;
 export const CHART_WIDTH = elements.chartTileWidth - 50;
-export const CHART_HEIGHT = elements.chartTileHeight - 100;
+export const CHART_HEIGHT = elements.chartTileHeight - 150;
 
 export const X_AXIS_KEY = 'label';
 export const STACK_Y_AXIS_KEY = 'notMatchedValue';

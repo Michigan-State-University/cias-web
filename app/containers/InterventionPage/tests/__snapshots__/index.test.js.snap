@@ -268,15 +268,28 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               </div>
             </div>
             <div
-              class="Row-y1cs0u-0 dskFsL"
+              class="Row-y1cs0u-0 gQFDhs"
+              width="100%"
             >
-              <p
-                class="Text-e4p0w3-0 styled__StyledEllipsisText-h4mjfj-0 jKspVy lnRdie"
+              <span
+                class="styled__StyledEllipsisText-h4mjfj-0 itjSMP"
+                data-for="Name"
+                data-tip="Name"
                 font-size="18"
                 font-weight="bold"
+                theme="[object Object]"
+                width="0"
               >
-                Name
-              </p>
+                <span />
+                <span>
+                  Name
+                </span>
+                <span
+                  style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                >
+                  …
+                </span>
+              </span>
             </div>
             <div
               class="Box-sc-1vhutan-0 qxAio"
