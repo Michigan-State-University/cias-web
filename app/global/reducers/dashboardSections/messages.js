@@ -39,4 +39,8 @@ export default defineMessages({
     id: `${scope}.reorderError`,
     defaultMessage: `Couldn't reorder dashboard sections`,
   },
+  chartReorderError: {
+    id: `${scope}.chartReorderError`,
+    defaultMessage: `Couldn't reorder charts`,
+  },
 });

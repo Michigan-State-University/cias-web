@@ -7,11 +7,15 @@ import {
   editDashboardSectionRequest,
   addChartRequest,
   selectChartAction,
+  reorderChartsRequest,
 } from 'global/reducers/dashboardSections';
 
 import { Col, Row } from 'components/ReactGridSystem';
 import SidePanel from 'components/SidePanel';
 
+import { DndContext } from '@dnd-kit/core';
+import { SortableContext } from '@dnd-kit/sortable';
+import { reorder } from 'utils/reorder';
 import ChartTileUI from './ChartTileUI';
 import AddChart from './AddChart';
 import SectionUI from './SectionUI';
@@ -27,6 +31,7 @@ const SectionComponent = ({
   addChart,
   selectChart,
   draggableHandler,
+  reorderCharts,
 }) => {
   const { selectedChart, fromDashboardView } = useContext(
     DashboardSectionsContext,
@@ -55,6 +60,24 @@ const SectionComponent = ({
     [id],
   );
 
+  const onChartsDragEnd = ({ active, over }) => {
+    if (active.id !== over.id) {
+      const oldIndex = charts.findIndex(
+        ({ id: chartId }) => chartId === active.id,
+      );
+      const newIndex = charts.findIndex(
+        ({ id: chartId }) => chartId === over.id,
+      );
+      const newList = reorder(charts, oldIndex, newIndex);
+      const chartOrdered = newList.map((section, chartIndex) => ({
+        ...section,
+        position: chartIndex + 1,
+      }));
+
+      reorderCharts(id, chartOrdered);
+    }
+  };
+
   return (
     <>
       <SectionUI
@@ -67,29 +90,32 @@ const SectionComponent = ({
         draggableHandler={draggableHandler}
       />
 
+      {!fromDashboardView && (
+        <Col xs="content" mb={40}>
+          <AddChart addChart={onAddChart} />
+        </Col>
+      )}
       <FullWidthContainer>
         <Row mb={40} justify="start">
-          {!fromDashboardView && (
-            <Col xs="content" mb={40}>
-              <AddChart addChart={onAddChart} />
-            </Col>
-          )}
-          {charts.map(chart => {
-            const isSelected =
-              selectedChart?.id === chart.id &&
-              selectedChart?.dashboardSectionId === id;
+          <DndContext onDragEnd={onChartsDragEnd}>
+            <SortableContext items={charts}>
+              {charts.map(chart => {
+                const isSelected =
+                  selectedChart?.id === chart.id &&
+                  selectedChart?.dashboardSectionId === id;
 
-            return (
-              <Col key={`Chart-${chart.id}-Section-${id}`} xs="content" mb={40}>
-                <ChartTileUI
-                  fromDashboardView={fromDashboardView}
-                  chart={chart}
-                  onClick={onSelectChart}
-                  isSelected={isSelected}
-                />
-              </Col>
-            );
-          })}
+                return (
+                  <ChartTileUI
+                    key={`Chart-${chart.id}-Section-${id}`}
+                    fromDashboardView={fromDashboardView}
+                    chart={chart}
+                    onClick={onSelectChart}
+                    isSelected={isSelected}
+                  />
+                );
+              })}
+            </SortableContext>
+          </DndContext>
         </Row>
       </FullWidthContainer>
 
@@ -107,6 +133,7 @@ SectionComponent.propTypes = {
   editDashboardSection: PropTypes.func,
   addChart: PropTypes.func,
   selectChart: PropTypes.func,
+  reorderCharts: PropTypes.func,
   index: PropTypes.number,
   draggableHandler: PropTypes.node,
 };
@@ -115,6 +142,7 @@ const mapDispatchToProps = {
   editDashboardSection: editDashboardSectionRequest,
   addChart: addChartRequest,
   selectChart: selectChartAction,
+  reorderCharts: reorderChartsRequest,
 };
 
 const withConnect = connect(

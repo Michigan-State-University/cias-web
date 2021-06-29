@@ -36,6 +36,7 @@ import {
   REORDER_DASHBOARD_SECTIONS_SUCCESS,
   REORDER_DASHBOARD_SECTIONS_FAILURE,
   REORDER_DASHBOARD_SECTIONS_REQUEST,
+  REORDER_CHARTS_REQUEST,
 } from './constants';
 
 export const initialState = {
@@ -349,6 +350,15 @@ const dashboardSectionsReducer = (state = initialState, action) =>
 
       case REORDER_DASHBOARD_SECTIONS_FAILURE: {
         draft.dashboardSections = state.cache.dashboardSections;
+        break;
+      }
+
+      case REORDER_CHARTS_REQUEST: {
+        const { dashboardSectionId } = payload;
+        draft.cache.dashboardSections = state.dashboardSections;
+        updateItemById(draft.dashboardSections, dashboardSectionId, item =>
+          dashboardSectionReducer(item, action),
+        );
         break;
       }
     }

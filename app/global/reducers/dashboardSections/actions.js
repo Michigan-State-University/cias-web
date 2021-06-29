@@ -33,6 +33,9 @@ import {
   REORDER_DASHBOARD_SECTIONS_REQUEST,
   REORDER_DASHBOARD_SECTIONS_SUCCESS,
   REORDER_DASHBOARD_SECTIONS_FAILURE,
+  REORDER_CHARTS_REQUEST,
+  REORDER_CHARTS_SUCCESS,
+  REORDER_CHARTS_FAILURE,
 } from './constants';
 
 export const addDashboardSectionRequest = (organizationId, name) =>
@@ -152,3 +155,15 @@ export const reorderSectionsSuccess = () =>
 
 export const reorderSectionsFailure = () =>
   actionBuilder(REORDER_DASHBOARD_SECTIONS_FAILURE, {});
+
+export const reorderChartsRequest = (dashboardSectionId, charts) =>
+  actionBuilder(REORDER_CHARTS_REQUEST, {
+    dashboardSectionId,
+    charts,
+  });
+
+export const reorderChartsSuccess = () =>
+  actionBuilder(REORDER_CHARTS_SUCCESS, {});
+
+export const reorderChartsFailure = () =>
+  actionBuilder(REORDER_CHARTS_FAILURE, {});
