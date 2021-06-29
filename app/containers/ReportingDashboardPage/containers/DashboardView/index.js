@@ -116,7 +116,7 @@ const DashboardView = ({
       <Helmet>
         <title>{formatMessage(messages.dashboardView)}</title>
       </Helmet>
-      <Container>
+      <Container mx="55px !important" maxWidth="100% !important">
         <Row my={15} justify="around" width="100%">
           <Select
             width={500}

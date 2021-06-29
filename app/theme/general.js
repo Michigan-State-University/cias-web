@@ -26,7 +26,7 @@ const elements = {
   grid: { firstColWidth: 300, colWidth: 80, leftPadding: 40 },
   treeRowHeight: 80,
   chartTileWidth: 500,
-  chartTileHeight: 300,
+  chartTileHeight: 350,
 };
 
 const visualAnalogScaleLabelStyles = {

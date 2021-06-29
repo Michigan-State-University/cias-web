@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Tooltip from 'components/Tooltip';
@@ -6,37 +6,28 @@ import Row from 'components/Row';
 
 import { StyledEllipsisText } from './styled';
 
-const EllipsisText = ({ text, dataFor, ...props }) => {
+const EllipsisText = ({ text, dataFor, lines, ...props }) => {
   const ref = useRef(null);
   const [allowTooltip, setAllowTooltip] = useState(false);
 
-  useEffect(() => {
-    if (!allowTooltip && ref.current) {
-      const { offsetWidth, scrollWidth } = ref.current;
-      if (offsetWidth < scrollWidth) {
-        setAllowTooltip(true);
-      }
-    }
-  }, [text]);
+  const onTruncate = isTruncated => {
+    setAllowTooltip(isTruncated);
+  };
 
   return (
-    <Row>
-      {allowTooltip ? (
-        <Tooltip text={text} id={text ?? ''} width="100%" display="inline">
-          <StyledEllipsisText
-            ref={ref}
-            data-tip={text}
-            data-for={dataFor ?? text ?? ''}
-            {...props}
-          >
-            {text}
-          </StyledEllipsisText>
-        </Tooltip>
-      ) : (
-        <StyledEllipsisText ref={ref} {...props}>
-          {text}
-        </StyledEllipsisText>
-      )}
+    <Row width="100%">
+      {allowTooltip && <Tooltip text={text} id={text ?? ''} display="inline" />}
+
+      <StyledEllipsisText
+        ref={ref}
+        data-tip={text}
+        data-for={dataFor ?? text ?? ''}
+        lines={lines}
+        onTruncate={onTruncate}
+        $styleProps={props}
+      >
+        {text}
+      </StyledEllipsisText>
     </Row>
   );
 };
@@ -44,6 +35,11 @@ const EllipsisText = ({ text, dataFor, ...props }) => {
 EllipsisText.propTypes = {
   text: PropTypes.string,
   dataFor: PropTypes.string,
+  lines: PropTypes.number,
+};
+
+EllipsisText.defaultProps = {
+  lines: 1,
 };
 
 export default EllipsisText;

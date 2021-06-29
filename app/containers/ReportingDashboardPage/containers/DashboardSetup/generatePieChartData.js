@@ -85,6 +85,7 @@ export const generatePieChartLabel = ({
           maxWidth={MAX_LABEL_WIDTH}
           dataFor="chart-tooltip"
           text={`${label} (${value})`}
+          textAlign={isRightSide ? '' : 'right'}
           color={color}
         />
       </Row>

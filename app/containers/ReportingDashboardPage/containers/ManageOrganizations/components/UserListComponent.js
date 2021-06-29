@@ -85,6 +85,7 @@ const UserListComponent = ({
             <Box
               key={`UserItem-${user.id}-${index}`}
               mb={index === users.length - 1 ? 0 : 8}
+              width="100%"
             >
               <UserItem
                 avatarColor={avatarColor}

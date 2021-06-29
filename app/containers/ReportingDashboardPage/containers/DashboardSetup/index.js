@@ -54,7 +54,7 @@ const DashboardSetup = ({
       <Helmet>
         <title>{formatMessage(messages.dashboardSetup)}</title>
       </Helmet>
-      <Container mx="55px !important">
+      <Container mx="55px !important" maxWidth="100% !important">
         {/* Chart labels use it */}
         <Tooltip id="chart-tooltip" />
 
