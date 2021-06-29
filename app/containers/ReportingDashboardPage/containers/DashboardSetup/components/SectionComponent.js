@@ -12,7 +12,6 @@ import {
 import { Col, Row } from 'components/ReactGridSystem';
 import SidePanel from 'components/SidePanel';
 
-import { Draggable } from 'react-beautiful-dnd';
 import ChartTileUI from './ChartTileUI';
 import AddChart from './AddChart';
 import SectionUI from './SectionUI';
@@ -27,6 +26,7 @@ const SectionComponent = ({
   index,
   addChart,
   selectChart,
+  draggableHandler,
 }) => {
   const { selectedChart, fromDashboardView } = useContext(
     DashboardSectionsContext,
@@ -55,8 +55,8 @@ const SectionComponent = ({
     [id],
   );
 
-  const renderSection = providedDraggable => (
-    <div ref={providedDraggable.innerRef} {...providedDraggable.draggableProps}>
+  return (
+    <>
       <SectionUI
         showDivider={index !== 0}
         name={name}
@@ -64,7 +64,7 @@ const SectionComponent = ({
         onDescriptionChange={onUpdate('description')}
         onNameChange={onUpdate('name')}
         fromDashboardView={fromDashboardView}
-        dragHandleProps={providedDraggable.dragHandleProps}
+        draggableHandler={draggableHandler}
       />
 
       <FullWidthContainer>
@@ -98,19 +98,7 @@ const SectionComponent = ({
           <ChartSettings onClose={closeSettings} chart={selectedChart} />
         </SidePanel>
       )}
-    </div>
-  );
-
-  return (
-    <Draggable
-      key={`group-${id}`}
-      draggableId={id}
-      index={index}
-      isDragDisabled={fromDashboardView}
-      type="DASHBOARD_SECTIONS"
-    >
-      {providedDraggable => renderSection(providedDraggable)}
-    </Draggable>
+    </>
   );
 };
 
@@ -120,6 +108,7 @@ SectionComponent.propTypes = {
   addChart: PropTypes.func,
   selectChart: PropTypes.func,
   index: PropTypes.number,
+  draggableHandler: PropTypes.node,
 };
 
 const mapDispatchToProps = {

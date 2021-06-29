@@ -8,8 +8,6 @@ import StyledInput from 'components/Input/StyledInput';
 import Divider from 'components/Divider';
 
 import Text from 'components/Text';
-import Img from 'components/Img';
-import reorderIcon from 'assets/svg/reorder-hand.svg';
 import { FullWidthContainer } from '../../../styled';
 import messages from '../messages';
 
@@ -20,7 +18,7 @@ const SectionUI = ({
   onNameChange,
   showDivider,
   fromDashboardView,
-  dragHandleProps,
+  draggableHandler,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -45,13 +43,7 @@ const SectionUI = ({
                 onBlur={onNameChange}
                 value={name}
               />
-
-              <Img
-                ml={10}
-                src={reorderIcon}
-                disabled={false}
-                {...dragHandleProps}
-              />
+              {draggableHandler}
             </Row>
           )}
           {fromDashboardView && (
@@ -90,7 +82,7 @@ SectionUI.propTypes = {
   onNameChange: PropTypes.func,
   showDivider: PropTypes.bool,
   fromDashboardView: PropTypes.bool,
-  dragHandleProps: PropTypes.object,
+  draggableHandler: PropTypes.node,
 };
 
 export default memo(SectionUI);

@@ -24,15 +24,14 @@ import Loader from 'components/Loader';
 import Comment from 'components/Text/Comment';
 import DashedButton from 'components/Button/DashedButton';
 import Divider from 'components/Divider';
-import Box from 'components/Box';
 
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-import { reorder } from 'utils/reorder';
-import SectionComponent from '../components/SectionComponent';
+import DraggableSectionComponent from '../components/DraggableSectionComponent';
 import { ReportingDashboardPageContext } from '../../../constants';
 import { FullWidthContainer } from '../../../styled';
 import { DashboardSectionsContext } from '../constants';
 import messages from '../messages';
+import DraggableSectionParent from '../components/DraggableSectionParent';
+import { orderDashboardSections } from '../utils';
 
 const DashboardSections = ({
   fetchDashboardSections,
@@ -66,16 +65,7 @@ const DashboardSections = ({
   );
 
   const onDragEnd = result => {
-    const {
-      destination: { index: destinationIndex },
-      source: { index: sourceIndex },
-    } = result;
-
-    const newList = reorder(dashboardSections, sourceIndex, destinationIndex);
-    const orderedNewList = newList.map((section, index) => ({
-      ...section,
-      position: index + 1,
-    }));
+    const orderedNewList = orderDashboardSections(result, dashboardSections);
     reorderSections(organizationId, orderedNewList);
   };
 
@@ -106,30 +96,16 @@ const DashboardSections = ({
 
         <Row>
           <Col mt={10}>
-            <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable
-                droppableId="dashboard-sections-list"
-                type="DASHBOARD_SECTIONS"
-              >
-                {provided => (
-                  <Box
-                    width="100%"
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                  >
-                    {dashboardSections.map((section, index) => (
-                      <SectionComponent
-                        key={`SectionComponent-${index}-id-${section.id}`}
-                        section={section}
-                        index={index}
-                        fromDashboardView={fromDashboardView}
-                      />
-                    ))}
-                    {provided.placeholder}
-                  </Box>
-                )}
-              </Droppable>
-            </DragDropContext>
+            <DraggableSectionParent onDragEnd={onDragEnd}>
+              {dashboardSections.map((section, index) => (
+                <DraggableSectionComponent
+                  key={`SectionComponent-${index}-id-${section.id}`}
+                  section={section}
+                  index={index}
+                  fromDashboardView={fromDashboardView}
+                />
+              ))}
+            </DraggableSectionParent>
           </Col>
         </Row>
 
