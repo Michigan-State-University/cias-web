@@ -1,11 +1,7 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
 
-import {
-  assignDraftItemsById,
-  deleteItemById,
-  updateItemById,
-} from 'utils/reduxUtils';
+import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
 import {
   FETCH_ORGANIZATION_REQUEST,
   FETCH_ORGANIZATION_SUCCESS,
@@ -55,6 +51,7 @@ import {
   FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_FAILURE,
   FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_SUCCESS,
   FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_REQUEST,
+  TOGGLE_SHOW_DELETED_ENTITIES,
 } from './constants';
 
 import { healthSystemReducer } from './healthSystemReducer';
@@ -102,6 +99,7 @@ export const initialState = {
     [EntityType.healthSystem]: false,
     [EntityType.clinic]: false,
   },
+  showDeletedEntities: false,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -314,8 +312,14 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.deleteHealthSystem = false;
         draft.errors.deleteHealthSystem = null;
 
-        deleteItemById(draft.organization.healthSystems, payload.id);
-        deleteItemById(draft.cache.organization.healthSystems, payload.id);
+        updateItemById(draft.organization.healthSystems, payload.id, item =>
+          healthSystemReducer(item, action),
+        );
+        assignDraftItemsById(
+          draft.organization.healthSystems,
+          draft.cache.organization.healthSystems,
+          payload.id,
+        );
 
         break;
       }
@@ -511,6 +515,10 @@ const organizationReducer = (state = initialState, action) =>
         draft.loaders.fetchDashboardViewSelect = false;
         draft.errors.fetchDashboardViewSelect = payload.error;
         break;
+      }
+
+      case TOGGLE_SHOW_DELETED_ENTITIES: {
+        draft.showDeletedEntities = !state.showDeletedEntities;
       }
     }
   });

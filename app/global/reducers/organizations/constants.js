@@ -101,6 +101,9 @@ export const DELETE_CLINIC_ERROR = 'app/organizations/DELETE_CLINIC_ERROR';
 
 export const SELECT_ENTITY_ACTION = 'app/organizations/SELECT_ENTITY_ACTION';
 
+export const TOGGLE_SHOW_DELETED_ENTITIES =
+  'app/organizations/TOGGLE_SHOW_DELETED_ENTITIES';
+
 export const SET_SHOULD_REFETCH_ACTION =
   'app/organizations/SET_SHOULD_REFETCH_ACTION';
 

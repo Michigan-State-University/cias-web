@@ -212,4 +212,18 @@ export default defineMessages({
     id: `${scope}.fieldCannotBeEmpty`,
     defaultMessage: '{field} cannot be empty',
   },
+  deleteEntityModalTitle: {
+    id: `${scope}.deleteOrganizationModalTitle`,
+    defaultMessage: 'Are you sure you want to delete this {type}?',
+  },
+  deleteEntityModalHeader: {
+    id: `${scope}.deleteOrganizationModalHeader`,
+    defaultMessage: `{type} <b>{name}</b> will be permanently deleted.<br /><br />
+      This operation cannot be undone and you will not be able to do any changes.<br /><br />
+      You will still be able to access charts and their data for this {type} and filter by it.`,
+  },
+  showDeletedEntitiesToggle: {
+    id: `${scope}.showDeletedEntitiesToggle`,
+    defaultMessage: 'Show deleted elements',
+  },
 });

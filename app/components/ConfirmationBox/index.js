@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -30,35 +30,42 @@ const ConfirmationBox = ({
   contentStyles,
   contentContainerStyles,
   ...modalStyles
-}) => (
-  <Modal visible={visible} onClose={onClose} {...modalStyles}>
-    <Column px={50} pd={30} {...contentContainerStyles}>
-      <H1 textAlign="center">{description}</H1>
-      {content && (
-        <Box padded {...contentStyles}>
-          {content}
-        </Box>
-      )}
-      <Row mt={25}>
-        <Button inverted hoverable onClick={onClose} type="button" mr={25}>
-          <FormattedMessage {...messages.cancel} />
-        </Button>
-        <Button
-          color={confirmationButtonColor}
-          hoverable
-          disabled={loading}
-          loading={loading}
-          onClick={confirmAction}
-          type="button"
-          data-cy="confirmation-box-confirm-button"
-        >
-          <FormattedMessage {...messages.confirmCanceling} />
-        </Button>
-      </Row>
-    </Column>
-    {error && <ErrorAlert fullWidth errorText={error} />}
-  </Modal>
-);
+}) => {
+  const onConfirm = useCallback(() => {
+    confirmAction();
+    onClose();
+  }, [confirmAction, onClose]);
+
+  return (
+    <Modal visible={visible} onClose={onClose} {...modalStyles}>
+      <Column px={50} pd={30} {...contentContainerStyles}>
+        <H1 textAlign="center">{description}</H1>
+        {content && (
+          <Box padded {...contentStyles}>
+            {content}
+          </Box>
+        )}
+        <Row mt={25}>
+          <Button inverted hoverable onClick={onClose} type="button" mr={25}>
+            <FormattedMessage {...messages.cancel} />
+          </Button>
+          <Button
+            color={confirmationButtonColor}
+            hoverable
+            disabled={loading}
+            loading={loading}
+            onClick={onConfirm}
+            type="button"
+            data-cy="confirmation-box-confirm-button"
+          >
+            <FormattedMessage {...messages.confirmCanceling} />
+          </Button>
+        </Row>
+      </Column>
+      {error && <ErrorAlert fullWidth errorText={error} />}
+    </Modal>
+  );
+};
 
 ConfirmationBox.propTypes = {
   visible: PropTypes.bool,

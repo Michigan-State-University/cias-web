@@ -42,7 +42,7 @@ const colors = {
   amethyst: '#A667C4',
   mauve: '#E2B1F4',
   orangeRed: '#ED722E',
-  yellowRed: '#F2BB40',
+  yellowRed: '#FFC062',
   turquoiseGreen: '#92D9B7',
   emerald: '#5ECC8A',
   blueEyes: '#9CD0F8',

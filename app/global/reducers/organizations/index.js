@@ -18,6 +18,7 @@ export {
   createOrganizationInterventionRequest,
   setShouldRefetchAction,
   fetchDashboardViewSelectOptionsRequest,
+  toggleShowDeletedEntitiesAction,
 } from './actions';
 export { organizationsReducer } from './reducer';
 export {
@@ -32,6 +33,7 @@ export {
   makeSelectOrganizationSelectedEntity,
   makeSelectOrganizationInterventions,
   makeSelectDashboardViewOptions,
+  makeSelectShowDeletedEntitiesToggle,
 } from './selectors';
 
 export { EntityType } from './constants';

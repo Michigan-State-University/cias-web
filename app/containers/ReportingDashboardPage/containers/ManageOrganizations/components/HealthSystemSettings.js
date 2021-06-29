@@ -24,7 +24,9 @@ import { Roles } from 'models/User/UserRoles';
 
 import { Col, Row } from 'components/ReactGridSystem';
 import Loader from 'components/Loader';
+import ConfirmationBox from 'components/ConfirmationBox';
 
+import { DeleteEntityModal } from '../Modals';
 import TopPanelComponent from './TopPanelComponent';
 
 import { ManageOrganizationsContext } from '../constants';
@@ -32,6 +34,9 @@ import messages from '../../../messages';
 import UserListComponent from './UserListComponent';
 
 const HealthSystemSettings = ({
+  openDeleteModal,
+  closeDeleteModal,
+  isDeleteModalOpen,
   fetchHealthSystem,
   deleteHealthSystem,
   editHealthSystem,
@@ -59,30 +64,42 @@ const HealthSystemSettings = ({
       fetchHealthSystem(selectedEntity.id);
   }, [shouldRefetch[EntityType.healthSystem]]);
 
-  const healthSystem = useMemo(
-    () => organization.healthSystems.find(({ id }) => id === selectedEntity.id),
+  const { healthSystemAdmins, id, name } = useMemo(
+    () =>
+      organization.healthSystems.find(
+        ({ id: healthSystemId }) => healthSystemId === selectedEntity.id,
+      ),
     [selectedEntity, organization],
   );
 
-  const onDelete = useCallback(() => deleteHealthSystem(healthSystem.id), [
-    healthSystem?.id,
+  const onDelete = useCallback(() => deleteHealthSystem(id), [id]);
+
+  const onEdit = useCallback(value => editHealthSystem({ ...value, id }), [id]);
+
+  const onInvite = useCallback((email, role) => inviteAdmin(id, email, role), [
+    id,
   ]);
 
-  const onEdit = useCallback(
-    value => editHealthSystem({ ...value, id: healthSystem.id }),
-    [healthSystem?.id],
-  );
-
-  const onInvite = useCallback(
-    (email, role) => inviteAdmin(healthSystem.id, email, role),
-    [healthSystem?.id],
-  );
-
-  if (!healthSystem || fetchOrganizationLoader || fetchHealthSystemLoader)
+  if (!id || fetchOrganizationLoader || fetchHealthSystemLoader)
     return <Loader type="inline" />;
 
   return (
     <>
+      <ConfirmationBox
+        visible={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        description={formatMessage(messages.deleteEntityModalTitle, {
+          type: formatMessage(messages.healthSystemHeader),
+        })}
+        confirmAction={onDelete}
+        content={
+          <DeleteEntityModal
+            name={name}
+            type={formatMessage(messages.healthSystemHeader)}
+          />
+        }
+      />
+
       <Row>
         <Col>
           <TopPanelComponent
@@ -90,8 +107,8 @@ const HealthSystemSettings = ({
             icon={HealthSystemIcon}
             isDeleting={deleteHealthSystemLoader}
             label={formatMessage(messages.healthSystemLabel)}
-            name={healthSystem.name}
-            onDelete={onDelete}
+            name={name}
+            onDelete={openDeleteModal}
             onEdit={onEdit}
             placeholder={formatMessage(messages.healthSystemPlaceholder)}
           />
@@ -103,10 +120,10 @@ const HealthSystemSettings = ({
           <UserListComponent
             header={formatMessage(messages.healthSystemAdminsHeader)}
             helper={formatMessage(messages.healthSystemAdminsHelper)}
-            inviteTo={healthSystem.name}
+            inviteTo={name}
             onInvite={onInvite}
             role={Roles.healthSystemAdmin}
-            users={healthSystem.healthSystemAdmins}
+            users={healthSystemAdmins}
           />
         </Col>
       </Row>
@@ -115,6 +132,9 @@ const HealthSystemSettings = ({
 };
 
 HealthSystemSettings.propTypes = {
+  closeDeleteModal: PropTypes.func,
+  openDeleteModal: PropTypes.func,
+  isDeleteModalOpen: PropTypes.bool,
   fetchHealthSystem: PropTypes.func,
   deleteHealthSystem: PropTypes.func,
   editHealthSystem: PropTypes.func,
