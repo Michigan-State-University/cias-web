@@ -24,6 +24,7 @@ import Loader from 'components/Loader';
 import Comment from 'components/Text/Comment';
 import DashedButton from 'components/Button/DashedButton';
 import Divider from 'components/Divider';
+import Box from 'components/Box';
 
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import { reorder } from 'utils/reorder';
@@ -70,16 +71,11 @@ const DashboardSections = ({
       source: { index: sourceIndex },
     } = result;
 
-    // if (!isNullOrUndefined(destination)) {
     const newList = reorder(dashboardSections, sourceIndex, destinationIndex);
-    let position = 0;
-    const orderedNewList = newList.map(session => {
-      position += 1;
-      return {
-        ...session,
-        position,
-      };
-    });
+    const orderedNewList = newList.map((section, index) => ({
+      ...section,
+      position: index + 1,
+    }));
     reorderSections(organizationId, orderedNewList);
   };
 
@@ -116,7 +112,11 @@ const DashboardSections = ({
                 type="DASHBOARD_SECTIONS"
               >
                 {provided => (
-                  <div ref={provided.innerRef} {...provided.droppableProps}>
+                  <Box
+                    width="100%"
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
                     {dashboardSections.map((section, index) => (
                       <SectionComponent
                         key={`SectionComponent-${index}-id-${section.id}`}
@@ -126,7 +126,7 @@ const DashboardSections = ({
                       />
                     ))}
                     {provided.placeholder}
-                  </div>
+                  </Box>
                 )}
               </Droppable>
             </DragDropContext>
