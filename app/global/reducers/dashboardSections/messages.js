@@ -35,4 +35,8 @@ export default defineMessages({
        other {properties}
      }.`,
   },
+  reorderError: {
+    id: `${scope}.reorderError`,
+    defaultMessage: `Couldn't reorder dashboard sections`,
+  },
 });

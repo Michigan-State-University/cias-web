@@ -21,11 +21,12 @@ import { DashboardSectionsContext } from '../constants';
 import { FullWidthContainer } from '../../../styled';
 
 const SectionComponent = ({
-  section,
+  section: { id, organizationId, name, description, charts },
   editDashboardSection,
   index,
   addChart,
   selectChart,
+  draggableHandler,
 }) => {
   const { selectedChart, fromDashboardView } = useContext(
     DashboardSectionsContext,
@@ -37,34 +38,33 @@ const SectionComponent = ({
     field => value =>
       editDashboardSection(
         {
-          organizationId: section.organizationId,
+          organizationId,
           [field]: value,
         },
-        section.id,
+        id,
       ),
-    [section.id, section.organizationId],
+    [id, organizationId],
   );
 
-  const onAddChart = useCallback(type => addChart(section.id, type), [
-    section.id,
-  ]);
+  const onAddChart = useCallback(type => addChart(id, type), [id]);
 
   const onSelectChart = useCallback(
     chartId => {
-      if (!fromDashboardView) selectChart(section.id, chartId);
+      if (!fromDashboardView) selectChart(id, chartId);
     },
-    [section.id],
+    [id],
   );
 
   return (
     <>
       <SectionUI
         showDivider={index !== 0}
-        name={section.name}
-        description={section.description}
+        name={name}
+        description={description}
         onDescriptionChange={onUpdate('description')}
         onNameChange={onUpdate('name')}
         fromDashboardView={fromDashboardView}
+        draggableHandler={draggableHandler}
       />
 
       <FullWidthContainer>
@@ -74,17 +74,13 @@ const SectionComponent = ({
               <AddChart addChart={onAddChart} />
             </Col>
           )}
-          {section.charts.map(chart => {
+          {charts.map(chart => {
             const isSelected =
               selectedChart?.id === chart.id &&
-              selectedChart?.dashboardSectionId === section.id;
+              selectedChart?.dashboardSectionId === id;
 
             return (
-              <Col
-                key={`Chart-${chart.id}-Section-${section.id}`}
-                xs="content"
-                mb={40}
-              >
+              <Col key={`Chart-${chart.id}-Section-${id}`} xs="content" mb={40}>
                 <ChartTileUI
                   fromDashboardView={fromDashboardView}
                   chart={chart}
@@ -112,6 +108,7 @@ SectionComponent.propTypes = {
   addChart: PropTypes.func,
   selectChart: PropTypes.func,
   index: PropTypes.number,
+  draggableHandler: PropTypes.node,
 };
 
 const mapDispatchToProps = {

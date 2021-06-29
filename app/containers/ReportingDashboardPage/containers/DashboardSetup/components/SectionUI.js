@@ -18,6 +18,7 @@ const SectionUI = ({
   onNameChange,
   showDivider,
   fromDashboardView,
+  draggableHandler,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -34,11 +35,16 @@ const SectionUI = ({
       <Row>
         <Col>
           {!fromDashboardView && (
-            <LabelledInput
-              placeholder={formatMessage(messages.inputSectionNamePlaceholder)}
-              onBlur={onNameChange}
-              value={name}
-            />
+            <Row>
+              <LabelledInput
+                placeholder={formatMessage(
+                  messages.inputSectionNamePlaceholder,
+                )}
+                onBlur={onNameChange}
+                value={name}
+              />
+              {draggableHandler}
+            </Row>
           )}
           {fromDashboardView && (
             <Text mb={30} fontSize={15} fontWeight="bold">
@@ -76,6 +82,7 @@ SectionUI.propTypes = {
   onNameChange: PropTypes.func,
   showDivider: PropTypes.bool,
   fromDashboardView: PropTypes.bool,
+  draggableHandler: PropTypes.node,
 };
 
 export default memo(SectionUI);
