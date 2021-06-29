@@ -30,6 +30,9 @@ import {
   SELECT_CHART_ACTION,
   SET_CHARTS_DATA,
   SET_CHARTS_FILTERS,
+  REORDER_DASHBOARD_SECTIONS_REQUEST,
+  REORDER_DASHBOARD_SECTIONS_SUCCESS,
+  REORDER_DASHBOARD_SECTIONS_FAILURE,
 } from './constants';
 
 export const addDashboardSectionRequest = (organizationId, name) =>
@@ -137,3 +140,15 @@ export const setChartsData = chartsData =>
 
 export const setChartFiltersRequest = filters =>
   actionBuilder(SET_CHARTS_FILTERS, { filters });
+
+export const reorderSectionsRequest = (organizationId, dashboardSections) =>
+  actionBuilder(REORDER_DASHBOARD_SECTIONS_REQUEST, {
+    organizationId,
+    dashboardSections,
+  });
+
+export const reorderSectionsSuccess = () =>
+  actionBuilder(REORDER_DASHBOARD_SECTIONS_SUCCESS, {});
+
+export const reorderSectionsFailure = () =>
+  actionBuilder(REORDER_DASHBOARD_SECTIONS_FAILURE, {});

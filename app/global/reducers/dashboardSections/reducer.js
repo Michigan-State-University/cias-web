@@ -33,6 +33,9 @@ import {
   SELECT_CHART_ACTION,
   SET_CHARTS_DATA,
   SET_CHARTS_FILTERS,
+  REORDER_DASHBOARD_SECTIONS_SUCCESS,
+  REORDER_DASHBOARD_SECTIONS_FAILURE,
+  REORDER_DASHBOARD_SECTIONS_REQUEST,
 } from './constants';
 
 export const initialState = {
@@ -329,6 +332,23 @@ const dashboardSectionsReducer = (state = initialState, action) =>
             item => dashboardSectionReducer(item, action),
           );
         }
+        break;
+      }
+
+      case REORDER_DASHBOARD_SECTIONS_REQUEST: {
+        const { dashboardSections } = payload;
+        draft.cache.dashboardSections = state.dashboardSections;
+        draft.dashboardSections = dashboardSections;
+        break;
+      }
+
+      case REORDER_DASHBOARD_SECTIONS_SUCCESS: {
+        draft.cache.dashboardSections = state.dashboardSections;
+        break;
+      }
+
+      case REORDER_DASHBOARD_SECTIONS_FAILURE: {
+        draft.dashboardSections = state.cache.dashboardSections;
         break;
       }
     }
