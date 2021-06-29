@@ -54,6 +54,7 @@ import {
   FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_FAILURE,
   FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_REQUEST,
   FETCH_DASHBOARD_VIEW_SELECT_OPTIONS_SUCCESS,
+  TOGGLE_SHOW_DELETED_ENTITIES,
 } from './constants';
 
 export const fetchOrganizationsRequest = () =>
@@ -170,6 +171,9 @@ export const deleteClinicFailure = error =>
 
 export const selectEntityAction = (id, type, parentId) =>
   actionBuilder(SELECT_ENTITY_ACTION, { id, type, parentId });
+
+export const toggleShowDeletedEntitiesAction = () =>
+  actionBuilder(TOGGLE_SHOW_DELETED_ENTITIES, {});
 
 export const setShouldRefetchAction = type =>
   actionBuilder(SET_SHOULD_REFETCH_ACTION, { type });

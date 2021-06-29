@@ -1,11 +1,15 @@
 import produce from 'immer';
+import forEach from 'lodash/forEach';
 
-import { deleteItemById, updateItemById } from 'utils/reduxUtils';
+import { updateItemById } from 'utils/reduxUtils';
+
+import { deleteClinicSuccess } from './actions';
 import { clinicReducer } from './clinicReducer';
 
 import {
   ADD_CLINIC_SUCCESS,
   DELETE_CLINIC_SUCCESS,
+  DELETE_HEALTH_SYSTEM_SUCCESS,
   EDIT_CLINIC_REQUEST,
   EDIT_CLINIC_SUCCESS,
   EDIT_HEALTH_SYSTEM_REQUEST,
@@ -45,8 +49,25 @@ const healthSystemReducer = (state = null, action) =>
       }
 
       case DELETE_CLINIC_SUCCESS: {
-        deleteItemById(draft.healthClinics, payload.id);
+        updateItemById(draft.healthClinics, payload.id, item =>
+          clinicReducer(item, action),
+        );
         break;
+      }
+
+      case DELETE_HEALTH_SYSTEM_SUCCESS: {
+        forEach(draft.healthClinics, clinic => {
+          const deleteClinicAction = deleteClinicSuccess(
+            clinic.id,
+            clinic.healthSystemId,
+          );
+
+          updateItemById(draft.healthClinics, clinic.id, item =>
+            clinicReducer(item, deleteClinicAction),
+          );
+        });
+
+        draft.deleted = true;
       }
     }
   });

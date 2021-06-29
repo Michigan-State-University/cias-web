@@ -17,6 +17,7 @@ import {
   selectEntityAction,
   EntityType,
   makeSelectOrganizationSelectedEntity,
+  makeSelectShowDeletedEntitiesToggle,
 } from 'global/reducers/organizations';
 
 import { Container, Col, Row } from 'components/ReactGridSystem';
@@ -40,6 +41,7 @@ const ManageOrganizations = ({
   shouldRefetch,
   selectEntity,
   selectedEntity,
+  showDeletedEntities,
 }) => {
   const { organizationId } = useContext(ReportingDashboardPageContext);
   const { formatMessage } = useIntl();
@@ -83,7 +85,14 @@ const ManageOrganizations = ({
 
   return (
     <ManageOrganizationsContext.Provider
-      value={{ organization, loaders, errors, shouldRefetch, selectedEntity }}
+      value={{
+        organization,
+        loaders,
+        errors,
+        shouldRefetch,
+        selectedEntity,
+        showDeletedEntities,
+      }}
     >
       <Helmet>
         <title>{formatMessage(messages.manageOrganizations)}</title>
@@ -110,6 +119,7 @@ ManageOrganizations.propTypes = {
     id: PropTypes.string,
     type: PropTypes.string,
   }),
+  showDeletedEntities: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -120,6 +130,7 @@ const mapStateToProps = createStructuredSelector({
   organizationsLoader: makeSelectOrganizationsLoader(),
   shouldRefetch: makeSelectOrganizationShouldRefetch(),
   selectedEntity: makeSelectOrganizationSelectedEntity(),
+  showDeletedEntities: makeSelectShowDeletedEntitiesToggle(),
 });
 
 const mapDispatchToProps = {

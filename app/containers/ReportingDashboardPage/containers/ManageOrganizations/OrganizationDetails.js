@@ -8,13 +8,16 @@ import {
   addHealthSystemRequest,
   selectEntityAction,
   addClinicRequest,
+  toggleShowDeletedEntitiesAction,
 } from 'global/reducers/organizations';
 
-import { Col, Row } from 'components/ReactGridSystem';
+import { Col, NoMarginRow, Row } from 'components/ReactGridSystem';
 import SortableTree from 'components/SortableTree';
 import Comment from 'components/Text/Comment';
-
 import Loader from 'components/Loader';
+import Checkbox from 'components/Checkbox';
+import Text from 'components/Text';
+
 import { ManageOrganizationsContext } from './constants';
 import messages from '../../messages';
 import { FullWidthContainer } from '../../styled';
@@ -23,7 +26,12 @@ import { generateTreeFromOrganization } from './generateTree';
 /**
  * General container for Organization, Health System and Clinic
  */
-const OrganizationDetails = ({ addHealthSystem, addClinic, selectEntity }) => {
+const OrganizationDetails = ({
+  addHealthSystem,
+  addClinic,
+  selectEntity,
+  toggleShowDeletedEntities,
+}) => {
   const { formatMessage } = useIntl();
   const {
     organization,
@@ -31,6 +39,7 @@ const OrganizationDetails = ({ addHealthSystem, addClinic, selectEntity }) => {
       fetchOrganization: fetchOrganizationLoader,
       addHealthSystem: addHealthSystemLoader,
     },
+    showDeletedEntities,
   } = useContext(ManageOrganizationsContext);
 
   const onAddHealthSystem = useCallback(
@@ -73,10 +82,31 @@ const OrganizationDetails = ({ addHealthSystem, addClinic, selectEntity }) => {
     <FullWidthContainer>
       <Row>
         <Col>
-          <Comment mt={30} ml={55}>
-            {formatMessage(messages.manageOrganizations)}
-          </Comment>
-          {render()}
+          <Row width="100%" justify="between" mt={30}>
+            <Col xs="content">
+              <Comment ml={55}>
+                {formatMessage(messages.manageOrganizations)}
+              </Comment>
+            </Col>
+
+            <Col xs="content">
+              <NoMarginRow align="center" justify="end">
+                <Checkbox
+                  checked={showDeletedEntities}
+                  mr={5}
+                  aria-labelledby="showDeletedEntities"
+                  onClick={toggleShowDeletedEntities}
+                />
+                <Text id="showDeletedEntities">
+                  {formatMessage(messages.showDeletedEntitiesToggle)}
+                </Text>
+              </NoMarginRow>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col>{render()}</Col>
+          </Row>
         </Col>
       </Row>
     </FullWidthContainer>
@@ -87,12 +117,14 @@ OrganizationDetails.propTypes = {
   addHealthSystem: PropTypes.func,
   addClinic: PropTypes.func,
   selectEntity: PropTypes.func,
+  toggleShowDeletedEntities: PropTypes.func,
 };
 
 const mapDispatchToProps = {
   addHealthSystem: addHealthSystemRequest,
   addClinic: addClinicRequest,
   selectEntity: selectEntityAction,
+  toggleShowDeletedEntities: toggleShowDeletedEntitiesAction,
 };
 
 const withConnect = connect(

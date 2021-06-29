@@ -24,7 +24,9 @@ import {
 
 import { Col, Row } from 'components/ReactGridSystem';
 import Loader from 'components/Loader';
+import ConfirmationBox from 'components/ConfirmationBox';
 
+import { DeleteEntityModal } from '../Modals';
 import TopPanelComponent from './TopPanelComponent';
 import UserListComponent from './UserListComponent';
 
@@ -32,6 +34,9 @@ import { ManageOrganizationsContext } from '../constants';
 import messages from '../../../messages';
 
 const ClinicSettings = ({
+  openDeleteModal,
+  closeDeleteModal,
+  isDeleteModalOpen,
   fetchClinic,
   deleteClinic,
   editClinic,
@@ -58,41 +63,57 @@ const ClinicSettings = ({
     if (shouldRefetch[EntityType.clinic]) fetchClinic(selectedEntity.id);
   }, [shouldRefetch[EntityType.clinic]]);
 
-  const clinic = useMemo(() => {
+  const { healthClinicAdmins, healthSystemId, id, name } = useMemo(() => {
     const healthSystem = organization.healthSystems.find(
-      ({ id }) => id === selectedEntity.parentId,
+      ({ id: systemId }) => systemId === selectedEntity.parentId,
     );
 
-    return healthSystem.healthClinics.find(
-      ({ id }) => id === selectedEntity.id,
+    return (
+      healthSystem.healthClinics.find(
+        ({ id: clinicId }) => clinicId === selectedEntity.id,
+      ) ?? {}
     );
   }, [selectedEntity, organization]);
 
   const onDelete = useCallback(
-    () => deleteClinic(clinic.id, selectedEntity.parentId),
-    [clinic?.id, selectedEntity.parentId],
+    () => deleteClinic(id, selectedEntity.parentId),
+    [id, selectedEntity.parentId],
   );
 
   const onEdit = useCallback(
     value =>
       editClinic({
         ...value,
-        id: clinic.id,
-        healthSystemId: clinic.healthSystemId,
+        id,
+        healthSystemId,
       }),
-    [clinic?.id],
+    [id],
   );
 
-  const onInvite = useCallback(
-    (email, role) => inviteAdmin(clinic.id, email, role),
-    [clinic?.id],
-  );
+  const onInvite = useCallback((email, role) => inviteAdmin(id, email, role), [
+    id,
+  ]);
 
-  if (!clinic || fetchOrganizationLoader || fetchClinicLoader)
+  if (!id || fetchOrganizationLoader || fetchClinicLoader)
     return <Loader type="inline" />;
 
   return (
     <>
+      <ConfirmationBox
+        visible={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        description={formatMessage(messages.deleteEntityModalTitle, {
+          type: formatMessage(messages.clinicHeader),
+        })}
+        confirmAction={onDelete}
+        content={
+          <DeleteEntityModal
+            name={name}
+            type={formatMessage(messages.clinicHeader)}
+          />
+        }
+      />
+
       <Row>
         <Col>
           <TopPanelComponent
@@ -100,8 +121,8 @@ const ClinicSettings = ({
             icon={ClinicIcon}
             isDeleting={deleteClinicLoader}
             label={formatMessage(messages.clinicLabel)}
-            name={clinic.name}
-            onDelete={onDelete}
+            name={name}
+            onDelete={openDeleteModal}
             onEdit={onEdit}
             placeholder={formatMessage(messages.clinicPlaceholder)}
           />
@@ -113,10 +134,10 @@ const ClinicSettings = ({
           <UserListComponent
             header={formatMessage(messages.clinicAdminsHeader)}
             helper={formatMessage(messages.clinicAdminsHelper)}
-            inviteTo={clinic.name}
+            inviteTo={name}
             onInvite={onInvite}
             role={Roles.clinicAdmin}
-            users={clinic.healthClinicAdmins}
+            users={healthClinicAdmins}
           />
         </Col>
       </Row>
@@ -125,6 +146,9 @@ const ClinicSettings = ({
 };
 
 ClinicSettings.propTypes = {
+  closeDeleteModal: PropTypes.func,
+  openDeleteModal: PropTypes.func,
+  isDeleteModalOpen: PropTypes.bool,
   fetchClinic: PropTypes.func,
   deleteClinic: PropTypes.func,
   editClinic: PropTypes.func,

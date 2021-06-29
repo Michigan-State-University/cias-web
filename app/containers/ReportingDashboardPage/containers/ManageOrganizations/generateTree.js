@@ -33,32 +33,38 @@ export const generateTreeFromOrganization = ({
     ],
   });
 
-  const generateHealthSystemNode = ({ name, id, healthClinics }) => ({
+  const generateHealthSystemNode = ({ name, id, healthClinics, deleted }) => ({
     title: generateEntityNodeTitle({
       type: EntityType.healthSystem,
       name,
       id,
       onClick: onClick(id, EntityType.healthSystem),
+      deleted,
     }),
     expanded: true,
     id,
     children: [
-      generateButtonNode({
-        onClick: () => addClinic(id),
-        text: formatMessage(messages.addEntityButton, {
-          type: EntityType.clinic,
-        }),
-      }),
+      ...(deleted
+        ? []
+        : [
+            generateButtonNode({
+              onClick: () => addClinic(id),
+              text: formatMessage(messages.addEntityButton, {
+                type: EntityType.clinic,
+              }),
+            }),
+          ]),
       ...healthClinics.map(generateClinicNode),
     ],
   });
 
-  const generateClinicNode = ({ name, id, healthSystemId }) => ({
+  const generateClinicNode = ({ name, id, healthSystemId, deleted }) => ({
     title: generateEntityNodeTitle({
       type: EntityType.clinic,
       name,
       id,
       onClick: onClick(id, EntityType.clinic, healthSystemId),
+      deleted,
     }),
     expanded: true,
     id,
@@ -68,8 +74,14 @@ export const generateTreeFromOrganization = ({
   return organizationData ? [generateOrganizationNode(organizationData)] : [{}];
 };
 
-const generateEntityNodeTitle = ({ type, name, id, onClick }) => (
-  <EntityTreeNode type={type} name={name} id={id} onClick={onClick} />
+const generateEntityNodeTitle = ({ type, name, id, onClick, deleted }) => (
+  <EntityTreeNode
+    type={type}
+    name={name}
+    id={id}
+    onClick={onClick}
+    deleted={deleted}
+  />
 );
 
 const generateButtonNode = ({ text, onClick, loading }) => ({
