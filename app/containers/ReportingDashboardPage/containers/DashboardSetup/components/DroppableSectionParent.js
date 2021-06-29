@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import Box from 'components/Box';
 
-const DraggableSectionParent = ({ onDragEnd, children }) => (
+const DroppableSectionParent = ({ onDragEnd, children }) => (
   <DragDropContext onDragEnd={onDragEnd}>
     <Droppable droppableId="dashboard-sections-list" type="DASHBOARD_SECTIONS">
       {provided => (
@@ -16,9 +16,9 @@ const DraggableSectionParent = ({ onDragEnd, children }) => (
   </DragDropContext>
 );
 
-DraggableSectionParent.propTypes = {
+DroppableSectionParent.propTypes = {
   onDragEnd: PropTypes.func,
   children: PropTypes.node,
 };
 
-export default DraggableSectionParent;
+export default DroppableSectionParent;

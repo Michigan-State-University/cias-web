@@ -30,7 +30,7 @@ import { ReportingDashboardPageContext } from '../../../constants';
 import { FullWidthContainer } from '../../../styled';
 import { DashboardSectionsContext } from '../constants';
 import messages from '../messages';
-import DraggableSectionParent from '../components/DraggableSectionParent';
+import DroppableSectionParent from '../components/DroppableSectionParent';
 import { orderDashboardSections } from '../utils';
 
 const DashboardSections = ({
@@ -96,7 +96,7 @@ const DashboardSections = ({
 
         <Row>
           <Col mt={10}>
-            <DraggableSectionParent onDragEnd={onDragEnd}>
+            <DroppableSectionParent onDragEnd={onDragEnd}>
               {dashboardSections.map((section, index) => (
                 <DraggableSectionComponent
                   key={`SectionComponent-${index}-id-${section.id}`}
@@ -105,7 +105,7 @@ const DashboardSections = ({
                   fromDashboardView={fromDashboardView}
                 />
               ))}
-            </DraggableSectionParent>
+            </DroppableSectionParent>
           </Col>
         </Row>
 
