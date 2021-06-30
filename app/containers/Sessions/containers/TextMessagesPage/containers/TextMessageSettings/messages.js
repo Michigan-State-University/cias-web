@@ -16,4 +16,8 @@ export default defineMessages({
     id: `${scope}.textMessageName`,
     defaultMessage: 'Tex Message Tile Name',
   },
+  addVariableButton: {
+    id: `${scope}.addVariableButton`,
+    defaultMessage: '+ Add variable',
+  },
 });

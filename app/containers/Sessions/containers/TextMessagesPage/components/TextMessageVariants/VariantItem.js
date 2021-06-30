@@ -5,12 +5,23 @@ import { connect } from 'react-redux';
 import { Row, Col, Container } from 'react-grid-system';
 import { injectIntl } from 'react-intl';
 
-import binNoBg from 'assets/svg/bin-no-bg.svg';
-
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
+import binNoBg from 'assets/svg/bin-no-bg.svg';
+
+import { VariableHelper } from 'models/Helpers';
+import {
+  currencyQuestion,
+  dateQuestion,
+  nameQuestion,
+  numberQuestion,
+  textboxQuestion,
+  visualAnalogueScaleQuestion,
+} from 'models/Session/QuestionTypes';
+
+import VariableChooser from 'containers/VariableChooser';
 
 import Box from 'components/Box';
 import { StyledInput } from 'components/Input/StyledInput';
@@ -19,6 +30,7 @@ import Img from 'components/Img';
 import Collapse from 'components/Collapse';
 import InequalityChooser from 'components/InequalityChooser';
 import H2 from 'components/H2';
+import { NoMarginRow } from 'components/ReactGridSystem';
 
 import {
   changeFormulaMatch,
@@ -27,6 +39,7 @@ import {
   changeSelectedVariantId,
 } from 'global/reducers/textMessages';
 
+import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessagesContext } from '../../utils';
 import messages from './messages';
 
@@ -40,7 +53,9 @@ const VariantItem = ({
   disabled,
   changeSelectedVariant,
 }) => {
-  const { formatMessage } = useContext(TextMessagesContext);
+  const { sessionId, interventionId, formatMessage } = useContext(
+    TextMessagesContext,
+  );
 
   const toggleCollapsable = () => {
     if (open) changeSelectedVariant('');
@@ -57,6 +72,14 @@ const VariantItem = ({
 
   const handleDeleteCase = () => {
     removeVariant(id);
+  };
+
+  const handleAddVariable = variable => {
+    const variableHelper = new VariableHelper(variable);
+
+    handleContentChange(
+      `${content}${variableHelper.getFormattedVariableForDynamicInput()}`,
+    );
   };
 
   return (
@@ -115,9 +138,34 @@ const VariantItem = ({
         </Row>
 
         <Row justfy="start">
-          <Text whiteSpace="pre">
-            {formatMessage(messages.sectionCaseContentHeader)}
-          </Text>
+          <NoMarginRow justify="between" width="100%">
+            <Text whiteSpace="pre">
+              {formatMessage(messages.sectionCaseContentHeader)}
+            </Text>
+            <VariableChooser
+              disabled={disabled}
+              interventionId={interventionId}
+              onClick={handleAddVariable}
+              placement="right"
+              questionTypeWhitelist={[
+                dateQuestion.id,
+                textboxQuestion.id,
+                numberQuestion.id,
+                visualAnalogueScaleQuestion.id,
+                currencyQuestion.id,
+                nameQuestion.id,
+              ]}
+              sessionId={sessionId}
+              includeAllVariables
+              includeCurrentSession
+              includeNonDigitVariables
+              isMultiSession
+            >
+              <Text fontWeight="bold" color={themeColors.secondary}>
+                {formatMessage(settingsMessages.addVariableButton)}
+              </Text>
+            </VariableChooser>
+          </NoMarginRow>
           <Box bg={colors.linkWater} width="100%" mt={10} mb={20} px={8} py={8}>
             <StyledInput
               type="multiline"

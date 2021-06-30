@@ -50,7 +50,7 @@ const TextMessagesFormula = ({
     <>
       <Row align="center" justify="between">
         <Col>{formatMessage(messages.formula)}</Col>
-        <Col align="end">
+        <Col align="end" width="content">
           <VariableChooser
             includeAllVariables
             disabled={disabled}
