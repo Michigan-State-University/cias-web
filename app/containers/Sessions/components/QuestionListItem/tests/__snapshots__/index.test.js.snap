@@ -36,7 +36,7 @@ exports[`<QuestionListItem /> should match the snapshot 1`] = `
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  color: #9AA1B6;
+  color: #6B707C;
 }
 
 .c14 {

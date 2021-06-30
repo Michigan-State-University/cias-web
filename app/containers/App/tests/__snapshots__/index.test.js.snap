@@ -72,7 +72,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
           class="styled__SidebarStyled-faqctv-0 bYWvzH"
         >
           <p
-            class="Text-e4p0w3-0 Comment-j8a9v8-0 eMBtpX kewGwK"
+            class="Text-e4p0w3-0 Comment-j8a9v8-0 eMBtpX gffAtl"
           >
             CIAS Panel
           </p>
@@ -132,7 +132,7 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <p
-              class="Text-e4p0w3-0 Comment-j8a9v8-0 zgurZ jLgoWH"
+              class="Text-e4p0w3-0 Comment-j8a9v8-0 zgurZ eHbKUI"
               width="100%"
             >
               Reporting panel

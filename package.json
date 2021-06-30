@@ -1,6 +1,6 @@
 {
   "name": "cias-3.0",
-  "version": "0.9.2",
+  "version": "0.9.3",
   "description": "CIAS 3.0 Web Application",
   "engines": {
     "npm": "6.x",

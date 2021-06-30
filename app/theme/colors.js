@@ -69,6 +69,7 @@ const themeColors = {
   text: colors.bluewood,
   highlight: colors.linkWater,
   warning: colors.vermilion,
+  comment: colors.sonicSilver,
 };
 
 export { colors, themeColors };

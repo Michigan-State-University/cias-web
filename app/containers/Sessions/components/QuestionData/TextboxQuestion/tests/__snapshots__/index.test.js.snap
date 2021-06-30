@@ -30,5 +30,10 @@ exports[`<TextboxQuestion /> Should render and match the snapshot 1`] = `
       </div>
     </div>
   </div>
+  <p
+    class="Text-e4p0w3-0 Comment-j8a9v8-0 jhwTed fRkavf"
+  >
+    Remaining characters: 250
+  </p>
 </div>
 `;

@@ -33,6 +33,10 @@ export default defineMessages({
     id: `${scope}.narrator_skippable`,
     defaultMessage: 'Skippable Narrator',
   },
+  text_limit: {
+    id: `${scope}.text_limit`,
+    defaultMessage: 'Text limit',
+  },
   proceed_button: {
     id: `${scope}.proceed_button`,
     defaultMessage: 'Continue Button',
@@ -173,5 +177,9 @@ export default defineMessages({
     id: `${scope}.blockRemovalConfirmationDescription`,
     defaultMessage:
       'Those block types will be removed in this question and their data will be wiped out',
+  },
+  textLimitSettingsPlaceholder: {
+    id: `${scope}.textLimitSettingsPlaceholder`,
+    defaultMessage: 'E.g. 250',
   },
 });

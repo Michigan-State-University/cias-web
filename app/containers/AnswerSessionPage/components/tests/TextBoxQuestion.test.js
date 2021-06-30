@@ -25,6 +25,9 @@ describe('<TextBoxQuestion />', () => {
       body: {
         variable: '1',
       },
+      settings: {
+        text_limit: 250,
+      },
       id: 'test-id',
     },
     answerBody: [],

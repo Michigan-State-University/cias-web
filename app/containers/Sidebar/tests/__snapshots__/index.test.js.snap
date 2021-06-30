@@ -23,7 +23,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  color: #9AA1B6;
+  color: #6B707C;
   margin-bottom: 8px !important;
 }
 
@@ -32,7 +32,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  color: #9AA1B6;
+  color: #6B707C;
   padding-top: 20px;
   margin-top: 20px;
   border-top: 1px solid #D5DEEA;
@@ -218,7 +218,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  color: #9AA1B6;
+  color: #6B707C;
   margin-bottom: 8px !important;
 }
 
@@ -227,7 +227,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  color: #9AA1B6;
+  color: #6B707C;
   padding-top: 20px;
   margin-top: 20px;
   border-top: 1px solid #D5DEEA;
