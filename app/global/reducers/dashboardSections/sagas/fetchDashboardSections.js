@@ -22,9 +22,9 @@ export function* fetchDashboardSections({
 
     yield put(fetchDashboardSectionsSuccess(dashboardSections));
 
-    let chartDataSuffix = `?statuses=[]published`;
+    let chartDataSuffix = `?statuses[]=published`;
     if (!fromDashboardView) {
-      chartDataSuffix += `&statuses=[]data_collection`;
+      chartDataSuffix += `&statuses[]=data_collection`;
     }
     const chartDataUrl = `v1/organizations/${organizationId}/charts_data/generate${chartDataSuffix}`;
     const { data: chartsData } = yield call(axios.get, chartDataUrl);

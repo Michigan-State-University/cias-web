@@ -25,7 +25,8 @@ export function* editChart({ payload: { chart } }) {
 
     if (chart.status === ChartStatus.DATA_COLLECTION) {
       const organization = yield select(makeSelectOrganization());
-      const chartDataSuffix = `?statuses=[]published&statuses=[]data_collection`;
+      const chartDataSuffix = `?statuses[]=published&statuses[]
+      =data_collection`;
       const chartDataUrl = `v1/organizations/${organization.id}/charts_data/${
         chart.id
       }/generate${chartDataSuffix}`;
