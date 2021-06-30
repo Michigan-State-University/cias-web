@@ -34,7 +34,7 @@ const BarChart = ({
   disableAnimation,
 }) => {
   const data = useMemo(() => {
-    if (!realChartData && status === ChartStatus.PUBLISHED) return null;
+    if (!realChartData && status !== ChartStatus.DRAFT) return null;
     if (!realChartData) return generateBarChartPreviewData(chartType);
     if (realChartData) {
       return realChartData;
@@ -101,7 +101,7 @@ const BarChart = ({
     if (chartType === ChartTypeDto.PERCENTAGE_BAR_CHART) {
       return [0, HUNDRED_PERCENT];
     }
-    if (status === ChartStatus.PUBLISHED) {
+    if (status !== ChartStatus.DRAFT) {
       return [0, maxNumericValue];
     }
     return [0, MAX_NUMERIC_VALUE];

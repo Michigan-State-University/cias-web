@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import objectToCamelCase from 'utils/objectToCamelCase';
-import { FETCH_SECTIONS_REQUEST } from '../constants';
+import { ChartStatus, FETCH_SECTIONS_REQUEST } from '../constants';
 import {
   fetchDashboardSectionsError,
   fetchDashboardSectionsSuccess,
@@ -21,8 +21,15 @@ export function* fetchDashboardSections({
     const dashboardSections = jsonApiToArray(data, 'dashboardSection');
 
     yield put(fetchDashboardSectionsSuccess(dashboardSections));
+
+    const availableChartStatuses = [ChartStatus.PUBLISHED];
+    if (!fromDashboardView) {
+      availableChartStatuses.push(ChartStatus.DATA_COLLECTION);
+    }
     const chartDataUrl = `v1/organizations/${organizationId}/charts_data/generate`;
-    const { data: chartsData } = yield call(axios.get, chartDataUrl);
+    const { data: chartsData } = yield call(axios.get, chartDataUrl, {
+      params: { statuses: availableChartStatuses },
+    });
     const parsedData = objectToCamelCase(chartsData.data_for_charts);
     yield put(setChartsData(parsedData));
   } catch (error) {
