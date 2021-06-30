@@ -15,13 +15,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import history from 'utils/history';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from 'components/ReactToastify';
 import { ScreenClassProvider } from 'react-grid-system';
 
 import smoothscroll from 'smoothscroll-polyfill';
 
 import 'sanitize.css/sanitize.css';
-import 'react-toastify/dist/ReactToastify.css';
 
 // Import root app
 import App from 'containers/App';

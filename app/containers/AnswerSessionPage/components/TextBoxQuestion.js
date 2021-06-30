@@ -15,6 +15,7 @@ const TextBoxQuestion = ({
     body: {
       variable: { name },
     },
+    settings: { text_limit: textLimit },
   } = question;
 
   const onChange = event => {
@@ -30,6 +31,7 @@ const TextBoxQuestion = ({
       formatMessage={formatMessage}
       answerBody={answerBody?.[0]}
       onChange={onChange}
+      textLimit={textLimit}
     />
   );
 };

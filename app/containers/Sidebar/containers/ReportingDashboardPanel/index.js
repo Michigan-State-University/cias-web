@@ -23,6 +23,7 @@ import Button from 'components/Button';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 import Box from 'components/Box';
+import Column from 'components/Column';
 
 import messages from './messages';
 import OrganizationItem from '../../components/OrganizationItem';
@@ -47,7 +48,7 @@ const ReportingDashboardPanel = ({
     createOrganization();
   };
 
-  const renderHealthSystems = () => {
+  const renderOrganizations = () => {
     if (organizationsError) {
       return <ErrorAlert errorText={organizationsError} />;
     }
@@ -64,7 +65,7 @@ const ReportingDashboardPanel = ({
   };
 
   return (
-    <Box width="100%">
+    <Column width="100%" overflow="hidden">
       {canAccessOrganizations && (
         <>
           <Comment
@@ -92,8 +93,8 @@ const ReportingDashboardPanel = ({
           {newOrganizationLoading && <Spinner color={themeColors.secondary} />}
         </>
       )}
-      {renderHealthSystems()}
-    </Box>
+      <Box overflow="scroll">{renderOrganizations()}</Box>
+    </Column>
   );
 };
 

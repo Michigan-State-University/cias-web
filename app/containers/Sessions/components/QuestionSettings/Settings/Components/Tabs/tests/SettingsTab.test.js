@@ -32,6 +32,7 @@ describe('<SettingsTab />', () => {
       subtitle: true,
       title: true,
       video: false,
+      narrator_skippable: false,
     },
     type: singleQuestion.id,
     id: 'test',

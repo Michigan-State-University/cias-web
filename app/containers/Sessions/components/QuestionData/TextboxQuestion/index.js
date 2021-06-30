@@ -4,18 +4,23 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
+import { Markup } from 'interweave';
+
+import { colors } from 'theme';
+
+import {
+  makeSelectSelectedQuestion,
+  updateQuestionData,
+} from 'global/reducers/questions';
 
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Question from 'models/Session/Question';
 import Row from 'components/Row';
-import { colors } from 'theme/colors';
-import {
-  makeSelectSelectedQuestion,
-  updateQuestionData,
-} from 'global/reducers/questions';
+import Comment from 'components/Text/Comment';
 
+import answerPageMessages from 'containers/AnswerSessionPage/layouts/messages';
 import messages from './messages';
 import { UPDATE_DATA } from './constants';
 
@@ -24,7 +29,14 @@ const TextboxQuestion = ({
   updateAnswer,
   intl: { formatMessage },
 }) => {
-  const { payload } = selectedQuestion.body.data[0];
+  const {
+    body: {
+      data: [{ payload }],
+    },
+    settings: { text_limit: textLimit },
+  } = selectedQuestion;
+
+  const isTextLimited = textLimit > 0;
 
   return (
     <Column mt={10}>
@@ -45,6 +57,18 @@ const TextboxQuestion = ({
           />
         </Row>
       </Box>
+
+      <Comment mt={5}>
+        <Markup
+          content={formatMessage(
+            answerPageMessages.textBoxQuestionRemainingCharacters,
+            {
+              remaining: isTextLimited ? textLimit - payload.length : '&infin;',
+            },
+          )}
+          noWrap
+        />
+      </Comment>
     </Column>
   );
 };

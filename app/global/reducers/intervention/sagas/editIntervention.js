@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import globalMessages from 'global/i18n/globalMessages';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { formatMessage } from 'utils/intlOutsideReact';
+import objectToSnakeCase from 'utils/objectToSnakeCase';
 
 import { editInterventionError, editInterventionSuccess } from '../actions';
 import {
@@ -18,7 +19,11 @@ export function* editIntervention({ payload: { intervention } }) {
   try {
     const {
       data: { data },
-    } = yield call(axios.patch, requestURL, { intervention });
+    } = yield call(
+      axios.patch,
+      requestURL,
+      objectToSnakeCase({ intervention }),
+    );
     const mappedData = defaultMapper(data);
     yield put(editInterventionSuccess({ ...intervention, ...mappedData }));
   } catch (error) {

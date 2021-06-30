@@ -7,6 +7,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
+import { IntlProvider } from 'react-intl';
+import { DEFAULT_LOCALE } from 'i18n';
 
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
@@ -50,7 +52,9 @@ describe('<CharacterAnim />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <CharacterAnim {...defaultProps} />
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <CharacterAnim {...defaultProps} />
+        </IntlProvider>
       </Provider>,
     );
     expect(spy).not.toHaveBeenCalled();
@@ -59,7 +63,9 @@ describe('<CharacterAnim />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <Provider store={store}>
-        <CharacterAnim {...defaultProps} />
+        <IntlProvider locale={DEFAULT_LOCALE}>
+          <CharacterAnim {...defaultProps} />
+        </IntlProvider>
       </Provider>,
     );
     expect(container).toMatchSnapshot();

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { memo, useContext, useMemo } from 'react';
 
-import { themeColors } from 'theme';
+import { colors, themeColors } from 'theme';
 import { EntityType } from 'global/reducers/organizations';
 
 import OrganizationIcon from 'assets/svg/organization-icon.svg';
@@ -14,7 +14,7 @@ import Text from 'components/Text';
 import { ManageOrganizationsContext } from '../constants';
 import { EntityRow, FullWidthContainer } from '../../../styled';
 
-const EntityTreeNode = ({ name, type, id, onClick }) => {
+const EntityTreeNode = ({ deleted, id, name, onClick, type }) => {
   const { selectedEntity } = useContext(ManageOrganizationsContext);
 
   const isSelected = useMemo(
@@ -35,18 +35,30 @@ const EntityTreeNode = ({ name, type, id, onClick }) => {
     }
   }, [type]);
 
+  const iconFillColor = useMemo(() => {
+    if (deleted) return colors.yellowRed;
+    if (isSelected) return themeColors.secondary;
+
+    return '';
+  }, [isSelected, deleted]);
+
+  const textColor = useMemo(() => {
+    if (deleted) return colors.yellowRed;
+    if (isSelected) return themeColors.secondary;
+
+    return themeColors.text;
+  }, [isSelected, deleted]);
+
   return (
     <FullWidthContainer>
-      <EntityRow align="end" $isSelected={isSelected} onClick={onClick}>
-        <Icon
-          src={icon}
-          fill={isSelected ? themeColors.secondary : ''}
-          mr={8}
-        />
-        <Text
-          fontWeight="bold"
-          color={isSelected ? themeColors.secondary : themeColors.text}
-        >
+      <EntityRow
+        align="end"
+        $isSelected={isSelected}
+        $isDeleted={deleted}
+        onClick={onClick}
+      >
+        <Icon src={icon} fill={iconFillColor} mr={8} />
+        <Text fontWeight="bold" color={textColor}>
           {name}
         </Text>
       </EntityRow>
@@ -55,6 +67,7 @@ const EntityTreeNode = ({ name, type, id, onClick }) => {
 };
 
 EntityTreeNode.propTypes = {
+  deleted: PropTypes.bool,
   id: PropTypes.string,
   name: PropTypes.string,
   type: PropTypes.string,

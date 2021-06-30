@@ -1,7 +1,7 @@
 import produce from 'immer';
 import cloneDeep from 'lodash/cloneDeep';
 
-import { updateItemById } from 'utils/reduxUtils';
+import { assignDraftItemsById, updateItemById } from 'utils/reduxUtils';
 
 import { dashboardSectionReducer } from './dashboardSectionReducer';
 import {
@@ -31,12 +31,21 @@ import {
   FETCH_SECTIONS_SUCCESS,
   COPY_CHART_SUCCESS,
   SELECT_CHART_ACTION,
+  SET_CHARTS_DATA,
+  SET_CHARTS_FILTERS,
+  REORDER_DASHBOARD_SECTIONS_SUCCESS,
+  REORDER_DASHBOARD_SECTIONS_FAILURE,
+  REORDER_DASHBOARD_SECTIONS_REQUEST,
+  REORDER_CHARTS_REQUEST,
+  REORDER_CHARTS_SUCCESS,
+  REORDER_CHARTS_FAILURE,
 } from './constants';
 
 export const initialState = {
   dashboardSections: [],
   singleDashboardSection: null,
   selectedChart: null,
+  filters: null,
   cache: { dashboardSections: [], singleDashboardSection: null },
   loaders: {
     fetchDashboardSectionLoader: false,
@@ -120,10 +129,10 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         draft.loaders.editDashboardSectionLoader = false;
         draft.errors.editDashboardSectionError = null;
 
-        updateItemById(
+        assignDraftItemsById(
+          draft.dashboardSections,
           draft.cache.dashboardSections,
           payload.dashboardSectionId,
-          item => dashboardSectionReducer(item, action),
         );
         break;
       }
@@ -300,6 +309,59 @@ const dashboardSectionsReducer = (state = initialState, action) =>
           };
         else draft.selectedChart = null;
 
+        break;
+      }
+
+      case SET_CHARTS_DATA: {
+        const { chartsData } = payload;
+        for (let i = 0; i < chartsData.length; i++) {
+          updateItemById(
+            draft.dashboardSections,
+            chartsData[i].dashboardSectionId,
+            item =>
+              dashboardSectionReducer(item, { type, payload: chartsData[i] }),
+          );
+        }
+
+        break;
+      }
+      case SET_CHARTS_FILTERS: {
+        const { filters } = payload;
+        draft.filters = filters;
+        for (let i = 0; i < draft.dashboardSections.length; i++) {
+          updateItemById(
+            draft.dashboardSections,
+            draft.dashboardSections[i].id,
+            item => dashboardSectionReducer(item, action),
+          );
+        }
+        break;
+      }
+
+      case REORDER_DASHBOARD_SECTIONS_REQUEST: {
+        const { dashboardSections } = payload;
+        draft.cache.dashboardSections = state.dashboardSections;
+        draft.dashboardSections = dashboardSections;
+        break;
+      }
+
+      case REORDER_DASHBOARD_SECTIONS_SUCCESS:
+      case REORDER_CHARTS_SUCCESS: {
+        draft.cache.dashboardSections = state.dashboardSections;
+        break;
+      }
+
+      case REORDER_DASHBOARD_SECTIONS_FAILURE:
+      case REORDER_CHARTS_FAILURE: {
+        draft.dashboardSections = state.cache.dashboardSections;
+        break;
+      }
+
+      case REORDER_CHARTS_REQUEST: {
+        const { dashboardSectionId } = payload;
+        updateItemById(draft.dashboardSections, dashboardSectionId, item =>
+          dashboardSectionReducer(item, action),
+        );
         break;
       }
     }

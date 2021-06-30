@@ -7,14 +7,24 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { useInjectSaga } from 'redux-injectors';
+import { createStructuredSelector } from 'reselect';
+
+import GlobalStyle from 'global-styles';
+
+import { Roles, ResearcherRoles } from 'models/User/UserRoles';
+import navbarNames, { NAVIGATION } from 'utils/navbarNames';
+import rootSaga from 'global/sagas/rootSaga';
+import { makeSelectUser } from 'global/reducers/auth';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
-import AppRoute from 'components/AppRoute';
 import EditSessionPage from 'containers/Sessions/containers/EditSessionPage';
-import GlobalStyle from 'global-styles';
 import InterventionDetailsPage from 'containers/InterventionDetailsPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -38,18 +48,11 @@ import ReportingDashboardPage from 'containers/ReportingDashboardPage/Loadable';
 import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable';
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
-import IdleTimer from 'components/IdleTimer/Loadable';
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
 
-import { Roles, ResearcherRoles } from 'models/User/UserRoles';
+import AppRoute from 'components/AppRoute';
+import IdleTimer from 'components/IdleTimer/Loadable';
 
-import navbarNames, { NAVIGATION } from 'utils/navbarNames';
-import rootSaga from 'global/sagas/rootSaga';
-import { useInjectSaga } from 'redux-injectors';
-import { createStructuredSelector } from 'reselect';
-import { makeSelectUser } from 'global/reducers/auth';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
 import {
   accountsTabId,
   interventionsTabId,
@@ -58,7 +61,14 @@ import {
 } from 'utils/defaultNavbarTabs';
 
 export function App({ user }) {
+  const { locale } = useIntl();
   useInjectSaga({ key: 'app', saga: rootSaga });
+
+  useEffect(() => {
+    const appRoot = document.getElementById('app');
+
+    appRoot?.setAttribute('lang', locale);
+  }, [locale]);
 
   const renderDashboardByRole = () => {
     if (user) {

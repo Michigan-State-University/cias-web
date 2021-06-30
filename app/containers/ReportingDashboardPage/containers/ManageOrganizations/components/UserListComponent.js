@@ -38,7 +38,14 @@ const UserListComponent = ({
   const closeInviteForm = useCallback(() => setIsInviteFormOpen(false), []);
 
   const [selectedUser, setSelectedUser] = useState(null);
-  const openUserDetails = useCallback(user => () => setSelectedUser(user), []);
+  const openUserDetails = useCallback(
+    user => () => {
+      if (user.active) {
+        setSelectedUser(user);
+      }
+    },
+    [],
+  );
   const closeUserDetails = useCallback(() => setSelectedUser(null), []);
 
   const avatarColor = useMemo(() => RolesColors[role], [role]);
@@ -78,6 +85,7 @@ const UserListComponent = ({
             <Box
               key={`UserItem-${user.id}-${index}`}
               mb={index === users.length - 1 ? 0 : 8}
+              width="100%"
             >
               <UserItem
                 avatarColor={avatarColor}

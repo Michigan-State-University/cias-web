@@ -146,7 +146,7 @@ export default defineMessages({
   },
   chartSettingsCopy: {
     id: `${scope}.chartSettingsCopy`,
-    defaultMessage: 'Copy chart',
+    defaultMessage: 'Duplicate chart',
   },
   chartFormulaCaseLabelPlaceholder: {
     id: `${scope}.chartFormulaCaseLabelPlaceholder`,
@@ -179,5 +179,9 @@ export default defineMessages({
       ${ChartStatus.DATA_COLLECTION} {Data Collection}
       ${ChartStatus.PUBLISHED} {Published}
     }`,
+  },
+  noChartsData: {
+    id: `${scope}.noChartsData`,
+    defaultMessage: 'No charts data',
   },
 });

@@ -12,24 +12,24 @@ import messages from './messages';
 import { TranscriptBox } from './styled';
 import TextBlock from './TextBlock';
 
-const QuestionTranscriptUI = ({ blocks, currentBlockIndex }) => {
+const QuestionTranscriptUI = ({ texts, currentBlockIndex, language }) => {
   const { formatMessage } = useIntl();
 
   return (
     <Column height="100%">
       <H3 mb={16}>{formatMessage(messages.header)}</H3>
-      <TranscriptBox>
+      <TranscriptBox lang={language}>
         <ScrollFogBox overflow="scroll" borderRadius="0px">
-          {blocks.map((block, index) => (
+          {texts.map(({ text, realIndex }, index) => (
             <Box key={`Block-Transcript-${index}`}>
               <TextBlock
-                block={block}
-                isCurrent={block.realIndex === currentBlockIndex}
+                text={text}
+                isCurrent={realIndex === currentBlockIndex}
               />
               <br />
             </Box>
           ))}
-          {(!blocks || !blocks.length) && (
+          {(!texts || !texts.length) && (
             <H3>{formatMessage(messages.emptyState)}</H3>
           )}
         </ScrollFogBox>
@@ -39,8 +39,9 @@ const QuestionTranscriptUI = ({ blocks, currentBlockIndex }) => {
 };
 
 QuestionTranscriptUI.propTypes = {
-  blocks: PropTypes.arrayOf(PropTypes.object),
+  texts: PropTypes.arrayOf(PropTypes.object),
   currentBlockIndex: PropTypes.number,
+  language: PropTypes.string,
 };
 
 export default memo(QuestionTranscriptUI);

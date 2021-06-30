@@ -42,10 +42,10 @@ export default defineMessages({
   },
   feedbackTitle: {
     id: `${scope}.feedbackTitle`,
-    defaultMessage: `We’re waiting for your feedback!`,
+    defaultMessage: `Something went wrong? Have a new idea?`,
   },
   feedbackDescription: {
     id: `${scope}.feedbackDescription`,
-    defaultMessage: `Share your opinion on CIAS`,
+    defaultMessage: `Share your thoughts here!`,
   },
 });

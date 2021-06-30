@@ -27,3 +27,7 @@ export const SVG = styled(({ fill, stroke, ...props }) => (
   cursor: ${getCursorStyle};
   ${margin};
 `;
+
+export const SvgWrapper = styled.div`
+  position: relative;
+`;

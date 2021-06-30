@@ -571,7 +571,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                 id="lottie"
               >
                 <div
-                  aria-label="animation"
+                  aria-label="This is a Narrator that speaks and moves around the screen."
                   role="button"
                   style="width: 100px; height: 100px; overflow: hidden; outline: none;"
                   tabindex="0"

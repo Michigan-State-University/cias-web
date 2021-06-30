@@ -3,20 +3,30 @@
 exports[`<TextBoxQuestion /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Box-sc-1vhutan-0 dFCBuO"
-    width="100%"
+    class="Column-sc-4zswzq-0 ekpwZH"
   >
     <div
-      class="Row-y1cs0u-0 dskFsL"
+      class="Box-sc-1vhutan-0 dFCBuO"
+      width="100%"
     >
-      <textarea
-        aria-label="Enter your response here"
-        class="TextArea-sc-175uiux-0 gRMYNb"
-        placeholder="Enter your response here"
-        rows="5"
-        width="100%"
-      />
+      <div
+        class="Row-y1cs0u-0 dskFsL"
+      >
+        <textarea
+          aria-label="Enter your response here"
+          class="TextArea-sc-175uiux-0 gRMYNb"
+          maxlength="250"
+          placeholder="Enter your response here"
+          rows="5"
+          width="100%"
+        />
+      </div>
     </div>
+    <p
+      class="Text-e4p0w3-0 Comment-j8a9v8-0 jhwTed fRkavf"
+    >
+      Remaining characters: 250
+    </p>
   </div>
 </div>
 `;

@@ -29,9 +29,13 @@ export default defineMessages({
     id: `${scope}.subtitle`,
     defaultMessage: 'Main Text',
   },
-  narratorSkippable: {
-    id: `${scope}.narratorSkippable`,
+  narrator_skippable: {
+    id: `${scope}.narrator_skippable`,
     defaultMessage: 'Skippable Narrator',
+  },
+  text_limit: {
+    id: `${scope}.text_limit`,
+    defaultMessage: 'Text limit',
   },
   proceed_button: {
     id: `${scope}.proceed_button`,
@@ -173,5 +177,9 @@ export default defineMessages({
     id: `${scope}.blockRemovalConfirmationDescription`,
     defaultMessage:
       'Those block types will be removed in this question and their data will be wiped out',
+  },
+  textLimitSettingsPlaceholder: {
+    id: `${scope}.textLimitSettingsPlaceholder`,
+    defaultMessage: 'E.g. 250',
   },
 });

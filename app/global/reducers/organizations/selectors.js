@@ -40,7 +40,25 @@ export const makeSelectNewOrganizationLoader = () =>
 export const makeSelectOrganization = () =>
   createSelector(
     selectOrganizationState,
-    substate => substate.organization,
+    substate => {
+      const { organization, showDeletedEntities } = substate;
+      const showDeletedFilter = ({ deleted }) =>
+        !deleted || showDeletedEntities;
+
+      return organization
+        ? {
+            ...organization,
+            healthSystems: organization.healthSystems
+              .filter(showDeletedFilter)
+              .map(healthSystem => ({
+                ...healthSystem,
+                healthClinics: healthSystem.healthClinics.filter(
+                  showDeletedFilter,
+                ),
+              })),
+          }
+        : null;
+    },
   );
 
 export const makeSelectOrganizationLoaders = () =>
@@ -86,4 +104,10 @@ export const makeSelectDashboardViewOptions = () =>
   createSelector(
     selectOrganizationState,
     substate => substate.organizationSelectData,
+  );
+
+export const makeSelectShowDeletedEntitiesToggle = () =>
+  createSelector(
+    selectOrganizationState,
+    substate => substate.showDeletedEntities,
   );

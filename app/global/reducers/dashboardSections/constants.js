@@ -49,6 +49,22 @@ export const COPY_CHART_SUCCESS = 'app/dashboardSections/COPY_CHART_SUCCESS';
 export const COPY_CHART_ERROR = 'app/dashboardSections/COPY_CHART_ERROR';
 
 export const SELECT_CHART_ACTION = 'app/dashboardSections/SELECT_CHART_ACTION';
+export const SET_CHARTS_DATA = 'app/dashboardSections/SET_CHARTS_DATA';
+export const SET_CHARTS_FILTERS = 'app/dashboardSections/SET_CHARTS_FILTERS';
+
+export const REORDER_DASHBOARD_SECTIONS_REQUEST =
+  'app/dashboardSections/REORDER_DASHBOARD_SECTIONS_REQUEST';
+export const REORDER_DASHBOARD_SECTIONS_SUCCESS =
+  'app/dashboardSections/REORDER_DASHBOARD_SECTIONS_SUCCESS';
+export const REORDER_DASHBOARD_SECTIONS_FAILURE =
+  'app/dashboardSections/REORDER_DASHBOARD_SECTIONS_FAILURE';
+
+export const REORDER_CHARTS_REQUEST =
+  'app/dashboardSections/REORDER_CHARTS_REQUEST';
+export const REORDER_CHARTS_SUCCESS =
+  'app/dashboardSections/REORDER_CHARTS_SUCCESS';
+export const REORDER_CHARTS_FAILURE =
+  'app/dashboardSections/REORDER_CHARTS_FAILURE';
 
 /**
  * @description Chart Type used by the API; DTO of charts uses this type internally

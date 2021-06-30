@@ -12,6 +12,23 @@ exports[`<UrlPreview /> Should render and match the snapshot 1`] = `
 }
 
 .c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  background-color: rgba(255,255,255,1);
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 70%;
+  padding: 20px;
+}
+
+.c2 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -22,51 +39,76 @@ exports[`<UrlPreview /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c3 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin: auto;
-  width: 50px;
-  height: 50px;
+.c7 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 8px;
+  margin-bottom: 13px;
+  font-size: 11px;
+  color: #2F3850;
 }
 
-.c3:after {
-  content: ' ';
-  display: block;
-  width: 33.33333333333333px;
-  height: 33.33333333333333px;
-  border-radius: 50%;
-  border: 6px solid #B727EA;
-  border-color: #B727EA transparent #B727EA transparent;
-  -webkit-animation: hAjVGa 1.2s linear infinite;
-  animation: hAjVGa 1.2s linear infinite;
+.c9 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 3px;
+  margin-bottom: 3px;
+  font-size: 9px;
+  color: rgba(183,39,234,1);
+  white-space: pre;
+  text-overflow: hidden;
+  overflow: hidden;
+  color: rgba(183,39,234,1);
 }
 
-.c2 {
-  width: 100%;
-  height: 100%;
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  color: #2F3850;
+}
+
+.c10 {
+  background-image: url("image1.png");
+  background-size: cover;
+  background-color: #9AA1B6;
+  background-position: center;
+  width: 30%;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.c10:hover {
+  cursor: pointer;
+}
+
+.c4 {
+  -webkit-text-decoration: none !important;
+  text-decoration: none !important;
+  color: #2F3850;
+}
+
+.c8 {
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  -o-box-orient: vertical;
   display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+}
+
+.c6 {
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-box-orient: vertical;
+  -o-box-orient: vertical;
+  display: -webkit-box;
 }
 
 <div>
@@ -79,13 +121,51 @@ exports[`<UrlPreview /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c2"
-        data-testid="inline-loader"
       >
         <div
           class="c3"
-          color="#B727EA"
-          size="50"
-          width="6"
+          width="70%"
+        >
+          <a
+            class="c4"
+            href="test-url"
+            target="_blank"
+          >
+            <h3
+              class="c5 c6"
+            >
+              Test
+            </h3>
+          </a>
+          <a
+            class="c4"
+            href="test-url"
+            target="_blank"
+          >
+            <p
+              class="c7 c8"
+              font-size="11"
+            >
+              Test site - mock data
+            </p>
+          </a>
+          <a
+            class="c4"
+            href="test-url"
+            target="_blank"
+          >
+            <p
+              class="c9"
+              color="#B727EA"
+              font-size="9"
+              overflow="hidden"
+            >
+              test-url
+            </p>
+          </a>
+        </div>
+        <div
+          class="c10"
         />
       </div>
     </div>

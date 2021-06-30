@@ -25,7 +25,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c10 {
+.c9 {
   width: auto;
   height: auto;
   display: block;
@@ -41,12 +41,10 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c8 {
+.c11 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  font-size: 18px;
-  font-weight: 700;
   color: #2F3850;
 }
 
@@ -54,18 +52,11 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  color: #2F3850;
-}
-
-.c13 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
   font-weight: 700;
   color: #2F3850;
 }
 
-.c14 {
+.c13 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -82,14 +73,12 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   -ms-flex-direction: row;
   flex-direction: row;
   height: auto;
+  width: 100%;
 }
 
-.c9 {
+.c8 {
   position: relative;
-  overflow: hidden;
   width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   font-size: 18px;
   font-weight: 700;
   color: #2F3850;
@@ -119,7 +108,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   flex-direction: column;
   color: #2F3850;
   background: #FFFFFF;
-  color: #000000;
+  color: #0E0E0E;
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
   -ms-flex-pack: justify;
@@ -161,14 +150,14 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
-.c11 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c11 div {
+.c10 div {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -212,26 +201,39 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
       </div>
       <div
         class="c7"
+        width="100%"
       >
-        <p
-          class="c8 c9"
+        <span
+          class="c8"
+          data-for="Name"
+          data-tip="Name"
           font-size="18"
           font-weight="bold"
+          theme="[object Object]"
+          width="0"
         >
-          Name
-        </p>
+          <span />
+          <span>
+            Name
+          </span>
+          <span
+            style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+          >
+            …
+          </span>
+        </span>
       </div>
       <div
-        class="c10"
+        class="c9"
         display="flex"
       >
         <div
           currentitem="false"
           data-for="test-id-tile-tooltip"
-          data-tip="true"
+          data-tip=""
         >
           <div
-            class="c11"
+            class="c10"
           />
         </div>
         <div
@@ -317,51 +319,51 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   
           </style>
           <p
-            class="c12"
+            class="c11"
           />
           <p
-            class="c13"
+            class="c12"
             font-weight="bold"
           >
             Created by: 
           </p>
           <p
-            class="c12"
+            class="c11"
           >
             Email: 
             test@test.com
           </p>
           <p
-            class="c12"
+            class="c11"
           >
             First name: 
             UserFirstName
           </p>
           <p
-            class="c14"
+            class="c13"
           >
             Last name: 
             UserLastName
           </p>
           <p
-            class="c13"
+            class="c12"
             font-weight="bold"
           >
             Created at: 
           </p>
           <p
-            class="c14"
+            class="c13"
           >
             2020/09/30 10:00 +00:00
           </p>
           <p
-            class="c13"
+            class="c12"
             font-weight="bold"
           >
             Updated at: 
           </p>
           <p
-            class="c14"
+            class="c13"
           >
             2020/09/30 10:00 +00:00
           </p>

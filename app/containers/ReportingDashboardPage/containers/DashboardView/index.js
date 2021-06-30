@@ -23,11 +23,16 @@ import Select from 'components/Select';
 import { arraysOverlap } from 'utils/arrayUtils';
 
 import Button from 'components/Button';
+import { setChartFiltersRequest } from 'global/reducers/dashboardSections';
 import messages from '../../messages';
 import DashboardSections from '../DashboardSetup/containers/DashboardSections';
 import { DEFAULT_OPTION, SELECT_OPTIONS } from './constants';
 
-const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
+const DashboardView = ({
+  fetchSelectOptions,
+  selectOptions,
+  setChartFilters,
+}) => {
   const { formatMessage } = useIntl();
   const [selectedValue, setSelectedValue] = useState(null);
   const [selectedDateRange, setSelectedDateRange] = useState(
@@ -95,7 +100,11 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
   }, [mappedSelectOptions]);
 
   const setChartDataFilters = () => {
-    console.log(selectedDateRange, selectedValue);
+    setChartFilters({
+      daysOffset: selectedDateRange,
+      clinics: selectedValue,
+      organizationId: organizationIdForRole,
+    });
   };
 
   const dateSelectOptions = useMemo(() => SELECT_OPTIONS(formatMessage), [
@@ -107,7 +116,7 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
       <Helmet>
         <title>{formatMessage(messages.dashboardView)}</title>
       </Helmet>
-      <Container>
+      <Container mx="55px !important" maxWidth="100% !important">
         <Row my={15} justify="around" width="100%">
           <Select
             width={500}
@@ -129,7 +138,9 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
           />
         </Row>
         <Row onClick={setChartDataFilters} mb={15} justify="center">
-          <Button width={200}>{formatMessage(messages.filterData)}</Button>
+          <Button disabled={selectedValue?.length === 0} width={200}>
+            {formatMessage(messages.filterData)}
+          </Button>
         </Row>
         {organizationIdForRole && (
           <DashboardSections
@@ -144,6 +155,7 @@ const DashboardView = ({ fetchSelectOptions, selectOptions }) => {
 
 DashboardView.propTypes = {
   fetchSelectOptions: PropTypes.func,
+  setChartFilters: PropTypes.func,
   selectOptions: PropTypes.array,
 };
 
@@ -153,6 +165,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = {
   fetchSelectOptions: fetchDashboardViewSelectOptionsRequest,
+  setChartFilters: setChartFiltersRequest,
 };
 
 const withConnect = connect(

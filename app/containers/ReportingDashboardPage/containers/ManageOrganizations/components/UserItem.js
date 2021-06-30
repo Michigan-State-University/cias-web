@@ -5,7 +5,7 @@ import { colors } from 'theme';
 
 import DashedCircleIcon from 'assets/svg/circle-dashed.svg';
 
-import { Col, Row } from 'components/ReactGridSystem';
+import { Col } from 'components/ReactGridSystem';
 import EllipsisText from 'components/Text/EllipsisText';
 import UserAvatar from 'components/UserAvatar';
 import Icon from 'components/Icon';
@@ -17,13 +17,9 @@ const UserItem = ({ avatarColor, user, onClick }) => {
 
   const wrapper = useCallback(
     component => (
-      <Row>
-        <Col>
-          <UserRow align="center" onClick={onClick}>
-            {component}
-          </UserRow>
-        </Col>
-      </Row>
+      <UserRow $active={active} align="center" onClick={onClick} nogutter>
+        {component}
+      </UserRow>
     ),
     [],
   );
@@ -33,32 +29,40 @@ const UserItem = ({ avatarColor, user, onClick }) => {
   if (active)
     return wrapper(
       <>
-        <UserAvatar
-          avatar={avatar}
-          backgroundColor={avatarColor}
-          firstName={firstName}
-          height={30}
-          lastName={lastName}
-          mr={10}
-          width={30}
-        />
-        <EllipsisText
-          fontWeight="bold"
-          maxWidth="200px"
-          text={fullNameString.trim() || email}
-        />
+        <Col xs="content">
+          <UserAvatar
+            avatar={avatar}
+            backgroundColor={avatarColor}
+            firstName={firstName}
+            height={30}
+            lastName={lastName}
+            mr={10}
+            width={30}
+          />
+        </Col>
+        <Col>
+          <EllipsisText
+            fontWeight="bold"
+            maxWidth="200px"
+            text={fullNameString.trim() || email}
+          />
+        </Col>
       </>,
     );
 
   return wrapper(
     <>
-      <Icon src={DashedCircleIcon} mr={10} />
-      <EllipsisText
-        color={colors.grey}
-        fontWeight="bold"
-        maxWidth="200px"
-        text={email}
-      />
+      <Col xs="content">
+        <Icon src={DashedCircleIcon} mr={10} />
+      </Col>
+      <Col>
+        <EllipsisText
+          color={colors.grey}
+          fontWeight="bold"
+          maxWidth="200px"
+          text={email}
+        />
+      </Col>
     </>,
   );
 };

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { memo, useCallback, useContext } from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { useIntl } from 'react-intl';
 
@@ -12,52 +12,75 @@ import {
   inviteAdminRequest,
 } from 'global/reducers/organizations';
 
+import { makeSelectUserRoles } from 'global/reducers/auth';
+import { RolePermissions } from 'models/User/RolePermissions';
 import { Roles } from 'models/User/UserRoles';
 
 import { Col, Row } from 'components/ReactGridSystem';
+import ConfirmationBox from 'components/ConfirmationBox';
 
+import { DeleteEntityModal } from '../Modals';
 import TopPanelComponent from './TopPanelComponent';
 import UserListComponent from './UserListComponent';
+
 import { ManageOrganizationsContext } from '../constants';
 import messages from '../../../messages';
 
 const OrganizationSettings = ({
+  openDeleteModal,
+  closeDeleteModal,
+  isDeleteModalOpen,
   deleteOrganization,
   editOrganization,
   inviteAdmin,
 }) => {
+  // selectors
+  const userRoles = useSelector(makeSelectUserRoles());
+
   const { formatMessage } = useIntl();
 
+  const { canDeleteOrganization } = RolePermissions(userRoles);
+
   const {
-    organization,
+    organization: { eInterventionAdmins, id, name, organizationAdmins },
     loaders: { deleteOrganization: deleteOrganizationLoader },
   } = useContext(ManageOrganizationsContext);
 
-  const onDelete = useCallback(() => deleteOrganization(organization.id), [
-    organization?.id,
+  const onDelete = useCallback(() => deleteOrganization(id), [id]);
+
+  const onEdit = useCallback(value => editOrganization({ ...value, id }), [id]);
+
+  const onInvite = useCallback((email, role) => inviteAdmin(id, email, role), [
+    id,
   ]);
-
-  const onEdit = useCallback(
-    value => editOrganization({ ...value, id: organization.id }),
-    [organization?.id],
-  );
-
-  const onInvite = useCallback(
-    (email, role) => inviteAdmin(organization.id, email, role),
-    [organization?.id],
-  );
 
   return (
     <>
+      <ConfirmationBox
+        visible={isDeleteModalOpen}
+        onClose={closeDeleteModal}
+        description={formatMessage(messages.deleteEntityModalTitle, {
+          type: formatMessage(messages.organizationHeader),
+        })}
+        confirmAction={onDelete}
+        content={
+          <DeleteEntityModal
+            name={name}
+            type={formatMessage(messages.organizationHeader)}
+          />
+        }
+      />
+
       <Row>
         <Col>
           <TopPanelComponent
+            canDelete={canDeleteOrganization}
             header={formatMessage(messages.organizationHeader)}
             icon={OrganizationIcon}
             isDeleting={deleteOrganizationLoader}
             label={formatMessage(messages.organizationLabel)}
-            name={organization.name}
-            onDelete={onDelete}
+            name={name}
+            onDelete={openDeleteModal}
             onEdit={onEdit}
             placeholder={formatMessage(messages.organizationPlaceholder)}
           />
@@ -69,10 +92,10 @@ const OrganizationSettings = ({
           <UserListComponent
             header={formatMessage(messages.interventionAdminsHeader)}
             helper={formatMessage(messages.interventionAdminsHelper)}
-            inviteTo={organization.name}
+            inviteTo={name}
             onInvite={onInvite}
             role={Roles.eInterventionAdmin}
-            users={organization.eInterventionAdmins}
+            users={eInterventionAdmins}
           />
         </Col>
       </Row>
@@ -82,10 +105,10 @@ const OrganizationSettings = ({
           <UserListComponent
             header={formatMessage(messages.organizationAdminsHeader)}
             helper={formatMessage(messages.organizationAdminsHelper)}
-            inviteTo={organization.name}
+            inviteTo={name}
             onInvite={onInvite}
             role={Roles.organizationAdmin}
-            users={organization.organizationAdmins}
+            users={organizationAdmins}
           />
         </Col>
       </Row>
@@ -94,6 +117,9 @@ const OrganizationSettings = ({
 };
 
 OrganizationSettings.propTypes = {
+  closeDeleteModal: PropTypes.func,
+  openDeleteModal: PropTypes.func,
+  isDeleteModalOpen: PropTypes.bool,
   deleteOrganization: PropTypes.func,
   editOrganization: PropTypes.func,
   inviteAdmin: PropTypes.func,

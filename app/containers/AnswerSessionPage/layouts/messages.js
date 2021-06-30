@@ -98,4 +98,8 @@ export default defineMessages({
     id: `${scope}.numberQuestionLabel`,
     defaultMessage: 'Provide a numeric value:',
   },
+  textBoxQuestionRemainingCharacters: {
+    id: `${scope}.textBoxQuestionRemainingCharacters`,
+    defaultMessage: 'Remaining characters: {remaining}',
+  },
 });

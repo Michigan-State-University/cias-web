@@ -16,6 +16,7 @@ import {
   makeSelectLoaders,
   makeSelectSelectedChart,
   selectChartAction,
+  reorderSectionsRequest,
 } from 'global/reducers/dashboardSections';
 
 import { Col, Row } from 'components/ReactGridSystem';
@@ -24,11 +25,13 @@ import Comment from 'components/Text/Comment';
 import DashedButton from 'components/Button/DashedButton';
 import Divider from 'components/Divider';
 
-import SectionComponent from '../components/SectionComponent';
+import DraggableSectionComponent from '../components/DraggableSectionComponent';
 import { ReportingDashboardPageContext } from '../../../constants';
 import { FullWidthContainer } from '../../../styled';
 import { DashboardSectionsContext } from '../constants';
 import messages from '../messages';
+import DroppableSectionParent from '../components/DroppableSectionParent';
+import { orderDashboardSections } from '../utils';
 
 const DashboardSections = ({
   fetchDashboardSections,
@@ -40,6 +43,7 @@ const DashboardSections = ({
   selectChart,
   fromDashboardView,
   organizableId,
+  reorderSections,
 }) => {
   const { organizationId } = useContext(ReportingDashboardPageContext);
   const { formatMessage } = useIntl();
@@ -59,6 +63,11 @@ const DashboardSections = ({
     () => addDashboardSection(organizationId),
     [organizationId],
   );
+
+  const onDragEnd = result => {
+    const orderedNewList = orderDashboardSections(result, dashboardSections);
+    reorderSections(organizationId, orderedNewList);
+  };
 
   if (fetchDashboardSectionsLoader) return <Loader type="inline" />;
 
@@ -87,14 +96,16 @@ const DashboardSections = ({
 
         <Row>
           <Col mt={10}>
-            {dashboardSections.map((section, index) => (
-              <SectionComponent
-                key={`SectionComponent-${index}-id-${section.id}`}
-                section={section}
-                index={index}
-                fromDashboardView={fromDashboardView}
-              />
-            ))}
+            <DroppableSectionParent onDragEnd={onDragEnd}>
+              {dashboardSections.map((section, index) => (
+                <DraggableSectionComponent
+                  key={`SectionComponent-${index}-id-${section.id}`}
+                  section={section}
+                  index={index}
+                  fromDashboardView={fromDashboardView}
+                />
+              ))}
+            </DroppableSectionParent>
           </Col>
         </Row>
 
@@ -124,6 +135,7 @@ DashboardSections.propTypes = {
   selectedChart: PropTypes.object,
   errors: PropTypes.object,
   selectChart: PropTypes.func,
+  reorderSections: PropTypes.func,
   fromDashboardView: PropTypes.bool,
   organizableId: PropTypes.string,
 };
@@ -139,6 +151,7 @@ const mapDispatchToProps = {
   fetchDashboardSections: fetchDashboardSectionsRequest,
   addDashboardSection: addDashboardSectionRequest,
   selectChart: selectChartAction,
+  reorderSections: reorderSectionsRequest,
 };
 
 const withConnect = connect(

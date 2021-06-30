@@ -15,7 +15,6 @@ const ReportingDashboardItem = ({ active, redirect, icon, name, alt, id }) => (
       onClick={redirect}
       key={id}
       padding={10}
-      ml={-10}
       display="flex"
       align="center"
       mb={5}

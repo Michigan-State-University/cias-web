@@ -2,6 +2,15 @@ import React from 'react';
 
 import { HUNDRED_PERCENT, RADIAN } from 'utils/mathUtils';
 
+import EllipsisText from 'components/Text/EllipsisText';
+import Row from 'components/Row';
+import {
+  X_AXIS_KEY,
+  Y_AXIS_KEY,
+  HALF_LABEL_HEIGHT,
+  MAX_LABEL_WIDTH,
+} from './constants';
+
 /**
  * @typedef {Object} Pattern
  * @property {string} match
@@ -23,8 +32,8 @@ export const generatePieChartPreviewData = patterns => {
   if (patternsSizeWithoutDefaultPattern === 0)
     return [
       {
-        name: patterns[0].label,
-        value: HUNDRED_PERCENT,
+        [X_AXIS_KEY]: patterns[0].label,
+        [Y_AXIS_KEY]: HUNDRED_PERCENT,
         color: patterns[0].color,
       },
     ];
@@ -39,8 +48,10 @@ export const generatePieChartPreviewData = patterns => {
     const isLastPattern = index === patternsSize - 1;
 
     return {
-      name: label,
-      value: isLastPattern ? percentForDefaultPattern : percentForSinglePattern,
+      [X_AXIS_KEY]: label,
+      [Y_AXIS_KEY]: isLastPattern
+        ? percentForDefaultPattern
+        : percentForSinglePattern,
       color,
     };
   });
@@ -51,7 +62,7 @@ export const generatePieChartLabel = ({
   cy,
   midAngle,
   outerRadius,
-  name,
+  label,
   color,
   value,
 }) => {
@@ -59,15 +70,25 @@ export const generatePieChartLabel = ({
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
+  const isRightSide = x > cx;
+
   return (
-    <text
-      x={x}
-      y={y}
-      fill={color}
-      textAnchor={x > cx ? 'start' : 'end'}
-      dominantBaseline="central"
+    <foreignObject
+      x={x + (isRightSide ? 0 : -MAX_LABEL_WIDTH)}
+      y={y - HALF_LABEL_HEIGHT}
+      width="1"
+      height="1"
+      overflow="visible"
     >
-      {name} ({`${value}%`})
-    </text>
+      <Row width={MAX_LABEL_WIDTH} justify={isRightSide ? 'start' : 'end'}>
+        <EllipsisText
+          maxWidth={MAX_LABEL_WIDTH}
+          dataFor="chart-tooltip"
+          text={`${label} (${value})`}
+          textAlign={isRightSide ? '' : 'right'}
+          color={color}
+        />
+      </Row>
+    </foreignObject>
   );
 };

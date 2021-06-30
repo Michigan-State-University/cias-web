@@ -28,6 +28,14 @@ import {
   COPY_CHART_REQUEST,
   COPY_CHART_SUCCESS,
   SELECT_CHART_ACTION,
+  SET_CHARTS_DATA,
+  SET_CHARTS_FILTERS,
+  REORDER_DASHBOARD_SECTIONS_REQUEST,
+  REORDER_DASHBOARD_SECTIONS_SUCCESS,
+  REORDER_DASHBOARD_SECTIONS_FAILURE,
+  REORDER_CHARTS_REQUEST,
+  REORDER_CHARTS_SUCCESS,
+  REORDER_CHARTS_FAILURE,
 } from './constants';
 
 export const addDashboardSectionRequest = (organizationId, name) =>
@@ -129,3 +137,33 @@ export const selectChartAction = (dashboardSectionId, chartId) =>
     dashboardSectionId,
     chartId,
   });
+
+export const setChartsData = chartsData =>
+  actionBuilder(SET_CHARTS_DATA, { chartsData });
+
+export const setChartFiltersRequest = filters =>
+  actionBuilder(SET_CHARTS_FILTERS, { filters });
+
+export const reorderSectionsRequest = (organizationId, dashboardSections) =>
+  actionBuilder(REORDER_DASHBOARD_SECTIONS_REQUEST, {
+    organizationId,
+    dashboardSections,
+  });
+
+export const reorderSectionsSuccess = () =>
+  actionBuilder(REORDER_DASHBOARD_SECTIONS_SUCCESS, {});
+
+export const reorderSectionsFailure = () =>
+  actionBuilder(REORDER_DASHBOARD_SECTIONS_FAILURE, {});
+
+export const reorderChartsRequest = (dashboardSectionId, charts) =>
+  actionBuilder(REORDER_CHARTS_REQUEST, {
+    dashboardSectionId,
+    charts,
+  });
+
+export const reorderChartsSuccess = () =>
+  actionBuilder(REORDER_CHARTS_SUCCESS, {});
+
+export const reorderChartsFailure = () =>
+  actionBuilder(REORDER_CHARTS_FAILURE, {});

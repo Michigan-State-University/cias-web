@@ -14,7 +14,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   display: -ms-flexbox;
   display: flex;
   z-index: 999;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(14,14,14,0.4);
   border-radius: 0px;
   border-radius: 0px;
   -webkit-box-pack: center;
@@ -253,8 +253,11 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
     width="100%"
   >
     <div
+      aria-describedby="modal-description"
+      aria-labelledby="modal-title"
       class="c1 c2"
       overflow="auto"
+      role="dialog"
     >
       <div
         class="c3"
@@ -264,6 +267,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
         >
           <h1
             class="c5"
+            id="modal-title"
           >
             Test
           </h1>
@@ -281,6 +285,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
       </div>
       <div
         class="c7"
+        id="modal-description"
       >
         <div
           class="c8"
@@ -332,7 +337,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   display: -ms-flexbox;
   display: flex;
   z-index: 999;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(14,14,14,0.4);
   border-radius: 0px;
   border-radius: 0px;
   -webkit-box-pack: center;
@@ -603,8 +608,11 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
     width="100%"
   >
     <div
+      aria-describedby="modal-description"
+      aria-labelledby="modal-title"
       class="c1 c2"
       overflow="auto"
+      role="dialog"
     >
       <div
         class="c3"
@@ -614,6 +622,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
         >
           <h1
             class="c5"
+            id="modal-title"
           >
             Test
           </h1>
@@ -631,6 +640,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
       </div>
       <div
         class="c7"
+        id="modal-description"
       >
         <div
           class="c8"

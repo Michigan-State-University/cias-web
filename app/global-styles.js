@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
-import { themeColors, colors, fontSizes, lineHeights } from 'theme';
-
 import 'fonts.css';
+
+import { themeColors, colors, fontSizes, lineHeights } from 'theme';
 
 const GlobalStyle = createGlobalStyle`
   html {

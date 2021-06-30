@@ -1,12 +1,11 @@
 import { takeLatest, put, delay, call } from 'redux-saga/effects';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import objectToSnakeCase from 'utils/objectToSnakeCase';
-import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 
-import { mapJsonApiToObject } from 'utils/jsonApiMapper';
-import { ReportTemplate } from 'models/ReportTemplate';
 import messages from './messages';
 import {
   addReportTemplateSuccess,
@@ -25,12 +24,10 @@ function* addReportTemplate({ payload: { sessionId, reportTemplate } }) {
       objectToSnakeCase({ reportTemplate }),
     );
 
-    const mappedData = mapJsonApiToObject(data, 'reportTemplate', {
-      isSingleObject: true,
-    });
+    const mappedData = jsonApiToObject(data, 'reportTemplate');
 
     yield delay(1000);
-    yield put(addReportTemplateSuccess(new ReportTemplate({ ...mappedData })));
+    yield put(addReportTemplateSuccess(mappedData));
     yield call(toast.success, formatMessage(messages.addReportTemplateSuccess));
 
     yield put(selectReportTemplate(mappedData.id));

@@ -47,6 +47,9 @@ describe('<TextboxQuestion />', () => {
           },
           position: 1,
           question_group_id: 'test',
+          settings: {
+            text_limit: 250,
+          },
         },
       ],
       selectedQuestion: 'test',

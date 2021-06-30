@@ -20,5 +20,5 @@ export const SectionDivider = styled.div`
   background-color: ${colors.linkWater};
   left: -${padding};
   position: relative;
-  margin-block: ${padding};
+  margin: ${padding} 0;
 `;

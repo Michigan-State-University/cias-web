@@ -6,7 +6,7 @@
 import React, { useLayoutEffect, useState, useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
@@ -14,16 +14,31 @@ import get from 'lodash/get';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import orderBy from 'lodash/orderBy';
 import { Col as GCol, Row as GRow, useScreenClass } from 'react-grid-system';
+import { useParams } from 'react-router-dom';
+import { injectSaga, injectReducer } from 'redux-injectors';
+import { Markup } from 'interweave';
 
-import ConfirmationBox from 'components/ConfirmationBox';
-import Loader from 'components/Loader';
-import Column from 'components/Column';
-import ErrorAlert from 'components/ErrorAlert';
-import Row from 'components/Row';
-import ShareBox from 'containers/ShareBox';
-import Modal from 'components/Modal';
-import Spinner from 'components/Spinner';
-import AppContainer from 'components/Container';
+import { colors, themeColors } from 'theme';
+
+import fileShare from 'assets/svg/file-share.svg';
+import copy from 'assets/svg/copy.svg';
+import archive from 'assets/svg/archive.svg';
+import pencil from 'assets/svg/pencil-solid.svg';
+
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+import { reorder } from 'utils/reorder';
+import {
+  canArchive,
+  canDeleteSession,
+  canEdit,
+  canShareWithParticipants,
+} from 'models/Status/statusPermissions';
+import { reorderScope } from 'models/Session/ReorderScope';
+import { archived } from 'models/Status/StatusTypes';
+import { RolePermissions } from 'models/User/RolePermissions';
+import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
+import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
+import { makeSelectUserRoles, makeSelectUserId } from 'global/reducers/auth';
 import {
   fetchInterventionRequest,
   makeSelectInterventionState,
@@ -40,14 +55,6 @@ import {
   externalCopySessionRequest,
 } from 'global/reducers/intervention';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
-
-import { injectSaga, injectReducer } from 'redux-injectors';
-
-import { colors, themeColors } from 'theme';
-
-import fileShare from 'assets/svg/file-share.svg';
-import copy from 'assets/svg/copy.svg';
-import archive from 'assets/svg/archive.svg';
 import {
   copyInterventionRequest,
   fetchInterventionsRequest,
@@ -60,30 +67,28 @@ import {
   getQuestionsRequest,
 } from 'global/reducers/questions';
 
-import isNullOrUndefined from 'utils/isNullOrUndefined';
-
-import SettingsPanel from 'containers/SettingsPanel';
-import H3 from 'components/H3';
-import {
-  canArchive,
-  canDeleteSession,
-  canEdit,
-  canShareWithParticipants,
-} from 'models/Status/statusPermissions';
-import { reorderScope } from 'models/Session/ReorderScope';
-import { reorder } from 'utils/reorder';
-import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
-import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
-import { makeSelectUserRoles, makeSelectUserId } from 'global/reducers/auth';
-
-import { archived } from 'models/Status/StatusTypes';
-import { RolePermissions } from 'models/User/RolePermissions';
 import OrganizationShareBox from 'containers/ShareBox/OrganizationShareBox';
+import SettingsPanel from 'containers/SettingsPanel';
+
+import ConfirmationBox from 'components/ConfirmationBox';
+import Loader from 'components/Loader';
+import Column from 'components/Column';
+import ErrorAlert from 'components/ErrorAlert';
+import Row from 'components/Row';
+import ShareBox from 'containers/ShareBox';
+import Modal from 'components/Modal';
+import Spinner from 'components/Spinner';
+import AppContainer from 'components/Container';
+import H3 from 'components/H3';
+import Icon from 'components/Icon';
+import Tooltip from 'components/Tooltip';
+
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
 import SessionCreateButton from './components/SessionCreateButton';
 import SessionListItem from './components/SessionListItem';
+import { InterventionSettingsModal } from './components/Modals';
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
 import {
@@ -93,13 +98,9 @@ import {
 } from './utils';
 
 export function InterventionDetailsPage({
-  intl: { formatMessage },
   createSession,
   editIntervention,
   fetchIntervention,
-  match: {
-    params: { interventionId },
-  },
   interventionState: {
     intervention,
     loaders: { fetchInterventionLoading, createSessionLoading },
@@ -120,6 +121,9 @@ export function InterventionDetailsPage({
   userId,
   editSession,
 }) {
+  const { interventionId } = useParams();
+  const { formatMessage } = useIntl();
+
   const [
     deleteConfirmationSessionId,
     setDeleteConfirmationSessionId,
@@ -139,6 +143,7 @@ export function InterventionDetailsPage({
     sharedTo,
     organizationId,
     userId: interventionOwnerId,
+    languageName,
   } = intervention || {};
 
   const editingPossible = canEdit(status);
@@ -151,6 +156,10 @@ export function InterventionDetailsPage({
   const [
     participantShareModalVisible,
     setParticipantShareModalVisible,
+  ] = useState(false);
+  const [
+    interventionSettingsModalVisible,
+    setInterventionSettingsModalVisible,
   ] = useState(false);
 
   const closeModal = () => setModalVisible(false);
@@ -355,7 +364,7 @@ export function InterventionDetailsPage({
               textOpacity={0.6}
               color={colors.bluewood}
             >
-              <FormattedMessage {...messages.modalTitle} />
+              {formatMessage(messages.modalTitle)}
             </H3>
           }
           onClose={closeModal}
@@ -365,6 +374,14 @@ export function InterventionDetailsPage({
             onResearchersSelected={copyInterventionToResearchers}
             onClose={closeModal}
           />
+        </Modal>
+
+        <Modal
+          title={formatMessage(messages.interventionSettingsModalTitle)}
+          onClose={() => setInterventionSettingsModalVisible(false)}
+          visible={interventionSettingsModalVisible}
+        >
+          <InterventionSettingsModal />
         </Modal>
 
         <Modal
@@ -390,6 +407,29 @@ export function InterventionDetailsPage({
           organizationId={organizationId}
           canAccessCsv={canAccessCsv}
         />
+
+        <Row>
+          <Tooltip
+            id="intervention-settings"
+            text={formatMessage(messages.interventionSettingsIconTooltip)}
+          >
+            <Icon
+              src={pencil}
+              fill={colors.grey}
+              onClick={() => setInterventionSettingsModalVisible(true)}
+              role="button"
+              aria-label={formatMessage(
+                messages.interventionSettingsIconTooltip,
+              )}
+              mr={10}
+            />
+          </Tooltip>
+          <Markup
+            content={formatMessage(messages.interventionLanguage, {
+              language: languageName,
+            })}
+          />
+        </Row>
 
         <GRow>
           <GCol
@@ -424,7 +464,6 @@ export function InterventionDetailsPage({
 }
 
 InterventionDetailsPage.propTypes = {
-  intl: PropTypes.object,
   createSession: PropTypes.func,
   fetchIntervention: PropTypes.func,
   interventionState: PropTypes.shape({
@@ -444,7 +483,6 @@ InterventionDetailsPage.propTypes = {
       createSessionLoading: PropTypes.bool,
     }),
   }),
-  match: PropTypes.object,
   editIntervention: PropTypes.func,
   sessionIndex: PropTypes.number,
   changeSessionIndex: PropTypes.func,
@@ -509,5 +547,4 @@ export default compose(
     key: 'interventionDetailsPageSagas',
     saga: interventionDetailsPageSagas,
   }),
-  injectIntl,
 )(InterventionDetailsPage);

@@ -1,4 +1,4 @@
-import React, { memo, useContext } from 'react';
+import React, { memo, useContext, useState } from 'react';
 
 import { EntityType } from 'global/reducers/organizations';
 
@@ -15,6 +15,16 @@ import { SettingsContainer } from '../../styled';
  * General container for Organization, Health System and Clinic
  */
 const Settings = () => {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const openDeleteModal = () => setIsDeleteModalOpen(true);
+  const closeDeleteModal = () => setIsDeleteModalOpen(false);
+
+  const commonProps = {
+    isDeleteModalOpen,
+    openDeleteModal,
+    closeDeleteModal,
+  };
+
   const {
     selectedEntity,
     organization,
@@ -30,11 +40,11 @@ const Settings = () => {
 
   switch (selectedEntity?.type) {
     case EntityType.organization:
-      return wrapper(<OrganizationSettings />);
+      return wrapper(<OrganizationSettings {...commonProps} />);
     case EntityType.healthSystem:
-      return wrapper(<HealthSystemSettings />);
+      return wrapper(<HealthSystemSettings {...commonProps} />);
     case EntityType.clinic:
-      return wrapper(<ClinicSettings />);
+      return wrapper(<ClinicSettings {...commonProps} />);
     default:
       return null;
   }

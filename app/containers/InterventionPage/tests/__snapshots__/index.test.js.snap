@@ -45,7 +45,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                 class="Text-e4p0w3-0 bmKPFZ"
                 font-weight="bold"
               >
-                We’re waiting for your feedback!
+                Something went wrong? Have a new idea?
               </p>
               <p
                 class="Text-e4p0w3-0 cFbubw"
@@ -57,7 +57,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                   href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
                   target="_blank"
                 >
-                  Share your opinion on CIAS
+                  Share your thoughts here!
                 </a>
               </p>
             </div>
@@ -160,7 +160,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
             >
               <button
                 class="styled__StatusLabel-ve6hnx-1 jWQWjX"
-                color="#000000"
+                color="#0E0E0E"
                 value="archived"
               >
                 <p
@@ -239,7 +239,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
           href="/interventions/undefined/"
         >
           <div
-            class="styled__TileContainer-agddns-0 igcEXR"
+            class="styled__TileContainer-agddns-0 ezDoDg"
           >
             <div
               class="styled__Heading-agddns-2 bzFUQe"
@@ -268,15 +268,28 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               </div>
             </div>
             <div
-              class="Row-y1cs0u-0 dskFsL"
+              class="Row-y1cs0u-0 gQFDhs"
+              width="100%"
             >
-              <p
-                class="Text-e4p0w3-0 styled__StyledEllipsisText-h4mjfj-0 jKspVy lnRdie"
+              <span
+                class="styled__StyledEllipsisText-h4mjfj-0 itjSMP"
+                data-for="Name"
+                data-tip="Name"
                 font-size="18"
                 font-weight="bold"
+                theme="[object Object]"
+                width="0"
               >
-                Name
-              </p>
+                <span />
+                <span>
+                  Name
+                </span>
+                <span
+                  style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                >
+                  …
+                </span>
+              </span>
             </div>
             <div
               class="Box-sc-1vhutan-0 qxAio"
@@ -285,7 +298,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               <div
                 currentitem="false"
                 data-for="undefined-tile-tooltip"
-                data-tip="true"
+                data-tip=""
               >
                 <div
                   class="styled__TileInfo-agddns-4 dElPvb"

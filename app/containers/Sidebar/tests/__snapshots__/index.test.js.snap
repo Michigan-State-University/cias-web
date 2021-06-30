@@ -23,7 +23,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  color: #9AA1B6;
+  color: #6B707C;
   margin-bottom: 8px !important;
 }
 
@@ -32,10 +32,23 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  color: #9AA1B6;
+  color: #6B707C;
   padding-top: 20px;
   margin-top: 20px;
   border-top: 1px solid #D5DEEA;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 .c0 {
@@ -61,7 +74,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   height: calc(100vh - 70px);
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -79,7 +92,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   height: 30px;
 }
 
-.c7:after {
+.c8:after {
   content: ' ';
   display: block;
   width: 20px;
@@ -116,12 +129,28 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   border: 1px solid transparent;
 }
 
-.c3 {
+.c7 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 100%;
+  overflow: scroll;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 <div
@@ -134,6 +163,7 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   </p>
   <div
     class="c3"
+    overflow="hidden"
     width="100%"
   >
     <p
@@ -152,10 +182,15 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
     </button>
     <div
       class="c7"
-      color="#B727EA"
-      size="30"
-      width="6"
-    />
+      overflow="scroll"
+    >
+      <div
+        class="c8"
+        color="#B727EA"
+        size="30"
+        width="6"
+      />
+    </div>
   </div>
 </div>
 `;
@@ -183,7 +218,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  color: #9AA1B6;
+  color: #6B707C;
   margin-bottom: 8px !important;
 }
 
@@ -192,10 +227,23 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
-  color: #9AA1B6;
+  color: #6B707C;
   padding-top: 20px;
   margin-top: 20px;
   border-top: 1px solid #D5DEEA;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 100%;
+  overflow: hidden;
 }
 
 .c0 {
@@ -221,7 +269,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   height: calc(100vh - 70px);
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -239,7 +287,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   height: 30px;
 }
 
-.c7:after {
+.c8:after {
   content: ' ';
   display: block;
   width: 20px;
@@ -276,12 +324,28 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   border: 1px solid transparent;
 }
 
-.c3 {
+.c7 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 100%;
+  overflow: scroll;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 <div
@@ -294,6 +358,7 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   </p>
   <div
     class="c3"
+    overflow="hidden"
     width="100%"
   >
     <p
@@ -312,10 +377,15 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
     </button>
     <div
       class="c7"
-      color="#B727EA"
-      size="30"
-      width="6"
-    />
+      overflow="scroll"
+    >
+      <div
+        class="c8"
+        color="#B727EA"
+        size="30"
+        width="6"
+      />
+    </div>
   </div>
 </div>
 `;

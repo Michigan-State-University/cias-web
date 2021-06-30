@@ -1,7 +1,16 @@
-import { variableNameRegex } from 'global/constants/regex';
+import {
+  variableNameInTextboxRegex,
+  variableNameRegex,
+} from 'global/constants/regex';
 
 export const variableNameValidator = target => {
-  if (variableNameRegex.test(target) || target === '') return true;
+  if (target === '') return true;
 
-  return false;
+  return variableNameRegex.test(target);
+};
+
+export const variableNameInTextboxValidator = target => {
+  if (target === '') return true;
+
+  return variableNameInTextboxRegex.test(target);
 };

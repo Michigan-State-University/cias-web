@@ -60,7 +60,7 @@ export const QuestionImage = ({
       <Box mt={20} bg={colors.linkWater}>
         <ApprovableInput
           type="multiline"
-          value={imageAlt}
+          value={imageAlt ?? ''}
           onCheck={handleUpdateDescription}
           placeholder={formatMessage(messages.logoDescriptionPlaceholder)}
           rows="4"

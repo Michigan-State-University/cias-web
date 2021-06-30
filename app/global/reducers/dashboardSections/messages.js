@@ -24,4 +24,23 @@ export default defineMessages({
     id: `${scope}.cloneError`,
     defaultMessage: 'Failed to clone chart!',
   },
+  filterError: {
+    id: `${scope}.filterError`,
+    defaultMessage: `Couldn't fetch chart data`,
+  },
+  editSectionError: {
+    id: `${scope}.editSectionError`,
+    defaultMessage: `Failed to edit section! Check {properties} {propertiesCount, plural,
+       one {property}
+       other {properties}
+     }.`,
+  },
+  reorderError: {
+    id: `${scope}.reorderError`,
+    defaultMessage: `Couldn't reorder dashboard sections`,
+  },
+  chartReorderError: {
+    id: `${scope}.chartReorderError`,
+    defaultMessage: `Couldn't reorder charts`,
+  },
 });

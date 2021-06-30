@@ -14,6 +14,24 @@ const ALLOWED_BLOCKS = [
   reflectionFormulaType,
 ];
 
+export const mapBlockToTextWithRealIndex = blocks => {
+  const blocksWithRealIndexMapped = blocks.map((block, index) => ({
+    ...block,
+    realIndex: index,
+  }));
+
+  const allowedBlocks = filterAllowedBlocks(blocksWithRealIndexMapped);
+
+  return allowedBlocks.map(block => {
+    const text = extractBlocksText(block);
+
+    return {
+      text,
+      realIndex: block.realIndex,
+    };
+  });
+};
+
 export const filterAllowedBlocks = blocks =>
   blocks.filter(block => ALLOWED_BLOCKS.includes(block.type));
 
@@ -36,6 +54,8 @@ const extractTextFromStandardSpeech = block => join(block.text, '');
 
 const extractTextFromReflectionSpeech = block => {
   const { target_value: targetValue } = block;
+
+  if (!targetValue) return '';
 
   switch (targetValue.constructor) {
     case Array:

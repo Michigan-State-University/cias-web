@@ -5,19 +5,30 @@ import { connect } from 'react-redux';
 import { Row, Container } from 'react-grid-system';
 import { injectIntl, IntlShape } from 'react-intl';
 
+import binNoBg from 'assets/svg/bin-no-bg.svg';
+
 import {
   deleteSectionCaseImageRequest,
   deleteSectionCaseRequest,
   updateSectionCaseRequest,
 } from 'global/reducers/reportTemplates';
 
-import binNoBg from 'assets/svg/bin-no-bg.svg';
-
+import { VariableHelper } from 'models/Helpers';
 import { SectionCase } from 'models/ReportTemplate';
+import {
+  currencyQuestion,
+  dateQuestion,
+  nameQuestion,
+  numberQuestion,
+  textboxQuestion,
+  visualAnalogueScaleQuestion,
+} from 'models/Session/QuestionTypes';
 import { colors, themeColors } from 'theme';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
+
+import VariableChooser from 'containers/VariableChooser';
 
 import { Col } from 'components/ReactGridSystem';
 import Box from 'components/Box';
@@ -31,7 +42,6 @@ import InequalityChooser from 'components/InequalityChooser';
 import ImageUpload from 'components/ImageUpload';
 import TextButton from 'components/Button/TextButton';
 
-import { nameQuestion } from 'models/Session/QuestionTypes';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
 import Option from './Option';
@@ -45,6 +55,8 @@ const SectionCaseItem = ({
   deleteCase,
 }) => {
   const {
+    interventionId,
+    sessionId,
     selectedTemplateSectionId,
     loaders: { updateReportTemplateLoading },
     canEdit,
@@ -52,7 +64,7 @@ const SectionCaseItem = ({
 
   useEffect(() => {
     if (!updateReportTemplateLoading) setIsUploadingImage(false);
-    if (!updateReportTemplateLoading) setIsUpdatingWithNameVariable(false);
+    if (!updateReportTemplateLoading) setIsUpdatingWithVariable(false);
   }, [updateReportTemplateLoading]);
 
   const [openCollapsable, setOpenCollapsable] = useState(false);
@@ -60,9 +72,7 @@ const SectionCaseItem = ({
 
   const [titleVisible, setTitleVisible] = useState(Boolean(sectionCase.title));
   const [isUploadingImage, setIsUploadingImage] = useState(false);
-  const [isUpdatingWithNameVariable, setIsUpdatingWithNameVariable] = useState(
-    false,
-  );
+  const [isUpdatingWithVariable, setIsUpdatingWithVariable] = useState(false);
 
   const handleSectionCaseUpdate = (
     newSectionCase,
@@ -100,10 +110,14 @@ const SectionCaseItem = ({
     handleSectionCaseUpdate({ ...sectionCase, content });
   };
 
-  const handleAddNameVariable = () => {
-    setIsUpdatingWithNameVariable(true);
+  const handleAddVariable = variable => {
+    setIsUpdatingWithVariable(true);
+    const variableHelper = new VariableHelper(variable);
+
     handleContentChange(
-      `${sectionCase.content}${nameQuestion.reservedVariable}`,
+      `${
+        sectionCase.content
+      }${variableHelper.getFormattedVariableForDynamicInput()}`,
     );
   };
 
@@ -242,21 +256,39 @@ const SectionCaseItem = ({
               </Text>
             </Col>
             <Col style={{ padding: 0, height: 30 }} align="end">
-              <TextButton
-                onClick={handleAddNameVariable}
-                whiteSpace="nowrap"
-                fontWeight="bold"
-                fontSize={14}
-                loading={isUpdatingWithNameVariable}
-                buttonProps={{
-                  color: themeColors.secondary,
-                  fontWeight: 'bold',
-                  disabled: !canEdit,
-                }}
-                spinnerProps={{ size: 30, width: 2 }}
+              <VariableChooser
+                disabled={!canEdit}
+                interventionId={interventionId}
+                onClick={handleAddVariable}
+                placement="right"
+                questionTypeWhitelist={[
+                  dateQuestion.id,
+                  textboxQuestion.id,
+                  numberQuestion.id,
+                  visualAnalogueScaleQuestion.id,
+                  currencyQuestion.id,
+                  nameQuestion.id,
+                ]}
+                sessionId={sessionId}
+                includeAllVariables
+                includeCurrentSession
+                includeNonDigitVariables
+                isMultiSession
               >
-                {formatMessage(messages.addNameVariableButton)}
-              </TextButton>{' '}
+                <TextButton
+                  whiteSpace="nowrap"
+                  fontWeight="bold"
+                  fontSize={14}
+                  loading={isUpdatingWithVariable}
+                  buttonProps={{
+                    color: themeColors.secondary,
+                    fontWeight: 'bold',
+                  }}
+                  spinnerProps={{ size: 30, width: 2 }}
+                >
+                  {formatMessage(messages.addVariableButton)}
+                </TextButton>
+              </VariableChooser>
             </Col>
             <Box
               bg={colors.linkWater}

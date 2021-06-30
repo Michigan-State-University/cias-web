@@ -91,7 +91,7 @@ export default defineMessages({
   },
   emailValidationError: {
     id: `${scope}.emailValidationError`,
-    defaultMessage: 'The email entered in wrong format',
+    defaultMessage: 'Please enter a valid email address in the correct format',
   },
   wcagWarning: {
     id: `${scope}.wcagWaring`,
@@ -109,5 +109,10 @@ export default defineMessages({
   fillHeader: {
     id: `${scope}.fillHeader`,
     defaultMessage: 'Fill Session',
+  },
+  narratorAlt: {
+    id: `${scope}.narratorAlt`,
+    defaultMessage:
+      'This is a Narrator that speaks and moves around the screen.',
   },
 });

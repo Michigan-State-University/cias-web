@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import Text from 'components/Text/index';
+import Truncate from 'react-truncate';
+
 import { text, style } from '../BaseComponentStyles';
 
-export const StyledEllipsisText = styled(Text)`
+export const StyledEllipsisText = styled(Truncate).attrs(
+  ({ $styleProps, ...props }) => ({ ...props, ...$styleProps }),
+)`
   position: relative;
-  overflow: hidden;
   width: 100%;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   ${text};
   ${style};
 `;
