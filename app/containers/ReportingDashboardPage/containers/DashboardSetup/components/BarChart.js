@@ -31,6 +31,7 @@ const BarChart = ({
   realChartData,
   status,
   formatMessage,
+  disableAnimation,
 }) => {
   const data = useMemo(() => {
     if (!realChartData && status !== ChartStatus.DRAFT) return null;
@@ -163,6 +164,7 @@ const BarChart = ({
       stackDataKey={
         chartType === ChartTypeDto.NUMERIC_BAR_CHART && STACK_Y_AXIS_KEY
       }
+      isAnimationActive={!disableAnimation}
     />
   );
 };
@@ -174,6 +176,7 @@ BarChart.propTypes = {
   realChartData: PropTypes.any,
   status: PropTypes.string,
   formatMessage: PropTypes.func,
+  disableAnimation: PropTypes.bool,
 };
 
 export default memo(BarChart);

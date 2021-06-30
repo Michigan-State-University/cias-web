@@ -59,6 +59,13 @@ export const REORDER_DASHBOARD_SECTIONS_SUCCESS =
 export const REORDER_DASHBOARD_SECTIONS_FAILURE =
   'app/dashboardSections/REORDER_DASHBOARD_SECTIONS_FAILURE';
 
+export const REORDER_CHARTS_REQUEST =
+  'app/dashboardSections/REORDER_CHARTS_REQUEST';
+export const REORDER_CHARTS_SUCCESS =
+  'app/dashboardSections/REORDER_CHARTS_SUCCESS';
+export const REORDER_CHARTS_FAILURE =
+  'app/dashboardSections/REORDER_CHARTS_FAILURE';
+
 /**
  * @description Chart Type used by the API; DTO of charts uses this type internally
  * @readonly

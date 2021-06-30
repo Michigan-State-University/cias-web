@@ -40,10 +40,16 @@ const ChartTileUI = ({
   isSelected,
   onClick,
   fromDashboardView,
+  isDragging,
+  dragHandle,
+  disableAnimation,
 }) => {
   const { formatMessage } = useIntl();
-
-  const handleOnClick = () => onClick(id);
+  const handleOnClick = () => {
+    if (!isDragging) {
+      onClick(id);
+    }
+  };
 
   const renderChart = useCallback(() => {
     switch (chartType) {
@@ -55,6 +61,7 @@ const ChartTileUI = ({
             realChartData={chartData}
             formatMessage={formatMessage}
             status={status}
+            disableAnimation={disableAnimation}
           />
         );
 
@@ -69,6 +76,7 @@ const ChartTileUI = ({
             realChartData={chartData}
             status={status}
             formatMessage={formatMessage}
+            disableAnimation={disableAnimation}
           />
         );
 
@@ -78,60 +86,65 @@ const ChartTileUI = ({
   }, [patterns, defaultPattern, chartType, trendLine, chartData]);
 
   return (
-    <Column width={elements.chartTileWidth}>
-      <HoverableBox
-        bg={colors.white}
-        height={elements.chartTileHeight}
-        onClick={handleOnClick}
-        $isSelected={isSelected}
-        padding={24}
-        clickable
-      >
-        <FullWidthContainer height="100%" display="grid">
-          <Row align="center" justify="center">
-            {!fromDashboardView && <Col xs={1} />}
+    <Col xs="content" mb={40}>
+      <Column width={elements.chartTileWidth}>
+        <HoverableBox
+          bg={colors.white}
+          height={elements.chartTileHeight}
+          onClick={handleOnClick}
+          $isSelected={isSelected}
+          padding={24}
+          clickable
+        >
+          <FullWidthContainer height="100%" display="grid">
+            <Row align="center" justify="center">
+              {!fromDashboardView && <Col xs={2} />}
 
-            <Col align="center" xs={9}>
-              <Box maxWidth={CHART_NAME_MAX_WIDTH}>
-                <H2>
-                  <EllipsisText text={name} />
-                </H2>
-              </Box>
-            </Col>
-
-            {!fromDashboardView && (
-              <Col xs={1} align="end">
-                <Icon src={gear} alt="show-settings" />
+              <Col align="center" xs={7}>
+                <Box maxWidth={CHART_NAME_MAX_WIDTH}>
+                  <H2>
+                    <EllipsisText text={name} />
+                  </H2>
+                </Box>
               </Col>
-            )}
-          </Row>
 
-          <Row mt={18}>
-            <Col>
-              <EllipsisText text={description} lines={2} />
-            </Col>
-          </Row>
+              {!fromDashboardView && (
+                <>
+                  <Col xs={1} align="end">
+                    <Icon src={gear} alt="show-settings" />
+                  </Col>
+                  {dragHandle}
+                </>
+              )}
+            </Row>
 
-          <Row align="center" justify="center" height={CHART_HEIGHT}>
-            <Col xs="content">
-              <Box width={CHART_WIDTH} height={CHART_HEIGHT}>
-                {renderChart()}
-              </Box>
-            </Col>
-          </Row>
+            <Row mt={18}>
+              <Col>
+                <EllipsisText text={description} lines={2} />
+              </Col>
+            </Row>
 
-          <Row align="end" justify="end">
-            <Col xs="content">
-              <Badge bg={ChartStatusToColorMap[status]} color={colors.white}>
-                {formatMessage(messages.chartStatus, {
-                  chartStatus: status,
-                })}
-              </Badge>
-            </Col>
-          </Row>
-        </FullWidthContainer>
-      </HoverableBox>
-    </Column>
+            <Row align="center" justify="center" height={CHART_HEIGHT}>
+              <Col xs="content">
+                <Box width={CHART_WIDTH} height={CHART_HEIGHT}>
+                  {renderChart()}
+                </Box>
+              </Col>
+            </Row>
+
+            <Row align="end" justify="end">
+              <Col xs="content">
+                <Badge bg={ChartStatusToColorMap[status]} color={colors.white}>
+                  {formatMessage(messages.chartStatus, {
+                    chartStatus: status,
+                  })}
+                </Badge>
+              </Col>
+            </Row>
+          </FullWidthContainer>
+        </HoverableBox>
+      </Column>
+    </Col>
   );
 };
 
@@ -140,6 +153,9 @@ ChartTileUI.propTypes = {
   isSelected: PropTypes.bool,
   fromDashboardView: PropTypes.bool,
   onClick: PropTypes.func,
+  isDragging: PropTypes.bool,
+  dragHandle: PropTypes.node,
+  disableAnimation: PropTypes.bool,
 };
 
 export default memo(ChartTileUI);

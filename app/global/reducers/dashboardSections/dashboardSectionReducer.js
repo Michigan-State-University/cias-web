@@ -10,6 +10,7 @@ import {
   EDIT_CHART_SUCCESS,
   EDIT_SECTION_REQUEST,
   EDIT_SECTION_SUCCESS,
+  REORDER_CHARTS_REQUEST,
   SET_CHARTS_DATA,
   SET_CHARTS_FILTERS,
 } from './constants';
@@ -67,6 +68,11 @@ const dashboardSectionReducer = (state = null, action) =>
               chartReducer(item, action),
             );
         }
+        break;
+      }
+
+      case REORDER_CHARTS_REQUEST: {
+        draft.charts = payload.charts;
         break;
       }
     }
