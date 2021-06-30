@@ -4,9 +4,8 @@
  *
  */
 
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import ReactTooltip from 'react-tooltip';
 
 import Box from 'components/Box';
 import Img from 'components/Img';
@@ -14,6 +13,10 @@ import Text from 'components/Text';
 
 import { StyledTooltip } from './styled';
 
+/**
+ * WARNING: It should be placed after the component with `data-tip` property, not before
+ * otherwise it will not render properly
+ */
 const Tooltip = ({
   id,
   children,
@@ -24,9 +27,6 @@ const Tooltip = ({
   ...restProps
 }) => {
   const getContent = dataTip => {
-    // Needed for dynamic content updates, like SVG etc.
-    ReactTooltip.rebuild();
-
     if (dataTip) return <Text>{dataTip ?? text}</Text>;
     return (
       <>
@@ -69,4 +69,4 @@ Tooltip.defaultProps = {
   visible: true,
 };
 
-export default Tooltip;
+export default memo(Tooltip);
