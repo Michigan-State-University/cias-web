@@ -23,7 +23,7 @@ const PieChart = ({
   status,
 }) => {
   const data = useMemo(() => {
-    if (!realChartData && status === ChartStatus.PUBLISHED) return null;
+    if (!realChartData && status !== ChartStatus.DRAFT) return null;
     if (!realChartData)
       return generatePieChartPreviewData([...patterns, defaultPattern]);
     if (realChartData) {
