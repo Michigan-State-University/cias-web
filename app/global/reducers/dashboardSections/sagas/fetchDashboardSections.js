@@ -21,7 +21,12 @@ export function* fetchDashboardSections({
     const dashboardSections = jsonApiToArray(data, 'dashboardSection');
 
     yield put(fetchDashboardSectionsSuccess(dashboardSections));
-    const chartDataUrl = `v1/organizations/${organizationId}/charts_data/generate`;
+
+    let chartDataSuffix = `?statuses=[]published`;
+    if (!fromDashboardView) {
+      chartDataSuffix += `&statuses=[]data_collection`;
+    }
+    const chartDataUrl = `v1/organizations/${organizationId}/charts_data/generate${chartDataSuffix}`;
     const { data: chartsData } = yield call(axios.get, chartDataUrl);
     const parsedData = objectToCamelCase(chartsData.data_for_charts);
     yield put(setChartsData(parsedData));

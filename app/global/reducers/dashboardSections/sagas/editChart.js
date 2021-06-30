@@ -1,11 +1,13 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
+import { put, takeLatest, call, select } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { jsonApiToObject } from 'utils/jsonApiMapper';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
 
-import { EDIT_CHART_REQUEST } from '../constants';
-import { editChartError, editChartSuccess } from '../actions';
+import objectToCamelCase from 'utils/objectToCamelCase';
+import { makeSelectOrganization } from 'global/reducers/organizations';
+import { ChartStatus, EDIT_CHART_REQUEST } from '../constants';
+import { editChartError, editChartSuccess, setChartsData } from '../actions';
 
 export function* editChart({ payload: { chart } }) {
   const requestURL = `v1/charts/${chart.id}`;
@@ -19,8 +21,18 @@ export function* editChart({ payload: { chart } }) {
       }),
     );
     const updatedChart = jsonApiToObject(data, 'chart');
-
     yield put(editChartSuccess(updatedChart));
+
+    if (chart.status === ChartStatus.DATA_COLLECTION) {
+      const organization = yield select(makeSelectOrganization());
+      const chartDataSuffix = `?statuses=[]published&statuses=[]data_collection`;
+      const chartDataUrl = `v1/organizations/${organization.id}/charts_data/${
+        chart.id
+      }/generate${chartDataSuffix}`;
+      const { data: chartsData } = yield call(axios.get, chartDataUrl);
+      const parsedData = objectToCamelCase(chartsData);
+      yield put(setChartsData(parsedData));
+    }
   } catch (error) {
     yield put(editChartError(error));
   }
