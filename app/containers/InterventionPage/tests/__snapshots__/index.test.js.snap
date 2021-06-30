@@ -317,7 +317,9 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                 data-id="tooltip"
                 id="undefined-tile-tooltip"
               >
-                <style>
+                <style
+                  aria-hidden="true"
+                >
                   
   	.t00000000-0000-0000-0000-000000000000 {
 	    color: #fff;

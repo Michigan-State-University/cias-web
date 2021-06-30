@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { memo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Tooltip from 'components/Tooltip';
@@ -8,16 +8,21 @@ import { StyledEllipsisText } from './styled';
 
 const EllipsisText = ({ text, dataFor, lines, ...props }) => {
   const ref = useRef(null);
+
   const [allowTooltip, setAllowTooltip] = useState(false);
+
+  const [isHovered, setIsHovered] = useState(false);
+  const onMouseEnter = () => setIsHovered(true);
+  const onMouseLeave = () => setIsHovered(false);
 
   const onTruncate = isTruncated => {
     setAllowTooltip(isTruncated);
   };
 
-  return (
-    <Row width="100%">
-      {allowTooltip && <Tooltip text={text} id={text ?? ''} display="inline" />}
+  const isTooltipVisible = isHovered && allowTooltip;
 
+  return (
+    <Row width="100%" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <StyledEllipsisText
         ref={ref}
         data-tip={text}
@@ -28,6 +33,10 @@ const EllipsisText = ({ text, dataFor, lines, ...props }) => {
       >
         {text}
       </StyledEllipsisText>
+
+      {isTooltipVisible && (
+        <Tooltip text={text} id={text ?? ''} display="inline" />
+      )}
     </Row>
   );
 };
@@ -42,4 +51,4 @@ EllipsisText.defaultProps = {
   lines: 1,
 };
 
-export default EllipsisText;
+export default memo(EllipsisText);

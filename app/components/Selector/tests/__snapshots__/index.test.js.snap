@@ -104,7 +104,9 @@ exports[`<Selector /> Should render and match the snapshot 1`] = `
           data-id="tooltip"
           id="el-tooltip-id-asd02as"
         >
-          <style>
+          <style
+            aria-hidden="true"
+          >
             
   	.t00000000-0000-0000-0000-000000000000 {
 	    color: #fff;
@@ -385,7 +387,9 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
           data-id="tooltip"
           id="el-tooltip-id-asd02as"
         >
-          <style>
+          <style
+            aria-hidden="true"
+          >
             
   	.t00000000-0000-0000-0000-000000000000 {
 	    color: #fff;
