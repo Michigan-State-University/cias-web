@@ -25,12 +25,14 @@ export function* editChart({ payload: { chart } }) {
 
     if (chart.status === ChartStatus.DATA_COLLECTION) {
       const organization = yield select(makeSelectOrganization());
-      const chartDataSuffix = `?statuses[]=published&statuses[]
-      =data_collection`;
       const chartDataUrl = `v1/organizations/${organization.id}/charts_data/${
         chart.id
-      }/generate${chartDataSuffix}`;
-      const { data: chartsData } = yield call(axios.get, chartDataUrl);
+      }/generate`;
+      const { data: chartsData } = yield call(axios.get, chartDataUrl, {
+        params: {
+          statuses: [ChartStatus.DATA_COLLECTION, ChartStatus.PUBLISHED],
+        },
+      });
       const parsedData = objectToCamelCase(chartsData);
       yield put(setChartsData(parsedData));
     }
