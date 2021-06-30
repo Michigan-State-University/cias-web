@@ -12,6 +12,7 @@ export {
   copyChartRequest,
   setChartFiltersRequest,
   reorderSectionsRequest,
+  reorderChartsRequest,
 } from './actions';
 export { dashboardSectionsReducer, initialState } from './reducer';
 export {

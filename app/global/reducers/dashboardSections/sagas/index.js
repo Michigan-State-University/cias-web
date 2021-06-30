@@ -10,6 +10,7 @@ import deleteChartSaga from './deleteChart';
 import copyChartSaga from './copyChart';
 import filterChartsDataSaga from './filterChartsData';
 import reorderDashboardSectionsSaga from './reorderDashboardSections';
+import reorderChartsSaga from './reorderCharts';
 
 export {
   fetchDashboardSectionSaga,
@@ -23,6 +24,7 @@ export {
   copyChartSaga,
   filterChartsDataSaga,
   reorderDashboardSectionsSaga,
+  reorderChartsSaga,
 };
 
 export default function* allDashboardSectionsSagas() {
@@ -38,5 +40,6 @@ export default function* allDashboardSectionsSagas() {
     copyChartSaga(),
     filterChartsDataSaga(),
     reorderDashboardSectionsSaga(),
+    reorderChartsSaga(),
   ]);
 }

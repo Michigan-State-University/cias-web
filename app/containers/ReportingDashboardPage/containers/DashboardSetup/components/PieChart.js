@@ -21,6 +21,7 @@ const PieChart = ({
   realChartData,
   formatMessage,
   status,
+  disableAnimation,
 }) => {
   const data = useMemo(() => {
     if (!realChartData && status === ChartStatus.PUBLISHED) return null;
@@ -63,6 +64,7 @@ const PieChart = ({
       dataKey={Y_AXIS_KEY}
       label={generatePieChartLabel}
       generateCellColor={generateCellColor}
+      isAnimationActive={!disableAnimation}
     />
   );
 };
@@ -73,6 +75,7 @@ PieChart.propTypes = {
   realChartData: PropTypes.any,
   formatMessage: PropTypes.func,
   status: PropTypes.string,
+  disableAnimation: PropTypes.bool,
 };
 
 export default memo(PieChart);
