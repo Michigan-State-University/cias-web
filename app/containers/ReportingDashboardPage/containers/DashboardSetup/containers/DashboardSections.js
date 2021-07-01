@@ -1,4 +1,10 @@
-import React, { memo, useCallback, useContext, useEffect } from 'react';
+import React, {
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
@@ -48,6 +54,8 @@ const DashboardSections = ({
   const { organizationId } = useContext(ReportingDashboardPageContext);
   const { formatMessage } = useIntl();
 
+  const [shouldAnimateCharts, setShouldAnimateCharts] = useState(true);
+
   const { addDashboardSectionLoader, fetchDashboardSectionsLoader } = loaders;
 
   // Reset settings on Component entry
@@ -64,9 +72,15 @@ const DashboardSections = ({
     [organizationId],
   );
 
-  const onDragEnd = result => {
-    const orderedNewList = orderDashboardSections(result, dashboardSections);
-    reorderSections(organizationId, orderedNewList);
+  const onDragEnd = ({ active, over }) => {
+    if (over.id !== active.id) {
+      const orderedNewList = orderDashboardSections(
+        dashboardSections,
+        active.id,
+        over.id,
+      );
+      reorderSections(organizationId, orderedNewList);
+    }
   };
 
   if (fetchDashboardSectionsLoader) return <Loader type="inline" />;
@@ -79,6 +93,8 @@ const DashboardSections = ({
         errors,
         selectedChart,
         fromDashboardView,
+        shouldAnimateCharts,
+        setShouldAnimateCharts,
       }}
     >
       <FullWidthContainer>
@@ -96,7 +112,11 @@ const DashboardSections = ({
 
         <Row>
           <Col mt={10}>
-            <DroppableSectionParent onDragEnd={onDragEnd}>
+            <DroppableSectionParent
+              onDragEnd={onDragEnd}
+              dashboardSections={dashboardSections}
+              fromDashboardView={fromDashboardView}
+            >
               {dashboardSections.map((section, index) => (
                 <DraggableSectionComponent
                   key={`SectionComponent-${index}-id-${section.id}`}
