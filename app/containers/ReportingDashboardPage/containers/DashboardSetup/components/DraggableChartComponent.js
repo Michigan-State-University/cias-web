@@ -24,7 +24,7 @@ const DraggableChartComponent = props => {
     isDragging,
   } = useSortable({ id, disabled: fromDashboardView });
 
-  const { shouldAnimateCharts } = useContext(DashboardSectionsContext);
+  const { isAnySectionDragging } = useContext(DashboardSectionsContext);
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -57,7 +57,7 @@ const DraggableChartComponent = props => {
         {...props}
         dragHandle={dragHandle}
         isDragging={isDragging}
-        disableAnimation={!shouldAnimateCharts}
+        disableAnimation={!isAnySectionDragging}
       />
     </div>
   );
