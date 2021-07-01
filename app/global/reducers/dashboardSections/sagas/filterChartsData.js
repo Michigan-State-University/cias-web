@@ -14,27 +14,16 @@ export function* filterChartsData({
   },
 }) {
   try {
-    let params = '';
-    if (clinics) {
-      params = clinics.reduce(
-        (acc, { value }) => acc.concat(`clinic_ids[]=${value}&`),
-        params,
-      );
-    }
     const { value: offset } = daysOffset;
 
     const chartDataUrl = `v1/organizations/${organizationId}/charts_data/generate?`;
-    const { data: chartsData } = yield call(
-      axios.get,
-      chartDataUrl.concat(params),
-      {
-        params: {
-          statuses: [ChartStatus.PUBLISHED],
-          date_offset: offset ?? '',
-          clinics: clinics ? clinics.map(({ value }) => value) : [],
-        },
+    const { data: chartsData } = yield call(axios.get, chartDataUrl, {
+      params: {
+        statuses: [ChartStatus.PUBLISHED],
+        date_offset: offset && offset !== 0 ? offset : null,
+        clinics: clinics ? clinics.map(({ value }) => value) : [],
       },
-    );
+    });
     const parsedData = objectToCamelCase(chartsData.data_for_charts);
     yield put(setChartsData(parsedData));
   } catch (error) {
