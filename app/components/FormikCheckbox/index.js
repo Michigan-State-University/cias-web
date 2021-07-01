@@ -26,8 +26,8 @@ function FormikCheckbox({ formikKey, children }) {
         <Checkbox
           id={formikKey}
           onClick={() => {
-            setValue(!value);
             setTouched(true);
+            setValue(!value);
           }}
           mr={10}
           checked={value}
