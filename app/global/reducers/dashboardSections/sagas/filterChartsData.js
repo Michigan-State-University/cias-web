@@ -4,7 +4,7 @@ import axios from 'axios';
 import objectToCamelCase from 'utils/objectToCamelCase';
 import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
-import { SET_CHARTS_FILTERS } from '../constants';
+import { ChartStatus, SET_CHARTS_FILTERS } from '../constants';
 import { setChartsData } from '../actions';
 import messages from '../messages';
 
@@ -29,6 +29,7 @@ export function* filterChartsData({
     const { data: chartsData } = yield call(
       axios.get,
       chartDataUrl.concat(params),
+      { params: { statuses: [ChartStatus.PUBLISHED] } },
     );
     const parsedData = objectToCamelCase(chartsData.data_for_charts);
     yield put(setChartsData(parsedData));
