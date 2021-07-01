@@ -182,27 +182,26 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             />
           </div>
         </div>
-        <div>
-          <div
-            class="Box-sc-1vhutan-0 ilPBiX"
-            display="flex"
+        <div
+          class="Box-sc-1vhutan-0 ilPBiX"
+          display="flex"
+        >
+          <img
+            src="IMAGE_MOCK"
+          />
+          <label
+            class="styled__StyledLabel-sc-1rm9cie-1 hivYpL"
+            for="terms"
           >
-            <img
-              src="IMAGE_MOCK"
-            />
-            <label
-              for="terms"
+            Accept
+            <p
+              class="Text-e4p0w3-0 hffOjZ"
+              color="#B727EA"
+              font-weight="bold"
             >
-              Accept
-              <p
-                class="Text-e4p0w3-0 hhhvNC"
-                color="#B727EA"
-                font-weight="bold"
-              >
-                Terms and conditions
-              </p>
-            </label>
-          </div>
+              Terms and conditions
+            </p>
+          </label>
         </div>
         <button
           class="StyledButton-d2s0gt-0 hIkQqV"
@@ -400,27 +399,26 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             />
           </div>
         </div>
-        <div>
-          <div
-            class="Box-sc-1vhutan-0 ilPBiX"
-            display="flex"
+        <div
+          class="Box-sc-1vhutan-0 ilPBiX"
+          display="flex"
+        >
+          <img
+            src="IMAGE_MOCK"
+          />
+          <label
+            class="styled__StyledLabel-sc-1rm9cie-1 hivYpL"
+            for="terms"
           >
-            <img
-              src="IMAGE_MOCK"
-            />
-            <label
-              for="terms"
+            Accept
+            <p
+              class="Text-e4p0w3-0 hffOjZ"
+              color="#B727EA"
+              font-weight="bold"
             >
-              Accept
-              <p
-                class="Text-e4p0w3-0 hhhvNC"
-                color="#B727EA"
-                font-weight="bold"
-              >
-                Terms and conditions
-              </p>
-            </label>
-          </div>
+              Terms and conditions
+            </p>
+          </label>
         </div>
         <button
           class="StyledButton-d2s0gt-0 hIkQqV"

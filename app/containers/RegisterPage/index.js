@@ -74,9 +74,7 @@ const validationSchema = formatMessage =>
     ),
     lastName: Yup.string().required(formatMessage(messages.lastNameRequired)),
     firstName: Yup.string().required(formatMessage(messages.firstNameRequired)),
-    terms: Yup.boolean()
-      .required(formatMessage(messages.termsRequired))
-      .oneOf([true], formatMessage(messages.termsRequired)),
+    terms: Yup.bool().oneOf([true], formatMessage(messages.termsRequired)),
   });
 
 const initialValues = email => ({
@@ -198,6 +196,7 @@ export function RegisterPage({
                     {formatMessage(messages.accept)}
                     <Text
                       ml={3}
+                      lineHeight="1.5em"
                       fontWeight="bold"
                       color={themeColors.secondary}
                       onClick={() => {
