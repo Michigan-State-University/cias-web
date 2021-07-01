@@ -38,8 +38,8 @@ const CommonLayout = ({ currentQuestion }) => {
       {settingsSubtitle && subtitle && (
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
-            <Row align="center">
-              <Markup content={subtitle} noWrap />
+            <Row align="end" justify="between">
+              <Markup content={subtitle} />
               {settingsRequired && <Text color={themeColors.warning}>*</Text>}
             </Row>
           </Box>
