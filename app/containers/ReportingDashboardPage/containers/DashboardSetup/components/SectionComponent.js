@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useContext } from 'react';
+import React, { memo, useCallback, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -32,9 +32,15 @@ const SectionComponent = ({
   draggableHandler,
   reorderCharts,
 }) => {
-  const { selectedChart, fromDashboardView } = useContext(
+  const { selectedChart, fromDashboardView, isAnySectionDragging } = useContext(
     DashboardSectionsContext,
   );
+
+  useEffect(() => {
+    if (!isAnySectionDragging) {
+      selectChart();
+    }
+  }, [isAnySectionDragging]);
 
   const closeSettings = useCallback(() => selectChart(), []);
 
@@ -112,7 +118,7 @@ const SectionComponent = ({
         </Row>
       </FullWidthContainer>
 
-      {!fromDashboardView && (
+      {!fromDashboardView && isAnySectionDragging && (
         <SidePanel isOpen={Boolean(selectedChart)} style={{ width: 500 }}>
           <ChartSettings onClose={closeSettings} chart={selectedChart} />
         </SidePanel>

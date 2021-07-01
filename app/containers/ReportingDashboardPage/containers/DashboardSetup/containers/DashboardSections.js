@@ -54,7 +54,7 @@ const DashboardSections = ({
   const { organizationId } = useContext(ReportingDashboardPageContext);
   const { formatMessage } = useIntl();
 
-  const [shouldAnimateCharts, setShouldAnimateCharts] = useState(true);
+  const [isAnySectionDragging, setIsAnySectionDragging] = useState(true);
 
   const { addDashboardSectionLoader, fetchDashboardSectionsLoader } = loaders;
 
@@ -93,8 +93,8 @@ const DashboardSections = ({
         errors,
         selectedChart,
         fromDashboardView,
-        shouldAnimateCharts,
-        setShouldAnimateCharts,
+        isAnySectionDragging,
+        setIsAnySectionDragging,
       }}
     >
       <FullWidthContainer>

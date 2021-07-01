@@ -16,15 +16,15 @@ const DraggableSectionParent = ({
   fromDashboardView,
 }) => {
   const [draggingSectionId, setDraggingSectionId] = useState(null);
-  const { setShouldAnimateCharts } = useContext(DashboardSectionsContext);
+  const { setIsAnySectionDragging } = useContext(DashboardSectionsContext);
 
   const onDragStart = e => {
-    setShouldAnimateCharts(false);
+    setIsAnySectionDragging(false);
     setDraggingSectionId(e.active.id);
   };
 
   const onDragEndCallback = () => {
-    setShouldAnimateCharts(true);
+    setIsAnySectionDragging(true);
     setDraggingSectionId(null);
   };
 
