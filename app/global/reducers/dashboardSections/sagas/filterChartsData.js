@@ -22,14 +22,18 @@ export function* filterChartsData({
       );
     }
     const { value: offset } = daysOffset;
-    if (offset) {
-      params += `date_offset=${offset}&`;
-    }
+
     const chartDataUrl = `v1/organizations/${organizationId}/charts_data/generate?`;
     const { data: chartsData } = yield call(
       axios.get,
       chartDataUrl.concat(params),
-      { params: { statuses: [ChartStatus.PUBLISHED] } },
+      {
+        params: {
+          statuses: [ChartStatus.PUBLISHED],
+          date_offset: offset ?? '',
+          clinics: clinics ? clinics.map(({ value }) => value) : [],
+        },
+      },
     );
     const parsedData = objectToCamelCase(chartsData.data_for_charts);
     yield put(setChartsData(parsedData));
