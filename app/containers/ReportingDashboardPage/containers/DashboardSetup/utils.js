@@ -8,13 +8,11 @@ const prepareOrderedList = (list, sourceIndex, destinationIndex) => {
   }));
 };
 
-export const orderDashboardSections = (result, dashboardSections) => {
-  const {
-    destination: { index: destinationIndex },
-    source: { index: sourceIndex },
-  } = result;
+export const orderDashboardSections = (list, activeId, overId) => {
+  const oldIndex = list.findIndex(({ id: itemId }) => itemId === activeId);
+  const newIndex = list.findIndex(({ id: itemId }) => itemId === overId);
 
-  return prepareOrderedList(dashboardSections, sourceIndex, destinationIndex);
+  return prepareOrderedList(list, oldIndex, newIndex);
 };
 
 export const orderCharts = (charts, activeId, overId) => {
