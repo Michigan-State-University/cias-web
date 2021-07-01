@@ -9,7 +9,7 @@ import Img from 'components/Img';
 import SectionComponent from './SectionComponent';
 import { DashboardSectionsContext } from '../constants';
 
-const DroppableSectionParent = ({
+const DraggableSectionParent = ({
   onDragEnd,
   children,
   dashboardSections,
@@ -60,11 +60,11 @@ const DroppableSectionParent = ({
   );
 };
 
-DroppableSectionParent.propTypes = {
+DraggableSectionParent.propTypes = {
   onDragEnd: PropTypes.func,
   children: PropTypes.node,
   dashboardSections: PropTypes.array,
   fromDashboardView: PropTypes.bool,
 };
 
-export default DroppableSectionParent;
+export default DraggableSectionParent;
