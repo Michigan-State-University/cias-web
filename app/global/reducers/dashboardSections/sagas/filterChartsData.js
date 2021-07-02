@@ -4,7 +4,7 @@ import axios from 'axios';
 import objectToCamelCase from 'utils/objectToCamelCase';
 import { toast } from 'react-toastify';
 import { formatMessage } from 'utils/intlOutsideReact';
-import { SET_CHARTS_FILTERS } from '../constants';
+import { ChartStatus, SET_CHARTS_FILTERS } from '../constants';
 import { setChartsData } from '../actions';
 import messages from '../messages';
 
@@ -14,22 +14,16 @@ export function* filterChartsData({
   },
 }) {
   try {
-    let params = '';
-    if (clinics) {
-      params = clinics.reduce(
-        (acc, { value }) => acc.concat(`clinic_ids[]=${value}&`),
-        params,
-      );
-    }
     const { value: offset } = daysOffset;
-    if (offset) {
-      params += `date_offset=${offset}&`;
-    }
+
     const chartDataUrl = `v1/organizations/${organizationId}/charts_data/generate?`;
-    const { data: chartsData } = yield call(
-      axios.get,
-      chartDataUrl.concat(params),
-    );
+    const { data: chartsData } = yield call(axios.get, chartDataUrl, {
+      params: {
+        statuses: [ChartStatus.PUBLISHED],
+        date_offset: offset && offset !== 0 ? offset : null,
+        clinics: clinics ? clinics.map(({ value }) => value) : [],
+      },
+    });
     const parsedData = objectToCamelCase(chartsData.data_for_charts);
     yield put(setChartsData(parsedData));
   } catch (error) {

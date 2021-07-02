@@ -10,7 +10,7 @@ import { useField } from 'formik';
 import Checkbox from 'components/Checkbox';
 import Box from 'components/Box';
 import { themeColors } from 'theme';
-import { ErrorText } from './styled';
+import { ErrorText, StyledLabel } from './styled';
 
 function FormikCheckbox({ formikKey, children }) {
   const [field, meta, helpers] = useField(formikKey);
@@ -21,22 +21,22 @@ function FormikCheckbox({ formikKey, children }) {
   const hasError = Boolean(touched && error);
 
   return (
-    <div>
+    <>
       <Box mb={5} display="flex" align="center">
         <Checkbox
           id={formikKey}
           onClick={() => {
-            setValue(!value);
             setTouched(true);
+            setValue(!value);
           }}
           mr={10}
           checked={value}
           stroke={hasError && themeColors.warning}
         />
-        <label htmlFor={formikKey}>{children}</label>
+        <StyledLabel htmlFor={formikKey}>{children}</StyledLabel>
       </Box>
       {hasError && <ErrorText>{error}</ErrorText>}
-    </div>
+    </>
   );
 }
 
