@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { themeColors } from 'theme';
 import Box from 'components/Box';
 import Icon from 'components/Icon';
-import Text from 'components/Text';
+import EllipsisText from 'components/Text/EllipsisText';
 
 const ReportingDashboardItem = ({ active, redirect, icon, name, alt, id }) => (
   <>
@@ -25,9 +25,13 @@ const ReportingDashboardItem = ({ active, redirect, icon, name, alt, id }) => (
         src={icon}
         alt={alt}
       />
-      <Text color={active ? themeColors.secondary : ''} fontWeight="bold">
-        {name}
-      </Text>
+      <Box maxWidth="100%">
+        <EllipsisText
+          color={active ? themeColors.secondary : ''}
+          fontWeight="bold"
+          text={name}
+        />
+      </Box>
     </Box>
   </>
 );
