@@ -39,7 +39,7 @@ import Select from 'components/Select';
 import Button from 'components/Button';
 import CsvFileReader from 'components/CsvFileReader';
 
-import { emailValidator } from 'utils/validators';
+import { csvEmailValidator } from 'utils/validators';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import ShareBoxModalParent from './Components/ShareBoxModalParent';
@@ -157,11 +157,10 @@ const OrganizationShareBox = ({
     const parsedData = map(data, columns => {
       if (!columns || !columns.data) return null;
 
-      const [notParsedEmail, healthClinicId] = columns.data;
-      const email = notParsedEmail.replace(`\r`, '');
+      const [email, healthClinicId] = columns.data;
       if (
         email &&
-        emailValidator(email) &&
+        csvEmailValidator(email) &&
         allClinicIds.includes(healthClinicId)
       )
         return { email, healthClinicId };

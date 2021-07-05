@@ -24,7 +24,7 @@ import Spinner from 'components/Spinner';
 import ErrorAlert from 'components/ErrorAlert';
 
 import { themeColors } from 'theme';
-import { emailValidator } from 'utils/validators/emailValidator';
+import { csvEmailValidator } from 'utils/validators/emailValidator';
 import { injectSaga } from 'redux-injectors';
 import {
   enableUserAccessRequest,
@@ -66,8 +66,8 @@ const AccessGiver = ({
     const parsedData = uniq(
       filter(
         map(data, columns => {
-          const email = head(columns.data).replace('\r', '');
-          if (email && emailValidator(email)) return email;
+          const email = head(columns.data);
+          if (email && csvEmailValidator(email)) return email;
           return null;
         }),
         val => val !== null,

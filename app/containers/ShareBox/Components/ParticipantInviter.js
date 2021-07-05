@@ -7,7 +7,7 @@ import uniq from 'lodash/uniq';
 import filter from 'lodash/filter';
 import isEmpty from 'lodash/isEmpty';
 
-import { emailValidator } from 'utils/validators/emailValidator';
+import { csvEmailValidator } from 'utils/validators/emailValidator';
 
 import Button from 'components/Button';
 import Column from 'components/Column';
@@ -30,8 +30,8 @@ const ParticipantInviter = ({
     const parsedData = uniq(
       filter(
         map(data, columns => {
-          const email = head(columns.data).replace(`\r`, '');
-          if (email && emailValidator(email)) return email;
+          const email = head(columns.data);
+          if (email && csvEmailValidator(email)) return email;
           return null;
         }),
         val => val !== null,
