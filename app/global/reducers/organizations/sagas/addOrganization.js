@@ -13,9 +13,16 @@ import { makeSelectOrganizations } from '../selectors';
 export function* createOrganization() {
   const requestURL = `v1/organizations`;
   const organizations = yield select(makeSelectOrganizations());
+  const organizationNames = organizations.map(({ name }) => name);
+  let { length: organizationsLength } = organizations;
+  let organizationName = '';
+  do {
+    organizationName = `New organization ${organizationsLength}`;
+    organizationsLength += 1;
+  } while (organizationNames.includes(organizationName));
   try {
     const { data } = yield call(axios.post, requestURL, {
-      organization: { name: `New organization ${organizations.length}` },
+      organization: { name: organizationName },
     });
     const organization = jsonApiToObject(data, 'organization');
     yield put(createOrganizationSuccess(organization));
