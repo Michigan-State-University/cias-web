@@ -30,7 +30,7 @@ const ParticipantInviter = ({
     const parsedData = uniq(
       filter(
         map(data, columns => {
-          const email = head(columns.data);
+          const email = head(columns.data).replace(`\r`, '');
           if (email && emailValidator(email)) return email;
           return null;
         }),

@@ -157,7 +157,8 @@ const OrganizationShareBox = ({
     const parsedData = map(data, columns => {
       if (!columns || !columns.data) return null;
 
-      const [email, healthClinicId] = columns.data;
+      const [notParsedEmail, healthClinicId] = columns.data;
+      const email = notParsedEmail.replace(`\r`, '');
       if (
         email &&
         emailValidator(email) &&
