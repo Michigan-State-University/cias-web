@@ -25,7 +25,7 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
   );
 
   const renderSetting = () => {
-    switch (setting.constructor) {
+    switch (setting?.constructor) {
       case Number:
         return (
           <Input
