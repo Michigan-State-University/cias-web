@@ -101,7 +101,7 @@ const ChartTileUI = ({
               {!fromDashboardView && <Col xs={2} />}
 
               <Col align="center" xs={7}>
-                <Box maxWidth={CHART_NAME_MAX_WIDTH}>
+                <Box maxWidth={CHART_NAME_MAX_WIDTH} width="100%">
                   <H2>
                     <EllipsisText text={name} />
                   </H2>

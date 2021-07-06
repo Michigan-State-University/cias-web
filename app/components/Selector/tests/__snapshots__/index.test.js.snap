@@ -26,7 +26,7 @@ exports[`<Selector /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c6 {
+.c5 {
   width: auto;
   height: auto;
   margin-left: 8px;
@@ -45,13 +45,6 @@ exports[`<Selector /> Should render and match the snapshot 1`] = `
   cursor: pointer;
   color: rgba(183,39,234,1);
   cursor: pointer;
-}
-
-.c5 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #2F3850;
 }
 
 .c1 {
@@ -94,105 +87,14 @@ exports[`<Selector /> Should render and match the snapshot 1`] = `
         <img
           alt="?"
           class="c4"
-          currentitem="false"
           data-for="el-tooltip-id-asd02as"
           data-tip=""
           src="IMAGE_MOCK"
         />
-        <div
-          class="__react_component_tooltip t00000000-0000-0000-0000-000000000000 place-top type-dark"
-          data-id="tooltip"
-          id="el-tooltip-id-asd02as"
-        >
-          <style
-            aria-hidden="true"
-          >
-            
-  	.t00000000-0000-0000-0000-000000000000 {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.t00000000-0000-0000-0000-000000000000.place-top {
-        margin-top: -10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-bottom {
-        margin-top: 10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-left {
-        margin-left: -10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-right {
-        margin-left: 10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p
-            class="c5"
-          >
-            tooltipContent
-          </p>
-        </div>
       </div>
       <img
         alt="arrow"
-        class="c6"
+        class="c5"
         src="IMAGE_MOCK"
         transform=""
       />
@@ -227,7 +129,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   height: auto;
 }
 
-.c6 {
+.c5 {
   width: auto;
   height: auto;
   margin-left: 8px;
@@ -251,14 +153,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c5 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #2F3850;
-}
-
-.c9 {
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -271,7 +166,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c10 {
+.c9 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -300,7 +195,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c7 {
+.c6 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -315,7 +210,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   right: 0;
 }
 
-.c8 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -377,118 +272,27 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
         <img
           alt="?"
           class="c4"
-          currentitem="false"
           data-for="el-tooltip-id-asd02as"
           data-tip=""
           src="IMAGE_MOCK"
         />
-        <div
-          class="__react_component_tooltip t00000000-0000-0000-0000-000000000000 place-top type-dark"
-          data-id="tooltip"
-          id="el-tooltip-id-asd02as"
-        >
-          <style
-            aria-hidden="true"
-          >
-            
-  	.t00000000-0000-0000-0000-000000000000 {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.t00000000-0000-0000-0000-000000000000.place-top {
-        margin-top: -10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-bottom {
-        margin-top: 10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-left {
-        margin-left: -10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-right {
-        margin-left: 10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p
-            class="c5"
-          >
-            tooltipContent
-          </p>
-        </div>
       </div>
       <img
         alt="arrow"
-        class="c6"
+        class="c5"
         src="IMAGE_MOCK"
         transform="rotate(180deg);"
       />
     </div>
     <div
-      class="c7"
+      class="c6"
       role="listbox"
     >
       <div
-        class="c8"
+        class="c7"
       >
         <p
-          class="c9"
+          class="c8"
           color="#B727EA"
           font-weight="bold"
           role="option"
@@ -496,7 +300,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
           Label
         </p>
         <p
-          class="c10"
+          class="c9"
           font-weight="bold"
           role="option"
         >

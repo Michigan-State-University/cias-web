@@ -11,32 +11,30 @@ const EllipsisText = ({ text, dataFor, lines, ...props }) => {
 
   const [allowTooltip, setAllowTooltip] = useState(false);
 
-  const [isHovered, setIsHovered] = useState(false);
-  const onMouseEnter = () => setIsHovered(true);
-  const onMouseLeave = () => setIsHovered(false);
-
   const onTruncate = isTruncated => {
     setAllowTooltip(isTruncated);
   };
 
-  const isTooltipVisible = isHovered && allowTooltip;
-
   return (
-    <Row width="100%" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
-      <StyledEllipsisText
-        ref={ref}
-        data-tip={text}
-        data-for={dataFor ?? text ?? ''}
-        lines={lines}
-        onTruncate={onTruncate}
-        $styleProps={props}
+    <Row width="100%">
+      <Tooltip
+        visible={allowTooltip}
+        text={text}
+        id={text ?? ''}
+        display="inline"
+        width="100%"
       >
-        {text}
-      </StyledEllipsisText>
-
-      {isTooltipVisible && (
-        <Tooltip text={text} id={text ?? ''} display="inline" />
-      )}
+        <StyledEllipsisText
+          ref={ref}
+          data-tip={text}
+          data-for={dataFor ?? text ?? ''}
+          lines={lines}
+          onTruncate={onTruncate}
+          $styleProps={props}
+        >
+          {text}
+        </StyledEllipsisText>
+      </Tooltip>
     </Row>
   );
 };

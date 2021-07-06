@@ -3,11 +3,15 @@
 exports[`<InterventionPage /> Should render and match the snapshot with interventions 1`] = `
 <div>
   <div
-    class="styled__StyledContainer-sc-6h8fd4-0 fziHXq"
+    class="Container-uh0ujs-0 styled__StyledContainer-sc-6h8fd4-0 cMRNTt fziHXq"
+    direction="column"
+    display="flex"
+    height="100% !important"
+    overflow="clip"
     style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
   >
     <div
-      class="Box-sc-1vhutan-0 fTNEzq styled__StyledNotification-ve6hnx-4 eUHyWa"
+      class="Box-sc-1vhutan-0 fTNEzq styled__StyledNotification-ve6hnx-4 cNoZbH"
       width="max-content"
     >
       <div
@@ -81,7 +85,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
       </div>
     </div>
     <div
-      class="styled__InitialRow-ve6hnx-0 cpSsKi"
+      class="styled__InitialRow-ve6hnx-0 cKtUtp"
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
     >
       <h1
@@ -94,7 +98,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
       />
     </div>
     <div
-      class="styled__InitialRow-ve6hnx-0 cpSsKi"
+      class="styled__InitialRow-ve6hnx-0 cKtUtp"
       style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
     >
       <div
@@ -208,222 +212,25 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
     </div>
     
     <div
-      style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+      class="Box-sc-1vhutan-0 fcQhED"
     >
       <div
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
+        class="auto-sizer-virtual-grid"
+        style="overflow: visible; height: 0px; width: 0px;"
+      />
+      <div
+        class="resize-triggers"
       >
         <div
-          class="styled__NewElementContainer-sc-1527ipx-1 ifuPmn"
-          data-cy="create-intervention-button"
+          class="expand-trigger"
         >
           <div
-            class="Box-sc-1vhutan-0 hgwYuz"
-            direction="column"
-            display="flex"
-          >
-            <img
-              alt="add"
-              class="Img-sc-55j3su-0 cpAjQg"
-              src="IMAGE_MOCK"
-            />
-            Create a new intervention
-          </div>
+            style="width: 1px; height: 1px;"
+          />
         </div>
-      </div>
-      <div
-        style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
-      >
-        <a
-          class="styled__StyledLink-agddns-1 bNrOVe"
-          href="/interventions/undefined/"
-        >
-          <div
-            class="styled__TileContainer-agddns-0 ezDoDg"
-          >
-            <div
-              class="styled__Heading-agddns-2 bzFUQe"
-            >
-              <div>
-                Draft
-                <span
-                  class="styled__StatusIndicator-agddns-3 buOhZv"
-                />
-              </div>
-              <div>
-                <div
-                  class="Box-sc-1vhutan-0 iHhkok"
-                  display="flex"
-                >
-                  <div
-                    class="styled__ImageContainer-sc-1ja85v4-0 bXydCK"
-                  >
-                    <img
-                      alt="dots"
-                      class="Img-sc-55j3su-0 cDhXoN"
-                      src="IMAGE_MOCK"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="Row-y1cs0u-0 gQFDhs"
-              width="100%"
-            >
-              <span
-                class="styled__StyledEllipsisText-h4mjfj-0 itjSMP"
-                data-for="Name"
-                data-tip="Name"
-                font-size="18"
-                font-weight="bold"
-                theme="[object Object]"
-                width="0"
-              >
-                <span />
-                <span>
-                  Name
-                </span>
-                <span
-                  style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
-                >
-                  …
-                </span>
-              </span>
-            </div>
-            <div
-              class="Box-sc-1vhutan-0 qxAio"
-              display="flex"
-            >
-              <div
-                currentitem="false"
-                data-for="undefined-tile-tooltip"
-                data-tip=""
-              >
-                <div
-                  class="styled__TileInfo-agddns-4 dElPvb"
-                >
-                  <div>
-                    <p
-                      class="Text-e4p0w3-0 fFURPd"
-                    >
-                      Sessions (2)
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div
-                class="__react_component_tooltip t00000000-0000-0000-0000-000000000000 place-top type-dark"
-                data-id="tooltip"
-                id="undefined-tile-tooltip"
-              >
-                <style
-                  aria-hidden="true"
-                >
-                  
-  	.t00000000-0000-0000-0000-000000000000 {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.t00000000-0000-0000-0000-000000000000.place-top {
-        margin-top: -10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-bottom {
-        margin-top: 10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-left {
-        margin-left: -10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-right {
-        margin-left: 10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-                </style>
-                <p
-                  class="Text-e4p0w3-0 fFURPd"
-                />
-                <p
-                  class="Text-e4p0w3-0 bmKPFZ"
-                  font-weight="bold"
-                >
-                  Created by: 
-                </p>
-                <p
-                  class="Text-e4p0w3-0 fFURPd"
-                >
-                  Email: 
-                </p>
-                <p
-                  class="Text-e4p0w3-0 fFURPd"
-                >
-                  First name: 
-                </p>
-                <p
-                  class="Text-e4p0w3-0 dSyDnZ"
-                >
-                  Last name: 
-                </p>
-              </div>
-            </div>
-          </div>
-        </a>
+        <div
+          class="contract-trigger"
+        />
       </div>
     </div>
     <span
