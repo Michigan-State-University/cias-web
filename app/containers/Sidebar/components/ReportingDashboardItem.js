@@ -25,7 +25,7 @@ const ReportingDashboardItem = ({ active, redirect, icon, name, alt, id }) => (
         src={icon}
         alt={alt}
       />
-      <Box maxWidth="100%">
+      <Box width="calc(100% - 40px)">
         <EllipsisText
           color={active ? themeColors.secondary : ''}
           fontWeight="bold"
