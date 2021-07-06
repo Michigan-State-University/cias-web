@@ -3,6 +3,7 @@ import axios from 'axios';
 import { push } from 'connected-react-router';
 
 import { jsonApiToObject } from 'utils/jsonApiMapper';
+import { calculateNextValue, CalculationStrategy } from 'utils/sequenceUtils';
 import { CREATE_ORGANIZATION_REQUEST } from '../constants';
 import {
   createOrganizationFailure,
@@ -13,16 +14,16 @@ import { makeSelectOrganizations } from '../selectors';
 export function* createOrganization() {
   const requestURL = `v1/organizations`;
   const organizations = yield select(makeSelectOrganizations());
-  const organizationNames = organizations.map(({ name }) => name);
-  let { length: organizationsLength } = organizations;
-  let organizationName = '';
-  do {
-    organizationName = `New organization ${organizationsLength}`;
-    organizationsLength += 1;
-  } while (organizationNames.includes(organizationName));
+  const organizationSuffixes = organizations.map(({ name }) =>
+    name.split(' ').pop(),
+  );
+  const nextOrganizationSuffix = calculateNextValue(
+    organizationSuffixes,
+    CalculationStrategy.NEXT_VALUE,
+  );
   try {
     const { data } = yield call(axios.post, requestURL, {
-      organization: { name: organizationName },
+      organization: { name: `New organization ${nextOrganizationSuffix}` },
     });
     const organization = jsonApiToObject(data, 'organization');
     yield put(createOrganizationSuccess(organization));
