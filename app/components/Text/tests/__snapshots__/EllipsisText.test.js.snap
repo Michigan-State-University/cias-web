@@ -1,6 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<EllipsisText /> should match the snapshot 1`] = `
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: inline;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -13,7 +22,7 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c1 {
+.c2 {
   position: relative;
   width: 100%;
   color: #2F3850;
@@ -24,25 +33,45 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
     class="c0"
     width="100%"
   >
-    <span
+    <div
       class="c1"
-      data-for=""
-      theme="[object Object]"
-      width="0"
+      display="inline"
+      width="100%"
     >
-      <span />
-      <span />
-      <span
-        style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+      <div
+        data-for=""
+        data-tip=""
       >
-        …
-      </span>
-    </span>
+        <span
+          class="c2"
+          data-for=""
+          theme="[object Object]"
+          width="0"
+        >
+          <span />
+          <span />
+          <span
+            style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+          >
+            …
+          </span>
+        </span>
+      </div>
+    </div>
   </div>
 </div>
 `;
 
 exports[`<EllipsisText /> should match the snapshot 2`] = `
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: inline;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -55,7 +84,7 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
   width: 100%;
 }
 
-.c1 {
+.c2 {
   position: relative;
   width: 100%;
   color: #2F3850;
@@ -66,23 +95,34 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
     class="c0"
     width="100%"
   >
-    <span
+    <div
       class="c1"
-      data-for="Test"
-      data-tip="Test"
-      theme="[object Object]"
-      width="0"
+      display="inline"
+      width="100%"
     >
-      <span />
-      <span>
-        Test
-      </span>
-      <span
-        style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+      <div
+        data-for="Test"
+        data-tip=""
       >
-        …
-      </span>
-    </span>
+        <span
+          class="c2"
+          data-for="Test"
+          data-tip="Test"
+          theme="[object Object]"
+          width="0"
+        >
+          <span />
+          <span>
+            Test
+          </span>
+          <span
+            style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+          >
+            …
+          </span>
+        </span>
+      </div>
+    </div>
   </div>
 </div>
 `;

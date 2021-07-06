@@ -4,63 +4,84 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Col, Row } from 'react-grid-system';
+import { useScreenClass } from 'react-grid-system';
 
 import useIsInViewport from 'utils/useIsInViewport';
 
+import { TilesContext } from 'components/TileRenderer/constants';
+import { VirtualGrid } from 'components/VirtualList';
+
+import GridTile from './GridTile';
 import NewButton from './Components/NewButton';
 import NewFloatButton from './Components/NewFloatButton';
 
-function TileRenderer({
-  elements,
-  mapFunction,
-  containerKey,
-  onCreateCall,
-  createLoading,
-  newLabel,
-}) {
+function TileRenderer({ elements, onCreateCall, createLoading, newLabel }) {
   const [ref, isInViewport] = useIsInViewport();
+  const screenClass = useScreenClass();
 
-  const wrapWithCol = (child, key) => (
-    <Col key={`Single-${containerKey}-${key}`} xs={12} sm={6} lg={4} xl={3}>
-      {child}
-    </Col>
+  const columnCount = useMemo(() => {
+    switch (screenClass) {
+      case 'xs':
+        return 1;
+      case 'sm':
+      case 'md':
+        return 2;
+      case 'lg':
+        return 3;
+      case 'xl':
+      case 'xxl':
+        return 4;
+      default:
+        return 1;
+    }
+  }, [screenClass]);
+
+  const rowCount = useMemo(
+    () => Math.ceil((elements?.length + 1) / columnCount),
+    [columnCount, elements?.length],
   );
 
-  const displayFloatButton = elements.length !== 0 && !isInViewport;
+  const displayFloatButton = elements?.length !== 0 && !isInViewport;
   return (
-    <Row>
-      {wrapWithCol(
-        <NewButton
-          onClick={onCreateCall}
-          loading={createLoading}
-          label={newLabel}
-          ref={ref}
-        />,
-        'new',
-      )}
-      {elements.map(element => wrapWithCol(mapFunction(element), element.id))}
+    <TilesContext.Provider
+      value={{
+        NewInterventionButton: (
+          <NewButton
+            onClick={onCreateCall}
+            loading={createLoading}
+            label={newLabel}
+            ref={ref}
+          />
+        ),
+      }}
+    >
+      <VirtualGrid
+        columnCount={columnCount}
+        rowCount={rowCount}
+        rowHeight={160}
+        itemData={elements}
+      >
+        {GridTile}
+      </VirtualGrid>
+
       {displayFloatButton && (
         <NewFloatButton onClick={onCreateCall} loading={createLoading} />
       )}
-    </Row>
+    </TilesContext.Provider>
   );
 }
 
 TileRenderer.propTypes = {
   elements: PropTypes.any,
-  mapFunction: PropTypes.func,
   onCreateCall: PropTypes.func,
-  containerKey: PropTypes.string,
   createLoading: PropTypes.bool,
   newLabel: PropTypes.string,
 };
 
 TileRenderer.defaultProps = {
   elements: [],
-  mapFunction: el => el,
 };
 
 export default memo(TileRenderer);

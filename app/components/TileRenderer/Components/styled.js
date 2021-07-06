@@ -20,7 +20,6 @@ export const NewElementContainer = styled.div`
   height: 150px;
   box-shadow: ${boxShadows.selago};
   border-radius: 5px;
-  margin-bottom: 20px;
   display: flex;
   cursor: pointer;
   flex-direction: column;

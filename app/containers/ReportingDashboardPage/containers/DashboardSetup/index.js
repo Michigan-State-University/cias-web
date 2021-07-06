@@ -21,7 +21,6 @@ import Loader from 'components/Loader';
 import Comment from 'components/Text/Comment';
 import StyledInput from 'components/Input/StyledInput';
 import Icon from 'components/Icon';
-import Tooltip from 'components/Tooltip';
 
 import DashboardSections from './containers/DashboardSections';
 import OrganizationInterventionRow from './containers/OrganizationInterventionRow';
@@ -55,9 +54,6 @@ const DashboardSetup = ({
         <title>{formatMessage(messages.dashboardSetup)}</title>
       </Helmet>
       <Container mx="55px !important" maxWidth="100% !important">
-        {/* Chart labels use it */}
-        <Tooltip id="chart-tooltip" />
-
         <Row>
           <Col mt={30}>
             <Row align="center">
