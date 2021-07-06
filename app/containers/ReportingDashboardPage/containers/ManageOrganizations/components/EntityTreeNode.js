@@ -59,8 +59,13 @@ const EntityTreeNode = ({ deleted, id, name, onClick, type }) => {
         onClick={onClick}
       >
         <Icon src={icon} fill={iconFillColor} mr={8} />
-        <Box width={200}>
-          <EllipsisText fontWeight="bold" color={textColor} text={name} />
+        <Box>
+          <EllipsisText
+            width={200}
+            fontWeight="bold"
+            color={textColor}
+            text={name}
+          />
         </Box>
       </EntityRow>
     </FullWidthContainer>
