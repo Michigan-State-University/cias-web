@@ -49,7 +49,7 @@ Object {
   margin-left: 25px;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -61,7 +61,7 @@ Object {
   background-color: rgba(248,251,255,1);
 }
 
-.c13 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -72,7 +72,7 @@ Object {
   width: 100%;
 }
 
-.c17 {
+.c18 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -144,7 +144,7 @@ Object {
   width: 100%;
 }
 
-.c14 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -159,7 +159,7 @@ Object {
   padding-left: 25px;
 }
 
-.c16 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -180,7 +180,16 @@ Object {
   margin-left: 5px;
 }
 
-.c11 {
+.c10 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: inline;
+}
+
+.c12 {
   width: auto;
   height: auto;
   display: block;
@@ -208,7 +217,7 @@ Object {
   color: #2F3850;
 }
 
-.c15 {
+.c16 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -216,7 +225,7 @@ Object {
   color: #2F3850;
 }
 
-.c10 {
+.c11 {
   position: relative;
   width: 100%;
   font-size: 15px;
@@ -351,45 +360,56 @@ Object {
                     class="c9"
                     width="100%"
                   >
-                    <span
+                    <div
                       class="c10"
-                      color="#B727EA"
-                      data-for="Intervention test title 1"
-                      data-tip="Intervention test title 1"
-                      font-size="15"
-                      font-weight="bold"
-                      theme="[object Object]"
-                      width="0"
+                      display="inline"
+                      width="100%"
                     >
-                      <span />
-                      <span>
-                        Intervention test title 1
-                      </span>
-                      <span
-                        style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                      <div
+                        data-for="Intervention test title 1"
+                        data-tip=""
                       >
-                        …
-                      </span>
-                    </span>
+                        <span
+                          class="c11"
+                          color="#B727EA"
+                          data-for="Intervention test title 1"
+                          data-tip="Intervention test title 1"
+                          font-size="15"
+                          font-weight="bold"
+                          theme="[object Object]"
+                          width="0"
+                        >
+                          <span />
+                          <span>
+                            Intervention test title 1
+                          </span>
+                          <span
+                            style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                          >
+                            …
+                          </span>
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div
-              class="c11"
+              class="c12"
               overflow="scroll"
             >
               <div
-                class="c12"
+                class="c13"
               >
                 <div
-                  class="c13"
+                  class="c14"
                 >
                   <div
-                    class="c14"
+                    class="c15"
                   >
                     <p
-                      class="c15"
+                      class="c16"
                       font-size="12"
                     >
                       No valid question groups to copy to
@@ -401,10 +421,10 @@ Object {
           </div>
         </div>
         <div
-          class="c16"
+          class="c17"
         >
           <button
-            class="c17"
+            class="c18"
             color="primary"
             disabled=""
             radius="100px"
@@ -458,26 +478,37 @@ Object {
                   class="Row-y1cs0u-0 gQFDhs"
                   width="100%"
                 >
-                  <span
-                    class="styled__StyledEllipsisText-h4mjfj-0 kOcmmz"
-                    color="#B727EA"
-                    data-for="Intervention test title 1"
-                    data-tip="Intervention test title 1"
-                    font-size="15"
-                    font-weight="bold"
-                    theme="[object Object]"
-                    width="0"
+                  <div
+                    class="Box-sc-1vhutan-0 lndiol"
+                    display="inline"
+                    width="100%"
                   >
-                    <span />
-                    <span>
-                      Intervention test title 1
-                    </span>
-                    <span
-                      style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                    <div
+                      data-for="Intervention test title 1"
+                      data-tip=""
                     >
-                      …
-                    </span>
-                  </span>
+                      <span
+                        class="styled__StyledEllipsisText-h4mjfj-0 kOcmmz"
+                        color="#B727EA"
+                        data-for="Intervention test title 1"
+                        data-tip="Intervention test title 1"
+                        font-size="15"
+                        font-weight="bold"
+                        theme="[object Object]"
+                        width="0"
+                      >
+                        <span />
+                        <span>
+                          Intervention test title 1
+                        </span>
+                        <span
+                          style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                        >
+                          …
+                        </span>
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

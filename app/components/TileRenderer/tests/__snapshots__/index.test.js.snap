@@ -1,83 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<TileRenderer /> Should render and match the snapshot 1`] = `
-.c0 {
-  padding: 15px;
-  height: 150px;
-  box-shadow: 0px 4px 20px #E3EEFB;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  cursor: pointer;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  background: #B727EA;
-  color: #FFFFFF;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c2 {
-  width: auto;
-  height: auto;
-  margin-bottom: 15px;
-}
-
-.c1 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
 <div>
   <div
-    style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+    class="auto-sizer-virtual-grid"
+    style="overflow: visible; height: 0px; width: 0px;"
+  />
+  <div
+    class="resize-triggers"
   >
     <div
-      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 33.333333333333336%; flex-basis: 33.333333333333336%; flex-grow: 0; flex-shrink: 0; max-width: 33.333333333333336%; margin-left: 0%;"
+      class="expand-trigger"
     >
       <div
-        class="c0"
-        data-cy="create-intervention-button"
-      >
-        <div
-          class="c1"
-          direction="column"
-          display="flex"
-        >
-          <img
-            alt="add"
-            class="c2"
-            src="IMAGE_MOCK"
-          />
-        </div>
-      </div>
+        style="width: 1px; height: 1px;"
+      />
     </div>
+    <div
+      class="contract-trigger"
+    />
   </div>
 </div>
 `;

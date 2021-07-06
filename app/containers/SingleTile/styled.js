@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { colors, themeColors, boxShadows } from 'theme';
+
+import { colors, themeColors, boxShadows, elements } from 'theme';
 import { statusTypeToColorMap } from 'models/Status/StatusTypes';
 
 const sharedContainerStyles = `
   padding: 15px;
-  height: 150px;
+  height: ${elements.interventionsTileHeight}px;
   box-shadow: ${boxShadows.selago};
   border-radius: 5px;
   margin-bottom: 20px;
@@ -16,7 +17,7 @@ const sharedContainerStyles = `
 `;
 
 export const TileContainer = styled.div`
-  ${sharedContainerStyles}
+  ${sharedContainerStyles};
   background: ${colors.white};
   color: ${colors.black};
   justify-content: space-between;

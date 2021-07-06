@@ -4,12 +4,13 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import Box from 'components/Box';
 import Img from 'components/Img';
 import Text from 'components/Text';
+import Portal from 'components/Portal';
 
 import { StyledTooltip } from './styled';
 
@@ -26,6 +27,10 @@ const Tooltip = ({
   content,
   ...restProps
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const onMouseEnter = () => setIsHovered(true);
+  const onMouseLeave = () => setIsHovered(false);
+
   const getContent = dataTip => {
     if (dataTip) return <Text>{dataTip ?? text}</Text>;
     return (
@@ -36,22 +41,34 @@ const Tooltip = ({
     );
   };
 
+  const shouldShowTooltip = visible && isHovered;
+
   return (
-    <Box display="flex" {...restProps}>
+    <Box
+      display="flex"
+      {...restProps}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {icon && <Img src={icon} alt="?" data-tip="" data-for={id} />}
       {children && (
         <div data-tip="" data-for={id}>
           {children}
         </div>
       )}
-      <StyledTooltip
-        visible={visible}
-        id={id}
-        type="light"
-        effect="solid"
-        multiline
-        getContent={getContent}
-      />
+
+      {shouldShowTooltip && (
+        <Portal>
+          <StyledTooltip
+            visible={visible}
+            id={id}
+            type="light"
+            effect="solid"
+            multiline
+            getContent={getContent}
+          />
+        </Portal>
+      )}
     </Box>
   );
 };

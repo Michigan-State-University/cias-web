@@ -27,6 +27,7 @@ const elements = {
   treeRowHeight: 80,
   chartTileWidth: 500,
   chartTileHeight: 350,
+  interventionsTileHeight: 150,
 };
 
 const visualAnalogScaleLabelStyles = {
