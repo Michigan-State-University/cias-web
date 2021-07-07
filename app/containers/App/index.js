@@ -60,6 +60,8 @@ import {
   teamsTabId,
 } from 'utils/defaultNavbarTabs';
 
+import { TOOLTIP_PORTAL_ID } from './constants';
+
 export function App({ user }) {
   const { locale } = useIntl();
   useInjectSaga({ key: 'app', saga: rootSaga });
@@ -118,6 +120,8 @@ export function App({ user }) {
     <>
       <ApiQueryMessageHandler />
       <IdleTimer />
+
+      <div id={TOOLTIP_PORTAL_ID} />
 
       <Switch>
         <AppRoute

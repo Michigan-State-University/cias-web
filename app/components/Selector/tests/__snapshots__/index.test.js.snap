@@ -24,9 +24,16 @@ exports[`<Selector /> Should render and match the snapshot 1`] = `
 .c4 {
   width: auto;
   height: auto;
+  display: block;
+  border-radius: 5px;
 }
 
 .c5 {
+  width: auto;
+  height: auto;
+}
+
+.c6 {
   width: auto;
   height: auto;
   margin-left: 8px;
@@ -84,17 +91,21 @@ exports[`<Selector /> Should render and match the snapshot 1`] = `
         class="c3"
         display="flex"
       >
-        <img
-          alt="?"
+        <div
           class="c4"
           data-for="el-tooltip-id-asd02as"
           data-tip=""
-          src="IMAGE_MOCK"
-        />
+        >
+          <img
+            alt="?"
+            class="c5"
+            src="IMAGE_MOCK"
+          />
+        </div>
       </div>
       <img
         alt="arrow"
-        class="c5"
+        class="c6"
         src="IMAGE_MOCK"
         transform=""
       />
@@ -127,9 +138,16 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
 .c4 {
   width: auto;
   height: auto;
+  display: block;
+  border-radius: 5px;
 }
 
 .c5 {
+  width: auto;
+  height: auto;
+}
+
+.c6 {
   width: auto;
   height: auto;
   margin-left: 8px;
@@ -153,7 +171,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c8 {
+.c9 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -166,7 +184,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c9 {
+.c10 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -195,7 +213,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c6 {
+.c7 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -210,7 +228,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
   right: 0;
 }
 
-.c7 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -269,30 +287,34 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
         class="c3"
         display="flex"
       >
-        <img
-          alt="?"
+        <div
           class="c4"
           data-for="el-tooltip-id-asd02as"
           data-tip=""
-          src="IMAGE_MOCK"
-        />
+        >
+          <img
+            alt="?"
+            class="c5"
+            src="IMAGE_MOCK"
+          />
+        </div>
       </div>
       <img
         alt="arrow"
-        class="c5"
+        class="c6"
         src="IMAGE_MOCK"
         transform="rotate(180deg);"
       />
     </div>
     <div
-      class="c6"
+      class="c7"
       role="listbox"
     >
       <div
-        class="c7"
+        class="c8"
       >
         <p
-          class="c8"
+          class="c9"
           color="#B727EA"
           font-weight="bold"
           role="option"
@@ -300,7 +322,7 @@ exports[`<Selector /> Should render disabled and match the snapshot 1`] = `
           Label
         </p>
         <p
-          class="c9"
+          class="c10"
           font-weight="bold"
           role="option"
         >

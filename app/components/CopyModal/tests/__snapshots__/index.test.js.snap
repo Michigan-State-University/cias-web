@@ -58,7 +58,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   margin-left: 25px;
 }
 
-.c21 {
+.c22 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -70,7 +70,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   background-color: rgba(248,251,255,1);
 }
 
-.c25 {
+.c26 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -167,7 +167,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c22 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -182,7 +182,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   padding-left: 25px;
 }
 
-.c24 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -272,7 +272,14 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   display: inline;
 }
 
-.c20 {
+.c19 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c21 {
   width: auto;
   height: auto;
   display: block;
@@ -300,7 +307,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c23 {
+.c24 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -308,7 +315,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c19 {
+.c20 {
   position: relative;
   width: 100%;
   font-size: 15px;
@@ -533,29 +540,32 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
                         width="100%"
                       >
                         <div
+                          class="c19"
                           data-for="Intervention test title 1"
                           data-tip=""
                         >
-                          <span
-                            class="c19"
-                            color="#B727EA"
-                            data-for="Intervention test title 1"
-                            data-tip="Intervention test title 1"
-                            font-size="15"
-                            font-weight="bold"
-                            theme="[object Object]"
-                            width="0"
-                          >
-                            <span />
-                            <span>
-                              Intervention test title 1
-                            </span>
+                          <div>
                             <span
-                              style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                              class="c20"
+                              color="#B727EA"
+                              data-for="Intervention test title 1"
+                              data-tip="Intervention test title 1"
+                              font-size="15"
+                              font-weight="bold"
+                              theme="[object Object]"
+                              width="0"
                             >
-                              …
+                              <span />
+                              <span>
+                                Intervention test title 1
+                              </span>
+                              <span
+                                style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                              >
+                                …
+                              </span>
                             </span>
-                          </span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -563,20 +573,20 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c20"
+                class="c21"
                 overflow="scroll"
               >
                 <div
-                  class="c21"
+                  class="c22"
                 >
                   <div
                     class="c3"
                   >
                     <div
-                      class="c22"
+                      class="c23"
                     >
                       <p
-                        class="c23"
+                        class="c24"
                         font-size="12"
                       >
                         No valid question groups to copy to
@@ -588,10 +598,10 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c24"
+            class="c25"
           >
             <button
-              class="c25"
+              class="c26"
               color="primary"
               disabled=""
               radius="100px"

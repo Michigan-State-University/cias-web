@@ -13,18 +13,21 @@ exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
       display="flex"
     >
       <div
+        class="Box-sc-1vhutan-0 dvfkZg"
         data-for="tooltip-finish-screen"
         data-tip=""
       >
-        <button
-          class="StyledButton-d2s0gt-0 eUaTKs"
-          color="primary"
-          disabled=""
-          radius="100px"
-          width="100%"
-        >
-          Go to dashboard
-        </button>
+        <div>
+          <button
+            class="StyledButton-d2s0gt-0 eUaTKs"
+            color="primary"
+            disabled=""
+            radius="100px"
+            width="100%"
+          >
+            Go to dashboard
+          </button>
+        </div>
       </div>
     </div>
   </div>

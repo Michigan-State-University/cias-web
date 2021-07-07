@@ -12,6 +12,7 @@ import { createPortal } from 'react-dom';
 const Portal = ({ children, id }) => {
   const component = useMemo(() => document.getElementById(id), [id]);
 
+  if (!component) return null;
   return createPortal(children, component);
 };
 

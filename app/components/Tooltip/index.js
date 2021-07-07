@@ -4,8 +4,15 @@
  *
  */
 
-import React, { memo, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
+
+import useKeyPress from 'utils/useKeyPress';
+import { KeyCodes } from 'utils/constants';
+import useOutsideClick from 'utils/useOutsideClick';
+
+import { TOOLTIP_PORTAL_ID } from 'containers/App/constants';
 
 import Box from 'components/Box';
 import Img from 'components/Img';
@@ -27,38 +34,61 @@ const Tooltip = ({
   content,
   ...restProps
 }) => {
+  const tooltipRef = useRef();
+  const contentRef = useRef();
   const [isHovered, setIsHovered] = useState(false);
-  const onMouseEnter = () => setIsHovered(true);
-  const onMouseLeave = () => setIsHovered(false);
 
-  const getContent = dataTip => {
-    if (dataTip) return <Text>{dataTip ?? text}</Text>;
-    return (
-      <>
-        <Text>{text}</Text>
-        {content}
-      </>
-    );
-  };
+  const onFocusIn = () => setIsHovered(true);
+  const onFocusOut = () => setIsHovered(false);
+
+  const showTooltip = () => ReactTooltip.show(tooltipRef.current);
+  const hideTooltip = () => ReactTooltip.hide(tooltipRef.current);
 
   const shouldShowTooltip = visible && isHovered;
 
+  useKeyPress(KeyCodes.ESC, onFocusOut, shouldShowTooltip);
+  useOutsideClick([tooltipRef, contentRef], onFocusOut, shouldShowTooltip);
+
+  useEffect(() => {
+    if (shouldShowTooltip) showTooltip();
+    else hideTooltip();
+
+    return () => {
+      hideTooltip();
+    };
+  }, [shouldShowTooltip]);
+
+  const onTooltipClick = event => {
+    const portal = document.getElementById(TOOLTIP_PORTAL_ID);
+
+    if (portal?.contains(event.target)) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+
+  const getContent = dataTip => (
+    <Box ref={contentRef}>
+      <Text>{dataTip || text}</Text>
+      {content}
+    </Box>
+  );
+
   return (
-    <Box
-      display="flex"
-      {...restProps}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      {icon && <Img src={icon} alt="?" data-tip="" data-for={id} />}
-      {children && (
-        <div data-tip="" data-for={id}>
-          {children}
-        </div>
-      )}
+    <Box display="flex" {...restProps} onClick={onTooltipClick}>
+      <Box
+        ref={tooltipRef}
+        data-tip=""
+        data-for={id}
+        onMouseEnter={onFocusIn}
+        onTouchStart={onFocusIn}
+      >
+        {icon && <Img src={icon} alt="?" />}
+        {children && <div>{children}</div>}
+      </Box>
 
       {shouldShowTooltip && (
-        <Portal>
+        <Portal id={TOOLTIP_PORTAL_ID}>
           <StyledTooltip
             visible={visible}
             id={id}
@@ -66,6 +96,8 @@ const Tooltip = ({
             effect="solid"
             multiline
             getContent={getContent}
+            delayHide={200}
+            afterHide={onFocusOut}
           />
         </Portal>
       )}

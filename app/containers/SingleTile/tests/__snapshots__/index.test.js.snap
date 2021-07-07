@@ -34,7 +34,14 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   display: inline;
 }
 
-.c10 {
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -62,7 +69,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c9 {
+.c10 {
   position: relative;
   width: 100%;
   font-size: 18px;
@@ -136,14 +143,14 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
-.c11 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c11 div {
+.c12 div {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -195,42 +202,48 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
           width="100%"
         >
           <div
+            class="c9"
             data-for="Name"
             data-tip=""
           >
-            <span
-              class="c9"
-              data-for="Name"
-              data-tip="Name"
-              font-size="18"
-              font-weight="bold"
-              theme="[object Object]"
-              width="0"
-            >
-              <span />
-              <span>
-                Name
-              </span>
+            <div>
               <span
-                style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                class="c10"
+                data-for="Name"
+                data-tip="Name"
+                font-size="18"
+                font-weight="bold"
+                theme="[object Object]"
+                width="0"
               >
-                …
+                <span />
+                <span>
+                  Name
+                </span>
+                <span
+                  style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                >
+                  …
+                </span>
               </span>
-            </span>
+            </div>
           </div>
         </div>
       </div>
       <div
-        class="c10"
+        class="c11"
         display="flex"
       >
         <div
+          class="c9"
           data-for="test-id-tile-tooltip"
           data-tip=""
         >
-          <div
-            class="c11"
-          />
+          <div>
+            <div
+              class="c12"
+            />
+          </div>
         </div>
       </div>
     </div>

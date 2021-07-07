@@ -10,6 +10,13 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
   display: inline;
 }
 
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -22,7 +29,7 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
   width: 100%;
 }
 
-.c2 {
+.c3 {
   position: relative;
   width: 100%;
   color: #2F3850;
@@ -39,23 +46,26 @@ exports[`<EllipsisText /> should match the snapshot 1`] = `
       width="100%"
     >
       <div
+        class="c2"
         data-for=""
         data-tip=""
       >
-        <span
-          class="c2"
-          data-for=""
-          theme="[object Object]"
-          width="0"
-        >
-          <span />
-          <span />
+        <div>
           <span
-            style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+            class="c3"
+            data-for=""
+            theme="[object Object]"
+            width="0"
           >
-            …
+            <span />
+            <span />
+            <span
+              style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+            >
+              …
+            </span>
           </span>
-        </span>
+        </div>
       </div>
     </div>
   </div>
@@ -72,6 +82,13 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
   display: inline;
 }
 
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -84,7 +101,7 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
   width: 100%;
 }
 
-.c2 {
+.c3 {
   position: relative;
   width: 100%;
   color: #2F3850;
@@ -101,26 +118,29 @@ exports[`<EllipsisText /> should match the snapshot 2`] = `
       width="100%"
     >
       <div
+        class="c2"
         data-for="Test"
         data-tip=""
       >
-        <span
-          class="c2"
-          data-for="Test"
-          data-tip="Test"
-          theme="[object Object]"
-          width="0"
-        >
-          <span />
-          <span>
-            Test
-          </span>
+        <div>
           <span
-            style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+            class="c3"
+            data-for="Test"
+            data-tip="Test"
+            theme="[object Object]"
+            width="0"
           >
-            …
+            <span />
+            <span>
+              Test
+            </span>
+            <span
+              style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+            >
+              …
+            </span>
           </span>
-        </span>
+        </div>
       </div>
     </div>
   </div>
