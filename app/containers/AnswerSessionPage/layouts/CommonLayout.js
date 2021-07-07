@@ -1,17 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Markup } from 'interweave';
+import { useIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
+import globalMessages from 'global/i18n/globalMessages';
 
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Img from 'components/Img';
 import Text from 'components/Text';
+import Tooltip from 'components/Tooltip';
 
 import { Player, PlayerWrapper, ImageWrapper } from './styled';
 
 const CommonLayout = ({ currentQuestion }) => {
+  const { formatMessage } = useIntl();
+
   const {
     title,
     subtitle,
@@ -38,9 +43,20 @@ const CommonLayout = ({ currentQuestion }) => {
       {settingsSubtitle && subtitle && (
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
-            <Row align="end" justify="between">
+            <Row align="start" justify="between">
               <Markup content={subtitle} />
-              {settingsRequired && <Text color={themeColors.warning}>*</Text>}
+              {settingsRequired && (
+                <Tooltip
+                  id="question-required"
+                  text={
+                    <Markup
+                      content={formatMessage(globalMessages.questionRequired)}
+                    />
+                  }
+                >
+                  <Text color={themeColors.warning}>*</Text>
+                </Tooltip>
+              )}
             </Row>
           </Box>
         </Row>

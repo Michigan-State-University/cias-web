@@ -15,11 +15,10 @@ import { toast } from 'react-toastify';
 import get from 'lodash/get';
 import { Redirect, useLocation } from 'react-router-dom';
 import { useContainerQuery } from 'react-container-query';
-import { Markup } from 'interweave';
 import { Hidden, Visible } from 'react-grid-system';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
-import { colors, themeColors } from 'theme';
+import { themeColors } from 'theme';
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE } from 'utils/previewMode';
@@ -28,7 +27,6 @@ import QuestionTranscript from 'containers/QuestionTranscript';
 
 import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
 import Switch from 'components/Switch';
-import Text from 'components/Text';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import { Button } from 'components/Button';
@@ -41,7 +39,6 @@ import H2 from 'components/H2';
 import H3 from 'components/H3';
 
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
-import globalMessages from 'global/i18n/globalMessages';
 import {
   fetchInterventionRequest,
   fetchInterventionSaga,
@@ -351,15 +348,6 @@ export function AnswerSessionPage({
 
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           </Box>
-
-          {required && (
-            <Text color={colors.sonicSilver} mt={40} ml={20}>
-              <Markup
-                content={formatMessage(globalMessages.questionRequired)}
-                noWrap
-              />
-            </Text>
-          )}
 
           {shouldRenderButton && (
             <Row width="100%" my={20}>
