@@ -16,6 +16,7 @@ const colors = {
   blueHaze: '#CED3E4',
   greyishBlue: '#B0BAC9',
   black: '#0E0E0E',
+  black20: '#CFCFCF',
   black60: '#6E6E6E',
   flamingo: '#EF462F',
   botticelli: '#D5DEEA',
