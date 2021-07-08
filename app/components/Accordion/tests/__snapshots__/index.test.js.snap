@@ -100,15 +100,9 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
       data-rbd-droppable-id="block-list"
     >
       <div
-        aria-describedby="rbd-hidden-text-1-hidden-text-5"
         class="c0"
-        data-rbd-drag-handle-context-id="1"
-        data-rbd-drag-handle-draggable-id="accordion-0"
         data-rbd-draggable-context-id="1"
         data-rbd-draggable-id="accordion-0"
-        draggable="false"
-        role="button"
-        tabindex="0"
       >
         <div
           class="c1"
@@ -117,8 +111,14 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             class="c2"
           >
             <div
+              aria-describedby="rbd-hidden-text-1-hidden-text-5"
               class="c3"
+              data-rbd-drag-handle-context-id="1"
+              data-rbd-drag-handle-draggable-id="accordion-0"
+              draggable="false"
               height="40px"
+              role="button"
+              tabindex="0"
             >
               <div
                 class="c4"
@@ -145,15 +145,9 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
         </div>
       </div>
       <div
-        aria-describedby="rbd-hidden-text-1-hidden-text-5"
         class="c0"
-        data-rbd-drag-handle-context-id="1"
-        data-rbd-drag-handle-draggable-id="accordion-1"
         data-rbd-draggable-context-id="1"
         data-rbd-draggable-id="accordion-1"
-        draggable="false"
-        role="button"
-        tabindex="0"
       >
         <div
           class="c1"
@@ -162,8 +156,14 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             class="c2"
           >
             <div
+              aria-describedby="rbd-hidden-text-1-hidden-text-5"
               class="c3"
+              data-rbd-drag-handle-context-id="1"
+              data-rbd-drag-handle-draggable-id="accordion-1"
+              draggable="false"
               height="40px"
+              role="button"
+              tabindex="0"
             >
               <div
                 class="c4"
@@ -190,15 +190,9 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
         </div>
       </div>
       <div
-        aria-describedby="rbd-hidden-text-1-hidden-text-5"
         class="c0"
-        data-rbd-drag-handle-context-id="1"
-        data-rbd-drag-handle-draggable-id="accordion-2"
         data-rbd-draggable-context-id="1"
         data-rbd-draggable-id="accordion-2"
-        draggable="false"
-        role="button"
-        tabindex="0"
       >
         <div
           class="c1"
@@ -207,8 +201,14 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
             class="c2"
           >
             <div
+              aria-describedby="rbd-hidden-text-1-hidden-text-5"
               class="c3"
+              data-rbd-drag-handle-context-id="1"
+              data-rbd-drag-handle-draggable-id="accordion-2"
+              draggable="false"
               height="40px"
+              role="button"
+              tabindex="0"
             >
               <div
                 class="c4"
@@ -485,15 +485,9 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
       data-rbd-droppable-id="block-list"
     >
       <div
-        aria-describedby="rbd-hidden-text-2-hidden-text-10"
         class="c0"
-        data-rbd-drag-handle-context-id="2"
-        data-rbd-drag-handle-draggable-id="accordion-0"
         data-rbd-draggable-context-id="2"
         data-rbd-draggable-id="accordion-0"
-        draggable="false"
-        role="button"
-        tabindex="0"
       >
         <div
           class="c1"
@@ -502,8 +496,14 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             class="c2"
           >
             <div
+              aria-describedby="rbd-hidden-text-2-hidden-text-10"
               class="c3"
+              data-rbd-drag-handle-context-id="2"
+              data-rbd-drag-handle-draggable-id="accordion-0"
+              draggable="false"
               height="40px"
+              role="button"
+              tabindex="0"
             >
               <div
                 class="c4"
@@ -530,15 +530,9 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
         </div>
       </div>
       <div
-        aria-describedby="rbd-hidden-text-2-hidden-text-10"
         class="c0"
-        data-rbd-drag-handle-context-id="2"
-        data-rbd-drag-handle-draggable-id="accordion-1"
         data-rbd-draggable-context-id="2"
         data-rbd-draggable-id="accordion-1"
-        draggable="false"
-        role="button"
-        tabindex="0"
       >
         <div
           class="c1"
@@ -547,8 +541,14 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             class="c2"
           >
             <div
+              aria-describedby="rbd-hidden-text-2-hidden-text-10"
               class="c8"
+              data-rbd-drag-handle-context-id="2"
+              data-rbd-drag-handle-draggable-id="accordion-1"
+              draggable="false"
               height="40px"
+              role="button"
+              tabindex="0"
             >
               <div
                 class="c4"
@@ -575,15 +575,9 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
         </div>
       </div>
       <div
-        aria-describedby="rbd-hidden-text-2-hidden-text-10"
         class="c0"
-        data-rbd-drag-handle-context-id="2"
-        data-rbd-drag-handle-draggable-id="accordion-2"
         data-rbd-draggable-context-id="2"
         data-rbd-draggable-id="accordion-2"
-        draggable="false"
-        role="button"
-        tabindex="0"
       >
         <div
           class="c1"
@@ -592,8 +586,14 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
             class="c2"
           >
             <div
+              aria-describedby="rbd-hidden-text-2-hidden-text-10"
               class="c8"
+              data-rbd-drag-handle-context-id="2"
+              data-rbd-drag-handle-draggable-id="accordion-2"
+              draggable="false"
               height="40px"
+              role="button"
+              tabindex="0"
             >
               <div
                 class="c4"

@@ -27,6 +27,7 @@ const Collapse = ({
   index,
   animatedImg,
   'data-cy': cypressId,
+  dragHandleProps,
 }) => (
   <StyledCollapseContainer data-cy={cypressId}>
     <CollapseLabel
@@ -46,6 +47,7 @@ const Collapse = ({
       deleteActive={deleteActive}
       index={index}
       animatedImg={animatedImg}
+      dragHandleProps={dragHandleProps}
     />
     <CollapseContent child={children} isOpened={isOpened} />
   </StyledCollapseContainer>
@@ -70,6 +72,7 @@ Collapse.propTypes = {
   index: PropTypes.number,
   animatedImg: PropTypes.bool,
   'data-cy': PropTypes.string,
+  dragHandleProps: PropTypes.object,
 };
 
 Collapse.defaultProps = {
