@@ -48,7 +48,7 @@ const CommonLayout = ({ currentQuestion }) => {
               {settingsRequired && (
                 <Tooltip
                   id="question-required"
-                  text={
+                  content={
                     <Markup
                       content={formatMessage(globalMessages.questionRequired)}
                     />
