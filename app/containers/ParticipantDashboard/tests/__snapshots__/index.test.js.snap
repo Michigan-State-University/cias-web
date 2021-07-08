@@ -2,7 +2,7 @@
 
 exports[`<ParticipantDashboard /> should render and match the snapshot 1`] = `
 <div
-  class="Container-uh0ujs-0 styled__StyledContainer-sc-6h8fd4-0 NYGA-D fziHXq"
+  class="Container-uh0ujs-0 styled__StyledContainer-sc-6h8fd4-0 fJvnJZ fziHXq"
   style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
 >
   <h1

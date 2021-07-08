@@ -3,7 +3,7 @@
 exports[`<InterventionPage /> Should render and match the snapshot with interventions 1`] = `
 <div>
   <div
-    class="Container-uh0ujs-0 styled__StyledContainer-sc-6h8fd4-0 cMRNTt fziHXq"
+    class="Container-uh0ujs-0 styled__StyledContainer-sc-6h8fd4-0 eqNBPz fziHXq"
     direction="column"
     display="flex"
     height="100% !important"

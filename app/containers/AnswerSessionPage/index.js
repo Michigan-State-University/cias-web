@@ -19,15 +19,17 @@ import { Markup } from 'interweave';
 import { Hidden, Visible } from 'react-grid-system';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
-import { colors, themeColors } from 'theme';
+import ccIcon from 'assets/svg/closed-captions.svg';
+
+import { colors, elements, themeColors } from 'theme';
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE } from 'utils/previewMode';
+import { useCallbackRef } from 'utils/useCallbackRef';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
 
 import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
-import Switch from 'components/Switch';
 import Text from 'components/Text';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
@@ -39,6 +41,7 @@ import Loader from 'components/Loader';
 import { MSULogo } from 'components/Logo';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
+import Icon from 'components/Icon';
 
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import globalMessages from 'global/i18n/globalMessages';
@@ -81,6 +84,9 @@ import {
   clearError,
   toggleTextTranscriptAction,
 } from './actions';
+
+const CC_SIZE = 40;
+const CC_PADDING = 10;
 
 const AnimationRefHelper = ({
   children,
@@ -197,6 +203,24 @@ export function AnswerSessionPage({
   const isDesktop = useMemo(
     () => previewMode === DESKTOP_MODE && containerQueryParams[IS_DESKTOP],
     [previewMode, containerQueryParams],
+  );
+
+  const {
+    callbackRef: outerContainerRef,
+    callbackResult: transcriptButtonStyles,
+  } = useCallbackRef(
+    node =>
+      isDesktop || !node
+        ? { bottom: 0, left: CC_PADDING }
+        : {
+            left: node?.offsetLeft + CC_PADDING,
+            top:
+              node?.offsetTop +
+              node?.offsetHeight +
+              elements.navbarHeight -
+              CC_SIZE,
+          },
+    [isDesktop],
   );
 
   const logoStyles = useMemo(() => {
@@ -434,6 +458,7 @@ export function AnswerSessionPage({
           <meta name="description" content="Answer Session" />
         </Helmet>
         <AnswerOuterContainer
+          ref={outerContainerRef}
           previewMode={previewMode}
           interventionStarted={interventionStarted}
         >
@@ -478,21 +503,20 @@ export function AnswerSessionPage({
 
                     {renderQuestionTranscript(true)}
                   </Box>
-                </Row>
 
-                <AppContainer $width="100%">
-                  <Row padding={26} pb={8} align="center">
-                    <Switch
-                      id="showTranscript"
-                      checked={showTextTranscript}
-                      onToggle={toggleTextTranscript}
-                      mr={16}
+                  <Box
+                    position="fixed !important"
+                    zIndex={10}
+                    width={CC_SIZE}
+                    {...transcriptButtonStyles}
+                  >
+                    <Icon
+                      src={ccIcon}
+                      onClick={toggleTextTranscript}
+                      fill={showTextTranscript ? themeColors.text : ''}
                     />
-                    <label htmlFor="showTranscript">
-                      {formatMessage(messages.showTranscriptToggle)}
-                    </label>
-                  </Row>
-                </AppContainer>
+                  </Box>
+                </Row>
 
                 {!nextQuestionLoading &&
                   currentQuestion &&
