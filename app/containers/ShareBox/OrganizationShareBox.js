@@ -111,7 +111,10 @@ const OrganizationShareBox = ({
     const data = [];
     const { healthSystems } = organization;
     healthSystems.forEach(({ name: healthSystemName, healthClinics }) => {
-      healthClinics.forEach(({ name: healthClinicName, id }) => {
+      const activeClinics = healthClinics.filter(
+        ({ deleted }) => deleted === false,
+      );
+      activeClinics.forEach(({ name: healthClinicName, id }) => {
         data.push({
           value: id,
           label: `${healthClinicName} (${healthSystemName})`,
