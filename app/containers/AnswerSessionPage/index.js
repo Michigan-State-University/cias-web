@@ -55,6 +55,7 @@ import {
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
+import { useWindowSize } from 'utils/useWindowSize';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,
@@ -202,6 +203,8 @@ export function AnswerSessionPage({
     [previewMode, containerQueryParams],
   );
 
+  const windowSize = useWindowSize();
+
   const {
     callbackRef: outerContainerRef,
     callbackResult: transcriptButtonStyles,
@@ -217,7 +220,7 @@ export function AnswerSessionPage({
               elements.navbarHeight -
               CC_SIZE,
           },
-    [isDesktop],
+    [isDesktop, windowSize],
   );
 
   const logoStyles = useMemo(() => {
