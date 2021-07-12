@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 
 const positioning = props => ({
-  left: props.left || '',
-  top: props.top || '',
-  right: props.right || '',
-  bottom: props.bottom || '',
+  left: props.left ?? '',
+  top: props.top ?? '',
+  right: props.right ?? '',
+  bottom: props.bottom ?? '',
 });
 
 positioning.propTypes = {
