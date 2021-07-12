@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useHistory, useLocation } from 'react-router';
+import { useSelector } from 'react-redux';
 
 import OrganizationIcon from 'assets/svg/organization-icon.svg';
+
+import { themeColors } from 'theme';
+import { makeSelectIntervention } from 'global/reducers/intervention';
+
 import Text from 'components/Text';
 import Box from 'components/Box';
-import { themeColors } from 'theme';
 
 import ReportingDashboardItem from './ReportingDashboardItem';
 
@@ -13,13 +17,18 @@ const OrganizationItem = ({
   organization: { id, name },
   canAccessOrganizations,
 }) => {
+  // selectors
+  const { organizationId } = useSelector(makeSelectIntervention()) ?? {};
+
   const history = useHistory();
   const location = useLocation();
   const redirect = () => {
     const suffix = canAccessOrganizations ? `` : `/dashboard`;
     history.push(`/organization/${id}${suffix}`);
   };
-  const active = location.pathname.includes(`organization/${id}`);
+
+  const active =
+    location.pathname.includes(`organization/${id}`) || id === organizationId;
 
   const buttons = [
     {
