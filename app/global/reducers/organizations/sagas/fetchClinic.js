@@ -12,7 +12,19 @@ export function* fetchClinic({ payload: { id } }) {
     const { data } = yield call(axios.get, requestURL);
     const clinic = jsonApiToObject(data, 'healthClinic');
 
-    yield put(fetchClinicSuccess(clinic));
+    const mappedClinicAdmins = clinic.healthClinicAdmins.map(clinicAdmin => {
+      const userInvitation = clinic.healthClinicInvitations.find(
+        ({ userId }) => userId === clinicAdmin.id,
+      );
+      return {
+        ...clinicAdmin,
+        active: !userInvitation || userInvitation.isAccepted,
+      };
+    });
+
+    yield put(
+      fetchClinicSuccess({ ...clinic, healthClinicAdmins: mappedClinicAdmins }),
+    );
   } catch (error) {
     yield put(fetchClinicFailure(error));
   }
