@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import ReactTooltip from 'react-tooltip';
 
@@ -74,6 +74,14 @@ const Tooltip = ({
     </Box>
   );
 
+  const calculateTooltipPosition = useCallback(
+    ({ left, top }, event, triggerElement, tooltipElement) => ({
+      top,
+      left: typeof tooltipElement === 'string' ? left : Math.max(left, 0),
+    }),
+    [],
+  );
+
   return (
     <Box display="flex" {...restProps} onClick={onTooltipClick}>
       <Box
@@ -98,6 +106,7 @@ const Tooltip = ({
             getContent={getContent}
             delayHide={200}
             afterHide={onFocusOut}
+            overridePosition={calculateTooltipPosition}
           />
         </Portal>
       )}

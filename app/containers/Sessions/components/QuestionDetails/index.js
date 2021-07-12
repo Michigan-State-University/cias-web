@@ -5,7 +5,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { useInjectSaga } from 'redux-injectors';
-import { Markup } from 'interweave';
 
 import { colors, elements } from 'theme';
 
@@ -24,7 +23,6 @@ import {
   makeSelectIntervention,
   makeSelectInterventionStatus,
 } from 'global/reducers/intervention';
-import globalMessages from 'global/i18n/globalMessages';
 
 import CommonLayout from 'containers/AnswerSessionPage/layouts/CommonLayout';
 
@@ -35,7 +33,6 @@ import Row from 'components/Row';
 import StyledInput from 'components/Input/StyledInput';
 import { selectInputText } from 'components/Input/utils';
 import { MSULogo } from 'components/Logo';
-import Text from 'components/Text';
 import { Button } from 'components/Button';
 
 import QuestionData from '../QuestionData';
@@ -89,7 +86,6 @@ const RenderQuestionDetails = ({
         title,
         subtitle,
         proceed_button: proceedButton,
-        required,
       } = {},
       narrator: { settings } = {},
     } = selectedQuestion || {};
@@ -178,16 +174,6 @@ const RenderQuestionDetails = ({
                   <QuestionData />
                 </Row>
 
-                {isNarratorTab && required && (
-                  <Row mt={40} ml={26}>
-                    <Text color={colors.sonicSilver}>
-                      <Markup
-                        content={formatMessage(globalMessages.questionRequired)}
-                        noWrap
-                      />
-                    </Text>
-                  </Row>
-                )}
                 {(isNullOrUndefined(proceedButton) || proceedButton) &&
                   !isFinishScreen && (
                     <Box my={20} ml={26}>
