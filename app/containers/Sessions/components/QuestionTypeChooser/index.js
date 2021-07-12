@@ -12,21 +12,20 @@ import Text from 'components/Text';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
 import decideIfPassValue from 'utils/decideIfPassValue';
 import globalMessages from 'global/i18n/globalMessages';
-import { makeSelectNameQuestionExists } from 'global/reducers/questions';
+import {
+  makeSelectNameQuestionExists,
+  makeSelectParticipantReportQuestionExists,
+  makeSelectPhoneQuestionExists,
+} from 'global/reducers/questions';
 import useOutsideClick from 'utils/useOutsideClick';
 import {
   finishQuestion,
   QuestionTypes,
   nameQuestion,
   participantReport,
-  thirdPartyQuestion,
   phoneQuestion,
 } from 'models/Session/QuestionTypes';
-import {
-  makeSelectParticipantReportQuestionExists,
-  makeSelectPhoneQuestionExists,
-  makeSelectThirdPartyReportQuestionExists,
-} from 'global/reducers/questions/selectors';
+
 import { borders, boxShadows, colors, fontSizes } from 'theme';
 
 import { useDropdownPositionHelper } from 'utils/useDropdownPositionHelper';
@@ -41,7 +40,6 @@ const QuestionTypeChooser = ({
   ButtonComponent,
   nameQuestionExists,
   participantReportExists,
-  thirdPartyReportExists,
   phoneQuestionExists,
 }) => {
   const buttonRef = useRef(null);
@@ -80,14 +78,12 @@ const QuestionTypeChooser = ({
           id !== finishQuestion.id &&
           !(nameQuestionExists && id === nameQuestion.id) &&
           !(participantReportExists && id === participantReport.id) &&
-          !(thirdPartyReportExists && id === thirdPartyQuestion.id) &&
           !(phoneQuestionExists && id === phoneQuestion.id),
       ),
     [
       QuestionTypes,
       nameQuestionExists,
       participantReportExists,
-      thirdPartyReportExists,
       phoneQuestionExists,
     ],
   );
@@ -163,7 +159,6 @@ QuestionTypeChooser.propTypes = {
   ButtonComponent: PropTypes.elementType,
   nameQuestionExists: PropTypes.bool,
   participantReportExists: PropTypes.bool,
-  thirdPartyReportExists: PropTypes.bool,
   phoneQuestionExists: PropTypes.bool,
 };
 
@@ -174,7 +169,6 @@ QuestionTypeChooser.defaultProps = {
 const mapStateToProps = createStructuredSelector({
   nameQuestionExists: makeSelectNameQuestionExists(),
   participantReportExists: makeSelectParticipantReportQuestionExists(),
-  thirdPartyReportExists: makeSelectThirdPartyReportQuestionExists(),
   phoneQuestionExists: makeSelectPhoneQuestionExists(),
 });
 

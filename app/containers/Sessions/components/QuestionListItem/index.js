@@ -41,7 +41,6 @@ import {
   QuestionTypes,
   nameQuestion,
   participantReport,
-  thirdPartyQuestion,
   phoneQuestion,
 } from 'models/Session/QuestionTypes';
 import Box from 'components/Box';
@@ -92,7 +91,6 @@ const QuestionListItem = ({
     () =>
       type !== nameQuestion.id &&
       type !== participantReport.id &&
-      type !== thirdPartyQuestion.id &&
       type !== phoneQuestion.id,
     [type],
   );
