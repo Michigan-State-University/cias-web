@@ -31,6 +31,9 @@ export {
   makeSelectFilteredQuestions,
   makeSelectPreviousQuestions,
   makeSelectLastCreatedQuestionId,
+  makeSelectThirdPartyReportQuestionExists,
+  makeSelectPhoneQuestionExists,
+  makeSelectParticipantReportQuestionExists,
 } from './selectors';
 export {
   copyQuestionSaga,
