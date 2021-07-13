@@ -44,6 +44,10 @@ export default defineMessages({
     id: `${scope}.adjust`,
     defaultMessage: 'Edit',
   },
+  translate: {
+    id: `${scope}.translate`,
+    defaultMessage: 'Translate',
+  },
   copy: {
     id: `${scope}.copy`,
     defaultMessage: 'Send copy to researcher',

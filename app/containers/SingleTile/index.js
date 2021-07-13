@@ -12,6 +12,7 @@ import { useInjectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
+import translate from 'assets/svg/translate.svg';
 import csvIcon from 'assets/svg/csv-icon.svg';
 import fileShare from 'assets/svg/file-share.svg';
 import copy from 'assets/svg/copy.svg';
@@ -83,6 +84,12 @@ const SingleTile = ({
     copyIntervention({ interventionId: id, withoutRedirect: true });
 
   const options = [
+    {
+      icon: translate,
+      action: () => {},
+      label: formatMessage(messages.translate),
+      id: 'translate',
+    },
     ...(canExportCSV
       ? [
           {
