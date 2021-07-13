@@ -25,10 +25,6 @@ export default defineMessages({
     id: `${scope}.sessions`,
     defaultMessage: 'Sessions ({sessionCount})',
   },
-  translate: {
-    id: `${scope}.translate`,
-    defaultMessage: 'Translate',
-  },
   exportCSV: {
     id: `${scope}.exportCSV`,
     defaultMessage: 'Export CSV',
