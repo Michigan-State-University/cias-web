@@ -21,7 +21,6 @@ import { Markup } from 'interweave';
 import { colors, themeColors } from 'theme';
 
 import fileShare from 'assets/svg/file-share.svg';
-import translate from 'assets/svg/translate.svg';
 import copy from 'assets/svg/copy.svg';
 import archive from 'assets/svg/archive.svg';
 import pencil from 'assets/svg/pencil-solid.svg';
@@ -179,13 +178,6 @@ export function InterventionDetailsPage({
   };
 
   const options = [
-    {
-      id: 'translate',
-      label: formatMessage(messages.translate),
-      icon: translate,
-      action: () => {},
-      color: colors.bluewood,
-    },
     {
       id: 'copy',
       label: formatMessage(messages.copy),
