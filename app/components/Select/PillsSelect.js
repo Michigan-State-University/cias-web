@@ -46,7 +46,7 @@ const PillsSelect = ({ addNewText, data, value, onSelected }) => {
       gap={10}
     >
       {selectedPills.map(({ label, value: id }) => (
-        <Box key={id} px={10} py={5} display="flex" bg="#e8ebf2">
+        <Box key={id} px={10} py={5} display="flex" bg={colors.mystic}>
           {label}
           <Text ml={10} cursor="pointer" onClick={onFilter(id)}>
             X
@@ -86,7 +86,7 @@ const PillsSelect = ({ addNewText, data, value, onSelected }) => {
                 px={15}
                 py={5}
                 mb={5}
-                bg="#ebe8f2"
+                bg={colors.mystic}
                 width="100%"
                 onClick={() => {
                   onSelected(`${value} ${id},`);
