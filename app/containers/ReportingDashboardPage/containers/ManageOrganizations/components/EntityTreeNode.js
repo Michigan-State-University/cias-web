@@ -9,8 +9,9 @@ import HealthSystemIcon from 'assets/svg/health-system-icon.svg';
 import ClinicIcon from 'assets/svg/clinic-icon.svg';
 
 import Icon from 'components/Icon';
-import Text from 'components/Text';
+import Box from 'components/Box';
 
+import EllipsisText from 'components/Text/EllipsisText';
 import { ManageOrganizationsContext } from '../constants';
 import { EntityRow, FullWidthContainer } from '../../../styled';
 
@@ -58,9 +59,14 @@ const EntityTreeNode = ({ deleted, id, name, onClick, type }) => {
         onClick={onClick}
       >
         <Icon src={icon} fill={iconFillColor} mr={8} />
-        <Text fontWeight="bold" color={textColor}>
-          {name}
-        </Text>
+        <Box>
+          <EllipsisText
+            width={200}
+            fontWeight="bold"
+            color={textColor}
+            text={name}
+          />
+        </Box>
       </EntityRow>
     </FullWidthContainer>
   );

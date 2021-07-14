@@ -4,12 +4,20 @@
  *
  */
 
-import React, { memo } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
+import ReactTooltip from 'react-tooltip';
+
+import useKeyPress from 'utils/useKeyPress';
+import { KeyCodes } from 'utils/constants';
+import useOutsideClick from 'utils/useOutsideClick';
+
+import { TOOLTIP_PORTAL_ID } from 'containers/App/constants';
 
 import Box from 'components/Box';
 import Img from 'components/Img';
 import Text from 'components/Text';
+import Portal from 'components/Portal';
 
 import { StyledTooltip } from './styled';
 
@@ -26,32 +34,82 @@ const Tooltip = ({
   content,
   ...restProps
 }) => {
-  const getContent = dataTip => {
-    if (dataTip) return <Text>{dataTip ?? text}</Text>;
-    return (
-      <>
-        <Text>{text}</Text>
-        {content}
-      </>
-    );
+  const tooltipRef = useRef();
+  const contentRef = useRef();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const onFocusIn = () => setIsHovered(true);
+  const onFocusOut = () => setIsHovered(false);
+
+  const showTooltip = () => ReactTooltip.show(tooltipRef.current);
+  const hideTooltip = () => ReactTooltip.hide(tooltipRef.current);
+
+  const shouldShowTooltip = visible && isHovered;
+
+  useKeyPress(KeyCodes.ESC, onFocusOut, shouldShowTooltip);
+  useOutsideClick([tooltipRef, contentRef], onFocusOut, shouldShowTooltip);
+
+  useEffect(() => {
+    if (shouldShowTooltip) showTooltip();
+    else hideTooltip();
+
+    return () => {
+      hideTooltip();
+    };
+  }, [shouldShowTooltip]);
+
+  const onTooltipClick = event => {
+    const portal = document.getElementById(TOOLTIP_PORTAL_ID);
+
+    if (portal?.contains(event.target)) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
   };
 
+  const getContent = dataTip => (
+    <Box ref={contentRef}>
+      <Text>{dataTip || text}</Text>
+      {content}
+    </Box>
+  );
+
+  const calculateTooltipPosition = useCallback(
+    ({ left, top }, event, triggerElement, tooltipElement) => ({
+      top,
+      left: typeof tooltipElement === 'string' ? left : Math.max(left, 0),
+    }),
+    [],
+  );
+
   return (
-    <Box display="flex" {...restProps}>
-      {icon && <Img src={icon} alt="?" data-tip="" data-for={id} />}
-      {children && (
-        <div data-tip="" data-for={id}>
-          {children}
-        </div>
+    <Box display="flex" {...restProps} onClick={onTooltipClick}>
+      <Box
+        ref={tooltipRef}
+        data-tip=""
+        data-for={id}
+        onMouseEnter={onFocusIn}
+        onTouchStart={onFocusIn}
+      >
+        {icon && <Img src={icon} alt="?" />}
+        {children && <div>{children}</div>}
+      </Box>
+
+      {shouldShowTooltip && (
+        <Portal id={TOOLTIP_PORTAL_ID}>
+          <StyledTooltip
+            visible={visible}
+            id={id}
+            type="light"
+            effect="solid"
+            multiline
+            getContent={getContent}
+            delayHide={200}
+            afterHide={onFocusOut}
+            overridePosition={calculateTooltipPosition}
+          />
+        </Portal>
       )}
-      <StyledTooltip
-        visible={visible}
-        id={id}
-        type="light"
-        effect="solid"
-        multiline
-        getContent={getContent}
-      />
     </Box>
   );
 };

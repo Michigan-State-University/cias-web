@@ -3,6 +3,9 @@
 exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
 <div>
   <div
+    id="tooltip-portal"
+  />
+  <div
     class="styled__PageContainer-sc-8koytx-0 boMXzl"
     style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
   >

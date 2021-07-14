@@ -14,7 +14,6 @@ import { injectReducer, injectSaga } from 'redux-injectors';
 import { Row, Col } from 'react-grid-system';
 import { Markup } from 'interweave';
 
-import SingleTile from 'containers/SingleTile';
 import Text from 'components/Text';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
@@ -22,6 +21,7 @@ import H1 from 'components/H1';
 import Loader from 'components/Loader';
 import TileRenderer from 'components/TileRenderer';
 import SearchInput from 'components/Input/SearchInput';
+import Box from 'components/Box';
 
 import useFilter from 'utils/useFilter';
 import { statusTypes } from 'models/Status/StatusTypes';
@@ -94,13 +94,6 @@ export function InterventionPage({
     setFilterStatus(statusTypes);
   };
 
-  const mapIntervention = intervention => (
-    <SingleTile
-      tileData={intervention}
-      link={`/interventions/${intervention.id}/`}
-    />
-  );
-
   const handleFeedbackClick = () => {
     editUser({ feedbackCompleted: true });
   };
@@ -127,8 +120,14 @@ export function InterventionPage({
 
   if (!finalInterventions.length && !interventions.length) {
     return (
-      <AppContainer>
+      <AppContainer
+        height="100% !important"
+        display="flex"
+        direction="column"
+        overflow="clip"
+      >
         {!user.feedbackCompleted && FeedbackNotification}
+
         {teamName && (
           <InitialRow fluid>
             <Text color={colors.manatee} fontSize={fontSizes.regular} mt={50}>
@@ -139,24 +138,35 @@ export function InterventionPage({
             </Text>
           </InitialRow>
         )}
+
         <H1 my={35}>
           <FormattedMessage {...messages.noInterventions} />
         </H1>
-        <TileRenderer
-          containerKey="intervention"
-          newLabel={formatMessage(messages.createIntervention)}
-          onCreateCall={createIntervention}
-          createLoading={createInterventionLoading}
-        />
+
+        <Box filled>
+          <TileRenderer
+            containerKey="intervention"
+            newLabel={formatMessage(messages.createIntervention)}
+            onCreateCall={createIntervention}
+            createLoading={createInterventionLoading}
+          />
+        </Box>
       </AppContainer>
     );
   }
+
   return (
-    <AppContainer>
+    <AppContainer
+      height="100% !important"
+      display="flex"
+      direction="column"
+      overflow="clip"
+    >
       {!user.feedbackCompleted && FeedbackNotification}
+
       {teamName && (
         <InitialRow fluid>
-          <Text color={colors.manatee} fontSize={fontSizes.regular} mt={50}>
+          <Text color={colors.manatee} fontSize={fontSizes.regular}>
             <Markup
               content={formatMessage(messages.teamName, { teamName })}
               noWrap
@@ -164,11 +174,13 @@ export function InterventionPage({
           </Text>
         </InitialRow>
       )}
+
       <InitialRow fluid>
         <H1 mt={35}>
           <FormattedMessage {...messages.myInterventions} />
         </H1>
       </InitialRow>
+
       <InitialRow fluid>
         <Row>
           <Col
@@ -204,19 +216,22 @@ export function InterventionPage({
           </Col>
         </Row>
       </InitialRow>
+
       {filterValue && finalInterventions.length === 0 && (
         <h3>
           <FormattedMessage {...messages.noFilterResults} />
         </h3>
       )}
-      <TileRenderer
-        containerKey="intervention"
-        elements={finalInterventions}
-        mapFunction={mapIntervention}
-        newLabel={formatMessage(messages.createIntervention)}
-        onCreateCall={createIntervention}
-        createLoading={createInterventionLoading}
-      />
+
+      <Box filled>
+        <TileRenderer
+          containerKey="intervention"
+          elements={finalInterventions}
+          newLabel={formatMessage(messages.createIntervention)}
+          onCreateCall={createIntervention}
+          createLoading={createInterventionLoading}
+        />
+      </Box>
     </AppContainer>
   );
 }

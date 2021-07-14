@@ -26,6 +26,7 @@ const CollapseLabel = ({
   deleteActive,
   index,
   animatedImg,
+  dragHandleProps,
 }) => {
   const currentImg = isOpened ? onShowImg : onHideImg;
   const img = animatedImg ? onShowImg : currentImg;
@@ -47,6 +48,7 @@ const CollapseLabel = ({
         onClick={onToggle}
         bgOpacity={bgOpacity}
         isOpened={isOpened}
+        {...dragHandleProps}
       >
         <Row justify="between">
           {label} {displayedImage}
@@ -84,6 +86,7 @@ CollapseLabel.propTypes = {
   deleteActive: PropTypes.bool,
   index: PropTypes.number,
   animatedImg: PropTypes.bool,
+  dragHandleProps: PropTypes.object,
 };
 
 export default CollapseLabel;

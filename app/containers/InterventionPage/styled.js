@@ -8,6 +8,7 @@ import Notification from 'components/Notification';
 export const InitialRow = styled(Container)`
   padding: 0 !important;
   margin-top: 10px;
+  width: 100%;
 `;
 
 export const StatusLabel = styled.button`
@@ -45,4 +46,5 @@ export const StyledLink = styled.a`
 export const StyledNotification = styled(Notification)`
   position: absolute;
   right: 16px;
+  top: 16px;
 `;

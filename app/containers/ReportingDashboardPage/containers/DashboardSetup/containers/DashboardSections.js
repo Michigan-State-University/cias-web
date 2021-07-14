@@ -73,6 +73,7 @@ const DashboardSections = ({
   );
 
   const onDragEnd = ({ active, over }) => {
+    if (!over || !active) return;
     if (over.id !== active.id) {
       const orderedNewList = orderDashboardSections(
         dashboardSections,

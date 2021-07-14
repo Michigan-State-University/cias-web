@@ -23,7 +23,7 @@ const Accordion = ({
     if (opened !== -1) onOpen(opened);
   }, [opened]);
 
-  const renderCollapse = (child, index) => {
+  const renderCollapse = (child, index, dragHandleProps) => {
     const {
       props: {
         children: content,
@@ -56,6 +56,7 @@ const Accordion = ({
         disabled={disabled}
         deleteActive={deleteActive}
         index={index}
+        dragHandleProps={dragHandleProps}
       >
         {content}
       </Collapse>
@@ -96,9 +97,8 @@ const Accordion = ({
                         mb={7}
                         ref={provided.innerRef}
                         {...provided.draggableProps}
-                        {...provided.dragHandleProps}
                       >
-                        {renderCollapse(child, index, dragDisabled)}
+                        {renderCollapse(child, index, provided.dragHandleProps)}
                       </Box>
                     )}
                   </Draggable>

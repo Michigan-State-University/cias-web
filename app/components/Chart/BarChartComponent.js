@@ -21,7 +21,7 @@ import {
 
 import { generateBarChartTrendData } from './utils';
 import { StyledResponsiveContainer } from './styled';
-import { TREND_LINE_DATA_KEY } from './constants';
+import { BRUSH_CONTAINER_HEIGHT, TREND_LINE_DATA_KEY } from './constants';
 
 const BarChartComponent = ({
   cartesianGrid,
@@ -95,7 +95,12 @@ const BarChartComponent = ({
           </Bar>
         )}
         {data?.length > 3 && (
-          <Brush startIndex={0} endIndex={2} dataKey={xAxis?.dataKey} />
+          <Brush
+            startIndex={0}
+            endIndex={2}
+            dataKey={xAxis?.dataKey}
+            height={BRUSH_CONTAINER_HEIGHT}
+          />
         )}
         {trendLine && (
           <Line

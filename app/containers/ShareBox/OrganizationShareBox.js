@@ -39,7 +39,7 @@ import Select from 'components/Select';
 import Button from 'components/Button';
 import CsvFileReader from 'components/CsvFileReader';
 
-import { emailValidator } from 'utils/validators';
+import { csvEmailValidator } from 'utils/validators';
 import { formatMessage } from 'utils/intlOutsideReact';
 
 import ShareBoxModalParent from './Components/ShareBoxModalParent';
@@ -111,7 +111,8 @@ const OrganizationShareBox = ({
     const data = [];
     const { healthSystems } = organization;
     healthSystems.forEach(({ name: healthSystemName, healthClinics }) => {
-      healthClinics.forEach(({ name: healthClinicName, id }) => {
+      const activeClinics = healthClinics.filter(({ deleted }) => !deleted);
+      activeClinics.forEach(({ name: healthClinicName, id }) => {
         data.push({
           value: id,
           label: `${healthClinicName} (${healthSystemName})`,
@@ -160,7 +161,7 @@ const OrganizationShareBox = ({
       const [email, healthClinicId] = columns.data;
       if (
         email &&
-        emailValidator(email) &&
+        csvEmailValidator(email) &&
         allClinicIds.includes(healthClinicId)
       )
         return { email, healthClinicId };

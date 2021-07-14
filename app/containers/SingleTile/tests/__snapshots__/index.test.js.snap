@@ -25,7 +25,23 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: inline;
+}
+
 .c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c11 {
   width: auto;
   height: auto;
   display: block;
@@ -41,29 +57,6 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c11 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #2F3850;
-}
-
-.c12 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: #2F3850;
-}
-
-.c13 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  margin-bottom: 5px;
-  color: #2F3850;
-}
-
 .c7 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -76,7 +69,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c8 {
+.c10 {
   position: relative;
   width: 100%;
   font-size: 18px;
@@ -150,14 +143,14 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c10 div {
+.c12 div {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -203,172 +196,54 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
         class="c7"
         width="100%"
       >
-        <span
+        <div
           class="c8"
-          data-for="Name"
-          data-tip="Name"
-          font-size="18"
-          font-weight="bold"
-          theme="[object Object]"
-          width="0"
+          display="inline"
+          width="100%"
         >
-          <span />
-          <span>
-            Name
-          </span>
-          <span
-            style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+          <div
+            class="c9"
+            data-for="Name"
+            data-tip=""
           >
-            …
-          </span>
-        </span>
+            <div>
+              <span
+                class="c10"
+                data-for="Name"
+                data-tip="Name"
+                font-size="18"
+                font-weight="bold"
+                theme="[object Object]"
+                width="0"
+              >
+                <span />
+                <span>
+                  Name
+                </span>
+                <span
+                  style="position: fixed; visibility: hidden; top: 0px; left: 0px;"
+                >
+                  …
+                </span>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
       <div
-        class="c9"
+        class="c11"
         display="flex"
       >
         <div
-          currentitem="false"
+          class="c9"
           data-for="test-id-tile-tooltip"
           data-tip=""
         >
-          <div
-            class="c10"
-          />
-        </div>
-        <div
-          class="__react_component_tooltip t00000000-0000-0000-0000-000000000000 place-top type-dark"
-          data-id="tooltip"
-          id="test-id-tile-tooltip"
-        >
-          <style
-            aria-hidden="true"
-          >
-            
-  	.t00000000-0000-0000-0000-000000000000 {
-	    color: #fff;
-	    background: #222;
-	    border: 1px solid transparent;
-  	}
-
-  	.t00000000-0000-0000-0000-000000000000.place-top {
-        margin-top: -10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-top::before {
-        border-top: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-top::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        bottom: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-top-color: #222;
-        border-top-style: solid;
-        border-top-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-bottom {
-        margin-top: 10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-bottom::before {
-        border-bottom: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-bottom::after {
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        top: -6px;
-        left: 50%;
-        margin-left: -8px;
-        border-bottom-color: #222;
-        border-bottom-style: solid;
-        border-bottom-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-left {
-        margin-left: -10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-left::before {
-        border-left: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-left::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        right: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-left-color: #222;
-        border-left-style: solid;
-        border-left-width: 6px;
-    }
-
-    .t00000000-0000-0000-0000-000000000000.place-right {
-        margin-left: 10px;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-right::before {
-        border-right: 8px solid transparent;
-    }
-    .t00000000-0000-0000-0000-000000000000.place-right::after {
-        border-top: 5px solid transparent;
-        border-bottom: 5px solid transparent;
-        left: -6px;
-        top: 50%;
-        margin-top: -4px;
-        border-right-color: #222;
-        border-right-style: solid;
-        border-right-width: 6px;
-    }
-  
-          </style>
-          <p
-            class="c11"
-          />
-          <p
-            class="c12"
-            font-weight="bold"
-          >
-            Created by: 
-          </p>
-          <p
-            class="c11"
-          >
-            Email: 
-            test@test.com
-          </p>
-          <p
-            class="c11"
-          >
-            First name: 
-            UserFirstName
-          </p>
-          <p
-            class="c13"
-          >
-            Last name: 
-            UserLastName
-          </p>
-          <p
-            class="c12"
-            font-weight="bold"
-          >
-            Created at: 
-          </p>
-          <p
-            class="c13"
-          >
-            2020/09/30 10:00 +00:00
-          </p>
-          <p
-            class="c12"
-            font-weight="bold"
-          >
-            Updated at: 
-          </p>
-          <p
-            class="c13"
-          >
-            2020/09/30 10:00 +00:00
-          </p>
+          <div>
+            <div
+              class="c12"
+            />
+          </div>
         </div>
       </div>
     </div>

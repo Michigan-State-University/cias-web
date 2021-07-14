@@ -28,3 +28,11 @@ export const HttpStatusCodes = {
   REQUEST_TIMEOUT: 408,
   UNPROCESSABLE_ENTITY: 422,
 };
+
+/**
+ * @readonly
+ * @enum {number}
+ */
+export const KeyCodes = {
+  ESC: 27,
+};

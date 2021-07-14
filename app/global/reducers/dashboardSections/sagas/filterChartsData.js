@@ -21,7 +21,7 @@ export function* filterChartsData({
       params: {
         statuses: [ChartStatus.PUBLISHED],
         date_offset: offset && offset !== 0 ? offset : null,
-        clinics: clinics ? clinics.map(({ value }) => value) : [],
+        clinic_ids: clinics ? clinics.map(({ value }) => value) : [],
       },
     });
     const parsedData = objectToCamelCase(chartsData.data_for_charts);

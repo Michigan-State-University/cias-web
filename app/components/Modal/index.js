@@ -7,19 +7,20 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+
 import { colors } from 'theme';
+
+import useLockBodyScroll from 'utils/useLockBodyScroll';
+import useKeyPress from 'utils/useKeyPress';
+import { KeyCodes } from 'utils/constants';
 
 import Box from 'components/Box';
 import Column from 'components/Column';
 import H1 from 'components/H1';
 import Row from 'components/Row';
-import useLockBodyScroll from 'utils/useLockBodyScroll';
-import useKeyPress from 'utils/useKeyPress';
-
 import ActionIcon from 'components/ActionIcon';
-import { StyledBox } from './styled';
 
-const ESC_KEY_CODE = 27;
+import { StyledBox } from './styled';
 
 const Modal = ({
   title,
@@ -32,7 +33,7 @@ const Modal = ({
   const modalContent = useRef(null);
   const modalOverlay = useRef(null);
   useLockBodyScroll(visible);
-  useKeyPress(ESC_KEY_CODE, onClose);
+  useKeyPress(KeyCodes.ESC, onClose);
 
   let portalRoot = document.getElementById('modal-portal');
   if (!portalRoot) {
