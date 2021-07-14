@@ -19,6 +19,7 @@ const flex = props => ({
   flexDirection: props.direction || '',
   flexWrap: props.flexWrap || '',
   alignSelf: propsToCssMapper[props.alignSelf] || '',
+  gap: props.gap || '',
 });
 
 flex.propTypes = {
@@ -42,6 +43,7 @@ flex.propTypes = {
   flexDirection: PropTypes.oneOf(['row', 'column']),
   flexWrap: PropTypes.oneOf(['wrap', 'nowrap', 'wrap-reverse']),
   alignSelf: PropTypes.oneOf(['start', 'end', 'center']),
+  gap: PropTypes.number,
 };
 
 export { flex };

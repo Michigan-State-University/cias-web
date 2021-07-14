@@ -28,7 +28,11 @@ const ThirdPartyQuestionLayout = ({
     <Column>
       <Box>
         {data.map((questionAnswer, index) => {
-          const { payload, value } = questionAnswer;
+          const {
+            payload,
+            value,
+            report_template_ids: reportTemplateIds,
+          } = questionAnswer;
           const isChecked = selectedAnswerIndex === index;
           const ariaInputId = `answer-${index + 1}`;
 
@@ -39,7 +43,7 @@ const ThirdPartyQuestionLayout = ({
                 py={14}
                 width={`calc(100% + ${margin}px)`}
                 clickable
-                onClick={() => handleClick(value, index)}
+                onClick={() => handleClick(value, reportTemplateIds, index)}
               >
                 <Row align="center" height="44">
                   <Radio
