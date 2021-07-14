@@ -33,7 +33,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
-import '!file-loader?name=[name].[ext]!./assets/images/logo.png';
+import '!file-loader?name=[name].[ext]!./assets/svg/logo-icon.svg';
 import 'file-loader?name=.htaccess!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
