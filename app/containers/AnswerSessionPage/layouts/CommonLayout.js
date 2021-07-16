@@ -12,7 +12,7 @@ import Img from 'components/Img';
 import Text from 'components/Text';
 import Tooltip from 'components/Tooltip';
 
-import { Player, PlayerWrapper, ImageWrapper } from './styled';
+import { Player, PlayerWrapper, ImageWrapper, MarkupContainer } from './styled';
 
 const CommonLayout = ({ currentQuestion }) => {
   const { formatMessage } = useIntl();
@@ -36,7 +36,9 @@ const CommonLayout = ({ currentQuestion }) => {
       {settingsTitle && title && (
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
-            <Markup content={title} noWrap />
+            <MarkupContainer>
+              <Markup content={title} noWrap />
+            </MarkupContainer>
           </Box>
         </Row>
       )}
@@ -44,7 +46,9 @@ const CommonLayout = ({ currentQuestion }) => {
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
             <Row align="start" justify="between">
-              <Markup content={subtitle} />
+              <MarkupContainer>
+                <Markup content={subtitle} />
+              </MarkupContainer>
               {settingsRequired && (
                 <Tooltip
                   id="question-required"
