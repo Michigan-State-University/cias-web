@@ -84,6 +84,7 @@ import H3 from 'components/H3';
 import Icon from 'components/Icon';
 import Tooltip from 'components/Tooltip';
 
+import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
@@ -153,7 +154,8 @@ export function InterventionDetailsPage({
   const deletionPossible = canDeleteSession(status);
   const canAccessCsv = interventionOwnerId === userId;
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const [sendCopyModalVisible, setSendCopyModalVisible] = useState(false);
+  const [translateModalVisible, setTranslateModalVisible] = useState(false);
   const [
     participantShareModalVisible,
     setParticipantShareModalVisible,
@@ -163,8 +165,12 @@ export function InterventionDetailsPage({
     setInterventionSettingsModalVisible,
   ] = useState(false);
 
-  const closeModal = () => setModalVisible(false);
-  const openModal = () => setModalVisible(true);
+  const closeSendCopyModal = () => setSendCopyModalVisible(false);
+  const openSendCopyModal = () => setSendCopyModalVisible(true);
+
+  const closeTranslateModal = () => setTranslateModalVisible(false);
+  const openTranslateModal = () => setTranslateModalVisible(true);
+
   const handleCopyIntervention = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
   const handleArchiveIntervention = () =>
@@ -183,14 +189,14 @@ export function InterventionDetailsPage({
       id: 'translate',
       label: formatMessage(messages.translate),
       icon: translate,
-      action: () => {},
+      action: openTranslateModal,
       color: colors.bluewood,
     },
     {
       id: 'copy',
       label: formatMessage(messages.copy),
       icon: fileShare,
-      action: openModal,
+      action: openSendCopyModal,
       color: colors.bluewood,
     },
     {
@@ -372,16 +378,20 @@ export function InterventionDetailsPage({
               textOpacity={0.6}
               color={colors.bluewood}
             >
-              {formatMessage(messages.modalTitle)}
+              {formatMessage(messages.sendCopyModalTitle)}
             </H3>
           }
-          onClose={closeModal}
-          visible={modalVisible}
+          onClose={closeSendCopyModal}
+          visible={sendCopyModalVisible}
         >
           <SelectResearchers
             onResearchersSelected={copyInterventionToResearchers}
-            onClose={closeModal}
+            onClose={closeSendCopyModal}
           />
+        </Modal>
+
+        <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
+          <TranslateInterventionModal name={name} />
         </Modal>
 
         <Modal

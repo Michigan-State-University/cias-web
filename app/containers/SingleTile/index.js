@@ -33,6 +33,7 @@ import Tooltip from 'components/Tooltip';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import SelectResearchers from 'containers/SelectResearchers';
+import TranslateInterventionModal from 'containers/TranslateInterventionModal';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { canArchive } from 'models/Status/statusPermissions';
 import messages from './messages';
@@ -59,10 +60,14 @@ const SingleTile = ({
     saga: interventionOptionsSaga,
   });
 
-  const [modalVisible, setModalVisible] = useState(false);
+  const [sendCopyModalVisible, setSendCopyModalVisible] = useState(false);
+  const [translateModalVisible, setTranslateModalVisible] = useState(false);
 
-  const closeModal = () => setModalVisible(false);
-  const openModal = () => setModalVisible(true);
+  const closeSendCopyModal = () => setSendCopyModalVisible(false);
+  const openSendCopyModal = () => setSendCopyModalVisible(true);
+
+  const closeTranslateModal = () => setTranslateModalVisible(false);
+  const openTranslateModal = () => setTranslateModalVisible(true);
 
   const handleArchiveIntervention = () => archiveIntervention(id);
 
@@ -86,7 +91,7 @@ const SingleTile = ({
   const options = [
     {
       icon: translate,
-      action: () => {},
+      action: openTranslateModal,
       label: formatMessage(messages.translate),
       id: 'translate',
     },
@@ -102,7 +107,7 @@ const SingleTile = ({
       : []),
     {
       icon: fileShare,
-      action: openModal,
+      action: openSendCopyModal,
       label: formatMessage(messages.sendCopy),
       id: 'Send copy to researcher',
     },
@@ -134,14 +139,17 @@ const SingleTile = ({
   return (
     <>
       <Modal
-        title={formatMessage(messages.modalTitle)}
-        onClose={closeModal}
-        visible={modalVisible}
+        title={formatMessage(messages.sendCopyModalTitle)}
+        onClose={closeSendCopyModal}
+        visible={sendCopyModalVisible}
       >
         <SelectResearchers
-          onClose={closeModal}
+          onClose={closeSendCopyModal}
           onResearchersSelected={copyInterventionToResearchers}
         />
+      </Modal>
+      <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
+        <TranslateInterventionModal name={name} />
       </Modal>
       <StyledLink to={link}>
         <TileContainer>

@@ -60,8 +60,8 @@ export default defineMessages({
     id: `${scope}.archive`,
     defaultMessage: 'Archive',
   },
-  modalTitle: {
-    id: `${scope}.modalTitle`,
+  sendCopyModalTitle: {
+    id: `${scope}.sendCopyModalTitle`,
     defaultMessage: 'Choose researchers to send',
   },
   participantShareModalTitle: {
