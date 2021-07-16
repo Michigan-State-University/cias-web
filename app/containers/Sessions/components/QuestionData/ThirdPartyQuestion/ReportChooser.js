@@ -1,17 +1,20 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import Text from 'components/Text';
-import { colors, themeColors } from 'theme';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
+
+import { colors, themeColors } from 'theme';
 import {
   makeSelectReportTemplatesErrors,
   makeSelectReportTemplatesLoaders,
   makeSelectThirdPartyReportTemplatesList,
 } from 'global/reducers/reportTemplates';
+
+import Text from 'components/Text';
 import ErrorAlert from 'components/ErrorAlert';
 import Spinner from 'components/Spinner';
 import PillsSelect from 'components/Select/PillsSelect';
+
 import messages from './messages';
 
 const ReportChooser = ({
