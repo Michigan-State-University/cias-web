@@ -102,3 +102,9 @@ export const StyledLink = styled(Link)`
   font-weight: bold;
   width: auto;
 `;
+
+export const MarkupContainer = styled.div`
+  * {
+    line-height: 1.42 !important;
+  }
+`;
