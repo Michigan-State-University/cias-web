@@ -68,7 +68,7 @@ const HealthSystemSettings = ({
     () =>
       organization.healthSystems.find(
         ({ id: healthSystemId }) => healthSystemId === selectedEntity.id,
-      ),
+      ) || { healthSystemAdmins: [], id: '', name: '' },
     [selectedEntity, organization],
   );
 

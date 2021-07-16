@@ -57,6 +57,7 @@ const Select = ({ selectProps, ...restProps }) => (
       components={customComponents(selectProps.isMulti)}
       menuPortalTarget={document.body}
       styles={customStyles(selectProps)}
+      menuPlacement="auto"
       {...selectProps}
     />
   </Box>
