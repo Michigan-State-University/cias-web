@@ -33,7 +33,7 @@ const PillsSelect = ({ addNewText, data, value, onSelected }) => {
     const newSelectedValue = selectedPills
       .filter(({ value: id }) => id !== deleteId)
       .map(({ value: id }) => id);
-    onSelected(newSelectedValue.join());
+    onSelected(newSelectedValue);
   };
 
   return (
@@ -89,7 +89,7 @@ const PillsSelect = ({ addNewText, data, value, onSelected }) => {
                 bg={colors.mystic}
                 width="100%"
                 onClick={() => {
-                  onSelected(`${value} ${id},`);
+                  onSelected([...value, id]);
                   setDropDownOpen(false);
                 }}
                 cursor="pointer"
@@ -114,7 +114,7 @@ PillsSelect.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({ label: PropTypes.string, id: PropTypes.any }),
   ).isRequired,
-  value: PropTypes.string,
+  value: PropTypes.array,
   onSelected: PropTypes.func,
 };
 

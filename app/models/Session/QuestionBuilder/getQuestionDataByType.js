@@ -73,7 +73,7 @@ export const getQuestionDataByType = type => {
 
     case thirdPartyQuestion.id:
       return {
-        data: [{ payload: '', value: '', report_template_ids: '' }],
+        data: [{ payload: '', value: '', report_template_ids: [] }],
       };
 
     default:

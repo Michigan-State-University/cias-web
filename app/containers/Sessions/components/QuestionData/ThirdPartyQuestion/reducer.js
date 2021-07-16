@@ -11,7 +11,7 @@ const thirdPartyQuestionReducer = (question, payload) => {
       question.body.data.push({
         value: '',
         payload: '',
-        report_template_ids: '',
+        report_template_ids: [],
       });
       return question;
     case UPDATE_ANSWER:
