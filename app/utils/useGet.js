@@ -1,10 +1,12 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+
 const defaultState = {
   data: null,
   error: null,
   isFetching: true,
 };
+
 const useGet = (url, dataParser) => {
   const [state, setState] = useState(defaultState);
 
