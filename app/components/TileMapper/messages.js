@@ -5,6 +5,7 @@ export const scope = 'app.containers.ParticipantDashboard';
 export default defineMessages({
   noResults: {
     id: `${scope}.noResults`,
-    defaultMessage: 'No reports available at the moment',
+    defaultMessage:
+      'Welcome to CIAS! If you request any reports from your sessions, you will be able to find them here.',
   },
 });
