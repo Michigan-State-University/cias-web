@@ -1,14 +1,8 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 
+import useGet from 'utils/useGet';
 import Select from '.';
-
-const defaultState = {
-  data: null,
-  error: null,
-  isFetching: true,
-};
 
 const ApiSelect = ({
   dataParser,
@@ -17,26 +11,7 @@ const ApiSelect = ({
   url,
   ...restProps
 }) => {
-  const [state, setState] = useState(defaultState);
-
-  const fetchData = async () => {
-    try {
-      setState(defaultState);
-
-      const { data } = await axios.get(url);
-
-      const formattedData = dataParser ? dataParser(data) : data;
-      setState({ data: formattedData, error: null, isFetching: false });
-    } catch (error) {
-      setState({ data: null, error, isFetching: false });
-    }
-  };
-
-  useEffect(() => {
-    if (url) {
-      fetchData();
-    }
-  }, [url]);
+  const state = useGet(url, dataParser);
 
   const options = useMemo(() => state.data?.map(optionsFormatter) ?? [], [
     state.data,

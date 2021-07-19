@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { ReportFor } from './constants';
 import { initialState } from './reducer';
 
 /**
@@ -87,6 +88,15 @@ const makeSelectSelectedSectionTemplateId = () =>
     substate => substate.selectedTemplateSectionId,
   );
 
+const makeSelectThirdPartyReportTemplatesList = () =>
+  createSelector(
+    selectReportTemplatesDomain,
+    substate =>
+      substate.reportTemplates.filter(
+        ({ reportFor }) => reportFor === ReportFor.thirdParty,
+      ),
+  );
+
 export default makeSelectReportTemplates;
 export {
   selectReportTemplatesDomain,
@@ -99,4 +109,5 @@ export {
   makeSelectSingleReportTemplate,
   makeSelectSelectedSectionTemplate,
   makeSelectSelectedSectionTemplateId,
+  makeSelectThirdPartyReportTemplatesList,
 };

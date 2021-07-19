@@ -11,6 +11,7 @@ export {
   makeSelectSingleReportTemplate,
   makeSelectSelectedSectionTemplate,
   makeSelectSelectedSectionTemplateId,
+  makeSelectThirdPartyReportTemplatesList,
 } from './selectors';
 
 export {
