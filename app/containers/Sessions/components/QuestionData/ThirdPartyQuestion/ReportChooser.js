@@ -24,6 +24,8 @@ const ReportChooser = ({
   errors: { fetchReportTemplatesError },
   value,
   onChange,
+  disabled,
+  isNarratorTab,
 }) => {
   const selectData = useMemo(
     () => reportTemplates.map(({ name, id }) => ({ label: name, value: id })),
@@ -36,6 +38,10 @@ const ReportChooser = ({
 
   if (fetchReportTemplatesLoading) {
     return <Spinner color={themeColors.secondary} />;
+  }
+
+  if (isNarratorTab) {
+    return <></>;
   }
 
   return (
@@ -52,6 +58,8 @@ const ReportChooser = ({
           addNewText={formatMessage(messages.addNewReport)}
           value={value}
           onSelected={onChange}
+          emptyText={formatMessage(messages.zeroReportChosen)}
+          disabled={disabled}
         />
       )}
     </div>
@@ -65,6 +73,8 @@ ReportChooser.propTypes = {
   errors: PropTypes.object,
   value: PropTypes.any,
   onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  isNarratorTab: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({

@@ -32,4 +32,8 @@ export default defineMessages({
     id: `${scope}.addNewReport`,
     defaultMessage: 'Add new report',
   },
+  zeroReportChosen: {
+    id: `${scope}.zeroReportChosen`,
+    defaultMessage: 'No reports were chosen for that answer',
+  },
 });

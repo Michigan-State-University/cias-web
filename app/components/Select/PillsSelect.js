@@ -7,7 +7,14 @@ import PlusCircle from 'components/Circle/PlusCircle';
 import { colors } from 'theme';
 import useOutsideClick from 'utils/useOutsideClick';
 
-const PillsSelect = ({ addNewText, data, value, onSelected }) => {
+const PillsSelect = ({
+  addNewText,
+  data,
+  value,
+  onSelected,
+  disabled,
+  emptyText,
+}) => {
   const dropdown = useRef(null);
 
   const [dropdownOpen, setDropDownOpen] = useState(false);
@@ -46,15 +53,24 @@ const PillsSelect = ({ addNewText, data, value, onSelected }) => {
       gap={10}
     >
       {selectedPills.map(({ label, value: id }) => (
-        <Box key={id} px={10} py={5} display="flex" bg={colors.mystic}>
+        <Box
+          key={id}
+          px={10}
+          py={5}
+          display="flex"
+          bg={colors.mystic}
+          disabled={disabled}
+        >
           {label}
-          <Text ml={10} cursor="pointer" onClick={onFilter(id)}>
-            X
-          </Text>
+          {!disabled && (
+            <Text ml={10} cursor="pointer" onClick={onFilter(id)}>
+              X
+            </Text>
+          )}
         </Box>
       ))}
       <div style={{ position: 'relative' }}>
-        {notSelectedPills.length > 0 && (
+        {notSelectedPills.length > 0 && !disabled && (
           <PlusCircle
             mr={12}
             size="18px"
@@ -100,22 +116,26 @@ const PillsSelect = ({ addNewText, data, value, onSelected }) => {
           </Box>
         )}
       </div>
-      {selectedPills.length === 0 && (
+      {selectedPills.length === 0 && !disabled && (
         <Text cursor="pointer" onClick={() => setDropDownOpen(true)}>
           {addNewText}
         </Text>
       )}
+
+      {selectedPills.length === 0 && disabled && <Text>{emptyText}</Text>}
     </Box>
   );
 };
 
 PillsSelect.propTypes = {
   addNewText: PropTypes.string,
+  emptyText: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({ label: PropTypes.string, id: PropTypes.any }),
   ).isRequired,
   value: PropTypes.array,
   onSelected: PropTypes.func,
+  disabled: PropTypes.bool,
 };
 
 export default PillsSelect;
