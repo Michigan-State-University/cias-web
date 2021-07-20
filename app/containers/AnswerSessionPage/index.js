@@ -20,11 +20,10 @@ import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import ccIcon from 'assets/svg/closed-captions.svg';
 
-import { elements, themeColors } from 'theme';
+import { themeColors } from 'theme';
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE } from 'utils/previewMode';
-import { useCallbackRef } from 'utils/useCallbackRef';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
 
@@ -55,7 +54,6 @@ import {
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
-import { useWindowSize } from 'utils/useWindowSize';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,
@@ -82,9 +80,6 @@ import {
   clearError,
   toggleTextTranscriptAction,
 } from './actions';
-
-const CC_SIZE = 40;
-const CC_PADDING = 10;
 
 const AnimationRefHelper = ({
   children,
@@ -203,26 +198,6 @@ export function AnswerSessionPage({
     [previewMode, containerQueryParams],
   );
 
-  const windowSize = useWindowSize();
-
-  const {
-    callbackRef: outerContainerRef,
-    callbackResult: transcriptButtonStyles,
-  } = useCallbackRef(
-    node =>
-      isDesktop || !node
-        ? { bottom: 0, left: CC_PADDING }
-        : {
-            left: node?.offsetLeft + CC_PADDING,
-            top:
-              node?.offsetTop +
-              node?.offsetHeight +
-              elements.navbarHeight -
-              CC_SIZE,
-          },
-    [isDesktop, windowSize],
-  );
-
   const logoStyles = useMemo(() => {
     if (isDesktop) return { position: 'absolute', right: '30px' };
 
@@ -325,6 +300,15 @@ export function AnswerSessionPage({
     return renderBottomSide();
   };
 
+  const transcriptToggleIcon = (
+    <Icon
+      width={22}
+      src={ccIcon}
+      onClick={toggleTextTranscript}
+      fill={showTextTranscript ? themeColors.text : ''}
+    />
+  );
+
   const renderQuestion = () => {
     const selectAnswerProp = (answerBody, selectedByUser = true) => {
       saveSelectedAnswer({
@@ -371,7 +355,10 @@ export function AnswerSessionPage({
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
           <Box lang={languageCode} width="100%">
-            <CommonLayout currentQuestion={currentQuestion} />
+            <CommonLayout
+              transcriptToggleIcon={transcriptToggleIcon}
+              currentQuestion={currentQuestion}
+            />
 
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           </Box>
@@ -449,7 +436,6 @@ export function AnswerSessionPage({
           <meta name="description" content="Answer Session" />
         </Helmet>
         <AnswerOuterContainer
-          ref={outerContainerRef}
           previewMode={previewMode}
           interventionStarted={interventionStarted}
         >
@@ -493,19 +479,6 @@ export function AnswerSessionPage({
                     </Row>
 
                     {renderQuestionTranscript(true)}
-                  </Box>
-
-                  <Box
-                    position="fixed !important"
-                    zIndex={10}
-                    width={CC_SIZE}
-                    {...transcriptButtonStyles}
-                  >
-                    <Icon
-                      src={ccIcon}
-                      onClick={toggleTextTranscript}
-                      fill={showTextTranscript ? themeColors.text : ''}
-                    />
                   </Box>
                 </Row>
 
