@@ -14,9 +14,8 @@ import Tooltip from 'components/Tooltip';
 
 import { Player, PlayerWrapper, ImageWrapper, MarkupContainer } from './styled';
 
-const CommonLayout = ({ currentQuestion }) => {
+const CommonLayout = ({ currentQuestion, transcriptToggleIcon }) => {
   const { formatMessage } = useIntl();
-
   const {
     title,
     subtitle,
@@ -33,6 +32,7 @@ const CommonLayout = ({ currentQuestion }) => {
   } = currentQuestion;
   return (
     <Box>
+      <Row padding={26}>{transcriptToggleIcon}</Row>
       {settingsTitle && title && (
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
@@ -89,6 +89,7 @@ const CommonLayout = ({ currentQuestion }) => {
 };
 
 CommonLayout.propTypes = {
+  transcriptToggleIcon: PropTypes.node,
   currentQuestion: PropTypes.shape({
     title: PropTypes.string,
     subtitle: PropTypes.string,
