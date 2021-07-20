@@ -55,9 +55,9 @@ if (!isNullOrUndefined(process.env.SENTRY_DSN))
     release: `${process.env.SENTRY_ENV}-v${process.env.VERSION}`,
   });
 
-const MOUNT_NODE = document.getElementById('app');
+const MOUNT_NODE = document.getElementById('app') || document.body;
 
-const render = messages => {
+const render = (messages: any) => {
   // preserve old Immer behavior (compatibility after update)
   setAutoFreeze(false);
 
@@ -78,7 +78,7 @@ const render = messages => {
   );
 };
 
-const runAppWithPolyfills = messages => {
+const runAppWithPolyfills = (messages: any) => {
   Promise.all([polyfillI18n()])
     .then(() => render(messages))
     .catch(err => {
