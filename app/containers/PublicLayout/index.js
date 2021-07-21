@@ -15,7 +15,7 @@ export const PublicLayout = ({ children }) => (
   <Background>
     <TopBackground />
     <Header>
-      <CIASLogo />
+      <CIASLogo height={80} />
     </Header>
     <Content>{children}</Content>
   </Background>
