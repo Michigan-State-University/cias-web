@@ -27,6 +27,7 @@ import {
   CHANGE_USER_SESSION_ID,
   SET_CURRENT_BLOCK_INDEX,
   TOGGLE_TEXT_TRANSCRIPT,
+  SET_TRANSITIONAL_USER_SESSION_ID,
 } from './constants';
 
 export const selectAnswer = payload => actionBuilder(SELECT_ANSWER, payload);
@@ -103,3 +104,6 @@ export const setCurrentBlockIndex = index =>
 
 export const toggleTextTranscriptAction = () =>
   actionBuilder(TOGGLE_TEXT_TRANSCRIPT, {});
+
+export const setTransitionalUserSessionId = userSessionId =>
+  actionBuilder(SET_TRANSITIONAL_USER_SESSION_ID, { userSessionId });

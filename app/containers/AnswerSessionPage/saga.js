@@ -33,6 +33,7 @@ import {
   nextQuestionRequest,
   createUserSessionRequest,
   changeUserSessionId,
+  setTransitionalUserSessionId,
 } from './actions';
 import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
 import messages from './messages';
@@ -90,11 +91,15 @@ function* nextQuestion({ payload: { userSessionId, questionId } }) {
         toast.warning,
         formatMessage(messages[warning] ?? messages.unknownWarning),
       );
-
     if (newUserSessionId) {
+      const location = yield select(makeSelectLocation());
+      const isPreview = /^.*\/preview/.test(location.pathname);
+
+      if (isPreview) {
+        yield put(setTransitionalUserSessionId(newUserSessionId));
+      }
       yield put(changeUserSessionId(newUserSessionId));
     }
-
     yield put(nextQuestionSuccess(mapQuestionToStateObject(data)));
   } catch (error) {
     yield put(nextQuestionFailure(error));

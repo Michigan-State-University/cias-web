@@ -80,6 +80,7 @@ import {
   clearError,
   toggleTextTranscriptAction,
 } from './actions';
+import BranchingScreen from './components/BranchingScreen.tsx';
 
 const AnimationRefHelper = ({
   children,
@@ -166,6 +167,7 @@ export function AnswerSessionPage({
     nextQuestionError,
     currentQuestion,
     showTextTranscript,
+    transitionalUserSessionId,
   },
   isPreview,
   interventionStatus,
@@ -300,7 +302,7 @@ export function AnswerSessionPage({
     return renderBottomSide();
   };
 
-  const transcriptToggleIcon = (
+  const transcriptToggleIcon = transitionalUserSessionId && (
     <Icon
       width={22}
       src={ccIcon}
@@ -482,9 +484,14 @@ export function AnswerSessionPage({
                   </Box>
                 </Row>
 
+                {transitionalUserSessionId && (
+                  <BranchingScreen userSessionId={userSession.id} />
+                )}
+
                 {!nextQuestionLoading &&
                   currentQuestion &&
-                  interventionStarted && (
+                  interventionStarted &&
+                  !transitionalUserSessionId && (
                     <AnimationRefHelper
                       currentQuestion={currentQuestion}
                       currentQuestionId={currentQuestionId}

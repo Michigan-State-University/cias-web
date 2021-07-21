@@ -4,7 +4,7 @@ import { colors } from 'theme';
 
 import Spinner from 'components/Spinner';
 import { StyledButton } from './StyledButton';
-
+// @ts-ignore
 const Button = React.forwardRef(
   ({ loading, title, children, disabled, inverted, ...props }, ref) => (
     <StyledButton
