@@ -84,7 +84,7 @@ export const generatePieChartLabel = ({
         <EllipsisText
           maxWidth={MAX_LABEL_WIDTH}
           dataFor="chart-tooltip"
-          text={`${label} (${value})`}
+          text={`(${value}) ${label}`}
           textAlign={isRightSide ? '' : 'right'}
           color={color}
         />

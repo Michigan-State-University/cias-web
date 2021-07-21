@@ -97,6 +97,11 @@ import { canEdit } from 'models/Status/statusPermissions';
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { FinishGroupType } from 'models/Session/GroupTypes';
+import {
+  fetchReportTemplatesRequest,
+  reportTemplatesReducer,
+  reportTemplatesSaga,
+} from 'global/reducers/reportTemplates';
 import editInterventionPageSaga from './saga';
 
 import QuestionDetails from '../../components/QuestionDetails';
@@ -133,6 +138,7 @@ function EditSessionPage({
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
   fetchInterventions,
+  fetchReportTemplates,
 }) {
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState([]);
@@ -259,12 +265,14 @@ function EditSessionPage({
   };
 
   useEffect(() => {
+    const { interventionId, sessionId: paramSessionId } = params;
     getSession({
-      sessionId: params.sessionId,
-      interventionId: params.interventionId,
+      sessionId: paramSessionId,
+      interventionId,
     });
-    getQuestionGroups(params.sessionId);
+    getQuestionGroups(paramSessionId);
     fetchInterventions();
+    fetchReportTemplates(paramSessionId);
   }, []);
 
   const onCreateQuestion = type => {
@@ -542,6 +550,7 @@ EditSessionPage.propTypes = {
   changeGroupName: PropTypes.func,
   getQuestionGroups: PropTypes.func,
   fetchInterventions: PropTypes.func,
+  fetchReportTemplates: PropTypes.func,
   interventionStatus: PropTypes.string,
   session: PropTypes.object,
 };
@@ -568,6 +577,7 @@ const mapDispatchToProps = {
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
   fetchInterventions: fetchInterventionsRequest,
+  fetchReportTemplates: fetchReportTemplatesRequest,
 };
 
 const withConnect = connect(
@@ -588,6 +598,7 @@ export default compose(
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
   injectReducer({ key: 'interventions', reducer: interventionsReducer }),
   injectReducer({ key: 'copyModal', reducer: copyModalReducer }),
+  injectReducer({ key: 'reportTemplates', reducer: reportTemplatesReducer }),
   injectSaga({ key: 'getSession', saga: getSessionSaga }),
   injectSaga({
     key: 'getQuestionGroupsSaga',
@@ -595,6 +606,7 @@ export default compose(
   }),
   injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
   injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
+  injectSaga({ key: 'reportTemplatesSaga', saga: reportTemplatesSaga }),
   injectSaga({ key: 'copyModal', saga: allCopyModalSagas }),
   injectSaga({
     key: 'reorderQuestionGroups',

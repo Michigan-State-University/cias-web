@@ -22,10 +22,11 @@ const ThirdPartyQuestion = ({
     setSelectedAnswerIndex(answerBody.length ? answerBody[0].index : null);
   }, [id]);
 
-  const handleClick = (value, index) => {
+  const handleClick = (value, reportTemplateIds, index) => {
     selectAnswer([
       {
         value,
+        report_template_ids: reportTemplateIds,
         index,
       },
     ]);

@@ -12,11 +12,10 @@ import Img from 'components/Img';
 import Text from 'components/Text';
 import Tooltip from 'components/Tooltip';
 
-import { Player, PlayerWrapper, ImageWrapper } from './styled';
+import { Player, PlayerWrapper, ImageWrapper, MarkupContainer } from './styled';
 
-const CommonLayout = ({ currentQuestion }) => {
+const CommonLayout = ({ currentQuestion, transcriptToggleIcon }) => {
   const { formatMessage } = useIntl();
-
   const {
     title,
     subtitle,
@@ -33,10 +32,13 @@ const CommonLayout = ({ currentQuestion }) => {
   } = currentQuestion;
   return (
     <Box>
+      <Row padding={26}>{transcriptToggleIcon}</Row>
       {settingsTitle && title && (
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
-            <Markup content={title} noWrap />
+            <MarkupContainer>
+              <Markup content={title} noWrap />
+            </MarkupContainer>
           </Box>
         </Row>
       )}
@@ -44,7 +46,9 @@ const CommonLayout = ({ currentQuestion }) => {
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
             <Row align="start" justify="between">
-              <Markup content={subtitle} />
+              <MarkupContainer>
+                <Markup content={subtitle} />
+              </MarkupContainer>
               {settingsRequired && (
                 <Tooltip
                   id="question-required"
@@ -85,6 +89,7 @@ const CommonLayout = ({ currentQuestion }) => {
 };
 
 CommonLayout.propTypes = {
+  transcriptToggleIcon: PropTypes.node,
   currentQuestion: PropTypes.shape({
     title: PropTypes.string,
     subtitle: PropTypes.string,

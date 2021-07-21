@@ -30,6 +30,7 @@ import { emailValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
 import answerPageMessages from 'containers/AnswerSessionPage/layouts/messages';
+import ReportChooser from './ReportChooser';
 import messages from './messages';
 import { ADD, UPDATE_ANSWER, REMOVE } from './constants';
 
@@ -70,8 +71,13 @@ const ThirdPartyQuestion = ({
   const handleChangeTitle = (newTitle, index, value) =>
     updateAnswer(index, { ...value, payload: newTitle });
 
-  const handleRemove = index => removeAnswer(index);
+  const handleChangeReportTemplateIds = (newReportTemplateIds, index, value) =>
+    updateAnswer(index, {
+      ...value,
+      report_template_ids: newReportTemplateIds,
+    });
 
+  const handleRemove = index => removeAnswer(index);
   return (
     <Column>
       {data.map((value, index) => (
@@ -144,6 +150,16 @@ const ThirdPartyQuestion = ({
                 )}
               </Row>
             </Column>
+
+            <ReportChooser
+              formatMessage={formatMessage}
+              value={value.report_template_ids}
+              onChange={reportTemplateIds =>
+                handleChangeReportTemplateIds(reportTemplateIds, index, value)
+              }
+              disabled={!editingPossible}
+              isNarratorTab={isNarratorTab}
+            />
           </HoverableBox>
         </Row>
       ))}
