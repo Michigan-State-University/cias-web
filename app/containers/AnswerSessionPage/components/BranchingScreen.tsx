@@ -8,13 +8,29 @@ import Box from 'components/Box';
 import Button from 'components/Button';
 
 import messages from '../messages';
+
 type Props = {
   userSessionId: string;
+  sessionId: string;
+  resetTransitionalUserSessionId: () => void;
 };
 
-const BranchingScreen = ({ userSessionId }: Props) => {
-  console.log(userSessionId);
+const BranchingScreen = ({
+  userSessionId,
+  sessionId,
+  resetTransitionalUserSessionId,
+}: Props) => {
   const { formatMessage } = useIntl();
+
+  const redirectToSessionMap = () => {
+    window.open(
+      `${
+        process.env.WEB_URL
+      }/  session/${sessionId}/session-map?userPreviewId=${userSessionId}`,
+      '_blank',
+    );
+  };
+
   return (
     <Box mt={50}>
       <H1 textAlign="center">{formatMessage(messages.ongoingBranching)}</H1>
@@ -22,10 +38,18 @@ const BranchingScreen = ({ userSessionId }: Props) => {
         {formatMessage(messages.ongoingBranchingParticipantInfo)}
       </H2>
       <Box mt={50} display="flex" justify="around">
-        {/* @ts-ignore */}
-        <Button width={200} title={formatMessage(messages.goToSessionMap)} />
-        {/* @ts-ignore */}
-        <Button width={200} title={formatMessage(messages.continuePreview)} />
+        <Button
+          // @ts-ignore
+          width={200}
+          onClick={redirectToSessionMap}
+          title={formatMessage(messages.goToSessionMap)}
+        />
+        <Button
+          // @ts-ignore
+          onClick={resetTransitionalUserSessionId}
+          width={200}
+          title={formatMessage(messages.continuePreview)}
+        />
       </Box>
     </Box>
   );

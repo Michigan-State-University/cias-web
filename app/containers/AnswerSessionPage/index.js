@@ -79,6 +79,7 @@ import {
   nextQuestionRequest,
   clearError,
   toggleTextTranscriptAction,
+  setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen.tsx';
 
@@ -176,6 +177,7 @@ export function AnswerSessionPage({
   nextQuestion,
   clearErrors,
   toggleTextTranscript,
+  setTransitionalUserSessionId,
 }) {
   const { formatMessage } = useIntl();
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
@@ -422,6 +424,9 @@ export function AnswerSessionPage({
 
   const renderPage = () => <>{renderQuestion()}</>;
 
+  const resetTransitionalUserSessionId = () =>
+    setTransitionalUserSessionId(null);
+
   if (nextQuestionLoading && interventionStarted) return <Loader />;
 
   return (
@@ -485,7 +490,13 @@ export function AnswerSessionPage({
                 </Row>
 
                 {transitionalUserSessionId && (
-                  <BranchingScreen userSessionId={userSession.id} />
+                  <BranchingScreen
+                    sessionId={sessionId}
+                    userSessionId={userSession.id}
+                    resetTransitionalUserSessionId={
+                      resetTransitionalUserSessionId
+                    }
+                  />
                 )}
 
                 {!nextQuestionLoading &&
@@ -531,6 +542,7 @@ AnswerSessionPage.propTypes = {
   nextQuestion: PropTypes.func,
   clearErrors: PropTypes.func,
   toggleTextTranscript: PropTypes.func,
+  setTransitionalUserSessionId: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -550,6 +562,7 @@ const mapDispatchToProps = {
   nextQuestion: nextQuestionRequest,
   clearErrors: clearError,
   toggleTextTranscript: toggleTextTranscriptAction,
+  setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
 };
 
 const withConnect = connect(
