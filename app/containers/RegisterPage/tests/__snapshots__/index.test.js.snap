@@ -18,7 +18,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
     />
   </div>
   <div
-    class="styled__Content-hdmnn0-4 cwrYjh"
+    class="styled__Content-hdmnn0-4 btbiUY"
   >
     <div
       class="Fill-sc-12xwpzs-0 tIBAp"
@@ -237,7 +237,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
     />
   </div>
   <div
-    class="styled__Content-hdmnn0-4 cwrYjh"
+    class="styled__Content-hdmnn0-4 btbiUY"
   >
     <div
       class="Fill-sc-12xwpzs-0 tIBAp"
