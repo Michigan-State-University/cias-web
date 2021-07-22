@@ -62,3 +62,6 @@ export const SET_CURRENT_BLOCK_INDEX =
 
 export const TOGGLE_TEXT_TRANSCRIPT =
   'app/AnswerSessionPage/TOGGLE_TEXT_TRANSCRIPT';
+
+export const SET_TRANSITIONAL_USER_SESSION_ID =
+  'app/AnswerSessionPage/SET_TRANSITIONAL_USER_SESSION_ID';

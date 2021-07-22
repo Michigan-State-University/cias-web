@@ -115,4 +115,17 @@ export default defineMessages({
     defaultMessage:
       'This is a Narrator that speaks and moves around the screen.',
   },
+  ongoingBranching: {
+    id: `${scope}.ongoingBranching`,
+    defaultMessage:
+      'You were branched to another session. You can see session map with questions from this preview or continue to another session.',
+  },
+  ongoingBranchingParticipantInfo: {
+    id: `${scope}.ongoingBranchingParticipantInfo`,
+    defaultMessage: 'This screen will not be visible for participants',
+  },
+  goToSessionMap: {
+    id: `${scope}.goToSessionMap`,
+    defaultMessage: 'Go to session map',
+  },
 });

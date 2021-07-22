@@ -79,7 +79,9 @@ import {
   nextQuestionRequest,
   clearError,
   toggleTextTranscriptAction,
+  setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
 } from './actions';
+import BranchingScreen from './components/BranchingScreen.tsx';
 
 const AnimationRefHelper = ({
   children,
@@ -166,6 +168,7 @@ export function AnswerSessionPage({
     nextQuestionError,
     currentQuestion,
     showTextTranscript,
+    transitionalUserSessionId,
   },
   isPreview,
   interventionStatus,
@@ -174,6 +177,7 @@ export function AnswerSessionPage({
   nextQuestion,
   clearErrors,
   toggleTextTranscript,
+  setTransitionalUserSessionId,
 }) {
   const { formatMessage } = useIntl();
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
@@ -300,7 +304,7 @@ export function AnswerSessionPage({
     return renderBottomSide();
   };
 
-  const transcriptToggleIcon = (
+  const transcriptToggleIcon = transitionalUserSessionId && (
     <Icon
       width={22}
       src={ccIcon}
@@ -420,6 +424,9 @@ export function AnswerSessionPage({
 
   const renderPage = () => <>{renderQuestion()}</>;
 
+  const resetTransitionalUserSessionId = () =>
+    setTransitionalUserSessionId(null);
+
   if (nextQuestionLoading && interventionStarted) return <Loader />;
 
   return (
@@ -482,9 +489,20 @@ export function AnswerSessionPage({
                   </Box>
                 </Row>
 
+                {transitionalUserSessionId && (
+                  <BranchingScreen
+                    sessionId={sessionId}
+                    userSessionId={userSession.id}
+                    resetTransitionalUserSessionId={
+                      resetTransitionalUserSessionId
+                    }
+                  />
+                )}
+
                 {!nextQuestionLoading &&
                   currentQuestion &&
-                  interventionStarted && (
+                  interventionStarted &&
+                  !transitionalUserSessionId && (
                     <AnimationRefHelper
                       currentQuestion={currentQuestion}
                       currentQuestionId={currentQuestionId}
@@ -524,6 +542,7 @@ AnswerSessionPage.propTypes = {
   nextQuestion: PropTypes.func,
   clearErrors: PropTypes.func,
   toggleTextTranscript: PropTypes.func,
+  setTransitionalUserSessionId: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -543,6 +562,7 @@ const mapDispatchToProps = {
   nextQuestion: nextQuestionRequest,
   clearErrors: clearError,
   toggleTextTranscript: toggleTextTranscriptAction,
+  setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
 };
 
 const withConnect = connect(
