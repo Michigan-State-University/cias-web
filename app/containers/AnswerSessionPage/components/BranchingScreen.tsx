@@ -26,7 +26,7 @@ const BranchingScreen = ({
     window.open(
       `${
         process.env.WEB_URL
-      }/  session/${sessionId}/session-map?userPreviewId=${userSessionId}`,
+      }/session/${sessionId}/session-map?userPreviewId=${userSessionId}`,
       '_blank',
     );
   };
