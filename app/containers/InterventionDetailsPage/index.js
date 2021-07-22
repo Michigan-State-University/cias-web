@@ -93,11 +93,7 @@ import SessionListItem from './components/SessionListItem';
 import { InterventionSettingsModal } from './components/Modals';
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
-import {
-  InterventionDetailsPageContext,
-  nextStatus,
-  updateStatuses,
-} from './utils';
+import { InterventionDetailsPageContext, nextStatus } from './utils';
 
 export function InterventionDetailsPage({
   createSession,
@@ -176,7 +172,6 @@ export function InterventionDetailsPage({
     copyIntervention({ interventionId: id, withoutRedirect: true });
   const handleArchiveIntervention = () =>
     editIntervention({
-      status_event: 'to_archive',
       status: archived,
       id: interventionId,
     });
@@ -250,7 +245,6 @@ export function InterventionDetailsPage({
 
   const handleChangeStatus = () =>
     editIntervention({
-      status_event: get(updateStatuses, status, ''),
       status: get(nextStatus, status, ''),
       id: interventionId,
     });
