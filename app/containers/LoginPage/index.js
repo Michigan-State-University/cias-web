@@ -20,8 +20,7 @@ import { useInjectSaga } from 'redux-injectors';
 import { Fill } from 'components/Fill';
 import Column from 'components/Column';
 import H1 from 'components/H1';
-import { MSULogo } from 'components/Logo';
-import withPublicLayout from 'containers/PublicLayout';
+import { PublicLayout } from 'containers/PublicLayout';
 
 import {
   loginRequest,
@@ -121,15 +120,16 @@ export const LoginPage = ({
       <Helmet>
         <title>{formatMessage(messages.pageTitle)}</title>
       </Helmet>
-      <MSULogo position="absolute" top={35} right={45} />
-      <Fill justify="center" align="center">
-        <Column sm={10} md={8} lg={6} align="start">
-          <H1 mb={40} fontSize={23}>
-            {formatMessage(messages.header)}
-          </H1>
-          {render()}
-        </Column>
-      </Fill>
+      <PublicLayout withMsuLogo>
+        <Fill justify="center" align="center">
+          <Column sm={10} md={8} lg={6} align="start">
+            <H1 mb={40} fontSize={23}>
+              {formatMessage(messages.header)}
+            </H1>
+            {render()}
+          </Column>
+        </Fill>
+      </PublicLayout>
     </>
   );
 };
@@ -165,7 +165,4 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(
-  withConnect,
-  withPublicLayout,
-)(LoginPage);
+export default compose(withConnect)(LoginPage);

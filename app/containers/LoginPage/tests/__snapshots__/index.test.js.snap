@@ -8,7 +8,16 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
     class="styled__TopBackground-hdmnn0-1 fKSajA"
   />
   <div
-    class="styled__Header-hdmnn0-2 hWqYDm"
+    class="styled__MSULogoContainerDesktop-hdmnn0-7 EvOkz"
+  >
+    <img
+      alt="Michigan State University Logo"
+      class="Img-sc-55j3su-0 iaFBRP"
+      src="IMAGE_MOCK"
+    />
+  </div>
+  <div
+    class="styled__HeaderWithDoubleLogo-hdmnn0-5 kiQXiY"
   >
     <img
       alt="CIAS Application Logo"
@@ -16,15 +25,19 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
       height="80"
       src="IMAGE_MOCK"
     />
+    <div
+      class="styled__MSULogoContainerMobile-hdmnn0-6 ezZegz"
+    >
+      <img
+        alt="Michigan State University Logo"
+        class="Img-sc-55j3su-0 iaFBRP"
+        src="IMAGE_MOCK"
+      />
+    </div>
   </div>
   <div
-    class="styled__Content-hdmnn0-4 cwrYjh"
+    class="styled__Content-hdmnn0-4 btbiUY"
   >
-    <img
-      alt="Michigan State University Logo"
-      class="Img-sc-55j3su-0 hdKJvI"
-      src="IMAGE_MOCK"
-    />
     <div
       class="Fill-sc-12xwpzs-0 tIBAp"
     >
