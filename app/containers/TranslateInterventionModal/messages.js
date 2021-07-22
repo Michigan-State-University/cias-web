@@ -6,7 +6,7 @@
 
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.TranslateInterventionModal';
+export const scope = 'app.containers.TranslateInterventionModal';
 
 export default defineMessages({
   title: {

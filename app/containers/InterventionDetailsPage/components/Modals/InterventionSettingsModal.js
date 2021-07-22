@@ -11,8 +11,8 @@ import {
 import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import ApiSelect from 'components/Select/ApiSelect';
 import Text from 'components/Text';
+import { languageSelectOptionFormatter } from 'utils/formatters';
 
-import { languageSelectOptionFormatter } from './utils';
 import messages from '../../messages';
 
 const InterventionSettingsModal = () => {

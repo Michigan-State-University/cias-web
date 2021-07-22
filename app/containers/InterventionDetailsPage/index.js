@@ -146,6 +146,7 @@ export function InterventionDetailsPage({
     organizationId,
     userId: interventionOwnerId,
     languageName,
+    googleLanguageId,
   } = intervention || {};
 
   const editingPossible = canEdit(status);
@@ -391,7 +392,10 @@ export function InterventionDetailsPage({
         </Modal>
 
         <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
-          <TranslateInterventionModal name={name} />
+          <TranslateInterventionModal
+            name={name}
+            googleLanguageId={googleLanguageId}
+          />
         </Modal>
 
         <Modal

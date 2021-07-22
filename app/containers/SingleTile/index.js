@@ -79,6 +79,7 @@ const SingleTile = ({
     user,
     created_at: createdAt,
     updated_at: updatedAt,
+    google_language_id: googleLanguageId,
   } = tileData || {};
 
   const handleCsvRequest = () => sendCsv(id);
@@ -149,7 +150,10 @@ const SingleTile = ({
         />
       </Modal>
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
-        <TranslateInterventionModal name={name} />
+        <TranslateInterventionModal
+          name={name}
+          googleLanguageId={googleLanguageId}
+        />
       </Modal>
       <StyledLink to={link}>
         <TileContainer>

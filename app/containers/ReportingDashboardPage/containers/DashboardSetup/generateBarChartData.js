@@ -1,6 +1,6 @@
 import range from 'lodash/range';
 
-import { jsMonthToStringFormatter } from 'utils/formatters/dateFormatters';
+import { jsMonthToStringFormatter } from 'utils/formatters';
 import { ChartTypeDto } from 'global/reducers/dashboardSections';
 import { X_AXIS_KEY, STACK_Y_AXIS_KEY, POPULATION_KEY } from './constants';
 
