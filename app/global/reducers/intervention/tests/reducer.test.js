@@ -5,6 +5,7 @@ import { actionBuilder } from 'utils/actionBuilder';
 import { defaultMapper } from 'utils/mapResponseObjects';
 import { createSession, createIntervention } from 'utils/reducerCreators';
 import { editInterventionRequest } from 'global/reducers/intervention';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import {
   FETCH_INTERVENTION_REQUEST,
   FETCH_INTERVENTION_SUCCESS,
@@ -47,11 +48,14 @@ import {
 } from '../constants';
 import { initialState, interventionReducer } from '../reducer';
 
+const mockIntervention = () =>
+  jsonApiToObject({ data: createIntervention() }, 'intervention');
+
 describe('intervention reducer', () => {
   const mockState = {
     ...initialState,
-    intervention: createIntervention(2),
-    cache: { intervention: createIntervention(2) },
+    intervention: mockIntervention(),
+    cache: { intervention: mockIntervention() },
   };
 
   it('FETCH_INTERVENTION_REQUEST', () => {
@@ -67,7 +71,10 @@ describe('intervention reducer', () => {
 
   it('FETCH_INTERVENTION_SUCCESS', () => {
     const payloadIntervention = {
-      intervention: createIntervention(1),
+      intervention: jsonApiToObject(
+        { data: createIntervention(1) },
+        'intervention',
+      ),
     };
     const action = actionBuilder(
       FETCH_INTERVENTION_SUCCESS,
@@ -279,7 +286,7 @@ describe('intervention reducer', () => {
     const payloadEmails = {
       emails: [
         ...mockState.intervention.usersWithAccess,
-        { id: 'test', email: 'user@test.com' },
+        { id: 'user-test-0"', email: 'user-test-0@user.com' },
       ],
     };
     const action = actionBuilder(ENABLE_USER_ACCESS_SUCCESS, payloadEmails);

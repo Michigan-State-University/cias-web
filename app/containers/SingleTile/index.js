@@ -74,12 +74,12 @@ const SingleTile = ({
   const {
     name,
     status,
-    sessions_size: sessionsSize,
+    sessionsSize,
     id,
     user,
-    created_at: createdAt,
-    updated_at: updatedAt,
-    google_language_id: googleLanguageId,
+    createdAt,
+    updatedAt,
+    googleLanguageId,
   } = tileData || {};
 
   const handleCsvRequest = () => sendCsv(id);

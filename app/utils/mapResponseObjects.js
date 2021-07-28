@@ -38,24 +38,6 @@ export const mapCurrentUser = user => ({
   organizableId: user.attributes.organizable_id,
 });
 
-export const mapCurrentUserWithoutAttributes = user => ({
-  id: user.id,
-  firstName: user.first_name,
-  lastName: user.last_name,
-  fullName: user.full_name,
-  email: user.email,
-  roles: user.roles,
-  avatar: user.avatar_url,
-  timeZone: user.time_zone,
-  active: user.active,
-  phone: user.phone,
-  teamId: user.team_id,
-  teamName: user.team_name,
-  emailNotification: user.email_notification,
-  smsNotification: user.sms_notification,
-  feedbackCompleted: user.feedback_completed,
-});
-
 export const pickUserAttributes = user =>
   pick(user, [
     'id',
