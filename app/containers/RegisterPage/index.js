@@ -20,6 +20,7 @@ import timezone from 'dayjs/plugin/timezone';
 import set from 'lodash/set';
 import lowerCase from 'lodash/lowerCase';
 import queryString from 'query-string';
+import { Markup } from 'interweave';
 
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
@@ -46,6 +47,7 @@ import {
   registerParticipantRequest,
   registerResearcherRequest,
 } from './actions';
+import { TermsAndConditions } from './styled';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -122,9 +124,14 @@ export function RegisterPage({
         visible={showTermsModal}
         title={formatMessage(messages.termsAndConditions)}
         onClose={() => setShowTermsModal(false)}
-        maxWidth={500}
+        maxWidth="80%"
       >
-        {formatMessage(messages.termsAndConditionsText)}
+        <TermsAndConditions>
+          <Markup
+            content={formatMessage(messages.termsAndConditionsText)}
+            noWrap
+          />
+        </TermsAndConditions>
       </Modal>
       <Fill justify="center" align="center">
         <Column sm={10} md={8} lg={6} align="start">
@@ -195,6 +202,7 @@ export function RegisterPage({
                   <FormikCheckbox formikKey="terms">
                     {formatMessage(messages.accept)}
                     <Text
+                      clickable
                       ml={3}
                       lineHeight="1.5em"
                       fontWeight="bold"

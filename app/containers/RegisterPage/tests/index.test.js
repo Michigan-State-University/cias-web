@@ -8,12 +8,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { render } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
-
 import { MemoryRouter, browserHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from 'configureStore';
+
+import { intlProviderConfig } from 'containers/LanguageProvider';
+
+import { DEFAULT_LOCALE } from 'i18n';
 import RegisterPage from '../index';
-import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<RegisterPage />', () => {
   let store;
@@ -41,7 +43,7 @@ describe('<RegisterPage />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <Provider store={store}>
-        <IntlProvider locale={DEFAULT_LOCALE}>
+        <IntlProvider locale={DEFAULT_LOCALE} {...intlProviderConfig}>
           <MemoryRouter>
             <RegisterPage {...props} />
           </MemoryRouter>
