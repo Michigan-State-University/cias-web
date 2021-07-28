@@ -32,7 +32,7 @@ import LanguageProvider from 'containers/LanguageProvider';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 // Load the favicon and the .htaccess file
-/* eslint-disable import/no-unresolved, import/extensions */
+/* eslint-disable import/no-unresolved, import/extensions, import/no-webpack-loader-syntax, import/no-extraneous-dependencies */
 import '!file-loader?name=[name].[ext]!./assets/images/logo-icon.png';
 import 'file-loader?name=.htaccess!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
@@ -45,6 +45,7 @@ import { translationMessages } from 'i18n';
 import { polyfillI18n } from 'i18nPolyfill';
 
 import 'utils/axios';
+import { ActionCableProvider } from 'components/ActionCable';
 
 smoothscroll.polyfill();
 
@@ -66,10 +67,12 @@ const render = (messages: any) => {
       <LanguageProvider messages={messages}>
         <ConnectedRouter history={history}>
           <ScreenClassProvider>
-            <Sentry.ErrorBoundary fallback={ErrorPage}>
-              <ToastContainer />
-              <App />
-            </Sentry.ErrorBoundary>
+            <ActionCableProvider url={`${process.env.API_URL}/cable`}>
+              <Sentry.ErrorBoundary fallback={ErrorPage}>
+                <ToastContainer />
+                <App />
+              </Sentry.ErrorBoundary>
+            </ActionCableProvider>
           </ScreenClassProvider>
         </ConnectedRouter>
       </LanguageProvider>

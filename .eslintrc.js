@@ -116,6 +116,9 @@ module.exports = {
       webpack: {
         config: './internals/webpack/webpack.prod.babel.js',
       },
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
     },
     jsdoc: {
       mode: 'typescript',
@@ -127,5 +130,44 @@ module.exports = {
     '*.setup.js',
     'cypress/support/*.ts',
     'app/utils/libraries/*.js',
+  ],
+  overrides: [
+    {
+      files: ['**/*.ts', '**/*.tsx'],
+      parser: '@typescript-eslint/parser',
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+        ecmaVersion: 2018,
+        sourceType: 'module',
+        project: './tsconfig.json',
+      },
+      extends: [
+        'airbnb-typescript',
+        'plugin:@typescript-eslint/recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'prettier/@typescript-eslint',
+        'plugin:prettier/recommended',
+      ],
+      plugins: ['@typescript-eslint', 'import'],
+      settings: {
+        'import/resolver': {
+          typescript: {
+            alwaysTryTypes: true, // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
+            project: './tsconfig.json',
+          },
+        },
+        'import/parsers': {
+          '@typescript-eslint/parser': ['.ts', '.tsx'],
+        },
+      },
+      rules: {
+        '@typescript-eslint/no-var-requires': 0,
+        'import/prefer-default-export': 0,
+        'react/require-default-props': 1,
+        'import/no-named-as-default': 0,
+        'react/prop-types': 0,
+        '@typescript-eslint/ban-ts-comment': 'off',
+      },
+    },
   ],
 };
