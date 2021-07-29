@@ -24,6 +24,9 @@ export const intlProviderConfig = {
     h1: chunks => `<h1>${chunks}</h1>`,
     h2: chunks => `<h2>${chunks}</h2>`,
     h3: chunks => `<h3>${chunks}</h3>`,
+    ol: chunks => `<ol>${chunks}</ol>`,
+    ul: chunks => `<ul>${chunks}</ul>`,
+    li: chunks => `<li>${chunks}</li>`,
     br: () => `<br />`,
   },
   onError: error => {

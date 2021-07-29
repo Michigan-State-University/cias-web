@@ -12,12 +12,13 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
   >
     <img
       alt="CIAS Application Logo"
-      class="Img-sc-55j3su-0 cDhXoN"
+      class="Img-sc-55j3su-0 A-dfzT"
+      height="80"
       src="IMAGE_MOCK"
     />
   </div>
   <div
-    class="styled__Content-hdmnn0-4 cwrYjh"
+    class="styled__Content-hdmnn0-4 btbiUY"
   >
     <div
       class="Fill-sc-12xwpzs-0 tIBAp"
@@ -195,11 +196,11 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
           >
             Accept
             <p
-              class="Text-e4p0w3-0 hffOjZ"
+              class="Text-e4p0w3-0 eqbaXt"
               color="#B727EA"
               font-weight="bold"
             >
-              Terms and conditions
+              Terms and conditions & Privacy Policy
             </p>
           </label>
         </div>
@@ -230,12 +231,13 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
   >
     <img
       alt="CIAS Application Logo"
-      class="Img-sc-55j3su-0 cDhXoN"
+      class="Img-sc-55j3su-0 A-dfzT"
+      height="80"
       src="IMAGE_MOCK"
     />
   </div>
   <div
-    class="styled__Content-hdmnn0-4 cwrYjh"
+    class="styled__Content-hdmnn0-4 btbiUY"
   >
     <div
       class="Fill-sc-12xwpzs-0 tIBAp"
@@ -412,11 +414,11 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
           >
             Accept
             <p
-              class="Text-e4p0w3-0 hffOjZ"
+              class="Text-e4p0w3-0 eqbaXt"
               color="#B727EA"
               font-weight="bold"
             >
-              Terms and conditions
+              Terms and conditions & Privacy Policy
             </p>
           </label>
         </div>

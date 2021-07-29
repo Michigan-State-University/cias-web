@@ -38,14 +38,18 @@ const InterventionDetails = ({
       {createdAt && (
         <>
           <Text fontWeight="bold">{formatMessage(messages.createdAt)}</Text>
-          <Text mb={5}>{dayjs(createdAt).format('YYYY/MM/DD HH:mm Z')}</Text>
+          <Text mb={5}>
+            {dayjs(createdAt.replace(/-/g, '/')).format('YYYY/MM/DD HH:mm Z')}
+          </Text>
         </>
       )}
 
       {updatedAt && (
         <>
           <Text fontWeight="bold">{formatMessage(messages.updatedAt)}</Text>
-          <Text mb={5}>{dayjs(updatedAt).format('YYYY/MM/DD HH:mm Z')}</Text>
+          <Text mb={5}>
+            {dayjs(updatedAt.replace(/-/g, '/')).format('YYYY/MM/DD HH:mm Z')}
+          </Text>
         </>
       )}
     </>

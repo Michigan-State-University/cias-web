@@ -72,6 +72,50 @@ export const Content = styled.div`
   margin-left: ${SIDEBAR_WIDTH};
   ${mediaQuery.tablet`
     margin-left: 0;
-    align-items: flex-start;
+    align-items: center;
+  `}
+`;
+
+export const HeaderWithDoubleLogo = styled.div`
+  display: flex;
+  flex: 0.75;
+  align-items: center;
+  background: ${colors.white};
+  padding: 0 20px 30px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(227, 238, 251, 0.8);
+  position: fixed;
+  height: 100vh;
+  width: ${SIDEBAR_WIDTH};
+  justify-content: center;
+  ${mediaQuery.tablet`
+    background: ${colors.white};
+    position: relative;
+    height: auto;
+    width: 100%;
+    justify-content: space-between;
+    background: none;
+    padding: 30px 15px;
+    flex: initial;
+    img {
+      height: 35px!important;
+    }
+  `}
+`;
+
+export const MSULogoContainerMobile = styled.div`
+  display: none;
+  ${mediaQuery.tablet`
+    display: initial;
+  `}
+`;
+
+export const MSULogoContainerDesktop = styled.div`
+  display: initial;
+  position: absolute;
+  top: 35px;
+  right: 45px;
+  ${mediaQuery.tablet`
+    display: none;
   `}
 `;
