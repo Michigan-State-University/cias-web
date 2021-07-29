@@ -21,9 +21,13 @@ import set from 'lodash/set';
 import lowerCase from 'lodash/lowerCase';
 import queryString from 'query-string';
 import { Markup } from 'interweave';
-
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
+import { themeColors } from 'theme';
+import { Roles } from 'models/User/UserRoles';
+import { passwordRegex } from 'global/constants/regex';
+
+import withPublicLayout from 'containers/PublicLayout';
 import { Fill } from 'components/Fill';
 import Button from 'components/Button';
 import StyledTextButton from 'components/Button/StyledTextButton';
@@ -34,11 +38,8 @@ import Text from 'components/Text';
 import Modal from 'components/Modal';
 import FormikInput from 'components/FormikInput';
 import ErrorAlert from 'components/ErrorAlert';
-import withPublicLayout from 'containers/PublicLayout';
-
-import { themeColors } from 'theme';
-import { passwordRegex } from 'global/constants/regex';
 import FormikCheckbox from 'components/FormikCheckbox';
+
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import allRegistrationsSaga from './sagas';
@@ -104,6 +105,11 @@ export function RegisterPage({
   );
   const isInvite = Boolean(invitationToken) && Boolean(email);
 
+  const termsAndConditionsText =
+    role === Roles.participant || !role
+      ? formatMessage(messages.termsAndConditionsParticipantText)
+      : formatMessage(messages.termsAndConditionsOtherRolesText);
+
   const onSubmit = (values, { setSubmitting }) => {
     const currentTimeZone = dayjs.tz.guess();
     set(values, 'timeZone', currentTimeZone);
@@ -127,10 +133,7 @@ export function RegisterPage({
         maxWidth="80%"
       >
         <TermsAndConditions>
-          <Markup
-            content={formatMessage(messages.termsAndConditionsText)}
-            noWrap
-          />
+          <Markup content={termsAndConditionsText} noWrap />
         </TermsAndConditions>
       </Modal>
       <Fill justify="center" align="center">
