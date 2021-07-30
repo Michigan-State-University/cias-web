@@ -25,7 +25,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 export const interventionsReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case FETCH_INTERVENTIONS_REQUEST:
         if (isEmpty(state.interventions)) draft.fetchInterventionLoading = true;

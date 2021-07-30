@@ -17,7 +17,7 @@ const PhoneQuestion = ({
     },
   } = question;
 
-  const onChange = event => {
+  const onChange = (event) => {
     const { prefix, number, iso, confirmed } = event ?? {};
     selectAnswer([
       {

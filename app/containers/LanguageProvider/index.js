@@ -19,18 +19,18 @@ const errorsToOmit = ['INVALID_TAG', 'UNCLOSED_TAG'];
 
 export const intlProviderConfig = {
   defaultRichTextElements: {
-    p: chunks => `<p>${chunks}</p>`,
-    b: chunks => `<b>${chunks}</b>`,
-    h1: chunks => `<h1>${chunks}</h1>`,
-    h2: chunks => `<h2>${chunks}</h2>`,
-    h3: chunks => `<h3>${chunks}</h3>`,
-    ol: chunks => `<ol>${chunks}</ol>`,
-    ul: chunks => `<ul>${chunks}</ul>`,
-    li: chunks => `<li>${chunks}</li>`,
+    p: (chunks) => `<p>${chunks}</p>`,
+    b: (chunks) => `<b>${chunks}</b>`,
+    h1: (chunks) => `<h1>${chunks}</h1>`,
+    h2: (chunks) => `<h2>${chunks}</h2>`,
+    h3: (chunks) => `<h3>${chunks}</h3>`,
+    ol: (chunks) => `<ol>${chunks}</ol>`,
+    ul: (chunks) => `<ul>${chunks}</ul>`,
+    li: (chunks) => `<li>${chunks}</li>`,
     br: () => `<br />`,
   },
-  onError: error => {
-    const showError = !errorsToOmit.some(errorToOmit =>
+  onError: (error) => {
+    const showError = !errorsToOmit.some((errorToOmit) =>
       error.toString().includes(errorToOmit),
     );
     // eslint-disable-next-line no-console
@@ -57,12 +57,9 @@ LanguageProvider.propTypes = {
   children: PropTypes.element.isRequired,
 };
 
-const mapStateToProps = createSelector(
-  makeSelectLocale(),
-  locale => ({
-    locale,
-  }),
-);
+const mapStateToProps = createSelector(makeSelectLocale(), (locale) => ({
+  locale,
+}));
 
 function mapDispatchToProps(dispatch) {
   return {
@@ -70,7 +67,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LanguageProvider);
+export default connect(mapStateToProps, mapDispatchToProps)(LanguageProvider);

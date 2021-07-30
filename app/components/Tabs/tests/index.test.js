@@ -5,7 +5,7 @@ import 'jest-styled-components';
 
 import Tabs from '../index';
 
-const defaultTabs = extraTabProps => (
+const defaultTabs = (extraTabProps) => (
   <Tabs {...extraTabProps}>
     <div label="Tab1">
       <span>Tab1 Content</span>

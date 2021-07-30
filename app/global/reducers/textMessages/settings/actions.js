@@ -8,42 +8,42 @@ import {
   CHANGE_FORMULA_USED,
 } from './constants';
 
-export const changeSchedulingType = value =>
+export const changeSchedulingType = (value) =>
   updateTextMessageSettingsRequest({
     type: CHANGE_SCHEDULING_TYPE,
     data: { value, field: 'schedule' },
   });
 
-export const changeSchedulingValue = value =>
+export const changeSchedulingValue = (value) =>
   updateTextMessageSettingsRequest({
     type: CHANGE_SCHEDULING_VALUE,
     data: { value, field: 'schedulePayload' },
   });
 
-export const changeSchedulingFrequency = value =>
+export const changeSchedulingFrequency = (value) =>
   updateTextMessageSettingsRequest({
     type: CHANGE_SCHEDULING_FREQUENCY,
     data: { value, field: '' },
   });
 
-export const changeFormulaValue = value =>
+export const changeFormulaValue = (value) =>
   updateTextMessageSettingsRequest({
     type: CHANGE_FORMULA_VALUE,
     data: { value, field: 'formula' },
   });
-export const changeTileName = value =>
+export const changeTileName = (value) =>
   updateTextMessageSettingsRequest({
     type: CHANGE_TILE_NAME,
     data: { value, field: 'name' },
   });
 
-export const changeFormulaUsed = value =>
+export const changeFormulaUsed = (value) =>
   updateTextMessageSettingsRequest({
     type: CHANGE_FORMULA_USED,
     data: { value, field: 'isUsedFormula' },
   });
 
-export const changeNoFormulaText = value =>
+export const changeNoFormulaText = (value) =>
   updateTextMessageSettingsRequest({
     type: CHANGE_FORMULA_USED,
     data: { value, field: 'noFormulaText' },

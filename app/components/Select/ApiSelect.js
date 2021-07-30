@@ -13,9 +13,10 @@ const ApiSelect = ({
 }) => {
   const state = useGet(url, dataParser);
 
-  const options = useMemo(() => state.data?.map(optionsFormatter) ?? [], [
-    state.data,
-  ]);
+  const options = useMemo(
+    () => state.data?.map(optionsFormatter) ?? [],
+    [state.data],
+  );
 
   const mergedSelectProps = useMemo(
     () => ({

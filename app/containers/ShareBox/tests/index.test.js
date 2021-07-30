@@ -14,7 +14,7 @@ import ShareBox from '../index';
 import { DEFAULT_LOCALE } from '../../../i18n';
 
 describe('<ShareBox />', () => {
-  const reducer = state => state;
+  const reducer = (state) => state;
   const initialState = {
     intervention: {
       currentSessionIndex: 0,

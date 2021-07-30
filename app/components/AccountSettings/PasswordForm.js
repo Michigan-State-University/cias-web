@@ -15,7 +15,7 @@ import messages from './messages';
 
 const passwordLength = 8;
 
-const validationSchema = formatMessage =>
+const validationSchema = (formatMessage) =>
   Yup.object().shape({
     oldPassword: Yup.string().required(
       formatMessage(messages.oldPasswordRequired),
@@ -29,7 +29,7 @@ const validationSchema = formatMessage =>
       .test(
         'password',
         formatMessage(messages.passwordInvalid),
-        value => value && !!value.match(passwordRegex),
+        (value) => value && !!value.match(passwordRegex),
       ),
     newPasswordConfirmation: Yup.string().oneOf(
       [Yup.ref('newPassword'), null],

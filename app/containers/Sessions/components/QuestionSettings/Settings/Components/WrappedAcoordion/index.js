@@ -63,7 +63,7 @@ const WrappedAccordion = ({
     blurDocument();
   };
 
-  const openAccordion = index => {
+  const openAccordion = (index) => {
     setDraggable(true);
     const { endPosition } = narrator.blocks[index] || {};
     if (!isEqual(endPosition, animationPosition)) {
@@ -71,7 +71,7 @@ const WrappedAccordion = ({
     }
   };
 
-  const handleDelete = index => {
+  const handleDelete = (index) => {
     if (narratorBlockIndex !== -1 && index === narrator.blocks.length - 1)
       changeNarratorBlockIndex(index - 1);
     deleteBlock(index, narratorBlockIndex);
@@ -170,9 +170,6 @@ const mapStateToProps = createStructuredSelector({
   groupIds: makeSelectQuestionGroupsIds(),
 });
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(WrappedAccordion);

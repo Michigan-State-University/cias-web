@@ -33,7 +33,7 @@ const CreateTeam = ({
     setTeamName(value);
   };
 
-  const onSelectUser = user => {
+  const onSelectUser = (user) => {
     setSelectedUser(user?.id);
   };
 
@@ -113,12 +113,6 @@ const mapDispatchToProps = {
   createTeam: createTeamRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(CreateTeam);
+export default compose(withConnect, injectIntl)(CreateTeam);

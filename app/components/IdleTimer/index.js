@@ -34,19 +34,19 @@ const IdleTimer = ({ logOut, user }) => {
     toast.dismiss(LOG_OUT);
   };
 
-  const requestInterceptor = config => {
+  const requestInterceptor = (config) => {
     reset();
 
     return config;
   };
 
-  const responseInterceptor = response => {
+  const responseInterceptor = (response) => {
     reset();
 
     return response;
   };
 
-  const interceptorError = error => {
+  const interceptorError = (error) => {
     // Handle case when user is logged out earlier than error interceptor kicks in
     if (isUserLogged) reset();
 
@@ -64,10 +64,8 @@ const IdleTimer = ({ logOut, user }) => {
 
   useEffect(() => {
     if (isUserLogged) {
-      const {
-        requestInterceptorInstance,
-        responseInterceptorInstance,
-      } = addInterceptorsAndResetTimer();
+      const { requestInterceptorInstance, responseInterceptorInstance } =
+        addInterceptorsAndResetTimer();
 
       return () =>
         removeInterceptorsAndPauseTimer(
@@ -121,9 +119,6 @@ const mapDispatchToProps = {
   logOut: logOutAction,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(IdleTimer);

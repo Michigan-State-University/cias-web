@@ -16,7 +16,7 @@ export const generateLastXMonths = (monthsToGenerate = 6) => {
   const monthOffset = LAST_MONTH_INDEX - currentMonth;
 
   const lastXMonths = range(monthsToGenerate).map(
-    item => LAST_MONTH_INDEX - ((item + monthOffset) % NUMBER_OF_MONTHS),
+    (item) => LAST_MONTH_INDEX - ((item + monthOffset) % NUMBER_OF_MONTHS),
   );
 
   return lastXMonths.reverse();
@@ -27,7 +27,7 @@ const getBarValue = (chartType, index) =>
     ? PERCENTAGE_VALUES[index]
     : NUMERIC_VALUES[index];
 
-export const generateBarChartPreviewData = chartType => {
+export const generateBarChartPreviewData = (chartType) => {
   const lastSixMonths = generateLastXMonths(6);
 
   const jsMonthFormatter = jsMonthToStringFormatter();

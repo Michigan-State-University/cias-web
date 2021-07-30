@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the AnswerSessionPage state domain
  */
 
-const selectAnswerSessionPageDomain = state =>
+const selectAnswerSessionPageDomain = (state) =>
   state.AnswerSessionPage || initialState;
 
 /**
@@ -17,45 +17,39 @@ const selectAnswerSessionPageDomain = state =>
  */
 
 const makeSelectAnswerSessionPage = () =>
-  createSelector(
-    selectAnswerSessionPageDomain,
-    substate => substate,
-  );
+  createSelector(selectAnswerSessionPageDomain, (substate) => substate);
 
 const makeSelectAnswers = () =>
-  createSelector(
-    selectAnswerSessionPageDomain,
-    substate => substate.answers,
-  );
+  createSelector(selectAnswerSessionPageDomain, (substate) => substate.answers);
 
 const makeSelectPreviewMode = () =>
   createSelector(
     selectAnswerSessionPageDomain,
-    substate => substate.previewMode,
+    (substate) => substate.previewMode,
   );
 
 const makeSelectUserSession = () =>
   createSelector(
     selectAnswerSessionPageDomain,
-    substate => substate.userSession,
+    (substate) => substate.userSession,
   );
 
 const makeSelectCurrentQuestion = () =>
   createSelector(
     selectAnswerSessionPageDomain,
-    substate => substate.currentQuestion,
+    (substate) => substate.currentQuestion,
   );
 
 const makeSelectCurrentBlockIndex = () =>
   createSelector(
     selectAnswerSessionPageDomain,
-    substate => substate.currentBlockIndex,
+    (substate) => substate.currentBlockIndex,
   );
 
 const makeSelectShowTextTranscript = () =>
   createSelector(
     selectAnswerSessionPageDomain,
-    substate => substate.showTextTranscript,
+    (substate) => substate.showTextTranscript,
   );
 
 export default makeSelectAnswerSessionPage;

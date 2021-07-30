@@ -29,7 +29,7 @@ const Target = ({
   onAddTarget,
   isOnlyTarget,
 }) => {
-  const onTargetClick = e => {
+  const onTargetClick = (e) => {
     if (onAddTarget) {
       e.stopPropagation();
       onAddTarget();
@@ -63,7 +63,7 @@ const Target = ({
             placeholder=".."
             value={target ? target.probability : ''}
             validator={numericValidator}
-            onBlur={probability => onUpdateTarget({ probability })}
+            onBlur={(probability) => onUpdateTarget({ probability })}
           />
         </Box>
         <Text whiteSpace="pre" mr={6}>
@@ -73,7 +73,7 @@ const Target = ({
           disabled={disabled}
           width={130}
           positionFrom="right"
-          setOpen={value => {
+          setOpen={(value) => {
             if (!onAddTarget) {
               handleDropdownClick(value, uniqueTargetIndex);
             }
@@ -96,7 +96,7 @@ const Target = ({
             sessionBranching={sessionBranching}
             isVisible={isChooserOpened}
             target={target}
-            onClick={value => {
+            onClick={(value) => {
               setTargetChooserOpen(-1);
               onUpdateTarget(value);
             }}

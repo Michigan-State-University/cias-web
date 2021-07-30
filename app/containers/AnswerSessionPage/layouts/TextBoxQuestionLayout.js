@@ -35,7 +35,7 @@ const TextBoxQuestionLayout = ({
             width="100%"
             onChange={onChange}
             aria-label={formatMessage(messages.textPlaceholder)}
-            {...isTextLimited && { maxLength: `${textLimit}` }}
+            {...(isTextLimited && { maxLength: `${textLimit}` })}
           />
         </Row>
       </Box>

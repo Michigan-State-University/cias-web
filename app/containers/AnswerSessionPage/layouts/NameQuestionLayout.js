@@ -27,8 +27,8 @@ const NameQuestionLayout = ({
     textAlign: 'center',
   };
 
-  const handleNameChange = value => onChange({ name: value, phoneticName });
-  const handlePhoneticNameChange = value =>
+  const handleNameChange = (value) => onChange({ name: value, phoneticName });
+  const handlePhoneticNameChange = (value) =>
     onChange({ name, phoneticName: value });
 
   const mdColSize = isDesktop ? 6 : 12;

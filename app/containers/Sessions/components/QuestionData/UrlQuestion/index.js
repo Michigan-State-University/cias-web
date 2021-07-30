@@ -89,14 +89,11 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateUrl: url => updateQuestionData({ type: UPDATE_URL, data: { url } }),
+  updateUrl: (url) => updateQuestionData({ type: UPDATE_URL, data: { url } }),
 };
 
 export const QuestionUrlWithIntl = injectIntl(UrlQuestion);
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(QuestionUrlWithIntl);

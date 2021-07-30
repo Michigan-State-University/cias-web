@@ -10,7 +10,7 @@ import SearchInput from '../SearchInput';
 import StyledInput from '../StyledInput';
 import TextArea from '../TextArea';
 
-const DateComponent = props => {
+const DateComponent = (props) => {
   const ref = useRef(null);
   return <DateInput ref={ref} {...props} />;
 };

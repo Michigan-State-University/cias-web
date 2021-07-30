@@ -12,7 +12,7 @@ export const useCallbackRef = (callback, deps = []) => {
   const [callbackResult, setCallbackResult] = useState(null);
 
   const callbackRef = useCallback(
-    node => {
+    (node) => {
       ref.current = node;
       setCallbackResult(callback(node));
     },

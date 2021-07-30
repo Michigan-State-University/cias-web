@@ -45,7 +45,7 @@ const ChooserComponent = ({
     }
   };
 
-  const isDisabled = count =>
+  const isDisabled = (count) =>
     disableCopy && !isNullOrUndefined(count) && count === 0;
 
   return (

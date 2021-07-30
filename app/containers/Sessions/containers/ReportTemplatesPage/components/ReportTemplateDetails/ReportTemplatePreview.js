@@ -45,7 +45,7 @@ const ReportTemplatePreview = ({
     addSection(new TemplateSectionBuilder().build(), selectedReportId);
   };
 
-  const onSummaryChange = summary => {
+  const onSummaryChange = (summary) => {
     if (summary !== singleReportTemplate.summary)
       updateReportTemplate(sessionId, { ...singleReportTemplate, summary });
   };
@@ -85,7 +85,7 @@ const ReportTemplatePreview = ({
                   />
                 </Col>
               </Row>
-              {singleReportTemplate.sections.map(section => (
+              {singleReportTemplate.sections.map((section) => (
                 <Row
                   key={`template-section-${section.id}`}
                   style={{ padding: 0 }}
@@ -119,10 +119,7 @@ const mapDispatchToProps = {
   updateReportTemplate: updateReportTemplateRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 ReportTemplatePreview.propTypes = {
   intl: PropTypes.shape(IntlShape),
@@ -130,7 +127,4 @@ ReportTemplatePreview.propTypes = {
   updateReportTemplate: PropTypes.func,
 };
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(ReportTemplatePreview);
+export default compose(withConnect, injectIntl)(ReportTemplatePreview);

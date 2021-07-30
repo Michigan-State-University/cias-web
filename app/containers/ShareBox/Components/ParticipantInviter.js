@@ -26,15 +26,15 @@ const ParticipantInviter = ({
 }) => {
   const [emails, setEmails] = useState([]);
 
-  const handleUploadCsv = data => {
+  const handleUploadCsv = (data) => {
     const parsedData = uniq(
       filter(
-        map(data, columns => {
+        map(data, (columns) => {
           const email = head(columns.data);
           if (email && csvEmailValidator(email)) return email;
           return null;
         }),
-        val => val !== null,
+        (val) => val !== null,
       ),
     );
     setEmails(parsedData);

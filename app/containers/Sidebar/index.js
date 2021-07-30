@@ -70,9 +70,4 @@ const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
 });
 
-export default memo(
-  compose(
-    connect(mapStateToProps),
-    injectIntl,
-  )(Sidebar),
-);
+export default memo(compose(connect(mapStateToProps), injectIntl)(Sidebar));

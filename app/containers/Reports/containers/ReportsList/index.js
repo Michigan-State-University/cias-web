@@ -59,7 +59,7 @@ const ReportsList = ({
 }) => {
   const sortOptions = useMemo(
     () =>
-      sortByOptions.map(value => ({
+      sortByOptions.map((value) => ({
         id: value,
         label: formatMessage(messages[value]),
       })),
@@ -68,12 +68,12 @@ const ReportsList = ({
 
   const [displayLoader, setDisplayLoader] = useState(false);
 
-  const innerSetPage = pageNumber => {
+  const innerSetPage = (pageNumber) => {
     setDisplayLoader(true);
     fetchReports(pageNumber, null, currentSortOption, match?.params?.sessionId);
   };
 
-  const handleChangeFilter = filter => {
+  const handleChangeFilter = (filter) => {
     setDisplayLoader(true);
     fetchReports(
       currentPage,
@@ -83,7 +83,7 @@ const ReportsList = ({
     );
   };
 
-  const handleChangeSort = sort => {
+  const handleChangeSort = (sort) => {
     setDisplayLoader(true);
     fetchReports(currentPage, null, sort, match?.params?.sessionId);
   };
@@ -180,10 +180,7 @@ const mapDispatchToProps = {
   fetchReports: fetchReportsRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   injectReducer({

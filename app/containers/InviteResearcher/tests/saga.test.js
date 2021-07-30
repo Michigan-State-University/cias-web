@@ -33,7 +33,7 @@ import inviteResearcherSaga, {
 } from '../sagas/inviteResearcher';
 import getInvitationsSaga, { getInvitations } from '../sagas/getInvitations';
 
-const stepper = fn => mock => fn.next(mock).value;
+const stepper = (fn) => (mock) => fn.next(mock).value;
 
 describe('inviteResearcher saga', () => {
   it('Check inviteResearcher generator success connection', () => {

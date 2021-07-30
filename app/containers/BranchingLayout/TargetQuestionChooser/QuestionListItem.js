@@ -18,7 +18,7 @@ const QuestionListItem = ({
   selectedQuestion,
   question: { id, subtitle, type, position, question_group_id: groupId },
 }) => {
-  const canSelectQuestion = pos =>
+  const canSelectQuestion = (pos) =>
     pos > selectedQuestion.position ||
     selectedQuestion.question_group_id !== groupId;
 

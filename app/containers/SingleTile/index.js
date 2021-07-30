@@ -129,12 +129,12 @@ const SingleTile = ({
     },
   ];
 
-  const preventDefault = e => {
+  const preventDefault = (e) => {
     e.stopPropagation();
     e.preventDefault();
   };
 
-  const copyInterventionToResearchers = users =>
+  const copyInterventionToResearchers = (users) =>
     copyIntervention({ interventionId: id, users });
 
   return (
@@ -226,8 +226,5 @@ const mapDispatchToProps = {
 const SingleTileWithIntl = injectIntl(SingleTile);
 
 export default memo(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(SingleTileWithIntl),
+  connect(mapStateToProps, mapDispatchToProps)(SingleTileWithIntl),
 );

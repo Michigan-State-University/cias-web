@@ -23,7 +23,7 @@ const AvatarForm = ({
   const openConfirmation = () => setConfirmationOpen(true);
   const closeConfirmation = () => setConfirmationOpen(false);
 
-  const handleUpload = file => {
+  const handleUpload = (file) => {
     addAvatar({
       image: file,
       imageUrl: window.URL.createObjectURL(file),

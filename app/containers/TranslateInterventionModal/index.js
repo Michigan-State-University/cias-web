@@ -31,7 +31,7 @@ const TranslateInterventionModal = ({ name, googleLanguageId }) => {
 
   const { data, isFetching, error } = useGet(
     '/v1/google/languages',
-    fetchedData => jsonApiToArray(fetchedData, 'supportedLanguage'),
+    (fetchedData) => jsonApiToArray(fetchedData, 'supportedLanguage'),
   );
 
   const languageOptions = useMemo(
@@ -41,7 +41,7 @@ const TranslateInterventionModal = ({ name, googleLanguageId }) => {
 
   useEffect(() => {
     const matchedSourceLanguage = languageOptions.find(
-      language => language.googleLanguageId === `${googleLanguageId}`,
+      (language) => language.googleLanguageId === `${googleLanguageId}`,
     );
     setSourceLanguage(matchedSourceLanguage);
   }, [googleLanguageId, languageOptions]);

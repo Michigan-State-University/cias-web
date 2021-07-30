@@ -11,7 +11,7 @@ const EllipsisText = ({ text, dataFor, lines, ...props }) => {
 
   const [allowTooltip, setAllowTooltip] = useState(false);
 
-  const onTruncate = isTruncated => {
+  const onTruncate = (isTruncated) => {
     setAllowTooltip(isTruncated);
   };
 

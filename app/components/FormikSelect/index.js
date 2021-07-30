@@ -28,7 +28,7 @@ function FormikSelect({
   const { error, touched } = meta;
   const hasError = touched && error;
 
-  const onChange = async e => {
+  const onChange = async (e) => {
     await validateForm();
     setValue(e);
     await submitForm();

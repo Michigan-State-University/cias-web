@@ -18,7 +18,7 @@ import { chartReducer } from './chartReducer';
 
 /* eslint-disable default-case, no-param-reassign */
 const dashboardSectionReducer = (state = null, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -35,7 +35,7 @@ const dashboardSectionReducer = (state = null, action) =>
 
       case EDIT_CHART_REQUEST:
       case EDIT_CHART_SUCCESS: {
-        updateItemById(draft.charts, payload.chart.id, item =>
+        updateItemById(draft.charts, payload.chart.id, (item) =>
           chartReducer(item, action),
         );
 
@@ -55,7 +55,7 @@ const dashboardSectionReducer = (state = null, action) =>
       }
 
       case SET_CHARTS_DATA: {
-        updateItemById(draft.charts, payload.chartId, item =>
+        updateItemById(draft.charts, payload.chartId, (item) =>
           chartReducer(item, action),
         );
         break;
@@ -64,7 +64,7 @@ const dashboardSectionReducer = (state = null, action) =>
       case SET_CHARTS_FILTERS: {
         if (draft.charts) {
           for (let i = 0; i < draft.charts.length; i++)
-            updateItemById(draft.charts, draft.charts[i].id, item =>
+            updateItemById(draft.charts, draft.charts[i].id, (item) =>
               chartReducer(item, action),
             );
         }

@@ -24,7 +24,7 @@ export const initialState = {
 };
 
 export const globalStateReducer = (state = initialState, { payload, type }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case DOWNLOAD_FILE_REQUEST:
       case DOWNLOAD_FILE_SUCCESS:

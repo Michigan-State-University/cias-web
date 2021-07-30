@@ -67,7 +67,7 @@ const SelectResearchers = ({
     onClose();
   };
 
-  const getDisplayName = fullName => {
+  const getDisplayName = (fullName) => {
     const trimmedFullName = trim(fullName);
     return ternary(
       trimmedFullName,
@@ -98,7 +98,7 @@ const SelectResearchers = ({
           width="100%"
           placeholder={formatMessage(messages.find)}
           value={filterValue}
-          onChange={e => setFilterValue(e.target.value)}
+          onChange={(e) => setFilterValue(e.target.value)}
         />
         <StyledButton
           disabled={selected.length === 0}
@@ -133,12 +133,12 @@ const SelectResearchers = ({
         </THead>
         <TBody>
           {finalUsers &&
-            finalUsers.map(user => {
+            finalUsers.map((user) => {
               const { fullName, email, id } = user;
               const isChecked = selected.includes(id);
               const handleClick = () => {
                 if (!isChecked) setSelected([...selected, id]);
-                else setSelected(remove(selected, elem => elem !== id));
+                else setSelected(remove(selected, (elem) => elem !== id));
               };
               return (
                 <StripedTR key={`row-th-${id}`}>
@@ -176,10 +176,7 @@ const mapDispatchToProps = {
   fetchUsersRequest: fetchResearchersRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withReducer = injectReducer({
   key: 'userList',

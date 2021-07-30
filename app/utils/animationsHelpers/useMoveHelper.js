@@ -39,7 +39,7 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
     return { x: scaleX, y: scaleY };
   };
 
-  const getInitialAnimationPosition = firstBlock => {
+  const getInitialAnimationPosition = (firstBlock) => {
     if (!firstBlock) return elements.characterInitialPosition;
     return getScaledPosition(getScaleFactor(), firstBlock.endPosition);
   };
@@ -57,7 +57,7 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
     const moveAnimations = [];
     if (blocks.length) {
       await Promise.all(
-        moveAnimationsNames.map(async animation => {
+        moveAnimationsNames.map(async (animation) => {
           const data = await import(`assets/animations/${animation}.json`);
           moveAnimations.push({
             name: animation,
@@ -73,10 +73,10 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
     loadedMoveAnimations.current = await loadMoveAnimations();
   };
 
-  const setPosition = position =>
+  const setPosition = (position) =>
     setAnimationPos(getScaledPosition(scaleFactor, position));
 
-  const findMoveAnimation = position => anim => {
+  const findMoveAnimation = (position) => (anim) => {
     const direction =
       getScaledPosition(scaleFactor, position).x > animationPos.x
         ? 'Left'
@@ -84,7 +84,7 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
     return anim.name === `move${direction}`;
   };
 
-  const moveAnimation = async nextBlock => {
+  const moveAnimation = async (nextBlock) => {
     if (!nextBlock) return;
     const { endPosition } = nextBlock;
     if (isEqual(getScaledPosition(scaleFactor, endPosition), animationPos))
@@ -96,7 +96,7 @@ const useMoveHelper = (animationContainer, blocks, dispatchUpdate) => {
       currentData: moveAnim,
     });
     setPosition(endPosition);
-    await new Promise(r => setTimeout(r, animationDuration + 100));
+    await new Promise((r) => setTimeout(r, animationDuration + 100));
   };
 
   return { animationPos, moveAnimation, fetchMoveAnimations };

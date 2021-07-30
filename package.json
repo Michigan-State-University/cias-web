@@ -51,7 +51,7 @@
     "IE 10"
   ],
   "lint-staged": {
-    "*.js": [
+    "*.js,*.jsx,*.ts,*.tsx": [
       "npm run lint:eslint:fix",
       "git add --force"
     ],
@@ -225,7 +225,7 @@
     "patch-package": "^6.2.2",
     "plop": "2.3.0",
     "pre-commit": "1.2.2",
-    "prettier": "1.17.0",
+    "prettier": "2.3.2",
     "react-app-polyfill": "^2.0.0",
     "react-test-renderer": "^17.0.2",
     "redux-saga-test-plan": "^4.0.1",

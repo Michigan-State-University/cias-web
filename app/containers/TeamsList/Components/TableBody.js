@@ -9,7 +9,7 @@ import TableRow from './TableRow';
 
 const TableBody = ({ teams, history, openModal, formatMessage }) => (
   <TBody>
-    {teams.map(team => (
+    {teams.map((team) => (
       <TableRow
         key={`row-th-${team.id}`}
         team={team}

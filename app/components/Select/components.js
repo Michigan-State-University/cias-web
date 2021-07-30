@@ -7,7 +7,7 @@ import ToggleArrow from 'components/ToggleArrow';
 
 import { OptionContainer } from './styled';
 
-const DropdownIndicator = props => {
+const DropdownIndicator = (props) => {
   const isOpen = get(props, 'selectProps.menuIsOpen', false);
   return (
     <components.DropdownIndicator {...props}>

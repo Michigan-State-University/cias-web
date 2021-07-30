@@ -44,7 +44,7 @@ const SpeechInput = ({
     setInputValue(newValue);
   };
 
-  const handleInput = e => setInputValue(e.target.value);
+  const handleInput = (e) => setInputValue(e.target.value);
 
   return (
     <Column>

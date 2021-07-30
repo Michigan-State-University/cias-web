@@ -11,7 +11,7 @@ export class GeneratedReportBuilder {
    * @param  {string} id
    * @returns  {GeneratedReportBuilder}
    */
-  withId = id => {
+  withId = (id) => {
     this.id = id;
 
     return this;
@@ -21,7 +21,7 @@ export class GeneratedReportBuilder {
    * @param  {object} json
    * @returns  {GeneratedReportBuilder}
    */
-  fromJson = json => {
+  fromJson = (json) => {
     const generatedReport = objectToCamelCase(defaultMapper(json));
 
     this.id = generatedReport.id;

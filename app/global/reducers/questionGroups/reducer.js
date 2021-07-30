@@ -38,7 +38,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const questionGroupsReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     if (SAVING_ACTIONS.includes(type)) draft.questionsGroupsSaving = true;
     if (SAVED_ACTIONS.includes(type)) draft.questionsGroupsSaving = false;
     switch (type) {
@@ -89,10 +89,10 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         const { questions } = payload;
 
         const afterReorderRemainingGroups = questions.map(
-          question => question.question_group_id,
+          (question) => question.question_group_id,
         );
 
-        const filteredGroups = state.groups.filter(group =>
+        const filteredGroups = state.groups.filter((group) =>
           afterReorderRemainingGroups.includes(group.id),
         );
 
@@ -104,7 +104,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         const { groupId, destinationIndex, sourceIndex } = payload;
 
         const sourceGroup = {
-          ...state.groups.find(group => group.id === groupId),
+          ...state.groups.find((group) => group.id === groupId),
         };
 
         removeAt(state.groups, sourceIndex);

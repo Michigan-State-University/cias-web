@@ -9,7 +9,7 @@ function CustomClipboard() {
 }
 
 // use function to access proper `this`
-CustomClipboard.prototype.onPaste = function(e) {
+CustomClipboard.prototype.onPaste = function (e) {
   const self = this;
   const { options } = this;
 
@@ -25,7 +25,7 @@ CustomClipboard.prototype.onPaste = function(e) {
     delta = delta.concat(self.convert()).delete(range.length);
 
     if (options.newLines === false) {
-      delta.ops.map(op => {
+      delta.ops.map((op) => {
         if (!(typeof op.insert === 'undefined')) {
           op.insert = op.insert.replace(/(\r\n|\n|\r)/gm, ' ');
         }

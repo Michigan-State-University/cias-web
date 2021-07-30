@@ -23,13 +23,14 @@ const PieChartFormulaPattern = ({ pattern, onEdit, onDelete }) => {
 
   const { match, label, color } = pattern;
 
-  const handleEdit = field => value => onEdit({ ...pattern, [field]: value });
+  const handleEdit = (field) => (value) =>
+    onEdit({ ...pattern, [field]: value });
 
   const onEditMatch = handleEdit('match');
 
   const onEditLabel = handleEdit('label');
 
-  const onEditColor = newColor => handleEdit('color')(newColor.hex);
+  const onEditColor = (newColor) => handleEdit('color')(newColor.hex);
 
   return (
     <FullWidthContainer>

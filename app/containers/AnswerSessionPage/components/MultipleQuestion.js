@@ -14,7 +14,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
 
   useEffect(() => {
     setSelectedAnswersIndex(
-      answerBody.length ? answerBody.map(answer => answer.index) : [],
+      answerBody.length ? answerBody.map((answer) => answer.index) : [],
     );
   }, [id]);
 
@@ -26,10 +26,10 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
     };
     if (selectedAnswersIndex.includes(index)) {
       setSelectedAnswersIndex(
-        selectedAnswersIndex.filter(item => item !== index),
+        selectedAnswersIndex.filter((item) => item !== index),
       );
       selectAnswer(
-        answerBody.filter(item => item.value !== selectedAnswer.value),
+        answerBody.filter((item) => item.value !== selectedAnswer.value),
       );
     } else {
       setSelectedAnswersIndex([...selectedAnswersIndex, index]);

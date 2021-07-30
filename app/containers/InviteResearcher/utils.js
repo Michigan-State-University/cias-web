@@ -1,7 +1,7 @@
 import { Roles } from 'models/User/UserRoles';
 import { defaultTimeZone } from 'utils/timezones';
 
-export const mapInvitedResearcher = user => ({
+export const mapInvitedResearcher = (user) => ({
   id: user.id,
   firstName: '',
   lastName: '',

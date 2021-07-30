@@ -113,7 +113,7 @@ const UserDetailsComponent = ({
   };
 
   const handleEdit = useCallback(
-    (field, required) => value => {
+    (field, required) => (value) => {
       if (value === '' && required === true) {
         toast.warning(
           formatMessage(messages.fieldCannotBeEmpty, {
@@ -174,10 +174,7 @@ const mapDispatchToProps = {
   setShouldRefetch: setShouldRefetchAction,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const reduxInjectors = [
   injectReducer({ key: 'singleUser', reducer: UserReducer }),
@@ -190,8 +187,5 @@ const reduxInjectors = [
 ];
 
 export default memo(
-  compose(
-    withConnect,
-    ...reduxInjectors,
-  )(UserDetailsComponent),
+  compose(withConnect, ...reduxInjectors)(UserDetailsComponent),
 );

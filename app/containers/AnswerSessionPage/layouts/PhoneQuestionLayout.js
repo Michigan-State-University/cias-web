@@ -40,7 +40,7 @@ const PhoneQuestionLayout = ({
     if (phone && phone.confirmed) onChange(phone);
   }, [phone]);
 
-  const handleChangePhoneNumber = phoneNumber => {
+  const handleChangePhoneNumber = (phoneNumber) => {
     editPhoneNumber(phoneNumber, isPreview);
     if (phoneNumber && phoneNumber.confirmed) onChange(phoneNumber);
   };
@@ -82,9 +82,6 @@ const mapDispatchToProps = {
   resetPhoneNumber: resetPhoneNumberPreview,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(PhoneQuestionLayout);

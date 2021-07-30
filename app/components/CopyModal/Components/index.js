@@ -142,7 +142,7 @@ const CopyChooser = ({
       });
   };
 
-  const handleSelectAction = selectedId => {
+  const handleSelectAction = (selectedId) => {
     setSelectedItem(selectedId);
   };
 
@@ -151,7 +151,7 @@ const CopyChooser = ({
     setSelectedItem(null);
     setCurrentView(VIEWS.INTERVENTION);
   };
-  const changeToSessionView = targetIntervention => {
+  const changeToSessionView = (targetIntervention) => {
     setSelectedItem(null);
     if (
       targetIntervention?.id &&
@@ -162,7 +162,7 @@ const CopyChooser = ({
     }
     setCurrentView(VIEWS.SESSION);
   };
-  const changeToQuestionGroupsView = targetSession => {
+  const changeToQuestionGroupsView = (targetSession) => {
     setSelectedItem(null);
     if (targetSession?.id) {
       changeView();
@@ -285,9 +285,6 @@ const mapDispatchToProps = {
   fetchInterventions: fetchInterventionsRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(injectIntl(CopyChooser));

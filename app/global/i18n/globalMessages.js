@@ -247,8 +247,6 @@ export default defineMessages({
   },
   questionRequired: {
     id: `${scope}.questionRequired`,
-    defaultMessage: `Required fields are marked with an asterisk<span style='color:${
-      themeColors.warning
-    };'>*</span>`,
+    defaultMessage: `Required fields are marked with an asterisk<span style='color:${themeColors.warning};'>*</span>`,
   },
 });

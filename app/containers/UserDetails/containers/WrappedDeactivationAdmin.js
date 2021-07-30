@@ -16,7 +16,7 @@ import Deactivation from 'components/AccountSettings/Deactivation';
 const WrappedDeactivationAdmin = ({ userState: { user }, changeStatus }) => {
   useInjectSaga({ key: 'changeActiveStatus', saga: changeActivateStatusSaga });
 
-  const changeStatusCall = newStatus => changeStatus(user.id, newStatus);
+  const changeStatusCall = (newStatus) => changeStatus(user.id, newStatus);
 
   return <Deactivation user={user} changeStatus={changeStatusCall} />;
 };
@@ -33,9 +33,6 @@ const mapDispatchToProps = {
   changeStatus: changeActivateStatusRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(WrappedDeactivationAdmin);

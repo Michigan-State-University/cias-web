@@ -27,7 +27,7 @@ const getAutoComplete = ({ autoComplete, placeholder }) => {
   }
 };
 
-const Input = styled.input.attrs(props => ({
+const Input = styled.input.attrs((props) => ({
   type: props.keyboard,
   ...getAutoComplete(props),
 }))`

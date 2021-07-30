@@ -15,15 +15,16 @@ import ActionIcon from 'components/ActionIcon';
 import { FilterText, StatusLabel } from './styled';
 
 const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
-  const labels = useMemo(() => Object.keys(globalMessages.statuses), [
-    globalMessages.statuses,
-  ]);
+  const labels = useMemo(
+    () => Object.keys(globalMessages.statuses),
+    [globalMessages.statuses],
+  );
 
   const showIcon = active && !isEqual(statusTypes, active.sort());
 
   return (
     <>
-      {labels.map(status => (
+      {labels.map((status) => (
         <Col
           xs="content"
           key={status}

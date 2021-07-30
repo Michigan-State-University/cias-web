@@ -94,7 +94,7 @@ const saved = [
 
 /* eslint-disable default-case, no-param-reassign */
 const sessionReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     if (saving.includes(action.type)) draft.sessionSaving = true;
     if (saved.includes(action.type)) draft.sessionSaving = false;
     switch (action.type) {

@@ -46,7 +46,7 @@ const Pattern = ({
           <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
           <InequalityChooser
             disabled={disabled}
-            onSuccessfulChange={value =>
+            onSuccessfulChange={(value) =>
               updatePattern({ ...pattern, match: value })
             }
             inequalityValue={pattern.match}
@@ -71,7 +71,7 @@ const Pattern = ({
         pattern.target.map((target, targetIndex) => {
           const uniqueTargetIndex = index * 100 + targetIndex;
           const isChooserOpened = uniqueTargetIndex === targetChooserOpen;
-          const updateTarget = newValues =>
+          const updateTarget = (newValues) =>
             onUpdateTarget(questionId, index, targetIndex, {
               ...target,
               ...newValues,

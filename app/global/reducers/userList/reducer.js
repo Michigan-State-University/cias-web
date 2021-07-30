@@ -50,7 +50,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const userListReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case FETCH_USERS:
         if (isEmpty(state.users)) draft.usersLoading = true;
@@ -89,7 +89,7 @@ const userListReducer = (state = initialState, { type, payload }) =>
       case CHANGE_ACTIVATE_STATUS_REQUEST: {
         const { users } = state;
         const { id, active, showInactive } = payload;
-        const index = findIndex(users, user => user.id === id);
+        const index = findIndex(users, (user) => user.id === id);
 
         if (showInactive) draft.users[index].active = active;
         else draft.users.splice(index, 1);

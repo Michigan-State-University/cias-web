@@ -92,7 +92,7 @@ function TeamsList({
             <Col xs={12} xl={6} xxl={7} style={{ marginBottom: 10 }}>
               <SearchInput
                 value={filterText}
-                onChange={e => setFilterText(e.target.value)}
+                onChange={(e) => setFilterText(e.target.value)}
               />
             </Col>
           </Row>
@@ -162,13 +162,6 @@ const mapDispatchToProps = {
   deleteTeam: deleteTeamRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  memo,
-  injectIntl,
-)(TeamsList);
+export default compose(withConnect, memo, injectIntl)(TeamsList);

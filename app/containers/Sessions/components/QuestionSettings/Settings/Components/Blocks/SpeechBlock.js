@@ -72,7 +72,7 @@ const SpeechBlock = ({
   const selectOptions = useMemo(() => {
     const animations = keys(speechAnimations);
 
-    return animations.map(animation => ({
+    return animations.map((animation) => ({
       value: animation,
       label: formatMessage(animationMessages[animation]),
     }));
@@ -80,16 +80,16 @@ const SpeechBlock = ({
 
   const feedbackOptions = useMemo(() => {
     const options = values(feedbackActions).filter(
-      action => action !== feedbackActions.showSpectrum,
+      (action) => action !== feedbackActions.showSpectrum,
     );
 
-    return options.map(option => ({
+    return options.map((option) => ({
       value: option,
       label: formatMessage(messages[option]),
     }));
   }, [feedbackActions]);
 
-  const handleTextUpdate = value =>
+  const handleTextUpdate = (value) =>
     updateText(blockIndex, splitAndKeep(value, [',', '.', '?', '!']), id);
 
   useEffect(() => {
@@ -103,18 +103,18 @@ const SpeechBlock = ({
     setIsPlaying(!isPlaying);
   };
 
-  const handleBlur = value => {
+  const handleBlur = (value) => {
     setIsSpeechUpdating(true);
     handleTextUpdate(value);
     setHasFocus(false);
   };
 
   const selectedOption = selectOptions.find(
-    option => option.value === block.animation,
+    (option) => option.value === block.animation,
   );
 
   const selectedFeedbackOption = feedbackOptions.find(
-    option => option.value === block.action,
+    (option) => option.value === block.action,
   );
 
   const hasSpecialPositioning = block.action !== feedbackActions.noAction;
@@ -233,9 +233,6 @@ const mapDispatchToProps = {
     ),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(SpeechBlock);

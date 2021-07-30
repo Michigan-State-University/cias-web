@@ -38,7 +38,7 @@ const VisualAnalogueScaleQuestion = ({
     setAnswerValue(value);
   }, [id]);
 
-  const onChange = num => setAnswerValue(num);
+  const onChange = (num) => setAnswerValue(num);
 
   const onAfterChange = () => {
     selectAnswer([

@@ -87,7 +87,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const reportTemplatesReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case FETCH_REPORT_TEMPLATES_REQUEST:
         if (isEmpty(state.reportTemplates))
@@ -322,7 +322,7 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
 
         draft.singleReportTemplate = {
           ...state.singleReportTemplate,
-          sections: state.singleReportTemplate.sections.map(section => {
+          sections: state.singleReportTemplate.sections.map((section) => {
             if (section.id === sectionId)
               return cloneDeep(
                 sectionReducer(section, {
@@ -337,7 +337,7 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
 
         draft.cache.singleReportTemplate = {
           ...state.cache.singleReportTemplate,
-          sections: state.cache.singleReportTemplate.sections.map(section => {
+          sections: state.cache.singleReportTemplate.sections.map((section) => {
             if (section.id === sectionId)
               return cloneDeep(
                 sectionReducer(section, {
@@ -365,7 +365,7 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
 
         draft.singleReportTemplate = {
           ...state.singleReportTemplate,
-          sections: state.singleReportTemplate.sections.map(section => {
+          sections: state.singleReportTemplate.sections.map((section) => {
             if (section.id === sectionId)
               return cloneDeep(
                 sectionReducer(section, {
@@ -398,9 +398,10 @@ const reportTemplatesReducer = (state = initialState, { type, payload }) =>
         draft.loaders.updateReportTemplateLoading = false;
         draft.errors.updateReportTemplateError = null;
 
-        const sectionCacheIndex = state.cache.singleReportTemplate.sections.findIndex(
-          ({ id }) => id === payload.sectionId,
-        );
+        const sectionCacheIndex =
+          state.cache.singleReportTemplate.sections.findIndex(
+            ({ id }) => id === payload.sectionId,
+          );
 
         if (sectionCacheIndex >= 0)
           draft.cache.singleReportTemplate.sections.splice(

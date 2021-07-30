@@ -94,13 +94,6 @@ const mapStateToProps = createStructuredSelector({
   authUser: makeSelectUser(),
 });
 
-const withConnect = connect(
-  mapStateToProps,
-  null,
-);
+const withConnect = connect(mapStateToProps, null);
 
-export default compose(
-  withConnect,
-  memo,
-  injectIntl,
-)(AccountSettings);
+export default compose(withConnect, memo, injectIntl)(AccountSettings);

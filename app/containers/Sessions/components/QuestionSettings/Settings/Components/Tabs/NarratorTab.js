@@ -64,13 +64,13 @@ const NarratorTab = ({
     return <></>;
   }
 
-  const onCreateBlock = type => {
+  const onCreateBlock = (type) => {
     onCreate(type, id, groupIds);
     const blocks = narrator?.blocks?.length ?? 0;
     changeNarratorBlockIndex(blocks);
   };
 
-  const toggleAction = index => value => {
+  const toggleAction = (index) => (value) => {
     if (value) onNarratorToggle(`${index}`, value);
     else setConfirmationOption(index);
   };
@@ -84,7 +84,7 @@ const NarratorTab = ({
   );
 
   const last = lastKey(narrator.settings);
-  const getBorderBottom = index => {
+  const getBorderBottom = (index) => {
     if (index === last) return null;
     return `${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`;
   };
@@ -112,7 +112,7 @@ const NarratorTab = ({
       <>
         <FormattedMessage {...messages.blockRemovalConfirmationDescription} />
         <UL>
-          {getRemovedBlockForSetting(confirmationOption).map(blockType => (
+          {getRemovedBlockForSetting(confirmationOption).map((blockType) => (
             <LI key={blockType}>
               <FormattedMessage {...globalMessages.blockTypes[blockType]} />
             </LI>
@@ -226,9 +226,6 @@ const mapDispatchToProps = {
   changeNarratorBlockIndex: changeCurrentNarratorBlock,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(NarratorTab);

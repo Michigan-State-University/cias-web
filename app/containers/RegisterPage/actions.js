@@ -14,20 +14,20 @@ import {
 } from './constants';
 import { actionBuilder } from '../../utils/actionBuilder';
 
-export const registerParticipantRequest = payload =>
+export const registerParticipantRequest = (payload) =>
   actionBuilder(REGISTER_PARTICIPANT_REQUEST, payload);
 
 export const registerParticipantSuccess = () =>
   actionBuilder(REGISTER_PARTICIPANT_SUCCESS, {});
 
-export const registerParticipantError = error =>
+export const registerParticipantError = (error) =>
   actionBuilder(REGISTER_PARTICIPANT_ERROR, { error });
 
-export const registerResearcherRequest = payload =>
+export const registerResearcherRequest = (payload) =>
   actionBuilder(REGISTER_RESEARCHER_REQUEST, payload);
 
 export const registerResearcherSuccess = () =>
   actionBuilder(REGISTER_RESEARCHER_SUCCESS, {});
 
-export const registerResearcherError = error =>
+export const registerResearcherError = (error) =>
   actionBuilder(REGISTER_RESEARCHER_ERROR, { error });

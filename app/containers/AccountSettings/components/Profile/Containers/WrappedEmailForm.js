@@ -58,9 +58,6 @@ const mapDispatchToProps = {
   changeErrorValue: changeErrorStatus,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(WrappedEmailForm);

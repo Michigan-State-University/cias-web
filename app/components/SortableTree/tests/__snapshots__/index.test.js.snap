@@ -25,7 +25,7 @@ exports[`<SortableTree /> Should render, not log errors in console and match the
   right: -15px;
   z-index: 1;
   background: initial;
-  background-image: url("IMAGE_MOCK");
+  background-image: url('IMAGE_MOCK');
   background-repeat: inherit;
   box-shadow: none;
   border-radius: unset;

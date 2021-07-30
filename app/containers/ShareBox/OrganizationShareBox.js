@@ -89,12 +89,10 @@ const OrganizationShareBox = ({
 
   const link = useMemo(() => {
     if (!selectedClinic) return null;
-    return `${process.env.WEB_URL}/interventions/${interventionId}/sessions/${
-      session.id
-    }/fill?cid=${selectedClinic.value}`;
+    return `${process.env.WEB_URL}/interventions/${interventionId}/sessions/${session.id}/fill?cid=${selectedClinic.value}`;
   }, [selectedClinic]);
 
-  const handleResend = id => resendInvite(id, session.id);
+  const handleResend = (id) => resendInvite(id, session.id);
 
   const sharingPossible = canShareWithParticipants(interventionStatus);
 
@@ -154,8 +152,8 @@ const OrganizationShareBox = ({
     </Row>
   );
 
-  const handleUpload = data => {
-    const parsedData = map(data, columns => {
+  const handleUpload = (data) => {
+    const parsedData = map(data, (columns) => {
       if (!columns || !columns.data) return null;
 
       const [email, healthClinicId] = columns.data;
@@ -167,7 +165,7 @@ const OrganizationShareBox = ({
         return { email, healthClinicId };
       return null;
     });
-    const filteredData = filter(parsedData, val => val !== null);
+    const filteredData = filter(parsedData, (val) => val !== null);
     const groupedData = groupBy(filteredData, 'healthClinicId');
     const outputData = map(groupedData, (groupObject, healthClinicId) => {
       const healthClinic = clinicSelectData.find(
@@ -196,7 +194,7 @@ const OrganizationShareBox = ({
       const healthClinic = clinicSelectData.find(
         ({ value }) => value === healthClinicId,
       );
-      forEach(invitedUsers, invitedUser =>
+      forEach(invitedUsers, (invitedUser) =>
         data.push({
           email: invitedUser.email,
           healthClinicId: healthClinic.value,
@@ -262,7 +260,7 @@ const OrganizationShareBox = ({
                   key={index}
                   selectClinics={clinicSelectData}
                   formatMessage={formatMessage}
-                  updateInvitation={invitationObj =>
+                  updateInvitation={(invitationObj) =>
                     editInvitationObj(invitationObj, index)
                   }
                 />
@@ -381,12 +379,6 @@ const mapDispatchToProps = {
   fetchOrganization: fetchOrganizationRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(OrganizationShareBox);
+export default compose(withConnect, injectIntl)(OrganizationShareBox);

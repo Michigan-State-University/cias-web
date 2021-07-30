@@ -36,7 +36,7 @@ import content from './dropdownContent';
 import PreviewNavbar from './components/PreviewNavbar';
 import DefaultNavbar from './components/DefaultNavbar';
 
-const renderNavbar = navbarProps => {
+const renderNavbar = (navbarProps) => {
   const { navbarId, ...restProps } = navbarProps || {};
   if (navbarId === NAVIGATION.SESSIONS)
     return <InterventionsNavbar {...restProps} />;
@@ -125,9 +125,4 @@ const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
 });
 
-export default memo(
-  compose(
-    connect(mapStateToProps),
-    injectIntl,
-  )(Navbar),
-);
+export default memo(compose(connect(mapStateToProps), injectIntl)(Navbar));

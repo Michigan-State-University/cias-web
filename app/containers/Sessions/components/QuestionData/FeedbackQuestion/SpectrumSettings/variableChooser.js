@@ -45,7 +45,9 @@ const SpectrumVariableChooser = ({
         <VariableChooser
           disabled={disabled}
           selectedQuestion={selectedQuestion}
-          onClick={value => onFormulaUpdate(`${spectrum.payload}${value}`, id)}
+          onClick={(value) =>
+            onFormulaUpdate(`${spectrum.payload}${value}`, id)
+          }
           sessionId={sessionId}
           interventionId={interventionId}
           isMultiSession
@@ -67,7 +69,7 @@ const SpectrumVariableChooser = ({
           width="100%"
           placeholder={formatMessage(messages.formulaPlaceholder)}
           value={spectrum.payload}
-          onBlur={value => onFormulaUpdate(value, id)}
+          onBlur={(value) => onFormulaUpdate(value, id)}
         />
       </Box>
       {spectrum.patterns.map((pattern, index) => (
@@ -79,7 +81,7 @@ const SpectrumVariableChooser = ({
           <Text whiteSpace="pre">{formatMessage(messages.if)}</Text>
           <InequalityChooser
             disabled={disabled}
-            onSuccessfulChange={value =>
+            onSuccessfulChange={(value) =>
               onUpdateCase(index, { ...pattern, match: value }, id)
             }
             inequalityValue={pattern.match}
@@ -95,7 +97,7 @@ const SpectrumVariableChooser = ({
               textAlign="center"
               placeholder="..."
               value={pattern.target}
-              onBlur={value =>
+              onBlur={(value) =>
                 onUpdateCase(index, { ...pattern, target: value }, id)
               }
             />

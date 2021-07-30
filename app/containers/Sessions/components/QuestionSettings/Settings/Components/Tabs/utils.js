@@ -1,6 +1,6 @@
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
-export const orderSettings = settings =>
+export const orderSettings = (settings) =>
   settings && {
     video: settings.video,
     image: settings.image,

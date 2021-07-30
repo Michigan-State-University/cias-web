@@ -23,35 +23,37 @@ import {
   CHANGE_ACTIVATE_STATUS_ERROR,
 } from './constants';
 
-export const fetchUserRequest = id => actionBuilder(FETCH_USER_REQUEST, { id });
-export const fetchUserSuccess = user => actionBuilder(FETCH_USER_SUCCESS, user);
-export const fetchUserFailure = error =>
+export const fetchUserRequest = (id) =>
+  actionBuilder(FETCH_USER_REQUEST, { id });
+export const fetchUserSuccess = (user) =>
+  actionBuilder(FETCH_USER_SUCCESS, user);
+export const fetchUserFailure = (error) =>
   actionBuilder(FETCH_USER_FAILURE, error);
 
-export const editOtherUserRequest = userData =>
+export const editOtherUserRequest = (userData) =>
   actionBuilder(EDIT_OTHER_USER_REQUEST, userData);
-export const editOtherUserSuccess = user =>
+export const editOtherUserSuccess = (user) =>
   actionBuilder(EDIT_OTHER_USER_SUCCESS, { user });
-export const editOtherUserError = error =>
+export const editOtherUserError = (error) =>
   actionBuilder(EDIT_OTHER_USER_ERROR, error);
 
-export const addOtherUserAvatarRequest = userData =>
+export const addOtherUserAvatarRequest = (userData) =>
   actionBuilder(ADD_OTHER_USER_AVATAR_REQUEST, userData);
-export const addOtherUserAvatarSuccess = user =>
+export const addOtherUserAvatarSuccess = (user) =>
   actionBuilder(ADD_OTHER_USER_AVATAR_SUCCESS, { user });
-export const addOtherUserAvatarError = error =>
+export const addOtherUserAvatarError = (error) =>
   actionBuilder(ADD_OTHER_USER_AVATAR_ERROR, error);
 
-export const deleteOtherUserAvatarRequest = userId =>
+export const deleteOtherUserAvatarRequest = (userId) =>
   actionBuilder(DELETE_OTHER_USER_AVATAR_REQUEST, { userId });
-export const deleteOtherUserAvatarSuccess = user =>
+export const deleteOtherUserAvatarSuccess = (user) =>
   actionBuilder(DELETE_OTHER_USER_AVATAR_SUCCESS, { user });
-export const deleteOtherUserAvatarError = error =>
+export const deleteOtherUserAvatarError = (error) =>
   actionBuilder(DELETE_OTHER_USER_AVATAR_ERROR, error);
 
 export const changeActivateStatusRequest = (userId, active) =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_REQUEST, { userId, active });
-export const changeActivateStatusSuccess = user =>
+export const changeActivateStatusSuccess = (user) =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_SUCCESS, { user });
-export const changeActivateStatusError = error =>
+export const changeActivateStatusError = (error) =>
   actionBuilder(CHANGE_ACTIVATE_STATUS_ERROR, error);

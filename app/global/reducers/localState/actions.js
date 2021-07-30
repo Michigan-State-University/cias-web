@@ -10,10 +10,10 @@ import {
   UPDATE_PREVIEW_DATA,
 } from './constants';
 
-export const changeCurrentNarratorBlock = index =>
+export const changeCurrentNarratorBlock = (index) =>
   actionBuilder(CHANGE_CURRENT_NARRATOR_BLOCK, { index });
 
-export const setCharacterDraggable = draggable =>
+export const setCharacterDraggable = (draggable) =>
   actionBuilder(MAKE_CHARACTER_DRAGGABLE, { draggable });
 
 export const setAnimationStopPosition = (posX, posY) =>
@@ -25,8 +25,8 @@ export const setQuestionSettings = ({ index, questionIndex, tab }) =>
 export const toggleQuestionSettings = () =>
   actionBuilder(TOGGLE_QUESTION_SETTINGS, {});
 
-export const updatePreviewAnimation = animation =>
+export const updatePreviewAnimation = (animation) =>
   actionBuilder(UPDATE_PREVIEW_ANIMATION, { animation });
 
-export const updatePreviewData = data =>
+export const updatePreviewData = (data) =>
   actionBuilder(UPDATE_PREVIEW_DATA, { ...data });

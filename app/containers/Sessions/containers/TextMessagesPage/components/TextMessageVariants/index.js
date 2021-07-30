@@ -67,9 +67,6 @@ const mapDispatchToProps = {
   createVariant: createVariantRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(TextMessageVariants);

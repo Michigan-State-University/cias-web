@@ -58,7 +58,7 @@ const Tooltip = ({
     };
   }, [shouldShowTooltip]);
 
-  const onTooltipClick = event => {
+  const onTooltipClick = (event) => {
     const portal = document.getElementById(TOOLTIP_PORTAL_ID);
 
     if (portal?.contains(event.target)) {
@@ -67,7 +67,7 @@ const Tooltip = ({
     }
   };
 
-  const getContent = dataTip => (
+  const getContent = (dataTip) => (
     <Box ref={contentRef}>
       <Text>{dataTip || text}</Text>
       {content}

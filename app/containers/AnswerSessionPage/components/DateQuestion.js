@@ -18,7 +18,7 @@ const DateQuestion = ({
     },
   } = question;
 
-  const onChange = event => {
+  const onChange = (event) => {
     if (isNullOrUndefined(event)) return;
     const date = new Date(event);
     selectAnswer([

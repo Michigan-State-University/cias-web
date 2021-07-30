@@ -62,7 +62,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case SELECT_ANSWER:
         draft.answers[payload.id] = payload;

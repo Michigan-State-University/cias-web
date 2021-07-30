@@ -87,30 +87,30 @@ const SectionCaseItem = ({
     );
   };
 
-  const handlePreviewChange = event => {
+  const handlePreviewChange = (event) => {
     event.preventDefault();
     event.stopPropagation();
     handleSectionCaseUpdate({ ...sectionCase, preview: true }, null, true);
   };
 
-  const handleFormulaMatchChange = formulaMatch => {
+  const handleFormulaMatchChange = (formulaMatch) => {
     handleSectionCaseUpdate({ ...sectionCase, formulaMatch });
   };
 
-  const handleTitleChange = newTitle => {
+  const handleTitleChange = (newTitle) => {
     handleSectionCaseUpdate({ ...sectionCase, title: newTitle });
   };
 
-  const handleTitleToggle = value => {
+  const handleTitleToggle = (value) => {
     if (!value) handleTitleChange('');
     setTitleVisible(value);
   };
 
-  const handleContentChange = content => {
+  const handleContentChange = (content) => {
     handleSectionCaseUpdate({ ...sectionCase, content });
   };
 
-  const handleAddVariable = variable => {
+  const handleAddVariable = (variable) => {
     setIsUpdatingWithVariable(true);
     const variableHelper = new VariableHelper(variable);
 
@@ -121,7 +121,7 @@ const SectionCaseItem = ({
     );
   };
 
-  const handleImageChange = image => {
+  const handleImageChange = (image) => {
     setIsUploadingImage(true);
 
     handleSectionCaseUpdate(sectionCase, image.image);
@@ -337,10 +337,7 @@ const mapDispatchToProps = {
   deleteCase: deleteSectionCaseRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 SectionCaseItem.propTypes = {
   title: PropTypes.string,
@@ -351,7 +348,4 @@ SectionCaseItem.propTypes = {
   intl: PropTypes.shape(IntlShape),
 };
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(SectionCaseItem);
+export default compose(withConnect, injectIntl)(SectionCaseItem);

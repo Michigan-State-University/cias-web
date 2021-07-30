@@ -29,7 +29,7 @@ function InterventionCollapse({
 }) {
   const [openCollapsable, setOpenCollapsable] = useState(itemIndex === 0);
   const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
-  const handleClickNotification = e => {
+  const handleClickNotification = (e) => {
     e.stopPropagation();
     toggleNotifications(id);
   };
@@ -119,7 +119,4 @@ const mapDispatchToProps = {
   toggleNotifications: toggleNotificationsRequest,
 };
 
-export default connect(
-  null,
-  mapDispatchToProps,
-)(InterventionCollapse);
+export default connect(null, mapDispatchToProps)(InterventionCollapse);

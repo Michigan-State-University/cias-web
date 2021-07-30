@@ -156,7 +156,7 @@ const PeedyVoiceSettings = ({
     ]);
   };
 
-  const handlePhoneticNameChange = value => {
+  const handlePhoneticNameChange = (value) => {
     setPreviewText(value);
   };
 
@@ -227,10 +227,7 @@ const mapDispatchToProps = {
   resetAudioPreview: resetPhoneticPreview,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   injectReducer({ key: 'ttsLanguages', reducer: ttsLanguageReducer }),

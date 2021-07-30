@@ -14,7 +14,7 @@ const defaultProps = {
   data: { label: 'test' },
   isSelected: true,
   isFocused: true,
-  selectProps: { formatLabel: jest.fn(s => s) },
+  selectProps: { formatLabel: jest.fn((s) => s) },
 };
 
 describe('<Option />', () => {

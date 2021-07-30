@@ -146,7 +146,7 @@ const InterventionNavbar = ({
           value={name}
           fontSize={23}
           placeholder={formatMessage(messages.placeholder)}
-          onBlur={val =>
+          onBlur={(val) =>
             updateSessionName({ path: 'name', value: val }, ['name'])
           }
           onFocus={selectInputText}
@@ -317,9 +317,6 @@ const mapDispatchToProps = {
   redirectToPreviewAction: redirectToPreview,
 };
 
-export default compose(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  ),
-)(InterventionNavbar);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(
+  InterventionNavbar,
+);

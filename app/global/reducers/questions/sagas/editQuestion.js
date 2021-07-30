@@ -43,11 +43,11 @@ const validateVariable = (payload, question, variables) => {
   if (payload.data && payload.data.name === nameQuestion.reservedVariable)
     throw reservedError;
   else if (question.type === multiQuestion.id) {
-    question.body.data.forEach(element => {
+    question.body.data.forEach((element) => {
       if (hasDuplicates(variables, element.variable.name)) throw duplicateError;
     });
   } else if (question.type === gridQuestion.id) {
-    question.body.data[0].payload.rows.forEach(element => {
+    question.body.data[0].payload.rows.forEach((element) => {
       if (hasDuplicates(variables, element.variable.name)) throw duplicateError;
     });
   } else if (hasDuplicates(variables, question.body.variable.name)) {
@@ -64,7 +64,7 @@ function* editQuestion({ payload }) {
   );
   const questions = yield select(makeSelectQuestions());
   const variables = getEditVariables(questions).filter(
-    currentVariable => currentVariable && currentVariable.trim(),
+    (currentVariable) => currentVariable && currentVariable.trim(),
   );
 
   try {
@@ -78,9 +78,7 @@ function* editQuestion({ payload }) {
 
   yield call(toast.dismiss, EDIT_QUESTION_ERROR);
 
-  const requestURL = `v1/question_groups/${
-    question.question_group_id
-  }/questions/${question.id}`;
+  const requestURL = `v1/question_groups/${question.question_group_id}/questions/${question.id}`;
   try {
     const response = yield axios.put(requestURL, {
       question,

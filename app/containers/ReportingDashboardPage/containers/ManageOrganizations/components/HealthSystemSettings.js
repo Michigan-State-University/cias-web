@@ -74,11 +74,15 @@ const HealthSystemSettings = ({
 
   const onDelete = useCallback(() => deleteHealthSystem(id), [id]);
 
-  const onEdit = useCallback(value => editHealthSystem({ ...value, id }), [id]);
+  const onEdit = useCallback(
+    (value) => editHealthSystem({ ...value, id }),
+    [id],
+  );
 
-  const onInvite = useCallback((email, role) => inviteAdmin(id, email, role), [
-    id,
-  ]);
+  const onInvite = useCallback(
+    (email, role) => inviteAdmin(id, email, role),
+    [id],
+  );
 
   if (!id || fetchOrganizationLoader || fetchHealthSystemLoader)
     return <Loader type="inline" />;
@@ -148,9 +152,6 @@ const mapDispatchToProps = {
   inviteAdmin: inviteAdminRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default memo(compose(withConnect)(HealthSystemSettings));

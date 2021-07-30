@@ -48,11 +48,15 @@ const OrganizationSettings = ({
 
   const onDelete = useCallback(() => deleteOrganization(id), [id]);
 
-  const onEdit = useCallback(value => editOrganization({ ...value, id }), [id]);
+  const onEdit = useCallback(
+    (value) => editOrganization({ ...value, id }),
+    [id],
+  );
 
-  const onInvite = useCallback((email, role) => inviteAdmin(id, email, role), [
-    id,
-  ]);
+  const onInvite = useCallback(
+    (email, role) => inviteAdmin(id, email, role),
+    [id],
+  );
 
   return (
     <>
@@ -131,9 +135,6 @@ const mapDispatchToProps = {
   inviteAdmin: inviteAdminRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default memo(compose(withConnect)(OrganizationSettings));

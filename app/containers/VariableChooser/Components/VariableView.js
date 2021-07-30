@@ -36,7 +36,7 @@ const VariableView = ({ onClick }) => {
   const dispatch = useDispatch();
 
   // actions
-  const fetchQuestionGroups = sessionId =>
+  const fetchQuestionGroups = (sessionId) =>
     dispatch(fetchQuestionGroupsRequest(sessionId));
 
   // selectors
@@ -101,7 +101,7 @@ const VariableView = ({ onClick }) => {
     currentView !== VIEWS.SESSION && setCurrentView(VIEWS.SESSION);
 
   const handleOnClick = useCallback(
-    variable => {
+    (variable) => {
       const variableToAdd =
         currentSessionId === initialSessionId
           ? variable

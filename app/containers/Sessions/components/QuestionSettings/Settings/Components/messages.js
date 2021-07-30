@@ -95,9 +95,7 @@ export default defineMessages({
   },
   warningMessage: {
     id: `${scope}.warningMessage`,
-    defaultMessage: `You <span style="color: ${
-      themeColors.warning
-    }">cannot edit content</span> on the screen while working with the Narrator.`,
+    defaultMessage: `You <span style="color: ${themeColors.warning}">cannot edit content</span> on the screen while working with the Narrator.`,
   },
   characterBlocked: {
     id: `${scope}.characterBlocked`,

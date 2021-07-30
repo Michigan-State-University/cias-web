@@ -19,7 +19,7 @@ const isGuestRequest = (locationUrl, method, requestUrl) =>
   !(method === 'post' && requestUrl.match(guestLogInRegex));
 
 axios.interceptors.request.use(
-  config => {
+  (config) => {
     config.baseURL = process.env.API_URL;
     const { method, url } = config;
     let headers;
@@ -35,17 +35,17 @@ axios.interceptors.request.use(
 
     return config;
   },
-  error => Promise.reject(error),
+  (error) => Promise.reject(error),
 );
 
 axios.interceptors.response.use(
-  response => {
+  (response) => {
     const { method, url } = response.config;
     setHeaders(response, isGuestRequest(window.location.pathname, method, url));
 
     return response;
   },
-  error => {
+  (error) => {
     const { response } = error;
     if (
       responseStatusEquals(response, HttpStatusCodes.UNAUTHORIZED) &&

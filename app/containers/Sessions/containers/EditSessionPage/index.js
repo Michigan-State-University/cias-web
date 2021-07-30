@@ -163,22 +163,20 @@ function EditSessionPage({
     mapOpenedGroupsToObject();
   }, [groupIds]);
 
-  const allGroupsCollapsed = useMemo(() => openedGroups.current.length === 0, [
-    openedGroups.current,
-  ]);
+  const allGroupsCollapsed = useMemo(
+    () => openedGroups.current.length === 0,
+    [openedGroups.current],
+  );
 
   // map is created for faster direct access than checking the array on every item
   const mapOpenedGroupsToObject = (groupsToMap = openedGroups.current) =>
     setOpenedGroupsMap(
-      flow(
-        keyBy,
-        list => mapValues(list, () => true),
-      )(groupsToMap),
+      flow(keyBy, (list) => mapValues(list, () => true))(groupsToMap),
     );
 
   const toggleGroupCollapsable = (id, value) => {
     const groupIndex = openedGroups.current.findIndex(
-      groupId => groupId === id,
+      (groupId) => groupId === id,
     );
 
     const isToggled = groupIndex >= 0;
@@ -193,7 +191,7 @@ function EditSessionPage({
       mapOpenedGroupsToObject(openedGroups.current);
     } else if (!toSet && isToggled) {
       openedGroups.current = openedGroups.current.filter(
-        groupId => groupId !== id,
+        (groupId) => groupId !== id,
       );
       mapOpenedGroupsToObject();
     }
@@ -275,7 +273,7 @@ function EditSessionPage({
     fetchReportTemplates(paramSessionId);
   }, []);
 
-  const onCreateQuestion = type => {
+  const onCreateQuestion = (type) => {
     createQuestion(
       instantiateEmptyQuestion(
         formatMessage(messages.newQuestionTitle),
@@ -286,7 +284,7 @@ function EditSessionPage({
     );
   };
 
-  const onDragEnd = result => {
+  const onDragEnd = (result) => {
     setIsDuringQuestionReorder(false);
 
     const { draggableId, destination, source, type } = result;
@@ -331,7 +329,7 @@ function EditSessionPage({
       }
   };
 
-  const onBeforeDragStart = result => {
+  const onBeforeDragStart = (result) => {
     const { type } = result;
 
     switch (type) {
@@ -350,15 +348,15 @@ function EditSessionPage({
     <GroupActionButton active={active} {...action} key={index} />
   );
 
-  const sendSlidesToResearchers = researchers =>
+  const sendSlidesToResearchers = (researchers) =>
     shareQuestionsToResearchers(researchers, selectedSlides);
 
   if (loading || questions.length === 0) return <Loader size={100} />;
 
-  const selectSlide = slideId =>
+  const selectSlide = (slideId) =>
     setSelectedSlides(xor(selectedSlides, [slideId]));
 
-  const checkSelectedGroup = gQuestions =>
+  const checkSelectedGroup = (gQuestions) =>
     gQuestions.every(({ id }) => selectedSlides.includes(id));
 
   const handleCloseManage = () => {
@@ -366,17 +364,24 @@ function EditSessionPage({
     setSelectedSlides([]);
   };
 
-  const toggleGroup = gQuestions => {
+  const toggleGroup = (gQuestions) => {
     const allSelected = checkSelectedGroup(gQuestions);
     let q = gQuestions;
     if (!allSelected) {
       q = gQuestions.filter(({ id }) => !selectedSlides.includes(id));
     }
-    setSelectedSlides(xor(selectedSlides, q.map(({ id }) => id)));
+    setSelectedSlides(
+      xor(
+        selectedSlides,
+        q.map(({ id }) => id),
+      ),
+    );
   };
 
-  const finishGroup = groups.find(group => group.type === FinishGroupType);
-  const filteredGroups = groups.filter(group => group.type !== FinishGroupType);
+  const finishGroup = groups.find((group) => group.type === FinishGroupType);
+  const filteredGroups = groups.filter(
+    (group) => group.type !== FinishGroupType,
+  );
 
   return (
     <EditSessionPageContext.Provider
@@ -402,9 +407,7 @@ function EditSessionPage({
         <QuestionsRow sm={4} isVisible={showList}>
           <Box
             data-cy="questions-list"
-            borderRight={`${borders.borderWidth} ${borders.borderStyle} ${
-              colors.linkWater
-            }`}
+            borderRight={`${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`}
             bg={colors.white}
             {...hoverListProps}
             display="flex"
@@ -449,7 +452,7 @@ function EditSessionPage({
                 onDragEnd={onDragEnd}
               >
                 <Droppable droppableId="group-list" type={reorderScope.groups}>
-                  {provided => (
+                  {(provided) => (
                     <div ref={provided.innerRef} {...provided.droppableProps}>
                       {filteredGroups.map((questionGroup, index) => (
                         <QuestionListGroup
@@ -580,10 +583,7 @@ const mapDispatchToProps = {
   fetchReportTemplates: fetchReportTemplatesRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withSaga = injectSaga({
   key: 'editInterventionPage',

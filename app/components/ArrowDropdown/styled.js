@@ -7,7 +7,7 @@ export const ArrowDropdownWrapper = styled.div`
   ${layout};
 `;
 
-export const DropdownContainer = styled.div.attrs(props => ({
+export const DropdownContainer = styled.div.attrs((props) => ({
   onClick: props.disabled ? null : props.onClick,
 }))`
   overflow: hidden;

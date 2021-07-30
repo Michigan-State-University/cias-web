@@ -27,7 +27,7 @@ const ALLOWED_ADD_ORGANIZATION = [Roles.admin];
 
 const ALLOWED_DELETE_ORGANIZATION = [Roles.admin];
 
-export const RolePermissions = roles => ({
+export const RolePermissions = (roles) => ({
   canEditLogo: arraysOverlap(roles, ALLOWED_EDIT_LOGO),
   canDownloadInterventionCsv: arraysOverlap(
     roles,

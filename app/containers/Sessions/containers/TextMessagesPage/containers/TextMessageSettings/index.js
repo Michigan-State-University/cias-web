@@ -145,9 +145,6 @@ const mapDispatchToProps = {
   cloneTextMessage: cloneTextMessageRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default compose(withConnect)(TextMessageSettings);

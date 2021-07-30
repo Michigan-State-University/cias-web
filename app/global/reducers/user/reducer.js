@@ -34,7 +34,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const userReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case FETCH_USER_REQUEST:
         draft.userLoading = true;

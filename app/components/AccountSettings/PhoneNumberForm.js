@@ -96,7 +96,7 @@ const PhoneNumberForm = ({
 
   const prefixOptions = useMemo(
     () =>
-      union(popularPrefixes, getCountriesCodes()).map(country => ({
+      union(popularPrefixes, getCountriesCodes()).map((country) => ({
         value: country,
         label: getCodeLabel(country),
         filterData: `${country} +${getCountryCallingCode(country)}`,
@@ -116,7 +116,7 @@ const PhoneNumberForm = ({
     <Column>
       {error && <ErrorAlert mt={25} errorText={error} />}
       <Formik
-        validate={values => {
+        validate={(values) => {
           const {
             iso: { value: country },
           } = values;

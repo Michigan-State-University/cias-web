@@ -41,10 +41,14 @@ const ShareBox = ({
   listLoading,
   interventionStatus,
 }) => {
-  const { name, intervention_id: interventionId, emails, position } =
-    session || {};
+  const {
+    name,
+    intervention_id: interventionId,
+    emails,
+    position,
+  } = session || {};
 
-  const handleResend = id => resendInvite(id, session.id);
+  const handleResend = (id) => resendInvite(id, session.id);
 
   const sharingPossible = canShareWithParticipants(interventionStatus);
 
@@ -72,16 +76,14 @@ const ShareBox = ({
       );
   };
   if (session) {
-    const link = `${
-      process.env.WEB_URL
-    }/interventions/${interventionId}/sessions/${session.id}/fill`;
+    const link = `${process.env.WEB_URL}/interventions/${interventionId}/sessions/${session.id}/fill`;
     return (
       <ShareBoxModalParent position={position} name={name}>
         <Row mt={20}>
           <ParticipantInviter
             disabled={!sharingPossible}
             loading={sendLoading}
-            sendInvite={value => sendInvite(value, session.id)}
+            sendInvite={(value) => sendInvite(value, session.id)}
           />
         </Row>
         {exportCsvButton()}
@@ -144,12 +146,6 @@ const mapDispatchToProps = {
   resendInvite: resendSessionInviteRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(ShareBox);
+export default compose(withConnect, injectIntl)(ShareBox);

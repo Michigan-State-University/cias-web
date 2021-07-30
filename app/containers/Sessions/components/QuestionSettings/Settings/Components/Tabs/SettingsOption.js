@@ -15,12 +15,13 @@ import messages from '../messages';
 const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
   const { formatMessage } = useIntl();
 
-  const handleUpdate = useCallback(value => onUpdate(`${index}`, value), [
-    index,
-  ]);
+  const handleUpdate = useCallback(
+    (value) => onUpdate(`${index}`, value),
+    [index],
+  );
 
   const handleStringToNumericUpdate = useCallback(
-    value => handleUpdate(+value),
+    (value) => handleUpdate(+value),
     [handleUpdate],
   );
 

@@ -18,7 +18,7 @@ import { AlertContainer } from './styled';
 const ErrorAlert = ({ errorText, fullPage, ...restProps }) => {
   const toDisplay = errorText.toString().split('\n')[0];
 
-  const wrapWithRow = child => (
+  const wrapWithRow = (child) => (
     <Row width="100%" justify="center" mt={100}>
       {child}
     </Row>

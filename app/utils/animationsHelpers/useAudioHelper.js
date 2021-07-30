@@ -42,7 +42,7 @@ const useAudioHelper = (
     );
 
     const uniqAnimations = uniqBy(
-      speechBlocks.filter(block => block.animation),
+      speechBlocks.filter((block) => block.animation),
       'animation',
     );
 
@@ -86,7 +86,7 @@ const useAudioHelper = (
       });
   };
 
-  const getReflectionData = block => {
+  const getReflectionData = (block) => {
     const { target_value: targetValue } = block;
 
     let reflections = [];
@@ -101,11 +101,11 @@ const useAudioHelper = (
     };
   };
 
-  const getSpeechData = index => {
+  const getSpeechData = (index) => {
     const block = blocks[index ?? 0];
 
     const speechData = loadedSpeechAnimations.current.find(
-      anim => anim.name === (block ? block.animation : undefined),
+      (anim) => anim.name === (block ? block.animation : undefined),
     );
     const initialAnimation =
       speechData && speechData.animationData.start ? 'start' : 'speech';
@@ -175,7 +175,7 @@ const useAudioHelper = (
     }
   };
 
-  const handleSpeech = audioUrls => {
+  const handleSpeech = (audioUrls) => {
     audioInstance.onPlay(playAnimation);
     audioInstance.onLoaded(onSpeechReady);
     audioInstance.onEnded(() => onSpeechEnded(audioUrls));
@@ -231,14 +231,14 @@ const useAudioHelper = (
 
   const onSpeechReady = () => audioInstance.start();
 
-  const onSpeechEnded = audioUrls => {
+  const onSpeechEnded = (audioUrls) => {
     cleanAudio();
 
     if (hasMoreAudio(audioUrls)) moveToNextAudio();
     else finishSpeech();
   };
 
-  const hasMoreAudio = audioUrls => {
+  const hasMoreAudio = (audioUrls) => {
     const audioLength = audioUrls.length;
 
     return audioLength > currentData.currentAudioIndex + 1;
@@ -320,8 +320,8 @@ const useAudioHelper = (
         currentData.type === readQuestionBlockType ||
         currentData.type === reflectionFormulaType) &&
       (audioInstance.paused || audioInstance.stopped) &&
-      (currentData.currentAnimation !== 'start' &&
-        currentData.currentAnimation !== 'end')
+      currentData.currentAnimation !== 'start' &&
+      currentData.currentAnimation !== 'end'
     );
 
   return {

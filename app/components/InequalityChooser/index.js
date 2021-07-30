@@ -19,7 +19,7 @@ const InequalityChooser = ({
   inequalityValue,
   disabled,
 }) => {
-  const populateSelectOption = sign => ({
+  const populateSelectOption = (sign) => ({
     label: sign,
     value: sign,
   });
@@ -60,7 +60,7 @@ const InequalityChooser = ({
           isDisabled: disabled,
           bg: colors.linkWater,
           options: signMapper,
-          onChange: value => setInequalitySign(value),
+          onChange: (value) => setInequalitySign(value),
           value: inequalitySign,
         }}
       />
@@ -75,7 +75,7 @@ const InequalityChooser = ({
           placeholder="..."
           value={numericValue}
           validator={numericValidator}
-          onBlur={value => setNumericValue(value)}
+          onBlur={(value) => setNumericValue(value)}
         />
       </Box>
     </>

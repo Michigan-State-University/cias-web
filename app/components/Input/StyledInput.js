@@ -6,7 +6,7 @@ import { TextArea } from './TextArea';
 const DEFAULT_TEXT_PADDING = 25;
 const DEFAULT_AVERAGE_LETTER_WIDTH = 8;
 
-const StyledInput = props => {
+const StyledInput = (props) => {
   const [value, setValue] = useState(props.value);
   const [hasFocus, setHasFocus] = useState(false);
 
@@ -14,20 +14,20 @@ const StyledInput = props => {
     if (props.value !== value && hasFocus === false) setValue(props.value);
   }, [props.value, hasFocus]);
 
-  const onInputChange = targetValue => {
+  const onInputChange = (targetValue) => {
     if (props.validator && props.validator(targetValue)) {
       setValue(targetValue);
     } else if (!props.validator) setValue(targetValue);
   };
 
-  const handleFocus = event => {
+  const handleFocus = (event) => {
     if (props.onFocus) props.onFocus(event);
 
     setHasFocus(true);
   };
 
   // calculate approximate input width in pixels
-  const calculateWidthFromText = text => {
+  const calculateWidthFromText = (text) => {
     const calculatedWidth = text * props.averageLetterWidth + props.textPadding;
     if (typeof props.maxWidth === 'number')
       return Math.min(calculatedWidth, props.maxWidth);
@@ -39,12 +39,12 @@ const StyledInput = props => {
         {...props}
         textAlign={props.textAlign}
         value={value}
-        onClick={e => {
+        onClick={(e) => {
           if (props.onClick) props.onClick(e);
 
           e.stopPropagation();
         }}
-        onChange={event => onInputChange(event.target.value)}
+        onChange={(event) => onInputChange(event.target.value)}
         onBlur={() => {
           setHasFocus(false);
           props.onBlur(value);
@@ -73,7 +73,7 @@ const StyledInput = props => {
       {...(props.rows ? { rows: props.rows, height: 'auto' } : {})}
       mr={9}
       value={value}
-      onChange={event => onInputChange(event.target.value)}
+      onChange={(event) => onInputChange(event.target.value)}
       onInput={props.onInput}
       onFocus={handleFocus}
       onBlur={() => {

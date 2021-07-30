@@ -122,10 +122,8 @@ export function InterventionDetailsPage({
   const { interventionId } = useParams();
   const { formatMessage } = useIntl();
 
-  const [
-    deleteConfirmationSessionId,
-    setDeleteConfirmationSessionId,
-  ] = useState(null);
+  const [deleteConfirmationSessionId, setDeleteConfirmationSessionId] =
+    useState(null);
 
   const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
 
@@ -153,10 +151,8 @@ export function InterventionDetailsPage({
 
   const [sendCopyModalVisible, setSendCopyModalVisible] = useState(false);
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
-  const [
-    participantShareModalVisible,
-    setParticipantShareModalVisible,
-  ] = useState(false);
+  const [participantShareModalVisible, setParticipantShareModalVisible] =
+    useState(false);
   const [
     interventionSettingsModalVisible,
     setInterventionSettingsModalVisible,
@@ -175,7 +171,7 @@ export function InterventionDetailsPage({
       status: archived,
       id: interventionId,
     });
-  const handleDeleteSession = sessionId => {
+  const handleDeleteSession = (sessionId) => {
     deleteSession(sessionId, id);
     setDeleteConfirmationSessionId(null);
   };
@@ -228,11 +224,11 @@ export function InterventionDetailsPage({
       fetchQuestions(sessions[sessionIndex].id);
   }, [intervention ? intervention.id : 0]);
 
-  const handleCopySession = sessionId => {
+  const handleCopySession = (sessionId) => {
     copySession({ sessionId });
   };
 
-  const handleExternalCopySession = params => {
+  const handleExternalCopySession = (params) => {
     const { sessionId, id: targetInterventionId } = params;
     externalCopySession({
       sessionId,
@@ -241,7 +237,7 @@ export function InterventionDetailsPage({
     });
   };
 
-  const editName = val => editIntervention({ name: val, id: interventionId });
+  const editName = (val) => editIntervention({ name: val, id: interventionId });
 
   const handleChangeStatus = () =>
     editIntervention({
@@ -257,7 +253,7 @@ export function InterventionDetailsPage({
   const handleReorder = (previousIndex, nextIndex) => {
     const newList = reorder(sessions, previousIndex, nextIndex);
     let position = 0;
-    const orderedNewList = newList.map(session => {
+    const orderedNewList = newList.map((session) => {
       position += 1;
       return {
         ...session,
@@ -270,10 +266,10 @@ export function InterventionDetailsPage({
     });
   };
 
-  const copyInterventionToResearchers = users =>
+  const copyInterventionToResearchers = (users) =>
     copyIntervention({ interventionId, users, withoutRedirect: true });
 
-  const onDragEnd = result => {
+  const onDragEnd = (result) => {
     const { source, destination } = result;
 
     if (destination) handleReorder(source.index, destination.index);
@@ -287,7 +283,7 @@ export function InterventionDetailsPage({
           droppableId="session-list"
           type={reorderScope.sessions}
         >
-          {providedDroppable => (
+          {(providedDroppable) => (
             <div
               ref={providedDroppable.innerRef}
               {...providedDroppable.droppableProps}
@@ -318,7 +314,7 @@ export function InterventionDetailsPage({
                         handleClick={handleClick}
                         handleCopySession={handleCopySession}
                         handleExternalCopySession={handleExternalCopySession}
-                        handleDeleteSession={sessionId =>
+                        handleDeleteSession={(sessionId) =>
                           setDeleteConfirmationSessionId(sessionId)
                         }
                         editSession={editSession}
@@ -540,10 +536,7 @@ const mapDispatchToProps = {
   editSession: editSessionRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 export default compose(
   withConnect,
   injectReducer({

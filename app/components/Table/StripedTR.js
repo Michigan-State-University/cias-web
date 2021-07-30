@@ -8,13 +8,12 @@ import { TBody } from './TBody';
 const StripedTR = styled(TR)`
   cursor: ${({ cursor }) => cursor || 'default'};
 
-  ${TBody} &:nth-child(${props => props.stripesPlacement}) {
-    background: ${props =>
+  ${TBody} &:nth-child(${(props) => props.stripesPlacement}) {
+    background: ${(props) =>
       props.color ? props.color : `rgba(${hexToRgb(colors.jungleGreen)}, 0.1)`};
 
     td,
     th {
-
       &:first-child {
         border-bottom-left-radius: ${borders.borderRadius};
         border-top-left-radius: ${borders.borderRadius};
@@ -28,20 +27,20 @@ const StripedTR = styled(TR)`
   }
 
   // select last 'n' elements
-  td:nth-last-child(-n+${props => props.lastItemHoverable}) {
-    opacity: ${props => (props.lastItemHoverable ? '0' : '100%')};
+  td:nth-last-child(-n + ${(props) => props.lastItemHoverable}) {
+    opacity: ${(props) => (props.lastItemHoverable ? '0' : '100%')};
   }
 
   &:hover {
-    background: ${props => props.hoverBg && props.hoverBg} !important;
+    background: ${(props) => props.hoverBg && props.hoverBg} !important;
 
     td:hover {
-      opacity: 100%
+      opacity: 100%;
     }
   }
 
-  color: ${props => props.textColor};
-  background-color: ${props => props.bg};;
+  color: ${(props) => props.textColor};
+  background-color: ${(props) => props.bg}; ;
 `;
 
 StripedTR.propTypes = {

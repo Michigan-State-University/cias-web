@@ -24,9 +24,7 @@ const BranchingScreen = ({
 
   const redirectToSessionMap = () => {
     window.open(
-      `${
-        process.env.WEB_URL
-      }/session/${sessionId}/session-map?userPreviewId=${userSessionId}`,
+      `${process.env.WEB_URL}/session/${sessionId}/session-map?userPreviewId=${userSessionId}`,
       '_blank',
     );
   };

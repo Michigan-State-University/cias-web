@@ -20,7 +20,7 @@ const UrlQuestion = ({ question, selectAnswer }) => {
     },
   } = question;
 
-  const changeLinkState = state => {
+  const changeLinkState = (state) => {
     selectAnswer([
       {
         var: name,

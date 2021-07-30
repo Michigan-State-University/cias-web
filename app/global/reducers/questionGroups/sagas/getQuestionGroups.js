@@ -20,12 +20,12 @@ function* getQuestionsGroups({ payload: { sessionId } }) {
     const { data } = yield axios.get(groupURL);
     const groups = jsonApiToArray(data, 'questionGroup');
     const questions = mapGroupsToQuestions(groups);
-    const groupsWithoutQuestions = groups.map(group =>
+    const groupsWithoutQuestions = groups.map((group) =>
       omit(group, 'questions'),
     );
     const sortedQuestions = sortBy(questions, 'position');
     const sortedGroups = sortBy(groupsWithoutQuestions, 'position');
-    const mappedQuestions = sortedQuestions.map(q =>
+    const mappedQuestions = sortedQuestions.map((q) =>
       objectKeysToSnakeCase(q, ['sha256', 'endPosition']),
     );
     yield put(getQuestionsSuccess(mappedQuestions));

@@ -1,6 +1,6 @@
 import pick from 'lodash/pick';
 
-export const mapQuestionToStateObject = question => ({
+export const mapQuestionToStateObject = (question) => ({
   ...question.attributes,
   id: question.id,
   body: {
@@ -9,7 +9,7 @@ export const mapQuestionToStateObject = question => ({
   },
 });
 
-export const defaultMapper = object => ({
+export const defaultMapper = (object) => ({
   ...object.attributes,
   id: object.id,
 });
@@ -19,7 +19,7 @@ export const mapAccessToStateObject = ({ user_id: id, email }) => ({
   email,
 });
 
-export const mapCurrentUser = user => ({
+export const mapCurrentUser = (user) => ({
   id: user.id,
   firstName: user.attributes.first_name,
   lastName: user.attributes.last_name,
@@ -38,7 +38,7 @@ export const mapCurrentUser = user => ({
   organizableId: user.attributes.organizable_id,
 });
 
-export const pickUserAttributes = user =>
+export const pickUserAttributes = (user) =>
   pick(user, [
     'id',
     'firstName',
@@ -57,7 +57,7 @@ export const pickUserAttributes = user =>
     'feedbackCompleted',
   ]);
 
-export const mapTeam = team => ({
+export const mapTeam = (team) => ({
   id: team.id,
   name: team.attributes.name,
   teamAdmin: team.relationships.team_admin,

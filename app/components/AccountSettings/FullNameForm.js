@@ -8,13 +8,13 @@ import FormikInput from 'components/FormikInput';
 import messages from './messages';
 import { StyledFullNameRow } from './styled';
 
-const validationSchema = formatMessage =>
+const validationSchema = (formatMessage) =>
   Yup.object().shape({
     firstName: Yup.string().required(formatMessage(messages.firstNameRequired)),
     lastName: Yup.string().required(formatMessage(messages.lastNameRequired)),
   });
 
-const initialValues = user => ({
+const initialValues = (user) => ({
   firstName: user.firstName,
   lastName: user.lastName,
 });

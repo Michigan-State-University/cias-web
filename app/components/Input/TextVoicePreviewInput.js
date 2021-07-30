@@ -72,7 +72,7 @@ const TextVoicePreviewInput = ({
       >
         <Input
           defaultValue={value ?? ''}
-          onBlur={e => onBlur(e.target.value)}
+          onBlur={(e) => onBlur(e.target.value)}
           placeholder={placeholder}
           transparent
           disabled={disabled}

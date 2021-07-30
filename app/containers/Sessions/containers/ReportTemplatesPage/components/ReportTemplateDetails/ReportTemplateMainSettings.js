@@ -63,17 +63,17 @@ const ReportTemplateMainSettings = ({
   const [openCollapsable, setOpenCollapsable] = useState(false);
   const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
 
-  const onNameChange = name => {
+  const onNameChange = (name) => {
     if (name !== singleReportTemplate.name)
       updateReportTemplate(sessionId, { ...singleReportTemplate, name });
   };
 
-  const onReportForChange = reportFor => {
+  const onReportForChange = (reportFor) => {
     if (reportFor !== singleReportTemplate.reportFor)
       updateReportTemplate(sessionId, { ...singleReportTemplate, reportFor });
   };
 
-  const onLogoChange = logo => {
+  const onLogoChange = (logo) => {
     setIsUploadingImage(true);
     updateReportTemplate(sessionId, singleReportTemplate, logo.image);
   };
@@ -86,7 +86,7 @@ const ReportTemplateMainSettings = ({
     deleteReportTemplate(sessionId, singleReportTemplate.id);
   };
 
-  const onTestDownload = event => {
+  const onTestDownload = (event) => {
     event.preventDefault();
     event.stopPropagation();
 
@@ -281,10 +281,7 @@ const mapDispatchToProps = {
   generateTestReport: generateTestReportRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 ReportTemplateMainSettings.propTypes = {
   intl: PropTypes.shape(IntlShape),
@@ -296,7 +293,4 @@ ReportTemplateMainSettings.propTypes = {
   selectedReport: PropTypes.shape(ReportTemplate),
 };
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(ReportTemplateMainSettings);
+export default compose(withConnect, injectIntl)(ReportTemplateMainSettings);

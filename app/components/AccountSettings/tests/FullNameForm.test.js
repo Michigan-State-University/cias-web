@@ -16,7 +16,7 @@ describe('<FullNameForm />', () => {
   const defaultProps = {
     user: { firstName: 'test', lastName: 'test' },
     editUser: jest.fn(),
-    formatMessage: jest.fn(msg => msg.defaultMessage),
+    formatMessage: jest.fn((msg) => msg.defaultMessage),
   };
 
   it('Expect to not log errors in console', () => {

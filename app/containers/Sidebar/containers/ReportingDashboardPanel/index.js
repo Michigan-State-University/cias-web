@@ -55,7 +55,7 @@ const ReportingDashboardPanel = ({
     if (organizationsLoading) {
       return <Spinner color={themeColors.secondary} />;
     }
-    return organizations.map(organization => (
+    return organizations.map((organization) => (
       <OrganizationItem
         canAccessOrganizations={canAccessOrganizations}
         organization={organization}
@@ -121,10 +121,7 @@ const mapDispatchToProps = {
   createOrganization: createOrganizationRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   injectReducer({ key: 'organizations', reducer: organizationsReducer }),

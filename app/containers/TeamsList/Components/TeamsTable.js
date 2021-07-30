@@ -28,7 +28,7 @@ const TeamsTable = ({
 }) => {
   const [pickedTeam, setPickedTeam] = useState({});
 
-  const openModal = user => setPickedTeam(user);
+  const openModal = (user) => setPickedTeam(user);
   const closeModal = () => setPickedTeam({});
 
   const handleDeleteTeam = () => {
@@ -90,7 +90,4 @@ TeamsTable.propTypes = {
   deleteTeam: PropTypes.func,
 };
 
-export default compose(
-  withRouter,
-  memo,
-)(TeamsTable);
+export default compose(withRouter, memo)(TeamsTable);

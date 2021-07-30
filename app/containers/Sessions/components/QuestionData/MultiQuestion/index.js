@@ -56,7 +56,7 @@ const MultiQuestion = ({
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
-  const handleMouseEnter = index => () => {
+  const handleMouseEnter = (index) => () => {
     if (!isNarratorTabOrEditNotPossible) setHovered(index);
   };
 
@@ -94,7 +94,7 @@ const MultiQuestion = ({
                         index: index + 1,
                       })}
                       value={value.payload}
-                      onCheck={newTitle =>
+                      onCheck={(newTitle) =>
                         updateAnswer(index, { ...value, payload: newTitle })
                       }
                       richText
@@ -126,7 +126,7 @@ const MultiQuestion = ({
                   )}
                   value={value.variable.name}
                   color={colors.jungleGreen}
-                  onBlur={val =>
+                  onBlur={(val) =>
                     updateAnswer(index, {
                       ...value,
                       variable: { ...value.variable, name: val },
@@ -146,7 +146,7 @@ const MultiQuestion = ({
                   )}
                   value={value.variable.value}
                   color={colors.azure}
-                  onBlur={val =>
+                  onBlur={(val) =>
                     updateAnswer(index, {
                       ...value,
                       variable: { ...value.variable, value: val },
@@ -188,17 +188,14 @@ const mapStateToProps = createStructuredSelector({
   selectedQuestion: makeSelectSelectedQuestion(),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   addAnswer: () => dispatch(updateQuestionData({ type: ADD })),
   updateAnswer: (index, value) =>
     dispatch(updateQuestionData({ type: UPDATE, data: { index, value } })),
-  removeAnswer: index =>
+  removeAnswer: (index) =>
     dispatch(updateQuestionData({ type: REMOVE, data: { index } })),
 });
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(MultiQuestion));

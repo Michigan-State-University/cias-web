@@ -123,10 +123,7 @@ const mapDispatchToProps = {
   fetchUsersRequest: fetchUsersSelector,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 const withSaga = injectSaga({ key: 'userList', saga: userListSaga });
 const withReducer = injectReducer({

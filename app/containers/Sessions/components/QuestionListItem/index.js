@@ -134,13 +134,13 @@ const QuestionListItem = ({
     setCopyOpen(true);
   };
 
-  const handleCopy = target => {
+  const handleCopy = (target) => {
     const copied = cloneDeep(question);
     set(copied, 'id', uniqueId());
     copyQuestion({ copied, questionId: question.id, target });
   };
 
-  const handleExternallyCopy = target => {
+  const handleExternallyCopy = (target) => {
     const copied = cloneDeep(question);
     set(copied, 'id', uniqueId());
     copyExternallyQuestion(target.sessionId, target.id, copied, [question.id]);
@@ -217,7 +217,7 @@ const QuestionListItem = ({
           {manage && !isFinishScreen && (
             <Column xs={1}>
               <Checkbox
-                onClick={e => {
+                onClick={(e) => {
                   selectSlide(id);
                   e.stopPropagation();
                   e.preventDefault();
@@ -273,7 +273,7 @@ const QuestionListItem = ({
       index={index}
       isDragDisabled={disabled}
     >
-      {provided => (
+      {(provided) => (
         <Box
           width="100%"
           key={id}
@@ -334,9 +334,6 @@ const mapDispatchToProps = {
   setCharacterPosition: setAnimationStopPosition,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(QuestionListItem));

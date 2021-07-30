@@ -76,13 +76,13 @@ export function InterventionPage({
     fetchInterventions();
   }, []);
 
-  const handleChange = value => () => {
+  const handleChange = (value) => () => {
     if (filterStatus.includes(value))
-      setFilterStatus(filterStatus.filter(el => el !== value));
+      setFilterStatus(filterStatus.filter((el) => el !== value));
     else setFilterStatus([...filterStatus, value]);
   };
 
-  const handleFilterStatus = e => {
+  const handleFilterStatus = (e) => {
     e.preventDefault();
     const {
       currentTarget: { value },
@@ -208,7 +208,7 @@ export function InterventionPage({
               <Col>
                 <SearchInput
                   value={filterValue}
-                  onChange={e => setFilterValue(e.target.value)}
+                  onChange={(e) => setFilterValue(e.target.value)}
                   placeholder={formatMessage(messages.filter)}
                 />
               </Col>
@@ -260,10 +260,7 @@ const mapDispatchToProps = {
   editUser: editUserRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   withConnect,

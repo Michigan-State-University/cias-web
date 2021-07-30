@@ -86,7 +86,7 @@ export const updateFormula = (value, questionId) =>
     data: { value, questionId },
   });
 
-export const addFormulaCase = questionId =>
+export const addFormulaCase = (questionId) =>
   updateQuestionSettings({
     type: ADD_FORMULA_CASE,
     data: { questionId },
@@ -110,7 +110,7 @@ export const saveNarratorMovement = (index, questionId, position) =>
     data: { index, questionId, position },
   });
 
-export const reorderNarratorBlocks = reorderedBlocks =>
+export const reorderNarratorBlocks = (reorderedBlocks) =>
   updateQuestionSettings({
     type: REORDER_NARRATOR_BLOCKS,
     data: { reorderedBlocks },

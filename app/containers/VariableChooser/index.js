@@ -93,19 +93,19 @@ const VariableChooser = ({
   }, [isOpen]);
 
   const handleOnVariableClick = useCallback(
-    variable => {
+    (variable) => {
       onClick(variable);
       close();
     },
     [onClick],
   );
 
-  const handleOnSessionClick = useCallback(sessionId => {
+  const handleOnSessionClick = useCallback((sessionId) => {
     setCurrentSessionId(sessionId);
     toVariableView();
   }, []);
 
-  const handleOnInterventionClick = useCallback(interventionId => {
+  const handleOnInterventionClick = useCallback((interventionId) => {
     setCurrentInterventionId(interventionId);
     toSessionView();
   }, []);
@@ -213,7 +213,4 @@ const reduxInjectors = [
   injectSaga({ key: 'copyModal', saga: allCopyModalSagas }),
 ];
 
-export default compose(
-  ...reduxInjectors,
-  memo,
-)(VariableChooser);
+export default compose(...reduxInjectors, memo)(VariableChooser);

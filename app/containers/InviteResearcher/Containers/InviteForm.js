@@ -26,7 +26,7 @@ const InviteForm = ({
     setError(null);
     onInputChange(value);
   };
-  const handleBlur = valid => () => {
+  const handleBlur = (valid) => () => {
     if (!valid) setError(formatMessage(messages.invalidEmail));
   };
 
@@ -72,8 +72,5 @@ const mapDispatchToProps = {
   onInputChange: changeEmailInput,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 export default compose(withConnect)(InviteForm);

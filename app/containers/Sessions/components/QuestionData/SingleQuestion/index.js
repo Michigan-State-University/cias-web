@@ -58,7 +58,7 @@ const SingleQuestion = ({
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
-  const handleMouseEnter = index => () => {
+  const handleMouseEnter = (index) => () => {
     if (!isNarratorTabOrEditNotPossible) setHovered(index);
   };
 
@@ -92,7 +92,7 @@ const SingleQuestion = ({
                         index: index + 1,
                       })}
                       value={value.payload}
-                      onCheck={newTitle =>
+                      onCheck={(newTitle) =>
                         updateAnswer(index, { ...value, payload: newTitle })
                       }
                       richText
@@ -129,7 +129,7 @@ const SingleQuestion = ({
                   }
                   value={value.value}
                   color={colors.azure}
-                  onBlur={val =>
+                  onBlur={(val) =>
                     updateAnswer(index, {
                       ...value,
                       value: val,
@@ -175,12 +175,10 @@ const mapDispatchToProps = {
   addAnswer: () => updateQuestionData({ type: ADD }),
   updateAnswer: (index, value) =>
     updateQuestionData({ type: UPDATE_ANSWER, data: { index, value } }),
-  removeAnswer: index => updateQuestionData({ type: REMOVE, data: { index } }),
+  removeAnswer: (index) =>
+    updateQuestionData({ type: REMOVE, data: { index } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(SingleQuestion));

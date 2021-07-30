@@ -81,11 +81,11 @@ function SessionSchedule({
     },
   };
 
-  const handleOnClickDateVariable = value =>
+  const handleOnClickDateVariable = (value) =>
     updateDateVariable(value, sessionId);
 
-  const handleChangeDate = date => updateDate(date, sessionId);
-  const handleChangeDays = days => updatePayload(days, sessionId);
+  const handleChangeDate = (date) => updateDate(date, sessionId);
+  const handleChangeDays = (days) => updatePayload(days, sessionId);
 
   const renderOption = () => {
     switch (selectedScheduleOption) {
@@ -170,10 +170,10 @@ function SessionSchedule({
         options={values(scheduleOptions)}
         activeOption={find(
           scheduleOptions,
-          elem => elem.id === selectedScheduleOption,
+          (elem) => elem.id === selectedScheduleOption,
         )}
         rightPosition="315"
-        setOption={id => changeType(id, sessionId)}
+        setOption={(id) => changeType(id, sessionId)}
       />
       {selectedScheduleOption && (
         <Row mt={28} mb={17} align="center">
@@ -215,12 +215,6 @@ const mapDispatchToProps = {
   fetchQuestions: getQuestionGroupsRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  injectIntl,
-  withConnect,
-)(SessionSchedule);
+export default compose(injectIntl, withConnect)(SessionSchedule);

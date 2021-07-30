@@ -18,7 +18,7 @@ export function* fetchTextMessages({ payload: { sessionId } }) {
       data: { data },
     } = yield call(axios.get, requestUrl);
 
-    const mappedData = data.map(item =>
+    const mappedData = data.map((item) =>
       new TextMessagesBuilder().fromJson(item).build(),
     );
 

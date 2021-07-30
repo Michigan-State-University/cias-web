@@ -43,7 +43,7 @@ function* submitAnswersAsync({
 }) {
   const answers = yield select(makeSelectAnswers());
   const { answerBody } = answers[answerId];
-  let data = map(answerBody, singleBody => omit(singleBody, 'index')); // index is needed to remember the selected answers, but useless in request
+  let data = map(answerBody, (singleBody) => omit(singleBody, 'index')); // index is needed to remember the selected answers, but useless in request
   if (data.length || !required) {
     if (!data.length) {
       data = [

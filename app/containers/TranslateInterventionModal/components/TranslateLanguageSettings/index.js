@@ -29,14 +29,14 @@ const TranslateLanguageSettings = ({
     () =>
       sourceLanguage
         ? sourceLanguageOptions.filter(
-            language =>
+            (language) =>
               language.googleLanguageId !== sourceLanguage.googleLanguageId,
           )
         : sourceLanguageOptions,
     [sourceLanguageOptions, sourceLanguage],
   );
 
-  const handleSourceLanguageChange = newSourceLanguage => {
+  const handleSourceLanguageChange = (newSourceLanguage) => {
     onSourceLanguageChange(newSourceLanguage);
     if (
       newSourceLanguage?.googleLanguageId ===

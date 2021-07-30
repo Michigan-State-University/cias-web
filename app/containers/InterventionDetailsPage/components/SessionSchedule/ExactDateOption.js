@@ -24,9 +24,9 @@ const ExactDateOption = ({
   const timeInfoMessage = () =>
     `${formatMessage(messages.timeInfo)} ${calculateTimeZone()}`;
 
-  const parseDate = date => dayjs(date).format('YYYY-MM-DD');
+  const parseDate = (date) => dayjs(date).format('YYYY-MM-DD');
 
-  const onChange = changeValue => setValue(parseDate(changeValue));
+  const onChange = (changeValue) => setValue(parseDate(changeValue));
 
   return (
     <Column>

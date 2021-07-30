@@ -39,7 +39,7 @@ const VariableInput = ({
         )}
         value={variable.name}
         color={colors.jungleGreen}
-        onBlur={val => updateVariable(val, questionId)}
+        onBlur={(val) => updateVariable(val, questionId)}
         autoComplete="off"
       />
     </Row>
@@ -61,9 +61,6 @@ const mapDispatchToProps = {
     updateQuestionData({ type: UPDATE_VARIABLE, data: { name, questionId } }),
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(VariableInput));

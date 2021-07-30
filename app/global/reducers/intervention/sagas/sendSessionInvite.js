@@ -20,7 +20,9 @@ import { makeSelectIntervention } from '../selectors';
 
 export function* sendSessionInvite({ payload: { emails, sessionId } }) {
   const { sessions, organizationId } = yield select(makeSelectIntervention());
-  const sessionIndex = sessions.findIndex(session => session.id === sessionId);
+  const sessionIndex = sessions.findIndex(
+    (session) => session.id === sessionId,
+  );
   const organizationPrefix = organizationId
     ? `/organizations/${organizationId}/`
     : '';

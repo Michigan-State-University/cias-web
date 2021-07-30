@@ -23,7 +23,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
             class="THead-sc-8drp5d-0"
           >
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF ctgvLd"
+              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF eosQBW"
               color="#E2EEF1"
             >
               <th
@@ -60,7 +60,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
             class="TBody-gqq9cv-0"
           >
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF ctgvLd"
+              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF eosQBW"
               color="#E2EEF1"
             >
               <th
@@ -103,7 +103,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               </td>
             </tr>
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF ctgvLd"
+              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF eosQBW"
               color="#E2EEF1"
             >
               <th

@@ -38,7 +38,7 @@ const DateQuestion = ({
             placeholder={formatMessage(messages.chooseDate)}
             type="date"
             value={Date.parse(payload)}
-            onCheck={value => updateAnswer({ variable, payload: value })}
+            onCheck={(value) => updateAnswer({ variable, payload: value })}
             fontSize={15}
           />
         </Row>
@@ -58,13 +58,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateAnswer: value =>
+  updateAnswer: (value) =>
     updateQuestionData({ type: UPDATE_DATA, data: { value } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(DateQuestion));

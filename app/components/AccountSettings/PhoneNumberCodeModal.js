@@ -31,7 +31,7 @@ import messages from './messages';
 
 const codeLength = 4;
 
-const validationSchema = formatMessage =>
+const validationSchema = (formatMessage) =>
   Yup.object().shape({
     code: Yup.string()
       .length(codeLength)
@@ -160,12 +160,6 @@ const mapDispatchToProps = {
   sendSmsToken: sendSmsTokenRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  injectIntl,
-  withConnect,
-)(PhoneNumberCodeModal);
+export default compose(injectIntl, withConnect)(PhoneNumberCodeModal);

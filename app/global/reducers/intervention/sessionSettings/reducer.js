@@ -69,9 +69,8 @@ const sessionSettingsReducer = (session, payload) => {
 
     case UPDATE_FORMULA_TARGET: {
       const { patternIndex, targetIndex, targetData } = payload.data;
-      clonedSession.formula.patterns[patternIndex].target[
-        targetIndex
-      ] = targetData;
+      clonedSession.formula.patterns[patternIndex].target[targetIndex] =
+        targetData;
       return clonedSession;
     }
 

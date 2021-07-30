@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { fontSizes, fontFamily, lineHeights, colors } from 'theme';
 import { margin, text, layout, style } from '../BaseComponentStyles';
 
-const Text = styled.p.attrs(props => ({
+const Text = styled.p.attrs((props) => ({
   onClick: props.disabled ? null : props.onClick,
 }))`
   font-family: ${fontFamily};

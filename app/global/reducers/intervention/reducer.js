@@ -108,7 +108,7 @@ const findInterventionIndex = (intervention, sessionId) =>
 
 /* eslint-disable default-case, no-param-reassign */
 export const interventionReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case FETCH_INTERVENTION_REQUEST:
         if (state.intervention && action.payload.id === state.intervention.id)
@@ -219,7 +219,7 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case UPDATE_SESSION_SETTINGS_REQUEST: {
         const sessionIndex = state.intervention.sessions.findIndex(
-          session => session.id === action.payload.data.sessionId,
+          (session) => session.id === action.payload.data.sessionId,
         );
         if (sessionIndex !== -1) {
           draft.currentSessionIndex = sessionIndex;
@@ -285,9 +285,10 @@ export const interventionReducer = (state = initialState, action) =>
         draft.intervention.usersWithAccess[userIndex].loading = true;
         break;
       case REVOKE_USER_ACCESS_SUCCESS:
-        draft.intervention.usersWithAccess = state.intervention.usersWithAccess.filter(
-          ({ id }) => id !== action.payload.userId,
-        );
+        draft.intervention.usersWithAccess =
+          state.intervention.usersWithAccess.filter(
+            ({ id }) => id !== action.payload.userId,
+          );
         break;
       case REVOKE_USER_ACCESS_ERROR:
         userIndex = state.intervention.usersWithAccess.findIndex(
@@ -341,7 +342,7 @@ export const interventionReducer = (state = initialState, action) =>
         if (sessionIndex !== -1) {
           draft.loaders.sendSessionLoading = true;
           draft.cache.intervention = state.intervention;
-          const mappedEmails = payloadEmails.map(email => ({
+          const mappedEmails = payloadEmails.map((email) => ({
             email,
           }));
 
@@ -409,7 +410,7 @@ export const interventionReducer = (state = initialState, action) =>
 
       case EDIT_SESSION_REQUEST: {
         const sessionIndex = state.intervention.sessions.findIndex(
-          session => session.id === action.payload.sessionId,
+          (session) => session.id === action.payload.sessionId,
         );
 
         if (sessionIndex !== -1)
@@ -422,7 +423,7 @@ export const interventionReducer = (state = initialState, action) =>
       }
       case EDIT_SESSION_SUCCESS:
         const sessionIndex = state.intervention.sessions.findIndex(
-          session => session.id === action.payload.session.id,
+          (session) => session.id === action.payload.session.id,
         );
 
         if (sessionIndex !== -1) {

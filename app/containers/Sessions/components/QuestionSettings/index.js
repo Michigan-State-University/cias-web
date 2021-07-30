@@ -73,9 +73,6 @@ const mapDispatchToProps = {
   toggleSettings: toggleQuestionSettings,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(QuestionSettings));

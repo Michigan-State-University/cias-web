@@ -31,7 +31,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const organizationsReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     draft.organization = organizationReducer(state.organization, action);
 
     const { type, payload } = action;
@@ -72,7 +72,7 @@ const organizationsReducer = (state = initialState, action) =>
       }
 
       case EDIT_ORGANIZATION_SUCCESS: {
-        draft.organizations = state.organizations.map(organization => {
+        draft.organizations = state.organizations.map((organization) => {
           if (organization.id === payload.organization.id)
             return { ...payload.organization };
 

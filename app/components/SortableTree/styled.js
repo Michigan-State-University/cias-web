@@ -29,7 +29,7 @@ export const StyledSortableTree = styled(SortableTree)`
       right: -15px;
       z-index: 1;
       background: initial;
-      background-image: url("${arrow}");
+      background-image: url('${arrow}');
       background-repeat: inherit;
       box-shadow: none;
       border-radius: unset;

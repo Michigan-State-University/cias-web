@@ -52,7 +52,7 @@ export const ReportsPage = ({
   const [page, setPage] = useState(1);
   const [displayLoader, setDisplayLoader] = useState(false);
 
-  const innerSetPage = pageNumber => {
+  const innerSetPage = (pageNumber) => {
     setDisplayLoader(true);
     setPage(pageNumber);
   };
@@ -124,13 +124,6 @@ const mapDispatchToProps = {
   fetchReports: fetchReportsRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-  memo,
-)(ReportsPage);
+export default compose(withConnect, injectIntl, memo)(ReportsPage);

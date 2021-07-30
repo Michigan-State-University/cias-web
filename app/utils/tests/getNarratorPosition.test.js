@@ -85,7 +85,7 @@ const getRandomBlockPosition = () => ({
   y: getRandomInt(601),
 });
 
-const getBlock = position => {
+const getBlock = (position) => {
   const number = getRandomInt(6);
   const copiedBlock = cloneDeep(allBlockTypes[number]);
   if (position) copiedBlock.endPosition = position;

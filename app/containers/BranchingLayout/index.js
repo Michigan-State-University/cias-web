@@ -78,7 +78,9 @@ function BranchingLayout({
             disabled={disabled}
             sessionId={sessionId}
             interventionId={interventionId}
-            onClick={value => onFormulaUpdate(`${formula.payload}${value}`, id)}
+            onClick={(value) =>
+              onFormulaUpdate(`${formula.payload}${value}`, id)
+            }
             includeAllVariables={includeAllVariables}
             includeCurrentQuestion={includeCurrentQuestion}
             includeAllSessions={includeAllSessions}
@@ -112,12 +114,12 @@ function BranchingLayout({
                 width="100%"
                 placeholder={formatMessage(messages.formulaPlaceholder)}
                 value={formula.payload}
-                onBlur={val => onFormulaUpdate(val, id)}
+                onBlur={(val) => onFormulaUpdate(val, id)}
               />
             </Box>
 
             {formula.patterns.map((pattern, index) => {
-              const updatePattern = patternObj => {
+              const updatePattern = (patternObj) => {
                 onUpdateCase(index, patternObj, id);
               };
               return (
@@ -204,7 +206,4 @@ const mapStateToProps = createStructuredSelector({
 
 const withConnect = connect(mapStateToProps);
 
-export default compose(
-  injectIntl,
-  withConnect,
-)(BranchingLayout);
+export default compose(injectIntl, withConnect)(BranchingLayout);

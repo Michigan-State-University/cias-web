@@ -67,7 +67,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
       };
 
     case REMOVE_BLOCK: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      const cloneBlocks = question.narrator.blocks.map((obj) => ({ ...obj }));
       cloneBlocks.splice(payload.data.index, 1);
       return {
         ...question,
@@ -79,7 +79,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
     }
 
     case UPDATE_NARRATOR_ANIMATION: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      const cloneBlocks = question.narrator.blocks.map((obj) => ({ ...obj }));
       cloneBlocks[payload.data.index].animation = payload.data.value;
       return {
         ...question,
@@ -91,7 +91,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
     }
 
     case UPDATE_BLOCK_SETTINGS: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      const cloneBlocks = question.narrator.blocks.map((obj) => ({ ...obj }));
       cloneBlocks[payload.data.index] = {
         ...cloneBlocks[payload.data.index],
         ...payload.data.value,
@@ -107,7 +107,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
     }
 
     case UPDATE_REFLECTION: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      const cloneBlocks = question.narrator.blocks.map((obj) => ({ ...obj }));
       const reflection =
         cloneBlocks[payload.data.blockIndex].reflections[
           payload.data.reflectionIndex
@@ -130,7 +130,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
     }
 
     case SWITCH_SPEECH_REFLECTION: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      const cloneBlocks = question.narrator.blocks.map((obj) => ({ ...obj }));
       const newBlockType = payload.data.switchTo;
 
       cloneBlocks[payload.data.index] = {
@@ -150,7 +150,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
     }
 
     case UPDATE_REFLECTION_FORMULA: {
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      const cloneBlocks = question.narrator.blocks.map((obj) => ({ ...obj }));
 
       cloneBlocks[payload.data.index] = reflectionFormulaBlockReducer(
         cloneBlocks[payload.data.index],
@@ -198,7 +198,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
     case UPDATE_NARRATOR_MOVEMENT: {
       const positionToSet = payload.data.position;
       // update position that animates to in current animation block
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      const cloneBlocks = question.narrator.blocks.map((obj) => ({ ...obj }));
       cloneBlocks[payload.data.index].endPosition = positionToSet;
 
       return {
@@ -225,7 +225,7 @@ const questionSettingsReducer = (allQuestions, payload, questionIndex) => {
     case UPDATE_PAUSE_DURATION: {
       const { duration, index } = payload.data;
 
-      const cloneBlocks = question.narrator.blocks.map(obj => ({ ...obj }));
+      const cloneBlocks = question.narrator.blocks.map((obj) => ({ ...obj }));
       cloneBlocks[index].pauseDuration = duration;
       return {
         ...question,

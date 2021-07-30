@@ -31,10 +31,10 @@ const UserTable = ({
   const [pickedUser, setPickedUser] = useState({});
   const [userToRemove, setUserToRemove] = useState({});
 
-  const openModal = user => setPickedUser(user);
+  const openModal = (user) => setPickedUser(user);
   const closeModal = () => setPickedUser({});
 
-  const openRemoveUserModal = user => setUserToRemove(user);
+  const openRemoveUserModal = (user) => setUserToRemove(user);
   const closeRemoveUserModal = () => setUserToRemove({});
 
   const handleDeactivate = () => {
@@ -128,7 +128,4 @@ UserTable.propTypes = {
   history: PropTypes.object,
 };
 
-export default compose(
-  withRouter,
-  memo,
-)(UserTable);
+export default compose(withRouter, memo)(UserTable);

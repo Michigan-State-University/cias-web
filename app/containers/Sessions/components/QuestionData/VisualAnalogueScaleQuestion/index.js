@@ -47,7 +47,7 @@ const VisualAnalogueScaleQuestion = ({
           textAlign="center"
           placeholder={formatMessage(messages.startValue)}
           value={startValue}
-          onBlur={value => updateLabel(value, 'start_value')}
+          onBlur={(value) => updateLabel(value, 'start_value')}
         />
       ),
       style: visualAnalogScaleLabelStyles,
@@ -60,7 +60,7 @@ const VisualAnalogueScaleQuestion = ({
           textAlign="center"
           placeholder={formatMessage(messages.endValue)}
           value={endValue}
-          onBlur={value => updateLabel(value, 'end_value')}
+          onBlur={(value) => updateLabel(value, 'end_value')}
         />
       ),
       style: visualAnalogScaleLabelStyles,
@@ -115,9 +115,6 @@ const mapDispatchToProps = {
     updateQuestionData({ type: UPDATE_DATA, data: { value, label } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(VisualAnalogueScaleQuestion));

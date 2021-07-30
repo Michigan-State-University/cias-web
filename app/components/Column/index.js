@@ -16,13 +16,13 @@ const maxNumberOfColumns = 12;
  * @param  {number} columnSpan column span value over maximum of 12 columns
  * @returns  {number} return width of column in percents
  */
-export const calculateWidth = columnSpan => {
+export const calculateWidth = (columnSpan) => {
   if (columnSpan) return (columnSpan / maxNumberOfColumns) * 100;
 
   return undefined;
 };
 
-export const getWidthString = columnSpan => {
+export const getWidthString = (columnSpan) => {
   if (columnSpan) return `width: ${calculateWidth(columnSpan)}%;`;
 
   return '';

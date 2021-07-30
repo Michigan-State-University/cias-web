@@ -13,7 +13,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const AudioPreviewReducer = (state = initialState, { payload, type }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case RESET_PHONETIC_PREVIEW:
         return initialState;

@@ -62,7 +62,7 @@ const BranchingTab = ({
     fetchIntervention(interventionId);
   }, []);
 
-  const displayPatternTargetText = target => {
+  const displayPatternTargetText = (target) => {
     if (!target) return formatMessage(messages.selectQuestion);
     const isQuestionType = target.type.startsWith(questionType);
 
@@ -138,14 +138,6 @@ const mapDispatchToProps = {
   onRemoveTarget: removeFormulaTarget,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default injectIntl(
-  compose(
-    withConnect,
-    withRouter,
-  )(BranchingTab),
-);
+export default injectIntl(compose(withConnect, withRouter)(BranchingTab));

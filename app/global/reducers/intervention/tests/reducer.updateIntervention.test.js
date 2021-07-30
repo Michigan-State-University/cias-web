@@ -51,7 +51,7 @@ describe('intervention reducer', () => {
     return session;
   };
 
-  const mockState = session => ({
+  const mockState = (session) => ({
     ...initialState,
     intervention: {
       sessions: [session],

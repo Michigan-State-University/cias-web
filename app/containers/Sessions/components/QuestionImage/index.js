@@ -35,7 +35,7 @@ export const QuestionImage = ({
   const { formatMessage } = useIntl();
   useInjectSaga({ key: 'questionImage', saga: questionImageSaga });
 
-  const handleDrop = image => {
+  const handleDrop = (image) => {
     addImage({
       image: image.image,
       imageUrl: image.imageUrl,
@@ -45,7 +45,7 @@ export const QuestionImage = ({
 
   const handleRemove = () => deleteImage({ selectedQuestionId: id });
 
-  const handleUpdateDescription = description => {
+  const handleUpdateDescription = (description) => {
     updateImage(id, description);
   };
 
@@ -94,12 +94,6 @@ const mapDispatchToProps = {
   updateImage: updateQuestionImageRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  injectIntl,
-  withConnect,
-)(QuestionImage);
+export default compose(injectIntl, withConnect)(QuestionImage);

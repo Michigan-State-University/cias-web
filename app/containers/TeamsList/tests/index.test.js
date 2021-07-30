@@ -23,7 +23,7 @@ import { TeamBuilder } from 'models/Teams/TeamBuilder';
 import TeamsList from '../index';
 
 describe('<TeamsList />', () => {
-  const initialState = role => ({
+  const initialState = (role) => ({
     auth: {
       user: { firstName: 'test', lastName: 'test', roles: [role] },
     },

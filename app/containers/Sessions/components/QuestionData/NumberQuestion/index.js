@@ -44,7 +44,9 @@ const NumberQuestion = ({
             placeholder={formatMessage(messages.placeholder)}
             value={payload}
             validator={numericValidator}
-            onCheck={newTitle => updateAnswer({ variable, payload: newTitle })}
+            onCheck={(newTitle) =>
+              updateAnswer({ variable, payload: newTitle })
+            }
             disabled
           />
         </Row>
@@ -64,13 +66,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateAnswer: value =>
+  updateAnswer: (value) =>
     updateQuestionData({ type: UPDATE_DATA, data: { value } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(NumberQuestion));

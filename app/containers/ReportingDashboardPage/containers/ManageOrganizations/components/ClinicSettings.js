@@ -81,7 +81,7 @@ const ClinicSettings = ({
   );
 
   const onEdit = useCallback(
-    value =>
+    (value) =>
       editClinic({
         ...value,
         id,
@@ -90,9 +90,10 @@ const ClinicSettings = ({
     [id],
   );
 
-  const onInvite = useCallback((email, role) => inviteAdmin(id, email, role), [
-    id,
-  ]);
+  const onInvite = useCallback(
+    (email, role) => inviteAdmin(id, email, role),
+    [id],
+  );
 
   if (!id || fetchOrganizationLoader || fetchClinicLoader)
     return <Loader type="inline" />;
@@ -162,9 +163,6 @@ const mapDispatchToProps = {
   inviteAdmin: inviteAdminRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default memo(compose(withConnect)(ClinicSettings));

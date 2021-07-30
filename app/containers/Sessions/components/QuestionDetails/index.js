@@ -45,7 +45,7 @@ import VariableInput from './VariableInput';
 import messages from './messages';
 import { AnswerOuterContainer, AnswerInterventionContent } from './styled';
 
-const QuestionDetails = props => (
+const QuestionDetails = (props) => (
   <Box
     width="100%"
     display="flex"
@@ -112,7 +112,7 @@ const RenderQuestionDetails = ({
                 placeholder={formatMessage(messages.groupPlaceholder)}
                 maxWidth="initial"
                 onFocus={selectInputText}
-                onBlur={val =>
+                onBlur={(val) =>
                   changeGroupName(val, sessionId, currentGroupScope.id)
                 }
                 disabled={!editingPossible}

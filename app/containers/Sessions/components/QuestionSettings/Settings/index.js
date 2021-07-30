@@ -34,7 +34,7 @@ const Settings = ({
   setDraggable,
   interventionStatus,
 }) => {
-  const handleChange = newTab => {
+  const handleChange = (newTab) => {
     changeTab({ tab: newTab });
     setDraggable(false);
   };
@@ -111,9 +111,6 @@ const mapDispatchToProps = {
   setDraggable: setCharacterDraggable,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(Settings));

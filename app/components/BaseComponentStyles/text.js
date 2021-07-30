@@ -7,7 +7,7 @@ const propsToCssMapper = {
   bold: 700,
 };
 
-const text = props => ({
+const text = (props) => ({
   fontSize: props.fontSize || '',
   fontWeight: propsToCssMapper[props.fontWeight] || '',
   fontStyle: props.fontStyle || '',

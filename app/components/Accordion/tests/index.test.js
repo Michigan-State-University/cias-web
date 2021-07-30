@@ -5,13 +5,13 @@ import 'jest-styled-components';
 
 import Accordion from '../index';
 
-const singleChild = index => (
+const singleChild = (index) => (
   <div key={index} label={`Label${index}`} color="red">
     {`Content${index}`}
   </div>
 );
 
-const multipleChildren = () => times(3, index => singleChild(index));
+const multipleChildren = () => times(3, (index) => singleChild(index));
 
 describe('<Accordion />', () => {
   const defaultProps = {

@@ -43,7 +43,7 @@ const Modal = ({
     app.appendChild(portalRoot);
   }
 
-  const handleClick = event => {
+  const handleClick = (event) => {
     const { target } = event;
     const { current: overlayCurrent } = modalOverlay;
     const { current: contentCurrent } = modalContent;

@@ -24,9 +24,10 @@ const QuestionSubtitle = ({
   intl: { formatMessage },
   updateSubtitle,
 }) => {
-  const handleUpdate = val => updateSubtitle({ path: 'subtitle', value: val });
+  const handleUpdate = (val) =>
+    updateSubtitle({ path: 'subtitle', value: val });
 
-  const onFocus = quill => {
+  const onFocus = (quill) => {
     selectQuillText(quill);
   };
 
@@ -61,12 +62,6 @@ const mapDispatchToProps = {
   updateSubtitle: editQuestionRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(QuestionSubtitle);
+export default compose(withConnect, injectIntl)(QuestionSubtitle);

@@ -25,7 +25,7 @@ const InterventionSettingsModal = () => {
   );
 
   // actions
-  const editIntervention = intervention =>
+  const editIntervention = (intervention) =>
     dispatch(editInterventionRequest(intervention));
 
   const { formatMessage } = useIntl();
@@ -63,7 +63,7 @@ const InterventionSettingsModal = () => {
         <Col>
           <ApiSelect
             url="/v1/google/languages"
-            dataParser={data => jsonApiToArray(data, 'supportedLanguage')}
+            dataParser={(data) => jsonApiToArray(data, 'supportedLanguage')}
             optionsFormatter={languageSelectOptionFormatter}
             selectProps={{
               onChange: handleLanguageChange,

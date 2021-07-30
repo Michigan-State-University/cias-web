@@ -20,7 +20,7 @@ const NumberQuestion = ({
     },
   } = question;
 
-  const onChange = event => {
+  const onChange = (event) => {
     selectAnswer([
       {
         var: name,
@@ -29,7 +29,7 @@ const NumberQuestion = ({
     ]);
   };
 
-  const onValidation = validationResult =>
+  const onValidation = (validationResult) =>
     !validationResult &&
     showError(formatMessage(messages.numberValidationError), {
       toastId: NUMBER_VALIDATION_ERROR,

@@ -18,7 +18,7 @@ export const Popup = ({
   visible,
 }) => {
   const [popupVisible, setPopupVisible] = useState(false);
-  const togglePopup = willBeVisible => () => {
+  const togglePopup = (willBeVisible) => () => {
     if (!controlled) setPopupVisible(willBeVisible);
   };
   return (

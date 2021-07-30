@@ -25,7 +25,7 @@ const Dropdown = ({ options, top, disabled, ...restProps }) => {
     return { top: '35px' };
   };
 
-  const callAction = action => {
+  const callAction = (action) => {
     action();
     setOpen(false);
   };
@@ -50,7 +50,7 @@ const Dropdown = ({ options, top, disabled, ...restProps }) => {
       {open && (
         <Row position="absolute" right="0" zIndex={999} {...getPosition()}>
           <Column bg={colors.white} shadow={boxShadows.black} borderRadius={10}>
-            {options.map(option => (
+            {options.map((option) => (
               <StyledRow
                 disabled={option.disabled}
                 key={`el-dropdown-${option.id}`}

@@ -60,44 +60,44 @@ import {
   UPDATE_INTERVENTION_LOGO_ERROR,
 } from './constants';
 
-export const fetchInterventionRequest = id =>
+export const fetchInterventionRequest = (id) =>
   actionBuilder(FETCH_INTERVENTION_REQUEST, { id });
-export const fetchInterventionSuccess = intervention =>
+export const fetchInterventionSuccess = (intervention) =>
   actionBuilder(FETCH_INTERVENTION_SUCCESS, { intervention });
-export const fetchInterventionError = error =>
+export const fetchInterventionError = (error) =>
   actionBuilder(FETCH_INTERVENTION_ERROR, { error });
 
-export const sendInterventionCsvRequest = id =>
+export const sendInterventionCsvRequest = (id) =>
   actionBuilder(SEND_INTERVENTION_CSV_REQUEST, { id });
-export const sendInterventionCsvSuccess = message =>
+export const sendInterventionCsvSuccess = (message) =>
   actionBuilder(SEND_INTERVENTION_CSV_SUCCESS, { message });
-export const sendInterventionCsvError = error =>
+export const sendInterventionCsvError = (error) =>
   actionBuilder(SEND_INTERVENTION_CSV_ERROR, { error });
 
 export const createInterventionRequest = () =>
   actionBuilder(CREATE_INTERVENTION_REQUEST, {});
-export const createInterventionSuccess = intervention =>
+export const createInterventionSuccess = (intervention) =>
   actionBuilder(CREATE_INTERVENTION_SUCCESS, { intervention });
-export const createInterventionError = error =>
+export const createInterventionError = (error) =>
   actionBuilder(CREATE_INTERVENTION_ERROR, { error });
 
-export const editInterventionRequest = intervention =>
+export const editInterventionRequest = (intervention) =>
   actionBuilder(EDIT_INTERVENTION_REQUEST, { intervention });
-export const editInterventionSuccess = intervention =>
+export const editInterventionSuccess = (intervention) =>
   actionBuilder(EDIT_INTERVENTION_SUCCESS, { intervention });
-export const editInterventionError = error =>
+export const editInterventionError = (error) =>
   actionBuilder(EDIT_INTERVENTION_ERROR, { error });
 
-export const copySessionRequest = payload =>
+export const copySessionRequest = (payload) =>
   actionBuilder(COPY_SESSION_REQUEST, payload);
-export const copySessionSuccess = session =>
+export const copySessionSuccess = (session) =>
   actionBuilder(COPY_SESSION_SUCCESS, { session });
 
-export const reorderSessionList = payload =>
+export const reorderSessionList = (payload) =>
   actionBuilder(REORDER_SESSION_LIST, payload);
-export const reorderSessionsSuccess = payload =>
+export const reorderSessionsSuccess = (payload) =>
   actionBuilder(REORDER_SESSION_LIST_SUCCESS, payload);
-export const reorderSessionsError = payload =>
+export const reorderSessionsError = (payload) =>
   actionBuilder(REORDER_SESSION_LIST_ERROR, payload);
 
 export const updateSessionSettings = (data, fields = []) =>
@@ -109,39 +109,39 @@ export const updateSessionSettingsSuccess = () =>
 export const updateSessionSettingsError = () =>
   actionBuilder(UPDATE_SESSION_SETTINGS_ERROR, {});
 
-export const changeCurrentSession = index =>
+export const changeCurrentSession = (index) =>
   actionBuilder(CHANGE_CURRENT_SESSION, { index });
 export const changeAccessSettingRequest = (id, setting) =>
   actionBuilder(CHANGE_ACCESS_SETTING_REQUEST, { id, setting });
 export const changeAccessSettingSuccess = () =>
   actionBuilder(CHANGE_ACCESS_SETTING_SUCCESS, {});
-export const changeAccessSettingFailure = payload =>
+export const changeAccessSettingFailure = (payload) =>
   actionBuilder(CHANGE_ACCESS_SETTING_ERROR, payload);
 
 export const enableUserAccessRequest = (id, emails) =>
   actionBuilder(ENABLE_USER_ACCESS_REQUEST, { id, emails });
-export const enableUserAccessSuccess = emails =>
+export const enableUserAccessSuccess = (emails) =>
   actionBuilder(ENABLE_USER_ACCESS_SUCCESS, { emails });
-export const enableUserAccessFailure = payload =>
+export const enableUserAccessFailure = (payload) =>
   actionBuilder(ENABLE_USER_ACCESS_ERROR, payload);
 
-export const fetchUsersWithAccessRequest = id =>
+export const fetchUsersWithAccessRequest = (id) =>
   actionBuilder(FETCH_USERS_WITH_ACCESS_REQUEST, { id });
-export const fetchUsersWithAccessSuccess = userAccess =>
+export const fetchUsersWithAccessSuccess = (userAccess) =>
   actionBuilder(FETCH_USERS_WITH_ACCESS_SUCCESS, { userAccess });
-export const fetchUsersWithAccessFailure = payload =>
+export const fetchUsersWithAccessFailure = (payload) =>
   actionBuilder(FETCH_USERS_WITH_ACCESS_ERROR, payload);
 
 export const revokeUserAccessRequest = (interventionId, userId) =>
   actionBuilder(REVOKE_USER_ACCESS_REQUEST, { interventionId, userId });
-export const revokeUserAccessSuccess = userId =>
+export const revokeUserAccessSuccess = (userId) =>
   actionBuilder(REVOKE_USER_ACCESS_SUCCESS, { userId });
 export const revokeUserAccessFailure = (userId, error) =>
   actionBuilder(REVOKE_USER_ACCESS_ERROR, { userId, error });
 
 export const createSessionRequest = (id, lastPosition) =>
   actionBuilder(CREATE_SESSION_REQUEST, { id, lastPosition });
-export const createSessionSuccess = session =>
+export const createSessionSuccess = (session) =>
   actionBuilder(CREATE_SESSION_SUCCESS, { session });
 export const createSessionError = () => actionBuilder(CREATE_SESSION_ERROR, {});
 
@@ -163,25 +163,25 @@ export const sendSessionInviteError = () =>
 export const resendSessionInviteRequest = (id, sessionId) =>
   actionBuilder(RESEND_SESSION_INVITE_REQUEST, { id, sessionId });
 
-export const fetchSessionEmailsRequest = index =>
+export const fetchSessionEmailsRequest = (index) =>
   actionBuilder(FETCH_SESSION_EMAILS_REQUEST, { index });
 export const fetchSessionEmailsSuccess = (emails, index) =>
   actionBuilder(FETCH_SESSION_EMAILS_SUCCESS, { emails, index });
-export const fetchSessionEmailsError = error =>
+export const fetchSessionEmailsError = (error) =>
   actionBuilder(FETCH_SESSION_EMAILS_ERROR, { error });
 
 export const deleteSessionRequest = (sessionId, interventionId) =>
   actionBuilder(DELETE_SESSION_REQUEST, { sessionId, interventionId });
 export const deleteSessionSuccess = () =>
   actionBuilder(DELETE_SESSION_SUCCESS, {});
-export const deleteSessionError = error =>
+export const deleteSessionError = (error) =>
   actionBuilder(DELETE_SESSION_ERROR, { error });
 
-export const externalCopySessionRequest = payload =>
+export const externalCopySessionRequest = (payload) =>
   actionBuilder(EXTERNAL_COPY_SESSION_REQUEST, payload);
 export const externalCopySessionSuccess = ({ session, interventionId }) =>
   actionBuilder(EXTERNAL_COPY_SESSION_SUCCESS, { session, interventionId });
-export const externalCopySessionError = error =>
+export const externalCopySessionError = (error) =>
   actionBuilder(EXTERNAL_COPY_SESSION_ERROR, { error });
 
 export const addInterventionLogoRequest = (interventionId, logoData, logoUrl) =>
@@ -190,16 +190,16 @@ export const addInterventionLogoRequest = (interventionId, logoData, logoUrl) =>
     logoData,
     logoUrl,
   });
-export const addInterventionLogoSuccess = logoUrl =>
+export const addInterventionLogoSuccess = (logoUrl) =>
   actionBuilder(ADD_INTERVENTION_LOGO_SUCCESS, { logoUrl });
-export const addInterventionLogoError = error =>
+export const addInterventionLogoError = (error) =>
   actionBuilder(ADD_INTERVENTION_LOGO_ERROR, { error });
 
-export const deleteInterventionLogoRequest = interventionId =>
+export const deleteInterventionLogoRequest = (interventionId) =>
   actionBuilder(DELETE_INTERVENTION_LOGO_REQUEST, { interventionId });
 export const deleteInterventionLogoSuccess = () =>
   actionBuilder(DELETE_INTERVENTION_LOGO_SUCCESS, {});
-export const deleteInterventionLogoError = error =>
+export const deleteInterventionLogoError = (error) =>
   actionBuilder(DELETE_INTERVENTION_LOGO_ERROR, { error });
 
 export const updateInterventionLogoRequest = (interventionId, description) =>
@@ -209,5 +209,5 @@ export const updateInterventionLogoRequest = (interventionId, description) =>
   });
 export const updateInterventionLogoSuccess = () =>
   actionBuilder(UPDATE_INTERVENTION_LOGO_SUCCESS, {});
-export const updateInterventionLogoError = error =>
+export const updateInterventionLogoError = (error) =>
   actionBuilder(UPDATE_INTERVENTION_LOGO_ERROR, { error });

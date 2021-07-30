@@ -7,7 +7,7 @@ import Switch from 'components/Switch';
 import { colors, borders } from 'theme';
 
 const Option = ({ withBorder, fontWeight, label, value, action, disabled }) => {
-  const handleToggle = val => {
+  const handleToggle = (val) => {
     action(val);
   };
   return (

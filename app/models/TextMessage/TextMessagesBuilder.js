@@ -15,7 +15,7 @@ export class TextMessagesBuilder {
    * @param  {string} id
    * @returns  {TextMessagesBuilder}
    */
-  withId = id => {
+  withId = (id) => {
     this.id = id;
 
     return this;
@@ -25,7 +25,7 @@ export class TextMessagesBuilder {
    * @param  {string} name
    * @returns  {TextMessagesBuilder}
    */
-  withName = name => {
+  withName = (name) => {
     this.name = name;
 
     return this;
@@ -35,7 +35,7 @@ export class TextMessagesBuilder {
    * @param  {string} sessionId
    * @returns  {TextMessagesBuilder}
    */
-  withSessionId = sessionId => {
+  withSessionId = (sessionId) => {
     this.sessionId = sessionId;
 
     return this;
@@ -64,7 +64,7 @@ export class TextMessagesBuilder {
    * @param  {object} json
    * @returns  {TextMessagesBuilder}
    */
-  fromJson = json => {
+  fromJson = (json) => {
     const textMessage = objectToCamelCase(defaultMapper(json));
 
     this.id = textMessage.id;

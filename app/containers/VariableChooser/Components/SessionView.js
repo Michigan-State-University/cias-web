@@ -22,7 +22,7 @@ const SessionView = ({ onClick }) => {
   const dispatch = useDispatch();
 
   // actions
-  const fetchSessions = interventionId =>
+  const fetchSessions = (interventionId) =>
     dispatch(fetchSessionsRequest(interventionId));
 
   // selectors
@@ -56,7 +56,7 @@ const SessionView = ({ onClick }) => {
     );
   }, [allSessions, includeAllSessions, includeCurrentSession]);
 
-  const isInitialSession = sessionId => sessionId === initialSessionId;
+  const isInitialSession = (sessionId) => sessionId === initialSessionId;
 
   const toInterventionView = () =>
     currentView !== VIEWS.INTERVENTION && setCurrentView(VIEWS.INTERVENTION);

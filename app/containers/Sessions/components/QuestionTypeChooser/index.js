@@ -64,7 +64,7 @@ const QuestionTypeChooser = ({
 
   const toggleTypeChooser = () => setTypeChooserOpen(!typeChooserOpen);
 
-  const handleClick = type => {
+  const handleClick = (type) => {
     onClick(type);
     toggleTypeChooser();
   };
@@ -107,9 +107,7 @@ const QuestionTypeChooser = ({
             visibility={isVisible ? 'visible' : 'hidden'}
           >
             <Box
-              borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
-                colors.linkWater
-              }`}
+              borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`}
               padded
             >
               <Text fontWeight="bold" fontSize={fontSizes.regular}>
@@ -172,12 +170,6 @@ const mapStateToProps = createStructuredSelector({
   phoneQuestionExists: makeSelectPhoneQuestionExists(),
 });
 
-const withConnect = connect(
-  mapStateToProps,
-  null,
-);
+const withConnect = connect(mapStateToProps, null);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(QuestionTypeChooser);
+export default compose(withConnect, injectIntl)(QuestionTypeChooser);

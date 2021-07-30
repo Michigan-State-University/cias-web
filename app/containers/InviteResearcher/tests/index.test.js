@@ -40,7 +40,7 @@ describe('<InviteResearcher />', () => {
     store.injectedSagas = {};
   });
   const defaultProps = {
-    formatMessage: jest.fn(msg => msg.defaultMessage),
+    formatMessage: jest.fn((msg) => msg.defaultMessage),
     onClose: jest.fn(),
     sendInvitation: jest.fn(),
     deleteError: jest.fn(),

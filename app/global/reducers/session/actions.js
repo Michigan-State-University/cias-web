@@ -9,16 +9,16 @@ import {
   EDIT_SESSION_ERROR,
 } from './constants';
 
-export const getSessionRequest = payload =>
+export const getSessionRequest = (payload) =>
   actionBuilder(GET_SESSION_REQUEST, payload);
-export const getSessionSuccess = session =>
+export const getSessionSuccess = (session) =>
   actionBuilder(GET_SESSION_SUCCESS, { session });
-export const getSessionError = error =>
+export const getSessionError = (error) =>
   actionBuilder(GET_SESSION_ERROR, { error });
 
 export const editSessionRequest = (payload, fields = [], sessionId) =>
   actionBuilder(EDIT_SESSION_REQUEST, { ...payload, sessionId }, fields);
-export const editSessionSuccess = session =>
+export const editSessionSuccess = (session) =>
   actionBuilder(EDIT_SESSION_SUCCESS, { session });
-export const editSessionError = error =>
+export const editSessionError = (error) =>
   actionBuilder(EDIT_SESSION_ERROR, { error });

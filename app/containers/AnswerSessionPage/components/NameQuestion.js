@@ -54,7 +54,7 @@ const NameQuestion = ({
       ]);
   }, []);
 
-  const onChange = event => {
+  const onChange = (event) => {
     const value = { ...event };
     const { phoneticName, name } = event;
     if (phoneticName === undefined && name !== undefined) {
@@ -107,10 +107,7 @@ const mapDispatchToProps = {
   resetAudioPreview: resetPhoneticPreview,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   injectReducer({ key: 'audioPreview', reducer: AudioPreviewReducer }),

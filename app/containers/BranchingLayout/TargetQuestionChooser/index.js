@@ -37,7 +37,7 @@ import { makeSelectQuestionGroups } from 'global/reducers/questionGroups';
 import messages from './messages';
 import GroupCollapse from './GroupCollapse';
 
-const TargetQuestionChooser = props => {
+const TargetQuestionChooser = (props) => {
   const {
     intl: { formatMessage },
     onClick,
@@ -85,7 +85,7 @@ const TargetQuestionChooser = props => {
   const filteredSessionList = useMemo(
     () =>
       sessionList
-        ? sessionList.filter(session => session.position > sessionIndex + 1)
+        ? sessionList.filter((session) => session.position > sessionIndex + 1)
         : [],
     [sessionList, sessionIndex],
   );
@@ -95,12 +95,12 @@ const TargetQuestionChooser = props => {
     if (event) event.stopPropagation();
     _setIsSessionView(value);
   };
-  const canSelectSession = sessionPosition =>
+  const canSelectSession = (sessionPosition) =>
     !sessionBranching ||
     (sessionList[sessionIndex] &&
       sessionPosition > sessionList[sessionIndex].position);
   const isLast = currentIndex === questions.length - 1;
-  const isCurrentSession = session =>
+  const isCurrentSession = (session) =>
     !sessionBranching && sessionId === session.id;
 
   useEffect(() => {
@@ -136,7 +136,7 @@ const TargetQuestionChooser = props => {
           data-cy="select-target-question-session-view-setter"
           src={arrowLeft}
           mr={10}
-          onClick={event => setIsSessionView(true, event)}
+          onClick={(event) => setIsSessionView(true, event)}
           clickable
         />
         <Img src={presentationProjector} mr={10} />
@@ -189,7 +189,7 @@ const TargetQuestionChooser = props => {
                   data-cy={`choose-session-${index}`}
                   key={`${id}-select-target-session-${index}`}
                   mb={index !== filteredSessionList.length - 1 ? 15 : 5}
-                  onClick={event => chooseSession(session, event)}
+                  onClick={(event) => chooseSession(session, event)}
                   align="center"
                   clickable={canSelectSession(session.position)}
                 >
@@ -232,9 +232,7 @@ const TargetQuestionChooser = props => {
     <Box width={300}>
       {!sessionBranching && (
         <Box
-          borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${
-            colors.linkWater
-          }`}
+          borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`}
           padded
         >
           <Row

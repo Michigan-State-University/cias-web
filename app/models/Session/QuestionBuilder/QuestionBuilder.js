@@ -8,7 +8,7 @@ export class QuestionBuilder {
    * @param  {string} id
    * @returns  {QuestionBuilder}
    */
-  withId = id => {
+  withId = (id) => {
     this.id = id;
 
     return this;
@@ -18,7 +18,7 @@ export class QuestionBuilder {
    * @param  {string} title
    * @returns  {QuestionBuilder}
    */
-  withTitle = title => {
+  withTitle = (title) => {
     this.title = title;
 
     return this;
@@ -28,7 +28,7 @@ export class QuestionBuilder {
    * @param  {string} subtitle
    * @returns  {QuestionBuilder}
    */
-  withSubtitle = subtitle => {
+  withSubtitle = (subtitle) => {
     this.subtitle = subtitle;
 
     return this;
@@ -38,7 +38,7 @@ export class QuestionBuilder {
    * @param  {string} type
    * @returns  {QuestionBuilder}
    */
-  ofType = type => {
+  ofType = (type) => {
     this.type = type;
     this.body = getQuestionDataByType(type);
 
@@ -49,7 +49,7 @@ export class QuestionBuilder {
    * @param  {object} body
    * @returns  {QuestionBuilder}
    */
-  withBody = body => {
+  withBody = (body) => {
     this.body = body;
 
     return this;
@@ -59,7 +59,7 @@ export class QuestionBuilder {
    * @param  {number} position
    * @returns  {QuestionBuilder}
    */
-  withPosition = position => {
+  withPosition = (position) => {
     this.position = position;
 
     return this;
@@ -69,7 +69,7 @@ export class QuestionBuilder {
    * @param  {string} question_group_id
    * @returns  {QuestionBuilder}
    */
-  withQuestionGroupId = question_group_id => {
+  withQuestionGroupId = (question_group_id) => {
     this.question_group_id = question_group_id;
 
     return this;

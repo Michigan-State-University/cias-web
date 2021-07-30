@@ -133,10 +133,7 @@ const mapDispatchToProps = {
   deleteSection: deleteTemplateSectionRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 TemplateSectionSettings.propTypes = {
   addCase: PropTypes.func,
@@ -144,7 +141,4 @@ TemplateSectionSettings.propTypes = {
   intl: PropTypes.shape(IntlShape),
 };
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(TemplateSectionSettings);
+export default compose(withConnect, injectIntl)(TemplateSectionSettings);

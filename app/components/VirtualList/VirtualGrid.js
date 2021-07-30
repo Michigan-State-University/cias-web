@@ -9,7 +9,7 @@ const VirtualGrid = ({ children, gutterWidth, gutterHeight, ...props }) => {
   const { columnCount } = props;
 
   const renderCell = memo(
-    gridProps => (
+    (gridProps) => (
       <GridChild
         {...gridProps}
         gutterWidth={gutterWidth}

@@ -8,7 +8,7 @@ import { splitAndKeep } from 'utils/splitAndKeep';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { readQuestionBlockType } from 'models/Narrator/BlockTypes';
 
-export const mapQuestionDataForType = question => {
+export const mapQuestionDataForType = (question) => {
   switch (question.type) {
     case textboxQuestion.id:
     case numberQuestion.id:
@@ -46,7 +46,7 @@ export const mapQuestionDataForType = question => {
   }
 };
 
-export const getFromQuestionTTS = question => {
+export const getFromQuestionTTS = (question) => {
   const delimiters = [',', '.', '?', '!'];
 
   const subtileTTS = question.subtitle
@@ -56,14 +56,14 @@ export const getFromQuestionTTS = question => {
   return subtileTTS;
 };
 
-export const assignFromQuestionTTS = question => {
+export const assignFromQuestionTTS = (question) => {
   const { subtitle } = question.settings;
 
   return {
     ...question,
     narrator: {
       ...question.narrator,
-      blocks: question.narrator.blocks.map(block => {
+      blocks: question.narrator.blocks.map((block) => {
         if (block.type === readQuestionBlockType)
           return {
             ...block,
@@ -80,7 +80,7 @@ export const assignFromQuestionTTS = question => {
 export const editQuestionSuccessCommon = (draft, payload) => {
   draft.loaders.updateQuestionLoading = false;
   const index = draft.questions.findIndex(
-    question => question.id === payload.question.id,
+    (question) => question.id === payload.question.id,
   );
   draft.questions[index] = mapQuestionDataForType(payload.question);
   draft.cache.questions = draft.questions;
@@ -89,7 +89,7 @@ export const editQuestionSuccessCommon = (draft, payload) => {
 /* eslint-disable default-case, no-param-reassign */
 export const editQuestionErrorCommon = (draft, payload) => {
   draft.loaders.updateQuestionLoading = false;
-  const finder = question => question.id === payload.questionId;
+  const finder = (question) => question.id === payload.questionId;
   const cacheIndex = draft.cache.questions.findIndex(finder);
   const index = draft.questions.findIndex(finder);
   if (cacheIndex !== -1 && index !== -1)

@@ -14,7 +14,7 @@ export class SectionCaseBuilder {
    * @param  {string} id
    * @returns  {SectionCaseBuilder}
    */
-  withId = id => {
+  withId = (id) => {
     this.id = id;
 
     return this;
@@ -24,7 +24,7 @@ export class SectionCaseBuilder {
    * @param  {boolean} preview
    * @returns  {SectionCaseBuilder}
    */
-  withPreview = preview => {
+  withPreview = (preview) => {
     this.preview = preview;
 
     return this;
@@ -34,7 +34,7 @@ export class SectionCaseBuilder {
    * @param  {string} formulaMatch
    * @returns  {SectionCaseBuilder}
    */
-  withFormulaMatch = formulaMatch => {
+  withFormulaMatch = (formulaMatch) => {
     this.formulaMatch = formulaMatch;
 
     return this;
@@ -44,7 +44,7 @@ export class SectionCaseBuilder {
    * @param  {string} title
    * @returns  {SectionCaseBuilder}
    */
-  withTitle = title => {
+  withTitle = (title) => {
     this.title = title;
 
     return this;
@@ -54,7 +54,7 @@ export class SectionCaseBuilder {
    * @param  {string} content
    * @returns  {SectionCaseBuilder}
    */
-  withContent = content => {
+  withContent = (content) => {
     this.content = content;
 
     return this;
@@ -64,7 +64,7 @@ export class SectionCaseBuilder {
    * @param  {string} reportTemplateSectionId
    * @returns  {SectionCaseBuilder}
    */
-  withReportTemplateSectionId = reportTemplateSectionId => {
+  withReportTemplateSectionId = (reportTemplateSectionId) => {
     this.reportTemplateSectionId = reportTemplateSectionId;
 
     return this;
@@ -74,7 +74,7 @@ export class SectionCaseBuilder {
    * @param  {string} imageUrl
    * @returns  {SectionCaseBuilder}
    */
-  withImageUrl = imageUrl => {
+  withImageUrl = (imageUrl) => {
     this.imageUrl = imageUrl;
 
     return this;
@@ -84,7 +84,7 @@ export class SectionCaseBuilder {
    * @param  {object} json
    * @returns  {SectionCaseBuilder}
    */
-  fromJson = json => {
+  fromJson = (json) => {
     const sectionCase = new SectionCase(objectToCamelCase(defaultMapper(json)));
 
     this.id = sectionCase.id;

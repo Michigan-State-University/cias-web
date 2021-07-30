@@ -23,7 +23,7 @@ const WrappedAvatarFormAdmin = ({
   useInjectSaga({ key: 'addSingleUserAvatar', saga: addSingleUserAvatarSaga });
   useInjectSaga({ key: 'deleteAvatar', saga: deleteSingleUserAvatarSaga });
 
-  const addAvatarCall = avatarData =>
+  const addAvatarCall = (avatarData) =>
     addAvatar({ userId: user.id, ...avatarData });
 
   const deleteAvatarCall = () => deleteAvatar(user.id);
@@ -50,9 +50,6 @@ const mapDispatchToProps = {
   deleteAvatar: deleteOtherUserAvatarRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(WrappedAvatarFormAdmin);

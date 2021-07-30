@@ -132,9 +132,7 @@ const GridQuestion = ({
                 {columns.map((column, columnIndex) => (
                   <TH
                     scope="col"
-                    key={`question-${
-                      selectedQuestion.id
-                    }-col-th-${columnIndex}`}
+                    key={`question-${selectedQuestion.id}-col-th-${columnIndex}`}
                     onMouseEnter={() => setHoveredColumn(columnIndex)}
                     onMouseLeave={() => setHoveredColumn(-1)}
                   >
@@ -171,7 +169,7 @@ const GridQuestion = ({
                           )}
                           value={column.variable.value}
                           color={colors.azure}
-                          onBlur={val =>
+                          onBlur={(val) =>
                             updateColumn(
                               { variable: { value: val } },
                               columnIndex,
@@ -202,7 +200,7 @@ const GridQuestion = ({
                             columnIndex + 1,
                           )}
                           value={column.payload}
-                          onBlur={value =>
+                          onBlur={(value) =>
                             updateColumn({ payload: value }, columnIndex)
                           }
                         />
@@ -255,7 +253,7 @@ const GridQuestion = ({
                             )}
                             value={row.variable.name}
                             color={colors.jungleGreen}
-                            onBlur={val =>
+                            onBlur={(val) =>
                               updateRow({ variable: { name: val } }, rowIndex)
                             }
                             autoComplete="off"
@@ -289,7 +287,7 @@ const GridQuestion = ({
                               rowIndex + 1,
                             )}
                             value={row.payload}
-                            onBlur={value =>
+                            onBlur={(value) =>
                               updateRow({ payload: value }, rowIndex)
                             }
                           />
@@ -300,9 +298,7 @@ const GridQuestion = ({
                   {columns.map((_, columnIndex) => (
                     <TD
                       height="inherit"
-                      key={`question-${
-                        selectedQuestion.id
-                      }-row-cell-${rowIndex}-${columnIndex}`}
+                      key={`question-${selectedQuestion.id}-row-cell-${rowIndex}-${columnIndex}`}
                     >
                       <Row justify="center" align="center">
                         <Img src={radio} />
@@ -358,14 +354,12 @@ const mapDispatchToProps = {
   updateColumn: (value, index) =>
     updateQuestionData({ type: UPDATE_COLUMN, data: { value, index } }),
 
-  deleteRow: index => updateQuestionData({ type: DELETE_ROW, data: { index } }),
-  deleteColumn: index =>
+  deleteRow: (index) =>
+    updateQuestionData({ type: DELETE_ROW, data: { index } }),
+  deleteColumn: (index) =>
     updateQuestionData({ type: DELETE_COLUMN, data: { index } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(GridQuestion));

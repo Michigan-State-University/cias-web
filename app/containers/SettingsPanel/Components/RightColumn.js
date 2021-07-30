@@ -12,9 +12,7 @@ const RightColumn = ({ state }) => (
       height="100%"
       width="100%"
       bg={colors.zirkon}
-      border={`${borders.borderWidth} ${borders.borderStyle} ${
-        colors.linkWater
-      }`}
+      border={`${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`}
       px={30}
       py={25}
     >

@@ -68,7 +68,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 export const textMessagesReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     const selectedMessageIndex = () =>
       state.textMessages.findIndex(({ id }) => id === state.selectedMessageId);
     let textMessageIndex;
@@ -230,16 +230,15 @@ export const textMessagesReducer = (state = initialState, action) =>
           textMessageIndex
         ].variants.findIndex(({ id }) => id === variantId);
 
-        draft.textMessages[textMessageIndex].variants[
-          variantIndex
-        ] = textMessageVariantReducer(
-          state.textMessages[textMessageIndex].variants[variantIndex],
-          {
-            data: variantData,
-            type: variantType,
-            variantId,
-          },
-        );
+        draft.textMessages[textMessageIndex].variants[variantIndex] =
+          textMessageVariantReducer(
+            state.textMessages[textMessageIndex].variants[variantIndex],
+            {
+              data: variantData,
+              type: variantType,
+              variantId,
+            },
+          );
         break;
       case UPDATE_TEXT_MESSAGE_VARIANT_SUCCESS:
         draft.loaders.updateVariantLoading = false;

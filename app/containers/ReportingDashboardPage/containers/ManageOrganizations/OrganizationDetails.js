@@ -48,7 +48,7 @@ const OrganizationDetails = ({
   );
 
   const onAddClinic = useCallback(
-    healthSystemId => addClinic(healthSystemId),
+    (healthSystemId) => addClinic(healthSystemId),
     [],
   );
 
@@ -127,9 +127,6 @@ const mapDispatchToProps = {
   toggleShowDeletedEntities: toggleShowDeletedEntitiesAction,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default memo(compose(withConnect)(OrganizationDetails));

@@ -36,7 +36,7 @@ const PhoneQuestion = ({
             iso,
             confirmed: true,
           }}
-          changePhoneNumber={value =>
+          changePhoneNumber={(value) =>
             updateAnswer({ variable, payload: value })
           }
           error={null}
@@ -59,13 +59,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateAnswer: value =>
+  updateAnswer: (value) =>
     updateQuestionData({ type: UPDATE_DATA, data: { ...value } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(PhoneQuestion));

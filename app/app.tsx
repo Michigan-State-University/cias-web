@@ -84,7 +84,7 @@ const render = (messages: any) => {
 const runAppWithPolyfills = (messages: any) => {
   Promise.all([polyfillI18n()])
     .then(() => render(messages))
-    .catch(err => {
+    .catch((err) => {
       throw err;
     });
 };

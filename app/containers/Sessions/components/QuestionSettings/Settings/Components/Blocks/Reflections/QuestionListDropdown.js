@@ -51,8 +51,8 @@ const QuestionListDropdown = ({
 
   const { height } = useChildSizeCalculator(ref, containerRef);
 
-  const canSelectQuestion = questionId => id !== questionId;
-  const filteredQuestions = questions.filter(question =>
+  const canSelectQuestion = (questionId) => id !== questionId;
+  const filteredQuestions = questions.filter((question) =>
     possibleQuestions.includes(question.type),
   );
 

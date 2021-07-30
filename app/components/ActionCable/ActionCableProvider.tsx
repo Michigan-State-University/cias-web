@@ -17,9 +17,7 @@ const ActionCableProvider = ({ children, cableInstance, url }: Props) => {
   const createActionCableConsumer = () => {
     const headers = LocalStorageService.getHeaders();
     return actionCable.createConsumer(
-      `${url}?uid=${headers.Uid}&access_token=${
-        headers['Access-Token']
-      }&client=${headers.Client}`,
+      `${url}?uid=${headers.Uid}&access_token=${headers['Access-Token']}&client=${headers.Client}`,
     );
   };
 

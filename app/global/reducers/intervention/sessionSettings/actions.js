@@ -23,7 +23,7 @@ export const updateFormula = (value, sessionId) =>
     ['formula'],
   );
 
-export const addFormulaCase = sessionId =>
+export const addFormulaCase = (sessionId) =>
   updateSessionSettings(
     {
       type: ADD_FORMULA_CASE,

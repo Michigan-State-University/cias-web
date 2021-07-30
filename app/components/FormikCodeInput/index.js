@@ -18,7 +18,7 @@ import { ErrorText } from './styled';
 
 const KEY_BACKSPACE = 8;
 const numericRegex = /^[0-9]{1}$/;
-const checkNumericInput = inputValue => !numericRegex.test(inputValue);
+const checkNumericInput = (inputValue) => !numericRegex.test(inputValue);
 
 function FormikCodeInput({ formikKey, label, codeLength }) {
   const [field, meta, helpers] = useField(formikKey);
@@ -39,7 +39,7 @@ function FormikCodeInput({ formikKey, label, codeLength }) {
       .map((_, i) => inputsRefs.current[i] || createRef());
   }
 
-  const handleInput = e => {
+  const handleInput = (e) => {
     const {
       target: { value: inputValue },
     } = e;
@@ -90,7 +90,7 @@ function FormikCodeInput({ formikKey, label, codeLength }) {
         {label}
       </Text>
       <Row justify="around" px={20} align="center">
-        {times(codeLength).map(index => (
+        {times(codeLength).map((index) => (
           <Input
             key={`code-input-${index}`}
             name={name}
@@ -98,8 +98,8 @@ function FormikCodeInput({ formikKey, label, codeLength }) {
             maxLength="1"
             size="1"
             onInput={handleInput}
-            onKeyUp={e => handleKeyUp(e, index)}
-            onChange={e => handleChange(e, index)}
+            onKeyUp={(e) => handleKeyUp(e, index)}
+            onChange={(e) => handleChange(e, index)}
             ref={inputsRefs.current[index]}
             textAlign="center"
             onBlur={onBlur}

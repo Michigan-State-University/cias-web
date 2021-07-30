@@ -10,7 +10,7 @@ const propsToCssMapper = {
   evenly: 'space-evenly',
 };
 
-const flex = props => ({
+const flex = (props) => ({
   justifyContent: propsToCssMapper[props.justify] || '',
   justifyItems: propsToCssMapper[props.justify] || '',
   alignContent: propsToCssMapper[props.align] || '',

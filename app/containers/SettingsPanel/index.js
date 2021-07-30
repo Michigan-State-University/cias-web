@@ -66,11 +66,11 @@ const SettingsPanel = ({
 
   const changingAccessSettingsPossible = canChangeAccessSettings(status);
 
-  const updateSetting = newSetting =>
+  const updateSetting = (newSetting) =>
     changeAccessSetting(intervention.id, newSetting);
 
   const onAddLogo = useCallback(
-    logo => {
+    (logo) => {
       addLogo(intervention.id, logo.image);
     },
     [intervention?.id],
@@ -81,7 +81,7 @@ const SettingsPanel = ({
   }, [intervention?.id]);
 
   const onUpdateLogoDescription = useCallback(
-    description => {
+    (description) => {
       updateLogo(intervention.id, description);
     },
     [intervention?.id],
@@ -89,17 +89,17 @@ const SettingsPanel = ({
 
   const { sharedTo, usersWithAccess } = intervention || {};
 
-  const dispatchUpdate = newState =>
+  const dispatchUpdate = (newState) =>
     dispatch({
       type: UPDATE,
       newState,
     });
 
   useEffect(() => {
-    dispatchUpdate(shareOptions.find(option => option.id === sharedTo));
+    dispatchUpdate(shareOptions.find((option) => option.id === sharedTo));
   }, [sharedTo]);
 
-  const currentOption = shareOptions.find(option => option.id === sharedTo);
+  const currentOption = shareOptions.find((option) => option.id === sharedTo);
 
   if (fetchInterventionLoading) return <Loader />;
   if (fetchInterventionError)
@@ -182,10 +182,7 @@ const mapDispatchToProps = {
   updateLogo: updateInterventionLogoRequest,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   withConnect,

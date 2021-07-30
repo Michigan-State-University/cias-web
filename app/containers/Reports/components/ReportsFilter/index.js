@@ -26,7 +26,7 @@ export function ReportsFilter({
           <Text mr={15} fontWeight="bold">
             {formatMessage(messages.filterLabel)}
           </Text>
-          {filterOptions.map(option => (
+          {filterOptions.map((option) => (
             <Row key={option} align="center">
               <Checkbox
                 onClick={() => changeFilter(option)}

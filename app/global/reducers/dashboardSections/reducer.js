@@ -71,7 +71,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const dashboardSectionsReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     const { type, payload } = action;
 
     switch (type) {
@@ -119,7 +119,7 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         updateItemById(
           draft.dashboardSections,
           payload.dashboardSectionId,
-          item => dashboardSectionReducer(item, action),
+          (item) => dashboardSectionReducer(item, action),
         );
 
         break;
@@ -202,13 +202,13 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         updateItemById(
           draft.dashboardSections,
           payload.chart.dashboardSectionId,
-          item => dashboardSectionReducer(item, action),
+          (item) => dashboardSectionReducer(item, action),
         );
 
         updateItemById(
           draft.cache.dashboardSections,
           payload.chart.dashboardSectionId,
-          item => dashboardSectionReducer(item, action),
+          (item) => dashboardSectionReducer(item, action),
         );
         break;
       }
@@ -228,7 +228,7 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         updateItemById(
           draft.dashboardSections,
           payload.chart.dashboardSectionId,
-          item => dashboardSectionReducer(item, action),
+          (item) => dashboardSectionReducer(item, action),
         );
 
         break;
@@ -241,7 +241,7 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         updateItemById(
           draft.cache.dashboardSections,
           payload.chart.dashboardSectionId,
-          item => dashboardSectionReducer(item, action),
+          (item) => dashboardSectionReducer(item, action),
         );
 
         break;
@@ -270,13 +270,13 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         updateItemById(
           draft.dashboardSections,
           payload.dashboardSectionId,
-          item => dashboardSectionReducer(item, action),
+          (item) => dashboardSectionReducer(item, action),
         );
 
         updateItemById(
           draft.cache.dashboardSections,
           payload.dashboardSectionId,
-          item => dashboardSectionReducer(item, action),
+          (item) => dashboardSectionReducer(item, action),
         );
 
         if (payload.chartId === state.selectedChart?.chartId)
@@ -296,7 +296,7 @@ const dashboardSectionsReducer = (state = initialState, action) =>
         updateItemById(
           draft.dashboardSections,
           payload.chart.dashboardSectionId,
-          item => dashboardSectionReducer(item, action),
+          (item) => dashboardSectionReducer(item, action),
         );
         break;
       }
@@ -318,7 +318,7 @@ const dashboardSectionsReducer = (state = initialState, action) =>
           updateItemById(
             draft.dashboardSections,
             chartsData[i].dashboardSectionId,
-            item =>
+            (item) =>
               dashboardSectionReducer(item, { type, payload: chartsData[i] }),
           );
         }
@@ -332,7 +332,7 @@ const dashboardSectionsReducer = (state = initialState, action) =>
           updateItemById(
             draft.dashboardSections,
             draft.dashboardSections[i].id,
-            item => dashboardSectionReducer(item, action),
+            (item) => dashboardSectionReducer(item, action),
           );
         }
         break;
@@ -359,7 +359,7 @@ const dashboardSectionsReducer = (state = initialState, action) =>
 
       case REORDER_CHARTS_REQUEST: {
         const { dashboardSectionId } = payload;
-        updateItemById(draft.dashboardSections, dashboardSectionId, item =>
+        updateItemById(draft.dashboardSections, dashboardSectionId, (item) =>
           dashboardSectionReducer(item, action),
         );
         break;

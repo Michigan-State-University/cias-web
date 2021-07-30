@@ -30,7 +30,7 @@ import {
   SET_TRANSITIONAL_USER_SESSION_ID,
 } from './constants';
 
-export const selectAnswer = payload => actionBuilder(SELECT_ANSWER, payload);
+export const selectAnswer = (payload) => actionBuilder(SELECT_ANSWER, payload);
 
 export const submitAnswer = (
   answerId,
@@ -47,7 +47,7 @@ export const submitAnswer = (
     userSessionId,
   });
 
-export const submitAnswerSuccess = answerId =>
+export const submitAnswerSuccess = (answerId) =>
   actionBuilder(SUBMIT_ANSWER_SUCCESS, { answerId });
 
 export const submitAnswerFailure = (answerId, error) =>
@@ -55,7 +55,7 @@ export const submitAnswerFailure = (answerId, error) =>
 
 export const startSession = () => actionBuilder(START_SESSION, {});
 
-export const resetSession = sessionId =>
+export const resetSession = (sessionId) =>
   actionBuilder(RESET_SESSION, { sessionId });
 
 export const resetAnswers = () => actionBuilder(RESET_ANSWERS, {});
@@ -67,43 +67,43 @@ export const redirectToPreview = (interventionId, sessionId, questionId) =>
     questionId,
   });
 
-export const changePreviewMode = previewMode =>
+export const changePreviewMode = (previewMode) =>
   actionBuilder(CHANGE_PREVIEW_MODE, { previewMode });
 
-export const changeIsAnimating = isAnimating =>
+export const changeIsAnimating = (isAnimating) =>
   actionBuilder(CHANGE_IS_ANIMATING, { isAnimating });
 
 export const setFeedbackScreenSettings = (setting, value) =>
   actionBuilder(SET_FEEDBACK_SCREEN_SETTINGS, { setting, value });
 
-export const createUserSessionRequest = sessionId =>
+export const createUserSessionRequest = (sessionId) =>
   actionBuilder(CREATE_USER_SESSION_REQUEST, { sessionId });
 
-export const createUserSessionSuccess = userSession =>
+export const createUserSessionSuccess = (userSession) =>
   actionBuilder(CREATE_USER_SESSION_SUCCESS, { userSession });
 
-export const createUserSessionFailure = error =>
+export const createUserSessionFailure = (error) =>
   actionBuilder(CREATE_USER_SESSION_FAILURE, { error });
 
 export const nextQuestionRequest = (userSessionId, questionId) =>
   actionBuilder(NEXT_QUESTION_REQUEST, { userSessionId, questionId });
 
-export const nextQuestionSuccess = question =>
+export const nextQuestionSuccess = (question) =>
   actionBuilder(NEXT_QUESTION_SUCCESS, { question });
 
-export const nextQuestionFailure = error =>
+export const nextQuestionFailure = (error) =>
   actionBuilder(NEXT_QUESTION_FAILURE, { error });
 
 export const clearError = () => actionBuilder(CLEAR_ERROR, {});
 
-export const changeUserSessionId = userSessionId =>
+export const changeUserSessionId = (userSessionId) =>
   actionBuilder(CHANGE_USER_SESSION_ID, { userSessionId });
 
-export const setCurrentBlockIndex = index =>
+export const setCurrentBlockIndex = (index) =>
   actionBuilder(SET_CURRENT_BLOCK_INDEX, { index });
 
 export const toggleTextTranscriptAction = () =>
   actionBuilder(TOGGLE_TEXT_TRANSCRIPT, {});
 
-export const setTransitionalUserSessionId = userSessionId =>
+export const setTransitionalUserSessionId = (userSessionId) =>
   actionBuilder(SET_TRANSITIONAL_USER_SESSION_ID, { userSessionId });

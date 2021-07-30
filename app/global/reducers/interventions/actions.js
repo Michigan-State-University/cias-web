@@ -13,19 +13,19 @@ import {
 
 export const fetchInterventionsRequest = () =>
   actionBuilder(FETCH_INTERVENTIONS_REQUEST, {});
-export const fetchInterventionsSuccess = interventions =>
+export const fetchInterventionsSuccess = (interventions) =>
   actionBuilder(FETCH_INTERVENTIONS_SUCCESS, { interventions });
-export const fetchInterventionsError = error =>
+export const fetchInterventionsError = (error) =>
   actionBuilder(FETCH_INTERVENTIONS_ERROR, { error });
 
-export const copyInterventionRequest = payload =>
+export const copyInterventionRequest = (payload) =>
   actionBuilder(COPY_INTERVENTION_REQUEST, payload);
-export const copyInterventionSuccess = intervention =>
+export const copyInterventionSuccess = (intervention) =>
   actionBuilder(COPY_INTERVENTION_SUCCESS, { intervention });
 
-export const archiveInterventionRequest = interventionId =>
+export const archiveInterventionRequest = (interventionId) =>
   actionBuilder(ARCHIVE_INTERVENTION_REQUEST, { interventionId });
-export const archiveInterventionSuccess = interventionId =>
+export const archiveInterventionSuccess = (interventionId) =>
   actionBuilder(ARCHIVE_INTERVENTION_SUCCESS, { interventionId });
-export const archiveInterventionFailure = interventionId =>
+export const archiveInterventionFailure = (interventionId) =>
   actionBuilder(ARCHIVE_INTERVENTION_ERROR, { interventionId });

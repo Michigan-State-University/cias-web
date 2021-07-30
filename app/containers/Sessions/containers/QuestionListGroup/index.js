@@ -55,13 +55,13 @@ const QuestionListGroup = ({
     handleToggleCollapsable(true);
   }, [questions.length]);
 
-  const renderQuestions = providedGroupDroppable => (
+  const renderQuestions = (providedGroupDroppable) => (
     <DraggableContainer
       style={{ width: '100%' }}
-      {...!noDnd && {
+      {...(!noDnd && {
         ref: providedGroupDroppable.innerRef,
         ...providedGroupDroppable.droppableProps,
-      }}
+      })}
     >
       {questions.map((question, index) => (
         <Row key={question.id} width="100%">
@@ -91,11 +91,11 @@ const QuestionListGroup = ({
       droppableId={id}
       type={reorderScope.questions}
     >
-      {provided => renderQuestions(provided)}
+      {(provided) => renderQuestions(provided)}
     </Droppable>
   );
 
-  const renderGroup = providedGroupDraggable => (
+  const renderGroup = (providedGroupDraggable) => (
     <Row
       width="100%"
       display="block"
@@ -122,7 +122,7 @@ const QuestionListGroup = ({
               {manage && !isFinishGroup && (
                 <Checkbox
                   mr={2}
-                  onClick={e => {
+                  onClick={(e) => {
                     e.stopPropagation();
                     toggleGroup(questions);
                   }}
@@ -138,7 +138,7 @@ const QuestionListGroup = ({
                 placeholder={formatMessage(messages.groupPlaceholder)}
                 width="100%"
                 maxWidth="initial"
-                onBlur={val => changeGroupName(val, sessionId, id)}
+                onBlur={(val) => changeGroupName(val, sessionId, id)}
                 onFocus={selectInputText}
                 disabled={!editingPossible}
               />
@@ -166,7 +166,7 @@ const QuestionListGroup = ({
       index={groupIndex}
       isDragDisabled={!editingPossible}
     >
-      {providedGroupDraggable => renderGroup(providedGroupDraggable)}
+      {(providedGroupDraggable) => renderGroup(providedGroupDraggable)}
     </Draggable>
   );
 

@@ -29,9 +29,9 @@ const ParticipantReportLayout = ({
   const { email, receive_report: option } =
     answerBody && answerBody.value ? answerBody.value : {};
 
-  const handleChangeEmail = value =>
+  const handleChangeEmail = (value) =>
     onChange({ email: value, receive_report: option });
-  const handleChangeOption = value => () =>
+  const handleChangeOption = (value) => () =>
     onChange({ email, receive_report: value });
 
   return (

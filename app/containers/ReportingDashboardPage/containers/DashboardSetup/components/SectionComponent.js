@@ -45,7 +45,7 @@ const SectionComponent = ({
   const closeSettings = useCallback(() => selectChart(), []);
 
   const onUpdate = useCallback(
-    field => value =>
+    (field) => (value) =>
       editDashboardSection(
         {
           organizationId,
@@ -56,10 +56,10 @@ const SectionComponent = ({
     [id, organizationId],
   );
 
-  const onAddChart = useCallback(type => addChart(id, type), [id]);
+  const onAddChart = useCallback((type) => addChart(id, type), [id]);
 
   const onSelectChart = useCallback(
-    chartId => {
+    (chartId) => {
       if (!fromDashboardView) selectChart(id, chartId);
     },
     [id],
@@ -99,7 +99,7 @@ const SectionComponent = ({
             charts={charts}
             fromDashboardView={fromDashboardView}
           >
-            {charts.map(chart => {
+            {charts.map((chart) => {
               const isSelected =
                 selectedChart?.id === chart.id &&
                 selectedChart?.dashboardSectionId === id;
@@ -144,12 +144,6 @@ const mapDispatchToProps = {
   reorderCharts: reorderChartsRequest,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  memo,
-)(SectionComponent);
+export default compose(withConnect, memo)(SectionComponent);

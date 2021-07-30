@@ -50,7 +50,7 @@ const FeedbackQuestion = ({
           textAlign="center"
           placeholder={formatMessage(messages.startValue)}
           value={startValue}
-          onBlur={value => onUpdateLabel(value, 'start_value')}
+          onBlur={(value) => onUpdateLabel(value, 'start_value')}
         />
       ),
       style: visualAnalogScaleLabelStyles,
@@ -64,7 +64,7 @@ const FeedbackQuestion = ({
           textAlign="center"
           placeholder={formatMessage(messages.endValue)}
           value={endValue}
-          onBlur={value => onUpdateLabel(value, 'end_value')}
+          onBlur={(value) => onUpdateLabel(value, 'end_value')}
         />
       ),
       style: visualAnalogScaleLabelStyles,
@@ -115,9 +115,6 @@ const mapDispatchToProps = {
   onUpdateLabel: updateLabel,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(FeedbackQuestion));

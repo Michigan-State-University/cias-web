@@ -45,7 +45,7 @@ describe('axios request test', () => {
 
     await axios.interceptors.request.handlers[0]
       .rejected(expected)
-      .catch(error => {
+      .catch((error) => {
         expect(error).toStrictEqual(expected);
       });
 
@@ -125,7 +125,7 @@ describe('axios response test', () => {
 
     await axios.interceptors.response.handlers[0]
       .rejected({ response: response422 })
-      .catch(error => error);
+      .catch((error) => error);
 
     expect(LocalStorageService.setHeaders).toHaveBeenCalledTimes(1);
     expect(LocalStorageService.setHeaders).toHaveBeenCalledWith(
@@ -148,7 +148,7 @@ describe('axios response test', () => {
 
     await axios.interceptors.response.handlers[0]
       .rejected({ response: response401 })
-      .catch(error => error);
+      .catch((error) => error);
 
     expect(LocalStorageService.setHeaders).not.toHaveBeenCalled();
     expect(logOut).toHaveBeenCalledTimes(1);

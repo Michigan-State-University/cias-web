@@ -70,9 +70,6 @@ const mapDispatchToProps = {
   onUpdateCase: updateFormulaCase,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(SpectrumSettings);

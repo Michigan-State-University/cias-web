@@ -46,7 +46,7 @@ describe('<UserDetails />', () => {
   beforeEach(() => {
     store = createTestStore(initialState);
 
-    ReactDOM.createPortal = jest.fn(element => element);
+    ReactDOM.createPortal = jest.fn((element) => element);
     modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal-portal');
     document.body.appendChild(modalContainer);

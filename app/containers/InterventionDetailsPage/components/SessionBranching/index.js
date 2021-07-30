@@ -58,17 +58,17 @@ function SessionBranching({
   onUpdateTarget,
   onDeleteTarget,
 }) {
-  const displayPatternTargetText = target => {
+  const displayPatternTargetText = (target) => {
     if (!target || target.id === '')
       return formatMessage(messages.selectSession);
     const session = find(
       intervention.sessions,
-      value => value.id === target.id,
+      (value) => value.id === target.id,
     );
     return session ? session.name : formatMessage(messages.selectSession);
   };
 
-  const handleFormulaStatus = value => onChangeFormulaStatus(value, id);
+  const handleFormulaStatus = (value) => onChangeFormulaStatus(value, id);
 
   const handleClickAddVariable = () => {
     if (id !== activeSessionId) {
@@ -174,10 +174,7 @@ const mapDispatchToProps = {
   onDeleteTarget: removeFormulaTarget,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   injectReducer({ key: 'questionGroups', reducer: questionGroupsReducer }),

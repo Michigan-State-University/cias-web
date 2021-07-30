@@ -53,20 +53,19 @@ const VariantItem = ({
   disabled,
   changeSelectedVariant,
 }) => {
-  const { sessionId, interventionId, formatMessage } = useContext(
-    TextMessagesContext,
-  );
+  const { sessionId, interventionId, formatMessage } =
+    useContext(TextMessagesContext);
 
   const toggleCollapsable = () => {
     if (open) changeSelectedVariant('');
     else changeSelectedVariant(id);
   };
 
-  const handleFormulaMatchChange = value => {
+  const handleFormulaMatchChange = (value) => {
     changeFormulaMatchAction(value, id);
   };
 
-  const handleContentChange = value => {
+  const handleContentChange = (value) => {
     changeContentAction(value, id);
   };
 
@@ -74,7 +73,7 @@ const VariantItem = ({
     removeVariant(id);
   };
 
-  const handleAddVariable = variable => {
+  const handleAddVariable = (variable) => {
     const variableHelper = new VariableHelper(variable);
 
     handleContentChange(
@@ -206,12 +205,6 @@ const mapDispatchToProps = {
   changeSelectedVariant: changeSelectedVariantId,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(VariantItem);
+export default compose(withConnect, injectIntl)(VariantItem);

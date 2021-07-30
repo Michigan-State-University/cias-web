@@ -3,7 +3,7 @@ import { hexToRgb } from 'theme';
 import { ternary } from 'utils/ternary';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
-const style = props => ({
+const style = (props) => ({
   backgroundColor:
     props.bg &&
     `rgba(${hexToRgb(props.bg)}, ${

@@ -30,7 +30,7 @@ function FormikNumberInput({
   const hasError = touched && error;
   const { setValue, setTouched } = helpers;
 
-  const handleChange = inputValue => {
+  const handleChange = (inputValue) => {
     setValue(
       formatIncompletePhoneNumber(inputValue.target.value, countryCode ?? 'US'),
     );

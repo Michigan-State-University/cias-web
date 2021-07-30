@@ -14,8 +14,9 @@ export function* editSession({ fields, payload: { sessionId } } = {}) {
     ? yield select(makeSelectSessionById(sessionId))
     : yield select(makeSelectSession());
 
-  const requestURL = `v1/interventions/${session.intervention_id ??
-    session.interventionId}/sessions/${sessionId ?? session.id}`;
+  const requestURL = `v1/interventions/${
+    session.intervention_id ?? session.interventionId
+  }/sessions/${sessionId ?? session.id}`;
 
   const patchDifference = pickFields(session, fields);
 

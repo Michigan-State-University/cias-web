@@ -42,7 +42,7 @@ const TextMessageScheduling = ({
     setFrequencySettings({ frequency, endAt });
   }, [id]);
 
-  const handleChangeFrequencySettings = updatedSettings => {
+  const handleChangeFrequencySettings = (updatedSettings) => {
     if (
       updatedSettings.frequency === MESSAGES_SCHEDULE_FREQUENCIES.once ||
       (updatedSettings.frequency && updatedSettings.endAt)
@@ -51,7 +51,7 @@ const TextMessageScheduling = ({
     }
   };
 
-  const handleChangeFrequency = frequencyValue => {
+  const handleChangeFrequency = (frequencyValue) => {
     const updatedSettings = {
       ...frequencySettings,
       frequency: frequencyValue,
@@ -59,7 +59,7 @@ const TextMessageScheduling = ({
     setFrequencySettings(updatedSettings);
     handleChangeFrequencySettings(updatedSettings);
   };
-  const handleChangeEndAt = dateValue => {
+  const handleChangeEndAt = (dateValue) => {
     const updatedSettings = {
       ...frequencySettings,
       endAt: dateValue.toLocaleString('en-GB'),

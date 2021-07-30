@@ -89,10 +89,7 @@ const mapDispatchToProps = {
   selectSection: selectTemplateSection,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 TemplateSectionItem.propTypes = {
   templateSection: PropTypes.shape(TemplateSection),
@@ -100,7 +97,4 @@ TemplateSectionItem.propTypes = {
   intl: PropTypes.shape(IntlShape),
 };
 
-export default compose(
-  withConnect,
-  injectIntl,
-)(TemplateSectionItem);
+export default compose(withConnect, injectIntl)(TemplateSectionItem);

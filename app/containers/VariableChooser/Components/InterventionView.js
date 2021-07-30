@@ -23,7 +23,7 @@ const InterventionView = ({ onClick }) => {
   const dispatch = useDispatch();
 
   // actions
-  const fetchInterventions = organizationId =>
+  const fetchInterventions = (organizationId) =>
     dispatch(fetchInterventionsRequest(organizationId));
 
   // selectors
@@ -42,7 +42,7 @@ const InterventionView = ({ onClick }) => {
     [allInterventions],
   );
 
-  const isInitialIntervention = interventionId =>
+  const isInitialIntervention = (interventionId) =>
     interventionId === initialInterventionId;
 
   if (!interventions || !interventions.length)

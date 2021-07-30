@@ -52,7 +52,7 @@ const ThirdPartyQuestion = ({
   const editingPossible = canEdit(interventionStatus);
   const isNarratorTabOrEditNotPossible = isNarratorTab || !editingPossible;
 
-  const handleMouseEnter = index => () => {
+  const handleMouseEnter = (index) => () => {
     if (!isNarratorTabOrEditNotPossible) setHovered(index);
   };
 
@@ -77,7 +77,7 @@ const ThirdPartyQuestion = ({
       report_template_ids: newReportTemplateIds,
     });
 
-  const handleRemove = index => removeAnswer(index);
+  const handleRemove = (index) => removeAnswer(index);
   return (
     <Column>
       {data.map((value, index) => (
@@ -111,7 +111,7 @@ const ThirdPartyQuestion = ({
                           : ''
                       }
                       value={value.payload}
-                      onCheck={newTitle =>
+                      onCheck={(newTitle) =>
                         handleChangeTitle(newTitle, index, value)
                       }
                       richText
@@ -130,7 +130,7 @@ const ThirdPartyQuestion = ({
                       }
                       value={value.value}
                       color={colors.azure}
-                      onBlur={currentValue =>
+                      onBlur={(currentValue) =>
                         handleChangeVariable(index, value, currentValue)
                       }
                       maxWidth="100%"
@@ -154,7 +154,7 @@ const ThirdPartyQuestion = ({
             <ReportChooser
               formatMessage={formatMessage}
               value={value.report_template_ids}
-              onChange={reportTemplateIds =>
+              onChange={(reportTemplateIds) =>
                 handleChangeReportTemplateIds(reportTemplateIds, index, value)
               }
               disabled={!editingPossible}
@@ -203,12 +203,10 @@ const mapDispatchToProps = {
   addAnswer: () => updateQuestionData({ type: ADD }),
   updateAnswer: (index, value) =>
     updateQuestionData({ type: UPDATE_ANSWER, data: { index, value } }),
-  removeAnswer: index => updateQuestionData({ type: REMOVE, data: { index } }),
+  removeAnswer: (index) =>
+    updateQuestionData({ type: REMOVE, data: { index } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(ThirdPartyQuestion));

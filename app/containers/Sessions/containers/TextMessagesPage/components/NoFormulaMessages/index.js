@@ -29,19 +29,16 @@ import { TextMessagesContext } from '../../utils';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 
 const NoFormulaMessage = ({ noFormulaText, changeAction }) => {
-  const {
-    sessionId,
-    interventionId,
-    formatMessage,
-    editingPossible,
-  } = useContext(TextMessagesContext);
+  const { sessionId, interventionId, formatMessage, editingPossible } =
+    useContext(TextMessagesContext);
 
-  const handleAddVariable = variable => {
+  const handleAddVariable = (variable) => {
     const variableHelper = new VariableHelper(variable);
 
     changeAction(
-      `${noFormulaText ??
-        ''}${variableHelper.getFormattedVariableForDynamicInput()}`,
+      `${
+        noFormulaText ?? ''
+      }${variableHelper.getFormattedVariableForDynamicInput()}`,
     );
   };
 
@@ -99,9 +96,6 @@ const mapDispatchToProps = {
   changeAction: changeNoFormulaText,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default compose(withConnect)(NoFormulaMessage);

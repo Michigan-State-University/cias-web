@@ -265,7 +265,7 @@ export function AnswerSessionPage({
       userSession.id,
     );
 
-  const renderQuestionTranscript = isRightSide => {
+  const renderQuestionTranscript = (isRightSide) => {
     const renderTranscriptComponent = ({ maxWidth, height }) => (
       <Box mt={30} maxWidth={maxWidth} height={height}>
         <QuestionTranscript
@@ -565,12 +565,6 @@ const mapDispatchToProps = {
   setTransitionalUserSessionId: setTransitionalUserSessionIdAction,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  memo,
-)(AnswerSessionPage);
+export default compose(withConnect, memo)(AnswerSessionPage);

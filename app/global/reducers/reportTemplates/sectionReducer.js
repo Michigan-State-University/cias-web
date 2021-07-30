@@ -26,7 +26,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 const templateSectionReducer = (state = initialState, { type, payload }) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (type) {
       case UPDATE_TEMPLATE_SECTION_REQUEST:
         return { ...state, ...payload.section };
@@ -37,7 +37,7 @@ const templateSectionReducer = (state = initialState, { type, payload }) =>
 
       case UPDATE_SECTION_CASE_SUCCESS:
       case UPDATE_SECTION_CASE_REQUEST: {
-        draft.variants = state.variants.map(variant => {
+        draft.variants = state.variants.map((variant) => {
           if (variant.id === payload.sectionCase.id) return payload.sectionCase;
 
           if (payload.previewChanged)

@@ -16,7 +16,7 @@ const UserItem = ({ avatarColor, user, onClick }) => {
   const { active, avatar, email, firstName, fullName, lastName } = user;
 
   const wrapper = useCallback(
-    component => (
+    (component) => (
       <UserRow $active={active} align="center" onClick={onClick} nogutter>
         {component}
       </UserRow>

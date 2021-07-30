@@ -36,9 +36,6 @@ const mapDispatchToProps = {
   changeAction: changeFormulaUsed,
 };
 
-const withConnect = connect(
-  null,
-  mapDispatchToProps,
-);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default compose(withConnect)(FormulaSwitcher);

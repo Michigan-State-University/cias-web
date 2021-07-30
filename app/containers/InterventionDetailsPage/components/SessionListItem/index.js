@@ -104,10 +104,10 @@ function SessionListItem({
 
   const closeCopyModal = () => setCopyOpen(false);
 
-  const externalCopy = params =>
+  const externalCopy = (params) =>
     handleExternalCopySession({ ...params, sessionId: id });
 
-  const goToReportTemplates = event => {
+  const goToReportTemplates = (event) => {
     event.preventDefault();
 
     const url = `/interventions/${interventionId}/sessions/${id}/report-templates`;
@@ -115,11 +115,11 @@ function SessionListItem({
     history.push(url);
   };
 
-  const handleUpdateVariable = value => {
+  const handleUpdateVariable = (value) => {
     editSession({ path: 'variable', value }, ['variable'], id);
   };
 
-  const preventVariableInputRedirect = event => {
+  const preventVariableInputRedirect = (event) => {
     event.preventDefault();
     event.stopPropagation();
   };
@@ -133,7 +133,7 @@ function SessionListItem({
       draggableId={`accordion-${index}`}
       index={index}
     >
-      {provided => (
+      {(provided) => (
         <Box
           width="100%"
           ref={provided.innerRef}

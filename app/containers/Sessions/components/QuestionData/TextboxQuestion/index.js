@@ -52,7 +52,7 @@ const TextboxQuestion = ({
             rows="5"
             placeholder={formatMessage(messages.placeholder)}
             value={payload}
-            onCheck={newTitle => updateAnswer({ payload: newTitle })}
+            onCheck={(newTitle) => updateAnswer({ payload: newTitle })}
             disabled
           />
         </Row>
@@ -84,13 +84,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = {
-  updateAnswer: value =>
+  updateAnswer: (value) =>
     updateQuestionData({ type: UPDATE_DATA, data: { value } }),
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default injectIntl(compose(withConnect)(TextboxQuestion));

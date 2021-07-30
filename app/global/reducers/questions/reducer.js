@@ -88,7 +88,7 @@ export const initialState = {
 
 /* eslint-disable default-case, no-param-reassign */
 export const questionsReducer = (state = initialState, action) =>
-  produce(state, draft => {
+  produce(state, (draft) => {
     switch (action.type) {
       case SELECT_QUESTION:
         draft.selectedQuestion = action.payload.index;
@@ -121,7 +121,7 @@ export const questionsReducer = (state = initialState, action) =>
           action.payload.questions.length !== 0
             ? action.payload.questions[0].id
             : '';
-        draft.questions = action.payload.questions.map(question =>
+        draft.questions = action.payload.questions.map((question) =>
           mapQuestionDataForType(question),
         );
         draft.cache.questions = draft.questions;
@@ -191,7 +191,10 @@ export const questionsReducer = (state = initialState, action) =>
         updateItemById(
           draft.questions,
           action.payload.questionId,
-          question => ({ ...question, image_alt: action.payload.description }),
+          (question) => ({
+            ...question,
+            image_alt: action.payload.description,
+          }),
         );
         break;
       case UPDATE_QUESTION_IMAGE_SUCCESS:
@@ -256,7 +259,7 @@ export const questionsReducer = (state = initialState, action) =>
 
         const groupedQuestions = groupBy(
           state.questions,
-          question => question.question_group_id,
+          (question) => question.question_group_id,
         );
         const sourceQuestion = {
           ...groupedQuestions[sourceGroupId][sourceIndex],
@@ -273,7 +276,7 @@ export const questionsReducer = (state = initialState, action) =>
 
         const groupKeys = keys(groupedQuestions);
 
-        forEach(groupKeys, groupKey => {
+        forEach(groupKeys, (groupKey) => {
           groupedQuestions[groupKey] = groupedQuestions[groupKey].map(
             (question, index) => ({
               ...question,
@@ -296,7 +299,7 @@ export const questionsReducer = (state = initialState, action) =>
       case DELETE_QUESTIONS_REQUEST: {
         const { questionIds, groupIds } = action.payload;
         const filteredQuestions = state.questions.filter(
-          question => !questionIds.includes(question.id),
+          (question) => !questionIds.includes(question.id),
         );
         const firstDeletedQuestion = state.questions.find(
           ({ id }) => id === questionIds[0],
@@ -306,7 +309,7 @@ export const questionsReducer = (state = initialState, action) =>
         const questions = [...filteredQuestions, firstDeletedQuestion];
 
         const groupIndex = groupIds.findIndex(
-          index => index === firstDeletedQuestion.groupId,
+          (index) => index === firstDeletedQuestion.groupId,
         );
 
         const newIdInsideGroup = getNewQuestionIdInsideGroup(
@@ -362,7 +365,7 @@ export const questionsReducer = (state = initialState, action) =>
         } = action;
         const { questions } = state;
         draft.questions = draft.questions.filter(
-          question => question.id !== questionId,
+          (question) => question.id !== questionId,
         );
         const newIdInsideGroup = getNewQuestionIdInsideGroup(
           questions,
@@ -375,7 +378,7 @@ export const questionsReducer = (state = initialState, action) =>
           return draft;
         }
 
-        const groupIndex = groupIds.findIndex(index => index === groupId);
+        const groupIndex = groupIds.findIndex((index) => index === groupId);
 
         const previewGroupsQuestionId = getNewQuestionIdInPreviousGroups(
           questions,
@@ -424,9 +427,8 @@ export const questionsReducer = (state = initialState, action) =>
           ),
         };
 
-        draft.questions[selectedQuestionIndex] = assignFromQuestionTTS(
-          updatedQuestion,
-        );
+        draft.questions[selectedQuestionIndex] =
+          assignFromQuestionTTS(updatedQuestion);
         break;
       }
 
@@ -446,13 +448,12 @@ export const questionsReducer = (state = initialState, action) =>
           ),
         };
 
-        draft.questions[selectedQuestionIndex] = assignFromQuestionTTS(
-          updatedQuestion,
-        );
+        draft.questions[selectedQuestionIndex] =
+          assignFromQuestionTTS(updatedQuestion);
         break;
       }
       case GROUP_QUESTIONS_SUCCESS: {
-        draft.questions = draft.questions.map(question => ({
+        draft.questions = draft.questions.map((question) => ({
           ...question,
           question_group_id: action.payload.questionIds.includes(question.id)
             ? action.payload.group.id

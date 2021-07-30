@@ -18,7 +18,7 @@ const TextBoxQuestion = ({
     settings: { text_limit: textLimit },
   } = question;
 
-  const onChange = event => {
+  const onChange = (event) => {
     selectAnswer([
       {
         var: name,

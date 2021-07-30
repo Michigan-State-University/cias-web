@@ -12,7 +12,7 @@ export function* fetchClinic({ payload: { id } }) {
     const { data } = yield call(axios.get, requestURL);
     const clinic = jsonApiToObject(data, 'healthClinic');
 
-    const mappedClinicAdmins = clinic.healthClinicAdmins.map(clinicAdmin => {
+    const mappedClinicAdmins = clinic.healthClinicAdmins.map((clinicAdmin) => {
       const userInvitation = clinic.healthClinicInvitations.find(
         ({ userId }) => userId === clinicAdmin.id,
       );

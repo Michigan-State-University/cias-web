@@ -5,7 +5,7 @@ import { initialState } from './reducer';
  * Direct selector to the userList state domain
  */
 
-const selectUserDomain = state => state.singleUser || initialState;
+const selectUserDomain = (state) => state.singleUser || initialState;
 
 /**
  * Other specific selectors
@@ -16,10 +16,7 @@ const selectUserDomain = state => state.singleUser || initialState;
  */
 
 const makeSelectUser = () =>
-  createSelector(
-    selectUserDomain,
-    substate => substate,
-  );
+  createSelector(selectUserDomain, (substate) => substate);
 
 export default makeSelectUser;
 export { selectUserDomain };

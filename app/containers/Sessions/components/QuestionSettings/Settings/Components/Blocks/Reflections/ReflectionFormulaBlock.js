@@ -63,7 +63,7 @@ const ReflectionFormulaBlock = ({
   const selectOptions = useMemo(() => {
     const animations = keys(speechAnimations);
 
-    return animations.map(animation => ({
+    return animations.map((animation) => ({
       value: animation,
       label: formatMessage(animationMessages[animation]),
     }));
@@ -71,21 +71,21 @@ const ReflectionFormulaBlock = ({
 
   const feedbackOptions = useMemo(() => {
     const options = values(feedbackActions).filter(
-      action => action !== feedbackActions.showSpectrum,
+      (action) => action !== feedbackActions.showSpectrum,
     );
 
-    return options.map(option => ({
+    return options.map((option) => ({
       value: option,
       label: formatMessage(messages[option]),
     }));
   }, [feedbackActions]);
 
   const selectedOption = selectOptions.find(
-    option => option.value === block.animation,
+    (option) => option.value === block.animation,
   );
 
   const selectedFeedbackOption = feedbackOptions.find(
-    option => option.value === block.action,
+    (option) => option.value === block.action,
   );
 
   const hasSpecialPositioning = block.action !== feedbackActions.noAction;
@@ -146,7 +146,7 @@ const ReflectionFormulaBlock = ({
         <Text fontWeight="bold">{formatMessage(messages.formulaHeader)}</Text>
         <VariableChooser
           disabled={disabled}
-          onClick={value =>
+          onClick={(value) =>
             onFormulaUpdate(`${block.payload}${value}`, id, blockIndex)
           }
           sessionId={sessionId}
@@ -172,7 +172,7 @@ const ReflectionFormulaBlock = ({
           width="100%"
           placeholder={formatMessage(messages.formulaPlaceholder)}
           value={block.payload}
-          onBlur={value => onFormulaUpdate(value, id, blockIndex)}
+          onBlur={(value) => onFormulaUpdate(value, id, blockIndex)}
         />
       </Box>
       {block.reflections.map((reflection, index) => (
@@ -248,9 +248,6 @@ const mapDispatchToProps = {
   onAddCase: addFormulaCase,
 };
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(ReflectionFormulaBlock);
