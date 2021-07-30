@@ -84,7 +84,7 @@ import H3 from 'components/H3';
 import Icon from 'components/Icon';
 import Tooltip from 'components/Tooltip';
 
-import TranslateInterventionModal from 'containers/TranslateInterventionModal';
+import TranslateInterventionModal from 'containers/TranslateInterventionModal/index.tsx';
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';

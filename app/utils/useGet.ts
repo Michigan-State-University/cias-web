@@ -1,14 +1,20 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+interface State<T> {
+  data: Nullable<T>;
+  error: any;
+  isFetching: boolean;
+}
+
 const defaultState = {
   data: null,
   error: null,
   isFetching: true,
 };
 
-const useGet = (url, dataParser) => {
-  const [state, setState] = useState(defaultState);
+const useGet = <T, U>(url: string, dataParser: (data: T) => U): State<U> => {
+  const [state, setState] = useState<State<U>>(defaultState);
 
   const fetchData = async () => {
     try {

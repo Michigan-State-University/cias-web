@@ -1,9 +1,17 @@
 import produce from 'immer';
+import { AnyAction, Reducer } from 'redux';
+
 import {
   PHONETIC_PREVIEW_REQUEST,
   PHONETIC_PREVIEW_SUCCESS,
   RESET_PHONETIC_PREVIEW,
 } from './constants';
+
+type State = {
+  phoneticText: Nullable<string>;
+  phoneticUrl: Nullable<string>;
+  phoneticLoading: boolean;
+};
 
 export const initialState = {
   phoneticText: null,
@@ -12,7 +20,10 @@ export const initialState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-const AudioPreviewReducer = (state = initialState, { payload, type }) =>
+const AudioPreviewReducer: Reducer<State> = (
+  state = initialState,
+  { payload, type }: AnyAction,
+) =>
   produce(state, (draft) => {
     switch (type) {
       case RESET_PHONETIC_PREVIEW:

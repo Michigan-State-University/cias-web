@@ -6,7 +6,6 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
-import PropTypes from 'prop-types';
 
 import { fontSizes, themeColors } from 'theme';
 import H1 from 'components/H1';
@@ -14,22 +13,38 @@ import H2 from 'components/H2';
 import Text from 'components/Text';
 import Comment from 'components/Text/Comment';
 import Row from 'components/Row';
-import Box from 'components/Box';
 import { StyledButton } from 'components/Button/StyledButton';
 import Loader from 'components/Loader';
 import ErrorAlert from 'components/ErrorAlert';
 import useGet from 'utils/useGet';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
-import { languageSelectOptionFormatter } from 'utils/formatters';
+import {
+  languageSelectOptionFormatter,
+  Language,
+  LanguageSelectOption,
+  VoiceSelectOption,
+} from 'utils/formatters';
 
 import TranslateLanguageSettings from './components/TranslateLanguageSettings';
+import TranslateVoiceSettings from './components/TranslateVoiceSettings';
 import messages from './messages';
 
-const TranslateInterventionModal = ({ name, googleLanguageId }) => {
-  const [sourceLanguage, setSourceLanguage] = useState(null);
-  const [destinationLanguage, setDestinationLanguage] = useState(null);
+type Props = {
+  name: string;
+  googleLanguageId: number;
+};
 
-  const { data, isFetching, error } = useGet(
+const TranslateInterventionModal = ({
+  name,
+  googleLanguageId,
+}: Props): JSX.Element => {
+  const [sourceLanguage, setSourceLanguage] =
+    useState<Nullable<LanguageSelectOption>>(null);
+  const [destinationLanguage, setDestinationLanguage] =
+    useState<Nullable<LanguageSelectOption>>(null);
+  const [voice, setVoice] = useState<Nullable<VoiceSelectOption>>(null);
+
+  const { data, isFetching, error } = useGet<{ data: [] }, Language[]>(
     '/v1/google/languages',
     (fetchedData) => jsonApiToArray(fetchedData, 'supportedLanguage'),
   );
@@ -43,10 +58,11 @@ const TranslateInterventionModal = ({ name, googleLanguageId }) => {
     const matchedSourceLanguage = languageOptions.find(
       (language) => language.googleLanguageId === `${googleLanguageId}`,
     );
-    setSourceLanguage(matchedSourceLanguage);
+    setSourceLanguage(matchedSourceLanguage ?? null);
   }, [googleLanguageId, languageOptions]);
 
   if (isFetching) {
+    // @ts-ignore
     return <Loader />;
   }
 
@@ -67,7 +83,10 @@ const TranslateInterventionModal = ({ name, googleLanguageId }) => {
       <Comment mb={20}>
         <FormattedMessage {...messages.translationSettingsComment} />
       </Comment>
-      {!error && (
+      {error ? (
+        // @ts-ignore
+        <ErrorAlert errorText={error} />
+      ) : (
         <TranslateLanguageSettings
           languageOptions={languageOptions}
           sourceLanguage={sourceLanguage}
@@ -76,10 +95,20 @@ const TranslateInterventionModal = ({ name, googleLanguageId }) => {
           onDestinationLanguageChange={setDestinationLanguage}
         />
       )}
-      {error && (
-        <Box>
-          <ErrorAlert errorText={error} />
-        </Box>
+      {destinationLanguage && (
+        <>
+          <H2 mt={50} mb={10}>
+            <FormattedMessage {...messages.voiceSettings} />
+          </H2>
+          <Comment mb={20}>
+            <FormattedMessage {...messages.voiceSettingsComment} />
+          </Comment>
+          <TranslateVoiceSettings
+            googleLanguageId={destinationLanguage.googleLanguageId}
+            voice={voice}
+            onVoiceChange={setVoice}
+          />
+        </>
       )}
       <Row mt={50}>
         <Comment width="100%">
@@ -91,11 +120,6 @@ const TranslateInterventionModal = ({ name, googleLanguageId }) => {
       </Row>
     </>
   );
-};
-
-TranslateInterventionModal.propTypes = {
-  name: PropTypes.string.isRequired,
-  googleLanguageId: PropTypes.number,
 };
 
 export default TranslateInterventionModal;

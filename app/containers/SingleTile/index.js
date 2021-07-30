@@ -33,7 +33,7 @@ import Tooltip from 'components/Tooltip';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import SelectResearchers from 'containers/SelectResearchers';
-import TranslateInterventionModal from 'containers/TranslateInterventionModal';
+import TranslateInterventionModal from 'containers/TranslateInterventionModal/index.tsx';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { canArchive } from 'models/Status/statusPermissions';
 import messages from './messages';

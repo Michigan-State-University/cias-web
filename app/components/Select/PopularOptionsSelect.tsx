@@ -13,21 +13,29 @@
 
 import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
-import PropTypes from 'prop-types';
+import { Props as SelectProps } from 'react-select';
 
 import Select from '.';
 import messages from './messages';
+import { SelectOption, GroupedOption, Group } from './types';
 
-const PopularOptionsSelect = ({
+type Props<OptionType extends SelectOption> = {
+  popularOptionsValues: string[];
+  popularGroupLabel?: string;
+  otherGroupLabel?: string;
+  selectProps: SelectProps<OptionType>;
+};
+
+const PopularOptionsSelect = <OptionType extends SelectOption>({
   popularOptionsValues,
   popularGroupLabel,
   otherGroupLabel,
   selectProps,
   ...restProps
-}) => {
+}: Props<OptionType> & Record<string, unknown>): JSX.Element => {
   const { formatMessage } = useIntl();
 
-  const emptyGroups = [
+  const emptyGroups: Group<OptionType>[] = [
     {
       label: popularGroupLabel ?? formatMessage(messages.popular),
       options: [],
@@ -37,19 +45,25 @@ const PopularOptionsSelect = ({
 
   const groupedOptions = useMemo(
     () =>
-      selectProps.options.reduce((groups, option) => {
+      selectProps.options?.reduce((groups, option) => {
         const groupIndex = +!popularOptionsValues.includes(option.value);
         groups[groupIndex].options.push({
-          ...option,
+          ...(option as OptionType),
           highlighted: !groupIndex,
         });
         return groups;
-      }, emptyGroups),
+      }, emptyGroups) ?? emptyGroups,
     [selectProps.options, popularOptionsValues],
   );
 
-  const formatOptionLabel = ({ value, label, highlighted }) =>
-    highlighted && value !== selectProps.value?.value ? <b>{label}</b> : label;
+  const formatOptionLabel = ({
+    value,
+    label,
+    highlighted,
+  }: GroupedOption<OptionType>) => {
+    const selectValue = selectProps.value as OptionType;
+    return highlighted && value !== selectValue?.value ? <b>{label}</b> : label;
+  };
 
   return (
     <Select
@@ -61,13 +75,6 @@ const PopularOptionsSelect = ({
       {...restProps}
     />
   );
-};
-
-PopularOptionsSelect.propTypes = {
-  popularOptionsValues: PropTypes.array.isRequired,
-  popularGroupLabel: PropTypes.string,
-  otherGroupLabel: PropTypes.string,
-  selectProps: PropTypes.object.isRequired,
 };
 
 export default PopularOptionsSelect;

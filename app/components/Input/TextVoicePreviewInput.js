@@ -24,7 +24,7 @@ import messages from './messages';
 const TextVoicePreviewInput = ({
   intl: { formatMessage },
   value,
-  onBlur,
+  onTextReady,
   placeholder,
   disabled,
   styles,
@@ -34,6 +34,7 @@ const TextVoicePreviewInput = ({
   isAnimationOngoing,
   boxPx,
   boxPy,
+  previewButtonInsideInput,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioButtonDisabled =
@@ -54,31 +55,58 @@ const TextVoicePreviewInput = ({
     audioInstance.setSrc(phoneticUrl);
   };
 
+  const saveText = (event) => onTextReady(event.target.value);
+
+  const saveTextIfEnterClicked = (event) => {
+    if (event.key === 'Enter') {
+      saveText(event);
+    }
+  };
+
+  const renderTextInput = () => (
+    <Box
+      bg={themeColors.highlight}
+      px={boxPx}
+      py={boxPy}
+      justify="center"
+      align="center"
+      minWidth={previewButtonInsideInput ? null : 300}
+      width="100%"
+    >
+      <Input
+        defaultValue={value ?? ''}
+        onBlur={saveText}
+        onKeyDown={saveTextIfEnterClicked}
+        placeholder={placeholder}
+        transparent
+        disabled={disabled}
+        {...styles}
+      />
+    </Box>
+  );
+
   const renderPreviewButton = () => {
     if (phoneticLoading) return <Loader size={24} type="inline" />;
     if (!isPlaying) return <Img src={playButton} />;
     return <Img src={stopButton} />;
   };
 
-  return (
-    <Column>
+  return previewButtonInsideInput ? (
+    <Row align="center">
+      {renderTextInput()}
       <Box
-        bg={themeColors.highlight}
-        px={boxPx}
-        py={boxPy}
-        justify="center"
-        align="center"
-        minWidth={300}
+        onClick={playPreview}
+        clickable
+        disabled={audioButtonDisabled}
+        role="button"
+        ml={-34}
       >
-        <Input
-          defaultValue={value ?? ''}
-          onBlur={(e) => onBlur(e.target.value)}
-          placeholder={placeholder}
-          transparent
-          disabled={disabled}
-          {...styles}
-        />
+        {renderPreviewButton()}
       </Box>
+    </Row>
+  ) : (
+    <Column>
+      {renderTextInput()}
       <Row
         align="center"
         width={80}
@@ -101,7 +129,7 @@ const TextVoicePreviewInput = ({
 TextVoicePreviewInput.propTypes = {
   intl: PropTypes.shape(IntlShape),
   value: PropTypes.string,
-  onBlur: PropTypes.func,
+  onTextReady: PropTypes.func,
   placeholder: PropTypes.string,
   phoneticUrl: PropTypes.any,
   disabled: PropTypes.bool,
@@ -111,6 +139,7 @@ TextVoicePreviewInput.propTypes = {
   isAnimationOngoing: PropTypes.bool,
   boxPy: PropTypes.number,
   boxPx: PropTypes.number,
+  previewButtonInsideInput: PropTypes.bool,
 };
 
 TextVoicePreviewInput.defaultProps = {

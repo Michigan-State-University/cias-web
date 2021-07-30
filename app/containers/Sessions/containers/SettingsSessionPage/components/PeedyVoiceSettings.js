@@ -182,7 +182,7 @@ const PeedyVoiceSettings = ({
           phoneticUrl={phoneticUrl}
           phoneticLoading={phoneticLoading}
           placeholder={formatMessage(messages.testVoice)}
-          onBlur={handlePhoneticNameChange}
+          onTextReady={handlePhoneticNameChange}
           styles={inputStyles}
         />
       )}

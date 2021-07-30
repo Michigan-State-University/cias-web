@@ -27,6 +27,14 @@ export default defineMessages({
     defaultMessage:
       'Select the original language of the intervention and then the destination language.',
   },
+  voiceSettings: {
+    id: `${scope}.voiceSettings`,
+    defaultMessage: 'Peedy voice settings',
+  },
+  voiceSettingsComment: {
+    id: `${scope}.voiceSettingsComment`,
+    defaultMessage: 'Choose the narrator voice type',
+  },
   costsComment: {
     id: `${scope}.costsComment`,
     defaultMessage:

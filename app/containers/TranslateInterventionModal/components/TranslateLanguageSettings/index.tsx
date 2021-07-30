@@ -6,15 +6,27 @@
 
 import React, { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import PropTypes from 'prop-types';
 
 import { themeColors } from 'theme';
 import H2 from 'components/H2';
 import Row from 'components/Row';
 import Column from 'components/Column';
 import PopularOptionsSelect from 'components/Select/PopularOptionsSelect';
+import { LanguageSelectOption } from 'utils/formatters';
 
 import messages from './messages';
+
+type Props = {
+  languageOptions: LanguageSelectOption[];
+  sourceLanguage: Nullable<LanguageSelectOption>;
+  onSourceLanguageChange: (
+    sourceLanguage: Nullable<LanguageSelectOption>,
+  ) => void;
+  destinationLanguage: Nullable<LanguageSelectOption>;
+  onDestinationLanguageChange: (
+    destinationLanguage: Nullable<LanguageSelectOption>,
+  ) => void;
+};
 
 const TranslateLanguageSettings = ({
   languageOptions: sourceLanguageOptions,
@@ -22,7 +34,7 @@ const TranslateLanguageSettings = ({
   onSourceLanguageChange,
   destinationLanguage,
   onDestinationLanguageChange,
-}) => {
+}: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
   const destinationLanguageOptions = useMemo(
@@ -36,7 +48,9 @@ const TranslateLanguageSettings = ({
     [sourceLanguageOptions, sourceLanguage],
   );
 
-  const handleSourceLanguageChange = (newSourceLanguage) => {
+  const handleSourceLanguageChange = (
+    newSourceLanguage: Nullable<LanguageSelectOption>,
+  ) => {
     onSourceLanguageChange(newSourceLanguage);
     if (
       newSourceLanguage?.googleLanguageId ===
@@ -81,14 +95,6 @@ const TranslateLanguageSettings = ({
       </Row>
     </>
   );
-};
-
-TranslateLanguageSettings.propTypes = {
-  languageOptions: PropTypes.array,
-  sourceLanguage: PropTypes.object,
-  onSourceLanguageChange: PropTypes.func,
-  destinationLanguage: PropTypes.object,
-  onDestinationLanguageChange: PropTypes.func,
 };
 
 export default TranslateLanguageSettings;
