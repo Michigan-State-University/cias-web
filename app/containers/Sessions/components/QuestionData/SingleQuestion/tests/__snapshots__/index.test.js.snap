@@ -37,7 +37,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
                   class="Column-sc-4zswzq-0 ekpwZH"
                 >
                   <div
-                    class="quill styled__QuillStyled-sc-10udg63-0 hIRMGR"
+                    class="quill styled__QuillStyled-sc-10udg63-0 bBDopv"
                   >
                     <div
                       class="ql-container ql-bubble"
@@ -1491,7 +1491,7 @@ exports[`<SingleQuestion /> Should render and match the snapshot 1`] = `
                   class="Column-sc-4zswzq-0 ekpwZH"
                 >
                   <div
-                    class="quill styled__QuillStyled-sc-10udg63-0 hIRMGR"
+                    class="quill styled__QuillStyled-sc-10udg63-0 bBDopv"
                   >
                     <div
                       class="ql-container ql-bubble"

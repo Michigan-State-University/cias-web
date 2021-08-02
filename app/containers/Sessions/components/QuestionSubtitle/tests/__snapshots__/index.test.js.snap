@@ -46,6 +46,7 @@ exports[`<QuestionSubtitle /> Should render and match the snapshot 1`] = `
 .c4 .ql-editor {
   font-weight: 400;
   padding: 10px;
+  overflow: visible;
 }
 
 .c4 .ql-editor.ql-blank::before {

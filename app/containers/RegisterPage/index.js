@@ -20,9 +20,14 @@ import timezone from 'dayjs/plugin/timezone';
 import set from 'lodash/set';
 import lowerCase from 'lodash/lowerCase';
 import queryString from 'query-string';
-
+import { Markup } from 'interweave';
 import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
+import { themeColors } from 'theme';
+import { Roles } from 'models/User/UserRoles';
+import { passwordRegex } from 'global/constants/regex';
+
+import withPublicLayout from 'containers/PublicLayout';
 import { Fill } from 'components/Fill';
 import Button from 'components/Button';
 import StyledTextButton from 'components/Button/StyledTextButton';
@@ -33,11 +38,8 @@ import Text from 'components/Text';
 import Modal from 'components/Modal';
 import FormikInput from 'components/FormikInput';
 import ErrorAlert from 'components/ErrorAlert';
-import withPublicLayout from 'containers/PublicLayout';
-
-import { themeColors } from 'theme';
-import { passwordRegex } from 'global/constants/regex';
 import FormikCheckbox from 'components/FormikCheckbox';
+
 import makeSelectRegisterPage from './selectors';
 import reducer from './reducer';
 import allRegistrationsSaga from './sagas';
@@ -46,6 +48,7 @@ import {
   registerParticipantRequest,
   registerResearcherRequest,
 } from './actions';
+import { TermsAndConditions } from './styled';
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -102,6 +105,11 @@ export function RegisterPage({
   );
   const isInvite = Boolean(invitationToken) && Boolean(email);
 
+  const termsAndConditionsText =
+    role === Roles.participant || !role
+      ? formatMessage(messages.termsAndConditionsParticipantText)
+      : formatMessage(messages.termsAndConditionsOtherRolesText);
+
   const onSubmit = (values, { setSubmitting }) => {
     const currentTimeZone = dayjs.tz.guess();
     set(values, 'timeZone', currentTimeZone);
@@ -122,9 +130,11 @@ export function RegisterPage({
         visible={showTermsModal}
         title={formatMessage(messages.termsAndConditions)}
         onClose={() => setShowTermsModal(false)}
-        maxWidth={500}
+        maxWidth="80%"
       >
-        {formatMessage(messages.termsAndConditionsText)}
+        <TermsAndConditions>
+          <Markup content={termsAndConditionsText} noWrap />
+        </TermsAndConditions>
       </Modal>
       <Fill justify="center" align="center">
         <Column sm={10} md={8} lg={6} align="start">
@@ -195,6 +205,7 @@ export function RegisterPage({
                   <FormikCheckbox formikKey="terms">
                     {formatMessage(messages.accept)}
                     <Text
+                      clickable
                       ml={3}
                       lineHeight="1.5em"
                       fontWeight="bold"

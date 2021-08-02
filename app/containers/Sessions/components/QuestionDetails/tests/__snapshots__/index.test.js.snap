@@ -354,6 +354,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 .c15 .ql-editor {
   font-weight: 400;
   padding: 10px;
+  overflow: visible;
 }
 
 .c15 .ql-editor.ql-blank::before {
@@ -386,6 +387,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
 .c18 .ql-editor {
   font-weight: 400;
   padding: 10px;
+  overflow: visible;
 }
 
 .c18 .ql-editor.ql-blank::before {
