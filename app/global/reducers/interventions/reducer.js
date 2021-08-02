@@ -41,10 +41,7 @@ export const interventionsReducer = (state = initialState, action) =>
         break;
       case CREATE_INTERVENTION_SUCCESS:
       case COPY_INTERVENTION_SUCCESS:
-        draft.interventions = [
-          ...state.interventions,
-          action.payload.intervention,
-        ];
+        draft.interventions.unshift(action.payload.intervention);
         break;
       case ARCHIVE_INTERVENTION_REQUEST:
         let interventionIndex = draft.interventions.findIndex(

@@ -14,7 +14,7 @@ import { CREATE_INTERVENTION_SUCCESS } from 'global/reducers/intervention';
 import { archived } from 'models/Status/StatusTypes';
 import interventionsReducer, { initialState } from '../reducer';
 
-describe('userList reducer', () => {
+describe('interventions reducer', () => {
   const interventions = [
     createIntervention(),
     createIntervention(1),
@@ -75,8 +75,8 @@ describe('userList reducer', () => {
 
     const expectedState = cloneDeep(mockStateWithInterventions);
     expectedState.interventions = [
-      ...mockStateWithInterventions.interventions,
       payloadIntervention.intervention,
+      ...mockStateWithInterventions.interventions,
     ];
 
     expect(interventionsReducer(mockStateWithInterventions, action)).toEqual(
