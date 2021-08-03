@@ -107,7 +107,7 @@ const CopyChooser = ({
   const filteredSessions = useMemo(
     () =>
       sessions
-        ? sessions.filter(({ intervention_id: sessionIntId }) =>
+        ? sessions.filter(({ interventionId: sessionIntId }) =>
             filteredInterventions.find(
               ({ id: intId }) => intId === sessionIntId,
             ),

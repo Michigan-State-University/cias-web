@@ -38,7 +38,7 @@ const InterventionView = ({ onClick }) => {
   }, []);
 
   const interventions = useMemo(
-    () => allInterventions.filter(({ status }) => status === published),
+    () => allInterventions?.filter(({ status }) => status === published),
     [allInterventions],
   );
 
