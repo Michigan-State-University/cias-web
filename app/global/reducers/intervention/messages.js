@@ -72,4 +72,12 @@ export default defineMessages({
     id: `${scope}.copySuccess`,
     defaultMessage: 'Successfully copied session',
   },
+  translateSuccess: {
+    id: `${scope}.translateSuccess`,
+    defaultMessage: 'The intervention translated successfully',
+  },
+  translateError: {
+    id: `${scope}.translateError`,
+    defaultMessage: `Couldn't translate the intervention`,
+  },
 });

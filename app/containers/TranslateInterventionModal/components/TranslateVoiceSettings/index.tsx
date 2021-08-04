@@ -40,12 +40,10 @@ type Props = {
   googleLanguageId?: string;
   voice: Nullable<VoiceSelectOption>;
   onVoiceChange: (voice: VoiceSelectOption) => void;
-  // @ts-ignore
-  audioPreviewRequest;
+  audioPreviewRequest: typeof phoneticPreviewRequest;
   // @ts-ignore
   audioPreview;
-  // @ts-ignore
-  resetAudioPreview;
+  resetAudioPreview: typeof resetPhoneticPreview;
 };
 
 const TranslateVoiceSettings = ({

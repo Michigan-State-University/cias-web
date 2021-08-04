@@ -151,8 +151,10 @@ const SingleTile = ({
       </Modal>
       <Modal onClose={closeTranslateModal} visible={translateModalVisible}>
         <TranslateInterventionModal
+          id={id}
           name={name}
           googleLanguageId={googleLanguageId}
+          onTranslated={closeTranslateModal}
         />
       </Modal>
       <StyledLink to={link}>

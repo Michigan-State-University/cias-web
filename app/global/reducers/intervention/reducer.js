@@ -68,6 +68,9 @@ import {
   UPDATE_INTERVENTION_LOGO_REQUEST,
   UPDATE_INTERVENTION_LOGO_SUCCESS,
   UPDATE_INTERVENTION_LOGO_ERROR,
+  TRANSLATE_INTERVENTION_REQUEST,
+  TRANSLATE_INTERVENTION_SUCCESS,
+  TRANSLATE_INTERVENTION_ERROR,
 } from './constants';
 
 export const initialState = {
@@ -92,6 +95,7 @@ export const initialState = {
       email: null,
     },
     logoLoading: false,
+    translateInterventionLoading: false,
   },
   errors: {
     fetchInterventionError: null,
@@ -100,6 +104,7 @@ export const initialState = {
     changeAccessSettingError: null,
     fetchUserAccessError: null,
     createSessionError: null,
+    translateInterventionError: null,
   },
 };
 
@@ -434,6 +439,18 @@ export const interventionReducer = (state = initialState, action) =>
         break;
       case EDIT_SESSION_ERROR:
         draft.intervention.sessions = state.cache.intervention.sessions;
+        break;
+      case TRANSLATE_INTERVENTION_REQUEST:
+        draft.loaders.translateInterventionLoading = true;
+        draft.errors.translateInterventionError = null;
+        break;
+      case TRANSLATE_INTERVENTION_SUCCESS:
+        draft.loaders.translateInterventionLoading = false;
+        draft.errors.translateInterventionError = null;
+        break;
+      case TRANSLATE_INTERVENTION_ERROR:
+        draft.loaders.translateInterventionLoading = false;
+        draft.errors.translateInterventionError = action.payload.error;
         break;
     }
   });

@@ -58,6 +58,9 @@ import {
   UPDATE_INTERVENTION_LOGO_REQUEST,
   UPDATE_INTERVENTION_LOGO_SUCCESS,
   UPDATE_INTERVENTION_LOGO_ERROR,
+  TRANSLATE_INTERVENTION_REQUEST,
+  TRANSLATE_INTERVENTION_SUCCESS,
+  TRANSLATE_INTERVENTION_ERROR,
 } from './constants';
 
 export const fetchInterventionRequest = (id) =>
@@ -211,3 +214,18 @@ export const updateInterventionLogoSuccess = () =>
   actionBuilder(UPDATE_INTERVENTION_LOGO_SUCCESS, {});
 export const updateInterventionLogoError = (error) =>
   actionBuilder(UPDATE_INTERVENTION_LOGO_ERROR, { error });
+
+export const translateInterventionRequest = (
+  id,
+  destinationLanguageId,
+  destinationVoiceId,
+) =>
+  actionBuilder(TRANSLATE_INTERVENTION_REQUEST, {
+    id,
+    destinationLanguageId,
+    destinationVoiceId,
+  });
+export const translateInterventionSuccess = (intervention) =>
+  actionBuilder(TRANSLATE_INTERVENTION_SUCCESS, { intervention });
+export const translateInterventionError = (error) =>
+  actionBuilder(TRANSLATE_INTERVENTION_ERROR, { error });

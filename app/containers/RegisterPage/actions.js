@@ -4,6 +4,8 @@
  *
  */
 
+import { actionBuilder } from 'utils/actionBuilder';
+
 import {
   REGISTER_PARTICIPANT_REQUEST,
   REGISTER_PARTICIPANT_SUCCESS,
@@ -12,7 +14,6 @@ import {
   REGISTER_RESEARCHER_SUCCESS,
   REGISTER_RESEARCHER_ERROR,
 } from './constants';
-import { actionBuilder } from '../../utils/actionBuilder';
 
 export const registerParticipantRequest = (payload) =>
   actionBuilder(REGISTER_PARTICIPANT_REQUEST, payload);

@@ -17,8 +17,11 @@ export const makeSelectInterventionStatus = () =>
     substate.intervention ? substate.intervention.status : null,
   );
 
-export const makeSelectInterventionLoader = (loader) =>
-  createSelector(selectIntervention, (substate) => substate.loaders[loader]);
+export const makeSelectInterventionLoader = (name) =>
+  createSelector(selectIntervention, ({ loaders }) => loaders[name]);
+
+export const makeSelectInterventionError = (name) =>
+  createSelector(selectIntervention, ({ errors }) => errors[name]);
 
 export const makeSelectCurrentSessionIndex = () =>
   createSelector(

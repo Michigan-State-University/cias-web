@@ -6,6 +6,10 @@
 
 import React, { useEffect, useMemo, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { injectReducer, injectSaga } from 'redux-injectors';
+import { createStructuredSelector } from 'reselect';
 
 import { fontSizes, themeColors } from 'theme';
 import H1 from 'components/H1';
@@ -13,7 +17,7 @@ import H2 from 'components/H2';
 import Text from 'components/Text';
 import Comment from 'components/Text/Comment';
 import Row from 'components/Row';
-import { StyledButton } from 'components/Button/StyledButton';
+import Button from 'components/Button';
 import Loader from 'components/Loader';
 import ErrorAlert from 'components/ErrorAlert';
 import useGet from 'utils/useGet';
@@ -24,25 +28,45 @@ import {
   LanguageSelectOption,
   VoiceSelectOption,
 } from 'utils/formatters';
+import {
+  translateInterventionRequest,
+  interventionReducer,
+  translateInterventionSaga,
+  makeSelectInterventionLoader,
+  makeSelectInterventionError,
+} from 'global/reducers/intervention';
 
 import TranslateLanguageSettings from './components/TranslateLanguageSettings';
 import TranslateVoiceSettings from './components/TranslateVoiceSettings';
 import messages from './messages';
 
 type Props = {
+  id: string;
   name: string;
   googleLanguageId: number;
+  onTranslated?: () => void;
+  // @ts-ignore
+  translateInterventionLoading;
+  // @ts-ignore
+  translateInterventionError;
+  translateIntervention: typeof translateInterventionRequest;
 };
 
 const TranslateInterventionModal = ({
+  id,
   name,
   googleLanguageId,
+  onTranslated,
+  translateInterventionLoading,
+  translateInterventionError,
+  translateIntervention,
 }: Props): JSX.Element => {
   const [sourceLanguage, setSourceLanguage] =
     useState<Nullable<LanguageSelectOption>>(null);
   const [destinationLanguage, setDestinationLanguage] =
     useState<Nullable<LanguageSelectOption>>(null);
   const [voice, setVoice] = useState<Nullable<VoiceSelectOption>>(null);
+  const [submitted, setSubmitted] = useState(false);
 
   const { data, isFetching, error } = useGet<{ data: [] }, Language[]>(
     '/v1/google/languages',
@@ -60,6 +84,25 @@ const TranslateInterventionModal = ({
     );
     setSourceLanguage(matchedSourceLanguage ?? null);
   }, [googleLanguageId, languageOptions]);
+
+  useEffect(() => {
+    const translatedSuccessfully =
+      submitted && !translateInterventionLoading && !translateInterventionError;
+    if (translatedSuccessfully && onTranslated) {
+      onTranslated();
+    }
+  }, [submitted, translateInterventionLoading, translateInterventionError]);
+
+  const handleTranslate = () => {
+    if (destinationLanguage) {
+      translateIntervention(
+        id,
+        destinationLanguage.googleLanguageId,
+        voice?.id,
+      );
+      setSubmitted(true);
+    }
+  };
 
   if (isFetching) {
     // @ts-ignore
@@ -114,12 +157,40 @@ const TranslateInterventionModal = ({
         <Comment width="100%">
           <FormattedMessage {...messages.costsComment} />
         </Comment>
-        <StyledButton ml={20} width={200}>
-          <FormattedMessage {...messages.translate} />
-        </StyledButton>
+        {
+          // @ts-ignore
+          <Button
+            ml={20}
+            width={200}
+            onClick={handleTranslate}
+            disabled={!destinationLanguage}
+            loading={translateInterventionLoading}
+          >
+            <FormattedMessage {...messages.translate} />
+          </Button>
+        }
       </Row>
     </>
   );
 };
 
-export default TranslateInterventionModal;
+const mapStateToProps = createStructuredSelector({
+  translateInterventionLoading: makeSelectInterventionLoader(
+    'translateInterventionLoading',
+  ),
+  translateInterventionError: makeSelectInterventionError(
+    'translateInterventionError',
+  ),
+});
+
+const mapDispatchToProps = {
+  translateIntervention: translateInterventionRequest,
+};
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(
+  withConnect,
+  injectSaga({ key: 'translateIntervention', saga: translateInterventionSaga }),
+  injectReducer({ key: 'intervention', reducer: interventionReducer }),
+)(TranslateInterventionModal);

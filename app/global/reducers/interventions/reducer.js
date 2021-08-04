@@ -3,6 +3,11 @@ import isEmpty from 'lodash/isEmpty';
 
 import { archived } from 'models/Status/StatusTypes';
 import {
+  CREATE_INTERVENTION_SUCCESS,
+  TRANSLATE_INTERVENTION_SUCCESS,
+} from 'global/reducers/intervention';
+
+import {
   COPY_INTERVENTION_SUCCESS,
   FETCH_INTERVENTIONS_ERROR,
   FETCH_INTERVENTIONS_REQUEST,
@@ -11,8 +16,6 @@ import {
   ARCHIVE_INTERVENTION_REQUEST,
   ARCHIVE_INTERVENTION_SUCCESS,
 } from './constants';
-
-import { CREATE_INTERVENTION_SUCCESS } from '../intervention';
 
 export const initialState = {
   interventions: [],
@@ -40,6 +43,7 @@ export const interventionsReducer = (state = initialState, action) =>
         draft.fetchInterventionError = action.payload.error;
         break;
       case CREATE_INTERVENTION_SUCCESS:
+      case TRANSLATE_INTERVENTION_SUCCESS:
       case COPY_INTERVENTION_SUCCESS:
         draft.interventions = [
           ...state.interventions,

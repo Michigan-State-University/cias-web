@@ -17,6 +17,7 @@ import revokeUserAccessSaga from './revokeUserAccess';
 import deleteSessionSaga from './deleteSession';
 import externalCopySessionSaga from './externalCopySession';
 import interventionLogoSaga from './interventionLogo';
+import translateInterventionSaga from './translateIntervention';
 
 export {
   createInterventionSaga,
@@ -37,6 +38,7 @@ export {
   deleteSessionSaga,
   externalCopySessionSaga,
   interventionLogoSaga,
+  translateInterventionSaga,
 };
 
 export default function* allInterventionSagas() {
@@ -59,5 +61,6 @@ export default function* allInterventionSagas() {
     resendSessionInviteSaga(),
     deleteSessionSaga(),
     externalCopySessionSaga(),
+    translateInterventionSaga(),
   ]);
 }
