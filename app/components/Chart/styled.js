@@ -28,17 +28,7 @@ export const StyledResponsiveContainer = styled(ResponsiveContainer)`
           }
 
           .recharts-brush-texts {
-            text {
-              &:first-child {
-                text-anchor: start;
-                transform: translate(10px, 10px);
-              }
-
-              &:last-child {
-                text-anchor: end;
-                transform: translate(-10px, 10px);
-              }
-            }
+            display: none;
           }
 
           .recharts-brush-traveller {
