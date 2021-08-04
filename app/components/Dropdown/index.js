@@ -1,14 +1,17 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 
+import dots from 'assets/svg/dots.svg';
+
+import { colors, boxShadows } from 'theme';
+import useOutsideClick from 'utils/useOutsideClick';
+
 import Img from 'components/Img';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Row from 'components/Row';
-import dots from 'assets/svg/dots.svg';
-import { colors, boxShadows } from 'theme';
+import Icon from 'components/Icon';
 
-import useOutsideClick from 'utils/useOutsideClick';
 import { StyledComment, ImageContainer, StyledRow } from './styled';
 
 const Dropdown = ({ options, top, disabled, ...restProps }) => {
@@ -58,7 +61,14 @@ const Dropdown = ({ options, top, disabled, ...restProps }) => {
                 onClick={() => !option.disabled && callAction(option.action)}
                 align="center"
               >
-                {option.icon && <Img src={option.icon} alt="icon" mr={12} />}
+                {option.icon && (
+                  <Icon
+                    src={option.icon}
+                    fill={colors.greyishBlue}
+                    alt="icon"
+                    mr={12}
+                  />
+                )}
                 <StyledComment
                   color={option.color || colors.bluewood}
                   whiteSpace="nowrap"

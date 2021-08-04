@@ -2,6 +2,8 @@ import produce from 'immer';
 import isEmpty from 'lodash/isEmpty';
 
 import { archived } from 'models/Status/StatusTypes';
+import { EDIT_INTERVENTION_SUCCESS } from 'global/reducers/intervention/constants';
+
 import {
   COPY_INTERVENTION_SUCCESS,
   FETCH_INTERVENTIONS_ERROR,
@@ -15,6 +17,7 @@ import {
 import { CREATE_INTERVENTION_SUCCESS } from '../intervention';
 
 export const initialState = {
+  shouldRefetch: false,
   interventions: [],
   fetchInterventionLoading: true,
   fetchInterventionError: null,
@@ -28,6 +31,7 @@ export const interventionsReducer = (state = initialState, action) =>
   produce(state, draft => {
     switch (action.type) {
       case FETCH_INTERVENTIONS_REQUEST:
+        draft.shouldRefetch = false;
         if (isEmpty(state.interventions)) draft.fetchInterventionLoading = true;
         draft.fetchInterventionError = null;
         break;
@@ -61,6 +65,10 @@ export const interventionsReducer = (state = initialState, action) =>
         draft.interventions[interventionIndex] =
           state.cache.archiveIntervention;
         draft.cache.archiveIntervention = null;
+        break;
+
+      case EDIT_INTERVENTION_SUCCESS:
+        draft.shouldRefetch = true;
         break;
     }
   });

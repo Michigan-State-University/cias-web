@@ -51,6 +51,7 @@ export function InterventionPage({
     interventions,
     fetchInterventionLoading,
     fetchInterventionError,
+    shouldRefetch,
   },
   intl: { formatMessage },
   createInterventionRequest: createIntervention,
@@ -75,6 +76,10 @@ export function InterventionPage({
   useEffect(() => {
     fetchInterventions();
   }, []);
+
+  useEffect(() => {
+    if (shouldRefetch) fetchInterventions();
+  }, [shouldRefetch]);
 
   const handleChange = value => () => {
     if (filterStatus.includes(value))

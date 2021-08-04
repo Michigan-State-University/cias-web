@@ -6,11 +6,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactSelect from 'react-select';
+
+import { themeColors } from 'theme';
+import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import Box from 'components/Box';
-import { themeColors } from 'theme';
 
-import ReactSelect from 'react-select';
 import { DropdownIndicator, Option } from './components';
 
 const customStyles = ({ isMulti, bg, isDisabled }) => ({
@@ -51,17 +53,22 @@ const customComponents = isMulti => ({
     : {}),
 });
 
-const Select = ({ selectProps, ...restProps }) => (
-  <Box {...restProps}>
-    <ReactSelect
-      components={customComponents(selectProps.isMulti)}
-      menuPortalTarget={document.body}
-      styles={customStyles(selectProps)}
-      menuPlacement="auto"
-      {...selectProps}
-    />
-  </Box>
-);
+const Select = ({ selectProps, ...restProps }) => {
+  const { value } = selectProps;
+
+  return (
+    <Box {...restProps}>
+      <ReactSelect
+        components={customComponents(selectProps.isMulti)}
+        menuPortalTarget={document.body}
+        styles={customStyles(selectProps)}
+        menuPlacement="auto"
+        {...selectProps}
+        value={!isNullOrUndefined(value?.value) ? value : null}
+      />
+    </Box>
+  );
+};
 
 Select.propTypes = {
   selectProps: PropTypes.object,

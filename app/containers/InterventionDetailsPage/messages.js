@@ -102,4 +102,16 @@ export default defineMessages({
     id: `${scope}.interventionSettingsLanguageLabel`,
     defaultMessage: 'Intervention Language:',
   },
+  assignOrganization: {
+    id: `${scope}.assignOrganization`,
+    defaultMessage: 'Assign Organization',
+  },
+  assignOrganizationSelectLabel: {
+    id: `${scope}.assignOrganizationSelectLabel`,
+    defaultMessage: 'Choose Organization:',
+  },
+  saveButton: {
+    id: `${scope}.saveButton`,
+    defaultMessage: 'Save',
+  },
 });

@@ -41,9 +41,17 @@ export default defineMessages({
     id: `${scope}.duplicate`,
     defaultMessage: 'Duplicate',
   },
+  assignOrganization: {
+    id: `${scope}.assignOrganization`,
+    defaultMessage: 'Assign Organization',
+  },
   modalTitle: {
     id: `${scope}.modalTitle`,
     defaultMessage: 'Choose researchers to send',
+  },
+  isFromOrganization: {
+    id: `${scope}.isFromOrganization`,
+    defaultMessage: 'Reporting',
   },
   createdBy: {
     id: `${scope}.createdBy`,

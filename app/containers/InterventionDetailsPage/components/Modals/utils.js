@@ -7,3 +7,11 @@ export const languageSelectOptionFormatter = ({
   value,
   label,
 });
+
+export const organizationSelectOptionFormatter = ({
+  id: value,
+  name: label,
+}) => ({
+  value,
+  label,
+});

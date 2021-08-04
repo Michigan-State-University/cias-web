@@ -41,7 +41,7 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c11 {
+.c12 {
   width: auto;
   height: auto;
   display: block;
@@ -67,6 +67,22 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   flex-direction: row;
   height: auto;
   width: 100%;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
 }
 
 .c10 {
@@ -143,14 +159,14 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
 }
 
-.c12 div {
+.c13 div {
   padding: 5px 10px;
   background: #e9f1fb;
   font-size: 12px;
@@ -232,17 +248,21 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
       </div>
       <div
         class="c11"
-        display="flex"
       >
         <div
-          class="c9"
-          data-for="test-id-tile-tooltip"
-          data-tip=""
+          class="c12"
+          display="flex"
         >
-          <div>
-            <div
-              class="c12"
-            />
+          <div
+            class="c9"
+            data-for="test-id-tile-tooltip"
+            data-tip=""
+          >
+            <div>
+              <div
+                class="c13"
+              />
+            </div>
           </div>
         </div>
       </div>
