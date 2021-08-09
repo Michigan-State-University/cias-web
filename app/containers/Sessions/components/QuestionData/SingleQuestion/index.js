@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
+import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
@@ -14,6 +14,7 @@ import PlusCircle from 'components/Circle/PlusCircle';
 import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
+import OriginalTextHover from 'components/OriginalTextHover';
 import bin from 'assets/svg/bin-red.svg';
 import globalMessages from 'global/i18n/globalMessages';
 import radio from 'assets/svg/radio-button.svg';
@@ -83,8 +84,11 @@ const SingleQuestion = ({
               >
                 <Row width="90%">
                   <Img ref={radioButtonRef} src={radio} mr={RADIO_MARGIN} />
-                  <Box width="100%">
-                    <ApprovableInput
+                  <OriginalTextHover
+                    text={value?.original_text}
+                    hidden={isNarratorTab}
+                  >
+                    <FlexibleWidthApprovableInput
                       mr={8}
                       fontSize={18}
                       type="singleline"
@@ -97,8 +101,9 @@ const SingleQuestion = ({
                       }
                       richText
                       disabled={isNarratorTabOrEditNotPossible}
+                      emptyWidth={105}
                     />
-                  </Box>
+                  </OriginalTextHover>
                 </Row>
                 <Row>
                   <Box
@@ -110,7 +115,7 @@ const SingleQuestion = ({
                   </Box>
                 </Row>
               </Row>
-              <Row align="center" display="flex" hidden={isNarratorTab}>
+              <Row align="center" hidden={isNarratorTab}>
                 <BadgeInput
                   data-cy={`score-${index}-input`}
                   ml={`${leftMargin}px`}
@@ -141,7 +146,7 @@ const SingleQuestion = ({
           </HoverableBox>
         </Row>
       ))}
-      <Row display="flex" hidden={isNarratorTabOrEditNotPossible}>
+      <Row hidden={isNarratorTabOrEditNotPossible}>
         <HoverableBox px={21} py={14} onClick={addAnswer}>
           <Box>
             <Row align="center">

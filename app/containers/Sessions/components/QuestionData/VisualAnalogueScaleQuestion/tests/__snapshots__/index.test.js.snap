@@ -60,6 +60,25 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   width: 100%;
 }
 
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+}
+
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -94,7 +113,7 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   height: auto;
 }
 
-.c8 {
+.c9 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -110,13 +129,13 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
   text-align: center;
 }
 
-.c8:focus {
+.c9:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c8:disabled {
+.c9:disabled {
   color: #ABBBD1;
 }
 
@@ -226,25 +245,35 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
                 class="rc-slider-mark-text rc-slider-mark-text-active"
                 style="transform: translateX(-50%); left: 0%; font-size: 15px;"
               >
-                <input
+                <div
                   class="c8"
-                  placeholder="Start value"
-                  type="text"
-                  value="1"
-                  width="120"
-                />
+                  display="flex"
+                >
+                  <input
+                    class="c9"
+                    placeholder="Start value"
+                    type="text"
+                    value="1"
+                    width="120"
+                  />
+                </div>
               </span>
               <span
                 class="rc-slider-mark-text"
                 style="transform: translateX(-50%); left: 100%; font-size: 15px;"
               >
-                <input
+                <div
                   class="c8"
-                  placeholder="End value"
-                  type="text"
-                  value="100"
-                  width="120"
-                />
+                  display="flex"
+                >
+                  <input
+                    class="c9"
+                    placeholder="End value"
+                    type="text"
+                    value="100"
+                    width="120"
+                  />
+                </div>
               </span>
             </div>
           </div>

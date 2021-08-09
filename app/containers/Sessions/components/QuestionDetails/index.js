@@ -167,7 +167,10 @@ const RenderQuestionDetails = ({
                   </>
                 )}
                 {isNarratorTabOrEditNotPossible && (
-                  <CommonLayout currentQuestion={selectedQuestion ?? {}} />
+                  <CommonLayout
+                    currentQuestion={selectedQuestion ?? {}}
+                    showOriginalText={!isNarratorTab}
+                  />
                 )}
 
                 <Row>

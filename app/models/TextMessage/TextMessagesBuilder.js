@@ -77,6 +77,7 @@ export class TextMessagesBuilder {
     this.formula = textMessage.formula;
     this.isUsedFormula = textMessage.isUsedFormula;
     this.noFormulaText = textMessage.noFormulaText;
+    this.originalText = textMessage.originalText;
 
     return this;
   };
@@ -96,6 +97,7 @@ export class TextMessagesBuilder {
       formula: this.formula,
       isUsedFormula: this.isUsedFormula,
       noFormulaText: this.noFormulaText,
+      originalText: this.originalText,
     });
 
   /**

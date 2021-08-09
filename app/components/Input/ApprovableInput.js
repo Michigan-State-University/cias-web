@@ -43,32 +43,32 @@ const quillModulesSingleline = {
   },
 };
 
-const ApprovableInput = (props) => {
-  const {
-    value: propsValue,
-    validator,
-    onValidation,
-    placeholder,
-    textAlign,
-    keyboard,
-    type,
-    onCheck,
-    onFocus,
-    rows,
-    richText,
-    autoSize,
-    fontSize,
-    mr,
-    disabled,
-    height,
-    width,
-    padding,
-    defaultFontSize,
-    styles,
-    minDate,
-    ariaLabel,
-    id,
-  } = props;
+const ApprovableInput = ({
+  value: propsValue,
+  validator,
+  onValidation,
+  placeholder,
+  textAlign,
+  keyboard,
+  type,
+  onChange,
+  onCheck,
+  onFocus,
+  rows,
+  richText,
+  autoSize,
+  fontSize,
+  mr,
+  disabled,
+  height,
+  width,
+  padding,
+  defaultFontSize,
+  styles,
+  minDate,
+  ariaLabel,
+  id,
+}) => {
   const [value, setValue] = useState(propsValue);
   const [focused, setFocused] = useState(false);
   const ref = useRef();
@@ -113,6 +113,10 @@ const ApprovableInput = (props) => {
   useEffect(() => {
     setValue(propsValue);
   }, [propsValue]);
+
+  useEffect(() => {
+    if (onChange) onChange(value);
+  }, [value]);
 
   const onInputChange = (targetValue) => {
     if (!validator) setValue(targetValue);
@@ -171,7 +175,7 @@ const ApprovableInput = (props) => {
           onChange={(event) => onInputChange(event.target.value)}
           onFocus={handleFocus}
           onBlur={onBlur}
-          placeholder={props.placeholder}
+          placeholder={placeholder}
           transparent
           disabled={disabled}
           aria-label={ariaLabel}
@@ -250,6 +254,7 @@ ApprovableInput.propTypes = {
     PropTypes.number,
     PropTypes.object,
   ]),
+  onChange: PropTypes.func,
   onCheck: PropTypes.func,
   onFocus: PropTypes.func,
   rows: PropTypes.string,

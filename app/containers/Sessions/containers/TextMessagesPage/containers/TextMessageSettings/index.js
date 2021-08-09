@@ -53,6 +53,7 @@ const TextMessageSettings = ({
       endAt,
       isUsedFormula,
       noFormulaText,
+      originalText,
     },
   } = useContext(TextMessagesContext);
 
@@ -68,7 +69,13 @@ const TextMessageSettings = ({
           <TextMessageVariants />
         </>
       );
-    return <NoFormulaMessage noFormulaText={noFormulaText} />;
+    return (
+      <NoFormulaMessage
+        id={id}
+        noFormulaText={noFormulaText}
+        originalText={originalText}
+      />
+    );
   };
 
   return (

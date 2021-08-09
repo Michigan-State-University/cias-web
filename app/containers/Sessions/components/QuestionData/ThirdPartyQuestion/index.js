@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 import { toast } from 'react-toastify';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
+import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
@@ -16,6 +16,8 @@ import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
 import H3 from 'components/H3';
+import { BadgeInput } from 'components/Input/BadgeInput';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import bin from 'assets/svg/bin-red.svg';
 import radio from 'assets/svg/radio-button.svg';
@@ -25,7 +27,6 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 import { canEdit } from 'models/Status/statusPermissions';
-import { BadgeInput } from 'components/Input/BadgeInput';
 import { emailValidator } from 'utils/validators';
 import { themeColors, colors } from 'theme';
 
@@ -46,6 +47,7 @@ const ThirdPartyQuestion = ({
   const [hovered, setHovered] = useState(-1);
 
   const {
+    id,
     body: { data },
   } = selectedQuestion;
 
@@ -81,7 +83,7 @@ const ThirdPartyQuestion = ({
   return (
     <Column>
       {data.map((value, index) => (
-        <Row key={`question-${selectedQuestion.id}-el-${index}`} mb={12}>
+        <Row key={`question-${id}-el-${index}`} mb={12}>
           <HoverableBox
             hoverColor={isNarratorTabOrEditNotPossible ? null : undefined}
             px={21}
@@ -97,10 +99,14 @@ const ThirdPartyQuestion = ({
                 justify="between"
                 mb={isNarratorTabOrEditNotPossible ? 0 : 10}
               >
-                <Column width="90%">
-                  <Row>
-                    <Img width="max-content" src={radio} mr={15} />
-                    <ApprovableInput
+                <Row width="90%">
+                  <Img width="max-content" src={radio} mr={15} />
+                  <OriginalTextHover
+                    id={`question-${id}-answer-${index}`}
+                    text={value?.original_text}
+                    hidden={isNarratorTab}
+                  >
+                    <FlexibleWidthApprovableInput
                       fontSize={18}
                       type="singleline"
                       placeholder={
@@ -116,27 +122,10 @@ const ThirdPartyQuestion = ({
                       }
                       richText
                       disabled={isNarratorTabOrEditNotPossible}
+                      emptyWidth={110}
                     />
-                  </Row>
-                  <Row mt={10} ml={40} align="center" hidden={isNarratorTab}>
-                    <BadgeInput
-                      data-cy={`score-${index}-input`}
-                      disabled={!editingPossible}
-                      textAlign="center"
-                      placeholder={
-                        !isNarratorTab
-                          ? formatMessage(messages.emailPlaceholder)
-                          : ''
-                      }
-                      value={value.value}
-                      color={colors.azure}
-                      onBlur={(currentValue) =>
-                        handleChangeVariable(index, value, currentValue)
-                      }
-                      maxWidth="100%"
-                    />
-                  </Row>
-                </Column>
+                  </OriginalTextHover>
+                </Row>
                 {data.length > 1 && (
                   <Row>
                     <Box
@@ -148,6 +137,24 @@ const ThirdPartyQuestion = ({
                     </Box>
                   </Row>
                 )}
+              </Row>
+              <Row mb={10} ml={40} align="center" hidden={isNarratorTab}>
+                <BadgeInput
+                  data-cy={`score-${index}-input`}
+                  disabled={!editingPossible}
+                  textAlign="center"
+                  placeholder={
+                    !isNarratorTab
+                      ? formatMessage(messages.emailPlaceholder)
+                      : ''
+                  }
+                  value={value.value}
+                  color={colors.azure}
+                  onBlur={(currentValue) =>
+                    handleChangeVariable(index, value, currentValue)
+                  }
+                  maxWidth="100%"
+                />
               </Row>
             </Column>
 

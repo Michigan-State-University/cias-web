@@ -12,6 +12,7 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import Select from 'components/Select';
 import Switch from 'components/Switch';
+import OriginalTextHover from 'components/OriginalTextHover';
 import {
   makeSelectLoader,
   makeSelectSelectedQuestionType,
@@ -164,18 +165,30 @@ const SpeechBlock = ({
               onToggle={() => switchToReflection(blockIndex, id)}
             />
           </Row>
-          <SpeechInput
-            formatMessage={formatMessage}
-            disabled={disabled}
-            text={text}
-            handleBlur={handleBlur}
-            handleButtonClick={handleButtonClick}
-            hasFocus={hasFocus}
-            isPlaying={isPlaying}
-            isSpeechUpdating={isSpeechUpdating}
-            setHasFocus={setHasFocus}
-            nameQuestionExists={nameQuestionExists}
-          />
+          <OriginalTextHover
+            id={`question-${id}-speech-block-${blockIndex}`}
+            text={block.original_text?.[0]}
+            align="end"
+            position="relative"
+            iconProps={{
+              position: 'absolute',
+              right: 54,
+              bottom: 12,
+            }}
+          >
+            <SpeechInput
+              formatMessage={formatMessage}
+              disabled={disabled}
+              text={text}
+              handleBlur={handleBlur}
+              handleButtonClick={handleButtonClick}
+              hasFocus={hasFocus}
+              isPlaying={isPlaying}
+              isSpeechUpdating={isSpeechUpdating}
+              setHasFocus={setHasFocus}
+              nameQuestionExists={nameQuestionExists}
+            />
+          </OriginalTextHover>
         </>
       )}
     </Column>
@@ -190,6 +203,7 @@ SpeechBlock.propTypes = {
     action: PropTypes.string,
     text: PropTypes.arrayOf(PropTypes.string),
     audio_urls: PropTypes.arrayOf(PropTypes.string),
+    original_text: PropTypes.arrayOf(PropTypes.string),
   }),
   id: PropTypes.string,
   blockIndex: PropTypes.number,

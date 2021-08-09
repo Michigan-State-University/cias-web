@@ -75,25 +75,35 @@ exports[`<FeedbackQuestion /> Should render and match the snapshot 1`] = `
                 class="rc-slider-mark-text rc-slider-mark-text-active"
                 style="transform: translateX(-50%); left: 0%; font-size: 15px;"
               >
-                <input
-                  class="Input-t9j2q5-0 WDQRg"
-                  placeholder="Least"
-                  type="text"
-                  value="0"
-                  width="120"
-                />
+                <div
+                  class="Box-sc-1vhutan-0 czpkWR"
+                  display="flex"
+                >
+                  <input
+                    class="Input-t9j2q5-0 WDQRg"
+                    placeholder="Least"
+                    type="text"
+                    value="0"
+                    width="120"
+                  />
+                </div>
               </span>
               <span
                 class="rc-slider-mark-text"
                 style="transform: translateX(-50%); left: 100%; font-size: 15px;"
               >
-                <input
-                  class="Input-t9j2q5-0 WDQRg"
-                  placeholder="Most"
-                  type="text"
-                  value="100"
-                  width="120"
-                />
+                <div
+                  class="Box-sc-1vhutan-0 czpkWR"
+                  display="flex"
+                >
+                  <input
+                    class="Input-t9j2q5-0 WDQRg"
+                    placeholder="Most"
+                    type="text"
+                    value="100"
+                    width="120"
+                  />
+                </div>
               </span>
             </div>
           </div>

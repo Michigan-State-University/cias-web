@@ -12,6 +12,7 @@ export class TextMessage {
    * @param  {string} formula
    * @param  {boolean} isUsedFormula
    * @param  {string} noFormulaText
+   * @param  {object} originalText
    */
   constructor({
     id,
@@ -24,6 +25,7 @@ export class TextMessage {
     formula,
     isUsedFormula,
     noFormulaText,
+    originalText,
   }) {
     this.id = id;
     this.name = name;
@@ -35,5 +37,6 @@ export class TextMessage {
     this.formula = formula;
     this.isUsedFormula = isUsedFormula;
     this.noFormulaText = noFormulaText;
+    this.originalText = originalText;
   }
 }

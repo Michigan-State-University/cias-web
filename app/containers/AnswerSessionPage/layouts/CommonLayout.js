@@ -11,12 +11,18 @@ import Box from 'components/Box';
 import Img from 'components/Img';
 import Text from 'components/Text';
 import Tooltip from 'components/Tooltip';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import { Player, PlayerWrapper, ImageWrapper, MarkupContainer } from './styled';
 
-const CommonLayout = ({ currentQuestion, transcriptToggleIcon }) => {
+const CommonLayout = ({
+  currentQuestion,
+  transcriptToggleIcon,
+  showOriginalText,
+}) => {
   const { formatMessage } = useIntl();
   const {
+    id,
     title,
     subtitle,
     video_url: videoUrl,
@@ -29,6 +35,7 @@ const CommonLayout = ({ currentQuestion, transcriptToggleIcon }) => {
       image: settingsImage,
       required: settingsRequired,
     },
+    original_text: originalText,
   } = currentQuestion;
   return (
     <Box>
@@ -36,32 +43,44 @@ const CommonLayout = ({ currentQuestion, transcriptToggleIcon }) => {
       {settingsTitle && title && (
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
-            <MarkupContainer>
-              <Markup content={title} noWrap />
-            </MarkupContainer>
+            <OriginalTextHover
+              id={`question-${id}-title`}
+              text={originalText?.title}
+              hidden={!showOriginalText}
+            >
+              <MarkupContainer>
+                <Markup content={title} noWrap />
+              </MarkupContainer>
+            </OriginalTextHover>
           </Box>
         </Row>
       )}
       {settingsSubtitle && subtitle && (
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
-            <Row align="start" justify="between">
-              <MarkupContainer>
-                <Markup content={subtitle} />
-              </MarkupContainer>
-              {settingsRequired && (
-                <Tooltip
-                  id="question-required"
-                  content={
-                    <Markup
-                      content={formatMessage(globalMessages.questionRequired)}
-                    />
-                  }
-                >
-                  <Text color={themeColors.warning}>*</Text>
-                </Tooltip>
-              )}
-            </Row>
+            <OriginalTextHover
+              id={`question-${id}-subtitle`}
+              text={originalText?.subtitle}
+              hidden={!showOriginalText}
+            >
+              <Row align="start" justify="between">
+                <MarkupContainer>
+                  <Markup content={subtitle} />
+                </MarkupContainer>
+                {settingsRequired && (
+                  <Tooltip
+                    id="question-required"
+                    content={
+                      <Markup
+                        content={formatMessage(globalMessages.questionRequired)}
+                      />
+                    }
+                  >
+                    <Text color={themeColors.warning}>*</Text>
+                  </Tooltip>
+                )}
+              </Row>
+            </OriginalTextHover>
           </Box>
         </Row>
       )}
@@ -91,6 +110,7 @@ const CommonLayout = ({ currentQuestion, transcriptToggleIcon }) => {
 CommonLayout.propTypes = {
   transcriptToggleIcon: PropTypes.node,
   currentQuestion: PropTypes.shape({
+    id: PropTypes.string,
     title: PropTypes.string,
     subtitle: PropTypes.string,
     video_url: PropTypes.string,
@@ -103,7 +123,9 @@ CommonLayout.propTypes = {
       image: PropTypes.bool,
       required: PropTypes.bool,
     }),
+    original_text: PropTypes.object,
   }),
+  showOriginalText: PropTypes.bool,
 };
 
 export default CommonLayout;

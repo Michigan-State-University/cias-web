@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
+import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
@@ -14,6 +14,7 @@ import PlusCircle from 'components/Circle/PlusCircle';
 import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import Text from 'components/Text';
+import OriginalTextHover from 'components/OriginalTextHover';
 import bin from 'assets/svg/bin-red.svg';
 import checkbox from 'assets/svg/checkbox.svg';
 import globalMessages from 'global/i18n/globalMessages';
@@ -85,8 +86,12 @@ const MultiQuestion = ({
                     src={checkbox}
                     mr={CHECKBOX_MARGIN}
                   />
-                  <Box width="100%">
-                    <ApprovableInput
+                  <OriginalTextHover
+                    id={`question-${selectedQuestion.id}-answer-${index}`}
+                    text={value?.original_text}
+                    hidden={isNarratorTab}
+                  >
+                    <FlexibleWidthApprovableInput
                       mr={8}
                       fontSize={18}
                       type="singleline"
@@ -99,8 +104,9 @@ const MultiQuestion = ({
                       }
                       richText
                       disabled={isNarratorTabOrEditNotPossible}
+                      emptyWidth={105}
                     />
-                  </Box>
+                  </OriginalTextHover>
                 </Row>
                 <Row>
                   <Box

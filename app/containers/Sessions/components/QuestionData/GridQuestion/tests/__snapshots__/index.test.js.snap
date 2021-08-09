@@ -100,14 +100,20 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       width="33px"
                     />
                   </div>
-                  <input
-                    class="Input-t9j2q5-0 tWwZo"
-                    cursor="pointer"
-                    placeholder="Column 1..."
-                    type="text"
-                    value="test-col-1"
-                    width="110"
-                  />
+                  <div
+                    class="Box-sc-1vhutan-0 ROsts"
+                    direction="column"
+                    display="flex"
+                  >
+                    <input
+                      class="Input-t9j2q5-0 tWwZo"
+                      cursor="pointer"
+                      placeholder="Column 1..."
+                      type="text"
+                      value="test-col-1"
+                      width="110"
+                    />
+                  </div>
                 </div>
               </th>
               <th
@@ -142,14 +148,20 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       width="33px"
                     />
                   </div>
-                  <input
-                    class="Input-t9j2q5-0 tWwZo"
-                    cursor="pointer"
-                    placeholder="Column 2..."
-                    type="text"
-                    value="test-col-2"
-                    width="110"
-                  />
+                  <div
+                    class="Box-sc-1vhutan-0 ROsts"
+                    direction="column"
+                    display="flex"
+                  >
+                    <input
+                      class="Input-t9j2q5-0 tWwZo"
+                      cursor="pointer"
+                      placeholder="Column 2..."
+                      type="text"
+                      value="test-col-2"
+                      width="110"
+                    />
+                  </div>
                 </div>
               </th>
               <td />
@@ -200,18 +212,24 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                         width="41px"
                       />
                     </div>
-                    <textarea
-                      class="TextArea-sc-175uiux-0 hDDZSW"
-                      cursor="pointer"
-                      data-cy="text-area"
-                      height="auto"
-                      placeholder="Row 1..."
-                      rows="2"
-                      type="multiline"
-                      width="300"
+                    <div
+                      class="Box-sc-1vhutan-0 kBxusH"
+                      display="flex"
+                      width="100%"
                     >
-                      test-row-1
-                    </textarea>
+                      <textarea
+                        class="TextArea-sc-175uiux-0 hDDZSW"
+                        cursor="pointer"
+                        data-cy="text-area"
+                        height="auto"
+                        placeholder="Row 1..."
+                        rows="2"
+                        type="multiline"
+                        width="300"
+                      >
+                        test-row-1
+                      </textarea>
+                    </div>
                   </div>
                 </div>
               </th>
@@ -285,18 +303,24 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                         width="41px"
                       />
                     </div>
-                    <textarea
-                      class="TextArea-sc-175uiux-0 hDDZSW"
-                      cursor="pointer"
-                      data-cy="text-area"
-                      height="auto"
-                      placeholder="Row 2..."
-                      rows="2"
-                      type="multiline"
-                      width="300"
+                    <div
+                      class="Box-sc-1vhutan-0 kBxusH"
+                      display="flex"
+                      width="100%"
                     >
-                      test-row-2
-                    </textarea>
+                      <textarea
+                        class="TextArea-sc-175uiux-0 hDDZSW"
+                        cursor="pointer"
+                        data-cy="text-area"
+                        height="auto"
+                        placeholder="Row 2..."
+                        rows="2"
+                        type="multiline"
+                        width="300"
+                      >
+                        test-row-2
+                      </textarea>
+                    </div>
                   </div>
                 </div>
               </th>

@@ -41,10 +41,17 @@ import Radio from 'components/Radio';
 import InequalityChooser from 'components/InequalityChooser';
 import ImageUpload from 'components/ImageUpload';
 import TextButton from 'components/Button/TextButton';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
 import Option from './Option';
+
+const originalTextIconProps = {
+  position: 'absolute',
+  right: 21,
+  bottom: 12,
+};
 
 const SectionCaseItem = ({
   intl: { formatMessage },
@@ -298,17 +305,25 @@ const SectionCaseItem = ({
               px={8}
               py={8}
             >
-              <StyledInput
-                type="multiline"
-                rows="5"
-                width="100%"
-                placeholder={formatMessage(
-                  messages.sectionCaseContentPlaceholder,
-                )}
-                value={sectionCase.content}
-                onBlur={handleContentChange}
-                disabled={!canEdit}
-              />
+              <OriginalTextHover
+                id={`section-case-${sectionCase.id}`}
+                text={sectionCase.originalText?.content}
+                position="relative"
+                mr={-9}
+                iconProps={originalTextIconProps}
+              >
+                <StyledInput
+                  type="multiline"
+                  rows="5"
+                  width="100%"
+                  placeholder={formatMessage(
+                    messages.sectionCaseContentPlaceholder,
+                  )}
+                  value={sectionCase.content}
+                  onBlur={handleContentChange}
+                  disabled={!canEdit}
+                />
+              </OriginalTextHover>
             </Box>
           </Row>
 

@@ -31,6 +31,7 @@ import Collapse from 'components/Collapse';
 import InequalityChooser from 'components/InequalityChooser';
 import H2 from 'components/H2';
 import { NoMarginRow } from 'components/ReactGridSystem';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import {
   changeFormulaMatch,
@@ -43,10 +44,16 @@ import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessagesContext } from '../../utils';
 import messages from './messages';
 
+const originalTextIconProps = {
+  position: 'absolute',
+  right: 21,
+  bottom: 12,
+};
+
 const VariantItem = ({
   open,
   index,
-  variant: { id, formulaMatch, content },
+  variant: { id, formulaMatch, content, originalText },
   changeFormulaMatchAction,
   changeContentAction,
   removeVariant,
@@ -166,17 +173,25 @@ const VariantItem = ({
             </VariableChooser>
           </NoMarginRow>
           <Box bg={colors.linkWater} width="100%" mt={10} mb={20} px={8} py={8}>
-            <StyledInput
-              type="multiline"
-              rows="5"
-              width="100%"
-              placeholder={formatMessage(
-                messages.sectionCaseContentPlaceholder,
-              )}
-              value={content}
-              onBlur={handleContentChange}
-              disabled={disabled}
-            />
+            <OriginalTextHover
+              id={`sms-variant-${index}`}
+              text={originalText?.content}
+              position="relative"
+              mr={-9}
+              iconProps={originalTextIconProps}
+            >
+              <StyledInput
+                type="multiline"
+                rows="5"
+                width="100%"
+                placeholder={formatMessage(
+                  messages.sectionCaseContentPlaceholder,
+                )}
+                value={content}
+                onBlur={handleContentChange}
+                disabled={disabled}
+              />
+            </OriginalTextHover>
           </Box>
         </Row>
       </Container>

@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import ApprovableInput from 'components/Input/ApprovableInput';
+import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
 import Row from 'components/Row';
 import { selectQuillText } from 'components/Input/utils';
+import OriginalTextHover from 'components/OriginalTextHover';
 
 import { colors } from 'theme';
 import Question from 'models/Session/Question';
@@ -20,7 +21,7 @@ import {
 import messages from './messages';
 
 const QuestionSubtitle = ({
-  selectedQuestion: { subtitle },
+  selectedQuestion: { id, subtitle, original_text: originalText },
   intl: { formatMessage },
   updateSubtitle,
 }) => {
@@ -34,15 +35,21 @@ const QuestionSubtitle = ({
   return (
     <Box width="100%" padded hoverColor={colors.linkWater} clickable={false}>
       <Row>
-        <ApprovableInput
-          placeholder={formatMessage(messages.placeholder)}
-          value={subtitle}
-          onCheck={handleUpdate}
-          onFocus={onFocus}
-          autoSize
-          richText
-          fontSize={36}
-        />
+        <OriginalTextHover
+          id={`question-${id}-subtitle`}
+          text={originalText?.subtitle}
+        >
+          <FlexibleWidthApprovableInput
+            placeholder={formatMessage(messages.placeholder)}
+            value={subtitle}
+            onCheck={handleUpdate}
+            onFocus={onFocus}
+            autoSize
+            richText
+            fontSize={36}
+            emptyWidth={215}
+          />
+        </OriginalTextHover>
       </Row>
     </Box>
   );

@@ -10,6 +10,7 @@ class Question {
    * @param  {Object} body
    * @param  {number} position
    * @param  {string} question_group_id
+   * @param  {Object} original_text
    */
   constructor({
     id,
@@ -19,6 +20,7 @@ class Question {
     subtitle,
     position,
     question_group_id,
+    original_text,
   }) {
     this.id = id;
     this.title = title;
@@ -27,6 +29,7 @@ class Question {
     this.body = body;
     this.position = position;
     this.question_group_id = question_group_id;
+    this.original_text = original_text;
   }
 }
 
