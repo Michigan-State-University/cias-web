@@ -212,7 +212,11 @@ export const TeamDetails = ({
           <Col>
             <UserList
               teamId={id}
-              filterableRoles={[Roles.participant, Roles.researcher]}
+              filterableRoles={[
+                Roles.participant,
+                Roles.researcher,
+                Roles.eInterventionAdmin,
+              ]}
               listOnly
             />
           </Col>
