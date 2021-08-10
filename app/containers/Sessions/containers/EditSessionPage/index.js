@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import xor from 'lodash/xor';
 import keyBy from 'lodash/keyBy';
 import mapValues from 'lodash/mapValues';
@@ -119,7 +119,6 @@ import {
 import QuestionListGroup from '../QuestionListGroup';
 
 function EditSessionPage({
-  intl: { formatMessage },
   questions,
   selectedQuestion,
   getSession,
@@ -140,6 +139,8 @@ function EditSessionPage({
   fetchInterventions,
   fetchReportTemplates,
 }) {
+  const { formatMessage } = useIntl();
+
   const [manage, setManage] = useState(false);
   const [selectedSlides, setSelectedSlides] = useState([]);
   const [showList, setShowList] = useState(false);
@@ -391,7 +392,9 @@ function EditSessionPage({
       }}
     >
       <Helmet>
-        <title>{sessionName}</title>
+        <title>
+          {formatMessage(messages.pageTitle, { name: sessionName })}
+        </title>
       </Helmet>
       <Modal
         title={formatMessage(messages.modalTitle)}
@@ -535,7 +538,6 @@ function EditSessionPage({
 }
 
 EditSessionPage.propTypes = {
-  intl: PropTypes.object,
   groups: PropTypes.array,
   questions: PropTypes.arrayOf(PropTypes.shape(Question)),
   selectedQuestion: PropTypes.string.isRequired,
@@ -612,7 +614,6 @@ export default compose(
     key: 'reorderQuestionGroups',
     saga: reorderQuestionGroupsSaga,
   }),
-  injectIntl,
   withConnect,
   withSaga,
 )(EditSessionPage);

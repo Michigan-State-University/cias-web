@@ -19,7 +19,7 @@ import { createStructuredSelector } from 'reselect';
 import GlobalStyle from 'global-styles';
 
 import { Roles, ResearcherRoles } from 'models/User/UserRoles';
-import navbarNames, { NAVIGATION } from 'utils/navbarNames';
+import navbarNames, { navbarMessages, NAVIGATION } from 'utils/navbarNames';
 import rootSaga from 'global/sagas/rootSaga';
 import { makeSelectUser } from 'global/reducers/auth';
 
@@ -63,7 +63,7 @@ import {
 import { TOOLTIP_PORTAL_ID } from './constants';
 
 export function App({ user }) {
-  const { locale } = useIntl();
+  const { locale, formatMessage } = useIntl();
   useInjectSaga({ key: 'app', saga: rootSaga });
 
   useEffect(() => {
@@ -107,9 +107,18 @@ export function App({ user }) {
     if (user) {
       switch (user.roles[0]) {
         case Roles.admin:
-          return <UserListPage />;
+          return (
+            <UserListPage
+              pageTitle={formatMessage(navbarMessages.adminAccounts)}
+            />
+          );
         case Roles.researcher:
-          return <UserListPage filterableRoles={[Roles.participant]} />;
+          return (
+            <UserListPage
+              filterableRoles={[Roles.participant]}
+              pageTitle={formatMessage(navbarMessages.researcherAccounts)}
+            />
+          );
         default:
           return NotFoundPage;
       }

@@ -106,4 +106,8 @@ export default defineMessages({
     id: `${scope}.interventionSettingsLanguageLabel`,
     defaultMessage: 'Intervention Language:',
   },
+  pageTitle: {
+    id: `${scope}.pageTitle`,
+    defaultMessage: 'Intervention: {name}',
+  },
 });

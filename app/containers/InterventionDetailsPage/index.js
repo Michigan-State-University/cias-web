@@ -351,7 +351,7 @@ export function InterventionDetailsPage({
     >
       <AppContainer>
         <Helmet>
-          <title>{name}</title>
+          <title>{formatMessage(messages.pageTitle, { name })}</title>
         </Helmet>
         <ConfirmationBox
           visible={!isNullOrUndefined(deleteConfirmationSessionId)}

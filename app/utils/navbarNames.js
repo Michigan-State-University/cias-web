@@ -77,4 +77,5 @@ export const NAVIGATION = {
   PREVIEW: 'PREVIEW',
 };
 
+export { navbarMessages };
 export default navbarNames;

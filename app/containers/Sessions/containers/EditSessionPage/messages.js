@@ -43,7 +43,6 @@ export default defineMessages({
     id: `${scope}.modalTitle`,
     defaultMessage: 'Send copy to researchers',
   },
-
   errors: {
     duplicateVariable: {
       id: `${scope}.duplicateVariable`,
@@ -53,5 +52,9 @@ export default defineMessages({
       id: `${scope}.copyError`,
       defaultMessage: 'Cannot copy the screen!',
     },
+  },
+  pageTitle: {
+    id: `${scope}.pageTitle`,
+    defaultMessage: 'Session: {name}',
   },
 });

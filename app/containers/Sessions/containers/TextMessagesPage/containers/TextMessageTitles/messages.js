@@ -6,7 +6,7 @@
 import { defineMessages } from 'react-intl';
 import { MESSAGES_SCHEDULE_OPTIONS } from 'models/TextMessage';
 
-export const scope = 'app.containers.InterventionPage';
+export const scope = 'app.containers.TextMessageTitles';
 
 export default defineMessages({
   createTextMessage: {

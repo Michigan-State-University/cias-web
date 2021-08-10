@@ -128,4 +128,11 @@ export default defineMessages({
     id: `${scope}.goToSessionMap`,
     defaultMessage: 'Go to session map',
   },
+  pageTitle: {
+    id: `${scope}.pageTitle`,
+    defaultMessage: `{isPreview, select,
+      true {Preview Session}
+      other {Answer Session}
+    }`,
+  },
 });

@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Col } from 'react-grid-system';
 import { compose } from 'redux';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import { injectIntl, IntlShape } from 'react-intl';
+import { useIntl } from 'react-intl';
+import { Helmet } from 'react-helmet';
 
 import Row from 'components/Row';
 
@@ -32,8 +33,9 @@ import { canEdit } from 'models/Status/statusPermissions';
 import TextMessageTiles from './containers/TextMessageTitles';
 import TextMessageSettings from './containers/TextMessageSettings';
 import { TextMessagesContext } from './utils';
+import messages from './messages';
+
 const TextMessagingPage = ({
-  intl: { formatMessage },
   match: {
     params: { sessionId, interventionId },
   },
@@ -47,6 +49,8 @@ const TextMessagingPage = ({
   status,
   fetchIntervention,
 }) => {
+  const { formatMessage } = useIntl();
+
   useEffect(() => {
     fetchTextMessages(sessionId);
   }, [sessionId]);
@@ -71,6 +75,10 @@ const TextMessagingPage = ({
         interventionId,
       }}
     >
+      <Helmet>
+        <title>{formatMessage(messages.pageTitle)}</title>
+      </Helmet>
+
       <Row maxHeigh="100%" style={{ justifyContent: 'center' }}>
         <Col md={8}>
           <TextMessageTiles />
@@ -86,7 +94,6 @@ const TextMessagingPage = ({
 };
 
 TextMessagingPage.propTypes = {
-  intl: PropTypes.shape(IntlShape),
   fetchTextMessages: PropTypes.func,
   textMessages: PropTypes.array,
   loaders: PropTypes.object,
@@ -122,4 +129,5 @@ export default compose(
   injectReducer({ key: 'intervention', reducer: interventionReducer }),
   injectSaga({ key: 'textMessagesSaga', saga: allTextMessagesSagas }),
   injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
-)(injectIntl(TextMessagingPage));
+  memo,
+)(TextMessagingPage);

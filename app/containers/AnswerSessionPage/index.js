@@ -180,6 +180,7 @@ export function AnswerSessionPage({
   setTransitionalUserSessionId,
 }) {
   const { formatMessage } = useIntl();
+
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
   useInjectSaga({ key: 'logInGuest', saga: logInGuestSaga });
@@ -439,9 +440,9 @@ export function AnswerSessionPage({
         width="100%"
       >
         <Helmet>
-          <title>Answer Session</title>
-          <meta name="description" content="Answer Session" />
+          <title>{formatMessage(messages.pageTitle, { isPreview })}</title>
         </Helmet>
+
         <AnswerOuterContainer
           previewMode={previewMode}
           interventionStarted={interventionStarted}
