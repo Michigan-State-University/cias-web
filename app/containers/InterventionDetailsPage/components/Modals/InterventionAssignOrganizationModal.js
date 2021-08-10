@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { injectReducer, injectSaga } from 'redux-injectors';
+import { compose } from 'redux';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
@@ -19,13 +20,13 @@ import ApiSelect from 'components/Select/ApiSelect';
 import Text from 'components/Text';
 
 import Button from 'components/Button';
-import { compose } from 'redux';
 import { organizationSelectOptionFormatter } from './utils';
 import messages from '../../messages';
 
 const InterventionAssignOrganizationModal = ({
   interventionId,
   organizationId,
+  onClose,
 }) => {
   const { formatMessage } = useIntl();
 
@@ -59,14 +60,13 @@ const InterventionAssignOrganizationModal = ({
 
   const canSave = organizationId !== selectedValue.value;
 
-  const handleSave = useCallback(
-    () =>
-      editIntervention({
-        id: interventionId,
-        organizationId: selectedValue.value,
-      }),
-    [selectedValue.value, interventionId],
-  );
+  const handleSave = useCallback(() => {
+    editIntervention({
+      id: interventionId,
+      organizationId: selectedValue.value,
+    });
+    onClose();
+  }, [selectedValue.value, interventionId]);
 
   const dataParser = useCallback(
     data => jsonApiToArray(data, 'organization'),
@@ -124,6 +124,7 @@ const InterventionAssignOrganizationModal = ({
 InterventionAssignOrganizationModal.propTypes = {
   interventionId: PropTypes.string,
   organizationId: PropTypes.string,
+  onClose: PropTypes.func,
 };
 
 export default compose(

@@ -4,7 +4,6 @@ import { actionBuilder } from 'utils/actionBuilder';
 import { createIntervention } from 'utils/reducerCreators';
 import {
   FETCH_INTERVENTIONS_REQUEST,
-  FETCH_INTERVENTIONS_SUCCESS,
   FETCH_INTERVENTIONS_ERROR,
   ARCHIVE_INTERVENTION_REQUEST,
   ARCHIVE_INTERVENTION_SUCCESS,
@@ -12,6 +11,7 @@ import {
 } from 'global/reducers/interventions/constants';
 import { CREATE_INTERVENTION_SUCCESS } from 'global/reducers/intervention';
 import { archived } from 'models/Status/StatusTypes';
+import { fetchInterventionsSuccess } from 'global/reducers/interventions/actions';
 import interventionsReducer, { initialState } from '../reducer';
 
 describe('interventions reducer', () => {
@@ -42,10 +42,7 @@ describe('interventions reducer', () => {
   it('FETCH_INTERVENTIONS_SUCCESS', () => {
     const payloadInterventions = { interventions };
 
-    const action = actionBuilder(
-      FETCH_INTERVENTIONS_SUCCESS,
-      payloadInterventions,
-    );
+    const action = fetchInterventionsSuccess(interventions);
 
     const expectedState = cloneDeep(mockState);
     expectedState.fetchInterventionLoading = false;

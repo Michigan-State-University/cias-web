@@ -8,8 +8,9 @@ import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import { useInjectSaga } from 'redux-injectors';
+import { injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
 import BinNoBgIcon from 'assets/svg/bin-no-bg.svg';
 import CsvIcon from 'assets/svg/csv-icon.svg';
@@ -43,6 +44,7 @@ import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
+import Loader from 'components/Loader';
 
 import InterventionDetails from './InterventionDetails';
 import messages from './messages';
@@ -64,12 +66,8 @@ const SingleTile = ({
   intl: { formatMessage },
   userId,
   userRoles,
+  isLoading,
 }) => {
-  useInjectSaga({
-    key: 'interventionOptionsSaga',
-    saga: interventionOptionsSaga,
-  });
-
   const [
     shareWithResearchersModalVisible,
     setShareWithResearchersModalVisible,
@@ -164,6 +162,13 @@ const SingleTile = ({
   const copyInterventionToResearchers = users =>
     copyIntervention({ interventionId: id, users });
 
+  if (isLoading)
+    return (
+      <TileContainer>
+        <Loader type="inline" />
+      </TileContainer>
+    );
+
   return (
     <>
       <Modal
@@ -185,6 +190,7 @@ const SingleTile = ({
         <InterventionAssignOrganizationModal
           interventionId={id}
           organizationId={organizationId}
+          onClose={closeAssignOrganizationModal}
         />
       </Modal>
 
@@ -255,6 +261,7 @@ SingleTile.propTypes = {
   archiveIntervention: PropTypes.func,
   userId: PropTypes.string,
   userRoles: PropTypes.arrayOf(PropTypes.string),
+  isLoading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -270,9 +277,16 @@ const mapDispatchToProps = {
 
 const SingleTileWithIntl = injectIntl(SingleTile);
 
-export default memo(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(SingleTileWithIntl),
+const withConenct = connect(
+  mapStateToProps,
+  mapDispatchToProps,
 );
+
+export default compose(
+  memo,
+  withConenct,
+  injectSaga({
+    key: 'interventionOptionsSaga',
+    saga: interventionOptionsSaga,
+  }),
+)(SingleTileWithIntl);

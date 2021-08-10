@@ -22,14 +22,18 @@ describe('fetchInterventions saga', () => {
   it('Check fetchInterventions generator success connection', () => {
     const apiResponse = { interventions: [createIntervention()] };
 
-    return expectSaga(fetchInterventions)
+    return expectSaga(fetchInterventions, { payload: {} })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
-      .put(fetchInterventionsSuccess(apiResponse.interventions))
+      .put(
+        fetchInterventionsSuccess(apiResponse.interventions, {
+          paginationData: undefined,
+        }),
+      )
       .run();
   });
   it('Check fetchInterventions error connection', () => {
     const error = new Error('test');
-    return expectSaga(fetchInterventions)
+    return expectSaga(fetchInterventions, { payload: {} })
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
       .put(
         fetchInterventionsError(

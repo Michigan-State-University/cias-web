@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useMemo } from 'react';
+import React, { memo, useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useScreenClass } from 'react-grid-system';
 
@@ -17,9 +17,23 @@ import GridTile from './GridTile';
 import NewButton from './Components/NewButton';
 import NewFloatButton from './Components/NewFloatButton';
 
-function TileRenderer({ elements, onCreateCall, createLoading, newLabel }) {
+function TileRenderer({
+  elements,
+  onCreateCall,
+  createLoading,
+  newLabel,
+  onFetchInterventions,
+  isLoading,
+  infiniteLoader,
+  filterData,
+}) {
+  const infiniteLoaderRef = useRef();
   const [ref, isInViewport] = useIsInViewport();
   const screenClass = useScreenClass();
+
+  useEffect(() => {
+    infiniteLoaderRef.current?.resetloadMoreItemsCache();
+  }, [filterData]);
 
   const columnCount = useMemo(() => {
     switch (screenClass) {
@@ -58,10 +72,20 @@ function TileRenderer({ elements, onCreateCall, createLoading, newLabel }) {
       }}
     >
       <VirtualGrid
+        ref={infiniteLoaderRef}
         columnCount={columnCount}
         rowCount={rowCount}
         rowHeight={160}
-        itemData={elements}
+        items={elements}
+        infiniteLoader={
+          infiniteLoader
+            ? {
+                loadMoreItems: onFetchInterventions,
+                isLoading,
+                ...infiniteLoader,
+              }
+            : null
+        }
       >
         {GridTile}
       </VirtualGrid>
@@ -78,6 +102,10 @@ TileRenderer.propTypes = {
   onCreateCall: PropTypes.func,
   createLoading: PropTypes.bool,
   newLabel: PropTypes.string,
+  onFetchInterventions: PropTypes.func,
+  isLoading: PropTypes.bool,
+  infiniteLoader: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  filterData: PropTypes.object,
 };
 
 TileRenderer.defaultProps = {

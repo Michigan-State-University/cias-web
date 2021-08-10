@@ -170,14 +170,236 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
           id="main-app-container"
         >
           <div
-            class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
-            data-testid="fullscreen-loader"
+            class="Container-uh0ujs-0 styled__StyledContainer-sc-6h8fd4-0 eqNBPz fziHXq"
+            direction="column"
+            display="flex"
+            height="100% !important"
+            overflow="clip"
+            style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
           >
             <div
-              class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
-              color="#B727EA"
-              size="100"
-              width="6"
+              class="Box-sc-1vhutan-0 fTNEzq styled__StyledNotification-ve6hnx-4 cNoZbH"
+              width="max-content"
+            >
+              <div
+                style="display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start; margin: 0px;"
+              >
+                <div
+                  align="flex-start"
+                  class="Col-zbj3ec-0 guvxHM"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 8px;"
+                >
+                  <div
+                    style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+                  >
+                    <div
+                      align="flex-start"
+                      class="Col-zbj3ec-0 guvxHM"
+                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 25%; flex-basis: 25%; flex-grow: 0; flex-shrink: 0; max-width: 25%; margin-left: 0%;"
+                    >
+                      <div
+                        class="StyledCircle-sc-1dov7hv-0 eDClgE"
+                        opacity="1"
+                      >
+                        <img
+                          class="Img-sc-55j3su-0 cDhXoN"
+                          src="IMAGE_MOCK"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      align="flex-start"
+                      class="Col-zbj3ec-0 guvxHM"
+                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 75%; flex-basis: 75%; flex-grow: 0; flex-shrink: 0; max-width: 75%; margin-left: 0%;"
+                    >
+                      <p
+                        class="Text-e4p0w3-0 bmKPFZ"
+                        font-weight="bold"
+                      >
+                        Something went wrong? Have a new idea?
+                      </p>
+                      <p
+                        class="Text-e4p0w3-0 cFbubw"
+                        color="#B727EA"
+                        font-weight="bold"
+                      >
+                        <a
+                          class="styled__StyledLink-ve6hnx-3 hNOXud"
+                          href="https://docs.google.com/forms/d/e/1FAIpQLSdddPH3GwgzYPjvouNBQ6Xp64ZDyw4KhMaAIVBq6k-jlG3sEg/viewform?usp=sf_link"
+                          target="_blank"
+                        >
+                          Share your thoughts here!
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  align="end"
+                  class="Col-zbj3ec-0 LYfLr"
+                  style="box-sizing: border-box; min-height: 1px; position: relative; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 0px;"
+                >
+                  <button
+                    class="styled__CrossButton-sc-1kp22um-1 iFPCsG"
+                  >
+                    <img
+                      alt="cross"
+                      class="Img-sc-55j3su-0 cDhXoN"
+                      src="IMAGE_MOCK"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="styled__InitialRow-ve6hnx-0 cKtUtp"
+              style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
+            >
+              <h1
+                class="H1-sc-1k7m23t-0 jjgKx"
+              >
+                My Dashboard
+              </h1>
+              <span
+                style="display: table; clear: both;"
+              />
+            </div>
+            <div
+              class="styled__InitialRow-ve6hnx-0 cKtUtp"
+              style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px;"
+            >
+              <div
+                style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+              >
+                <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+                >
+                  <div
+                    my="35"
+                    style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+                  >
+                    <div
+                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
+                    >
+                      <button
+                        class="styled__StatusLabel-ve6hnx-1 jLCcXY"
+                        color="#107969"
+                        value="draft"
+                      >
+                        <p
+                          class="styled__FilterText-ve6hnx-2 hVabCW"
+                          color="#FFFFFF"
+                        >
+                          Draft
+                        </p>
+                      </button>
+                    </div>
+                    <div
+                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
+                    >
+                      <button
+                        class="styled__StatusLabel-ve6hnx-1 kaTVpF"
+                        color="#8CBD00"
+                        value="published"
+                      >
+                        <p
+                          class="styled__FilterText-ve6hnx-2 hVabCW"
+                          color="#FFFFFF"
+                        >
+                          Published
+                        </p>
+                      </button>
+                    </div>
+                    <div
+                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
+                    >
+                      <button
+                        class="styled__StatusLabel-ve6hnx-1 iimraB"
+                        color="#F0684A"
+                        value="closed"
+                      >
+                        <p
+                          class="styled__FilterText-ve6hnx-2 hVabCW"
+                          color="#FFFFFF"
+                        >
+                          Closed
+                        </p>
+                      </button>
+                    </div>
+                    <div
+                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; margin-top: 5px; margin-bottom: 5px;"
+                    >
+                      <button
+                        class="styled__StatusLabel-ve6hnx-1 jWQWjX"
+                        color="#0E0E0E"
+                        value="archived"
+                      >
+                        <p
+                          class="styled__FilterText-ve6hnx-2 hVabCW"
+                          color="#FFFFFF"
+                        >
+                          Archived
+                        </p>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 50%; flex-basis: 50%; flex-grow: 0; flex-shrink: 0; max-width: 50%; margin-left: 0%; margin-top: 10px; margin-bottom: 10px;"
+                >
+                  <div
+                    style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: flex-start;"
+                  >
+                    <div
+                      style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+                    >
+                      <div
+                        class="styled__SearchInputStyled-sc-10udg63-3 gFHxDg"
+                      >
+                        <input
+                          class="Input-t9j2q5-0 hjYQaq"
+                          placeholder="Filter by name"
+                          type="text"
+                          value=""
+                        />
+                        <img
+                          alt="search"
+                          class="styled__SearchIcon-sc-10udg63-4 VQGbD"
+                          src="IMAGE_MOCK"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <span
+                style="display: table; clear: both;"
+              />
+            </div>
+            <div
+              class="Box-sc-1vhutan-0 fcQhED"
+            >
+              <div
+                class="virtual-grid-auto-sizer"
+                style="overflow: visible; height: 0px; width: 0px;"
+              />
+              <div
+                class="resize-triggers"
+              >
+                <div
+                  class="expand-trigger"
+                >
+                  <div
+                    style="width: 1px; height: 1px;"
+                  />
+                </div>
+                <div
+                  class="contract-trigger"
+                />
+              </div>
+            </div>
+            <span
+              style="display: table; clear: both;"
             />
           </div>
         </div>
