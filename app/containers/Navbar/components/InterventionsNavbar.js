@@ -60,6 +60,7 @@ const getActiveTab = (path, formatMessage) => {
     return formatMessage(messages.generatedReports);
   if (path.includes('/sms-messaging'))
     return formatMessage(messages.smsMessaging);
+  if (path.includes('/map')) return formatMessage(messages.sessionMap);
   return formatMessage(messages.sharing);
 };
 
@@ -241,6 +242,15 @@ const InterventionNavbar = ({
                   child={textMessagesCountValue}
                 />
               </Row>
+            </StyledLink>
+          }
+        />
+        <div
+          renderAsLink={
+            <StyledLink
+              to={`/interventions/${interventionId}/sessions/${sessionId}/map`}
+            >
+              {formatMessage(messages.sessionMap)}
             </StyledLink>
           }
         />

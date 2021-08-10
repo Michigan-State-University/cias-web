@@ -37,6 +37,9 @@ describe('<SettingsSessionPage />', () => {
         createSession: false,
         editSession: false,
       },
+      errors: {
+        getSession: null,
+      },
     },
   };
   const store = createTestStore(initialState);

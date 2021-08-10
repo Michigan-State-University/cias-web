@@ -10,7 +10,8 @@ export { sessionReducer } from './reducer';
 export {
   makeSelectSession,
   makeSelectCacheSession,
-  makeSelectSessionLoaders,
+  makeSelectSessionLoader,
   makeSelectSessionEditLoader,
+  makeSelectSessionError,
 } from './selectors';
 export { editSessionSaga, getSessionSaga } from './sagas';

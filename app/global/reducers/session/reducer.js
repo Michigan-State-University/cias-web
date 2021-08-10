@@ -56,6 +56,9 @@ export const initialState = {
   cache: {
     session: new Session('', ''),
   },
+  errors: {
+    getSession: null,
+  },
 };
 
 const saving = [
@@ -100,14 +103,17 @@ const sessionReducer = (state = initialState, action) =>
     switch (action.type) {
       case GET_SESSION_REQUEST:
         draft.loaders.getSession = true;
+        draft.errors.getSession = null;
         break;
       case GET_SESSION_SUCCESS:
         draft.loaders.getSession = false;
+        draft.errors.getSession = null;
         draft.session = action.payload.session;
         draft.cache.session = action.payload.session;
         break;
       case GET_SESSION_ERROR:
         draft.loaders.getSession = false;
+        draft.errors.getSession = action.payload.error;
         break;
 
       case EDIT_SESSION_REQUEST:

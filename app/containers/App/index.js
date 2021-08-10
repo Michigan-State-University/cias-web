@@ -49,6 +49,7 @@ import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
+import SessionMapPage from 'containers/SessionMapPage/Loadable.ts';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';
@@ -273,6 +274,16 @@ export function App({ user }) {
           exact
           path="/interventions/:interventionId/sessions/:sessionId/sms-messaging"
           component={TextMessagesPage}
+          protectedRoute
+          allowedRoles={[Roles.admin, ...ResearcherRoles]}
+          navbarProps={{
+            navbarId: NAVIGATION.SESSIONS,
+          }}
+        />
+        <AppRoute
+          exact
+          path="/interventions/:interventionId/sessions/:sessionId/map"
+          component={SessionMapPage}
           protectedRoute
           allowedRoles={[Roles.admin, ...ResearcherRoles]}
           navbarProps={{

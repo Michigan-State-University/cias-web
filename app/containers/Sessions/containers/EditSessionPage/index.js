@@ -53,7 +53,7 @@ import {
   getSessionRequest,
   sessionReducer,
   getSessionSaga,
-  makeSelectSessionLoaders,
+  makeSelectSessionLoader,
   makeSelectSession,
 } from 'global/reducers/session';
 import {
@@ -127,7 +127,7 @@ function EditSessionPage({
   reorderQuestions,
   reorderGroups,
   interventionStatus,
-  sessionLoaders: { getSession: getSessionLoader },
+  getSessionLoader,
   copyQuestions,
   deleteQuestions,
   groupQuestions,
@@ -559,7 +559,7 @@ EditSessionPage.propTypes = {
   reorderQuestions: PropTypes.func,
   reorderGroups: PropTypes.func,
   getQuestionsLoading: PropTypes.bool,
-  sessionLoaders: PropTypes.object,
+  getSessionLoader: PropTypes.bool,
   copyQuestions: PropTypes.func,
   deleteQuestions: PropTypes.func,
   groupQuestions: PropTypes.func,
@@ -575,7 +575,7 @@ EditSessionPage.propTypes = {
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionId(),
-  sessionLoaders: makeSelectSessionLoaders(),
+  getSessionLoader: makeSelectSessionLoader('getSession'),
   createQuestionsLoader: makeSelectLoader('createQuestionLoading'),
   groups: makeSelectQuestionGroups(),
   interventionStatus: makeSelectInterventionStatus(),

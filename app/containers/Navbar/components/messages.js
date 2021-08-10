@@ -64,4 +64,8 @@ export default defineMessages({
     id: `${scope}.goBackToDetails`,
     defaultMessage: 'Go back to Intervention details',
   },
+  sessionMap: {
+    id: `${scope}.sessionMap`,
+    defaultMessage: 'Session Map',
+  },
 });
