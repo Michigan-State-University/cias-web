@@ -60,4 +60,8 @@ export default defineMessages({
     id: `${scope}.smsMessaging`,
     defaultMessage: 'SMS Messaging',
   },
+  goBackToDetails: {
+    id: `${scope}.goBackToDetails`,
+    defaultMessage: 'Go back to Intervention details',
+  },
 });

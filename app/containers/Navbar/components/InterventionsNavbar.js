@@ -136,6 +136,8 @@ const InterventionNavbar = ({
         <ActionIcon
           to={`/interventions/${interventionId}`}
           iconSrc={backButton}
+          aria-label={formatMessage(messages.goBackToDetails)}
+          title={formatMessage(messages.goBackToDetails)}
         />
 
         <StyledInput
@@ -256,7 +258,7 @@ const InterventionNavbar = ({
               style={{ display: 'flex', alignItems: 'center' }}
             >
               <CheckBackground>
-                <Img src={check} />
+                <Img src={check} role="presentation" />
               </CheckBackground>
               <FormattedMessage {...messages.saved} />
             </SaveInfoContainer>

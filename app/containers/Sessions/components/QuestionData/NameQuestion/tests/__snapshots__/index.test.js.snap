@@ -48,6 +48,7 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <input
+              aria-label="Spell your name how it sounds"
               class="Input-t9j2q5-0 cSqYOu"
               disabled=""
               height="100%"

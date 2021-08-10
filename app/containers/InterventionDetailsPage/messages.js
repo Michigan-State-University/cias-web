@@ -110,4 +110,8 @@ export default defineMessages({
     id: `${scope}.pageTitle`,
     defaultMessage: 'Intervention: {name}',
   },
+  translateInterventionModalLabel: {
+    id: `${scope}.translateInterventionModalLabel`,
+    defaultMessage: 'Translate Intervention',
+  },
 });

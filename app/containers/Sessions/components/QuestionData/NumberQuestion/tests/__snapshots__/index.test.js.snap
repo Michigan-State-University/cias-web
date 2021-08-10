@@ -19,6 +19,7 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
           class="Column-sc-4zswzq-0 ekpwZH"
         >
           <input
+            aria-label="Respondent answer goes here..."
             class="Input-t9j2q5-0 sMbAr"
             disabled=""
             height="60"

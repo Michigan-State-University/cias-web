@@ -568,6 +568,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
           width="inherit"
         >
           <input
+            aria-label="Group placeholder"
             class="c4"
             font-size="18"
             font-weight="bold"
@@ -3498,6 +3499,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                   display="flex"
                 >
                   <input
+                    aria-label="Variable name..."
                     autocomplete="off"
                     class="c23 c24"
                     color="#107969"
@@ -3530,6 +3532,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                           class="c16"
                         >
                           <input
+                            aria-label="Respondent answer goes here..."
                             class="c27"
                             disabled=""
                             height="60"

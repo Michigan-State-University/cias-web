@@ -57,4 +57,12 @@ export default defineMessages({
     id: `${scope}.pageTitle`,
     defaultMessage: 'Session: {name}',
   },
+  showQuestionsBoxLabel: {
+    id: `${scope}.showQuestionsBoxLabel`,
+    defaultMessage: 'Hover to show Questions',
+  },
+  closeQuestionManagementLabel: {
+    id: `${scope}.closeQuestionManagementLabel`,
+    defaultMessage: 'Close Manage Groups',
+  },
 });

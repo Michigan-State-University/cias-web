@@ -2,6 +2,8 @@ import React, { useRef } from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import 'jest-styled-components';
 
+import { testRender } from 'utils/testUtils';
+
 import Input from '../index';
 import DateInput from '../DateInput';
 import ApprovableInput from '../ApprovableInput';
@@ -60,11 +62,11 @@ describe('<SearchInput />', () => {
   };
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<SearchInput {...defaultProps} />);
+    testRender(<SearchInput {...defaultProps} />);
     expect(spy).not.toHaveBeenCalled();
   });
   it('Should render and match the snapshot', () => {
-    const { container } = render(<SearchInput {...defaultProps} />);
+    const { container } = testRender(<SearchInput {...defaultProps} />);
     expect(container).toMatchSnapshot();
   });
   it('Should invoke onCHange function', async () => {
@@ -72,7 +74,7 @@ describe('<SearchInput />', () => {
       ...defaultProps,
       value: 'Value',
     };
-    render(<SearchInput {...newProps} />);
+    testRender(<SearchInput {...newProps} />);
     const img = document.querySelectorAll('img')[1];
     fireEvent.click(img);
     await waitFor(() =>

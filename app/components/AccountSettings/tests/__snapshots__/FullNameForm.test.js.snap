@@ -157,6 +157,7 @@ exports[`<FullNameForm /> Should render and match the snapshot 1`] = `
         width="100%"
       >
         <input
+          aria-label="Enter first name"
           class="c5"
           height="46"
           id="firstName"
@@ -186,6 +187,7 @@ exports[`<FullNameForm /> Should render and match the snapshot 1`] = `
         width="100%"
       >
         <input
+          aria-label="Enter last name"
           class="c5"
           height="46"
           id="lastName"

@@ -210,6 +210,7 @@ export function InterventionPage({
                   value={filterValue}
                   onChange={(e) => setFilterValue(e.target.value)}
                   placeholder={formatMessage(messages.filter)}
+                  aria-label={formatMessage(messages.searchInterventionsLabel)}
                 />
               </Col>
             </Row>

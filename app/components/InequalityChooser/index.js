@@ -6,11 +6,17 @@
 
 import React, { memo, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useIntl } from 'react-intl';
+
+import { colors } from 'theme';
+
+import { numericValidator } from 'utils/validators';
+
 import Select from 'components/Select';
 import Box from 'components/Box';
-import { colors } from 'theme';
-import { numericValidator } from 'utils/validators';
+
 import { CaseInput } from './styled';
+import messages from './messages';
 
 const signs = ['=', '<', '>', '<=', '>='];
 
@@ -19,6 +25,8 @@ const InequalityChooser = ({
   inequalityValue,
   disabled,
 }) => {
+  const { formatMessage } = useIntl();
+
   const populateSelectOption = (sign) => ({
     label: sign,
     value: sign,
@@ -76,6 +84,7 @@ const InequalityChooser = ({
           value={numericValue}
           validator={numericValidator}
           onBlur={(value) => setNumericValue(value)}
+          aria-label={formatMessage(messages.inputLabel)}
         />
       </Box>
     </>

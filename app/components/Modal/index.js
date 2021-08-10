@@ -7,6 +7,7 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
+import { useIntl } from 'react-intl';
 
 import { colors } from 'theme';
 
@@ -20,6 +21,7 @@ import H1 from 'components/H1';
 import Row from 'components/Row';
 import ActionIcon from 'components/ActionIcon';
 
+import messages from './messages';
 import { StyledBox } from './styled';
 
 const Modal = ({
@@ -30,6 +32,8 @@ const Modal = ({
   titleProps,
   ...stylesProps
 }) => {
+  const { formatMessage } = useIntl();
+
   const modalContent = useRef(null);
   const modalOverlay = useRef(null);
   useLockBodyScroll(visible);
@@ -105,6 +109,8 @@ const Modal = ({
                   left="40px"
                   onClick={onClose}
                   data-testid="close-modal-button"
+                  aria-label={formatMessage(messages.closeButtonLabel)}
+                  title={formatMessage(messages.closeButtonLabel)}
                 />
               </Row>
             </Column>

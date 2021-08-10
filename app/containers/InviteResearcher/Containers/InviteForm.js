@@ -36,10 +36,11 @@ const InviteForm = ({
         <FormattedMessage {...messages.sendInvite} />
       </H3>
       <Column width="100%" mb={35}>
-        <Text mb={10} fontSize={14}>
+        <Text mb={10} fontSize={14} id="researcher-email-label">
           <FormattedMessage {...messages.sectionTitle} />
         </Text>
         <Input
+          aria-labelledby="researcher-email-label"
           maxWidth="none"
           width="100%"
           transparent={false}

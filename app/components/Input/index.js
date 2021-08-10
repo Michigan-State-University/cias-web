@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { themeColors, borders, paddings, colors } from 'theme';
+
 import { margin, layout, padding, text, style } from '../BaseComponentStyles';
+import { getAriaLabelProps } from './utils';
 
 const getBorderColor = (hasError, currentColor) => {
   if (hasError) return themeColors.warning;
@@ -27,10 +29,15 @@ const getAutoComplete = ({ autoComplete, placeholder }) => {
   }
 };
 
-const Input = styled.input.attrs((props) => ({
-  type: props.keyboard,
-  ...getAutoComplete(props),
-}))`
+const Input = styled.input.attrs((props) => {
+  const { keyboard } = props;
+
+  return {
+    type: keyboard,
+    ...getAriaLabelProps(props),
+    ...getAutoComplete(props),
+  };
+})`
   padding: ${paddings.small};
   border-style: ${borders.borderStyle};
   border-width: ${borders.borderWidth};

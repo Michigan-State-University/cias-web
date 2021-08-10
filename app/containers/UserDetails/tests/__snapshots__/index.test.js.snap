@@ -130,6 +130,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                   width="100%"
                 >
                   <input
+                    aria-label="Enter first name"
                     class="Input-t9j2q5-0 ptbLy"
                     height="46"
                     id="firstName"
@@ -159,6 +160,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                   width="100%"
                 >
                   <input
+                    aria-label="Enter last name"
                     class="Input-t9j2q5-0 ptbLy"
                     height="46"
                     id="lastName"
@@ -285,6 +287,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                     </p>
                   </label>
                   <input
+                    aria-label="Enter phone number"
                     class="Input-t9j2q5-0 dbKITh"
                     disabled=""
                     id="number"

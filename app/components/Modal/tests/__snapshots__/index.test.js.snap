@@ -181,9 +181,11 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
             Test
           </h1>
           <button
+            aria-label="Close window"
             class="c6"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
+            title="Close window"
           >
             <img
               alt="cross"

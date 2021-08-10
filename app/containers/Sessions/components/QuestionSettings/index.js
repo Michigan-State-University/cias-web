@@ -49,7 +49,11 @@ const QuestionSettings = ({
           <Settings />
         </Box>
       </SettingsBar>
-      <OpenButton onClick={toggleSettings}>
+      <OpenButton
+        onClick={toggleSettings}
+        aria-label={formatMessage(messages.settingsButtonLabel)}
+        title={formatMessage(messages.settingsButtonLabel)}
+      >
         <Icon src={isVisible ? cross : gear} alt="show-settings" />
       </OpenButton>
     </Container>

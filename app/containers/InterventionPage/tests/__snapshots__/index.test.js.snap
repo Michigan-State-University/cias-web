@@ -36,6 +36,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
               >
                 <img
                   class="Img-sc-55j3su-0 cDhXoN"
+                  role="presentation"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -190,6 +191,7 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                 class="styled__SearchInputStyled-sc-10udg63-3 gFHxDg"
               >
                 <input
+                  aria-label="Filter Interventions by name"
                   class="Input-t9j2q5-0 hjYQaq"
                   placeholder="Filter by name"
                   type="text"

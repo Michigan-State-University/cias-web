@@ -7,4 +7,8 @@ export default defineMessages({
     id: `${scope}.preview`,
     defaultMessage: 'Try it out!',
   },
+  clearButtonLabel: {
+    id: `${scope}.clearButtonLabel`,
+    defaultMessage: 'Clear input',
+  },
 });

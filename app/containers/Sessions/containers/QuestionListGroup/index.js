@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 import { makeSelectGroupQuestions } from 'global/reducers/questions/selectors';
+import globalMessages from 'global/i18n/globalMessages';
 
 import Collapse from 'components/Collapse';
 import Row from 'components/Row';
@@ -147,6 +148,8 @@ const QuestionListGroup = ({
               <Img
                 src={reorderIcon}
                 disabled={!editingPossible}
+                aria-label={formatMessage(globalMessages.dragHandle)}
+                title={formatMessage(globalMessages.dragHandle)}
                 {...providedGroupDraggable.dragHandleProps}
               />
             )}

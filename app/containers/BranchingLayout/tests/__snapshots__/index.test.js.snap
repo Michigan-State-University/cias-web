@@ -235,6 +235,7 @@ exports[`<BranchingLayout /> Should render and match the snapshot 1`] = `
       width="100%"
     >
       <textarea
+        aria-label="Enter formula here... (You can use mathematical operators +, -, *, /)"
         class="c9"
         data-cy="text-area"
         height="auto"

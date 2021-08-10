@@ -128,7 +128,7 @@ const ChipsInput = ({
           value={inputValue}
           onChange={handleChange({})}
           onKeyDown={handleKeyDown}
-          placeholder={isInputFilled ? null : placeholder}
+          placeholder={placeholder}
           isInputFilled={isInputFilled}
         />
       </Row>

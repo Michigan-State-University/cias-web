@@ -59,10 +59,11 @@ const CreateTeam = ({
     >
       <Column>
         <Column width="100%" mb={35}>
-          <Text mb={10} fontSize={14}>
+          <Text mb={10} fontSize={14} id="team-name-label">
             <FormattedMessage {...messages.nameSectionTitle} />
           </Text>
           <Input
+            aria-labelledby="team-name-label"
             maxWidth="none"
             width="100%"
             transparent={false}

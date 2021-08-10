@@ -112,6 +112,7 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
             </p>
           </label>
           <input
+            aria-label="Enter phone number"
             class="Input-t9j2q5-0 dbKITh"
             disabled=""
             id="number"

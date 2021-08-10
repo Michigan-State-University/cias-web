@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.endValue`,
     defaultMessage: 'End value',
   },
+  sliderLabel: {
+    id: `${scope}.sliderLabel`,
+    defaultMessage: 'Select a value on a slider:',
+  },
 });

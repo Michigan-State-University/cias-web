@@ -92,6 +92,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     display="flex"
                   >
                     <input
+                      aria-label="Score"
                       class="Input-t9j2q5-0 kTUkta BadgeInput-sc-1ua27xt-0 eSqSHP"
                       color="#0086F8"
                       placeholder="Score"
@@ -106,6 +107,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     display="flex"
                   >
                     <input
+                      aria-label="Column 1..."
                       class="Input-t9j2q5-0 tWwZo"
                       cursor="pointer"
                       placeholder="Column 1..."
@@ -140,6 +142,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     display="flex"
                   >
                     <input
+                      aria-label="Score"
                       class="Input-t9j2q5-0 kTUkta BadgeInput-sc-1ua27xt-0 eSqSHP"
                       color="#0086F8"
                       placeholder="Score"
@@ -154,6 +157,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                     display="flex"
                   >
                     <input
+                      aria-label="Column 2..."
                       class="Input-t9j2q5-0 tWwZo"
                       cursor="pointer"
                       placeholder="Column 2..."
@@ -202,6 +206,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       display="flex"
                     >
                       <input
+                        aria-label="Variable name..."
                         autocomplete="off"
                         class="Input-t9j2q5-0 cAqUSW BadgeInput-sc-1ua27xt-0 gmlnZr"
                         color="#107969"
@@ -218,6 +223,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       width="100%"
                     >
                       <textarea
+                        aria-label="Row 1..."
                         class="TextArea-sc-175uiux-0 hDDZSW"
                         cursor="pointer"
                         data-cy="text-area"
@@ -293,6 +299,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       display="flex"
                     >
                       <input
+                        aria-label="Variable name..."
                         autocomplete="off"
                         class="Input-t9j2q5-0 cAqUSW BadgeInput-sc-1ua27xt-0 gmlnZr"
                         color="#107969"
@@ -309,6 +316,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                       width="100%"
                     >
                       <textarea
+                        aria-label="Row 2..."
                         class="TextArea-sc-175uiux-0 hDDZSW"
                         cursor="pointer"
                         data-cy="text-area"

@@ -100,6 +100,7 @@ const VisualAnalogueScaleQuestion = ({
                   marks={labels}
                   disabled
                   showValue={!isNullOrUndefined(showNumber) && showNumber}
+                  ariaLabelForHandle={formatMessage(messages.sliderLabel)}
                 />
               )}
               {isNarratorTab && (

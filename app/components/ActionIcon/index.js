@@ -16,7 +16,7 @@ const ActionIcon = ({ to, onClick, iconSrc, ...restProps }) => {
   const icon = <Icon src={iconSrc} alt="cross" />;
   if (to)
     return (
-      <CrossLink data-cy="back-intervention-button" to={to}>
+      <CrossLink data-cy="back-intervention-button" to={to} {...restProps}>
         {icon}
       </CrossLink>
     );

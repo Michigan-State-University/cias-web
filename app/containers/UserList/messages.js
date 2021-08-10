@@ -94,4 +94,8 @@ export default defineMessages({
     id: `${scope}.paginationNextAriaLabel`,
     defaultMessage: 'Go to page: {page}',
   },
+  searchPlaceholder: {
+    id: `${scope}.searchPlaceholder`,
+    defaultMessage: 'Filter users by name',
+  },
 });

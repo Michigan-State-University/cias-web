@@ -20,6 +20,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         Name
       </h3>
       <input
+        aria-label="e-Session Name"
         class="Input-t9j2q5-0 dayPHP styled__Input-sc-12xx0pj-0 lcXNLu"
         disabled=""
         placeholder="e-Session Name"
@@ -39,6 +40,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
         Variable
       </h3>
       <input
+        aria-label="Variable name..."
         autocomplete="off"
         class="Input-t9j2q5-0 kMQnkg BadgeInput-sc-1ua27xt-0 locZHQ"
         color="#107969"

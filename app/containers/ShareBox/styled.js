@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
+import { themeColors, borders, paddings, colors } from 'theme';
+
 import Row from 'components/Row';
 import TextButton from 'components/Button/TextButton';
 import { margin } from 'components/BaseComponentStyles';
-import { themeColors, borders, paddings, colors } from 'theme';
+import Input from 'components/Input';
 
 export const StyledChipsInput = styled.div`
   padding: ${({ isInputFilled }) =>
@@ -18,7 +20,7 @@ export const StyledChipsInput = styled.div`
   ${margin};
 `;
 
-export const HiddenInput = styled.input`
+export const HiddenInput = styled(Input)`
   height: ${({ isInputFilled }) => (isInputFilled ? '31px' : '100%')};
   width: ${({ isInputFilled }) => (isInputFilled ? 'auto' : '100%')};
   border: none;

@@ -5,9 +5,9 @@
  */
 
 import React from 'react';
-import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
+import { testRender } from 'utils/testUtils';
 import createModalForTests from 'utils/createModalForTests';
 
 import Modal from '../index';
@@ -25,12 +25,12 @@ describe('<Modal />', () => {
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<Modal {...props} />);
+    testRender(<Modal {...props} />);
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('Should render and match the snapshot', () => {
-    const { container } = render(<Modal {...props} />);
+    const { container } = testRender(<Modal {...props} />);
     expect(container).toMatchSnapshot();
   });
 });

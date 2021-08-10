@@ -67,6 +67,7 @@ exports[`<ParticipantReport /> Should render and match the snapshot 1`] = `
           width="100%"
         >
           <input
+            aria-label="Email..."
             class="Input-t9j2q5-0 cfspKj"
             disabled=""
             placeholder="Email..."

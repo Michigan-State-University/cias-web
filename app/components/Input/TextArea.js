@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { themeColors, borders, paddings, colors } from 'theme';
-import { margin, layout } from '../BaseComponentStyles';
 
-const TextArea = styled.textarea`
+import { margin, layout } from '../BaseComponentStyles';
+import { getAriaLabelProps } from './utils';
+
+const TextArea = styled.textarea.attrs((props) => ({
+  ...getAriaLabelProps(props),
+}))`
   resize: none;
   padding: ${paddings.small};
   border: ${borders.borderWidth} ${borders.borderStyle} ${themeColors.highlight};

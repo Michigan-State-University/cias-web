@@ -31,7 +31,11 @@ const CollapseLabel = ({
   const currentImg = isOpened ? onShowImg : onHideImg;
   const img = animatedImg ? onShowImg : currentImg;
   const imgElement = (
-    <Img className={animatedImg ? 'animated-img' : 'img'} src={img} />
+    <Img
+      className={animatedImg ? 'animated-img' : 'img'}
+      src={img}
+      role="presentation"
+    />
   );
   const displayedImage = !imgWithBackground ? (
     imgElement

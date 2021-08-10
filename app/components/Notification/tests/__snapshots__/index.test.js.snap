@@ -141,6 +141,7 @@ exports[`<Notification /> should match the snapshot 1`] = `
             >
               <img
                 class="c3"
+                role="presentation"
                 src="IMAGE_MOCK"
               />
             </div>

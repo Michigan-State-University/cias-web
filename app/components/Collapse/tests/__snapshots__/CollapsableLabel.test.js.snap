@@ -104,6 +104,7 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
         >
           <img
             class="c4 img"
+            role="presentation"
             src=""
           />
         </div>

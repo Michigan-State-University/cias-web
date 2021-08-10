@@ -54,6 +54,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
               width="100%"
             >
               <input
+                aria-label="Enter first name"
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
                 id="firstName"
@@ -83,6 +84,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
               width="100%"
             >
               <input
+                aria-label="Enter last name"
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
                 id="lastName"
@@ -113,6 +115,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             width="100%"
           >
             <input
+              aria-label="Enter e-mail address"
               class="Input-t9j2q5-0 kmneJd"
               disabled=""
               height="46"
@@ -143,6 +146,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             width="100%"
           >
             <input
+              aria-label="Enter password"
               class="Input-t9j2q5-0 ptbLy"
               height="46"
               id="password"
@@ -172,6 +176,7 @@ exports[`<RegisterPage /> Should render and match the researcher 1`] = `
             width="100%"
           >
             <input
+              aria-label="Retype your password"
               class="Input-t9j2q5-0 ptbLy"
               height="46"
               id="passwordConfirmation"
@@ -273,6 +278,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               width="100%"
             >
               <input
+                aria-label="Enter first name"
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
                 id="firstName"
@@ -302,6 +308,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
               width="100%"
             >
               <input
+                aria-label="Enter last name"
                 class="Input-t9j2q5-0 ptbLy"
                 height="46"
                 id="lastName"
@@ -332,6 +339,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             width="100%"
           >
             <input
+              aria-label="Enter e-mail address"
               class="Input-t9j2q5-0 ptbLy"
               height="46"
               id="email"
@@ -361,6 +369,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             width="100%"
           >
             <input
+              aria-label="Enter password"
               class="Input-t9j2q5-0 ptbLy"
               height="46"
               id="password"
@@ -390,6 +399,7 @@ exports[`<RegisterPage /> Should render and match the snapshot for participant 1
             width="100%"
           >
             <input
+              aria-label="Retype your password"
               class="Input-t9j2q5-0 ptbLy"
               height="46"
               id="passwordConfirmation"

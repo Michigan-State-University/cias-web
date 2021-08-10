@@ -28,9 +28,11 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             Invite researcher
           </h1>
           <button
+            aria-label="Close window"
             class="styled__CrossButton-sc-1kp22um-1 fPabiY"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
+            title="Close window"
           >
             <img
               alt="cross"
@@ -58,10 +60,12 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             <p
               class="Text-e4p0w3-0 fwzRty"
               font-size="14"
+              id="researcher-email-label"
             >
               Researcher’s e-mail address
             </p>
             <input
+              aria-labelledby="researcher-email-label"
               class="Input-t9j2q5-0 dbCYSA"
               placeholder="e.g john.doe@contact.com"
               type="text"
@@ -161,9 +165,11 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             Invite researcher
           </h1>
           <button
+            aria-label="Close window"
             class="styled__CrossButton-sc-1kp22um-1 fPabiY"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
+            title="Close window"
           >
             <img
               alt="cross"
@@ -191,10 +197,12 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             <p
               class="Text-e4p0w3-0 fwzRty"
               font-size="14"
+              id="researcher-email-label"
             >
               Researcher’s e-mail address
             </p>
             <input
+              aria-labelledby="researcher-email-label"
               class="Input-t9j2q5-0 dbCYSA"
               placeholder="e.g john.doe@contact.com"
               type="text"
@@ -287,9 +295,11 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             Invite researcher
           </h1>
           <button
+            aria-label="Close window"
             class="styled__CrossButton-sc-1kp22um-1 fPabiY"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
+            title="Close window"
           >
             <img
               alt="cross"
@@ -317,10 +327,12 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             <p
               class="Text-e4p0w3-0 fwzRty"
               font-size="14"
+              id="researcher-email-label"
             >
               Researcher’s e-mail address
             </p>
             <input
+              aria-labelledby="researcher-email-label"
               class="Input-t9j2q5-0 dbCYSA"
               placeholder="e.g john.doe@contact.com"
               type="text"

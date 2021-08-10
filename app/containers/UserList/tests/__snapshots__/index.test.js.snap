@@ -141,7 +141,9 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 class="styled__SearchInputStyled-sc-10udg63-3 gFHxDg"
               >
                 <input
+                  aria-label="Filter users by name"
                   class="Input-t9j2q5-0 hjYQaq"
+                  placeholder="Filter users by name"
                   type="text"
                   value=""
                 />
@@ -577,7 +579,9 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 class="styled__SearchInputStyled-sc-10udg63-3 gFHxDg"
               >
                 <input
+                  aria-label="Filter users by name"
                   class="Input-t9j2q5-0 hjYQaq"
+                  placeholder="Filter users by name"
                   type="text"
                   value=""
                 />

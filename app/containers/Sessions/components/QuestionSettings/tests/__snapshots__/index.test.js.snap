@@ -63,7 +63,9 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <button
-    class="styled__OpenButton-sc-148sou8-2 jiMlPp"
+    aria-label="Toggle Settings visibility"
+    class="styled__OpenButton-sc-148sou8-2 GUsZd"
+    title="Toggle Settings visibility"
   >
     <img
       alt="show-settings"

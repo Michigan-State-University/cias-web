@@ -446,7 +446,14 @@ function EditSessionPage({
             {manage && (
               <Row mb={10} justify="between">
                 <Row>{groupActions.map(mapActions)}</Row>
-                <ActionIcon mr="0" onClick={handleCloseManage} />
+                <ActionIcon
+                  mr="0"
+                  onClick={handleCloseManage}
+                  aria-label={formatMessage(
+                    messages.closeQuestionManagementLabel,
+                  )}
+                  title={formatMessage(messages.closeQuestionManagementLabel)}
+                />
               </Row>
             )}
             <Box disableScrollbar overflow="hidden auto">
@@ -517,7 +524,12 @@ function EditSessionPage({
 
             <div ref={containerBottomRef} />
           </Box>
-          <ShowListButton className="show-list-button" {...hoverListProps}>
+          <ShowListButton
+            className="show-list-button"
+            aria-label={formatMessage(messages.showQuestionsBoxLabel)}
+            title={formatMessage(messages.showQuestionsBoxLabel)}
+            {...hoverListProps}
+          >
             <Icon src={menu} alt="questions-list" />
           </ShowListButton>
         </QuestionsRow>

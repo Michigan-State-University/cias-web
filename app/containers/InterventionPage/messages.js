@@ -48,4 +48,8 @@ export default defineMessages({
     id: `${scope}.feedbackDescription`,
     defaultMessage: `Share your thoughts here!`,
   },
+  searchInterventionsLabel: {
+    id: `${scope}.searchInterventionsLabel`,
+    defaultMessage: `Filter Interventions by name`,
+  },
 });

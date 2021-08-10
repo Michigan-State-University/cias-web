@@ -142,6 +142,7 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
           class="c4"
         >
           <textarea
+            aria-label="Paste or type a web page link to show it to a respondent."
             class="c5"
             height="auto"
             placeholder="Paste or type a web page link to show it to a respondent."

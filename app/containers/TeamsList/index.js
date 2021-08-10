@@ -93,6 +93,8 @@ function TeamsList({
               <SearchInput
                 value={filterText}
                 onChange={(e) => setFilterText(e.target.value)}
+                placeholder={formatMessage(messages.searchPlaceholder)}
+                aria-label={formatMessage(messages.searchPlaceholder)}
               />
             </Col>
           </Row>

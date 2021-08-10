@@ -168,6 +168,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
       width="100%"
     >
       <textarea
+        aria-label="Enter formula here... (You can use mathematical operators +, -, *, /)"
         class="TextArea-sc-175uiux-0 kmGeZJ"
         data-cy="text-area"
         height="auto"
@@ -263,6 +264,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             class="Box-sc-1vhutan-0 gTFrB"
           >
             <input
+              aria-label="Provide a numeric value"
               class="Input-t9j2q5-0 gkqnfr styled__CaseInput-xvuzq8-0 bQOaOG"
               data-cy="case-value-input"
               data-testid="input"
@@ -296,6 +298,7 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <textarea
+                aria-label="Enter speech here..."
                 class="TextArea-sc-175uiux-0 kmGeZJ"
                 data-cy="text-area"
                 height="auto"

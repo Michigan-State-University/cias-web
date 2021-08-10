@@ -233,6 +233,7 @@ exports[`<QuestionImage /> should match the snapshot with file 1`] = `
             class="c0"
           >
             <textarea
+              aria-label="Input here the text describing the image for people with disabilities"
               class="c11"
               height="auto"
               placeholder="Input here the text describing the image for people with disabilities"
@@ -510,6 +511,7 @@ exports[`<QuestionImage /> should match the snapshot without file 1`] = `
             class="c0"
           >
             <textarea
+              aria-label="Input here the text describing the image for people with disabilities"
               class="c12"
               height="auto"
               placeholder="Input here the text describing the image for people with disabilities"

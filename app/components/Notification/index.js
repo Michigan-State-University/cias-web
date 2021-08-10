@@ -31,7 +31,7 @@ const Notification = ({ title, description, onClose, className }) => (
             <Circle
               size="50px"
               bg={colors.linkWater}
-              child={<Img src={checklist} />}
+              child={<Img src={checklist} role="presentation" />}
             />
           </Col>
           <Col xs={9}>

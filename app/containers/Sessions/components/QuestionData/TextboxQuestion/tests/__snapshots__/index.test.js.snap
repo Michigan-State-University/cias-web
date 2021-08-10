@@ -19,6 +19,7 @@ exports[`<TextboxQuestion /> Should render and match the snapshot 1`] = `
           class="Column-sc-4zswzq-0 ekpwZH"
         >
           <textarea
+            aria-label="Respondent answer goes here..."
             class="TextArea-sc-175uiux-0 cIMVkN"
             disabled=""
             height="auto"

@@ -127,6 +127,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                  
                 <img
                   class="c5 img"
+                  role="presentation"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -172,6 +173,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                  
                 <img
                   class="c5 img"
+                  role="presentation"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -217,6 +219,7 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                  
                 <img
                   class="c5 img"
+                  role="presentation"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -343,6 +346,7 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
              
             <img
               class="c4 img"
+              role="presentation"
               src="IMAGE_MOCK"
             />
           </div>
@@ -512,6 +516,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                  
                 <img
                   class="c5 img"
+                  role="presentation"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -557,6 +562,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                  
                 <img
                   class="c5 img"
+                  role="presentation"
                   src="IMAGE_MOCK"
                 />
               </div>
@@ -602,6 +608,7 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                  
                 <img
                   class="c5 img"
+                  role="presentation"
                   src="IMAGE_MOCK"
                 />
               </div>

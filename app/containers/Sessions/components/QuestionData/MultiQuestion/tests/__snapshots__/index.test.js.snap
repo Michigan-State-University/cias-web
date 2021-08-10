@@ -1450,6 +1450,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
           display="flex"
         >
           <input
+            aria-label="Variable name..."
             autocomplete="off"
             class="Input-t9j2q5-0 cgWHkh BadgeInput-sc-1ua27xt-0 gmlnZr"
             color="#107969"
@@ -1460,6 +1461,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
             width="57px"
           />
           <input
+            aria-label="Score"
             class="Input-t9j2q5-0 kTUkta BadgeInput-sc-1ua27xt-0 eSqSHP"
             color="#0086F8"
             placeholder="Score"

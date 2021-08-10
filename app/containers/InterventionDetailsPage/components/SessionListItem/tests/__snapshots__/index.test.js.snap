@@ -851,6 +851,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
                 Intervention
               </h2>
               <input
+                aria-label="Variable name..."
                 autocomplete="off"
                 class="c12 c13"
                 color="#107969"
@@ -1034,6 +1035,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               width="100%"
             >
               <textarea
+                aria-label="Enter formula here... (You can use mathematical operators +, -, *, /)"
                 class="c49"
                 data-cy="text-area"
                 height="auto"

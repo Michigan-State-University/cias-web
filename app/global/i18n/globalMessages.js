@@ -249,4 +249,8 @@ export default defineMessages({
     id: `${scope}.questionRequired`,
     defaultMessage: `Required fields are marked with an asterisk<span style='color:${themeColors.warning};'>*</span>`,
   },
+  dragHandle: {
+    id: `${scope}.dragHandle`,
+    defaultMessage: `Hold and drag to change position`,
+  },
 });
