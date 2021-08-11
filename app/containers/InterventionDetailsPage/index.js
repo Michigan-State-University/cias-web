@@ -13,7 +13,7 @@ import { createStructuredSelector } from 'reselect';
 import get from 'lodash/get';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import orderBy from 'lodash/orderBy';
-import { Col as GCol, Row as GRow, useScreenClass } from 'react-grid-system';
+import { Col as GCol, Row as GRow } from 'react-grid-system';
 import { useParams } from 'react-router-dom';
 import { injectSaga, injectReducer } from 'redux-injectors';
 import { Markup } from 'interweave';
@@ -126,8 +126,6 @@ export function InterventionDetailsPage({
     useState(null);
 
   const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
-
-  const screenClass = useScreenClass();
 
   const {
     sessions,
@@ -446,11 +444,7 @@ export function InterventionDetailsPage({
         </Row>
 
         <GRow>
-          <GCol
-            lg={6}
-            md={12}
-            style={{ order: ['md', 'sm', 'xs'].includes(screenClass) ? 1 : 0 }}
-          >
+          <GCol xl={6}>
             {renderList()}
             {createSessionLoading && (
               <Row my={18} align="center">
@@ -468,7 +462,7 @@ export function InterventionDetailsPage({
               <ErrorAlert errorText={createSessionError} />
             )}
           </GCol>
-          <GCol>
+          <GCol xl={6}>
             <Column position="sticky" top="100px" mt={18}>
               <SettingsPanel intervention={intervention} />
             </Column>
