@@ -6,12 +6,6 @@ exports[`<Dropdown /> should render on bottom and match the snapshot 1`] = `
   height: auto;
 }
 
-.c7 {
-  width: auto;
-  height: auto;
-  margin-right: 12px;
-}
-
 .c0 {
   width: auto;
   height: auto;
@@ -84,7 +78,7 @@ exports[`<Dropdown /> should render on bottom and match the snapshot 1`] = `
   padding: 8px;
 }
 
-.c9 {
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -101,7 +95,7 @@ exports[`<Dropdown /> should render on bottom and match the snapshot 1`] = `
   padding: 8px;
 }
 
-.c10::after {
+.c9::after {
   display: block;
   content: attr(title);
   font-weight: bold;
@@ -110,7 +104,7 @@ exports[`<Dropdown /> should render on bottom and match the snapshot 1`] = `
   visibility: hidden;
 }
 
-.c6:hover .c8 {
+.c6:hover .c7 {
   font-weight: bold;
 }
 
@@ -155,11 +149,10 @@ exports[`<Dropdown /> should render on bottom and match the snapshot 1`] = `
         >
           <img
             alt="icon"
-            class="c7"
             src="img.png"
           />
           <p
-            class="c8 c9 c10"
+            class="c7 c8 c9"
             color="red"
             title="Label"
           >

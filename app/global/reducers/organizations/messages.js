@@ -22,6 +22,11 @@ export default defineMessages({
     id: `${scope}.inviteAdminError`,
     defaultMessage: 'Failed to invite Admin!',
   },
+  inviteAdmin403Error: {
+    id: `${scope}.inviteAdmin403Error`,
+    defaultMessage:
+      'You do not have proper permissions to perform this action!',
+  },
   deleteOrganizationSuccess: {
     id: `${scope}.deleteOrganizationSuccess`,
     defaultMessage: 'Organization deleted successfully!',

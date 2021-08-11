@@ -136,6 +136,7 @@ describe('intervention reducer', () => {
 
     const expectedState = cloneDeep(mockState);
     expectedState.intervention.status = 'published';
+    expectedState.loaders.editIntervention = true;
 
     expect(interventionReducer(mockState, action)).toEqual(expectedState);
   });

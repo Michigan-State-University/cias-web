@@ -3,6 +3,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 import { formatMessage } from 'utils/intlOutsideReact';
+import { responseStatusEquals } from 'utils/axiosUtils';
+import { HttpStatusCodes } from 'utils/constants';
 
 import { Roles } from 'models/User/UserRoles';
 import {
@@ -33,9 +35,15 @@ export function* inviteAdmin({ payload: { email, role, id } }) {
       toastId: INVITE_ADMIN_SUCCESS,
     });
   } catch (error) {
+    const { response } = error;
+
     yield put(inviteAdminFailure(error));
 
-    yield call(toast.error, formatMessage(messages.inviteAdminError), {
+    let errorMessage = formatMessage(messages.inviteAdminError);
+    if (responseStatusEquals(response, HttpStatusCodes.FORBIDDEN))
+      errorMessage = formatMessage(messages.inviteAdmin403Error);
+
+    yield call(toast.error, errorMessage, {
       toastId: INVITE_ADMIN_ERROR,
     });
   }

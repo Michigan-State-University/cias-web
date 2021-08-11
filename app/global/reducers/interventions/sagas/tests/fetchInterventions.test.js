@@ -11,7 +11,6 @@ import { createIntervention } from 'utils/reducerCreators';
 import fetchInterventionsSaga, {
   fetchInterventions,
 } from 'global/reducers/interventions/sagas/fetchInterventions';
-import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   fetchInterventionsSuccess,
   fetchInterventionsError,
@@ -21,17 +20,21 @@ import messages from '../../messages';
 
 describe('fetchInterventions saga', () => {
   it('Check fetchInterventions generator success connection', () => {
-    const apiResponse = [createIntervention()];
-    return expectSaga(fetchInterventions)
+    // TODO: Fix test
+    const apiResponse = { interventions: [createIntervention()] };
+
+    return expectSaga(fetchInterventions, { payload: {} })
       .provide([[matchers.call.fn(axios.get), { data: apiResponse }]])
       .put(
-        fetchInterventionsSuccess(jsonApiToArray(apiResponse, 'intervention')),
+        fetchInterventionsSuccess(apiResponse.interventions, {
+          paginationData: undefined,
+        }),
       )
       .run();
   });
   it('Check fetchInterventions error connection', () => {
     const error = new Error('test');
-    return expectSaga(fetchInterventions)
+    return expectSaga(fetchInterventions, { payload: {} })
       .provide([[matchers.call.fn(axios.get), throwError(error)]])
       .put(
         fetchInterventionsError(

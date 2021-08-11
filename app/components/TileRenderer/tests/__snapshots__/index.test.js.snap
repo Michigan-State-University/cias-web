@@ -3,7 +3,7 @@
 exports[`<TileRenderer /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="auto-sizer-virtual-grid"
+    class="virtual-grid-auto-sizer"
     style="overflow: visible; height: 0px; width: 0px;"
   />
   <div

@@ -241,6 +241,7 @@ UserList.defaultProps = {
     Roles.researcher,
     Roles.teamAdmin,
     Roles.thirdParty,
+    Roles.eInterventionAdmin,
   ],
 };
 

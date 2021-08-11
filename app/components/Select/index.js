@@ -6,11 +6,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactSelect from 'react-select';
 
-import Box from 'components/Box';
 import { themeColors } from 'theme';
 
-import ReactSelect from 'react-select';
+import Box from 'components/Box';
+
 import { DropdownIndicator, Option } from './components';
 
 const customStyles = ({ isMulti, bg, isDisabled }) => ({

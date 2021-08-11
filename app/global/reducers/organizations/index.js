@@ -34,6 +34,7 @@ export {
   makeSelectOrganizationInterventions,
   makeSelectDashboardViewOptions,
   makeSelectShowDeletedEntitiesToggle,
+  makeSelectShouldRefetchInterventions,
 } from './selectors';
 
 export { EntityType } from './constants';

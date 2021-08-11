@@ -9,9 +9,13 @@ import ReactQuill from 'react-quill';
  */
 export const selectQuillText = (quill, { start, end } = {}) => {
   const editor = quill.getEditor();
+  const selection = editor.getSelection();
 
-  editor.setSelection(start ?? 0, end ?? editor.getText().length);
-  editor.theme.tooltip.show();
+  // If user selected text before focus, do not override that
+  if (!selection || !selection.length) {
+    editor.setSelection(start ?? 0, end ?? editor.getText().length);
+    editor.theme.tooltip.show();
+  }
 };
 
 /**

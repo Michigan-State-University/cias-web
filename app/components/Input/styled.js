@@ -19,13 +19,17 @@ export const QuillStyled = styled(ReactQuill)`
           },
         }
       : { border: '1px solid transparent' }}
+
   .ql-editor {
     font-weight: 400;
     padding: 10px;
+    overflow: visible;
+
+    &.ql-blank::before {
+      left: 11px;
+    }
   }
-  .ql-editor.ql-blank::before {
-    left: 11px;
-  }
+
   .ql-picker-label svg {
     margin-bottom: 15px !important;
   }
