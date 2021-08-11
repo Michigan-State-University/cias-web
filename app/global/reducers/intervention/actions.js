@@ -142,8 +142,8 @@ export const revokeUserAccessSuccess = (userId) =>
 export const revokeUserAccessFailure = (userId, error) =>
   actionBuilder(REVOKE_USER_ACCESS_ERROR, { userId, error });
 
-export const createSessionRequest = (id, lastPosition) =>
-  actionBuilder(CREATE_SESSION_REQUEST, { id, lastPosition });
+export const createSessionRequest = (id, lastPosition, type) =>
+  actionBuilder(CREATE_SESSION_REQUEST, { id, lastPosition, type });
 export const createSessionSuccess = (session) =>
   actionBuilder(CREATE_SESSION_SUCCESS, { session });
 export const createSessionError = () => actionBuilder(CREATE_SESSION_ERROR, {});
