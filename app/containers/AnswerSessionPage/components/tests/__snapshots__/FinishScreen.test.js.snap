@@ -3,7 +3,7 @@
 exports[`<FinishScreen /> Should render and match the snapshot 1`] = `
 <div>
   <div
-    class="Row-y1cs0u-0 fSJzDH"
+    class="Row-y1cs0u-0 jciuts"
     width="100%"
   >
     <a

@@ -89,7 +89,7 @@ import TranslateInterventionModal from 'containers/TranslateInterventionModal/in
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
-import SessionCreateButton from './components/SessionCreateButton';
+import SessionCreateButton from './components/SessionCreateButton/index.tsx';
 import SessionListItem from './components/SessionListItem';
 import {
   InterventionAssignOrganizationModal,
@@ -266,8 +266,8 @@ export function InterventionDetailsPage({
 
   const handleSendCsv = () => sendCsv(id);
 
-  const createSessionCall = () =>
-    createSession(interventionId, sessions.length);
+  const createSessionCall = (sessionType) =>
+    createSession(interventionId, sessions.length, sessionType);
 
   const handleReorder = (previousIndex, nextIndex) => {
     const newList = reorder(sessions, previousIndex, nextIndex);
@@ -486,7 +486,9 @@ export function InterventionDetailsPage({
             )}
             {editingPossible && (
               <Row my={18} align="center">
-                <SessionCreateButton handleClick={createSessionCall} />
+                <SessionCreateButton
+                  handleSessionCreation={createSessionCall}
+                />
               </Row>
             )}
             {createSessionError && (
