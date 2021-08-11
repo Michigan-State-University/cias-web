@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useIntl } from 'react-intl';
+import { useSelector } from 'react-redux';
 
 import { themeColors } from 'theme';
 import H1 from 'components/H1';
@@ -8,25 +9,27 @@ import Box from 'components/Box';
 import Button from 'components/Button';
 
 import messages from '../messages';
+import { makeSelectUserSession } from '../selectors';
+import { getSessionMapUserPreviewUrl } from '../utils';
 
 type Props = {
-  userSessionId: string;
-  sessionId: string;
   resetTransitionalUserSessionId: () => void;
 };
 
 const BranchingScreen = ({
-  userSessionId,
-  sessionId,
   resetTransitionalUserSessionId,
-}: Props) => {
+}: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
+  const { id: userSessionId } = useSelector(makeSelectUserSession());
+
+  const sessionMapUrl = useMemo(
+    () => getSessionMapUserPreviewUrl(userSessionId),
+    [userSessionId],
+  );
+
   const redirectToSessionMap = () => {
-    window.open(
-      `${process.env.WEB_URL}/session/${sessionId}/session-map?userPreviewId=${userSessionId}`,
-      '_blank',
-    );
+    window.open(sessionMapUrl, '_blank');
   };
 
   return (
@@ -41,6 +44,7 @@ const BranchingScreen = ({
           width={200}
           onClick={redirectToSessionMap}
           title={formatMessage(messages.goToSessionMap)}
+          inverted
         />
         <Button
           // @ts-ignore

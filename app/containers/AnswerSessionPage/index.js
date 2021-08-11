@@ -492,8 +492,6 @@ export function AnswerSessionPage({
 
                 {transitionalUserSessionId && (
                   <BranchingScreen
-                    sessionId={sessionId}
-                    userSessionId={userSession.id}
                     resetTransitionalUserSessionId={
                       resetTransitionalUserSessionId
                     }

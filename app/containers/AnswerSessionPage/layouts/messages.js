@@ -60,9 +60,13 @@ export default defineMessages({
     id: `${scope}.participantReportUserEmail`,
     defaultMessage: 'Your email is: <b>{email}</b>',
   },
-  dashboard: {
-    id: `${scope}.dashboard`,
+  goToDashboard: {
+    id: `${scope}.goToDashboard`,
     defaultMessage: 'Go to dashboard',
+  },
+  goToSessionMap: {
+    id: `${scope}.goToSessionMap`,
+    defaultMessage: 'Go to session map',
   },
   wcagThirdPartyWarning: {
     id: `${scope}.wcagThirdPartyWarning`,
