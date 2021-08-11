@@ -12,9 +12,13 @@ import 'jest-styled-components';
 import { render } from '@testing-library/react';
 import { DEFAULT_LOCALE } from 'i18n';
 
-import SessionCreateButton from '../index';
+import createModalForTests from 'utils/createModalForTests';
+import SessionCreateButton from '../index.tsx';
 
 describe('<SessionCreateButton />', () => {
+  beforeAll(() => {
+    createModalForTests();
+  });
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(

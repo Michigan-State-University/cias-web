@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { CAT_SESSION, CLASSIC_SESSION } from 'models/Session/constants';
+import { CLASSIC_SESSION } from 'models/Session/constants';
 import Text from 'components/Text';
 import Button from 'components/Button';
 import Box from 'components/Box';
@@ -10,6 +10,7 @@ import Radio from 'components/Radio';
 import { colors } from 'theme';
 
 import messages from './messages';
+import { prepareSessionTypes } from './constants';
 
 type Props = {
   onCreateSession: (sessionType: string) => void;
@@ -20,18 +21,10 @@ const SessionTypeChooser = ({ onCreateSession }: Props): JSX.Element => {
   const [selectedSessionType, setSelectedSessionType] =
     useState(CLASSIC_SESSION);
 
-  const sessionTypes = [
-    {
-      title: formatMessage(messages.classicSession),
-      type: CLASSIC_SESSION,
-      description: formatMessage(messages.classicSessionDescription),
-    },
-    {
-      title: formatMessage(messages.catSession),
-      type: CAT_SESSION,
-      description: formatMessage(messages.catSessionDescription),
-    },
-  ];
+  const sessionTypes = useMemo(
+    () => prepareSessionTypes(formatMessage),
+    [formatMessage],
+  );
 
   return (
     <div>
