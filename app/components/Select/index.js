@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import ReactSelect from 'react-select';
 
 import { themeColors } from 'theme';
-import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import Box from 'components/Box';
 
@@ -53,22 +52,17 @@ const customComponents = isMulti => ({
     : {}),
 });
 
-const Select = ({ selectProps, ...restProps }) => {
-  const { value } = selectProps;
-
-  return (
-    <Box {...restProps}>
-      <ReactSelect
-        components={customComponents(selectProps.isMulti)}
-        menuPortalTarget={document.body}
-        styles={customStyles(selectProps)}
-        menuPlacement="auto"
-        {...selectProps}
-        value={!isNullOrUndefined(value?.value) ? value : null}
-      />
-    </Box>
-  );
-};
+const Select = ({ selectProps, ...restProps }) => (
+  <Box {...restProps}>
+    <ReactSelect
+      components={customComponents(selectProps.isMulti)}
+      menuPortalTarget={document.body}
+      styles={customStyles(selectProps)}
+      menuPlacement="auto"
+      {...selectProps}
+    />
+  </Box>
+);
 
 Select.propTypes = {
   selectProps: PropTypes.object,

@@ -46,27 +46,33 @@ const InterventionAssignOrganizationModal = ({
   const { name: currentOrganizationName } =
     organizations.find(({ id }) => id === organizationId) ?? {};
 
-  const [selectedValue, setSelectedValue] = useState({
-    value: organizationId,
-    label: currentOrganizationName,
-  });
+  const generateSelectedValueObject = (orgId, orgName) =>
+    orgId
+      ? {
+          value: orgId,
+          label: orgName,
+        }
+      : null;
+
+  const [selectedValue, setSelectedValue] = useState(
+    generateSelectedValueObject(organizationId, currentOrganizationName),
+  );
 
   useEffect(() => {
-    setSelectedValue({
-      value: organizationId,
-      label: currentOrganizationName,
-    });
+    setSelectedValue(
+      generateSelectedValueObject(organizationId, currentOrganizationName),
+    );
   }, [organizationId, currentOrganizationName]);
 
-  const canSave = organizationId !== selectedValue.value;
+  const canSave = organizationId !== selectedValue?.value;
 
   const handleSave = useCallback(() => {
     editIntervention({
       id: interventionId,
-      organizationId: selectedValue.value,
+      organizationId: selectedValue?.value ?? null,
     });
     onClose();
-  }, [selectedValue.value, interventionId]);
+  }, [selectedValue?.value, interventionId]);
 
   const dataParser = useCallback(
     data => jsonApiToArray(data, 'organization'),
@@ -75,11 +81,7 @@ const InterventionAssignOrganizationModal = ({
 
   const onSelect = value => {
     if (value) setSelectedValue(value);
-    else
-      setSelectedValue({
-        value: null,
-        label: null,
-      });
+    else setSelectedValue(null);
   };
 
   return (
