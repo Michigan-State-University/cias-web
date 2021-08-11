@@ -25,6 +25,7 @@ import CopyIcon from 'assets/svg/copy.svg';
 import ArchiveIcon from 'assets/svg/archive.svg';
 import PencilIcon from 'assets/svg/pencil-solid.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
+import TranslateIcon from 'assets/svg/translate.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -159,17 +160,15 @@ export function InterventionDetailsPage({
     interventionSettingsModalVisible,
     setInterventionSettingsModalVisible,
   ] = useState(false);
-  const [
-    assignOrganizationModalVisible,
-    setAssignOrganizationModalVisible,
-  ] = useState(false);
+  const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
+    useState(false);
 
   const closeSendCopyModal = () => setSendCopyModalVisible(false);
   const openSendCopyModal = () => setSendCopyModalVisible(true);
 
   const closeTranslateModal = () => setTranslateModalVisible(false);
   const openTranslateModal = () => setTranslateModalVisible(true);
-const closeAssignOrganizationModal = () =>
+  const closeAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(false);
   const openAssignOrganizationModal = () =>
     setAssignOrganizationModalVisible(true);
@@ -189,7 +188,7 @@ const closeAssignOrganizationModal = () =>
     {
       id: 'translate',
       label: formatMessage(messages.translate),
-      icon: translate,
+      icon: TranslateIcon,
       action: openTranslateModal,
       color: colors.bluewood,
     },

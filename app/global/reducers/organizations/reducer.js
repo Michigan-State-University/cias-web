@@ -1,6 +1,6 @@
 import produce from 'immer';
 
-import { EDIT_INTERVENTION_SUCCESS } from 'global/reducers/intervention/constants';
+import { EDIT_INTERVENTION_SUCCESS } from 'global/reducers/intervention';
 
 import {
   CREATE_ORGANIZATION_SUCCESS,

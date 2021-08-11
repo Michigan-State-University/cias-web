@@ -9,15 +9,13 @@ import isNumber from 'lodash/isNumber';
 import useOutsideClick from 'utils/useOutsideClick';
 import { formatMessage } from 'utils/intlOutsideReact';
 
-import messages from 'components/Input/messages';
-
 import Column from '../Column';
 import Row from '../Row';
 import { Input } from './index';
 import { DatePickerWrapper, QuillStyled } from './styled';
 import { TextArea } from './TextArea';
 import DateInput from './DateInput';
-
+import messages from './messages';
 import './QuillSinglelineHandler';
 
 const quillModules = {

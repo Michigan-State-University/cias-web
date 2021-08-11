@@ -1,10 +1,11 @@
 import axios from 'axios';
 import get from 'lodash/get';
-
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { formatMessage } from 'utils/intlOutsideReact';
 
+import { formatMessage } from 'utils/intlOutsideReact';
 import objectToSnakeCase from 'utils/objectToSnakeCase';
+import { jsonApiToArray } from 'utils/jsonApiMapper';
+
 import { fetchInterventionsSuccess, fetchInterventionsError } from '../actions';
 import { FETCH_INTERVENTIONS_REQUEST } from '../constants';
 
@@ -17,12 +18,13 @@ export function* fetchInterventions({
 
   const { startIndex, endIndex } = paginationData ?? {};
   try {
-    // TODO: Change serializer
-    const {
-      data: { interventions, interventions_size: interventionsSize },
-    } = yield call(axios.get, requestURL, {
+    const { data } = yield call(axios.get, requestURL, {
       params: objectToSnakeCase({ startIndex, endIndex, ...filterData }),
     });
+
+    const { interventions_size: interventionsSize } = data;
+    const interventions = jsonApiToArray(data, 'intervention');
+
     yield put(
       fetchInterventionsSuccess(interventions, {
         paginationData,

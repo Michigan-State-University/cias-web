@@ -75,10 +75,8 @@ const SingleTile = ({
     setShareWithResearchersModalVisible,
   ] = useState(false);
 
-  const [
-    assignOrganizationModalVisible,
-    setAssignOrganizationModalVisible,
-  ] = useState(false);
+  const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
+    useState(false);
 
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
 
@@ -102,7 +100,7 @@ const SingleTile = ({
     status,
     sessionsSize,
     id,
-    organization_id: organizationId,
+    organizationId,
     user,
     createdAt,
     updatedAt,
@@ -186,7 +184,7 @@ const SingleTile = ({
   return (
     <>
       <Modal
-        title={formatMessage(messages.modalTitle)}
+        title={formatMessage(messages.sendCopyModalTitle)}
         onClose={closeShareWithResearchersModal}
         visible={shareWithResearchersModalVisible}
       >
@@ -299,10 +297,7 @@ const mapDispatchToProps = {
 
 const SingleTileWithIntl = injectIntl(SingleTile);
 
-const withConenct = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-);
+const withConenct = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   memo,

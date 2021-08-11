@@ -2,13 +2,13 @@ import produce from 'immer';
 import isEmpty from 'lodash/isEmpty';
 
 import { archived } from 'models/Status/StatusTypes';
-import { EDIT_INTERVENTION_SUCCESS } from 'global/reducers/intervention/constants';
-
-import isNullOrUndefined from 'utils/isNullOrUndefined';
 import {
+  EDIT_INTERVENTION_SUCCESS,
   CREATE_INTERVENTION_SUCCESS,
   TRANSLATE_INTERVENTION_SUCCESS,
 } from 'global/reducers/intervention';
+
+import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import {
   ARCHIVE_INTERVENTION_ERROR,
