@@ -5,7 +5,7 @@ import RWInfiniteLoader from 'react-window-infinite-loader';
 const InfiniteLoader = forwardRef(
   ({ children, loadMoreItems, isLoading, ...props }, ref) => {
     const handleLoadMoreItems = (startIndex, stopIndex) =>
-      new Promise(resolve => {
+      new Promise((resolve) => {
         // load new items only when nothing is being loaded already
         if (!isLoading) loadMoreItems(startIndex, stopIndex);
         resolve();

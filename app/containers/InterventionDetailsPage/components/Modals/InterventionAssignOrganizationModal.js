@@ -40,7 +40,7 @@ const InterventionAssignOrganizationModal = ({
   );
 
   // actions
-  const editIntervention = intervention =>
+  const editIntervention = (intervention) =>
     dispatch(editInterventionRequest(intervention));
 
   const { name: currentOrganizationName } =
@@ -75,11 +75,11 @@ const InterventionAssignOrganizationModal = ({
   }, [selectedValue?.value, interventionId]);
 
   const dataParser = useCallback(
-    data => jsonApiToArray(data, 'organization'),
+    (data) => jsonApiToArray(data, 'organization'),
     [],
   );
 
-  const onSelect = value => {
+  const onSelect = (value) => {
     if (value) setSelectedValue(value);
     else setSelectedValue(null);
   };

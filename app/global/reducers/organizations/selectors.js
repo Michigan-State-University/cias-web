@@ -38,7 +38,7 @@ export const makeSelectNewOrganizationLoader = () =>
 export const makeSelectShouldRefetchInterventions = () =>
   createSelector(
     selectOrganizationsState,
-    substate => substate.shouldRefetch,
+    (substate) => substate.shouldRefetch,
   );
 
 export const makeSelectOrganization = () =>
