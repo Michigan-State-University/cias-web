@@ -10,6 +10,7 @@ import {
   createOrganizationInterventionRequest,
   makeSelectOrganizationLoaders,
   makeSelectOrganizationErrors,
+  makeSelectShouldRefetchInterventions,
 } from 'global/reducers/organizations';
 
 import Spinner from 'components/Spinner';
@@ -33,11 +34,16 @@ const OrganizationInterventionRow = ({
   organizationErrors: {
     fetchOrganizationInterventions: fetchOrganizationInterventionsError,
   },
+  shouldRefetch,
   formatMessage,
 }) => {
   useEffect(() => {
     organizationInterventionsFetchRequest(organizationId);
   }, []);
+
+  useEffect(() => {
+    if (shouldRefetch) organizationInterventionsFetchRequest(organizationId);
+  }, [shouldRefetch]);
 
   if (fetchOrganizationInterventions) {
     return <Spinner color={themeColors.secondary} />;
@@ -74,6 +80,7 @@ OrganizationInterventionRow.propTypes = {
   formatMessage: PropTypes.func,
   organizationLoaders: PropTypes.object,
   organizationErrors: PropTypes.object,
+  shouldRefetch: PropTypes.bool,
 };
 
 OrganizationInterventionRow.defaultProps = {
@@ -84,6 +91,7 @@ const mapStateToProps = createStructuredSelector({
   organizationInterventions: makeSelectOrganizationInterventions(),
   organizationLoaders: makeSelectOrganizationLoaders(),
   organizationErrors: makeSelectOrganizationErrors(),
+  shouldRefetch: makeSelectShouldRefetchInterventions(),
 });
 
 const mapDispatchToProps = {

@@ -29,34 +29,40 @@ import {
   thirdPartyQuestion,
   participantReport,
 } from 'models/Session/QuestionTypes';
+import { Roles } from 'models/User/UserRoles';
+import { archived, closed, draft, published } from 'models/Status/StatusTypes';
 
 export const scope = 'app.GlobalMessages';
 
 export default defineMessages({
   roles: {
-    admin: {
-      id: `${scope}.admin`,
+    [Roles.admin]: {
+      id: `${scope}.${Roles.admin}`,
       defaultMessage: 'Admin',
     },
-    team_admin: {
-      id: `${scope}.teamAdmin`,
+    [Roles.teamAdmin]: {
+      id: `${scope}.${Roles.teamAdmin}`,
       defaultMessage: 'Team Admin',
     },
-    participant: {
-      id: `${scope}.participant`,
+    [Roles.participant]: {
+      id: `${scope}.${Roles.participant}`,
       defaultMessage: 'Participant',
     },
-    researcher: {
-      id: `${scope}.researcher`,
+    [Roles.researcher]: {
+      id: `${scope}.${Roles.researcher}`,
       defaultMessage: 'Researcher',
     },
-    guest: {
-      id: `${scope}.guest`,
+    [Roles.guest]: {
+      id: `${scope}.${Roles.guest}`,
       defaultMessage: 'Guest',
     },
-    third_party: {
-      id: `${scope}.third_party`,
+    [Roles.thirdParty]: {
+      id: `${scope}.${Roles.thirdParty}`,
       defaultMessage: 'Third Party',
+    },
+    [Roles.eInterventionAdmin]: {
+      id: `${scope}.${Roles.eInterventionAdmin}`,
+      defaultMessage: 'E-Intervention Admin',
     },
   },
   variables: {
@@ -190,20 +196,20 @@ export default defineMessages({
     },
   },
   statuses: {
-    draft: {
-      id: `${scope}.draft`,
+    [draft]: {
+      id: `${scope}.${draft}`,
       defaultMessage: 'Draft',
     },
-    published: {
-      id: `${scope}.published`,
+    [published]: {
+      id: `${scope}.${published}`,
       defaultMessage: 'Published',
     },
-    closed: {
-      id: `${scope}.closed`,
+    [closed]: {
+      id: `${scope}.${closed}`,
       defaultMessage: 'Closed',
     },
-    archived: {
-      id: `${scope}.archived`,
+    [archived]: {
+      id: `${scope}.${archived}`,
       defaultMessage: 'Archived',
     },
   },

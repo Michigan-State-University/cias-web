@@ -4,7 +4,7 @@
  *
  */
 
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -18,12 +18,10 @@ import Text from 'components/Text';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import H1 from 'components/H1';
-import Loader from 'components/Loader';
 import TileRenderer from 'components/TileRenderer';
 import SearchInput from 'components/Input/SearchInput';
 import Box from 'components/Box';
 
-import useFilter from 'utils/useFilter';
 import { statusTypes } from 'models/Status/StatusTypes';
 
 import {
@@ -45,12 +43,16 @@ import StatusFilter from './StatusFilter';
 import messages from './messages';
 import { InitialRow, StyledLink, StyledNotification } from './styled';
 
+const INITIAL_FETCH_LIMIT = 15;
+
 export function InterventionPage({
   fetchInterventionsRequest: fetchInterventions,
   interventionPageState: {
     interventions,
+    interventionsSize,
     fetchInterventionLoading,
     fetchInterventionError,
+    shouldRefetch,
   },
   intl: { formatMessage },
   createInterventionRequest: createIntervention,
@@ -60,21 +62,34 @@ export function InterventionPage({
 }) {
   const { teamName } = user ?? {};
 
-  const [valueFilteredInterventions, filterValue, setFilterValue] = useFilter(
-    interventions,
-    'name',
-    {},
-  );
+  const [filterValue, setFilterValue] = useState('');
+  const [filterStatus, setFilterStatus] = useState(statusTypes);
 
-  const [finalInterventions, filterStatus, setFilterStatus] = useFilter(
-    valueFilteredInterventions,
-    'status',
-    { initialDelay: 0, initialValue: statusTypes },
+  const filterData = useMemo(
+    () => ({ statuses: filterStatus, name: filterValue }),
+    [filterValue, filterStatus],
   );
 
   useEffect(() => {
-    fetchInterventions();
-  }, []);
+    handleFetch(0, INITIAL_FETCH_LIMIT);
+  }, [filterData]);
+
+  useEffect(() => {
+    if (shouldRefetch) handleFetch(0, INITIAL_FETCH_LIMIT);
+  }, [shouldRefetch]);
+
+  const handleFetch = (startIndex, stopIndex) => {
+    const realStartIndex = Math.max(startIndex - 1, 0);
+    const realStopIndex = stopIndex - 1;
+
+    fetchInterventions({
+      paginationData: {
+        startIndex: realStartIndex,
+        endIndex: realStopIndex,
+      },
+      filterData,
+    });
+  };
 
   const handleChange = (value) => () => {
     if (filterStatus.includes(value))
@@ -114,46 +129,8 @@ export function InterventionPage({
     />
   );
 
-  if (fetchInterventionLoading) return <Loader />;
   if (fetchInterventionError)
     return <ErrorAlert errorText={fetchInterventionError} fullPage />;
-
-  if (!finalInterventions.length && !interventions.length) {
-    return (
-      <AppContainer
-        height="100% !important"
-        display="flex"
-        direction="column"
-        overflow="clip"
-      >
-        {!user.feedbackCompleted && FeedbackNotification}
-
-        {teamName && (
-          <InitialRow fluid>
-            <Text color={colors.manatee} fontSize={fontSizes.regular} mt={50}>
-              <Markup
-                content={formatMessage(messages.teamName, { teamName })}
-                noWrap
-              />
-            </Text>
-          </InitialRow>
-        )}
-
-        <H1 my={35}>
-          <FormattedMessage {...messages.noInterventions} />
-        </H1>
-
-        <Box filled>
-          <TileRenderer
-            containerKey="intervention"
-            newLabel={formatMessage(messages.createIntervention)}
-            onCreateCall={createIntervention}
-            createLoading={createInterventionLoading}
-          />
-        </Box>
-      </AppContainer>
-    );
-  }
 
   return (
     <AppContainer
@@ -207,10 +184,11 @@ export function InterventionPage({
             <Row align="center">
               <Col>
                 <SearchInput
-                  value={filterValue}
+                  defaultValue={filterValue}
                   onChange={(e) => setFilterValue(e.target.value)}
                   placeholder={formatMessage(messages.filter)}
                   aria-label={formatMessage(messages.searchInterventionsLabel)}
+                  debounceTime={300}
                 />
               </Col>
             </Row>
@@ -218,7 +196,7 @@ export function InterventionPage({
         </Row>
       </InitialRow>
 
-      {filterValue && finalInterventions.length === 0 && (
+      {interventionsSize === 0 && (
         <h3>
           <FormattedMessage {...messages.noFilterResults} />
         </h3>
@@ -227,10 +205,14 @@ export function InterventionPage({
       <Box filled>
         <TileRenderer
           containerKey="intervention"
-          elements={finalInterventions}
+          elements={interventions}
           newLabel={formatMessage(messages.createIntervention)}
           onCreateCall={createIntervention}
           createLoading={createInterventionLoading}
+          onFetchInterventions={handleFetch}
+          isLoading={fetchInterventionLoading}
+          filterData={filterData}
+          infiniteLoader={{ itemCount: interventionsSize }}
         />
       </Box>
     </AppContainer>

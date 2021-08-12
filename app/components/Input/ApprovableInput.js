@@ -7,6 +7,7 @@ import ReactQuill from 'react-quill';
 import isNumber from 'lodash/isNumber';
 
 import useOutsideClick from 'utils/useOutsideClick';
+import { formatMessage } from 'utils/intlOutsideReact';
 
 import Column from '../Column';
 import Row from '../Row';
@@ -14,18 +15,30 @@ import { Input } from './index';
 import { DatePickerWrapper, QuillStyled } from './styled';
 import { TextArea } from './TextArea';
 import DateInput from './DateInput';
-
+import messages from './messages';
 import './QuillSinglelineHandler';
 
 const quillModules = {
-  toolbar: [
-    ['bold', 'italic', 'underline', 'strike'],
-    ['link'],
-    ['blockquote'],
-    [{ script: 'sub' }, { script: 'super' }],
-    [{ header: 1 }, { header: 2 }],
-    [{ color: [] }, { background: [] }],
-  ],
+  toolbar: {
+    container: [
+      ['bold', 'italic', 'underline', 'strike'],
+      ['link'],
+      ['blockquote'],
+      [{ script: 'sub' }, { script: 'super' }],
+      [{ header: 1 }, { header: 2 }],
+      [{ color: [] }, { background: [] }],
+    ],
+    handlers: {
+      link(value) {
+        if (value) {
+          // eslint-disable-next-line no-alert,no-param-reassign
+          value = prompt(formatMessage(messages.quillLinkLabel));
+        }
+
+        this.quill.format('link', value);
+      },
+    },
+  },
 };
 
 const quillModulesSingleline = {

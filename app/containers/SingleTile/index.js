@@ -8,34 +8,47 @@ import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import { useInjectSaga } from 'redux-injectors';
+import { injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 
-import binNoBg from 'assets/svg/bin-no-bg.svg';
-import translate from 'assets/svg/translate.svg';
-import csvIcon from 'assets/svg/csv-icon.svg';
-import fileShare from 'assets/svg/file-share.svg';
-import copy from 'assets/svg/copy.svg';
+import BinNoBgIcon from 'assets/svg/bin-no-bg.svg';
+import CsvIcon from 'assets/svg/csv-icon.svg';
+import FileShareIcon from 'assets/svg/file-share.svg';
+import CopyIcon from 'assets/svg/copy.svg';
+import AddAppIcon from 'assets/svg/app-add.svg';
+import TranslateIcon from 'assets/svg/translate.svg';
+
+import { colors } from 'theme';
+
 import globalMessages from 'global/i18n/globalMessages';
-
+import { makeSelectUserId, makeSelectUserRoles } from 'global/reducers/auth';
+import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
 import { sendInterventionCsvRequest } from 'global/reducers/intervention';
 import {
   copyInterventionRequest,
   archiveInterventionRequest,
 } from 'global/reducers/interventions';
-import { makeSelectUserId } from 'global/reducers/auth';
-import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
+
+import { canArchive, canEdit } from 'models/Status/statusPermissions';
+import { RolePermissions } from 'models/User/RolePermissions';
+
+import isNullOrUndefined from 'utils/isNullOrUndefined';
+
+import { InterventionAssignOrganizationModal } from 'containers/InterventionDetailsPage/components/Modals';
+import SelectResearchers from 'containers/SelectResearchers';
 
 import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
-import InterventionDetails from 'containers/SingleTile/InterventionDetails';
 import Tooltip from 'components/Tooltip';
 import Dropdown from 'components/Dropdown';
 import Modal from 'components/Modal';
-import SelectResearchers from 'containers/SelectResearchers';
-import TranslateInterventionModal from 'containers/TranslateInterventionModal/index.tsx';
-import isNullOrUndefined from 'utils/isNullOrUndefined';
-import { canArchive } from 'models/Status/statusPermissions';
+import Row from 'components/Row';
+import Badge from 'components/Badge';
+import Loader from 'components/Loader';
+import TranslateInterventionModal from 'containers/TranslateInterventionModal';
+
+import InterventionDetails from './InterventionDetails';
 import messages from './messages';
 import {
   TileContainer,
@@ -54,17 +67,28 @@ const SingleTile = ({
   archiveIntervention,
   intl: { formatMessage },
   userId,
+  userRoles,
+  isLoading,
 }) => {
-  useInjectSaga({
-    key: 'interventionOptionsSaga',
-    saga: interventionOptionsSaga,
-  });
+  const [
+    shareWithResearchersModalVisible,
+    setShareWithResearchersModalVisible,
+  ] = useState(false);
 
-  const [sendCopyModalVisible, setSendCopyModalVisible] = useState(false);
+  const [assignOrganizationModalVisible, setAssignOrganizationModalVisible] =
+    useState(false);
+
   const [translateModalVisible, setTranslateModalVisible] = useState(false);
 
-  const closeSendCopyModal = () => setSendCopyModalVisible(false);
-  const openSendCopyModal = () => setSendCopyModalVisible(true);
+  const closeShareWithResearchersModal = () =>
+    setShareWithResearchersModalVisible(false);
+  const openShareWithResearchersModal = () =>
+    setShareWithResearchersModalVisible(true);
+
+  const closeAssignOrganizationModal = () =>
+    setAssignOrganizationModalVisible(false);
+  const openAssignOrganizationModal = () =>
+    setAssignOrganizationModalVisible(true);
 
   const closeTranslateModal = () => setTranslateModalVisible(false);
   const openTranslateModal = () => setTranslateModalVisible(true);
@@ -76,6 +100,7 @@ const SingleTile = ({
     status,
     sessionsSize,
     id,
+    organizationId,
     user,
     createdAt,
     updatedAt,
@@ -85,13 +110,14 @@ const SingleTile = ({
   const handleCsvRequest = () => sendCsv(id);
 
   const canExportCSV = userId === user?.id;
+  const { canAssignOrganizationToIntervention } = RolePermissions(userRoles);
 
   const handleClone = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
 
   const options = [
     {
-      icon: translate,
+      icon: TranslateIcon,
       action: openTranslateModal,
       label: formatMessage(messages.translate),
       id: 'translate',
@@ -99,7 +125,7 @@ const SingleTile = ({
     ...(canExportCSV
       ? [
           {
-            icon: csvIcon,
+            icon: CsvIcon,
             action: handleCsvRequest,
             label: formatMessage(messages.exportCSV),
             id: 'Export CSV',
@@ -107,14 +133,14 @@ const SingleTile = ({
         ]
       : []),
     {
-      icon: fileShare,
-      action: openSendCopyModal,
+      icon: FileShareIcon,
+      action: openShareWithResearchersModal,
       label: formatMessage(messages.sendCopy),
       id: 'Send copy to researcher',
     },
     ...((canArchive(status) && [
       {
-        icon: binNoBg,
+        icon: BinNoBgIcon,
         action: handleArchiveIntervention,
         label: formatMessage(messages.archive),
         id: 'Archive e-session',
@@ -124,9 +150,20 @@ const SingleTile = ({
     {
       id: 'duplicate',
       label: formatMessage(messages.duplicate),
-      icon: copy,
+      icon: CopyIcon,
       action: handleClone,
     },
+    ...(canAssignOrganizationToIntervention
+      ? [
+          {
+            icon: AddAppIcon,
+            action: openAssignOrganizationModal,
+            label: formatMessage(messages.assignOrganization),
+            id: 'assignOrganization',
+            disabled: !canEdit(status),
+          },
+        ]
+      : []),
   ];
 
   const preventDefault = (e) => {
@@ -137,15 +174,22 @@ const SingleTile = ({
   const copyInterventionToResearchers = (users) =>
     copyIntervention({ interventionId: id, users });
 
+  if (isLoading)
+    return (
+      <TileContainer>
+        <Loader type="inline" />
+      </TileContainer>
+    );
+
   return (
     <>
       <Modal
         title={formatMessage(messages.sendCopyModalTitle)}
-        onClose={closeSendCopyModal}
-        visible={sendCopyModalVisible}
+        onClose={closeShareWithResearchersModal}
+        visible={shareWithResearchersModalVisible}
       >
         <SelectResearchers
-          onClose={closeSendCopyModal}
+          onClose={closeShareWithResearchersModal}
           onResearchersSelected={copyInterventionToResearchers}
         />
       </Modal>
@@ -157,6 +201,19 @@ const SingleTile = ({
           onTranslated={closeTranslateModal}
         />
       </Modal>
+
+      <Modal
+        title={formatMessage(messages.assignOrganization)}
+        onClose={closeAssignOrganizationModal}
+        visible={assignOrganizationModalVisible}
+      >
+        <InterventionAssignOrganizationModal
+          interventionId={id}
+          organizationId={organizationId}
+          onClose={closeAssignOrganizationModal}
+        />
+      </Modal>
+
       <StyledLink to={link}>
         <TileContainer>
           <Heading>
@@ -174,30 +231,40 @@ const SingleTile = ({
               </div>
             )}
           </Heading>
+
           <EllipsisText text={name} fontSize={18} fontWeight="bold" />
-          <Tooltip
-            id={`${id}-tile-tooltip`}
-            content={
-              <InterventionDetails
-                formatMessage={formatMessage}
-                user={user}
-                createdAt={createdAt}
-                updatedAt={updatedAt}
-              />
-            }
-          >
-            <TileInfo>
-              {!isNullOrUndefined(sessionsSize) && (
-                <div>
-                  <Text>
-                    {formatMessage(messages.sessions, {
-                      sessionCount: sessionsSize,
-                    })}
-                  </Text>
-                </div>
-              )}
-            </TileInfo>
-          </Tooltip>
+
+          <Row justify="between">
+            <Tooltip
+              id={`${id}-tile-tooltip`}
+              content={
+                <InterventionDetails
+                  formatMessage={formatMessage}
+                  user={user}
+                  createdAt={createdAt}
+                  updatedAt={updatedAt}
+                />
+              }
+            >
+              <TileInfo>
+                {!isNullOrUndefined(sessionsSize) && (
+                  <div>
+                    <Text>
+                      {formatMessage(messages.sessions, {
+                        sessionCount: sessionsSize,
+                      })}
+                    </Text>
+                  </div>
+                )}
+              </TileInfo>
+            </Tooltip>
+
+            {organizationId && (
+              <Badge bg={colors.orange}>
+                {formatMessage(messages.isFromOrganization)}
+              </Badge>
+            )}
+          </Row>
         </TileContainer>
       </StyledLink>
     </>
@@ -213,10 +280,13 @@ SingleTile.propTypes = {
   copyIntervention: PropTypes.func,
   archiveIntervention: PropTypes.func,
   userId: PropTypes.string,
+  userRoles: PropTypes.arrayOf(PropTypes.string),
+  isLoading: PropTypes.bool,
 };
 
 const mapStateToProps = createStructuredSelector({
   userId: makeSelectUserId(),
+  userRoles: makeSelectUserRoles(),
 });
 
 const mapDispatchToProps = {
@@ -227,6 +297,13 @@ const mapDispatchToProps = {
 
 const SingleTileWithIntl = injectIntl(SingleTile);
 
-export default memo(
-  connect(mapStateToProps, mapDispatchToProps)(SingleTileWithIntl),
-);
+const withConenct = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(
+  memo,
+  withConenct,
+  injectSaga({
+    key: 'interventionOptionsSaga',
+    saga: interventionOptionsSaga,
+  }),
+)(SingleTileWithIntl);

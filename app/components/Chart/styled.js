@@ -27,6 +27,10 @@ export const StyledResponsiveContainer = styled(ResponsiveContainer)`
             transform: translateY(${BRUSH_Y_OFFSET}px);
           }
 
+          .recharts-brush-texts {
+            display: none;
+          }
+
           .recharts-brush-traveller {
             display: none;
           }

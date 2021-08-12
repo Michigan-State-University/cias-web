@@ -11,4 +11,8 @@ export default defineMessages({
     id: `${scope}.clearButtonLabel`,
     defaultMessage: 'Clear input',
   },
+  quillLinkLabel: {
+    id: `${scope}.quillLinkLabel`,
+    defaultMessage: 'Provide an URL:',
+  },
 });

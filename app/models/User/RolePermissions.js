@@ -27,6 +27,11 @@ const ALLOWED_ADD_ORGANIZATION = [Roles.admin];
 
 const ALLOWED_DELETE_ORGANIZATION = [Roles.admin];
 
+const ALLOWED_ASSIGN_ORGANIZATION_TO_INTERVENTION = [
+  Roles.admin,
+  Roles.eInterventionAdmin,
+];
+
 export const RolePermissions = (roles) => ({
   canEditLogo: arraysOverlap(roles, ALLOWED_EDIT_LOGO),
   canDownloadInterventionCsv: arraysOverlap(
@@ -44,4 +49,8 @@ export const RolePermissions = (roles) => ({
   ),
   canAddNewOrganization: arraysOverlap(roles, ALLOWED_ADD_ORGANIZATION),
   canDeleteOrganization: arraysOverlap(roles, ALLOWED_DELETE_ORGANIZATION),
+  canAssignOrganizationToIntervention: arraysOverlap(
+    roles,
+    ALLOWED_ASSIGN_ORGANIZATION_TO_INTERVENTION,
+  ),
 });

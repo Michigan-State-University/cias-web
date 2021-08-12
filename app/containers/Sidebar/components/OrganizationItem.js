@@ -17,18 +17,27 @@ const OrganizationItem = ({
   organization: { id, name },
   canAccessOrganizations,
 }) => {
-  // selectors
-  const { organizationId } = useSelector(makeSelectIntervention()) ?? {};
-
   const history = useHistory();
   const location = useLocation();
+
+  // selectors
+  const { organizationId, id: interventionId } =
+    useSelector(makeSelectIntervention()) ?? {};
+
   const redirect = () => {
     const suffix = canAccessOrganizations ? `` : `/dashboard`;
     history.push(`/organization/${id}${suffix}`);
   };
 
+  const isCurrentOrganizationPage = () =>
+    location.pathname.includes(`organization/${id}`);
+
+  const isCurrentOrganizationInterventionPage = () =>
+    id === organizationId &&
+    location.pathname.includes(`interventions/${interventionId}`);
+
   const active =
-    location.pathname.includes(`organization/${id}`) || id === organizationId;
+    isCurrentOrganizationPage() || isCurrentOrganizationInterventionPage();
 
   const buttons = [
     {

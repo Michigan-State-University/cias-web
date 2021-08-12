@@ -20,7 +20,7 @@ const StatusFilter = ({ formatMessage, onClick, active, onClear }) => {
     [globalMessages.statuses],
   );
 
-  const showIcon = active && !isEqual(statusTypes, active.sort());
+  const showIcon = active && !isEqual(statusTypes, [...active].sort());
 
   return (
     <>
