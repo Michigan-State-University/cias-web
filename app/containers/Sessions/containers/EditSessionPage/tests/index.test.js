@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router-dom';
 
 import configureStore from 'configureStore';
 import { DEFAULT_LOCALE } from 'i18n';
-import EditSessionPage from '../index';
+import EditSessionPage from '../index.tsx';
 
 describe('<EditSessionPage />', () => {
   let store;
