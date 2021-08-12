@@ -1,21 +1,21 @@
-import { CLASSIC_SESSION, CAT_SESSION } from 'models/Session/constants';
+import { SessionTypes } from 'models/Session/SessionDto';
 import messages from './messages';
 
-type SessionTypes = {
+type SessionTypesCard = {
   title: string;
-  type: string;
+  type: SessionTypes;
   description: string;
 };
 
-export const prepareSessionTypes = (formatMessage: any): SessionTypes[] => [
+export const prepareSessionTypes = (formatMessage: any): SessionTypesCard[] => [
   {
     title: formatMessage(messages.classicSession),
-    type: CLASSIC_SESSION,
+    type: SessionTypes.CLASSIC_SESSION,
     description: formatMessage(messages.classicSessionDescription),
   },
   {
     title: formatMessage(messages.catSession),
-    type: CAT_SESSION,
+    type: SessionTypes.CAT_SESSION,
     description: formatMessage(messages.catSessionDescription),
   },
 ];

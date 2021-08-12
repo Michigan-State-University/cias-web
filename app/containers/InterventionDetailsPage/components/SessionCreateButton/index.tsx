@@ -7,13 +7,13 @@
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { CLASSIC_SESSION } from 'models/Session/constants';
 import Row from 'components/Row';
 import Img from 'components/Img';
 import H3 from 'components/H3';
 import Modal from 'components/Modal';
 import addSign2 from 'assets/svg/addSign2.svg';
 
+import { SessionTypes } from 'models/Session/SessionDto';
 import { NewInterventionContainer } from './styled';
 import messages from './messages';
 import SessionTypeChooser from './SessionTypeChooser';
@@ -33,8 +33,8 @@ const SessionCreateButton = ({
   const handleClose = () => setModalVisible(false);
 
   const clickWrapper = () => {
-    if (!canCreateCatSession) {
-      handleSessionCreation(CLASSIC_SESSION);
+    if (canCreateCatSession) {
+      handleSessionCreation(SessionTypes.CLASSIC_SESSION);
     } else {
       setModalVisible(true);
     }
