@@ -2,7 +2,7 @@ import { PatternDto } from 'models/Pattern/PatternDto';
 
 export enum SessionTypes {
   CLASSIC_SESSION = 'Session::Classic',
-  CAT_SESSION = 'Session::Cat',
+  CAT_SESSION = 'Session::CatMh',
 }
 type SessionSettingsDto = {
   formula?: boolean;

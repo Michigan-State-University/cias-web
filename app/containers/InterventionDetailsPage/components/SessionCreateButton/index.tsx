@@ -33,7 +33,7 @@ const SessionCreateButton = ({
   const handleClose = () => setModalVisible(false);
 
   const clickWrapper = () => {
-    if (canCreateCatSession) {
+    if (!canCreateCatSession) {
       handleSessionCreation(SessionTypes.CLASSIC_SESSION);
     } else {
       setModalVisible(true);
