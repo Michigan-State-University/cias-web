@@ -190,7 +190,7 @@ const EditClassicSessionPage = ({
       setOpenedGroupsMap(
         flow(keyBy, (list) => mapValues(list, () => true))(groupsToMap),
       ),
-    [],
+    [openedGroups.current],
   );
 
   // when changing session set all groups to open

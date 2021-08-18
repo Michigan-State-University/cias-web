@@ -52,6 +52,7 @@ export interface SessionDto {
   schedule: ScheduleOptions;
   formula: FormulaDto;
   reportTemplatesCount: number;
+  type: SessionTypes;
 }
 
 export interface ClassicSessionDto extends SessionDto {
