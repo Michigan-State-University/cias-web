@@ -31,7 +31,7 @@ export enum BlockTypes {
   FEEDBACK = 'Feedback',
 }
 
-type Block = {
+interface Block {
   text: string[];
   type: BlockTypes;
   action: string;
@@ -42,9 +42,9 @@ type Block = {
     x: number;
     y: number;
   };
-};
+}
 
-export type QuestionDto = {
+export interface QuestionDto {
   id: string;
   type: QuestionTypes;
   question_group_id: string;
@@ -80,4 +80,4 @@ export type QuestionDto = {
     payload: string;
     patterns: PatternDto<QuestionTypes | SessionTypes>[];
   };
-};
+}

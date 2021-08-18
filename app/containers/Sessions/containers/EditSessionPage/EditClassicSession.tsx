@@ -4,6 +4,7 @@ import React, {
   useRef,
   useMemo,
   useLayoutEffect,
+  useCallback,
 } from 'react';
 import { injectSaga, injectReducer } from 'redux-injectors';
 import {
@@ -184,10 +185,13 @@ const EditClassicSessionPage = ({
   const groupIds = useMemo(() => groups.map(({ id }) => id), [groups]);
 
   // map is created for faster direct access than checking the array on every item
-  const mapOpenedGroupsToObject = (groupsToMap = openedGroups.current) =>
-    setOpenedGroupsMap(
-      flow(keyBy, (list) => mapValues(list, () => true))(groupsToMap),
-    );
+  const mapOpenedGroupsToObject = useCallback(
+    (groupsToMap = openedGroups.current) =>
+      setOpenedGroupsMap(
+        flow(keyBy, (list) => mapValues(list, () => true))(groupsToMap),
+      ),
+    [],
+  );
 
   // when changing session set all groups to open
   useLayoutEffect(() => {

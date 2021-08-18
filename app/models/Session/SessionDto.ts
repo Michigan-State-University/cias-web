@@ -4,18 +4,18 @@ export enum SessionTypes {
   CLASSIC_SESSION = 'Session::Classic',
   CAT_SESSION = 'Session::CatMh',
 }
-type SessionSettingsDto = {
+interface SessionSettingsDto {
   formula?: boolean;
   narrator: {
     voice: boolean;
     animation: boolean;
   };
-};
+}
 
-type FormulaDto = {
+interface FormulaDto {
   payload: string;
   patterns: PatternDto<SessionTypes>[];
-};
+}
 
 enum ScheduleOptions {
   AFTER_FILL = 'after_fill',
@@ -25,7 +25,7 @@ enum ScheduleOptions {
   DAYS_AFTER_DATE = 'days_after_date',
 }
 
-type GoogleTTSVoiceDto = {
+interface GoogleTTSVoiceDto {
   id: number;
   googleTtsLanguageId: number;
   voiceLabel: string;
@@ -33,9 +33,9 @@ type GoogleTTSVoiceDto = {
   languageCode: string;
   createdAt: string;
   updatedAt: string;
-};
+}
 
-export type SessionDto = {
+export interface SessionDto {
   id: string;
   settings: SessionSettingsDto;
   position: number;
@@ -52,9 +52,11 @@ export type SessionDto = {
   schedule: ScheduleOptions;
   formula: FormulaDto;
   reportTemplatesCount: number;
-};
+}
 
-export type ClassicSessionDto = SessionDto & {
+export interface ClassicSessionDto extends SessionDto {
   type: SessionTypes.CLASSIC_SESSION;
-};
-export type CatSessionDto = SessionDto & { type: SessionTypes.CAT_SESSION };
+}
+export interface CatSessionDto extends SessionDto {
+  type: SessionTypes.CAT_SESSION;
+}

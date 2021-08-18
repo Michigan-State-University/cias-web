@@ -7,13 +7,13 @@
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
+import { SessionTypes } from 'models/Session/SessionDto';
 import Row from 'components/Row';
 import Img from 'components/Img';
 import H3 from 'components/H3';
 import Modal from 'components/Modal';
 import addSign2 from 'assets/svg/addSign2.svg';
 
-import { SessionTypes } from 'models/Session/SessionDto';
 import { NewInterventionContainer } from './styled';
 import messages from './messages';
 import SessionTypeChooser from './SessionTypeChooser';
