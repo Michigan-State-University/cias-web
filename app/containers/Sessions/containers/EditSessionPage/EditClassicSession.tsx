@@ -4,10 +4,15 @@ import React, {
   useRef,
   useMemo,
   useLayoutEffect,
+  useCallback,
 } from 'react';
 import { injectSaga, injectReducer } from 'redux-injectors';
-import PropTypes from 'prop-types';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import {
+  DragDropContext,
+  DragStart,
+  Droppable,
+  DropResult,
+} from 'react-beautiful-dnd';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
@@ -42,20 +47,11 @@ import shareActive from 'assets/svg/file-share-active.svg';
 import groupIcon from 'assets/svg/group.svg';
 import groupIconActive from 'assets/svg/group-active.svg';
 
-import Question from 'models/Session/Question';
 import { borders, colors, themeColors } from 'theme';
 
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
-import { localStateReducer } from 'global/reducers/localState';
-import {
-  getSessionRequest,
-  sessionReducer,
-  getSessionSaga,
-  makeSelectSessionLoader,
-  makeSelectSession,
-} from 'global/reducers/session';
 import {
   createQuestionRequest,
   questionsReducer,
@@ -78,38 +74,24 @@ import {
   getQuestionGroupsSaga,
 } from 'global/reducers/questionGroups';
 import {
-  interventionReducer,
-  fetchInterventionSaga,
-  makeSelectInterventionStatus,
-} from 'global/reducers/intervention';
-import {
-  fetchInterventionsSaga,
-  interventionsReducer,
-  fetchInterventionsRequest,
-} from 'global/reducers/interventions';
-import {
   copyModalReducer,
   allCopyModalSagas,
 } from 'global/reducers/copyModalReducer';
 
-import { canEdit } from 'models/Status/statusPermissions';
-
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { FinishGroupType } from 'models/Session/GroupTypes';
-import {
-  fetchReportTemplatesRequest,
-  reportTemplatesReducer,
-  reportTemplatesSaga,
-} from 'global/reducers/reportTemplates';
-import editInterventionPageSaga from './saga';
+import { ClassicSessionDto } from 'models/Session/SessionDto';
 
+import { QuestionDto } from 'models/Question/QuestionDto';
+import Question from 'models/Session/Question';
+import { GroupDto } from 'models/Groups/GroupDto';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 
 import messages from './messages';
-import { EditSessionPageContext, useLockEditSessionPageScroll } from './utils';
+import { useLockEditSessionPageScroll } from './utils';
 import {
   QuestionsRow,
   ShowListButton,
@@ -118,16 +100,69 @@ import {
 } from './styled';
 import QuestionListGroup from '../QuestionListGroup';
 
-function EditSessionPage({
+type NonReduxProps = {
+  session: ClassicSessionDto;
+  editingPossible: boolean;
+  interventionStatus: string;
+};
+
+type Props = {
+  getQuestionGroups: (sessionId: string) => void;
+  changeGroupName: (
+    newName: string,
+    sessionId: string,
+    groupId: string,
+  ) => void;
+  shareQuestionsToResearchers: (
+    researchers: string[],
+    questionIds: string[],
+  ) => void;
+  groupQuestions: (questionIds: string[], sessionId: string) => void;
+  deleteQuestions: (
+    questionIds: string[],
+    sessionId: string,
+    groupIds: string[],
+  ) => void;
+  copyQuestions: (questionIds: string[], sessionId: string) => void;
+  reorderGroups: ({
+    groupId,
+    sourceIndex,
+    destinationIndex,
+    sessionId,
+  }: {
+    groupId: string;
+    sourceIndex: number;
+    destinationIndex: number;
+    sessionId: string;
+  }) => void;
+  reorderQuestions: ({
+    sourceIndex,
+    sourceGroupId,
+    destinationIndex,
+    destinationGroupId,
+    questionId,
+    sessionId,
+  }: {
+    sourceIndex: number;
+    sourceGroupId: string;
+    destinationIndex: number;
+    destinationGroupId: string;
+    questionId: string;
+    sessionId: string;
+  }) => void;
+  createQuestion: (question: Question, sessionId: string) => void;
+  selectedQuestion: string;
+  questions: QuestionDto[];
+  groups: GroupDto[];
+} & NonReduxProps;
+
+const EditClassicSessionPage = ({
   questions,
   selectedQuestion,
-  getSession,
   createQuestion,
-  match: { params },
   reorderQuestions,
   reorderGroups,
-  interventionStatus,
-  getSessionLoader,
+  editingPossible,
   copyQuestions,
   deleteQuestions,
   groupQuestions,
@@ -136,20 +171,27 @@ function EditSessionPage({
   changeGroupName,
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
-  fetchInterventions,
-  fetchReportTemplates,
-}) {
+  interventionStatus,
+}: Props): JSX.Element => {
   const { formatMessage } = useIntl();
-
   const [manage, setManage] = useState(false);
-  const [selectedSlides, setSelectedSlides] = useState([]);
+  const [selectedSlides, setSelectedSlides] = useState<string[]>([]);
   const [showList, setShowList] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
-  const openedGroups = useRef([]);
+  const openedGroups = useRef<string[]>([]);
   const [openedGroupsMap, setOpenedGroupsMap] = useState({});
 
   const groupIds = useMemo(() => groups.map(({ id }) => id), [groups]);
+
+  // map is created for faster direct access than checking the array on every item
+  const mapOpenedGroupsToObject = useCallback(
+    (groupsToMap = openedGroups.current) =>
+      setOpenedGroupsMap(
+        flow(keyBy, (list) => mapValues(list, () => true))(groupsToMap),
+      ),
+    [openedGroups.current],
+  );
 
   // when changing session set all groups to open
   useLayoutEffect(() => {
@@ -169,13 +211,7 @@ function EditSessionPage({
     [openedGroups.current],
   );
 
-  // map is created for faster direct access than checking the array on every item
-  const mapOpenedGroupsToObject = (groupsToMap = openedGroups.current) =>
-    setOpenedGroupsMap(
-      flow(keyBy, (list) => mapValues(list, () => true))(groupsToMap),
-    );
-
-  const toggleGroupCollapsable = (id, value) => {
+  const toggleGroupCollapsable = (id: string, value?: null | string) => {
     const groupIndex = openedGroups.current.findIndex(
       (groupId) => groupId === id,
     );
@@ -213,15 +249,13 @@ function EditSessionPage({
     ({ id }) => currentQuestion && id === currentQuestion.question_group_id,
   );
 
-  const editingPossible = canEdit(interventionStatus);
-
   const groupActions = [
     {
       label: <FormattedMessage {...messages.group} />,
       inactiveIcon: groupIcon,
       activeIcon: groupIconActive,
       action: () => {
-        groupQuestions(selectedSlides, params.sessionId);
+        groupQuestions(selectedSlides, sessionId);
         setSelectedSlides([]);
       },
       disabled: !editingPossible,
@@ -231,7 +265,7 @@ function EditSessionPage({
       inactiveIcon: copy,
       activeIcon: copyActive,
       action: () => {
-        copyQuestions(selectedSlides, params.sessionId);
+        copyQuestions(selectedSlides, sessionId);
         setSelectedSlides([]);
       },
       disabled: !editingPossible,
@@ -241,7 +275,7 @@ function EditSessionPage({
       inactiveIcon: bin,
       activeIcon: binActive,
       action: () => {
-        deleteQuestions(selectedSlides, params.sessionId, groupIds);
+        deleteQuestions(selectedSlides, sessionId, groupIds);
         setSelectedSlides([]);
       },
       disabled: !editingPossible,
@@ -264,28 +298,21 @@ function EditSessionPage({
   };
 
   useEffect(() => {
-    const { interventionId, sessionId: paramSessionId } = params;
-    getSession({
-      sessionId: paramSessionId,
-      interventionId,
-    });
-    getQuestionGroups(paramSessionId);
-    fetchInterventions();
-    fetchReportTemplates(paramSessionId);
+    getQuestionGroups(sessionId);
   }, []);
 
-  const onCreateQuestion = (type) => {
+  const onCreateQuestion = (type: string) => {
     createQuestion(
       instantiateEmptyQuestion(
         formatMessage(messages.newQuestionTitle),
         type,
         formatMessage(messages.newQuestionSubtitle),
       ),
-      params.sessionId,
+      sessionId,
     );
   };
 
-  const onDragEnd = (result) => {
+  const onDragEnd = (result: DropResult) => {
     setIsDuringQuestionReorder(false);
 
     const { draggableId, destination, source, type } = result;
@@ -293,12 +320,12 @@ function EditSessionPage({
     if (!isNullOrUndefined(destination))
       switch (type) {
         case reorderScope.questions: {
-          const sourceIndex = source.index;
-          const sourceGroupId = source.droppableId;
-          const destinationIndex = destination.index;
-          const destinationGroupId = destination.droppableId;
+          const { index: sourceIndex } = source;
+          const { droppableId: sourceGroupId } = source;
+          const destinationIndex = destination?.index;
+          const destinationGroupId = destination?.droppableId;
           const questionId = draggableId;
-
+          if (!destinationIndex || !destinationGroupId) break;
           reorderQuestions({
             sourceIndex,
             sourceGroupId,
@@ -313,8 +340,10 @@ function EditSessionPage({
 
         case reorderScope.groups: {
           const groupId = draggableId;
-          const sourceIndex = source.index;
-          const destinationIndex = destination.index;
+          const { index: sourceIndex } = source;
+          const destinationIndex = destination?.index;
+
+          if (!destinationIndex) break;
 
           reorderGroups({
             groupId,
@@ -330,7 +359,7 @@ function EditSessionPage({
       }
   };
 
-  const onBeforeDragStart = (result) => {
+  const onBeforeDragStart = (result: DragStart) => {
     const { type } = result;
 
     switch (type) {
@@ -342,22 +371,23 @@ function EditSessionPage({
     }
   };
 
-  const loading = getSessionLoader;
-
   const active = selectedSlides.length !== 0;
-  const mapActions = (action, index) => (
+
+  const mapActions = (action: typeof groupActions[0], index: number) => (
+    // @ts-ignore
     <GroupActionButton active={active} {...action} key={index} />
   );
 
-  const sendSlidesToResearchers = (researchers) =>
+  const sendSlidesToResearchers = (researchers: string[]) =>
     shareQuestionsToResearchers(researchers, selectedSlides);
 
-  if (loading || questions.length === 0) return <Loader size={100} />;
+  // @ts-ignore
+  if (questions.length === 0) return <Loader size={100} />;
 
-  const selectSlide = (slideId) =>
+  const selectSlide = (slideId: string) =>
     setSelectedSlides(xor(selectedSlides, [slideId]));
 
-  const checkSelectedGroup = (gQuestions) =>
+  const checkSelectedGroup = (gQuestions: QuestionDto[]) =>
     gQuestions.every(({ id }) => selectedSlides.includes(id));
 
   const handleCloseManage = () => {
@@ -365,7 +395,7 @@ function EditSessionPage({
     setSelectedSlides([]);
   };
 
-  const toggleGroup = (gQuestions) => {
+  const toggleGroup = (gQuestions: QuestionDto[]) => {
     const allSelected = checkSelectedGroup(gQuestions);
     let q = gQuestions;
     if (!allSelected) {
@@ -380,22 +410,19 @@ function EditSessionPage({
   };
 
   const finishGroup = groups.find((group) => group.type === FinishGroupType);
+
   const filteredGroups = groups.filter(
     (group) => group.type !== FinishGroupType,
   );
 
   return (
-    <EditSessionPageContext.Provider
-      value={{
-        sessionId: params.sessionId,
-        interventionId: params.interventionId,
-      }}
-    >
+    <>
       <Helmet>
         <title>
           {formatMessage(messages.pageTitle, { name: sessionName })}
         </title>
       </Helmet>
+      {/* @ts-ignore */}
       <Modal
         title={formatMessage(messages.modalTitle)}
         onClose={() => setModalVisible(false)}
@@ -446,6 +473,7 @@ function EditSessionPage({
             {manage && (
               <Row mb={10} justify="between">
                 <Row>{groupActions.map(mapActions)}</Row>
+                {/* @ts-ignore */}
                 <ActionIcon
                   mr="0"
                   onClick={handleCloseManage}
@@ -470,7 +498,7 @@ function EditSessionPage({
                           editingPossible={editingPossible}
                           changeGroupName={changeGroupName}
                           checkSelectedGroup={checkSelectedGroup}
-                          sessionId={params.sessionId}
+                          sessionId={sessionId}
                           manage={manage}
                           questionGroup={questionGroup}
                           selectSlide={selectSlide}
@@ -497,7 +525,7 @@ function EditSessionPage({
                   editingPossible={editingPossible}
                   changeGroupName={changeGroupName}
                   checkSelectedGroup={checkSelectedGroup}
-                  sessionId={params.sessionId}
+                  sessionId={sessionId}
                   manage={manage}
                   questionGroup={finishGroup}
                   selectSlide={selectSlide}
@@ -530,6 +558,7 @@ function EditSessionPage({
             title={formatMessage(messages.showQuestionsBoxLabel)}
             {...hoverListProps}
           >
+            {/* @ts-ignore */}
             <Icon src={menu} alt="questions-list" />
           </ShowListButton>
         </QuestionsRow>
@@ -545,45 +574,18 @@ function EditSessionPage({
           </Row>
         </Column>
       </Row>
-    </EditSessionPageContext.Provider>
+    </>
   );
-}
-
-EditSessionPage.propTypes = {
-  groups: PropTypes.array,
-  questions: PropTypes.arrayOf(PropTypes.shape(Question)),
-  selectedQuestion: PropTypes.string.isRequired,
-  match: PropTypes.object,
-  getSession: PropTypes.func,
-  createQuestion: PropTypes.func,
-  reorderQuestions: PropTypes.func,
-  reorderGroups: PropTypes.func,
-  getQuestionsLoading: PropTypes.bool,
-  getSessionLoader: PropTypes.bool,
-  copyQuestions: PropTypes.func,
-  deleteQuestions: PropTypes.func,
-  groupQuestions: PropTypes.func,
-  shareQuestionsToResearchers: PropTypes.func,
-  changeGroupName: PropTypes.func,
-  getQuestionGroups: PropTypes.func,
-  fetchInterventions: PropTypes.func,
-  fetchReportTemplates: PropTypes.func,
-  interventionStatus: PropTypes.string,
-  session: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   questions: makeSelectQuestions(),
   selectedQuestion: makeSelectSelectedQuestionId(),
-  getSessionLoader: makeSelectSessionLoader('getSession'),
   createQuestionsLoader: makeSelectLoader('createQuestionLoading'),
   groups: makeSelectQuestionGroups(),
-  interventionStatus: makeSelectInterventionStatus(),
-  session: makeSelectSession(),
 });
 
 const mapDispatchToProps = {
-  getSession: getSessionRequest,
   createQuestion: createQuestionRequest,
   reorderQuestions: reorderQuestionListRequest,
   reorderGroups: reorderGroupListRequest,
@@ -593,39 +595,23 @@ const mapDispatchToProps = {
   shareQuestionsToResearchers: shareQuestionsToResearchersRequest,
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
-  fetchInterventions: fetchInterventionsRequest,
-  fetchReportTemplates: fetchReportTemplatesRequest,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withSaga = injectSaga({
-  key: 'editInterventionPage',
-  saga: editInterventionPageSaga,
-});
-
 export default compose(
   injectReducer({ key: 'questions', reducer: questionsReducer }),
-  injectReducer({ key: 'session', reducer: sessionReducer }),
-  injectReducer({ key: 'localState', reducer: localStateReducer }),
+  // @ts-ignore
   injectReducer({ key: 'questionGroups', reducer: questionGroupsReducer }),
-  injectReducer({ key: 'intervention', reducer: interventionReducer }),
-  injectReducer({ key: 'interventions', reducer: interventionsReducer }),
   injectReducer({ key: 'copyModal', reducer: copyModalReducer }),
-  injectReducer({ key: 'reportTemplates', reducer: reportTemplatesReducer }),
-  injectSaga({ key: 'getSession', saga: getSessionSaga }),
   injectSaga({
     key: 'getQuestionGroupsSaga',
     saga: getQuestionGroupsSaga,
   }),
-  injectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga }),
-  injectSaga({ key: 'fetchInterventions', saga: fetchInterventionsSaga }),
-  injectSaga({ key: 'reportTemplatesSaga', saga: reportTemplatesSaga }),
   injectSaga({ key: 'copyModal', saga: allCopyModalSagas }),
   injectSaga({
     key: 'reorderQuestionGroups',
     saga: reorderQuestionGroupsSaga,
   }),
   withConnect,
-  withSaga,
-)(EditSessionPage);
+)(EditClassicSessionPage) as React.ComponentType<NonReduxProps>;

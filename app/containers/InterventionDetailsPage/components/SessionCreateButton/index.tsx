@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { CLASSIC_SESSION } from 'models/Session/constants';
+import { SessionTypes } from 'models/Session/SessionDto';
 import Row from 'components/Row';
 import Img from 'components/Img';
 import H3 from 'components/H3';
@@ -34,7 +34,7 @@ const SessionCreateButton = ({
 
   const clickWrapper = () => {
     if (!canCreateCatSession) {
-      handleSessionCreation(CLASSIC_SESSION);
+      handleSessionCreation(SessionTypes.CLASSIC_SESSION);
     } else {
       setModalVisible(true);
     }
