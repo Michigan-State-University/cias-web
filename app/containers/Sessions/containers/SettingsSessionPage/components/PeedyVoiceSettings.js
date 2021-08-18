@@ -67,7 +67,11 @@ const PeedyVoiceSettings = ({
     if (selectedLanguage && selectedLanguage.value) {
       const languageVoices = ttsVoices[selectedLanguage.value];
       if (languageVoices && languageVoices.data) {
-        setSelectedVoice(languageVoices.data[0]);
+        setSelectedVoice(
+          languageVoices.data.find(
+            ({ value }) => value === selectedVoice?.value,
+          ) ?? languageVoices.data[0],
+        );
       }
     }
   };
