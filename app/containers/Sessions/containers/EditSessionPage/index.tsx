@@ -45,6 +45,7 @@ import editInterventionPageSaga from './saga';
 import messages from './messages';
 import { EditSessionPageContext } from './utils';
 import EditClassicSession from './EditClassicSession';
+import EditCatSession from './EditCatSession';
 
 interface MatchParams {
   interventionId: string;
@@ -111,6 +112,12 @@ const EditSessionPage = ({
           editingPossible={editingPossible}
           interventionStatus={interventionStatus}
           session={session as ClassicSessionDto}
+        />
+      )}
+      {type === SessionTypes.CAT_SESSION && (
+        <EditCatSession
+          editingPossible={editingPossible}
+          session={session as CatSessionDto}
         />
       )}
     </EditSessionPageContext.Provider>

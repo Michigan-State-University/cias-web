@@ -65,4 +65,12 @@ export default defineMessages({
     id: `${scope}.closeQuestionManagementLabel`,
     defaultMessage: 'Close Manage Groups',
   },
+  generalSettings: {
+    id: `${scope}.generalSettings`,
+    defaultMessage: 'General settings',
+  },
+  sessionDetails: {
+    id: `${scope}.sessionDetails`,
+    defaultMessage: 'Session details',
+  },
 });
