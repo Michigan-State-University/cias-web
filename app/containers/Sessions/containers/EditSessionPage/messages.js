@@ -73,4 +73,37 @@ export default defineMessages({
     id: `${scope}.sessionDetails`,
     defaultMessage: 'Session details',
   },
+  language: {
+    id: `${scope}.language`,
+    defaultMessage: 'Language',
+  },
+  timeFrame: {
+    id: `${scope}.timeFrame`,
+    defaultMessage: 'Time frame',
+  },
+  population: {
+    id: `${scope}.population`,
+    defaultMessage: 'Population',
+  },
+  variable: {
+    id: `${scope}.variable`,
+    defaultMessage: 'Session variable',
+  },
+  narratorVoiceType: {
+    id: `${scope}.narratorVoiceType`,
+    defaultMessage: 'Peedy voice type',
+  },
+  noTestsData: {
+    id: `${scope}.noTestsData`,
+    defaultMessage:
+      'Choose language, time frame and population to see available tests',
+  },
+  testsHeader: {
+    id: `${scope}.testsHeader`,
+    defaultMessage: 'Test types and their variables with scores',
+  },
+  saveChanges: {
+    id: `${scope}.saveChanges`,
+    defaultMessage: 'Save changes',
+  },
 });
