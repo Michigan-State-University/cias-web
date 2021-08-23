@@ -36,6 +36,7 @@ export const mapCurrentUser = (user) => ({
   smsNotification: user.attributes.sms_notification,
   feedbackCompleted: user.attributes.feedback_completed,
   organizableId: user.attributes.organizable_id,
+  abilityToCreateCatMh: user.attributes.ability_to_create_cat_mh,
 });
 
 export const pickUserAttributes = (user) =>
@@ -55,6 +56,7 @@ export const pickUserAttributes = (user) =>
     'emailNotification',
     'smsNotification',
     'feedbackCompleted',
+    'abilityToCreateCatMh',
   ]);
 
 export const mapTeam = (team) => ({
