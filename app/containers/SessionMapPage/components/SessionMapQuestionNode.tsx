@@ -1,23 +1,18 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useRef } from 'react';
 import { useIntl } from 'react-intl';
+import { NodeProps } from 'react-flow-renderer';
 
-import { htmlToPlainText } from 'utils/htmlToPlainText';
-import { finishQuestion, QuestionTypes } from 'models/Session/QuestionTypes';
-import globalMessages from 'global/i18n/globalMessages';
+import { finishQuestion } from 'models/Session/QuestionTypes';
 
 import { themeColors } from 'theme';
 import Box from 'components/Box';
-import Row from 'components/Row';
-import StyledCircle from 'components/Circle/StyledCircle';
-import Text from 'components/Text';
-import Divider from 'components/Divider';
-import Switch from 'components/Switch';
-import EllipsisText from 'components/Text/EllipsisText';
 
 import messages from '../messages';
 import { QuestionTileData } from '../types';
 import { sessionMapColors } from '../constants';
 import SessionMapNodeHandles from './SessionMapNodeHandles';
+import SessionMapQuestionNodeDetailedInfo from './SessionMapQuestionNodeDetailedInfo';
+import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
 
 const getBorder = (detailsShown: boolean) =>
   detailsShown
@@ -25,18 +20,21 @@ const getBorder = (detailsShown: boolean) =>
     : `1px solid ${sessionMapColors.nodeBase}`;
 
 const SessionMapQuestionNode = ({
-  data: { question, showDetails, onShowDetailsChange },
-}: {
-  data: QuestionTileData;
-}): JSX.Element => {
+  data: { question, showDetails, onShowDetailsChange, showDetailedInfo, index },
+}: NodeProps<QuestionTileData>): JSX.Element => {
   const { formatMessage } = useIntl();
 
-  const { id, subtitle, type } = question;
+  const { id, type } = question;
 
   const border = useMemo(() => getBorder(showDetails), [showDetails]);
 
-  const handleToggle = (isToggled: boolean) =>
-    onShowDetailsChange(isToggled, id);
+  const nodeRef = useRef<HTMLElement>(null);
+
+  // save node height without border and padding on initial render
+  const detailedInfoHeight = useMemo(
+    () => nodeRef?.current?.firstElementChild?.clientHeight ?? 0,
+    [nodeRef.current],
+  );
 
   return (
     <>
@@ -48,44 +46,21 @@ const SessionMapQuestionNode = ({
         bg={themeColors.highlight}
         border={border}
         cursor="default"
+        ref={nodeRef}
       >
-        <Row align="center" mb={9}>
-          <StyledCircle
-            background={
-              QuestionTypes.find(({ id: typeId }) => typeId === type)?.color
-            }
-            size="7px"
-            mr={6}
+        {showDetailedInfo && (
+          <SessionMapQuestionNodeDetailedInfo
+            question={question}
+            showDetails={showDetails}
+            onShowDetailsChange={onShowDetailsChange}
           />
-          <Text fontSize={10} fontWeight="medium" color={themeColors.comment}>
-            {
-              // @ts-ignore
-              formatMessage(globalMessages.questionTypes[type])
-            }
-          </Text>
-        </Row>
-        <EllipsisText
-          text={htmlToPlainText(subtitle)}
-          dataFor={id}
-          lines={2}
-          fontSize={12}
-          fontWeight="bold"
-        />
-        <Divider my={16} />
-        <Row align="center">
-          {
-            // @ts-ignore
-            <Switch
-              checked={showDetails}
-              mr={10}
-              onToggle={(isToggled: boolean) => handleToggle(isToggled)}
-              id={`show-details-switch-${id}`}
-            />
-          }
-          <Text fontSize={12} fontWeight="bold" color={themeColors.comment}>
-            {formatMessage(messages.showDetails)}
-          </Text>
-        </Row>
+        )}
+        {!showDetailedInfo && (
+          <SessionMapNodeBriefInfo
+            height={detailedInfoHeight}
+            info={formatMessage(messages.screenNo, { no: index + 1 })}
+          />
+        )}
       </Box>
       <SessionMapNodeHandles
         nodeId={id}
@@ -94,5 +69,4 @@ const SessionMapQuestionNode = ({
     </>
   );
 };
-
 export default memo(SessionMapQuestionNode);

@@ -37,6 +37,7 @@ import {
   defaultZoom,
   defaultMaxZoom,
   sessionMapColors,
+  detailedInfoZoomThreshold,
 } from '../constants';
 import SessionMapScrollbar from './SessionMapScrollbar';
 
@@ -100,16 +101,22 @@ const SessionMap = ({
     [],
   );
 
+  const showDetailedInfo = useMemo(
+    () => zoom > detailedInfoZoomThreshold,
+    [zoom],
+  );
+
   const elements = useMemo(
     () => [
       ...createMapNodesFromQuestions(
         questions,
         selectedQuestionId,
         handleShowDetailsToggle,
+        showDetailedInfo,
       ),
       ...createMapEdgesFromQuestions(questions),
     ],
-    [questions, selectedQuestionId],
+    [questions, selectedQuestionId, showDetailedInfo],
   );
 
   const { layoutedElements, panAreaWidth, panAreaHeight } = useMemo(

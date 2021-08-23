@@ -29,4 +29,8 @@ export default defineMessages({
     id: `${scope}.showDetails`,
     defaultMessage: 'Show details',
   },
+  screenNo: {
+    id: `${scope}.screenNo`,
+    defaultMessage: 'Screen {no}',
+  },
 });

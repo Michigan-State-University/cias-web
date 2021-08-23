@@ -27,8 +27,9 @@ export const createMapNodesFromQuestions = (
   questions: Question[],
   showDetailsId: string,
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void,
+  showDetailedInfo: boolean,
 ): Node<QuestionTileData>[] =>
-  questions.map((question) => ({
+  questions.map((question, index) => ({
     id: question.id,
     type: 'question',
     position: { x: 0, y: 0 },
@@ -36,6 +37,8 @@ export const createMapNodesFromQuestions = (
       question,
       showDetails: question.id === showDetailsId,
       onShowDetailsChange,
+      showDetailedInfo,
+      index,
     },
   }));
 

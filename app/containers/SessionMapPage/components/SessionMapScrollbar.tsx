@@ -35,7 +35,7 @@ const SessionMapScrollbar = ({
       current: { offsetWidth, offsetHeight },
     } = containerRef;
     return horizontal ? offsetWidth : offsetHeight;
-  }, [containerRef.current]);
+  }, [containerRef.current?.offsetHeight, containerRef.current?.offsetWidth]);
 
   const scrollbarSize = useMemo(
     () => Math.round(sizeRatio * containerSize),
