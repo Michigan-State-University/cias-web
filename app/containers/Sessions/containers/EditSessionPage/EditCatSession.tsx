@@ -37,6 +37,7 @@ const EditCatSession = ({
     selectedTestIds: [],
   });
   const [testsUrl, setTestsUrl] = useState('');
+  const [languagesUrl, setLanguagesUrl] = useState('');
 
   useEffect(() => {
     const { selectedLanguage, selectedTimeFrame, selectedPopulation } =
@@ -51,6 +52,13 @@ const EditCatSession = ({
     formData.selectedTimeFrame,
     formData.selectedPopulation,
   ]);
+
+  useEffect(() => {
+    if (!formData.selectedLanguage) return;
+    setLanguagesUrl(
+      `/v1/cat_mh/languages/${formData.selectedLanguage.value}/voices`,
+    );
+  }, [formData.selectedLanguage]);
 
   const updateFormData = (key: string, value: any) =>
     setFormData({ ...formData, [key]: value });
@@ -165,17 +173,17 @@ const EditCatSession = ({
               {formatMessage(messages.narratorVoiceType)}
             </Text>
             <ApiSelect
-              url="/v1/cat_mh/populations"
-              dataParser={(data: any) => jsonApiToArray(data, 'population')}
+              url={languagesUrl}
+              dataParser={(data: any) => jsonApiToArray(data, 'voice')}
               selectProps={{
                 onChange: (value: any) =>
                   updateFormData('selectedVoice', value),
                 value: formData.selectedVoice,
-                isDisabled: !editingPossible,
+                isDisabled: !editingPossible || !languagesUrl,
               }}
-              optionsFormatter={({ id, name }: any) => ({
+              optionsFormatter={({ id, languageCode, voiceLabel }: any) => ({
                 value: id,
-                label: name,
+                label: `${languageCode} ${voiceLabel}`,
               })}
             />
           </Box>
