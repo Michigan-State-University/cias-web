@@ -302,6 +302,35 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
+            class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 fyfnXk jKoKLe"
+            width="100%"
+          >
+            <div
+              class="Box-sc-1vhutan-0 hlMeWb"
+              display="flex"
+            >
+              <div
+                class="styled__SwitchWrapper-k9teya-0 hucWtb"
+              >
+                <input
+                  class="styled__SwitchInput-k9teya-1 hdJnOF"
+                  data-cy="branching-intervention-toggle"
+                  data-testid="switch-input"
+                  id="ability-to-create-cat-mh"
+                  type="checkbox"
+                />
+                <span
+                  class="styled__Slider-k9teya-2 jYsxIO"
+                />
+              </div>
+              <p
+                class="Text-e4p0w3-0 kbVxuh"
+              >
+                Can create Cat-MH(TM) sessions
+              </p>
+            </div>
+          </div>
+          <div
             class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 eomgnk jKoKLe"
             width="100%"
           />
