@@ -54,6 +54,8 @@ const colors = {
   vermilion: '#D2371D',
   aliceBlue: '#F1F4F9',
   electricPurple: '#B727EA',
+  periwinkleGray: '#B3C1E1',
+  solitude: '#E6EDFD',
   red: '#BE4745',
   red5: '#FCF6F6',
   blue: '#3F88C5',

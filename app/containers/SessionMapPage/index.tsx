@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { push } from 'connected-react-router';
+import { ReactFlowProvider } from 'react-flow-renderer';
 
 import {
   getSessionRequest,
   getSessionSaga,
-  makeSelectSession,
   makeSelectSessionError,
   sessionReducer,
   makeSelectSessionLoader,
@@ -18,25 +18,37 @@ import {
   fetchInterventionSaga,
   interventionReducer,
 } from 'global/reducers/intervention';
+import {
+  makeSelectQuestions,
+  questionsReducer,
+  selectQuestion,
+} from 'global/reducers/questions';
+import {
+  getQuestionGroupsRequest,
+  getQuestionGroupsSaga,
+  makeSelectGetQuestionGroupLoader,
+  makeSelectGetQuestionGroupError,
+  makeSelectQuestionGroups,
+  questionGroupsReducer,
+} from 'global/reducers/questionGroups';
+import { QuestionGroup } from 'global/types/questionGroup';
+import { Question } from 'global/types/question';
 
-import { Container } from 'components/ReactGridSystem';
-import H2 from 'components/H2';
+import useQuery from 'utils/useQuery';
+
 import Loader from 'components/Loader';
+import Column from 'components/Column';
 
 import messages from './messages';
+import { sortQuestionsByGroupAndPosition } from './utils';
+import SessionMapHeader from './components/SessionMapHeader';
+import SessionMap from './components/SessionMap';
+import SessionMapFooter from './components/SessionMapFooter';
+import { defaultMaxZoom, defaultMinZoom, defaultZoom } from './constants';
 
 type RouteParams = {
   interventionId: string;
   sessionId: string;
-};
-
-const mainContainerStyle = {
-  height: '100%',
-  maxWidth: '100%',
-  marginLeft: 5,
-  marginRight: 5,
-  paddingTop: 30,
-  paddingBottom: 15,
 };
 
 const SessionMapPage = (): JSX.Element => {
@@ -48,11 +60,35 @@ const SessionMapPage = (): JSX.Element => {
 
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
-  const loading = useSelector(makeSelectSessionLoader('getSession'));
-  const error = useSelector(makeSelectSessionError('getSession'));
-  const { id } = useSelector(makeSelectSession());
+  const sessionLoading = useSelector(makeSelectSessionLoader('getSession'));
+  const sessionError = useSelector(makeSelectSessionError('getSession'));
+
+  // @ts-ignore
+  useInjectReducer({ key: 'questionGroups', reducer: questionGroupsReducer });
+  useInjectSaga({ key: 'questionGroupsSaga', saga: getQuestionGroupsSaga });
+  const questionGroups = useSelector(
+    makeSelectQuestionGroups(),
+  ) as QuestionGroup[];
+  const questionGroupsLoading = useSelector(makeSelectGetQuestionGroupLoader());
+  const questionGroupsError = useSelector(makeSelectGetQuestionGroupError());
+
+  useInjectReducer({ key: 'questions', reducer: questionsReducer });
+  const questions = useSelector(makeSelectQuestions()) as Question[];
+
+  const sortedQuestions = useMemo(
+    () => sortQuestionsByGroupAndPosition(questionGroups, questions),
+    [questions, questionGroups],
+  );
 
   const { interventionId, sessionId } = useParams<RouteParams>();
+  const userSessionId = useQuery('userSessionId');
+
+  const [showWithBranchingOnly, setShowWithBranchingOnly] = useState(false);
+
+  const [zoom, setZoom] = useState(defaultZoom);
+  const [minZoom, setMinZoom] = useState(defaultMinZoom);
+  const handleZoomIn = () => setZoom(Math.min(defaultMaxZoom, zoom + 0.25));
+  const handleZoomOut = () => setZoom(Math.max(minZoom, zoom - 0.25));
 
   useEffect(() => {
     dispatch(
@@ -61,24 +97,52 @@ const SessionMapPage = (): JSX.Element => {
         interventionId,
       }),
     );
+    dispatch(getQuestionGroupsRequest(sessionId));
   }, []);
 
   useEffect(() => {
-    if (error) {
+    dispatch(selectQuestion(''));
+  }, [questions]);
+
+  useEffect(() => {
+    if (sessionError || questionGroupsError) {
       dispatch(push(`/interventions/${interventionId}`));
     }
-  }, [error]);
+  }, [sessionError, questionGroupsError]);
 
   return (
-    <Container style={mainContainerStyle}>
+    <Column height="100%" pt={40} pb={15} px={20}>
       <Helmet>
         <title>{formatMessage(messages.sessionMap)}</title>
       </Helmet>
-      {
+      {sessionLoading || questionGroupsLoading ? (
         // @ts-ignore
-        loading ? <Loader /> : <H2>{id}</H2>
-      }
-    </Container>
+        <Loader />
+      ) : (
+        <>
+          <SessionMapHeader
+            showWithBranchingOnly={showWithBranchingOnly}
+            onShowWithBranchingOnlyChange={setShowWithBranchingOnly}
+          />
+          <ReactFlowProvider>
+            <SessionMap
+              questions={sortedQuestions}
+              zoom={zoom}
+              onZoomChange={setZoom}
+              minZoom={minZoom}
+              onMinZoomChange={setMinZoom}
+            />
+          </ReactFlowProvider>
+          <SessionMapFooter
+            afterPreview={Boolean(userSessionId)}
+            zoomIn={handleZoomIn}
+            zoomOut={handleZoomOut}
+            zoomInDisabled={zoom === defaultMaxZoom}
+            zoomOutDisabled={zoom === minZoom}
+          />
+        </>
+      )}
+    </Column>
   );
 };
 

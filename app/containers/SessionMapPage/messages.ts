@@ -12,4 +12,21 @@ export default defineMessages({
     id: `${scope}.sessionMap`,
     defaultMessage: 'Session Map',
   },
+  sessionMapComment: {
+    id: `${scope}.sessionMapComment`,
+    defaultMessage:
+      'The session map is a tool that allows you to see the entire survey process.',
+  },
+  showWithBranchingOnly: {
+    id: `${scope}.showWithBranchingOnly`,
+    defaultMessage: 'Show screens only with branching',
+  },
+  afterPreview: {
+    id: `${scope}.afterPreview`,
+    defaultMessage: 'After user preview session',
+  },
+  showDetails: {
+    id: `${scope}.showDetails`,
+    defaultMessage: 'Show details',
+  },
 });

@@ -16,7 +16,6 @@ import {
   GET_QUESTION_GROUPS_REQUEST,
   GET_QUESTION_GROUPS_SUCCESS,
   GET_QUESTION_GROUPS_ERROR,
-  CREATE_QUESTION_IN_GROUP,
   REORDER_GROUP_LIST_REQUEST,
   REORDER_GROUP_LIST_SUCCESS,
   REORDER_GROUP_LIST_ERROR,
@@ -63,9 +62,6 @@ export const getQuestionGroupsSuccess = (groups) =>
   actionBuilder(GET_QUESTION_GROUPS_SUCCESS, { groups });
 export const getQuestionGroupsError = (error) =>
   actionBuilder(GET_QUESTION_GROUPS_ERROR, { error });
-
-export const createNewQuestionInGroup = (question, groupId) =>
-  actionBuilder(CREATE_QUESTION_IN_GROUP, { question, groupId });
 
 export const reorderGroupListRequest = (payload) =>
   actionBuilder(REORDER_GROUP_LIST_REQUEST, payload);

@@ -6,7 +6,6 @@ import { FinishGroupType } from 'models/Session/GroupTypes';
 import { ternary } from 'utils/ternary';
 import {
   GET_QUESTION_GROUPS_SUCCESS,
-  CREATE_QUESTION_IN_GROUP,
   GROUP_QUESTIONS_SUCCESS,
   CHANGE_GROUP_NAME_REQUEST,
   SAVING_ACTIONS,
@@ -30,6 +29,9 @@ export const initialState = {
   loaders: {
     questionGroupsLoading: false,
   },
+  errors: {
+    questionGroupsError: null,
+  },
   cache: {
     groups: null,
   },
@@ -45,6 +47,7 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
       case GET_QUESTION_GROUPS_REQUEST: {
         draft.sessionId = payload.sessionId;
         draft.loaders.questionGroupsLoading = true;
+        draft.errors.questionGroupsError = null;
         draft.groups = [];
         break;
       }
@@ -52,18 +55,13 @@ const questionGroupsReducer = (state = initialState, { type, payload }) =>
         draft.groups = payload.groups;
         draft.cache.groups = payload.groups;
         draft.loaders.questionGroupsLoading = false;
+        draft.errors.questionGroupsError = null;
         break;
       }
       case GET_QUESTION_GROUPS_ERROR: {
         draft.sessionId = null;
         draft.loaders.questionGroupsLoading = false;
-        break;
-      }
-      case CREATE_QUESTION_IN_GROUP: {
-        const index = state.groups.findIndex(
-          ({ id }) => id === payload.groupId,
-        );
-        draft.groups[index].questions = true;
+        draft.errors.questionGroupsError = payload.error;
         break;
       }
       case GROUP_QUESTIONS_SUCCESS: {

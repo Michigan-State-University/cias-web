@@ -30,3 +30,9 @@ export const makeSelectGetQuestionGroupLoader = () =>
     selectQuestionGroups,
     (substate) => substate.loaders.questionGroupsLoading,
   );
+
+export const makeSelectGetQuestionGroupError = () =>
+  createSelector(
+    selectQuestionGroups,
+    (substate) => substate.errors.questionGroupsError,
+  );
