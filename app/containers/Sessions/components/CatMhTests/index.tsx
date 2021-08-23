@@ -45,7 +45,7 @@ const CatMhTests = ({
     <Container>
       <Row>
         {data?.map((test) => (
-          <Col my={20} sm={6}>
+          <Col key={test.id} my={20} sm={6}>
             <TestItem
               test={test}
               selected={selectedTestIds.includes(test.id)}
