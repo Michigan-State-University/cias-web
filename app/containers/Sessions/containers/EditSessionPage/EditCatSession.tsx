@@ -37,20 +37,31 @@ const EditCatSession = ({
     selectedTestIds: [],
   });
   const [testsUrl, setTestsUrl] = useState('');
+  const [languagesUrl, setLanguagesUrl] = useState('');
 
   useEffect(() => {
     const { selectedLanguage, selectedTimeFrame, selectedPopulation } =
       formData;
     if (!selectedLanguage || !selectedTimeFrame || !selectedPopulation) return;
 
-    setTestsUrl(
-      `/v1/cat_mh/available_test_types?language_id=${selectedLanguage.value}&population_id=${selectedPopulation.value}&time_frame_id=${selectedTimeFrame.value}`,
-    );
+    const params = new URLSearchParams();
+    params.append('language_id', selectedLanguage.value);
+    params.append('population_id', selectedPopulation.value);
+    params.append('time_frame_id', selectedTimeFrame.value);
+
+    setTestsUrl(`/v1/cat_mh/available_test_types?${params.toString()}`);
   }, [
     formData.selectedLanguage,
     formData.selectedTimeFrame,
     formData.selectedPopulation,
   ]);
+
+  useEffect(() => {
+    if (!formData.selectedLanguage) return;
+    setLanguagesUrl(
+      `/v1/cat_mh/languages/${formData.selectedLanguage.value}/voices`,
+    );
+  }, [formData.selectedLanguage]);
 
   const updateFormData = (key: string, value: any) =>
     setFormData({ ...formData, [key]: value });
@@ -81,6 +92,15 @@ const EditCatSession = ({
     );
   };
 
+  const wrapWithLabel = (label: string, children: JSX.Element) => (
+    <Box width="100%" mx={5}>
+      <Text fontSize={13} mb={5}>
+        {label}
+      </Text>
+      {children}
+    </Box>
+  );
+
   return (
     <Box display="flex" justify="center" align="center">
       <Box
@@ -103,10 +123,8 @@ const EditCatSession = ({
           {formatMessage(messages.sessionDetails)}
         </Text>
         <Box display="flex" justify="between" align="center">
-          <Box width="100%" mx={5}>
-            <Text fontSize={13} mb={5}>
-              {formatMessage(messages.language)}
-            </Text>
+          {wrapWithLabel(
+            formatMessage(messages.language),
             <ApiSelect
               url="/v1/cat_mh/languages"
               dataParser={(data: any) => jsonApiToArray(data, 'language')}
@@ -120,12 +138,10 @@ const EditCatSession = ({
                 value: id,
                 label: name,
               })}
-            />
-          </Box>
-          <Box width="100%" mx={5}>
-            <Text fontSize={13} mb={5}>
-              {formatMessage(messages.timeFrame)}
-            </Text>
+            />,
+          )}
+          {wrapWithLabel(
+            formatMessage(messages.timeFrame),
             <ApiSelect
               url="/v1/cat_mh/time_frames"
               dataParser={(data: any) => jsonApiToArray(data, 'timeFrame')}
@@ -139,12 +155,10 @@ const EditCatSession = ({
                 value: id,
                 label: description,
               })}
-            />
-          </Box>
-          <Box width="100%" mx={5}>
-            <Text fontSize={13} mb={5}>
-              {formatMessage(messages.population)}
-            </Text>
+            />,
+          )}
+          {wrapWithLabel(
+            formatMessage(messages.population),
             <ApiSelect
               url="/v1/cat_mh/populations"
               dataParser={(data: any) => jsonApiToArray(data, 'population')}
@@ -158,38 +172,34 @@ const EditCatSession = ({
                 value: id,
                 label: name,
               })}
-            />
-          </Box>
-          <Box width="100%" mx={5}>
-            <Text fontSize={13} mb={5}>
-              {formatMessage(messages.narratorVoiceType)}
-            </Text>
+            />,
+          )}
+          {wrapWithLabel(
+            formatMessage(messages.narratorVoiceType),
             <ApiSelect
-              url="/v1/cat_mh/populations"
-              dataParser={(data: any) => jsonApiToArray(data, 'population')}
+              url={languagesUrl}
+              dataParser={(data: any) => jsonApiToArray(data, 'voice')}
               selectProps={{
                 onChange: (value: any) =>
                   updateFormData('selectedVoice', value),
                 value: formData.selectedVoice,
-                isDisabled: !editingPossible,
+                isDisabled: !editingPossible || !languagesUrl,
               }}
-              optionsFormatter={({ id, name }: any) => ({
+              optionsFormatter={({ id, languageCode, voiceLabel }: any) => ({
                 value: id,
-                label: name,
+                label: `${languageCode} ${voiceLabel}`,
               })}
-            />
-          </Box>
-          <Box width="100%" mx={5}>
-            <Text fontSize={13} mb={5}>
-              {formatMessage(messages.variable)}
-            </Text>
+            />,
+          )}
+          {wrapWithLabel(
+            formatMessage(messages.variable),
             <Input
               disabled={!editingPossible}
               mx={5}
               defaultValue={formData.sessionVariable}
               onBlur={(value: any) => updateFormData('sessionVariable', value)}
-            ></Input>
-          </Box>
+            ></Input>,
+          )}
         </Box>
         <Row my={30}>
           <Divider />
