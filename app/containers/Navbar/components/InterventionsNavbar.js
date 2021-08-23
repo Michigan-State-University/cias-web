@@ -43,6 +43,7 @@ import {
 import { redirectToPreview } from 'containers/AnswerSessionPage/actions';
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit, canPreview } from 'models/Status/statusPermissions';
+import { SessionTypes } from 'models/Session/SessionDto';
 import messages from './messages';
 import {
   StyledLink,
@@ -71,6 +72,7 @@ const InterventionNavbar = ({
     smsPlansCount,
     generatedReportCount,
     interventionOwnerId,
+    type,
   },
   reportsLoaders: { updateReportTemplateLoading },
   textLoaders,
@@ -245,15 +247,17 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-        <div
-          renderAsLink={
-            <StyledLink
-              to={`/interventions/${interventionId}/sessions/${sessionId}/map`}
-            >
-              {formatMessage(messages.sessionMap)}
-            </StyledLink>
-          }
-        />
+        {type === SessionTypes.CLASSIC_SESSION && (
+          <div
+            renderAsLink={
+              <StyledLink
+                to={`/interventions/${interventionId}/sessions/${sessionId}/map`}
+              >
+                {formatMessage(messages.sessionMap)}
+              </StyledLink>
+            }
+          />
+        )}
       </Tabs>
       <Box display="flex" align="center">
         <SaveInfoContainer>
@@ -292,6 +296,7 @@ InterventionNavbar.propTypes = {
     id: PropTypes.string,
     interventionOwnerId: PropTypes.string,
     generatedReportCount: PropTypes.number,
+    type: PropTypes.string,
   }),
   updateSessionName: PropTypes.func,
   intl: PropTypes.shape(IntlShape),
