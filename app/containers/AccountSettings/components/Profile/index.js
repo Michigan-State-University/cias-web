@@ -115,7 +115,7 @@ Profile.propTypes = {
   TimezoneComponent: PropTypes.object,
   DeactivationComponent: PropTypes.object,
   PhoneNumberComponent: PropTypes.object,
-  CatMhSettingsComponent: PropTypes.object,
+  CatMhSettingsComponent: PropTypes.func,
 };
 
 Profile.defaultProps = {
