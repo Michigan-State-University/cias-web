@@ -1,22 +1,214 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: auto;
+  position: absolute;
+  display: none;
+  background-color: rgba(255,255,255,1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  border-radius: 10px;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 8px;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-right: 8px;
+  padding-left: 8px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: rgba(233,241,251,1);
+}
+
+.c10 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.c4 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+}
+
+.c4:hover {
+  -webkit-text-decoration: underline;
+  text-decoration: underline;
+}
+
+.c9 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  margin-right: 9px;
+  width: 100%;
+  height: auto;
+  max-width: initial;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c9:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c9:disabled {
+  color: #ABBBD1;
+}
+
+.c11 {
+  height: 40px;
+  border: 1px dashed #B0BAC9;
+  color: #B0BAC9;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  font-weight: bold;
+  border-radius: 4px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.c11:hover {
+  background-color: #107969;
+  color: #FFFFFF;
+  border: none;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 ekpwZH"
+    class="c0"
   >
     <div
-      class="Row-y1cs0u-0 ddPUgf"
+      class="c1"
     >
       Formula
       <div
-        class="Box-sc-1vhutan-0 eamgEw"
+        class="c2"
       >
         <div
-          class="Box-sc-1vhutan-0 gfyFJD"
+          class="c3"
         >
           <p
-            class="Text-e4p0w3-0 lmzfCF"
+            class="c4"
             color="#B727EA"
             font-weight="bold"
           >
@@ -24,27 +216,27 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
           </p>
         </div>
         <div
-          class="Box-sc-1vhutan-0 bvPvIe"
+          class="c5"
           display="none"
           width="auto"
         >
           <div
-            class="Row-y1cs0u-0 dskFsL"
+            class="c6"
           >
             <div
-              class="Box-sc-1vhutan-0 fOicvH"
+              class="c7"
             />
           </div>
         </div>
       </div>
     </div>
     <div
-      class="Box-sc-1vhutan-0 dSHbNt"
+      class="c8"
       width="100%"
     >
       <textarea
         aria-label="Enter formula here... (You can use mathematical operators +, -, *, /)"
-        class="TextArea-sc-175uiux-0 kmGeZJ"
+        class="c9"
         data-cy="text-area"
         height="auto"
         placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
@@ -54,7 +246,7 @@ exports[`<BranchingTab /> Should render and match the snapshot 1`] = `
       />
     </div>
     <div
-      class="Box-sc-1vhutan-0 styled__DashedBox-g59fuj-0 kvIAfn dyejuR"
+      class="c10 c11"
     >
       + Add case
     </div>

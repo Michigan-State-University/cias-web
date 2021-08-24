@@ -1,72 +1,325 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 100%;
+  padding: 35px;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  cursor: pointer;
+}
+
+.c14 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  font-weight: 400;
+  color: #2F3850;
+}
+
+.c4 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-bottom: 25px;
+  color: #2F3850;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 25px;
+}
+
+.c9 {
+  display: none;
+}
+
+.c8:disabled + label > .c12 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c11 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c11:hover {
+  cursor: pointer;
+}
+
+.c8:disabled + .c10 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c13 {
+  margin-left: 5px;
+}
+
+.c2 {
+  box-shadow: 0px 4px 20px #E3EEFB;
+  background-color: #FFFFFF;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 ekpwZH"
+    class="c0"
   >
     <div
-      class="Box-sc-1vhutan-0 styled__StyledBox-w5tasd-0 dvfkZg dBQBvk"
+      class="c1 c2"
     >
       <div
-        class="Column-sc-4zswzq-0 jnrASG"
+        class="c3"
         width="100%"
       >
         <h2
-          class="H2-uw8lbl-0 bzPnix"
+          class="c4"
         >
           Who can access this intervention?
         </h2>
         <div
-          class="Box-sc-1vhutan-0 lmDegy"
+          class="c5"
         >
           <div
-            class="Row-y1cs0u-0 bNHlls"
-            disabled=""
+            class="c6"
             width="fit-content"
           >
-            <img
-              src="IMAGE_MOCK"
-            />
-            <p
-              class="Text-e4p0w3-0 eDRzdo"
-              font-size="15"
-              font-weight="regular"
+            <div
+              class="c7"
             >
-              Anyone with the link
-            </p>
+              <input
+                class="c8 c9"
+                disabled=""
+                id="access-radio-anyone"
+                type="radio"
+              />
+              <label
+                class="c10 c11"
+                for="access-radio-anyone"
+              >
+                <img
+                  class="c12 "
+                  src="IMAGE_MOCK"
+                />
+                <div
+                  class="c1 c13"
+                >
+                  <p
+                    class="c14"
+                    font-size="15"
+                    font-weight="regular"
+                  >
+                    Anyone with the link
+                  </p>
+                </div>
+              </label>
+            </div>
           </div>
           <div
-            class="Row-y1cs0u-0 bNHlls"
-            disabled=""
+            class="c6"
             width="fit-content"
           >
-            <img
-              src="IMAGE_MOCK"
-            />
-            <p
-              class="Text-e4p0w3-0 eDRzdo"
-              font-size="15"
-              font-weight="regular"
+            <div
+              class="c7"
             >
-              Any registered participant
-            </p>
+              <input
+                class="c8 c9"
+                disabled=""
+                id="access-radio-registered"
+                type="radio"
+              />
+              <label
+                class="c10 c11"
+                for="access-radio-registered"
+              >
+                <img
+                  class="c12 "
+                  src="IMAGE_MOCK"
+                />
+                <div
+                  class="c1 c13"
+                >
+                  <p
+                    class="c14"
+                    font-size="15"
+                    font-weight="regular"
+                  >
+                    Any registered participant
+                  </p>
+                </div>
+              </label>
+            </div>
           </div>
           <div
-            class="Row-y1cs0u-0 cQENWz"
-            disabled=""
+            class="c15"
             width="fit-content"
           >
-            <img
-              src="IMAGE_MOCK"
-            />
-            <p
-              class="Text-e4p0w3-0 eDRzdo"
-              font-size="15"
-              font-weight="regular"
+            <div
+              class="c7"
             >
-              Specific registered participants
-            </p>
+              <input
+                class="c8 c9"
+                disabled=""
+                id="access-radio-invited"
+                type="radio"
+              />
+              <label
+                class="c10 c11"
+                for="access-radio-invited"
+              >
+                <img
+                  class="c12 "
+                  src="IMAGE_MOCK"
+                />
+                <div
+                  class="c1 c13"
+                >
+                  <p
+                    class="c14"
+                    font-size="15"
+                    font-weight="regular"
+                  >
+                    Specific registered participants
+                  </p>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
       </div>

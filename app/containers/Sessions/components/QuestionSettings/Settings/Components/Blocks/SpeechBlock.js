@@ -158,12 +158,14 @@ const SpeechBlock = ({
       {block.type !== readQuestionBlockType && (
         <>
           <Row mt={15} align="center" justify="between">
-            {formatMessage(messages.reflectionToggle)}
             <Switch
+              id="reflection-toggle"
               disabled={disabled}
               mr={15}
               onToggle={() => switchToReflection(blockIndex, id)}
-            />
+            >
+              {formatMessage(messages.reflectionToggle)}
+            </Switch>
           </Row>
           <OriginalTextHover
             id={`question-${id}-speech-block-${blockIndex}`}

@@ -29,24 +29,31 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
     switch (setting?.constructor) {
       case Number:
         return (
-          <Input
-            placeholder={formatMessage(messages.textLimitSettingsPlaceholder)}
-            type="singleline"
-            keyboard="tel"
-            value={`${setting}`}
-            validator={numericValidator}
-            onBlur={handleStringToNumericUpdate}
-            width={150}
-          />
+          <>
+            <H3>{formatMessage(messages[`${index}`])}</H3>
+
+            <Input
+              placeholder={formatMessage(messages.textLimitSettingsPlaceholder)}
+              type="singleline"
+              keyboard="tel"
+              value={`${setting}`}
+              validator={numericValidator}
+              onBlur={handleStringToNumericUpdate}
+              width={150}
+            />
+          </>
         );
       case Boolean:
       default:
         return (
           <Switch
+            id={index}
             disabled={disabled}
             checked={setting}
             onToggle={handleUpdate}
-          />
+          >
+            <H3>{formatMessage(messages[`${index}`])}</H3>
+          </Switch>
         );
     }
   };
@@ -63,8 +70,6 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
           : null
       }
     >
-      <H3>{formatMessage(messages[`${index}`])}</H3>
-
       {renderSetting()}
     </Row>
   );

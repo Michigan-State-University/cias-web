@@ -1,21 +1,112 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
+.c3 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  width: calc(90% / 6);
+  color: #2F3850;
+  text-align: center;
+}
+
+.c3:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c3:disabled {
+  color: #ABBBD1;
+}
+
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: space-around;
+  -webkit-justify-content: space-around;
+  -ms-flex-pack: space-around;
+  justify-content: space-around;
+  justify-items: space-around;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 eExeGs"
+    class="c0"
   >
     <p
-      class="Text-e4p0w3-0 kFFPgx"
+      class="c1"
       width="fit-content"
     >
       Label
     </p>
     <div
-      class="Row-y1cs0u-0 fZNegU"
+      class="c2"
     >
       <input
-        class="Input-t9j2q5-0 iihhWY"
+        class="c3"
         maxlength="1"
         name="test"
         size="1"
@@ -23,7 +114,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
         width="calc(90% / 6)"
       />
       <input
-        class="Input-t9j2q5-0 iihhWY"
+        class="c3"
         maxlength="1"
         name="test"
         size="1"
@@ -31,7 +122,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
         width="calc(90% / 6)"
       />
       <input
-        class="Input-t9j2q5-0 iihhWY"
+        class="c3"
         maxlength="1"
         name="test"
         size="1"
@@ -39,7 +130,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
         width="calc(90% / 6)"
       />
       <input
-        class="Input-t9j2q5-0 iihhWY"
+        class="c3"
         maxlength="1"
         name="test"
         size="1"
@@ -47,7 +138,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
         width="calc(90% / 6)"
       />
       <input
-        class="Input-t9j2q5-0 iihhWY"
+        class="c3"
         maxlength="1"
         name="test"
         size="1"
@@ -55,7 +146,7 @@ exports[`<FormikCodeInput /> Should render and match the snapshot 1`] = `
         width="calc(90% / 6)"
       />
       <input
-        class="Input-t9j2q5-0 iihhWY"
+        class="c3"
         maxlength="1"
         name="test"
         size="1"

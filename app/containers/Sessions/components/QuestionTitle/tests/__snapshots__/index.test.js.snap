@@ -1,30 +1,154 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionTitle /> Should render and match the snapshot 1`] = `
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.c6 {
+  width: 100%;
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
+  border: 1px solid transparent;
+}
+
+.c6 .ql-editor {
+  font-weight: 400;
+  padding: 10px;
+  overflow: visible;
+}
+
+.c6 .ql-editor.ql-blank::before {
+  left: 11px;
+}
+
+.c6 .ql-picker-label svg {
+  margin-bottom: 15px !important;
+}
+
+.c6 .ql-toolbar {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c6 .ql-container {
+  font-size: 16px;
+  font-family: DM Sans;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 16px;
+  width: 100%;
+  max-width: 702px;
+  margin-bottom: 10px;
+}
+
+.c0:hover {
+  background-color: #E9F1FB;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 kUHPYz"
+    class="c0"
     width="100%"
   >
     <div
-      class="Row-y1cs0u-0 dskFsL"
+      class="c1"
     >
       <div
-        class="Box-sc-1vhutan-0 hWcsjg"
+        class="c2"
         display="flex"
       >
         <div
-          class="Box-sc-1vhutan-0 dvfkZg"
+          class="c3"
         >
           <div
-            class="Row-y1cs0u-0 gQFDhs"
+            class="c4"
             width="100%"
           >
             <div
-              class="Column-sc-4zswzq-0 ekpwZH"
+              class="c5"
             >
               <div
-                class="quill styled__QuillStyled-sc-10udg63-0 gUMdhZ"
+                class="quill c6"
               >
                 <div
                   class="ql-container ql-bubble"

@@ -18,12 +18,14 @@ const TestItem = ({
 }: Props): JSX.Element => (
   <Box display="flex" align="center">
     <Checkbox
-      mr={10}
+      id={`cat-mh-test-type-${id.toString()}`}
       checked={selected}
-      stroke={null}
-      onClick={() => onToggle(id)}
-    />
-    <Text fontSize={16}>{name}</Text>
+      onChange={() => onToggle(id)}
+    >
+      <Text ml={5} fontSize={16}>
+        {name}
+      </Text>
+    </Checkbox>
   </Box>
 );
 

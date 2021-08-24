@@ -85,11 +85,11 @@ import H3 from 'components/H3';
 import Icon from 'components/Icon';
 import Tooltip from 'components/Tooltip';
 
-import TranslateInterventionModal from 'containers/TranslateInterventionModal/index.tsx';
+import TranslateInterventionModal from 'containers/TranslateInterventionModal/index';
 import Header from './Header';
 import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
-import SessionCreateButton from './components/SessionCreateButton/index.tsx';
+import SessionCreateButton from './components/SessionCreateButton/index';
 import SessionListItem from './components/SessionListItem';
 import {
   InterventionAssignOrganizationModal,

@@ -29,7 +29,7 @@ import AccountSettings from '../AccountSettings';
 import WrappedAvatarFormAdmin from './containers/WrappedAvatarFormAdmin';
 import WrappedFullNameFormAdmin from './containers/WrappedFullNameFormAdmin';
 import WrappedDeactivationAdmin from './containers/WrappedDeactivationAdmin';
-import WrappedCatMhSettingAdmin from './containers/WrappedCatMhSettingAdmin.tsx';
+import WrappedCatMhSettingAdmin from './containers/WrappedCatMhSettingAdmin';
 import messages from './messages';
 
 export const UserDetails = ({

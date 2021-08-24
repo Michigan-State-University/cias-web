@@ -24,7 +24,7 @@ import rootSaga from 'global/sagas/rootSaga';
 import { makeSelectUser } from 'global/reducers/auth';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
-import EditSessionPage from 'containers/Sessions/containers/EditSessionPage';
+import EditSessionPage from 'containers/Sessions/containers/EditSessionPage/Loadable';
 import InterventionDetailsPage from 'containers/InterventionDetailsPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -49,7 +49,7 @@ import ClinicAdminRedirectPage from 'containers/ClinicAdminRedirectPage/Loadable
 import { VIEW } from 'containers/ReportingDashboardPage/constants';
 import ApiQueryMessageHandler from 'components/ApiQueryMessageHandler/Loadable';
 import ParticipantDashboard from 'containers/ParticipantDashboard/Loadable';
-import SessionMapPage from 'containers/SessionMapPage/Loadable.ts';
+import SessionMapPage from 'containers/SessionMapPage/Loadable';
 
 import AppRoute from 'components/AppRoute';
 import IdleTimer from 'components/IdleTimer/Loadable';

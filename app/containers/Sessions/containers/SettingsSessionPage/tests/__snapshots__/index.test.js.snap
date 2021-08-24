@@ -1,27 +1,348 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding-top: 40px;
+  padding-bottom: 100px;
+  background-color: rgba(248,251,255,1);
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c4 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  margin-bottom: 5px;
+  font-weight: 400;
+  color: #2F3850;
+}
+
+.c9 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  color: #2F3850;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #E9F1FB;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+}
+
+.c12 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c18 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.c5 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 100%;
+  max-width: 200px;
+  color: #2F3850;
+  opacity: 0.5;
+}
+
+.c5:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c5:disabled {
+  color: #ABBBD1;
+}
+
+.c7 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 153px;
+  max-width: 200px;
+  color: rgba(16,121,105,1);
+  text-align: center;
+  background-color: rgba(16,121,105,0.1);
+  color: rgba(16,121,105,1);
+  opacity: 0.5;
+}
+
+.c7:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c7:disabled {
+  color: #ABBBD1;
+}
+
+.c8 {
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: rgba(16,121,105,0.1);
+  color: rgba(16,121,105,1);
+  opacity: 0.5;
+}
+
+.c8:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+.c13 {
+  position: relative;
+  display: inline-block;
+  min-width: 40px;
+  height: 21px;
+}
+
+.c15 {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.c17 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  cursor: pointer;
+  background-color: #CED3E4;
+  border-radius: 21px;
+}
+
+.c14:checked + .c16 {
+  background-color: #B727EA;
+}
+
+.c14:focus + .c16 {
+  box-shadow: 0 0 1px #B727EA;
+}
+
+.c14:disabled + .c16 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c17:before {
+  position: absolute;
+  content: '';
+  left: 4px;
+  bottom: 4px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  height: 13px;
+  width: 13px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.c14:checked + .c16:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+.c6 {
+  border: none;
+  background-color: #E9F1FB;
+  outline: none;
+  height: 50px;
+  max-width: none;
+}
+
+.c6:focus {
+  border: none;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c2 {
+  width: 400px;
+  padding: 25px 20px;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  box-shadow: 0px 4px 20px #E3EEFB;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
-  class="Box-sc-1vhutan-0 laeLGt"
+  class="c0"
   display="flex"
   width="100%"
 >
   <div
-    class="Column-sc-4zswzq-0 styled__StyledColumn-sc-10au7g3-0 iyDzCx buHnUv"
+    class="c1 c2"
     height="100%"
   >
     <div
-      class="styled__InputContainer-sc-12xx0pj-1 gWMxgR"
+      class="c3"
     >
       <h3
-        class="H3-twxrn4-0 cJvzEt"
+        class="c4"
         font-weight="regular"
       >
         Name
       </h3>
       <input
         aria-label="e-Session Name"
-        class="Input-t9j2q5-0 dayPHP styled__Input-sc-12xx0pj-0 lcXNLu"
+        class="c5 c6"
         disabled=""
         placeholder="e-Session Name"
         type="text"
@@ -30,11 +351,11 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       />
     </div>
     <div
-      class="styled__InputContainer-sc-12xx0pj-1 gWMxgR"
+      class="c3"
       style="margin-top: 15px;"
     >
       <h3
-        class="H3-twxrn4-0 cJvzEt"
+        class="c4"
         font-weight="regular"
       >
         Variable
@@ -42,7 +363,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       <input
         aria-label="Variable name..."
         autocomplete="off"
-        class="Input-t9j2q5-0 kMQnkg BadgeInput-sc-1ua27xt-0 locZHQ"
+        class="c7 c8"
         color="#107969"
         disabled=""
         name="notASearchField-Variable name..."
@@ -53,81 +374,120 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       />
     </div>
     <h3
-      class="H3-twxrn4-0 bCdqfX"
+      class="c9"
     >
       Narrator Settings
     </h3>
     <div
-      class="Row-y1cs0u-0 cNUaef"
+      class="c10"
     >
-      <p
-        class="Text-e4p0w3-0 bmKPFZ"
-        font-weight="bold"
-      >
-        Narrator Active
-      </p>
       <div
-        class="styled__SwitchWrapper-k9teya-0 hucWtb"
+        class="c11"
+        width="100%"
       >
-        <input
-          checked=""
-          class="styled__SwitchInput-k9teya-1 hdJnOF"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          disabled=""
-          type="checkbox"
-        />
-        <span
-          class="styled__Slider-k9teya-2 jYsxIO"
-        />
+        <label
+          for="Narrator Active"
+        >
+          <p
+            class="c12"
+            font-weight="bold"
+          >
+            Narrator Active
+          </p>
+        </label>
+        <div
+          class="c13"
+        >
+          <input
+            aria-checked="true"
+            aria-disabled="true"
+            checked=""
+            class="c14 c15"
+            data-cy="branching-intervention-toggle"
+            data-testid="switch-input"
+            disabled=""
+            id="Narrator Active"
+            role="switch"
+            type="checkbox"
+          />
+          <span
+            class="c16 c17"
+          />
+        </div>
       </div>
     </div>
     <div
-      class="Row-y1cs0u-0 cNUaef"
+      class="c10"
     >
-      <p
-        class="Text-e4p0w3-0 fFURPd"
-      >
-        Voice
-      </p>
       <div
-        class="styled__SwitchWrapper-k9teya-0 hucWtb"
+        class="c11"
+        width="100%"
       >
-        <input
-          checked=""
-          class="styled__SwitchInput-k9teya-1 hdJnOF"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          disabled=""
-          type="checkbox"
-        />
-        <span
-          class="styled__Slider-k9teya-2 jYsxIO"
-        />
+        <label
+          for="Voice"
+        >
+          <p
+            class="c18"
+          >
+            Voice
+          </p>
+        </label>
+        <div
+          class="c13"
+        >
+          <input
+            aria-checked="true"
+            aria-disabled="true"
+            checked=""
+            class="c14 c15"
+            data-cy="branching-intervention-toggle"
+            data-testid="switch-input"
+            disabled=""
+            id="Voice"
+            role="switch"
+            type="checkbox"
+          />
+          <span
+            class="c16 c17"
+          />
+        </div>
       </div>
     </div>
     <div
-      class="Row-y1cs0u-0 gaoRiI"
+      class="c19"
     >
-      <p
-        class="Text-e4p0w3-0 fFURPd"
-      >
-        Display Narrator
-      </p>
       <div
-        class="styled__SwitchWrapper-k9teya-0 hucWtb"
+        class="c11"
+        width="100%"
       >
-        <input
-          checked=""
-          class="styled__SwitchInput-k9teya-1 hdJnOF"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          disabled=""
-          type="checkbox"
-        />
-        <span
-          class="styled__Slider-k9teya-2 jYsxIO"
-        />
+        <label
+          for="Display Narrator"
+        >
+          <p
+            class="c18"
+          >
+            Display Narrator
+          </p>
+        </label>
+        <div
+          class="c13"
+        >
+          <input
+            aria-checked="true"
+            aria-disabled="true"
+            checked=""
+            class="c14 c15"
+            data-cy="branching-intervention-toggle"
+            data-testid="switch-input"
+            disabled=""
+            id="Display Narrator"
+            role="switch"
+            type="checkbox"
+          />
+          <span
+            class="c16 c17"
+          />
+        </div>
       </div>
     </div>
   </div>

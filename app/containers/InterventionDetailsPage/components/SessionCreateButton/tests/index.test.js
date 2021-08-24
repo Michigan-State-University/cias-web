@@ -13,7 +13,7 @@ import { render } from '@testing-library/react';
 import { DEFAULT_LOCALE } from 'i18n';
 
 import createModalForTests from 'utils/createModalForTests';
-import SessionCreateButton from '../index.tsx';
+import SessionCreateButton from '../index';
 
 describe('<SessionCreateButton />', () => {
   beforeAll(() => {

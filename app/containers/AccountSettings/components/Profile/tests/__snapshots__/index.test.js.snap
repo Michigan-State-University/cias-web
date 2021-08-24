@@ -1,26 +1,615 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Profile /> Should render and match the snapshot 1`] = `
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-top: 50px;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.c20 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  justify-items: flex-start;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.c27 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.c30 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: end;
+  -webkit-justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  justify-items: flex-end;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c16 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.c19 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.c24 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  padding-right: 10px;
+}
+
+.c26 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c28 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 230px;
+  padding-right: 10px;
+}
+
+.c31 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 33%;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 30px;
+  margin-top: 20px;
+  background-color: rgba(255,255,255,1);
+  box-shadow: 0px 4px 20px #E3EEFB;
+}
+
+.c9 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.c22 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c1 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-bottom: 20px;
+  color: #2F3850;
+}
+
+.c18 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  width: 100%;
+  height: 46px;
+  color: #2F3850;
+}
+
+.c18:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c18:disabled {
+  color: #ABBBD1;
+}
+
+.c29 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  width: 100%;
+  color: #2F3850;
+}
+
+.c29:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c29:disabled {
+  color: #ABBBD1;
+}
+
+.c12 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+}
+
+.c17 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.c25 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c4 {
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  border-radius: 50%;
+  background-color: #107969;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  color: rgba(255,255,255,1);
+}
+
+.c32 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  white-space: nowrap;
+}
+
+.c5 {
+  height: 75px;
+  width: 75px;
+  font-size: 40px;
+}
+
+.c10 {
+  margin-left: 20px;
+}
+
+.c21 {
+  margin-top: 50px;
+}
+
+.c33 {
+  margin-left: 25px;
+  margin-top: 30px;
+}
+
+.c23 {
+  width: 50%;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (max-width:480px) {
+  .c15 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-start;
+    -webkit-box-align: flex-start;
+    -ms-flex-align: flex-start;
+    align-items: flex-start;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c8 {
+    margin-left: 30px;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width:480px) {
+  .c8 {
+    margin-left: 0px;
+  }
+}
+
+@media only screen and (max-width:360px) {
+  .c10 {
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c21 {
+    margin-top: 25px;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-align-items: flex-start;
+    -webkit-box-align: flex-start;
+    -ms-flex-align: flex-start;
+    align-items: flex-start;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c33 {
+    margin-left: 0;
+    margin-top: 25px;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c23 {
+    margin-top: 20px;
+  }
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 iCDuTP"
+    class="c0"
   >
     <h2
-      class="H2-uw8lbl-0 iUhbVg"
+      class="c1"
     >
       Profile
     </h2>
     <div
-      class="Row-y1cs0u-0 cUkLOH"
+      class="c2"
       display="flex"
     >
       <div>
         <div
-          class="Row-y1cs0u-0 fgwsqb"
+          class="c3"
           width="100%"
         >
           <div
-            class="styled__AvatarStyled-bn66gh-0 fvqhMv styled__StyledUserAvatar-sc-4bx7ap-1 dObBuO"
+            class="c4 c5"
             color="#FFFFFF"
           >
             <div>
@@ -28,13 +617,13 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="Row-y1cs0u-0 jOTCVU"
+            class="c6"
           >
             <div
-              class="Row-y1cs0u-0 styled__StyledButtonsRow-sc-4bx7ap-2 dskFsL fA-DhtD"
+              class="c7 c8"
             >
               <div
-                class="Box-sc-1vhutan-0 crjFXF styled__StyledUploadFileButton-sc-4bx7ap-4 GlRFp"
+                class="c9 c10"
                 height="fit-content"
               >
                 <input
@@ -44,10 +633,10 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                   type="file"
                 />
                 <div
-                  class="Row-y1cs0u-0 bLAOxT"
+                  class="c11"
                 >
                   <p
-                    class="Text-e4p0w3-0 gEakrP"
+                    class="c12"
                     color="#B727EA"
                     font-size="14"
                     font-weight="bold"
@@ -62,33 +651,33 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-y1cs0u-0 eDtOGP"
+      class="c13"
     >
       <div
-        class="Row-y1cs0u-0 styled__StyledFullNameRow-sc-4bx7ap-0 gQFDhs loGlNM"
+        class="c14 c15"
         width="100%"
       >
         <div
-          class="Column-sc-4zswzq-0 ehOEzE"
+          class="c16"
           data-testid="first-name-input"
         >
           <label
             for="firstName"
           >
             <p
-              class="Text-e4p0w3-0 kFFPgx"
+              class="c17"
               width="fit-content"
             >
               First Name
             </p>
           </label>
           <div
-            class="Row-y1cs0u-0 fgwsqb"
+            class="c3"
             width="100%"
           >
             <input
               aria-label="Enter first name"
-              class="Input-t9j2q5-0 ptbLy"
+              class="c18"
               height="46"
               id="firstName"
               name="firstName"
@@ -100,25 +689,25 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="Column-sc-4zswzq-0 jCuscc"
+          class="c19"
         >
           <label
             for="lastName"
           >
             <p
-              class="Text-e4p0w3-0 kFFPgx"
+              class="c17"
               width="fit-content"
             >
               Last name
             </p>
           </label>
           <div
-            class="Row-y1cs0u-0 fgwsqb"
+            class="c3"
             width="100%"
           >
             <input
               aria-label="Enter last name"
-              class="Input-t9j2q5-0 ptbLy"
+              class="c18"
               height="46"
               id="lastName"
               name="lastName"
@@ -132,27 +721,27 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 fyfnXk jKoKLe"
+      class="c20 c21"
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 styled__StyledTimezoneBox-sc-1pif2s-3 dvfkZg dFeJUv"
+        class="c22 c23"
       >
         <div
-          class="Column-sc-4zswzq-0 laIXbL"
+          class="c24"
         >
           <label
             for="timeZone"
           >
             <p
-              class="Text-e4p0w3-0 kFFPgx"
+              class="c17"
               width="fit-content"
             >
               Time zone
             </p>
           </label>
           <div
-            class="Box-sc-1vhutan-0 dvfkZg"
+            class="c22"
             data-testid="select"
           >
             <div
@@ -209,7 +798,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                   >
                     <img
                       alt="arrow"
-                      class="Img-sc-55j3su-0 gTKGj"
+                      class="c25"
                       src="IMAGE_MOCK"
                       transform=""
                     />
@@ -222,32 +811,32 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 fyfnXk jKoKLe"
+      class="c20 c21"
       width="100%"
     >
       <div
-        class="Column-sc-4zswzq-0 ekpwZH"
+        class="c26"
       >
         <div
-          class="Row-y1cs0u-0 hqAUhv"
+          class="c27"
           width="100%"
         >
           <div
-            class="Column-sc-4zswzq-0 HRVgp"
+            class="c28"
             width="230"
           >
             <label
               for="iso"
             >
               <p
-                class="Text-e4p0w3-0 kFFPgx"
+                class="c17"
                 width="fit-content"
               >
                 Phone prefix
               </p>
             </label>
             <div
-              class="Box-sc-1vhutan-0 dvfkZg"
+              class="c22"
               data-testid="select"
             >
               <div
@@ -304,7 +893,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
                     >
                       <img
                         alt="arrow"
-                        class="Img-sc-55j3su-0 gTKGj"
+                        class="c25"
                         src="IMAGE_MOCK"
                         transform=""
                       />
@@ -315,14 +904,14 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="Column-sc-4zswzq-0 ekpwZH"
+            class="c26"
             value=""
           >
             <label
               for="number"
             >
               <p
-                class="Text-e4p0w3-0 kFFPgx"
+                class="c17"
                 width="fit-content"
               >
                 Phone number
@@ -330,7 +919,7 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
             </label>
             <input
               aria-label="Enter phone number"
-              class="Input-t9j2q5-0 iHMTey"
+              class="c29"
               id="number"
               name="number"
               placeholder="Enter phone number"
@@ -343,19 +932,19 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 fyfnXk jKoKLe"
+      class="c20 c21"
       width="100%"
     />
     <div
-      class="Row-y1cs0u-0 styled__StyledRow-sc-1pif2s-1 eomgnk jKoKLe"
+      class="c30 c21"
       width="100%"
     >
       <div
-        class="Column-sc-4zswzq-0 eSmZPS"
+        class="c31"
         width="33%"
       >
         <button
-          class="StyledTextButton-sc-1b7egxw-0 styled__TextButton-sc-1pif2s-2 hbRTax hCmSLB"
+          class="c32 c33"
           color="#B727EA"
           font-size="14"
           font-weight="bold"

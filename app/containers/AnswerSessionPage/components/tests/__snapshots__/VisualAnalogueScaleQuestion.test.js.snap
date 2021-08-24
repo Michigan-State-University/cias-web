@@ -1,23 +1,135 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 50px;
+  height: 25px;
+  background-color: rgba(183,39,234,0.5);
+  border: none;
+  color: #FFFFFF;
+  border-radius: 3px;
+}
+
+.c5 {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.c7 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 15px;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
+}
+
+.c4 .rc-slider-mark-text {
+  word-break: normal;
+  word-wrap: break-word;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  color: #666;
+}
+
+.c4.wrap-text .rc-slider-mark-text {
+  max-width: 70px;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 FXGzf"
+    class="c0"
   >
     <div
-      class="Box-sc-1vhutan-0 jtfWfT"
+      class="c1"
       width="100%"
     >
       <div
-        class="Row-y1cs0u-0 dskFsL"
+        class="c2"
       >
         <div
-          class="Box-sc-1vhutan-0 hcKMxI"
+          class="c3"
           width="100%"
         >
           <div
-            class="rc-slider rc-slider-with-marks styled__VisualAnalogueSlider-bqo6sz-6 bjuSZt"
+            class="rc-slider rc-slider-with-marks c4"
           >
             <div
               class="rc-slider-rail"
@@ -53,13 +165,13 @@ exports[`<VisualAnalogueScaleQuestion /> Should render and match the snapshot 1`
               tabindex="0"
             >
               <div
-                class="styled__ValueSliderWrapperStyled-sc-1tylzs2-1 ldnKSE"
+                class="c5"
               >
                 <div
-                  class="styled__ValueSliderStyled-sc-1tylzs2-0 eNBWOL"
+                  class="c6"
                 >
                   <p
-                    class="Text-e4p0w3-0 hPWiyu"
+                    class="c7"
                     color="#FFFFFF"
                     font-size="15px"
                   >

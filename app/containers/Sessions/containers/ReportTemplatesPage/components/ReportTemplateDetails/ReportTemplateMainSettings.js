@@ -147,42 +147,46 @@ const ReportTemplateMainSettings = ({
                     <Row
                       align="center"
                       style={{ margin: 0, cursor: 'pointer' }}
-                      onClick={() =>
-                        canEdit && onReportForChange(ReportFor.participant)
-                      }
                     >
                       <Radio
+                        id={`report-for-toggle-${ReportFor.participant}`}
                         mr={10}
                         disabled={!canEdit}
                         checked={
                           singleReportTemplate.reportFor ===
                           ReportFor.participant
                         }
-                      />
-                      <Text disabled={!canEdit}>
-                        {formatMessage(messages.settingsReportForParticipant)}
-                      </Text>
+                        onChange={() =>
+                          canEdit && onReportForChange(ReportFor.participant)
+                        }
+                      >
+                        <Text>
+                          {formatMessage(messages.settingsReportForParticipant)}
+                        </Text>
+                      </Radio>
                     </Row>
                   </Col>
                   <Col>
                     <Row
                       align="center"
                       style={{ cursor: canEdit ? 'pointer' : 'initial' }}
-                      onClick={() =>
-                        canEdit && onReportForChange(ReportFor.thirdParty)
-                      }
                     >
                       <Radio
+                        id={`report-for-toggle-${ReportFor.thirdParty}`}
                         mr={10}
                         disabled={!canEdit}
                         checked={
                           singleReportTemplate.reportFor ===
                           ReportFor.thirdParty
                         }
-                      />
-                      <Text disabled={!canEdit}>
-                        {formatMessage(messages.settingsReportFor3rdParty)}
-                      </Text>
+                        onChange={() =>
+                          canEdit && onReportForChange(ReportFor.thirdParty)
+                        }
+                      >
+                        <Text>
+                          {formatMessage(messages.settingsReportFor3rdParty)}
+                        </Text>
+                      </Radio>
                     </Row>
                   </Col>
                 </Row>

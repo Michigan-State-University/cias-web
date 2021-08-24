@@ -16,7 +16,7 @@ module.exports = require('./webpack.base.babel')({
     require.resolve('react-app-polyfill/ie11'),
     require.resolve('react-app-polyfill/stable'),
     'webpack-hot-middleware/client?reload=true',
-    path.join(process.cwd(), 'app/app.tsx'), // Start with js/app.js
+    path.join(process.cwd(), 'app/app.tsx'), // Start with js/app.tsx
   ],
 
   // Don't use hashes in dev mode for better performance

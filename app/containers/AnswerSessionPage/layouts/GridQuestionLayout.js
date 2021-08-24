@@ -123,14 +123,18 @@ const GridQuestionLayout = ({
                         width={elements.grid.colWidth}
                         align="center"
                         justify="center"
-                        onClick={handleClick(
-                          column,
-                          row.variable.name,
-                          rowIndex,
-                          columnIndex,
-                        )}
                       >
-                        <Radio aria-label={ariaLabel} checked={isChecked} />
+                        <Radio
+                          id={`question-${questionId}-cell-${rowIndex}-${columnIndex}`}
+                          aria-label={ariaLabel}
+                          checked={isChecked}
+                          onChange={handleClick(
+                            column,
+                            row.variable.name,
+                            rowIndex,
+                            columnIndex,
+                          )}
+                        />
                       </Row>
                     </TD>
                   );

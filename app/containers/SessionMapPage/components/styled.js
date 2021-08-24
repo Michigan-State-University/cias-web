@@ -3,7 +3,7 @@ import { Handle } from 'react-flow-renderer';
 
 import { colors } from 'theme';
 
-import { sessionMapColors } from '../constants.ts';
+import { sessionMapColors } from '../constants';
 
 export const ScrollbarContainer = styled.div.attrs(() => {})`
   height: ${({ horizontal }) => (horizontal ? '25px' : '100%')};

@@ -28,15 +28,13 @@ const SessionMapHeader = ({
       <Row justify="between" mb={15}>
         <H2>{formatMessage(messages.sessionMap)}</H2>
         <Row align="center" gap={10}>
-          {
-            // @ts-ignore
-            <Checkbox
-              checked={showWithBranchingOnly}
-              onClick={handleCheckboxClick}
-              id="show-only-with-branching-checkbox"
-            />
-          }
-          <Comment>{formatMessage(messages.showWithBranchingOnly)}</Comment>
+          <Checkbox
+            checked={showWithBranchingOnly}
+            onChange={handleCheckboxClick}
+            id="show-only-with-branching-checkbox"
+          >
+            <Comment>{formatMessage(messages.showWithBranchingOnly)}</Comment>
+          </Checkbox>
         </Row>
       </Row>
       <Comment mb={20}>{formatMessage(messages.sessionMapComment)}</Comment>

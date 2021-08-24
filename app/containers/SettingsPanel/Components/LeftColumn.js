@@ -27,7 +27,6 @@ const LeftColumn = ({
         const isChecked = currentOption && option.id === currentOption.id;
         return (
           <Row
-            disabled={disabled}
             key={`el-option-radio-${index}`}
             mb={decideIfPassValue({
               index,
@@ -46,16 +45,19 @@ const LeftColumn = ({
               )
             }
             width="fit-content"
-            onClick={() => updateAccessSetting(option.id)}
           >
             <Radio
+              id={`access-radio-${option.id}`}
               data-cy={isChecked && `access-${option.id}-radio`}
               checked={isChecked}
+              disabled={disabled}
               mr={12}
-            />
-            <Text fontSize={15} fontWeight={isChecked ? 'bold' : 'regular'}>
-              {option.label}
-            </Text>
+              onChange={() => updateAccessSetting(option.id)}
+            >
+              <Text fontSize={15} fontWeight={isChecked ? 'bold' : 'regular'}>
+                {option.label}
+              </Text>
+            </Radio>
           </Row>
         );
       })}

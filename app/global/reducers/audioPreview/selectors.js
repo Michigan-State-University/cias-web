@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { initialState } from './reducer.ts';
+import { initialState } from './reducer';
 
 const audioPreview = (state) => state.audioPreview || initialState;
 

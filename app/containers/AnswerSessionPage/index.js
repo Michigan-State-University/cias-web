@@ -81,7 +81,7 @@ import {
   toggleTextTranscriptAction,
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
 } from './actions';
-import BranchingScreen from './components/BranchingScreen.tsx';
+import BranchingScreen from './components/BranchingScreen';
 
 const AnimationRefHelper = ({
   children,

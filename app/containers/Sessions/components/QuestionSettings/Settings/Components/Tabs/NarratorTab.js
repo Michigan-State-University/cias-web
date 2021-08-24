@@ -147,8 +147,8 @@ const NarratorTab = ({
               mb={15}
               borderBottom={getBorderBottom(index)}
             >
-              <H3>{formatMessage(messages[`${index}`])}</H3>
               <Switch
+                id={index}
                 disabled={
                   disabled ||
                   DisabledNarratorSettingsByQuestionType[index]?.includes(
@@ -157,7 +157,9 @@ const NarratorTab = ({
                 }
                 checked={val}
                 onToggle={toggleAction(index)}
-              />
+              >
+                <H3>{formatMessage(messages[`${index}`])}</H3>
+              </Switch>
             </Row>
           ))}
       </Box>

@@ -1,28 +1,120 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Reflection /> Should render and match the snapshot 1`] = `
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 15px;
+  background-color: rgba(233,241,251,1);
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c4 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  margin-right: 9px;
+  width: 100%;
+  height: auto;
+  max-width: initial;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c4:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c4:disabled {
+  color: #ABBBD1;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 ekpwZH"
+    class="c0"
   >
     <div
-      class="Box-sc-1vhutan-0 gjHPvd"
+      class="c1"
     >
       1
     </div>
     <div
-      class="Column-sc-4zswzq-0 ekpwZH"
+      class="c0"
     >
       <div
-        class="Box-sc-1vhutan-0 eamgEw"
+        class="c2"
       >
         <div
-          class="Box-sc-1vhutan-0 frPtNM"
+          class="c3"
           width="100%"
         >
           <textarea
             aria-label="Enter speech here..."
-            class="TextArea-sc-175uiux-0 kmGeZJ"
+            class="c4"
             data-cy="text-area"
             height="auto"
             placeholder="Enter speech here..."
@@ -34,10 +126,10 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
           </textarea>
         </div>
         <div
-          class="Box-sc-1vhutan-0 hbJIgk"
+          class="c5"
         >
           <img
-            class="Img-sc-55j3su-0 kDGTCK"
+            class="c6"
             src="IMAGE_MOCK"
           />
         </div>

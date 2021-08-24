@@ -140,7 +140,12 @@ function SessionListItem({
           {...provided.draggableProps}
           {...provided.dragHandleProps}
         >
-          <ToggleableBox isSelected={isSelected} isHovered={isHovered}>
+          <ToggleableBox
+            isSelected={isSelected}
+            isHovered={isHovered}
+            role="group"
+            aria-label={formatMessage(messages.wcagDescription, { name })}
+          >
             <Row py={21} px={16} align="center" justify="between">
               <CopyModal
                 visible={copyOpen}

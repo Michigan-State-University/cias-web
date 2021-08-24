@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { memo, useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Row, Container } from 'react-grid-system';
-import { injectIntl, IntlShape } from 'react-intl';
+import { useIntl } from 'react-intl';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
 
@@ -54,13 +54,16 @@ const originalTextIconProps = {
 };
 
 const SectionCaseItem = ({
-  intl: { formatMessage },
   title,
   sectionCase,
   updateSectionCase,
   deleteImage,
   deleteCase,
+  openCollapsable,
+  isOpened,
 }) => {
+  const { formatMessage } = useIntl();
+
   const {
     interventionId,
     sessionId,
@@ -73,9 +76,6 @@ const SectionCaseItem = ({
     if (!updateReportTemplateLoading) setIsUploadingImage(false);
     if (!updateReportTemplateLoading) setIsUpdatingWithVariable(false);
   }, [updateReportTemplateLoading]);
-
-  const [openCollapsable, setOpenCollapsable] = useState(false);
-  const toggleCollapsable = () => setOpenCollapsable(!openCollapsable);
 
   const [titleVisible, setTitleVisible] = useState(Boolean(sectionCase.title));
   const [isUploadingImage, setIsUploadingImage] = useState(false);
@@ -94,7 +94,7 @@ const SectionCaseItem = ({
     );
   };
 
-  const handlePreviewChange = (event) => {
+  const handlePreviewChange = (_, event) => {
     event.preventDefault();
     event.stopPropagation();
     handleSectionCaseUpdate({ ...sectionCase, preview: true }, null, true);
@@ -146,8 +146,8 @@ const SectionCaseItem = ({
     <>
       <Collapse
         disabled
-        isOpened={openCollapsable}
-        onToggle={toggleCollapsable}
+        isOpened={isOpened}
+        onToggle={openCollapsable}
         height="auto"
         px={0}
         bgOpacity={0}
@@ -172,31 +172,29 @@ const SectionCaseItem = ({
             </Col>
             <Col align="end" xs={6}>
               <Row align="center" justify="end" nogutter>
-                <Col xs={2}>
+                <Col>
                   <Radio
+                    id={`case-preview-toggle-${sectionCase.id}`}
                     mr={10}
                     disabled={!canEdit}
-                    onClick={handlePreviewChange}
+                    onChange={handlePreviewChange}
                     checked={sectionCase.preview}
-                  />
-                </Col>
-                <Col xs={10} align="end" style={{ textAlign: 'end' }}>
-                  <Text
-                    width="max-content"
-                    disabled={!canEdit}
-                    onClick={handlePreviewChange}
-                    whiteSpace="pre"
-                    fontWeight={sectionCase.preview ? 'bold' : 'normal'}
                   >
-                    {formatMessage(messages.previewCaseRadio)}
-                  </Text>
+                    <Text
+                      width="max-content"
+                      whiteSpace="pre"
+                      fontWeight={sectionCase.preview ? 'bold' : 'normal'}
+                    >
+                      {formatMessage(messages.previewCaseRadio)}
+                    </Text>
+                  </Radio>
                 </Col>
               </Row>
             </Col>
           </Row>
         }
       >
-        <Container style={{ width: '100%' }}>
+        <Container style={{ width: '100%' }} role="group" aria-label={title}>
           <Row justify="between" align="center" style={{ marginBottom: 20 }}>
             <Col xs="content">
               <Row align="center">
@@ -220,6 +218,7 @@ const SectionCaseItem = ({
                 <Option
                   key="section-title-toggle"
                   label={formatMessage(messages.sectionCaseTitleToggle)}
+                  labelId={sectionCase.id}
                   value={titleVisible}
                   action={handleTitleToggle}
                   disabled={!canEdit}
@@ -258,7 +257,7 @@ const SectionCaseItem = ({
 
           <Row justify="start">
             <Col style={{ padding: 0 }}>
-              <Text whiteSpace="pre">
+              <Text whiteSpace="pre" id="section-case-content">
                 {formatMessage(messages.sectionCaseContentHeader)}
               </Text>
             </Col>
@@ -313,6 +312,7 @@ const SectionCaseItem = ({
                 iconProps={originalTextIconProps}
               >
                 <StyledInput
+                  aria-labelledby="section-case-content"
                   type="multiline"
                   rows="5"
                   width="100%"
@@ -360,7 +360,8 @@ SectionCaseItem.propTypes = {
   deleteCase: PropTypes.func,
   deleteImage: PropTypes.func,
   sectionCase: PropTypes.shape(SectionCase),
-  intl: PropTypes.shape(IntlShape),
+  openCollapsable: PropTypes.func,
+  isOpened: PropTypes.bool,
 };
 
-export default compose(withConnect, injectIntl)(SectionCaseItem);
+export default compose(withConnect, memo)(SectionCaseItem);

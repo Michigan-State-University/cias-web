@@ -1,27 +1,351 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 15px;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c18 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  position: absolute;
+  display: none;
+  background-color: rgba(255,255,255,1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
+  border-radius: 10px;
+  right: 0;
+}
+
+.c19 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: relative;
+}
+
+.c20 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 15px;
+  background-color: rgba(233,241,251,1);
+}
+
+.c22 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.c15 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 100%px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+.c17 {
+  width: auto;
+  height: auto;
+}
+
+.c23 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
+.c7 {
+  position: relative;
+  display: inline-block;
+  min-width: 40px;
+  height: 21px;
+  margin-right: 15px;
+}
+
+.c9 {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.c11 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  cursor: pointer;
+  background-color: #CED3E4;
+  border-radius: 21px;
+}
+
+.c8:checked + .c10 {
+  background-color: #B727EA;
+}
+
+.c8:focus + .c10 {
+  box-shadow: 0 0 1px #B727EA;
+}
+
+.c8:disabled + .c10 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c11:before {
+  position: absolute;
+  content: '';
+  left: 4px;
+  bottom: 4px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  height: 13px;
+  width: 13px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.c8:checked + .c10:before {
+  -webkit-transform: translateX(18px);
+  -ms-transform: translateX(18px);
+  transform: translateX(18px);
+}
+
+.c16 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+  white-space: pre;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.c13 {
+  position: relative;
+  width: 100%;
+}
+
+.c14 {
+  overflow: hidden;
+  height: 50px;
+  padding: 5px 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  border-radius: 5px;
+  background-color: #E9F1FB;
+  cursor: pointer;
+}
+
+.c21 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  margin-right: 9px;
+  width: 100%;
+  height: auto;
+  max-width: initial;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c21:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c21:disabled {
+  color: #ABBBD1;
+}
+
+.c1 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 15px;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 ekpwZH"
+    class="c0"
   >
     <button
-      class="StyledButton-d2s0gt-0 bWynbR"
+      class="c1"
       color="primary"
       radius="100px"
     >
       Reset Narrator to previous block position
     </button>
     <div
-      class="Box-sc-1vhutan-0 gjHPvd"
+      class="c2"
     >
       Select Speech Animation
     </div>
     <div
-      class="Box-sc-1vhutan-0 gjHPvd"
+      class="c2"
     >
       <div
-        class="Box-sc-1vhutan-0 dvfkZg"
+        class="c3"
       >
         <div
           class=" css-2b097c-container"
@@ -77,7 +401,7 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
               >
                 <img
                   alt="arrow"
-                  class="Img-sc-55j3su-0 gTKGj"
+                  class="c4"
                   src="IMAGE_MOCK"
                   transform=""
                 />
@@ -88,61 +412,87 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="Row-y1cs0u-0 bGCTtn"
+      class="c5"
     >
-      Use Reflection
       <div
-        class="styled__SwitchWrapper-k9teya-0 gKjzSJ"
+        class="c6"
+        width="100%"
       >
-        <input
-          checked=""
-          class="styled__SwitchInput-k9teya-1 hdJnOF"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          type="checkbox"
-        />
-        <span
-          class="styled__Slider-k9teya-2 jYsxIO"
-        />
+        <label
+          for="reflection-toggle"
+        >
+          Use Reflection
+        </label>
+        <div
+          class="c7"
+        >
+          <input
+            aria-checked="true"
+            aria-disabled="false"
+            checked=""
+            class="c8 c9"
+            data-cy="branching-intervention-toggle"
+            data-testid="switch-input"
+            id="reflection-toggle"
+            role="switch"
+            type="checkbox"
+          />
+          <span
+            class="c10 c11"
+          />
+        </div>
       </div>
     </div>
     <div
-      class="Row-y1cs0u-0 gBsZUK"
+      class="c12"
     >
-      Use Formula
       <div
-        class="styled__SwitchWrapper-k9teya-0 gKjzSJ"
+        class="c6"
+        width="100%"
       >
-        <input
-          class="styled__SwitchInput-k9teya-1 hdJnOF"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          type="checkbox"
-        />
-        <span
-          class="styled__Slider-k9teya-2 jYsxIO"
-        />
+        <label
+          for="formula-toggle"
+        >
+          Use Formula
+        </label>
+        <div
+          class="c7"
+        >
+          <input
+            aria-checked="false"
+            aria-disabled="false"
+            class="c8 c9"
+            data-cy="branching-intervention-toggle"
+            data-testid="switch-input"
+            id="formula-toggle"
+            role="switch"
+            type="checkbox"
+          />
+          <span
+            class="c10 c11"
+          />
+        </div>
       </div>
     </div>
     <div
-      class="styled__ArrowDropdownWrapper-sc-84wil9-0 evREvO"
+      class="c13"
       width="100%"
     >
       <div
-        class="styled__DropdownContainer-sc-84wil9-1 eBiCVQ"
+        class="c14"
       >
         <div
-          class="Row-y1cs0u-0 jkgLKe"
+          class="c15"
           height="100%"
         >
           <div
-            class="Box-sc-1vhutan-0 dvfkZg"
+            class="c3"
           >
             <div
-              class="Box-sc-1vhutan-0 dvfkZg"
+              class="c3"
             >
               <p
-                class="Text-e4p0w3-0 imsaiG"
+                class="c16"
                 overflow="hidden"
               >
                 Choose Question
@@ -150,41 +500,41 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <img
-            class="Img-sc-55j3su-0 cDhXoN"
+            class="c17"
             src="IMAGE_MOCK"
           />
         </div>
       </div>
       <div
-        class="Box-sc-1vhutan-0 dMwoFk"
+        class="c18"
         display="none"
         width="100%"
       />
     </div>
     <div
-      class="Box-sc-1vhutan-0 gjHPvd"
+      class="c2"
     >
       <div
-        class="Column-sc-4zswzq-0 ekpwZH"
+        class="c0"
       >
         <div
-          class="Box-sc-1vhutan-0 gjHPvd"
+          class="c2"
         >
           1
         </div>
         <div
-          class="Column-sc-4zswzq-0 ekpwZH"
+          class="c0"
         >
           <div
-            class="Box-sc-1vhutan-0 eamgEw"
+            class="c19"
           >
             <div
-              class="Box-sc-1vhutan-0 frPtNM"
+              class="c20"
               width="100%"
             >
               <textarea
                 aria-label="Enter speech here..."
-                class="TextArea-sc-175uiux-0 kmGeZJ"
+                class="c21"
                 data-cy="text-area"
                 height="auto"
                 placeholder="Enter speech here..."
@@ -196,10 +546,10 @@ exports[`<ReflectionBlock /> Should render and match the snapshot 1`] = `
               </textarea>
             </div>
             <div
-              class="Box-sc-1vhutan-0 hbJIgk"
+              class="c22"
             >
               <img
-                class="Img-sc-55j3su-0 kDGTCK"
+                class="c23"
                 src="IMAGE_MOCK"
               />
             </div>

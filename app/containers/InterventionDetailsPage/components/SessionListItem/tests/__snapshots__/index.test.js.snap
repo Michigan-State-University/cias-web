@@ -821,7 +821,9 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
     width="100%"
   >
     <div
+      aria-label="Tile of Session: Intervention"
       class="c1 c2"
+      role="group"
     >
       <div
         class="c3"
@@ -966,24 +968,37 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
             class="c32"
             width="100%"
           >
-            <p
-              class="c33"
-            >
-              Use formula
-            </p>
             <div
-              class="c34"
+              class="c4"
+              width="100%"
             >
-              <input
-                checked=""
-                class="c35 c36"
-                data-cy="branching-intervention-toggle"
-                data-testid="switch-input"
-                type="checkbox"
-              />
-              <span
-                class="c37 c38"
-              />
+              <label
+                for="session-1-formula-switch-label"
+              >
+                <p
+                  class="c33"
+                >
+                  Use formula
+                </p>
+              </label>
+              <div
+                class="c34"
+              >
+                <input
+                  aria-checked="true"
+                  aria-disabled="false"
+                  checked=""
+                  class="c35 c36"
+                  data-cy="branching-intervention-toggle"
+                  data-testid="switch-input"
+                  id="session-1-formula-switch-label"
+                  role="switch"
+                  type="checkbox"
+                />
+                <span
+                  class="c37 c38"
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -145,7 +145,11 @@ const SelectResearchers = ({
                   <TD pl={10}>{getDisplayName(fullName)}</TD>
                   <TD>{email}</TD>
                   <TD pr={10}>
-                    <Checkbox checked={isChecked} onClick={handleClick} />
+                    <Checkbox
+                      id={`researcher-to-select-${id}`}
+                      checked={isChecked}
+                      onChange={handleClick}
+                    />
                   </TD>
                 </StripedTR>
               );
