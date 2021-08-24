@@ -20,7 +20,7 @@ import SessionTypeChooser from './SessionTypeChooser';
 
 type Props = {
   handleSessionCreation: (sessionType: string) => void;
-  canCreateCatSession?: boolean;
+  canCreateCatSession: boolean;
 };
 
 const SessionCreateButton = ({
@@ -33,7 +33,7 @@ const SessionCreateButton = ({
   const handleClose = () => setModalVisible(false);
 
   const clickWrapper = () => {
-    if (canCreateCatSession) {
+    if (!canCreateCatSession) {
       handleSessionCreation(SessionTypes.CLASSIC_SESSION);
     } else {
       setModalVisible(true);

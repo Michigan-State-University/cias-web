@@ -29,6 +29,7 @@ import AccountSettings from '../AccountSettings';
 import WrappedAvatarFormAdmin from './containers/WrappedAvatarFormAdmin';
 import WrappedFullNameFormAdmin from './containers/WrappedFullNameFormAdmin';
 import WrappedDeactivationAdmin from './containers/WrappedDeactivationAdmin';
+import WrappedCatMhSettingAdmin from './containers/WrappedCatMhSettingAdmin';
 import messages from './messages';
 
 export const UserDetails = ({
@@ -62,6 +63,7 @@ export const UserDetails = ({
           AvatarComponent: WrappedAvatarFormAdmin,
           FullNameComponent: WrappedFullNameFormAdmin,
           DeactivationComponent: WrappedDeactivationAdmin,
+          CatMhSettingsComponent: WrappedCatMhSettingAdmin,
         }}
         userId={user.id}
       />

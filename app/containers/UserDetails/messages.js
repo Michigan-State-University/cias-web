@@ -13,4 +13,8 @@ export default defineMessages({
     id: `${scope}.pageTitle`,
     defaultMessage: 'User Details',
   },
+  canCreateCatMhSession: {
+    id: `${scope}.canCreateCatMhSession`,
+    defaultMessage: 'Can create Cat-MH(TM) sessions',
+  },
 });

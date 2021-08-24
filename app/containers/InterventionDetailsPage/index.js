@@ -40,7 +40,7 @@ import { archived } from 'models/Status/StatusTypes';
 import { RolePermissions } from 'models/User/RolePermissions';
 import { getQuestionGroupsSaga } from 'global/reducers/questionGroups/sagas';
 import { editSessionRequest, editSessionSaga } from 'global/reducers/session';
-import { makeSelectUserRoles, makeSelectUserId } from 'global/reducers/auth';
+import { makeSelectUser } from 'global/reducers/auth';
 import {
   fetchInterventionRequest,
   makeSelectInterventionState,
@@ -119,8 +119,7 @@ export function InterventionDetailsPage({
   deleteSession,
   fetchInterventions,
   externalCopySession,
-  roles,
-  userId,
+  user: { id: userId, roles, abilityToCreateCatMh },
   editSession,
 }) {
   const { interventionId } = useParams();
@@ -183,6 +182,11 @@ export function InterventionDetailsPage({
     deleteSession(sessionId, id);
     setDeleteConfirmationSessionId(null);
   };
+
+  const canCreateCatSession = useMemo(() => {
+    if (roles.includes('admin')) return true;
+    return abilityToCreateCatMh;
+  }, [abilityToCreateCatMh, roles]);
 
   const options = [
     {
@@ -487,6 +491,7 @@ export function InterventionDetailsPage({
             {editingPossible && (
               <Row my={18} align="center">
                 <SessionCreateButton
+                  canCreateCatSession={canCreateCatSession}
                   handleSessionCreation={createSessionCall}
                 />
               </Row>
@@ -539,15 +544,13 @@ InterventionDetailsPage.propTypes = {
   fetchInterventions: PropTypes.func,
   externalCopySession: PropTypes.func,
   editSession: PropTypes.func,
-  roles: PropTypes.arrayOf(PropTypes.string),
-  userId: PropTypes.string,
+  user: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   interventionState: makeSelectInterventionState(),
   sessionIndex: makeSelectCurrentSessionIndex(),
-  roles: makeSelectUserRoles(),
-  userId: makeSelectUserId(),
+  user: makeSelectUser(),
 });
 
 const mapDispatchToProps = {
