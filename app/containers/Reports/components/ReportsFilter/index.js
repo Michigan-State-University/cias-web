@@ -29,14 +29,15 @@ export function ReportsFilter({
           {filterOptions.map((option) => (
             <Row key={option} align="center">
               <Checkbox
-                onClick={() => changeFilter(option)}
+                id={option}
+                onChange={() => changeFilter(option)}
                 width={20}
-                mr={5}
                 checked={activeFilters.includes(option)}
-              />
-              <Text fontSize={15} mr={15}>
-                {formatMessage(messages[option])}
-              </Text>
+              >
+                <Text fontSize={15} mr={15}>
+                  {formatMessage(messages[option])}
+                </Text>
+              </Checkbox>
             </Row>
           ))}
         </Row>

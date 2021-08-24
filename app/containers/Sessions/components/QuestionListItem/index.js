@@ -217,10 +217,11 @@ const QuestionListItem = ({
           {manage && !isFinishScreen && (
             <Column xs={1}>
               <Checkbox
-                onClick={(e) => {
+                id={`question-to-select-${id}`}
+                onChange={(_, event) => {
                   selectSlide(id);
-                  e.stopPropagation();
-                  e.preventDefault();
+                  event.stopPropagation();
+                  event.preventDefault();
                 }}
                 checked={checked}
               />

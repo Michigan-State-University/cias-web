@@ -122,9 +122,11 @@ const QuestionListGroup = ({
             <Box display="flex">
               {manage && !isFinishGroup && (
                 <Checkbox
+                  id={`group-to-select-${id}`}
                   mr={2}
-                  onClick={(e) => {
-                    e.stopPropagation();
+                  onChange={(_, event) => {
+                    event.stopPropagation();
+                    event.preventDefault();
                     toggleGroup(questions);
                   }}
                   checked={checkSelectedGroup(questions)}

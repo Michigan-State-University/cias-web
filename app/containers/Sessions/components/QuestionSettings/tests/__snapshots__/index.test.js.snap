@@ -1,54 +1,224 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  height: 100%;
+}
+
+.c4 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding: 16px;
+  width: 400px;
+  height: 100%;
+}
+
+.c6 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: flex-end;
+  -ms-flex-line-pack: end;
+  align-content: flex-end;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c10 {
+  margin: 25px 10px;
+}
+
+.c9 {
+  position: relative;
+  bottom: -3px;
+  margin: 0 10px;
+  padding-bottom: 7px;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: #B727EA;
+}
+
+.c9 div {
+  cursor: pointer;
+}
+
+.c3 {
+  overflow-x: auto;
+  -webkit-transition: right 0.4s ease;
+  transition: right 0.4s ease;
+  position: relative;
+  right: 0px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  background-color: #FFFFFF;
+  -webkit-transition: width 0.4s ease;
+  transition: width 0.4s ease;
+  box-shadow: -20px 0 20px rgba(0,0,0,0.08);
+  z-index: 1;
+  width: 400px;
+}
+
+.c11 {
+  background-color: #B727EA;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  outline: none;
+  border-radius: 5px;
+  border-width: 0;
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  top: 85px;
+  right: 22px;
+}
+
+.c11:hover {
+  cursor: pointer;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
-  class="Box-sc-1vhutan-0 styled__Container-sc-148sou8-1 dvfkZg gHGvmX"
+  class="c0 c1"
 >
   <div
-    class="Box-sc-1vhutan-0 styled__SettingsBar-sc-148sou8-0 kibwoq ktiiAc"
+    class="c2 c3"
     height="100%"
   >
     <div
-      class="Box-sc-1vhutan-0 ftihex"
+      class="c4"
       height="100%"
       width="400"
     >
       <div
-        class="Row-y1cs0u-0 iMgawu"
+        class="c5"
       >
         <h2
-          class="H2-uw8lbl-0 kkLJyf"
+          class="c6"
         >
           Screen Details
         </h2>
       </div>
       <div
-        class="Column-sc-4zswzq-0 ekpwZH"
+        class="c7"
       >
         <div
-          class="styled__TabsContainer-sc-1tqggs6-0 fLgeVZ"
+          class=""
           data-cy="settings-panel"
         >
           <div
-            class="Row-y1cs0u-0 liAqOY"
+            class="c8"
             data-cy="tabs"
           >
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 dzwVzC"
+              class="c9"
             >
               <div>
                 Settings
               </div>
             </div>
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 dzwVzC"
+              class="c9"
             >
               <div>
                 Narrator
               </div>
             </div>
             <div
-              class="styled__LabelContainer-sc-1tqggs6-2 dzwVzC"
+              class="c9"
             >
               <div>
                 Branching
@@ -56,7 +226,7 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="styled__ContentContainer-sc-1tqggs6-1 cZARfo"
+            class="c10"
           />
         </div>
       </div>
@@ -64,7 +234,7 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
   </div>
   <button
     aria-label="Toggle Settings visibility"
-    class="styled__OpenButton-sc-148sou8-2 GUsZd"
+    class="c11"
     title="Toggle Settings visibility"
   >
     <img

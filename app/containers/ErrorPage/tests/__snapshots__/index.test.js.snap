@@ -1,6 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ErrorPage /> should render and match the snapshot 1`] = `
+.c0 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 10vh;
+  font-weight: 700;
+  color: rgba(16,121,105,1);
+  text-align: center;
+  color: rgba(16,121,105,1);
+}
+
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 50px;
+  font-size: 24px;
+  color: #2F3850;
+  text-align: center;
+}
+
+.c2 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 50px;
+  width: 180px;
+}
+
 <div
   style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px; height: 100%;"
 >
@@ -17,7 +54,7 @@ exports[`<ErrorPage /> should render and match the snapshot 1`] = `
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
         >
           <p
-            class="Text-e4p0w3-0 lpgqtC"
+            class="c0"
             color="#107969"
             font-size="10vh"
             font-weight="bold"
@@ -33,7 +70,7 @@ exports[`<ErrorPage /> should render and match the snapshot 1`] = `
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 0px; flex-grow: 1; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
         >
           <p
-            class="Text-e4p0w3-0 TTVWG"
+            class="c1"
             font-size="24"
           >
             <b>
@@ -63,7 +100,7 @@ exports[`<ErrorPage /> should render and match the snapshot 1`] = `
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; max-width: 100%; margin-left: 0%;"
         >
           <button
-            class="StyledButton-d2s0gt-0 jOamYW"
+            class="c2"
             color="primary"
             radius="100px"
             width="180"
@@ -75,7 +112,7 @@ exports[`<ErrorPage /> should render and match the snapshot 1`] = `
           style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; max-width: 100%; margin-left: 0%;"
         >
           <button
-            class="StyledButton-d2s0gt-0 jOamYW"
+            class="c2"
             color="primary"
             radius="100px"
             width="180"

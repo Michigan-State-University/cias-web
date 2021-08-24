@@ -1,6 +1,62 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Option /> Should render and match the snapshot 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c3 {
+  display: none;
+}
+
+.c7 {
+  margin-right: 5px;
+}
+
+.c2:disabled + label > .c6 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c5:hover {
+  cursor: pointer;
+}
+
+.c2:disabled + .c4 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .c0 {
   padding: 10px;
   display: -webkit-box;
@@ -19,17 +75,87 @@ exports[`<Option /> Should render and match the snapshot 1`] = `
   <div
     class="c0 custom-option"
   >
-    <img
-      src="IMAGE_MOCK"
-    />
-    <span>
-      test
-    </span>
+    <div
+      class="c1"
+    >
+      <input
+        checked=""
+        class="c2 c3"
+        id="test"
+        type="checkbox"
+      />
+      <label
+        class="c4 c5"
+        for="test"
+      >
+        <img
+          class="c6 c7"
+          src="IMAGE_MOCK"
+        />
+        test
+      </label>
+    </div>
   </div>
 </div>
 `;
 
 exports[`<Option /> Should render and match the snapshot 2`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c3 {
+  display: none;
+}
+
+.c7 {
+  margin-right: 5px;
+}
+
+.c2:disabled + label > .c6 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c5:hover {
+  cursor: pointer;
+}
+
+.c2:disabled + .c4 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 .c0 {
   padding: 10px;
   display: -webkit-box;
@@ -48,12 +174,26 @@ exports[`<Option /> Should render and match the snapshot 2`] = `
   <div
     class="c0 custom-option"
   >
-    <img
-      src="IMAGE_MOCK"
-    />
-    <span>
-      test2
-    </span>
+    <div
+      class="c1"
+    >
+      <input
+        checked=""
+        class="c2 c3"
+        id="test"
+        type="checkbox"
+      />
+      <label
+        class="c4 c5"
+        for="test"
+      >
+        <img
+          class="c6 c7"
+          src="IMAGE_MOCK"
+        />
+        test2
+      </label>
+    </div>
   </div>
 </div>
 `;

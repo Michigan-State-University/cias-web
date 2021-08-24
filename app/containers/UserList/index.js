@@ -141,16 +141,14 @@ function UserList({
                 )}
                 {clearFilters && <Box width={25} />}
                 <Col xs={12} sm={4} style={{ marginBottom: 10 }}>
-                  <Box
-                    cursor="pointer"
-                    onClick={() => setShowInactive(!showInactive)}
-                    display="inline-flex"
-                    justify="center"
-                    align="center"
+                  <Checkbox
+                    id="show-inactive"
+                    mr={5}
+                    checked={showInactive}
+                    onChange={() => setShowInactive(!showInactive)}
                   >
-                    <Checkbox mr={5} checked={showInactive} />
                     <FormattedMessage {...messages.showInactive} />
-                  </Box>
+                  </Checkbox>
                 </Col>
               </Row>
             </Col>

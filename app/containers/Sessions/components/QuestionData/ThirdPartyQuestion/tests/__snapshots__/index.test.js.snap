@@ -1,47 +1,406 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 90%;
+}
+
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  width: 100%;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 40px;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c11 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  background-color: transparent;
+  border-color: transparent;
+  width: 89px;
+  max-width: 100%;
+  color: rgba(0,134,248,1);
+  text-align: center;
+  background-color: rgba(0,134,248,0.1);
+  color: rgba(0,134,248,1);
+}
+
+.c11:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c11:disabled {
+  color: #ABBBD1;
+}
+
+.c9 {
+  width: 100%;
+  height: auto;
+  border: 1px solid transparent;
+}
+
+.c9 .ql-editor {
+  font-weight: 400;
+  padding: 10px;
+  overflow: visible;
+}
+
+.c9 .ql-editor.ql-blank::before {
+  left: 11px;
+}
+
+.c9 .ql-picker-label svg {
+  margin-bottom: 15px !important;
+}
+
+.c9 .ql-toolbar {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.c9 .ql-container {
+  font-size: initial;
+  font-family: DM Sans;
+}
+
+.c20 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  color: rgba(183,39,234,1);
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  border-radius: 5px;
+  border-radius: 5px;
+}
+
+.c2:hover {
+  background-color: #E9F1FB;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  min-width: 110px;
+}
+
+.c15 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+}
+
+.c15:hover {
+  background-color: #E9F1FB;
+}
+
+.c16 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  margin-right: 15px;
+}
+
+.c19 {
+  width: auto;
+  height: auto;
+}
+
+.c18 {
+  border-radius: 50%;
+  background-color: #B727EA;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  margin-right: 12px;
+  background-color: rgba(183,39,234,1);
+  color: rgba(255,255,255,1);
+  opacity: 1;
+  color: rgba(255,255,255,1);
+}
+
+.c12 {
+  padding: 5px 10px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 4px;
+  background-color: rgba(0,134,248,0.1);
+  color: rgba(0,134,248,1);
+}
+
+.c12:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid transparent;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto;
+  width: 30px;
+  height: 30px;
+}
+
+.c13:after {
+  content: ' ';
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 6px solid #B727EA;
+  border-color: #B727EA transparent #B727EA transparent;
+  -webkit-animation: hAjVGa 1.2s linear infinite;
+  animation: hAjVGa 1.2s linear infinite;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div
-  class="Column-sc-4zswzq-0 ekpwZH"
+  class="c0"
 >
   <div
-    class="Row-y1cs0u-0 kdnhbN"
+    class="c1"
   >
     <div
-      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 couByT"
+      class="HoverableBox-zvip6a-0 c2"
       width="100%"
     >
       <div
-        class="Column-sc-4zswzq-0 ekpwZH"
+        class="c0"
       >
         <div
-          class="Row-y1cs0u-0 iUMItT"
+          class="c3"
         >
           <div
-            class="Row-y1cs0u-0 iUkPIE"
+            class="c4"
             width="90%"
           >
             <img
-              class="Img-sc-55j3su-0 gJeocE"
+              class="c5"
               src="IMAGE_MOCK"
               width="max-content"
             />
             <div
-              class="Box-sc-1vhutan-0 hWcsjg"
+              class="c6"
               display="flex"
             >
               <div
-                class="Box-sc-1vhutan-0 kQmAmQ"
+                class="c7"
               >
                 <div
-                  class="Row-y1cs0u-0 gQFDhs"
+                  class="c8"
                   width="100%"
                 >
                   <div
-                    class="Column-sc-4zswzq-0 ekpwZH"
+                    class="c0"
                   >
                     <div
-                      class="quill styled__QuillStyled-sc-10udg63-0 bBDopv"
+                      class="quill c9"
                     >
                       <div
                         class="ql-container ql-bubble"
@@ -1434,11 +1793,11 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="Row-y1cs0u-0 fmHnkR"
+          class="c10"
         >
           <input
             aria-label="Email(s)"
-            class="Input-t9j2q5-0 kxIwRW BadgeInput-sc-1ua27xt-0 eSqSHP"
+            class="c11 c12"
             color="#0086F8"
             data-cy="score-0-input"
             placeholder="Email(s)"
@@ -1449,7 +1808,7 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="styled__StyledSpinner-sc-129uixn-0 bIPmqf"
+        class="c13"
         color="#B727EA"
         size="30"
         width="6"
@@ -1457,30 +1816,30 @@ exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
     </div>
   </div>
   <div
-    class="Row-y1cs0u-0 dMmARv"
+    class="c14"
     display="flex"
   >
     <div
-      class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 donflz"
+      class="HoverableBox-zvip6a-0 c15"
     >
       <div
-        class="Box-sc-1vhutan-0 dvfkZg"
+        class="c16"
       >
         <div
-          class="Row-y1cs0u-0 ecllgQ"
+          class="c17"
         >
           <div
-            class="StyledCircle-sc-1dov7hv-0 jkyOQV"
+            class="c18"
             color="#FFFFFF"
             opacity="1"
           >
             <img
-              class="Img-sc-55j3su-0 cDhXoN"
+              class="c19"
               src="IMAGE_MOCK"
             />
           </div>
           <p
-            class="Text-e4p0w3-0 cFbubw"
+            class="c20"
             color="#B727EA"
             font-weight="bold"
           >

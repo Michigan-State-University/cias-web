@@ -1,32 +1,153 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.c4 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  margin-bottom: 50px;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+  text-align: center;
+}
+
+.c5 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+}
+
+.c3 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-bottom: 50px;
+  color: #2F3850;
+  text-align: center;
+}
+
+.c6 {
+  width: 80%;
+}
+
+.c2 {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 702px;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (max-width:480px) {
+  .c6 {
+    width: 80%;
+  }
+}
+
 <div
-  class="Column-sc-4zswzq-0 iyDzCx"
+  class="c0"
   height="100%"
 >
   <div
-    class="Box-sc-1vhutan-0 dnOunt"
+    class="c1"
     display="flex"
     height="100%"
     width="100%"
   >
     <div
-      class="styled__AnswerOuterContainer-sc-1j1abe3-3 cufUDN"
+      class="c2"
     >
       <h2
-        class="H2-uw8lbl-0 vHNJM"
+        class="c3"
       >
         Fill Session
       </h2>
       <h3
-        class="H3-twxrn4-0 hwldYA"
+        class="c4"
         color="#D2371D"
       >
         Please be aware that after clicking the button, audio may be played automatically and the content could change its position dynamically.
       </h3>
       <button
-        class="StyledButton-d2s0gt-0 dOJpyk styled__StyledButton-sc-1j1abe3-0 ikJNrY"
+        class="c5 c6"
         color="primary"
         radius="100px"
       >

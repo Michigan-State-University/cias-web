@@ -177,21 +177,25 @@ const ReflectionBlock = ({
         </>
       )}
       <Row my={15} align="center" justify="between">
-        {formatMessage(messages.reflectionToggle)}
         <Switch
+          id="reflection-toggle"
           disabled={disabled}
           checked
           mr={15}
           onToggle={() => switchToSpeech(blockIndex, id)}
-        />
+        >
+          {formatMessage(messages.reflectionToggle)}
+        </Switch>
       </Row>
       <Row mb={15} align="center" justify="between">
-        {formatMessage(messages.formulaToggle)}
         <Switch
+          id="formula-toggle"
           disabled={disabled}
           mr={15}
           onToggle={() => switchToReflectionFormula(blockIndex, id)}
-        />
+        >
+          {formatMessage(messages.formulaToggle)}
+        </Switch>
       </Row>
       <ArrowDropdown
         disabled={disabled}

@@ -45,20 +45,25 @@ const SessionTypeChooser = ({ onCreateSession }: Props): JSX.Element => {
             background={isChecked ? colors.zirkon : colors.white}
             borderRadius={5}
           >
-            <Radio mr={10} checked={isChecked} />
-            <div>
-              <Box fontSize={15} fontWeight={isChecked ? 'bold' : 'regular'}>
-                <Markup content={title}></Markup>
-              </Box>
-              <Text
-                color={colors.bluewood}
-                textOpacity={isChecked ? 1 : 0.5}
-                fontSize={13}
-                mt={15}
-              >
-                {description}
-              </Text>
-            </div>
+            <Radio
+              id={`session-type-chooser-${type}`}
+              checked={isChecked}
+              onChange={undefined}
+            >
+              <div>
+                <Box fontSize={15} fontWeight={isChecked ? 'bold' : 'regular'}>
+                  <Markup content={title}></Markup>
+                </Box>
+                <Text
+                  color={colors.bluewood}
+                  textOpacity={isChecked ? 1 : 0.5}
+                  fontSize={13}
+                  mt={15}
+                >
+                  {description}
+                </Text>
+              </div>
+            </Radio>
           </Box>
         );
       })}

@@ -1,16 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.c2 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+  text-align: center;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 fgvXEf"
+    class="c0"
   >
     <div
-      class="Box-sc-1vhutan-0 dyNKoD"
+      class="c1"
       width="100%"
     />
     <h3
-      class="H3-twxrn4-0 cksTtw"
+      class="c2"
       color="#D2371D"
     >
       Please verify the validity of the External Link.

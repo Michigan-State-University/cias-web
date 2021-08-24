@@ -1,22 +1,75 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 ekpwZH"
+    class="c0"
   >
     <label
       for="test"
     >
       <p
-        class="Text-e4p0w3-0 kFFPgx"
+        class="c1"
         width="fit-content"
       >
         Label
       </p>
     </label>
     <div
-      class="Box-sc-1vhutan-0 dvfkZg"
+      class="c2"
       data-testid="select"
     >
       <div
@@ -73,7 +126,7 @@ exports[`<FormikSelect /> Should render and match the snapshot 1`] = `
             >
               <img
                 alt="arrow"
-                class="Img-sc-55j3su-0 gTKGj"
+                class="c3"
                 src="IMAGE_MOCK"
                 transform=""
               />

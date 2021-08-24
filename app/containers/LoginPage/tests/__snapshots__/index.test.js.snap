@@ -1,79 +1,471 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<LoginPage /> Should render and match the snapshot 1`] = `
+.c8 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.c10 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  margin-bottom: 40px;
+  font-size: 23px;
+  color: #2F3850;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  max-width: 200px;
+  max-height: 100px;
+}
+
+.c5 {
+  width: auto;
+  height: auto;
+  height: 80px;
+}
+
+.c0 {
+  position: relative;
+  z-index: 0;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 100%;
+  min-height: 100%;
+  background: #F8FBFF;
+}
+
+.c1 {
+  position: absolute;
+  z-index: -1;
+  background: #FFFFFF;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 30px 15px;
+  margin-left: 50vw;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex: 0.75;
+  -ms-flex: 0.75;
+  flex: 0.75;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #FFFFFF;
+  padding: 0 20px 30px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 10px rgba(227,238,251,0.8);
+  position: fixed;
+  height: 100vh;
+  width: 50vw;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.c6 {
+  display: none;
+}
+
+.c2 {
+  display: initial;
+  position: absolute;
+  top: 35px;
+  right: 45px;
+}
+
+.c15 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  width: 100%;
+  height: 46px;
+  color: #2F3850;
+}
+
+.c15:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c15:disabled {
+  color: #ABBBD1;
+}
+
+.c13 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 5px;
+  color: #2F3850;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.c21 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: -5px;
+  font-weight: 700;
+  color: #2F3850;
+}
+
+.c14 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c17 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  color: #B727EA;
+  cursor: pointer;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+}
+
+.c16 {
+  margin-bottom: -14px;
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  z-index: 1;
+}
+
+.c18 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 25px;
+  border-radius: 5px;
+  height: 46px;
+}
+
+.c20 {
+  width: 100%;
+  height: 0;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border-top: 1px solid #D5DEEA;
+  margin-top: 40px;
+  margin-right: 15px;
+}
+
+.c23 {
+  width: 100%;
+  height: 0;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  border-top: 1px solid #D5DEEA;
+  margin-top: 40px;
+  margin-left: 15px;
+}
+
+.c19 {
+  width: 100%;
+}
+
+.c24 {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.c22 {
+  -webkit-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  line-height: 17px;
+}
+
+.c11 {
+  width: 100%;
+  display: inherit;
+  -webkit-flex-direction: inherit;
+  -ms-flex-direction: inherit;
+  flex-direction: inherit;
+}
+
+@media only screen and (min-width:768px) {
+  .c9 {
+    width: 83.33333333333334%;
+  }
+}
+
+@media only screen and (min-width:960px) {
+  .c9 {
+    width: 66.66666666666666%;
+  }
+}
+
+@media only screen and (min-width:1170px) {
+  .c9 {
+    width: 50%;
+  }
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (max-width:768px) {
+  .c0 {
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c1 {
+    background: transparent;
+    height: 400px;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c7 {
+    margin-left: 0;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c4 {
+    background: #FFFFFF;
+    position: relative;
+    height: auto;
+    width: 100%;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    background: none;
+    padding: 30px 15px;
+    -webkit-flex: initial;
+    -ms-flex: initial;
+    flex: initial;
+  }
+
+  .c4 img {
+    height: 35px!important;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c6 {
+    display: initial;
+  }
+}
+
+@media only screen and (max-width:768px) {
+  .c2 {
+    display: none;
+  }
+}
+
 <div
-  class="styled__Background-hdmnn0-0 hmySuK"
+  class="c0"
 >
   <div
-    class="styled__TopBackground-hdmnn0-1 fKSajA"
+    class="c1"
   />
   <div
-    class="styled__MSULogoContainerDesktop-hdmnn0-7 EvOkz"
+    class="c2"
   >
     <img
       alt="Michigan State University Logo"
-      class="Img-sc-55j3su-0 iaFBRP"
+      class="c3"
       src="IMAGE_MOCK"
     />
   </div>
   <div
-    class="styled__HeaderWithDoubleLogo-hdmnn0-5 kiQXiY"
+    class="c4"
   >
     <img
       alt="CIAS Application Logo"
-      class="Img-sc-55j3su-0 A-dfzT"
+      class="c5"
       height="80"
       src="IMAGE_MOCK"
     />
     <div
-      class="styled__MSULogoContainerMobile-hdmnn0-6 ezZegz"
+      class="c6"
     >
       <img
         alt="Michigan State University Logo"
-        class="Img-sc-55j3su-0 iaFBRP"
+        class="c3"
         src="IMAGE_MOCK"
       />
     </div>
   </div>
   <div
-    class="styled__Content-hdmnn0-4 btbiUY"
+    class="c7"
   >
     <div
-      class="Fill-sc-12xwpzs-0 tIBAp"
+      class="c8"
     >
       <div
-        class="Column-sc-4zswzq-0 gYlaIX"
+        class="c9"
       >
         <h1
-          class="H1-sc-1k7m23t-0 ikOywA"
+          class="c10"
           font-size="23"
         >
           Log into CIAS
         </h1>
         <form
           action="#"
-          class="styled__StyledForm-sc-1pd518n-1 cszuPK"
+          class="c11"
         >
           <div
-            class="Column-sc-4zswzq-0 jCuscc"
+            class="c12"
           >
             <label
               for="email"
             >
               <p
-                class="Text-e4p0w3-0 kFFPgx"
+                class="c13"
                 width="fit-content"
               >
                 E-mail address
               </p>
             </label>
             <div
-              class="Row-y1cs0u-0 fgwsqb"
+              class="c14"
               width="100%"
             >
               <input
                 aria-label="Enter e-mail address"
-                class="Input-t9j2q5-0 ptbLy"
+                class="c15"
                 height="46"
                 id="email"
                 name="email"
@@ -85,10 +477,10 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="styled__LinkContainer-ii5zgx-1 bmFcIc"
+            class="c16"
           >
             <a
-              class="styled__StyledLink-ii5zgx-0 iYqTXA"
+              class="c17"
               href="/reset-password"
               tabindex="-1"
             >
@@ -96,25 +488,25 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             </a>
           </div>
           <div
-            class="Column-sc-4zswzq-0 jCuscc"
+            class="c12"
           >
             <label
               for="password"
             >
               <p
-                class="Text-e4p0w3-0 kFFPgx"
+                class="c13"
                 width="fit-content"
               >
                 Password
               </p>
             </label>
             <div
-              class="Row-y1cs0u-0 fgwsqb"
+              class="c14"
               width="100%"
             >
               <input
                 aria-label="Enter password"
-                class="Input-t9j2q5-0 ptbLy"
+                class="c15"
                 height="46"
                 id="password"
                 name="password"
@@ -126,7 +518,7 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 gfZkUL"
+            class="c18"
             color="primary"
             height="46"
             radius="100px"
@@ -135,36 +527,36 @@ exports[`<LoginPage /> Should render and match the snapshot 1`] = `
             Log in
           </button>
           <div
-            class="Row-ptbd41-0 MvYuR"
+            class="c19"
             style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
             width="100%"
           >
             <div
-              class="styled__StyledDivider-sc-1v05p1h-0 cnOitH"
+              class="c20"
               color="#D5DEEA"
             />
             <p
-              class="Text-e4p0w3-0 styled__Or-sc-1pd518n-0 gliHTo brRnoK"
+              class="c21 c22"
               font-weight="bold"
             >
               or
             </p>
             <div
-              class="styled__StyledDivider-sc-1v05p1h-0 eBHkCw"
+              class="c23"
               color="#D5DEEA"
             />
           </div>
           <div
-            class="Row-ptbd41-0 eaFQFD"
+            class="c24"
             mt="30"
             style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: center;"
             width="100%"
           >
             <div
-              class="styled__LinkContainer-ii5zgx-1 iHHiFA"
+              class=""
             >
               <a
-                class="styled__StyledLink-ii5zgx-0 iYqTXA"
+                class="c17"
                 href="/register"
               >
                 Create participant account

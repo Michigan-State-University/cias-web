@@ -1,9 +1,311 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<InviteResearcher /> Should display invalid email error 1`] = `
+.c16 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 45px;
+  margin-bottom: 5px;
+  width: 260px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 100%;
+  margin-bottom: 35px;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 46px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  height: 46px;
+  border-bottom: 1px solid #D7DEE9;
+}
+
+.c10 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #2F3850;
+}
+
+.c14 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 14px;
+  color: #2F3850;
+}
+
+.c12 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 5px;
+  font-weight: 700;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 999;
+  background-color: rgba(14,14,14,0.4);
+  border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  left: 0px;
+  top: 0px;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 700px;
+  max-height: 90%;
+  min-width: 450px;
+  min-height: 200px;
+  overflow: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: rgba(255,255,255,1);
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 10px;
+  border-radius: 0px;
+  border-radius: 0px;
+}
+
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c6 {
+  height: 28px;
+  width: 28px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  background: #E9F1FB;
+  margin-right: 35px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0;
+  position: relative;
+  left: 40px;
+  top: -8px;
+}
+
+.c8 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  margin-bottom: 20px;
+  color: #2F3850;
+}
+
+.c15 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  font-weight: 700;
+  color: rgba(210,55,29,1);
+}
+
+.c11 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  width: 100%;
+  max-width: none;
+  color: #2F3850;
+  background-color: rgba(233,241,251,1);
+}
+
+.c11:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c11:disabled {
+  color: #ABBBD1;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (max-width:480px) {
+  .c2 {
+    max-height: calc(100% - 20px);
+    max-width: none;
+    min-width: 0;
+    width: calc(100% - 20px);
+  }
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 clRtth"
+    class="c0"
     display="flex"
     height="100%"
     width="100%"
@@ -11,25 +313,25 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
     <div
       aria-describedby="modal-description"
       aria-labelledby="modal-title"
-      class="Box-sc-1vhutan-0 styled__StyledBox-sc-253ice-0 irgbRm CZPtF"
+      class="c1 c2"
       overflow="auto"
       role="dialog"
     >
       <div
-        class="Column-sc-4zswzq-0 ekpwZH"
+        class="c3"
       >
         <div
-          class="Row-y1cs0u-0 ddPUgf"
+          class="c4"
         >
           <h1
-            class="H1-sc-1k7m23t-0 ewNLte"
+            class="c5"
             id="modal-title"
           >
             Invite researcher
           </h1>
           <button
             aria-label="Close window"
-            class="styled__CrossButton-sc-1kp22um-1 fPabiY"
+            class="c6"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
             title="Close window"
@@ -42,23 +344,23 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-1vhutan-0 bUssfU"
+        class="c7"
         id="modal-description"
       >
         <div
-          class="Column-sc-4zswzq-0 ekpwZH"
+          class="c3"
         >
           <h3
-            class="H3-twxrn4-0 yVyBl"
+            class="c8"
           >
             Send another invite
           </h3>
           <div
-            class="Column-sc-4zswzq-0 cPpuJH"
+            class="c9"
             width="100%"
           >
             <p
-              class="Text-e4p0w3-0 fwzRty"
+              class="c10"
               font-size="14"
               id="researcher-email-label"
             >
@@ -66,14 +368,14 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             </p>
             <input
               aria-labelledby="researcher-email-label"
-              class="Input-t9j2q5-0 dbCYSA"
+              class="c11"
               placeholder="e.g john.doe@contact.com"
               type="text"
               value="invalidemail"
               width="100%"
             />
             <p
-              class="Text-e4p0w3-0 kPOgQg"
+              class="c12"
               color="#D2371D"
               font-weight="bold"
             >
@@ -81,22 +383,22 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             </p>
           </div>
           <h3
-            class="H3-twxrn4-0 yVyBl"
+            class="c8"
           >
             Invitations sent (2)
           </h3>
           <div
-            class="Row-y1cs0u-0 jzzpxY"
+            class="c13"
             height="46"
           >
             <p
-              class="Text-e4p0w3-0 iZfJuq"
+              class="c14"
               font-size="14"
             >
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              class="c15"
               color="#D2371D"
               font-weight="bold"
             >
@@ -104,17 +406,17 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             </button>
           </div>
           <div
-            class="Row-y1cs0u-0 jzzpxY"
+            class="c13"
             height="46"
           >
             <p
-              class="Text-e4p0w3-0 iZfJuq"
+              class="c14"
               font-size="14"
             >
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              class="c15"
               color="#D2371D"
               font-weight="bold"
             >
@@ -122,7 +424,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 gIfTt"
+            class="c16"
             color="primary"
             disabled=""
             radius="100px"
@@ -138,9 +440,301 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
 `;
 
 exports[`<InviteResearcher /> Should display server error 1`] = `
+.c15 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 45px;
+  margin-bottom: 5px;
+  width: 260px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 100%;
+  margin-bottom: 35px;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 46px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  height: 46px;
+  border-bottom: 1px solid #D7DEE9;
+}
+
+.c10 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #2F3850;
+}
+
+.c13 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 14px;
+  color: #2F3850;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 999;
+  background-color: rgba(14,14,14,0.4);
+  border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  left: 0px;
+  top: 0px;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 700px;
+  max-height: 90%;
+  min-width: 450px;
+  min-height: 200px;
+  overflow: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: rgba(255,255,255,1);
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 10px;
+  border-radius: 0px;
+  border-radius: 0px;
+}
+
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c6 {
+  height: 28px;
+  width: 28px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  background: #E9F1FB;
+  margin-right: 35px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0;
+  position: relative;
+  left: 40px;
+  top: -8px;
+}
+
+.c8 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  margin-bottom: 20px;
+  color: #2F3850;
+}
+
+.c14 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  font-weight: 700;
+  color: rgba(210,55,29,1);
+}
+
+.c11 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  width: 100%;
+  max-width: none;
+  color: #2F3850;
+  background-color: rgba(233,241,251,1);
+}
+
+.c11:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c11:disabled {
+  color: #ABBBD1;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (max-width:480px) {
+  .c2 {
+    max-height: calc(100% - 20px);
+    max-width: none;
+    min-width: 0;
+    width: calc(100% - 20px);
+  }
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 clRtth"
+    class="c0"
     display="flex"
     height="100%"
     width="100%"
@@ -148,25 +742,25 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
     <div
       aria-describedby="modal-description"
       aria-labelledby="modal-title"
-      class="Box-sc-1vhutan-0 styled__StyledBox-sc-253ice-0 irgbRm CZPtF"
+      class="c1 c2"
       overflow="auto"
       role="dialog"
     >
       <div
-        class="Column-sc-4zswzq-0 ekpwZH"
+        class="c3"
       >
         <div
-          class="Row-y1cs0u-0 ddPUgf"
+          class="c4"
         >
           <h1
-            class="H1-sc-1k7m23t-0 ewNLte"
+            class="c5"
             id="modal-title"
           >
             Invite researcher
           </h1>
           <button
             aria-label="Close window"
-            class="styled__CrossButton-sc-1kp22um-1 fPabiY"
+            class="c6"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
             title="Close window"
@@ -179,23 +773,23 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-1vhutan-0 bUssfU"
+        class="c7"
         id="modal-description"
       >
         <div
-          class="Column-sc-4zswzq-0 ekpwZH"
+          class="c3"
         >
           <h3
-            class="H3-twxrn4-0 yVyBl"
+            class="c8"
           >
             Send another invite
           </h3>
           <div
-            class="Column-sc-4zswzq-0 cPpuJH"
+            class="c9"
             width="100%"
           >
             <p
-              class="Text-e4p0w3-0 fwzRty"
+              class="c10"
               font-size="14"
               id="researcher-email-label"
             >
@@ -203,7 +797,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             </p>
             <input
               aria-labelledby="researcher-email-label"
-              class="Input-t9j2q5-0 dbCYSA"
+              class="c11"
               placeholder="e.g john.doe@contact.com"
               type="text"
               value=""
@@ -211,22 +805,22 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             />
           </div>
           <h3
-            class="H3-twxrn4-0 yVyBl"
+            class="c8"
           >
             Invitations sent (2)
           </h3>
           <div
-            class="Row-y1cs0u-0 jzzpxY"
+            class="c12"
             height="46"
           >
             <p
-              class="Text-e4p0w3-0 iZfJuq"
+              class="c13"
               font-size="14"
             >
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              class="c14"
               color="#D2371D"
               font-weight="bold"
             >
@@ -234,17 +828,17 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             </button>
           </div>
           <div
-            class="Row-y1cs0u-0 jzzpxY"
+            class="c12"
             height="46"
           >
             <p
-              class="Text-e4p0w3-0 iZfJuq"
+              class="c13"
               font-size="14"
             >
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              class="c14"
               color="#D2371D"
               font-weight="bold"
             >
@@ -252,7 +846,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 gIfTt"
+            class="c15"
             color="primary"
             disabled=""
             radius="100px"
@@ -268,9 +862,301 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
 `;
 
 exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
+.c15 {
+  width: 100%;
+  height: 40px;
+  border-radius: 100px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: #107969;
+  color: #FFFFFF;
+  border: 1px solid transparent;
+  cursor: default;
+  background-color: #9AA1B6;
+  -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-top: 45px;
+  margin-bottom: 5px;
+  width: 260px;
+  -webkit-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: 100%;
+  margin-bottom: 35px;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 46px;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  height: 46px;
+  border-bottom: 1px solid #D7DEE9;
+}
+
+.c10 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #2F3850;
+}
+
+.c13 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 14px;
+  color: #2F3850;
+}
+
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 999;
+  background-color: rgba(14,14,14,0.4);
+  border-radius: 0px;
+  border-radius: 0px;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  left: 0px;
+  top: 0px;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  max-width: 700px;
+  max-height: 90%;
+  min-width: 450px;
+  min-height: 200px;
+  overflow: auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  background-color: rgba(255,255,255,1);
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  margin-top: 10px;
+  border-radius: 0px;
+  border-radius: 0px;
+}
+
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c6 {
+  height: 28px;
+  width: 28px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border-radius: 4px;
+  background: #E9F1FB;
+  margin-right: 35px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 0;
+  position: relative;
+  left: 40px;
+  top: -8px;
+}
+
+.c8 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  margin-bottom: 20px;
+  color: #2F3850;
+}
+
+.c14 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  font-weight: 700;
+  color: rgba(210,55,29,1);
+}
+
+.c11 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  width: 100%;
+  max-width: none;
+  color: #2F3850;
+  background-color: rgba(233,241,251,1);
+}
+
+.c11:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c11:disabled {
+  color: #ABBBD1;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (max-width:480px) {
+  .c2 {
+    max-height: calc(100% - 20px);
+    max-width: none;
+    min-width: 0;
+    width: calc(100% - 20px);
+  }
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 clRtth"
+    class="c0"
     display="flex"
     height="100%"
     width="100%"
@@ -278,25 +1164,25 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
     <div
       aria-describedby="modal-description"
       aria-labelledby="modal-title"
-      class="Box-sc-1vhutan-0 styled__StyledBox-sc-253ice-0 irgbRm CZPtF"
+      class="c1 c2"
       overflow="auto"
       role="dialog"
     >
       <div
-        class="Column-sc-4zswzq-0 ekpwZH"
+        class="c3"
       >
         <div
-          class="Row-y1cs0u-0 ddPUgf"
+          class="c4"
         >
           <h1
-            class="H1-sc-1k7m23t-0 ewNLte"
+            class="c5"
             id="modal-title"
           >
             Invite researcher
           </h1>
           <button
             aria-label="Close window"
-            class="styled__CrossButton-sc-1kp22um-1 fPabiY"
+            class="c6"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
             title="Close window"
@@ -309,23 +1195,23 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
         </div>
       </div>
       <div
-        class="Box-sc-1vhutan-0 bUssfU"
+        class="c7"
         id="modal-description"
       >
         <div
-          class="Column-sc-4zswzq-0 ekpwZH"
+          class="c3"
         >
           <h3
-            class="H3-twxrn4-0 yVyBl"
+            class="c8"
           >
             Send another invite
           </h3>
           <div
-            class="Column-sc-4zswzq-0 cPpuJH"
+            class="c9"
             width="100%"
           >
             <p
-              class="Text-e4p0w3-0 fwzRty"
+              class="c10"
               font-size="14"
               id="researcher-email-label"
             >
@@ -333,7 +1219,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             </p>
             <input
               aria-labelledby="researcher-email-label"
-              class="Input-t9j2q5-0 dbCYSA"
+              class="c11"
               placeholder="e.g john.doe@contact.com"
               type="text"
               value=""
@@ -341,22 +1227,22 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             />
           </div>
           <h3
-            class="H3-twxrn4-0 yVyBl"
+            class="c8"
           >
             Invitations sent (2)
           </h3>
           <div
-            class="Row-y1cs0u-0 jzzpxY"
+            class="c12"
             height="46"
           >
             <p
-              class="Text-e4p0w3-0 iZfJuq"
+              class="c13"
               font-size="14"
             >
               email@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              class="c14"
               color="#D2371D"
               font-weight="bold"
             >
@@ -364,17 +1250,17 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             </button>
           </div>
           <div
-            class="Row-y1cs0u-0 jzzpxY"
+            class="c12"
             height="46"
           >
             <p
-              class="Text-e4p0w3-0 iZfJuq"
+              class="c13"
               font-size="14"
             >
               email2@gmail.com
             </p>
             <button
-              class="StyledTextButton-sc-1b7egxw-0 hkoCFR"
+              class="c14"
               color="#D2371D"
               font-weight="bold"
             >
@@ -382,7 +1268,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             </button>
           </div>
           <button
-            class="StyledButton-d2s0gt-0 gIfTt"
+            class="c15"
             color="primary"
             disabled=""
             radius="100px"

@@ -15,14 +15,16 @@ const FormulaSwitcher = ({ isUsedFormula, changeAction }) => {
   const { formatMessage, editingPossible } = useContext(TextMessagesContext);
   return (
     <Row mb={30} align="center">
-      <Text mr={15} fontSize={15} fontWeight="bold">
-        {formatMessage(messages.useFormula)}
-      </Text>
       <Switch
+        id="sms-formula-switch"
         onToggle={changeAction}
         checked={isUsedFormula}
         disabled={!editingPossible}
-      />
+      >
+        <Text mr={15} fontSize={15} fontWeight="bold">
+          {formatMessage(messages.useFormula)}
+        </Text>
+      </Switch>
     </Row>
   );
 };

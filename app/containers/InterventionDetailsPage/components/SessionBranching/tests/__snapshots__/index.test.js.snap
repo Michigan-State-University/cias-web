@@ -71,6 +71,30 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -98,7 +122,7 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   width: 33.33333333333333%;
 }
 
-.c8 {
+.c9 {
   position: relative;
   display: inline-block;
   min-width: 40px;
@@ -106,13 +130,13 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   margin-left: 10px;
 }
 
-.c10 {
+.c11 {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-.c12 {
+.c13 {
   position: absolute;
   top: 0;
   left: 0;
@@ -125,20 +149,20 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   border-radius: 21px;
 }
 
-.c9:checked + .c11 {
+.c10:checked + .c12 {
   background-color: #B727EA;
 }
 
-.c9:focus + .c11 {
+.c10:focus + .c12 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c9:disabled + .c11 {
+.c10:disabled + .c12 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c12:before {
+.c13:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -151,7 +175,7 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c9:checked + .c11:before {
+.c10:checked + .c12:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
@@ -175,7 +199,7 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c7 {
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -247,23 +271,36 @@ exports[`<SessionBranching /> Should render and match the snapshot 1`] = `
       class="c6"
       width="100%"
     >
-      <p
-        class="c7"
-      >
-        Use formula
-      </p>
       <div
-        class="c8"
+        class="c7"
+        width="100%"
       >
-        <input
-          class="c9 c10"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          type="checkbox"
-        />
-        <span
-          class="c11 c12"
-        />
+        <label
+          for="session-undefined-formula-switch-label"
+        >
+          <p
+            class="c8"
+          >
+            Use formula
+          </p>
+        </label>
+        <div
+          class="c9"
+        >
+          <input
+            aria-checked="false"
+            aria-disabled="false"
+            class="c10 c11"
+            data-cy="branching-intervention-toggle"
+            data-testid="switch-input"
+            id="session-undefined-formula-switch-label"
+            role="switch"
+            type="checkbox"
+          />
+          <span
+            class="c12 c13"
+          />
+        </div>
       </div>
     </div>
   </div>

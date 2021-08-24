@@ -10,7 +10,7 @@ import { previewRegex } from 'global/constants/regex';
 import { StyledLink } from './styled';
 import messages from './messages';
 import { makeSelectUserSession } from '../selectors';
-import { getSessionMapUserPreviewUrl } from '../utils.ts';
+import { getSessionMapUserPreviewUrl } from '../utils';
 
 const FinishScreenLayout = ({ formatMessage }) => {
   const { id: userSessionId } = useSelector(makeSelectUserSession());

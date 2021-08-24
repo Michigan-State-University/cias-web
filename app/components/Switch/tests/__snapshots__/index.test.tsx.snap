@@ -64,9 +64,12 @@ exports[`<Switch /> should match the snapshot 1`] = `
     class="c0"
   >
     <input
+      aria-checked="false"
+      aria-disabled="false"
       class="c1 c2"
       data-cy="branching-intervention-toggle"
       data-testid="switch-input"
+      role="switch"
       type="checkbox"
     />
     <span

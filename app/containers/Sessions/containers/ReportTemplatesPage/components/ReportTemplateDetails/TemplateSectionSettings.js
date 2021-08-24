@@ -37,6 +37,13 @@ const TemplateSectionSettings = ({
     canEdit,
   } = useContext(ReportTemplatesContext);
 
+  const [currentlyOpenedCollapsable, setCurrentlyOpenedCollapsable] =
+    useState(-1);
+  const handleOpenCollapsable = (index) => () => {
+    if (index === currentlyOpenedCollapsable) setCurrentlyOpenedCollapsable(-1);
+    else setCurrentlyOpenedCollapsable(index);
+  };
+
   useEffect(() => {
     if (!updateReportTemplateLoading) {
       setIsAddingSection(false);
@@ -104,6 +111,8 @@ const TemplateSectionSettings = ({
             <Col>
               <Spacer />
               <SectionCaseItem
+                openCollapsable={handleOpenCollapsable(index)}
+                isOpened={index === currentlyOpenedCollapsable}
                 title={formatMessage(messages.caseTitle, {
                   index: index + 1,
                 })}

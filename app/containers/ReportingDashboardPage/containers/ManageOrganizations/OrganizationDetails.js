@@ -92,14 +92,15 @@ const OrganizationDetails = ({
             <Col xs="content">
               <NoMarginRow align="center" justify="end">
                 <Checkbox
+                  id="organization-toggle-archived"
                   checked={showDeletedEntities}
                   mr={5}
-                  aria-labelledby="showDeletedEntities"
-                  onClick={toggleShowDeletedEntities}
-                />
-                <Text id="showDeletedEntities">
-                  {formatMessage(messages.showDeletedEntitiesToggle)}
-                </Text>
+                  onChange={toggleShowDeletedEntities}
+                >
+                  <Text>
+                    {formatMessage(messages.showDeletedEntitiesToggle)}
+                  </Text>
+                </Checkbox>
               </NoMarginRow>
             </Col>
           </Row>

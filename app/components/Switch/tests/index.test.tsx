@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import 'jest-styled-components';
 
-import Switch from '../index';
+import Switch from '..';
 
 describe('<Switch />', () => {
-  const defaultProps = {
+  const defaultProps: ComponentProps<typeof Switch> = {
+    checked: false,
     onToggle: jest.fn(),
   };
+
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(<Switch {...defaultProps} />);

@@ -9,7 +9,7 @@ export function* getInvitations() {
   const requestUrl = `/v1/users/invitations`;
   try {
     const { data } = yield call(axios.get, requestUrl);
-    const invitations = jsonApiToArray(data, 'invitation');
+    const invitations = jsonApiToArray(data, 'user');
     yield put(getInvitationsSuccess(invitations));
   } catch (error) {
     yield put(getInvitationsError(error.toString()));

@@ -13,18 +13,16 @@ import {
   INVITE_RESEARCHER_SUCCESS,
 } from '../constants';
 import { inviteResearcherSuccess, inviteResearcherError } from '../actions';
-import { mapInvitedResearcher } from '../utils';
 
 export function* inviteResearcher({ payload: { email } }) {
   const requestUrl = '/v1/users/invitations';
   const body = { invitation: { email } };
   try {
     const { data } = yield call(axios.post, requestUrl, body);
-    const user = jsonApiToObject(data, 'invitation');
-    const mappedUser = mapInvitedResearcher(user);
+    const user = jsonApiToObject(data, 'user');
 
-    yield put(inviteResearcherSuccess(mappedUser));
-    yield put(addUserToList(mappedUser));
+    yield put(inviteResearcherSuccess(user));
+    yield put(addUserToList(user));
     yield call(toast.success, formatMessage(messages.invitationSent), {
       toastId: INVITE_RESEARCHER_SUCCESS,
     });

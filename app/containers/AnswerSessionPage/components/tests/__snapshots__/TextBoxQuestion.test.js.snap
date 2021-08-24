@@ -1,20 +1,108 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<TextBoxQuestion /> Should render and match the snapshot 1`] = `
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  background-color: rgba(233,241,251,1);
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c3 {
+  resize: none;
+  padding: 12px;
+  border: 1px solid #E9F1FB;
+  border-radius: 5px;
+  width: 100%;
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+.c3:focus {
+  box-shadow: none;
+  outline: none;
+  border: 1px solid #107969;
+}
+
+.c3:disabled {
+  color: #ABBBD1;
+}
+
+.c4 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  margin-top: 5px;
+  color: #2F3850;
+}
+
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #6B707C;
+  margin-top: 5px;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 ekpwZH"
+    class="c0"
   >
     <div
-      class="Box-sc-1vhutan-0 dFCBuO"
+      class="c1"
       width="100%"
     >
       <div
-        class="Row-y1cs0u-0 dskFsL"
+        class="c2"
       >
         <textarea
           aria-label="Enter your response here"
-          class="TextArea-sc-175uiux-0 gRMYNb"
+          class="c3"
           maxlength="250"
           placeholder="Enter your response here"
           rows="5"
@@ -23,7 +111,7 @@ exports[`<TextBoxQuestion /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <p
-      class="Text-e4p0w3-0 Comment-j8a9v8-0 jhwTed fRkavf"
+      class="c4 c5"
     >
       Remaining characters: 250
     </p>

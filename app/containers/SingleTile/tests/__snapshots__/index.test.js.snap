@@ -52,11 +52,6 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
-.c6 {
-  width: auto;
-  height: auto;
-}
-
 .c7 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -83,6 +78,11 @@ exports[`<SingleTile /> Should render and match the snapshot 1`] = `
   -ms-flex-pack: justify;
   justify-content: space-between;
   justify-items: space-between;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
 }
 
 .c10 {

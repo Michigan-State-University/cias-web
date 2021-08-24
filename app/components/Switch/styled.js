@@ -11,7 +11,12 @@ const SwitchWrapper = styled.div`
   ${padding};
 `;
 
-const SwitchInput = styled.input.attrs({ type: 'checkbox' })`
+const SwitchInput = styled.input.attrs(({ checked, disabled }) => ({
+  type: 'checkbox',
+  role: 'switch',
+  'aria-checked': checked,
+  'aria-disabled': disabled,
+}))`
   opacity: 0;
   width: 0;
   height: 0;

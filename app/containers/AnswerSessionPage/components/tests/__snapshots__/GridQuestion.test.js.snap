@@ -1,55 +1,292 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.c2 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  -webkit-scrollbar-width: none;
+  -moz-scrollbar-width: none;
+  -ms-scrollbar-width: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: inherit;
+  overflow: scroll;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  margin-left: 40px;
+}
+
+.c2::-webkit-scrollbar {
+  width: 0;
+}
+
+.c9 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c10 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: inherit;
+  max-width: 300px;
+  padding: 5px;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  justify-items: center;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 80px;
+}
+
+.c12 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c14 {
+  display: none;
+}
+
+.c13:disabled + label > .c17 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c16 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c16:hover {
+  cursor: pointer;
+}
+
+.c13:disabled + .c15 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c3 {
+  font-size: 13px;
+}
+
+.c3 tr,
+.c3 th,
+.c3 td {
+  font-weight: 400;
+}
+
+.c5 {
+  height: 47.5px;
+}
+
+.c6 {
+  cursor: default;
+  color: #0E0E0E;
+  background-color: #F8FBFF;
+}
+
+.TBody-gqq9cv-0 .c4:nth-child(even) {
+  background: #E2EEF1;
+}
+
+.TBody-gqq9cv-0 .c4:nth-child(even) td:first-child,
+.TBody-gqq9cv-0 .c6:nth-child(even) th:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.TBody-gqq9cv-0 .c4:nth-child(even) td:last-child,
+.TBody-gqq9cv-0 .c6:nth-child(even) th:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.c6 td:nth-last-child(-n + ) {
+  opacity: 100%;
+}
+
+.c6:hover {
+  background: !important;
+}
+
+.c6:hover td:hover {
+  opacity: 100%;
+}
+
+.c7 {
+  width: 120px;
+}
+
+.c8 {
+  z-index: 1;
+  background-color: inherit;
+  text-align: left;
+  word-break: normal;
+  word-wrap: break-word;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Box-sc-1vhutan-0 jtfWfT"
+    class="c0"
     width="100%"
   >
     <div
-      class="Box-sc-1vhutan-0 jOzpnJ"
+      class="c1"
       height="100%"
       width="100%"
     >
       <div
-        class="Box-sc-1vhutan-0 bkzVBq"
+        class="c2"
         height="inherit"
         overflow="scroll"
       >
         <table
-          class="Table-sc-1y0iqmn-0 dCDWhF"
+          class="c3"
         >
           <thead
             class="THead-sc-8drp5d-0"
           >
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF eosQBW"
+              class="c4 c5 c6"
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb uqDUt"
+                class="c7 c8"
                 scope="col"
                 style="position: sticky; left: 0px;"
                 width="120px"
               />
               <th
-                class="TH-sc-1w7ae0i-0 eqAwGb"
+                class="c7"
                 scope="col"
                 width="120px"
               >
                 <div
-                  class="Column-sc-4zswzq-0 ekpwZH"
+                  class="c9"
                 >
                   test
                 </div>
               </th>
               <th
-                class="TH-sc-1w7ae0i-0 eqAwGb"
+                class="c7"
                 scope="col"
                 width="120px"
               >
                 <div
-                  class="Column-sc-4zswzq-0 ekpwZH"
+                  class="c9"
                 >
                   test
                 </div>
@@ -60,17 +297,17 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
             class="TBody-gqq9cv-0"
           >
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF eosQBW"
+              class="c4 c5 c6"
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb uqDUt"
+                class="c7 c8"
                 scope="row"
                 style="position: sticky; left: 0px;"
                 width="120px"
               >
                 <div
-                  class="Column-sc-4zswzq-0 hIrqPf"
+                  class="c10"
                   height="inherit"
                   width="max-content"
                 >
@@ -78,42 +315,74 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 </div>
               </th>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
               >
                 <div
-                  class="Row-y1cs0u-0 iQucgI"
+                  class="c11"
                   width="80"
                 >
-                  <img
-                    src="IMAGE_MOCK"
-                  />
+                  <div
+                    class="c12"
+                  >
+                    <input
+                      aria-label="Question 1: test; Answer 1: test."
+                      class="c13 c14"
+                      id="question-test-id-cell-0-0"
+                      type="radio"
+                    />
+                    <label
+                      class="c15 c16"
+                      for="question-test-id-cell-0-0"
+                    >
+                      <img
+                        class="c17 "
+                        src="IMAGE_MOCK"
+                      />
+                    </label>
+                  </div>
                 </div>
               </td>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
               >
                 <div
-                  class="Row-y1cs0u-0 iQucgI"
+                  class="c11"
                   width="80"
                 >
-                  <img
-                    src="IMAGE_MOCK"
-                  />
+                  <div
+                    class="c12"
+                  >
+                    <input
+                      aria-label="Question 1: test; Answer 2: test."
+                      class="c13 c14"
+                      id="question-test-id-cell-0-1"
+                      type="radio"
+                    />
+                    <label
+                      class="c15 c16"
+                      for="question-test-id-cell-0-1"
+                    >
+                      <img
+                        class="c17 "
+                        src="IMAGE_MOCK"
+                      />
+                    </label>
+                  </div>
                 </div>
               </td>
             </tr>
             <tr
-              class="TR-sc-1omngt7-0 StripedTR-sc-1wcdkgr-0 iNrQaF eosQBW"
+              class="c4 c5 c6"
               color="#E2EEF1"
             >
               <th
-                class="TH-sc-1w7ae0i-0 styled__FirstTH-bqo6sz-7 eqAwGb uqDUt"
+                class="c7 c8"
                 scope="row"
                 style="position: sticky; left: 0px;"
                 width="120px"
               >
                 <div
-                  class="Column-sc-4zswzq-0 hIrqPf"
+                  class="c10"
                   height="inherit"
                   width="max-content"
                 >
@@ -121,27 +390,59 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 </div>
               </th>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
               >
                 <div
-                  class="Row-y1cs0u-0 iQucgI"
+                  class="c11"
                   width="80"
                 >
-                  <img
-                    src="IMAGE_MOCK"
-                  />
+                  <div
+                    class="c12"
+                  >
+                    <input
+                      aria-label="Question 2: test; Answer 1: test."
+                      class="c13 c14"
+                      id="question-test-id-cell-1-0"
+                      type="radio"
+                    />
+                    <label
+                      class="c15 c16"
+                      for="question-test-id-cell-1-0"
+                    >
+                      <img
+                        class="c17 "
+                        src="IMAGE_MOCK"
+                      />
+                    </label>
+                  </div>
                 </div>
               </td>
               <td
-                class="TD-y7762g-0 gxeveZ"
+                class=""
               >
                 <div
-                  class="Row-y1cs0u-0 iQucgI"
+                  class="c11"
                   width="80"
                 >
-                  <img
-                    src="IMAGE_MOCK"
-                  />
+                  <div
+                    class="c12"
+                  >
+                    <input
+                      aria-label="Question 2: test; Answer 2: test."
+                      class="c13 c14"
+                      id="question-test-id-cell-1-1"
+                      type="radio"
+                    />
+                    <label
+                      class="c15 c16"
+                      for="question-test-id-cell-1-1"
+                    >
+                      <img
+                        class="c17 "
+                        src="IMAGE_MOCK"
+                      />
+                    </label>
+                  </div>
                 </div>
               </td>
             </tr>

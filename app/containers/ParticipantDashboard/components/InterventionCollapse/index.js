@@ -69,15 +69,17 @@ function InterventionCollapse({
               <Row>
                 <NotificationColumn align="end" mr={25}>
                   <Row mb={5} align="center">
-                    <Text color={themeColors.secondary} textAlign="right">
-                      <FormattedMessage {...messages.notifications} />
-                    </Text>
                     <Checkbox
-                      onClick={handleClickNotification}
+                      id="participant-email-notification"
+                      onChange={handleClickNotification}
                       ml={5}
                       height={17}
                       checked={emailNotifications}
-                    />
+                    >
+                      <Text color={themeColors.secondary} textAlign="right">
+                        <FormattedMessage {...messages.notifications} />
+                      </Text>
+                    </Checkbox>
                   </Row>
                   <Text>
                     {sessionsLength}{' '}
@@ -94,7 +96,7 @@ function InterventionCollapse({
         }
       >
         {sessions.map((sessionProps, sessionIndex) => (
-          <Column key={`Session-Collapse-${sessionProps.id}`} widh="100%">
+          <Column key={`Session-Collapse-${sessionProps.id}`} width="100%">
             <SessionDivider width={sessionIndex === 0 ? '100%' : '97%'} />
             <StyledBox px={26}>
               <SessionTile {...sessionProps} />

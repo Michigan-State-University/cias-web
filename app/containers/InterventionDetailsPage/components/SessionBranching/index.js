@@ -94,13 +94,15 @@ function SessionBranching({
         </Column>
         <Column xs={4}>
           <Row justify="end" align="center" width="100%">
-            <Text whiteSpace="pre">{formatMessage(messages.useFormula)}</Text>
             <Switch
+              id={`session-${id}-formula-switch-label`}
               disabled={disabled}
               ml={10}
               checked={status}
               onToggle={handleFormulaStatus}
-            />
+            >
+              <Text whiteSpace="pre">{formatMessage(messages.useFormula)}</Text>
+            </Switch>
           </Row>
         </Column>
       </Row>

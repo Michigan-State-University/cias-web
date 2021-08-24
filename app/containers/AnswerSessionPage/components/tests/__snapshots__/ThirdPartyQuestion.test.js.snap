@@ -1,64 +1,247 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ThirdPartyQuestion /> Should render and match the snapshot 1`] = `
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c2 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 44px;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 44;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c1 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: calc(100% + 21px);
+  padding-top: 14px;
+  padding-bottom: 14px;
+  padding-right: 21px;
+  padding-left: 21px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-radius: 5px;
+}
+
+.c3:hover {
+  background-color: #E9F1FB;
+}
+
+.c7 {
+  display: none;
+}
+
+.c6:disabled + label > .c10 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c9 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c9:hover {
+  cursor: pointer;
+}
+
+.c6:disabled + .c8 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c11 {
+  margin-left: 5px;
+}
+
+.c12 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 15px;
+  line-height: 150%;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+  text-align: center;
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
+}
+
 <div>
   <div
-    class="Column-sc-4zswzq-0 ekpwZH"
+    class="c0"
   >
     <div
-      class="Box-sc-1vhutan-0 dvfkZg"
+      class="c1"
     >
       <div
-        class="Row-y1cs0u-0 kdnhbN"
+        class="c2"
       >
         <div
-          class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 kmyFFE"
+          class="HoverableBox-zvip6a-0 c3"
           width="calc(100% + 21px)"
         >
           <div
-            class="Row-y1cs0u-0 hBrQLN"
+            class="c4"
             height="44"
           >
-            <img
-              src="IMAGE_MOCK"
-            />
-            <label
-              for="answer-1"
+            <div
+              class="c5"
             >
-              <div>
-                test
-              </div>
-            </label>
+              <input
+                class="c6 c7"
+                data-cy="single-question-0-checkbox"
+                id="answer-1"
+                type="radio"
+              />
+              <label
+                class="c8 c9"
+                for="answer-1"
+              >
+                <img
+                  class="c10 "
+                  src="IMAGE_MOCK"
+                />
+                <div
+                  class="c1 c11"
+                >
+                  <div>
+                    test
+                  </div>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
       </div>
       <div
-        class="Row-y1cs0u-0 kdnhbN"
+        class="c2"
       >
         <div
-          class="Box-sc-1vhutan-0 HoverableBox-zvip6a-0 kmyFFE"
+          class="HoverableBox-zvip6a-0 c3"
           width="calc(100% + 21px)"
         >
           <div
-            class="Row-y1cs0u-0 hBrQLN"
+            class="c4"
             height="44"
           >
-            <img
-              src="IMAGE_MOCK"
-            />
-            <label
-              for="answer-2"
+            <div
+              class="c5"
             >
-              <div>
-                test
-              </div>
-            </label>
+              <input
+                class="c6 c7"
+                data-cy="single-question-1-checkbox"
+                id="answer-2"
+                type="radio"
+              />
+              <label
+                class="c8 c9"
+                for="answer-2"
+              >
+                <img
+                  class="c10 "
+                  src="IMAGE_MOCK"
+                />
+                <div
+                  class="c1 c11"
+                >
+                  <div>
+                    test
+                  </div>
+                </div>
+              </label>
+            </div>
           </div>
         </div>
       </div>
     </div>
     <h3
-      class="H3-twxrn4-0 cksTtw"
+      class="c12"
       color="#D2371D"
     >
       Please note that selecting a Person in here means that someone outside the system will receive a report based on Your answers in this Session.

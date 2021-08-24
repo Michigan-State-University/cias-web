@@ -61,18 +61,20 @@ const SessionMapQuestionNodeDetailedInfo = ({
       />
       <Divider my={16} />
       <Row align="center">
-        {
-          // @ts-ignore
-          <Switch
-            checked={showDetails}
-            mr={10}
-            onToggle={handleToggle}
-            id={`show-details-switch-${id}`}
-          />
-        }
-        <Text fontSize={12} fontWeight="bold" color={themeColors.comment}>
-          {formatMessage(messages.showDetails)}
-        </Text>
+        <Switch
+          checked={showDetails}
+          onToggle={handleToggle}
+          id={`show-details-switch-${id}`}
+        >
+          <Text
+            ml={5}
+            fontSize={12}
+            fontWeight="bold"
+            color={themeColors.comment}
+          >
+            {formatMessage(messages.showDetails)}
+          </Text>
+        </Switch>
       </Row>
     </div>
   );

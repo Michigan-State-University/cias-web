@@ -1,23 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CsvFileReader /> Should render and match the snapshot 1`] = `
+.c2 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+}
+
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+}
+
+.c3 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(183,39,234,1);
+  white-space: nowrap;
+  color: rgba(183,39,234,1);
+}
+
+.c0 .button {
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  outline: none;
+}
+
+.c0 .button:hover {
+  cursor: pointer;
+}
+
 <div>
   <div
-    class="styled__StyledCsvFileExport-sc-1gk8m8y-0 hRNcCq"
+    class="c0"
   >
     <button
       class="button"
     >
       <div
-        class="Row-y1cs0u-0 dskFsL"
+        class="c1"
       >
         <img
           alt="upload"
-          class="Img-sc-55j3su-0 cYsgyu"
+          class="c2"
           src="IMAGE_MOCK"
         />
         <p
-          class="Text-e4p0w3-0 kxJcki"
+          class="c3"
           color="#B727EA"
           font-weight="bold"
         >

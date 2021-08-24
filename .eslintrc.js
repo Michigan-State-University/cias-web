@@ -10,6 +10,16 @@ const baseRules = {
   'arrow-body-style': [2, 'as-needed'],
   'class-methods-use-this': 0,
   'import/imports-first': 0,
+  'import/extensions': [
+    'error',
+    'ignorePackages',
+    {
+      js: 'never',
+      jsx: 'never',
+      ts: 'never',
+      tsx: 'never',
+    },
+  ],
   'import/newline-after-import': 0,
   'import/no-dynamic-require': 0,
   'import/no-extraneous-dependencies': 0,
@@ -52,7 +62,7 @@ const baseRules = {
       },
       AssignmentExpression: {
         array: true,
-        object: true,
+        object: false,
       },
     },
     {
@@ -128,10 +138,11 @@ module.exports = {
   },
   ignorePatterns: [
     'mjml',
-    'internals/**/*.js',
+    'internals/**/*',
     '*.setup.js',
     'cypress/support/*.ts',
-    'app/utils/libraries/*.js',
+    'app/utils/libraries/*',
+    '.vscode/.history/**/*',
   ],
   overrides: [
     {

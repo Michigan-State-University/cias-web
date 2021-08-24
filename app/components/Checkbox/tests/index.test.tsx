@@ -1,29 +1,34 @@
 /**
  *
- * Tests for Radio
+ * Tests for Checkbox
  *
  */
 
-import React from 'react';
+import React, { ComponentProps } from 'react';
 import { render } from '@testing-library/react';
-import 'jest-styled-components';
 
-import Radio from '../index';
+import Checkbox from '../index';
 
-describe('<Radio />', () => {
+describe('<Checkbox />', () => {
+  const props: ComponentProps<typeof Checkbox> = {
+    id: 'test-checkbox',
+    onChange: jest.fn(),
+    checked: false,
+  };
+
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<Radio />);
+    render(<Checkbox {...props} />);
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('Should render checked and match the snapshot', () => {
-    const { container } = render(<Radio checked />);
+    const { container } = render(<Checkbox {...props} checked />);
     expect(container).toMatchSnapshot();
   });
 
   it('Should render unchecked and match the snapshot', () => {
-    const { container } = render(<Radio checked={false} />);
+    const { container } = render(<Checkbox {...props} />);
     expect(container).toMatchSnapshot();
   });
 });

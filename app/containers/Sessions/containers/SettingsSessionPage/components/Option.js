@@ -22,8 +22,14 @@ const Option = ({ withBorder, fontWeight, label, value, action, disabled }) => {
           : null
       }
     >
-      <Text fontWeight={fontWeight}>{label}</Text>
-      <Switch disabled={disabled} checked={value} onToggle={handleToggle} />
+      <Switch
+        id={label}
+        disabled={disabled}
+        checked={value}
+        onToggle={handleToggle}
+      >
+        <Text fontWeight={fontWeight}>{label}</Text>
+      </Switch>
     </Row>
   );
 };
