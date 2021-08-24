@@ -29,7 +29,12 @@ const WrappedCatMhSetting = (): JSX.Element | null => {
   const { abilityToCreateCatMh, id: userId } = user;
 
   const editUserCall = () =>
-  dispatch(editOtherUserRequest({ userId, abilityToCreateCatMh: !abilityToCreateCatMh }));
+    dispatch(
+      editOtherUserRequest({
+        userId,
+        abilityToCreateCatMh: !abilityToCreateCatMh,
+      }),
+    );
 
   return (
     <Box display="flex" align="center">
@@ -43,7 +48,5 @@ const WrappedCatMhSetting = (): JSX.Element | null => {
     </Box>
   );
 };
-
-
 
 export default WrappedCatMhSetting;
