@@ -5,6 +5,7 @@ export {
   editSessionRequest,
   editSessionSuccess,
   editSessionError,
+  bulkEditSessionRequest,
 } from './actions';
 export { sessionReducer } from './reducer';
 export {
@@ -14,4 +15,4 @@ export {
   makeSelectSessionEditLoader,
   makeSelectSessionError,
 } from './selectors';
-export { editSessionSaga, getSessionSaga } from './sagas';
+export { editSessionSaga, getSessionSaga, bulkEditSession } from './sagas';
