@@ -159,7 +159,54 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c42 {
+.c36 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c41 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c47 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -228,7 +275,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   width: fit-content;
 }
 
-.c41 {
+.c46 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -473,7 +520,7 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   padding: 60px 160px;
 }
 
-.c36 {
+.c43 {
   position: relative;
   display: inline-block;
   min-width: 40px;
@@ -484,27 +531,23 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   opacity: 0;
   width: 0;
   height: 0;
+  visibility: collapse;
 }
 
 .c40 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c40:hover {
   cursor: pointer;
-  background-color: #CED3E4;
-  border-radius: 21px;
-}
-
-.c37:checked + .c39 {
-  background-color: #B727EA;
-}
-
-.c37:focus + .c39 {
-  box-shadow: 0 0 1px #B727EA;
 }
 
 .c37:disabled + .c39 {
@@ -512,7 +555,32 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   cursor: not-allowed;
 }
 
-.c40:before {
+.c45 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  background-color: #CED3E4;
+  border-radius: 21px;
+}
+
+.c37:checked + .c39 .c44 {
+  background-color: #B727EA;
+}
+
+.c37:focus + .c39 .c44 {
+  box-shadow: 0 0 1px #B727EA;
+}
+
+.c37:disabled + .c39 .c44 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c45:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -525,10 +593,14 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c37:checked + .c39:before {
+.c37:checked + .c39 .c44:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
+}
+
+.c42 {
+  margin-right: 5px;
 }
 
 @media only screen and (min-width:768px) {
@@ -984,19 +1056,36 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
                   role="switch"
                   type="checkbox"
                 />
-                <span
+                <label
                   class="c39 c40"
-                />
+                  for="ability-to-create-cat-mh"
+                >
+                  <div
+                    class="c41"
+                    width="100%"
+                  >
+                    <div
+                      class="c32 c42"
+                    />
+                    <div
+                      class="c43"
+                    >
+                      <span
+                        class="c44 c45"
+                      />
+                    </div>
+                  </div>
+                </label>
               </div>
               <p
-                class="c41"
+                class="c46"
               >
                 Can create Cat-MH(TM) sessions
               </p>
             </div>
           </div>
           <div
-            class="c42 c28"
+            class="c47 c28"
             width="100%"
           />
         </div>

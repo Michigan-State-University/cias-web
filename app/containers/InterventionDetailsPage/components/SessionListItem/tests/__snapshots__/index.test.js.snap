@@ -177,22 +177,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c39 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  margin-right: 62px;
-  margin-left: 62px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.c41 {
+.c33 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -215,7 +200,22 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c46 {
+.c43 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  margin-right: 62px;
+  margin-left: 62px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.c49 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -266,7 +266,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   width: 33.33333333333333%;
 }
 
-.c40 {
+.c44 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -347,7 +347,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   align-items: flex-start;
 }
 
-.c42 {
+.c45 {
   width: auto;
   height: auto;
   display: block;
@@ -355,7 +355,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   position: relative;
 }
 
-.c43 {
+.c46 {
   width: auto;
   height: auto;
   display: block;
@@ -363,7 +363,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c45 {
+.c48 {
   width: auto;
   height: auto;
   display: block;
@@ -377,7 +377,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   border-radius: 10px;
 }
 
-.c47 {
+.c50 {
   width: auto;
   height: auto;
   display: block;
@@ -389,7 +389,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   flex-grow: 1;
 }
 
-.c48 {
+.c51 {
   width: auto;
   height: auto;
   display: block;
@@ -404,7 +404,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c50 {
+.c53 {
   width: auto;
   height: auto;
   display: block;
@@ -504,7 +504,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c33 {
+.c39 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -512,7 +512,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   white-space: pre;
 }
 
-.c44 {
+.c47 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -521,7 +521,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c44:hover {
+.c47:hover {
   -webkit-text-decoration: underline;
   text-decoration: underline;
 }
@@ -571,7 +571,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #ABBBD1;
 }
 
-.c49 {
+.c52 {
   resize: none;
   padding: 12px;
   border: 1px solid #E9F1FB;
@@ -584,13 +584,13 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c49:focus {
+.c52:focus {
   box-shadow: none;
   outline: none;
   border: 1px solid #107969;
 }
 
-.c49:disabled {
+.c52:disabled {
   color: #ABBBD1;
 }
 
@@ -652,21 +652,42 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: white;
 }
 
-.c34 {
+.c40 {
   position: relative;
   display: inline-block;
   min-width: 40px;
   height: 21px;
-  margin-left: 10px;
 }
 
-.c36 {
+.c35 {
   opacity: 0;
   width: 0;
   height: 0;
+  visibility: collapse;
 }
 
-.c38 {
+.c37 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c37:hover {
+  cursor: pointer;
+}
+
+.c34:disabled + .c36 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c42 {
   position: absolute;
   top: 0;
   left: 0;
@@ -674,25 +695,24 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   bottom: 0;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  cursor: pointer;
   background-color: #CED3E4;
   border-radius: 21px;
 }
 
-.c35:checked + .c37 {
+.c34:checked + .c36 .c41 {
   background-color: #B727EA;
 }
 
-.c35:focus + .c37 {
+.c34:focus + .c36 .c41 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c35:disabled + .c37 {
+.c34:disabled + .c36 .c41 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c38:before {
+.c42:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -705,13 +725,17 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c35:checked + .c37:before {
+.c34:checked + .c36 .c41:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
 
-.c51 {
+.c38 {
+  margin-right: 5px;
+}
+
+.c54 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -734,7 +758,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c51:hover {
+.c54:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
@@ -969,61 +993,70 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
             width="100%"
           >
             <div
-              class="c4"
-              width="100%"
+              class="c33"
             >
+              <input
+                aria-checked="true"
+                aria-disabled="false"
+                checked=""
+                class="c34 c35"
+                data-cy="branching-intervention-toggle"
+                data-testid="switch-input"
+                id="session-1-formula-switch-label"
+                role="switch"
+                type="checkbox"
+              />
               <label
+                class="c36 c37"
                 for="session-1-formula-switch-label"
               >
-                <p
-                  class="c33"
+                <div
+                  class="c4"
+                  width="100%"
                 >
-                  Use formula
-                </p>
+                  <div
+                    class="c1 c38"
+                  >
+                    <p
+                      class="c39"
+                    >
+                      Use formula
+                    </p>
+                  </div>
+                  <div
+                    class="c40"
+                  >
+                    <span
+                      class="c41 c42"
+                    />
+                  </div>
+                </div>
               </label>
-              <div
-                class="c34"
-              >
-                <input
-                  aria-checked="true"
-                  aria-disabled="false"
-                  checked=""
-                  class="c35 c36"
-                  data-cy="branching-intervention-toggle"
-                  data-testid="switch-input"
-                  id="session-1-formula-switch-label"
-                  role="switch"
-                  type="checkbox"
-                />
-                <span
-                  class="c37 c38"
-                />
-              </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        class="c39"
+        class="c43"
       >
         <div
-          class="c40"
+          class="c44"
         >
           <div
-            class="c40"
+            class="c44"
           >
             <div
-              class="c41"
+              class="c33"
             >
               Formula
               <div
-                class="c42"
+                class="c45"
               >
                 <div
-                  class="c43"
+                  class="c46"
                 >
                   <p
-                    class="c44"
+                    class="c47"
                     color="#B727EA"
                     font-weight="bold"
                   >
@@ -1031,27 +1064,27 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
                   </p>
                 </div>
                 <div
-                  class="c45"
+                  class="c48"
                   display="none"
                   width="auto"
                 >
                   <div
-                    class="c46"
+                    class="c49"
                   >
                     <div
-                      class="c47"
+                      class="c50"
                     />
                   </div>
                 </div>
               </div>
             </div>
             <div
-              class="c48"
+              class="c51"
               width="100%"
             >
               <textarea
                 aria-label="Enter formula here... (You can use mathematical operators +, -, *, /)"
-                class="c49"
+                class="c52"
                 data-cy="text-area"
                 height="auto"
                 placeholder="Enter formula here... (You can use mathematical operators +, -, *, /)"
@@ -1061,7 +1094,7 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
               />
             </div>
             <div
-              class="c50 c51"
+              class="c53 c54"
             >
               + Add case
             </div>

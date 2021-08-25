@@ -11,7 +11,7 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Select from 'components/Select';
-import Switch from 'components/Switch';
+import { FullWidthSwitch } from 'components/Switch';
 import OriginalTextHover from 'components/OriginalTextHover';
 import {
   makeSelectLoader,
@@ -158,14 +158,14 @@ const SpeechBlock = ({
       {block.type !== readQuestionBlockType && (
         <>
           <Row mt={15} align="center" justify="between">
-            <Switch
+            <FullWidthSwitch
               id="reflection-toggle"
               disabled={disabled}
               mr={15}
               onToggle={() => switchToReflection(blockIndex, id)}
             >
               {formatMessage(messages.reflectionToggle)}
-            </Switch>
+            </FullWidthSwitch>
           </Row>
           <OriginalTextHover
             id={`question-${id}-speech-block-${blockIndex}`}

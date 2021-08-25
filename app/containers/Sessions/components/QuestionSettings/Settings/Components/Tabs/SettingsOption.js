@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { borders, colors } from 'theme';
 import { numericValidator } from 'utils/validators';
 
-import Switch from 'components/Switch';
+import { FullWidthSwitch } from 'components/Switch';
 import H3 from 'components/H3';
 import Row from 'components/Row';
 
@@ -46,14 +46,14 @@ const SettingsOption = ({ setting, index, onUpdate, disabled, isLast }) => {
       case Boolean:
       default:
         return (
-          <Switch
+          <FullWidthSwitch
             id={index}
             disabled={disabled}
             checked={setting}
             onToggle={handleUpdate}
           >
             <H3>{formatMessage(messages[`${index}`])}</H3>
-          </Switch>
+          </FullWidthSwitch>
         );
     }
   };

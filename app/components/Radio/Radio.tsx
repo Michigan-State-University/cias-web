@@ -63,14 +63,18 @@ const Radio = ({
         $clickable
       />
 
-      <StyledLabel htmlFor={id} $labelPosition={labelPosition}>
+      <StyledLabel htmlFor={id}>
         <RadioLabelWrapper labelPosition={labelPosition}>
           <StyledIcon
             src={icon}
             fill={themeColors.secondary}
             stroke={stroke || themeColors.secondary}
           />
-          {children && <LabelContent>{children}</LabelContent>}
+          {children && (
+            <LabelContent $labelPosition={labelPosition}>
+              {children}
+            </LabelContent>
+          )}
         </RadioLabelWrapper>
       </StyledLabel>
     </Row>

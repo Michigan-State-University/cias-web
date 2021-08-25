@@ -48,10 +48,33 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.c7 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 100%;
 }
 
-.c8 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -76,20 +99,49 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   padding-bottom: 15px;
 }
 
-.c3 {
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c11 {
   position: relative;
   display: inline-block;
   min-width: 40px;
   height: 21px;
 }
 
-.c5 {
+.c4 {
   opacity: 0;
   width: 0;
   height: 0;
+  visibility: collapse;
 }
 
-.c7 {
+.c6 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c6:hover {
+  cursor: pointer;
+}
+
+.c3:disabled + .c5 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c13 {
   position: absolute;
   top: 0;
   left: 0;
@@ -97,25 +149,24 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   bottom: 0;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  cursor: pointer;
   background-color: #CED3E4;
   border-radius: 21px;
 }
 
-.c4:checked + .c6 {
+.c3:checked + .c5 .c12 {
   background-color: #B727EA;
 }
 
-.c4:focus + .c6 {
+.c3:focus + .c5 .c12 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c4:disabled + .c6 {
+.c3:disabled + .c5 .c12 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c7:before {
+.c13:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -128,13 +179,21 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c4:checked + .c6:before {
+.c3:checked + .c5 .c12:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
 }
 
+.c9 {
+  margin-right: 5px;
+}
+
 .c2 {
+  width: 100% !important;
+}
+
+.c10 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -147,249 +206,312 @@ exports[`<SettingsTab /> Should render and match the snapshot 1`] = `
     class="c0"
   >
     <div
-      class="c1"
-      width="100%"
+      class="c1 c2"
     >
+      <input
+        aria-checked="false"
+        aria-disabled="false"
+        class="c3 c4"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        id="video"
+        role="switch"
+        type="checkbox"
+      />
       <label
+        class="c5 c6"
         for="video"
       >
-        <h3
-          class="c2"
+        <div
+          class="c7"
+          width="100%"
         >
-          Video
-        </h3>
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Video
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
       </label>
-      <div
-        class="c3"
-      >
-        <input
-          aria-checked="false"
-          aria-disabled="false"
-          class="c4 c5"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          id="video"
-          role="switch"
-          type="checkbox"
-        />
-        <span
-          class="c6 c7"
-        />
-      </div>
     </div>
   </div>
   <div
     class="c0"
   >
     <div
-      class="c1"
-      width="100%"
+      class="c1 c2"
     >
+      <input
+        aria-checked="false"
+        aria-disabled="false"
+        class="c3 c4"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        id="image"
+        role="switch"
+        type="checkbox"
+      />
       <label
+        class="c5 c6"
         for="image"
       >
-        <h3
-          class="c2"
+        <div
+          class="c7"
+          width="100%"
         >
-          Image
-        </h3>
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Image
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
       </label>
-      <div
-        class="c3"
-      >
-        <input
-          aria-checked="false"
-          aria-disabled="false"
-          class="c4 c5"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          id="image"
-          role="switch"
-          type="checkbox"
-        />
-        <span
-          class="c6 c7"
-        />
-      </div>
     </div>
   </div>
   <div
     class="c0"
   >
     <div
-      class="c1"
-      width="100%"
+      class="c1 c2"
     >
+      <input
+        aria-checked="true"
+        aria-disabled="false"
+        checked=""
+        class="c3 c4"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        id="title"
+        role="switch"
+        type="checkbox"
+      />
       <label
+        class="c5 c6"
         for="title"
       >
-        <h3
-          class="c2"
+        <div
+          class="c7"
+          width="100%"
         >
-          Title
-        </h3>
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Title
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
       </label>
-      <div
-        class="c3"
-      >
-        <input
-          aria-checked="true"
-          aria-disabled="false"
-          checked=""
-          class="c4 c5"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          id="title"
-          role="switch"
-          type="checkbox"
-        />
-        <span
-          class="c6 c7"
-        />
-      </div>
     </div>
   </div>
   <div
     class="c0"
   >
     <div
-      class="c1"
-      width="100%"
+      class="c1 c2"
     >
+      <input
+        aria-checked="true"
+        aria-disabled="false"
+        checked=""
+        class="c3 c4"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        id="subtitle"
+        role="switch"
+        type="checkbox"
+      />
       <label
+        class="c5 c6"
         for="subtitle"
       >
-        <h3
-          class="c2"
+        <div
+          class="c7"
+          width="100%"
         >
-          Main Text
-        </h3>
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Main Text
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
       </label>
-      <div
-        class="c3"
-      >
-        <input
-          aria-checked="true"
-          aria-disabled="false"
-          checked=""
-          class="c4 c5"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          id="subtitle"
-          role="switch"
-          type="checkbox"
-        />
-        <span
-          class="c6 c7"
-        />
-      </div>
     </div>
   </div>
   <div
     class="c0"
   >
     <div
-      class="c1"
-      width="100%"
+      class="c1 c2"
     >
+      <input
+        aria-checked="false"
+        aria-disabled="false"
+        class="c3 c4"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        id="narrator_skippable"
+        role="switch"
+        type="checkbox"
+      />
       <label
+        class="c5 c6"
         for="narrator_skippable"
       >
-        <h3
-          class="c2"
+        <div
+          class="c7"
+          width="100%"
         >
-          Skippable Narrator
-        </h3>
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Skippable Narrator
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
       </label>
-      <div
-        class="c3"
-      >
-        <input
-          aria-checked="false"
-          aria-disabled="false"
-          class="c4 c5"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          id="narrator_skippable"
-          role="switch"
-          type="checkbox"
-        />
-        <span
-          class="c6 c7"
-        />
-      </div>
     </div>
   </div>
   <div
     class="c0"
   >
     <div
-      class="c1"
-      width="100%"
+      class="c1 c2"
     >
+      <input
+        aria-checked="true"
+        aria-disabled="false"
+        checked=""
+        class="c3 c4"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        id="proceed_button"
+        role="switch"
+        type="checkbox"
+      />
       <label
+        class="c5 c6"
         for="proceed_button"
       >
-        <h3
-          class="c2"
+        <div
+          class="c7"
+          width="100%"
         >
-          Continue Button
-        </h3>
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Continue Button
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
       </label>
-      <div
-        class="c3"
-      >
-        <input
-          aria-checked="true"
-          aria-disabled="false"
-          checked=""
-          class="c4 c5"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          id="proceed_button"
-          role="switch"
-          type="checkbox"
-        />
-        <span
-          class="c6 c7"
-        />
-      </div>
     </div>
   </div>
   <div
-    class="c8"
+    class="c14"
   >
     <div
-      class="c1"
-      width="100%"
+      class="c1 c2"
     >
+      <input
+        aria-checked="true"
+        aria-disabled="false"
+        checked=""
+        class="c3 c4"
+        data-cy="branching-intervention-toggle"
+        data-testid="switch-input"
+        id="required"
+        role="switch"
+        type="checkbox"
+      />
       <label
+        class="c5 c6"
         for="required"
       >
-        <h3
-          class="c2"
+        <div
+          class="c7"
+          width="100%"
         >
-          Required
-        </h3>
+          <div
+            class="c8 c9"
+          >
+            <h3
+              class="c10"
+            >
+              Required
+            </h3>
+          </div>
+          <div
+            class="c11"
+          >
+            <span
+              class="c12 c13"
+            />
+          </div>
+        </div>
       </label>
-      <div
-        class="c3"
-      >
-        <input
-          aria-checked="true"
-          aria-disabled="false"
-          checked=""
-          class="c4 c5"
-          data-cy="branching-intervention-toggle"
-          data-testid="switch-input"
-          id="required"
-          role="switch"
-          type="checkbox"
-        />
-        <span
-          class="c6 c7"
-        />
-      </div>
     </div>
   </div>
 </div>

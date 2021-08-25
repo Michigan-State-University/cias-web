@@ -2,6 +2,60 @@
 
 exports[`<Switch /> should match the snapshot 1`] = `
 .c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 100%;
+}
+
+.c6 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c8 {
   position: relative;
   display: inline-block;
   min-width: 40px;
@@ -12,27 +66,23 @@ exports[`<Switch /> should match the snapshot 1`] = `
   opacity: 0;
   width: 0;
   height: 0;
+  visibility: collapse;
 }
 
 .c4 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c4:hover {
   cursor: pointer;
-  background-color: #CED3E4;
-  border-radius: 21px;
-}
-
-.c1:checked + .c3 {
-  background-color: #B727EA;
-}
-
-.c1:focus + .c3 {
-  box-shadow: 0 0 1px #B727EA;
 }
 
 .c1:disabled + .c3 {
@@ -40,7 +90,32 @@ exports[`<Switch /> should match the snapshot 1`] = `
   cursor: not-allowed;
 }
 
-.c4:before {
+.c10 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  background-color: #CED3E4;
+  border-radius: 21px;
+}
+
+.c1:checked + .c3 .c9 {
+  background-color: #B727EA;
+}
+
+.c1:focus + .c3 .c9 {
+  box-shadow: 0 0 1px #B727EA;
+}
+
+.c1:disabled + .c3 .c9 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c10:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -53,10 +128,14 @@ exports[`<Switch /> should match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c1:checked + .c3:before {
+.c1:checked + .c3 .c9:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
+}
+
+.c7 {
+  margin-right: 5px;
 }
 
 <div>
@@ -72,9 +151,25 @@ exports[`<Switch /> should match the snapshot 1`] = `
       role="switch"
       type="checkbox"
     />
-    <span
+    <label
       class="c3 c4"
-    />
+    >
+      <div
+        class="c5"
+        width="100%"
+      >
+        <div
+          class="c6 c7"
+        />
+        <div
+          class="c8"
+        >
+          <span
+            class="c9 c10"
+          />
+        </div>
+      </div>
+    </label>
   </div>
 </div>
 `;
