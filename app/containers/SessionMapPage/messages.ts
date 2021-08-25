@@ -33,4 +33,12 @@ export default defineMessages({
     id: `${scope}.screenNo`,
     defaultMessage: 'Screen {no}',
   },
+  chosenSlide: {
+    id: `${scope}.chosenSlide`,
+    defaultMessage: 'Chosen slide',
+  },
+  chosenSlideComment: {
+    id: `${scope}.chosenSlideComment`,
+    defaultMessage: 'In this section you see more details about choosen slide.',
+  },
 });

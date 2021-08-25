@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useInjectReducer } from 'redux-injectors';
 
 import ReactFlow, {
   ConnectionLineType,
@@ -11,11 +9,6 @@ import ReactFlow, {
   useZoomPanHelper,
 } from 'react-flow-renderer';
 
-import {
-  makeSelectSelectedQuestionId,
-  questionsReducer,
-  selectQuestion,
-} from 'global/reducers/questions';
 import { Question } from 'global/types/question';
 
 import Row from 'components/Row';
@@ -47,6 +40,8 @@ const nodeTypes: NodeTypesType = {
 
 type Props = {
   questions: Question[];
+  showDetailsId: string;
+  onShowDetailsIdChange: (showDetailsId: string) => void;
   zoom: number;
   onZoomChange: (zoom: number) => void;
   minZoom: number;
@@ -55,16 +50,13 @@ type Props = {
 
 const SessionMap = ({
   questions,
+  showDetailsId,
+  onShowDetailsIdChange,
   zoom,
   onZoomChange,
   minZoom,
   onMinZoomChange,
 }: Props): JSX.Element => {
-  const dispatch = useDispatch();
-
-  useInjectReducer({ key: 'questions', reducer: questionsReducer });
-  const selectedQuestionId = useSelector(makeSelectSelectedQuestionId());
-
   const { zoomTo, transform } = useZoomPanHelper();
   const containerWidth = useStoreState((state) => state.width);
   const containerHeight = useStoreState((state) => state.height);
@@ -94,9 +86,9 @@ const SessionMap = ({
     zoomTo(zoom);
   }, [zoom]);
 
-  const handleShowDetailsToggle = useCallback(
+  const handleShowDetailsChange = useCallback(
     (showDetails: boolean, questionId: string) => {
-      dispatch(selectQuestion(showDetails ? questionId : ''));
+      onShowDetailsIdChange(showDetails ? questionId : '');
     },
     [],
   );
@@ -110,13 +102,13 @@ const SessionMap = ({
     () => [
       ...createMapNodesFromQuestions(
         questions,
-        selectedQuestionId,
-        handleShowDetailsToggle,
+        showDetailsId,
+        handleShowDetailsChange,
         showDetailedInfo,
       ),
       ...createMapEdgesFromQuestions(questions),
     ],
-    [questions, selectedQuestionId, showDetailedInfo],
+    [questions, showDetailsId, showDetailedInfo],
   );
 
   const { layoutedElements, panAreaWidth, panAreaHeight } = useMemo(
@@ -241,7 +233,7 @@ const SessionMap = ({
           onPositionRatioChange={handleScrollbarPositionRatioChange('y')}
         />
       </Row>
-      <Row gap={25}>
+      <Row gap={20}>
         <SessionMapScrollbar
           horizontal
           sizeRatio={horizontalScrollbarSizeRatio}

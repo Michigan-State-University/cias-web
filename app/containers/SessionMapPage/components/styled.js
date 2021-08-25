@@ -2,12 +2,13 @@ import styled from 'styled-components';
 import { Handle } from 'react-flow-renderer';
 
 import { colors } from 'theme';
+import Column from 'components/Column';
 
 import { sessionMapColors } from '../constants';
 
 export const ScrollbarContainer = styled.div.attrs(() => {})`
-  height: ${({ horizontal }) => (horizontal ? '25px' : '100%')};
-  width: ${({ horizontal }) => (!horizontal ? '25px' : '100%')};
+  height: ${({ horizontal }) => (horizontal ? '20px' : '100%')};
+  width: ${({ horizontal }) => (!horizontal ? '20px' : '100%')};
   position: relative;
   display: flex;
   flex-direction: ${({ horizontal }) => (horizontal ? 'column' : 'row')};
@@ -27,4 +28,11 @@ export const SourceHandle = styled(Handle)`
   border-width: 2px !important;
   width: 10px !important;
   height: 10px !important;
+`;
+
+export const QuestionDetailsColumn = styled(Column)`
+  border: 1px solid ${colors.linkWater};
+  height: 100%;
+  padding: 39px 20px 19px 20px;
+  background: ${colors.white};
 `;

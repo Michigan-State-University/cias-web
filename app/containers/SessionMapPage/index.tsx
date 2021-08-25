@@ -21,7 +21,6 @@ import {
 import {
   makeSelectQuestions,
   questionsReducer,
-  selectQuestion,
 } from 'global/reducers/questions';
 import {
   getQuestionGroupsRequest,
@@ -38,13 +37,16 @@ import useQuery from 'utils/useQuery';
 
 import Loader from 'components/Loader';
 import Column from 'components/Column';
+import Row from 'components/Row';
 
 import messages from './messages';
 import { sortQuestionsByGroupAndPosition } from './utils';
+import { defaultMaxZoom, defaultMinZoom, defaultZoom } from './constants';
 import SessionMapHeader from './components/SessionMapHeader';
 import SessionMap from './components/SessionMap';
 import SessionMapFooter from './components/SessionMapFooter';
-import { defaultMaxZoom, defaultMinZoom, defaultZoom } from './constants';
+import { QuestionDetailsColumn } from './components/styled';
+import SessionMapQuestionDetails from './components/SessionMapQuestionDetails';
 
 type RouteParams = {
   interventionId: string;
@@ -83,6 +85,17 @@ const SessionMapPage = (): JSX.Element => {
   const { interventionId, sessionId } = useParams<RouteParams>();
   const userSessionId = useQuery('userSessionId');
 
+  const [showDetailsId, setShowDetailsId] = useState('');
+
+  const [showDetailsQuestion, showDetailsQuestionGroup] = useMemo(() => {
+    const question = questions.find(({ id }) => id === showDetailsId);
+    if (!question) return [undefined, undefined];
+    const questionGroup = questionGroups.find(
+      ({ id }) => id === question.question_group_id,
+    );
+    return [question, questionGroup];
+  }, [showDetailsId, questions, questionGroups]);
+
   const [showWithBranchingOnly, setShowWithBranchingOnly] = useState(false);
 
   const [zoom, setZoom] = useState(defaultZoom);
@@ -101,48 +114,68 @@ const SessionMapPage = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    dispatch(selectQuestion(''));
-  }, [questions]);
-
-  useEffect(() => {
     if (sessionError || questionGroupsError) {
       dispatch(push(`/interventions/${interventionId}`));
     }
   }, [sessionError, questionGroupsError]);
 
+  const showDetails = Boolean(
+    showDetailsId && showDetailsQuestion && showDetailsQuestionGroup,
+  );
+
   return (
-    <Column height="100%" pt={40} pb={15} px={20}>
-      <Helmet>
-        <title>{formatMessage(messages.sessionMap)}</title>
-      </Helmet>
-      {sessionLoading || questionGroupsLoading ? (
-        // @ts-ignore
-        <Loader />
-      ) : (
-        <>
-          <SessionMapHeader
-            showWithBranchingOnly={showWithBranchingOnly}
-            onShowWithBranchingOnlyChange={setShowWithBranchingOnly}
-          />
-          <ReactFlowProvider>
-            <SessionMap
-              questions={sortedQuestions}
-              zoom={zoom}
-              onZoomChange={setZoom}
-              minZoom={minZoom}
-              onMinZoomChange={setMinZoom}
+    <Row height="100%">
+      <Column
+        height="100%"
+        pt={40}
+        pb={20}
+        px={20}
+        xs={showDetails ? 6 : 12}
+        md={showDetails ? 7 : 12}
+        lg={showDetails ? 8 : 12}
+      >
+        <Helmet>
+          <title>{formatMessage(messages.sessionMap)}</title>
+        </Helmet>
+        {sessionLoading || questionGroupsLoading ? (
+          // @ts-ignore
+          <Loader />
+        ) : (
+          <>
+            <SessionMapHeader
+              showWithBranchingOnly={showWithBranchingOnly}
+              onShowWithBranchingOnlyChange={setShowWithBranchingOnly}
             />
-          </ReactFlowProvider>
-          <SessionMapFooter
-            afterPreview={Boolean(userSessionId)}
-            zoomIn={handleZoomIn}
-            zoomOut={handleZoomOut}
-            zoomInDisabled={zoom === defaultMaxZoom}
-            zoomOutDisabled={zoom === minZoom}
+            <ReactFlowProvider>
+              <SessionMap
+                questions={sortedQuestions}
+                showDetailsId={showDetailsId}
+                onShowDetailsIdChange={setShowDetailsId}
+                zoom={zoom}
+                onZoomChange={setZoom}
+                minZoom={minZoom}
+                onMinZoomChange={setMinZoom}
+              />
+            </ReactFlowProvider>
+            <SessionMapFooter
+              afterPreview={Boolean(userSessionId)}
+              zoomIn={handleZoomIn}
+              zoomOut={handleZoomOut}
+              zoomInDisabled={zoom === defaultMaxZoom}
+              zoomOutDisabled={zoom === minZoom}
+            />
+          </>
+        )}
+      </Column>
+      {showDetailsId && showDetailsQuestion && showDetailsQuestionGroup && (
+        <QuestionDetailsColumn xs={6} md={5} lg={4}>
+          <SessionMapQuestionDetails
+            question={showDetailsQuestion}
+            questionGroup={showDetailsQuestionGroup}
           />
-        </>
+        </QuestionDetailsColumn>
       )}
-    </Column>
+    </Row>
   );
 };
 
