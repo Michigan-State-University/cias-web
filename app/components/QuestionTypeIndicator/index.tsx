@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { QuestionTypes } from 'models/Session/QuestionTypes';
+import { QuestionTypes as QuestionTypesEnum } from 'models/Question/QuestionDto';
 import globalMessages from 'global/i18n/globalMessages';
 
 import { themeColors } from 'theme';
@@ -10,7 +11,7 @@ import Text from 'components/Text';
 import Row from 'components/Row';
 
 type Props = {
-  type: string;
+  type: QuestionTypesEnum;
   iconSize: string;
   fontSize: number;
 } & Record<string, unknown>; // Extend Record type until css props are typed

@@ -14,7 +14,8 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 
-import messages from '../messages';
+import messages from './messages';
+import VariablesAndScores from './VariablesAndScores';
 
 type Props = {
   questionGroup: QuestionGroup;
@@ -53,6 +54,7 @@ const SessionMapQuestionDetails = ({
             />
           </Column>
         </Row>
+        <VariablesAndScores question={question} />
       </Box>
     </>
   );

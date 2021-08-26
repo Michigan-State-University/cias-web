@@ -1,3 +1,5 @@
+import { QuestionTypes } from 'models/Question/QuestionDto';
+
 export interface QuestionSettings {
   image: boolean;
   title: boolean;
@@ -119,7 +121,7 @@ export interface QuestionOriginalText {
 
 export interface Question {
   id: string;
-  type: string;
+  type: QuestionTypes;
   question_group_id: string;
   settings: QuestionSettings;
   position: number;

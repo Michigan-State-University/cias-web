@@ -46,7 +46,7 @@ import SessionMapHeader from './components/SessionMapHeader';
 import SessionMap from './components/SessionMap';
 import SessionMapFooter from './components/SessionMapFooter';
 import { QuestionDetailsColumn } from './components/styled';
-import SessionMapQuestionDetails from './components/SessionMapQuestionDetails';
+import SessionMapQuestionDetails from './components/QuestionDetails/SessionMapQuestionDetails';
 
 type RouteParams = {
   interventionId: string;
