@@ -77,7 +77,7 @@ const VariablesAndScores = ({
 
   return (
     <>
-      <Comment mb={15} fontWeight="bold">
+      <Comment mt={30} mb={15} fontWeight="bold">
         {formatMessage(messages.variablesAndScores)}
       </Comment>
       <ChipsContainer>{renderChipsByQuestionType()}</ChipsContainer>

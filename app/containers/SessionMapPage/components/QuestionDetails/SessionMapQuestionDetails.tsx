@@ -16,6 +16,7 @@ import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 
 import messages from './messages';
 import VariablesAndScores from './VariablesAndScores';
+import FormulaAndCases from './FormulaAndCases';
 
 type Props = {
   questionGroup: QuestionGroup;
@@ -41,7 +42,7 @@ const SessionMapQuestionDetails = ({
         <Text color={colors.electricPurple} fontWeight="bold" mb={10}>
           {questionGroup.title}
         </Text>
-        <Row mb={30} gap={30}>
+        <Row gap={30}>
           <Column filled>
             <H2>{htmlToPlainText(question.subtitle)}</H2>
           </Column>
@@ -55,6 +56,7 @@ const SessionMapQuestionDetails = ({
           </Column>
         </Row>
         <VariablesAndScores question={question} />
+        <FormulaAndCases question={question} />
       </Box>
     </>
   );
