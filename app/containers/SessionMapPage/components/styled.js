@@ -6,7 +6,7 @@ import Column from 'components/Column';
 
 import { sessionMapColors } from '../constants';
 
-export const ScrollbarContainer = styled.div.attrs(() => {})`
+export const ScrollbarContainer = styled.div`
   height: ${({ horizontal }) => (horizontal ? '20px' : '100%')};
   width: ${({ horizontal }) => (!horizontal ? '20px' : '100%')};
   position: relative;

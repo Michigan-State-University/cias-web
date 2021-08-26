@@ -10,6 +10,9 @@ import Comment from 'components/Text/Comment';
 import H2 from 'components/H2';
 import Box from 'components/Box';
 import Text from 'components/Text';
+import Column from 'components/Column';
+import Row from 'components/Row';
+import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 
 import messages from '../messages';
 
@@ -37,7 +40,19 @@ const SessionMapQuestionDetails = ({
         <Text color={colors.electricPurple} fontWeight="bold" mb={10}>
           {questionGroup.title}
         </Text>
-        <H2 mb={30}>{htmlToPlainText(question.subtitle)}</H2>
+        <Row mb={30} gap={30}>
+          <Column filled>
+            <H2>{htmlToPlainText(question.subtitle)}</H2>
+          </Column>
+          <Column width="auto">
+            <QuestionTypeIndicator
+              type={question.type}
+              iconSize="9px"
+              fontSize={13}
+              gap={8}
+            />
+          </Column>
+        </Row>
       </Box>
     </>
   );
