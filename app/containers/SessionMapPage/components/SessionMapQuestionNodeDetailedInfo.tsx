@@ -7,7 +7,7 @@ import { Question } from 'global/types/question';
 import { themeColors } from 'theme';
 import Text from 'components/Text';
 import Divider from 'components/Divider';
-import Switch from 'components/Switch';
+import Switch, { LabelPosition } from 'components/Switch';
 import EllipsisText from 'components/Text/EllipsisText';
 import Row from 'components/Row';
 import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
@@ -50,11 +50,12 @@ const SessionMapQuestionNodeDetailedInfo = ({
         width={160}
       />
       <Divider my={16} />
-      <Row align="center">
+      <Row>
         <Switch
           checked={showDetails}
           onToggle={handleToggle}
           id={`show-details-switch-${id}`}
+          labelPosition={LabelPosition.Right}
         >
           <Text
             ml={5}
