@@ -1,8 +1,9 @@
 import React from 'react';
 
-import Row from 'components/Row';
+import { colors } from 'theme';
 
-import { FormulaChip } from './styled';
+import Row from 'components/Row';
+import ColoredChip from 'components/ColoredChip';
 
 type Props = {
   payload: Nullable<string>;
@@ -10,7 +11,7 @@ type Props = {
 
 const Formula = ({ payload }: Props): JSX.Element => (
   <Row>
-    <FormulaChip>{payload || '-'}</FormulaChip>
+    <ColoredChip color={colors.orangePeel}>{payload || '-'}</ColoredChip>
   </Row>
 );
 
