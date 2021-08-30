@@ -17,6 +17,10 @@ import {
 import {
   fetchInterventionSaga,
   interventionReducer,
+  makeSelectIntervention,
+  makeSelectInterventionLoader,
+  makeSelectInterventionError,
+  fetchInterventionRequest,
 } from 'global/reducers/intervention';
 import {
   makeSelectQuestions,
@@ -68,6 +72,13 @@ const SessionMapPage = (): JSX.Element => {
 
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
   useInjectSaga({ key: 'fetchIntervention', saga: fetchInterventionSaga });
+  const intervention = useSelector(makeSelectIntervention());
+  const interventionLoading = useSelector(
+    makeSelectInterventionLoader('fetchInterventionLoading'),
+  );
+  const interventionError = useSelector(
+    makeSelectInterventionError('fetchInterventionError'),
+  );
 
   useInjectReducer({ key: 'session', reducer: sessionReducer });
   useInjectSaga({ key: 'getSession', saga: getSessionSaga });
@@ -134,6 +145,7 @@ const SessionMapPage = (): JSX.Element => {
     );
     dispatch(getQuestionGroupsRequest(sessionId));
     dispatch(fetchReportTemplatesRequest(sessionId, interventionId));
+    dispatch(fetchInterventionRequest(interventionId));
   }, []);
 
   useEffect(() => {
@@ -142,8 +154,19 @@ const SessionMapPage = (): JSX.Element => {
     }
   }, [sessionError, questionGroupsError, reportTemplatesError]);
 
+  useEffect(() => {
+    if (interventionError) dispatch(push(``));
+  }, [interventionError]);
+
   const showDetails = Boolean(
     showDetailsId && showDetailsQuestion && showDetailsQuestionGroup,
+  );
+
+  const loading = Boolean(
+    sessionLoading ||
+      questionGroupsLoading ||
+      reportTemplatesLoading ||
+      interventionLoading,
   );
 
   return (
@@ -160,7 +183,7 @@ const SessionMapPage = (): JSX.Element => {
         <Helmet>
           <title>{formatMessage(messages.sessionMap)}</title>
         </Helmet>
-        {sessionLoading || questionGroupsLoading || reportTemplatesLoading ? (
+        {loading ? (
           // @ts-ignore
           <Loader />
         ) : (
@@ -196,6 +219,8 @@ const SessionMapPage = (): JSX.Element => {
             question={showDetailsQuestion}
             questionGroup={showDetailsQuestionGroup}
             reportTemplates={reportTemplates}
+            sessions={intervention?.sessions || []}
+            questions={questions}
           />
         </QuestionDetailsColumn>
       )}

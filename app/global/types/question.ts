@@ -47,7 +47,7 @@ export interface FormulaPatternTarget {
 
 export interface FormulaPattern {
   match: string;
-  target: FormulaPatternTarget[] | string;
+  target: FormulaPatternTarget[];
 }
 
 export interface QuestionFormula {
@@ -90,6 +90,16 @@ export interface FeedbackQuestionPayload {
   original_text?: StartEndValueOriginalText;
 }
 
+export interface SpectrumPattern {
+  match: string;
+  target: string;
+}
+
+export interface Spectrum {
+  payload: string;
+  patterns: SpectrumPattern[];
+}
+
 export interface QuestionData {
   payload:
     | string
@@ -98,7 +108,7 @@ export interface QuestionData {
     | FeedbackQuestionPayload;
   variable?: QuestionVariable;
   value?: string;
-  spectrum?: QuestionFormula;
+  spectrum?: Spectrum;
   report_template_ids?: string[];
   original_text?: string;
 }

@@ -24,4 +24,8 @@ export default defineMessages({
     id: `${scope}.endUserValueIs`,
     defaultMessage: `end user value is {endUserValue}`,
   },
+  goTo: {
+    id: `${scope}.goTo`,
+    defaultMessage: `{probability} go to {subtarget}`,
+  },
 });

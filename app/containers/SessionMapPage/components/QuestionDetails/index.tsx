@@ -31,12 +31,16 @@ type Props = {
   questionGroup: QuestionGroup;
   question: Question;
   reportTemplates: ReportTemplate[];
+  sessions: any[];
+  questions: Question[];
 };
 
 const SessionMapQuestionDetails = ({
   questionGroup,
   question,
   reportTemplates,
+  sessions,
+  questions,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
   const { subtitle, type } = question;
@@ -78,7 +82,11 @@ const SessionMapQuestionDetails = ({
           <FeedbackFormulaAndCases question={question} />
         )}
         {type !== QuestionTypes.FINISH && (
-          <BranchingFormulaAndCases question={question} />
+          <BranchingFormulaAndCases
+            question={question}
+            sessions={sessions}
+            questions={questions}
+          />
         )}
       </Box>
     </>

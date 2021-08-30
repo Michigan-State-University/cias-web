@@ -13,6 +13,10 @@ import Column from 'components/Column';
 import messages from './messages';
 import Formula from './Formula';
 import CaseMatch from './CaseMatch';
+import { highlightTargetText } from './utils';
+
+const getCaseTargetElementId = (index: number): string =>
+  `session-map-question-details-feedback-target-${index}`;
 
 type Props = {
   question: Question;
@@ -23,9 +27,6 @@ const FeedbackFormulaAndCases = ({
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
   const { spectrum } = body.data[0];
-
-  const getCaseTargetElementId = (index: number): string =>
-    `session-map-question-details-feedback-target-${index}`;
 
   return (
     <>
@@ -54,7 +55,7 @@ const FeedbackFormulaAndCases = ({
             >
               <Markup
                 content={formatMessage(messages.endUserValueIs, {
-                  endUserValue: `<span style='color: ${colors.jungleGreen};'>${target}</span>`,
+                  endUserValue: highlightTargetText(target),
                 })}
                 noWrap
               />
