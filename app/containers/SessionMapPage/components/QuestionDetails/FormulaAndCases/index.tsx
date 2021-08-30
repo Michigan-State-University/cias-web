@@ -2,6 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { Question } from 'global/types/question';
+import { QuestionTypes } from 'models/Question/QuestionDto';
 
 import Comment from 'components/Text/Comment';
 
@@ -12,8 +13,12 @@ type Props = {
   question: Question;
 };
 
-const FormulaAndCases = ({ question: { formula } }: Props): JSX.Element => {
+const FormulaAndCases = ({
+  question: { formula, type },
+}: Props): JSX.Element => {
   const { formatMessage } = useIntl();
+
+  if (type === QuestionTypes.FINISH) return <></>;
 
   return (
     <>
