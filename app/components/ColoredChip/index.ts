@@ -1,10 +1,5 @@
-import { ColoredChip, ColoredChipProps } from './ColoredChip';
-import { DoubleColoredChip, DoubleColoredChipProps } from './DoubleColoredChip';
+import { ColoredChip } from './ColoredChip';
+import { DoubleColoredChip } from './DoubleColoredChip';
 
-export type {
-  ColoredChip,
-  ColoredChipProps,
-  DoubleColoredChip,
-  DoubleColoredChipProps,
-};
+export { ColoredChip, DoubleColoredChip };
 export default ColoredChip;

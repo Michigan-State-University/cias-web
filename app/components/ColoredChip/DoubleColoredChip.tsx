@@ -1,4 +1,4 @@
-import React, { ComponentProps, FunctionComponent } from 'react';
+import React, { ComponentProps, FunctionComponent, ReactNode } from 'react';
 
 // @ts-ignore
 import styled from 'styled-components';
@@ -27,11 +27,11 @@ const RightChip: FunctionComponent<ComponentProps<typeof ColoredChip>> = styled(
   border-radius: 0 4px 4px 0;
 `;
 
-export type DoubleColoredChipProps = {
+type DoubleColoredChipProps = {
   leftChipColor: string;
-  leftChipContent: string;
+  leftChipContent: ReactNode;
   rightChipColor: string;
-  rightChipContent: string;
+  rightChipContent: ReactNode;
 };
 
 export const DoubleColoredChip = ({

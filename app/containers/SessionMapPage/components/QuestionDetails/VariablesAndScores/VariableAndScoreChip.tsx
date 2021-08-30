@@ -1,17 +1,33 @@
 import React from 'react';
 
-import { Chip, Score, Variable } from './styled';
+import { colors } from 'theme';
+import { ColoredChip, DoubleColoredChip } from 'components/ColoredChip';
 
 type Props = {
-  name: Nullable<string>;
-  score: Nullable<string>;
+  variable: Nullable<string>;
+  score?: Nullable<string>;
+  variableOnly?: boolean;
 };
 
-const VariableAndScoreChip = ({ name, score }: Props): JSX.Element => (
-  <Chip>
-    <Variable>{name || '-'}</Variable>
-    <Score>{score || '-'}</Score>
-  </Chip>
-);
+const VariableAndScoreChip = ({
+  variable,
+  score,
+  variableOnly,
+}: Props): JSX.Element => {
+  if (variableOnly) {
+    return (
+      <ColoredChip color={colors.jungleGreen}>{variable || '-'}</ColoredChip>
+    );
+  }
+
+  return (
+    <DoubleColoredChip
+      leftChipColor={colors.jungleGreen}
+      leftChipContent={variable || '-'}
+      rightChipColor={colors.azure}
+      rightChipContent={score || '-'}
+    />
+  );
+};
 
 export default VariableAndScoreChip;

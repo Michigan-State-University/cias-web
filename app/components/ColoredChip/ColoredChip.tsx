@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { fontWeights } from 'theme';
 
-export type ColoredChipProps = {
+type ColoredChipProps = {
   color: string;
 };
 

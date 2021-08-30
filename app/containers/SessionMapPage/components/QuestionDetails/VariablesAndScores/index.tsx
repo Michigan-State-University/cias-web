@@ -26,17 +26,21 @@ const VariablesAndScores = ({
 
   const renderChipsByQuestionType = (): JSX.Element[] | JSX.Element => {
     switch (type) {
-      case QuestionTypes.SINGLE:
       case QuestionTypes.FREE_RESPONSE:
       case QuestionTypes.DATE:
+      case QuestionTypes.NAME:
       case QuestionTypes.CURRENCY:
       case QuestionTypes.NUMBER:
       case QuestionTypes.EXTERNAL_LINK:
       case QuestionTypes.PARTICIPANT_REPORT:
       case QuestionTypes.PHONE:
+        return (
+          <VariableAndScoreChip variable={body.variable?.name} variableOnly />
+        );
+      case QuestionTypes.SINGLE:
         return body.data.map(({ value }, index) => (
           <VariableAndScoreChip
-            name={body.variable?.name}
+            variable={body.variable?.name}
             score={value}
             key={`session-map-question-details-variable-${index}`}
           />
@@ -44,7 +48,7 @@ const VariablesAndScores = ({
       case QuestionTypes.SLIDER:
         return body.data.map((_, index) => (
           <VariableAndScoreChip
-            name={body.variable?.name}
+            variable={body.variable?.name}
             score="0 - 100"
             key={`session-map-question-details-variable-${index}`}
           />
@@ -52,22 +56,24 @@ const VariablesAndScores = ({
       case QuestionTypes.MULTIPLE:
         return body.data.map(({ variable }, index) => (
           <VariableAndScoreChip
-            name={variable?.name}
+            variable={variable?.name}
             score={variable?.value}
             key={`session-map-question-details-variable-${index}`}
           />
         ));
       case QuestionTypes.GRID:
         const { rows, columns } = body.data[0].payload as GridQuestionPayload;
-        return rows.flatMap(({ variable: { name } }, rowIndex) =>
-          columns.map(({ variable: { value } }, columnIndex) => (
-            <VariableAndScoreChip
-              name={name}
-              score={value}
-              key={`session-map-question-details-variable-${rowIndex}-${columnIndex}`}
-            />
-          )),
-        );
+        return rows.map(({ variable: { name } }, rowIndex) => (
+          <ChipsContainer key={`session-map-variables-row-${rowIndex}`}>
+            {columns.map(({ variable: { value } }, columnIndex) => (
+              <VariableAndScoreChip
+                variable={name}
+                score={value}
+                key={`session-map-variable-${rowIndex}-${columnIndex}`}
+              />
+            ))}
+          </ChipsContainer>
+        ));
       default:
         return <></>;
     }
