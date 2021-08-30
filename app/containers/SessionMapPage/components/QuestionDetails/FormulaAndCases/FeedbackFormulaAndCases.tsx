@@ -67,14 +67,3 @@ const FeedbackFormulaAndCases = ({
 };
 
 export default FeedbackFormulaAndCases;
-
-// <Column>
-//   <Text color={colors.manatee} fontWeight="bold">
-//     <Markup
-//       content={formatMessage(messages.endUserValueIs, {
-//         endUserValue: `<span style='color: ${colors.jungleGreen};'>${target}</span>`,
-//       })}
-//       noWrap
-//     />
-//   </Text>
-// </Column>
