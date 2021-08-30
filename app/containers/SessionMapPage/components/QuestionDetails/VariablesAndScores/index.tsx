@@ -2,13 +2,16 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { GridQuestionPayload, Question } from 'global/types/question';
+import { ReportTemplate } from 'global/types/reportTemplate';
 import { QuestionTypes } from 'models/Question/QuestionDto';
 
 import Comment from 'components/Text/Comment';
 
-import VariableAndScoreChip from './VariableAndScoreChip';
-import { ChipsContainer } from './styled';
 import messages from './messages';
+import { formatThirdPartyReportQuestionData } from './utils';
+import { ChipsContainer } from './styled';
+import VariableAndScoreChip from './VariableAndScoreChip';
+import EmailAndReportTemplateChip from './EmailAndReportTemplateChip';
 
 const typesWithoutVariablesAndScoresSection = [
   QuestionTypes.INFORMATION,
@@ -17,10 +20,12 @@ const typesWithoutVariablesAndScoresSection = [
 
 type Props = {
   question: Question;
+  reportTemplates: ReportTemplate[];
 };
 
 const VariablesAndScores = ({
   question: { body, type },
+  reportTemplates,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
@@ -74,6 +79,28 @@ const VariablesAndScores = ({
             ))}
           </ChipsContainer>
         ));
+      case QuestionTypes.THIRD_PARTY:
+        const formattedData = formatThirdPartyReportQuestionData(body.data);
+        return Array.from(formattedData).flatMap(([email, templatesIds]) => {
+          if (templatesIds.size === 0) {
+            return (
+              <EmailAndReportTemplateChip
+                key={`session-map-emails-${email}`}
+                email={email}
+              />
+            );
+          }
+          return Array.from(templatesIds).map((templateId) => (
+            <EmailAndReportTemplateChip
+              key={`session-map-emails-${email}-${templateId}`}
+              email={email}
+              template={
+                reportTemplates.find(({ id }) => id === templateId)?.name ??
+                templateId
+              }
+            />
+          ));
+        });
       default:
         return <></>;
     }

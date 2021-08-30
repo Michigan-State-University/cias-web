@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
+import { ReportTemplate } from 'global/types/reportTemplate';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 import { colors } from 'theme';
@@ -21,11 +22,13 @@ import FormulaAndCases from './FormulaAndCases';
 type Props = {
   questionGroup: QuestionGroup;
   question: Question;
+  reportTemplates: ReportTemplate[];
 };
 
 const SessionMapQuestionDetails = ({
   questionGroup,
   question,
+  reportTemplates,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
@@ -55,7 +58,10 @@ const SessionMapQuestionDetails = ({
             />
           </Column>
         </Row>
-        <VariablesAndScores question={question} />
+        <VariablesAndScores
+          question={question}
+          reportTemplates={reportTemplates}
+        />
         <FormulaAndCases question={question} />
       </Box>
     </>

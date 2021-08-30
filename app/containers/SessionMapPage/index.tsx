@@ -30,8 +30,16 @@ import {
   makeSelectQuestionGroups,
   questionGroupsReducer,
 } from 'global/reducers/questionGroups';
+import {
+  makeSelectReportTemplatesList,
+  reportTemplatesReducer,
+  reportTemplatesSaga,
+  makeSelectReportTemplatesErrors,
+  makeSelectReportTemplatesLoaders,
+} from 'global/reducers/reportTemplates';
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
+import { ReportTemplate } from 'global/types/reportTemplate';
 
 import useQuery from 'utils/useQuery';
 
@@ -77,6 +85,19 @@ const SessionMapPage = (): JSX.Element => {
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
   const questions = useSelector(makeSelectQuestions()) as Question[];
 
+  // @ts-ignore
+  useInjectReducer({ key: 'reportTemplates', reducer: reportTemplatesReducer });
+  useInjectSaga({ key: 'reportTemplatesSaga', saga: reportTemplatesSaga });
+  const reportTemplates = useSelector(
+    makeSelectReportTemplatesList(),
+  ) as ReportTemplate[];
+  const { fetchReportTemplatesLoading: reportTemplatesLoading } = useSelector(
+    makeSelectReportTemplatesLoaders(),
+  );
+  const { fetchReportTemplatesError: reportTemplatesError } = useSelector(
+    makeSelectReportTemplatesErrors(),
+  );
+
   const sortedQuestions = useMemo(
     () => sortQuestionsByGroupAndPosition(questionGroups, questions),
     [questions, questionGroups],
@@ -114,10 +135,10 @@ const SessionMapPage = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    if (sessionError || questionGroupsError) {
+    if (sessionError || questionGroupsError || reportTemplatesError) {
       dispatch(push(`/interventions/${interventionId}`));
     }
-  }, [sessionError, questionGroupsError]);
+  }, [sessionError, questionGroupsError, reportTemplatesError]);
 
   const showDetails = Boolean(
     showDetailsId && showDetailsQuestion && showDetailsQuestionGroup,
@@ -137,7 +158,7 @@ const SessionMapPage = (): JSX.Element => {
         <Helmet>
           <title>{formatMessage(messages.sessionMap)}</title>
         </Helmet>
-        {sessionLoading || questionGroupsLoading ? (
+        {sessionLoading || questionGroupsLoading || reportTemplatesLoading ? (
           // @ts-ignore
           <Loader />
         ) : (
@@ -172,6 +193,7 @@ const SessionMapPage = (): JSX.Element => {
           <SessionMapQuestionDetails
             question={showDetailsQuestion}
             questionGroup={showDetailsQuestionGroup}
+            reportTemplates={reportTemplates}
           />
         </QuestionDetailsColumn>
       )}
