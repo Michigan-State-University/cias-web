@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
 import { ReportTemplate } from 'global/types/reportTemplate';
+import { QuestionTypes } from 'models/Question/QuestionDto';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 import { colors } from 'theme';
@@ -17,7 +18,14 @@ import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 
 import messages from './messages';
 import VariablesAndScores from './VariablesAndScores';
-import FormulaAndCases from './FormulaAndCases';
+import FeedbackFormulaAndCases from './FormulaAndCases/FeedbackFormulaAndCases';
+import BranchingFormulaAndCases from './FormulaAndCases/BranchingFormulaAndCases';
+
+const typesWithoutVariablesAndScoresSection = [
+  QuestionTypes.INFORMATION,
+  QuestionTypes.FINISH,
+  QuestionTypes.FEEDBACK,
+];
 
 type Props = {
   questionGroup: QuestionGroup;
@@ -31,6 +39,7 @@ const SessionMapQuestionDetails = ({
   reportTemplates,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
+  const { subtitle, type } = question;
 
   return (
     <>
@@ -47,25 +56,33 @@ const SessionMapQuestionDetails = ({
         </Text>
         <Row gap={30}>
           <Column filled>
-            <H2>{htmlToPlainText(question.subtitle)}</H2>
+            <H2>{htmlToPlainText(subtitle)}</H2>
           </Column>
           <Column width="auto">
             <QuestionTypeIndicator
-              type={question.type}
+              type={type}
               iconSize="9px"
               fontSize={13}
+              fontWeight="bold"
               gap={8}
             />
           </Column>
         </Row>
-        <VariablesAndScores
-          question={question}
-          reportTemplates={reportTemplates}
-        />
-        <FormulaAndCases question={question} />
+        {!typesWithoutVariablesAndScoresSection.includes(type) && (
+          <VariablesAndScores
+            question={question}
+            reportTemplates={reportTemplates}
+          />
+        )}
+        {type === QuestionTypes.FEEDBACK && (
+          <FeedbackFormulaAndCases question={question} />
+        )}
+        {type !== QuestionTypes.FINISH && (
+          <BranchingFormulaAndCases question={question} />
+        )}
       </Box>
     </>
   );
 };
 
-export default SessionMapQuestionDetails;
+export default memo(SessionMapQuestionDetails);

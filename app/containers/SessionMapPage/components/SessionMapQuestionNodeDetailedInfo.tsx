@@ -38,6 +38,7 @@ const SessionMapQuestionNodeDetailedInfo = ({
         type={type}
         iconSize="7px"
         fontSize={10}
+        fontWeight="medium"
         mb={9}
         gap={6}
       />

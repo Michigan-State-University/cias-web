@@ -36,6 +36,7 @@ import {
   reportTemplatesSaga,
   makeSelectReportTemplatesErrors,
   makeSelectReportTemplatesLoaders,
+  fetchReportTemplatesRequest,
 } from 'global/reducers/reportTemplates';
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
@@ -54,7 +55,7 @@ import SessionMapHeader from './components/SessionMapHeader';
 import SessionMap from './components/SessionMap';
 import SessionMapFooter from './components/SessionMapFooter';
 import { QuestionDetailsColumn } from './components/styled';
-import SessionMapQuestionDetails from './components/QuestionDetails/SessionMapQuestionDetails';
+import SessionMapQuestionDetails from './components/QuestionDetails';
 
 type RouteParams = {
   interventionId: string;
@@ -132,6 +133,7 @@ const SessionMapPage = (): JSX.Element => {
       }),
     );
     dispatch(getQuestionGroupsRequest(sessionId));
+    dispatch(fetchReportTemplatesRequest(sessionId, interventionId));
   }, []);
 
   useEffect(() => {

@@ -13,11 +13,6 @@ import { ChipsContainer } from './styled';
 import VariableAndScoreChip from './VariableAndScoreChip';
 import EmailAndReportTemplateChip from './EmailAndReportTemplateChip';
 
-const typesWithoutVariablesAndScoresSection = [
-  QuestionTypes.INFORMATION,
-  QuestionTypes.FINISH,
-];
-
 type Props = {
   question: Question;
   reportTemplates: ReportTemplate[];
@@ -105,8 +100,6 @@ const VariablesAndScores = ({
         return <></>;
     }
   };
-
-  if (typesWithoutVariablesAndScoresSection.includes(type)) return <></>;
 
   return (
     <>

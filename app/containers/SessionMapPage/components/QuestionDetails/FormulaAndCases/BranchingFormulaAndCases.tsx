@@ -2,7 +2,6 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { Question } from 'global/types/question';
-import { QuestionTypes } from 'models/Question/QuestionDto';
 
 import Comment from 'components/Text/Comment';
 
@@ -13,21 +12,19 @@ type Props = {
   question: Question;
 };
 
-const FormulaAndCases = ({
-  question: { formula, type },
+const BranchingFormulaAndCases = ({
+  question: { formula },
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
-
-  if (type === QuestionTypes.FINISH) return <></>;
 
   return (
     <>
       <Comment mt={30} mb={15} fontWeight="bold">
-        {formatMessage(messages.formulaAndCases)}
+        {formatMessage(messages.branchingFormulaAndCases)}
       </Comment>
       <Formula payload={formula.payload} />
     </>
   );
 };
 
-export default FormulaAndCases;
+export default BranchingFormulaAndCases;

@@ -47,7 +47,7 @@ export interface FormulaPatternTarget {
 
 export interface FormulaPattern {
   match: string;
-  target: FormulaPatternTarget[];
+  target: FormulaPatternTarget[] | string;
 }
 
 export interface QuestionFormula {
