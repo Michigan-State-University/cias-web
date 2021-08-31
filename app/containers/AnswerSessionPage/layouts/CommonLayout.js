@@ -110,7 +110,7 @@ const CommonLayout = ({
 CommonLayout.propTypes = {
   transcriptToggleIcon: PropTypes.node,
   currentQuestion: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
     subtitle: PropTypes.string,
     video_url: PropTypes.string,

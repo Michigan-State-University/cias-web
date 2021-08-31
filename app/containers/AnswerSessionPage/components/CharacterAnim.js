@@ -359,7 +359,7 @@ CharacterAnim.propTypes = {
       type: PropTypes.string,
     }),
   ),
-  questionId: PropTypes.string,
+  questionId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   settings: PropTypes.object,
   animationContainer: PropTypes.shape({
     clientWidth: PropTypes.number,
