@@ -50,7 +50,7 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c7 {
+.c9 {
   width: auto;
   height: auto;
   display: block;
@@ -100,6 +100,25 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.c7 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c8 {
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 .c6 {
@@ -181,7 +200,6 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
             Test
           </h1>
           <button
-            aria-label="Close window"
             class="c6"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
@@ -191,11 +209,16 @@ exports[`<Modal /> Should render and match the snapshot 1`] = `
               alt="cross"
               src="IMAGE_MOCK"
             />
+            <p
+              class="c7 c8"
+            >
+              Close window
+            </p>
           </button>
         </div>
       </div>
       <div
-        class="c7"
+        class="c9"
         id="modal-description"
       />
     </div>

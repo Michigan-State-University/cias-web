@@ -12,7 +12,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -32,7 +32,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   flex-grow: 1;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -44,7 +44,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   height: 280px;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -58,7 +58,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   margin-left: 25px;
 }
 
-.c22 {
+.c24 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -70,7 +70,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   background-color: rgba(248,251,255,1);
 }
 
-.c26 {
+.c28 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -113,7 +113,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   margin-left: 25px;
 }
 
-.c9 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -124,7 +124,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c12 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -143,7 +143,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c14 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -155,7 +155,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   margin-top: 10px;
 }
 
-.c17 {
+.c19 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -167,7 +167,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c23 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -182,7 +182,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   padding-left: 25px;
 }
 
-.c25 {
+.c27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -244,7 +244,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c7 {
+.c9 {
   width: auto;
   height: auto;
   display: block;
@@ -254,7 +254,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   border-radius: 0px;
 }
 
-.c16 {
+.c18 {
   width: auto;
   height: auto;
   display: block;
@@ -263,7 +263,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
-.c18 {
+.c20 {
   width: auto;
   height: auto;
   display: block;
@@ -272,14 +272,14 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   display: inline;
 }
 
-.c19 {
+.c21 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
 }
 
-.c21 {
+.c23 {
   width: auto;
   height: auto;
   display: block;
@@ -288,7 +288,14 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   overflow: scroll;
 }
 
-.c13 {
+.c7 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c15 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -298,7 +305,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c15 {
+.c17 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -307,7 +314,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c24 {
+.c26 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -315,13 +322,25 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c20 {
+.c22 {
   position: relative;
   width: 100%;
   font-size: 15px;
   font-weight: 700;
   color: rgba(183,39,234,1);
   color: rgba(183,39,234,1);
+}
+
+.c8 {
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 .c5 {
@@ -475,7 +494,6 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
             Select a place to paste
           </h1>
           <button
-            aria-label="Close window"
             class="c6"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
@@ -485,70 +503,75 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
               alt="cross"
               src="IMAGE_MOCK"
             />
+            <p
+              class="c7 c8"
+            >
+              Close window
+            </p>
           </button>
         </div>
       </div>
       <div
-        class="c7"
+        class="c9"
         id="modal-description"
       >
         <div
-          class="c8"
+          class="c10"
         >
           <div
-            class="c9"
+            class="c11"
           >
             <div
-              class="c10"
+              class="c12"
               data-testid="undefined-select-target-session"
               height="280"
             >
               <div
-                class="c11"
+                class="c13"
               >
                 <div
-                  class="c12"
+                  class="c14"
                 >
                   <img
                     src="IMAGE_MOCK"
                   />
                   <p
-                    class="c13"
+                    class="c15"
                     color="#B727EA"
                   >
                     Sessions
                   </p>
                 </div>
                 <div
-                  class="c14"
+                  class="c16"
                 >
                   <p
-                    class="c15"
+                    class="c17"
                     font-size="15"
                     font-weight="bold"
                   >
                     Question Groups in 
                   </p>
                   <div
-                    class="c16"
+                    class="c18"
                   >
                     <div
-                      class="c17"
+                      class="c19"
                       width="100%"
                     >
                       <div
-                        class="c18"
+                        class="c20"
                         display="inline"
                         width="100%"
                       >
                         <div
-                          class="c19"
+                          class="c21"
                           data-for="Intervention test title 1"
                           data-tip=""
                         >
                           <div>
                             <span
-                              class="c20"
+                              class="c22"
                               color="#B727EA"
                               data-for="Intervention test title 1"
                               data-tip="Intervention test title 1"
@@ -575,20 +598,20 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
                 </div>
               </div>
               <div
-                class="c21"
+                class="c23"
                 overflow="scroll"
               >
                 <div
-                  class="c22"
+                  class="c24"
                 >
                   <div
                     class="c3"
                   >
                     <div
-                      class="c23"
+                      class="c25"
                     >
                       <p
-                        class="c24"
+                        class="c26"
                         font-size="12"
                       >
                         No valid question groups to copy to
@@ -600,10 +623,10 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c25"
+            class="c27"
           >
             <button
-              class="c26"
+              class="c28"
               color="primary"
               disabled=""
               radius="100px"

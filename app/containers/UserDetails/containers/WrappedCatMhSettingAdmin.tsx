@@ -9,7 +9,7 @@ import {
   editSingleUserSaga,
 } from 'global/reducers/user';
 
-import Switch from 'components/Switch';
+import Switch, { LabelPosition } from 'components/Switch';
 import Box from 'components/Box';
 import Text from 'components/Text';
 
@@ -43,8 +43,10 @@ const WrappedCatMhSetting = (): JSX.Element | null => {
         id="ability-to-create-cat-mh"
         checked={abilityToCreateCatMh}
         onToggle={editUserCall}
-      />
-      <Text ml={10}>{formatMessage(messages.canCreateCatMhSession)}</Text>
+        labelPosition={LabelPosition.Right}
+      >
+        <Text ml={10}>{formatMessage(messages.canCreateCatMhSession)}</Text>
+      </Switch>
     </Box>
   );
 };

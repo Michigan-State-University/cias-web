@@ -109,8 +109,7 @@ const Modal = ({
                   left="40px"
                   onClick={onClose}
                   data-testid="close-modal-button"
-                  aria-label={formatMessage(messages.closeButtonLabel)}
-                  title={formatMessage(messages.closeButtonLabel)}
+                  ariaText={formatMessage(messages.closeButtonLabel)}
                 />
               </Row>
             </Column>

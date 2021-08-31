@@ -68,4 +68,8 @@ export default defineMessages({
     id: `${scope}.sessionMap`,
     defaultMessage: 'Session Map',
   },
+  closePreviewText: {
+    id: `${scope}.closePreviewText`,
+    defaultMessage: 'Close Preview',
+  },
 });

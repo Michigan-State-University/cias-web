@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import debounce from 'lodash/debounce';
@@ -15,26 +15,31 @@ const DEFAULT_DEBOUNCE = 0;
 
 const SearchInput = ({ icon, debounceTime, ...inputProps }) => {
   const { formatMessage } = useIntl();
+  const ref = useRef();
 
-  const { value, onChange, width } = inputProps;
+  const { onChange, width } = inputProps;
 
   const handleChange = useCallback(debounce(onChange, debounceTime), [
     debounceTime,
   ]);
 
+  const handleClear = useCallback(() => {
+    ref.current.value = '';
+    handleChange({ target: { value: '' } });
+  }, [handleChange]);
+
   return (
     <SearchInputStyled width={width}>
-      <Input {...inputProps} onChange={handleChange} px={30} />
+      <Input ref={ref} {...inputProps} onChange={handleChange} px={30} />
       <SearchIcon src={search} alt="search" />
-      {value && (
+      {ref.current?.value && (
         <ActionIcon
-          onClick={() => onChange({ target: { value: '' } })}
+          onClick={handleClear}
           height={15}
           width={15}
           ml={10}
           background="none"
-          aria-label={formatMessage(messages.clearButtonLabel)}
-          title={formatMessage(messages.clearButtonLabel)}
+          ariaText={formatMessage(messages.clearButtonLabel)}
         />
       )}
     </SearchInputStyled>

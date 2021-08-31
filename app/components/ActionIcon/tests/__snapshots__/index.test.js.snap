@@ -1,6 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ActionIcon /> Should render and match the snapshot as button 1`] = `
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c2 {
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .c0 {
   height: 28px;
   width: 28px;
@@ -28,16 +47,41 @@ exports[`<ActionIcon /> Should render and match the snapshot as button 1`] = `
 <div>
   <button
     class="c0"
+    title="Close"
   >
     <img
       alt="cross"
       src="IMAGE_MOCK"
     />
+    <p
+      class="c1 c2"
+    >
+      Close
+    </p>
   </button>
 </div>
 `;
 
 exports[`<ActionIcon /> Should render and match the snapshot as link 1`] = `
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c2 {
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .c0 {
   height: 28px;
   width: 28px;
@@ -64,16 +108,41 @@ exports[`<ActionIcon /> Should render and match the snapshot as link 1`] = `
     class="c0"
     data-cy="back-intervention-button"
     href="/"
+    title="Close"
   >
     <img
       alt="cross"
       src="IMAGE_MOCK"
     />
+    <p
+      class="c1 c2"
+    >
+      Close
+    </p>
   </a>
 </div>
 `;
 
 exports[`<ActionIcon /> Should render and match the snapshot with different icon 1`] = `
+.c1 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c2 {
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
 .c0 {
   height: 28px;
   width: 28px;
@@ -101,11 +170,17 @@ exports[`<ActionIcon /> Should render and match the snapshot with different icon
 <div>
   <button
     class="c0"
+    title="Close"
   >
     <img
       alt="cross"
       src="IMAGE_MOCK"
     />
+    <p
+      class="c1 c2"
+    >
+      Close
+    </p>
   </button>
 </div>
 `;
