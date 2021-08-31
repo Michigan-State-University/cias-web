@@ -12,7 +12,7 @@ import EllipsisText from 'components/Text/EllipsisText';
 import Row from 'components/Row';
 import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 
-import messages from '../messages';
+import messages from '../../messages';
 
 type Props = {
   question: Question;

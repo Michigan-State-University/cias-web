@@ -18,8 +18,10 @@ import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 
 import messages from './messages';
 import VariablesAndScores from './VariablesAndScores';
-import FeedbackFormulaAndCases from './FormulaAndCases/FeedbackFormulaAndCases';
-import BranchingFormulaAndCases from './FormulaAndCases/BranchingFormulaAndCases';
+import {
+  FeedbackFormulaAndCases,
+  BranchingFormulaAndCases,
+} from './FormulaAndCases';
 
 const typesWithoutVariablesAndScoresSection = [
   QuestionTypes.INFORMATION,

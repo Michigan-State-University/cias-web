@@ -24,15 +24,15 @@ import {
   createMapEdgesFromQuestions,
   createMapNodesFromQuestions,
   layoutElements,
-} from '../utils';
+} from '../../utils';
 import {
   CustomArrowHeadType,
   defaultZoom,
   defaultMaxZoom,
   sessionMapColors,
   detailedInfoZoomThreshold,
-} from '../constants';
-import SessionMapScrollbar from './SessionMapScrollbar';
+} from '../../constants';
+import SessionMapScrollbar from '../SessionMapScrollbar';
 
 const nodeTypes: NodeTypesType = {
   question: SessionMapQuestionNode,
