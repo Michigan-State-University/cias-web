@@ -38,6 +38,7 @@ const EditCatSession = ({
     catMhPopulationId,
     catMhTimeFrameId,
     googleTtsVoice,
+    catMhTestTypes,
   },
   editingPossible,
   editSession,
@@ -51,7 +52,7 @@ const EditCatSession = ({
     selectedPopulation: null,
     selectedVoice: null,
     sessionVariable: variable,
-    selectedTestIds: [],
+    selectedTestIds: catMhTestTypes.map(({ id }) => +id),
   });
   const [testsUrl, setTestsUrl] = useState('');
   const [languagesUrl, setLanguagesUrl] = useState('');
