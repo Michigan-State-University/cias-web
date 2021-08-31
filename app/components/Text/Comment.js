@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { fontSizes, fontFamily, lineHeights, themeColors } from 'theme';
 
 import { style, padding, border, margin } from '../BaseComponentStyles';
-import Text from '.';
+import Text from './Text';
 
 const Comment = styled(Text)`
   margin: 0;

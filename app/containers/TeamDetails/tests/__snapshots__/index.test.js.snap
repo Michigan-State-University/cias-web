@@ -96,6 +96,22 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
+.c0 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
 .c5 {
   margin: 0;
   font-family: DM Sans;
@@ -169,22 +185,6 @@ exports[`<TeamDetails /> Should render and match the snapshot 1`] = `
 
 .c11:disabled {
   color: #ABBBD1;
-}
-
-.c0 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  width: 100%;
-  height: 100%;
-}
-
-.c7 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
 }
 
 .c16 {

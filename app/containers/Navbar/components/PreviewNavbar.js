@@ -69,7 +69,10 @@ const PreviewNavbar = ({
   return (
     <Row align="center" justify="between" width="100%">
       <Row>
-        <ActionIcon onClick={handleClose} />
+        <ActionIcon
+          onClick={handleClose}
+          ariaText={formatMessage(messages.closePreviewText)}
+        />
         <Text color="black" fontSize={23}>
           {navbarName}
         </Text>

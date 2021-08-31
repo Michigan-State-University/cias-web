@@ -250,6 +250,18 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   line-height: 270%;
 }
 
+.c16 {
+  width: auto;
+  height: auto;
+  margin-right: 10px;
+}
+
+.c29 {
+  width: auto;
+  height: auto;
+  margin-right: 15px;
+}
+
 .c12 {
   width: 100%;
   height: 40px;
@@ -269,18 +281,6 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   -webkit-align-self: flex-start;
   -ms-flex-item-align: start;
   align-self: flex-start;
-}
-
-.c16 {
-  width: auto;
-  height: auto;
-  margin-right: 10px;
-}
-
-.c29 {
-  width: auto;
-  height: auto;
-  margin-right: 15px;
 }
 
 .c19 .button {

@@ -139,8 +139,7 @@ const InterventionNavbar = ({
         <ActionIcon
           to={`/interventions/${interventionId}`}
           iconSrc={backButton}
-          aria-label={formatMessage(messages.goBackToDetails)}
-          title={formatMessage(messages.goBackToDetails)}
+          ariaText={formatMessage(messages.goBackToDetails)}
         />
 
         <StyledInput

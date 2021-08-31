@@ -44,6 +44,7 @@ const SessionMapFooter = ({
             disabled={zoomInDisabled}
             height={zoomIconSize}
             width={zoomIconSize}
+            ariaText={formatMessage(messages.zoomInLabel)}
             mr={15}
           />
         }
@@ -55,6 +56,7 @@ const SessionMapFooter = ({
             disabled={zoomOutDisabled}
             height={zoomIconSize}
             width={zoomIconSize}
+            ariaText={formatMessage(messages.zoomOutLabel)}
             mr={0}
           />
         }

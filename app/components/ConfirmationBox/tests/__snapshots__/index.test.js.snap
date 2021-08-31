@@ -50,7 +50,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c7 {
+.c9 {
   width: auto;
   height: auto;
   display: block;
@@ -68,7 +68,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c9 {
+.c11 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -100,7 +100,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -110,6 +110,25 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   flex-direction: row;
   height: auto;
   margin-top: 25px;
+}
+
+.c7 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c8 {
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 .c3 {
@@ -123,7 +142,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -163,7 +182,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   top: -8px;
 }
 
-.c11 {
+.c13 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -178,13 +197,13 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   margin-right: 25px;
 }
 
-.c11:hover {
+.c13:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;
 }
 
-.c12 {
+.c14 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -198,7 +217,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c12:hover {
+.c14:hover {
   background-color: #FFFFFF;
   color: #D2371D;
   border: 1px solid #D2371D;
@@ -272,7 +291,6 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
             Test
           </h1>
           <button
-            aria-label="Close window"
             class="c6"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
@@ -282,26 +300,31 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
               alt="cross"
               src="IMAGE_MOCK"
             />
+            <p
+              class="c7 c8"
+            >
+              Close window
+            </p>
           </button>
         </div>
       </div>
       <div
-        class="c7"
+        class="c9"
         id="modal-description"
       >
         <div
-          class="c8"
+          class="c10"
         >
           <h1
-            class="c9"
+            class="c11"
           >
             Are you sure you want to perform this action?
           </h1>
           <div
-            class="c10"
+            class="c12"
           >
             <button
-              class="c11"
+              class="c13"
               color="primary"
               radius="100px"
               type="button"
@@ -309,7 +332,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
               Cancel
             </button>
             <button
-              class="c12"
+              class="c14"
               color="warning"
               data-cy="confirmation-box-confirm-button"
               radius="100px"
@@ -375,7 +398,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c7 {
+.c9 {
   width: auto;
   height: auto;
   display: block;
@@ -393,7 +416,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c9 {
+.c11 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -425,7 +448,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c10 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -437,13 +460,20 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   margin-top: 25px;
 }
 
-.c14 {
+.c16 {
   width: auto;
   height: auto;
   margin-right: 15px;
 }
 
-.c15 {
+.c7 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c17 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -452,7 +482,19 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c13 {
+.c8 {
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.c15 {
   padding: 20px;
   width: 100%;
   max-width: 700px;
@@ -480,7 +522,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c8 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -520,7 +562,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   top: -8px;
 }
 
-.c11 {
+.c13 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -535,13 +577,13 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   margin-right: 25px;
 }
 
-.c11:hover {
+.c13:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;
 }
 
-.c12 {
+.c14 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -555,7 +597,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c12:hover {
+.c14:hover {
   background-color: #FFFFFF;
   color: #D2371D;
   border: 1px solid #D2371D;
@@ -629,7 +671,6 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
             Test
           </h1>
           <button
-            aria-label="Close window"
             class="c6"
             data-cy="modal-close-button"
             data-testid="close-modal-button"
@@ -639,26 +680,31 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
               alt="cross"
               src="IMAGE_MOCK"
             />
+            <p
+              class="c7 c8"
+            >
+              Close window
+            </p>
           </button>
         </div>
       </div>
       <div
-        class="c7"
+        class="c9"
         id="modal-description"
       >
         <div
-          class="c8"
+          class="c10"
         >
           <h1
-            class="c9"
+            class="c11"
           >
             Are you sure you want to perform this action?
           </h1>
           <div
-            class="c10"
+            class="c12"
           >
             <button
-              class="c11"
+              class="c13"
               color="primary"
               radius="100px"
               type="button"
@@ -666,7 +712,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
               Cancel
             </button>
             <button
-              class="c12"
+              class="c14"
               color="warning"
               data-cy="confirmation-box-confirm-button"
               radius="100px"
@@ -677,15 +723,15 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c13"
+          class="c15"
         >
           <img
             alt="error"
-            class="c14"
+            class="c16"
             src="IMAGE_MOCK"
           />
           <p
-            class="c15"
+            class="c17"
             font-size="15"
             font-weight="bold"
           >
