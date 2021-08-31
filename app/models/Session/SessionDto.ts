@@ -63,4 +63,7 @@ export interface CatSessionDto extends SessionDto {
   catMhTimeFrameId: number;
   catMhPopulationId: number;
   type: SessionTypes.CAT_SESSION;
+  catMhTestTypes: {
+    id: string;
+  }[];
 }
