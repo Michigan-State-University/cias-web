@@ -155,21 +155,25 @@ module.exports = require('./webpack.base.babel')({
 
     new Dotenv({ systemvars: true }), // load environmental variables from the system
 
-    new SentryWebpackPlugin({
-      // sentry-cli configuration
-      authToken: process.env.SENTRY_AUTH_TOKEN,
-      org: 'htd',
-      project: 'cias-web',
+    ...(process.env.SENTRY_AUTH_TOKEN
+      ? [
+          new SentryWebpackPlugin({
+            // sentry-cli configuration
+            authToken: process.env.SENTRY_AUTH_TOKEN,
+            org: 'htd',
+            project: 'cias-web',
 
-      // webpack specific configuration
-      include: './build',
-      ignore: ['node_modules', 'webpack.config.js'],
-      release: `${process.env.SENTRY_ENV}-v${process.env.VERSION}`,
-    }),
+            // webpack specific configuration
+            include: './build',
+            ignore: ['node_modules', 'webpack.config.js'],
+            release: `${process.env.SENTRY_ENV}-v${process.env.VERSION}`,
+          }),
+        ]
+      : []),
   ],
 
   performance: {
-    assetFilter: assetFilename =>
+    assetFilter: (assetFilename) =>
       !/(\.map$)|(^(main\.|favicon\.))/.test(assetFilename),
   },
 });
