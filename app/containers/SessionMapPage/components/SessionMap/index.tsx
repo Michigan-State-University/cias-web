@@ -159,7 +159,7 @@ const SessionMap = ({
 
     if (
       elementLeftEndPosition < -1 * currentTransform.x ||
-      elementTopEndPosition > -1 * currentTransform.y
+      elementTopEndPosition < -1 * currentTransform.y
     ) {
       const newTransform = {
         ...currentTransform,
