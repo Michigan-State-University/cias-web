@@ -14,10 +14,10 @@ const baseRules = {
     'error',
     'ignorePackages',
     {
-      js: 'never',
-      jsx: 'never',
-      ts: 'never',
-      tsx: 'never',
+      js: 'ignorePackages',
+      jsx: 'ignorePackages',
+      ts: 'ignorePackages',
+      tsx: 'ignorePackages',
     },
   ],
   'import/newline-after-import': 0,
@@ -95,12 +95,7 @@ const baseRules = {
 module.exports = {
   root: true,
   parser: 'babel-eslint',
-  extends: [
-    'airbnb',
-    'prettier',
-    'prettier/react',
-    'plugin:cypress/recommended',
-  ],
+  extends: ['airbnb', 'plugin:prettier/recommended'],
   plugins: [
     'prettier',
     'redux-saga',
@@ -144,6 +139,10 @@ module.exports = {
     'app/utils/libraries/*',
     '.vscode/.history/**/*',
   ],
+  globals: {
+    cy: 'readonly',
+    Cypress: 'readonly',
+  },
   overrides: [
     {
       files: ['**/*.ts', '**/*.tsx'],
@@ -154,13 +153,7 @@ module.exports = {
         sourceType: 'module',
         project: './tsconfig.json',
       },
-      extends: [
-        'airbnb-typescript',
-        'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/eslint-recommended',
-        'prettier/@typescript-eslint',
-        'plugin:prettier/recommended',
-      ],
+      extends: ['airbnb', 'airbnb-typescript', 'plugin:prettier/recommended'],
       plugins: ['@typescript-eslint', 'import'],
       settings: {
         'import/resolver': {

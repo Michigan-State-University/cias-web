@@ -48,6 +48,12 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
+.c6 {
+  width: auto;
+  height: auto;
+  cursor: pointer;
+}
+
 .c4 {
   resize: none;
   padding: 12px;
@@ -69,12 +75,6 @@ exports[`<Reflection /> Should render and match the snapshot 1`] = `
 
 .c4:disabled {
   color: #ABBBD1;
-}
-
-.c6 {
-  width: auto;
-  height: auto;
-  cursor: pointer;
 }
 
 @media only screen and (min-width:768px) {

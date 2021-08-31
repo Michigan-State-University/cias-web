@@ -52,4 +52,8 @@ export default defineMessages({
     id: `${scope}.searchInterventionsLabel`,
     defaultMessage: `Filter Interventions by name`,
   },
+  clearFiltersText: {
+    id: `${scope}.clearFiltersText`,
+    defaultMessage: `Reset filters to default values`,
+  },
 });

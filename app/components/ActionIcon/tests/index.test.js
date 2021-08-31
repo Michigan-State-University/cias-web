@@ -5,17 +5,19 @@
  */
 
 import React from 'react';
-import { render } from '@testing-library/react';
 import 'jest-styled-components';
-
 import { MemoryRouter } from 'react-router-dom';
+
 import testIcon from 'assets/svg/addSign.svg';
+
+import { testRender } from 'utils/testUtils';
+
 import ActionIcon from '../index';
 
 describe('<ActionIcon />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(
+    testRender(
       <MemoryRouter>
         <ActionIcon />
       </MemoryRouter>,
@@ -24,7 +26,7 @@ describe('<ActionIcon />', () => {
   });
 
   it('Should render and match the snapshot as link', () => {
-    const { container } = render(
+    const { container } = testRender(
       <MemoryRouter>
         <ActionIcon to="/" />
       </MemoryRouter>,
@@ -33,7 +35,7 @@ describe('<ActionIcon />', () => {
   });
 
   it('Should render and match the snapshot as button', () => {
-    const { container } = render(
+    const { container } = testRender(
       <MemoryRouter>
         <ActionIcon onClick={jest.fn()} />
       </MemoryRouter>,
@@ -42,7 +44,7 @@ describe('<ActionIcon />', () => {
   });
 
   it('Should render and match the snapshot with different icon', () => {
-    const { container } = render(
+    const { container } = testRender(
       <MemoryRouter>
         <ActionIcon onClick={jest.fn()} iconSrc={testIcon} />
       </MemoryRouter>,

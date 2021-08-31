@@ -10,7 +10,7 @@ import { Markup } from 'interweave';
 import Box from 'components/Box';
 import H3 from 'components/H3';
 import Row from 'components/Row';
-import Switch from 'components/Switch';
+import { FullWidthSwitch } from 'components/Switch';
 import Text from 'components/Text';
 import lastKey from 'utils/getLastKey';
 import { colors, borders, fontSizes, themeColors } from 'theme';
@@ -147,7 +147,7 @@ const NarratorTab = ({
               mb={15}
               borderBottom={getBorderBottom(index)}
             >
-              <Switch
+              <FullWidthSwitch
                 id={index}
                 disabled={
                   disabled ||
@@ -159,7 +159,7 @@ const NarratorTab = ({
                 onToggle={toggleAction(index)}
               >
                 <H3>{formatMessage(messages[`${index}`])}</H3>
-              </Switch>
+              </FullWidthSwitch>
             </Row>
           ))}
       </Box>

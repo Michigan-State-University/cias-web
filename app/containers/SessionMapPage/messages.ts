@@ -33,4 +33,12 @@ export default defineMessages({
     id: `${scope}.screenNo`,
     defaultMessage: 'Screen {no}',
   },
+  zoomInLabel: {
+    id: `${scope}.zoomInLabel`,
+    defaultMessage: 'Zoom In',
+  },
+  zoomOutLabel: {
+    id: `${scope}.zoomOutLabel`,
+    defaultMessage: 'Zoom Out',
+  },
 });
