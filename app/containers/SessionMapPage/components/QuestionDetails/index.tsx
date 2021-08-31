@@ -56,6 +56,7 @@ const SessionMapQuestionDetails = ({
         background={colors.zirkon}
         height="100%"
         padding={20}
+        overflow="auto"
       >
         <Text color={colors.electricPurple} fontWeight="bold" mb={10}>
           {questionGroup.title}

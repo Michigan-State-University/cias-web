@@ -183,10 +183,11 @@ const SessionMapPage = (): JSX.Element => {
         <Helmet>
           <title>{formatMessage(messages.sessionMap)}</title>
         </Helmet>
-        {loading ? (
+        {loading && (
           // @ts-ignore
           <Loader />
-        ) : (
+        )}
+        {!loading && (
           <>
             <SessionMapHeader
               showWithBranchingOnly={showWithBranchingOnly}
