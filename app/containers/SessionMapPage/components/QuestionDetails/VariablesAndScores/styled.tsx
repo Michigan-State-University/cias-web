@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-
 // @ts-ignore
 import styled from 'styled-components';
 
