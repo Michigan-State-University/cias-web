@@ -98,4 +98,8 @@ export default defineMessages({
     id: `${scope}.searchPlaceholder`,
     defaultMessage: 'Filter users by name',
   },
+  clearFiltersText: {
+    id: `${scope}.clearFiltersText`,
+    defaultMessage: `Reset filters to default values`,
+  },
 });

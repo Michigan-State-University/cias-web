@@ -477,10 +477,9 @@ const EditClassicSessionPage = ({
                 <ActionIcon
                   mr="0"
                   onClick={handleCloseManage}
-                  aria-label={formatMessage(
+                  ariaText={formatMessage(
                     messages.closeQuestionManagementLabel,
                   )}
-                  title={formatMessage(messages.closeQuestionManagementLabel)}
                 />
               </Row>
             )}

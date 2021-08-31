@@ -102,15 +102,6 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c4 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 18px;
-  line-height: 130%;
-  margin-bottom: 25px;
-  color: #2F3850;
-}
-
 .c1 {
   width: auto;
   height: auto;
@@ -124,6 +115,15 @@ exports[`<SettingsPanel /> Should render and match the snapshot 1`] = `
   display: block;
   border-radius: 5px;
   margin-bottom: 25px;
+}
+
+.c4 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 18px;
+  line-height: 130%;
+  margin-bottom: 25px;
+  color: #2F3850;
 }
 
 .c9 {

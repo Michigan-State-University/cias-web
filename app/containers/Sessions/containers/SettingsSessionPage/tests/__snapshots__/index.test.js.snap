@@ -28,6 +28,13 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
+.c18 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
 .c4 {
   margin: 0;
   font-family: DM Sans;
@@ -95,10 +102,33 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.c17 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 100%;
 }
 
-.c19 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -123,7 +153,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   padding-bottom: 15px;
 }
 
-.c12 {
+.c20 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -131,7 +161,7 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c18 {
+.c24 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -217,20 +247,42 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
 }
 
-.c13 {
+.c21 {
   position: relative;
   display: inline-block;
   min-width: 40px;
   height: 21px;
 }
 
-.c15 {
+.c14 {
   opacity: 0;
   width: 0;
   height: 0;
+  visibility: collapse;
 }
 
-.c17 {
+.c16 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c16:hover {
+  cursor: pointer;
+}
+
+.c13:disabled + .c15 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c23 {
   position: absolute;
   top: 0;
   left: 0;
@@ -238,25 +290,24 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   bottom: 0;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  cursor: pointer;
   background-color: #CED3E4;
   border-radius: 21px;
 }
 
-.c14:checked + .c16 {
+.c13:checked + .c15 .c22 {
   background-color: #B727EA;
 }
 
-.c14:focus + .c16 {
+.c13:focus + .c15 .c22 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c14:disabled + .c16 {
+.c13:disabled + .c15 .c22 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c17:before {
+.c23:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -269,10 +320,18 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c14:checked + .c16:before {
+.c13:checked + .c15 .c22:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
+}
+
+.c19 {
+  margin-right: 5px;
+}
+
+.c12 {
+  width: 100% !important;
 }
 
 .c6 {
@@ -382,112 +441,139 @@ exports[`<SettingsSessionPage /> Should render and match the snapshot 1`] = `
       class="c10"
     >
       <div
-        class="c11"
-        width="100%"
+        class="c11 c12"
       >
+        <input
+          aria-checked="true"
+          aria-disabled="true"
+          checked=""
+          class="c13 c14"
+          data-cy="branching-intervention-toggle"
+          data-testid="switch-input"
+          disabled=""
+          id="Narrator Active"
+          role="switch"
+          type="checkbox"
+        />
         <label
+          class="c15 c16"
           for="Narrator Active"
         >
-          <p
-            class="c12"
-            font-weight="bold"
+          <div
+            class="c17"
+            width="100%"
           >
-            Narrator Active
-          </p>
+            <div
+              class="c18 c19"
+            >
+              <p
+                class="c20"
+                font-weight="bold"
+              >
+                Narrator Active
+              </p>
+            </div>
+            <div
+              class="c21"
+            >
+              <span
+                class="c22 c23"
+              />
+            </div>
+          </div>
         </label>
-        <div
-          class="c13"
-        >
-          <input
-            aria-checked="true"
-            aria-disabled="true"
-            checked=""
-            class="c14 c15"
-            data-cy="branching-intervention-toggle"
-            data-testid="switch-input"
-            disabled=""
-            id="Narrator Active"
-            role="switch"
-            type="checkbox"
-          />
-          <span
-            class="c16 c17"
-          />
-        </div>
       </div>
     </div>
     <div
       class="c10"
     >
       <div
-        class="c11"
-        width="100%"
+        class="c11 c12"
       >
+        <input
+          aria-checked="true"
+          aria-disabled="true"
+          checked=""
+          class="c13 c14"
+          data-cy="branching-intervention-toggle"
+          data-testid="switch-input"
+          disabled=""
+          id="Voice"
+          role="switch"
+          type="checkbox"
+        />
         <label
+          class="c15 c16"
           for="Voice"
         >
-          <p
-            class="c18"
+          <div
+            class="c17"
+            width="100%"
           >
-            Voice
-          </p>
+            <div
+              class="c18 c19"
+            >
+              <p
+                class="c24"
+              >
+                Voice
+              </p>
+            </div>
+            <div
+              class="c21"
+            >
+              <span
+                class="c22 c23"
+              />
+            </div>
+          </div>
         </label>
-        <div
-          class="c13"
-        >
-          <input
-            aria-checked="true"
-            aria-disabled="true"
-            checked=""
-            class="c14 c15"
-            data-cy="branching-intervention-toggle"
-            data-testid="switch-input"
-            disabled=""
-            id="Voice"
-            role="switch"
-            type="checkbox"
-          />
-          <span
-            class="c16 c17"
-          />
-        </div>
       </div>
     </div>
     <div
-      class="c19"
+      class="c25"
     >
       <div
-        class="c11"
-        width="100%"
+        class="c11 c12"
       >
+        <input
+          aria-checked="true"
+          aria-disabled="true"
+          checked=""
+          class="c13 c14"
+          data-cy="branching-intervention-toggle"
+          data-testid="switch-input"
+          disabled=""
+          id="Display Narrator"
+          role="switch"
+          type="checkbox"
+        />
         <label
+          class="c15 c16"
           for="Display Narrator"
         >
-          <p
-            class="c18"
+          <div
+            class="c17"
+            width="100%"
           >
-            Display Narrator
-          </p>
+            <div
+              class="c18 c19"
+            >
+              <p
+                class="c24"
+              >
+                Display Narrator
+              </p>
+            </div>
+            <div
+              class="c21"
+            >
+              <span
+                class="c22 c23"
+              />
+            </div>
+          </div>
         </label>
-        <div
-          class="c13"
-        >
-          <input
-            aria-checked="true"
-            aria-disabled="true"
-            checked=""
-            class="c14 c15"
-            data-cy="branching-intervention-toggle"
-            data-testid="switch-input"
-            disabled=""
-            id="Display Narrator"
-            role="switch"
-            type="checkbox"
-          />
-          <span
-            class="c16 c17"
-          />
-        </div>
       </div>
     </div>
   </div>

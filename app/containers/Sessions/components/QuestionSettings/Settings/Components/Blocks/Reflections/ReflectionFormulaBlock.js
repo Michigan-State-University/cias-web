@@ -15,7 +15,7 @@ import Column from 'components/Column';
 import Box from 'components/Box';
 import Select from 'components/Select';
 import Row from 'components/Row';
-import Switch from 'components/Switch';
+import { FullWidthSwitch } from 'components/Switch';
 import Text from 'components/Text';
 
 import { StyledInput } from 'components/Input/StyledInput';
@@ -124,7 +124,7 @@ const ReflectionFormulaBlock = ({
         </>
       )}
       <Row my={15} align="center" justify="between">
-        <Switch
+        <FullWidthSwitch
           id="reflection-toggle"
           disabled={disabled}
           checked
@@ -132,10 +132,10 @@ const ReflectionFormulaBlock = ({
           onToggle={() => switchToSpeech(blockIndex, id)}
         >
           {formatMessage(messages.reflectionToggle)}
-        </Switch>
+        </FullWidthSwitch>
       </Row>
       <Row mb={15} align="center" justify="between">
-        <Switch
+        <FullWidthSwitch
           id="formula-toggle"
           disabled={disabled}
           checked
@@ -143,7 +143,7 @@ const ReflectionFormulaBlock = ({
           onToggle={() => switchToReflection(blockIndex, id)}
         >
           {formatMessage(messages.formulaToggle)}
-        </Switch>
+        </FullWidthSwitch>
       </Row>
 
       <Row mt={20} align="center" justify="between">

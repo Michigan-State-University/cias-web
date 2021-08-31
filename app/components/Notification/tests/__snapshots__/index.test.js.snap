@@ -89,31 +89,6 @@ exports[`<Notification /> should match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c7 {
-  height: 28px;
-  width: 28px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  border-radius: 4px;
-  background: #E9F1FB;
-  margin-right: 35px;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  padding: 0;
-  margin: 0px;
-}
-
 <div>
   <div
     class="c0"
@@ -171,17 +146,7 @@ exports[`<Notification /> should match the snapshot 1`] = `
         align="end"
         class="c6"
         style="box-sizing: border-box; min-height: 1px; position: relative; width: auto; flex-basis: auto; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%; padding: 0px;"
-      >
-        <button
-          class="c7"
-        >
-          <img
-            alt="cross"
-            class="c3"
-            src="IMAGE_MOCK"
-          />
-        </button>
-      </div>
+      />
     </div>
   </div>
 </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import 'jest-styled-components';
 
-import Comment from '../index';
+import Comment from '../Comment';
 
 describe('<Comment />', () => {
   it('should match the snapshot', () => {

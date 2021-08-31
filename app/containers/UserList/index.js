@@ -136,6 +136,7 @@ function UserList({
                       width={15}
                       onClick={() => setSelectRoles(filterableRoles)}
                       background="none"
+                      ariaText={formatMessage(messages.clearFiltersText)}
                     />
                   </Col>
                 )}

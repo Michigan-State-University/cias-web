@@ -51,6 +51,14 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   overflow: hidden;
 }
 
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  overflow: scroll;
+}
+
 .c0 {
   width: 300px;
   height: 100vh;
@@ -127,14 +135,6 @@ exports[`<Sidebar /> Should render and match the snapshot with session path 1`] 
   background-color: #B727EA;
   color: #FFFFFF;
   border: 1px solid transparent;
-}
-
-.c7 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  overflow: scroll;
 }
 
 @media only screen and (min-width:768px) {
@@ -246,6 +246,14 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   overflow: hidden;
 }
 
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  overflow: scroll;
+}
+
 .c0 {
   width: 300px;
   height: 100vh;
@@ -322,14 +330,6 @@ exports[`<Sidebar /> Should render and match the snapshot without matching path 
   background-color: #B727EA;
   color: #FFFFFF;
   border: 1px solid transparent;
-}
-
-.c7 {
-  width: auto;
-  height: auto;
-  display: block;
-  border-radius: 5px;
-  overflow: scroll;
 }
 
 @media only screen and (min-width:768px) {

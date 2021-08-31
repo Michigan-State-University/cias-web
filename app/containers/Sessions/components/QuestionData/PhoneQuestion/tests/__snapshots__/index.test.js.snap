@@ -76,6 +76,14 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
 }
 
+.c7 {
+  width: auto;
+  height: auto;
+  -webkit-transition: -webkit-transform 0.2s;
+  -webkit-transition: transform 0.2s;
+  transition: transform 0.2s;
+}
+
 .c1 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -104,14 +112,6 @@ exports[`<PhoneQuestion /> Should render and match the snapshot 1`] = `
   -ms-flex-align: flex-start;
   align-items: flex-start;
   width: 100%;
-}
-
-.c7 {
-  width: auto;
-  height: auto;
-  -webkit-transition: -webkit-transform 0.2s;
-  -webkit-transition: transform 0.2s;
-  transition: transform 0.2s;
 }
 
 @media only screen and (min-width:768px) {

@@ -17,7 +17,14 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   margin-bottom: 30px;
 }
 
-.c13 {
+.c12 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c19 {
   width: auto;
   height: auto;
   display: block;
@@ -25,7 +32,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   margin-bottom: 15px;
 }
 
-.c17 {
+.c23 {
   width: auto;
   height: auto;
   display: block;
@@ -33,7 +40,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   position: relative;
 }
 
-.c18 {
+.c24 {
   width: auto;
   height: auto;
   display: block;
@@ -41,7 +48,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   margin-top: 14px;
 }
 
-.c6 {
+.c14 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -96,10 +103,33 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: auto;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  justify-items: space-between;
+  -webkit-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
   width: 100%;
 }
 
-.c12 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -124,7 +154,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   padding-bottom: 15px;
 }
 
-.c14 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -135,20 +165,42 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c7 {
+.c15 {
   position: relative;
   display: inline-block;
   min-width: 40px;
   height: 21px;
 }
 
-.c9 {
+.c8 {
   opacity: 0;
   width: 0;
   height: 0;
+  visibility: collapse;
 }
 
-.c11 {
+.c10 {
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c10:hover {
+  cursor: pointer;
+}
+
+.c7:disabled + .c9 {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.c17 {
   position: absolute;
   top: 0;
   left: 0;
@@ -156,25 +208,24 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   bottom: 0;
   -webkit-transition: 0.4s;
   transition: 0.4s;
-  cursor: pointer;
   background-color: #CED3E4;
   border-radius: 21px;
 }
 
-.c8:checked + .c10 {
+.c7:checked + .c9 .c16 {
   background-color: #B727EA;
 }
 
-.c8:focus + .c10 {
+.c7:focus + .c9 .c16 {
   box-shadow: 0 0 1px #B727EA;
 }
 
-.c8:disabled + .c10 {
+.c7:disabled + .c9 .c16 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c11:before {
+.c17:before {
   position: absolute;
   content: '';
   left: 4px;
@@ -187,10 +238,18 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   border-radius: 50%;
 }
 
-.c8:checked + .c10:before {
+.c7:checked + .c9 .c16:before {
   -webkit-transform: translateX(18px);
   -ms-transform: translateX(18px);
   transform: translateX(18px);
+}
+
+.c13 {
+  margin-right: 5px;
+}
+
+.c6 {
+  width: 100% !important;
 }
 
 .c3 {
@@ -201,7 +260,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c16 {
+.c22 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -210,7 +269,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c15 {
+.c21 {
   width: auto;
   height: auto;
   margin-right: 10px;
@@ -223,7 +282,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   padding: 10px;
 }
 
-.c19 {
+.c25 {
   height: 40px;
   border: 1px dashed #B0BAC9;
   color: #B0BAC9;
@@ -246,7 +305,7 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c19:hover {
+.c25:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: none;
@@ -276,87 +335,105 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
       class="c4"
     >
       <div
-        class="c5"
-        width="100%"
+        class="c5 c6"
       >
+        <input
+          aria-checked="true"
+          aria-disabled="false"
+          checked=""
+          class="c7 c8"
+          data-cy="branching-intervention-toggle"
+          data-testid="switch-input"
+          id="voice"
+          role="switch"
+          type="checkbox"
+        />
         <label
+          class="c9 c10"
           for="voice"
         >
-          <h3
-            class="c6"
+          <div
+            class="c11"
+            width="100%"
           >
-            Voice
-          </h3>
+            <div
+              class="c12 c13"
+            >
+              <h3
+                class="c14"
+              >
+                Voice
+              </h3>
+            </div>
+            <div
+              class="c15"
+            >
+              <span
+                class="c16 c17"
+              />
+            </div>
+          </div>
         </label>
-        <div
-          class="c7"
-        >
-          <input
-            aria-checked="true"
-            aria-disabled="false"
-            checked=""
-            class="c8 c9"
-            data-cy="branching-intervention-toggle"
-            data-testid="switch-input"
-            id="voice"
-            role="switch"
-            type="checkbox"
-          />
-          <span
-            class="c10 c11"
-          />
-        </div>
       </div>
     </div>
     <div
-      class="c12"
+      class="c18"
     >
       <div
-        class="c5"
-        width="100%"
+        class="c5 c6"
       >
+        <input
+          aria-checked="true"
+          aria-disabled="false"
+          checked=""
+          class="c7 c8"
+          data-cy="branching-intervention-toggle"
+          data-testid="switch-input"
+          id="animation"
+          role="switch"
+          type="checkbox"
+        />
         <label
+          class="c9 c10"
           for="animation"
         >
-          <h3
-            class="c6"
+          <div
+            class="c11"
+            width="100%"
           >
-            Display Narrator
-          </h3>
+            <div
+              class="c12 c13"
+            >
+              <h3
+                class="c14"
+              >
+                Display Narrator
+              </h3>
+            </div>
+            <div
+              class="c15"
+            >
+              <span
+                class="c16 c17"
+              />
+            </div>
+          </div>
         </label>
-        <div
-          class="c7"
-        >
-          <input
-            aria-checked="true"
-            aria-disabled="false"
-            checked=""
-            class="c8 c9"
-            data-cy="branching-intervention-toggle"
-            data-testid="switch-input"
-            id="animation"
-            role="switch"
-            type="checkbox"
-          />
-          <span
-            class="c10 c11"
-          />
-        </div>
       </div>
     </div>
   </div>
   <div
-    class="c13 c2"
+    class="c19 c2"
   >
     <div
-      class="c14"
+      class="c20"
     >
       <img
-        class="c15"
+        class="c21"
         src="IMAGE_MOCK"
       />
       <p
-        class="c16"
+        class="c22"
         color="#D2371D"
         font-size="14px"
       >
@@ -374,10 +451,10 @@ exports[`<NarratorTab /> Should render and match the snapshot 1`] = `
     />
   </div>
   <div
-    class="c17"
+    class="c23"
   >
     <div
-      class="c18 c19"
+      class="c24 c25"
     >
       + Add block
     </div>

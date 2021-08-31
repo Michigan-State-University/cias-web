@@ -16,7 +16,7 @@ import { TOOLTIP_PORTAL_ID } from 'containers/App/constants';
 
 import Box from 'components/Box';
 import Img from 'components/Img';
-import Text from 'components/Text';
+import Text from 'components/Text/Text'; // direct import to avoid dependency cycle
 import Portal from 'components/Portal';
 
 import { StyledTooltip } from './styled';

@@ -1,9 +1,11 @@
 import React, { useRef } from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import 'jest-styled-components';
+import userEvent from '@testing-library/user-event';
 
 import { testRender } from 'utils/testUtils';
 
+import { act } from '@testing-library/react-hooks';
 import Input from '../index';
 import DateInput from '../DateInput';
 import ApprovableInput from '../ApprovableInput';
@@ -69,14 +71,18 @@ describe('<SearchInput />', () => {
     const { container } = testRender(<SearchInput {...defaultProps} />);
     expect(container).toMatchSnapshot();
   });
-  it('Should invoke onCHange function', async () => {
+  it('Should invoke onChange function', async () => {
     const newProps = {
       ...defaultProps,
       value: 'Value',
     };
-    testRender(<SearchInput {...newProps} />);
+    act(() => {
+      const { rerender } = testRender(<SearchInput {...newProps} />);
+      rerender(<SearchInput {...newProps} />);
+    });
+    userEvent.type(screen.getByRole('textbox'), 'test');
     const img = document.querySelectorAll('img')[1];
-    fireEvent.click(img);
+    userEvent.click(img);
     await waitFor(() =>
       expect(newProps.onChange).toHaveBeenCalledWith({ target: { value: '' } }),
     );
