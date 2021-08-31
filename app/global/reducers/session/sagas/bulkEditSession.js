@@ -2,6 +2,7 @@ import { put, takeLatest, select, call } from 'redux-saga/effects';
 import axios from 'axios';
 
 import objectKeysToSnakeCase from 'utils/objectToSnakeCase';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { BULK_EDIT_SESSION_REQUEST } from '../constants';
 
 import { editSessionSuccess, editSessionError } from '../actions';
@@ -16,18 +17,11 @@ export function* bulkEditSession({ payload: { session: editedSession } } = {}) {
   }/sessions/${session.id}`;
 
   try {
-    const {
-      data: { data },
-    } = yield call(axios.put, requestURL, {
+    const { data } = yield call(axios.put, requestURL, {
       session: objectKeysToSnakeCase(editedSession),
     });
 
-    yield put(
-      editSessionSuccess({
-        ...data.attributes,
-        id: data.id,
-      }),
-    );
+    yield put(editSessionSuccess(jsonApiToObject(data, 'session')));
   } catch (error) {
     yield put(editSessionError(error));
   }
