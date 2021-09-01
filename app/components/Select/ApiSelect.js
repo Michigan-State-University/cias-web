@@ -19,11 +19,15 @@ const ApiSelect = ({
     [state.data],
   );
 
-  useEffect(() => {
+  const setDefaultSelectValue = () => {
     if (options && options.length !== 0 && defaultValue) {
       const option = options.find(({ value }) => value === defaultValue);
       selectProps.onChange(option);
     }
+  };
+
+  useEffect(() => {
+    setDefaultSelectValue();
   }, [options]);
 
   const mergedSelectProps = useMemo(

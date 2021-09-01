@@ -6,7 +6,7 @@ export interface Language {
   languageName: string;
 }
 
-export interface LanguageSelectOption extends SelectOption {
+export interface LanguageSelectOption extends SelectOption<string> {
   googleLanguageId: string;
 }
 

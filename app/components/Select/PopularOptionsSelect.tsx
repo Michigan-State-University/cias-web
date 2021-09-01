@@ -19,14 +19,14 @@ import Select from '.';
 import messages from './messages';
 import { SelectOption, GroupedOption, Group } from './types';
 
-type Props<OptionType extends SelectOption> = {
+type Props<OptionType extends SelectOption<string>> = {
   popularOptionsValues: string[];
   popularGroupLabel?: string;
   otherGroupLabel?: string;
   selectProps: SelectProps<OptionType>;
 };
 
-const PopularOptionsSelect = <OptionType extends SelectOption>({
+const PopularOptionsSelect = <OptionType extends SelectOption<string>>({
   popularOptionsValues,
   popularGroupLabel,
   otherGroupLabel,

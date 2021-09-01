@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { useInjectSaga } from 'redux-injectors';
+import { createStructuredSelector } from 'reselect';
 
 import { colors } from 'theme';
 import { CatSessionDto } from 'models/Session/SessionDto';
@@ -19,8 +21,7 @@ import ApiSelect from 'components/Select/ApiSelect';
 import Input from 'components/Input';
 import Button from 'components/Button';
 
-import { useInjectSaga } from 'redux-injectors';
-import { createStructuredSelector } from 'reselect';
+import { SelectOption } from 'components/Select/types';
 import messages from './messages';
 import CatMhTests from '../../components/CatMhTests';
 
@@ -29,6 +30,15 @@ type Props = {
   editingPossible: boolean;
   sessionIsEditing: boolean;
   editSession: any;
+};
+
+type State = {
+  selectedLanguage: null | SelectOption<number>;
+  selectedTimeFrame: null | SelectOption<number>;
+  selectedPopulation: null | SelectOption<number>;
+  selectedVoice: null | SelectOption<number>;
+  sessionVariable: string;
+  selectedTestIds: number[];
 };
 
 const EditCatSession = ({
@@ -46,7 +56,7 @@ const EditCatSession = ({
 }: Props): JSX.Element => {
   useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
   const { formatMessage } = useIntl();
-  const [formData, setFormData] = useState<any>({
+  const [formData, setFormData] = useState<State>({
     selectedLanguage: null,
     selectedTimeFrame: null,
     selectedPopulation: null,
@@ -96,14 +106,21 @@ const EditCatSession = ({
       selectedTestIds: testIds,
       sessionVariable,
     } = formData;
-    editSession({
-      catMhLanguageId: selectedLanguage.value,
-      catMhTimeFrameId: selectedTimeFrame.value,
-      catMhPopulationId: selectedPopulation.value,
-      catTests: testIds,
-      googleTtsVoiceId: selectedVoice.value,
-      variable: sessionVariable,
-    });
+    if (
+      selectedLanguage &&
+      selectedTimeFrame &&
+      selectedPopulation &&
+      selectedVoice
+    ) {
+      editSession({
+        catMhLanguageId: selectedLanguage.value,
+        catMhTimeFrameId: selectedTimeFrame.value,
+        catMhPopulationId: selectedPopulation.value,
+        catTests: testIds,
+        googleTtsVoiceId: selectedVoice.value,
+        variable: sessionVariable,
+      });
+    }
   };
 
   const wrapWithLabel = (label: string, children: JSX.Element) => (
