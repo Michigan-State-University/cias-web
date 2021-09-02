@@ -11,6 +11,7 @@ import {
   bulkEditSession,
   makeSelectSessionEditLoader,
 } from 'global/reducers/session';
+import { CatSessionDto } from 'models/Session/SessionDto';
 
 import Box from 'components/Box';
 import Text from 'components/Text';
@@ -21,8 +22,15 @@ import Input from 'components/Input';
 import Button from 'components/Button';
 
 import messages from './messages';
-import { EditCatSessionProps, EditCatSessionState } from './types';
+import { EditCatSessionState } from './types';
 import CatMhTests from '../../components/CatMhTests';
+
+type EditCatSessionProps = {
+  session: CatSessionDto;
+  editingPossible: boolean;
+  sessionIsEditing: boolean;
+  editSession: any;
+};
 
 const EditCatSession = ({
   session: {

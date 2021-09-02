@@ -1,12 +1,4 @@
 import { SelectOption } from 'components/Select/types';
-import { CatSessionDto } from 'models/Session/SessionDto';
-
-export type EditCatSessionProps = {
-  session: CatSessionDto;
-  editingPossible: boolean;
-  sessionIsEditing: boolean;
-  editSession: any;
-};
 
 export type EditCatSessionState = {
   selectedLanguage: null | SelectOption<number>;
