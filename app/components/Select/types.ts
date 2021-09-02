@@ -1,6 +1,6 @@
 export interface SelectOption<T> {
-  value: string;
-  label: T;
+  value: T;
+  label: string;
 }
 
 export type GroupedOption<OptionType extends SelectOption<string>> =

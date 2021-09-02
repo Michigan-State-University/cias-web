@@ -5,7 +5,6 @@ import { useInjectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
 
 import { colors } from 'theme';
-import { CatSessionDto } from 'models/Session/SessionDto';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   bulkEditSessionRequest,
@@ -21,25 +20,9 @@ import ApiSelect from 'components/Select/ApiSelect';
 import Input from 'components/Input';
 import Button from 'components/Button';
 
-import { SelectOption } from 'components/Select/types';
 import messages from './messages';
+import { EditCatSessionProps, EditCatSessionState } from './types';
 import CatMhTests from '../../components/CatMhTests';
-
-type Props = {
-  session: CatSessionDto;
-  editingPossible: boolean;
-  sessionIsEditing: boolean;
-  editSession: any;
-};
-
-type State = {
-  selectedLanguage: null | SelectOption<number>;
-  selectedTimeFrame: null | SelectOption<number>;
-  selectedPopulation: null | SelectOption<number>;
-  selectedVoice: null | SelectOption<number>;
-  sessionVariable: string;
-  selectedTestIds: number[];
-};
 
 const EditCatSession = ({
   session: {
@@ -53,10 +36,10 @@ const EditCatSession = ({
   editingPossible,
   editSession,
   sessionIsEditing,
-}: Props): JSX.Element => {
+}: EditCatSessionProps): JSX.Element => {
   useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
   const { formatMessage } = useIntl();
-  const [formData, setFormData] = useState<State>({
+  const [formData, setFormData] = useState<EditCatSessionState>({
     selectedLanguage: null,
     selectedTimeFrame: null,
     selectedPopulation: null,
@@ -73,9 +56,9 @@ const EditCatSession = ({
     if (!selectedLanguage || !selectedTimeFrame || !selectedPopulation) return;
 
     const params = new URLSearchParams();
-    params.append('language_id', selectedLanguage.value);
-    params.append('population_id', selectedPopulation.value);
-    params.append('time_frame_id', selectedTimeFrame.value);
+    params.append('language_id', `${selectedLanguage.value}`);
+    params.append('population_id', `${selectedPopulation.value}`);
+    params.append('time_frame_id', `${selectedTimeFrame.value}`);
 
     setTestsUrl(`/v1/cat_mh/available_test_types?${params.toString()}`);
   }, [
