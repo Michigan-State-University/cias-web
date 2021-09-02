@@ -43,6 +43,7 @@ import {
   EDIT_SESSION_REQUEST,
   EDIT_SESSION_SUCCESS,
   EDIT_SESSION_ERROR,
+  BULK_EDIT_SESSION_REQUEST,
 } from './constants';
 
 export const initialState = {
@@ -73,6 +74,7 @@ const saving = [
   REORDER_QUESTION_LIST_REQUEST,
   CREATE_QUESTION_REQUEST,
   UPDATE_QUESTION_IMAGE_REQUEST,
+  BULK_EDIT_SESSION_REQUEST,
 ];
 const saved = [
   EDIT_SESSION_SUCCESS,
@@ -118,6 +120,9 @@ const sessionReducer = (state = initialState, action) =>
 
       case EDIT_SESSION_REQUEST:
         set(draft.session, action.payload.path, action.payload.value);
+        break;
+      case BULK_EDIT_SESSION_REQUEST:
+        draft.session = { ...state.session, ...action.payload.session };
         break;
       case EDIT_SESSION_SUCCESS:
         draft.session = objectToCamelCase(action.payload.session);

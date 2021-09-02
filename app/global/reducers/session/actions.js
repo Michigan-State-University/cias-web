@@ -7,6 +7,7 @@ import {
   EDIT_SESSION_REQUEST,
   EDIT_SESSION_SUCCESS,
   EDIT_SESSION_ERROR,
+  BULK_EDIT_SESSION_REQUEST,
 } from './constants';
 
 export const getSessionRequest = (payload) =>
@@ -18,6 +19,8 @@ export const getSessionError = (error) =>
 
 export const editSessionRequest = (payload, fields = [], sessionId) =>
   actionBuilder(EDIT_SESSION_REQUEST, { ...payload, sessionId }, fields);
+export const bulkEditSessionRequest = (session) =>
+  actionBuilder(BULK_EDIT_SESSION_REQUEST, { session });
 export const editSessionSuccess = (session) =>
   actionBuilder(EDIT_SESSION_SUCCESS, { session });
 export const editSessionError = (error) =>

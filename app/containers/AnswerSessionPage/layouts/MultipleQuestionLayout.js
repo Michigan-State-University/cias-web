@@ -51,7 +51,7 @@ const MultipleQuestionLayout = ({
 
 MultipleQuestionLayout.propTypes = {
   data: PropTypes.array,
-  questionId: PropTypes.string,
+  questionId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   check: PropTypes.func,
   selectedAnswersIndex: PropTypes.array,
 };
