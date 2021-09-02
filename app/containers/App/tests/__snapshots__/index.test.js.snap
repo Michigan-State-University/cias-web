@@ -360,13 +360,13 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                           class="Input-t9j2q5-0 hjYQaq"
                           placeholder="Filter by name"
                           type="text"
-                          value=""
                         />
                         <img
                           alt="search"
                           class="styled__SearchIcon-sc-10udg63-4 VQGbD"
                           src="IMAGE_MOCK"
                         />
+                        
                       </div>
                     </div>
                   </div>

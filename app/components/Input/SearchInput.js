@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash/debounce';
 
@@ -11,16 +11,31 @@ import { SearchInputStyled, SearchIcon } from './styled';
 
 const DEFAULT_DEBOUNCE = 0;
 
-const SearchInput = ({ icon, debounceTime, ...inputProps }) => {
-  const { value, onChange, width } = inputProps;
+const SearchInput = ({
+  icon,
+  debounceTime,
+  value,
+  onChange,
+  ...inputProps
+}) => {
+  const { width } = inputProps;
+
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (value !== inputRef.current.value) {
+      inputRef.current.value = value;
+    }
+  }, [value, inputRef]);
 
   const handleChange = useCallback(debounce(onChange, debounceTime), [
     debounceTime,
+    onChange,
   ]);
 
   return (
     <SearchInputStyled width={width}>
-      <Input {...inputProps} onChange={handleChange} px={30} />
+      <Input {...inputProps} ref={inputRef} onChange={handleChange} px={30} />
       <SearchIcon src={search} alt="search" />
       {value && (
         <ActionIcon
@@ -38,6 +53,8 @@ const SearchInput = ({ icon, debounceTime, ...inputProps }) => {
 SearchInput.propTypes = {
   icon: PropTypes.any,
   debounceTime: PropTypes.number,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 SearchInput.defaultProps = {

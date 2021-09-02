@@ -161,7 +161,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                 <input
                   class="Input-t9j2q5-0 hjYQaq"
                   type="text"
-                  value=""
                 />
                 <img
                   alt="search"
@@ -615,7 +614,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                 <input
                   class="Input-t9j2q5-0 hjYQaq"
                   type="text"
-                  value=""
                 />
                 <img
                   alt="search"
