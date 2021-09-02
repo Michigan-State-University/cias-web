@@ -55,7 +55,7 @@ SingleQuestionLayout.propTypes = {
   data: PropTypes.array,
   handleClick: PropTypes.func,
   selectedAnswerIndex: PropTypes.number,
-  questionId: PropTypes.string,
+  questionId: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default SingleQuestionLayout;

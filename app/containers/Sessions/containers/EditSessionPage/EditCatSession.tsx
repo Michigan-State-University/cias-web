@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { useInjectSaga } from 'redux-injectors';
+import { createStructuredSelector } from 'reselect';
 
 import { colors } from 'theme';
-import { CatSessionDto } from 'models/Session/SessionDto';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
-import { editSessionRequest } from 'global/reducers/session';
+import {
+  bulkEditSessionRequest,
+  bulkEditSession,
+  makeSelectSessionEditLoader,
+} from 'global/reducers/session';
+import { CatSessionDto } from 'models/Session/SessionDto';
 
 import Box from 'components/Box';
 import Text from 'components/Text';
@@ -16,25 +22,38 @@ import Input from 'components/Input';
 import Button from 'components/Button';
 
 import messages from './messages';
+import { EditCatSessionState } from './types';
 import CatMhTests from '../../components/CatMhTests';
 
-type Props = {
+type EditCatSessionProps = {
   session: CatSessionDto;
   editingPossible: boolean;
+  sessionIsEditing: boolean;
+  editSession: any;
 };
 
 const EditCatSession = ({
-  session: { variable, id: sessionId },
+  session: {
+    variable,
+    catMhLanguageId,
+    catMhPopulationId,
+    catMhTimeFrameId,
+    googleTtsVoice,
+    catMhTestTypes,
+  },
   editingPossible,
-}: Props): JSX.Element => {
+  editSession,
+  sessionIsEditing,
+}: EditCatSessionProps): JSX.Element => {
+  useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
   const { formatMessage } = useIntl();
-  const [formData, setFormData] = useState<any>({
+  const [formData, setFormData] = useState<EditCatSessionState>({
     selectedLanguage: null,
     selectedTimeFrame: null,
     selectedPopulation: null,
     selectedVoice: null,
     sessionVariable: variable,
-    selectedTestIds: [],
+    selectedTestIds: catMhTestTypes.map(({ id }) => +id),
   });
   const [testsUrl, setTestsUrl] = useState('');
   const [languagesUrl, setLanguagesUrl] = useState('');
@@ -45,9 +64,9 @@ const EditCatSession = ({
     if (!selectedLanguage || !selectedTimeFrame || !selectedPopulation) return;
 
     const params = new URLSearchParams();
-    params.append('language_id', selectedLanguage.value);
-    params.append('population_id', selectedPopulation.value);
-    params.append('time_frame_id', selectedTimeFrame.value);
+    params.append('language_id', `${selectedLanguage.value}`);
+    params.append('population_id', `${selectedPopulation.value}`);
+    params.append('time_frame_id', `${selectedTimeFrame.value}`);
 
     setTestsUrl(`/v1/cat_mh/available_test_types?${params.toString()}`);
   }, [
@@ -74,22 +93,25 @@ const EditCatSession = ({
       selectedLanguage,
       selectedTimeFrame,
       selectedPopulation,
+      selectedVoice,
       selectedTestIds: testIds,
-      selectedVoice: voiceId,
       sessionVariable,
     } = formData;
-    console.log(
-      {
-        catMhLanguage: selectedLanguage.value,
-        catMhTimeFrame: selectedTimeFrame.value,
-        catMhPopulation: selectedPopulation.value,
-        testIds,
-        voiceId,
+    if (
+      selectedLanguage &&
+      selectedTimeFrame &&
+      selectedPopulation &&
+      selectedVoice
+    ) {
+      editSession({
+        catMhLanguageId: selectedLanguage.value,
+        catMhTimeFrameId: selectedTimeFrame.value,
+        catMhPopulationId: selectedPopulation.value,
+        catTests: testIds,
+        googleTtsVoiceId: selectedVoice.value,
         variable: sessionVariable,
-      },
-      [],
-      sessionId,
-    );
+      });
+    }
   };
 
   const wrapWithLabel = (label: string, children: JSX.Element) => (
@@ -138,6 +160,7 @@ const EditCatSession = ({
                 value: id,
                 label: name,
               })}
+              defaultValue={catMhLanguageId}
             />,
           )}
           {wrapWithLabel(
@@ -155,6 +178,7 @@ const EditCatSession = ({
                 value: id,
                 label: description,
               })}
+              defaultValue={catMhTimeFrameId}
             />,
           )}
           {wrapWithLabel(
@@ -172,6 +196,7 @@ const EditCatSession = ({
                 value: id,
                 label: name,
               })}
+              defaultValue={catMhPopulationId}
             />,
           )}
           {wrapWithLabel(
@@ -189,6 +214,7 @@ const EditCatSession = ({
                 value: id,
                 label: `${languageCode} ${voiceLabel}`,
               })}
+              defaultValue={`${googleTtsVoice.id}`}
             />,
           )}
           {wrapWithLabel(
@@ -221,7 +247,12 @@ const EditCatSession = ({
         )}
         {formData.selectedTestIds.length !== 0 && (
           // @ts-ignore
-          <Button onClick={updateCatSession} mt={30} width={200}>
+          <Button
+            loading={sessionIsEditing}
+            onClick={updateCatSession}
+            mt={30}
+            width={200}
+          >
             {formatMessage(messages.saveChanges)}
           </Button>
         )}
@@ -230,10 +261,14 @@ const EditCatSession = ({
   );
 };
 
+const mapStateToProps = createStructuredSelector({
+  sessionIsEditing: makeSelectSessionEditLoader(),
+});
+
 const mapDispatchToProps = {
-  editSession: editSessionRequest,
+  editSession: bulkEditSessionRequest,
 };
 
-const withConnect = connect(null, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default withConnect(EditCatSession);

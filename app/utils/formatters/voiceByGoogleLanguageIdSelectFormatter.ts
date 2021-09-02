@@ -8,7 +8,7 @@ export interface Voice {
   voiceType: string;
 }
 
-export interface VoiceSelectOption extends SelectOption {
+export interface VoiceSelectOption extends SelectOption<string> {
   id: string;
   googleTtsLanguageId: number;
 }
