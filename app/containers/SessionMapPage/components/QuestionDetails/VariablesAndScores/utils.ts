@@ -1,7 +1,7 @@
 import { QuestionData } from 'global/types/question';
 
 export const formatThirdPartyReportQuestionData = (
-  questionData: QuestionData[],
+  questionData: QuestionData<string>[],
 ): Map<string, Set<string>> => {
   const formattedData = new Map<string, Set<string>>();
 

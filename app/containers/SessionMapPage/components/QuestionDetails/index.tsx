@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { QuestionGroup } from 'global/types/questionGroup';
-import { Question } from 'global/types/question';
+import { FeedbackQuestionPayload, Question } from 'global/types/question';
 import { ReportTemplate } from 'global/types/reportTemplate';
 import { QuestionTypes } from 'models/Question/QuestionDto';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
@@ -82,7 +82,9 @@ const SessionMapQuestionDetails = ({
           />
         )}
         {type === QuestionTypes.FEEDBACK && (
-          <FeedbackFormulaAndCases question={question} />
+          <FeedbackFormulaAndCases
+            question={question as Question<FeedbackQuestionPayload>}
+          />
         )}
         {type !== QuestionTypes.FINISH && (
           <BranchingFormulaAndCases

@@ -90,6 +90,12 @@ export interface FeedbackQuestionPayload {
   original_text?: StartEndValueOriginalText;
 }
 
+export type PayloadType =
+  | string
+  | GridQuestionPayload
+  | SliderQuestionPayload
+  | FeedbackQuestionPayload;
+
 export interface SpectrumPattern {
   match: string;
   target: string;
@@ -100,12 +106,8 @@ export interface Spectrum {
   patterns: SpectrumPattern[];
 }
 
-export interface QuestionData {
-  payload:
-    | string
-    | GridQuestionPayload
-    | SliderQuestionPayload
-    | FeedbackQuestionPayload;
+export interface QuestionData<T> {
+  payload: T;
   variable?: QuestionVariable;
   value?: string;
   spectrum?: Spectrum;
@@ -118,8 +120,8 @@ export interface QuestionVariable {
   value?: string;
 }
 
-export interface QuestionBody {
-  data: QuestionData[];
+export interface QuestionBody<T> {
+  data: QuestionData<T>[];
   variable?: QuestionVariable;
 }
 
@@ -129,7 +131,7 @@ export interface QuestionOriginalText {
   image_description: Nullable<string>;
 }
 
-export interface Question {
+export interface Question<T extends PayloadType = PayloadType> {
   id: string;
   type: QuestionTypes;
   question_group_id: string;
@@ -140,7 +142,7 @@ export interface Question {
   narrator: Narrator;
   video_url: Nullable<string>;
   formula: QuestionFormula;
-  body: QuestionBody;
+  body: QuestionBody<T>;
   original_text: QuestionOriginalText;
   image_url: Nullable<string>;
   image_alt: Nullable<string>;

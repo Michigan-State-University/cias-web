@@ -1,7 +1,12 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { GridQuestionPayload, Question } from 'global/types/question';
+import {
+  GridQuestionPayload,
+  Question,
+  QuestionBody,
+  SliderQuestionPayload,
+} from 'global/types/question';
 import { ReportTemplate } from 'global/types/reportTemplate';
 import { QuestionTypes } from 'models/Question/QuestionDto';
 
@@ -34,27 +39,34 @@ const VariablesAndScores = ({
       case QuestionTypes.EXTERNAL_LINK:
       case QuestionTypes.PARTICIPANT_REPORT:
       case QuestionTypes.PHONE:
+        const stringQuestionBody = body as QuestionBody<string>;
         return (
-          <VariableAndScoreChip variable={body.variable?.name} variableOnly />
+          <VariableAndScoreChip
+            variable={stringQuestionBody.variable?.name}
+            variableOnly
+          />
         );
       case QuestionTypes.SINGLE:
-        return body.data.map(({ value }, index) => (
+        const singleQuestionBody = body as QuestionBody<string>;
+        return singleQuestionBody.data.map(({ value }, index) => (
           <VariableAndScoreChip
-            variable={body.variable?.name}
+            variable={singleQuestionBody.variable?.name}
             score={value}
             key={`session-map-question-details-variable-${index}`}
           />
         ));
       case QuestionTypes.SLIDER:
-        return body.data.map((_, index) => (
+        const sliderQuestionBody = body as QuestionBody<SliderQuestionPayload>;
+        return sliderQuestionBody.data.map((_, index) => (
           <VariableAndScoreChip
-            variable={body.variable?.name}
+            variable={sliderQuestionBody.variable?.name}
             score="0 - 100"
             key={`session-map-question-details-variable-${index}`}
           />
         ));
       case QuestionTypes.MULTIPLE:
-        return body.data.map(({ variable }, index) => (
+        const multipleQuestionBody = body as QuestionBody<string>;
+        return multipleQuestionBody.data.map(({ variable }, index) => (
           <VariableAndScoreChip
             variable={variable?.name}
             score={variable?.value}
@@ -62,7 +74,9 @@ const VariablesAndScores = ({
           />
         ));
       case QuestionTypes.GRID:
-        const { rows, columns } = body.data[0].payload as GridQuestionPayload;
+        const gridQuestionBody = body as QuestionBody<GridQuestionPayload>;
+        const { rows, columns } = gridQuestionBody.data[0]
+          .payload as GridQuestionPayload;
         return rows.map(({ variable: { name } }, rowIndex) => (
           <ChipsContainer key={`session-map-variables-row-${rowIndex}`}>
             {columns.map(({ variable: { value } }, columnIndex) => (
@@ -75,7 +89,10 @@ const VariablesAndScores = ({
           </ChipsContainer>
         ));
       case QuestionTypes.THIRD_PARTY:
-        const formattedData = formatThirdPartyReportQuestionData(body.data);
+        const thirdPartyQuestionBody = body as QuestionBody<string>;
+        const formattedData = formatThirdPartyReportQuestionData(
+          thirdPartyQuestionBody.data,
+        );
         return Array.from(formattedData).flatMap(([email, templatesIds]) => {
           if (templatesIds.size === 0) {
             return (

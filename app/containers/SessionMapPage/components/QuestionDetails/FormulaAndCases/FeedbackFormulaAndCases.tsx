@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { Question } from 'global/types/question';
+import { FeedbackQuestionPayload, Question } from 'global/types/question';
 
 import { colors } from 'theme';
 import Text from 'components/Text';
@@ -19,7 +19,7 @@ const getCaseTargetElementId = (index: number): string =>
   `session-map-question-details-feedback-target-${index}`;
 
 type Props = {
-  question: Question;
+  question: Question<FeedbackQuestionPayload>;
 };
 
 const FeedbackFormulaAndCases = ({
