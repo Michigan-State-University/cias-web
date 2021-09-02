@@ -1,14 +1,8 @@
+import { Voice } from 'global/types/voice';
+
 import { SelectOption } from 'components/Select/types';
 
-export interface Voice {
-  id: string;
-  googleTtsLanguageId: number;
-  languageCode: string;
-  voiceLabel: string;
-  voiceType: string;
-}
-
-export interface VoiceSelectOption extends SelectOption {
+export interface VoiceSelectOption extends SelectOption<string> {
   id: string;
   googleTtsLanguageId: number;
 }

@@ -59,5 +59,11 @@ export interface ClassicSessionDto extends SessionDto {
   type: SessionTypes.CLASSIC_SESSION;
 }
 export interface CatSessionDto extends SessionDto {
+  catMhLanguageId: number;
+  catMhTimeFrameId: number;
+  catMhPopulationId: number;
   type: SessionTypes.CAT_SESSION;
+  catMhTestTypes: {
+    id: string;
+  }[];
 }

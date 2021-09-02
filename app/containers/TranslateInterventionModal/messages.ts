@@ -29,7 +29,7 @@ export default defineMessages({
   },
   voiceSettings: {
     id: `${scope}.voiceSettings`,
-    defaultMessage: 'Peedy voice settings',
+    defaultMessage: 'Narrator voice settings',
   },
   voiceSettingsComment: {
     id: `${scope}.voiceSettingsComment`,
