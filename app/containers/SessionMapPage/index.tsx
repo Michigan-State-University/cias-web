@@ -53,7 +53,6 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 
 import messages from './messages';
-import { sortQuestionsByGroupAndPosition } from './utils';
 import { defaultMaxZoom, defaultMinZoom, defaultZoom } from './constants';
 import SessionMapHeader from './components/SessionMapHeader';
 import SessionMap from './components/SessionMap';
@@ -108,11 +107,6 @@ const SessionMapPage = (): JSX.Element => {
   );
   const { fetchReportTemplatesError: reportTemplatesError } = useSelector(
     makeSelectReportTemplatesErrors(),
-  );
-
-  const sortedQuestions = useMemo(
-    () => sortQuestionsByGroupAndPosition(questionGroups, questions),
-    [questions, questionGroups],
   );
 
   const { interventionId, sessionId } = useParams<RouteParams>();
@@ -195,7 +189,8 @@ const SessionMapPage = (): JSX.Element => {
             />
             <ReactFlowProvider>
               <SessionMap
-                questions={sortedQuestions}
+                questions={questions}
+                questionGroups={questionGroups}
                 showDetailsId={showDetailsId}
                 onShowDetailsIdChange={setShowDetailsId}
                 zoom={zoom}

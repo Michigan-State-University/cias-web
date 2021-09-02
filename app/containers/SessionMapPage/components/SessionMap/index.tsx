@@ -10,6 +10,7 @@ import ReactFlow, {
 } from 'react-flow-renderer';
 
 import { Question } from 'global/types/question';
+import { QuestionGroup } from 'global/types/questionGroup';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -24,6 +25,7 @@ import {
   createMapEdgesFromQuestions,
   createMapNodesFromQuestions,
   layoutElements,
+  sortQuestionsByGroupAndPosition,
 } from '../../utils';
 import {
   CustomArrowHeadType,
@@ -40,6 +42,7 @@ const nodeTypes: NodeTypesType = {
 
 type Props = {
   questions: Question[];
+  questionGroups: QuestionGroup[];
   showDetailsId: string;
   onShowDetailsIdChange: (showDetailsId: string) => void;
   zoom: number;
@@ -50,6 +53,7 @@ type Props = {
 
 const SessionMap = ({
   questions,
+  questionGroups,
   showDetailsId,
   onShowDetailsIdChange,
   zoom,
@@ -98,17 +102,22 @@ const SessionMap = ({
     [zoom],
   );
 
+  const sortedQuestions = useMemo(
+    () => sortQuestionsByGroupAndPosition(questionGroups, questions),
+    [questions, questionGroups],
+  );
+
   const elements = useMemo(
     () => [
       ...createMapNodesFromQuestions(
-        questions,
+        sortedQuestions,
         showDetailsId,
         handleShowDetailsChange,
         showDetailedInfo,
       ),
-      ...createMapEdgesFromQuestions(questions),
+      ...createMapEdgesFromQuestions(sortedQuestions),
     ],
-    [questions, showDetailsId, showDetailedInfo],
+    [sortedQuestions, showDetailsId, showDetailedInfo],
   );
 
   const { layoutedElements, panAreaWidth, panAreaHeight } = useMemo(

@@ -18,10 +18,22 @@ import { isNanOrInfinite } from '../../utils/mathUtils';
 export const sortQuestionsByGroupAndPosition = (
   questionGroups: QuestionGroup[],
   questions: Question[],
-): Question[] =>
-  questionGroups.flatMap(({ id }) =>
-    questions.filter(({ question_group_id }) => question_group_id === id),
+): Question[] => {
+  // sort all question groups itself by position
+  const sortedQuestionGroups = questionGroups.sort((groupA, groupB) =>
+    groupA.position <= groupB.position ? -1 : 1,
   );
+  return sortedQuestionGroups.flatMap(({ id }) => {
+    // questions belonging to current group
+    const groupQuestions = questions.filter(
+      ({ question_group_id }) => question_group_id === id,
+    );
+    // sort questions belonging to current group by position
+    return groupQuestions.sort((questionA, questionB) =>
+      questionA.position <= questionB.position ? -1 : 1,
+    );
+  });
+};
 
 export const createMapNodesFromQuestions = (
   questions: Question[],
@@ -45,7 +57,8 @@ export const createMapNodesFromQuestions = (
 export const createMapEdgesFromQuestions = (questions: Question[]): Edge[] =>
   questions.flatMap((question, index) => {
     if (question.type === finishQuestion.id) return [];
-    const nextNodeId = questions[index + 1].id;
+    const nextNodeId = questions[index + 1]?.id;
+    if (!nextNodeId) return [];
     // @ts-ignore
     return {
       id: `${question.id}-${nextNodeId}`,
