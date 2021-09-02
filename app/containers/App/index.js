@@ -21,7 +21,11 @@ import GlobalStyle from 'global-styles';
 import { Roles, ResearcherRoles } from 'models/User/UserRoles';
 import navbarNames, { navbarMessages, NAVIGATION } from 'utils/navbarNames';
 import rootSaga from 'global/sagas/rootSaga';
-import { makeSelectUser } from 'global/reducers/auth';
+import {
+  fetchSelfDetailsRequest,
+  makeSelectUser,
+  fetchSelfDetailsSaga,
+} from 'global/reducers/auth';
 
 import AnswerSessionPage from 'containers/AnswerSessionPage/Loadable';
 import EditSessionPage from 'containers/Sessions/containers/EditSessionPage/Loadable';
@@ -63,9 +67,16 @@ import {
 
 import { TOOLTIP_PORTAL_ID } from './constants';
 
-export function App({ user }) {
+export function App({ user, fetchSelfDetails }) {
   const { locale, formatMessage } = useIntl();
   useInjectSaga({ key: 'app', saga: rootSaga });
+  useInjectSaga({ key: 'fetchSelfDetails', saga: fetchSelfDetailsSaga });
+
+  useEffect(() => {
+    if (user) {
+      fetchSelfDetails();
+    }
+  }, []);
 
   useEffect(() => {
     const appRoot = document.getElementById('app');
@@ -421,12 +432,17 @@ export function App({ user }) {
 
 App.propTypes = {
   user: PropTypes.object,
+  fetchSelfDetails: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
   user: makeSelectUser(),
 });
 
-const withConnect = connect(mapStateToProps);
+const mapDispatchToProps = {
+  fetchSelfDetails: fetchSelfDetailsRequest,
+};
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(App);
