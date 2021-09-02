@@ -17,7 +17,7 @@ export default defineMessages({
   },
   voiceType: {
     id: `${scope}.voiceType`,
-    defaultMessage: 'Peedy voice type',
+    defaultMessage: 'Narrator voice type',
   },
   selectVoice: {
     id: `${scope}.selectVoice`,

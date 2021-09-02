@@ -24,7 +24,6 @@ import useGet from 'utils/useGet';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   languageSelectOptionFormatter,
-  Language,
   LanguageSelectOption,
   VoiceSelectOption,
 } from 'utils/formatters';
@@ -35,6 +34,7 @@ import {
   makeSelectInterventionLoader,
   makeSelectInterventionError,
 } from 'global/reducers/intervention';
+import { Language, LanguageDTO } from 'global/types/language';
 
 import TranslateLanguageSettings from './components/TranslateLanguageSettings';
 import TranslateVoiceSettings from './components/TranslateVoiceSettings';
@@ -68,7 +68,7 @@ const TranslateInterventionModal = ({
   const [voice, setVoice] = useState<Nullable<VoiceSelectOption>>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  const { data, isFetching, error } = useGet<{ data: [] }, Language[]>(
+  const { data, isFetching, error } = useGet<LanguageDTO, Language[]>(
     '/v1/google/languages',
     (fetchedData) => jsonApiToArray(fetchedData, 'supportedLanguage'),
   );

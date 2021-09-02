@@ -11,19 +11,9 @@ import { injectReducer, injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { fontSizes, themeColors } from 'theme';
-import Text from 'components/Text';
-import Spinner from 'components/Spinner';
-import ErrorAlert from 'components/ErrorAlert';
-import Select from 'components/Select';
-import Column from 'components/Column';
-import Row from 'components/Row';
-import TextVoicePreviewInput from 'components/Input/TextVoicePreviewInput';
 import useGet from 'utils/useGet';
-import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   voiceByGoogleLanguageIdSelectFormatter,
-  Voice,
   VoiceSelectOption,
 } from 'utils/formatters';
 import {
@@ -33,8 +23,19 @@ import {
   phoneticPreviewRequest,
   resetPhoneticPreview,
 } from 'global/reducers/audioPreview';
+import { Voice, VoiceDTO } from 'global/types/voice';
+
+import { fontSizes, themeColors } from 'theme';
+import Text from 'components/Text';
+import Spinner from 'components/Spinner';
+import ErrorAlert from 'components/ErrorAlert';
+import Select from 'components/Select';
+import Column from 'components/Column';
+import Row from 'components/Row';
+import TextVoicePreviewInput from 'components/Input/TextVoicePreviewInput';
 
 import messages from './messages';
+import { voiceDataParser } from './utils';
 
 type Props = {
   googleLanguageId?: string;
@@ -58,9 +59,9 @@ const TranslateVoiceSettings = ({
 
   const [previewText, setPreviewText] = useState('');
 
-  const { data, isFetching, error } = useGet<{ data: [] }, Voice[]>(
+  const { data, isFetching, error } = useGet<VoiceDTO, Voice[]>(
     `/v1/google/languages/${googleLanguageId}/voices`,
-    (fetchedData) => jsonApiToArray(fetchedData, 'voice'),
+    (fetchedData) => voiceDataParser(fetchedData),
   );
 
   const voiceOptions = useMemo(

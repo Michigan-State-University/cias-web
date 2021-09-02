@@ -1,12 +1,13 @@
 import React from 'react';
 
-import { CatMhTestDto } from 'models/CatMhTest/CatMhTestDto';
+import { CatMhTest } from 'global/types/catMh';
+
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
 import Text from 'components/Text';
 
 type Props = {
-  test: CatMhTestDto;
+  test: CatMhTest;
   selected: boolean;
   onToggle: (id: number) => void;
 };

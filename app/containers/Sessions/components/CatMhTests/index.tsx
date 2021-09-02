@@ -1,6 +1,7 @@
 import React from 'react';
+
 import { themeColors } from 'theme';
-import { CatMhTestDto } from 'models/CatMhTest/CatMhTestDto';
+import { CatMhTest, CatMhTestDTO } from 'global/types/catMh';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import useGet from 'utils/useGet';
 
@@ -21,7 +22,7 @@ const CatMhTests = ({
   onSelectTest,
   selectedTestIds,
 }: Props): JSX.Element => {
-  const { data, error, isFetching } = useGet<any, CatMhTestDto[]>(
+  const { data, error, isFetching } = useGet<CatMhTestDTO, CatMhTest[]>(
     url,
     (tests) => jsonApiToArray(tests, 'testType'),
   );

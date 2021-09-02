@@ -1,10 +1,6 @@
-import { SelectOption } from 'components/Select/types';
+import { Language } from 'global/types/language';
 
-export interface Language {
-  id: string;
-  languageCode: string;
-  languageName: string;
-}
+import { SelectOption } from 'components/Select/types';
 
 export interface LanguageSelectOption extends SelectOption<string> {
   googleLanguageId: string;
