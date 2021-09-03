@@ -88,7 +88,7 @@ const PhoneNumberForm = ({
   const getCodeLabel = (country = 'US') => (
     <Row align="center">
       <FlagIcon code={country} />
-      <Text ml={10} fintSize={18}>{`${country} +${getCountryCallingCode(
+      <Text ml={10} fontSize={18}>{`${country} +${getCountryCallingCode(
         country,
       )}`}</Text>
     </Row>

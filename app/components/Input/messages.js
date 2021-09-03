@@ -15,4 +15,12 @@ export default defineMessages({
     id: `${scope}.quillLinkLabel`,
     defaultMessage: 'Provide an URL:',
   },
+  playButtonLabel: {
+    id: `${scope}.playButtonLabel`,
+    defaultMessage: 'Play audio',
+  },
+  stopButtonLabel: {
+    id: `${scope}.stopButtonLabel`,
+    defaultMessage: 'Stop audio',
+  },
 });

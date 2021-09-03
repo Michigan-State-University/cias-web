@@ -81,7 +81,6 @@ import ShareBox from 'containers/ShareBox';
 import Modal from 'components/Modal';
 import Spinner from 'components/Spinner';
 import AppContainer from 'components/Container';
-import H3 from 'components/H3';
 import Icon from 'components/Icon';
 import Tooltip from 'components/Tooltip';
 
@@ -384,17 +383,7 @@ export function InterventionDetailsPage({
           confirmAction={() => handleDeleteSession(deleteConfirmationSessionId)}
         />
         <Modal
-          title={
-            <H3
-              mb={15}
-              fontSize={13}
-              fontWeight="bold"
-              textOpacity={0.6}
-              color={colors.bluewood}
-            >
-              {formatMessage(messages.sendCopyModalTitle)}
-            </H3>
-          }
+          title={formatMessage(messages.sendCopyModalTitle)}
           onClose={closeSendCopyModal}
           visible={sendCopyModalVisible}
         >

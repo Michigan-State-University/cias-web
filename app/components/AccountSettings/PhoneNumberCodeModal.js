@@ -2,12 +2,22 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { Markup } from 'interweave';
-import * as Yup from 'yup';
+
 import { Formik } from 'formik';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
+
+import { themeColors } from 'theme';
+
+import {
+  confirmPhoneNumberRequest,
+  confirmPhoneNumberSaga,
+  makeSelectLoaders,
+  sendSmsTokenRequest,
+  sendSmsTokenSaga,
+} from 'global/reducers/auth';
 
 import Modal from 'components/Modal';
 import Column from 'components/Column';
@@ -18,27 +28,13 @@ import Text from 'components/Text';
 import StyledTextButton from 'components/Button/StyledTextButton';
 import Loader from 'components/Loader';
 
-import {
-  confirmPhoneNumberRequest,
-  confirmPhoneNumberSaga,
-  makeSelectLoaders,
-  sendSmsTokenRequest,
-  sendSmsTokenSaga,
-} from 'global/reducers/auth';
-
-import { themeColors } from 'theme';
 import messages from './messages';
+import {
+  CODE_INPUT_LENGTH,
+  confirmationCodeValidationSchema,
+} from './constants';
 
-const codeLength = 4;
-
-const validationSchema = (formatMessage) =>
-  Yup.object().shape({
-    code: Yup.string()
-      .length(codeLength)
-      .required(formatMessage(messages.codeRequired)),
-  });
-
-function PhoneNumberCodeModal({
+const PhoneNumberCodeModal = ({
   intl: { formatMessage },
   modalVisible,
   closeModal,
@@ -46,7 +42,7 @@ function PhoneNumberCodeModal({
   phone,
   sendSmsToken,
   loaders: { smsTokenLoading, confirmPhoneNumberLoading },
-}) {
+}) => {
   useInjectSaga({ key: 'confirmPhoneNumber', saga: confirmPhoneNumberSaga });
   useInjectSaga({ key: 'sendSmsToken', saga: sendSmsTokenSaga });
 
@@ -72,7 +68,7 @@ function PhoneNumberCodeModal({
         </Text>
         <Row>
           <Formik
-            validationSchema={validationSchema(formatMessage)}
+            validationSchema={confirmationCodeValidationSchema(formatMessage)}
             initialValues={{ code: '' }}
             onSubmit={handleSubmit}
           >
@@ -90,7 +86,7 @@ function PhoneNumberCodeModal({
                       formikKey="code"
                       label={formatMessage(messages.code)}
                       type="text"
-                      codeLength={codeLength}
+                      codeLength={CODE_INPUT_LENGTH}
                     />
                   </Row>
                   {smsTokenLoading ? (
@@ -136,7 +132,7 @@ function PhoneNumberCodeModal({
       </Column>
     </Modal>
   );
-}
+};
 
 PhoneNumberCodeModal.propTypes = {
   intl: PropTypes.object,

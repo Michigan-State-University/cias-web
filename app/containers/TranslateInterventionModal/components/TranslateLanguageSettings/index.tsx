@@ -8,12 +8,19 @@ import React, { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
+
+import { LanguageSelectOption } from 'utils/formatters';
+
 import H2 from 'components/H2';
 import Row from 'components/Row';
 import Column from 'components/Column';
 import PopularOptionsSelect from 'components/Select/PopularOptionsSelect';
-import { LanguageSelectOption } from 'utils/formatters';
+import Text from 'components/Text';
 
+import {
+  DESTINATION_LANGUAGE_LABEL_ID,
+  SOURCE_LANGUAGE_LABEL_ID,
+} from '../../constants';
 import messages from './messages';
 
 type Props = {
@@ -64,7 +71,9 @@ const TranslateLanguageSettings = ({
     <>
       <Row align="end">
         <Column>
-          <FormattedMessage {...messages.sourceLanguage} />
+          <Text id={SOURCE_LANGUAGE_LABEL_ID}>
+            <FormattedMessage {...messages.sourceLanguage} />
+          </Text>
           <PopularOptionsSelect
             mt={5}
             selectProps={{
@@ -72,6 +81,7 @@ const TranslateLanguageSettings = ({
               value: sourceLanguage,
               onChange: handleSourceLanguageChange,
               placeholder: formatMessage(messages.searchLanguage),
+              'aria-labelledby': SOURCE_LANGUAGE_LABEL_ID,
             }}
             popularOptionsValues={['en', 'es', 'zh', 'fr']}
           />
@@ -80,7 +90,9 @@ const TranslateLanguageSettings = ({
           <H2 color={themeColors.primary}>-</H2>
         </Column>
         <Column>
-          <FormattedMessage {...messages.destinationLanguage} />
+          <Text id={DESTINATION_LANGUAGE_LABEL_ID}>
+            <FormattedMessage {...messages.destinationLanguage} />
+          </Text>
           <PopularOptionsSelect
             mt={5}
             selectProps={{
@@ -88,6 +100,7 @@ const TranslateLanguageSettings = ({
               value: destinationLanguage,
               onChange: onDestinationLanguageChange,
               placeholder: formatMessage(messages.searchLanguage),
+              'aria-labelledby': DESTINATION_LANGUAGE_LABEL_ID,
             }}
             popularOptionsValues={['en', 'es', 'zh', 'fr']}
           />

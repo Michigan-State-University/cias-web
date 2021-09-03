@@ -297,11 +297,11 @@ const mapDispatchToProps = {
 
 const SingleTileWithIntl = injectIntl(SingleTile);
 
-const withConenct = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(
   memo,
-  withConenct,
+  withConnect,
   injectSaga({
     key: 'interventionOptionsSaga',
     saga: interventionOptionsSaga,

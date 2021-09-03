@@ -15,14 +15,14 @@ import useLockBodyScroll from 'utils/useLockBodyScroll';
 import useKeyPress from 'utils/useKeyPress';
 import { KeyCodes } from 'utils/constants';
 
+import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import Box from 'components/Box';
-import Column from 'components/Column';
 import H1 from 'components/H1';
-import Row from 'components/Row';
 import ActionIcon from 'components/ActionIcon';
 
 import messages from './messages';
 import { StyledBox } from './styled';
+import { MODAL_DESCRIPTION_ID, MODAL_TITLE_ID } from './constants';
 
 const Modal = ({
   title,
@@ -86,8 +86,8 @@ const Modal = ({
         >
           <StyledBox
             role="dialog"
-            aria-labelledby="modal-title"
-            aria-describedby="modal-description"
+            aria-labelledby={MODAL_TITLE_ID}
+            aria-describedby={MODAL_DESCRIPTION_ID}
             ref={modalContent}
             minWidth={400}
             minHeight={200}
@@ -99,23 +99,40 @@ const Modal = ({
             overflow="auto"
             {...stylesProps}
           >
-            <Column border="1px solid red">
-              <Row align="center" justify="between" {...titleProps}>
-                <H1 id="modal-title">{title}</H1>
-                <ActionIcon
-                  data-cy="modal-close-button"
-                  position="relative"
-                  top="-8px"
-                  left="40px"
-                  onClick={onClose}
-                  data-testid="close-modal-button"
-                  ariaText={formatMessage(messages.closeButtonLabel)}
-                />
+            <FullWidthContainer>
+              <Row align="center" justify="between">
+                <Col xs={10}>
+                  {title && (
+                    <H1 id={MODAL_TITLE_ID} {...titleProps}>
+                      {title}
+                    </H1>
+                  )}
+                </Col>
+
+                <Col xs={2} align="end">
+                  <ActionIcon
+                    mr={0}
+                    data-cy="modal-close-button"
+                    onClick={onClose}
+                    data-testid="close-modal-button"
+                    ariaText={formatMessage(messages.closeButtonLabel)}
+                  />
+                </Col>
               </Row>
-            </Column>
-            <Box borderRadius="0px" mt={10} id="modal-description">
-              {children}
-            </Box>
+
+              <Row>
+                <Col xs={12}>
+                  <Box
+                    width="100%"
+                    borderRadius="0px"
+                    mt={10}
+                    id={MODAL_DESCRIPTION_ID}
+                  >
+                    {children}
+                  </Box>
+                </Col>
+              </Row>
+            </FullWidthContainer>
           </StyledBox>
         </Box>,
         document.getElementById('modal-portal'),

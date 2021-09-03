@@ -9,10 +9,10 @@ module.exports = {
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',
     '!app/**/*.test.{js,jsx,ts,tsx}',
-    '!app/**/messages.js',
+    '!app/**/messages.{js,ts}',
     '!app/*/RbGenerated*/*.{js,jsx,ts,tsx}',
     '!app/app.js',
-    '!app/global-styles.js',
+    '!app/global-styles.{js,ts}',
     '!app/*/*/Loadable.{js,jsx,ts,tsx}',
   ],
   coverageThreshold: {},

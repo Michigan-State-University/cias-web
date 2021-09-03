@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IntlShape, injectIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -22,7 +22,6 @@ import { themeColors } from 'theme';
 import messages from './messages';
 
 const TextVoicePreviewInput = ({
-  intl: { formatMessage },
   value,
   onTextReady,
   placeholder,
@@ -36,6 +35,8 @@ const TextVoicePreviewInput = ({
   boxPy,
   previewButtonInsideInput,
 }) => {
+  const { formatMessage } = useIntl();
+
   const [isPlaying, setIsPlaying] = useState(false);
   const audioButtonDisabled =
     disabled || phoneticUrl === null || phoneticLoading || isAnimationOngoing;
@@ -87,22 +88,35 @@ const TextVoicePreviewInput = ({
 
   const renderPreviewButton = () => {
     if (phoneticLoading) return <Loader size={24} type="inline" />;
-    if (!isPlaying) return <Img src={playButton} />;
-    return <Img src={stopButton} />;
+    if (!isPlaying)
+      return (
+        <Img
+          src={playButton}
+          onClick={playPreview}
+          clickable
+          disabled={audioButtonDisabled}
+          aria-disabled={audioButtonDisabled}
+          role="button"
+          aria-label={formatMessage(messages.playButtonLabel)}
+        />
+      );
+    return (
+      <Img
+        src={stopButton}
+        onClick={playPreview}
+        clickable
+        disabled={audioButtonDisabled}
+        aria-disabled={audioButtonDisabled}
+        role="button"
+        aria-label={formatMessage(messages.stopButtonLabel)}
+      />
+    );
   };
 
   return previewButtonInsideInput ? (
     <Row align="center">
       {renderTextInput()}
-      <Box
-        onClick={playPreview}
-        clickable
-        disabled={audioButtonDisabled}
-        role="button"
-        ml={-34}
-      >
-        {renderPreviewButton()}
-      </Box>
+      <Box ml={-34}>{renderPreviewButton()}</Box>
     </Row>
   ) : (
     <Column>
@@ -127,7 +141,6 @@ const TextVoicePreviewInput = ({
 };
 
 TextVoicePreviewInput.propTypes = {
-  intl: PropTypes.shape(IntlShape),
   value: PropTypes.string,
   onTextReady: PropTypes.func,
   placeholder: PropTypes.string,
@@ -152,6 +165,5 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const withConnect = connect(mapStateToProps);
-const TextVoicePreviewInputWithIntl = injectIntl(TextVoicePreviewInput);
 
-export default compose(withConnect)(TextVoicePreviewInputWithIntl);
+export default compose(withConnect)(TextVoicePreviewInput);

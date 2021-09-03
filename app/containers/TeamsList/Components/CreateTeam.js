@@ -3,6 +3,14 @@ import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl, IntlShape } from 'react-intl';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
+import { colors } from 'theme';
+
+import { Roles } from 'models/User/UserRoles';
+
+import { createTeamRequest } from 'global/reducers/teamList';
+import { makeSelectTeamListLoaders } from 'global/reducers/teamList/selectors';
 
 import Button from 'components/Button';
 import Column from 'components/Column';
@@ -11,13 +19,8 @@ import Text from 'components/Text';
 import Input from 'components/Input';
 import UserSelector from 'containers/UserSelector';
 
-import { Roles } from 'models/User/UserRoles';
-import { createTeamRequest } from 'global/reducers/teamList';
-import { createStructuredSelector } from 'reselect';
-
-import { colors } from 'theme';
-import { makeSelectTeamListLoaders } from 'global/reducers/teamList/selectors';
 import messages from '../messages';
+import { CHOOSE_TEAM_ADMIN_LABEL_ID } from '../constants';
 
 const CreateTeam = ({
   visible,
@@ -73,13 +76,14 @@ const CreateTeam = ({
             onChange={handleChange}
           />
         </Column>
-        <Text mb={10} fontSize={14}>
+        <Text mb={10} fontSize={14} id={CHOOSE_TEAM_ADMIN_LABEL_ID}>
           <FormattedMessage {...messages.researcherSectionTitle} />
         </Text>
         <UserSelector
           selectedUserId={selectedUser}
           onSelect={onSelectUser}
           rolesToInclude={[Roles.researcher, Roles.teamAdmin]}
+          selectProps={{ 'aria-labelledby': CHOOSE_TEAM_ADMIN_LABEL_ID }}
         />
         <Button
           width={260}

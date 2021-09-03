@@ -8,13 +8,13 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import Box from '../Box';
-import H1 from '../H1';
-import ErrorAlert from '../ErrorAlert';
-import Modal from '../Modal';
-import Button from '../Button';
-import Row from '../Row';
-import Column from '../Column';
+import Box from 'components/Box';
+import H1 from 'components/H1';
+import ErrorAlert from 'components/ErrorAlert';
+import Modal, { MODAL_TITLE_ID } from 'components/Modal';
+import Button from 'components/Button';
+import Row from 'components/Row';
+import Column from 'components/Column';
 
 import messages from './messages';
 
@@ -39,7 +39,9 @@ const ConfirmationBox = ({
   return (
     <Modal visible={visible} onClose={onClose} {...modalStyles}>
       <Column px={50} pd={30} {...contentContainerStyles}>
-        <H1 textAlign="center">{description}</H1>
+        <H1 textAlign="center" id={MODAL_TITLE_ID}>
+          {description}
+        </H1>
         {content && (
           <Box padded {...contentStyles}>
             {content}
