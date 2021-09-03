@@ -60,6 +60,7 @@ const Checkbox = ({
           fill={themeColors.secondary}
           stroke={stroke || themeColors.secondary}
         />
+
         {children}
       </StyledLabel>
     </Row>

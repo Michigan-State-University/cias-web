@@ -18,10 +18,11 @@ import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/sag
 import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import ApiSelect from 'components/Select/ApiSelect';
 import Text from 'components/Text';
-
 import Button from 'components/Button';
+
 import { organizationSelectOptionFormatter } from './utils';
 import messages from '../../messages';
+import { CHOOSE_ORGANIZATION_LABEL_ID } from './constants';
 
 const InterventionAssignOrganizationModal = ({
   interventionId,
@@ -88,7 +89,7 @@ const InterventionAssignOrganizationModal = ({
     <FullWidthContainer>
       <Row align="center" mt={20}>
         <Col xs={4}>
-          <Text fontWeight="bold">
+          <Text fontWeight="bold" id={CHOOSE_ORGANIZATION_LABEL_ID}>
             {formatMessage(messages.assignOrganizationSelectLabel)}
           </Text>
         </Col>
@@ -102,6 +103,7 @@ const InterventionAssignOrganizationModal = ({
               onChange: onSelect,
               value: selectedValue,
               isClearable: true,
+              'aria-labelledby': CHOOSE_ORGANIZATION_LABEL_ID,
             }}
             width="100%"
           />

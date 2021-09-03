@@ -14,6 +14,7 @@ import Text from 'components/Text';
 import { languageSelectOptionFormatter } from 'utils/formatters';
 
 import messages from '../../messages';
+import { INTERVENTION_LANGUAGE_LABEL_ID } from './constants';
 
 const InterventionSettingsModal = () => {
   // redux
@@ -56,7 +57,7 @@ const InterventionSettingsModal = () => {
     <FullWidthContainer>
       <Row align="center">
         <Col>
-          <Text fontWeight="bold">
+          <Text fontWeight="bold" id={INTERVENTION_LANGUAGE_LABEL_ID}>
             {formatMessage(messages.interventionSettingsLanguageLabel)}
           </Text>
         </Col>
@@ -68,6 +69,7 @@ const InterventionSettingsModal = () => {
             selectProps={{
               onChange: handleLanguageChange,
               value: selectedValue,
+              'aria-labelledby': INTERVENTION_LANGUAGE_LABEL_ID,
             }}
             width="100%"
           />

@@ -6,41 +6,43 @@
 
 import React, { useState, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
-import { injectIntl, FormattedMessage } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { createStructuredSelector } from 'reselect';
 import remove from 'lodash/remove';
 import trim from 'lodash/trim';
-
-import { themeColors } from 'theme';
-import useFilter from 'utils/useFilter';
-import Row from 'components/Row';
-import Loader from 'components/Loader';
-import Column from 'components/Column';
-import Box from 'components/Box';
-import Text from 'components/Text';
-import { StripedTR, Table, TBody, TD, TH, THead } from 'components/Table';
-import Checkbox from 'components/Checkbox';
-import { StyledButton } from 'components/Button/StyledButton';
-import ErrorAlert from 'components/ErrorAlert';
-import SearchInput from 'components/Input/SearchInput';
 import { injectSaga, injectReducer } from 'redux-injectors';
 
-import { Roles } from 'models/User/UserRoles';
+import { themeColors } from 'theme';
+
+import useFilter from 'utils/useFilter';
+import { ternary } from 'utils/ternary';
+
 import {
   makeSelectUserList,
   UserListReducer,
   userListSaga,
   fetchResearchersRequest,
 } from 'global/reducers/userList';
-
 import { makeSelectUser } from 'global/reducers/auth';
-import { ternary } from 'utils/ternary';
+
+import { Roles } from 'models/User/UserRoles';
+
+import Row from 'components/Row';
+import Loader from 'components/Loader';
+import Column from 'components/Column';
+import Box from 'components/Box';
+import Text, { HiddenText } from 'components/Text';
+import { StripedTR, Table, TBody, TD, TH, THead } from 'components/Table';
+import Checkbox from 'components/Checkbox';
+import { StyledButton } from 'components/Button/StyledButton';
+import ErrorAlert from 'components/ErrorAlert';
+import SearchInput from 'components/Input/SearchInput';
+
 import messages from './messages';
 
 const SelectResearchers = ({
-  intl: { formatMessage },
   userList: {
     researchersSelector,
     researchersSelectorLoading,
@@ -51,6 +53,7 @@ const SelectResearchers = ({
   user: { id: currentUserId },
   onResearchersSelected,
 }) => {
+  const { formatMessage } = useIntl();
   const [selected, setSelected] = useState([]);
 
   const [finalUsers, filterValue, setFilterValue] = useFilter(
@@ -106,28 +109,32 @@ const SelectResearchers = ({
           ml={10}
           onClick={handleSend}
         >
-          <FormattedMessage {...messages.send} />
+          {formatMessage(messages.send)}
         </StyledButton>
       </Row>
       <Table>
         <THead>
           <StripedTR>
             <TH scope="col">
-              <Column width={300} pl={10}>
+              <Column width={290} pl={10}>
                 <Text textAlign="left" fontWeight="bold">
-                  <FormattedMessage {...messages.name} />
+                  {formatMessage(messages.name)}
                 </Text>
               </Column>
             </TH>
             <TH scope="col">
               <Column width={300}>
                 <Text textAlign="left" fontWeight="bold">
-                  <FormattedMessage {...messages.email} />
+                  {formatMessage(messages.email)}
                 </Text>
               </Column>
             </TH>
             <TH scope="col">
-              <Column width="100%" />
+              <Column width="100%">
+                <Text textAlign="left" fontWeight="bold">
+                  {formatMessage(messages.checkbox)}
+                </Text>
+              </Column>
             </TH>
           </StripedTR>
         </THead>
@@ -140,16 +147,23 @@ const SelectResearchers = ({
                 if (!isChecked) setSelected([...selected, id]);
                 else setSelected(remove(selected, (elem) => elem !== id));
               };
+
+              const rowId = `row-th-${id}`;
+              const checkboxLabelId = `researcher-email-${email}`;
+
               return (
-                <StripedTR key={`row-th-${id}`}>
+                <StripedTR key={rowId}>
                   <TD pl={10}>{getDisplayName(fullName)}</TD>
                   <TD>{email}</TD>
                   <TD pr={10}>
                     <Checkbox
-                      id={`researcher-to-select-${id}`}
+                      id={checkboxLabelId}
+                      aria-labelledby={rowId}
                       checked={isChecked}
                       onChange={handleClick}
-                    />
+                    >
+                      <HiddenText>{email}</HiddenText>
+                    </Checkbox>
                   </TD>
                 </StripedTR>
               );
@@ -161,12 +175,9 @@ const SelectResearchers = ({
 };
 
 SelectResearchers.propTypes = {
-  intl: PropTypes.object,
   userList: PropTypes.object,
   user: PropTypes.object,
   fetchUsersRequest: PropTypes.func.isRequired,
-  copyInterventionToResearchers: PropTypes.func,
-  interventionId: PropTypes.string,
   onClose: PropTypes.func,
   onResearchersSelected: PropTypes.func,
 };
@@ -188,9 +199,4 @@ const withReducer = injectReducer({
 });
 const withSaga = injectSaga({ key: 'userList', saga: userListSaga });
 
-export default compose(
-  injectIntl,
-  withConnect,
-  withReducer,
-  withSaga,
-)(SelectResearchers);
+export default compose(withConnect, withReducer, withSaga)(SelectResearchers);

@@ -168,6 +168,8 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
 .c8 {
   width: auto;
   height: auto;
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 @media only screen and (min-width:768px) {
@@ -267,7 +269,11 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
             width="80"
           >
             <img
+              aria-disabled="true"
+              aria-label="Play audio"
               class="c8"
+              disabled=""
+              role="button"
               src="IMAGE_MOCK"
             />
             <p

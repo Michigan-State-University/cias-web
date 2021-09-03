@@ -12,14 +12,7 @@ import { injectReducer, injectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
 
 import { fontSizes, themeColors } from 'theme';
-import H1 from 'components/H1';
-import H2 from 'components/H2';
-import Text from 'components/Text';
-import Comment from 'components/Text/Comment';
-import Row from 'components/Row';
-import Button from 'components/Button';
-import Loader from 'components/Loader';
-import ErrorAlert from 'components/ErrorAlert';
+
 import useGet from 'utils/useGet';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
@@ -36,6 +29,16 @@ import {
 } from 'global/reducers/intervention';
 import { Language, LanguageDTO } from 'global/types/language';
 
+import H1 from 'components/H1';
+import H2 from 'components/H2';
+import Text from 'components/Text';
+import Comment from 'components/Text/Comment';
+import Row from 'components/Row';
+import Button from 'components/Button';
+import Loader from 'components/Loader';
+import ErrorAlert from 'components/ErrorAlert';
+import { MODAL_TITLE_ID } from 'components/Modal';
+
 import TranslateLanguageSettings from './components/TranslateLanguageSettings';
 import TranslateVoiceSettings from './components/TranslateVoiceSettings';
 import messages from './messages';
@@ -45,10 +48,8 @@ type Props = {
   name: string;
   googleLanguageId: number;
   onTranslated?: () => void;
-  // @ts-ignore
-  translateInterventionLoading;
-  // @ts-ignore
-  translateInterventionError;
+  translateInterventionLoading: boolean;
+  translateInterventionError: boolean;
   translateIntervention: typeof translateInterventionRequest;
 };
 
@@ -114,7 +115,7 @@ const TranslateInterventionModal = ({
       <H2 mb={10} color={themeColors.primary}>
         {name}
       </H2>
-      <H1 mb={20}>
+      <H1 mb={20} id={MODAL_TITLE_ID}>
         <FormattedMessage {...messages.title} />
       </H1>
       <Text mb={50} fontSize={fontSizes.regular}>

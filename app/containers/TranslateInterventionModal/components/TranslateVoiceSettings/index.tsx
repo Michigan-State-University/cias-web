@@ -36,6 +36,7 @@ import TextVoicePreviewInput from 'components/Input/TextVoicePreviewInput';
 
 import messages from './messages';
 import { voiceDataParser } from './utils';
+import { DESTINATION_VOICE_LABEL_ID } from '../../constants';
 
 type Props = {
   googleLanguageId?: string;
@@ -92,7 +93,9 @@ const TranslateVoiceSettings = ({
   const renderVoiceSettings = () => (
     <Row align="end" gap={40}>
       <Column>
-        <FormattedMessage {...messages.voiceType} />
+        <Text id={DESTINATION_VOICE_LABEL_ID}>
+          <FormattedMessage {...messages.voiceType} />
+        </Text>
         <Select
           mt={5}
           selectProps={{
@@ -100,6 +103,7 @@ const TranslateVoiceSettings = ({
             value: voice,
             onChange: onVoiceChange,
             placeholder: formatMessage(messages.selectVoice),
+            'aria-labelledby': DESTINATION_VOICE_LABEL_ID,
           }}
         />
       </Column>

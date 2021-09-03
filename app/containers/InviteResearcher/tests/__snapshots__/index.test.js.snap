@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<InviteResearcher /> Should display invalid email error 1`] = `
-.c18 {
+.c20 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -23,7 +23,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   align-self: center;
 }
 
-.c3 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -34,7 +34,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   width: 100%;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -47,30 +47,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   margin-bottom: 35px;
 }
 
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c15 {
+.c17 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -97,14 +74,14 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   border-bottom: 1px solid #D7DEE9;
 }
 
-.c7 {
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c12 {
+.c14 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -113,7 +90,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   color: #2F3850;
 }
 
-.c16 {
+.c18 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -121,7 +98,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   color: #2F3850;
 }
 
-.c14 {
+.c16 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -180,17 +157,18 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
+  width: 100%;
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
 }
 
-.c8 {
+.c9 {
   -webkit-clip: rect(0 0 0 0);
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(100%);
@@ -202,6 +180,41 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   width: 1px;
 }
 
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c3 {
+  max-width: 100% !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 .c5 {
   margin: 0;
   font-family: DM Sans;
@@ -210,7 +223,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   color: #2F3850;
 }
 
-.c6 {
+.c7 {
   height: 28px;
   width: 28px;
   display: -webkit-box;
@@ -232,12 +245,10 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   border: none;
   outline: none;
   padding: 0;
-  position: relative;
-  left: 40px;
-  top: -8px;
+  margin-right: 0;
 }
 
-.c10 {
+.c12 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -246,7 +257,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   color: #2F3850;
 }
 
-.c17 {
+.c19 {
   outline: none;
   border: none;
   background: transparent;
@@ -259,7 +270,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c13 {
+.c15 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -271,13 +282,13 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c13:focus {
+.c15:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c13:disabled {
+.c15:disabled {
   color: #ABBBD1;
 }
 
@@ -338,124 +349,153 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
     >
       <div
         class="c3"
+        style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
       >
         <div
-          class="c4"
+          class=""
+          style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
         >
-          <h1
-            class="c5"
-            id="modal-title"
+          <div
+            align="flex-start"
+            class="c4"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
           >
-            Invite researcher
-          </h1>
-          <button
+            <h1
+              class="c5"
+              id="modal-title"
+            >
+              Invite researcher
+            </h1>
+          </div>
+          <div
+            align="end"
             class="c6"
-            data-cy="modal-close-button"
-            data-testid="close-modal-button"
-            title="Close window"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
-            <img
-              alt="cross"
-              src="IMAGE_MOCK"
-            />
-            <p
-              class="c7 c8"
+            <button
+              class="c7"
+              data-cy="modal-close-button"
+              data-testid="close-modal-button"
+              title="Close window"
             >
-              Close window
-            </p>
-          </button>
+              <img
+                alt="cross"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="c8 c9"
+              >
+                Close window
+              </p>
+            </button>
+          </div>
         </div>
-      </div>
-      <div
-        class="c9"
-        id="modal-description"
-      >
         <div
-          class="c3"
+          class=""
+          style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
         >
-          <h3
-            class="c10"
-          >
-            Send another invite
-          </h3>
           <div
-            class="c11"
-            width="100%"
+            align="flex-start"
+            class="c4"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
-            <p
-              class="c12"
-              font-size="14"
-              id="researcher-email-label"
-            >
-              Researcher’s e-mail address
-            </p>
-            <input
-              aria-labelledby="researcher-email-label"
-              class="c13"
-              placeholder="e.g john.doe@contact.com"
-              type="text"
-              value="invalidemail"
+            <div
+              class="c10"
+              id="modal-description"
               width="100%"
-            />
-            <p
-              class="c14"
-              color="#D2371D"
-              font-weight="bold"
             >
-              Invalid e-mail address
-            </p>
+              <div
+                class="c11"
+              >
+                <h3
+                  class="c12"
+                >
+                  Send another invite
+                </h3>
+                <div
+                  class="c13"
+                  width="100%"
+                >
+                  <p
+                    class="c14"
+                    font-size="14"
+                    id="researcher-email-label"
+                  >
+                    Researcher’s e-mail address
+                  </p>
+                  <input
+                    aria-labelledby="researcher-email-label"
+                    class="c15"
+                    placeholder="e.g john.doe@contact.com"
+                    type="text"
+                    value="invalidemail"
+                    width="100%"
+                  />
+                  <p
+                    class="c16"
+                    color="#D2371D"
+                    font-weight="bold"
+                  >
+                    Invalid e-mail address
+                  </p>
+                </div>
+                <h3
+                  class="c12"
+                >
+                  Invitations sent (2)
+                </h3>
+                <div
+                  class="c17"
+                  height="46"
+                >
+                  <p
+                    class="c18"
+                    font-size="14"
+                  >
+                    email@gmail.com
+                  </p>
+                  <button
+                    class="c19"
+                    color="#D2371D"
+                    font-weight="bold"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <div
+                  class="c17"
+                  height="46"
+                >
+                  <p
+                    class="c18"
+                    font-size="14"
+                  >
+                    email2@gmail.com
+                  </p>
+                  <button
+                    class="c19"
+                    color="#D2371D"
+                    font-weight="bold"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <button
+                  class="c20"
+                  color="primary"
+                  disabled=""
+                  radius="100px"
+                  width="260"
+                >
+                  Send invitation
+                </button>
+              </div>
+            </div>
           </div>
-          <h3
-            class="c10"
-          >
-            Invitations sent (2)
-          </h3>
-          <div
-            class="c15"
-            height="46"
-          >
-            <p
-              class="c16"
-              font-size="14"
-            >
-              email@gmail.com
-            </p>
-            <button
-              class="c17"
-              color="#D2371D"
-              font-weight="bold"
-            >
-              Cancel
-            </button>
-          </div>
-          <div
-            class="c15"
-            height="46"
-          >
-            <p
-              class="c16"
-              font-size="14"
-            >
-              email2@gmail.com
-            </p>
-            <button
-              class="c17"
-              color="#D2371D"
-              font-weight="bold"
-            >
-              Cancel
-            </button>
-          </div>
-          <button
-            class="c18"
-            color="primary"
-            disabled=""
-            radius="100px"
-            width="260"
-          >
-            Send invitation
-          </button>
         </div>
+        <span
+          style="display: table; clear: both;"
+        />
       </div>
     </div>
   </div>
@@ -463,7 +503,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
 `;
 
 exports[`<InviteResearcher /> Should display server error 1`] = `
-.c17 {
+.c19 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -485,7 +525,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   align-self: center;
 }
 
-.c3 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -496,7 +536,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   width: 100%;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -509,30 +549,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   margin-bottom: 35px;
 }
 
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c14 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -559,14 +576,14 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   border-bottom: 1px solid #D7DEE9;
 }
 
-.c7 {
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c12 {
+.c14 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -575,7 +592,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   color: #2F3850;
 }
 
-.c15 {
+.c17 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -632,17 +649,18 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
+  width: 100%;
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
 }
 
-.c8 {
+.c9 {
   -webkit-clip: rect(0 0 0 0);
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(100%);
@@ -654,6 +672,41 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   width: 1px;
 }
 
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c3 {
+  max-width: 100% !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 .c5 {
   margin: 0;
   font-family: DM Sans;
@@ -662,7 +715,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   color: #2F3850;
 }
 
-.c6 {
+.c7 {
   height: 28px;
   width: 28px;
   display: -webkit-box;
@@ -684,12 +737,10 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   border: none;
   outline: none;
   padding: 0;
-  position: relative;
-  left: 40px;
-  top: -8px;
+  margin-right: 0;
 }
 
-.c10 {
+.c12 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -698,7 +749,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   color: #2F3850;
 }
 
-.c16 {
+.c18 {
   outline: none;
   border: none;
   background: transparent;
@@ -711,7 +762,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c13 {
+.c15 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -723,13 +774,13 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c13:focus {
+.c15:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c13:disabled {
+.c15:disabled {
   color: #ABBBD1;
 }
 
@@ -790,117 +841,146 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
     >
       <div
         class="c3"
+        style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
       >
         <div
-          class="c4"
+          class=""
+          style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
         >
-          <h1
-            class="c5"
-            id="modal-title"
+          <div
+            align="flex-start"
+            class="c4"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
           >
-            Invite researcher
-          </h1>
-          <button
+            <h1
+              class="c5"
+              id="modal-title"
+            >
+              Invite researcher
+            </h1>
+          </div>
+          <div
+            align="end"
             class="c6"
-            data-cy="modal-close-button"
-            data-testid="close-modal-button"
-            title="Close window"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
-            <img
-              alt="cross"
-              src="IMAGE_MOCK"
-            />
-            <p
-              class="c7 c8"
+            <button
+              class="c7"
+              data-cy="modal-close-button"
+              data-testid="close-modal-button"
+              title="Close window"
             >
-              Close window
-            </p>
-          </button>
+              <img
+                alt="cross"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="c8 c9"
+              >
+                Close window
+              </p>
+            </button>
+          </div>
         </div>
-      </div>
-      <div
-        class="c9"
-        id="modal-description"
-      >
         <div
-          class="c3"
+          class=""
+          style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
         >
-          <h3
-            class="c10"
-          >
-            Send another invite
-          </h3>
           <div
-            class="c11"
-            width="100%"
+            align="flex-start"
+            class="c4"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
-            <p
-              class="c12"
-              font-size="14"
-              id="researcher-email-label"
-            >
-              Researcher’s e-mail address
-            </p>
-            <input
-              aria-labelledby="researcher-email-label"
-              class="c13"
-              placeholder="e.g john.doe@contact.com"
-              type="text"
-              value=""
+            <div
+              class="c10"
+              id="modal-description"
               width="100%"
-            />
+            >
+              <div
+                class="c11"
+              >
+                <h3
+                  class="c12"
+                >
+                  Send another invite
+                </h3>
+                <div
+                  class="c13"
+                  width="100%"
+                >
+                  <p
+                    class="c14"
+                    font-size="14"
+                    id="researcher-email-label"
+                  >
+                    Researcher’s e-mail address
+                  </p>
+                  <input
+                    aria-labelledby="researcher-email-label"
+                    class="c15"
+                    placeholder="e.g john.doe@contact.com"
+                    type="text"
+                    value=""
+                    width="100%"
+                  />
+                </div>
+                <h3
+                  class="c12"
+                >
+                  Invitations sent (2)
+                </h3>
+                <div
+                  class="c16"
+                  height="46"
+                >
+                  <p
+                    class="c17"
+                    font-size="14"
+                  >
+                    email@gmail.com
+                  </p>
+                  <button
+                    class="c18"
+                    color="#D2371D"
+                    font-weight="bold"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <div
+                  class="c16"
+                  height="46"
+                >
+                  <p
+                    class="c17"
+                    font-size="14"
+                  >
+                    email2@gmail.com
+                  </p>
+                  <button
+                    class="c18"
+                    color="#D2371D"
+                    font-weight="bold"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <button
+                  class="c19"
+                  color="primary"
+                  disabled=""
+                  radius="100px"
+                  width="260"
+                >
+                  Send invitation
+                </button>
+              </div>
+            </div>
           </div>
-          <h3
-            class="c10"
-          >
-            Invitations sent (2)
-          </h3>
-          <div
-            class="c14"
-            height="46"
-          >
-            <p
-              class="c15"
-              font-size="14"
-            >
-              email@gmail.com
-            </p>
-            <button
-              class="c16"
-              color="#D2371D"
-              font-weight="bold"
-            >
-              Cancel
-            </button>
-          </div>
-          <div
-            class="c14"
-            height="46"
-          >
-            <p
-              class="c15"
-              font-size="14"
-            >
-              email2@gmail.com
-            </p>
-            <button
-              class="c16"
-              color="#D2371D"
-              font-weight="bold"
-            >
-              Cancel
-            </button>
-          </div>
-          <button
-            class="c17"
-            color="primary"
-            disabled=""
-            radius="100px"
-            width="260"
-          >
-            Send invitation
-          </button>
         </div>
+        <span
+          style="display: table; clear: both;"
+        />
       </div>
     </div>
   </div>
@@ -908,7 +988,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
 `;
 
 exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
-.c17 {
+.c19 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -930,7 +1010,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   align-self: center;
 }
 
-.c3 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -941,7 +1021,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c11 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -954,30 +1034,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   margin-bottom: 35px;
 }
 
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c14 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1004,14 +1061,14 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   border-bottom: 1px solid #D7DEE9;
 }
 
-.c7 {
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c12 {
+.c14 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1020,7 +1077,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c15 {
+.c17 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1077,17 +1134,18 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
+  width: 100%;
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
 }
 
-.c8 {
+.c9 {
   -webkit-clip: rect(0 0 0 0);
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(100%);
@@ -1099,6 +1157,41 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   width: 1px;
 }
 
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+}
+
+.c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c3 {
+  max-width: 100% !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 .c5 {
   margin: 0;
   font-family: DM Sans;
@@ -1107,7 +1200,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c6 {
+.c7 {
   height: 28px;
   width: 28px;
   display: -webkit-box;
@@ -1129,12 +1222,10 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   border: none;
   outline: none;
   padding: 0;
-  position: relative;
-  left: 40px;
-  top: -8px;
+  margin-right: 0;
 }
 
-.c10 {
+.c12 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -1143,7 +1234,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c16 {
+.c18 {
   outline: none;
   border: none;
   background: transparent;
@@ -1156,7 +1247,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c13 {
+.c15 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -1168,13 +1259,13 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c13:focus {
+.c15:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c13:disabled {
+.c15:disabled {
   color: #ABBBD1;
 }
 
@@ -1235,117 +1326,146 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c3"
+        style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
       >
         <div
-          class="c4"
+          class=""
+          style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
         >
-          <h1
-            class="c5"
-            id="modal-title"
+          <div
+            align="flex-start"
+            class="c4"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
           >
-            Invite researcher
-          </h1>
-          <button
+            <h1
+              class="c5"
+              id="modal-title"
+            >
+              Invite researcher
+            </h1>
+          </div>
+          <div
+            align="end"
             class="c6"
-            data-cy="modal-close-button"
-            data-testid="close-modal-button"
-            title="Close window"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
-            <img
-              alt="cross"
-              src="IMAGE_MOCK"
-            />
-            <p
-              class="c7 c8"
+            <button
+              class="c7"
+              data-cy="modal-close-button"
+              data-testid="close-modal-button"
+              title="Close window"
             >
-              Close window
-            </p>
-          </button>
+              <img
+                alt="cross"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="c8 c9"
+              >
+                Close window
+              </p>
+            </button>
+          </div>
         </div>
-      </div>
-      <div
-        class="c9"
-        id="modal-description"
-      >
         <div
-          class="c3"
+          class=""
+          style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
         >
-          <h3
-            class="c10"
-          >
-            Send another invite
-          </h3>
           <div
-            class="c11"
-            width="100%"
+            align="flex-start"
+            class="c4"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
-            <p
-              class="c12"
-              font-size="14"
-              id="researcher-email-label"
-            >
-              Researcher’s e-mail address
-            </p>
-            <input
-              aria-labelledby="researcher-email-label"
-              class="c13"
-              placeholder="e.g john.doe@contact.com"
-              type="text"
-              value=""
+            <div
+              class="c10"
+              id="modal-description"
               width="100%"
-            />
+            >
+              <div
+                class="c11"
+              >
+                <h3
+                  class="c12"
+                >
+                  Send another invite
+                </h3>
+                <div
+                  class="c13"
+                  width="100%"
+                >
+                  <p
+                    class="c14"
+                    font-size="14"
+                    id="researcher-email-label"
+                  >
+                    Researcher’s e-mail address
+                  </p>
+                  <input
+                    aria-labelledby="researcher-email-label"
+                    class="c15"
+                    placeholder="e.g john.doe@contact.com"
+                    type="text"
+                    value=""
+                    width="100%"
+                  />
+                </div>
+                <h3
+                  class="c12"
+                >
+                  Invitations sent (2)
+                </h3>
+                <div
+                  class="c16"
+                  height="46"
+                >
+                  <p
+                    class="c17"
+                    font-size="14"
+                  >
+                    email@gmail.com
+                  </p>
+                  <button
+                    class="c18"
+                    color="#D2371D"
+                    font-weight="bold"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <div
+                  class="c16"
+                  height="46"
+                >
+                  <p
+                    class="c17"
+                    font-size="14"
+                  >
+                    email2@gmail.com
+                  </p>
+                  <button
+                    class="c18"
+                    color="#D2371D"
+                    font-weight="bold"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <button
+                  class="c19"
+                  color="primary"
+                  disabled=""
+                  radius="100px"
+                  width="260"
+                >
+                  Send invitation
+                </button>
+              </div>
+            </div>
           </div>
-          <h3
-            class="c10"
-          >
-            Invitations sent (2)
-          </h3>
-          <div
-            class="c14"
-            height="46"
-          >
-            <p
-              class="c15"
-              font-size="14"
-            >
-              email@gmail.com
-            </p>
-            <button
-              class="c16"
-              color="#D2371D"
-              font-weight="bold"
-            >
-              Cancel
-            </button>
-          </div>
-          <div
-            class="c14"
-            height="46"
-          >
-            <p
-              class="c15"
-              font-size="14"
-            >
-              email2@gmail.com
-            </p>
-            <button
-              class="c16"
-              color="#D2371D"
-              font-weight="bold"
-            >
-              Cancel
-            </button>
-          </div>
-          <button
-            class="c17"
-            color="primary"
-            disabled=""
-            radius="100px"
-            width="260"
-          >
-            Send invitation
-          </button>
         </div>
+        <span
+          style="display: table; clear: both;"
+        />
       </div>
     </div>
   </div>

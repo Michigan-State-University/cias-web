@@ -50,11 +50,12 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
+  width: 100%;
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
@@ -68,7 +69,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c11 {
+.c12 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -77,30 +78,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   text-align: center;
 }
 
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -112,14 +90,14 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   margin-top: 25px;
 }
 
-.c7 {
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c8 {
+.c9 {
   -webkit-clip: rect(0 0 0 0);
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(100%);
@@ -131,7 +109,7 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   width: 1px;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -139,23 +117,34 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 100%;
-}
-
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  padding-right: 50px;
-  padding-left: 50px;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
 }
 
 .c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c3 {
+  max-width: 100% !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.c7 {
   height: 28px;
   width: 28px;
   display: -webkit-box;
@@ -177,12 +166,10 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   border: none;
   outline: none;
   padding: 0;
-  position: relative;
-  left: 40px;
-  top: -8px;
+  margin-right: 0;
 }
 
-.c13 {
+.c14 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -197,13 +184,13 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   margin-right: 25px;
 }
 
-.c13:hover {
+.c14:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;
 }
 
-.c14 {
+.c15 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -217,42 +204,23 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c14:hover {
+.c15:hover {
   background-color: #FFFFFF;
   color: #D2371D;
   border: 1px solid #D2371D;
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  padding-right: 50px;
+  padding-left: 50px;
 }
 
 @media only screen and (max-width:480px) {
@@ -262,6 +230,22 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
     min-width: 0;
     width: calc(100% - 20px);
   }
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 <div>
@@ -280,68 +264,98 @@ exports[`<ConfirmationBox /> Should render and match the snapshot 1`] = `
     >
       <div
         class="c3"
+        style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
       >
         <div
-          class="c4"
+          class=""
+          style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
         >
-          <h1
-            class="c5"
-            id="modal-title"
-          >
-            Test
-          </h1>
-          <button
-            class="c6"
-            data-cy="modal-close-button"
-            data-testid="close-modal-button"
-            title="Close window"
-          >
-            <img
-              alt="cross"
-              src="IMAGE_MOCK"
-            />
-            <p
-              class="c7 c8"
-            >
-              Close window
-            </p>
-          </button>
-        </div>
-      </div>
-      <div
-        class="c9"
-        id="modal-description"
-      >
-        <div
-          class="c10"
-        >
-          <h1
-            class="c11"
-          >
-            Are you sure you want to perform this action?
-          </h1>
           <div
-            class="c12"
+            align="flex-start"
+            class="c4"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
+          >
+            <h1
+              class="c5"
+              id="modal-title"
+            >
+              Test
+            </h1>
+          </div>
+          <div
+            align="end"
+            class="c6"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
             <button
-              class="c13"
-              color="primary"
-              radius="100px"
-              type="button"
+              class="c7"
+              data-cy="modal-close-button"
+              data-testid="close-modal-button"
+              title="Close window"
             >
-              Cancel
-            </button>
-            <button
-              class="c14"
-              color="warning"
-              data-cy="confirmation-box-confirm-button"
-              radius="100px"
-              type="button"
-            >
-              Confirm
+              <img
+                alt="cross"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="c8 c9"
+              >
+                Close window
+              </p>
             </button>
           </div>
         </div>
+        <div
+          class=""
+          style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
+        >
+          <div
+            align="flex-start"
+            class="c4"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
+          >
+            <div
+              class="c10"
+              id="modal-description"
+              width="100%"
+            >
+              <div
+                class="c11"
+              >
+                <h1
+                  class="c12"
+                  id="modal-title"
+                >
+                  Are you sure you want to perform this action?
+                </h1>
+                <div
+                  class="c13"
+                >
+                  <button
+                    class="c14"
+                    color="primary"
+                    radius="100px"
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    class="c15"
+                    color="warning"
+                    data-cy="confirmation-box-confirm-button"
+                    radius="100px"
+                    type="button"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <span
+          style="display: table; clear: both;"
+        />
       </div>
     </div>
   </div>
@@ -398,11 +412,12 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c9 {
+.c10 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
+  width: 100%;
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
@@ -416,7 +431,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c11 {
+.c12 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -425,30 +440,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   text-align: center;
 }
 
-.c4 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: row;
-  -ms-flex-direction: row;
-  flex-direction: row;
-  height: auto;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  justify-items: space-between;
-  -webkit-align-content: center;
-  -ms-flex-line-pack: center;
-  align-content: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c12 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -460,20 +452,20 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   margin-top: 25px;
 }
 
-.c16 {
+.c17 {
   width: auto;
   height: auto;
   margin-right: 15px;
 }
 
-.c7 {
+.c8 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c17 {
+.c18 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -482,7 +474,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c8 {
+.c9 {
   -webkit-clip: rect(0 0 0 0);
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(100%);
@@ -494,7 +486,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   width: 1px;
 }
 
-.c15 {
+.c16 {
   padding: 20px;
   width: 100%;
   max-width: 700px;
@@ -511,7 +503,7 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c3 {
+.c4 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -519,23 +511,34 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  width: 100%;
-}
-
-.c10 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  padding-right: 50px;
-  padding-left: 50px;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
 }
 
 .c6 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: flex-end;
+  -webkit-box-align: flex-end;
+  -ms-flex-align: flex-end;
+  align-items: flex-end;
+}
+
+.c3 {
+  max-width: 100% !important;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.c7 {
   height: 28px;
   width: 28px;
   display: -webkit-box;
@@ -557,12 +560,10 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   border: none;
   outline: none;
   padding: 0;
-  position: relative;
-  left: 40px;
-  top: -8px;
+  margin-right: 0;
 }
 
-.c13 {
+.c14 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -577,13 +578,13 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   margin-right: 25px;
 }
 
-.c13:hover {
+.c14:hover {
   background-color: #107969;
   color: #FFFFFF;
   border: 1px solid transparent;
 }
 
-.c14 {
+.c15 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -597,42 +598,23 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
 }
 
-.c14:hover {
+.c15:hover {
   background-color: #FFFFFF;
   color: #D2371D;
   border: 1px solid #D2371D;
 }
 
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
-}
-
-@media only screen and (min-width:768px) {
-
-}
-
-@media only screen and (min-width:960px) {
-
-}
-
-@media only screen and (min-width:1170px) {
-
-}
-
-@media only screen and (min-width:1360px) {
-
+.c11 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  padding-right: 50px;
+  padding-left: 50px;
 }
 
 @media only screen and (max-width:480px) {
@@ -642,6 +624,22 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
     min-width: 0;
     width: calc(100% - 20px);
   }
+}
+
+@media only screen and (min-width:768px) {
+
+}
+
+@media only screen and (min-width:960px) {
+
+}
+
+@media only screen and (min-width:1170px) {
+
+}
+
+@media only screen and (min-width:1360px) {
+
 }
 
 <div>
@@ -660,84 +658,114 @@ exports[`<ConfirmationBox /> Should render error and match the snapshot 1`] = `
     >
       <div
         class="c3"
+        style="box-sizing: border-box; position: relative; margin-left: auto; margin-right: auto; padding-left: 15px; padding-right: 15px; max-width: 960px;"
       >
         <div
-          class="c4"
+          class=""
+          style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: center; justify-content: space-between;"
         >
-          <h1
-            class="c5"
-            id="modal-title"
-          >
-            Test
-          </h1>
-          <button
-            class="c6"
-            data-cy="modal-close-button"
-            data-testid="close-modal-button"
-            title="Close window"
-          >
-            <img
-              alt="cross"
-              src="IMAGE_MOCK"
-            />
-            <p
-              class="c7 c8"
-            >
-              Close window
-            </p>
-          </button>
-        </div>
-      </div>
-      <div
-        class="c9"
-        id="modal-description"
-      >
-        <div
-          class="c10"
-        >
-          <h1
-            class="c11"
-          >
-            Are you sure you want to perform this action?
-          </h1>
           <div
-            class="c12"
+            align="flex-start"
+            class="c4"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 83.33333333333334%; flex-basis: 83.33333333333334%; flex-grow: 0; flex-shrink: 0; max-width: 83.33333333333334%; margin-left: 0%;"
+          >
+            <h1
+              class="c5"
+              id="modal-title"
+            >
+              Test
+            </h1>
+          </div>
+          <div
+            align="end"
+            class="c6"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
             <button
-              class="c13"
-              color="primary"
-              radius="100px"
-              type="button"
+              class="c7"
+              data-cy="modal-close-button"
+              data-testid="close-modal-button"
+              title="Close window"
             >
-              Cancel
-            </button>
-            <button
-              class="c14"
-              color="warning"
-              data-cy="confirmation-box-confirm-button"
-              radius="100px"
-              type="button"
-            >
-              Confirm
+              <img
+                alt="cross"
+                src="IMAGE_MOCK"
+              />
+              <p
+                class="c8 c9"
+              >
+                Close window
+              </p>
             </button>
           </div>
         </div>
         <div
-          class="c15"
+          class=""
+          style="margin-left: -15px; margin-right: -15px; display: flex; flex-wrap: wrap; flex-grow: 0; flex-shrink: 0; align-items: normal; justify-content: flex-start;"
         >
-          <img
-            alt="error"
-            class="c16"
-            src="IMAGE_MOCK"
-          />
-          <p
-            class="c17"
-            font-size="15"
-            font-weight="bold"
+          <div
+            align="flex-start"
+            class="c4"
+            style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
-            Error
-          </p>
+            <div
+              class="c10"
+              id="modal-description"
+              width="100%"
+            >
+              <div
+                class="c11"
+              >
+                <h1
+                  class="c12"
+                  id="modal-title"
+                >
+                  Are you sure you want to perform this action?
+                </h1>
+                <div
+                  class="c13"
+                >
+                  <button
+                    class="c14"
+                    color="primary"
+                    radius="100px"
+                    type="button"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    class="c15"
+                    color="warning"
+                    data-cy="confirmation-box-confirm-button"
+                    radius="100px"
+                    type="button"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+              <div
+                class="c16"
+              >
+                <img
+                  alt="error"
+                  class="c17"
+                  src="IMAGE_MOCK"
+                />
+                <p
+                  class="c18"
+                  font-size="15"
+                  font-weight="bold"
+                >
+                  Error
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+        <span
+          style="display: table; clear: both;"
+        />
       </div>
     </div>
   </div>
