@@ -5,3 +5,6 @@ export const formatCaseMatch = (match: string): string =>
 
 export const highlightTargetText = (text: string) =>
   `<span style='color: ${colors.jungleGreen};'>${text}</span>`;
+
+export const getCaseTargetElementId = (index: number): string =>
+  `session-map-question-details-feedback-target-${index}`;

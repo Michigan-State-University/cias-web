@@ -18,15 +18,18 @@ import Column from 'components/Column';
 import SessionMapQuestionNode from './SessionMapQuestionNode';
 import SessionMapCustomArrowHead from './SessionMapCustomArrowHead';
 import {
+  areTransformsDifferent,
   calculateAxisTransform,
   calculateMinZoom,
   calculateScrollbarPositionRatio,
   calculateScrollbarSizeRatio,
+  calculateTransformToFitElementInView,
+  calculateTransformToFitViewInContainer,
   createMapEdgesFromQuestions,
   createMapNodesFromQuestions,
   layoutElements,
   sortQuestionsByGroupAndPosition,
-} from '../../utils';
+} from './utils';
 import {
   CustomArrowHeadType,
   defaultZoom,
@@ -157,64 +160,29 @@ const SessionMap = ({
     );
     if (!showDetailsElement) return;
 
-    const { position, __rf: ref } = showDetailsElement;
-    const elementLeftEndPosition = position.x * zoom;
-    const elementTopEndPosition = position.y * zoom;
-    const elementRightEndPosition = (position.x + ref.width) * zoom;
-    const elementBottomEndPosition = (position.y + ref.height) * zoom;
+    const newTransform = calculateTransformToFitElementInView(
+      showDetailsElement,
+      currentTransform,
+      containerWidth,
+      containerHeight,
+    );
 
-    const viewRightEndPosition = -1 * currentTransform.x + containerWidth;
-    const viewBottomEndPosition = -1 * currentTransform.y + containerHeight;
-
-    if (
-      elementLeftEndPosition < -1 * currentTransform.x ||
-      elementTopEndPosition < -1 * currentTransform.y
-    ) {
-      const newTransform = {
-        ...currentTransform,
-        x: -1 * elementLeftEndPosition,
-        y: -1 * elementTopEndPosition,
-      };
-      transform(newTransform);
-      return;
-    }
-
-    if (
-      elementRightEndPosition > viewRightEndPosition ||
-      elementBottomEndPosition > viewBottomEndPosition
-    ) {
-      const newTransform = {
-        ...currentTransform,
-        x: -1 * (elementRightEndPosition - containerWidth),
-        y: -1 * (elementBottomEndPosition - containerHeight),
-      };
+    if (areTransformsDifferent(currentTransform, newTransform)) {
       transform(newTransform);
     }
   };
 
   const fitViewInContainer = () => {
-    const viewWidth = panAreaWidth * zoom;
-    const viewHeight = panAreaHeight * zoom;
+    const newTransform = calculateTransformToFitViewInContainer(
+      panAreaWidth,
+      panAreaHeight,
+      currentTransform,
+      containerWidth,
+      containerHeight,
+    );
 
-    const viewRightEndPosition = -1 * currentTransform.x + containerWidth;
-    const viewBottomEndPosition = -1 * currentTransform.y + containerHeight;
-
-    let { x: newX, y: newY } = currentTransform;
-
-    if (viewWidth < viewRightEndPosition) {
-      newX = -1 * (viewWidth - containerWidth);
-    }
-
-    if (viewHeight < viewBottomEndPosition) {
-      newY = -1 * (viewHeight - containerHeight);
-    }
-
-    if (newX !== currentTransform.x || newY !== currentTransform.y) {
-      transform({
-        ...currentTransform,
-        x: newX,
-        y: newY,
-      });
+    if (areTransformsDifferent(currentTransform, newTransform)) {
+      transform(newTransform);
     }
   };
 

@@ -13,10 +13,7 @@ import Column from 'components/Column';
 import messages from './messages';
 import Formula from './Formula';
 import CaseMatch from './CaseMatch';
-import { highlightTargetText } from './utils';
-
-const getCaseTargetElementId = (index: number): string =>
-  `session-map-question-details-feedback-target-${index}`;
+import { highlightTargetText, getCaseTargetElementId } from './utils';
 
 type Props = {
   question: Question<FeedbackQuestionPayload>;
