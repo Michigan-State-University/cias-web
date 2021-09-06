@@ -6,14 +6,21 @@ export const defaultZoom = 1;
 
 export const detailedInfoZoomThreshold = 0.75;
 
-export const nodesVerticalDistanceRatio = 4;
+export const sessionNodesVerticalDistanceRatio = 1;
+export const questionNodesVerticalDistanceRatio = 4;
 
 export const sessionMapColors = {
   nodeBase: colors.smokeWhite,
   nodeDetailsShown: colors.orchid,
   edgeBase: colors.periwinkleGray,
   selected: colors.jungleGreen,
+  sessionNode: colors.tuftsBlue,
 };
+
+export enum NodeType {
+  QUESTION = 'question',
+  SESSION = 'session',
+}
 
 export enum CustomArrowHeadType {
   BASE = 'arrowcustom-base',

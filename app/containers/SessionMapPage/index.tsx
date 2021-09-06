@@ -203,6 +203,7 @@ const SessionMapPage = (): JSX.Element => {
               <SessionMap
                 questions={questions}
                 questionGroups={questionGroups}
+                sessions={intervention?.sessions || []}
                 showDetailsId={showDetailsId}
                 onShowDetailsIdChange={setShowDetailsId}
                 zoom={zoom}

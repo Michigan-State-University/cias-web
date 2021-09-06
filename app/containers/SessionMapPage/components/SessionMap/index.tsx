@@ -11,6 +11,7 @@ import ReactFlow, {
 
 import { Question } from 'global/types/question';
 import { QuestionGroup } from 'global/types/questionGroup';
+import { SessionDto } from 'models/Session/SessionDto';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
@@ -36,16 +37,20 @@ import {
   defaultMaxZoom,
   sessionMapColors,
   detailedInfoZoomThreshold,
+  NodeType,
 } from '../../constants';
 import SessionMapScrollbar from '../SessionMapScrollbar';
+import SessionMapSessionNode from './SessionMapSessionNode';
 
 const nodeTypes: NodeTypesType = {
-  question: SessionMapQuestionNode,
+  [NodeType.QUESTION]: SessionMapQuestionNode,
+  [NodeType.SESSION]: SessionMapSessionNode,
 };
 
 type Props = {
   questions: Question[];
   questionGroups: QuestionGroup[];
+  sessions: SessionDto[];
   showDetailsId: string;
   onShowDetailsIdChange: (showDetailsId: string) => void;
   zoom: number;
@@ -57,6 +62,7 @@ type Props = {
 const SessionMap = ({
   questions,
   questionGroups,
+  sessions,
   showDetailsId,
   onShowDetailsIdChange,
   zoom,
@@ -117,6 +123,7 @@ const SessionMap = ({
         showDetailsId,
         handleShowDetailsChange,
         showDetailedInfo,
+        sessions,
       ),
       ...createMapEdges(sortedQuestions),
     ],
