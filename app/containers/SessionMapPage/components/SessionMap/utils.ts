@@ -17,11 +17,10 @@ import { isNanOrInfinite } from 'utils/mathUtils';
 
 import { QuestionTileData } from '../../types';
 import {
-  CustomArrowHeadType,
   defaultMinZoom,
   defaultZoom,
   nodesVerticalDistanceRatio,
-  sessionMapColors,
+  baseEdgeSharedAttributes,
 } from '../../constants';
 
 export const sortQuestionsByGroupAndPosition = (
@@ -63,17 +62,16 @@ export const createMapNodes = (
     },
   }));
 
-const baseEdgeSharedAttributes = {
-  type: 'smoothstep',
-  arrowHeadType: CustomArrowHeadType.BASE,
-  style: {
-    strokeWidth: 2,
-    stroke: sessionMapColors.edgeBase,
-  },
-};
-
 const createEdgeId = (sourceId: string, targetId: string): string =>
   `${sourceId}_TO_${targetId}`;
+
+const findQuestionPosition = (
+  questions: Question[],
+  questionId: string,
+): number => questions.findIndex(({ id }) => id === questionId);
+
+const edgeExists = (edges: Edge[], edgeId: string): boolean =>
+  Boolean(edges.find(({ id }) => id === edgeId));
 
 const createMapEdgesFromNextQuestions = (questions: Question[]): Edge[] =>
   questions.flatMap(({ id }, index) => {
@@ -94,12 +92,18 @@ const createMapEdgesFromBranchingPatterns = (
 ): Edge[] => {
   const edges = cloneDeep(existingEdges);
   // check every target of every pattern of every question
-  questions.forEach(({ id: nodeId, formula: { patterns } }) =>
+  questions.forEach(({ id: nodeId, formula: { patterns } }, questionIndex) =>
     patterns.forEach(({ target: targets }) =>
-      targets.forEach(({ id: targetNodeId }) => {
+      targets.forEach(({ id: targetNodeId, type }) => {
         if (!targetNodeId) return;
+        if (
+          type.startsWith('Question') &&
+          findQuestionPosition(questions, targetNodeId) < questionIndex
+        ) {
+          return;
+        }
         const edgeId = createEdgeId(nodeId, targetNodeId);
-        if (edges.find(({ id }) => id === edgeId)) return;
+        if (edgeExists(edges, edgeId)) return;
         // @ts-ignore
         const edge = {
           id: edgeId,

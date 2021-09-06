@@ -19,3 +19,12 @@ export enum CustomArrowHeadType {
   BASE = 'arrowcustom-base',
   SELECTED = 'arrowcustom-selected',
 }
+
+export const baseEdgeSharedAttributes = {
+  type: 'smoothstep',
+  arrowHeadType: CustomArrowHeadType.BASE,
+  style: {
+    strokeWidth: 2,
+    stroke: sessionMapColors.edgeBase,
+  },
+};
