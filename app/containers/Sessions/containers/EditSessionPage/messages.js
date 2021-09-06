@@ -91,7 +91,7 @@ export default defineMessages({
   },
   narratorVoiceType: {
     id: `${scope}.narratorVoiceType`,
-    defaultMessage: 'Peedy voice type',
+    defaultMessage: 'Narrator voice type',
   },
   noTestsData: {
     id: `${scope}.noTestsData`,

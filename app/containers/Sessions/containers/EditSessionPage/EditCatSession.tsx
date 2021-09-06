@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
+import isEqual from 'lodash/isEqual';
 
 import { colors } from 'theme';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
@@ -18,9 +19,9 @@ import Text from 'components/Text';
 import Row from 'components/Row';
 import Divider from 'components/Divider';
 import ApiSelect from 'components/Select/ApiSelect';
-import Input from 'components/Input';
 import Button from 'components/Button';
 
+import StyledInput from 'components/Input/StyledInput';
 import messages from './messages';
 import { EditCatSessionState } from './types';
 import CatMhTests from '../../components/CatMhTests';
@@ -33,30 +34,37 @@ type EditCatSessionProps = {
 };
 
 const EditCatSession = ({
-  session: {
+  session,
+  editingPossible,
+  editSession,
+  sessionIsEditing,
+}: EditCatSessionProps): JSX.Element => {
+  const {
     variable,
     catMhLanguageId,
     catMhPopulationId,
     catMhTimeFrameId,
     googleTtsVoice,
     catMhTestTypes,
-  },
-  editingPossible,
-  editSession,
-  sessionIsEditing,
-}: EditCatSessionProps): JSX.Element => {
+  } = session;
   useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
   const { formatMessage } = useIntl();
+  const mappedCatTests = catMhTestTypes.map(({ id }) => +id);
   const [formData, setFormData] = useState<EditCatSessionState>({
     selectedLanguage: null,
     selectedTimeFrame: null,
     selectedPopulation: null,
     selectedVoice: null,
     sessionVariable: variable,
-    selectedTestIds: catMhTestTypes.map(({ id }) => +id),
+    selectedTestIds: mappedCatTests,
   });
+
   const [testsUrl, setTestsUrl] = useState('');
   const [languagesUrl, setLanguagesUrl] = useState('');
+  const [initialFetch, setInitialFetch] = useState(true);
+
+  const updateFormData = (key: string, value: any) =>
+    setFormData({ ...formData, [key]: value });
 
   useEffect(() => {
     const { selectedLanguage, selectedTimeFrame, selectedPopulation } =
@@ -69,6 +77,11 @@ const EditCatSession = ({
     params.append('time_frame_id', `${selectedTimeFrame.value}`);
 
     setTestsUrl(`/v1/cat_mh/available_test_types?${params.toString()}`);
+    if (!initialFetch) {
+      updateFormData('selectedTestIds', []);
+    } else {
+      setInitialFetch(false);
+    }
   }, [
     formData.selectedLanguage,
     formData.selectedTimeFrame,
@@ -82,8 +95,37 @@ const EditCatSession = ({
     );
   }, [formData.selectedLanguage]);
 
-  const updateFormData = (key: string, value: any) =>
-    setFormData({ ...formData, [key]: value });
+  const saveButtonDisabled = useMemo(() => {
+    const {
+      selectedLanguage,
+      selectedTimeFrame,
+      selectedPopulation,
+      selectedVoice,
+      selectedTestIds,
+      sessionVariable,
+    } = formData;
+
+    const catMhDetailsSet =
+      selectedTestIds.length === 0 ||
+      !selectedVoice ||
+      !selectedLanguage ||
+      !selectedTimeFrame ||
+      !selectedPopulation ||
+      !sessionVariable;
+    if (catMhDetailsSet) return true;
+
+    const catSessionChanged =
+      selectedLanguage.value === catMhLanguageId &&
+      selectedTimeFrame.value === catMhTimeFrameId &&
+      selectedPopulation.value === catMhPopulationId &&
+      sessionVariable === variable &&
+      +selectedVoice.value === googleTtsVoice.id &&
+      isEqual(selectedTestIds, mappedCatTests);
+
+    if (catSessionChanged) return true;
+
+    return false;
+  }, [formData, session]);
 
   const onSelectTests = (testIds: number[]) =>
     updateFormData('selectedTestIds', testIds);
@@ -219,12 +261,13 @@ const EditCatSession = ({
           )}
           {wrapWithLabel(
             formatMessage(messages.variable),
-            <Input
+            <StyledInput
               disabled={!editingPossible}
+              // @ts-ignore
               mx={5}
-              defaultValue={formData.sessionVariable}
+              value={formData.sessionVariable}
               onBlur={(value: any) => updateFormData('sessionVariable', value)}
-            ></Input>,
+            />,
           )}
         </Box>
         <Row my={30}>
@@ -240,18 +283,20 @@ const EditCatSession = ({
         )}
         {testsUrl && (
           <CatMhTests
+            disabled={!editingPossible}
             selectedTestIds={formData.selectedTestIds}
             onSelectTest={onSelectTests}
             url={testsUrl}
           />
         )}
-        {formData.selectedTestIds.length !== 0 && (
+        {editingPossible && (
           // @ts-ignore
           <Button
             loading={sessionIsEditing}
             onClick={updateCatSession}
             mt={30}
             width={200}
+            disabled={saveButtonDisabled}
           >
             {formatMessage(messages.saveChanges)}
           </Button>
