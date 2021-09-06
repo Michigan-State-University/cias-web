@@ -42,10 +42,9 @@ const BranchingFormulaAndCases = ({
     targetIndex: number,
   ): JSX.Element[] =>
     subtargets.map(({ id, probability, type }, subtargetIndex) => {
-      const subtargetName =
-        type === 'Session'
-          ? sessions.find(({ id: sessionId }) => sessionId === id)?.name
-          : questions.find(({ id: questionId }) => questionId === id)?.subtitle;
+      const subtargetName = type.startsWith('Session')
+        ? sessions.find(({ id: sessionId }) => sessionId === id)?.name
+        : questions.find(({ id: questionId }) => questionId === id)?.subtitle;
 
       const displayedName = isNullOrUndefined(subtargetName)
         ? ''

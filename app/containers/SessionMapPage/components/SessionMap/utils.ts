@@ -8,11 +8,10 @@ import {
 } from 'react-flow-renderer';
 import dagre from 'dagre';
 import isEqual from 'lodash/isEqual';
+import cloneDeep from 'lodash/cloneDeep';
 
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
-
-import { finishQuestion } from 'models/Session/QuestionTypes';
 
 import { isNanOrInfinite } from 'utils/mathUtils';
 
@@ -21,6 +20,7 @@ import {
   CustomArrowHeadType,
   defaultMinZoom,
   defaultZoom,
+  nodesVerticalDistanceRatio,
   sessionMapColors,
 } from '../../constants';
 
@@ -44,7 +44,7 @@ export const sortQuestionsByGroupAndPosition = (
   });
 };
 
-export const createMapNodesFromQuestions = (
+export const createMapNodes = (
   questions: Question[],
   showDetailsId: string,
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void,
@@ -63,23 +63,61 @@ export const createMapNodesFromQuestions = (
     },
   }));
 
-export const createMapEdgesFromQuestions = (questions: Question[]): Edge[] =>
-  questions.flatMap((question, index) => {
-    if (question.type === finishQuestion.id) return [];
+const baseEdgeSharedAttributes = {
+  type: 'smoothstep',
+  arrowHeadType: CustomArrowHeadType.BASE,
+  style: {
+    strokeWidth: 2,
+    stroke: sessionMapColors.edgeBase,
+  },
+};
+
+const createEdgeId = (sourceId: string, targetId: string): string =>
+  `${sourceId}_TO_${targetId}`;
+
+const createMapEdgesFromNextQuestions = (questions: Question[]): Edge[] =>
+  questions.flatMap(({ id }, index) => {
     const nextNodeId = questions[index + 1]?.id;
     if (!nextNodeId) return [];
     // @ts-ignore
     return {
-      id: `${question.id}-${nextNodeId}`,
-      source: question.id,
+      id: createEdgeId(id, nextNodeId),
+      source: id,
       target: nextNodeId,
-      arrowHeadType: CustomArrowHeadType.BASE,
-      style: {
-        strokeWidth: 2,
-        stroke: sessionMapColors.edgeBase,
-      },
+      ...baseEdgeSharedAttributes,
     } as Edge;
   });
+
+const createMapEdgesFromBranchingPatterns = (
+  questions: Question[],
+  existingEdges: Edge[],
+): Edge[] => {
+  const edges = cloneDeep(existingEdges);
+  // check every target of every pattern of every question
+  questions.forEach(({ id: nodeId, formula: { patterns } }) =>
+    patterns.forEach(({ target: targets }) =>
+      targets.forEach(({ id: targetNodeId }) => {
+        if (!targetNodeId) return;
+        const edgeId = createEdgeId(nodeId, targetNodeId);
+        if (edges.find(({ id }) => id === edgeId)) return;
+        // @ts-ignore
+        const edge = {
+          id: edgeId,
+          source: nodeId,
+          target: targetNodeId,
+          ...baseEdgeSharedAttributes,
+        } as Edge;
+        edges.push(edge);
+      }),
+    ),
+  );
+  return edges;
+};
+
+export const createMapEdges = (questions: Question[]): Edge[] => {
+  const edges: Edge[] = createMapEdgesFromNextQuestions(questions);
+  return createMapEdgesFromBranchingPatterns(questions, edges);
+};
 
 // Example: https://reactflow.dev/examples/layouting/
 export const layoutElements = (
@@ -100,7 +138,10 @@ export const layoutElements = (
         const {
           __rf: { width, height },
         } = renderedNode;
-        dagreGraph.setNode(el.id, { width, height });
+        dagreGraph.setNode(el.id, {
+          width,
+          height: height * nodesVerticalDistanceRatio,
+        });
       } else {
         dagreGraph.setNode(el.id, { width: 0, height: 0 });
       }
@@ -116,7 +157,8 @@ export const layoutElements = (
   const layoutedElements = elements.map((el) => {
     if (isEdge(el)) return el;
 
-    const { x, y, width, height } = dagreGraph.node(el.id);
+    const node = dagreGraph.node(el.id);
+    const { x, y, width, height } = node;
     // shift the dagre node position (anchor=center center) to the top left
     // so it matches the react flow node anchor point (top left).
     const position = {
@@ -125,7 +167,10 @@ export const layoutElements = (
     };
 
     panAreaWidth = Math.max(panAreaWidth, position.x + width);
-    panAreaHeight = Math.max(panAreaHeight, position.y + height);
+    panAreaHeight = Math.max(
+      panAreaHeight,
+      position.y + height / nodesVerticalDistanceRatio,
+    );
 
     return {
       ...el,

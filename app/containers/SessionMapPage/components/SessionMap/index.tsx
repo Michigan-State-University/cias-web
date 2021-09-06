@@ -25,8 +25,8 @@ import {
   calculateScrollbarSizeRatio,
   calculateTransformToFitElementInView,
   calculateTransformToFitViewInContainer,
-  createMapEdgesFromQuestions,
-  createMapNodesFromQuestions,
+  createMapEdges,
+  createMapNodes,
   layoutElements,
   sortQuestionsByGroupAndPosition,
 } from './utils';
@@ -112,13 +112,13 @@ const SessionMap = ({
 
   const elements = useMemo(
     () => [
-      ...createMapNodesFromQuestions(
+      ...createMapNodes(
         sortedQuestions,
         showDetailsId,
         handleShowDetailsChange,
         showDetailedInfo,
       ),
-      ...createMapEdgesFromQuestions(sortedQuestions),
+      ...createMapEdges(sortedQuestions),
     ],
     [sortedQuestions, showDetailsId, showDetailedInfo],
   );
