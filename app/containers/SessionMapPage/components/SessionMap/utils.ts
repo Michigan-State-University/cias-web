@@ -7,7 +7,7 @@ import {
   Node,
 } from 'react-flow-renderer';
 import dagre from 'dagre';
-import _ from 'lodash';
+import { isEqual } from 'lodash';
 
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
@@ -268,4 +268,4 @@ export const calculateTransformToFitElementInView = (
 export const areTransformsDifferent = (
   transformA: FlowTransform,
   transformB: FlowTransform,
-): boolean => !_.isEqual(transformA, transformB);
+): boolean => !isEqual(transformA, transformB);
