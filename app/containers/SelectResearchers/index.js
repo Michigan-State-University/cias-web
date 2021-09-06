@@ -27,8 +27,6 @@ import {
 } from 'global/reducers/userList';
 import { makeSelectUser } from 'global/reducers/auth';
 
-import { Roles } from 'models/User/UserRoles';
-
 import Row from 'components/Row';
 import Loader from 'components/Loader';
 import Column from 'components/Column';
@@ -52,6 +50,8 @@ const SelectResearchers = ({
   onClose,
   user: { id: currentUserId },
   onResearchersSelected,
+  filterParams,
+  filterWarning,
 }) => {
   const { formatMessage } = useIntl();
   const [selected, setSelected] = useState([]);
@@ -62,7 +62,7 @@ const SelectResearchers = ({
     {},
   );
   useLayoutEffect(() => {
-    fetchUsersRequest([Roles.researcher]);
+    fetchUsersRequest(filterParams);
   }, []);
 
   const handleSend = () => {
@@ -95,6 +95,7 @@ const SelectResearchers = ({
     );
   return (
     <Box>
+      {filterWarning && <ErrorAlert errorText={filterWarning} />}
       <Row pt={10} width="100%">
         <SearchInput
           ml={5}
@@ -180,6 +181,8 @@ SelectResearchers.propTypes = {
   fetchUsersRequest: PropTypes.func.isRequired,
   onClose: PropTypes.func,
   onResearchersSelected: PropTypes.func,
+  filterParams: PropTypes.object,
+  filterWarning: PropTypes.string,
 };
 
 const mapStateToProps = createStructuredSelector({
