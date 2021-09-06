@@ -104,24 +104,26 @@ const EditCatSession = ({
       selectedTestIds,
       sessionVariable,
     } = formData;
-    if (
+
+    const catMhDetailsSet =
       selectedTestIds.length === 0 ||
       !selectedVoice ||
       !selectedLanguage ||
       !selectedTimeFrame ||
       !selectedPopulation ||
-      !sessionVariable
-    )
-      return true;
-    if (
+      !sessionVariable;
+    if (catMhDetailsSet) return true;
+
+    const catSessionChanged =
       selectedLanguage.value === catMhLanguageId &&
       selectedTimeFrame.value === catMhTimeFrameId &&
       selectedPopulation.value === catMhPopulationId &&
       sessionVariable === variable &&
       +selectedVoice.value === googleTtsVoice.id &&
-      isEqual(selectedTestIds, mappedCatTests)
-    )
-      return true;
+      isEqual(selectedTestIds, mappedCatTests);
+
+    if (catSessionChanged) return true;
+
     return false;
   }, [formData, session]);
 
