@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import { useLocation, useParams, useHistory } from 'react-router-dom';
 import { push } from 'connected-react-router';
 import { ReactFlowProvider } from 'react-flow-renderer';
 
@@ -45,8 +45,10 @@ import {
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
 import { ReportTemplate } from 'global/types/reportTemplate';
+import { JumpToScreenLocationState } from 'global/types/locationState';
 
 import useQuery from 'utils/useQuery';
+import clearLocationState from 'utils/clearLocationState';
 
 import Loader from 'components/Loader';
 import Column from 'components/Column';
@@ -67,6 +69,8 @@ type RouteParams = {
 
 const SessionMapPage = (): JSX.Element => {
   const { formatMessage } = useIntl();
+  const location = useLocation<JumpToScreenLocationState>();
+  const history = useHistory<JumpToScreenLocationState>();
   const dispatch = useDispatch();
 
   useInjectReducer({ key: 'intervention', reducer: interventionReducer });
@@ -112,7 +116,9 @@ const SessionMapPage = (): JSX.Element => {
   const { interventionId, sessionId } = useParams<RouteParams>();
   const userSessionId = useQuery('userSessionId');
 
-  const [showDetailsId, setShowDetailsId] = useState('');
+  const [showDetailsId, setShowDetailsId] = useState(
+    location.state?.selectedQuestionId ?? '',
+  );
 
   const [showDetailsQuestion, showDetailsQuestionGroup] = useMemo(() => {
     const question = questions.find(({ id }) => id === showDetailsId);
@@ -140,6 +146,7 @@ const SessionMapPage = (): JSX.Element => {
     dispatch(getQuestionGroupsRequest(sessionId));
     dispatch(fetchReportTemplatesRequest(sessionId, interventionId));
     dispatch(fetchInterventionRequest(interventionId));
+    clearLocationState(location);
   }, []);
 
   useEffect(() => {
@@ -151,6 +158,11 @@ const SessionMapPage = (): JSX.Element => {
   useEffect(() => {
     if (interventionError) dispatch(push(``));
   }, [interventionError]);
+
+  const goToScreenEdit = () => {
+    const url = `/interventions/${interventionId}/sessions/${sessionId}/edit`;
+    history.push(url, { selectedQuestionId: showDetailsId });
+  };
 
   const showDetails = Boolean(
     showDetailsId && showDetailsQuestion && showDetailsQuestionGroup,
@@ -217,6 +229,7 @@ const SessionMapPage = (): JSX.Element => {
             reportTemplates={reportTemplates}
             sessions={intervention?.sessions || []}
             questions={questions}
+            onGoToScreenClick={goToScreenEdit}
           />
         </QuestionDetailsColumn>
       )}

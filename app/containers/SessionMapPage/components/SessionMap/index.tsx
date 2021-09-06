@@ -191,7 +191,7 @@ const SessionMap = ({
     if (showDetailsId) {
       fitShowDetailsElementInView();
     }
-  }, [showDetailsId, containerWidth, containerHeight]);
+  }, [containerWidth, containerHeight, renderedNodes]);
 
   const handleScrollbarPositionRatioChange =
     (axis: 'x' | 'y') => (newScrollbarPositionRatio: number) => {

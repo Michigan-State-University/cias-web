@@ -42,8 +42,7 @@ import {
   UPDATE_QUESTION_IMAGE_ERROR,
 } from './constants';
 
-export const selectQuestion = (index) =>
-  actionBuilder(SELECT_QUESTION, { index });
+export const selectQuestion = (id) => actionBuilder(SELECT_QUESTION, { id });
 
 export const createQuestionRequest = (question, id) =>
   actionBuilder(CREATE_QUESTION_REQUEST, { question, id });

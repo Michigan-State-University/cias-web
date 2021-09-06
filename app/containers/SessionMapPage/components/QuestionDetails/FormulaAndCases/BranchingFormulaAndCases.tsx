@@ -3,6 +3,9 @@ import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
 import { FormulaPatternTarget, Question } from 'global/types/question';
+
+import { SessionDto } from 'models/Session/SessionDto';
+
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
@@ -23,7 +26,7 @@ const getCaseTargetElementId = (index: number): string =>
 
 type Props = {
   question: Question;
-  sessions: any[];
+  sessions: SessionDto[];
   questions: Question[];
 };
 
