@@ -15,12 +15,14 @@ type Props = {
   url: string;
   selectedTestIds: number[];
   onSelectTest: (newTestIds: number[]) => void;
+  disabled: boolean;
 };
 
 const CatMhTests = ({
   url,
   onSelectTest,
   selectedTestIds,
+  disabled,
 }: Props): JSX.Element => {
   const { data, error, isFetching } = useGet<CatMhTestDTO, CatMhTest[]>(
     url,
@@ -48,6 +50,7 @@ const CatMhTests = ({
         {data?.map((test) => (
           <Col key={test.id} my={20} sm={6}>
             <TestItem
+              disabled={disabled}
               test={test}
               selected={selectedTestIds.includes(test.id)}
               onToggle={onCheckboxToggle}
