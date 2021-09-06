@@ -24,6 +24,7 @@ import {
   sessionNodesVerticalDistanceRatio,
   questionNodesVerticalDistanceRatio,
   baseEdgeSharedAttributes,
+  questionNodeLabelOffset,
 } from '../../constants';
 
 export const sortQuestionsByGroupAndPosition = (
@@ -252,7 +253,7 @@ export const layoutElements = (
     // so it matches the react flow node anchor point (top left).
     const position = {
       x: x - width / 2,
-      y: y - height / 2,
+      y: y - height / 2 + questionNodeLabelOffset, // "+ questionNodeLabelOffset" - to make top padding for question node labels
     };
 
     panAreaWidth = Math.max(panAreaWidth, position.x + width);

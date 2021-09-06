@@ -9,6 +9,9 @@ export const detailedInfoZoomThreshold = 0.75;
 export const sessionNodesVerticalDistanceRatio = 1;
 export const questionNodesVerticalDistanceRatio = 4;
 
+export const nodeWidth = 210;
+export const questionNodeLabelOffset = 32;
+
 export const sessionMapColors = {
   nodeBase: colors.smokeWhite,
   nodeDetailsShown: colors.orchid,

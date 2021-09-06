@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import Box from 'components/Box';
 
 import { SessionTileData } from '../../types';
-import { sessionMapColors } from '../../constants';
+import { nodeWidth, sessionMapColors } from '../../constants';
 import messages from '../../messages';
 import SessionMapNodeHandles from './SessionMapNodeHandles';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
@@ -24,12 +24,14 @@ const SessionMapSessionNode = ({
     [nodeRef.current],
   );
 
+  const sessionNo = sessionIndex + 1;
+
   return (
     <>
       <Box
         py={18}
         px={24}
-        width={210}
+        width={nodeWidth}
         bg={sessionMapColors.sessionNode}
         bgOpacity={0.3}
         border={`1px dashed ${sessionMapColors.sessionNode}`}
@@ -37,16 +39,16 @@ const SessionMapSessionNode = ({
         ref={nodeRef}
       >
         {showDetailedInfo && (
-          <SessionMapSessionNodeDetailedInfo sessionIndex={sessionIndex} />
+          <SessionMapSessionNodeDetailedInfo sessionIndex={sessionNo} />
         )}
         {!showDetailedInfo && (
           <SessionMapNodeBriefInfo
             height={detailedInfoHeight}
-            info={formatMessage(messages.sessionNo, { no: sessionIndex })}
+            info={formatMessage(messages.sessionNo, { no: sessionNo })}
           />
         )}
       </Box>
-      <SessionMapNodeHandles nodeId={`session-${sessionIndex}`} />
+      <SessionMapNodeHandles nodeId={`session-${sessionNo}`} />
     </>
   );
 };
