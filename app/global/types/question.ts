@@ -1,3 +1,5 @@
+import { QuestionTypes } from 'models/Question/QuestionDto';
+
 export interface QuestionSettings {
   image: boolean;
   title: boolean;
@@ -88,15 +90,27 @@ export interface FeedbackQuestionPayload {
   original_text?: StartEndValueOriginalText;
 }
 
-export interface QuestionData {
-  payload:
-    | string
-    | GridQuestionPayload
-    | SliderQuestionPayload
-    | FeedbackQuestionPayload;
+export type PayloadType =
+  | string
+  | GridQuestionPayload
+  | SliderQuestionPayload
+  | FeedbackQuestionPayload;
+
+export interface SpectrumPattern {
+  match: string;
+  target: string;
+}
+
+export interface Spectrum {
+  payload: string;
+  patterns: SpectrumPattern[];
+}
+
+export interface QuestionData<T> {
+  payload: T;
   variable?: QuestionVariable;
   value?: string;
-  spectrum?: QuestionFormula;
+  spectrum?: Spectrum;
   report_template_ids?: string[];
   original_text?: string;
 }
@@ -106,8 +120,8 @@ export interface QuestionVariable {
   value?: string;
 }
 
-export interface QuestionBody {
-  data: QuestionData[];
+export interface QuestionBody<T> {
+  data: QuestionData<T>[];
   variable?: QuestionVariable;
 }
 
@@ -117,9 +131,9 @@ export interface QuestionOriginalText {
   image_description: Nullable<string>;
 }
 
-export interface Question {
+export interface Question<T extends PayloadType = PayloadType> {
   id: string;
-  type: string;
+  type: QuestionTypes;
   question_group_id: string;
   settings: QuestionSettings;
   position: number;
@@ -128,7 +142,7 @@ export interface Question {
   narrator: Narrator;
   video_url: Nullable<string>;
   formula: QuestionFormula;
-  body: QuestionBody;
+  body: QuestionBody<T>;
   original_text: QuestionOriginalText;
   image_url: Nullable<string>;
   image_alt: Nullable<string>;

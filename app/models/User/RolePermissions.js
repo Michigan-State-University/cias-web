@@ -32,6 +32,8 @@ const ALLOWED_ASSIGN_ORGANIZATION_TO_INTERVENTION = [
   Roles.eInterventionAdmin,
 ];
 
+const FORBIDDEN_CAT_MH_SETTING_DISPLAY = [Roles.thirdParty, Roles.participant];
+
 export const RolePermissions = (roles) => ({
   canEditLogo: arraysOverlap(roles, ALLOWED_EDIT_LOGO),
   canDownloadInterventionCsv: arraysOverlap(
@@ -52,5 +54,9 @@ export const RolePermissions = (roles) => ({
   canAssignOrganizationToIntervention: arraysOverlap(
     roles,
     ALLOWED_ASSIGN_ORGANIZATION_TO_INTERVENTION,
+  ),
+  canDisplayCatMhSetting: !arraysOverlap(
+    roles,
+    FORBIDDEN_CAT_MH_SETTING_DISPLAY,
   ),
 });

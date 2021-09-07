@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import pickFields from 'utils/pickFields';
 import { makeSelectSessionById } from 'global/reducers/intervention';
+import { jsonApiToObject } from 'utils/jsonApiMapper';
 import { EDIT_SESSION_REQUEST } from '../constants';
 
 import { editSessionSuccess, editSessionError } from '../actions';
@@ -21,16 +22,11 @@ export function* editSession({ fields, payload: { sessionId } } = {}) {
   const patchDifference = pickFields(session, fields);
 
   try {
-    const {
-      data: { data },
-    } = yield call(axios.put, requestURL, { session: patchDifference });
+    const { data } = yield call(axios.put, requestURL, {
+      session: patchDifference,
+    });
 
-    yield put(
-      editSessionSuccess({
-        ...data.attributes,
-        id: data.id,
-      }),
-    );
+    yield put(editSessionSuccess(jsonApiToObject(data, 'session')));
   } catch (error) {
     yield put(editSessionError(error));
   }

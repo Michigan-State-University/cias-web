@@ -5,6 +5,7 @@ import React, {
   useMemo,
   useLayoutEffect,
   useCallback,
+  useContext,
 } from 'react';
 import { injectSaga, injectReducer } from 'redux-injectors';
 import {
@@ -16,6 +17,7 @@ import {
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+import { useHistory, useLocation } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage, useIntl } from 'react-intl';
 import xor from 'lodash/xor';
@@ -51,6 +53,7 @@ import { borders, colors, themeColors } from 'theme';
 
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
+import clearLocationState from 'utils/clearLocationState';
 
 import {
   createQuestionRequest,
@@ -60,6 +63,7 @@ import {
   reorderQuestionListRequest,
   makeSelectLoader,
   deleteQuestionsRequest,
+  selectQuestion as selectQuestionAction,
 } from 'global/reducers/questions';
 import {
   reorderGroupListRequest,
@@ -77,6 +81,7 @@ import {
   copyModalReducer,
   allCopyModalSagas,
 } from 'global/reducers/copyModalReducer';
+import { JumpToScreenLocationState } from 'global/types/locationState';
 
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
 import { reorderScope } from 'models/Session/ReorderScope';
@@ -91,7 +96,7 @@ import QuestionSettings from '../../components/QuestionSettings';
 import QuestionTypeChooser from '../../components/QuestionTypeChooser';
 
 import messages from './messages';
-import { useLockEditSessionPageScroll } from './utils';
+import { EditSessionPageContext, useLockEditSessionPageScroll } from './utils';
 import {
   QuestionsRow,
   ShowListButton,
@@ -154,6 +159,7 @@ type Props = {
   selectedQuestion: string;
   questions: QuestionDto[];
   groups: GroupDto[];
+  selectQuestion: (id: string) => void;
 } & NonReduxProps;
 
 const EditClassicSessionPage = ({
@@ -168,6 +174,7 @@ const EditClassicSessionPage = ({
   groupQuestions,
   shareQuestionsToResearchers,
   groups,
+  selectQuestion,
   changeGroupName,
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
@@ -181,6 +188,9 @@ const EditClassicSessionPage = ({
   const [isDuringQuestionReorder, setIsDuringQuestionReorder] = useState(false);
   const openedGroups = useRef<string[]>([]);
   const [openedGroupsMap, setOpenedGroupsMap] = useState({});
+  const { interventionId } = useContext(EditSessionPageContext);
+  const location = useLocation<JumpToScreenLocationState>();
+  const history = useHistory<JumpToScreenLocationState>();
 
   const groupIds = useMemo(() => groups.map(({ id }) => id), [groups]);
 
@@ -297,9 +307,21 @@ const EditClassicSessionPage = ({
     onMouseLeave: () => setShowList(false),
   };
 
+  const selectQuestionIfRedirectedFromSessionMap = () => {
+    const questionToSelectId = location.state?.selectedQuestionId;
+    if (questionToSelectId) {
+      selectQuestion(questionToSelectId);
+    }
+  };
+
   useEffect(() => {
     getQuestionGroups(sessionId);
   }, []);
+
+  useEffect(() => {
+    selectQuestionIfRedirectedFromSessionMap();
+    clearLocationState(location);
+  }, [questions]);
 
   const onCreateQuestion = (type: string) => {
     createQuestion(
@@ -414,6 +436,11 @@ const EditClassicSessionPage = ({
   const filteredGroups = groups.filter(
     (group) => group.type !== FinishGroupType,
   );
+
+  const goToSessionMap = () => {
+    const url = `/interventions/${interventionId}/sessions/${sessionId}/map`;
+    history.push(url, { selectedQuestionId: selectedQuestion });
+  };
 
   return (
     <>
@@ -569,7 +596,10 @@ const EditClassicSessionPage = ({
               currentGroupScope={currentGroupScope}
               sessionId={sessionId}
             />
-            <QuestionSettings />
+            {
+              // @ts-ignore
+              <QuestionSettings onGoToSessionMapClick={goToSessionMap} />
+            }
           </Row>
         </Column>
       </Row>
@@ -594,6 +624,7 @@ const mapDispatchToProps = {
   shareQuestionsToResearchers: shareQuestionsToResearchersRequest,
   changeGroupName: changeGroupNameRequest,
   getQuestionGroups: getQuestionGroupsRequest,
+  selectQuestion: selectQuestionAction,
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

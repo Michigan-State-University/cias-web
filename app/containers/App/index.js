@@ -9,6 +9,7 @@
 
 import React, { useEffect } from 'react';
 import { Redirect, Switch } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -69,11 +70,12 @@ import { TOOLTIP_PORTAL_ID } from './constants';
 
 export function App({ user, fetchSelfDetails }) {
   const { locale, formatMessage } = useIntl();
+  const { pathname } = useLocation();
   useInjectSaga({ key: 'app', saga: rootSaga });
   useInjectSaga({ key: 'fetchSelfDetails', saga: fetchSelfDetailsSaga });
 
   useEffect(() => {
-    if (user) {
+    if (user && !pathname.includes('/preview')) {
       fetchSelfDetails();
     }
   }, []);
