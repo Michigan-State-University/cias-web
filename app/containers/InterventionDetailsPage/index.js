@@ -142,6 +142,7 @@ export function InterventionDetailsPage({
     userId: interventionOwnerId,
     languageName,
     googleLanguageId,
+    hasCatSessions,
   } = intervention || {};
 
   const editingPossible = canEdit(status);
@@ -390,6 +391,12 @@ export function InterventionDetailsPage({
           <SelectResearchers
             onResearchersSelected={copyInterventionToResearchers}
             onClose={closeSendCopyModal}
+            {...(hasCatSessions
+              ? {
+                  filterParams: { withCatAbility: hasCatSessions },
+                  filterWarning: formatMessage(messages.filterWarning),
+                }
+              : {})}
           />
         </Modal>
 

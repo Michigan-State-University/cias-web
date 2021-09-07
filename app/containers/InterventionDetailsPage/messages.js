@@ -126,4 +126,9 @@ export default defineMessages({
     id: `${scope}.translateInterventionModalLabel`,
     defaultMessage: 'Translate Intervention',
   },
+  filterWarning: {
+    id: `${scope}.filterWarning`,
+    defaultMessage:
+      'The researchers without permission to create a CAT-MH session do not appear on the list',
+  },
 });
