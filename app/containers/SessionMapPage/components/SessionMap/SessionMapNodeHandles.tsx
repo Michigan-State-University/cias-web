@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Position } from 'react-flow-renderer';
 
-import { SourceHandle, TargetHandle } from './styled';
+import { SourceHandle, TargetHandle } from '../styled';
 
 type Props = {
   nodeId: string;
