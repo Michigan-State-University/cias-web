@@ -42,7 +42,7 @@ export default defineMessages({
     defaultMessage: 'Zoom Out',
   },
   redirectionTo: {
-    id: `${scope}.sessionNo`,
+    id: `${scope}.redirectionTo`,
     defaultMessage: 'Redirection to Session {no}',
   },
   sessionNo: {
