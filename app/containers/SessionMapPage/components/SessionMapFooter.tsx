@@ -30,7 +30,7 @@ const SessionMapFooter = ({
   const { formatMessage } = useIntl();
 
   return (
-    <Row justify="between" align="end" py={20}>
+    <Row justify="between" align="end" pt={20}>
       <Row align="center" />
       <Row align="center">
         {afterPreview && (

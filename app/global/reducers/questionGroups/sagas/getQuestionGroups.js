@@ -30,8 +30,8 @@ function* getQuestionsGroups({ payload: { sessionId } }) {
     );
     yield put(getQuestionsSuccess(mappedQuestions));
     if (!isEmpty(sortedQuestions) && sortedQuestions[0].narrator.blocks[0]) {
-      const position = sortedQuestions[0].narrator.blocks[0].endPosition;
-      yield put(setAnimationStopPosition(position.x, position.y));
+      const { x, y } = sortedQuestions[0].narrator.blocks[0].endPosition;
+      yield put(setAnimationStopPosition(x, y));
     }
     yield put(getQuestionGroupsSuccess(sortedGroups));
   } catch (error) {
