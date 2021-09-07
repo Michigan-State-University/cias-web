@@ -106,4 +106,8 @@ export default defineMessages({
     id: `${scope}.saveChanges`,
     defaultMessage: 'Save changes',
   },
+  creationDate: {
+    id: `${scope}.creationDate`,
+    defaultMessage: 'Creation date:',
+  },
 });

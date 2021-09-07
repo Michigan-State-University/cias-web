@@ -5,7 +5,7 @@ import { useInjectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
 import isEqual from 'lodash/isEqual';
 
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   bulkEditSessionRequest,
@@ -22,6 +22,7 @@ import ApiSelect from 'components/Select/ApiSelect';
 import Button from 'components/Button';
 
 import StyledInput from 'components/Input/StyledInput';
+import dayjs from 'dayjs';
 import messages from './messages';
 import { EditCatSessionState } from './types';
 import CatMhTests from '../../components/CatMhTests';
@@ -46,6 +47,7 @@ const EditCatSession = ({
     catMhTimeFrameId,
     googleTtsVoice,
     catMhTestTypes,
+    createdAt,
   } = session;
   useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
   const { formatMessage } = useIntl();
@@ -177,9 +179,23 @@ const EditCatSession = ({
         boxShadow={`0px 4px 20px ${colors.selago}`}
         height="100%"
       >
-        <Text fontSize={20} fontWeight="bold">
-          {formatMessage(messages.generalSettings)}
-        </Text>
+        <Box height={35} display="flex" justify="between" align="center">
+          <Text fontSize={20} fontWeight="bold">
+            {formatMessage(messages.generalSettings)}
+          </Text>
+          <Box display="flex" justify="center" align="center">
+            <Text lineHeight="26px" mr={5} color={themeColors.comment}>
+              {formatMessage(messages.creationDate)}
+            </Text>
+            <Text
+              fontWeight="bold"
+              lineHeight="26px"
+              color={themeColors.primary}
+            >
+              {dayjs(createdAt).format('MM-DD-YYYY')}
+            </Text>
+          </Box>
+        </Box>
         <Row my={30}>
           <Divider />
         </Row>
