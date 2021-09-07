@@ -13,9 +13,11 @@ import Radio from 'components/Radio';
 import Row from 'components/Row';
 import { ScrollFogBox } from 'components/Box/ScrollFog';
 import { StripedTR, Table, TBody, TD, TH, THead } from 'components/Table';
+import { HiddenText } from 'components/Text';
 
 import messages from './messages';
 import { FirstTH } from './styled';
+import { generateGridAnswerId, generateGridQuestionId } from '../utils';
 
 const IS_SMALL_SCREEN = 'IS_SMALL_SCREEN';
 const SCROLL_FOG_BOX = 'SCROLL_FOG_BOX';
@@ -81,7 +83,9 @@ const GridQuestionLayout = ({
                   scope="col"
                   key={`question-${questionId}-col-th-${columnIndex}`}
                 >
-                  <Column>{column.payload}</Column>
+                  <Column id={generateGridAnswerId(columnIndex)}>
+                    {column.payload}
+                  </Column>
                 </TH>
               ))}
             </StripedTR>
@@ -100,6 +104,7 @@ const GridQuestionLayout = ({
                     width="max-content"
                     height="inherit"
                     padding={5}
+                    id={generateGridQuestionId(rowIndex)}
                   >
                     {row.payload}
                   </Column>
@@ -108,25 +113,24 @@ const GridQuestionLayout = ({
                 {columns.map((column, columnIndex) => {
                   const isChecked =
                     selectedAnswersIndex[rowIndex] === columnIndex;
-                  const ariaLabel = formatMessage(messages.gridLabel, {
-                    questionIndex: rowIndex + 1,
-                    questionText: row.payload,
-                    answerIndex: columnIndex + 1,
-                    answerText: column.payload,
-                  });
+
+                  const cellId = `cell-${rowIndex}-${columnIndex}`;
 
                   return (
                     <TD
                       key={`question-${questionId}-row-cell-${rowIndex}-${columnIndex}`}
                     >
                       <Row
-                        width={elements.grid.colWidth}
+                        width="100%"
+                        minWidth={elements.grid.colWidth}
                         align="center"
                         justify="center"
                       >
                         <Radio
-                          id={`question-${questionId}-cell-${rowIndex}-${columnIndex}`}
-                          aria-label={ariaLabel}
+                          id={cellId}
+                          aria-labelledby={`${cellId} ${generateGridQuestionId(
+                            rowIndex,
+                          )} ${generateGridAnswerId(columnIndex)}`}
                           checked={isChecked}
                           onChange={handleClick(
                             column,
@@ -134,7 +138,14 @@ const GridQuestionLayout = ({
                             rowIndex,
                             columnIndex,
                           )}
-                        />
+                        >
+                          <HiddenText>
+                            {formatMessage(messages.gridLabel, {
+                              questionIndex: rowIndex + 1,
+                              answerIndex: columnIndex + 1,
+                            })}
+                          </HiddenText>
+                        </Radio>
                       </Row>
                     </TD>
                   );

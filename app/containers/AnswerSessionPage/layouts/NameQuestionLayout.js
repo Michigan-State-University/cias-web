@@ -2,12 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-grid-system';
 
+import { themeColors } from 'theme';
+
 import ApprovableInput from 'components/Input/ApprovableInput';
 import TextVoicePreviewInput from 'components/Input/TextVoicePreviewInput';
 import Box from 'components/Box';
-import { themeColors } from 'theme';
+import Text from 'components/Text';
 
 import messages from './messages';
+import {
+  NAME_QUESTION_NAME_ID,
+  NAME_QUESTION_SPELL_NAME_ID,
+} from '../constants';
 
 const NameQuestionLayout = ({
   onChange,
@@ -37,6 +43,10 @@ const NameQuestionLayout = ({
     <Container fluid>
       <Row>
         <Col sm={12} md={mdColSize}>
+          <Text id={NAME_QUESTION_NAME_ID}>
+            {formatMessage(messages.enterName)}
+          </Text>
+
           <Box
             bg={themeColors.highlight}
             minWidth={300}
@@ -52,11 +62,15 @@ const NameQuestionLayout = ({
               onCheck={handleNameChange}
               styles={inputStyles}
               disabled={disabled}
-              ariaLabel={formatMessage(messages.enterName)}
+              aria-labelledby={NAME_QUESTION_NAME_ID}
             />
           </Box>
         </Col>
         <Col sm={12} md={mdColSize}>
+          <Text id={NAME_QUESTION_SPELL_NAME_ID}>
+            {formatMessage(messages.enterNamePhonetically)}
+          </Text>
+
           <TextVoicePreviewInput
             phoneticUrl={phoneticUrl}
             phoneticLoading={phoneticLoading}
@@ -66,7 +80,7 @@ const NameQuestionLayout = ({
             onTextReady={handlePhoneticNameChange}
             styles={inputStyles}
             disabled={disabled}
-            ariaLabel={formatMessage(messages.enterNamePhonetically)}
+            aria-labelledby={NAME_QUESTION_SPELL_NAME_ID}
           />
         </Col>
       </Row>

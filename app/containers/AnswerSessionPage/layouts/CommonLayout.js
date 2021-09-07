@@ -14,6 +14,7 @@ import Tooltip from 'components/Tooltip';
 import OriginalTextHover from 'components/OriginalTextHover';
 
 import { Player, PlayerWrapper, ImageWrapper, MarkupContainer } from './styled';
+import { QUESTION_SUBTITLE_ID, QUESTION_TITLE_ID } from '../constants';
 
 const CommonLayout = ({
   currentQuestion,
@@ -48,7 +49,7 @@ const CommonLayout = ({
               text={originalText?.title}
               hidden={!showOriginalText}
             >
-              <MarkupContainer>
+              <MarkupContainer id={QUESTION_TITLE_ID}>
                 <Markup content={title} noWrap />
               </MarkupContainer>
             </OriginalTextHover>
@@ -64,7 +65,7 @@ const CommonLayout = ({
               hidden={!showOriginalText}
             >
               <Row align="start" justify="between">
-                <MarkupContainer>
+                <MarkupContainer id={QUESTION_SUBTITLE_ID}>
                   <Markup content={subtitle} />
                 </MarkupContainer>
                 {settingsRequired && (

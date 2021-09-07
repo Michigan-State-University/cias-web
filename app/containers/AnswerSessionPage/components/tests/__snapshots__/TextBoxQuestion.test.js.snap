@@ -101,7 +101,7 @@ exports[`<TextBoxQuestion /> Should render and match the snapshot 1`] = `
         class="c2"
       >
         <textarea
-          aria-label="Enter your response here"
+          aria-labelledby="question-title question-subtitle"
           class="c3"
           maxlength="250"
           placeholder="Enter your response here"

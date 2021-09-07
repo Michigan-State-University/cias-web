@@ -3534,7 +3534,7 @@ exports[`<QuestionDetails /> should match the snapshot 1`] = `
                           class="c16"
                         >
                           <input
-                            aria-label="Respondent answer goes here..."
+                            aria-labelledby="question-title question-subtitle"
                             class="c27"
                             disabled=""
                             height="60"

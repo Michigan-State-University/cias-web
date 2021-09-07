@@ -104,7 +104,7 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
           class="c3"
         >
           <input
-            aria-label="Provide a numeric value:"
+            aria-labelledby="question-title question-subtitle"
             class="c4"
             height="50"
             placeholder="ex: 1, 2, 100"

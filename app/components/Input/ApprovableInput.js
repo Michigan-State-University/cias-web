@@ -80,6 +80,7 @@ const ApprovableInput = ({
   styles,
   minDate,
   ariaLabel,
+  'aria-labelledby': ariaLabelledBy,
   id,
 }) => {
   const [value, setValue] = useState(propsValue);
@@ -192,6 +193,7 @@ const ApprovableInput = ({
           transparent
           disabled={disabled}
           aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
           id={id}
         />
       );
@@ -248,6 +250,7 @@ const ApprovableInput = ({
         fontSize={fontSize}
         padding={padding}
         aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
         id={id}
         {...styles}
       />
@@ -289,6 +292,7 @@ ApprovableInput.propTypes = {
   minDate: PropTypes.object,
   styles: PropTypes.object,
   ariaLabel: PropTypes.string,
+  'aria-labelledby': PropTypes.string,
   id: PropTypes.string,
 };
 

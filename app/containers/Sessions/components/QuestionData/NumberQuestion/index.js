@@ -17,6 +17,11 @@ import {
   updateQuestionData,
 } from 'global/reducers/questions';
 
+import {
+  QUESTION_SUBTITLE_ID,
+  QUESTION_TITLE_ID,
+} from 'containers/AnswerSessionPage/constants';
+
 import messages from './messages';
 import { UPDATE_DATA } from './constants';
 
@@ -47,6 +52,7 @@ const NumberQuestion = ({
             onCheck={(newTitle) =>
               updateAnswer({ variable, payload: newTitle })
             }
+            aria-labelledby={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
             disabled
           />
         </Row>

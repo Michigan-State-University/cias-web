@@ -95,8 +95,7 @@ export default defineMessages({
   },
   gridLabel: {
     id: `${scope}.gridLabel`,
-    defaultMessage:
-      'Question {questionIndex}: {questionText}; Answer {answerIndex}: {answerText}.',
+    defaultMessage: 'Question {questionIndex} and Answer {answerIndex}',
   },
   numberQuestionLabel: {
     id: `${scope}.numberQuestionLabel`,
