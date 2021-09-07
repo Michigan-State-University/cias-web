@@ -7,9 +7,9 @@ import { finishQuestion } from 'models/Session/QuestionTypes';
 import { themeColors } from 'theme';
 import Box from 'components/Box';
 
-import messages from '../messages';
-import { QuestionTileData } from '../types';
-import { sessionMapColors } from '../constants';
+import messages from '../../messages';
+import { QuestionTileData } from '../../types';
+import { sessionMapColors } from '../../constants';
 import SessionMapNodeHandles from './SessionMapNodeHandles';
 import SessionMapQuestionNodeDetailedInfo from './SessionMapQuestionNodeDetailedInfo';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';

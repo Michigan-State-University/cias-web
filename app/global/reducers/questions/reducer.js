@@ -91,7 +91,7 @@ export const questionsReducer = (state = initialState, action) =>
   produce(state, (draft) => {
     switch (action.type) {
       case SELECT_QUESTION:
-        draft.selectedQuestion = action.payload.index;
+        draft.selectedQuestion = action.payload.id;
         break;
 
       case CREATE_QUESTION_REQUEST:
