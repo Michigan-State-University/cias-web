@@ -2,19 +2,17 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
-import { QuestionTypes } from 'models/Session/QuestionTypes';
-import globalMessages from 'global/i18n/globalMessages';
 import { Question } from 'global/types/question';
 
 import { themeColors } from 'theme';
-import StyledCircle from 'components/Circle/StyledCircle';
 import Text from 'components/Text';
 import Divider from 'components/Divider';
-import Switch from 'components/Switch';
+import Switch, { LabelPosition } from 'components/Switch';
 import EllipsisText from 'components/Text/EllipsisText';
 import Row from 'components/Row';
+import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 
-import messages from '../messages';
+import messages from '../../messages';
 
 type Props = {
   question: Question;
@@ -36,21 +34,14 @@ const SessionMapQuestionNodeDetailedInfo = ({
 
   return (
     <div>
-      <Row align="center" mb={9}>
-        <StyledCircle
-          background={
-            QuestionTypes.find(({ id: typeId }) => typeId === type)?.color
-          }
-          size="7px"
-          mr={6}
-        />
-        <Text fontSize={10} fontWeight="medium" color={themeColors.comment}>
-          {
-            // @ts-ignore
-            formatMessage(globalMessages.questionTypes[type])
-          }
-        </Text>
-      </Row>
+      <QuestionTypeIndicator
+        type={type}
+        iconSize="7px"
+        fontSize={10}
+        fontWeight="medium"
+        mb={9}
+        gap={6}
+      />
       <EllipsisText
         text={htmlToPlainText(subtitle)}
         dataFor={id}
@@ -60,11 +51,12 @@ const SessionMapQuestionNodeDetailedInfo = ({
         width={160}
       />
       <Divider my={16} />
-      <Row align="center">
+      <Row>
         <Switch
           checked={showDetails}
           onToggle={handleToggle}
           id={`show-details-switch-${id}`}
+          labelPosition={LabelPosition.Right}
         >
           <Text
             ml={5}

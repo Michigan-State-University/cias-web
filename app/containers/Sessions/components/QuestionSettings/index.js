@@ -9,6 +9,7 @@ import Box from 'components/Box';
 import H2 from 'components/H2';
 import Row from 'components/Row';
 import Icon from 'components/Icon';
+import Button from 'components/Button';
 import gear from 'assets/svg/gear-white-background.svg';
 import cross from 'assets/svg/cross-white-small.svg';
 import { useInjectSaga } from 'redux-injectors';
@@ -31,6 +32,7 @@ const QuestionSettings = ({
   toggleSettings,
   intl: { formatMessage },
   questionsLength,
+  onGoToSessionMapClick,
 }) => {
   useInjectSaga({
     key: 'updateQuestionSettings',
@@ -47,6 +49,11 @@ const QuestionSettings = ({
             <H2>{formatMessage(messages.header)}</H2>
           </Row>
           <Settings />
+          <Button
+            onClick={onGoToSessionMapClick}
+            width={175}
+            title={formatMessage(messages.goToSessionMap)}
+          />
         </Box>
       </SettingsBar>
       <OpenButton
@@ -65,6 +72,7 @@ QuestionSettings.propTypes = {
   settingsVisibility: PropTypes.bool,
   toggleSettings: PropTypes.func,
   questionsLength: PropTypes.number,
+  onGoToSessionMapClick: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
