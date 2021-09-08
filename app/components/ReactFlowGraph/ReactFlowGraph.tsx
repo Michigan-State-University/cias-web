@@ -1,0 +1,262 @@
+import React, { memo, useEffect, useMemo, useState } from 'react';
+import ReactFlow, {
+  ConnectionLineType,
+  Elements,
+  FlowTransform,
+  NodeTypesType,
+  ReactFlowProps,
+  useStoreState,
+  useZoomPanHelper,
+} from 'react-flow-renderer';
+import isEqual from 'lodash/isEqual';
+
+import Row from 'components/Row';
+import Column from 'components/Column';
+import Scrollbar from 'components/Scrollbar';
+
+import {
+  areTransformsDifferent,
+  calculateAxisTransform,
+  calculateMinZoom,
+  calculateScrollbarPositionRatio,
+  calculateScrollbarSizeRatio,
+  calculateTransformToFitNodeInView,
+  calculateTransformToFitViewInContainer,
+  layoutElements,
+} from './utils';
+
+type Props = {
+  defaultMinZoom?: number;
+  defaultMaxZoom?: number;
+  defaultZoom?: number;
+  zoom: number;
+  onZoomChange: (zoom: number) => void;
+  minZoom?: number;
+  onMinZoomChange?: (minZoom: number) => void;
+  elements: Elements;
+  nodeTypes: NodeTypesType;
+  getNodeVerticalDistanceRatio?: (type?: string) => number;
+  nodeTopMargin?: number;
+  pickedNodeId?: string;
+  children?: React.ReactNode | React.ReactNode[];
+};
+
+const ReactFlowGraph = ({
+  defaultMinZoom,
+  defaultMaxZoom,
+  defaultZoom = 1,
+  zoom,
+  onZoomChange,
+  minZoom,
+  onMinZoomChange,
+  elements,
+  nodeTypes,
+  getNodeVerticalDistanceRatio = () => 1,
+  nodeTopMargin = 0,
+  pickedNodeId,
+  children,
+}: Props): JSX.Element => {
+  const { zoomTo, transform } = useZoomPanHelper();
+  const containerWidth = useStoreState((state) => state.width);
+  const containerHeight = useStoreState((state) => state.height);
+  const renderedNodes = useStoreState((state) => state.nodes);
+
+  const [mapLoaded, setMapLoaded] = useState(false);
+
+  const [currentTransform, setCurrentTransform] = useState<FlowTransform>({
+    x: 0,
+    y: 0,
+    zoom,
+  });
+
+  const [horizontalScrollbarSizeRatio, setHorizontalScrollbarSizeRatio] =
+    useState(0);
+  const [verticalScrollbarSizeRatio, setVerticalScrollbarSizeRatio] =
+    useState(0);
+
+  const [
+    horizontalScrollbarPositionRatio,
+    setHorizontalScrollbarPositionRatio,
+  ] = useState(0);
+  const [verticalScrollbarPositionRatio, setVerticalScrollbarPositionRatio] =
+    useState(0);
+
+  useEffect(() => {
+    zoomTo(zoom);
+  }, [zoom]);
+
+  const { layoutedElements, panAreaWidth, panAreaHeight } = useMemo(
+    () =>
+      mapLoaded
+        ? layoutElements(
+            elements,
+            renderedNodes,
+            getNodeVerticalDistanceRatio,
+            nodeTopMargin,
+          )
+        : { layoutedElements: elements, panAreaWidth: 0, panAreaHeight: 0 },
+    [mapLoaded, elements],
+  );
+
+  useEffect(() => {
+    if (onMinZoomChange) {
+      onMinZoomChange(
+        calculateMinZoom(
+          panAreaWidth,
+          panAreaHeight,
+          containerWidth,
+          containerHeight,
+          defaultZoom,
+          defaultMinZoom,
+        ),
+      );
+    }
+  }, [panAreaWidth, panAreaHeight, containerWidth, containerHeight]);
+
+  useEffect(() => {
+    setHorizontalScrollbarSizeRatio(
+      calculateScrollbarSizeRatio(panAreaWidth, containerWidth, zoom),
+    );
+  }, [panAreaWidth, containerWidth, zoom]);
+
+  useEffect(() => {
+    setVerticalScrollbarSizeRatio(
+      calculateScrollbarSizeRatio(panAreaHeight, containerHeight, zoom),
+    );
+  }, [panAreaHeight, containerHeight, zoom]);
+
+  const fitPickedNodeInView = () => {
+    const pickedNode = renderedNodes.find(({ id }) => id === pickedNodeId);
+    if (!pickedNode) return;
+
+    const newTransform = calculateTransformToFitNodeInView(
+      pickedNode,
+      currentTransform,
+      containerWidth,
+      containerHeight,
+    );
+
+    if (areTransformsDifferent(currentTransform, newTransform)) {
+      transform(newTransform);
+    }
+  };
+
+  const fitViewInContainer = () => {
+    const newTransform = calculateTransformToFitViewInContainer(
+      panAreaWidth,
+      panAreaHeight,
+      currentTransform,
+      containerWidth,
+      containerHeight,
+    );
+
+    if (areTransformsDifferent(currentTransform, newTransform)) {
+      transform(newTransform);
+    }
+  };
+
+  useEffect(() => {
+    fitViewInContainer();
+    if (pickedNodeId) {
+      fitPickedNodeInView();
+    }
+  }, [containerWidth, containerHeight, renderedNodes]);
+
+  const handleScrollbarPositionRatioChange =
+    (axis: 'x' | 'y') => (newScrollbarPositionRatio: number) => {
+      const axisTransform = calculateAxisTransform(
+        newScrollbarPositionRatio,
+        axis === 'x' ? panAreaWidth : panAreaHeight,
+        zoom,
+        axis === 'x' ? containerWidth : containerHeight,
+      );
+      const newTransform = { ...currentTransform };
+      newTransform[axis] = axisTransform;
+      transform(newTransform);
+    };
+
+  const handleMove = (newTransform?: FlowTransform) => {
+    if (!newTransform || isEqual(newTransform, currentTransform)) return;
+
+    const fitsWidth = panAreaWidth * newTransform.zoom < containerWidth;
+    const fitsHeight = panAreaHeight * newTransform.zoom < containerHeight;
+
+    if (
+      (fitsWidth && newTransform.x !== 0) ||
+      (fitsHeight && newTransform.y !== 0)
+    ) {
+      const limitedTransform = {
+        zoom: newTransform.zoom,
+        x: fitsWidth ? 0 : newTransform.x,
+        y: fitsHeight ? 0 : newTransform.y,
+      };
+      transform(limitedTransform);
+      return;
+    }
+
+    setCurrentTransform(newTransform);
+    setHorizontalScrollbarPositionRatio(
+      calculateScrollbarPositionRatio(
+        newTransform.x,
+        panAreaWidth,
+        zoom,
+        containerWidth,
+      ),
+    );
+    setVerticalScrollbarPositionRatio(
+      calculateScrollbarPositionRatio(
+        newTransform.y,
+        panAreaHeight,
+        zoom,
+        containerHeight,
+      ),
+    );
+
+    if (zoom !== newTransform.zoom) onZoomChange(newTransform.zoom);
+  };
+
+  const reactFlowProps: ReactFlowProps = {
+    elements: layoutedElements,
+    nodeTypes,
+    nodesDraggable: false,
+    nodesConnectable: false,
+    translateExtent: [
+      [0, 0],
+      [panAreaWidth, panAreaHeight],
+    ],
+    minZoom,
+    maxZoom: defaultMaxZoom,
+    defaultZoom,
+    connectionLineType: ConnectionLineType.SmoothStep,
+    onLoad: () => setMapLoaded(true),
+    onMove: handleMove,
+  };
+
+  return (
+    <>
+      <Row filled>
+        <Column cursor="grab">
+          <ReactFlow {...reactFlowProps}>{children}</ReactFlow>
+        </Column>
+        <Scrollbar
+          sizeRatio={verticalScrollbarSizeRatio}
+          positionRatio={verticalScrollbarPositionRatio}
+          onPositionRatioChange={handleScrollbarPositionRatioChange('y')}
+          margin={15}
+        />
+      </Row>
+      <Row gap={20}>
+        <Scrollbar
+          horizontal
+          sizeRatio={horizontalScrollbarSizeRatio}
+          positionRatio={horizontalScrollbarPositionRatio}
+          onPositionRatioChange={handleScrollbarPositionRatioChange('x')}
+          margin={15}
+        />
+        <div />
+      </Row>
+    </>
+  );
+};
+
+export default memo(ReactFlowGraph);
