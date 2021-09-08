@@ -15,6 +15,7 @@ import { SessionDto } from 'models/Session/SessionDto';
 
 import Row from 'components/Row';
 import Column from 'components/Column';
+import Scrollbar from 'components/Scrollbar';
 
 import SessionMapQuestionNode from './SessionMapQuestionNode';
 import SessionMapCustomArrowHead from './SessionMapCustomArrowHead';
@@ -39,7 +40,6 @@ import {
   detailedInfoZoomThreshold,
   NodeType,
 } from '../../constants';
-import SessionMapScrollbar from '../SessionMapScrollbar';
 import SessionMapSessionNode from './SessionMapSessionNode';
 
 const nodeTypes: NodeTypesType = {
@@ -285,18 +285,20 @@ const SessionMap = ({
             />
           </ReactFlow>
         </Column>
-        <SessionMapScrollbar
+        <Scrollbar
           sizeRatio={verticalScrollbarSizeRatio}
           positionRatio={verticalScrollbarPositionRatio}
           onPositionRatioChange={handleScrollbarPositionRatioChange('y')}
+          margin={15}
         />
       </Row>
       <Row gap={20}>
-        <SessionMapScrollbar
+        <Scrollbar
           horizontal
           sizeRatio={horizontalScrollbarSizeRatio}
           positionRatio={horizontalScrollbarPositionRatio}
           onPositionRatioChange={handleScrollbarPositionRatioChange('x')}
+          margin={15}
         />
         <div />
       </Row>
