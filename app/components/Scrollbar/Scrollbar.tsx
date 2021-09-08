@@ -39,7 +39,11 @@ const Scrollbar = ({
       current: { offsetWidth, offsetHeight },
     } = containerRef;
     return horizontal ? offsetWidth : offsetHeight;
-  }, [containerRef.current?.offsetHeight, containerRef.current?.offsetWidth]);
+  }, [
+    containerRef.current?.offsetHeight,
+    containerRef.current?.offsetWidth,
+    horizontal,
+  ]);
 
   const scrollbarSize = useMemo(
     () => Math.round(sizeRatio * containerSize),
@@ -71,7 +75,7 @@ const Scrollbar = ({
         newPositionOnAxis / (containerSize - scrollbarSize),
       );
     },
-    [containerSize, scrollbarSize],
+    [containerSize, scrollbarSize, onPositionRatioChange, horizontal],
   );
 
   const containerThickness = useMemo(
