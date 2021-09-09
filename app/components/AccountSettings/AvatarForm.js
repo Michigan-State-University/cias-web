@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import Row from 'components/Row';
 import { themeColors } from 'theme';
 
@@ -37,7 +37,7 @@ const AvatarForm = ({
 
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={confirmationOpen}
         onClose={closeConfirmation}
         description={<FormattedMessage {...messages.removeConfirmation} />}

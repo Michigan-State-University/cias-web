@@ -7,8 +7,6 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import Accordion from 'components/Accordion';
-import globalMessages from 'global/i18n/globalMessages';
 import { getNarratorPositionWhenBlockIsRemoved } from 'utils/getNarratorPosition';
 import { reorder } from 'utils/reorder';
 import blurDocument from 'utils/blurDocument';
@@ -24,11 +22,16 @@ import {
   changeCurrentNarratorBlock,
   makeSelectCurrentNarratorBlockIndex,
 } from 'global/reducers/localState';
-
 import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
+import globalMessages from 'global/i18n/globalMessages';
 import { feedbackBlockType } from 'models/Narrator/BlockTypes';
+
+import { ModalType, useModal } from 'components/Modal';
+import Accordion from 'components/Accordion';
+
 import { getBlockColor, renderBlock } from '../utils';
 import { removeBlock, reorderNarratorBlocks } from '../../actions';
+import messages from '../messages';
 
 const WrappedAccordion = ({
   id,
@@ -96,39 +99,56 @@ const WrappedAccordion = ({
     reorderBlocks(newList);
   };
 
+  const {
+    openModal: openDeleteModal,
+    Modal: DeleteModal,
+    modalState: blockToDeleteIndex,
+  } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteBlockHeader),
+      content: formatMessage(messages.deleteBlockMessage),
+      confirmAction: () => handleDelete(blockToDeleteIndex),
+    },
+  });
+
   return (
-    <Accordion
-      data-cy="narrator-blocks"
-      disabled={disabled}
-      opened={narratorBlockIndex}
-      setOpened={changeNarratorBlockIndex}
-      onHide={hideAccordion}
-      onOpen={openAccordion}
-      onReorder={handleReorder}
-      onDelete={handleDelete}
-    >
-      {narrator &&
-        map(narrator.blocks, (block, blockIndex) => (
-          <div
-            data-cy={`narrator-block-${blockIndex}`}
-            key={`${id}-narrator-block-${blockIndex}`}
-            color={getBlockColor(block.type, { animation, voice })}
-            deleteActive={block.type !== feedbackBlockType}
-            label={`${blockIndex + 1}. ${formatMessage(
-              globalMessages.blockTypes[block.type],
-            )}`}
-          >
-            {renderBlock(
-              block,
-              blockIndex,
-              id,
-              formatMessage,
-              disabled,
-              !animation,
-            )}
-          </div>
-        ))}
-    </Accordion>
+    <>
+      <DeleteModal />
+
+      <Accordion
+        data-cy="narrator-blocks"
+        disabled={disabled}
+        opened={narratorBlockIndex}
+        setOpened={changeNarratorBlockIndex}
+        onHide={hideAccordion}
+        onOpen={openAccordion}
+        onReorder={handleReorder}
+        onDelete={openDeleteModal}
+      >
+        {narrator &&
+          map(narrator.blocks, (block, blockIndex) => (
+            <div
+              data-cy={`narrator-block-${blockIndex}`}
+              key={`${id}-narrator-block-${blockIndex}`}
+              color={getBlockColor(block.type, { animation, voice })}
+              deleteActive={block.type !== feedbackBlockType}
+              label={`${blockIndex + 1}. ${formatMessage(
+                globalMessages.blockTypes[block.type],
+              )}`}
+            >
+              {renderBlock(
+                block,
+                blockIndex,
+                id,
+                formatMessage,
+                disabled,
+                !animation,
+              )}
+            </div>
+          ))}
+      </Accordion>
+    </>
   );
 };
 

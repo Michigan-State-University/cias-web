@@ -17,12 +17,14 @@ import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 
 import { colors, themeColors } from 'theme';
 
+import VariableChooser from 'containers/VariableChooser';
+
 import Column from 'components/Column';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import { StyledInput } from 'components/Input/StyledInput';
-import VariableChooser from 'containers/VariableChooser';
+import { ModalType, useModal } from 'components/Modal';
 
 import { DashedBox } from './styled';
 import messages from './messages';
@@ -68,8 +70,31 @@ function BranchingLayout({
     setTargetChooserOpen(value ? index : -1);
   };
 
+  const handleDeleteClick = (index, questionId) =>
+    openDeleteModal({ index, questionId });
+
+  const handleDeleteConfirm = () => {
+    const { index, questionId } = caseToDelete;
+    return onRemoveCase(index, questionId);
+  };
+
+  const {
+    openModal: openDeleteModal,
+    Modal: DeleteModal,
+    modalState: caseToDelete,
+  } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteCaseHeader),
+      content: formatMessage(messages.deleteCaseMessage),
+      confirmAction: handleDeleteConfirm,
+    },
+  });
+
   return (
     <>
+      <DeleteModal />
+
       <Column>
         <Row align="center" justify="between">
           {formatMessage(messages.formula)}
@@ -132,7 +157,7 @@ function BranchingLayout({
                   index={index}
                   key={index}
                   onAddTarget={() => onAddTarget(id, index)}
-                  onRemoveCase={onRemoveCase}
+                  onRemoveCase={handleDeleteClick}
                   pattern={pattern}
                   questionId={id}
                   sessionBranching={sessionBranching}

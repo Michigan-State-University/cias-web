@@ -25,7 +25,7 @@ import {
 import { setShouldRefetchAction } from 'global/reducers/organizations';
 
 import Text from 'components/Text';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import Loader from 'components/Loader';
 
 import UserDetailsUI from './UserDetailsUI';
@@ -141,7 +141,7 @@ const UserDetailsComponent = ({
         onCancel={handleCancel}
       />
 
-      <ConfirmationBox
+      <ConfirmationModal
         visible={activationModalVisible}
         onClose={closeActivationModal}
         description={modalDescription}

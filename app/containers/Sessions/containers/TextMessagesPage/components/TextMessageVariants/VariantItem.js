@@ -40,6 +40,7 @@ import {
   changeSelectedVariantId,
 } from 'global/reducers/textMessages';
 
+import { ModalType, useModal } from 'components/Modal';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessagesContext } from '../../utils';
 import messages from './messages';
@@ -88,6 +89,15 @@ const VariantItem = ({
     );
   };
 
+  const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteCaseHeader),
+      content: formatMessage(messages.deleteCaseMessage),
+      confirmAction: handleDeleteCase,
+    },
+  });
+
   return (
     <Collapse
       disabled
@@ -123,13 +133,15 @@ const VariantItem = ({
       }
     >
       <Container style={{ width: '100%' }}>
+        <DeleteModal />
+
         <Row justfy="between" align="center" style={{ marginBottom: 20 }}>
           <Col width="content">
             <Row align="center">
               <Img
                 disabled={disabled}
                 src={binNoBg}
-                onClick={handleDeleteCase}
+                onClick={openDeleteModal}
                 mr={10}
                 clickable
               />

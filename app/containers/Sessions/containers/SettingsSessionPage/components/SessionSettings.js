@@ -26,7 +26,7 @@ import globalMessages from 'global/i18n/globalMessages';
 
 import H3 from 'components/H3';
 import { LI, UL } from 'components/List';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import BadgeInput from 'components/Input/BadgeInput';
 import Option from './Option';
 import messages from './messages';
@@ -143,7 +143,7 @@ const SessionSettings = ({
 
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={isConfirmationBoxVisible}
         onClose={dismissConfirmation}
         description={getConfirmationDescription()}

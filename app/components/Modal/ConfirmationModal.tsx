@@ -1,36 +1,49 @@
 /**
  *
- * ConfirmationBox
+ * ConfirmationModal
  *
  */
 
-import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import Box from 'components/Box';
 import H1 from 'components/H1';
 import ErrorAlert from 'components/ErrorAlert';
-import Modal, { MODAL_TITLE_ID } from 'components/Modal';
 import Button from 'components/Button';
 import Row from 'components/Row';
 import Column from 'components/Column';
 
 import messages from './messages';
+import Modal from './Modal';
+import { MODAL_TITLE_ID } from './constants';
 
-const ConfirmationBox = ({
-  visible,
-  description,
+export type Props = {
+  visible: boolean;
+  description: ReactNode;
+  onClose: () => void;
+  confirmAction: () => void;
+  loading: boolean;
+  error?: string | object;
+  content: ReactNode;
+  confirmationButtonColor: string;
+  contentStyles?: Record<string, unknown>;
+  contentContainerStyles?: Record<string, unknown>;
+} & Record<string, unknown>;
+
+const ConfirmationModal = ({
+  visible = false,
+  description = <FormattedMessage {...messages.defaultDescription} />,
   onClose,
   confirmAction,
-  loading,
+  loading = false,
   error,
   content,
-  confirmationButtonColor,
+  confirmationButtonColor = 'warning',
   contentStyles,
   contentContainerStyles,
   ...modalStyles
-}) => {
+}: Props): JSX.Element => {
   const onConfirm = useCallback(() => {
     confirmAction();
     onClose();
@@ -48,9 +61,11 @@ const ConfirmationBox = ({
           </Box>
         )}
         <Row mt={25}>
+          {/* @ts-ignore */}
           <Button inverted hoverable onClick={onClose} type="button" mr={25}>
             <FormattedMessage {...messages.cancel} />
           </Button>
+          {/* @ts-ignore */}
           <Button
             color={confirmationButtonColor}
             hoverable
@@ -64,35 +79,14 @@ const ConfirmationBox = ({
           </Button>
         </Row>
       </Column>
+      {/* @ts-ignore */}
       {error && <ErrorAlert fullWidth errorText={error} />}
     </Modal>
   );
 };
 
-ConfirmationBox.propTypes = {
-  visible: PropTypes.bool,
-  title: PropTypes.node,
-  content: PropTypes.node,
-  onClose: PropTypes.func,
-  confirmAction: PropTypes.func,
-  loading: PropTypes.bool,
-  error: PropTypes.array,
-  description: PropTypes.node,
-  maxWidth: PropTypes.number,
-  confirmationButtonColor: PropTypes.string,
-  contentStyles: PropTypes.object,
-  contentContainerStyles: PropTypes.object,
-};
-
-ConfirmationBox.defaultProps = {
-  onClose: () => {},
-  confirmAction: () => {},
-  loading: false,
-  error: null,
-  visible: false,
-  description: <FormattedMessage {...messages.defaultDescription} />,
+ConfirmationModal.defaultProps = {
   maxWidth: 500,
-  confirmationButtonColor: 'warning',
 };
 
-export default ConfirmationBox;
+export default ConfirmationModal;

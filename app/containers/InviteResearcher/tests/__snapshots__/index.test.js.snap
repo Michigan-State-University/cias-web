@@ -180,6 +180,14 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   width: 1px;
 }
 
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
 .c4 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -213,14 +221,6 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   width: 100%;
   margin: 0 !important;
   padding: 0 !important;
-}
-
-.c5 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 25px;
-  line-height: 130%;
-  color: #2F3850;
 }
 
 .c7 {
@@ -672,6 +672,14 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   width: 1px;
 }
 
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
 .c4 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -705,14 +713,6 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   width: 100%;
   margin: 0 !important;
   padding: 0 !important;
-}
-
-.c5 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 25px;
-  line-height: 130%;
-  color: #2F3850;
 }
 
 .c7 {
@@ -1157,6 +1157,14 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   width: 1px;
 }
 
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
 .c4 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1190,14 +1198,6 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   width: 100%;
   margin: 0 !important;
   padding: 0 !important;
-}
-
-.c5 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 25px;
-  line-height: 130%;
-  color: #2F3850;
 }
 
 .c7 {

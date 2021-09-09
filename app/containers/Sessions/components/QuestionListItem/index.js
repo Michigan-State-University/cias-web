@@ -45,7 +45,7 @@ import {
 } from 'models/Session/QuestionTypes';
 import Box from 'components/Box';
 import Checkbox from 'components/Checkbox';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import Text from 'components/Text';
 import scrollByRef from 'utils/scrollByRef';
 import VariableInput from '../QuestionDetails/VariableInput';
@@ -189,7 +189,7 @@ const QuestionListItem = ({
         disableSessionCopy
         pasteText={formatMessage(messages.pasteQuestion)}
       />
-      <ConfirmationBox
+      <ConfirmationModal
         visible={deleteOpen}
         onClose={() => setDeleteOpen(false)}
         description={formatMessage(messages.deleteModalTitle)}

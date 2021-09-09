@@ -66,7 +66,7 @@ import {
   teamsTabId,
 } from 'utils/defaultNavbarTabs';
 
-import { TOOLTIP_PORTAL_ID } from './constants';
+import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
 
 export function App({ user, fetchSelfDetails }) {
   const { locale, formatMessage } = useIntl();
@@ -145,6 +145,7 @@ export function App({ user, fetchSelfDetails }) {
       <IdleTimer />
 
       <div id={TOOLTIP_PORTAL_ID} />
+      <div id={MODAL_PORTAL_ID} />
 
       <Switch>
         <AppRoute

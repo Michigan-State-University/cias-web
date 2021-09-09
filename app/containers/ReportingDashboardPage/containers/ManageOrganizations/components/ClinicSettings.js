@@ -24,7 +24,7 @@ import {
 
 import { Col, Row } from 'components/ReactGridSystem';
 import Loader from 'components/Loader';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 
 import { DeleteEntityModal } from '../Modals';
 import TopPanelComponent from './TopPanelComponent';
@@ -100,7 +100,7 @@ const ClinicSettings = ({
 
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={isDeleteModalOpen}
         onClose={closeDeleteModal}
         description={formatMessage(messages.deleteEntityModalTitle, {

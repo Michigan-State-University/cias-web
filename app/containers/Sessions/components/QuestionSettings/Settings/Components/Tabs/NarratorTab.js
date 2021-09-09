@@ -29,7 +29,7 @@ import { makeSelectQuestionGroupsIds } from 'global/reducers/questionGroups';
 
 import bulb from 'assets/svg/bulb.svg';
 
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import InfoBox from 'components/Box/InfoBox';
 import Img from 'components/Img';
 import { LI, UL } from 'components/List';
@@ -124,7 +124,7 @@ const NarratorTab = ({
 
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={isConfirmationBoxVisible}
         onClose={dismissConfirmation}
         description={getConfirmationDescription()}
