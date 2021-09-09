@@ -122,7 +122,15 @@ const sessionReducer = (state = initialState, action) =>
         set(draft.session, action.payload.path, action.payload.value);
         break;
       case BULK_EDIT_SESSION_REQUEST:
-        draft.session = { ...state.session, ...action.payload.session };
+        let newSession = action.payload.session;
+        if (action.payload.session.catTests) {
+          const { catTests, ...rest } = action.payload.session;
+          newSession = {
+            ...rest,
+            catMhTestTypes: catTests.map((id) => ({ id })),
+          };
+        }
+        draft.session = { ...state.session, ...newSession };
         break;
       case EDIT_SESSION_SUCCESS:
         draft.session = objectToCamelCase(action.payload.session);

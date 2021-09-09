@@ -24,7 +24,6 @@ export function* bulkEditSession({ payload: { session: editedSession } } = {}) {
     });
 
     yield put(editSessionSuccess(jsonApiToObject(data, 'session')));
-    yield call(toast.success, formatMessage(messages.editSessionSuccess));
   } catch (error) {
     yield call(toast.error, formatMessage(messages.editSessionError));
     yield put(editSessionError(error));
