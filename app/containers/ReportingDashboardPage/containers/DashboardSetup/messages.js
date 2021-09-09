@@ -178,4 +178,13 @@ export default defineMessages({
     id: `${scope}.noChartsData`,
     defaultMessage: 'No charts data',
   },
+  deleteChartModalHeader: {
+    id: `${scope}.deleteChartModalHeader`,
+    defaultMessage: 'Delete Chart',
+  },
+  deleteChartModalMessage: {
+    id: `${scope}.deleteChartModalMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this chart? It will not be possible to recover it later.',
+  },
 });

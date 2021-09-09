@@ -14,6 +14,7 @@ import {
   ReportFor,
   generateTestReportRequest,
 } from 'global/reducers/reportTemplates';
+import { ReportTemplate } from 'models/ReportTemplate';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
@@ -29,8 +30,8 @@ import ImageUpload from 'components/ImageUpload';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Img from 'components/Img';
+import { ModalType, useModal } from 'components/Modal';
 
-import { ReportTemplate } from 'models/ReportTemplate';
 import { CardBox, Spacer } from '../../styled';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
@@ -93,10 +94,21 @@ const ReportTemplateMainSettings = ({
     generateTestReport(sessionId, singleReportTemplate.id);
   };
 
+  const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteReportTemplateHeader),
+      content: formatMessage(messages.deleteReportTemplateMessage),
+      confirmAction: onDelete,
+    },
+  });
+
   const imageUploading = updateReportTemplateLoading && isUploadingImage;
 
   return (
     <Container style={{ maxWidth: 600 }}>
+      <DeleteModal />
+
       <Row justify="between" align="center">
         <Col>
           <Collapse
@@ -250,7 +262,7 @@ const ReportTemplateMainSettings = ({
                 <Row style={{ marginBottom: 10 }}>
                   <Col>
                     <TextButton
-                      onClick={onDelete}
+                      onClick={openDeleteModal}
                       whiteSpace="nowrap"
                       fontWeight="bold"
                       fontSize={14}

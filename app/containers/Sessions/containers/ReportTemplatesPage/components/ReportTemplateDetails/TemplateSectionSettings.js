@@ -12,12 +12,14 @@ import {
 } from 'global/reducers/reportTemplates';
 import { SectionCaseBuilder } from 'models/ReportTemplate';
 
-import DashedButton from 'components/Button/DashedButton';
-
 import { elements, themeColors } from 'theme';
+
+import DashedButton from 'components/Button/DashedButton';
+import { ModalType, useModal } from 'components/Modal';
 import { Col } from 'components/ReactGridSystem';
 import H2 from 'components/H2';
 import TextButton from 'components/Button/TextButton';
+
 import SectionFormula from './SectionFormula';
 import SectionCaseItem from './SectionCaseItem';
 import { Spacer, CardBox } from '../../styled';
@@ -71,6 +73,15 @@ const TemplateSectionSettings = ({
     deleteSection(selectedTemplateSectionId, selectedReportId);
   };
 
+  const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteReportTemplateSectionHeader),
+      content: formatMessage(messages.deleteReportTemplateSectionMessage),
+      confirmAction: onDelete,
+    },
+  });
+
   if (!selectedTemplateSection) return <></>;
 
   return (
@@ -78,6 +89,8 @@ const TemplateSectionSettings = ({
       height={`calc(100vh - ${2 * elements.navbarHeight}px)`}
       overflow="auto"
     >
+      <DeleteModal />
+
       <Container fluid>
         <Row style={{ marginBottom: 25 }}>
           <Col xs={7}>
@@ -86,7 +99,7 @@ const TemplateSectionSettings = ({
           <Col xs={5} align="end">
             <TextButton
               disabled={!canEdit}
-              onClick={onDelete}
+              onClick={openDeleteModal}
               whiteSpace="nowrap"
               fontWeight="bold"
               fontSize={14}

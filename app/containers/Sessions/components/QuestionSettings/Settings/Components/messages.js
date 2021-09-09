@@ -180,4 +180,13 @@ export default defineMessages({
     id: `${scope}.textLimitSettingsPlaceholder`,
     defaultMessage: 'E.g. 250',
   },
+  deleteBlockHeader: {
+    id: `${scope}.deleteBlockHeader`,
+    defaultMessage: 'Delete Block',
+  },
+  deleteBlockMessage: {
+    id: `${scope}.deleteBlockMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this Block? It will not be possible to recover it later.',
+  },
 });

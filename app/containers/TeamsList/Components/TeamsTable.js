@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import H1 from 'components/H1';
 import Text from 'components/Text';
 import { TableLoading } from 'components/Table';
@@ -53,7 +53,7 @@ const TeamsTable = ({
   );
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={Boolean(pickedTeam.id)}
         onClose={closeModal}
         description={formatMessage(messages.deleteTeamConfirm)}

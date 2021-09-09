@@ -42,7 +42,7 @@ import EllipsisText from 'components/Text/EllipsisText';
 import Text from 'components/Text';
 import Tooltip from 'components/Tooltip';
 import Dropdown from 'components/Dropdown';
-import Modal from 'components/Modal';
+import Modal, { ModalType, useModal } from 'components/Modal';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
@@ -95,6 +95,15 @@ const SingleTile = ({
 
   const handleArchiveIntervention = () => archiveIntervention(id);
 
+  const { openModal: openArchiveModal, Modal: ArchiveModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.interventionArchiveHeader),
+      content: formatMessage(messages.interventionArchiveMessage),
+      confirmAction: handleArchiveIntervention,
+    },
+  });
+
   const {
     name,
     status,
@@ -142,7 +151,7 @@ const SingleTile = ({
     ...((canArchive(status) && [
       {
         icon: BinNoBgIcon,
-        action: handleArchiveIntervention,
+        action: openArchiveModal,
         label: formatMessage(messages.archive),
         id: 'Archive e-session',
       },
@@ -184,6 +193,7 @@ const SingleTile = ({
 
   return (
     <>
+      <ArchiveModal />
       <Modal
         title={formatMessage(messages.sendCopyModalTitle)}
         onClose={closeShareWithResearchersModal}

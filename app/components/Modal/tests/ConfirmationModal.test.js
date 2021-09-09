@@ -12,9 +12,9 @@ import 'jest-styled-components';
 
 import { DEFAULT_LOCALE } from 'i18n';
 
-import ConfirmationBox from '../index';
+import ConfirmationModal from '../ConfirmationModal';
 
-describe('<ConfirmationBox />', () => {
+describe('<ConfirmationModal />', () => {
   const defaultProps = {
     title: 'Test',
     visible: true,
@@ -39,7 +39,7 @@ describe('<ConfirmationBox />', () => {
     const spy = jest.spyOn(global.console, 'error');
     render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <ConfirmationBox {...defaultProps} />
+        <ConfirmationModal {...defaultProps} />
       </IntlProvider>,
     );
     expect(spy).not.toHaveBeenCalled();
@@ -48,7 +48,7 @@ describe('<ConfirmationBox />', () => {
   it('Should render and match the snapshot', () => {
     const { container } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <ConfirmationBox {...defaultProps} />
+        <ConfirmationModal {...defaultProps} />
       </IntlProvider>,
     );
     expect(container).toMatchSnapshot();
@@ -57,7 +57,7 @@ describe('<ConfirmationBox />', () => {
   it('Should render error and match the snapshot', () => {
     const { container } = render(
       <IntlProvider locale={DEFAULT_LOCALE}>
-        <ConfirmationBox {...defaultProps} error={['Error']} />
+        <ConfirmationModal {...defaultProps} error={['Error']} />
       </IntlProvider>,
     );
     expect(container).toMatchSnapshot();
