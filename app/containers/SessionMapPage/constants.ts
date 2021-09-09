@@ -1,3 +1,5 @@
+import { ConnectionLineType } from 'react-flow-renderer';
+
 import { colors } from 'theme';
 
 export const defaultMinZoom = 0.5;
@@ -12,6 +14,9 @@ export const questionNodesVerticalDistanceRatio = 4;
 export const nodeWidth = 210;
 export const questionNodeLabelOffset = 32;
 
+export const scrollbarsThickness = 5;
+export const scrollbarsMargin = 15;
+
 export const sessionMapColors = {
   nodeBase: colors.smokeWhite,
   nodeDetailsShown: colors.orchid,
@@ -20,19 +25,19 @@ export const sessionMapColors = {
   sessionNode: colors.tuftsBlue,
 };
 
-export enum NodeType {
+export enum SessionMapNodeType {
   QUESTION = 'question',
   SESSION = 'session',
 }
 
-export enum CustomArrowHeadType {
-  BASE = 'arrowcustom-base',
-  SELECTED = 'arrowcustom-selected',
+export enum SessionMapHeadType {
+  BASE = 'sessionmap-base',
+  SELECTED = 'sesionmap-selected',
 }
 
 export const baseEdgeSharedAttributes = {
-  type: 'smoothstep',
-  arrowHeadType: CustomArrowHeadType.BASE,
+  type: ConnectionLineType.SmoothStep,
+  arrowHeadType: SessionMapHeadType.BASE,
   style: {
     strokeWidth: 2,
     stroke: sessionMapColors.edgeBase,

@@ -7,7 +7,7 @@ import { SessionDto } from 'models/Session/SessionDto';
 
 import { QuestionTileData, SessionTileData } from '../../types';
 import {
-  NodeType,
+  SessionMapNodeType,
   sessionNodesVerticalDistanceRatio,
   questionNodesVerticalDistanceRatio,
   baseEdgeSharedAttributes,
@@ -41,7 +41,7 @@ const createQuestionNode = (
   index: number,
 ): Node<QuestionTileData> => ({
   id: question.id,
-  type: NodeType.QUESTION,
+  type: SessionMapNodeType.QUESTION,
   position: { x: 0, y: 0 },
   data: {
     question,
@@ -80,7 +80,7 @@ const createSessionNodesFromBranching = (
 
       nodes.push({
         id: sessionNodeId,
-        type: NodeType.SESSION,
+        type: SessionMapNodeType.SESSION,
         position: { x: 0, y: 0 },
         data: {
           sessionIndex,
@@ -189,6 +189,6 @@ export const createMapEdges = (questions: Question[]): Edge[] => {
 };
 
 export const getNodeVerticalDistanceRatio = (nodeType?: string): number =>
-  nodeType === NodeType.SESSION
+  nodeType === SessionMapNodeType.SESSION
     ? sessionNodesVerticalDistanceRatio
     : questionNodesVerticalDistanceRatio;

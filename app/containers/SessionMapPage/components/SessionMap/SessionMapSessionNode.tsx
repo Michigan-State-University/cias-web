@@ -3,11 +3,11 @@ import { NodeProps } from 'react-flow-renderer';
 import { useIntl } from 'react-intl';
 
 import Box from 'components/Box';
+import { ReactFlowNodeHandles } from 'components/ReactFlowGraph';
 
 import { SessionTileData } from '../../types';
 import { nodeWidth, sessionMapColors } from '../../constants';
 import messages from '../../messages';
-import SessionMapNodeHandles from './SessionMapNodeHandles';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
 import SessionMapSessionNodeDetailedInfo from './SessionMapSessionNodeDetailedInfo';
 
@@ -48,7 +48,10 @@ const SessionMapSessionNode = ({
           />
         )}
       </Box>
-      <SessionMapNodeHandles nodeId={`session-${sessionNo}`} />
+      <ReactFlowNodeHandles
+        nodeId={`session-${sessionNo}`}
+        sourceHandleColor={sessionMapColors.edgeBase}
+      />
     </>
   );
 };

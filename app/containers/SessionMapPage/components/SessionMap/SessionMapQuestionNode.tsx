@@ -9,6 +9,7 @@ import { themeColors } from 'theme';
 import Box from 'components/Box';
 import Text from 'components/Text';
 import Row from 'components/Row';
+import { ReactFlowNodeHandles } from 'components/ReactFlowGraph';
 
 import messages from '../../messages';
 import { QuestionTileData } from '../../types';
@@ -17,7 +18,6 @@ import {
   questionNodeLabelOffset,
   sessionMapColors,
 } from '../../constants';
-import SessionMapNodeHandles from './SessionMapNodeHandles';
 import SessionMapQuestionNodeDetailedInfo from './SessionMapQuestionNodeDetailedInfo';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
 
@@ -85,9 +85,10 @@ const SessionMapQuestionNode = ({
           />
         )}
       </Box>
-      <SessionMapNodeHandles
+      <ReactFlowNodeHandles
         nodeId={id}
         showSourceHandle={type !== finishQuestion.id}
+        sourceHandleColor={sessionMapColors.edgeBase}
       />
     </>
   );

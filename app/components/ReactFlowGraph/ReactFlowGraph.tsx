@@ -1,6 +1,5 @@
 import React, { memo, useEffect, useMemo, useState } from 'react';
 import ReactFlow, {
-  ConnectionLineType,
   Elements,
   FlowTransform,
   NodeTypesType,
@@ -25,7 +24,7 @@ import {
   layoutElements,
 } from './utils';
 
-type Props = {
+export interface ReactFlowGraphProps extends ReactFlowProps {
   defaultMinZoom?: number;
   defaultMaxZoom?: number;
   defaultZoom?: number;
@@ -38,8 +37,10 @@ type Props = {
   getNodeVerticalDistanceRatio?: (type?: string) => number;
   nodeTopMargin?: number;
   pickedNodeId?: string;
+  scrollbarsThickness?: number;
+  scrollbarsMargin?: number;
   children?: React.ReactNode | React.ReactNode[];
-};
+}
 
 const ReactFlowGraph = ({
   defaultMinZoom,
@@ -54,8 +55,11 @@ const ReactFlowGraph = ({
   getNodeVerticalDistanceRatio = () => 1,
   nodeTopMargin = 0,
   pickedNodeId,
+  scrollbarsThickness = 0,
+  scrollbarsMargin = 0,
   children,
-}: Props): JSX.Element => {
+  ...restReactFlowProps
+}: ReactFlowGraphProps): JSX.Element => {
   const { zoomTo, transform } = useZoomPanHelper();
   const containerWidth = useStoreState((state) => state.width);
   const containerHeight = useStoreState((state) => state.height);
@@ -218,8 +222,6 @@ const ReactFlowGraph = ({
   const reactFlowProps: ReactFlowProps = {
     elements: layoutedElements,
     nodeTypes,
-    nodesDraggable: false,
-    nodesConnectable: false,
     translateExtent: [
       [0, 0],
       [panAreaWidth, panAreaHeight],
@@ -227,9 +229,9 @@ const ReactFlowGraph = ({
     minZoom,
     maxZoom: defaultMaxZoom,
     defaultZoom,
-    connectionLineType: ConnectionLineType.SmoothStep,
     onLoad: () => setMapLoaded(true),
     onMove: handleMove,
+    ...restReactFlowProps,
   };
 
   return (
@@ -238,23 +240,29 @@ const ReactFlowGraph = ({
         <Column cursor="grab">
           <ReactFlow {...reactFlowProps}>{children}</ReactFlow>
         </Column>
-        <Scrollbar
-          sizeRatio={verticalScrollbarSizeRatio}
-          positionRatio={verticalScrollbarPositionRatio}
-          onPositionRatioChange={handleScrollbarPositionRatioChange('y')}
-          margin={15}
-        />
+        {Boolean(scrollbarsThickness) && (
+          <Scrollbar
+            sizeRatio={verticalScrollbarSizeRatio}
+            positionRatio={verticalScrollbarPositionRatio}
+            onPositionRatioChange={handleScrollbarPositionRatioChange('y')}
+            thickness={scrollbarsThickness}
+            margin={scrollbarsMargin}
+          />
+        )}
       </Row>
-      <Row gap={20}>
-        <Scrollbar
-          horizontal
-          sizeRatio={horizontalScrollbarSizeRatio}
-          positionRatio={horizontalScrollbarPositionRatio}
-          onPositionRatioChange={handleScrollbarPositionRatioChange('x')}
-          margin={15}
-        />
-        <div />
-      </Row>
+      {Boolean(scrollbarsThickness) && (
+        <Row gap={scrollbarsThickness + scrollbarsMargin}>
+          <Scrollbar
+            horizontal
+            sizeRatio={horizontalScrollbarSizeRatio}
+            positionRatio={horizontalScrollbarPositionRatio}
+            onPositionRatioChange={handleScrollbarPositionRatioChange('x')}
+            thickness={scrollbarsThickness}
+            margin={scrollbarsMargin}
+          />
+          <div />
+        </Row>
+      )}
     </>
   );
 };

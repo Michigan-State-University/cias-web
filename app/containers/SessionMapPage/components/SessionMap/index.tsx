@@ -6,17 +6,23 @@ import { Question } from 'global/types/question';
 import { QuestionGroup } from 'global/types/questionGroup';
 import { SessionDto } from 'models/Session/SessionDto';
 
-import ReactFlowGraph from 'components/ReactFlowGraph';
+import {
+  ReactFlowGraph,
+  ReactFlowGraphProps,
+  ReactFlowArrowHead,
+} from 'components/ReactFlowGraph';
 
 import {
-  CustomArrowHeadType,
+  SessionMapHeadType,
   defaultZoom,
   defaultMaxZoom,
   sessionMapColors,
   detailedInfoZoomThreshold,
-  NodeType,
+  SessionMapNodeType,
   defaultMinZoom,
   questionNodeLabelOffset,
+  scrollbarsThickness,
+  scrollbarsMargin,
 } from '../../constants';
 import {
   sortQuestionsByGroupAndPosition,
@@ -25,12 +31,11 @@ import {
   getNodeVerticalDistanceRatio,
 } from './utils';
 import SessionMapSessionNode from './SessionMapSessionNode';
-import SessionMapCustomArrowHead from './SessionMapCustomArrowHead';
 import SessionMapQuestionNode from './SessionMapQuestionNode';
 
 const nodeTypes: NodeTypesType = {
-  [NodeType.QUESTION]: SessionMapQuestionNode,
-  [NodeType.SESSION]: SessionMapSessionNode,
+  [SessionMapNodeType.QUESTION]: SessionMapQuestionNode,
+  [SessionMapNodeType.SESSION]: SessionMapSessionNode,
 };
 
 type Props = {
@@ -87,28 +92,34 @@ const SessionMap = ({
     [sortedQuestions, showDetailsId, showDetailedInfo],
   );
 
+  const sessionMapGraphProps: ReactFlowGraphProps = {
+    defaultMinZoom,
+    defaultMaxZoom,
+    defaultZoom,
+    zoom,
+    onZoomChange,
+    minZoom,
+    onMinZoomChange,
+    elements,
+    nodeTypes,
+    getNodeVerticalDistanceRatio,
+    nodeTopMargin: questionNodeLabelOffset,
+    pickedNodeId: showDetailsId,
+    nodesDraggable: false,
+    nodesConnectable: false,
+    scrollbarsThickness,
+    scrollbarsMargin,
+  };
+
   return (
     <>
-      <ReactFlowGraph
-        defaultMinZoom={defaultMinZoom}
-        defaultMaxZoom={defaultMaxZoom}
-        defaultZoom={defaultZoom}
-        zoom={zoom}
-        onZoomChange={onZoomChange}
-        minZoom={minZoom}
-        onMinZoomChange={onMinZoomChange}
-        elements={elements}
-        nodeTypes={nodeTypes}
-        getNodeVerticalDistanceRatio={getNodeVerticalDistanceRatio}
-        nodeTopMargin={questionNodeLabelOffset}
-        pickedNodeId={showDetailsId}
-      >
-        <SessionMapCustomArrowHead
-          id={`react-flow__${CustomArrowHeadType.BASE}`}
+      <ReactFlowGraph {...sessionMapGraphProps}>
+        <ReactFlowArrowHead
+          type={SessionMapHeadType.BASE}
           color={sessionMapColors.edgeBase}
         />
-        <SessionMapCustomArrowHead
-          id={`react-flow__${CustomArrowHeadType.SELECTED}`}
+        <ReactFlowArrowHead
+          type={SessionMapHeadType.SELECTED}
           color={sessionMapColors.selected}
         />
       </ReactFlowGraph>
