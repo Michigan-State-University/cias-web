@@ -50,7 +50,7 @@ const EditCatSession = ({
     createdAt,
   } = session;
   useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
-  const { formatMessage } = useIntl();
+  const { formatMessage, formatDate } = useIntl();
   const mappedCatTests = catMhTestTypes.map(({ id }) => +id);
   const [formData, setFormData] = useState<EditCatSessionState>({
     selectedLanguage: null,
@@ -192,7 +192,7 @@ const EditCatSession = ({
               lineHeight="26px"
               color={themeColors.primary}
             >
-              {dayjs(createdAt).format('MM-DD-YYYY')}
+              {formatDate(dayjs(createdAt).toDate())}
             </Text>
           </Box>
         </Box>
@@ -272,7 +272,7 @@ const EditCatSession = ({
                 value: id,
                 label: `${languageCode} ${voiceLabel}`,
               })}
-              defaultValue={`${googleTtsVoice.id}`}
+              defaultValue={`${googleTtsVoice?.id}`}
             />,
           )}
           {wrapWithLabel(
