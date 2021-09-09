@@ -20,4 +20,13 @@ export default defineMessages({
     id: `${scope}.addVariableButton`,
     defaultMessage: '+ Add variable',
   },
+  deleteTextMessageHeader: {
+    id: `${scope}.deleteTextMessageHeader`,
+    defaultMessage: 'Delete Text Message',
+  },
+  deleteTextMessageMessage: {
+    id: `${scope}.deleteTextMessageMessage`,
+    defaultMessage:
+      'Are you sure you want to delete this Text Message? It will not be possible to recover it later.',
+  },
 });

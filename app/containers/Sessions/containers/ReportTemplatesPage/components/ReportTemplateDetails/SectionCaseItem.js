@@ -42,6 +42,7 @@ import InequalityChooser from 'components/InequalityChooser';
 import ImageUpload from 'components/ImageUpload';
 import TextButton from 'components/Button/TextButton';
 import OriginalTextHover from 'components/OriginalTextHover';
+import { ModalType, useModal } from 'components/Modal';
 
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
@@ -142,8 +143,19 @@ const SectionCaseItem = ({
     deleteCase(sectionCase.id, selectedTemplateSectionId);
   };
 
+  const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteSectionCaseHeader),
+      content: formatMessage(messages.deleteSectionCaseMessage),
+      confirmAction: handleDeleteCase,
+    },
+  });
+
   return (
     <>
+      <DeleteModal />
+
       <Collapse
         disabled
         isOpened={isOpened}
@@ -200,7 +212,7 @@ const SectionCaseItem = ({
               <Row align="center">
                 <Img
                   src={binNoBg}
-                  onClick={handleDeleteCase}
+                  onClick={openDeleteModal}
                   mr={10}
                   disabled={!canEdit}
                   clickable

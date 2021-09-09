@@ -1,6 +1,7 @@
 import React, { memo, useCallback, useContext, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
+import { Markup } from 'interweave';
 
 import { colors, themeColors } from 'theme';
 
@@ -20,10 +21,10 @@ import Text from 'components/Text';
 import Button from 'components/Button';
 import Tooltip from 'components/Tooltip';
 import Circle from 'components/Circle';
-
 import InfoBox from 'components/Box/InfoBox';
-import { Markup } from 'interweave';
+import { ModalType, useModal } from 'components/Modal';
 import Badge from 'components/Badge';
+
 import messages from '../messages';
 import { FullWidthContainer } from '../../../styled';
 import { ChartSettingsContext } from '../constants';
@@ -41,6 +42,15 @@ const ChartSettingsTopSection = ({
   const { formatMessage } = useIntl();
 
   const { statusPermissions } = useContext(ChartSettingsContext);
+
+  const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteChartModalHeader),
+      content: formatMessage(messages.deleteChartModalMessage),
+      confirmAction: onDelete,
+    },
+  });
 
   const handleStatusChange = () => {
     switch (chartStatus) {
@@ -115,13 +125,15 @@ const ChartSettingsTopSection = ({
 
   return (
     <FullWidthContainer>
+      <DeleteModal />
+
       <Row justify="between" align="center">
         <Col xs="content">
           <H3>{formatMessage(messages.chartSettingsHeader, { chartType })}</H3>
         </Col>
 
         <Col xs="content">
-          <TextButton loading={isDeleting} onClick={onDelete}>
+          <TextButton loading={isDeleting} onClick={openDeleteModal}>
             <Row align="center">
               <Icon src={BinIcon} fill={themeColors.warning} mr={8} />
               <Text fontWeight="bold" color={themeColors.warning}>

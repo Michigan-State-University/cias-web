@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
@@ -20,8 +20,11 @@ import binNoBg from 'assets/svg/bin-no-bg.svg';
 import copy from 'assets/svg/copy.svg';
 
 import { colors } from 'theme';
+
 import { StyledInput } from 'components/Input/StyledInput';
 import Box from 'components/Box';
+import { ModalType, useModal } from 'components/Modal';
+
 import TextMessagesFormula from '../../components/TextMessagesFormula';
 import TextMessageVariants from '../../components/TextMessageVariants';
 import { StyledSmsSettings, SectionDivider } from './styled';
@@ -61,6 +64,19 @@ const TextMessageSettings = ({
     fetchVariants();
   }, [id]);
 
+  const onDelete = useCallback(() => {
+    removeTextMessage(id);
+  }, [id]);
+
+  const { openModal: openDeleteModal, Modal: DeleteModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.deleteTextMessageHeader),
+      content: formatMessage(messages.deleteTextMessageMessage),
+      confirmAction: onDelete,
+    },
+  });
+
   const messageSection = () => {
     if (isUsedFormula)
       return (
@@ -80,6 +96,8 @@ const TextMessageSettings = ({
 
   return (
     <StyledSmsSettings>
+      <DeleteModal />
+
       <Row align="center" justify="between">
         <Text fontSize={18} fontWeight="bold">
           {formatMessage(messages.header)}
@@ -95,7 +113,7 @@ const TextMessageSettings = ({
           />
           <Img
             src={binNoBg}
-            onClick={() => removeTextMessage(id)}
+            onClick={openDeleteModal}
             mr={10}
             clickable
             disabled={!editingPossible}

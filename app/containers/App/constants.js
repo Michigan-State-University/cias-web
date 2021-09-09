@@ -1,1 +1,3 @@
 export const TOOLTIP_PORTAL_ID = 'tooltip-portal';
+
+export const MODAL_PORTAL_ID = 'modal-portal';

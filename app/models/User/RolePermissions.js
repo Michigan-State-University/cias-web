@@ -32,6 +32,13 @@ const ALLOWED_ASSIGN_ORGANIZATION_TO_INTERVENTION = [
   Roles.eInterventionAdmin,
 ];
 
+const ALLOWED_CAT_MH_SETTING_DISPLAY = [
+  Roles.admin,
+  Roles.researcher,
+  Roles.eInterventionAdmin,
+  Roles.teamAdmin,
+];
+
 export const RolePermissions = (roles) => ({
   canEditLogo: arraysOverlap(roles, ALLOWED_EDIT_LOGO),
   canDownloadInterventionCsv: arraysOverlap(
@@ -53,4 +60,5 @@ export const RolePermissions = (roles) => ({
     roles,
     ALLOWED_ASSIGN_ORGANIZATION_TO_INTERVENTION,
   ),
+  canDisplayCatMhSetting: arraysOverlap(roles, ALLOWED_CAT_MH_SETTING_DISPLAY),
 });

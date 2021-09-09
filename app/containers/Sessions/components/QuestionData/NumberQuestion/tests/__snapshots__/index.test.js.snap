@@ -134,7 +134,7 @@ exports[`<NumberQuestion /> Should render and match the snapshot 1`] = `
           class="c4"
         >
           <input
-            aria-label="Respondent answer goes here..."
+            aria-labelledby="question-title question-subtitle"
             class="c5"
             disabled=""
             height="60"

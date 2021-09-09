@@ -6,6 +6,10 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
 import FeedbackQuestionLayout from 'containers/AnswerSessionPage/layouts/Feedback/FeedbackQuestionLayout';
+import {
+  QUESTION_SUBTITLE_ID,
+  QUESTION_TITLE_ID,
+} from 'containers/AnswerSessionPage/constants';
 
 import AppSlider from 'components/AppSlider';
 import Box from 'components/Box';
@@ -20,6 +24,7 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { canEdit } from 'models/Status/statusPermissions';
 
 import { visualAnalogScaleLabelStyles } from 'theme';
+
 import messages from './messages';
 
 import { updateLabel } from './actions';
@@ -95,7 +100,7 @@ const FeedbackQuestion = ({
                   marks={labels}
                   disabled
                   showValue={!isNullOrUndefined(showNumber) && showNumber}
-                  ariaLabelForHandle={formatMessage(messages.feedbackLabel)}
+                  ariaLabelledByForHandle={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
                 />
               )}
               {isNarratorTab && (

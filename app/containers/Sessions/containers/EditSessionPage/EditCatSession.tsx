@@ -2,15 +2,13 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
-import { createStructuredSelector } from 'reselect';
-import isEqual from 'lodash/isEqual';
 
 import { colors, themeColors } from 'theme';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
+import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 import {
   bulkEditSessionRequest,
   bulkEditSession,
-  makeSelectSessionEditLoader,
 } from 'global/reducers/session';
 import { CatSessionDto } from 'models/Session/SessionDto';
 
@@ -18,19 +16,16 @@ import Box from 'components/Box';
 import Text from 'components/Text';
 import Row from 'components/Row';
 import Divider from 'components/Divider';
+import { SelectOption } from 'components/Select/types';
 import ApiSelect from 'components/Select/ApiSelect';
-import Button from 'components/Button';
-
 import StyledInput from 'components/Input/StyledInput';
 import dayjs from 'dayjs';
 import messages from './messages';
-import { EditCatSessionState } from './types';
 import CatMhTests from '../../components/CatMhTests';
 
 type EditCatSessionProps = {
   session: CatSessionDto;
   editingPossible: boolean;
-  sessionIsEditing: boolean;
   editSession: any;
 };
 
@@ -38,7 +33,6 @@ const EditCatSession = ({
   session,
   editingPossible,
   editSession,
-  sessionIsEditing,
 }: EditCatSessionProps): JSX.Element => {
   const {
     variable,
@@ -51,112 +45,43 @@ const EditCatSession = ({
   } = session;
   useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
   const { formatMessage, formatDate } = useIntl();
-  const mappedCatTests = catMhTestTypes.map(({ id }) => +id);
-  const [formData, setFormData] = useState<EditCatSessionState>({
-    selectedLanguage: null,
-    selectedTimeFrame: null,
-    selectedPopulation: null,
-    selectedVoice: null,
-    sessionVariable: variable,
-    selectedTestIds: mappedCatTests,
-  });
+
+  const mappedCatTests = useMemo(
+    () => catMhTestTypes.map(({ id }) => +id),
+    [catMhTestTypes],
+  );
 
   const [testsUrl, setTestsUrl] = useState('');
   const [languagesUrl, setLanguagesUrl] = useState('');
   const [initialFetch, setInitialFetch] = useState(true);
 
-  const updateFormData = (key: string, value: any) =>
-    setFormData({ ...formData, [key]: value });
+  const updateCatSession = (key: string, value: any) =>
+    editSession({ [key]: value });
+
+  const onSelectTests = (testIds: number[]) =>
+    updateCatSession('catTests', testIds);
 
   useEffect(() => {
-    const { selectedLanguage, selectedTimeFrame, selectedPopulation } =
-      formData;
-    if (!selectedLanguage || !selectedTimeFrame || !selectedPopulation) return;
-
     const params = new URLSearchParams();
-    params.append('language_id', `${selectedLanguage.value}`);
-    params.append('population_id', `${selectedPopulation.value}`);
-    params.append('time_frame_id', `${selectedTimeFrame.value}`);
+    params.append('language_id', `${catMhLanguageId}`);
+    params.append('population_id', `${catMhPopulationId}`);
+    params.append('time_frame_id', `${catMhTimeFrameId}`);
 
     setTestsUrl(`/v1/cat_mh/available_test_types?${params.toString()}`);
     if (!initialFetch) {
-      updateFormData('selectedTestIds', []);
+      onSelectTests([]);
     } else {
       setInitialFetch(false);
     }
-  }, [
-    formData.selectedLanguage,
-    formData.selectedTimeFrame,
-    formData.selectedPopulation,
-  ]);
+  }, [catMhLanguageId, catMhPopulationId, catMhTimeFrameId]);
+
+  useDidUpdateEffect(() => {
+    updateCatSession('googleTtsVoiceId', null);
+  }, [catMhLanguageId]);
 
   useEffect(() => {
-    if (!formData.selectedLanguage) return;
-    setLanguagesUrl(
-      `/v1/cat_mh/languages/${formData.selectedLanguage.value}/voices`,
-    );
-  }, [formData.selectedLanguage]);
-
-  const saveButtonDisabled = useMemo(() => {
-    const {
-      selectedLanguage,
-      selectedTimeFrame,
-      selectedPopulation,
-      selectedVoice,
-      selectedTestIds,
-      sessionVariable,
-    } = formData;
-
-    const catMhDetailsSet =
-      selectedTestIds.length === 0 ||
-      !selectedVoice ||
-      !selectedLanguage ||
-      !selectedTimeFrame ||
-      !selectedPopulation ||
-      !sessionVariable;
-    if (catMhDetailsSet) return true;
-
-    const catSessionChanged =
-      selectedLanguage.value === catMhLanguageId &&
-      selectedTimeFrame.value === catMhTimeFrameId &&
-      selectedPopulation.value === catMhPopulationId &&
-      sessionVariable === variable &&
-      +selectedVoice.value === googleTtsVoice.id &&
-      isEqual(selectedTestIds, mappedCatTests);
-
-    if (catSessionChanged) return true;
-
-    return false;
-  }, [formData, session]);
-
-  const onSelectTests = (testIds: number[]) =>
-    updateFormData('selectedTestIds', testIds);
-
-  const updateCatSession = () => {
-    const {
-      selectedLanguage,
-      selectedTimeFrame,
-      selectedPopulation,
-      selectedVoice,
-      selectedTestIds: testIds,
-      sessionVariable,
-    } = formData;
-    if (
-      selectedLanguage &&
-      selectedTimeFrame &&
-      selectedPopulation &&
-      selectedVoice
-    ) {
-      editSession({
-        catMhLanguageId: selectedLanguage.value,
-        catMhTimeFrameId: selectedTimeFrame.value,
-        catMhPopulationId: selectedPopulation.value,
-        catTests: testIds,
-        googleTtsVoiceId: selectedVoice.value,
-        variable: sessionVariable,
-      });
-    }
-  };
+    setLanguagesUrl(`/v1/cat_mh/languages/${catMhLanguageId}/voices`);
+  }, [catMhLanguageId]);
 
   const wrapWithLabel = (label: string, children: JSX.Element) => (
     <Box width="100%" mx={5}>
@@ -166,6 +91,12 @@ const EditCatSession = ({
       {children}
     </Box>
   );
+
+  const onApiSelectUpdate =
+    (key: string) => (selectedOption: SelectOption<string>) => {
+      if (!selectedOption) return;
+      updateCatSession(key, selectedOption.value);
+    };
 
   return (
     <Box display="flex" justify="center" align="center">
@@ -209,16 +140,14 @@ const EditCatSession = ({
               url="/v1/cat_mh/languages"
               dataParser={(data: any) => jsonApiToArray(data, 'language')}
               selectProps={{
-                onChange: (value: any) =>
-                  updateFormData('selectedLanguage', value),
-                value: formData.selectedLanguage,
+                onChange: onApiSelectUpdate('catMhLanguageId'),
                 isDisabled: !editingPossible,
               }}
               optionsFormatter={({ id, name }: any) => ({
                 value: id,
                 label: name,
               })}
-              defaultValue={catMhLanguageId}
+              selectedValue={catMhLanguageId}
             />,
           )}
           {wrapWithLabel(
@@ -227,16 +156,14 @@ const EditCatSession = ({
               url="/v1/cat_mh/time_frames"
               dataParser={(data: any) => jsonApiToArray(data, 'timeFrame')}
               selectProps={{
-                onChange: (value: any) =>
-                  updateFormData('selectedTimeFrame', value),
-                value: formData.selectedTimeFrame,
+                onChange: onApiSelectUpdate('catMhTimeFrameId'),
                 isDisabled: !editingPossible,
               }}
               optionsFormatter={({ id, description }: any) => ({
                 value: id,
                 label: description,
               })}
-              defaultValue={catMhTimeFrameId}
+              selectedValue={catMhTimeFrameId}
             />,
           )}
           {wrapWithLabel(
@@ -245,16 +172,14 @@ const EditCatSession = ({
               url="/v1/cat_mh/populations"
               dataParser={(data: any) => jsonApiToArray(data, 'population')}
               selectProps={{
-                onChange: (value: any) =>
-                  updateFormData('selectedPopulation', value),
-                value: formData.selectedPopulation,
+                onChange: onApiSelectUpdate('catMhPopulationId'),
                 isDisabled: !editingPossible,
               }}
               optionsFormatter={({ id, name }: any) => ({
                 value: id,
                 label: name,
               })}
-              defaultValue={catMhPopulationId}
+              selectedValue={catMhPopulationId}
             />,
           )}
           {wrapWithLabel(
@@ -263,16 +188,14 @@ const EditCatSession = ({
               url={languagesUrl}
               dataParser={(data: any) => jsonApiToArray(data, 'voice')}
               selectProps={{
-                onChange: (value: any) =>
-                  updateFormData('selectedVoice', value),
-                value: formData.selectedVoice,
+                onChange: onApiSelectUpdate('googleTtsVoiceId'),
                 isDisabled: !editingPossible || !languagesUrl,
               }}
               optionsFormatter={({ id, languageCode, voiceLabel }: any) => ({
                 value: id,
                 label: `${languageCode} ${voiceLabel}`,
               })}
-              defaultValue={`${googleTtsVoice?.id}`}
+              selectedValue={`${googleTtsVoice?.id}`}
             />,
           )}
           {wrapWithLabel(
@@ -281,8 +204,8 @@ const EditCatSession = ({
               disabled={!editingPossible}
               // @ts-ignore
               mx={5}
-              value={formData.sessionVariable}
-              onBlur={(value: any) => updateFormData('sessionVariable', value)}
+              value={variable}
+              onBlur={(value: any) => updateCatSession('variable', value)}
             />,
           )}
         </Box>
@@ -300,36 +223,20 @@ const EditCatSession = ({
         {testsUrl && (
           <CatMhTests
             disabled={!editingPossible}
-            selectedTestIds={formData.selectedTestIds}
+            selectedTestIds={mappedCatTests}
             onSelectTest={onSelectTests}
             url={testsUrl}
           />
-        )}
-        {editingPossible && (
-          // @ts-ignore
-          <Button
-            loading={sessionIsEditing}
-            onClick={updateCatSession}
-            mt={30}
-            width={200}
-            disabled={saveButtonDisabled}
-          >
-            {formatMessage(messages.saveChanges)}
-          </Button>
         )}
       </Box>
     </Box>
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  sessionIsEditing: makeSelectSessionEditLoader(),
-});
-
 const mapDispatchToProps = {
   editSession: bulkEditSessionRequest,
 };
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(null, mapDispatchToProps);
 
 export default withConnect(EditCatSession);

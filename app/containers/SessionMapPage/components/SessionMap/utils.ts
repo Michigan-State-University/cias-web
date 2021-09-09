@@ -7,7 +7,7 @@ import {
   Node,
 } from 'react-flow-renderer';
 import dagre from 'dagre';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';

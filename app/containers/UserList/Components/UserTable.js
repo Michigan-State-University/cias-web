@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 import H1 from 'components/H1';
 import Text from 'components/Text';
 import { TableLoading } from 'components/Table';
@@ -81,14 +81,14 @@ const UserTable = ({
 
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={Boolean(pickedUser.id)}
         onClose={closeModal}
         description={modalDescription}
         content={modalContent}
         confirmAction={handleDeactivate}
       />
-      <ConfirmationBox
+      <ConfirmationModal
         visible={Boolean(userToRemove.id)}
         onClose={closeRemoveUserModal}
         description={formatMessage(messages.deleteFromTeamConfirm)}

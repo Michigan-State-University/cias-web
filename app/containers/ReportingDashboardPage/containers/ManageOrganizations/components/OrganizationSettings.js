@@ -17,7 +17,7 @@ import { RolePermissions } from 'models/User/RolePermissions';
 import { Roles } from 'models/User/UserRoles';
 
 import { Col, Row } from 'components/ReactGridSystem';
-import ConfirmationBox from 'components/ConfirmationBox';
+import { ConfirmationModal } from 'components/Modal';
 
 import { DeleteEntityModal } from '../Modals';
 import TopPanelComponent from './TopPanelComponent';
@@ -60,7 +60,7 @@ const OrganizationSettings = ({
 
   return (
     <>
-      <ConfirmationBox
+      <ConfirmationModal
         visible={isDeleteModalOpen}
         onClose={closeDeleteModal}
         description={formatMessage(messages.deleteEntityModalTitle, {

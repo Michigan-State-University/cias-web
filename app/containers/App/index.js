@@ -9,6 +9,7 @@
 
 import React, { useEffect } from 'react';
 import { Redirect, Switch } from 'react-router-dom';
+import { useLocation } from 'react-router';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
@@ -65,15 +66,16 @@ import {
   teamsTabId,
 } from 'utils/defaultNavbarTabs';
 
-import { TOOLTIP_PORTAL_ID } from './constants';
+import { MODAL_PORTAL_ID, TOOLTIP_PORTAL_ID } from './constants';
 
 export function App({ user, fetchSelfDetails }) {
   const { locale, formatMessage } = useIntl();
+  const { pathname } = useLocation();
   useInjectSaga({ key: 'app', saga: rootSaga });
   useInjectSaga({ key: 'fetchSelfDetails', saga: fetchSelfDetailsSaga });
 
   useEffect(() => {
-    if (user) {
+    if (user && !pathname.includes('/preview')) {
       fetchSelfDetails();
     }
   }, []);
@@ -143,6 +145,7 @@ export function App({ user, fetchSelfDetails }) {
       <IdleTimer />
 
       <div id={TOOLTIP_PORTAL_ID} />
+      <div id={MODAL_PORTAL_ID} />
 
       <Switch>
         <AppRoute

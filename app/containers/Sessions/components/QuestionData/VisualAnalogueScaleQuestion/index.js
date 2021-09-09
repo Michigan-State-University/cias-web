@@ -5,6 +5,11 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
+import {
+  QUESTION_SUBTITLE_ID,
+  QUESTION_TITLE_ID,
+} from 'containers/AnswerSessionPage/constants';
+
 import AppSlider from 'components/AppSlider';
 import Box from 'components/Box';
 import Column from 'components/Column';
@@ -100,7 +105,7 @@ const VisualAnalogueScaleQuestion = ({
                   marks={labels}
                   disabled
                   showValue={!isNullOrUndefined(showNumber) && showNumber}
-                  ariaLabelForHandle={formatMessage(messages.sliderLabel)}
+                  ariaLabelledByForHandle={`${QUESTION_TITLE_ID} ${QUESTION_SUBTITLE_ID}`}
                 />
               )}
               {isNarratorTab && (

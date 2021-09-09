@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import useGet from 'utils/useGet';
@@ -9,7 +9,7 @@ const ApiSelect = ({
   optionsFormatter,
   selectProps,
   url,
-  defaultValue,
+  selectedValue,
   ...restProps
 }) => {
   const state = useGet(url, dataParser);
@@ -19,24 +19,23 @@ const ApiSelect = ({
     [state.data],
   );
 
-  const setDefaultSelectValue = () => {
-    if (options && options.length !== 0 && defaultValue) {
-      const option = options.find(({ value }) => value === defaultValue);
-      selectProps.onChange(option);
-    }
-  };
+  const value = useMemo(() => {
+    if (selectProps.value) return selectProps.value;
 
-  useEffect(() => {
-    setDefaultSelectValue();
-  }, [options]);
+    if (!options || options.length === 0) return null;
+    return (
+      options.find(({ value: option }) => option === selectedValue) || null
+    );
+  }, [options, selectedValue, selectProps.value]);
 
   const mergedSelectProps = useMemo(
     () => ({
       ...selectProps,
       options,
       isLoading: state.isFetching,
+      value,
     }),
-    [selectProps, options, state.isFetching],
+    [selectProps, options, state.isFetching, value],
   );
 
   return <Select selectProps={mergedSelectProps} {...restProps} />;
@@ -47,7 +46,7 @@ ApiSelect.propTypes = {
   optionsFormatter: PropTypes.func,
   selectProps: PropTypes.object,
   url: PropTypes.string,
-  defaultValue: PropTypes.any,
+  selectedValue: PropTypes.any,
 };
 
 export default ApiSelect;

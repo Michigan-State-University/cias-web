@@ -81,4 +81,17 @@ export default defineMessages({
     id: `${scope}.lastName`,
     defaultMessage: 'Last name: ',
   },
+  filterWarning: {
+    id: `${scope}.filterWarning`,
+    defaultMessage:
+      'The researchers without permission to create a CAT-MH session do not appear on the list',
+  },
+  interventionArchiveHeader: {
+    id: `${scope}.interventionArchiveHeader`,
+    defaultMessage: 'Archive Intervention',
+  },
+  interventionArchiveMessage: {
+    id: `${scope}.interventionArchiveMessage`,
+    defaultMessage: 'Are you sure you want to archive this Intervention?',
+  },
 });

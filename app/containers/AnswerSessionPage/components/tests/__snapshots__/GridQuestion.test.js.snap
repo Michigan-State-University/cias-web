@@ -41,6 +41,13 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   width: 0;
 }
 
+.c18 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
 .c9 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -90,7 +97,8 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  width: 80px;
+  width: 100%;
+  min-width: 80px;
 }
 
 .c12 {
@@ -146,6 +154,10 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   cursor: not-allowed;
 }
 
+.c19 {
+  margin-left: 5px;
+}
+
 .c3 {
   font-size: 13px;
 }
@@ -196,6 +208,25 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
 
 .c7 {
   width: 120px;
+}
+
+.c20 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: #2F3850;
+}
+
+.c21 {
+  -webkit-clip: rect(0 0 0 0);
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 
 .c8 {
@@ -276,6 +307,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c9"
+                  id="answer-0"
                 >
                   test
                 </div>
@@ -287,6 +319,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c9"
+                  id="answer-1"
                 >
                   test
                 </div>
@@ -309,6 +342,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 <div
                   class="c10"
                   height="inherit"
+                  id="question-0"
                   width="max-content"
                 >
                   test
@@ -319,25 +353,34 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c11"
-                  width="80"
+                  width="100%"
                 >
                   <div
                     class="c12"
                   >
                     <input
-                      aria-label="Question 1: test; Answer 1: test."
+                      aria-labelledby="cell-0-0 question-0 answer-0"
                       class="c13 c14"
-                      id="question-test-id-cell-0-0"
+                      id="cell-0-0"
                       type="radio"
                     />
                     <label
                       class="c15 c16"
-                      for="question-test-id-cell-0-0"
+                      for="cell-0-0"
                     >
                       <img
                         class="c17 "
                         src="IMAGE_MOCK"
                       />
+                      <div
+                        class="c18 c19"
+                      >
+                        <p
+                          class="c20 c21"
+                        >
+                          Question 1 and Answer 1
+                        </p>
+                      </div>
                     </label>
                   </div>
                 </div>
@@ -347,25 +390,34 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c11"
-                  width="80"
+                  width="100%"
                 >
                   <div
                     class="c12"
                   >
                     <input
-                      aria-label="Question 1: test; Answer 2: test."
+                      aria-labelledby="cell-0-1 question-0 answer-1"
                       class="c13 c14"
-                      id="question-test-id-cell-0-1"
+                      id="cell-0-1"
                       type="radio"
                     />
                     <label
                       class="c15 c16"
-                      for="question-test-id-cell-0-1"
+                      for="cell-0-1"
                     >
                       <img
                         class="c17 "
                         src="IMAGE_MOCK"
                       />
+                      <div
+                        class="c18 c19"
+                      >
+                        <p
+                          class="c20 c21"
+                        >
+                          Question 1 and Answer 2
+                        </p>
+                      </div>
                     </label>
                   </div>
                 </div>
@@ -384,6 +436,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 <div
                   class="c10"
                   height="inherit"
+                  id="question-1"
                   width="max-content"
                 >
                   test
@@ -394,25 +447,34 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c11"
-                  width="80"
+                  width="100%"
                 >
                   <div
                     class="c12"
                   >
                     <input
-                      aria-label="Question 2: test; Answer 1: test."
+                      aria-labelledby="cell-1-0 question-1 answer-0"
                       class="c13 c14"
-                      id="question-test-id-cell-1-0"
+                      id="cell-1-0"
                       type="radio"
                     />
                     <label
                       class="c15 c16"
-                      for="question-test-id-cell-1-0"
+                      for="cell-1-0"
                     >
                       <img
                         class="c17 "
                         src="IMAGE_MOCK"
                       />
+                      <div
+                        class="c18 c19"
+                      >
+                        <p
+                          class="c20 c21"
+                        >
+                          Question 2 and Answer 1
+                        </p>
+                      </div>
                     </label>
                   </div>
                 </div>
@@ -422,25 +484,34 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               >
                 <div
                   class="c11"
-                  width="80"
+                  width="100%"
                 >
                   <div
                     class="c12"
                   >
                     <input
-                      aria-label="Question 2: test; Answer 2: test."
+                      aria-labelledby="cell-1-1 question-1 answer-1"
                       class="c13 c14"
-                      id="question-test-id-cell-1-1"
+                      id="cell-1-1"
                       type="radio"
                     />
                     <label
                       class="c15 c16"
-                      for="question-test-id-cell-1-1"
+                      for="cell-1-1"
                     >
                       <img
                         class="c17 "
                         src="IMAGE_MOCK"
                       />
+                      <div
+                        class="c18 c19"
+                      >
+                        <p
+                          class="c20 c21"
+                        >
+                          Question 2 and Answer 2
+                        </p>
+                      </div>
                     </label>
                   </div>
                 </div>

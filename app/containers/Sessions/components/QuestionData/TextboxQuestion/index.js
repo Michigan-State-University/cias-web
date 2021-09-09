@@ -18,7 +18,7 @@ import Box from 'components/Box';
 import Column from 'components/Column';
 import Question from 'models/Session/Question';
 import Row from 'components/Row';
-import Comment from 'components/Text/Comment';
+import { Comment } from 'components/Text';
 
 import answerPageMessages from 'containers/AnswerSessionPage/layouts/messages';
 import messages from './messages';

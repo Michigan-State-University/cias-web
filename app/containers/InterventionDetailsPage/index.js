@@ -72,13 +72,16 @@ import {
 import OrganizationShareBox from 'containers/ShareBox/OrganizationShareBox';
 import SettingsPanel from 'containers/SettingsPanel';
 
-import ConfirmationBox from 'components/ConfirmationBox';
+import Modal, {
+  ConfirmationModal,
+  ModalType,
+  useModal,
+} from 'components/Modal';
 import Loader from 'components/Loader';
 import Column from 'components/Column';
 import ErrorAlert from 'components/ErrorAlert';
 import Row from 'components/Row';
 import ShareBox from 'containers/ShareBox';
-import Modal from 'components/Modal';
 import Spinner from 'components/Spinner';
 import AppContainer from 'components/Container';
 import Icon from 'components/Icon';
@@ -142,6 +145,7 @@ export function InterventionDetailsPage({
     userId: interventionOwnerId,
     languageName,
     googleLanguageId,
+    hasCatSessions,
   } = intervention || {};
 
   const editingPossible = canEdit(status);
@@ -182,6 +186,15 @@ export function InterventionDetailsPage({
     setDeleteConfirmationSessionId(null);
   };
 
+  const { openModal: openArchiveModal, Modal: ArchiveModal } = useModal({
+    type: ModalType.ConfirmationModal,
+    props: {
+      description: formatMessage(messages.interventionArchiveHeader),
+      content: formatMessage(messages.interventionArchiveMessage),
+      confirmAction: handleArchiveIntervention,
+    },
+  });
+
   const canCreateCatSession = useMemo(() => {
     if (roles.includes('admin')) return true;
     return abilityToCreateCatMh;
@@ -213,7 +226,7 @@ export function InterventionDetailsPage({
       id: 'archive',
       label: formatMessage(messages.archive),
       icon: ArchiveIcon,
-      action: handleArchiveIntervention,
+      action: openArchiveModal,
       color: colors.bluewood,
       disabled: !archivingPossible,
     },
@@ -375,7 +388,8 @@ export function InterventionDetailsPage({
         <Helmet>
           <title>{formatMessage(messages.pageTitle, { name })}</title>
         </Helmet>
-        <ConfirmationBox
+        <ArchiveModal />
+        <ConfirmationModal
           visible={!isNullOrUndefined(deleteConfirmationSessionId)}
           onClose={() => setDeleteConfirmationSessionId(null)}
           description={formatMessage(messages.sessionDeleteHeader)}
@@ -390,6 +404,12 @@ export function InterventionDetailsPage({
           <SelectResearchers
             onResearchersSelected={copyInterventionToResearchers}
             onClose={closeSendCopyModal}
+            {...(hasCatSessions
+              ? {
+                  filterParams: { withCatAbility: hasCatSessions },
+                  filterWarning: formatMessage(messages.filterWarning),
+                }
+              : {})}
           />
         </Modal>
 

@@ -39,8 +39,8 @@ export const fetchUsersSuccess = (users, usersSize) =>
 export const fetchUsersFailure = (error) =>
   actionBuilder(FETCH_USERS_FAILURE, error);
 
-export const fetchResearchersRequest = () =>
-  actionBuilder(FETCH_RESEARCHERS_REQUEST, {});
+export const fetchResearchersRequest = (extraParams) =>
+  actionBuilder(FETCH_RESEARCHERS_REQUEST, { extraParams });
 export const fetchResearchersSuccess = (users, usersSize) =>
   actionBuilder(FETCH_RESEARCHERS_SUCCESS, { users, usersSize });
 export const fetchResearchersError = (error) =>
