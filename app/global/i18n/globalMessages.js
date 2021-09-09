@@ -259,4 +259,8 @@ export default defineMessages({
     id: `${scope}.dragHandle`,
     defaultMessage: `Hold and drag to change position`,
   },
+  CatMhSessionInvalid: {
+    id: `${scope}.CatMhSessionInvalid`,
+    defaultMessage: `Cat-MH TM session need to have all values set up.`,
+  },
 });
