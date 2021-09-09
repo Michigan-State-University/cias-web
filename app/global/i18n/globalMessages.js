@@ -261,6 +261,6 @@ export default defineMessages({
   },
   CatMhSessionInvalid: {
     id: `${scope}.CatMhSessionInvalid`,
-    defaultMessage: `Cat-MH TM session need to have all values set up.`,
+    defaultMessage: `Every Cat-MH TM session needs to have all values set up.`,
   },
 });
