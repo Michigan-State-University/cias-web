@@ -79,6 +79,7 @@ const BlockTypeChooser = ({
           shadow={boxShadows.black}
           position="absolute"
           width="100%"
+          bg={colors.white}
         >
           <Box
             borderBottom={`${borders.borderWidth} ${borders.borderStyle} ${colors.linkWater}`}

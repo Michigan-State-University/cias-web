@@ -88,6 +88,7 @@ exports[`<QuestionSettings /> Should render and match the snapshot 1`] = `
   border: 1px solid transparent;
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
+  margin-left: 10px;
   width: 175px;
 }
 

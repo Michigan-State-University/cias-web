@@ -50,6 +50,7 @@ const QuestionSettings = ({
           </Row>
           <Settings />
           <Button
+            ml={10}
             onClick={onGoToSessionMapClick}
             width={175}
             title={formatMessage(messages.goToSessionMap)}

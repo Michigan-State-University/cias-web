@@ -83,6 +83,7 @@ exports[`<BlockTypeChooser /> should match the snapshot while being open 1`] = `
   border-radius: 5px;
   width: 100%;
   position: absolute;
+  background-color: rgba(255,255,255,1);
   border-radius: 10px;
   box-shadow: 0px 0px 50px rgba(0,0,0,0.08);
   border-radius: 10px;
