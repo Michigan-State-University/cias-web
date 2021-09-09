@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
 
-import { colors } from 'theme';
+import { colors, themeColors } from 'theme';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import useDidUpdateEffect from 'utils/useDidUpdateEffect';
 import {
@@ -19,7 +19,7 @@ import Divider from 'components/Divider';
 import { SelectOption } from 'components/Select/types';
 import ApiSelect from 'components/Select/ApiSelect';
 import StyledInput from 'components/Input/StyledInput';
-
+import dayjs from 'dayjs';
 import messages from './messages';
 import CatMhTests from '../../components/CatMhTests';
 
@@ -41,9 +41,10 @@ const EditCatSession = ({
     catMhTimeFrameId,
     googleTtsVoice,
     catMhTestTypes,
+    createdAt,
   } = session;
   useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
-  const { formatMessage } = useIntl();
+  const { formatMessage, formatDate } = useIntl();
 
   const mappedCatTests = useMemo(
     () => catMhTestTypes.map(({ id }) => +id),
@@ -109,9 +110,23 @@ const EditCatSession = ({
         boxShadow={`0px 4px 20px ${colors.selago}`}
         height="100%"
       >
-        <Text fontSize={20} fontWeight="bold">
-          {formatMessage(messages.generalSettings)}
-        </Text>
+        <Box height={35} display="flex" justify="between" align="center">
+          <Text fontSize={20} fontWeight="bold">
+            {formatMessage(messages.generalSettings)}
+          </Text>
+          <Box display="flex" justify="center" align="center">
+            <Text lineHeight="26px" mr={5} color={themeColors.comment}>
+              {formatMessage(messages.creationDate)}
+            </Text>
+            <Text
+              fontWeight="bold"
+              lineHeight="26px"
+              color={themeColors.primary}
+            >
+              {formatDate(dayjs(createdAt).toDate())}
+            </Text>
+          </Box>
+        </Box>
         <Row my={30}>
           <Divider />
         </Row>

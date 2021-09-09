@@ -45,6 +45,7 @@ export interface SessionDto {
   logoUrl?: string;
   generatedReportCount: number;
   variable: string;
+  createdAt: string;
   googleTtsVoice: GoogleTTSVoiceDto;
   smsPlansCount: number;
   scheduleAt?: string;
