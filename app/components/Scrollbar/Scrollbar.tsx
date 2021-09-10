@@ -19,13 +19,17 @@ type Props = {
   sizeRatio: number;
   positionRatio: number;
   onPositionRatioChange: (positionRatio: number) => void;
+  thickness?: number;
+  margin?: number;
 };
 
-const SessionMapScrollbar = ({
+const Scrollbar = ({
   horizontal,
   sizeRatio,
   positionRatio,
   onPositionRatioChange,
+  thickness = 5,
+  margin = 0,
 }: Props): JSX.Element => {
   const containerRef = useRef<Nullable<HTMLDivElement>>(null);
 
@@ -35,7 +39,11 @@ const SessionMapScrollbar = ({
       current: { offsetWidth, offsetHeight },
     } = containerRef;
     return horizontal ? offsetWidth : offsetHeight;
-  }, [containerRef.current?.offsetHeight, containerRef.current?.offsetWidth]);
+  }, [
+    containerRef.current?.offsetHeight,
+    containerRef.current?.offsetWidth,
+    horizontal,
+  ]);
 
   const scrollbarSize = useMemo(
     () => Math.round(sizeRatio * containerSize),
@@ -67,11 +75,20 @@ const SessionMapScrollbar = ({
         newPositionOnAxis / (containerSize - scrollbarSize),
       );
     },
-    [containerSize, scrollbarSize],
+    [containerSize, scrollbarSize, onPositionRatioChange, horizontal],
+  );
+
+  const containerThickness = useMemo(
+    () => thickness + margin,
+    [thickness, margin],
   );
 
   return (
-    <ScrollbarContainer ref={containerRef} horizontal={horizontal}>
+    <ScrollbarContainer
+      ref={containerRef}
+      horizontal={horizontal}
+      containerThickness={containerThickness}
+    >
       {Boolean(scrollbarSize) && (
         <Draggable
           axis={horizontal ? 'x' : 'y'}
@@ -84,8 +101,8 @@ const SessionMapScrollbar = ({
           <Box
             background={dragging ? colors.periwinkleGray : colors.solitude}
             hoverColor={colors.periwinkleGray}
-            height={horizontal ? 5 : scrollbarSize}
-            width={!horizontal ? 5 : scrollbarSize}
+            height={horizontal ? thickness : scrollbarSize}
+            width={!horizontal ? thickness : scrollbarSize}
           />
         </Draggable>
       )}
@@ -93,4 +110,4 @@ const SessionMapScrollbar = ({
   );
 };
 
-export default memo(SessionMapScrollbar);
+export default memo(Scrollbar);

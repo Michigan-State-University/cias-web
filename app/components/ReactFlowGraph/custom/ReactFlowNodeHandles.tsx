@@ -1,16 +1,18 @@
 import React, { memo } from 'react';
 import { Position } from 'react-flow-renderer';
 
-import { SourceHandle, TargetHandle } from '../styled';
+import { SourceHandle, TargetHandle } from './styled';
 
 type Props = {
   nodeId: string;
   showSourceHandle?: boolean;
+  sourceHandleColor: string;
 };
 
-const SessionMapNodeHandles = ({
+const ReactFlowNodeHandles = ({
   nodeId,
   showSourceHandle,
+  sourceHandleColor,
 }: Props): JSX.Element => (
   <>
     <TargetHandle
@@ -23,9 +25,10 @@ const SessionMapNodeHandles = ({
         type="source"
         position={Position.Right}
         id={`${nodeId}-source-handle`}
+        color={sourceHandleColor}
       />
     )}
   </>
 );
 
-export default memo(SessionMapNodeHandles);
+export default memo(ReactFlowNodeHandles);

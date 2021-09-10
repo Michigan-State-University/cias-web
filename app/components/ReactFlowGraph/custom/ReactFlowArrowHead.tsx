@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 type Props = {
-  id: string;
+  type: string;
   color: string;
 };
 
-const SessionMapCustomArrowHead = ({ color, id }: Props): JSX.Element => (
+const ReactFlowArrowHead = ({ color, type }: Props): JSX.Element => (
   <svg>
     <defs>
       <marker
         className="react-flow__arrowhead"
-        id={id}
+        id={`react-flow__${type}`}
         markerWidth="12.5"
         markerHeight="12.5"
         viewBox="-10 -10 20 20"
@@ -31,4 +31,4 @@ const SessionMapCustomArrowHead = ({ color, id }: Props): JSX.Element => (
   </svg>
 );
 
-export default SessionMapCustomArrowHead;
+export default memo(ReactFlowArrowHead);

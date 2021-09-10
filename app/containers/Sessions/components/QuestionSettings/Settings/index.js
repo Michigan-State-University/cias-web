@@ -27,13 +27,16 @@ import SettingsTab from './Components/Tabs/SettingsTab';
 import messages from './messages';
 
 const Settings = ({
-  selectedQuestion: { narrator, settings, id, formula, type } = {},
+  selectedQuestion,
   intl: { formatMessage },
   tab,
   changeTab,
   setDraggable,
   interventionStatus,
 }) => {
+  if (!selectedQuestion) return <></>;
+  const { narrator, settings, id, formula, type } = selectedQuestion;
+
   const handleChange = (newTab) => {
     changeTab({ tab: newTab });
     setDraggable(false);

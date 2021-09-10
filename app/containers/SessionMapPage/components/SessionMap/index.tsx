@@ -1,51 +1,47 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useMemo } from 'react';
 
-import ReactFlow, {
-  ConnectionLineType,
-  FlowTransform,
-  NodeTypesType,
-  ReactFlowProps,
-  useStoreState,
-  useZoomPanHelper,
-} from 'react-flow-renderer';
+import { NodeTypesType } from 'react-flow-renderer';
 
 import { Question } from 'global/types/question';
 import { QuestionGroup } from 'global/types/questionGroup';
+import { SessionDto } from 'models/Session/SessionDto';
 
-import Row from 'components/Row';
-import Column from 'components/Column';
+import {
+  ReactFlowGraph,
+  ReactFlowGraphProps,
+  ReactFlowArrowHead,
+} from 'components/ReactFlowGraph';
 
-import SessionMapQuestionNode from './SessionMapQuestionNode';
-import SessionMapCustomArrowHead from './SessionMapCustomArrowHead';
 import {
-  areTransformsDifferent,
-  calculateAxisTransform,
-  calculateMinZoom,
-  calculateScrollbarPositionRatio,
-  calculateScrollbarSizeRatio,
-  calculateTransformToFitElementInView,
-  calculateTransformToFitViewInContainer,
-  createMapEdgesFromQuestions,
-  createMapNodesFromQuestions,
-  layoutElements,
-  sortQuestionsByGroupAndPosition,
-} from './utils';
-import {
-  CustomArrowHeadType,
+  SessionMapHeadType,
   defaultZoom,
   defaultMaxZoom,
   sessionMapColors,
   detailedInfoZoomThreshold,
+  SessionMapNodeType,
+  defaultMinZoom,
+  questionNodeLabelOffset,
+  scrollbarsThickness,
+  scrollbarsMargin,
 } from '../../constants';
-import SessionMapScrollbar from '../SessionMapScrollbar';
+import {
+  sortQuestionsByGroupAndPosition,
+  createMapNodes,
+  createMapEdges,
+  getNodeVerticalDistanceRatio,
+} from './utils';
+import SessionMapSessionNode from './SessionMapSessionNode';
+import SessionMapQuestionNode from './SessionMapQuestionNode';
 
 const nodeTypes: NodeTypesType = {
-  question: SessionMapQuestionNode,
+  [SessionMapNodeType.QUESTION]: SessionMapQuestionNode,
+  [SessionMapNodeType.SESSION]: SessionMapSessionNode,
 };
 
 type Props = {
   questions: Question[];
   questionGroups: QuestionGroup[];
+  sessions: SessionDto[];
   showDetailsId: string;
   onShowDetailsIdChange: (showDetailsId: string) => void;
   zoom: number;
@@ -57,6 +53,7 @@ type Props = {
 const SessionMap = ({
   questions,
   questionGroups,
+  sessions,
   showDetailsId,
   onShowDetailsIdChange,
   zoom,
@@ -64,35 +61,6 @@ const SessionMap = ({
   minZoom,
   onMinZoomChange,
 }: Props): JSX.Element => {
-  const { zoomTo, transform } = useZoomPanHelper();
-  const containerWidth = useStoreState((state) => state.width);
-  const containerHeight = useStoreState((state) => state.height);
-  const renderedNodes = useStoreState((state) => state.nodes);
-
-  const [mapLoaded, setMapLoaded] = useState(false);
-
-  const [currentTransform, setCurrentTransform] = useState<FlowTransform>({
-    x: 0,
-    y: 0,
-    zoom,
-  });
-
-  const [horizontalScrollbarSizeRatio, setHorizontalScrollbarSizeRatio] =
-    useState(0);
-  const [verticalScrollbarSizeRatio, setVerticalScrollbarSizeRatio] =
-    useState(0);
-
-  const [
-    horizontalScrollbarPositionRatio,
-    setHorizontalScrollbarPositionRatio,
-  ] = useState(0);
-  const [verticalScrollbarPositionRatio, setVerticalScrollbarPositionRatio] =
-    useState(0);
-
-  useEffect(() => {
-    zoomTo(zoom);
-  }, [zoom]);
-
   const handleShowDetailsChange = useCallback(
     (showDetails: boolean, questionId: string) => {
       onShowDetailsIdChange(showDetails ? questionId : '');
@@ -112,189 +80,51 @@ const SessionMap = ({
 
   const elements = useMemo(
     () => [
-      ...createMapNodesFromQuestions(
+      ...createMapNodes(
         sortedQuestions,
         showDetailsId,
         handleShowDetailsChange,
         showDetailedInfo,
+        sessions,
       ),
-      ...createMapEdgesFromQuestions(sortedQuestions),
+      ...createMapEdges(sortedQuestions),
     ],
     [sortedQuestions, showDetailsId, showDetailedInfo],
   );
 
-  const { layoutedElements, panAreaWidth, panAreaHeight } = useMemo(
-    () =>
-      mapLoaded
-        ? layoutElements(elements, renderedNodes)
-        : { layoutedElements: elements, panAreaWidth: 0, panAreaHeight: 0 },
-    [mapLoaded, elements],
-  );
-
-  useEffect(() => {
-    onMinZoomChange(
-      calculateMinZoom(
-        panAreaWidth,
-        panAreaHeight,
-        containerWidth,
-        containerHeight,
-      ),
-    );
-  }, [panAreaWidth, panAreaHeight, containerWidth, containerHeight]);
-
-  useEffect(() => {
-    setHorizontalScrollbarSizeRatio(
-      calculateScrollbarSizeRatio(panAreaWidth, containerWidth, zoom),
-    );
-  }, [panAreaWidth, containerWidth, zoom]);
-
-  useEffect(() => {
-    setVerticalScrollbarSizeRatio(
-      calculateScrollbarSizeRatio(panAreaHeight, containerHeight, zoom),
-    );
-  }, [panAreaHeight, containerHeight, zoom]);
-
-  const fitShowDetailsElementInView = () => {
-    const showDetailsElement = renderedNodes.find(
-      ({ id }) => id === showDetailsId,
-    );
-    if (!showDetailsElement) return;
-
-    const newTransform = calculateTransformToFitElementInView(
-      showDetailsElement,
-      currentTransform,
-      containerWidth,
-      containerHeight,
-    );
-
-    if (areTransformsDifferent(currentTransform, newTransform)) {
-      transform(newTransform);
-    }
-  };
-
-  const fitViewInContainer = () => {
-    const newTransform = calculateTransformToFitViewInContainer(
-      panAreaWidth,
-      panAreaHeight,
-      currentTransform,
-      containerWidth,
-      containerHeight,
-    );
-
-    if (areTransformsDifferent(currentTransform, newTransform)) {
-      transform(newTransform);
-    }
-  };
-
-  useEffect(() => {
-    fitViewInContainer();
-    if (showDetailsId) {
-      fitShowDetailsElementInView();
-    }
-  }, [containerWidth, containerHeight, renderedNodes]);
-
-  const handleScrollbarPositionRatioChange =
-    (axis: 'x' | 'y') => (newScrollbarPositionRatio: number) => {
-      const axisTransform = calculateAxisTransform(
-        newScrollbarPositionRatio,
-        axis === 'x' ? panAreaWidth : panAreaHeight,
-        zoom,
-        axis === 'x' ? containerWidth : containerHeight,
-      );
-      const newTransform = { ...currentTransform };
-      newTransform[axis] = axisTransform;
-      transform(newTransform);
-    };
-
-  const handleMove = (newTransform?: FlowTransform) => {
-    if (!newTransform) return;
-
-    const fitsWidth = panAreaWidth * newTransform.zoom < containerWidth;
-    const fitsHeight = panAreaHeight * newTransform.zoom < containerHeight;
-
-    if (
-      (fitsWidth && newTransform.x !== 0) ||
-      (fitsHeight && newTransform.y !== 0)
-    ) {
-      const limitedTransform = {
-        zoom: newTransform.zoom,
-        x: fitsWidth ? 0 : newTransform.x,
-        y: fitsHeight ? 0 : newTransform.y,
-      };
-      transform(limitedTransform);
-      return;
-    }
-
-    setCurrentTransform(newTransform);
-    setHorizontalScrollbarPositionRatio(
-      calculateScrollbarPositionRatio(
-        newTransform.x,
-        panAreaWidth,
-        zoom,
-        containerWidth,
-      ),
-    );
-    setVerticalScrollbarPositionRatio(
-      calculateScrollbarPositionRatio(
-        newTransform.y,
-        panAreaHeight,
-        zoom,
-        containerHeight,
-      ),
-    );
-
-    if (zoom !== newTransform.zoom) onZoomChange(newTransform.zoom);
-  };
-
-  const reactFlowProps: ReactFlowProps = {
-    elements: layoutedElements,
+  const sessionMapGraphProps: ReactFlowGraphProps = {
+    defaultMinZoom,
+    defaultMaxZoom,
+    defaultZoom,
+    zoom,
+    onZoomChange,
+    minZoom,
+    onMinZoomChange,
+    elements,
     nodeTypes,
+    getNodeVerticalDistanceRatio,
+    nodeTopMargin: questionNodeLabelOffset,
+    pickedNodeId: showDetailsId,
     nodesDraggable: false,
     nodesConnectable: false,
-    translateExtent: [
-      [0, 0],
-      [panAreaWidth, panAreaHeight],
-    ],
-    minZoom,
-    maxZoom: defaultMaxZoom,
-    defaultZoom,
-    connectionLineType: ConnectionLineType.SmoothStep,
-    onLoad: () => setMapLoaded(true),
-    onMove: handleMove,
+    scrollbarsThickness,
+    scrollbarsMargin,
   };
 
   return (
     <>
-      <Row filled>
-        <Column cursor="grab">
-          <ReactFlow {...reactFlowProps}>
-            <SessionMapCustomArrowHead
-              id={`react-flow__${CustomArrowHeadType.BASE}`}
-              color={sessionMapColors.edgeBase}
-            />
-            <SessionMapCustomArrowHead
-              id={`react-flow__${CustomArrowHeadType.SELECTED}`}
-              color={sessionMapColors.selected}
-            />
-          </ReactFlow>
-        </Column>
-        <SessionMapScrollbar
-          sizeRatio={verticalScrollbarSizeRatio}
-          positionRatio={verticalScrollbarPositionRatio}
-          onPositionRatioChange={handleScrollbarPositionRatioChange('y')}
+      <ReactFlowGraph {...sessionMapGraphProps}>
+        <ReactFlowArrowHead
+          type={SessionMapHeadType.BASE}
+          color={sessionMapColors.edgeBase}
         />
-      </Row>
-      <Row gap={20}>
-        <SessionMapScrollbar
-          horizontal
-          sizeRatio={horizontalScrollbarSizeRatio}
-          positionRatio={horizontalScrollbarPositionRatio}
-          onPositionRatioChange={handleScrollbarPositionRatioChange('x')}
+        <ReactFlowArrowHead
+          type={SessionMapHeadType.SELECTED}
+          color={sessionMapColors.selected}
         />
-        <div />
-      </Row>
+      </ReactFlowGraph>
     </>
   );
 };
 
-export default SessionMap;
+export default memo(SessionMap);

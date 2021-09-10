@@ -41,4 +41,17 @@ export default defineMessages({
     id: `${scope}.zoomOutLabel`,
     defaultMessage: 'Zoom Out',
   },
+  redirectionTo: {
+    id: `${scope}.redirectionTo`,
+    defaultMessage: 'Redirection to Session {no}',
+  },
+  sessionNo: {
+    id: `${scope}.sessionNo`,
+    defaultMessage: 'Session {no}',
+  },
+  switchSession: {
+    id: `${scope}.switchSession`,
+    defaultMessage:
+      '<p style="font-size: 10px;">In <span style="font-weight: bold;">“Session Map”</span> you can see only one session. Switch a session to see its map.</p>',
+  },
 });
