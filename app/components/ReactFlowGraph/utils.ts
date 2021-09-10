@@ -213,11 +213,13 @@ export const calculateTransformToFitViewInContainer = (
 
 export const calculateTransformToFitNodeInView = (
   element: Node,
-  { x, y, zoom }: FlowTransform,
+  currentTransform: FlowTransform,
   containerWidth: number,
   containerHeight: number,
 ): FlowTransform => {
+  const { x, y, zoom } = currentTransform;
   const { position, __rf: ref } = element;
+
   const elementLeftEndPosition = position.x * zoom;
   const elementTopEndPosition = position.y * zoom;
   const elementRightEndPosition = (position.x + ref.width) * zoom;
@@ -226,30 +228,39 @@ export const calculateTransformToFitNodeInView = (
   const viewRightEndPosition = -1 * x + containerWidth;
   const viewBottomEndPosition = -1 * y + containerHeight;
 
-  if (elementLeftEndPosition < -1 * x || elementTopEndPosition < -1 * y) {
+  const fitsLeft = elementLeftEndPosition >= -1 * x;
+  if (!fitsLeft) {
     return {
-      zoom,
+      ...currentTransform,
       x: -1 * elementLeftEndPosition,
+    };
+  }
+
+  const fitsTop = elementTopEndPosition >= -1 * y;
+  if (!fitsTop) {
+    return {
+      ...currentTransform,
       y: -1 * elementTopEndPosition,
     };
   }
 
-  if (
-    elementRightEndPosition > viewRightEndPosition ||
-    elementBottomEndPosition > viewBottomEndPosition
-  ) {
+  const fitsRight = elementRightEndPosition <= viewRightEndPosition;
+  if (!fitsRight) {
     return {
-      zoom,
+      ...currentTransform,
       x: -1 * (elementRightEndPosition - containerWidth),
+    };
+  }
+
+  const fitsBottom = elementBottomEndPosition <= viewBottomEndPosition;
+  if (!fitsBottom) {
+    return {
+      ...currentTransform,
       y: -1 * (elementBottomEndPosition - containerHeight),
     };
   }
 
-  return {
-    zoom,
-    x,
-    y,
-  };
+  return currentTransform;
 };
 
 export const areTransformsDifferent = (
