@@ -5,48 +5,64 @@ import {
   isNode,
   Node,
 } from 'react-flow-renderer';
-import dagre from 'dagre';
+import { layout, graphlib } from 'dagre';
 import isEqual from 'lodash/isEqual';
 
 import { isNanOrInfinite } from 'utils/mathUtils';
 
-// Example: https://reactflow.dev/examples/layouting/
-export const layoutElements = (
+const calculateNodeDimensionsForLayout = (
+  node: Node,
+  renderedNodes: Node[],
+  getNodeVerticalDistanceRatio: (type?: string) => number,
+): { width: number; height: number } => {
+  const renderedNode = renderedNodes.find(({ id }) => id === node.id);
+  if (renderedNode) {
+    const {
+      __rf: { width, height },
+      type,
+    } = renderedNode;
+
+    return {
+      width,
+      height: height * getNodeVerticalDistanceRatio(type),
+    };
+  }
+  return { width: 0, height: 0 };
+};
+
+const createDagreGraphWithElements = (
   elements: FlowElement[],
   renderedNodes: Node[],
   getNodeVerticalDistanceRatio: (type?: string) => number,
+): graphlib.Graph => {
+  const dagreGraph = new graphlib.Graph();
+  dagreGraph.setDefaultEdgeLabel(() => ({}));
+  dagreGraph.setGraph({ rankdir: 'LR' });
+  elements.forEach((el) => {
+    if (isNode(el)) {
+      const nodeDimensions = calculateNodeDimensionsForLayout(
+        el,
+        renderedNodes,
+        getNodeVerticalDistanceRatio,
+      );
+      dagreGraph.setNode(el.id, nodeDimensions);
+    } else {
+      dagreGraph.setEdge(el.source, el.target);
+    }
+  });
+  return dagreGraph;
+};
+
+const getLayoutedElementsAndPanAreaDimensions = (
+  elements: FlowElement[],
+  dagreGraph: graphlib.Graph,
   nodeTopMargin: number,
+  getNodeVerticalDistanceRatio: (type?: string) => number,
 ): {
   layoutedElements: FlowElement[];
   panAreaWidth: number;
   panAreaHeight: number;
 } => {
-  const dagreGraph = new dagre.graphlib.Graph();
-  dagreGraph.setDefaultEdgeLabel(() => ({}));
-  dagreGraph.setGraph({ rankdir: 'LR' });
-  elements.forEach((el) => {
-    if (isNode(el)) {
-      const renderedNode = renderedNodes.find(({ id }) => id === el.id);
-      if (renderedNode) {
-        const {
-          __rf: { width, height },
-          type,
-        } = renderedNode;
-
-        dagreGraph.setNode(el.id, {
-          width,
-          height: height * getNodeVerticalDistanceRatio(type),
-        });
-      } else {
-        dagreGraph.setNode(el.id, { width: 0, height: 0 });
-      }
-    } else {
-      dagreGraph.setEdge(el.source, el.target);
-    }
-  });
-
-  dagre.layout(dagreGraph);
-
   let panAreaWidth = 0;
   let panAreaHeight = 0;
   const layoutedElements = elements.map((el) => {
@@ -74,6 +90,33 @@ export const layoutElements = (
   });
 
   return { layoutedElements, panAreaWidth, panAreaHeight };
+};
+
+// Example: https://reactflow.dev/examples/layouting/
+export const layoutElements = (
+  elements: FlowElement[],
+  renderedNodes: Node[],
+  getNodeVerticalDistanceRatio: (type?: string) => number,
+  nodeTopMargin: number,
+): {
+  layoutedElements: FlowElement[];
+  panAreaWidth: number;
+  panAreaHeight: number;
+} => {
+  const dagreGraph = createDagreGraphWithElements(
+    elements,
+    renderedNodes,
+    getNodeVerticalDistanceRatio,
+  );
+
+  layout(dagreGraph);
+
+  return getLayoutedElementsAndPanAreaDimensions(
+    elements,
+    dagreGraph,
+    nodeTopMargin,
+    getNodeVerticalDistanceRatio,
+  );
 };
 
 export const calculateMinZoom = (
