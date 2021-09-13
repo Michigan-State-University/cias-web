@@ -1,5 +1,6 @@
 import { Edge, Node } from 'react-flow-renderer';
 import cloneDeep from 'lodash/cloneDeep';
+import intersection from 'lodash/intersection';
 
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
@@ -145,16 +146,16 @@ const createMapEdgesFromNextQuestions = (
   selectedQuestionsIds: string[],
 ): Edge[] =>
   questions.flatMap(({ id }, index) => {
-    const nextNodeId = questions[index + 1]?.id;
-    if (!nextNodeId) return [];
+    const nextQuestionId = questions[index + 1]?.id;
+    if (!nextQuestionId) return [];
 
     const edge: Edge = {
-      id: createEdgeId(id, nextNodeId),
+      id: createEdgeId(id, nextQuestionId),
       source: id,
-      target: nextNodeId,
+      target: nextQuestionId,
     };
 
-    if (selectedQuestionsIds.includes(id)) {
+    if (intersection(selectedQuestionsIds, [id, nextQuestionId]).length) {
       // @ts-ignore
       return {
         ...edge,
@@ -202,7 +203,7 @@ const createMapEdgesFromBranching = (
           target: targetNodeId,
         };
 
-        if (selectedQuestionsIds.includes(nodeId)) {
+        if (intersection(selectedQuestionsIds, [nodeId, targetNodeId]).length) {
           // @ts-ignore
           edges.push({
             ...edge,
