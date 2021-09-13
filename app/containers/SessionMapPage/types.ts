@@ -7,8 +7,10 @@ interface TileData {
 export interface QuestionTileData extends TileData {
   question: Question;
   showDetails: boolean;
-  onShowDetailsChange: (showDetails: boolean, id: string) => void;
+  onShowDetailsChange: (showDetails: boolean, questionId: string) => void;
   index: number;
+  selected: boolean;
+  onSelectedChange: (selected: boolean, questionId: string) => void;
 }
 
 export interface SessionTileData extends TileData {

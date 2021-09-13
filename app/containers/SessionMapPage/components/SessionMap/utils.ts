@@ -35,20 +35,25 @@ export const sortQuestionsByGroupAndPosition = (
 
 const createQuestionNode = (
   question: Question,
-  showDetails: boolean,
+  showDetailsId: string,
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void,
   showDetailedInfo: boolean,
   index: number,
+  selectedQuestionsIds: string[],
+  onSelectedChange: (selected: boolean, questionId: string) => void,
 ): Node<QuestionTileData> => ({
   id: question.id,
   type: SessionMapNodeType.QUESTION,
   position: { x: 0, y: 0 },
+  selectable: true,
   data: {
     question,
-    showDetails,
+    showDetails: question.id === showDetailsId,
     onShowDetailsChange,
     showDetailedInfo,
     index,
+    selected: selectedQuestionsIds.includes(question.id),
+    onSelectedChange,
   },
 });
 
@@ -99,15 +104,19 @@ export const createMapNodes = (
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void,
   showDetailedInfo: boolean,
   sessions: SessionDto[],
+  selectedQuestionsIds: string[],
+  onSelectedChange: (selected: boolean, questionId: string) => void,
 ): Node<QuestionTileData | SessionTileData>[] =>
   questions.flatMap((question, index) => {
     const nodes: Node<QuestionTileData | SessionTileData>[] = [
       createQuestionNode(
         question,
-        question.id === showDetailsId,
+        showDetailsId,
         onShowDetailsChange,
         showDetailedInfo,
         index,
+        selectedQuestionsIds,
+        onSelectedChange,
       ),
     ];
 

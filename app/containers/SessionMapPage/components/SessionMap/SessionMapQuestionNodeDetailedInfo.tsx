@@ -52,21 +52,23 @@ const SessionMapQuestionNodeDetailedInfo = ({
       />
       <Divider my={16} />
       <Row>
-        <Switch
-          checked={showDetails}
-          onToggle={handleToggle}
-          id={`show-details-switch-${id}`}
-          labelPosition={LabelPosition.Right}
-        >
-          <Text
-            ml={5}
-            fontSize={12}
-            fontWeight="bold"
-            color={themeColors.comment}
+        <div onClick={(e) => e.stopPropagation()}>
+          <Switch
+            checked={showDetails}
+            onToggle={handleToggle}
+            id={`show-details-switch-${id}`}
+            labelPosition={LabelPosition.Right}
           >
-            {formatMessage(messages.showDetails)}
-          </Text>
-        </Switch>
+            <Text
+              ml={5}
+              fontSize={12}
+              fontWeight="bold"
+              color={themeColors.comment}
+            >
+              {formatMessage(messages.showDetails)}
+            </Text>
+          </Switch>
+        </div>
       </Row>
     </div>
   );

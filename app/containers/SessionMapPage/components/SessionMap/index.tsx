@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 
 import { NodeTypesType } from 'react-flow-renderer';
 
@@ -61,11 +61,36 @@ const SessionMap = ({
   minZoom,
   onMinZoomChange,
 }: Props): JSX.Element => {
+  const [selectedQuestionsIds, setSelectedQuestionsIds] = useState<string[]>(
+    [],
+  );
+
+  const unselectQuestion = (questionId: string) => {
+    setSelectedQuestionsIds(
+      selectedQuestionsIds.filter((id) => id !== questionId),
+    );
+  };
+
+  const selectQuestion = (questionId: string) => {
+    setSelectedQuestionsIds([...selectedQuestionsIds, questionId]);
+  };
+
+  const handleSelectedChange = useCallback(
+    (selected: boolean, questionId: string) => {
+      if (selected) {
+        selectQuestion(questionId);
+      } else {
+        unselectQuestion(questionId);
+      }
+    },
+    [selectedQuestionsIds, setSelectedQuestionsIds],
+  );
+
   const handleShowDetailsChange = useCallback(
     (showDetails: boolean, questionId: string) => {
       onShowDetailsIdChange(showDetails ? questionId : '');
     },
-    [],
+    [onShowDetailsIdChange],
   );
 
   const showDetailedInfo = useMemo(
@@ -86,10 +111,20 @@ const SessionMap = ({
         handleShowDetailsChange,
         showDetailedInfo,
         sessions,
+        selectedQuestionsIds,
+        handleSelectedChange,
       ),
       ...createMapEdges(sortedQuestions),
     ],
-    [sortedQuestions, showDetailsId, showDetailedInfo],
+    [
+      sortedQuestions,
+      showDetailsId,
+      handleShowDetailsChange,
+      showDetailedInfo,
+      sessions,
+      selectedQuestionsIds,
+      handleSelectedChange,
+    ],
   );
 
   const sessionMapGraphProps: ReactFlowGraphProps = {
