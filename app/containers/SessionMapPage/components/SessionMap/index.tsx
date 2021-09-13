@@ -114,7 +114,7 @@ const SessionMap = ({
         selectedQuestionsIds,
         handleSelectedChange,
       ),
-      ...createMapEdges(sortedQuestions),
+      ...createMapEdges(sortedQuestions, selectedQuestionsIds),
     ],
     [
       sortedQuestions,
@@ -152,6 +152,10 @@ const SessionMap = ({
         <ReactFlowArrowHead
           type={SessionMapHeadType.BASE}
           color={sessionMapColors.edgeBase}
+        />
+        <ReactFlowArrowHead
+          type={SessionMapHeadType.SELECTED_LIGHT}
+          color={sessionMapColors.selectedLight}
         />
         <ReactFlowArrowHead
           type={SessionMapHeadType.SELECTED}

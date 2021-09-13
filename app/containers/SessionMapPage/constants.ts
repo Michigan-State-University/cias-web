@@ -22,6 +22,7 @@ export const sessionMapColors = {
   nodeDetailsShown: colors.orchid,
   edgeBase: colors.periwinkleGray,
   selected: colors.jungleGreen,
+  selectedLight: colors.jungleGreen50,
   sessionNode: colors.tuftsBlue,
 };
 
@@ -33,13 +34,27 @@ export enum SessionMapNodeType {
 export enum SessionMapHeadType {
   BASE = 'sessionmap-base',
   SELECTED = 'sesionmap-selected',
+  SELECTED_LIGHT = 'sesionmap-selected-light',
 }
 
-export const baseEdgeSharedAttributes = {
+export const edgeSharedAttributes = {
   type: ConnectionLineType.SmoothStep,
+};
+
+export const baseEdgeSharedAttributes = {
+  ...edgeSharedAttributes,
   arrowHeadType: SessionMapHeadType.BASE,
   style: {
     strokeWidth: 2,
     stroke: sessionMapColors.edgeBase,
+  },
+};
+
+export const selectedLightEdgeSharedAttributes = {
+  ...edgeSharedAttributes,
+  arrowHeadType: SessionMapHeadType.SELECTED_LIGHT,
+  style: {
+    strokeWidth: 2,
+    stroke: sessionMapColors.selectedLight,
   },
 };

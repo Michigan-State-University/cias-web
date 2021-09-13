@@ -11,6 +11,7 @@ import {
   sessionNodesVerticalDistanceRatio,
   questionNodesVerticalDistanceRatio,
   baseEdgeSharedAttributes,
+  selectedLightEdgeSharedAttributes,
 } from '../../constants';
 
 export const sortQuestionsByGroupAndPosition = (
@@ -139,15 +140,31 @@ const findQuestionPosition = (
 const edgeExists = (edges: Edge[], edgeId: string): boolean =>
   Boolean(edges.find(({ id }) => id === edgeId));
 
-const createMapEdgesFromNextQuestions = (questions: Question[]): Edge[] =>
+const createMapEdgesFromNextQuestions = (
+  questions: Question[],
+  selectedQuestionsIds: string[],
+): Edge[] =>
   questions.flatMap(({ id }, index) => {
     const nextNodeId = questions[index + 1]?.id;
     if (!nextNodeId) return [];
-    // @ts-ignore
-    return {
+
+    const edge: Edge = {
       id: createEdgeId(id, nextNodeId),
       source: id,
       target: nextNodeId,
+    };
+
+    if (selectedQuestionsIds.includes(id)) {
+      // @ts-ignore
+      return {
+        ...edge,
+        ...selectedLightEdgeSharedAttributes,
+      } as Edge;
+    }
+
+    // @ts-ignore
+    return {
+      ...edge,
       ...baseEdgeSharedAttributes,
     } as Edge;
   });
@@ -155,6 +172,7 @@ const createMapEdgesFromNextQuestions = (questions: Question[]): Edge[] =>
 const createMapEdgesFromBranching = (
   questions: Question[],
   existingEdges: Edge[],
+  selectedQuestionsIds: string[],
 ): Edge[] => {
   const edges = cloneDeep(existingEdges);
   // check every target of every pattern of every question
@@ -178,23 +196,41 @@ const createMapEdgesFromBranching = (
 
         if (edgeExists(edges, edgeId)) return;
 
-        // @ts-ignore
         const edge = {
           id: edgeId,
           source: nodeId,
           target: targetNodeId,
+        };
+
+        if (selectedQuestionsIds.includes(nodeId)) {
+          // @ts-ignore
+          edges.push({
+            ...edge,
+            ...selectedLightEdgeSharedAttributes,
+          });
+          return;
+        }
+
+        // @ts-ignore
+        edges.push({
+          ...edge,
           ...baseEdgeSharedAttributes,
-        } as Edge;
-        edges.push(edge);
+        });
       }),
     ),
   );
   return edges;
 };
 
-export const createMapEdges = (questions: Question[]): Edge[] => {
-  const edges: Edge[] = createMapEdgesFromNextQuestions(questions);
-  return createMapEdgesFromBranching(questions, edges);
+export const createMapEdges = (
+  questions: Question[],
+  selectedQuestionsIds: string[],
+): Edge[] => {
+  const edges: Edge[] = createMapEdgesFromNextQuestions(
+    questions,
+    selectedQuestionsIds,
+  );
+  return createMapEdgesFromBranching(questions, edges, selectedQuestionsIds);
 };
 
 export const getNodeVerticalDistanceRatio = (nodeType?: string): number =>
