@@ -14,6 +14,7 @@ import values from 'lodash/values';
 import find from 'lodash/find';
 
 import { dateQuestion } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session/SessionDto';
 
 import {
   SCHEDULE_OPTIONS,
@@ -38,7 +39,6 @@ import Selector from 'components/Selector';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 
-import { SessionTypes } from 'models/Session/SessionDto';
 import ExactDateOption from './ExactDateOption';
 import DaysAfterOption from './DaysAfterOption';
 import messages from './messages';

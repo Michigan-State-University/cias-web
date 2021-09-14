@@ -20,6 +20,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session/SessionTypes';
 
 import VariableChooser from 'containers/VariableChooser';
 
@@ -41,7 +42,6 @@ import {
 } from 'global/reducers/textMessages';
 
 import { ModalType, useModal } from 'components/Modal';
-import { SessionTypes } from 'models/Session/SessionTypes';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessagesContext } from '../../utils';
 import messages from './messages';

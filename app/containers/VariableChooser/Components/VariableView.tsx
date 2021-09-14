@@ -78,11 +78,13 @@ const VariableView = ({ onClick }: Props) => {
   const apiVariables = useMemo(() => {
     const { data } = state;
     if (!data) return null;
-    const arr: VariablesRendered[] = [];
+    const variables: VariablesRendered[] = [];
     data.variable_names.map(({ subtitle, variables: varNames }) =>
-      varNames.map((varName) => arr.push({ subtitle, variable: varName })),
+      varNames.map((varName) =>
+        variables.push({ subtitle, variable: varName }),
+      ),
     );
-    return arr;
+    return variables;
   }, [state.data]);
 
   const toSessionView = () => {

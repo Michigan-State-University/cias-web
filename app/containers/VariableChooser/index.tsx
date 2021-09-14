@@ -14,6 +14,9 @@ import {
   copyModalReducer,
 } from 'global/reducers/copyModalReducer';
 
+import { SessionTypes } from 'models/Session/SessionDto';
+import { QuestionDto, QuestionTypes } from 'models/Question/QuestionDto';
+
 import { colors, boxShadows } from 'theme';
 
 import useOutsideClick from 'utils/useOutsideClick';
@@ -21,8 +24,6 @@ import useOutsideClick from 'utils/useOutsideClick';
 import Row from 'components/Row';
 import Box from 'components/Box';
 
-import { SessionTypes } from 'models/Session/SessionDto';
-import { QuestionDto, QuestionTypes } from 'models/Question/QuestionDto';
 import VariableView from './Components/VariableView';
 import SessionView from './Components/SessionView';
 import InterventionView from './Components/InterventionView';

@@ -1,6 +1,6 @@
+import { createContext } from 'react';
 import { QuestionTypes, QuestionDto } from 'models/Question/QuestionDto';
 import { SessionTypes } from 'models/Session/SessionDto';
-import { createContext } from 'react';
 
 export enum VIEWS {
   VARIABLE = 'VARIABLE',

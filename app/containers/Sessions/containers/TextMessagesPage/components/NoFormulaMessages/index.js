@@ -14,6 +14,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session/SessionDto';
 import { changeNoFormulaText } from 'global/reducers/textMessages';
 
 import VariableChooser from 'containers/VariableChooser';
@@ -25,7 +26,6 @@ import { StyledInput } from 'components/Input/StyledInput';
 import Box from 'components/Box';
 import OriginalTextHover from 'components/OriginalTextHover';
 
-import { SessionTypes } from 'models/Session/SessionDto';
 import messages from './messages';
 import { TextMessagesContext } from '../../utils';
 import settingsMessages from '../../containers/TextMessageSettings/messages';

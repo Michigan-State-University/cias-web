@@ -23,6 +23,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session/SessionDto';
 import { colors, themeColors } from 'theme';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
@@ -44,7 +45,6 @@ import TextButton from 'components/Button/TextButton';
 import OriginalTextHover from 'components/OriginalTextHover';
 import { ModalType, useModal } from 'components/Modal';
 
-import { SessionTypes } from 'models/Session/SessionDto';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
 import Option from './Option';

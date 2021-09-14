@@ -6,11 +6,11 @@ import {
   fetchSessionsRequest,
   makeSelectSessions,
 } from 'global/reducers/copyModalReducer';
+import { SessionDto } from 'models/Session/SessionDto';
 
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
 
-import { SessionDto } from 'models/Session/SessionDto';
 import ViewWrapper from './ViewWrapper';
 import SessionRow from './SessionRow';
 
