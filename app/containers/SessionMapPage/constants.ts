@@ -32,15 +32,15 @@ export enum SessionMapNodeType {
 }
 
 export enum SessionMapHeadType {
-  BASE = 'sessionmap-base',
-  SELECTED_LIGHT = 'sesionmap-selected-light',
-  SELECTED = 'sesionmap-selected',
+  BASE = 'session-map-base',
+  HIGHLIGHTED = 'session-map-highlighted',
+  DIRECT_CONNECTION = 'session-map-direct-connection',
 }
 
 export const edgePriorities = new Map<string, number>([
   [SessionMapHeadType.BASE, 1],
-  [SessionMapHeadType.SELECTED_LIGHT, 2],
-  [SessionMapHeadType.SELECTED, 3],
+  [SessionMapHeadType.HIGHLIGHTED, 2],
+  [SessionMapHeadType.DIRECT_CONNECTION, 3],
 ]);
 
 export const edgeSharedAttributes: Partial<Edge> = {
@@ -60,7 +60,7 @@ export const baseEdgeSharedAttributes: Partial<Edge> = {
 export const selectedLightEdgeSharedAttributes: Partial<Edge> = {
   ...edgeSharedAttributes,
   // @ts-ignore
-  arrowHeadType: SessionMapHeadType.SELECTED_LIGHT,
+  arrowHeadType: SessionMapHeadType.HIGHLIGHTED,
   style: {
     strokeWidth: 2,
     stroke: sessionMapColors.selectedLight,
@@ -70,7 +70,7 @@ export const selectedLightEdgeSharedAttributes: Partial<Edge> = {
 export const selectedEdgeSharedAttributes: Partial<Edge> = {
   ...edgeSharedAttributes,
   // @ts-ignore
-  arrowHeadType: SessionMapHeadType.SELECTED,
+  arrowHeadType: SessionMapHeadType.DIRECT_CONNECTION,
   style: {
     strokeWidth: 3,
     stroke: sessionMapColors.selected,

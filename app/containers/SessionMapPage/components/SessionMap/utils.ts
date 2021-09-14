@@ -245,14 +245,15 @@ const createMapEdgesFromBranching = (
 const removeHighlightIfDirectConnectionExists = (edges: Edge[]): Edge[] => {
   const edgesCopy: Edge[] = cloneDeep(edges);
   const directConnections = edgesCopy.filter(
-    // @ts-ignore
-    ({ arrowHeadType }) => arrowHeadType === SessionMapHeadType.SELECTED,
+    ({ arrowHeadType }) =>
+      // @ts-ignore
+      arrowHeadType === SessionMapHeadType.DIRECT_CONNECTION,
   );
 
   for (let i = 0; i < directConnections.length; i++) {
     const anyRemovableHighlights = edgesCopy.some(
       // @ts-ignore
-      (edge) => edge.arrowHeadType === SessionMapHeadType.SELECTED_LIGHT,
+      (edge) => edge.arrowHeadType === SessionMapHeadType.HIGHLIGHTED,
     );
     if (!anyRemovableHighlights) {
       break;
@@ -263,7 +264,7 @@ const removeHighlightIfDirectConnectionExists = (edges: Edge[]): Edge[] => {
     edgesCopy.forEach((edge, edgeIndex) => {
       if (
         // @ts-ignore
-        edge.arrowHeadType === SessionMapHeadType.SELECTED_LIGHT &&
+        edge.arrowHeadType === SessionMapHeadType.HIGHLIGHTED &&
         (edge.source === connectingEdge.source ||
           edge.target === connectingEdge.target)
       ) {

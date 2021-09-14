@@ -152,11 +152,11 @@ const SessionMap = ({
           color={sessionMapColors.edgeBase}
         />
         <ReactFlowArrowHead
-          type={SessionMapHeadType.SELECTED_LIGHT}
+          type={SessionMapHeadType.HIGHLIGHTED}
           color={sessionMapColors.selectedLight}
         />
         <ReactFlowArrowHead
-          type={SessionMapHeadType.SELECTED}
+          type={SessionMapHeadType.DIRECT_CONNECTION}
           color={sessionMapColors.selected}
         />
       </ReactFlowGraph>
