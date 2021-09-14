@@ -14,6 +14,7 @@ import {
   baseEdgeSharedAttributes,
   selectedLightEdgeSharedAttributes,
   selectedEdgeSharedAttributes,
+  SessionMapHeadType,
 } from '../../constants';
 
 export const sortQuestionsByGroupAndPosition = (
@@ -209,7 +210,7 @@ const createMapEdgesFromBranching = (
   existingEdges: Edge[],
   selectedQuestionsIds: string[],
 ): Edge[] => {
-  const edges = cloneDeep(existingEdges);
+  const edges: Edge[] = cloneDeep(existingEdges);
   // check every target of every pattern of every question
   questions.forEach(({ id: nodeId, formula: { patterns } }, questionIndex) =>
     patterns.forEach(({ target: targets }) =>
@@ -239,15 +240,58 @@ const createMapEdgesFromBranching = (
   return edges;
 };
 
+// if selected node has direct connections with any other selected nodes,
+// remove highlight from input/output edges other than these creating a direct connections
+const removeHighlightIfDirectConnectionExists = (edges: Edge[]): Edge[] => {
+  const edgesCopy: Edge[] = cloneDeep(edges);
+  const directConnections = edgesCopy.filter(
+    // @ts-ignore
+    ({ arrowHeadType }) => arrowHeadType === SessionMapHeadType.SELECTED,
+  );
+
+  for (let i = 0; i < directConnections.length; i++) {
+    const anyRemovableHighlights = edgesCopy.some(
+      // @ts-ignore
+      (edge) => edge.arrowHeadType === SessionMapHeadType.SELECTED_LIGHT,
+    );
+    if (!anyRemovableHighlights) {
+      break;
+    }
+
+    const connectingEdge = directConnections[i];
+
+    edgesCopy.forEach((edge, edgeIndex) => {
+      if (
+        // @ts-ignore
+        edge.arrowHeadType === SessionMapHeadType.SELECTED_LIGHT &&
+        (edge.source === connectingEdge.source ||
+          edge.target === connectingEdge.target)
+      ) {
+        edgesCopy[edgeIndex] = {
+          ...edge,
+          ...baseEdgeSharedAttributes,
+        };
+      }
+    });
+  }
+
+  return edgesCopy;
+};
+
 export const createMapEdges = (
   questions: Question[],
   selectedQuestionsIds: string[],
 ): Edge[] => {
-  const edges: Edge[] = createMapEdgesFromNextQuestions(
+  const edgesFromNextQuestions: Edge[] = createMapEdgesFromNextQuestions(
     questions,
     selectedQuestionsIds,
   );
-  return createMapEdgesFromBranching(questions, edges, selectedQuestionsIds);
+  const allEdges: Edge[] = createMapEdgesFromBranching(
+    questions,
+    edgesFromNextQuestions,
+    selectedQuestionsIds,
+  );
+  return removeHighlightIfDirectConnectionExists(allEdges);
 };
 
 export const getNodeVerticalDistanceRatio = (nodeType?: string): number =>
