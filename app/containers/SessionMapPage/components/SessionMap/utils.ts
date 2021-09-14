@@ -141,33 +141,49 @@ const findQuestionPosition = (
 const edgeExists = (edges: Edge[], edgeId: string): boolean =>
   Boolean(edges.find(({ id }) => id === edgeId));
 
+const createEdgeObject = (
+  id: string,
+  source: string,
+  target: string,
+  selectedNodesIds: string[],
+): Edge => {
+  const edge: Edge = {
+    id,
+    source,
+    target,
+  };
+
+  // if either source or target node is selected
+  if (intersection(selectedNodesIds, [source, target]).length) {
+    // @ts-ignore
+    return {
+      ...edge,
+      ...selectedLightEdgeSharedAttributes,
+    } as Edge;
+  }
+
+  // if neither source nor target node is selected
+  // @ts-ignore
+  return {
+    ...edge,
+    ...baseEdgeSharedAttributes,
+  } as Edge;
+};
+
 const createMapEdgesFromNextQuestions = (
   questions: Question[],
   selectedQuestionsIds: string[],
 ): Edge[] =>
-  questions.flatMap(({ id }, index) => {
+  questions.flatMap(({ id: questionId }, index) => {
     const nextQuestionId = questions[index + 1]?.id;
     if (!nextQuestionId) return [];
 
-    const edge: Edge = {
-      id: createEdgeId(id, nextQuestionId),
-      source: id,
-      target: nextQuestionId,
-    };
-
-    if (intersection(selectedQuestionsIds, [id, nextQuestionId]).length) {
-      // @ts-ignore
-      return {
-        ...edge,
-        ...selectedLightEdgeSharedAttributes,
-      } as Edge;
-    }
-
-    // @ts-ignore
-    return {
-      ...edge,
-      ...baseEdgeSharedAttributes,
-    } as Edge;
+    return createEdgeObject(
+      createEdgeId(questionId, nextQuestionId),
+      questionId,
+      nextQuestionId,
+      selectedQuestionsIds,
+    );
   });
 
 const createMapEdgesFromBranching = (
@@ -192,31 +208,13 @@ const createMapEdgesFromBranching = (
         const targetNodeId = type.startsWith('Question')
           ? targetId
           : createSessionNodeId(nodeId, targetId);
-
         const edgeId = createEdgeId(nodeId, targetNodeId);
 
         if (edgeExists(edges, edgeId)) return;
 
-        const edge = {
-          id: edgeId,
-          source: nodeId,
-          target: targetNodeId,
-        };
-
-        if (intersection(selectedQuestionsIds, [nodeId, targetNodeId]).length) {
-          // @ts-ignore
-          edges.push({
-            ...edge,
-            ...selectedLightEdgeSharedAttributes,
-          });
-          return;
-        }
-
-        // @ts-ignore
-        edges.push({
-          ...edge,
-          ...baseEdgeSharedAttributes,
-        });
+        edges.push(
+          createEdgeObject(edgeId, nodeId, targetNodeId, selectedQuestionsIds),
+        );
       }),
     ),
   );
