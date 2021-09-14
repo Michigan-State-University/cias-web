@@ -23,6 +23,7 @@ import {
   questionNodeLabelOffset,
   scrollbarsThickness,
   scrollbarsMargin,
+  edgePriorities,
 } from '../../constants';
 import {
   sortQuestionsByGroupAndPosition,
@@ -144,6 +145,7 @@ const SessionMap = ({
     nodesConnectable: false,
     scrollbarsThickness,
     scrollbarsMargin,
+    edgePriorities,
   };
 
   return (

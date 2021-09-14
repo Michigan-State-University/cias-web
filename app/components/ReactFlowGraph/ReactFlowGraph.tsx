@@ -22,6 +22,7 @@ import {
   calculateTransformToFitNodeInView,
   calculateTransformToFitViewInContainer,
   layoutElements,
+  prioritizeEdges,
 } from './utils';
 
 export interface ReactFlowGraphProps extends ReactFlowProps {
@@ -39,6 +40,7 @@ export interface ReactFlowGraphProps extends ReactFlowProps {
   pickedNodeId?: string;
   scrollbarsThickness?: number;
   scrollbarsMargin?: number;
+  edgePriorities?: Map<string, number>;
   children?: React.ReactNode | React.ReactNode[];
 }
 
@@ -57,6 +59,7 @@ const ReactFlowGraph = ({
   pickedNodeId,
   scrollbarsThickness = 0,
   scrollbarsMargin = 0,
+  edgePriorities,
   children,
   ...restReactFlowProps
 }: ReactFlowGraphProps): JSX.Element => {
@@ -102,6 +105,14 @@ const ReactFlowGraph = ({
     [mapLoaded, elements],
   );
 
+  const layoutedElementsWithPrioritizedEdges = useMemo(
+    () =>
+      mapLoaded && edgePriorities
+        ? prioritizeEdges(layoutedElements, edgePriorities)
+        : layoutedElements,
+    [mapLoaded, layoutedElements, edgePriorities],
+  );
+
   useEffect(() => {
     if (onMinZoomChange) {
       onMinZoomChange(
@@ -115,7 +126,14 @@ const ReactFlowGraph = ({
         ),
       );
     }
-  }, [panAreaWidth, panAreaHeight, containerWidth, containerHeight]);
+  }, [
+    panAreaWidth,
+    panAreaHeight,
+    containerWidth,
+    containerHeight,
+    defaultZoom,
+    defaultMinZoom,
+  ]);
 
   useEffect(() => {
     setHorizontalScrollbarSizeRatio(
@@ -220,7 +238,7 @@ const ReactFlowGraph = ({
   };
 
   const reactFlowProps: ReactFlowProps = {
-    elements: layoutedElements,
+    elements: layoutedElementsWithPrioritizedEdges,
     nodeTypes,
     translateExtent: [
       [0, 0],
