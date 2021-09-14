@@ -66,3 +66,13 @@ export const selectedLightEdgeSharedAttributes: Partial<Edge> = {
     stroke: sessionMapColors.selectedLight,
   },
 };
+
+export const selectedEdgeSharedAttributes: Partial<Edge> = {
+  ...edgeSharedAttributes,
+  // @ts-ignore
+  arrowHeadType: SessionMapHeadType.SELECTED,
+  style: {
+    strokeWidth: 3,
+    stroke: sessionMapColors.selected,
+  },
+};

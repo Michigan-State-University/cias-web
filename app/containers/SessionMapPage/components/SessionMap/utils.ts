@@ -13,6 +13,7 @@ import {
   questionNodesVerticalDistanceRatio,
   baseEdgeSharedAttributes,
   selectedLightEdgeSharedAttributes,
+  selectedEdgeSharedAttributes,
 } from '../../constants';
 
 export const sortQuestionsByGroupAndPosition = (
@@ -163,21 +164,28 @@ const createEdgeObject = (
     target,
   };
 
-  // if either source or target node is selected
-  if (intersection(selectedNodesIds, [source, target]).length) {
-    // @ts-ignore
-    return {
-      ...edge,
-      ...selectedLightEdgeSharedAttributes,
-    } as Edge;
+  const { length: edgeSelectedNodesCount } = intersection(selectedNodesIds, [
+    source,
+    target,
+  ]);
+
+  let edgeSharedAttributes;
+  switch (edgeSelectedNodesCount) {
+    case 1: // if either source or target node is selected
+      edgeSharedAttributes = selectedLightEdgeSharedAttributes;
+      break;
+    case 2: // if both source and target node are selected
+      edgeSharedAttributes = selectedEdgeSharedAttributes;
+      break;
+    case 0: // if neither source nor target node is selected
+    default:
+      edgeSharedAttributes = baseEdgeSharedAttributes;
   }
 
-  // if neither source nor target node is selected
-  // @ts-ignore
   return {
     ...edge,
-    ...baseEdgeSharedAttributes,
-  } as Edge;
+    ...edgeSharedAttributes,
+  };
 };
 
 const createMapEdgesFromNextQuestions = (
