@@ -240,8 +240,8 @@ const createMapEdgesFromBranching = (
   return edges;
 };
 
-// if selected node has direct connections with any other selected nodes,
-// remove highlight from input/output edges other than these creating a direct connections
+// if a selected node has direct connections with any other selected nodes,
+// remove a highlight from input/output edges other than these creating direct connections
 const removeHighlightIfDirectConnectionExists = (edges: Edge[]): Edge[] => {
   const edgesCopy: Edge[] = cloneDeep(edges);
   const directConnections = edgesCopy.filter(
