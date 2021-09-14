@@ -863,6 +863,7 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="c21"
                   src="IMAGE_MOCK"
                 />
+                
               </div>
             </div>
           </div>
@@ -1998,6 +1999,7 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="c20"
                   src="IMAGE_MOCK"
                 />
+                
               </div>
             </div>
           </div>
