@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { memo, useContext, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
@@ -11,22 +10,27 @@ import {
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
 
+import { SessionDto } from 'models/Session/SessionDto';
 import ViewWrapper from './ViewWrapper';
 import SessionRow from './SessionRow';
 
 import messages from '../messages';
 import { VariableChooserContext, VIEWS } from '../constants';
 
-const SessionView = ({ onClick }) => {
+interface Props {
+  onClick: (sessionId: string) => void;
+}
+
+const SessionView = ({ onClick }: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
 
   // actions
-  const fetchSessions = (interventionId) =>
+  const fetchSessions = (interventionId: string) =>
     dispatch(fetchSessionsRequest(interventionId));
 
   // selectors
-  const allSessions = useSelector(makeSelectSessions());
+  const allSessions = useSelector(makeSelectSessions()) as SessionDto[];
 
   const {
     currentInterventionId,
@@ -36,6 +40,7 @@ const SessionView = ({ onClick }) => {
     initialSessionId,
     isMultiIntervention,
     setCurrentView,
+    sessionTypesWhiteList,
   } = useContext(VariableChooserContext);
 
   useEffect(() => {
@@ -43,40 +48,52 @@ const SessionView = ({ onClick }) => {
   }, [currentInterventionId]);
 
   const sessions = useMemo(() => {
-    if (includeAllSessions) return allSessions;
+    const filteredSessions = allSessions?.filter(({ type }) =>
+      sessionTypesWhiteList.includes(type),
+    );
+    if (includeAllSessions) return filteredSessions;
 
     const currentSession = allSessions?.find(
       ({ id }) => id === initialSessionId,
-    );
+    ) as SessionDto;
 
-    return allSessions?.filter(({ position }) =>
+    return filteredSessions?.filter(({ position }) =>
       includeCurrentSession
         ? position <= currentSession?.position
         : position < currentSession?.position,
     );
-  }, [allSessions, includeAllSessions, includeCurrentSession]);
+  }, [
+    allSessions,
+    includeAllSessions,
+    includeCurrentSession,
+    sessionTypesWhiteList,
+  ]);
 
-  const isInitialSession = (sessionId) => sessionId === initialSessionId;
+  const isInitialSession = (sessionId: string) =>
+    sessionId === initialSessionId;
 
-  const toInterventionView = () =>
-    currentView !== VIEWS.INTERVENTION && setCurrentView(VIEWS.INTERVENTION);
+  const toInterventionView = () => {
+    if (!isMultiIntervention) return;
+    if (currentView === VIEWS.INTERVENTION) return;
+    setCurrentView(VIEWS.INTERVENTION);
+  };
 
   if (!sessions || !sessions.length)
     return (
-      <ViewWrapper goBack={isMultiIntervention && toInterventionView}>
+      <ViewWrapper goBack={toInterventionView}>
         <Box padding={30}>
+          {/* @ts-ignore */}
           <NoContent text={formatMessage(messages.noSessions)} />
         </Box>
       </ViewWrapper>
     );
 
   return (
-    <ViewWrapper goBack={isMultiIntervention && toInterventionView}>
+    <ViewWrapper goBack={toInterventionView}>
       {sessions.map(({ id, name }, index) => (
         <SessionRow
           key={`${id}-select-session-${index}`}
           id={id}
-          index={index}
           isInitialSession={isInitialSession(id)}
           isLast={index === sessions.length - 1}
           name={name}
@@ -86,9 +103,4 @@ const SessionView = ({ onClick }) => {
     </ViewWrapper>
   );
 };
-
-SessionView.propTypes = {
-  onClick: PropTypes.func,
-};
-
 export default memo(SessionView);

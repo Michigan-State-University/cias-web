@@ -38,6 +38,7 @@ import Selector from 'components/Selector';
 import Row from 'components/Row';
 import Badge from 'components/Badge';
 
+import { SessionTypes } from 'models/Session/SessionDto';
 import ExactDateOption from './ExactDateOption';
 import DaysAfterOption from './DaysAfterOption';
 import messages from './messages';
@@ -133,6 +134,7 @@ function SessionSchedule({
                 includeCurrentSession={false}
                 includeNonDigitVariables
                 isMultiSession
+                sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
               >
                 <Badge bg={themeColors.primary} color={colors.white}>
                   {daysAfterDateVariableName ??

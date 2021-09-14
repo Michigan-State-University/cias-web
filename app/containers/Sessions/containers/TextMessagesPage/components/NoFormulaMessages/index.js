@@ -25,6 +25,7 @@ import { StyledInput } from 'components/Input/StyledInput';
 import Box from 'components/Box';
 import OriginalTextHover from 'components/OriginalTextHover';
 
+import { SessionTypes } from 'models/Session/SessionDto';
 import messages from './messages';
 import { TextMessagesContext } from '../../utils';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
@@ -78,6 +79,7 @@ const NoFormulaMessage = ({
           includeCurrentSession
           includeNonDigitVariables
           isMultiSession
+          sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
         >
           <Text fontWeight="bold" color={themeColors.secondary}>
             {formatMessage(settingsMessages.addVariableButton)}

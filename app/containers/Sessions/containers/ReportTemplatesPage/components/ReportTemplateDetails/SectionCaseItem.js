@@ -44,6 +44,7 @@ import TextButton from 'components/Button/TextButton';
 import OriginalTextHover from 'components/OriginalTextHover';
 import { ModalType, useModal } from 'components/Modal';
 
+import { SessionTypes } from 'models/Session/SessionDto';
 import { ReportTemplatesContext } from '../../utils';
 import messages from '../../messages';
 import Option from './Option';
@@ -292,6 +293,7 @@ const SectionCaseItem = ({
                 includeCurrentSession
                 includeNonDigitVariables
                 isMultiSession
+                sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
               >
                 <TextButton
                   whiteSpace="nowrap"

@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { memo, useContext, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useIntl } from 'react-intl';
@@ -12,26 +11,33 @@ import { published } from 'models/Status/StatusTypes';
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
 
+import { InterventionDto } from 'models/Intervention/InterventionDto';
 import ViewWrapper from './ViewWrapper';
 import InterventionRow from './InterventionRow';
 
 import messages from '../messages';
 import { VariableChooserContext } from '../constants';
 
-const InterventionView = ({ onClick }) => {
+type Props = {
+  onClick: (interventionId: string) => void;
+};
+
+const InterventionView = ({ onClick }: Props) => {
   const { formatMessage } = useIntl();
   const dispatch = useDispatch();
-
-  // actions
-  const fetchInterventions = (organizationId) =>
-    dispatch(fetchInterventionsRequest(organizationId));
-
-  // selectors
-  const allInterventions = useSelector(makeSelectInterventions());
 
   const { initialInterventionId, organizationId } = useContext(
     VariableChooserContext,
   );
+
+  // actions
+  const fetchInterventions = (orgId: string) =>
+    dispatch(fetchInterventionsRequest(orgId));
+
+  // selectors
+  const allInterventions = useSelector(
+    makeSelectInterventions(),
+  ) as InterventionDto[];
 
   useEffect(() => {
     fetchInterventions(organizationId);
@@ -42,13 +48,14 @@ const InterventionView = ({ onClick }) => {
     [allInterventions],
   );
 
-  const isInitialIntervention = (interventionId) =>
+  const isInitialIntervention = (interventionId: string) =>
     interventionId === initialInterventionId;
 
   if (!interventions || !interventions.length)
     return (
       <ViewWrapper>
         <Box padding={30}>
+          {/* @ts-ignore */}
           <NoContent text={formatMessage(messages.noInterventions)} />
         </Box>
       </ViewWrapper>
@@ -60,7 +67,6 @@ const InterventionView = ({ onClick }) => {
         <InterventionRow
           key={`${id}-select-intervention-${index}`}
           id={id}
-          index={index}
           isInitialIntervention={isInitialIntervention(id)}
           isLast={index === interventions.length - 1}
           name={name}
@@ -69,10 +75,6 @@ const InterventionView = ({ onClick }) => {
       ))}
     </ViewWrapper>
   );
-};
-
-InterventionView.propTypes = {
-  onClick: PropTypes.func,
 };
 
 export default memo(InterventionView);

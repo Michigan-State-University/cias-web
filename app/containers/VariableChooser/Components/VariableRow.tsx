@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import { colors } from 'theme';
@@ -12,7 +11,15 @@ import Text from 'components/Text';
 import Img from 'components/Img';
 import Badge from 'components/Badge';
 
-const VariableRow = ({ id, subtitle, isLast, onClick, variable }) => (
+interface Props {
+  id: string;
+  subtitle: string;
+  isLast: boolean;
+  onClick: (variable: string) => void;
+  variable: string;
+}
+
+const VariableRow = ({ id, subtitle, isLast, onClick, variable }: Props) => (
   <Row
     data-testid={`${id}-select-variable`}
     mb={!isLast && 15}
@@ -43,13 +50,5 @@ const VariableRow = ({ id, subtitle, isLast, onClick, variable }) => (
     </Badge>
   </Row>
 );
-
-VariableRow.propTypes = {
-  id: PropTypes.string,
-  isLast: PropTypes.bool,
-  onClick: PropTypes.func,
-  subtitle: PropTypes.string,
-  variable: PropTypes.string,
-};
 
 export default VariableRow;

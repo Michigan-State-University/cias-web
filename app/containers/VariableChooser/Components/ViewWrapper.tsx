@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -10,10 +9,16 @@ import Column from 'components/Column';
 import Img from 'components/Img';
 import Loader from 'components/Loader';
 
-const ViewWrapper = ({ children, goBack }) => {
+interface Props {
+  goBack?: () => void;
+  children: JSX.Element | JSX.Element[];
+}
+
+const ViewWrapper = ({ children, goBack }: Props) => {
   const isLoading = useSelector(makeSelectCopyModalLoader());
 
   const render = () => {
+    // @ts-ignore
     if (isLoading) return <Loader type="inline" />;
 
     return children;
@@ -33,14 +38,6 @@ const ViewWrapper = ({ children, goBack }) => {
       {render()}
     </Column>
   );
-};
-
-ViewWrapper.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-  goBack: PropTypes.func,
 };
 
 export default memo(ViewWrapper);

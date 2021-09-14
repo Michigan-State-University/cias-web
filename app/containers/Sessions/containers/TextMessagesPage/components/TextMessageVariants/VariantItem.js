@@ -41,6 +41,7 @@ import {
 } from 'global/reducers/textMessages';
 
 import { ModalType, useModal } from 'components/Modal';
+import { SessionTypes } from 'models/Session/SessionTypes';
 import settingsMessages from '../../containers/TextMessageSettings/messages';
 import { TextMessagesContext } from '../../utils';
 import messages from './messages';
@@ -178,6 +179,7 @@ const VariantItem = ({
               includeCurrentSession
               includeNonDigitVariables
               isMultiSession
+              sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
             >
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(settingsMessages.addVariableButton)}
