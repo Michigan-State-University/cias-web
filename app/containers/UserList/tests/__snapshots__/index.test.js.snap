@@ -857,7 +857,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
                   class="c20"
                   placeholder="Filter users by name"
                   type="text"
-                  value=""
                 />
                 <img
                   alt="search"
@@ -1993,7 +1992,6 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
                   class="c19"
                   placeholder="Filter users by name"
                   type="text"
-                  value=""
                 />
                 <img
                   alt="search"
