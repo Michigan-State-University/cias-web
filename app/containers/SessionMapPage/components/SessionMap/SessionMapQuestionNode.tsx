@@ -29,6 +29,7 @@ const getBorder = (detailsShown: boolean, selected: boolean) => {
 };
 
 const SessionMapQuestionNode = ({
+  id,
   data: {
     question,
     showDetails,
@@ -41,7 +42,7 @@ const SessionMapQuestionNode = ({
 }: NodeProps<QuestionTileData>): JSX.Element => {
   const { formatMessage } = useIntl();
 
-  const { id, type } = question;
+  const { type } = question;
 
   const border = useMemo(
     () => getBorder(showDetails, selected),

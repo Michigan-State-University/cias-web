@@ -62,29 +62,25 @@ const SessionMap = ({
   minZoom,
   onMinZoomChange,
 }: Props): JSX.Element => {
-  const [selectedQuestionsIds, setSelectedQuestionsIds] = useState<string[]>(
-    [],
-  );
+  const [selectedNodesIds, setSelectedNodesIds] = useState<string[]>([]);
 
-  const unselectQuestion = (questionId: string) => {
-    setSelectedQuestionsIds(
-      selectedQuestionsIds.filter((id) => id !== questionId),
-    );
+  const unselectNode = (nodeId: string) => {
+    setSelectedNodesIds(selectedNodesIds.filter((id) => id !== nodeId));
   };
 
-  const selectQuestion = (questionId: string) => {
-    setSelectedQuestionsIds([...selectedQuestionsIds, questionId]);
+  const selectNode = (nodeId: string) => {
+    setSelectedNodesIds([...selectedNodesIds, nodeId]);
   };
 
   const handleSelectedChange = useCallback(
-    (selected: boolean, questionId: string) => {
+    (selected: boolean, nodeId: string) => {
       if (selected) {
-        selectQuestion(questionId);
+        selectNode(nodeId);
       } else {
-        unselectQuestion(questionId);
+        unselectNode(nodeId);
       }
     },
-    [selectedQuestionsIds, setSelectedQuestionsIds],
+    [selectedNodesIds, setSelectedNodesIds],
   );
 
   const handleShowDetailsChange = useCallback(
@@ -112,10 +108,10 @@ const SessionMap = ({
         handleShowDetailsChange,
         showDetailedInfo,
         sessions,
-        selectedQuestionsIds,
+        selectedNodesIds,
         handleSelectedChange,
       ),
-      ...createMapEdges(sortedQuestions, selectedQuestionsIds),
+      ...createMapEdges(sortedQuestions, selectedNodesIds),
     ],
     [
       sortedQuestions,
@@ -123,7 +119,7 @@ const SessionMap = ({
       handleShowDetailsChange,
       showDetailedInfo,
       sessions,
-      selectedQuestionsIds,
+      selectedNodesIds,
       handleSelectedChange,
     ],
   );

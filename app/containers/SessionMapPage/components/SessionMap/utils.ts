@@ -41,8 +41,8 @@ const createQuestionNode = (
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void,
   showDetailedInfo: boolean,
   index: number,
-  selectedQuestionsIds: string[],
-  onSelectedChange: (selected: boolean, questionId: string) => void,
+  selectedNodesIds: string[],
+  onSelectedChange: (selected: boolean, nodeId: string) => void,
 ): Node<QuestionTileData> => ({
   id: question.id,
   type: SessionMapNodeType.QUESTION,
@@ -54,7 +54,7 @@ const createQuestionNode = (
     onShowDetailsChange,
     showDetailedInfo,
     index,
-    selected: selectedQuestionsIds.includes(question.id),
+    selected: selectedNodesIds.includes(question.id),
     onSelectedChange,
   },
 });
@@ -69,6 +69,8 @@ const createSessionNodesFromBranching = (
   question: Question,
   sessions: SessionDto[],
   showDetailedInfo: boolean,
+  selectedNodesIds: string[],
+  onSelectedChange: (selected: boolean, nodeId: string) => void,
 ): Node<SessionTileData>[] => {
   const nodes: Node<SessionTileData>[] = [];
 
@@ -92,6 +94,8 @@ const createSessionNodesFromBranching = (
         data: {
           sessionIndex,
           showDetailedInfo,
+          selected: selectedNodesIds.includes(sessionNodeId),
+          onSelectedChange,
         },
       });
     }),
@@ -106,8 +110,8 @@ export const createMapNodes = (
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void,
   showDetailedInfo: boolean,
   sessions: SessionDto[],
-  selectedQuestionsIds: string[],
-  onSelectedChange: (selected: boolean, questionId: string) => void,
+  selectedNodesIds: string[],
+  onSelectedChange: (selected: boolean, nodeId: string) => void,
 ): Node<QuestionTileData | SessionTileData>[] =>
   questions.flatMap((question, index) => {
     const nodes: Node<QuestionTileData | SessionTileData>[] = [
@@ -117,14 +121,20 @@ export const createMapNodes = (
         onShowDetailsChange,
         showDetailedInfo,
         index,
-        selectedQuestionsIds,
+        selectedNodesIds,
         onSelectedChange,
       ),
     ];
 
     // creates a separate session node for each redirection from question to session
     nodes.push(
-      ...createSessionNodesFromBranching(question, sessions, showDetailedInfo),
+      ...createSessionNodesFromBranching(
+        question,
+        sessions,
+        showDetailedInfo,
+        selectedNodesIds,
+        onSelectedChange,
+      ),
     );
 
     return nodes;
