@@ -25,7 +25,6 @@ import Loader from 'components/Loader';
 import SearchInput from 'components/Input/SearchInput';
 import TextButton from 'components/Button/TextButton';
 import UserRoleTile from 'components/UserRoleTile';
-import useDebounce from 'utils/useDebounce';
 import { Roles } from 'models/User/UserRoles';
 import {
   fetchUsers,
@@ -72,29 +71,16 @@ function UserList({
   const [showInactive, setShowInactive] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const [page, setPage] = useState(1);
-  const debouncedFilterText = useDebounce(filterText, initialDelay);
 
   const clearFilters = selectRoles.length === filterableRoles.length;
 
   useEffect(() => {
-    fetchUsersRequest(
-      selectRoles,
-      debouncedFilterText,
-      page,
-      showInactive,
-      teamId,
-    );
-  }, [selectRoles, debouncedFilterText, page, showInactive, teamId]);
+    fetchUsersRequest(selectRoles, filterText, page, showInactive, teamId);
+  }, [selectRoles, filterText, page, showInactive, teamId]);
 
   useEffect(() => {
     if (shouldRefetch)
-      fetchUsersRequest(
-        selectRoles,
-        debouncedFilterText,
-        page,
-        showInactive,
-        teamId,
-      );
+      fetchUsersRequest(selectRoles, filterText, page, showInactive, teamId);
   }, [shouldRefetch]);
 
   useEffect(() => {
@@ -157,6 +143,7 @@ function UserList({
               <SearchInput
                 value={filterText}
                 onChange={(e) => setFilterText(e.target.value)}
+                debounceTime={initialDelay}
                 placeholder={formatMessage(messages.searchPlaceholder)}
                 aria-label={formatMessage(messages.searchPlaceholder)}
               />
