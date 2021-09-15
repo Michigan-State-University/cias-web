@@ -108,6 +108,7 @@ export function App({ user }) {
       switch (user.roles[0]) {
         case Roles.admin:
           return <UserListPage />;
+        case Roles.eInterventionAdmin:
         case Roles.researcher:
           return <UserListPage filterableRoles={[Roles.participant]} />;
         default:

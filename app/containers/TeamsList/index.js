@@ -20,7 +20,6 @@ import H1 from 'components/H1';
 import Loader from 'components/Loader';
 import SearchInput from 'components/Input/SearchInput';
 import TextButton from 'components/Button/TextButton';
-import useDebounce from 'utils/useDebounce';
 import {
   fetchTeamsRequest,
   teamListSaga,
@@ -63,14 +62,13 @@ function TeamsList({
   const [filterText, setFilterText] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [page, setPage] = useState(1);
-  const debouncedFilterText = useDebounce(filterText, initialDelay);
 
   useEffect(() => {
-    fetchTeams(debouncedFilterText, page);
-  }, [debouncedFilterText, page]);
+    fetchTeams(filterText, page);
+  }, [filterText, page]);
 
   useEffect(() => {
-    if (shouldRefetch) fetchTeams(debouncedFilterText, page);
+    if (shouldRefetch) fetchTeams(filterText, page);
   }, [shouldRefetch]);
 
   useEffect(() => {
@@ -93,6 +91,7 @@ function TeamsList({
               <SearchInput
                 value={filterText}
                 onChange={e => setFilterText(e.target.value)}
+                debounceTime={initialDelay}
               />
             </Col>
           </Row>

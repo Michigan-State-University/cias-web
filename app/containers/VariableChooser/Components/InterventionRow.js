@@ -41,7 +41,7 @@ const InterventionRow = ({
         }
         mr={10}
       />
-      <Box mr={10}>
+      <Box mr={10} width="100%">
         <EllipsisText
           text={name}
           fontWeight={isInitialIntervention ? 'bold' : ''}

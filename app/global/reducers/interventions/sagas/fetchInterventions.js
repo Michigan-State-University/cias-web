@@ -4,19 +4,30 @@ import get from 'lodash/get';
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { formatMessage } from 'utils/intlOutsideReact';
 
+import objectToSnakeCase from 'utils/objectToSnakeCase';
 import { fetchInterventionsSuccess, fetchInterventionsError } from '../actions';
 import { FETCH_INTERVENTIONS_REQUEST } from '../constants';
 
 import messages from '../messages';
 
-export function* fetchInterventions() {
+export function* fetchInterventions({
+  payload: { paginationData, filterData },
+}) {
   const requestURL = `v1/interventions`;
 
+  const { startIndex, endIndex } = paginationData ?? {};
   try {
     const {
-      data: { interventions },
-    } = yield call(axios.get, requestURL);
-    yield put(fetchInterventionsSuccess(interventions));
+      data: { interventions, interventions_size: interventionsSize },
+    } = yield call(axios.get, requestURL, {
+      params: objectToSnakeCase({ startIndex, endIndex, ...filterData }),
+    });
+    yield put(
+      fetchInterventionsSuccess(interventions, {
+        paginationData,
+        interventionsSize,
+      }),
+    );
   } catch (error) {
     yield put(
       fetchInterventionsError(

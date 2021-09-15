@@ -56,7 +56,7 @@ const SelectResearchers = ({
   const [finalUsers, filterValue, setFilterValue] = useFilter(
     researchersSelector.filter(({ id }) => id !== currentUserId),
     'fullName',
-    {},
+    { initialDelay: 0 },
   );
   useLayoutEffect(() => {
     fetchUsersRequest([Roles.researcher]);
@@ -99,6 +99,7 @@ const SelectResearchers = ({
           placeholder={formatMessage(messages.find)}
           value={filterValue}
           onChange={e => setFilterValue(e.target.value)}
+          debounceTime={500}
         />
         <StyledButton
           disabled={selected.length === 0}

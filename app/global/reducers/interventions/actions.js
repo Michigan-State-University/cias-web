@@ -11,10 +11,20 @@ import {
   ARCHIVE_INTERVENTION_ERROR,
 } from './constants';
 
-export const fetchInterventionsRequest = () =>
-  actionBuilder(FETCH_INTERVENTIONS_REQUEST, {});
-export const fetchInterventionsSuccess = interventions =>
-  actionBuilder(FETCH_INTERVENTIONS_SUCCESS, { interventions });
+export const fetchInterventionsRequest = ({
+  paginationData,
+  filterData,
+} = {}) =>
+  actionBuilder(FETCH_INTERVENTIONS_REQUEST, { paginationData, filterData });
+export const fetchInterventionsSuccess = (
+  interventions,
+  { paginationData, interventionsSize } = {},
+) =>
+  actionBuilder(FETCH_INTERVENTIONS_SUCCESS, {
+    interventions,
+    paginationData,
+    interventionsSize: interventionsSize ?? Number.MAX_SAFE_INTEGER,
+  });
 export const fetchInterventionsError = error =>
   actionBuilder(FETCH_INTERVENTIONS_ERROR, { error });
 

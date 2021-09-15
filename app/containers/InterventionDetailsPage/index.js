@@ -20,10 +20,11 @@ import { Markup } from 'interweave';
 
 import { colors, themeColors } from 'theme';
 
-import fileShare from 'assets/svg/file-share.svg';
-import copy from 'assets/svg/copy.svg';
-import archive from 'assets/svg/archive.svg';
-import pencil from 'assets/svg/pencil-solid.svg';
+import FileShareIcon from 'assets/svg/file-share.svg';
+import CopyIcon from 'assets/svg/copy.svg';
+import ArchiveIcon from 'assets/svg/archive.svg';
+import PencilIcon from 'assets/svg/pencil-solid.svg';
+import AddAppIcon from 'assets/svg/app-add.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -88,7 +89,10 @@ import { DraggedTest } from './styled';
 import interventionDetailsPageSagas from './saga';
 import SessionCreateButton from './components/SessionCreateButton';
 import SessionListItem from './components/SessionListItem';
-import { InterventionSettingsModal } from './components/Modals';
+import {
+  InterventionAssignOrganizationModal,
+  InterventionSettingsModal,
+} from './components/Modals';
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
 import {
@@ -130,6 +134,7 @@ export function InterventionDetailsPage({
   ] = useState(null);
 
   const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
+  const { canAssignOrganizationToIntervention } = rolePermissions;
 
   const screenClass = useScreenClass();
 
@@ -161,9 +166,18 @@ export function InterventionDetailsPage({
     interventionSettingsModalVisible,
     setInterventionSettingsModalVisible,
   ] = useState(false);
+  const [
+    assignOrganizationModalVisible,
+    setAssignOrganizationModalVisible,
+  ] = useState(false);
 
   const closeModal = () => setModalVisible(false);
   const openModal = () => setModalVisible(true);
+  const closeAssignOrganizationModal = () =>
+    setAssignOrganizationModalVisible(false);
+  const openAssignOrganizationModal = () =>
+    setAssignOrganizationModalVisible(true);
+
   const handleCopyIntervention = () =>
     copyIntervention({ interventionId: id, withoutRedirect: true });
   const handleArchiveIntervention = () =>
@@ -181,25 +195,36 @@ export function InterventionDetailsPage({
     {
       id: 'copy',
       label: formatMessage(messages.copy),
-      icon: fileShare,
+      icon: FileShareIcon,
       action: openModal,
       color: colors.bluewood,
     },
     {
       id: 'duplicate',
       label: formatMessage(messages.duplicate),
-      icon: copy,
+      icon: CopyIcon,
       action: handleCopyIntervention,
       color: colors.bluewood,
     },
     {
       id: 'archive',
       label: formatMessage(messages.archive),
-      icon: archive,
+      icon: ArchiveIcon,
       action: handleArchiveIntervention,
       color: colors.bluewood,
       disabled: !archivingPossible,
     },
+    ...(canAssignOrganizationToIntervention
+      ? [
+          {
+            icon: AddAppIcon,
+            action: openAssignOrganizationModal,
+            label: formatMessage(messages.assignOrganization),
+            id: 'assignOrganization',
+            disabled: !canEdit(status),
+          },
+        ]
+      : []),
   ];
 
   useLayoutEffect(() => {
@@ -213,7 +238,7 @@ export function InterventionDetailsPage({
   useEffect(() => {
     if (
       !isNullOrUndefined(intervention) &&
-      !isNullOrUndefined(sessions[sessionIndex])
+      !isNullOrUndefined(sessions?.[sessionIndex])
     )
       fetchQuestions(sessions[sessionIndex].id);
   }, [intervention ? intervention.id : 0]);
@@ -394,6 +419,18 @@ export function InterventionDetailsPage({
             <OrganizationShareBox organizationId={organizationId} />
           )}
         </Modal>
+
+        <Modal
+          title={formatMessage(messages.assignOrganization)}
+          onClose={closeAssignOrganizationModal}
+          visible={assignOrganizationModalVisible}
+        >
+          <InterventionAssignOrganizationModal
+            interventionId={id}
+            organizationId={organizationId}
+          />
+        </Modal>
+
         <Header
           name={name}
           csvGeneratedAt={csvGeneratedAt}
@@ -414,7 +451,7 @@ export function InterventionDetailsPage({
             text={formatMessage(messages.interventionSettingsIconTooltip)}
           >
             <Icon
-              src={pencil}
+              src={PencilIcon}
               fill={colors.grey}
               onClick={() => setInterventionSettingsModalVisible(true)}
               role="button"
