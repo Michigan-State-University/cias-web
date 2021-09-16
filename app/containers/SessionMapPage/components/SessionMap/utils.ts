@@ -12,7 +12,9 @@ import {
   sessionNodesVerticalDistanceRatio,
   questionNodesVerticalDistanceRatio,
   baseEdgeSharedAttributes,
-  selectedLightEdgeSharedAttributes,
+  highlightedEdgeSharedAttributes,
+  directConnectionEdgeSharedAttributes,
+  SessionMapHeadType,
 } from '../../constants';
 
 export const sortQuestionsByGroupAndPosition = (
@@ -163,21 +165,28 @@ const createEdgeObject = (
     target,
   };
 
-  // if either source or target node is selected
-  if (intersection(selectedNodesIds, [source, target]).length) {
-    // @ts-ignore
-    return {
-      ...edge,
-      ...selectedLightEdgeSharedAttributes,
-    } as Edge;
+  const { length: edgeSelectedNodesCount } = intersection(selectedNodesIds, [
+    source,
+    target,
+  ]);
+
+  let edgeSharedAttributes;
+  switch (edgeSelectedNodesCount) {
+    case 1: // if either source or target node is selected
+      edgeSharedAttributes = highlightedEdgeSharedAttributes;
+      break;
+    case 2: // if both source and target node are selected
+      edgeSharedAttributes = directConnectionEdgeSharedAttributes;
+      break;
+    case 0: // if neither source nor target node is selected
+    default:
+      edgeSharedAttributes = baseEdgeSharedAttributes;
   }
 
-  // if neither source nor target node is selected
-  // @ts-ignore
   return {
     ...edge,
-    ...baseEdgeSharedAttributes,
-  } as Edge;
+    ...edgeSharedAttributes,
+  };
 };
 
 const createMapEdgesFromNextQuestions = (
@@ -201,7 +210,7 @@ const createMapEdgesFromBranching = (
   existingEdges: Edge[],
   selectedQuestionsIds: string[],
 ): Edge[] => {
-  const edges = cloneDeep(existingEdges);
+  const edges: Edge[] = cloneDeep(existingEdges);
   // check every target of every pattern of every question
   questions.forEach(({ id: nodeId, formula: { patterns } }, questionIndex) =>
     patterns.forEach(({ target: targets }) =>
@@ -231,15 +240,59 @@ const createMapEdgesFromBranching = (
   return edges;
 };
 
+// if a selected node has direct connections with any other selected nodes,
+// remove a highlight from input/output edges other than these creating direct connections
+const removeHighlightIfDirectConnectionExists = (edges: Edge[]): Edge[] => {
+  const edgesCopy: Edge[] = cloneDeep(edges);
+  const directConnections = edgesCopy.filter(
+    ({ arrowHeadType }) =>
+      // @ts-ignore
+      arrowHeadType === SessionMapHeadType.DIRECT_CONNECTION,
+  );
+
+  for (let i = 0; i < directConnections.length; i++) {
+    const anyRemovableHighlights = edgesCopy.some(
+      // @ts-ignore
+      (edge) => edge.arrowHeadType === SessionMapHeadType.HIGHLIGHTED,
+    );
+    if (!anyRemovableHighlights) {
+      break;
+    }
+
+    const connectingEdge = directConnections[i];
+
+    edgesCopy.forEach((edge, edgeIndex) => {
+      if (
+        // @ts-ignore
+        edge.arrowHeadType === SessionMapHeadType.HIGHLIGHTED &&
+        (edge.source === connectingEdge.source ||
+          edge.target === connectingEdge.target)
+      ) {
+        edgesCopy[edgeIndex] = {
+          ...edge,
+          ...baseEdgeSharedAttributes,
+        };
+      }
+    });
+  }
+
+  return edgesCopy;
+};
+
 export const createMapEdges = (
   questions: Question[],
   selectedQuestionsIds: string[],
 ): Edge[] => {
-  const edges: Edge[] = createMapEdgesFromNextQuestions(
+  const edgesFromNextQuestions: Edge[] = createMapEdgesFromNextQuestions(
     questions,
     selectedQuestionsIds,
   );
-  return createMapEdgesFromBranching(questions, edges, selectedQuestionsIds);
+  const allEdges: Edge[] = createMapEdgesFromBranching(
+    questions,
+    edgesFromNextQuestions,
+    selectedQuestionsIds,
+  );
+  return removeHighlightIfDirectConnectionExists(allEdges);
 };
 
 export const getNodeVerticalDistanceRatio = (nodeType?: string): number =>
