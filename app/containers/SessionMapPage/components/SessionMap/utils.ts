@@ -12,8 +12,8 @@ import {
   sessionNodesVerticalDistanceRatio,
   questionNodesVerticalDistanceRatio,
   baseEdgeSharedAttributes,
-  selectedLightEdgeSharedAttributes,
-  selectedEdgeSharedAttributes,
+  highlightedEdgeSharedAttributes,
+  directConnectionEdgeSharedAttributes,
   SessionMapHeadType,
 } from '../../constants';
 
@@ -173,10 +173,10 @@ const createEdgeObject = (
   let edgeSharedAttributes;
   switch (edgeSelectedNodesCount) {
     case 1: // if either source or target node is selected
-      edgeSharedAttributes = selectedLightEdgeSharedAttributes;
+      edgeSharedAttributes = highlightedEdgeSharedAttributes;
       break;
     case 2: // if both source and target node are selected
-      edgeSharedAttributes = selectedEdgeSharedAttributes;
+      edgeSharedAttributes = directConnectionEdgeSharedAttributes;
       break;
     case 0: // if neither source nor target node is selected
     default:

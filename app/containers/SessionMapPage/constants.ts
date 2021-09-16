@@ -57,7 +57,7 @@ export const baseEdgeSharedAttributes: Partial<Edge> = {
   },
 };
 
-export const selectedLightEdgeSharedAttributes: Partial<Edge> = {
+export const highlightedEdgeSharedAttributes: Partial<Edge> = {
   ...edgeSharedAttributes,
   // @ts-ignore
   arrowHeadType: SessionMapHeadType.HIGHLIGHTED,
@@ -67,7 +67,7 @@ export const selectedLightEdgeSharedAttributes: Partial<Edge> = {
   },
 };
 
-export const selectedEdgeSharedAttributes: Partial<Edge> = {
+export const directConnectionEdgeSharedAttributes: Partial<Edge> = {
   ...edgeSharedAttributes,
   // @ts-ignore
   arrowHeadType: SessionMapHeadType.DIRECT_CONNECTION,
