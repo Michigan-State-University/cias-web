@@ -184,7 +184,7 @@ export function InterventionPage({
             <Row align="center">
               <Col>
                 <SearchInput
-                  defaultValue={filterValue}
+                  value={filterValue}
                   onChange={(e) => setFilterValue(e.target.value)}
                   placeholder={formatMessage(messages.filter)}
                   aria-label={formatMessage(messages.searchInterventionsLabel)}

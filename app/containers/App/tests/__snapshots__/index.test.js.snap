@@ -1105,7 +1105,6 @@ exports[`<AnswerSessionPage /> Should render and match the snapshot 1`] = `
                           class="c48"
                           placeholder="Filter by name"
                           type="text"
-                          value=""
                         />
                         <img
                           alt="search"

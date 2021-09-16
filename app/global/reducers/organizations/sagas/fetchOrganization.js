@@ -12,7 +12,25 @@ export function* fetchOrganization({ payload: { id } }) {
     const { data } = yield call(axios.get, requestURL);
     const organization = jsonApiToObject(data, 'organization');
 
-    yield put(fetchOrganizationSuccess(organization));
+    const eInterventionAdmins = organization.eInterventionAdmins.map(
+      (eInterventionAdmin) => {
+        const userInvitation = organization.organizationInvitations.find(
+          ({ userId }) => userId === eInterventionAdmin.id,
+        );
+
+        return {
+          ...eInterventionAdmin,
+          active: !userInvitation || userInvitation.isAccepted,
+        };
+      },
+    );
+
+    yield put(
+      fetchOrganizationSuccess({
+        ...organization,
+        eInterventionAdmins,
+      }),
+    );
   } catch (error) {
     yield put(fetchOrganizationFailure(error));
   }
