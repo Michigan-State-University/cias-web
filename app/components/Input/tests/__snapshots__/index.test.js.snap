@@ -1995,7 +1995,6 @@ exports[`<SearchInput /> Should render and match the snapshot 1`] = `
     <input
       class="c1"
       type="text"
-      value=""
       width="100%"
     />
     <img
@@ -2003,6 +2002,7 @@ exports[`<SearchInput /> Should render and match the snapshot 1`] = `
       class="c2"
       src="IMAGE_MOCK"
     />
+    
   </div>
 </div>
 `;

@@ -555,7 +555,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
                   class="c22"
                   placeholder="Filter by name"
                   type="text"
-                  value=""
                 />
                 <img
                   alt="search"
@@ -1156,7 +1155,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
                   class="c22"
                   placeholder="Filter by name"
                   type="text"
-                  value=""
                 />
                 <img
                   alt="search"
@@ -1757,7 +1755,6 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
                   class="c22"
                   placeholder="Filter by name"
                   type="text"
-                  value=""
                 />
                 <img
                   alt="search"
