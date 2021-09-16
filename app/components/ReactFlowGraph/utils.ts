@@ -1,4 +1,5 @@
 import {
+  Edge,
   FlowElement,
   FlowTransform,
   isEdge,
@@ -117,6 +118,32 @@ export const layoutElements = (
     nodeTopMargin,
     getNodeVerticalDistanceRatio,
   );
+};
+
+// edges with higher priorities will be later in the elements array so they will
+// be printed later so they will be over the edges with lower priorities
+export const prioritizeEdges = (
+  layoutedElements: FlowElement[],
+  edgePriorities: Map<string, number>,
+): FlowElement[] => {
+  const edges: Edge[] = [];
+  const nodes: Node[] = [];
+
+  layoutedElements.forEach((element) => {
+    if (isNode(element)) {
+      nodes.push(element);
+    } else {
+      edges.push(element);
+    }
+  });
+
+  edges.sort(({ arrowHeadType: typeA }, { arrowHeadType: typeB }) => {
+    const priorityA = edgePriorities.get(typeA ?? '') ?? 0; // use 0 as a default priority
+    const priorityB = edgePriorities.get(typeB ?? '') ?? 0;
+    return priorityA - priorityB;
+  });
+
+  return [...nodes, ...edges];
 };
 
 export const calculateMinZoom = (

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo, useCallback, useMemo, useState } from 'react';
 
 import { NodeTypesType } from 'react-flow-renderer';
 
@@ -23,6 +23,7 @@ import {
   questionNodeLabelOffset,
   scrollbarsThickness,
   scrollbarsMargin,
+  edgePriorities,
 } from '../../constants';
 import {
   sortQuestionsByGroupAndPosition,
@@ -61,11 +62,32 @@ const SessionMap = ({
   minZoom,
   onMinZoomChange,
 }: Props): JSX.Element => {
+  const [selectedNodesIds, setSelectedNodesIds] = useState<string[]>([]);
+
+  const unselectNode = (nodeId: string) => {
+    setSelectedNodesIds(selectedNodesIds.filter((id) => id !== nodeId));
+  };
+
+  const selectNode = (nodeId: string) => {
+    setSelectedNodesIds([...selectedNodesIds, nodeId]);
+  };
+
+  const handleSelectedChange = useCallback(
+    (selected: boolean, nodeId: string) => {
+      if (selected) {
+        selectNode(nodeId);
+      } else {
+        unselectNode(nodeId);
+      }
+    },
+    [selectedNodesIds, setSelectedNodesIds],
+  );
+
   const handleShowDetailsChange = useCallback(
     (showDetails: boolean, questionId: string) => {
       onShowDetailsIdChange(showDetails ? questionId : '');
     },
-    [],
+    [onShowDetailsIdChange],
   );
 
   const showDetailedInfo = useMemo(
@@ -86,10 +108,20 @@ const SessionMap = ({
         handleShowDetailsChange,
         showDetailedInfo,
         sessions,
+        selectedNodesIds,
+        handleSelectedChange,
       ),
-      ...createMapEdges(sortedQuestions),
+      ...createMapEdges(sortedQuestions, selectedNodesIds),
     ],
-    [sortedQuestions, showDetailsId, showDetailedInfo],
+    [
+      sortedQuestions,
+      showDetailsId,
+      handleShowDetailsChange,
+      showDetailedInfo,
+      sessions,
+      selectedNodesIds,
+      handleSelectedChange,
+    ],
   );
 
   const sessionMapGraphProps: ReactFlowGraphProps = {
@@ -109,6 +141,7 @@ const SessionMap = ({
     nodesConnectable: false,
     scrollbarsThickness,
     scrollbarsMargin,
+    edgePriorities,
   };
 
   return (
@@ -117,6 +150,10 @@ const SessionMap = ({
         <ReactFlowArrowHead
           type={SessionMapHeadType.BASE}
           color={sessionMapColors.edgeBase}
+        />
+        <ReactFlowArrowHead
+          type={SessionMapHeadType.SELECTED_LIGHT}
+          color={sessionMapColors.selectedLight}
         />
         <ReactFlowArrowHead
           type={SessionMapHeadType.SELECTED}

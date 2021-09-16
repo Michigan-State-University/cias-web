@@ -21,19 +21,33 @@ import {
 import SessionMapQuestionNodeDetailedInfo from './SessionMapQuestionNodeDetailedInfo';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
 
-const getBorder = (detailsShown: boolean) =>
-  detailsShown
-    ? `3px solid ${sessionMapColors.nodeDetailsShown}`
+const getBorder = (detailsShown: boolean, selected: boolean) => {
+  if (detailsShown) return `3px solid ${sessionMapColors.nodeDetailsShown}`;
+  return selected
+    ? `3px solid ${sessionMapColors.selected}`
     : `1px solid ${sessionMapColors.nodeBase}`;
+};
 
 const SessionMapQuestionNode = ({
-  data: { question, showDetails, onShowDetailsChange, showDetailedInfo, index },
+  id,
+  data: {
+    question,
+    showDetails,
+    onShowDetailsChange,
+    showDetailedInfo,
+    index,
+    selected,
+    onSelectedChange,
+  },
 }: NodeProps<QuestionTileData>): JSX.Element => {
   const { formatMessage } = useIntl();
 
-  const { id, type } = question;
+  const { type } = question;
 
-  const border = useMemo(() => getBorder(showDetails), [showDetails]);
+  const border = useMemo(
+    () => getBorder(showDetails, selected),
+    [showDetails, selected],
+  );
 
   const nodeRef = useRef<HTMLElement>(null);
 
@@ -43,7 +57,11 @@ const SessionMapQuestionNode = ({
     [nodeRef.current],
   );
 
+  const handleClick = () => onSelectedChange(!selected, id);
+
   const screenNo = index + 1;
+
+  const thickBorder = showDetails || selected;
 
   return (
     <>
@@ -62,14 +80,15 @@ const SessionMapQuestionNode = ({
         </Row>
       )}
       <Box
-        py={showDetails ? 16 : 18}
-        px={showDetails ? 22 : 24}
+        py={thickBorder ? 16 : 18}
+        px={thickBorder ? 22 : 24}
         width={nodeWidth}
         maxHeight={146} // workaround to make dagre layout question nodes with ellipsis text correctly, update if necessary
         bg={themeColors.highlight}
         border={border}
-        cursor="default"
+        cursor="pointer"
         ref={nodeRef}
+        onClick={handleClick}
       >
         {showDetailedInfo && (
           <SessionMapQuestionNodeDetailedInfo
@@ -88,7 +107,9 @@ const SessionMapQuestionNode = ({
       <ReactFlowNodeHandles
         nodeId={id}
         showSourceHandle={type !== finishQuestion.id}
-        sourceHandleColor={sessionMapColors.edgeBase}
+        sourceHandleColor={
+          selected ? sessionMapColors.selected : sessionMapColors.edgeBase
+        }
       />
     </>
   );

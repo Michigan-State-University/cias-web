@@ -19,7 +19,7 @@ export default defineMessages({
   },
   showWithBranchingOnly: {
     id: `${scope}.showWithBranchingOnly`,
-    defaultMessage: 'Show screens only with branching',
+    defaultMessage: 'Only show screens with branching',
   },
   afterPreview: {
     id: `${scope}.afterPreview`,
