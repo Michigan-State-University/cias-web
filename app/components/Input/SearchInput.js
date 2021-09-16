@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 import debounce from 'lodash/debounce';
@@ -13,28 +13,36 @@ import messages from './messages';
 
 const DEFAULT_DEBOUNCE = 0;
 
-const SearchInput = ({ icon, debounceTime, ...inputProps }) => {
+const SearchInput = ({
+  icon,
+  debounceTime,
+  value,
+  onChange,
+  ...inputProps
+}) => {
   const { formatMessage } = useIntl();
-  const ref = useRef();
+  const inputRef = useRef(null);
 
-  const { onChange, width } = inputProps;
+  const { width } = inputProps;
+
+  useEffect(() => {
+    if (value !== inputRef.current.value) {
+      inputRef.current.value = value;
+    }
+  }, [value, inputRef]);
 
   const handleChange = useCallback(debounce(onChange, debounceTime), [
     debounceTime,
+    onChange,
   ]);
-
-  const handleClear = useCallback(() => {
-    ref.current.value = '';
-    handleChange({ target: { value: '' } });
-  }, [handleChange]);
 
   return (
     <SearchInputStyled width={width}>
-      <Input ref={ref} {...inputProps} onChange={handleChange} px={30} />
+      <Input {...inputProps} ref={inputRef} onChange={handleChange} px={30} />
       <SearchIcon src={search} alt="search" />
-      {ref.current?.value && (
+      {value && (
         <ActionIcon
-          onClick={handleClear}
+          onClick={() => onChange({ target: { value: '' } })}
           height={15}
           width={15}
           ml={10}
@@ -49,6 +57,8 @@ const SearchInput = ({ icon, debounceTime, ...inputProps }) => {
 SearchInput.propTypes = {
   icon: PropTypes.any,
   debounceTime: PropTypes.number,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 SearchInput.defaultProps = {

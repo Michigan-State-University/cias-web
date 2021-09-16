@@ -447,13 +447,13 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
                   class="c6"
                   placeholder="Filter users by name"
                   type="text"
-                  value=""
                 />
                 <img
                   alt="search"
                   class="c7"
                   src="IMAGE_MOCK"
                 />
+                
               </div>
             </div>
           </div>

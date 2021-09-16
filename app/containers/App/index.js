@@ -126,6 +126,7 @@ export function App({ user, fetchSelfDetails }) {
               pageTitle={formatMessage(navbarMessages.adminAccounts)}
             />
           );
+        case Roles.eInterventionAdmin:
         case Roles.researcher:
           return (
             <UserListPage

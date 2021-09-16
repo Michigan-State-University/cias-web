@@ -1,4 +1,4 @@
-import { ConnectionLineType } from 'react-flow-renderer';
+import { ConnectionLineType, Edge } from 'react-flow-renderer';
 
 import { colors } from 'theme';
 
@@ -22,6 +22,7 @@ export const sessionMapColors = {
   nodeDetailsShown: colors.orchid,
   edgeBase: colors.periwinkleGray,
   selected: colors.jungleGreen,
+  selectedLight: colors.jungleGreen50,
   sessionNode: colors.tuftsBlue,
 };
 
@@ -31,15 +32,47 @@ export enum SessionMapNodeType {
 }
 
 export enum SessionMapHeadType {
-  BASE = 'sessionmap-base',
-  SELECTED = 'sesionmap-selected',
+  BASE = 'session-map-base',
+  HIGHLIGHTED = 'session-map-highlighted',
+  DIRECT_CONNECTION = 'session-map-direct-connection',
 }
 
-export const baseEdgeSharedAttributes = {
+export const edgePriorities = new Map<string, number>([
+  [SessionMapHeadType.BASE, 1],
+  [SessionMapHeadType.HIGHLIGHTED, 2],
+  [SessionMapHeadType.DIRECT_CONNECTION, 3],
+]);
+
+export const edgeSharedAttributes: Partial<Edge> = {
   type: ConnectionLineType.SmoothStep,
+};
+
+export const baseEdgeSharedAttributes: Partial<Edge> = {
+  ...edgeSharedAttributes,
+  // @ts-ignore
   arrowHeadType: SessionMapHeadType.BASE,
   style: {
     strokeWidth: 2,
     stroke: sessionMapColors.edgeBase,
+  },
+};
+
+export const highlightedEdgeSharedAttributes: Partial<Edge> = {
+  ...edgeSharedAttributes,
+  // @ts-ignore
+  arrowHeadType: SessionMapHeadType.HIGHLIGHTED,
+  style: {
+    strokeWidth: 2,
+    stroke: sessionMapColors.selectedLight,
+  },
+};
+
+export const directConnectionEdgeSharedAttributes: Partial<Edge> = {
+  ...edgeSharedAttributes,
+  // @ts-ignore
+  arrowHeadType: SessionMapHeadType.DIRECT_CONNECTION,
+  style: {
+    strokeWidth: 3,
+    stroke: sessionMapColors.selected,
   },
 };

@@ -11,8 +11,14 @@ import messages from '../../messages';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
 import SessionMapSessionNodeDetailedInfo from './SessionMapSessionNodeDetailedInfo';
 
+const getBorder = (selected: boolean) =>
+  selected
+    ? `3px dashed ${sessionMapColors.selected}`
+    : `1px dashed ${sessionMapColors.sessionNode}`;
+
 const SessionMapSessionNode = ({
-  data: { sessionIndex, showDetailedInfo },
+  id,
+  data: { sessionIndex, showDetailedInfo, selected, onSelectedChange },
 }: NodeProps<SessionTileData>): JSX.Element => {
   const { formatMessage } = useIntl();
 
@@ -24,19 +30,22 @@ const SessionMapSessionNode = ({
     [nodeRef.current],
   );
 
+  const handleClick = () => onSelectedChange(!selected, id);
+
   const sessionNo = sessionIndex + 1;
 
   return (
     <>
       <Box
-        py={18}
-        px={24}
+        py={selected ? 16 : 18}
+        px={selected ? 22 : 24}
         width={nodeWidth}
         bg={sessionMapColors.sessionNode}
         bgOpacity={0.3}
-        border={`1px dashed ${sessionMapColors.sessionNode}`}
-        cursor="default"
+        border={getBorder(selected)}
+        cursor="pointer"
         ref={nodeRef}
+        onClick={handleClick}
       >
         {showDetailedInfo && (
           <SessionMapSessionNodeDetailedInfo sessionIndex={sessionNo} />
