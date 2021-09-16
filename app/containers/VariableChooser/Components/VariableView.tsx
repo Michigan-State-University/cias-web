@@ -48,12 +48,16 @@ const VariableView = ({ onClick }: Props) => {
   const url = useMemo(() => {
     const baseUrl = `v1/sessions/${currentSessionId}/variables/`;
     let suffix = '';
+
     if (!includeAllVariables) suffix = (selectedQuestion as QuestionDto).id;
+
     const urlParams = new URLSearchParams();
     if (!includeNonDigitVariables)
       urlParams.append('only_digit_variables', `${true}`);
+
     if (includeCurrentQuestion)
       urlParams.append('include_current_question', `${true}`);
+
     if (questionTypeWhitelist && questionTypeWhitelist.length) {
       for (let i = 0; i < questionTypeWhitelist.length; i++) {
         urlParams.append('allow_list[]', questionTypeWhitelist[i]);
@@ -70,10 +74,7 @@ const VariableView = ({ onClick }: Props) => {
     includeCurrentQuestion,
   ]);
 
-  const state = useGet<any, VariableApiResponse>(
-    url,
-    (d: unknown) => d as VariableApiResponse,
-  );
+  const state = useGet<VariableApiResponse, VariableApiResponse>(url, (d) => d);
 
   const apiVariables = useMemo(() => {
     const { data } = state;
@@ -102,7 +103,7 @@ const VariableView = ({ onClick }: Props) => {
 
       onClick(variableToAdd);
     },
-    [currentSessionId, initialSessionId, state.data],
+    [currentSessionId, initialSessionId, state.data, onClick],
   );
 
   if (state.isFetching) {

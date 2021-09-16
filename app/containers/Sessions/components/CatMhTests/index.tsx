@@ -2,6 +2,7 @@ import React from 'react';
 
 import { themeColors } from 'theme';
 import { CatMhTest, CatMhTestDTO } from 'global/types/catMh';
+import { ApiData } from 'global/types/api';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import useGet from 'utils/useGet';
 
@@ -24,10 +25,10 @@ const CatMhTests = ({
   selectedTestIds,
   disabled,
 }: Props): JSX.Element => {
-  const { data, error, isFetching } = useGet<CatMhTestDTO, CatMhTest[]>(
-    url,
-    (tests) => jsonApiToArray(tests, 'testType'),
-  );
+  const { data, error, isFetching } = useGet<
+    ApiData<CatMhTestDTO>,
+    CatMhTest[]
+  >(url, (tests) => jsonApiToArray(tests, 'testType'));
 
   const onCheckboxToggle = (testId: number) => {
     if (selectedTestIds.includes(testId)) {
