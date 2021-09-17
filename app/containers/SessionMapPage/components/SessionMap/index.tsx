@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { NodeTypesType } from 'react-flow-renderer';
 
@@ -88,6 +88,13 @@ const SessionMap = ({
   );
 
   const nodesSelectable = useMemo(() => !answers, [answers]);
+
+  useEffect(() => {
+    if (answers) {
+      const answeredQuestionsIds = answers.map(({ questionId }) => questionId);
+      setSelectedNodesIds(answeredQuestionsIds);
+    }
+  }, [answers]);
 
   const handleShowDetailsChange = useCallback(
     (showDetails: boolean, questionId: string) => {
