@@ -161,11 +161,18 @@ const findQuestionPosition = (
 const edgeExists = (edges: Edge[], edgeId: string): boolean =>
   Boolean(edges.find(({ id }) => id === edgeId));
 
+type EdgeSharedAttributesGetter = (
+  selectedNodesIds: string[],
+  source: string,
+  target: string,
+) => Partial<Edge>;
+
 const createEdgeObject = (
   id: string,
   source: string,
   target: string,
   selectedNodesIds: string[],
+  edgeSharedAttributesGetter: EdgeSharedAttributesGetter,
 ): Edge => {
   const edge: Edge = {
     id,
@@ -173,23 +180,11 @@ const createEdgeObject = (
     target,
   };
 
-  const { length: edgeSelectedNodesCount } = intersection(selectedNodesIds, [
+  const edgeSharedAttributes = edgeSharedAttributesGetter(
+    selectedNodesIds,
     source,
     target,
-  ]);
-
-  let edgeSharedAttributes;
-  switch (edgeSelectedNodesCount) {
-    case 1: // if either source or target node is selected
-      edgeSharedAttributes = highlightedEdgeSharedAttributes;
-      break;
-    case 2: // if both source and target node are selected
-      edgeSharedAttributes = directConnectionEdgeSharedAttributes;
-      break;
-    case 0: // if neither source nor target node is selected
-    default:
-      edgeSharedAttributes = baseEdgeSharedAttributes;
-  }
+  );
 
   return {
     ...edge,
@@ -200,6 +195,7 @@ const createEdgeObject = (
 const createMapEdgesFromNextQuestions = (
   questions: Question[],
   selectedQuestionsIds: string[],
+  edgeSharedAttributesGetter: EdgeSharedAttributesGetter,
 ): Edge[] =>
   questions.flatMap(({ id: questionId }, index) => {
     const nextQuestionId = questions[index + 1]?.id;
@@ -210,6 +206,7 @@ const createMapEdgesFromNextQuestions = (
       questionId,
       nextQuestionId,
       selectedQuestionsIds,
+      edgeSharedAttributesGetter,
     );
   });
 
@@ -217,6 +214,7 @@ const createMapEdgesFromBranching = (
   questions: Question[],
   existingEdges: Edge[],
   selectedQuestionsIds: string[],
+  edgeSharedAttributesGetter: EdgeSharedAttributesGetter,
 ): Edge[] => {
   const edges: Edge[] = cloneDeep(existingEdges);
   // check every target of every pattern of every question
@@ -240,7 +238,13 @@ const createMapEdgesFromBranching = (
         if (edgeExists(edges, edgeId)) return;
 
         edges.push(
-          createEdgeObject(edgeId, nodeId, targetNodeId, selectedQuestionsIds),
+          createEdgeObject(
+            edgeId,
+            nodeId,
+            targetNodeId,
+            selectedQuestionsIds,
+            edgeSharedAttributesGetter,
+          ),
         );
       }),
     ),
@@ -288,36 +292,70 @@ const removeHighlightIfDirectConnectionExists = (edges: Edge[]): Edge[] => {
   return edgesCopy;
 };
 
-const grayOutEdgesOtherThanDirectConnection = (edges: Edge[]): Edge[] =>
-  edges.map((edge) => {
-    // @ts-ignore
-    if (edge.arrowHeadType === SessionMapHeadType.DIRECT_CONNECTION) {
-      return edge;
-    }
-    return {
-      ...edge,
-      ...grayedOutEdgeSharedAttributes,
-    };
-  });
+const getEdgeSharedAttributesForSelectableNodes: EdgeSharedAttributesGetter = (
+  selectedNodesIds: string[],
+  source: string,
+  target: string,
+): Partial<Edge> => {
+  const { length: edgeSelectedNodesCount } = intersection(selectedNodesIds, [
+    source,
+    target,
+  ]);
+
+  switch (edgeSelectedNodesCount) {
+    case 1: // if either source or target node is selected
+      return highlightedEdgeSharedAttributes;
+    case 2: // if both source and target node are selected
+      return directConnectionEdgeSharedAttributes;
+    case 0: // if neither source nor target node is selected
+    default:
+      return baseEdgeSharedAttributes;
+  }
+};
+
+// asserts that the order of selectedNodesIds follows the order of answering questions
+const getEdgeSharedAttributesForNonSelectableNodes: EdgeSharedAttributesGetter =
+  (
+    selectedNodesIds: string[],
+    source: string,
+    target: string,
+  ): Partial<Edge> => {
+    const sourceNodeIndex = selectedNodesIds.findIndex((id) => id === source);
+
+    if (sourceNodeIndex === -1) return grayedOutEdgeSharedAttributes;
+
+    const targetNodeIndex = selectedNodesIds.findIndex((id) => id === target);
+
+    if (targetNodeIndex === sourceNodeIndex + 1)
+      return directConnectionEdgeSharedAttributes;
+
+    return grayedOutEdgeSharedAttributes;
+  };
 
 export const createMapEdges = (
   questions: Question[],
-  selectedQuestionsIds: string[],
+  selectedNodesIds: string[],
   nodesSelectable: boolean,
 ): Edge[] => {
+  const edgeSharedAttributesGetter: EdgeSharedAttributesGetter = nodesSelectable
+    ? getEdgeSharedAttributesForSelectableNodes
+    : getEdgeSharedAttributesForNonSelectableNodes;
+
   const edgesFromNextQuestions: Edge[] = createMapEdgesFromNextQuestions(
     questions,
-    selectedQuestionsIds,
+    selectedNodesIds,
+    edgeSharedAttributesGetter,
   );
   const allEdges: Edge[] = createMapEdgesFromBranching(
     questions,
     edgesFromNextQuestions,
-    selectedQuestionsIds,
+    selectedNodesIds,
+    edgeSharedAttributesGetter,
   );
 
   return nodesSelectable
     ? removeHighlightIfDirectConnectionExists(allEdges)
-    : grayOutEdgesOtherThanDirectConnection(allEdges);
+    : allEdges;
 };
 
 export const getNodeVerticalDistanceRatio = (nodeType?: string): number =>
