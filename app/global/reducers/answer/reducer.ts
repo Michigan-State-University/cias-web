@@ -4,6 +4,7 @@ import produce from 'immer';
 import { AppAction } from 'utils/actionBuilder';
 
 import { Answer } from 'models/Answer';
+import { ApiError } from 'models/Api';
 
 import {
   FETCH_ANSWERS_ERROR,
@@ -11,11 +12,10 @@ import {
   FETCH_ANSWERS_SUCCESS,
 } from './constants';
 import { fetchAnswersError, fetchAnswersSuccess } from './actions';
-
 export type AnswersState = {
   answers: Answer[];
   loaders: Record<string, boolean>;
-  errors: Record<string, Nullable<any>>; // TODO create error type
+  errors: Record<string, Nullable<ApiError>>;
 };
 
 export const initialState: AnswersState = {
@@ -29,9 +29,9 @@ export const initialState: AnswersState = {
 };
 
 /* eslint-disable default-case, no-param-reassign */
-export const answersReducer: Reducer<AnswersState, AppAction<any>> = (
+export const answersReducer: Reducer<AnswersState, AppAction> = (
   state = initialState,
-  action: AppAction<any>, // TODO stricter AppAction type
+  action: AppAction,
 ) =>
   produce(state, (draft) => {
     switch (action.type) {
@@ -42,7 +42,7 @@ export const answersReducer: Reducer<AnswersState, AppAction<any>> = (
       case FETCH_ANSWERS_SUCCESS:
         const { payload: fetchAnswersSuccessPayload } = action as ReturnType<
           typeof fetchAnswersSuccess
-        >; // TODO think of improvement
+        >;
         draft.answers = fetchAnswersSuccessPayload.answers;
         draft.loaders.fetchAnswers = false;
         break;
