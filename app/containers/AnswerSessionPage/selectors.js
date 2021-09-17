@@ -52,6 +52,12 @@ const makeSelectShowTextTranscript = () =>
     (substate) => substate.showTextTranscript,
   );
 
+const makeSelectPreviousUserSessionId = () =>
+  createSelector(
+    selectAnswerSessionPageDomain,
+    (substate) => substate.previousUserSessionId,
+  );
+
 export default makeSelectAnswerSessionPage;
 export {
   selectAnswerSessionPageDomain,
@@ -61,4 +67,5 @@ export {
   makeSelectCurrentQuestion,
   makeSelectCurrentBlockIndex,
   makeSelectShowTextTranscript,
+  makeSelectPreviousUserSessionId,
 };

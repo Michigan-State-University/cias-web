@@ -9,7 +9,7 @@ import Box from 'components/Box';
 import Button from 'components/Button';
 
 import messages from '../messages';
-import { makeSelectUserSession } from '../selectors';
+import { makeSelectPreviousUserSessionId } from '../selectors';
 import { getSessionMapUserPreviewUrl } from '../utils';
 
 type Props = {
@@ -21,11 +21,11 @@ const BranchingScreen = ({
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
-  const { id: userSessionId } = useSelector(makeSelectUserSession());
+  const previousUserSessionId = useSelector(makeSelectPreviousUserSessionId());
 
   const sessionMapUrl = useMemo(
-    () => getSessionMapUserPreviewUrl(userSessionId),
-    [userSessionId],
+    () => getSessionMapUserPreviewUrl(previousUserSessionId),
+    [previousUserSessionId],
   );
 
   const redirectToSessionMap = () => {
