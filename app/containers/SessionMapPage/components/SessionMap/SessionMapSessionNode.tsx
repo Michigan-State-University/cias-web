@@ -10,6 +10,7 @@ import { nodeWidth, sessionMapColors } from '../../constants';
 import messages from '../../messages';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
 import SessionMapSessionNodeDetailedInfo from './SessionMapSessionNodeDetailedInfo';
+import { getNodeOpacity } from './utils';
 
 const getBorder = (selected: boolean) =>
   selected
@@ -40,6 +41,8 @@ const SessionMapSessionNode = ({
 
   const sessionNo = sessionIndex + 1;
 
+  const opacity = getNodeOpacity(selectable, selected);
+
   return (
     <>
       <Box
@@ -50,6 +53,7 @@ const SessionMapSessionNode = ({
         bgOpacity={0.3}
         border={getBorder(selected)}
         cursor={selectable ? 'pointer' : 'default'}
+        opacity={opacity}
         ref={nodeRef}
         onClick={handleClick}
       >

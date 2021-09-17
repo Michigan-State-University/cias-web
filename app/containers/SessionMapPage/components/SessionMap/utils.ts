@@ -324,3 +324,11 @@ export const getNodeVerticalDistanceRatio = (nodeType?: string): number =>
   nodeType === SessionMapNodeType.SESSION
     ? sessionNodesVerticalDistanceRatio
     : questionNodesVerticalDistanceRatio;
+
+export const getNodeOpacity = (
+  selectable: boolean,
+  selected: boolean,
+): number => {
+  if (selectable || selected) return 1;
+  return 0.5;
+};

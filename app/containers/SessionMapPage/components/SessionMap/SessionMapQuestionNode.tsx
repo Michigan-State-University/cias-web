@@ -20,6 +20,7 @@ import {
 } from '../../constants';
 import SessionMapQuestionNodeDetailedInfo from './SessionMapQuestionNodeDetailedInfo';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
+import { getNodeOpacity } from './utils';
 
 const getBorder = (detailsShown: boolean, selected: boolean) => {
   if (detailsShown) return `3px solid ${sessionMapColors.nodeDetailsShown}`;
@@ -64,6 +65,8 @@ const SessionMapQuestionNode = ({
 
   const thickBorder = showDetails || selected;
 
+  const opacity = getNodeOpacity(selectable, selected);
+
   return (
     <>
       {showDetailedInfo && (
@@ -74,6 +77,7 @@ const SessionMapQuestionNode = ({
           width={nodeWidth}
           justify="center"
           cursor="default"
+          opacity={opacity}
         >
           <Text fontSize={14} fontWeight="bold">
             {formatMessage(messages.screenNo, { no: screenNo })}
@@ -88,6 +92,7 @@ const SessionMapQuestionNode = ({
         bg={themeColors.highlight}
         border={border}
         cursor={selectable ? 'pointer' : 'default'}
+        opacity={opacity}
         ref={nodeRef}
         onClick={handleClick}
       >
