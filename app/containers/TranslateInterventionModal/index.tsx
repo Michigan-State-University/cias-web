@@ -28,6 +28,7 @@ import {
   makeSelectInterventionError,
 } from 'global/reducers/intervention';
 import { Language, LanguageDTO } from 'global/types/language';
+import { ApiData } from 'global/types/api';
 
 import H1 from 'components/H1';
 import H2 from 'components/H2';
@@ -69,7 +70,7 @@ const TranslateInterventionModal = ({
   const [voice, setVoice] = useState<Nullable<VoiceSelectOption>>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  const { data, isFetching, error } = useGet<LanguageDTO, Language[]>(
+  const { data, isFetching, error } = useGet<ApiData<LanguageDTO>, Language[]>(
     '/v1/google/languages',
     (fetchedData) => jsonApiToArray(fetchedData, 'supportedLanguage'),
   );

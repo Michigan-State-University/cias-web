@@ -14,6 +14,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session/SessionDto';
 import { changeNoFormulaText } from 'global/reducers/textMessages';
 
 import VariableChooser from 'containers/VariableChooser';
@@ -78,6 +79,7 @@ const NoFormulaMessage = ({
           includeCurrentSession
           includeNonDigitVariables
           isMultiSession
+          sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
         >
           <Text fontWeight="bold" color={themeColors.secondary}>
             {formatMessage(settingsMessages.addVariableButton)}

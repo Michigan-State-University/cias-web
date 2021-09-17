@@ -6,7 +6,6 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { injectReducer, injectSaga } from 'redux-injectors';
 
@@ -15,10 +14,10 @@ import {
   copyModalReducer,
 } from 'global/reducers/copyModalReducer';
 
-import { colors, boxShadows } from 'theme';
+import { SessionTypes } from 'models/Session/SessionDto';
+import { QuestionDto, QuestionTypes } from 'models/Question/QuestionDto';
 
-import { QuestionTypes } from 'models/Session/QuestionTypes';
-import Question from 'models/Session/Question';
+import { colors, boxShadows } from 'theme';
 
 import useOutsideClick from 'utils/useOutsideClick';
 
@@ -30,6 +29,27 @@ import SessionView from './Components/SessionView';
 import InterventionView from './Components/InterventionView';
 
 import { VariableChooserContext, VIEWS } from './constants';
+
+interface Props {
+  children: JSX.Element;
+  disabled: boolean;
+  includeAllSessions: boolean;
+  includeAllVariables: boolean;
+  includeCurrentQuestion: boolean;
+  includeCurrentSession: boolean;
+  includeNonDigitVariables: boolean;
+  interventionId: string;
+  isMultiIntervention: boolean;
+  isMultiSession: boolean;
+  onClick: (variable: string) => void;
+  organizationId: string;
+  placement: 'left' | 'right';
+  questionTypeWhitelist: QuestionTypes[];
+  selectedQuestion: QuestionDto;
+  sessionId: string;
+  topPosition: string;
+  sessionTypesWhiteList: SessionTypes[];
+}
 
 const VariableChooser = ({
   children,
@@ -46,10 +66,11 @@ const VariableChooser = ({
   organizationId,
   placement,
   questionTypeWhitelist,
-  selectedQuestion = {},
+  selectedQuestion,
   sessionId: initialSessionId,
   topPosition,
-}) => {
+  sessionTypesWhiteList,
+}: Props) => {
   const variableChooser = useRef(null);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -169,6 +190,7 @@ const VariableChooser = ({
                 questionTypeWhitelist,
                 selectedQuestion,
                 setCurrentView,
+                sessionTypesWhiteList,
               }}
             >
               {displayContent()}
@@ -180,33 +202,16 @@ const VariableChooser = ({
   );
 };
 
-VariableChooser.propTypes = {
-  children: PropTypes.node,
-  disabled: PropTypes.bool,
-  includeAllSessions: PropTypes.bool,
-  includeAllVariables: PropTypes.bool,
-  includeCurrentQuestion: PropTypes.bool,
-  includeCurrentSession: PropTypes.bool,
-  includeNonDigitVariables: PropTypes.bool,
-  interventionId: PropTypes.string,
-  isMultiIntervention: PropTypes.bool,
-  isMultiSession: PropTypes.bool,
-  onClick: PropTypes.func.isRequired,
-  organizationId: PropTypes.string,
-  placement: PropTypes.oneOf(['left', 'right']),
-  questionTypeWhitelist: PropTypes.arrayOf(PropTypes.string),
-  questions: PropTypes.arrayOf(PropTypes.shape(Question)),
-  selectedQuestion: PropTypes.shape(Question),
-  sessionId: PropTypes.string,
-  topPosition: PropTypes.string,
-};
-
 VariableChooser.defaultProps = {
   includeCurrentQuestion: true,
   includeCurrentSession: true,
   placement: 'right',
-  questionTypeWhitelist: QuestionTypes.map(({ id }) => id),
-};
+  sessionTypesWhiteList: [
+    SessionTypes.CAT_SESSION,
+    SessionTypes.CLASSIC_SESSION,
+  ],
+  selectedQuestion: {},
+} as Partial<Props>;
 
 const reduxInjectors = [
   injectReducer({ key: 'copyModal', reducer: copyModalReducer }),
