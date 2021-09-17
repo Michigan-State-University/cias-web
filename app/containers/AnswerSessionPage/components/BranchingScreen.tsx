@@ -7,6 +7,7 @@ import H1 from 'components/H1';
 import H2 from 'components/H2';
 import Box from 'components/Box';
 import Button from 'components/Button';
+import StyledLink from 'components/StyledLink';
 
 import messages from '../messages';
 import { makeSelectPreviousUserSessionId } from '../selectors';
@@ -28,10 +29,6 @@ const BranchingScreen = ({
     [previousUserSessionId],
   );
 
-  const redirectToSessionMap = () => {
-    window.open(sessionMapUrl, '_blank');
-  };
-
   return (
     <Box mt={50}>
       <H1 textAlign="center">{formatMessage(messages.ongoingBranching)}</H1>
@@ -39,13 +36,14 @@ const BranchingScreen = ({
         {formatMessage(messages.ongoingBranchingParticipantInfo)}
       </H2>
       <Box mt={50} display="flex" justify="around">
-        <Button
-          // @ts-ignore
-          width={200}
-          onClick={redirectToSessionMap}
-          title={formatMessage(messages.goToSessionMap)}
-          inverted
-        />
+        <StyledLink to={sessionMapUrl} target="_blank">
+          <Button
+            // @ts-ignore
+            px={20}
+            inverted
+            title={formatMessage(messages.goToSessionMap)}
+          />
+        </StyledLink>
         <Button
           // @ts-ignore
           onClick={resetTransitionalUserSessionId}
