@@ -65,6 +65,7 @@ const colors = {
   orange: '#EB7900',
   orange5: '#FEF8F2',
   jungleGreen50: '#80b4AE',
+  periwinkleGray50: '#D9E0F0',
 };
 
 const themeColors = {

@@ -125,7 +125,7 @@ const SessionMap = ({
         handleSelectedChange,
         nodesSelectable,
       ),
-      ...createMapEdges(sortedQuestions, selectedNodesIds),
+      ...createMapEdges(sortedQuestions, selectedNodesIds, nodesSelectable),
     ],
     [
       sortedQuestions,
@@ -172,6 +172,10 @@ const SessionMap = ({
         <ReactFlowArrowHead
           type={SessionMapHeadType.DIRECT_CONNECTION}
           color={sessionMapColors.selected}
+        />
+        <ReactFlowArrowHead
+          type={SessionMapHeadType.GRAYED_OUT}
+          color={sessionMapColors.grayedOut}
         />
       </ReactFlowGraph>
     </>

@@ -26,6 +26,7 @@ export const sessionMapColors = {
   selected: colors.jungleGreen,
   selectedLight: colors.jungleGreen50,
   sessionNode: colors.tuftsBlue,
+  grayedOut: colors.periwinkleGray50,
 };
 
 export enum SessionMapNodeType {
@@ -37,12 +38,14 @@ export enum SessionMapHeadType {
   BASE = 'session-map-base',
   HIGHLIGHTED = 'session-map-highlighted',
   DIRECT_CONNECTION = 'session-map-direct-connection',
+  GRAYED_OUT = 'session-map-grayed-out',
 }
 
 export const edgePriorities = new Map<string, number>([
   [SessionMapHeadType.BASE, 1],
   [SessionMapHeadType.HIGHLIGHTED, 2],
   [SessionMapHeadType.DIRECT_CONNECTION, 3],
+  [SessionMapHeadType.GRAYED_OUT, 0],
 ]);
 
 export const edgeSharedAttributes: Partial<Edge> = {
@@ -76,6 +79,16 @@ export const directConnectionEdgeSharedAttributes: Partial<Edge> = {
   style: {
     strokeWidth: 3,
     stroke: sessionMapColors.selected,
+  },
+};
+
+export const grayedOutEdgeSharedAttributes: Partial<Edge> = {
+  ...edgeSharedAttributes,
+  // @ts-ignore
+  arrowHeadType: SessionMapHeadType.GRAYED_OUT,
+  style: {
+    strokeWidth: 2,
+    stroke: sessionMapColors.grayedOut,
   },
 };
 

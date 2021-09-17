@@ -14,6 +14,7 @@ import {
   baseEdgeSharedAttributes,
   highlightedEdgeSharedAttributes,
   directConnectionEdgeSharedAttributes,
+  grayedOutEdgeSharedAttributes,
   SessionMapHeadType,
 } from '../../constants';
 
@@ -287,9 +288,22 @@ const removeHighlightIfDirectConnectionExists = (edges: Edge[]): Edge[] => {
   return edgesCopy;
 };
 
+const grayOutEdgesOtherThanDirectConnection = (edges: Edge[]): Edge[] =>
+  edges.map((edge) => {
+    // @ts-ignore
+    if (edge.arrowHeadType === SessionMapHeadType.DIRECT_CONNECTION) {
+      return edge;
+    }
+    return {
+      ...edge,
+      ...grayedOutEdgeSharedAttributes,
+    };
+  });
+
 export const createMapEdges = (
   questions: Question[],
   selectedQuestionsIds: string[],
+  nodesSelectable: boolean,
 ): Edge[] => {
   const edgesFromNextQuestions: Edge[] = createMapEdgesFromNextQuestions(
     questions,
@@ -300,7 +314,10 @@ export const createMapEdges = (
     edgesFromNextQuestions,
     selectedQuestionsIds,
   );
-  return removeHighlightIfDirectConnectionExists(allEdges);
+
+  return nodesSelectable
+    ? removeHighlightIfDirectConnectionExists(allEdges)
+    : grayOutEdgesOtherThanDirectConnection(allEdges);
 };
 
 export const getNodeVerticalDistanceRatio = (nodeType?: string): number =>
