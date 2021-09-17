@@ -26,6 +26,6 @@ export function* fetchAnswers({
   }
 }
 
-export default function* fetchAnswersSaga() {
+export function* fetchAnswersSaga() {
   yield takeLatest(FETCH_ANSWERS_REQUEST, fetchAnswers);
 }

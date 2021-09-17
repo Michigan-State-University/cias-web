@@ -45,6 +45,7 @@ const createQuestionNode = (
   index: number,
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
+  selectable: boolean,
 ): Node<QuestionTileData> => ({
   id: question.id,
   type: SessionMapNodeType.QUESTION,
@@ -58,6 +59,7 @@ const createQuestionNode = (
     index,
     selected: selectedNodesIds.includes(question.id),
     onSelectedChange,
+    selectable,
   },
 });
 
@@ -73,6 +75,7 @@ const createSessionNodesFromBranching = (
   showDetailedInfo: boolean,
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
+  selectable: boolean,
 ): Node<SessionTileData>[] => {
   const nodes: Node<SessionTileData>[] = [];
 
@@ -98,6 +101,7 @@ const createSessionNodesFromBranching = (
           showDetailedInfo,
           selected: selectedNodesIds.includes(sessionNodeId),
           onSelectedChange,
+          selectable,
         },
       });
     }),
@@ -114,6 +118,7 @@ export const createMapNodes = (
   sessions: SessionDto[],
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
+  selectable: boolean,
 ): Node<QuestionTileData | SessionTileData>[] =>
   questions.flatMap((question, index) => {
     const nodes: Node<QuestionTileData | SessionTileData>[] = [
@@ -125,6 +130,7 @@ export const createMapNodes = (
         index,
         selectedNodesIds,
         onSelectedChange,
+        selectable,
       ),
     ];
 
@@ -136,6 +142,7 @@ export const createMapNodes = (
         showDetailedInfo,
         selectedNodesIds,
         onSelectedChange,
+        selectable,
       ),
     );
 
@@ -259,6 +266,7 @@ const removeHighlightIfDirectConnectionExists = (edges: Edge[]): Edge[] => {
       break;
     }
 
+    // eslint-disable-next-line prefer-destructuring
     const connectingEdge = directConnections[i];
 
     edgesCopy.forEach((edge, edgeIndex) => {

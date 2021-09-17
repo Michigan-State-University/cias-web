@@ -38,6 +38,7 @@ const SessionMapQuestionNode = ({
     index,
     selected,
     onSelectedChange,
+    selectable,
   },
 }: NodeProps<QuestionTileData>): JSX.Element => {
   const { formatMessage } = useIntl();
@@ -57,7 +58,7 @@ const SessionMapQuestionNode = ({
     [nodeRef.current],
   );
 
-  const handleClick = () => onSelectedChange(!selected, id);
+  const handleClick = () => selectable && onSelectedChange(!selected, id);
 
   const screenNo = index + 1;
 
@@ -86,7 +87,7 @@ const SessionMapQuestionNode = ({
         maxHeight={146} // workaround to make dagre layout question nodes with ellipsis text correctly, update if necessary
         bg={themeColors.highlight}
         border={border}
-        cursor="pointer"
+        cursor={selectable ? 'pointer' : 'default'}
         ref={nodeRef}
         onClick={handleClick}
       >

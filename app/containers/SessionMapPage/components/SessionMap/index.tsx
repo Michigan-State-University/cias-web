@@ -5,6 +5,7 @@ import { NodeTypesType } from 'react-flow-renderer';
 import { Question } from 'global/types/question';
 import { QuestionGroup } from 'global/types/questionGroup';
 import { SessionDto } from 'models/Session/SessionDto';
+import { Answer } from 'models/Answer';
 
 import {
   ReactFlowGraph,
@@ -50,6 +51,7 @@ type Props = {
   onZoomChange: (zoom: number) => void;
   minZoom: number;
   onMinZoomChange: (minZoom: number) => void;
+  answers: Nullable<Answer[]>;
 };
 
 const SessionMap = ({
@@ -62,6 +64,7 @@ const SessionMap = ({
   onZoomChange,
   minZoom,
   onMinZoomChange,
+  answers,
 }: Props): JSX.Element => {
   const [selectedNodesIds, setSelectedNodesIds] = useState<string[]>([]);
 
@@ -83,6 +86,8 @@ const SessionMap = ({
     },
     [selectedNodesIds, setSelectedNodesIds],
   );
+
+  const nodesSelectable = useMemo(() => !answers, [answers]);
 
   const handleShowDetailsChange = useCallback(
     (showDetails: boolean, questionId: string) => {
@@ -111,6 +116,7 @@ const SessionMap = ({
         sessions,
         selectedNodesIds,
         handleSelectedChange,
+        nodesSelectable,
       ),
       ...createMapEdges(sortedQuestions, selectedNodesIds),
     ],

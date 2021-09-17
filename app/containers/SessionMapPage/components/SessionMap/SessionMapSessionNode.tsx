@@ -18,7 +18,13 @@ const getBorder = (selected: boolean) =>
 
 const SessionMapSessionNode = ({
   id,
-  data: { sessionIndex, showDetailedInfo, selected, onSelectedChange },
+  data: {
+    sessionIndex,
+    showDetailedInfo,
+    selected,
+    onSelectedChange,
+    selectable,
+  },
 }: NodeProps<SessionTileData>): JSX.Element => {
   const { formatMessage } = useIntl();
 
@@ -30,7 +36,7 @@ const SessionMapSessionNode = ({
     [nodeRef.current],
   );
 
-  const handleClick = () => onSelectedChange(!selected, id);
+  const handleClick = () => selectable && onSelectedChange(!selected, id);
 
   const sessionNo = sessionIndex + 1;
 
@@ -43,7 +49,7 @@ const SessionMapSessionNode = ({
         bg={sessionMapColors.sessionNode}
         bgOpacity={0.3}
         border={getBorder(selected)}
-        cursor="pointer"
+        cursor={selectable ? 'pointer' : 'default'}
         ref={nodeRef}
         onClick={handleClick}
       >

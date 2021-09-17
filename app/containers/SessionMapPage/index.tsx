@@ -45,9 +45,11 @@ import {
 } from 'global/reducers/reportTemplates';
 import {
   fetchAnswersRequest,
+  makeSelectAnswers,
   makeSelectAnswersLoader,
   makeSelectAnswersError,
   answersReducer,
+  fetchAnswersSaga,
   FETCH_ANSWERS_ERROR,
 } from 'global/reducers/answer';
 import { QuestionGroup } from 'global/types/questionGroup';
@@ -69,7 +71,6 @@ import SessionMap from './components/SessionMap';
 import SessionMapFooter from './components/SessionMapFooter';
 import { QuestionDetailsColumn } from './components/styled';
 import SessionMapQuestionDetails from './components/QuestionDetails';
-import fetchAnswersSaga from '../../global/reducers/answer/sagas/fetchAnswers';
 
 type RouteParams = {
   interventionId: string;
@@ -125,6 +126,7 @@ const SessionMapPage = (): JSX.Element => {
   // @ts-ignore
   useInjectReducer({ key: 'answers', reducer: answersReducer });
   useInjectSaga({ key: 'fetchAnswers', saga: fetchAnswersSaga });
+  const answers = useSelector(makeSelectAnswers());
   const answersLoading = useSelector(makeSelectAnswersLoader('fetchAnswers'));
   const answersError = useSelector(makeSelectAnswersError('fetchAnswers'));
 
@@ -238,6 +240,7 @@ const SessionMapPage = (): JSX.Element => {
                 onZoomChange={setZoom}
                 minZoom={minZoom}
                 onMinZoomChange={setMinZoom}
+                answers={userSessionId && !answersError ? answers : null}
               />
               <SessionMapFooter
                 afterPreview={Boolean(userSessionId)}
