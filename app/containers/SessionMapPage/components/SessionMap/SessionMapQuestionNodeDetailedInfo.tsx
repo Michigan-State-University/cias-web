@@ -13,6 +13,7 @@ import Row from 'components/Row';
 import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 
 import messages from '../../messages';
+import { SHOW_DETAILS_CLASSNAME, DIVIDER_CLASSNAME } from '../../constants';
 
 type Props = {
   question: Question;
@@ -50,8 +51,8 @@ const SessionMapQuestionNodeDetailedInfo = ({
         fontWeight="bold"
         width={160}
       />
-      <Divider my={16} />
-      <Row>
+      <Divider my={16} className={DIVIDER_CLASSNAME} />
+      <Row className={SHOW_DETAILS_CLASSNAME}>
         <div onClick={(e) => e.stopPropagation()}>
           <Switch
             checked={showDetails}

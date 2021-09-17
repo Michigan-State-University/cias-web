@@ -24,6 +24,7 @@ import {
   scrollbarsThickness,
   scrollbarsMargin,
   edgePriorities,
+  SESSION_MAP_ID,
 } from '../../constants';
 import {
   sortQuestionsByGroupAndPosition,
@@ -146,7 +147,7 @@ const SessionMap = ({
 
   return (
     <>
-      <ReactFlowGraph {...sessionMapGraphProps}>
+      <ReactFlowGraph {...sessionMapGraphProps} id={SESSION_MAP_ID}>
         <ReactFlowArrowHead
           type={SessionMapHeadType.BASE}
           color={sessionMapColors.edgeBase}

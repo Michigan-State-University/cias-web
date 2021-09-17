@@ -451,6 +451,9 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 
 .c16:hover {
@@ -1607,6 +1610,9 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 
 .c15:hover {

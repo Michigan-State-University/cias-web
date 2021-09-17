@@ -18,6 +18,7 @@ export const StyledIcon = styled(Icon)`
 export const StyledLabel = styled.label`
   display: flex;
   align-items: center;
+  width: max-content;
 
   &:hover {
     cursor: pointer;

@@ -94,6 +94,7 @@
     "he": "^1.2.0",
     "history": "4.9.0",
     "hoist-non-react-statics": "3.3.0",
+    "html-to-image": "^1.7.0",
     "immer": "^9.0.2",
     "immutable": "^4.0.0-rc.12",
     "interweave": "^12.7.0",

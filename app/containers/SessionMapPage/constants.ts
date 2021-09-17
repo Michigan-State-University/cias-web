@@ -2,6 +2,8 @@ import { ConnectionLineType, Edge } from 'react-flow-renderer';
 
 import { colors } from 'theme';
 
+import { DownloadProgressState } from './types';
+
 export const defaultMinZoom = 0.5;
 export const defaultMaxZoom = 2;
 export const defaultZoom = 1;
@@ -75,4 +77,18 @@ export const directConnectionEdgeSharedAttributes: Partial<Edge> = {
     strokeWidth: 3,
     stroke: sessionMapColors.selected,
   },
+};
+
+export const SESSION_MAP_ID = 'session-map';
+export const SHOW_DETAILS_CLASSNAME = 'show-details';
+export const DIVIDER_CLASSNAME = 'divider';
+export const REACT_FLOW_EDGES_PANE_ID = 'react-flow__edges';
+
+export const INITIAL_DOWNLOAD_PROGRESS_STATE: DownloadProgressState = {
+  mapState: null,
+  cachedEdgesPane: null,
+  withBackground: false,
+  isInProgress: false,
+  isReadyToGenerate: false,
+  isReadyToRestore: false,
 };
