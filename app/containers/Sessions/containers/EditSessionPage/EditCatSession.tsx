@@ -21,8 +21,8 @@ import { SelectOption } from 'components/Select/types';
 import ApiSelect from 'components/Select/ApiSelect';
 import Circle from 'components/Circle';
 import StyledInput from 'components/Input/StyledInput';
+import { catMhVoiceDataParser } from 'global/parsers';
 import GhostLink from 'components/GhostLink';
-
 import messages from './messages';
 import CatMhTests from '../../components/CatMhTests';
 
@@ -189,7 +189,7 @@ const EditCatSession = ({
             formatMessage(messages.narratorVoiceType),
             <ApiSelect
               url={languagesUrl}
-              dataParser={(data: any) => jsonApiToArray(data, 'voice')}
+              dataParser={(data: any) => catMhVoiceDataParser(data)}
               selectProps={{
                 onChange: onApiSelectUpdate('googleTtsVoiceId'),
                 isDisabled: !editingPossible || !languagesUrl,
