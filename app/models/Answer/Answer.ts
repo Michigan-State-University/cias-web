@@ -14,4 +14,5 @@ export interface Answer {
   questionId: string;
   type: AnswerType;
   decryptedBody: AnswerBody;
+  nextSessionId: Nullable<string>;
 }

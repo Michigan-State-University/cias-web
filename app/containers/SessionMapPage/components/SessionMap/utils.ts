@@ -4,7 +4,9 @@ import intersection from 'lodash/intersection';
 
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
+
 import { SessionDto } from 'models/Session/SessionDto';
+import { Answer } from 'models/Answer';
 
 import { QuestionTileData, SessionTileData } from '../../types';
 import {
@@ -369,4 +371,24 @@ export const getNodeOpacity = (
 ): number => {
   if (selectable || selected) return 1;
   return 0.5;
+};
+
+export const createSelectedNodesIdsFromAnswers = (
+  answers: Answer[],
+  sortedQuestions: Question[],
+): string[] => {
+  const selectedNodesIds = answers.map(({ questionId }) => questionId);
+
+  const { questionId: lastAnsweredQuestionId, nextSessionId } =
+    answers[answers.length - 1];
+
+  if (nextSessionId) {
+    selectedNodesIds.push(
+      createSessionNodeId(lastAnsweredQuestionId, nextSessionId),
+    );
+  } else {
+    selectedNodesIds.push(sortedQuestions[sortedQuestions.length - 1].id); // finish screen
+  }
+
+  return selectedNodesIds;
 };

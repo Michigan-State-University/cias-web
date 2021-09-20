@@ -32,6 +32,7 @@ import {
   createMapNodes,
   createMapEdges,
   getNodeVerticalDistanceRatio,
+  createSelectedNodesIdsFromAnswers,
 } from './utils';
 import SessionMapSessionNode from './SessionMapSessionNode';
 import SessionMapQuestionNode from './SessionMapQuestionNode';
@@ -89,13 +90,6 @@ const SessionMap = ({
 
   const nodesSelectable = useMemo(() => !answers, [answers]);
 
-  useEffect(() => {
-    if (answers) {
-      const answeredQuestionsIds = answers.map(({ questionId }) => questionId);
-      setSelectedNodesIds(answeredQuestionsIds);
-    }
-  }, [answers]);
-
   const handleShowDetailsChange = useCallback(
     (showDetails: boolean, questionId: string) => {
       onShowDetailsIdChange(showDetails ? questionId : '');
@@ -112,6 +106,14 @@ const SessionMap = ({
     () => sortQuestionsByGroupAndPosition(questionGroups, questions),
     [questions, questionGroups],
   );
+
+  useEffect(() => {
+    if (answers) {
+      setSelectedNodesIds(
+        createSelectedNodesIdsFromAnswers(answers, sortedQuestions),
+      );
+    }
+  }, [answers, sortedQuestions]);
 
   const elements = useMemo(
     () => [

@@ -1,3 +1,3 @@
-export const FETCH_ANSWERS_REQUEST = 'app/SessionMap/FETCH_ANSWERS_REQUEST';
-export const FETCH_ANSWERS_SUCCESS = 'app/SessionMap/FETCH_ANSWERS_SUCCESS';
-export const FETCH_ANSWERS_ERROR = 'app/SessionMap/FETCH_ANSWERS_ERROR';
+export const FETCH_ANSWERS_REQUEST = 'app/Answers/FETCH_ANSWERS_REQUEST';
+export const FETCH_ANSWERS_SUCCESS = 'app/Answers/FETCH_ANSWERS_SUCCESS';
+export const FETCH_ANSWERS_ERROR = 'app/Answers/FETCH_ANSWERS_ERROR';
