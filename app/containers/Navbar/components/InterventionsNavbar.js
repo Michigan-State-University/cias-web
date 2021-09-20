@@ -94,6 +94,8 @@ const InterventionNavbar = ({
 
   const canAccessGeneratedReports = interventionOwnerId === userId;
 
+  const isClassicSession = type === SessionTypes.CLASSIC_SESSION;
+
   useInjectSaga({ key: 'editSession', saga: editSessionSaga });
   const [tabActive, setTabActive] = useState(
     getActiveTab(pathname, formatMessage),
@@ -184,27 +186,29 @@ const InterventionNavbar = ({
             </StyledLink>
           }
         />
-        <div
-          linkMatch={formatMessage(messages.reportTemplates)}
-          renderAsLink={
-            <StyledLink
-              to={`/interventions/${interventionId}/sessions/${sessionId}/report-templates`}
-            >
-              <Row style={{ lineHeight: 'normal' }} align="end">
-                {formatMessage(messages.reportTemplates)}
-                <Circle
-                  bg={themeColors.secondary}
-                  color={colors.white}
-                  size="20px"
-                  child={reportTemplatesCount ?? 0}
-                  fontSize={11}
-                  ml={5}
-                />
-              </Row>
-            </StyledLink>
-          }
-        />
-        {canAccessGeneratedReports && (
+        {isClassicSession && (
+          <div
+            linkMatch={formatMessage(messages.reportTemplates)}
+            renderAsLink={
+              <StyledLink
+                to={`/interventions/${interventionId}/sessions/${sessionId}/report-templates`}
+              >
+                <Row style={{ lineHeight: 'normal' }} align="end">
+                  {formatMessage(messages.reportTemplates)}
+                  <Circle
+                    bg={themeColors.secondary}
+                    color={colors.white}
+                    size="20px"
+                    child={reportTemplatesCount ?? 0}
+                    fontSize={11}
+                    ml={5}
+                  />
+                </Row>
+              </StyledLink>
+            }
+          />
+        )}
+        {canAccessGeneratedReports && isClassicSession && (
           <div
             linkMatch={formatMessage(messages.generatedReports)}
             renderAsLink={
@@ -226,27 +230,29 @@ const InterventionNavbar = ({
             }
           />
         )}
-        <div
-          linkMatch={formatMessage(messages.smsMessaging)}
-          renderAsLink={
-            <StyledLink
-              to={`/interventions/${interventionId}/sessions/${sessionId}/sms-messaging`}
-            >
-              <Row align="end">
-                {formatMessage(messages.smsMessaging)}
-                <Circle
-                  bg={themeColors.secondary}
-                  color={colors.white}
-                  size="20px"
-                  fontSize={11}
-                  ml={5}
-                  child={textMessagesCountValue}
-                />
-              </Row>
-            </StyledLink>
-          }
-        />
-        {type === SessionTypes.CLASSIC_SESSION && (
+        {isClassicSession && (
+          <div
+            linkMatch={formatMessage(messages.smsMessaging)}
+            renderAsLink={
+              <StyledLink
+                to={`/interventions/${interventionId}/sessions/${sessionId}/sms-messaging`}
+              >
+                <Row align="end">
+                  {formatMessage(messages.smsMessaging)}
+                  <Circle
+                    bg={themeColors.secondary}
+                    color={colors.white}
+                    size="20px"
+                    fontSize={11}
+                    ml={5}
+                    child={textMessagesCountValue}
+                  />
+                </Row>
+              </StyledLink>
+            }
+          />
+        )}
+        {isClassicSession && (
           <div
             renderAsLink={
               <StyledLink
