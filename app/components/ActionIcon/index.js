@@ -11,7 +11,6 @@ import { useIntl } from 'react-intl';
 import cross from 'assets/svg/cross.svg';
 
 import Icon from 'components/Icon';
-import { HiddenText } from 'components/Text';
 
 import { CrossLink, CrossButton } from './styled';
 import messages from './messages';
@@ -26,13 +25,10 @@ const ActionIcon = ({ to, onClick, iconSrc, ariaText, ...restProps }) => {
         data-cy="back-intervention-button"
         to={to}
         title={ariaText ?? formatMessage(messages.defaultCrossButtonText)}
+        aria-label={ariaText ?? formatMessage(messages.defaultCrossButtonText)}
         {...restProps}
       >
         {icon}
-
-        <HiddenText>
-          {ariaText ?? formatMessage(messages.defaultCrossButtonText)}
-        </HiddenText>
       </CrossLink>
     );
   if (onClick)
@@ -40,13 +36,10 @@ const ActionIcon = ({ to, onClick, iconSrc, ariaText, ...restProps }) => {
       <CrossButton
         onClick={onClick}
         title={ariaText ?? formatMessage(messages.defaultCrossButtonText)}
+        aria-label={ariaText ?? formatMessage(messages.defaultCrossButtonText)}
         {...restProps}
       >
         {icon}
-
-        <HiddenText>
-          {ariaText ?? formatMessage(messages.defaultCrossButtonText)}
-        </HiddenText>
       </CrossButton>
     );
   return null;

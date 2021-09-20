@@ -46,9 +46,16 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
 }
 
 .c5 {
-  width: auto;
-  height: auto;
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
   margin-left: 5px;
+  color: #2F3850;
 }
 
 .c1 {
@@ -110,13 +117,18 @@ exports[`<CollapsableLabel /> should match the snapshot 1`] = `
         </div>
       </div>
     </div>
-    <img
-      alt="bin"
+    <button
+      aria-label="Delete"
       class="c5"
       data-cy="accordion-element-delete-0"
       data-testid="bin-test"
-      src="IMAGE_MOCK"
-    />
+      title="Delete"
+      type="button"
+    >
+      <img
+        src="IMAGE_MOCK"
+      />
+    </button>
   </div>
 </div>
 `;

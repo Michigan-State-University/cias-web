@@ -6,17 +6,16 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
+import AudioWrapper from 'utils/audioWrapper';
+
 import { Input } from 'components/Input';
-import Img from 'components/Img';
 import Text from 'components/Text';
 import Row from 'components/Row';
 import Box from 'components/Box';
 import Column from 'components/Column';
 import Loader from 'components/Loader';
-import AudioWrapper from 'utils/audioWrapper';
+import { PlayStopButton } from 'components/ActionIcons';
 
-import playButton from 'assets/svg/play-button-1.svg';
-import stopButton from 'assets/svg/stop-button-1.svg';
 import { themeColors } from 'theme';
 
 import messages from './messages';
@@ -88,27 +87,12 @@ const TextVoicePreviewInput = ({
 
   const renderPreviewButton = () => {
     if (phoneticLoading) return <Loader size={24} type="inline" />;
-    if (!isPlaying)
-      return (
-        <Img
-          src={playButton}
-          onClick={playPreview}
-          clickable
-          disabled={audioButtonDisabled}
-          aria-disabled={audioButtonDisabled}
-          role="button"
-          aria-label={formatMessage(messages.playButtonLabel)}
-        />
-      );
+
     return (
-      <Img
-        src={stopButton}
+      <PlayStopButton
+        isPlaying={isPlaying}
         onClick={playPreview}
-        clickable
         disabled={audioButtonDisabled}
-        aria-disabled={audioButtonDisabled}
-        role="button"
-        aria-label={formatMessage(messages.stopButtonLabel)}
       />
     );
   };

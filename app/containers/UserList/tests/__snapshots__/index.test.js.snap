@@ -1,41 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
-.c6 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 14px;
-  font-weight: 700;
-  color: rgba(255,255,255,1);
-  color: rgba(255,255,255,1);
-}
-
-.c31 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: rgba(210,55,29,1);
-  color: rgba(210,55,29,1);
-}
-
-.c35 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: rgba(210,55,29,1);
-  color: rgba(210,55,29,1);
-}
-
-.c40 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: rgba(255,255,255,1);
-  color: rgba(255,255,255,1);
-}
-
 .c0 {
   width: auto;
   height: auto;
@@ -463,6 +428,41 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 .c13:disabled + .c15 {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.c6 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
+}
+
+.c31 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+}
+
+.c35 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+}
+
+.c40 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
 }
 
 .c3 {
@@ -1160,41 +1160,6 @@ exports[`<UserList /> Should render and match the snapshot - admin 1`] = `
 `;
 
 exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
-.c5 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-size: 14px;
-  font-weight: 700;
-  color: rgba(255,255,255,1);
-  color: rgba(255,255,255,1);
-}
-
-.c30 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: rgba(210,55,29,1);
-  color: rgba(210,55,29,1);
-}
-
-.c34 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  font-weight: 700;
-  color: rgba(210,55,29,1);
-  color: rgba(210,55,29,1);
-}
-
-.c39 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: rgba(255,255,255,1);
-  color: rgba(255,255,255,1);
-}
-
 .c0 {
   width: auto;
   height: auto;
@@ -1622,6 +1587,41 @@ exports[`<UserList /> Should render and match the snapshot - researcher 1`] = `
 .c12:disabled + .c14 {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.c5 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-size: 14px;
+  font-weight: 700;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
+}
+
+.c30 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+}
+
+.c34 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  font-weight: 700;
+  color: rgba(210,55,29,1);
+  color: rgba(210,55,29,1);
+}
+
+.c39 {
+  font-family: DM Sans;
+  font-size: 13px;
+  line-height: 130%;
+  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);
 }
 
 .c3 {

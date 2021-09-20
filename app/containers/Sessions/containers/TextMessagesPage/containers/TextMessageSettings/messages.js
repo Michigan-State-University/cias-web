@@ -29,4 +29,12 @@ export default defineMessages({
     defaultMessage:
       'Are you sure you want to delete this Text Message? It will not be possible to recover it later.',
   },
+  deleteIcon: {
+    id: `${scope}.deleteIcon`,
+    defaultMessage: 'Delete Text Message',
+  },
+  cloneIcon: {
+    id: `${scope}.cloneIcon`,
+    defaultMessage: 'Duplicate Text Message',
+  },
 });

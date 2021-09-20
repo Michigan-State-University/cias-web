@@ -173,10 +173,17 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
 }
 
 .c9 {
-  width: auto;
-  height: auto;
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
   cursor: not-allowed;
-  opacity: 0.5;
+  opacity: 0.7;
+  color: #2F3850;
+  cursor: pointer;
 }
 
 @media only screen and (min-width:768px) {
@@ -287,14 +294,17 @@ exports[`<NameQuestion /> Should render and match the snapshot 1`] = `
             role="button"
             width="80"
           >
-            <img
-              aria-disabled="true"
+            <button
               aria-label="Play audio"
               class="c9"
               disabled=""
-              role="button"
-              src="IMAGE_MOCK"
-            />
+              title="Play audio"
+              type="button"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+            </button>
             <p
               class="c10"
               color="#B727EA"
