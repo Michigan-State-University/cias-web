@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
+import dayjs from 'dayjs';
 
 import { colors, themeColors } from 'theme';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
@@ -18,8 +19,10 @@ import Row from 'components/Row';
 import Divider from 'components/Divider';
 import { SelectOption } from 'components/Select/types';
 import ApiSelect from 'components/Select/ApiSelect';
+import Circle from 'components/Circle';
 import StyledInput from 'components/Input/StyledInput';
-import dayjs from 'dayjs';
+import GhostLink from 'components/GhostLink';
+
 import messages from './messages';
 import CatMhTests from '../../components/CatMhTests';
 
@@ -212,9 +215,23 @@ const EditCatSession = ({
         <Row my={30}>
           <Divider />
         </Row>
-        <Text mb={25} fontSize={16}>
-          {formatMessage(messages.testsHeader)}
-        </Text>
+        <Box display="flex" align="center" mb={25}>
+          <Text fontSize={16}>{formatMessage(messages.testsHeader)}</Text>
+          <GhostLink
+            href="https://adaptivetestingtechnologies.com/cat-mh-modules/"
+            target="_blank"
+          >
+            <Circle
+              bg={colors.grey}
+              color={colors.white}
+              size="16px"
+              fontWeight="bold"
+              ml={5}
+              fontSize={11}
+              child="?"
+            />
+          </GhostLink>
+        </Box>
         {!testsUrl && (
           <Text fontSize={15} fontWeight="bold" textAlign="center">
             {formatMessage(messages.noTestsData)}
