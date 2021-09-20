@@ -37,6 +37,7 @@ export const submitAnswer = (
   type,
   sessionId,
   userSessionId,
+  skipped,
 ) =>
   actionBuilder(SUBMIT_ANSWER_REQUEST, {
     answerId,
@@ -44,6 +45,7 @@ export const submitAnswer = (
     type,
     sessionId,
     userSessionId,
+    skipped,
   });
 
 export const submitAnswerSuccess = answerId =>

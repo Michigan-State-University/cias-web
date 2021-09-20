@@ -21,9 +21,24 @@ import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 import ccIcon from 'assets/svg/closed-captions.svg';
 
 import { themeColors } from 'theme';
+
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE } from 'utils/previewMode';
+import { makeSelectAudioInstance } from 'global/reducers/globalState';
+import {
+  fetchInterventionRequest,
+  fetchInterventionSaga,
+  makeSelectInterventionStatus,
+  interventionReducer,
+} from 'global/reducers/intervention';
+import {
+  editPhoneNumberQuestionSaga,
+  REDIRECT_QUERY_KEY,
+} from 'global/reducers/auth';
+import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
+import { canPreview } from 'models/Status/statusPermissions';
+import { finishQuestion } from 'models/Session/QuestionTypes';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
 
@@ -39,36 +54,22 @@ import { MSULogo } from 'components/Logo';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
 import Icon from 'components/Icon';
+import ConfirmationBox from 'components/ConfirmationBox';
 
-import { makeSelectAudioInstance } from 'global/reducers/globalState';
-import {
-  fetchInterventionRequest,
-  fetchInterventionSaga,
-  makeSelectInterventionStatus,
-  interventionReducer,
-} from 'global/reducers/intervention';
-import {
-  editPhoneNumberQuestionSaga,
-  REDIRECT_QUERY_KEY,
-} from 'global/reducers/auth';
-import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
-import { canPreview } from 'models/Status/statusPermissions';
-import { finishQuestion } from 'models/Session/QuestionTypes';
+import renderQuestionByType from './components';
+import CharacterAnim from './components/CharacterAnim';
+import { SkipQuestionButton } from './components/SkipQuestionButton';
+import CommonLayout from './layouts/CommonLayout';
+
+import makeSelectAnswerSessionPage from './selectors';
+import reducer from './reducer';
+import saga from './saga';
+import messages from './messages';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,
   StyledButton,
 } from './styled';
-
-import renderQuestionByType from './components';
-import CharacterAnim from './components/CharacterAnim';
-import CommonLayout from './layouts/CommonLayout';
-import makeSelectAnswerSessionPage from './selectors';
-
-import reducer from './reducer';
-import saga from './saga';
-import messages from './messages';
-
 import {
   submitAnswer,
   selectAnswer,
@@ -183,6 +184,10 @@ export function AnswerSessionPage({
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
 
+  const [skipQuestionModalVisible, setSkipQuestionModalVisible] = useState(
+    false,
+  );
+
   const {
     settings: {
       required,
@@ -252,13 +257,14 @@ export function AnswerSessionPage({
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
 
-  const saveAnswer = () =>
+  const saveAnswer = (skipped = false) =>
     submitAnswerRequest(
       currentQuestionId,
       get(currentQuestion, 'settings.required', false),
       get(currentQuestion, 'type', ''),
       sessionId,
       userSession.id,
+      skipped,
     );
 
   const renderQuestionTranscript = isRightSide => {
@@ -346,7 +352,10 @@ export function AnswerSessionPage({
 
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
-    const shouldRenderButton =
+    const shouldRenderSkipQuestionButton = !isLastScreen;
+    const skipQuestionButtonDisabled = required;
+
+    const shouldRenderContinueButton =
       !isLastScreen &&
       (isNullOrUndefined(proceedButton) || proceedButton) &&
       canSkipNarrator;
@@ -363,19 +372,26 @@ export function AnswerSessionPage({
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           </Box>
 
-          {shouldRenderButton && (
-            <Row width="100%" my={20}>
+          <Row width="100%" my={20} justify="end" align="center">
+            {shouldRenderSkipQuestionButton && (
+              <SkipQuestionButton
+                onClick={() => setSkipQuestionModalVisible(true)}
+                disabled={skipQuestionButtonDisabled}
+              />
+            )}
+
+            {shouldRenderContinueButton && (
               <Button
                 data-cy="continue-button"
                 disabled={isButtonDisabled()}
                 margin={20}
                 width="180px"
                 loading={currentQuestion.loading || nextQuestionLoading}
-                onClick={saveAnswer}
+                onClick={() => saveAnswer(false)}
                 title={formatMessage(messages.nextQuestion)}
               />
-            </Row>
-          )}
+            )}
+          </Row>
 
           {renderQuestionTranscript(false)}
         </AppContainer>
@@ -424,6 +440,14 @@ export function AnswerSessionPage({
 
   return (
     <Column height="100%" ref={pageRef}>
+      <ConfirmationBox
+        visible={skipQuestionModalVisible}
+        onClose={() => setSkipQuestionModalVisible(false)}
+        description={formatMessage(messages.skipQuestionModalHeader)}
+        content={formatMessage(messages.skipQuestionModalMessage)}
+        confirmAction={() => saveAnswer(true)}
+      />
+
       <Box
         display="flex"
         align="center"

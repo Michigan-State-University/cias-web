@@ -4,10 +4,9 @@ import omit from 'lodash/omit';
 import map from 'lodash/map';
 import { toast } from 'react-toastify';
 import { push } from 'connected-react-router';
-import { formatMessage } from 'utils/intlOutsideReact';
 
 import { mapQuestionToStateObject } from 'utils/mapResponseObjects';
-
+import { formatMessage } from 'utils/intlOutsideReact';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { logInGuest } from 'global/reducers/auth/sagas/logInGuest';
 import LocalStorageService from 'utils/localStorageService';
@@ -38,7 +37,7 @@ import { makeSelectAnswers, makeSelectCurrentQuestion } from './selectors';
 import messages from './messages';
 
 function* submitAnswersAsync({
-  payload: { answerId, required, type: questionType, userSessionId },
+  payload: { answerId, required, type: questionType, userSessionId, skipped },
 }) {
   const answers = yield select(makeSelectAnswers());
   const { answerBody } = answers[answerId];
@@ -59,6 +58,7 @@ function* submitAnswersAsync({
       objectToSnakeCase({
         answer: { type, body: { data } },
         questionId: answerId,
+        skipped,
       }),
     );
 
