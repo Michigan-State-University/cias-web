@@ -54,4 +54,12 @@ export default defineMessages({
     defaultMessage:
       '<p style="font-size: 10px;">In <span style="font-weight: bold;">“Session Map”</span> you can see only one session. Switch a session to see its map.</p>',
   },
+  downloadSessionMap: {
+    id: `${scope}.downloadSessionMap`,
+    defaultMessage: 'Download map as SVG',
+  },
+  withBackgroundCheckbox: {
+    id: `${scope}.withBackgroundCheckbox`,
+    defaultMessage: 'With background',
+  },
 });

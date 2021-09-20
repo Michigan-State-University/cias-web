@@ -24,6 +24,7 @@ import {
   resetPhoneticPreview,
 } from 'global/reducers/audioPreview';
 import { Voice, VoiceDTO } from 'global/types/voice';
+import { ApiData } from 'global/types/api';
 
 import { fontSizes, themeColors } from 'theme';
 import Text from 'components/Text';
@@ -60,7 +61,7 @@ const TranslateVoiceSettings = ({
 
   const [previewText, setPreviewText] = useState('');
 
-  const { data, isFetching, error } = useGet<VoiceDTO, Voice[]>(
+  const { data, isFetching, error } = useGet<ApiData<VoiceDTO>, Voice[]>(
     `/v1/google/languages/${googleLanguageId}/voices`,
     (fetchedData) => voiceDataParser(fetchedData),
   );

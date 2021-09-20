@@ -20,6 +20,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session/SessionTypes';
 
 import VariableChooser from 'containers/VariableChooser';
 
@@ -178,6 +179,7 @@ const VariantItem = ({
               includeCurrentSession
               includeNonDigitVariables
               isMultiSession
+              sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
             >
               <Text fontWeight="bold" color={themeColors.secondary}>
                 {formatMessage(settingsMessages.addVariableButton)}

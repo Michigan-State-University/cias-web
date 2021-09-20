@@ -170,6 +170,7 @@ module.exports = {
         ...baseRules,
         '@typescript-eslint/no-var-requires': 0,
         '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/no-use-before-define': 0,
       },
     },
   ],

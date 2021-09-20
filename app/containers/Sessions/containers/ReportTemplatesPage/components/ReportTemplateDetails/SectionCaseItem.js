@@ -23,6 +23,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session/SessionDto';
 import { colors, themeColors } from 'theme';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
@@ -292,6 +293,7 @@ const SectionCaseItem = ({
                 includeCurrentSession
                 includeNonDigitVariables
                 isMultiSession
+                sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
               >
                 <TextButton
                   whiteSpace="nowrap"

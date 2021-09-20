@@ -46,6 +46,9 @@ exports[`<Checkbox /> Should render checked and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 
 .c4:hover {
@@ -126,6 +129,9 @@ exports[`<Checkbox /> Should render unchecked and match the snapshot 1`] = `
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 
 .c4:hover {

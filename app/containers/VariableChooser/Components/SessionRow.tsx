@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -15,7 +14,15 @@ import { Col, NoMarginRow } from 'components/ReactGridSystem';
 
 import messages from '../messages';
 
-const SessionRow = ({ id, isInitialSession, isLast, name, onClick }) => {
+interface Props {
+  id: string;
+  isInitialSession: boolean;
+  isLast: boolean;
+  name: string;
+  onClick: (id: string) => void;
+}
+
+const SessionRow = ({ id, isInitialSession, isLast, name, onClick }: Props) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -40,6 +47,7 @@ const SessionRow = ({ id, isInitialSession, isLast, name, onClick }) => {
 
       <Col>
         <Box mr={10} width="100%">
+          {/* @ts-ignore */}
           <EllipsisText
             text={name}
             fontWeight={isInitialSession ? 'bold' : ''}
@@ -57,14 +65,6 @@ const SessionRow = ({ id, isInitialSession, isLast, name, onClick }) => {
       )}
     </NoMarginRow>
   );
-};
-
-SessionRow.propTypes = {
-  id: PropTypes.string,
-  isLast: PropTypes.bool,
-  isInitialSession: PropTypes.bool,
-  onClick: PropTypes.func,
-  name: PropTypes.string,
 };
 
 export default memo(SessionRow);

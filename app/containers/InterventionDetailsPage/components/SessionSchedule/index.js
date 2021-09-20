@@ -14,6 +14,7 @@ import values from 'lodash/values';
 import find from 'lodash/find';
 
 import { dateQuestion } from 'models/Session/QuestionTypes';
+import { SessionTypes } from 'models/Session/SessionDto';
 
 import {
   SCHEDULE_OPTIONS,
@@ -133,6 +134,7 @@ function SessionSchedule({
                 includeCurrentSession={false}
                 includeNonDigitVariables
                 isMultiSession
+                sessionTypesWhiteList={[SessionTypes.CLASSIC_SESSION]}
               >
                 <Badge bg={themeColors.primary} color={colors.white}>
                   {daysAfterDateVariableName ??

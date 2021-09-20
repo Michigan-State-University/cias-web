@@ -211,14 +211,14 @@ const SessionMapPage = (): JSX.Element => {
                 minZoom={minZoom}
                 onMinZoomChange={setMinZoom}
               />
+              <SessionMapFooter
+                afterPreview={Boolean(userSessionId)}
+                zoomIn={handleZoomIn}
+                zoomOut={handleZoomOut}
+                zoomInDisabled={zoom === defaultMaxZoom}
+                zoomOutDisabled={zoom === minZoom}
+              />
             </ReactFlowProvider>
-            <SessionMapFooter
-              afterPreview={Boolean(userSessionId)}
-              zoomIn={handleZoomIn}
-              zoomOut={handleZoomOut}
-              zoomInDisabled={zoom === defaultMaxZoom}
-              zoomOutDisabled={zoom === minZoom}
-            />
           </>
         )}
       </Column>

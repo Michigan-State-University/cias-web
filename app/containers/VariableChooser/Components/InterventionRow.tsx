@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -16,13 +15,21 @@ import Box from 'components/Box';
 
 import messages from '../messages';
 
+type Props = {
+  id: string;
+  isInitialIntervention: boolean;
+  isLast: boolean;
+  name: string;
+  onClick: (id: string) => void;
+};
+
 const InterventionRow = ({
   id,
   isInitialIntervention,
   isLast,
   name,
   onClick,
-}) => {
+}: Props) => {
   const { formatMessage } = useIntl();
 
   return (
@@ -42,6 +49,7 @@ const InterventionRow = ({
         mr={10}
       />
       <Box mr={10} width="100%">
+        {/* @ts-ignore */}
         <EllipsisText
           text={name}
           fontWeight={isInitialIntervention ? 'bold' : ''}
@@ -55,14 +63,6 @@ const InterventionRow = ({
       )}
     </Row>
   );
-};
-
-InterventionRow.propTypes = {
-  id: PropTypes.string,
-  isLast: PropTypes.bool,
-  isInitialIntervention: PropTypes.bool,
-  onClick: PropTypes.func,
-  name: PropTypes.string,
 };
 
 export default memo(InterventionRow);
