@@ -53,7 +53,6 @@ import { borders, colors, themeColors } from 'theme';
 
 import instantiateEmptyQuestion from 'utils/instantiateEmptyQuestion';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
-import clearLocationState from 'utils/clearLocationState';
 
 import {
   createQuestionRequest,
@@ -112,7 +111,7 @@ type NonReduxProps = {
 };
 
 type Props = {
-  getQuestionGroups: (sessionId: string) => void;
+  getQuestionGroups: (sessionId: string, questionToSelectId?: string) => void;
   changeGroupName: (
     newName: string,
     sessionId: string,
@@ -174,7 +173,6 @@ const EditClassicSessionPage = ({
   groupQuestions,
   shareQuestionsToResearchers,
   groups,
-  selectQuestion,
   changeGroupName,
   getQuestionGroups,
   session: { id: sessionId, name: sessionName },
@@ -307,21 +305,17 @@ const EditClassicSessionPage = ({
     onMouseLeave: () => setShowList(false),
   };
 
-  const selectQuestionIfRedirectedFromSessionMap = () => {
+  const getQuestionToSelectId = () => {
     const questionToSelectId = location.state?.selectedQuestionId;
     if (questionToSelectId) {
-      selectQuestion(questionToSelectId);
+      history.replace({ state: undefined });
     }
+    return questionToSelectId;
   };
 
   useEffect(() => {
-    getQuestionGroups(sessionId);
+    getQuestionGroups(sessionId, getQuestionToSelectId());
   }, []);
-
-  useEffect(() => {
-    selectQuestionIfRedirectedFromSessionMap();
-    clearLocationState(location);
-  }, [questions]);
 
   const onCreateQuestion = (type: string) => {
     createQuestion(

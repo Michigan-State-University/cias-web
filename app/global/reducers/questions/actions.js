@@ -53,8 +53,8 @@ export const createQuestionError = (error) =>
 
 export const getQuestionsRequest = (sessionId) =>
   actionBuilder(GET_QUESTIONS_REQUEST, { sessionId });
-export const getQuestionsSuccess = (questions) =>
-  actionBuilder(GET_QUESTIONS_SUCCESS, { questions });
+export const getQuestionsSuccess = (questions, questionToSelectId) =>
+  actionBuilder(GET_QUESTIONS_SUCCESS, { questions, questionToSelectId });
 export const getQuestionsError = (error) =>
   actionBuilder(GET_QUESTIONS_ERROR, { error });
 

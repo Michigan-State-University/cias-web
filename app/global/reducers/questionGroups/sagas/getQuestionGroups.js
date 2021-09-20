@@ -13,7 +13,7 @@ import { mapGroupsToQuestions } from 'global/reducers/questionGroups/utils';
 import { GET_QUESTION_GROUPS_REQUEST } from '../constants';
 import { getQuestionGroupsError, getQuestionGroupsSuccess } from '../actions';
 
-function* getQuestionsGroups({ payload: { sessionId } }) {
+function* getQuestionsGroups({ payload: { sessionId, questionToSelectId } }) {
   const groupURL = `/v1/sessions/${sessionId}/question_groups`;
 
   try {
@@ -28,7 +28,7 @@ function* getQuestionsGroups({ payload: { sessionId } }) {
     const mappedQuestions = sortedQuestions.map((q) =>
       objectKeysToSnakeCase(q, ['sha256', 'endPosition']),
     );
-    yield put(getQuestionsSuccess(mappedQuestions));
+    yield put(getQuestionsSuccess(mappedQuestions, questionToSelectId));
     if (!isEmpty(sortedQuestions) && sortedQuestions[0].narrator.blocks[0]) {
       const { x, y } = sortedQuestions[0].narrator.blocks[0].endPosition;
       yield put(setAnimationStopPosition(x, y));

@@ -48,7 +48,6 @@ import { ReportTemplate } from 'global/types/reportTemplate';
 import { JumpToScreenLocationState } from 'global/types/locationState';
 
 import useQuery from 'utils/useQuery';
-import clearLocationState from 'utils/clearLocationState';
 
 import Loader from 'components/Loader';
 import Column from 'components/Column';
@@ -120,6 +119,12 @@ const SessionMapPage = (): JSX.Element => {
     location.state?.selectedQuestionId ?? '',
   );
 
+  const clearLocationStateIfRedirectedFromScreenEdit = () => {
+    if (location.state) {
+      history.replace({ state: undefined });
+    }
+  };
+
   const [showDetailsQuestion, showDetailsQuestionGroup] = useMemo(() => {
     const question = questions.find(({ id }) => id === showDetailsId);
     if (!question) return [undefined, undefined];
@@ -146,7 +151,7 @@ const SessionMapPage = (): JSX.Element => {
     dispatch(getQuestionGroupsRequest(sessionId));
     dispatch(fetchReportTemplatesRequest(sessionId, interventionId));
     dispatch(fetchInterventionRequest(interventionId));
-    clearLocationState(location);
+    clearLocationStateIfRedirectedFromScreenEdit();
   }, []);
 
   useEffect(() => {
