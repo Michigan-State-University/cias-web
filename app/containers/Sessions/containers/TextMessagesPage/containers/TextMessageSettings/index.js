@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 import Text from 'components/Text';
-import Img from 'components/Img';
 import Row from 'components/Row';
 import {
   changeSchedulingType,
@@ -24,6 +23,7 @@ import { colors } from 'theme';
 import { StyledInput } from 'components/Input/StyledInput';
 import Box from 'components/Box';
 import { ModalType, useModal } from 'components/Modal';
+import { ImageButton } from 'components/Button';
 
 import TextMessagesFormula from '../../components/TextMessagesFormula';
 import TextMessageVariants from '../../components/TextMessageVariants';
@@ -103,19 +103,19 @@ const TextMessageSettings = ({
           {formatMessage(messages.header)}
         </Text>
         <div>
-          <Img
+          <ImageButton
+            title={formatMessage(messages.cloneIcon)}
             src={copy}
             onClick={() => cloneTextMessage(id)}
-            mr={10}
-            clickable
             disabled={!editingPossible}
-            height={20}
+            mr={10}
           />
-          <Img
+
+          <ImageButton
+            title={formatMessage(messages.deleteIcon)}
             src={binNoBg}
             onClick={openDeleteModal}
             mr={10}
-            clickable
             disabled={!editingPossible}
           />
         </div>

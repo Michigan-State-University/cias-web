@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Box from 'components/Box';
+
 import { colors, themeColors } from 'theme';
+import { nameQuestion } from 'models/Session/QuestionTypes';
+
+import Box from 'components/Box';
 import { StyledInput } from 'components/Input/StyledInput';
 import Row from 'components/Row';
 import Loader from 'components/Loader';
-import Img from 'components/Img';
-import stopButton from 'assets/svg/stop-button-1.svg';
-import playButton from 'assets/svg/play-button-1.svg';
 import Text from 'components/Text';
 import Column from 'components/Column';
-import { nameQuestion } from 'models/Session/QuestionTypes';
+import { PlayStopButton } from 'components/ActionIcons';
+
 import messages from './messages';
 
 const SpeechInput = ({
@@ -29,12 +30,10 @@ const SpeechInput = ({
 
   const BUTTON_MARGIN = '10px';
 
-  const button = isPlaying ? stopButton : playButton;
-
   const renderButton = () => {
     if (isSpeechUpdating) return <Loader size={24} type="inline" />;
 
-    return <Img src={button} onClick={handleButtonClick} clickable />;
+    return <PlayStopButton isPlaying={isPlaying} onClick={handleButtonClick} />;
   };
 
   const handleAddVariable = () => {

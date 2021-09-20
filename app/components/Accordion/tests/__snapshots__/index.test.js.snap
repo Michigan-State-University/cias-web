@@ -85,10 +85,16 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
 }
 
 .c6 {
-  width: auto;
-  height: auto;
-  margin-left: 5px;
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
   cursor: pointer;
+  margin-left: 5px;
+  color: #2F3850;
 }
 
 <div>
@@ -132,13 +138,18 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                 />
               </div>
             </div>
-            <img
-              alt="bin"
+            <button
+              aria-label="Delete"
               class="c6"
               data-cy="accordion-element-delete-0"
               data-testid="bin-Label0"
-              src="IMAGE_MOCK"
-            />
+              title="Delete"
+              type="button"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+            </button>
           </div>
           <div
             class="c7"
@@ -178,13 +189,18 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                 />
               </div>
             </div>
-            <img
-              alt="bin"
+            <button
+              aria-label="Delete"
               class="c6"
               data-cy="accordion-element-delete-1"
               data-testid="bin-Label1"
-              src="IMAGE_MOCK"
-            />
+              title="Delete"
+              type="button"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+            </button>
           </div>
           <div
             class="c7"
@@ -224,13 +240,18 @@ exports[`<Accordion /> Should render multiple elements and match the snapshot 1`
                 />
               </div>
             </div>
-            <img
-              alt="bin"
+            <button
+              aria-label="Delete"
               class="c6"
               data-cy="accordion-element-delete-2"
               data-testid="bin-Label2"
-              src="IMAGE_MOCK"
-            />
+              title="Delete"
+              type="button"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+            </button>
           </div>
           <div
             class="c7"
@@ -319,10 +340,16 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
 }
 
 .c5 {
-  width: auto;
-  height: auto;
-  margin-left: 5px;
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
   cursor: pointer;
+  margin-left: 5px;
+  color: #2F3850;
 }
 
 <div>
@@ -351,13 +378,18 @@ exports[`<Accordion /> Should render only one element and match the snapshot 1`]
             />
           </div>
         </div>
-        <img
-          alt="bin"
+        <button
+          aria-label="Delete"
           class="c5"
           data-cy="accordion-element-delete-0"
           data-testid="bin-Label0"
-          src="IMAGE_MOCK"
-        />
+          title="Delete"
+          type="button"
+        >
+          <img
+            src="IMAGE_MOCK"
+          />
+        </button>
       </div>
       <div
         class="c6"
@@ -474,10 +506,16 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
 }
 
 .c6 {
-  width: auto;
-  height: auto;
-  margin-left: 5px;
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
   cursor: pointer;
+  margin-left: 5px;
+  color: #2F3850;
 }
 
 <div>
@@ -521,13 +559,18 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                 />
               </div>
             </div>
-            <img
-              alt="bin"
+            <button
+              aria-label="Delete"
               class="c6"
               data-cy="accordion-element-delete-0"
               data-testid="bin-Label0"
-              src="IMAGE_MOCK"
-            />
+              title="Delete"
+              type="button"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+            </button>
           </div>
           <div
             class="c7"
@@ -567,13 +610,18 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                 />
               </div>
             </div>
-            <img
-              alt="bin"
+            <button
+              aria-label="Delete"
               class="c6"
               data-cy="accordion-element-delete-1"
               data-testid="bin-Label1"
-              src="IMAGE_MOCK"
-            />
+              title="Delete"
+              type="button"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+            </button>
           </div>
           <div
             class="c7"
@@ -613,13 +661,18 @@ exports[`<Accordion /> Should render with one element opened and match the snaps
                 />
               </div>
             </div>
-            <img
-              alt="bin"
+            <button
+              aria-label="Delete"
               class="c6"
               data-cy="accordion-element-delete-2"
               data-testid="bin-Label2"
-              src="IMAGE_MOCK"
-            />
+              title="Delete"
+              type="button"
+            >
+              <img
+                src="IMAGE_MOCK"
+              />
+            </button>
           </div>
           <div
             class="c7"

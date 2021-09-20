@@ -308,12 +308,6 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c40 {
-  width: auto;
-  height: auto;
-  cursor: pointer;
-}
-
 .c0 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -557,6 +551,19 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
   -webkit-transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   transition: background-color 300ms ease,color 300ms ease,border 300ms ease;
   margin-top: 15px;
+}
+
+.c40 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  color: #2F3850;
+  cursor: pointer;
 }
 
 @media only screen and (min-width:768px) {
@@ -947,10 +954,16 @@ exports[`<ReflectionFormulaBlock /> Should render and match the snapshot 1`] = `
             <div
               class="c39"
             >
-              <img
+              <button
+                aria-label="Play audio"
                 class="c40"
-                src="IMAGE_MOCK"
-              />
+                title="Play audio"
+                type="button"
+              >
+                <img
+                  src="IMAGE_MOCK"
+                />
+              </button>
             </div>
           </div>
         </div>

@@ -5,14 +5,14 @@
  */
 
 import React from 'react';
-import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 
-import { createTestStore } from 'utils/testUtils/storeUtils';
 import { multiQuestion } from 'models/Session/QuestionTypes';
 import { reflectionType, bodyAnimationType } from 'models/Narrator/BlockTypes';
+import { createTestStore } from 'utils/testUtils/storeUtils';
 import { createQuestion } from 'utils/reducerCreators';
 import { formatMessage } from 'utils/intlOutsideReact';
+import { testRender } from 'utils/testUtils';
 
 import { instantiateBlockForType } from 'models/Session/utils';
 import Reflection from '../Reflection';
@@ -69,7 +69,7 @@ describe('<Reflection />', () => {
 
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(
+    testRender(
       <Provider store={store}>
         <Reflection {...defaultProps} />
       </Provider>,
@@ -78,7 +78,7 @@ describe('<Reflection />', () => {
   });
 
   it('Should render and match the snapshot', () => {
-    const { container } = render(
+    const { container } = testRender(
       <Provider store={store}>
         <Reflection {...defaultProps} />
       </Provider>,

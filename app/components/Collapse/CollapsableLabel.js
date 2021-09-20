@@ -1,13 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import Row from 'components/Row';
-import Img from 'components/Img';
+import { useIntl } from 'react-intl';
 
 import bin from 'assets/svg/bin-red.svg';
 import binGrey from 'assets/svg/bin-grey.svg';
 
+import Row from 'components/Row';
+import Img from 'components/Img';
+import { ImageButton } from 'components/Button';
+
 import { ImageWrapper, StyledCollapseLabel } from './styled';
+import messages from './messages';
 
 const CollapseLabel = ({
   isOpened,
@@ -28,6 +31,7 @@ const CollapseLabel = ({
   animatedImg,
   dragHandleProps,
 }) => {
+  const { formatMessage } = useIntl();
   const currentImg = isOpened ? onShowImg : onHideImg;
   const img = animatedImg ? onShowImg : currentImg;
   const imgElement = (
@@ -59,14 +63,13 @@ const CollapseLabel = ({
         </Row>
       </StyledCollapseLabel>
       {!disabled && (
-        <Img
+        <ImageButton
+          src={deleteActive ? bin : binGrey}
+          onClick={deleteActive ? onDelete : undefined}
+          title={formatMessage(messages.deleteItem)}
+          ml={5}
           data-testid={`bin-${label}`}
           data-cy={`accordion-element-delete-${index}`}
-          src={deleteActive ? bin : binGrey}
-          alt="bin"
-          clickable={deleteActive}
-          onClick={deleteActive ? onDelete : undefined}
-          ml={5}
         />
       )}
     </Row>

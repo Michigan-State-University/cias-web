@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CopyModal /> Should render and match the snapshot 1`] = `
-.c11 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -21,7 +21,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   flex-grow: 1;
 }
 
-.c13 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -33,7 +33,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   height: 280px;
 }
 
-.c14 {
+.c12 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -47,7 +47,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   margin-left: 25px;
 }
 
-.c25 {
+.c23 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -59,7 +59,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   background-color: rgba(248,251,255,1);
 }
 
-.c26 {
+.c24 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -70,7 +70,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c30 {
+.c28 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -88,7 +88,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   margin-left: 25px;
 }
 
-.c12 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -99,7 +99,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   height: auto;
 }
 
-.c15 {
+.c13 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -118,7 +118,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c17 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -130,7 +130,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   margin-top: 10px;
 }
 
-.c20 {
+.c18 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -142,7 +142,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c27 {
+.c25 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -157,7 +157,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   padding-left: 25px;
 }
 
-.c29 {
+.c27 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -219,7 +219,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c10 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -230,7 +230,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   border-radius: 0px;
 }
 
-.c19 {
+.c17 {
   width: auto;
   height: auto;
   display: block;
@@ -239,7 +239,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   margin-left: 5px;
 }
 
-.c21 {
+.c19 {
   width: auto;
   height: auto;
   display: block;
@@ -248,14 +248,14 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   display: inline;
 }
 
-.c22 {
+.c20 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
 }
 
-.c24 {
+.c22 {
   width: auto;
   height: auto;
   display: block;
@@ -264,14 +264,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   overflow: scroll;
 }
 
-.c8 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #2F3850;
-}
-
-.c16 {
+.c14 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -281,7 +274,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c18 {
+.c16 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -290,7 +283,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c28 {
+.c26 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -298,25 +291,13 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c23 {
+.c21 {
   position: relative;
   width: 100%;
   font-size: 15px;
   font-weight: 700;
   color: rgba(183,39,234,1);
   color: rgba(183,39,234,1);
-}
-
-.c9 {
-  -webkit-clip: rect(0 0 0 0);
-  clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(100%);
-  clip-path: inset(100%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
 }
 
 .c5 {
@@ -518,6 +499,7 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
             <button
+              aria-label="Close window"
               class="c7"
               data-cy="modal-close-button"
               data-testid="close-modal-button"
@@ -527,11 +509,6 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
                 alt="cross"
                 src="IMAGE_MOCK"
               />
-              <p
-                class="c8 c9"
-              >
-                Close window
-              </p>
             </button>
           </div>
         </div>
@@ -545,67 +522,67 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
             <div
-              class="c10"
+              class="c8"
               id="modal-description"
               width="100%"
             >
               <div
-                class="c11"
+                class="c9"
               >
                 <div
-                  class="c12"
+                  class="c10"
                 >
                   <div
-                    class="c13"
+                    class="c11"
                     data-testid="undefined-select-target-session"
                     height="280"
                   >
                     <div
-                      class="c14"
+                      class="c12"
                     >
                       <div
-                        class="c15"
+                        class="c13"
                       >
                         <img
                           src="IMAGE_MOCK"
                         />
                         <p
-                          class="c16"
+                          class="c14"
                           color="#B727EA"
                         >
                           Sessions
                         </p>
                       </div>
                       <div
-                        class="c17"
+                        class="c15"
                       >
                         <p
-                          class="c18"
+                          class="c16"
                           font-size="15"
                           font-weight="bold"
                         >
                           Question Groups in 
                         </p>
                         <div
-                          class="c19"
+                          class="c17"
                         >
                           <div
-                            class="c20"
+                            class="c18"
                             width="100%"
                           >
                             <div
-                              class="c21"
+                              class="c19"
                               display="inline"
                               width="100%"
                             >
                               <div
-                                class="c22"
+                                class="c20"
                                 data-for="Intervention test title 1"
                                 data-tip=""
                               >
                                 <div>
                                   <span
-                                    class="c23"
+                                    class="c21"
                                     color="#B727EA"
                                     data-for="Intervention test title 1"
                                     data-tip="Intervention test title 1"
@@ -632,20 +609,20 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
                       </div>
                     </div>
                     <div
-                      class="c24"
+                      class="c22"
                       overflow="scroll"
                     >
                       <div
-                        class="c25"
+                        class="c23"
                       >
                         <div
-                          class="c26"
+                          class="c24"
                         >
                           <div
-                            class="c27"
+                            class="c25"
                           >
                             <p
-                              class="c28"
+                              class="c26"
                               font-size="12"
                             >
                               No valid question groups to copy to
@@ -657,10 +634,10 @@ exports[`<CopyModal /> Should render and match the snapshot 1`] = `
                   </div>
                 </div>
                 <div
-                  class="c29"
+                  class="c27"
                 >
                   <button
-                    class="c30"
+                    class="c28"
                     color="primary"
                     disabled=""
                     radius="100px"

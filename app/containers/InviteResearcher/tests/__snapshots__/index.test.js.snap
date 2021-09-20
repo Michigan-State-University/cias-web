@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<InviteResearcher /> Should display invalid email error 1`] = `
-.c20 {
+.c18 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -23,7 +23,20 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   align-self: center;
 }
 
-.c11 {
+.c17 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  font-weight: 700;
+  color: rgba(210,55,29,1);
+}
+
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -34,7 +47,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   width: 100%;
 }
 
-.c13 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -47,7 +60,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   margin-bottom: 35px;
 }
 
-.c17 {
+.c15 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -74,14 +87,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   border-bottom: 1px solid #D7DEE9;
 }
 
-.c8 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #2F3850;
-}
-
-.c14 {
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -90,7 +96,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   color: #2F3850;
 }
 
-.c18 {
+.c16 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -98,7 +104,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   color: #2F3850;
 }
 
-.c16 {
+.c14 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -157,7 +163,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c10 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -166,18 +172,6 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
-}
-
-.c9 {
-  -webkit-clip: rect(0 0 0 0);
-  clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(100%);
-  clip-path: inset(100%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
 }
 
 .c5 {
@@ -248,7 +242,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   margin-right: 0;
 }
 
-.c12 {
+.c10 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -257,20 +251,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   color: #2F3850;
 }
 
-.c19 {
-  outline: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 17px;
-  padding: 2px;
-  cursor: pointer;
-  font-weight: 700;
-  color: rgba(210,55,29,1);
-}
-
-.c15 {
+.c13 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -282,13 +263,13 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c15:focus {
+.c13:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c15:disabled {
+.c13:disabled {
   color: #ABBBD1;
 }
 
@@ -373,6 +354,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
             <button
+              aria-label="Close window"
               class="c7"
               data-cy="modal-close-button"
               data-testid="close-modal-button"
@@ -382,11 +364,6 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
                 alt="cross"
                 src="IMAGE_MOCK"
               />
-              <p
-                class="c8 c9"
-              >
-                Close window
-              </p>
             </button>
           </div>
         </div>
@@ -400,24 +377,24 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
             <div
-              class="c10"
+              class="c8"
               id="modal-description"
               width="100%"
             >
               <div
-                class="c11"
+                class="c9"
               >
                 <h3
-                  class="c12"
+                  class="c10"
                 >
                   Send another invite
                 </h3>
                 <div
-                  class="c13"
+                  class="c11"
                   width="100%"
                 >
                   <p
-                    class="c14"
+                    class="c12"
                     font-size="14"
                     id="researcher-email-label"
                   >
@@ -425,14 +402,14 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
                   </p>
                   <input
                     aria-labelledby="researcher-email-label"
-                    class="c15"
+                    class="c13"
                     placeholder="e.g john.doe@contact.com"
                     type="text"
                     value="invalidemail"
                     width="100%"
                   />
                   <p
-                    class="c16"
+                    class="c14"
                     color="#D2371D"
                     font-weight="bold"
                   >
@@ -440,22 +417,22 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
                   </p>
                 </div>
                 <h3
-                  class="c12"
+                  class="c10"
                 >
                   Invitations sent (2)
                 </h3>
                 <div
-                  class="c17"
+                  class="c15"
                   height="46"
                 >
                   <p
-                    class="c18"
+                    class="c16"
                     font-size="14"
                   >
                     email@gmail.com
                   </p>
                   <button
-                    class="c19"
+                    class="c17"
                     color="#D2371D"
                     font-weight="bold"
                   >
@@ -463,17 +440,17 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
                   </button>
                 </div>
                 <div
-                  class="c17"
+                  class="c15"
                   height="46"
                 >
                   <p
-                    class="c18"
+                    class="c16"
                     font-size="14"
                   >
                     email2@gmail.com
                   </p>
                   <button
-                    class="c19"
+                    class="c17"
                     color="#D2371D"
                     font-weight="bold"
                   >
@@ -481,7 +458,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
                   </button>
                 </div>
                 <button
-                  class="c20"
+                  class="c18"
                   color="primary"
                   disabled=""
                   radius="100px"
@@ -503,7 +480,7 @@ exports[`<InviteResearcher /> Should display invalid email error 1`] = `
 `;
 
 exports[`<InviteResearcher /> Should display server error 1`] = `
-.c19 {
+.c17 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -525,7 +502,20 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   align-self: center;
 }
 
-.c11 {
+.c16 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  font-weight: 700;
+  color: rgba(210,55,29,1);
+}
+
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -536,7 +526,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   width: 100%;
 }
 
-.c13 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -549,7 +539,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   margin-bottom: 35px;
 }
 
-.c16 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -576,14 +566,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   border-bottom: 1px solid #D7DEE9;
 }
 
-.c8 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #2F3850;
-}
-
-.c14 {
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -592,7 +575,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   color: #2F3850;
 }
 
-.c17 {
+.c15 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -649,7 +632,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c10 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -658,18 +641,6 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
-}
-
-.c9 {
-  -webkit-clip: rect(0 0 0 0);
-  clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(100%);
-  clip-path: inset(100%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
 }
 
 .c5 {
@@ -740,7 +711,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   margin-right: 0;
 }
 
-.c12 {
+.c10 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -749,20 +720,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   color: #2F3850;
 }
 
-.c18 {
-  outline: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 17px;
-  padding: 2px;
-  cursor: pointer;
-  font-weight: 700;
-  color: rgba(210,55,29,1);
-}
-
-.c15 {
+.c13 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -774,13 +732,13 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c15:focus {
+.c13:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c15:disabled {
+.c13:disabled {
   color: #ABBBD1;
 }
 
@@ -865,6 +823,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
             <button
+              aria-label="Close window"
               class="c7"
               data-cy="modal-close-button"
               data-testid="close-modal-button"
@@ -874,11 +833,6 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
                 alt="cross"
                 src="IMAGE_MOCK"
               />
-              <p
-                class="c8 c9"
-              >
-                Close window
-              </p>
             </button>
           </div>
         </div>
@@ -892,24 +846,24 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
             <div
-              class="c10"
+              class="c8"
               id="modal-description"
               width="100%"
             >
               <div
-                class="c11"
+                class="c9"
               >
                 <h3
-                  class="c12"
+                  class="c10"
                 >
                   Send another invite
                 </h3>
                 <div
-                  class="c13"
+                  class="c11"
                   width="100%"
                 >
                   <p
-                    class="c14"
+                    class="c12"
                     font-size="14"
                     id="researcher-email-label"
                   >
@@ -917,7 +871,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
                   </p>
                   <input
                     aria-labelledby="researcher-email-label"
-                    class="c15"
+                    class="c13"
                     placeholder="e.g john.doe@contact.com"
                     type="text"
                     value=""
@@ -925,22 +879,22 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
                   />
                 </div>
                 <h3
-                  class="c12"
+                  class="c10"
                 >
                   Invitations sent (2)
                 </h3>
                 <div
-                  class="c16"
+                  class="c14"
                   height="46"
                 >
                   <p
-                    class="c17"
+                    class="c15"
                     font-size="14"
                   >
                     email@gmail.com
                   </p>
                   <button
-                    class="c18"
+                    class="c16"
                     color="#D2371D"
                     font-weight="bold"
                   >
@@ -948,17 +902,17 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
                   </button>
                 </div>
                 <div
-                  class="c16"
+                  class="c14"
                   height="46"
                 >
                   <p
-                    class="c17"
+                    class="c15"
                     font-size="14"
                   >
                     email2@gmail.com
                   </p>
                   <button
-                    class="c18"
+                    class="c16"
                     color="#D2371D"
                     font-weight="bold"
                   >
@@ -966,7 +920,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
                   </button>
                 </div>
                 <button
-                  class="c19"
+                  class="c17"
                   color="primary"
                   disabled=""
                   radius="100px"
@@ -988,7 +942,7 @@ exports[`<InviteResearcher /> Should display server error 1`] = `
 `;
 
 exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
-.c19 {
+.c17 {
   width: 100%;
   height: 40px;
   border-radius: 100px;
@@ -1010,7 +964,20 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   align-self: center;
 }
 
-.c11 {
+.c16 {
+  outline: none;
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  padding: 2px;
+  cursor: pointer;
+  font-weight: 700;
+  color: rgba(210,55,29,1);
+}
+
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1021,7 +988,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c13 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1034,7 +1001,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   margin-bottom: 35px;
 }
 
-.c16 {
+.c14 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1061,14 +1028,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   border-bottom: 1px solid #D7DEE9;
 }
 
-.c8 {
-  font-family: DM Sans;
-  font-size: 13px;
-  line-height: 130%;
-  color: #2F3850;
-}
-
-.c14 {
+.c12 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1077,7 +1037,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c17 {
+.c15 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -1134,7 +1094,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   background-color: rgba(255,255,255,1);
 }
 
-.c10 {
+.c8 {
   width: auto;
   height: auto;
   display: block;
@@ -1143,18 +1103,6 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   margin-top: 10px;
   border-radius: 0px;
   border-radius: 0px;
-}
-
-.c9 {
-  -webkit-clip: rect(0 0 0 0);
-  clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(100%);
-  clip-path: inset(100%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
 }
 
 .c5 {
@@ -1225,7 +1173,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   margin-right: 0;
 }
 
-.c12 {
+.c10 {
   margin: 0;
   font-family: DM Sans;
   font-size: 15px;
@@ -1234,20 +1182,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c18 {
-  outline: none;
-  border: none;
-  background: transparent;
-  font-weight: bold;
-  font-size: 13px;
-  line-height: 17px;
-  padding: 2px;
-  cursor: pointer;
-  font-weight: 700;
-  color: rgba(210,55,29,1);
-}
-
-.c15 {
+.c13 {
   padding: 12px;
   border-style: solid;
   border-width: 1px;
@@ -1259,13 +1194,13 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
   background-color: rgba(233,241,251,1);
 }
 
-.c15:focus {
+.c13:focus {
   box-shadow: none;
   outline: none;
   border-color: #107969;
 }
 
-.c15:disabled {
+.c13:disabled {
   color: #ABBBD1;
 }
 
@@ -1350,6 +1285,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 16.666666666666668%; flex-basis: 16.666666666666668%; flex-grow: 0; flex-shrink: 0; max-width: 16.666666666666668%; margin-left: 0%;"
           >
             <button
+              aria-label="Close window"
               class="c7"
               data-cy="modal-close-button"
               data-testid="close-modal-button"
@@ -1359,11 +1295,6 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
                 alt="cross"
                 src="IMAGE_MOCK"
               />
-              <p
-                class="c8 c9"
-              >
-                Close window
-              </p>
             </button>
           </div>
         </div>
@@ -1377,24 +1308,24 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
             style="box-sizing: border-box; min-height: 1px; position: relative; padding-left: 15px; padding-right: 15px; width: 100%; flex-basis: 100%; flex-grow: 0; flex-shrink: 0; max-width: 100%; margin-left: 0%;"
           >
             <div
-              class="c10"
+              class="c8"
               id="modal-description"
               width="100%"
             >
               <div
-                class="c11"
+                class="c9"
               >
                 <h3
-                  class="c12"
+                  class="c10"
                 >
                   Send another invite
                 </h3>
                 <div
-                  class="c13"
+                  class="c11"
                   width="100%"
                 >
                   <p
-                    class="c14"
+                    class="c12"
                     font-size="14"
                     id="researcher-email-label"
                   >
@@ -1402,7 +1333,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
                   </p>
                   <input
                     aria-labelledby="researcher-email-label"
-                    class="c15"
+                    class="c13"
                     placeholder="e.g john.doe@contact.com"
                     type="text"
                     value=""
@@ -1410,22 +1341,22 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
                   />
                 </div>
                 <h3
-                  class="c12"
+                  class="c10"
                 >
                   Invitations sent (2)
                 </h3>
                 <div
-                  class="c16"
+                  class="c14"
                   height="46"
                 >
                   <p
-                    class="c17"
+                    class="c15"
                     font-size="14"
                   >
                     email@gmail.com
                   </p>
                   <button
-                    class="c18"
+                    class="c16"
                     color="#D2371D"
                     font-weight="bold"
                   >
@@ -1433,17 +1364,17 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
                   </button>
                 </div>
                 <div
-                  class="c16"
+                  class="c14"
                   height="46"
                 >
                   <p
-                    class="c17"
+                    class="c15"
                     font-size="14"
                   >
                     email2@gmail.com
                   </p>
                   <button
-                    class="c18"
+                    class="c16"
                     color="#D2371D"
                     font-weight="bold"
                   >
@@ -1451,7 +1382,7 @@ exports[`<InviteResearcher /> Should render and match the snapshot 1`] = `
                   </button>
                 </div>
                 <button
-                  class="c19"
+                  class="c17"
                   color="primary"
                   disabled=""
                   radius="100px"

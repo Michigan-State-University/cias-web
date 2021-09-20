@@ -1,6 +1,7 @@
 import React from 'react';
-import { render } from '@testing-library/react';
 import 'jest-styled-components';
+
+import { testRender } from 'utils/testUtils';
 
 import CollapsableLabel from '../CollapsableLabel';
 
@@ -16,12 +17,12 @@ describe('<CollapsableLabel />', () => {
   };
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<CollapsableLabel {...props} />);
+    testRender(<CollapsableLabel {...props} />);
     expect(spy).not.toHaveBeenCalled();
   });
 
   it('should match the snapshot', () => {
-    const { container } = render(<CollapsableLabel {...props} />);
+    const { container } = testRender(<CollapsableLabel {...props} />);
     expect(container).toMatchSnapshot();
   });
 });

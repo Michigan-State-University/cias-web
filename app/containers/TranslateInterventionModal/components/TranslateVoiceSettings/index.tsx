@@ -35,8 +35,8 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import TextVoicePreviewInput from 'components/Input/TextVoicePreviewInput';
 
+import { voiceDataParser } from 'global/parsers';
 import messages from './messages';
-import { voiceDataParser } from './utils';
 import { DESTINATION_VOICE_LABEL_ID } from '../../constants';
 
 type Props = {
