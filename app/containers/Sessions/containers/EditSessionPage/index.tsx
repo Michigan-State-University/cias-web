@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { injectSaga, injectReducer } from 'redux-injectors';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
@@ -80,6 +80,8 @@ const EditSessionPage = ({
   const { formatMessage } = useIntl();
   const editingPossible = canEdit(interventionStatus);
 
+  const [storeInitialized, setStoreInitialized] = useState(false);
+
   useEffect(() => {
     const { interventionId, sessionId: paramSessionId } = params;
     getSession({
@@ -88,12 +90,11 @@ const EditSessionPage = ({
     });
     fetchInterventions();
     fetchReportTemplates(paramSessionId);
+    setStoreInitialized(true);
   }, []);
 
-  const loading = getSessionLoader;
-
   // @ts-ignore
-  if (loading) return <Loader size={100} />;
+  if (!storeInitialized || getSessionLoader) return <Loader size={100} />;
 
   return (
     <EditSessionPageContext.Provider

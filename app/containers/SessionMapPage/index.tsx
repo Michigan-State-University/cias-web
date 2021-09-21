@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { Helmet } from 'react-helmet';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useParams, useHistory } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { push } from 'connected-react-router';
 import { ReactFlowProvider } from 'react-flow-renderer';
 import { toast } from 'react-toastify';
@@ -58,7 +58,7 @@ import { ReportTemplate } from 'global/types/reportTemplate';
 import { JumpToScreenLocationState } from 'global/types/locationState';
 
 import useQuery from 'utils/useQuery';
-import clearLocationState from 'utils/clearLocationState';
+import useLocationState from 'utils/useLocationState';
 
 import Loader from 'components/Loader';
 import Column from 'components/Column';
@@ -79,7 +79,6 @@ type RouteParams = {
 
 const SessionMapPage = (): JSX.Element => {
   const { formatMessage } = useIntl();
-  const location = useLocation<JumpToScreenLocationState>();
   const history = useHistory<JumpToScreenLocationState>();
   const dispatch = useDispatch();
 
@@ -133,8 +132,11 @@ const SessionMapPage = (): JSX.Element => {
   const { interventionId, sessionId } = useParams<RouteParams>();
   const userSessionId = useQuery('userSessionId');
 
+  const { locationState, clearLocationState } =
+    useLocationState<JumpToScreenLocationState>();
+
   const [showDetailsId, setShowDetailsId] = useState(
-    location.state?.selectedQuestionId ?? '',
+    locationState?.selectedQuestionId ?? '',
   );
 
   const [showDetailsQuestion, showDetailsQuestionGroup] = useMemo(() => {
@@ -163,7 +165,7 @@ const SessionMapPage = (): JSX.Element => {
     dispatch(getQuestionGroupsRequest(sessionId));
     dispatch(fetchReportTemplatesRequest(sessionId, interventionId));
     dispatch(fetchInterventionRequest(interventionId));
-    clearLocationState(location);
+    clearLocationState();
   }, []);
 
   useEffect(() => {

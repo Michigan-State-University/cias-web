@@ -64,7 +64,7 @@ const ApprovableInput = ({
   textAlign,
   keyboard,
   type,
-  onChange,
+  onValueChange,
   onCheck,
   onFocus,
   rows,
@@ -129,8 +129,8 @@ const ApprovableInput = ({
   }, [propsValue]);
 
   useEffect(() => {
-    if (onChange) onChange(value);
-  }, [value]);
+    if (onValueChange) onValueChange(value);
+  }, [value, onValueChange]);
 
   const onInputChange = (targetValue) => {
     if (!validator) setValue(targetValue);
@@ -270,7 +270,7 @@ ApprovableInput.propTypes = {
     PropTypes.number,
     PropTypes.object,
   ]),
-  onChange: PropTypes.func,
+  onValueChange: PropTypes.func,
   onCheck: PropTypes.func,
   onFocus: PropTypes.func,
   rows: PropTypes.string,

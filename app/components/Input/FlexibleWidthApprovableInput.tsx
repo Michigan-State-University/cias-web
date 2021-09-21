@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
@@ -17,15 +17,11 @@ const FlexibleWidthApprovableInput = ({
 }: Props): JSX.Element => {
   const [inputValue, setInputValue] = useState(value);
 
-  useEffect(() => {
-    setInputValue(value);
-  }, [value]);
-
   return (
     <Box minWidth={htmlToPlainText(inputValue) ? null : emptyWidth}>
       <ApprovableInput
-        onChange={setInputValue}
-        value={inputValue}
+        onValueChange={setInputValue}
+        value={value}
         {...restProps}
       />
     </Box>

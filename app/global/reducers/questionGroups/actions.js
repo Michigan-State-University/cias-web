@@ -56,8 +56,8 @@ export const changeGroupNameSuccess = () =>
 export const changeGroupNameError = (error) =>
   actionBuilder(CHANGE_GROUP_NAME_ERROR, { error });
 
-export const getQuestionGroupsRequest = (sessionId) =>
-  actionBuilder(GET_QUESTION_GROUPS_REQUEST, { sessionId });
+export const getQuestionGroupsRequest = (sessionId, questionToSelectId) =>
+  actionBuilder(GET_QUESTION_GROUPS_REQUEST, { sessionId, questionToSelectId });
 export const getQuestionGroupsSuccess = (groups) =>
   actionBuilder(GET_QUESTION_GROUPS_SUCCESS, { groups });
 export const getQuestionGroupsError = (error) =>

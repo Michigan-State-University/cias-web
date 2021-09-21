@@ -117,10 +117,12 @@ export const questionsReducer = (state = initialState, action) =>
         break;
       case GET_QUESTIONS_SUCCESS:
         draft.loaders.getQuestionsLoading = false;
+        const { questionToSelectId } = action.payload;
         draft.selectedQuestion =
-          action.payload.questions.length !== 0
+          questionToSelectId ??
+          (action.payload.questions.length !== 0
             ? action.payload.questions[0].id
-            : '';
+            : '');
         draft.questions = action.payload.questions.map((question) =>
           mapQuestionDataForType(question),
         );
