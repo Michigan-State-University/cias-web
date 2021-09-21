@@ -32,8 +32,8 @@ import AppContainer from 'components/Container';
 import Row from 'components/Row';
 import StyledInput from 'components/Input/StyledInput';
 import { selectInputText } from 'components/Input/utils';
-import { MSULogo } from 'components/Logo';
 import { Button } from 'components/Button';
+import Img from 'components/Img';
 
 import QuestionData from '../QuestionData';
 import QuestionImage from '../QuestionImage';
@@ -117,7 +117,14 @@ const RenderQuestionDetails = ({
                 }
                 disabled={!editingPossible}
               />
-              <MSULogo logoUrl={logoUrl} imageAlt={imageAlt} />
+              {logoUrl && (
+                <Img
+                  maxHeight={elements.interventionLogoSize.height}
+                  maxWidth={elements.interventionLogoSize.width}
+                  src={logoUrl}
+                  aria-label={imageAlt}
+                />
+              )}
             </Row>
           )}
           <AnswerInterventionContent

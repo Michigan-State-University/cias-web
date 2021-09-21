@@ -20,7 +20,7 @@ import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import ccIcon from 'assets/svg/closed-captions.svg';
 
-import { themeColors } from 'theme';
+import { elements, themeColors } from 'theme';
 
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -50,11 +50,11 @@ import Row from 'components/Row';
 import Column from 'components/Column';
 import Box from 'components/Box';
 import Loader from 'components/Loader';
-import { MSULogo } from 'components/Logo';
 import H2 from 'components/H2';
 import H3 from 'components/H3';
 import Icon from 'components/Icon';
 import ConfirmationBox from 'components/ConfirmationBox';
+import Img from 'components/Img';
 
 import renderQuestionByType from './components';
 import CharacterAnim from './components/CharacterAnim';
@@ -499,7 +499,14 @@ export function AnswerSessionPage({
                 <Row padding={30} pb={isDesktop ? 10 : 0}>
                   <Box {...logoStyles}>
                     <Row justify="end">
-                      <MSULogo logoUrl={logoUrl} alt={imageAlt} />
+                      {logoUrl && (
+                        <Img
+                          maxHeight={elements.interventionLogoSize.height}
+                          maxWidth={elements.interventionLogoSize.width}
+                          src={logoUrl}
+                          aria-label={imageAlt}
+                        />
+                      )}
                     </Row>
 
                     {renderQuestionTranscript(true)}
