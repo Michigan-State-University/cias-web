@@ -22,18 +22,16 @@ import Row from 'components/Row';
 import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 import Button from 'components/Button';
 
+import {
+  questionTypesWithoutVariablesAndScoresSection,
+  questionTypesWithoutAnswersSection,
+} from '../../constants';
 import messages from './messages';
 import VariablesAndScores from './VariablesAndScores';
 import {
-  FeedbackFormulaAndCases,
   BranchingFormulaAndCases,
+  FeedbackFormulaAndCases,
 } from './FormulaAndCases';
-
-const typesWithoutVariablesAndScoresSection = [
-  QuestionTypes.INFORMATION,
-  QuestionTypes.FINISH,
-  QuestionTypes.FEEDBACK,
-];
 
 type Props = {
   questionGroup: QuestionGroup;
@@ -93,7 +91,7 @@ const SessionMapQuestionDetails = ({
               />
             </Column>
           </Row>
-          {!typesWithoutVariablesAndScoresSection.includes(type) && (
+          {!questionTypesWithoutVariablesAndScoresSection.includes(type) && (
             <VariablesAndScores
               question={shownQuestion}
               reportTemplates={reportTemplates}
@@ -111,7 +109,8 @@ const SessionMapQuestionDetails = ({
               questions={questions}
             />
           )}
-          {shownQuestionAnswer && JSON.stringify(shownQuestionAnswer)}
+          {!questionTypesWithoutAnswersSection.includes(type) &&
+            JSON.stringify(shownQuestionAnswer)}
         </div>
         <div>
           <Button

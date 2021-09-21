@@ -2,6 +2,8 @@ import { ConnectionLineType, Edge } from 'react-flow-renderer';
 
 import { colors } from 'theme';
 
+import { QuestionTypes } from 'models/Question/QuestionDto';
+
 import { DownloadProgressState } from './types';
 
 export const defaultMinZoom = 0.5;
@@ -105,3 +107,16 @@ export const INITIAL_DOWNLOAD_PROGRESS_STATE: DownloadProgressState = {
   isReadyToGenerate: false,
   isReadyToRestore: false,
 };
+
+export const questionTypesWithoutVariablesAndScoresSection = [
+  QuestionTypes.INFORMATION,
+  QuestionTypes.FINISH,
+  QuestionTypes.FEEDBACK,
+];
+
+export const questionTypesWithoutAnswersSection = [
+  QuestionTypes.INFORMATION,
+  QuestionTypes.FINISH,
+  QuestionTypes.FEEDBACK,
+  QuestionTypes.EXTERNAL_LINK,
+];
