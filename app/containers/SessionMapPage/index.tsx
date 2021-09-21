@@ -51,7 +51,7 @@ import {
   answersReducer,
   fetchAnswersSaga,
   FETCH_ANSWERS_ERROR,
-} from 'global/reducers/answer';
+} from 'global/reducers/answers';
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
 import { ReportTemplate } from 'global/types/reportTemplate';
