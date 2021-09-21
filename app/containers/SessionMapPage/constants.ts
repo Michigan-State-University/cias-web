@@ -10,8 +10,8 @@ export const defaultZoom = 1;
 
 export const detailedInfoZoomThreshold = 0.75;
 
-export const sessionNodesVerticalDistanceRatio = 1;
-export const questionNodesVerticalDistanceRatio = 4;
+export const sessionNodeVerticalMargin = 0;
+export const questionNodeVerticalMargin = 210;
 
 export const nodeWidth = 210;
 export const questionNodeLabelOffset = 32;

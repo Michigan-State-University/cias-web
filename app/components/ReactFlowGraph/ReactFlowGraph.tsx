@@ -35,7 +35,7 @@ export interface ReactFlowGraphProps extends ReactFlowProps {
   onMinZoomChange?: (minZoom: number) => void;
   elements: Elements;
   nodeTypes: NodeTypesType;
-  getNodeVerticalDistanceRatio?: (type?: string) => number;
+  getNodeVerticalMargin?: (type?: string) => number;
   nodeTopMargin?: number;
   pickedNodeId?: string;
   scrollbarsThickness?: number;
@@ -54,7 +54,7 @@ const ReactFlowGraph = ({
   onMinZoomChange,
   elements,
   nodeTypes,
-  getNodeVerticalDistanceRatio = () => 1,
+  getNodeVerticalMargin = () => 0,
   nodeTopMargin = 0,
   pickedNodeId,
   scrollbarsThickness = 0,
@@ -98,7 +98,7 @@ const ReactFlowGraph = ({
         ? layoutElements(
             elements,
             renderedNodes,
-            getNodeVerticalDistanceRatio,
+            getNodeVerticalMargin,
             nodeTopMargin,
           )
         : { layoutedElements: elements, panAreaWidth: 0, panAreaHeight: 0 },

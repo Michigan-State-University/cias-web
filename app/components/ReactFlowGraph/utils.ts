@@ -14,7 +14,7 @@ import { isNanOrInfinite } from 'utils/mathUtils';
 const calculateNodeDimensionsForLayout = (
   node: Node,
   renderedNodes: Node[],
-  getNodeVerticalDistanceRatio: (type?: string) => number,
+  getNodeVerticalMargin: (type?: string) => number,
 ): { width: number; height: number } => {
   const renderedNode = renderedNodes.find(({ id }) => id === node.id);
   if (renderedNode) {
@@ -25,7 +25,7 @@ const calculateNodeDimensionsForLayout = (
 
     return {
       width,
-      height: height * getNodeVerticalDistanceRatio(type),
+      height: height + 2 * getNodeVerticalMargin(type),
     };
   }
   return { width: 0, height: 0 };
@@ -34,7 +34,7 @@ const calculateNodeDimensionsForLayout = (
 const createDagreGraphWithElements = (
   elements: FlowElement[],
   renderedNodes: Node[],
-  getNodeVerticalDistanceRatio: (type?: string) => number,
+  getNodeVerticalMargin: (type?: string) => number,
 ): graphlib.Graph => {
   const dagreGraph = new graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -44,7 +44,7 @@ const createDagreGraphWithElements = (
       const nodeDimensions = calculateNodeDimensionsForLayout(
         el,
         renderedNodes,
-        getNodeVerticalDistanceRatio,
+        getNodeVerticalMargin,
       );
       dagreGraph.setNode(el.id, nodeDimensions);
     } else {
@@ -58,7 +58,7 @@ const getLayoutedElementsAndPanAreaDimensions = (
   elements: FlowElement[],
   dagreGraph: graphlib.Graph,
   nodeTopMargin: number,
-  getNodeVerticalDistanceRatio: (type?: string) => number,
+  getNodeVerticalMargin: (type?: string) => number,
 ): {
   layoutedElements: FlowElement[];
   panAreaWidth: number;
@@ -81,7 +81,7 @@ const getLayoutedElementsAndPanAreaDimensions = (
     panAreaWidth = Math.max(panAreaWidth, position.x + width);
     panAreaHeight = Math.max(
       panAreaHeight,
-      position.y + height / getNodeVerticalDistanceRatio(el.type),
+      position.y + height - 2 * getNodeVerticalMargin(el.type),
     );
 
     return {
@@ -97,7 +97,7 @@ const getLayoutedElementsAndPanAreaDimensions = (
 export const layoutElements = (
   elements: FlowElement[],
   renderedNodes: Node[],
-  getNodeVerticalDistanceRatio: (type?: string) => number,
+  getNodeVerticalMargin: (type?: string) => number,
   nodeTopMargin: number,
 ): {
   layoutedElements: FlowElement[];
@@ -107,7 +107,7 @@ export const layoutElements = (
   const dagreGraph = createDagreGraphWithElements(
     elements,
     renderedNodes,
-    getNodeVerticalDistanceRatio,
+    getNodeVerticalMargin,
   );
 
   layout(dagreGraph);
@@ -116,7 +116,7 @@ export const layoutElements = (
     elements,
     dagreGraph,
     nodeTopMargin,
-    getNodeVerticalDistanceRatio,
+    getNodeVerticalMargin,
   );
 };
 

@@ -15,8 +15,8 @@ import {
 } from '../../types';
 import {
   SessionMapNodeType,
-  sessionNodesVerticalDistanceRatio,
-  questionNodesVerticalDistanceRatio,
+  sessionNodeVerticalMargin,
+  questionNodeVerticalMargin,
   baseEdgeSharedAttributes,
   highlightedEdgeSharedAttributes,
   directConnectionEdgeSharedAttributes,
@@ -359,10 +359,10 @@ export const createMapEdges = (
     : allEdges;
 };
 
-export const getNodeVerticalDistanceRatio = (nodeType?: string): number =>
+export const getNodeVerticalMargin = (nodeType?: string): number =>
   nodeType === SessionMapNodeType.SESSION
-    ? sessionNodesVerticalDistanceRatio
-    : questionNodesVerticalDistanceRatio;
+    ? sessionNodeVerticalMargin
+    : questionNodeVerticalMargin;
 
 export const getNodeOpacity = (
   selectableOnClick: boolean,
