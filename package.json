@@ -153,7 +153,6 @@
     "seamless-immutable": "^7.1.4",
     "smoothscroll-polyfill": "^0.4.4",
     "styled-components": "^5.2.1",
-    "xregexp": "^5.1.0",
     "yup": "^0.29.3"
   },
   "devDependencies": {
