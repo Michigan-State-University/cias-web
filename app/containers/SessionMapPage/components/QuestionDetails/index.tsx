@@ -7,6 +7,7 @@ import { ReportTemplate } from 'global/types/reportTemplate';
 
 import { QuestionTypes } from 'models/Question/QuestionDto';
 import { SessionDto } from 'models/Session/SessionDto';
+import { Answer } from 'models/Answer';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
@@ -36,23 +37,29 @@ const typesWithoutVariablesAndScoresSection = [
 
 type Props = {
   questionGroup: QuestionGroup;
-  question: Question;
+  shownQuestion: Question;
   reportTemplates: ReportTemplate[];
   sessions: SessionDto[];
   questions: Question[];
   onGoToScreenClick: () => void;
+  answers: Nullable<Answer[]>;
 };
 
 const SessionMapQuestionDetails = ({
   questionGroup,
-  question,
+  shownQuestion,
   reportTemplates,
   sessions,
   questions,
   onGoToScreenClick,
+  answers,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
-  const { subtitle, type } = question;
+  const { id, subtitle, type } = shownQuestion;
+
+  const shownQuestionAnswer = answers?.find(
+    ({ questionId }) => questionId === id,
+  );
 
   return (
     <>
@@ -88,22 +95,23 @@ const SessionMapQuestionDetails = ({
           </Row>
           {!typesWithoutVariablesAndScoresSection.includes(type) && (
             <VariablesAndScores
-              question={question}
+              question={shownQuestion}
               reportTemplates={reportTemplates}
             />
           )}
           {type === QuestionTypes.FEEDBACK && (
             <FeedbackFormulaAndCases
-              question={question as Question<FeedbackQuestionPayload>}
+              question={shownQuestion as Question<FeedbackQuestionPayload>}
             />
           )}
           {type !== QuestionTypes.FINISH && (
             <BranchingFormulaAndCases
-              question={question}
+              question={shownQuestion}
               sessions={sessions}
               questions={questions}
             />
           )}
+          {shownQuestionAnswer && JSON.stringify(shownQuestionAnswer)}
         </div>
         <div>
           <Button

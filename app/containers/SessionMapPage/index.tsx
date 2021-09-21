@@ -258,12 +258,13 @@ const SessionMapPage = (): JSX.Element => {
       {showDetailsId && showDetailsQuestion && showDetailsQuestionGroup && (
         <QuestionDetailsColumn xs={6} md={5} lg={4}>
           <SessionMapQuestionDetails
-            question={showDetailsQuestion}
+            shownQuestion={showDetailsQuestion}
             questionGroup={showDetailsQuestionGroup}
             reportTemplates={reportTemplates}
             sessions={intervention?.sessions || []}
             questions={questions}
             onGoToScreenClick={goToScreenEdit}
+            answers={userSessionId && !answersError ? answers : null}
           />
         </QuestionDetailsColumn>
       )}
