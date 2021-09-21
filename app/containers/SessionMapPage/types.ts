@@ -1,10 +1,10 @@
-import { FlowTransform } from 'react-flow-renderer';
+import { Edge, FlowTransform } from 'react-flow-renderer';
 
 import { Question } from 'global/types/question';
 
 interface TileData {
   showDetailedInfo: boolean;
-  selectable: boolean;
+  selectableOnClick: boolean;
   selected: boolean;
   onSelectedChange: (selected: boolean, nodeId: string) => void;
 }
@@ -34,3 +34,9 @@ export type DownloadProgressState = {
   isReadyToGenerate: boolean;
   isReadyToRestore: boolean;
 };
+
+export type EdgeSharedAttributesGetter = (
+  selectedNodesIds: string[],
+  source: string,
+  target: string,
+) => Partial<Edge>;

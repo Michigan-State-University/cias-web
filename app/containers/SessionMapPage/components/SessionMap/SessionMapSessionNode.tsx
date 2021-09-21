@@ -24,7 +24,7 @@ const SessionMapSessionNode = ({
     showDetailedInfo,
     selected,
     onSelectedChange,
-    selectable,
+    selectableOnClick,
   },
 }: NodeProps<SessionTileData>): JSX.Element => {
   const { formatMessage } = useIntl();
@@ -37,11 +37,12 @@ const SessionMapSessionNode = ({
     [nodeRef.current],
   );
 
-  const handleClick = () => selectable && onSelectedChange(!selected, id);
+  const handleClick = () =>
+    selectableOnClick && onSelectedChange(!selected, id);
 
   const sessionNo = sessionIndex + 1;
 
-  const opacity = getNodeOpacity(selectable, selected);
+  const opacity = getNodeOpacity(selectableOnClick, selected);
 
   return (
     <>
@@ -52,7 +53,7 @@ const SessionMapSessionNode = ({
         bg={sessionMapColors.sessionNode}
         bgOpacity={0.3}
         border={getBorder(selected)}
-        cursor={selectable ? 'pointer' : 'default'}
+        cursor={selectableOnClick ? 'pointer' : 'default'}
         opacity={opacity}
         ref={nodeRef}
         onClick={handleClick}

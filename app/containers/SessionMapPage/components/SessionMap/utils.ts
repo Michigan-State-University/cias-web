@@ -8,7 +8,11 @@ import { Question } from 'global/types/question';
 import { SessionDto } from 'models/Session/SessionDto';
 import { Answer } from 'models/Answer';
 
-import { QuestionTileData, SessionTileData } from '../../types';
+import {
+  EdgeSharedAttributesGetter,
+  QuestionTileData,
+  SessionTileData,
+} from '../../types';
 import {
   SessionMapNodeType,
   sessionNodesVerticalDistanceRatio,
@@ -48,7 +52,7 @@ const createQuestionNode = (
   index: number,
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
-  selectable: boolean,
+  selectableOnClick: boolean,
 ): Node<QuestionTileData> => ({
   id: question.id,
   type: SessionMapNodeType.QUESTION,
@@ -62,7 +66,7 @@ const createQuestionNode = (
     index,
     selected: selectedNodesIds.includes(question.id),
     onSelectedChange,
-    selectable,
+    selectableOnClick,
   },
 });
 
@@ -78,7 +82,7 @@ const createSessionNodesFromBranching = (
   showDetailedInfo: boolean,
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
-  selectable: boolean,
+  selectableOnClick: boolean,
 ): Node<SessionTileData>[] => {
   const nodes: Node<SessionTileData>[] = [];
 
@@ -104,7 +108,7 @@ const createSessionNodesFromBranching = (
           showDetailedInfo,
           selected: selectedNodesIds.includes(sessionNodeId),
           onSelectedChange,
-          selectable,
+          selectableOnClick,
         },
       });
     }),
@@ -121,7 +125,7 @@ export const createMapNodes = (
   sessions: SessionDto[],
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
-  selectable: boolean,
+  selectableOnClick: boolean,
 ): Node<QuestionTileData | SessionTileData>[] =>
   questions.flatMap((question, index) => {
     const nodes: Node<QuestionTileData | SessionTileData>[] = [
@@ -133,7 +137,7 @@ export const createMapNodes = (
         index,
         selectedNodesIds,
         onSelectedChange,
-        selectable,
+        selectableOnClick,
       ),
     ];
 
@@ -145,7 +149,7 @@ export const createMapNodes = (
         showDetailedInfo,
         selectedNodesIds,
         onSelectedChange,
-        selectable,
+        selectableOnClick,
       ),
     );
 
@@ -162,12 +166,6 @@ const findQuestionPosition = (
 
 const edgeExists = (edges: Edge[], edgeId: string): boolean =>
   Boolean(edges.find(({ id }) => id === edgeId));
-
-type EdgeSharedAttributesGetter = (
-  selectedNodesIds: string[],
-  source: string,
-  target: string,
-) => Partial<Edge>;
 
 const createEdgeObject = (
   id: string,
@@ -337,11 +335,12 @@ const getEdgeSharedAttributesForNonSelectableNodes: EdgeSharedAttributesGetter =
 export const createMapEdges = (
   questions: Question[],
   selectedNodesIds: string[],
-  nodesSelectable: boolean,
+  nodesSelectableOnClick: boolean,
 ): Edge[] => {
-  const edgeSharedAttributesGetter: EdgeSharedAttributesGetter = nodesSelectable
-    ? getEdgeSharedAttributesForSelectableNodes
-    : getEdgeSharedAttributesForNonSelectableNodes;
+  const edgeSharedAttributesGetter: EdgeSharedAttributesGetter =
+    nodesSelectableOnClick
+      ? getEdgeSharedAttributesForSelectableNodes
+      : getEdgeSharedAttributesForNonSelectableNodes;
 
   const edgesFromNextQuestions: Edge[] = createMapEdgesFromNextQuestions(
     questions,
@@ -355,7 +354,7 @@ export const createMapEdges = (
     edgeSharedAttributesGetter,
   );
 
-  return nodesSelectable
+  return nodesSelectableOnClick
     ? removeHighlightIfDirectConnectionExists(allEdges)
     : allEdges;
 };
@@ -366,10 +365,12 @@ export const getNodeVerticalDistanceRatio = (nodeType?: string): number =>
     : questionNodesVerticalDistanceRatio;
 
 export const getNodeOpacity = (
-  selectable: boolean,
+  selectableOnClick: boolean,
   selected: boolean,
 ): number => {
-  if (selectable || selected) return 1;
+  // nodes can be selected programmatically while not being
+  // selectable on click by the user
+  if (selectableOnClick || selected) return 1;
   return 0.5;
 };
 

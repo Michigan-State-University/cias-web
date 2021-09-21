@@ -12,6 +12,7 @@ import {
   FETCH_ANSWERS_SUCCESS,
 } from './constants';
 import { fetchAnswersError, fetchAnswersSuccess } from './actions';
+
 export type AnswersState = {
   answers: Answer[];
   loaders: Record<string, boolean>;

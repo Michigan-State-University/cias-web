@@ -88,7 +88,7 @@ const SessionMap = ({
     [selectedNodesIds, setSelectedNodesIds],
   );
 
-  const nodesSelectable = useMemo(() => !answers, [answers]);
+  const nodesSelectableOnClick = useMemo(() => !answers, [answers]);
 
   const handleShowDetailsChange = useCallback(
     (showDetails: boolean, questionId: string) => {
@@ -125,9 +125,13 @@ const SessionMap = ({
         sessions,
         selectedNodesIds,
         handleSelectedChange,
-        nodesSelectable,
+        nodesSelectableOnClick,
       ),
-      ...createMapEdges(sortedQuestions, selectedNodesIds, nodesSelectable),
+      ...createMapEdges(
+        sortedQuestions,
+        selectedNodesIds,
+        nodesSelectableOnClick,
+      ),
     ],
     [
       sortedQuestions,
