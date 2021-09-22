@@ -58,6 +58,7 @@ export const initialState = {
   currentBlockIndex: -1,
   showTextTranscript: false,
   transitionalUserSessionId: null,
+  previousUserSessionId: null,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -148,6 +149,7 @@ const AnswerSessionPageReducer = (state = initialState, { payload, type }) =>
         break;
 
       case CHANGE_USER_SESSION_ID:
+        draft.previousUserSessionId = draft.userSession.id;
         draft.userSession.id = payload.userSessionId;
         break;
 

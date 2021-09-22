@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { push } from 'connected-react-router';
 import { ReactFlowProvider } from 'react-flow-renderer';
+import { toast } from 'react-toastify';
 
 import {
   getSessionRequest,
@@ -42,6 +43,15 @@ import {
   makeSelectReportTemplatesLoaders,
   fetchReportTemplatesRequest,
 } from 'global/reducers/reportTemplates';
+import {
+  fetchAnswersRequest,
+  makeSelectAnswers,
+  makeSelectAnswersLoader,
+  makeSelectAnswersError,
+  answersReducer,
+  fetchAnswersSaga,
+  FETCH_ANSWERS_ERROR,
+} from 'global/reducers/answers';
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
 import { ReportTemplate } from 'global/types/reportTemplate';
@@ -112,6 +122,13 @@ const SessionMapPage = (): JSX.Element => {
     makeSelectReportTemplatesErrors(),
   );
 
+  // @ts-ignore
+  useInjectReducer({ key: 'answers', reducer: answersReducer });
+  useInjectSaga({ key: 'fetchAnswers', saga: fetchAnswersSaga });
+  const answers = useSelector(makeSelectAnswers());
+  const answersLoading = useSelector(makeSelectAnswersLoader('fetchAnswers'));
+  const answersError = useSelector(makeSelectAnswersError('fetchAnswers'));
+
   const { interventionId, sessionId } = useParams<RouteParams>();
   const userSessionId = useQuery('userSessionId');
 
@@ -152,10 +169,22 @@ const SessionMapPage = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
+    if (userSessionId) dispatch(fetchAnswersRequest(userSessionId));
+  }, [userSessionId]);
+
+  useEffect(() => {
     if (sessionError || questionGroupsError || reportTemplatesError) {
       dispatch(push(`/interventions/${interventionId}`));
     }
   }, [sessionError, questionGroupsError, reportTemplatesError]);
+
+  useEffect(() => {
+    if (userSessionId && answersError) {
+      toast.error(formatMessage(messages.answersErrorToastMessage), {
+        toastId: FETCH_ANSWERS_ERROR,
+      });
+    }
+  }, [userSessionId, answersError]);
 
   useEffect(() => {
     if (interventionError) dispatch(push(``));
@@ -174,7 +203,8 @@ const SessionMapPage = (): JSX.Element => {
     sessionLoading ||
       questionGroupsLoading ||
       reportTemplatesLoading ||
-      interventionLoading,
+      interventionLoading ||
+      answersLoading,
   );
 
   return (
@@ -212,6 +242,7 @@ const SessionMapPage = (): JSX.Element => {
                 onZoomChange={setZoom}
                 minZoom={minZoom}
                 onMinZoomChange={setMinZoom}
+                answers={userSessionId && !answersError ? answers : null}
               />
               <SessionMapFooter
                 afterPreview={Boolean(userSessionId)}

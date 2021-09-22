@@ -20,6 +20,7 @@ import {
 } from '../../constants';
 import SessionMapQuestionNodeDetailedInfo from './SessionMapQuestionNodeDetailedInfo';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
+import { getNodeOpacity } from './utils';
 
 const getBorder = (detailsShown: boolean, selected: boolean) => {
   if (detailsShown) return `3px solid ${sessionMapColors.nodeDetailsShown}`;
@@ -38,6 +39,7 @@ const SessionMapQuestionNode = ({
     index,
     selected,
     onSelectedChange,
+    selectableOnClick,
   },
 }: NodeProps<QuestionTileData>): JSX.Element => {
   const { formatMessage } = useIntl();
@@ -57,11 +59,14 @@ const SessionMapQuestionNode = ({
     [nodeRef.current],
   );
 
-  const handleClick = () => onSelectedChange(!selected, id);
+  const handleClick = () =>
+    selectableOnClick && onSelectedChange(!selected, id);
 
   const screenNo = index + 1;
 
   const thickBorder = showDetails || selected;
+
+  const opacity = getNodeOpacity(selectableOnClick, selected);
 
   return (
     <>
@@ -73,6 +78,7 @@ const SessionMapQuestionNode = ({
           width={nodeWidth}
           justify="center"
           cursor="default"
+          opacity={opacity}
         >
           <Text fontSize={14} fontWeight="bold">
             {formatMessage(messages.screenNo, { no: screenNo })}
@@ -86,7 +92,8 @@ const SessionMapQuestionNode = ({
         maxHeight={146} // workaround to make dagre layout question nodes with ellipsis text correctly, update if necessary
         bg={themeColors.highlight}
         border={border}
-        cursor="pointer"
+        cursor={selectableOnClick ? 'pointer' : 'default'}
+        opacity={opacity}
         ref={nodeRef}
         onClick={handleClick}
       >

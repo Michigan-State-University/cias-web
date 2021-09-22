@@ -62,4 +62,8 @@ export default defineMessages({
     id: `${scope}.withBackgroundCheckbox`,
     defaultMessage: 'With background',
   },
+  answersErrorToastMessage: {
+    id: `${scope}.answersErrorToastMessage`,
+    defaultMessage: 'Could not fetch preview session answers.',
+  },
 });

@@ -4,9 +4,15 @@ import intersection from 'lodash/intersection';
 
 import { QuestionGroup } from 'global/types/questionGroup';
 import { Question } from 'global/types/question';
-import { SessionDto } from 'models/Session/SessionDto';
 
-import { QuestionTileData, SessionTileData } from '../../types';
+import { SessionDto } from 'models/Session/SessionDto';
+import { Answer } from 'models/Answer';
+
+import {
+  EdgeSharedAttributesGetter,
+  QuestionTileData,
+  SessionTileData,
+} from '../../types';
 import {
   SessionMapNodeType,
   sessionNodesVerticalDistanceRatio,
@@ -14,6 +20,7 @@ import {
   baseEdgeSharedAttributes,
   highlightedEdgeSharedAttributes,
   directConnectionEdgeSharedAttributes,
+  grayedOutEdgeSharedAttributes,
   SessionMapHeadType,
 } from '../../constants';
 
@@ -45,6 +52,7 @@ const createQuestionNode = (
   index: number,
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
+  selectableOnClick: boolean,
 ): Node<QuestionTileData> => ({
   id: question.id,
   type: SessionMapNodeType.QUESTION,
@@ -58,6 +66,7 @@ const createQuestionNode = (
     index,
     selected: selectedNodesIds.includes(question.id),
     onSelectedChange,
+    selectableOnClick,
   },
 });
 
@@ -73,6 +82,7 @@ const createSessionNodesFromBranching = (
   showDetailedInfo: boolean,
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
+  selectableOnClick: boolean,
 ): Node<SessionTileData>[] => {
   const nodes: Node<SessionTileData>[] = [];
 
@@ -98,6 +108,7 @@ const createSessionNodesFromBranching = (
           showDetailedInfo,
           selected: selectedNodesIds.includes(sessionNodeId),
           onSelectedChange,
+          selectableOnClick,
         },
       });
     }),
@@ -114,6 +125,7 @@ export const createMapNodes = (
   sessions: SessionDto[],
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
+  selectableOnClick: boolean,
 ): Node<QuestionTileData | SessionTileData>[] =>
   questions.flatMap((question, index) => {
     const nodes: Node<QuestionTileData | SessionTileData>[] = [
@@ -125,6 +137,7 @@ export const createMapNodes = (
         index,
         selectedNodesIds,
         onSelectedChange,
+        selectableOnClick,
       ),
     ];
 
@@ -136,6 +149,7 @@ export const createMapNodes = (
         showDetailedInfo,
         selectedNodesIds,
         onSelectedChange,
+        selectableOnClick,
       ),
     );
 
@@ -158,6 +172,7 @@ const createEdgeObject = (
   source: string,
   target: string,
   selectedNodesIds: string[],
+  edgeSharedAttributesGetter: EdgeSharedAttributesGetter,
 ): Edge => {
   const edge: Edge = {
     id,
@@ -165,23 +180,11 @@ const createEdgeObject = (
     target,
   };
 
-  const { length: edgeSelectedNodesCount } = intersection(selectedNodesIds, [
+  const edgeSharedAttributes = edgeSharedAttributesGetter(
+    selectedNodesIds,
     source,
     target,
-  ]);
-
-  let edgeSharedAttributes;
-  switch (edgeSelectedNodesCount) {
-    case 1: // if either source or target node is selected
-      edgeSharedAttributes = highlightedEdgeSharedAttributes;
-      break;
-    case 2: // if both source and target node are selected
-      edgeSharedAttributes = directConnectionEdgeSharedAttributes;
-      break;
-    case 0: // if neither source nor target node is selected
-    default:
-      edgeSharedAttributes = baseEdgeSharedAttributes;
-  }
+  );
 
   return {
     ...edge,
@@ -192,6 +195,7 @@ const createEdgeObject = (
 const createMapEdgesFromNextQuestions = (
   questions: Question[],
   selectedQuestionsIds: string[],
+  edgeSharedAttributesGetter: EdgeSharedAttributesGetter,
 ): Edge[] =>
   questions.flatMap(({ id: questionId }, index) => {
     const nextQuestionId = questions[index + 1]?.id;
@@ -202,6 +206,7 @@ const createMapEdgesFromNextQuestions = (
       questionId,
       nextQuestionId,
       selectedQuestionsIds,
+      edgeSharedAttributesGetter,
     );
   });
 
@@ -209,6 +214,7 @@ const createMapEdgesFromBranching = (
   questions: Question[],
   existingEdges: Edge[],
   selectedQuestionsIds: string[],
+  edgeSharedAttributesGetter: EdgeSharedAttributesGetter,
 ): Edge[] => {
   const edges: Edge[] = cloneDeep(existingEdges);
   // check every target of every pattern of every question
@@ -232,7 +238,13 @@ const createMapEdgesFromBranching = (
         if (edgeExists(edges, edgeId)) return;
 
         edges.push(
-          createEdgeObject(edgeId, nodeId, targetNodeId, selectedQuestionsIds),
+          createEdgeObject(
+            edgeId,
+            nodeId,
+            targetNodeId,
+            selectedQuestionsIds,
+            edgeSharedAttributesGetter,
+          ),
         );
       }),
     ),
@@ -259,6 +271,7 @@ const removeHighlightIfDirectConnectionExists = (edges: Edge[]): Edge[] => {
       break;
     }
 
+    // eslint-disable-next-line prefer-destructuring
     const connectingEdge = directConnections[i];
 
     edgesCopy.forEach((edge, edgeIndex) => {
@@ -279,23 +292,104 @@ const removeHighlightIfDirectConnectionExists = (edges: Edge[]): Edge[] => {
   return edgesCopy;
 };
 
+const getEdgeSharedAttributesForSelectableNodes: EdgeSharedAttributesGetter = (
+  selectedNodesIds: string[],
+  source: string,
+  target: string,
+): Partial<Edge> => {
+  const { length: edgeSelectedNodesCount } = intersection(selectedNodesIds, [
+    source,
+    target,
+  ]);
+
+  switch (edgeSelectedNodesCount) {
+    case 1: // if either source or target node is selected
+      return highlightedEdgeSharedAttributes;
+    case 2: // if both source and target node are selected
+      return directConnectionEdgeSharedAttributes;
+    case 0: // if neither source nor target node is selected
+    default:
+      return baseEdgeSharedAttributes;
+  }
+};
+
+// asserts that the order of selectedNodesIds follows the order of answering questions
+const getEdgeSharedAttributesForNonSelectableNodes: EdgeSharedAttributesGetter =
+  (
+    selectedNodesIds: string[],
+    source: string,
+    target: string,
+  ): Partial<Edge> => {
+    const sourceNodeIndex = selectedNodesIds.findIndex((id) => id === source);
+
+    if (sourceNodeIndex === -1) return grayedOutEdgeSharedAttributes;
+
+    const targetNodeIndex = selectedNodesIds.findIndex((id) => id === target);
+
+    if (targetNodeIndex === sourceNodeIndex + 1)
+      return directConnectionEdgeSharedAttributes;
+
+    return grayedOutEdgeSharedAttributes;
+  };
+
 export const createMapEdges = (
   questions: Question[],
-  selectedQuestionsIds: string[],
+  selectedNodesIds: string[],
+  nodesSelectableOnClick: boolean,
 ): Edge[] => {
+  const edgeSharedAttributesGetter: EdgeSharedAttributesGetter =
+    nodesSelectableOnClick
+      ? getEdgeSharedAttributesForSelectableNodes
+      : getEdgeSharedAttributesForNonSelectableNodes;
+
   const edgesFromNextQuestions: Edge[] = createMapEdgesFromNextQuestions(
     questions,
-    selectedQuestionsIds,
+    selectedNodesIds,
+    edgeSharedAttributesGetter,
   );
   const allEdges: Edge[] = createMapEdgesFromBranching(
     questions,
     edgesFromNextQuestions,
-    selectedQuestionsIds,
+    selectedNodesIds,
+    edgeSharedAttributesGetter,
   );
-  return removeHighlightIfDirectConnectionExists(allEdges);
+
+  return nodesSelectableOnClick
+    ? removeHighlightIfDirectConnectionExists(allEdges)
+    : allEdges;
 };
 
 export const getNodeVerticalDistanceRatio = (nodeType?: string): number =>
   nodeType === SessionMapNodeType.SESSION
     ? sessionNodesVerticalDistanceRatio
     : questionNodesVerticalDistanceRatio;
+
+export const getNodeOpacity = (
+  selectableOnClick: boolean,
+  selected: boolean,
+): number => {
+  // nodes can be selected programmatically while not being
+  // selectable on click by the user
+  if (selectableOnClick || selected) return 1;
+  return 0.5;
+};
+
+export const createSelectedNodesIdsFromAnswers = (
+  answers: Answer[],
+  sortedQuestions: Question[],
+): string[] => {
+  const selectedNodesIds = answers.map(({ questionId }) => questionId);
+
+  const { questionId: lastAnsweredQuestionId, nextSessionId } =
+    answers[answers.length - 1];
+
+  if (nextSessionId) {
+    selectedNodesIds.push(
+      createSessionNodeId(lastAnsweredQuestionId, nextSessionId),
+    );
+  } else {
+    selectedNodesIds.push(sortedQuestions[sortedQuestions.length - 1].id); // finish screen
+  }
+
+  return selectedNodesIds;
+};

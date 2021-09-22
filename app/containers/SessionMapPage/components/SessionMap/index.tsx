@@ -1,10 +1,11 @@
-import React, { memo, useCallback, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { NodeTypesType } from 'react-flow-renderer';
 
 import { Question } from 'global/types/question';
 import { QuestionGroup } from 'global/types/questionGroup';
 import { SessionDto } from 'models/Session/SessionDto';
+import { Answer } from 'models/Answer';
 
 import {
   ReactFlowGraph,
@@ -31,6 +32,7 @@ import {
   createMapNodes,
   createMapEdges,
   getNodeVerticalDistanceRatio,
+  createSelectedNodesIdsFromAnswers,
 } from './utils';
 import SessionMapSessionNode from './SessionMapSessionNode';
 import SessionMapQuestionNode from './SessionMapQuestionNode';
@@ -50,6 +52,7 @@ type Props = {
   onZoomChange: (zoom: number) => void;
   minZoom: number;
   onMinZoomChange: (minZoom: number) => void;
+  answers: Nullable<Answer[]>;
 };
 
 const SessionMap = ({
@@ -62,6 +65,7 @@ const SessionMap = ({
   onZoomChange,
   minZoom,
   onMinZoomChange,
+  answers,
 }: Props): JSX.Element => {
   const [selectedNodesIds, setSelectedNodesIds] = useState<string[]>([]);
 
@@ -84,6 +88,8 @@ const SessionMap = ({
     [selectedNodesIds, setSelectedNodesIds],
   );
 
+  const nodesSelectableOnClick = useMemo(() => !answers, [answers]);
+
   const handleShowDetailsChange = useCallback(
     (showDetails: boolean, questionId: string) => {
       onShowDetailsIdChange(showDetails ? questionId : '');
@@ -101,6 +107,14 @@ const SessionMap = ({
     [questions, questionGroups],
   );
 
+  useEffect(() => {
+    if (answers) {
+      setSelectedNodesIds(
+        createSelectedNodesIdsFromAnswers(answers, sortedQuestions),
+      );
+    }
+  }, [answers, sortedQuestions]);
+
   const elements = useMemo(
     () => [
       ...createMapNodes(
@@ -111,8 +125,13 @@ const SessionMap = ({
         sessions,
         selectedNodesIds,
         handleSelectedChange,
+        nodesSelectableOnClick,
       ),
-      ...createMapEdges(sortedQuestions, selectedNodesIds),
+      ...createMapEdges(
+        sortedQuestions,
+        selectedNodesIds,
+        nodesSelectableOnClick,
+      ),
     ],
     [
       sortedQuestions,
@@ -159,6 +178,10 @@ const SessionMap = ({
         <ReactFlowArrowHead
           type={SessionMapHeadType.DIRECT_CONNECTION}
           color={sessionMapColors.selected}
+        />
+        <ReactFlowArrowHead
+          type={SessionMapHeadType.GRAYED_OUT}
+          color={sessionMapColors.grayedOut}
         />
       </ReactFlowGraph>
     </>

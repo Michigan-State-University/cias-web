@@ -1,6 +1,6 @@
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
-type AppAction<T> = {
+type AppAction<T = any> = {
   type: string;
   payload: T;
   fields?: Nullable<string[]>;
