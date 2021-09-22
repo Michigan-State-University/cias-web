@@ -22,42 +22,38 @@ import Row from 'components/Row';
 import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 import Button from 'components/Button';
 
-import {
-  questionTypesWithoutVariablesAndScoresSection,
-  questionTypesWithoutAnswersSection,
-} from '../../constants';
+import { questionTypesWithoutVariables } from '../../constants';
 import messages from './messages';
 import VariablesAndScores from './VariablesAndScores';
 import {
   BranchingFormulaAndCases,
   FeedbackFormulaAndCases,
 } from './FormulaAndCases';
+import { UserAnswer } from './UserAnswer';
 
 type Props = {
-  questionGroup: QuestionGroup;
   shownQuestion: Question;
+  isUserSessionQuestion: boolean; // was this question shown to the user during preview session?
+  questionAnswer: Nullable<Answer>;
+  questionGroup: QuestionGroup;
   reportTemplates: ReportTemplate[];
   sessions: SessionDto[];
   questions: Question[];
   onGoToScreenClick: () => void;
-  answers: Nullable<Answer[]>;
 };
 
 const SessionMapQuestionDetails = ({
-  questionGroup,
   shownQuestion,
+  isUserSessionQuestion,
+  questionAnswer,
+  questionGroup,
   reportTemplates,
   sessions,
   questions,
   onGoToScreenClick,
-  answers,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
-  const { id, subtitle, type } = shownQuestion;
-
-  const shownQuestionAnswer = answers?.find(
-    ({ questionId }) => questionId === id,
-  );
+  const { subtitle, type } = shownQuestion;
 
   return (
     <>
@@ -91,7 +87,7 @@ const SessionMapQuestionDetails = ({
               />
             </Column>
           </Row>
-          {!questionTypesWithoutVariablesAndScoresSection.includes(type) && (
+          {!questionTypesWithoutVariables.includes(type) && (
             <VariablesAndScores
               question={shownQuestion}
               reportTemplates={reportTemplates}
@@ -109,8 +105,9 @@ const SessionMapQuestionDetails = ({
               questions={questions}
             />
           )}
-          {!questionTypesWithoutAnswersSection.includes(type) &&
-            JSON.stringify(shownQuestionAnswer)}
+          {isUserSessionQuestion && (
+            <UserAnswer question={shownQuestion} answer={questionAnswer} />
+          )}
         </div>
         <div>
           <Button

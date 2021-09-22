@@ -5,7 +5,6 @@ import { NodeTypesType } from 'react-flow-renderer';
 import { Question } from 'global/types/question';
 import { QuestionGroup } from 'global/types/questionGroup';
 import { SessionDto } from 'models/Session/SessionDto';
-import { Answer } from 'models/Answer';
 
 import {
   ReactFlowGraph,
@@ -32,7 +31,6 @@ import {
   createMapNodes,
   createMapEdges,
   getNodeVerticalMargin,
-  createSelectedNodesIdsFromAnswers,
 } from './utils';
 import SessionMapSessionNode from './SessionMapSessionNode';
 import SessionMapQuestionNode from './SessionMapQuestionNode';
@@ -52,7 +50,7 @@ type Props = {
   onZoomChange: (zoom: number) => void;
   minZoom: number;
   onMinZoomChange: (minZoom: number) => void;
-  answers: Nullable<Answer[]>;
+  userSessionNodesIds: string[];
 };
 
 const SessionMap = ({
@@ -65,7 +63,7 @@ const SessionMap = ({
   onZoomChange,
   minZoom,
   onMinZoomChange,
-  answers,
+  userSessionNodesIds,
 }: Props): JSX.Element => {
   const [selectedNodesIds, setSelectedNodesIds] = useState<string[]>([]);
 
@@ -88,7 +86,14 @@ const SessionMap = ({
     [selectedNodesIds, setSelectedNodesIds],
   );
 
-  const nodesSelectableOnClick = useMemo(() => !answers, [answers]);
+  useEffect(() => {
+    if (userSessionNodesIds.length) setSelectedNodesIds(userSessionNodesIds);
+  }, [userSessionNodesIds]);
+
+  const nodesSelectableOnClick = useMemo(
+    () => !userSessionNodesIds.length,
+    [userSessionNodesIds],
+  );
 
   const handleShowDetailsChange = useCallback(
     (showDetails: boolean, questionId: string) => {
@@ -106,14 +111,6 @@ const SessionMap = ({
     () => sortQuestionsByGroupAndPosition(questionGroups, questions),
     [questions, questionGroups],
   );
-
-  useEffect(() => {
-    if (answers) {
-      setSelectedNodesIds(
-        createSelectedNodesIdsFromAnswers(answers, sortedQuestions),
-      );
-    }
-  }, [answers, sortedQuestions]);
 
   const elements = useMemo(
     () => [
@@ -141,6 +138,7 @@ const SessionMap = ({
       sessions,
       selectedNodesIds,
       handleSelectedChange,
+      nodesSelectableOnClick,
     ],
   );
 

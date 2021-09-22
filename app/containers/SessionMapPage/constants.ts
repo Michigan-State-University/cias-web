@@ -108,13 +108,13 @@ export const INITIAL_DOWNLOAD_PROGRESS_STATE: DownloadProgressState = {
   isReadyToRestore: false,
 };
 
-export const questionTypesWithoutVariablesAndScoresSection = [
+export const questionTypesWithoutVariables = [
   QuestionTypes.INFORMATION,
   QuestionTypes.FINISH,
   QuestionTypes.FEEDBACK,
 ];
 
-export const questionTypesWithoutAnswersSection = [
+export const questionTypesWithoutAnswers = [
   QuestionTypes.INFORMATION,
   QuestionTypes.FINISH,
   QuestionTypes.FEEDBACK,

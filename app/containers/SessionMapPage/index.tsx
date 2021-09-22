@@ -71,6 +71,7 @@ import SessionMap from './components/SessionMap';
 import SessionMapFooter from './components/SessionMapFooter';
 import { QuestionDetailsColumn } from './components/styled';
 import SessionMapQuestionDetails from './components/QuestionDetails';
+import { createUserSessionNodesIdsFromAnswers } from './components/SessionMap/utils';
 
 type RouteParams = {
   interventionId: string;
@@ -190,6 +191,29 @@ const SessionMapPage = (): JSX.Element => {
     if (interventionError) dispatch(push(``));
   }, [interventionError]);
 
+  // ids of nodes representing screens that were shown to the user during preview session
+  const userSessionNodesIds = useMemo(() => {
+    const answersReady = !answersError && !answersLoading;
+    if (userSessionId && answersReady) {
+      return createUserSessionNodesIdsFromAnswers(answers, questions);
+    }
+    return [];
+  }, [answers, answersError, answersLoading, userSessionId, questions]);
+
+  const { detailsOfUserSessionQuestionShown, shownQuestionAnswer } =
+    useMemo(() => {
+      const isUserSessionQuestion = userSessionNodesIds.includes(showDetailsId);
+
+      const answer = isUserSessionQuestion
+        ? answers.find(({ questionId }) => questionId === showDetailsId)
+        : null;
+
+      return {
+        detailsOfUserSessionQuestionShown: isUserSessionQuestion,
+        shownQuestionAnswer: answer,
+      };
+    }, [userSessionNodesIds, showDetailsId, answers]);
+
   const goToScreenEdit = () => {
     const url = `/interventions/${interventionId}/sessions/${sessionId}/edit`;
     history.push(url, { selectedQuestionId: showDetailsId });
@@ -242,7 +266,7 @@ const SessionMapPage = (): JSX.Element => {
                 onZoomChange={setZoom}
                 minZoom={minZoom}
                 onMinZoomChange={setMinZoom}
-                answers={userSessionId && !answersError ? answers : null}
+                userSessionNodesIds={userSessionNodesIds}
               />
               <SessionMapFooter
                 afterPreview={Boolean(userSessionId)}
@@ -264,7 +288,8 @@ const SessionMapPage = (): JSX.Element => {
             sessions={intervention?.sessions || []}
             questions={questions}
             onGoToScreenClick={goToScreenEdit}
-            answers={userSessionId && !answersError ? answers : null}
+            isUserSessionQuestion={detailsOfUserSessionQuestionShown}
+            questionAnswer={shownQuestionAnswer}
           />
         </QuestionDetailsColumn>
       )}
