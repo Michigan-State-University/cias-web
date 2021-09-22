@@ -8,6 +8,7 @@ import Question from 'models/Session/Question';
 import UrlPreview from 'components/UrlPreview';
 import H3 from 'components/H3';
 import Column from 'components/Column';
+import Tooltip from 'components/Tooltip';
 
 import messages from '../layouts/messages';
 
@@ -36,10 +37,16 @@ const UrlQuestion = ({ question, selectAnswer }) => {
   const onClick = () => changeLinkState(true);
   return (
     <Column mt={10}>
-      <UrlPreview handleClick={onClick} link={payload} />
-      <H3 color={themeColors.warning} textAlign="center">
-        {formatMessage(messages.wcagExternalLinkWarning)}
-      </H3>
+      <Tooltip
+        id="external-url-warning"
+        content={
+          <H3 color={themeColors.warning} textAlign="center">
+            {formatMessage(messages.wcagExternalLinkWarning)}
+          </H3>
+        }
+      >
+        <UrlPreview handleClick={onClick} link={payload} />
+      </Tooltip>
     </Column>
   );
 };

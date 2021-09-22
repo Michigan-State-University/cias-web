@@ -87,6 +87,24 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.c7 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c8 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
   width: 100%;
   margin-top: 5px;
   margin-bottom: 5px;
@@ -156,7 +174,20 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
   </div>
   <div
     class="c6"
-    width="100%"
-  />
+    display="flex"
+  >
+    <div
+      class="c7"
+      data-for="external-url-warning"
+      data-tip=""
+    >
+      <div>
+        <div
+          class="c8"
+          width="100%"
+        />
+      </div>
+    </div>
+  </div>
 </div>
 `;

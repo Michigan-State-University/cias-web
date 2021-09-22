@@ -6,15 +6,22 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
     class="Column-sc-4zswzq-0 fgvXEf"
   >
     <div
-      class="Box-sc-1vhutan-0 dyNKoD"
-      width="100%"
-    />
-    <h3
-      class="H3-twxrn4-0 cksTtw"
-      color="#D2371D"
+      class="Box-sc-1vhutan-0 qxAio"
+      display="flex"
     >
-      Please verify the validity of the External Link.
-    </h3>
+      <div
+        class="Box-sc-1vhutan-0 dvfkZg"
+        data-for="external-url-warning"
+        data-tip=""
+      >
+        <div>
+          <div
+            class="Box-sc-1vhutan-0 dyNKoD"
+            width="100%"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

@@ -71,7 +71,8 @@ export default defineMessages({
   },
   wcagExternalLinkWarning: {
     id: `${scope}.wcagExternalLinkWarning`,
-    defaultMessage: 'Please verify the validity of the External Link.',
+    defaultMessage:
+      'Clicking this link will take you to a different website. You can click the CIAS tab in your browser to return back to CIAS at any time',
   },
   sliderLabel: {
     id: `${scope}.sliderLabel`,
