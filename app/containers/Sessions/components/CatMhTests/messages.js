@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-export const scope = 'app.components.CatMhTests';
+export const scope = 'app.containers.Sessions.components.CatMhTests';
 
 export default defineMessages({
   variablesAndScores: {

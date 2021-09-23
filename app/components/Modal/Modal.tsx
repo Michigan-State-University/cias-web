@@ -27,7 +27,7 @@ import { MODAL_DESCRIPTION_ID, MODAL_TITLE_ID } from './constants';
 
 export type Props = {
   title?: string;
-  onClose: () => void;
+  onClose?: () => void;
   children: ReactNode;
   visible: boolean;
   titleProps?: Record<string, unknown>;
@@ -43,10 +43,14 @@ const Modal = ({
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
+  const handleClose = () => {
+    if (onClose) onClose();
+  };
+
   const modalContent = useRef<HTMLElement>(null);
   const modalOverlay = useRef<HTMLElement>(null);
   useLockBodyScroll(visible);
-  useKeyPress(KeyCodes.ESC, onClose);
+  useKeyPress(KeyCodes.ESC, handleClose);
 
   const handleClick = (event: MouseEvent) => {
     const { target } = event;
@@ -58,7 +62,7 @@ const Modal = ({
       overlayCurrent.contains(target as Node) &&
       !contentCurrent.contains(target as Node)
     )
-      onClose();
+      handleClose();
   };
 
   useEffect(() => {
