@@ -25,7 +25,7 @@ type Props = {
   disabled?: boolean;
   id: string;
   labelPosition?: LabelPosition;
-  onChange: Nullable<
+  onChange?: Nullable<
     (value: boolean, event: ChangeEvent<HTMLInputElement>) => void
   >;
   stroke?: boolean | string;

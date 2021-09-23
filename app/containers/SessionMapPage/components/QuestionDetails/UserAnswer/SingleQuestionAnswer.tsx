@@ -1,0 +1,42 @@
+import React from 'react';
+
+import { htmlToPlainText } from 'utils/htmlToPlainText';
+
+import { QuestionBody } from 'global/types/question';
+
+import { Answer } from 'models/Answer';
+
+import { colors } from 'theme';
+
+import Row from 'components/Row';
+import { Radio } from 'components/Radio';
+import Text from 'components/Text';
+
+type Props = {
+  questionBody: QuestionBody<string>;
+  answer: Answer;
+};
+
+const SingleQuestionAnswer = ({
+  questionBody: { data: questionData },
+  answer: {
+    decryptedBody: { data: answerData },
+    id,
+  },
+}: Props): JSX.Element => (
+  <Row gap={15} flexWrap="wrap">
+    {questionData.map(({ value, payload }, index) => (
+      <Radio
+        checked={value === answerData[0].value}
+        disabled
+        id={`session-map-question-details-answer-${id}-radio-${index}`}
+      >
+        <Text color={colors.jungleGreen} fontWeight="bold">
+          {htmlToPlainText(payload)}
+        </Text>
+      </Radio>
+    ))}
+  </Row>
+);
+
+export default SingleQuestionAnswer;
