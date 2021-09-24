@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
@@ -23,20 +23,29 @@ const SingleQuestionAnswer = ({
     decryptedBody: { data: answerData },
     id,
   },
-}: Props): JSX.Element => (
-  <Row gap={15} flexWrap="wrap">
-    {questionData.map(({ value, payload }, index) => (
-      <Radio
-        checked={value === answerData[0].value}
-        disabled
-        id={`session-map-question-details-answer-${id}-radio-${index}`}
-      >
-        <Text color={colors.jungleGreen} fontWeight="bold">
-          {htmlToPlainText(payload)}
-        </Text>
-      </Radio>
-    ))}
-  </Row>
-);
+}: Props): JSX.Element => {
+  const getRadioId = useCallback(
+    (index: number) =>
+      `session-map-question-details-answer-${id}-radio-${index}`,
+    [id],
+  );
+
+  return (
+    <Row gap={15} flexWrap="wrap">
+      {questionData.map(({ value, payload }, index) => (
+        <Radio
+          checked={value === answerData[0].value}
+          disabled
+          id={getRadioId(index)}
+          key={getRadioId(index)}
+        >
+          <Text color={colors.jungleGreen} fontWeight="bold">
+            {htmlToPlainText(payload)}
+          </Text>
+        </Radio>
+      ))}
+    </Row>
+  );
+};
 
 export default SingleQuestionAnswer;
