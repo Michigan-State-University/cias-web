@@ -15,6 +15,7 @@ import { questionTypesWithoutAnswers } from '../../../constants';
 import messages from './messages';
 import SingleAnswer from './SingleAnswer';
 import MultiAnswer from './MultiAnswer';
+import FreeResponseAnswer from './FreeResponseAnswer';
 
 type Props = {
   question: Question;
@@ -48,6 +49,8 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
         return (
           <MultiAnswer questionBody={multiAnswerQuestionBody} answer={answer} />
         );
+      case QuestionTypes.FREE_RESPONSE:
+        return <FreeResponseAnswer answer={answer} />;
       default:
         return <></>;
     }
