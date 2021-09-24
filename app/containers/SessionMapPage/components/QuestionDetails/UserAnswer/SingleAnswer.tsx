@@ -17,7 +17,10 @@ type Props = {
   answer: Answer;
 };
 
-const SingleQuestionAnswer = ({
+// IMPLEMENTATION LIMITATION:
+// all options with a value equal to the answer's value will be checked
+// despite the fact that this is a single answer question
+const SingleAnswer = ({
   questionBody: { data: questionData },
   answer: {
     decryptedBody: { data: answerData },
@@ -48,4 +51,4 @@ const SingleQuestionAnswer = ({
   );
 };
 
-export default SingleQuestionAnswer;
+export default SingleAnswer;

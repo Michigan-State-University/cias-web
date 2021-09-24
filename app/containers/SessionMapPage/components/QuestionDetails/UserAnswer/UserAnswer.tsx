@@ -13,7 +13,8 @@ import Comment from 'components/Text/Comment';
 
 import { questionTypesWithoutAnswers } from '../../../constants';
 import messages from './messages';
-import SingleQuestionAnswer from './SingleQuestionAnswer';
+import SingleAnswer from './SingleAnswer';
+import MultiAnswer from './MultiAnswer';
 
 type Props = {
   question: Question;
@@ -35,12 +36,17 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
 
     switch (type) {
       case QuestionTypes.SINGLE:
-        const singleQuestionBody = body as QuestionBody<string>;
+        const singleAnswerQuestionBody = body as QuestionBody<string>;
         return (
-          <SingleQuestionAnswer
-            questionBody={singleQuestionBody}
+          <SingleAnswer
+            questionBody={singleAnswerQuestionBody}
             answer={answer}
           />
+        );
+      case QuestionTypes.MULTIPLE:
+        const multiAnswerQuestionBody = body as QuestionBody<string>;
+        return (
+          <MultiAnswer questionBody={multiAnswerQuestionBody} answer={answer} />
         );
       default:
         return <></>;
