@@ -52,7 +52,16 @@ function* submitAnswersAsync({
       ];
     }
 
+    if (skipped)
+      data = [
+        {
+          value: '',
+          var: '',
+        },
+      ];
+
     const type = questionType.replace('Question', 'Answer');
+
     yield axios.post(
       `/v1/user_sessions/${userSessionId}/answers`,
       objectToSnakeCase({

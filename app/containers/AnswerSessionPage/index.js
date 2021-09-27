@@ -81,6 +81,7 @@ import {
   clearError,
   toggleTextTranscriptAction,
 } from './actions';
+import { NOT_SKIPABLE_QUESTIONS } from './constants';
 
 const AnimationRefHelper = ({
   children,
@@ -189,6 +190,7 @@ export function AnswerSessionPage({
   );
 
   const {
+    type,
     settings: {
       required,
       proceed_button: proceedButton,
@@ -352,7 +354,8 @@ export function AnswerSessionPage({
 
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
-    const shouldRenderSkipQuestionButton = !isLastScreen;
+    const shouldRenderSkipQuestionButton =
+      !isLastScreen && !NOT_SKIPABLE_QUESTIONS.includes(type);
     const skipQuestionButtonDisabled = required;
 
     const shouldRenderContinueButton =
