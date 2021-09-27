@@ -42,4 +42,12 @@ export default defineMessages({
     id: `${scope}.spelling`,
     defaultMessage: 'Spelling: {spelling}',
   },
+  currency: {
+    id: `${scope}.currency`,
+    defaultMessage: 'Currency:',
+  },
+  amount: {
+    id: `${scope}.amount`,
+    defaultMessage: 'Amount: {amount}',
+  },
 });
