@@ -4,6 +4,12 @@
  *
  */
 
+import {
+  feedbackQuestion,
+  informationQuestion,
+  urlQuestion,
+} from 'models/Session/QuestionTypes';
+
 export const SUBMIT_ANSWER_REQUEST =
   'app/AnswerSessionPage/SUBMIT_ANSWER_REQUEST';
 export const SUBMIT_ANSWER_SUCCESS =
@@ -62,3 +68,9 @@ export const SET_CURRENT_BLOCK_INDEX =
 
 export const TOGGLE_TEXT_TRANSCRIPT =
   'app/AnswerSessionPage/TOGGLE_TEXT_TRANSCRIPT';
+
+export const NOT_SKIPABLE_QUESTIONS = [
+  feedbackQuestion.id,
+  informationQuestion.id,
+  urlQuestion.id,
+];
