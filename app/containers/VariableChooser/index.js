@@ -49,6 +49,7 @@ const VariableChooser = ({
   selectedQuestion = {},
   sessionId: initialSessionId,
   topPosition,
+  setIsOpen: propsSetOpen,
 }) => {
   const variableChooser = useRef(null);
 
@@ -90,6 +91,7 @@ const VariableChooser = ({
 
   useLayoutEffect(() => {
     if (isOpen) resetVariableChooser();
+    if (propsSetOpen) propsSetOpen(isOpen);
   }, [isOpen]);
 
   const handleOnVariableClick = useCallback(
@@ -199,6 +201,7 @@ VariableChooser.propTypes = {
   selectedQuestion: PropTypes.shape(Question),
   sessionId: PropTypes.string,
   topPosition: PropTypes.string,
+  setIsOpen: PropTypes.func,
 };
 
 VariableChooser.defaultProps = {

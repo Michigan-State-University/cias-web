@@ -14,6 +14,17 @@ const StyledInput = props => {
     if (props.value !== value && hasFocus === false) setValue(props.value);
   }, [props.value, hasFocus]);
 
+  const handleBlur = () => {
+    setHasFocus(false);
+    props.onBlur(value);
+  };
+
+  useEffect(() => {
+    if (props.forceBlur) {
+      handleBlur();
+    }
+  }, [props.forceBlur]);
+
   const onInputChange = targetValue => {
     if (props.validator && props.validator(targetValue)) {
       setValue(targetValue);
@@ -45,10 +56,7 @@ const StyledInput = props => {
           e.stopPropagation();
         }}
         onChange={event => onInputChange(event.target.value)}
-        onBlur={() => {
-          setHasFocus(false);
-          props.onBlur(value);
-        }}
+        onBlur={handleBlur}
         onFocus={handleFocus}
         placeholder={props.placeholder}
         keyboard={props.keyboard}
@@ -76,10 +84,7 @@ const StyledInput = props => {
       onChange={event => onInputChange(event.target.value)}
       onInput={props.onInput}
       onFocus={handleFocus}
-      onBlur={() => {
-        setHasFocus(false);
-        props.onBlur(value);
-      }}
+      onBlur={handleBlur}
       placeholder={props.placeholder}
       transparent={props.transparent}
       data-cy="text-area"
@@ -105,6 +110,7 @@ StyledInput.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   transparent: PropTypes.bool,
   disabled: PropTypes.bool,
+  forceBlur: PropTypes.bool,
   onInput: PropTypes.func,
 };
 
