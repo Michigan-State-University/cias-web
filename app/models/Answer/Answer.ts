@@ -5,7 +5,7 @@ export interface NameAnswerValue {
   phoneticName: string;
 }
 
-export type AnswerValueType = string | NameAnswerValue;
+export type AnswerValueType = string | number | NameAnswerValue;
 
 export interface AnswerData<T> {
   var: string;

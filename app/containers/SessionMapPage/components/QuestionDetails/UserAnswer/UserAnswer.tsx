@@ -19,6 +19,7 @@ import FreeResponseAnswer from './FreeResponseAnswer';
 import DateAnswer from './DateAnswer';
 import NameAnswer from './NameAnswer';
 import CurrencyAnswer from './CurrencyAnswer';
+import NumberAnswer from './NumberAnswer';
 
 type Props = {
   question: Question;
@@ -69,6 +70,9 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
       case QuestionTypes.CURRENCY:
         const currencyAnswer = answer as Answer<string>;
         return <CurrencyAnswer answer={currencyAnswer} />;
+      case QuestionTypes.NUMBER:
+        const numberAnswer = answer as Answer<number>;
+        return <NumberAnswer answer={numberAnswer} />;
       default:
         return <></>;
     }
