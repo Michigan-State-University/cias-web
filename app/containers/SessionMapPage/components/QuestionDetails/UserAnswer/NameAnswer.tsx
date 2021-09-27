@@ -4,9 +4,7 @@ import { Markup } from 'interweave';
 
 import { Answer, NameAnswerValue } from 'models/Answer';
 
-import { themeColors } from 'theme';
-
-import Text from 'components/Text';
+import Comment from 'components/Text/Comment';
 import Row from 'components/Row';
 
 import messages from './messages';
@@ -27,22 +25,22 @@ const NameAnswer = ({
 
   return (
     <Row gap="15px 30px" flexWrap="wrap">
-      <Text color={themeColors.comment}>
+      <Comment>
         <Markup
           content={formatMessage(messages.name, {
             name: formatAnswerValueForMarkup(name),
           })}
           noWrap
         />
-      </Text>
-      <Text color={themeColors.comment}>
+      </Comment>
+      <Comment>
         <Markup
           content={formatMessage(messages.spelling, {
             spelling: formatAnswerValueForMarkup(phoneticName),
           })}
           noWrap
         />
-      </Text>
+      </Comment>
     </Row>
   );
 };

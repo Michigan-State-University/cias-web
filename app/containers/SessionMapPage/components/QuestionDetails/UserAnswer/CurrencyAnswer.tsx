@@ -9,6 +9,7 @@ import { Answer } from 'models/Answer';
 import { themeColors } from 'theme';
 
 import Text from 'components/Text';
+import Comment from 'components/Text/Comment';
 import Row from 'components/Row';
 
 import messages from './messages';
@@ -30,9 +31,7 @@ const CurrencyAnswer = ({
   return (
     <Row gap="15px 30px" flexWrap="wrap">
       <Row>
-        <Text color={themeColors.comment} mr={8}>
-          {formatMessage(messages.currency)}
-        </Text>
+        <Comment mr={8}>{formatMessage(messages.currency)}</Comment>
         <div
           className={`currency-flag currency-flag-${currency.toLowerCase()}`}
         />
@@ -40,7 +39,7 @@ const CurrencyAnswer = ({
           {currency}
         </Text>
       </Row>
-      <Text color={themeColors.comment}>
+      <Comment>
         <Markup
           content={formatMessage(messages.amount, {
             amount: formatAnswerValueForMarkup(
@@ -49,7 +48,7 @@ const CurrencyAnswer = ({
           })}
           noWrap
         />
-      </Text>
+      </Comment>
     </Row>
   );
 };

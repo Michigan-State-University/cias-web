@@ -1,7 +1,11 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { Question, QuestionBody } from 'global/types/question';
+import {
+  GridQuestionPayload,
+  Question,
+  QuestionBody,
+} from 'global/types/question';
 
 import { Answer, NameAnswerValue } from 'models/Answer';
 import { QuestionTypes } from 'models/Question/QuestionDto';
@@ -20,6 +24,7 @@ import DateAnswer from './DateAnswer';
 import NameAnswer from './NameAnswer';
 import CurrencyAnswer from './CurrencyAnswer';
 import NumberAnswer from './NumberAnswer';
+import GridAnswer from './GridAnswer';
 
 type Props = {
   question: Question;
@@ -73,6 +78,12 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
       case QuestionTypes.NUMBER:
         const numberAnswer = answer as Answer<number>;
         return <NumberAnswer answer={numberAnswer} />;
+      case QuestionTypes.GRID:
+        const gridQuestionBody = body as QuestionBody<GridQuestionPayload>;
+        const gridAnswer = answer as Answer<string>;
+        return (
+          <GridAnswer questionBody={gridQuestionBody} answer={gridAnswer} />
+        );
       default:
         return <></>;
     }

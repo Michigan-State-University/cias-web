@@ -27,7 +27,7 @@ const MultiAnswer = ({
     id,
   },
 }: Props): JSX.Element => {
-  const getRadioId = useCallback(
+  const getCheckboxId = useCallback(
     (index: number) =>
       `session-map-question-details-answer-${id}-checkbox-${index}`,
     [id],
@@ -49,8 +49,8 @@ const MultiAnswer = ({
         <Checkbox
           checked={hasNameAndIsSelected(variable?.name)}
           disabled
-          id={getRadioId(index)}
-          key={getRadioId(index)}
+          id={getCheckboxId(index)}
+          key={getCheckboxId(index)}
           onChange={() => {}}
         >
           <Text color={colors.jungleGreen} fontWeight="bold">
