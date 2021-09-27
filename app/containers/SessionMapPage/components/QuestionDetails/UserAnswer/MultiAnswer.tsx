@@ -14,7 +14,7 @@ import Text from 'components/Text';
 
 type Props = {
   questionBody: QuestionBody<string>;
-  answer: Answer;
+  answer: Answer<string>;
 };
 
 // IMPLEMENTATION LIMITATION:

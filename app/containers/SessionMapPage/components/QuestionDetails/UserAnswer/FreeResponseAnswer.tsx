@@ -7,7 +7,7 @@ import { Answer } from 'models/Answer';
 import Comment from 'components/Text/Comment';
 
 type Props = {
-  answer: Answer;
+  answer: Answer<string>;
 };
 
 const FreeResponseAnswer = ({ answer }: Props): JSX.Element => (

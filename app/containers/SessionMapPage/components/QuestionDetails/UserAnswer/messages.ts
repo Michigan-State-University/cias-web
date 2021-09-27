@@ -34,4 +34,12 @@ export default defineMessages({
     defaultMessage:
       'This is a finish screen that does not contain any answers.',
   },
+  name: {
+    id: `${scope}.name`,
+    defaultMessage: 'Name: {name}',
+  },
+  spelling: {
+    id: `${scope}.spelling`,
+    defaultMessage: 'Spelling: {spelling}',
+  },
 });

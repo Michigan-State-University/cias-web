@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { Question, QuestionBody } from 'global/types/question';
 
-import { Answer } from 'models/Answer';
+import { Answer, NameAnswerValue } from 'models/Answer';
 import { QuestionTypes } from 'models/Question/QuestionDto';
 
 import { themeColors } from 'theme';
@@ -17,6 +17,7 @@ import SingleAnswer from './SingleAnswer';
 import MultiAnswer from './MultiAnswer';
 import FreeResponseAnswer from './FreeResponseAnswer';
 import DateAnswer from './DateAnswer';
+import NameAnswer from './NameAnswer';
 
 type Props = {
   question: Question;
@@ -39,21 +40,31 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
     switch (type) {
       case QuestionTypes.SINGLE:
         const singleAnswerQuestionBody = body as QuestionBody<string>;
+        const singleAnswer = answer as Answer<string>;
         return (
           <SingleAnswer
             questionBody={singleAnswerQuestionBody}
-            answer={answer}
+            answer={singleAnswer}
           />
         );
       case QuestionTypes.MULTIPLE:
         const multiAnswerQuestionBody = body as QuestionBody<string>;
+        const multiAnswer = answer as Answer<string>;
         return (
-          <MultiAnswer questionBody={multiAnswerQuestionBody} answer={answer} />
+          <MultiAnswer
+            questionBody={multiAnswerQuestionBody}
+            answer={multiAnswer}
+          />
         );
       case QuestionTypes.FREE_RESPONSE:
-        return <FreeResponseAnswer answer={answer} />;
+        const freeResponseAnswer = answer as Answer<string>;
+        return <FreeResponseAnswer answer={freeResponseAnswer} />;
       case QuestionTypes.DATE:
-        return <DateAnswer answer={answer} />;
+        const dateAnswer = answer as Answer<string>;
+        return <DateAnswer answer={dateAnswer} />;
+      case QuestionTypes.NAME:
+        const nameAnswer = answer as Answer<NameAnswerValue>;
+        return <NameAnswer answer={nameAnswer} />;
       default:
         return <></>;
     }

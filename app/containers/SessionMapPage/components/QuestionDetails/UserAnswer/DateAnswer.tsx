@@ -9,7 +9,7 @@ import { colors } from 'theme';
 import Text from 'components/Text';
 
 type Props = {
-  answer: Answer;
+  answer: Answer<string>;
 };
 
 const DateAnswer = ({ answer }: Props): JSX.Element => {
