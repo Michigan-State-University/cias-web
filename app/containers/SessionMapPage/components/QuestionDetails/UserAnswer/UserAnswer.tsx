@@ -16,6 +16,7 @@ import messages from './messages';
 import SingleAnswer from './SingleAnswer';
 import MultiAnswer from './MultiAnswer';
 import FreeResponseAnswer from './FreeResponseAnswer';
+import DateAnswer from './DateAnswer';
 
 type Props = {
   question: Question;
@@ -51,6 +52,8 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
         );
       case QuestionTypes.FREE_RESPONSE:
         return <FreeResponseAnswer answer={answer} />;
+      case QuestionTypes.DATE:
+        return <DateAnswer answer={answer} />;
       default:
         return <></>;
     }
