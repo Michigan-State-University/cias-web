@@ -5,7 +5,16 @@ export interface NameAnswerValue {
   phoneticName: string;
 }
 
-export type AnswerValueType = string | number | NameAnswerValue;
+export interface ParticipantReportAnswerValue {
+  email: string;
+  receiveReport: boolean;
+}
+
+export type AnswerValueType =
+  | string
+  | number
+  | NameAnswerValue
+  | ParticipantReportAnswerValue;
 
 export interface AnswerData<T> {
   var: string;

@@ -8,7 +8,11 @@ import {
   SliderQuestionPayload,
 } from 'global/types/question';
 
-import { Answer, NameAnswerValue } from 'models/Answer';
+import {
+  Answer,
+  NameAnswerValue,
+  ParticipantReportAnswerValue,
+} from 'models/Answer';
 import { QuestionTypes } from 'models/Question/QuestionDto';
 
 import { themeColors } from 'theme';
@@ -27,6 +31,7 @@ import CurrencyAnswer from './CurrencyAnswer';
 import NumberAnswer from './NumberAnswer';
 import GridAnswer from './GridAnswer';
 import SliderAnswer from './SliderAnswer';
+import ParticipantReportAnswer from './ParticipantReportAnswer';
 
 type Props = {
   question: Question;
@@ -95,6 +100,10 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
             answer={sliderAnswer}
           />
         );
+      case QuestionTypes.PARTICIPANT_REPORT:
+        const participantReportAnswer =
+          answer as Answer<ParticipantReportAnswerValue>;
+        return <ParticipantReportAnswer answer={participantReportAnswer} />;
       default:
         return <></>;
     }

@@ -50,4 +50,12 @@ export default defineMessages({
     id: `${scope}.amount`,
     defaultMessage: 'Amount: {amount}',
   },
+  yes: {
+    id: `${scope}.yes`,
+    defaultMessage: 'Yes',
+  },
+  no: {
+    id: `${scope}.no`,
+    defaultMessage: 'No',
+  },
 });
