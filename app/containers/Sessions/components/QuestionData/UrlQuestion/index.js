@@ -13,7 +13,6 @@ import {
 } from 'global/reducers/questions';
 import { canEdit } from 'models/Status/statusPermissions';
 
-import H3 from 'components/H3';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
@@ -21,7 +20,8 @@ import Question from 'models/Session/Question';
 import Row from 'components/Row';
 import UrlPreview from 'components/UrlPreview';
 import Text from 'components/Text';
-import Tooltip from 'components/Tooltip';
+import { IconTooltip, TooltipType } from 'components/Tooltip';
+import Comment from 'components/Text/Comment';
 
 import answerPageMessages from 'containers/AnswerSessionPage/layouts/messages';
 import messages from './messages';
@@ -68,16 +68,17 @@ const UrlQuestion = ({
         </Text>
       )}
       {displayPreview && (
-        <Tooltip
+        <IconTooltip
           id="external-url-warning"
+          type={TooltipType.WARNING}
           content={
-            <H3 color={themeColors.warning} textAlign="center">
+            <Comment>
               {formatMessage(answerPageMessages.wcagExternalLinkWarning)}
-            </H3>
+            </Comment>
           }
         >
           <UrlPreview link={payload} />
-        </Tooltip>
+        </IconTooltip>
       )}
     </Column>
   );
