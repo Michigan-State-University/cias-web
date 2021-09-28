@@ -17,6 +17,7 @@ import { formatThirdPartyReportQuestionData } from './utils';
 import { ChipsContainer } from './styled';
 import VariableAndScoreChip from './VariableAndScoreChip';
 import EmailAndReportTemplateChip from './EmailAndReportTemplateChip';
+import Column from '../../../../../components/Column';
 
 type Props = {
   question: Question;
@@ -77,17 +78,21 @@ const VariablesAndScores = ({
         const gridQuestionBody = body as QuestionBody<GridQuestionPayload>;
         const { rows, columns } = gridQuestionBody.data[0]
           .payload as GridQuestionPayload;
-        return rows.map(({ variable: { name } }, rowIndex) => (
-          <ChipsContainer key={`session-map-variables-row-${rowIndex}`}>
-            {columns.map(({ variable: { value } }, columnIndex) => (
-              <VariableAndScoreChip
-                variable={name}
-                score={value}
-                key={`session-map-variable-${rowIndex}-${columnIndex}`}
-              />
+        return (
+          <Column gap={15}>
+            {rows.map(({ variable: { name } }, rowIndex) => (
+              <ChipsContainer key={`session-map-variables-row-${rowIndex}`}>
+                {columns.map(({ variable: { value } }, columnIndex) => (
+                  <VariableAndScoreChip
+                    variable={name}
+                    score={value}
+                    key={`session-map-variable-${rowIndex}-${columnIndex}`}
+                  />
+                ))}
+              </ChipsContainer>
             ))}
-          </ChipsContainer>
-        ));
+          </Column>
+        );
       case QuestionTypes.THIRD_PARTY:
         const thirdPartyQuestionBody = body as QuestionBody<string>;
         const formattedData = formatThirdPartyReportQuestionData(

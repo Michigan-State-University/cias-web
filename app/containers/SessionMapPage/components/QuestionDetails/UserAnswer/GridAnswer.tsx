@@ -35,10 +35,13 @@ const GridAnswer = ({
   const getAnswerLabel = useCallback(
     (variableName: string): string => {
       if (!variableName) return '';
+
       const answerValue = answerData.find(
         (answer) => answer.var === variableName,
       )?.value;
+
       if (!answerValue) return '';
+
       return columns
         .filter(({ variable }) => variable.value === answerValue)
         .map(({ payload }) => payload)
@@ -50,7 +53,7 @@ const GridAnswer = ({
   return (
     <>
       {rows.map(({ payload, variable }, index) => (
-        <Row key={getRowId(index)}>
+        <Row key={getRowId(index)} mb={15}>
           <Comment mr={4}>{`${payload}: `}</Comment>
           <Text color={colors.jungleGreen} fontWeight="bold">
             {getAnswerLabel(variable.name)}
