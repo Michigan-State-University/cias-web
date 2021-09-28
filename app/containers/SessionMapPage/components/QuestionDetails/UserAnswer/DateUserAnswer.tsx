@@ -2,17 +2,17 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import dayjs from 'dayjs';
 
-import { Answer } from 'models/Answer';
+import { DateAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
 
 import Text from 'components/Text';
 
 type Props = {
-  answer: Answer<string>;
+  answer: DateAnswer;
 };
 
-const DateAnswer = ({ answer }: Props): JSX.Element => {
+const DateUserAnswer = ({ answer }: Props): JSX.Element => {
   const { formatDate } = useIntl();
 
   return (
@@ -22,4 +22,4 @@ const DateAnswer = ({ answer }: Props): JSX.Element => {
   );
 };
 
-export default DateAnswer;
+export default DateUserAnswer;

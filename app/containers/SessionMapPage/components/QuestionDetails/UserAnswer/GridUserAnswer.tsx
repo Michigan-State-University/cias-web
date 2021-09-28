@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { GridQuestionPayload, QuestionBody } from 'global/types/question';
 
-import { Answer } from 'models/Answer';
+import { GridAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
 
@@ -12,13 +12,13 @@ import Comment from 'components/Text/Comment';
 
 type Props = {
   questionBody: QuestionBody<GridQuestionPayload>;
-  answer: Answer<string>;
+  answer: GridAnswer;
 };
 
 // IMPLEMENTATION LIMITATION:
 // any option in a row without a variable name will not be shown even if this option was selected by the user
 // all options in a row with a value equal to the answer's value will be shown
-const GridAnswer = ({
+const GridUserAnswer = ({
   questionBody: { data: questionData },
   answer: {
     decryptedBody: { data: answerData },
@@ -64,4 +64,4 @@ const GridAnswer = ({
   );
 };
 
-export default GridAnswer;
+export default GridUserAnswer;

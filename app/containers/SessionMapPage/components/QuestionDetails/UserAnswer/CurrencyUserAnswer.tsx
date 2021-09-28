@@ -4,7 +4,7 @@ import { Markup } from 'interweave';
 
 import 'currency-flags/dist/currency-flags.min.css';
 
-import { Answer } from 'models/Answer';
+import { CurrencyAnswer } from 'models/Answer';
 
 import { themeColors } from 'theme';
 
@@ -16,10 +16,10 @@ import messages from './messages';
 import { formatAnswerValueForMarkup } from './utils';
 
 type Props = {
-  answer: Answer<string>;
+  answer: CurrencyAnswer;
 };
 
-const CurrencyAnswer = ({
+const CurrencyUserAnswer = ({
   answer: {
     decryptedBody: { data },
   },
@@ -52,4 +52,4 @@ const CurrencyAnswer = ({
     </Row>
   );
 };
-export default CurrencyAnswer;
+export default CurrencyUserAnswer;

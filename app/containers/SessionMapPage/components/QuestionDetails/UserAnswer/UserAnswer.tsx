@@ -10,8 +10,16 @@ import {
 
 import {
   Answer,
-  NameAnswerValue,
-  ParticipantReportAnswerValue,
+  CurrencyAnswer,
+  DateAnswer,
+  FreeResponseAnswer,
+  GridAnswer,
+  MultiAnswer,
+  NameAnswer,
+  NumberAnswer,
+  ParticipantReportAnswer,
+  SingleAnswer,
+  SliderAnswer,
 } from 'models/Answer';
 import { QuestionTypes } from 'models/Question/QuestionDto';
 
@@ -22,16 +30,16 @@ import Comment from 'components/Text/Comment';
 
 import { questionTypesWithoutAnswers } from '../../../constants';
 import messages from './messages';
-import SingleAnswer from './SingleAnswer';
-import MultiAnswer from './MultiAnswer';
-import FreeResponseAnswer from './FreeResponseAnswer';
-import DateAnswer from './DateAnswer';
-import NameAnswer from './NameAnswer';
-import CurrencyAnswer from './CurrencyAnswer';
-import NumberAnswer from './NumberAnswer';
-import GridAnswer from './GridAnswer';
-import SliderAnswer from './SliderAnswer';
-import ParticipantReportAnswer from './ParticipantReportAnswer';
+import SingleUserAnswer from './SingleUserAnswer';
+import MultiUserAnswer from './MultiUserAnswer';
+import FreeResponseUserAnswer from './FreeResponseUserAnswer';
+import DateUserAnswer from './DateUserAnswer';
+import NameUserAnswer from './NameUserAnswer';
+import CurrencyUserAnswer from './CurrencyUserAnswer';
+import NumberUserAnswer from './NumberUserAnswer';
+import GridUserAnswer from './GridUserAnswer';
+import ParticipantReportUserAnswer from './ParticipantReportUserAnswer';
+import SliderUserAnswer from './SliderUserAnswer';
 
 type Props = {
   question: Question;
@@ -53,57 +61,49 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
 
     switch (type) {
       case QuestionTypes.SINGLE:
-        const singleAnswerQuestionBody = body as QuestionBody<string>;
-        const singleAnswer = answer as Answer<string>;
         return (
-          <SingleAnswer
-            questionBody={singleAnswerQuestionBody}
-            answer={singleAnswer}
+          <SingleUserAnswer
+            questionBody={body as QuestionBody<string>}
+            answer={answer as SingleAnswer}
           />
         );
       case QuestionTypes.MULTIPLE:
-        const multiAnswerQuestionBody = body as QuestionBody<string>;
-        const multiAnswer = answer as Answer<string>;
         return (
-          <MultiAnswer
-            questionBody={multiAnswerQuestionBody}
-            answer={multiAnswer}
+          <MultiUserAnswer
+            questionBody={body as QuestionBody<string>}
+            answer={answer as MultiAnswer}
           />
         );
       case QuestionTypes.FREE_RESPONSE:
-        const freeResponseAnswer = answer as Answer<string>;
-        return <FreeResponseAnswer answer={freeResponseAnswer} />;
+        return <FreeResponseUserAnswer answer={answer as FreeResponseAnswer} />;
       case QuestionTypes.DATE:
-        const dateAnswer = answer as Answer<string>;
-        return <DateAnswer answer={dateAnswer} />;
+        return <DateUserAnswer answer={answer as DateAnswer} />;
       case QuestionTypes.NAME:
-        const nameAnswer = answer as Answer<NameAnswerValue>;
-        return <NameAnswer answer={nameAnswer} />;
+        return <NameUserAnswer answer={answer as NameAnswer} />;
       case QuestionTypes.CURRENCY:
-        const currencyAnswer = answer as Answer<string>;
-        return <CurrencyAnswer answer={currencyAnswer} />;
+        return <CurrencyUserAnswer answer={answer as CurrencyAnswer} />;
       case QuestionTypes.NUMBER:
-        const numberAnswer = answer as Answer<number>;
-        return <NumberAnswer answer={numberAnswer} />;
+        return <NumberUserAnswer answer={answer as NumberAnswer} />;
       case QuestionTypes.GRID:
-        const gridQuestionBody = body as QuestionBody<GridQuestionPayload>;
-        const gridAnswer = answer as Answer<string>;
         return (
-          <GridAnswer questionBody={gridQuestionBody} answer={gridAnswer} />
+          <GridUserAnswer
+            questionBody={body as QuestionBody<GridQuestionPayload>}
+            answer={answer as GridAnswer}
+          />
         );
       case QuestionTypes.SLIDER:
-        const sliderQuestionBody = body as QuestionBody<SliderQuestionPayload>;
-        const sliderAnswer = answer as Answer<number>;
         return (
-          <SliderAnswer
-            questionBody={sliderQuestionBody}
-            answer={sliderAnswer}
+          <SliderUserAnswer
+            questionBody={body as QuestionBody<SliderQuestionPayload>}
+            answer={answer as SliderAnswer}
           />
         );
       case QuestionTypes.PARTICIPANT_REPORT:
-        const participantReportAnswer =
-          answer as Answer<ParticipantReportAnswerValue>;
-        return <ParticipantReportAnswer answer={participantReportAnswer} />;
+        return (
+          <ParticipantReportUserAnswer
+            answer={answer as ParticipantReportAnswer}
+          />
+        );
       default:
         return <></>;
     }

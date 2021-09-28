@@ -4,7 +4,7 @@ import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 import { QuestionBody } from 'global/types/question';
 
-import { Answer } from 'models/Answer';
+import { MultiAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
 
@@ -14,13 +14,13 @@ import Text from 'components/Text';
 
 type Props = {
   questionBody: QuestionBody<string>;
-  answer: Answer<string>;
+  answer: MultiAnswer;
 };
 
 // IMPLEMENTATION LIMITATION:
 // any option without a variable name assigned will not be checked
 // even if this option was selected by the user
-const MultiAnswer = ({
+const MultiUserAnswer = ({
   questionBody: { data: questionData },
   answer: {
     decryptedBody: { data: answerData },
@@ -62,4 +62,4 @@ const MultiAnswer = ({
   );
 };
 
-export default MultiAnswer;
+export default MultiUserAnswer;

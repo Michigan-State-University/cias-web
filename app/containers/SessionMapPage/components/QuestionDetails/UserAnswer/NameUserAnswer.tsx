@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { Answer, NameAnswerValue } from 'models/Answer';
+import { NameAnswer } from 'models/Answer';
 
 import Comment from 'components/Text/Comment';
 import Row from 'components/Row';
@@ -11,10 +11,10 @@ import messages from './messages';
 import { formatAnswerValueForMarkup } from './utils';
 
 type Props = {
-  answer: Answer<NameAnswerValue>;
+  answer: NameAnswer;
 };
 
-const NameAnswer = ({
+const NameUserAnswer = ({
   answer: {
     decryptedBody: { data },
   },
@@ -36,7 +36,7 @@ const NameAnswer = ({
       <Comment>
         <Markup
           content={formatMessage(messages.spelling, {
-            spelling: formatAnswerValueForMarkup(phoneticName),
+            spelling: formatAnswerValueForMarkup(phoneticName ?? ''),
           })}
           noWrap
         />
@@ -44,4 +44,4 @@ const NameAnswer = ({
     </Row>
   );
 };
-export default NameAnswer;
+export default NameUserAnswer;

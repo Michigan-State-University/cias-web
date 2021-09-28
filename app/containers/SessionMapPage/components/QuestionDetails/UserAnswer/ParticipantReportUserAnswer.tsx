@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 
-import { Answer, ParticipantReportAnswerValue } from 'models/Answer';
+import { ParticipantReportAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
 
@@ -12,10 +12,10 @@ import Text from 'components/Text';
 import messages from './messages';
 
 type Props = {
-  answer: Answer<ParticipantReportAnswerValue>;
+  answer: ParticipantReportAnswer;
 };
 
-const ParticipantReportAnswer = ({
+const ParticipantReportUserAnswer = ({
   answer: {
     decryptedBody: { data: answerData },
     id,
@@ -29,16 +29,18 @@ const ParticipantReportAnswer = ({
     [id],
   );
 
-  const { receiveReport } = answerData[0].value;
+  const { value } = answerData[0];
+  const receiveReport =
+    typeof value === 'string' ? undefined : value.receiveReport;
 
   return (
     <Row gap={15} flexWrap="wrap">
-      <Radio checked={receiveReport} disabled id={getRadioId('yes')}>
+      <Radio checked={receiveReport === true} disabled id={getRadioId('yes')}>
         <Text color={colors.jungleGreen} fontWeight="bold">
           {formatMessage(messages.yes)}
         </Text>
       </Radio>
-      <Radio checked={!receiveReport} disabled id={getRadioId('no')}>
+      <Radio checked={receiveReport === false} disabled id={getRadioId('no')}>
         <Text color={colors.jungleGreen} fontWeight="bold">
           {formatMessage(messages.no)}
         </Text>
@@ -47,4 +49,4 @@ const ParticipantReportAnswer = ({
   );
 };
 
-export default ParticipantReportAnswer;
+export default ParticipantReportUserAnswer;

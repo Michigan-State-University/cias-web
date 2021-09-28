@@ -4,7 +4,7 @@ import { htmlToPlainText } from 'utils/htmlToPlainText';
 
 import { QuestionBody } from 'global/types/question';
 
-import { Answer } from 'models/Answer';
+import { SingleAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
 
@@ -14,13 +14,13 @@ import Text from 'components/Text';
 
 type Props = {
   questionBody: QuestionBody<string>;
-  answer: Answer<string>;
+  answer: SingleAnswer;
 };
 
 // IMPLEMENTATION LIMITATION:
 // all options with a value equal to the answer's value will be checked
 // despite the fact that this is a single answer question
-const SingleAnswer = ({
+const SingleUserAnswer = ({
   questionBody: { data: questionData },
   answer: {
     decryptedBody: { data: answerData },
@@ -51,4 +51,4 @@ const SingleAnswer = ({
   );
 };
 
-export default SingleAnswer;
+export default SingleUserAnswer;

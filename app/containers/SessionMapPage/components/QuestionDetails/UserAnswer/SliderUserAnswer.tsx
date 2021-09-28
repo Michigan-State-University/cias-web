@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Answer } from 'models/Answer';
+import { SliderAnswer } from 'models/Answer';
 
 import { QuestionBody, SliderQuestionPayload } from 'global/types/question';
 
@@ -11,10 +11,10 @@ import Box from 'components/Box';
 
 type Props = {
   questionBody: QuestionBody<SliderQuestionPayload>;
-  answer: Answer<number>;
+  answer: SliderAnswer;
 };
 
-const Slider = ({
+const SliderUserAnswer = ({
   answer,
   questionBody: { data: questionData },
 }: Props): JSX.Element => {
@@ -45,4 +45,4 @@ const Slider = ({
   );
 };
 
-export default Slider;
+export default SliderUserAnswer;
