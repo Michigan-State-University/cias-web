@@ -5,6 +5,7 @@ import {
   GridQuestionPayload,
   Question,
   QuestionBody,
+  SliderQuestionPayload,
 } from 'global/types/question';
 
 import { Answer, NameAnswerValue } from 'models/Answer';
@@ -25,6 +26,7 @@ import NameAnswer from './NameAnswer';
 import CurrencyAnswer from './CurrencyAnswer';
 import NumberAnswer from './NumberAnswer';
 import GridAnswer from './GridAnswer';
+import SliderAnswer from './SliderAnswer';
 
 type Props = {
   question: Question;
@@ -83,6 +85,15 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
         const gridAnswer = answer as Answer<string>;
         return (
           <GridAnswer questionBody={gridQuestionBody} answer={gridAnswer} />
+        );
+      case QuestionTypes.SLIDER:
+        const sliderQuestionBody = body as QuestionBody<SliderQuestionPayload>;
+        const sliderAnswer = answer as Answer<number>;
+        return (
+          <SliderAnswer
+            questionBody={sliderQuestionBody}
+            answer={sliderAnswer}
+          />
         );
       default:
         return <></>;
