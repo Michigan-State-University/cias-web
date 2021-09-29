@@ -18,6 +18,7 @@ import {
   NameAnswer,
   NumberAnswer,
   ParticipantReportAnswer,
+  PhoneAnswer,
   SingleAnswer,
   SliderAnswer,
   ThirdPartyReportAnswer,
@@ -42,6 +43,7 @@ import GridUserAnswer from './GridUserAnswer';
 import ParticipantReportUserAnswer from './ParticipantReportUserAnswer';
 import SliderUserAnswer from './SliderUserAnswer';
 import ThirdPartyReportUserAnswer from './ThirdPartyReportUserAnswer';
+import PhoneUserAnswer from './PhoneUserAnswer';
 
 type Props = {
   question: Question;
@@ -113,6 +115,8 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
             answer={answer as ThirdPartyReportAnswer}
           />
         );
+      case QuestionTypes.PHONE:
+        return <PhoneUserAnswer answer={answer as PhoneAnswer} />;
       default:
         return <></>;
     }

@@ -58,4 +58,12 @@ export default defineMessages({
     id: `${scope}.no`,
     defaultMessage: 'No',
   },
+  phonePrefix: {
+    id: `${scope}.phonePrefix`,
+    defaultMessage: 'Phone prefix:',
+  },
+  phoneNumber: {
+    id: `${scope}.phoneNumber`,
+    defaultMessage: 'Phone number: {number}',
+  },
 });

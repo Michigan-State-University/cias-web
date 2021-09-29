@@ -25,7 +25,7 @@ const NameUserAnswer = ({
 
   return (
     <Row gap="15px 30px" flexWrap="wrap">
-      <Comment>
+      <Comment fontWeight="medium">
         <Markup
           content={formatMessage(messages.name, {
             name: formatAnswerValueForMarkup(name),
@@ -33,7 +33,7 @@ const NameUserAnswer = ({
           noWrap
         />
       </Comment>
-      <Comment>
+      <Comment fontWeight="medium">
         <Markup
           content={formatMessage(messages.spelling, {
             spelling: formatAnswerValueForMarkup(phoneticName ?? ''),

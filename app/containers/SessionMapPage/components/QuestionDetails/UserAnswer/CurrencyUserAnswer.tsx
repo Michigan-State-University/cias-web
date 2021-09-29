@@ -30,16 +30,18 @@ const CurrencyUserAnswer = ({
 
   return (
     <Row gap="15px 30px" flexWrap="wrap">
-      <Row>
-        <Comment mr={8}>{formatMessage(messages.currency)}</Comment>
+      <Row align="center">
+        <Comment fontWeight="medium" mr={8}>
+          {formatMessage(messages.currency)}
+        </Comment>
         <div
-          className={`currency-flag currency-flag-${currency.toLowerCase()}`}
+          className={`currency-flag currency-flag-sm currency-flag-${currency.toLowerCase()}`}
         />
         <Text color={themeColors.primary} fontWeight="bold" ml={4}>
           {currency}
         </Text>
       </Row>
-      <Comment>
+      <Comment fontWeight="medium">
         <Markup
           content={formatMessage(messages.amount, {
             amount: formatAnswerValueForMarkup(

@@ -54,7 +54,7 @@ const GridUserAnswer = ({
     <>
       {rows.map(({ payload, variable }, index) => (
         <Row key={getRowId(index)} mb={15}>
-          <Comment mr={4}>{`${payload}: `}</Comment>
+          <Comment fontWeight="medium" mr={4}>{`${payload}: `}</Comment>
           <Text color={colors.jungleGreen} fontWeight="bold">
             {getAnswerLabel(variable.name)}
           </Text>
