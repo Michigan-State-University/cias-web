@@ -29,7 +29,7 @@ import {
   BranchingFormulaAndCases,
   FeedbackFormulaAndCases,
 } from './FormulaAndCases';
-import { UserAnswer } from './UserAnswer';
+import UserAnswer from './UserAnswer';
 
 type Props = {
   shownQuestion: Question;
