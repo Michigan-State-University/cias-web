@@ -31,4 +31,5 @@ export interface InterventionDto {
   updatedAt: string;
   user: { id: string; firstName: string; email: string; lastName: string };
   userId: string;
+  firstSessionLanguage?: string;
 }
