@@ -20,6 +20,7 @@ import {
   ParticipantReportAnswer,
   SingleAnswer,
   SliderAnswer,
+  ThirdPartyReportAnswer,
 } from 'models/Answer';
 import { QuestionTypes } from 'models/Question/QuestionDto';
 
@@ -40,6 +41,7 @@ import NumberUserAnswer from './NumberUserAnswer';
 import GridUserAnswer from './GridUserAnswer';
 import ParticipantReportUserAnswer from './ParticipantReportUserAnswer';
 import SliderUserAnswer from './SliderUserAnswer';
+import ThirdPartyReportUserAnswer from './ThirdPartyReportUserAnswer';
 
 type Props = {
   question: Question;
@@ -102,6 +104,13 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
         return (
           <ParticipantReportUserAnswer
             answer={answer as ParticipantReportAnswer}
+          />
+        );
+      case QuestionTypes.THIRD_PARTY:
+        return (
+          <ThirdPartyReportUserAnswer
+            questionBody={body as QuestionBody<string>}
+            answer={answer as ThirdPartyReportAnswer}
           />
         );
       default:
