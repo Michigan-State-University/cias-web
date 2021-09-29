@@ -51,6 +51,7 @@ type Props = {
   minZoom: number;
   onMinZoomChange: (minZoom: number) => void;
   userSessionNodesIds: string[];
+  showWithBranchingOnly: boolean;
 };
 
 const SessionMap = ({
@@ -64,6 +65,7 @@ const SessionMap = ({
   minZoom,
   onMinZoomChange,
   userSessionNodesIds,
+  showWithBranchingOnly,
 }: Props): JSX.Element => {
   const [selectedNodesIds, setSelectedNodesIds] = useState<string[]>([]);
 
@@ -112,9 +114,9 @@ const SessionMap = ({
     [questions, questionGroups],
   );
 
-  const elements = useMemo(
+  const [nodes, edges] = useMemo(
     () => [
-      ...createMapNodes(
+      createMapNodes(
         sortedQuestions,
         showDetailsId,
         handleShowDetailsChange,
@@ -124,11 +126,7 @@ const SessionMap = ({
         handleSelectedChange,
         nodesSelectableOnClick,
       ),
-      ...createMapEdges(
-        sortedQuestions,
-        selectedNodesIds,
-        nodesSelectableOnClick,
-      ),
+      createMapEdges(sortedQuestions, selectedNodesIds, nodesSelectableOnClick),
     ],
     [
       sortedQuestions,
@@ -141,6 +139,15 @@ const SessionMap = ({
       nodesSelectableOnClick,
     ],
   );
+
+  const elements = useMemo(() => {
+    if (showWithBranchingOnly) {
+      const filteredNodes = nodes; // filter out nodes without branching
+      return [...filteredNodes, ...edges];
+    }
+
+    return [...nodes, ...edges];
+  }, [nodes, edges, showWithBranchingOnly]);
 
   const sessionMapGraphProps: ReactFlowGraphProps = {
     defaultMinZoom,

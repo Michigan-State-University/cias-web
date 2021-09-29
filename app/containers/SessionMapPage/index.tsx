@@ -267,6 +267,7 @@ const SessionMapPage = (): JSX.Element => {
                 minZoom={minZoom}
                 onMinZoomChange={setMinZoom}
                 userSessionNodesIds={userSessionNodesIds}
+                showWithBranchingOnly={showWithBranchingOnly}
               />
               <SessionMapFooter
                 afterPreview={Boolean(userSessionId)}
