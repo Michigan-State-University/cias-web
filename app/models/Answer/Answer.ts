@@ -53,47 +53,108 @@ export interface AnswerBody<T extends AnswerDataType = AnswerDataType> {
 
 // answer
 
-export interface Answer<T extends AnswerDataType = AnswerDataType> {
+export interface GenericAnswer<
+  V extends AnswerType = AnswerType,
+  T extends AnswerDataType = AnswerDataType,
+> {
   id: string;
   questionId: string;
-  type: AnswerType;
+  type: V;
   decryptedBody: AnswerBody<T>;
   nextSessionId: Nullable<string>;
 }
 
-export type SingleAnswer = Answer<VariableAnswerData<string>>;
+export type SingleAnswer = GenericAnswer<
+  AnswerType.SINGLE,
+  VariableAnswerData<string>
+>;
 
-export type MultiAnswer = Answer<VariableAnswerData<string>>;
+export type MultiAnswer = GenericAnswer<
+  AnswerType.MULTIPLE,
+  VariableAnswerData<string>
+>;
 
-export type FreeResponseAnswer = Answer<VariableAnswerData<string>>;
+export type FreeResponseAnswer = GenericAnswer<
+  AnswerType.FREE_RESPONSE,
+  VariableAnswerData<string>
+>;
 
-export type DateAnswer = Answer<VariableAnswerData<string>>;
+export type DateAnswer = GenericAnswer<
+  AnswerType.DATE,
+  VariableAnswerData<string>
+>;
 
-export type NameAnswer = Answer<VariableAnswerData<NameAnswerValue>>;
+export type NameAnswer = GenericAnswer<
+  AnswerType.NAME,
+  VariableAnswerData<NameAnswerValue>
+>;
 
-export type CurrencyAnswer = Answer<VariableAnswerData<string>>;
+export type CurrencyAnswer = GenericAnswer<
+  AnswerType.CURRENCY,
+  VariableAnswerData<string>
+>;
 
-export type NumberAnswer = Answer<VariableAnswerData<string | number>>;
+export type NumberAnswer = GenericAnswer<
+  AnswerType.NUMBER,
+  VariableAnswerData<string | number>
+>;
 
-export type GridAnswer = Answer<VariableAnswerData<string>>;
+export type GridAnswer = GenericAnswer<
+  AnswerType.GRID,
+  VariableAnswerData<string>
+>;
 
-export type SliderAnswer = Answer<VariableAnswerData<number>>;
+export type SliderAnswer = GenericAnswer<
+  AnswerType.SLIDER,
+  VariableAnswerData<number>
+>;
 
-export type InformationAnswer = Answer<VariableAnswerData<''>>;
+export type InformationAnswer = GenericAnswer<
+  AnswerType.INFORMATION,
+  VariableAnswerData<''>
+>;
 
-export type ExternalLinkAnswer = Answer<VariableAnswerData<boolean>>;
+export type ExternalLinkAnswer = GenericAnswer<
+  AnswerType.EXTERNAL_LINK,
+  VariableAnswerData<boolean>
+>;
 
-export type FeedbackAnswer = Answer<VariableAnswerData<''>>;
+export type FeedbackAnswer = GenericAnswer<
+  AnswerType.FEEDBACK,
+  VariableAnswerData<''>
+>;
 
-// value is an empty string if question is skipped
-export type ParticipantReportAnswer = Answer<
+export type ParticipantReportAnswer = GenericAnswer<
+  AnswerType.PARTICIPANT_REPORT,
+  // value is an empty string if question is skipped
   VariableAnswerData<ParticipantReportAnswerValue | ''>
 >;
 
-// value is an empty string if question is skipped
-export type ThirdPartyReportAnswer = Answer<
+export type ThirdPartyReportAnswer = GenericAnswer<
+  AnswerType.THIRD_PARTY,
+  // value is an empty string if question is skipped
   ThirdPartyReportAnswerData | VariableAnswerData<''>
 >;
 
-// value is an empty string if question is skipped
-export type PhoneAnswer = Answer<VariableAnswerData<PhoneAnswerValue | ''>>;
+export type PhoneAnswer = GenericAnswer<
+  AnswerType.PHONE,
+  // value is an empty string if question is skipped
+  VariableAnswerData<PhoneAnswerValue | ''>
+>;
+
+export type Answer =
+  | SingleAnswer
+  | MultiAnswer
+  | FreeResponseAnswer
+  | DateAnswer
+  | NameAnswer
+  | CurrencyAnswer
+  | NumberAnswer
+  | GridAnswer
+  | SliderAnswer
+  | InformationAnswer
+  | ExternalLinkAnswer
+  | FeedbackAnswer
+  | ParticipantReportAnswer
+  | ThirdPartyReportAnswer
+  | PhoneAnswer;

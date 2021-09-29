@@ -8,22 +8,7 @@ import {
   SliderQuestionPayload,
 } from 'global/types/question';
 
-import {
-  Answer,
-  CurrencyAnswer,
-  DateAnswer,
-  FreeResponseAnswer,
-  GridAnswer,
-  MultiAnswer,
-  NameAnswer,
-  NumberAnswer,
-  ParticipantReportAnswer,
-  PhoneAnswer,
-  SingleAnswer,
-  SliderAnswer,
-  ThirdPartyReportAnswer,
-} from 'models/Answer';
-import { QuestionTypes } from 'models/Question/QuestionDto';
+import { Answer, AnswerType } from 'models/Answer';
 
 import { themeColors } from 'theme';
 
@@ -52,71 +37,69 @@ type Props = {
 
 const UserAnswer = ({ question, answer }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
-  const { type, body } = question;
+  const { body, type: questionType } = question;
 
   const renderUserAnswerByQuestionType = (): JSX.Element[] | JSX.Element => {
-    if (questionTypesWithoutAnswers.includes(type)) {
+    if (questionTypesWithoutAnswers.includes(questionType)) {
       return (
-        <Text color={themeColors.warning}>{formatMessage(messages[type])}</Text>
+        <Text color={themeColors.warning}>
+          {formatMessage(messages[questionType])}
+        </Text>
       );
     }
 
     if (!answer) return <></>;
 
-    switch (type) {
-      case QuestionTypes.SINGLE:
+    switch (answer.type) {
+      case AnswerType.SINGLE:
         return (
           <SingleUserAnswer
             questionBody={body as QuestionBody<string>}
-            answer={answer as SingleAnswer}
+            answer={answer}
           />
         );
-      case QuestionTypes.MULTIPLE:
+      case AnswerType.MULTIPLE:
         return (
           <MultiUserAnswer
             questionBody={body as QuestionBody<string>}
-            answer={answer as MultiAnswer}
+            answer={answer}
           />
         );
-      case QuestionTypes.FREE_RESPONSE:
-        return <FreeResponseUserAnswer answer={answer as FreeResponseAnswer} />;
-      case QuestionTypes.DATE:
-        return <DateUserAnswer answer={answer as DateAnswer} />;
-      case QuestionTypes.NAME:
-        return <NameUserAnswer answer={answer as NameAnswer} />;
-      case QuestionTypes.CURRENCY:
-        return <CurrencyUserAnswer answer={answer as CurrencyAnswer} />;
-      case QuestionTypes.NUMBER:
-        return <NumberUserAnswer answer={answer as NumberAnswer} />;
-      case QuestionTypes.GRID:
+      case AnswerType.FREE_RESPONSE:
+        return <FreeResponseUserAnswer answer={answer} />;
+      case AnswerType.DATE:
+        return <DateUserAnswer answer={answer} />;
+      case AnswerType.NAME:
+        return <NameUserAnswer answer={answer} />;
+      case AnswerType.CURRENCY:
+        return <CurrencyUserAnswer answer={answer} />;
+      case AnswerType.NUMBER:
+        return <NumberUserAnswer answer={answer} />;
+      case AnswerType.GRID:
         return (
           <GridUserAnswer
             questionBody={body as QuestionBody<GridQuestionPayload>}
-            answer={answer as GridAnswer}
+            answer={answer}
           />
         );
-      case QuestionTypes.SLIDER:
+      case AnswerType.SLIDER:
         return (
           <SliderUserAnswer
             questionBody={body as QuestionBody<SliderQuestionPayload>}
-            answer={answer as SliderAnswer}
+            answer={answer}
           />
         );
-      case QuestionTypes.PARTICIPANT_REPORT:
-        return (
-          <ParticipantReportUserAnswer
-            answer={answer as ParticipantReportAnswer}
-          />
-        );
-      case QuestionTypes.THIRD_PARTY:
+      case AnswerType.PARTICIPANT_REPORT:
+        return <ParticipantReportUserAnswer answer={answer} />;
+      case AnswerType.THIRD_PARTY:
         return (
           <ThirdPartyReportUserAnswer
             questionBody={body as QuestionBody<string>}
-            answer={answer as ThirdPartyReportAnswer}
+            answer={answer}
           />
         );
-      case QuestionTypes.PHONE:
-        return <PhoneUserAnswer answer={answer as PhoneAnswer} />;
+      case AnswerType.PHONE:
+        return <PhoneUserAnswer answer={answer} />;
       default:
         return <></>;
     }
