@@ -20,10 +20,9 @@ const NameQuestionLayout = ({
   formatMessage,
   answerBody,
   disabled,
-  phoneticUrl,
-  phoneticLoading,
   isDesktop,
   isAnimationOngoing,
+  phoneticPreviewParams,
 }) => {
   const { name, phoneticName } =
     answerBody && answerBody.value ? answerBody.value : {};
@@ -72,8 +71,7 @@ const NameQuestionLayout = ({
           </Text>
 
           <TextVoicePreviewInput
-            phoneticUrl={phoneticUrl}
-            phoneticLoading={phoneticLoading}
+            phoneticPreviewParams={phoneticPreviewParams}
             isAnimationOngoing={isAnimationOngoing}
             value={phoneticName}
             placeholder={formatMessage(messages.enterNamePhonetically)}
@@ -93,9 +91,8 @@ NameQuestionLayout.propTypes = {
   disabled: PropTypes.bool,
   formatMessage: PropTypes.func,
   answerBody: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  phoneticUrl: PropTypes.any,
-  phoneticLoading: PropTypes.bool,
   isAnimationOngoing: PropTypes.bool,
+  phoneticPreviewParams: PropTypes.object,
   isDesktop: PropTypes.bool,
 };
 

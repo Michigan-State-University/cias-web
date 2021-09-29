@@ -8,12 +8,13 @@ export interface VoiceSelectOption extends SelectOption<string> {
 }
 
 export const voiceByGoogleLanguageIdSelectFormatter = ({
-  voiceType: value,
+  id,
   voiceLabel,
   languageCode,
   ...restProps
 }: Voice): VoiceSelectOption => ({
-  value,
+  id,
+  value: id,
   label: `(${languageCode}) ${voiceLabel}`,
   ...restProps,
 });

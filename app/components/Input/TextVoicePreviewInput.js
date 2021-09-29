@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { injectReducer, injectSaga } from 'redux-injectors';
 
+import { themeColors } from 'theme';
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
+import {
+  allAudioPreviewSagas,
+  AudioPreviewReducer,
+  makeSelectAudioPreviewState,
+  phoneticPreviewRequest,
+  resetPhoneticPreview,
+} from 'global/reducers/audioPreview';
 import AudioWrapper from 'utils/audioWrapper';
 
 import { Input } from 'components/Input';
@@ -16,27 +25,48 @@ import Column from 'components/Column';
 import Loader from 'components/Loader';
 import { PlayStopButton } from 'components/ActionIcons';
 
-import { themeColors } from 'theme';
-
 import messages from './messages';
 
 const TextVoicePreviewInput = ({
   value,
-  onTextReady,
   placeholder,
   disabled,
   styles,
-  phoneticUrl,
   audioInstance,
-  phoneticLoading,
   isAnimationOngoing,
   boxPx,
   boxPy,
   previewButtonInsideInput,
+  audioPreviewRequest,
+  audioPreview: { phoneticUrl, phoneticLoading },
+  resetAudioPreview,
+  phoneticPreviewParams,
+  previewValidation,
 }) => {
   const { formatMessage } = useIntl();
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [previewText, setPreviewText] = useState('');
+
+  useEffect(() => {
+    resetAudioPreview();
+  }, []);
+
+  useEffect(() => {
+    if (value && previewText.length === 0) {
+      setPreviewText(value);
+    }
+  }, [value]);
+
+  useEffect(() => {
+    if (
+      previewText.length !== 0 &&
+      (!previewValidation || previewValidation())
+    ) {
+      audioPreviewRequest(previewText, phoneticPreviewParams);
+    }
+  }, [previewText, previewValidation, phoneticPreviewParams]);
+
   const audioButtonDisabled =
     disabled || phoneticUrl === null || phoneticLoading || isAnimationOngoing;
 
@@ -55,7 +85,7 @@ const TextVoicePreviewInput = ({
     audioInstance.setSrc(phoneticUrl);
   };
 
-  const saveText = (event) => onTextReady(event.target.value);
+  const saveText = (event) => setPreviewText(event.target.value);
 
   const saveTextIfEnterClicked = (event) => {
     if (event.key === 'Enter') {
@@ -126,17 +156,19 @@ const TextVoicePreviewInput = ({
 
 TextVoicePreviewInput.propTypes = {
   value: PropTypes.string,
-  onTextReady: PropTypes.func,
   placeholder: PropTypes.string,
-  phoneticUrl: PropTypes.any,
   disabled: PropTypes.bool,
   styles: PropTypes.object,
   audioInstance: PropTypes.shape(AudioWrapper),
-  phoneticLoading: PropTypes.bool,
   isAnimationOngoing: PropTypes.bool,
   boxPy: PropTypes.number,
   boxPx: PropTypes.number,
   previewButtonInsideInput: PropTypes.bool,
+  audioPreview: PropTypes.object,
+  audioPreviewRequest: PropTypes.func,
+  resetAudioPreview: PropTypes.func,
+  phoneticPreviewParams: PropTypes.object,
+  previewValidation: PropTypes.func,
 };
 
 TextVoicePreviewInput.defaultProps = {
@@ -146,8 +178,21 @@ TextVoicePreviewInput.defaultProps = {
 
 const mapStateToProps = createStructuredSelector({
   audioInstance: makeSelectAudioInstance(),
+  audioPreview: makeSelectAudioPreviewState(),
 });
 
-const withConnect = connect(mapStateToProps);
+const mapDispatchToProps = {
+  audioPreviewRequest: phoneticPreviewRequest,
+  resetAudioPreview: resetPhoneticPreview,
+};
 
-export default compose(withConnect)(TextVoicePreviewInput);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(
+  injectReducer({ key: 'audioPreview', reducer: AudioPreviewReducer }),
+  injectSaga({
+    key: 'audioPreview',
+    saga: allAudioPreviewSagas,
+  }),
+  withConnect,
+)(TextVoicePreviewInput);

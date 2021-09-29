@@ -4,6 +4,8 @@ import { useStoreState, useZoomPanHelper } from 'react-flow-renderer';
 import { FileDownloaderFactory } from 'utils/fileDownloader';
 import { HTMLToFileConverterFactory } from 'utils/htmlToImg';
 
+import { colors } from 'theme';
+
 import {
   DIVIDER_CLASSNAME,
   INITIAL_DOWNLOAD_PROGRESS_STATE,
@@ -109,7 +111,7 @@ export const useDownloadSessionMap = (): DownloadSessionMap => {
     return htmlToImageConverter.convert(map, {
       width,
       height,
-      backgroundColor: withBackground ? 'white' : 'transparent',
+      backgroundColor: withBackground ? colors.zirkon : 'transparent',
       filter: (node) =>
         !node.classList?.contains(SHOW_DETAILS_CLASSNAME) &&
         !node.classList?.contains(DIVIDER_CLASSNAME),

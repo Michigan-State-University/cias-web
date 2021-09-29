@@ -4,25 +4,14 @@
  *
  */
 
-import React, { ElementType, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import { compose } from 'redux';
-import { injectReducer, injectSaga } from 'redux-injectors';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 
 import useGet from 'utils/useGet';
 import {
   voiceByGoogleLanguageIdSelectFormatter,
   VoiceSelectOption,
 } from 'utils/formatters';
-import {
-  allAudioPreviewSagas,
-  AudioPreviewReducer,
-  makeSelectAudioPreviewState,
-  phoneticPreviewRequest,
-  resetPhoneticPreview,
-} from 'global/reducers/audioPreview';
 import { Voice, VoiceDTO } from 'global/types/voice';
 import { ApiData } from 'global/types/api';
 
@@ -43,23 +32,14 @@ type Props = {
   googleLanguageId?: string;
   voice: Nullable<VoiceSelectOption>;
   onVoiceChange: (voice: VoiceSelectOption) => void;
-  audioPreviewRequest: typeof phoneticPreviewRequest;
-  // @ts-ignore
-  audioPreview;
-  resetAudioPreview: typeof resetPhoneticPreview;
 };
 
 const TranslateVoiceSettings = ({
   googleLanguageId,
   voice,
   onVoiceChange,
-  audioPreviewRequest,
-  audioPreview: { phoneticUrl, phoneticLoading },
-  resetAudioPreview,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
-
-  const [previewText, setPreviewText] = useState('');
 
   const { data, isFetching, error } = useGet<ApiData<VoiceDTO>, Voice[]>(
     `/v1/google/languages/${googleLanguageId}/voices`,
@@ -75,22 +55,7 @@ const TranslateVoiceSettings = ({
     onVoiceChange(voiceOptions[0]);
   }, [voiceOptions]);
 
-  useEffect(() => {
-    resetAudioPreview();
-  }, []);
-
-  const loadPreview = () => {
-    if (previewText.length !== 0 && voice && voice.value) {
-      audioPreviewRequest(previewText, {
-        google_tts_voice_id: voice.id,
-      });
-    }
-  };
-
-  useEffect(() => {
-    loadPreview();
-  }, [previewText, voice]);
-
+  const voicePreviewValidation = () => voice && voice.id !== null;
   const renderVoiceSettings = () => (
     <Row align="end" gap={40}>
       <Column>
@@ -110,15 +75,13 @@ const TranslateVoiceSettings = ({
       </Column>
       <Column>
         <TextVoicePreviewInput
-          // @ts-ignore
           boxPx={0}
           boxPy={0}
-          phoneticUrl={phoneticUrl}
-          phoneticLoading={phoneticLoading}
           placeholder={formatMessage(messages.testVoice)}
-          onTextReady={setPreviewText}
           styles={{ height: 45, width: '100%', pr: 42 }}
           previewButtonInsideInput
+          phoneticPreviewParams={{ google_tts_voice_id: voice?.id }}
+          previewValidation={voicePreviewValidation}
         />
       </Column>
     </Row>
@@ -146,22 +109,4 @@ const TranslateVoiceSettings = ({
   );
 };
 
-const mapDispatchToProps = {
-  audioPreviewRequest: phoneticPreviewRequest,
-  resetAudioPreview: resetPhoneticPreview,
-};
-
-const mapStateToProps = createStructuredSelector({
-  audioPreview: makeSelectAudioPreviewState(),
-});
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-export default compose<ElementType>(
-  injectReducer({ key: 'audioPreview', reducer: AudioPreviewReducer }),
-  injectSaga({
-    key: 'audioPreview',
-    saga: allAudioPreviewSagas,
-  }),
-  withConnect,
-)(TranslateVoiceSettings);
+export default TranslateVoiceSettings;

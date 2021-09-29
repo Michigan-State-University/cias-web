@@ -3,15 +3,20 @@ import { useIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { useInjectSaga } from 'redux-injectors';
 import dayjs from 'dayjs';
+import { createStructuredSelector } from 'reselect';
 
 import { colors, themeColors } from 'theme';
 import { jsonApiToArray } from 'utils/jsonApiMapper';
-import useDidUpdateEffect from 'utils/useDidUpdateEffect';
+import { voiceDataParser } from 'global/parsers';
+import { voiceByGoogleLanguageIdSelectFormatter } from 'utils/formatters';
 import {
   bulkEditSessionRequest,
   bulkEditSession,
+  editSessionRequest,
 } from 'global/reducers/session';
 import { CatSessionDto } from 'models/Session/SessionDto';
+import { makeSelectIntervention } from 'global/reducers/intervention';
+import { InterventionDto } from 'models/Intervention/InterventionDto';
 
 import Box from 'components/Box';
 import Text from 'components/Text';
@@ -21,21 +26,26 @@ import { SelectOption } from 'components/Select/types';
 import ApiSelect from 'components/Select/ApiSelect';
 import Circle from 'components/Circle';
 import StyledInput from 'components/Input/StyledInput';
-import { catMhVoiceDataParser } from 'global/parsers';
 import GhostLink from 'components/GhostLink';
-import messages from './messages';
+
 import CatMhTests from '../../components/CatMhTests';
+import NarratorConflictModal from '../../components/NarratorConflictModal';
+import messages from './messages';
 
 type EditCatSessionProps = {
   session: CatSessionDto;
   editingPossible: boolean;
   editSession: any;
+  editSessionSetting: any;
+  intervention: InterventionDto;
 };
 
 const EditCatSession = ({
   session,
   editingPossible,
   editSession,
+  editSessionSetting,
+  intervention,
 }: EditCatSessionProps): JSX.Element => {
   const {
     variable,
@@ -45,6 +55,9 @@ const EditCatSession = ({
     googleTtsVoice,
     catMhTestTypes,
     createdAt,
+    settings: {
+      narrator: { voice },
+    },
   } = session;
   useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
   const { formatMessage, formatDate } = useIntl();
@@ -65,25 +78,27 @@ const EditCatSession = ({
     updateCatSession('catTests', testIds);
 
   useEffect(() => {
-    const params = new URLSearchParams();
-    params.append('language_id', `${catMhLanguageId}`);
-    params.append('population_id', `${catMhPopulationId}`);
-    params.append('time_frame_id', `${catMhTimeFrameId}`);
+    if (catMhLanguageId && catMhPopulationId && catMhTimeFrameId) {
+      const params = new URLSearchParams();
+      params.append('language_id', `${catMhLanguageId}`);
+      params.append('population_id', `${catMhPopulationId}`);
+      params.append('time_frame_id', `${catMhTimeFrameId}`);
 
-    setTestsUrl(`/v1/cat_mh/available_test_types?${params.toString()}`);
+      setTestsUrl(`/v1/cat_mh/available_test_types?${params.toString()}`);
+    }
     if (!initialFetch) {
-      onSelectTests([]);
+      if (catMhTestTypes.length > 0) {
+        onSelectTests([]);
+      }
     } else {
       setInitialFetch(false);
     }
   }, [catMhLanguageId, catMhPopulationId, catMhTimeFrameId]);
 
-  useDidUpdateEffect(() => {
-    updateCatSession('googleTtsVoiceId', null);
-  }, [catMhLanguageId]);
-
   useEffect(() => {
-    setLanguagesUrl(`/v1/cat_mh/languages/${catMhLanguageId}/voices`);
+    if (catMhLanguageId) {
+      setLanguagesUrl(`/v1/cat_mh/languages/${catMhLanguageId}/voices`);
+    }
   }, [catMhLanguageId]);
 
   const wrapWithLabel = (label: string, children: JSX.Element) => (
@@ -101,8 +116,33 @@ const EditCatSession = ({
       updateCatSession(key, selectedOption.value);
     };
 
+  const onNarratorVoiceDisable = () =>
+    editSessionSetting({ path: `settings.narrator.voice`, value: false }, [
+      'settings',
+    ]);
+
+  const selectModalVoiceAndLanguage = (languageId: string, voiceId: string) => {
+    editSession({
+      googleTtsVoiceId: voiceId,
+      catMhLanguageId: languageId,
+    });
+  };
+
+  const onLanguageUpdate = (selectedOption: SelectOption<string>) => {
+    updateCatSession('googleTtsVoiceId', null);
+    onApiSelectUpdate('catMhLanguageId')(selectedOption);
+  };
+
   return (
     <Box display="flex" justify="center" align="center">
+      {catMhLanguageId === null && voice === true && (
+        <NarratorConflictModal
+          onNarratorVoiceDisable={onNarratorVoiceDisable}
+          wrapWithLabel={wrapWithLabel}
+          selectModalVoiceAndLanguage={selectModalVoiceAndLanguage}
+          languageName={intervention?.languageName || ''}
+        />
+      )}
       <Box
         padding={30}
         mt={25}
@@ -143,7 +183,7 @@ const EditCatSession = ({
               url="/v1/cat_mh/languages"
               dataParser={(data: any) => jsonApiToArray(data, 'language')}
               selectProps={{
-                onChange: onApiSelectUpdate('catMhLanguageId'),
+                onChange: onLanguageUpdate,
                 isDisabled: !editingPossible,
               }}
               optionsFormatter={({ id, name }: any) => ({
@@ -189,15 +229,12 @@ const EditCatSession = ({
             formatMessage(messages.narratorVoiceType),
             <ApiSelect
               url={languagesUrl}
-              dataParser={(data: any) => catMhVoiceDataParser(data)}
+              dataParser={voiceDataParser}
               selectProps={{
                 onChange: onApiSelectUpdate('googleTtsVoiceId'),
                 isDisabled: !editingPossible || !languagesUrl,
               }}
-              optionsFormatter={({ id, languageCode, voiceLabel }: any) => ({
-                value: id,
-                label: `${languageCode} ${voiceLabel}`,
-              })}
+              optionsFormatter={voiceByGoogleLanguageIdSelectFormatter}
               selectedValue={`${googleTtsVoice?.id}`}
             />,
           )}
@@ -250,10 +287,15 @@ const EditCatSession = ({
   );
 };
 
+const mapStateToProps = createStructuredSelector({
+  intervention: makeSelectIntervention(),
+});
+
 const mapDispatchToProps = {
   editSession: bulkEditSessionRequest,
+  editSessionSetting: editSessionRequest,
 };
 
-const withConnect = connect(null, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default withConnect(EditCatSession);

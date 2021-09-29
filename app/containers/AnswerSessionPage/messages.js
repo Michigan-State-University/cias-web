@@ -11,6 +11,7 @@ import {
   ZERO_DIVISION_FORMULA_ERROR,
   NO_BRANCHING_TARGET,
   RANDOMIZATION_MISS_MATCH,
+  FORBIDDEN_CAT_MH_BRANCHING,
 } from 'containers/AnswerSessionPage/constants';
 
 export const scope = 'app.containers.AnswerSessionPage';
@@ -88,6 +89,10 @@ export default defineMessages({
   [RANDOMIZATION_MISS_MATCH]: {
     id: `${scope}.${RANDOMIZATION_MISS_MATCH}`,
     defaultMessage: `Randomization was setup incorrectly and you were transitioned to next screen`,
+  },
+  [FORBIDDEN_CAT_MH_BRANCHING]: {
+    id: `${scope}.${FORBIDDEN_CAT_MH_BRANCHING}`,
+    defaultMessage: `There was a branching to CAT-MH session that is not available during preview. Participants will be branched correctly when filling out published intervention`,
   },
   emailValidationError: {
     id: `${scope}.emailValidationError`,
