@@ -104,6 +104,7 @@ export const layoutElements = (
   panAreaWidth: number;
   panAreaHeight: number;
 } => {
+  console.log('hello from layout elements');
   const dagreGraph = createDagreGraphWithElements(
     elements,
     renderedNodes,

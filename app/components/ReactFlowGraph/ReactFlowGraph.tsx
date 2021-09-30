@@ -102,7 +102,7 @@ const ReactFlowGraph = ({
             nodeTopMargin,
           )
         : { layoutedElements: elements, panAreaWidth: 0, panAreaHeight: 0 },
-    [mapLoaded, elements],
+    [mapLoaded, elements, getNodeVerticalMargin, nodeTopMargin],
   );
 
   const layoutedElementsWithPrioritizedEdges = useMemo(

@@ -31,13 +31,16 @@ import {
   createMapNodes,
   createMapEdges,
   getNodeVerticalMargin,
+  collapseQuestionsWithoutBranching,
 } from './utils';
 import SessionMapSessionNode from './SessionMapSessionNode';
 import SessionMapQuestionNode from './SessionMapQuestionNode';
+import SessionMapCollapseNode from './SessionMapCollapseNode';
 
 const nodeTypes: NodeTypesType = {
   [SessionMapNodeType.QUESTION]: SessionMapQuestionNode,
   [SessionMapNodeType.SESSION]: SessionMapSessionNode,
+  [SessionMapNodeType.COLLAPSE]: SessionMapCollapseNode,
 };
 
 type Props = {
@@ -147,12 +150,11 @@ const SessionMap = ({
 
   const elements = useMemo(() => {
     if (showWithBranchingOnly) {
-      const filteredNodes = nodes; // filter out nodes without branching
-      return [...filteredNodes, ...edges];
+      return collapseQuestionsWithoutBranching(nodes, edges);
     }
 
     return [...nodes, ...edges];
-  }, [nodes, edges, showWithBranchingOnly]);
+  }, [showWithBranchingOnly, nodes, edges]);
 
   const sessionMapGraphProps: ReactFlowGraphProps = {
     defaultMinZoom,

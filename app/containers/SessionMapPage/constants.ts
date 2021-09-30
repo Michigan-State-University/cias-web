@@ -12,9 +12,6 @@ export const defaultZoom = 1;
 
 export const detailedInfoZoomThreshold = 0.75;
 
-export const sessionNodeVerticalMargin = 0;
-export const questionNodeVerticalMargin = 210;
-
 export const nodeWidth = 210;
 export const questionNodeLabelOffset = 32;
 
@@ -34,7 +31,14 @@ export const sessionMapColors = {
 export enum SessionMapNodeType {
   QUESTION = 'question',
   SESSION = 'session',
+  COLLAPSE = 'collapse',
 }
+
+export const nodesVerticalMargins = {
+  [SessionMapNodeType.QUESTION.valueOf()]: 210,
+  [SessionMapNodeType.SESSION.valueOf()]: 0,
+  [SessionMapNodeType.COLLAPSE.valueOf()]: 0,
+};
 
 export enum SessionMapHeadType {
   BASE = 'session-map-base',

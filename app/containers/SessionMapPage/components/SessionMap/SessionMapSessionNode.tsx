@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import Box from 'components/Box';
 import { ReactFlowNodeHandles } from 'components/ReactFlowGraph';
 
-import { SessionTileData } from '../../types';
+import { SessionNodeData } from '../../types';
 import { nodeWidth, sessionMapColors } from '../../constants';
 import messages from '../../messages';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
@@ -26,7 +26,7 @@ const SessionMapSessionNode = ({
     onSelectedChange,
     selectableOnClick,
   },
-}: NodeProps<SessionTileData>): JSX.Element => {
+}: NodeProps<SessionNodeData>): JSX.Element => {
   const { formatMessage } = useIntl();
 
   const nodeRef = useRef<HTMLElement>(null);
@@ -69,7 +69,7 @@ const SessionMapSessionNode = ({
         )}
       </Box>
       <ReactFlowNodeHandles
-        nodeId={`session-${sessionNo}`}
+        nodeId={id}
         sourceHandleColor={sessionMapColors.edgeBase}
       />
     </>

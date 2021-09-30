@@ -12,7 +12,7 @@ import Row from 'components/Row';
 import { ReactFlowNodeHandles } from 'components/ReactFlowGraph';
 
 import messages from '../../messages';
-import { QuestionTileData } from '../../types';
+import { QuestionNodeData } from '../../types';
 import {
   nodeWidth,
   questionNodeLabelOffset,
@@ -36,12 +36,12 @@ const SessionMapQuestionNode = ({
     showDetails,
     onShowDetailsChange,
     showDetailedInfo,
-    index,
+    questionIndex,
     selected,
     onSelectedChange,
     selectableOnClick,
   },
-}: NodeProps<QuestionTileData>): JSX.Element => {
+}: NodeProps<QuestionNodeData>): JSX.Element => {
   const { formatMessage } = useIntl();
 
   const { type } = question;
@@ -62,7 +62,7 @@ const SessionMapQuestionNode = ({
   const handleClick = () =>
     selectableOnClick && onSelectedChange(!selected, id);
 
-  const screenNo = index + 1;
+  const screenNo = questionIndex + 1;
 
   const thickBorder = showDetails || selected;
 
