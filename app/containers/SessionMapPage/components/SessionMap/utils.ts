@@ -216,6 +216,7 @@ const createMapEdgesFromBranching = (
   existingEdges: Edge[],
   selectedQuestionsIds: string[],
   edgeSharedAttributesGetter: EdgeSharedAttributesGetter,
+  sessions: SessionDto[],
 ): Edge[] => {
   const edges: Edge[] = cloneDeep(existingEdges);
   // check every target of every pattern of every question
@@ -227,6 +228,13 @@ const createMapEdgesFromBranching = (
         if (
           type.startsWith('Question') &&
           findQuestionPosition(questions, targetId) < questionIndex
+        ) {
+          return;
+        }
+
+        if (
+          type.startsWith('Session') &&
+          !sessions.find((session) => session.id === targetId)
         ) {
           return;
         }
@@ -337,6 +345,7 @@ export const createMapEdges = (
   questions: Question[],
   selectedNodesIds: string[],
   nodesSelectableOnClick: boolean,
+  sessions: SessionDto[],
 ): Edge[] => {
   const edgeSharedAttributesGetter: EdgeSharedAttributesGetter =
     nodesSelectableOnClick
@@ -353,6 +362,7 @@ export const createMapEdges = (
     edgesFromNextQuestions,
     selectedNodesIds,
     edgeSharedAttributesGetter,
+    sessions,
   );
 
   return nodesSelectableOnClick

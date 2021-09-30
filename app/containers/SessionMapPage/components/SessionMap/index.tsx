@@ -126,7 +126,12 @@ const SessionMap = ({
         handleSelectedChange,
         nodesSelectableOnClick,
       ),
-      createMapEdges(sortedQuestions, selectedNodesIds, nodesSelectableOnClick),
+      createMapEdges(
+        sortedQuestions,
+        selectedNodesIds,
+        nodesSelectableOnClick,
+        sessions,
+      ),
     ],
     [
       sortedQuestions,
