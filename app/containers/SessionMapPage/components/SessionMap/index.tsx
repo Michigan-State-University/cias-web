@@ -30,7 +30,6 @@ import {
   sortQuestionsByGroupAndPosition,
   createMapNodes,
   createMapEdges,
-  getNodeVerticalMargin,
   collapseQuestionsWithoutBranching,
 } from './utils';
 import SessionMapSessionNode from './SessionMapSessionNode';
@@ -166,7 +165,6 @@ const SessionMap = ({
     onMinZoomChange,
     elements,
     nodeTypes,
-    getNodeVerticalMargin,
     nodeTopMargin: questionNodeLabelOffset,
     pickedNodeId: showDetailsId,
     nodesDraggable: false,

@@ -11,13 +11,13 @@ import { ReportTemplate } from 'global/types/reportTemplate';
 import { QuestionTypes } from 'models/Question/QuestionDto';
 
 import Comment from 'components/Text/Comment';
+import Column from 'components/Column';
 
 import messages from './messages';
 import { formatThirdPartyReportQuestionData } from './utils';
 import { ChipsContainer } from './styled';
 import VariableAndScoreChip from './VariableAndScoreChip';
 import EmailAndReportTemplateChip from './EmailAndReportTemplateChip';
-import Column from '../../../../../components/Column';
 
 type Props = {
   question: Question;

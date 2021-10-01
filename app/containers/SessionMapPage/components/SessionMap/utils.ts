@@ -22,7 +22,6 @@ import {
   highlightedEdgeSharedAttributes,
   SessionMapHeadType,
   SessionMapNodeType,
-  nodesVerticalMargins,
 } from '../../constants';
 
 export const sortQuestionsByGroupAndPosition = (
@@ -369,9 +368,6 @@ export const createMapEdges = (
     ? removeHighlightIfDirectConnectionExists(allEdges)
     : allEdges;
 };
-
-export const getNodeVerticalMargin = (nodeType?: string): number =>
-  nodeType ? nodesVerticalMargins[nodeType] : 0;
 
 export const getNodeOpacity = (
   selectableOnClick: boolean,

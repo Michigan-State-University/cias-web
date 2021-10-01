@@ -14,18 +14,16 @@ import { isNanOrInfinite } from 'utils/mathUtils';
 const calculateNodeDimensionsForLayout = (
   node: Node,
   renderedNodes: Node[],
-  getNodeVerticalMargin: (type?: string) => number,
 ): { width: number; height: number } => {
   const renderedNode = renderedNodes.find(({ id }) => id === node.id);
   if (renderedNode) {
     const {
       __rf: { width, height },
-      type,
     } = renderedNode;
 
     return {
       width,
-      height: height + 2 * getNodeVerticalMargin(type),
+      height,
     };
   }
   return { width: 0, height: 0 };
@@ -34,7 +32,6 @@ const calculateNodeDimensionsForLayout = (
 const createDagreGraphWithElements = (
   elements: FlowElement[],
   renderedNodes: Node[],
-  getNodeVerticalMargin: (type?: string) => number,
 ): graphlib.Graph => {
   const dagreGraph = new graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -44,7 +41,6 @@ const createDagreGraphWithElements = (
       const nodeDimensions = calculateNodeDimensionsForLayout(
         el,
         renderedNodes,
-        getNodeVerticalMargin,
       );
       dagreGraph.setNode(el.id, nodeDimensions);
     } else {
@@ -58,7 +54,6 @@ const getLayoutedElementsAndPanAreaDimensions = (
   elements: FlowElement[],
   dagreGraph: graphlib.Graph,
   nodeTopMargin: number,
-  getNodeVerticalMargin: (type?: string) => number,
 ): {
   layoutedElements: FlowElement[];
   panAreaWidth: number;
@@ -69,8 +64,7 @@ const getLayoutedElementsAndPanAreaDimensions = (
   const layoutedElements = elements.map((el) => {
     if (isEdge(el)) return el;
 
-    const node = dagreGraph.node(el.id);
-    const { x, y, width, height } = node;
+    const { x, y, width, height } = dagreGraph.node(el.id);
     // shift the dagre node position (anchor=center center) to the top left
     // so it matches the react flow node anchor point (top left).
     const position = {
@@ -79,10 +73,7 @@ const getLayoutedElementsAndPanAreaDimensions = (
     };
 
     panAreaWidth = Math.max(panAreaWidth, position.x + width);
-    panAreaHeight = Math.max(
-      panAreaHeight,
-      position.y + height - 2 * getNodeVerticalMargin(el.type),
-    );
+    panAreaHeight = Math.max(panAreaHeight, position.y + height);
 
     return {
       ...el,
@@ -97,19 +88,13 @@ const getLayoutedElementsAndPanAreaDimensions = (
 export const layoutElements = (
   elements: FlowElement[],
   renderedNodes: Node[],
-  getNodeVerticalMargin: (type?: string) => number,
   nodeTopMargin: number,
 ): {
   layoutedElements: FlowElement[];
   panAreaWidth: number;
   panAreaHeight: number;
 } => {
-  console.log('hello from layout elements');
-  const dagreGraph = createDagreGraphWithElements(
-    elements,
-    renderedNodes,
-    getNodeVerticalMargin,
-  );
+  const dagreGraph = createDagreGraphWithElements(elements, renderedNodes);
 
   layout(dagreGraph);
 
@@ -117,7 +102,6 @@ export const layoutElements = (
     elements,
     dagreGraph,
     nodeTopMargin,
-    getNodeVerticalMargin,
   );
 };
 
