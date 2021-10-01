@@ -66,4 +66,17 @@ export default defineMessages({
     id: `${scope}.answersErrorToastMessage`,
     defaultMessage: 'Could not fetch preview session answers.',
   },
+  collapseNodeTitle: {
+    id: `${scope}.collapseNodeTitle`,
+    defaultMessage: 'Screens without branching',
+  },
+  collapseNodeBody: {
+    id: `${scope}.collapseNodeBody`,
+    defaultMessage:
+      'Screens from {firstCollapsedScreenNo} {to} {lastCollapsedScreenNo} are excluding branching, so they are hidden now. Uncheck the checkbox above the session map to see hidden screens.',
+  },
+  to: {
+    id: `${scope}.to`,
+    defaultMessage: 'to',
+  },
 });
