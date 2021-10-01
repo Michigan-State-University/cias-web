@@ -428,8 +428,6 @@ export const collapseQuestionsWithoutBranching = (
     }
   });
 
-  console.table(questionNodesWithoutBranchingPositions);
-
   let collapseGroup: number[] = [];
 
   questionNodesWithoutBranchingPositions.forEach((position, index) => {
@@ -438,18 +436,9 @@ export const collapseQuestionsWithoutBranching = (
       return;
     }
 
-    const isLastQuestionWithoutBranching =
-      index === questionNodesWithoutBranchingPositions.length - 1;
-
-    if (
-      isLastQuestionWithoutBranching &&
-      questionNodesWithoutBranchingPositions[index - 1] === position - 1
-    ) {
+    if (questionNodesWithoutBranchingPositions[index - 1] === position - 1) {
       collapseGroup.push(position);
     }
-
-    console.log(collapseGroup);
-    console.log(nodesCopy);
 
     if (collapseGroup.length > 1) {
       const firstCollapsedNodePosition = collapseGroup[0];
@@ -473,9 +462,13 @@ export const collapseQuestionsWithoutBranching = (
         },
       };
 
-      // TODO MORE THAN ONE COLLAPSE GROUPS - CHANGED POSITIONS
       // replace question nodes with a collapse node
-      nodesCopy.splice(collapseGroup[0], collapseGroup.length, collapseNode);
+      const nodesCountDifference = nodes.length - nodesCopy.length;
+      nodesCopy.splice(
+        firstCollapsedNodePosition - nodesCountDifference,
+        collapseGroup.length,
+        collapseNode,
+      );
 
       const collapsedNodesIds = collapseGroup.map(
         (collapsedNodePosition) => nodes[collapsedNodePosition].id,
@@ -493,7 +486,6 @@ export const collapseQuestionsWithoutBranching = (
         }
 
         if (edge.source === lastCollapsedNode.id) {
-          console.log(collapseNodeId);
           return [
             {
               ...edge,
@@ -509,14 +501,10 @@ export const collapseQuestionsWithoutBranching = (
 
         return [edge];
       });
-
-      console.log('midfied edges', edgesCopy);
     }
 
     collapseGroup = [];
   });
-
-  console.log('after collapse', nodesCopy);
 
   return [...nodesCopy, ...edgesCopy];
 };
