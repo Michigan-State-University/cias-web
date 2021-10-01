@@ -155,6 +155,16 @@ const SessionMap = ({
     return [...nodes, ...edges];
   }, [showWithBranchingOnly, nodes, edges]);
 
+  const [shouldLayout, setShouldLayout] = useState(false);
+
+  useEffect(() => {
+    setShouldLayout(true);
+  }, [showWithBranchingOnly]);
+
+  useEffect(() => {
+    if (shouldLayout) setShouldLayout(false);
+  }, [shouldLayout]);
+
   const sessionMapGraphProps: ReactFlowGraphProps = {
     defaultMinZoom,
     defaultMaxZoom,
@@ -172,6 +182,7 @@ const SessionMap = ({
     scrollbarsThickness,
     scrollbarsMargin,
     edgePriorities,
+    shouldLayout,
   };
 
   return (

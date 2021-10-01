@@ -41,6 +41,7 @@ export interface ReactFlowGraphProps extends ReactFlowProps {
   scrollbarsMargin?: number;
   edgePriorities?: Map<string, number>;
   children?: React.ReactNode | React.ReactNode[];
+  shouldLayout: boolean;
 }
 
 const ReactFlowGraph = ({
@@ -59,6 +60,7 @@ const ReactFlowGraph = ({
   scrollbarsMargin = 0,
   edgePriorities,
   children,
+  shouldLayout,
   ...restReactFlowProps
 }: ReactFlowGraphProps): JSX.Element => {
   const { zoomTo, transform } = useZoomPanHelper();
@@ -95,7 +97,7 @@ const ReactFlowGraph = ({
       mapLoaded
         ? layoutElements(elements, renderedNodes, nodeTopMargin)
         : { layoutedElements: elements, panAreaWidth: 0, panAreaHeight: 0 },
-    [mapLoaded, elements, nodeTopMargin],
+    [mapLoaded, elements, nodeTopMargin, shouldLayout],
   );
 
   const layoutedElementsWithPrioritizedEdges = useMemo(
