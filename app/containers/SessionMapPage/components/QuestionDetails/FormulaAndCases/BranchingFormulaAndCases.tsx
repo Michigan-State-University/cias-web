@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
@@ -21,9 +21,6 @@ import Formula from './Formula';
 import CaseMatch from './CaseMatch';
 import { highlightTargetText } from './utils';
 
-const getCaseTargetElementId = (index: number): string =>
-  `session-map-question-details-branching-target-${index}`;
-
 type Props = {
   question: Question;
   sessions: SessionDto[];
@@ -31,20 +28,39 @@ type Props = {
 };
 
 const BranchingFormulaAndCases = ({
-  question: { formula },
+  question: { id, formula },
   sessions,
   questions,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
+  const getCaseSubtargetElementId = useCallback(
+    (targetIndex: number, subtargetIndex: number): string =>
+      `session-map-question-details-branching-subtarget-${id}-${targetIndex}-${subtargetIndex}`,
+    [id],
+  );
+
+  const getCaseTargetElementId = useCallback(
+    (targetIndex: number): string =>
+      `session-map-question-details-branching-target-${id}-${targetIndex}`,
+    [id],
+  );
+
+  const getCaseMatchElementId = useCallback(
+    (matchIndex: number): string =>
+      `session-map-question-details-branching-match-${id}-${matchIndex}`,
+    [id],
+  );
+
   const renderSubtargets = (
     subtargets: FormulaPatternTarget[],
     targetIndex: number,
   ): JSX.Element[] =>
-    subtargets.map(({ id, probability, type }, subtargetIndex) => {
+    subtargets.map(({ id: targetId, probability, type }, subtargetIndex) => {
       const subtargetName = type.startsWith('Session')
-        ? sessions.find(({ id: sessionId }) => sessionId === id)?.name
-        : questions.find(({ id: questionId }) => questionId === id)?.subtitle;
+        ? sessions.find(({ id: sessionId }) => sessionId === targetId)?.name
+        : questions.find(({ id: questionId }) => questionId === targetId)
+            ?.subtitle;
 
       const displayedName = isNullOrUndefined(subtargetName)
         ? ''
@@ -54,7 +70,7 @@ const BranchingFormulaAndCases = ({
         <Text
           color={colors.manatee}
           fontWeight="bold"
-          key={`session-map-question-details-branching-target-${targetIndex}-${subtargetIndex}`}
+          key={getCaseSubtargetElementId(targetIndex, subtargetIndex)}
           mt={subtargetIndex !== 0 ? 15 : 0}
         >
           <Markup
@@ -79,8 +95,8 @@ const BranchingFormulaAndCases = ({
           {formula?.patterns?.map(({ match }, index) => (
             <CaseMatch
               match={match}
+              key={getCaseMatchElementId(index)}
               caseTargetElementId={getCaseTargetElementId(index)}
-              key={`session-map-question-details-branching-match-${index}`}
             />
           ))}
         </Column>

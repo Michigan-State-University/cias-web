@@ -2,6 +2,8 @@ import { ConnectionLineType, Edge } from 'react-flow-renderer';
 
 import { colors } from 'theme';
 
+import { QuestionTypes } from 'models/Question/QuestionDto';
+
 import { DownloadProgressState } from './types';
 
 export const defaultMinZoom = 0.5;
@@ -9,9 +11,6 @@ export const defaultMaxZoom = 2;
 export const defaultZoom = 1;
 
 export const detailedInfoZoomThreshold = 0.75;
-
-export const sessionNodesVerticalDistanceRatio = 1;
-export const questionNodesVerticalDistanceRatio = 4;
 
 export const nodeWidth = 210;
 export const questionNodeLabelOffset = 32;
@@ -105,3 +104,16 @@ export const INITIAL_DOWNLOAD_PROGRESS_STATE: DownloadProgressState = {
   isReadyToGenerate: false,
   isReadyToRestore: false,
 };
+
+export const questionTypesWithoutVariables = [
+  QuestionTypes.INFORMATION,
+  QuestionTypes.FINISH,
+  QuestionTypes.FEEDBACK,
+];
+
+export const questionTypesWithoutAnswers = [
+  QuestionTypes.INFORMATION,
+  QuestionTypes.FINISH,
+  QuestionTypes.FEEDBACK,
+  QuestionTypes.EXTERNAL_LINK,
+];

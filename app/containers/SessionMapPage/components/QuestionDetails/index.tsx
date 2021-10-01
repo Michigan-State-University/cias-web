@@ -7,6 +7,7 @@ import { ReportTemplate } from 'global/types/reportTemplate';
 
 import { QuestionTypes } from 'models/Question/QuestionDto';
 import { SessionDto } from 'models/Session/SessionDto';
+import { Answer } from 'models/Answer';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
@@ -21,22 +22,20 @@ import Row from 'components/Row';
 import QuestionTypeIndicator from 'components/QuestionTypeIndicator';
 import Button from 'components/Button';
 
+import { questionTypesWithoutVariables } from '../../constants';
 import messages from './messages';
 import VariablesAndScores from './VariablesAndScores';
 import {
-  FeedbackFormulaAndCases,
   BranchingFormulaAndCases,
+  FeedbackFormulaAndCases,
 } from './FormulaAndCases';
-
-const typesWithoutVariablesAndScoresSection = [
-  QuestionTypes.INFORMATION,
-  QuestionTypes.FINISH,
-  QuestionTypes.FEEDBACK,
-];
+import UserAnswer from './UserAnswer';
 
 type Props = {
+  shownQuestion: Question;
+  isUserSessionQuestion: boolean; // was this question shown to the user during preview session?
+  questionAnswer: Nullable<Answer>;
   questionGroup: QuestionGroup;
-  question: Question;
   reportTemplates: ReportTemplate[];
   sessions: SessionDto[];
   questions: Question[];
@@ -44,15 +43,17 @@ type Props = {
 };
 
 const SessionMapQuestionDetails = ({
+  shownQuestion,
+  isUserSessionQuestion,
+  questionAnswer,
   questionGroup,
-  question,
   reportTemplates,
   sessions,
   questions,
   onGoToScreenClick,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
-  const { subtitle, type } = question;
+  const { subtitle, type } = shownQuestion;
 
   return (
     <>
@@ -86,23 +87,26 @@ const SessionMapQuestionDetails = ({
               />
             </Column>
           </Row>
-          {!typesWithoutVariablesAndScoresSection.includes(type) && (
+          {!questionTypesWithoutVariables.includes(type) && (
             <VariablesAndScores
-              question={question}
+              question={shownQuestion}
               reportTemplates={reportTemplates}
             />
           )}
           {type === QuestionTypes.FEEDBACK && (
             <FeedbackFormulaAndCases
-              question={question as Question<FeedbackQuestionPayload>}
+              question={shownQuestion as Question<FeedbackQuestionPayload>}
             />
           )}
           {type !== QuestionTypes.FINISH && (
             <BranchingFormulaAndCases
-              question={question}
+              question={shownQuestion}
               sessions={sessions}
               questions={questions}
             />
+          )}
+          {isUserSessionQuestion && (
+            <UserAnswer question={shownQuestion} answer={questionAnswer} />
           )}
         </div>
         <div>
