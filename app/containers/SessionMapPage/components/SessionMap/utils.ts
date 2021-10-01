@@ -228,6 +228,7 @@ const createMapEdgesFromBranching = (
           type.startsWith('Question') &&
           findQuestionPosition(questions, targetId) < questionIndex
         ) {
+          // does not create an edge if target question does not exists or is a prior question
           return;
         }
 
@@ -235,6 +236,7 @@ const createMapEdgesFromBranching = (
           type.startsWith('Session') &&
           !sessions.find((session) => session.id === targetId)
         ) {
+          // does not create an edge if target session does not exists
           return;
         }
 

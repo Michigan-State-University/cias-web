@@ -54,6 +54,7 @@ type Props = {
   onMinZoomChange: (minZoom: number) => void;
   userSessionNodesIds: string[];
   showWithBranchingOnly: boolean;
+  onIsBranchingChange: (isBranching: boolean) => void;
 };
 
 const SessionMap = ({
@@ -68,6 +69,7 @@ const SessionMap = ({
   onMinZoomChange,
   userSessionNodesIds,
   showWithBranchingOnly,
+  onIsBranchingChange,
 }: Props): JSX.Element => {
   const [selectedNodesIds, setSelectedNodesIds] = useState<string[]>([]);
 
@@ -146,6 +148,15 @@ const SessionMap = ({
       nodesSelectableOnClick,
     ],
   );
+
+  const isBranching = useMemo(
+    () => edges.length !== nodes.length - 1,
+    [nodes, edges],
+  );
+
+  useEffect(() => {
+    onIsBranchingChange(isBranching);
+  }, [isBranching]);
 
   const elements = useMemo(() => {
     if (showWithBranchingOnly) {
