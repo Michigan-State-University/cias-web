@@ -59,6 +59,13 @@ const EditCatSession = ({
       narrator: { voice },
     },
   } = session;
+
+  const { firstSessionLanguage, languageName: interventionLanguage } =
+    intervention || {
+      firstSessionLanguage: undefined,
+      languageName: undefined,
+    };
+
   useInjectSaga({ saga: bulkEditSession, key: 'bulkEditSession' });
   const { formatMessage, formatDate } = useIntl();
 
@@ -140,7 +147,7 @@ const EditCatSession = ({
           onNarratorVoiceDisable={onNarratorVoiceDisable}
           wrapWithLabel={wrapWithLabel}
           selectModalVoiceAndLanguage={selectModalVoiceAndLanguage}
-          languageName={intervention?.languageName || ''}
+          languageName={firstSessionLanguage || interventionLanguage || ''}
         />
       )}
       <Box

@@ -39,7 +39,7 @@ export default defineMessages({
   narratorConflictDescription: {
     id: `${scope}.narratorConflictDescription`,
     defaultMessage:
-      'The {languageName} language chosen in the previous session is not available to the narrator. Turn off narration or change narrator language in this session.',
+      'The {languageName} language is not available to the narrator. Turn off narration or change narrator language in this session.',
   },
   narratorVoiceConflict: {
     id: `${scope}.narratorVoiceConflict`,
