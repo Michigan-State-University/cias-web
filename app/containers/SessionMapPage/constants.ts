@@ -13,6 +13,7 @@ export const defaultZoom = 1;
 export const detailedInfoZoomThreshold = 0.75;
 
 export const nodeWidth = 210;
+export const questionNodeMaxHeight = 148;
 export const questionNodeLabelOffset = 32;
 
 export const scrollbarsThickness = 5;

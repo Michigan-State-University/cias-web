@@ -16,6 +16,7 @@ import { QuestionNodeData } from '../../types';
 import {
   nodeWidth,
   questionNodeLabelOffset,
+  questionNodeMaxHeight,
   sessionMapColors,
 } from '../../constants';
 import SessionMapQuestionNodeDetailedInfo from './SessionMapQuestionNodeDetailedInfo';
@@ -56,7 +57,7 @@ const SessionMapQuestionNode = ({
   // save node height without border and padding on initial render
   const detailedInfoHeight = useMemo(
     () => nodeRef?.current?.firstElementChild?.clientHeight ?? 108,
-    [nodeRef.current],
+    [nodeRef.current?.firstElementChild?.clientHeight],
   );
 
   const handleClick = () =>
@@ -69,7 +70,7 @@ const SessionMapQuestionNode = ({
   const opacity = getNodeOpacity(selectableOnClick, selected);
 
   return (
-    <>
+    <Row align="center" height={questionNodeMaxHeight}>
       {showDetailedInfo && (
         <Row
           position="absolute" // to make edge handles stay vertically centered on the tile
@@ -89,7 +90,6 @@ const SessionMapQuestionNode = ({
         py={thickBorder ? 16 : 18}
         px={thickBorder ? 22 : 24}
         width={nodeWidth}
-        maxHeight={146} // workaround to make dagre layout question nodes with ellipsis text correctly, update if necessary
         bg={themeColors.highlight}
         border={border}
         cursor={selectableOnClick ? 'pointer' : 'default'}
@@ -118,7 +118,7 @@ const SessionMapQuestionNode = ({
           selected ? sessionMapColors.selected : sessionMapColors.edgeBase
         }
       />
-    </>
+    </Row>
   );
 };
 

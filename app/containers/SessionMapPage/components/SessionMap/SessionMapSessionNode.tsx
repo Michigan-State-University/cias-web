@@ -34,7 +34,7 @@ const SessionMapSessionNode = ({
   // save node height without border and padding on initial render
   const detailedInfoHeight = useMemo(
     () => nodeRef?.current?.firstElementChild?.clientHeight ?? 72,
-    [nodeRef.current],
+    [nodeRef.current?.firstElementChild?.clientHeight],
   );
 
   const handleClick = () =>
