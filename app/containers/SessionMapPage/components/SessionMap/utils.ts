@@ -7,6 +7,7 @@ import { Question } from 'global/types/question';
 
 import { SessionDto } from 'models/Session/SessionDto';
 import { Answer } from 'models/Answer';
+import { QuestionTypes } from 'models/Question/QuestionDto';
 
 import {
   EdgeSharedAttributesGetter,
@@ -14,14 +15,12 @@ import {
   SessionTileData,
 } from '../../types';
 import {
-  SessionMapNodeType,
-  sessionNodesVerticalDistanceRatio,
-  questionNodesVerticalDistanceRatio,
   baseEdgeSharedAttributes,
-  highlightedEdgeSharedAttributes,
   directConnectionEdgeSharedAttributes,
   grayedOutEdgeSharedAttributes,
+  highlightedEdgeSharedAttributes,
   SessionMapHeadType,
+  SessionMapNodeType,
 } from '../../constants';
 
 export const sortQuestionsByGroupAndPosition = (
@@ -359,11 +358,6 @@ export const createMapEdges = (
     : allEdges;
 };
 
-export const getNodeVerticalDistanceRatio = (nodeType?: string): number =>
-  nodeType === SessionMapNodeType.SESSION
-    ? sessionNodesVerticalDistanceRatio
-    : questionNodesVerticalDistanceRatio;
-
 export const getNodeOpacity = (
   selectableOnClick: boolean,
   selected: boolean,
@@ -374,22 +368,25 @@ export const getNodeOpacity = (
   return 0.5;
 };
 
-export const createSelectedNodesIdsFromAnswers = (
+export const createUserSessionNodesIdsFromAnswers = (
   answers: Answer[],
-  sortedQuestions: Question[],
+  questions: Question[],
 ): string[] => {
-  const selectedNodesIds = answers.map(({ questionId }) => questionId);
+  const userSessionNodesIds = answers.map(({ questionId }) => questionId);
 
   const { questionId: lastAnsweredQuestionId, nextSessionId } =
-    answers[answers.length - 1];
+    answers[answers.length - 1] ?? {};
 
   if (nextSessionId) {
-    selectedNodesIds.push(
+    userSessionNodesIds.push(
       createSessionNodeId(lastAnsweredQuestionId, nextSessionId),
     );
   } else {
-    selectedNodesIds.push(sortedQuestions[sortedQuestions.length - 1].id); // finish screen
+    const finishScreen = questions.find(
+      ({ type }) => type === QuestionTypes.FINISH,
+    );
+    if (finishScreen) userSessionNodesIds.push(finishScreen.id);
   }
 
-  return selectedNodesIds;
+  return userSessionNodesIds;
 };
