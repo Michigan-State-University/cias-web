@@ -17,7 +17,7 @@ const SessionMapCollapseNode = ({
     <>
       <Box
         width={390}
-        height={438}
+        height={324}
         px={25}
         mx={15}
         borderLeft={borderX}
