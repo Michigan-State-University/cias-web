@@ -35,12 +35,6 @@ export enum SessionMapNodeType {
   COLLAPSE = 'collapse',
 }
 
-export const nodesVerticalMargins = {
-  [SessionMapNodeType.QUESTION.valueOf()]: 210,
-  [SessionMapNodeType.SESSION.valueOf()]: 0,
-  [SessionMapNodeType.COLLAPSE.valueOf()]: 0,
-};
-
 export enum SessionMapHeadType {
   BASE = 'session-map-base',
   HIGHLIGHTED = 'session-map-highlighted',
