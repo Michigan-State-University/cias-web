@@ -1,14 +1,15 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
+import { ReportTemplate } from 'global/types/reportTemplate';
+
 import {
   GridQuestionPayload,
   Question,
   QuestionBody,
   SliderQuestionPayload,
-} from 'global/types/question';
-import { ReportTemplate } from 'global/types/reportTemplate';
-import { QuestionTypes } from 'models/Question/QuestionDto';
+  QuestionTypes,
+} from 'models/Question';
 
 import Comment from 'components/Text/Comment';
 import Column from 'components/Column';

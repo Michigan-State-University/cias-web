@@ -1,4 +1,4 @@
-import { QuestionData } from 'global/types/question';
+import { QuestionData } from 'models/Question';
 
 export const formatThirdPartyReportQuestionData = (
   questionData: QuestionData<string>[],

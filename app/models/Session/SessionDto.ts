@@ -1,20 +1,17 @@
-import { PatternDto } from 'models/Pattern/PatternDto';
+import { Formula } from '../Formula';
+import { SessionTargetType } from './SessionTargetType';
 
 export enum SessionTypes {
   CLASSIC_SESSION = 'Session::Classic',
   CAT_SESSION = 'Session::CatMh',
 }
+
 interface SessionSettingsDto {
   formula?: boolean;
   narrator: {
     voice: boolean;
     animation: boolean;
   };
-}
-
-interface FormulaDto {
-  payload: string;
-  patterns: PatternDto<SessionTypes>[];
 }
 
 enum ScheduleOptions {
@@ -51,7 +48,7 @@ export interface SessionDto {
   scheduleAt?: string;
   schedulePayload?: number;
   schedule: ScheduleOptions;
-  formula: FormulaDto;
+  formula: Formula<SessionTargetType>;
   reportTemplatesCount: number;
   type: SessionTypes;
 }

@@ -2,10 +2,13 @@ import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { QuestionGroup } from 'global/types/questionGroup';
-import { FeedbackQuestionPayload, Question } from 'global/types/question';
 import { ReportTemplate } from 'global/types/reportTemplate';
 
-import { QuestionTypes } from 'models/Question/QuestionDto';
+import {
+  QuestionTypes,
+  FeedbackQuestionPayload,
+  Question,
+} from 'models/Question';
 import { SessionDto } from 'models/Session/SessionDto';
 import { Answer } from 'models/Answer';
 

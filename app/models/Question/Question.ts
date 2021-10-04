@@ -1,4 +1,73 @@
-import { QuestionTypes } from 'models/Question/QuestionDto';
+import { SessionTargetType } from 'models/Session/SessionTargetType';
+import { Formula } from '../Formula';
+
+export enum QuestionTypes {
+  SINGLE = 'Question::Single',
+  MULTIPLE = 'Question::Multiple',
+  FREE_RESPONSE = 'Question::FreeResponse',
+  THIRD_PARTY = 'Question::ThirdParty',
+  NAME = 'Question::Name',
+  NUMBER = 'Question::Number',
+  GRID = 'Question::Grid',
+  SLIDER = 'Question::Slider',
+  INFORMATION = 'Question::Information',
+  EXTERNAL_LINK = 'Question::ExternalLink',
+  FEEDBACK = 'Question::Feedback',
+  FINISH = 'Question::Finish',
+  PHONE = 'Question::Phone',
+  DATE = 'Question::Date',
+  PARTICIPANT_REPORT = 'Question::ParticipantReport',
+  CURRENCY = 'Question::Currency',
+}
+
+export enum BlockTypes {
+  BODY_ANIMATION = 'BodyAnimation',
+  HEAD_ANIMATION = 'HeadAnimation',
+  SPEECH = 'Speech',
+  READ_QUESTION = 'ReadQuestion',
+  REFLECTION = 'Reflection',
+  REFLECTION_FORMULA = 'ReflectionFormula',
+  PAUSE = 'Pause',
+  FEEDBACK = 'Feedback',
+}
+
+// export interface Question {
+//   id: string;
+//   type: QuestionTypes;
+//   question_group_id: string;
+//   settings: {
+//     image: boolean;
+//     title: boolean;
+//     video: boolean;
+//     required: boolean;
+//     subtitle: boolean;
+//     proceed_button?: boolean;
+//     narrator_skippable: boolean;
+//   };
+//   position: number;
+//   title: string;
+//   subtitle: string;
+//   narrator: {
+//     blocks: Block[];
+//     settings: {
+//       voice: boolean;
+//       animation: boolean;
+//     };
+//   };
+//   video_url: null | string;
+//   image_url: null | string;
+//   image_alt: null | string;
+//   original_text: {
+//     title: string;
+//     subtitle: string;
+//     image_description: string;
+//   };
+//   body: any;
+//   formula: {
+//     payload: string;
+//     patterns: PatternDto<QuestionTypes | SessionTypes>[];
+//   };
+// }
 
 export interface QuestionSettings {
   image: boolean;
@@ -19,7 +88,7 @@ export interface Position {
 
 export interface NarratorBlock {
   text?: Nullable<string[]>;
-  type: string;
+  type: BlockTypes;
   action?: string;
   sha256?: string[];
   animation: string;
@@ -37,22 +106,6 @@ export interface NarratorSettings {
 export interface Narrator {
   blocks: NarratorBlock[];
   settings: NarratorSettings;
-}
-
-export interface FormulaPatternTarget {
-  id: string;
-  type: string;
-  probability: string;
-}
-
-export interface FormulaPattern {
-  match: string;
-  target: FormulaPatternTarget[];
-}
-
-export interface QuestionFormula {
-  payload: string;
-  patterns: FormulaPattern[];
 }
 
 export interface GridQuestionRow {
@@ -130,6 +183,7 @@ export interface QuestionOriginalText {
   subtitle: string;
   image_description: Nullable<string>;
 }
+export type QuestionFormula = Formula<QuestionTypes | SessionTargetType>;
 
 export interface Question<T extends PayloadType = PayloadType> {
   id: string;
@@ -141,7 +195,7 @@ export interface Question<T extends PayloadType = PayloadType> {
   subtitle: string;
   narrator: Narrator;
   video_url: Nullable<string>;
-  formula: QuestionFormula;
+  formula: Formula<QuestionTypes | SessionTargetType>;
   body: QuestionBody<T>;
   original_text: QuestionOriginalText;
   image_url: Nullable<string>;

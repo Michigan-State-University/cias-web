@@ -3,11 +3,10 @@ import cloneDeep from 'lodash/cloneDeep';
 import intersection from 'lodash/intersection';
 
 import { QuestionGroup } from 'global/types/questionGroup';
-import { Question } from 'global/types/question';
 
+import { QuestionTypes, Question } from 'models/Question';
 import { SessionDto } from 'models/Session/SessionDto';
 import { Answer } from 'models/Answer';
-import { QuestionTypes } from 'models/Question/QuestionDto';
 
 import {
   EdgeSharedAttributesGetter,

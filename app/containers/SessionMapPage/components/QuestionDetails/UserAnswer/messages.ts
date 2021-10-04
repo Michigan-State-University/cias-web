@@ -5,7 +5,7 @@
  */
 import { defineMessages } from 'react-intl';
 
-import { QuestionTypes } from 'models/Question/QuestionDto';
+import { QuestionTypes } from 'models/Question';
 
 export const scope = 'app.containers.UserAnswer';
 

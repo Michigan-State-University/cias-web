@@ -15,7 +15,7 @@ import {
 } from 'global/reducers/copyModalReducer';
 
 import { SessionTypes } from 'models/Session/SessionDto';
-import { QuestionDto, QuestionTypes } from 'models/Question/QuestionDto';
+import { Question, QuestionTypes } from 'models/Question';
 
 import { colors, boxShadows } from 'theme';
 
@@ -45,7 +45,7 @@ interface Props {
   organizationId: string;
   placement: 'left' | 'right';
   questionTypeWhitelist: QuestionTypes[];
-  selectedQuestion: QuestionDto;
+  selectedQuestion: Question;
   sessionId: string;
   topPosition: string;
   sessionTypesWhiteList: SessionTypes[];

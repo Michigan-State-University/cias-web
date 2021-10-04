@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { FeedbackQuestionPayload, Question } from 'global/types/question';
+import { FeedbackQuestionPayload, Question } from 'models/Question';
 
 import { colors } from 'theme';
 import Text from 'components/Text';

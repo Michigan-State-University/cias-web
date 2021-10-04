@@ -1,6 +1,6 @@
 import { Edge, FlowTransform } from 'react-flow-renderer';
 
-import { Question } from 'global/types/question';
+import { Question } from 'models/Question';
 
 interface TileData {
   showDetailedInfo: boolean;

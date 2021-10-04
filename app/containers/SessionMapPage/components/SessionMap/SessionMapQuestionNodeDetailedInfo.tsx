@@ -2,7 +2,8 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
-import { Question } from 'global/types/question';
+
+import { Question } from 'models/Question';
 
 import { themeColors } from 'theme';
 import Text from 'components/Text';

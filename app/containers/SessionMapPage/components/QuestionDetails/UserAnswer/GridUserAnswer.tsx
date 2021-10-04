@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { GridQuestionPayload, QuestionBody } from 'global/types/question';
-
+import { GridQuestionPayload, QuestionBody } from 'models/Question';
 import { GridAnswer } from 'models/Answer';
 
 import { colors } from 'theme';

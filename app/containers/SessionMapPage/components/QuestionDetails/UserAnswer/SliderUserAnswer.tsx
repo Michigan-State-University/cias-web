@@ -1,8 +1,7 @@
 import React from 'react';
 
+import { QuestionBody, SliderQuestionPayload } from 'models/Question';
 import { SliderAnswer } from 'models/Answer';
-
-import { QuestionBody, SliderQuestionPayload } from 'global/types/question';
 
 import { visualAnalogScaleLabelStyles } from 'theme';
 

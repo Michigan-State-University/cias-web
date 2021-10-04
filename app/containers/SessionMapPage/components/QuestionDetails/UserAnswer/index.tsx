@@ -6,8 +6,7 @@ import {
   Question,
   QuestionBody,
   SliderQuestionPayload,
-} from 'global/types/question';
-
+} from 'models/Question';
 import { Answer, AnswerType } from 'models/Answer';
 
 import { themeColors } from 'theme';

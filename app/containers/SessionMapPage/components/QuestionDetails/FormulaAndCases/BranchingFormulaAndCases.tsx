@@ -2,8 +2,9 @@ import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { FormulaPatternTarget, Question } from 'global/types/question';
-
+import { Target } from 'models/Formula';
+import { Question, QuestionTypes } from 'models/Question';
+import { SessionTargetType } from 'models/Session/SessionTargetType';
 import { SessionDto } from 'models/Session/SessionDto';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
@@ -53,14 +54,15 @@ const BranchingFormulaAndCases = ({
   );
 
   const renderSubtargets = (
-    subtargets: FormulaPatternTarget[],
+    subtargets: Target<QuestionTypes | SessionTargetType>[],
     targetIndex: number,
   ): JSX.Element[] =>
     subtargets.map(({ id: targetId, probability, type }, subtargetIndex) => {
-      const subtargetName = type.startsWith('Session')
-        ? sessions.find(({ id: sessionId }) => sessionId === targetId)?.name
-        : questions.find(({ id: questionId }) => questionId === targetId)
-            ?.subtitle;
+      const subtargetName =
+        type === SessionTargetType.SESSION
+          ? sessions.find(({ id: sessionId }) => sessionId === targetId)?.name
+          : questions.find(({ id: questionId }) => questionId === targetId)
+              ?.subtitle;
 
       const displayedName = isNullOrUndefined(subtargetName)
         ? ''

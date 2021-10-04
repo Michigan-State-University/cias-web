@@ -2,8 +2,7 @@ import React, { useCallback } from 'react';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
-import { QuestionBody } from 'global/types/question';
-
+import { QuestionBody } from 'models/Question';
 import { SingleAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
