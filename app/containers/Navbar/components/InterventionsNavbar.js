@@ -117,7 +117,8 @@ const InterventionNavbar = ({
     setTabActive(getActiveTab(pathname, formatMessage));
   }, [pathname]);
 
-  const previewDisabled = !questionsLength || !canPreview(interventionStatus);
+  const previewDisabled =
+    !questionsLength || !canPreview(interventionStatus) || !isClassicSession;
 
   const editingPossible = canEdit(interventionStatus);
 
