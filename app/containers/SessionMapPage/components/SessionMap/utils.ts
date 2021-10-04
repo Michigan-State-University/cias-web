@@ -404,13 +404,10 @@ export const createUserSessionNodesIdsFromAnswers = (
   return userSessionNodesIds;
 };
 
-export const collapseQuestionsWithoutBranching = (
+const findQuestionNodesWithoutBranchingPositions = (
   nodes: Node[],
   edges: Edge[],
-): Elements => {
-  const nodesCopy = cloneDeep(nodes);
-  let edgesCopy = cloneDeep(edges);
-
+): number[] => {
   const questionNodesWithoutBranchingPositions: number[] = [];
 
   nodes.forEach((node, index) => {
@@ -419,17 +416,23 @@ export const collapseQuestionsWithoutBranching = (
     const isFirstOrLastQuestion = index === 0 || index === nodes.length - 1;
     if (isFirstOrLastQuestion) return;
 
-    const nodeEdges = edgesCopy.filter(
+    const nodeEdges = edges.filter(
       ({ source, target }) => source === node.id || target === node.id,
     );
 
-    const noBranching = nodeEdges.length === 2;
-
-    if (noBranching) {
+    const withoutBranching = nodeEdges.length === 2;
+    if (withoutBranching) {
       questionNodesWithoutBranchingPositions.push(index);
     }
   });
 
+  return questionNodesWithoutBranchingPositions;
+};
+
+const divideQuestionNodesToCollapseGroups = (
+  questionNodesWithoutBranchingPositions: number[],
+): number[][] => {
+  const collapseGroups: number[][] = [];
   let collapseGroup: number[] = [];
 
   questionNodesWithoutBranchingPositions.forEach((position, index) => {
@@ -442,6 +445,95 @@ export const collapseQuestionsWithoutBranching = (
       collapseGroup.push(position);
     }
 
+    collapseGroups.push(collapseGroup);
+    collapseGroup = [];
+  });
+
+  return collapseGroups;
+};
+
+const createCollapseNodeId = (
+  firstCollapsedNodePosition: number,
+  lastCollapsedNodePosition: number,
+): string =>
+  `collapse-from-${firstCollapsedNodePosition}-to-${lastCollapsedNodePosition}`;
+
+const createCollapseNode = (
+  id: string,
+  firstCollapsedNode: Node<QuestionNodeData>,
+  lastCollapsedNode: Node<QuestionNodeData>,
+): Node<CollapseNodeData> => ({
+  id,
+  type: SessionMapNodeType.COLLAPSE,
+  position: { x: 0, y: 0 },
+  selectable: false,
+  data: {
+    firstCollapsedScreenNo: firstCollapsedNode.data?.questionIndex! + 1,
+    lastCollapsedScreenNo: lastCollapsedNode.data?.questionIndex! + 1,
+  },
+});
+
+const replaceEdgeTarget = (edge: Edge, newTarget: string): Edge => ({
+  ...edge,
+  id: createEdgeId(edge.source, newTarget),
+  target: newTarget,
+});
+
+const replaceEdgeSource = (edge: Edge, newSource: string): Edge => ({
+  ...edge,
+  id: createEdgeId(newSource, edge.target),
+  source: newSource,
+});
+
+const updateEdgesForCollapsedNodes = (
+  collapseGroup: number[],
+  nodes: Node[],
+  edges: Edge[],
+  firstCollapsedNode: Node<QuestionNodeData>,
+  lastCollapsedNode: Node<QuestionNodeData>,
+  collapseNodeId: string,
+): Edge[] => {
+  const collapsedNodesIds = collapseGroup.map(
+    (collapsedNodePosition) => nodes[collapsedNodePosition].id,
+  );
+
+  return edges.flatMap((edge) => {
+    const isFirstCollapsedNodeInput = edge.target === firstCollapsedNode.id;
+    if (isFirstCollapsedNodeInput) {
+      return [replaceEdgeTarget(edge, collapseNodeId)];
+    }
+
+    const isLastCollapsedNodeOutput = edge.source === lastCollapsedNode.id;
+    if (isLastCollapsedNodeOutput) {
+      return [replaceEdgeSource(edge, collapseNodeId)];
+    }
+
+    const isAnyOtherCollapsedNodeEdge = collapsedNodesIds.includes(edge.source);
+    if (isAnyOtherCollapsedNodeEdge) {
+      // remove edge
+      return [];
+    }
+
+    // do not modify edge
+    return [edge];
+  });
+};
+
+export const collapseQuestionsWithoutBranching = (
+  nodes: Node[],
+  edges: Edge[],
+): Elements => {
+  const nodesCopy = cloneDeep(nodes);
+  let edgesCopy = cloneDeep(edges);
+
+  const questionNodesWithoutBranchingPositions: number[] =
+    findQuestionNodesWithoutBranchingPositions(nodes, edges);
+
+  const collapseGroups: number[][] = divideQuestionNodesToCollapseGroups(
+    questionNodesWithoutBranchingPositions,
+  );
+
+  collapseGroups.forEach((collapseGroup) => {
     if (collapseGroup.length > 1) {
       const firstCollapsedNodePosition = collapseGroup[0];
       const firstCollapsedNode: Node<QuestionNodeData> =
@@ -451,18 +543,15 @@ export const collapseQuestionsWithoutBranching = (
       const lastCollapsedNode: Node<QuestionNodeData> =
         nodes[lastCollapsedNodePosition];
 
-      const collapseNodeId = `collapse-from-${firstCollapsedNodePosition}-to-${lastCollapsedNodePosition}`;
-
-      const collapseNode: Node<CollapseNodeData> = {
-        id: collapseNodeId,
-        type: SessionMapNodeType.COLLAPSE,
-        position: { x: 0, y: 0 },
-        selectable: false,
-        data: {
-          firstCollapsedScreenNo: firstCollapsedNode.data?.questionIndex! + 1,
-          lastCollapsedScreenNo: lastCollapsedNode.data?.questionIndex! + 1,
-        },
-      };
+      const collapseNodeId = createCollapseNodeId(
+        firstCollapsedNodePosition,
+        lastCollapsedNodePosition,
+      );
+      const collapseNode = createCollapseNode(
+        collapseNodeId,
+        firstCollapsedNode,
+        lastCollapsedNode,
+      );
 
       // replace question nodes with a collapse node
       const nodesCountDifference = nodes.length - nodesCopy.length;
@@ -472,40 +561,15 @@ export const collapseQuestionsWithoutBranching = (
         collapseNode,
       );
 
-      const collapsedNodesIds = collapseGroup.map(
-        (collapsedNodePosition) => nodes[collapsedNodePosition].id,
+      edgesCopy = updateEdgesForCollapsedNodes(
+        collapseGroup,
+        nodes,
+        edgesCopy,
+        firstCollapsedNode,
+        lastCollapsedNode,
+        collapseNodeId,
       );
-
-      edgesCopy = edgesCopy.flatMap((edge) => {
-        if (edge.target === firstCollapsedNode.id) {
-          return [
-            {
-              ...edge,
-              id: createEdgeId(edge.source, collapseNodeId),
-              target: collapseNodeId,
-            },
-          ];
-        }
-
-        if (edge.source === lastCollapsedNode.id) {
-          return [
-            {
-              ...edge,
-              id: createEdgeId(collapseNodeId, edge.target),
-              source: collapseNodeId,
-            },
-          ];
-        }
-
-        if (collapsedNodesIds.includes(edge.source)) {
-          return [];
-        }
-
-        return [edge];
-      });
     }
-
-    collapseGroup = [];
   });
 
   return [...nodesCopy, ...edgesCopy];
