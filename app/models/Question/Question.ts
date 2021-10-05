@@ -1,36 +1,8 @@
 import { SessionTargetType } from 'models/Session/SessionTargetType';
+import { Formula } from 'models/Formula';
+import { Narrator } from 'models/Narrator';
 
-import { Formula } from '../Formula';
-
-export enum QuestionTypes {
-  SINGLE = 'Question::Single',
-  MULTIPLE = 'Question::Multiple',
-  FREE_RESPONSE = 'Question::FreeResponse',
-  THIRD_PARTY = 'Question::ThirdParty',
-  NAME = 'Question::Name',
-  NUMBER = 'Question::Number',
-  GRID = 'Question::Grid',
-  SLIDER = 'Question::Slider',
-  INFORMATION = 'Question::Information',
-  EXTERNAL_LINK = 'Question::ExternalLink',
-  FEEDBACK = 'Question::Feedback',
-  FINISH = 'Question::Finish',
-  PHONE = 'Question::Phone',
-  DATE = 'Question::Date',
-  PARTICIPANT_REPORT = 'Question::ParticipantReport',
-  CURRENCY = 'Question::Currency',
-}
-
-export enum BlockTypes {
-  BODY_ANIMATION = 'BodyAnimation',
-  HEAD_ANIMATION = 'HeadAnimation',
-  SPEECH = 'Speech',
-  READ_QUESTION = 'ReadQuestion',
-  REFLECTION = 'Reflection',
-  REFLECTION_FORMULA = 'ReflectionFormula',
-  PAUSE = 'Pause',
-  FEEDBACK = 'Feedback',
-}
+import { QuestionTypes } from './QuestionTypes';
 
 export interface QuestionSettings {
   image: boolean;
@@ -42,33 +14,6 @@ export interface QuestionSettings {
   narrator_skippable: boolean;
   proceed_button?: boolean;
   show_number?: boolean;
-}
-
-export interface Position {
-  x: number;
-  y: number;
-}
-
-export interface NarratorBlock {
-  text?: Nullable<string[]>;
-  type: BlockTypes;
-  action?: string;
-  sha256?: string[];
-  animation: string;
-  audio_urls?: string[];
-  endPosition: Position;
-  pause_duration?: number;
-  original_text?: Nullable<string[]>;
-}
-
-export interface NarratorSettings {
-  voice: boolean;
-  animation: boolean;
-}
-
-export interface Narrator {
-  blocks: NarratorBlock[];
-  settings: NarratorSettings;
 }
 
 export interface GridQuestionRow {
