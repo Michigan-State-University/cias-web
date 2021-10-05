@@ -1,4 +1,4 @@
-import { SessionTargetType } from 'models/Session/SessionTargetType';
+import { SESSION_TARGET } from 'models/Session/constants';
 import { Formula } from '../Formula';
 
 export enum QuestionTypes {
@@ -30,44 +30,6 @@ export enum BlockTypes {
   PAUSE = 'Pause',
   FEEDBACK = 'Feedback',
 }
-
-// export interface Question {
-//   id: string;
-//   type: QuestionTypes;
-//   question_group_id: string;
-//   settings: {
-//     image: boolean;
-//     title: boolean;
-//     video: boolean;
-//     required: boolean;
-//     subtitle: boolean;
-//     proceed_button?: boolean;
-//     narrator_skippable: boolean;
-//   };
-//   position: number;
-//   title: string;
-//   subtitle: string;
-//   narrator: {
-//     blocks: Block[];
-//     settings: {
-//       voice: boolean;
-//       animation: boolean;
-//     };
-//   };
-//   video_url: null | string;
-//   image_url: null | string;
-//   image_alt: null | string;
-//   original_text: {
-//     title: string;
-//     subtitle: string;
-//     image_description: string;
-//   };
-//   body: any;
-//   formula: {
-//     payload: string;
-//     patterns: PatternDto<QuestionTypes | SessionTypes>[];
-//   };
-// }
 
 export interface QuestionSettings {
   image: boolean;
@@ -183,11 +145,15 @@ export interface QuestionOriginalText {
   subtitle: string;
   image_description: Nullable<string>;
 }
-export type QuestionFormula = Formula<QuestionTypes | SessionTargetType>;
 
-export interface Question<T extends PayloadType = PayloadType> {
+export type QuestionFormulaTargetType = QuestionTypes | typeof SESSION_TARGET;
+
+export interface GenericQuestion<
+  V extends QuestionTypes = QuestionTypes,
+  T extends PayloadType = PayloadType,
+> {
   id: string;
-  type: QuestionTypes;
+  type: V;
   question_group_id: string;
   settings: QuestionSettings;
   position: number;
@@ -195,9 +161,83 @@ export interface Question<T extends PayloadType = PayloadType> {
   subtitle: string;
   narrator: Narrator;
   video_url: Nullable<string>;
-  formula: Formula<QuestionTypes | SessionTargetType>;
+  formula: Formula<QuestionFormulaTargetType>;
   body: QuestionBody<T>;
   original_text: QuestionOriginalText;
   image_url: Nullable<string>;
   image_alt: Nullable<string>;
 }
+
+export type SingleQuestion = GenericQuestion<QuestionTypes.SINGLE, string>;
+
+export type MultipleQuestion = GenericQuestion<QuestionTypes.MULTIPLE, string>;
+
+export type FreeResponseQuestion = GenericQuestion<
+  QuestionTypes.FREE_RESPONSE,
+  string
+>;
+
+export type ThirdPartyReportQuestion = GenericQuestion<
+  QuestionTypes.THIRD_PARTY,
+  string
+>;
+
+export type NameQuestion = GenericQuestion<QuestionTypes.NAME, string>;
+
+export type NumberQuestion = GenericQuestion<QuestionTypes.NUMBER, string>;
+
+export type GridQuestion = GenericQuestion<
+  QuestionTypes.GRID,
+  GridQuestionPayload
+>;
+
+export type SliderQuestion = GenericQuestion<
+  QuestionTypes.SLIDER,
+  SliderQuestionPayload
+>;
+
+export type InformationQuestion = GenericQuestion<
+  QuestionTypes.INFORMATION,
+  string
+>;
+
+export type ExternalLinkQuestion = GenericQuestion<
+  QuestionTypes.EXTERNAL_LINK,
+  string
+>;
+
+export type FeedbackQuestion = GenericQuestion<
+  QuestionTypes.FEEDBACK,
+  FeedbackQuestionPayload
+>;
+
+export type FinishQuestion = GenericQuestion<QuestionTypes.FINISH, string>;
+
+export type PhoneQuestion = GenericQuestion<QuestionTypes.PHONE, string>;
+
+export type DateQuestion = GenericQuestion<QuestionTypes.DATE, string>;
+
+export type ParticipantReportQuestion = GenericQuestion<
+  QuestionTypes.PARTICIPANT_REPORT,
+  string
+>;
+
+export type CurrencyQuestion = GenericQuestion<QuestionTypes.CURRENCY, string>;
+
+export type Question =
+  | SingleQuestion
+  | MultipleQuestion
+  | FreeResponseQuestion
+  | ThirdPartyReportQuestion
+  | NameQuestion
+  | NumberQuestion
+  | GridQuestion
+  | SliderQuestion
+  | InformationQuestion
+  | ExternalLinkQuestion
+  | FeedbackQuestion
+  | FinishQuestion
+  | PhoneQuestion
+  | DateQuestion
+  | ParticipantReportQuestion
+  | CurrencyQuestion;

@@ -4,11 +4,7 @@ import { useIntl } from 'react-intl';
 import { QuestionGroup } from 'global/types/questionGroup';
 import { ReportTemplate } from 'global/types/reportTemplate';
 
-import {
-  QuestionTypes,
-  FeedbackQuestionPayload,
-  Question,
-} from 'models/Question';
+import { QuestionTypes, Question, FeedbackQuestion } from 'models/Question';
 import { SessionDto } from 'models/Session/SessionDto';
 import { Answer } from 'models/Answer';
 
@@ -98,7 +94,7 @@ const SessionMapQuestionDetails = ({
           )}
           {type === QuestionTypes.FEEDBACK && (
             <FeedbackFormulaAndCases
-              question={shownQuestion as Question<FeedbackQuestionPayload>}
+              question={shownQuestion as FeedbackQuestion}
             />
           )}
           {type !== QuestionTypes.FINISH && (

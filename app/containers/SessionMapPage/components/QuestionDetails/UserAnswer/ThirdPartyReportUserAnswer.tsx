@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
-import { QuestionBody } from 'models/Question';
+import { ThirdPartyReportQuestion } from 'models/Question';
 import { ThirdPartyReportAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
@@ -12,7 +12,7 @@ import { Radio } from 'components/Radio';
 import Text from 'components/Text';
 
 type Props = {
-  questionBody: QuestionBody<string>;
+  question: ThirdPartyReportQuestion;
   answer: ThirdPartyReportAnswer;
 };
 
@@ -20,7 +20,9 @@ type Props = {
 // all options with a value equal to the answer's value will be checked
 // despite the fact that only one option can be selected
 const ThirdPartyReportUserAnswer = ({
-  questionBody: { data: questionData },
+  question: {
+    body: { data: questionData },
+  },
   answer: {
     decryptedBody: { data: answerData },
     id,

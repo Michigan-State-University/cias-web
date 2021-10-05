@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
-import { QuestionBody } from 'models/Question';
+import { MultipleQuestion } from 'models/Question';
 import { MultiAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
@@ -12,7 +12,7 @@ import Checkbox from 'components/Checkbox';
 import Text from 'components/Text';
 
 type Props = {
-  questionBody: QuestionBody<string>;
+  question: MultipleQuestion;
   answer: MultiAnswer;
 };
 
@@ -20,7 +20,9 @@ type Props = {
 // any option without a variable name assigned will not be checked
 // even if this option was selected by the user
 const MultiUserAnswer = ({
-  questionBody: { data: questionData },
+  question: {
+    body: { data: questionData },
+  },
   answer: {
     decryptedBody: { data: answerData },
     id,

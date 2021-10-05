@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { QuestionBody, SliderQuestionPayload } from 'models/Question';
+import { SliderQuestion } from 'models/Question';
 import { SliderAnswer } from 'models/Answer';
 
 import { visualAnalogScaleLabelStyles } from 'theme';
@@ -9,13 +9,15 @@ import AppSlider from 'components/AppSlider';
 import Box from 'components/Box';
 
 type Props = {
-  questionBody: QuestionBody<SliderQuestionPayload>;
+  question: SliderQuestion;
   answer: SliderAnswer;
 };
 
 const SliderUserAnswer = ({
+  question: {
+    body: { data: questionData },
+  },
   answer,
-  questionBody: { data: questionData },
 }: Props): JSX.Element => {
   const { start_value: startValue, end_value: endValue } =
     questionData[0].payload;

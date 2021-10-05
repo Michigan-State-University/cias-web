@@ -2,10 +2,12 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import {
-  GridQuestionPayload,
+  GridQuestion,
+  MultipleQuestion,
   Question,
-  QuestionBody,
-  SliderQuestionPayload,
+  SingleQuestion,
+  SliderQuestion,
+  ThirdPartyReportQuestion,
 } from 'models/Question';
 import { Answer, AnswerType } from 'models/Answer';
 
@@ -36,7 +38,7 @@ type Props = {
 
 const UserAnswer = ({ question, answer }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
-  const { body, type: questionType } = question;
+  const { type: questionType } = question;
 
   const renderUserAnswerByQuestionType = (): JSX.Element[] | JSX.Element => {
     if (questionTypesWithoutAnswers.includes(questionType)) {
@@ -53,14 +55,14 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
       case AnswerType.SINGLE:
         return (
           <SingleUserAnswer
-            questionBody={body as QuestionBody<string>}
+            question={question as SingleQuestion}
             answer={answer}
           />
         );
       case AnswerType.MULTIPLE:
         return (
           <MultiUserAnswer
-            questionBody={body as QuestionBody<string>}
+            question={question as MultipleQuestion}
             answer={answer}
           />
         );
@@ -76,15 +78,12 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
         return <NumberUserAnswer answer={answer} />;
       case AnswerType.GRID:
         return (
-          <GridUserAnswer
-            questionBody={body as QuestionBody<GridQuestionPayload>}
-            answer={answer}
-          />
+          <GridUserAnswer question={question as GridQuestion} answer={answer} />
         );
       case AnswerType.SLIDER:
         return (
           <SliderUserAnswer
-            questionBody={body as QuestionBody<SliderQuestionPayload>}
+            question={question as SliderQuestion}
             answer={answer}
           />
         );
@@ -93,7 +92,7 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
       case AnswerType.THIRD_PARTY:
         return (
           <ThirdPartyReportUserAnswer
-            questionBody={body as QuestionBody<string>}
+            question={question as ThirdPartyReportQuestion}
             answer={answer}
           />
         );

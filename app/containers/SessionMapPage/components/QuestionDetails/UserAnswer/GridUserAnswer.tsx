@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { GridQuestionPayload, QuestionBody } from 'models/Question';
+import { GridQuestion } from 'models/Question';
 import { GridAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
@@ -10,7 +10,7 @@ import Text from 'components/Text';
 import Comment from 'components/Text/Comment';
 
 type Props = {
-  questionBody: QuestionBody<GridQuestionPayload>;
+  question: GridQuestion;
   answer: GridAnswer;
 };
 
@@ -18,7 +18,9 @@ type Props = {
 // any option in a row without a variable name will not be shown even if this option was selected by the user
 // all options in a row with a value equal to the answer's value will be shown
 const GridUserAnswer = ({
-  questionBody: { data: questionData },
+  question: {
+    body: { data: questionData },
+  },
   answer: {
     decryptedBody: { data: answerData },
     id,

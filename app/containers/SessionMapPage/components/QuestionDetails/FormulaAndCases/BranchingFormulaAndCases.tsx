@@ -2,10 +2,10 @@ import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { Target } from 'models/Formula';
-import { Question, QuestionTypes } from 'models/Question';
-import { SessionTargetType } from 'models/Session/SessionTargetType';
+import { Question, QuestionFormulaTargetType } from 'models/Question';
+import { SESSION_TARGET } from 'models/Session/constants';
 import { SessionDto } from 'models/Session/SessionDto';
+import { Target } from 'models/Formula';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -54,12 +54,12 @@ const BranchingFormulaAndCases = ({
   );
 
   const renderSubtargets = (
-    subtargets: Target<QuestionTypes | SessionTargetType>[],
+    subtargets: Target<QuestionFormulaTargetType>[],
     targetIndex: number,
   ): JSX.Element[] =>
     subtargets.map(({ id: targetId, probability, type }, subtargetIndex) => {
       const subtargetName =
-        type === SessionTargetType.SESSION
+        type === SESSION_TARGET
           ? sessions.find(({ id: sessionId }) => sessionId === targetId)?.name
           : questions.find(({ id: questionId }) => questionId === targetId)
               ?.subtitle;

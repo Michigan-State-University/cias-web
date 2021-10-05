@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
-import { QuestionBody } from 'models/Question';
+import { SingleQuestion } from 'models/Question';
 import { SingleAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
@@ -12,7 +12,7 @@ import { Radio } from 'components/Radio';
 import Text from 'components/Text';
 
 type Props = {
-  questionBody: QuestionBody<string>;
+  question: SingleQuestion;
   answer: SingleAnswer;
 };
 
@@ -20,7 +20,9 @@ type Props = {
 // all options with a value equal to the answer's value will be checked
 // despite the fact that this is a single answer question
 const SingleUserAnswer = ({
-  questionBody: { data: questionData },
+  question: {
+    body: { data: questionData },
+  },
   answer: {
     decryptedBody: { data: answerData },
     id,
