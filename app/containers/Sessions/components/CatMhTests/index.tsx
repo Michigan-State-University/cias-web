@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { themeColors } from 'theme';
-import { CatMhTest, CatMhTestDTO } from 'global/types/catMh';
-import { ApiData } from 'global/types/api';
+
+import { CatMhTest, CatMhTestDTO } from 'models/CatMh';
+import { ApiData } from 'models/Api';
+
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import useGet from 'utils/useGet';
 

@@ -52,10 +52,10 @@ import {
   fetchAnswersSaga,
   FETCH_ANSWERS_ERROR,
 } from 'global/reducers/answers';
-import { QuestionGroup } from 'global/types/questionGroup';
-import { ReportTemplate } from 'global/types/reportTemplate';
 import { JumpToScreenLocationState } from 'global/types/locationState';
 
+import { ReportTemplate } from 'models/ReportTemplate/ReportTemplateModel';
+import { QuestionGroup } from 'models/QuestionGroup';
 import { Question } from 'models/Question';
 
 import useQuery from 'utils/useQuery';

@@ -2,8 +2,7 @@ import { Edge, Node } from 'react-flow-renderer';
 import cloneDeep from 'lodash/cloneDeep';
 import intersection from 'lodash/intersection';
 
-import { QuestionGroup } from 'global/types/questionGroup';
-
+import { QuestionGroup } from 'models/QuestionGroup';
 import { QuestionTypes, Question } from 'models/Question';
 import { SessionDto } from 'models/Session/SessionDto';
 import { Answer } from 'models/Answer';

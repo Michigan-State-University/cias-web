@@ -2,8 +2,7 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { NodeTypesType } from 'react-flow-renderer';
 
-import { QuestionGroup } from 'global/types/questionGroup';
-
+import { QuestionGroup } from 'models/QuestionGroup';
 import { Question } from 'models/Question';
 import { SessionDto } from 'models/Session/SessionDto';
 

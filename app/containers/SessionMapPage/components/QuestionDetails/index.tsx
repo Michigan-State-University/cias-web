@@ -1,9 +1,8 @@
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
-import { QuestionGroup } from 'global/types/questionGroup';
-import { ReportTemplate } from 'global/types/reportTemplate';
-
+import { ReportTemplate } from 'models/ReportTemplate/ReportTemplateModel';
+import { QuestionGroup } from 'models/QuestionGroup';
 import { QuestionTypes, Question, FeedbackQuestion } from 'models/Question';
 import { SessionDto } from 'models/Session/SessionDto';
 import { Answer } from 'models/Answer';
