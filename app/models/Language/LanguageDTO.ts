@@ -1,4 +1,5 @@
-export interface LanguageDTO {
-  language_code: string;
-  language_name: string;
-}
+import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
+
+import { Language } from './Language';
+
+export type LanguageDTO = CamelToSnakeOmitId<Language>;

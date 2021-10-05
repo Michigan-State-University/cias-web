@@ -1,4 +1,4 @@
-interface CatMhTestAttribute {
+export interface CatMhTestAttribute {
   id: string;
   name: string;
   range: string;
