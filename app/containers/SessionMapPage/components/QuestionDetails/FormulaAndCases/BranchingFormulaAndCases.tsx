@@ -3,8 +3,8 @@ import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
 import { Question, QuestionFormulaTargetType } from 'models/Question';
-import { SESSION_TARGET } from 'models/Session/constants';
 import { SessionDto } from 'models/Session/SessionDto';
+import { SessionTargetType } from 'models/Session/SessionTargetType';
 import { Target } from 'models/Formula';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
@@ -59,7 +59,7 @@ const BranchingFormulaAndCases = ({
   ): JSX.Element[] =>
     subtargets.map(({ id: targetId, probability, type }, subtargetIndex) => {
       const subtargetName =
-        type === SESSION_TARGET
+        type === SessionTargetType.SESSION
           ? sessions.find(({ id: sessionId }) => sessionId === targetId)?.name
           : questions.find(({ id: questionId }) => questionId === targetId)
               ?.subtitle;

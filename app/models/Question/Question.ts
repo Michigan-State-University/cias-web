@@ -1,4 +1,5 @@
-import { SESSION_TARGET } from 'models/Session/constants';
+import { SessionTargetType } from 'models/Session/SessionTargetType';
+
 import { Formula } from '../Formula';
 
 export enum QuestionTypes {
@@ -146,7 +147,7 @@ export interface QuestionOriginalText {
   image_description: Nullable<string>;
 }
 
-export type QuestionFormulaTargetType = QuestionTypes | typeof SESSION_TARGET;
+export type QuestionFormulaTargetType = QuestionTypes | SessionTargetType;
 
 export interface GenericQuestion<
   V extends QuestionTypes = QuestionTypes,

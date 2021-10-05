@@ -1,5 +1,5 @@
 import { Formula } from '../Formula';
-import { SESSION_TARGET } from './constants';
+import { SessionTargetType } from './SessionTargetType';
 
 export enum SessionTypes {
   CLASSIC_SESSION = 'Session::Classic',
@@ -48,7 +48,7 @@ export interface SessionDto {
   scheduleAt?: string;
   schedulePayload?: number;
   schedule: ScheduleOptions;
-  formula: Formula<typeof SESSION_TARGET>;
+  formula: Formula<SessionTargetType>;
   reportTemplatesCount: number;
   type: SessionTypes;
 }
@@ -56,6 +56,7 @@ export interface SessionDto {
 export interface ClassicSessionDto extends SessionDto {
   type: SessionTypes.CLASSIC_SESSION;
 }
+
 export interface CatSessionDto extends SessionDto {
   catMhLanguageId: number;
   catMhTimeFrameId: number;
