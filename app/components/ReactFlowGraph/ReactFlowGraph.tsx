@@ -2,6 +2,7 @@ import React, { memo, useEffect, useMemo, useState } from 'react';
 import ReactFlow, {
   Elements,
   FlowTransform,
+  Node,
   NodeTypesType,
   ReactFlowProps,
   useStoreState,
@@ -24,7 +25,7 @@ import {
   layoutElements,
   prioritizeEdges,
 } from './utils';
-import { CustomConnectionLineType } from './types';
+import { CustomConnectionLineType, NodeDimensions } from './types';
 import PathFindingEdge from './custom/PathFindingEdge';
 
 export const edgeTypes = {
@@ -42,12 +43,12 @@ export interface ReactFlowGraphProps extends ReactFlowProps {
   elements: Elements;
   nodeTypes: NodeTypesType;
   nodeTopMargin?: number;
+  nodeDimensions: Map<string, NodeDimensions>;
   pickedNodeId?: string;
   scrollbarsThickness?: number;
   scrollbarsMargin?: number;
   edgePriorities?: Map<string, number>;
   children?: React.ReactNode | React.ReactNode[];
-  shouldLayout: boolean;
 }
 
 const ReactFlowGraph = ({
@@ -61,20 +62,17 @@ const ReactFlowGraph = ({
   elements,
   nodeTypes,
   nodeTopMargin = 0,
+  nodeDimensions,
   pickedNodeId,
   scrollbarsThickness = 0,
   scrollbarsMargin = 0,
   edgePriorities,
   children,
-  shouldLayout,
   ...restReactFlowProps
 }: ReactFlowGraphProps): JSX.Element => {
   const { zoomTo, transform } = useZoomPanHelper();
   const containerWidth = useStoreState((state) => state.width);
   const containerHeight = useStoreState((state) => state.height);
-  const renderedNodes = useStoreState((state) => state.nodes);
-
-  const [mapLoaded, setMapLoaded] = useState(false);
 
   const [currentTransform, setCurrentTransform] = useState<FlowTransform>({
     x: 0,
@@ -99,19 +97,16 @@ const ReactFlowGraph = ({
   }, [zoom]);
 
   const { layoutedElements, panAreaWidth, panAreaHeight } = useMemo(
-    () =>
-      mapLoaded
-        ? layoutElements(elements, renderedNodes, nodeTopMargin)
-        : { layoutedElements: elements, panAreaWidth: 0, panAreaHeight: 0 },
-    [mapLoaded, elements, nodeTopMargin, shouldLayout],
+    () => layoutElements(elements, nodeTopMargin, nodeDimensions),
+    [elements, nodeTopMargin, nodeDimensions],
   );
 
   const layoutedElementsWithPrioritizedEdges = useMemo(
     () =>
-      mapLoaded && edgePriorities
+      edgePriorities
         ? prioritizeEdges(layoutedElements, edgePriorities)
         : layoutedElements,
-    [mapLoaded, layoutedElements, edgePriorities],
+    [layoutedElements, edgePriorities],
   );
 
   useEffect(() => {
@@ -149,7 +144,9 @@ const ReactFlowGraph = ({
   }, [panAreaHeight, containerHeight, zoom]);
 
   const fitPickedNodeInView = () => {
-    const pickedNode = renderedNodes.find(({ id }) => id === pickedNodeId);
+    const pickedNode = layoutedElementsWithPrioritizedEdges.find(
+      ({ id }) => id === pickedNodeId,
+    ) as Node;
     if (!pickedNode) return;
 
     const newTransform = calculateTransformToFitNodeInView(
@@ -157,6 +154,7 @@ const ReactFlowGraph = ({
       currentTransform,
       containerWidth,
       containerHeight,
+      nodeDimensions,
     );
 
     if (areTransformsDifferent(currentTransform, newTransform)) {
@@ -183,7 +181,12 @@ const ReactFlowGraph = ({
     if (pickedNodeId) {
       fitPickedNodeInView();
     }
-  }, [containerWidth, containerHeight, renderedNodes]);
+  }, [
+    containerWidth,
+    containerHeight,
+    layoutedElementsWithPrioritizedEdges,
+    nodeDimensions,
+  ]);
 
   const handleScrollbarPositionRatioChange =
     (axis: 'x' | 'y') => (newScrollbarPositionRatio: number) => {
@@ -249,7 +252,6 @@ const ReactFlowGraph = ({
     minZoom,
     maxZoom: defaultMaxZoom,
     defaultZoom,
-    onLoad: () => setMapLoaded(true),
     onMove: handleMove,
     ...restReactFlowProps,
   };

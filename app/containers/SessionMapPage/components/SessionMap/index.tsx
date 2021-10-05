@@ -25,6 +25,7 @@ import {
   scrollbarsMargin,
   edgePriorities,
   SESSION_MAP_ID,
+  sessionMapNodeDimensions,
 } from '../../constants';
 import {
   sortQuestionsByGroupAndPosition,
@@ -166,16 +167,6 @@ const SessionMap = ({
     return [...nodes, ...edges];
   }, [showWithBranchingOnly, nodes, edges]);
 
-  const [shouldLayout, setShouldLayout] = useState(false);
-
-  useEffect(() => {
-    setShouldLayout(true);
-  }, [showWithBranchingOnly]);
-
-  useEffect(() => {
-    if (shouldLayout) setShouldLayout(false);
-  }, [shouldLayout]);
-
   const sessionMapGraphProps: ReactFlowGraphProps = {
     defaultMinZoom,
     defaultMaxZoom,
@@ -187,13 +178,13 @@ const SessionMap = ({
     elements,
     nodeTypes,
     nodeTopMargin: questionNodeLabelOffset,
+    nodeDimensions: sessionMapNodeDimensions,
     pickedNodeId: showDetailsId,
     nodesDraggable: false,
     nodesConnectable: false,
     scrollbarsThickness,
     scrollbarsMargin,
     edgePriorities,
-    shouldLayout,
   };
 
   return (

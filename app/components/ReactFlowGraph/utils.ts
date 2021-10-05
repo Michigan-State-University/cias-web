@@ -8,65 +8,46 @@ import {
 } from 'react-flow-renderer';
 import { layout, graphlib } from 'dagre';
 import isEqual from 'lodash/isEqual';
-import maxBy from 'lodash/maxBy';
 
 import { isNanOrInfinite } from 'utils/mathUtils';
 import { Matrix2D, MatrixNode } from 'utils/pathFinding';
 
 import { MATRIX_X_SCALE, MATRIX_Y_SCALE } from './constants';
-
-const calculateNodeDimensionsForLayout = (
-  node: Node,
-  renderedNodes: Node[],
-): { width: number; height: number } => {
-  const renderedNode = renderedNodes.find(({ id }) => id === node.id);
-  if (renderedNode) {
-    const {
-      __rf: { width, height },
-    } = renderedNode;
-
-    return {
-      width,
-      height,
-    };
-  }
-  return { width: 0, height: 0 };
-};
+import { NodeDimensions } from './types';
 
 const createDagreGraphWithElements = (
   elements: FlowElement[],
-  renderedNodes: Node[],
   nodeTopMargin: number,
+  nodeDimensions: Map<string, NodeDimensions>,
 ): graphlib.Graph => {
   const dagreGraph = new graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
 
-  const biggestNode = maxBy(
-    renderedNodes,
-    (node) =>
-      // eslint-disable-next-line no-underscore-dangle
-      node?.__rf?.height,
-  );
-  const maxNodeHeight =
-    // eslint-disable-next-line no-underscore-dangle
-    (biggestNode?.__rf?.height as number) ?? 5 * nodeTopMargin;
+  let maxNodeHeight = 0;
+
+  elements.forEach((el) => {
+    if (isNode(el)) {
+      const dimensions = nodeDimensions.get(el.type!) || {
+        width: 0,
+        height: 0,
+      };
+
+      dagreGraph.setNode(el.id, { ...dimensions });
+
+      if (dimensions.height > maxNodeHeight) {
+        maxNodeHeight = dimensions.height;
+      }
+    } else {
+      dagreGraph.setEdge(el.source, el.target);
+    }
+  });
 
   dagreGraph.setGraph({
     rankdir: 'LR',
     ranksep: MATRIX_X_SCALE * 3, // Take into account rounding from both sides + extra margin around nodes
     nodesep: maxNodeHeight + 5 * nodeTopMargin, // Take into account rounding from both sides + extra margin around nodes
   });
-  elements.forEach((el) => {
-    if (isNode(el)) {
-      const nodeDimensions = calculateNodeDimensionsForLayout(
-        el,
-        renderedNodes,
-      );
-      dagreGraph.setNode(el.id, nodeDimensions);
-    } else {
-      dagreGraph.setEdge(el.source, el.target);
-    }
-  });
+
   return dagreGraph;
 };
 
@@ -107,8 +88,8 @@ const getLayoutedElementsAndPanAreaDimensions = (
 // Example: https://reactflow.dev/examples/layouting/
 export const layoutElements = (
   elements: FlowElement[],
-  renderedNodes: Node[],
   nodeTopMargin: number,
+  nodeDimensions: Map<string, NodeDimensions>,
 ): {
   layoutedElements: FlowElement[];
   panAreaWidth: number;
@@ -116,8 +97,8 @@ export const layoutElements = (
 } => {
   const dagreGraph = createDagreGraphWithElements(
     elements,
-    renderedNodes,
     nodeTopMargin,
+    nodeDimensions,
   );
 
   layout(dagreGraph);
@@ -267,14 +248,20 @@ export const calculateTransformToFitNodeInView = (
   currentTransform: FlowTransform,
   containerWidth: number,
   containerHeight: number,
+  nodeDimensions: Map<string, NodeDimensions>,
 ): FlowTransform => {
   const { x, y, zoom } = currentTransform;
-  const { position, __rf: ref } = element;
+  const { position, type } = element;
+
+  const { width, height } = nodeDimensions.get(type!) || {
+    width: 0,
+    height: 0,
+  };
 
   const elementLeftEndPosition = position.x * zoom;
   const elementTopEndPosition = position.y * zoom;
-  const elementRightEndPosition = (position.x + ref.width) * zoom;
-  const elementBottomEndPosition = (position.y + ref.height) * zoom;
+  const elementRightEndPosition = (position.x + width) * zoom;
+  const elementBottomEndPosition = (position.y + height) * zoom;
 
   const viewRightEndPosition = -1 * x + containerWidth;
   const viewBottomEndPosition = -1 * y + containerHeight;

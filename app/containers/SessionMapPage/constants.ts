@@ -4,7 +4,10 @@ import { colors } from 'theme';
 
 import { QuestionTypes } from 'models/Question/QuestionDto';
 
-import { CustomConnectionLineType } from 'components/ReactFlowGraph';
+import {
+  CustomConnectionLineType,
+  NodeDimensions,
+} from 'components/ReactFlowGraph';
 
 import { DownloadProgressState } from './types';
 
@@ -36,6 +39,12 @@ export enum SessionMapNodeType {
   SESSION = 'session',
   COLLAPSE = 'collapse',
 }
+
+export const sessionMapNodeDimensions = new Map<string, NodeDimensions>([
+  [SessionMapNodeType.QUESTION, { height: 148, width: 210 }],
+  [SessionMapNodeType.SESSION, { height: 148, width: 210 }],
+  [SessionMapNodeType.COLLAPSE, { height: 324, width: 440 }],
+]);
 
 export enum SessionMapHeadType {
   BASE = 'session-map-base',
