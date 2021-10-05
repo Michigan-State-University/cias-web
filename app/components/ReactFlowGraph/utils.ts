@@ -19,11 +19,10 @@ const createDagreGraphWithElements = (
   elements: FlowElement[],
   nodeTopMargin: number,
   nodeDimensions: Map<string, NodeDimensions>,
+  maxNodeHeight: number,
 ): graphlib.Graph => {
   const dagreGraph = new graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
-
-  let maxNodeHeight = 0;
 
   elements.forEach((el) => {
     if (isNode(el)) {
@@ -33,10 +32,6 @@ const createDagreGraphWithElements = (
       };
 
       dagreGraph.setNode(el.id, { ...dimensions });
-
-      if (dimensions.height > maxNodeHeight) {
-        maxNodeHeight = dimensions.height;
-      }
     } else {
       dagreGraph.setEdge(el.source, el.target);
     }
@@ -45,7 +40,7 @@ const createDagreGraphWithElements = (
   dagreGraph.setGraph({
     rankdir: 'LR',
     ranksep: MATRIX_X_SCALE * 3, // Take into account rounding from both sides + extra margin around nodes
-    nodesep: maxNodeHeight + 5 * nodeTopMargin, // Take into account rounding from both sides + extra margin around nodes
+    nodesep: maxNodeHeight / 2 + 5 * nodeTopMargin, // Take into account rounding from both sides + extra margin around nodes
   });
 
   return dagreGraph;
@@ -90,6 +85,7 @@ export const layoutElements = (
   elements: FlowElement[],
   nodeTopMargin: number,
   nodeDimensions: Map<string, NodeDimensions>,
+  maxNodeHeight: number,
 ): {
   layoutedElements: FlowElement[];
   panAreaWidth: number;
@@ -99,6 +95,7 @@ export const layoutElements = (
     elements,
     nodeTopMargin,
     nodeDimensions,
+    maxNodeHeight,
   );
 
   layout(dagreGraph);
@@ -392,3 +389,15 @@ export const assignMatrixToEdges = (
 
     return element;
   });
+
+export const findMaxNodeHeight = (
+  nodeDimensions: Map<string, NodeDimensions>,
+): number => {
+  let maxHeight = 0;
+
+  nodeDimensions.forEach(({ height }) => {
+    if (height > maxHeight) maxHeight = height;
+  });
+
+  return maxHeight;
+};

@@ -22,6 +22,7 @@ import {
   calculateScrollbarSizeRatio,
   calculateTransformToFitNodeInView,
   calculateTransformToFitViewInContainer,
+  findMaxNodeHeight,
   layoutElements,
   prioritizeEdges,
 } from './utils';
@@ -96,9 +97,15 @@ const ReactFlowGraph = ({
     zoomTo(zoom);
   }, [zoom]);
 
+  const maxNodeHeight = useMemo(
+    () => findMaxNodeHeight(nodeDimensions),
+    [nodeDimensions],
+  );
+
   const { layoutedElements, panAreaWidth, panAreaHeight } = useMemo(
-    () => layoutElements(elements, nodeTopMargin, nodeDimensions),
-    [elements, nodeTopMargin, nodeDimensions],
+    () =>
+      layoutElements(elements, nodeTopMargin, nodeDimensions, maxNodeHeight),
+    [elements, nodeTopMargin, nodeDimensions, maxNodeHeight],
   );
 
   const layoutedElementsWithPrioritizedEdges = useMemo(
