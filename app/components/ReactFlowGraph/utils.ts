@@ -8,8 +8,12 @@ import {
 } from 'react-flow-renderer';
 import { layout, graphlib } from 'dagre';
 import isEqual from 'lodash/isEqual';
+import maxBy from 'lodash/maxBy';
 
 import { isNanOrInfinite } from 'utils/mathUtils';
+import { Matrix2D, MatrixNode } from 'utils/pathFinding';
+
+import { MATRIX_X_SCALE, MATRIX_Y_SCALE } from './constants';
 
 const calculateNodeDimensionsForLayout = (
   node: Node,
@@ -32,10 +36,26 @@ const calculateNodeDimensionsForLayout = (
 const createDagreGraphWithElements = (
   elements: FlowElement[],
   renderedNodes: Node[],
+  nodeTopMargin: number,
 ): graphlib.Graph => {
   const dagreGraph = new graphlib.Graph();
   dagreGraph.setDefaultEdgeLabel(() => ({}));
-  dagreGraph.setGraph({ rankdir: 'LR' });
+
+  const biggestNode = maxBy(
+    renderedNodes,
+    (node) =>
+      // eslint-disable-next-line no-underscore-dangle
+      node?.__rf?.height,
+  );
+  const maxNodeHeight =
+    // eslint-disable-next-line no-underscore-dangle
+    (biggestNode?.__rf?.height as number) ?? 5 * nodeTopMargin;
+
+  dagreGraph.setGraph({
+    rankdir: 'LR',
+    ranksep: MATRIX_X_SCALE * 3, // Take into account rounding from both sides + extra margin around nodes
+    nodesep: maxNodeHeight + 5 * nodeTopMargin, // Take into account rounding from both sides + extra margin around nodes
+  });
   elements.forEach((el) => {
     if (isNode(el)) {
       const nodeDimensions = calculateNodeDimensionsForLayout(
@@ -94,15 +114,34 @@ export const layoutElements = (
   panAreaWidth: number;
   panAreaHeight: number;
 } => {
-  const dagreGraph = createDagreGraphWithElements(elements, renderedNodes);
+  const dagreGraph = createDagreGraphWithElements(
+    elements,
+    renderedNodes,
+    nodeTopMargin,
+  );
 
   layout(dagreGraph);
 
-  return getLayoutedElementsAndPanAreaDimensions(
-    elements,
+  const { layoutedElements, panAreaWidth, panAreaHeight } =
+    getLayoutedElementsAndPanAreaDimensions(
+      elements,
+      dagreGraph,
+      nodeTopMargin,
+    );
+
+  const matrix = generate2DMatrixFromNodes(
+    layoutedElements,
     dagreGraph,
+    panAreaWidth,
+    panAreaHeight,
     nodeTopMargin,
   );
+
+  return {
+    layoutedElements: assignMatrixToEdges(layoutedElements, matrix),
+    panAreaWidth,
+    panAreaHeight,
+  };
 };
 
 // edges with higher priorities will be later in the elements array so they will
@@ -279,3 +318,90 @@ export const areTransformsDifferent = (
   transformA: FlowTransform,
   transformB: FlowTransform,
 ): boolean => !isEqual(transformA, transformB);
+
+export const generate2DMatrixFromNodes = (
+  elements: FlowElement[],
+  dagreGraph: graphlib.Graph,
+  graphWidth: number,
+  graphHeight: number,
+  nodeTopMargin: number,
+): Matrix2D => {
+  const scaledGraphWidth = Math.floor(graphWidth / MATRIX_X_SCALE);
+  const scaledGraphHeight = Math.floor(graphHeight / MATRIX_Y_SCALE);
+
+  const matrix: Matrix2D = instantiateEmpty2DMatrix(
+    scaledGraphHeight,
+    scaledGraphWidth,
+  );
+
+  elements.forEach((element) => {
+    if (isNode(element)) {
+      const { width, height } = dagreGraph.node(element.id);
+      drawNodeOnMatrix(matrix, element, width, height, nodeTopMargin);
+    }
+  });
+
+  return matrix;
+};
+
+/*
+  Tried to find most efficient solution: https://stackoverflow.com/a/53029824
+  TypedArray (like Int8Array) is the most efficient Array filler and creator, so it's best used for really big arrays (not compatible with libraries)
+  Then according to benchmark new Array(n)+for is the second winner accross multiple browsers
+*/
+const instantiateEmpty2DMatrix = (width: number, height: number): Matrix2D => {
+  const matrix = new Array<Array<number>>(width);
+
+  for (let x = 0; x < width; ++x) {
+    const column = new Array<number>(height);
+
+    for (let y = 0; y < height; ++y) column[y] = MatrixNode.Walkable;
+
+    matrix[x] = column;
+  }
+
+  return matrix;
+};
+
+const drawNodeOnMatrix = (
+  matrix: Matrix2D,
+  node: Node,
+  width: number,
+  height: number,
+  nodeTopMargin: number,
+) => {
+  const {
+    position: { x: sourceX, y: sourceY },
+  } = node;
+
+  // Scale the size up to prevent line going over node edges
+  const scaledMarginSize = Math.ceil(nodeTopMargin / MATRIX_Y_SCALE);
+  const scaledWidth = Math.ceil(width / MATRIX_X_SCALE);
+  const scaledHeight = Math.ceil(height / MATRIX_Y_SCALE) + scaledMarginSize;
+  const scaledSourceX = Math.floor(sourceX / MATRIX_X_SCALE);
+  const scaledSourceY = Math.floor(sourceY / MATRIX_Y_SCALE) - scaledMarginSize;
+
+  for (let x = scaledSourceX, targetX = x + scaledWidth; x <= targetX; x++) {
+    for (let y = scaledSourceY, targetY = y + scaledHeight; y <= targetY; y++) {
+      if (matrix[y] !== undefined && matrix[y][x] !== undefined)
+        // eslint-disable-next-line no-param-reassign
+        matrix[y][x] = MatrixNode.Blocked;
+    }
+  }
+};
+
+export const assignMatrixToEdges = (
+  elements: FlowElement[],
+  matrix: Matrix2D,
+): FlowElement[] =>
+  elements.map((element) => {
+    if (isEdge(element))
+      return {
+        ...element,
+        data: {
+          matrix,
+        },
+      };
+
+    return element;
+  });

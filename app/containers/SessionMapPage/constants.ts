@@ -1,8 +1,10 @@
-import { ConnectionLineType, Edge } from 'react-flow-renderer';
+import { Edge } from 'react-flow-renderer';
 
 import { colors } from 'theme';
 
 import { QuestionTypes } from 'models/Question';
+
+import { CustomConnectionLineType } from 'components/ReactFlowGraph';
 
 import { DownloadProgressState } from './types';
 
@@ -48,7 +50,7 @@ export const edgePriorities = new Map<string, number>([
 ]);
 
 export const edgeSharedAttributes: Partial<Edge> = {
-  type: ConnectionLineType.SmoothStep,
+  type: CustomConnectionLineType.PathFind,
 };
 
 export const baseEdgeSharedAttributes: Partial<Edge> = {
