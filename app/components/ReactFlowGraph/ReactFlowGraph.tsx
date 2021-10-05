@@ -24,6 +24,12 @@ import {
   layoutElements,
   prioritizeEdges,
 } from './utils';
+import { CustomConnectionLineType } from './types';
+import PathFindingEdge from './custom/PathFindingEdge';
+
+export const edgeTypes = {
+  [CustomConnectionLineType.PathFind]: PathFindingEdge,
+};
 
 export interface ReactFlowGraphProps extends ReactFlowProps {
   defaultMinZoom?: number;
@@ -235,6 +241,7 @@ const ReactFlowGraph = ({
   const reactFlowProps: ReactFlowProps = {
     elements: layoutedElementsWithPrioritizedEdges,
     nodeTypes,
+    edgeTypes,
     translateExtent: [
       [0, 0],
       [panAreaWidth, panAreaHeight],
