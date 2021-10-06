@@ -63,7 +63,7 @@ const SessionMapSessionNode = ({
         )}
         {!showDetailedInfo && (
           <SessionMapNodeBriefInfo
-            height={detailedInfoHeight}
+            minHeight={detailedInfoHeight}
             info={formatMessage(messages.sessionNo, { no: sessionNo })}
           />
         )}
