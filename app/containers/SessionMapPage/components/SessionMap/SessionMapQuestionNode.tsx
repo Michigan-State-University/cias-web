@@ -13,15 +13,10 @@ import { ReactFlowNodeHandles } from 'components/ReactFlowGraph';
 
 import messages from '../../messages';
 import { QuestionNodeData } from '../../types';
-import {
-  nodeWidth,
-  questionNodeLabelOffset,
-  questionNodeMaxHeight,
-  sessionMapColors,
-} from '../../constants';
+import { questionNodeLabelOffset, sessionMapColors } from '../../constants';
+import { getNodeDimensions, getNodeOpacity } from './utils';
 import SessionMapQuestionNodeDetailedInfo from './SessionMapQuestionNodeDetailedInfo';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
-import { getNodeOpacity } from './utils';
 
 const getBorder = (detailsShown: boolean, selected: boolean) => {
   if (detailsShown) return `3px solid ${sessionMapColors.nodeDetailsShown}`;
@@ -42,6 +37,7 @@ const SessionMapQuestionNode = ({
     onSelectedChange,
     selectableOnClick,
   },
+  type: nodeType,
 }: NodeProps<QuestionNodeData>): JSX.Element => {
   const { formatMessage } = useIntl();
 
@@ -51,6 +47,8 @@ const SessionMapQuestionNode = ({
     () => getBorder(showDetails, selected),
     [showDetails, selected],
   );
+
+  const nodeDimensions = useMemo(() => getNodeDimensions(nodeType), [nodeType]);
 
   const nodeRef = useRef<HTMLElement>(null);
 
@@ -70,13 +68,13 @@ const SessionMapQuestionNode = ({
   const opacity = getNodeOpacity(selectableOnClick, selected);
 
   return (
-    <Row align="center" height={questionNodeMaxHeight}>
+    <Row align="center" height={nodeDimensions.height}>
       {showDetailedInfo && (
         <Row
           position="absolute" // to make edge handles stay vertically centered on the tile
           top={-1 * questionNodeLabelOffset}
           height={questionNodeLabelOffset}
-          width={nodeWidth}
+          width={nodeDimensions.width}
           justify="center"
           cursor="default"
           opacity={opacity}
@@ -89,7 +87,7 @@ const SessionMapQuestionNode = ({
       <Box
         py={thickBorder ? 16 : 18}
         px={thickBorder ? 22 : 24}
-        width={nodeWidth}
+        width={nodeDimensions.width}
         bg={themeColors.highlight}
         border={border}
         cursor={selectableOnClick ? 'pointer' : 'default'}

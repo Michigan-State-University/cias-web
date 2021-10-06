@@ -18,9 +18,11 @@ import {
 import {
   baseEdgeSharedAttributes,
   directConnectionEdgeSharedAttributes,
+  fallbackNodeDimensions,
   grayedOutEdgeSharedAttributes,
   highlightedEdgeSharedAttributes,
   SessionMapHeadType,
+  sessionMapNodeDimensions,
   SessionMapNodeType,
 } from '../../constants';
 
@@ -574,3 +576,6 @@ export const collapseQuestionsWithoutBranching = (
 
   return [...nodesCopy, ...edgesCopy];
 };
+
+export const getNodeDimensions = (nodeType: SessionMapNodeType | string) =>
+  sessionMapNodeDimensions.get(nodeType) || fallbackNodeDimensions;

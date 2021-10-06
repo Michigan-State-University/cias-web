@@ -46,6 +46,8 @@ export const sessionMapNodeDimensions = new Map<string, NodeDimensions>([
   [SessionMapNodeType.COLLAPSE, { height: 324, width: 440 }],
 ]);
 
+export const fallbackNodeDimensions: NodeDimensions = { width: 0, height: 0 };
+
 export enum SessionMapHeadType {
   BASE = 'session-map-base',
   HIGHLIGHTED = 'session-map-highlighted',

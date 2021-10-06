@@ -6,11 +6,11 @@ import Box from 'components/Box';
 import { ReactFlowNodeHandles } from 'components/ReactFlowGraph';
 
 import { SessionNodeData } from '../../types';
-import { nodeWidth, sessionMapColors } from '../../constants';
+import { sessionMapColors } from '../../constants';
 import messages from '../../messages';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
 import SessionMapSessionNodeDetailedInfo from './SessionMapSessionNodeDetailedInfo';
-import { getNodeOpacity } from './utils';
+import { getNodeDimensions, getNodeOpacity } from './utils';
 
 const getBorder = (selected: boolean) =>
   selected
@@ -26,8 +26,11 @@ const SessionMapSessionNode = ({
     onSelectedChange,
     selectableOnClick,
   },
+  type: nodeType,
 }: NodeProps<SessionNodeData>): JSX.Element => {
   const { formatMessage } = useIntl();
+
+  const nodeDimensions = useMemo(() => getNodeDimensions(nodeType), [nodeType]);
 
   const nodeRef = useRef<HTMLElement>(null);
 
@@ -49,7 +52,7 @@ const SessionMapSessionNode = ({
       <Box
         py={selected ? 16 : 18}
         px={selected ? 22 : 24}
-        width={nodeWidth}
+        width={nodeDimensions.width}
         bg={sessionMapColors.sessionNode}
         bgOpacity={0.3}
         border={getBorder(selected)}

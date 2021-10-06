@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import { NodeProps } from 'react-flow-renderer';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
@@ -16,12 +16,16 @@ import Text from 'components/Text';
 import { CollapseNodeData } from '../../types';
 import { sessionMapColors } from '../../constants';
 import messages from '../../messages';
+import { getNodeDimensions } from './utils';
 
 const SessionMapCollapseNode = ({
   id,
   data: { firstCollapsedScreenNo, lastCollapsedScreenNo },
+  type: nodeType,
 }: NodeProps<CollapseNodeData>): JSX.Element => {
   const { formatMessage } = useIntl();
+
+  const nodeDimensions = useMemo(() => getNodeDimensions(nodeType), [nodeType]);
 
   const borderX = `1px dashed ${sessionMapColors.sessionNode}`;
 
@@ -34,8 +38,7 @@ const SessionMapCollapseNode = ({
   return (
     <>
       <Box
-        width={440}
-        height={324}
+        {...nodeDimensions}
         px={25}
         mx={15}
         borderLeft={borderX}
