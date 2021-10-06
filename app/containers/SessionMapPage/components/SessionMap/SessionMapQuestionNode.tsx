@@ -13,17 +13,17 @@ import { ReactFlowNodeHandles } from 'components/ReactFlowGraph';
 
 import messages from '../../messages';
 import { QuestionNodeData } from '../../types';
-import { questionNodeLabelOffset, sessionMapColors } from '../../constants';
+import {
+  questionNodeLabelOffset,
+  sessionMapColors,
+  nodeThinBorderWidth,
+  nodeThickBorderWidth,
+  nodeVerticalNonContentWidth,
+  nodeHorizontalNonContentWidth,
+} from '../../constants';
 import { getNodeDimensions, getNodeOpacity } from './utils';
 import SessionMapQuestionNodeDetailedInfo from './SessionMapQuestionNodeDetailedInfo';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
-
-const getBorder = (detailsShown: boolean, selected: boolean) => {
-  if (detailsShown) return `3px solid ${sessionMapColors.nodeDetailsShown}`;
-  return selected
-    ? `3px solid ${sessionMapColors.selected}`
-    : `1px solid ${sessionMapColors.nodeBase}`;
-};
 
 const SessionMapQuestionNode = ({
   id,
@@ -43,18 +43,15 @@ const SessionMapQuestionNode = ({
 
   const { type } = question;
 
-  const border = useMemo(
-    () => getBorder(showDetails, selected),
-    [showDetails, selected],
-  );
-
   const nodeDimensions = useMemo(() => getNodeDimensions(nodeType), [nodeType]);
 
   const nodeRef = useRef<HTMLElement>(null);
 
   // save node height without border and padding on initial render
   const detailedInfoHeight = useMemo(
-    () => nodeRef?.current?.firstElementChild?.clientHeight ?? 108,
+    () =>
+      nodeRef?.current?.firstElementChild?.clientHeight ??
+      nodeDimensions.height - 2 * nodeVerticalNonContentWidth,
     [nodeRef.current?.firstElementChild?.clientHeight],
   );
 
@@ -63,7 +60,17 @@ const SessionMapQuestionNode = ({
 
   const screenNo = questionIndex + 1;
 
-  const thickBorder = showDetails || selected;
+  const borderWidth = useMemo(
+    () =>
+      showDetails || selected ? nodeThickBorderWidth : nodeThinBorderWidth,
+    [showDetails, selected],
+  );
+
+  const borderColor = useMemo(() => {
+    if (showDetails) return sessionMapColors.nodeDetailsShown;
+    if (selected) return sessionMapColors.selected;
+    return sessionMapColors.nodeBase;
+  }, [showDetails, selected]);
 
   const opacity = getNodeOpacity(selectableOnClick, selected);
 
@@ -85,11 +92,11 @@ const SessionMapQuestionNode = ({
         </Row>
       )}
       <Box
-        py={thickBorder ? 16 : 18}
-        px={thickBorder ? 22 : 24}
+        py={nodeVerticalNonContentWidth - borderWidth}
+        px={nodeHorizontalNonContentWidth - borderWidth}
         width={nodeDimensions.width}
         bg={themeColors.highlight}
-        border={border}
+        border={`${borderWidth}px solid ${borderColor}`}
         cursor={selectableOnClick ? 'pointer' : 'default'}
         opacity={opacity}
         ref={nodeRef}

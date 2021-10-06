@@ -6,16 +6,17 @@ import Box from 'components/Box';
 import { ReactFlowNodeHandles } from 'components/ReactFlowGraph';
 
 import { SessionNodeData } from '../../types';
-import { sessionMapColors } from '../../constants';
+import {
+  sessionMapColors,
+  nodeThinBorderWidth,
+  nodeThickBorderWidth,
+  nodeVerticalNonContentWidth,
+  nodeHorizontalNonContentWidth,
+} from '../../constants';
 import messages from '../../messages';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
 import SessionMapSessionNodeDetailedInfo from './SessionMapSessionNodeDetailedInfo';
 import { getNodeDimensions, getNodeOpacity } from './utils';
-
-const getBorder = (selected: boolean) =>
-  selected
-    ? `3px dashed ${sessionMapColors.selected}`
-    : `1px dashed ${sessionMapColors.sessionNode}`;
 
 const SessionMapSessionNode = ({
   id,
@@ -36,7 +37,9 @@ const SessionMapSessionNode = ({
 
   // save node height without border and padding on initial render
   const detailedInfoHeight = useMemo(
-    () => nodeRef?.current?.firstElementChild?.clientHeight ?? 72,
+    () =>
+      nodeRef?.current?.firstElementChild?.clientHeight ??
+      nodeDimensions.height - 2 * nodeVerticalNonContentWidth,
     [nodeRef.current?.firstElementChild?.clientHeight],
   );
 
@@ -45,17 +48,27 @@ const SessionMapSessionNode = ({
 
   const sessionNo = sessionIndex + 1;
 
+  const borderWidth = useMemo(
+    () => (selected ? nodeThickBorderWidth : nodeThinBorderWidth),
+    [selected],
+  );
+
+  const borderColor = useMemo(() => {
+    if (selected) return sessionMapColors.selected;
+    return sessionMapColors.nodeBase;
+  }, [selected]);
+
   const opacity = getNodeOpacity(selectableOnClick, selected);
 
   return (
     <>
       <Box
-        py={selected ? 16 : 18}
-        px={selected ? 22 : 24}
+        py={nodeVerticalNonContentWidth - borderWidth}
+        px={nodeHorizontalNonContentWidth - borderWidth}
         width={nodeDimensions.width}
         bg={sessionMapColors.sessionNode}
         bgOpacity={0.3}
-        border={getBorder(selected)}
+        border={`${borderWidth}px dashed ${borderColor}`}
         cursor={selectableOnClick ? 'pointer' : 'default'}
         opacity={opacity}
         ref={nodeRef}

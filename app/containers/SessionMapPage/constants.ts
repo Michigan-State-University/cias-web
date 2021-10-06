@@ -17,9 +17,15 @@ export const defaultZoom = 1;
 
 export const detailedInfoZoomThreshold = 0.75;
 
-export const nodeWidth = 210;
-export const questionNodeMaxHeight = 148;
 export const questionNodeLabelOffset = 32;
+
+export const nodeThinBorderWidth = 1;
+export const nodeThickBorderWidth = 3;
+
+// vertical margin + vertical border width + vertical padding
+export const nodeVerticalNonContentWidth = 19;
+// horizontal margin + horizontal border width + horizontal padding
+export const nodeHorizontalNonContentWidth = 25;
 
 export const scrollbarsThickness = 5;
 export const scrollbarsMargin = 15;
@@ -41,8 +47,8 @@ export enum SessionMapNodeType {
 }
 
 export const sessionMapNodeDimensions = new Map<string, NodeDimensions>([
-  [SessionMapNodeType.QUESTION, { height: 148, width: 210 }],
-  [SessionMapNodeType.SESSION, { height: 148, width: 210 }],
+  [SessionMapNodeType.QUESTION, { height: 146, width: 210 }],
+  [SessionMapNodeType.SESSION, { height: 110, width: 210 }],
   [SessionMapNodeType.COLLAPSE, { height: 324, width: 440 }],
 ]);
 

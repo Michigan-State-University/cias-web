@@ -14,7 +14,7 @@ import H1 from 'components/H1';
 import Text from 'components/Text';
 
 import { CollapseNodeData } from '../../types';
-import { sessionMapColors } from '../../constants';
+import { sessionMapColors, nodeThinBorderWidth } from '../../constants';
 import messages from '../../messages';
 import { getNodeDimensions } from './utils';
 
@@ -27,7 +27,7 @@ const SessionMapCollapseNode = ({
 
   const nodeDimensions = useMemo(() => getNodeDimensions(nodeType), [nodeType]);
 
-  const borderX = `1px dashed ${sessionMapColors.sessionNode}`;
+  const verticalBorder = `${nodeThinBorderWidth}px dashed ${sessionMapColors.sessionNode}`;
 
   const collapseNodeBody = formatMessage(messages.collapseNodeBody, {
     firstCollapsedScreenNo: styleTextBold(firstCollapsedScreenNo),
@@ -41,8 +41,8 @@ const SessionMapCollapseNode = ({
         {...nodeDimensions}
         px={25}
         mx={15}
-        borderLeft={borderX}
-        borderRight={borderX}
+        borderLeft={verticalBorder}
+        borderRight={verticalBorder}
       >
         <Column height="100%" justify="center">
           <H1 mb={15}>{formatMessage(messages.collapseNodeTitle)}</H1>
