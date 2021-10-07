@@ -7,3 +7,8 @@ export enum CustomConnectionLineType {
 export type PathFindingEdgeData = {
   matrix: Matrix2D;
 };
+
+export interface NodeDimensions {
+  width: number;
+  height: number;
+}

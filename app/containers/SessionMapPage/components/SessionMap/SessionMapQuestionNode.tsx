@@ -12,22 +12,18 @@ import Row from 'components/Row';
 import { ReactFlowNodeHandles } from 'components/ReactFlowGraph';
 
 import messages from '../../messages';
-import { QuestionTileData } from '../../types';
+import { QuestionNodeData } from '../../types';
 import {
-  nodeWidth,
   questionNodeLabelOffset,
   sessionMapColors,
+  nodeThinBorderWidth,
+  nodeThickBorderWidth,
+  nodeVerticalNonContentWidth,
+  nodeHorizontalNonContentWidth,
 } from '../../constants';
+import { getNodeDimensions, getNodeOpacity } from './utils';
 import SessionMapQuestionNodeDetailedInfo from './SessionMapQuestionNodeDetailedInfo';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
-import { getNodeOpacity } from './utils';
-
-const getBorder = (detailsShown: boolean, selected: boolean) => {
-  if (detailsShown) return `3px solid ${sessionMapColors.nodeDetailsShown}`;
-  return selected
-    ? `3px solid ${sessionMapColors.selected}`
-    : `1px solid ${sessionMapColors.nodeBase}`;
-};
 
 const SessionMapQuestionNode = ({
   id,
@@ -36,46 +32,56 @@ const SessionMapQuestionNode = ({
     showDetails,
     onShowDetailsChange,
     showDetailedInfo,
-    index,
+    questionIndex,
     selected,
     onSelectedChange,
     selectableOnClick,
   },
-}: NodeProps<QuestionTileData>): JSX.Element => {
+  type: nodeType,
+}: NodeProps<QuestionNodeData>): JSX.Element => {
   const { formatMessage } = useIntl();
 
   const { type } = question;
 
-  const border = useMemo(
-    () => getBorder(showDetails, selected),
-    [showDetails, selected],
-  );
+  const nodeDimensions = useMemo(() => getNodeDimensions(nodeType), [nodeType]);
 
   const nodeRef = useRef<HTMLElement>(null);
 
   // save node height without border and padding on initial render
   const detailedInfoHeight = useMemo(
-    () => nodeRef?.current?.firstElementChild?.clientHeight ?? 0,
-    [nodeRef.current],
+    () =>
+      nodeRef?.current?.firstElementChild?.clientHeight ??
+      nodeDimensions.height - 2 * nodeVerticalNonContentWidth,
+    [nodeRef.current?.firstElementChild?.clientHeight],
   );
 
   const handleClick = () =>
     selectableOnClick && onSelectedChange(!selected, id);
 
-  const screenNo = index + 1;
+  const screenNo = questionIndex + 1;
 
-  const thickBorder = showDetails || selected;
+  const borderWidth = useMemo(
+    () =>
+      showDetails || selected ? nodeThickBorderWidth : nodeThinBorderWidth,
+    [showDetails, selected],
+  );
+
+  const borderColor = useMemo(() => {
+    if (showDetails) return sessionMapColors.nodeDetailsShown;
+    if (selected) return sessionMapColors.selected;
+    return sessionMapColors.nodeBase;
+  }, [showDetails, selected]);
 
   const opacity = getNodeOpacity(selectableOnClick, selected);
 
   return (
-    <>
+    <Row align="center" height={nodeDimensions.height}>
       {showDetailedInfo && (
         <Row
           position="absolute" // to make edge handles stay vertically centered on the tile
           top={-1 * questionNodeLabelOffset}
           height={questionNodeLabelOffset}
-          width={nodeWidth}
+          width={nodeDimensions.width}
           justify="center"
           cursor="default"
           opacity={opacity}
@@ -86,12 +92,11 @@ const SessionMapQuestionNode = ({
         </Row>
       )}
       <Box
-        py={thickBorder ? 16 : 18}
-        px={thickBorder ? 22 : 24}
-        width={nodeWidth}
-        maxHeight={146} // workaround to make dagre layout question nodes with ellipsis text correctly, update if necessary
+        py={nodeVerticalNonContentWidth - borderWidth}
+        px={nodeHorizontalNonContentWidth - borderWidth}
+        width={nodeDimensions.width}
         bg={themeColors.highlight}
-        border={border}
+        border={`${borderWidth}px solid ${borderColor}`}
         cursor={selectableOnClick ? 'pointer' : 'default'}
         opacity={opacity}
         ref={nodeRef}
@@ -106,7 +111,7 @@ const SessionMapQuestionNode = ({
         )}
         {!showDetailedInfo && (
           <SessionMapNodeBriefInfo
-            height={detailedInfoHeight}
+            minHeight={detailedInfoHeight}
             info={formatMessage(messages.screenNo, { no: screenNo })}
           />
         )}
@@ -118,7 +123,7 @@ const SessionMapQuestionNode = ({
           selected ? sessionMapColors.selected : sessionMapColors.edgeBase
         }
       />
-    </>
+    </Row>
   );
 };
 

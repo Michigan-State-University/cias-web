@@ -25,18 +25,22 @@ import {
   scrollbarsMargin,
   edgePriorities,
   SESSION_MAP_ID,
+  sessionMapNodeDimensions,
 } from '../../constants';
 import {
   sortQuestionsByGroupAndPosition,
   createMapNodes,
   createMapEdges,
+  collapseQuestionsWithoutBranching,
 } from './utils';
 import SessionMapSessionNode from './SessionMapSessionNode';
 import SessionMapQuestionNode from './SessionMapQuestionNode';
+import SessionMapCollapseNode from './SessionMapCollapseNode';
 
 const nodeTypes: NodeTypesType = {
   [SessionMapNodeType.QUESTION]: SessionMapQuestionNode,
   [SessionMapNodeType.SESSION]: SessionMapSessionNode,
+  [SessionMapNodeType.COLLAPSE]: SessionMapCollapseNode,
 };
 
 type Props = {
@@ -50,6 +54,8 @@ type Props = {
   minZoom: number;
   onMinZoomChange: (minZoom: number) => void;
   userSessionNodesIds: string[];
+  showWithBranchingOnly: boolean;
+  onIsBranchingChange: (isBranching: boolean) => void;
 };
 
 const SessionMap = ({
@@ -63,6 +69,8 @@ const SessionMap = ({
   minZoom,
   onMinZoomChange,
   userSessionNodesIds,
+  showWithBranchingOnly,
+  onIsBranchingChange,
 }: Props): JSX.Element => {
   const [selectedNodesIds, setSelectedNodesIds] = useState<string[]>([]);
 
@@ -111,9 +119,9 @@ const SessionMap = ({
     [questions, questionGroups],
   );
 
-  const elements = useMemo(
+  const [nodes, edges] = useMemo(
     () => [
-      ...createMapNodes(
+      createMapNodes(
         sortedQuestions,
         showDetailsId,
         handleShowDetailsChange,
@@ -123,10 +131,11 @@ const SessionMap = ({
         handleSelectedChange,
         nodesSelectableOnClick,
       ),
-      ...createMapEdges(
+      createMapEdges(
         sortedQuestions,
         selectedNodesIds,
         nodesSelectableOnClick,
+        sessions,
       ),
     ],
     [
@@ -141,6 +150,23 @@ const SessionMap = ({
     ],
   );
 
+  const isBranching = useMemo(
+    () => edges.length !== nodes.length - 1,
+    [nodes, edges],
+  );
+
+  useEffect(() => {
+    onIsBranchingChange(isBranching);
+  }, [isBranching]);
+
+  const elements = useMemo(() => {
+    if (showWithBranchingOnly) {
+      return collapseQuestionsWithoutBranching(nodes, edges);
+    }
+
+    return [...nodes, ...edges];
+  }, [showWithBranchingOnly, nodes, edges]);
+
   const sessionMapGraphProps: ReactFlowGraphProps = {
     defaultMinZoom,
     defaultMaxZoom,
@@ -152,6 +178,7 @@ const SessionMap = ({
     elements,
     nodeTypes,
     nodeTopMargin: questionNodeLabelOffset,
+    nodeDimensions: sessionMapNodeDimensions,
     pickedNodeId: showDetailsId,
     nodesDraggable: false,
     nodesConnectable: false,

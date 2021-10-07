@@ -5,17 +5,18 @@ import { useIntl } from 'react-intl';
 import Box from 'components/Box';
 import { ReactFlowNodeHandles } from 'components/ReactFlowGraph';
 
-import { SessionTileData } from '../../types';
-import { nodeWidth, sessionMapColors } from '../../constants';
+import { SessionNodeData } from '../../types';
+import {
+  sessionMapColors,
+  nodeThinBorderWidth,
+  nodeThickBorderWidth,
+  nodeVerticalNonContentWidth,
+  nodeHorizontalNonContentWidth,
+} from '../../constants';
 import messages from '../../messages';
 import SessionMapNodeBriefInfo from './SessionMapNodeBriefInfo';
 import SessionMapSessionNodeDetailedInfo from './SessionMapSessionNodeDetailedInfo';
-import { getNodeOpacity } from './utils';
-
-const getBorder = (selected: boolean) =>
-  selected
-    ? `3px dashed ${sessionMapColors.selected}`
-    : `1px dashed ${sessionMapColors.sessionNode}`;
+import { getNodeDimensions, getNodeOpacity } from './utils';
 
 const SessionMapSessionNode = ({
   id,
@@ -26,15 +27,20 @@ const SessionMapSessionNode = ({
     onSelectedChange,
     selectableOnClick,
   },
-}: NodeProps<SessionTileData>): JSX.Element => {
+  type: nodeType,
+}: NodeProps<SessionNodeData>): JSX.Element => {
   const { formatMessage } = useIntl();
+
+  const nodeDimensions = useMemo(() => getNodeDimensions(nodeType), [nodeType]);
 
   const nodeRef = useRef<HTMLElement>(null);
 
   // save node height without border and padding on initial render
   const detailedInfoHeight = useMemo(
-    () => nodeRef?.current?.firstElementChild?.clientHeight ?? 0,
-    [nodeRef.current],
+    () =>
+      nodeRef?.current?.firstElementChild?.clientHeight ??
+      nodeDimensions.height - 2 * nodeVerticalNonContentWidth,
+    [nodeRef.current?.firstElementChild?.clientHeight],
   );
 
   const handleClick = () =>
@@ -42,17 +48,27 @@ const SessionMapSessionNode = ({
 
   const sessionNo = sessionIndex + 1;
 
+  const borderWidth = useMemo(
+    () => (selected ? nodeThickBorderWidth : nodeThinBorderWidth),
+    [selected],
+  );
+
+  const borderColor = useMemo(() => {
+    if (selected) return sessionMapColors.selected;
+    return sessionMapColors.nodeBase;
+  }, [selected]);
+
   const opacity = getNodeOpacity(selectableOnClick, selected);
 
   return (
     <>
       <Box
-        py={selected ? 16 : 18}
-        px={selected ? 22 : 24}
-        width={nodeWidth}
+        py={nodeVerticalNonContentWidth - borderWidth}
+        px={nodeHorizontalNonContentWidth - borderWidth}
+        width={nodeDimensions.width}
         bg={sessionMapColors.sessionNode}
         bgOpacity={0.3}
-        border={getBorder(selected)}
+        border={`${borderWidth}px dashed ${borderColor}`}
         cursor={selectableOnClick ? 'pointer' : 'default'}
         opacity={opacity}
         ref={nodeRef}
@@ -63,13 +79,13 @@ const SessionMapSessionNode = ({
         )}
         {!showDetailedInfo && (
           <SessionMapNodeBriefInfo
-            height={detailedInfoHeight}
+            minHeight={detailedInfoHeight}
             info={formatMessage(messages.sessionNo, { no: sessionNo })}
           />
         )}
       </Box>
       <ReactFlowNodeHandles
-        nodeId={`session-${sessionNo}`}
+        nodeId={id}
         sourceHandleColor={sessionMapColors.edgeBase}
       />
     </>
