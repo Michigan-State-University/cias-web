@@ -1,10 +1,5 @@
-export interface CatMhTestDTO {
-  name: string;
-  short_name: string;
-  cat_mh_test_attributes: {
-    id: string;
-    name: string;
-    range: string;
-    variable_type: string;
-  };
-}
+import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
+
+import { CatMhTest } from './CatMhTest';
+
+export type CatMhTestDTO = CamelToSnakeOmitId<CatMhTest>;

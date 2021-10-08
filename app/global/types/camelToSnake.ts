@@ -52,15 +52,17 @@ type SnakeCase<S extends string> = ToSnakeCase<S, ''>;
 /**
  * IMPORTANT: Supports keys with a max length of 37 characters.
  * Properties with keys longer than that will be omitted
- * Does not work recursively
  */
-export type CamelToSnake<T> = {
-  [K in keyof T as SnakeCase<Extract<K, string>>]: T[K];
-};
+export type CamelToSnake<T> = T extends readonly any[]
+  ? { [K in keyof T]: CamelToSnake<T[K]> }
+  : T extends object
+  ? {
+      [K in keyof T as SnakeCase<Extract<K, string>>]: CamelToSnake<T[K]>;
+    }
+  : T;
 
 /**
  * IMPORTANT: Supports keys with a max length of 37 characters.
  * Properties with keys longer than that will be omitted
- * Does not work recursively
  */
 export type CamelToSnakeOmitId<T> = Omit<CamelToSnake<T>, 'id'>;
