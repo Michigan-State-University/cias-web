@@ -3,7 +3,7 @@ import cloneDeep from 'lodash/cloneDeep';
 import intersection from 'lodash/intersection';
 
 import { QuestionGroup } from 'models/QuestionGroup';
-import { QuestionTypes, Question } from 'models/Question';
+import { QuestionTypes, QuestionDTO } from 'models/Question';
 import { SessionDto } from 'models/Session/SessionDto';
 import { Answer } from 'models/Answer';
 
@@ -26,8 +26,8 @@ import {
 
 export const sortQuestionsByGroupAndPosition = (
   questionGroups: QuestionGroup[],
-  questions: Question[],
-): Question[] => {
+  questions: QuestionDTO[],
+): QuestionDTO[] => {
   // sort all question groups itself by position
   const sortedQuestionGroups = questionGroups.sort((groupA, groupB) =>
     groupA.position <= groupB.position ? -1 : 1,
@@ -45,7 +45,7 @@ export const sortQuestionsByGroupAndPosition = (
 };
 
 const createQuestionNode = (
-  question: Question,
+  question: QuestionDTO,
   showDetailsId: string,
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void,
   showDetailedInfo: boolean,
@@ -77,7 +77,7 @@ const nodeExists = (nodes: Node[], nodeId: string): boolean =>
   Boolean(nodes.find(({ id }) => id === nodeId));
 
 const createSessionNodesFromBranching = (
-  question: Question,
+  question: QuestionDTO,
   sessions: SessionDto[],
   showDetailedInfo: boolean,
   selectedNodesIds: string[],
@@ -118,7 +118,7 @@ const createSessionNodesFromBranching = (
 };
 
 export const createMapNodes = (
-  questions: Question[],
+  questions: QuestionDTO[],
   showDetailsId: string,
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void,
   showDetailedInfo: boolean,
@@ -160,7 +160,7 @@ const createEdgeId = (sourceId: string, targetId: string): string =>
   `${sourceId}_TO_${targetId}`;
 
 const findQuestionPosition = (
-  questions: Question[],
+  questions: QuestionDTO[],
   questionId: string,
 ): number => questions.findIndex(({ id }) => id === questionId);
 
@@ -193,7 +193,7 @@ const createEdgeObject = (
 };
 
 const createMapEdgesFromNextQuestions = (
-  questions: Question[],
+  questions: QuestionDTO[],
   selectedQuestionsIds: string[],
   edgeSharedAttributesGetter: EdgeSharedAttributesGetter,
 ): Edge[] =>
@@ -211,7 +211,7 @@ const createMapEdgesFromNextQuestions = (
   });
 
 const createMapEdgesFromBranching = (
-  questions: Question[],
+  questions: QuestionDTO[],
   existingEdges: Edge[],
   selectedQuestionsIds: string[],
   edgeSharedAttributesGetter: EdgeSharedAttributesGetter,
@@ -343,7 +343,7 @@ const getEdgeSharedAttributesForNonSelectableNodes: EdgeSharedAttributesGetter =
   };
 
 export const createMapEdges = (
-  questions: Question[],
+  questions: QuestionDTO[],
   selectedNodesIds: string[],
   nodesSelectableOnClick: boolean,
   sessions: SessionDto[],
@@ -383,7 +383,7 @@ export const getNodeOpacity = (
 
 export const createUserSessionNodesIdsFromAnswers = (
   answers: Answer[],
-  questions: Question[],
+  questions: QuestionDTO[],
 ): string[] => {
   const userSessionNodesIds = answers.map(({ questionId }) => questionId);
 

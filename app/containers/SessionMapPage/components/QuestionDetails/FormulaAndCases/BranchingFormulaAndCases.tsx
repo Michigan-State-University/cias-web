@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { Question, QuestionFormulaTargetType } from 'models/Question';
+import { QuestionDTO, QuestionFormulaTargetType } from 'models/Question';
 import { SessionDto } from 'models/Session/SessionDto';
 import { SessionTargetType } from 'models/Session/SessionTargetType';
 import { Target } from 'models/Formula';
@@ -23,9 +23,9 @@ import CaseMatch from './CaseMatch';
 import { highlightTargetText } from './utils';
 
 type Props = {
-  question: Question;
+  question: QuestionDTO;
   sessions: SessionDto[];
-  questions: Question[];
+  questions: QuestionDTO[];
 };
 
 const BranchingFormulaAndCases = ({

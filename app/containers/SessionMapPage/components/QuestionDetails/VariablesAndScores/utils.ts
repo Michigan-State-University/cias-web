@@ -1,7 +1,7 @@
-import { QuestionData } from 'models/Question';
+import { QuestionDataDTO } from 'models/Question';
 
 export const formatThirdPartyReportQuestionData = (
-  questionData: QuestionData<string>[],
+  questionData: QuestionDataDTO<string>[],
 ): Map<string, Set<string>> => {
   const formattedData = new Map<string, Set<string>>();
 

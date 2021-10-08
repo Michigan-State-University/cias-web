@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
-import { SingleQuestion } from 'models/Question';
+import { SingleQuestionDTO } from 'models/Question';
 import { SingleAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
@@ -12,7 +12,7 @@ import { Radio } from 'components/Radio';
 import Text from 'components/Text';
 
 type Props = {
-  question: SingleQuestion;
+  question: SingleQuestionDTO;
   answer: SingleAnswer;
 };
 

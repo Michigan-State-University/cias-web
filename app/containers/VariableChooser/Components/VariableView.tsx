@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import useGet from 'utils/useGet';
 
-import { Question } from 'models/Question';
+import { QuestionDTO } from 'models/Question';
 
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
@@ -51,7 +51,7 @@ const VariableView = ({ onClick }: Props) => {
     const baseUrl = `v1/sessions/${currentSessionId}/variables/`;
     let suffix = '';
 
-    if (!includeAllVariables) suffix = (selectedQuestion as Question).id;
+    if (!includeAllVariables) suffix = (selectedQuestion as QuestionDTO).id;
 
     const urlParams = new URLSearchParams();
     if (!includeNonDigitVariables)

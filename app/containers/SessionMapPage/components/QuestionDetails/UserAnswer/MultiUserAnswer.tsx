@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
-import { MultipleQuestion } from 'models/Question';
+import { MultipleQuestionDTO } from 'models/Question';
 import { MultiAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
@@ -12,7 +12,7 @@ import Checkbox from 'components/Checkbox';
 import Text from 'components/Text';
 
 type Props = {
-  question: MultipleQuestion;
+  question: MultipleQuestionDTO;
   answer: MultiAnswer;
 };
 

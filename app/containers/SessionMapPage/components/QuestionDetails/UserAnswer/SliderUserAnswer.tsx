@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SliderQuestion } from 'models/Question';
+import { SliderQuestionDTO } from 'models/Question';
 import { SliderAnswer } from 'models/Answer';
 
 import { visualAnalogScaleLabelStyles } from 'theme';
@@ -9,7 +9,7 @@ import AppSlider from 'components/AppSlider';
 import Box from 'components/Box';
 
 type Props = {
-  question: SliderQuestion;
+  question: SliderQuestionDTO;
   answer: SliderAnswer;
 };
 

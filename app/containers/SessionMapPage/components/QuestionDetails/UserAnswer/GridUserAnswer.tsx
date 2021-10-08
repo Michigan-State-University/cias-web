@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { GridQuestion } from 'models/Question';
+import { GridQuestionDTO } from 'models/Question';
 import { GridAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
@@ -10,7 +10,7 @@ import Text from 'components/Text';
 import Comment from 'components/Text/Comment';
 
 type Props = {
-  question: GridQuestion;
+  question: GridQuestionDTO;
   answer: GridAnswer;
 };
 

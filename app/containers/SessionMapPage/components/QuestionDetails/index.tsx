@@ -3,7 +3,11 @@ import { useIntl } from 'react-intl';
 
 import { ReportTemplate } from 'models/ReportTemplate/ReportTemplateModel';
 import { QuestionGroup } from 'models/QuestionGroup';
-import { QuestionTypes, Question, FeedbackQuestion } from 'models/Question';
+import {
+  QuestionTypes,
+  FeedbackQuestionDTO,
+  QuestionDTO,
+} from 'models/Question';
 import { SessionDto } from 'models/Session/SessionDto';
 import { Answer } from 'models/Answer';
 
@@ -30,13 +34,13 @@ import {
 import UserAnswer from './UserAnswer';
 
 type Props = {
-  shownQuestion: Question;
+  shownQuestion: QuestionDTO;
   isUserSessionQuestion: boolean; // was this question shown to the user during preview session?
   questionAnswer: Nullable<Answer>;
   questionGroup: QuestionGroup;
   reportTemplates: ReportTemplate[];
   sessions: SessionDto[];
-  questions: Question[];
+  questions: QuestionDTO[];
   onGoToScreenClick: () => void;
 };
 
@@ -93,7 +97,7 @@ const SessionMapQuestionDetails = ({
           )}
           {type === QuestionTypes.FEEDBACK && (
             <FeedbackFormulaAndCases
-              question={shownQuestion as FeedbackQuestion}
+              question={shownQuestion as FeedbackQuestionDTO}
             />
           )}
           {type !== QuestionTypes.FINISH && (

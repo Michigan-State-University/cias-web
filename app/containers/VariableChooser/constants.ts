@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import { QuestionTypes, Question } from 'models/Question';
+import { QuestionTypes, QuestionDTO } from 'models/Question';
 import { SessionTypes } from 'models/Session/SessionDto';
 
 export enum VIEWS {
@@ -24,7 +24,7 @@ interface ContextType {
   isMultiSession: boolean;
   organizationId: string;
   questionTypeWhitelist: QuestionTypes[];
-  selectedQuestion: Question | {};
+  selectedQuestion: QuestionDTO | {};
   setCurrentView: (view: VIEWS) => void;
   sessionTypesWhiteList: SessionTypes[];
 }

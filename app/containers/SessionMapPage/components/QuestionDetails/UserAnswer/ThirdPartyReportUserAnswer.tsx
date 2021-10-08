@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
-import { ThirdPartyReportQuestion } from 'models/Question';
+import { ThirdPartyReportQuestionDTO } from 'models/Question';
 import { ThirdPartyReportAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
@@ -12,7 +12,7 @@ import { Radio } from 'components/Radio';
 import Text from 'components/Text';
 
 type Props = {
-  question: ThirdPartyReportQuestion;
+  question: ThirdPartyReportQuestionDTO;
   answer: ThirdPartyReportAnswer;
 };
 

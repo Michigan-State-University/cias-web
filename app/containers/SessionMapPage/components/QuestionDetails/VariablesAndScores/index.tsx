@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { ReportTemplate } from 'models/ReportTemplate/ReportTemplateModel';
 
-import { Question, QuestionTypes } from 'models/Question';
+import { QuestionDTO, QuestionTypes } from 'models/Question';
 
 import Comment from 'components/Text/Comment';
 import Column from 'components/Column';
@@ -15,7 +15,7 @@ import VariableAndScoreChip from './VariableAndScoreChip';
 import EmailAndReportTemplateChip from './EmailAndReportTemplateChip';
 
 type Props = {
-  question: Question;
+  question: QuestionDTO;
   reportTemplates: ReportTemplate[];
 };
 

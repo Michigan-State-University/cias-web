@@ -1,104 +1,22 @@
+import { CamelToSnake } from 'global/types/camelToSnake';
+
 import { SessionTargetType } from 'models/Session/SessionTargetType';
 import { Formula } from 'models/Formula';
 import { Narrator } from 'models/Narrator';
 
 import { QuestionTypes } from './QuestionTypes';
-
-export interface QuestionSettings {
-  image: boolean;
-  title: boolean;
-  video: boolean;
-  required?: boolean;
-  subtitle: boolean;
-  text_limit?: number;
-  narrator_skippable: boolean;
-  proceed_button?: boolean;
-  show_number?: boolean;
-}
-
-export interface GridQuestionRow {
-  payload: string;
-  variable: { name: string };
-  original_text?: string;
-}
-
-export interface GridQuestionColumn {
-  payload: string;
-  variable: { value: string };
-  original_text?: string;
-}
-
-export interface GridQuestionPayload {
-  rows: GridQuestionRow[];
-  columns: GridQuestionColumn[];
-}
-
-export interface StartEndValueOriginalText {
-  start_value: string;
-  end_value: string;
-}
-
-export interface SliderQuestionPayload {
-  start_value: string;
-  end_value: string;
-  original_text?: StartEndValueOriginalText;
-}
-
-export interface FeedbackQuestionPayload {
-  start_value: string;
-  end_value: string;
-  target_value: string;
-  original_text?: StartEndValueOriginalText;
-}
-
-export type PayloadType =
-  | string
-  | GridQuestionPayload
-  | SliderQuestionPayload
-  | FeedbackQuestionPayload;
-
-export interface SpectrumPattern {
-  match: string;
-  target: string;
-}
-
-export interface Spectrum {
-  payload: string;
-  patterns: SpectrumPattern[];
-}
-
-export interface QuestionData<T> {
-  payload: T;
-  variable?: QuestionVariable;
-  value?: string;
-  spectrum?: Spectrum;
-  report_template_ids?: string[];
-  original_text?: string;
-}
-
-export interface QuestionVariable {
-  name: string;
-  value?: string;
-}
-
-export interface QuestionBody<T extends PayloadType = PayloadType> {
-  data: QuestionData<T>[];
-}
-
-export interface QuestionBodyWithVariable<T extends PayloadType = PayloadType>
-  extends QuestionBody<T> {
-  variable: QuestionVariable;
-}
-
-export type QuestionBodyType<T extends PayloadType = PayloadType> =
-  | QuestionBody<T>
-  | QuestionBodyWithVariable<T>;
-
-export interface QuestionOriginalText {
-  title: string;
-  subtitle: string;
-  image_description: Nullable<string>;
-}
+import { QuestionSettings } from './QuestionSettings';
+import {
+  FeedbackQuestionPayload,
+  GridQuestionPayload,
+  SliderQuestionPayload,
+} from './QuestionPayload';
+import {
+  QuestionBody,
+  QuestionBodyType,
+  QuestionBodyWithVariable,
+} from './QuestionBody';
+import { QuestionOriginalText } from './QuestionOriginalText';
 
 export type QuestionFormulaTargetType = QuestionTypes | SessionTargetType;
 
@@ -108,99 +26,117 @@ export interface GenericQuestion<
 > {
   id: string;
   type: VType;
-  question_group_id: string;
+  questionGroupId: string;
   settings: QuestionSettings;
   position: number;
   title: string;
   subtitle: string;
   narrator: Narrator;
-  video_url: Nullable<string>;
+  videoUrl: Nullable<string>;
   formula: Formula<QuestionFormulaTargetType>;
   body: TBody;
-  original_text: QuestionOriginalText;
-  image_url: Nullable<string>;
-  image_alt: Nullable<string>;
+  originalText: QuestionOriginalText;
+  imageUrl: Nullable<string>;
+  imageAlt: Nullable<string>;
 }
 
 export type SingleQuestion = GenericQuestion<
   QuestionTypes.SINGLE,
   QuestionBodyWithVariable<string>
 >;
+export type SingleQuestionDTO = CamelToSnake<SingleQuestion>;
 
 export type MultipleQuestion = GenericQuestion<
   QuestionTypes.MULTIPLE,
   QuestionBody<string>
 >;
+export type MultipleQuestionDTO = CamelToSnake<MultipleQuestion>;
 
 export type FreeResponseQuestion = GenericQuestion<
   QuestionTypes.FREE_RESPONSE,
   QuestionBodyWithVariable<string>
 >;
+export type FreeResponseQuestionDTO = CamelToSnake<FreeResponseQuestion>;
 
 export type ThirdPartyReportQuestion = GenericQuestion<
   QuestionTypes.THIRD_PARTY,
   QuestionBody<string>
 >;
+export type ThirdPartyReportQuestionDTO =
+  CamelToSnake<ThirdPartyReportQuestion>;
 
 export type NameQuestion = GenericQuestion<
   QuestionTypes.NAME,
   QuestionBodyWithVariable<string>
 >;
+export type NameQuestionDTO = CamelToSnake<NameQuestion>;
 
 export type NumberQuestion = GenericQuestion<
   QuestionTypes.NUMBER,
   QuestionBodyWithVariable<string>
 >;
+export type NumberQuestionDTO = CamelToSnake<NumberQuestion>;
 
 export type GridQuestion = GenericQuestion<
   QuestionTypes.GRID,
   QuestionBody<GridQuestionPayload>
 >;
+export type GridQuestionDTO = CamelToSnake<GridQuestion>;
 
 export type SliderQuestion = GenericQuestion<
   QuestionTypes.SLIDER,
   QuestionBodyWithVariable<SliderQuestionPayload>
 >;
+export type SliderQuestionDTO = CamelToSnake<SliderQuestion>;
 
 export type InformationQuestion = GenericQuestion<
   QuestionTypes.INFORMATION,
   QuestionBody<string>
 >;
+export type InformationQuestionDTO = CamelToSnake<InformationQuestion>;
 
 export type ExternalLinkQuestion = GenericQuestion<
   QuestionTypes.EXTERNAL_LINK,
   QuestionBodyWithVariable<string>
 >;
+export type ExternalLinkQuestionDTO = CamelToSnake<ExternalLinkQuestion>;
 
 export type FeedbackQuestion = GenericQuestion<
   QuestionTypes.FEEDBACK,
   QuestionBody<FeedbackQuestionPayload>
 >;
+export type FeedbackQuestionDTO = CamelToSnake<FeedbackQuestion>;
 
 export type FinishQuestion = GenericQuestion<
   QuestionTypes.FINISH,
   QuestionBody<string>
 >;
+export type FinishQuestionDTO = CamelToSnake<FinishQuestion>;
 
 export type PhoneQuestion = GenericQuestion<
   QuestionTypes.PHONE,
   QuestionBodyWithVariable<string>
 >;
+export type PhoneQuestionDTO = CamelToSnake<PhoneQuestion>;
 
 export type DateQuestion = GenericQuestion<
   QuestionTypes.DATE,
   QuestionBodyWithVariable<string>
 >;
+export type DateQuestionDTO = CamelToSnake<DateQuestion>;
 
 export type ParticipantReportQuestion = GenericQuestion<
   QuestionTypes.PARTICIPANT_REPORT,
   QuestionBodyWithVariable<string>
 >;
+export type ParticipantReportQuestionDTO =
+  CamelToSnake<ParticipantReportQuestion>;
 
 export type CurrencyQuestion = GenericQuestion<
   QuestionTypes.CURRENCY,
   QuestionBodyWithVariable<string>
 >;
+export type CurrencyQuestionDTO = CamelToSnake<CurrencyQuestion>;
 
 export type Question =
   | SingleQuestion
@@ -219,3 +155,4 @@ export type Question =
   | DateQuestion
   | ParticipantReportQuestion
   | CurrencyQuestion;
+export type QuestionDTO = CamelToSnake<Question>;

@@ -2,12 +2,12 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import {
-  GridQuestion,
-  MultipleQuestion,
-  Question,
-  SingleQuestion,
-  SliderQuestion,
-  ThirdPartyReportQuestion,
+  GridQuestionDTO,
+  MultipleQuestionDTO,
+  QuestionDTO,
+  SingleQuestionDTO,
+  SliderQuestionDTO,
+  ThirdPartyReportQuestionDTO,
 } from 'models/Question';
 import { Answer, AnswerType } from 'models/Answer';
 
@@ -32,7 +32,7 @@ import ThirdPartyReportUserAnswer from './ThirdPartyReportUserAnswer';
 import PhoneUserAnswer from './PhoneUserAnswer';
 
 type Props = {
-  question: Question;
+  question: QuestionDTO;
   answer: Nullable<Answer>;
 };
 
@@ -55,14 +55,14 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
       case AnswerType.SINGLE:
         return (
           <SingleUserAnswer
-            question={question as SingleQuestion}
+            question={question as SingleQuestionDTO}
             answer={answer}
           />
         );
       case AnswerType.MULTIPLE:
         return (
           <MultiUserAnswer
-            question={question as MultipleQuestion}
+            question={question as MultipleQuestionDTO}
             answer={answer}
           />
         );
@@ -78,12 +78,15 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
         return <NumberUserAnswer answer={answer} />;
       case AnswerType.GRID:
         return (
-          <GridUserAnswer question={question as GridQuestion} answer={answer} />
+          <GridUserAnswer
+            question={question as GridQuestionDTO}
+            answer={answer}
+          />
         );
       case AnswerType.SLIDER:
         return (
           <SliderUserAnswer
-            question={question as SliderQuestion}
+            question={question as SliderQuestionDTO}
             answer={answer}
           />
         );
@@ -92,7 +95,7 @@ const UserAnswer = ({ question, answer }: Props): JSX.Element => {
       case AnswerType.THIRD_PARTY:
         return (
           <ThirdPartyReportUserAnswer
-            question={question as ThirdPartyReportQuestion}
+            question={question as ThirdPartyReportQuestionDTO}
             answer={answer}
           />
         );

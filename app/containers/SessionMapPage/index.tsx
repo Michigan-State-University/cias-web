@@ -56,7 +56,7 @@ import { JumpToScreenLocationState } from 'global/types/locationState';
 
 import { ReportTemplate } from 'models/ReportTemplate/ReportTemplateModel';
 import { QuestionGroup } from 'models/QuestionGroup';
-import { Question } from 'models/Question';
+import { QuestionDTO } from 'models/Question';
 
 import useQuery from 'utils/useQuery';
 import useLocationState from 'utils/useLocationState';
@@ -109,7 +109,7 @@ const SessionMapPage = (): JSX.Element => {
   const questionGroupsError = useSelector(makeSelectGetQuestionGroupError());
 
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
-  const questions = useSelector(makeSelectQuestions()) as Question[];
+  const questions = useSelector(makeSelectQuestions()) as QuestionDTO[];
 
   // @ts-ignore
   useInjectReducer({ key: 'reportTemplates', reducer: reportTemplatesReducer });

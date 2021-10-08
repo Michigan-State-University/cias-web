@@ -3,7 +3,7 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { NodeTypesType } from 'react-flow-renderer';
 
 import { QuestionGroup } from 'models/QuestionGroup';
-import { Question } from 'models/Question';
+import { QuestionDTO } from 'models/Question';
 import { SessionDto } from 'models/Session/SessionDto';
 
 import {
@@ -44,7 +44,7 @@ const nodeTypes: NodeTypesType = {
 };
 
 type Props = {
-  questions: Question[];
+  questions: QuestionDTO[];
   questionGroups: QuestionGroup[];
   sessions: SessionDto[];
   showDetailsId: string;

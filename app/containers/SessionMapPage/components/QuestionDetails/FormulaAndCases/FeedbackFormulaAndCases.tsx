@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { FeedbackQuestion } from 'models/Question';
+import { FeedbackQuestionDTO } from 'models/Question';
 
 import { colors } from 'theme';
 import Text from 'components/Text';
@@ -16,7 +16,7 @@ import CaseMatch from './CaseMatch';
 import { highlightTargetText, getCaseTargetElementId } from './utils';
 
 type Props = {
-  question: FeedbackQuestion;
+  question: FeedbackQuestionDTO;
 };
 
 const FeedbackFormulaAndCases = ({

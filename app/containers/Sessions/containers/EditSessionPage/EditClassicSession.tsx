@@ -87,7 +87,7 @@ import { reorderScope } from 'models/Session/ReorderScope';
 import { FinishGroupType } from 'models/Session/GroupTypes';
 import { ClassicSessionDto } from 'models/Session/SessionDto';
 
-import { Question } from 'models/Question';
+import { QuestionDTO } from 'models/Question';
 import { GroupDto } from 'models/Groups/GroupDto';
 import QuestionDetails from '../../components/QuestionDetails';
 import QuestionSettings from '../../components/QuestionSettings';
@@ -153,9 +153,9 @@ type Props = {
     questionId: string;
     sessionId: string;
   }) => void;
-  createQuestion: (question: Question, sessionId: string) => void;
+  createQuestion: (question: QuestionDTO, sessionId: string) => void;
   selectedQuestion: string;
-  questions: Question[];
+  questions: QuestionDTO[];
   groups: GroupDto[];
   selectQuestion: (id: string) => void;
 } & NonReduxProps;
@@ -322,7 +322,7 @@ const EditClassicSessionPage = ({
         formatMessage(messages.newQuestionTitle),
         type,
         formatMessage(messages.newQuestionSubtitle),
-      ) as Question,
+      ) as QuestionDTO,
       sessionId,
     );
   };
@@ -402,7 +402,7 @@ const EditClassicSessionPage = ({
   const selectSlide = (slideId: string) =>
     setSelectedSlides(xor(selectedSlides, [slideId]));
 
-  const checkSelectedGroup = (gQuestions: Question[]) =>
+  const checkSelectedGroup = (gQuestions: QuestionDTO[]) =>
     gQuestions.every(({ id }) => selectedSlides.includes(id));
 
   const handleCloseManage = () => {
@@ -410,7 +410,7 @@ const EditClassicSessionPage = ({
     setSelectedSlides([]);
   };
 
-  const toggleGroup = (gQuestions: Question[]) => {
+  const toggleGroup = (gQuestions: QuestionDTO[]) => {
     const allSelected = checkSelectedGroup(gQuestions);
     let q = gQuestions;
     if (!allSelected) {
