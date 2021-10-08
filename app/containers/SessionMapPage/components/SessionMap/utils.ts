@@ -1,4 +1,4 @@
-import { Edge, Node } from 'react-flow-renderer';
+import { Edge, Elements, Node } from 'react-flow-renderer';
 import cloneDeep from 'lodash/cloneDeep';
 import intersection from 'lodash/intersection';
 
@@ -8,16 +8,19 @@ import { SessionDto } from 'models/Session/SessionDto';
 import { Answer } from 'models/Answer';
 
 import {
+  CollapseNodeData,
   EdgeSharedAttributesGetter,
-  QuestionTileData,
-  SessionTileData,
+  QuestionNodeData,
+  SessionNodeData,
 } from '../../types';
 import {
   baseEdgeSharedAttributes,
   directConnectionEdgeSharedAttributes,
+  fallbackNodeDimensions,
   grayedOutEdgeSharedAttributes,
   highlightedEdgeSharedAttributes,
   SessionMapHeadType,
+  sessionMapNodeDimensions,
   SessionMapNodeType,
 } from '../../constants';
 
@@ -46,11 +49,11 @@ const createQuestionNode = (
   showDetailsId: string,
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void,
   showDetailedInfo: boolean,
-  index: number,
+  questionIndex: number,
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
   selectableOnClick: boolean,
-): Node<QuestionTileData> => ({
+): Node<QuestionNodeData> => ({
   id: question.id,
   type: SessionMapNodeType.QUESTION,
   position: { x: 0, y: 0 },
@@ -60,7 +63,7 @@ const createQuestionNode = (
     showDetails: question.id === showDetailsId,
     onShowDetailsChange,
     showDetailedInfo,
-    index,
+    questionIndex,
     selected: selectedNodesIds.includes(question.id),
     onSelectedChange,
     selectableOnClick,
@@ -80,8 +83,8 @@ const createSessionNodesFromBranching = (
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
   selectableOnClick: boolean,
-): Node<SessionTileData>[] => {
-  const nodes: Node<SessionTileData>[] = [];
+): Node<SessionNodeData>[] => {
+  const nodes: Node<SessionNodeData>[] = [];
 
   question.formula.patterns.forEach(({ target: targets }) =>
     targets.forEach(({ id: targetId, type }) => {
@@ -123,15 +126,15 @@ export const createMapNodes = (
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
   selectableOnClick: boolean,
-): Node<QuestionTileData | SessionTileData>[] =>
-  questions.flatMap((question, index) => {
-    const nodes: Node<QuestionTileData | SessionTileData>[] = [
+): Node<QuestionNodeData | SessionNodeData>[] =>
+  questions.flatMap((question, questionIndex) => {
+    const nodes: Node<QuestionNodeData | SessionNodeData>[] = [
       createQuestionNode(
         question,
         showDetailsId,
         onShowDetailsChange,
         showDetailedInfo,
-        index,
+        questionIndex,
         selectedNodesIds,
         onSelectedChange,
         selectableOnClick,
@@ -212,6 +215,7 @@ const createMapEdgesFromBranching = (
   existingEdges: Edge[],
   selectedQuestionsIds: string[],
   edgeSharedAttributesGetter: EdgeSharedAttributesGetter,
+  sessions: SessionDto[],
 ): Edge[] => {
   const edges: Edge[] = cloneDeep(existingEdges);
   // check every target of every pattern of every question
@@ -224,6 +228,15 @@ const createMapEdgesFromBranching = (
           type.startsWith('Question') &&
           findQuestionPosition(questions, targetId) < questionIndex
         ) {
+          // does not create an edge if target question does not exists or is a prior question
+          return;
+        }
+
+        if (
+          type.startsWith('Session') &&
+          !sessions.find((session) => session.id === targetId)
+        ) {
+          // does not create an edge if target session does not exists
           return;
         }
 
@@ -333,6 +346,7 @@ export const createMapEdges = (
   questions: Question[],
   selectedNodesIds: string[],
   nodesSelectableOnClick: boolean,
+  sessions: SessionDto[],
 ): Edge[] => {
   const edgeSharedAttributesGetter: EdgeSharedAttributesGetter =
     nodesSelectableOnClick
@@ -349,6 +363,7 @@ export const createMapEdges = (
     edgesFromNextQuestions,
     selectedNodesIds,
     edgeSharedAttributesGetter,
+    sessions,
   );
 
   return nodesSelectableOnClick
@@ -388,3 +403,177 @@ export const createUserSessionNodesIdsFromAnswers = (
 
   return userSessionNodesIds;
 };
+
+const findQuestionNodesWithoutBranchingPositions = (
+  nodes: Node[],
+  edges: Edge[],
+): number[] => {
+  const questionNodesWithoutBranchingPositions: number[] = [];
+
+  nodes.forEach((node, index) => {
+    if (node.type !== SessionMapNodeType.QUESTION) return;
+
+    const isFirstOrLastQuestion = index === 0 || index === nodes.length - 1;
+    if (isFirstOrLastQuestion) return;
+
+    const nodeEdges = edges.filter(
+      ({ source, target }) => source === node.id || target === node.id,
+    );
+
+    const withoutBranching = nodeEdges.length === 2;
+    if (withoutBranching) {
+      questionNodesWithoutBranchingPositions.push(index);
+    }
+  });
+
+  return questionNodesWithoutBranchingPositions;
+};
+
+const divideQuestionNodesToCollapseGroups = (
+  questionNodesWithoutBranchingPositions: number[],
+): number[][] => {
+  const collapseGroups: number[][] = [];
+  let collapseGroup: number[] = [];
+
+  questionNodesWithoutBranchingPositions.forEach((position, index) => {
+    if (questionNodesWithoutBranchingPositions[index + 1] === position + 1) {
+      collapseGroup.push(position);
+      return;
+    }
+
+    if (questionNodesWithoutBranchingPositions[index - 1] === position - 1) {
+      collapseGroup.push(position);
+    }
+
+    collapseGroups.push(collapseGroup);
+    collapseGroup = [];
+  });
+
+  return collapseGroups;
+};
+
+const createCollapseNodeId = (
+  firstCollapsedNodePosition: number,
+  lastCollapsedNodePosition: number,
+): string =>
+  `collapse-from-${firstCollapsedNodePosition}-to-${lastCollapsedNodePosition}`;
+
+const createCollapseNode = (
+  id: string,
+  firstCollapsedNode: Node<QuestionNodeData>,
+  lastCollapsedNode: Node<QuestionNodeData>,
+): Node<CollapseNodeData> => ({
+  id,
+  type: SessionMapNodeType.COLLAPSE,
+  position: { x: 0, y: 0 },
+  selectable: false,
+  data: {
+    firstCollapsedScreenNo: firstCollapsedNode.data?.questionIndex! + 1,
+    lastCollapsedScreenNo: lastCollapsedNode.data?.questionIndex! + 1,
+  },
+});
+
+const replaceEdgeTarget = (edge: Edge, newTarget: string): Edge => ({
+  ...edge,
+  id: createEdgeId(edge.source, newTarget),
+  target: newTarget,
+});
+
+const replaceEdgeSource = (edge: Edge, newSource: string): Edge => ({
+  ...edge,
+  id: createEdgeId(newSource, edge.target),
+  source: newSource,
+});
+
+const updateEdgesForCollapsedNodes = (
+  collapseGroup: number[],
+  nodes: Node[],
+  edges: Edge[],
+  firstCollapsedNode: Node<QuestionNodeData>,
+  lastCollapsedNode: Node<QuestionNodeData>,
+  collapseNodeId: string,
+): Edge[] => {
+  const collapsedNodesIds = collapseGroup.map(
+    (collapsedNodePosition) => nodes[collapsedNodePosition].id,
+  );
+
+  return edges.flatMap((edge) => {
+    const isFirstCollapsedNodeInput = edge.target === firstCollapsedNode.id;
+    if (isFirstCollapsedNodeInput) {
+      return [replaceEdgeTarget(edge, collapseNodeId)];
+    }
+
+    const isLastCollapsedNodeOutput = edge.source === lastCollapsedNode.id;
+    if (isLastCollapsedNodeOutput) {
+      return [replaceEdgeSource(edge, collapseNodeId)];
+    }
+
+    const isAnyOtherCollapsedNodeEdge = collapsedNodesIds.includes(edge.source);
+    if (isAnyOtherCollapsedNodeEdge) {
+      // remove edge
+      return [];
+    }
+
+    // do not modify edge
+    return [edge];
+  });
+};
+
+export const collapseQuestionsWithoutBranching = (
+  nodes: Node[],
+  edges: Edge[],
+): Elements => {
+  const nodesCopy = cloneDeep(nodes);
+  let edgesCopy = cloneDeep(edges);
+
+  const questionNodesWithoutBranchingPositions: number[] =
+    findQuestionNodesWithoutBranchingPositions(nodes, edges);
+
+  const collapseGroups: number[][] = divideQuestionNodesToCollapseGroups(
+    questionNodesWithoutBranchingPositions,
+  );
+
+  collapseGroups.forEach((collapseGroup) => {
+    if (collapseGroup.length > 1) {
+      const firstCollapsedNodePosition = collapseGroup[0];
+      const firstCollapsedNode: Node<QuestionNodeData> =
+        nodes[firstCollapsedNodePosition];
+
+      const lastCollapsedNodePosition = collapseGroup[collapseGroup.length - 1];
+      const lastCollapsedNode: Node<QuestionNodeData> =
+        nodes[lastCollapsedNodePosition];
+
+      const collapseNodeId = createCollapseNodeId(
+        firstCollapsedNodePosition,
+        lastCollapsedNodePosition,
+      );
+      const collapseNode = createCollapseNode(
+        collapseNodeId,
+        firstCollapsedNode,
+        lastCollapsedNode,
+      );
+
+      // replace question nodes with a collapse node
+      const nodesCountDifference = nodes.length - nodesCopy.length;
+      nodesCopy.splice(
+        firstCollapsedNodePosition - nodesCountDifference,
+        collapseGroup.length,
+        collapseNode,
+      );
+
+      edgesCopy = updateEdgesForCollapsedNodes(
+        collapseGroup,
+        nodes,
+        edgesCopy,
+        firstCollapsedNode,
+        lastCollapsedNode,
+        collapseNodeId,
+      );
+    }
+  });
+
+  return [...nodesCopy, ...edgesCopy];
+};
+
+export const getNodeDimensions = (nodeType: SessionMapNodeType | string) =>
+  sessionMapNodeDimensions.get(nodeType) || fallbackNodeDimensions;

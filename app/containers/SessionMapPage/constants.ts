@@ -4,7 +4,10 @@ import { colors } from 'theme';
 
 import { QuestionTypes } from 'models/Question';
 
-import { CustomConnectionLineType } from 'components/ReactFlowGraph';
+import {
+  CustomConnectionLineType,
+  NodeDimensions,
+} from 'components/ReactFlowGraph';
 
 import { DownloadProgressState } from './types';
 
@@ -14,8 +17,15 @@ export const defaultZoom = 1;
 
 export const detailedInfoZoomThreshold = 0.75;
 
-export const nodeWidth = 210;
 export const questionNodeLabelOffset = 32;
+
+export const nodeThinBorderWidth = 1;
+export const nodeThickBorderWidth = 3;
+
+// vertical margin + vertical border width + vertical padding
+export const nodeVerticalNonContentWidth = 19;
+// horizontal margin + horizontal border width + horizontal padding
+export const nodeHorizontalNonContentWidth = 25;
 
 export const scrollbarsThickness = 5;
 export const scrollbarsMargin = 15;
@@ -33,7 +43,16 @@ export const sessionMapColors = {
 export enum SessionMapNodeType {
   QUESTION = 'question',
   SESSION = 'session',
+  COLLAPSE = 'collapse',
 }
+
+export const sessionMapNodeDimensions = new Map<string, NodeDimensions>([
+  [SessionMapNodeType.QUESTION, { height: 146, width: 210 }],
+  [SessionMapNodeType.SESSION, { height: 110, width: 210 }],
+  [SessionMapNodeType.COLLAPSE, { height: 324, width: 440 }],
+]);
+
+export const fallbackNodeDimensions: NodeDimensions = { width: 0, height: 0 };
 
 export enum SessionMapHeadType {
   BASE = 'session-map-base',

@@ -11,11 +11,13 @@ import messages from '../messages';
 type Props = {
   showWithBranchingOnly: boolean;
   onShowWithBranchingOnlyChange: (newValue: boolean) => void;
+  showWithBranchingOnlyEnabled: boolean;
 };
 
 const SessionMapHeader = ({
   showWithBranchingOnly,
   onShowWithBranchingOnlyChange,
+  showWithBranchingOnlyEnabled,
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
 
@@ -30,6 +32,7 @@ const SessionMapHeader = ({
         <Row align="center" gap={10}>
           <Checkbox
             checked={showWithBranchingOnly}
+            disabled={!showWithBranchingOnlyEnabled}
             onChange={handleCheckboxClick}
             id="show-only-with-branching-checkbox"
           >

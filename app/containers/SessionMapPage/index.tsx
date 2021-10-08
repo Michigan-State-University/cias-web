@@ -151,6 +151,8 @@ const SessionMapPage = (): JSX.Element => {
   }, [showDetailsId, questions, questionGroups]);
 
   const [showWithBranchingOnly, setShowWithBranchingOnly] = useState(false);
+  const [showWithBranchingOnlyEnabled, setShowWithBranchingOnlyEnabled] =
+    useState(false);
 
   const [zoom, setZoom] = useState(defaultZoom);
   const [minZoom, setMinZoom] = useState(defaultMinZoom);
@@ -255,6 +257,7 @@ const SessionMapPage = (): JSX.Element => {
             <SessionMapHeader
               showWithBranchingOnly={showWithBranchingOnly}
               onShowWithBranchingOnlyChange={setShowWithBranchingOnly}
+              showWithBranchingOnlyEnabled={showWithBranchingOnlyEnabled}
             />
             <ReactFlowProvider>
               <SessionMap
@@ -268,6 +271,8 @@ const SessionMapPage = (): JSX.Element => {
                 minZoom={minZoom}
                 onMinZoomChange={setMinZoom}
                 userSessionNodesIds={userSessionNodesIds}
+                showWithBranchingOnly={showWithBranchingOnly}
+                onIsBranchingChange={setShowWithBranchingOnlyEnabled}
               />
               <SessionMapFooter
                 afterPreview={Boolean(userSessionId)}

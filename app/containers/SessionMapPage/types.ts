@@ -2,22 +2,27 @@ import { Edge, FlowTransform } from 'react-flow-renderer';
 
 import { Question } from 'models/Question';
 
-interface TileData {
+interface InteractiveNodeData {
   showDetailedInfo: boolean;
   selectableOnClick: boolean;
   selected: boolean;
   onSelectedChange: (selected: boolean, nodeId: string) => void;
 }
 
-export interface QuestionTileData extends TileData {
+export interface QuestionNodeData extends InteractiveNodeData {
   question: Question;
   showDetails: boolean;
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void;
-  index: number;
+  questionIndex: number;
 }
 
-export interface SessionTileData extends TileData {
+export interface SessionNodeData extends InteractiveNodeData {
   sessionIndex: number;
+}
+
+export interface CollapseNodeData {
+  firstCollapsedScreenNo: number;
+  lastCollapsedScreenNo: number;
 }
 
 export type DownloadMapState = {
