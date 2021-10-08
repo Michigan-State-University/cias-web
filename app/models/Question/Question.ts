@@ -1,6 +1,6 @@
 import { CamelToSnake } from 'global/types/camelToSnake';
 
-import { SessionTargetType } from 'models/Session/SessionTargetType';
+import { SessionTargetType } from 'models/Session';
 import { Formula } from 'models/Formula';
 import { Narrator } from 'models/Narrator';
 

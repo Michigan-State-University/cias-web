@@ -14,7 +14,7 @@ import values from 'lodash/values';
 import find from 'lodash/find';
 
 import { dateQuestion } from 'models/Session/QuestionTypes';
-import { SessionTypes } from 'models/Session/SessionDto';
+import { SessionTypes } from 'models/Session';
 
 import {
   SCHEDULE_OPTIONS,

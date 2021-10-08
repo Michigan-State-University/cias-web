@@ -85,7 +85,7 @@ import { JumpToScreenLocationState } from 'global/types/locationState';
 import GroupActionButton from 'containers/Sessions/components/GroupActionButton';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { FinishGroupType } from 'models/Session/GroupTypes';
-import { ClassicSessionDto } from 'models/Session/SessionDto';
+import { ClassicSession } from 'models/Session';
 
 import { QuestionDTO } from 'models/Question';
 import { GroupDto } from 'models/Groups/GroupDto';
@@ -104,7 +104,7 @@ import {
 import QuestionListGroup from '../QuestionListGroup';
 
 type NonReduxProps = {
-  session: ClassicSessionDto;
+  session: ClassicSession;
   editingPossible: boolean;
   interventionStatus: string;
 };

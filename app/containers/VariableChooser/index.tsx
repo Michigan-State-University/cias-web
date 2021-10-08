@@ -14,7 +14,7 @@ import {
   copyModalReducer,
 } from 'global/reducers/copyModalReducer';
 
-import { SessionTypes } from 'models/Session/SessionDto';
+import { SessionTypes } from 'models/Session';
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 
 import { colors, boxShadows } from 'theme';

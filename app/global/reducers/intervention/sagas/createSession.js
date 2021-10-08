@@ -2,7 +2,7 @@ import { put, call, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { defaultMapper } from 'utils/mapResponseObjects';
-import { SessionTypes } from 'models/Session/SessionDto';
+import { SessionTypes } from 'models/Session';
 import { CREATE_SESSION_REQUEST } from '../constants';
 
 import { createSessionSuccess, createSessionError } from '../actions';

@@ -4,7 +4,7 @@ import { NodeTypesType } from 'react-flow-renderer';
 
 import { QuestionGroup } from 'models/QuestionGroup';
 import { QuestionDTO } from 'models/Question';
-import { SessionDto } from 'models/Session/SessionDto';
+import { Session } from 'models/Session';
 
 import {
   ReactFlowGraph,
@@ -46,7 +46,7 @@ const nodeTypes: NodeTypesType = {
 type Props = {
   questions: QuestionDTO[];
   questionGroups: QuestionGroup[];
-  sessions: SessionDto[];
+  sessions: Session[];
   showDetailsId: string;
   onShowDetailsIdChange: (showDetailsId: string) => void;
   zoom: number;

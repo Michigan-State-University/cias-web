@@ -1,4 +1,6 @@
-enum UserRoles {
+import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
+
+export enum UserRoles {
   ADMIN = 'admin',
   RESEARCHER = 'researcher',
   PARTICIPANT = 'participant',
@@ -12,7 +14,7 @@ enum UserRoles {
   TEAM_ADMIN = 'team_admin',
 }
 
-export interface UserDto {
+export interface User {
   active: boolean;
   email: string;
   emailNotification: boolean;
@@ -28,3 +30,5 @@ export interface UserDto {
   teamName: Nullable<string>;
   abilityToCreateCatMh: boolean;
 }
+
+export type UserDTO = CamelToSnakeOmitId<User>;

@@ -8,7 +8,7 @@ import Box from 'components/Box';
 import Radio from 'components/Radio';
 import { colors } from 'theme';
 
-import { SessionTypes } from 'models/Session/SessionDto';
+import { SessionTypes } from 'models/Session';
 import messages from './messages';
 import { prepareSessionTypes } from './constants';
 

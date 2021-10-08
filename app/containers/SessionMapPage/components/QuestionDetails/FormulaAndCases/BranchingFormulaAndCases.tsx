@@ -3,8 +3,7 @@ import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
 import { QuestionDTO, QuestionFormulaTargetType } from 'models/Question';
-import { SessionDto } from 'models/Session/SessionDto';
-import { SessionTargetType } from 'models/Session/SessionTargetType';
+import { Session, SessionTargetType } from 'models/Session';
 import { Target } from 'models/Formula';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
@@ -24,7 +23,7 @@ import { highlightTargetText } from './utils';
 
 type Props = {
   question: QuestionDTO;
-  sessions: SessionDto[];
+  sessions: Session[];
   questions: QuestionDTO[];
 };
 

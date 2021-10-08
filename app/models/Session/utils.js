@@ -16,7 +16,7 @@ import {
 import { getFromQuestionTTS } from 'global/reducers/questions/utils';
 import { DEFAULT_PAUSE_DURATION } from 'utils/constants';
 
-import Session from './Session';
+import { Session } from './Session';
 import Question from './Question';
 
 import {

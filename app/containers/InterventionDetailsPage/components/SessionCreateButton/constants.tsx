@@ -1,4 +1,4 @@
-import { SessionTypes } from 'models/Session/SessionDto';
+import { SessionTypes } from 'models/Session';
 import messages from './messages';
 
 type SessionTypesCard = {

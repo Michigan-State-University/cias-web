@@ -7,7 +7,7 @@ import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
 
 import BranchingLayout from 'containers/BranchingLayout';
-import Session from 'models/Session/Session';
+import Session from 'models/Session';
 import Question from 'models/Session/Question';
 import { questionType } from 'models/Session/QuestionTypes';
 import { htmlToPlainText } from 'utils/htmlToPlainText';

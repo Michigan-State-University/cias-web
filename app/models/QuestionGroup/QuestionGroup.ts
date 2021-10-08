@@ -1,3 +1,5 @@
+import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
+
 export interface QuestionGroup {
   id: string;
   sessionId: string;
@@ -5,3 +7,5 @@ export interface QuestionGroup {
   position: number;
   type: string;
 }
+
+export type QuestionGroupDTO = CamelToSnakeOmitId<QuestionGroup>;

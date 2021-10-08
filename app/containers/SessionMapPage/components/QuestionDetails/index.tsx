@@ -8,7 +8,7 @@ import {
   FeedbackQuestionDTO,
   QuestionDTO,
 } from 'models/Question';
-import { SessionDto } from 'models/Session/SessionDto';
+import { Session } from 'models/Session';
 import { Answer } from 'models/Answer';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
@@ -39,7 +39,7 @@ type Props = {
   questionAnswer: Nullable<Answer>;
   questionGroup: QuestionGroup;
   reportTemplates: ReportTemplate[];
-  sessions: SessionDto[];
+  sessions: Session[];
   questions: QuestionDTO[];
   onGoToScreenClick: () => void;
 };

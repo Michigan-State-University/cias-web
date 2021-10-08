@@ -1,4 +1,5 @@
-import { Formula } from '../Formula';
+import { Formula } from 'models/Formula';
+
 import { SessionTargetType } from './SessionTargetType';
 
 export enum SessionTypes {
@@ -6,7 +7,7 @@ export enum SessionTypes {
   CAT_SESSION = 'Session::CatMh',
 }
 
-interface SessionSettingsDto {
+interface SessionSettings {
   formula?: boolean;
   narrator: {
     voice: boolean;
@@ -22,7 +23,7 @@ enum ScheduleOptions {
   DAYS_AFTER_DATE = 'days_after_date',
 }
 
-interface GoogleTTSVoiceDto {
+interface GoogleTTSVoice {
   id: number;
   googleTtsLanguageId: number;
   voiceLabel: string;
@@ -32,9 +33,9 @@ interface GoogleTTSVoiceDto {
   updatedAt: string;
 }
 
-export interface SessionDto {
+export interface Session {
   id: string;
-  settings: SessionSettingsDto;
+  settings: SessionSettings;
   position: number;
   name: string;
   interventionId: string;
@@ -43,7 +44,7 @@ export interface SessionDto {
   generatedReportCount: number;
   variable: string;
   createdAt: string;
-  googleTtsVoice: GoogleTTSVoiceDto;
+  googleTtsVoice: GoogleTTSVoice;
   smsPlansCount: number;
   scheduleAt?: string;
   schedulePayload?: number;
@@ -53,11 +54,11 @@ export interface SessionDto {
   type: SessionTypes;
 }
 
-export interface ClassicSessionDto extends SessionDto {
+export interface ClassicSession extends Session {
   type: SessionTypes.CLASSIC_SESSION;
 }
 
-export interface CatSessionDto extends SessionDto {
+export interface CatSession extends Session {
   catMhLanguageId: number;
   catMhTimeFrameId: number;
   catMhPopulationId: number;

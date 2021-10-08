@@ -4,7 +4,7 @@ import intersection from 'lodash/intersection';
 
 import { QuestionGroup } from 'models/QuestionGroup';
 import { QuestionTypes, QuestionDTO } from 'models/Question';
-import { SessionDto } from 'models/Session/SessionDto';
+import { Session } from 'models/Session';
 import { Answer } from 'models/Answer';
 
 import {
@@ -78,7 +78,7 @@ const nodeExists = (nodes: Node[], nodeId: string): boolean =>
 
 const createSessionNodesFromBranching = (
   question: QuestionDTO,
-  sessions: SessionDto[],
+  sessions: Session[],
   showDetailedInfo: boolean,
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
@@ -122,7 +122,7 @@ export const createMapNodes = (
   showDetailsId: string,
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void,
   showDetailedInfo: boolean,
-  sessions: SessionDto[],
+  sessions: Session[],
   selectedNodesIds: string[],
   onSelectedChange: (selected: boolean, nodeId: string) => void,
   selectableOnClick: boolean,
@@ -215,7 +215,7 @@ const createMapEdgesFromBranching = (
   existingEdges: Edge[],
   selectedQuestionsIds: string[],
   edgeSharedAttributesGetter: EdgeSharedAttributesGetter,
-  sessions: SessionDto[],
+  sessions: Session[],
 ): Edge[] => {
   const edges: Edge[] = cloneDeep(existingEdges);
   // check every target of every pattern of every question
@@ -346,7 +346,7 @@ export const createMapEdges = (
   questions: QuestionDTO[],
   selectedNodesIds: string[],
   nodesSelectableOnClick: boolean,
-  sessions: SessionDto[],
+  sessions: Session[],
 ): Edge[] => {
   const edgeSharedAttributesGetter: EdgeSharedAttributesGetter =
     nodesSelectableOnClick

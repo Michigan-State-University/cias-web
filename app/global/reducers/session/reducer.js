@@ -1,6 +1,5 @@
 import produce from 'immer';
 import set from 'lodash/set';
-import Session from 'models/Session/Session';
 
 import {
   EDIT_QUESTION_SUCCESS,
@@ -47,7 +46,12 @@ import {
 } from './constants';
 
 export const initialState = {
-  session: new Session('', ''),
+  session: {
+    name: '',
+    type: '',
+    questions: [],
+    settings: {},
+  },
   sessionSaving: false,
   loaders: {
     createSession: false,
@@ -55,7 +59,12 @@ export const initialState = {
     editSession: false,
   },
   cache: {
-    session: new Session('', ''),
+    session: {
+      name: '',
+      type: '',
+      questions: [],
+      settings: {},
+    },
   },
   errors: {
     getSession: null,

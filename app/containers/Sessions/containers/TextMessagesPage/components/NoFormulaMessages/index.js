@@ -14,7 +14,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
-import { SessionTypes } from 'models/Session/SessionDto';
+import { SessionTypes } from 'models/Session';
 import { changeNoFormulaText } from 'global/reducers/textMessages';
 
 import VariableChooser from 'containers/VariableChooser';

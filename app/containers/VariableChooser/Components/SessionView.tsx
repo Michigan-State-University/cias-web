@@ -6,7 +6,7 @@ import {
   fetchSessionsRequest,
   makeSelectSessions,
 } from 'global/reducers/copyModalReducer';
-import { SessionDto } from 'models/Session/SessionDto';
+import { Session } from 'models/Session';
 
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
@@ -30,7 +30,7 @@ const SessionView = ({ onClick }: Props) => {
     dispatch(fetchSessionsRequest(interventionId));
 
   // selectors
-  const allSessions = useSelector(makeSelectSessions()) as SessionDto[];
+  const allSessions = useSelector(makeSelectSessions()) as Session[];
 
   const {
     currentInterventionId,
@@ -55,7 +55,7 @@ const SessionView = ({ onClick }: Props) => {
 
     const currentSession = allSessions?.find(
       ({ id }) => id === initialSessionId,
-    ) as SessionDto;
+    ) as Session;
 
     return filteredSessions?.filter(({ position }) =>
       includeCurrentSession

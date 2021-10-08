@@ -23,7 +23,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
-import { SessionTypes } from 'models/Session/SessionDto';
+import { SessionTypes } from 'models/Session';
 import { colors, themeColors } from 'theme';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
