@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { FeedbackQuestionDTO } from 'models/Question';
+import { FeedbackQuestionData, FeedbackQuestionDTO } from 'models/Question';
 
 import { colors } from 'theme';
 import Text from 'components/Text';
@@ -23,7 +23,8 @@ const FeedbackFormulaAndCases = ({
   question: { body },
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
-  const { spectrum } = body.data[0];
+  // @ts-ignore TODO REMOVE CAST!!!!!!!!!!!
+  const { spectrum } = body.data[0] as FeedbackQuestionData;
 
   return (
     <>
@@ -33,7 +34,7 @@ const FeedbackFormulaAndCases = ({
       <Formula payload={spectrum?.payload} />
       <Row>
         <Column width="auto">
-          {spectrum?.patterns?.map(({ match }, index) => (
+          {spectrum.patterns.map(({ match }, index) => (
             <CaseMatch
               match={match}
               caseTargetElementId={getCaseTargetElementId(index)}
@@ -42,7 +43,7 @@ const FeedbackFormulaAndCases = ({
           ))}
         </Column>
         <Column>
-          {spectrum?.patterns?.map(({ target }, index) => (
+          {spectrum.patterns.map(({ target }, index) => (
             <Text
               color={colors.manatee}
               fontWeight="bold"

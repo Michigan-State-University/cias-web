@@ -91,7 +91,7 @@ export type SliderQuestionDTO = CamelToSnake<SliderQuestion>;
 
 export type InformationQuestion = GenericQuestion<
   QuestionTypes.INFORMATION,
-  QuestionBody<string>
+  QuestionBody<never>
 >;
 export type InformationQuestionDTO = CamelToSnake<InformationQuestion>;
 

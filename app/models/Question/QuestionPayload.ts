@@ -16,8 +16,8 @@ export interface GridQuestionPayload {
 }
 
 export interface StartEndValueOriginalText {
-  startValue: string;
-  endValue: string;
+  startValue?: string;
+  endValue?: string;
 }
 
 export interface SliderQuestionPayload {
