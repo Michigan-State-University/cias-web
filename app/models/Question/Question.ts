@@ -81,19 +81,17 @@ export interface QuestionVariable {
   value?: string;
 }
 
-export interface QuestionBodyWithoutVariable<
-  T extends PayloadType = PayloadType,
-> {
+export interface QuestionBody<T extends PayloadType = PayloadType> {
   data: QuestionData<T>[];
 }
 
 export interface QuestionBodyWithVariable<T extends PayloadType = PayloadType>
-  extends QuestionBodyWithoutVariable<T> {
+  extends QuestionBody<T> {
   variable: QuestionVariable;
 }
 
-export type QuestionBody<T extends PayloadType = PayloadType> =
-  | QuestionBodyWithoutVariable<T>
+export type QuestionBodyType<T extends PayloadType = PayloadType> =
+  | QuestionBody<T>
   | QuestionBodyWithVariable<T>;
 
 export interface QuestionOriginalText {
@@ -106,7 +104,7 @@ export type QuestionFormulaTargetType = QuestionTypes | SessionTargetType;
 
 export interface GenericQuestion<
   VType extends QuestionTypes = QuestionTypes,
-  TBody extends QuestionBody = QuestionBody,
+  TBody extends QuestionBodyType = QuestionBodyType,
 > {
   id: string;
   type: VType;
@@ -131,7 +129,7 @@ export type SingleQuestion = GenericQuestion<
 
 export type MultipleQuestion = GenericQuestion<
   QuestionTypes.MULTIPLE,
-  QuestionBodyWithoutVariable<string>
+  QuestionBody<string>
 >;
 
 export type FreeResponseQuestion = GenericQuestion<
@@ -141,7 +139,7 @@ export type FreeResponseQuestion = GenericQuestion<
 
 export type ThirdPartyReportQuestion = GenericQuestion<
   QuestionTypes.THIRD_PARTY,
-  QuestionBodyWithoutVariable<string>
+  QuestionBody<string>
 >;
 
 export type NameQuestion = GenericQuestion<
@@ -156,7 +154,7 @@ export type NumberQuestion = GenericQuestion<
 
 export type GridQuestion = GenericQuestion<
   QuestionTypes.GRID,
-  QuestionBodyWithoutVariable<GridQuestionPayload>
+  QuestionBody<GridQuestionPayload>
 >;
 
 export type SliderQuestion = GenericQuestion<
@@ -166,7 +164,7 @@ export type SliderQuestion = GenericQuestion<
 
 export type InformationQuestion = GenericQuestion<
   QuestionTypes.INFORMATION,
-  QuestionBodyWithoutVariable<string>
+  QuestionBody<string>
 >;
 
 export type ExternalLinkQuestion = GenericQuestion<
@@ -176,12 +174,12 @@ export type ExternalLinkQuestion = GenericQuestion<
 
 export type FeedbackQuestion = GenericQuestion<
   QuestionTypes.FEEDBACK,
-  QuestionBodyWithoutVariable<FeedbackQuestionPayload>
+  QuestionBody<FeedbackQuestionPayload>
 >;
 
 export type FinishQuestion = GenericQuestion<
   QuestionTypes.FINISH,
-  QuestionBodyWithoutVariable<string>
+  QuestionBody<string>
 >;
 
 export type PhoneQuestion = GenericQuestion<
