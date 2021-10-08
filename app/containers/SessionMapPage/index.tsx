@@ -54,7 +54,7 @@ import {
 } from 'global/reducers/answers';
 import { JumpToScreenLocationState } from 'global/types/locationState';
 
-import { ReportTemplate } from 'models/ReportTemplate/ReportTemplateModel';
+import { ReportTemplate } from 'models/ReportTemplate';
 import { QuestionGroup } from 'models/QuestionGroup';
 import { QuestionDTO } from 'models/Question';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 
-import { ReportTemplate } from 'models/ReportTemplate/ReportTemplateModel';
+import { ReportTemplate } from 'models/ReportTemplate';
 
 import { QuestionDTO, QuestionTypes } from 'models/Question';
 
