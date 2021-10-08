@@ -37,14 +37,14 @@ const VariablesAndScores = ({
       case QuestionTypes.PHONE:
         return (
           <VariableAndScoreChip
-            variable={question.body.variable?.name}
+            variable={question.body.variable.name}
             variableOnly
           />
         );
       case QuestionTypes.SINGLE:
         return question.body.data.map(({ value }, index) => (
           <VariableAndScoreChip
-            variable={question.body.variable?.name}
+            variable={question.body.variable.name}
             score={value}
             key={`session-map-question-details-variable-${index}`}
           />
@@ -52,7 +52,7 @@ const VariablesAndScores = ({
       case QuestionTypes.SLIDER:
         return question.body.data.map((_, index) => (
           <VariableAndScoreChip
-            variable={question.body.variable?.name}
+            variable={question.body.variable.name}
             score="0 - 100"
             key={`session-map-question-details-variable-${index}`}
           />

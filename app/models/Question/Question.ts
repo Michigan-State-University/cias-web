@@ -81,10 +81,20 @@ export interface QuestionVariable {
   value?: string;
 }
 
-export interface QuestionBody<T> {
+export interface QuestionBodyWithoutVariable<
+  T extends PayloadType = PayloadType,
+> {
   data: QuestionData<T>[];
-  variable?: QuestionVariable;
 }
+
+export interface QuestionBodyWithVariable<T extends PayloadType = PayloadType>
+  extends QuestionBodyWithoutVariable<T> {
+  variable: QuestionVariable;
+}
+
+export type QuestionBody<T extends PayloadType = PayloadType> =
+  | QuestionBodyWithoutVariable<T>
+  | QuestionBodyWithVariable<T>;
 
 export interface QuestionOriginalText {
   title: string;
@@ -95,11 +105,11 @@ export interface QuestionOriginalText {
 export type QuestionFormulaTargetType = QuestionTypes | SessionTargetType;
 
 export interface GenericQuestion<
-  V extends QuestionTypes = QuestionTypes,
-  T extends PayloadType = PayloadType,
+  VType extends QuestionTypes = QuestionTypes,
+  TBody extends QuestionBody = QuestionBody,
 > {
   id: string;
-  type: V;
+  type: VType;
   question_group_id: string;
   settings: QuestionSettings;
   position: number;
@@ -108,67 +118,91 @@ export interface GenericQuestion<
   narrator: Narrator;
   video_url: Nullable<string>;
   formula: Formula<QuestionFormulaTargetType>;
-  body: QuestionBody<T>;
+  body: TBody;
   original_text: QuestionOriginalText;
   image_url: Nullable<string>;
   image_alt: Nullable<string>;
 }
 
-export type SingleQuestion = GenericQuestion<QuestionTypes.SINGLE, string>;
+export type SingleQuestion = GenericQuestion<
+  QuestionTypes.SINGLE,
+  QuestionBodyWithVariable<string>
+>;
 
-export type MultipleQuestion = GenericQuestion<QuestionTypes.MULTIPLE, string>;
+export type MultipleQuestion = GenericQuestion<
+  QuestionTypes.MULTIPLE,
+  QuestionBodyWithoutVariable<string>
+>;
 
 export type FreeResponseQuestion = GenericQuestion<
   QuestionTypes.FREE_RESPONSE,
-  string
+  QuestionBodyWithVariable<string>
 >;
 
 export type ThirdPartyReportQuestion = GenericQuestion<
   QuestionTypes.THIRD_PARTY,
-  string
+  QuestionBodyWithoutVariable<string>
 >;
 
-export type NameQuestion = GenericQuestion<QuestionTypes.NAME, string>;
+export type NameQuestion = GenericQuestion<
+  QuestionTypes.NAME,
+  QuestionBodyWithVariable<string>
+>;
 
-export type NumberQuestion = GenericQuestion<QuestionTypes.NUMBER, string>;
+export type NumberQuestion = GenericQuestion<
+  QuestionTypes.NUMBER,
+  QuestionBodyWithVariable<string>
+>;
 
 export type GridQuestion = GenericQuestion<
   QuestionTypes.GRID,
-  GridQuestionPayload
+  QuestionBodyWithoutVariable<GridQuestionPayload>
 >;
 
 export type SliderQuestion = GenericQuestion<
   QuestionTypes.SLIDER,
-  SliderQuestionPayload
+  QuestionBodyWithVariable<SliderQuestionPayload>
 >;
 
 export type InformationQuestion = GenericQuestion<
   QuestionTypes.INFORMATION,
-  string
+  QuestionBodyWithoutVariable<string>
 >;
 
 export type ExternalLinkQuestion = GenericQuestion<
   QuestionTypes.EXTERNAL_LINK,
-  string
+  QuestionBodyWithVariable<string>
 >;
 
 export type FeedbackQuestion = GenericQuestion<
   QuestionTypes.FEEDBACK,
-  FeedbackQuestionPayload
+  QuestionBodyWithoutVariable<FeedbackQuestionPayload>
 >;
 
-export type FinishQuestion = GenericQuestion<QuestionTypes.FINISH, string>;
+export type FinishQuestion = GenericQuestion<
+  QuestionTypes.FINISH,
+  QuestionBodyWithoutVariable<string>
+>;
 
-export type PhoneQuestion = GenericQuestion<QuestionTypes.PHONE, string>;
+export type PhoneQuestion = GenericQuestion<
+  QuestionTypes.PHONE,
+  QuestionBodyWithVariable<string>
+>;
 
-export type DateQuestion = GenericQuestion<QuestionTypes.DATE, string>;
+export type DateQuestion = GenericQuestion<
+  QuestionTypes.DATE,
+  QuestionBodyWithVariable<string>
+>;
 
 export type ParticipantReportQuestion = GenericQuestion<
   QuestionTypes.PARTICIPANT_REPORT,
-  string
+  QuestionBodyWithVariable<string>
 >;
 
-export type CurrencyQuestion = GenericQuestion<QuestionTypes.CURRENCY, string>;
+export type CurrencyQuestion = GenericQuestion<
+  QuestionTypes.CURRENCY,
+  QuestionBodyWithVariable<string>
+>;
 
 export type Question =
   | SingleQuestion
