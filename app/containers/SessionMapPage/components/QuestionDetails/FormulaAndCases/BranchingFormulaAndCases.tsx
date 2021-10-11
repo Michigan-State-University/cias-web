@@ -93,7 +93,7 @@ const BranchingFormulaAndCases = ({
       <Formula payload={formula.payload} />
       <Row>
         <Column width="auto">
-          {formula?.patterns?.map(({ match }, index) => (
+          {formula.patterns.map(({ match }, index) => (
             <CaseMatch
               match={match}
               key={getCaseMatchElementId(index)}
@@ -102,7 +102,7 @@ const BranchingFormulaAndCases = ({
           ))}
         </Column>
         <Column>
-          {formula?.patterns?.map(({ target }, index) => (
+          {formula.patterns.map(({ target }, index) => (
             <Box
               key={getCaseTargetElementId(index)}
               id={getCaseTargetElementId(index)}

@@ -35,7 +35,7 @@ const MultiUserAnswer = ({
   );
 
   const hasNameAndIsSelected = useCallback(
-    (optionVariableName?: string) =>
+    (optionVariableName: string) =>
       Boolean(optionVariableName) &&
       answerData.some(
         ({ var: answerVariableName }) =>
@@ -48,7 +48,7 @@ const MultiUserAnswer = ({
     <Row gap={15} flexWrap="wrap">
       {questionData.map(({ variable, payload }, index) => (
         <Checkbox
-          checked={hasNameAndIsSelected(variable?.name)}
+          checked={hasNameAndIsSelected(variable.name)}
           disabled
           id={getCheckboxId(index)}
           key={getCheckboxId(index)}

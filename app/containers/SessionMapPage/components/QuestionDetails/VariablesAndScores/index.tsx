@@ -60,8 +60,8 @@ const VariablesAndScores = ({
       case QuestionTypes.MULTIPLE:
         return question.body.data.map(({ variable }, index) => (
           <VariableAndScoreChip
-            variable={variable?.name}
-            score={variable?.value}
+            variable={variable.name}
+            score={variable.value}
             key={`session-map-question-details-variable-${index}`}
           />
         ));

@@ -30,7 +30,7 @@ const FeedbackFormulaAndCases = ({
       <Comment mt={30} mb={15} fontWeight="bold">
         {formatMessage(messages.feedbackFormulaAndCases)}
       </Comment>
-      <Formula payload={spectrum?.payload} />
+      <Formula payload={spectrum.payload} />
       <Row>
         <Column width="auto">
           {spectrum.patterns.map(({ match }, index) => (
