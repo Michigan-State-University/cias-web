@@ -308,14 +308,33 @@ export function AnswerSessionPage({
     return renderBottomSide();
   };
 
-  const transcriptToggleIcon = (
-    <Icon
-      width={22}
-      src={ccIcon}
-      onClick={toggleTextTranscript}
-      fill={showTextTranscript ? themeColors.text : ''}
-    />
-  );
+  const renderTranscriptToggleIcon = () => {
+    const transcriptToggleIcon = (
+      <Icon
+        width={22}
+        src={ccIcon}
+        onClick={toggleTextTranscript}
+        fill={showTextTranscript ? themeColors.text : ''}
+      />
+    );
+
+    return (
+      <>
+        {isDesktop && (
+          <Row position="absolute" right={30} bottom={30}>
+            {transcriptToggleIcon}
+          </Row>
+        )}
+        {!isDesktop && (
+          <Box position="relative" width="100%" mt={52}>
+            <Row position="absolute" left={15} bottom={15}>
+              {transcriptToggleIcon}
+            </Row>
+          </Box>
+        )}
+      </>
+    );
+  };
 
   const renderQuestion = () => {
     const selectAnswerProp = (answerBody, selectedByUser = true) => {
@@ -367,10 +386,7 @@ export function AnswerSessionPage({
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
           <Box lang={languageCode} width="100%">
-            <CommonLayout
-              transcriptToggleIcon={transcriptToggleIcon}
-              currentQuestion={currentQuestion}
-            />
+            <CommonLayout currentQuestion={currentQuestion} />
 
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           </Box>
@@ -534,6 +550,7 @@ export function AnswerSessionPage({
                   )}
               </Box>
               {answersError && <ErrorAlert errorText={answersError} />}
+              {renderTranscriptToggleIcon()}
             </>
           )}
         </AnswerOuterContainer>
