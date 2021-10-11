@@ -3,11 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { ReportTemplate } from 'models/ReportTemplate';
 
-import {
-  QuestionDTO,
-  QuestionTypes,
-  ThirdPartyReportQuestionDataDTO,
-} from 'models/Question';
+import { QuestionDTO, QuestionTypes } from 'models/Question';
 
 import Comment from 'components/Text/Comment';
 import Column from 'components/Column';
@@ -88,7 +84,7 @@ const VariablesAndScores = ({
         );
       case QuestionTypes.THIRD_PARTY:
         const formattedData = formatThirdPartyReportQuestionData(
-          question.body.data as ThirdPartyReportQuestionDataDTO[], // TODO REMOVE CAST!!!!!!!!!!!!!!!!!!!!
+          question.body.data,
         );
         return Array.from(formattedData).flatMap(([email, templatesIds]) => {
           if (templatesIds.size === 0) {

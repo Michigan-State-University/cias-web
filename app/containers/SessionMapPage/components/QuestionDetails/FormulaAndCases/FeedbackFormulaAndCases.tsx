@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { FeedbackQuestionData, FeedbackQuestionDTO } from 'models/Question';
+import { FeedbackQuestionDTO } from 'models/Question';
 
 import { colors } from 'theme';
 import Text from 'components/Text';
@@ -23,8 +23,7 @@ const FeedbackFormulaAndCases = ({
   question: { body },
 }: Props): JSX.Element => {
   const { formatMessage } = useIntl();
-  // @ts-ignore TODO REMOVE CAST!!!!!!!!!!!
-  const { spectrum } = body.data[0] as FeedbackQuestionData;
+  const { spectrum } = body.data[0];
 
   return (
     <>
