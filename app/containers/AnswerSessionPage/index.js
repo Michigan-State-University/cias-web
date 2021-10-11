@@ -42,7 +42,10 @@ import { finishQuestion } from 'models/Session/QuestionTypes';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
 
-import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
+import {
+  additionalBreakpoints,
+  containerBreakpoints,
+} from 'components/Container/containerBreakpoints';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import { Button } from 'components/Button';
@@ -138,10 +141,14 @@ AnimationRefHelper.propTypes = {
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
+const IS_XXL = 'IS_XXL';
 
 const QUERY = {
   [IS_DESKTOP]: {
     minWidth: additionalBreakpoints.desktopSm,
+  },
+  [IS_XXL]: {
+    minWidth: containerBreakpoints.xxl,
   },
 };
 
@@ -318,21 +325,21 @@ export function AnswerSessionPage({
       />
     );
 
+    const fixedPosition =
+      previewMode === DESKTOP_MODE && containerQueryParams[IS_XXL];
+
+    if (fixedPosition) {
+      return (
+        <Row position="fixed" right={30} bottom={30}>
+          {transcriptToggleIcon}
+        </Row>
+      );
+    }
+
     return (
-      <>
-        {isDesktop && (
-          <Row position="absolute" right={30} bottom={30}>
-            {transcriptToggleIcon}
-          </Row>
-        )}
-        {!isDesktop && (
-          <Box position="relative" width="100%" mt={52}>
-            <Row position="absolute" left={15} bottom={15}>
-              {transcriptToggleIcon}
-            </Row>
-          </Box>
-        )}
-      </>
+      <Row pt={15} pb={15}>
+        {transcriptToggleIcon}
+      </Row>
     );
   };
 
@@ -413,6 +420,7 @@ export function AnswerSessionPage({
           </Row>
 
           {renderQuestionTranscript(false)}
+          {renderTranscriptToggleIcon()}
         </AppContainer>
       </Row>
     );
@@ -550,7 +558,6 @@ export function AnswerSessionPage({
                   )}
               </Box>
               {answersError && <ErrorAlert errorText={answersError} />}
-              {renderTranscriptToggleIcon()}
             </>
           )}
         </AnswerOuterContainer>
