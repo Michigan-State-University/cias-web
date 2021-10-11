@@ -80,7 +80,7 @@ export interface ParticipantReportQuestionData
 
 export interface CurrencyQuestionData extends QuestionPayloadData<string> {}
 
-export type QuestionDataType =
+export type QuestionData =
   | SingleQuestionData
   | MultipleQuestionData
   | FreeResponseQuestionData
