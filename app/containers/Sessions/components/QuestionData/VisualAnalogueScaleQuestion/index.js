@@ -13,7 +13,7 @@ import {
 import AppSlider from 'components/AppSlider';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Question from 'models/Session/Question';
+import { QuestionDTO } from 'models/Question';
 import Row from 'components/Row';
 import VisualAnalogueScaleQuestionLayout from 'containers/AnswerSessionPage/layouts/VisualAnalogueScaleQuestionLayout';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -124,7 +124,7 @@ const VisualAnalogueScaleQuestion = ({
 };
 
 VisualAnalogueScaleQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.shape(QuestionDTO).isRequired,
   intl: PropTypes.object.isRequired,
   updateLabel: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,

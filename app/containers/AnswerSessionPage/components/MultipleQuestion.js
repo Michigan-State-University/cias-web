@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
+import { QuestionDTO } from 'models/Question';
+
 import MultipleQuestionLayout from '../layouts/MultipleQuestionLayout';
 
 const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
@@ -47,7 +48,7 @@ const MultipleQuestion = ({ question, answerBody, selectAnswer }) => {
 };
 
 MultipleQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.shape(QuestionDTO).isRequired,
   answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
 };

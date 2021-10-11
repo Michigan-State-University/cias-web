@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 
 import { themeColors } from 'theme';
-import Question from 'models/Session/Question';
+
+import { QuestionDTO } from 'models/Question';
 
 import UrlPreview from 'components/UrlPreview';
 import H3 from 'components/H3';
@@ -45,7 +46,7 @@ const UrlQuestion = ({ question, selectAnswer }) => {
 };
 
 UrlQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.shape(QuestionDTO).isRequired,
   selectAnswer: PropTypes.func,
 };
 

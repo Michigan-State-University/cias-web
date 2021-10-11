@@ -17,7 +17,7 @@ import Column from 'components/Column';
 import { StyledInput } from 'components/Input/StyledInput';
 import Row from 'components/Row';
 import OriginalTextHover from 'components/OriginalTextHover';
-import Question from 'models/Session/Question';
+import { QuestionDTO } from 'models/Question';
 
 import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -119,7 +119,7 @@ const FeedbackQuestion = ({
 };
 
 FeedbackQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.shape(QuestionDTO).isRequired,
   intl: PropTypes.object.isRequired,
   onUpdateLabel: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,

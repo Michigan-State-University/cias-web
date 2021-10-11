@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
+import { QuestionDTO } from 'models/Question';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { loadState } from 'utils/persist';
 
@@ -69,7 +69,7 @@ const ParticipantReportQuestion = ({
 };
 
 ParticipantReportQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.shape(QuestionDTO).isRequired,
   selectAnswer: PropTypes.func,
   formatMessage: PropTypes.func,
   showError: PropTypes.func,

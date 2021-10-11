@@ -8,7 +8,7 @@ import { injectIntl } from 'react-intl';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Question from 'models/Session/Question';
+import { QuestionDTO } from 'models/Question';
 import Row from 'components/Row';
 
 import {
@@ -48,7 +48,7 @@ const DateQuestion = ({
 };
 
 DateQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.shape(QuestionDTO).isRequired,
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
 };

@@ -5,14 +5,16 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import Column from 'components/Column';
-import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
-import Question from 'models/Session/Question';
-import Row from 'components/Row';
+import { QuestionDTO } from 'models/Question';
+
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
 } from 'global/reducers/questions';
+
+import Column from 'components/Column';
+import PhoneNumberForm from 'components/AccountSettings/PhoneNumberForm';
+import Row from 'components/Row';
 
 import { UPDATE_DATA } from './constants';
 
@@ -49,7 +51,7 @@ const PhoneQuestion = ({
 };
 
 PhoneQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.shape(QuestionDTO).isRequired,
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
 };

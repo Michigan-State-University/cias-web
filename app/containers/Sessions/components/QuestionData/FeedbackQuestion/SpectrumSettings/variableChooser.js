@@ -8,6 +8,8 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
+import { QuestionDTO } from 'models/Question';
+
 import { EditSessionPageContext } from 'containers/Sessions/containers/EditSessionPage/utils';
 import VariableChooser from 'containers/VariableChooser';
 import Img from 'components/Img';
@@ -19,7 +21,6 @@ import { StyledInput } from 'components/Input/StyledInput';
 import InequalityChooser from 'components/InequalityChooser';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
-import Question from 'models/Session/Question';
 
 import { themeColors, colors } from 'theme';
 import messages from '../messages';
@@ -124,7 +125,7 @@ const SpectrumVariableChooser = ({
 };
 
 SpectrumVariableChooser.propTypes = {
-  selectedQuestion: PropTypes.shape(Question),
+  selectedQuestion: PropTypes.shape(QuestionDTO),
   id: PropTypes.string,
   intl: PropTypes.object,
   spectrum: PropTypes.shape({

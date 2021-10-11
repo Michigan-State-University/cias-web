@@ -7,7 +7,7 @@ import { injectIntl } from 'react-intl';
 
 import FlexibleWidthApprovableInput from 'components/Input/FlexibleWidthApprovableInput';
 import Box from 'components/Box';
-import Question from 'models/Session/Question';
+import { QuestionDTO } from 'models/Question';
 import Row from 'components/Row';
 import { selectQuillText } from 'components/Input/utils';
 import OriginalTextHover from 'components/OriginalTextHover';
@@ -62,7 +62,7 @@ const QuestionTitle = ({
 };
 
 QuestionTitle.propTypes = {
-  selectedQuestion: PropTypes.shape(Question),
+  selectedQuestion: PropTypes.shape(QuestionDTO),
   updateTitle: PropTypes.func,
   intl: PropTypes.object,
 };

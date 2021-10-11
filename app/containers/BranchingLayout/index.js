@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
 
-import Question from 'models/Session/Question';
+import { QuestionDTO } from 'models/Question';
 
 import { makeSelectSelectedQuestion } from 'global/reducers/questions';
 
@@ -215,7 +215,7 @@ BranchingLayout.propTypes = {
   disabled: PropTypes.bool,
   includeAllVariables: PropTypes.bool,
   includeCurrentQuestion: PropTypes.bool,
-  selectedQuestion: PropTypes.shape(Question),
+  selectedQuestion: PropTypes.shape(QuestionDTO),
   includeAllSessions: PropTypes.bool,
   includeCurrentSession: PropTypes.bool,
   isMultiSession: PropTypes.bool,

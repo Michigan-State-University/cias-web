@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
+import { QuestionDTO } from 'models/Question';
 import ThirdPartyQuestionLayout from '../layouts/ThirdPartyQuestionLayout';
 
 const ThirdPartyQuestion = ({
@@ -48,7 +48,7 @@ const ThirdPartyQuestion = ({
 };
 
 ThirdPartyQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.shape(QuestionDTO).isRequired,
   answerBody: PropTypes.any,
   selectAnswer: PropTypes.func,
   questionIndex: PropTypes.number,

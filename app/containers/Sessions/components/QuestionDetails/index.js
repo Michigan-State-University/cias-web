@@ -8,7 +8,7 @@ import { useInjectSaga } from 'redux-injectors';
 
 import { colors, elements } from 'theme';
 
-import Question from 'models/Session/Question';
+import { QuestionDTO } from 'models/Question';
 import { canEdit } from 'models/Status/statusPermissions';
 import { nameQuestion, finishQuestion } from 'models/Session/QuestionTypes';
 import { hasObjectProperty } from 'utils/hasObjectProperty';
@@ -197,7 +197,7 @@ const RenderQuestionDetails = ({
 };
 
 RenderQuestionDetails.propTypes = {
-  selectedQuestion: PropTypes.shape(Question),
+  selectedQuestion: PropTypes.shape(QuestionDTO),
   isNarratorTab: PropTypes.bool,
   interventionStatus: PropTypes.string,
   formatMessage: PropTypes.func,

@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl, IntlShape } from 'react-intl';
 
+import { QuestionDTO } from 'models/Question';
+
 import Column from 'components/Column';
 import Button from 'components/Button';
 import Row from 'components/Row';
-import Question from 'models/Session/Question';
+
 import questionGroupIcon from 'assets/svg/question-group-icon.svg';
 import sessionIcon from 'assets/svg/session-icon.svg';
 import interventionIcon from 'assets/svg/intervention-icon.svg';
@@ -244,7 +246,7 @@ CopyChooser.propTypes = {
   session: PropTypes.object,
   intervention: PropTypes.object,
   sessions: PropTypes.array,
-  selectedQuestion: PropTypes.shape(Question),
+  selectedQuestion: PropTypes.shape(QuestionDTO),
   loading: PropTypes.bool,
   questionGroups: PropTypes.array,
   interventions: PropTypes.array,

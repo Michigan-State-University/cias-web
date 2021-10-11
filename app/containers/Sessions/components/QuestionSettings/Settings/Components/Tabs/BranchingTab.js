@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
+import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import BranchingLayout from 'containers/BranchingLayout';
-import Session from 'models/Session';
-import Question from 'models/Session/Question';
+import { Session } from 'models/Session';
+import { QuestionDTO } from 'models/Question';
 import { questionType } from 'models/Session/QuestionTypes';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { makeSelectQuestions } from 'global/reducers/questions';
-import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import { findQuestionIndex, findInterventionIndex } from 'models/Session/utils';
 import {
@@ -110,7 +110,7 @@ BranchingTab.propTypes = {
   onAddCase: PropTypes.func,
   onRemoveCase: PropTypes.func,
   onUpdateCase: PropTypes.func,
-  questions: PropTypes.arrayOf(PropTypes.shape(Question)),
+  questions: PropTypes.arrayOf(PropTypes.shape(QuestionDTO)),
   intervention: PropTypes.shape({
     sessions: PropTypes.arrayOf(PropTypes.shape(Session)),
   }),
