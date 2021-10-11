@@ -3,7 +3,7 @@ import { CamelToSnake } from 'global/types/camelToSnake';
 import {
   FeedbackQuestionPayload,
   GridQuestionPayload,
-  PayloadType,
+  QuestionPayload,
   SliderQuestionPayload,
 } from './QuestionPayload';
 
@@ -22,9 +22,7 @@ export interface QuestionDataVariable {
   value: string;
 }
 
-export interface QuestionPayloadData<
-  TPayload extends PayloadType = PayloadType,
-> {
+export interface QuestionPayloadData<TPayload extends QuestionPayload> {
   payload: TPayload;
 }
 

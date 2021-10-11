@@ -33,7 +33,7 @@ export interface FeedbackQuestionPayload {
   originalText?: StartEndValueOriginalText;
 }
 
-export type PayloadType =
+export type QuestionPayload =
   | string
   | GridQuestionPayload
   | SliderQuestionPayload
