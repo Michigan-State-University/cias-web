@@ -33,8 +33,8 @@ import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 // Load the favicon and the .htaccess file
 /* eslint-disable import/no-unresolved, import/extensions */
-import '!file-loader?name=[name].[ext]!./assets/images/logo-icon.png';
-import 'file-loader?name=.htaccess!./.htaccess';
+import '!./assets/images/logo-icon.png?file-loader';
+import './.htaccess?file-loader';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import { store } from 'configureStore';
@@ -97,15 +97,3 @@ if (module.hot) {
 }
 
 runAppWithPolyfills(translationMessages);
-
-// Install ServiceWorker and AppCache in the end since
-// it's not most important operation and if main code fails,
-// we do not want it installed
-if (process.env.NODE_ENV === 'production') {
-  const runtime = require('offline-plugin/runtime'); // eslint-disable-line global-require
-
-  runtime.install({
-    onUpdateReady: () => runtime.applyUpdate(), // force update Service Worker (even if existing tabs are open)
-    onUpdated: () => window.location.reload(), // reload page into updated version
-  });
-}
