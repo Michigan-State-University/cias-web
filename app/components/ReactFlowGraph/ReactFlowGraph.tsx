@@ -1,7 +1,8 @@
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import ReactFlow, {
   Elements,
   FlowTransform,
+  isNode,
   Node,
   NodeTypesType,
   ReactFlowProps,
@@ -20,9 +21,12 @@ import {
   calculateMinZoom,
   calculateScrollbarPositionRatio,
   calculateScrollbarSizeRatio,
+  calculateTransformToCenterNodeInView,
   calculateTransformToFitNodeInView,
   calculateTransformToFitViewInContainer,
+  findFirstNode,
   findMaxNodeHeight,
+  findNodeById,
   layoutElements,
   prioritizeEdges,
 } from './utils';
@@ -74,6 +78,7 @@ const ReactFlowGraph = ({
   const { zoomTo, transform } = useZoomPanHelper();
   const containerWidth = useStoreState((state) => state.width);
   const containerHeight = useStoreState((state) => state.height);
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   const [currentTransform, setCurrentTransform] = useState<FlowTransform>({
     x: 0,
@@ -154,7 +159,7 @@ const ReactFlowGraph = ({
     const pickedNode = layoutedElementsWithPrioritizedEdges.find(
       ({ id }) => id === pickedNodeId,
     ) as Node;
-    if (!pickedNode) return;
+    if (!pickedNode || !isNode(pickedNode)) return;
 
     const newTransform = calculateTransformToFitNodeInView(
       pickedNode,
@@ -185,15 +190,37 @@ const ReactFlowGraph = ({
 
   useEffect(() => {
     fitViewInContainer();
+  }, [containerWidth, containerHeight, panAreaWidth, panAreaHeight]);
+
+  useEffect(() => {
     if (pickedNodeId) {
       fitPickedNodeInView();
     }
-  }, [
-    containerWidth,
-    containerHeight,
-    layoutedElementsWithPrioritizedEdges,
-    nodeDimensions,
-  ]);
+  }, [containerWidth, containerHeight, pickedNodeId, nodeDimensions]);
+
+  const centerToPickedOrFirstNode = useCallback(() => {
+    const node = pickedNodeId
+      ? findNodeById(layoutedElementsWithPrioritizedEdges, pickedNodeId)
+      : findFirstNode(layoutedElementsWithPrioritizedEdges);
+
+    if (!node) return;
+
+    const centerToNodeTransform = calculateTransformToCenterNodeInView(
+      node,
+      zoom,
+      panAreaWidth,
+      panAreaHeight,
+      containerWidth,
+      containerHeight,
+      nodeDimensions,
+    );
+
+    transform(centerToNodeTransform);
+  }, [mapLoaded]);
+
+  useEffect(() => {
+    if (mapLoaded) centerToPickedOrFirstNode();
+  }, [mapLoaded]);
 
   const handleScrollbarPositionRatioChange =
     (axis: 'x' | 'y') => (newScrollbarPositionRatio: number) => {
@@ -260,6 +287,7 @@ const ReactFlowGraph = ({
     maxZoom: defaultMaxZoom,
     defaultZoom,
     onMove: handleMove,
+    onLoad: () => setMapLoaded(true),
     ...restReactFlowProps,
   };
 
