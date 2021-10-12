@@ -11,6 +11,9 @@ import { compose } from 'redux';
 import { injectReducer, injectSaga } from 'redux-injectors';
 import { createStructuredSelector } from 'reselect';
 
+import { Language, LanguageDTO } from 'models/Language';
+import { ApiData } from 'models/Api';
+
 import { fontSizes, themeColors } from 'theme';
 
 import useGet from 'utils/useGet';
@@ -27,8 +30,6 @@ import {
   makeSelectInterventionLoader,
   makeSelectInterventionError,
 } from 'global/reducers/intervention';
-import { Language, LanguageDTO } from 'global/types/language';
-import { ApiData } from 'global/types/api';
 
 import H1 from 'components/H1';
 import H2 from 'components/H2';

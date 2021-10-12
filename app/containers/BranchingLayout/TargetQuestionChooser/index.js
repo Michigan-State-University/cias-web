@@ -13,7 +13,7 @@ import H3 from 'components/H3';
 import EllipsisText from 'components/Text/EllipsisText';
 import Img from 'components/Img';
 import Loader from 'components/Loader';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
 import Text from 'components/Text';
 import arrowLeft from 'assets/svg/arrow-left.svg';
@@ -265,8 +265,8 @@ TargetQuestionChooser.propTypes = {
   intl: PropTypes.object,
   onClick: PropTypes.func.isRequired,
   session: PropTypes.object,
-  questions: PropTypes.arrayOf(PropTypes.shape(Question)),
-  selectedQuestion: PropTypes.shape(Question),
+  questions: PropTypes.arrayOf(PropTypes.object),
+  selectedQuestion: PropTypes.object,
   target: PropTypes.shape({ id: PropTypes.string, type: PropTypes.string }),
   currentIndex: PropTypes.string,
   sessionIndex: PropTypes.number,

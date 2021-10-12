@@ -1,7 +1,9 @@
 /* eslint-disable camelcase,no-unused-vars */
 import { defaultMapper } from 'utils/mapResponseObjects';
 import objectToCamelCase from 'utils/objectToCamelCase';
+
 import { ReportFor } from 'global/reducers/reportTemplates/constants';
+
 import { ReportTemplate } from './ReportTemplate';
 import { TemplateSection } from './TemplateSection';
 
@@ -83,9 +85,7 @@ export class ReportTemplateBuilder {
    * @returns  {ReportTemplateBuilder}
    */
   fromJson = (json) => {
-    const reportTemplate = new ReportTemplate(
-      objectToCamelCase(defaultMapper(json)),
-    );
+    const reportTemplate = objectToCamelCase(defaultMapper(json));
 
     this.id = reportTemplate.id;
     this.name = reportTemplate.name;
@@ -102,14 +102,13 @@ export class ReportTemplateBuilder {
   /**
    * @returns  {ReportTemplate}
    */
-  build = () =>
-    new ReportTemplate({
-      id: this.id,
-      name: this.name,
-      reportFor: this.reportFor,
-      summary: this.summary,
-      logoUrl: this.logoUrl,
-      sessionId: this.sessionId,
-      sections: this.sections,
-    });
+  build = () => ({
+    id: this.id,
+    name: this.name,
+    reportFor: this.reportFor,
+    summary: this.summary,
+    logoUrl: this.logoUrl,
+    sessionId: this.sessionId,
+    sections: this.sections,
+  });
 }

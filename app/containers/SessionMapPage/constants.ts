@@ -2,7 +2,7 @@ import { Edge } from 'react-flow-renderer';
 
 import { colors } from 'theme';
 
-import { QuestionTypes } from 'models/Question/QuestionDto';
+import { QuestionTypes } from 'models/Question';
 
 import {
   CustomConnectionLineType,

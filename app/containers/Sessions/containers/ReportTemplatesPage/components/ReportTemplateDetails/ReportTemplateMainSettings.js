@@ -14,7 +14,6 @@ import {
   ReportFor,
   generateTestReportRequest,
 } from 'global/reducers/reportTemplates';
-import { ReportTemplate } from 'models/ReportTemplate';
 
 import arrowDown from 'assets/svg/arrow-down-black.svg';
 import arrowUp from 'assets/svg/arrow-up-black.svg';
@@ -306,7 +305,7 @@ ReportTemplateMainSettings.propTypes = {
   deleteReportTemplateLogo: PropTypes.func,
   generateTestReport: PropTypes.func,
   selectTemplate: PropTypes.func,
-  selectedReport: PropTypes.shape(ReportTemplate),
+  selectedReport: PropTypes.object,
 };
 
 export default compose(withConnect, injectIntl)(ReportTemplateMainSettings);

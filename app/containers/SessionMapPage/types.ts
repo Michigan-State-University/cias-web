@@ -1,6 +1,6 @@
 import { Edge, FlowTransform } from 'react-flow-renderer';
 
-import { Question } from 'global/types/question';
+import { QuestionDTO } from 'models/Question';
 
 interface InteractiveNodeData {
   showDetailedInfo: boolean;
@@ -10,7 +10,7 @@ interface InteractiveNodeData {
 }
 
 export interface QuestionNodeData extends InteractiveNodeData {
-  question: Question;
+  question: QuestionDTO;
   showDetails: boolean;
   onShowDetailsChange: (showDetails: boolean, questionId: string) => void;
   questionIndex: number;

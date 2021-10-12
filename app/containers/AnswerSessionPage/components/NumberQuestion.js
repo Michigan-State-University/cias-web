@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
-
 import NumberQuestionLayout from '../layouts/NumberQuestionLayout';
 import messages from '../layouts/messages';
 import { NUMBER_VALIDATION_ERROR } from '../constants';
@@ -46,7 +44,7 @@ const NumberQuestion = ({
 };
 
 NumberQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   formatMessage: PropTypes.func,

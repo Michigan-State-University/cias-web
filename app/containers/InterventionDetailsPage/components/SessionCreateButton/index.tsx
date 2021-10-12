@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { SessionTypes } from 'models/Session/SessionDto';
+import { SessionTypes } from 'models/Session';
 import Row from 'components/Row';
 import Img from 'components/Img';
 import H3 from 'components/H3';

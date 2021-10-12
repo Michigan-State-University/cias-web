@@ -43,7 +43,7 @@ import {
 import { redirectToPreview } from 'containers/AnswerSessionPage/actions';
 import { makeSelectInterventionStatus } from 'global/reducers/intervention';
 import { canEdit, canPreview } from 'models/Status/statusPermissions';
-import { SessionTypes } from 'models/Session/SessionDto';
+import { SessionTypes } from 'models/Session';
 import messages from './messages';
 import {
   StyledLink,

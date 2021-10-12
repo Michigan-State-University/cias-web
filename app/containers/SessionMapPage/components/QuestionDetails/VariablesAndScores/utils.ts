@@ -1,12 +1,12 @@
-import { QuestionData } from 'global/types/question';
+import { ThirdPartyReportQuestionDataDTO } from 'models/Question';
 
 export const formatThirdPartyReportQuestionData = (
-  questionData: QuestionData<string>[],
+  questionData: ThirdPartyReportQuestionDataDTO[],
 ): Map<string, Set<string>> => {
   const formattedData = new Map<string, Set<string>>();
 
   questionData.forEach(({ value, report_template_ids: reportTemplateIds }) => {
-    const emails = value ? value.split(',') : [];
+    const emails = value.split(',');
 
     if (emails.length === 0) {
       emails.push('');
@@ -14,7 +14,7 @@ export const formatThirdPartyReportQuestionData = (
 
     emails.forEach((email) => {
       const emailTemplatesIds = formattedData.get(email) ?? new Set<string>();
-      if (!reportTemplateIds || reportTemplateIds.length === 0) {
+      if (reportTemplateIds.length === 0) {
         emailTemplatesIds.add('');
       } else {
         reportTemplateIds.forEach((templateId) => {

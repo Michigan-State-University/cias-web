@@ -16,7 +16,7 @@ import {
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import Question from 'models/Session/Question';
+
 import Row from 'components/Row';
 import { Comment } from 'components/Text';
 
@@ -74,7 +74,7 @@ const TextboxQuestion = ({
 };
 
 TextboxQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
 };

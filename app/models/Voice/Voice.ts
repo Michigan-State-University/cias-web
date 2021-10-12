@@ -1,9 +1,4 @@
-export interface VoiceDTO {
-  google_tts_language_id: number;
-  language_code: string;
-  voice_label: string;
-  voice_type: string;
-}
+import { CamelToSnakeOmitId } from 'global/types/camelToSnake';
 
 export interface Voice {
   id: string;
@@ -12,3 +7,5 @@ export interface Voice {
   voiceLabel: string;
   voiceType: string;
 }
+
+export type VoiceDTO = CamelToSnakeOmitId<Voice>;

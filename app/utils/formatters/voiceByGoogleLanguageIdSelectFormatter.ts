@@ -1,4 +1,4 @@
-import { Voice } from 'global/types/voice';
+import { Voice } from 'models/Voice';
 
 import { SelectOption } from 'components/Select/types';
 

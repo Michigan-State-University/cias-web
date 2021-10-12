@@ -2,7 +2,8 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
-import { Question } from 'global/types/question';
+
+import { QuestionDTO } from 'models/Question';
 
 import { themeColors } from 'theme';
 import Text from 'components/Text';
@@ -16,7 +17,7 @@ import messages from '../../messages';
 import { SHOW_DETAILS_CLASSNAME, DIVIDER_CLASSNAME } from '../../constants';
 
 type Props = {
-  question: Question;
+  question: QuestionDTO;
   showDetails: boolean;
   onShowDetailsChange: (showDetails: boolean, is: string) => void;
 };

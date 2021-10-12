@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 import { useIntl } from 'react-intl';
 
-import { CatMhTest } from 'global/types/catMh';
+import { CatMhTest } from 'models/CatMh';
+
 import { colors } from 'theme';
 
 import Box from 'components/Box';

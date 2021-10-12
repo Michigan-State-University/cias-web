@@ -12,8 +12,11 @@ import {
   voiceByGoogleLanguageIdSelectFormatter,
   VoiceSelectOption,
 } from 'utils/formatters';
-import { Voice, VoiceDTO } from 'global/types/voice';
-import { ApiData } from 'global/types/api';
+
+import { Voice, VoiceDTO } from 'models/Voice';
+import { ApiData } from 'models/Api';
+
+import { voiceDataParser } from 'global/parsers';
 
 import { fontSizes, themeColors } from 'theme';
 import Text from 'components/Text';
@@ -24,7 +27,6 @@ import Column from 'components/Column';
 import Row from 'components/Row';
 import TextVoicePreviewInput from 'components/Input/TextVoicePreviewInput';
 
-import { voiceDataParser } from 'global/parsers';
 import messages from './messages';
 import { DESTINATION_VOICE_LABEL_ID } from '../../constants';
 

@@ -1,5 +1,6 @@
-import { ApiData } from 'global/types/api';
-import { Voice, VoiceDTO } from 'global/types/voice';
+import { ApiData } from 'models/Api';
+import { Voice, VoiceDTO } from 'models/Voice';
+
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 
 export const voiceDataParser = (data: ApiData<VoiceDTO>): Voice[] => {

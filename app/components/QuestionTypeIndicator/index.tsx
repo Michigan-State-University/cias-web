@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
 import { QuestionTypes } from 'models/Session/QuestionTypes';
-import { QuestionTypes as QuestionTypesEnum } from 'models/Question/QuestionDto';
+import { QuestionTypes as QuestionTypesEnum } from 'models/Question';
 import globalMessages from 'global/i18n/globalMessages';
 
 import { colors } from 'theme';

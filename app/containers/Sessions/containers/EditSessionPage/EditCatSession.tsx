@@ -14,7 +14,7 @@ import {
   bulkEditSession,
   editSessionRequest,
 } from 'global/reducers/session';
-import { CatSessionDto } from 'models/Session/SessionDto';
+import { CatSession } from 'models/Session';
 import { makeSelectIntervention } from 'global/reducers/intervention';
 import { InterventionDto } from 'models/Intervention/InterventionDto';
 
@@ -33,7 +33,7 @@ import NarratorConflictModal from '../../components/NarratorConflictModal';
 import messages from './messages';
 
 type EditCatSessionProps = {
-  session: CatSessionDto;
+  session: CatSession;
   editingPossible: boolean;
   editSession: any;
   editSessionSetting: any;

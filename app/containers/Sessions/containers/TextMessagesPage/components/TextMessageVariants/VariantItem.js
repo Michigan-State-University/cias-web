@@ -20,7 +20,7 @@ import {
   textboxQuestion,
   visualAnalogueScaleQuestion,
 } from 'models/Session/QuestionTypes';
-import { SessionTypes } from 'models/Session/SessionTypes';
+import { SessionTypes } from 'models/Session';
 
 import VariableChooser from 'containers/VariableChooser';
 

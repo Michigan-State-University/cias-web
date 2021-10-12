@@ -1,13 +1,15 @@
 import React, { memo, useCallback, useContext, useMemo } from 'react';
 import { useIntl } from 'react-intl';
 
+import useGet from 'utils/useGet';
+
+import { QuestionDTO } from 'models/Question';
+
 import NoContent from 'components/NoContent';
 import Box from 'components/Box';
-
-import useGet from 'utils/useGet';
-import { QuestionDto } from 'models/Question/QuestionDto';
 import Loader from 'components/Loader';
 import ErrorAlert from 'components/ErrorAlert';
+
 import VariableRow from './VariableRow';
 import ViewWrapper from './ViewWrapper';
 
@@ -49,7 +51,7 @@ const VariableView = ({ onClick }: Props) => {
     const baseUrl = `v1/sessions/${currentSessionId}/variables/`;
     let suffix = '';
 
-    if (!includeAllVariables) suffix = (selectedQuestion as QuestionDto).id;
+    if (!includeAllVariables) suffix = (selectedQuestion as QuestionDTO).id;
 
     const urlParams = new URLSearchParams();
     if (!includeNonDigitVariables)

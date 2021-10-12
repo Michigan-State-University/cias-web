@@ -2,6 +2,7 @@
 import pick from 'lodash/pick';
 import sortBy from 'lodash/sortBy';
 
+import { Question } from 'models/Question';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
 import {
   bodyAnimationType,
@@ -16,8 +17,7 @@ import {
 import { getFromQuestionTTS } from 'global/reducers/questions/utils';
 import { DEFAULT_PAUSE_DURATION } from 'utils/constants';
 
-import Session from './Session';
-import Question from './Question';
+import { Session } from './Session';
 
 import {
   multiQuestion,

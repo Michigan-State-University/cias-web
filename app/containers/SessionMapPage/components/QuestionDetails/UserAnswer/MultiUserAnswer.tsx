@@ -2,8 +2,7 @@ import React, { useCallback } from 'react';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 
-import { QuestionBody } from 'global/types/question';
-
+import { MultipleQuestionDTO } from 'models/Question';
 import { MultiAnswer } from 'models/Answer';
 
 import { colors } from 'theme';
@@ -13,7 +12,7 @@ import Checkbox from 'components/Checkbox';
 import Text from 'components/Text';
 
 type Props = {
-  questionBody: QuestionBody<string>;
+  question: MultipleQuestionDTO;
   answer: MultiAnswer;
 };
 
@@ -21,7 +20,9 @@ type Props = {
 // any option without a variable name assigned will not be checked
 // even if this option was selected by the user
 const MultiUserAnswer = ({
-  questionBody: { data: questionData },
+  question: {
+    body: { data: questionData },
+  },
   answer: {
     decryptedBody: { data: answerData },
     id,
@@ -34,7 +35,7 @@ const MultiUserAnswer = ({
   );
 
   const hasNameAndIsSelected = useCallback(
-    (optionVariableName?: string) =>
+    (optionVariableName: string) =>
       Boolean(optionVariableName) &&
       answerData.some(
         ({ var: answerVariableName }) =>
@@ -47,7 +48,7 @@ const MultiUserAnswer = ({
     <Row gap={15} flexWrap="wrap">
       {questionData.map(({ variable, payload }, index) => (
         <Checkbox
-          checked={hasNameAndIsSelected(variable?.name)}
+          checked={hasNameAndIsSelected(variable.name)}
           disabled
           id={getCheckboxId(index)}
           key={getCheckboxId(index)}

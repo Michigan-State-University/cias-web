@@ -34,11 +34,7 @@ import {
   reportTemplatesReducer,
   reportTemplatesSaga,
 } from 'global/reducers/reportTemplates';
-import {
-  CatSessionDto,
-  ClassicSessionDto,
-  SessionTypes,
-} from 'models/Session/SessionDto';
+import { CatSession, ClassicSession, SessionTypes } from 'models/Session';
 import { RouteComponentProps } from 'react-router-dom';
 import editInterventionPageSaga from './saga';
 
@@ -64,7 +60,7 @@ interface Props extends RouteComponentProps<MatchParams> {
   fetchInterventions: () => void;
   fetchReportTemplates: (sessionId: string) => void;
   interventionStatus: string;
-  session: ClassicSessionDto | CatSessionDto;
+  session: ClassicSession | CatSession;
 }
 
 const EditSessionPage = ({
@@ -112,13 +108,13 @@ const EditSessionPage = ({
         <EditClassicSession
           editingPossible={editingPossible}
           interventionStatus={interventionStatus}
-          session={session as ClassicSessionDto}
+          session={session as ClassicSession}
         />
       )}
       {type === SessionTypes.CAT_SESSION && (
         <EditCatSession
           editingPossible={editingPossible}
-          session={session as CatSessionDto}
+          session={session as CatSession}
         />
       )}
     </EditSessionPageContext.Provider>

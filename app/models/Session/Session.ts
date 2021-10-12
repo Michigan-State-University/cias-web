@@ -1,20 +1,18 @@
-import { PatternDto } from 'models/Pattern/PatternDto';
+import { Formula } from 'models/Formula';
+
+import { SessionTargetType } from './SessionTargetType';
 
 export enum SessionTypes {
   CLASSIC_SESSION = 'Session::Classic',
   CAT_SESSION = 'Session::CatMh',
 }
-interface SessionSettingsDto {
+
+interface SessionSettings {
   formula?: boolean;
   narrator: {
     voice: boolean;
     animation: boolean;
   };
-}
-
-interface FormulaDto {
-  payload: string;
-  patterns: PatternDto<SessionTypes>[];
 }
 
 enum ScheduleOptions {
@@ -25,7 +23,7 @@ enum ScheduleOptions {
   DAYS_AFTER_DATE = 'days_after_date',
 }
 
-interface GoogleTTSVoiceDto {
+interface GoogleTTSVoice {
   id: number;
   googleTtsLanguageId: number;
   voiceLabel: string;
@@ -35,9 +33,9 @@ interface GoogleTTSVoiceDto {
   updatedAt: string;
 }
 
-export interface SessionDto {
+export interface Session {
   id: string;
-  settings: SessionSettingsDto;
+  settings: SessionSettings;
   position: number;
   name: string;
   interventionId: string;
@@ -46,20 +44,21 @@ export interface SessionDto {
   generatedReportCount: number;
   variable: string;
   createdAt: string;
-  googleTtsVoice: GoogleTTSVoiceDto;
+  googleTtsVoice: GoogleTTSVoice;
   smsPlansCount: number;
   scheduleAt?: string;
   schedulePayload?: number;
   schedule: ScheduleOptions;
-  formula: FormulaDto;
+  formula: Formula<SessionTargetType>;
   reportTemplatesCount: number;
   type: SessionTypes;
 }
 
-export interface ClassicSessionDto extends SessionDto {
+export interface ClassicSession extends Session {
   type: SessionTypes.CLASSIC_SESSION;
 }
-export interface CatSessionDto extends SessionDto {
+
+export interface CatSession extends Session {
   catMhLanguageId: number;
   catMhTimeFrameId: number;
   catMhPopulationId: number;

@@ -1,12 +1,14 @@
 import React, { memo } from 'react';
 import { useIntl } from 'react-intl';
 
-import { QuestionGroup } from 'global/types/questionGroup';
-import { FeedbackQuestionPayload, Question } from 'global/types/question';
-import { ReportTemplate } from 'global/types/reportTemplate';
-
-import { QuestionTypes } from 'models/Question/QuestionDto';
-import { SessionDto } from 'models/Session/SessionDto';
+import { ReportTemplate } from 'models/ReportTemplate';
+import { QuestionGroup } from 'models/QuestionGroup';
+import {
+  QuestionTypes,
+  FeedbackQuestionDTO,
+  QuestionDTO,
+} from 'models/Question';
+import { Session } from 'models/Session';
 import { Answer } from 'models/Answer';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
@@ -32,13 +34,13 @@ import {
 import UserAnswer from './UserAnswer';
 
 type Props = {
-  shownQuestion: Question;
+  shownQuestion: QuestionDTO;
   isUserSessionQuestion: boolean; // was this question shown to the user during preview session?
   questionAnswer: Nullable<Answer>;
   questionGroup: QuestionGroup;
   reportTemplates: ReportTemplate[];
-  sessions: SessionDto[];
-  questions: Question[];
+  sessions: Session[];
+  questions: QuestionDTO[];
   onGoToScreenClick: () => void;
 };
 
@@ -95,7 +97,7 @@ const SessionMapQuestionDetails = ({
           )}
           {type === QuestionTypes.FEEDBACK && (
             <FeedbackFormulaAndCases
-              question={shownQuestion as Question<FeedbackQuestionPayload>}
+              question={shownQuestion as FeedbackQuestionDTO}
             />
           )}
           {type !== QuestionTypes.FINISH && (

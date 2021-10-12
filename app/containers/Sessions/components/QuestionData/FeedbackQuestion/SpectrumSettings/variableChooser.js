@@ -19,7 +19,6 @@ import { StyledInput } from 'components/Input/StyledInput';
 import InequalityChooser from 'components/InequalityChooser';
 
 import binNoBg from 'assets/svg/bin-no-bg.svg';
-import Question from 'models/Session/Question';
 
 import { themeColors, colors } from 'theme';
 import messages from '../messages';
@@ -124,7 +123,7 @@ const SpectrumVariableChooser = ({
 };
 
 SpectrumVariableChooser.propTypes = {
-  selectedQuestion: PropTypes.shape(Question),
+  selectedQuestion: PropTypes.object,
   id: PropTypes.string,
   intl: PropTypes.object,
   spectrum: PropTypes.shape({

@@ -1,4 +1,4 @@
-import { Language } from 'global/types/language';
+import { Language } from 'models/Language';
 
 import { SelectOption } from 'components/Select/types';
 

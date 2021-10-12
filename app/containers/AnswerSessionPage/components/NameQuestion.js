@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Question from 'models/Session/Question';
-
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -68,7 +66,7 @@ const NameQuestion = ({
 };
 
 NameQuestion.propTypes = {
-  question: PropTypes.shape(Question).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   formatMessage: PropTypes.func,

@@ -2,7 +2,7 @@ import React from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { FeedbackQuestionPayload, Question } from 'global/types/question';
+import { FeedbackQuestionDTO } from 'models/Question';
 
 import { colors } from 'theme';
 import Text from 'components/Text';
@@ -16,7 +16,7 @@ import CaseMatch from './CaseMatch';
 import { highlightTargetText, getCaseTargetElementId } from './utils';
 
 type Props = {
-  question: Question<FeedbackQuestionPayload>;
+  question: FeedbackQuestionDTO;
 };
 
 const FeedbackFormulaAndCases = ({
@@ -30,10 +30,10 @@ const FeedbackFormulaAndCases = ({
       <Comment mt={30} mb={15} fontWeight="bold">
         {formatMessage(messages.feedbackFormulaAndCases)}
       </Comment>
-      <Formula payload={spectrum?.payload} />
+      <Formula payload={spectrum.payload} />
       <Row>
         <Column width="auto">
-          {spectrum?.patterns?.map(({ match }, index) => (
+          {spectrum.patterns.map(({ match }, index) => (
             <CaseMatch
               match={match}
               caseTargetElementId={getCaseTargetElementId(index)}
@@ -42,7 +42,7 @@ const FeedbackFormulaAndCases = ({
           ))}
         </Column>
         <Column>
-          {spectrum?.patterns?.map(({ target }, index) => (
+          {spectrum.patterns.map(({ target }, index) => (
             <Text
               color={colors.manatee}
               fontWeight="bold"

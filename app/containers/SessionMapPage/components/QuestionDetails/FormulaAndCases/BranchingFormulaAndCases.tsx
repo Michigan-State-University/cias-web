@@ -2,9 +2,9 @@ import React, { useCallback } from 'react';
 import { useIntl } from 'react-intl';
 import { Markup } from 'interweave';
 
-import { FormulaPatternTarget, Question } from 'global/types/question';
-
-import { SessionDto } from 'models/Session/SessionDto';
+import { QuestionDTO, QuestionFormulaTargetType } from 'models/Question';
+import { Session, SessionTargetType } from 'models/Session';
+import { Target } from 'models/Formula';
 
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
@@ -22,9 +22,9 @@ import CaseMatch from './CaseMatch';
 import { highlightTargetText } from './utils';
 
 type Props = {
-  question: Question;
-  sessions: SessionDto[];
-  questions: Question[];
+  question: QuestionDTO;
+  sessions: Session[];
+  questions: QuestionDTO[];
 };
 
 const BranchingFormulaAndCases = ({
@@ -53,14 +53,15 @@ const BranchingFormulaAndCases = ({
   );
 
   const renderSubtargets = (
-    subtargets: FormulaPatternTarget[],
+    subtargets: Target<QuestionFormulaTargetType>[],
     targetIndex: number,
   ): JSX.Element[] =>
     subtargets.map(({ id: targetId, probability, type }, subtargetIndex) => {
-      const subtargetName = type.startsWith('Session')
-        ? sessions.find(({ id: sessionId }) => sessionId === targetId)?.name
-        : questions.find(({ id: questionId }) => questionId === targetId)
-            ?.subtitle;
+      const subtargetName =
+        type === SessionTargetType.SESSION
+          ? sessions.find(({ id: sessionId }) => sessionId === targetId)?.name
+          : questions.find(({ id: questionId }) => questionId === targetId)
+              ?.subtitle;
 
       const displayedName = isNullOrUndefined(subtargetName)
         ? ''
@@ -92,7 +93,7 @@ const BranchingFormulaAndCases = ({
       <Formula payload={formula.payload} />
       <Row>
         <Column width="auto">
-          {formula?.patterns?.map(({ match }, index) => (
+          {formula.patterns.map(({ match }, index) => (
             <CaseMatch
               match={match}
               key={getCaseMatchElementId(index)}
@@ -101,7 +102,7 @@ const BranchingFormulaAndCases = ({
           ))}
         </Column>
         <Column>
-          {formula?.patterns?.map(({ target }, index) => (
+          {formula.patterns.map(({ target }, index) => (
             <Box
               key={getCaseTargetElementId(index)}
               id={getCaseTargetElementId(index)}

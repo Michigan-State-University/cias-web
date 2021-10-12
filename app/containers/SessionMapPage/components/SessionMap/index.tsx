@@ -2,9 +2,9 @@ import React, { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { NodeTypesType } from 'react-flow-renderer';
 
-import { Question } from 'global/types/question';
-import { QuestionGroup } from 'global/types/questionGroup';
-import { SessionDto } from 'models/Session/SessionDto';
+import { QuestionGroup } from 'models/QuestionGroup';
+import { QuestionDTO } from 'models/Question';
+import { Session } from 'models/Session';
 
 import {
   ReactFlowGraph,
@@ -44,9 +44,9 @@ const nodeTypes: NodeTypesType = {
 };
 
 type Props = {
-  questions: Question[];
+  questions: QuestionDTO[];
   questionGroups: QuestionGroup[];
-  sessions: SessionDto[];
+  sessions: Session[];
   showDetailsId: string;
   onShowDetailsIdChange: (showDetailsId: string) => void;
   zoom: number;

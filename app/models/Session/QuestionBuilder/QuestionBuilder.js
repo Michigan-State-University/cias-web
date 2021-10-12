@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import Question from '../Question';
+import { QuestionDTO } from 'models/Question';
 
 import { getQuestionDataByType } from './getQuestionDataByType';
 
@@ -76,16 +76,15 @@ export class QuestionBuilder {
   };
 
   /**
-   * @returns  {Question}
+   * @returns  {QuestionDTO}
    */
-  build = () =>
-    new Question({
-      id: this.id,
-      title: this.title,
-      subtitle: this.subtitle,
-      type: this.type,
-      body: this.body,
-      position: this.position,
-      question_group_id: this.question_group_id,
-    });
+  build = () => ({
+    id: this.id,
+    title: this.title,
+    subtitle: this.subtitle,
+    type: this.type,
+    body: this.body,
+    position: this.position,
+    question_group_id: this.question_group_id,
+  });
 }

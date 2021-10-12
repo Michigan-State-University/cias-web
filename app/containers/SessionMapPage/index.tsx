@@ -52,10 +52,11 @@ import {
   fetchAnswersSaga,
   FETCH_ANSWERS_ERROR,
 } from 'global/reducers/answers';
-import { QuestionGroup } from 'global/types/questionGroup';
-import { Question } from 'global/types/question';
-import { ReportTemplate } from 'global/types/reportTemplate';
 import { JumpToScreenLocationState } from 'global/types/locationState';
+
+import { ReportTemplate } from 'models/ReportTemplate';
+import { QuestionGroup } from 'models/QuestionGroup';
+import { QuestionDTO } from 'models/Question';
 
 import useQuery from 'utils/useQuery';
 import useLocationState from 'utils/useLocationState';
@@ -108,7 +109,7 @@ const SessionMapPage = (): JSX.Element => {
   const questionGroupsError = useSelector(makeSelectGetQuestionGroupError());
 
   useInjectReducer({ key: 'questions', reducer: questionsReducer });
-  const questions = useSelector(makeSelectQuestions()) as Question[];
+  const questions = useSelector(makeSelectQuestions()) as QuestionDTO[];
 
   // @ts-ignore
   useInjectReducer({ key: 'reportTemplates', reducer: reportTemplatesReducer });

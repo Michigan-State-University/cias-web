@@ -21,7 +21,6 @@ import { ScrollFogBox } from 'components/Box/ScrollFog';
 import { Table, THead, TBody, StripedTR, TD, TH } from 'components/Table';
 import OriginalTextHover from 'components/OriginalTextHover';
 
-import Question from 'models/Session/Question';
 import scrollByRef from 'utils/scrollByRef';
 import { numericValidator, variableNameValidator } from 'utils/validators';
 import { themeColors, colors, elements } from 'theme';
@@ -347,7 +346,7 @@ const GridQuestion = ({
 };
 
 GridQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(Question).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   addRow: PropTypes.func.isRequired,
   addColumn: PropTypes.func.isRequired,
