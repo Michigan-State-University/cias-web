@@ -42,7 +42,10 @@ import { finishQuestion } from 'models/Session/QuestionTypes';
 
 import QuestionTranscript from 'containers/QuestionTranscript';
 
-import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
+import {
+  additionalBreakpoints,
+  containerBreakpoints,
+} from 'components/Container/containerBreakpoints';
 import AppContainer from 'components/Container';
 import ErrorAlert from 'components/ErrorAlert';
 import { Button } from 'components/Button';
@@ -138,10 +141,14 @@ AnimationRefHelper.propTypes = {
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
+const IS_XXL = 'IS_XXL';
 
 const QUERY = {
   [IS_DESKTOP]: {
     minWidth: additionalBreakpoints.desktopSm,
+  },
+  [IS_XXL]: {
+    minWidth: containerBreakpoints.xxl,
   },
 };
 
@@ -308,14 +315,33 @@ export function AnswerSessionPage({
     return renderBottomSide();
   };
 
-  const transcriptToggleIcon = (
-    <Icon
-      width={22}
-      src={ccIcon}
-      onClick={toggleTextTranscript}
-      fill={showTextTranscript ? themeColors.text : ''}
-    />
-  );
+  const renderTranscriptToggleIcon = () => {
+    const transcriptToggleIcon = (
+      <Icon
+        width={22}
+        src={ccIcon}
+        onClick={toggleTextTranscript}
+        fill={showTextTranscript ? themeColors.text : ''}
+      />
+    );
+
+    const fixedPosition =
+      previewMode === DESKTOP_MODE && containerQueryParams[IS_XXL];
+
+    if (fixedPosition) {
+      return (
+        <Row position="fixed" right={30} bottom={30}>
+          {transcriptToggleIcon}
+        </Row>
+      );
+    }
+
+    return (
+      <Row pt={15} pb={15}>
+        {transcriptToggleIcon}
+      </Row>
+    );
+  };
 
   const renderQuestion = () => {
     const selectAnswerProp = (answerBody, selectedByUser = true) => {
@@ -367,10 +393,7 @@ export function AnswerSessionPage({
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
           <Box lang={languageCode} width="100%">
-            <CommonLayout
-              transcriptToggleIcon={transcriptToggleIcon}
-              currentQuestion={currentQuestion}
-            />
+            <CommonLayout currentQuestion={currentQuestion} />
 
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           </Box>
@@ -397,6 +420,7 @@ export function AnswerSessionPage({
           </Row>
 
           {renderQuestionTranscript(false)}
+          {renderTranscriptToggleIcon()}
         </AppContainer>
       </Row>
     );
