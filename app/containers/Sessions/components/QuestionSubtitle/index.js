@@ -12,7 +12,7 @@ import { selectQuillText } from 'components/Input/utils';
 import OriginalTextHover from 'components/OriginalTextHover';
 
 import { colors } from 'theme';
-import { QuestionDTO } from 'models/Question';
+
 import {
   makeSelectSelectedQuestion,
   editQuestionRequest,
@@ -56,7 +56,7 @@ const QuestionSubtitle = ({
 };
 
 QuestionSubtitle.propTypes = {
-  selectedQuestion: PropTypes.shape(QuestionDTO),
+  selectedQuestion: PropTypes.object,
   updateSubtitle: PropTypes.func,
   intl: PropTypes.object,
 };

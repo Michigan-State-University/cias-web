@@ -5,8 +5,6 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import { QuestionDTO } from 'models/Question';
-
 import {
   makeSelectSelectedQuestion,
   updateQuestionData,
@@ -51,7 +49,7 @@ const PhoneQuestion = ({
 };
 
 PhoneQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(QuestionDTO).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
 };

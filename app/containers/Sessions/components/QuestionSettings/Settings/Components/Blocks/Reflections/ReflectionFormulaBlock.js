@@ -23,7 +23,6 @@ import { StyledInput } from 'components/Input/StyledInput';
 import { feedbackQuestion } from 'models/Session/QuestionTypes';
 import { speechType, reflectionType } from 'models/Narrator/BlockTypes';
 import { feedbackActions } from 'models/Narrator/FeedbackActions';
-import { QuestionDTO } from 'models/Question';
 
 import {
   makeSelectLoader,
@@ -221,7 +220,7 @@ ReflectionFormulaBlock.propTypes = {
   onFormulaUpdate: PropTypes.func,
   onAddCase: PropTypes.func,
   disabled: PropTypes.bool,
-  selectedQuestion: PropTypes.shape(QuestionDTO),
+  selectedQuestion: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({

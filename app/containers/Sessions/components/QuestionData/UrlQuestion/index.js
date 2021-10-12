@@ -9,7 +9,7 @@ import H3 from 'components/H3';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import { QuestionDTO } from 'models/Question';
+
 import Row from 'components/Row';
 import UrlPreview from 'components/UrlPreview';
 import Text from 'components/Text';
@@ -77,7 +77,7 @@ const UrlQuestion = ({
 };
 
 UrlQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(QuestionDTO).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   updateUrl: PropTypes.func.isRequired,
   isNarratorTab: PropTypes.bool,

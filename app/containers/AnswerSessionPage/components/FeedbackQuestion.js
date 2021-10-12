@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { QuestionDTO } from 'models/Question';
-
 import FeedbackQuestionLayout from '../layouts/Feedback/FeedbackQuestionLayout';
 
 const FeedbackQuestion = ({
@@ -42,7 +40,7 @@ const FeedbackQuestion = ({
 };
 
 FeedbackQuestion.propTypes = {
-  question: PropTypes.shape(QuestionDTO).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   feedbackScreenSettings: PropTypes.object,
   setFeedbackSettings: PropTypes.func,

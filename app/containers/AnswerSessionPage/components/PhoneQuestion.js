@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { QuestionDTO } from 'models/Question';
-
 import PhoneQuestionLayout from '../layouts/PhoneQuestionLayout';
 
 const PhoneQuestion = ({
@@ -37,7 +35,7 @@ const PhoneQuestion = ({
 };
 
 PhoneQuestion.propTypes = {
-  question: PropTypes.shape(QuestionDTO).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   formatMessage: PropTypes.func,

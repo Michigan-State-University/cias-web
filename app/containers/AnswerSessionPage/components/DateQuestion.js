@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { QuestionDTO } from 'models/Question';
-
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import DateQuestionLayout from '../layouts/DateQuestionLayout';
@@ -40,7 +38,7 @@ const DateQuestion = ({
 };
 
 DateQuestion.propTypes = {
-  question: PropTypes.shape(QuestionDTO).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
   formatMessage: PropTypes.func,

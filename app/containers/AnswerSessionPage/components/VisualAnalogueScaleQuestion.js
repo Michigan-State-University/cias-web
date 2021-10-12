@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import { QuestionDTO } from 'models/Question';
-
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
 import VisualAnalogueScaleQuestionLayout from '../layouts/VisualAnalogueScaleQuestionLayout';
@@ -64,7 +62,7 @@ const VisualAnalogueScaleQuestion = ({
 };
 
 VisualAnalogueScaleQuestion.propTypes = {
-  question: PropTypes.shape(QuestionDTO).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   answerBody: PropTypes.any,
 };

@@ -8,7 +8,7 @@ import { injectIntl } from 'react-intl';
 import ApprovableInput from 'components/Input/ApprovableInput';
 import Box from 'components/Box';
 import Column from 'components/Column';
-import { QuestionDTO } from 'models/Question';
+
 import Row from 'components/Row';
 import { colors } from 'theme/colors';
 import { numericValidator } from 'utils/validators';
@@ -62,7 +62,7 @@ const NumberQuestion = ({
 };
 
 NumberQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(QuestionDTO).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   updateAnswer: PropTypes.func.isRequired,
 };

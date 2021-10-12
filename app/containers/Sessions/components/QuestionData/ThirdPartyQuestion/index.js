@@ -12,7 +12,7 @@ import Column from 'components/Column';
 import HoverableBox from 'components/Box/HoverableBox';
 import Img from 'components/Img';
 import PlusCircle from 'components/Circle/PlusCircle';
-import { QuestionDTO } from 'models/Question';
+
 import Row from 'components/Row';
 import Text from 'components/Text';
 import H3 from 'components/H3';
@@ -193,7 +193,7 @@ const ThirdPartyQuestion = ({
 };
 
 ThirdPartyQuestion.propTypes = {
-  selectedQuestion: PropTypes.shape(QuestionDTO).isRequired,
+  selectedQuestion: PropTypes.object.isRequired,
   intl: PropTypes.object.isRequired,
   addAnswer: PropTypes.func.isRequired,
   updateAnswer: PropTypes.func.isRequired,

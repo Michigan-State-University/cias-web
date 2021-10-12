@@ -8,8 +8,7 @@ import { withRouter } from 'react-router-dom';
 import { useInjectReducer, useInjectSaga } from 'redux-injectors';
 
 import BranchingLayout from 'containers/BranchingLayout';
-import { Session } from 'models/Session';
-import { QuestionDTO } from 'models/Question';
+
 import { questionType } from 'models/Session/QuestionTypes';
 import { htmlToPlainText } from 'utils/htmlToPlainText';
 import { makeSelectQuestions } from 'global/reducers/questions';
@@ -110,9 +109,9 @@ BranchingTab.propTypes = {
   onAddCase: PropTypes.func,
   onRemoveCase: PropTypes.func,
   onUpdateCase: PropTypes.func,
-  questions: PropTypes.arrayOf(PropTypes.shape(QuestionDTO)),
+  questions: PropTypes.arrayOf(PropTypes.object),
   intervention: PropTypes.shape({
-    sessions: PropTypes.arrayOf(PropTypes.shape(Session)),
+    sessions: PropTypes.arrayOf(PropTypes.object),
   }),
   fetchIntervention: PropTypes.func,
   onAddTarget: PropTypes.func,

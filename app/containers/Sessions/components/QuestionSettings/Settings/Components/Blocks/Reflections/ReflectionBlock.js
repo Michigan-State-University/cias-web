@@ -15,7 +15,6 @@ import { FullWidthSwitch } from 'components/Switch';
 import Text from 'components/Text';
 import ArrowDropdown from 'components/ArrowDropdown';
 
-import { QuestionDTO } from 'models/Question';
 import {
   singleQuestion,
   gridQuestion,
@@ -264,7 +263,7 @@ ReflectionBlock.propTypes = {
   switchToSpeech: PropTypes.func,
   switchToReflectionFormula: PropTypes.func,
   updateQuestion: PropTypes.func,
-  questions: PropTypes.arrayOf(PropTypes.shape(QuestionDTO)),
+  questions: PropTypes.arrayOf(PropTypes.object),
   updateAction: PropTypes.func,
   currentQuestionType: PropTypes.string,
   disabled: PropTypes.bool,

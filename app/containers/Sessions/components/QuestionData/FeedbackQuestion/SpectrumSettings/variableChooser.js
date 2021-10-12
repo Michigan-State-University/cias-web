@@ -8,8 +8,6 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { injectIntl } from 'react-intl';
 
-import { QuestionDTO } from 'models/Question';
-
 import { EditSessionPageContext } from 'containers/Sessions/containers/EditSessionPage/utils';
 import VariableChooser from 'containers/VariableChooser';
 import Img from 'components/Img';
@@ -125,7 +123,7 @@ const SpectrumVariableChooser = ({
 };
 
 SpectrumVariableChooser.propTypes = {
-  selectedQuestion: PropTypes.shape(QuestionDTO),
+  selectedQuestion: PropTypes.object,
   id: PropTypes.string,
   intl: PropTypes.object,
   spectrum: PropTypes.shape({

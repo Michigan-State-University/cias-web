@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { QuestionDTO } from 'models/Question';
-
 import TextBoxQuestionLayout from '../layouts/TextBoxQuestionLayout';
 
 const TextBoxQuestion = ({
@@ -37,7 +35,7 @@ const TextBoxQuestion = ({
 };
 
 TextBoxQuestion.propTypes = {
-  question: PropTypes.shape(QuestionDTO).isRequired,
+  question: PropTypes.object.isRequired,
   selectAnswer: PropTypes.func,
   formatMessage: PropTypes.func,
   answerBody: PropTypes.any,
