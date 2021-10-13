@@ -26,6 +26,7 @@ import ArchiveIcon from 'assets/svg/archive.svg';
 import PencilIcon from 'assets/svg/pencil-solid.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
+import DocumentIcon from 'assets/svg/document.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -35,6 +36,7 @@ import {
   canEdit,
   canShareWithParticipants,
 } from 'models/Status/statusPermissions';
+import { Roles } from 'models/User/UserRoles';
 import { reorderScope } from 'models/Session/ReorderScope';
 import { archived } from 'models/Status/StatusTypes';
 import { RolePermissions } from 'models/User/RolePermissions';
@@ -63,7 +65,6 @@ import {
   interventionsReducer,
   fetchInterventionsSaga,
 } from 'global/reducers/interventions';
-
 import {
   questionsReducer,
   getQuestionsRequest,
@@ -94,6 +95,7 @@ import interventionDetailsPageSagas from './saga';
 import SessionCreateButton from './components/SessionCreateButton/index';
 import SessionListItem from './components/SessionListItem';
 import {
+  CatMhAccessModal,
   InterventionAssignOrganizationModal,
   InterventionSettingsModal,
 } from './components/Modals';
@@ -132,6 +134,8 @@ export function InterventionDetailsPage({
 
   const rolePermissions = useMemo(() => RolePermissions(roles), [roles]);
   const { canAssignOrganizationToIntervention } = rolePermissions;
+
+  const isAdmin = roles.includes(Roles.admin);
 
   const {
     sessions,
@@ -194,6 +198,13 @@ export function InterventionDetailsPage({
       confirmAction: handleArchiveIntervention,
     },
   });
+  const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
+    type: ModalType.Modal,
+    modalContentRenderer: () => <CatMhAccessModal />,
+    props: {
+      title: formatMessage(messages.catMhSettingsModalTitle),
+    },
+  });
 
   const canCreateCatSession = useMemo(() => {
     if (roles.includes('admin')) return true;
@@ -238,6 +249,16 @@ export function InterventionDetailsPage({
             label: formatMessage(messages.assignOrganization),
             id: 'assignOrganization',
             disabled: !canEdit(status),
+          },
+        ]
+      : []),
+    ...(isAdmin
+      ? [
+          {
+            icon: DocumentIcon,
+            action: openCatMhModal,
+            label: formatMessage(messages.catMhSettingsModalTitle),
+            id: 'catMhAccess',
           },
         ]
       : []),
@@ -389,6 +410,7 @@ export function InterventionDetailsPage({
           <title>{formatMessage(messages.pageTitle, { name })}</title>
         </Helmet>
         <ArchiveModal />
+        <CatMhModal />
         <ConfirmationModal
           visible={!isNullOrUndefined(deleteConfirmationSessionId)}
           onClose={() => setDeleteConfirmationSessionId(null)}

@@ -68,6 +68,14 @@ export default defineMessages({
     id: `${scope}.participantShareModalTitle`,
     defaultMessage: 'Send an email with the invitation',
   },
+  catMhSettingsOption: {
+    id: `${scope}.catMhSettingsOption`,
+    defaultMessage: 'CAT-MH Access',
+  },
+  catMhSettingsModalTitle: {
+    id: `${scope}.catMhSettingsModalTitle`,
+    defaultMessage: 'Access of CAT-MH',
+  },
   anyone: {
     id: `${scope}.anyone`,
     defaultMessage: 'Anyone with the link can access sessions',

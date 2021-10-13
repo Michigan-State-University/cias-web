@@ -18,6 +18,7 @@ import FileShareIcon from 'assets/svg/file-share.svg';
 import CopyIcon from 'assets/svg/copy.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
+import DocumentIcon from 'assets/svg/document.svg';
 
 import { colors } from 'theme';
 
@@ -32,10 +33,14 @@ import {
 
 import { canArchive, canEdit } from 'models/Status/statusPermissions';
 import { RolePermissions } from 'models/User/RolePermissions';
+import { Roles } from 'models/User/UserRoles';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 
-import { InterventionAssignOrganizationModal } from 'containers/InterventionDetailsPage/components/Modals';
+import {
+  CatMhAccessModal,
+  InterventionAssignOrganizationModal,
+} from 'containers/InterventionDetailsPage/components/Modals';
 import SelectResearchers from 'containers/SelectResearchers';
 
 import EllipsisText from 'components/Text/EllipsisText';
@@ -103,6 +108,15 @@ const SingleTile = ({
       confirmAction: handleArchiveIntervention,
     },
   });
+  const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
+    type: ModalType.Modal,
+    modalContentRenderer: () => <CatMhAccessModal />,
+    props: {
+      title: formatMessage(messages.catMhSettingsModalTitle),
+    },
+  });
+
+  const isAdmin = userRoles.includes(Roles.admin);
 
   const {
     name,
@@ -174,6 +188,16 @@ const SingleTile = ({
           },
         ]
       : []),
+    ...(isAdmin
+      ? [
+          {
+            icon: DocumentIcon,
+            action: openCatMhModal,
+            label: formatMessage(messages.catMhSettingsModalTitle),
+            id: 'catMhAccess',
+          },
+        ]
+      : []),
   ];
 
   const preventDefault = (e) => {
@@ -193,6 +217,7 @@ const SingleTile = ({
 
   return (
     <>
+      <CatMhModal />
       <ArchiveModal />
       <Modal
         title={formatMessage(messages.sendCopyModalTitle)}
