@@ -6,19 +6,27 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
   height: auto;
   display: block;
   border-radius: 5px;
-  width: 100%;
-  margin-top: 5px;
-  margin-bottom: 5px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .c2 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 15px;
-  line-height: 150%;
-  color: rgba(210,55,29,1);
-  color: rgba(210,55,29,1);
-  text-align: center;
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+}
+
+.c3 {
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .c0 {
@@ -55,14 +63,21 @@ exports[`<UrlQuestion /> Should render and match the snapshot 1`] = `
   >
     <div
       class="c1"
-      width="100%"
-    />
-    <h3
-      class="c2"
-      color="#D2371D"
+      display="flex"
     >
-      Please verify the validity of the External Link.
-    </h3>
+      <div
+        class="c2"
+        data-for="external-url-warning"
+        data-tip=""
+      >
+        <div>
+          <div
+            class="c3"
+            width="100%"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

@@ -72,11 +72,11 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="styled__FillScreenLoader-sc-1aaagww-0 jdsSke"
+      class="styled__FillScreenLoader-sc-1aaagww-0 jxxyAf"
       data-testid="fullscreen-loader"
     >
       <div
-        class="styled__StyledSpinner-sc-129uixn-0 PnEbr"
+        class="styled__StyledSpinner-sc-129uixn-0 dQkukC"
         color="#B727EA"
         size="100"
         width="6"

@@ -20,26 +20,11 @@ import { useInjectSaga, useInjectReducer } from 'redux-injectors';
 
 import ccIcon from 'assets/svg/closed-captions.svg';
 
-import { themeColors } from 'theme';
+import { elements, themeColors } from 'theme';
+
 import AudioWrapper from 'utils/audioWrapper';
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { DESKTOP_MODE } from 'utils/previewMode';
-
-import QuestionTranscript from 'containers/QuestionTranscript';
-
-import { additionalBreakpoints } from 'components/Container/containerBreakpoints';
-import AppContainer from 'components/Container';
-import ErrorAlert from 'components/ErrorAlert';
-import { Button } from 'components/Button';
-import Row from 'components/Row';
-import Column from 'components/Column';
-import Box from 'components/Box';
-import Loader from 'components/Loader';
-import { MSULogo } from 'components/Logo';
-import H2 from 'components/H2';
-import H3 from 'components/H3';
-import Icon from 'components/Icon';
-
 import { makeSelectAudioInstance } from 'global/reducers/globalState';
 import {
   fetchInterventionRequest,
@@ -54,21 +39,40 @@ import {
 import logInGuestSaga from 'global/reducers/auth/sagas/logInGuest';
 import { canPreview } from 'models/Status/statusPermissions';
 import { finishQuestion } from 'models/Session/QuestionTypes';
+
+import QuestionTranscript from 'containers/QuestionTranscript';
+
+import {
+  additionalBreakpoints,
+  containerBreakpoints,
+} from 'components/Container/containerBreakpoints';
+import AppContainer from 'components/Container';
+import ErrorAlert from 'components/ErrorAlert';
+import { Button } from 'components/Button';
+import Row from 'components/Row';
+import Column from 'components/Column';
+import Box from 'components/Box';
+import Loader from 'components/Loader';
+import H2 from 'components/H2';
+import H3 from 'components/H3';
+import Icon from 'components/Icon';
+import { ConfirmationModal } from 'components/Modal';
+import Img from 'components/Img';
+
+import renderQuestionByType from './components';
+import CharacterAnim from './components/CharacterAnim';
+import { SkipQuestionButton } from './components/SkipQuestionButton';
+import CommonLayout from './layouts/CommonLayout';
+
+import makeSelectAnswerSessionPage from './selectors';
+import reducer from './reducer';
+import saga from './saga';
+import messages from './messages';
 import {
   AnswerInterventionContent,
   AnswerOuterContainer,
   StyledButton,
 } from './styled';
-
-import renderQuestionByType from './components';
-import CharacterAnim from './components/CharacterAnim';
-import CommonLayout from './layouts/CommonLayout';
-import makeSelectAnswerSessionPage from './selectors';
-
-import reducer from './reducer';
-import saga from './saga';
-import messages from './messages';
-
 import {
   submitAnswer,
   selectAnswer,
@@ -82,6 +86,7 @@ import {
   setTransitionalUserSessionId as setTransitionalUserSessionIdAction,
 } from './actions';
 import BranchingScreen from './components/BranchingScreen';
+import { NOT_SKIPABLE_QUESTIONS } from './constants';
 
 const AnimationRefHelper = ({
   children,
@@ -138,10 +143,14 @@ AnimationRefHelper.propTypes = {
 };
 
 const IS_DESKTOP = 'IS_DESKTOP';
+const IS_XXL = 'IS_XXL';
 
 const QUERY = {
   [IS_DESKTOP]: {
     minWidth: additionalBreakpoints.desktopSm,
+  },
+  [IS_XXL]: {
+    minWidth: containerBreakpoints.xxl,
   },
 };
 
@@ -188,7 +197,11 @@ export function AnswerSessionPage({
   useInjectSaga({ key: 'AnswerSessionPage', saga });
   useInjectSaga({ key: 'editPhoneNumber', saga: editPhoneNumberQuestionSaga });
 
+  const [skipQuestionModalVisible, setSkipQuestionModalVisible] =
+    useState(false);
+
   const {
+    type,
     settings: {
       required,
       proceed_button: proceedButton,
@@ -257,13 +270,14 @@ export function AnswerSessionPage({
 
   const currentQuestionId = currentQuestion ? currentQuestion.id : null;
 
-  const saveAnswer = () =>
+  const saveAnswer = (skipped = false) =>
     submitAnswerRequest(
       currentQuestionId,
       get(currentQuestion, 'settings.required', false),
       get(currentQuestion, 'type', ''),
       sessionId,
       userSession.id,
+      skipped,
     );
 
   const renderQuestionTranscript = (isRightSide) => {
@@ -305,14 +319,33 @@ export function AnswerSessionPage({
     return renderBottomSide();
   };
 
-  const transcriptToggleIcon = transitionalUserSessionId && (
-    <Icon
-      width={22}
-      src={ccIcon}
-      onClick={toggleTextTranscript}
-      fill={showTextTranscript ? themeColors.text : ''}
-    />
-  );
+  const renderTranscriptToggleIcon = () => {
+    const transcriptToggleIcon = (
+      <Icon
+        width={22}
+        src={ccIcon}
+        onClick={toggleTextTranscript}
+        fill={showTextTranscript ? themeColors.text : ''}
+      />
+    );
+
+    const fixedPosition =
+      previewMode === DESKTOP_MODE && containerQueryParams[IS_XXL];
+
+    if (fixedPosition) {
+      return (
+        <Row position="fixed" right={30} bottom={30}>
+          {transcriptToggleIcon}
+        </Row>
+      );
+    }
+
+    return (
+      <Row pt={15} pb={15}>
+        {transcriptToggleIcon}
+      </Row>
+    );
+  };
 
   const renderQuestion = () => {
     const selectAnswerProp = (answerBody, selectedByUser = true) => {
@@ -351,7 +384,11 @@ export function AnswerSessionPage({
 
     const canSkipNarrator = narratorSkippable || !isAnimationOngoing;
 
-    const shouldRenderButton =
+    const shouldRenderSkipQuestionButton =
+      !isLastScreen && !NOT_SKIPABLE_QUESTIONS.includes(type);
+    const skipQuestionButtonDisabled = required;
+
+    const shouldRenderContinueButton =
       !isLastScreen &&
       (isNullOrUndefined(proceedButton) || proceedButton) &&
       canSkipNarrator;
@@ -360,29 +397,34 @@ export function AnswerSessionPage({
       <Row justify="center" width="100%">
         <AppContainer $width="100%">
           <Box lang={languageCode} width="100%">
-            <CommonLayout
-              transcriptToggleIcon={transcriptToggleIcon}
-              currentQuestion={currentQuestion}
-            />
+            <CommonLayout currentQuestion={currentQuestion} />
 
             <Row>{renderQuestionByType(currentQuestion, sharedProps)}</Row>
           </Box>
 
-          {shouldRenderButton && (
-            <Row width="100%" my={20}>
+          <Row width="100%" my={20} justify="end" align="center">
+            {shouldRenderSkipQuestionButton && (
+              <SkipQuestionButton
+                onClick={() => setSkipQuestionModalVisible(true)}
+                disabled={skipQuestionButtonDisabled}
+              />
+            )}
+
+            {shouldRenderContinueButton && (
               <Button
                 data-cy="continue-button"
                 disabled={isButtonDisabled()}
                 margin={20}
                 width="180px"
                 loading={currentQuestion.loading || nextQuestionLoading}
-                onClick={saveAnswer}
+                onClick={() => saveAnswer(false)}
                 title={formatMessage(messages.nextQuestion)}
               />
-            </Row>
-          )}
+            )}
+          </Row>
 
           {renderQuestionTranscript(false)}
+          {renderTranscriptToggleIcon()}
         </AppContainer>
       </Row>
     );
@@ -432,6 +474,14 @@ export function AnswerSessionPage({
 
   return (
     <Column height="100%" ref={pageRef}>
+      <ConfirmationModal
+        visible={skipQuestionModalVisible}
+        onClose={() => setSkipQuestionModalVisible(false)}
+        description={formatMessage(messages.skipQuestionModalHeader)}
+        content={formatMessage(messages.skipQuestionModalMessage)}
+        confirmAction={() => saveAnswer(true)}
+      />
+
       <Box
         display="flex"
         align="center"
@@ -483,7 +533,14 @@ export function AnswerSessionPage({
                 <Row padding={30} pb={isDesktop ? 10 : 0}>
                   <Box {...logoStyles}>
                     <Row justify="end">
-                      <MSULogo logoUrl={logoUrl} alt={imageAlt} />
+                      {logoUrl && (
+                        <Img
+                          maxHeight={elements.interventionLogoSize.height}
+                          maxWidth={elements.interventionLogoSize.width}
+                          src={logoUrl}
+                          aria-label={imageAlt}
+                        />
+                      )}
                     </Row>
 
                     {renderQuestionTranscript(true)}

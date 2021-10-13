@@ -70,14 +70,6 @@ exports[`<ReportTile /> Should render and match the snapshot 1`] = `
   justify-content: space-between;
 }
 
-.c5:hover .H2-uw8lbl-0 {
-  color: #B727EA !important;
-}
-
-.c5:hover .styled__ToggleableBox-zk98vs-0 {
-  background-color: black !important;
-}
-
 .c1 {
   width: 100%;
   margin-top: 20px;

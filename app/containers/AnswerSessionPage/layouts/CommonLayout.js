@@ -16,11 +16,7 @@ import OriginalTextHover from 'components/OriginalTextHover';
 import { Player, PlayerWrapper, ImageWrapper, MarkupContainer } from './styled';
 import { QUESTION_SUBTITLE_ID, QUESTION_TITLE_ID } from '../constants';
 
-const CommonLayout = ({
-  currentQuestion,
-  transcriptToggleIcon,
-  showOriginalText,
-}) => {
+const CommonLayout = ({ currentQuestion, showOriginalText }) => {
   const { formatMessage } = useIntl();
   const {
     id,
@@ -40,7 +36,6 @@ const CommonLayout = ({
   } = currentQuestion;
   return (
     <Box>
-      <Row padding={26}>{transcriptToggleIcon}</Row>
       {settingsTitle && title && (
         <Row>
           <Box lineHeight="1.42" padding={26} pt={0} pb={8}>
@@ -109,7 +104,6 @@ const CommonLayout = ({
 };
 
 CommonLayout.propTypes = {
-  transcriptToggleIcon: PropTypes.node,
   currentQuestion: PropTypes.shape({
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,

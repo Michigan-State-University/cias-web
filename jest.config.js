@@ -3,8 +3,7 @@ process.env.TZ = 'UTC';
 module.exports = {
   testEnvironment: 'jsdom',
   transform: {
-    '^.+\\.(ts|tsx)?$': 'ts-jest',
-    '^.+\\.(js|jsx)$': 'babel-jest',
+    '^.+\\.[jt]sx?$': 'babel-jest',
   },
   collectCoverageFrom: [
     'app/**/*.{js,jsx,ts,tsx}',
@@ -26,7 +25,7 @@ module.exports = {
     '<rootDir>/internals/testing/test-bundler.js',
     '@testing-library/jest-dom/extend-expect',
     '<rootDir>/jest.setup.js',
-    'jest-extended',
+    'jest-extended/all',
   ],
   setupFiles: ['raf/polyfill', 'jest-canvas-mock'],
   testRegex: 'tests/.*\\.test\\.(js|ts)x?$',

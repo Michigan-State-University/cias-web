@@ -241,7 +241,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c30 {
+.c29 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -256,10 +256,33 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   margin-right: 10px;
 }
 
-.c29 {
+.c28 {
   width: auto;
   height: auto;
   margin-right: 15px;
+}
+
+.c5 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 12px;
 }
 
 .c12 {
@@ -307,29 +330,6 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   color: rgba(47,56,80,0.6);
 }
 
-.c5 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-}
-
-.c13 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 12px;
-}
-
 .c9 {
   padding: 12px;
   border-style: solid;
@@ -370,10 +370,6 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
   -webkit-flex: 1;
   -ms-flex: 1;
   flex: 1;
-}
-
-.c28:hover .styled__StyledTextButton-sc-1achu0i-2 {
-  display: block;
 }
 
 .c2 {
@@ -608,7 +604,7 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
         data-cy="user-list"
       >
         <div
-          class="c27 c28"
+          class="c27 "
           data-cy="user-list-item-0"
         >
           <div
@@ -616,11 +612,11 @@ exports[`<ShareBox /> Should render and match the snapshot 1`] = `
           >
             <img
               alt="avatar"
-              class="c29"
+              class="c28"
               src="IMAGE_MOCK"
             />
             <p
-              class="c30"
+              class="c29"
               font-size="15px"
             />
           </div>

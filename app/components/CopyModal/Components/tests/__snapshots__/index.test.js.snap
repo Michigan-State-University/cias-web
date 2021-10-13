@@ -445,62 +445,62 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="Column-sc-4zswzq-0 kVNJHr"
+      class="Column-sc-4zswzq-0 hWxfnG"
     >
       <div
-        class="Row-y1cs0u-0 dskFsL"
+        class="Row-sc-y1cs0u-0 eHOYqb"
       >
         <div
-          class="Column-sc-4zswzq-0 crbKIj"
+          class="Column-sc-4zswzq-0 iyzFzS"
           data-testid="undefined-select-target-session"
           height="280"
         >
           <div
-            class="Column-sc-4zswzq-0 cgbIvt"
+            class="Column-sc-4zswzq-0 boRXfc"
           >
             <div
-              class="Row-y1cs0u-0 bLAOxT"
+              class="Row-sc-y1cs0u-0 kDcMGL"
             >
               <img
                 src="IMAGE_MOCK"
               />
               <p
-                class="Text-eeozpu-0 kfRSpe"
+                class="Text-sc-eeozpu-0 RoXaC"
                 color="#B727EA"
               >
                 Sessions
               </p>
             </div>
             <div
-              class="Row-y1cs0u-0 liVUAf"
+              class="Row-sc-y1cs0u-0 dnKzmX"
             >
               <p
-                class="Text-eeozpu-0 gAOaPO"
+                class="Text-sc-eeozpu-0 fjcmMi"
                 font-size="15"
                 font-weight="bold"
               >
                 Question Groups in 
               </p>
               <div
-                class="Box-sc-1vhutan-0 kBBRkC"
+                class="Box-sc-1vhutan-0 cTpGxj"
               >
                 <div
-                  class="Row-y1cs0u-0 gQFDhs"
+                  class="Row-sc-y1cs0u-0 gLiPxw"
                   width="100%"
                 >
                   <div
-                    class="Box-sc-1vhutan-0 lndiol"
+                    class="Box-sc-1vhutan-0 kmlMic"
                     display="inline"
                     width="100%"
                   >
                     <div
-                      class="Box-sc-1vhutan-0 dvfkZg"
+                      class="Box-sc-1vhutan-0 ifJZzF"
                       data-for="Intervention test title 1"
                       data-tip=""
                     >
                       <div>
                         <span
-                          class="styled__StyledEllipsisText-h4mjfj-0 kOcmmz"
+                          class="styled__StyledEllipsisText-sc-h4mjfj-0 eOHeKf"
                           color="#B727EA"
                           data-for="Intervention test title 1"
                           data-tip="Intervention test title 1"
@@ -527,20 +527,20 @@ Object {
             </div>
           </div>
           <div
-            class="Box-sc-1vhutan-0 ijYDEg"
+            class="Box-sc-1vhutan-0 cIfGaV"
             overflow="scroll"
           >
             <div
-              class="Column-sc-4zswzq-0 gLBXpw"
+              class="Column-sc-4zswzq-0 fgYshh"
             >
               <div
-                class="Column-sc-4zswzq-0 ekpwZH"
+                class="Column-sc-4zswzq-0 gYSXgu"
               >
                 <div
-                  class="Row-y1cs0u-0 brzjBw"
+                  class="Row-sc-y1cs0u-0 dLTzvQ"
                 >
                   <p
-                    class="Text-eeozpu-0 hsmUaZ"
+                    class="Text-sc-eeozpu-0 fjleZt"
                     font-size="12"
                   >
                     No valid question groups to copy to
@@ -552,10 +552,10 @@ Object {
         </div>
       </div>
       <div
-        class="Row-y1cs0u-0 bHvccM"
+        class="Row-sc-y1cs0u-0 kULXtg"
       >
         <button
-          class="StyledButton-d2s0gt-0 bYOfpf"
+          class="StyledButton-sc-d2s0gt-0 dcmceT"
           color="primary"
           disabled=""
           radius="100px"

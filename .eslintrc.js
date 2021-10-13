@@ -94,7 +94,7 @@ const baseRules = {
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   extends: ['airbnb', 'plugin:prettier/recommended'],
   plugins: [
     'prettier',

@@ -23,7 +23,7 @@ const UrlPreview = ({ link, handleClick }) => {
 
   const redirectToLink = () => {
     if (handleClick) handleClick();
-    window.open(link, '_blank');
+    window.open(metadata.url, '_blank');
   };
 
   const image = metadata?.image || metadata?.images?.[0];
@@ -35,19 +35,19 @@ const UrlPreview = ({ link, handleClick }) => {
           <Row>
             <Box bgc="transparent" padding={20} width={image ? '70%' : '100%'}>
               {metadata.title && (
-                <Url href={link} target="_blank" onClick={handleClick}>
+                <Url href={metadata.url} target="_blank" onClick={handleClick}>
                   <ClampedTitle>{metadata.title}</ClampedTitle>
                 </Url>
               )}
               {metadata?.description && (
-                <Url href={link} target="_blank" onClick={handleClick}>
+                <Url href={metadata.url} target="_blank" onClick={handleClick}>
                   <ClampedText mt={8} mb={13} fontSize={11}>
                     {metadata?.description}
                   </ClampedText>
                 </Url>
               )}
               {metadata.url && (
-                <Url href={link} target="_blank" onClick={handleClick}>
+                <Url href={metadata.url} target="_blank" onClick={handleClick}>
                   <Text
                     textOverflow="hidden"
                     whiteSpace="pre"
