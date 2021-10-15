@@ -127,6 +127,10 @@ module.exports = options => ({
     ],
   },
   plugins: options.plugins.concat([
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
+
     ...(onHeroku ? [] : [gitRevisionPlugin]),
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; Terser will automatically
