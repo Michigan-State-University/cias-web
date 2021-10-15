@@ -1,4 +1,4 @@
-import React, { ComponentType, ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { render, RenderOptions, RenderResult } from '@testing-library/react';
 import { IntlProvider } from 'react-intl';
 
@@ -13,7 +13,6 @@ const ProviderWrapper = ({ children }: Props): JSX.Element => (
 const testRender = (
   ui: ReactElement,
   options?: Omit<RenderOptions, 'queries'>,
-): RenderResult =>
-  render(ui, { wrapper: ProviderWrapper as ComponentType, ...options });
+): RenderResult => render(ui, { wrapper: ProviderWrapper, ...options });
 
 export { testRender };

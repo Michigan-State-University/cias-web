@@ -126,14 +126,6 @@ exports[`<LatestReport /> Should render and match the snapshot 1`] = `
   justify-content: space-between;
 }
 
-.c3:hover .H2-uw8lbl-0 {
-  color: #B727EA !important;
-}
-
-.c3:hover .styled__ToggleableBox-zk98vs-0 {
-  background-color: black !important;
-}
-
 @media only screen and (min-width:768px) {
 
 }

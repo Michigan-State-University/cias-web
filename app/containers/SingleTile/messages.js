@@ -94,4 +94,12 @@ export default defineMessages({
     id: `${scope}.interventionArchiveMessage`,
     defaultMessage: 'Are you sure you want to archive this Intervention?',
   },
+  catMhSettingsOption: {
+    id: `${scope}.catMhSettingsOption`,
+    defaultMessage: 'CAT-MH Access',
+  },
+  catMhSettingsModalTitle: {
+    id: `${scope}.catMhSettingsModalTitle`,
+    defaultMessage: 'Access of CAT-MH',
+  },
 });

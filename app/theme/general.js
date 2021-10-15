@@ -28,6 +28,10 @@ const elements = {
   chartTileWidth: 500,
   chartTileHeight: 350,
   interventionsTileHeight: 150,
+  interventionLogoSize: {
+    width: 200,
+    height: 100,
+  },
 };
 
 const visualAnalogScaleLabelStyles = {

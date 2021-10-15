@@ -12,4 +12,7 @@ RUN npm run build:and:prune
 
 EXPOSE 4200
 
-CMD ["npm", "run", "start:prod"]
+# Configure the main process to run when running the image
+ADD startup.sh /
+RUN chmod +x /startup.sh
+CMD ["/startup.sh"]

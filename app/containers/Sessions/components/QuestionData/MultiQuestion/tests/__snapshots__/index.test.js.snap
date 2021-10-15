@@ -415,7 +415,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
     class="c1"
   >
     <div
-      class="HoverableBox-zvip6a-0 c2"
+      class="HoverableBox-sc-zvip6a-0 c2"
       width="100%"
     >
       <div
@@ -1885,7 +1885,7 @@ exports[`<MultiQuestion /> Should render and match the snapshot 1`] = `
     display="flex"
   >
     <div
-      class="HoverableBox-zvip6a-0 c18"
+      class="HoverableBox-sc-zvip6a-0 c18"
     >
       <div
         class="c8"

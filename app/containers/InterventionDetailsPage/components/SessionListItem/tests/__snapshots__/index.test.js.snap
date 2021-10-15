@@ -468,10 +468,6 @@ exports[`<SessionListItem /> Should render and match the snapshot 1`] = `
   color: #B727EA !important;
 }
 
-.c6:hover .styled__ToggleableBox-zk98vs-0 {
-  background-color: black !important;
-}
-
 .c18 {
   font-family: DM Sans;
   font-size: 13px;

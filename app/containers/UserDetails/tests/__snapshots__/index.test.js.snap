@@ -265,32 +265,6 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   border-radius: 5px;
 }
 
-.c2 {
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  -webkit-text-decoration: none;
-  text-decoration: none;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.c5 {
-  margin: 0;
-  font-family: DM Sans;
-  font-size: 25px;
-  line-height: 130%;
-  margin-top: 25px;
-  margin-bottom: 25px;
-  color: #2F3850;
-}
-
 .c23 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -338,6 +312,32 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
   width: 100%;
   width: 230px;
   padding-right: 10px;
+}
+
+.c2 {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c5 {
+  margin: 0;
+  font-family: DM Sans;
+  font-size: 25px;
+  line-height: 130%;
+  margin-top: 25px;
+  margin-bottom: 25px;
+  color: #2F3850;
 }
 
 .c7 {

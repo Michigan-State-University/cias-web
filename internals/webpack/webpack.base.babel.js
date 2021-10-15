@@ -23,11 +23,13 @@ module.exports = options => ({
       {
         test: /\.jsx?$/, // Transform all .js and .jsx files required somewhere with Babel
         exclude: /node_modules/,
+        type: 'javascript/auto',
         use: {
           loader: 'babel-loader',
           options: options.babelQuery,
         },
       },
+
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
@@ -39,41 +41,64 @@ module.exports = options => ({
         // for a list of loaders, see https://webpack.js.org/loaders/#styling
         test: /\.css$/,
         exclude: /node_modules/,
+        type: 'javascript/auto',
         use: ['style-loader', 'css-loader'],
       },
+
       {
         // Preprocess 3rd party .css files located in node_modules
         test: /\.css$/,
         include: /node_modules/,
+        type: 'javascript/auto',
         use: ['style-loader', 'css-loader'],
       },
+
       {
         test: /\.(eot|otf|ttf|woff|woff2)$/,
-        use: 'file-loader',
+        type: 'asset/resource',
       },
+
+      // for inline query loading
+      {
+        resourceQuery: /file-loader/,
+        type: 'asset/resource',
+      },
+
+      {
+        test: /\.(mp4|webm)$/,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            // Inline files smaller than 10 kB
+            maxSize: 10 * 1024,
+          },
+        },
+      },
+
       {
         test: /\.svg$/,
+        type: 'javascript/auto',
         use: [
           {
             loader: 'svg-url-loader',
             options: {
               // Inline files smaller than 10 kB
-              limit: 10 * 1024,
-              noquotes: true,
+              maxSize: 10 * 1024,
             },
           },
         ],
       },
+
       {
         test: /\.(jpg|png|gif)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              // Inline files smaller than 10 kB
-              limit: 10 * 1024,
-            },
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            // Inline files smaller than 10 kB
+            maxSize: 10 * 1024,
           },
+        },
+        use: [
           {
             loader: 'image-webpack-loader',
             options: {
@@ -98,22 +123,19 @@ module.exports = options => ({
           },
         ],
       },
+
       {
         test: /\.html$/,
+        type: 'javascript/auto',
         use: 'html-loader',
-      },
-      {
-        test: /\.(mp4|webm)$/,
-        use: {
-          loader: 'url-loader',
-          options: {
-            limit: 10000,
-          },
-        },
       },
     ],
   },
   plugins: options.plugins.concat([
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
+
     ...(onHeroku ? [] : [gitRevisionPlugin]),
     // Always expose NODE_ENV to webpack, in order to use `process.env.NODE_ENV`
     // inside your code for any environment checks; Terser will automatically
@@ -129,6 +151,10 @@ module.exports = options => ({
     modules: ['node_modules', 'app'],
     extensions: ['.tsx', '.ts', '.js', '.jsx', '.react.js'],
     mainFields: ['browser', 'jsnext:main', 'main'],
+    fallback: {
+      stream: false,
+      domain: false,
+    },
   },
   devtool: options.devtool,
   target: 'web', // Make web variables accessible to webpack, e.g. window

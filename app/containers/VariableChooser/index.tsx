@@ -49,6 +49,7 @@ interface Props {
   sessionId: string;
   topPosition: string;
   sessionTypesWhiteList: SessionTypes[];
+  setIsOpen: (isOpen: boolean) => void;
 }
 
 const VariableChooser = ({
@@ -70,6 +71,7 @@ const VariableChooser = ({
   sessionId: initialSessionId,
   topPosition,
   sessionTypesWhiteList,
+  setIsOpen: propsSetOpen,
 }: Props) => {
   const variableChooser = useRef(null);
 
@@ -111,6 +113,7 @@ const VariableChooser = ({
 
   useLayoutEffect(() => {
     if (isOpen) resetVariableChooser();
+    if (propsSetOpen) propsSetOpen(isOpen);
   }, [isOpen]);
 
   const handleOnVariableClick = useCallback(

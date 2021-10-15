@@ -42,7 +42,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   margin-bottom: 30px;
 }
 
-.c23 {
+.c22 {
   width: auto;
   height: auto;
   display: block;
@@ -70,7 +70,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c17 {
+.c16 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -88,7 +88,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c22 {
+.c21 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -110,7 +110,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   display: flex;
 }
 
-.c19 {
+.c18 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
@@ -119,12 +119,31 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   color: rgba(210,55,29,1);
 }
 
-.c24 {
+.c23 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: rgba(255,255,255,1);
   color: rgba(255,255,255,1);
+}
+
+.c13 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  -webkit-align-content: flex-start;
+  -ms-flex-line-pack: start;
+  align-content: flex-start;
+  -webkit-align-items: flex-start;
+  -webkit-box-align: flex-start;
+  -ms-flex-align: flex-start;
+  align-items: flex-start;
+  padding-left: 20px;
 }
 
 .c3 {
@@ -136,7 +155,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   color: #2F3850;
 }
 
-.c25 {
+.c24 {
   margin: 0;
   font-family: DM Sans;
   font-size: 25px;
@@ -145,7 +164,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   cursor: pointer;
 }
 
-.c21 {
+.c20 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -163,7 +182,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   height: 100px;
 }
 
-.c21:after {
+.c20:after {
   content: ' ';
   display: block;
   width: 66.66666666666666px;
@@ -235,7 +254,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   color: rgba(183,39,234,1);
 }
 
-.c18 {
+.c17 {
   outline: none;
   border: none;
   background: transparent;
@@ -245,25 +264,6 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   padding: 2px;
   cursor: pointer;
   color: #2F3850;
-}
-
-.c14 {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%;
-  -webkit-align-content: flex-start;
-  -ms-flex-line-pack: start;
-  align-content: flex-start;
-  -webkit-align-items: flex-start;
-  -webkit-box-align: flex-start;
-  -ms-flex-align: flex-start;
-  align-items: flex-start;
-  padding-left: 20px;
 }
 
 .c9 {
@@ -279,81 +279,49 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   font-weight: 400;
 }
 
-.c11 {
+.c10 {
   height: 47.5px;
 }
 
-.c12 {
+.c11 {
   cursor: default;
   color: #0E0E0E;
 }
 
-.TBody-gqq9cv-0 .c10:nth-child(even) {
-  background: rgba(16,121,105,0.1);
-}
-
-.TBody-gqq9cv-0 .c10:nth-child(even) td:first-child,
-.TBody-gqq9cv-0 .c12:nth-child(even) th:first-child {
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-}
-
-.TBody-gqq9cv-0 .c10:nth-child(even) td:last-child,
-.TBody-gqq9cv-0 .c12:nth-child(even) th:last-child {
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.c12 td:nth-last-child(-n + ) {
+.c11 td:nth-last-child(-n + ) {
   opacity: 100%;
 }
 
-.c12:hover {
+.c11:hover {
   background: !important;
 }
 
-.c12:hover td:hover {
+.c11:hover td:hover {
   opacity: 100%;
 }
 
-.c15 {
+.c14 {
   cursor: pointer;
   color: #0E0E0E;
 }
 
-.TBody-gqq9cv-0 .c10:nth-child(even) {
-  background: #FFFFFF;
-}
-
-.TBody-gqq9cv-0 .c10:nth-child(even) td:first-child,
-.TBody-gqq9cv-0 .c15:nth-child(even) th:first-child {
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-}
-
-.TBody-gqq9cv-0 .c10:nth-child(even) td:last-child,
-.TBody-gqq9cv-0 .c15:nth-child(even) th:last-child {
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.c15 td:nth-last-child(-n + 1) {
+.c14 td:nth-last-child(-n + 1) {
   opacity: 0;
 }
 
-.c15:hover {
+.c14:hover {
   background: #E9F1FB !important;
 }
 
-.c15:hover td:hover {
+.c14:hover td:hover {
   opacity: 100%;
 }
 
-.c16 {
+.c15 {
   padding-left: 20px;
 }
 
-.c13 {
+.c12 {
   width: auto;
   background-color: rgba(255,255,255,1);
   color: rgba(47,56,80,1);
@@ -364,7 +332,7 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
   position: relative;
 }
 
-.c20 {
+.c19 {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -472,56 +440,56 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
               class="THead-sc-8drp5d-0"
             >
               <tr
-                class="c10 c11 c12"
+                class="c10 c11"
               >
                 <th
-                  class="c13"
+                  class="c12"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="c14"
+                    class="c13"
                   >
                     Name
                   </div>
                 </th>
                 <th
-                  class="c13"
+                  class="c12"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="c14"
+                    class="c13"
                   >
                     Team Admin name
                   </div>
                 </th>
                 <th
-                  class="c13"
+                  class="c12"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="c14"
+                    class="c13"
                   >
                     Team Admin email
                   </div>
                 </th>
                 <th
-                  class="c13"
+                  class="c12"
                   color="#2F3850"
                   opacity="0.6"
                   scope="col"
                   width="auto"
                 >
                   <div
-                    class="c14"
+                    class="c13"
                   >
                      
                   </div>
@@ -529,23 +497,23 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
               </tr>
             </thead>
             <tbody
-              class="TBody-gqq9cv-0"
+              class="TBody-sc-gqq9cv-0"
             >
               <tr
-                class="c10 c11 c15"
+                class="c10 c14"
                 color="#FFFFFF"
                 cursor="pointer"
               >
                 <td
-                  class="c16"
+                  class="c15"
                 >
                   Team 1
                 </td>
                 <td
-                  class="c16"
+                  class="c15"
                 />
                 <td
-                  class="c16"
+                  class="c15"
                 >
                   ta-1@test.pl
                 </td>
@@ -553,14 +521,14 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
                   class=""
                 >
                   <div
-                    class="c17"
+                    class="c16"
                     width="100%"
                   >
                     <button
-                      class="c18"
+                      class="c17"
                     >
                       <p
-                        class="c19"
+                        class="c18"
                         color="#D2371D"
                         font-weight="bold"
                       >
@@ -571,20 +539,20 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
                 </td>
               </tr>
               <tr
-                class="c10 c11 c15"
+                class="c10 c14"
                 color="#FFFFFF"
                 cursor="pointer"
               >
                 <td
-                  class="c16"
+                  class="c15"
                 >
                   Team 2
                 </td>
                 <td
-                  class="c16"
+                  class="c15"
                 />
                 <td
-                  class="c16"
+                  class="c15"
                 >
                   ta-2@test.pl
                 </td>
@@ -592,14 +560,14 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
                   class=""
                 >
                   <div
-                    class="c17"
+                    class="c16"
                     width="100%"
                   >
                     <button
-                      class="c18"
+                      class="c17"
                     >
                       <p
-                        class="c19"
+                        class="c18"
                         color="#D2371D"
                         font-weight="bold"
                       >
@@ -610,20 +578,20 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
                 </td>
               </tr>
               <tr
-                class="c10 c11 c15"
+                class="c10 c14"
                 color="#FFFFFF"
                 cursor="pointer"
               >
                 <td
-                  class="c16"
+                  class="c15"
                 >
                   Team 3
                 </td>
                 <td
-                  class="c16"
+                  class="c15"
                 />
                 <td
-                  class="c16"
+                  class="c15"
                 >
                   ta-3@test.pl
                 </td>
@@ -631,14 +599,14 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
                   class=""
                 >
                   <div
-                    class="c17"
+                    class="c16"
                     width="100%"
                   >
                     <button
-                      class="c18"
+                      class="c17"
                     >
                       <p
-                        class="c19"
+                        class="c18"
                         color="#D2371D"
                         font-weight="bold"
                       >
@@ -651,10 +619,10 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
             </tbody>
           </table>
           <div
-            class="c20"
+            class="c19"
           >
             <div
-              class="c21"
+              class="c20"
               color="#B727EA"
               size="100"
               width="6"
@@ -662,24 +630,24 @@ exports[`<TeamsList /> Should render and match the snapshot 1`] = `
           </div>
         </div>
         <div
-          class="c22"
+          class="c21"
           display="flex"
           width="100%"
         >
           <div
-            class="c23"
+            class="c22"
             cursor="pointer"
             display="flex"
           >
             <p
-              class="c24"
+              class="c23"
               color="#FFFFFF"
             >
               1
             </p>
           </div>
           <h1
-            class="c25"
+            class="c24"
             cursor="pointer"
           >
             &gt;

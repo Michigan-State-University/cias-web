@@ -8,23 +8,25 @@ import ConfirmationModal, {
   Props as ConfirmationModalComponentProps,
 } from './ConfirmationModal';
 
-type Props = {
-  modalContentRenderer: (props: { closeModal: () => void }) => ReactNode;
-} & SpecificModalProps;
+type Props<T> = SpecificModalProps<T>;
 
-type SpecificModalProps = ModalProps | ConfirmationModalProps;
+type SpecificModalProps<T> = ModalProps<T> | ConfirmationModalProps;
 
-type ModalProps = {
+type ModalProps<T = boolean> = {
   type: ModalType.Modal;
-  props: ModalComponentProps;
+  props: Omit<ModalComponentProps, 'children'>;
+  modalContentRenderer: (props: {
+    closeModal: () => void;
+    modalState: Nullable<T | boolean>;
+  }) => ReactNode;
 };
 
 type ConfirmationModalProps = {
   type: ModalType.ConfirmationModal;
-  props: ConfirmationModalComponentProps;
+  props: Omit<ConfirmationModalComponentProps, 'children'>;
 };
 
-export const useModal = <T,>({ modalContentRenderer, type, props }: Props) => {
+export const useModal = <T,>({ type, props, ...restProps }: Props<T>) => {
   const [modalState, setModalState] = useState<T | boolean>();
 
   const isModalVisible = useMemo(
@@ -63,12 +65,14 @@ export const useModal = <T,>({ modalContentRenderer, type, props }: Props) => {
           />
         );
       case ModalType.Modal:
-      default:
+        const { modalContentRenderer } = restProps as ModalProps<T>;
         return (
           <Modal {...(props as ModalComponentProps)} {...sharedProps}>
-            {modalContentRenderer({ closeModal })}
+            {modalContentRenderer({ closeModal, modalState })}
           </Modal>
         );
+      default:
+        return null;
     }
   }, [isModalVisible, props]);
 

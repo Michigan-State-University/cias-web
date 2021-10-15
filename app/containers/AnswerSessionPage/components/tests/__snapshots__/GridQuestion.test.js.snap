@@ -41,14 +41,14 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   width: 0;
 }
 
-.c18 {
+.c17 {
   width: auto;
   height: auto;
   display: block;
   border-radius: 5px;
 }
 
-.c9 {
+.c8 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -59,7 +59,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   width: 100%;
 }
 
-.c10 {
+.c9 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -76,7 +76,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   padding: 5px;
 }
 
-.c11 {
+.c10 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -101,7 +101,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   min-width: 80px;
 }
 
-.c12 {
+.c11 {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -124,16 +124,16 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c14 {
+.c13 {
   display: none;
 }
 
-.c13:disabled + label > .c17 {
+.c12:disabled + label > .c16 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c16 {
+.c15 {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -145,16 +145,16 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   align-items: center;
 }
 
-.c16:hover {
+.c15:hover {
   cursor: pointer;
 }
 
-.c13:disabled + .c15 {
+.c12:disabled + .c14 {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
-.c19 {
+.c18 {
   margin-left: 5px;
 }
 
@@ -168,56 +168,40 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   font-weight: 400;
 }
 
-.c5 {
+.c4 {
   height: 47.5px;
 }
 
-.c6 {
+.c5 {
   cursor: default;
   color: #0E0E0E;
   background-color: #F8FBFF;
 }
 
-.TBody-gqq9cv-0 .c4:nth-child(even) {
-  background: #E2EEF1;
-}
-
-.TBody-gqq9cv-0 .c4:nth-child(even) td:first-child,
-.TBody-gqq9cv-0 .c6:nth-child(even) th:first-child {
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-}
-
-.TBody-gqq9cv-0 .c4:nth-child(even) td:last-child,
-.TBody-gqq9cv-0 .c6:nth-child(even) th:last-child {
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
-.c6 td:nth-last-child(-n + ) {
+.c5 td:nth-last-child(-n + ) {
   opacity: 100%;
 }
 
-.c6:hover {
+.c5:hover {
   background: !important;
 }
 
-.c6:hover td:hover {
+.c5:hover td:hover {
   opacity: 100%;
 }
 
-.c7 {
+.c6 {
   width: 120px;
 }
 
-.c20 {
+.c19 {
   font-family: DM Sans;
   font-size: 13px;
   line-height: 130%;
   color: #2F3850;
 }
 
-.c21 {
+.c20 {
   -webkit-clip: rect(0 0 0 0);
   clip: rect(0 0 0 0);
   -webkit-clip-path: inset(100%);
@@ -229,7 +213,7 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
   width: 1px;
 }
 
-.c8 {
+.c7 {
   z-index: 1;
   background-color: inherit;
   text-align: left;
@@ -291,34 +275,34 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
             class="THead-sc-8drp5d-0"
           >
             <tr
-              class="c4 c5 c6"
+              class="c4 c5"
               color="#E2EEF1"
             >
               <th
-                class="c7 c8"
+                class="c6 c7"
                 scope="col"
                 style="position: sticky; left: 0px;"
                 width="120px"
               />
               <th
-                class="c7"
+                class="c6"
                 scope="col"
                 width="120px"
               >
                 <div
-                  class="c9"
+                  class="c8"
                   id="answer-0"
                 >
                   test
                 </div>
               </th>
               <th
-                class="c7"
+                class="c6"
                 scope="col"
                 width="120px"
               >
                 <div
-                  class="c9"
+                  class="c8"
                   id="answer-1"
                 >
                   test
@@ -327,20 +311,20 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
             </tr>
           </thead>
           <tbody
-            class="TBody-gqq9cv-0"
+            class="TBody-sc-gqq9cv-0"
           >
             <tr
-              class="c4 c5 c6"
+              class="c4 c5"
               color="#E2EEF1"
             >
               <th
-                class="c7 c8"
+                class="c6 c7"
                 scope="row"
                 style="position: sticky; left: 0px;"
                 width="120px"
               >
                 <div
-                  class="c10"
+                  class="c9"
                   height="inherit"
                   id="question-0"
                   width="max-content"
@@ -352,31 +336,31 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 class=""
               >
                 <div
-                  class="c11"
+                  class="c10"
                   width="100%"
                 >
                   <div
-                    class="c12"
+                    class="c11"
                   >
                     <input
                       aria-labelledby="cell-0-0 question-0 answer-0"
-                      class="c13 c14"
+                      class="c12 c13"
                       id="cell-0-0"
                       type="radio"
                     />
                     <label
-                      class="c15 c16"
+                      class="c14 c15"
                       for="cell-0-0"
                     >
                       <img
-                        class="c17 "
+                        class="c16 "
                         src="IMAGE_MOCK"
                       />
                       <div
-                        class="c18 c19"
+                        class="c17 c18"
                       >
                         <p
-                          class="c20 c21"
+                          class="c19 c20"
                         >
                           Question 1 and Answer 1
                         </p>
@@ -389,31 +373,31 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 class=""
               >
                 <div
-                  class="c11"
+                  class="c10"
                   width="100%"
                 >
                   <div
-                    class="c12"
+                    class="c11"
                   >
                     <input
                       aria-labelledby="cell-0-1 question-0 answer-1"
-                      class="c13 c14"
+                      class="c12 c13"
                       id="cell-0-1"
                       type="radio"
                     />
                     <label
-                      class="c15 c16"
+                      class="c14 c15"
                       for="cell-0-1"
                     >
                       <img
-                        class="c17 "
+                        class="c16 "
                         src="IMAGE_MOCK"
                       />
                       <div
-                        class="c18 c19"
+                        class="c17 c18"
                       >
                         <p
-                          class="c20 c21"
+                          class="c19 c20"
                         >
                           Question 1 and Answer 2
                         </p>
@@ -424,17 +408,17 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
               </td>
             </tr>
             <tr
-              class="c4 c5 c6"
+              class="c4 c5"
               color="#E2EEF1"
             >
               <th
-                class="c7 c8"
+                class="c6 c7"
                 scope="row"
                 style="position: sticky; left: 0px;"
                 width="120px"
               >
                 <div
-                  class="c10"
+                  class="c9"
                   height="inherit"
                   id="question-1"
                   width="max-content"
@@ -446,31 +430,31 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 class=""
               >
                 <div
-                  class="c11"
+                  class="c10"
                   width="100%"
                 >
                   <div
-                    class="c12"
+                    class="c11"
                   >
                     <input
                       aria-labelledby="cell-1-0 question-1 answer-0"
-                      class="c13 c14"
+                      class="c12 c13"
                       id="cell-1-0"
                       type="radio"
                     />
                     <label
-                      class="c15 c16"
+                      class="c14 c15"
                       for="cell-1-0"
                     >
                       <img
-                        class="c17 "
+                        class="c16 "
                         src="IMAGE_MOCK"
                       />
                       <div
-                        class="c18 c19"
+                        class="c17 c18"
                       >
                         <p
-                          class="c20 c21"
+                          class="c19 c20"
                         >
                           Question 2 and Answer 1
                         </p>
@@ -483,31 +467,31 @@ exports[`<GridQuestion /> Should render and match the snapshot 1`] = `
                 class=""
               >
                 <div
-                  class="c11"
+                  class="c10"
                   width="100%"
                 >
                   <div
-                    class="c12"
+                    class="c11"
                   >
                     <input
                       aria-labelledby="cell-1-1 question-1 answer-1"
-                      class="c13 c14"
+                      class="c12 c13"
                       id="cell-1-1"
                       type="radio"
                     />
                     <label
-                      class="c15 c16"
+                      class="c14 c15"
                       for="cell-1-1"
                     >
                       <img
-                        class="c17 "
+                        class="c16 "
                         src="IMAGE_MOCK"
                       />
                       <div
-                        class="c18 c19"
+                        class="c17 c18"
                       >
                         <p
-                          class="c20 c21"
+                          class="c19 c20"
                         >
                           Question 2 and Answer 2
                         </p>

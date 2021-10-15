@@ -93,14 +93,6 @@ exports[`<SessionTile /> Should render and match the snapshot 1`] = `
   justify-content: space-between;
 }
 
-.c4:hover .H2-uw8lbl-0 {
-  color: #B727EA !important;
-}
-
-.c4:hover .styled__ToggleableBox-zk98vs-0 {
-  background-color: black !important;
-}
-
 @media (max-width:575px) {
   .c3 {
     margin-top: 20px;

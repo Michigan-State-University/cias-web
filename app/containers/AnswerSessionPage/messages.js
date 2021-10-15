@@ -21,6 +21,22 @@ export default defineMessages({
     id: `${scope}.nextQuestion`,
     defaultMessage: 'Continue',
   },
+  skipQuestion: {
+    id: `${scope}.skipQuestion`,
+    defaultMessage: 'Skip question',
+  },
+  skipQuestionDisabledTooltip: {
+    id: `${scope}.skipQuestionDisabledTooltip`,
+    defaultMessage: "This question is required, so you can't skip it.",
+  },
+  skipQuestionModalHeader: {
+    id: `${scope}.skipQuestionModalHeader`,
+    defaultMessage: 'You did not answer',
+  },
+  skipQuestionModalMessage: {
+    id: `${scope}.skipQuestionModalMessage`,
+    defaultMessage: 'Are you sure you want to leave this question empty?',
+  },
   submitAnswer: {
     id: `${scope}.submitAnswer`,
     defaultMessage: 'Finish session',
