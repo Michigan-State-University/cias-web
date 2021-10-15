@@ -310,9 +310,9 @@ export function InterventionDetailsPage({
             >
               {sessions &&
                 orderBy(sessions, 'position').map((session, index) => {
-                  const handleClick = () => {
+                  const handleInviteParticipantsClick = () => {
                     fetchSessionEmails(index);
-                    if (session.position !== sessionIndex + 1) {
+                    if (index !== sessionIndex) {
                       fetchQuestions(session.id);
                       changeSessionIndex(index);
                     }
@@ -331,7 +331,9 @@ export function InterventionDetailsPage({
                         session={session}
                         index={index}
                         isSelected={index === sessionIndex}
-                        handleClick={handleClick}
+                        handleInviteParticipantsClick={
+                          handleInviteParticipantsClick
+                        }
                         handleCopySession={handleCopySession}
                         handleExternalCopySession={handleExternalCopySession}
                         handleDeleteSession={sessionId =>
