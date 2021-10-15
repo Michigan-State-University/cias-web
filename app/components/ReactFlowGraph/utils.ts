@@ -6,7 +6,7 @@ import {
   isNode,
   Node,
 } from 'react-flow-renderer';
-import { layout, graphlib } from 'dagre';
+import { graphlib, layout } from 'dagre';
 import isEqual from 'lodash/isEqual';
 
 import { isNanOrInfinite } from 'utils/mathUtils';
@@ -298,6 +298,36 @@ export const calculateTransformToFitNodeInView = (
   return currentTransform;
 };
 
+export const calculateTransformToCenterNodeInView = (
+  node: Node,
+  zoom: number,
+  panAreaWidth: number,
+  panAreaHeight: number,
+  containerWidth: number,
+  containerHeight: number,
+  nodeDimensions: Map<string, NodeDimensions>,
+): FlowTransform => {
+  const { position, type } = node;
+  const { height, width } = nodeDimensions.get(type!) || {
+    height: 0,
+    width: 0,
+  };
+
+  const centerToNodeTransform: FlowTransform = {
+    zoom,
+    x: Math.min(-1 * zoom * (position.x - (containerWidth - width) / 2), 0),
+    y: Math.min(-1 * zoom * (position.y - (containerHeight - height) / 2), 0),
+  };
+
+  return calculateTransformToFitViewInContainer(
+    panAreaWidth,
+    panAreaHeight,
+    centerToNodeTransform,
+    containerWidth,
+    containerHeight,
+  );
+};
+
 export const areTransformsDifferent = (
   transformA: FlowTransform,
   transformB: FlowTransform,
@@ -401,3 +431,9 @@ export const findMaxNodeHeight = (
 
   return maxHeight;
 };
+
+export const findNodeById = (elements: FlowElement[], nodeId: string): Node =>
+  elements.find((element) => element.id === nodeId && isNode(element)) as Node;
+
+export const findFirstNode = (elements: FlowElement[]): Node =>
+  elements.find((element) => isNode(element)) as Node;
