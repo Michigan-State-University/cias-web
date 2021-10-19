@@ -8,7 +8,7 @@ import React, { memo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
-import { injectSaga } from 'redux-injectors';
+import { injectReducer, injectSaga } from 'redux-injectors';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 
@@ -25,7 +25,10 @@ import { colors } from 'theme';
 import globalMessages from 'global/i18n/globalMessages';
 import { makeSelectUserId, makeSelectUserRoles } from 'global/reducers/auth';
 import { interventionOptionsSaga } from 'global/sagas/interventionOptionsSaga';
-import { sendInterventionCsvRequest } from 'global/reducers/intervention';
+import {
+  interventionReducer,
+  sendInterventionCsvRequest,
+} from 'global/reducers/intervention';
 import {
   copyInterventionRequest,
   archiveInterventionRequest,
@@ -52,6 +55,7 @@ import Row from 'components/Row';
 import Badge from 'components/Badge';
 import Loader from 'components/Loader';
 import TranslateInterventionModal from 'containers/TranslateInterventionModal';
+import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
 
 import InterventionDetails from './InterventionDetails';
 import messages from './messages';
@@ -110,7 +114,7 @@ const SingleTile = ({
   });
   const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
     type: ModalType.Modal,
-    modalContentRenderer: () => <CatMhAccessModal />,
+    modalContentRenderer: (props) => <CatMhAccessModal {...props} />,
     props: {
       title: formatMessage(messages.catMhSettingsModalTitle),
     },
@@ -192,7 +196,7 @@ const SingleTile = ({
       ? [
           {
             icon: DocumentIcon,
-            action: openCatMhModal,
+            action: () => openCatMhModal(tileData),
             label: formatMessage(messages.catMhSettingsModalTitle),
             id: 'catMhAccess',
           },
@@ -348,4 +352,9 @@ export default compose(
     key: 'interventionOptionsSaga',
     saga: interventionOptionsSaga,
   }),
+  injectSaga({
+    key: 'interventionDetailsPageSagas',
+    saga: interventionDetailsPageSagas,
+  }),
+  injectReducer({ key: 'intervention', reducer: interventionReducer }),
 )(SingleTileWithIntl);

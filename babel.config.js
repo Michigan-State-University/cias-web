@@ -1,21 +1,10 @@
 module.exports = {
   presets: [
-    [
-      '@babel/preset-env',
-      {
-        modules: false,
-      },
-    ],
+    '@babel/preset-env',
     '@babel/preset-react',
     '@babel/preset-typescript',
   ],
-  plugins: [
-    'styled-components',
-    '@babel/plugin-proposal-class-properties',
-    '@babel/plugin-proposal-optional-chaining',
-    '@babel/plugin-proposal-nullish-coalescing-operator',
-    '@babel/plugin-syntax-dynamic-import',
-  ],
+  plugins: ['babel-plugin-styled-components'],
   env: {
     production: {
       only: ['app'],

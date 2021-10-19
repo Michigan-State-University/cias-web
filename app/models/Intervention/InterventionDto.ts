@@ -11,6 +11,11 @@ enum InterventionSharedTo {
   INVITED = 'invited',
 }
 
+export enum CatMhLicenseType {
+  LIMITED = 'limited',
+  UNLIMITED = 'unlimited',
+}
+
 export interface InterventionDto {
   createdAt: string;
   csvGeneratedAt: Nullable<string>;
@@ -32,4 +37,10 @@ export interface InterventionDto {
   user: { id: string; firstName: string; email: string; lastName: string };
   userId: string;
   firstSessionLanguage?: string;
+  catMhApplicationId: string;
+  catMhOrganizationId: string;
+  catMhPool: number;
+  createdCatMhSessionCount: number;
+  isAccessRevoked: boolean;
+  licenseType: CatMhLicenseType;
 }

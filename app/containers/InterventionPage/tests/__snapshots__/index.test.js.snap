@@ -103,6 +103,27 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   color: #2F3850;
 }
 
+.c20 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  color: #2F3850;
+}
+
+.c20:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c20:disabled {
+  color: #ABBBD1;
+}
+
 .c11 {
   height: 28px;
   width: 28px;
@@ -126,27 +147,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with interven
   outline: none;
   padding: 0;
   margin: 0px;
-}
-
-.c20 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  padding-right: 30px;
-  padding-left: 30px;
-  color: #2F3850;
-}
-
-.c20:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: #107969;
-}
-
-.c20:disabled {
-  color: #ABBBD1;
 }
 
 .c19 {
@@ -680,6 +680,27 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   color: #2F3850;
 }
 
+.c20 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  color: #2F3850;
+}
+
+.c20:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c20:disabled {
+  color: #ABBBD1;
+}
+
 .c11 {
   height: 28px;
   width: 28px;
@@ -703,27 +724,6 @@ exports[`<InterventionPage /> Should render and match the snapshot with loader 1
   outline: none;
   padding: 0;
   margin: 0px;
-}
-
-.c20 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  padding-right: 30px;
-  padding-left: 30px;
-  color: #2F3850;
-}
-
-.c20:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: #107969;
-}
-
-.c20:disabled {
-  color: #ABBBD1;
 }
 
 .c19 {
@@ -1257,6 +1257,27 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   color: #2F3850;
 }
 
+.c20 {
+  padding: 12px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #E9F1FB;
+  border-radius: 5px;
+  padding-right: 30px;
+  padding-left: 30px;
+  color: #2F3850;
+}
+
+.c20:focus {
+  box-shadow: none;
+  outline: none;
+  border-color: #107969;
+}
+
+.c20:disabled {
+  color: #ABBBD1;
+}
+
 .c11 {
   height: 28px;
   width: 28px;
@@ -1280,27 +1301,6 @@ exports[`<InterventionPage /> Should render and match the snapshot without inter
   outline: none;
   padding: 0;
   margin: 0px;
-}
-
-.c20 {
-  padding: 12px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #E9F1FB;
-  border-radius: 5px;
-  padding-right: 30px;
-  padding-left: 30px;
-  color: #2F3850;
-}
-
-.c20:focus {
-  box-shadow: none;
-  outline: none;
-  border-color: #107969;
-}
-
-.c20:disabled {
-  color: #ABBBD1;
 }
 
 .c19 {

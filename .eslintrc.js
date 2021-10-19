@@ -108,10 +108,11 @@ module.exports = {
     jest: true,
     browser: true,
     node: true,
-    es6: true,
+    es2021: true,
   },
   parserOptions: {
-    ecmaVersion: 6,
+    requireConfigFile: false,
+    ecmaVersion: 12,
     sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
@@ -149,7 +150,7 @@ module.exports = {
       parser: '@typescript-eslint/parser',
       parserOptions: {
         ecmaFeatures: { jsx: true },
-        ecmaVersion: 2018,
+        ecmaVersion: 12,
         sourceType: 'module',
         project: './tsconfig.json',
       },

@@ -150,6 +150,7 @@ export function InterventionDetailsPage({
     languageName,
     googleLanguageId,
     hasCatSessions,
+    isAccessRevoked,
   } = intervention || {};
 
   const editingPossible = canEdit(status);
@@ -200,7 +201,7 @@ export function InterventionDetailsPage({
   });
   const { openModal: openCatMhModal, Modal: CatMhModal } = useModal({
     type: ModalType.Modal,
-    modalContentRenderer: () => <CatMhAccessModal />,
+    modalContentRenderer: (props) => <CatMhAccessModal {...props} />,
     props: {
       title: formatMessage(messages.catMhSettingsModalTitle),
     },
@@ -208,8 +209,8 @@ export function InterventionDetailsPage({
 
   const canCreateCatSession = useMemo(() => {
     if (roles.includes('admin')) return true;
-    return abilityToCreateCatMh;
-  }, [abilityToCreateCatMh, roles]);
+    return abilityToCreateCatMh && !isAccessRevoked;
+  }, [abilityToCreateCatMh, roles, isAccessRevoked]);
 
   const options = [
     {
@@ -256,7 +257,7 @@ export function InterventionDetailsPage({
       ? [
           {
             icon: DocumentIcon,
-            action: openCatMhModal,
+            action: () => openCatMhModal(intervention),
             label: formatMessage(messages.catMhSettingsModalTitle),
             id: 'catMhAccess',
           },

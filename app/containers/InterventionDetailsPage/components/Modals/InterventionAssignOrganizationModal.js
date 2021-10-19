@@ -2,18 +2,13 @@ import React, { memo, useCallback, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { injectReducer, injectSaga } from 'redux-injectors';
-import { compose } from 'redux';
 
 import { jsonApiToArray } from 'utils/jsonApiMapper';
 import {
   editInterventionRequest,
-  interventionReducer,
   makeSelectInterventionLoader,
 } from 'global/reducers/intervention';
 import { makeSelectOrganizations } from 'global/reducers/organizations';
-
-import interventionDetailsPageSagas from 'containers/InterventionDetailsPage/saga';
 
 import { Col, FullWidthContainer, Row } from 'components/ReactGridSystem';
 import ApiSelect from 'components/Select/ApiSelect';
@@ -131,11 +126,4 @@ InterventionAssignOrganizationModal.propTypes = {
   onClose: PropTypes.func,
 };
 
-export default compose(
-  memo,
-  injectSaga({
-    key: 'interventionDetailsPageSagas',
-    saga: interventionDetailsPageSagas,
-  }),
-  injectReducer({ key: 'intervention', reducer: interventionReducer }),
-)(InterventionAssignOrganizationModal);
+export default memo(InterventionAssignOrganizationModal);
