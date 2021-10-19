@@ -19,6 +19,13 @@ const errorsToOmit = ['INVALID_TAG', 'UNCLOSED_TAG'];
 
 export const intlProviderConfig = {
   defaultRichTextElements: {
+    space: (chunks) => (
+      <>
+        {'\u2000'}
+        {chunks}
+      </>
+    ),
+    bold: (chunks) => <b>{chunks}</b>,
     span: (chunks) => `<span>${chunks}</span>`,
     p: (chunks) => `<p>${chunks}</p>`,
     b: (chunks) => `<b>${chunks}</b>`,

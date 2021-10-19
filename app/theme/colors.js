@@ -67,6 +67,7 @@ const colors = {
   whiteLilac: '#F6F8FC',
   jungleGreen50: '#80b4AE',
   periwinkleGray50: '#D9E0F0',
+  gainsbro: '#DADADA',
 };
 
 const themeColors = {
@@ -74,6 +75,7 @@ const themeColors = {
   secondary: colors.electricPurple,
   text: colors.bluewood,
   highlight: colors.linkWater,
+  success: colors.jungleGreen,
   warning: colors.vermilion,
   comment: colors.sonicSilver,
 };

@@ -147,4 +147,14 @@ export default defineMessages({
     defaultMessage:
       'The researchers without permission to create a CAT-MH session do not appear on the list',
   },
+  catMhCounter: {
+    id: `${scope}.catMhCounter`,
+    defaultMessage:
+      '<bold>CAT-MH License</bold>: Limited (<counter>{current}/{initial}</counter> <space></space> tests left)',
+  },
+  catMhCountWarning: {
+    id: `${scope}.catMhCountWarning`,
+    defaultMessage:
+      'The test limit has almost been reached. Extend your license to continue to use CAT-MH with this intervention.',
+  },
 });

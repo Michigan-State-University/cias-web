@@ -27,6 +27,7 @@ import PencilIcon from 'assets/svg/pencil-solid.svg';
 import AddAppIcon from 'assets/svg/app-add.svg';
 import TranslateIcon from 'assets/svg/translate.svg';
 import DocumentIcon from 'assets/svg/document.svg';
+import QuestionIcon from 'assets/svg/question-mark.svg';
 
 import isNullOrUndefined from 'utils/isNullOrUndefined';
 import { reorder } from 'utils/reorder';
@@ -102,6 +103,7 @@ import {
 import SelectResearchers from '../SelectResearchers';
 import messages from './messages';
 import { InterventionDetailsPageContext, nextStatus } from './utils';
+import { CAT_MH_TEST_COUNT_WARNING_THRESHOLD } from './constants';
 
 export function InterventionDetailsPage({
   createSession,
@@ -151,7 +153,13 @@ export function InterventionDetailsPage({
     googleLanguageId,
     hasCatSessions,
     isAccessRevoked,
+    catMhPool,
+    createdCatMhSessionCount,
   } = intervention || {};
+
+  const hasSmallNumberOfCatMhSessionsRemaining =
+    !catMhPool ||
+    createdCatMhSessionCount / catMhPool <= CAT_MH_TEST_COUNT_WARNING_THRESHOLD;
 
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
@@ -489,28 +497,67 @@ export function InterventionDetailsPage({
           canAccessCsv={canAccessCsv}
         />
 
-        <Row>
-          <Tooltip
-            id="intervention-settings"
-            text={formatMessage(messages.interventionSettingsIconTooltip)}
-          >
-            <Icon
-              src={PencilIcon}
-              fill={colors.grey}
-              onClick={() => setInterventionSettingsModalVisible(true)}
-              role="button"
-              aria-label={formatMessage(
-                messages.interventionSettingsIconTooltip,
-              )}
-              mr={10}
-            />
-          </Tooltip>
-          <Markup
-            content={formatMessage(messages.interventionLanguage, {
-              language: languageName,
-            })}
-          />
-        </Row>
+        <GRow>
+          <GCol>
+            <Row justify="between">
+              <Row align="center">
+                <Tooltip
+                  id="intervention-settings"
+                  text={formatMessage(messages.interventionSettingsIconTooltip)}
+                >
+                  <Icon
+                    src={PencilIcon}
+                    fill={colors.grey}
+                    onClick={() => setInterventionSettingsModalVisible(true)}
+                    role="button"
+                    aria-label={formatMessage(
+                      messages.interventionSettingsIconTooltip,
+                    )}
+                    mr={10}
+                  />
+                </Tooltip>
+                <Markup
+                  content={formatMessage(messages.interventionLanguage, {
+                    language: languageName,
+                  })}
+                />
+              </Row>
+
+              <Row align="center">
+                {formatMessage(messages.catMhCounter, {
+                  current: createdCatMhSessionCount ?? 0,
+                  initial: catMhPool ?? 0,
+                  counter: (chunks) => (
+                    <span
+                      style={{
+                        color: hasSmallNumberOfCatMhSessionsRemaining
+                          ? themeColors.warning
+                          : themeColors.success,
+                      }}
+                    >
+                      {chunks}
+                    </span>
+                  ),
+                })}
+                {hasSmallNumberOfCatMhSessionsRemaining && (
+                  <Tooltip
+                    id="cat-mh-count-warning"
+                    text={formatMessage(messages.catMhCountWarning)}
+                  >
+                    <Icon
+                      src={QuestionIcon}
+                      fill={colors.gainsbro}
+                      width={16}
+                      height={16}
+                    />
+                  </Tooltip>
+                )}
+              </Row>
+            </Row>
+          </GCol>
+
+          <GCol xs={0} xl={6} />
+        </GRow>
 
         <GRow>
           <GCol xl={6}>
