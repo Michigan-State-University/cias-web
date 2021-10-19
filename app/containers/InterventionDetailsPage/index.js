@@ -123,7 +123,7 @@ export function InterventionDetailsPage({
   deleteSession,
   fetchInterventions,
   externalCopySession,
-  user: { id: userId, roles, abilityToCreateCatMh },
+  user: { id: userId, roles },
   editSession,
 }) {
   const { interventionId } = useParams();
@@ -209,8 +209,8 @@ export function InterventionDetailsPage({
 
   const canCreateCatSession = useMemo(() => {
     if (roles.includes('admin')) return true;
-    return abilityToCreateCatMh && !isAccessRevoked;
-  }, [abilityToCreateCatMh, roles, isAccessRevoked]);
+    return !isAccessRevoked;
+  }, [roles, isAccessRevoked]);
 
   const options = [
     {

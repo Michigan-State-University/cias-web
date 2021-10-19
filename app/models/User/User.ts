@@ -28,7 +28,6 @@ export interface User {
   smsNotification: boolean;
   teamId: Nullable<string>;
   teamName: Nullable<string>;
-  abilityToCreateCatMh: boolean;
 }
 
 export type UserDTO = CamelToSnakeOmitId<User>;

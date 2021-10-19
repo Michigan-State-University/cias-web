@@ -32,7 +32,6 @@ const Profile = (props) => {
     TimezoneComponent,
     DeactivationComponent,
     PhoneNumberComponent,
-    CatMhSettingsComponent,
     userId,
   } = props;
   const [passwordReset, setPasswordReset] = useState(false);
@@ -83,9 +82,6 @@ const Profile = (props) => {
           />
         )}
       </StyledRow>
-      <StyledRow width="100%" align="start" justify="start">
-        {CatMhSettingsComponent && <CatMhSettingsComponent />}
-      </StyledRow>
       <StyledRow width="100%" align="center" justify="end">
         {PasswordComponent && (
           <Column width="33%" align="center">
@@ -115,7 +111,6 @@ Profile.propTypes = {
   TimezoneComponent: PropTypes.object,
   DeactivationComponent: PropTypes.object,
   PhoneNumberComponent: PropTypes.object,
-  CatMhSettingsComponent: PropTypes.func,
 };
 
 Profile.defaultProps = {
@@ -125,7 +120,6 @@ Profile.defaultProps = {
   TimezoneComponent: WrappedTimezoneForm,
   PhoneNumberComponent: WrappedPhoneNumberForm,
   DeactivationComponent: null,
-  CatMhSettingsComponent: null,
 };
 
 export default injectIntl(Profile);

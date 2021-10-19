@@ -932,10 +932,6 @@ exports[`<Profile /> Should render and match the snapshot 1`] = `
       </div>
     </div>
     <div
-      class="c20 c21"
-      width="100%"
-    />
-    <div
       class="c30 c21"
       width="100%"
     >

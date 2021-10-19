@@ -25,12 +25,10 @@ import {
 import Spinner from 'components/Spinner';
 import ErrorAlert from 'components/ErrorAlert';
 
-import { RolePermissions } from 'models/User/RolePermissions';
 import AccountSettings from '../AccountSettings';
 import WrappedAvatarFormAdmin from './containers/WrappedAvatarFormAdmin';
 import WrappedFullNameFormAdmin from './containers/WrappedFullNameFormAdmin';
 import WrappedDeactivationAdmin from './containers/WrappedDeactivationAdmin';
-import WrappedCatMhSettingAdmin from './containers/WrappedCatMhSettingAdmin';
 import messages from './messages';
 
 export const UserDetails = ({
@@ -53,10 +51,6 @@ export const UserDetails = ({
     return <ErrorAlert errorText={userError} />;
   }
 
-  const { roles } = user;
-
-  const { canDisplayCatMhSetting } = RolePermissions(roles);
-
   return (
     <>
       <AccountSettings
@@ -68,9 +62,6 @@ export const UserDetails = ({
           AvatarComponent: WrappedAvatarFormAdmin,
           FullNameComponent: WrappedFullNameFormAdmin,
           DeactivationComponent: WrappedDeactivationAdmin,
-          ...(canDisplayCatMhSetting && {
-            CatMhSettingsComponent: WrappedCatMhSettingAdmin,
-          }),
         }}
         userId={user.id}
       />

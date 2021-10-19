@@ -880,10 +880,6 @@ exports[`<UserDetails /> Should render and match the snapshot 1`] = `
             </div>
           </div>
           <div
-            class="c27 c28"
-            width="100%"
-          />
-          <div
             class="c35 c28"
             width="100%"
           />
