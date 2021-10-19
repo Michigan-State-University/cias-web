@@ -263,4 +263,8 @@ export default defineMessages({
     id: `${scope}.CatMhSessionInvalid`,
     defaultMessage: `Every Cat-MH TM session needs to have all values set up.`,
   },
+  CatMhWrongSettings: {
+    id: `${scope}.CatMhWrongSettings`,
+    defaultMessage: `Cat-MH license settings need to be properly set up. Please contact an Admin in that matter.`,
+  },
 });
