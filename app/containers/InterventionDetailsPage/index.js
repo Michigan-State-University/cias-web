@@ -155,11 +155,12 @@ export function InterventionDetailsPage({
     isAccessRevoked,
     catMhPool,
     createdCatMhSessionCount,
+    licenseType,
   } = intervention || {};
 
+  const testsLeft = catMhPool - createdCatMhSessionCount;
   const hasSmallNumberOfCatMhSessionsRemaining =
-    !catMhPool ||
-    createdCatMhSessionCount / catMhPool <= CAT_MH_TEST_COUNT_WARNING_THRESHOLD;
+    !catMhPool || testsLeft / catMhPool <= CAT_MH_TEST_COUNT_WARNING_THRESHOLD;
 
   const editingPossible = canEdit(status);
   const sharingPossible = canShareWithParticipants(status);
@@ -525,7 +526,8 @@ export function InterventionDetailsPage({
 
               <Row align="center">
                 {formatMessage(messages.catMhCounter, {
-                  current: createdCatMhSessionCount ?? 0,
+                  licenseType,
+                  current: testsLeft ?? 0,
                   initial: catMhPool ?? 0,
                   counter: (chunks) => (
                     <span
