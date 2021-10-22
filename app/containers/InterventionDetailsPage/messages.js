@@ -76,7 +76,7 @@ export default defineMessages({
   },
   catMhSettingsModalTitle: {
     id: `${scope}.catMhSettingsModalTitle`,
-    defaultMessage: 'Access of CAT-MH',
+    defaultMessage: 'Access to CAT-MH',
   },
   anyone: {
     id: `${scope}.anyone`,

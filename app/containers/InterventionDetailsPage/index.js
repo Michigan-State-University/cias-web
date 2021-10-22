@@ -524,37 +524,39 @@ export function InterventionDetailsPage({
                 />
               </Row>
 
-              <Row align="center">
-                {formatMessage(messages.catMhCounter, {
-                  licenseType,
-                  current: testsLeft ?? 0,
-                  initial: catMhPool ?? 0,
-                  counter: (chunks) => (
-                    <span
-                      style={{
-                        color: hasSmallNumberOfCatMhSessionsRemaining
-                          ? themeColors.warning
-                          : themeColors.success,
-                      }}
+              {!isAccessRevoked && (
+                <Row align="center">
+                  {formatMessage(messages.catMhCounter, {
+                    licenseType,
+                    current: testsLeft ?? 0,
+                    initial: catMhPool ?? 0,
+                    counter: (chunks) => (
+                      <span
+                        style={{
+                          color: hasSmallNumberOfCatMhSessionsRemaining
+                            ? themeColors.warning
+                            : themeColors.success,
+                        }}
+                      >
+                        {chunks}
+                      </span>
+                    ),
+                  })}
+                  {hasSmallNumberOfCatMhSessionsRemaining && (
+                    <Tooltip
+                      id="cat-mh-count-warning"
+                      text={formatMessage(messages.catMhCountWarning)}
                     >
-                      {chunks}
-                    </span>
-                  ),
-                })}
-                {hasSmallNumberOfCatMhSessionsRemaining && (
-                  <Tooltip
-                    id="cat-mh-count-warning"
-                    text={formatMessage(messages.catMhCountWarning)}
-                  >
-                    <Icon
-                      src={QuestionIcon}
-                      fill={colors.gainsbro}
-                      width={16}
-                      height={16}
-                    />
-                  </Tooltip>
-                )}
-              </Row>
+                      <Icon
+                        src={QuestionIcon}
+                        fill={colors.gainsbro}
+                        width={16}
+                        height={16}
+                      />
+                    </Tooltip>
+                  )}
+                </Row>
+              )}
             </Row>
           </GCol>
 
