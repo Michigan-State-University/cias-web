@@ -43,6 +43,7 @@ const PhoneNumberForm = ({
   error,
   loading,
   disabled,
+  required,
 }) => {
   const previousLoadingState = useRef(loading);
   const inputNumberRef = useRef(null);
@@ -120,7 +121,7 @@ const PhoneNumberForm = ({
           const {
             iso: { value: country },
           } = values;
-          const schema = phoneNumberSchema(formatMessage, country);
+          const schema = phoneNumberSchema(formatMessage, country, required);
           try {
             validateYupSchema(values, schema, true);
           } catch (err) {
@@ -184,6 +185,7 @@ const PhoneNumberForm = ({
                     onBlur: handleSubmit,
                     disabled,
                   }}
+                  required={required}
                 />
               </Row>
 
@@ -215,10 +217,12 @@ PhoneNumberForm.propTypes = {
   error: PropTypes.string,
   changePhoneNumber: PropTypes.func,
   disabled: PropTypes.bool,
+  required: PropTypes.bool,
 };
 
 PhoneNumberForm.defaultProps = {
   disabled: false,
+  required: true,
 };
 
 export default PhoneNumberForm;

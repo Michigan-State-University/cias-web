@@ -35,6 +35,7 @@ describe('<PhoneQuestion />', () => {
       body: {
         variable: 'test',
       },
+      settings: { required: true },
     },
     answerBody: [],
     ...mockedFunctions,
