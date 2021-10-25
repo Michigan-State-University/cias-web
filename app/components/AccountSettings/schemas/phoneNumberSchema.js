@@ -1,15 +1,13 @@
 import * as Yup from 'yup';
-import parsePhoneNumber from 'libphonenumber-js';
+import { isValidNumber } from 'libphonenumber-js';
+
 import messages from 'components/AccountSettings/messages';
 
 function yupMethod(errorMessage, country) {
   return this.test(`phoneNumberTest`, errorMessage, function callback(value) {
     const { path, createError } = this;
     return (
-      (value &&
-        value.length > 1 &&
-        country &&
-        parsePhoneNumber(value, country).isValid()) ||
+      (value && country && isValidNumber(value, country)) ||
       createError({ path, message: errorMessage })
     );
   });
