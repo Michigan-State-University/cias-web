@@ -27,6 +27,7 @@ const PhoneQuestionLayout = ({
   loading,
   changeErrorValue,
   onChange,
+  required,
 }) => {
   const US_PHONE = { iso: 'US', prefix: '+1' };
 
@@ -54,6 +55,7 @@ const PhoneQuestionLayout = ({
       loading={loading}
       changeErrorValue={changeErrorValue}
       disabled={phone?.confirmed}
+      required={required}
     />
   );
 };
@@ -67,6 +69,7 @@ PhoneQuestionLayout.propTypes = {
   editPhoneNumber: PropTypes.func,
   changeErrorValue: PropTypes.func,
   onChange: PropTypes.func,
+  required: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
