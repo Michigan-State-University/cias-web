@@ -221,4 +221,8 @@ export default defineMessages({
     id: `${scope}.resendCode`,
     defaultMessage: 'Resend verification code',
   },
+  incorrectOldPassword: {
+    id: `${scope}.incorrectOldPassword`,
+    defaultMessage: 'Provided old password is not correct',
+  },
 });
